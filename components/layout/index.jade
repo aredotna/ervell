@@ -3,11 +3,9 @@ html
   head
     title Arena
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link( type='text/css', rel='stylesheet', href=('/components/layouts/index' + sd.CSS_EXT) )
     block styles
   body
     block body
     #scripts
       != sharify.script()
-      script( src='/assets/channel' + sd.JS_EXT )
       block scripts
