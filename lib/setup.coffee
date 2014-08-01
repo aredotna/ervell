@@ -32,7 +32,11 @@ module.exports = (app) ->
     app.use require("stylus").middleware
       src: path.resolve(__dirname, "../")
       dest: path.resolve(__dirname, "../public")
-      # compile: (str, path) -> stylus(str).use(require("nib")())
+      compile: (str, path) -> 
+        stylus(str)
+        .set('filename', path)
+        .set('compress', true)
+        .use(require("nib")())
         
     app.use require("browserify-dev-middleware")
       src: path.resolve(__dirname, "../")
@@ -43,8 +47,8 @@ module.exports = (app) ->
     # Mount fake API server
     app.use "/__api", require("../test/helpers/integration.coffee").api
 
-  # Mount apps
-  app.use require "../apps/channel"
-
   # More general middleware
   app.use express.static(path.resolve __dirname, "../public")
+
+  # Mount apps
+  app.use require "../apps/channel"
