@@ -20,5 +20,5 @@ module.exports.ChannelView = class ChannelView extends Backbone.View
 
 module.exports.init = ->
     new ChannelView
-        el: $ "body"
-        model: new Channel sd.CHANNEL
+      el: $ "body"
+      model: new Channel sd.CHANNEL
