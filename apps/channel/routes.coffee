@@ -6,10 +6,11 @@ Channel = require "../../models/channel"
 
 @channel = (req, res, next) ->
   channel = new Channel
-    username: req.params.username
     channel_slug: req.params.channel_slug
+
   channel.fetch
     success: ->
+      res.locals.sd.USERNAME = req.params.username
       res.locals.sd.CHANNEL = channel.toJSON()
       res.render "index", channel: channel
     error: (m, err) -> next err.text
