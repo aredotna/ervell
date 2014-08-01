@@ -40,8 +40,7 @@ module.exports = (app) ->
     app.use "/__api", require("../test/helpers/integration.coffee").api
 
   # Mount apps
-  app.use '/', (req, res) ->
-    res.send 'Start by writing an app in /apps and mounting it in /lib/setup!'
+  app.use require "../apps/channel"
 
   # More general middleware
   app.use express.static(path.resolve __dirname, "../public")
