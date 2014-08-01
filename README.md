@@ -9,11 +9,11 @@ Built using Artsy's [Ezel](https://github.com/artsy/ezel)
 
 * * *
 
-## Installation
+### Installation
 	git clone git@github.com:arenahq/ervell.git
 	cd ervell
 	npm install
 	make s
 
-## Running the server
+### Running the server
 	make s
