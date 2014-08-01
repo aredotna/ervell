@@ -10,7 +10,6 @@ Channel = require "../../models/channel"
     channel_slug: req.params.channel_slug
   channel.fetch
     success: ->
-      console.log channel, 'channel'
       res.locals.sd.CHANNEL = channel.toJSON()
       res.render "index", channel: channel
     error: (m, err) -> next err.text

@@ -9,6 +9,8 @@ express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
 path = require "path"
+stylus = require "stylus"
+nib = require "nib"
 
 # Inject some constant data into sharify
 sharify.data =
@@ -30,6 +32,8 @@ module.exports = (app) ->
     app.use require("stylus").middleware
       src: path.resolve(__dirname, "../")
       dest: path.resolve(__dirname, "../public")
+      # compile: (str, path) -> stylus(str).use(require("nib")())
+        
     app.use require("browserify-dev-middleware")
       src: path.resolve(__dirname, "../")
       transforms: [require("jadeify"), require('caching-coffeeify')]
