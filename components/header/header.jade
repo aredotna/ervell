@@ -4,7 +4,7 @@ header.path
       a(href='/') Are.na
     span.separator /
     span.username
-      a(href="/")=channel.username
+      a(href="/")=channel.get('user').username
     span.separator /
-    span
+    span.active.channel
       = channel.get('title')
