@@ -4,7 +4,7 @@
 
 Base = require("./base.coffee")
 sd = require("sharify").data
-Commit = require("../models/block.coffee")
+Block = require("../models/block.coffee")
 
 module.exports = class Blocks extends Base
 
@@ -13,4 +13,5 @@ module.exports = class Blocks extends Base
   url: -> "#{sd.API_URL}/channels/#{@slug}/contents"
 
   initialize: (models, options) ->
-    @slug = options.slug
+    console.log 'options', options
+    @slug = options.channel_slug
