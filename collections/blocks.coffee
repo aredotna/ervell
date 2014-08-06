@@ -2,11 +2,11 @@
 # General collection for a group of Blocks
 #
 
-Backbone = require("backbone")
+Base = require("./base.coffee")
 sd = require("sharify").data
 Commit = require("../models/block.coffee")
 
-module.exports = class Blocks extends Backbone.Collection
+module.exports = class Blocks extends Base
 
   model: Block
 
