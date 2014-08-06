@@ -1,6 +1,6 @@
-# 
+#
 # Model for Channel, takes a username and channel_slug as params
-# 
+#
 
 Backbone = require "backbone"
 sd = require("sharify").data
