@@ -11,9 +11,8 @@ module.exports = class Blocks extends Base
   model: Block
 
   url: ->
-    "#{sd.API_URL}/channels/#{@slug}/contents?per=10"
+    "#{sd.API_URL}/channels/#{@slug}/contents?per=20"
 
-  initialize: (models, options) ->
-    console.log 'options', options
-    console.log 'models', models
-    @slug = options.channel_slug
+  parse: (data)-> data.contents
+
+  initialize: (models, options) -> @slug = options.channel_slug

@@ -2,12 +2,9 @@
 # Model for a single block
 #
 
-Backbone = require "backbone"
+Base = require "./base.coffee"
 sd = require("sharify").data
 
-module.exports = class Block extends Backbone.Model
+module.exports = class Block extends Base
 
   url: -> "#{sd.API_URL}/blocks/#{@id}"
-
-  initialize: (options) ->
-    @id = options.channel_slug
