@@ -10,6 +10,6 @@ module.exports = class Channel extends Base
   url: -> "#{sd.API_URL}/channels/#{@slug}"
 
   initialize: (options) ->
-    console.log 'base', @
-  	@slug = options.channel_slug
-  	@username = options.username
+    if options
+      @slug = options.channel_slug
+      @username = options.username
