@@ -10,8 +10,10 @@ module.exports = class Blocks extends Base
 
   model: Block
 
-  url: -> "#{sd.API_URL}/channels/#{@slug}/contents?per=10"
+  url: ->
+    "#{sd.API_URL}/channels/#{@slug}/contents?per=10"
 
   initialize: (models, options) ->
     console.log 'options', options
+    console.log 'models', models
     @slug = options.channel_slug
