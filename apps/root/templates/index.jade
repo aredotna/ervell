@@ -4,8 +4,20 @@ block styles
   link( type='text/css', rel='stylesheet', href=('/assets/root' + sd.CSS_EXT) )
 
 block body
-  .container
-    img(src="../images/arena-logo.svg", alt="Arena")
+  .container.landing
+    img(src="../images/arena-logo.svg", alt="Arena", width=200)
+    img.mark(src="../images/arena-mark.svg", alt="Arena", width=50)
+
+    p.introduction.
+      Arena is a platform for private and collaborative research where you can save links, 
+      images, and files as "blocks" and organize them into named "channels". People use Arena 
+      to assemble references around a topic, collect images around a theme, share ideas with 
+      collaborators, and more. 
+
+    .login
+      a(href="#login") Login 
+      span / 
+      a(href="#register") Register
 
 block scripts
   script( src='/assets/root' + sd.JS_EXT )
