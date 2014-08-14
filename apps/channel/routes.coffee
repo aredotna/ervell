@@ -3,13 +3,24 @@
 #
 
 Channel = require "../../models/channel"
+Blocks = require "../../collections/blocks"
 
 @channel = (req, res, next) ->
   channel = new Channel
-    username: req.params.username
     channel_slug: req.params.channel_slug
+
+  blocks = new Blocks null,
+    channel_slug: req.params.channel_slug
+
   channel.fetch
     success: ->
-      res.locals.sd.CHANNEL = channel.toJSON()
-      res.render "index", channel: channel
+      blocks.fetch
+        success: ->
+          res.locals.sd.USERNAME = req.params.username
+          res.locals.sd.CHANNEL = channel.toJSON()
+          res.locals.sd.BLOCKS = blocks.toJSON()
+
+          console.log 'channel', channel
+
+          res.render "index", channel: channel, blocks: blocks.models
     error: (m, err) -> next err.text

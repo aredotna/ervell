@@ -4,8 +4,9 @@ block styles
   link( type='text/css', rel='stylesheet', href=('/assets/channel' + sd.CSS_EXT) )
 
 block body
-  #header
-    include header
+  .container
+    include ../../../components/header/header
+    include ../../../components/block_collection/block_collection
 
 block scripts
   script( src='/assets/channel' + sd.JS_EXT )
