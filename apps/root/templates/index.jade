@@ -1,1 +1,11 @@
-p hey
+extends ../../../components/layout/index
+
+block styles
+  link( type='text/css', rel='stylesheet', href=('/assets/root' + sd.CSS_EXT) )
+
+block body
+  .container
+    img(src="../images/arena-logo.svg", alt="Arena")
+
+block scripts
+  script( src='/assets/root' + sd.JS_EXT )
