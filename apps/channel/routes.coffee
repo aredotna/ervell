@@ -20,5 +20,7 @@ Blocks = require "../../collections/blocks"
           res.locals.sd.CHANNEL = channel.toJSON()
           res.locals.sd.BLOCKS = blocks.toJSON()
 
+          console.log 'channel', channel
+
           res.render "index", channel: channel, blocks: blocks.models
     error: (m, err) -> next err.text

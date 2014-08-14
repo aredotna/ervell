@@ -9,7 +9,10 @@ module.exports =
 
   NODE_ENV: "development"
   PORT: 4000
-  API_URL: "http://staging.are.na/v3"
+  # last one is the "rotten egg", jk last one listed is the one used.
+  API_URL: "http://staging.are.na/v2"
+  API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
+  API_URL: "http://localhost:3000/v3"
 
 # Override any values with env variables if they exist
 module.exports[key] = (process.env[key] or val) for key, val of module.exports
