@@ -51,4 +51,5 @@ module.exports = (app) ->
   app.use express.static(path.resolve __dirname, "../public")
 
   # Mount apps
+  app.use require "../apps/root"
   app.use require "../apps/channel"
