@@ -12,7 +12,8 @@
     "backbone": "*",
     "backbone-super-sync": "*",
     "coffee-script": "*",
-    "chaplin": "*"
+    "chaplin": "*",
+    "artsy-passport": "*"
   },
   "devDependencies": {
     "jquery": "*",
