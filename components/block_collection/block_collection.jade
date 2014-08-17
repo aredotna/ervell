@@ -1,3 +1,2 @@
 for block in blocks
-
-  div(class="block privacy-#{ block.get('visibility') }")
+  div(class="block privacy-#{ block.get('visibility') }", style="background-image:url( #{ block.getImageSize('large') })")
