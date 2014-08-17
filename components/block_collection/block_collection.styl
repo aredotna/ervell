@@ -4,5 +4,7 @@
   height: 330px
   margin: 1em
 
-  &.privacy-closed:hover
-    border: 1px solid #FF6702
+  colors = 'closed' closed, 'public' public, 'private' private
+  for color in colors
+    &{'.privacy-' + color[0] + ':hover'}
+      border: 1px solid color[1]
