@@ -2,25 +2,14 @@
 # Routes file that exports route handlers for ease of testing.
 #
 
-Channel = require "../../models/channel"
+User = require "../../models/user"
 Blocks = require "../../collections/blocks"
 
-@channel = (req, res, next) ->
-  channel = new Channel
-    channel_slug: req.params.channel_slug
+@user = (req, res, next) ->
+  user = new User
+    id: req.params.username
 
-  blocks = new Blocks null,
-    channel_slug: req.params.channel_slug
-
-  channel.fetch
+  user.fetch
     success: ->
-      blocks.fetch
-        success: ->
-          res.locals.sd.USERNAME = req.params.username
-          res.locals.sd.CHANNEL = channel.toJSON()
-          res.locals.sd.BLOCKS = blocks.toJSON()
-
-          console.log 'channel', channel
-
-          res.render "index", channel: channel, blocks: blocks.models
-    error: (m, err) -> next err.text
+      res.locals.sd.USER = user.toJSON()
+      res.render "index", user: user
