@@ -7,5 +7,5 @@ header.path
       a(href="/" + user.get('slug'))=user.get('username')
     if channel
       span.separator /
-      span.active.channel
+      span.active.channel(class="privacy-#{channel.get('status')}")
         = channel.get('title')
