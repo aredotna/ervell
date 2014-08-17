@@ -52,4 +52,5 @@ module.exports = (app) ->
 
   # Mount apps
   app.use require "../apps/root"
+  app.use require "../apps/user"
   app.use require "../apps/channel"
