@@ -14,5 +14,7 @@ header
   .separator
     margin: 0 0.25em
 
-  .privacy-closed
-    color: #FF6702
+  colors = 'closed' closed, 'public' public, 'private' private
+  for color in colors
+    {'.privacy-' + color[0]}
+     color: color[1]
