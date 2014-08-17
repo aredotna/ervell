@@ -7,8 +7,27 @@
   background-position: center center
   background-repeat: no-repeat
   border: 1px solid transparent
+  overflow: hidden
+  padding: 1em
 
   colors = 'closed' closed, 'public' public, 'private' private
   for color in colors
     &{'.privacy-' + color[0] + ':hover'}
       border: 1px solid color[1]
+
+  hr
+    border: 1px solid #eee
+
+  .content
+    line-height: 1.4
+    font-size: 14px
+    overflow: hidden
+    text-overflow: ellipsis
+    max-height: 330px
+
+    a
+      text-decoration: underline
+
+
+  p
+    margin: 0.5em 0
