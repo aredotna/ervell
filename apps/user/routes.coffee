@@ -12,6 +12,4 @@ Blocks = require "../../collections/blocks"
   user.fetch
     success: ->
       res.locals.sd.USER = user.toJSON()
-
-      console.log 'user', user
       res.render "index", user: user
