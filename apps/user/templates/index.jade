@@ -1,0 +1,12 @@
+extends ../../../components/layout/index
+
+block styles
+  link( type='text/css', rel='stylesheet', href=('/assets/channel' + sd.CSS_EXT) )
+
+block body
+  .container
+    include ../../../components/header/header
+
+block scripts
+  script( src='/assets/channel' + sd.JS_EXT )
+
