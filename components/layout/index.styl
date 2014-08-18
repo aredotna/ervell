@@ -3,8 +3,13 @@
 
 global-reset()
 
+*
+  box-sizing: border-box
+
 body, html
   font-family: Arial
+
+input:focus {outline: none; }
 
 h1 { font-size: 2em }
 h2 { font-size: 1.5em }
@@ -21,6 +26,7 @@ a
 
 .container
   margin: 3em
+  padding-top: 50px
 
 strong
   font-weight: bold
@@ -30,3 +36,5 @@ strong
 closed = #A0A0A0
 public = #10860B
 private = #B60202
+
+@import '../topbar/index'
