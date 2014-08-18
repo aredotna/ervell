@@ -13,3 +13,4 @@ Blocks = require "../../collections/blocks"
     success: ->
       res.locals.sd.USER = user.toJSON()
       res.render "index", user: user
+    error: (m, err) -> next err.text

@@ -30,6 +30,7 @@
     "uglify-js": "*",
     "caching-coffeeify": "*",
     "nib": "*",
-    "jeet": "*"
+    "jeet": "*",
+    "rupture": "*"
   }
 }
