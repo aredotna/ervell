@@ -1,5 +1,5 @@
 for block in blocks
-  div(class="block privacy-#{ block.get('visibility') }", style="background-image:url( #{ block.getImageSize('large') })")
+  div(class="block privacy-#{ block.get('visibility') }", style="background-image:url( #{ block.getImageSize('display') })")
     .content
       if(block.get('class') == 'Text')
         !{block.get('content_html')}
