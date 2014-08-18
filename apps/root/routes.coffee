@@ -7,8 +7,6 @@ Blocks = require "../../collections/blocks"
 @index = (req, res, next) ->
   # to do: check for login! for now just render the splash page
 
-#  res.render 'index'
-
   blocks = new Blocks null,
     channel_slug: 'arena-influences'
 

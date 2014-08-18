@@ -1,4 +1,4 @@
-// TODO: make into a block view
+# // TODO: make into a block view
 
 Backbone = require "backbone"
 $ = require 'jquery'
