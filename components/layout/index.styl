@@ -28,7 +28,7 @@ a
     opacity: 0.8
 
 .container
-  center(1320px)
+  center(1400px)
   padding-top 100px
 
 strong
@@ -38,6 +38,14 @@ blockquote
   border-left: 3px solid #eee
   padding-left: 1em
   font-style: italic
+
+@media (min-width: 2000px)
+  .container 
+    center(1700px)
+
+@media (max-width: 1480px)
+  .container 
+    center(94%)
 
 // colors
 closed = #A0A0A0
