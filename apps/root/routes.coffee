@@ -7,13 +7,15 @@ Blocks = require "../../collections/blocks"
 @index = (req, res, next) ->
   # to do: check for login! for now just render the splash page
 
-  blocks = new Blocks null,
-    channel_slug: 'arena-influences'
+  res.render 'index'
 
-  blocks.fetch
-    success: ->
-      # res.locals.sd.USERNAME = req.params.username
-      res.locals.sd.BLOCKS = blocks.toJSON()
+  # blocks = new Blocks null,
+  #   channel_slug: 'arena-influences'
 
-      res.render 'index', blocks: blocks.models
-    error: (m, err) -> next err.text
+  # blocks.fetch
+  #   success: ->
+  #     # res.locals.sd.USERNAME = req.params.username
+  #     res.locals.sd.BLOCKS = blocks.toJSON()
+
+  #     res.render 'index', blocks: blocks.models
+  #   error: (m, err) -> next err.text
