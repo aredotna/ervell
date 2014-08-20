@@ -11,6 +11,7 @@
   background-repeat: no-repeat
   border: 1px solid transparent
   overflow: hidden
+  position: relative
 
   colors = 'closed' closed, 'public' public, 'private' private
   for color in colors
@@ -29,8 +30,19 @@
     text-align: left
 
     a
-      text-decoration: underlin
+      text-decoration: underline
 
+  .overlay
+    opacity: 0
+    pointer-events: none
+    background: #fff
+    background-position: center
+    background-size: 40%
+    background-repeat: no-repeat
+
+  &:hover .overlay
+    opacity: 1
+    pointer-events: auto
 
   p
     margin: 0.5em 0
