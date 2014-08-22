@@ -13,7 +13,7 @@
     "backbone-super-sync": "*",
     "coffee-script": "*",
     "chaplin": "*",
-    "artsy-passport": "*"
+    "arena-passport": "git://github.com/arenahq/arena-passport.git"
   },
   "devDependencies": {
     "jquery": "*",
