@@ -30,6 +30,8 @@
     "sqwish": "*",
     "uglify-js": "*",
     "caching-coffeeify": "*",
-    "nib": "*"
+    "nib": "*",
+    "jeet": "*",
+    "rupture": "*"
   }
 }

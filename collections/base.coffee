@@ -2,10 +2,10 @@
 # General collection for a group of Blocks
 #
 
-Chaplin = require("chaplin")
+Collection = require("chaplin").Collection
 sd = require("sharify").data
 Model = require("../models/base.coffee")
 
-module.exports = class Blocks extends Chaplin.Collection
+module.exports = class Blocks extends Collection
 
   model:Model

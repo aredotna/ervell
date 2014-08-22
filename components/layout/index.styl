@@ -1,9 +1,18 @@
-@import "nib"
+@import '../../node_modules/nib'
+@import '../../node_modules/jeet/stylus/jeet'
+@import '../../node_modules/rupture/rupture'
 
 global-reset()
 
+// edit()
+
+*
+  box-sizing: border-box
+
 body, html
   font-family: Arial
+
+input:focus {outline: none; }
 
 h1 { font-size: 2em }
 h2 { font-size: 1.5em }
@@ -19,5 +28,35 @@ a
     opacity: 0.8
 
 .container
-  margin: 3em
+  center(1400px)
+  padding-top 100px
 
+strong
+  font-weight: bold
+
+blockquote
+  border-left: 3px solid #eee
+  padding-left: 1em
+  font-style: italic
+
+.abs-fill
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+
+@media (min-width: 2000px)
+  .container 
+    center(1700px)
+
+@media (max-width: 1480px)
+  .container 
+    center(94%)
+
+// colors
+closed = #A0A0A0
+public = #10860B
+private = #B60202
+
+@import '../topbar/index'

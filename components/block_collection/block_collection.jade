@@ -1,2 +1,8 @@
-for block in blocks
-  li= block.get('title')
+.block-collection
+  for block in blocks
+    div(class="block privacy-#{ block.get('visibility') }", style="background-image:url( #{ block.getImageSize('display') })")
+      .content.abs-fill
+        if(block.get('class') == 'Text')
+          !{block.get('content_html')}
+      .overlay.abs-fill(style="background-image:url( #{ block.getImageSize('thumb') })")
+        p= block.get('title')

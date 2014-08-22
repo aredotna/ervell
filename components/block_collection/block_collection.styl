@@ -1,0 +1,64 @@
+.block-collection
+  cf()
+
+.block
+  column(1/4, cycle: 4)
+  margin-bottom: 3%
+  height: 300px
+  padding: 1em
+  background-size: contain
+  background-position: center center
+  background-repeat: no-repeat
+  border: 1px solid transparent
+  overflow: hidden
+  position: relative
+
+  colors = 'closed' closed, 'public' public, 'private' private
+  for color in colors
+    &{'.privacy-' + color[0] + ':hover'}
+      border: 1px solid color[1]
+
+  hr
+    border: 1px solid #eee
+
+  .content
+    line-height: 1.4
+    font-size: 14px
+    overflow: hidden
+    text-overflow: ellipsis
+    max-height: 330px
+    text-align: left
+
+    a
+      text-decoration: underline
+
+  .overlay
+    opacity: 0
+    pointer-events: none
+    background: #fff
+    background-position: center
+    background-size: 40%
+    background-repeat: no-repeat
+
+  &:hover .overlay
+    opacity: 1
+    pointer-events: auto
+
+  p
+    margin: 0.5em 0
+
+@media (min-width: 2000px)
+  .block
+    column(1/5, uncycle: 4, cycle: 5)
+
+@media (max-width: 1200px)
+  .block
+    column(1/3, uncycle: 4, cycle: 3)
+
+@media (max-width: 768px)
+  .block
+    column(1/2, uncycle: 3, cycle: 2)
+
+@media (max-width: 408px)
+  .block
+    column(1, uncycle: 3, cycle: 1)

@@ -11,6 +11,7 @@ sharify = require "sharify"
 path = require "path"
 stylus = require "stylus"
 nib = require "nib"
+rupture = require 'rupture'
 
 # Inject some constant data into sharify
 sharify.data =
@@ -36,6 +37,7 @@ module.exports = (app) ->
         stylus(str)
         .set('filename', path)
         .set('compress', true)
+        .use(rupture())
         .use(require("nib")())
 
     app.use require("browserify-dev-middleware")
@@ -51,4 +53,6 @@ module.exports = (app) ->
   app.use express.static(path.resolve __dirname, "../public")
 
   # Mount apps
+  app.use require "../apps/root"
+  app.use require "../apps/user"
   app.use require "../apps/channel"

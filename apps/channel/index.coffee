@@ -1,5 +1,5 @@
 #
-# The express app for the "commits" app.
+# The express app for the "channel" app.
 #
 # Simply exports the express instance to be mounted into the project,
 # and loads the routes.

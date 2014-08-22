@@ -4,6 +4,7 @@
 
 Channel = require "../../models/channel"
 Blocks = require "../../collections/blocks"
+User = require "../../models/user"
 
 @channel = (req, res, next) ->
   channel = new Channel
@@ -20,7 +21,7 @@ Blocks = require "../../collections/blocks"
           res.locals.sd.CHANNEL = channel.toJSON()
           res.locals.sd.BLOCKS = blocks.toJSON()
 
-          console.log 'channel', channel
+          user = new User channel.get('user')
 
-          res.render "index", channel: channel, blocks: blocks.models
+          res.render "index", channel: channel, blocks: blocks.models, user: user
     error: (m, err) -> next err.text

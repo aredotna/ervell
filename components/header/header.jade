@@ -1,10 +1,11 @@
 header.path
-  h2
+  h1
     span.root
       a(href='/') Are.na
     span.separator /
     span.username
-      a(href="/" + channel.get('user').slug)=channel.get('user').username
-    span.separator /
-    span.active.channel
-      = channel.get('title')
+      a(href="/" + user.get('slug'))=user.get('slug')
+    if channel
+      span.separator /
+      span.active.channel(class="privacy-#{channel.get('status')}")
+        = channel.get('title')
