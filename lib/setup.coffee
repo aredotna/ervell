@@ -61,6 +61,9 @@ module.exports = (app) ->
     domain: COOKIE_DOMAIN
     key: SESSION_COOKIE_KEY
     maxage: SESSION_COOKIE_MAX_AGE
+  app.use arenaPassport _.extend config,
+    CurrentUser: CurrentUser
+    SECURE_ARTSY_URL: API_URL
 
   # Mount apps
   app.use require "../apps/root"
