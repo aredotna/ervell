@@ -4,7 +4,7 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV } = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN} = require "../config"
 express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
@@ -51,6 +51,16 @@ module.exports = (app) ->
 
   # More general middleware
   app.use express.static(path.resolve __dirname, "../public")
+
+  # session management
+  app.use bodyParser.json()
+  app.use bodyParser.urlencoded(extended: true)
+  app.use cookieParser()
+  app.use session
+    secret: SESSION_SECRET
+    domain: COOKIE_DOMAIN
+    key: SESSION_COOKIE_KEY
+    maxage: SESSION_COOKIE_MAX_AGE
 
   # Mount apps
   app.use require "../apps/root"

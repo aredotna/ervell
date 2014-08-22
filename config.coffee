@@ -16,6 +16,7 @@ module.exports =
   SESSION_SECRET: 'change-me'
   SESSION_COOKIE_MAX_AGE: 31536000000
   SESSION_COOKIE_KEY: 'arena.session'
+  COOKIE_DOMAIN: null
 
 # Override any values with env variables if they exist
 module.exports[key] = (process.env[key] or val) for key, val of module.exports
