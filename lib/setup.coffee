@@ -5,6 +5,8 @@
 #
 
 { API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN} = require "../config"
+
+_ = require 'underscore'
 express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
