@@ -1,2 +1,6 @@
 .topbar
   input(type="text")
+if user
+  p= "Hello " + user.get('username')
+else
+  p= "Login"
