@@ -4,7 +4,7 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN} = config = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH} = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -24,6 +24,7 @@ sharify.data =
   API_URL: API_URL
   JS_EXT: (if "production" is NODE_ENV then ".min.js" else ".js")
   CSS_EXT: (if "production" is NODE_ENV then ".min.css" else ".css")
+  ASSET_PATH: ASSET_PATH
 
 # current user management
 CurrentUser = require '../models/current_user'
