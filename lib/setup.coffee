@@ -10,6 +10,7 @@ _ = require 'underscore'
 express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
+arenaPassport = require 'arena-passport'
 bodyParser = require 'body-parser'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
