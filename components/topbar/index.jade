@@ -1,6 +1,12 @@
 .topbar
-  input(type="text")
-if user
-  p= "Hello " + user.get('username')
-else
-  p= "Login"
+  .search
+    input(type="text")
+  .user
+    if user
+      span= "Hello " + user.get('username')
+    else
+      span
+        a(href="#log_in") Login 
+      span or 
+      span
+        a(href="#log_in") Sign Up
