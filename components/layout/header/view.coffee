@@ -18,6 +18,8 @@ module.exports = class HeaderView extends Backbone.View
     #   el: @$('#main-layout-search-bar-container')
     #   $input: @$('#main-layout-search-bar-input')
 
+    console.log 'HeaderView init', @$el
+
     mediator.on 'open:auth', @openAuth, @
 
   openAuth: (options) ->
