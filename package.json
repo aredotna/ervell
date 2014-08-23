@@ -13,6 +13,8 @@
     "backbone-super-sync": "*",
     "coffee-script": "*",
     "chaplin": "*",
+    "underscore": "*",
+    "underscore.string": "*",
     "body-parser": "*",
     "cookie-parser": "*",
     "cookie-session": "*",
