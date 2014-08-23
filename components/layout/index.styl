@@ -1,6 +1,7 @@
 @import '../../node_modules/nib'
 @import '../../node_modules/jeet/stylus/jeet'
 @import '../../node_modules/rupture/rupture'
+@import 'variables'
 
 global-reset()
 
@@ -54,9 +55,4 @@ blockquote
   .container 
     center(94%)
 
-// colors
-closed = #A0A0A0
-public = #10860B
-private = #B60202
-
-@import '../topbar/index'
+@import 'header/index'
