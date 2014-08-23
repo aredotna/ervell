@@ -5,7 +5,7 @@
 User = require "./user.coffee"
 sd = require("sharify").data
 
-module.exports = class User extends User
+module.exports = class CurrentUser extends User
 
   url: -> "#{sd.API_URL}/accounts"
 

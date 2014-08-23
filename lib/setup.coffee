@@ -19,6 +19,9 @@ sharify.data =
   JS_EXT: (if "production" is NODE_ENV then ".min.js" else ".js")
   CSS_EXT: (if "production" is NODE_ENV then ".min.css" else ".css")
 
+# current user management
+CurrentUser = require '../models/current_user'
+
 module.exports = (app) ->
 
   # Override Backbone to use server-side sync
