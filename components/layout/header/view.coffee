@@ -8,8 +8,8 @@ sd = require('sharify').data
 module.exports = class HeaderView extends Backbone.View
 
   events:
-    'click .btn-login': 'login'
-    'click .btn-signup': 'signup'
+    'click .btn-login'  : 'login'
+    'click .btn-signup' : 'signup'
 
   initialize: (options) ->
     { @$window, @$body } = options
