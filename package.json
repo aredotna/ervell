@@ -13,6 +13,9 @@
     "backbone-super-sync": "*",
     "coffee-script": "*",
     "chaplin": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "cookie-session": "*",
     "arena-passport": "git://github.com/arenahq/arena-passport.git"
   },
   "devDependencies": {

@@ -19,7 +19,7 @@ app.use express.cookieSession()
 _Values indicate defaults._
 
 ````coffeescript
-app.use artsyPassport
+app.use arenaPassport
   SECURE_ARENA_URL: # SSL Arena url e.g. https://api.are.na
   APP_URL: # Url pointing back to your app e.g. http://master.are.na
   loginPath: '/users/sign_in' # POST `email` and `password` to this path to login
