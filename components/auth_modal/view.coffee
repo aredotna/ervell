@@ -1,6 +1,5 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-Cookies = require 'cookies-js'
 { parse } = require 'url'
 ModalView = require '../modal/view.coffee'
 Form = require '../mixins/form.coffee'
