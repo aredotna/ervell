@@ -8,51 +8,77 @@ global-reset()
 // edit()
 
 *
-  box-sizing: border-box
+  box-sizing border-box
 
 body, html
-  font-family: Arial
+  font-family Arial
 
-input:focus {outline: none; }
+input
+  focus outline none
 
-h1 { font-size: 2em }
-h2 { font-size: 1.5em }
-h3 { font-size: 1.17em }
-h5 { font-size: .83em }
-h6 { font-size: .75em }
+h1
+  font-size 1.7em
+
+h2
+  font-size 1.4em
+
+h3
+  font-size 1.17em
+
+h5
+  font-size .83em
+
+h6
+  font-size .75em
 
 a
   text-decoration: none
-  color: inherit
+  color inherit
+  font-weight 700
 
   &:hover
-    opacity: 0.8
+    color #000
+
+.privacy-public:hover
+  color public
+
+.privacy-closed:hover
+  color closed
+
+.privacy-private:hover
+  color private
 
 .container
   center(1400px)
   padding-top 100px
 
 strong
-  font-weight: bold
+  font-weight bold
 
 blockquote
-  border-left: 3px solid #eee
-  padding-left: 1em
-  font-style: italic
+  border-left 3px solid #eee
+  padding-left 1em
+  font-style italic
 
 .abs-fill
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
 
 @media (min-width: 2000px)
-  .container 
+  .container
     center(1700px)
 
 @media (max-width: 1480px)
-  .container 
+  .container
     center(94%)
+
+// colors
+closed = #A0A0A0
+public = #10860B
+private = #B60202
+darkgray = #333333
 
 @import 'header/index'
