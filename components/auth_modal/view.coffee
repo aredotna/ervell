@@ -6,7 +6,7 @@ Form = require '../mixins/form.coffee'
 mediator = require '../../lib/mediator.coffee'
 LoggedOutUser = require '../../models/logged_out_user.coffee'
 
-{ templateMap, stateEventMap, successEventMap, routeCopyMap } = require './maps.coffee'
+# { templateMap, stateEventMap, successEventMap, routeCopyMap } = require './maps.coffee'
 
 class State extends Backbone.Model
   defaults: mode: 'register'
