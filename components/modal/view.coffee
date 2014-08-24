@@ -1,7 +1,6 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../lib/mediator.coffee'
-Transition = require '../mixins/transition.coffee'
 
 modalTemplate = -> require('./modal.jade') arguments...
 
@@ -33,8 +32,6 @@ module.exports = class ModalView extends Backbone.View
     @$window.on 'keyup', @escape
     @$window.on 'resize', @resize
 
-    @scrollbar = new Scrollbar $els: $('#main-layout-header')
-
     mediator.on 'modal:close', @close, this
     mediator.on 'modal:opened', @updatePosition, this
 
@@ -59,8 +56,7 @@ module.exports = class ModalView extends Backbone.View
       top: ((@$el.height() - @$dialog.height()) / 2) + 'px'
       left: ((@$el.width() - @$dialog.width()) / 2) + 'px'
 
-  autofocus: ->
-    if isTouchDevice() then undefined else true
+  autofocus: -> true
 
   isLoading: ->
     @$el.addClass 'is-loading'
@@ -87,6 +83,7 @@ module.exports = class ModalView extends Backbone.View
     @$dialog.css { width: width or @width }
 
   setup: ->
+    console.log 'modal setup'
     backdropClass = if @backdrop then 'has-backdrop' else 'has-nobackdrop'
 
     @$el.
@@ -102,7 +99,7 @@ module.exports = class ModalView extends Backbone.View
     @postRender()
 
     # Disable scroll on body
-    @scrollbar.set()
+    # @scrollbar.set()
 
     # Fade in
     _.defer => @$el.attr 'data-state', 'open'

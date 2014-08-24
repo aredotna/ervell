@@ -6,7 +6,7 @@ Form = require '../mixins/form.coffee'
 mediator = require '../../lib/mediator.coffee'
 LoggedOutUser = require '../../models/logged_out_user.coffee'
 
-# { templateMap, stateEventMap, successEventMap, routeCopyMap } = require './maps.coffee'
+{ templateMap, stateEventMap, successEventMap, routeCopyMap } = require './maps.coffee'
 
 class State extends Backbone.Model
   defaults: mode: 'register'
@@ -42,29 +42,29 @@ module.exports = class AuthModalView extends ModalView
       redirectTo: @redirectTo
 
     @listenTo @state, 'change:mode', @reRender
-    @listenTo @state, 'change:mode', @logState
+    # @listenTo @state, 'change:mode', @logState
 
     mediator.on 'auth:change:mode', @setMode, this
     mediator.on 'auth:error', @showError
     mediator.on 'modal:closed', @logClose
 
-    @logState()
+    # @logState()
 
   renderCopy: (copy) ->
-    attrs = if copy?
-      if _.isObject copy
-        containsRequired = _.partial _.contains, ['signup', 'register', 'login']
-        # Ensure the object has one of the required copy keys
-        copy if _.any _.keys(copy), containsRequired
-      else if _.isString copy
-        # Return an object with the initialized state + the specified copy
-        _.tap {}, (hsh) =>
-          hsh[@state.get 'mode'] = copy
-    else # Fallback to route copy
-      routeCopy = routeCopyMap[@redirectTo]
-    # Ensure we return an object
-    attrs or {}
-    new Backbone.Model attrs
+    # attrs = if copy?
+    #   if _.isObject copy
+    #     containsRequired = _.partial _.contains, ['signup', 'register', 'login']
+    #     # Ensure the object has one of the required copy keys
+    #     copy if _.any _.keys(copy), containsRequired
+    #   else if _.isString copy
+    #     # Return an object with the initialized state + the specified copy
+    #     _.tap {}, (hsh) =>
+    #       hsh[@state.get 'mode'] = copy
+    # else # Fallback to route copy
+    #   routeCopy = routeCopyMap[@redirectTo]
+    # # Ensure we return an object
+    # attrs or {}
+    # new Backbone.Model attrs
 
   setMode: (mode) ->
     @state.set 'mode', mode
