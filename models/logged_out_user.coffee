@@ -18,7 +18,7 @@ module.exports = class LoggedOutUser extends User
 
   login: (options = {}) ->
     settings = _.defaults options,
-      url: '/users/sign_in'
+      url: '/me/sign_in'
       success: injectToken -> location.reload()
     new Backbone.Model().save (@pick 'email', 'password'), settings
 

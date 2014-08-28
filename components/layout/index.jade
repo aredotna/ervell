@@ -5,10 +5,10 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     block styles
   body
+    #modal-container
     include header/templates/index
     block body
 
-    #modal-container
     #scripts
       != sharify.script()
       script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )
