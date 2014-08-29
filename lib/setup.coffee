@@ -13,7 +13,6 @@ sharify = require "sharify"
 arenaPassport = require 'arena-passport'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
-errorMiddleware = require './middleware/error'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"

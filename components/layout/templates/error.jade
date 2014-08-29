@@ -5,6 +5,16 @@ block body
     include ../../../components/path/error
 
     if code == 404
-      p This is a 404
+      p Not found!
     else if code == 500
-      p this is a 500
+      p
+        | Something has gone wrong, please contact 
+        a(href="mailto:info@are.na") info@are.na 
+        | if the problem persists
+
+      p=detail
+    else if code == 401
+      p You aren't allow to see this
+      if !user
+        p Maybe you need to 
+          a(href="#log_in") log in?
