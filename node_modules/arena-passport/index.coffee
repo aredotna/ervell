@@ -68,7 +68,6 @@ signup = (req, res, next) ->
   ).end onCreateUser(next)
 
 onCreateUser = (next) ->
-  console.log 'onCreateUser', next
   (err, res) ->
     if res.status isnt 201
       errMsg = res.body.message
@@ -78,11 +77,9 @@ onCreateUser = (next) ->
 
 addLocals = (req, res, next) ->
   if req.user
-    console.log 'req.user', req.user
     res.locals.user = req.user
     res.locals.sd?.CURRENT_USER = req.user.toJSON()
     res.locals.sd?.XAuthToken = req.user.get('authentication_token')
-    console.log 'res.locals.sd', res.locals.sd
   next()
 
 headerLogin = (req, res, next) ->
