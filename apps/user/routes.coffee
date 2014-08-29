@@ -17,4 +17,4 @@ auth = require '../../lib/middleware/auth'
     success: ->
       res.locals.sd.USER = user.toJSON()
       res.render "index", author: user
-    error: (m, err) -> next err.text
+    error: (m, err) -> next err

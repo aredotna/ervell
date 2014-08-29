@@ -18,7 +18,8 @@
     "body-parser": "*",
     "cookie-parser": "*",
     "cookie-session": "*",
-    "arena-passport": "git://github.com/arenahq/arena-passport.git"
+    "arena-passport": "git://github.com/arenahq/arena-passport.git",
+    "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git"
   },
   "devDependencies": {
     "jquery": "*",
