@@ -4,12 +4,13 @@
 
 _ = require 'underscore'
 { path } = require 'url'
-template = path.resolve(__dirname, '../components/layout/templates/error.jade')
+template = path.resolve(__dirname, '../../components/layout/templates/error.jade')
 
 render = (res, data) ->
   res.send jade.compile(fs.readFileSync(template), filename: template)(data)
 
-module.exports = (req, res, next) ->
+module.exports = (err, req, res, next) ->
+  console.log 'error', req, err
   res.status err.status or 500
   data = _.extend
     code: res.statusCode

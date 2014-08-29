@@ -11,9 +11,9 @@ express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
 arenaPassport = require 'arena-passport'
-arenaToken = require('arena-passport').arena_xauth_token
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
+errorMiddleware = require './middleware/error'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
@@ -83,3 +83,5 @@ module.exports = (app) ->
   app.use require "../apps/auth"
   app.use require "../apps/user"
   app.use require "../apps/channel"
+
+  app.use errorMiddleware
