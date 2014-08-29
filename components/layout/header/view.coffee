@@ -2,6 +2,7 @@ _ = require 'underscore'
 Backbone = require 'backbone'
 SearchBarView = require '../../search_bar/view.coffee'
 AuthModalView = require '../../auth_modal/view.coffee'
+AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
 sd = require('sharify').data
 
@@ -18,9 +19,10 @@ module.exports = class HeaderView extends Backbone.View
     #   el: @$('#main-layout-search-bar-container')
     #   $input: @$('#main-layout-search-bar-input')
 
-    console.log 'HeaderView init', @$el
-
     mediator.on 'open:auth', @openAuth, @
+
+    new AuthRouter
+    Backbone.history.start()
 
   openAuth: (options) ->
     console.log 'trigger open auth'
