@@ -10,6 +10,7 @@ module.exports = class CurrentUser extends User
   url: -> "#{sd.API_URL}/accounts"
 
   sync: (method, model, options = {}) ->
+    console.log('sync CurrentUser', @)
     options.data ?= {}
     options.data.auth_token = @get 'access_token'
     super

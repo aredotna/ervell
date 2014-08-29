@@ -11,7 +11,9 @@ express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
 arenaPassport = require 'arena-passport'
+arenaToken = require('arena-passport').arena_xauth_token
 bodyParser = require 'body-parser'
+localsMiddleware = require './middleware/locals'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
@@ -30,9 +32,6 @@ sharify.data =
 CurrentUser = require '../models/current_user'
 
 module.exports = (app) ->
-
-  # Override Backbone to use server-side sync
-  Backbone.sync = require "backbone-super-sync"
 
   # Mount sharify
   app.use sharify
@@ -71,9 +70,13 @@ module.exports = (app) ->
     domain: COOKIE_DOMAIN
     key: SESSION_COOKIE_KEY
     maxage: SESSION_COOKIE_MAX_AGE
-  app.use arenaPassport _.extend config,
+
+  arena_pp = arenaPassport _.extend config,
     CurrentUser: CurrentUser
     SECURE_ARTSY_URL: API_URL
+
+  app.use arena_pp
+  app.use localsMiddleware
 
   # Mount apps
   app.use require "../apps/root"

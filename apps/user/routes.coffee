@@ -4,8 +4,12 @@
 
 User = require "../../models/user"
 Blocks = require "../../collections/blocks"
+auth = require '../../lib/middleware/auth'
 
 @user = (req, res, next) ->
+
+  auth req
+
   user = new User
     id: req.params.username
 
