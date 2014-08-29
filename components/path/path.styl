@@ -1,0 +1,25 @@
+.path
+  color darkgray
+  margin-bottom 4em
+  text-align left
+  font-weight 700
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
+  .username:hover
+    border-bottom 2px solid black
+
+  .channel
+    // text-decoration: underline
+
+  .active
+    color darkgray
+
+  .separator
+    margin 0 0.25em
+    font-weight bold
+
+  colors = 'closed' closed, 'public' public, 'private' private
+  for color in colors
+    {'.privacy-' + color[0]}
+     color: color[1]

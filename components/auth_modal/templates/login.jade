@@ -1,0 +1,24 @@
+#auth-page.vam-outer
+  .vam-inner
+    //- include ./_header
+    aside
+      = 'Log in to Arena'
+
+    section#auth-body
+      form.auth-login-email.auth-form( action='/me/sign_in' )
+        .auth-errors
+        input.bordered-input.is-block(
+          name='email', type='email', placeholder='Email', required, autofocus= autofocus
+        )
+        input.bordered-input.is-block(
+          name='password', type='password', placeholder='Password', autocomplete='on', required
+        )
+        button#auth-submit.avant-garde-button-black.is-block Log in
+
+        footer.auth-form-options
+          .artsy-checkbox
+            input( id='remember_me', name='remember_me', type='checkbox', value='1', checked )
+            label( for='remember_me', data-label='Remember me' )
+          a.faux-underline.auth-toggle( href='/forgot', data-mode='forgot', rel='nofollow' ) Forgot Password?
+
+    //- include ./_login_footer.jade

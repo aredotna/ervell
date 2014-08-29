@@ -1,6 +1,7 @@
 @import '../../node_modules/nib'
 @import '../../node_modules/jeet/stylus/jeet'
 @import '../../node_modules/rupture/rupture'
+@import 'variables'
 
 global-reset()
 
@@ -15,16 +16,16 @@ body, html
 input
   focus outline none
 
-h1 
+h1
   font-size 1.7em
 
-h2 
+h2
   font-size 1.4em
 
-h3 
+h3
   font-size 1.17em
 
-h5 
+h5
   font-size .83em
 
 h6
@@ -38,7 +39,7 @@ a
   &:hover
     color #000
 
-.privacy-public:hover 
+.privacy-public:hover
   color public
 
 .privacy-closed:hover
@@ -67,11 +68,11 @@ blockquote
   height 100%
 
 @media (min-width: 2000px)
-  .container 
+  .container
     center(1700px)
 
 @media (max-width: 1480px)
-  .container 
+  .container
     center(94%)
 
 // colors
@@ -80,4 +81,6 @@ public = #10860B
 private = #B60202
 darkgray = #333333
 
-@import '../topbar/index'
+@import 'header/index'
+@import '../modal/index'
+@import '../path/path'

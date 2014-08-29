@@ -12,7 +12,14 @@
     "backbone": "*",
     "backbone-super-sync": "*",
     "coffee-script": "*",
-    "chaplin": "*"
+    "chaplin": "*",
+    "underscore": "*",
+    "underscore.string": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "cookie-session": "*",
+    "arena-passport": "git://github.com/arenahq/arena-passport.git",
+    "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git"
   },
   "devDependencies": {
     "jquery": "*",
@@ -31,6 +38,7 @@
     "caching-coffeeify": "*",
     "nib": "*",
     "jeet": "*",
-    "rupture": "*"
+    "rupture": "*",
+    "cookies-js": "*"
   }
 }

@@ -1,0 +1,90 @@
+@import '../layout/variables'
+
+// Disable scroll on body when open
+body.is-modal
+  overflow hidden
+
+#modal
+  z-index modal_z
+  transition opacity 0.25s
+  opacity 0
+  // Default is a simple fade in
+  &[data-state='open'], &.is-open
+    opacity 1
+    > .modal-backdrop > .modal-dialog
+      // Avoid transitioning the initial open
+      transition all 0.25s, width 0
+  // Slide modal dialog in
+  &.is-slide-in
+    > .modal-backdrop > .modal-dialog
+      transform translateY(100px)
+      transition transform 0.4s
+    &[data-state='open'], &.is-open
+      opacity 1
+      > .modal-backdrop > .modal-dialog
+        transform translateY(0)
+        // Avoid transitioning the initial open
+        transition all 0.25s, width 0, transform 0.4s
+
+  &.is-loading
+    > .modal-backdrop::before
+      display block
+      content ''
+
+  &.confirm
+    .modal-body
+      text-align center
+      padding-top 100px
+      padding-bottom 100px
+    h3
+      margin-top 20px
+      font-size 24px
+
+.modal-h1
+  font-size 22px
+
+#modal
+.modal-backdrop
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+
+.modal-backdrop
+  background-color rgba(black, 0.5)
+
+#modal.has-nobackdrop > .modal-backdrop
+  background-color transparent
+
+.modal-dialog
+  position fixed
+  overflow-y auto
+  background-color white
+  max-width 90%
+  max-height 90%
+  &.is-notransition
+    transition none !important
+
+.modal-close
+  position absolute
+  top 24px
+  right 27px
+  font-size 65px
+  cursor pointer
+  transition opacity 0.25s
+  opacity 0.15
+  font-size 50px
+  z-index 2
+  &:hover
+    opacity 1
+
+.modal-dialog
+.modal-body
+  padding 1em
+  transition opacity 0.25s
+  &[data-state='fade-out'], &.is-fade-out
+    opacity 0
+  &[data-state='fade-in'], &.is-fade-in
+    opacity 1
+

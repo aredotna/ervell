@@ -23,5 +23,5 @@ User = require "../../models/user"
 
           user = new User channel.get('user')
 
-          res.render "index", channel: channel, blocks: blocks.models, user: user
-    error: (m, err) -> next err.text
+          res.render "index", channel: channel, blocks: blocks.models, author: user
+    error: (m, err) -> next err

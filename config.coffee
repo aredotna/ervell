@@ -13,6 +13,11 @@ module.exports =
   API_URL: "http://staging.are.na/v2"
   #API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
   #API_URL: "http://localhost:3000/v2"
+  SESSION_SECRET: 'change-me'
+  SESSION_COOKIE_MAX_AGE: 31536000000
+  SESSION_COOKIE_KEY: 'arena.session'
+  COOKIE_DOMAIN: null
+  ASSET_PATH: '/assets/'
 
 # Override any values with env variables if they exist
 module.exports[key] = (process.env[key] or val) for key, val of module.exports

@@ -1,0 +1,20 @@
+header#layout-header
+  .search
+    input(type="text", placeholder="Search Arena")
+
+  .right
+    if user && user.has('username')
+      .user
+        .username= user.get('username')
+        .dropdown
+          ul
+            li: a(href="/#{user.get('slug')}") Profile
+            li: a(href="/me/sign_out") Sign Out
+
+    else
+      .register
+        span
+          a(href="#log_in").btn-login Login
+        span or
+        span
+          a(href="#log_in").btn-signup Sign Up

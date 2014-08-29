@@ -1,0 +1,11 @@
+section.path
+  h1
+    span.root
+      a(href='/') Are.na
+    span.separator /
+    span.username
+      a(href="/" + author.get('slug'))=author.get('slug')
+    if channel
+      span.separator /
+      span.active.channel(class="privacy-#{channel.get('status')}")
+        = channel.get('title')
