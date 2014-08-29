@@ -3,9 +3,13 @@ header#layout-header
     input(type="text", placeholder="Search Arena")
 
   .right
-    if user
+    if user && user.has('username')
       .user
-        span.username= user.get('username')
+        .username= user.get('username')
+        .dropdown
+          ul
+            li: a(href="/#{user.get('slug')}") Profile
+            li: a(href="/me/sign_out") Sign Out
 
     else
       .register
