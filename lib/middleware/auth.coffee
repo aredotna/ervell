@@ -8,4 +8,5 @@ Backbone.sync = require "backbone-super-sync"
 module.exports = (p_req) ->
 
   Backbone.sync.editRequest = (req) ->
-    req.set('X-AUTH-TOKEN': p_req.user.get('authentication_token'))
+    if p_req.user?
+      req.set('X-AUTH-TOKEN': p_req.user.get('authentication_token'))
