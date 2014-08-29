@@ -2,7 +2,7 @@
 
 topbar_h = 50px
 
-#main-layout-header
+#layout-header
   position: fixed
   top: 0
   left: 0
@@ -12,10 +12,11 @@ topbar_h = 50px
   background-color: rgba(250, 250, 250, 1)
   padding: 0 3em
   display: flex
+  justify-content: space-between
   z-index: header_z
 
   .search
-    flex-grow: 2
+    flex-grow: 3
 
     input
       width: 100%
@@ -23,10 +24,15 @@ topbar_h = 50px
       font-size: 18px
       background: transparent
       border: none
+      line-height: topbar_h
+      outline: 0
+      font-family: Arial
+
+  .right
+    flex-grow: 1
+    text-align: right
 
   .user
-    flex-grow: 1
-    text-align: center
 
     span
       padding: 0 0.25em

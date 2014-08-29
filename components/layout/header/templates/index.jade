@@ -1,15 +1,16 @@
-header#main-layout-header
+header#layout-header
   .search
-    input(type="text")
-  .user
+    input(type="text", placeholder="Search Arena")
+
+  .right
     if user
-      span= "Hello " + user.get('username')
-      span or
-      span
-        a(href="/me/sign_out") Sign out
+      .user
+        span= user.get('username')
+
     else
-      span
-        a(href="#log_in").btn-login Login
-      span or
-      span
-        a(href="#log_in").btn-signup Sign Up
+      .register
+        span
+          a(href="#log_in").btn-login Login
+        span or
+        span
+          a(href="#log_in").btn-signup Sign Up
