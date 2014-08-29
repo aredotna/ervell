@@ -4,8 +4,7 @@ block body
   .container
     include ../../../components/path/error
 
-  -if code == 404
-    p This is a 404
-  -else if code == 401
-    p This is unauthorized
-
+    if code == 404
+      p This is a 404
+    else if code == 500
+      p this is a 500

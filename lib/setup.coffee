@@ -83,5 +83,3 @@ module.exports = (app) ->
   app.use require "../apps/auth"
   app.use require "../apps/user"
   app.use require "../apps/channel"
-
-  app.use errorMiddleware
