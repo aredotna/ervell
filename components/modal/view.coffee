@@ -125,15 +125,7 @@ module.exports = class ModalView extends Backbone.View
 
     mediator.off null, null, this
 
-    @$el.
-      attr('data-state', 'closed').
-      one($.support.transition.end, =>
-        # Re-enable scrolling
-        @scrollbar.reset()
+    @$el.attr('data-state', 'closed')
 
-        mediator.trigger 'modal:closed', { view: this }
-
-        @remove()
-
-        cb() if _.isFunction cb
-      ).emulateTransitionEnd 250
+    mediator.trigger 'modal:closed', { view: this }
+    @remove()
