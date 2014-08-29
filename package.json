@@ -37,6 +37,7 @@
     "caching-coffeeify": "*",
     "nib": "*",
     "jeet": "*",
-    "rupture": "*"
+    "rupture": "*",
+    "cookies-js": "*"
   }
 }
