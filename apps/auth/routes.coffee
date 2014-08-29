@@ -2,6 +2,8 @@
 # Auth routes
 #
 
+{ parse } = require 'url'
+
 @logout = (req, res, next) ->
   req.logout()
   next()

@@ -4,9 +4,12 @@ header#main-layout-header
   .user
     if user
       span= "Hello " + user.get('username')
+      span or
+      span
+        a(href="/me/sign_out") Sign out
     else
       span
-        a(href="#log_in").btn-login Login 
-      span or 
+        a(href="#log_in").btn-login Login
+      span or
       span
         a(href="#log_in").btn-signup Sign Up
