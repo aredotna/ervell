@@ -11,7 +11,10 @@ global-reset()
   box-sizing border-box
 
 body, html
-  font-family Arial
+  font-family Arial, Helvetica
+  color #333
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
 
 input
   focus outline none
@@ -34,6 +37,7 @@ h6
 a
   text-decoration: none
   color inherit
+  font-weight 700
 
   &:hover
     color #000
@@ -78,7 +82,7 @@ blockquote
 closed = #A0A0A0
 public = #10860B
 private = #B60202
-darkgray = #333333
+textgray = #333333
 
 @import 'header/index'
 @import '../modal/index'

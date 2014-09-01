@@ -5,21 +5,27 @@ block styles
 
 block body
   .container.landing
-    img.mark(src="../images/arena-mark.svg", alt="Arena", width=80)
-    img(src="../images/arena-logo.svg", alt="Arena", width=200)
+    .section-1
+      img.mark(src="../images/arena-mark.svg", alt="Arena", width=80)
+      // img(src="../images/arena-logo.svg", alt="Arena", width=200)
 
-    p.introduction.
-      Arena is a platform for private and collaborative research where you can save links, 
-      images, and files as "blocks" and organize them into named "channels". People use Arena 
-      to assemble references around a topic, collect images around a theme, share ideas with 
-      collaborators, and more. 
+      .login
+        a(href="#log_in") Login 
+        span / 
+        a(href="#sign_up") Register
 
-    .login
-      a(href="#log_in") Login 
-      span / 
-      a(href="#sign_up") Register
+      p.introduction.
+        Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into collections. People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators. 
+        <br>
+        An evolving archive where people collaboratively create new concepts by combining new and existing material. 
 
-    //- include ../../../components/block_collection/block_collection
+      //- include ../../../components/block_collection/block_collection
+
+    .section-2
+
+    .section-3
+
+    .section-4
 
 block scripts
   script( src='/assets/root' + sd.JS_EXT )
