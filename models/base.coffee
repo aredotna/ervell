@@ -3,10 +3,12 @@
 #
 Backbone = require 'backbone'
 Model = require("chaplin").Model
-CurrentUser = require './current_user.coffee'
+_ = require 'underscore'
+ModelLib = require '../lib/model_lib.coffee'
 sd = require("sharify").data
 
 module.exports = class Base extends Model
+  _.extend @prototype, ModelLib
 
   initialize: (attributes, options={})->
     @setOptions(options)
