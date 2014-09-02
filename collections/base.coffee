@@ -1,7 +1,6 @@
 #
-# General collection for a group of Blocks
+# General collection
 #
-
 Collection = require("chaplin").Collection
 sd = require("sharify").data
 _ = require 'underscore'
