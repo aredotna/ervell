@@ -49,19 +49,6 @@ module.exports = class Base extends Model
         success: ->
           options.success() if options.success
 
-
-  sync: (method, model, options) ->
-    xhr = Backbone.sync(method, model, options)
-    mediator.syncManager.add model, xhr
-    return xhr
-
-  dispose: ->
-    return if @disposed
-    @clearDelayed()
-    @abortSync()
-    mediator.syncManager.remove @
-    super
-
   serialize: ->
     data = super
     return data unless @calculated
