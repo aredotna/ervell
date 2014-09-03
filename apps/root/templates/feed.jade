@@ -1,0 +1,13 @@
+extends ../../../components/layout/index
+
+block styles
+  link( type='text/css', rel='stylesheet', href=('/assets/feed' + sd.CSS_EXT) )
+
+block body
+  .container
+    include ../../../components/path/path
+    include ../../../components/feed/feed
+
+block scripts
+  script( src='/assets/root' + sd.JS_EXT )
+

@@ -4,6 +4,7 @@ FeedGroup = require './feed_group.coffee'
 CurrentUser = require '../models/current_user'
 sd = require("sharify").data
 _ = require 'underscore'
+$ = require 'jquery'
 
 module.exports = class Feed extends Base
   model: FeedGroup
@@ -37,15 +38,17 @@ module.exports = class Feed extends Base
       else
         url += "/#{@options.type}/#{@options.object_id}/feed"
 
+    console.log 'url', url
+
     url + '?' + @getParams()
 
   getParams: ->
-    # if @options.type is 'primary'
-    #   params = offset: (@options.page - 1) * @options.per
-    # else
-    #   params = _.pick @options, ['page', 'per']
+    if @options.type is 'primary'
+      params = offset: (@options.page - 1) * @options.per
+    else
+      params = _.pick @options, ['page', 'per']
 
-    # $.param params
+    $.param params
 
   parse: (data)->
     @exhausted = true if data.item_count is 0

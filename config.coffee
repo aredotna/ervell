@@ -10,7 +10,7 @@ module.exports =
   NODE_ENV: "development"
   PORT: 4000
   # last one is the "rotten egg", jk last one listed is the one used.
-  API_URL: "http://staging.are.na/v2"
+  API_URL: "http://api.are.na/v2"
   #API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
   #API_URL: "http://localhost:3000/v2"
   SESSION_SECRET: 'change-me'

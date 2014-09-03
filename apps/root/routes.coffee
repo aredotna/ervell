@@ -2,12 +2,16 @@
 # Routes file that exports route handlers for ease of testing.
 #
 
-Blocks = require "../../collections/blocks"
+Feed = require "../../collections/feed"
 CurrentUser = require '../../models/current_user'
 
 @index = (req, res, next) ->
   if req.user
-    res.render 'feed'
+    feed = new Feed type: 'primary'
+    feed.fetch
+      success: ->
+        console.log 'feed', feed
+        res.render 'feed'
   else
     res.render 'index'
 
