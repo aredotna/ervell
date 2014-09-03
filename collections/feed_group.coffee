@@ -1,5 +1,6 @@
 Base = require("./base.coffee")
 FeedItem = require '../models/feed_item'
+Block = require '../models/block.coffee'
 _ = require 'underscore'
 _.mixin(require 'underscore.string')
 
@@ -18,6 +19,8 @@ module.exports = class FeedGroup extends Base
   # Necessary because we're using this collection inside another collection,
   # and that collection calls _validate on instantiated models
   _validate: -> true
+
+  items: -> @map (model)-> new Block model.get('item')
 
   actor: -> @models[0].get('user')
 
