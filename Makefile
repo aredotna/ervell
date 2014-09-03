@@ -38,12 +38,12 @@ verify:
 	if [ $(shell wc -c < public/assets/layout.min.js.cgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "layout JS exists" ; else echo; echo "Layout JS asset compilation failed" ; exit 1 ; fi
 
 deploy: assets verify
-	$(BIN)/bucketassets -d public/assets -b force-$(env)
-	$(BIN)/bucketassets -d public/images -b force-$(env)
+	$(BIN)/bucketassets -d public/assets -b ervell-production
+	$(BIN)/bucketassets -d public/images -b ervell-production
 	heroku config:add \
-		ASSET_PATH=//$(CDN_DOMAIN_$(env)).cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
+		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
 		--app=force-$(env)
-	git push git@heroku.com:force-$(env).git master
+	git push git@heroku.com:ervell.git master
 
 
 .PHONY: test assets
