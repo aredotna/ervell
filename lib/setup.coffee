@@ -24,8 +24,8 @@ rupture = require 'rupture'
 # Inject some constant data into sharify
 sharify.data =
   API_URL: API_URL
-  JS_EXT: (if "production" is NODE_ENV then ".min.js" else ".js")
-  CSS_EXT: (if "production" is NODE_ENV then ".min.css" else ".css")
+  JS_EXT: (if ("production" is NODE_ENV ) then ".min.js.cgz" else ".js")
+  CSS_EXT: (if ("production" is NODE_ENV) then ".min.css.cgz" else ".css")
   ASSET_PATH: ASSET_PATH
   REDIS_URL: REDIS_URL
 
