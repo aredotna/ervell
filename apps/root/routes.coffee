@@ -11,7 +11,7 @@ CurrentUser = require '../../models/current_user'
     feed.fetch
       success: ->
         console.log 'feed', feed
-        res.render 'feed'
+        res.render 'feed', feed: feed.models
   else
     res.render 'index'
 
