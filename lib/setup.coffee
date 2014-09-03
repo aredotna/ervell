@@ -11,6 +11,7 @@ express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
 arenaPassport = require 'arena-passport'
+backboneCacheSync = require 'backbone-cache-sync'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
 cookieParser = require 'cookie-parser'

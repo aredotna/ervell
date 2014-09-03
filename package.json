@@ -21,7 +21,8 @@
     "arena-passport": "git://github.com/arenahq/arena-passport.git",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
     "query-params": "*",
-    "backbone-cache-sync": "*"
+    "backbone-cache-sync": "*",
+    "bucket-assets": "*"
   },
   "devDependencies": {
     "jquery": "*",

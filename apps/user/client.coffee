@@ -8,7 +8,6 @@ $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
-headerTemplate = -> require("../../components/header/header.jade") arguments...
 
 module.exports.ChannelView = class ChannelView extends Backbone.View
 

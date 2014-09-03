@@ -9,6 +9,7 @@ CurrentUser = require '../../models/current_user'
   if req.user
     feed = new Feed type: 'primary', user: req.user
     feed.fetch
+      cache: true
       success: ->
         res.render 'feed', feed: feed.models
   else
