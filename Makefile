@@ -13,6 +13,10 @@ MIN_FILE_SIZE = 1000
 s:
 	$(BIN)/coffee index.coffee
 
+# Start the server with forever
+sf:
+	$(BIN)/forever $(BIN)/coffee index.coffee
+
 # Run all of the project-level tests, followed by app-level tests
 test: assets
 	$(BIN)/mocha $(shell find test -name '*.coffee' -not -path 'test/helpers/*')
