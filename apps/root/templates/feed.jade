@@ -1,7 +1,7 @@
 extends ../../../components/layout/index
 
 block styles
-  link( type='text/css', rel='stylesheet', href=('/assets/feed' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'feed' + sd.CSS_EXT) )
 
 block body
   .container
@@ -9,5 +9,5 @@ block body
     include ../../../components/feed/templates/feed
 
 block scripts
-  script( src='/assets/root' + sd.JS_EXT )
+  script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )
 
