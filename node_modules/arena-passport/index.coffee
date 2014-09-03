@@ -14,7 +14,7 @@ arenaXappToken = null
 
 # Default options
 opts =
-  SECURE_ARENA_URL: 'http://staging.are.na'
+  SECURE_ARENA_URL: 'http://api.are.na'
   loginPath: '/me/sign_in'
   signupPath: '/me/invitation/accept'
   userKeys: ['id', 'first_name', 'last_name', 'email', 'slug', 'following_ids', 'notification_count', 'username', 'authentication_token']
