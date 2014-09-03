@@ -1,10 +1,10 @@
-
 Base = require './base.coffee'
 FeedGroup = require './feed_group.coffee'
+FeedItem = require '../models/feed_item'
 CurrentUser = require '../models/current_user'
 sd = require("sharify").data
 _ = require 'underscore'
-$ = require 'jquery'
+params = require 'query-params'
 
 module.exports = class Feed extends Base
   model: FeedGroup
@@ -44,17 +44,18 @@ module.exports = class Feed extends Base
 
   getParams: ->
     if @options.type is 'primary'
-      params = offset: (@options.page - 1) * @options.per
+      parameters = offset: (@options.page - 1) * @options.per
     else
-      params = _.pick @options, ['page', 'per']
+      parameters = _.pick @options, ['page', 'per']
 
-    $.param params
+    # params parameters
 
   parse: (data)->
     @exhausted = true if data.item_count is 0
 
-    items = _.filter data.items, (model) -> 
-      model.user? && !(model.user.id is mediator.user.id and model.action is 'has joined Arena') && model?.item?.kind != "shortcuts"
+    items = _.filter data.items, (model) => 
+      # model.user? && !(model.user.id is @options.user.id and model.action is 'has joined Arena') && model?.item?.kind != "shortcuts"
+      model.user?
 
     groups = _.groupBy items, (model) -> 
       "#{model.user?.id}_#{model.target?.id}_#{model.action}"

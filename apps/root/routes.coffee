@@ -7,7 +7,7 @@ CurrentUser = require '../../models/current_user'
 
 @index = (req, res, next) ->
   if req.user
-    feed = new Feed type: 'primary'
+    feed = new Feed type: 'primary', user: req.user
     feed.fetch
       success: ->
         console.log 'feed', feed
