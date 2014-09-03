@@ -78,7 +78,7 @@ module.exports = (app) ->
 
   arena_pp = arenaPassport _.extend config,
     CurrentUser: CurrentUser
-    SECURE_ARTSY_URL: API_URL
+    SECURE_ARENA_URL: API_URL
 
   app.use arena_pp
   app.use localsMiddleware
