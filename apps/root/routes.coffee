@@ -3,19 +3,11 @@
 #
 
 Blocks = require "../../collections/blocks"
+CurrentUser = require '../../models/current_user'
 
 @index = (req, res, next) ->
-  # to do: check for login! for now just render the splash page
+  if req.user
+    res.render 'feed'
+  else
+    res.render 'index'
 
-  res.render 'index'
-
-  # blocks = new Blocks null,
-  #   channel_slug: 'arena-influences'
-
-  # blocks.fetch
-  #   success: ->
-  #     # res.locals.sd.USERNAME = req.params.username
-  #     res.locals.sd.BLOCKS = blocks.toJSON()
-
-  #     res.render 'index', blocks: blocks.models
-  #   error: (m, err) -> next err.text
