@@ -42,8 +42,7 @@ deploy: assets verify
 	$(BIN)/bucketassets -d public/images -b ervell-production
 	heroku config:add \
 		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
-		--app=force-$(env)
+		--app=ervell
 	git push git@heroku.com:ervell.git master
-
 
 .PHONY: test assets
