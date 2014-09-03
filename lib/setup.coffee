@@ -35,6 +35,7 @@ CurrentUser = require '../models/current_user'
 module.exports = (app) ->
 
   Backbone.sync = require "backbone-super-sync"
+  console.log 'REDIS_URL', REDIS_URL
   backboneCacheSync(Backbone.sync, REDIS_URL, 3000, NODE_ENV) if REDIS_URL
 
   # Mount sharify
