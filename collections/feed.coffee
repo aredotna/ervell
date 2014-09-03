@@ -38,8 +38,6 @@ module.exports = class Feed extends Base
       else
         url += "/#{@options.type}/#{@options.object_id}/feed"
 
-    console.log 'url', url
-
     url + '?' + @getParams()
 
   getParams: ->

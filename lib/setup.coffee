@@ -4,7 +4,7 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH} = config = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, REDIS_URL} = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"

@@ -20,7 +20,8 @@
     "cookie-session": "*",
     "arena-passport": "git://github.com/arenahq/arena-passport.git",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
-    "query-params": "*"
+    "query-params": "*",
+    "backbone-cache-sync": "*"
   },
   "devDependencies": {
     "jquery": "*",
