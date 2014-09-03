@@ -1,12 +1,12 @@
 extends ../../../components/layout/index
 
 block styles
-  link( type='text/css', rel='stylesheet', href=('/assets/channel' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'channel' + sd.CSS_EXT) )
 
 block body
   .container
     include ../../../components/path/path
 
 block scripts
-  script( src='/assets/channel' + sd.JS_EXT )
+  script( src= sd.ASSET_PATH + 'channel' + sd.JS_EXT )
 
