@@ -1,15 +1,15 @@
 .sentence
   a(href="/#{group.actor().slug}" class="username")=group.actor().username
-  &nbsp;
+  span &nbsp;
   span=group.action()
-  &nbsp;
+  span &nbsp;
   if group.is_single()
     span
       a(href="#{group.single_subject_link()}")=group.single_subject()
   else
     span=group.grouped_subject()
   if group.connector()
-    &nbsp;
+    span &nbsp;
     span=group.connector()
-    &nbsp;
+    span &nbsp;
     a(href="#{group.single_target_link()}")=group.single_target()

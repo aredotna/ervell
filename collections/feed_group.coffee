@@ -1,5 +1,5 @@
 Base = require("./base.coffee")
-FeedItem = require '../models/feed_item'
+FeedItem = require '../models/feed_item.coffee'
 Block = require '../models/block.coffee'
 _ = require 'underscore'
 _.mixin(require 'underscore.string')

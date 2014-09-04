@@ -1,4 +1,4 @@
-Base = require './base'
+Base = require './base.coffee'
 
 module.exports = class FeedItem extends Base
 

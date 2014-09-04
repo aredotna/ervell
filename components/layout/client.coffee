@@ -44,7 +44,8 @@ setupViews = ->
   new HeaderView el: $('#main-layout-header'), $window: $(window), $body: $('body')
 
 setupJquery = ->
+  console.log 'setupJquery', sd.CURRENT_USER?.authentication_token
   $.ajaxSettings.headers =
-    'X-AUTH-TOKEN': sd.CURRENT_USER?.access_token
+    'X-AUTH-TOKEN': sd.CURRENT_USER?.authentication_token
 
 setupAnalytics()

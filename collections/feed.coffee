@@ -1,7 +1,7 @@
 Base = require './base.coffee'
 FeedGroup = require './feed_group.coffee'
-FeedItem = require '../models/feed_item'
-CurrentUser = require '../models/current_user'
+FeedItem = require '../models/feed_item.coffee'
+CurrentUser = require '../models/current_user.coffee'
 sd = require("sharify").data
 _ = require 'underscore'
 params = require 'query-params'
@@ -46,7 +46,9 @@ module.exports = class Feed extends Base
     else
       parameters = _.pick @options, ['page', 'per']
 
-    # params parameters
+    parameters.auth_token = sd.CURRENT_USER.authentication_token
+
+    params.encode parameters
 
   parse: (data)->
     @exhausted = true if data.item_count is 0
