@@ -13,6 +13,13 @@ module.exports = class Blocks extends Collection
 
   _.extend @prototype, ModelLib
 
+  sync: (method, model, options) ->
+    if sd.CURRENT_USER
+      if !options.headers
+        options.headers = {}
+      options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token
+    super
+
   initialize: (models, options={})->
     @setOptions(options)
     super

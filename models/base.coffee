@@ -14,6 +14,13 @@ module.exports = class Base extends Model
     @setOptions(options)
     super
 
+  sync: (method, model, options) ->
+    if sd.CURRENT_USER
+      if !options.headers
+        options.headers = {}
+      options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token
+    super
+
   get: (key, options)->
     if @calculated and _.include(_.keys(@calculated), key)
       return @calculated[key].apply(@, [options])

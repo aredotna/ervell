@@ -46,7 +46,7 @@ module.exports = class Feed extends Base
     else
       parameters = _.pick @options, ['page', 'per']
 
-    parameters.auth_token = sd.CURRENT_USER.authentication_token
+    # parameters.auth_token = sd.CURRENT_USER.authentication_token
 
     params.encode parameters
 
