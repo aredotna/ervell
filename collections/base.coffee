@@ -7,7 +7,7 @@ _ = require 'underscore'
 Model = require("../models/base.coffee")
 ModelLib = require '../lib/model_lib.coffee'
 
-module.exports = class Blocks extends Collection
+module.exports = class Base extends Collection
 
   model:Model
 
