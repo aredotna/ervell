@@ -1,11 +1,11 @@
-Backbone = require "backbone"
+Chaplin = require 'chaplin'
 $ = require 'jquery'
-Backbone.$ = $
+Chaplin.$ = $
 sd = require("sharify").data
 
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
 
-module.exports = class FeedView extends Backbone.View
+module.exports = class FeedView extends Chaplin.View
 
   initialize: ->
     @collection.on "sync", @render
