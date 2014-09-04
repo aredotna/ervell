@@ -19,8 +19,16 @@
     margin 0 0.25em
     font-weight 400
 
-
     colors = 'closed' closed, 'public' public, 'private' private
     for color in colors
       {'.privacy-' + color[0]}
        color: color[1]
+
+  .privacy-public
+    color public
+
+  .privacy-closed
+    color closed
+
+  .privacy-private
+    color private
