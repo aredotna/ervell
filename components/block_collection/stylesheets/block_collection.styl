@@ -18,11 +18,7 @@
     background-position: center center
     background-repeat: no-repeat
     border: 1px solid transparent
-
-    colors = 'closed' closed, 'public' public, 'private' private
-    for color in colors
-      &{'.block--privacy-' + color[0] + ':hover'}
-        border: 1px solid color[1]
+    position relative
 
   hr
     border: 1px solid #eee
@@ -45,6 +41,11 @@
     background-position: center
     background-size: 40%
     background-repeat: no-repeat
+
+    colors = 'closed' closed, 'public' public, 'private' private
+    for color in colors
+      &{'.block--privacy-' + color[0]}
+        border: 1px solid color[1]
 
   &:hover .block__overlay
     opacity: 1
