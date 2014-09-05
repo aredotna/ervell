@@ -116,6 +116,16 @@ module.exports = Base = (function(_super) {
     return Base.__super__.initialize.apply(this, arguments);
   };
 
+  Base.prototype.sync = function(method, model, options) {
+    if (sd.CURRENT_USER) {
+      if (!options.headers) {
+        options.headers = {};
+      }
+      options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token;
+    }
+    return Base.__super__.sync.apply(this, arguments);
+  };
+
   Base.prototype.get = function(key, options) {
     if (this.calculated && _.include(_.keys(this.calculated), key)) {
       return this.calculated[key].apply(this, [options]);
