@@ -1,8 +1,8 @@
 .path
-  color darkgray
+  color textgray
   margin-bottom 4em
   text-align left
-  font-weight 100
+  font-weight 400
 
   .username
     font-weight 700
@@ -11,16 +11,16 @@
     border-bottom 2px solid black
 
   .channel
-    // text-decoration: underline
 
   .active
-    color darkgray
+    font-weight 400
 
   .separator
     margin 0 0.25em
-    font-weight bold
+    font-weight 400
 
-  colors = 'closed' closed, 'public' public, 'private' private
-  for color in colors
-    {'.privacy-' + color[0]}
-     color: color[1]
+
+    colors = 'closed' closed, 'public' public, 'private' private
+    for color in colors
+      {'.privacy-' + color[0]}
+       color: color[1]

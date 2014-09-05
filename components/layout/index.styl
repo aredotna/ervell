@@ -12,7 +12,7 @@ global-reset()
 
 body, html
   font-family Arial, Helvetica
-  color #333
+  color textgray
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
 
@@ -42,21 +42,21 @@ a
   &:hover
     color #000
 
-.privacy-public:hover
+.path .privacy-public
   color public
 
-.privacy-closed:hover
+.path .privacy-closed
   color closed
 
-.privacy-private:hover
+.privacy-private
   color private
+
+strong
+  font-weight 700
 
 .container
   center(1400px)
   padding-top 100px
-
-strong
-  font-weight bold
 
 blockquote
   border-left 3px solid #eee
@@ -79,10 +79,10 @@ blockquote
     center(94%)
 
 // colors
-closed = #A0A0A0
+closed = #D8A068
 public = #10860B
 private = #B60202
-textgray = #333333
+textgray = #454545
 
 @import 'header/index'
 @import '../modal/index'

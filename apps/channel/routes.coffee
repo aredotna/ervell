@@ -14,8 +14,10 @@ User = require "../../models/user"
     channel_slug: req.params.channel_slug
 
   channel.fetch
+    cache: true
     success: ->
       blocks.fetch
+        cache: true
         success: ->
           res.locals.sd.USERNAME = req.params.username
           res.locals.sd.CHANNEL = channel.toJSON()

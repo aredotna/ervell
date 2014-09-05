@@ -4,13 +4,14 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH} = config = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, REDIS_URL} = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
 arenaPassport = require 'arena-passport'
+backboneCacheSync = require 'backbone-cache-sync'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
 cookieParser = require 'cookie-parser'
@@ -23,14 +24,19 @@ rupture = require 'rupture'
 # Inject some constant data into sharify
 sharify.data =
   API_URL: API_URL
-  JS_EXT: (if "production" is NODE_ENV then ".min.js" else ".js")
-  CSS_EXT: (if "production" is NODE_ENV then ".min.css" else ".css")
+  JS_EXT: (if ("production" is NODE_ENV ) then ".min.js.cgz" else ".js")
+  CSS_EXT: (if ("production" is NODE_ENV) then ".min.css.cgz" else ".css")
   ASSET_PATH: ASSET_PATH
+  REDIS_URL: REDIS_URL
 
 # current user management
 CurrentUser = require '../models/current_user'
 
 module.exports = (app) ->
+
+  Backbone.sync = require "backbone-super-sync"
+  console.log 'REDIS_URL', REDIS_URL
+  # backboneCacheSync(Backbone.sync, REDIS_URL, 3000, NODE_ENV) if REDIS_URL
 
   # Mount sharify
   app.use sharify
@@ -72,7 +78,7 @@ module.exports = (app) ->
 
   arena_pp = arenaPassport _.extend config,
     CurrentUser: CurrentUser
-    SECURE_ARTSY_URL: API_URL
+    SECURE_ARENA_URL: API_URL
 
   app.use arena_pp
   app.use localsMiddleware

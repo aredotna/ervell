@@ -6,16 +6,9 @@ sd = require('sharify').data
 # analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
-  setupJquery()
   setupViews()
   setupReferrerTracking()
-
-ensureFreshUser = (data) ->
-  return unless sd.CURRENT_USER
-  for attr in ['id', 'type', 'name', 'email', 'phone', 'lab_features',
-               'default_profile_id', 'has_partner_access', 'collector_level']
-    if not _.isEqual data[attr], sd.CURRENT_USER[attr]
-      $.ajax('/user/refresh').then -> window.location.reload()
+  setupAnalytics()
 
 setupAnalytics = ->
   # Initialize analytics & track page view if we included mixpanel
@@ -42,9 +35,3 @@ setupReferrerTracking = ->
 
 setupViews = ->
   new HeaderView el: $('#main-layout-header'), $window: $(window), $body: $('body')
-
-setupJquery = ->
-  $.ajaxSettings.headers =
-    'X-AUTH-TOKEN': sd.CURRENT_USER?.access_token
-
-setupAnalytics()
