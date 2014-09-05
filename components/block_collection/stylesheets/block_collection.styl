@@ -7,22 +7,22 @@
 .block
   column(1/4, cycle: 4)
   margin-bottom: 70px;
-  padding: 1em
-  background-size: contain
-  background-position: center center
-  background-repeat: no-repeat
-  border: 1px solid transparent
   overflow: hidden
+  padding-bottom 1em
   position: relative
 
   .block__inner
     height 300px
     width 100%
+    background-size: contain
+    background-position: center center
+    background-repeat: no-repeat
+    border: 1px solid transparent
 
-  colors = 'closed' closed, 'public' public, 'private' private
-  for color in colors
-    &{'.block--privacy-' + color[0] + ':hover'}
-      border: 1px solid color[1]
+    colors = 'closed' closed, 'public' public, 'private' private
+    for color in colors
+      &{'.block--privacy-' + color[0] + ':hover'}
+        border: 1px solid color[1]
 
   hr
     border: 1px solid #eee
@@ -46,7 +46,7 @@
     background-size: 40%
     background-repeat: no-repeat
 
-  &:hover .block-overlay
+  &:hover .block__overlay
     opacity: 1
     pointer-events: auto  
 
@@ -54,7 +54,10 @@
   font-size 12px
   font-weight 700
   text-align center
-  margin: 0.5em 0
+  margin 0
+  position absolute
+  bottom 0
+  width 100%
 
 .block__text
   font-size 15px
@@ -62,17 +65,17 @@
   margin: 0.5em 0
 
 @media (min-width: 2000px)
-  .block-outer
+  .block
     column(1/5, uncycle: 4, cycle: 5)
 
 @media (max-width: 1200px)
-  .block-outer
+  .block
     column(1/3, uncycle: 4, cycle: 3)
 
 @media (max-width: 768px)
-  .block-outer
+  .block
     column(1/2, uncycle: 3, cycle: 2)
 
 @media (max-width: 408px)
-  .block-outer
+  .block
     column(1, uncycle: 3, cycle: 1)
