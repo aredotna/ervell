@@ -1,9 +1,10 @@
-@import '../../node_modules/jeet/stylus/jeet'
+@import '../../../node_modules/jeet/stylus/jeet'
+@import '../../layout/variables'
 
 .block-collection
   cf()
 
-.block
+.block-outer
   column(1/4, cycle: 4)
   margin-bottom: 70px;
   height: 300px
@@ -23,7 +24,7 @@
   hr
     border: 1px solid #eee
 
-  .content
+  .block-content
     line-height: 1.4
     font-size: 14px
     overflow: hidden
@@ -34,7 +35,7 @@
     a
       text-decoration: underline
 
-  .overlay
+  .block-overlay
     opacity: 0
     pointer-events: none
     background: #fff
@@ -42,28 +43,28 @@
     background-size: 40%
     background-repeat: no-repeat
 
-  &:hover .overlay
+  &:hover .block-overlay
     opacity: 1
     pointer-events: auto
 
-  p
+  .block-title
     font-size 12px
     font-weight 700
     text-align center
     margin: 0.5em 0
 
 @media (min-width: 2000px)
-  .block
+  .block-outer
     column(1/5, uncycle: 4, cycle: 5)
 
 @media (max-width: 1200px)
-  .block
+  .block-outer
     column(1/3, uncycle: 4, cycle: 3)
 
 @media (max-width: 768px)
-  .block
+  .block-outer
     column(1/2, uncycle: 3, cycle: 2)
 
 @media (max-width: 408px)
-  .block
+  .block-outer
     column(1, uncycle: 3, cycle: 1)

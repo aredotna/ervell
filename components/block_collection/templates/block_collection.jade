@@ -1,8 +1,9 @@
 .block-collection
   for block in blocks
-    div(class="block privacy-#{ block.get('visibility') }", style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
-      .content.abs-fill
-        - if(block.get('class') == 'Text')
-          != block.get('content_html')
-      .overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
-      p= block.get('title')
+    div(class="block-outer privacy-#{ block.get('visibility') }", style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
+      .block-inner
+        .block-content.abs-fill
+          - if(block.get('class') == 'Text')
+            != block.get('content_html')
+        .block-overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
+        p.block-title= block.get('title')
