@@ -4,10 +4,9 @@
 .block-collection
   cf()
 
-.block-outer
+.block
   column(1/4, cycle: 4)
   margin-bottom: 70px;
-  height: 300px
   padding: 1em
   background-size: contain
   background-position: center center
@@ -16,15 +15,19 @@
   overflow: hidden
   position: relative
 
+  .block__inner
+    height 300px
+    width 100%
+
   colors = 'closed' closed, 'public' public, 'private' private
   for color in colors
-    &{'.privacy-' + color[0] + ':hover'}
+    &{'.block--privacy-' + color[0] + ':hover'}
       border: 1px solid color[1]
 
   hr
     border: 1px solid #eee
 
-  .block-content
+  .block__content
     line-height: 1.4
     font-size: 14px
     overflow: hidden
@@ -35,7 +38,7 @@
     a
       text-decoration: underline
 
-  .block-overlay
+  .block__overlay
     opacity: 0
     pointer-events: none
     background: #fff
