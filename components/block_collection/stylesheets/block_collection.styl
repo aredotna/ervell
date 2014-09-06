@@ -20,6 +20,11 @@
     border: 1px solid transparent
     position relative
 
+  colors = 'closed' closed, 'public' public, 'private' private
+  for color in colors
+    &{'.block--channel .block--privacy-' + color[0]}
+      border: 1px solid color[1]
+
   hr
     border: 1px solid #eee
 
@@ -44,7 +49,7 @@
 
     colors = 'closed' closed, 'public' public, 'private' private
     for color in colors
-      &{'.block--privacy-' + color[0]}
+      &{'.block__overlay--privacy-' + color[0]}
         border: 1px solid color[1]
 
   &:hover .block__overlay

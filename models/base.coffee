@@ -57,7 +57,6 @@ module.exports = class Base extends Model
           options.success() if options.success
 
   smartTruncate: (text, limit=40) ->
-    console.log 'smartTruncate', text
     return unless text
     size = 0
     textArray = for token in text.split(' ')
