@@ -5,9 +5,9 @@ block styles
 
 block body
   .container
-    include ../../../components/path/path
+    include ../../../components/path/templates/path
     if blocks
-      include ../../../components/block_collection/templates/index
+      include ../../../components/block_collection/templates/block_collection
 
 block scripts
   script( src= sd.ASSET_PATH + 'channel' + sd.JS_EXT )

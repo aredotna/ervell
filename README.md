@@ -15,3 +15,17 @@ Built using Artsy's [Ezel](https://github.com/artsy/ezel)
 
 ### Running the server
 	make s
+
+### or alternatively
+
+Install nodemon
+```
+npm install
+```
+
+Run the server
+```
+nodemon index.coffee
+```
+
+(this will automatically restart the server when code changes)
