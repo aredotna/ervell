@@ -10,8 +10,7 @@ module.exports = class UserBlocks extends Base
 
   model: Block
 
-  url: ->
-    "#{sd.API_URL}/user/#{@slug}/search"
+  url: -> "#{sd.API_URL}/user/#{@slug}/search"
 
   parse: (data)-> data.blocks
 

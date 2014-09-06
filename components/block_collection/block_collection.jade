@@ -1,8 +1,0 @@
-.block-collection
-  for block in blocks
-    div(class="block privacy-#{ block.get('visibility') }", style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
-      .content.abs-fill
-        - if(block.get('class') == 'Text')
-          != block.get('content_html')
-      .overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
-      p(class="block__title")= block.get('title')

@@ -27,5 +27,4 @@ _ = require 'underscore'
     error: (m, err) -> next err
 
   render = _.after 2, ->
-    console.log 'blocks.models', blocks.models
     res.render "index", author: user, blocks: blocks.models
