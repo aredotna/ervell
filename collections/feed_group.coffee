@@ -88,6 +88,6 @@ module.exports = class FeedGroup extends Base
       else
         # @_format_subject()
 
-  timestamp: -> @models[0].get('created_at')
+  timestamp: -> @models[0].createdAtAgo()
 
 

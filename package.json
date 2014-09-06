@@ -23,7 +23,8 @@
     "query-params": "*",
     "backbone-cache-sync": "*",
     "bucket-assets": "*",
-    "forever": "*"
+    "forever": "*",
+    "moment": "*"
   },
   "devDependencies": {
     "jquery": "*",

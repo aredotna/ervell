@@ -3,6 +3,7 @@
 #
 Backbone = require 'backbone'
 Model = require("chaplin").Model
+moment = require 'moment'
 _ = require 'underscore'
 ModelLib = require '../lib/model_lib.coffee'
 sd = require("sharify").data
@@ -64,6 +65,8 @@ module.exports = class Base extends Model
       break if size > limit
       token
     textArray.join(" ") + (if text.length > limit then "..." else "")
+
+  createdAtAgo:  -> moment(@get('created_at')).fromNow()
 
   serialize: ->
     data = super
