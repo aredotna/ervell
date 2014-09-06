@@ -5,7 +5,7 @@ section.path
     span.separator /
     if author
       span.username
-        a(href="/" + author.get('slug'))=author.get('slug')
+        a(href="/" + author.get('slug'))=author.get('username')
     if channel
       span.separator /
       span.active.channel(class="privacy-#{channel.get('status')}")

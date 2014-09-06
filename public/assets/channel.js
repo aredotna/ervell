@@ -187,6 +187,33 @@ module.exports = Base = (function(_super) {
     }
   };
 
+  Base.prototype.smartTruncate = function(text, limit) {
+    var size, textArray, token;
+    if (limit == null) {
+      limit = 40;
+    }
+    console.log('smartTruncate', text);
+    if (!text) {
+      return;
+    }
+    size = 0;
+    textArray = (function() {
+      var _i, _len, _ref, _results;
+      _ref = text.split(' ');
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        token = _ref[_i];
+        size += token.length + 1;
+        if (size > limit) {
+          break;
+        }
+        _results.push(token);
+      }
+      return _results;
+    })();
+    return textArray.join(" ") + (text.length > limit ? "..." : "");
+  };
+
   Base.prototype.serialize = function() {
     var data;
     data = Base.__super__.serialize.apply(this, arguments);

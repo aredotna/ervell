@@ -1,9 +1,13 @@
 .block-collection
   for block in blocks
-    div(class="block")
-      .block__inner(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""))
+    div(class="block block--#{block.get('class').toLowerCase()}")
+      .block__inner(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('display') })" : ""), class="block--privacy-#{ block.getVisibility() }")
         .block__content.abs-fill
           - if(block.get('class') == 'Text')
             != block.get('content_html')
-        .block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="block--privacy-#{ block.get('visibility') }")
-      p.block__title= block.get('title')
+        .block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="block__overlay--privacy-#{ block.getVisibility() }")
+        - if(block.get('class') == 'Channel')
+          .block__channel-title
+            .block__channel-title__inner
+              h2=block.get('title')
+      p.block__title= block.smartTruncate(block.get('title'))

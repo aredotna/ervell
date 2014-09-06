@@ -3,15 +3,28 @@
 #
 
 User = require "../../models/user"
-Blocks = require "../../collections/blocks"
+UserBlocks = require "../../collections/user_blocks"
+_ = require 'underscore'
 
 @user = (req, res, next) ->
 
   user = new User
     id: req.params.username
 
+  blocks = new UserBlocks null,
+    user_slug: req.params.username
+
   user.fetch
     success: ->
       res.locals.sd.USER = user.toJSON()
-      res.render "index", author: user
+      render()
     error: (m, err) -> next err
+
+  blocks.fetch
+    success: ->
+      res.locals.sd.BLOCKS = blocks.toJSON()
+      render()
+    error: (m, err) -> next err
+
+  render = _.after 2, ->
+    res.render "index", author: user, blocks: blocks.models

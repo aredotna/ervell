@@ -56,6 +56,15 @@ module.exports = class Base extends Model
         success: ->
           options.success() if options.success
 
+  smartTruncate: (text, limit=40) ->
+    return unless text
+    size = 0
+    textArray = for token in text.split(' ')
+      size += (token.length + 1)
+      break if size > limit
+      token
+    textArray.join(" ") + (if text.length > limit then "..." else "")
+
   serialize: ->
     data = super
     return data unless @calculated

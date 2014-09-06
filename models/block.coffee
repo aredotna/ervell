@@ -12,3 +12,9 @@ module.exports = class Block extends Base
   getImageSize: (size) ->
     if @has('image')
       @get('image')?[size]?.url
+
+  getVisibility: ->
+    if @get('class') is 'Channel'
+      @get('status')
+    else
+      @get('visibility')
