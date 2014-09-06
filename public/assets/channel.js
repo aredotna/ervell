@@ -192,7 +192,6 @@ module.exports = Base = (function(_super) {
     if (limit == null) {
       limit = 40;
     }
-    console.log('smartTruncate', text);
     if (!text) {
       return;
     }

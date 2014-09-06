@@ -10,4 +10,9 @@
           .block__channel-title
             .block__channel-title__inner
               h2=block.get('title')
+        - if(block.get('class') == 'User')
+          .block__user-avatar
+            .block__user-avatar__inner
+              img(src="#{block.get('avatar_image').display}", alt="#{block.get('username')}")
+              h3=block.get('username')
       p.block__title= block.smartTruncate(block.get('title'))

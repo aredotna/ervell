@@ -1,4 +1,4 @@
-.sentence
+.feed-group__sentence
   a(href="/#{group.actor().slug}" class="username")=group.actor().username
   span &nbsp;
   span=group.action()
@@ -13,3 +13,4 @@
     span=group.connector()
     span &nbsp;
     a(href="#{group.single_target_link()}")=group.single_target()
+  .feed-group__timestamp=group.timestamp()

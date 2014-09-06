@@ -4,6 +4,7 @@
 
 Base = require("./base.coffee")
 sd = require("sharify").data
+_ = require 'underscore'
 Block = require("../models/block.coffee")
 
 module.exports = class UserBlocks extends Base
@@ -12,6 +13,7 @@ module.exports = class UserBlocks extends Base
 
   url: -> "#{sd.API_URL}/user/#{@slug}/search"
 
-  parse: (data)-> data.blocks
+  parse: (data)->
+    _.flatten _.values _.pick(data, ['contents', 'followers', 'users', 'channels', 'following', 'blocks'])
 
   initialize: (models, options) -> @slug = options.user_slug

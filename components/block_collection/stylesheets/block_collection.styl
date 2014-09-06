@@ -25,6 +25,9 @@
     &{'.block--channel .block--privacy-' + color[0]}
       border: 1px solid color[1]
 
+  &.block--user .block__inner
+    border 1px solid textgray
+
   hr
     border: 1px solid #eee
 
@@ -66,13 +69,13 @@
   width 100%
   white-space nowrap
 
-.block__channel-title
+.block__channel-title, .block__user-avatar
   position absolute
   width 100%
   height 100%
   display table
 
-.block__channel-title__inner
+.block__channel-title__inner, .block__user-avatar__inner
   display table-cell
   width 100%
   height 100%
