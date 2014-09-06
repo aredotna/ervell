@@ -18,3 +18,11 @@ module.exports = class Block extends Base
       @get('status')
     else
       @get('visibility')
+
+  getHref: ->
+    if @get('class') is 'Channel'
+      "/#{@get('user').slug}/#{@get('slug')}"
+    else if @get('class') is 'User'
+      "/#{@get('slug')}"
+    else
+      "#/block/#{@id}"
