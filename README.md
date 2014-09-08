@@ -20,7 +20,7 @@ Built using Artsy's [Ezel](https://github.com/artsy/ezel)
 
 Install nodemon
 ```
-npm install
+npm install -g nodemon
 ```
 
 Run the server
