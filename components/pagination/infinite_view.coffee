@@ -10,6 +10,7 @@ module.exports = class InfiniteView extends Backbone.View
     @itemSelector = options.itemSelector
     @initListener()
     @initLoader()
+    console.log '@context', @context
     super
 
   initLoader: ->
@@ -19,13 +20,17 @@ module.exports = class InfiniteView extends Backbone.View
     @timer = setInterval @maybeLoad, 150
 
   maybeLoad: =>
+    console.log 'maybeLoad', @loading, @disabled
     return if @loading or @disabled
 
     threshold = 0
     total = $('body').prop('scrollHeight')
     progress = $('body').scrollTop() + $(window).height()*2
 
+    console.log 'total', total, 'progress', progress
+
     if total - progress < threshold
+      console.log('loading next page')
       @loadNextPage()
 
   loadNextPage: ->
@@ -35,10 +40,11 @@ module.exports = class InfiniteView extends Backbone.View
     @startLoader()
 
     $.when(request).then =>
+      console.log 'request done'
       @stopLoader()
 
       _.delay =>
-
+        console.log 'loading=false'
         @loading = false
       , 500
 
