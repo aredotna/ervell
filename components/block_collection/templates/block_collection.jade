@@ -3,7 +3,7 @@
     div(class="block block--#{block.get('class').toLowerCase()}")
       a(href="#{block.getHref()}")
         .block__inner(class="block--privacy-#{ block.getVisibility() }")
-          .block__content.abs-fill
+          .block__content
             - if(block.get('class') == 'Text')
               != block.get('content_html')
             - if(block.has('image'))
