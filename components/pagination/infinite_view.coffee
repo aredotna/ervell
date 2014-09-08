@@ -1,14 +1,15 @@
 Backbone = require 'backbone'
 $ = require 'jquery'
+_ = require 'underscore'
 Backbone.$ = $
 
 module.exports = class InfiniteView extends Backbone.View
 
   initialize: (options)->
     @context = options.context
+    @itemSelector = options.itemSelector
     @initListener()
     @initLoader()
-
     super
 
   initLoader: ->
@@ -21,8 +22,8 @@ module.exports = class InfiniteView extends Backbone.View
     return if @loading or @disabled
 
     threshold = 0
-    total = $(@context).prop('scrollHeight')
-    progress = $(@context).scrollTop() + $(window).height()*2
+    total = $('body').prop('scrollHeight')
+    progress = $('body').scrollTop() + $(window).height()*2
 
     if total - progress < threshold
       @loadNextPage()
@@ -37,14 +38,15 @@ module.exports = class InfiniteView extends Backbone.View
       @stopLoader()
 
       _.delay =>
+
         @loading = false
       , 500
 
   startLoader: ->
-    $(@loader).css('visibility','visible').insertAfter(@$(@options.itemSelector + ':last')).spin()
+    # $(@loader).css('visibility','visible').insertAfter(@$(@itemSelector + ':last')).spin()
 
   stopLoader: ->
-    $(@loader).css('visibility','hidden')
+    # $(@loader).css('visibility','hidden')
 
   disable: ->
     @disabled = true
