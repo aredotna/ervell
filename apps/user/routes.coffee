@@ -28,3 +28,4 @@ _ = require 'underscore'
 
   render = _.after 2, ->
     res.render "index", author: user, blocks: blocks.models
+
