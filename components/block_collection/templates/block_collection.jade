@@ -9,7 +9,7 @@
             - if(block.has('image'))
               .block__image
                 .block__image__inner
-                  img(src="#{block.getImageSize('display')}")
+                  img(src="#{block.getImageSize('display')}").block__image__content
           .block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="block__overlay--privacy-#{ block.getVisibility() }")
           - if(block.get('class') == 'Channel')
             .block__channel-title
