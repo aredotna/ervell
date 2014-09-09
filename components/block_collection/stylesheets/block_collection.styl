@@ -20,10 +20,7 @@
     border: 1px solid transparent
     position relative
 
-  colors = 'closed' closed, 'public' public, 'private' private
-  for color in colors
-    &{'.block--channel .block--privacy-' + color[0]}
-      border: 1px solid color[1]
+  privacy-color('&.block--channel .block--privacy-', border-color)
 
   &.block--user .block__inner
     border 1px solid textgray
@@ -61,10 +58,7 @@
     background-size: 40%
     background-repeat: no-repeat
 
-    colors = 'closed' closed, 'public' public, 'private' private
-    for color in colors
-      &{'.block__overlay--privacy-' + color[0]}
-        border: 1px solid color[1]
+    privacy-color('&.block__overlay--privacy-', border-color)
 
   &:hover .block__overlay
     opacity: 1

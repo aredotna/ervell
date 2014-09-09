@@ -19,3 +19,11 @@ caret()
   border-right 4px solid transparent
   border-left 4px solid transparent
   margin 2px 0 4px 4px
+
+privacy-color(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0]}
+      if attr == border-color
+        border 1px solid
+      {attr} value[1]
