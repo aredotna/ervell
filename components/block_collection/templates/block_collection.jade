@@ -1,23 +1,25 @@
-.block-collection
+.grid
   for block in blocks
-    div(class="block block--#{block.get('class').toLowerCase()}")
+    div(class="grid__block grid__block--#{block.get('class').toLowerCase()}")
       a(href="#{block.getHref()}")
-        .block__inner(class="block--privacy-#{ block.getVisibility() }")
-          .block__content
-            - if(block.get('class') == 'Text')
-              != block.get('content_html')
-            - if(block.has('image'))
-              .block__image
-                .block__image__inner
-                  img(src="#{block.getImageSize('display')}").block__image__content
-          .block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="block__overlay--privacy-#{ block.getVisibility() }")
-          - if(block.get('class') == 'Channel')
-            .block__channel-title
-              .block__channel-title__inner
-                h2=block.get('title')
-          - if(block.get('class') == 'User')
-            .block__user-avatar
-              .block__user-avatar__inner
-                img(src="#{block.get('avatar_image').display}", alt="#{block.get('username')}")
-                h3=block.get('username')
-      p.block__title= block.smartTruncate(block.get('title'))
+        .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")
+          - if(block.get('class') != 'Channel' || block.get('class') != 'User')
+            .grid__block__content.grid--valign-outer
+              .grid--valign-inner
+                - if(block.has('image'))
+                  img(src="#{block.getImageSize('display')}").grid__block__content__image
+                - if(block.get('class') == 'Text')
+                  .grid__block__content__text
+                    != block.get('content_html')
+                - if(block.get('class') == 'Channel')
+                  h2=block.get('title')
+            .grid__block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+              .grid__block__mini-feed
+                - if(channel)
+                  ul.bare-list
+                    li
+                      span(data-href="/#{block.get('connected_by_user_slug')}").inline-link.username=block.get('connected_by_username')
+                      span.arrow &#x279d;
+                      span.inline-link.channel=channel.smartTruncate(channel.get('title'), 30)
+
+      p.grid__block__title= block.smartTruncate(block.get('title'))

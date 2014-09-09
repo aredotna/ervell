@@ -27,3 +27,4 @@ User = require "../../models/user"
 
           res.render "index", channel: channel, blocks: blocks.models, author: user
     error: (m, err) -> next err
+
