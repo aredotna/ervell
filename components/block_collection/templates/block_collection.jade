@@ -13,6 +13,8 @@
                     != block.get('content_html')
                 - if(block.get('class') == 'Channel')
                   h2=block.get('title')
+                - if(block.get('class') == 'User')
+                  h3=block.get('username')
             .grid__block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="grid__block__overlay--privacy-#{ block.getVisibility() }")
               .grid__block__mini-feed
                 - if(channel)
