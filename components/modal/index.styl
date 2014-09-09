@@ -52,7 +52,7 @@ body.is-modal
   left 0
 
 .modal-backdrop
-  background-color rgba(white, 0.9)
+  background-color rgba(white, 0.95)
 
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
@@ -68,14 +68,12 @@ body.is-modal
     transition none !important
 
 .modal-close
-  position absolute
-  top 24px
-  right 27px
-  font-size 65px
+  position fixed
+  top 90px
+  right 90px
+  font-size 32px
   cursor pointer
-  transition opacity 0.25s
-  opacity 0.15
-  font-size 50px
+  opacity 0.8
   z-index 2
   &:hover
     opacity 1
@@ -88,4 +86,7 @@ body.is-modal
     opacity 0
   &[data-state='fade-in'], &.is-fade-in
     opacity 1
+
+.modal-title
+  margin 0 0 50px 0
 
