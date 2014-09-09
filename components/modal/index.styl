@@ -52,7 +52,7 @@ body.is-modal
   left 0
 
 .modal-backdrop
-  background-color rgba(black, 0.5)
+  background-color rgba(white, 0.9)
 
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
@@ -60,7 +60,8 @@ body.is-modal
 .modal-dialog
   position fixed
   overflow-y auto
-  background-color white
+  background-color none
+  width 40%
   max-width 90%
   max-height 90%
   &.is-notransition
