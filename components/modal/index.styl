@@ -40,6 +40,18 @@ body.is-modal
       margin-top 20px
       font-size 24px
 
+// To be exported into /forms/stylesheets/
+  input
+    width 100%
+    height 40px
+    background-color none
+    border none
+    border-bottom 1px solid lightgray
+
+  input:focus
+    outline none
+    background-color backgroundgray
+
 .modal-h1
   font-size 22px
 
@@ -62,8 +74,9 @@ body.is-modal
   overflow-y auto
   background-color none
   width 40%
-  max-width 90%
-  max-height 90%
+  border 1px solid lightgray
+  background-color white
+  height 90%
   &.is-notransition
     transition none !important
 
@@ -88,5 +101,12 @@ body.is-modal
     opacity 1
 
 .modal-title
-  margin 0 0 50px 0
+  font-size 21px
+  margin 0 0 40px 0
 
+.modal-forgot
+  font-size 12px
+  margin 10px 0 0 0
+
+.modal-checkbox
+  display none
