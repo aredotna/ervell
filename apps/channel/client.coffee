@@ -3,6 +3,7 @@ $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Channel = require '../../models/channel.coffee'
+Blocks = require '../../collections/blocks.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 
@@ -16,6 +17,8 @@ module.exports = class ChannelView extends Backbone.View
 module.exports.init = ->
   current_user = new CurrentUser sd.CURRENT_USER
   channel = new Channel sd.CHANNEL
+  blocks = new Blocks sd.BLOCKS,
+    channel_slug: sd.CHANNEL.slug
 
   new ChannelView
     el: $ "body"
@@ -25,3 +28,4 @@ module.exports.init = ->
     new NewBlockView
       el: $ ".grid__block--new-block"
       model: channel
+      blocks: blocks

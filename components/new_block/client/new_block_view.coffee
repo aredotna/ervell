@@ -2,6 +2,8 @@ Backbone = require "backbone"
 $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
+Blocks = require '../../../collections/blocks.coffee'
+Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
 
 module.exports = class NewBlockView extends Backbone.View
@@ -11,8 +13,9 @@ module.exports = class NewBlockView extends Backbone.View
     'click .grid__block--new-block__cancel' : 'cancelForm'
     'click .grid__block--new-block__submit' : 'createBlock'
 
-  initialize: ->
-    console.log 'this NewBlockView', @, 'el', @$el
+  initialize: (options)->
+    @blocks = options.blocks
+    @$field = @$('.grid__block--new-block__content-field')
 
   showAddBlockForm: ->
     @$el.addClass 'active'
@@ -28,4 +31,20 @@ module.exports = class NewBlockView extends Backbone.View
     urlregex = /^((ht{1}tp(s)?:\/\/)[-a-zA-Z0-9@:,!$%_\+.~#?&\(\)\/\/=]+)$/
     urlregex.test(string)
 
+  fieldIsntEmpty: ->
+    @$field.val() isnt ""
+
   createBlock: ->
+    if @fieldIsntEmpty()
+      block = new Block
+
+      if @isURL()
+        block.set source: @$field.val(), { silent: true }
+      else
+        block.set content: @$field.val(), { silent: true }
+
+      console.log 'our new block', block.toJSON(), @blocks, @blocks.create
+
+      @blocks.create block.toJSON(),
+        url: "#{sd.API_URL}/channels/#{@model.get('slug')}/blocks"
+        success: (block) -> console.log 'block created', block
