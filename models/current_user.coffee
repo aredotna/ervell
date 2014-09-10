@@ -19,5 +19,5 @@ module.exports = class CurrentUser extends User
 
   canEditChannel: (channel) ->
     # TODO: add functionality for collaborators
-    if channel.get('user').id is @id
+    if channel.get('user').id is @id or channel.get('status') is 'public'
       true
