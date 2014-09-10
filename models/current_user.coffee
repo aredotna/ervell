@@ -16,3 +16,7 @@ module.exports = class CurrentUser extends User
     super
 
   parse: (response) -> response.user
+
+  canEditChannel: (channel) ->
+    if channel.get('user').id is @id
+      true
