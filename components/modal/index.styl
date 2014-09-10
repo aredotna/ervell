@@ -43,14 +43,58 @@ body.is-modal
 // To be exported into /forms/stylesheets/
   input
     width 100%
-    height 40px
-    background-color none
+    height 30px
+    font-size 16px
+    font-weight 400
+    margin 0 0 20px 0
+    background-color rgba(white, 0.96)
     border none
     border-bottom 1px solid lightgray
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
 
-  input:focus
+  ::-webkit-input-placeholder
+     color lightgray
+
+  :-moz-placeholder /* Firefox 18- */
+     color lightgray
+
+  ::-moz-placeholder /* Firefox 19+ */
+     color lightgray
+
+  :-ms-input-placeholder
+     color lightgray
+
+  &:focus
     outline none
-    background-color backgroundgray
+    border-bottom 1px solid textgray
+
+    &:focus::-webkit-input-placeholder
+      color textgray
+
+    &:focus:-moz-placeholder /* Firefox 18- */
+      color textgray
+
+    &:focus::-moz-placeholder /* Firefox 19+ */
+      color textgray
+
+    &:focus:-ms-input-placeholder
+      color textgray
+
+  button
+    width 100%
+    height 40px
+    border 1px solid lightgray
+    outline none
+    background none
+    cursor pointer
+    font-size 16px
+    font-weight bold
+    color textgray
+    margin 40px 0 0 0
+
+    &:hover
+      background-color backgroundgray
 
 .modal-h1
   font-size 22px
@@ -64,7 +108,7 @@ body.is-modal
   left 0
 
 .modal-backdrop
-  background-color rgba(white, 0.95)
+  background-color rgba(white, 0.96)
 
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
@@ -73,16 +117,16 @@ body.is-modal
   position fixed
   overflow-y auto
   background-color none
-  width 40%
-  border 1px solid lightgray
-  background-color white
-  height 90%
+  width 24%
+  height 70%
+  border 0 solid lightgray
+  background-color none
   &.is-notransition
     transition none !important
 
 .modal-close
   position fixed
-  top 90px
+  top 10%
   right 90px
   font-size 32px
   cursor pointer
@@ -102,11 +146,15 @@ body.is-modal
 
 .modal-title
   font-size 21px
+  font-weight 700
   margin 0 0 40px 0
 
 .modal-forgot
   font-size 12px
   margin 10px 0 0 0
+
+  a
+    color lightgray
 
 .modal-checkbox
   display none
