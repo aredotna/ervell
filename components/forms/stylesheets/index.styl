@@ -1,0 +1,55 @@
+input
+  width 100%
+  height 30px
+  font-size 16px
+  font-weight 400
+  margin 0 0 20px 0
+  background-color rgba(white, 0.96)
+  border none
+  border-bottom 1px solid lightgray
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
+::-webkit-input-placeholder
+   color lightgray
+
+:-moz-placeholder /* Firefox 18- */
+   color lightgray
+
+::-moz-placeholder /* Firefox 19+ */
+   color lightgray
+
+:-ms-input-placeholder
+   color lightgray
+
+&:focus
+  outline none
+  border-bottom 1px solid textgray
+
+  &:focus::-webkit-input-placeholder
+    color textgray
+
+  &:focus:-moz-placeholder /* Firefox 18- */
+    color textgray
+
+  &:focus::-moz-placeholder /* Firefox 19+ */
+    color textgray
+
+  &:focus:-ms-input-placeholder
+    color textgray
+
+button
+  width 100%
+  height 40px
+  border 1px solid lightgray
+  outline none
+  background none
+  cursor pointer
+  font-size 16px
+  font-weight bold
+  color lightgray
+  margin 40px 0 0 0
+
+  &:hover
+    background-color backgroundgray
+    color textgray
