@@ -18,5 +18,6 @@ module.exports = class CurrentUser extends User
   parse: (response) -> response.user
 
   canEditChannel: (channel) ->
+    # TODO: add functionality for collaborators
     if channel.get('user').id is @id
       true
