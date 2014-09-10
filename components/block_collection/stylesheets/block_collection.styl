@@ -1,70 +1,85 @@
 @import '../../../node_modules/jeet/stylus/jeet'
 @import '../../layout/variables'
 
-.block-collection
+
+.grid
+  display flex
+  justify-content center
+  flex-flow row wrap
+
+.grid__block
+  flex 0 0 30%
+  min-width 330px
+  max-width 360px
   text-align center
-  cf()
+  margin 0 10px 60px
 
-.block
-  display inline-block
-  margin 0 10px 80px 10px
-  overflow: hidden
-  vertical-align top
+// don't display non processed blocks
+.grid__block--block
+  display none
 
-  .block__inner
-    width 330px
-    height 330px
-    background-size: contain
-    background-position: center center
-    background-repeat: no-repeat
-    border: 1px solid transparent
-    position relative
+.grid__block__inner
+  width 100%
+  height 330px
+  position relative
+  overflow hidden
 
-  privacy-color('&.block--channel .block--privacy-', border-color)
+privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 
-  &.block--user .block__inner
-    border 1px solid textgray
+.grid--valign-outer
+  display table
+  position absolute
+  width 100%
+  height 100%
 
-  hr
-    border: 1px solid #eee
+.grid--valign-inner
+  display table-cell
+  width 100%
+  height 100%
+  vertical-align middle
+  text-align center
 
-  .block__content
-    line-height: 1.6
-    font-size: 18px
+.grid__block__content__image
+  max-width 100%
+  height auto
+  max-height 330px
+
+.grid__block__content__text
+  @extend .serif-text
+  padding 0.5em
+
+  a
     font-weight 100
-    overflow: hidden
-    text-overflow: ellipsis
-    max-height: 330px
-    text-align: left
-    font-family serif
 
-    img.block__image__content
-      max-height 328px
-      width auto
-      max-width 328px
-      vertical-align middle
+.grid__block__overlay
+  opacity: 0
+  pointer-events: none
+  background: #fff
+  background-position: center
+  background-size: 40%
+  background-repeat: no-repeat
 
-    p
-      margin 0.6em 0
+.grid__block:hover .grid__block__overlay
+  opacity 1
 
-    a
-      text-decoration: underline
+.grid__block.grid__block--text:hover .grid__block__overlay
+  background-color rgba(255,255,255, 0.9)
 
-  .block__overlay
-    opacity: 0
-    pointer-events: none
-    background: #fff
-    background-position: center
-    background-size: 40%
-    background-repeat: no-repeat
+.grid__block.grid__block--channel:hover .grid__block__overlay, .grid__block.grid__block--user:hover .grid__block__overlay
+  background-color rgba(255,255,255, 0)
 
-    privacy-color('&.block__overlay--privacy-', border-color)
+privacy-color('.grid__block__overlay--privacy-', border-color)
 
-  &:hover .block__overlay
-    opacity: 1
-    pointer-events: auto
+.grid__block__mini-feed
+  font-size 12px
+  padding-top 20px
+  font-weight 800
+  color #000
 
-.block__title
+  span
+    padding 0 5px
+
+.grid__block__title
   position relative
   font-size 12px
   font-weight 700
@@ -73,37 +88,3 @@
   bottom 0
   width 100%
   white-space nowrap
-
-.block__channel-title, .block__user-avatar, .block__image
-  position absolute
-  width 100%
-  height 100%
-  display table
-
-.block__channel-title__inner, .block__user-avatar__inner, .block__image__inner
-  display table-cell
-  width 100%
-  height 100%
-  vertical-align middle
-  text-align center
-
-.block__text
-  font-size 15px
-  font-weight 400
-  margin: 0.5em 0
-  font-family serif
-
-// @media (max-width: 1500px)
-//   .block .block__inner
-//     width 270px
-//     height 270px
-
-// @media (max-width: 1023px)
-//   .block .block__inner
-//     width 230px
-//     height 230px
-
-// @media (max-width: 408px)
-//   .block .block__inner
-//     width 200px
-//     height 200px
