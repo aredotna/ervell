@@ -1,24 +1,27 @@
-#
-# The client-side code for the channel header.
-#
-#
-
 Backbone = require "backbone"
 $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Channel = require '../../models/channel.coffee'
-NewBlockView = require '../../components/new_block_view'
+CurrentUser = require '../../models/current_user.coffee'
+NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 
-module.exports.ChannelView = class ChannelView extends Backbone.View
+module.exports = class ChannelView extends Backbone.View
 
   initialize: ->
     @model.on "sync", @render
 
+  render: -> # nothin yet
 
 module.exports.init = ->
-  console.log 'USERNAME', sd.USERNAME
+  current_user = new CurrentUser sd.CURRENT_USER
+  channel = new Channel sd.CHANNEL
+
   new ChannelView
     el: $ "body"
-    model: new Channel sd.CHANNEL
-    username: sd.USERNAME
+    model: channel
+
+  if current_user.canEditChannel channel
+    new NewBlockView
+      el: $ ".grid__block--new-block"
+      model: channel
