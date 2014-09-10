@@ -4,7 +4,10 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'channel' + sd.CSS_EXT) )
 
 block body
-  include ../../../components/block_collection/templates/block_collection
+  .grid
+    if user
+      include ../../../components/new_block/templates/new_block
+    include ../../../components/block_collection/templates/block_collection
 
 block scripts
   script( src=sd.ASSET_PATH + 'channel' + sd.JS_EXT )
