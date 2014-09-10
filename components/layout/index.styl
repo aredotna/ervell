@@ -34,20 +34,17 @@ h5
 h6
   font-size .75em
 
-a
+a, .inline-link
   text-decoration: none
   color inherit
   font-weight 700
+  cursor pointer
 
   &:hover
     color #000
 
 strong
   font-weight 700
-
-.container
-  center(1400px)
-  padding-top 50px
 
 blockquote
   border-left 3px solid #eee
@@ -61,6 +58,13 @@ blockquote
   width 100%
   height 100%
 
+.small-text
+  font-size 12px
+
+.container
+  center(1400px)
+  padding-top 50px
+
 @media (min-width: 2000px)
   .container
     center(1750px)
@@ -69,12 +73,7 @@ blockquote
   .container
     center(94%)
 
-// colors
-closed = #D8A068
-public = #10860B
-private = #B60202
-textgray = #454545
-
 @import 'header/index'
 @import '../modal/index'
 @import '../path/stylesheets/path'
+@import 'forms'

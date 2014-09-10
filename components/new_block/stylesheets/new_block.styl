@@ -1,6 +1,9 @@
 .grid__block--new-block .grid__block__inner
   border 1px dashed lightgray
 
+.grid__block--new-block.active .grid__block__inner
+  border 1px solid lightgrayplus
+
 .grid__block--new-block__plus_button
   font-size 800%
   color lightgray
@@ -8,3 +11,22 @@
 
 .grid__block--new-block:hover .grid__block--new-block__plus_button
   color lightgrayplus
+
+.grid__block--new-block__form
+  opacity 0
+  pointer-events none
+  padding 2em
+
+.grid__block--new-block__form.active
+  opacity 1
+  pointer-events all
+  background-color #fff
+
+.grid__block--new-block__content-field
+  width 100%
+  height 200px
+
+.grid__block--new-block__cancel
+  position absolute
+  bottom 1em
+  right 1em
