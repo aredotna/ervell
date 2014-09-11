@@ -4,13 +4,16 @@
 
 .grid
   display flex
-  justify-content center
+  justify-content flex-start
   flex-flow row wrap
+
+.grid.grid--feed
+  justify-content center
 
 .grid__block
   flex 0 0 30%
+  max-width 330px
   min-width 330px
-  max-width 360px
   text-align center
   margin 0 10px 60px
 

@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var $, Backbone, Channel, ChannelView, sd,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+var $, Backbone, Blocks, Channel, ChannelView, CurrentUser, NewBlockView, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -12,13 +11,18 @@ Backbone.$ = $;
 
 sd = require("sharify").data;
 
-Channel = require("../../models/channel.coffee");
+Channel = require('../../models/channel.coffee');
 
-module.exports.ChannelView = ChannelView = (function(_super) {
+Blocks = require('../../collections/blocks.coffee');
+
+CurrentUser = require('../../models/current_user.coffee');
+
+NewBlockView = require('../../components/new_block/client/new_block_view.coffee');
+
+module.exports = ChannelView = (function(_super) {
   __extends(ChannelView, _super);
 
   function ChannelView() {
-    this.render = __bind(this.render, this);
     return ChannelView.__super__.constructor.apply(this, arguments);
   }
 
@@ -26,32 +30,234 @@ module.exports.ChannelView = ChannelView = (function(_super) {
     return this.model.on("sync", this.render);
   };
 
-  ChannelView.prototype.render = function() {
-    return this.$("header").html(headerTemplate({
-      channel: this.model,
-      username: sd.USERNAME
-    }));
-  };
+  ChannelView.prototype.render = function() {};
 
   return ChannelView;
 
 })(Backbone.View);
 
 module.exports.init = function() {
-  console.log('USERNAME', sd.USERNAME);
-  return new ChannelView({
-    el: $("body"),
-    model: new Channel(sd.CHANNEL),
-    username: sd.USERNAME
+  var blocks, channel, current_user;
+  current_user = new CurrentUser(sd.CURRENT_USER);
+  channel = new Channel(sd.CHANNEL);
+  blocks = new Blocks(sd.BLOCKS, {
+    channel_slug: sd.CHANNEL.slug
   });
+  new ChannelView({
+    el: $("body"),
+    model: channel
+  });
+  if (current_user.canEditChannel(channel)) {
+    return new NewBlockView({
+      el: $(".grid__block--new-block"),
+      model: channel,
+      blocks: blocks
+    });
+  }
 };
 
 
-},{"../../models/channel.coffee":5,"backbone":6,"jquery":10,"sharify":12}],2:[function(require,module,exports){
+},{"../../collections/blocks.coffee":4,"../../components/new_block/client/new_block_view.coffee":5,"../../models/channel.coffee":9,"../../models/current_user.coffee":10,"backbone":12,"jquery":16,"sharify":18}],2:[function(require,module,exports){
 require('jquery')(require("../apps/channel/client.coffee").init);
 
 
-},{"../apps/channel/client.coffee":1,"jquery":10}],3:[function(require,module,exports){
+},{"../apps/channel/client.coffee":1,"jquery":16}],3:[function(require,module,exports){
+var Base, Collection, Model, ModelLib, sd, _,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Collection = require("chaplin").Collection;
+
+sd = require("sharify").data;
+
+_ = require('underscore');
+
+Model = require("../models/base.coffee");
+
+ModelLib = require('../lib/model_lib.coffee');
+
+module.exports = Base = (function(_super) {
+  __extends(Base, _super);
+
+  function Base() {
+    return Base.__super__.constructor.apply(this, arguments);
+  }
+
+  Base.prototype.model = Model;
+
+  _.extend(Base.prototype, ModelLib);
+
+  Base.prototype.sync = function(method, model, options) {
+    if (sd.CURRENT_USER) {
+      if (!options.headers) {
+        options.headers = {};
+      }
+      options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token;
+    }
+    return Base.__super__.sync.apply(this, arguments);
+  };
+
+  Base.prototype.initialize = function(models, options) {
+    if (options == null) {
+      options = {};
+    }
+    this.setOptions(options);
+    return Base.__super__.initialize.apply(this, arguments);
+  };
+
+  Base.prototype.next = function(model) {
+    return this.at((this.indexOf(model) + 1) % _.size(this.models));
+  };
+
+  Base.prototype.prev = function(model) {
+    var index;
+    index = this.indexOf(model) - 1;
+    return this.at(index > -1 ? index : _.size(this.models) - 1);
+  };
+
+  Base.prototype.last = function() {
+    return this.at(this.length - 1);
+  };
+
+  Base.prototype.isEmpty = function() {
+    return this.models.length === 0;
+  };
+
+  return Base;
+
+})(Collection);
+
+
+},{"../lib/model_lib.coffee":6,"../models/base.coffee":7,"chaplin":14,"sharify":18,"underscore":19}],4:[function(require,module,exports){
+var Base, Block, Blocks, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+sd = require("sharify").data;
+
+Block = require("../models/block.coffee");
+
+module.exports = Blocks = (function(_super) {
+  __extends(Blocks, _super);
+
+  function Blocks() {
+    return Blocks.__super__.constructor.apply(this, arguments);
+  }
+
+  Blocks.prototype.model = Block;
+
+  Blocks.prototype.url = function() {
+    return "" + sd.API_URL + "/channels/" + this.slug + "/contents?per=20";
+  };
+
+  Blocks.prototype.parse = function(data) {
+    return data.contents;
+  };
+
+  Blocks.prototype.initialize = function(models, options) {
+    return this.slug = options.channel_slug;
+  };
+
+  return Blocks;
+
+})(Base);
+
+
+},{"../models/block.coffee":8,"./base.coffee":3,"sharify":18}],5:[function(require,module,exports){
+var $, Backbone, Block, Blocks, Channel, NewBlockView, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+Blocks = require('../../../collections/blocks.coffee');
+
+Block = require('../../../models/block.coffee');
+
+Channel = require('../../../models/channel.coffee');
+
+module.exports = NewBlockView = (function(_super) {
+  __extends(NewBlockView, _super);
+
+  function NewBlockView() {
+    return NewBlockView.__super__.constructor.apply(this, arguments);
+  }
+
+  NewBlockView.prototype.events = {
+    'click .grid__block--new-block__plus_button': 'showAddBlockForm',
+    'click .grid__block--new-block__cancel': 'cancelForm',
+    'click .grid__block--new-block__submit': 'createBlock'
+  };
+
+  NewBlockView.prototype.initialize = function(options) {
+    this.blocks = options.blocks;
+    return this.$field = this.$('.grid__block--new-block__content-field');
+  };
+
+  NewBlockView.prototype.showAddBlockForm = function() {
+    this.$el.addClass('active');
+    return this.$('.grid__block--new-block__add-block').addClass('active');
+  };
+
+  NewBlockView.prototype.cancelForm = function(e) {
+    var $parent;
+    $parent = $(e.target).closest('.grid__block--new-block__form');
+    this.$el.removeClass('active');
+    return $parent.removeClass('active');
+  };
+
+  NewBlockView.prototype.isURL = function() {
+    var string, urlregex;
+    string = this.$field.val();
+    urlregex = /^((ht{1}tp(s)?:\/\/)[-a-zA-Z0-9@:,!$%_\+.~#?&\(\)\/\/=]+)$/;
+    return urlregex.test(string);
+  };
+
+  NewBlockView.prototype.fieldIsntEmpty = function() {
+    return this.$field.val() !== "";
+  };
+
+  NewBlockView.prototype.createBlock = function() {
+    var block;
+    if (this.fieldIsntEmpty()) {
+      block = new Block;
+      if (this.isURL()) {
+        block.set({
+          source: this.$field.val()
+        }, {
+          silent: true
+        });
+      } else {
+        block.set({
+          content: this.$field.val()
+        }, {
+          silent: true
+        });
+      }
+      console.log('our new block', block.toJSON(), this.blocks, this.blocks.create);
+      return this.blocks.create(block.toJSON(), {
+        url: "" + sd.API_URL + "/channels/" + (this.model.get('slug')) + "/blocks",
+        success: function(block) {
+          return console.log('block created', block);
+        }
+      });
+    }
+  };
+
+  return NewBlockView;
+
+})(Backbone.View);
+
+
+},{"../../../collections/blocks.coffee":4,"../../../models/block.coffee":8,"../../../models/channel.coffee":9,"backbone":12,"jquery":16,"sharify":18}],6:[function(require,module,exports){
 var Chaplin, ModelLib, _;
 
 Chaplin = require('chaplin');
@@ -84,7 +290,7 @@ ModelLib = {
 module.exports = _.extend(ModelLib, Chaplin.SyncMachine);
 
 
-},{"chaplin":8,"underscore":13}],4:[function(require,module,exports){
+},{"chaplin":14,"underscore":19}],7:[function(require,module,exports){
 var Backbone, Base, Model, ModelLib, moment, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -237,7 +443,57 @@ module.exports = Base = (function(_super) {
 })(Model);
 
 
-},{"../lib/model_lib.coffee":3,"backbone":6,"chaplin":8,"moment":11,"sharify":12,"underscore":13}],5:[function(require,module,exports){
+},{"../lib/model_lib.coffee":6,"backbone":12,"chaplin":14,"moment":17,"sharify":18,"underscore":19}],8:[function(require,module,exports){
+var Base, Block, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+sd = require("sharify").data;
+
+module.exports = Block = (function(_super) {
+  __extends(Block, _super);
+
+  function Block() {
+    return Block.__super__.constructor.apply(this, arguments);
+  }
+
+  Block.prototype.url = function() {
+    return "" + sd.API_URL + "/blocks/" + this.id;
+  };
+
+  Block.prototype.getImageSize = function(size) {
+    var _ref, _ref1;
+    if (this.has('image')) {
+      return (_ref = this.get('image')) != null ? (_ref1 = _ref[size]) != null ? _ref1.url : void 0 : void 0;
+    }
+  };
+
+  Block.prototype.getVisibility = function() {
+    if (this.get('class') === 'Channel') {
+      return this.get('status');
+    } else {
+      return this.get('visibility');
+    }
+  };
+
+  Block.prototype.getHref = function() {
+    if (this.get('class') === 'Channel') {
+      return "/" + (this.get('user').slug) + "/" + (this.get('slug'));
+    } else if (this.get('class') === 'User') {
+      return "/" + (this.get('slug'));
+    } else {
+      return "#/block/" + this.id;
+    }
+  };
+
+  return Block;
+
+})(Base);
+
+
+},{"./base.coffee":7,"sharify":18}],9:[function(require,module,exports){
 var Base, Channel, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -269,7 +525,79 @@ module.exports = Channel = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":4,"sharify":12}],6:[function(require,module,exports){
+},{"./base.coffee":7,"sharify":18}],10:[function(require,module,exports){
+var CurrentUser, User, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+User = require("./user.coffee");
+
+sd = require("sharify").data;
+
+module.exports = CurrentUser = (function(_super) {
+  __extends(CurrentUser, _super);
+
+  function CurrentUser() {
+    return CurrentUser.__super__.constructor.apply(this, arguments);
+  }
+
+  CurrentUser.prototype.url = function() {
+    return "" + sd.API_URL + "/accounts";
+  };
+
+  CurrentUser.prototype.sync = function(method, model, options) {
+    if (options == null) {
+      options = {};
+    }
+    console.log('sync CurrentUser', this);
+    if (options.data == null) {
+      options.data = {};
+    }
+    options.data.auth_token = this.get('access_token');
+    return CurrentUser.__super__.sync.apply(this, arguments);
+  };
+
+  CurrentUser.prototype.parse = function(response) {
+    return response.user;
+  };
+
+  CurrentUser.prototype.canEditChannel = function(channel) {
+    if (channel.get('user').id === this.id || channel.get('status') === 'public') {
+      return true;
+    }
+  };
+
+  return CurrentUser;
+
+})(User);
+
+
+},{"./user.coffee":11,"sharify":18}],11:[function(require,module,exports){
+var Base, User, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+sd = require("sharify").data;
+
+module.exports = User = (function(_super) {
+  __extends(User, _super);
+
+  function User() {
+    return User.__super__.constructor.apply(this, arguments);
+  }
+
+  User.prototype.url = function() {
+    return "" + sd.API_URL + "/users/" + this.id;
+  };
+
+  return User;
+
+})(Base);
+
+
+},{"./base.coffee":7,"sharify":18}],12:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1879,7 +2207,7 @@ module.exports = Channel = (function(_super) {
 
 }));
 
-},{"underscore":7}],7:[function(require,module,exports){
+},{"underscore":13}],13:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3224,7 +3552,7 @@ module.exports = Channel = (function(_super) {
   }
 }).call(this);
 
-},{}],8:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * Chaplin 1.0.1
  *
@@ -6335,9 +6663,9 @@ if (typeof define === 'function' && define.amd) {
 }
 
 })();
-},{"backbone":6,"underscore":9}],9:[function(require,module,exports){
-module.exports=require(7)
-},{}],10:[function(require,module,exports){
+},{"backbone":12,"underscore":15}],15:[function(require,module,exports){
+module.exports=require(13)
+},{}],16:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -15529,7 +15857,7 @@ return jQuery;
 
 }));
 
-},{}],11:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (global){
 //! moment.js
 //! version : 2.8.3
@@ -18389,7 +18717,7 @@ return jQuery;
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],12:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 // Middleware that injects the shared data and sharify script
 module.exports = function(req, res, next) {
 
@@ -18438,6 +18766,6 @@ var bootstrapOnClient = module.exports.bootstrapOnClient = function() {
 };
 bootstrapOnClient();
 
-},{}],13:[function(require,module,exports){
-module.exports=require(7)
+},{}],19:[function(require,module,exports){
+module.exports=require(13)
 },{}]},{},[2]);

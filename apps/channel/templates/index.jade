@@ -5,7 +5,7 @@ block styles
 
 block body
   .grid
-    if user.canEditChannel(channel)
+    if user && user.canEditChannel(channel)
       include ../../../components/new_block/templates/new_block
     include ../../../components/block_collection/templates/block_collection
 
