@@ -6,9 +6,8 @@ block styles
 block body
   .landing
     .section-1
-      img.mark(src="../images/arena-mark.svg", alt="Arena", width=80)
-      // img(src="../images/arena-logo.svg", alt="Arena", width=200)
-
+      img.home-logo(src="../images/arena-logo.svg", alt="Arena")
+      img.home-mark(src="../images/arena-mark.svg", alt="Arena")
       .login
         a(href="#log_in") Login 
         span / 
@@ -22,6 +21,15 @@ block body
       //- include ../../../components/block_collection/block_collection
 
     .section-2
+      | Channel examples:
+      .home-link
+        a(href='#sublime') Are.na / Morgan-Sutherland / Sublime
+      .home-link  
+        a.home-link(href='#dark-bliss') Are.na / Chris-Sherron / Dark Bliss
+      .home-link  
+        a(href='#fashion-images') Are.na / Dena-Yago / Fashion Images
+      .home-link  
+        a(href='#color-schemes') Are.na / Daniel-Bär / Color Schemes
 
     .section-3
 
