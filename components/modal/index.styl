@@ -40,9 +40,6 @@ body.is-modal
       margin-top 20px
       font-size 24px
 
-// To be exported into /forms/stylesheets/
-
-
 .modal-h1
   font-size 22px
 
@@ -64,8 +61,9 @@ body.is-modal
   position fixed
   overflow-y auto
   background-color none
-  width 24%
-  height 70%
+  width 420px
+  height 80%
+  margin 110px 0 0 0
   border 0 solid lightgray
   background-color none
   &.is-notransition
@@ -73,7 +71,7 @@ body.is-modal
 
 .modal-close
   position fixed
-  top 10%
+  top 100px
   right 90px
   font-size 32px
   cursor pointer
@@ -92,16 +90,27 @@ body.is-modal
     opacity 1
 
 .modal-title
-  font-size 21px
+  font-size 27px
   font-weight 700
   margin 0 0 40px 0
 
 .modal-forgot
   font-size 12px
-  margin 10px 0 0 0
-
   a
-    color lightgray
+    color lightgray 
+    &:hover
+      color textgray 
 
 .modal-checkbox
   display none
+
+.auth-button
+  font-size 24px
+  margin 60px 0 0 0
+
+.auth-input
+  margin 20px 0 0 0
+
+.auth-forgot
+  margin -28px 10px 0 0
+  text-align right

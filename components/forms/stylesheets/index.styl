@@ -1,14 +1,14 @@
 input
   width 100%
-  height 30px
+  height 45px
   font-size 16px
   font-weight 400
-  margin 0 0 20px 0
-  background-color rgba(white, 0.96)
+  margin 0 0 0 0
+  background-color backgroundgray
   border none
-  border-bottom 1px solid lightgray
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
+  border-bottom 0px solid lightgray
+  padding 0 0 0 10px
+  antialiased()
 
 ::-webkit-input-placeholder
    color lightgray
@@ -24,7 +24,7 @@ input
 
 &:focus
   outline none
-  border-bottom 1px solid textgray
+  border-bottom 0px solid lightgray
 
   &:focus::-webkit-input-placeholder
     color textgray
@@ -40,16 +40,25 @@ input
 
 button
   width 100%
-  height 40px
-  border 1px solid lightgray
+  height 45px
+  border 0
+  border-top 1px solid textgray
   outline none
-  background none
+  background-color white
   cursor pointer
   font-size 16px
   font-weight bold
-  color lightgray
-  margin 40px 0 0 0
+  color textgray
+  margin 20px 0 0 0
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
 
   &:hover
-    background-color backgroundgray
-    color textgray
+    // background-color #E7F3E4
+    border-top 1px solid public
+    color public
+    transition(0.1s)
+
+  &:active
+    background-color white
+    border-bottom 0
