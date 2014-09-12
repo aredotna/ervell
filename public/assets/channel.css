@@ -85,7 +85,10 @@
   background-position: center;
   background-size: 40%;
   background-repeat: no-repeat;
-  transition: opacity 0.1s;
+  -webkit-transition: all ease-in opacity;
+  -moz-transition: all ease-in opacity;
+  -o-transition: all ease-in opacity;
+  transition: all ease-in opacity;
 }
 .grid__block:hover .grid__block__overlay {
   opacity: 1;
@@ -137,7 +140,10 @@
 .grid__block--new-block__plus_button {
   font-size: 800%;
   color: #a9a9a9;
-  transition: color 0.6s;
+  -webkit-transition: all ease-in color;
+  -moz-transition: all ease-in color;
+  -o-transition: all ease-in color;
+  transition: all ease-in color;
 }
 .grid__block--new-block:hover .grid__block--new-block__plus_button {
   color: #cbcbcb;

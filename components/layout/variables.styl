@@ -16,6 +16,18 @@ s_margin = 10px
 block_width = 330px
 block_width_mar= block_width + (s_margin * 2)
 
+// transitions
+transition(n)
+  -webkit-transition: all ease-in n
+  -moz-transition: all ease-in n
+  -o-transition: all ease-in n
+  transition: all ease-in n
+
+//antialiased
+antialiased()
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
 caret()
   display inline-block
   content ''
