@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var $, Backbone, Blocks, Channel, ChannelView, CurrentUser, NewBlockView, sd,
+var $, Backbone, BlockCollectionView, Blocks, Channel, ChannelView, CurrentUser, NewBlockView, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -18,6 +18,8 @@ Blocks = require('../../collections/blocks.coffee');
 CurrentUser = require('../../models/current_user.coffee');
 
 NewBlockView = require('../../components/new_block/client/new_block_view.coffee');
+
+BlockCollectionView = require('../../components/block_collection/client/block_collection_view.coffee');
 
 module.exports = ChannelView = (function(_super) {
   __extends(ChannelView, _super);
@@ -47,6 +49,9 @@ module.exports.init = function() {
     el: $("body"),
     model: channel
   });
+  new BlockCollectionView({
+    el: 'body'
+  });
   if (current_user.canEditChannel(channel)) {
     return new NewBlockView({
       el: $(".grid__block--new-block"),
@@ -57,11 +62,11 @@ module.exports.init = function() {
 };
 
 
-},{"../../collections/blocks.coffee":4,"../../components/new_block/client/new_block_view.coffee":5,"../../models/channel.coffee":9,"../../models/current_user.coffee":10,"backbone":12,"jquery":16,"sharify":18}],2:[function(require,module,exports){
+},{"../../collections/blocks.coffee":4,"../../components/block_collection/client/block_collection_view.coffee":5,"../../components/new_block/client/new_block_view.coffee":9,"../../models/channel.coffee":14,"../../models/current_user.coffee":15,"backbone":17,"jquery":22,"sharify":24}],2:[function(require,module,exports){
 require('jquery')(require("../apps/channel/client.coffee").init);
 
 
-},{"../apps/channel/client.coffee":1,"jquery":16}],3:[function(require,module,exports){
+},{"../apps/channel/client.coffee":1,"jquery":22}],3:[function(require,module,exports){
 var Base, Collection, Model, ModelLib, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -128,7 +133,7 @@ module.exports = Base = (function(_super) {
 })(Collection);
 
 
-},{"../lib/model_lib.coffee":6,"../models/base.coffee":7,"chaplin":14,"sharify":18,"underscore":19}],4:[function(require,module,exports){
+},{"../lib/model_lib.coffee":11,"../models/base.coffee":12,"chaplin":19,"sharify":24,"underscore":25}],4:[function(require,module,exports){
 var Base, Block, Blocks, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -149,7 +154,7 @@ module.exports = Blocks = (function(_super) {
   Blocks.prototype.model = Block;
 
   Blocks.prototype.url = function() {
-    return "" + sd.API_URL + "/channels/" + this.slug + "/contents?per=20";
+    return "" + sd.API_URL + "/channels/" + this.slug + "/skeleton?per=12&page=1";
   };
 
   Blocks.prototype.parse = function(data) {
@@ -165,7 +170,173 @@ module.exports = Blocks = (function(_super) {
 })(Base);
 
 
-},{"../models/block.coffee":8,"./base.coffee":3,"sharify":18}],5:[function(require,module,exports){
+},{"../models/block.coffee":13,"./base.coffee":3,"sharify":24}],5:[function(require,module,exports){
+var $, Backbone, Block, BlockCollectionView, LightboxRouter, LightboxView, mediator, sd,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+mediator = require('../../../lib/mediator.coffee');
+
+Block = require('../../../models/block.coffee');
+
+LightboxRouter = require('../../lightbox/lightbox_router.coffee');
+
+LightboxView = require('../../lightbox/client/lightbox_view.coffee');
+
+module.exports = BlockCollectionView = (function(_super) {
+  __extends(BlockCollectionView, _super);
+
+  function BlockCollectionView() {
+    this.render = __bind(this.render, this);
+    return BlockCollectionView.__super__.constructor.apply(this, arguments);
+  }
+
+  BlockCollectionView.prototype.initialize = function() {
+    mediator.on('open:lightbox', this.openLightbox, this);
+    new LightboxRouter;
+    return Backbone.history.start();
+  };
+
+  BlockCollectionView.prototype.openLightbox = function(id) {
+    var block;
+    block = new Block(id);
+    return this.lbv = new LightboxView({
+      el: $('#l-lightbox-container'),
+      model: block
+    });
+  };
+
+  BlockCollectionView.prototype.render = function() {};
+
+  return BlockCollectionView;
+
+})(Backbone.View);
+
+
+},{"../../../lib/mediator.coffee":10,"../../../models/block.coffee":13,"../../lightbox/client/lightbox_view.coffee":6,"../../lightbox/lightbox_router.coffee":7,"backbone":17,"jquery":22,"sharify":24}],6:[function(require,module,exports){
+var $, Backbone, LightboxView, lightboxTemplate, mediator, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+mediator = require('../../../lib/mediator.coffee');
+
+lightboxTemplate = function() {
+  return require('../templates/lightbox.jade').apply(null, arguments);
+};
+
+module.exports = LightboxView = (function(_super) {
+  __extends(LightboxView, _super);
+
+  function LightboxView() {
+    return LightboxView.__super__.constructor.apply(this, arguments);
+  }
+
+  LightboxView.prototype.events = {
+    'click .lightbox--close': 'close'
+  };
+
+  LightboxView.prototype.initialize = function() {
+    $('body').addClass('is-lightbox');
+    this.$el.addClass('is-active');
+    this.model.on("sync", this.render, this);
+    return this.model.fetch();
+  };
+
+  LightboxView.prototype.render = function() {
+    return this.$el.html(lightboxTemplate({
+      block: this.model
+    }));
+  };
+
+  LightboxView.prototype.close = function() {
+    this.$el.html("");
+    $('body').removeClass('is-lightbox');
+    return this.$el.removeClass('is-active');
+  };
+
+  return LightboxView;
+
+})(Backbone.View);
+
+
+},{"../../../lib/mediator.coffee":10,"../templates/lightbox.jade":8,"backbone":17,"jquery":22,"sharify":24}],7:[function(require,module,exports){
+var Backbone, LightboxRouter, mediator, _,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require('backbone');
+
+_ = require('underscore');
+
+mediator = require('../../lib/mediator.coffee');
+
+module.exports = LightboxRouter = (function(_super) {
+  __extends(LightboxRouter, _super);
+
+  function LightboxRouter() {
+    return LightboxRouter.__super__.constructor.apply(this, arguments);
+  }
+
+  LightboxRouter.prototype.routes = {
+    'block/:id': 'showBlock'
+  };
+
+  LightboxRouter.prototype.showBlock = function(id) {
+    return mediator.trigger('open:lightbox', {
+      id: id
+    });
+  };
+
+  return LightboxRouter;
+
+})(Backbone.Router);
+
+
+},{"../../lib/mediator.coffee":10,"backbone":17,"underscore":25}],8:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (block) {
+buf.push("<div id=\"l-lightbox-container_inner\"><div class=\"lightbox__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('title'))
+{
+buf.push("<h2 class=\"lightbox__content__title\">" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + "/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"lightbox__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.has('description'))
+{
+buf.push("<div class=\"lightbox__content__description\">" + (null == (jade_interp = block.get('description_html')) ? "" : jade_interp) + "</div>");
+}
+buf.push("</div></div></div><a class=\"lightbox--close\"><h1>&times;</h1></a>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined));;return buf.join("");
+};
+},{"jade/runtime":21}],9:[function(require,module,exports){
 var $, Backbone, Block, Blocks, Channel, NewBlockView, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -257,7 +428,19 @@ module.exports = NewBlockView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../collections/blocks.coffee":4,"../../../models/block.coffee":8,"../../../models/channel.coffee":9,"backbone":12,"jquery":16,"sharify":18}],6:[function(require,module,exports){
+},{"../../../collections/blocks.coffee":4,"../../../models/block.coffee":13,"../../../models/channel.coffee":14,"backbone":17,"jquery":22,"sharify":24}],10:[function(require,module,exports){
+var Backbone, mediator, _;
+
+_ = require('underscore');
+
+Backbone = require('backbone');
+
+mediator = _.extend({}, Backbone.Events);
+
+module.exports = (typeof window !== "undefined" && window !== null ? window.__mediator != null ? window.__mediator : window.__mediator = mediator : void 0) || mediator;
+
+
+},{"backbone":17,"underscore":25}],11:[function(require,module,exports){
 var Chaplin, ModelLib, _;
 
 Chaplin = require('chaplin');
@@ -290,7 +473,7 @@ ModelLib = {
 module.exports = _.extend(ModelLib, Chaplin.SyncMachine);
 
 
-},{"chaplin":14,"underscore":19}],7:[function(require,module,exports){
+},{"chaplin":19,"underscore":25}],12:[function(require,module,exports){
 var Backbone, Base, Model, ModelLib, moment, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -443,7 +626,7 @@ module.exports = Base = (function(_super) {
 })(Model);
 
 
-},{"../lib/model_lib.coffee":6,"backbone":12,"chaplin":14,"moment":17,"sharify":18,"underscore":19}],8:[function(require,module,exports){
+},{"../lib/model_lib.coffee":11,"backbone":17,"chaplin":19,"moment":23,"sharify":24,"underscore":25}],13:[function(require,module,exports){
 var Base, Block, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -493,7 +676,7 @@ module.exports = Block = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":7,"sharify":18}],9:[function(require,module,exports){
+},{"./base.coffee":12,"sharify":24}],14:[function(require,module,exports){
 var Base, Channel, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -525,7 +708,7 @@ module.exports = Channel = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":7,"sharify":18}],10:[function(require,module,exports){
+},{"./base.coffee":12,"sharify":24}],15:[function(require,module,exports){
 var CurrentUser, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -572,7 +755,7 @@ module.exports = CurrentUser = (function(_super) {
 })(User);
 
 
-},{"./user.coffee":11,"sharify":18}],11:[function(require,module,exports){
+},{"./user.coffee":16,"sharify":24}],16:[function(require,module,exports){
 var Base, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -597,7 +780,7 @@ module.exports = User = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":7,"sharify":18}],12:[function(require,module,exports){
+},{"./base.coffee":12,"sharify":24}],17:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -2207,7 +2390,7 @@ module.exports = User = (function(_super) {
 
 }));
 
-},{"underscore":13}],13:[function(require,module,exports){
+},{"underscore":18}],18:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3552,7 +3735,7 @@ module.exports = User = (function(_super) {
   }
 }).call(this);
 
-},{}],14:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*!
  * Chaplin 1.0.1
  *
@@ -6663,9 +6846,222 @@ if (typeof define === 'function' && define.amd) {
 }
 
 })();
-},{"backbone":12,"underscore":15}],15:[function(require,module,exports){
-module.exports=require(13)
-},{}],16:[function(require,module,exports){
+},{"backbone":17,"underscore":20}],20:[function(require,module,exports){
+module.exports=require(18)
+},{}],21:[function(require,module,exports){
+(function (global){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+'use strict';
+
+/**
+ * Merge two attribute objects giving precedence
+ * to values in object `b`. Classes are special-cased
+ * allowing for arrays and merging/joining appropriately
+ * resulting in a string.
+ *
+ * @param {Object} a
+ * @param {Object} b
+ * @return {Object} a
+ * @api private
+ */
+
+exports.merge = function merge(a, b) {
+  if (arguments.length === 1) {
+    var attrs = a[0];
+    for (var i = 1; i < a.length; i++) {
+      attrs = merge(attrs, a[i]);
+    }
+    return attrs;
+  }
+  var ac = a['class'];
+  var bc = b['class'];
+
+  if (ac || bc) {
+    ac = ac || [];
+    bc = bc || [];
+    if (!Array.isArray(ac)) ac = [ac];
+    if (!Array.isArray(bc)) bc = [bc];
+    a['class'] = ac.concat(bc).filter(nulls);
+  }
+
+  for (var key in b) {
+    if (key != 'class') {
+      a[key] = b[key];
+    }
+  }
+
+  return a;
+};
+
+/**
+ * Filter null `val`s.
+ *
+ * @param {*} val
+ * @return {Boolean}
+ * @api private
+ */
+
+function nulls(val) {
+  return val != null && val !== '';
+}
+
+/**
+ * join array as classes.
+ *
+ * @param {*} val
+ * @return {String}
+ */
+exports.joinClasses = joinClasses;
+function joinClasses(val) {
+  return Array.isArray(val) ? val.map(joinClasses).filter(nulls).join(' ') : val;
+}
+
+/**
+ * Render the given classes.
+ *
+ * @param {Array} classes
+ * @param {Array.<Boolean>} escaped
+ * @return {String}
+ */
+exports.cls = function cls(classes, escaped) {
+  var buf = [];
+  for (var i = 0; i < classes.length; i++) {
+    if (escaped && escaped[i]) {
+      buf.push(exports.escape(joinClasses([classes[i]])));
+    } else {
+      buf.push(joinClasses(classes[i]));
+    }
+  }
+  var text = joinClasses(buf);
+  if (text.length) {
+    return ' class="' + text + '"';
+  } else {
+    return '';
+  }
+};
+
+/**
+ * Render the given attribute.
+ *
+ * @param {String} key
+ * @param {String} val
+ * @param {Boolean} escaped
+ * @param {Boolean} terse
+ * @return {String}
+ */
+exports.attr = function attr(key, val, escaped, terse) {
+  if ('boolean' == typeof val || null == val) {
+    if (val) {
+      return ' ' + (terse ? key : key + '="' + key + '"');
+    } else {
+      return '';
+    }
+  } else if (0 == key.indexOf('data') && 'string' != typeof val) {
+    return ' ' + key + "='" + JSON.stringify(val).replace(/'/g, '&apos;') + "'";
+  } else if (escaped) {
+    return ' ' + key + '="' + exports.escape(val) + '"';
+  } else {
+    return ' ' + key + '="' + val + '"';
+  }
+};
+
+/**
+ * Render the given attributes object.
+ *
+ * @param {Object} obj
+ * @param {Object} escaped
+ * @return {String}
+ */
+exports.attrs = function attrs(obj, terse){
+  var buf = [];
+
+  var keys = Object.keys(obj);
+
+  if (keys.length) {
+    for (var i = 0; i < keys.length; ++i) {
+      var key = keys[i]
+        , val = obj[key];
+
+      if ('class' == key) {
+        if (val = joinClasses(val)) {
+          buf.push(' ' + key + '="' + val + '"');
+        }
+      } else {
+        buf.push(exports.attr(key, val, false, terse));
+      }
+    }
+  }
+
+  return buf.join('');
+};
+
+/**
+ * Escape the given string of `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+exports.escape = function escape(html){
+  var result = String(html)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  if (result === '' + html) return html;
+  else return result;
+};
+
+/**
+ * Re-throw the given `err` in context to the
+ * the jade in `filename` at the given `lineno`.
+ *
+ * @param {Error} err
+ * @param {String} filename
+ * @param {String} lineno
+ * @api private
+ */
+
+exports.rethrow = function rethrow(err, filename, lineno, str){
+  if (!(err instanceof Error)) throw err;
+  if ((typeof window != 'undefined' || !filename) && !str) {
+    err.message += ' on line ' + lineno;
+    throw err;
+  }
+  try {
+    str = str || _dereq_('fs').readFileSync(filename, 'utf8')
+  } catch (ex) {
+    rethrow(err, null, lineno)
+  }
+  var context = 3
+    , lines = str.split('\n')
+    , start = Math.max(lineno - context, 0)
+    , end = Math.min(lines.length, lineno + context);
+
+  // Error context
+  var context = lines.slice(start, end).map(function(line, i){
+    var curr = i + start + 1;
+    return (curr == lineno ? '  > ' : '    ')
+      + curr
+      + '| '
+      + line;
+  }).join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  err.message = (filename || 'Jade') + ':' + lineno
+    + '\n' + context + '\n\n' + err.message;
+  throw err;
+};
+
+},{"fs":2}],2:[function(_dereq_,module,exports){
+
+},{}]},{},[1])
+(1)
+});
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],22:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -15857,7 +16253,7 @@ return jQuery;
 
 }));
 
-},{}],17:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (global){
 //! moment.js
 //! version : 2.8.3
@@ -18717,7 +19113,7 @@ return jQuery;
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],18:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // Middleware that injects the shared data and sharify script
 module.exports = function(req, res, next) {
 
@@ -18766,6 +19162,6 @@ var bootstrapOnClient = module.exports.bootstrapOnClient = function() {
 };
 bootstrapOnClient();
 
-},{}],19:[function(require,module,exports){
-module.exports=require(13)
+},{}],25:[function(require,module,exports){
+module.exports=require(18)
 },{}]},{},[2]);
