@@ -22,5 +22,6 @@ module.exports = class LightboxView extends Backbone.View
     @$el.html lightboxTemplate(block: @model)
 
   close: ->
+    @$el.html ""
     $('body').removeClass 'is-lightbox'
     @$el.removeClass 'is-active'
