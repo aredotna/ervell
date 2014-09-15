@@ -4,13 +4,23 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 
+lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
+
 module.exports = class LightboxView extends Backbone.View
 
+  events:
+    'click .lightbox--close': 'close'
+
   initialize: ->
-    console.log 'LightboxView initialize', @model
+    $('body').addClass 'is-lightbox'
+    @$el.addClass 'is-active'
 
     @model.on "sync", @render, @
     @model.fetch()
 
   render: ->
-    console.log 'should render', @model
+    @$el.html lightboxTemplate(block: @model)
+
+  close: ->
+    $('body').removeClass 'is-lightbox'
+    @$el.removeClass 'is-active'

@@ -18,7 +18,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   openLightbox: (id)->
     block = new Block id
     @lbv = new LightboxView
-      el: $('#modal-container')
+      el: $('#l-lightbox-container')
       model: block
 
   render: => # nothing for now

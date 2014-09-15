@@ -1,0 +1,24 @@
+// disable scroll
+body.is-lightbox
+  overflow hidden
+
+#l-lightbox-container
+  width 100%
+  min-height 100%
+  position fixed
+  z-index lightbox_z
+  top topbar_h
+  left 0
+  background-color rgba(255,255,255, 1)
+  display none
+
+  &.is-active
+    display block
+
+
+.lightbox--close
+  display block
+  position absolute
+  top 20px
+  right 20px
+
