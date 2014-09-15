@@ -52,10 +52,7 @@ textarea
   color textgray
 
 button
-  width 100%
-  height 45px
   border 0
-  border-top 1px solid textgray
   outline none
   background-color transparent
   cursor pointer
@@ -67,8 +64,18 @@ button
     background-color backgroundgray
     color textgray
 
+  &.button--border
+    border-top 1px solid textgray
+
+    &:hover
+      background-color transparent
+      border-top 1px solid public
+      color public
+      transition(0.1s)
+
   &.button--wide
     width 100%
+    height 45px
 
   &.button--dark
     border none
@@ -79,12 +86,6 @@ button
   margin 20px 0 0 0
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-
-  &:hover
-    background-color transparent
-    border-top 1px solid public
-    color public
-    transition(0.1s)
 
   &:active
     background-color white

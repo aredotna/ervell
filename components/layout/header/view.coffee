@@ -26,7 +26,6 @@ module.exports = class HeaderView extends Backbone.View
       Backbone.history.start()
 
   openAuth: (options) ->
-    console.log 'trigger open auth'
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
 
   signup: (e) ->

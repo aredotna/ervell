@@ -6,6 +6,7 @@ Channel = require '../../models/channel.coffee'
 Blocks = require '../../collections/blocks.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
+BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 
 module.exports = class ChannelView extends Backbone.View
 
@@ -23,6 +24,9 @@ module.exports.init = ->
   new ChannelView
     el: $ "body"
     model: channel
+
+  new BlockCollectionView
+    el: 'body'
 
   if current_user.canEditChannel channel
     new NewBlockView

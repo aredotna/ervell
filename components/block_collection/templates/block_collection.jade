@@ -1,5 +1,5 @@
 for block in blocks
-  div(class="grid__block grid__block--#{block.get('class').toLowerCase()}")
+  div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}")
     a(href="#{block.getHref()}")
       .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")
         - if(block.get('class') != 'Channel' || block.get('class') != 'User')
