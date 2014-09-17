@@ -6,19 +6,19 @@
     section#auth-body
       form.auth-login-email.auth-form( action='/me/sign_in' )
         .auth-errors
-        input.auth-input.is-block(
+        input.input--wide.input--relative.is-block(
           name='email', type='email', placeholder='Email', required, autofocus= autofocus
         )
-        input.auth-input.is-block(
+        input.input--wide.input--relative.is-block(
           name='password', type='password', placeholder='Password', autocomplete='on', required
         )
         footer.auth-form-options
           .modal-checkbox
             input( id='remember_me', name='remember_me', type='checkbox', value='1', checked )
             label( for='remember_me', data-label='Remember me' )
-          .modal-forgot.auth-forgot
+          .modal-forgot
             a.faux-underline.auth-toggle( href='/forgot', data-mode='forgot', rel='nofollow' ) Forgot?
 
-        button#auth-submit.button--wide.button--border &rarr;
+        button#auth-submit.button--wide.button--border.button--relative &rarr;
 
-    //- include ./_login_footer.jade
+     //- include ./_login_footer.jade

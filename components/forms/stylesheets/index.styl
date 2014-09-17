@@ -1,6 +1,4 @@
 input
-  width 100%
-  height 45px
   font-size 16px
   font-weight 400
   margin 0 0 0 0
@@ -24,7 +22,7 @@ input
 
   &:focus
     outline none
-    border-bottom 1px solid textgray
+    border-bottom 0
 
   &:focus::-webkit-input-placeholder
     color textgray
@@ -37,6 +35,16 @@ input
 
   &:focus:-ms-input-placeholder
     color textgray
+
+  &.input--wide
+    width: 100%
+    height 45px
+
+  &.input--relative
+    position relative
+    float left
+    margin 20px 0 0 0
+
 
 fieldset
   margin 0.6em 0
@@ -56,7 +64,7 @@ button
   outline none
   background-color transparent
   cursor pointer
-  font-size 16px
+  font-size 24px
   font-weight bold
   color lightgray
 
@@ -82,11 +90,16 @@ button
     background-color #000
     color #fff
 
+  &.button--relative
+    position relative
+    float left
+    margin 20px 0 0 0
+
   color textgray
   margin 20px 0 0 0
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
 
   &:active
-    background-color white
+    background-color transparent
     border-bottom 0
