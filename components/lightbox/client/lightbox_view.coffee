@@ -35,3 +35,5 @@ module.exports = class LightboxView extends Backbone.View
     @$el.html ""
     $('body').removeClass 'is-lightbox'
     @$el.removeClass 'is-active'
+
+    mediator.trigger 'lightbox:closed'
