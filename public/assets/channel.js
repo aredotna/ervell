@@ -700,7 +700,7 @@ if(block.get('class') != 'Channel' || block.get('class') != 'User')
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
 if(block.has('image'))
 {
-buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(400)) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
 }
 if(block.get('class') == 'Text')
 {
@@ -735,7 +735,7 @@ if(block.get('class') != 'Channel' || block.get('class') != 'User')
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
 if(block.has('image'))
 {
-buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(400)) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
 }
 if(block.get('class') == 'Text')
 {
@@ -801,7 +801,7 @@ if(block.get('class') != 'Channel' || block.get('class') != 'User')
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
 if(block.has('image'))
 {
-buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(400)) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
 }
 if(block.get('class') == 'Text')
 {
@@ -836,7 +836,7 @@ if(block.get('class') != 'Channel' || block.get('class') != 'User')
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
 if(block.has('image'))
 {
-buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(400)) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
 }
 if(block.get('class') == 'Text')
 {
@@ -1038,7 +1038,7 @@ var jade_interp;
 buf.push("<div id=\"l-lightbox-container_inner\"><div class=\"lightbox__content valign-outer\"><div class=\"valign-inner\">");
 if(block.has('image'))
 {
-buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(900)) + "", true, false)) + "/>");
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('original')) + "", true, false)) + "/>");
 }
 if(block.get('class') == 'Text')
 {
@@ -1365,19 +1365,9 @@ module.exports = Block = (function(_super) {
   };
 
   Block.prototype.getImageSize = function(size) {
-    var pixels, _ref, _ref1;
+    var _ref, _ref1;
     if (this.has('image')) {
-      if (typeof size === "string") {
-        pixels = {
-          large: "900",
-          display: "600",
-          thumb: "200",
-          square: "220"
-        };
-        return "https://d2ss1gpcas6f9e.cloudfront.net/q/resize/" + pixels[size] + "%3E/auto_orient/true/src/" + (encodeURIComponent((_ref = this.get('image')) != null ? (_ref1 = _ref[size]) != null ? _ref1.url : void 0 : void 0));
-      } else {
-        return "https://d2ss1gpcas6f9e.cloudfront.net/q/resize/" + size + "%3E/auto_orient/true/src/" + (encodeURIComponent(this.get('image').original.url));
-      }
+      return (_ref = this.get('image')) != null ? (_ref1 = _ref[size]) != null ? _ref1.url : void 0 : void 0;
     }
   };
 
