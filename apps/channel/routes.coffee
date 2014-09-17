@@ -16,7 +16,7 @@ User = require "../../models/user"
   channel.fetch
     cache: true
     success: ->
-      blocks.add channel.contents
+      blocks.add channel.get 'contents'
 
       res.locals.sd.CHANNEL = channel.toJSON()
       res.locals.sd.BLOCKS = blocks.toJSON()
