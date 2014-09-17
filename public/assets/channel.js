@@ -1036,10 +1036,6 @@ var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (block) {
 buf.push("<div id=\"l-lightbox-container_inner\"><div class=\"lightbox__content valign-outer\"><div class=\"valign-inner\">");
-if(block.has('title'))
-{
-buf.push("<h2 class=\"lightbox__content__title\">" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
-}
 if(block.has('image'))
 {
 buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(900)) + "", true, false)) + "/>");
@@ -1047,6 +1043,10 @@ buf.push("<img" + (jade.attr("src", "" + (block.getImageSize(900)) + "", true, f
 if(block.get('class') == 'Text')
 {
 buf.push("<div class=\"lightbox__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.has('title'))
+{
+buf.push("<h2 class=\"lightbox__content__title\">" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
 }
 if(block.has('description'))
 {

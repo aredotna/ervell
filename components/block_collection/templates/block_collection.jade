@@ -6,7 +6,7 @@ for block in blocks
           .grid__block__content.valign-outer
             .valign-inner
               - if(block.has('image'))
-                img(src="#{block.getImageSize(400)}").grid__block__content__image
+                img(src="#{block.getImageSize('display')}").grid__block__content__image
               - if(block.get('class') == 'Text')
                 .grid__block__content__text
                   != block.get('content_html')
