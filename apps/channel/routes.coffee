@@ -16,15 +16,14 @@ User = require "../../models/user"
   channel.fetch
     cache: true
     success: ->
-      blocks.fetch
-        cache: true
-        success: ->
-          res.locals.sd.USERNAME = req.params.username
-          res.locals.sd.CHANNEL = channel.toJSON()
-          res.locals.sd.BLOCKS = blocks.toJSON()
+      blocks.add channel.get('contents')
 
-          user = new User channel.get('user')
+      res.locals.sd.CHANNEL = channel.toJSON()
+      res.locals.sd.BLOCKS = blocks.toJSON()
 
-          res.render "index", channel: channel, blocks: blocks.models, author: user
+      user = new User channel.get('user')
+
+      res.render "index", channel: channel, blocks: blocks.models, author: user
+
     error: (m, err) -> next err
 
