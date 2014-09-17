@@ -14,6 +14,7 @@ module.exports = class Feed extends Base
     type: "primary"
 
   initialize: (models, options) ->
+    console.log 'options', options
     super
     @subscribeEvent 'feed:loaded', @setupListener
     @subscribeEvent 'activity:recieved', @maybeGetActivity
@@ -27,6 +28,9 @@ module.exports = class Feed extends Base
     # Note that urls for object feeds take the singular version of the object
     # name while other object resource access urls take the plural
     # /user/:id/feed | /users/:id/channels
+
+    console.log 'FEED @options.type', @options.type
+
     switch @options.type
       when "primary"
         url += "/feed"

@@ -5,5 +5,9 @@ feedTemplate = -> require('../../../components/feed/templates/small_feed.jade') 
 
 module.exports = class SmallFeedView extends FeedView
 
+  initialize: ->
+    super
+    console.log 'small_feed', @collection
+
   render: =>
     @$el.html feedTemplate(feed: @collection.models)

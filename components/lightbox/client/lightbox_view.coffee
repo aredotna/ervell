@@ -3,6 +3,8 @@ $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+Feed = require '../../../collections/feed.coffee'
+SmallFeedView = require '../../feed/client/small_feed_view.coffee'
 
 lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 
@@ -20,6 +22,14 @@ module.exports = class LightboxView extends Backbone.View
 
   render: ->
     @$el.html lightboxTemplate(block: @model)
+
+    feed = new Feed null,
+      type: 'block'
+      object_id: @model.id
+
+    new SmallFeedView
+      el: @$ "#lightbox__feed"
+      collection: feed
 
   close: ->
     @$el.html ""
