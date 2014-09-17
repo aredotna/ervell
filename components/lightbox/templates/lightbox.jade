@@ -2,7 +2,7 @@
   .lightbox__content.valign-outer
     .valign-inner
       - if(block.has('image'))
-        img(src="#{block.getImageSize('original')}")
+        img.lightbox__content__img(src="#{block.getImageSize('original')}")
 
       - if(block.get('class') == 'Text')
         .lightbox__content__text!= block.get('content_html')
