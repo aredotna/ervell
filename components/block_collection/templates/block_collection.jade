@@ -14,7 +14,8 @@ for block in blocks
                 h2=block.get('title')
               - if(block.get('class') == 'User')
                 h3=block.get('username')
-          .grid__block__overlay.abs-fill(style=(block.has('image') ? "background-image:url( #{ block.getImageSize('thumb') })" : ""), class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+                //- background-image:url( #{ block.getImageSize('dis') })
+          .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
             .grid__block__mini-feed
               - if(channel)
                 ul.bare-list

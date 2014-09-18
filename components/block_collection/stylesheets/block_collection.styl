@@ -61,15 +61,16 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
   transition opacity 0.1s
 
 .grid__block:hover .grid__block__overlay
-  opacity 1
+  opacity 0.9
+  border 1px solid lightgrayplus
 
 .grid__block.grid__block--text:hover .grid__block__overlay
   background-color rgba(255,255,255, 0.9)
 
 .grid__block.grid__block--channel:hover .grid__block__overlay, .grid__block.grid__block--user:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0)
+  background-color rgba(255,255,255, 0.9)
 
-privacy-color('.grid__block__overlay--privacy-', border-color)
+// privacy-color('.grid__block__overlay--privacy-', border-color)
 
 .grid__block__mini-feed
   font-size 12px
