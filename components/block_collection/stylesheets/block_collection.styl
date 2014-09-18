@@ -18,9 +18,9 @@
   justify-content center
 
 .grid__block
-  flex 0 0 30%
-  max-width 330px
-  min-width 330px
+  flex 0 0 20%
+  max-width block_width
+  min-width block_width
   text-align center
   margin 0 10px 60px
 
@@ -33,7 +33,7 @@
 
 .grid__block__inner
   width 100%
-  height 330px
+  height block_width
   position relative
   overflow hidden
 
@@ -42,7 +42,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 .grid__block__content__image
   max-width 100%
   height auto
-  max-height 330px
+  max-height block_width
 
 .grid__block__content__text
   @extend .serif-text
