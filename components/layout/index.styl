@@ -77,7 +77,7 @@ blockquote
   center(1400px)
 
 for i in (1..5)
-  @media (min-width: block_width_mar * i)
+  @media (min-width: (block_width_mar * i) + 20)
     .container
       center(block_width_mar * i)
 
