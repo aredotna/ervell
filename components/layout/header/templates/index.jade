@@ -6,9 +6,12 @@ header#layout-header
     if user && user.has('username')
       .user
         .username= user.get('username')
-        .dropdown
+        .dropdown.dropdown--size
           ul
             li: a(href="/#{user.get('slug')}") Profile
+            li: a(href="#") Settings
+            li: a(href="#") Tools
+            li: a(href="#") About
             li: a(href="/me/sign_out") Sign Out
 
     else
