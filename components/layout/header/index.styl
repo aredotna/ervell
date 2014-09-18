@@ -46,27 +46,27 @@
       vertical-align middle
       margin-left 0.3em
 
-    .dropdown
-      position absolute
-      font-size 14px
-      top topbar_h
-      right -30px
-      padding 10px 30px 10px 0
-      display none
-      z-index 3001
-      background-color backgroundgray
-      border-top 1px solid lightgray
+.dropdown--menu
+  cursor pointer
 
-    li
-      padding 5px
-      
+.dropdown
+  position absolute
+  font-size 14px
+  top topbar_h
+  right -30px
+  padding 10px 30px 10px 0
+  display none
+  z-index 3001
+  background-color backgroundgray
+  border-top 1px solid lightgray
 
-    &:hover .dropdown
-      display block
+  &.dropdown--size
+    width 150px
+    line-height 40px
 
-      &.dropdown--size
-        width 150px
-        line-height 40px
+  .dropdown__link
+    display block
+    padding 5px
 
-  span
-    padding: 0 0.25em
+.dropdown--is_active .dropdown
+  display block
