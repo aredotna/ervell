@@ -3,12 +3,14 @@ Backbone.$ = $
 _ = require 'underscore'
 HeaderView = require './header/view.coffee'
 sd = require('sharify').data
+$ = require 'jquery'
 # analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
   setupViews()
   setupReferrerTracking()
   setupAnalytics()
+  setupPageclickEvent()
 
 setupAnalytics = ->
   # Initialize analytics & track page view if we included mixpanel
@@ -34,4 +36,7 @@ setupReferrerTracking = ->
   #   Cookies.set 'force-session-start', window.location.href
 
 setupViews = ->
-  new HeaderView el: $('#main-layout-header'), $window: $(window), $body: $('body')
+  new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
+
+setupPageclickEvent: ->
+  $()
