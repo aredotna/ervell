@@ -10,7 +10,7 @@ module.exports = class Blocks extends Base
 
   model: Block
 
-  url: -> "#{sd.API_URL}/channels/#{@slug}/skeleton?per=12&page=1"
+  url: -> "#{sd.API_URL}/channels/#{@slug}/contents?per=12"
 
   parse: (data)-> data.contents
 

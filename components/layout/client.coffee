@@ -38,5 +38,4 @@ setupReferrerTracking = ->
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
 
-setupPageclickEvent: ->
-  $()
+setupPageclickEvent = -> # nothing for now
