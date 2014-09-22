@@ -7,8 +7,7 @@ block body
   .grid
     if user && user.canEditChannel(channel)
       include ../../../components/new_block/templates/new_block
-    .grid__channel-contents
-      include ../../../components/block_collection/templates/block_collection
+    include ../../../components/block_collection/templates/block_collection
 
 block scripts
   script( src=sd.ASSET_PATH + 'channel' + sd.JS_EXT )
