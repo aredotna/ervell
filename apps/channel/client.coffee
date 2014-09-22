@@ -12,15 +12,18 @@ blockCollectionTemplate = -> require('../../components/block_collection/template
 module.exports = class BlockSkeletonView extends Backbone.View
 
   initialize: ->
-    @collection.on "sync", @render, @
+    # @collection.on "sync", @render, @
 
-    # @collection.fetchUntilEnd()
-
-    console.log '@$el', @$el
+    @collection.fetch
+      reset: true
+      data:
+        page: 1
+        per: 12
 
     super
 
   render: ->
+    console.log 'rendering'
     @$el.html blockCollectionTemplate(blocks: @collection.models)
 
 module.exports.init = ->
