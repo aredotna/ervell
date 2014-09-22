@@ -2,21 +2,24 @@ header#layout-header
   .search
     input(type="text", placeholder="Search Arena")
 
-  .right
-    if user && user.has('username')
-      .user.dropdown--menu
-        .username.dropdown--menu__trigger= user.get('username')
-        .dropdown.dropdown--size
-          a.dropdown__link(href="/#{user.get('slug')}") Profile
-          a.dropdown__link(href="#") Settings
-          a.dropdown__link(href="#") Tools
-          a.dropdown__link(href="#") About
-          a.dropdown__link(href="/me/sign_out") Sign Out
+  if user && user.has('username')
+    .user.dropdown--menu.right
+      .username.dropdown--menu__trigger= user.get('username')
+      .dropdown.dropdown--size
+        a.dropdown__link(href="/#{user.get('slug')}") Profile
+        a.dropdown__link(href="#") Settings
+        a.dropdown__link(href="#") Tools
+        a.dropdown__link(href="#") About
+        a.dropdown__link(href="/me/sign_out") Sign Out
 
-    else
-      .register
-        span
-          a(href="#log_in").btn-login Login
-        span or
-        span
-          a(href="#log_in").btn-signup Sign Up
+  else
+    .register
+      span
+        a(href="#log_in").btn-login Login 
+      span or 
+      span
+        a(href="#log_in").btn-signup Sign Up
+
+  .logo.dropdown--menu.right
+    .logo-icon.dropdown--menu__trigger
+      include ../../../../public/images/arena-mark.svg
