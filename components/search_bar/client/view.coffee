@@ -2,6 +2,7 @@ Backbone = require "backbone"
 $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
+SearchBlocks = require '../../../collections/search_blocks.coffee'
 
 module.exports = class SearchBarView extends Backbone.View
 
