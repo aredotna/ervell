@@ -1,6 +1,6 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-SearchBarView = require '../../search_bar/view.coffee'
+SearchBarView = require '../../search_bar/client/view.coffee'
 AuthModalView = require '../../auth_modal/view.coffee'
 AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
@@ -18,13 +18,11 @@ module.exports = class HeaderView extends Backbone.View
   initialize: (options) ->
     { @$window, @$body } = options
 
-    # @searchBarView = new SearchBarView
-    #   el: @$('#main-layout-search-bar-container')
-    #   $input: @$('#main-layout-search-bar-input')
+    @searchBarView = new SearchBarView
+      el: @$('.layout-header__search')
+      $input: @$('#layout-header__search__input')
 
     mediator.on 'open:auth', @openAuth, @
-
-    console.log 'HeaderView'
 
     if !sd.CURRENT_USER
       new AuthRouter

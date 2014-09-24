@@ -1,6 +1,6 @@
 header#layout-header
-  .search
-    input(type="text", placeholder="Search Arena")
+  .layout-header__search
+    input#layout-header__search__input(type="text", placeholder="Search Arena")
 
   if user && user.has('username')
     .user.dropdown--menu.right
