@@ -2,12 +2,12 @@
 # Collection for a group of Blocks for a user
 #
 
-Base = require("./base.coffee")
+Base = require("./blocks.coffee")
 sd = require("sharify").data
 _ = require 'underscore'
 Block = require("../models/block.coffee")
 
-module.exports = class UserBlocks extends Base
+module.exports = class UserBlocks extends Blocks
 
   model: Block
 
