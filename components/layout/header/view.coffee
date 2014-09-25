@@ -21,6 +21,7 @@ module.exports = class HeaderView extends Backbone.View
     @searchBarView = new SearchBarView
       el: @$('.layout-header__search')
       $input: @$('#layout-header__search__input')
+      $results: @$('.layout-header__search__results')
 
     mediator.on 'open:auth', @openAuth, @
 

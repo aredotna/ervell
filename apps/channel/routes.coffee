@@ -3,14 +3,14 @@
 #
 
 Channel = require "../../models/channel"
-Blocks = require "../../collections/blocks"
+ChannelBlocks = require "../../collections/channel_blocks"
 User = require "../../models/user"
 
 @channel = (req, res, next) ->
   channel = new Channel
     channel_slug: req.params.channel_slug
 
-  blocks = new Blocks null,
+  blocks = new ChannelBlocks null,
     channel_slug: req.params.channel_slug
 
   channel.fetch

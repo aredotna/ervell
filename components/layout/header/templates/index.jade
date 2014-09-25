@@ -1,6 +1,9 @@
 header#layout-header
   .layout-header__search
     input#layout-header__search__input(type="text", placeholder="Search Arena")
+    .layout-header__search__close.pointer &times;
+    .layout-header__search__results
+      //- rendered by client
 
   if user && user.has('username')
     .user.dropdown--menu.right
