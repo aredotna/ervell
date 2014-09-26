@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="26px" height="22px" viewBox="0 0 26 22" version="1.1">
+    <!-- Generator: Sketch 3.0.1 (7597) - http://www.bohemiancoding.com/sketch -->
+    <title>circle_sync_backup_1_outline_stroke 2</title>
+    <description>Created with Sketch.</description>
+    <defs>
+        <path d="M23.9998544,11.0572015 C23.9690562,17.1060164 19.056054,22 13,22 C8.7376321,22 5.04148823,19.5757082 3.21520553,16.0307617 L4.3556897,16.0307617 C6.08907246,19.0027963 9.31130015,21 13,21 C18.4845063,21 22.9377859,16.5847957 22.9993538,11.114872 L21.407119,12.7071068 L20.7000122,12 L23.5284393,9.17157288 L26.3568665,12 L25.6497597,12.7071068 L23.9998544,11.0572015 Z M2.05074788,9.93652211 C2.58568149,4.3603725 7.28363066,0 13,0 C16.8558099,0 20.2482608,1.9838748 22.2123004,4.98657227 L20.990629,4.98657227 C19.1656063,2.56531772 16.265603,1 13,1 C7.85552358,1 3.61836919,4.88470535 3.06193907,9.88071382 L4.64975968,8.29289322 L5.35686646,9 L2.52843933,11.8284271 L-0.299987793,9 L0.407118988,8.29289322 L2.05074788,9.93652211 L2.05074788,9.93652211 Z" id="path-1"/>
+    </defs>
+    <g id="miu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="circle_sync_backup_1_outline_stroke-2">
+            <use fill="#000000" fill-rule="evenodd" sketch:type="MSShapeGroup" transform="translate(13.000000, 11.000000) rotate(-30.000000) translate(-13.000000, -11.000000) " xlink:href="#path-1"/>
+            <use fill="none" xlink:href="#path-1"/>
+        </g>
+    </g>
+</svg>

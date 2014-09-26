@@ -1,44 +1,71 @@
 @import '../variables'
 
-topbar_h = 50px
-
 #layout-header
-  position: fixed
-  top: 0
-  left: 0
-  height: topbar_h
-  line-height: topbar_h
-  width: 100%
-  background-color: rgba(250, 250, 250, 1)
-  padding: 0 3em
-  display: flex
-  justify-content: space-between
-  z-index: header_z
+  position fixed
+  top 0
+  left 0
+  height topbar_h
+  line-height topbar_h
+  width 100%
+  background-color rgba(250, 250, 250, 1)
+  padding 0 container_pad 0 container_pad
+  display flex
+  justify-content space-between
+  z-index header_z
 
-  .search
-    flex-grow: 3
+  .layout-header__search
+    flex-grow 3
+    position relative
 
-    input
-      width: 100%
-      height: 100%
-      font-size: 18px
-      background: transparent
-      border: none
-      line-height: topbar_h
-      outline: 0
-      font-family: Arial
-      font-weight 100
+    input#layout-header__search__input
+      width 100%
+      height 100%
+      font-size 14px
+      background transparent
+      border none
+      outline 0
+      font-weight 400
+      padding-left 0
+
+    .layout-header__search__results
+      position absolute
+      left - container_pad
+      width 100%
+      display none
+
+    &.is-active .layout-header__search__results
+      display block
+
+    .search__results__list
+      list-style-type none
+
+    .search__results__result
+      background backgroundgray
+      padding s_margin
+      padding-left container_pad
+      font-size 14px
+
+    .layout-header__search__close
+      position absolute
+      right 40px
+      font-size 22px
+      top 0
+      display none
+
+    &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
+      display block
+
 
   .right
-    flex-grow: 1
-    text-align: right
+    text-align right
+    margin 0 .6em
 
   .user
     position relative
 
     .username
-      color: #999
-      font-weight bold
+      color lightgray
+      font-weight normal
       font-size 14px
       position relative
 
@@ -49,14 +76,33 @@ topbar_h = 50px
       vertical-align middle
       margin-left 0.3em
 
-    .dropdown
-      position absolute
-      top topbar_h
-      right 0
-      display none
+  .logo
+    .logo-icon svg
+      fill lightgray
+      width 30px
+      height 50px
 
-    &:hover .dropdown
-      display block
+.dropdown--menu
+  cursor pointer
 
-  span
-    padding: 0 0.25em
+.dropdown
+  position absolute
+  font-size 14px
+  top topbar_h
+  right -30px
+  padding 10px 30px 10px 0
+  display none
+  z-index 3001
+  background-color backgroundgray
+  border-top 1px solid lightgrayplus
+
+  &.dropdown--size
+    width 150px
+    line-height 40px
+
+  .dropdown__link
+    display block
+    padding 5px
+
+.dropdown--is_active .dropdown
+  display block

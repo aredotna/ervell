@@ -1,8 +1,9 @@
 @import '../../layout/variables'
 
 .path
+  position relative
   color textgray
-  margin-bottom 4em
+  margin 6em 0 4em 10px
   text-align left
   font-weight 400
 
@@ -10,7 +11,7 @@
     font-weight 700
 
   .username:hover
-    border-bottom 2px solid black
+    border-bottom 0
 
   .channel
 
@@ -21,7 +22,5 @@
     margin 0 0.25em
     font-weight 400
 
-  colors = 'closed' closed, 'public' public, 'private' private
-  for color in colors
-    {'.privacy-' + color[0]}
-     color: color[1]
+  privacy-color('.privacy-', color)
+

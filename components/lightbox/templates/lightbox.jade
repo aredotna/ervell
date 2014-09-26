@@ -1,0 +1,19 @@
+#l-lightbox-container_inner
+  .lightbox__content.valign-outer
+    .valign-inner
+      - if(block.has('image'))
+        img.lightbox__content__img(src="#{block.getImageSize('original')}")
+
+      - if(block.get('class') == 'Text')
+        .lightbox__content__text!= block.get('content_html')
+
+      - if(block.has('title'))
+        h2.lightbox__content__title= block.get('title')
+
+      - if(block.has('description'))
+        .lightbox__content__description!= block.get('description_html')
+  #lightbox__feed.lightbox__feed
+    //- rendered by client
+
+a.lightbox--close
+  h1 &times;

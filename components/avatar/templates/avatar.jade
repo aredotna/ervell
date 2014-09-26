@@ -1,0 +1,17 @@
+mixin avatar(user)
+  - var splitName = user.get('username').split(" ")
+
+  if splitName
+    - var initials = []
+
+    for name in splitName
+      - initials.push(name.substring(0, 1))
+
+    - var initials = initials.join("").substring(0,4)
+
+  .user__avatar
+    .user__avatar__initials.valign-outer
+      .valign-inner
+        .user__avatar__initials__content=initials
+
+    img(src="#{user.get('avatar_image').display}").user__avatar__image

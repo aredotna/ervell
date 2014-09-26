@@ -1,23 +1,27 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-SearchBarView = require '../../search_bar/view.coffee'
+SearchBarView = require '../../search_bar/client/view.coffee'
 AuthModalView = require '../../auth_modal/view.coffee'
 AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
 sd = require('sharify').data
+$ = require 'jquery'
+Backbone.$ = $
 
 module.exports = class HeaderView extends Backbone.View
 
   events:
-    'click .btn-login'  : 'login'
-    'click .btn-signup' : 'signup'
+    'click .btn-login'      : 'login'
+    'click .btn-signup'     : 'signup'
+    'click .dropdown--menu' : 'toggleDropdown'
 
   initialize: (options) ->
     { @$window, @$body } = options
 
-    # @searchBarView = new SearchBarView
-    #   el: @$('#main-layout-search-bar-container')
-    #   $input: @$('#main-layout-search-bar-input')
+    @searchBarView = new SearchBarView
+      el: @$('.layout-header__search')
+      $input: @$('#layout-header__search__input')
+      $results: @$('.layout-header__search__results')
 
     mediator.on 'open:auth', @openAuth, @
 
@@ -25,8 +29,11 @@ module.exports = class HeaderView extends Backbone.View
       new AuthRouter
       Backbone.history.start()
 
+  toggleDropdown: (e)->
+    $el = $(e.target).parent()
+    ac = $el.toggleClass('dropdown--is_active')
+
   openAuth: (options) ->
-    console.log 'trigger open auth'
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
 
   signup: (e) ->

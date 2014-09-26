@@ -1,0 +1,16 @@
+.grid__block.grid__block--new-block
+  a(href="#")
+    .grid__block__inner
+      .grid__block__content.valign-outer
+        .valign-inner
+          h1.grid__block--new-block__plus_button +
+          h3.grid__block--new-block__title Add to #{channel.get('title')}
+      .grid__block--new-block__add-block.grid__block--new-block__form.abs-fill
+        h4 Add to #{channel.get('title')}
+        fieldset
+          textarea(placeholder="Add text (or add a url to a website, video, link, or file)").grid__block--new-block__content-field
+        fieldset
+          button.check.grid__block--new-block__submit.button--dark &#10004;
+        .grid__block--new-block__cancel.inline-link.small-text Cancel
+      .grid__block--new-block__add-channel.grid__block--new-block__form.abs-fill
+        //- client side rendered

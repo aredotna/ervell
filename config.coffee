@@ -10,8 +10,8 @@ module.exports =
   PORT: 4000
   # last one is the "rotten egg", jk last one listed is the one used.
   API_URL: "http://api.are.na/v2"
-  #API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
-  #API_URL: "http://localhost:3000/v2"
+  # API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
+  # API_URL: "http://localhost:3000/v2"
   S3_KEY: null
   S3_SECRET: null
   REDIS_URL: "redis://redistogo:f6ccb2b733aedb75db8100eba74791b5@barreleye.redistogo.com:11317/"

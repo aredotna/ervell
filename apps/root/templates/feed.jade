@@ -4,10 +4,8 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'feed' + sd.CSS_EXT) )
 
 block body
-  .container
-    include ../../../components/path/templates/path
-    .feed-container
-      //- rendered via client
+  .feed-container
+    //- rendered via client
 
 block scripts
   script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )

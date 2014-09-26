@@ -5,19 +5,18 @@
 
 global-reset()
 
-//edit()
+// edit()
 
 *
   box-sizing border-box
 
 body, html
-  font-family Arial, Helvetica
+  font-family font_sans
   color textgray
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
+  antialiased()
 
-input
-  focus outline none
+body
+  padding 0 (container_pad - 10)
 
 h1
   font-size 1.7em
@@ -34,23 +33,20 @@ h5
 h6
   font-size .75em
 
-a
+a, .inline-link
   text-decoration: none
   color inherit
   font-weight 700
+  cursor pointer
 
   &:hover
-    color #000
+    color #030303
 
 strong
   font-weight 700
 
-.container
-  center(1400px)
-  padding-top 100px
-
 blockquote
-  border-left 3px solid #eee
+  border-left 3px lightgrayplus solid
   padding-left 1em
   font-style italic
 
@@ -61,20 +57,35 @@ blockquote
   width 100%
   height 100%
 
-@media (min-width: 2000px)
-  .container
-    center(1750px)
+.small-text
+  font-size 12px
 
-@media (max-width: 1480px)
-  .container
-    center(94%)
+.valign-outer
+  display table
+  position absolute
+  width 100%
+  height 100%
 
-// colors
-closed = #D8A068
-public = #10860B
-private = #B60202
-textgray = #454545
+.valign-inner
+  display table-cell
+  width 100%
+  height 100%
+  vertical-align middle
+  text-align center
+
+.pointer
+  cursor pointer
+
+.container
+  center(1400px)
+
+for i in (1..5)
+  @media (min-width: (block_width_mar * i) + 20)
+    .container
+      center(block_width_mar * i)
 
 @import 'header/index'
 @import '../modal/index'
 @import '../path/stylesheets/path'
+@import '../forms/stylesheets/index'
+@import '../feed/stylesheets/feed'

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Ebene_1" x="0px" y="0px" width="100.0px" height="100px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<g>
+	<path d="M456,456H152V152h304V456z M168,440h272V168H168V440z"/>
+</g>
+<g>
+	<rect x="248" y="160" width="16" height="288"/>
+</g>
+<g>
+	<rect x="344" y="160" width="16" height="288"/>
+</g>
+<g>
+	<rect x="160" y="248" width="288" height="16"/>
+</g>
+<g>
+	<rect x="160" y="344" width="288" height="16"/>
+</g>
+<g>
+	<rect x="152" y="64" width="16" height="48"/>
+</g>
+<g>
+	<rect x="248" y="64" width="16" height="48"/>
+</g>
+<g>
+	<rect x="64" y="152" width="48" height="16"/>
+</g>
+<g>
+	<rect x="64" y="248" width="48" height="16"/>
+</g>
+<g>
+	<polygon points="112,360 56,360 56,56 360,56 360,112 344,112 344,72 72,72 72,344 112,344  "/>
+</g>
+</svg>

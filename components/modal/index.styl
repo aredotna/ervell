@@ -52,7 +52,7 @@ body.is-modal
   left 0
 
 .modal-backdrop
-  background-color rgba(black, 0.5)
+  background-color rgba(white, 0.96)
 
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
@@ -60,21 +60,21 @@ body.is-modal
 .modal-dialog
   position fixed
   overflow-y auto
-  background-color white
-  max-width 90%
-  max-height 90%
+  background-color none
+  width 420px
+  margin 0 0 0 0
+  border 0 solid lightgray
+  background-color none
   &.is-notransition
     transition none !important
 
 .modal-close
-  position absolute
-  top 24px
-  right 27px
-  font-size 65px
+  position fixed
+  top 70px
+  right 40px
+  font-size 32px
   cursor pointer
-  transition opacity 0.25s
-  opacity 0.15
-  font-size 50px
+  opacity 0.8
   z-index 2
   &:hover
     opacity 1
@@ -88,3 +88,22 @@ body.is-modal
   &[data-state='fade-in'], &.is-fade-in
     opacity 1
 
+.modal-title
+  font-size 27px
+  font-weight bold
+  margin 0 0 30px 0
+
+.modal-forgot
+  position relative
+  float right
+  font-size 12px
+  margin -28px 10px 0 0
+  text-align right
+
+  a
+    color lightgray 
+    &:hover
+      color textgray 
+
+.modal-checkbox
+  display none

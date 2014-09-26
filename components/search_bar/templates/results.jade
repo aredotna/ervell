@@ -1,0 +1,10 @@
+ul.search__results__list
+  for result in results
+    li.search__results__result
+      if result.get('kind') != 'profile'
+        a(href="/#{result.get('user').slug}")= result.get('user').username
+        span  &nbsp;/&nbsp;
+        a(href="/#{result.get('user').slug}/#{result.get('slug')}")= result.get('title')
+      else
+        a(href="/#{result.get('user').slug}")= result.get('user').username
+        span  &nbsp;/&nbsp;

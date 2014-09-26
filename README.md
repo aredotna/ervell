@@ -28,4 +28,9 @@ Run the server
 nodemon index.coffee
 ```
 
+* * *
+
+### Assets
+Assets in public/assets are not included in the repo. To compile these assets for testing locally run `make assets` .
+
 (this will automatically restart the server when code changes)

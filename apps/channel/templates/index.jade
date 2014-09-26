@@ -4,8 +4,9 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'channel' + sd.CSS_EXT) )
 
 block body
-  .container
-    include ../../../components/path/templates/path
+  .grid
+    if user && user.canEditChannel(channel)
+      include ../../../components/new_block/templates/new_block
     include ../../../components/block_collection/templates/block_collection
 
 block scripts

@@ -1,14 +1,25 @@
 doctype html
 html
   head
-    title Arena
+    title
+      | Arena 
+      if channel
+        | / #{channel.get('title')}
+      else if author
+        | / #{author.get('username')}
+
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'layout' + sd.CSS_EXT) )
     block styles
   body
     #modal-container
+      //- rendered by client
+    #l-lightbox-container
+      //- rendered by client
     include header/templates/index
-    block body
+    .container
+      include ../../components/path/templates/path
+      block body
 
     #scripts
       != sharify.script()

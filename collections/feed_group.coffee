@@ -1,6 +1,7 @@
 Base = require("./base.coffee")
 FeedItem = require '../models/feed_item.coffee'
 Block = require '../models/block.coffee'
+Channel = require '../models/channel.coffee'
 _ = require 'underscore'
 _.mixin(require 'underscore.string')
 
@@ -20,7 +21,14 @@ module.exports = class FeedGroup extends Base
   # and that collection calls _validate on instantiated models
   _validate: -> true
 
-  items: -> @map (model)-> new Block model.get('item')
+  items: -> @map (model)->
+    block = new Block model.get('item')
+    block.set 'connected_by_username', model.get('user').username
+    block.set 'connected_by_user_slug', model.get('user').slug
+
+  channel: ->
+    if @models[0].get('action') is 'added'
+      new Channel @models[0].get('target')
 
   actor: -> @models[0].get('user')
 
