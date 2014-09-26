@@ -9,9 +9,3 @@ Block = require("../models/block.coffee")
 module.exports = class Blocks extends Base
 
   model: Block
-
-  url: -> "#{sd.API_URL}/channels/#{@slug}/skeleton?per=12&page=1"
-
-  parse: (data)-> data.contents
-
-  initialize: (models, options) -> @slug = options.channel_slug

@@ -10,7 +10,7 @@ module.exports = class LightboxRouter extends Backbone.Router
   initialize: ->
     mediator.on 'lightbox:closed', @removeRoute, @
 
-  removeRoute: -> @navigate ''
+  removeRoute: -> #@navigate ''
 
   showBlock: (id)->
     mediator.trigger 'open:lightbox', id: id

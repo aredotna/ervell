@@ -11,9 +11,12 @@ global-reset()
   box-sizing border-box
 
 body, html
-  font-family Arial, Helvetica
+  font-family font_sans
   color textgray
   antialiased()
+
+body
+  padding 0 (container_pad - 10)
 
 h1
   font-size 1.7em
@@ -70,11 +73,14 @@ blockquote
   vertical-align middle
   text-align center
 
+.pointer
+  cursor pointer
+
 .container
   center(1400px)
 
 for i in (1..5)
-  @media (min-width: block_width_mar * i)
+  @media (min-width: (block_width_mar * i) + 20)
     .container
       center(block_width_mar * i)
 
@@ -82,3 +88,4 @@ for i in (1..5)
 @import '../modal/index'
 @import '../path/stylesheets/path'
 @import '../forms/stylesheets/index'
+@import '../feed/stylesheets/feed'

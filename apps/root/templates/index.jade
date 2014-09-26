@@ -6,47 +6,76 @@ block styles
 block body
   .landing
     .section-1
-      //-img.home-logo(src="images/arena-logo.svg", alt="Arena")
-      //-img.home-mark(src="images/arena-mark.svg", alt="Arena")
+      img.home-logo(src="images/arena-logo.svg", alt="Arena")
+      img.home-mark(src="images/arena-mark.svg", alt="Arena")
       .login
         a(href="#log_in") Login 
         span / 
         a(href="#sign_up") Register
       .introduction
         p.
-          Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into collections.
-        p(style="margin-top: 20px;").
-          People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators. 
+          Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into collections. People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators. 
         p(style="margin-top: 20px;").
           An evolving archive where people collaboratively create new concepts by combining new and existing material. 
 
       //- include ../../../components/block_collection/block_collection
 
-    //-.section-2
+    .section-2
+      | Channel case studies: 
+      strong 1, 
+        span(style="color: #000") 2
+        | , 3, 4, 5
+      .freak-hack-div
+        iframe.freak-hack(src="http://ervell.herokuapp.com/john-michael-boling/anime-cigs")
+
+//  .section-2
       .section-2__links
-        | Channel examples:
-        .home-link
-          a(href='#sublime') Are.na / Morgan-Sutherland / Sublime
-        .home-link  
-          a.home-link(href='#dark-bliss') Are.na / Chris-Sherron / Dark Bliss
-        .home-link  
-          a(href='#fashion-images') Are.na / Dena-Yago / Fashion Images
-        .home-link  
-          a(href='#color-schemes') Are.na / Daniel-Bär / Color Schemes
+        | Real time:
+        .section-2__activity
+          a(href='#sublime') Morgan Sutherland 
+          | added 
+          a(href='#sublime') sha_IMG.jpg 
+          | to 
+          a(href='#sublime') Sublime 
+          br
+          .home--small 30 seconds ago
+          a(href='#sublime') Chris Sherron 
+          | added 
+          a(href='#sublime') Kid Cudi 
+          | to 
+          a(href='#sublime') Dark Bliss
+          .home--small 67 seconds ago
+        .section-2__activity
+          | Total channels:
+          br
+          a(href='#sublime') 533'210
+        .section-2__activity
+          | Total blocks:
+          br 
+          a(href='#sublime') 5'233'210
 
       .section-2__images
         img(src='https://s3.amazonaws.com/arena_images/242903/original_bf324850b79e8af41e87fe9d6529a936.jpg')
-        img(src='https://s3.amazonaws.com/arena_images/246865/original_1a82c2954a007b93d3de924e9cdb6b61.jpg')
-        img(src='https://s3.amazonaws.com/arena_images/268546/original_5be7d4f32355225e3d7432bda36004f0.jpg')
-        img(src='http://fillmurray.com/290/300')
-
-    //-.section-3
-      img(src='images/add.svg')
-      img(src='images/channels.svg')
-      img(src='images/collaborate.svg')
-      img(src='images/use.svg')
-
-    //-.section-4
+        .section-2__arrow(style="width: 200px; position: relative; float: left; margin: 160px 0 0 -20px; text-align: center;") &rarr;
+        img(src='images/channel-placeholder.png')
+        
+//  .section-3
+      .section-3__block
+        img(src='images/add.svg')
+        br
+        .section-3__description Create channels or use public ones to organize your content.
+      .section-3__block
+        img(src='images/channels.svg')
+        br
+        .section-3__description Add content from the web and your computer, or interact with exhisting research. 
+      .section-3__block
+        img(src='images/collaborate.svg')
+        br
+        .section-3__description Collaborate on channels with other people, openly or as private projects.
+      .section-3__block
+        img(src='images/use.svg')
+        br
+        .section-3__description Use our premium set of tools to export, showcase, sell, synchronize your channels.
 
 block scripts
   script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )
