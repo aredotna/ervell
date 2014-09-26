@@ -14,7 +14,6 @@ module.exports = class Feed extends Base
     type: "primary"
 
   initialize: (models, options) ->
-    console.log 'options', options
     super
     @subscribeEvent 'feed:loaded', @setupListener
     @subscribeEvent 'activity:recieved', @maybeGetActivity

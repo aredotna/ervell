@@ -1,3 +1,5 @@
+include ../../avatar/templates/avatar
+
 for block in blocks
   div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}")
     a(href="#{block.getHref()}")
@@ -13,8 +15,8 @@ for block in blocks
               - if(block.get('class') == 'Channel')
                 h2=block.get('title')
               - if(block.get('class') == 'User')
+                +avatar(block)
                 h3=block.get('username')
-                //- background-image:url( #{ block.getImageSize('dis') })
           .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
             .grid__block__mini-feed
               - if(channel)
