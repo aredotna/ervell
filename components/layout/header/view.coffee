@@ -13,7 +13,7 @@ module.exports = class HeaderView extends Backbone.View
   events:
     'click .btn-login'      : 'login'
     'click .btn-signup'     : 'signup'
-    'click .dropdown--menu' : 'toggleDropdown'
+    'click .dropdown--menu__trigger' : 'toggleDropdown'
 
   initialize: (options) ->
     { @$window, @$body } = options
@@ -30,7 +30,7 @@ module.exports = class HeaderView extends Backbone.View
       Backbone.history.start()
 
   toggleDropdown: (e)->
-    $el = $(e.target).parent()
+    $el = $(e.currentTarget).parent().parent()
     ac = $el.toggleClass('dropdown--is_active')
 
   openAuth: (options) ->

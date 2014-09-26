@@ -62,24 +62,9 @@
     text-align right
     margin 0 .6em
 
-  .user
-    position relative
-
-    .username
-      color lightgray
-      font-weight normal
-      font-size 14px
-      position relative
-
-    .username:after
-      content "▼"
-      color #aaa
-      font-size 8px
-      vertical-align middle
-      margin-left 0.3em
-
   .logo
     .logo-icon svg
+      display inline-block
       fill lightgray
       width 30px
       height 50px
@@ -99,7 +84,7 @@
   &.dropdown--desktop-size
     width 15vw
     line-height 70px
-    right -30px
+    right 0
 
   .dropdown__link
     display block
@@ -108,3 +93,10 @@
 
 .dropdown--is_active .dropdown
   display block
+
+.dropdown--menu__trigger:after
+  content " ▾"
+  color #aaa
+  font-size 10px
+  vertical-align top
+  margin-left 0.3em
