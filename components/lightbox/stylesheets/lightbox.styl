@@ -7,8 +7,8 @@ body.is-lightbox
   height 100%
   min-height 100%
   position fixed
-  z-index lightbox_z
-  top topbar_h
+  z-index header_z + 1
+  top 0
   left 0
   background-color rgba(255,255,255, 0.95)
   opacity 0
@@ -38,18 +38,21 @@ body.is-lightbox
 .lightbox--close
   display block
   position absolute
-  top s_margin * 2
+  color lightgray
+  font-weight normal
+  font-size 30px
+  top s_margin 
   right s_margin * 2
 
 .lightbox__content__description, .lightbox__content__text
-  padding-top 2em
   width 600px
   margin 0 auto
+  padding 0
   line-height 1.4em
   text-align left
 
   p
-    margin 1em 0
+    margin 0.8em 0
 
 .lightbox__content__text
   box-shadow 0px 0px 14px rgba(0,0,0,0.1)
@@ -60,7 +63,8 @@ body.is-lightbox
   background-color rgba(255,255,255, 1)
 
 .lightbox__content__img
-  max-height 90vh
+  max-height 80%
+  max-width 70%
 
 .lightbox__feed
   width 100%
