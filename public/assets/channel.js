@@ -1,5 +1,609 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var $, Backbone, Channel, ChannelView, sd,
+var $, Backbone, BlockCollectionView, BlockSkeletonView, Channel, ChannelBlocks, CurrentUser, NewBlockView, blockCollectionTemplate, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+Channel = require('../../models/channel.coffee');
+
+ChannelBlocks = require('../../collections/channel_blocks.coffee');
+
+CurrentUser = require('../../models/current_user.coffee');
+
+NewBlockView = require('../../components/new_block/client/new_block_view.coffee');
+
+BlockCollectionView = require('../../components/block_collection/client/block_collection_view.coffee');
+
+blockCollectionTemplate = function() {
+  return require('../../components/block_collection/templates/block_collection.jade').apply(null, arguments);
+};
+
+module.exports = BlockSkeletonView = (function(_super) {
+  __extends(BlockSkeletonView, _super);
+
+  function BlockSkeletonView() {
+    return BlockSkeletonView.__super__.constructor.apply(this, arguments);
+  }
+
+  BlockSkeletonView.prototype.initialize = function() {
+    this.collection.fetch({
+      reset: true,
+      data: {
+        page: 1,
+        per: 12
+      }
+    });
+    return BlockSkeletonView.__super__.initialize.apply(this, arguments);
+  };
+
+  BlockSkeletonView.prototype.render = function() {
+    console.log('rendering');
+    return this.$el.html(blockCollectionTemplate({
+      blocks: this.collection.models
+    }));
+  };
+
+  return BlockSkeletonView;
+
+})(Backbone.View);
+
+module.exports.init = function() {
+  var blocks, channel, current_user;
+  current_user = new CurrentUser(sd.CURRENT_USER);
+  channel = new Channel(sd.CHANNEL);
+  blocks = new ChannelBlocks(sd.BLOCKS, {
+    channel_slug: sd.CHANNEL.slug
+  });
+  new BlockCollectionView({
+    el: 'body'
+  });
+  new BlockSkeletonView({
+    collection: blocks,
+    el: $(".grid")
+  });
+  if (current_user.canEditChannel(channel)) {
+    return new NewBlockView({
+      el: $(".grid__block--new-block"),
+      model: channel,
+      blocks: blocks
+    });
+  }
+};
+
+
+},{"../../collections/channel_blocks.coffee":5,"../../components/block_collection/client/block_collection_view.coffee":8,"../../components/block_collection/templates/block_collection.jade":9,"../../components/new_block/client/new_block_view.coffee":17,"../../models/channel.coffee":22,"../../models/current_user.coffee":23,"backbone":26,"jquery":31,"sharify":34}],2:[function(require,module,exports){
+require('jquery')(require("../apps/channel/client.coffee").init);
+
+
+},{"../apps/channel/client.coffee":1,"jquery":31}],3:[function(require,module,exports){
+var Base, Collection, Model, ModelLib, sd, _,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Collection = require("chaplin").Collection;
+
+sd = require("sharify").data;
+
+_ = require('underscore');
+
+Model = require("../models/base.coffee");
+
+ModelLib = require('../lib/model_lib.coffee');
+
+module.exports = Base = (function(_super) {
+  __extends(Base, _super);
+
+  function Base() {
+    return Base.__super__.constructor.apply(this, arguments);
+  }
+
+  Base.prototype.model = Model;
+
+  _.extend(Base.prototype, ModelLib);
+
+  Base.prototype.sync = function(method, model, options) {
+    if (sd.CURRENT_USER) {
+      if (!options.headers) {
+        options.headers = {};
+      }
+      options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token;
+    }
+    return Base.__super__.sync.apply(this, arguments);
+  };
+
+  Base.prototype.fetchUntilEnd = function(options) {
+    var fetchPage, opts, page, _ref;
+    if (options == null) {
+      options = {};
+    }
+    page = ((_ref = options.data) != null ? _ref.page : void 0) - 1 || 0;
+    opts = _.clone(options);
+    fetchPage = (function(_this) {
+      return function() {
+        var _ref1;
+        return _this.fetch(_.extend(opts, {
+          data: _.extend((_ref1 = opts.data) != null ? _ref1 : {}, {
+            page: page += 1
+          }),
+          remove: false,
+          complete: function() {},
+          success: function(col, res) {
+            if (typeof options.each === "function") {
+              options.each(col, res);
+            }
+            if (res.length < page * 12) {
+              if (typeof options.success === "function") {
+                options.success(_this);
+              }
+              return typeof options.complete === "function" ? options.complete(_this) : void 0;
+            } else {
+              return fetchPage();
+            }
+          },
+          error: function() {
+            if (typeof options.error === "function") {
+              options.error.apply(options, arguments);
+            }
+            return typeof options.complete === "function" ? options.complete() : void 0;
+          }
+        }));
+      };
+    })(this);
+    return fetchPage();
+  };
+
+  Base.prototype.initialize = function(models, options) {
+    if (options == null) {
+      options = {};
+    }
+    this.setOptions(options);
+    return Base.__super__.initialize.apply(this, arguments);
+  };
+
+  Base.prototype.next = function(model) {
+    return this.at((this.indexOf(model) + 1) % _.size(this.models));
+  };
+
+  Base.prototype.prev = function(model) {
+    var index;
+    index = this.indexOf(model) - 1;
+    return this.at(index > -1 ? index : _.size(this.models) - 1);
+  };
+
+  Base.prototype.last = function() {
+    return this.at(this.length - 1);
+  };
+
+  Base.prototype.isEmpty = function() {
+    return this.models.length === 0;
+  };
+
+  return Base;
+
+})(Collection);
+
+
+},{"../lib/model_lib.coffee":19,"../models/base.coffee":20,"chaplin":28,"sharify":34,"underscore":36}],4:[function(require,module,exports){
+var Base, Block, Blocks, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+sd = require("sharify").data;
+
+Block = require("../models/block.coffee");
+
+module.exports = Blocks = (function(_super) {
+  __extends(Blocks, _super);
+
+  function Blocks() {
+    return Blocks.__super__.constructor.apply(this, arguments);
+  }
+
+  Blocks.prototype.model = Block;
+
+  return Blocks;
+
+})(Base);
+
+
+},{"../models/block.coffee":21,"./base.coffee":3,"sharify":34}],5:[function(require,module,exports){
+var Block, Blocks, ChannelBlocks, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Blocks = require("./blocks.coffee");
+
+sd = require("sharify").data;
+
+Block = require("../models/block.coffee");
+
+module.exports = ChannelBlocks = (function(_super) {
+  __extends(ChannelBlocks, _super);
+
+  function ChannelBlocks() {
+    return ChannelBlocks.__super__.constructor.apply(this, arguments);
+  }
+
+  ChannelBlocks.prototype.model = Block;
+
+  ChannelBlocks.prototype.url = function() {
+    return "" + sd.API_URL + "/channels/" + this.slug + "/skeleton";
+  };
+
+  ChannelBlocks.prototype.parse = function(data) {
+    return data.contents;
+  };
+
+  ChannelBlocks.prototype.initialize = function(models, options) {
+    return this.slug = options != null ? options.channel_slug : void 0;
+  };
+
+  return ChannelBlocks;
+
+})(Blocks);
+
+
+},{"../models/block.coffee":21,"./blocks.coffee":4,"sharify":34}],6:[function(require,module,exports){
+var Base, CurrentUser, Feed, FeedGroup, FeedItem, params, sd, _,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require('./base.coffee');
+
+FeedGroup = require('./feed_group.coffee');
+
+FeedItem = require('../models/feed_item.coffee');
+
+CurrentUser = require('../models/current_user.coffee');
+
+sd = require("sharify").data;
+
+_ = require('underscore');
+
+params = require('query-params');
+
+module.exports = Feed = (function(_super) {
+  __extends(Feed, _super);
+
+  function Feed() {
+    return Feed.__super__.constructor.apply(this, arguments);
+  }
+
+  Feed.prototype.model = FeedGroup;
+
+  Feed.prototype.defaultOptions = {
+    page: 1,
+    per: 50,
+    type: "primary"
+  };
+
+  Feed.prototype.initialize = function(models, options) {
+    Feed.__super__.initialize.apply(this, arguments);
+    this.subscribeEvent('feed:loaded', this.setupListener);
+    return this.subscribeEvent('activity:recieved', this.maybeGetActivity);
+  };
+
+  Feed.prototype.comparator = function(group) {
+    var date;
+    date = new Date(group.models[0].get('created_at'));
+    return -date.valueOf();
+  };
+
+  Feed.prototype.url = function() {
+    var object_id, url;
+    url = sd.API_URL;
+    console.log('FEED @options.type', this.options.type);
+    switch (this.options.type) {
+      case "primary":
+        url += "/feed";
+        break;
+      case "global":
+        url += "/feed/global";
+        break;
+      case "network":
+        object_id = this.options.object_id != null ? this.options.object_id : CurrentUser.id;
+        url += "/user/" + object_id + "/network";
+        break;
+      default:
+        url += "/" + this.options.type + "/" + this.options.object_id + "/feed";
+    }
+    return url + '?' + this.getParams();
+  };
+
+  Feed.prototype.getParams = function() {
+    var parameters;
+    if (this.options.type === 'primary') {
+      parameters = {
+        offset: (this.options.page - 1) * this.options.per
+      };
+    } else {
+      parameters = _.pick(this.options, ['page', 'per']);
+    }
+    return params.encode(parameters);
+  };
+
+  Feed.prototype.parse = function(data) {
+    var groups, items, splitGroups;
+    if (data.item_count === 0) {
+      this.exhausted = true;
+    }
+    items = _.filter(data.items, (function(_this) {
+      return function(model) {
+        return model.user != null;
+      };
+    })(this));
+    groups = _.groupBy(items, function(model) {
+      var _ref, _ref1;
+      return "" + ((_ref = model.user) != null ? _ref.id : void 0) + "_" + ((_ref1 = model.target) != null ? _ref1.id : void 0) + "_" + model.action;
+    });
+    splitGroups = [];
+    _.each(groups, function(group) {
+      var prevDateVal, workingGroup;
+      group = _.sortBy(group, function(model) {
+        return -new Date(model.created_at);
+      });
+      workingGroup = [];
+      prevDateVal = null;
+      _.each(group, function(model) {
+        var dateVal;
+        dateVal = new Date(model.created_at);
+        if (prevDateVal && (dateVal - prevDateVal) > (60 * 60)) {
+          splitGroups.push(workingGroup);
+          workingGroup = [];
+        }
+        workingGroup.push(model);
+        return prevDateVal = dateVal;
+      });
+      return splitGroups.push(workingGroup);
+    });
+    groups = _.sortBy(splitGroups, (function(_this) {
+      return function(group) {
+        group = _.sortBy(group, function(model) {
+          return -new Date(model.created_at);
+        });
+        return -new Date(group[0].created_at);
+      };
+    })(this));
+    groups = _.map(groups, function(group) {
+      return _.map(group, function(item) {
+        return new FeedItem(item);
+      });
+    });
+    return groups;
+  };
+
+  Feed.prototype.findGroupByItem = function(item) {
+    var group;
+    group = this.find(function(group) {
+      var _ref, _ref1;
+      if (group.models) {
+        return group.models[0].get('action') === item.action && group.models[0].get('user').id === item.user.id && ((_ref = group.models[0].get('target')) != null ? _ref.id : void 0) === ((_ref1 = item.target) != null ? _ref1.id : void 0);
+      }
+    });
+    return group;
+  };
+
+  Feed.prototype.loadNext = function() {
+    if (this.exhausted) {
+      return false;
+    }
+    ++this.options.page;
+    return this.fetch({
+      remove: false
+    });
+  };
+
+  Feed.prototype.setupListener = function() {};
+
+  Feed.prototype.maybeGetActivity = function(score) {};
+
+  Feed.prototype.addOrMergeNew = function(item) {
+    var group, item_model, model;
+    group = this.findGroupByItem(item);
+    if (group != null) {
+      item_model = new FeedItem(item);
+      group.unshift(item_model);
+    } else {
+      item_model = new FeedItem(item);
+      model = new FeedGroup([item]);
+      this.models.push(model);
+      ++this.length;
+    }
+    this.sort({
+      silent: true
+    });
+    return this.trigger('group:added');
+  };
+
+  Feed.prototype.changeType = function(options) {
+    _.extend(this.options, options);
+    mediator.publish('pageload:start');
+    return this.fetch({
+      remove: true,
+      success: (function(_this) {
+        return function() {
+          _this.exhausted = false;
+          return mediator.publish('pageload:end');
+        };
+      })(this)
+    });
+  };
+
+  return Feed;
+
+})(Base);
+
+
+},{"../models/current_user.coffee":23,"../models/feed_item.coffee":24,"./base.coffee":3,"./feed_group.coffee":7,"query-params":33,"sharify":34,"underscore":36}],7:[function(require,module,exports){
+var Base, Block, Channel, FeedGroup, FeedItem, _,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+FeedItem = require('../models/feed_item.coffee');
+
+Block = require('../models/block.coffee');
+
+Channel = require('../models/channel.coffee');
+
+_ = require('underscore');
+
+_.mixin(require('underscore.string'));
+
+module.exports = FeedGroup = (function(_super) {
+  __extends(FeedGroup, _super);
+
+  function FeedGroup() {
+    return FeedGroup.__super__.constructor.apply(this, arguments);
+  }
+
+  FeedGroup.prototype.model = FeedItem;
+
+  FeedGroup.prototype.initialize = function(models) {
+    FeedGroup.__super__.initialize.apply(this, arguments);
+    return this.cid = _.uniqueId('fg');
+  };
+
+  FeedGroup.prototype.isNew = function() {
+    return this.any(function(model) {
+      return model.get('is_read') === false;
+    });
+  };
+
+  FeedGroup.prototype._validate = function() {
+    return true;
+  };
+
+  FeedGroup.prototype.items = function() {
+    return this.map(function(model) {
+      var block;
+      block = new Block(model.get('item'));
+      block.set('connected_by_username', model.get('user').username);
+      return block.set('connected_by_user_slug', model.get('user').slug);
+    });
+  };
+
+  FeedGroup.prototype.channel = function() {
+    if (this.models[0].get('action') === 'added') {
+      return new Channel(this.models[0].get('target'));
+    }
+  };
+
+  FeedGroup.prototype.actor = function() {
+    return this.models[0].get('user');
+  };
+
+  FeedGroup.prototype.action = function() {
+    return this.models[0].get('action');
+  };
+
+  FeedGroup.prototype.is_single = function() {
+    return this.length === 1;
+  };
+
+  FeedGroup.prototype.single_subject_link = function(subject) {
+    if (this.models[0].get('item')["class"] === 'Channel') {
+      return "/" + (this.models[0].get('item').user.slug) + "/" + (this.models[0].get('item').slug);
+    } else if (this.models[0].get('item')["class"] === 'User') {
+      return "/" + (this.models[0].get('item').slug);
+    } else {
+      return "/#/block/" + (this.models[0].get('item').id);
+    }
+  };
+
+  FeedGroup.prototype.single_subject_class = function() {
+    return this.models[0].get('item').base_class.toLowerCase();
+  };
+
+  FeedGroup.prototype.single_subject = function() {
+    if (this.models[0].get('item').username != null) {
+      return this.models[0].get('item').username;
+    } else if (this.models[0].get('item')["class"] === "Channel") {
+      return this.models[0].get('item').title;
+    } else {
+      return this._format_subject();
+    }
+  };
+
+  FeedGroup.prototype.grouped_subject = function() {
+    var grouped, groups;
+    grouped = this.groupBy(function(model) {
+      return model.get('item')["class"];
+    });
+    groups = _.map(grouped, function(group) {
+      var first, s, type, _ref, _ref1;
+      first = group[0];
+      type = first.get('item_type') === 'Comment' ? (_ref = first.get('target')) != null ? _ref["class"].toLowerCase() : void 0 : (_ref1 = first.get('item')["class"]) != null ? _ref1.toLowerCase() : void 0;
+      if (type === "media") {
+        type = "embed";
+      }
+      s = group.length > 1 ? "s" : "";
+      return "" + group.length + " " + type + s;
+    });
+    return _.toSentence(groups);
+  };
+
+  FeedGroup.prototype._format_subject = function() {
+    var a, klass;
+    a = "a";
+    klass = this.models[0].get('item')["class"].toLowerCase();
+    if (klass === "media") {
+      klass = "embed";
+      a = "an";
+    }
+    if (klass === "attachment" || klass === "image") {
+      a = "an";
+    }
+    return "" + a + " " + klass;
+  };
+
+  FeedGroup.prototype.connector = function() {
+    return this.models[0].get('connector');
+  };
+
+  FeedGroup.prototype.single_target_link = function(subject) {
+    if (this.models[0].get('target')["class"] === 'Channel') {
+      return "/" + (this.models[0].get('target').user.slug) + "/" + (this.models[0].get('target').slug);
+    } else if (this.models[0].get('target')["class"] === 'User') {
+      return "/" + (this.models[0].get('target').slug);
+    } else {
+      return "/#/block/" + (this.models[0].get('target').id);
+    }
+  };
+
+  FeedGroup.prototype.single_target = function() {
+    if (this.models[0].has('target')) {
+      if (this.models[0].get('target').username != null) {
+        return this.models[0].get('target').username;
+      } else if (this.models[0].get('target')["class"] === "Channel") {
+        return this.models[0].get('target').title;
+      } else {
+
+      }
+    }
+  };
+
+  FeedGroup.prototype.timestamp = function() {
+    return this.models[0].createdAtAgo();
+  };
+
+  return FeedGroup;
+
+})(Base);
+
+
+},{"../models/block.coffee":21,"../models/channel.coffee":22,"../models/feed_item.coffee":24,"./base.coffee":3,"underscore":36,"underscore.string":35}],8:[function(require,module,exports){
+var $, Backbone, Block, BlockCollectionView, LightboxRouter, LightboxView, mediator, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -12,46 +616,824 @@ Backbone.$ = $;
 
 sd = require("sharify").data;
 
-Channel = require("../../models/channel.coffee");
+mediator = require('../../../lib/mediator.coffee');
 
-module.exports.ChannelView = ChannelView = (function(_super) {
-  __extends(ChannelView, _super);
+Block = require('../../../models/block.coffee');
 
-  function ChannelView() {
+LightboxRouter = require('../../lightbox/lightbox_router.coffee');
+
+LightboxView = require('../../lightbox/client/lightbox_view.coffee');
+
+module.exports = BlockCollectionView = (function(_super) {
+  __extends(BlockCollectionView, _super);
+
+  function BlockCollectionView() {
     this.render = __bind(this.render, this);
-    return ChannelView.__super__.constructor.apply(this, arguments);
+    return BlockCollectionView.__super__.constructor.apply(this, arguments);
   }
 
-  ChannelView.prototype.initialize = function() {
-    return this.model.on("sync", this.render);
+  BlockCollectionView.prototype.initialize = function() {
+    mediator.on('open:lightbox', this.openLightbox, this);
+    new LightboxRouter;
+    return Backbone.history.start();
   };
 
-  ChannelView.prototype.render = function() {
-    return this.$("header").html(headerTemplate({
-      channel: this.model,
-      username: sd.USERNAME
-    }));
+  BlockCollectionView.prototype.openLightbox = function(id) {
+    var block;
+    block = new Block(id);
+    return this.lbv = new LightboxView({
+      el: $('#l-lightbox-container'),
+      model: block
+    });
   };
 
-  return ChannelView;
+  BlockCollectionView.prototype.render = function() {};
+
+  return BlockCollectionView;
 
 })(Backbone.View);
 
-module.exports.init = function() {
-  console.log('USERNAME', sd.USERNAME);
-  return new ChannelView({
-    el: $("body"),
-    model: new Channel(sd.CHANNEL),
-    username: sd.USERNAME
-  });
+
+},{"../../../lib/mediator.coffee":18,"../../../models/block.coffee":21,"../../lightbox/client/lightbox_view.coffee":14,"../../lightbox/lightbox_router.coffee":15,"backbone":26,"jquery":31,"sharify":34}],9:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (blocks, channel) {
+jade_mixins["avatar"] = function(user){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+var splitName = user.get('username').split(" ")
+if ( splitName)
+{
+var initials = []
+// iterate splitName
+;(function(){
+  var $$obj = splitName;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var name = $$obj[$index];
+
+initials.push(name.substring(0, 1))
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var name = $$obj[$index];
+
+initials.push(name.substring(0, 1))
+    }
+
+  }
+}).call(this);
+
+var initials = initials.join("").substring(0,4)
+}
+buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
+};
+// iterate blocks
+;(function(){
+  var $$obj = blocks;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var block = $$obj[$index];
+
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+if(block.get('class') != 'Channel' || block.get('class') != 'User')
+{
+buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"grid__block__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Channel')
+{
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'User')
+{
+jade_mixins["avatar"](block);
+buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+}
+buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
+if(channel)
+{
+buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
+}
+buf.push("</div></div>");
+}
+buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var block = $$obj[$index];
+
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+if(block.get('class') != 'Channel' || block.get('class') != 'User')
+{
+buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"grid__block__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Channel')
+{
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'User')
+{
+jade_mixins["avatar"](block);
+buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+}
+buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
+if(channel)
+{
+buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
+}
+buf.push("</div></div>");
+}
+buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+    }
+
+  }
+}).call(this);
+}("blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
+};
+},{"jade/runtime":30}],10:[function(require,module,exports){
+var $, Backbone, FeedView, feedTemplate, sd,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+feedTemplate = function() {
+  return require('../../../components/feed/templates/feed.jade').apply(null, arguments);
 };
 
+module.exports = FeedView = (function(_super) {
+  __extends(FeedView, _super);
 
-},{"../../models/channel.coffee":5,"backbone":6,"jquery":10,"sharify":12}],2:[function(require,module,exports){
-require('jquery')(require("../apps/channel/client.coffee").init);
+  function FeedView() {
+    this.render = __bind(this.render, this);
+    return FeedView.__super__.constructor.apply(this, arguments);
+  }
+
+  FeedView.prototype.initialize = function() {
+    this.collection.on("sync", this.render);
+    return this.collection.fetch();
+  };
+
+  FeedView.prototype.render = function() {
+    return this.$el.html(feedTemplate({
+      feed: this.collection.models
+    }));
+  };
+
+  return FeedView;
+
+})(Backbone.View);
 
 
-},{"../apps/channel/client.coffee":1,"jquery":10}],3:[function(require,module,exports){
+},{"../../../components/feed/templates/feed.jade":12,"backbone":26,"jquery":31,"sharify":34}],11:[function(require,module,exports){
+var FeedView, SmallFeedView, feedTemplate, sd,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+FeedView = require("./feed_view.coffee");
+
+sd = require("sharify").data;
+
+feedTemplate = function() {
+  return require('../../../components/feed/templates/small_feed.jade').apply(null, arguments);
+};
+
+module.exports = SmallFeedView = (function(_super) {
+  __extends(SmallFeedView, _super);
+
+  function SmallFeedView() {
+    this.render = __bind(this.render, this);
+    return SmallFeedView.__super__.constructor.apply(this, arguments);
+  }
+
+  SmallFeedView.prototype.initialize = function() {
+    SmallFeedView.__super__.initialize.apply(this, arguments);
+    return console.log('small_feed', this.collection);
+  };
+
+  SmallFeedView.prototype.render = function() {
+    return this.$el.html(feedTemplate({
+      feed: this.collection.models
+    }));
+  };
+
+  return SmallFeedView;
+
+})(FeedView);
+
+
+},{"../../../components/feed/templates/small_feed.jade":13,"./feed_view.coffee":10,"sharify":34}],12:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (feed, blocks, channel) {
+// iterate feed
+;(function(){
+  var $$obj = feed;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var group = $$obj[$index];
+
+buf.push("<div class=\"feed-group\"><div class=\"feed-group__sentence\"><a" + (jade.attr("href", "/" + (group.actor().slug) + "", true, false)) + " class=\"username\">" + (jade.escape(null == (jade_interp = group.actor().username) ? "" : jade_interp)) + "</a><span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.action()) ? "" : jade_interp)) + "</span><span>&nbsp;</span>");
+if ( group.is_single())
+{
+buf.push("<span><a" + (jade.attr("href", "" + (group.single_subject_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_subject()) ? "" : jade_interp)) + "</a></span>");
+}
+else
+{
+buf.push("<span>" + (jade.escape(null == (jade_interp = group.grouped_subject()) ? "" : jade_interp)) + "</span>");
+}
+if ( group.connector())
+{
+buf.push("<span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.connector()) ? "" : jade_interp)) + "</span><span>&nbsp;</span><a" + (jade.attr("href", "" + (group.single_target_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_target()) ? "" : jade_interp)) + "</a>");
+}
+buf.push("<div class=\"feed-group__timestamp\">" + (jade.escape(null == (jade_interp = group.timestamp()) ? "" : jade_interp)) + "</div></div>");
+blocks = group.items()
+channel = group.channel()
+buf.push("<div class=\"grid grid--feed\">");
+jade_mixins["avatar"] = function(user){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+var splitName = user.get('username').split(" ")
+if ( splitName)
+{
+var initials = []
+// iterate splitName
+;(function(){
+  var $$obj = splitName;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var name = $$obj[$index];
+
+initials.push(name.substring(0, 1))
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var name = $$obj[$index];
+
+initials.push(name.substring(0, 1))
+    }
+
+  }
+}).call(this);
+
+var initials = initials.join("").substring(0,4)
+}
+buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
+};
+// iterate blocks
+;(function(){
+  var $$obj = blocks;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var block = $$obj[$index];
+
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+if(block.get('class') != 'Channel' || block.get('class') != 'User')
+{
+buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"grid__block__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Channel')
+{
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'User')
+{
+jade_mixins["avatar"](block);
+buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+}
+buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
+if(channel)
+{
+buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
+}
+buf.push("</div></div>");
+}
+buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var block = $$obj[$index];
+
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+if(block.get('class') != 'Channel' || block.get('class') != 'User')
+{
+buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"grid__block__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Channel')
+{
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'User')
+{
+jade_mixins["avatar"](block);
+buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+}
+buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
+if(channel)
+{
+buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
+}
+buf.push("</div></div>");
+}
+buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+    }
+
+  }
+}).call(this);
+
+buf.push("</div></div>");
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var group = $$obj[$index];
+
+buf.push("<div class=\"feed-group\"><div class=\"feed-group__sentence\"><a" + (jade.attr("href", "/" + (group.actor().slug) + "", true, false)) + " class=\"username\">" + (jade.escape(null == (jade_interp = group.actor().username) ? "" : jade_interp)) + "</a><span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.action()) ? "" : jade_interp)) + "</span><span>&nbsp;</span>");
+if ( group.is_single())
+{
+buf.push("<span><a" + (jade.attr("href", "" + (group.single_subject_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_subject()) ? "" : jade_interp)) + "</a></span>");
+}
+else
+{
+buf.push("<span>" + (jade.escape(null == (jade_interp = group.grouped_subject()) ? "" : jade_interp)) + "</span>");
+}
+if ( group.connector())
+{
+buf.push("<span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.connector()) ? "" : jade_interp)) + "</span><span>&nbsp;</span><a" + (jade.attr("href", "" + (group.single_target_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_target()) ? "" : jade_interp)) + "</a>");
+}
+buf.push("<div class=\"feed-group__timestamp\">" + (jade.escape(null == (jade_interp = group.timestamp()) ? "" : jade_interp)) + "</div></div>");
+blocks = group.items()
+channel = group.channel()
+buf.push("<div class=\"grid grid--feed\">");
+jade_mixins["avatar"] = function(user){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+var splitName = user.get('username').split(" ")
+if ( splitName)
+{
+var initials = []
+// iterate splitName
+;(function(){
+  var $$obj = splitName;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var name = $$obj[$index];
+
+initials.push(name.substring(0, 1))
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var name = $$obj[$index];
+
+initials.push(name.substring(0, 1))
+    }
+
+  }
+}).call(this);
+
+var initials = initials.join("").substring(0,4)
+}
+buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
+};
+// iterate blocks
+;(function(){
+  var $$obj = blocks;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var block = $$obj[$index];
+
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+if(block.get('class') != 'Channel' || block.get('class') != 'User')
+{
+buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"grid__block__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Channel')
+{
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'User')
+{
+jade_mixins["avatar"](block);
+buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+}
+buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
+if(channel)
+{
+buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
+}
+buf.push("</div></div>");
+}
+buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var block = $$obj[$index];
+
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+if(block.get('class') != 'Channel' || block.get('class') != 'User')
+{
+buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('display')) + "", true, false)) + " class=\"grid__block__content__image\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"grid__block__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Channel')
+{
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'User')
+{
+jade_mixins["avatar"](block);
+buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+}
+buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
+if(channel)
+{
+buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
+}
+buf.push("</div></div>");
+}
+buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+    }
+
+  }
+}).call(this);
+
+buf.push("</div></div>");
+    }
+
+  }
+}).call(this);
+}("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined,"blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
+};
+},{"jade/runtime":30}],13:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (feed) {
+// iterate feed
+;(function(){
+  var $$obj = feed;
+  if ('number' == typeof $$obj.length) {
+
+    for (var $index = 0, $$l = $$obj.length; $index < $$l; $index++) {
+      var group = $$obj[$index];
+
+buf.push("<div class=\"feed-group__sentence\"><a" + (jade.attr("href", "/" + (group.actor().slug) + "", true, false)) + " class=\"username\">" + (jade.escape(null == (jade_interp = group.actor().username) ? "" : jade_interp)) + "</a><span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.action()) ? "" : jade_interp)) + "</span><span>&nbsp;</span>");
+if ( group.is_single())
+{
+buf.push("<span><a" + (jade.attr("href", "" + (group.single_subject_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_subject()) ? "" : jade_interp)) + "</a></span>");
+}
+else
+{
+buf.push("<span>" + (jade.escape(null == (jade_interp = group.grouped_subject()) ? "" : jade_interp)) + "</span>");
+}
+if ( group.connector())
+{
+buf.push("<span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.connector()) ? "" : jade_interp)) + "</span><span>&nbsp;</span><a" + (jade.attr("href", "" + (group.single_target_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_target()) ? "" : jade_interp)) + "</a>");
+}
+buf.push("<div class=\"feed-group__timestamp\">" + (jade.escape(null == (jade_interp = group.timestamp()) ? "" : jade_interp)) + "</div></div>");
+    }
+
+  } else {
+    var $$l = 0;
+    for (var $index in $$obj) {
+      $$l++;      var group = $$obj[$index];
+
+buf.push("<div class=\"feed-group__sentence\"><a" + (jade.attr("href", "/" + (group.actor().slug) + "", true, false)) + " class=\"username\">" + (jade.escape(null == (jade_interp = group.actor().username) ? "" : jade_interp)) + "</a><span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.action()) ? "" : jade_interp)) + "</span><span>&nbsp;</span>");
+if ( group.is_single())
+{
+buf.push("<span><a" + (jade.attr("href", "" + (group.single_subject_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_subject()) ? "" : jade_interp)) + "</a></span>");
+}
+else
+{
+buf.push("<span>" + (jade.escape(null == (jade_interp = group.grouped_subject()) ? "" : jade_interp)) + "</span>");
+}
+if ( group.connector())
+{
+buf.push("<span>&nbsp;</span><span>" + (jade.escape(null == (jade_interp = group.connector()) ? "" : jade_interp)) + "</span><span>&nbsp;</span><a" + (jade.attr("href", "" + (group.single_target_link()) + "", true, false)) + ">" + (jade.escape(null == (jade_interp = group.single_target()) ? "" : jade_interp)) + "</a>");
+}
+buf.push("<div class=\"feed-group__timestamp\">" + (jade.escape(null == (jade_interp = group.timestamp()) ? "" : jade_interp)) + "</div></div>");
+    }
+
+  }
+}).call(this);
+}("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined));;return buf.join("");
+};
+},{"jade/runtime":30}],14:[function(require,module,exports){
+var $, Backbone, Feed, LightboxView, SmallFeedView, lightboxTemplate, mediator, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+mediator = require('../../../lib/mediator.coffee');
+
+Feed = require('../../../collections/feed.coffee');
+
+SmallFeedView = require('../../feed/client/small_feed_view.coffee');
+
+lightboxTemplate = function() {
+  return require('../templates/lightbox.jade').apply(null, arguments);
+};
+
+module.exports = LightboxView = (function(_super) {
+  __extends(LightboxView, _super);
+
+  function LightboxView() {
+    return LightboxView.__super__.constructor.apply(this, arguments);
+  }
+
+  LightboxView.prototype.events = {
+    'click .lightbox--close': 'close'
+  };
+
+  LightboxView.prototype.initialize = function() {
+    $('body').addClass('is-lightbox');
+    this.$el.addClass('is-active');
+    this.model.on("sync", this.render, this);
+    return this.model.fetch();
+  };
+
+  LightboxView.prototype.render = function() {
+    var feed;
+    this.$el.html(lightboxTemplate({
+      block: this.model
+    }));
+    feed = new Feed(null, {
+      type: 'block',
+      object_id: this.model.id
+    });
+    return new SmallFeedView({
+      el: this.$("#lightbox__feed"),
+      collection: feed
+    });
+  };
+
+  LightboxView.prototype.close = function() {
+    this.$el.html("");
+    $('body').removeClass('is-lightbox');
+    this.$el.removeClass('is-active');
+    return mediator.trigger('lightbox:closed');
+  };
+
+  return LightboxView;
+
+})(Backbone.View);
+
+
+},{"../../../collections/feed.coffee":6,"../../../lib/mediator.coffee":18,"../../feed/client/small_feed_view.coffee":11,"../templates/lightbox.jade":16,"backbone":26,"jquery":31,"sharify":34}],15:[function(require,module,exports){
+var Backbone, LightboxRouter, mediator, _,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require('backbone');
+
+_ = require('underscore');
+
+mediator = require('../../lib/mediator.coffee');
+
+module.exports = LightboxRouter = (function(_super) {
+  __extends(LightboxRouter, _super);
+
+  function LightboxRouter() {
+    return LightboxRouter.__super__.constructor.apply(this, arguments);
+  }
+
+  LightboxRouter.prototype.routes = {
+    'block/:id': 'showBlock'
+  };
+
+  LightboxRouter.prototype.initialize = function() {
+    return mediator.on('lightbox:closed', this.removeRoute, this);
+  };
+
+  LightboxRouter.prototype.removeRoute = function() {};
+
+  LightboxRouter.prototype.showBlock = function(id) {
+    return mediator.trigger('open:lightbox', {
+      id: id
+    });
+  };
+
+  return LightboxRouter;
+
+})(Backbone.Router);
+
+
+},{"../../lib/mediator.coffee":18,"backbone":26,"underscore":36}],16:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+;var locals_for_with = (locals || {});(function (block) {
+buf.push("<div id=\"l-lightbox-container_inner\"><div class=\"lightbox__content valign-outer\"><div class=\"valign-inner\">");
+if(block.has('image'))
+{
+buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('original')) + "", true, false)) + " class=\"lightbox__content__img\"/>");
+}
+if(block.get('class') == 'Text')
+{
+buf.push("<div class=\"lightbox__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.has('title'))
+{
+buf.push("<h2 class=\"lightbox__content__title\">" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.has('description'))
+{
+buf.push("<div class=\"lightbox__content__description\">" + (null == (jade_interp = block.get('description_html')) ? "" : jade_interp) + "</div>");
+}
+buf.push("</div></div><div id=\"lightbox__feed\" class=\"lightbox__feed\"></div></div><a class=\"lightbox--close\"><h1>&times;</h1></a>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined));;return buf.join("");
+};
+},{"jade/runtime":30}],17:[function(require,module,exports){
+var $, Backbone, Block, Blocks, Channel, NewBlockView, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+Blocks = require('../../../collections/blocks.coffee');
+
+Block = require('../../../models/block.coffee');
+
+Channel = require('../../../models/channel.coffee');
+
+module.exports = NewBlockView = (function(_super) {
+  __extends(NewBlockView, _super);
+
+  function NewBlockView() {
+    return NewBlockView.__super__.constructor.apply(this, arguments);
+  }
+
+  NewBlockView.prototype.events = {
+    'click .grid__block--new-block__plus_button': 'showAddBlockForm',
+    'click .grid__block--new-block__cancel': 'cancelForm',
+    'click .grid__block--new-block__submit': 'createBlock'
+  };
+
+  NewBlockView.prototype.initialize = function(options) {
+    this.blocks = options.blocks;
+    return this.$field = this.$('.grid__block--new-block__content-field');
+  };
+
+  NewBlockView.prototype.showAddBlockForm = function() {
+    this.$el.addClass('active');
+    return this.$('.grid__block--new-block__add-block').addClass('active');
+  };
+
+  NewBlockView.prototype.cancelForm = function(e) {
+    var $parent;
+    $parent = $(e.target).closest('.grid__block--new-block__form');
+    this.$el.removeClass('active');
+    return $parent.removeClass('active');
+  };
+
+  NewBlockView.prototype.isURL = function() {
+    var string, urlregex;
+    string = this.$field.val();
+    urlregex = /^((ht{1}tp(s)?:\/\/)[-a-zA-Z0-9@:,!$%_\+.~#?&\(\)\/\/=]+)$/;
+    return urlregex.test(string);
+  };
+
+  NewBlockView.prototype.fieldIsntEmpty = function() {
+    return this.$field.val() !== "";
+  };
+
+  NewBlockView.prototype.createBlock = function() {
+    var block;
+    if (this.fieldIsntEmpty()) {
+      block = new Block;
+      if (this.isURL()) {
+        block.set({
+          source: this.$field.val()
+        }, {
+          silent: true
+        });
+      } else {
+        block.set({
+          content: this.$field.val()
+        }, {
+          silent: true
+        });
+      }
+      console.log('our new block', block.toJSON(), this.blocks, this.blocks.create);
+      return this.blocks.create(block.toJSON(), {
+        url: "" + sd.API_URL + "/channels/" + (this.model.get('slug')) + "/blocks",
+        success: function(block) {
+          return console.log('block created', block);
+        }
+      });
+    }
+  };
+
+  return NewBlockView;
+
+})(Backbone.View);
+
+
+},{"../../../collections/blocks.coffee":4,"../../../models/block.coffee":21,"../../../models/channel.coffee":22,"backbone":26,"jquery":31,"sharify":34}],18:[function(require,module,exports){
+var Backbone, mediator, _;
+
+_ = require('underscore');
+
+Backbone = require('backbone');
+
+mediator = _.extend({}, Backbone.Events);
+
+module.exports = (typeof window !== "undefined" && window !== null ? window.__mediator != null ? window.__mediator : window.__mediator = mediator : void 0) || mediator;
+
+
+},{"backbone":26,"underscore":36}],19:[function(require,module,exports){
 var Chaplin, ModelLib, _;
 
 Chaplin = require('chaplin');
@@ -84,7 +1466,7 @@ ModelLib = {
 module.exports = _.extend(ModelLib, Chaplin.SyncMachine);
 
 
-},{"chaplin":8,"underscore":13}],4:[function(require,module,exports){
+},{"chaplin":28,"underscore":36}],20:[function(require,module,exports){
 var Backbone, Base, Model, ModelLib, moment, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -237,7 +1619,57 @@ module.exports = Base = (function(_super) {
 })(Model);
 
 
-},{"../lib/model_lib.coffee":3,"backbone":6,"chaplin":8,"moment":11,"sharify":12,"underscore":13}],5:[function(require,module,exports){
+},{"../lib/model_lib.coffee":19,"backbone":26,"chaplin":28,"moment":32,"sharify":34,"underscore":36}],21:[function(require,module,exports){
+var Base, Block, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+sd = require("sharify").data;
+
+module.exports = Block = (function(_super) {
+  __extends(Block, _super);
+
+  function Block() {
+    return Block.__super__.constructor.apply(this, arguments);
+  }
+
+  Block.prototype.url = function() {
+    return "" + sd.API_URL + "/blocks/" + this.id;
+  };
+
+  Block.prototype.getImageSize = function(size) {
+    var _ref, _ref1;
+    if (this.has('image')) {
+      return (_ref = this.get('image')) != null ? (_ref1 = _ref[size]) != null ? _ref1.url : void 0 : void 0;
+    }
+  };
+
+  Block.prototype.getVisibility = function() {
+    if (this.get('class') === 'Channel') {
+      return this.get('status');
+    } else {
+      return this.get('visibility');
+    }
+  };
+
+  Block.prototype.getHref = function() {
+    if (this.get('class') === 'Channel') {
+      return "/" + (this.get('user').slug) + "/" + (this.get('slug'));
+    } else if (this.get('class') === 'User') {
+      return "/" + (this.get('slug'));
+    } else {
+      return "#/block/" + this.id;
+    }
+  };
+
+  return Block;
+
+})(Base);
+
+
+},{"./base.coffee":20,"sharify":34}],22:[function(require,module,exports){
 var Base, Channel, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -269,7 +1701,150 @@ module.exports = Channel = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":4,"sharify":12}],6:[function(require,module,exports){
+},{"./base.coffee":20,"sharify":34}],23:[function(require,module,exports){
+var CurrentUser, User, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+User = require("./user.coffee");
+
+sd = require("sharify").data;
+
+module.exports = CurrentUser = (function(_super) {
+  __extends(CurrentUser, _super);
+
+  function CurrentUser() {
+    return CurrentUser.__super__.constructor.apply(this, arguments);
+  }
+
+  CurrentUser.prototype.url = function() {
+    return "" + sd.API_URL + "/accounts";
+  };
+
+  CurrentUser.prototype.sync = function(method, model, options) {
+    if (options == null) {
+      options = {};
+    }
+    console.log('sync CurrentUser', this);
+    if (options.data == null) {
+      options.data = {};
+    }
+    options.data.auth_token = this.get('access_token');
+    return CurrentUser.__super__.sync.apply(this, arguments);
+  };
+
+  CurrentUser.prototype.parse = function(response) {
+    return response.user;
+  };
+
+  CurrentUser.prototype.canEditChannel = function(channel) {
+    if (channel.get('user').id === this.id || channel.get('status') === 'public') {
+      return true;
+    }
+  };
+
+  return CurrentUser;
+
+})(User);
+
+
+},{"./user.coffee":25,"sharify":34}],24:[function(require,module,exports){
+var Base, FeedItem,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require('./base.coffee');
+
+module.exports = FeedItem = (function(_super) {
+  __extends(FeedItem, _super);
+
+  function FeedItem() {
+    return FeedItem.__super__.constructor.apply(this, arguments);
+  }
+
+  FeedItem.prototype.initialize = function() {
+    var n, obj, thing, type, _i, _len, _ref, _ref1, _results;
+    FeedItem.__super__.initialize.apply(this, arguments);
+    if (this.has('user')) {
+      this.set("user_url", "/users/" + ((_ref = this.get('user')) != null ? _ref.slug : void 0));
+    }
+    _ref1 = ['parent', 'target', 'item'];
+    _results = [];
+    for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+      thing = _ref1[_i];
+      obj = this.get("" + thing);
+      if (obj != null) {
+        this.set("" + thing + "_url", "/" + obj.slug);
+        switch (this.get("" + thing + "_type")) {
+          case "channel":
+            this.set("" + thing + "_readable", obj.title);
+            this.set("" + thing + "_url", "/" + obj.slug);
+            break;
+          case "user":
+            this.set("" + thing + "_readable", obj.username);
+            this.set("" + thing + "_url", "/users/" + obj.slug);
+            break;
+          case "block":
+            type = this.get("" + thing)["class"].toLowerCase();
+            if (type === "media") {
+              type = "embed";
+            }
+            n = type === "image" || type === "embed" || type === "attachment" ? "n" : "";
+            this.set("" + thing + "_readable", "a" + n + " " + type);
+            this.set("" + thing + "_url", "/show/" + obj.id);
+            break;
+          case "comment":
+            this.set("" + thing + "_readable", this.get('target_readable'));
+            this.set("" + thing + "_url", "/show/" + (this.get('target').id));
+        }
+        switch (this.get('action')) {
+          case 'replied to':
+            _results.push(this.set('action', 'commented on'));
+            break;
+          case 'published':
+            _results.push(this.set('action', 'created'));
+            break;
+          default:
+            _results.push(void 0);
+        }
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+
+  return FeedItem;
+
+})(Base);
+
+
+},{"./base.coffee":20}],25:[function(require,module,exports){
+var Base, User, sd,
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Base = require("./base.coffee");
+
+sd = require("sharify").data;
+
+module.exports = User = (function(_super) {
+  __extends(User, _super);
+
+  function User() {
+    return User.__super__.constructor.apply(this, arguments);
+  }
+
+  User.prototype.url = function() {
+    return "" + sd.API_URL + "/users/" + this.id;
+  };
+
+  return User;
+
+})(Base);
+
+
+},{"./base.coffee":20,"sharify":34}],26:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1879,7 +3454,7 @@ module.exports = Channel = (function(_super) {
 
 }));
 
-},{"underscore":7}],7:[function(require,module,exports){
+},{"underscore":27}],27:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3224,7 +4799,7 @@ module.exports = Channel = (function(_super) {
   }
 }).call(this);
 
-},{}],8:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /*!
  * Chaplin 1.0.1
  *
@@ -6335,9 +7910,222 @@ if (typeof define === 'function' && define.amd) {
 }
 
 })();
-},{"backbone":6,"underscore":9}],9:[function(require,module,exports){
-module.exports=require(7)
-},{}],10:[function(require,module,exports){
+},{"backbone":26,"underscore":29}],29:[function(require,module,exports){
+module.exports=require(27)
+},{}],30:[function(require,module,exports){
+(function (global){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+'use strict';
+
+/**
+ * Merge two attribute objects giving precedence
+ * to values in object `b`. Classes are special-cased
+ * allowing for arrays and merging/joining appropriately
+ * resulting in a string.
+ *
+ * @param {Object} a
+ * @param {Object} b
+ * @return {Object} a
+ * @api private
+ */
+
+exports.merge = function merge(a, b) {
+  if (arguments.length === 1) {
+    var attrs = a[0];
+    for (var i = 1; i < a.length; i++) {
+      attrs = merge(attrs, a[i]);
+    }
+    return attrs;
+  }
+  var ac = a['class'];
+  var bc = b['class'];
+
+  if (ac || bc) {
+    ac = ac || [];
+    bc = bc || [];
+    if (!Array.isArray(ac)) ac = [ac];
+    if (!Array.isArray(bc)) bc = [bc];
+    a['class'] = ac.concat(bc).filter(nulls);
+  }
+
+  for (var key in b) {
+    if (key != 'class') {
+      a[key] = b[key];
+    }
+  }
+
+  return a;
+};
+
+/**
+ * Filter null `val`s.
+ *
+ * @param {*} val
+ * @return {Boolean}
+ * @api private
+ */
+
+function nulls(val) {
+  return val != null && val !== '';
+}
+
+/**
+ * join array as classes.
+ *
+ * @param {*} val
+ * @return {String}
+ */
+exports.joinClasses = joinClasses;
+function joinClasses(val) {
+  return Array.isArray(val) ? val.map(joinClasses).filter(nulls).join(' ') : val;
+}
+
+/**
+ * Render the given classes.
+ *
+ * @param {Array} classes
+ * @param {Array.<Boolean>} escaped
+ * @return {String}
+ */
+exports.cls = function cls(classes, escaped) {
+  var buf = [];
+  for (var i = 0; i < classes.length; i++) {
+    if (escaped && escaped[i]) {
+      buf.push(exports.escape(joinClasses([classes[i]])));
+    } else {
+      buf.push(joinClasses(classes[i]));
+    }
+  }
+  var text = joinClasses(buf);
+  if (text.length) {
+    return ' class="' + text + '"';
+  } else {
+    return '';
+  }
+};
+
+/**
+ * Render the given attribute.
+ *
+ * @param {String} key
+ * @param {String} val
+ * @param {Boolean} escaped
+ * @param {Boolean} terse
+ * @return {String}
+ */
+exports.attr = function attr(key, val, escaped, terse) {
+  if ('boolean' == typeof val || null == val) {
+    if (val) {
+      return ' ' + (terse ? key : key + '="' + key + '"');
+    } else {
+      return '';
+    }
+  } else if (0 == key.indexOf('data') && 'string' != typeof val) {
+    return ' ' + key + "='" + JSON.stringify(val).replace(/'/g, '&apos;') + "'";
+  } else if (escaped) {
+    return ' ' + key + '="' + exports.escape(val) + '"';
+  } else {
+    return ' ' + key + '="' + val + '"';
+  }
+};
+
+/**
+ * Render the given attributes object.
+ *
+ * @param {Object} obj
+ * @param {Object} escaped
+ * @return {String}
+ */
+exports.attrs = function attrs(obj, terse){
+  var buf = [];
+
+  var keys = Object.keys(obj);
+
+  if (keys.length) {
+    for (var i = 0; i < keys.length; ++i) {
+      var key = keys[i]
+        , val = obj[key];
+
+      if ('class' == key) {
+        if (val = joinClasses(val)) {
+          buf.push(' ' + key + '="' + val + '"');
+        }
+      } else {
+        buf.push(exports.attr(key, val, false, terse));
+      }
+    }
+  }
+
+  return buf.join('');
+};
+
+/**
+ * Escape the given string of `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+exports.escape = function escape(html){
+  var result = String(html)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  if (result === '' + html) return html;
+  else return result;
+};
+
+/**
+ * Re-throw the given `err` in context to the
+ * the jade in `filename` at the given `lineno`.
+ *
+ * @param {Error} err
+ * @param {String} filename
+ * @param {String} lineno
+ * @api private
+ */
+
+exports.rethrow = function rethrow(err, filename, lineno, str){
+  if (!(err instanceof Error)) throw err;
+  if ((typeof window != 'undefined' || !filename) && !str) {
+    err.message += ' on line ' + lineno;
+    throw err;
+  }
+  try {
+    str = str || _dereq_('fs').readFileSync(filename, 'utf8')
+  } catch (ex) {
+    rethrow(err, null, lineno)
+  }
+  var context = 3
+    , lines = str.split('\n')
+    , start = Math.max(lineno - context, 0)
+    , end = Math.min(lines.length, lineno + context);
+
+  // Error context
+  var context = lines.slice(start, end).map(function(line, i){
+    var curr = i + start + 1;
+    return (curr == lineno ? '  > ' : '    ')
+      + curr
+      + '| '
+      + line;
+  }).join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  err.message = (filename || 'Jade') + ':' + lineno
+    + '\n' + context + '\n\n' + err.message;
+  throw err;
+};
+
+},{"fs":2}],2:[function(_dereq_,module,exports){
+
+},{}]},{},[1])
+(1)
+});
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],31:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -15529,7 +17317,7 @@ return jQuery;
 
 }));
 
-},{}],11:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function (global){
 //! moment.js
 //! version : 2.8.3
@@ -18389,7 +20177,41 @@ return jQuery;
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],12:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
+function encode (o, sep) {
+    var list = [];
+    var key;
+    for (key in o) {
+        if (o[key] != null && typeof o[key] != 'object' &&
+                typeof o[key] != 'function') {
+            list.push(encodeURIComponent(key) + '=' + encodeURIComponent(o[key]));
+        }
+    }
+    return list.join(sep || '&');
+}
+
+var REXP_SPLIT = /&amp;|&|;/gmi;
+function decode (str, sep) {
+    sep = sep||REXP_SPLIT;
+    var result = {};
+    var expr = str.split(sep);
+    var key, val, index;
+    for (var i = 0, len = expr.length; i < len; i++) {
+        index = expr[i].indexOf('=');
+        key = expr[i].substring(0, index);
+        val = expr[i].substring(index+1);
+        if (val) {
+            result[decodeURIComponent(key)] = decodeURIComponent(val);
+        }
+    }
+    return result;
+};
+
+module.exports = {
+    encode: encode,
+    decode: decode
+};
+},{}],34:[function(require,module,exports){
 // Middleware that injects the shared data and sharify script
 module.exports = function(req, res, next) {
 
@@ -18438,6 +20260,681 @@ var bootstrapOnClient = module.exports.bootstrapOnClient = function() {
 };
 bootstrapOnClient();
 
-},{}],13:[function(require,module,exports){
-module.exports=require(7)
+},{}],35:[function(require,module,exports){
+//  Underscore.string
+//  (c) 2010 Esa-Matti Suuronen <esa-matti aet suuronen dot org>
+//  Underscore.string is freely distributable under the terms of the MIT license.
+//  Documentation: https://github.com/epeli/underscore.string
+//  Some code is borrowed from MooTools and Alexandru Marasteanu.
+//  Version '2.3.2'
+
+!function(root, String){
+  'use strict';
+
+  // Defining helper functions.
+
+  var nativeTrim = String.prototype.trim;
+  var nativeTrimRight = String.prototype.trimRight;
+  var nativeTrimLeft = String.prototype.trimLeft;
+
+  var parseNumber = function(source) { return source * 1 || 0; };
+
+  var strRepeat = function(str, qty){
+    if (qty < 1) return '';
+    var result = '';
+    while (qty > 0) {
+      if (qty & 1) result += str;
+      qty >>= 1, str += str;
+    }
+    return result;
+  };
+
+  var slice = [].slice;
+
+  var defaultToWhiteSpace = function(characters) {
+    if (characters == null)
+      return '\\s';
+    else if (characters.source)
+      return characters.source;
+    else
+      return '[' + _s.escapeRegExp(characters) + ']';
+  };
+
+  // Helper for toBoolean
+  function boolMatch(s, matchers) {
+    var i, matcher, down = s.toLowerCase();
+    matchers = [].concat(matchers);
+    for (i = 0; i < matchers.length; i += 1) {
+      matcher = matchers[i];
+      if (!matcher) continue;
+      if (matcher.test && matcher.test(s)) return true;
+      if (matcher.toLowerCase() === down) return true;
+    }
+  }
+
+  var escapeChars = {
+    lt: '<',
+    gt: '>',
+    quot: '"',
+    amp: '&',
+    apos: "'"
+  };
+
+  var reversedEscapeChars = {};
+  for(var key in escapeChars) reversedEscapeChars[escapeChars[key]] = key;
+  reversedEscapeChars["'"] = '#39';
+
+  // sprintf() for JavaScript 0.7-beta1
+  // http://www.diveintojavascript.com/projects/javascript-sprintf
+  //
+  // Copyright (c) Alexandru Marasteanu <alexaholic [at) gmail (dot] com>
+  // All rights reserved.
+
+  var sprintf = (function() {
+    function get_type(variable) {
+      return Object.prototype.toString.call(variable).slice(8, -1).toLowerCase();
+    }
+
+    var str_repeat = strRepeat;
+
+    var str_format = function() {
+      if (!str_format.cache.hasOwnProperty(arguments[0])) {
+        str_format.cache[arguments[0]] = str_format.parse(arguments[0]);
+      }
+      return str_format.format.call(null, str_format.cache[arguments[0]], arguments);
+    };
+
+    str_format.format = function(parse_tree, argv) {
+      var cursor = 1, tree_length = parse_tree.length, node_type = '', arg, output = [], i, k, match, pad, pad_character, pad_length;
+      for (i = 0; i < tree_length; i++) {
+        node_type = get_type(parse_tree[i]);
+        if (node_type === 'string') {
+          output.push(parse_tree[i]);
+        }
+        else if (node_type === 'array') {
+          match = parse_tree[i]; // convenience purposes only
+          if (match[2]) { // keyword argument
+            arg = argv[cursor];
+            for (k = 0; k < match[2].length; k++) {
+              if (!arg.hasOwnProperty(match[2][k])) {
+                throw new Error(sprintf('[_.sprintf] property "%s" does not exist', match[2][k]));
+              }
+              arg = arg[match[2][k]];
+            }
+          } else if (match[1]) { // positional argument (explicit)
+            arg = argv[match[1]];
+          }
+          else { // positional argument (implicit)
+            arg = argv[cursor++];
+          }
+
+          if (/[^s]/.test(match[8]) && (get_type(arg) != 'number')) {
+            throw new Error(sprintf('[_.sprintf] expecting number but found %s', get_type(arg)));
+          }
+          switch (match[8]) {
+            case 'b': arg = arg.toString(2); break;
+            case 'c': arg = String.fromCharCode(arg); break;
+            case 'd': arg = parseInt(arg, 10); break;
+            case 'e': arg = match[7] ? arg.toExponential(match[7]) : arg.toExponential(); break;
+            case 'f': arg = match[7] ? parseFloat(arg).toFixed(match[7]) : parseFloat(arg); break;
+            case 'o': arg = arg.toString(8); break;
+            case 's': arg = ((arg = String(arg)) && match[7] ? arg.substring(0, match[7]) : arg); break;
+            case 'u': arg = Math.abs(arg); break;
+            case 'x': arg = arg.toString(16); break;
+            case 'X': arg = arg.toString(16).toUpperCase(); break;
+          }
+          arg = (/[def]/.test(match[8]) && match[3] && arg >= 0 ? '+'+ arg : arg);
+          pad_character = match[4] ? match[4] == '0' ? '0' : match[4].charAt(1) : ' ';
+          pad_length = match[6] - String(arg).length;
+          pad = match[6] ? str_repeat(pad_character, pad_length) : '';
+          output.push(match[5] ? arg + pad : pad + arg);
+        }
+      }
+      return output.join('');
+    };
+
+    str_format.cache = {};
+
+    str_format.parse = function(fmt) {
+      var _fmt = fmt, match = [], parse_tree = [], arg_names = 0;
+      while (_fmt) {
+        if ((match = /^[^\x25]+/.exec(_fmt)) !== null) {
+          parse_tree.push(match[0]);
+        }
+        else if ((match = /^\x25{2}/.exec(_fmt)) !== null) {
+          parse_tree.push('%');
+        }
+        else if ((match = /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(_fmt)) !== null) {
+          if (match[2]) {
+            arg_names |= 1;
+            var field_list = [], replacement_field = match[2], field_match = [];
+            if ((field_match = /^([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
+              field_list.push(field_match[1]);
+              while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
+                if ((field_match = /^\.([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
+                  field_list.push(field_match[1]);
+                }
+                else if ((field_match = /^\[(\d+)\]/.exec(replacement_field)) !== null) {
+                  field_list.push(field_match[1]);
+                }
+                else {
+                  throw new Error('[_.sprintf] huh?');
+                }
+              }
+            }
+            else {
+              throw new Error('[_.sprintf] huh?');
+            }
+            match[2] = field_list;
+          }
+          else {
+            arg_names |= 2;
+          }
+          if (arg_names === 3) {
+            throw new Error('[_.sprintf] mixing positional and named placeholders is not (yet) supported');
+          }
+          parse_tree.push(match);
+        }
+        else {
+          throw new Error('[_.sprintf] huh?');
+        }
+        _fmt = _fmt.substring(match[0].length);
+      }
+      return parse_tree;
+    };
+
+    return str_format;
+  })();
+
+
+
+  // Defining underscore.string
+
+  var _s = {
+
+    VERSION: '2.3.0',
+
+    isBlank: function(str){
+      if (str == null) str = '';
+      return (/^\s*$/).test(str);
+    },
+
+    stripTags: function(str){
+      if (str == null) return '';
+      return String(str).replace(/<\/?[^>]+>/g, '');
+    },
+
+    capitalize : function(str){
+      str = str == null ? '' : String(str);
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    chop: function(str, step){
+      if (str == null) return [];
+      str = String(str);
+      step = ~~step;
+      return step > 0 ? str.match(new RegExp('.{1,' + step + '}', 'g')) : [str];
+    },
+
+    clean: function(str){
+      return _s.strip(str).replace(/\s+/g, ' ');
+    },
+
+    count: function(str, substr){
+      if (str == null || substr == null) return 0;
+
+      str = String(str);
+      substr = String(substr);
+
+      var count = 0,
+        pos = 0,
+        length = substr.length;
+
+      while (true) {
+        pos = str.indexOf(substr, pos);
+        if (pos === -1) break;
+        count++;
+        pos += length;
+      }
+
+      return count;
+    },
+
+    chars: function(str) {
+      if (str == null) return [];
+      return String(str).split('');
+    },
+
+    swapCase: function(str) {
+      if (str == null) return '';
+      return String(str).replace(/\S/g, function(c){
+        return c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase();
+      });
+    },
+
+    escapeHTML: function(str) {
+      if (str == null) return '';
+      return String(str).replace(/[&<>"']/g, function(m){ return '&' + reversedEscapeChars[m] + ';'; });
+    },
+
+    unescapeHTML: function(str) {
+      if (str == null) return '';
+      return String(str).replace(/\&([^;]+);/g, function(entity, entityCode){
+        var match;
+
+        if (entityCode in escapeChars) {
+          return escapeChars[entityCode];
+        } else if (match = entityCode.match(/^#x([\da-fA-F]+)$/)) {
+          return String.fromCharCode(parseInt(match[1], 16));
+        } else if (match = entityCode.match(/^#(\d+)$/)) {
+          return String.fromCharCode(~~match[1]);
+        } else {
+          return entity;
+        }
+      });
+    },
+
+    escapeRegExp: function(str){
+      if (str == null) return '';
+      return String(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+    },
+
+    splice: function(str, i, howmany, substr){
+      var arr = _s.chars(str);
+      arr.splice(~~i, ~~howmany, substr);
+      return arr.join('');
+    },
+
+    insert: function(str, i, substr){
+      return _s.splice(str, i, 0, substr);
+    },
+
+    include: function(str, needle){
+      if (needle === '') return true;
+      if (str == null) return false;
+      return String(str).indexOf(needle) !== -1;
+    },
+
+    join: function() {
+      var args = slice.call(arguments),
+        separator = args.shift();
+
+      if (separator == null) separator = '';
+
+      return args.join(separator);
+    },
+
+    lines: function(str) {
+      if (str == null) return [];
+      return String(str).split("\n");
+    },
+
+    reverse: function(str){
+      return _s.chars(str).reverse().join('');
+    },
+
+    startsWith: function(str, starts){
+      if (starts === '') return true;
+      if (str == null || starts == null) return false;
+      str = String(str); starts = String(starts);
+      return str.length >= starts.length && str.slice(0, starts.length) === starts;
+    },
+
+    endsWith: function(str, ends){
+      if (ends === '') return true;
+      if (str == null || ends == null) return false;
+      str = String(str); ends = String(ends);
+      return str.length >= ends.length && str.slice(str.length - ends.length) === ends;
+    },
+
+    succ: function(str){
+      if (str == null) return '';
+      str = String(str);
+      return str.slice(0, -1) + String.fromCharCode(str.charCodeAt(str.length-1) + 1);
+    },
+
+    titleize: function(str){
+      if (str == null) return '';
+      str  = String(str).toLowerCase();
+      return str.replace(/(?:^|\s|-)\S/g, function(c){ return c.toUpperCase(); });
+    },
+
+    camelize: function(str){
+      return _s.trim(str).replace(/[-_\s]+(.)?/g, function(match, c){ return c ? c.toUpperCase() : ""; });
+    },
+
+    underscored: function(str){
+      return _s.trim(str).replace(/([a-z\d])([A-Z]+)/g, '$1_$2').replace(/[-\s]+/g, '_').toLowerCase();
+    },
+
+    dasherize: function(str){
+      return _s.trim(str).replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '-').toLowerCase();
+    },
+
+    classify: function(str){
+      return _s.titleize(String(str).replace(/[\W_]/g, ' ')).replace(/\s/g, '');
+    },
+
+    humanize: function(str){
+      return _s.capitalize(_s.underscored(str).replace(/_id$/,'').replace(/_/g, ' '));
+    },
+
+    trim: function(str, characters){
+      if (str == null) return '';
+      if (!characters && nativeTrim) return nativeTrim.call(str);
+      characters = defaultToWhiteSpace(characters);
+      return String(str).replace(new RegExp('\^' + characters + '+|' + characters + '+$', 'g'), '');
+    },
+
+    ltrim: function(str, characters){
+      if (str == null) return '';
+      if (!characters && nativeTrimLeft) return nativeTrimLeft.call(str);
+      characters = defaultToWhiteSpace(characters);
+      return String(str).replace(new RegExp('^' + characters + '+'), '');
+    },
+
+    rtrim: function(str, characters){
+      if (str == null) return '';
+      if (!characters && nativeTrimRight) return nativeTrimRight.call(str);
+      characters = defaultToWhiteSpace(characters);
+      return String(str).replace(new RegExp(characters + '+$'), '');
+    },
+
+    truncate: function(str, length, truncateStr){
+      if (str == null) return '';
+      str = String(str); truncateStr = truncateStr || '...';
+      length = ~~length;
+      return str.length > length ? str.slice(0, length) + truncateStr : str;
+    },
+
+    /**
+     * _s.prune: a more elegant version of truncate
+     * prune extra chars, never leaving a half-chopped word.
+     * @author github.com/rwz
+     */
+    prune: function(str, length, pruneStr){
+      if (str == null) return '';
+
+      str = String(str); length = ~~length;
+      pruneStr = pruneStr != null ? String(pruneStr) : '...';
+
+      if (str.length <= length) return str;
+
+      var tmpl = function(c){ return c.toUpperCase() !== c.toLowerCase() ? 'A' : ' '; },
+        template = str.slice(0, length+1).replace(/.(?=\W*\w*$)/g, tmpl); // 'Hello, world' -> 'HellAA AAAAA'
+
+      if (template.slice(template.length-2).match(/\w\w/))
+        template = template.replace(/\s*\S+$/, '');
+      else
+        template = _s.rtrim(template.slice(0, template.length-1));
+
+      return (template+pruneStr).length > str.length ? str : str.slice(0, template.length)+pruneStr;
+    },
+
+    words: function(str, delimiter) {
+      if (_s.isBlank(str)) return [];
+      return _s.trim(str, delimiter).split(delimiter || /\s+/);
+    },
+
+    pad: function(str, length, padStr, type) {
+      str = str == null ? '' : String(str);
+      length = ~~length;
+
+      var padlen  = 0;
+
+      if (!padStr)
+        padStr = ' ';
+      else if (padStr.length > 1)
+        padStr = padStr.charAt(0);
+
+      switch(type) {
+        case 'right':
+          padlen = length - str.length;
+          return str + strRepeat(padStr, padlen);
+        case 'both':
+          padlen = length - str.length;
+          return strRepeat(padStr, Math.ceil(padlen/2)) + str
+                  + strRepeat(padStr, Math.floor(padlen/2));
+        default: // 'left'
+          padlen = length - str.length;
+          return strRepeat(padStr, padlen) + str;
+        }
+    },
+
+    lpad: function(str, length, padStr) {
+      return _s.pad(str, length, padStr);
+    },
+
+    rpad: function(str, length, padStr) {
+      return _s.pad(str, length, padStr, 'right');
+    },
+
+    lrpad: function(str, length, padStr) {
+      return _s.pad(str, length, padStr, 'both');
+    },
+
+    sprintf: sprintf,
+
+    vsprintf: function(fmt, argv){
+      argv.unshift(fmt);
+      return sprintf.apply(null, argv);
+    },
+
+    toNumber: function(str, decimals) {
+      if (!str) return 0;
+      str = _s.trim(str);
+      if (!str.match(/^-?\d+(?:\.\d+)?$/)) return NaN;
+      return parseNumber(parseNumber(str).toFixed(~~decimals));
+    },
+
+    numberFormat : function(number, dec, dsep, tsep) {
+      if (isNaN(number) || number == null) return '';
+
+      number = number.toFixed(~~dec);
+      tsep = typeof tsep == 'string' ? tsep : ',';
+
+      var parts = number.split('.'), fnums = parts[0],
+        decimals = parts[1] ? (dsep || '.') + parts[1] : '';
+
+      return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals;
+    },
+
+    strRight: function(str, sep){
+      if (str == null) return '';
+      str = String(str); sep = sep != null ? String(sep) : sep;
+      var pos = !sep ? -1 : str.indexOf(sep);
+      return ~pos ? str.slice(pos+sep.length, str.length) : str;
+    },
+
+    strRightBack: function(str, sep){
+      if (str == null) return '';
+      str = String(str); sep = sep != null ? String(sep) : sep;
+      var pos = !sep ? -1 : str.lastIndexOf(sep);
+      return ~pos ? str.slice(pos+sep.length, str.length) : str;
+    },
+
+    strLeft: function(str, sep){
+      if (str == null) return '';
+      str = String(str); sep = sep != null ? String(sep) : sep;
+      var pos = !sep ? -1 : str.indexOf(sep);
+      return ~pos ? str.slice(0, pos) : str;
+    },
+
+    strLeftBack: function(str, sep){
+      if (str == null) return '';
+      str += ''; sep = sep != null ? ''+sep : sep;
+      var pos = str.lastIndexOf(sep);
+      return ~pos ? str.slice(0, pos) : str;
+    },
+
+    toSentence: function(array, separator, lastSeparator, serial) {
+      separator = separator || ', ';
+      lastSeparator = lastSeparator || ' and ';
+      var a = array.slice(), lastMember = a.pop();
+
+      if (array.length > 2 && serial) lastSeparator = _s.rtrim(separator) + lastSeparator;
+
+      return a.length ? a.join(separator) + lastSeparator + lastMember : lastMember;
+    },
+
+    toSentenceSerial: function() {
+      var args = slice.call(arguments);
+      args[3] = true;
+      return _s.toSentence.apply(_s, args);
+    },
+
+    slugify: function(str) {
+      if (str == null) return '';
+
+      var from  = "ąàáäâãåæăćęèéëêìíïîłńòóöôõøśșțùúüûñçżź",
+          to    = "aaaaaaaaaceeeeeiiiilnoooooosstuuuunczz",
+          regex = new RegExp(defaultToWhiteSpace(from), 'g');
+
+      str = String(str).toLowerCase().replace(regex, function(c){
+        var index = from.indexOf(c);
+        return to.charAt(index) || '-';
+      });
+
+      return _s.dasherize(str.replace(/[^\w\s-]/g, ''));
+    },
+
+    surround: function(str, wrapper) {
+      return [wrapper, str, wrapper].join('');
+    },
+
+    quote: function(str, quoteChar) {
+      return _s.surround(str, quoteChar || '"');
+    },
+
+    unquote: function(str, quoteChar) {
+      quoteChar = quoteChar || '"';
+      if (str[0] === quoteChar && str[str.length-1] === quoteChar)
+        return str.slice(1,str.length-1);
+      else return str;
+    },
+
+    exports: function() {
+      var result = {};
+
+      for (var prop in this) {
+        if (!this.hasOwnProperty(prop) || prop.match(/^(?:include|contains|reverse)$/)) continue;
+        result[prop] = this[prop];
+      }
+
+      return result;
+    },
+
+    repeat: function(str, qty, separator){
+      if (str == null) return '';
+
+      qty = ~~qty;
+
+      // using faster implementation if separator is not needed;
+      if (separator == null) return strRepeat(String(str), qty);
+
+      // this one is about 300x slower in Google Chrome
+      for (var repeat = []; qty > 0; repeat[--qty] = str) {}
+      return repeat.join(separator);
+    },
+
+    naturalCmp: function(str1, str2){
+      if (str1 == str2) return 0;
+      if (!str1) return -1;
+      if (!str2) return 1;
+
+      var cmpRegex = /(\.\d+)|(\d+)|(\D+)/g,
+        tokens1 = String(str1).toLowerCase().match(cmpRegex),
+        tokens2 = String(str2).toLowerCase().match(cmpRegex),
+        count = Math.min(tokens1.length, tokens2.length);
+
+      for(var i = 0; i < count; i++) {
+        var a = tokens1[i], b = tokens2[i];
+
+        if (a !== b){
+          var num1 = parseInt(a, 10);
+          if (!isNaN(num1)){
+            var num2 = parseInt(b, 10);
+            if (!isNaN(num2) && num1 - num2)
+              return num1 - num2;
+          }
+          return a < b ? -1 : 1;
+        }
+      }
+
+      if (tokens1.length === tokens2.length)
+        return tokens1.length - tokens2.length;
+
+      return str1 < str2 ? -1 : 1;
+    },
+
+    levenshtein: function(str1, str2) {
+      if (str1 == null && str2 == null) return 0;
+      if (str1 == null) return String(str2).length;
+      if (str2 == null) return String(str1).length;
+
+      str1 = String(str1); str2 = String(str2);
+
+      var current = [], prev, value;
+
+      for (var i = 0; i <= str2.length; i++)
+        for (var j = 0; j <= str1.length; j++) {
+          if (i && j)
+            if (str1.charAt(j - 1) === str2.charAt(i - 1))
+              value = prev;
+            else
+              value = Math.min(current[j], current[j - 1], prev) + 1;
+          else
+            value = i + j;
+
+          prev = current[j];
+          current[j] = value;
+        }
+
+      return current.pop();
+    },
+
+    toBoolean: function(str, trueValues, falseValues) {
+      if (typeof str === "number") str = "" + str;
+      if (typeof str !== "string") return !!str;
+      str = _s.trim(str);
+      if (boolMatch(str, trueValues || ["true", "1"])) return true;
+      if (boolMatch(str, falseValues || ["false", "0"])) return false;
+    }
+  };
+
+  // Aliases
+
+  _s.strip    = _s.trim;
+  _s.lstrip   = _s.ltrim;
+  _s.rstrip   = _s.rtrim;
+  _s.center   = _s.lrpad;
+  _s.rjust    = _s.lpad;
+  _s.ljust    = _s.rpad;
+  _s.contains = _s.include;
+  _s.q        = _s.quote;
+  _s.toBool   = _s.toBoolean;
+
+  // Exporting
+
+  // CommonJS module is defined
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports)
+      module.exports = _s;
+
+    exports._s = _s;
+  }
+
+  // Register as a named module with AMD.
+  if (typeof define === 'function' && define.amd)
+    define('underscore.string', [], function(){ return _s; });
+
+
+  // Integrate with Underscore.js if defined
+  // or create our own underscore object.
+  root._ = root._ || {};
+  root._.string = root._.str = _s;
+}(this, String);
+
+},{}],36:[function(require,module,exports){
+module.exports=require(27)
 },{}]},{},[2]);
