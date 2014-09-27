@@ -30,19 +30,18 @@
     .layout-header__search__results
       position absolute
       left - container_pad
-      width 85vw
+      width 100%
       display none
 
     &.is-active .layout-header__search__results
       display block
-      box-shadow downshadow
 
     .search__results__list
       list-style-type none
 
     .search__results__result
-      background backgroundgray
-      padding s_margin
+      background #F4F4F4
+      padding 4px
       padding-left container_pad
       font-size 14px
       border-top 1px solid lightgrayplus
@@ -53,6 +52,10 @@
       font-size 22px
       top 0
       display none
+      color lightgray
+      
+      &:hover
+        color textgray
 
     &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
       display block
@@ -60,14 +63,18 @@
 
   .right
     text-align right
-    margin 0 .6em
+    margin 0
 
   .logo
     .logo-icon svg
       display inline-block
       fill lightgray
-      width 30px
+      width 25px
       height 50px
+
+    .logo-icon:hover
+      svg
+        fill textgray
 
 .dropdown--menu
   cursor pointer
@@ -78,25 +85,36 @@
   font-size 14px
   top topbar_h
   z-index 3001
-  background-color #F2F2F2;
-  box-shadow downshadow
+  background-color #F4F4F4
 
-  &.dropdown--desktop-size
-    width 15vw
-    line-height 70px
+  &.dropdown--size
+    width 300px
     right 0
 
   .dropdown__link
     display block
-    padding 0 20px 0 0
+    padding 4px container_pad 4px container_pad
     border-top 1px solid lightgrayplus
+
+  .dropdown__notification a
+    display block
+    height 59px
+    font-size 12px
+    padding 12px container_pad 0 0
+    border-top 1px solid lightgray
+    line-height 18px
+    background-color backgroundgray
+    color private
+
+    &:hover
+      color #111
 
 .dropdown--is_active .dropdown
   display block
 
 .dropdown--menu__trigger:after
   content " ▾"
-  color #aaa
-  font-size 10px
+  color lightgray
+  font-size 12px
   vertical-align top
   margin-left 0.3em
