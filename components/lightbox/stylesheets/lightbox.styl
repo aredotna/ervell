@@ -10,6 +10,7 @@ body.is-lightbox
   z-index header_z + 1
   top 0
   left 0
+  color textgray
   background-color rgba(255,255,255, 0.95)
   opacity 0
   pointer-events none
@@ -29,7 +30,7 @@ body.is-lightbox
   position static
 
 .lightbox__content
-  padding s_margin * 2
+  padding s_margin * 3
   padding-bottom topbar_h
 
 .lightbox__content__title
@@ -41,7 +42,7 @@ body.is-lightbox
   color lightgray
   font-weight normal
   font-size 30px
-  top s_margin 
+  top s_margin * 2
   right s_margin * 2
 
 .lightbox__content__description, .lightbox__content__text
@@ -53,6 +54,9 @@ body.is-lightbox
 
   p
     margin 0.8em 0
+
+.lightbox__content__description
+  font-size 14px
 
 .lightbox__content__text
   box-shadow 0px 0px 14px rgba(0,0,0,0.1)
@@ -71,7 +75,8 @@ body.is-lightbox
   height auto
   text-align center
   background-color backgroundgray
-  padding 50px 0 50px 0
+  border-top 1px solid lightgray
+  padding 30px 0 50px 0
 
   .feed-group__sentence
     padding-bottom 1.1em
