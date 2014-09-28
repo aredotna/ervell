@@ -7,8 +7,8 @@
   height topbar_h
   line-height topbar_h
   width 100%
-  background-color rgba(250, 250, 250, 1)
-  padding 0 container_pad 0 container_pad
+  background-color backgroundgray
+  padding 0
   display flex
   justify-content space-between
   z-index header_z
@@ -19,29 +19,33 @@
 
     input#layout-header__search__input
       width 100%
-      height 100%
+      height 50px
       font-size 1em
-      background transparent
       border none
       outline 0
-      font-weight 400
-      padding-left 0
+      font-weight normal
+      padding 0 container_pad 0 container_pad
+
+      &:focus
+        background-color secondbacgroundgray
 
     .layout-header__search__results
       position absolute
       left - container_pad
+      padding-left container_pad
       width 100%
       display none
 
     &.is-active .layout-header__search__results
       display block
       box-shadow downshadow
+      padding 0 0 0 container_pad
 
     .search__results__list
       list-style-type none
 
     .search__results__result
-      background #F4F4F4
+      background secondbacgroundgray
       padding 4px
       padding-left container_pad
       font-size 1em
@@ -67,6 +71,8 @@
     margin 0
 
   .logo
+      padding 0 container_pad 0 container_pad
+    
     .logo-icon svg
       display inline-block
       fill lightgray
@@ -86,7 +92,7 @@
   font-size 1em
   top topbar_h
   z-index 3001
-  background-color #F4F4F4
+  background-color secondbacgroundgray
   box-shadow downshadow
 
   &.dropdown--size
