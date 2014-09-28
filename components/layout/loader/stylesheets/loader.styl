@@ -1,0 +1,37 @@
+@import '../../../node_modules/nib'
+
+#l-loader-container
+  position absolute
+  color #000
+  opacity 0
+  width 100%
+  height 100%
+  top 0
+  left 0
+  z-index 6001
+  pointer-events none
+
+  .dot
+    display inline-block
+    animation-name dot_anim
+    animation-iteration-duration 1.9s
+    animation-iteration-count infinite
+
+  .dot__1
+    animation-delay 0.39s
+
+  .dot__2
+    animation-delay 0.78s
+
+  .dot__3
+    animation-delay 1.17s
+
+@keyframes dot_anim
+  0%
+
+  50%
+    opacity 1
+
+  100%
+
+

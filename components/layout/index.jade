@@ -21,6 +21,8 @@ html
       include ../../components/path/templates/path
       block body
 
+    #l-loader-container
+      include loader/templates/index
     #scripts
       != sharify.script()
       script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )
