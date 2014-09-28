@@ -16,7 +16,7 @@ for block in blocks
                 h2=block.get('title')
               - if(block.get('class') == 'User')
                 +avatar(block)
-                h3=block.get('username')
+                h2=block.get('username')
           .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
             .grid__block__mini-feed
               - if(channel)
