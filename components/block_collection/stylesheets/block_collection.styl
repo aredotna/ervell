@@ -29,7 +29,7 @@
   display none
 
 .grid__block--user .grid__block__inner
-  border: 2px solid textgray
+  border: 2px solid lightgray
 
 .grid__block--text .valign-inner
   vertical-align top
@@ -50,7 +50,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 .grid__block__content__text
   @extend .serif-text
   padding 0.5em
-  font-size 16px
+  font-size 1em
 
   a
     font-weight 100
@@ -67,7 +67,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 .grid__block:hover .grid__block__overlay
   opacity 1
   background-color rgba(255,255,255, 0.9)
-  border 2px solid lightgray
+  border 2px solid textgray
 
 .grid__block.grid__block--text:hover .grid__block__overlay
   background-color rgba(255,255,255, 0.9)
@@ -83,10 +83,10 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 // privacy-color('.grid__block__overlay--privacy-', border-color)
 
 .grid__block__mini-feed
-  font-size 12px
+  font-size caption
   padding-top 20px
-  font-weight 800
-  color #000
+  font-weight bold
+  color hovergray
 
   span
     padding 0 5px
@@ -94,8 +94,8 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 .grid__block__title
   color lightgray
   position relative
-  font-size 12px
-  font-weight 700
+  font-size caption
+  font-weight bold
   text-align center
   margin 20px 0 5px 0
   bottom 0
