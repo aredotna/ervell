@@ -730,7 +730,12 @@ buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (bl
 }
 buf.push("</div></div>");
 }
-buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+buf.push("</div>");
+if(block.get('class') != 'Channel')
+{
+buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p>");
+}
+buf.push("</a></div>");
     }
 
   } else {
@@ -766,7 +771,12 @@ buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (bl
 }
 buf.push("</div></div>");
 }
-buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+buf.push("</div>");
+if(block.get('class') != 'Channel')
+{
+buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p>");
+}
+buf.push("</a></div>");
     }
 
   }
@@ -954,7 +964,12 @@ buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (bl
 }
 buf.push("</div></div>");
 }
-buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+buf.push("</div>");
+if(block.get('class') != 'Channel')
+{
+buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p>");
+}
+buf.push("</a></div>");
     }
 
   } else {
@@ -990,7 +1005,12 @@ buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (bl
 }
 buf.push("</div></div>");
 }
-buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+buf.push("</div>");
+if(block.get('class') != 'Channel')
+{
+buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p>");
+}
+buf.push("</a></div>");
     }
 
   }
@@ -1089,7 +1109,12 @@ buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (bl
 }
 buf.push("</div></div>");
 }
-buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+buf.push("</div>");
+if(block.get('class') != 'Channel')
+{
+buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p>");
+}
+buf.push("</a></div>");
     }
 
   } else {
@@ -1125,7 +1150,12 @@ buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (bl
 }
 buf.push("</div></div>");
 }
-buf.push("</div></a><p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p></div>");
+buf.push("</div>");
+if(block.get('class') != 'Channel')
+{
+buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp = block.smartTruncate(block.get('title'))) ? "" : jade_interp)) + "</p>");
+}
+buf.push("</a></div>");
     }
 
   }

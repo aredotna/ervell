@@ -20,7 +20,7 @@
     input#layout-header__search__input
       width 100%
       height 100%
-      font-size 14px
+      font-size 1em
       background transparent
       border none
       outline 0
@@ -35,6 +35,7 @@
 
     &.is-active .layout-header__search__results
       display block
+      box-shadow downshadow
 
     .search__results__list
       list-style-type none
@@ -43,7 +44,7 @@
       background #F4F4F4
       padding 4px
       padding-left container_pad
-      font-size 14px
+      font-size 1em
       border-top 1px solid lightgrayplus
 
     .layout-header__search__close
@@ -82,10 +83,11 @@
 .dropdown
   display none
   position absolute
-  font-size 14px
+  font-size 1em
   top topbar_h
   z-index 3001
   background-color #F4F4F4
+  box-shadow downshadow
 
   &.dropdown--size
     width 300px
@@ -99,15 +101,15 @@
   .dropdown__notification a
     display block
     height 59px
-    font-size 12px
-    padding 12px container_pad 0 0
-    border-top 1px solid lightgray
+    font-size caption
+    padding 12px container_pad 0 container_pad
+    border-top 1px solid lightgrayplus
     line-height 18px
     background-color backgroundgray
     color private
 
     &:hover
-      color #111
+      color hovergray
 
 .dropdown--is_active .dropdown
   display block
@@ -115,6 +117,6 @@
 .dropdown--menu__trigger:after
   content " ▾"
   color lightgray
-  font-size 12px
+  font-size caption
   vertical-align top
   margin-left 0.3em
