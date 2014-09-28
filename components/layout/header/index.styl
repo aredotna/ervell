@@ -27,27 +27,24 @@
       padding 0 container_pad 0 container_pad
 
       &:focus
-        background-color secondbacgroundgray
+        background-color secondbackgroundgray
 
     .layout-header__search__results
       position absolute
-      left - container_pad
-      padding-left container_pad
+      left 0
       width 100%
       display none
+      box-shadow downshadow
+      background secondbackgroundgray
 
     &.is-active .layout-header__search__results
       display block
-      box-shadow downshadow
-      padding 0 0 0 container_pad
 
     .search__results__list
       list-style-type none
 
     .search__results__result
-      background secondbacgroundgray
-      padding 4px
-      padding-left container_pad
+      padding 4px 0 4px container_pad
       font-size 1em
       border-top 1px solid lightgrayplus
 
@@ -92,7 +89,7 @@
   font-size 1em
   top topbar_h
   z-index 3001
-  background-color secondbacgroundgray
+  background-color secondbackgroundgray
   box-shadow downshadow
 
   &.dropdown--size
