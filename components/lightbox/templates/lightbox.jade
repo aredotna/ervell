@@ -4,6 +4,9 @@
       - if(block.has('image'))
         img.lightbox__content__img(src="#{block.getImageSize('original')}")
 
+      - if(block.get('class') == 'Attachment')
+        img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+
       - if(block.get('class') == 'Text')
         .lightbox__content__text!= block.get('content_html')
 
