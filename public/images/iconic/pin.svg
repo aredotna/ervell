@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-pin" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Pin</title>
+  </g>
+  <g class="iconic-pin-lg iconic-container iconic-lg" data-width="76" data-height="128" display="inline" transform="translate(26)">
+    <path class="iconic-pin-pin iconic-property-fill" d="M40 117.999l-2 10.001-2-10.001v-60.999h4z" />
+    <path d="M68 50h-6c-4.418 0-8-3.582-8-8v-36h8v-2c0-2.209-1.791-4-4-4h-40c-2.209 0-4 1.791-4 4v2h8v36c0 4.418-3.582 8-8 8h-6c-4.418 0-8 3.582-8 8v8h76v-8c0-4.418-3.582-8-8-8z" class="iconic-pin-body iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-pin-md iconic-container iconic-md" data-width="20" data-height="32" display="none" transform="scale(4) translate(6)">
+    <path class="iconic-pin-pin iconic-property-fill" d="M9 14v14l1 4 1-4v-14z" />
+    <path d="M17.895 14h-1.79c-1.163 0-2.105.057-2.105-1.105v-10.895h3c0-1.105-.895-2-2-2h-10c-1.105 0-2 .895-2 2h3v10.895c0 1.163-.943 1.105-2.105 1.105h-1.789c-1.163 0-2.105.943-2.105 2.105v2.895h20v-2.895c0-1.163-.943-2.105-2.105-2.105z" class="iconic-pin-body iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-pin-sm iconic-container iconic-sm" data-width="11" data-height="16" display="none" transform="scale(8) translate(2)">
+    <path class="iconic-pin-pin iconic-property-fill" d="M5 6.15v7.85l.5 2 .5-2v-7.85z" />
+    <path d="M9.842 6h-.684c-.639 0-1.158-.518-1.158-1.158v-3.842h.5c.276 0 .5-.224.5-.5s-.224-.5-.5-.5h-6c-.276 0-.5.224-.5.5s.224.5.5.5h.5v3.842c0 .639-.518 1.158-1.158 1.158h-.684c-.639 0-1.158.518-1.158 1.158v1.842h11v-1.842c0-.639-.518-1.158-1.158-1.158z"
+    class="iconic-pin-body iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

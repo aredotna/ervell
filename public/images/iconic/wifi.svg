@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-wifi" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Wifi</title>
+  </g>
+  <g class="iconic-wifi-lg iconic-container iconic-lg" data-width="128" data-height="88" display="inline" transform="translate(0 20)">
+    <path d="M52.686 76.686c2.895-2.895 6.895-4.686 11.314-4.686s8.418 1.791 11.314 4.686l-11.314 11.314-11.314-11.314z" class="iconic-wifi-center iconic-property-accent iconic-property-fill" />
+    <path stroke="#000" stroke-width="8" d="M38.544 62.544c6.515-6.515 15.515-10.544 25.456-10.544s18.941 4.029 25.456 10.544" class="iconic-wifi-wave iconic-wifi-wave-inner iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="8" d="M21.574 45.574c10.858-10.858 25.858-17.574 42.426-17.574s31.569 6.716 42.426 17.574" class="iconic-wifi-wave iconic-wifi-wave-middle iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="8" d="M4.603 28.603c15.201-15.201 36.201-24.603 59.397-24.603s44.196 9.402 59.397 24.603" class="iconic-wifi-wave iconic-wifi-wave-outer iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-wifi-md iconic-container iconic-md" data-width="32" data-height="22" display="none" transform="scale(4) translate(0 5)">
+    <path d="M13.172 19.172c.724-.724 1.724-1.172 2.828-1.172s2.105.448 2.828 1.172l-2.828 2.828-2.828-2.828z" class="iconic-wifi-center iconic-property-accent iconic-property-fill" />
+    <path stroke="#000" stroke-width="3" d="M10 16c1.538-1.538 3.653-2.5 6-2.5s4.462.962 6 2.5" class="iconic-wifi-wave iconic-wifi-wave-inner iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="3" d="M5.4 11.75c2.714-2.624 6.458-4.25 10.6-4.25s7.886 1.626 10.6 4.25" class="iconic-wifi-wave iconic-wifi-wave-middle iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="3" d="M1 7.5c3.838-3.71 9.144-6 15-6s11.162 2.29 15 6" class="iconic-wifi-wave iconic-wifi-wave-outer iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-wifi-sm iconic-container iconic-sm" data-width="16" data-height="10" display="none" transform="scale(8) translate(0 3)">
+    <path d="M6.586 8.586c.362-.362.862-.586 1.414-.586s1.052.224 1.414.586l-1.414 1.414-1.414-1.414z" class="iconic-wifi-center iconic-property-accent iconic-property-fill" />
+    <path stroke="#000" stroke-width="2" d="M4.465 6.465c.905-.905 2.155-1.465 3.535-1.465s2.631.56 3.535 1.464" class="iconic-wifi-wave iconic-wifi-wave-inner iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="2" d="M1.636 3.636c1.629-1.629 3.879-2.636 6.364-2.636s4.735 1.007 6.364 2.636" class="iconic-wifi-wave iconic-wifi-wave-outer iconic-property-stroke" fill="none" />
+  </g>
+</svg>

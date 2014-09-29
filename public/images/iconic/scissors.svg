@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-scissors" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Scissors</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-scissors-clip-0">
+      <path d="M0 0v100h128v-100h-128zm60 50c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm-12 20l-4-.388s48.623-32.155 59.954-39.682l4.046.069c-11.33 7.527-60 40-60 40z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-scissors-clip-0">
+      <path d="M0 0v24h32v-24h-32zm12 18l-1-1.097s12.156-8.039 14.989-9.92l1.011 1.017c-2.833 1.882-15 10-15 10z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-scissors-lg iconic-container iconic-lg" data-width="128" data-height="100" display="inline" transform="translate(0 14)">
+    <path clip-path="url(#iconic-size-lg-scissors-clip-0)" d="M37.015 29.832c-2.339 6.824-8.654 11.782-16.186 12.126l-.829 2.042c11.75 0 11.991-3.447 24 4.47.21.139.408.259.61.385 24.215 15.952 58.259 38.39 65.39 43.144 12 8 18-1.47 18-1.47l-90.985-60.698z"
+    class="iconic-scissors-blade iconic-scissors-blade-top iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-scissors-clip-0)" d="M37.035 74.222l90.965-60.222s-6-10-18-2c-7.469 4.979-40.672 26.863-64.684 42.681-.421.245-.854.509-1.316.814-12.056 7.964-12 4.505-24 4.505l.829 2.042c7.552.345 13.882 5.328 16.206 12.18z"
+    class="iconic-scissors-blade iconic-scissors-blade-bottom iconic-property-fill" />
+    <path d="M20 10c7.72 0 14 6.28 14 14s-6.28 14-14 14-14-6.28-14-14 6.28-14 14-14m0-6c-11.046 0-20 8.954-20 20s8.954 20 20 20 20-8.954 20-20-8.954-20-20-20z" class="iconic-scissors-handle iconic-scissors-handle-top iconic-property-accent iconic-property-fill"
+    />
+    <path d="M20 66c7.72 0 14 6.28 14 14s-6.28 14-14 14-14-6.28-14-14 6.28-14 14-14m0-6c-11.046 0-20 8.954-20 20s8.954 20 20 20 20-8.954 20-20-8.954-20-20-20z" class="iconic-scissors-handle iconic-scissors-handle-bottom iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-scissors-md iconic-container iconic-md" data-width="32" data-height="24" display="none" transform="scale(4) translate(0 4)">
+    <path clip-path="url(#iconic-size-md-scissors-clip-0)" d="M9.369 6.035c-.453 1.917-2.126 3.348-4.157 3.444l-.212.521c2.938 0 2.998-.862 6 1.118 5.587 3.683 13.242 8.728 15 9.882 4 2.625 6 .132 6 .132l-22.631-15.098z" class="iconic-scissors-blade iconic-scissors-blade-top iconic-property-fill"
+    />
+    <path clip-path="url(#iconic-size-md-scissors-clip-0)" d="M9.373 17.98l22.627-14.98s-2-2.583-6 0c-1.867 1.206-9.454 6.211-14.999 9.873 0 0 0 0-.001 0-3.014 1.991-3 1.126-6 1.126l.212.521c2.037.096 3.714 1.534 4.162 3.458z" class="iconic-scissors-blade iconic-scissors-blade-bottom iconic-property-fill"
+    />
+    <path d="M5 2c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3m0-2c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5z" class="iconic-scissors-handle iconic-scissors-handle-top iconic-property-accent iconic-property-fill" />
+    <path d="M5 16c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3m0-2c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5z" class="iconic-scissors-handle iconic-scissors-handle-bottom iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-scissors-sm iconic-container iconic-sm" data-width="16" data-height="14" display="none" transform="scale(8) translate(0 1)">
+    <path d="M5.456 3.441c-.207 1.16-1.21 2.042-2.427 2.056l-.029.503c1.312 0 1.747-.683 3.091.254 2.662 1.768 5.962 3.961 6.909 4.59 1.661 1.103 3-.344 3-.344l-10.544-7.059z" class="iconic-scissors-blade iconic-scissors-blade-top iconic-property-fill"
+    />
+    <path d="M5.456 10.559l10.544-7.059s-1.375-1.219-3.296-.178c-.483.262-3.934 2.575-6.703 4.443-.739.498-2 .236-3 .236l.005.5c1.227.003 2.241.891 2.45 2.059z" class="iconic-scissors-blade iconic-scissors-blade-bottom iconic-property-fill" />
+    <path d="M3 1c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2m0-1c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" class="iconic-scissors-handle iconic-scissors-handle-top iconic-property-accent iconic-property-fill" />
+    <path d="M3 9c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2m0-1c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" class="iconic-scissors-handle iconic-scissors-handle-bottom iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

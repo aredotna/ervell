@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-text" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Text</title>
+  </g>
+  <g class="iconic-text-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path d="M124 0h-120l-4 28h4c0-11.046 8.954-20 20-20h32v106c0 5.523-4.477 10-10 10h-5.75v4h47.749v-4h-6c-5.523 0-10-4.477-10-10v-106h32c11.046 0 20 8.954 20 20h4l-4-28z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-text-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path d="M31 0h-30l-1 8h1c0-2.761 2.239-5 5-5h7v25.5c0 1.381-1.119 2.5-2.5 2.5h-2.5v1h16v-1h-2.5c-1.381 0-2.5-1.119-2.5-2.5v-25.5h7c2.761 0 5 2.239 5 5h1l-1-8z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-text-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M15 0h-14l-1 4h1c0-1.105.895-2 2-2h3v12c0 .552-.448 1-1 1h-1v1h8v-1h-1c-.552 0-1-.448-1-1v-12h3c1.105 0 2 .895 2 2h1l-1-4z" class="iconic-property-fill" />
+  </g>
+</svg>

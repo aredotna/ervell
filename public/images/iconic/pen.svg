@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-pen" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Pen</title>
+  </g>
+  <g class="iconic-pen-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path transform="matrix(-.707 -.707 .707 -.707 187.125 103.51)" class="iconic-pen-button iconic-property-accent iconic-property-fill" d="M107.929 1.686h14.142v22.627h-14.142z" />
+    <path class="iconic-pen-body iconic-pen-body-bottom iconic-property-fill" d="M38 100l-10-10-16 16v6l-6 6 4 4 6-6h6z" />
+    <path transform="matrix(-.707 .707 -.707 -.707 151.51 71.243)" class="iconic-pen-body iconic-pen-body-middle iconic-property-fill" d="M17.159 55.686h87.681v22.627h-87.681z" />
+    <path transform="matrix(-.707 .707 -.707 -.707 194.51 -32.569)" class="iconic-pen-body-top iconic-property-accent iconic-property-fill" d="M95.515 12.686h16.971v22.627h-16.971z" />
+    <path class="iconic-pen-clip iconic-property-accent iconic-property-fill" d="M88 16l-38 38v4l34-34 20 20 6-6z" />
+    <path class="iconic-pen-head iconic-property-accent iconic-property-fill" d="M8 124l-4-4-4 4v4l3.997-.003z" />
+  </g>
+  <g class="iconic-pen-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path transform="matrix(-.707 -.707 .707 -.707 46.178 26.127)" class="iconic-pen-button iconic-property-accent iconic-property-fill" d="M26.379.672h4.243v5.657h-4.243z" />
+    <path class="iconic-pen-body iconic-pen-body-bottom iconic-property-fill" d="M10.021 24.979l-3.021-2.938-3.979 3.979-.014 1.972-1.007 1.007 1 1 1-1h2z" />
+    <path transform="matrix(-.707 .707 -.707 -.707 37.127 19.621)" class="iconic-pen-body iconic-pen-body-middle iconic-property-fill" d="M4.601 13.964h19.799v7.071h-19.799z" />
+    <path transform="matrix(-.707 .707 -.707 -.707 48.627 -8.142)" class="iconic-pen-body iconic-pen-body-top iconic-property-accent iconic-property-fill" d="M23.879 2.465h4.243v7.071h-4.243z" />
+    <path class="iconic-pen-clip iconic-property-accent iconic-property-fill" d="M20 3l-11 11v2l10-10 6 6 2-2z" />
+    <path class="iconic-pen-head iconic-property-accent iconic-property-fill" d="M2 31l-1-1-1 1v1l.999-.001z" />
+  </g>
+  <g class="iconic-pen-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path transform="matrix(-.707 -.707 .707 -.707 22.485 13.314)" class="iconic-pen-button iconic-property-accent iconic-property-fill" d="M13.293-.121h1.414v4.243h-1.414z" />
+    <path transform="matrix(.707 -.707 .707 .707 -7.814 6.136)" class="iconic-pen-body iconic-pen-body-bottom iconic-property-fill" d="M2.086 11.793h2.828v1.414h-2.828z" />
+    <path transform="matrix(-.707 .707 -.707 -.707 18.814 9.207)" class="iconic-pen-body iconic-pen-body-middle iconic-property-fill" d="M2.55 7.086h9.899v2.828h-9.899z" />
+    <path transform="matrix(-.707 .707 -.707 -.707 24.814 -5.278)" class="iconic-pen-body iconic-pen-body-top iconic-property-accent iconic-property-fill" d="M12.793 1.086h1.414v2.828h-1.414z" />
+    <path class="iconic-pen-clip iconic-property-accent iconic-property-fill" d="M10 0l-5 5v2l5-5 3 3 1-1z" />
+    <path class="iconic-pen-head iconic-property-accent iconic-property-fill" d="M0 15v1h1l1-1-1-1z" />
+  </g>
+</svg>

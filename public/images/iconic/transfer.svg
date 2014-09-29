@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-transfer" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Transfer</title>
+  </g>
+  <g class="iconic-transfer-lg iconic-container iconic-lg" data-width="128" data-height="60" display="inline" transform="translate(0 34)">
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-transfer-line iconic-transfer-line-bottom iconic-property-accent iconic-property-stroke" d="M124 46h-100" fill="none" />
+    <path d="M1.296 46.756l21.409 12.488c.715.417 1.296.084 1.296-.744v-25c0-.828-.58-1.162-1.296-.744l-21.409 12.488c-.716.417-.716 1.094 0 1.512z" class="iconic-transfer-arrowhead iconic-transfer-arrowhead-bottom iconic-property-accent iconic-property-fill"
+    />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-transfer-line iconic-transfer-line-top iconic-property-stroke" d="M4 14h100" fill="none" />
+    <path d="M126.704 13.244l-21.409-12.488c-.716-.417-1.296-.084-1.296.744v25c0 .828.58 1.162 1.296.744l21.409-12.488c.716-.417.716-1.094 0-1.512z" class="iconic-transfer-arrowhead iconic-transfer-arrowhead-top iconic-property-fill" />
+  </g>
+  <g class="iconic-transfer-md iconic-container iconic-md" data-width="32" data-height="18" display="none" transform="scale(4) translate(0 7)">
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-transfer-line iconic-transfer-line-bottom iconic-property-accent iconic-property-stroke" d="M30.5 13.5h-25" fill="none" />
+    <path d="M.4 13.2l5.2-3.9c.221-.166.4-.076.4.2v8c0 .276-.179.366-.4.2l-5.2-3.9c-.221-.166-.221-.434 0-.6z" class="iconic-transfer-arrowhead iconic-transfer-arrowhead-bottom iconic-property-accent iconic-property-fill" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-transfer-line iconic-transfer-line-bottom iconic-property-stroke" d="M1.5 4.5h25" fill="none" />
+    <path d="M31.6 4.8l-5.2 3.9c-.221.166-.4.076-.4-.2v-8c0-.276.179-.366.4-.2l5.2 3.9c.221.166.221.434 0 .6z" class="iconic-transfer-arrowhead iconic-transfer-arrowhead-top iconic-property-fill" />
+  </g>
+  <g class="iconic-transfer-sm iconic-container iconic-sm" data-width="16" data-height="12" display="none" transform="scale(8) translate(0 2)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-transfer-line iconic-transfer-line-bottom iconic-property-accent iconic-property-stroke" d="M15 9h-12" fill="none" />
+    <path class="iconic-transfer-arrowhead iconic-transfer-arrowhead-bottom iconic-property-accent iconic-property-fill" d="M3 12v-6l-3 3z" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-transfer-line iconic-transfer-line-top iconic-property-stroke" d="M1 3h12" fill="none" />
+    <path class="iconic-transfer-arrowhead iconic-transfer-arrowhead-top iconic-property-fill" d="M13 0v6l3-3z" />
+  </g>
+</svg>

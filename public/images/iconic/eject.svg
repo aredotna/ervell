@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-eject" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Eject</title>
+  </g>
+  <g class="iconic-eject-lg iconic-container iconic-lg" data-width="96" data-height="64" display="inline" transform="translate(16 32)">
+    <path d="M46.961 1.082l-45.922 47.836c-.574.598-.367 1.082.461 1.082h93c.828 0 1.035-.484.461-1.082l-45.922-47.836c-.574-.598-1.504-.598-2.078 0z" class="iconic-eject-arrowhead iconic-property-fill" />
+    <path class="iconic-eject-line iconic-property-fill" d="M0 56h96v8h-96z" />
+  </g>
+  <g class="iconic-eject-md iconic-container iconic-md" data-width="22" data-height="16" display="none" transform="scale(4) translate(5 8)">
+    <path d="M10.646.354l-10.293 10.293c-.195.195-.13.354.146.354h21c.276 0 .342-.158.146-.354l-10.293-10.293c-.195-.195-.512-.195-.707 0z" class="iconic-eject-arrowhead iconic-property-fill" />
+    <path class="iconic-eject-line iconic-property-fill" d="M0 13h22v3h-22z" />
+  </g>
+  <g class="iconic-eject-sm iconic-container iconic-sm" data-width="10" data-height="8" display="none" transform="scale(8) translate(3 4)">
+    <path class="iconic-eject-arrowhead iconic-property-fill" d="M5 0l-5 5h10z" />
+    <path class="iconic-eject-line iconic-property-fill" d="M0 6h10v2h-10z" />
+  </g>
+</svg>

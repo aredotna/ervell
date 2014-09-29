@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-radiation" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Radiation</title>
+  </g>
+  <g class="iconic-radiation-lg iconic-container iconic-lg" data-width="128" data-height="120" display="inline" transform="translate(0 4)">
+    <circle cx="64" cy="56" r="12" class="iconic-radiation-center iconic-property-accent iconic-property-fill" />
+    <path d="M52.999 36.944c-6.575 3.804-10.999 10.913-10.999 19.056h-42c0-23.688 12.869-44.37 31.997-55.436l21.002 36.38z" class="iconic-radiation-trefoil iconic-radiation-trefoil-3 iconic-property-fill" />
+    <path d="M52.992 75.052c3.238 1.875 6.998 2.948 11.008 2.948 4.008 0 7.765-1.072 11.001-2.944l21.002 36.38c-9.414 5.446-20.345 8.564-32.003 8.564-11.667 0-22.605-3.122-32.024-8.576l21.016-36.372z" class="iconic-radiation-trefoil iconic-radiation-trefoil-2 iconic-property-fill"
+    />
+    <path d="M86 56c0-8.14-4.42-15.247-10.992-19.052l21.016-36.372c19.117 11.069 31.976 31.745 31.976 55.424h-42z" class="iconic-radiation-trefoil iconic-radiation-trefoil-1 iconic-property-fill" />
+  </g>
+  <g class="iconic-radiation-md iconic-container iconic-md" data-width="32" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <circle cx="16" cy="14" r="3" class="iconic-radiation-center iconic-property-accent iconic-property-fill" />
+    <path d="M0 14c0-5.922 3.217-11.092 7.999-13.859l4.75 8.229c-1.943 1.124-3.25 3.225-3.25 5.63h-9.5z" class="iconic-radiation-trefoil iconic-radiation-trefoil-3 iconic-property-fill" />
+    <path d="M12.748 19.629c.957.554 2.067.871 3.252.871 1.184 0 2.294-.317 3.25-.87l4.75 8.229c-2.353 1.362-5.086 2.141-8.001 2.141-2.917 0-5.651-.78-8.006-2.144l4.754-8.227z" class="iconic-radiation-trefoil iconic-radiation-trefoil-2 iconic-property-fill"
+    />
+    <path d="M19.252 8.371c1.941 1.124 3.248 3.224 3.248 5.629h9.5c0-5.92-3.215-11.089-7.994-13.856l-4.754 8.227z" class="iconic-radiation-trefoil iconic-radiation-trefoil-1 iconic-property-fill" />
+  </g>
+  <g class="iconic-radiation-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <circle cx="8" cy="7" r="2" class="iconic-radiation-center iconic-property-accent iconic-property-fill" />
+    <path d="M0 7c0-2.961 1.609-5.546 4-6.929l2 3.465c-1.196.692-2 1.984-2 3.465h-4z" class="iconic-radiation-trefoil iconic-radiation-trefoil-3 iconic-property-fill" />
+    <path d="M5.998 10.464c.589.341 1.272.536 2.002.536.729 0 1.412-.195 2-.535l2 3.465c-1.177.681-2.543 1.07-4 1.07-1.458 0-2.826-.39-4.003-1.072l2.002-3.464z" class="iconic-radiation-trefoil iconic-radiation-trefoil-2 iconic-property-fill" />
+    <path d="M12 7c0-1.48-.804-2.772-1.998-3.464l2.002-3.464c2.389 1.384 3.997 3.968 3.997 6.928h-4z" class="iconic-radiation-trefoil iconic-radiation-trefoil-1 iconic-property-fill" />
+  </g>
+</svg>

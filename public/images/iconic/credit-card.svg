@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-credit-card" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Credit Card</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-credit-card-clip-0">
+      <path d="M0 0v80h128v-80h-128zm30 71.5c0 .275-.225.5-.5.5h-21c-.275 0-.5-.225-.5-.5v-13c0-.275.225-.5.5-.5h21c.275 0 .5.225.5.5v13zm62-30c0 .275-.225.5-.5.5h-83c-.275 0-.5-.225-.5-.5v-11c0-.275.225-.5.5-.5h83c.275 0 .5.225.5.5v11zm28 0c0 .275-.225.5-.5.5h-23c-.275 0-.5-.225-.5-.5v-11c0-.275.225-.5.5-.5h23c.275 0 .5.225.5.5v11zm6-19.5h-124v-14h124v14z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-md-credit-card-clip-0">
+      <path d="M0 0v20h32v-20h-32zm8 16.75c0 .137-.112.25-.25.25h-4.5c-.138 0-.25-.113-.25-.25v-2.5c0-.137.112-.25.25-.25h4.5c.138 0 .25.113.25.25v2.5zm15-6c0 .138-.113.25-.25.25h-19.5c-.138 0-.25-.113-.25-.25v-1.5c0-.137.112-.25.25-.25h19.5c.137 0 .25.113.25.25v1.5zm5 0c0 .138-.113.25-.25.25h-3.5c-.137 0-.25-.113-.25-.25v-1.5c0-.137.113-.25.25-.25h3.5c.137 0 .25.113.25.25v1.5zm3-4.75h-30v-3h30v3z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-credit-card-clip-0">
+      <path d="M0 2v-2h16v2h-16zm16 2v8h-16v-8h16zm-11 4h-3v2h3v-2z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-credit-card-lg iconic-container iconic-lg" data-width="128" data-height="80" display="inline" transform="translate(0 24)">
+    <path clip-path="url(#iconic-size-lg-credit-card-clip-0)" d="M125 80h-122c-1.657 0-3-1.343-3-3v-74c0-1.657 1.343-3 3-3h122c1.657 0 3 1.343 3 3v74c0 1.657-1.343 3-3 3z" class="iconic-credit-card-body iconic-property-fill" />
+  </g>
+  <g class="iconic-credit-card-md iconic-container iconic-md" data-width="32" data-height="20" display="none" transform="scale(4) translate(0 6)">
+    <path clip-path="url(#iconic-size-md-credit-card-clip-0)" d="M31 20h-30c-.552 0-1-.448-1-1v-18c0-.552.448-1 1-1h30c.552 0 1 .448 1 1v18c0 .552-.448 1-1 1z" class="iconic-credit-card-body iconic-property-fill" />
+  </g>
+  <g class="iconic-credit-card-sm iconic-container iconic-sm" data-width="16" data-height="12" display="none" transform="scale(8) translate(0 2)">
+    <path d="M15.5 12h-15c-.276 0-.5-.224-.5-.5v-11c0-.276.224-.5.5-.5h15c.276 0 .5.224.5.5v11c0 .276-.224.5-.5.5z" clip-path="url(#iconic-size-sm-credit-card-clip-0)" class="iconic-credit-card-body iconic-property-fill" />
+  </g>
+</svg>

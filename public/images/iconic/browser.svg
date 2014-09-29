@@ -1,0 +1,56 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="browser" width="128" height="128" class="iconic iconic-browser" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Browser</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-browser-clip-0">
+      <path d="M0 11v97h128v-97h-128zm124 93h-120v-90h120v90z"/>
+    </clipPath>
+    <clipPath id="iconic-size-lg-browser-clip-1">
+      <path d="M0 0v14h128v-14h-128zm8 10l-4.1-2 4.1-2v4zm4 0v-4l4 2-4 2zm110.1 0h-100.1c-1.1 0-2-.9-2-2s.9-2 2-2h100.1c1.1 0 2 .9 2 2s-.9 2-2 2z"/>
+    </clipPath>
+    <clipPath id="iconic-size-lg-browser-clip-2">
+      <rect x="4" y="14" width="120" height="90"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-browser-clip-0">
+      <path d="M0 4v23h32v-23h-32zm30 21h-28v-20h28v20z"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-browser-clip-1">
+      <path d="M0 0v5h32v-5h-32zm3 3l-1-.5 1-.5v1zm1 0v-1l1 .5-1 .5zm25.5 0h-23c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5z"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-browser-clip-2">
+      <rect x="2" y="5" width="28" height="20"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-browser-clip-0">
+      <path d="M0 2.5v11.5h16v-11.5h-16zm15 10.5h-14v-10h14v10z"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-browser-clip-1">
+      <path d="M0 0v3h16v-3h-16zm1.5 2c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm2 0c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm10 0h-8c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h8c.3 0 .5.2.5.5s-.2.5-.5.5z"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-browser-clip-2">
+      <rect x="1" y="3" width="14" height="10"/>
+    </clipPath>
+  </defs>
+  <g data-width="128" data-height="108" class="iconic-container iconic-lg" display="inline" transform="translate(0 10)">
+    <path clip-path="url(#iconic-size-lg-browser-clip-0)" d="M126.5 108h-125c-.8 0-1.5-.7-1.5-1.5v-94c0-.8.7-1.5 1.5-1.5h125c.8 0 1.5.7 1.5 1.5v94c0 .8-.7 1.5-1.5 1.5z" class="iconic-browser-border iconic-property-fill"/>
+    <path clip-path="url(#iconic-size-lg-browser-clip-1)" d="M0 1.5v11c0 .8.7 1.5 1.5 1.5h125c.8 0 1.5-.7 1.5-1.5v-11c0-.8-.7-1.5-1.5-1.5h-125c-.8 0-1.5.7-1.5 1.5z" class="iconic-browser-top iconic-property-fill"/>
+    <image class="iconic-browser-screenshot-image" data-max-width="120" x="4" y="14" clip-path="url(#iconic-size-lg-browser-clip-2)"/>
+  </g>
+  <g data-width="32" data-height="27" class="iconic-container iconic-md" display="none" transform="scale(4) translate(0 2)">
+    <path clip-path="url(#iconic-size-md-browser-clip-0)" d="M31.5 27h-31c-.3 0-.5-.2-.5-.5v-22c0-.3.2-.5.5-.5h31c.3 0 .5.2.5.5v22c0 .3-.2.5-.5.5z" class="iconic-browser-border iconic-property-fill"/>
+    <path clip-path="url(#iconic-size-md-browser-clip-1)" d="M31.5 5h-31c-.3 0-.5-.2-.5-.5v-4c0-.3.2-.5.5-.5h31c.3 0 .5.2.5.5v4c0 .3-.2.5-.5.5z" class="iconic-browser-top iconic-property-fill"/>
+    <image class="iconic-browser-screenshot-image" data-max-width="28" x="2" y="5" clip-path="url(#iconic-size-md-browser-clip-2)"/>
+  </g>
+  <g data-width="16" data-height="14" class="iconic-container iconic-sm" display="none" transform="scale(8) translate(0 1)">
+    <path clip-path="url(#iconic-size-sm-browser-clip-0)" class="iconic-browser-border iconic-property-fill" d="M0 2.5h16v11.5h-16z"/>
+    <path clip-path="url(#iconic-size-sm-browser-clip-1)" class="iconic-browser-top iconic-property-fill" d="M0 0h16v3h-16z"/>
+    <image class="iconic-browser-screenshot-image" data-max-width="14" x="1" y="3" clip-path="url(#iconic-size-sm-browser-clip-2)"/>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["browser"]=iconicApis["browser"]||function(t){var e=function(e){t.setAttribute("data-screenshot",e);var a,r,i=t.querySelectorAll(".iconic-browser-screenshot-image"),n=0,o=new Image;o.onload=function(){for(n=0;n<i.length;n++){i[n].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",e),i[n].setAttribute("display","inline");var t=o.width/o.height,c=parseInt(i[n].getAttribute("data-max-width"));r=c,a=c/t,i[n].setAttribute("height",a+"px"),i[n].setAttribute("width",r+"px")}};var c=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,s=new RegExp(c);if(e&&e.match(s))o.src=e;else for(n=0;n<i.length;n++)i[n].setAttribute("display","none"),i[n].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","")},a=function(){var a=t.getAttribute("data-screenshot")||"";e(a)};return{update:a,setScreenshot:e}};
+//]]>
+</script>
+</svg>
+
+

@@ -1,0 +1,39 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="monitor" width="128" height="128" class="iconic iconic-monitor" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Monitor</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-monitor-clip-0">
+      <rect x="4" y="4" width="120" height="72"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-monitor-clip-0">
+      <rect x="2" y="2" width="28" height="18"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-monitor-clip-0">
+      <rect x="1" y="1" width="14" height="9"/>
+    </clipPath>
+  </defs>
+  <g data-width="128" data-height="106" class="iconic-container iconic-lg" display="inline" transform="translate(0 11)">
+    <path d="M75.5 98l-1.5-16h-4c0 3.3-2.7 6-6 6s-6-2.7-6-6h-4l-1.5 16c-.3 2.2-2.3 4-4.5 4v2h32.1v-2c-2.2 0-4.3-1.8-4.6-4z" class="iconic-monitor-base iconic-monitor-base-neck iconic-property-fill"/>
+    <path d="M88 102h-48c-2.2 0-4 1.8-4 4h56c0-2.2-1.8-4-4-4z" class="iconic-monitor-base iconic-monitor-base-foot iconic-property-fill"/>
+    <path stroke="#000" stroke-width="4" stroke-linejoin="round" stroke-miterlimit="10" class="iconic-monitor-screen iconic-monitor-screen-border iconic-property-stroke" d="M2 2h124v76h-124z" fill="none"/>
+    <image class="iconic-monitor-screenshot-image" data-max-width="120" x="4" y="4" clip-path="url(#iconic-size-lg-monitor-clip-0)"/>
+  </g>
+  <g data-width="32" data-height="29" class="iconic-container iconic-md" display="none" transform="scale(4) translate(0 1)">
+    <path stroke="#000" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="10" class="iconic-monitor-screen iconic-monitor-screen-border iconic-property-stroke" d="M1 1h30v20h-30z" fill="none"/>
+    <path d="M20 28.5v-.5c-.6 0-1-.4-1-1v-4h-6v4c0 .6-.4 1-1 1v.5h8z" class="iconic-monitor-base iconic-monitor-base-neck iconic-property-fill"/>
+    <path d="M22 28h-12c-.6 0-1 .4-1 1h14c0-.6-.4-1-1-1z" class="iconic-monitor-base iconic-monitor-base-foot iconic-property-fill"/>
+    <image class="iconic-monitor-screenshot-image" data-max-width="28" x="2" y="2" clip-path="url(#iconic-size-md-monitor-clip-0)"/>
+  </g>
+  <g data-width="16" data-height="15" class="iconic-container iconic-sm" display="none" transform="scale(8)">
+    <path class="iconic-monitor-base iconic-monitor-base-neck iconic-property-fill" d="M6 12h4v2.3h-4z"/>
+    <path d="M12 14h-8c-.6 0-1 .4-1 1h10c0-.6-.4-1-1-1z" class="iconic-monitor-base iconic-monitor-base-foot iconic-property-fill"/>
+    <path stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" class="iconic-monitor-screen iconic-monitor-screen-border iconic-property-stroke" d="M.5.5h15v10h-15z" fill="none"/>
+    <image class="iconic-monitor-screenshot-image" data-max-width="14" x="1" y="1" clip-path="url(#iconic-size-sm-monitor-clip-0)"/>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["monitor"]=iconicApis["monitor"]||function(t){var e=function(e){t.setAttribute("data-screenshot",e);var i,r,n=t.querySelectorAll(".iconic-monitor-screenshot-image"),a=0,c=new Image;c.onload=function(){for(a=0;a<n.length;a++){n[a].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",e),n[a].setAttribute("display","inline");var t=c.width/c.height,o=parseInt(n[a].getAttribute("data-max-width"));r=o,i=o/t,n[a].setAttribute("height",i+"px"),n[a].setAttribute("width",r+"px")}};var o=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,s=new RegExp(o);if(e&&e.match(s))c.src=e;else for(a=0;a<n.length;a++)n[a].setAttribute("display","none"),n[a].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","")},i=function(){var i=t.getAttribute("data-screenshot")||"";e(i)};return{update:i,setScreenshot:e}};
+//]]>
+</script>
+</svg>

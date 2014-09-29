@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-media-play-circle" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Media Play Circle</title>
+  </g>
+  <g class="iconic-media-play-circle-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path d="M64 0c-35.346 0-64 28.654-64 64 0 35.346 28.654 64 64 64s64-28.654 64-64c0-35.346-28.654-64-64-64zm-18 90v-52l52 26-52 26z" class="iconic-media-play-circle-body iconic-property-fill" />
+  </g>
+  <g class="iconic-media-play-circle-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zm-5 23v-14l14 7-14 7z" class="iconic-media-play-circle-body iconic-property-fill" />
+  </g>
+  <g class="iconic-media-play-circle-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm-3 12v-8l8 4-8 4z" class="iconic-media-play-circle-body iconic-property-fill" />
+  </g>
+</svg>

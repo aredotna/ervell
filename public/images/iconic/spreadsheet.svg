@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-spreadsheet" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Spreadsheet</title>
+  </g>
+  <g class="iconic-spreadsheet-lg iconic-container iconic-lg" data-width="128" data-height="104" display="inline" transform="translate(0 12)">
+    <path stroke="#000" stroke-width="2" class="iconic-spreadsheet-column iconic-spreadsheet-column-2 iconic-property-accent iconic-property-stroke" d="M73 4v96.586" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-spreadsheet-column iconic-spreadsheet-column-1 iconic-property-accent iconic-property-stroke" d="M25 4v96.586" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-spreadsheet-row iconic-spreadsheet-row-4 iconic-property-accent iconic-property-stroke" d="M4 79h120" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-spreadsheet-row iconic-spreadsheet-row-3 iconic-property-accent iconic-property-stroke" d="M4 61h120" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-spreadsheet-row iconic-spreadsheet-row-2 iconic-property-accent iconic-property-stroke" d="M4 43h120" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-spreadsheet-row iconic-spreadsheet-row-1 iconic-property-accent iconic-property-stroke" d="M4 25h120" fill="none" />
+    <path d="M120 8v88h-112v-88h112m5-8h-122c-1.657 0-3 1.343-3 3v98c0 1.657 1.343 3 3 3h122c1.657 0 3-1.343 3-3v-98c0-1.657-1.343-3-3-3z" class="iconic-spreadsheet-frame iconic-property-fill" />
+  </g>
+  <g class="iconic-spreadsheet-md iconic-container iconic-md" data-width="32" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <path stroke="#000" class="iconic-spreadsheet-column iconic-spreadsheet-column-2 iconic-property-accent iconic-property-stroke" d="M18.5 2v26" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-column iconic-spreadsheet-column-1 iconic-property-accent iconic-property-stroke" d="M7.5 1.5v27" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-4 iconic-property-accent iconic-property-stroke" d="M1.5 22.5h29" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-3 iconic-property-accent iconic-property-stroke" d="M1.5 17.5h29" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-2 iconic-property-accent iconic-property-stroke" d="M1.5 12.5h29" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-1 iconic-property-accent iconic-property-stroke" d="M1.5 7.5h29" fill="none" />
+    <path d="M29 3v24h-26v-24h26m2-3h-30c-.552 0-1 .448-1 1v28c0 .552.448 1 1 1h30c.552 0 1-.448 1-1v-28c0-.552-.448-1-1-1z" class="iconic-spreadsheet-frame iconic-property-fill" />
+  </g>
+  <g class="iconic-spreadsheet-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path stroke="#000" class="iconic-spreadsheet-column iconic-spreadsheet-column-2 iconic-property-accent iconic-property-stroke" d="M9.5 2v12" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-column iconic-spreadsheet-column-1 iconic-property-accent iconic-property-stroke" d="M4.5 1v13" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-3 iconic-property-accent iconic-property-stroke" d="M1 10.5h14" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-2 iconic-property-accent iconic-property-stroke" d="M1 7.5h14" fill="none" />
+    <path stroke="#000" class="iconic-spreadsheet-row iconic-spreadsheet-row-1 iconic-property-accent iconic-property-stroke" d="M1 4.5h14" fill="none" />
+    <path d="M14 2v11h-12v-11h12m1.75-2h-15.5c-.138 0-.25.112-.25.25v14.5c0 .138.112.25.25.25h15.5c.138 0 .25-.112.25-.25v-14.5c0-.138-.112-.25-.25-.25z" class="iconic-spreadsheet-frame iconic-property-fill" />
+  </g>
+</svg>

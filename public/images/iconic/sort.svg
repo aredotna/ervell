@@ -1,0 +1,56 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="sort" width="128" height="128" class="iconic iconic-sort iconic-orientation-square" viewBox="0 0 128 128">
+  <g><title>Sort</title></g>
+  <g data-width="102" data-height="128" class="iconic-lg iconic-container" display="inline" transform="translate(13)">
+    <g class="iconic-sort-ascending">
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-arrow iconic-sort-ascending-arrow-line iconic-property-stroke" d="M14 4v98.4" fill="none"/>
+      <path d="M14.8 126.7l12.5-21.4c.4-.7.1-1.3-.7-1.3h-25c-.8 0-1.2.6-.7 1.3l12.5 21.4c.3.7.9.7 1.4 0z" class="iconic-sort-ascending-arrow iconic-sort-ascending-arrow-head iconic-property-fill"/>
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-small iconic-property-accent iconic-property-stroke" d="M38 22h32" fill="none"/>
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-medium iconic-property-accent iconic-property-stroke" d="M38 46h46" fill="none"/>
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-large iconic-property-accent iconic-property-stroke" d="M38 70h60" fill="none"/>
+    </g>
+    <g class="iconic-sort-descending" display="none">
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-arrow iconic-sort-descending-arrow-line iconic-property-stroke" d="M14 4v98.4" fill="none"/>
+      <path d="M14.8 126.7l12.5-21.4c.4-.7.1-1.3-.7-1.3h-25c-.8 0-1.2.6-.7 1.3l12.5 21.4c.3.7.9.7 1.4 0z" class="iconic-sort-descending-arrow iconic-sort-descending-arrow-head iconic-property-fill"/>
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-small iconic-property-accent iconic-property-stroke" d="M38 70h32" fill="none"/>
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-medium iconic-property-accent iconic-property-stroke" d="M38 46h46" fill="none"/>
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-large iconic-property-accent iconic-property-stroke" d="M38 22h60" fill="none"/>
+    </g>
+  </g>
+  <g data-width="30" data-height="32" class="iconic-md iconic-container" display="none" transform="scale(4) translate(1)">
+    <g class="iconic-sort-ascending">
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-arrow iconic-sort-ascending-arrow-line iconic-property-stroke" d="M4.5 1.5v24.4" fill="none"/>
+      <path d="M4.2 31.6l-3.9-5.2c-.2-.2-.1-.4.2-.4h8c.3 0 .4.2.2.4l-3.9 5.2c-.2.2-.4.2-.6 0z" class="iconic-sort-ascending-arrow iconic-sort-ascending-arrow-head iconic-property-fill"/>
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-small iconic-property-accent iconic-property-stroke" d="M12.5 4.5h6" fill="none"/>
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-medium iconic-property-accent iconic-property-stroke" d="M12.5 12.5h11" fill="none"/>
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-large iconic-property-accent iconic-property-stroke" d="M12.5 20.5h16" fill="none"/>
+    </g>
+    <g class="iconic-sort-descending" display="none">
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-arrow iconic-sort-descending-arrow-line iconic-property-stroke" d="M4.5 1.5v24.4" fill="none"/>
+      <path d="M4.2 31.6l-3.9-5.2c-.2-.2-.1-.4.2-.4h8c.3 0 .4.2.2.4l-3.9 5.2c-.2.2-.4.2-.6 0z" class="iconic-sort-descending-arrow iconic-sort-descending-arrow-head iconic-property-fill"/>
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-small iconic-property-accent iconic-property-stroke" d="M12.5 20.5h6" fill="none"/>
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-medium iconic-property-accent iconic-property-stroke" d="M12.5 12.5h11" fill="none"/>
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-large iconic-property-accent iconic-property-stroke" d="M12.5 4.5h16" fill="none"/>
+    </g>
+  </g>
+  <g data-width="16" data-height="16" class="iconic-sm iconic-container" display="none" transform="scale(8)">
+    <g class="iconic-sort-ascending">
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-arrow iconic-sort-ascending-arrow-line iconic-property-stroke" d="M4 1v12" fill="none"/>
+      <path class="iconic-sort-ascending-arrow iconic-sort-ascending-arrow-head iconic-property-fill" d="M4 16l4-4h-8z"/>
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-small iconic-property-stroke" d="M8 1h3" fill="none"/>
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-medium iconic-property-accent iconic-property-stroke" d="M8 5h5" fill="none"/>
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-ascending-sort iconic-sort-ascending-sort-large iconic-property-accent iconic-property-stroke" d="M8 9h7" fill="none"/>
+    </g>
+    <g class="iconic-sort-descending" display="none">
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-arrow iconic-sort-descending-arrow-line iconic-property-stroke" d="M4 1v12" fill="none"/>
+      <path class="iconic-sort-descending-arrow iconic-sort-descending-arrow-head iconic-property-fill" d="M4 16l4-4h-8z"/>
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-large iconic-property-accent iconic-property-stroke" d="M8 1h7" fill="none"/>
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-medium iconic-property-accent iconic-property-stroke" d="M8 5h5" fill="none"/>
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-sort-descending-sort iconic-sort-descending-sort-small iconic-property-accent iconic-property-stroke" d="M8 9h3" fill="none"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["sort"]=iconicApis["sort"]||function(t){var e=function(e){t.setAttribute("data-state",e);var i,r,n=t.querySelectorAll(".iconic-sort-ascending"),a=t.querySelectorAll(".iconic-sort-descending");i=r="none","descending"===e?i="inline":r="inline";for(var c=0;c<n.length;c++)n[c].setAttribute("display",r),a[c].setAttribute("display",i)},i=function(){var i=t.getAttribute("data-state");i&&e(i)};return{update:i,setState:e}};
+//]]>
+</script>
+</svg>

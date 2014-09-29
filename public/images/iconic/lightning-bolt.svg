@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-lightning-bolt" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Lightning Bolt</title>
+  </g>
+  <g class="iconic-lightning-bolt-lg iconic-container iconic-lg" data-width="116" data-height="128" display="inline" transform="translate(6)">
+    <path d="M71.124 1.218l-44.249 61.564c-.484.673-.204 1.218.624 1.218h17c.828 0 1.108.545.625 1.218l-44.249 61.564c-.483.673-.361.786.273.253l97.703-82.07c.634-.533.477-.965-.352-.965h-23c-.828 0-1.036-.486-.464-1.085l39.929-41.83c.572-.599.364-1.085-.464-1.085h-41c-.828 0-1.892.545-2.376 1.218z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-lightning-bolt-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path d="M17.7.4l-11.4 15.2c-.166.221-.076.4.2.4h5c.276 0 .366.179.2.4l-11.4 15.2c-.166.221-.129.256.083.078l24.234-20.357c.211-.178.159-.322-.117-.322h-6c-.276 0-.342-.158-.146-.354l10.293-10.293c.195-.195.13-.354-.146-.354h-10c-.276 0-.634.179-.8.4z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-lightning-bolt-sm iconic-container iconic-sm" data-width="14" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path class="iconic-property-fill" d="M8 0l-6 8h3l-5 8 13-11h-4l5-5z" />
+  </g>
+</svg>

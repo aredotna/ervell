@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-tag" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Tag</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-tag-clip-0">
+      <path d="M48 0h-48v48l80 80 48-48-80-80zm-22 34c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-tag-clip-0">
+      <path d="M12 0h-12v12.01l20 19.99 12-12-20-20zm-5.5 9c-1.381 0-2.5-1.119-2.5-2.5s1.119-2.5 2.5-2.5 2.5 1.119 2.5 2.5-1.119 2.5-2.5 2.5z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-tag-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path d="M46.5 0h-45c-.828 0-1.5.672-1.5 1.5v45c0 .828.475 1.975 1.061 2.561l77.879 77.879c.586.586 1.536.586 2.121 0l45.879-45.879c.586-.586.586-1.536 0-2.121l-77.879-77.879c-.586-.586-1.732-1.061-2.561-1.061z" clip-path="url(#iconic-size-lg-tag-clip-0)"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-tag-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path d="M11.5 0h-11c-.276 0-.5.224-.5.5v11.01c0 .276.158.658.354.854l19.293 19.283c.195.195.512.195.707 0l11.293-11.293c.195-.195.195-.512 0-.707l-19.293-19.293c-.195-.195-.578-.354-.854-.354z" clip-path="url(#iconic-size-md-tag-clip-0)" class="iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-tag-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M6 0h-6v6.005l10.006 9.995 5.994-6-10-10zm-2 6c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" class="iconic-property-fill" />
+  </g>
+</svg>

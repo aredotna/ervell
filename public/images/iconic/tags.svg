@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-tags" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Tags</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-tags-clip-0">
+      <path d="M108 64l-32 32 6 6 38-38-68-64h-12z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-tags-clip-1">
+      <path d="M36 0h-36v36l68 64 36-36-68-64zm-14 28c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-tags-clip-0">
+      <path d="M32 16l-17-16h-3l17 16-8.5 8.5 1.5 1.5z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-tags-clip-1">
+      <path d="M10 0h-10v10l17 16 10-10-17-16zm-4 8c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-tags-clip-0">
+      <path d="M7 0l7 7-4 4 1.01 1 4.99-5-7-7z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-tags-lg iconic-container iconic-lg" data-width="120" data-height="102" display="inline" transform="translate(4 13)">
+    <path d="M16 1.5v33c0 .828.489 1.96 1.092 2.528l65.815 61.944c.603.568 1.567.553 2.153-.033l33.879-33.879c.586-.586.572-1.521-.032-2.089l-65.816-61.944c-.603-.568-1.764-1.028-2.592-1.028h-33c-.828 0-1.5.672-1.5 1.5z" clip-path="url(#iconic-size-lg-tags-clip-0)"
+    class="iconic-tags-back iconic-property-accent iconic-property-fill" />
+    <path d="M34.5 0h-33c-.828 0-1.5.672-1.5 1.5v33c0 .828.489 1.96 1.092 2.528l65.815 61.944c.603.568 1.567.553 2.153-.033l33.879-33.879c.586-.586.572-1.521-.032-2.089l-65.816-61.944c-.603-.568-1.764-1.028-2.592-1.028z" clip-path="url(#iconic-size-lg-tags-clip-1)"
+    class="iconic-tags-front iconic-property-fill" />
+  </g>
+  <g class="iconic-tags-md iconic-container iconic-md" data-width="32" data-height="26" display="none" transform="scale(4) translate(0 3)">
+    <path d="M5 .5v9c0 .276.163.653.364.843l16.272 15.315c.201.189.522.184.718-.011l9.293-9.293c.195-.195.191-.507-.011-.696l-16.272-15.315c-.201-.189-.588-.343-.864-.343h-9c-.276 0-.5.224-.5.5z" clip-path="url(#iconic-size-md-tags-clip-0)" class="iconic-tags-back iconic-property-accent iconic-property-fill"
+    />
+    <path d="M9.5 0h-9c-.276 0-.5.224-.5.5v9c0 .276.163.653.364.843l16.272 15.315c.201.189.522.184.718-.011l9.293-9.293c.195-.195.191-.507-.011-.696l-16.272-15.315c-.201-.189-.588-.343-.864-.343z" clip-path="url(#iconic-size-md-tags-clip-1)" class="iconic-tags-front iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-tags-sm iconic-container iconic-sm" data-width="16" data-height="12" display="none" transform="scale(8) translate(0 2)">
+    <path clip-path="url(#iconic-size-sm-tags-clip-0)" class="iconic-tags-back iconic-property-accent iconic-property-fill" d="M4 0l.01 5 6.99 7 5-5-7-7z" />
+    <path d="M5 0h-5v5l7 7 5-5-7-7zm-1.5 5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z" class="iconic-tags-front iconic-property-fill" />
+  </g>
+</svg>

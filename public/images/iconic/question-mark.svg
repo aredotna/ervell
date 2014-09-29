@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-question-mark" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Question Mark</title>
+  </g>
+  <g class="iconic-question-mark-lg iconic-container iconic-lg" data-width="76" data-height="128" display="inline" transform="translate(26)">
+    <path stroke="#231F20" stroke-width="12" d="M38 104v-10c0-35 32-32 32-64 0-11.75-8-24-32-24-32 0-32 24-32 30v2" class="iconic-question-mark-curve iconic-property-stroke" fill="none" />
+    <path class="iconic-question-mark-dot iconic-property-fill" d="M32 116h12v12h-12z" />
+  </g>
+  <g class="iconic-question-mark-md iconic-container iconic-md" data-width="20" data-height="32" display="none" transform="scale(4) translate(6)">
+    <path stroke="#231F20" stroke-width="4" d="M2 10c0-2 0-8 8-8 6 0 8 3.063 8 6 0 8-8 7.25-8 16v1" class="iconic-question-mark-curve iconic-property-stroke" fill="none" />
+    <path class="iconic-question-mark-dot iconic-property-fill" d="M8 28h4v4h-4z" />
+  </g>
+  <g class="iconic-question-mark-sm iconic-container iconic-sm" data-width="10" data-height="16" display="none" transform="scale(8) translate(3)">
+    <path stroke="#231F20" stroke-width="2" d="M1 5c0-1 0-4 4-4 3 0 4 1.531 4 3 0 4-4 3.5-4 7.5v.5" class="iconic-question-mark-curve iconic-property-stroke" fill="none" />
+    <path class="iconic-question-mark-dot iconic-property-fill" d="M4 14h2v2h-2z" />
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-power-standby" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Power Standby</title>
+  </g>
+  <g class="iconic-power-standby-lg iconic-container iconic-lg" data-width="112" data-height="126" display="inline" transform="translate(8 1)">
+    <path stroke="#000" stroke-width="8" d="M71.463 20.338c1.628.506 3.222 1.091 4.777 1.749 1.555.658 3.072 1.389 4.545 2.19s2.904 1.67 4.287 2.605c1.383.934 2.719 1.934 4.003 2.994 1.284 1.06 2.517 2.18 3.693 3.356 1.176 1.176 2.296 2.409 3.356 3.693 1.06 1.284 2.059 2.62 2.994 4.003.934 1.383 1.804 2.814 2.605 4.287.8 1.474 1.532 2.99 2.19 4.545s1.242 3.149 1.749 4.777c.506 1.628.935 3.291 1.281 4.983.346 1.692.611 3.415.788 5.163.178 1.748.268 3.522.268 5.317s-.091 3.569-.269 5.317c-.177 1.748-.442 3.471-.788 5.163s-.775 3.355-1.281 4.983-1.091 3.222-1.749 4.777-1.389 3.072-2.19 4.545c-.8 1.474-1.67 2.904-2.605 4.287s-1.934 2.719-2.994 4.003c-1.06 1.284-2.18 2.517-3.356 3.693s-2.409 2.296-3.693 3.356c-1.284 1.06-2.62 2.059-4.003 2.994s-2.814 1.804-4.287 2.605c-1.474.8-2.99 1.532-4.545 2.19s-3.149 1.242-4.777 1.749-3.291.935-4.983 1.281-3.415.611-5.163.788c-1.748.178-3.522.268-5.317.268s-3.569-.091-5.317-.269c-1.748-.177-3.471-.442-5.163-.788-1.692-.346-3.355-.775-4.983-1.281-1.628-.506-3.222-1.091-4.777-1.749s-3.072-1.389-4.545-2.19c-1.474-.8-2.904-1.67-4.287-2.605s-2.719-1.934-4.003-2.994c-1.284-1.06-2.517-2.18-3.693-3.356-1.176-1.176-2.296-2.409-3.356-3.693s-2.059-2.62-2.994-4.003-1.804-2.814-2.605-4.287-1.532-2.99-2.19-4.545c-.658-1.555-1.242-3.149-1.749-4.777s-.935-3.291-1.281-4.983c-.346-1.692-.611-3.415-.788-5.163-.178-1.748-.268-3.522-.268-5.317s.091-3.569.269-5.317c.177-1.748.442-3.471.788-5.163.346-1.692.775-3.355 1.281-4.983.506-1.628 1.091-3.222 1.749-4.777.658-1.555 1.389-3.072 2.19-4.545s1.67-2.904 2.605-4.287c.934-1.383 1.934-2.719 2.994-4.003s2.18-2.517 3.356-3.693c1.176-1.176 2.409-2.296 3.693-3.356 1.284-1.06 2.62-2.059 4.003-2.994 1.383-.934 2.814-1.804 4.287-2.605 1.474-.8 2.99-1.532 4.545-2.19 1.555-.658 3.149-1.242 4.777-1.749"
+    class="iconic-power-standby-circle iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-power-standby-line iconic-property-accent iconic-property-stroke" d="M56 4v32" fill="none" />
+  </g>
+  <g class="iconic-power-standby-md iconic-container iconic-md" data-width="27" data-height="31" display="none" transform="scale(4) translate(2)">
+    <path stroke="#000" stroke-width="3" d="M18.171 6.443c1.436.607 2.729 1.486 3.814 2.572s1.964 2.379 2.572 3.814.943 3.014.943 4.671-.336 3.235-.943 4.671c-.607 1.436-1.486 2.729-2.572 3.814s-2.379 1.964-3.814 2.572c-1.436.607-3.014.943-4.671.943s-3.235-.336-4.671-.943-2.729-1.486-3.814-2.572-1.964-2.379-2.572-3.814c-.607-1.436-.943-3.014-.943-4.671s.336-3.235.943-4.671 1.486-2.729 2.572-3.814 2.379-1.965 3.814-2.572"
+    class="iconic-power-standby-circle iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-power-standby-line iconic-property-accent iconic-property-stroke" d="M13.5 1.5v9" fill="none" />
+  </g>
+  <g class="iconic-power-standby-sm iconic-container iconic-sm" data-width="14" data-height="15" display="none" transform="scale(8) translate(1)">
+    <path stroke="#000" stroke-width="2" d="M10.704 3.28c1.398 1.098 2.296 2.805 2.296 4.72 0 3.314-2.686 6-6 6s-6-2.686-6-6c0-1.912.894-3.615 2.287-4.713" class="iconic-power-standby-circle iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-power-standby-line iconic-property-accent iconic-property-stroke" d="M7 1v5" fill="none" />
+  </g>
+</svg>

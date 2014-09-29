@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-elevator" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Elevator</title>
+  </g>
+  <g class="iconic-elevator-lg iconic-container iconic-lg" data-width="72" data-height="128" display="inline" transform="translate(28)">
+    <path d="M36.791 126.725l34.418-55.451c.437-.704.119-1.275-.709-1.275h-69c-.828 0-1.146.571-.709 1.274l34.418 55.451c.437.704 1.145.704 1.582 0z" class="iconic-elevator-arrow-bottom iconic-property-fill" />
+    <path d="M35.209 1.274l-34.418 55.451c-.437.704-.119 1.275.709 1.275h69c.828 0 1.146-.571.709-1.274l-34.418-55.451c-.437-.704-1.145-.704-1.582 0z" class="iconic-elevator-arrow-top iconic-property-fill" />
+  </g>
+  <g class="iconic-elevator-md iconic-container iconic-md" data-width="18" data-height="32" display="none" transform="scale(4) translate(7)">
+    <path d="M9.27 31.579l8.459-13.159c.149-.232.047-.421-.23-.421h-17c-.276 0-.379.188-.23.421l8.459 13.159c.149.232.392.232.541 0z" class="iconic-elevator-arrow-bottom iconic-property-fill" />
+    <path d="M8.73.421l-8.459 13.159c-.149.232-.047.421.23.421h17c.276 0 .379-.188.23-.421l-8.459-13.159c-.149-.232-.392-.232-.541 0z" class="iconic-elevator-arrow-top iconic-property-fill" />
+  </g>
+  <g class="iconic-elevator-sm iconic-container iconic-sm" data-width="10" data-height="16" display="none" transform="scale(8) translate(3)">
+    <path class="iconic-elevator-arrow-bottom iconic-property-fill" d="M5 16l5-7h-10z" />
+    <path class="iconic-elevator-arrow-top iconic-property-fill" d="M5 0l-5 7h10z" />
+  </g>
+</svg>

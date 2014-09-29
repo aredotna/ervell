@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-warning" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Warning</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-warning-clip-0">
+      <path d="M0 0v118h128v-118h-128zm64 98c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm4-29.833l-2 13.833h-4l-2-13.917v-18.083h8v18.167z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-warning-clip-0">
+      <path d="M0 0v30h31v-30h-31zm15.5 26c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm1.5-10l-1 5h-1l-1-5v-6h3v6z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-warning-clip-0">
+      <path d="M0 0v16h16v-16h-16zm8 14c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1zm1-5l-1 1-1-1v-4h2v4z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-warning-lg iconic-container iconic-lg" data-width="128" data-height="118" display="inline" transform="translate(0 5)">
+    <path d="M.715 116.681l62.57-115.363c.395-.728 1.035-.728 1.43 0l62.57 115.363c.395.728.044 1.319-.785 1.319h-125c-.828 0-1.18-.59-.785-1.319z" clip-path="url(#iconic-size-lg-warning-clip-0)" class="iconic-warning-body iconic-property-fill" />
+  </g>
+  <g class="iconic-warning-md iconic-container iconic-md" data-width="31" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <path d="M.23 29.556l15.041-29.112c.127-.245.332-.245.459 0l15.041 29.112c.127.245.006.444-.27.444h-30c-.276 0-.397-.199-.27-.444z" clip-path="url(#iconic-size-md-warning-clip-0)" class="iconic-warning-body iconic-property-fill" />
+  </g>
+  <g class="iconic-warning-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M0 15.75v-1.5c0-.138.05-.35.112-.474l6.776-13.553c.062-.123.224-.224.362-.224h1.5c.138 0 .3.1.362.224l6.776 13.553c.062.124.112.336.112.474v1.5c0 .138-.112.25-.25.25h-15.5c-.138 0-.25-.112-.25-.25z" clip-path="url(#iconic-size-sm-warning-clip-0)"
+    class="iconic-warning-body iconic-property-fill" />
+  </g>
+</svg>

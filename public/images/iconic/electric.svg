@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-electric" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Electric</title>
+  </g>
+  <g class="iconic-electric-lg iconic-container iconic-lg" data-width="68" data-height="128" display="inline" transform="translate(30)">
+    <path class="iconic-property-fill" d="M44 0l-44 76h24v52l44-76h-24z" />
+  </g>
+  <g class="iconic-electric-md iconic-container iconic-md" data-width="18" data-height="32" display="none" transform="scale(4) translate(7)">
+    <path class="iconic-property-fill" d="M11 0l-11 20h7v12l11-20h-7z" />
+  </g>
+  <g class="iconic-electric-sm iconic-container iconic-sm" data-width="10" data-height="16" display="none" transform="scale(8) translate(3)">
+    <path class="iconic-property-fill" d="M6 0l-6 10h4v6l6-10h-4z" />
+  </g>
+</svg>

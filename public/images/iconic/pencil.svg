@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-pencil" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Pencil</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-pencil-clip-0">
+      <path transform="matrix(-.707 -.707 .707 -.707 189.539 102.51)" d="M104.686 6.343h22.627v11.314h-22.627z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-pencil-clip-0">
+      <path transform="matrix(-.707 -.707 .707 -.707 44.971 26.627)" d="M24.465 1.879h7.071v4.243h-7.071z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-pencil-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path d="M106.707 22.707l-77 77c-.195.195-.451.293-.707.293s-.512-.098-.707-.293c-.391-.391-.391-1.023 0-1.414l77-77-7.293-7.293-82.3 82.3c.107.107.197.231.248.384l1.842 5.526 5.526 1.842c.298.1.533.334.632.632l1.842 5.526 5.526 1.842c.153.051.277.142.384.249l82.3-82.3-7.293-7.293z"
+    class="iconic-pencil-shaft iconic-property-fill" />
+    <path d="M24.684 111.949c-.298-.1-.533-.334-.632-.632l-1.842-5.526-5.526-1.842c-.298-.1-.533-.334-.632-.632l-1.675-5.026-8.506 17.58 6.261 6.261 17.58-8.506-5.027-1.676z" class="iconic-pencil-exposed-wood iconic-property-fill" />
+    <path class="iconic-pencil-tip iconic-property-fill" d="M4.565 118.565l-4.565 9.435 9.435-4.565z" />
+    <path clip-path="url(#iconic-size-lg-pencil-clip-0)" d="M114.121 2.121l11.757 11.757c1.172 1.172 1.172 3.071 0 4.243l-5.757 5.757c-1.172 1.172-3.071 1.172-4.243 0l-11.757-11.757c-1.172-1.172-1.172-3.071 0-4.243l5.757-5.757c1.172-1.172 3.071-1.172 4.243 0z"
+    class="iconic-pencil-eraser iconic-property-fill" />
+    <path transform="matrix(-.707 .707 -.707 -.707 199.51 -44.64)" class="iconic-pencil-eraser-border iconic-property-fill" d="M107.586 7.686h2.828v22.627h-2.828z" />
+  </g>
+  <g class="iconic-pencil-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path class="iconic-pencil-shaft iconic-property-fill" d="M2 27l1-3 19-19 5 5-19 19-3 1" />
+    <path clip-path="url(#iconic-size-md-pencil-clip-0)" d="M27.354.354l4.293 4.293c.195.195.195.512 0 .707l-3.293 3.293c-.195.195-.512.195-.707 0l-4.293-4.293c-.195-.195-.195-.512 0-.707l3.293-3.293c.195-.195.512-.195.707 0z" class="iconic-pencil-eraser iconic-property-fill"
+    />
+    <path class="iconic-pencil-tip iconic-property-fill" d="M1 29l-1 3 3-1z" />
+  </g>
+  <g class="iconic-pencil-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path transform="matrix(-.707 .707 -.707 -.707 18.314 10.414)" class="iconic-pencil-shaft iconic-property-fill" d="M2.05 6.879h9.899v4.243h-9.899z" />
+    <path transform="matrix(-.707 -.707 .707 -.707 21.278 13.814)" class="iconic-pencil-eraser iconic-property-fill" d="M11.379 1.086h4.243v2.828h-4.243z" />
+    <path class="iconic-pencil-tip iconic-property-fill" d="M1 12l-1 4 4-1z" />
+  </g>
+</svg>

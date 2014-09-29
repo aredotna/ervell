@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-euro" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Euro</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-euro-clip-0">
+      <path d="M0 64l4-16h102l-13.334 40-92.666-8 4-16.001z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-euro-clip-1">
+      <path d="M114 96h-24l32-96h-104v128h96z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-euro-clip-0">
+      <path d="M23.667 22l3.333-10h-26l-1 4 1.5.001-.5 1-1 4z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-euro-clip-1">
+      <path d="M29 24h-6l8-24h-26v32h24z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-euro-clip-0">
+      <path d="M12.333 11l1.667-5h-13.5l-.5 2h.75l-.75 3z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-euro-clip-1">
+      <path d="M15 12h-3l4-12h-13v16h12z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-euro-lg iconic-container iconic-lg" data-width="120" data-height="128" display="inline" transform="translate(4)">
+    <path clip-path="url(#iconic-size-lg-euro-clip-0)" stroke="#000" stroke-width="8" class="iconic-euro-strike iconic-euro-strike-bottom iconic-property-accent iconic-property-stroke" d="M-6 76h104" fill="none" />
+    <path clip-path="url(#iconic-size-lg-euro-clip-0)" stroke="#000" stroke-width="8" class="iconic-euro-strike iconic-euro-strike-top iconic-property-accent iconic-property-stroke" d="M106 60h-112" fill="none" />
+    <path clip-path="url(#iconic-size-lg-euro-clip-1)" stroke="#000" stroke-width="12" d="M140 64c0 32.032-25.968 58-58 58s-58-25.968-58-58 25.968-58 58-58 58 23.206 58 58z" class="iconic-euro-e iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-euro-md iconic-container iconic-md" data-width="30" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path clip-path="url(#iconic-size-md-euro-clip-0)" stroke="#000" stroke-width="3" class="iconic-euro-strike iconic-euro-strike-bottom iconic-property-accent iconic-property-stroke" d="M-1 19.5h26" fill="none" />
+    <path clip-path="url(#iconic-size-md-euro-clip-0)" stroke="#000" stroke-width="3" class="iconic-euro-strike iconic-euro-strike-top iconic-property-accent iconic-property-stroke" d="M27 14.5h-28" fill="none" />
+    <circle clip-path="url(#iconic-size-md-euro-clip-1)" stroke="#000" stroke-width="4" cx="21" cy="16" r="14" class="iconic-euro-e iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-euro-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-euro-clip-0)" stroke="#000" stroke-width="2" class="iconic-euro-strike iconic-euro-strike-bottom iconic-property-accent iconic-property-stroke" d="M0 10h13" fill="none" />
+    <path clip-path="url(#iconic-size-sm-euro-clip-0)" stroke="#000" stroke-width="2" class="iconic-euro-strike iconic-euro-strike-top iconic-property-accent iconic-property-stroke" d="M14 7h-14" fill="none" />
+    <circle clip-path="url(#iconic-size-sm-euro-clip-1)" stroke="#000" stroke-width="2" cx="11" cy="8" r="7" class="iconic-euro-e iconic-property-stroke" fill="none" />
+  </g>
+</svg>

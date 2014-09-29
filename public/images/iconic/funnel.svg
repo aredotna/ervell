@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-funnel" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Funnel</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-funnel-clip-0">
+      <path d="M0 2h120.013v6h-120.013z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-funnel-lg iconic-container iconic-lg" data-width="120" data-height="130" display="inline" transform="translate(4 -1)">
+    <path d="M3.061 19.061l47.879 47.879c.586.586 1.061 1.732 1.061 2.561v59c0 .828.601 1.2 1.342.829l13.317-6.658c.741-.37 1.342-1.342 1.342-2.171v-51c0-.828.475-1.975 1.061-2.561l47.879-47.879c.586-.586 1.061-1.732 1.061-2.561v-13c0-.828-.672-1.5-1.5-1.5h-113c-.828 0-1.5.672-1.5 1.5v13c0 .828.475 1.975 1.061 2.561z"
+    class="iconic-funnel-body iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-funnel-clip-0)" d="M1.329 6.658l-.658-1.317c-.37-.741-.671-2.013-.671-2.842v-1c0-.828.672-1.5 1.5-1.5h117c.828 0 1.5.672 1.5 1.5v1c0 .828-.3 2.101-.671 2.842l-.658 1.317c-.371.741-1.342 1.342-2.171 1.342h-113c-.828 0-1.8-.601-2.171-1.342z"
+    class="iconic-funnel-rim iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-funnel-md iconic-container iconic-md" data-width="30" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path d="M1.354 5.354l10.293 10.293c.195.195.354.577.354.854v15c0 .276.186.376.416.223l5.168-3.445c.23-.153.416-.501.416-.777v-11c0-.276.158-.658.354-.854l10.293-10.293c.195-.195.354-.578.354-.854v-4c0-.276-.224-.5-.5-.5h-27c-.276 0-.5.224-.5.5v4c0 .276.158.658.354.854z"
+    class="iconic-funnel-body iconic-property-fill" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-funnel-rim iconic-property-accent iconic-property-stroke" d="M.5.5h29" fill="none" />
+  </g>
+  <g class="iconic-funnel-sm iconic-container iconic-sm" data-width="14" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path class="iconic-property-fill" d="M0 2l5 5v9l4-4v-5l5-5v-2h-14z" />
+  </g>
+</svg>

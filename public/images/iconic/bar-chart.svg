@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-bar-chart" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Bar Chart</title>
+  </g>
+  <g class="iconic-bar-chart-lg iconic-container iconic-lg" data-width="128" data-height="112" display="inline" transform="translate(0 8)">
+    <path stroke="#000" stroke-width="12" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-5 iconic-property-accent iconic-property-stroke" d="M116 102v-60" fill="none" />
+    <path stroke="#000" stroke-width="12" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-4 iconic-property-accent iconic-property-stroke" d="M92 102v-70" fill="none" />
+    <path stroke="#000" stroke-width="12" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-3 iconic-property-accent iconic-property-stroke" d="M68 102v-88" fill="none" />
+    <path stroke="#000" stroke-width="12" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-2 iconic-property-accent iconic-property-stroke" d="M44 102v-50" fill="none" />
+    <path stroke="#000" stroke-width="12" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-1 iconic-property-accent iconic-property-stroke" d="M20 102v-38" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-11 iconic-property-stroke" d="M1 1h2" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-10 iconic-property-stroke" d="M1 11h4" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-9 iconic-property-stroke" d="M1 21h2" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-8 iconic-property-stroke" d="M1 31h4" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-7 iconic-property-stroke" d="M1 41h2" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-6 iconic-property-stroke" d="M1 51h4" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-5 iconic-property-stroke" d="M1 61h2" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-4 iconic-property-stroke" d="M1 71h4" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-3 iconic-property-stroke" d="M1 81h2" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-2 iconic-property-stroke" d="M1 91h4" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-1 iconic-property-stroke" d="M1 101h2" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-bar-chart-axes iconic-property-stroke" d="M127 111h-126v-110" fill="none" />
+  </g>
+  <g class="iconic-bar-chart-md iconic-container iconic-md" data-width="32" data-height="25" display="none" transform="scale(4) translate(0 3)">
+    <path stroke="#000" stroke-width="5" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-3 iconic-property-accent iconic-property-stroke" d="M25.5 20.5v-10" fill="none" />
+    <path stroke="#000" stroke-width="5" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-2 iconic-property-accent iconic-property-stroke" d="M17.5 20.5v-15" fill="none" />
+    <path stroke="#000" stroke-width="5" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-1 iconic-property-accent iconic-property-stroke" d="M9.5 20.5v-6" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-8 iconic-property-stroke" d="M.5.5h2" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-7 iconic-property-stroke" d="M.5 3.5h1" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-6 iconic-property-stroke" d="M.5 6.5h2" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-5 iconic-property-stroke" d="M.5 9.5h1" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-4 iconic-property-stroke" d="M.5 12.5h2" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-3 iconic-property-stroke" d="M.5 15.5h1" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-major iconic-bar-chart-tick-2 iconic-property-stroke" d="M.5 18.5h2" fill="none" />
+    <path stroke="#000" stroke-width=".985" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-minor iconic-bar-chart-tick-1 iconic-property-stroke" d="M.5 21.5h1" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-axes iconic-property-stroke" d="M31.5 24.5h-31v-24" fill="none" />
+  </g>
+  <g class="iconic-bar-chart-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-3 iconic-property-accent iconic-property-stroke" d="M13.5 12.5v-6" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-2 iconic-property-accent iconic-property-stroke" d="M9.5 12.5v-8" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-bar-chart-bar iconic-bar-chart-bar-1 iconic-property-accent iconic-property-stroke" d="M5.5 12.5v-4" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-5 iconic-property-stroke" d="M.5.5h1" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-4 iconic-property-stroke" d="M.5 3.5h1" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-3 iconic-property-stroke" d="M.5 6.5h1" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-2 iconic-property-stroke" d="M.5 9.5h1" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-tick iconic-bar-chart-tick-1 iconic-property-stroke" d="M.5 12.5h1" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-bar-chart-axes iconic-property-stroke" d="M15.5 15.5h-15v-15" fill="none" />
+  </g>
+</svg>

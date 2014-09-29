@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-inbox" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Inbox</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-inbox-clip-0">
+      <path d="M0 0v116h116v-116h-116zm108 114h-100v-98h100v98z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-inbox-clip-1">
+      <path d="M0 100h40l8 12h20l8-12h40v28h-116z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-inbox-clip-0">
+      <path d="M0 0v30h30v-30h-30zm27 29h-24v-24h24v24z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-inbox-clip-1">
+      <path d="M0 24h10l2 3h6l2-3h10v8h-30z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-inbox-clip-0">
+      <path d="M0 0v14.938h16v-14.938h-16zm14 14.5h-12v-11.5h12v11.5z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-inbox-clip-1">
+      <path d="M0 12h5l1 2h4l1-2h5v4h-16z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-inbox-lg iconic-container iconic-lg" data-width="116" data-height="128" display="inline" transform="translate(6)">
+    <path clip-path="url(#iconic-size-lg-inbox-clip-0)" d="M108 112h-100c-4.418 0-8-3.582-8-8v-96c0-4.418 3.582-8 8-8h100c4.418 0 8 3.582 8 8v96c0 4.418-3.582 8-8 8z" class="iconic-inbox-back iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-inbox-clip-1)" d="M108 128h-100c-4.418 0-8-3.582-8-8v-22c0-4.418 3.582-8 8-8h100c4.418 0 8 3.582 8 8v22c0 4.418-3.582 8-8 8z" class="iconic-inbox-front iconic-property-fill" />
+  </g>
+  <g class="iconic-inbox-md iconic-container iconic-md" data-width="30" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path clip-path="url(#iconic-size-md-inbox-clip-0)" d="M28 30h-26c-1.105 0-2-.895-2-2v-26c0-1.105.895-2 2-2h26c1.105 0 2 .895 2 2v26c0 1.105-.895 2-2 2z" class="iconic-inbox-back iconic-property-fill" />
+    <path clip-path="url(#iconic-size-md-inbox-clip-1)" d="M28 32h-26c-1.105 0-2-.895-2-2v-7c0-1.105.895-2 2-2h26c1.105 0 2 .895 2 2v7c0 1.105-.895 2-2 2z" class="iconic-inbox-front iconic-property-fill" />
+  </g>
+  <g class="iconic-inbox-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-inbox-clip-0)" d="M15 14.938h-14c-.552 0-1-.448-1-1v-12.938c0-.552.448-1 1-1h14c.552 0 1 .448 1 1v12.938c0 .552-.448 1-1 1z" class="iconic-inbox-back iconic-property-fill" />
+    <path clip-path="url(#iconic-size-sm-inbox-clip-1)" d="M15 16h-14c-.552 0-1-.448-1-1v-4.031c0-.552.448-1 1-1h14c.552 0 1 .448 1 1v4.031c0 .552-.448 1-1 1z" class="iconic-inbox-front iconic-property-fill" />
+  </g>
+</svg>

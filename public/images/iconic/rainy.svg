@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-rainy" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Rainy</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-rainy-clip-0">
+      <path d="M0 0v86h30v-2c0-4.418 3.582-8 8-8 1.459 0 2.822.397 4 1.079v-1.079c0-4.418 3.582-8 8-8s8 3.582 8 8v1.079c1.178-.682 2.541-1.079 4-1.079s2.822.397 4 1.079v-1.079c0-4.418 3.582-8 8-8s8 3.582 8 8v.262c.64-.165 1.308-.262 2-.262 4.418 0 8 3.582 8 8v2h36v-86h-128z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-md-rainy-clip-0">
+      <path d="M0 0v22h7v-.5c0-1.381 1.119-2.5 2.5-2.5.187 0 .368.024.544.063.207-1.172 1.225-2.063 2.456-2.063s2.249.891 2.456 2.063c.176-.039.357-.063.544-.063s.368.024.544.063c.207-1.172 1.225-2.063 2.456-2.063s2.249.891 2.456 2.063c.176-.039.357-.063.544-.063 1.381 0 2.5 1.119 2.5 2.5v.5h8v-22h-32z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-rainy-clip-0">
+      <path d="M0 0v12h4v-1.5c0-.829.671-1.5 1.5-1.5s1.5.671 1.5 1.5v-1c0-.829.671-1.5 1.5-1.5s1.5.671 1.5 1.5v1c0-.829.671-1.5 1.5-1.5s1.5.671 1.5 1.5v1.5h3v-12h-16z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-rainy-lg iconic-container iconic-lg" data-width="128" data-height="114" display="inline" transform="translate(0 7)">
+    <path stroke="#000" stroke-width="4" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-5 iconic-property-accent iconic-property-stroke" d="M38 84v22" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-4 iconic-property-accent iconic-property-stroke" d="M50 76v36" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-3 iconic-property-accent iconic-property-stroke" d="M62 84v24" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-2 iconic-property-accent iconic-property-stroke" d="M74 76v36" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-1 iconic-property-accent iconic-property-stroke" d="M84 84v22" fill="none" />
+    <path d="M110 86c9.925 0 18-8.075 18-18s-8.075-18-18-18c-.711 0-1.311-.081-2 0-.871-8.409-7.602-15.091-16-16-.986-18.976-16.783-34-36-34-18.8 0-34.415 14.604-36 33-11.578 3.042-20 13.481-20 26 0 14.552 11.575 26.471 26 27h84z" clip-path="url(#iconic-size-lg-rainy-clip-0)"
+    class="iconic-rainy-cloud iconic-property-fill" />
+  </g>
+  <g class="iconic-rainy-md iconic-container iconic-md" data-width="32" data-height="28" display="none" transform="scale(4) translate(0 2)">
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-5 iconic-property-accent iconic-property-stroke" d="M9.5 21.5v5" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-4 iconic-property-accent iconic-property-stroke" d="M12.5 19.5v8" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-3 iconic-property-accent iconic-property-stroke" d="M15.5 21.5v5" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-2 iconic-property-accent iconic-property-stroke" d="M18.5 19.5v8" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-1 iconic-property-accent iconic-property-stroke" d="M21.5 21.5v5" fill="none" />
+    <path d="M27 12c-.401-1.976-2.065-3.524-4.046-3.909-.457-4.537-4.298-8.091-8.954-8.091-4.721 0-8.634 3.371-9 8-2.906.852-5 3.822-5 7 0 3.527 2.603 6.521 6 7 4.323 0 20.923 0 21 0 2.76 0 5-2.24 5-5s-2.24-5-5-5z" clip-path="url(#iconic-size-md-rainy-clip-0)"
+    class="iconic-rainy-cloud iconic-property-fill" />
+  </g>
+  <g class="iconic-rainy-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path d="M13 6v-1c0-2.757-2.243-5-5-5-2.454 0-4.49 1.78-4.91 4.114-1.767.415-3.09 1.995-3.09 3.886 0 2.206 1.794 4 4 4h9c1.654 0 3-1.346 3-3s-1.346-3-3-3z" clip-path="url(#iconic-size-sm-rainy-clip-0)" class="iconic-rainy-cloud iconic-property-fill"
+    />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-3 iconic-property-accent iconic-property-stroke" d="M11.5 10.5v4" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-2 iconic-property-accent iconic-property-stroke" d="M8.5 9.5v4" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-rainy-rain-droplet iconic-rainy-rain-droplet-1 iconic-property-accent iconic-property-stroke" d="M5.5 10.5v4" fill="none" />
+  </g>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-basket" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Basket</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-basket-clip-0">
+      <path d="M98.882 42.513c1.926 2.696 1.302 6.444-1.395 8.37-1.057.755-2.275 1.118-3.482 1.118-1.872 0-3.716-.874-4.887-2.513l-5.348-7.487h-39.539l-5.348 7.487c-1.171 1.64-3.016 2.513-4.887 2.513-1.207 0-2.425-.363-3.482-1.118-2.697-1.926-3.321-5.673-1.395-8.37l.366-.513h-29.484v68h128v-68h-29.484l.366.513zm-58.347 57.414c-.179.049-.359.073-.536.073-.876 0-1.68-.58-1.926-1.465l-10-36c-.295-1.064.328-2.167 1.392-2.462 1.063-.293 2.167.328 2.462 1.392l10 36c.295 1.064-.328 2.166-1.392 2.462zm15.685.061c-.075.008-.149.012-.223.012-1.006 0-1.872-.756-1.985-1.779l-4-36c-.122-1.098.669-2.086 1.767-2.208 1.094-.12 2.086.669 2.208 1.767l4 36c.122 1.098-.669 2.086-1.767 2.209zm21.767-37.767l-4 36c-.114 1.023-.979 1.779-1.985 1.779-.074 0-.148-.004-.223-.012-1.098-.122-1.889-1.111-1.767-2.208l4-36c.122-1.098 1.111-1.887 2.208-1.767 1.098.122 1.889 1.111 1.767 2.209zm21.939.315l-10 36c-.246.885-1.05 1.465-1.926 1.465-.177 0-.357-.024-.536-.073-1.065-.296-1.688-1.398-1.392-2.462l10-36c.296-1.065 1.397-1.685 2.462-1.392 1.064.296 1.688 1.398 1.392 2.462z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-lg-basket-clip-1">
+      <path d="M61.942 0l-31.197 43.675c-1.284 1.798-.868 4.296.93 5.58.703.502 1.513.744 2.315.745h.011c1.247-.001 2.474-.583 3.254-1.675l34.518-48.325h-9.832zm-27.942 48c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-basket-clip-2">
+      <path d="M74.231 0l-35.348 49.487c-.13.182-.271.35-.416.513h61.533v-50h-25.769zm19.769 48c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-basket-clip-0">
+      <path d="M25.946 12c.191.938-.164 1.942-.993 2.534-.441.315-.948.466-1.451.466-.78 0-1.548-.364-2.036-1.047l-1.395-1.953h-8.142l-1.395 1.953c-.488.683-1.256 1.047-2.036 1.047-.503 0-1.011-.151-1.451-.466-.829-.592-1.184-1.597-.993-2.534h-6.054v18h32v-18h-6.054zm-17.325 14.985c-.04.01-.081.015-.122.015-.224 0-.428-.151-.484-.379l-2-8c-.067-.268.096-.539.364-.606.266-.07.539.095.606.364l2 8c.067.268-.096.539-.364.606zm4.941.011c-.021.002-.042.004-.063.004-.248 0-.464-.185-.496-.438l-1-8c-.034-.274.16-.524.434-.558.278-.034.523.16.558.434l1 8c.034.274-.16.524-.434.558zm5.434-.434c-.032.253-.247.438-.496.438-.021 0-.042-.002-.063-.004-.274-.034-.468-.284-.434-.558l1-8c.034-.274.285-.468.558-.434.274.034.468.284.434.558l-1 8zm6.989-7.941l-2 8c-.057.228-.26.379-.484.379-.04 0-.081-.005-.122-.015-.268-.067-.431-.338-.364-.606l2-8c.066-.269.336-.434.606-.364.268.067.431.338.364.606z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-md-basket-clip-1">
+      <path d="M17.986 0c.628.832.699 1.999.079 2.908l-7.5 11c-.484.71-1.269 1.092-2.068 1.092h17.502v-15h-8.014z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-basket-clip-0">
+      <path d="M12.993 7c-.001.678-.34 1.34-.964 1.715-.322.193-.677.286-1.027.286-.68 0-1.342-.347-1.717-.972l-.617-1.029h-1.336l-.617 1.029c-.375.625-1.037.972-1.717.972-.35 0-.705-.092-1.027-.286-.624-.375-.963-1.036-.964-1.715h-3.007v9h16v-9h-3.007zm-6.993 6.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-2c0-.276.224-.5.5-.5s.5.224.5.5v2zm5 0c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-2c0-.276.224-.5.5-.5s.5.224.5.5v2z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-basket-clip-1">
+      <path d="M13 0v9h-6v-1.447l2.715-4.525c.568-.947.261-2.175-.686-2.744l3.971-.285z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-basket-lg iconic-container iconic-lg" data-width="128" data-height="110" display="inline" transform="translate(0 9)">
+    <path d="M101 110h-74c-1.657 0-3.364-1.293-3.812-2.888l-16.376-58.224c-.449-1.595.531-2.888 2.188-2.888h110c1.657 0 2.636 1.293 2.188 2.888l-16.375 58.224c-.449 1.595-2.155 2.888-3.812 2.888z" clip-path="url(#iconic-size-lg-basket-clip-0)" class="iconic-basket-body iconic-property-fill"
+    />
+    <path d="M126.5 50h-125c-.828 0-1.5-.672-1.5-1.5v-5c0-.828.672-1.5 1.5-1.5h125c.828 0 1.5.672 1.5 1.5v5c0 .828-.672 1.5-1.5 1.5z" clip-path="url(#iconic-size-lg-basket-clip-0)" class="iconic-basket-lip iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-basket-clip-1)" stroke="#000" stroke-width="8" stroke-linecap="round" class="iconic-basket-handle iconic-basket-handle-left iconic-property-accent iconic-property-stroke" d="M34 46l30-42" fill="none" />
+    <path clip-path="url(#iconic-size-lg-basket-clip-2)" stroke="#000" stroke-width="8" stroke-linecap="round" class="iconic-basket-handle iconic-basket-handle-right iconic-property-accent iconic-property-stroke" d="M94 46l-30-42" fill="none" />
+  </g>
+  <g class="iconic-basket-md iconic-container iconic-md" data-width="32" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <path clip-path="url(#iconic-size-md-basket-clip-0)" d="M25.5 30h-19c-.276 0-.554-.217-.621-.485l-3.757-15.03c-.067-.268.103-.485.379-.485h27c.276 0 .446.217.379.485l-3.757 15.03c-.067.268-.345.485-.621.485z" class="iconic-basket-body iconic-property-fill"
+    />
+    <path clip-path="url(#iconic-size-md-basket-clip-0)" d="M31.5 15h-31c-.276 0-.5-.224-.5-.5v-2c0-.276.224-.5.5-.5h31c.276 0 .5.224.5.5v2c0 .276-.224.5-.5.5z" class="iconic-basket-lip iconic-property-fill" />
+    <path clip-path="url(#iconic-size-md-basket-clip-1)" stroke="#000" stroke-width="3" stroke-linecap="round" class="iconic-basket-handle iconic-basket-handle-right iconic-property-accent iconic-property-stroke" d="M23.5 12.5l-7.5-11" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="round" class="iconic-basket-handle iconic-basket-handle-left iconic-property-accent iconic-property-stroke" d="M8.5 12.5l7.5-11" fill="none" />
+  </g>
+  <g class="iconic-basket-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-basket-clip-0)" class="iconic-basket-body iconic-property-fill" d="M13 16h-10l-2-8h14z" />
+    <path clip-path="url(#iconic-size-sm-basket-clip-0)" class="iconic-basket-lip iconic-property-fill" d="M0 7h16v2h-16z" />
+    <path clip-path="url(#iconic-size-sm-basket-clip-1)" stroke="#000" stroke-width="2" stroke-linecap="round" class="iconic-basket-handle iconic-basket-handle-right iconic-property-accent iconic-property-stroke" d="M11 7l-3-5" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" class="iconic-basket-handle iconic-basket-handle-left iconic-property-accent iconic-property-stroke" d="M5 7l3-5" fill="none" />
+  </g>
+</svg>

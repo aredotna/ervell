@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-tiara" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Tiara</title>
+  </g>
+  <g class="iconic-tiara-lg iconic-container iconic-lg" data-width="128" data-height="48" display="inline" transform="translate(0 40)">
+    <path d="M120 46c-15.75 0-24-26-24-26s-7.667 15-14.417 5.583c-4.466-6.231-17.583-25.583-17.583-25.583s-13.172 19.11-17.583 25.583c-6.417 9.417-14.417-5.583-14.417-5.583s-7.999 26-23.999 26h-8.001v2h128v-2h-8zm-65-9l-3-5 3-5 3 5-3 5zm3-13l6-10 6 10-6 10-6-10zm15 13l-3-5 3-5 3 5-3 5z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-tiara-md iconic-container iconic-md" data-width="32" data-height="12" display="none" transform="scale(4) translate(0 10)">
+    <path d="M31 11c-3.938 0-7-6-7-6s-1.604 3.427-3.604 1.396c-1.345-1.366-4.396-6.396-4.396-6.396s-3.022 5-4.396 6.396c-2 2.031-3.604-1.396-3.604-1.396s-3 6-7 6h-1v1h32v-1h-1zm-15-1l-2-3 2-3 2 3-2 3z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-tiara-sm iconic-container iconic-sm" data-width="16" data-height="6" display="none" transform="scale(8) translate(0 5)">
+    <path d="M15 5c-1.969 0-3-2.5-3-2.5s-1 1.516-2 .5c-.672-.683-2-3-2-3s-1.313 2.302-2 3c-1 1.016-2-.5-2-.5s-1 2.5-3 2.5c-.958 0-1 0-1 0v1h16v-1s-.042 0-1 0zm-7 0l-1-1 1-1 1 1-1 1z" class="iconic-property-fill" />
+  </g>
+</svg>

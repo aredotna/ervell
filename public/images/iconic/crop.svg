@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-crop" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Crop</title>
+  </g>
+  <g class="iconic-crop-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path transform="matrix(-.707 .707 -.707 -.707 162.01 45.893)" class="iconic-crop-angle iconic-property-accent iconic-property-fill" d="M-5.575 53.672h154.149v5.657h-154.149z" />
+    <path stroke="#000" stroke-width="8" class="iconic-crop-corner iconic-crop-corner-top iconic-property-stroke" d="M0 16h112v112" fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-crop-corner iconic-crop-corner-bottom iconic-property-stroke" d="M128 112h-112v-112" fill="none" />
+  </g>
+  <g class="iconic-crop-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path transform="matrix(-.707 -.707 .707 -.707 22.035 36.127)" class="iconic-crop-angle iconic-property-accent iconic-property-fill" d="M17.793-4.885h1.414v36.77h-1.414z" />
+    <path stroke="#000" stroke-width="3" class="iconic-crop-corner iconic-crop-corner-top iconic-property-stroke" d="M0 6.5h25.5v25.5" fill="none" />
+    <path stroke="#000" stroke-width="3" class="iconic-crop-corner iconic-crop-corner-bottom iconic-property-stroke" d="M32 25.5h-25.5v-25.5" fill="none" />
+  </g>
+  <g class="iconic-crop-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path transform="matrix(-.707 -.707 .707 -.707 11.621 17.814)" class="iconic-crop-angle iconic-property-accent iconic-property-fill" d="M8.793-1.985h1.414v16.971h-1.414z" />
+    <path stroke="#000" stroke-width="2" class="iconic-crop-corner iconic-crop-corner-top iconic-property-stroke" d="M0 3h13v13" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-crop-corner iconic-crop-corner-bottom iconic-property-stroke" d="M16 13h-13v-13" fill="none" />
+  </g>
+</svg>

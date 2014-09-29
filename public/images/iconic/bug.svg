@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-bug" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Bug</title>
+  </g>
+  <g class="iconic-bug-lg iconic-container iconic-lg" data-width="116" data-height="128" display="inline" transform="translate(6)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-top iconic-bug-leg-top-right iconic-property-accent iconic-property-stroke" d="M72 46l15-5v-12l12-8" fill="none"
+    />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-bottom iconic-bug-leg-bottom-right iconic-property-accent iconic-property-stroke" d="M85 81l18 8-12 34 4 4"
+    fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-middle iconic-bug-leg-middle-right iconic-property-accent iconic-property-stroke" d="M79 57l12-4 12 20 12 4"
+    fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-top iconic-bug-leg-top-left iconic-property-accent iconic-property-stroke" d="M44 46l-15-5v-12l-12-8" fill="none"
+    />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-bottom iconic-bug-leg-bottom-left iconic-property-accent iconic-property-stroke" d="M31 81l-18 8 12 34-4 4"
+    fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-middle iconic-bug-leg-middle-left iconic-property-accent iconic-property-stroke" d="M37 57l-12-4-12 20-12 4"
+    fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" d="M53.905 29.444s-4.064-28.444-20.317-28.444" class="iconic-bug-antenna iconic-bug-antenna-left iconic-property-accent iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="round" d="M62.095 29.444s4.064-28.444 20.317-28.444" class="iconic-bug-antenna iconic-bug-antenna-right iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M58.151 16c15.367 0 23.45 20.258 13.418 32h-27.102c-10.245-11.45-1.684-32 13.684-32z" class="iconic-bug-head iconic-property-fill" />
+    <path d="M47.809 125.137c4.452-3.681 8.191-10.012 8.191-17.137v-50c0-1.105.895-2 2-2s2 .895 2 2v50c0 7.125 3.739 13.457 8.191 17.137 11.552-6.716 19.809-24.519 19.809-45.43 0-26.671-13.431-37.707-30-37.707s-30 11.036-30 37.707c0 20.911 8.258 38.714 19.809 45.43zm24.759-16.739c4.723-7.602 7.432-18.318 7.432-29.398 0-.552.448-1 1-1s1 .448 1 1c0 11.443-2.819 22.543-7.733 30.454-.19.305-.516.472-.851.472-.18 0-.362-.048-.527-.15-.469-.291-.613-.908-.322-1.377zm-30.835 1.056c-4.914-7.911-7.733-19.011-7.733-30.454 0-.552.448-1 1-1s1 .448 1 1c0 11.081 2.709 21.796 7.432 29.398.291.469.147 1.086-.322 1.377-.165.102-.347.15-.527.15-.334 0-.661-.167-.85-.472z"
+    class="iconic-bug-thorax iconic-property-fill" />
+  </g>
+  <g class="iconic-bug-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-top iconic-bug-leg-top-right iconic-property-accent iconic-property-stroke" d="M18.5 11.5l3-1v-3l3-2" fill="none" />
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-bottom iconic-bug-leg-bottom-right iconic-property-accent iconic-property-stroke" d="M20.5 20.5l5 2-3 8 1 1" fill="none" />
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-middle iconic-bug-leg-middle-right iconic-property-accent iconic-property-stroke" d="M19.5 14.5l3-1 3 5 3 1" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-top iconic-bug-leg-top-left iconic-property-accent iconic-property-stroke" d="M10.5 11.5l-3-1v-3l-3-2" fill="none" />
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-bottom iconic-bug-leg-bottom-left iconic-property-accent iconic-property-stroke" d="M8.5 20.5l-5 2 3 8-1 1" fill="none" />
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-middle iconic-bug-leg-middle-left iconic-property-accent iconic-property-stroke" d="M9.5 14.5l-3-1-3 5-3 1" fill="none" />
+    <path stroke="#000" stroke-linecap="round" d="M12.5 7.5s-1-7-5-7" class="iconic-bug-antenna iconic-bug-antenna-left iconic-property-accent iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-linecap="round" d="M15.5 7.5s1-7 5-7" class="iconic-bug-antenna iconic-bug-antenna-right iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M14.533 3.5c3.842 0 5.862 5.728 3.355 8.5h-6.776c-2.561-2.703-.421-8.5 3.421-8.5z" class="iconic-bug-head iconic-property-fill" />
+    <path d="M11.821 31.265c1.164-.876 2.179-2.45 2.179-4.265v-12.5c0-.276.224-.5.5-.5s.5.224.5.5v12.501c0 1.815 1.015 3.388 2.179 4.264 2.817-1.583 4.821-5.576 4.821-10.265 0-6.075-3.358-11-7.5-11s-7.5 4.925-7.5 11c0 4.689 2.004 8.682 4.821 10.265z"
+    class="iconic-bug-thorax iconic-property-fill" />
+  </g>
+  <g class="iconic-bug-sm iconic-container iconic-sm" data-width="15" data-height="15" display="none" transform="scale(8)">
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-top iconic-bug-leg-top-right iconic-property-accent iconic-property-stroke" d="M9.5 6.5l3-2" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-bottom iconic-bug-leg-bottom-right iconic-property-accent iconic-property-stroke" d="M10.5 9.5l3 4" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-right iconic-bug-leg-middle iconic-bug-leg-middle-right iconic-property-accent iconic-property-stroke" d="M10.5 7.5l4 2" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-top iconic-bug-leg-top-left iconic-property-accent iconic-property-stroke" d="M5.5 6.5l-3-2" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-bottom iconic-bug-leg-bottom-left iconic-property-accent iconic-property-stroke" d="M4.5 9.5l-3 4" fill="none" />
+    <path stroke="#000" stroke-linecap="round" class="iconic-bug-leg iconic-bug-leg-left iconic-bug-leg-middle iconic-bug-leg-middle-left iconic-property-accent iconic-property-stroke" d="M4.5 7.5l-4 2" fill="none" />
+    <path stroke="#000" stroke-linecap="round" d="M6.5 4s-.5-3.5-2.5-3.5" class="iconic-bug-antenna iconic-bug-antenna-left iconic-property-accent iconic-property-stroke" fill="none" />
+    <path stroke="#000" stroke-linecap="round" d="M8 4s.5-3.5 2.5-3.5" class="iconic-bug-antenna iconic-bug-antenna-right iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M7.517 2c1.985 0 3.252 2.586 1.957 3.972l-3.941.028c-1.323-1.352 0-4 1.984-4z" class="iconic-bug-head iconic-property-fill" />
+    <path d="M7.5 5c-2.485 0-4.5 2.462-4.5 5.5 0 2.349 1.208 4.349 2.904 5.137.585-.437 1.096-1.226 1.096-2.137v-6c0-.276.224-.5.5-.5s.5.224.5.5v6c0 .911.511 1.7 1.096 2.137 1.696-.788 2.904-2.788 2.904-5.137 0-3.038-2.015-5.5-4.5-5.5z" class="iconic-bug-thorax iconic-property-fill"
+    />
+  </g>
+</svg>

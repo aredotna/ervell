@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-excerpt" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Excerpt</title>
+  </g>
+  <g class="iconic-excerpt-lg iconic-container iconic-lg" data-width="128" data-height="98" display="inline" transform="translate(0 15)">
+    <path class="iconic-excerpt-period iconic-excerpt-period-3 iconic-property-accent iconic-property-fill" d="M32 90h8v8h-8z" />
+    <path class="iconic-excerpt-period iconic-excerpt-period-2 iconic-property-accent iconic-property-fill" d="M16 90h8v8h-8z" />
+    <path class="iconic-excerpt-period iconic-excerpt-period-1 iconic-property-accent iconic-property-fill" d="M0 90h8v8h-8z" />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-3 iconic-property-stroke" d="M4 64h120" fill="none" />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-2 iconic-property-stroke" d="M4 34h80" fill="none" />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-1 iconic-property-stroke" d="M4 4h106" fill="none" />
+  </g>
+  <g class="iconic-excerpt-md iconic-container iconic-md" data-width="32" data-height="27" display="none" transform="scale(4) translate(0 2)">
+    <path class="iconic-excerpt-period iconic-excerpt-period-3 iconic-property-accent iconic-property-fill" d="M0 24h3v3h-3z" />
+    <path class="iconic-excerpt-period iconic-excerpt-period-2 iconic-property-accent iconic-property-fill" d="M6 24h3v3h-3z" />
+    <path class="iconic-excerpt-period iconic-excerpt-period-1 iconic-property-accent iconic-property-fill" d="M12 24h3v3h-3z" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-3 iconic-property-stroke" d="M1.5 17.5h29" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-2 iconic-property-stroke" d="M1.5 9.5h16" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-1 iconic-property-stroke" d="M1.5 1.5h24" fill="none" />
+  </g>
+  <g class="iconic-excerpt-sm iconic-container iconic-sm" data-width="16" data-height="14" display="none" transform="scale(8) translate(0 1)">
+    <path class="iconic-excerpt-period iconic-excerpt-period-3 iconic-property-accent iconic-property-fill" d="M6 12h2v2h-2z" />
+    <path class="iconic-excerpt-period iconic-excerpt-period-2 iconic-property-accent iconic-property-fill" d="M3 12h2v2h-2z" />
+    <path class="iconic-excerpt-period iconic-excerpt-period-1 iconic-property-accent iconic-property-fill" d="M0 12h2v2h-2z" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-3 iconic-property-stroke" d="M1 9h14" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-2 iconic-property-stroke" d="M1 5h8" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-excerpt-line iconic-excerpt-line-1 iconic-property-stroke" d="M1 1h12" fill="none" />
+  </g>
+</svg>

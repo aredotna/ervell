@@ -1,0 +1,50 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="double-quote-serif" width="128" height="128" class="iconic iconic-double-quote-serif" viewBox="0 0 128 128">
+  <g><title>Double Quote Serif</title></g>
+  <g data-width="128" data-height="112" class="iconic-lg iconic-container" display="inline" transform="translate(0 8)">
+    <g class="iconic-double-quote-serif-left">
+      <path stroke="#000" stroke-width="16" stroke-miterlimit="10" d="M56 8c-26.5 0-48 21.5-48 48v12" class="iconic-double-quote-serif-left-left iconic-double-quote-serif-left-curl iconic-property-stroke" fill="none"/>
+      <path d="M54.5 112h-53c-.8 0-1.5-.7-1.5-1.5v-53c0-.8.7-1.5 1.5-1.5h53c.8 0 1.5.7 1.5 1.5v53c0 .8-.7 1.5-1.5 1.5z" class="iconic-double-quote-serif-left-left iconic-double-quote-serif-left-block iconic-property-fill"/>
+      <path stroke="#000" stroke-width="16" stroke-miterlimit="10" d="M128 8c-26.5 0-48 21.5-48 48v12" class="iconic-double-quote-serif-left-right iconic-double-quote-serif-left-curl iconic-property-stroke" fill="none"/>
+      <path d="M126.5 112h-53c-.8 0-1.5-.7-1.5-1.5v-53c0-.8.7-1.5 1.5-1.5h53c.8 0 1.5.7 1.5 1.5v53c0 .8-.7 1.5-1.5 1.5z" class="iconic-double-quote-serif-left-right iconic-double-quote-serif-left-block iconic-property-fill"/>
+    </g>
+    <g class="iconic-double-quote-serif-right" display="none">
+      <path stroke="#000" stroke-width="16" stroke-miterlimit="10" d="M0 104c26.5 0 48-21.5 48-48v-12" class="iconic-double-quote-serif-right-left iconic-double-quote-serif-right-curl iconic-property-stroke" fill="none"/>
+      <path d="M1.5 0h53c.8 0 1.5.7 1.5 1.5v53c0 .8-.7 1.5-1.5 1.5h-53c-.8 0-1.5-.7-1.5-1.5v-53c0-.8.7-1.5 1.5-1.5z" class="iconic-double-quote-serif-right-left iconic-double-quote-serif-right-block iconic-property-fill"/>
+      <path stroke="#000" stroke-width="16" stroke-miterlimit="10" d="M72 104c26.5 0 48-21.5 48-48v-12" class="iconic-double-quote-serif-right-right iconic-double-quote-serif-right-curl iconic-property-stroke" fill="none"/>
+      <path d="M73.5 0h53c.8 0 1.5.7 1.5 1.5v53c0 .8-.7 1.5-1.5 1.5h-53c-.8 0-1.5-.7-1.5-1.5v-53c0-.8.7-1.5 1.5-1.5z" class="iconic-double-quote-serif-right-right iconic-double-quote-serif-right-block iconic-property-fill"/>
+    </g>
+  </g>
+  <g data-width="32" data-height="28" class="iconic-md iconic-container" display="none" transform="scale(4) translate(0 2)">
+    <g class="iconic-double-quote-serif-left">
+      <path stroke="#000" stroke-width="5" stroke-miterlimit="10" d="M14 2.5c-6.4 0-11.5 5.1-11.5 11.5v5" class="iconic-double-quote-serif-left-left iconic-double-quote-serif-left-curl iconic-property-stroke" fill="none"/>
+      <path d="M13.5 28h-13c-.3 0-.5-.2-.5-.5v-13c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v13c0 .3-.2.5-.5.5z" class="iconic-double-quote-serif-left-left iconic-double-quote-serif-left-block iconic-property-fill"/>
+      <path stroke="#000" stroke-width="5" stroke-miterlimit="10" d="M32 2.5c-6.4 0-11.5 5.1-11.5 11.5v5" class="iconic-double-quote-serif-left-right iconic-double-quote-serif-left-curl iconic-property-stroke" fill="none"/>
+      <path d="M31.5 28h-13c-.3 0-.5-.2-.5-.5v-13c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v13c0 .3-.2.5-.5.5z" class="iconic-double-quote-serif-left-right iconic-double-quote-serif-left-block iconic-property-fill"/>
+    </g>
+     <g class="iconic-double-quote-serif-right" display="none">
+      <path stroke="#000" stroke-width="5" stroke-miterlimit="10" d="M0 25.5c6.4 0 11.5-5.1 11.5-11.5v-5" class="iconic-double-quote-serif-right-left iconic-double-quote-serif-right-curl iconic-property-stroke" fill="none"/>
+      <path d="M.5 0h13c.3 0 .5.2.5.5v13c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5v-13c0-.3.2-.5.5-.5z" class="iconic-double-quote-serif-right-left iconic-double-quote-serif-right-block iconic-property-fill"/>
+      <path stroke="#000" stroke-width="5" stroke-miterlimit="10" d="M18 25.5c6.4 0 11.5-5.1 11.5-11.5v-5" class="iconic-double-quote-serif-right-right iconic-double-quote-serif-right-curl iconic-property-stroke" fill="none"/>
+      <path d="M18.5 0h13c.3 0 .5.2.5.5v13c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5v-13c0-.3.2-.5.5-.5z" class="iconic-double-quote-serif-right-right iconic-double-quote-serif-right-block iconic-property-fill"/>
+    </g>
+  </g>
+  <g data-width="16" data-height="14" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(0 1)">
+    <g class="iconic-double-quote-serif-left">
+      <path stroke="#000" stroke-width="3" stroke-miterlimit="10" d="M7 1.5c-3 0-5.5 2.5-5.5 5.5v2" class="iconic-double-quote-serif-left-left iconic-double-quote-serif-left-curl iconic-property-stroke" fill="none"/>
+      <path class="iconic-double-quote-serif-left-left iconic-double-quote-serif-left-block iconic-property-fill" d="M0 7h7v7h-7z"/>
+      <path stroke="#000" stroke-width="3" stroke-miterlimit="10" d="M16 1.5c-3 0-5.5 2.5-5.5 5.5v2" class="iconic-double-quote-serif-left-right iconic-double-quote-serif-left-curl iconic-property-stroke" fill="none"/>
+      <path class="iconic-double-quote-serif-left-right iconic-double-quote-serif-left-block iconic-property-fill" d="M9 7h7v7h-7z"/>
+    </g>
+     <g class="iconic-double-quote-serif-right" display="none">
+      <path stroke="#000" stroke-width="3" stroke-miterlimit="10" d="M0 12.5c3 0 5.5-2.5 5.5-5.5v-4" class="iconic-double-quote-serif-right-left iconic-double-quote-serif-right-curl iconic-property-stroke" fill="none"/>
+      <path class="iconic-double-quote-serif-right-left iconic-double-quote-serif-right-block iconic-property-fill" d="M0 0h7v7h-7z"/>
+      <path stroke="#000" stroke-width="3" stroke-miterlimit="10" d="M9 12.5c3 0 5.5-2.5 5.5-5.5v-4" class="iconic-double-quote-serif-right-right iconic-double-quote-serif-right-curl iconic-property-stroke" fill="none"/>
+      <path class="iconic-double-quote-serif-right-right iconic-double-quote-serif-right-block iconic-property-fill" d="M9 0h7v7h-7z"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["double-quote-serif"]=iconicApis["double-quote-serif"]||function(t){var e=function(e){t.setAttribute("data-quote-direction",e);var r,i,a=t.querySelectorAll(".iconic-double-quote-serif-left"),n=t.querySelectorAll(".iconic-double-quote-serif-right");r=i="none","right"===e?i="inline":r="inline";for(var o=0;o<a.length;o++)a[o].setAttribute("display",r),n[o].setAttribute("display",i)},r=function(){var r=t.getAttribute("data-quote-direction");r&&e(r)};return{update:r,setQuoteDirection:e}};
+//]]>
+</script>
+</svg>

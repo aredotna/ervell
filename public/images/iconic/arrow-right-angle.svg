@@ -1,0 +1,29 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="arrow-right-angle" width="128" height="128" class="iconic iconic-arrow-right-angle" viewBox="0 0 128 128">
+  <g><title>Arrow 90 Degree</title></g>
+  <g data-width="128" data-height="128" data-default-max-height="96" class="iconic-lg iconic-container" display="inline" transform="translate(0 18)">
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-arrow-right-angle-stem iconic-property-stroke" d="M114 24h-110v68" fill="none"/>
+    <path d="M126.7 23.2l-21.4-12.5c-.7-.4-1.3-.1-1.3.7v25c0 .8.6 1.2 1.3.7l21.4-12.5c.7-.3.7-.9 0-1.4z" class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill iconic-property-fill"/>
+    <path d="M126.6 23.4l-29.2-12.8c-.8-.3-1.4.1-1.4.9v25c0 .8.6 1.2 1.4.9l29.3-12.8c.7-.3.7-.9-.1-1.2z" class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill-acute iconic-property-fill" display="none"/>
+    <path d="M126.6 23.5l-33.2-13c-.8-.3-1.1 0-.7.8l6.5 11.4c.4.7.4 1.9 0 2.6l-6.5 11.4c-.4.7-.1 1.1.7.8l33.2-12.9c.8-.4.8-.8 0-1.1z" class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill-angled iconic-property-fill" display="none"/>
+    <path class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-line iconic-property-fill" d="M128 24l-24-24h-10l24 24-24 24h10z" display="none"/>
+  </g>
+  <g data-width="32" data-height="32" data-default-max-height="26" class="iconic-md iconic-container" display="none" transform="scale(4) translate(0 3)">
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-arrow-right-angle-stem iconic-property-stroke" d="M27 6.5h-25.5v18" fill="none"/>
+    <path d="M31.6 6.8l-5.2 3.9c-.2.2-.4.1-.4-.2v-8c0-.3.2-.4.4-.2l5.2 3.9c.2.2.2.4 0 .6z" class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill iconic-property-fill"/>
+    <path d="M31.6 6.7l-8.1 4.1c-.2.1-.4 0-.4-.3v-8c0-.3.2-.4.4-.3l8.1 4.1c.2.1.2.3 0 .4z" class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill-acute iconic-property-fill" display="none"/>
+    <path d="M31.5 6.7l-9.1 4.1c-.3.1-.4 0-.3-.3l1.7-3.5c.1-.3.1-.7 0-.9l-1.6-3.6c-.1-.3 0-.4.3-.3l9.1 4.1c.2.1.2.3-.1.4z" class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill-angled iconic-property-fill" display="none"/>
+    <path class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-line iconic-property-fill" d="M32 6.5l-7-6.5h-3.5l7 6.5-7 6.5h3.5z" display="none"/>
+  </g>
+  <g data-width="16" data-height="16" data-default-max-height="13" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(0 1)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-arrow-right-angle-stem iconic-property-stroke" d="M13 4h-12v8" fill="none"/>
+    <path class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill iconic-property-fill" d="M16 4l-3 3v-6z"/>
+    <path class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill-acute iconic-property-fill" d="M16 4l-5 3v-6z" display="none"/>
+    <path class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-fill-angled iconic-property-fill" d="M16 4l-6 3 2-3-2-3z" display="none"/>
+    <path class="iconic-arrow-right-angle-head iconic-arrow-right-angle-head-line iconic-property-fill" d="M16 4l-4-4h-2l4 4-4 4h2z" display="none"/>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["arrow-right-angle"]=iconicApis["arrow-right-angle"]||function(t){function e(e){t.setAttribute("data-head",e);for(var a=t.querySelectorAll(".iconic-arrow-right-angle-head"),r=0;r<a.length;r++)a[r].setAttribute("display","none");var i=".iconic-arrow-right-angle-head-"+e,n=t.querySelectorAll(i);n.length||(n=t.querySelectorAll(".iconic-arrow-right-angle-head-fill"));for(var o=0;o<n.length;o++)n[o].setAttribute("display","inline")}function a(e){t.setAttribute("data-direction",e);var a,o,c;switch(e){case"bottom-left":a=["scale(-1 1)","rotate(0 64 64)","translate(-128 18)"],o=["scale(-4 4)","rotate(0 16 16)","translate(-32 3)"],c=["scale(-8 8)","rotate(0 8 8)","translate(-16 1)"];break;case"top-left":a=["rotate(180 64 64)","translate(0 18)"],o=["scale(4)","rotate(180 16 16)","translate(0 3)"],c=["scale(8)","rotate(180 8 8)","translate(0 1)"];break;case"top-right":a=["scale(-1 1)","rotate(180 64 64)","translate(128 18)"],o=["scale(-4 4)","rotate(180 16 16)","translate(32 3)"],c=["scale(-8 8)","rotate(180 8 8)","translate(16 1)"];break;case"right-top":a=["rotate(270 64 64)","translate(0 18)"],o=["scale(4)","rotate(270 16 16)","translate(0 3)"],c=["scale(8)","rotate(270 8 8)","translate(0 1)"];break;case"right-bottom":a=["scale(-1 1)","rotate(90 64 64)","translate(0 146)"],o=["scale(-4 4)","rotate(90 16 16)","translate(0 35)"],c=["scale(-8 8)","rotate(90 8 8)","translate(0 17)"];break;case"left-top":a=["scale(-1 1)","rotate(270 64 64)","translate(0 -110)"],o=["scale(-4 4)","rotate(270 16 16)","translate(0 -29)"],c=["scale(-8 8)","rotate(270 8 8)","translate(0 -15)"];break;case"left-bottom":a=["rotate(90 64 64)","translate(0 18)"],o=["scale(4)","rotate(90 16 16)","translate(0 3)"],c=["scale(8)","rotate(90 8 8)","translate(0 1)"];break;default:a=["translate(0 18)"],o=["scale(4)","translate(0 3)"],c=["scale(8)","translate(0 1)"]}r.setAttribute("transform",a.join(" ")),i.setAttribute("transform",o.join(" ")),n.setAttribute("transform",c.join(" "))}var r=t.querySelector(".iconic-lg"),i=t.querySelector(".iconic-md"),n=t.querySelector(".iconic-sm"),o=function(){var r=t.getAttribute("data-head")||"";r&&e(r);var i=t.getAttribute("data-direction")||"";i&&a(i)};return{update:o,setHead:e,setDirection:a}};
+//]]>
+</script>
+</svg>

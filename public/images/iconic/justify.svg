@@ -1,0 +1,68 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="justify" width="128" height="128" class="iconic iconic-justify" viewBox="0 0 128 128">
+  <g><title>Justify</title></g>
+  <g data-width="128" data-height="86" class="iconic-lg iconic-container" display="inline" transform="translate(0 21)" stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" fill="none">
+    <g class="iconic-justify-left" display="inline">
+      <path class="iconic-justify-left-line-1 iconic-justify-left-line-long iconic-property-stroke" d="M4 4h120"/>
+      <path class="iconic-justify-left-line-3 iconic-justify-left-line-long iconic-property-stroke" d="M4 56h120"/>
+      <path class="iconic-justify-left-line-2 iconic-justify-left-line-long iconic-property-stroke" d="M4 30h120"/>
+      <path class="iconic-justify-left-line-4 iconic-justify-left-line-short iconic-property-stroke" d="M4 82h82"/>
+    </g>
+    <g class="iconic-justify-center" display="none">
+      <path class="iconic-justify-center-line-4 iconic-justify-center-line-short iconic-property-stroke" d="M22 82h84"/>
+      <path class="iconic-justify-center-line-3 iconic-justify-center-line-long iconic-property-stroke" d="M4 56h120"/>
+      <path class="iconic-justify-center-line-2 iconic-justify-center-line-long iconic-property-stroke" d="M4 30h120"/>
+      <path class="iconic-justify-center-line-1 iconic-justify-center-line-long iconic-property-stroke" d="M4 4h120"/>
+    </g>
+    <g class="iconic-justify-right" display="none">
+      <path class="iconic-justify-right-line-1 iconic-justify-right-line-long iconic-property-stroke" d="M4 4h120"/>
+      <path class="iconic-justify-right-line-3 iconic-justify-right-line-long iconic-property-stroke" d="M4 56h120"/>
+      <path class="iconic-justify-right-line-2 iconic-justify-right-line-long iconic-property-stroke" d="M4 30h120"/>
+      <path class="iconic-justify-right-line-4 iconic-justify-right-line-short iconic-property-stroke" d="M42 82h82"/>
+    </g>
+  </g>
+  <g data-width="32" data-height="27" class="iconic-md iconic-container" display="none" transform="scale(4) translate(0 2)" stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" fill="none">
+    <g class="iconic-justify-left" display="inline">
+      <path class="iconic-justify-left-line-2 iconic-justify-left-line-long iconic-property-stroke" d="M1.5 9.5h29"/>
+      <path class="iconic-justify-left-line-1 iconic-justify-left-line-long iconic-property-stroke" d="M1.5 1.5h29"/>
+      <path class="iconic-justify-left-line-4 iconic-justify-left-line-short iconic-property-stroke" d="M1.5 25.5h21"/>
+      <path class="iconic-justify-left-line-3 iconic-justify-left-line-long iconic-property-stroke" d="M1.5 17.5h29"/>
+    </g>
+    <g class="iconic-justify-center" display="none">
+      <path class="iconic-justify-center-line-4 iconic-justify-center-line-short iconic-property-stroke" d="M5.5 25.5h21"/>
+      <path class="iconic-justify-center-line-3 iconic-justify-center-line-long iconic-property-stroke" d="M1.5 17.5h29"/>
+      <path class="iconic-justify-center-line-2 iconic-justify-center-line-long iconic-property-stroke" d="M1.5 9.5h29"/>
+      <path class="iconic-justify-center-line-1 iconic-justify-center-line-long iconic-property-stroke" d="M1.5 1.5h29"/>
+    </g>
+    <g class="iconic-justify-right" display="none">
+      <path class="iconic-justify-right-line-2 iconic-justify-right-line-long iconic-property-stroke" d="M1.5 9.5h29"/>
+      <path class="iconic-justify-right-line-1 iconic-justify-right-line-long iconic-property-stroke" d="M1.5 1.5h29"/>
+      <path class="iconic-justify-right-line-4 iconic-justify-right-line-short iconic-property-stroke" d="M9.5 25.5h21"/>
+      <path class="iconic-justify-right-line-3 iconic-justify-right-line-long iconic-property-stroke" d="M1.5 17.5h29"/>
+    </g>
+  </g>
+  <g data-width="16" data-height="14" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(0 1)" stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" fill="none">
+    <g class="iconic-justify-left" display="inline">
+      <path class="iconic-justify-left-line-2 iconic-justify-left-line-long iconic-property-stroke" d="M1 5h14"/>
+      <path class="iconic-justify-left-line-1 iconic-justify-left-line-long iconic-property-stroke" d="M1 1h14"/>
+      <path class="iconic-justify-left-line-4 iconic-justify-left-line-short iconic-property-stroke" d="M1 13h10"/>
+      <path class="iconic-justify-left-line-3 iconic-justify-left-line-long iconic-property-stroke" d="M1 9h14"/>
+    </g>
+    <g class="iconic-justify-center" display="none">
+      <path class="iconic-justify-center-line-4 iconic-justify-center-line-short iconic-property-stroke" d="M3 13h10"/>
+      <path class="iconic-justify-center-line-3 iconic-justify-center-line-long iconic-property-stroke" d="M1 9h14"/>
+      <path class="iconic-justify-center-line-2 iconic-justify-center-line-long iconic-property-stroke" d="M1 5h14"/>
+      <path class="iconic-justify-center-line-1 iconic-justify-center-line-long iconic-property-stroke" d="M1 1h14"/>
+    </g>
+    <g class="iconic-justify-right" display="none">
+      <path class="iconic-justify-right-line-2 iconic-justify-right-line-long iconic-property-stroke" d="M1 5h14"/>
+      <path class="iconic-justify-right-line-1 iconic-justify-right-line-long iconic-property-stroke" d="M1 1h14"/>
+      <path class="iconic-justify-right-line-4 iconic-justify-right-line-short iconic-property-stroke" d="M5 13h10"/>
+      <path class="iconic-justify-right-line-3 iconic-justify-right-line-long iconic-property-stroke" d="M1 9h14"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["justify"]=iconicApis["justify"]||function(t){var e=function(e){t.setAttribute("data-text-alignment",e);var i,r,a,n=t.querySelectorAll(".iconic-justify-left"),o=t.querySelectorAll(".iconic-justify-center"),c=t.querySelectorAll(".iconic-justify-right");switch(i=r=a="none",e){case"center":i="inline";break;case"right":a="inline";break;default:r="inline"}for(var s=0;s<n.length;s++)n[s].setAttribute("display",r),o[s].setAttribute("display",i),c[s].setAttribute("display",a)},i=function(){var i=t.getAttribute("data-text-alignment");i&&e(i)};return{update:i,setTextAlignment:e}};
+//]]>
+</script>
+</svg>

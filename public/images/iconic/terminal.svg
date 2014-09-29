@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-terminal" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Terminal</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-terminal-clip-0">
+      <path d="M0 0v106h128v-106h-128zm26 22l-18 10v-4l13-7-13-7 .068-4 17.932 10v2zm30 10h-26v-4h26v4z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-terminal-clip-0">
+      <path d="M0 0v28h32v-28h-32zm9 8l-6 3v-1l5-2.5-4.994-2.5.02-1 5.974 3v1zm12 3h-9.041v-1h9.041v1z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-terminal-clip-0">
+      <path d="M0 0v14h16v-14h-16zm6 5l-4 2v-1l3-1.469-3-1.531v-1l4 2v1zm7 2h-5v-1h5v1z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-terminal-lg iconic-container iconic-lg" data-width="128" data-height="106" display="inline" transform="translate(0 11)">
+    <path clip-path="url(#iconic-size-lg-terminal-clip-0)" d="M126.5 106h-125c-.828 0-1.5-.672-1.5-1.5v-103c0-.828.672-1.5 1.5-1.5h125c.828 0 1.5.672 1.5 1.5v103c0 .828-.672 1.5-1.5 1.5z" class="iconic-terminal-screen iconic-property-fill" />
+  </g>
+  <g class="iconic-terminal-md iconic-container iconic-md" data-width="32" data-height="28" display="none" transform="scale(4) translate(0 2)">
+    <path clip-path="url(#iconic-size-md-terminal-clip-0)" d="M31.5 28h-31c-.276 0-.5-.224-.5-.5v-27c0-.276.224-.5.5-.5h31c.276 0 .5.224.5.5v27c0 .276-.224.5-.5.5z" class="iconic-terminal-screen iconic-property-fill" />
+  </g>
+  <g class="iconic-terminal-sm iconic-container iconic-sm" data-width="16" data-height="14" display="none" transform="scale(8) translate(0 1)">
+    <path clip-path="url(#iconic-size-sm-terminal-clip-0)" d="M15.75 14h-15.5c-.138 0-.25-.112-.25-.25v-13.5c0-.138.112-.25.25-.25h15.5c.138 0 .25.112.25.25v13.5c0 .138-.112.25-.25.25z" class="iconic-terminal-screen iconic-property-fill" />
+  </g>
+</svg>

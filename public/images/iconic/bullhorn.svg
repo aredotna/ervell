@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-bullhorn" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Bullhorn</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-bullhorn-clip-0">
+      <path d="M4 0h114v92h-114z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-bullhorn-clip-1">
+      <path d="M120 0h8v92h-8z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-bullhorn-clip-0">
+      <path d="M2 0h26v22h-26z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-bullhorn-clip-1">
+      <path d="M29 0h3v22h-3z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-bullhorn-clip-0">
+      <path d="M0 0h13v11h-13z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-bullhorn-clip-1">
+      <path d="M14 0h2v11h-2z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-bullhorn-lg iconic-container iconic-lg" data-width="128" data-height="122" display="inline" transform="translate(0 3)">
+    <path d="M41.711 68.321l5.578 10.359c.393.729.04 1.321-.789 1.321h-9c-.828 0-1.478-.671-1.451-1.499l.195-6.025c.027-.828.562-1.933 1.194-2.467l2.416-2.041c.633-.534 1.464-.377 1.857.353z" class="iconic-bullhorn-handle iconic-bullhorn-handle-trigger iconic-property-fill"
+    />
+    <path d="M59.629 121.072l-19.038-47.595c-1.105-2.661 3.208-7.453 7.478-6.079l-.068-11.398h-28v10h1.6l22.029 55.072c.204.511.821.928 1.371.928h14c.55 0 .833-.418.629-.928z" class="iconic-bullhorn-handle iconic-property-fill" />
+    <path d="M10.5 62h-9c-.828 0-1.5-.672-1.5-1.5v-29c0-.828.672-1.5 1.5-1.5h9c.828 0 1.5.672 1.5 1.5v29c0 .828-.672 1.5-1.5 1.5z" class="iconic-bullhorn-body iconic-bullhorn-body-back iconic-property-fill" />
+    <path d="M4 64.5v-37c0-.828.672-1.5 1.5-1.5h37c.828 0 2.133-.223 2.915-.499l70.885-25.002c.781-.276 2.086-.499 2.915-.499h7.286c.828 0 1.5.672 1.5 1.5v89c0 .828-.672 1.5-1.5 1.5h-7.286c-.828 0-2.133-.223-2.915-.499l-70.885-25.002c-.781-.276-2.086-.499-2.915-.499h-37c-.828 0-1.5-.672-1.5-1.5z"
+    clip-path="url(#iconic-size-lg-bullhorn-clip-0)" class="iconic-bullhorn-body iconic-property-fill" />
+    <path d="M119.5 0h7c.828 0 1.5.672 1.5 1.5v89c0 .828-.672 1.5-1.5 1.5h-7c-.828 0-1.5-.672-1.5-1.5v-89c0-.828.672-1.5 1.5-1.5z" clip-path="url(#iconic-size-lg-bullhorn-clip-1)" class="iconic-bullhorn-body iconic-bullhorn-body-front-lip iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-bullhorn-md iconic-container iconic-md" data-width="32" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <path d="M14.814 29.536l-4.667-11.667c-.276-.665.332-1.712 1.399-1.369l-.547-2.5-6-1v3h.4l5.414 13.536c.102.255.411.464.686.464h3c.275 0 .416-.209.314-.464z" class="iconic-bullhorn-handle iconic-property-fill" />
+    <path d="M2.5 15h-2c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5h2c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5z" class="iconic-bullhorn-body iconic-bullhorn-body-back iconic-property-fill" />
+    <path d="M2 15.5v-9c0-.276.224-.5.5-.5h7c.276 0 .713-.069.975-.155l17.478-5.69c.263-.085.699-.155.976-.155h2.571c.276 0 .5.224.5.5v21c0 .276-.224.5-.5.5h-2.571c-.276 0-.713-.069-.975-.155l-17.478-5.69c-.263-.085-.699-.155-.976-.155h-7c-.276 0-.5-.224-.5-.5z"
+    clip-path="url(#iconic-size-md-bullhorn-clip-0)" class="iconic-bullhorn-body iconic-property-fill" />
+    <path d="M28.5 0h3c.276 0 .5.224.5.5v21c0 .276-.224.5-.5.5h-3c-.276 0-.5-.224-.5-.5v-21c0-.276.224-.5.5-.5z" clip-path="url(#iconic-size-md-bullhorn-clip-1)" class="iconic-bullhorn-body iconic-bullhorn-body-front-lip iconic-property-fill" />
+  </g>
+  <g class="iconic-bullhorn-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path d="M6.898 13.386l-1.909-4.42c-.112-.336.228-.883.748-.716l.263-1.25h-4v1l2.816 6.328c.26.575.937.83 1.512.57s.83-.937.57-1.512z" class="iconic-bullhorn-handle iconic-property-fill" />
+    <path clip-path="url(#iconic-size-sm-bullhorn-clip-0)" class="iconic-bullhorn-body iconic-property-fill" d="M0 8v-5h5l8.714-3h2.286v11h-2.286l-8.714-3z" />
+    <path d="M13.25 0h2.5c.138 0 .25.112.25.25v10.5c0 .138-.112.25-.25.25h-2.5c-.138 0-.25-.112-.25-.25v-10.5c0-.138.112-.25.25-.25z" clip-path="url(#iconic-size-sm-bullhorn-clip-1)" class="iconic-bullhorn-body iconic-bullhorn-body-front-lip iconic-property-fill"
+    />
+  </g>
+</svg>

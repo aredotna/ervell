@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-history" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>History</title>
+  </g>
+  <g class="iconic-history-lg iconic-container iconic-lg" data-width="126" data-height="116" display="inline" transform="translate(1 6)">
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-history-clock-hands iconic-property-accent iconic-property-stroke" d="M68 22v36l18 14" fill="none" />
+    <path stroke="#000" stroke-width="8" d="M29.816 96.184c9.772 9.772 23.272 15.816 38.184 15.816s28.412-6.044 38.184-15.816 15.816-23.272 15.816-38.184-6.044-28.412-15.816-38.184-23.272-15.816-38.184-15.816-28.412 6.044-38.184 15.816-15.816 23.272-15.816 38.184v6"
+    class="iconic-history-rim iconic-property-stroke" fill="none" />
+    <path d="M14.756 80.704l12.488-21.409c.417-.716.084-1.296-.744-1.296h-25c-.828 0-1.162.58-.744 1.296l12.488 21.409c.417.716 1.094.716 1.512 0z" class="iconic-history-arrowhead iconic-property-fill" />
+  </g>
+  <g class="iconic-history-md iconic-container iconic-md" data-width="31" data-height="28" display="none" transform="scale(4) translate(0 2)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-history-clock-hands iconic-property-accent iconic-property-stroke" d="M17 7v7l4 3" fill="none" />
+    <path stroke="#000" stroke-width="3" d="M8.161 22.839c2.262 2.262 5.387 3.661 8.839 3.661s6.577-1.399 8.839-3.661 3.661-5.387 3.661-8.839-1.399-6.577-3.661-8.839-5.387-3.661-8.839-3.661-6.577 1.399-8.839 3.661-3.661 5.387-3.661 8.839v1" class="iconic-history-rim iconic-property-stroke"
+    fill="none" />
+    <path d="M4.2 19.6l-3.9-5.2c-.166-.221-.076-.4.2-.4h8c.276 0 .366.179.2.4l-3.9 5.2c-.166.221-.434.221-.6 0z" class="iconic-history-arrowhead iconic-property-fill" />
+  </g>
+  <g class="iconic-history-sm iconic-container iconic-sm" data-width="16" data-height="14" display="none" transform="scale(8) translate(0 1)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-history-clock-hands iconic-property-accent iconic-property-stroke" d="M9 5v2l1.49 1.49" fill="none" />
+    <path stroke="#000" stroke-width="2" d="M4.757 11.243c1.086 1.086 2.586 1.757 4.243 1.757s3.157-.672 4.243-1.757 1.757-2.586 1.757-4.243-.672-3.157-1.757-4.243-2.586-1.757-4.243-1.757-3.157.672-4.243 1.757-1.757 2.586-1.757 4.243v1" class="iconic-history-rim iconic-property-stroke"
+    fill="none" />
+    <path class="iconic-history-arrowhead iconic-property-fill" d="M0 7l3 3 3-3z" />
+  </g>
+</svg>

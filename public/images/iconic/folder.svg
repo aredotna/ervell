@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-folder" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Folder</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-folder-clip-0">
+      <path d="M0 26h128v78h-128z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-folder-clip-0">
+      <path d="M0 7h32v20h-32z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-folder-clip-0">
+      <path d="M0 5h16v9h-16z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-folder-lg iconic-container iconic-lg" data-width="128" data-height="104" display="inline" transform="translate(0 12)">
+    <path d="M40.5 14h-39c-.828 0-1.5-.672-1.5-1.5v-11c0-.828.672-1.5 1.5-1.5h39c.828 0 1.5.672 1.5 1.5v11c0 .828-.672 1.5-1.5 1.5z" class="iconic-folder-top iconic-folder-top-tag iconic-property-fill" />
+    <path class="iconic-folder-top iconic-property-fill" d="M0 10h128v12h-128z" />
+    <path clip-path="url(#iconic-size-lg-folder-clip-0)" d="M125 104h-122c-1.657 0-3-1.343-3-3v-76c0-1.657 1.343-3 3-3h122c1.657 0 3 1.343 3 3v76c0 1.657-1.343 3-3 3z" class="iconic-folder-bottom iconic-property-fill" />
+  </g>
+  <g class="iconic-folder-md iconic-container iconic-md" data-width="32" data-height="27" display="none" transform="scale(4) translate(0 2)">
+    <path d="M.5 5h10c.276 0 .5-.224.5-.5v-4c0-.276-.224-.5-.5-.5h-10c-.276 0-.5.224-.5.5v4c0 .276.224.5.5.5z" class="iconic-folder-top iconic-folder-top-tag iconic-property-fill" />
+    <path class="iconic-folder-top iconic-property-fill" d="M0 3.002h32.001v2.998h-32.001z" />
+    <path clip-path="url(#iconic-size-md-folder-clip-0)" d="M31 27h-30c-.552 0-1-.448-1-1v-19c0-.552.448-1 1-1h30c.552 0 1 .448 1 1v19c0 .552-.448 1-1 1z" class="iconic-folder-bottom iconic-property-fill" />
+  </g>
+  <g class="iconic-folder-sm iconic-container iconic-sm" data-width="16" data-height="14" display="none" transform="scale(8) translate(0 1)">
+    <path d="M.25 3h5.5c.138 0 .25-.112.25-.25v-2.5c0-.138-.112-.25-.25-.25h-5.5c-.138 0-.25.112-.25.25v2.5c0 .138.112.25.25.25z" class="iconic-folder-top iconic-folder-top-tag iconic-property-fill" />
+    <path class="iconic-folder-top iconic-property-fill" d="M0 2.001h16v1.999h-16z" />
+    <path clip-path="url(#iconic-size-sm-folder-clip-0)" d="M15.5 14h-15c-.276 0-.5-.224-.5-.5v-9c0-.276.224-.5.5-.5h15c.276 0 .5.224.5.5v9c0 .276-.224.5-.5.5z" class="iconic-folder-bottom iconic-property-fill" />
+  </g>
+</svg>

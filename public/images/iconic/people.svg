@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-people" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>People</title>
+  </g>
+  <g class="iconic-people-lg iconic-container iconic-lg" data-width="128" data-height="58" display="inline" transform="translate(0 35)">
+    <path d="M34.448 40.182c.545-.624.522-.648-.166-.187-1.901 1.274-4.037 2.006-6.282 2.006-2.769 0-5.377-1.104-7.577-2.974-.631-.536-1.765-1.026-2.593-1.026h-3.829c-7.732 0-14 6.268-14 14v2.5c0 .828.672 1.5 1.5 1.5h27c.828 0 1.5-.672 1.5-1.5v-2.5c0-4.523 1.683-8.654 4.448-11.818z"
+    class="iconic-people-person iconic-people-person-body iconic-people-person-left iconic-people-person-body-left iconic-property-accent iconic-property-fill" />
+    <path d="M40 24c0 8.284-5.373 16-12 16s-12-7.716-12-16 5.373-14 12-14 12 5.716 12 14z" class="iconic-people-person iconic-people-person-head iconic-people-person-left iconic-people-person-head-left iconic-property-accent iconic-property-fill" />
+    <path d="M110.142 38c-.828 0-1.961.49-2.592 1.027-2.194 1.869-4.792 2.973-7.55 2.973-2.329 0-4.543-.788-6.497-2.159-.678-.476-.686-.469-.132.147 2.871 3.188 4.629 7.395 4.629 12.012v2.5c0 .828.672 1.5 1.5 1.5h27c.828 0 1.5-.672 1.5-1.5v-2.5c0-7.732-6.268-14-14-14h-3.858z"
+    class="iconic-people-person iconic-people-person-body iconic-people-person-right iconic-people-person-body-right iconic-property-accent iconic-property-fill" />
+    <path d="M112 23.875c0 8.284-5.373 16.125-12 16.125s-12-7.841-12-16.125 5.373-13.875 12-13.875 12 5.591 12 13.875z" class="iconic-people-person iconic-people-person-head iconic-people-person-right iconic-people-person-head-right iconic-property-accent iconic-property-fill"
+    />
+    <path d="M77.478 36c-.828 0-1.935.512-2.521 1.098-3.059 3.058-6.875 4.902-10.957 4.902s-7.898-1.845-10.957-4.902c-.586-.586-1.692-1.098-2.521-1.098h-2.522c-8.836 0-16 7.163-16 16v4.5c0 .828.672 1.5 1.5 1.5h61c.828 0 1.5-.672 1.5-1.5v-4.5c0-8.836-7.163-16-16-16h-2.522z"
+    class="iconic-people-person iconic-people-person-body iconic-people-person-center iconic-people-person-body-center iconic-property-fill" />
+    <path d="M80 19c0 11.046-7.163 21-16 21s-16-9.954-16-21 7.163-19 16-19 16 7.954 16 19z" class="iconic-people-person iconic-people-person-head iconic-people-person-center iconic-people-person-head-center iconic-property-fill" />
+  </g>
+  <g class="iconic-people-md iconic-container iconic-md" data-width="32" data-height="15" display="none" transform="scale(4) translate(0 8)">
+    <path d="M7.259 11.432c.088-.262.085-.451-.037-.442-.074.006-.147.009-.222.009-1.177 0-2.263-.616-3.074-1.601-.176-.213-.328-.399-.363-.399h-.063c-1.933 0-3.5 1.567-3.5 3.5v1c0 .276.224.5.5.5h6c.276 0 .5-.224.5-.5v-.5c0-.549.093-1.074.259-1.568z" class="iconic-people-person iconic-people-person-body iconic-people-person-left iconic-people-person-body-left iconic-property-accent iconic-property-fill"
+    />
+    <path d="M10.5 5.25c0 2.485-1.567 4.75-3.5 4.75s-3.5-2.265-3.5-4.75 1.567-4.25 3.5-4.25 3.5 1.765 3.5 4.25z" class="iconic-people-person iconic-people-person-head iconic-people-person-left iconic-people-person-head-left iconic-property-accent iconic-property-fill"
+    />
+    <path d="M28.437 9c-.035 0-.187.186-.363.399-.811.985-1.898 1.601-3.074 1.601-.074 0-.148-.003-.222-.009-.122-.009-.126.18-.037.442.166.493.259 1.019.259 1.568v.5c0 .276.224.5.5.5h6c.276 0 .5-.224.5-.5v-1c0-1.933-1.567-3.5-3.5-3.5 0 0-.028 0-.063 0z"
+    class="iconic-people-person iconic-people-person-body iconic-people-person-right iconic-people-person-body-right iconic-property-accent iconic-property-fill" />
+    <path d="M28.5 5.25c0 2.485-1.567 4.75-3.5 4.75s-3.5-2.265-3.5-4.75 1.567-4.25 3.5-4.25 3.5 1.765 3.5 4.25z" class="iconic-people-person iconic-people-person-head iconic-people-person-right iconic-people-person-head-right iconic-property-accent iconic-property-fill"
+    />
+    <path d="M19.765 9c-.13 0-.366.181-.548.39-.845.971-1.947 1.61-3.217 1.61s-2.372-.639-3.217-1.61c-.181-.208-.418-.39-.548-.39h-.235c-2.209 0-4 1.791-4 4v1.5c0 .276.224.5.5.5h15c.276 0 .5-.224.5-.5v-1.5c0-2.209-1.791-4-4-4 0 0-.105 0-.235 0z" class="iconic-people-person iconic-people-person-body iconic-people-person-center iconic-people-person-body-center iconic-property-fill"
+    />
+    <path d="M20 4.5c0 2.761-1.791 5.5-4 5.5s-4-2.739-4-5.5 1.791-4.5 4-4.5 4 1.739 4 4.5z" class="iconic-people-person iconic-people-person-head iconic-people-person-center iconic-people-person-head-center iconic-property-fill" />
+  </g>
+  <g class="iconic-people-sm iconic-container iconic-sm" data-width="16" data-height="10" display="none" transform="scale(8) translate(0 3)">
+    <path d="M3 8c0-.782.308-1.489.8-2.023-.729-.058-1.389-.409-1.884-.968-1.065.045-1.916.916-1.916 1.992v2h3v-1z" class="iconic-people-person iconic-people-person-body iconic-people-person-left iconic-people-person-body-left iconic-property-accent iconic-property-fill"
+    />
+    <path d="M5 3.5c0-.861.278-1.641.722-2.251-.347-.743-.984-1.249-1.722-1.249-1.105 0-2 1.119-2 2.5s.895 2.5 2 2.5c.429 0 .825-.172 1.151-.46-.089-.331-.151-.675-.151-1.04z" class="iconic-people-person iconic-people-person-head iconic-people-person-left iconic-people-person-head-left iconic-property-accent iconic-property-fill"
+    />
+    <path d="M14.084 5.008c-.495.559-1.155.91-1.884.968.492.535.8 1.241.8 2.023v1h3v-2c0-1.076-.851-1.946-1.916-1.992z" class="iconic-people-person iconic-people-person-body iconic-people-person-right iconic-people-person-body-right iconic-property-accent iconic-property-fill"
+    />
+    <path d="M12 0c-.738 0-1.375.505-1.722 1.249.444.61.722 1.39.722 2.251 0 .364-.061.709-.15 1.04.326.288.721.46 1.15.46 1.105 0 2-1.119 2-2.5s-.895-2.5-2-2.5z" class="iconic-people-person iconic-people-person-head iconic-people-person-right iconic-people-person-head-right iconic-property-accent iconic-property-fill"
+    />
+    <path d="M10.084 6.008c-.54.611-1.274.992-2.084.992s-1.544-.38-2.084-.992c-1.065.045-1.916.916-1.916 1.992v2h8v-2c0-1.076-.851-1.946-1.916-1.992z" class="iconic-people-person iconic-people-person-body iconic-people-person-center iconic-people-person-body-center iconic-property-fill"
+    />
+    <ellipse cx="8" cy="3.5" rx="2" ry="2.5" class="iconic-people-person iconic-people-person-head iconic-people-person-center iconic-people-person-head-center iconic-property-fill" />
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-moon" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Moon</title>
+  </g>
+  <g class="iconic-moon-lg iconic-container iconic-lg" data-width="118" data-height="118" display="inline" transform="translate(5 5)">
+    <path d="M82 100c-35.346 0-64-28.654-64-64 0-13.07 3.926-25.219 10.652-35.348-17.265 11.462-28.652 31.072-28.652 53.348 0 35.346 28.654 64 64 64 22.276 0 41.886-11.387 53.348-28.652-10.129 6.725-22.278 10.652-35.348 10.652z" class="iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-moon-md iconic-container iconic-md" data-width="30" data-height="30" display="none" transform="scale(4) translate(1 1)">
+    <path d="M22 24c-8.836 0-16-7.163-16-16 0-2.877.769-5.569 2.098-7.902-4.833 2.753-8.098 7.942-8.098 13.902 0 8.836 7.163 16 16 16 5.96 0 11.149-3.265 13.902-8.098-2.332 1.329-5.025 2.098-7.902 2.098z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-moon-sm iconic-container iconic-sm" data-width="15" data-height="15" display="none" transform="scale(8)">
+    <path d="M11.036 11.99c-4.433 0-8.026-3.594-8.026-8.026 0-1.443.386-2.794 1.053-3.964-2.424 1.381-4.062 3.984-4.062 6.974 0 4.433 3.594 8.026 8.026 8.026 2.99 0 5.593-1.638 6.974-4.062-1.17.667-2.521 1.053-3.964 1.053z" class="iconic-property-fill"
+    />
+  </g>
+</svg>

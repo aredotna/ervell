@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-flash" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Flash</title>
+  </g>
+  <g class="iconic-flash-lg iconic-container iconic-lg" data-width="50" data-height="128" display="inline" transform="translate(39)">
+    <path class="iconic-flash-line iconic-property-fill" d="M16 0l-16 68h32l-8 40h10l16-52h-32l16-56" />
+    <path d="M23.443 126.607l-6.886-17.215c-.308-.769.114-1.393.943-1.393h25c.828 0 1.025.475.439 1.061l-17.879 17.879c-.586.586-1.31.437-1.618-.332z" class="iconic-flash-arrowhead iconic-property-fill" />
+  </g>
+  <g class="iconic-flash-md iconic-container iconic-md" data-width="13" data-height="32" display="none" transform="scale(4) translate(9)">
+    <path class="iconic-property-fill" d="M5 14l4-14h-5l-4 17h8l-2 10-.281 1h3l.281-1 4-13z" />
+    <path d="M5.743 31.571l-2.486-4.143c-.142-.237-.033-.429.243-.429h8c.276 0 .328.143.116.32l-5.232 4.36c-.212.177-.499.128-.641-.109z" class="iconic-flash-arrowhead iconic-property-fill" />
+  </g>
+  <g class="iconic-flash-sm iconic-container iconic-sm" data-width="7" data-height="15" display="none" transform="scale(8) translate(4)">
+    <path class="iconic-flash-line iconic-property-fill" d="M2 0l-2 8h4l-1 4h2l2-6h-4l2-6" />
+    <path class="iconic-flash-arrowhead iconic-property-fill" d="M4 15l-3-3h6z" />
+  </g>
+</svg>

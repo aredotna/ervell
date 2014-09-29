@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-british-pound" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>British Pound</title>
+  </g>
+  <g class="iconic-british-pound-lg iconic-container iconic-lg" data-width="88" data-height="128" display="inline" transform="translate(20)">
+    <path stroke="#000" stroke-width="6" class="iconic-british-pound-strike iconic-property-accent iconic-property-stroke" d="M6 69h42" fill="none" />
+    <path stroke="#000" stroke-width="12" d="M76 32c0-16.518-13.482-26-30-26s-29.909 13.391-29.909 29.909c0 24.924 27.296 44.705-10.091 82.091v4h82" class="iconic-british-pound-l iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-british-pound-md iconic-container iconic-md" data-width="21" data-height="32" display="none" transform="scale(4) translate(5)">
+    <path stroke="#000" stroke-width="2" class="iconic-british-pound-strike iconic-property-accent iconic-property-stroke" d="M0 16h12" fill="none" />
+    <path stroke="#000" stroke-width="4" d="M17.042 8.5c0-3.866-3.134-6.5-7-6.5s-7 3.134-7 7c0 5.833 7.708 10.75-1.042 19.5v1.5h19" class="iconic-british-pound-l iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-british-pound-sm iconic-container iconic-sm" data-width="11" data-height="16" display="none" transform="scale(8) translate(2)">
+    <path stroke="#000" class="iconic-british-pound-strike iconic-property-accent iconic-property-stroke" d="M0 8.5h7" fill="none" />
+    <path stroke="#000" stroke-width="2" d="M9 4c0-1.933-1.567-3-3.5-3s-3.5 1.567-3.5 3.5c0 2.917 3.375 5.125-1 9.5v1h10" class="iconic-british-pound-l iconic-property-stroke" fill="none" />
+  </g>
+</svg>

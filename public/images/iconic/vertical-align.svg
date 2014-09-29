@@ -1,0 +1,79 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="vertical-align" width="128" height="128" class="iconic iconic-vertical-align" viewBox="0 0 128 128">
+  <g><title>Vertical Align</title></g>
+  <defs>
+    <clipPath id="iconic-size-lg-vertical-align-center-clip-0">
+      <path d="M28 40v-40h72v40h-72zm0 6v40h72v-40h-72z"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-vertical-align-center-clip-0">
+      <path d="M27 12v9h-22v-9h22zm0-3v-9h-22v9h22z"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-vertical-align-center-clip-0">
+      <path d="M1 4v-4h14v4h-14zm0 3v4h14v-4h-14z"/>
+    </clipPath>
+  </defs>
+  <g data-width="128" data-height="90" class="iconic-lg iconic-container" display="inline" transform="translate(0 19)">
+    <g class="iconic-vertical-align-top">
+      <path d="M98.5 74h-17c-.8 0-1.5-.7-1.5-1.5v-67c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v67c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-top-element iconic-vertical-align-top-element-3 iconic-property-fill"/>
+      <path d="M72.5 54h-17c-.8 0-1.5-.7-1.5-1.5v-47c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v47c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-top-element iconic-vertical-align-top-element-2 iconic-property-fill"/>
+      <path d="M46.5 90h-17c-.8 0-1.5-.7-1.5-1.5v-83c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v83c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-top-element iconic-vertical-align-top-element-1 iconic-property-fill"/>
+      <path stroke="#000" stroke-width="2" stroke-miterlimit="10" class="iconic-vertical-align-top-alignment-line iconic-property-accent iconic-property-stroke" d="M0 1h128" fill="none"/>
+    </g>
+    <g class="iconic-vertical-align-center" display="none">
+      <path clip-path="url(#iconic-size-lg-vertical-align-center-clip-0)" d="M98.5 78h-17c-.8 0-1.5-.7-1.5-1.5v-67c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v67c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-3 iconic-property-fill"/>
+      <path clip-path="url(#iconic-size-lg-vertical-align-center-clip-0)" d="M72.5 68h-17c-.8 0-1.5-.7-1.5-1.5v-47c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v47c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-2 iconic-property-fill"/>
+      <path clip-path="url(#iconic-size-lg-vertical-align-center-clip-0)" d="M46.5 86h-17c-.8 0-1.5-.7-1.5-1.5v-83c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v83c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-1 iconic-property-fill"/>
+      <path stroke="#000" stroke-width="2" stroke-miterlimit="10" class="iconic-vertical-align-center-alignment-line iconic-property-accent iconic-property-stroke" d="M0 43h128" fill="none"/>
+    </g>
+    <g class="iconic-vertical-align-bottom" display="none">
+      <path d="M98.5 86h-17c-.8 0-1.5-.7-1.5-1.5v-67c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v67c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-3 iconic-property-fill"/>
+      <path d="M72.5 86h-17c-.8 0-1.5-.7-1.5-1.5v-47c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v47c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-2 iconic-property-fill"/>
+      <path d="M46.5 86h-17c-.8 0-1.5-.7-1.5-1.5v-83c0-.8.7-1.5 1.5-1.5h17c.8 0 1.5.7 1.5 1.5v83c0 .8-.7 1.5-1.5 1.5z" class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-1 iconic-property-fill"/>
+      <path stroke="#000" stroke-width="2" stroke-miterlimit="10" class="iconic-vertical-align-bottom-alignment-line iconic-property-accent iconic-property-stroke" d="M0 89h128" fill="none"/>
+    </g>
+  </g>
+  <g data-width="32" data-height="23" class="iconic-md iconic-container" display="none" transform="scale(4) translate(0 4)">
+    <g class="iconic-vertical-align-top">
+      <path d="M26.5 19h-5c-.3 0-.5-.2-.5-.5v-16c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v16c0 .3-.2.5-.5.5z" class="iconic-vertical-align-top-element iconic-vertical-align-top-element-3 iconic-property-fill"/>
+      <path d="M18.5 15h-5c-.3 0-.5-.2-.5-.5v-12c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v12c0 .3-.2.5-.5.5z" class="iconic-vertical-align-top-element iconic-vertical-align-top-element-2 iconic-property-fill"/>
+      <path d="M10.5 23h-5c-.3 0-.5-.2-.5-.5v-20c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v20c0 .3-.2.5-.5.5z" class="iconic-vertical-align-top-element iconic-vertical-align-top-element-1 iconic-property-fill"/>
+      <path stroke="#000" stroke-miterlimit="10" class="iconic-vertical-align-top-alignment-line iconic-property-accent iconic-property-stroke" d="M0 .5h32" fill="none"/>
+    </g>
+    <g class="iconic-vertical-align-center" display="none">
+      <path clip-path="url(#iconic-size-md-vertical-align-center-clip-0)" d="M26.5 19h-5c-.3 0-.5-.2-.5-.5v-16c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v16c0 .3-.2.5-.5.5z" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-3 iconic-property-fill"/>
+      <path clip-path="url(#iconic-size-md-vertical-align-center-clip-0)" d="M18.5 17h-5c-.3 0-.5-.2-.5-.5v-12c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v12c0 .3-.2.5-.5.5z" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-2 iconic-property-fill"/>
+      <path clip-path="url(#iconic-size-md-vertical-align-center-clip-0)" d="M10.5 21h-5c-.3 0-.5-.2-.5-.5v-20c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v20c0 .3-.2.5-.5.5z" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-1 iconic-property-fill"/>
+      <path stroke="#000" stroke-miterlimit="10" class="iconic-vertical-align-center-alignment-line iconic-property-accent iconic-property-stroke" d="M0 10.5h32" fill="none"/>
+    </g>
+    <g class="iconic-vertical-align-bottom" display="none">
+      <path d="M26.5 21h-5c-.3 0-.5-.2-.5-.5v-16c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v16c0 .3-.2.5-.5.5z" class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-3 iconic-property-fill"/>
+      <path d="M18.5 21h-5c-.3 0-.5-.2-.5-.5v-12c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v12c0 .3-.2.5-.5.5z" class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-2 iconic-property-fill"/>
+      <path d="M10.5 21h-5c-.3 0-.5-.2-.5-.5v-20c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v20c0 .3-.2.5-.5.5z" class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-1 iconic-property-fill"/>
+      <path stroke="#000" stroke-miterlimit="10" class="iconic-vertical-align-bottom-alignment-line iconic-property-accent iconic-property-stroke" d="M0 22.5h32" fill="none"/>
+    </g>
+  </g>
+  <g data-width="16" data-height="13" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(0 1)">
+    <g class="iconic-vertical-align-top">
+      <path class="iconic-vertical-align-top-element iconic-vertical-align-top-element-3 iconic-property-fill" d="M11 2h4v9h-4z"/>
+      <path class="iconic-vertical-align-top-element iconic-vertical-align-top-element-2 iconic-property-fill" d="M6 2h4v7h-4z"/>
+      <path class="iconic-vertical-align-top-element iconic-vertical-align-top-element-1 iconic-property-fill" d="M1 2h4v11h-4z"/>
+      <path stroke="#000" stroke-miterlimit="10" class="iconic-vertical-align-top-alignment-line iconic-property-accent iconic-property-stroke" d="M0 .5h16" fill="none"/>
+    </g>
+    <g class="iconic-vertical-align-center" display="none">
+      <path clip-path="url(#iconic-size-sm-vertical-align-center-clip-0)" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-3 iconic-property-fill" d="M11 1h4v9h-4z"/>
+      <path clip-path="url(#iconic-size-sm-vertical-align-center-clip-0)" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-2 iconic-property-fill" d="M6 2h4v7h-4z"/>
+      <path clip-path="url(#iconic-size-sm-vertical-align-center-clip-0)" class="iconic-vertical-align-center-element iconic-vertical-align-center-element-1 iconic-property-fill" d="M1 0h4v11h-4z"/>
+      <path stroke="#000" stroke-miterlimit="10" class="iconic-vertical-align-center-alignment-line iconic-property-stroke" d="M0 5.5h16" fill="none"/>
+    </g>
+    <g class="iconic-vertical-align-bottom" display="none">
+      <path class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-3 iconic-property-fill" d="M11 2h4v9h-4z"/>
+      <path class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-2 iconic-property-fill" d="M6 4h4v7h-4z"/>
+      <path class="iconic-vertical-align-bottom-element iconic-vertical-align-bottom-element-1 iconic-property-fill" d="M1 0h4v11h-4z"/>
+      <path stroke="#000" stroke-miterlimit="10" class="iconic-vertical-align-bottom-alignment-line iconic-property-accent iconic-property-stroke" d="M0 12.5h16" fill="none"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["vertical-align"]=iconicApis["vertical-align"]||function(t){var e=function(e){t.setAttribute("data-vertical-alignment",e);var i,r,n,a=t.querySelectorAll(".iconic-vertical-align-top"),c=t.querySelectorAll(".iconic-vertical-align-center"),o=t.querySelectorAll(".iconic-vertical-align-bottom");switch(i=r=n="none",e){case"center":i="inline";break;case"bottom":n="inline";break;default:r="inline"}for(var s=0;s<a.length;s++)a[s].setAttribute("display",r),c[s].setAttribute("display",i),o[s].setAttribute("display",n)},i=function(){var i=t.getAttribute("data-vertical-alignment");i&&e(i)};return{update:i,setVerticalAlignment:e}};
+//]]>
+</script>
+</svg>
