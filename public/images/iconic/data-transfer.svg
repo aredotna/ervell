@@ -1,0 +1,38 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="data-transfer" width="128" height="128" class="iconic iconic-data-transfer" viewBox="0 0 128 128">
+  <g><title>Data Transfer</title></g>
+  <g data-width="60" data-height="128" class="iconic-lg iconic-container" display="inline" transform="translate(34)">
+    <g class="iconic-download">
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-download-bar iconic-property-accent iconic-property-stroke" d="M4 124h52" fill="none"/>
+      <path class="iconic-download-arrow iconic-property-fill" d="M38 76v-76h-16v76h-14l22 36 22-36z"/>
+    </g>
+    <g class="iconic-upload" display="none">
+      <path stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" class="iconic-upload-line iconic-property-accent iconic-property-stroke" d="M56 4h-52" fill="none"/>
+      <path class="iconic-upload-arrow iconic-property-fill" d="M52 52l-22-36-22 36h14v76h16v-76z"/>
+    </g>
+  </g>
+  <g data-width="20" data-height="32" class="iconic-md iconic-container" display="none" transform="scale(4) translate(6)">
+    <g class="iconic-download">
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-download-bar iconic-property-accent iconic-property-stroke" d="M1.5 30.5h17" fill="none"/>
+      <path class="iconic-download-arrow iconic-property-fill" d="M13 17v-17h-6v17h-4l7 9 7-9z"/>
+    </g>
+    <g class="iconic-upload" display="none">
+      <path stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" class="iconic-upload-line iconic-property-accent iconic-property-stroke" d="M18.5 1.5h-17" fill="none"/>
+      <path class="iconic-upload-arrow iconic-property-fill" d="M17 15l-7-9-7 9h4v17h6v-17z"/>
+    </g>
+  </g>
+  <g data-width="14" data-height="16" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(1)">
+    <g class="iconic-download">
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-download-bar iconic-property-accent iconic-property-stroke" d="M1 15h12" fill="none"/>
+      <path class="iconic-download-arrow iconic-property-fill" d="M9 7v-7h-4v7h-3l5 5 5-5z"/>
+    </g>
+    <g class="iconic-upload" display="none">
+      <path stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" class="iconic-upload-line iconic-property-accent iconic-property-stroke" d="M13 1h-12" fill="none"/>
+      <path class="iconic-upload-arrow iconic-property-fill" d="M12 9l-5-5-5 5h3v7h4v-7z"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["data-transfer"]=iconicApis["data-transfer"]||function(t){var e=function(e){t.setAttribute("data-transfer-direction",e);var r,a,i=t.querySelectorAll(".iconic-upload"),n=t.querySelectorAll(".iconic-download");a=r="none","upload"===e?r="inline":a="inline";for(var o=0;o<i.length;o++)i[o].setAttribute("display",r),n[o].setAttribute("display",a)},r=function(){var r=t.getAttribute("data-transfer-direction");r&&e(r)};return{update:r,setTransferDirection:e}};
+//]]>
+</script>
+</svg>

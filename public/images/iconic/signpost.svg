@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-signpost" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Signpost</title>
+  </g>
+  <g class="iconic-signpost-lg iconic-container iconic-lg" data-width="124" data-height="128" display="inline" transform="translate(2)">
+    <path class="iconic-signpost-sign iconic-signpost-sign-right iconic-property-fill" d="M68 14h48l8 10-8 10h-48z" />
+    <path class="iconic-signpost-sign iconic-signpost-sign-left iconic-property-fill" d="M64 26h-56l-8-10 8-10h56z" />
+    <path class="iconic-signpost-post iconic-property-fill" d="M58 0h8v128h-8z" />
+  </g>
+  <g class="iconic-signpost-md iconic-container iconic-md" data-width="31" data-height="32" display="none" transform="scale(4)">
+    <path class="iconic-signpost-sign iconic-signpost-sign-right iconic-property-fill" d="M15 5h14l2 3-2 3h-14z" />
+    <path class="iconic-signpost-sign iconic-signpost-sign-left iconic-property-fill" d="M16 8h-14l-2-3 2-3h14z" />
+    <path class="iconic-signpost-post iconic-property-fill" d="M14 0h3v32h-3z" />
+  </g>
+  <g class="iconic-signpost-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path class="iconic-signpost-sign iconic-signpost-sign-right iconic-property-fill" d="M8 3h6l2 2-2 2h-6z" />
+    <path class="iconic-signpost-sign iconic-signpost-sign-left iconic-property-fill" d="M8 5h-6l-2-2 2-2h6z" />
+    <path class="iconic-signpost-post iconic-property-fill" d="M7 0h2v16h-2z" />
+  </g>
+</svg>

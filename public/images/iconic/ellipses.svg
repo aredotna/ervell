@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-ellipses" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Ellipses</title>
+  </g>
+  <g class="iconic-ellipses-lg iconic-container iconic-lg" data-width="126" data-height="34" display="inline" transform="translate(1 47)">
+    <path d="M32.5 34h-31c-.828 0-1.5-.672-1.5-1.5v-31c0-.828.672-1.5 1.5-1.5h31c.828 0 1.5.672 1.5 1.5v31c0 .828-.672 1.5-1.5 1.5z" class="iconic-ellipses-dot iconic-ellipses-dot-1 iconic-property-fill" />
+    <path d="M78.5 34h-31c-.828 0-1.5-.672-1.5-1.5v-31c0-.828.672-1.5 1.5-1.5h31c.828 0 1.5.672 1.5 1.5v31c0 .828-.672 1.5-1.5 1.5z" class="iconic-ellipses-dot iconic-ellipses-dot-2 iconic-property-fill" />
+    <path d="M124.5 34h-31c-.828 0-1.5-.672-1.5-1.5v-31c0-.828.672-1.5 1.5-1.5h31c.828 0 1.5.672 1.5 1.5v31c0 .828-.672 1.5-1.5 1.5z" class="iconic-ellipses-dot iconic-ellipses-dot-3 iconic-property-fill" />
+  </g>
+  <g class="iconic-ellipses-md iconic-container iconic-md" data-width="32" data-height="8" display="none" transform="scale(4) translate(0 12)">
+    <path d="M7.5 8h-7c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5h7c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5z" class="iconic-ellipses-dot iconic-ellipses-dot-1 iconic-property-fill" />
+    <path d="M19.5 8h-7c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5h7c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5z" class="iconic-ellipses-dot iconic-ellipses-dot-2 iconic-property-fill" />
+    <path d="M31.5 8h-7c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5h7c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5z" class="iconic-ellipses-dot iconic-ellipses-dot-3 iconic-property-fill" />
+  </g>
+  <g class="iconic-ellipses-sm iconic-container iconic-sm" data-width="16" data-height="4" display="none" transform="scale(8) translate(0 6)">
+    <path class="iconic-ellipses-dot iconic-ellipses-dot-1 iconic-property-fill" d="M0 0h4v4h-4z" />
+    <path class="iconic-ellipses-dot iconic-ellipses-dot-2 iconic-property-fill" d="M6 0h4v4h-4z" />
+    <path class="iconic-ellipses-dot iconic-ellipses-dot-3 iconic-property-fill" d="M12 0h4v4h-4z" />
+  </g>
+</svg>

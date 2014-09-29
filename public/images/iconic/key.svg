@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-key" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Key</title>
+  </g>
+  <g class="iconic-key-lg iconic-container iconic-lg" data-width="128" data-height="126" display="inline" transform="translate(0 1)">
+    <path d="M92 0c-19.882 0-36 16.118-36 36 0 4.193.724 8.215 2.042 11.958l-58.042 58.042v20h20l8-8v-8h8v-6h6v-8h8l10-10v-6h6l5.938-5.938 4 4 7.171-7.171c2.844.723 5.822 1.109 8.891 1.109 19.882 0 36-16.118 36-36s-16.118-36-36-36zm-87.906 112.156v-4.125l53.908-54.033 1.998 2.169-55.906 55.99zm102.906-84.156c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-key-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path d="M23 0c-4.971 0-9 4.029-9 9 0 .909.138 1.785.388 2.612l-14.388 14.388v6h6v-3h3v-3h3v-3h3l5.388-5.388c.827.251 1.703.388 2.612.388 4.971 0 9-4.029 9-9s-4.029-9-9-9zm3 8c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" class="iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-key-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M11.5 0c-2.485 0-4.5 2.015-4.5 4.5 0 .452.086.879.21 1.29l-7.21 7.21v3h3v-2h2v-2h2v-2h2l1.21-1.21c.411.124.838.21 1.29.21 2.485 0 4.5-2.015 4.5-4.5s-2.015-4.5-4.5-4.5zm1.5 4c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" class="iconic-property-fill"
+    />
+  </g>
+</svg>

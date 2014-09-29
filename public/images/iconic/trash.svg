@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-trash" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Trash</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-trash-clip-0">
+      <path d="M88 20v93c0 1.105-.895 2-2 2s-2-.895-2-2v-93h-12v93c0 1.105-.895 2-2 2s-2-.895-2-2v-93h-12v93c0 1.105-.895 2-2 2s-2-.895-2-2v-93h-12v93c0 1.105-.895 2-2 2s-2-.895-2-2v-93h-12v93c0 1.105-.895 2-2 2s-2-.895-2-2v-93h-12v108h92v-108h-12z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-trash-clip-0">
+      <path d="M23 7v21.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-21.5h-3v21.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-21.5h-3v21.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-21.5h-3v21.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-21.5h-3v21.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-21.5h-3v25h23v-25h-3z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-trash-clip-0">
+      <path d="M11 5v8.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-8.5h-2v8.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-8.5h-2v8.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-8.5h-2v11h11v-11h-2z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-trash-lg iconic-container iconic-lg" data-width="108" data-height="128" display="inline" transform="translate(10)">
+    <path clip-path="url(#iconic-size-lg-trash-clip-0)" d="M97 128h-86c-1.657 0-3-1.343-3-3v-106c0-1.657 1.343-3 3-3h86c1.657 0 3 1.343 3 3v106c0 1.657-1.343 3-3 3z" class="iconic-trash-can iconic-property-fill" />
+    <path stroke="#000" stroke-width="2" d="M41 15.333v-11.333c0-1.657 1.343-3 3-3h20c1.657 0 3 1.343 3 3v11.333" class="iconic-trash-lid iconic-trash-lid-handle iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M104 10c-.086 0-.166.02-.25.025v-.025h-15.75c0-1.105-.895-2-2-2h-63.938v.006c-.021-.001-.041-.006-.063-.006-1.105 0-2 .895-2 2h-16c-2.209 0-4 1.791-4 4v4h108v-4c0-2.209-1.791-4-4-4z" class="iconic-trash-lid iconic-property-fill" />
+  </g>
+  <g class="iconic-trash-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path clip-path="url(#iconic-size-md-trash-clip-0)" d="M25 32h-21c-.552 0-1-.448-1-1v-25c0-.552.448-1 1-1h21c.552 0 1 .448 1 1v25c0 .552-.448 1-1 1z" class="iconic-trash-can iconic-property-fill" />
+    <path stroke="#000" d="M11.5 3.958v-2.958c0-.276.224-.5.5-.5h5c.276 0 .5.224.5.5v2.958" class="iconic-trash-lid iconic-trash-lid-handle iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M26 3h-3c0-.552-.448-1-1-1h-15c-.552 0-1 .448-1 1h-3c-1.657 0-3 1.343-3 3h29c0-1.657-1.343-3-3-3z" class="iconic-trash-lid iconic-property-fill" />
+  </g>
+  <g class="iconic-trash-sm iconic-container iconic-sm" data-width="15" data-height="16" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-trash-clip-0)" d="M12.5 16h-10c-.276 0-.5-.224-.5-.5v-12c0-.276.224-.5.5-.5h10c.276 0 .5.224.5.5v12c0 .276-.224.5-.5.5z" class="iconic-trash-can iconic-property-fill" />
+    <path stroke="#000" d="M5.5 2.958v-2.208c0-.138.112-.25.25-.25h3.5c.138 0 .25.112.25.25v2.208" class="iconic-trash-lid iconic-trash-lid-handle iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M15 4c0-1.105-.895-2-2-2h-11c-1.105 0-2 .895-2 2h15z" class="iconic-trash-lid iconic-property-fill" />
+  </g>
+</svg>

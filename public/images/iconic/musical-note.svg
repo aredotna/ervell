@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-musical-note" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Musical Note</title>
+  </g>
+  <g class="iconic-musical-note-lg iconic-container iconic-lg" data-width="118" data-height="128" display="inline" transform="translate(5)">
+    <path d="M28 16v79.035c-2.861-1.915-6.299-3.035-10-3.035-9.941 0-18 8.059-18 18s8.059 18 18 18 18-8.059 18-18v-74.241c10.547-4.459 32.797-10.933 74-11.684v60.961c-2.861-1.915-6.299-3.035-10-3.035-9.941 0-18 8.059-18 18s8.059 18 18 18 18-8.059 18-18v-100c-70 0-90 16-90 16z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-musical-note-md iconic-container iconic-md" data-width="31" data-height="32" display="none" transform="scale(4)">
+    <path d="M7 4v18.422c-.613-.268-1.288-.422-2-.422-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5v-18.52c2.887-1.029 8.299-2.236 18-2.446v14.388c-.613-.268-1.288-.422-2-.422-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5v-25c-20 0-24 4-24 4z" class="iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-musical-note-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M4 2v8.184c-.314-.112-.647-.184-1-.184-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3v-7.922c1.476-.454 3.952-.927 8-1.047v5.153c-.314-.112-.648-.184-1-.184-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3v-12c-10 0-12 2-12 2z" class="iconic-property-fill"
+    />
+  </g>
+</svg>

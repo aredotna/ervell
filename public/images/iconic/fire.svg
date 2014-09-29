@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-fire" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Fire</title>
+  </g>
+  <g class="iconic-fire-lg iconic-container iconic-lg" data-width="100" data-height="128" display="inline" transform="translate(14)">
+    <path d="M32 0s32 16 32 48-47.75 48.25-32 80c0 0-32-16-32-48s48-48 32-80z" class="iconic-fire-flame iconic-fire-flame-large iconic-property-fill" />
+    <path d="M68 38s32 16 32 48c0 15.072-10.593 26.65-20.155 38-1.125 1.335-4.012 4-7.845 4s-34 .001-34 .001-1.375-2.5-1.831-6c-.169-1.298-.169-2.638-.169-4.001 0-32 48-48 32-80z" class="iconic-fire-flame iconic-fire-flame-small iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-fire-md iconic-container iconic-md" data-width="26" data-height="32" display="none" transform="scale(4) translate(3)">
+    <path d="M8 0s8 4 8 12-11.938 12.063-8 20c0 0-8-4-8-12s12-12 8-20z" class="iconic-fire-flame iconic-fire-flame-large iconic-property-fill" />
+    <path d="M11 32c-.578-.281-1-1-1-2 0-8 12-12 8-20 0 0 8 4 8 12 0 3.547-2.347 6.32-4.616 9-.283.334-.884 1-2.384 1h-8z" class="iconic-fire-flame iconic-fire-flame-small iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-fire-sm iconic-container iconic-sm" data-width="14" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path d="M4 0s4 2 4 6-5.969 6.031-4 10c0 0-4-2-4-6s6-6 4-10z" class="iconic-fire-flame iconic-fire-flame-large iconic-property-fill" />
+    <path d="M10 6s4 2 4 6c0 3-2.001 4-2.001 4-1.03 0-5.999 0-5.999 0 0-4 6-6 4-10z" class="iconic-fire-flame iconic-fire-flame-small iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

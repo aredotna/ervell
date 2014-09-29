@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-timer" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Timer</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-sm-timer-clip-0">
+      <path d="M13.783 3.622l-5.324 6.707-.036.045-.04.04c-.378.378-.88.586-1.414.586-.534 0-1.036-.208-1.414-.586s-.586-.88-.586-1.414.208-1.036.586-1.414l.042-.042.047-.037 6.738-5.293.272-.214h-12.654v14h14v-12.651l-.217.273z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-timer-lg iconic-container iconic-lg" data-width="116" data-height="128" display="inline" transform="translate(6)">
+    <path d="M52.343 64.343c-3.124 3.124-3.124 8.19 0 11.314 3.124 3.124 8.19 3.124 11.314 0 3.124-3.124 26.343-35.657 26.343-35.657s-34.533 21.219-37.657 24.343zm5.657 9.657c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z" class="iconic-timer-needle iconic-property-fill"
+    />
+    <path class="iconic-timer-stop-button iconic-timer-stop-button-base iconic-property-fill" d="M52 4h12v12.147h-12z" />
+    <path class="iconic-timer-stop-button iconic-timer-stop-button-top iconic-property-fill" d="M48 0h20v2h-20z" />
+    <circle stroke="#000" stroke-width="8" cx="58" cy="70" r="54" class="iconic-timer-body iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-timer-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path class="iconic-timer-stop-button iconic-timer-stop-button-base iconic-property-fill" d="M13 1h3v4h-3z" />
+    <path class="iconic-timer-stop-button iconic-timer-stop-button-top iconic-property-fill" d="M12 0h5v1h-5z" />
+    <path d="M15.561 18.561c-.586.586-1.536.586-2.121 0-.586-.586-.586-1.536 0-2.121.586-.586 8.561-6.439 8.561-6.439s-5.854 7.975-6.439 8.561z" class="iconic-timer-needle iconic-property-fill" />
+    <circle stroke="#000" stroke-width="3" cx="14.5" cy="17.5" r="13" class="iconic-timer-body iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-timer-sm iconic-container iconic-sm" data-width="14" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path class="iconic-timer-stop-button iconic-timer-stop-button-base iconic-property-fill" d="M6 0h2v3h-2z" />
+    <path class="iconic-timer-stop-button iconic-timer-stop-button-top iconic-property-fill" d="M5 0h4v1h-4z" />
+    <path d="M6.262 8.293c-.391.391-.391 1.024 0 1.414s1.024.391 1.414 0l5.324-6.707-6.738 5.293z" class="iconic-timer-needle iconic-property-fill" />
+    <circle clip-path="url(#iconic-size-sm-timer-clip-0)" fill="#fff" stroke="#000" stroke-width="2" cx="7" cy="9" r="6" class="iconic-timer-body iconic-property-stroke" />
+  </g>
+</svg>

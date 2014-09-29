@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-signal" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Signal</title>
+  </g>
+  <g class="iconic-signal-lg iconic-container iconic-lg" data-width="122" data-height="107" display="inline" transform="translate(3 10)">
+    <path stroke="#000" stroke-width="18" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-1 iconic-property-stroke" d="M9 98v-13" fill="none" />
+    <path stroke="#000" stroke-width="18" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-2 iconic-property-stroke" d="M35 98v-35" fill="none" />
+    <path stroke="#000" stroke-width="18" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-3 iconic-property-stroke" d="M61 98v-53" fill="none" />
+    <path stroke="#000" stroke-width="18" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-4 iconic-property-stroke" d="M87 98v-71" fill="none" />
+    <path stroke="#000" stroke-width="18" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-5 iconic-property-stroke" d="M113 98v-89" fill="none" />
+  </g>
+  <g class="iconic-signal-md iconic-container iconic-md" data-width="28" data-height="24" display="none" transform="scale(4) translate(2 4)">
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-1 iconic-property-stroke" d="M2 22v-3" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-2 iconic-property-stroke" d="M8 22v-8" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-3 iconic-property-stroke" d="M14 22v-12" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-4 iconic-property-stroke" d="M20 22v-16" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-5 iconic-property-stroke" d="M26 22v-20" fill="none" />
+  </g>
+  <g class="iconic-signal-sm iconic-container iconic-sm" data-width="14" data-height="11" display="none" transform="scale(8) translate(1 2)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-1 iconic-property-stroke" d="M1 10v-1" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-2 iconic-property-stroke" d="M4 10v-3" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-3 iconic-property-stroke" d="M7 10v-5" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-4 iconic-property-stroke" d="M10 10v-7" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-signal-bar iconic-signal-bar-5 iconic-property-stroke" d="M13 10v-9" fill="none" />
+  </g>
+</svg>

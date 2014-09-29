@@ -1,0 +1,42 @@
+<svg version="1.1" class="iconic iconic-file" data-icon="file" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <g><title>File</title></g>
+  <defs>
+    <clipPath id="file-clip-page-lg-0" data-clip="primary-lg">
+      <path d="M72,0c0-0.55-0.45-1-1-1H1C0.45-1,0-0.55,0,0v127c0,0.55,0.45,1,1,1h96c0.55,0,1.015-0.45,1.033-0.999 l0.933-28.001C98.985,98.45,98.55,98,98,98H37c-0.55,0-1-0.45-1-1V69c0-0.55,0.45-1,1-1h61c0.55,0,1-0.45,1-1V27 c0-0.55-0.45-1-1-1H73c-0.55,0-1-0.45-1-1V0z"/>
+    </clipPath>
+    <clipPath id="file-clip-page-lg-alt" data-clip="secondary-lg">
+      <path d="M72,0c0-0.55-0.45-1-1-1H1C0.45-1,0-0.55,0,0v127c0,0.55,0.45,1,1,1h96c0.55,0,1.015-0.45,1.033-0.999 l0.933-28.001C98.985,98.45,98.55,98,98,98c0.55,0,1-0.45,1-1V27 c0-0.55-0.45-1-1-1H73c-0.55,0-1-0.45-1-1V0z"/>
+    </clipPath>
+    <clipPath id="file-clip-flap-lg-1">
+      <path d="M75-2c-0.55,0-1,0.45-1,1v24c0,0.55,0.45,1,1,1h24c0.55,0,1-0.45,1-1V-1c0-0.55-0.45-1-1-1L75-2z"/>
+    </clipPath>
+    <clipPath id="file-clip-page-md-0" data-clip="primary-md">
+      <path d="M-0.782,28.123C-0.902,28.055-0.887,28-0.75,28h27.5c0.138,0,0.152,0.055,0.032,0.123l-0.564,0.317 C26.098,28.507,26,28.675,26,28.813v2.937c0,0.138-0.112,0.25-0.25,0.25H0.25C0.112,32,0,31.888,0,31.75v-2.937 c0-0.138-0.098-0.305-0.218-0.373L-0.782,28.123z M18-0.75c0-0.137-0.08-0.17-0.177-0.073l-0.646,0.646 C17.08-0.08,16.888,0,16.75,0H0.25C0.112,0,0,0.113,0,0.25v14.844c0,0.137-0.094,0.312-0.209,0.387l-0.582,0.382 C-0.906,15.938-0.887,16-0.75,16h27.5c0.138,0,0.149-0.05,0.026-0.112l-0.553-0.276C26.101,15.551,26,15.388,26,15.25V8.958 c0-0.137,0.092-0.315,0.204-0.394l0.592-0.419C26.908,8.065,26.888,8,26.75,8h-8.5C18.112,8,18,7.887,18,7.75V-0.75z"/>
+    </clipPath>
+    <clipPath id="file-clip-page-md-alt" data-clip="secondary-md">
+      <polygon points="18,8 18,0 0,0 0,32 26,32 26,8"/>
+    </clipPath>
+    <clipPath id="file-clip-flap-md-0">
+      <path d="M27,6.75C27,6.888,26.888,7,26.75,7h-7.5C19.112,7,19,6.888,19,6.75v-7.5C19-0.888,19.112-1,19.25-1h7.5 C26.888-1,27-0.888,27-0.75V6.75z"/>
+    </clipPath>
+  </defs>
+  <g class="iconic-sm iconic-container" transform="scale(8) translate(1 0)" display="none" data-width="13" data-height="16">
+    <polygon class="iconic-file-page iconic-property-fill" points="8,0 0,0 0,16 13,16 13,5 8,5"/>
+    <polygon class="iconic-file-flap iconic-property-fill" points="13,4 9,0 9,4"/>
+  </g>
+  <g class="iconic-md iconic-container" transform="scale(4) translate(3 0)" display="none" data-width="25" data-height="32">
+    <polygon class="iconic-file-page iconic-property-fill" clip-path="url(#file-clip-page-md-0)" points="19,0 0,0 0,32 26,32 26,7"/>
+    <polygon class="iconic-file-flap iconic-property-fill" clip-path="url(#file-clip-flap-md-1)" points="26,7 19,7 19,0"/>
+    <text class="iconic-file-extension iconic-property-text" x="2" y="25" font-family="sans-serif" font-weight="bold" font-size="8">SVG</text>
+  </g>
+  <g class="iconic-lg iconic-container" transform="translate(15 0)" display="inline" data-width="98" data-height="128">
+    <path class="iconic-file-page iconic-property-fill" clip-path="url(#file-clip-page-lg-0)" d="M98,1c0-0.55-0.45-1-1-1H1C0.45,0,0,0.45,0,1v126c0,0.55,0.45,1,1,1 h96c0.55,0,1-0.45,1-1V1z"/>
+    <polygon class="iconic-file-flap iconic-property-fill" clip-path="url(#file-clip-flap-lg-1)" points="74,0 74,24 98,24"/>
+    <text class="iconic-file-extension iconic-property-text" x="46" y="90" font-family="sans-serif" font-weight="bold" font-size="15">SVG</text>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["file"]=iconicApis["file"]||function(t){var e=function(e){t.setAttribute("data-file-extension",e);var i=t.querySelector("g.iconic-lg .iconic-file-page"),r=t.querySelector("g.iconic-md .iconic-file-page");e&&""!==e?(i.setAttribute("clip-path","url(#"+t.querySelector('[data-clip="primary-lg"]').getAttribute("id")+")"),r.setAttribute("clip-path","url(#"+t.querySelector('[data-clip="primary-md"]').getAttribute("id")+")")):(i.setAttribute("clip-path","url(#"+t.querySelector('[data-clip="secondary-lg"]').getAttribute("id")+")"),r.setAttribute("clip-path","url(#"+t.querySelector('[data-clip="secondary-md"]').getAttribute("id")+")")),e=e.substring(0,4),e=e.toUpperCase();for(var a=t.querySelectorAll("text.iconic-file-extension"),n=0;n<a.length;n++)e&&""!==e?(a[n].textContent=e,a[n].setAttribute("display","inline")):(a[n].textContent="",a[n].setAttribute("display","none"))},i=function(){var i=t.getAttribute("data-file-extension")||"";e(i)};return{update:i,setFileExtension:e}};
+//]]>
+</script>
+</svg>

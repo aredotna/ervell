@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-tools" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Tools</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-tools-clip-0">
+      <path d="M0 0v128h128v-128h-128zm76.548 84.635l-68.49-68.491 4.029-4.029 68.49 68.491-4.029 4.029zm4.029-4.087l-64.462-64.462 4.029-4.029 64.462 64.462-4.029 4.029z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-tools-clip-0">
+      <path d="M0 0v32h32v-32h-32zm20 21l-1 1-17-17 1-1 2-2 17 17-2 2z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-tools-clip-0">
+      <path d="M0 0v16h16v-16h-16zm10 9l-2 2-6-6 2-2 1-1 6 6-1 1z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-tools-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path class="iconic-tools-screwdriver iconic-tools-screwdriver-head iconic-property-accent iconic-property-fill" d="M16.115 20.144l57.462 57.462 4.029-4.029-57.462-57.462-2.029-8.058-14.087-8.058-4.029 4.029 8.058 14.087z" />
+    <path d="M123.983 108.017l-35.983-36.017h-4l-2-2v-2l-2-2-14 14 2 2h2l2 2v4l36.017 35.983c2.079 2.454 5.179 4.017 8.648 4.017 6.26 0 11.335-5.075 11.335-11.335 0-3.469-1.562-6.569-4.017-8.648zm-12.276 13.69c-.195.195-.451.293-.707.293s-.512-.098-.707-.293l-34-34c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0l34 34c.391.391.391 1.024 0 1.414zm6-4c-.195.195-.451.293-.707.293s-.512-.098-.707-.293l-34-34c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0l34 34c.391.391.391 1.024 0 1.414zm4-6c-.195.195-.451.293-.707.293s-.512-.098-.707-.293l-34-34c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0l34 34c.391.391.391 1.024 0 1.414z"
+    class="iconic-tools-screwdriver iconic-tools-screwdriver-handle iconic-property-accent iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-tools-clip-0)" d="M127.646 31.646l-1.293-1.293c-.673-.673-1.715-1.715-2.353-2.353-4-4-6 0-10-4s-2-8-6-12c-12-12-16-12-40-12 28 12.125 19.938 24.063 16 28l-36 36 8 8 36-36c5.875-5.875 7.875-6.125 12-2 4.083 4.083 0 6 4 10 1 1 3 3 3 3l.646.646c.195.195.513.195.707 0l15.293-15.293c.195-.194.195-.513 0-.707z"
+    class="iconic-tools-hammer iconic-tools-hammer-head iconic-property-fill" />
+    <path d="M57.154 52.949l-6.308 2.103c-1.572.524-3.796 1.898-4.967 3.07l-43.757 43.757c-1.172 1.172-1.521 3.323-.78 4.805l9.317 18.633c.741 1.482 2.088 1.567 3.009.189l4.728-7.074c.921-1.377 2.617-3.444 3.788-4.615l39.695-39.695c1.172-1.172 2.538-3.398 3.052-4.973l2.014-6.171c.514-1.575 1.854-3.775 2.993-4.915s1.113-3.012-.059-4.184l-3.757-3.757c-1.171-1.172-3.017-1.226-4.121-.121s-3.274 2.425-4.846 2.949z"
+    clip-path="url(#iconic-size-lg-tools-clip-0)" class="iconic-tools-hammer iconic-tools-hammer-handle iconic-property-fill" />
+  </g>
+  <g class="iconic-tools-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path class="iconic-tools-screwdriver iconic-tools-screwdriver-head iconic-property-accent iconic-property-fill" d="M4 5l16 16 1-1-16-16-1-2-3-2-1 1 2 3z" />
+    <path d="M31 27.011l-9-9.011h-1l-1-1-3 3 1 1v1l9.011 8.989c.52.613 1.287 1.011 2.154 1.011 1.566 0 2.835-1.269 2.835-2.835 0-.867-.387-1.634-1-2.154z" class="iconic-tools-screwdriver iconic-tools-screwdriver-handle iconic-property-accent iconic-property-fill"
+    />
+    <path d="M31 7c-1-1-1 0-2-1s0-1-1-2-1-1-1-1c-3-3-4-3-10-3 7 3.031 4.984 6.016 4 7l-9 9 2 2 9-9c.984-.984 1.969-1.031 3 0s0 1 1 2 1 1 1 1l4-4s0 0-1-1z" clip-path="url(#iconic-size-md-tools-clip-0)" class="iconic-tools-hammer iconic-tools-hammer-head iconic-property-fill"
+    />
+    <path d="M14.526 13.158l-2.051.684c-.262.087-.633.316-.828.512l-11.293 11.293c-.195.195-.253.554-.13.801l2.553 5.106c.123.247.348.261.501.032l1.46-2.184c.153-.23.436-.574.631-.769l10.277-10.277c.195-.195.423-.566.509-.829l.658-2.018c.086-.263.313-.634.509-.829l.324-.324c.195-.195.195-.512 0-.707l-1.293-1.293c-.195-.195-.512-.195-.707 0l-.293.293c-.195.195-.566.424-.828.512z"
+    clip-path="url(#iconic-size-md-tools-clip-0)" class="iconic-tools-hammer iconic-tools-hammer-handle iconic-property-fill" />
+  </g>
+  <g class="iconic-tools-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path class="iconic-tools-screwdriver iconic-tools-screwdriver-head iconic-property-accent iconic-property-fill" d="M4 5l6 6 1-1-6-6v-2l-4-2-1 1 2 4z" />
+    <path d="M15.586 13.584c-.03-.03-5.082-5.08-5.082-5.08l-2.016 2s5.066 5.051 5.096 5.082c.553.553 1.448.553 2.001 0 .553-.553.553-1.449 0-2.001z" class="iconic-tools-screwdriver iconic-tools-screwdriver-handle iconic-property-accent iconic-property-fill"
+    />
+    <path d="M14 2c-2-2-3-2-6-2 2.96 1.002 3 2.948 2.04 3.96l-4.04 4.04 1 1 4-4c.001.001.001.001.002.002 1-1 .999-1.002 2-.001.515.515 0 0 .5.5s.5.5.5.5l1.999-1.999s-1-1.001-2-2.001z" clip-path="url(#iconic-size-sm-tools-clip-0)" class="iconic-tools-hammer iconic-tools-hammer-head iconic-property-fill"
+    />
+    <path d="M7.177 6.823c-.097.097-.289.177-.427.177h-.5c-.138 0-.33.08-.427.177l-5.646 5.646c-.097.097-.114.27-.038.385l1.723 2.584c.076.114.189.107.251-.015l.783-1.561c.062-.123.192-.303.289-.4l4.639-4.639c.097-.097.175-.289.173-.427l-.008-.484c-.002-.137.076-.329.173-.427l.662-.662c.097-.097.097-.256 0-.354l-.646-.646c-.097-.097-.256-.097-.354 0l-.646.646z"
+    clip-path="url(#iconic-size-sm-tools-clip-0)" class="iconic-tools-hammer iconic-tools-hammer-handle iconic-property-fill" />
+  </g>
+</svg>

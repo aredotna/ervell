@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-map-marker" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Map Marker</title>
+  </g>
+  <g class="iconic-map-marker-lg iconic-container iconic-lg" data-width="80" data-height="128" display="inline" transform="translate(24)">
+    <path d="M40 0c-22.091 0-40 17.909-40 40 0 30 40 88 40 88s40-58 40-88c0-22.091-17.909-40-40-40zm0 58c-9.941 0-18-8.059-18-18s8.059-18 18-18 18 8.059 18 18-8.059 18-18 18z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-map-marker-md iconic-container iconic-md" data-width="20" data-height="32" display="none" transform="scale(4) translate(6)">
+    <path d="M10 0c-5.523 0-10 4.477-10 10 0 7.5 10 22 10 22s10-14.5 10-22c0-5.523-4.477-10-10-10zm0 15c-2.761 0-5-2.239-5-5s2.239-5 5-5 5 2.239 5 5-2.239 5-5 5z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-map-marker-sm iconic-container iconic-sm" data-width="10" data-height="16" display="none" transform="scale(8) translate(3)">
+    <path d="M5 0c-2.761 0-5 2.239-5 5 0 3.75 5 11 5 11s5-7.25 5-11c0-2.761-2.239-5-5-5zm0 7c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2z" class="iconic-property-fill" />
+  </g>
+</svg>

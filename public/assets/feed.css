@@ -113,7 +113,7 @@
 .grid__block:hover .grid__block__overlay {
   opacity: 1;
   background-color: rgba(255,255,255,0.92);
-  border: 2px solid #616161;
+  border: 2px solid #e7e7e7;
 }
 .grid__block.grid__block--text:hover .grid__block__overlay {
   background-color: rgba(255,255,255,0.92);

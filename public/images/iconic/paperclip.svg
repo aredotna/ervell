@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-paperclip" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Paperclip</title>
+  </g>
+  <g class="iconic-paperclip-lg iconic-container iconic-lg" data-width="118" data-height="128" display="inline" transform="translate(5)">
+    <path stroke="#000" stroke-width="6" stroke-linecap="square" d="M61.87 54.816l-40.527 40.527c-3.124 3.124-3.124 8.19 0 11.314 3.124 3.124 8.19 3.124 11.314 0l76.328-76.328c6.248-6.248 6.248-16.379 0-22.627s-16.379-6.248-22.627 0l-76.328 76.328c-9.373 9.373-9.373 24.569 0 33.941s24.569 9.373 33.941 0l40.527-40.527"
+    class="iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-paperclip-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" d="M16.071 13.101l-10.485 10.485c-.781.781-.781 2.047 0 2.828.781.781 2.047.781 2.828 0l18.414-18.586c1.562-1.562 1.562-4.095 0-5.657-1.562-1.562-4.095-1.562-5.657 0l-18.414 18.586c-2.343 2.343-2.343 6.142 0 8.485s6.142 2.343 8.485 0l10.485-10.485"
+    class="iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-paperclip-sm iconic-container iconic-sm" data-width="14" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path stroke="#000" stroke-linecap="square" d="M8.328 6.257l-4.535 4.535c-.391.391-.391 1.024 0 1.414.391.391 1.024.391 1.414 0l7.507-7.436c.976-.976.976-2.559 0-3.535s-2.559-.976-3.535 0l-7.507 7.436c-1.562 1.562-1.562 4.095 0 5.657s4.095 1.562 5.657 0l4.535-4.535"
+    class="iconic-property-stroke" fill="none" />
+  </g>
+</svg>

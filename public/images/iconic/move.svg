@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-move" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Move</title>
+  </g>
+  <g class="iconic-move-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-move-axis iconic-move-axis-vertical iconic-property-stroke" d="M64 15v97" fill="none" />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-move-axis iconic-move-axis-horizontal iconic-property-stroke" d="M117 64h-105" fill="none" />
+    <path d="M63.244 1.296l-12.488 21.409c-.417.716-.084 1.296.744 1.296h25c.828 0 1.162-.58.744-1.296l-12.488-21.409c-.417-.716-1.094-.716-1.512 0z" class="iconic-move-arrowhead iconic-move-arrowhead-top iconic-property-fill" />
+    <path d="M64.756 126.704l12.488-21.409c.417-.716.084-1.296-.744-1.296h-25c-.828 0-1.162.58-.744 1.296l12.488 21.409c.417.716 1.094.716 1.512 0z" class="iconic-move-arrowhead iconic-move-arrowhead-bottom iconic-property-fill" />
+    <path d="M126.704 63.244l-21.409-12.488c-.716-.417-1.296-.084-1.296.744v25c0 .828.58 1.162 1.296.744l21.409-12.488c.716-.417.716-1.094 0-1.512z" class="iconic-move-arrowhead iconic-move-arrowhead-right iconic-property-fill" />
+    <path d="M1.296 64.756l21.409 12.488c.715.417 1.296.084 1.296-.744v-25c0-.828-.58-1.162-1.296-.744l-21.409 12.488c-.716.417-.716 1.094 0 1.512z" class="iconic-move-arrowhead iconic-move-arrowhead-left iconic-property-fill" />
+  </g>
+  <g class="iconic-move-md iconic-container iconic-md" data-width="31" data-height="31" display="none" transform="scale(4)">
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-move-axis iconic-move-axis-vertical iconic-property-stroke" d="M15.5 7v20" fill="none" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-move-axis iconic-move-axis-horizontal iconic-property-stroke" d="M24 15.5h-18" fill="none" />
+    <path d="M15.2 30.6l-3.9-5.2c-.166-.221-.076-.4.2-.4h8c.276 0 .366.179.2.4l-3.9 5.2c-.166.221-.434.221-.6 0z" class="iconic-move-arrowhead iconic-move-arrowhead-bottom iconic-property-fill" />
+    <path d="M15.8.4l3.9 5.2c.166.221.076.4-.2.4h-8c-.276 0-.366-.179-.2-.4l3.9-5.2c.166-.221.434-.221.6 0z" class="iconic-move-arrowhead iconic-move-arrowhead-top iconic-property-fill" />
+    <path d="M.4 15.2l5.2-3.9c.221-.166.4-.076.4.2v8c0 .276-.179.366-.4.2l-5.2-3.9c-.221-.166-.221-.434 0-.6z" class="iconic-move-arrowhead iconic-move-arrowhead-left iconic-property-fill" />
+    <path d="M30.6 15.8l-5.2 3.9c-.221.166-.4.076-.4-.2v-8c0-.276.179-.366.4-.2l5.2 3.9c.221.166.221.434 0 .6z" class="iconic-move-arrowhead iconic-move-arrowhead-right iconic-property-fill" />
+  </g>
+  <g class="iconic-move-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-move-axis iconic-move-axis-vertical iconic-property-stroke" d="M8 3v11" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-move-axis iconic-move-axis-horizontal iconic-property-stroke" d="M13 8h-10" fill="none" />
+    <path class="iconic-move-arrowhead iconic-move-arrowhead-top iconic-property-fill" d="M8 0l-3 3h6z" />
+    <path class="iconic-move-arrowhead iconic-move-arrowhead-right iconic-property-fill" d="M16 8l-3-3v6z" />
+    <path class="iconic-move-arrowhead iconic-move-arrowhead-left iconic-property-fill" d="M0 8l3 3v-6z" />
+    <path class="iconic-move-arrowhead iconic-move-arrowhead-top iconic-property-fill" d="M8 16l3-3h-6z" />
+  </g>
+</svg>

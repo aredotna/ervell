@@ -20,6 +20,7 @@ module.exports =
   SESSION_COOKIE_KEY: 'arena.session'
   COOKIE_DOMAIN: null
   ASSET_PATH: '/assets/'
+  IMAGE_PATH: '/images/'
 
 # Override any values with env variables if they exist
 for key, val of module.exports

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-task" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Task</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-task-clip-0">
+      <path d="M27.718 48.407l-20.097-22.307 8.529-8.441 9.611 11.733 25.393-25.393h-51.154v56h56v-39.875z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-task-clip-0">
+      <path d="M10.491 10.991l-2.518-.482.034-6.934 2.575-2.575h-10.581v13h13v-5.519z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-task-clip-0">
+      <path d="M6.018 5.852l-1.549-4.108 1.684-1.743h-6.154v8h8v-4.13z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-task-lg iconic-container iconic-lg" data-width="128" data-height="60" display="inline" transform="translate(0 34)">
+    <path clip-path="url(#iconic-size-lg-task-clip-0)" stroke="#000" stroke-width="4" d="M52.5 58h-49c-.828 0-1.5-.672-1.5-1.5v-49c0-.828.672-1.5 1.5-1.5h49c.828 0 1.5.672 1.5 1.5v49c0 .828-.672 1.5-1.5 1.5z" class="iconic-task-check iconic-task-check-box iconic-property-stroke"
+    fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-task-check iconic-task-check-mark iconic-property-accent iconic-property-stroke" d="M11.886 21.88l15.854 16.02 33.817-33.817" fill="none" />
+    <path stroke="#000" stroke-width="4" class="iconic-task-line iconic-task-line-3 iconic-property-stroke" d="M68 42h54" fill="none" />
+    <path stroke="#000" stroke-width="4" class="iconic-task-line iconic-task-line-2 iconic-property-stroke" d="M68 30h50" fill="none" />
+    <path stroke="#000" stroke-width="4" class="iconic-task-line iconic-task-line-1 iconic-property-stroke" d="M68 18h60" fill="none" />
+  </g>
+  <g class="iconic-task-md iconic-container iconic-md" data-width="32" data-height="14" display="none" transform="scale(4) translate(0 9)">
+    <path clip-path="url(#iconic-size-md-task-clip-0)" stroke="#000" stroke-width="2" d="M11.5 13h-10c-.276 0-.5-.224-.5-.5v-10c0-.276.224-.5.5-.5h10c.276 0 .5.224.5.5v10c0 .276-.224.5-.5.5z" class="iconic-task-check iconic-task-check-box iconic-property-stroke"
+    fill="none" />
+    <path stroke="#000" stroke-width="3" class="iconic-task-check iconic-task-check-mark iconic-property-accent iconic-property-stroke" d="M4.995 5.505l3.005 2.995 7.5-7.5" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-task-line iconic-task-line-2 iconic-property-stroke" d="M17 10h12" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-task-line iconic-task-line-1 iconic-property-stroke" d="M17 5h15" fill="none" />
+  </g>
+  <g class="iconic-task-sm iconic-container iconic-sm" data-width="16" data-height="8" display="none" transform="scale(8) translate(0 4)">
+    <path clip-path="url(#iconic-size-sm-task-clip-0)" stroke="#000" class="iconic-task-check iconic-task-check-box iconic-property-stroke" d="M.5.5h7v7h-7z" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-task-check iconic-task-check-mark iconic-property-accent iconic-property-stroke" d="M2.5 2.5l2 2 3.8-3.8" fill="none" />
+    <path stroke="#000" class="iconic-task-line iconic-task-line-2 iconic-property-stroke" d="M10 5.5h5" fill="none" />
+    <path stroke="#000" class="iconic-task-line iconic-task-line-1 iconic-property-stroke" d="M10 2.5h6" fill="none" />
+  </g>
+</svg>

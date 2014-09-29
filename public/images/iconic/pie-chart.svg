@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-pie-chart" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Pie Chart</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-pie-chart-clip-0">
+      <path d="M74 0l.167 74-54.167 54h108v-128z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-pie-chart-clip-1">
+      <path d="M0 32l16-4 45.833 45.833-54.833 54.167h-7z" />
+    </clipPath>
+    <clipPath id="iconic-size-lg-pie-chart-clip-2">
+      <path d="M66 0h-58l6 14 51.998 52z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-pie-chart-clip-0">
+      <path d="M19 0l.042 19-13.042 13h26v-32z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-pie-chart-clip-1">
+      <path d="M0 8l3-1 11.958 11.958-12.958 13.042h-2z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-pie-chart-clip-2">
+      <path d="M16 0h-14l2 4 11.999 12z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-pie-chart-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <circle clip-path="url(#iconic-size-lg-pie-chart-clip-0)" cx="68" cy="68" r="60" class="iconic-pie-chart-slice iconic-pie-chart-slice-large iconic-property-fill" />
+    <circle clip-path="url(#iconic-size-lg-pie-chart-clip-1)" cx="48" cy="72" r="48" class="iconic-pie-chart-slice iconic-pie-chart-slice-medium iconic-property-fill" />
+    <circle clip-path="url(#iconic-size-lg-pie-chart-clip-2)" cx="56" cy="56" r="56" class="iconic-pie-chart-slice iconic-pie-chart-slice-small iconic-property-fill" />
+  </g>
+  <g class="iconic-pie-chart-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <circle clip-path="url(#iconic-size-md-pie-chart-clip-0)" cx="17.5" cy="17.5" r="14.5" class="iconic-pie-chart-slice iconic-pie-chart-slice-large iconic-property-fill" />
+    <circle clip-path="url(#iconic-size-md-pie-chart-clip-1)" cx="12" cy="18" r="12" class="iconic-pie-chart-slice iconic-pie-chart-slice-medium iconic-property-fill" />
+    <circle clip-path="url(#iconic-size-md-pie-chart-clip-2)" cx="14" cy="14" r="14" class="iconic-pie-chart-slice iconic-pie-chart-slice-small iconic-property-fill" />
+  </g>
+  <g class="iconic-pie-chart-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M10 2.101v6.813l-5.449 5.449c1.213 1.007 2.75 1.637 4.449 1.637 3.866 0 7-3.134 7-7 0-3.523-2.612-6.41-6-6.899z" class="iconic-pie-chart-slice iconic-pie-chart-slice-large iconic-property-fill" />
+    <path d="M1.826 4.74c-1.111 1.089-1.826 2.581-1.826 4.26 0 1.909.892 3.61 2.281 4.709l4.261-4.253-4.716-4.716z" class="iconic-pie-chart-slice iconic-pie-chart-slice-medium iconic-property-fill" />
+    <path d="M2.054 2.054c1.264-1.268 3.014-2.054 4.947-2.054h.001c.339 0 .672.024.998.071v7.929l-5.946-5.947z" class="iconic-pie-chart-slice iconic-pie-chart-slice-small iconic-property-fill" />
+  </g>
+</svg>

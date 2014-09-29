@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-calculator" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Calculator</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-calculator-clip-0">
+      <path d="M0 128h100v-128h-100v128zm28-12.5c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-3c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v3zm20 60c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-3c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v3zm20 60c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-3c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v3zm20 60c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-35c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v35zm0-40c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-15c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v15zm0-20c0 .275-.225.5-.5.5h-15c-.275 0-.5-.225-.5-.5v-3c0-.275.225-.5.5-.5h15c.275 0 .5.225.5.5v3zm0-10c0 .275-.225.5-.5.5h-75c-.275 0-.5-.225-.5-.5v-1c0-.275.225-.5.5-.5h75c.275 0 .5.225.5.5v1zm0-10c0 .275-.225.5-.5.5h-75c-.275 0-.5-.225-.5-.5v-23c0-.275.225-.5.5-.5h75c.275 0 .5.225.5.5v23z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-md-calculator-clip-0">
+      <path d="M0 0v32h24v-32h-24zm6 29h-3v-3h3v3zm0-5h-3v-3h3v3zm0-5h-3v-3h3v3zm0-5h-3v-1h3v1zm5 15h-3v-3h3v3zm0-5h-3v-3h3v3zm0-5h-3v-3h3v3zm0-5h-3v-1h3v1zm5 15h-3v-3h3v3zm0-5h-3v-3h3v3zm0-5h-3v-3h3v3zm0-5h-3v-1h3v1zm5 15h-3v-8h3v8zm0-10h-3v-3h3v3zm0-5h-3v-1h3v1zm0-3h-18v-1h18v1zm0-3h-18v-5h18v5z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-calculator-clip-0">
+      <path d="M0 0v16h15v-16h-15zm4 14h-2v-2h2v2zm0-3h-2v-2h2v2zm0-3h-2v-2h2v2zm3 6h-2v-2h2v2zm0-3h-2v-2h2v2zm0-3h-2v-2h2v2zm3 6h-2v-2h2v2zm0-3h-2v-2h2v2zm0-3h-2v-2h2v2zm3 6h-2v-5h2v5zm0-6h-2v-2h2v2zm0-3h-11v-3h11v3z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-calculator-lg iconic-container iconic-lg" data-width="100" data-height="128" display="inline" transform="translate(14)">
+    <path clip-path="url(#iconic-size-lg-calculator-clip-0)" d="M97 128h-94c-1.657 0-3-1.343-3-3v-122c0-1.657 1.343-3 3-3h94c1.657 0 3 1.343 3 3v122c0 1.657-1.343 3-3 3z" class="iconic-calculator-body iconic-property-fill" />
+  </g>
+  <g class="iconic-calculator-md iconic-container iconic-md" data-width="24" data-height="32" display="none" transform="scale(4) translate(4)">
+    <path clip-path="url(#iconic-size-md-calculator-clip-0)" d="M23 32h-22c-.552 0-1-.448-1-1v-30c0-.552.448-1 1-1h22c.552 0 1 .448 1 1v30c0 .552-.448 1-1 1z" class="iconic-calculator-body iconic-property-fill" />
+  </g>
+  <g class="iconic-calculator-sm iconic-container iconic-sm" data-width="15" data-height="16" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-calculator-clip-0)" d="M14.75 16h-14.5c-.138 0-.25-.112-.25-.25v-15.5c0-.138.112-.25.25-.25h14.5c.138 0 .25.112.25.25v15.5c0 .138-.112.25-.25.25z" class="iconic-calculator-body iconic-property-fill" />
+  </g>
+</svg>

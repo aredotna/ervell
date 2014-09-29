@@ -1,0 +1,68 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-icon="align" width="128" height="128" class="iconic iconic-align" viewBox="0 0 128 128" preserveAspectRatio="xMidYMid meet">
+  <g><title>Align</title></g>
+  <g data-width="128" data-height="86" class="iconic-lg iconic-container" display="inline" transform="translate(0 21)" stroke="#000" stroke-width="8" stroke-linecap="square" stroke-miterlimit="10" fill="none">
+    <g class="iconic-align-left">
+      <path class="iconic-align-left-line-4 iconic-align-left-line-short iconic-property-stroke" d="M4 82h82"/>
+      <path class="iconic-align-left-line-3 iconic-align-left-line-long iconic-property-stroke" d="M4 56h120"/>
+      <path class="iconic-align-left-line-2 iconic-align-left-line-short iconic-property-stroke" d="M4 30h82"/>
+      <path class="iconic-align-left-line-1 iconic-align-left-line-long iconic-property-stroke" d="M4 4h120"/>
+    </g>
+    <g class="iconic-align-center" display="none">
+      <path class="iconic-align-center-line-4 iconic-align-center-line-short iconic-property-stroke" d="M23 82h82"/>
+      <path class="iconic-align-center-line-3 iconic-align-center-line-long iconic-property-stroke" d="M4 56h120"/>
+      <path class="iconic-align-center-line-2 iconic-align-center-line-short iconic-property-stroke" d="M23 30h82"/>
+      <path class="iconic-align-center-line-1 iconic-align-center-line-long iconic-property-stroke" d="M4 4h120"/>
+    </g>
+    <g class="iconic-align-right" display="none">
+      <path class="iconic-align-right-line-4 iconic-align-right-line-short iconic-property-stroke" d="M42 82h82"/>
+      <path class="iconic-align-right-line-3 iconic-align-right-line-long iconic-property-stroke" d="M4 56h120"/>
+      <path class="iconic-align-right-line-2 iconic-align-right-line-short iconic-property-stroke" d="M42 30h82"/>
+      <path class="iconic-align-right-line-1 iconic-align-right-line-long iconic-property-stroke" d="M4 4h120"/>
+    </g>
+  </g>
+  <g data-width="32" data-height="27" class="iconic-md iconic-container" display="none" transform="scale(4) translate(0 2)" stroke="#000" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" fill="none">
+    <g class="iconic-align-left" display="inline">
+      <path class="iconic-align-left-line-4 iconic-align-left-line-short iconic-property-stroke" d="M1.5 25.5h21"/>
+      <path class="iconic-align-left-line-3 iconic-align-left-line-long iconic-property-stroke" d="M1.5 17.5h29"/>
+      <path class="iconic-align-left-line-2 iconic-align-left-line-short iconic-property-stroke" d="M1.5 9.5h21"/>
+      <path class="iconic-align-left-line-1 iconic-align-left-line-long iconic-property-stroke" d="M1.5 1.5h29"/>
+    </g>
+    <g class="iconic-align-center" display="none">
+      <path class="iconic-align-center-line-4 iconic-align-center-line-short iconic-property-stroke" d="M5.5 25.5h21"/>
+      <path class="iconic-align-center-line-3 iconic-align-center-line-long iconic-property-stroke" d="M1.5 17.5h29"/>
+      <path class="iconic-align-center-line-2 iconic-align-center-line-short iconic-property-stroke" d="M5.5 9.5h21"/>
+      <path class="iconic-align-center-line-1 iconic-align-center-line-long iconic-property-stroke" d="M1.5 1.5h29"/>
+    </g>
+    <g class="iconic-align-right" display="none">
+      <path class="iconic-align-right-line-4 iconic-align-right-line-short iconic-property-stroke" d="M9.5 25.5h21"/>
+      <path class="iconic-align-right-line-3 iconic-align-right-line-long iconic-property-stroke" d="M1.5 17.5h29"/>
+      <path class="iconic-align-right-line-2 iconic-align-right-line-short iconic-property-stroke" d="M9.5 9.5h21"/>
+      <path class="iconic-align-right-line-1 iconic-align-right-line-long iconic-property-stroke" d="M1.5 1.5h29"/>
+    </g>
+  </g>
+  <g data-width="16" data-height="14" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(0 1)" stroke="#000" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" fill="none">
+    <g class="iconic-align-left" display="inline">
+      <path class="iconic-align-left-line-4 iconic-align-left-line-short iconic-property-stroke" d="M1 13h10"/>
+      <path class="iconic-align-left-line-3 iconic-align-left-line-long iconic-property-stroke" d="M1 9h14"/>
+      <path class="iconic-align-left-line-2 iconic-align-left-line-short iconic-property-stroke" d="M1 5h10"/>
+      <path class="iconic-align-left-line-1 iconic-align-left-line-long iconic-property-stroke" d="M1 1h14"/>
+    </g>
+    <g class="iconic-align-center" display="none">
+      <path class="iconic-align-center-line-4 iconic-align-center-line-short iconic-property-stroke" d="M3 13h10"/>
+      <path class="iconic-align-center-line-3 iconic-align-center-line-long iconic-property-stroke" d="M1 9h14"/>
+      <path class="iconic-align-center-line-2 iconic-align-center-line-short iconic-property-stroke" d="M3 5h10"/>
+      <path class="iconic-align-center-line-1 iconic-align-center-line-long iconic-property-stroke" d="M1 1h14"/>
+    </g>
+    <g class="iconic-align-right" display="none">
+      <path class="iconic-align-right-line-4 iconic-align-right-line-short iconic-property-stroke" d="M5 13h10"/>
+      <path class="iconic-align-right-line-3 iconic-align-right-line-long iconic-property-stroke" d="M1 9h14"/>
+      <path class="iconic-align-right-line-2 iconic-align-right-line-short iconic-property-stroke" d="M5 5h10"/>
+      <path class="iconic-align-right-line-1 iconic-align-right-line-long iconic-property-stroke" d="M1 1h14"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["align"]=iconicApis["align"]||function(t){var i=function(i){t.setAttribute("data-text-alignment",i);var n,e,c,o=t.querySelectorAll(".iconic-align-left"),a=t.querySelectorAll(".iconic-align-center"),r=t.querySelectorAll(".iconic-align-right");switch(n=e=c="none",i){case"center":n="inline";break;case"right":c="inline";break;default:e="inline"}for(var l=0;l<o.length;l++)o[l].setAttribute("display",e),a[l].setAttribute("display",n),r[l].setAttribute("display",c)},n=function(){var n=t.getAttribute("data-text-alignment");n&&i(n)};return{update:n,setTextAlignment:i}};
+//]]>
+</script>
+</svg>

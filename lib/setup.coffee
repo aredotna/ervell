@@ -4,7 +4,7 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, REDIS_URL} = config = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL} = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -27,6 +27,7 @@ sharify.data =
   JS_EXT: (if ("production" is NODE_ENV ) then ".min.js.cgz" else ".js")
   CSS_EXT: (if ("production" is NODE_ENV) then ".min.css.cgz" else ".css")
   ASSET_PATH: ASSET_PATH
+  IMAGE_PATH: IMAGE_PATH
   REDIS_URL: REDIS_URL
 
 # current user management

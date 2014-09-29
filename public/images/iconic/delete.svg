@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-delete" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Delete</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-delete-clip-0">
+      <path d="M0 0v72h128v-72h-128zm94.657 51l-5.657 5.657-15-15-15 15-5.657-5.657 15-15-15-15 5.657-5.657 15 15 15-15 5.657 5.657-15 15 15 15z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-delete-clip-0">
+      <path d="M0 0v18h32v-18h-32zm23.621 12l-2.121 2.121-3-3-3 3-2.121-2.121 3-3-3-3 2.121-2.121 3 3 3-3 2.121 2.121-3 3 3 3z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-delete-clip-0">
+      <path d="M0 0v12h16v-12h-16zm13.414 8l-1.414 1.414-2-2-2 2-1.414-1.414 2-2-2-2 1.414-1.414 2 2 2-2 1.414 1.414-2 2 2 2z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-delete-lg iconic-container iconic-lg" data-width="128" data-height="72" display="inline" transform="translate(0 28)">
+    <path d="M23.168 1.248l-22.336 33.504c-.46.689-.46 1.807 0 2.496l22.336 33.504c.46.689 1.504 1.248 2.332 1.248h101c.828 0 1.5-.672 1.5-1.5v-69c0-.828-.672-1.5-1.5-1.5h-101c-.828 0-1.872.559-2.332 1.248z" clip-path="url(#iconic-size-lg-delete-clip-0)"
+    class="iconic-delete-body iconic-property-fill" />
+  </g>
+  <g class="iconic-delete-md iconic-container iconic-md" data-width="32" data-height="18" display="none" transform="scale(4) translate(0 7)">
+    <path d="M5.723.416l-5.445 8.168c-.153.23-.153.602 0 .832l5.445 8.168c.153.23.501.416.777.416h25c.276 0 .5-.224.5-.5v-17c0-.276-.224-.5-.5-.5h-25c-.276 0-.624.186-.777.416z" clip-path="url(#iconic-size-md-delete-clip-0)" class="iconic-delete-body iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-delete-sm iconic-container iconic-sm" data-width="16" data-height="12" display="none" transform="scale(8) translate(0 2)">
+    <path clip-path="url(#iconic-size-sm-delete-clip-0)" class="iconic-delete-body iconic-property-fill" d="M4 0l-4 6 4 6h12v-12z" />
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-bold" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Bold</title>
+  </g>
+  <g class="iconic-bold-lg iconic-container iconic-lg" data-width="108" data-height="128" display="inline" transform="translate(10)">
+    <path d="M85.654 58.687c8.644-5.729 14.346-15.54 14.346-26.687 0-17.673-14.327-32-32-32h-68v6h12c3.314 0 6 2.686 6 6v104c0 3.314-2.686 6-6 6h-10v6h70c19.882 0 36-16.118 36-36 0-15.048-9.236-27.933-22.346-33.313zm-34.654-52.687c13.807 0 25 11.193 25 25s-11.193 25-25 25h-11v-50h11zm5 116h-16v-60h16c16.569 0 30 13.431 30 30s-13.431 30-30 30z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-bold-md iconic-container iconic-md" data-width="26" data-height="32" display="none" transform="scale(4) translate(3)">
+    <path d="M20.409 14.673c2.163-1.432 3.591-3.884 3.591-6.673 0-4.418-3.582-8-8-8h-16v2h2c1.105 0 2 .895 2 2v24c0 1.105-.895 2-2 2h-2v2h17c4.971 0 9-4.029 9-9 0-3.763-2.312-6.983-5.591-8.327zm-9.688-12.673h2.279c3.314 0 6 2.686 6 6s-2.686 6-6 6h-4v-12h1.721zm3.279 28h-5v-14h5c3.866 0 7 3.134 7 7s-3.134 7-7 7z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-bold-sm iconic-container iconic-sm" data-width="14" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" d="M3 15" class="iconic-property-stroke" fill="none" />
+    <path d="M11.199 7.337c1.084-.716 1.801-1.941 1.801-3.337 0-2.209-1.791-4-4-4h-9v1h1c.552 0 1 .448 1 1v12c0 .552-.448 1-1 1h-1v1h9.5c2.485 0 4.5-2.015 4.5-4.5 0-1.883-1.159-3.492-2.801-4.163zm-4.199-6.337c1.657 0 3 1.343 3 3s-1.343 3-3 3h-2v-6h2zm.5 14h-2.5v-7h2.5c1.933 0 3.5 1.567 3.5 3.5s-1.567 3.5-3.5 3.5z"
+    class="iconic-property-fill" />
+  </g>
+</svg>

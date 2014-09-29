@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-script" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Script</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-script-clip-0">
+      <path d="M0 0v128h104v-128h-104zm8 119c0 .552-.448 1-1 1s-1-.448-1-1v-43c0-.552.448-1 1-1s1 .448 1 1v43zm92-83h-86v-27c0-.552.448-1 1-1s1 .448 1 1v25h84c.552 0 1 .448 1 1s-.448 1-1 1z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-script-clip-0">
+      <path d="M0 0v32h29v-32h-29zm4 28.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-9.5c0-.276.224-.5.5-.5s.5.224.5.5v9.5zm23-19.5h-21v-5.5c0-.276.224-.5.5-.5s.5.224.5.5v4.5h20c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-script-clip-0">
+      <path d="M0 0v16h15v-16h-15zm2 13.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-4c0-.276.224-.5.5-.5s.5.224.5.5v4zm11.5-7.5h-10.5v-3.5c0-.276.224-.5.5-.5s.5.224.5.5v2.5h9.5c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-script-lg iconic-container iconic-lg" data-width="104" data-height="128" display="inline" transform="translate(12)">
+    <path clip-path="url(#iconic-size-lg-script-clip-0)" d="M96 0h-80c-4.418 0-8 3.582-8 8v86h-8v26c0 4.418 3.582 8 8 8h80c4.418 0 7.999-3.581 8-7.999v-86.001h8v-26c0-4.418-3.582-8-8-8z" class="iconic-script-body iconic-property-fill" />
+  </g>
+  <g class="iconic-script-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path clip-path="url(#iconic-size-md-script-clip-0)" d="M26 0h-19c-1.657 0-3 1.343-3 3v20h-3v6c0 1.657 1.343 3 3 3h19c1.657 0 3-1.343 3-3v-21h3v-5c0-1.657-1.343-3-3-3z" class="iconic-script-body iconic-property-fill" />
+  </g>
+  <g class="iconic-script-sm iconic-container iconic-sm" data-width="15" data-height="16" display="none" transform="scale(8)">
+    <path d="M13 0h-9c-1.105 0-2 .895-2 2v9h-2v3.125h.013c.066 1.045.926 1.875 1.987 1.875h9c1.105 0 2-.895 2-2v-9h2v-3c0-1.105-.895-2-2-2z" clip-path="url(#iconic-size-sm-script-clip-0)" class="iconic-script-body iconic-property-fill" />
+  </g>
+</svg>

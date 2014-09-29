@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-bluetooth" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Bluetooth</title>
+  </g>
+  <g class="iconic-bluetooth-lg iconic-container iconic-lg" data-width="64" data-height="128" display="inline" transform="translate(32)">
+    <path d="M64 38l-38-38v52l-20-20-6 6 26 26-26 26 6 6 20-20v52l38-38-25.2-26 25.2-26zm-30-18l18 18-18 18v-36zm18 70l-18 18v-36l18 18z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-bluetooth-md iconic-container iconic-md" data-width="15" data-height="30" display="none" transform="scale(4) translate(8 1)">
+    <path d="M15 9l-9-9v12l-4.5-4.5-1.5 1.5 6 6-6 6 1.5 1.5 4.5-4.5v12l9-9-6-6 6-6zm-7-4l4 4-4 4v-8zm4 16l-4 4v-8l4 4z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-bluetooth-sm iconic-container iconic-sm" data-width="8" data-height="16" display="none" transform="scale(8) translate(4)">
+    <path d="M8 5l-5-5v6l-2-2-1 1 3 3-3 3 1 1 2-2v6l5-5-3-3 3-3zm-4-2l2 2-2 2v-4zm2 8l-2 2v-4l2 2z" class="iconic-property-fill" />
+  </g>
+</svg>

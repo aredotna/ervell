@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-infinity" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Infinity</title>
+  </g>
+  <g class="iconic-infinity-lg iconic-container iconic-lg" data-width="128" data-height="58" display="inline" transform="translate(0 35)">
+    <path stroke="#000" stroke-width="8" d="M25 4c-13.144 0-20.999 12.912-21 25.325-.001 12.415 7.854 24.675 21 24.675 26.897 0 51.069-50 79-50 13.33 0 20 12.913 20 25.326 0 12.414-6.669 24.674-20 24.674-28.103 0-52.276-50-79-50z" class="iconic-property-stroke"
+    fill="none" />
+  </g>
+  <g class="iconic-infinity-md iconic-container iconic-md" data-width="32" data-height="15" display="none" transform="scale(4) translate(0 8)">
+    <path stroke="#000" stroke-width="3" d="M6.5 1.5c-3.176 0-5 3-5 6s1.823 6 5 6c6.5 0 12.5-12 19.25-12 3.221 0 4.75 3 4.75 6s-1.528 6-4.75 6c-6.792 0-12.792-12-19.25-12z" class="iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-infinity-sm iconic-container iconic-sm" data-width="15" data-height="8" display="none" transform="scale(8) translate(0 4)">
+    <path stroke="#000" stroke-width="2" d="M3.219 1c-2.958 0-2.958 6 0 6s6.5-6 9.5-6 3 6 0 6-6.542-6-9.5-6z" class="iconic-property-stroke" fill="none" />
+  </g>
+</svg>

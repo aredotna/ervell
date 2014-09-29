@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-camera-slr" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Camera Slr</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-camera-slr-clip-0">
+      <path d="M0 112h128v6h-128v-6zm128-112v110h-128v-110h128zm-112 38c0 2.209 1.791 4 4 4s4-1.791 4-4-1.791-4-4-4-4 1.791-4 4zm24-1c0-.552-.448-1-1-1s-1 .448-1 1v3c0 1.377-.855 3.44-1.828 4.414l-1.758 1.758c-.974.974-3.037 1.828-4.414 1.828h-24c-.552 0-1 .448-1 1s.448 1 1 1h24c.755 0 1.61-.17 2.453-.453-.283.843-.453 1.697-.453 2.453v9c0 .552.448 1 1 1s1-.448 1-1v-9c0-1.377.855-3.44 1.828-4.414l1.758-1.758c1.354-1.353 2.414-3.913 2.414-5.828v-3zm78 33c0-3.314-2.686-6-6-6-1.686 0-3.208.698-4.298 1.818-2.042-14.569-14.58-25.818-29.702-25.818-16.542 0-30 13.458-30 30s13.458 30 30 30c15.122 0 27.66-11.249 29.702-25.818 1.09 1.12 2.611 1.818 4.298 1.818 3.314 0 6-2.686 6-6z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-md-camera-slr-clip-0">
+      <path d="M0 0v30h32v-30h-32zm5 12c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1zm22 7c-.024 0-.044-.012-.067-.014-.489 3.947-3.856 7.014-7.933 7.014-4.411 0-8-3.589-8-8s3.589-8 8-8c4.077 0 7.444 3.067 7.933 7.014.023-.002.043-.014.067-.014.552 0 1 .448 1 1s-.448 1-1 1z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-camera-slr-clip-0">
+      <path d="M0 0v15h16v-15h-16zm9 13c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-camera-slr-lg iconic-container iconic-lg" data-width="128" data-height="118" display="inline" transform="translate(0 5)">
+    <circle cx="112" cy="70" r="4" class="iconic-camera-slr-lens-release iconic-property-fill" />
+    <path d="M78 44c-14.359 0-26 11.641-26 26s11.641 26 26 26 26-11.641 26-26-11.641-26-26-26zm0 49.649c-13.04 0-23.649-10.609-23.649-23.649s10.609-23.649 23.649-23.649 23.649 10.609 23.649 23.649-10.609 23.649-23.649 23.649z" class="iconic-camera-slr-lens iconic-camera-slr-lens-barrel iconic-property-fill"
+    />
+    <path class="iconic-camera-slr-flash-mount iconic-property-fill" d="M72 0h14v3h-14z" />
+    <path d="M78 47.982c-12.141 0-22.018 9.877-22.018 22.018s9.877 22.018 22.018 22.018 22.018-9.877 22.018-22.018-9.877-22.018-22.018-22.018zm0 5.018c-9.374 0-17 7.626-17 17 0 .552-.448 1-1 1s-1-.448-1-1c0-10.477 8.523-19 19-19 .552 0 1 .448 1 1s-.448 1-1 1z"
+    class="iconic-camera-slr-lens iconic-camera-slr-lens-glass iconic-property-accent iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-camera-slr-clip-0)" d="M108.126 19.657l-12.252-15.315c-1.035-1.294-3.217-2.343-4.874-2.343h-26c-1.657 0-3.839 1.049-4.874 2.343l-12.252 15.315c-1.035 1.294-3.217 2.343-4.874 2.343h-19c-13.255 0-24 10.745-24 24v69c0 1.657 1.343 3 3 3h122c1.657 0 3-1.343 3-3v-90c0-1.657-1.343-3-3-3h-12c-1.657 0-3.839-1.049-4.874-2.343z"
+    class="iconic-camera-slr-body iconic-property-fill" />
+  </g>
+  <g class="iconic-camera-slr-md iconic-container iconic-md" data-width="32" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <path clip-path="url(#iconic-size-md-camera-slr-clip-0)" d="M26.723 5.584l-3.445-5.168c-.153-.23-.501-.416-.777-.416h-7c-.276 0-.624.186-.777.416l-3.445 5.168c-.153.23-.501.416-.777.416h-4.5c-3.314 0-6 2.686-6 6v17.5c0 .276.224.5.5.5h31c.276 0 .5-.224.5-.5v-23c0-.276-.224-.5-.5-.5h-4c-.276 0-.624-.186-.777-.416z"
+    class="iconic-camera-slr-body iconic-property-fill" />
+    <path d="M19 12c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zm0 2c-2.206 0-4 1.794-4 4 0 .276-.224.5-.5.5s-.5-.224-.5-.5c0-2.757 2.243-5 5-5 .276 0 .5.224.5.5s-.224.5-.5.5z" class="iconic-camera-slr-lens iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-camera-slr-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-camera-slr-clip-0)" d="M12.861 2.792l-1.723-2.584c-.077-.115-.251-.208-.389-.208h-3.5c-.138 0-.312.093-.389.208l-1.723 2.584c-.077.115-.251.208-.389.208h-1.75c-1.657 0-3 1.343-3 3v8.75c0 .138.112.25.25.25h15.5c.138 0 .25-.112.25-.25v-11.5c0-.138-.112-.25-.25-.25h-2.5c-.138 0-.312-.093-.389-.208z"
+    class="iconic-camera-slr-body iconic-property-fill" />
+    <circle cx="9" cy="9" r="3" class="iconic-camera-slr-lens iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

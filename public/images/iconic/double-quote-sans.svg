@@ -1,0 +1,38 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="double-quote-sans" width="128" height="128" class="iconic iconic-double-quote-sans" viewBox="0 0 128 128">
+  <g><title>Double Quote Sans</title></g>
+  <g data-width="108" data-height="80" class="iconic-lg iconic-container" display="inline" transform="translate(10 24)">
+    <g class="iconic-double-quote-sans-left">
+      <path d="M108 78.5v-77c0-.8-.5-1-1.1-.5l-41.8 38c-.6.6-1.1 1.7-1.1 2.5v37c0 .8.7 1.5 1.5 1.5h41c.8 0 1.5-.7 1.5-1.5z" class="iconic-double-quote-sans-left-second iconic-property-fill"/>
+      <path d="M44 78.5v-77c0-.8-.5-1-1.1-.5l-41.8 38c-.6.5-1.1 1.7-1.1 2.5v37c0 .8.7 1.5 1.5 1.5h41c.8 0 1.5-.7 1.5-1.5z" class="iconic-double-quote-sans-left-first iconic-property-fill"/>
+    </g>
+    <g class="iconic-double-quote-sans-right" display="none">
+      <path d="M64 1.5v77c0 .8.5 1 1.1.5l41.8-38c.6-.6 1.1-1.7 1.1-2.5v-37c0-.8-.7-1.5-1.5-1.5h-41c-.8 0-1.5.7-1.5 1.5z" class="iconic-double-quote-sans-right-second iconic-property-fill"/>
+      <path d="M0 1.5v77c0 .8.5 1 1.1.5l41.8-38c.6-.6 1.1-1.7 1.1-2.5v-37c0-.8-.7-1.5-1.5-1.5h-41c-.8 0-1.5.7-1.5 1.5z" class="iconic-double-quote-sans-right-first iconic-property-fill"/>
+    </g>
+  </g>
+  <g data-width="30" data-height="20" class="iconic-md iconic-container" display="none" transform="scale(4) translate(1 5)">
+    <g class="iconic-double-quote-sans-left">
+      <path d="M30 19.5v-19c0-.3-.2-.3-.4-.2l-10.2 9.4c-.2.2-.4.6-.4.8v9c0 .3.2.5.5.5h10c.3 0 .5-.2.5-.5z" class="iconic-double-quote-sans-left-second iconic-property-fill"/>
+      <path d="M11 19.5v-19c0-.3-.2-.3-.4-.2l-10.2 9.4c-.2.1-.4.5-.4.8v9c0 .3.2.5.5.5h10c.3 0 .5-.2.5-.5z" class="iconic-double-quote-sans-left-first iconic-property-fill"/>
+    </g>
+    <g class="iconic-double-quote-sans-right" display="none">
+      <path d="M18 .5v19c0 .3.2.3.4.2l10.3-9.3c.2-.2.4-.6.4-.8v-9c-.1-.4-.3-.6-.6-.6h-10c-.3 0-.5.2-.5.5z" class="iconic-double-quote-sans-right-second iconic-property-fill"/>
+      <path d="M0 .5v19c0 .3.2.3.4.2l10.3-9.3c.2-.2.4-.6.4-.8v-9c-.1-.4-.3-.6-.6-.6h-10c-.3 0-.5.2-.5.5z" class="iconic-double-quote-sans-right-first iconic-property-fill"/>
+    </g>
+  </g>
+  <g data-width="16" data-height="11" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(0 2)">
+    <g class="iconic-double-quote-sans-left">
+      <path class="iconic-double-quote-sans-left-second iconic-property-fill" d="M16 11v-11l-6 6v5z"/>
+      <path class="iconic-double-quote-sans-left-first iconic-property-fill" d="M6 11v-11l-6 6v5z"/>
+    </g>
+    <g class="iconic-double-quote-sans-right" display="none">
+      <path class="iconic-double-quote-sans-right-second iconic-property-fill" d="M10 0v11l6-6v-5z"/>
+      <path class="iconic-double-quote-sans-right-first iconic-property-fill" d="M0 0v11l6-6v-5z"/>
+    </g>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["double-quote-sans"]=iconicApis["double-quote-sans"]||function(t){var e=function(e){t.setAttribute("data-quote-direction",e);var r,i,a=t.querySelectorAll(".iconic-double-quote-sans-left"),n=t.querySelectorAll(".iconic-double-quote-sans-right");r=i="none","right"===e?i="inline":r="inline";for(var o=0;o<a.length;o++)a[o].setAttribute("display",r),n[o].setAttribute("display",i)},r=function(){var r=t.getAttribute("data-quote-direction");r&&e(r)};return{update:r,setQuoteDirection:e}};
+//]]>
+</script>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-bitcoin-transaction" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Bitcoin Transaction</title>
+  </g>
+  <g class="iconic-bitcoin-transaction-lg iconic-container iconic-lg" data-width="116" data-height="128" display="inline" transform="translate(6)">
+    <path stroke="#000" stroke-width="8" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-top iconic-bitcoin-transaction-strike-left iconic-property-accent iconic-property-stroke" d="M32 0v18" fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-top iconic-bitcoin-transaction-strike-right iconic-property-accent iconic-property-stroke" d="M48 0v18" fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-bottom iconic-bitcoin-transaction-strike-left iconic-property-accent iconic-property-stroke" d="M32 110v18" fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-bottom iconic-bitcoin-transaction-strike-right iconic-property-accent iconic-property-stroke" d="M48 110v18" fill="none" />
+    <path d="M63.382 58.419c5.266-4.402 8.618-11.018 8.618-18.419 0-12.671-9.822-23.042-22.267-23.931v-.069h-49.733v6h8c3.314 0 6 2.686 6 6v72c0 3.314-2.686 6-6 6h-8v6h53v-.025c15-.528 27-12.846 27-27.975 0-11.41-6.828-21.218-16.618-25.581zm-35.382-36.419h15c9.389 0 17 7.611 17 17s-7.611 17-17 17h-15v-34zm16.533 84h-16.533v-44h16.533c12.15 0 22 9.85 22 22s-9.85 22-22 22z"
+    class="iconic-bitcoin-transaction-b iconic-property-fill" />
+    <path stroke="#000" stroke-width="8" class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-bottom iconic-bitcoin-transaction-arrow-bottom-stem iconic-property-stroke" d="M86 68h16" fill="none" />
+    <path class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-bottom iconic-bitcoin-transaction-arrow-bottom-head iconic-property-fill" d="M100 80v-24l16 12z" />
+    <path stroke="#000" stroke-width="8" class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-top iconic-bitcoin-transaction-arrow-top-stem iconic-property-stroke" d="M110 48h-16" fill="none" />
+    <path class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-top iconic-bitcoin-transaction-arrow-top-head iconic-property-fill" d="M96 36v24l-16-12z" />
+  </g>
+  <g class="iconic-bitcoin-transaction-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path stroke="#000" stroke-width="2" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-top iconic-bitcoin-transaction-strike-left iconic-property-accent iconic-property-stroke" d="M8 0v6" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-top iconic-bitcoin-transaction-strike-right iconic-property-accent iconic-property-stroke" d="M12 0v6" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-bottom iconic-bitcoin-transaction-strike-left iconic-property-accent iconic-property-stroke" d="M8 26v6" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-bottom iconic-bitcoin-transaction-strike-right iconic-property-accent iconic-property-stroke" d="M12 26v6" fill="none" />
+    <path d="M16.5 14.5c.928-.985 1.5-2.541 1.5-4 0-3.038-2.462-5.5-5.5-5.5h-12.5v2h2c1.105 0 2 .895 2 2v14c0 1.105-.895 2-2 2h-2v2h13.5c3.59 0 6.5-2.91 6.5-6.5 0-2.507-1.421-4.916-3.5-6zm-6-7.5c1.933 0 3.5 1.567 3.5 3.5s-1.567 3.5-3.5 3.5h-2.5v-7h2.5zm1 18h-3.5v-9h3.5c2.485 0 4.5 2.015 4.5 4.5s-2.015 4.5-4.5 4.5z"
+    class="iconic-bitcoin-transaction-b iconic-property-fill" />
+    <path stroke="#000" stroke-width="2" class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-bottom iconic-bitcoin-transaction-arrow-bottom-stem iconic-property-stroke" d="M26 17h-4" fill="none" />
+    <path class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-bottom iconic-bitcoin-transaction-arrow-bottom-head iconic-property-fill" d="M25 18v2l4-3-4-3v2" />
+    <path stroke="#000" stroke-width="2" class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-top iconic-bitcoin-transaction-arrow-top-stem iconic-property-stroke" d="M27 12h-4" fill="none" />
+    <path class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-top iconic-bitcoin-transaction-arrow-top-head iconic-property-fill" d="M24 15l-4-3 4-3z" />
+  </g>
+  <g class="iconic-bitcoin-transaction-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path stroke="#000" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-top iconic-bitcoin-transaction-strike-left iconic-property-accent iconic-property-stroke" d="M3.5 0v3.5" fill="none" />
+    <path stroke="#000" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-top iconic-bitcoin-transaction-strike-right iconic-property-accent iconic-property-stroke" d="M5.5 0v3.5" fill="none" />
+    <path stroke="#000" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-bottom iconic-bitcoin-transaction-strike-left iconic-property-accent iconic-property-stroke" d="M3.5 12.5v3.5" fill="none" />
+    <path stroke="#000" class="iconic-bitcoin-transaction-strike iconic-bitcoin-transaction-strike-bottom iconic-bitcoin-transaction-strike-right iconic-property-accent iconic-property-stroke" d="M5.5 12.5v3.5" fill="none" />
+    <path d="M7.252 7.281c.461-.454.748-1.083.748-1.781 0-1.381-1.119-2.5-2.5-2.5h-5.5v1c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1v1h6c1.657 0 3-1.343 3-3 0-1.209-.719-2.244-1.748-2.719zm-4.252-3.281h1.5c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5h-1.5v-3zm2 8h-2v-4h2c1.105 0 2 .895 2 2s-.895 2-2 2z"
+    class="iconic-bitcoin-transaction-b iconic-property-fill" />
+    <path stroke="#000" class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-bottom iconic-bitcoin-transaction-arrow-bottom-stem iconic-property-stroke" d="M14 10.5h-3" fill="none" />
+    <path class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-bottom iconic-bitcoin-transaction-arrow-bottom-head iconic-property-fill" d="M16 10.5l-3-2.5v5z" />
+    <path stroke="#000" class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-top iconic-bitcoin-transaction-arrow-top-stem iconic-property-stroke" d="M14 6.5h-3" fill="none" />
+    <path class="iconic-bitcoin-transaction-arrow iconic-bitcoin-transaction-arrow-top iconic-bitcoin-transaction-arrow-top-head iconic-property-fill" d="M9 6.5l3 2.5v-5z" />
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-x" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>X</title>
+  </g>
+  <g class="iconic-x-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path stroke="#000" stroke-width="16" stroke-linecap="square" class="iconic-property-stroke" d="M13 13l102 102m0-102l-102 102" fill="none" />
+  </g>
+  <g class="iconic-x-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path stroke="#000" stroke-width="6" stroke-linecap="square" class="iconic-property-stroke" d="M4.5 4.5l23 23m0-23l-23 23" fill="none" />
+  </g>
+  <g class="iconic-x-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-property-stroke" d="M3 3l10 10m0-10l-10 10" fill="none" />
+  </g>
+</svg>

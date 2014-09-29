@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-route" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Route</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-route-clip-0">
+      <path d="M90 62c3.916 0 7.457 1.621 10 4.221v-66.221h-100v42.221c2.543-2.6 6.084-4.221 10-4.221 7.72 0 14 6.28 14 14s-6.28 14-14 14c-3.916 0-7.457-1.621-10-4.221v66.221h100v-42.221c-2.543 2.6-6.084 4.221-10 4.221-7.72 0-14-6.28-14-14s6.28-14 14-14z"
+      />
+    </clipPath>
+  </defs>
+  <g class="iconic-route-lg iconic-container iconic-lg" data-width="100" data-height="128" display="inline" transform="translate(14)">
+    <path clip-path="url(#iconic-size-lg-route-clip-0)" stroke="#000" stroke-width="8" d="M10 54v50c0 11.046 8.954 20 20 20s20-8.954 20-20v-80c0-11.046 8.954-20 20-20s20 8.954 20 20v48" class="iconic-route-path iconic-property-stroke" fill="none" />
+    <circle cx="90" cy="76" r="10" class="iconic-route-point iconic-route-end-point iconic-property-accent iconic-property-fill" />
+    <circle cx="10" cy="52" r="10" class="iconic-route-point iconic-route-start-point iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-route-md iconic-container iconic-md" data-width="29" data-height="32" display="none" transform="scale(4) translate(1)">
+    <path stroke="#231F20" stroke-width="3" d="M25.5 17.5v-10.5c0-3.038-2.462-5.5-5.5-5.5s-5.5 2.462-5.5 5.5v18c0 3.038-2.462 5.5-5.5 5.5s-5.5-2.462-5.5-5.5v-10.5" class="iconic-route-path iconic-property-stroke" fill="none" />
+    <circle fill="#231F20" cx="3.5" cy="14.5" r="3.5" class="iconic-route-point iconic-route-start-point iconic-property-accent iconic-property-fill" />
+    <circle fill="#231F20" cx="25.5" cy="17.5" r="3.5" class="iconic-route-point iconic-route-end-point iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-route-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path stroke="#231F20" stroke-width="2" d="M2 8v4c0 1.657 1.343 3 3 3s3-1.343 3-3v-8c0-1.657 1.343-3 3-3s3 1.343 3 3v4" class="iconic-route-path iconic-property-stroke" fill="none" />
+    <circle fill="#231F20" cx="2" cy="8" r="2" class="iconic-route-point iconic-route-start-point iconic-property-accent iconic-property-fill" />
+    <circle fill="#231F20" cx="14" cy="8" r="2" class="iconic-route-point iconic-route-end-point iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

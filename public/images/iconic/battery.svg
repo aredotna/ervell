@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-battery" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Battery</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-battery-clip-0">
+      <path d="M0 0v64h118v-64h-118zm112 58h-106v-52h106v52z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-battery-clip-0">
+      <path d="M0 0v16h29v-16h-29zm27 14h-25v-12h25v12z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-battery-clip-0">
+      <path d="M0 0v10h14v-10h-14zm13 9h-12v-8h12v8z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-battery-lg iconic-container iconic-lg" data-width="128" data-height="64" display="inline" transform="translate(0 32)">
+    <path d="M117.5 18h9c.828 0 1.5.672 1.5 1.5v25c0 .828-.672 1.5-1.5 1.5h-9c-.828 0-1.5-.672-1.5-1.5v-25c0-.828.672-1.5 1.5-1.5z" class="iconic-battery-terminal iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-battery-clip-0)" d="M115 64h-112c-1.657 0-3-1.343-3-3v-58c0-1.657 1.343-3 3-3h112c1.657 0 3 1.343 3 3v58c0 1.657-1.343 3-3 3z" class="iconic-battery-casing iconic-property-fill" />
+    <path class="iconic-battery-charge-amount iconic-property-fill" d="M6 6h106v52h-106z" />
+    <path display="none" fill="#fff" class="iconic-battery-charge-indicator iconic-property-fill" d="M18 36l-6 10h4v6l6-10h-4z" />
+    <text transform="translate(24 50.343)" display="none" fill="#fff" font-family="'HelveticaNeue-Bold'" font-size="18" class="iconic-battery-charge-amount-percent iconic-property-fill iconic-property-text">100%</text>
+  </g>
+  <g class="iconic-battery-md iconic-container iconic-md" data-width="32" data-height="16" display="none" transform="scale(4) translate(0 8)">
+    <path d="M25.5 4h6c.276 0 .5.224.5.5v7c0 .276-.224.5-.5.5h-6c-.276 0-.5-.224-.5-.5v-7c0-.276.224-.5.5-.5z" class="iconic-battery-terminal iconic-property-fill" />
+    <path clip-path="url(#iconic-size-md-battery-clip-0)" d="M28 16h-27c-.552 0-1-.448-1-1v-14c0-.552.448-1 1-1h27c.552 0 1 .448 1 1v14c0 .552-.448 1-1 1z" class="iconic-battery-casing iconic-property-fill" />
+    <path class="iconic-battery-charge-amount iconic-property-fill" d="M2 2h25v12h-25z" />
+    <path display="none" fill="#fff" class="iconic-battery-charge-indicator iconic-property-fill" d="M7 4l-3 5h2v3l3-5h-2z" />
+  </g>
+  <g class="iconic-battery-sm iconic-container iconic-sm" data-width="16" data-height="10" display="none" transform="scale(8) translate(0 3)">
+    <path d="M12.25 3h3.5c.138 0 .25.112.25.25v3.5c0 .138-.112.25-.25.25h-3.5c-.138 0-.25-.112-.25-.25v-3.5c0-.138.112-.25.25-.25z" class="iconic-battery-terminal iconic-property-fill" />
+    <path class="iconic-battery-charge-amount iconic-property-fill" d="M1 1h12v8h-12z" />
+    <path display="none" fill="#fff" class="iconic-battery-charge-indicator iconic-property-fill" d="M5 1l-3 5h2v3l3-5h-2z" />
+    <path clip-path="url(#iconic-size-sm-battery-clip-0)" d="M13.75 10h-13.5c-.138 0-.25-.112-.25-.25v-9.5c0-.138.112-.25.25-.25h13.5c.138 0 .25.112.25.25v9.5c0 .138-.112.25-.25.25z" class="iconic-battery-casing iconic-property-fill" />
+  </g>
+</svg>

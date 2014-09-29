@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-yen" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Yen</title>
+  </g>
+  <g class="iconic-yen-lg iconic-container iconic-lg" data-width="100" data-height="128" display="inline" transform="translate(14)">
+    <path stroke="#000" stroke-width="8" class="iconic-yen-strike iconic-yen-strike-bottom iconic-property-accent iconic-property-stroke" d="M2 78h96" fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-yen-strike iconic-yen-strike-top iconic-property-accent iconic-property-stroke" d="M2 62h96" fill="none" />
+    <path class="iconic-yen-y iconic-property-fill" d="M0 0l44 64v64h12v-64l44-64h-12l-38 56-38-56z" />
+  </g>
+  <g class="iconic-yen-md iconic-container iconic-md" data-width="26" data-height="32" display="none" transform="scale(4) translate(3)">
+    <path stroke="#000" stroke-width="3" class="iconic-yen-strike iconic-yen-strike-bottom iconic-property-accent iconic-property-stroke" d="M0 20.5h26" />
+    <path stroke="#000" stroke-width="3" class="iconic-yen-strike iconic-yen-strike-top iconic-property-accent iconic-property-stroke" d="M0 14.5h26" />
+    <path class="iconic-yen-y iconic-property-fill" d="M0 0l11 16v16h4v-16l11-16h-4l-9 13-9-13z" />
+  </g>
+  <g class="iconic-yen-sm iconic-container iconic-sm" data-width="12" data-height="16" display="none" transform="scale(8) translate(2)">
+    <path stroke="#000" stroke-width="2" class="iconic-yen-strike iconic-yen-strike-bottom iconic-property-accent iconic-property-stroke" d="M0 12h12" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-yen-strike iconic-yen-strike-top iconic-property-accent iconic-property-stroke" d="M0 8h12" fill="none" />
+    <path class="iconic-yen-y iconic-property-fill" d="M0 0l5 8v8h2v-8l5-8h-2l-4 6.5-4-6.5z" />
+  </g>
+</svg>

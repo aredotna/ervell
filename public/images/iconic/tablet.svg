@@ -1,0 +1,31 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="tablet" width="128" height="128" class="iconic iconic-tablet" viewBox="0 0 128 128">
+  <g><title>Tablet</title></g>
+  <defs>
+    <clipPath id="iconic-size-lg-tablet-clip-0">
+      <rect x="4" y="12" width="78" height="104"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-tablet-clip-0">
+      <rect x="1" y="3" width="20" height="25"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-tablet-clip-0">
+      <rect x="1" y="2" width="9" height="11"/>
+    </clipPath>
+  </defs>
+  <g data-width="86" data-height="128" class="iconic-lg iconic-container" display="inline" transform="translate(21)">
+    <path d="M80 0h-74c-3.3 0-6 2.7-6 6v116c0 3.3 2.7 6 6 6h74c3.3 0 6-2.7 6-6v-116c0-3.3-2.7-6-6-6zm-37 6c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm0 118c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3zm39-8h-78v-104h78v104z" class="iconic-tablet-body iconic-property-fill"/>
+    <image class="iconic-tablet-screenshot-image" data-max-width="78" x="4" y="12" clip-path="url(#iconic-size-lg-tablet-clip-0)"/>
+  </g>
+  <g data-width="22" data-height="32" class="iconic-md iconic-container" display="none" transform="scale(4) translate(5)">
+    <path d="M20.2 0h-18.4c-1 0-1.8.8-1.8 1.8v28.5c0 1 .8 1.8 1.8 1.8h18.5c1 0 1.8-.8 1.8-1.8v-28.5c-.1-1-.9-1.8-1.9-1.8zm-9.2 31c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm10-3h-20v-25h20v25z" class="iconic-tablet-body iconic-property-fill"/>
+    <image class="iconic-tablet-screenshot-image" data-max-width="20" x="1" y="3" clip-path="url(#iconic-size-md-tablet-clip-0)"/>
+  </g>
+  <g data-width="11" data-height="16" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(2)">
+    <path d="M10.2 0h-9.4c-.5 0-.8.3-.8.8v14.5c0 .4.3.7.8.7h9.5c.4 0 .8-.3.8-.8v-14.4c-.1-.5-.4-.8-.9-.8zm-4.7 15c-.3 0-.5-.2-.5-.5s.2-.5.5-.5.5.2.5.5-.2.5-.5.5zm4.5-2h-9v-11h9v11z" class="iconic-tablet-body iconic-property-fill"/>
+    <image class="iconic-tablet-screenshot-image" data-max-width="9" x="1" y="2" clip-path="url(#iconic-size-sm-tablet-clip-0)"/>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["tablet"]=iconicApis["tablet"]||function(t){var e=function(e){t.setAttribute("data-screenshot",e);var i,r,n=t.querySelectorAll(".iconic-tablet-screenshot-image"),a=0,c=new Image;c.onload=function(){for(a=0;a<n.length;a++){n[a].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",e),n[a].setAttribute("display","inline");var t=c.width/c.height,o=parseInt(n[a].getAttribute("data-max-width"));r=o,i=o/t,n[a].setAttribute("height",i+"px"),n[a].setAttribute("width",r+"px")}};var o=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,s=new RegExp(o);if(e&&e.match(s))c.src=e;else for(a=0;a<n.length;a++)n[a].setAttribute("display","none"),n[a].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","")},i=function(){var i=t.getAttribute("data-screenshot")||"";e(i)};return{update:i,setScreenshot:e}};
+//]]>
+</script>
+</svg>

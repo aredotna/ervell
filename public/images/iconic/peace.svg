@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-peace" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Peace</title>
+  </g>
+  <g class="iconic-peace-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path stroke="#000" stroke-width="8" class="iconic-peace-line-bottom iconic-property-stroke" d="M106 104l-42-44-42 44" fill="none" />
+    <path stroke="#000" stroke-width="8" class="iconic-peace-line-vertical iconic-property-stroke" d="M64 1v123" fill="none" />
+    <circle stroke="#000" stroke-width="8" cx="64" cy="64" r="60" class="iconic-peace-border iconic-property-accent iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-peace-md iconic-container iconic-md" data-width="31" data-height="31" display="none" transform="scale(4)">
+    <path stroke="#000" stroke-width="3" class="iconic-peace-line-bottom iconic-property-stroke" d="M25 25l-9.5-10-9.5 10" fill="none" />
+    <path stroke="#000" stroke-width="3" class="iconic-peace-line-vertical iconic-property-stroke" d="M15.5 1v30" fill="none" />
+    <circle stroke="#000" stroke-width="3" cx="15.5" cy="15.5" r="14" class="iconic-peace-border iconic-property-accent iconic-property-stroke" fill="none" />
+  </g>
+  <g class="iconic-peace-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path stroke="#000" stroke-width="2" class="iconic-peace-line-bottom iconic-property-stroke" d="M13 12l-5-4.5-5 4.5" fill="none" />
+    <path stroke="#000" stroke-width="2" class="iconic-peace-line-vertical iconic-property-stroke" d="M8 1v14" fill="none" />
+    <circle stroke="#000" stroke-width="2" cx="8" cy="8" r="7" class="iconic-peace-border iconic-property-accent iconic-property-stroke" fill="none" />
+  </g>
+</svg>

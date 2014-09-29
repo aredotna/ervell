@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-chat" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Chat</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-chat-clip-0">
+      <path d="M46 72h-46v-72h83v16h-37z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-chat-clip-0">
+      <path d="M11 18.875h-11v-18.875h22v6h-11z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-chat-clip-0">
+      <path d="M5 11h-5v-11h11v3h-6z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-chat-lg iconic-container iconic-lg" data-width="128" data-height="90" display="inline" transform="translate(0 19)">
+    <path d="M48 19.5v55c0 .828.672 1.5 1.5 1.5h65c.828 0 1.937.51 2.476 1.139l10.048 11.722c.539.629.976.467.976-.361v-69c0-.828-.672-1.5-1.5-1.5h-77c-.828 0-1.5.672-1.5 1.5z" class="iconic-chat-bubble iconic-chat-bubble-front iconic-property-fill" />
+    <path d="M0 1.5v69c0 .828.437.99.976.361l10.048-11.722c.539-.629 1.648-1.139 2.476-1.139h65c.828 0 1.5-.672 1.5-1.5v-55c0-.828-.672-1.5-1.5-1.5h-77c-.828 0-1.5.672-1.5 1.5z" clip-path="url(#iconic-size-lg-chat-clip-0)" class="iconic-chat-bubble iconic-chat-bubble-back iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-chat-md iconic-container iconic-md" data-width="32" data-height="26" display="none" transform="scale(4) translate(0 3)">
+    <path d="M12 7.5v14c0 .276.224.5.5.5h15c.276 0 .658.158.854.354l3.293 3.293c.195.195.354.13.354-.146v-18c0-.276-.224-.5-.5-.5h-19c-.276 0-.5.224-.5.5z" class="iconic-chat-bubble iconic-chat-bubble-front iconic-property-fill" />
+    <path d="M0 .5v18c0 .276.158.342.354.146l3.293-3.293c.195-.195.577-.354.853-.354h15c.276 0 .5-.224.5-.5v-14c0-.276-.224-.5-.5-.5h-19c-.276 0-.5.224-.5.5z" clip-path="url(#iconic-size-md-chat-clip-0)" class="iconic-chat-bubble iconic-chat-bubble-back iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-chat-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path class="iconic-chat-bubble iconic-chat-bubble-front iconic-property-fill" d="M6 4v8h7l3 3v-11z" />
+    <path clip-path="url(#iconic-size-sm-chat-clip-0)" class="iconic-chat-bubble iconic-chat-bubble-back iconic-property-accent iconic-property-fill" d="M0 0v11l3-3h7v-8z" />
+  </g>
+</svg>

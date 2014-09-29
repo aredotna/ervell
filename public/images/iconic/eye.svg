@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-eye" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Eye</title>
+  </g>
+  <g class="iconic-eye-lg iconic-container iconic-lg" data-width="128" data-height="76" display="inline" transform="translate(0 26)">
+    <path d="M64.5 0c-40.5 0-64.5 38-64.5 38s24 38 64.5 38c39.5 0 63.5-38 63.5-38s-24-38-63.5-38zm-.5 62c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24z" class="iconic-eye-eyeball iconic-property-fill" />
+    <path d="M72 34c-2.209 0-4-1.791-4-4 0-1.1.445-2.096 1.164-2.819-1.566-.749-3.313-1.181-5.164-1.181-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12c0-1.852-.432-3.598-1.181-5.164-.723.719-1.719 1.164-2.819 1.164z" class="iconic-eye-pupil iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-eye-md iconic-container iconic-md" data-width="32" data-height="20" display="none" transform="scale(4) translate(0 6)">
+    <path d="M16.125 0c-10.125 0-16.125 10-16.125 10s6 10 16.125 10c9.875 0 15.875-10 15.875-10s-6-10-15.875-10zm-.125 17c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7z" class="iconic-eye-eyeball iconic-property-fill" />
+    <path d="M18.5 9c-.828 0-1.5-.672-1.5-1.5 0-.479.228-.9.577-1.175-.484-.208-1.017-.325-1.577-.325-2.209 0-4 1.791-4 4s1.791 4 4 4 4-1.791 4-4c0-.561-.117-1.093-.325-1.577-.275.349-.696.577-1.175.577z" class="iconic-eye-pupil iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-eye-sm iconic-container iconic-sm" data-width="16" data-height="12" display="none" transform="scale(8) translate(0 2)">
+    <path d="M8.063 0c-5.063 0-8.063 6-8.063 6s3 6 8.063 6c4.938 0 7.938-6 7.938-6s-3-6-7.938-6zm-.063 10c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z" class="iconic-eye-eyeball iconic-property-fill" />
+    <path d="M9 6c-.552 0-1-.448-1-1 0-.403.241-.745.584-.903-.186-.057-.379-.097-.584-.097-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2c0-.204-.04-.398-.097-.584-.159.343-.501.584-.903.584z" class="iconic-eye-pupil iconic-property-fill" />
+  </g>
+</svg>

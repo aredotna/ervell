@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-aperture" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Aperture</title>
+  </g>
+  <g class="iconic-aperture-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path d="M48.989 86l-35.43-61.367c-8.487 10.859-13.559 24.516-13.559 39.367 0 7.73 1.371 15.14 3.882 22h45.107z" class="iconic-aperture-blade iconic-aperture-blade-6 iconic-property-fill" />
+    <path d="M75.547 88h-70.877c8.17 20.176 26.322 35.227 48.337 39.04l22.54-39.04z" class="iconic-aperture-blade iconic-aperture-blade-5 iconic-property-fill" />
+    <path d="M90.558 66l-35.434 61.373c2.902.403 5.862.627 8.875.627 19.725 0 37.358-8.929 49.099-22.959l-22.54-39.041z" class="iconic-aperture-blade iconic-aperture-blade-4 iconic-property-fill" />
+    <path d="M79.011 42l35.43 61.367c8.487-10.859 13.559-24.516 13.559-39.367 0-7.73-1.371-15.14-3.882-22h-45.107z" class="iconic-aperture-blade iconic-aperture-blade-3 iconic-property-fill" />
+    <path d="M52.453 40h70.877c-8.17-20.176-26.322-35.227-48.337-39.04l-22.54 39.04z" class="iconic-aperture-blade iconic-aperture-blade-2 iconic-property-fill" />
+    <path d="M37.442 62l35.434-61.373c-2.902-.403-5.862-.627-8.875-.627-19.725 0-37.358 8.929-49.098 22.959l22.54 39.041z" class="iconic-aperture-blade iconic-aperture-blade-1 iconic-property-fill" />
+  </g>
+  <g class="iconic-aperture-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path d="M11.959 21l-8.563-14.832c-2.12 2.714-3.395 6.121-3.395 9.832 0 1.748.29 3.426.808 5h11.151z" class="iconic-aperture-blade iconic-aperture-blade-6 iconic-property-fill" />
+    <path d="M18.309 22h-17.136c1.978 4.883 6.289 8.569 11.556 9.663l5.579-9.663z" class="iconic-aperture-blade iconic-aperture-blade-5 iconic-property-fill" />
+    <path d="M22.351 17l-8.562 14.829c.725.1 1.459.17 2.211.17 4.743 0 8.99-2.075 11.92-5.354l-5.569-9.646z" class="iconic-aperture-blade iconic-aperture-blade-4 iconic-property-fill" />
+    <path d="M20.041 11l8.563 14.832c2.12-2.714 3.395-6.121 3.395-9.832 0-1.748-.29-3.426-.808-5h-11.151z" class="iconic-aperture-blade iconic-aperture-blade-3 iconic-property-fill" />
+    <path d="M13.691 10h17.135c-1.978-4.883-6.289-8.569-11.556-9.663l-5.579 9.663z" class="iconic-aperture-blade iconic-aperture-blade-2 iconic-property-fill" />
+    <path d="M9.649 15l8.562-14.829c-.725-.1-1.459-.17-2.211-.17-4.743 0-8.99 2.075-11.92 5.354l5.569 9.646z" class="iconic-aperture-blade iconic-aperture-blade-1 iconic-property-fill" />
+  </g>
+  <g class="iconic-aperture-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M5.691 10l-3.993-6.916c-1.06 1.357-1.698 3.061-1.698 4.916 0 .692.097 1.36.262 2h5.428z" class="iconic-aperture-blade iconic-aperture-blade-6 iconic-property-fill" />
+    <path d="M8.577 11h-7.99c.925 2.283 2.872 4.037 5.276 4.702l2.715-4.702z" class="iconic-aperture-blade iconic-aperture-blade-5 iconic-property-fill" />
+    <path d="M10.887 9l-3.992 6.915c.362.05.729.085 1.105.085 2.183 0 4.16-.877 5.603-2.295l-2.717-4.705z" class="iconic-aperture-blade iconic-aperture-blade-4 iconic-property-fill" />
+    <path d="M14.302 12.916c1.06-1.357 1.698-3.061 1.698-4.916 0-.692-.097-1.36-.262-2h-5.428l3.993 6.916z" class="iconic-aperture-blade iconic-aperture-blade-3 iconic-property-fill" />
+    <path d="M7.423 5h7.99c-.925-2.283-2.872-4.037-5.275-4.702l-2.715 4.702z" class="iconic-aperture-blade iconic-aperture-blade-2 iconic-property-fill" />
+    <path d="M5.113 7l3.992-6.915c-.362-.05-.729-.085-1.105-.085-2.183 0-4.16.877-5.603 2.294l2.717 4.705z" class="iconic-aperture-blade iconic-aperture-blade-1 iconic-property-fill" />
+  </g>
+</svg>

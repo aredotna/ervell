@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-clipboard" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Clipboard</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-clipboard-clip-0">
+      <path d="M75.473 20c1.588 2.27 2.527 5.026 2.527 8v4h-68v-4c0-2.974.94-5.73 2.527-8h-12.527v105h88v-105h-12.527z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-clipboard-clip-0">
+      <path d="M20.444 6c.345.591.556 1.268.556 2v2h-18v-2c0-.732.212-1.409.556-2h-3.556v26h24v-26h-3.556z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-clipboard-clip-0">
+      <path d="M11 3v2h-9v-2h-2v13h13v-13z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-clipboard-lg iconic-container iconic-lg" data-width="88" data-height="125" display="inline" transform="translate(20 1)">
+    <path clip-path="url(#iconic-size-lg-clipboard-clip-0)" d="M86.5 125h-85c-.828 0-1.5-.672-1.5-1.5v-102c0-.828.672-1.5 1.5-1.5h85c.828 0 1.5.672 1.5 1.5v102c0 .828-.672 1.5-1.5 1.5z" class="iconic-clipboard-board iconic-property-fill" />
+    <path d="M44 0c-6.617 0-12 5.383-12 12v10l24 .167v-10.166c0-6.617-5.383-12-12-12zm0 12c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z" class="iconic-clipboard-clip iconic-clipboard-clip-loop iconic-property-accent iconic-property-fill"
+    />
+    <path d="M12 28c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v2h-64v-2z" class="iconic-clipboard-clip iconic-clipboard-clip-base iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-clipboard-md iconic-container iconic-md" data-width="24" data-height="32" display="none" transform="scale(4) translate(4)">
+    <path clip-path="url(#iconic-size-md-clipboard-clip-0)" d="M23.5 32h-23c-.276 0-.5-.224-.5-.5v-25c0-.276.224-.5.5-.5h23c.276 0 .5.224.5.5v25c0 .276-.224.5-.5.5z" class="iconic-clipboard-board iconic-property-fill" />
+    <path d="M12 0c-1.654 0-3 1.346-3 3v3h6v-3c0-1.654-1.346-3-3-3zm0 4c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" class="iconic-clipboard-clip iconic-clipboard-clip-loop iconic-property-accent iconic-property-fill" />
+    <path d="M17 5h-10c-1.657 0-3 1.343-3 3v1h16v-1c0-1.657-1.343-3-3-3z" class="iconic-clipboard-clip iconic-clipboard-clip-base iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-clipboard-sm iconic-container iconic-sm" data-width="13" data-height="16" display="none" transform="scale(8) translate(1)">
+    <path clip-path="url(#iconic-size-sm-clipboard-clip-0)" d="M12.75 16h-12.5c-.138 0-.25-.112-.25-.25v-12.5c0-.138.112-.25.25-.25h12.5c.138 0 .25.112.25.25v12.5c0 .138-.112.25-.25.25z" class="iconic-clipboard-board iconic-property-fill" />
+    <path stroke="#000" d="M7.5 3.021v-1.521c0-.552-.448-1-1-1s-1 .448-1 1v1.479" class="iconic-clipboard-clip iconic-clipboard-clip-loop iconic-property-accent iconic-property-stroke" fill="none" />
+    <path d="M9 2h-5c-.55 0-1 .45-1 1v1h7v-1c0-.55-.45-1-1-1z" class="iconic-clipboard-clip iconic-clipboard-clip-base iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

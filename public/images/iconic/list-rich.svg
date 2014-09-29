@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-list-rich" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>List Rich</title>
+  </g>
+  <g class="iconic-list-rich-lg iconic-container iconic-lg" data-width="120" data-height="128" display="inline" transform="translate(4)">
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M56 102h62" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M56 112h46" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-3 iconic-property-stroke" d="M56 122h56" fill="none" />
+    <path d="M42.5 128h-41c-.828 0-1.5-.672-1.5-1.5v-29c0-.828.672-1.5 1.5-1.5h41c.828 0 1.5.672 1.5 1.5v29c0 .828-.672 1.5-1.5 1.5z" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-block iconic-property-accent iconic-property-fill"
+    />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M56 54h62" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M56 64h46" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-3 iconic-property-stroke" d="M56 74h56" fill="none" />
+    <path d="M42.5 80h-41c-.828 0-1.5-.672-1.5-1.5v-29c0-.828.672-1.5 1.5-1.5h41c.828 0 1.5.672 1.5 1.5v29c0 .828-.672 1.5-1.5 1.5z" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-block iconic-property-accent iconic-property-fill"
+    />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-3 iconic-property-stroke" d="M56 26h56" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M56 16h46" fill="none" />
+    <path stroke="#000" stroke-width="4" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M56 6h62" fill="none" />
+    <path d="M42.5 32h-41c-.828 0-1.5-.672-1.5-1.5v-29c0-.828.672-1.5 1.5-1.5h41c.828 0 1.5.672 1.5 1.5v29c0 .828-.672 1.5-1.5 1.5z" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-block iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-list-rich-md iconic-container iconic-md" data-width="32" data-height="26" display="none" transform="scale(4) translate(0 3)">
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M12.5 21.5h19" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M12.5 24.5h15" fill="none" />
+    <path d="M8.5 26h-8c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5h8c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5z" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-block iconic-property-accent iconic-property-fill" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M12.5 11.5h19" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M12.5 14.5h15" fill="none" />
+    <path d="M8.5 16h-8c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5h8c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5z" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-block iconic-property-accent iconic-property-fill" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M12.5 1.5h19" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M12.5 4.5h15" fill="none" />
+    <path d="M8.5 6h-8c-.276 0-.5-.224-.5-.5v-5c0-.276.224-.5.5-.5h8c.276 0 .5.224.5.5v5c0 .276-.224.5-.5.5z" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-block iconic-property-accent iconic-property-fill" />
+  </g>
+  <g class="iconic-list-rich-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-block iconic-property-accent iconic-property-fill" d="M0 12h5v3h-5z" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M7.5 12.5h8" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-3 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M7.5 14.5h6" fill="none" />
+    <path class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-block iconic-property-accent iconic-property-fill" d="M0 6h5v3h-5z" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M7.5 6.5h8" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-2 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M7.5 8.5h6" fill="none" />
+    <path class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-block iconic-property-accent iconic-property-fill" d="M0 0h5v3h-5z" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-1 iconic-property-stroke" d="M7.5.5h8" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-list-rich-list-group iconic-list-rich-list-group-1 iconic-list-rich-line iconic-list-rich-line-2 iconic-property-stroke" d="M7.5 2.5h6" fill="none" />
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-loop-circular" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Loop Circular</title>
+  </g>
+  <g class="iconic-loop-circular-lg iconic-container iconic-lg" data-width="128" data-height="107" display="inline" transform="translate(0 10)">
+    <path stroke="#000" stroke-width="8" d="M15.016 64.04c-2.481-12.125-.341-24.984 5.992-35.621 6.117-10.272 15.904-18.169 27.257-21.93 17.781-5.89 37.853-1.118 51.09 12.118" class="iconic-loop-circular-line iconic-loop-circular-line-left iconic-property-stroke"
+    fill="none" />
+    <path class="iconic-loop-circular-arrowhead iconic-loop-circular-arrowhead-left iconic-property-fill" d="M14 77.963l14-24h-28z" />
+    <path stroke="#000" stroke-width="8" d="M112.984 43.886c2.481 12.125.341 24.984-5.992 35.621-6.117 10.272-15.904 18.169-27.257 21.93-17.781 5.89-37.853 1.118-51.09-12.118" class="iconic-loop-circular-line iconic-loop-circular-line-right iconic-property-stroke"
+    fill="none" />
+    <path class="iconic-loop-circular-arrowhead iconic-loop-circular-arrowhead-right iconic-property-fill" d="M114 29.963l-14 24h28z" />
+  </g>
+  <g class="iconic-loop-circular-md iconic-container iconic-md" data-width="32" data-height="25" display="none" transform="scale(4) translate(0 3)">
+    <path stroke="#000" stroke-width="3" d="M4.5 12.986c0-4.52 2.743-8.718 6.882-10.535 4.292-1.884 9.438-.908 12.75 2.403" class="iconic-loop-circular-line iconic-loop-circular-line-left iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-circular-arrowhead iconic-loop-circular-arrowhead-left iconic-property-fill" d="M4.5 18.986l-4.5-6h9z" />
+    <path stroke="#000" stroke-width="3" d="M27.5 12.986c0 4.52-2.743 8.718-6.882 10.535-4.292 1.884-9.438.908-12.75-2.403" class="iconic-loop-circular-line iconic-loop-circular-line-right iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-circular-arrowhead iconic-loop-circular-arrowhead-right iconic-property-fill" d="M27.5 6.986l4.5 6h-9z" />
+  </g>
+  <g class="iconic-loop-circular-sm iconic-container iconic-sm" data-width="16" data-height="11" display="none" transform="scale(8) translate(0 2)">
+    <path stroke="#000" stroke-width="2" d="M3 5.962c0-4.361 5.45-6.621 8.536-3.535" class="iconic-loop-circular-line iconic-loop-circular-line-left iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-circular-arrowhead iconic-loop-circular-arrowhead-left iconic-property-fill" d="M3 8.962l-3-3h6z" />
+    <path stroke="#000" stroke-width="2" d="M13 5.962c0 4.361-5.45 6.621-8.536 3.535" class="iconic-loop-circular-line iconic-loop-circular-line-right iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-circular-arrowhead iconic-loop-circular-arrowhead-right iconic-property-fill" d="M13 2.962l3 3h-6z" />
+  </g>
+</svg>

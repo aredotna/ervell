@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-database" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Database</title>
+  </g>
+  <g class="iconic-database-lg iconic-container iconic-lg" data-width="72" data-height="128" display="inline" transform="translate(28)">
+    <path d="M36 72c19.851 0 36-16.149 36-36 0-19.882-16.118-36-36-36s-36 16.118-36 36c0 19.851 16.149 36 36 36z" class="iconic-database-disc iconic-database-disc-top iconic-property-fill" />
+    <path d="M36 100c19.851 0 36-16.149 36-36v-10.577c-6.488 13.351-20.186 22.577-36 22.577s-29.512-9.226-36-22.577v10.577c0 19.851 16.149 36 36 36z" class="iconic-database-disc iconic-database-disc-middle iconic-property-accent iconic-property-fill"
+    />
+    <path d="M36 104c-15.814 0-29.512-9.226-36-22.577v10.577c0 19.882 16.118 36 36 36s36-16.118 36-36v-10.577c-6.488 13.351-20.186 22.577-36 22.577z" class="iconic-database-disc iconic-database-disc-bottom iconic-property-fill" />
+  </g>
+  <g class="iconic-database-md iconic-container iconic-md" data-width="18" data-height="32" display="none" transform="scale(4) translate(7)">
+    <path d="M9 18c4.962 0 9-4.038 9-9 0-4.971-4.029-9-9-9s-9 4.029-9 9c0 4.962 4.038 9 9 9z" class="iconic-database-disc iconic-database-disc-top iconic-property-fill" />
+    <path d="M9 25c4.962 0 9-4.038 9-9v-2.67c-1.618 3.349-5.039 5.67-9 5.67s-7.382-2.321-9-5.67v2.67c0 4.962 4.038 9 9 9z" class="iconic-database-disc iconic-database-disc-middle iconic-property-accent iconic-property-fill" />
+    <path d="M9 26c-3.962 0-7.382-2.321-9-5.67v2.67c0 4.971 4.029 9 9 9s9-4.029 9-9v-2.67c-1.618 3.349-5.039 5.67-9 5.67z" class="iconic-database-disc iconic-database-disc-bottom iconic-property-fill" />
+  </g>
+  <g class="iconic-database-sm iconic-container iconic-sm" data-width="8" data-height="16" display="none" transform="scale(8) translate(4)">
+    <path d="M4 8c2.206 0 4-1.794 4-4 0-2.209-1.791-4-4-4s-4 1.791-4 4c0 2.206 1.794 4 4 4z" class="iconic-database-disc iconic-database-disc-top iconic-property-fill" />
+    <path d="M4 12c2.206 0 4-1.794 4-4v-1.031c-.912 1.225-2.359 2.031-4 2.031s-3.088-.806-4-2.031v1.031c0 2.206 1.794 4 4 4z" class="iconic-database-disc iconic-database-disc-middle iconic-property-accent iconic-property-fill" />
+    <path d="M4 13c-1.641 0-3.088-.806-4-2.031v1.031c0 2.209 1.791 4 4 4s4-1.791 4-4v-1.031c-.912 1.225-2.359 2.031-4 2.031z" class="iconic-database-disc iconic-database-disc-bottom iconic-property-fill" />
+  </g>
+</svg>

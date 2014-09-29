@@ -1,4 +1,7 @@
 header#layout-header
+  //- img(src="#{sd.IMAGE_PATH}iconic/magnifying-glass.svg", class="iconic iconic-md header--icon")
+  .header--icon
+    include ../../../../public/images/iconic/magnifying-glass.svg
   .layout-header__search
     input#layout-header__search__input(type="text", placeholder="Search Arena")
     .layout-header__search__close.pointer &times;
@@ -16,7 +19,9 @@ header#layout-header
           a(href="#") Charles Broskoski added 4 items to Color Schemes
         a.dropdown__link(href="/#{user.get('slug')}")= user.get('username') 
           [avatar]
-        a.dropdown__link(href="#") Tools
+        a.dropdown__link(href="#") 
+          | Tools
+          include ../../../../public/images/iconic/tools.svg
         a.dropdown__link(href="#") About & FAQ
         a.dropdown__link(href="#") Settings
         a.dropdown__link(href="/me/sign_out") Sign Out

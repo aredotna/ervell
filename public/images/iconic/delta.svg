@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-delta" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Delta</title>
+  </g>
+  <g class="iconic-delta-lg iconic-container iconic-lg" data-width="128" data-height="128" display="inline">
+    <path d="M64 0l-64 127.999v.001h128l-64-128zm-58 123.999l54-107.999 54 108h-108v-.001z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-delta-md iconic-container iconic-md" data-width="32" data-height="32" display="none" transform="scale(4)">
+    <path d="M16 0l-16 32h32l-16-32zm-13 30l12-24 12 24h-24z" class="iconic-property-fill" />
+  </g>
+  <g class="iconic-delta-sm iconic-container iconic-sm" data-width="16" data-height="16" display="none" transform="scale(8)">
+    <path d="M8 0l-8 16h16l-8-16zm-6.5 15l5.75-11.5 5.75 11.5h-11.5z" class="iconic-property-fill" />
+  </g>
+</svg>

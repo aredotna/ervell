@@ -1,0 +1,17 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="caret" width="128" height="128" class="iconic iconic-caret" viewBox="0 0 128 128">
+  <g><title>Caret</title></g>
+  <g data-width="128" data-height="128" class="iconic-lg iconic-container" display="inline" transform="translate(24) rotate(0 40 64)">
+    <path d="M78.8 63.1l-77.6-62.2c-.7-.5-1.2-.2-1.2.6v125c0 .8.5 1.1 1.2.6l77.7-62.1c.6-.6.6-1.4-.1-1.9z" class="iconic-property-fill"/>
+  </g>
+  <g data-width="32" data-height="32" class="iconic-md iconic-container" display="none" transform="scale(4) translate(7) rotate(0 9 16)">
+    <path d="M19.6 15.7l-19.2-15.4c-.2-.2-.4-.1-.4.2v31c0 .3.2.4.4.2l19.2-15.4c.2-.2.2-.4 0-.6z" class="iconic-property-fill"/>
+  </g>
+  <g data-width="16" data-height="16" class="iconic-sm iconic-container" display="none" transform="scale(8) translate(4) rotate(0 4 8)">
+    <path class="iconic-property-fill" d="M8 8l-8-8v16z"/>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["caret"]=iconicApis["caret"]||function(t){function e(e){t.setAttribute("data-direction",e);var n=0;switch(e){case"top":n=270;break;case"left":n=180;break;case"bottom":n=90;break;default:n=0}a.setAttribute("transform","rotate("+n+" 64 64) translate(24)"),r.setAttribute("transform","scale(4) rotate("+n+" 16 16) translate(7)"),i.setAttribute("transform","scale(8) rotate("+n+" 8 8) translate(4)")}var a=t.querySelector(".iconic-lg"),r=t.querySelector(".iconic-md"),i=t.querySelector(".iconic-sm"),n=function(){var a=t.getAttribute("data-direction")||"";e(a)};return{update:n,setDirection:e}};
+//]]>
+</script>
+</svg>

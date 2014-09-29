@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-pulse" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Pulse</title>
+  </g>
+  <g class="iconic-pulse-lg iconic-container iconic-lg" data-width="128" data-height="80" display="inline" transform="translate(0 24)">
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-property-stroke" d="M124 52h-24l-10-18.5-18 36-22-58-24 58-8-17.5h-14" fill="none" />
+  </g>
+  <g class="iconic-pulse-md iconic-container iconic-md" data-width="32" data-height="24" display="none" transform="scale(4) translate(0 4)">
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-property-stroke" d="M30.5 15.5h-4.5l-3-5-5 9-5-14.5-6 14.5-2-4h-3.5" fill="none" />
+  </g>
+  <g class="iconic-pulse-sm iconic-container iconic-sm" data-width="16" data-height="13" display="none" transform="scale(8) translate(0 1)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-property-stroke" d="M15 8h-3l-1-2-2 4-2.5-7-2.5 7-1-2h-2" fill="none" />
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-box" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Box</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-box-clip-0">
+      <path d="M2 10v110h124v-110h-124zm78 18.5c0 .825-.675 1.5-1.5 1.5h-29c-.825 0-1.5-.675-1.5-1.5v-9c0-.825.675-1.5 1.5-1.5h29c.825 0 1.5.675 1.5 1.5v9z" />
+    </clipPath>
+    <clipPath id="iconic-size-md-box-clip-0">
+      <path d="M1 4v26h30v-26h-30zm19 5.5c0 .275-.225.5-.5.5h-7c-.275 0-.5-.225-.5-.5v-2c0-.275.225-.5.5-.5h7c.275 0 .5.225.5.5v2z" />
+    </clipPath>
+    <clipPath id="iconic-size-sm-box-clip-0">
+      <path d="M0 3v12h16v-12h-16zm10 3.75c0 .138-.113.25-.25.25h-3.5c-.138 0-.25-.112-.25-.25v-1.5c0-.138.112-.25.25-.25h3.5c.137 0 .25.112.25.25v1.5z" />
+    </clipPath>
+  </defs>
+  <g class="iconic-box-lg iconic-container iconic-lg" data-width="128" data-height="120" display="inline" transform="translate(0 4)">
+    <path clip-path="url(#iconic-size-lg-box-clip-0)" d="M124.5 120h-121c-.828 0-1.5-.672-1.5-1.5v-109c0-.828.672-1.5 1.5-1.5h121c.828 0 1.5.672 1.5 1.5v109c0 .828-.672 1.5-1.5 1.5z" class="iconic-box-shell iconic-property-fill" />
+    <path class="iconic-box-lid iconic-property-fill" d="M0 0h128v8h-128z" />
+  </g>
+  <g class="iconic-box-md iconic-container iconic-md" data-width="32" data-height="30" display="none" transform="scale(4) translate(0 1)">
+    <path clip-path="url(#iconic-size-md-box-clip-0)" d="M1 3.5v26c0 .276.224.5.5.5h29c.276 0 .5-.224.5-.5v-26c0-.276-.224-.5-.5-.5h-29c-.276 0-.5.224-.5.5z" class="iconic-box-shell iconic-property-fill" />
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-box-lid iconic-property-stroke" d="M1.5 1.5h29" fill="none" />
+  </g>
+  <g class="iconic-box-sm iconic-container iconic-sm" data-width="16" data-height="15" display="none" transform="scale(8)">
+    <path clip-path="url(#iconic-size-sm-box-clip-0)" d="M15.75 15h-15.5c-.138 0-.25-.112-.25-.25v-12.5c0-.138.112-.25.25-.25h15.5c.138 0 .25.112.25.25v12.5c0 .138-.112.25-.25.25z" class="iconic-box-shell iconic-property-fill" />
+    <path class="iconic-box-lid iconic-property-fill" d="M0 0h16v2h-16z" />
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-icon="laptop" width="128" height="128" class="iconic iconic-laptop" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Laptop</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-laptop-clip-0">
+      <path d="M120 0h-112v72h112v-72zm-52 72h-8c-1.1 0-2-.9-2-2h12c0 1.1-.9 2-2 2zm48-4h-104v-64h104v64zm3 6c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/>
+    </clipPath>
+    <clipPath id="iconic-size-lg-laptop-clip-1">
+      <path d="M0 70v6h128v-6h-58c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2h-58zm119 4c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z"/>
+    </clipPath>
+    <clipPath id="iconic-size-lg-laptop-clip-2">
+      <rect x="12" y="4" width="104" height="64"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-laptop-clip-0">
+      <path d="M29 0h-26v18h26v-18zm-11 17.5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-.5h4v.5zm9-1.5h-22v-14h22v14z"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-laptop-clip-1">
+      <path d="M0 17v2h32v-2h-14v.5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-.5h-14z"/>
+    </clipPath>
+    <clipPath id="iconic-size-md-laptop-clip-2">
+      <rect x="5" y="2" width="22" height="14"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-laptop-clip-0">
+      <path d="M2 0v9h4.5c-.3 0-.5-.2-.5-.5v-.5h4v.5c0 .3-.2.5-.5.5h4.5v-9h-12zm11 7h-10v-6h10v6z"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-laptop-clip-1">
+      <path d="M10 8v.5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-.5h-6v2h16v-2h-6z"/>
+    </clipPath>
+    <clipPath id="iconic-size-sm-laptop-clip-2">
+      <rect x="3" y="1" width="10" height="6"/>
+    </clipPath>
+  </defs>
+  <g data-width="128" data-height="76" class="iconic-container iconic-lg" display="inline" transform="translate(0 26)">
+    <path clip-path="url(#iconic-size-lg-laptop-clip-0)" stroke="#000" stroke-width="4" stroke-miterlimit="10" d="M116.5 70h-105c-.8 0-1.5-.7-1.5-1.5v-65c0-.8.7-1.5 1.5-1.5h105c.8 0 1.5.7 1.5 1.5v65c0 .8-.7 1.5-1.5 1.5z" class="iconic-laptop-screen-border iconic-property-stroke" fill="none"/>
+    <path clip-path="url(#iconic-size-lg-laptop-clip-1)" d="M126.5 76h-125c-.8 0-1.5-.7-1.5-1.5v-7c0-.8.7-1.5 1.5-1.5h125c.8 0 1.5.7 1.5 1.5v7c0 .8-.7 1.5-1.5 1.5z" class="iconic-laptop-base iconic-property-fill"/>
+    <image class="iconic-laptop-screenshot-image" data-max-width="104" x="12" y="4" clip-path="url(#iconic-size-lg-laptop-clip-2)"/>
+  </g>
+  <g data-width="32" data-height="19" class="iconic-container iconic-md" display="none" transform="scale(4) translate(0 6)">
+    <path clip-path="url(#iconic-size-md-laptop-clip-0)" stroke="#000" stroke-width="2" stroke-miterlimit="10" d="M27.5 17h-23c-.3 0-.5-.2-.5-.5v-15c0-.3.2-.5.5-.5h23c.3 0 .5.2.5.5v15c0 .3-.2.5-.5.5z" class="iconic-laptop-screen-border iconic-property-stroke" fill="none"/>
+    <path clip-path="url(#iconic-size-md-laptop-clip-1)" d="M31.5 19h-31c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h31c.3 0 .5.2.5.5v3c0 .3-.2.5-.5.5z" class="iconic-laptop-base iconic-property-fill"/>
+    <image class="iconic-laptop-screenshot-image" data-max-width="22" x="5" y="2" clip-path="url(#iconic-size-md-laptop-clip-2)"/>
+  </g>
+  <g data-width="16" data-height="10" class="iconic-container iconic-sm" display="none" transform="scale(8) translate(0 3)">
+    <path clip-path="url(#iconic-size-sm-laptop-clip-0)" d="M13.8 9h-11.6c-.1 0-.2-.1-.2-.2v-8.6c0-.1.1-.2.2-.2h11.5c.2 0 .3.1.3.2v8.5c0 .2-.1.3-.2.3z" class="iconic-laptop-screen-border iconic-property-fill"/>
+    <path clip-path="url(#iconic-size-sm-laptop-clip-1)" d="M15.8 10h-15.5c-.2 0-.3-.1-.3-.2v-3.6c0-.1.1-.2.3-.2h15.5c.1 0 .2.1.2.2v3.5c0 .2-.1.3-.2.3z" class="iconic-laptop-base iconic-property-fill"/>
+    <image class="iconic-laptop-screenshot-image" data-max-width="10" x="3" y="1" clip-path="url(#iconic-size-sm-laptop-clip-2)"/>
+  </g>
+<script class="iconic-api" type="application/ecmascript">
+//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["laptop"]=iconicApis["laptop"]||function(t){var e=function(e){t.setAttribute("data-screenshot",e);var i,r,a=t.querySelectorAll(".iconic-laptop-screenshot-image"),n=0,o=new Image;o.onload=function(){for(n=0;n<a.length;n++){a[n].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",e),a[n].setAttribute("display","inline");var t=o.width/o.height,c=parseInt(a[n].getAttribute("data-max-width"));r=c,i=c/t,a[n].setAttribute("height",i+"px"),a[n].setAttribute("width",r+"px")}};var c=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi,s=new RegExp(c);if(e&&e.match(s))o.src=e;else for(n=0;n<a.length;n++)a[n].setAttribute("display","none"),a[n].setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","")},i=function(){var i=t.getAttribute("data-screenshot")||"";e(i)};return{update:i,setScreenshot:e}};
+//]]>
+</script>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-loop" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Loop</title>
+  </g>
+  <g class="iconic-loop-lg iconic-container iconic-lg" data-width="112" data-height="72" display="inline" transform="translate(8 28)">
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" d="M46 58h59c1.657 0 3-1.343 3-3v-38c0-1.657-1.343-3-3-3h-5" class="iconic-loop-line iconic-loop-line-bottom iconic-property-stroke" fill="none" />
+    <path d="M25.296 58.756l21.409 12.488c.715.417 1.296.084 1.296-.744v-25c0-.828-.58-1.162-1.296-.744l-21.409 12.488c-.716.417-.716 1.094 0 1.512z" class="iconic-loop-arrowhead iconic-loop-arrowhead-bottom iconic-property-fill" />
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" d="M72 14h-65c-1.657 0-3 1.343-3 3v38c0 1.657 1.343 3 3 3h5" class="iconic-loop-line iconic-loop-line-top iconic-property-stroke" fill="none" />
+    <path d="M86.704 13.244l-21.409-12.488c-.716-.417-1.296-.084-1.296.744v25c0 .828.58 1.162 1.296.744l21.409-12.488c.716-.417.716-1.094 0-1.512z" class="iconic-loop-arrowhead iconic-loop-arrowhead-top iconic-property-fill" />
+  </g>
+  <g class="iconic-loop-md iconic-container iconic-md" data-width="30" data-height="23" display="none" transform="scale(4) translate(1 4)">
+    <path stroke="#000" stroke-width="3" d="M12 18.5h15.5c.552 0 1-.448 1-1v-12c0-.552-.448-1-1-1h-2.5" class="iconic-loop-line iconic-loop-line-bottom iconic-property-stroke" fill="none" />
+    <path d="M7.4 18.2l5.2-3.9c.221-.166.4-.076.4.2v8c0 .276-.179.366-.4.2l-5.2-3.9c-.221-.166-.221-.434 0-.6z" class="iconic-loop-arrowhead iconic-loop-arrowhead-bottom iconic-property-fill" />
+    <path stroke="#000" stroke-width="3" d="M20 4.5h-17.5c-.552 0-1 .448-1 1v12c0 .552.448 1 1 1h2.5" class="iconic-loop-line iconic-loop-line-top iconic-property-stroke" fill="none" />
+    <path d="M22.6 4.8l-5.2 3.9c-.221.166-.4.076-.4-.2v-8c0-.276.179-.366.4-.2l5.2 3.9c.221.166.221.434 0 .6z" class="iconic-loop-arrowhead iconic-loop-arrowhead-top iconic-property-fill" />
+  </g>
+  <g class="iconic-loop-sm iconic-container iconic-sm" data-width="16" data-height="14" display="none" transform="scale(8) translate(0 1)">
+    <path stroke="#000" stroke-width="2" d="M7 11h7.5c.276 0 .5-.224.5-.5v-7c0-.276-.224-.5-.5-.5h-1.5" class="iconic-loop-line iconic-loop-line-bottom iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-arrowhead iconic-loop-arrowhead-bottom iconic-property-fill" d="M7 14v-6l-3 3z" />
+    <path stroke="#000" stroke-width="2" d="M10 3h-8.5c-.276 0-.5.224-.5.5v7c0 .276.224.5.5.5h1.5" class="iconic-loop-line iconic-loop-line-top iconic-property-stroke" fill="none" />
+    <path class="iconic-loop-arrowhead iconic-loop-arrowhead-top iconic-property-fill" d="M9 0v6l3-3z" />
+  </g>
+</svg>

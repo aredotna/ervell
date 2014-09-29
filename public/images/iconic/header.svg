@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-header" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Header</title>
+  </g>
+  <g class="iconic-header-lg iconic-container iconic-lg" data-width="100" data-height="128" display="inline" transform="translate(14)">
+    <path d="M98 4h2v-4h-28v4h2c3.314 0 6 2.686 6 6v52h-60v-52c0-3.314 2.686-6 6-6h2v-4h-28v4h2c3.314 0 6 2.686 6 6v108c0 3.314-2.686 6-6 6h-2v4h28v-4h-2c-3.314 0-6-2.686-6-6v-50h60v50c0 3.314-2.686 6-6 6h-2v4h28v-4h-2c-3.314 0-6-2.686-6-6v-108c0-3.314 2.686-6 6-6z"
+    class="iconic-property-fill" />
+  </g>
+  <g class="iconic-header-md iconic-container iconic-md" data-width="27" data-height="32" display="none" transform="scale(4) translate(2)">
+    <path d="M26 1h1v-1h-9v1h1c1.105 0 2 .895 2 2v12h-15v-12c0-1.105.895-2 2-2h1v-1h-9v1h1c1.105 0 2 .895 2 2v26c0 1.105-.895 2-2 2h-1v1h9v-1h-1c-1.105 0-2-.895-2-2v-12h15v12c0 1.105-.895 2-2 2h-1v1h9v-1h-1c-1.105 0-2-.895-2-2v-26c0-1.105.895-2 2-2z" class="iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-header-sm iconic-container iconic-sm" data-width="15" data-height="16" display="none" transform="scale(8)">
+    <path d="M14 1h1v-1h-6v1h1c.552 0 1 .448 1 1v5h-7v-5c0-.552.448-1 1-1h1v-1h-6v1h1c.552 0 1 .448 1 1v12c0 .552-.448 1-1 1h-1v1h6v-1h-1c-.552 0-1-.448-1-1v-5h7v5c0 .552-.448 1-1 1h-1v1h6v-1h-1c-.552 0-1-.448-1-1v-12c0-.552.448-1 1-1z" class="iconic-property-fill"
+    />
+  </g>
+</svg>

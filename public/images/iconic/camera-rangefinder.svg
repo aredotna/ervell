@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-camera-rangefinder" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Camera Rangefinder</title>
+  </g>
+  <defs>
+    <clipPath id="iconic-size-lg-camera-rangefinder-clip-0">
+      <path d="M0 78h128v2h-128v-2zm85.85-52c7.298 4.604 12.15 12.733 12.15 22 0 14.359-11.641 26-26 26-12.95 0-23.685-9.469-25.668-21.86-1.093 1.143-2.629 1.86-4.332 1.86-3.309 0-6-2.691-6-6s2.691-6 6-6c1.707 0 3.247.72 4.34 1.869 1.203-7.519 5.62-13.964 11.81-17.869h-58.15v50h128v-50h-42.15z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-lg-camera-rangefinder-clip-1">
+      <path d="M48 2v4h-48v18h61.989c3.082-1.287 6.463-2 10.011-2s6.929.713 10.011 2h45.989v-22h-80zm-6 13.75c0 .138-.113.25-.25.25h-7.5c-.138 0-.25-.113-.25-.25v-3.5c0-.138.113-.25.25-.25h7.5c.138 0 .25.113.25.25v3.5zm48 2c0 .138-.113.25-.25.25h-13.5c-.138 0-.25-.113-.25-.25v-9.5c0-.137.112-.25.25-.25h13.5c.138 0 .25.113.25.25v9.5zm26 2c0 .138-.113.25-.25.25h-19.5c-.138 0-.25-.113-.25-.25v-13.5c0-.138.112-.25.25-.25h19.5c.138 0 .25.113.25.25v13.5z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-md-camera-rangefinder-clip-0">
+      <path d="M12 0v1h-12v19h32v-20h-20zm6 2.125c0-.069.056-.125.125-.125h3.75c.069 0 .125.056.125.125v1.75c0 .069-.056.125-.125.125h-3.75c-.069 0-.125-.056-.125-.125v-1.75zm0 15.875c-2.978 0-5.443-2.172-5.913-5.018-.03.003-.056.018-.087.018h-1c-.552 0-1-.448-1-1s.448-1 1-1h1c.031 0 .057.015.087.018.47-2.845 2.934-5.018 5.913-5.018 3.314 0 6 2.686 6 6s-2.686 6-6 6zm11-13.125c0 .069-.056.125-.125.125h-4.75c-.069 0-.125-.056-.125-.125v-3.75c0-.069.056-.125.125-.125h4.75c.069 0 .125.056.125.125v3.75z"
+      />
+    </clipPath>
+    <clipPath id="iconic-size-sm-camera-rangefinder-clip-0">
+      <path d="M6 0v1h-6v9h16v-10h-10zm4 1.125c0-.069.056-.125.125-.125h.75c.069 0 .125.056.125.125v.75c0 .069-.056.125-.125.125h-.75c-.069 0-.125-.056-.125-.125v-.75zm-1 7.875c-1.317 0-2.424-.854-2.827-2.035-.058.011-.112.035-.173.035h-1c-.552 0-1-.448-1-1s.448-1 1-1h1c.061 0 .115.024.173.035.403-1.181 1.51-2.035 2.827-2.035 1.657 0 3 1.343 3 3s-1.343 3-3 3zm5-7.125c0 .069-.056.125-.125.125h-1.75c-.069 0-.125-.056-.125-.125v-.75c0-.069.056-.125.125-.125h1.75c.069 0 .125.056.125.125v.75z"
+      />
+    </clipPath>
+  </defs>
+  <g class="iconic-camera-rangefinder-lg iconic-container iconic-lg" data-width="128" data-height="80" display="inline" transform="translate(0 24)">
+    <path class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-shutter-release iconic-camera-rangefinder-controls-shutter-release-button iconic-property-fill" d="M18 0h8v4h-8z" />
+    <path class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-shutter-release iconic-camera-rangefinder-controls-shutter-release-base iconic-property-fill" d="M16 2h12v4h-12z" />
+    <path class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-shutter-speed-dial iconic-property-fill" d="M30 2h16v4h-16z" />
+    <path d="M38 48c0 2.206 1.794 4 4 4s4-1.794 4-4-1.794-4-4-4-4 1.794-4 4z" class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-lens-release iconic-property-fill" />
+    <path clip-path="url(#iconic-size-lg-camera-rangefinder-clip-0)" d="M125 80h-122c-1.657 0-3-1.343-3-3v-54c0-1.657 1.343-3 3-3h122c1.657 0 3 1.343 3 3v54c0 1.657-1.343 3-3 3z" class="iconic-camera-rangefinder-body iconic-camera-rangefinder-body-bottom iconic-property-fill"
+    />
+    <path clip-path="url(#iconic-size-lg-camera-rangefinder-clip-1)" d="M126.5 28h-125c-.828 0-1.5-.672-1.5-1.5v-19c0-.828.672-1.5 1.5-1.5h45c.828 0 1.5-.672 1.5-1.5v-1c0-.828.672-1.5 1.5-1.5h77c.828 0 1.5.672 1.5 1.5v23c0 .828-.672 1.5-1.5 1.5z" class="iconic-camera-rangefinder-body iconic-camera-rangefinder-body-top iconic-property-fill"
+    />
+    <path d="M72 24c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm0 46c-12.131 0-22-9.869-22-22s9.869-22 22-22 22 9.869 22 22-9.869 22-22 22z" class="iconic-camera-rangefinder-lens iconic-camera-rangefinder-lens-barrel iconic-property-fill"
+    />
+    <path d="M72 28c-11.046 0-20 8.954-20 20s8.954 20 20 20 20-8.954 20-20-8.954-20-20-20zm0 4c-8.822 0-16 7.178-16 16 0 .552-.448 1-1 1s-1-.448-1-1c0-9.925 8.075-18 18-18 .552 0 1 .448 1 1s-.448 1-1 1z" class="iconic-camera-rangefinder-lens iconic-camera-rangefinder-lens-glass iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-camera-rangefinder-md iconic-container iconic-md" data-width="32" data-height="20" display="none" transform="scale(4) translate(0 6)">
+    <path class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-shutter-release iconic-property-fill" d="M3 0h3v1h-3z" />
+    <path class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-shutter-speed-dial iconic-property-fill" d="M7 0h4v1h-4z" />
+    <path d="M31 20h-30c-.552 0-1-.448-1-1v-17c0-.552.448-1 1-1h10c.552 0 1-.224 1-.5s.448-.5 1-.5h18c.552 0 1 .448 1 1v18c0 .552-.448 1-1 1z" clip-path="url(#iconic-size-md-camera-rangefinder-clip-0)" class="iconic-camera-rangefinder-body iconic-property-fill"
+    />
+    <path d="M18 7c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 2c-1.654 0-3 1.346-3 3 0 .276-.224.5-.5.5s-.5-.224-.5-.5c0-2.206 1.794-4 4-4 .276 0 .5.224.5.5s-.224.5-.5.5z" class="iconic-camera-rangefinder-lens iconic-camera-rangefinder-lens-glass iconic-property-accent iconic-property-fill"
+    />
+  </g>
+  <g class="iconic-camera-rangefinder-sm iconic-container iconic-sm" data-width="16" data-height="10" display="none" transform="scale(8) translate(0 3)">
+    <path class="iconic-camera-rangefinder-controls iconic-camera-rangefinder-controls-shutter-release iconic-property-fill" d="M1 0h2v1h-2z" />
+    <path clip-path="url(#iconic-size-sm-camera-rangefinder-clip-0)" class="iconic-camera-rangefinder-body iconic-property-fill" d="M16 10h-16v-9h6v-1h10z" />
+    <circle cx="9" cy="6" r="2" class="iconic-camera-rangefinder-lens iconic-camera-rangefinder-lens-glass iconic-property-accent iconic-property-fill" />
+  </g>
+</svg>

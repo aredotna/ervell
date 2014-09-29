@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="iconic iconic-graph" width="128" height="128" viewBox="0 0 128 128">
+  <g class="iconic-metadata">
+    <title>Graph</title>
+  </g>
+  <g class="iconic-graph-lg iconic-container iconic-lg" data-width="128" data-height="78" display="inline" transform="translate(0 25)">
+    <path stroke="#000" stroke-width="8" stroke-linecap="square" class="iconic-graph-chart iconic-property-stroke" d="M8 50l24-24 18 14 22-22 20 16 28-28" fill="none" />
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-graph-axis iconic-property-accent iconic-property-stroke" d="M1 77h126" fill="none" />
+  </g>
+  <g class="iconic-graph-md iconic-container iconic-md" data-width="32" data-height="21" display="none" transform="scale(4) translate(0 5)">
+    <path stroke="#000" stroke-width="3" stroke-linecap="square" class="iconic-graph-chart iconic-property-stroke" d="M2.5 13.5l5-6 6 4 5-6 5 4 6-6.8" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-graph-axis iconic-property-accent iconic-property-stroke" d="M.5 20.5h31" fill="none" />
+  </g>
+  <g class="iconic-graph-sm iconic-container iconic-sm" data-width="16" data-height="12" display="none" transform="scale(8) translate(0 2)">
+    <path stroke="#000" stroke-width="2" stroke-linecap="square" class="iconic-graph-chart iconic-property-stroke" d="M1.5 6.5l2.5-2.5 2 2 3-3 2 2 3.5-3.5" fill="none" />
+    <path stroke="#000" stroke-linecap="square" class="iconic-graph-axis iconic-property-accent iconic-property-stroke" d="M.5 11.5h15" fill="none" />
+  </g>
+</svg>
