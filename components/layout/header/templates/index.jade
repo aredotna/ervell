@@ -1,5 +1,7 @@
 header#layout-header
-  img(data-src="#{sd.IMAGE_PATH}iconic/magnifying-glass.svg", src="{sd.IMAGE_PATH}iconic/magnifying-glass.svg", class="iconic iconic-md header--icon")
+  //- img(src="#{sd.IMAGE_PATH}iconic/magnifying-glass.svg", class="iconic iconic-md header--icon")
+  .header--icon
+    include ../../../../public/images/iconic/magnifying-glass.svg
   .layout-header__search
     input#layout-header__search__input(type="text", placeholder="Search Arena")
     .layout-header__search__close.pointer &times;
