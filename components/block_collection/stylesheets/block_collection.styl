@@ -29,10 +29,14 @@
   display none
 
 .grid__block--user .grid__block__inner
-  border: 2px solid lightgray
+  border: 0px solid lightgray
+  background-color backgroundgray
 
 .grid__block--text .valign-inner
   vertical-align top
+
+.grid__block .grid__block--channel
+  color
 
 .grid__block__inner
   width 100%
@@ -62,18 +66,19 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
   background-position: center
   background-size: 40%
   background-repeat: no-repeat
-  transition opacity 0.1s
+  transition (opacity 0.2s)
+
 
 .grid__block:hover .grid__block__overlay
   opacity 1
-  background-color rgba(255,255,255, 0.9)
-  border 2px solid textgray
+  background-color rgba(255,255,255, 0.92)
+  border 2px solid bordergray
 
 .grid__block.grid__block--text:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0.9)
+  background-color rgba(255,255,255, 0.92)
 
 .grid__block.grid__block--channel:hover .grid__block__overlay, .grid__block.grid__block--user:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0.9)
+  background-color rgba(255,255,255, 0.92)
   opacity 0
 
 
@@ -86,7 +91,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
   font-size caption
   padding-top 20px
   font-weight bold
-  color hovergray
+  color textgray
 
   span
     padding 0 5px
