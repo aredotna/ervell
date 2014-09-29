@@ -9,8 +9,6 @@
 BIN = node_modules/.bin
 MIN_FILE_SIZE = 1000
 
-
-
 # Start the server
 s:
 	$(BIN)/coffee index.coffee
