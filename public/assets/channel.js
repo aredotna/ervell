@@ -721,7 +721,7 @@ buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" :
 if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
-buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
@@ -762,7 +762,7 @@ buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" :
 if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
-buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
@@ -955,7 +955,7 @@ buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" :
 if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
-buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
@@ -996,7 +996,7 @@ buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" :
 if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
-buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
@@ -1100,7 +1100,7 @@ buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" :
 if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
-buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
@@ -1141,7 +1141,7 @@ buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('title')) ? "" :
 if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
-buf.push("<h3>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h3>");
+buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
