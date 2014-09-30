@@ -1365,7 +1365,7 @@ var jade_mixins = {};
 var jade_interp;
 ;var locals_for_with = (locals || {});(function (block, sd) {
 buf.push("<div id=\"l-lightbox-container_inner\"><div class=\"lightbox__content valign-outer\"><div class=\"valign-inner\">");
-if(block.has('image'))
+if(block.has('image') && block.get('class') != 'Media')
 {
 buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('original')) + "", true, false)) + " class=\"lightbox__content__img\"/>");
 }
@@ -1376,6 +1376,10 @@ buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg
 if(block.get('class') == 'Text')
 {
 buf.push("<div class=\"lightbox__content__text\">" + (null == (jade_interp = block.get('content_html')) ? "" : jade_interp) + "</div>");
+}
+if(block.get('class') == 'Media')
+{
+buf.push("<div class=\"lightbox__content__media\">" + (null == (jade_interp = block.get('embed').html) ? "" : jade_interp) + "</div>");
 }
 if(block.has('title'))
 {
