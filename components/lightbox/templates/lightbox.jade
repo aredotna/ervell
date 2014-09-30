@@ -1,7 +1,7 @@
 #l-lightbox-container_inner
   .lightbox__content.valign-outer
     .valign-inner
-      - if(block.has('image'))
+      - if(block.has('image') && block.get('class') != 'Media')
         img.lightbox__content__img(src="#{block.getImageSize('original')}")
 
       - if(block.get('class') == 'Attachment')
@@ -9,6 +9,9 @@
 
       - if(block.get('class') == 'Text')
         .lightbox__content__text!= block.get('content_html')
+
+      - if(block.get('class') == 'Media')
+        .lightbox__content__media!= block.get('embed').html
 
       - if(block.has('title'))
         h2.lightbox__content__title= block.get('title')

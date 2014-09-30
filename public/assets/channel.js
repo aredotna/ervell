@@ -1381,10 +1381,6 @@ if(block.has('title'))
 {
 buf.push("<h2 class=\"lightbox__content__title\">" + (jade.escape(null == (jade_interp = block.get('title')) ? "" : jade_interp)) + "</h2>");
 }
-if(block.get('attachment').url)
-{
-buf.push("<a" + (jade.attr("href", "" + (block.get('attachment').url) + "", true, false)) + " target=\"_blank\"><span data-glyph=\"data-transfer-download\" class=\"iconic dropdown__icon\">&nbsp;Download</span></a>");
-}
 if(block.has('description'))
 {
 buf.push("<div class=\"lightbox__content__description\">" + (null == (jade_interp = block.get('description_html')) ? "" : jade_interp) + "</div>");
