@@ -29,15 +29,16 @@ section.path
             | Description:
           .metadata__text
             = channel.get('metadata').description
-      .metadata__column
-        .metadata__title
-          | Contributors:
-        .metadata__text
-          a(href="#") Charles Broskoski, 
-          a(href="#") Chris Sherron, 
-          a(href="#") Morgan Sutherland, 
-          a(href="#") Daniel Pianetti, 
-          | ...
+      if channel.get('collaboration')
+        .metadata__column
+          .metadata__title
+            | Contributors:
+          .metadata__text
+            a(href="#") Charles Broskoski, 
+            a(href="#") Chris Sherron, 
+            a(href="#") Morgan Sutherland, 
+            a(href="#") Daniel Pianetti, 
+            | ...
       .metadata__column
         .metadata__title
           | Followers:
@@ -68,3 +69,9 @@ section.path
           | Followers:
         .metadata__text
           = author.get('follower_count')
+
+      .metadata__column
+        .metadata__title
+          | Following:
+        .metadata__text
+          = author.get('following_count')
