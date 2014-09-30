@@ -661,7 +661,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (blocks, channel) {
+;var locals_for_with = (locals || {});(function (blocks, sd, channel) {
 jade_mixins["avatar"] = function(user){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 var splitName = user.get('username').split(" ")
@@ -723,6 +723,10 @@ if(block.get('class') == 'User')
 jade_mixins["avatar"](block);
 buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
+}
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
 {
@@ -764,6 +768,10 @@ if(block.get('class') == 'User')
 jade_mixins["avatar"](block);
 buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
+}
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
 {
@@ -781,7 +789,7 @@ buf.push("</a></div>");
 
   }
 }).call(this);
-}("blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
+}("blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
 };
 },{"jade/runtime":30}],10:[function(require,module,exports){
 var $, Backbone, FeedView, feedTemplate, sd,
@@ -870,7 +878,7 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (feed, blocks, channel) {
+;var locals_for_with = (locals || {});(function (feed, blocks, channel, sd) {
 // iterate feed
 ;(function(){
   var $$obj = feed;
@@ -957,6 +965,10 @@ if(block.get('class') == 'User')
 jade_mixins["avatar"](block);
 buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
+}
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
 {
@@ -997,6 +1009,10 @@ if(block.get('class') == 'User')
 {
 jade_mixins["avatar"](block);
 buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
+}
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
 }
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
@@ -1102,6 +1118,10 @@ if(block.get('class') == 'User')
 jade_mixins["avatar"](block);
 buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
+}
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
 {
@@ -1143,6 +1163,10 @@ if(block.get('class') == 'User')
 jade_mixins["avatar"](block);
 buf.push("<h2>" + (jade.escape(null == (jade_interp = block.get('username')) ? "" : jade_interp)) + "</h2>");
 }
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
+}
 buf.push("</div></div><div" + (jade.cls(['grid__block__overlay','abs-fill',"grid__block__overlay--privacy-" + ( block.getVisibility() ) + ""], [null,null,true])) + "><div class=\"grid__block__mini-feed\">");
 if(channel)
 {
@@ -1166,7 +1190,7 @@ buf.push("</div></div>");
 
   }
 }).call(this);
-}("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined,"blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
+}("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined,"blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined));;return buf.join("");
 };
 },{"jade/runtime":30}],13:[function(require,module,exports){
 var jade = require("jade/runtime");
@@ -1339,11 +1363,15 @@ module.exports = function template(locals) {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (block) {
+;var locals_for_with = (locals || {});(function (block, sd) {
 buf.push("<div id=\"l-lightbox-container_inner\"><div class=\"lightbox__content valign-outer\"><div class=\"valign-inner\">");
 if(block.has('image'))
 {
 buf.push("<img" + (jade.attr("src", "" + (block.getImageSize('original')) + "", true, false)) + " class=\"lightbox__content__img\"/>");
+}
+if(block.get('class') == 'Attachment')
+{
+buf.push("<img" + (jade.attr("data-src", "" + (sd.IMAGE_PATH) + "iconic/file.svg", true, false)) + (jade.attr("data-file-extension", "" + (block.get('attachment').extension) + "", true, false)) + " class=\"iconic iconic-lg\"/>");
 }
 if(block.get('class') == 'Text')
 {
@@ -1357,7 +1385,7 @@ if(block.has('description'))
 {
 buf.push("<div class=\"lightbox__content__description\">" + (null == (jade_interp = block.get('description_html')) ? "" : jade_interp) + "</div>");
 }
-buf.push("</div></div><div id=\"lightbox__feed\" class=\"lightbox__feed\"></div></div><a class=\"lightbox--close\"><h1>&times;</h1></a>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined));;return buf.join("");
+buf.push("</div></div><div id=\"lightbox__feed\" class=\"lightbox__feed\"></div></div><a class=\"lightbox--close\"><h1>&times;</h1></a>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined));;return buf.join("");
 };
 },{"jade/runtime":30}],17:[function(require,module,exports){
 var $, Backbone, Block, Blocks, Channel, NewBlockView, sd,
