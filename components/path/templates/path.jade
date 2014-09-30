@@ -23,12 +23,13 @@ section.path
 
   else if channel
     .metadata
+      if channel.has('metadata')
+        .metadata__column
+          .metadata__title
+            | Description:
+          .metadata__text
+            = channel.get('metadata').description
       .metadata__column
-        .metadata__title
-          | Description:
-        .metadata__text
-          | This is the story of the channel, not too long.
-      .metadata__column 
         .metadata__title
           | Contributors:
         .metadata__text
@@ -37,22 +38,22 @@ section.path
           a(href="#") Morgan Sutherland, 
           a(href="#") Daniel Pianetti, 
           | ...
-      .metadata__column  
+      .metadata__column
         .metadata__title
           | Followers:
         .metadata__text
-          | 132
+          = channel.get('follower_count')
 
   else if author
     .metadata
       .metadata__column
         .metadata__title
-          | Info: 
+          | Info:
         .metadata__text
           | Son of @broskoski, father of a cat. NYC.
           a(href="#")  Noway.com
 
-      .metadata__column    
+      .metadata__column
         .metadata__title
           | View:
         .metadata__text
@@ -62,8 +63,8 @@ section.path
           |  /
           a(href="#") Blocks
 
-      .metadata__column    
+      .metadata__column
         .metadata__title
           | Followers:
         .metadata__text
-          | 53k
+          = author.get('follower_count')
