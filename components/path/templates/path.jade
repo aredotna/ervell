@@ -10,3 +10,60 @@ section.path
       span.separator /
       span.active.channel(class="privacy-#{channel.get('status')}")
         = channel.get('title')
+
+  if !channel && !author
+    .metadata
+      .metadata__column
+        .metadata__title
+          | View:
+        .metadata__text
+          a(href="#").active Feed
+          |  / 
+          a(href="#") Explore
+
+  else if channel
+    .metadata
+      .metadata__column
+        .metadata__title
+          | Description:
+        .metadata__text
+          | This is the story of the channel, not too long.
+      .metadata__column 
+        .metadata__title
+          | Contributors:
+        .metadata__text
+          a(href="#") Charles Broskoski, 
+          a(href="#") Chris Sherron, 
+          a(href="#") Morgan Sutherland, 
+          a(href="#") Daniel Pianetti, 
+          | ...
+      .metadata__column  
+        .metadata__title
+          | Followers:
+        .metadata__text
+          | 132
+
+  else if author
+    .metadata
+      .metadata__column
+        .metadata__title
+          | Info: 
+        .metadata__text
+          | Son of @broskoski, father of a cat. NYC.
+          a(href="#")  Noway.com
+
+      .metadata__column    
+        .metadata__title
+          | View:
+        .metadata__text
+          a(href="#") All
+          |  / 
+          a(href="#").active Channels
+          |  /
+          a(href="#") Blocks
+
+      .metadata__column    
+        .metadata__title
+          | Followers:
+        .metadata__text
+          | 53k
