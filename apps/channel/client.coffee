@@ -12,19 +12,19 @@ blockCollectionTemplate = -> require('../../components/block_collection/template
 module.exports = class BlockSkeletonView extends Backbone.View
 
   initialize: ->
-    # @collection.on "sync", @render, @
+    @collection.on "merge:skeleton", @renderSkeleton, @
 
-    @collection.fetch
-      reset: true
-      data:
-        page: 1
-        per: 12
+    @collection.loadSkeleton()
 
     super
 
   render: ->
     console.log 'rendering'
     @$el.html blockCollectionTemplate(blocks: @collection.models)
+
+  renderSkeleton: ->
+    console.log 'will eventually render skeleton', @collection
+    # nothing for now
 
 module.exports.init = ->
   current_user = new CurrentUser sd.CURRENT_USER
