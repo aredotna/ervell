@@ -31,7 +31,8 @@ module.exports = class ChannelBlocks extends Blocks
       model = models.shift()
 
       # if model doesn't exist, add
-      @add(model, silent: true) if !@get(model.id)
+      if !@get(model.id)
+        @add(model)
 
       _.defer mergeSkeletonModel
 

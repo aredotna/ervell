@@ -8,10 +8,12 @@ CurrentUser = require '../../models/current_user.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 blockCollectionTemplate = -> require('../../components/block_collection/templates/block_collection.jade') arguments...
+blockTemplate = -> require('../../components/block_collection/templates/block.jade') arguments...
 
 module.exports = class BlockSkeletonView extends Backbone.View
 
   initialize: ->
+    @collection.on "add", @appendBlock, @
     @collection.on "merge:skeleton", @renderSkeleton, @
 
     @collection.loadSkeleton()
@@ -19,12 +21,15 @@ module.exports = class BlockSkeletonView extends Backbone.View
     super
 
   render: ->
-    console.log 'rendering'
     @$el.html blockCollectionTemplate(blocks: @collection.models)
 
   renderSkeleton: ->
     console.log 'will eventually render skeleton', @collection
     # nothing for now
+
+  appendBlock: (model)->
+    console.log 'adding block'
+    @$el.append blockTemplate(block: model)
 
 module.exports.init = ->
   current_user = new CurrentUser sd.CURRENT_USER
