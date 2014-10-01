@@ -1,0 +1,30 @@
+include ../../avatar/templates/avatar
+
+div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}")
+  a(href="#{block.getHref()}")
+    .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")
+      - if(block.get('class') != 'Channel' || block.get('class') != 'User')
+        .grid__block__content.valign-outer
+          .valign-inner
+            - if(block.has('image'))
+              img(src="#{block.getImageSize('display')}").grid__block__content__image
+            - if(block.get('class') == 'Text')
+              .grid__block__content__text
+                != block.get('content_html')
+            - if(block.get('class') == 'Channel')
+              h2=block.get('title')
+            - if(block.get('class') == 'User')
+              +avatar(block)
+              h2=block.get('username')
+            - if(block.get('class') == 'Attachment')
+              img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+        .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+          .grid__block__mini-feed
+            - if(channel)
+              ul.bare-list
+                li
+                  span(data-href="/#{block.get('connected_by_user_slug')}").inline-link.username=block.get('connected_by_username')
+                  span.arrow &#x279d;
+                  span.inline-link.channel=channel.smartTruncate(channel.get('title'), 30)
+    - if(block.get('class') != 'Channel')
+      p.grid__block__title= block.smartTruncate(block.get('title'))
