@@ -3,6 +3,10 @@ section.path
     span.root
       a(href='/') Are.na
     span.separator /
+    if !channel && !author
+      a(href="#") feed  
+      span.unactive &#8644; 
+        a(href="#") explore
     if author
       span.username
         a(href="/" + author.get('slug'))=author.get('username')
@@ -11,17 +15,7 @@ section.path
       span.active.channel(class="privacy-#{channel.get('status')}")
         = channel.get('title')
 
-  if !channel && !author
-    .metadata
-      .metadata__column
-        .metadata__title
-          | View:
-        .metadata__text
-          a(href="#").active Feed
-          |  / 
-          a(href="#") Explore
-
-  else if channel
+  if channel
     .metadata
       if channel.has('metadata')
         .metadata__column
@@ -75,3 +69,15 @@ section.path
           | Following:
         .metadata__text
           = author.get('following_count')
+//-
+  if !channel && !author
+    .metadata
+      .metadata__column
+        .metadata__title
+          | View:
+        .metadata__text
+          a(href="#").active Feed
+          |  / 
+          a(href="#") Explore 
+
+
