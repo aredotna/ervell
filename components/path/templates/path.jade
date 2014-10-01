@@ -5,7 +5,8 @@ section.path
     span.separator /
     if !channel && !author
       a(href="#") feed  
-      span.unactive &#8644; 
+      span.unactive 
+        span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
         a(href="#") explore
     if author
       span.username
