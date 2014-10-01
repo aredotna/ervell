@@ -17,6 +17,9 @@ for block in blocks
               - if(block.get('class') == 'User')
                 +avatar(block)
                 h2=block.get('username')
+              - if(block.get('class') == 'Comment')
+                .grid__block__content__comment
+                  p This is a test comment Cab can you fetch the actual content in the template
               - if(block.get('class') == 'Attachment')
                 img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
           .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
