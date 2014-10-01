@@ -4,8 +4,8 @@ section.path
       a(href='/') Are.na
     span.separator /
     if !channel && !author
-      a(href="#") feed  
-      span.unactive 
+      span.root--active feed  
+      span.root--unactive 
         span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
         a(href="#") explore
     if author
@@ -54,7 +54,7 @@ section.path
         .metadata__text
           a(href="#") All
           |  / 
-          a(href="#").active Channels
+          a(href="#").metadata--active Channels
           |  /
           a(href="#") Blocks
 
