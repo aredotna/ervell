@@ -63,8 +63,9 @@ module.exports = BlockSkeletonView = (function(_super) {
   };
 
   BlockSkeletonView.prototype.updateBlock = function(id, model) {
-    console.log('updateBlock', id, model, this.$el.find("#" + id));
-    return this.$el.find("#" + id).html(blockTemplate({
+    var $block;
+    $block = this.$el.find("#" + id);
+    return $block.replaceWith(blockTemplate({
       block: model
     }));
   };

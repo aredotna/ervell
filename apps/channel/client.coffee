@@ -32,7 +32,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @$el.append blockTemplate(block: model)
 
   updateBlock: (id, model)->
-    $block = @$el.find("##{id}")
+    $block = $("##{id}")
     $block.replaceWith blockTemplate(block: model)
 
   renderSkeleton: ->
