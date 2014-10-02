@@ -28,7 +28,7 @@ module.exports = class ChannelBlocks extends Blocks
 
   loadPage: (page)->
     console.log 'loadPage'
-    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=#{@options.per}&page=#{page}", (response) =>
+    $.get "#{sd.API_URL}/channels/#{@slug}/contents?per=#{@options.per}&page=#{page}", (response) =>
       @replacePlaceholders(response.contents, page, @loadDirection)
 
   mergeSkeleton: (models) ->
@@ -54,9 +54,10 @@ module.exports = class ChannelBlocks extends Blocks
 
       retrieveFn = if direction is 'up' then 'pop' else 'shift'
 
-      model = models[retrieveFn]()
+      model = new Block models[retrieveFn]()
 
       @get(model.id).set(model, sort:false)
+      @trigger 'model:updated', model.id, model
 
       _.defer replacePlaceholder
     )()

@@ -1,6 +1,6 @@
 include ../../avatar/templates/avatar
 
-div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}")
+div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}" id="#{block.id}")
   a(href="#{block.getHref()}")
     .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")
       - if(block.get('class') != 'Channel' || block.get('class') != 'User')

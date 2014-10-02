@@ -18,6 +18,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
     console.log 'initialize BlockSkeletonView'
     @collection.on "add", @appendBlock, @
     @collection.on "merge:skeleton", @renderSkeleton, @
+    @collection.on "model:updated", @updateBlock, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
     @collection.loadSkeleton()
@@ -29,6 +30,10 @@ module.exports = class BlockSkeletonView extends Backbone.View
 
   appendBlock: (model)->
     @$el.append blockTemplate(block: model)
+
+  updateBlock: (id, model)->
+    console.log 'updateBlock', id, model, @$el.find("##{id}")
+    @$el.find("##{id}").html blockTemplate(block: model)
 
   renderSkeleton: ->
     @queue = []
