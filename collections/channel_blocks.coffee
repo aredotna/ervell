@@ -8,6 +8,9 @@ Block = require("../models/block.coffee")
 mediator = require '../lib/mediator.coffee'
 
 module.exports = class ChannelBlocks extends Blocks
+  defaultOptions:
+    per: 6
+    page: 1
 
   model: Block
 
@@ -15,12 +18,18 @@ module.exports = class ChannelBlocks extends Blocks
 
   parse: (data)-> data.contents
 
-  initialize: (models, options) -> @slug = options?.channel_slug
+  initialize: (models, options) ->
+    @slug = options?.channel_slug
+    super
 
   loadSkeleton: ->
-    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=6&page=2", (response) =>
-      console.log 'loadSkeleton', response
+    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=#{@options.per}&page=2", (response) =>
       @mergeSkeleton(response.contents)
+
+  loadPage: (page)->
+    console.log 'loadPage'
+    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=#{@options.per}&page=#{page}", (response) =>
+      @replacePlaceholders(response.contents, page, @loadDirection)
 
   mergeSkeleton: (models) ->
 
@@ -38,10 +47,10 @@ module.exports = class ChannelBlocks extends Blocks
 
     )()
 
-  replacePlaceholders: (models, page, direction, callback) ->
+  replacePlaceholders: (models, page, direction) ->
     (replacePlaceholder = =>
       unless models.length
-        return mediator.publish 'placeholders:replaced', page
+        return @trigger 'placeholders:replaced', page
 
       retrieveFn = if direction is 'up' then 'pop' else 'shift'
 
