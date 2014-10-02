@@ -32,8 +32,8 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @$el.append blockTemplate(block: model)
 
   updateBlock: (id, model)->
-    console.log 'updateBlock', id, model, @$el.find("##{id}")
-    @$el.find("##{id}").html blockTemplate(block: model)
+    $block = @$el.find("##{id}")
+    $block.replaceWith blockTemplate(block: model)
 
   renderSkeleton: ->
     @queue = []
@@ -95,10 +95,10 @@ module.exports = class BlockSkeletonView extends Backbone.View
 
   get: (id) -> @pages[id]
 
-  pageLoading: (id) -> 
+  pageLoading: (id) ->
     @pages[id].loading = true
 
-  pageLoaded: (id) -> 
+  pageLoaded: (id) ->
     @pages[id].loaded = true
     --@loading
     @startLoad()

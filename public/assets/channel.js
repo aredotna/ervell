@@ -1,21 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var $, Backbone, BlockCollectionView, BlockSkeletonView, Channel, ChannelBlocks, CurrentUser, NewBlockView, blockCollectionTemplate, blockTemplate, sd,
+var Backbone, BlockCollectionView, BlockSkeletonView, Channel, ChannelBlocks, CurrentUser, NewBlockView, blockCollectionTemplate, blockTemplate, mediator, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 Backbone = require("backbone");
 
-$ = require('jquery');
-
 Backbone.$ = $;
 
+_ = require('underscore');
+
 sd = require("sharify").data;
+
+mediator = require('../../lib/mediator.coffee');
 
 Channel = require('../../models/channel.coffee');
 
 ChannelBlocks = require('../../collections/channel_blocks.coffee');
 
 CurrentUser = require('../../models/current_user.coffee');
+
+NewBlockView = require('../../components/new_block/client/new_block_view.coffee');
 
 NewBlockView = require('../../components/new_block/client/new_block_view.coffee');
 
@@ -37,8 +41,11 @@ module.exports = BlockSkeletonView = (function(_super) {
   }
 
   BlockSkeletonView.prototype.initialize = function() {
+    console.log('initialize BlockSkeletonView');
     this.collection.on("add", this.appendBlock, this);
     this.collection.on("merge:skeleton", this.renderSkeleton, this);
+    this.collection.on("model:updated", this.updateBlock, this);
+    this.collection.on("placeholders:replaced", this.completeRequest, this);
     this.collection.loadSkeleton();
     return BlockSkeletonView.__super__.initialize.apply(this, arguments);
   };
@@ -49,15 +56,206 @@ module.exports = BlockSkeletonView = (function(_super) {
     }));
   };
 
-  BlockSkeletonView.prototype.renderSkeleton = function() {
-    return console.log('will eventually render skeleton', this.collection);
-  };
-
   BlockSkeletonView.prototype.appendBlock = function(model) {
-    console.log('adding block');
     return this.$el.append(blockTemplate({
       block: model
     }));
+  };
+
+  BlockSkeletonView.prototype.updateBlock = function(id, model) {
+    console.log('updateBlock', id, model, this.$el.find("#" + id));
+    return this.$el.find("#" + id).html(blockTemplate({
+      block: model
+    }));
+  };
+
+  BlockSkeletonView.prototype.renderSkeleton = function() {
+    this.queue = [];
+    this.pages = [];
+    return this.addWaypoints();
+  };
+
+  BlockSkeletonView.prototype.addWaypoints = function() {
+    var sel, that;
+    sel = '.grid__block';
+    this.$("" + sel + ":nth-child(" + this.collection.options.per + "n)").not('.grid__block--new-block').each((function(_this) {
+      return function(i, el) {
+        if (!$(el).is(_this.$("" + sel + ":last"))) {
+          _this.addPage(i + 2);
+          return $(el).after("<span id='page-" + (i + 2) + "' class='pagemarker' data-page='" + (i + 2) + "'></span>");
+        }
+      };
+    })(this));
+    $("<span class='pagemarker' data-page='last'></span>").insertAfter(this.$("" + sel + ":last"));
+    that = this;
+    $('.pagemarker').waypoint({
+      handler: function(direction) {
+        return that.checkWaypoint(this, direction);
+      }
+    });
+    $('.pagemarker').waypoint({
+      handler: function(direction) {
+        return that.checkWaypoint(this, direction);
+      },
+      offset: 'bottom-in-view'
+    });
+    return this.resetQueue([1, 2, 3]);
+  };
+
+  BlockSkeletonView.prototype.checkWaypoint = function(el, direction) {
+    var current, toLoad;
+    current = $(el).data('page');
+    if (current === 'last') {
+      direction = 'up';
+      current = $('.pagemarker').length;
+      $(el).waypoint('prev').waypoint('disable');
+      _.delay((function(_this) {
+        return function() {
+          if (!_this.disposed) {
+            return $(el).waypoint('prev').waypoint('enable');
+          }
+        };
+      })(this), 500);
+    }
+    this.collection.loadDirection = direction;
+    if (direction === 'up') {
+      toLoad = [current, current - 1, current + 1, current - 2, current - 3];
+    } else {
+      toLoad = [current, current + 1, current - 1, current + 2, current - 2];
+    }
+    return this.resetQueue(toLoad);
+  };
+
+  BlockSkeletonView.prototype.addPage = function(id) {
+    return this.pages[id] = {
+      loaded: false,
+      loading: false,
+      xhr: {},
+      num: id
+    };
+  };
+
+  BlockSkeletonView.prototype.get = function(id) {
+    return this.pages[id];
+  };
+
+  BlockSkeletonView.prototype.pageLoading = function(id) {
+    return this.pages[id].loading = true;
+  };
+
+  BlockSkeletonView.prototype.pageLoaded = function(id) {
+    this.pages[id].loaded = true;
+    --this.loading;
+    return this.startLoad();
+  };
+
+  BlockSkeletonView.prototype.resetQueue = function(items) {
+    if (items == null) {
+      items = [];
+    }
+    this.queue = items;
+    this.cancelStaleRequests();
+    this.loading = _.filter(this.pages, (function(_this) {
+      return function(page) {
+        return page.loading;
+      };
+    })(this)).length;
+    return this.startLoad();
+  };
+
+  BlockSkeletonView.prototype.cancelStaleRequests = function() {
+    return _.each(this.pages, (function(_this) {
+      return function(page) {
+        if (page.loading && !_.include(_this.queue, page.num)) {
+          return _this.cancelRequest(page.num);
+        }
+      };
+    })(this));
+  };
+
+  BlockSkeletonView.prototype.cancelAllRequests = function() {
+    return _.each(this.pages, (function(_this) {
+      return function(page) {
+        return _this.cancelRequest(page.num);
+      };
+    })(this));
+  };
+
+  BlockSkeletonView.prototype.startLoad = function() {
+    var load;
+    return (load = (function(_this) {
+      return function() {
+        var current;
+        if (!(_this.queue.length && (_this.loading < 2))) {
+          return;
+        }
+        current = _this.queue.shift();
+        if (_this.pages[current] && !_this.pages[current].loading && !_this.pages[current].loaded) {
+          ++_this.loading;
+          _this.setPlaceholdersLoading(current);
+          _this.pages[current] = {
+            xhr: _this.collection.loadPage(current, _this),
+            loaded: false,
+            loading: true,
+            num: current
+          };
+        }
+        return load();
+      };
+    })(this))();
+  };
+
+  BlockSkeletonView.prototype.setPlaceholdersLoading = function(id) {
+    return $("#page-" + id).nextUntil("#page-" + (id + 1)).addClass('loading');
+  };
+
+  BlockSkeletonView.prototype.unsetPlaceholdersLoading = function(id) {
+    return $("#page-" + id).nextUntil("#page-" + (id + 1)).removeClass('loading');
+  };
+
+  BlockSkeletonView.prototype.completeRequest = function(page_id) {
+    this.pagesLoaded();
+    this.markPageLoaded(page_id);
+    this.startLoad();
+    return mediator.trigger('page:loaded');
+  };
+
+  BlockSkeletonView.prototype.markPageLoaded = function(id) {
+    var _ref, _ref1;
+    if ((_ref = this.pages[id]) != null) {
+      _ref.loaded = true;
+    }
+    if ((_ref1 = this.pages[id]) != null) {
+      _ref1.loading = false;
+    }
+    return --this.loading;
+  };
+
+  BlockSkeletonView.prototype.pagesLoaded = function() {
+    _.each(this.pages, function(page) {
+      if (!page.loaded) {
+        return false;
+      }
+    });
+    return true;
+  };
+
+  BlockSkeletonView.prototype.cancelRequest = function(id) {
+    var _ref, _ref1, _ref2, _ref3;
+    if ((_ref = this.pages[id]) != null) {
+      if ((_ref1 = _ref.xhr) != null) {
+        if (typeof _ref1.abort === "function") {
+          _ref1.abort();
+        }
+      }
+    }
+    if ((_ref2 = this.pages[id]) != null) {
+      _ref2.loaded = false;
+    }
+    if ((_ref3 = this.pages[id]) != null) {
+      _ref3.loading = false;
+    }
+    return this.unsetPlaceholdersLoading(id);
   };
 
   return BlockSkeletonView;
@@ -88,11 +286,15 @@ module.exports.init = function() {
 };
 
 
-},{"../../collections/channel_blocks.coffee":5,"../../components/block_collection/client/block_collection_view.coffee":8,"../../components/block_collection/templates/block.jade":9,"../../components/block_collection/templates/block_collection.jade":10,"../../components/new_block/client/new_block_view.coffee":18,"../../models/channel.coffee":23,"../../models/current_user.coffee":24,"backbone":27,"jquery":32,"sharify":35}],2:[function(require,module,exports){
-require('jquery')(require("../apps/channel/client.coffee").init);
+},{"../../collections/channel_blocks.coffee":5,"../../components/block_collection/client/block_collection_view.coffee":8,"../../components/block_collection/templates/block.jade":9,"../../components/block_collection/templates/block_collection.jade":10,"../../components/new_block/client/new_block_view.coffee":18,"../../lib/mediator.coffee":19,"../../models/channel.coffee":24,"../../models/current_user.coffee":25,"backbone":28,"sharify":36,"underscore":38}],2:[function(require,module,exports){
+require('../lib/vendor/waypoints.coffee');
+
+$(function() {
+  return require("../apps/channel/client.coffee").init();
+});
 
 
-},{"../apps/channel/client.coffee":1,"jquery":32}],3:[function(require,module,exports){
+},{"../apps/channel/client.coffee":1,"../lib/vendor/waypoints.coffee":21}],3:[function(require,module,exports){
 var Base, Collection, Model, ModelLib, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -174,6 +376,7 @@ module.exports = Base = (function(_super) {
       options = {};
     }
     this.setOptions(options);
+    console.log('setOptions', this.options);
     return Base.__super__.initialize.apply(this, arguments);
   };
 
@@ -200,7 +403,7 @@ module.exports = Base = (function(_super) {
 })(Collection);
 
 
-},{"../lib/model_lib.coffee":20,"../models/base.coffee":21,"chaplin":29,"sharify":35,"underscore":37}],4:[function(require,module,exports){
+},{"../lib/model_lib.coffee":20,"../models/base.coffee":22,"chaplin":30,"sharify":36,"underscore":38}],4:[function(require,module,exports){
 var Base, Block, Blocks, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -225,7 +428,7 @@ module.exports = Blocks = (function(_super) {
 })(Base);
 
 
-},{"../models/block.coffee":22,"./base.coffee":3,"sharify":35}],5:[function(require,module,exports){
+},{"../models/block.coffee":23,"./base.coffee":3,"sharify":36}],5:[function(require,module,exports){
 var Block, Blocks, ChannelBlocks, mediator, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -247,6 +450,11 @@ module.exports = ChannelBlocks = (function(_super) {
     return ChannelBlocks.__super__.constructor.apply(this, arguments);
   }
 
+  ChannelBlocks.prototype.defaultOptions = {
+    per: 6,
+    page: 1
+  };
+
   ChannelBlocks.prototype.model = Block;
 
   ChannelBlocks.prototype.url = function() {
@@ -258,14 +466,23 @@ module.exports = ChannelBlocks = (function(_super) {
   };
 
   ChannelBlocks.prototype.initialize = function(models, options) {
-    return this.slug = options != null ? options.channel_slug : void 0;
+    this.slug = options != null ? options.channel_slug : void 0;
+    return ChannelBlocks.__super__.initialize.apply(this, arguments);
   };
 
   ChannelBlocks.prototype.loadSkeleton = function() {
-    return $.get("" + sd.API_URL + "/channels/" + this.slug + "/skeleton?per=6&page=2", (function(_this) {
+    return $.get("" + sd.API_URL + "/channels/" + this.slug + "/skeleton?per=" + this.options.per + "&page=2", (function(_this) {
       return function(response) {
-        console.log('loadSkeleton', response);
         return _this.mergeSkeleton(response.contents);
+      };
+    })(this));
+  };
+
+  ChannelBlocks.prototype.loadPage = function(page) {
+    console.log('loadPage');
+    return $.get("" + sd.API_URL + "/channels/" + this.slug + "/contents?per=" + this.options.per + "&page=" + page, (function(_this) {
+      return function(response) {
+        return _this.replacePlaceholders(response.contents, page, _this.loadDirection);
       };
     })(this));
   };
@@ -287,19 +504,20 @@ module.exports = ChannelBlocks = (function(_super) {
     })(this))();
   };
 
-  ChannelBlocks.prototype.replacePlaceholders = function(models, page, direction, callback) {
+  ChannelBlocks.prototype.replacePlaceholders = function(models, page, direction) {
     var replacePlaceholder;
     return (replacePlaceholder = (function(_this) {
       return function() {
         var model, retrieveFn;
         if (!models.length) {
-          return mediator.publish('placeholders:replaced', page);
+          return _this.trigger('placeholders:replaced', page);
         }
         retrieveFn = direction === 'up' ? 'pop' : 'shift';
-        model = models[retrieveFn]();
+        model = new Block(models[retrieveFn]());
         _this.get(model.id).set(model, {
           sort: false
         });
+        _this.trigger('model:updated', model.id, model);
         return _.defer(replacePlaceholder);
       };
     })(this))();
@@ -310,7 +528,7 @@ module.exports = ChannelBlocks = (function(_super) {
 })(Blocks);
 
 
-},{"../lib/mediator.coffee":19,"../models/block.coffee":22,"./blocks.coffee":4,"sharify":35,"underscore":37}],6:[function(require,module,exports){
+},{"../lib/mediator.coffee":19,"../models/block.coffee":23,"./blocks.coffee":4,"sharify":36,"underscore":38}],6:[function(require,module,exports){
 var Base, CurrentUser, Feed, FeedGroup, FeedItem, params, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -501,7 +719,7 @@ module.exports = Feed = (function(_super) {
 })(Base);
 
 
-},{"../models/current_user.coffee":24,"../models/feed_item.coffee":25,"./base.coffee":3,"./feed_group.coffee":7,"query-params":34,"sharify":35,"underscore":37}],7:[function(require,module,exports){
+},{"../models/current_user.coffee":25,"../models/feed_item.coffee":26,"./base.coffee":3,"./feed_group.coffee":7,"query-params":35,"sharify":36,"underscore":38}],7:[function(require,module,exports){
 var Base, Block, Channel, FeedGroup, FeedItem, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -660,7 +878,7 @@ module.exports = FeedGroup = (function(_super) {
 })(Base);
 
 
-},{"../models/block.coffee":22,"../models/channel.coffee":23,"../models/feed_item.coffee":25,"./base.coffee":3,"underscore":37,"underscore.string":36}],8:[function(require,module,exports){
+},{"../models/block.coffee":23,"../models/channel.coffee":24,"../models/feed_item.coffee":26,"./base.coffee":3,"underscore":38,"underscore.string":37}],8:[function(require,module,exports){
 var $, Backbone, Block, BlockCollectionView, LightboxRouter, LightboxView, mediator, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -712,7 +930,7 @@ module.exports = BlockCollectionView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../lib/mediator.coffee":19,"../../../models/block.coffee":22,"../../lightbox/client/lightbox_view.coffee":15,"../../lightbox/lightbox_router.coffee":16,"backbone":27,"jquery":32,"sharify":35}],9:[function(require,module,exports){
+},{"../../../lib/mediator.coffee":19,"../../../models/block.coffee":23,"../../lightbox/client/lightbox_view.coffee":15,"../../lightbox/lightbox_router.coffee":16,"backbone":28,"jquery":33,"sharify":36}],9:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -752,7 +970,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -791,7 +1009,7 @@ buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp 
 }
 buf.push("</a></div>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
 };
-},{"jade/runtime":31}],10:[function(require,module,exports){
+},{"jade/runtime":32}],10:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -839,7 +1057,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -916,7 +1134,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -960,7 +1178,7 @@ buf.push("</a></div>");
 }).call(this);
 }("blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
 };
-},{"jade/runtime":31}],11:[function(require,module,exports){
+},{"jade/runtime":32}],11:[function(require,module,exports){
 var $, Backbone, FeedView, feedTemplate, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -1002,7 +1220,7 @@ module.exports = FeedView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../components/feed/templates/feed.jade":13,"backbone":27,"jquery":32,"sharify":35}],12:[function(require,module,exports){
+},{"../../../components/feed/templates/feed.jade":13,"backbone":28,"jquery":33,"sharify":36}],12:[function(require,module,exports){
 var FeedView, SmallFeedView, feedTemplate, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -1040,7 +1258,7 @@ module.exports = SmallFeedView = (function(_super) {
 })(FeedView);
 
 
-},{"../../../components/feed/templates/small_feed.jade":14,"./feed_view.coffee":11,"sharify":35}],13:[function(require,module,exports){
+},{"../../../components/feed/templates/small_feed.jade":14,"./feed_view.coffee":11,"sharify":36}],13:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1113,7 +1331,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -1190,7 +1408,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -1298,7 +1516,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -1375,7 +1593,7 @@ var initials = initials.join("").substring(0,4)
 }
 buf.push("<div class=\"user__avatar\"><div class=\"user__avatar__initials valign-outer\"><div class=\"valign-inner\"><div class=\"user__avatar__initials__content\">" + (jade.escape(null == (jade_interp = initials) ? "" : jade_interp)) + "</div></div></div><img" + (jade.attr("src", "" + (user.get('avatar_image').display) + "", true, false)) + " class=\"user__avatar__image\"/></div>");
 };
-buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
+buf.push("<div" + (jade.attr("data-id", "" + (block.id) + "", true, false)) + (jade.attr("id", "" + (block.id) + "", true, false)) + (jade.cls(["grid__block grid__block--" + (block.get('class').toLowerCase()) + ""], [true])) + "><a" + (jade.attr("href", "" + (block.getHref()) + "", true, false)) + "><div" + (jade.cls(['grid__block__inner',"grid__block__inner--privacy-" + ( block.getVisibility() ) + ""], [null,true])) + ">");
 if(block.get('class') != 'Channel' || block.get('class') != 'User')
 {
 buf.push("<div class=\"grid__block__content valign-outer\"><div class=\"valign-inner\">");
@@ -1425,7 +1643,7 @@ buf.push("</div></div>");
 }).call(this);
 }("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined,"blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined));;return buf.join("");
 };
-},{"jade/runtime":31}],14:[function(require,module,exports){
+},{"jade/runtime":32}],14:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1482,7 +1700,7 @@ buf.push("<div class=\"feed-group__timestamp\">" + (jade.escape(null == (jade_in
 }).call(this);
 }("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined));;return buf.join("");
 };
-},{"jade/runtime":31}],15:[function(require,module,exports){
+},{"jade/runtime":32}],15:[function(require,module,exports){
 var $, Backbone, Feed, LightboxView, SmallFeedView, lightboxTemplate, mediator, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1550,7 +1768,7 @@ module.exports = LightboxView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../collections/feed.coffee":6,"../../../lib/mediator.coffee":19,"../../feed/client/small_feed_view.coffee":12,"../templates/lightbox.jade":17,"backbone":27,"jquery":32,"sharify":35}],16:[function(require,module,exports){
+},{"../../../collections/feed.coffee":6,"../../../lib/mediator.coffee":19,"../../feed/client/small_feed_view.coffee":12,"../templates/lightbox.jade":17,"backbone":28,"jquery":33,"sharify":36}],16:[function(require,module,exports){
 var Backbone, LightboxRouter, mediator, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1589,7 +1807,7 @@ module.exports = LightboxRouter = (function(_super) {
 })(Backbone.Router);
 
 
-},{"../../lib/mediator.coffee":19,"backbone":27,"underscore":37}],17:[function(require,module,exports){
+},{"../../lib/mediator.coffee":19,"backbone":28,"underscore":38}],17:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1624,7 +1842,7 @@ buf.push("<div class=\"lightbox__content__description\">" + (null == (jade_inter
 }
 buf.push("</div></div><div id=\"lightbox__feed\" class=\"lightbox__feed\"></div></div><a class=\"lightbox--close\"><h1>&times;</h1></a>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined));;return buf.join("");
 };
-},{"jade/runtime":31}],18:[function(require,module,exports){
+},{"jade/runtime":32}],18:[function(require,module,exports){
 var $, Backbone, Block, Blocks, Channel, NewBlockView, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1716,7 +1934,7 @@ module.exports = NewBlockView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../collections/blocks.coffee":4,"../../../models/block.coffee":22,"../../../models/channel.coffee":23,"backbone":27,"jquery":32,"sharify":35}],19:[function(require,module,exports){
+},{"../../../collections/blocks.coffee":4,"../../../models/block.coffee":23,"../../../models/channel.coffee":24,"backbone":28,"jquery":33,"sharify":36}],19:[function(require,module,exports){
 var Backbone, mediator, _;
 
 _ = require('underscore');
@@ -1728,7 +1946,7 @@ mediator = _.extend({}, Backbone.Events);
 module.exports = (typeof window !== "undefined" && window !== null ? window.__mediator != null ? window.__mediator : window.__mediator = mediator : void 0) || mediator;
 
 
-},{"backbone":27,"underscore":37}],20:[function(require,module,exports){
+},{"backbone":28,"underscore":38}],20:[function(require,module,exports){
 var Chaplin, ModelLib, _;
 
 Chaplin = require('chaplin');
@@ -1761,7 +1979,503 @@ ModelLib = {
 module.exports = _.extend(ModelLib, Chaplin.SyncMachine);
 
 
-},{"chaplin":29,"underscore":37}],21:[function(require,module,exports){
+},{"chaplin":30,"underscore":38}],21:[function(require,module,exports){
+
+/*!
+jQuery Waypoints - v2.0.5
+Copyright (c) 2011-2014 Caleb Troughton
+Licensed under the MIT license.
+https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
+ */
+var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+  __slice = [].slice;
+
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    return define('waypoints', ['jquery'], function($) {
+      return factory($, root);
+    });
+  } else {
+    return factory(root.jQuery, root);
+  }
+})(window, function($, window) {
+  var $w, Context, Waypoint, allWaypoints, contextCounter, contextKey, contexts, isTouch, jQMethods, methods, resizeEvent, scrollEvent, waypointCounter, waypointKey, wp, wps;
+  $w = $(window);
+  isTouch = __indexOf.call(window, 'ontouchstart') >= 0;
+  allWaypoints = {
+    horizontal: {},
+    vertical: {}
+  };
+  contextCounter = 1;
+  contexts = {};
+  contextKey = 'waypoints-context-id';
+  resizeEvent = 'resize.waypoints';
+  scrollEvent = 'scroll.waypoints';
+  waypointCounter = 1;
+  waypointKey = 'waypoints-waypoint-ids';
+  wp = 'waypoint';
+  wps = 'waypoints';
+  Context = (function() {
+    function Context($element) {
+      this.$element = $element;
+      this.element = $element[0];
+      this.didResize = false;
+      this.didScroll = false;
+      this.id = 'context' + contextCounter++;
+      this.oldScroll = {
+        x: $element.scrollLeft(),
+        y: $element.scrollTop()
+      };
+      this.waypoints = {
+        horizontal: {},
+        vertical: {}
+      };
+      this.element[contextKey] = this.id;
+      contexts[this.id] = this;
+      $element.bind(scrollEvent, (function(_this) {
+        return function() {
+          var scrollHandler;
+          if (!(_this.didScroll || isTouch)) {
+            _this.didScroll = true;
+            scrollHandler = function() {
+              _this.doScroll();
+              return _this.didScroll = false;
+            };
+            return window.setTimeout(scrollHandler, $[wps].settings.scrollThrottle);
+          }
+        };
+      })(this));
+      $element.bind(resizeEvent, (function(_this) {
+        return function() {
+          var resizeHandler;
+          if (!_this.didResize) {
+            _this.didResize = true;
+            resizeHandler = function() {
+              $[wps]('refresh');
+              return _this.didResize = false;
+            };
+            return window.setTimeout(resizeHandler, $[wps].settings.resizeThrottle);
+          }
+        };
+      })(this));
+    }
+
+    Context.prototype.doScroll = function() {
+      var axes;
+      axes = {
+        horizontal: {
+          newScroll: this.$element.scrollLeft(),
+          oldScroll: this.oldScroll.x,
+          forward: 'right',
+          backward: 'left'
+        },
+        vertical: {
+          newScroll: this.$element.scrollTop(),
+          oldScroll: this.oldScroll.y,
+          forward: 'down',
+          backward: 'up'
+        }
+      };
+      if (isTouch && (!axes.vertical.oldScroll || !axes.vertical.newScroll)) {
+        $[wps]('refresh');
+      }
+      $.each(axes, (function(_this) {
+        return function(aKey, axis) {
+          var direction, isForward, triggered;
+          triggered = [];
+          isForward = axis.newScroll > axis.oldScroll;
+          direction = isForward ? axis.forward : axis.backward;
+          $.each(_this.waypoints[aKey], function(wKey, waypoint) {
+            var _ref, _ref1;
+            if ((axis.oldScroll < (_ref = waypoint.offset) && _ref <= axis.newScroll)) {
+              return triggered.push(waypoint);
+            } else if ((axis.newScroll < (_ref1 = waypoint.offset) && _ref1 <= axis.oldScroll)) {
+              return triggered.push(waypoint);
+            }
+          });
+          triggered.sort(function(a, b) {
+            return a.offset - b.offset;
+          });
+          if (!isForward) {
+            triggered.reverse();
+          }
+          return $.each(triggered, function(i, waypoint) {
+            if (waypoint.options.continuous || i === triggered.length - 1) {
+              return waypoint.trigger([direction]);
+            }
+          });
+        };
+      })(this));
+      return this.oldScroll = {
+        x: axes.horizontal.newScroll,
+        y: axes.vertical.newScroll
+      };
+    };
+
+    Context.prototype.refresh = function() {
+      var axes, cOffset, isWin;
+      isWin = $.isWindow(this.element);
+      cOffset = this.$element.offset();
+      this.doScroll();
+      axes = {
+        horizontal: {
+          contextOffset: isWin ? 0 : cOffset.left,
+          contextScroll: isWin ? 0 : this.oldScroll.x,
+          contextDimension: this.$element.width(),
+          oldScroll: this.oldScroll.x,
+          forward: 'right',
+          backward: 'left',
+          offsetProp: 'left'
+        },
+        vertical: {
+          contextOffset: isWin ? 0 : cOffset.top,
+          contextScroll: isWin ? 0 : this.oldScroll.y,
+          contextDimension: isWin ? $[wps]('viewportHeight') : this.$element.height(),
+          oldScroll: this.oldScroll.y,
+          forward: 'down',
+          backward: 'up',
+          offsetProp: 'top'
+        }
+      };
+      return $.each(axes, (function(_this) {
+        return function(aKey, axis) {
+          return $.each(_this.waypoints[aKey], function(i, waypoint) {
+            var adjustment, elementOffset, oldOffset, _ref, _ref1;
+            adjustment = waypoint.options.offset;
+            oldOffset = waypoint.offset;
+            elementOffset = $.isWindow(waypoint.element) ? 0 : waypoint.$element.offset()[axis.offsetProp];
+            if ($.isFunction(adjustment)) {
+              adjustment = adjustment.apply(waypoint.element);
+            } else if (typeof adjustment === 'string') {
+              adjustment = parseFloat(adjustment);
+              if (waypoint.options.offset.indexOf('%') > -1) {
+                adjustment = Math.ceil(axis.contextDimension * adjustment / 100);
+              }
+            }
+            waypoint.offset = elementOffset - axis.contextOffset + axis.contextScroll - adjustment;
+            if ((waypoint.options.onlyOnScroll && (oldOffset != null)) || !waypoint.enabled) {
+              return;
+            }
+            if (oldOffset !== null && (oldOffset < (_ref = axis.oldScroll) && _ref <= waypoint.offset)) {
+              return waypoint.trigger([axis.backward]);
+            } else if (oldOffset !== null && (oldOffset > (_ref1 = axis.oldScroll) && _ref1 >= waypoint.offset)) {
+              return waypoint.trigger([axis.forward]);
+            } else if (oldOffset === null && axis.oldScroll >= waypoint.offset) {
+              return waypoint.trigger([axis.forward]);
+            }
+          });
+        };
+      })(this));
+    };
+
+    Context.prototype.checkEmpty = function() {
+      if ($.isEmptyObject(this.waypoints.horizontal) && $.isEmptyObject(this.waypoints.vertical)) {
+        this.$element.unbind([resizeEvent, scrollEvent].join(' '));
+        return delete contexts[this.id];
+      }
+    };
+
+    return Context;
+
+  })();
+  Waypoint = (function() {
+    function Waypoint($element, context, options) {
+      var idList, _ref;
+      if (options.offset === 'bottom-in-view') {
+        options.offset = function() {
+          var contextHeight;
+          contextHeight = $[wps]('viewportHeight');
+          if (!$.isWindow(context.element)) {
+            contextHeight = context.$element.height();
+          }
+          return contextHeight - $(this).outerHeight();
+        };
+      }
+      this.$element = $element;
+      this.element = $element[0];
+      this.axis = options.horizontal ? 'horizontal' : 'vertical';
+      this.callback = options.handler;
+      this.context = context;
+      this.enabled = options.enabled;
+      this.id = 'waypoints' + waypointCounter++;
+      this.offset = null;
+      this.options = options;
+      context.waypoints[this.axis][this.id] = this;
+      allWaypoints[this.axis][this.id] = this;
+      idList = (_ref = this.element[waypointKey]) != null ? _ref : [];
+      idList.push(this.id);
+      this.element[waypointKey] = idList;
+    }
+
+    Waypoint.prototype.trigger = function(args) {
+      if (!this.enabled) {
+        return;
+      }
+      if (this.callback != null) {
+        this.callback.apply(this.element, args);
+      }
+      if (this.options.triggerOnce) {
+        return this.destroy();
+      }
+    };
+
+    Waypoint.prototype.disable = function() {
+      return this.enabled = false;
+    };
+
+    Waypoint.prototype.enable = function() {
+      this.context.refresh();
+      return this.enabled = true;
+    };
+
+    Waypoint.prototype.destroy = function() {
+      delete allWaypoints[this.axis][this.id];
+      delete this.context.waypoints[this.axis][this.id];
+      return this.context.checkEmpty();
+    };
+
+    Waypoint.getWaypointsByElement = function(element) {
+      var all, ids;
+      ids = element[waypointKey];
+      if (!ids) {
+        return [];
+      }
+      all = $.extend({}, allWaypoints.horizontal, allWaypoints.vertical);
+      return $.map(ids, function(id) {
+        return all[id];
+      });
+    };
+
+    return Waypoint;
+
+  })();
+  methods = {
+    init: function(f, options) {
+      options = $.extend({}, $.fn[wp].defaults, options);
+      if (options.handler == null) {
+        options.handler = f;
+      }
+      this.each(function() {
+        var $this, context, contextElement, _ref;
+        $this = $(this);
+        contextElement = (_ref = options.context) != null ? _ref : $.fn[wp].defaults.context;
+        if (!$.isWindow(contextElement)) {
+          contextElement = $this.closest(contextElement);
+        }
+        contextElement = $(contextElement);
+        context = contexts[contextElement[0][contextKey]];
+        if (!context) {
+          context = new Context(contextElement);
+        }
+        return new Waypoint($this, context, options);
+      });
+      $[wps]('refresh');
+      return this;
+    },
+    disable: function() {
+      return methods._invoke.call(this, 'disable');
+    },
+    enable: function() {
+      return methods._invoke.call(this, 'enable');
+    },
+    destroy: function() {
+      return methods._invoke.call(this, 'destroy');
+    },
+    prev: function(axis, selector) {
+      return methods._traverse.call(this, axis, selector, function(stack, index, waypoints) {
+        if (index > 0) {
+          return stack.push(waypoints[index - 1]);
+        }
+      });
+    },
+    next: function(axis, selector) {
+      return methods._traverse.call(this, axis, selector, function(stack, index, waypoints) {
+        if (index < waypoints.length - 1) {
+          return stack.push(waypoints[index + 1]);
+        }
+      });
+    },
+    _traverse: function(axis, selector, push) {
+      var stack, waypoints;
+      if (axis == null) {
+        axis = 'vertical';
+      }
+      if (selector == null) {
+        selector = window;
+      }
+      waypoints = jQMethods.aggregate(selector);
+      stack = [];
+      this.each(function() {
+        var index;
+        index = $.inArray(this, waypoints[axis]);
+        return push(stack, index, waypoints[axis]);
+      });
+      return this.pushStack(stack);
+    },
+    _invoke: function(method) {
+      this.each(function() {
+        var waypoints;
+        waypoints = Waypoint.getWaypointsByElement(this);
+        return $.each(waypoints, function(i, waypoint) {
+          waypoint[method]();
+          return true;
+        });
+      });
+      return this;
+    }
+  };
+  $.fn[wp] = function() {
+    var args, method;
+    method = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    if (methods[method]) {
+      return methods[method].apply(this, args);
+    } else if ($.isFunction(method)) {
+      return methods.init.apply(this, arguments);
+    } else if ($.isPlainObject(method)) {
+      return methods.init.apply(this, [null, method]);
+    } else if (!method) {
+      return $.error("jQuery Waypoints needs a callback function or handler option.");
+    } else {
+      return $.error("The " + method + " method does not exist in jQuery Waypoints.");
+    }
+  };
+  $.fn[wp].defaults = {
+    context: window,
+    continuous: true,
+    enabled: true,
+    horizontal: false,
+    offset: 0,
+    triggerOnce: false
+  };
+  jQMethods = {
+    refresh: function() {
+      return $.each(contexts, function(i, context) {
+        return context.refresh();
+      });
+    },
+    viewportHeight: function() {
+      var _ref;
+      return (_ref = window.innerHeight) != null ? _ref : $w.height();
+    },
+    aggregate: function(contextSelector) {
+      var collection, waypoints, _ref;
+      collection = allWaypoints;
+      if (contextSelector) {
+        collection = (_ref = contexts[$(contextSelector)[0][contextKey]]) != null ? _ref.waypoints : void 0;
+      }
+      if (!collection) {
+        return [];
+      }
+      waypoints = {
+        horizontal: [],
+        vertical: []
+      };
+      $.each(waypoints, function(axis, arr) {
+        $.each(collection[axis], function(key, waypoint) {
+          return arr.push(waypoint);
+        });
+        arr.sort(function(a, b) {
+          return a.offset - b.offset;
+        });
+        waypoints[axis] = $.map(arr, function(waypoint) {
+          return waypoint.element;
+        });
+        return waypoints[axis] = $.unique(waypoints[axis]);
+      });
+      return waypoints;
+    },
+    above: function(contextSelector) {
+      if (contextSelector == null) {
+        contextSelector = window;
+      }
+      return jQMethods._filter(contextSelector, 'vertical', function(context, waypoint) {
+        return waypoint.offset <= context.oldScroll.y;
+      });
+    },
+    below: function(contextSelector) {
+      if (contextSelector == null) {
+        contextSelector = window;
+      }
+      return jQMethods._filter(contextSelector, 'vertical', function(context, waypoint) {
+        return waypoint.offset > context.oldScroll.y;
+      });
+    },
+    left: function(contextSelector) {
+      if (contextSelector == null) {
+        contextSelector = window;
+      }
+      return jQMethods._filter(contextSelector, 'horizontal', function(context, waypoint) {
+        return waypoint.offset <= context.oldScroll.x;
+      });
+    },
+    right: function(contextSelector) {
+      if (contextSelector == null) {
+        contextSelector = window;
+      }
+      return jQMethods._filter(contextSelector, 'horizontal', function(context, waypoint) {
+        return waypoint.offset > context.oldScroll.x;
+      });
+    },
+    enable: function() {
+      return jQMethods._invoke('enable');
+    },
+    disable: function() {
+      return jQMethods._invoke('disable');
+    },
+    destroy: function() {
+      return jQMethods._invoke('destroy');
+    },
+    extendFn: function(methodName, f) {
+      return methods[methodName] = f;
+    },
+    _invoke: function(method) {
+      var waypoints;
+      waypoints = $.extend({}, allWaypoints.vertical, allWaypoints.horizontal);
+      return $.each(waypoints, function(key, waypoint) {
+        waypoint[method]();
+        return true;
+      });
+    },
+    _filter: function(selector, axis, test) {
+      var context, waypoints;
+      context = contexts[$(selector)[0][contextKey]];
+      if (!context) {
+        return [];
+      }
+      waypoints = [];
+      $.each(context.waypoints[axis], function(i, waypoint) {
+        if (test(context, waypoint)) {
+          return waypoints.push(waypoint);
+        }
+      });
+      waypoints.sort(function(a, b) {
+        return a.offset - b.offset;
+      });
+      return $.map(waypoints, function(waypoint) {
+        return waypoint.element;
+      });
+    }
+  };
+  $[wps] = function() {
+    var args, method;
+    method = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+    if (jQMethods[method]) {
+      return jQMethods[method].apply(null, args);
+    } else {
+      return jQMethods.aggregate.call(null, method);
+    }
+  };
+  $[wps].settings = {
+    resizeThrottle: 100,
+    scrollThrottle: 30
+  };
+  return $w.on('load.waypoints', function() {
+    return $[wps]('refresh');
+  });
+});
+
+
+},{}],22:[function(require,module,exports){
 var Backbone, Base, Model, ModelLib, moment, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1914,7 +2628,7 @@ module.exports = Base = (function(_super) {
 })(Model);
 
 
-},{"../lib/model_lib.coffee":20,"backbone":27,"chaplin":29,"moment":33,"sharify":35,"underscore":37}],22:[function(require,module,exports){
+},{"../lib/model_lib.coffee":20,"backbone":28,"chaplin":30,"moment":34,"sharify":36,"underscore":38}],23:[function(require,module,exports){
 var Base, Block, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1964,7 +2678,7 @@ module.exports = Block = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":21,"sharify":35}],23:[function(require,module,exports){
+},{"./base.coffee":22,"sharify":36}],24:[function(require,module,exports){
 var Base, Channel, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1996,7 +2710,7 @@ module.exports = Channel = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":21,"sharify":35}],24:[function(require,module,exports){
+},{"./base.coffee":22,"sharify":36}],25:[function(require,module,exports){
 var CurrentUser, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2043,7 +2757,7 @@ module.exports = CurrentUser = (function(_super) {
 })(User);
 
 
-},{"./user.coffee":26,"sharify":35}],25:[function(require,module,exports){
+},{"./user.coffee":27,"sharify":36}],26:[function(require,module,exports){
 var Base, FeedItem,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2114,7 +2828,7 @@ module.exports = FeedItem = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":21}],26:[function(require,module,exports){
+},{"./base.coffee":22}],27:[function(require,module,exports){
 var Base, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2139,7 +2853,7 @@ module.exports = User = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":21,"sharify":35}],27:[function(require,module,exports){
+},{"./base.coffee":22,"sharify":36}],28:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -3749,7 +4463,7 @@ module.exports = User = (function(_super) {
 
 }));
 
-},{"underscore":28}],28:[function(require,module,exports){
+},{"underscore":29}],29:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -5094,7 +5808,7 @@ module.exports = User = (function(_super) {
   }
 }).call(this);
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /*!
  * Chaplin 1.0.1
  *
@@ -8205,9 +8919,9 @@ if (typeof define === 'function' && define.amd) {
 }
 
 })();
-},{"backbone":27,"underscore":30}],30:[function(require,module,exports){
-module.exports=require(28)
-},{}],31:[function(require,module,exports){
+},{"backbone":28,"underscore":31}],31:[function(require,module,exports){
+module.exports=require(29)
+},{}],32:[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
@@ -8420,7 +9134,7 @@ exports.rethrow = function rethrow(err, filename, lineno, str){
 (1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -17612,7 +18326,7 @@ return jQuery;
 
 }));
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 (function (global){
 //! moment.js
 //! version : 2.8.3
@@ -20472,7 +21186,7 @@ return jQuery;
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 function encode (o, sep) {
     var list = [];
     var key;
@@ -20506,7 +21220,7 @@ module.exports = {
     encode: encode,
     decode: decode
 };
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 // Middleware that injects the shared data and sharify script
 module.exports = function(req, res, next) {
 
@@ -20555,7 +21269,7 @@ var bootstrapOnClient = module.exports.bootstrapOnClient = function() {
 };
 bootstrapOnClient();
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 //  Underscore.string
 //  (c) 2010 Esa-Matti Suuronen <esa-matti aet suuronen dot org>
 //  Underscore.string is freely distributable under the terms of the MIT license.
@@ -21230,6 +21944,6 @@ bootstrapOnClient();
   root._.string = root._.str = _s;
 }(this, String);
 
-},{}],37:[function(require,module,exports){
-module.exports=require(28)
+},{}],38:[function(require,module,exports){
+module.exports=require(29)
 },{}]},{},[2]);
