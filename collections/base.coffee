@@ -43,6 +43,7 @@ module.exports = class Base extends Collection
 
   initialize: (models, options={})->
     @setOptions(options)
+    console.log 'setOptions', @options
     super
 
   next: (model) ->
