@@ -1,0 +1,18 @@
+.metadata__title
+  | Collaborators:
+.metadata__text
+  each collaborator, i in collaborators
+    if collaborators.length == 1
+      a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
+    else
+      if i == collaborators.length - 2
+        a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')} 
+        span and 
+      else if i == collaborators.length - 1
+        a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
+      else if i < collaborators.length - 2
+        a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}, 
+  //- a(href="#") Charles Broskoski, 
+  //- a(href="#") Chris Sherron, 
+  //- a(href="#") Morgan Sutherland, 
+  //- a(href="#") Daniel Pianetti, 

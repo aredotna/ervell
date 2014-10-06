@@ -25,15 +25,8 @@ section.path
           .metadata__text
             = channel.get('metadata').description
       if channel.get('collaboration')
-        .metadata__column
-          .metadata__title
-            | Contributors:
-          .metadata__text
-            a(href="#") Charles Broskoski, 
-            a(href="#") Chris Sherron, 
-            a(href="#") Morgan Sutherland, 
-            a(href="#") Daniel Pianetti, 
-            | ...
+        #metadata--collaborators.metadata__column
+          //- Rendered by client
       .metadata__column
         .metadata__title
           | Followers:
