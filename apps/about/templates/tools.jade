@@ -1,0 +1,43 @@
+extends ../../../components/layout/index
+
+block styles
+	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
+
+block body
+	.static__left-column
+		.static__title
+			strong Are.na /
+		ul.static__menu
+			li 
+				a(href="#").active tools
+
+	.static__right-column
+		.static__tools.static--text
+			| Bookmarklet
+			.static__tools__frame
+				|	Add your bookmarklet to save stuff
+			
+			| Invite Friends
+			.static__tools__frame
+				|	Add your friend's email or share this link to collaborate with someone. You can add three channels worth of notice below:
+			
+			| Premium
+			.static__tools__frame.static__tools__frame--premium
+				|	Supporter and premium offers
+
+			|	Find Friends
+			.static__tools__frame
+				|	Connect to Facebook or Twitter to follow or collaborate with friends. 
+			
+			| Send via email
+			.static__tools__frame
+				| Send and email to this address to add to an Arena channel, use the subject to indicate the channel.
+
+
+
+
+
+
+
+block scripts
+	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
