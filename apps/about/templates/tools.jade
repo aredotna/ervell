@@ -6,7 +6,8 @@ block styles
 block body
 	.static__left-column
 		.static__title
-			strong Are.na /
+			a(href="/") Are.na 
+			| /
 		ul.static__menu
 			li 
 				a(href="#").active tools
@@ -32,12 +33,10 @@ block body
 			| Send via email
 			.static__tools__frame
 				| Send and email to this address to add to an Arena channel, use the subject to indicate the channel.
-
-
-
-
-
-
+			
+			| Tutorial
+			.static__tools__frame
+				| [link to tutorial]
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
