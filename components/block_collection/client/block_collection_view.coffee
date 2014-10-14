@@ -6,23 +6,33 @@ mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
 LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 LightboxView = require '../../lightbox/client/lightbox_view.coffee'
+ConnectView = require '../../connect/client/connect_view.coffee'
 
 module.exports = class BlockCollectionView extends Backbone.View
 
   events:
     'click .grid__block__connect-btn' : 'renderConnectView'
 
-  initialize: ->
+  initialize: (options)->
     mediator.on 'open:lightbox', @openLightbox, @
 
     new LightboxRouter
     Backbone.history.start()
 
+    @channel = options.channel
+
+    super
+
   renderConnectView: (event) ->
     event.preventDefault()
     event.stopPropagation()
 
-    console.log('should render here')
+    $connect_container = $(event.currentTarget).parent().next()
+
+    $connect_container.addClass 'is-active'
+    new ConnectView
+      el: $connect_container
+      channel: @channel
 
   openLightbox: (id)->
     console.log 'openLightbox', id

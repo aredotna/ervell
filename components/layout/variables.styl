@@ -35,11 +35,11 @@ container_pad         = 20px
 downshadow            = 0px 4px 14px -7px rgba(0,0,0,0.1)
 
 // transitions
-transition(n)
-  -webkit-transition: all ease-in n
-  -moz-transition: all ease-in n
-  -o-transition: all ease-in n
-  transition: all ease-in n
+transition(n, property = all)
+  -webkit-transition: property ease-in n
+  -moz-transition: property ease-in n
+  -o-transition: property ease-in n
+  transition: property ease-in n
 
 // antialiased
 antialiased()

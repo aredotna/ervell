@@ -206,6 +206,7 @@ module.exports.init = ->
 
   new BlockCollectionView
     el: $ ".grid"
+    channel: channel
 
   new BlockSkeletonView
     collection: blocks

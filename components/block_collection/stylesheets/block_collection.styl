@@ -117,6 +117,16 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
   height 30px
   line-height 30px
 
+.grid__block__connect-container
+  pointer-events none
+  opacity 0
+  background-color #fff
+  transition(.1s, opacity)
+
+  &.is-active
+    opacity 1
+    pointer-events all
+
 .grid__block__title
   color lightgray
   position relative
