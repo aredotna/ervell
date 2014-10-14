@@ -26,6 +26,8 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
                   span(data-href="/#{block.get('connected_by_user_slug')}").inline-link.username=block.get('connected_by_username')
                   span.arrow &#x279d;
                   span.inline-link.channel=channel.smartTruncate(channel.get('title'), 30)
+          .grid__block__connect-container
+            //- rendered by the client
           .grid__block__connect-btn Connect
     - if(block.get('class') != 'Channel')
       p.grid__block__title= block.smartTruncate(block.get('title'))
