@@ -1,4 +1,5 @@
 Backbone = require "backbone"
+$ = require 'jquery'
 Backbone.$ = $
 _ = require 'underscore'
 sd = require("sharify").data
@@ -204,7 +205,7 @@ module.exports.init = ->
     channel_slug: sd.CHANNEL.slug
 
   new BlockCollectionView
-    el: 'body'
+    el: $ ".grid"
 
   new BlockSkeletonView
     collection: blocks

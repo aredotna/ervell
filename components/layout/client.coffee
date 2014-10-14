@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+$ = require 'jquery'
 Backbone.$ = $
 _ = require 'underscore'
 HeaderView = require './header/view.coffee'
@@ -39,7 +40,7 @@ setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
 
 setupAjaxHeaders = ->
-  console.log 'sd.CURRENT_USER?.authentication_token', sd.CURRENT_USER?.authentication_token, $
+  console.log 'sd.CURRENT_USER?.authentication_token', sd.CURRENT_USER?.authentication_token
   $.ajaxSetup
     beforeSend: (xhr)->
       console.log 'beforeSend'

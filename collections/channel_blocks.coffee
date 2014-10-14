@@ -2,6 +2,7 @@
 # Collection for a group of Blocks fetched via a channel
 #
 _ = require 'underscore'
+$ = require 'jquery'
 Blocks = require("./blocks.coffee")
 sd = require("sharify").data
 Block = require("../models/block.coffee")
