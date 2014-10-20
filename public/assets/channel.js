@@ -1,9 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Backbone, BlockCollectionView, BlockSkeletonView, Channel, ChannelBlocks, CollaborationView, Collaborators, CurrentUser, NewBlockView, blockCollectionTemplate, blockTemplate, collaboratorsTemplate, mediator, sd, _,
+var $, Backbone, BlockCollectionView, BlockSkeletonView, Channel, ChannelBlocks, CollaborationView, Collaborators, CurrentUser, NewBlockView, blockCollectionTemplate, blockTemplate, collaboratorsTemplate, mediator, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 Backbone = require("backbone");
+
+$ = require('jquery');
 
 Backbone.$ = $;
 
@@ -300,7 +302,8 @@ module.exports.init = function() {
     channel_slug: sd.CHANNEL.slug
   });
   new BlockCollectionView({
-    el: 'body'
+    el: $(".grid"),
+    channel: channel
   });
   new BlockSkeletonView({
     collection: blocks,
@@ -325,7 +328,7 @@ module.exports.init = function() {
 };
 
 
-},{"../../collections/channel_blocks.coffee":6,"../../collections/collaborators.coffee":7,"../../components/block_collection/client/block_collection_view.coffee":10,"../../components/block_collection/templates/block.jade":11,"../../components/block_collection/templates/block_collection.jade":12,"../../components/new_block/client/new_block_view.coffee":20,"../../lib/mediator.coffee":21,"../../models/channel.coffee":26,"../../models/current_user.coffee":27,"./templates/collaborators.jade":2,"backbone":30,"sharify":38,"underscore":40}],2:[function(require,module,exports){
+},{"../../collections/channel_blocks.coffee":6,"../../collections/collaborators.coffee":7,"../../components/block_collection/client/block_collection_view.coffee":10,"../../components/block_collection/templates/block.jade":11,"../../components/block_collection/templates/block_collection.jade":12,"../../components/new_block/client/new_block_view.coffee":22,"../../lib/mediator.coffee":23,"../../models/channel.coffee":28,"../../models/current_user.coffee":29,"./templates/collaborators.jade":2,"backbone":32,"jquery":37,"sharify":40,"underscore":42}],2:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -394,15 +397,21 @@ buf.push("<a" + (jade.attr("href", "/" + (collaborator.get('slug')) + "", true, 
 
 buf.push("</div>");}("collaborators" in locals_for_with?locals_for_with.collaborators:typeof collaborators!=="undefined"?collaborators:undefined));;return buf.join("");
 };
-},{"jade/runtime":34}],3:[function(require,module,exports){
-require('../lib/vendor/waypoints.coffee');
+},{"jade/runtime":36}],3:[function(require,module,exports){
+var loadChannelModules;
 
-$(function() {
+loadChannelModules = function() {
+  var $;
+  $ = require('jquery');
+  console.log('$', $);
+  require('../lib/vendor/waypoints.coffee');
   return require("../apps/channel/client.coffee").init();
-});
+};
+
+require('jquery')(loadChannelModules());
 
 
-},{"../apps/channel/client.coffee":1,"../lib/vendor/waypoints.coffee":23}],4:[function(require,module,exports){
+},{"../apps/channel/client.coffee":1,"../lib/vendor/waypoints.coffee":25,"jquery":37}],4:[function(require,module,exports){
 var Base, Collection, Model, ModelLib, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -511,7 +520,7 @@ module.exports = Base = (function(_super) {
 })(Collection);
 
 
-},{"../lib/model_lib.coffee":22,"../models/base.coffee":24,"chaplin":32,"sharify":38,"underscore":40}],5:[function(require,module,exports){
+},{"../lib/model_lib.coffee":24,"../models/base.coffee":26,"chaplin":34,"sharify":40,"underscore":42}],5:[function(require,module,exports){
 var Base, Block, Blocks, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -536,12 +545,14 @@ module.exports = Blocks = (function(_super) {
 })(Base);
 
 
-},{"../models/block.coffee":25,"./base.coffee":4,"sharify":38}],6:[function(require,module,exports){
-var Block, Blocks, ChannelBlocks, mediator, sd, _,
+},{"../models/block.coffee":27,"./base.coffee":4,"sharify":40}],6:[function(require,module,exports){
+var $, Block, Blocks, ChannelBlocks, mediator, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 _ = require('underscore');
+
+$ = require('jquery');
 
 Blocks = require("./blocks.coffee");
 
@@ -636,7 +647,7 @@ module.exports = ChannelBlocks = (function(_super) {
 })(Blocks);
 
 
-},{"../lib/mediator.coffee":21,"../models/block.coffee":25,"./blocks.coffee":5,"sharify":38,"underscore":40}],7:[function(require,module,exports){
+},{"../lib/mediator.coffee":23,"../models/block.coffee":27,"./blocks.coffee":5,"jquery":37,"sharify":40,"underscore":42}],7:[function(require,module,exports){
 var Base, Collaborators, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -674,7 +685,7 @@ module.exports = Collaborators = (function(_super) {
 })(Base);
 
 
-},{"../models/user.coffee":29,"./base.coffee":4,"sharify":38}],8:[function(require,module,exports){
+},{"../models/user.coffee":31,"./base.coffee":4,"sharify":40}],8:[function(require,module,exports){
 var Base, CurrentUser, Feed, FeedGroup, FeedItem, params, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -865,7 +876,7 @@ module.exports = Feed = (function(_super) {
 })(Base);
 
 
-},{"../models/current_user.coffee":27,"../models/feed_item.coffee":28,"./base.coffee":4,"./feed_group.coffee":9,"query-params":37,"sharify":38,"underscore":40}],9:[function(require,module,exports){
+},{"../models/current_user.coffee":29,"../models/feed_item.coffee":30,"./base.coffee":4,"./feed_group.coffee":9,"query-params":39,"sharify":40,"underscore":42}],9:[function(require,module,exports){
 var Base, Block, Channel, FeedGroup, FeedItem, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1024,8 +1035,8 @@ module.exports = FeedGroup = (function(_super) {
 })(Base);
 
 
-},{"../models/block.coffee":25,"../models/channel.coffee":26,"../models/feed_item.coffee":28,"./base.coffee":4,"underscore":40,"underscore.string":39}],10:[function(require,module,exports){
-var $, Backbone, Block, BlockCollectionView, LightboxRouter, LightboxView, mediator, sd,
+},{"../models/block.coffee":27,"../models/channel.coffee":28,"../models/feed_item.coffee":30,"./base.coffee":4,"underscore":42,"underscore.string":41}],10:[function(require,module,exports){
+var $, Backbone, Block, BlockCollectionView, ConnectView, LightboxRouter, LightboxView, mediator, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1046,6 +1057,8 @@ LightboxRouter = require('../../lightbox/lightbox_router.coffee');
 
 LightboxView = require('../../lightbox/client/lightbox_view.coffee');
 
+ConnectView = require('../../connect/client/connect_view.coffee');
+
 module.exports = BlockCollectionView = (function(_super) {
   __extends(BlockCollectionView, _super);
 
@@ -1054,14 +1067,33 @@ module.exports = BlockCollectionView = (function(_super) {
     return BlockCollectionView.__super__.constructor.apply(this, arguments);
   }
 
-  BlockCollectionView.prototype.initialize = function() {
+  BlockCollectionView.prototype.events = {
+    'click .grid__block__connect-btn': 'renderConnectView'
+  };
+
+  BlockCollectionView.prototype.initialize = function(options) {
     mediator.on('open:lightbox', this.openLightbox, this);
     new LightboxRouter;
-    return Backbone.history.start();
+    Backbone.history.start();
+    this.channel = options.channel;
+    return BlockCollectionView.__super__.initialize.apply(this, arguments);
+  };
+
+  BlockCollectionView.prototype.renderConnectView = function(event) {
+    var $connect_container;
+    event.preventDefault();
+    event.stopPropagation();
+    $connect_container = $(event.currentTarget).parent().next();
+    $connect_container.addClass('is-active');
+    return new ConnectView({
+      el: $connect_container,
+      channel: this.channel
+    });
   };
 
   BlockCollectionView.prototype.openLightbox = function(id) {
     var block;
+    console.log('openLightbox', id);
     block = new Block(id);
     return this.lbv = new LightboxView({
       el: $('#l-lightbox-container'),
@@ -1076,7 +1108,7 @@ module.exports = BlockCollectionView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../lib/mediator.coffee":21,"../../../models/block.coffee":25,"../../lightbox/client/lightbox_view.coffee":17,"../../lightbox/lightbox_router.coffee":18,"backbone":30,"jquery":35,"sharify":38}],11:[function(require,module,exports){
+},{"../../../lib/mediator.coffee":23,"../../../models/block.coffee":27,"../../connect/client/connect_view.coffee":13,"../../lightbox/client/lightbox_view.coffee":19,"../../lightbox/lightbox_router.coffee":20,"backbone":32,"jquery":37,"sharify":40}],11:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1146,7 +1178,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1155,7 +1187,7 @@ buf.push("<p class=\"grid__block__title\">" + (jade.escape(null == (jade_interp 
 }
 buf.push("</a></div>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
 };
-},{"jade/runtime":34}],12:[function(require,module,exports){
+},{"jade/runtime":36}],12:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1233,7 +1265,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1310,7 +1342,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1324,7 +1356,58 @@ buf.push("</a></div>");
 }).call(this);
 }("blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined));;return buf.join("");
 };
-},{"jade/runtime":34}],13:[function(require,module,exports){
+},{"jade/runtime":36}],13:[function(require,module,exports){
+var $, Backbone, ConnectView, connectTemplate, sd,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __hasProp = {}.hasOwnProperty,
+  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+Backbone = require("backbone");
+
+$ = require('jquery');
+
+Backbone.$ = $;
+
+sd = require("sharify").data;
+
+connectTemplate = function() {
+  return require('../templates/connect.jade').apply(null, arguments);
+};
+
+module.exports = ConnectView = (function(_super) {
+  __extends(ConnectView, _super);
+
+  function ConnectView() {
+    this.render = __bind(this.render, this);
+    return ConnectView.__super__.constructor.apply(this, arguments);
+  }
+
+  ConnectView.prototype.initialize = function() {
+    console.log('rendering ConnectView');
+    this.render();
+    return ConnectView.__super__.initialize.apply(this, arguments);
+  };
+
+  ConnectView.prototype.render = function() {
+    return this.$el.html(connectTemplate());
+  };
+
+  return ConnectView;
+
+})(Backbone.View);
+
+
+},{"../templates/connect.jade":14,"backbone":32,"jquery":37,"sharify":40}],14:[function(require,module,exports){
+var jade = require("jade/runtime");
+
+module.exports = function template(locals) {
+var buf = [];
+var jade_mixins = {};
+var jade_interp;
+
+buf.push("<p>should render search field here.</p>");;return buf.join("");
+};
+},{"jade/runtime":36}],15:[function(require,module,exports){
 var $, Backbone, FeedView, feedTemplate, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -1366,7 +1449,7 @@ module.exports = FeedView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../components/feed/templates/feed.jade":15,"backbone":30,"jquery":35,"sharify":38}],14:[function(require,module,exports){
+},{"../../../components/feed/templates/feed.jade":17,"backbone":32,"jquery":37,"sharify":40}],16:[function(require,module,exports){
 var FeedView, SmallFeedView, feedTemplate, sd,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
@@ -1404,7 +1487,7 @@ module.exports = SmallFeedView = (function(_super) {
 })(FeedView);
 
 
-},{"../../../components/feed/templates/small_feed.jade":16,"./feed_view.coffee":13,"sharify":38}],15:[function(require,module,exports){
+},{"../../../components/feed/templates/small_feed.jade":18,"./feed_view.coffee":15,"sharify":40}],17:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1507,7 +1590,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1584,7 +1667,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1692,7 +1775,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1769,7 +1852,7 @@ if(channel)
 {
 buf.push("<ul class=\"bare-list\"><li><span" + (jade.attr("data-href", "/" + (block.get('connected_by_user_slug')) + "", true, false)) + " class=\"inline-link username\">" + (jade.escape(null == (jade_interp = block.get('connected_by_username')) ? "" : jade_interp)) + "</span><span class=\"arrow\">&#x279d;</span><span class=\"inline-link channel\">" + (jade.escape(null == (jade_interp = channel.smartTruncate(channel.get('title'), 30)) ? "" : jade_interp)) + "</span></li></ul>");
 }
-buf.push("</div></div>");
+buf.push("</div><div class=\"grid__block__connect-btn\">Connect</div></div><div class=\"grid__block__connect-container abs-fill\"></div>");
 }
 buf.push("</div>");
 if(block.get('class') != 'Channel')
@@ -1789,7 +1872,7 @@ buf.push("</div></div>");
 }).call(this);
 }("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined,"blocks" in locals_for_with?locals_for_with.blocks:typeof blocks!=="undefined"?blocks:undefined,"channel" in locals_for_with?locals_for_with.channel:typeof channel!=="undefined"?channel:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined));;return buf.join("");
 };
-},{"jade/runtime":34}],16:[function(require,module,exports){
+},{"jade/runtime":36}],18:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1846,7 +1929,7 @@ buf.push("<div class=\"feed-group__timestamp\">" + (jade.escape(null == (jade_in
 }).call(this);
 }("feed" in locals_for_with?locals_for_with.feed:typeof feed!=="undefined"?feed:undefined));;return buf.join("");
 };
-},{"jade/runtime":34}],17:[function(require,module,exports){
+},{"jade/runtime":36}],19:[function(require,module,exports){
 var $, Backbone, Feed, LightboxView, SmallFeedView, lightboxTemplate, mediator, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1914,7 +1997,7 @@ module.exports = LightboxView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../collections/feed.coffee":8,"../../../lib/mediator.coffee":21,"../../feed/client/small_feed_view.coffee":14,"../templates/lightbox.jade":19,"backbone":30,"jquery":35,"sharify":38}],18:[function(require,module,exports){
+},{"../../../collections/feed.coffee":8,"../../../lib/mediator.coffee":23,"../../feed/client/small_feed_view.coffee":16,"../templates/lightbox.jade":21,"backbone":32,"jquery":37,"sharify":40}],20:[function(require,module,exports){
 var Backbone, LightboxRouter, mediator, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -1933,14 +2016,25 @@ module.exports = LightboxRouter = (function(_super) {
   }
 
   LightboxRouter.prototype.routes = {
-    'block/:id': 'showBlock'
+    'block/:id': 'showBlock',
+    '': 'closeLightbox'
   };
 
   LightboxRouter.prototype.initialize = function() {
     return mediator.on('lightbox:closed', this.removeRoute, this);
   };
 
-  LightboxRouter.prototype.removeRoute = function() {};
+  LightboxRouter.prototype.closeLightbox = function() {};
+
+  LightboxRouter.prototype.removeRoute = function() {
+    var loc;
+    loc = window.location;
+    history.pushState("", document.title, loc.pathname + loc.search);
+    return this.navigate('', {
+      trigger: false,
+      replace: false
+    });
+  };
 
   LightboxRouter.prototype.showBlock = function(id) {
     return mediator.trigger('open:lightbox', {
@@ -1953,7 +2047,7 @@ module.exports = LightboxRouter = (function(_super) {
 })(Backbone.Router);
 
 
-},{"../../lib/mediator.coffee":21,"backbone":30,"underscore":40}],19:[function(require,module,exports){
+},{"../../lib/mediator.coffee":23,"backbone":32,"underscore":42}],21:[function(require,module,exports){
 var jade = require("jade/runtime");
 
 module.exports = function template(locals) {
@@ -1988,7 +2082,7 @@ buf.push("<div class=\"lightbox__content__description\">" + (null == (jade_inter
 }
 buf.push("</div></div><div id=\"lightbox__feed\" class=\"lightbox__feed\"></div></div><a class=\"lightbox--close\"><h1>&times;</h1></a>");}("block" in locals_for_with?locals_for_with.block:typeof block!=="undefined"?block:undefined,"sd" in locals_for_with?locals_for_with.sd:typeof sd!=="undefined"?sd:undefined));;return buf.join("");
 };
-},{"jade/runtime":34}],20:[function(require,module,exports){
+},{"jade/runtime":36}],22:[function(require,module,exports){
 var $, Backbone, Block, Blocks, Channel, NewBlockView, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2080,7 +2174,7 @@ module.exports = NewBlockView = (function(_super) {
 })(Backbone.View);
 
 
-},{"../../../collections/blocks.coffee":5,"../../../models/block.coffee":25,"../../../models/channel.coffee":26,"backbone":30,"jquery":35,"sharify":38}],21:[function(require,module,exports){
+},{"../../../collections/blocks.coffee":5,"../../../models/block.coffee":27,"../../../models/channel.coffee":28,"backbone":32,"jquery":37,"sharify":40}],23:[function(require,module,exports){
 var Backbone, mediator, _;
 
 _ = require('underscore');
@@ -2092,7 +2186,7 @@ mediator = _.extend({}, Backbone.Events);
 module.exports = (typeof window !== "undefined" && window !== null ? window.__mediator != null ? window.__mediator : window.__mediator = mediator : void 0) || mediator;
 
 
-},{"backbone":30,"underscore":40}],22:[function(require,module,exports){
+},{"backbone":32,"underscore":42}],24:[function(require,module,exports){
 var Chaplin, ModelLib, _;
 
 Chaplin = require('chaplin');
@@ -2125,7 +2219,7 @@ ModelLib = {
 module.exports = _.extend(ModelLib, Chaplin.SyncMachine);
 
 
-},{"chaplin":32,"underscore":40}],23:[function(require,module,exports){
+},{"chaplin":34,"underscore":42}],25:[function(require,module,exports){
 
 /*!
 jQuery Waypoints - v2.0.5
@@ -2133,16 +2227,19 @@ Copyright (c) 2011-2014 Caleb Troughton
 Licensed under the MIT license.
 https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
  */
-var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+var $,
+  __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
   __slice = [].slice;
+
+$ = require('jquery');
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    return define('waypoints', ['jquery'], function($) {
+    return define('waypoints', function($) {
       return factory($, root);
     });
   } else {
-    return factory(root.jQuery, root);
+    return factory($, root);
   }
 })(window, function($, window) {
   var $w, Context, Waypoint, allWaypoints, contextCounter, contextKey, contexts, isTouch, jQMethods, methods, resizeEvent, scrollEvent, waypointCounter, waypointKey, wp, wps;
@@ -2621,7 +2718,7 @@ var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; 
 });
 
 
-},{}],24:[function(require,module,exports){
+},{"jquery":37}],26:[function(require,module,exports){
 var Backbone, Base, Model, ModelLib, moment, sd, _,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2774,7 +2871,7 @@ module.exports = Base = (function(_super) {
 })(Model);
 
 
-},{"../lib/model_lib.coffee":22,"backbone":30,"chaplin":32,"moment":36,"sharify":38,"underscore":40}],25:[function(require,module,exports){
+},{"../lib/model_lib.coffee":24,"backbone":32,"chaplin":34,"moment":38,"sharify":40,"underscore":42}],27:[function(require,module,exports){
 var Base, Block, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2824,7 +2921,7 @@ module.exports = Block = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":24,"sharify":38}],26:[function(require,module,exports){
+},{"./base.coffee":26,"sharify":40}],28:[function(require,module,exports){
 var Base, Channel, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2856,7 +2953,7 @@ module.exports = Channel = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":24,"sharify":38}],27:[function(require,module,exports){
+},{"./base.coffee":26,"sharify":40}],29:[function(require,module,exports){
 var CurrentUser, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2903,7 +3000,7 @@ module.exports = CurrentUser = (function(_super) {
 })(User);
 
 
-},{"./user.coffee":29,"sharify":38}],28:[function(require,module,exports){
+},{"./user.coffee":31,"sharify":40}],30:[function(require,module,exports){
 var Base, FeedItem,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2974,7 +3071,7 @@ module.exports = FeedItem = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":24}],29:[function(require,module,exports){
+},{"./base.coffee":26}],31:[function(require,module,exports){
 var Base, User, sd,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2999,7 +3096,7 @@ module.exports = User = (function(_super) {
 })(Base);
 
 
-},{"./base.coffee":24,"sharify":38}],30:[function(require,module,exports){
+},{"./base.coffee":26,"sharify":40}],32:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -4609,7 +4706,7 @@ module.exports = User = (function(_super) {
 
 }));
 
-},{"underscore":31}],31:[function(require,module,exports){
+},{"underscore":33}],33:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -5954,7 +6051,7 @@ module.exports = User = (function(_super) {
   }
 }).call(this);
 
-},{}],32:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /*!
  * Chaplin 1.0.1
  *
@@ -9065,9 +9162,9 @@ if (typeof define === 'function' && define.amd) {
 }
 
 })();
-},{"backbone":30,"underscore":33}],33:[function(require,module,exports){
-module.exports=require(31)
-},{}],34:[function(require,module,exports){
+},{"backbone":32,"underscore":35}],35:[function(require,module,exports){
+module.exports=require(33)
+},{}],36:[function(require,module,exports){
 (function (global){
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.jade=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
@@ -9280,7 +9377,7 @@ exports.rethrow = function rethrow(err, filename, lineno, str){
 (1)
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],35:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -18472,7 +18569,7 @@ return jQuery;
 
 }));
 
-},{}],36:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 (function (global){
 //! moment.js
 //! version : 2.8.3
@@ -21332,7 +21429,7 @@ return jQuery;
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],37:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 function encode (o, sep) {
     var list = [];
     var key;
@@ -21366,7 +21463,7 @@ module.exports = {
     encode: encode,
     decode: decode
 };
-},{}],38:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 // Middleware that injects the shared data and sharify script
 module.exports = function(req, res, next) {
 
@@ -21415,7 +21512,7 @@ var bootstrapOnClient = module.exports.bootstrapOnClient = function() {
 };
 bootstrapOnClient();
 
-},{}],39:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 //  Underscore.string
 //  (c) 2010 Esa-Matti Suuronen <esa-matti aet suuronen dot org>
 //  Underscore.string is freely distributable under the terms of the MIT license.
@@ -22090,6 +22187,6 @@ bootstrapOnClient();
   root._.string = root._.str = _s;
 }(this, String);
 
-},{}],40:[function(require,module,exports){
-module.exports=require(31)
+},{}],42:[function(require,module,exports){
+module.exports=require(33)
 },{}]},{},[3]);

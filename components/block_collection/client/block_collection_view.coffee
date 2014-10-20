@@ -20,7 +20,9 @@ module.exports = class BlockCollectionView extends Backbone.View
     Backbone.history.start()
 
     @channel = options.channel
+    @blocks = options.blocks
 
+    @render()
     super
 
   renderConnectView: (event) ->
@@ -41,4 +43,4 @@ module.exports = class BlockCollectionView extends Backbone.View
       el: $('#l-lightbox-container')
       model: block
 
-  render: => # nothing for now
+  render: => console.log 'rendering block view', @
