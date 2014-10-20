@@ -1,4 +1,5 @@
 Backbone = require "backbone"
+$ = require 'jquery'
 Backbone.$ = $
 _ = require 'underscore'
 sd = require("sharify").data
