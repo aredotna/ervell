@@ -36,6 +36,10 @@ module.exports = class BlockSkeletonView extends Backbone.View
       container: @$el
       model: model
 
+  updateBlock: (id, model)->
+    $block = $("##{id}")
+    $block.replaceWith blockTemplate(block: model)
+
   renderSkeleton: ->
     @queue = []
     @pages = []
