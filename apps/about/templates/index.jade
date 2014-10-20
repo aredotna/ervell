@@ -6,7 +6,8 @@ block styles
 block body
 	.static__left-column
 		.static__title
-			strong Are.na /
+			a(href="/") Are.na 
+			| /
 		ul.static__menu
 			li 
 				a(href="#").active about
@@ -23,46 +24,47 @@ block body
 
 	.static__right-column
 		.static__about.static--text
-			| About
-			br
+			h1	About
 			|	Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into named "channels." People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators, and more. 
 			br 
 			br
 			|	We built Arena in response to feeling overwhelmed by the mass of information presented to us daily on the Internet. We wanted a tool that could help us collect and sort information as it appears. Arena enables you to build ideas over time using any content you add or come across online. We like to think of Arena as an evolving archive where people collaboratively create new concepts by combining found and original material.
 			br
 			br
-			| Some numbers 
+			|	Arena's users created 430'939 channels and connected 2'231'663 blocks of information.
 
 		.static__team.static--text
-			| Team
+			h1 Team
+			a(href="#") Charles Broskoski 
+			| - mini bio
 			br
-			| Charles Broskoski - mini bio
+			a(href="#") Chris Sherron 
+			| - mini bio
 			br
-			| Chris Sherron - mini bio
+			a(href="#") Daniel Pianetti 
+			| - mini bio
 			br
-			| Daniel Pianetti - mini bio
+			a(href="#") Morgan Sutherland 
+			| - mini bio
 			br
-			| Morgan Sutherland - mini bio
 			br
+			|	Advisors
 			br
-			| Advisors
-			br
-			| Damon Zucconi
-			br
-			| Dena Yago
-			br
-			| Daniel Brewster
-			br
-			| JMB
+			a(href="#") Damon Zucconi, 
+			a(href="#") Dena Yago, 
+			a(href="#") Daniel Brewster, 
+			a(href="#") JMB.
 
 		.static__premium.static--text
+			h1 Premium 
 			| - self-sustanability goal
 			br
 			| - some numbers
 			br
-			| - options for users to help: supporter and premium
+			| - options for users to help: supporter and premium [link to tools]
 
 		.static__labs.static--text
+			h1 Labs
 			| - Case studies (powered by arena)
 			br
 			| - API [link]
@@ -70,11 +72,15 @@ block body
 			| - We're open to collaborations for custom archives, CMS and stuff
 
 		.static__faq.static--text
+			h1 FAQs
 			| Q?
 			br
 			| A.
+			br
+			| [link to tutorial]
 
 		.static__contact.static--text
+			h1 Contact
 			| NYC
 			br
 			| info @ are.na
