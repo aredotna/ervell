@@ -14,8 +14,15 @@ module.exports = class BlockView extends Backbone.View
   initialize: (options)->
     @container = options.container if options.container
     @render() if @autoRender
+    @$el = $("##{@model.id}")
+
+    @listenTo @model, 'change', @update
 
     super
+
+  update: =>
+    # this doesnt work yet
+    # @$el.replaceWith blockTemplate(block: @model)
 
   render: =>
     @container[@containerMethod] blockTemplate(block: @model)
