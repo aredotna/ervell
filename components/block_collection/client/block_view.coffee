@@ -7,11 +7,15 @@ mediator = require '../../../lib/mediator.coffee'
 blockTemplate = -> require('../templates/block.jade') arguments...
 
 module.exports = class BlockView extends Backbone.View
+  autoRender: true
+  container: null
+  containerMethod: 'append'
 
-  initialize: ->
-    mediator.trigger 'connect'
-    @render()
+  initialize: (options)->
+    @container = options.container if options.container
+    @render() if @autoRender
+
     super
 
   render: =>
-    @$el.html blockTemplate()
+    @container[@containerMethod] blockTemplate(block: @model)

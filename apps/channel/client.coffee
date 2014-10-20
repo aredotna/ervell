@@ -8,7 +8,7 @@ Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 Collaborators = require '../../collections/collaborators.coffee'
 CurrentUser = require '../../models/current_user.coffee'
-NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
+BlockView = require '../../components/block_collection/client/block_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 blockCollectionTemplate = -> require('../../components/block_collection/templates/block_collection.jade') arguments...
@@ -32,7 +32,9 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @$el.html blockCollectionTemplate(blocks: @collection.models)
 
   appendBlock: (model)->
-    @$el.append blockTemplate(block: model)
+    new BlockView
+      container: @$el
+      model: model
 
   updateBlock: (id, model)->
     $block = $("##{id}")
