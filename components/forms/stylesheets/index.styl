@@ -72,20 +72,19 @@ button
   outline none
   background-color transparent
   cursor pointer
-  font-weight bold
-  color textgray
+  font-size 2em
+  font-weight normal
 
   &:hover
     background-color backgroundgray
-    color red
 
   &.button--border
-    border-top 1px solid textgray
+    border-top 1px solid public
 
     &:hover
       background-color transparent
-      border-top 1px solid public
-      color public
+      border-top 1px solid backgroundgray
+      color backgroundgray
       transition(0.1s)
 
   &.button--wide
@@ -100,15 +99,14 @@ button
   &.button--relative
     position relative
     float left
-    margin 20px 0 0 0
+    margin 40px 0 0 0
 
   &.button--add
     font-size caption
 
-  color textgray
+  color public
   margin 20px 0 0 0
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
+  antialiased()
 
   &:active
     background-color transparent
