@@ -11,6 +11,9 @@ module.exports = class BlockView extends Backbone.View
   container: null
   containerMethod: 'append'
 
+  events:
+    'click .grid__block__connect-btn' : 'loadConnectView'
+
   initialize: (options)->
     @container = options.container if options.container
     @render() if @autoRender
@@ -19,6 +22,11 @@ module.exports = class BlockView extends Backbone.View
     @listenTo @model, 'change', @update
 
     super
+
+  loadConnectView: (e)=>
+    e.preventDefault()
+    e.stopPropagation()
+    console.log 'should be loadConnectView'
 
   update: =>
     # this doesnt work yet
