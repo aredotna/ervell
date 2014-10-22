@@ -44,6 +44,8 @@
   position relative
   overflow hidden
   word-break break-word
+  border 2px solid #fff
+  transition (all 0.2s)
 
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 
@@ -72,19 +74,21 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
     padding 15px
 
 .grid__block__overlay
-  opacity: 0
-  pointer-events: none
-  background: #fff
-  background-position: center
+  opacity 0
+  pointer-events none
+  background #fff
+  background-position center
   background-size: 40%
   background-repeat: no-repeat
   transition (opacity 0.2s)
 
+.grid__block__inner:hover
+  border 2px solid lightgrayplus
+  transition (all 0.2s)
 
-.grid__block:hover .grid__block__overlay
+.grid__block__inner:hover .grid__block__overlay
   opacity 1
   background-color rgba(255,255,255, 0.92)
-  border 2px solid bordergray
   pointer-events all
 
 .grid__block.grid__block--text:hover .grid__block__overlay
