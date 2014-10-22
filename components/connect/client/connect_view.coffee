@@ -16,7 +16,11 @@ module.exports = class ConnectView extends Backbone.View
 
   render: =>
     @$el.html connectTemplate()
+    @focusSearch()
     @renderChannels()
+
+  focusSearch: ->
+    @$('.new-connection__search').focus()
 
   renderChannels: =>
     new ConnectResultsView

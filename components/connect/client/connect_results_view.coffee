@@ -10,9 +10,18 @@ connectResultsTemplate = -> require('../templates/connect_results.jade') argumen
 module.exports = class ConnectResultsView extends Backbone.View
 
   initialize: ->
-    
+    @collection = new UserBlocks null,
+      user_slug: sd.CURRENT_USER.slug
+
+    @collection.fetch
+      data:
+        per: 3
+        filter:
+          type: 'channel'
+
+    @collection.on "sync", @render, @
+
     super
 
-  render: =>
-    @$el.html connectResultsTemplate()
-    @renderChannels()
+  render: ->
+    @$el.html connectResultsTemplate(blocks: @collection.models)
