@@ -83,19 +83,19 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
   transition (opacity 0.2s)
 
 .grid__block__inner:hover
-  border 2px solid lightgrayplus
+  border 2px solid bordergray
   transition (all 0.2s)
 
 .grid__block__inner:hover .grid__block__overlay
   opacity 1
-  background-color rgba(255,255,255, 0.92)
+  background-color rgba(255,255,255, 0.95)
   pointer-events all
 
 .grid__block.grid__block--text:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0.92)
+  background-color rgba(255,255,255, 0.95)
 
 .grid__block.grid__block--channel:hover .grid__block__overlay, .grid__block.grid__block--user:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0.92)
+  background-color rgba(255,255,255, 0.95)
   opacity 0
 
 
@@ -106,7 +106,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 
 .grid__block__mini-feed
   font-size caption
-  padding-top 20px
+  padding-top 135px
   font-weight bold
   color textgray
 
@@ -116,11 +116,17 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 .grid__block__connect-btn
   position absolute
   bottom 0
+  width 90%
+  height 60px
+  margin 0 0 0 5%
+  line-height 55px
+  font-weight bold
+  font-size 1em
   border-top 1px solid textgray
-  width 100%
-  height 30px
-  line-height 30px
   cursor pointer
+
+  &:hover
+    color hovergray
 
 .grid__block__connect-container
   pointer-events none
