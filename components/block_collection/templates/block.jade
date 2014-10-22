@@ -2,7 +2,6 @@ include ../../avatar/templates/avatar
 
 //- a(href="#{block.getHref()}")
 
-
 div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}" id="#{block.id}")
   .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")
     - if(block.get('class') != 'Channel' || block.get('class') != 'User')
