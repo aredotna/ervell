@@ -3,6 +3,7 @@ $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+ConnectResultsView = require './connect_results_view.coffee'
 
 connectTemplate = -> require('../templates/connect.jade') arguments...
 
@@ -15,3 +16,8 @@ module.exports = class ConnectView extends Backbone.View
 
   render: =>
     @$el.html connectTemplate()
+    @renderChannels()
+
+  renderChannels: =>
+    new ConnectResultsView
+      el: @$('.new-connection__search-results')
