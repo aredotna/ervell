@@ -13,6 +13,7 @@ module.exports = class BlockView extends Backbone.View
   container: null
   containerMethod: 'append'
 
+  # this should fall back to an actual link
   events:
     'click .grid__block__overlay' : 'openLightbox'
     'click .grid__block__connect-btn' : 'loadConnectView'
@@ -40,11 +41,14 @@ module.exports = class BlockView extends Backbone.View
       block: @block
 
   openLightbox: ->
-    loc = window.location
-    history.pushState "", document.title, loc.pathname + "#/show/#{@model.id}"
-    @lbv = new LightboxView
-      el: $('#l-lightbox-container')
-      model: @model
+    if @model.get('base_class') is 'Channel' or @model.get('base_class') is 'User'
+      document.location.href = @model.getHref()
+    else
+      loc = window.location
+      history.pushState "", document.title, loc.pathname + "#/show/#{@model.id}"
+      @lbv = new LightboxView
+        el: $('#l-lightbox-container')
+        model: @model
 
   update: (model)=>
     $("##{model.id}").replaceWith blockTemplate(block: model)

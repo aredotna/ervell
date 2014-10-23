@@ -10,6 +10,7 @@ LightboxView = require '../../lightbox/client/lightbox_view.coffee'
 module.exports = class BlockCollectionView extends Backbone.View
 
   initialize: (options)->
+    console.log 'init BlockCollectionView'
     mediator.on 'open:lightbox', @openLightbox, @
 
     new LightboxRouter
