@@ -38,7 +38,7 @@ module.exports = class BlockView extends Backbone.View
     $connect_container.addClass 'is-active'
     new ConnectView
       el: $connect_container
-      block: @block
+      block: @model
 
   openLightbox: ->
     if @model.get('base_class') is 'Channel' or @model.get('base_class') is 'User'

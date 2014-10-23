@@ -66,6 +66,12 @@ privacy-color(prefix, attr)
         border 2px solid
       {attr} value[1]
 
+privacy-light-color(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0]}
+      {attr} alpha(value[1], 0.2)
+
 .serif-text
   font-family font_serif
   font-weight 100

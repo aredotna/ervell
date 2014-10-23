@@ -18,6 +18,23 @@
   padding .5em
   margin-top .5em
   margin-bottom .5em
+  transition background-color 0.3s
 
 privacy-color('.new-connection__search-result-', border-color)
 privacy-color('.new-connection__search-result-', color)
+privacy-light-color('.is-connected.new-connection__search-result-', background-color)
+
+
+.new-connection__done-button
+  position absolute
+  bottom 0
+  width 100%
+  height 60px
+  line-height 55px
+  font-weight bold
+  font-size 1em
+  border-top 1px solid hovergray
+  cursor pointer
+
+  &:hover
+    color hovergray
