@@ -18,27 +18,18 @@ collaboratorsTemplate = -> require('./templates/collaborators.jade') arguments..
 module.exports = class BlockSkeletonView extends Backbone.View
 
   initialize: ->
-    console.log 'initialize BlockSkeletonView'
     @collection.on "add", @appendBlock, @
     @collection.on "merge:skeleton", @renderSkeleton, @
-    @collection.on "model:updated", @updateBlock, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
     @collection.loadSkeleton()
 
     super
 
-  render: ->
-    @$el.html blockCollectionTemplate(blocks: @collection.models)
-
   appendBlock: (model)->
     new BlockView
       container: @$el
       model: model
-
-  updateBlock: (id, model)->
-    $block = $("##{id}")
-    $block.replaceWith blockTemplate(block: model)
 
   renderSkeleton: ->
     @queue = []

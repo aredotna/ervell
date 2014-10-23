@@ -40,7 +40,7 @@
 .grid__block .grid__block--channel
   color
 
-.grid__block__inner
+.grid__block__inner, .grid__block__connect-container
   width 100%
   height block_width
   position relative
@@ -84,11 +84,11 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
   background-size: 40%
   background-repeat: no-repeat
   transition (opacity 0.2s)
+  transition-delay 0.4s
   cursor pointer
 
 .grid__block__inner:hover
   border 2px solid bordergray
-  transition (all 0.2s)
   cursor pointer
 
 .grid__block__inner:hover .grid__block__overlay

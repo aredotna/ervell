@@ -8,11 +8,15 @@ $ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
+UserBlocks = require '../../collections/user_blocks.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 
 module.exports.init = ->
   channel = new Channel sd.CHANNEL
+  blocks = new UserBlocks sd.BLOCKS,
+    channel_slug: sd.CHANNEL.slug
 
   new BlockCollectionView
     el: $ ".grid"
     channel: channel
+    blocks: blocks

@@ -1,5 +1,4 @@
 Backbone = require 'backbone'
-$ = require 'jquery'
 Backbone.$ = $
 _ = require 'underscore'
 HeaderView = require './header/view.coffee'

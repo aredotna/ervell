@@ -2,7 +2,6 @@
 # Collection for a group of Blocks fetched via a channel
 #
 _ = require 'underscore'
-$ = require 'jquery'
 Blocks = require("./blocks.coffee")
 sd = require("sharify").data
 Block = require("../models/block.coffee")
@@ -57,8 +56,8 @@ module.exports = class ChannelBlocks extends Blocks
 
       model = new Block models[retrieveFn]()
 
-      @get(model.id).set(model, sort:false)
-      @trigger 'model:updated', model.id, model
+      @get(model.id).set(model)
+      mediator.trigger "model:#{model.id}:updated", model
 
       _.defer replacePlaceholder
     )()
