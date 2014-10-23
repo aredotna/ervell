@@ -6,14 +6,14 @@ body.is-modal
 
 #modal
   z-index modal_z
-  transition opacity 1.25s
+  transition opacity 0.25s
   opacity 0
   color backgroundgray
   antialiased()
   // Default is a simple fade in
   &[data-state='open'], &.is-open
     opacity 1
-    transition opacity 1.25s
+    transition opacity 0.25s
     > .modal-backdrop > .modal-dialog
       // Avoid transitioning the initial open
       transition all 0.25s, width 0
