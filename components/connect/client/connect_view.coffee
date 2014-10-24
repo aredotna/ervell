@@ -12,13 +12,17 @@ module.exports = class ConnectView extends Backbone.View
 
   events:
     'keyup .new-connection__search' : 'onKeyUp'
-    'click .new-connection__done-button' : 'remove'
+    'click .new-connection__done-button' : 'clear'
 
   initialize: (options)->
     @block = options.block
     @$input = @$('.new-connection__search')
     @render()
     super
+
+  clear: ->
+    @$el.html ""
+    @undelegateEvents()
 
   onKeyUp: (e)->
     e.preventDefault()
