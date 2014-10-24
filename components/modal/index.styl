@@ -8,7 +8,7 @@ body.is-modal
   z-index modal_z
   transition opacity 1.25s
   opacity 0
-  color backgroundgray
+  color textgray
   antialiased()
   // Default is a simple fade in
   &[data-state='open'], &.is-open
@@ -55,39 +55,42 @@ body.is-modal
   left 0
 
 .modal-backdrop
-  background-color rgba(26, 26, 26, 0.97)
-
+  background rgba(240, 240, 240, 0.85) 
+  
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
+  
 
 .modal-dialog
   position fixed
   overflow-y auto
-  background-color none
-  width 600px
-  height auto
-  margin 0 0 0 0
-  border-left 0px solid lightgray
-  border-right 0px solid lightgray
-  background-color none
+  background-color backgroundgray
+  border 2px solid bordergray
+  width 94%
+  height 90%
+  margin 1% 0 0 0
   &.is-notransition
     transition none !important
 
 .modal-close
-  position fixed
+  position absolute
   top 30px
   right 30px
-  font-size 50px
+  font-size 28px
+  font-weight bold
   cursor pointer
   z-index 2
-  color backgroundgray
+  color textgray
 
   &:hover
-    color lightgray
+    color hovergray
 
-.modal-dialog
 .modal-body
-  padding 1em
+  max-width 600px
+  margin auto
+  vertical-align middle
+  height 100%
+  padding 10% 0 0 0
   transition opacity 0.25s
   &[data-state='fade-out'], &.is-fade-out
     opacity 0
@@ -95,10 +98,10 @@ body.is-modal
     opacity 1
 
 .modal-title
-  position fixed
-  left 35px
-  top 40px
-  font-size 2em
+  position absolute
+  left 30px
+  top 30px
+  font-size 1.8em
   font-weight bold
   margin 0
   padding 0

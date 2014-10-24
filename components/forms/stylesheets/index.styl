@@ -3,9 +3,8 @@ input
   font-weight normal
   margin 0 0 0 0
   color textgray
-  background-color backgroundgray
-  border none
-  border-bottom 0px solid lightgray
+  background-color secondbackgroundgray
+  border 2px solid backgroundgray
   padding 0 0 0 10px
   font-family font_sans
   antialiased()
@@ -28,7 +27,7 @@ input
 
   &:focus
     outline none
-    border-bottom 0
+    border 2px solid bordergray
     background-color secondbackgroundgray
     transition(0.1s)
 
@@ -46,7 +45,7 @@ input
 
   &.input--wide
     width: 100%
-    height 45px
+    height 50px
 
   &.input--relative
     position relative
@@ -79,12 +78,12 @@ button
     background-color backgroundgray
 
   &.button--border
-    border-top 1px solid public
+    border-top 1px solid textgray
 
     &:hover
       background-color transparent
-      border-top 1px solid backgroundgray
-      color backgroundgray
+      border-top 1px solid public
+      color public
       transition(0.1s)
 
   &.button--wide
@@ -104,7 +103,7 @@ button
   &.button--add
     font-size caption
 
-  color public
+  color textgray
   margin 20px 0 0 0
   antialiased()
 
