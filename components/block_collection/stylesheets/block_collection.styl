@@ -78,12 +78,9 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 .grid__block__overlay
   opacity 0
   pointer-events none
-  background #fff
   background-position center
   background-size: 40%
   background-repeat: no-repeat
-  transition (opacity 0s)
-  transition-delay 0.4s
   cursor pointer
 
 .grid__block__inner:hover
@@ -92,14 +89,13 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 
 .grid__block__inner:hover .grid__block__overlay
   opacity 1
-  background-color rgba(255,255,255, 0.95)
   pointer-events all
 
 .grid__block.grid__block--text:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0.95)
+  // background-color rgba(255,255,255, 0.95)
 
 .grid__block.grid__block--channel:hover .grid__block__overlay, .grid__block.grid__block--user:hover .grid__block__overlay
-  background-color rgba(255,255,255, 0.95)
+  // background-color rgba(255,255,255, 0.95)
   opacity 0
 
 
@@ -120,23 +116,22 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 .grid__block__connect-btn
   position absolute
   bottom 0
-  width 90%
+  width 100%
   height 60px
-  margin 0 0 0 5%
   line-height 55px
   font-weight bold
   font-size 1em
-  border-top 1px solid hovergray
   cursor pointer
+  background-color rgba(255,255,255, 0.8)
 
   &:hover
     color hovergray
+    background-color backgroundgray
 
 .grid__block__connect-container
   pointer-events none
   opacity 0
   background-color #fff
-  transition(.1s, opacity)
 
   &.is-active
     opacity 1

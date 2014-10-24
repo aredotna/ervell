@@ -22,6 +22,7 @@ module.exports = class ConnectView extends Backbone.View
 
   clear: ->
     @$el.html ""
+    @$el.removeClass 'is-active'
     @undelegateEvents()
 
   onKeyUp: (e)->
