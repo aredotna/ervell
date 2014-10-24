@@ -4,7 +4,6 @@
 #
 
 Backbone = require "backbone"
-$ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"

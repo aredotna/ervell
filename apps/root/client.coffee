@@ -1,7 +1,6 @@
 # // TODO: make into a block view
 
 Backbone = require "backbone"
-$ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Feed = require "../../collections/feed.coffee"

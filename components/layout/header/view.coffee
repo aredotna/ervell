@@ -5,7 +5,6 @@ AuthModalView = require '../../auth_modal/view.coffee'
 AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
 sd = require('sharify').data
-$ = require 'jquery'
 Backbone.$ = $
 
 module.exports = class HeaderView extends Backbone.View

@@ -5,7 +5,6 @@ Licensed under the MIT license.
 https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
 ###
 
-$ = require 'jquery'
 
 ((root, factory) ->
   if typeof define is 'function' and define.amd

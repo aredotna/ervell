@@ -1,5 +1,4 @@
 Backbone = require "backbone"
-$ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
