@@ -16,8 +16,13 @@ section.path
       span.active.channel(class="privacy-#{channel.get('status')}")
         = channel.get('title')
   
-  .edit-channel
-    a(href="#") Edit channel
+  if channel
+    .edit-channel
+      a(href="#") Edit channel
+
+  else if author
+    .edit-profile
+      a(href="#") Profile settings
 
   if channel
     .metadata
