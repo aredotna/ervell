@@ -1621,7 +1621,7 @@ module.exports = ConnectView = (function(_super) {
 
   ConnectView.prototype.events = {
     'keyup .new-connection__search': 'onKeyUp',
-    'click .new-connection__done-button': 'remove'
+    'click .new-connection__done-button': 'clear'
   };
 
   ConnectView.prototype.initialize = function(options) {
@@ -1629,6 +1629,12 @@ module.exports = ConnectView = (function(_super) {
     this.$input = this.$('.new-connection__search');
     this.render();
     return ConnectView.__super__.initialize.apply(this, arguments);
+  };
+
+  ConnectView.prototype.clear = function() {
+    this.$el.html("");
+    this.$el.removeClass('is-active');
+    return this.undelegateEvents();
   };
 
   ConnectView.prototype.onKeyUp = function(e) {
