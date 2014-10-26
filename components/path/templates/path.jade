@@ -15,6 +15,14 @@ section.path
       span.separator /
       span.active.channel(class="privacy-#{channel.get('status')}")
         = channel.get('title')
+  
+  if channel
+    .edit-channel
+      a(href="#") Edit channel
+
+  else if author
+    .edit-profile
+      a(href="#") Profile settings
 
   if channel
     .metadata
@@ -29,7 +37,7 @@ section.path
           //- Rendered by client
       .metadata__column
         .metadata__title
-          | Followers:
+          | Followers
         .metadata__text
           = channel.get('follower_count')
 
@@ -37,30 +45,30 @@ section.path
     .metadata
       .metadata__column
         .metadata__title
-          | Info:
+          | Info
         .metadata__text
           | Son of @broskoski, father of a cat. NYC.
           a(href="#")  Noway.com
 
       .metadata__column
         .metadata__title
-          | View:
+          | View
         .metadata__text
           a(href="#") All
           |  / 
           a(href="#").metadata--active Channels
-          |  /
+          |  / 
           a(href="#") Blocks
 
       .metadata__column
         .metadata__title
-          | Followers:
+          | Followers
         .metadata__text
           = author.get('follower_count')
 
       .metadata__column
         .metadata__title
-          | Following:
+          | Following
         .metadata__text
           = author.get('following_count')
 //-
