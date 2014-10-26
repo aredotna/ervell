@@ -30,20 +30,23 @@ body.is-lightbox
   position static
 
 .lightbox__content
-  padding s_margin * 3
+  padding s_margin * 4
   padding-bottom topbar_h
 
 .lightbox__content__title
   padding-top 1.5em
+  font-size 1em
 
 .lightbox--close
   display block
   position absolute
+  top 32px
+  right 32px
+  font-size 28px
+  line-height 28px
+  cursor pointer
+  z-index 2
   color textgray
-  font-weight normal
-  font-size 26px
-  top s_margin * 3
-  right s_margin * 2
 
   &:hover
     color hovergray
@@ -59,7 +62,7 @@ body.is-lightbox
     margin 0.8em 0
 
 .lightbox__content__description
-  font-size 14px
+  font-size 1em
 
 .lightbox__content__text
   box-shadow 0px 0px 14px rgba(0,0,0,0.1)
@@ -79,9 +82,15 @@ body.is-lightbox
   text-align center
   background-color backgroundgray
   border-top 0
-  padding 30px 0 50px 0
+  padding 70px 0 50px 0
 
   .feed-group__sentence
     padding-bottom 1.1em
+    font-size feed
+    
+  .feed-group__timestamp
+    font-size caption
+    margin-top 10px
+    
 
 

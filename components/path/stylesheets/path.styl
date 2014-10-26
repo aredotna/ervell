@@ -3,10 +3,15 @@
 .path
   position relative
   color textgray
-  margin 6em 0 4em 10px
+  margin 6em 10px 4em 10px
   text-align left
   font-weight normal
 
+  h1
+    position relative
+    float left
+    width auto
+    
   .username
     font-weight bold
 
@@ -25,8 +30,16 @@
 
   privacy-color('.privacy-', color)
 
+.edit-channel, edit-profile
+  position relative
+  float right
+  width auto
+  color lightgray
+  font-size caption + 1
+  line-height: 30px;
+
 .metadata
-  padding 25px 0 10px 0
+  padding 75px 0 10px 0
   color textgray
   font-size caption + 1
   line-height 1.5
@@ -34,11 +47,12 @@
   .metadata__column
     display inline-block
     vertical-align top
-    margin 0 35px 0 0
-    width 200px
+    margin 0 50px 0 0
+    width 210px
 
   .metadata__title
     width 100%
+    color lightgray
 
   .metadata__text
     width 100%
