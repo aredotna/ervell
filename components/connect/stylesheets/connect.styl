@@ -7,6 +7,7 @@
 
 .new-connection__caption
   font-size caption
+  color lightgrayplus
   margin-top 1em
   margin-bottom 1em
 
@@ -15,10 +16,13 @@
 
 .new-connection__search-result
   text-align left
-  padding .5em
+  padding .7em .5em .7em .5em 
   margin-top .5em
   margin-bottom .5em
   transition background-color 0.3s
+  
+  &:hover
+    border-color bordergray
 
 privacy-color('.new-connection__search-result-', border-color)
 privacy-color('.new-connection__search-result-', color)
@@ -27,17 +31,8 @@ privacy-light-color('.is-loading.new-connection__search-result-', background-col
 
 .new-connection__done-button
   position absolute
-  bottom 0
+  bottom 0.6em
   left 0
-  width 92%
-  left 4%
-  height 60px
-  line-height 50px
   font-weight bold
   font-size 1.4em
-  border-top 1px solid bordergray
   cursor pointer
-
-  &:hover
-    color hovergray
-    border-top 1px solid textgray
