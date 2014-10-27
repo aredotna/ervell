@@ -56,12 +56,15 @@ module.exports = class Feed extends Base
   parse: (data)->
     @exhausted = true if data.item_count is 0
 
-    items = _.filter data.items, (model) => 
+    items = _.filter data.items, (model) =>
       # model.user? && !(model.user.id is @options.user.id and model.action is 'has joined Arena') && model?.item?.kind != "shortcuts"
       model.user?
 
-    groups = _.groupBy items, (model) -> 
-      "#{model.user?.id}_#{model.target?.id}_#{model.action}"
+    groups = _.groupBy items, (model) ->
+      if model.action is 'commented on'
+        "#{model.user?.id}_#{model.target?.id}_#{model.created_at}"
+      else
+        "#{model.user?.id}_#{model.target?.id}_#{model.action}"
 
     # Split group into multiple groups if there is a gap
     # of more than an hour between the creation of any
