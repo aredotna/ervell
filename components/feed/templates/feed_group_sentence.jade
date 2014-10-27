@@ -4,8 +4,11 @@
   span=group.action()
   span &nbsp;
   if group.is_single()
-    span
-      a(href="#{group.single_subject_link()}")=group.single_subject()
+    if group.is_comment()
+      em.feed-group__sentence__comment=group.single_subject()
+    else
+      span
+        a(href="#{group.single_subject_link()}")=group.single_subject()
   else
     span=group.grouped_subject()
   if group.connector()
