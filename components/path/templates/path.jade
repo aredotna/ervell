@@ -1,20 +1,20 @@
 section.path
   h1
-    span.root
-      a(href='/') Are.na
-    span.separator /
-    if !channel && !author
-      span.root--active feed  
-      span.root--unactive 
-        span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
-        a(href="#") explore
-    if author
-      span.username
-        a(href="/" + author.get('slug'))=author.get('username')
-    if channel
-      span.separator /
-      span.active.channel(class="privacy-#{channel.get('status')}")
-        = channel.get('title')
+    ul.path__breadcrumb
+      li.root
+        a(href='/') Are.na
+      if !channel && !author
+        //- li
+        //-   span.root--active feed  
+        //-   span.root--unactive 
+        //-     span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
+        //-     a(href="#") explore
+      if author
+        li.path__username
+          a(href="/" + author.get('slug'))=author.get('username')
+      if channel
+        li.path__channel.active.channel(class="privacy-#{channel.get('status')}")
+          = channel.get('title')
 
   if channel
     .edit-channel
