@@ -6,12 +6,13 @@
   margin 6em 10px 4em 10px
   text-align left
   font-weight normal
+  clearfix()
 
   h1
     position relative
     float left
     width auto
-    
+
   .username
     font-weight bold
 
@@ -19,6 +20,7 @@
     border-bottom 0
 
   .channel
+    // nothing
 
   .active
     font-weight normal
@@ -35,13 +37,13 @@
   float right
   width auto
   color lightgray
-  font-size caption + 1
+  font-size s_caption + 1
   line-height: 30px;
 
 .metadata
   padding 75px 0 10px 0
   color textgray
-  font-size caption + 1
+  font-size s_caption + 1
   line-height 1.5
 
   .metadata__column
@@ -64,7 +66,7 @@
     font-weight normal
     cursor normal
 
-.root--active 
+.root--active
   color textgray
   font-weight bold
 
@@ -73,12 +75,6 @@
 
   a
     color bordergray
-  
+
     &:hover
       color textgray
-  
-    
-    
-  
-  
-
