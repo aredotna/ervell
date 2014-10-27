@@ -24,6 +24,7 @@ module.exports = class ConnectView extends Backbone.View
     @$el.html ""
     @$el.removeClass 'is-active'
     @undelegateEvents()
+    mediator.trigger "connection:#{@block.id}:complete"
 
   onKeyUp: (e)->
     e.preventDefault()

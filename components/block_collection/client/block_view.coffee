@@ -24,7 +24,8 @@ module.exports = class BlockView extends Backbone.View
     @render() if @autoRender
     @$el = $("##{@model.id}")
 
-    mediator.on "model:#{@model.id}:updated", @update
+    mediator.on "model:#{@model.id}:updated", @update, @
+    mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
 
     super
 
@@ -33,8 +34,9 @@ module.exports = class BlockView extends Backbone.View
     e.stopPropagation()
 
     $connect_container = @$('.grid__block__connect-container')
-
     $connect_container.addClass 'is-active'
+    @$('.grid__block__inner').addClass 'is-active'
+
     new ConnectView
       el: $connect_container
       block: @model
@@ -49,10 +51,13 @@ module.exports = class BlockView extends Backbone.View
         el: $('#l-lightbox-container')
         model: @model
 
-  update: (model)=>
+  update: (model)->
     $("##{model.id}").replaceWith blockTemplate(block: model)
     @$el = $("##{model.id}")
+    @model = model
     @delegateEvents()
+
+  removeActiveClass: -> @$('.grid__block__inner').removeClass 'is-active'
 
   render: =>
     @container[@containerMethod] blockTemplate(block: @model)
