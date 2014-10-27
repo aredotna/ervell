@@ -1,14 +1,14 @@
 section.path
-  h1
+  h2
     ul.path__breadcrumb
       li.root
         a(href='/') Are.na
       if !channel && !author
-        //- li
-        //-   span.root--active feed  
-        //-   span.root--unactive 
-        //-     span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
-        //-     a(href="#") explore
+        li
+          span.root--active feed  
+          span.root--unactive 
+            span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
+            a(href="#") explore
       if author
         li.path__username
           a(href="/" + author.get('slug'))=author.get('username')
