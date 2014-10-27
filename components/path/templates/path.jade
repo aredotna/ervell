@@ -15,14 +15,14 @@ section.path
       span.separator /
       span.active.channel(class="privacy-#{channel.get('status')}")
         = channel.get('title')
-  
+
   if channel
     .edit-channel
       a(href="#") Edit channel
 
   else if author
-    .edit-profile
-      a(href="#") Profile settings
+    //- .edit-profile
+    //-   a(href="#") Profile settings
 
   if channel
     .metadata
@@ -43,20 +43,21 @@ section.path
 
   else if author
     .metadata
-      .metadata__column
-        .metadata__title
-          | Info
-        .metadata__text
-          | Son of @broskoski, father of a cat. NYC.
-          a(href="#")  Noway.com
+      if author.has('metadata')
+        .metadata__column
+          .metadata__title
+            | Info
+          .metadata__text
+            | Son of @broskoski, father of a cat. NYC.
+            a(href="#")  Noway.com
 
       .metadata__column
         .metadata__title
           | View
         .metadata__text
-          a(href="#") All
+          a(href="#").metadata--active All
           |  / 
-          a(href="#").metadata--active Channels
+          a(href="#") Channels 
           |  / 
           a(href="#") Blocks
 

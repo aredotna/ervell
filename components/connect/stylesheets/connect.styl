@@ -1,0 +1,38 @@
+@import '../../layout/variables'
+
+.new-connection
+  height 100%
+  width 100%
+  padding .6em
+
+.new-connection__caption
+  font-size s_caption
+  color lightgrayplus
+  margin-top 1em
+  margin-bottom 1em
+
+.new-connection__caption--top
+  margin-top 0
+
+.new-connection__search-result
+  text-align left
+  padding .7em .5em .7em .5em
+  margin-top .5em
+  margin-bottom .5em
+  transition background-color 0.3s
+
+  &:hover
+    border-color bordergray
+
+privacy-color('.new-connection__search-result-', border-color)
+privacy-color('.new-connection__search-result-', color)
+privacy-light-color('.is-connected.new-connection__search-result-', background-color)
+privacy-light-color('.is-loading.new-connection__search-result-', background-color)
+
+.new-connection__done-button
+  position absolute
+  bottom 0.6em
+  left 0
+  font-weight bold
+  font-size 1.4em
+  cursor pointer

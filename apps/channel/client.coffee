@@ -7,7 +7,7 @@ Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 Collaborators = require '../../collections/collaborators.coffee'
 CurrentUser = require '../../models/current_user.coffee'
-NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
+BlockView = require '../../components/block_collection/client/block_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 blockCollectionTemplate = -> require('../../components/block_collection/templates/block_collection.jade') arguments...
@@ -17,25 +17,18 @@ collaboratorsTemplate = -> require('./templates/collaborators.jade') arguments..
 module.exports = class BlockSkeletonView extends Backbone.View
 
   initialize: ->
-    console.log 'initialize BlockSkeletonView'
     @collection.on "add", @appendBlock, @
     @collection.on "merge:skeleton", @renderSkeleton, @
-    @collection.on "model:updated", @updateBlock, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
     @collection.loadSkeleton()
 
     super
 
-  render: ->
-    @$el.html blockCollectionTemplate(blocks: @collection.models)
-
   appendBlock: (model)->
-    @$el.append blockTemplate(block: model)
-
-  updateBlock: (id, model)->
-    $block = $("##{id}")
-    $block.replaceWith blockTemplate(block: model)
+    new BlockView
+      container: @$el
+      model: model
 
   renderSkeleton: ->
     @queue = []
@@ -204,7 +197,9 @@ module.exports.init = ->
     channel_slug: sd.CHANNEL.slug
 
   new BlockCollectionView
-    el: 'body'
+    el: $ ".grid"
+    channel: channel
+    blocks: blocks
 
   new BlockSkeletonView
     collection: blocks

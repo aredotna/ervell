@@ -39,10 +39,9 @@ setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
 
 setupAjaxHeaders = ->
-  console.log 'sd.CURRENT_USER?.authentication_token', sd.CURRENT_USER?.authentication_token, $
+  console.log 'sd.CURRENT_USER?.authentication_token', sd.CURRENT_USER?.authentication_token
   $.ajaxSetup
     beforeSend: (xhr)->
-      console.log 'beforeSend'
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
 
 setupPageclickEvent = -> # nothing for now

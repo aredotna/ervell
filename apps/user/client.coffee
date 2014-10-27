@@ -4,20 +4,16 @@
 #
 
 Backbone = require "backbone"
-$ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
+UserBlocks = require '../../collections/user_blocks.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 
-module.exports = class UserBlockCollectionView extends Backbone.View
-
-  initialize: ->
-    @model.on "sync", @render
-
-  render: =>
-    @$("header").html headerTemplate(channel: @model, username: sd.USERNAME)
-
 module.exports.init = ->
+  blocks = new UserBlocks sd.BLOCKS,
+    user_slug: sd.USER.slug
+
   new BlockCollectionView
-    el: 'body'
+    el: $ ".grid"
+    blocks: blocks

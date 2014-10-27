@@ -4,12 +4,14 @@ Copyright (c) 2011-2014 Caleb Troughton
 Licensed under the MIT license.
 https://github.com/imakewebthings/jquery-waypoints/blob/master/licenses.txt
 ###
+
+
 ((root, factory) ->
   if typeof define is 'function' and define.amd
-    define 'waypoints', ['jquery'], ($) ->
+    define 'waypoints', ($) ->
       factory $, root
   else
-    factory root.jQuery, root
+    factory $, root
 ) window, ($, window) ->
   $w = $ window
 

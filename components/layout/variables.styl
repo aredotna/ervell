@@ -36,11 +36,11 @@ container_pad         = 20px
 downshadow            = 0px 4px 14px -7px rgba(0,0,0,0.1)
 
 // transitions
-transition(n)
-  -webkit-transition: all ease-in n
-  -moz-transition: all ease-in n
-  -o-transition: all ease-in n
-  transition: all ease-in n
+transition(n, property = all)
+  -webkit-transition: property ease-in n
+  -moz-transition: property ease-in n
+  -o-transition: property ease-in n
+  transition: property ease-in n
 
 // antialiased
 antialiased()
@@ -66,6 +66,12 @@ privacy-color(prefix, attr)
       if attr == border-color
         border 2px solid
       {attr} value[1]
+
+privacy-light-color(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0]}
+      {attr} alpha(value[1], 0.2)
 
 .serif-text
   font-family font_serif

@@ -19,7 +19,7 @@
 
 .grid__block--new-block__form
   pointer-events none
-  padding 1em
+  padding 0.2em
 
 .grid__block--new-block__form.active
   opacity 1
@@ -28,11 +28,18 @@
 
 .grid__block--new-block__content-field
   width 100%
-  height 200px
+  height 205px
   border 0
   antialiased()
   &:hover
     background-color backgroundgray
+    
+.grid__block--new-block__submit
+  line-height 50px
+  font-size 1em
+  font-weight bold 
+  color lightgray
+  border-top 2px solid bordergray
 
 .grid__block--new-block__cancel
   position absolute

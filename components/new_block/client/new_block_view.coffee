@@ -1,5 +1,4 @@
 Backbone = require "backbone"
-$ = require 'jquery'
 Backbone.$ = $
 sd = require("sharify").data
 Blocks = require '../../../collections/blocks.coffee'

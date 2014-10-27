@@ -1,5 +1,4 @@
 Chaplin = require 'chaplin'
-$ = require 'jquery'
 Chaplin.$ = $
 sd = require("sharify").data
 InfiniteView = require '../../../components/pagination/infinite_view.coffee'
