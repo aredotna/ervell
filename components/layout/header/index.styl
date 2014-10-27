@@ -1,4 +1,4 @@
-@import '../../node_modules/rupture/rupture'
+@import '../../node_modules/axis/axis/index'
 @import '../variables'
 
 #layout-header
@@ -126,15 +126,15 @@
 
 .dropdown
   display none
-  position absolute
-  top topbar_h + 12px
   margin-right 12px
   font-size 1em
   text-align left
   background-color backgroundgray
   border 2px solid bordergray
   z-index 3001
-  triangle('up', 10px, backgroundgray)
+  bubble: top right backgroundgray
+  position absolute
+
 
   &.dropdown--size
     width 300px
