@@ -6,70 +6,70 @@ block styles
 block body
   .landing
     // img.home-logo(src="images/arena-logo.svg", alt="Arena")
-    img.home-mark(src="images/arena-mark.svg", alt="Arena")
+    img.home__mark(src="images/arena-mark.svg", alt="Arena")
     .section-1
-      .login
-        a(href="#log_in").home--small Login
+      h3.home__menu
+        a(href="#log_in") Login
         br
-        a(href="#sign_up").home--small Register
+        a(href="#sign_up") Register
         br
-        a(href="/about").home--small About
+        a(href="/about") About
         br
-        a(href="/tools").home--small Tools
+        a(href="/tools") Tools
 
-      .introduction
+      h2.intro
         p.
           Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.
         br
         p.
           The platform is designed to support arbitrary applications: Arena is adopted professionally or for personal use to research projects, manage inventory, curate exhibitions, share inspiration, collect references.
         br
-        a(href="#sign_up").register Create an account
+        a(href="#sign_up").intro--register Create an account
 
       //- include ../../../components/block_collection/block_collection
 
   .section-2
-      | Channel examples
+      h2 Channel examples
       .section-2__links
-        a(href='#sublime').home--small Are.na / Charles Broskoski / Notes on Ghosts 
+        h3
+          a(href='#sublime') Are.na / Charles Broskoski / Notes on Ghosts 
         .section-2__images
           img(src='https://s3.amazonaws.com/arena_images/242903/original_bf324850b79e8af41e87fe9d6529a936.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/136222/original_744ca39dff932c0f6b5eac2ab055fccc.gif')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/115330/original_6bbd33fb76badf768008e675526e1637.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/2116/original_e2443a02afe6e09b7f1fc748603f2301.jpg')
-        br
-        a(href='#sublime').home--small Are.na / Chris Sherron / Children Literature 
+        h3
+          a(href='#sublime') Are.na / Chris Sherron / Children Literature 
         .section-2__images
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/182210/original_c2d2449a208a81bc343d0ea66c624a62.png')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/255619/original_9578c2bb291727e47ceb28fe9ee420ba.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/61204/original_86770483f6ce9d599044e034aa144329.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/75766/original_565407fd2bd06316f1688c871b79ee0f.jpg')        
-        br
-        a(href='#sublime').home--small Are.na / Morgan Sutherland / Color Scheme
+        h3    
+          a(href='#sublime') Are.na / Morgan Sutherland / Color Scheme
         .section-2__images
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/117966/original_24441c4cfc32ec18eefb7d004c211977.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/6258/original_4c591add1acae09bf90d88937cfbb7ac.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/272088/original_fcd45d855d8f277b3f70dda016dd77e5.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/280209/original_d7de3232b0c4a897f82f9e68b0047b6d.jpg')        
-        br
-        a(href='#sublime').home--small Are.na / Dena Yago / Future
+        h3
+          a(href='#sublime') Are.na / Dena Yago / Future
         .section-2__images
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/149334/original_edc6376daefd7487f6dc037815d97e58.png')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/285911/original_a7abf714c70acdf9a377befe8af32fad.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/285862/original_037ac573f53260113e6d87a3b4d45f17.jpg')
           img(src='https://d2w9rnfcy7mm78.cloudfront.net/50751/original_5f5f600121b230e03b452abaf59fd580.jpg')
       .section-2__activity
-        | Total channels:
-        br
-        a(href='#sublime').home--small 533'210
+        h2 Total channels:
+        h3 533'210
       .section-2__activity
-        | Total blocks:
-        br 
-        a(href='#sublime').home--small 5'233'210
+        h2 Total blocks:
+        h3 5'233'210
       .section-2__activity(style="width: 600px;")
-        a(href='/about') Learn more 
-        | about Arena or 
-        a(href='#register') register.
+        h2
+          a(href='/about') Learn more 
+          | about Arena or 
+          a(href='#register') register.
         
  // .section-3
       .section-3__block

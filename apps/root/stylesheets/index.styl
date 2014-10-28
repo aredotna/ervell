@@ -14,22 +14,53 @@
 #layout-header
   display none
 
-.section-1, .section-2, .section-3, .section-4
+.section-1, .section-2
   position relative
   float left
-  width: 100%
-  min-height 600px
-  font-size 24px
-  font-weight bold
-  line-height 32px
-  background-color white
-  padding 2em 2.2em 2.8em 5em
+  width 100%
+  min-height 500px
+  background-color #fff
+  padding 2em 7em 2em 7em
 
 .section-1
   background-color backgroundgray
   color #111
-  font-weight bold
-  padding-top 4.2em
+  top 0
+  padding 6.8em 7em 6.8em 7em
+
+.home__mark
+  position absolute
+  top 7.3em
+  left 65px
+  display inline-block
+  width 30px
+  margin 0 0 0 0
+  opacity 0.90
+  z-index 199
+
+.home__menu
+  position relative
+  float right
+  top 0
+  right 0
+  color textgray
+  text-align right
+  padding 0
+  z-index 199
+
+.intro
+  position relative
+  top 0
+  max-width 740px
+  margin 0
+
+.intro--register
+  border-bottom 2px solid #111
+  padding 0 0 4px 0
+  
+  &:hover
+    color public
+    border-bottom 2px solid public
 
 .section-2
   color lightgray
@@ -46,6 +77,10 @@
   float left
   width 100%
   margin 0 0 0 0
+  
+  h3 a
+    color hovergray
+    padding 10px 0 10px 0
 
 .section-2__images
   position relative
@@ -66,47 +101,14 @@
   position relative
   float left
   width 300px
-  line-height: 25px;
   margin 0 30px 0 0
-
-.home-logo
-  display inline-block
-  width 140px
-  opacity 0.75
-
-.home-mark
-  position absolute
-  top 108px
-  left 70px
-  display inline-block
-  width 30px
-  margin 0 0 0 0
-  opacity 0.90
-  z-index 199
-
-.home--small
-  font-size 16px
-  line-height 10px
-
-.login
-  position absolute
-  top 0
-  right 0
-  color textgray
-  text-align right
-  line-height 26px
-  padding 4em 5em 0 0
-  z-index 199
-
-.register
-  border-bottom 2px solid #111
-  padding 0 0 4px 0
   
-  &:hover
-    color public
-    border-bottom 2px solid public
+  a
+    color textgray
+    
+    &:hover
+      color hovergray
 
-.introduction
-  max-width 740px
+
 
 
