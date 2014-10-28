@@ -73,6 +73,12 @@ privacy-light-color(prefix, attr)
     {prefix + value[0]}
       {attr} alpha(value[1], 0.2)
 
+privacy-color-hover(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0] + ':hover'}
+      {attr} value[1]
+
 .serif-text
   font-family font_serif
   font-weight 100
