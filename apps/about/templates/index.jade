@@ -5,26 +5,8 @@ block styles
 
 block body
 	.static__left-column
-		.static__title
-			a(href="/") Are.na 
-			| /
-		ul.static__menu
-			li 
-				a(href="#").active about
-			li 
-				a(href="#") team
-			li 
-				a(href="#") premium
-			li 
-				a(href="#") labs
-			li 
-				a(href="#") FAQ
-			li 
-				a(href="#") contact
-
-	.static__right-column
 		.static__about.static--text
-			h1	About
+			h2	About
 			|	Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into named "channels." People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators, and more. 
 			br 
 			br
@@ -34,7 +16,7 @@ block body
 			|	Arena's users created 430'939 channels and connected 2'231'663 blocks of information.
 
 		.static__team.static--text
-			h1 Team
+			h2 Team
 			a(href="#") Charles Broskoski 
 			| - mini bio
 			br
@@ -56,7 +38,7 @@ block body
 			a(href="#") JMB.
 
 		.static__premium.static--text
-			h1 Premium 
+			h2 Premium 
 			| - self-sustanability goal
 			br
 			| - some numbers
@@ -64,7 +46,7 @@ block body
 			| - options for users to help: supporter and premium [link to tools]
 
 		.static__labs.static--text
-			h1 Labs
+			h2 Labs
 			| - Case studies (powered by arena)
 			br
 			| - API [link]
@@ -72,7 +54,7 @@ block body
 			| - We're open to collaborations for custom archives, CMS and stuff
 
 		.static__faq.static--text
-			h1 FAQs
+			h2 FAQs
 			| Q?
 			br
 			| A.
@@ -80,10 +62,25 @@ block body
 			| [link to tutorial]
 
 		.static__contact.static--text
-			h1 Contact
+			h2 Contact
 			| NYC
 			br
 			| info @ are.na
+
+	.static__right-column
+		ul.static__menu
+			li 
+				a(href="#").active about
+			li 
+				a(href="#") team
+			li 
+				a(href="#") premium
+			li 
+				a(href="#") labs
+			li 
+				a(href="#") FAQ
+			li 
+				a(href="#") contact
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

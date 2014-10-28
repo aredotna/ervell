@@ -1,12 +1,20 @@
 @import '../components/layout/variables'
 
 .static__left-column
+	position relative
+	float left
+	top topbar_h
+	padding 5em 0 0 0
+	width 740px
+
+.static__menu
 	position fixed
-	left 50%
+	right 0
 	float left
 	width 300px
-	margin 120px 0 0 -550px
-	font-size 1.8em
+	padding 3em 5em 0 0
+	font-size 16px
+	text-align right
 	line-height	1.4
 
 .static__title
@@ -17,20 +25,22 @@
 .static__menu
 	position relative
 	float left
-	width 150px
+	width 100%
+	font-weight bold
+	text-align left
 	color lightgray
 
 	a.active
 		color textgray
 
 .static__right-column
-	position absolute
+	position relative
 	float left
-	width 600px
-	left 50%
-	margin 120px 0 0 -250px
+	width 200px
+	margin 0
 
 .static--text
+	font-size 23px
 	line-height 1.5
 	padding 0 0 70px 0
 
