@@ -136,19 +136,20 @@
   font-size 1em
   text-align left
   background-color backgroundgray
-  border 2px solid bordergray
   z-index 3001
-  bubble(pos0: top, pos1: right, triangleSize: 15px, triangleColor: backgroundgray, color: backgroundgray)
+  bubble(pos0: top, pos1: right, triangleSize: 12px, triangleColor: backgroundgray, color: backgroundgray)
   position absolute
   border-radius 0px
+  padding 0
 
   &.dropdown--size
     width 300px
     right 0
+    border 2px solid bordergray
 
   .dropdown__link
     display block
-    padding 4px container_pad/2 4px container_pad/2
+    padding 6px 14px 6px 14px
     border-top 0px solid bordergray
     font-weight 700
 
@@ -156,20 +157,23 @@
     float right
 
   .dropdown__notification
+    width 100%
     border-bottom 2px solid bordergray
+    padding 0 0 14px 0
 
     a
       display block
       height auto
       font-size s_caption
       font-weight normal
-      padding 10px 0
+      padding 14px 14px 0 14px
       line-height 17px
       background-color backgroundgray
       color private
 
       &:hover
-        font-weight bold
+        font-weight normal
+        color hovergray
 
 .dropdown--is_active .dropdown
   display block
