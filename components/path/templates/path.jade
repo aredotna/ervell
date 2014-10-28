@@ -3,12 +3,12 @@ section.path
     ul.path__breadcrumb
       li.root
         a(href='/') Are.na
-      if !channel && !author
-        li
-          span.root--active feed  
-          span.root--unactive 
-            span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
-            a(href="#") explore
+      //- if !channel && !author
+      //-   li
+      //-     span.root--active feed  
+      //-     span.root--unactive 
+      //-       span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
+      //-       a(href="#") explore
       if author
         li.path__username
           a(href="/" + author.get('slug'))=author.get('username')
@@ -71,15 +71,14 @@ section.path
           | Following
         .metadata__text
           = author.get('following_count')
-//-
+
   if !channel && !author
     .metadata
       .metadata__column
         .metadata__title
-          | View:
-        .metadata__text
-          a(href="#").active Feed
-          |  / 
-          a(href="#") Explore 
+          | View
+        ul.metadata--selector.breadcrumb
+          li: a(href="#").metadata--selector__option.is-active Feed
+          li: a(href="#").metadata--selector__option Explore
 
 
