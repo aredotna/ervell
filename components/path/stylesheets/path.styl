@@ -74,15 +74,30 @@
     &.is-active
       color hovergray
 
+.root__toggle
+  position relative
+  display inline-block
+  height 24px
+  margin 0 0 0 1px
+
 .root--active
+  position relative
+  float left
+  line-height 15px
+  font-size s_caption + 1
   color textgray
   font-weight bold
 
 .root--unactive
-  color bordergray
+  position relative
+  float left
+  clear both
+  line-height 15px
+  font-size s_caption
+  color #cdcdcd
 
   a
-    color bordergray
+    color #cdcdcd
 
     &:hover
       color textgray

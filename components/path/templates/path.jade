@@ -3,7 +3,14 @@ section.path
     ul.path__breadcrumb
       li.root
         a(href='/') Are.na
-      //- if !channel && !author
+      
+      if !channel && !author
+        li
+          .root__toggle
+            span.root--active feed 
+            span.root--unactive 
+              a(href="#") explore
+      //- 
       //-   li
       //-     span.root--active feed  
       //-     span.root--unactive 
@@ -72,7 +79,7 @@ section.path
         .metadata__text
           = author.get('following_count')
 
-  if !channel && !author
+//  if !channel && !author
     .metadata
       .metadata__column
         .metadata__title

@@ -1,40 +1,36 @@
 @import '../components/layout/variables'
 
-.container
-  position absolute
-  top 0
-  left 0
-  width 100%
-  max-width 100%
-  padding 0 0 0 0
-
 .path
   display none
 
 #layout-header
   display none
 
+.home--gray-background
+  position absolute
+  left 0
+  top 0
+  width 100%
+  height 540px
+  background-color backgroundgray
+  
 .section-1, .section-2
   position relative
   float left
   width 100%
-  min-height 500px
-  background-color #fff
-  padding 2em 7em 2em 7em
+  min-height 540px
+  background-color none
+  padding 2em 0 2em 0
 
 .section-1
-  background-color backgroundgray
-  color #111
+  color hovergray
   top 0
-  padding 6.8em 7em 6.8em 7em
+  padding 6.8em 0 6.8em 0
 
 .home__mark
   position absolute
-  top 7.3em
-  left 65px
-  display inline-block
-  width 30px
-  margin 0 0 0 0
+  width 28px
+  margin 7px 0 0 -42px
   opacity 0.90
   z-index 199
 
@@ -43,13 +39,15 @@
   float right
   top 0
   right 0
+  width 150px
   color textgray
-  text-align right
-  padding 0
+  text-align left
+  padding 0 0 0 0
   z-index 199
 
 .intro
   position relative
+  float left
   top 0
   max-width 740px
   margin 0
@@ -64,7 +62,6 @@
 
 .section-2
   color lightgray
-  background-color #fff
   
   a 
     color textgray
@@ -72,11 +69,11 @@
     &:hover
       color hovergray
 
-.section-2__links
+.section-2__channels
   position relative
   float left
   width 100%
-  margin 0 0 0 0
+  margin 0
   
   h3 a
     color hovergray

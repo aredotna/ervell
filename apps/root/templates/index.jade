@@ -4,33 +4,32 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'root' + sd.CSS_EXT) )
 
 block body
-  .landing
-    // img.home-logo(src="images/arena-logo.svg", alt="Arena")
+  .home--gray-background
+  // img.home-logo(src="images/arena-logo.svg", alt="Arena")
+  .section-1
     img.home__mark(src="images/arena-mark.svg", alt="Arena")
-    .section-1
-      h3.home__menu
-        a(href="#log_in") Login
-        br
-        a(href="#sign_up") Register
-        br
-        a(href="/about") About
-        br
-        a(href="/tools") Tools
 
-      h2.intro
-        p.
-          Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.
-        br
-        p.
-          The platform is designed to support arbitrary applications: Arena is adopted professionally or for personal use to research projects, manage inventory, curate exhibitions, share inspiration, collect references.
-        br
-        a(href="#sign_up").intro--register Create an account
+    h2.intro
+      p.
+        Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.
+      br
+      p.
+        The platform is designed to support arbitrary applications: Arena is adopted professionally or for personal use to research projects, manage inventory, curate exhibitions, share inspiration, collect references.
+      br
+      a(href="#sign_up").intro--register Create an account
 
-      //- include ../../../components/block_collection/block_collection
+    h3.home__menu
+      a(href="#log_in") Login
+      br
+      a(href="#sign_up") Register
+      br
+      a(href="/about") About
+      br
+      a(href="/tools") Tools
 
   .section-2
       h2 Channel examples
-      .section-2__links
+      .section-2__channels
         h3
           a(href='#sublime') Are.na / Charles Broskoski / Notes on Ghosts 
         .section-2__images
