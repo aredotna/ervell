@@ -4,7 +4,6 @@ block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-	.static--gray-background
 	.static__left-column
 		a(href="/")
 			img.static__mark(src="../images/arena-mark.svg", alt="Arena")
@@ -30,7 +29,7 @@ block body
 			.static__tools__frame
 				| Send and email to this address to add to an Arena channel, use the subject to indicate the channel.
 			
-	.static__right-column
+	//.static__right-column
 		h3.static__menu 
 			a(href="#about") Tools
 			br
