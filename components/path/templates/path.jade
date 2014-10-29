@@ -2,12 +2,15 @@ section.path
   h1
     ul.path__breadcrumb
       li.root
-        a(href='/') Are.na / 
-        .root__toggle
-          span.root--active feed 
-          span.root--unactive 
-            a(href="#") explore
-      //- if !channel && !author
+        a(href='/') Are.na
+      
+        if !channel && !author
+        li
+          .root__toggle
+            span.root--active feed 
+            span.root--unactive 
+              a(href="#") explore
+      //- 
       //-   li
       //-     span.root--active feed  
       //-     span.root--unactive 
