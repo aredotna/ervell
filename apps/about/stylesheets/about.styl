@@ -1,53 +1,61 @@
 @import '../components/layout/variables'
 
+.static__mark
+  position absolute
+  width 28px
+  margin 7px 0 0 -42px
+  opacity 0.90
+  z-index 199
+  
+  &:hover 
+  	opacity 0.70
+  
 .static__left-column
 	position relative
 	float left
-	top topbar_h
-	padding 5em 0 0 0
-	width 740px
+	top 0
+	left 0
+	width auto
+	padding 6.8em 0 0 0
+	
+.static__right-column
+  position relative
+  float right
+  top 0
+  right 0
+  color textgray
+  text-align left
+  padding 7.4em 1.5em 0 0
+  z-index 199
 
 .static__menu
-	position fixed
-	right 0
-	float left
-	width 300px
-	padding 3em 5em 0 0
-	font-size 16px
-	text-align right
-	line-height	1.4
+  position relative
+  float right
+  top 0
+  right 0
+  color textgray
+  text-align left
+  padding 0 2.5em 0 0
+  z-index 199
 
-.static__title
-	position relative
-	float left
-	width 115px
-
-.static__menu
+.static--title
 	position relative
 	float left
 	width 100%
-	font-weight bold
-	text-align left
-	color lightgray
-
-	a.active
-		color textgray
-
-.static__right-column
-	position relative
-	float left
-	width 200px
-	margin 0
+	color hovergray
+	margin 0 0 24px 0
 
 .static--text
-	font-size 23px
-	line-height 1.5
-	padding 0 0 70px 0
-
-	h1
-		border-bottom 1px solid lightgray
-		padding 0
-		margin 0 0 10px 0
+	max-width 740px
+	font-size 24px
+	line-height 1.3em
+	margin-bottom 130px
+	
+	a
+		font-weight bold
+		
+		&:hover
+			color hovergray
 
 .static__tools__frame
 	border 1px solid lightgray
