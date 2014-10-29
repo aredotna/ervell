@@ -3,6 +3,7 @@
 #
 
 Feed = require "../../collections/feed"
+SearchBlocks = require "../../collections/search_blocks"
 CurrentUser = require '../../models/current_user'
 
 @index = (req, res, next) ->
@@ -10,4 +11,12 @@ CurrentUser = require '../../models/current_user'
     res.render 'feed'
   else
     res.render 'index'
+
+@explore = (req, res, next) ->
+  blocks = new SearchBlocks
+  blocks.url = "#{res.locals.sd.API_URL}/search"
+
+  blocks.fetch
+    success: ->
+      res.render "explore", blocks: blocks.models
 
