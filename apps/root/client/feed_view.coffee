@@ -23,8 +23,6 @@ module.exports = class FeedView extends Chaplin.View
 
     blocks = new Blocks @collection.getAllItems()
 
-    console.log('blocks', blocks)
-
     new BlockCollectionView
       el: $ ".grid"
       blocks: blocks
