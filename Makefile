@@ -3,8 +3,6 @@
 # Add any build tasks here and abstract complex build scripts into `lib` that
 # can be run in a Makefile task like `coffee lib/build_script`.
 #
-# Remember to set your text editor to use 4 size non-soft tabs.
-#
 
 BIN = node_modules/.bin
 MIN_FILE_SIZE = 1000

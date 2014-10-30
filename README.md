@@ -1,13 +1,12 @@
 # Ervell
 
-Front-end client for Arena.
+Front-end client for Arena, built using Artsy's [Ezel](https://github.com/artsy/ezel). Also made possible by Artsy's very generous decision to open source their front-end client. Many patterns (and in a few instances, actual code) adopted from [Force](https://github.com/artsy/force-public). Thanks dudes.
 
-Built using Artsy's [Ezel](https://github.com/artsy/ezel)
-
+The general idea here is something minimal, utilitarian, unobtrusive and adaptible to many different situations. We try to make use of re-usable components and views as often as possible.
 
 * * *
 
-### Installation
+### Local installation
 	git clone git@github.com:arenahq/ervell.git
 	cd ervell
 	npm install
@@ -15,22 +14,3 @@ Built using Artsy's [Ezel](https://github.com/artsy/ezel)
 
 ### Running the server
 	make s
-
-### or alternatively
-
-Install nodemon
-```
-npm install -g nodemon
-```
-
-Run the server
-```
-nodemon index.coffee
-```
-
-* * *
-
-### Assets
-Assets in public/assets are not included in the repo. To compile these assets for testing locally run `make assets` .
-
-(this will automatically restart the server when code changes)
