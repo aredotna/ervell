@@ -24,6 +24,8 @@ module.exports = class BlockView extends Backbone.View
     @render() if @autoRender
     @$el = $("##{@model.id}")
 
+    console.log 'block view', @$el, @model
+
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
 

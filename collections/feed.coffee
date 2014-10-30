@@ -113,6 +113,11 @@ module.exports = class Feed extends Base
 
     return group
 
+  getAllItems: ->
+    items = @map (model)-> model.items()
+    items = _.flatten items, true
+    return items
+
   loadNext: ->
     return false if @exhausted
 
