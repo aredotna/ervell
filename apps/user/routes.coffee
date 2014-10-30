@@ -14,6 +14,9 @@ _ = require 'underscore'
   blocks = new UserBlocks null,
     user_slug: req.params.username
 
+  if req.params.block_id
+    res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
+
   user.fetch
     success: ->
       res.locals.sd.USER = user.toJSON()

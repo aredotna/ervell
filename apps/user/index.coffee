@@ -13,3 +13,4 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 app.get "/:username", auth, routes.user
+app.get "/:username/block/:block_id", auth, routes.user

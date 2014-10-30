@@ -1,4 +1,4 @@
 ul.new-connection__search-results__list
   for block in blocks
     li(class="new-connection__search-result new-connection__search-result-#{ block.getVisibility() }" data-id="#{block.id}")
-      = block.get('title')
+      =block.get('title')

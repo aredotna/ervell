@@ -12,17 +12,21 @@ module.exports = class BodyView extends Backbone.View
     'click a[data-client]:not([data-disabled])'   : 'intercept'
 
   initialize: (options) ->
-    mediator.on 'open:auth', @openAuth, @
+    current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
+
+    console.log('current_path', current_path)
 
     new LightboxRouter
-    Backbone.history.start pushState: true
+    Backbone.history.start pushState: true, root: current_path
+
+    if sd.CLIENT_PATH
+      Backbone.history.navigate sd.CLIENT_PATH, trigger: true, replace: false
 
   intercept: (e)->
     e.preventDefault()
 
-    Backbone.history.navigate $(e.currentTarget).attr('href'), trigger: true, replace: true
+    Backbone.history.navigate "#{$(e.currentTarget).attr('href')}", trigger: true, replace: true
 
   disable: (e)->
-    console.log 'should disable'
     e.preventDefault()
     e.stopPropagation()

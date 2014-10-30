@@ -13,6 +13,9 @@ User = require "../../models/user"
   blocks = new ChannelBlocks null,
     channel_slug: req.params.channel_slug
 
+  if req.params.block_id
+    res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
+
   channel.fetch
     cache: true
     success: ->

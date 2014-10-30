@@ -25,4 +25,4 @@ module.exports = class Block extends Base
     else if @get('class') is 'User'
       "/#{@get('slug')}"
     else
-      "block/#{@id}"
+      "/block/#{@id}"
