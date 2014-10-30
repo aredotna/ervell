@@ -1,6 +1,7 @@
 @import '../../node_modules/nib'
 @import '../../node_modules/jeet/stylus/jeet'
 @import '../../node_modules/rupture/rupture'
+@import '../../node_modules/axis/axis/index'
 @import 'variables'
 
 global-reset()
@@ -19,21 +20,42 @@ body
   padding 0 (container_pad - 10)
 
 h1
-  font-size 1.8em
+  font-size 28px
+  font-size 1.750em
+  text-rendering optimizelegibility
+  font-weight bold
+  margin .75em 0
+  line-height 1.6em
 
 h2
-  font-size 1.5em
+  font-size 24px
+  font-size 1.500rem
+  text-rendering optimizelegibility
+  font-weight bold
+  margin .4em 0
   line-height 1.3em
-  font-weight normal
 
 h3
-  font-size 1.17em
+  font-size 16px
+  font-size 1rem
+  text-rendering optimizelegibility
+  font-weight bold
+  margin 0
+  line-height 1.5em
+
+h4
+  h4()
 
 h5
-  font-size .83em
+  h5()
+  // font-size .83em
 
 h6
-  font-size .75em
+  h6()
+  // font-size .75em
+
+.breadcrumb
+  breadcrumb()
 
 em
   font-style italic
@@ -41,11 +63,8 @@ em
 a, .inline-link
   text-decoration: none
   color inherit
-  font-weight 700
   cursor pointer
-
-  &:hover
-    color hovergray
+  hover-color hovergray
 
 strong
   font-weight 700

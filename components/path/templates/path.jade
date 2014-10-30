@@ -1,28 +1,35 @@
 section.path
   h1
-    span.root
-      a(href='/') Are.na
-    span.separator /
-    if !channel && !author
-      span.root--active feed  
-      span.root--unactive 
-        span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
-        a(href="#") explore
-    if author
-      span.username
-        a(href="/" + author.get('slug'))=author.get('username')
-    if channel
-      span.separator /
-      span.active.channel(class="privacy-#{channel.get('status')}")
-        = channel.get('title')
-  
+    ul.path__breadcrumb
+      li.root
+        a(href='/') Are.na
+      
+      if !channel && !author
+        li
+          .root__toggle
+            span.root--active feed 
+            span.root--unactive 
+              a(href="#") explore
+      //- 
+      //-   li
+      //-     span.root--active feed  
+      //-     span.root--unactive 
+      //-       span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
+      //-       a(href="#") explore
+      if author
+        li.path__username
+          a(href="/" + author.get('slug'))=author.get('username')
+      if channel
+        li.path__channel.active.channel(class="privacy-#{channel.get('status')}")
+          = channel.get('title')
+
   if channel
     .edit-channel
       a(href="#") Edit channel
 
   else if author
-    .edit-profile
-      a(href="#") Profile settings
+    //- .edit-profile
+    //-   a(href="#") Profile settings
 
   if channel
     .metadata
@@ -43,22 +50,22 @@ section.path
 
   else if author
     .metadata
-      .metadata__column
-        .metadata__title
-          | Info
-        .metadata__text
-          | Son of @broskoski, father of a cat. NYC.
-          a(href="#")  Noway.com
+      if author.has('metadata')
+        .metadata__column
+          .metadata__title
+            | Info
+          .metadata__text
+            | Son of @broskoski, father of a cat. NYC.
+            a(href="#")  Noway.com
 
       .metadata__column
         .metadata__title
           | View
         .metadata__text
-          a(href="#") All
-          |  / 
-          a(href="#").metadata--active Channels
-          |  / 
-          a(href="#") Blocks
+          ul.metadata--selector.breadcrumb
+            li: a(href="#").metadata--selector__option.is-active All
+            li: a(href="#").metadata--selector__option Channels
+            li: a(href="#").metadata--selector__option Blocks
 
       .metadata__column
         .metadata__title
@@ -71,15 +78,14 @@ section.path
           | Following
         .metadata__text
           = author.get('following_count')
-//-
-  if !channel && !author
+
+//  if !channel && !author
     .metadata
       .metadata__column
         .metadata__title
-          | View:
-        .metadata__text
-          a(href="#").active Feed
-          |  / 
-          a(href="#") Explore 
+          | View
+        ul.metadata--selector.breadcrumb
+          li: a(href="/").metadata--selector__option.is-active Feed
+          li: a(href="/explore").metadata--selector__option Explore
 
 

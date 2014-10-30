@@ -11,7 +11,7 @@ body.is-lightbox
   top 0
   left 0
   color textgray
-  background-color rgba(255,255,255, 0.95)
+  background-color rgba(255,255,255, 0.96)
   opacity 0
   pointer-events none
   // transition(0.1s)
@@ -35,7 +35,6 @@ body.is-lightbox
 
 .lightbox__content__title
   padding-top 1.5em
-  font-size 1em
 
 .lightbox--close
   display block
@@ -43,11 +42,12 @@ body.is-lightbox
   top 32px
   right 32px
   font-size 28px
+  font-weight bold
   line-height 28px
   cursor pointer
   z-index 2
   color textgray
-
+  
   &:hover
     color hovergray
 
@@ -65,7 +65,7 @@ body.is-lightbox
   font-size 1em
 
 .lightbox__content__text
-  box-shadow 0px 0px 14px rgba(0,0,0,0.1)
+  box-shadow 0px 0px 4px rgba(0,0,0,0.1)
   font-family Georgia
   padding 2em
   font-size 1em
@@ -77,22 +77,15 @@ body.is-lightbox
   max-height 80%
 
 .lightbox__feed
-  width 75%
   height auto
   text-align center
   background-color backgroundgray
   border-top 0
-  padding 70px 0 50px 0
-  margin auto
-  line-height 1.6
+  padding 50px 0 50px 0
 
-  .feed-group__sentence
-    padding-bottom 1.1em
-    font-size s_feed
-
-  .feed-group__timestamp
-    font-size s_caption
-    margin-top 10px
+  .lightbox__feed__inner
+    width 65%
+    margin auto
 
 
 

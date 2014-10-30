@@ -14,7 +14,7 @@ module.exports = class BlockCollectionView extends Backbone.View
     mediator.on 'open:lightbox', @openLightbox, @
 
     new LightboxRouter
-    Backbone.history.start()
+    Backbone.history.start pushState: true
 
     @channel = options.channel
     @blocks = options.blocks

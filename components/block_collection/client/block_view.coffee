@@ -46,7 +46,7 @@ module.exports = class BlockView extends Backbone.View
       document.location.href = @model.getHref()
     else
       loc = window.location
-      history.pushState "", document.title, loc.pathname + "#/show/#{@model.id}"
+      history.pushState "", document.title, loc.pathname + "#/block/#{@model.id}"
       @lbv = new LightboxView
         el: $('#l-lightbox-container')
         model: @model

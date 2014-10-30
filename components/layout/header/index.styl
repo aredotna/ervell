@@ -18,13 +18,19 @@
     left 0
     top 0
     width 40px
-    
+
     svg
       width 46px
       height 46px
       line-height 2em
       padding 18px 15px 12px 15px
       outline none
+
+      .iconic-magnifying-glass-lg
+        display none
+
+      .iconic-magnifying-glass-md
+        display inline
 
       & *
         stroke lightgray
@@ -67,6 +73,9 @@
       font-size 1em
       border-top 1px solid bordergray
 
+      a
+        font-weight bold
+
     .layout-header__search__close
       position absolute
       right 20px
@@ -81,13 +90,17 @@
     &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
       display block
 
+  .layout-header__register
+    padding 0 container_pad 0 container_pad
+    a
+      font-weight bold
 
   .right
     text-align right
     margin 0
 
   .logo
-      padding 0 container_pad 0 container_pad
+    padding 0 container_pad 0 container_pad
 
     .logo-icon svg
       display inline-block
@@ -99,48 +112,68 @@
       svg
         fill textgray
 
+.new-channel-btn
+  font-size 28px
+  line-height 24px
+  height 30px
+  width 30px
+  color hovergray
+  border 0px solid bordergray
+  text-align center
+  margin-top 11px
+
+  &:hover
+    border 0px solid lightgray
+    color textgray
+    cursor pointer
+
 .dropdown--menu
   cursor pointer
 
 .dropdown
   display none
-  position absolute
-  top topbar_h + 12px
   margin-right 12px
   font-size 1em
   text-align left
   background-color backgroundgray
-  border 2px solid bordergray
   z-index 3001
+  bubble(pos0: top, pos1: right, triangleSize: 12px, triangleColor: backgroundgray, color: backgroundgray)
+  position absolute
+  border-radius 0px
+  padding 0
 
   &.dropdown--size
     width 300px
     right 0
+    border 2px solid bordergray
 
   .dropdown__link
     display block
-    padding 4px container_pad 4px container_pad
+    padding 4px 14px 4px 14px
     border-top 0px solid bordergray
+    font-weight 700
 
   .dropdown__icon
     float right
 
   .dropdown__notification
+    width 100%
     border-bottom 2px solid bordergray
-    padding 0 container_pad container_pad container_pad
+    padding 0 0 14px 0
 
     a
       display block
       height auto
       font-size s_caption
       font-weight normal
-      padding container_pad 0 0 0
+      padding 14px 14px 0 14px
       line-height 17px
       background-color backgroundgray
       color private
 
       &:hover
-        font-weight bold
+        font-weight normal
+        color hovergray
 
 .dropdown--is_active .dropdown
   display block

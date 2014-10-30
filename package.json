@@ -44,6 +44,7 @@
     "nib": "*",
     "jeet": "*",
     "rupture": "*",
+    "axis": "*",
     "cookies-js": "*"
   }
 }

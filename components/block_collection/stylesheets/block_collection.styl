@@ -50,6 +50,8 @@
 
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
+privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
+privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
 
 .grid__block__content__image
   max-width block_width - 1
@@ -58,11 +60,14 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 
 .grid__block__content__text
   @extend .serif-text
-  padding 0.5em
+  height 100%
+  padding 1em 1.2em 0 1.2em
   font-size 1em
 
   a
     font-weight normal
+  p
+    margin 0
 
 .grid__block__content__comment
   height 100%
@@ -72,7 +77,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 
   p
     @extend .serif-text
-    font-size caption + 1
+    font-size s_caption + 1
     padding 15px
 
 .grid__block__overlay
@@ -94,15 +99,17 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 .grid__block.grid__block--text:hover .grid__block__overlay
   // background-color rgba(255,255,255, 0.95)
 
-.grid__block.grid__block--channel:hover .grid__block__overlay, .grid__block.grid__block--user:hover .grid__block__overlay
+.grid__block.grid__block--user:hover .grid__block__overlay
   // background-color rgba(255,255,255, 0.95)
   opacity 0
 
-
 .grid__block.grid__block--channel .grid__block__content
   padding s_margin
-
-// privacy-color('.grid__block__overlay--privacy-', border-color)
+  
+.grid__block.grid__block--channel
+  
+  h2
+    font-weight normal
 
 .grid__block__mini-feed
   display none
@@ -142,7 +149,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 .grid__block__title
   color lightgray
   position relative
-  font-size caption
+  font-size s_caption
   font-weight bold
   text-align center
   margin 20px 0 5px 0

@@ -1,49 +1,84 @@
 @import '../components/layout/variables'
 
+.static__mark
+  position absolute
+  width 28px
+  margin 7px 0 0 -42px
+  opacity 0.90
+  z-index 199
+  
+  &:hover 
+  	opacity 0.70
+  
 .static__left-column
-	position fixed
-	left 50%
-	float left
-	width 300px
-	margin 120px 0 0 -550px
-	font-size 1.8em
-	line-height	1.4
-
-.static__title
 	position relative
 	float left
-	width 115px
+	top 0
+	left 0
+	width auto
+	padding 6.8em 0 0 0
+	
+.static__right-column
+  position relative
+  float right
+  top 0
+  right 0
+  color textgray
+  text-align left
+  padding 7.4em 1.5em 0 0
+  z-index 199
 
 .static__menu
+  position relative
+  float right
+  top 0
+  right 0
+  width 150px
+  color textgray
+  text-align left
+  padding 0 0 0 0
+  z-index 199
+
+.static--title
 	position relative
 	float left
-	width 150px
-	color lightgray
-
-	a.active
-		color textgray
-
-.static__right-column
-	position absolute
-	float left
-	width 600px
-	left 50%
-	margin 120px 0 0 -250px
+	width 100%
+	color hovergray
+	margin 0 0 24px 0
 
 .static--text
-	line-height 1.5
-	padding 0 0 70px 0
-
-	h1
-		border-bottom 1px solid lightgray
-		padding 0
-		margin 0 0 10px 0
+	max-width 740px
+	font-size 24px
+	line-height 1.3em
+	margin-bottom 130px
+	
+	a
+		font-weight bold
+		
+		&:hover
+			color hovergray
 
 .static__tools__frame
-	border 1px solid lightgray
-	padding 10px
-	margin 0 0 50px 0
+	position relative
+	float left
+	width 100%
+	border 2px solid bordergray
+	padding 12px
+	margin 0 0 130px 0
 
 .static__tools__frame--premium
-	border 1px solid public
+	border 2px solid public	
+
+#layout-header .layout-header__search
+	display none
+	
+.new-channel-btn
+	display none
+
+#layout-header .right
+	position absolute
+	right 0
+
+body 
+	background-color backgroundgray
 	

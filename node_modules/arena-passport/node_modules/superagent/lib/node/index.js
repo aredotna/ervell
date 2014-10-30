@@ -559,6 +559,7 @@ Request.prototype.abort = function(){
   this._aborted = true;
   this.clearTimeout();
   this.req.abort();
+  this.emit('abort');
 };
 
 /**
@@ -622,6 +623,12 @@ Request.prototype.redirect = function(res){
 /**
  * Set Authorization field value with `user` and `pass`.
  *
+ * Examples:
+ *
+ *   .auth('tobi', 'learnboost')
+ *   .auth('tobi:learnboost')
+ *   .auth('tobi')
+ *
  * @param {String} user
  * @param {String} pass
  * @return {Request} for chaining
@@ -629,8 +636,9 @@ Request.prototype.redirect = function(res){
  */
 
 Request.prototype.auth = function(user, pass){
-  if (pass) pass = ':' + pass;
-  var str = new Buffer(user + (pass || '')).toString('base64');
+  if (1 === arguments.length) pass = '';
+  if (!~user.indexOf(':')) user = user + ':';
+  var str = new Buffer(user + pass).toString('base64');
   return this.set('Authorization', 'Basic ' + str);
 };
 
@@ -644,6 +652,15 @@ Request.prototype.auth = function(user, pass){
 
 Request.prototype.ca = function(cert){
   this._ca = cert;
+  return this;
+};
+
+/**
+ * Allow for extension
+ */
+
+Request.prototype.use = function(fn) {
+  fn(this);
   return this;
 };
 
@@ -704,7 +721,7 @@ Request.prototype.request = function(){
   this.query(url.query);
 
   // add cookies
-  req.setHeader('Cookie', this.cookies);
+  if (this.cookies) req.setHeader('Cookie', this.cookies);
 
   // set default UA
   req.setHeader('User-Agent', 'node-superagent/' + pkg.version);
@@ -801,7 +818,18 @@ Request.prototype.end = function(fn){
     var type = type[0];
     var multipart = 'multipart' == type;
     var redirect = isRedirect(res.statusCode);
-    var parser = self._parser
+    var parser = self._parser;
+
+    self.res = res;
+
+    if ('HEAD' == self.method) {
+      var response = new Response(self);
+      self.response = response;
+      response.redirects = self._redirectList;
+      self.emit('response', response);
+      self.emit('end');
+      return;
+    }
 
     if (self.piped) {
       res.on('end', function(){
@@ -829,7 +857,8 @@ Request.prototype.end = function(fn){
 
       form.parse(res, function(err, fields, files){
         if (err) return self.callback(err);
-        var response = new Response(req, res);
+        var response = new Response(self);
+        self.response = response;
         response.body = fields;
         response.files = files;
         response.redirects = self._redirectList;
@@ -843,7 +872,8 @@ Request.prototype.end = function(fn){
     if (!parser && isImage(mime)) {
       exports.parse.image(res, function(err, obj){
         if (err) return self.callback(err);
-        var response = new Response(req, res);
+        var response = new Response(self);
+        self.response = response;
         response.body = obj;
         response.redirects = self._redirectList;
         self.emit('end');
@@ -885,7 +915,8 @@ Request.prototype.end = function(fn){
     if (!buffer) {
       debug('unbuffered %s %s', self.method, self.url);
       self.res = res;
-      var response = new Response(self.req, self.res);
+      var response = new Response(self);
+      self.response = response;
       response.redirects = self._redirectList;
       self.emit('response', response);
       if (multipart) return // allow multipart to handle end event
@@ -901,7 +932,8 @@ Request.prototype.end = function(fn){
     res.on('end', function(){
       debug('end %s %s', self.method, self.url);
       // TODO: unless buffering emit earlier to stream
-      var response = new Response(self.req, self.res);
+      var response = new Response(self);
+      self.response = response;
       response.redirects = self._redirectList;
       self.emit('response', response);
       self.emit('end');
@@ -937,6 +969,21 @@ Request.prototype.end = function(fn){
   }
 
   return this;
+};
+
+/**
+ * To json.
+ *
+ * @return {Object}
+ * @api public
+ */
+
+Request.prototype.toJSON = function(){
+  return {
+    method: this.method,
+    url: this.url,
+    data: this._data
+  };
 };
 
 /**

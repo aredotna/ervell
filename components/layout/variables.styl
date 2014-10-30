@@ -21,8 +21,8 @@ font_sans             = 'Arial', sans-serif
 font_serif            = Georgia, serif
 
 // font sizes
-s_caption               = 12px
-s_feed                = 24px
+s_caption             = 12px
+s_feed                = 23px
 
 // units
 s_margin              = 10px
@@ -72,6 +72,12 @@ privacy-light-color(prefix, attr)
   for value in colors
     {prefix + value[0]}
       {attr} alpha(value[1], 0.1)
+
+privacy-color-hover(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0] + ':hover'}
+      {attr} value[1]
 
 .serif-text
   font-family font_serif

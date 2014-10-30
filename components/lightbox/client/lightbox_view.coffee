@@ -27,7 +27,7 @@ module.exports = class LightboxView extends Backbone.View
       object_id: @model.id
 
     new SmallFeedView
-      el: @$ "#lightbox__feed"
+      el: @$ "#lightbox__feed_inner"
       collection: feed
 
   close: ->

@@ -6,9 +6,14 @@
   margin 6em 10px 4em 10px
   text-align left
   font-weight normal
+
   clearfix()
 
+  .path__breadcrumb
+    breadcrumb(character = '/', spacing = 10px, divider-color = #cdcdcd)
+
   h1
+    margin 0
     position relative
     float left
     width auto
@@ -61,20 +66,38 @@
     font-weight normal
     color textgray
 
-  .metadata--active
+  .metadata--selector__option
     color lightgray
-    font-weight normal
-    cursor normal
+    font-weight bold
+    hover-color hovergray
+
+    &.is-active
+      color hovergray
+
+.root__toggle
+  position relative
+  display inline-block
+  height 24px
+  margin 0 0 0 1px
 
 .root--active
+  position relative
+  float left
+  line-height 15px
+  font-size s_caption + 1
   color textgray
   font-weight bold
 
 .root--unactive
-  color bordergray
+  position relative
+  float left
+  clear both
+  line-height 15px
+  font-size s_caption
+  color #cdcdcd
 
   a
-    color bordergray
+    color #cdcdcd
 
     &:hover
       color textgray
