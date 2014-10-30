@@ -4,8 +4,6 @@ Front-end client for Arena, built using Artsy's [Ezel](https://github.com/artsy/
 
 The general idea here is something minimal, utilitarian, unobtrusive and adaptible to many different situations. We try to make use of re-usable components and views as often as possible.
 
-![Ervell](/public/images/gh.png)
-
 * * *
 
 ### Local installation
