@@ -20,7 +20,9 @@ module.exports = class ConnectView extends Backbone.View
     @render()
     super
 
-  clear: ->
+  clear: (e)->
+    e.stopPropagation()
+    e.preventDefault()
     @$el.html ""
     @$el.removeClass 'is-active'
     @undelegateEvents()

@@ -50,7 +50,9 @@ module.exports = class BlockView extends Backbone.View
     @model = model
     @delegateEvents()
 
-  removeActiveClass: -> @$('.grid__block__inner').removeClass 'is-active'
+  removeActiveClass: ->
+    @$('.grid__block__inner').removeClass 'is-active'
+    @$('.grid__block__link').removeAttr('data-disabled')
 
   render: =>
     @container[@containerMethod] blockTemplate(block: @model)
