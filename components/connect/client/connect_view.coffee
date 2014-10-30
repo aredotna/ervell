@@ -11,13 +11,8 @@ connectTemplate = -> require('../templates/connect.jade') arguments...
 module.exports = class ConnectView extends Backbone.View
 
   events:
-    'click .new-connection': 'stopPropagation'
     'keyup .new-connection__search' : 'onKeyUp'
     'click .new-connection__done-button' : 'clear'
-
-  stopPropagation: (e)->
-    console.log 'stopPropagation'
-    e.stopPropagation()
 
   initialize: (options)->
     @block = options.block

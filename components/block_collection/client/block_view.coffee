@@ -41,16 +41,6 @@ module.exports = class BlockView extends Backbone.View
       el: $connect_container
       block: @model
 
-  openLightbox: ->
-    if @model.get('base_class') is 'Channel' or @model.get('base_class') is 'User'
-      document.location.href = @model.getHref()
-    else
-      loc = window.location
-      history.pushState "", document.title, loc.pathname + "#/block/#{@model.id}"
-      @lbv = new LightboxView
-        el: $('#l-lightbox-container')
-        model: @model
-
   update: (model)->
     $("##{model.id}").replaceWith blockTemplate(block: model)
     @$el = $("##{model.id}")

@@ -1,6 +1,8 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 mediator = require '../../lib/mediator.coffee'
+Block = require '../../models/block.coffee'
+LightboxView = require './client/lightbox_view.coffee'
 
 module.exports = class LightboxRouter extends Backbone.Router
 
@@ -10,6 +12,7 @@ module.exports = class LightboxRouter extends Backbone.Router
 
   initialize: ->
     mediator.on 'lightbox:closed', @removeRoute, @
+    mediator.on 'lightbox:opened', @showBlock, @
 
   closeLightbox: -> # nothing for now
 
@@ -19,4 +22,7 @@ module.exports = class LightboxRouter extends Backbone.Router
     @navigate '', trigger: false, replace: false
 
   showBlock: (id)->
-    mediator.trigger 'open:lightbox', id: id
+    block = new Block {id: id}
+    @lbv = new LightboxView
+      el: $('#l-lightbox-container')
+      model: block

@@ -2,6 +2,7 @@ Backbone = require 'backbone'
 Backbone.$ = $
 _ = require 'underscore'
 HeaderView = require './header/view.coffee'
+BodyView = require './body/view.coffee'
 sd = require('sharify').data
 # analytics = require '../../lib/analytics.coffee'
 
@@ -37,9 +38,9 @@ setupReferrerTracking = ->
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
+  new BodyView el: $('body')
 
 setupAjaxHeaders = ->
-  console.log 'sd.CURRENT_USER?.authentication_token', sd.CURRENT_USER?.authentication_token
   $.ajaxSetup
     beforeSend: (xhr)->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
