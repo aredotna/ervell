@@ -37,9 +37,6 @@
 .grid__block--text .valign-inner
   vertical-align top
 
-.grid__block .grid__block--channel
-  color
-
 .grid__block__inner, .grid__block__connect-container
   width 100%
   height block_width
@@ -52,6 +49,9 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-colo
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
+
+.grid__block--channel .grid__block__inner:hover
+  color textgray
 
 .grid__block__content__image
   max-width block_width - 1
@@ -156,6 +156,9 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', borde
   bottom 0
   width 100%
   white-space nowrap
+  
+  &:hover
+    color hovergray
 
 @import '../../avatar/stylesheets/avatar'
 @import '../../lightbox/stylesheets/lightbox'
