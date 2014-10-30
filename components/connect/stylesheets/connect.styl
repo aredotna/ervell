@@ -19,15 +19,27 @@
   padding .7em .5em .7em .5em
   margin-top .5em
   margin-bottom .5em
+  border 2px solid
   transition background-color 0.3s
 
   &:hover
-    border-color bordergray
+    opacity 0.7
+    transition opacity 0.1s
 
 privacy-color('.new-connection__search-result-', border-color)
 privacy-color('.new-connection__search-result-', color)
-privacy-light-color('.is-connected.new-connection__search-result-', background-color)
-privacy-light-color('.is-loading.new-connection__search-result-', background-color)
+privacy-light-color('.new-connection__search-result-', background-color)
+privacy-color('.is-loading.new-connection__search-result-', background-color)
+
+.is-connected
+  opacity 0.3
+  background-color #fff
+  transition (0.8s)
+  
+  &:hover
+    opacity 0.3
+    background-color #fff
+    transition (0.8s)
 
 .new-connection__done-button
   position absolute
