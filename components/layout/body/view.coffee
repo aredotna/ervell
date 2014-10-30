@@ -8,7 +8,8 @@ LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 module.exports = class BodyView extends Backbone.View
 
   events:
-    'click a[data-client]' : 'intercept'
+    'click a[data-disabled]'                      : 'disable'
+    'click a[data-client]:not([data-disabled])'   : 'intercept'
 
   initialize: (options) ->
     mediator.on 'open:auth', @openAuth, @
@@ -17,7 +18,11 @@ module.exports = class BodyView extends Backbone.View
     Backbone.history.start pushState: true
 
   intercept: (e)->
-    console.log('intercepting client link')
     e.preventDefault()
 
     Backbone.history.navigate $(e.currentTarget).attr('href'), trigger: true, replace: true
+
+  disable: (e)->
+    console.log 'should disable'
+    e.preventDefault()
+    e.stopPropagation()

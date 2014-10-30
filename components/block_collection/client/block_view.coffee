@@ -37,6 +37,9 @@ module.exports = class BlockView extends Backbone.View
     $connect_container.addClass 'is-active'
     @$('.grid__block__inner').addClass 'is-active'
 
+    $connect_link = @$('.grid__block__link')
+    $connect_link.attr('data-disabled', 'true')
+
     new ConnectView
       el: $connect_container
       block: @model
