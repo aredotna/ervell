@@ -13,31 +13,31 @@
 .static__left-column
 	position relative
 	float left
-	top 0
+	top 108px
 	left 0
 	width auto
-	padding 6.8em 0 0 0
-	
-.static__right-column
-  position relative
-  float right
-  top 0
-  right 0
-  color textgray
-  text-align left
-  padding 7.4em 1.5em 0 0
-  z-index 199
 
 .static__menu
   position relative
   float right
-  top 0
+  top 110px
   right 0
   width 150px
-  color textgray
   text-align left
-  padding 0 0 0 0
+  padding 0
   z-index 199
+
+.static__menu--dark
+	color hovergray
+	
+	&:hover
+		color textgray
+
+.static__menu--light
+	color lightgray
+	
+	&:hover
+		color hovergray
 
 .static--title
 	position relative
@@ -69,15 +69,21 @@
 .static__tools__frame--premium
 	border 2px solid public	
 
+#layout-header
+	background none
+	
+#layout-header .right
+	position absolute
+	right 0
+
 #layout-header .layout-header__search
 	display none
 	
 .new-channel-btn
 	display none
-
-#layout-header .right
-	position absolute
-	right 0
+	
+.layout-header__register
+	display none
 
 body 
 	background-color backgroundgray

@@ -14,42 +14,28 @@
   height 540px
   background-color backgroundgray
   
-.section-1, .section-2
+.section-2
   position relative
   float left
   width 100%
-  min-height 540px
   background-color none
   padding 2em 0 2em 0
-
-.section-1
-  color hovergray
-  top 0
-  padding 6.8em 0 6.8em 0
 
 .home__mark
   position absolute
   width 28px
-  margin 7px 0 0 -42px
+  margin 115px 0 0 -42px
   opacity 0.90
-  z-index 199
-
-.home__menu
-  position relative
-  float right
-  top 0
-  right 0
-  width 150px
-  color textgray
-  text-align left
-  padding 0 0 0 0
   z-index 199
 
 .intro
   position relative
   float left
-  top 0
+  top 108px
   max-width 740px
+  height 540px
+  margin 0
+  color hovergray
   margin 0
 
 .intro--register
@@ -59,6 +45,27 @@
   &:hover
     color public
     border-bottom 2px solid public
+
+.static__menu
+  position relative
+  float right
+  top 110px
+  right 0
+  width 150px
+  text-align left
+  z-index 199
+
+.static__menu--dark
+  color hovergray
+  
+  &:hover
+    color textgray
+
+.static__menu--light
+  color lightgray
+  
+  &:hover
+    color hovergray
 
 .section-2
   color lightgray

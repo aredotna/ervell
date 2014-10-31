@@ -8,7 +8,7 @@ block body
 		a(href="/")
 			img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 		.static__about.static--text
-			h2.static--title	About
+			h2.static--title	About Arena
 			|	Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into named "channels." People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators, and more. 
 			br 
 			br
@@ -71,19 +71,29 @@ block body
 			br
 			| info @ are.na
 
-	.static__right-column
-		h3.static__menu 
-			a(href="#about") About
+	h3.static__menu
+		a(href="#about-arena").static__menu--light About Arena
+		br
+		a(href="#team").static__menu--light Team
+		br
+		a(href="#principles").static__menu--light Principles
+		br
+		a(href="#labs").static__menu--light Labs
+		br
+		a(href="#faq").static__menu--light FAQ
+		br
+		a(href="#contact").static__menu--light Contact
+		br
+		if !user
 			br
-			a(href="#team") Team
+			a(href="/").static__menu--dark Home
 			br
-			a(href="#team") Self-sustainability
+			a(href="#tools").static__menu--dark Tools
 			br
-			a(href="#team") Labs
+			a(href="#log_in").static__menu--dark Login
 			br
-			a(href="#team") FAQ
-			br
-			a(href="#team") Contact
+			a(href="#sign_up").static__menu--dark Register
+
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

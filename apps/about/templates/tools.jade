@@ -29,11 +29,16 @@ block body
 			.static__tools__frame
 				| Send and email to this address to add to an Arena channel, use the subject to indicate the channel.
 			
-	//.static__right-column
-		h3.static__menu 
-			a(href="#about") Tools
+	h3.static__menu
+		if !user
 			br
-			a(href="#team") About
+			a(href="/").static__menu--dark Home
+			br
+			a(href="/about").static__menu--dark About
+			br
+			a(href="#log_in").static__menu--dark Login
+			br
+			a(href="#sign_up").static__menu--dark Register
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
