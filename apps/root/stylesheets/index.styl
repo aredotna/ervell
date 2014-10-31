@@ -6,20 +6,14 @@
 #layout-header
   display none
 
-.home--gray-background
+.home__gray-background
   position absolute
+  float left
   left 0
   top 0
   width 100%
   height 540px
   background-color backgroundgray
-  
-.section-2
-  position relative
-  float left
-  width 100%
-  background-color none
-  padding 2em 0 2em 0
 
 .home__mark
   position absolute
@@ -36,7 +30,6 @@
   height 540px
   margin 0
   color hovergray
-  margin 0
 
 .intro--register
   border-bottom 2px solid #111
@@ -75,8 +68,15 @@
   
     &:hover
       color hovergray
+      
+.home__section-2
+  position relative
+  float left
+  width 100%
+  background-color none
+  padding 2em 0 2em 0
 
-.section-2__channels
+.home__section-2__channels
   position relative
   float left
   width 100%
@@ -86,7 +86,7 @@
     color hovergray
     padding 10px 0 10px 0
 
-.section-2__images
+.home__section-2__images
   position relative
   float left
   width 100%
@@ -101,17 +101,17 @@
     overflow hidden
     margin 5px 30px 80px 0
 
-.section-2__activity
+.home__section-2__activity
   position relative
   float left
   width 300px
   margin 0 30px 0 0
   
   a
-    color textgray
+    color hovergray
     
     &:hover
-      color hovergray
+      color textgray
 
 
 
