@@ -53,8 +53,10 @@ module.exports = class ModalView extends Backbone.View
 
   updatePosition: =>
     @$dialog.css
-      top: ((@$el.height() - @$dialog.height()) / 3) + 'px'
-      left: ((@$el.width() - @$dialog.width()) / 2) + 'px'
+      width: (@$el.width() - (@$el.width() * 0.06)) + 'px'
+      height: (@$el.height() - (@$el.width() * 0.06)) + 'px'
+      top: (@$el.width() * 0.03) + 'px'
+      left: (@$el.width() * 0.03) + 'px'
 
   autofocus: -> true
 
