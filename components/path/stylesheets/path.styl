@@ -15,6 +15,11 @@
     li:after
       font-weight 200
 
+    li:last-child
+      color hovergray
+
+  privacy-color('.path__breadcrumb li:last-child.privacy-', color)
+
   h1
     margin 0
     position relative
@@ -38,7 +43,7 @@
     margin 0 0.25em
     font-weight 400
 
-  privacy-color('.privacy-', color)
+  
 
 .edit-channel, edit-profile
   position relative
