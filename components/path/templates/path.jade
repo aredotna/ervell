@@ -3,18 +3,18 @@ section.path
     ul.path__breadcrumb
       li.root
         a(href='/') Are.na
-      
+
       if !channel && !author
         li
           .root__toggle
-            span.root--active feed 
-            span.root--unactive 
+            span.root--active feed
+            span.root--unactive
               a(href="#") explore
-      //- 
+      //-
       //-   li
-      //-     span.root--active feed  
-      //-     span.root--unactive 
-      //-       span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true") 
+      //-     span.root--active feed
+      //-     span.root--unactive
+      //-       span(class="iconic" data-glyph="loop" title="loop" aria-hidden="true")
       //-       a(href="#") explore
       if author
         li.path__username
@@ -46,7 +46,7 @@ section.path
         .metadata__title
           | Followers
         .metadata__text
-          = channel.get('follower_count')
+          a(href="#")= channel.get('follower_count')
 
   else if author
     .metadata
@@ -71,13 +71,13 @@ section.path
         .metadata__title
           | Followers
         .metadata__text
-          = author.get('follower_count')
+          a(href="#")= author.get('follower_count')
 
       .metadata__column
         .metadata__title
           | Following
         .metadata__text
-          = author.get('following_count')
+          a(href="#")= author.get('following_count')
 
 //  if !channel && !author
     .metadata
