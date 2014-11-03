@@ -6,7 +6,7 @@ body.is-modal
 
 #modal
   z-index modal_z
-  transition opacity 0.25s
+  // transition opacity 0.25s
   opacity 0
   color textgray
   antialiased()
@@ -55,11 +55,11 @@ body.is-modal
   left 0
 
 .modal-backdrop
-  background rgba(240, 240, 240, 0.85) 
-  
+  background rgba(240, 240, 240, 0.85)
+
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
-  
+
 
 .modal-dialog
   position fixed
@@ -88,7 +88,7 @@ body.is-modal
   vertical-align middle
   height 100%
   padding 10% 0 0 0
-  transition opacity 0.25s
+  // transition opacity 0.25s
   &[data-state='fade-out'], &.is-fade-out
     opacity 0
   &[data-state='fade-in'], &.is-fade-in
@@ -112,13 +112,13 @@ body.is-modal
   text-align right
 
   a
-    color lightgray 
+    color lightgray
     &:hover
-      color textgray 
+      color textgray
 
 .modal-checkbox
   display none
-  
+
 #auth-page
   max-width 400px
   margin auto
