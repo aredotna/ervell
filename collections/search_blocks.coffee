@@ -14,4 +14,4 @@ module.exports = class SearchBlocks extends Blocks
   url: -> "#{sd.API_URL}/search/channels"
 
   parse: (data)->
-    _.flatten _.values _.pick(data, ['contents', 'followers', 'users', 'channels', 'following', 'blocks'])
+    _.flatten _.values _.pick(data, ['contents', 'followers', 'users', 'channels', 'following', 'blocks', 'results'])
