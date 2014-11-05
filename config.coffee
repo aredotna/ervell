@@ -12,6 +12,7 @@ module.exports =
   API_URL: "http://api.are.na/v2"
   # API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
   # API_URL: "http://localhost:3000/v2"
+  PUSHER_KEY: '19beda1f7e2ca403abab'
   S3_KEY: null
   S3_SECRET: null
   REDIS_URL: "redis://redistogo:f6ccb2b733aedb75db8100eba74791b5@barreleye.redistogo.com:11317/"

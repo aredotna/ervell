@@ -4,7 +4,7 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL} = config = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL, PUSHER_KEY} = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -29,6 +29,7 @@ sharify.data =
   ASSET_PATH: ASSET_PATH
   IMAGE_PATH: IMAGE_PATH
   REDIS_URL: REDIS_URL
+  PUSHER_KEY: PUSHER_KEY
 
 # current user management
 CurrentUser = require '../models/current_user'

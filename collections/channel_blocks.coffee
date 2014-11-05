@@ -6,7 +6,6 @@ Blocks = require "./blocks.coffee"
 sd = require("sharify").data
 Block = require "../models/block.coffee"
 mediator = require '../lib/mediator.coffee'
-Pusher = require 'pusher'
 
 module.exports = class ChannelBlocks extends Blocks
   defaultOptions:

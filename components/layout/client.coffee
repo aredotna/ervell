@@ -3,6 +3,7 @@ Backbone.$ = $
 _ = require 'underscore'
 HeaderView = require './header/view.coffee'
 BodyView = require './body/view.coffee'
+mediator = require '../../lib/mediator.coffee'
 sd = require('sharify').data
 # analytics = require '../../lib/analytics.coffee'
 
@@ -12,6 +13,7 @@ module.exports = ->
   setupAnalytics()
   setupPageclickEvent()
   setupAjaxHeaders()
+  setupPusher()
 
 setupAnalytics = ->
   # Initialize analytics & track page view if we included mixpanel
@@ -35,6 +37,10 @@ setupReferrerTracking = ->
   # if document?.referrer?.indexOf and document.referrer.indexOf(sd.APP_URL) < 0
   #   Cookies.set 'force-referrer', document.referrer
   #   Cookies.set 'force-session-start', window.location.href
+
+setupPusher = ->
+  pusher = new Pusher sd.PUSHER_KEY
+  console.log 'pusher', pusher
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
