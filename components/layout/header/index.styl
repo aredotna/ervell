@@ -190,3 +190,8 @@
   font-size s_caption
   vertical-align top
   margin-left 0.3em
+  display inline-block
+  transition transform .3s ease-in-quad
+
+.dropdown--is_active .dropdown--menu__trigger:after
+  transform rotate(180deg)
