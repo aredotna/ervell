@@ -36,3 +36,6 @@ module.exports = class FeedItem extends Base
 
           when 'published'
             @set 'action', 'created'
+
+          when 'added'
+            @set 'action', 'connected'
