@@ -1,8 +1,11 @@
 h2.feed-group__sentence
   a(href="/#{group.actor().slug}" class="username")=group.actor().username
+  -if(group.action() == "said")
+    span :
   span &nbsp;
-  span=group.action()
-  span &nbsp;
+  -if(group.action() != "said")
+    span=group.action()
+    span &nbsp;
   if group.is_single()
     if group.is_comment()
       em.feed-group__sentence__comment=group.single_subject()
