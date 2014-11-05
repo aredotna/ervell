@@ -7,7 +7,7 @@ sd = require("sharify").data
 
 module.exports = class Channel extends Base
 
-  url: -> "#{sd.API_URL}/channels/#{@slug}/thumb"
+  url: -> "#{sd.API_URL}/channels/#{@slug}/thumb?direction=desc"
 
   initialize: (options) ->
     if options

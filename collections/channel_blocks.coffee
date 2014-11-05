@@ -14,7 +14,7 @@ module.exports = class ChannelBlocks extends Blocks
 
   model: Block
 
-  url: -> "#{sd.API_URL}/channels/#{@slug}/contents"
+  url: -> "#{sd.API_URL}/channels/#{@slug}/contents?direction=desc"
 
   parse: (data)-> data.contents
 
@@ -23,12 +23,12 @@ module.exports = class ChannelBlocks extends Blocks
     super
 
   loadSkeleton: ->
-    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=#{@options.per}&page=2", (response) =>
+    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=#{@options.per}&page=2&direction=desc", (response) =>
       @mergeSkeleton(response.contents)
 
   loadPage: (page)->
     console.log 'loadPage'
-    $.get "#{sd.API_URL}/channels/#{@slug}/contents?per=#{@options.per}&page=#{page}", (response) =>
+    $.get "#{sd.API_URL}/channels/#{@slug}/contents?per=#{@options.per}&page=#{page}&direction=desc", (response) =>
       @replacePlaceholders(response.contents, page, @loadDirection)
 
   mergeSkeleton: (models) ->
