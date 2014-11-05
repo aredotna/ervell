@@ -38,6 +38,9 @@
 .grid__block--text .valign-inner
   vertical-align top
 
+.grid__block--channel .grid__block__inner
+  border-width 2px
+
 .grid__block__inner, .grid__block__connect-container
   width 100%
   height block_width
@@ -93,6 +96,9 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', borde
 .grid__block__inner:hover, .grid__block__inner.is-active
   border 1px solid bordergray
   cursor pointer
+
+.grid__block--channel .grid__block__inner:hover
+  border-width 2px
 
 .grid__block__inner:hover .grid__block__overlay
   opacity 1
