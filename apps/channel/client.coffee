@@ -191,7 +191,7 @@ module.exports = class CollaborationView extends Backbone.View
     @$el.html collaboratorsTemplate(collaborators: @collection.models)
 
 module.exports.init = ->
-  current_user = new CurrentUser sd.CURRENT_USER
+  current_user = mediator.current_user
   channel = new Channel sd.CHANNEL
   blocks = new ChannelBlocks sd.BLOCKS,
     channel_slug: sd.CHANNEL.slug

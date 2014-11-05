@@ -3,9 +3,14 @@
 #
 
 User = require "./user.coffee"
+mediator = require '../lib/mediator.coffee'
 sd = require("sharify").data
 
 module.exports = class CurrentUser extends User
+
+  initialize: ->
+    super
+    console.log 'CurrentUser', mediator
 
   url: -> "#{sd.API_URL}/accounts"
 
