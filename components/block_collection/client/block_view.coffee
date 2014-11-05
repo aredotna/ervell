@@ -4,6 +4,7 @@ sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 ConnectView = require '../../connect/client/connect_view.coffee'
 LightboxView = require '../../lightbox/client/lightbox_view.coffee'
+IconicJS = require '../../../components/iconic/client/iconic.min.js'
 User = require '../../../models/user.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
@@ -51,6 +52,9 @@ module.exports = class BlockView extends Backbone.View
     $("##{model.id}").replaceWith blockTemplate(block: model, user: @current_user)
     @$el = $("##{model.id}")
     @model = model
+
+    IconicJS().inject 'img.iconic'
+
     @delegateEvents()
 
   removeActiveClass: ->
