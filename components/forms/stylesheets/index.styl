@@ -72,7 +72,7 @@ button
   background-color transparent
   cursor pointer
   font-size 2em
-  font-weight normal
+  font-weight bold
 
   &:hover
     background-color backgroundgray
@@ -89,18 +89,6 @@ button
   &.button--wide
     width 100%
     height 45px
-
-  &.button--inblock
-    width 92%
-    height 50px
-    left 4%
-    font-size 15px
-    color textgray
-    border-top 1px solid bordergray
-
-    &:hover
-      background-color #fff
-      color hovergray
 
   &.button--dark
     border none
@@ -122,3 +110,21 @@ button
   &:active
     background-color transparent
     border-bottom 0
+
+.button--inblock
+  position absolute
+  bottom 0
+  width 92%
+  height 60px
+  line-height 58px
+  left 4%
+  font-size 15px
+  font-weight bold
+  color textgray
+  border-top 1px solid bordergray
+  padding 0
+
+  &:hover
+    background-color #fff
+    color hovergray
+    cursor pointer
