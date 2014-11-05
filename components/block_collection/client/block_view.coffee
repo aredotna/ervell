@@ -4,6 +4,7 @@ sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 ConnectView = require '../../connect/client/connect_view.coffee'
 LightboxView = require '../../lightbox/client/lightbox_view.coffee'
+User = require '../../../models/user.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
 
@@ -23,6 +24,8 @@ module.exports = class BlockView extends Backbone.View
 
     @render() if @autoRender
     @$el = $("##{@model.id}")
+
+    @current_user = new User sd.CURRENT_USER
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
@@ -45,7 +48,7 @@ module.exports = class BlockView extends Backbone.View
       block: @model
 
   update: (model)->
-    $("##{model.id}").replaceWith blockTemplate(block: model)
+    $("##{model.id}").replaceWith blockTemplate(block: model, user: @current_user)
     @$el = $("##{model.id}")
     @model = model
     @delegateEvents()
@@ -55,4 +58,4 @@ module.exports = class BlockView extends Backbone.View
     @$('.grid__block__link').removeAttr('data-disabled')
 
   render: =>
-    @container[@containerMethod] blockTemplate(block: @model)
+    @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
