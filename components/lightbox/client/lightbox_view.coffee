@@ -11,6 +11,7 @@ module.exports = class LightboxView extends Backbone.View
 
   events:
     'click .lightbox--close': 'close'
+    'click .lightbox__content': 'close'
 
   initialize: ->
     $('body').addClass 'is-lightbox'
