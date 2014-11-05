@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 Feed = require '../../../collections/feed.coffee'
+IconicJS = require '../../../components/iconic/client/iconic.min.js'
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
 
 lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
@@ -18,11 +19,9 @@ module.exports = class LightboxView extends Backbone.View
     @$el.addClass 'is-active'
 
     @model.on "sync", @render, @
-    console.log '@model initialize', @model
     @model.fetch()
 
   render: ->
-    console.log('rendering', @model)
     @$el.html lightboxTemplate(block: @model)
 
     feed = new Feed null,
@@ -32,6 +31,8 @@ module.exports = class LightboxView extends Backbone.View
     new SmallFeedView
       el: @$ "#lightbox__feed_inner"
       collection: feed
+
+    IconicJS().inject 'img.iconic'
 
   close: ->
     @$el.html ""

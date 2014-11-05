@@ -2,6 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+IconicJS = require '../../../components/iconic/client/iconic.min.js'
 Block = require '../../../models/block.coffee'
 BlockView = require './block_view.coffee'
 
@@ -12,6 +13,7 @@ module.exports = class BlockCollectionView extends Backbone.View
     @blocks = options.blocks
 
     @blocks.each (block) => @renderBlockView block
+    IconicJS().inject 'img.iconic'
     super
 
   renderBlockView: (block)=>
