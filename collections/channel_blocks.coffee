@@ -6,15 +6,17 @@ Blocks = require "./blocks.coffee"
 sd = require("sharify").data
 Block = require "../models/block.coffee"
 mediator = require '../lib/mediator.coffee'
+params = require 'query-params'
 
 module.exports = class ChannelBlocks extends Blocks
   defaultOptions:
+    direction: 'desc'
+    sort: 'position'
     per: 6
-    page: 1
 
   model: Block
 
-  url: -> "#{sd.API_URL}/channels/#{@slug}/contents?direction=desc"
+  url: -> "#{sd.API_URL}/channels/#{@slug}/contents?#{params.encode(@options)}"
 
   parse: (data)-> data.contents
 
@@ -23,12 +25,15 @@ module.exports = class ChannelBlocks extends Blocks
     super
 
   loadSkeleton: ->
-    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?per=#{@options.per}&page=2&direction=desc", (response) =>
+    options = @options
+    options.page = 2
+    $.get "#{sd.API_URL}/channels/#{@slug}/skeleton?#{params.encode(options)}", (response) =>
       @mergeSkeleton(response.contents)
 
   loadPage: (page)->
-    console.log 'loadPage'
-    $.get "#{sd.API_URL}/channels/#{@slug}/contents?per=#{@options.per}&page=#{page}&direction=desc", (response) =>
+    options = @options
+    options.page = page
+    $.get "#{sd.API_URL}/channels/#{@slug}/contents?#{params.encode(options)}", (response) =>
       @replacePlaceholders(response.contents, page, @loadDirection)
 
   mergeSkeleton: (models) ->

@@ -64,7 +64,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
       direction = 'up'
       current = $('.pagemarker').length
       # Kinda hacky here, if we don't do this, the
-      # callback from the last page waypoint hitting top of page 
+      # callback from the last page waypoint hitting top of page
       # sometimes fires after the 'last' waypoint does when scrolling
       # down
       $(el).waypoint('prev').waypoint('disable')
