@@ -10,38 +10,13 @@ sd = require('sharify').data
 
 module.exports = ->
   setupViews()
-  setupReferrerTracking()
-  setupAnalytics()
-  setupPageclickEvent()
   setupAjaxHeaders()
   setupPusherAndCurrentUser()
 
-setupAnalytics = ->
-  # Initialize analytics & track page view if we included mixpanel
-  # (not included in test environment).
-  # analytics(ga: ga)
-  # analytics.trackPageview()
-  # analytics.registerCurrentUser()
-
-  # # Log a visit once per session
-  # unless Cookies.get('active_session')?
-  #   Cookies.set 'active_session', true
-  #   analytics.track.funnel if sd.CURRENT_USER
-  #     'Visited logged in'
-  #   else
-  #     'Visited logged out'
-
-setupReferrerTracking = ->
-  # Live, document.referrer always exists, but let's check
-  # 'document?.referrer?.indexOf' just in case we're in a
-  # test that stubs document
-  # if document?.referrer?.indexOf and document.referrer.indexOf(sd.APP_URL) < 0
-  #   Cookies.set 'force-referrer', document.referrer
-  #   Cookies.set 'force-session-start', window.location.href
-
 setupPusherAndCurrentUser = ->
-  mediator.pusher = new Pusher sd.PUSHER_KEY
-  mediator.current_user = new CurrentUser sd.CURRENT_USER
+  mediator.shared = {}
+  mediator.shared.pusher = new Pusher sd.PUSHER_KEY
+  mediator.shared.current_user = new CurrentUser sd.CURRENT_USER
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
