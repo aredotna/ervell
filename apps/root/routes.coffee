@@ -12,7 +12,7 @@ CurrentUser = require '../../models/current_user'
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
   if req.user
-    res.render 'feed'
+    res.render 'feed', path: 'feed'
   else
     res.render 'index'
 
@@ -24,5 +24,5 @@ CurrentUser = require '../../models/current_user'
 
   blocks.fetch
     success: ->
-      res.render "explore", blocks: blocks.models
+      res.render "explore", blocks: blocks.models, path: 'explore'
 

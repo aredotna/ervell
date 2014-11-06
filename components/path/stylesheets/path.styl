@@ -43,8 +43,6 @@
     margin 0 0.25em
     font-weight 400
 
-  
-
 .edit-channel, edit-profile
   position relative
   float right
@@ -92,24 +90,8 @@
   height 24px
   margin 0 0 0 1px
 
-.root--active
-  position relative
-  float left
-  line-height 15px
-  font-size s_caption + 1
-  color hovergray
-  font-weight bold
+  .root__toggle__item
+    font-size s_caption + 1
 
-.root--unactive
-  position relative
-  float left
-  clear both
-  line-height 15px
-  font-size s_caption
-  color lightgray
-
-  a
-    color lightgray
-
-    &:hover
-      color textgray
+    &.active
+      font-weight bold

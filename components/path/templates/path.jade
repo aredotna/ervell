@@ -7,9 +7,8 @@ section.path
       if !channel && !author
         li
           .root__toggle
-            span.root--active feed
-            span.root--unactive
-              a(href="/explore") explore
+            .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
+            .root__toggle__item(class="#{path == 'explore' ? 'active' : ''}"): a(href="/explore") explore
       //-
       //-   li
       //-     span.root--active feed
