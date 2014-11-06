@@ -5,6 +5,8 @@ Blocks = require '../../../collections/blocks.coffee'
 Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
 
+newBlockTemplate = -> require('../templates/new_block.jade') arguments...
+
 module.exports = class NewBlockView extends Backbone.View
 
   events:
@@ -14,7 +16,10 @@ module.exports = class NewBlockView extends Backbone.View
 
   initialize: (options)->
     @blocks = options.blocks
+    @$container = options.container
     @$field = @$('.grid__block--new-block__content-field')
+
+    @render() if options.autoRender
 
   showAddBlockForm: ->
     @$el.addClass 'active'
@@ -47,3 +52,6 @@ module.exports = class NewBlockView extends Backbone.View
       @blocks.create block.toJSON(),
         url: "#{sd.API_URL}/channels/#{@model.get('slug')}/blocks"
         success: (block) -> console.log 'block created', block
+
+  render: ->
+    @$container.prepend newBlockTemplate(channel: @model)

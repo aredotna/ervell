@@ -16,14 +16,29 @@ collaboratorsTemplate = -> require('./templates/collaborators.jade') arguments..
 
 module.exports = class BlockSkeletonView extends Backbone.View
 
-  initialize: ->
+  initialize: (options)->
+    @channel = options.channel if options?.channel
+
     @collection.on "add", @appendBlock, @
     @collection.on "merge:skeleton", @renderSkeleton, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
+    mediator.on 'collaborators:fetched', @checkUserAbilities, @
+
     @collection.loadSkeleton()
 
     super
+
+  checkUserAbilities: (collaborators) ->
+    console.log 'mediator.shared.current_user.id', mediator.shared.current_user.id, "collaborators.pluck('id')", collaborators.pluck('id')
+    if _.contains collaborators.pluck('id'), mediator.shared.current_user.id
+      console.log 'should add new block view'
+      new NewBlockView
+        el: $ ".grid__block--new-block"
+        container: @$el
+        model: @channel
+        blocks: @collection
+        autoRender: true
 
   appendBlock: (model)->
     new BlockView
@@ -189,9 +204,10 @@ module.exports = class CollaborationView extends Backbone.View
 
   render: ->
     @$el.html collaboratorsTemplate(collaborators: @collection.models)
+    mediator.trigger 'collaborators:fetched', @collection
 
 module.exports.init = ->
-  current_user = mediator.current_user
+  current_user = mediator.shared.current_user
   channel = new Channel sd.CHANNEL
   blocks = new ChannelBlocks sd.BLOCKS,
     channel_slug: sd.CHANNEL.slug
@@ -203,6 +219,7 @@ module.exports.init = ->
 
   new BlockSkeletonView
     collection: blocks
+    channel: channel
     el: $ ".grid"
 
   if channel.has('collaboration')

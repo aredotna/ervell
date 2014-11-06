@@ -14,8 +14,6 @@ module.exports = class BodyView extends Backbone.View
   initialize: (options) ->
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
 
-    console.log('current_path', current_path)
-
     new LightboxRouter
     Backbone.history.start pushState: true, root: current_path
 

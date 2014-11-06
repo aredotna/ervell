@@ -15,8 +15,6 @@ module.exports = class HeaderView extends Backbone.View
     'click .dropdown--menu__trigger' : 'toggleDropdown'
 
   initialize: (options) ->
-    { @$window, @$body } = options
-
     @searchBarView = new SearchBarView
       el: @$('.layout-header__search')
       $input: @$('#layout-header__search__input')
@@ -26,7 +24,6 @@ module.exports = class HeaderView extends Backbone.View
 
     if !sd.CURRENT_USER
       new AuthRouter
-      Backbone.history.start()
 
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent().parent()
