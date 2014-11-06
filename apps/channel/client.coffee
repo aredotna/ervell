@@ -30,9 +30,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
     super
 
   checkUserAbilities: (collaborators) ->
-    console.log 'mediator.shared.current_user.id', mediator.shared.current_user.id, "collaborators.pluck('id')", collaborators.pluck('id')
     if _.contains collaborators.pluck('id'), mediator.shared.current_user.id
-      console.log 'should add new block view'
       new NewBlockView
         el: $ ".grid__block--new-block"
         container: @$el
