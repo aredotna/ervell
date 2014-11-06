@@ -10,8 +10,10 @@ feedTemplate = -> require('../../../components/feed/templates/feed.jade') argume
 module.exports = class FeedView extends Chaplin.View
 
   initialize: ->
+    $('body').addClass 'is-loading'
     @collection.on "sync", @render, @
-    @collection.fetch()
+    @collection.fetch
+      success: -> $('body').removeClass 'is-loading'
 
     @current_user = new User sd.CURRENT_USER
 
