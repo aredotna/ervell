@@ -13,4 +13,6 @@ module.exports = class UserBlockCollectionView extends BlockCollectionView
     super
     @blocks.on 'add', @appendBlockView, @
 
-  appendBlockView: (model) -> @renderBlockView model, true
+  appendBlockView: (model) ->
+    console.log 'appendBlockView', @current_user
+    @renderBlockView model, true

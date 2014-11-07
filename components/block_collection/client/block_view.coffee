@@ -23,10 +23,10 @@ module.exports = class BlockView extends Backbone.View
     @container = options.container if options.container?
     @autoRender = options.autoRender if options.autoRender?
 
+    @current_user = mediator.shared.current_user
+
     @render() if @autoRender
     @$el = $("##{@model.id}")
-
-    @current_user = new User sd.CURRENT_USER
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
@@ -61,5 +61,6 @@ module.exports = class BlockView extends Backbone.View
     @$('.grid__block__inner').removeClass 'is-active'
     @$('.grid__block__link').removeAttr('data-disabled')
 
-  render: =>
+  render: ->
+    console.log 'rending block view', @current_user, @
     @container[@containerMethod] blockTemplate(block: @model, user: @current_user)

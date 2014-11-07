@@ -16,8 +16,6 @@ CurrentUser = require '../../models/current_user'
   else
     res.render 'index'
 
-
-
 @explore = (req, res, next) ->
   blocks = new SearchBlocks
   blocks.url = "#{res.locals.sd.API_URL}/search"
