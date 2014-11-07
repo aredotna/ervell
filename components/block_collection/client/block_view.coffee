@@ -62,5 +62,4 @@ module.exports = class BlockView extends Backbone.View
     @$('.grid__block__link').removeAttr('data-disabled')
 
   render: ->
-    console.log 'rending block view', @current_user, @
     @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
