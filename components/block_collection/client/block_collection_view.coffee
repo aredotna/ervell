@@ -15,7 +15,6 @@ module.exports = class BlockCollectionView extends Backbone.View
     @blocks.each (block) => @renderBlockView block
     IconicJS().inject 'img.iconic'
 
-    @blocks.on 'add', @appendBlockView, @
     super
 
   renderBlockView: (block, autoRender = false)=>
@@ -23,5 +22,3 @@ module.exports = class BlockCollectionView extends Backbone.View
       container: $('.grid')
       model: block
       autoRender: autoRender
-
-  appendBlockView: (model) -> @renderBlockView model, true
