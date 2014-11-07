@@ -20,6 +20,13 @@ module.exports = class BodyView extends Backbone.View
     if sd.CLIENT_PATH
       Backbone.history.navigate sd.CLIENT_PATH, trigger: true, replace: false
 
+    mediator.on 'load:start', @startLoading, @
+    mediator.on 'load:stop', @stopLoading, @
+
+  startLoading: -> $('body').addClass 'is-loading'
+
+  stopLoading: -> $('body').removeClass 'is-loading'
+
   intercept: (e)->
     e.preventDefault()
 
