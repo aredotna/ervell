@@ -15,7 +15,6 @@ module.exports =
   PUSHER_KEY: '19beda1f7e2ca403abab'
   S3_KEY: null
   S3_SECRET: null
-  REDIS_URL: "redis://redistogo:f6ccb2b733aedb75db8100eba74791b5@barreleye.redistogo.com:11317/"
   SESSION_SECRET: 'change-me'
   SESSION_COOKIE_MAX_AGE: 31536000000
   SESSION_COOKIE_KEY: 'arena.session'
