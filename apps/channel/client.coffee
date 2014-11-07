@@ -39,9 +39,12 @@ module.exports = class BlockSkeletonView extends Backbone.View
         autoRender: true
 
   appendBlock: (model)->
+    console.log 'appendBlock: model, ', model
+    containerMethod = if model.options?.wait is true then 'prepend' else 'append'
     new BlockView
       container: @$el
       model: model
+      containerMethod: containerMethod
 
   renderSkeleton: ->
     @queue = []

@@ -51,6 +51,7 @@ module.exports = class NewBlockView extends Backbone.View
 
       @blocks.create block.toJSON(),
         url: "#{sd.API_URL}/channels/#{@model.get('slug')}/blocks"
+        wait: true
         success: (block) -> console.log 'block created', block
 
   render: ->

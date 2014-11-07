@@ -1,10 +1,7 @@
 .grid__block.grid__block--new-block
-  a(href="#")
-    .grid__block__inner
-      .grid__block--new-block__add-block.grid__block--new-block__form.abs-fill
-        fieldset
-          textarea(placeholder="Drop files, paste an URL (image, video, page) or type text here").grid__block--new-block__content-field
+  .grid__block__inner
+    .grid__block--new-block__add-block.grid__block--new-block__form.abs-fill
+      fieldset
+        textarea(placeholder="Drop files, paste an URL (image, video, page) or type text here").grid__block--new-block__content-field
 
-        button.check.grid__block--new-block__submit.button--inblock Add to #{channel.get('title')} &rarr;
-      .grid__block--new-block__add-channel.grid__block--new-block__form.abs-fill
-        //- client side rendered
+      button.check.grid__block--new-block__submit.button--inblock Add to #{channel.get('title')} &rarr;

@@ -20,7 +20,7 @@ setupViews = ->
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}
-  mediator.shared.pusher = new Pusher sd.PUSHER_KEY
+  # mediator.shared.pusher = new Pusher sd.PUSHER_KEY
   mediator.shared.current_user = new CurrentUser sd.CURRENT_USER
 
 setupAjaxHeaders = ->

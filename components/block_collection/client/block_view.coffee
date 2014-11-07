@@ -14,7 +14,6 @@ module.exports = class BlockView extends Backbone.View
   container: null
   containerMethod: 'append'
 
-  # this should fall back to an actual link
   events:
     'click .grid__block__overlay' : 'openLightbox'
     'click .grid__block__connect-btn' : 'loadConnectView'
@@ -22,6 +21,7 @@ module.exports = class BlockView extends Backbone.View
   initialize: (options)->
     @container = options.container if options.container?
     @autoRender = options.autoRender if options.autoRender?
+    @containerMethod = options.containerMethod if options.containerMethod?
 
     @current_user = mediator.shared.current_user
 
