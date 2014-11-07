@@ -18,3 +18,9 @@ module.exports = class UserBlocks extends SearchBlocks
   initialize: (models, options) ->
     super
     @slug = options.user_slug
+
+  loadNext: ->
+    return false if @exhausted
+
+    ++@options.page
+    @fetch remove: false

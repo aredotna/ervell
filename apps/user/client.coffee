@@ -8,6 +8,7 @@ Backbone.$ = $
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
+InfiniteView = require '../../components/pagination/infinite_view.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 
 module.exports.init = ->
@@ -17,3 +18,8 @@ module.exports.init = ->
   new BlockCollectionView
     el: $ ".grid"
     blocks: blocks
+
+  new InfiniteView
+    context: $ ".grid"
+    collection: blocks
+    itemSelector: $ ".grid"
