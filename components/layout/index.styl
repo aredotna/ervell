@@ -107,6 +107,11 @@ for i in (1..5)
     .container
       center(block_width_mar * i)
 
+@media (max-width:(block_width_mar * 2) + 20)
+  .container
+    center(94%)
+
+
 @import 'header/index'
 @import 'loader/stylesheets/loader'
 @import '../iconic/stylesheets/index'
