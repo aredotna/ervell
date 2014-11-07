@@ -9,7 +9,7 @@ sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
 InfiniteView = require '../../components/pagination/infinite_view.coffee'
-BlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
+UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
 
 module.exports.init = ->
   blocks = new UserBlocks sd.BLOCKS,
