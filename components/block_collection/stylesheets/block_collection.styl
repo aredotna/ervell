@@ -54,8 +54,17 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
 
+.grid__block__channel__stats
+  display none
+  margin 1em 0 1em
+
 .grid__block--channel .grid__block__inner:hover
   h2
+    font-weight bold
+
+  .grid__block__channel__stats
+    display block
+    line-height 1.5
     font-weight bold
 
 .grid__block__content__image

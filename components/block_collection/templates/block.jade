@@ -16,6 +16,10 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
                 != block.get('content_html')
             - if(block.get('class') == 'Channel')
               h2=block.get('title')
+              .grid__block__channel__stats
+                ul.grid__block__channel__stats__list
+                  li #{block.get('length')} blocks
+                  li #{block.get('follower_count')} followers
             - if(block.get('class') == 'User')
               +avatar(block)
               h2=block.get('username')
