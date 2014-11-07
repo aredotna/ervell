@@ -1,13 +1,30 @@
 @import '../../layout/variables'
 
+.path--header
+  margin 6em 10px 4em 10px
+
 .path
   position relative
   color lightgray
-  margin 6em 10px 4em 10px
   text-align left
   font-weight normal
 
   clearfix()
+
+  &.stuck
+    position fixed
+    z-index header_z + 1
+    top 0
+    left 50px
+    margin 0
+    line-height 48px
+    background backgroundgray
+
+    h1
+      font-size 16px
+
+    .root__toggle
+      line-height 1
 
   .path__breadcrumb
     breadcrumb: '/' 8px lightgray
@@ -53,7 +70,7 @@
   font-weight bold
 
 .metadata
-  padding 75px 0 10px 0
+  padding 45px 0 10px 0
   font-size s_caption + 1
   line-height 1.5
 

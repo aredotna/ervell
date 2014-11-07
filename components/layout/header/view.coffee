@@ -22,6 +22,8 @@ module.exports = class HeaderView extends Backbone.View
 
     mediator.on 'open:auth', @openAuth, @
 
+    $('section > .path').waypoint('sticky')
+
     if !sd.CURRENT_USER
       new AuthRouter
 

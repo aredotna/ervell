@@ -1,61 +1,63 @@
-section.path
-  h1
-    ul.path__breadcrumb
-      li.root
-        a(href='/') Are.na
+section.path--header
+  .path
+    h1
+      ul.path__breadcrumb
+        li.root
+          a(href='/') Are.na
 
-      if !channel && !author
-        li
-          .root__toggle
-            .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
-            .root__toggle__item(class="#{path == 'explore' ? 'active' : ''}"): a(href="/explore") explore
-      if author
-        li.path__username
-          a(href="/" + author.get('slug'))=author.get('username')
-      if channel
-        li.path__channel.active.channel(class="privacy-#{channel.get('status')}")
-          = channel.get('title')
+        if !channel && !author
+          li
+            .root__toggle
+              .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
+              .root__toggle__item(class="#{path == 'explore' ? 'active' : ''}"): a(href="/explore") explore
+        if author
+          li.path__username
+            a(href="/" + author.get('slug'))=author.get('username')
+        if channel
+          li.path__channel.active.channel(class="privacy-#{channel.get('status')}")
+            = channel.get('title')
 
-  if channel
-    .edit-channel
-      a(href="#") Edit channel
+    if channel
+      .edit-channel
+        a(href="#") Edit channel
 
-  else if author
-    //- .edit-profile
-    //-   a(href="#") Profile settings
+    else if author
+      //- .edit-profile
+      //-   a(href="#") Profile settings
 
-  if channel
-    .metadata
-      if channel.has('metadata')
+  .metadata--container
+    if channel
+      .metadata
+        if channel.has('metadata')
+          .metadata__column
+            .metadata__title Description
+            .metadata__text= channel.get('metadata').description
+        if channel.get('collaboration')
+          #metadata--collaborators.metadata__column
+            //- Rendered by client
         .metadata__column
-          .metadata__title Description
-          .metadata__text= channel.get('metadata').description
-      if channel.get('collaboration')
-        #metadata--collaborators.metadata__column
-          //- Rendered by client
-      .metadata__column
-        .metadata__title Followers
-        .metadata__text: a(href="#")= channel.get('follower_count')
+          .metadata__title Followers
+          .metadata__text: a(href="#")= channel.get('follower_count')
 
-  else if author
-    .metadata
-      if author.has('metadata')
+    else if author
+      .metadata
+        if author.has('metadata')
+          .metadata__column
+            .metadata__title Info
+            .metadata__text Son of @broskoski, father of a cat. NYC.
+
         .metadata__column
-          .metadata__title Info
-          .metadata__text Son of @broskoski, father of a cat. NYC.
+          .metadata__title View
+          .metadata__text
+            ul.metadata--selector.breadcrumb
+              li: a(href="#").metadata--selector__option.is-active All
+              li: a(href="#").metadata--selector__option Channels
+              li: a(href="#").metadata--selector__option Blocks
 
-      .metadata__column
-        .metadata__title View
-        .metadata__text
-          ul.metadata--selector.breadcrumb
-            li: a(href="#").metadata--selector__option.is-active All
-            li: a(href="#").metadata--selector__option Channels
-            li: a(href="#").metadata--selector__option Blocks
+        .metadata__column
+          .metadata__title Followers
+          .metadata__text: a(href="#")= author.get('follower_count')
 
-      .metadata__column
-        .metadata__title Followers
-        .metadata__text: a(href="#")= author.get('follower_count')
-
-      .metadata__column
-        .metadata__title Following
-        .metadata__text: a(href="#")= author.get('following_count')
+        .metadata__column
+          .metadata__title Following
+          .metadata__text: a(href="#")= author.get('following_count')
