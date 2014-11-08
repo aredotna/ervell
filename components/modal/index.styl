@@ -84,6 +84,7 @@ body.is-modal
     color hovergray
 
 .modal-body
+  width 90%
   max-width 760px
   margin auto
   vertical-align middle
@@ -123,3 +124,15 @@ body.is-modal
 #auth-page
   max-width 400px
   margin auto
+
+@media (max-width:500px)
+  .modal-body
+    padding 25% 0 0 0
+  
+  .modal-title
+    top 4%
+    left 5%
+    
+  .modal-close
+    top 3.5%
+    right 5%
