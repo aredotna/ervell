@@ -55,7 +55,10 @@ privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-'
 privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
 
 .grid__block__channel__stats
-  display none
+  visibility hidden
+  font-size s_caption
+  line-height 1
+  font-weight normal
   margin 1em 0 1em
 
 .grid__block--channel .grid__block__inner:hover
@@ -63,10 +66,7 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
     font-weight normal
 
   .grid__block__channel__stats
-    display block
-    font-size s_caption
-    line-height 1
-    font-weight normal
+    visibility visible
 
 .grid__block__content__image
   max-width block_width - 1
