@@ -26,6 +26,9 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
             - if(block.get('class') == 'Attachment')
               img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
         .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+          - if(block.get('class') == 'Link')
+            .grid__block__content__link
+              img(data-src="#{sd.IMAGE_PATH}iconic/link.svg" class="iconic iconic-sm")
           .grid__block__mini-feed
             - if(channel)
               ul.bare-list

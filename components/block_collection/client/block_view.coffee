@@ -15,8 +15,9 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
-    'click .grid__block__overlay' : 'openLightbox'
-    'click .grid__block__connect-btn' : 'loadConnectView'
+    'click .grid__block__content__link' : 'openLink'
+    'click .grid__block__overlay'       : 'openLightbox'
+    'click .grid__block__connect-btn'   : 'loadConnectView'
 
   initialize: (options)->
     @container = options.container if options.container?
@@ -47,6 +48,12 @@ module.exports = class BlockView extends Backbone.View
     new ConnectView
       el: $connect_container
       block: @model
+
+  openLink: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    console.log 'openLink', @model
+    window.location = @model.get('source').url
 
   update: (model)->
     $("##{model.id}").replaceWith blockTemplate(block: model, user: @current_user)
