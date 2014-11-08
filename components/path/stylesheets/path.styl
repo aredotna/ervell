@@ -16,27 +16,29 @@
     z-index header_z
     top 0
     left 50px
+    height 50px
     margin 0
-    line-height 50px
-    height 30px
     background-color backgroundgray
       
     h1
       font-size 1em
-      line-height 
+      line-height 3.1em
 
     .edit-channel
       display none
 
     .root__toggle
-      line-height 1
-      margin 10px 0 0 0
+      height auto
+      margin 8px 0 0 0
+      
+      .root__toggle__item
+        font-size s_caption
 
   .path__breadcrumb
     breadcrumb: '/' 8px lightgray
 
     li:after
-      font-weight 200
+      font-weight normal
 
     li:last-child
       color textgray
@@ -111,11 +113,12 @@
   position relative
   display inline-block
   height 24px
-  margin 0 0 0 1px
+  margin 1px 0 0 0
 
   .root__toggle__item
     color lightgray
     font-size s_caption + 1
+    line-height 1.3em
 
     &.active
       color hovergray
