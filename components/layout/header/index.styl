@@ -46,7 +46,7 @@
     input#layout-header__search__input
       width 100%
       height 50px
-      font-size 16px
+      font-size 1em
       border none
       outline 0
       font-weight normal
@@ -164,17 +164,17 @@
 
   .dropdown__notification
     width 100%
+    padding 8px 0 8px 0
     border-bottom 1px solid bordergray
-    padding 0 0 14px 0
+    background-color backgroundgray
 
     a
       display block
       height auto
       font-size s_caption
       font-weight normal
-      padding 14px 14px 0 14px
+      padding 10px 14px 10px 14px
       line-height 17px
-      background-color backgroundgray
       color private
 
       &:hover
@@ -191,7 +191,37 @@
   vertical-align top
   margin-left 0.3em
   display inline-block
-  transition transform .3s ease-in-quad
+  transition transform 0s ease-in-quad
 
 .dropdown--is_active .dropdown--menu__trigger:after
   transform rotate(180deg)
+
+
+@media (max-width:500px)
+
+  html, body
+    font-size 13.5px
+
+  #layout-header .logo
+    width 70px
+    padding 0 10px 0 10px
+
+  .dropdown
+    position fixed
+    overflow scroll
+    margin 0
+    background-color secondbackgroundgray
+  
+    .dropdown__notification
+      background-color secondbackgroundgray
+    
+    .dropdown__link
+      width 300px
+      margin auto
+  
+  .dropdown.dropdown--size
+    width 100%
+    height 100%
+
+    
+    
