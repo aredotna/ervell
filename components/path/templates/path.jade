@@ -28,7 +28,7 @@ section.path--header
   .metadata--container
     if channel
       .metadata
-        if channel.has('metadata')
+        if channel.has('metadata') && channel.get('metadata').description
           .metadata__column
             .metadata__title Description
             .metadata__text= channel.get('metadata').description
