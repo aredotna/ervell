@@ -62,4 +62,7 @@ module.exports = class BlockView extends Backbone.View
     @$('.grid__block__link').removeAttr('data-disabled')
 
   render: ->
-    @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
+    if @containerMethod isnt 'before' and @containerMethod isnt 'after'
+      @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
+    else
+      @container.find('.grid__block--new-block')[@containerMethod] blockTemplate(block: @model, user: @current_user)

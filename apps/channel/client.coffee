@@ -20,6 +20,8 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @channel = options.channel if options?.channel
 
     @collection.on "add", @appendBlock, @
+    @collection.on "created:block", @appendBlock, @
+    @collection.on "placeholder:added", @appendBlock, @
     @collection.on "merge:skeleton", @renderSkeleton, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
@@ -39,8 +41,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
         autoRender: true
 
   appendBlock: (model)->
-    console.log 'appendBlock: model, ', model
-    containerMethod = if model.options?.wait is true then 'prepend' else 'append'
+    containerMethod = if model?.options?.wait is true then 'after' else 'append'
     new BlockView
       container: @$el
       model: model
