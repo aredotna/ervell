@@ -19,7 +19,10 @@ section.path--header
 
     if channel
       .edit-channel
-        a(href="#") Edit channel
+        .edit-channel__info-icon
+          include ../../../public/images/iconic/info.svg
+        .edit-channel__icon
+          include ../../../public/images/iconic/pencil.svg
 
     else if author
       //- .edit-profile

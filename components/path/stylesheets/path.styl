@@ -72,10 +72,45 @@
   position relative
   float right
   width auto
+  height 30px
   color lightgray
   font-size s_caption + 1
-  line-height: 30px;
+  line-height: 50px;
   font-weight bold
+  
+.edit-channel__icon, .edit-channel__info-icon
+    position relative
+    float left
+    width 20px
+    height 30px
+    margin 10px 12px 0 12px
+    line-height 1em
+
+    svg
+      width 20px
+      height 20px
+      padding 0
+      margin 0
+      outline none
+      stroke lightgray
+      fill lightgray
+
+      .iconic-pencil-lg, .iconic-info-lg
+        display none
+
+      .iconic-pencil-md, .iconic-info-md
+        display none
+
+      .iconic-pencil-sm, .iconic-info-sm
+        display inline
+        
+      &:hover
+        stroke hovergray
+        fill hovergray
+        cursor pointer
+
+.edit-channel__info-icon
+  display none
 
 .metadata
   padding 45px 0 10px 0
@@ -123,3 +158,17 @@
     &.active
       color hovergray
       font-weight bold
+      
+@media (max-width:1023px)
+  .path h1
+    width 75%
+
+  .metadata
+    display none
+    
+  .edit-channel__info-icon
+    display block
+
+@media (max-width:500px)
+  .edit-channel__icon, .edit-channel__info-icon
+    margin 4px 10px 0 10px 
