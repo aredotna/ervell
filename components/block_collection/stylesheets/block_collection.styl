@@ -51,8 +51,8 @@
 
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
+privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
+privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
 
 .grid__block__channel__stats
   display none
@@ -60,12 +60,13 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', borde
 
 .grid__block--channel .grid__block__inner:hover
   h2
-    font-weight bold
+    font-weight normal
 
   .grid__block__channel__stats
     display block
-    line-height 1.5
-    font-weight bold
+    font-size s_caption
+    line-height 1
+    font-weight normal
 
 .grid__block__content__image
   max-width block_width - 1
