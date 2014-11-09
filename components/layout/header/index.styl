@@ -12,6 +12,9 @@
   display flex
   justify-content space-between
   z-index header_z
+  
+  .is-active .header--icon
+    display none
 
   .header--icon
     position absolute
@@ -83,9 +86,9 @@
 
     .layout-header__search__close
       position absolute
-      right 20px
-      font-size 22px
-      top 0
+      left 16px
+      font-size 31px
+      top 1px
       display none
       color lightgray
 
@@ -125,7 +128,7 @@
   color textgray
   border 0px solid bordergray
   text-align center
-  margin-top 11px
+  margin 11px 0 0 15px
 
   &:hover
     border 0px solid lightgray
