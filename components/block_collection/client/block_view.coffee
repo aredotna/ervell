@@ -14,6 +14,7 @@ module.exports = class BlockView extends Backbone.View
   container: null
   containerMethod: 'append'
 
+
   events:
     'click .grid__block__content__link' : 'openLink'
     'click .grid__block__overlay'       : 'openLightbox'
