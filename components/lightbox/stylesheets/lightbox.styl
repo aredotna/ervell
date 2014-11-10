@@ -38,7 +38,7 @@ body.is-lightbox
 
 .lightbox--close
   display block
-  position absolute
+  position fixed
   top 30px
   right 32px
   font-size 24px
@@ -75,7 +75,6 @@ body.is-lightbox
 
 .lightbox__content__img
   max-width 80%
-  max-height 80%
 
 .lightbox__feed
   height auto
@@ -94,3 +93,6 @@ body.is-lightbox
   
   .lightbox__feed .lightbox__feed__inner
     width 100%
+    
+  .lightbox--close
+    position absolute
