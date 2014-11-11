@@ -61,12 +61,17 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   font-weight normal
   margin 1em 0 1em
 
-.grid__block--channel .grid__block__inner:hover
+.grid__block.grid__block--channel
   h2
     font-weight normal
+    transition(0.1s)
+  &:hover
+    h2
+      font-size 1.53em
+      transition(0.1s)
 
-  .grid__block__channel__stats
-    visibility visible
+    .grid__block__channel__stats
+      visibility visible
 
 .grid__block__content .valign-inner
   padding 15px 0 0 0
@@ -144,11 +149,6 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 
 .grid__block.grid__block--channel .grid__block__content
   padding s_margin
-
-.grid__block.grid__block--channel
-
-  h2
-    font-weight normal
 
 .grid__block__mini-feed
   display none

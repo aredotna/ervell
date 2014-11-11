@@ -38,7 +38,7 @@ body.is-lightbox
 
 .lightbox--close
   display block
-  position absolute
+  position fixed
   top 30px
   right 32px
   font-size 24px
@@ -52,7 +52,8 @@ body.is-lightbox
     color hovergray
 
 .lightbox__content__description, .lightbox__content__text
-  width 600px
+  width 100%
+  max-width 450px
   margin 0 auto
   padding 0
   line-height 1.4em
@@ -74,9 +75,9 @@ body.is-lightbox
 
 .lightbox__content__img
   max-width 80%
-  max-height 80%
 
 .lightbox__feed
+  position relative
   height auto
   text-align center
   background-color backgroundgray
@@ -86,6 +87,17 @@ body.is-lightbox
   .lightbox__feed__inner
     width 65%
     margin auto
-
-
-
+    
+@media (max-width:500px)
+  .lightbox__content
+    padding 10px
+  
+  .lightbox__feed .lightbox__feed__inner
+    width 100%
+    
+  .lightbox--close
+    position absolute
+  
+  .lightbox__feed
+    padding 20px 0 20px 0
+    

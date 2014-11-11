@@ -16,9 +16,11 @@
   background-color backgroundgray
 
 .home__mark
-  position absolute
+  position relative
+  float left
+  height auto
   width 28px
-  margin 115px 0 0 -42px
+  margin 115px 10px 0 0
   opacity 0.90
   z-index 199
 
@@ -26,8 +28,9 @@
   position relative
   float left
   top 108px
-  max-width 740px
+  max-width 720px
   height 540px
+  line-height 1.4em
   margin 0
   color hovergray
   
@@ -40,9 +43,17 @@
       border-bottom 2px solid textgray
     
 
-a.intro--register
+a.intro__menu, a.intro__menu--mobile
   border-bottom 2px solid #111
-  padding 0 0 2px 0
+  padding 0 0 1px 0
+  margin 10px 0 0 0
+  
+  &:hover
+    color public
+    border-bottom 2px solid public
+
+a.intro__menu--mobile
+  display none
   
   &:hover
     color public
@@ -122,6 +133,17 @@ a.intro--register
     &:hover
       color textgray
 
+@media (max-width:1023px)
+  .intro 
+    max-width 620px
+    
+  a.intro__menu--mobile
+    display inline
+    
+  .static__menu
+    display none
 
-
+@media (max-width:768px)
+  .intro 
+    max-width 92%
 

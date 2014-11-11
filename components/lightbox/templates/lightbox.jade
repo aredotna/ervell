@@ -1,6 +1,7 @@
 #l-lightbox-container_inner
   .lightbox__content.valign-outer
     .valign-inner
+      a.lightbox--close &#10006;
       - if(block.has('image') && block.get('class') != 'Media')
         img.lightbox__content__img(src="#{block.getImageSize('original')}")
 
@@ -21,5 +22,3 @@
   #lightbox__feed.lightbox__feed
     #lightbox__feed_inner.lightbox__feed__inner
       //- rendered by client
-
-a.lightbox--close &#10006;
