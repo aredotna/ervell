@@ -10,9 +10,12 @@ Backbone.$ = $
 module.exports = class HeaderView extends Backbone.View
 
   events:
-    'click .btn-login'      : 'login'
-    'click .btn-signup'     : 'signup'
-    'click .dropdown--menu__trigger' : 'toggleDropdown'
+    'focus #layout-header__search__input' : 'setActive'
+    'blur #layout-header__search__input'  : 'unsetActive'
+    'click .header--icon'                 : 'setActive'
+    'click .btn-login'                    : 'login'
+    'click .btn-signup'                   : 'signup'
+    'click .dropdown--menu__trigger'      : 'toggleDropdown'
 
   initialize: (options) ->
     @searchBarView = new SearchBarView
@@ -26,6 +29,12 @@ module.exports = class HeaderView extends Backbone.View
 
     if !sd.CURRENT_USER
       new AuthRouter
+
+  setActive: (e)->
+    @$el.addClass 'is-active'
+    @$('#layout-header__search__input').focus()
+
+  unsetActive: (e)-> @$el.removeClass 'is-active'
 
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent().parent()

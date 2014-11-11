@@ -12,9 +12,12 @@
   display flex
   justify-content space-between
   z-index header_z
-  
-  .is-active .header--icon
-    display none
+
+  &.is-active
+    z-index header_z + 2
+
+    .header--icon
+      display none
 
   .header--icon
     position absolute
