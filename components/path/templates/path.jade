@@ -31,11 +31,13 @@ section.path--header
   .metadata--container
     if channel
       .metadata
-        if channel.has('metadata') && channel.get('metadata').description
-          .metadata__column
-            .metadata__title Description
-            .metadata__text= channel.get('metadata').description
-        if channel.get('collaboration')
+        .metadata__column
+          .metadata__title Description
+            if channel.has('metadata')
+              .metadata__text= channel.get('metadata').description
+            else
+              .metadata__text —
+        channel.get('collaboration')
           #metadata--collaborators.metadata__column
             //- Rendered by client
         .metadata__column
@@ -44,11 +46,12 @@ section.path--header
 
     else if author
       .metadata
-        if author.has('metadata')
-          .metadata__column
-            .metadata__title Info
-            .metadata__text Son of @broskoski, father of a cat. NYC.
-
+        .metadata__column
+          .metadata__title Info
+            if author.has('metadata')
+              .metadata__text Son of @broskoski, father of a cat. NYC.
+            else
+              .metadata__text —
         .metadata__column
           .metadata__title View
           .metadata__text
