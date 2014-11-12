@@ -1,4 +1,5 @@
 require('../components/iconic/client/iconic.min.js')
 require('../lib/vendor/waypoints.coffee')
 require('../lib/vendor/waypoints-sticky.coffee')
+require('../node_modules/backbone-fetch-cache/backbone.fetch-cache.min.js')
 require('jquery') require('../components/layout/client.coffee')()

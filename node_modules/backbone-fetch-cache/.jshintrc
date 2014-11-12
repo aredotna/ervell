@@ -1,0 +1,32 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "boss": true,
+  "eqnull": true,
+  "browser": true,
+  "indent": 2,
+  "globals": {
+    "$": true,
+    "_": true,
+    "Backbone": true,
+    "define": true,
+    "it": true,
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "expect": true,
+    "spyOn": true,
+    "jasmine": true,
+    "sinon": true,
+    "waitsFor": true,
+    "runs": true,
+    "require": true,
+    "module" : true
+  }
+}

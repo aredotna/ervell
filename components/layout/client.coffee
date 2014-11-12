@@ -19,25 +19,21 @@ setupViews = ->
   new BodyView el: $('body')
 
 setupPusherAndCurrentUser = ->
+  user = new CurrentUser sd.CURRENT_USER
+  user.fetch
+    cache: true
+    prefill: true
+    prefillSuccess: -> console.log 'prefillSuccess', user
+    success: -> console.log 'fetch success', @, user
+
   mediator.shared = {}
   # mediator.shared.pusher = new Pusher sd.PUSHER_KEY
-  mediator.shared.current_user = new CurrentUser sd.CURRENT_USER
+  mediator.shared.current_user = user
 
 setupAjaxHeaders = ->
   $.ajaxSetup
     beforeSend: (xhr)->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
-
-syncAccount = ->
-  if sd.CURRENT_USER
-    $.ajax
-      url: "#{sd.API_URL}/accounts"
-      success: (data) ->
-        console.log 'accounts', data
-        showAnnouncements data.announcements
-        showNotifications data.user.notification_count
-        setFollows data.user.following_ids
-      error: (data) -> console.log('syncUser error: data', data)
 
 showAnnouncements = (announcements) ->
   # stub

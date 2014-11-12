@@ -6,12 +6,12 @@ User = require "./user.coffee"
 mediator = require '../lib/mediator.coffee'
 sd = require("sharify").data
 _ = require 'underscore'
+Backbone = require 'backbone'
 
 module.exports = class CurrentUser extends User
 
   initialize: ->
-    super
-    console.log 'CurrentUser', mediator
+    console.log 'CurrentUser', @
 
   url: -> "#{sd.API_URL}/accounts"
 

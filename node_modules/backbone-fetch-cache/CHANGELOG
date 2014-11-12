@@ -1,0 +1,24 @@
+Changelog
+
+- v1.4.0: Change - Return a full Deferred object to allow request cancellation. Thanks to [@garrensmith](https://github.com/garrensmith).
+- v1.3.0: Feature - Allow a prefix to be added to cache keys via Backbone.fetchCache.getLocalStorageKey function. Thanks to [@zhulduz](https://github.com/zhulduz).
+- v1.2.1: Bugfix - Allow for URL function in clearItem method. Thanks to [@prdn](https://github.com/prdn).
+- v1.2.0: Change - Call Model#parse when setting data on the model. Thanks to [@charlietilt](https://github.com/charlietilt). Bugfix - fix cache expiration issue when the url is passed via options for the model. Thanks to [@guilherme](https://github.com/guilherme).
+- v1.1.2: Bugfix - Collection fetch now triggers both the collection's parse method, and the model's parse method - thanks to [@BananaNeil](https://github.com/BananaNeil)
+- v1.1.1: Bugfix - respect jQuery.ajax's async: true option and resolve from the cache synchronously if required - thanks to [@matthewkremer](https://github.com/matthewkremer)
+- v1.1.0: Change - Don't rely on global jQuery. We now use Backbone.root.jQuery or an AMD defined `jquery` module - thanks to [@brett-shwom](https://github.com/brett-shwom)
+- v1.0.2: Bugfix - adds better check for localStorage support - thanks to [@jfmoy](https://github.com/jfmoy)
+- v1.0.1: Bugfix - updates fetch success callback signature to match Backbone's - thanks to [@ydaniv](https://github.com/ydaniv)
+- v1.0.0: Perform all cache fulfilment asynchronously. Only the promise, not the full $.Deferred object is returned from fetch functions.
+
+- v0.1.11: Account for custom URLs to be passed in fetch method options - thanks to [@dincho](https://github.com/dincho)
+- v0.1.10: Add getCacheKey function to allow custom cache keys - thanks to [@ebertti](https://github.com/ebertti)
+- v0.1.9: Fixes a bug where clearing a cache item didn't get persisted to localStorage - thanks to [@mzafer](https://github.com/mzafer)
+- v0.1.8: Trigger `sync` and `cachesync` events - thanks to [@victorquinn](https://github.com/victorquinn).
+- v0.1.7: Ensures that `parse` is called for collections - thanks to [@fernandopg](https://github.com/fernandopg).
+- v0.1.6: Update to call the correct `add` and `reset` methods for collections - thanks to [@mzafer](https://github.com/mzafer).
+- v0.1.5: Attempt to clear cache keys on PUT/POST/DELETE
+- v0.1.4: Bug fix for older Webkits which throw an error trying to JSON.parse(null)
+- v0.1.3: Auto expiration of old cache items if `locaStorage` gets full - thanks to [@inf0rmer](https://github.com/inf0rmer).
+- v0.1.2: Add AMD support.
+- v0.1.1: Add `prefetch` option.
