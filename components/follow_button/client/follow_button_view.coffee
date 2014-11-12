@@ -9,4 +9,5 @@ module.exports = class FollowButtonView extends Backbone.View
   initialize: (options) ->
     super
 
-    console.log 'init PathView'
+    console.log 'init FollowButtonView'
+
