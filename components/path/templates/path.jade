@@ -21,8 +21,9 @@ section.path--header
       .edit-channel
         .edit-channel__info-icon
           include ../../../public/images/iconic/info.svg
-        .edit-channel__icon
-          include ../../../public/images/iconic/cogs.svg
+        if user.canEditChannel(channel)
+          .edit-channel__icon
+            include ../../../public/images/iconic/cogs.svg
 
     else if author
       //- .edit-profile
