@@ -81,6 +81,7 @@ module.exports = (app) ->
   arena_pp = arenaPassport _.extend config,
     CurrentUser: CurrentUser
     SECURE_ARENA_URL: API_URL
+    userKeys: ['id', 'first_name', 'last_name', 'email', 'slug', 'following_ids', 'notification_count', 'username', 'authentication_token']
 
   app.use arena_pp
   app.use localsMiddleware
