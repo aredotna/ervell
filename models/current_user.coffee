@@ -21,7 +21,14 @@ module.exports = class CurrentUser extends User
     super
 
   parse: (response) ->
-    response.user
+    data = _.extend response.user,
+      manifest: response.manifest if response.manifest?
+      shortcuts_id: response.shortcuts_id if response.shortcuts_id?
+      announcements: response.announcements if response.announcements?
+      following_channels: response.following_ids?.channels
+      following_users: response.following_ids?.users
+
+    data
 
   canEditChannel: (channel) ->
     if channel.get('user').id is @id or channel.get('status') is 'public'

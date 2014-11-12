@@ -24,7 +24,8 @@
     "backbone-cache-sync": "*",
     "bucket-assets": "*",
     "forever": "*",
-    "moment": "*"
+    "moment": "*",
+    "Backbone.cachingSync": "*"
   },
   "devDependencies": {
     "jquery": "*",

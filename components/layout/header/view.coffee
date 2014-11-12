@@ -29,7 +29,7 @@ module.exports = class HeaderView extends Backbone.View
       offset: 1
 
     if !sd.CURRENT_USER
-      new AuthRouter
+      new AuthRouter pushState: false
 
   setActive: (e)->
     @$el.addClass 'is-active'
