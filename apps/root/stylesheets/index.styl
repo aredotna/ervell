@@ -6,14 +6,25 @@
 #layout-header
   display none
 
-.home__gray-background
+.home__section-intro__background
   position absolute
   float left
   left 0
   top 0
   width 100%
-  height 540px
+  height 512px
   background-color backgroundgray
+  
+.home__section-stats__background
+  position absolute
+  top 512px
+  left 0
+  width 100%
+  height 275px
+  background-color #F2F2F2
+  
+.home__section-footer__background
+  position absolute
 
 .home__mark
   position relative
@@ -24,13 +35,12 @@
   opacity 0.90
   z-index 199
 
-.intro
+.home__section-intro
   position relative
   float left
-  top 108px
   max-width 720px
-  height 540px
   line-height 1.4em
+  padding 108px 0 70px 0
   margin 0
   color hovergray
   
@@ -43,16 +53,19 @@
       border-bottom 2px solid textgray
     
 
-a.intro__menu, a.intro__menu--mobile
+a.home__section-intro__menu, a.home__section-intro__menu--mobile
+  position relative
+  float left
+  clear both
   border-bottom 2px solid #111
   padding 0 0 1px 0
-  margin 10px 0 0 0
+  margin 0
   
   &:hover
     color public
     border-bottom 2px solid public
 
-a.intro__menu--mobile
+a.home__section-intro__menu--mobile
   display none
   
   &:hover
@@ -80,38 +93,58 @@ a.intro__menu--mobile
   &:hover
     color hovergray
 
-.section-2
-  color lightgray
-  
-  a 
-    color textgray
-  
-    &:hover
-      color hovergray
-      
-.home__section-2
+.home__section-stats
   position relative
   float left
   width 100%
-  background-color none
-  padding 2em 0 2em 0
+  padding 70px 0 70px 38px
 
-.home__section-2__channels
+.home__section-stats__column
+  position relative
+  float left
+  width 33%
+  text-align center
+  
+  h1
+    font-size 5em
+    font-weight normal
+    color lightgray
+    margin 0
+  
+  h2
+    font-weight normal
+    color lightgray
+    margin 0
+
+.home__section-channels
+  position relative
+  float left
+  background-color none
+  padding 40px 0 70px 38px
+  
+  h2
+    color hovergray
+
+.home__section-channels__channels
   position relative
   float left
   width 100%
   margin 0
   
-  h3 a
-    color hovergray
-    padding 10px 0 10px 0
+  h2
+    position relative
+    float left
+    color lightgray
+    padding 40px 0 20px 0
+    margin 0
 
-.home__section-2__images
+.home__section-channels__images
   position relative
   float left
   width 100%
   overflow hidden
   text-align center
+  padding 0 0 40px 0
 
   img 
     position relative
@@ -119,25 +152,44 @@ a.intro__menu--mobile
     height 300px
     width 300px
     overflow hidden
-    margin 5px 30px 80px 0
+    margin 0 25px 0 0
 
-.home__section-2__activity
+.home__section-channels__button
   position relative
   float left
-  width 300px
+  width 100%
+  margin 20px 0 40px 0
+  text-align center
+  
+  .button--inblock
+    position relative
+    left 0
+    width 280px
+    margin auto
+    color lightgray
+    
+    &:hover
+      color hovergray
+
+.home__section-footer
+  position relative
+  float left
+  width 100%
   margin 0 30px 0 0
   
   a
     color hovergray
+    border-bottom 2px solid hovergray
     
     &:hover
       color textgray
+      border-bottom 2px solid textgray
 
 @media (max-width:1023px)
-  .intro 
+  .home__section-intro 
     max-width 640px
     
-  a.intro__menu--mobile
+  a.home__section-intro__menu--mobile
     display inline
     
   .static__menu
