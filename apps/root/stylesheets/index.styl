@@ -2,6 +2,14 @@
 
 .path
   display none
+  
+.home__path--public
+  color public
+  font-weight normal
+
+.home__path--closed
+  color closed
+  font-weight normal
 
 #layout-header
   display none
@@ -21,12 +29,17 @@
   left 0
   width 100%
   height 275px
-  background-color #F2F2F2
+  background-color #EFEFEF
   
 .home__section-footer__background
   position absolute
+  top 3100px
+  left 0
+  width 100%
+  height 275px
+  background-color #EFEFEF
 
-.home__mark
+.home__mark, .home__mark--footer
   position relative
   float left
   height auto
@@ -34,6 +47,9 @@
   margin 115px 10px 0 0
   opacity 0.90
   z-index 199
+
+.home__mark--footer
+  margin 16px 10px 0 0
 
 .home__section-intro
   position relative
@@ -45,7 +61,7 @@
   color hovergray
   
   a
-    border-bottom 2px solid #111
+    border-bottom 2px solid hovergray
     padding 0 0 1px 0
     
     &:hover
@@ -57,7 +73,7 @@ a.home__section-intro__menu, a.home__section-intro__menu--mobile
   position relative
   float left
   clear both
-  border-bottom 2px solid #111
+  border-bottom 2px solid hovergray
   padding 0 0 1px 0
   margin 0
   
@@ -72,10 +88,10 @@ a.home__section-intro__menu--mobile
     color public
     border-bottom 2px solid public
 
-.static__menu
+.static__menu, .static__menu--footer
   position relative
   float right
-  top 110px
+  margin 110px 0 0 0
   right 0
   width 150px
   text-align left
@@ -102,7 +118,7 @@ a.home__section-intro__menu--mobile
 .home__section-stats__column
   position relative
   float left
-  width 33%
+  width 32%
   text-align center
   
   h1
@@ -137,6 +153,10 @@ a.home__section-intro__menu--mobile
     color lightgray
     padding 40px 0 20px 0
     margin 0
+    
+.home__section-channels__channels a:hover .home__path--closed,
+.home__section-channels__channels a:hover .home__path--public
+  color hovergray
 
 .home__section-channels__images
   position relative
@@ -175,15 +195,27 @@ a.home__section-intro__menu--mobile
   position relative
   float left
   width 100%
-  margin 0 30px 0 0
+  color hovergray
+  margin 40px 0 0 0
+  
+  h2
+    position relative
+    float left
+    max-width 720px
   
   a
     color hovergray
     border-bottom 2px solid hovergray
+    padding 0 0 1px 0
     
     &:hover
       color textgray
       border-bottom 2px solid textgray
+  
+  .static__menu--footer
+    margin 12px 0 0 0
+    a
+      border 0
 
 @media (max-width:1023px)
   .home__section-intro 
