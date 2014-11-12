@@ -25,9 +25,13 @@ section.path--header
           .edit-channel__icon
             include ../../../public/images/iconic/cogs.svg
 
-    else if author
-      //- .edit-profile
-      //-   a(href="#") Profile settings
+    else if author && author.id == user.id
+      .edit-profile
+        a(href="#") Profile settings
+
+    else if author && author.id != user.id && !channel
+      .edit-profile
+        a(href="#") Follow #{author.get('username')}
 
   .metadata--container
     if channel
@@ -38,7 +42,7 @@ section.path--header
               .metadata__text= channel.get('metadata').description
             else
               .metadata__text —
-        channel.get('collaboration')
+        if channel.get('collaboration')
           #metadata--collaborators.metadata__column
             //- Rendered by client
         .metadata__column
