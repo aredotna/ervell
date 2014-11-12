@@ -3,6 +3,7 @@ sd = require('sharify').data
 Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
+PathView = require '../../path/client/path_view.coffee'
 LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 
 module.exports = class BodyView extends Backbone.View
@@ -22,6 +23,8 @@ module.exports = class BodyView extends Backbone.View
 
     mediator.on 'load:start', @startLoading, @
     mediator.on 'load:stop', @stopLoading, @
+
+    new PathView el: @$('section.path--header')
 
   startLoading: -> $('body').addClass 'is-loading'
 
