@@ -21,15 +21,15 @@ section.path--header
       .edit-channel
         .edit-channel__info-icon
           include ../../../public/images/iconic/info.svg
-        if user.canEditChannel(channel)
+        if user && user.canEditChannel(channel)
           .edit-channel__icon
             include ../../../public/images/iconic/cogs.svg
 
-    else if author && author.id == user.id
+    else if author && user && author.id == user.id
       .edit-profile
         a(href="#") Profile settings
 
-    else if author && author.id != user.id && !channel
+    else if author && user && author.id != user.id && !channel
       .edit-profile
         a.follow_button.pointer(data-type="User", data-id="#{author.id}") Follow #{author.get('username')}
 

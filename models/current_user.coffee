@@ -5,6 +5,7 @@
 User = require "./user.coffee"
 mediator = require '../lib/mediator.coffee'
 sd = require("sharify").data
+_ = require 'underscore'
 
 module.exports = class CurrentUser extends User
 
@@ -19,7 +20,8 @@ module.exports = class CurrentUser extends User
     options.data.auth_token = @get 'access_token'
     super
 
-  parse: (response) -> response.user
+  parse: (response) ->
+    response.user
 
   canEditChannel: (channel) ->
     if channel.get('user').id is @id or channel.get('status') is 'public'
