@@ -35,6 +35,7 @@
         font-size s_caption
 
   .path__breadcrumb
+    min-width 115px
     breadcrumb: '/' 8px lightgray
 
     li:after
@@ -175,3 +176,12 @@
 @media (max-width:500px)
   .edit-channel__icon, .edit-channel__info-icon
     margin 4px 10px 0 10px
+  
+  .root__toggle
+    margin -2px 0 0 0
+  
+  .path.stuck 
+    h1
+      line-height 3.8em 
+    .root__toggle
+      margin 10px 0 0 0
