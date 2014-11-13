@@ -191,9 +191,9 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   &:hover
     color hovergray
 
-@media (max-width:(block_width_mar * 3.2) + 20)
+@media (max-width:(block_width_mar * 3) + 30)
   .grid
-    justify-content: space-between;
+    justify-content center
 
   .grid__block
     max-width 294px
@@ -204,15 +204,8 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   
   .grid__block__content__image
     max-width 293px
-    height auto
     max-height 294px
-    
-@media (max-width:(block_width_mar * 3) + 20)
-  .grid
-    justify-content center
   
-
-
 @import '../../avatar/stylesheets/avatar'
 @import '../../lightbox/stylesheets/lightbox'
 @import '../../connect/stylesheets/connect'
