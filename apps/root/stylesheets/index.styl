@@ -54,7 +54,7 @@
 .home__section-intro
   position relative
   float left
-  max-width 720px
+  max-width 700px
   line-height 1.4em
   padding 108px 0 70px 0
   margin 0
@@ -93,7 +93,7 @@ a.home__section-intro__menu--mobile
   float right
   margin 110px 0 0 0
   right 0
-  width 150px
+  width 130px
   text-align left
   z-index 199
 
@@ -113,16 +113,16 @@ a.home__section-intro__menu--mobile
   position relative
   float left
   width 100%
-  padding 70px 0 70px 38px
+  padding 70px 38px 70px 38px
 
 .home__section-stats__column
   position relative
   float left
-  width 32%
+  width 33%
   text-align center
   
   h1
-    font-size 5em
+    font-size 4.8em
     font-weight normal
     color lightgray
     margin 0
@@ -168,17 +168,16 @@ a.home__section-intro__menu--mobile
 
   img 
     position relative
-    float left
     height 300px
     width 300px
     overflow hidden
-    margin 0 25px 0 0
+    margin 0 25px 25px 0
 
 .home__section-channels__button
   position relative
   float left
   width 100%
-  margin 20px 0 40px 0
+  margin 0 0 40px 0
   text-align center
   
   .button--inblock
@@ -217,13 +216,61 @@ a.home__section-intro__menu--mobile
     a
       border 0
 
-@media (max-width:1023px)
+@media (max-width:(block_width_mar * 3) + 30)
+  html, body
+    font-size 13px
+
+  .home__mark
+    margin 40px 0 0 0
+
   .home__section-intro 
-    max-width 640px
+    clear both
+    max-width 500px
+    padding 20px 0 0 0
     
   a.home__section-intro__menu--mobile
     display inline
     
   .static__menu
     display none
+  
+  .home__section-stats
+    padding 80px 0 80px 0
+    
+  .home__section-stats__column
+    width 50%
+    h1
+      font-size 4em
+    h2
+      font-size 1.5em
 
+  .home__section-stats__background
+    height 180px
+  
+  .home__section-footer__background
+    display none
+
+  .home__section-stats__column--connections
+    display none
+    
+  .home__section-channels
+    padding 20px 0 20px 0
+    
+  .home__section-channels__channels h2
+    padding 0
+  
+  .home__section-channels__images
+    justify-content center
+  
+  .home__section-footer
+    margin 0 0 40px 0
+
+  .static__menu--footer
+    display none
+
+@media (max-width:500px)
+  .home__section-intro__background
+    height 100%
+
+  .home__section-stats, .home__section-stats__background
+    display none
