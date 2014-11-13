@@ -31,7 +31,7 @@ section.path--header
 
     else if author && user && author.id != user.id && !channel
       .edit-profile
-        a.follow_button.pointer(data-type="User", data-id="#{author.id}") Follow #{author.get('username')}
+        a.follow_button.pointer(data-type="User", data-id="#{author.id}")
 
   .metadata--container
     if channel
