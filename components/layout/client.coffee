@@ -12,7 +12,6 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupPusherAndCurrentUser()
-  syncAccount()
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
@@ -23,8 +22,10 @@ setupPusherAndCurrentUser = ->
   user.fetch
     cache: true
     prefill: true
-    prefillSuccess: -> console.log 'prefillSuccess', user
-    success: -> console.log 'fetch success', @, user
+    prefillSuccess: ->
+      console.log 'prefillSuccess', mediator
+      mediator.trigger 'current_user:prefetched'
+    success: -> mediator.trigger 'current_user:fetched'
 
   mediator.shared = {}
   # mediator.shared.pusher = new Pusher sd.PUSHER_KEY

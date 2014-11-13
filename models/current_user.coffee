@@ -33,3 +33,11 @@ module.exports = class CurrentUser extends User
   canEditChannel: (channel) ->
     if channel.get('user').id is @id or channel.get('status') is 'public'
       true
+
+  isFollowing: (model) ->
+    console.log 'isFollowing', @, model
+    console.log "_.contains @get('following_users'), model.id", _.contains @get('following_users'), model.id
+    if model.get('base_class') is 'Channel'
+      _.contains @get('following_channels'), model.id
+    else
+      _.contains @get('following_users'), model.id

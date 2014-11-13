@@ -9,6 +9,12 @@ module.exports = class Block extends Base
 
   url: -> "#{sd.API_URL}/blocks/#{@id}"
 
+  title: ->
+    if @has('username')
+      @get('username')
+    else
+      @get('title')
+
   getImageSize: (size) ->
     if @has('image')
       @get('image')?[size]?.url
