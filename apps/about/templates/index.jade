@@ -4,11 +4,11 @@ block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
+	a(href="/")
+		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 	.static__left-column
-		a(href="/")
-			img.static__mark(src="../images/arena-mark.svg", alt="Arena")
-		.static__about.static--text
-			h2.static--title#about-arena About Arena
+		h2.static__about.static--text
+			.static--title#about-arena About
 			|	Arena is a platform for private and collaborative research where you can save links, images, and files as "blocks" and organize them into named "channels." People use Arena to assemble references around a topic, collect images around a theme, share ideas with collaborators, and more. 
 			br 
 			br
@@ -17,8 +17,8 @@ block body
 			br
 			|	Arena's users created 430'939 channels and connected 2'231'663 blocks of information.
 
-		.static__team.static--text
-			h2.static--title#team Team
+		h2.static__team.static--text
+			.static--title#team Team
 			a(href="#") Charles Broskoski 
 			| - mini bio
 			br
@@ -39,8 +39,8 @@ block body
 			a(href="#") Daniel Brewster, 
 			a(href="#") JMB.
 
-		.static__premium.static--text
-			h2.static--title#principles Principles
+		h2.static__premium.static--text
+			.static--title#principles Principles
 			| - self-sustanability goal
 			br
 			| - some numbers
@@ -49,30 +49,30 @@ block body
 			br
 			| - principles
 
-		.static__labs.static--text
-			h2.static--title#labs Labs
+		h2.static__labs.static--text
+			.static--title#labs Labs
 			| - Case studies (powered by arena)
 			br
 			| - API [link]
 			br
 			| - We're open to collaborations for custom archives, CMS and stuff
 
-		.static__faq.static--text
-			h2.static--title#faq FAQs
+		h2.static__faq.static--text
+			.static--title#faq FAQs
 			| Q?
 			br
 			| A.
 			br
 			| [link to tutorial]
 
-		.static__contact.static--text
-			h2.static--title#contact Contact
+		h2.static__contact.static--text
+			.static--title#contact Contact
 			| NYC
 			br
 			| info @ are.na
 
 	h3.static__menu
-		a(href="#about-arena").static__menu--dark About Arena
+		a(href="#about-arena").static__menu--dark About
 		br
 		a(href="#team").static__menu--light Team
 		br
