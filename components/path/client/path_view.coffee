@@ -11,7 +11,7 @@ module.exports = class PathView extends Backbone.View
   initialize: (options) ->
     super
 
-    if sd.USER or sd.CHANNEL
+    if (sd.USER or sd.CHANNEL) and sd.CURRENT_USER
 
       model = if sd.USER then sd.USER else sd.CHANNEL
       @model = new Block model

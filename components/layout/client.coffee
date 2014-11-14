@@ -23,11 +23,12 @@ setupPusherAndCurrentUser = ->
   user = new CurrentUser sd.CURRENT_USER
   mediator.shared.current_user = user
 
-  user.fetch
-    cache: true
-    prefill: true
-    prefillSuccess: -> mediator.trigger 'current_user:prefetched'
-    success: -> mediator.trigger 'current_user:fetched'
+  if user.id
+    user.fetch
+      cache: true
+      prefill: true
+      prefillSuccess: -> mediator.trigger 'current_user:prefetched'
+      success: -> mediator.trigger 'current_user:fetched'
 
   # mediator.shared.pusher = new Pusher sd.PUSHER_KEY
 
