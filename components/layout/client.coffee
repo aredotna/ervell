@@ -9,27 +9,27 @@ sd = require('sharify').data
 # analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
+  setupPusherAndCurrentUser()
   setupViews()
   setupAjaxHeaders()
-  setupPusherAndCurrentUser()
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
   new BodyView el: $('body')
 
 setupPusherAndCurrentUser = ->
+  mediator.shared = {}
+
   user = new CurrentUser sd.CURRENT_USER
+  mediator.shared.current_user = user
+
   user.fetch
     cache: true
     prefill: true
-    prefillSuccess: ->
-      console.log 'prefillSuccess', mediator
-      mediator.trigger 'current_user:prefetched'
+    prefillSuccess: -> mediator.trigger 'current_user:prefetched'
     success: -> mediator.trigger 'current_user:fetched'
 
-  mediator.shared = {}
   # mediator.shared.pusher = new Pusher sd.PUSHER_KEY
-  mediator.shared.current_user = user
 
 setupAjaxHeaders = ->
   $.ajaxSetup

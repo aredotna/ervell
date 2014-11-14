@@ -49,7 +49,7 @@ module.exports = class CurrentUser extends User
     id = followable.id
     ids = @get("following_#{type}")
 
-    console.log '@get("following_#{type}")', @get("following_#{type}"), "following_#{type}", @
+    console.log '@get("following_#{type}")', @get("following_#{type}"), "following_#{type}", @, @id
 
     isFollowing = _.include ids, id
 
@@ -58,7 +58,7 @@ module.exports = class CurrentUser extends User
       successEvent = "current_user:unfollowed"
       method = "DELETE"
     else
-      @set "following_#{type}", @get("following_#{type}").push id
+      @push "following_#{type}", id
       successEvent = "current_user:followed"
       method = "POST"
 

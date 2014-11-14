@@ -74,3 +74,8 @@ module.exports = class Base extends Model
 
     _.each _.keys(@calculated), (attr)=>
       data[attr] = @calculated[attr].apply(@)
+
+  push: (arg, val) ->
+    arr = _.clone @get(arg)
+    arr.push val
+    @set arg, arr

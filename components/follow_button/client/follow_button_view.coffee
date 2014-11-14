@@ -16,8 +16,8 @@ module.exports = class FollowButtonView extends Backbone.View
 
     mediator.on 'current_user:prefetched', @render, @
     mediator.on 'current_user:fetched', @render, @
-    mediator.on 'current_user:followed', @render, @
-    mediator.on 'current_user:unfollowed', @render, @
+    mediator.shared.current_user.on 'change:following_channels', @render, @
+    mediator.shared.current_user.on 'change:following_users', @render, @
 
   render: ->
     @$el.html followButtonTemplate(model: @model, user: mediator.shared.current_user)
