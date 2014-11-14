@@ -41,9 +41,11 @@ module.exports = class CurrentUser extends User
       _.contains @get('following_users'), model.id
 
   toggleFollow: (followable)->
-    type = followable.type + 's'
+    type = followable.get('base_class').toLowerCase() + 's'
     id = followable.id
-    ids = @following_ids[type]
+    ids = @get("following_#{type}")
+
+    console.log '@get("following_#{type}")', @get("following_#{type}"), "following_#{type}", @
 
     isFollowing = _.include ids, id
 
@@ -60,4 +62,4 @@ module.exports = class CurrentUser extends User
       url: "#{sd.API_URL}/#{type}/#{id}/follow"
       type: method
       success: (response)->
-        mediator.publish successEvent, response
+        mediator.trigger successEvent, response
