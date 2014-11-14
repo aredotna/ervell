@@ -4,7 +4,10 @@
 
 Channel = require "../../models/channel"
 ChannelBlocks = require "../../collections/channel_blocks"
+Blocks = require "../../collections/blocks"
 User = require "../../models/user"
+sd = require("sharify").data
+_ = require 'underscore'
 
 @channel = (req, res, next) ->
   channel = new Channel
@@ -28,4 +31,33 @@ User = require "../../models/user"
       res.render "index", channel: channel, blocks: blocks.models, author: author
 
     error: (m, err) -> next err
+
+@followers = (req, res, next) ->
+  channel = new Channel
+    channel_slug: req.params.channel_slug
+
+  author = new User {}
+
+  blocks = new Blocks null
+  blocks.url = "#{sd.API_URL}/channels/#{req.params.channel_slug}/followers"
+
+  blocks.parse = (data)-> data.users
+
+  channel.fetch
+    success: =>
+      res.locals.sd.CHANNEL = channel.toJSON()
+      author = new User channel.get('user')
+      render()
+
+  blocks.fetch
+    cache: true
+    success: (data, response) ->
+      res.locals.sd.BLOCKS = blocks.toJSON()
+      res.locals.sd.FOLLOWERS = blocks.toJSON()
+      render()
+    error: (m, err) -> next err
+
+
+  render = _.after 2, -> res.render "index", channel: channel, blocks: blocks.models, author: author, followers: true
+
 

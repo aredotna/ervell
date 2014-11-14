@@ -8,10 +8,22 @@ _ = require 'underscore'
 Block = require("../models/block.coffee")
 
 module.exports = class SearchBlocks extends Blocks
+  defaultOptions:
+    page: 1
+    per: 20
 
   model: Block
 
   url: -> "#{sd.API_URL}/search/channels"
 
   parse: (data)->
+    @total_pages = data.total_pages
+    console.log('total_pages', data.total_pages, data)
     _.flatten _.values _.pick(data, ['contents', 'followers', 'users', 'channels', 'following', 'blocks', 'results'])
+
+  loadNext: ->
+    console.log 'loadNext', @options.page, @total_pages
+    return false if @options.page > @total_pages
+
+    ++@options.page
+    @fetch remove: false

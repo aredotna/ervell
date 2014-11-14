@@ -41,10 +41,18 @@
     li:after
       font-weight normal
 
+    .path__channel
+      font-weight normal
+      color textgray
+
     li:last-child
       color textgray
 
-  privacy-color('.path__breadcrumb li:last-child.privacy-', color)
+    .path__sub
+      font-weight normal
+
+
+  privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
 
   h1
     margin 0
@@ -176,12 +184,12 @@
 @media (max-width:500px)
   .edit-channel__icon, .edit-channel__info-icon
     margin 4px 10px 0 10px
-  
+
   .root__toggle
     margin -2px 0 0 0
-  
-  .path.stuck 
+
+  .path.stuck
     h1
-      line-height 3.8em 
+      line-height 3.8em
     .root__toggle
       margin 10px 0 0 0

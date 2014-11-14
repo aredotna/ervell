@@ -10,9 +10,6 @@ Backbone = require 'backbone'
 
 module.exports = class CurrentUser extends User
 
-  initialize: ->
-    console.log 'CurrentUser', @
-
   url: -> "#{sd.API_URL}/accounts"
 
   sync: (method, model, options = {}) ->
@@ -27,8 +24,6 @@ module.exports = class CurrentUser extends User
       announcements: response.announcements if response.announcements?
       following_channels: response.following_ids?.channels
       following_users: response.following_ids?.users
-
-    data
 
   canAddToChannel: (channel) ->
     if channel.get('user').id is @id or channel.get('status') is 'public'
@@ -48,8 +43,6 @@ module.exports = class CurrentUser extends User
     type = followable.get('base_class').toLowerCase() + 's'
     id = followable.id
     ids = @get("following_#{type}")
-
-    console.log '@get("following_#{type}")', @get("following_#{type}"), "following_#{type}", @, @id
 
     isFollowing = _.include ids, id
 

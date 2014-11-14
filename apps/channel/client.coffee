@@ -219,11 +219,6 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
 
-  new BlockSkeletonView
-    collection: blocks
-    channel: channel
-    el: $ ".grid"
-
   if channel.has('collaboration')
     collaborators = new Collaborators
       channel_slug: channel.get('slug')
@@ -232,8 +227,15 @@ module.exports.init = ->
       collection: collaborators
       el: $ "#metadata--collaborators"
 
-  if current_user.canEditChannel channel
-    new NewBlockView
-      el: $ ".grid__block--new-block"
-      model: channel
-      blocks: blocks
+  if not sd.FOLLOWERS
+
+    new BlockSkeletonView
+      collection: blocks
+      channel: channel
+      el: $ ".grid"
+
+    if current_user.canEditChannel channel
+      new NewBlockView
+        el: $ ".grid__block--new-block"
+        model: channel
+        blocks: blocks

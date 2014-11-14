@@ -14,8 +14,12 @@ section.path--header
           li.path__username
             a(href="/" + author.get('slug'))=author.get('username')
         if channel
-          li.path__channel.active.channel(class="privacy-#{channel.get('status')}")
-            = channel.get('title')
+          li.path__channel.channel(class="privacy-#{channel.get('status')}")
+            a(href="/" + author.get('slug') + '/' + channel.get('slug'))= channel.get('title')
+        if followers
+          li.path__sub followers
+        if following
+          li.path__sub following
 
     if channel
       .edit-channel
@@ -49,7 +53,7 @@ section.path--header
             //- Rendered by client
         .metadata__column
           .metadata__title Followers
-          .metadata__text: a(href="#")= channel.get('follower_count')
+          .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
 
     else if author
       .metadata
@@ -69,8 +73,8 @@ section.path--header
 
         .metadata__column
           .metadata__title Followers
-          .metadata__text: a(href="#")= author.get('follower_count')
+          .metadata__text: a(href="/" + author.get('slug') + '/followers')= author.get('follower_count')
 
         .metadata__column
           .metadata__title Following
-          .metadata__text: a(href="#")= author.get('following_count')
+          .metadata__text: a(href="/" + author.get('slug') + '/following')= author.get('following_count')

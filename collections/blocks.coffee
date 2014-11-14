@@ -7,5 +7,5 @@ sd = require("sharify").data
 Block = require("../models/block.coffee")
 
 module.exports = class Blocks extends Base
-
   model: Block
+
