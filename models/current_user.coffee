@@ -30,8 +30,12 @@ module.exports = class CurrentUser extends User
 
     data
 
-  canEditChannel: (channel) ->
+  canAddToChannel: (channel) ->
     if channel.get('user').id is @id or channel.get('status') is 'public'
+      true
+
+  canEditChannel: (channel) ->
+    if channel.get('user').id is @id
       true
 
   isFollowing: (model) ->

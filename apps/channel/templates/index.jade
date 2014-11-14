@@ -6,7 +6,7 @@ block styles
 block body
   include ../../../components/path/templates/path
   .grid
-    if user && user.canEditChannel(channel)
+    if user && user.canAddToChannel(channel)
       include ../../../components/new_block/templates/new_block
     include ../../../components/block_collection/templates/block_collection
 
