@@ -35,9 +35,29 @@ module.exports = class CurrentUser extends User
       true
 
   isFollowing: (model) ->
-    console.log 'isFollowing', @, model
-    console.log "_.contains @get('following_users'), model.id", _.contains @get('following_users'), model.id
     if model.get('base_class') is 'Channel'
       _.contains @get('following_channels'), model.id
     else
       _.contains @get('following_users'), model.id
+
+  toggleFollow: (followable)->
+    type = followable.type + 's'
+    id = followable.id
+    ids = @following_ids[type]
+
+    isFollowing = _.include ids, id
+
+    if isFollowing
+      @set "following_#{type}", _.without @get("following_#{type}"), id
+      successEvent = "current_user:unfollowed"
+      method = "DELETE"
+    else
+      @set "following_#{type}", @get("following_#{type}").push id
+      successEvent = "current_user:followed"
+      method = "POST"
+
+    $.ajax
+      url: "#{sd.API_URL}/#{type}/#{id}/follow"
+      type: method
+      success: (response)->
+        mediator.publish successEvent, response

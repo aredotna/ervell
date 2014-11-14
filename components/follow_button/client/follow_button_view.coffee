@@ -8,14 +8,17 @@ followButtonTemplate = -> require('../templates/follow_button.jade') arguments..
 
 module.exports = class FollowButtonView extends Backbone.View
 
+  events:
+    'click' : 'toggleFollow'
+
   initialize: (options) ->
     super
 
-    console.log 'init FollowButtonView', @$el
     mediator.on 'current_user:prefetched', @render, @
 
   render: ->
-    console.log 'rendered FollowButtonView'
     @$el.html followButtonTemplate(model: @model, user: mediator.shared.current_user)
 
+  toggleFollow: (e) ->
+    console.log 'toggleFollow', e
 
