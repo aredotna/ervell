@@ -11,21 +11,36 @@ block body
 		.static__tools.static--text
 			h2.static--title Bookmarklet
 			h2.static__tools__frame
-				| Add your bookmarklet to save stuff
+				.static__tools__bookmarklet-button Drag this to your browser toolbar &#10548;
+				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
 			
-			h2.static--title Invite Friends
+			h2.static--title Invite someone
 			h2.static__tools__frame
-				| Add your friend's email or share this link to collaborate with someone. You can add three channels worth of notice below:
-			
-			h2.static--title Premium
-			h2.static__tools__frame.static__tools__frame--premium
-				|	Supporter and premium offers
+				| Add an email address to collaborate with someone:
+				br
+				input.input--wide.input--relative.is-block(
+          name='email', type='email', placeholder='Email', required, autofocus= autofocus
+        )
+				| You want you can attach two channels worth of notice below:
+				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
+				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
+				button.button--wide.button--border.button--add Send invitation &rarr;
 
+			h2.static--title Extra tools
+			h2.static__tools__frame.static__tools__frame--premium
+				|	Supporter
+				br
+				| - search in channel
+				br
+				| - follow our work in progress and be the first in testing our beta features
+				br
+				br
+				| Premium (coming soon)
 			h2.static--title Find Friends
 			h2.static__tools__frame
 				|	Connect to Facebook or Twitter to follow or collaborate with friends. 
 			
-			h2.static--title Send via email
+			h2.static--title Add via email
 			h2.static__tools__frame
 				| Send and email to this address to add to an Arena channel, use the subject to indicate the channel.
 			
