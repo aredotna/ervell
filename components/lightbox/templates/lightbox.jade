@@ -14,11 +14,11 @@
       - if(block.get('class') == 'Media')
         .lightbox__content__media!= block.get('embed').html
 
-      - if(block.has('title'))
-        h3.lightbox__content__title= block.get('title')
+    - if(block.has('title'))
+      h3.lightbox__content__title= block.get('title')
 
-      - if(block.has('description'))
-        .lightbox__content__description!= block.get('description_html')
-  #lightbox__feed.lightbox__feed
-    #lightbox__feed_inner.lightbox__feed__inner
+    - if(block.has('description'))
+      .lightbox__content__description!= block.get('description_html')
+    #lightbox__feed.lightbox__feed
+      #lightbox__feed_inner.lightbox__feed__inner
       //- rendered by client
