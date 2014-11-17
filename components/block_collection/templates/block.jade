@@ -10,7 +10,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
         .grid__block__content.valign-outer
           .valign-inner
             - if(block.has('image'))
-              img(src="#{block.getImageSize('display')}").grid__block__content__image
+              img(src="#{block.getImageSize('display')}" alt="#{block.get('description')}").grid__block__content__image
             - if(block.get('class') == 'Text')
               .grid__block__content__text
                 != block.get('content_html')
@@ -24,11 +24,11 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
               +avatar(block)
               h2=block.get('username')
             - if(block.get('class') == 'Attachment')
-              img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+              img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}", class="iconic iconic-lg", src="{sd.IMAGE_PATH}iconic/file.svg", alt="Download File")
         .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
           - if(block.get('class') == 'Link')
             .grid__block__content__link
-              img(data-src="#{sd.IMAGE_PATH}iconic/link.svg" class="iconic iconic-sm")
+              img(data-src="#{sd.IMAGE_PATH}iconic/link.svg" class="iconic iconic-sm" src="#{sd.IMAGE_PATH}iconic/link.svg" alt="Visit external link")
           .grid__block__mini-feed
             - if(channel)
               ul.bare-list
