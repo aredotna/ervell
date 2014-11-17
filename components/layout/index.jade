@@ -9,31 +9,8 @@ html
         | / #{author.get('username')}
 
     meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=0")
-
-    //- twitter & fb meta
-    meta(name="twitter:description", content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
-    meta(name="twitter:site", content="@aredotna")
-    meta(name="twitter:title", content="Are.na/channel-name")
-    meta(name="twitter:url", content="current url")
-    meta(property="og:title" content="Are.na/channel-name")
-    meta(property="og:description" content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
-    meta(property="og:url" content="current url")
-    if channel || author
-      meta(name="twitter:card", content="gallery")
-      meta(name="twitter:image0", content="last-image1.jpg")
-      meta(name="twitter:image1", content="last-image2.jpg")
-      meta(name="twitter:image2", content="last-image3.jpg")
-      meta(name="twitter:image3", content="last-image4.jpg")
-      meta(property="og:image" content="last-image1.jpg")
-      meta(property="og:image" content="last-image2.jpg")
-      meta(property="og:image" content="last-image3.jpg")
-      meta(property="og:image" content="last-image4.jpg")
-    else
-      meta(name="twitter:card", content="summary")
-      meta(name="twitter:image", content="logo.jpg")
-      meta(property="og:image" content="logo.jpg")
-
     link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'layout' + sd.CSS_EXT) )
+    include ../../components/meta/templates/meta
     block styles
   body
     #modal-container

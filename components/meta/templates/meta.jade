@@ -1,0 +1,29 @@
+//- twitter & fb meta
+meta(name="twitter:description", content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
+meta(name="twitter:site", content="@aredotna")
+meta(property="og:description" content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
+if channel && author
+  meta(name="twitter:title", content="Are.na / #{channel.get('title')}")
+  meta(name="twitter:url", content="http://are.na/#{author.get('slug')}/#{channel.get('slug')}")
+  meta(property="og:title" content="Are.na / #{channel.get('title')}")
+  meta(property="og:url" content="http://are.na/#{author.get('slug')}/#{channel.get('slug')}")
+else if author
+  meta(name="twitter:title", content="Are.na / #{author.get('username')}")
+  meta(name="twitter:url", content="http://are.na/#{author.get('slug')}}")
+  meta(property="og:title" content="Are.na / #{author.get('username')}")
+  meta(property="og:url" content="http://are.na/#{author.get('slug')}")
+else
+  meta(name="twitter:title", content="Are.na")
+  meta(name="twitter:url", content="http://are.na")
+  meta(property="og:title" content="Are.na")
+  meta(property="og:url" content="http://are.na")
+if blocks
+  meta(name="twitter:card", content="gallery")
+  each block, index in blocks
+    if block.has('image')
+      meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
+      meta(property="og:image" content="#{block.get('image').display.url}")
+else
+  meta(name="twitter:card", content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
+  meta(name="twitter:image", content="logo.jpg")
+  meta(property="og:image" content="logo.jpg")
