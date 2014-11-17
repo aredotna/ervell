@@ -51,6 +51,10 @@ section.path--header
         if channel.get('collaboration')
           #metadata--collaborators.metadata__column
             //- Rendered by client
+        else
+          .metadata__column
+            .metadata__title Contributors
+            .metadata__text —
         .metadata__column
           .metadata__title Followers
           .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
