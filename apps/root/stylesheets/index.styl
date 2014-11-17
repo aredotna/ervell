@@ -1,8 +1,11 @@
 @import '../components/layout/variables'
 
+body
+  padding 0px
+
 .path
   display none
-  
+
 .home__path--public
   color public
   font-weight normal
@@ -14,30 +17,18 @@
 #layout-header
   display none
 
-.home__section-intro__background
-  position absolute
-  float left
-  left 0
-  top 0
+.home__section
+  clearfix()
   width 100%
-  height 512px
+  height auto
+  padding 0 10px
   background-color backgroundgray
-  
-.home__section-stats__background
-  position absolute
-  top 512px
-  left 0
-  width 100%
-  height 275px
+
+.home__section--stats, .home__section--footer
   background-color #EFEFEF
-  
-.home__section-footer__background
-  position absolute
-  top 3100px
-  left 0
-  width 100%
-  height 275px
-  background-color #EFEFEF
+
+.home__section--channels
+  background-color #fff
 
 .home__mark, .home__mark--footer
   position relative
@@ -51,7 +42,7 @@
 .home__mark--footer
   margin 16px 10px 0 0
 
-.home__section-intro
+.home__section-intro__text
   position relative
   float left
   max-width 700px
@@ -59,15 +50,15 @@
   padding 108px 0 70px 0
   margin 0
   color hovergray
-  
+
   a
     border-bottom 2px solid hovergray
     padding 0 0 1px 0
-    
+
     &:hover
       color textgray
       border-bottom 2px solid textgray
-    
+
 
 a.home__section-intro__menu, a.home__section-intro__menu--mobile
   position relative
@@ -76,14 +67,14 @@ a.home__section-intro__menu, a.home__section-intro__menu--mobile
   border-bottom 2px solid hovergray
   padding 0 0 1px 0
   margin 0
-  
+
   &:hover
     color public
     border-bottom 2px solid public
 
 a.home__section-intro__menu--mobile
   display none
-  
+
   &:hover
     color public
     border-bottom 2px solid public
@@ -99,61 +90,61 @@ a.home__section-intro__menu--mobile
 
 .static__menu--dark
   color hovergray
-  
+
   &:hover
     color textgray
 
 .static__menu--light
   color lightgray
-  
+
   &:hover
     color hovergray
 
-.home__section-stats
+.home__section--stats
   position relative
   float left
   width 100%
   padding 70px 38px 70px 38px
 
-.home__section-stats__column
+.home__section--stats__column
   position relative
   float left
   width 33%
   text-align center
-  
+
   h1
     font-size 4.8em
     font-weight normal
     color lightgray
     margin 0
-  
+
   h2
     font-weight normal
     color lightgray
     margin 0
 
-.home__section-channels
+.home__section--channels
   position relative
   float left
   background-color none
   padding 40px 0 70px 38px
-  
+
   h2
     color hovergray
 
-.home__section-channels__channels
+.home__section--channels__channels
   position relative
   float left
   width 100%
   margin 0
-  
+
   h2
     position relative
     float left
     color lightgray
     padding 40px 0 20px 0
     margin 0
-    
+
 .home__section-channels__channels a:hover .home__path--closed,
 .home__section-channels__channels a:hover .home__path--public
   color hovergray
@@ -165,11 +156,11 @@ a.home__section-intro__menu--mobile
   overflow hidden
   text-align center
   padding 0 0 40px 0
-    
+
   .grid__block
     max-width 300px
     min-width 300px
-  
+
   .grid__block__inner
     height 300px
 
@@ -179,38 +170,38 @@ a.home__section-intro__menu--mobile
   width 100%
   margin 0 0 40px 0
   text-align center
-  
+
   .button--inblock
     position relative
     left 0
     width 280px
     margin auto
     color lightgray
-    
+
     &:hover
       color hovergray
 
-.home__section-footer
+.home__section--footer
   position relative
   float left
   width 100%
   color hovergray
-  margin 40px 0 0 0
-  
+  padding 40px 10px
+
   h2
     position relative
     float left
     max-width 720px
-  
+
   a
     color hovergray
     border-bottom 2px solid hovergray
     padding 0 0 1px 0
-    
+
     &:hover
       color textgray
       border-bottom 2px solid textgray
-  
+
   .static__menu--footer
     margin 12px 0 0 0
     a
@@ -223,45 +214,39 @@ a.home__section-intro__menu--mobile
   .home__mark
     margin 40px 0 0 0
 
-  .home__section-intro 
+  .home__section--intro
     clear both
     max-width 500px
     padding 20px 0 0 0
-    
+
   a.home__section-intro__menu--mobile
     display inline
-    
+
   .static__menu
     display none
-  
-  .home__section-stats
+
+  .home__section--stats
     padding 80px 0 80px 0
-    
-  .home__section-stats__column
+
+  .home__section--stats__column
     width 50%
     h1
       font-size 4em
     h2
       font-size 1.5em
 
-  .home__section-stats__background
-    height 180px
-  
-  .home__section-footer__background
-    display none
-
   .home__section-stats__column--connections
     display none
-    
-  .home__section-channels
+
+  .home__section--channels
     padding 20px 0 20px 0
-    
-  .home__section-channels__channels h2
+
+  .home__section--channels__channels h2
     padding 0
-  
-  .home__section-channels__images
+
+  .home__section--channels__images
     justify-content center
-  
+
   .home__section-footer
     margin 0 0 40px 0
 
@@ -269,8 +254,5 @@ a.home__section-intro__menu--mobile
     display none
 
 @media (max-width:500px)
-  .home__section-intro__background
-    height 100%
-
-  .home__section-stats, .home__section-stats__background
+  .home__section-stats
     display none

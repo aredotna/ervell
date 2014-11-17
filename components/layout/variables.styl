@@ -47,6 +47,12 @@ antialiased()
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
 
+clearfix()
+  &:after
+    content ""
+    display table
+    clear both
+
 caret()
   display inline-block
   content ''
