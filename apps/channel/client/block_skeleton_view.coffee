@@ -2,14 +2,9 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
-NewBlockView = require '../../../components/new_block/client/new_block_view.coffee'
 BlockView = require '../../../components/block_collection/client/block_view.coffee'
 
 module.exports = class BlockSkeletonView extends Backbone.View
-
-  events:
-    'dragenter' : 'handleDrag'
-    'dragleave' : 'clearDrag'
 
   initialize: (options)->
     @channel = options.channel if options?.channel
@@ -20,28 +15,9 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @collection.on "merge:skeleton", @renderSkeleton, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
-    mediator.on 'collaborators:fetched', @checkUserAbilities, @
-
     @collection.loadSkeleton()
 
     super
-
-  handleDrag: (e)->
-    $('body').addClass('droppable-hover')
-
-  clearDrag: (e) ->
-    console.log 'clearDrag'
-    if !e or $(e.currentTarget).is 'body'
-      $('body').removeClass('droppable-hover')
-
-  checkUserAbilities: (collaborators) ->
-    if _.contains collaborators.pluck('id'), mediator.shared.current_user.id
-      new NewBlockView
-        el: $ ".grid__block--new-block"
-        container: @$el
-        model: @channel
-        blocks: @collection
-        autoRender: true
 
   appendBlock: (model)->
     containerMethod = if model?.options?.wait is true then 'after' else 'append'
