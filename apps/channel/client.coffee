@@ -8,7 +8,7 @@ Collaborators = require '../../collections/collaborators.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
 BlockSkeletonView = require './client/block_skeleton_view.coffee'
-NewBlockView = require '../../../components/new_block/client/new_block_view.coffee'
+NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 
 module.exports = class ChannelView extends Backbone.View
