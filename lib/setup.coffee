@@ -93,7 +93,5 @@ module.exports = (app) ->
   app.use require "../apps/user"
   app.use require "../apps/channel"
 
-  app.locals._ = require("underscore")
-
   require('artsy-error-handler') app,
     template: path.resolve(__dirname, '../components/layout/templates/error.jade')
