@@ -35,12 +35,17 @@ container_pad         = 20px
 // shadows
 downshadow            = 0px 4px 14px -7px rgba(0,0,0,0.1)
 
+v-align()
+  -webkit-transform translateY(-50%)
+  -ms-transform translateY(-50%)
+  transform translateY(-50%)
+
 // transitions
 transition(n, property = all)
-  -webkit-transition: property ease-in n
-  -moz-transition: property ease-in n
-  -o-transition: property ease-in n
-  transition: property ease-in n
+  -webkit-transition property ease-in n
+  -moz-transition property ease-in n
+  -o-transition property ease-in n
+  transition property ease-in n
 
 // antialiased
 antialiased()
