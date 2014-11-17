@@ -20,7 +20,7 @@ else
 if blocks
   meta(name="twitter:card", content="gallery")
   - var filtered = _.filter(blocks, function(block){ return block.has('image'); })
-  each block, index in filtered
+  each block, index in filtered.slice(0,3)
     if block.has('image')
       meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
