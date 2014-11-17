@@ -19,7 +19,8 @@ else
   meta(property="og:url" content="http://are.na")
 if blocks
   meta(name="twitter:card", content="gallery")
-  each block, index in blocks
+  - var filtered = _.filter(blocks, function(block){ return block.has('image'); })
+  each block, index in filtered
     if block.has('image')
       meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")

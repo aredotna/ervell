@@ -4,6 +4,7 @@
 
 Backbone = require "backbone"
 Backbone.sync = require "backbone-super-sync"
+_ = require 'underscore'
 
 module.exports = (p_req, res, next) ->
 
@@ -11,4 +12,5 @@ module.exports = (p_req, res, next) ->
     if p_req.user?
       req.set('X-AUTH-TOKEN': p_req.user.get('authentication_token'))
 
+  res.locals._ = _
   next()
