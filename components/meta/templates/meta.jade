@@ -18,11 +18,11 @@ else
   meta(property="og:title" content="Are.na")
   meta(property="og:url" content="http://are.na")
 if blocks
-  meta(name="twitter:card", content="gallery")
-  each block, index in blocks
-    if block.has('image')
-      meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
-      meta(property="og:image" content="#{block.get('image').display.url}")
+  //- meta(name="twitter:card", content="gallery")
+  //- each block, index in blocks
+  //-   if block.has('image')
+  //-     meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
+  //-     meta(property="og:image" content="#{block.get('image').display.url}")
 else
   meta(name="twitter:card", content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
   meta(name="twitter:image", content="logo.jpg")
