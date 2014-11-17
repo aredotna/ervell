@@ -1,8 +1,5 @@
 include ../../avatar/templates/avatar
 
-//- broke block lightbox handling for now, need to think of a different way to capture those events
-//-
-
 div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id="#{block.id}" id="#{block.id}")
   a(href="#{block.getHref()}" data-client=block.get('base_class') == 'Block' class="grid__block__link")
     .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")

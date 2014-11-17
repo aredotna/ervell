@@ -11,6 +11,13 @@
 
   clearfix()
 
+  .path__headline
+    @extend h1
+    margin 0
+    position relative
+    float left
+    width auto
+
   &.stuck
     position fixed
     z-index header_z
@@ -53,12 +60,6 @@
 
 
   privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
-
-  h1
-    margin 0
-    position relative
-    float left
-    width auto
 
   .username
     font-weight bold
@@ -175,7 +176,7 @@
       font-weight bold
 
 @media (max-width:(block_width_mar * 3) + 30)
-  .path h1
+  .path__headline
     width 75%
 
   .metadata
@@ -192,7 +193,7 @@
     margin -2px 0 0 0
 
   .path.stuck
-    h1
+    .path__headline
       line-height 3.8em
     .root__toggle
       margin 10px 0 0 0
