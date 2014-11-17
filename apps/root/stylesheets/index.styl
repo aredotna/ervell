@@ -1,4 +1,5 @@
 @import '../components/layout/variables'
+@import '../../node_modules/jeet/stylus/jeet'
 
 body
   padding 0px
@@ -23,6 +24,9 @@ body
   height auto
   padding 0 10px
   background-color backgroundgray
+
+.home__section__container
+  center(1400px)
 
 .home__section--stats, .home__section--footer
   background-color #EFEFEF
@@ -104,7 +108,7 @@ a.home__section-intro__menu--mobile
   position relative
   float left
   width 100%
-  padding 70px 38px 70px 38px
+  padding 70px 0 70px 0
 
 .home__section--stats__column
   position relative
@@ -127,16 +131,18 @@ a.home__section-intro__menu--mobile
   position relative
   float left
   background-color none
-  padding 40px 0 70px 38px
+  padding 40px 0 70px 0
 
   h2
     color hovergray
+    padding 0 0 0 38px
 
 .home__section--channels__channels
   position relative
   float left
   width 100%
   margin 0
+  padding 0 0 0 38px
 
   h2
     position relative
@@ -155,7 +161,7 @@ a.home__section-intro__menu--mobile
   width 100%
   overflow hidden
   text-align center
-  padding 0 0 40px 0
+  padding 0
 
   .grid__block
     max-width 300px
@@ -206,6 +212,11 @@ a.home__section-intro__menu--mobile
     margin 12px 0 0 0
     a
       border 0
+      
+for i in (1..5)
+  @media (min-width: (block_width_mar * i) + 20)
+    .home__section__container
+      center(block_width_mar * i)
 
 @media (max-width:(block_width_mar * 3) + 30)
   html, body
@@ -214,7 +225,7 @@ a.home__section-intro__menu--mobile
   .home__mark
     margin 40px 0 0 0
 
-  .home__section--intro
+  .home__section-intro__text
     clear both
     max-width 500px
     padding 20px 0 0 0

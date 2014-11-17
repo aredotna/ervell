@@ -5,69 +5,74 @@ block styles
 
 block body
   .home__section.home__section--intro
-    img.home__mark(src="images/arena-mark.svg", alt="Arena")
-    h2.home__section-intro__text
-      p.
-        Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.
-      br
-      p.
-        The platform is designed to support arbitrary applications: Arena is adopted professionally or for personal use to research projects, manage inventory, curate exhibitions, share inspiration, collect references.
-      br
-      a(href="#sign_up").home__section-intro__menu Create an account
-      a(href="#log_in").home__section-intro__menu--mobile Login
-      a(href="/about").home__section-intro__menu--mobile About
-      a(href="/tools").home__section-intro__menu--mobile Tools
+    .home__section__container
+      img.home__mark(src="images/arena-mark.svg", alt="Arena")
+      h2.home__section-intro__text
+        p.
+          Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.
+        br
+        p.
+          The platform is designed to support arbitrary applications: Arena is adopted professionally or for personal use to research projects, manage inventory, curate exhibitions, share inspiration, collect references.
+        br
+        a(href="#sign_up").home__section-intro__menu Create an account
+        a(href="#log_in").home__section-intro__menu--mobile Login
+        a(href="/about").home__section-intro__menu--mobile About
+        a(href="/tools").home__section-intro__menu--mobile Tools
 
-    h3.static__menu
-      a(href="#log_in").static__menu--dark Login
-      br
-      a(href="#sign_up").static__menu--dark Register
-      br
-      a(href="/about").static__menu--dark About
-      br
-      a(href="/about/tools").static__menu--dark Tools
+      h3.static__menu
+        a(href="#log_in").static__menu--dark Login
+        br
+        a(href="#sign_up").static__menu--dark Register
+        br
+        a(href="/about").static__menu--dark About
+        br
+        a(href="/about/tools").static__menu--dark Tools
   .home__section.home__section--stats
-    .home__section--stats__column
-      h1 19,971
-      h2 Total channels
-    .home__section--stats__column
-      h1 302,047
-      h2 Total blocks
-    .home__section--stats__column.home__section-stats__column--connections
-      h1 357,304
-      h2 Total connections
+    .home__section__container
+      .home__section--stats__column
+        h1 19,971
+        h2 Total channels
+      .home__section--stats__column
+        h1 302,047
+        h2 Total blocks
+      .home__section--stats__column.home__section-stats__column--connections
+        h1 357,304
+        h2 Total connections
   .home__section.home__section--channels
-    h2 Example channels:
-    .home__section--channels__channels
-      - for e_channel in example_channel.get('contents')
-        h2
-          a(href="/#{e_channel.user.slug}/#{e_channel.slug}")
-            ul.breadcrumb
-              li Are.na
-              li=e_channel.user.username
-              li=e_channel.title
-        .home__section-channels__images.grid
-          - for block in e_channel.contents.models.slice(0,4)
-            include ../../../components/block_collection/templates/block
+    .home__section__container
+      h2 Example channels:
+      .home__section--channels__channels
+        - for e_channel in example_channel.get('contents')
+          h2
+            a(href="/#{e_channel.user.slug}/#{e_channel.slug}")
+              ul.breadcrumb
+                li Are.na
+                li=e_channel.user.username
+                li=e_channel.title
+          .home__section-channels__images.grid
+            - for block in e_channel.contents.models.slice(0,4)
+              include ../../../components/block_collection/templates/block
 
-        .home__section-channels__button
-          a.button--inblock(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
+          .home__section-channels__button
+            .button--inblock
+              a(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
 
   .home__section.home__section--footer
-    img.home__mark--footer(src="images/arena-mark.svg", alt="Arena")
-    h2
-      a(href='/about') Learn more
-      |  about Arena or
-      a(href='#register')  register.
+    .home__section__container
+      img.home__mark--footer(src="images/arena-mark.svg", alt="Arena")
+      h2
+        a(href='/about') Learn more
+        |  about Arena or
+        a(href='#register')  register.
 
-    h3.static__menu--footer
-      a(href="#log_in").static__menu--dark Login
-      br
-      a(href="#sign_up").static__menu--dark Register
-      br
-      a(href="/about").static__menu--dark About
-      br
-      a(href="/tools").static__menu--dark Tools
+      h3.static__menu--footer
+        a(href="#log_in").static__menu--dark Login
+        br
+        a(href="#sign_up").static__menu--dark Register
+        br
+        a(href="/about").static__menu--dark About
+        br
+        a(href="/tools").static__menu--dark Tools
 
 block scripts
   script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )
