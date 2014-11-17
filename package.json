@@ -25,7 +25,8 @@
     "bucket-assets": "*",
     "forever": "*",
     "moment": "*",
-    "backbone-fetch-cache": "*"
+    "backbone-fetch-cache": "*",
+    "blueimp-file-upload": "*"
   },
   "devDependencies": {
     "jquery": "*",
