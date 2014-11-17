@@ -67,7 +67,9 @@
 	float left
 	width 100%
 	border 2px solid bordergray
-	padding 20px
+	padding 30px 20px 30px 20px
+	font-size 1em
+	line-height 1.5em
 	font-weight normal
 	margin 0 0 130px 0
 	
@@ -75,29 +77,40 @@
 		background-color bordergray
 	
 	.input--relative
-		margin 20px 0 20px 0
+		margin 10px 0 10px 0
 		
 		&:focus
 			background-color secondbackgroundgray
 	
-.static__tools__bookmarklet-button
+	button
+		margin 10px 0 0 0
+	
+	.static__tools__frame--premium, .static__tools__frame--supporter
+		color public
+		
+		strong
+			color textgray
+	
+	.static__tools__frame--premium
+		opacity 0.4
+
+.static__tools__bookmarklet-button, .static__tools__social-button
 	width 100%
 	height 50px
-	font-size 0.7em
 	line-height 50px
 	font-weight bold
 	text-align center
 	background-color bordergray
 	border 1px dashed lightgray
-	margin 0 0 20px 0
+	margin 12px 0 12px 0
 	
 	&:hover
 		opacity 0.6
 		cursor pointer
+		
+.static__tools__social-button
+	border 1px solid lightgray
 	
-.static__tools__frame--premium
-	border 2px solid public	
-
 #layout-header
 	background none
 	

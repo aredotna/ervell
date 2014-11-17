@@ -14,6 +14,30 @@ block body
 				.static__tools__bookmarklet-button Drag this to your browser toolbar &#10548;
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
 			
+			h2.static--title Extra tools
+			h2.static__tools__frame
+				ul.static__tools__frame--supporter
+					strong Supporter package
+					li – search inside a channel
+					li – follow our work in progress and test our beta features early
+				button.button--wide.button--border.button--add $12 / year - Activate &rarr;
+				br
+				br
+				ul.static__tools__frame--premium
+					strong Premium package (coming soon)
+					li – same supporter privileges as described above
+					li – dashboard: see and sort of every channel on Arena, their connections and authors
+					li – one more feature 
+					li – new features will be added periodically
+				button.button--wide.button--border.button--add(style="opacity: 0.4") $45 / year - Activate &rarr;
+				br
+				br
+				| In order to sustain its expenses and future development without advertising and external funding, Arena needs the support of its loyal users. By activating one of the tools packages you contribute to our 
+				a(href="/about#principles") self-sustainability principles.
+				br
+				br
+				| If there are features or tools you would like to see implemented feel free to add suggestions in our 
+				a(href="arena/feedback") feedback channel.
 			h2.static--title Invite someone
 			h2.static__tools__frame
 				| Add an email address to collaborate with someone:
@@ -21,28 +45,27 @@ block body
 				input.input--wide.input--relative.is-block(
           name='email', type='email', placeholder='Email', required, autofocus= autofocus
         )
-				| You want you can attach two channels worth of notice below:
+				| You can attach two channels worth of notice below:
 				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
 				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
 				button.button--wide.button--border.button--add Send invitation &rarr;
 
-			h2.static--title Extra tools
-			h2.static__tools__frame.static__tools__frame--premium
-				|	Supporter
-				br
-				| - search in channel
-				br
-				| - follow our work in progress and be the first in testing our beta features
-				br
-				br
-				| Premium (coming soon)
 			h2.static--title Find Friends
 			h2.static__tools__frame
-				|	Connect to Facebook or Twitter to follow or collaborate with friends. 
+				|	Connect to Facebook or Twitter to follow or collaborate with friends.
+				.static__tools__social-button Find Facebook contacts &rarr;
+				.static__tools__social-button Find Twitter contacts &rarr;
 			
 			h2.static--title Add via email
 			h2.static__tools__frame
-				| Send and email to this address to add to an Arena channel, use the subject to indicate the channel.
+				strong post+subo918@are.na
+				br
+				br
+				| Sending an e-mail to this address will post the contents (including attachments) to an automatically generated private channel called “Add via Email.” You can send emails to specific channels by writing a channel title in the subject line.
+				br
+				br
+				strong Note: 
+				| anyone possessing your personal 'Add via E-mail' address can post to your account.
 			
 	h3.static__menu
 		if !user
