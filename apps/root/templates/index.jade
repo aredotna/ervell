@@ -53,6 +53,9 @@ block body
           - for block in e_channel.contents.models.slice(0,4)
             include ../../../components/block_collection/templates/block
 
+        .home__section-channels__button
+          .button--inblock +#{e_channel.length - 4} more blocks &rarr;
+
   .home__section-footer
     img.home__mark--footer(src="images/arena-mark.svg", alt="Arena")
     h2
