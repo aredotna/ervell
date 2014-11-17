@@ -45,16 +45,17 @@ block body
     .home__section-channels__channels
       - for e_channel in example_channel.get('contents')
         h2
-          ul.breadcrumb
-            li Are.na
-            li=e_channel.user.username
-            li=e_channel.title
+          a(href="/#{e_channel.user.slug}/#{e_channel.slug}")
+            ul.breadcrumb
+              li Are.na
+              li=e_channel.user.username
+              li=e_channel.title
         .home__section-channels__images.grid
           - for block in e_channel.contents.models.slice(0,4)
             include ../../../components/block_collection/templates/block
 
         .home__section-channels__button
-          .button--inblock +#{e_channel.length - 4} more blocks &rarr;
+          a.button--inblock(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
 
   .home__section-footer
     img.home__mark--footer(src="images/arena-mark.svg", alt="Arena")
