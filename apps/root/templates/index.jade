@@ -54,7 +54,8 @@ block body
               include ../../../components/block_collection/templates/block
 
           .home__section-channels__button
-            a.button--inblock(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
+            .button--inblock
+              a(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
 
   .home__section.home__section--footer
     .home__section__container
