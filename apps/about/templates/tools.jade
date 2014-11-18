@@ -9,12 +9,13 @@ block body
 			img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 
 		.static__tools.static--text
-			h2.static--title Bookmarklet
+			h2.static--title Tools
+			h2#bookmarklet.static--title Bookmarklet
 			h2.static__tools__frame
 				.static__tools__bookmarklet-button Drag this to your browser toolbar &#10548;
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
-			
-			h2.static--title Extra tools
+
+			h2#extra-tools.static--title Extra tools
 			h2.static__tools__frame
 				ul.static__tools__frame--supporter
 					strong Supporter package
@@ -27,18 +28,18 @@ block body
 					strong Premium package (coming soon)
 					li – same supporter privileges as described above
 					li – dashboard: see and sort of every channel on Arena, their connections and authors
-					li – one more feature 
+					li – one more feature
 					li – new features will be added periodically
 				button.button--wide.button--border.button--add(style="opacity: 0.4") $45 / year - Activate &rarr;
 				br
 				br
-				| In order to sustain its expenses and future development without advertising and external funding, Arena needs the support of its loyal users. By activating one of the tools packages you contribute to our 
+				| In order to sustain its expenses and future development without advertising and external funding, Arena needs the support of its loyal users. By activating one of the tools packages you contribute to our
 				a(href="/about#principles") self-sustainability principles.
 				br
 				br
-				| If there are features or tools you would like to see implemented feel free to add suggestions in our 
+				| If there are features or tools you would like to see implemented feel free to add suggestions in our
 				a(href="arena/feedback") feedback channel.
-			h2.static--title Invite someone
+			h2#invite.static--title Invite someone
 			h2.static__tools__frame
 				| Add an email address to collaborate with someone:
 				br
@@ -50,13 +51,13 @@ block body
 				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
 				button.button--wide.button--border.button--add Send invitation &rarr;
 
-			h2.static--title Find Friends
+			h2#find-friends.static--title Find Friends
 			h2.static__tools__frame
 				|	Connect to Facebook or Twitter to follow or collaborate with friends.
 				.static__tools__social-button Find Facebook contacts &rarr;
 				.static__tools__social-button Find Twitter contacts &rarr;
-			
-			h2.static--title Add via email
+
+			h2#add-via-email.static--title Add via email
 			h2.static__tools__frame
 				strong post+subo918@are.na
 				br
@@ -64,9 +65,9 @@ block body
 				| Sending an e-mail to this address will post the contents (including attachments) to an automatically generated private channel called “Add via Email.” You can send emails to specific channels by writing a channel title in the subject line.
 				br
 				br
-				strong Note: 
+				strong Note:
 				| anyone possessing your personal 'Add via E-mail' address can post to your account.
-			
+
 	h3.static__menu
 			br
 			a(href="/").static__menu--dark Home
@@ -76,6 +77,16 @@ block body
 			a(href="#log_in").static__menu--dark Login
 			br
 			a(href="#sign_up").static__menu--dark Register
+			br
+			a(href="#bookmarklet").static__menu--light Bookmarklet
+			br
+			a(href="#extra-tools").static__menu--light Extra tools
+			br
+			a(href="#invite").static__menu--light Send invitation
+			br
+			a(href="#find-friends").static__menu--light Find friends
+			br
+			a(href="#add-via-email").static__menu--light Add via email
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

@@ -23,7 +23,9 @@
   max-width block_width
   min-width block_width
   text-align center
-  margin 0 10px 60px
+  padding 0 10px 60px
+  position relative
+  margin-bottom 20px
 
 // don't display non processed blocks
 .grid__block--block
@@ -189,7 +191,9 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   font-weight bold
   text-align center
   margin 20px 0 5px 0
-  bottom 0
+  bottom 20px
+  left 0
+  position absolute
   width 100%
   white-space nowrap
 
@@ -203,7 +207,7 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   visibility visible
 
 .grid__block:hover .grid__block__title
-  visibility hidden
+  display none
 
 @media (max-width:(block_width_mar * 3) + 30)
   .grid
