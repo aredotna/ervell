@@ -68,6 +68,8 @@ module.exports = class Base extends Model
 
   createdAtAgo:  -> moment(@get('created_at')).fromNow()
 
+  updatedAtAgo:  -> moment(@get('updated_at')).fromNow()
+
   serialize: ->
     data = super
     return data unless @calculated

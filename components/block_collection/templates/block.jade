@@ -17,6 +17,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
                 ul.grid__block__channel__stats__list
                   li by #{block.get('user').username}
                   li #{block.get('length')} blocks
+                  //- li #{block.updatedAtAgo()}
                   //- li #{block.get('follower_count')} followers
             - if(block.get('class') == 'User')
               +avatar(block)
