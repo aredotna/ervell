@@ -42,4 +42,4 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
             //- rendered by the client
     - if(block.get('class') != 'Channel')
       p.grid__block__title= block.smartTruncate(block.get('title'))
-      p.grid__block__author= block.get('user').username
+      p.grid__block__author Added by #{block.get('user').username}

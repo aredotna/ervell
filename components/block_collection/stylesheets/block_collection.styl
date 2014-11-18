@@ -74,7 +74,6 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
     //   transition(0.1s)
 
     .grid__block__channel__stats
-      font-weight bold
       font-size 15px
       line-height 1.2
       visibility visible
@@ -183,7 +182,7 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
     opacity 1
     pointer-events all
 
-.grid__block__title
+.grid__block__title, .grid__block__author
   color lightgray
   position relative
   font-size s_caption
@@ -196,6 +195,15 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 
   &:hover
     color hovergray
+
+.grid__block__author
+  display none
+
+.grid__block:hover .grid__block__author
+  display block
+
+.grid__block:hover .grid__block__title
+  display none
 
 @media (max-width:(block_width_mar * 3) + 30)
   .grid
