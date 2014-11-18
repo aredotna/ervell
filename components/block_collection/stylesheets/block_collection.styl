@@ -67,11 +67,16 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
     transition(0.1s)
     padding 15px 0 0 0
   &:hover
-    h2
-      font-size 1.53em
-      transition(0.1s)
+    .grid__block__inner
+      border-width 4px
+    // h2
+    //   font-size 1.53em
+    //   transition(0.1s)
 
     .grid__block__channel__stats
+      font-weight bold
+      font-size 15px
+      line-height 1.2
       visibility visible
 
 .grid__block__content .valign-inner
@@ -120,13 +125,13 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   margin-left 40%
   line-height 4.5em
   background-color rgba(255,255,255, 0.85)
-  
+
   svg
     fill textgray
-  
+
   &:hover
     background-color rgba(255,255,255, 0.95)
-    
+
     svg
       fill hovergray
 
@@ -199,32 +204,32 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   .grid__block
     max-width 294px
     min-width 294px
-  
+
   .grid__block__inner, .grid__block__connect-container
     height 294px
-  
+
   .grid__block__content__image
     max-width 293px
     max-height 294px
-    
+
 @media (max-width:(block_width_mar * 1) + 20)
   body
     padding 0
-  
+
   .container
     max-width 96%
-    
+
   .grid__block
     max-width 280px
     min-width 280px
-  
+
   .grid__block__inner, .grid__block__connect-container
     height 280px
-  
+
   .grid__block__content__image
     max-width 280px
     max-height 280px
-  
+
 @import '../../avatar/stylesheets/avatar'
 @import '../../lightbox/stylesheets/lightbox'
 @import '../../connect/stylesheets/connect'
