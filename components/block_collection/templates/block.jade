@@ -40,6 +40,6 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
         if user
           .grid__block__connect-container.abs-fill
             //- rendered by the client
-    - if(block.get('class') != 'Channel')
+    - if(block.get('class') != 'Channel' && block.get('class') != 'User')
       p.grid__block__title= block.smartTruncate(block.get('title'))
       p.grid__block__author Added by #{block.get('user').username}
