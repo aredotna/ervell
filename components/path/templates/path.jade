@@ -26,8 +26,7 @@ section.path--header
         .edit-channel__info-icon
           include ../../../public/images/iconic/info.svg
         if user && user.canEditChannel(channel)
-          .edit-channel__icon
-            include ../../../public/images/iconic/cogs.svg
+          .edit-channel Edit channel
         else
           a.follow_button.pointer(data-type="Channel", data-id="#{author.id}")
 
