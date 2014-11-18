@@ -1,7 +1,7 @@
 #l-lightbox-container_inner
   .lightbox__content.valign-outer
     .valign-inner
-      a.lightbox--close &#10006;
+      a.lightbox--close: span(class="iconic iconic-sm" data-glyph="x" title="x" aria-hidden="true")
       - if(block.has('image') && block.get('class') != 'Media')
         img.lightbox__content__img(src="#{block.getImageSize('original')}")
 
@@ -9,7 +9,8 @@
         img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
 
       - if(block.get('class') == 'Text')
-        .lightbox__content__text!= block.get('content_html')
+        .lightbox__content__text
+          .lightbox__content__text__inner!= block.get('content_html')
 
       - if(block.get('class') == 'Media')
         .lightbox__content__media!= block.get('embed').html
