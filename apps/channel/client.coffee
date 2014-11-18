@@ -29,10 +29,11 @@ module.exports = class ChannelView extends Backbone.View
     $('.channel--drop-zone').removeClass('is-droppable')
 
   checkUserAbilities: (collaborators) ->
+    console.log "collaborators.pluck('id')", collaborators.pluck('id')
     if _.contains collaborators.pluck('id'), mediator.shared.current_user.id
       new NewBlockView
         el: $ ".grid__block--new-block"
-        container: @$el
+        container: $ '.grid'
         model: @channel
         blocks: @collection
         autoRender: true

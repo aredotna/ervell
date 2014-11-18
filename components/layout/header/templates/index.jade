@@ -9,7 +9,7 @@ header#layout-header
       //- rendered by client
 
   if user && user.has('username')
-    .new-channel-btn.iconic(data-glyph="plus")
+    .new-channel-btn.iconic(data-glyph="plus") &nbsp; New channel
     .logo.dropdown--menu.right
       .logo-icon.dropdown--menu__trigger
         include ../../../../public/images/arena-mark.svg
@@ -37,7 +37,7 @@ header#layout-header
   else
     .layout-header__register
       span
-        a(href="#log_in").btn-login Login 
-      span or 
+        a(href="#log_in").btn-login Login
+      span or
       span
         a(href="#log_in").btn-signup Sign Up
