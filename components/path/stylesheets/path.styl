@@ -81,14 +81,19 @@
 .channel-settings
   position relative
   float right
-  clear both
+  clear right
   width auto
   height 20px
   color lightgray
   font-size s_caption + 1
   line-height 20px
   font-weight bold
-  
+  margin 14px 0 0 0
+
+.follow_button
+  &:hover
+    color hovergray
+
 /*  .edit-channel__icon, .edit-channel__info-icon
     position relative
     float left
@@ -186,6 +191,7 @@
     
   .channel-settings
     float left
+    clear left
     margin 5px 0 0 0
 
   .show-info

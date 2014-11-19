@@ -28,7 +28,8 @@ section.path--header
         .channel-settings.edit-channel 
           a(href="#") Edit channel
       else
-        a.channel-settings.follow_button.pointer(data-type="Channel", data-id="#{author.id}")
+        .channel-settings.follow_button.pointer 
+          a(data-type="Channel", data-id="#{author.id}")
 
     else if author && user && author.id == user.id
       .channel-settings.edit-profile
