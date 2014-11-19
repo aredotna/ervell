@@ -78,17 +78,18 @@
     margin 0 0.25em
     font-weight 400
 
-.edit-channel, .edit-profile
+.channel-settings
   position relative
   float right
+  clear both
   width auto
-  height 30px
+  height 20px
   color lightgray
   font-size s_caption + 1
-  line-height: 50px;
+  line-height 20px
   font-weight bold
-
-.edit-channel__icon, .edit-channel__info-icon
+  
+/*  .edit-channel__icon, .edit-channel__info-icon
     position relative
     float left
     width 18px
@@ -117,9 +118,10 @@
       &:hover
         stroke hovergray
         fill hovergray
-        cursor pointer
+        cursor pointer 
+*/
 
-.edit-channel__info-icon
+.show-info
   display none
 
 .metadata
@@ -181,13 +183,14 @@
 
   .metadata
     display none
+    
+  .channel-settings
+    float left
+    margin 5px 0 0 0
 
-  .edit-channel__info-icon
+  .show-info
     display block
 
 @media (max-width:500px)
-  .edit-channel__icon, .edit-channel__info-icon
-    margin 4px 10px 0 10px
-
   .path.stuck
     display none
