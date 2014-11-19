@@ -9,7 +9,8 @@ header#layout-header
       //- rendered by client
 
   if user && user.has('username')
-    .new-channel-btn.iconic(data-glyph="plus") &nbsp; New channel
+    .new-channel-btn.iconic(data-glyph="plus") &nbsp;
+      .new-channel-btn--caption New channel
     .logo.dropdown--menu.right
       .logo-icon.dropdown--menu__trigger
         include ../../../../public/images/arena-mark.svg

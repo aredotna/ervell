@@ -124,14 +124,16 @@
         fill hovergray
 
 .new-channel-btn
+  display inline-block
+  height 50px
   font-size 13px
-  line-height 27px
+  line-height 53px
   // height 30px
   // width 30px
   color textgray
   border 0px solid bordergray
   text-align center
-  margin 11px 0 0 15px
+  margin 0 0 0 15px
   font-weight bold
 
   &:before
@@ -142,6 +144,11 @@
     border 0px solid lightgray
     color hovergray
     cursor pointer
+
+.new-channel-btn--caption
+  display inline-block
+  vertical-align top
+  margin -1px 0 0 6px
 
 .dropdown--menu
   cursor pointer
@@ -230,5 +237,8 @@
   .dropdown.dropdown--size
     width 100%
     height 100%
+  
+  .new-channel-btn--caption
+    display none
 
 
