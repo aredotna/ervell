@@ -220,7 +220,11 @@
   #layout-header .logo
     width 70px
     padding 0 10px 0 10px
+  
+  .new-channel-btn--caption
+    display none
 
+@media (max-width:350px)
   .dropdown
     position fixed
     overflow scroll
@@ -231,14 +235,11 @@
       background-color secondbackgroundgray
 
     .dropdown__link
-      width 280px
+      max-width 280px
+      height 50px
       margin auto
 
   .dropdown.dropdown--size
     width 100%
     height 100%
-  
-  .new-channel-btn--caption
-    display none
-
 
