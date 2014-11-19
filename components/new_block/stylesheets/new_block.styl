@@ -9,8 +9,18 @@
   border 1px solid #fff
   cursor text
 
-.grid__block--new-block fieldset
-  margin 0
+.grid__block--new-block 
+  fieldset
+    margin 0
+  
+  .plus-placeholder
+    position absolute
+    width 90%
+    left 5%
+    top 38%
+    font-size 40px
+    text-align center
+    color lightgray
 
 .grid__block--new-block__content-field
   opacity 0
@@ -21,20 +31,28 @@
   background none
   antialiased()
 
-.grid__block__inner:hover .grid__block--new-block__content-field
-  opacity 1
-  background-color secondbackgroundgray
+.grid__block__inner:hover 
+  .grid__block--new-block__content-field
+    opacity 1
+    background-color secondbackgroundgray
+  
+  .plus-placeholder
+    display none
 
 .grid__block--new-block__content-field::-webkit-input-placeholder
   font-size 22px
   line-height 1.3em
   text-align center
   padding 60px 0 0 0
+  color textgray
 
 .grid__block--new-block__content-field:-moz-placeholder
   font-size 22px
   line-height 1.3em
   text-align center
+
+.grid__block--new-block__submit
+  color lightgray
 
 .grid__block--new-block__submit:hover
   color hovergray
