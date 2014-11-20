@@ -30,13 +30,14 @@ module.exports = class ChannelView extends Backbone.View
 
   checkUserAbilities: (collaborators) ->
     console.log "collaborators.pluck('id')", collaborators.pluck('id')
-    if _.contains collaborators.pluck('id'), mediator.shared.current_user.id
+    if (_.contains collaborators.pluck('id'), mediator.shared.current_user.id) or mediator.shared.current_user.canAddToChannel(@channel)
+      should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
       new NewBlockView
         el: $ ".grid__block--new-block"
         container: $ '.grid'
         model: @channel
-        blocks: @collection
-        autoRender: true
+        blocks: @blocks
+        autoRender: should_render
 
 
 module.exports.init = ->
