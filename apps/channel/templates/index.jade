@@ -10,7 +10,8 @@ block body
       include ../../../components/new_block/templates/new_block
     include ../../../components/block_collection/templates/block_collection
 
-  .channel--drop-zone.abs-fill &nbsp;
+  .channel--drop-zone.abs-fill
+    .inner: h1 Drop files here to add to #{channel.get('title')}
     //- include ./filedrop
 
 block scripts
