@@ -27,7 +27,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
         .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
           if user
             - if(block.get('class') == 'Attachment' || block.get('class') == 'Link' || block.get('class') == 'Media')
-              .button--inblock.button--inblock--left Source
+              .button--inblock.button--inblock--left.grid__block__link Source
               .button--inblock.button--inblock--right.grid__block__connect-btn Connect &#x279d;
             - if(block.get('class') == 'Channel')
               .button--inblock.button--inblock--left Follow
