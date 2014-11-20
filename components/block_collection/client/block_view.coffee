@@ -16,7 +16,7 @@ module.exports = class BlockView extends Backbone.View
 
 
   events:
-    'click .grid__block__link'        : 'openLink'
+    'click .grid__block__source__link': 'openLink'
     'click .grid__block__overlay'     : 'openLightbox'
     'click .grid__block__connect-btn' : 'loadConnectView'
 
