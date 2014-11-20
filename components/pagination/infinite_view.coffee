@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 Backbone.$ = $
+IconicJS = require '../iconic/client/iconic.min.js'
 
 module.exports = class InfiniteView extends Backbone.View
 
@@ -38,10 +39,8 @@ module.exports = class InfiniteView extends Backbone.View
 
       _.delay =>
         @loading = false
+        IconicJS().inject 'img.iconic'
       , 500
-
-      IconicJS().inject 'img.iconic'
-
 
   startLoader: ->
     # $(@loader).css('visibility','visible').insertAfter(@$(@itemSelector + ':last')).spin()

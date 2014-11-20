@@ -18,11 +18,9 @@ module.exports = class SearchBlocks extends Blocks
 
   parse: (data)->
     @total_pages = data.total_pages
-    console.log('total_pages', data.total_pages, data)
     _.flatten _.values _.pick(data, ['contents', 'followers', 'users', 'channels', 'following', 'blocks', 'results'])
 
   loadNext: ->
-    console.log 'loadNext', @options.page, @total_pages
     return false if @options.page > @total_pages
 
     ++@options.page
