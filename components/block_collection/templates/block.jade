@@ -19,11 +19,13 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
                   li #{block.get('length')} blocks
                   //- li #{block.updatedAtAgo()}
                   //- li #{block.get('follower_count')} followers
-            - if(block.get('class') == 'User')
-              +avatar(block)
-              h2=block.get('username')
             - if(block.get('class') == 'Attachment')
               img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+            - if(block.get('class') == 'User')
+              h2=block.get('username')
+              +avatar(block)
+              .button--inblock.button--inblock--bottom Follow
+
         .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
           if user
             - if(block.get('class') == 'Attachment' || block.get('class') == 'Link' || block.get('class') == 'Media')
@@ -33,7 +35,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
               .button--inblock.button--inblock--left Follow
               .button--inblock.button--inblock--right.grid__block__connect-btn Connect &#x279d;
             - if(block.get('class') == 'Image' || block.get('class') == 'Text')
-              .button--inblock.button--inblock--center.grid__block__connect-btn Connect &#x279d;
+              .button--inblock.button--inblock--center.grid__block__connect-btn Connect &#x279d;  
           .grid__block__mini-feed
             - if(channel)
               ul.bare-list
