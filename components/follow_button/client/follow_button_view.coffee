@@ -14,13 +14,15 @@ module.exports = class FollowButtonView extends Backbone.View
   initialize: (options) ->
     super
 
+    @showTitle = if options.showTitle then options.showTitle else true
+
     mediator.on 'current_user:prefetched', @render, @
     mediator.on 'current_user:fetched', @render, @
     mediator.shared.current_user.on 'change:following_channels', @render, @
     mediator.shared.current_user.on 'change:following_users', @render, @
 
   render: ->
-    @$el.html followButtonTemplate(model: @model, user: mediator.shared.current_user)
+    @$el.html followButtonTemplate(model: @model, user: mediator.shared.current_user, showTitle: @showTitle)
 
   toggleFollow: (e) ->
     mediator.shared.current_user.toggleFollow @model
