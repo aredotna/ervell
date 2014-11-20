@@ -31,12 +31,19 @@
 // don't display non processed blocks
 .grid__block--block
   display none
-
-.grid__block--user:hover
-  color hovergray
-
+    
 .grid__block--user .grid__block__inner
   background-color backgroundgray
+  border 2px solid bordergray
+  
+  h2
+    margin 40px 0 22px 0
+    
+.grid__block--user:hover
+  color hovergray
+  
+  .grid__block__inner
+    border 2px solid lightgray
 
 .grid__block--text .valign-inner
   vertical-align top
@@ -143,13 +150,6 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 .grid__block__inner:hover .grid__block__overlay
   opacity 1
   pointer-events all
-
-.grid__block.grid__block--text:hover .grid__block__overlay
-  // background-color rgba(255,255,255, 0.95)
-
-.grid__block.grid__block--user:hover .grid__block__overlay
-  // background-color rgba(255,255,255, 0.95)
-  opacity 0
 
 .grid__block.grid__block--channel .grid__block__content
   padding s_margin
