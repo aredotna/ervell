@@ -25,10 +25,10 @@ section.path--header
       .channel-settings.show-info
         a(href="#") Show info
       if user && user.canEditChannel(channel)
-        .channel-settings.edit-channel 
+        .channel-settings.edit-channel
           a(href="#") Edit channel
       else
-        .channel-settings.follow_button.pointer 
+        .channel-settings.follow_button.pointer
           a(data-type="Channel", data-id="#{author.id}")
 
     else if author && user && author.id == user.id
