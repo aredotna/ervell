@@ -40,6 +40,9 @@ module.exports = class InfiniteView extends Backbone.View
         @loading = false
       , 500
 
+      IconicJS().inject 'img.iconic'
+
+
   startLoader: ->
     # $(@loader).css('visibility','visible').insertAfter(@$(@itemSelector + ':last')).spin()
 

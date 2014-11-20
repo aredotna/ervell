@@ -29,7 +29,6 @@ module.exports = class ChannelView extends Backbone.View
     $('.channel--drop-zone').removeClass('is-droppable')
 
   checkUserAbilities: (collaborators) ->
-    console.log "collaborators.pluck('id')", collaborators.pluck('id')
     if (_.contains collaborators.pluck('id'), mediator.shared.current_user.id) or mediator.shared.current_user.canAddToChannel(@channel)
       should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
       new NewBlockView
