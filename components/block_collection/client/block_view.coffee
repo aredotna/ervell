@@ -53,7 +53,15 @@ module.exports = class BlockView extends Backbone.View
   openLink: (e)->
     e.preventDefault()
     e.stopPropagation()
-    window.open @model.get('source').url,'_blank'
+
+    if @model.get('source').url
+      url = @model.get('source').url
+    else if @model.get('attachment').url
+      url = @model.get('attachment').url
+    else
+      url = @model.getImageSize('display')
+
+    window.open url,'_blank'
 
   update: (model)->
     $("##{model.id}").replaceWith blockTemplate(block: model, user: @current_user)
