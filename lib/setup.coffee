@@ -32,6 +32,7 @@ sharify.data =
   REDIS_URL: REDIS_URL
   PUSHER_KEY: PUSHER_KEY
 
+
 # current user management
 CurrentUser = require '../models/current_user'
 
