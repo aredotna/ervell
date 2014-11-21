@@ -30,7 +30,7 @@ setupPusherAndCurrentUser = ->
       prefillSuccess: -> mediator.trigger 'current_user:prefetched'
       success: -> mediator.trigger 'current_user:fetched'
 
-  # mediator.shared.pusher = new Pusher sd.PUSHER_KEY
+  mediator.shared.pusher = new Pusher sd.PUSHER_KEY
 
 setupAjaxHeaders = ->
   $.ajaxSetup
