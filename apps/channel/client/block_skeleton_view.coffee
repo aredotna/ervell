@@ -2,6 +2,7 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+Block = require '../../../models/block.coffee'
 BlockView = require '../../../components/block_collection/client/block_view.coffee'
 
 module.exports = class BlockSkeletonView extends Backbone.View
@@ -15,9 +16,18 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @collection.on "merge:skeleton", @renderSkeleton, @
     @collection.on "placeholders:replaced", @completeRequest, @
 
+    mediator.on 'upload:done', @makeBlock, @
+
     @collection.loadSkeleton()
 
     super
+
+  makeBlock: (location) ->
+    console.log 'makeBlock'
+    block = new Block block_type: "Block", source: location
+    @collection.create block.toJSON(),
+      url: "#{sd.API_URL}/channels/#{@channel.get('slug')}/blocks"
+      wait: true
 
   appendBlock: (model)->
     containerMethod = if model?.options?.wait is true then 'after' else 'append'
