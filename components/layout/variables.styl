@@ -91,13 +91,13 @@ privacy-color-border-hover(prefix, attr)
   colors = 'closed' closed, 'public' public, 'private' private
   for value in colors
     {prefix + value[0] + ':hover'}
-      {attr} value[1]
+      {attr} alpha(value[1], 0.6)
 
 privacy-color-hover(prefix, attr)
   colors = 'closed' closed, 'public' public, 'private' private
   for value in colors
     {prefix + value[0] + ':hover'}
-      {attr} value[1] - 15%
+      {attr} value[1]
 
 
 .serif-text
