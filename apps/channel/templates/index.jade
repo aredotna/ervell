@@ -12,7 +12,7 @@ block body
 
   .channel--drop-zone.abs-fill
     .inner: h1 Drop files here to add to #{channel.get('title')}
-    //- include ./filedrop
+      include ./filedrop
 
 block scripts
   script( src=sd.ASSET_PATH + 'channel' + sd.JS_EXT )

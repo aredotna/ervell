@@ -10,23 +10,15 @@ BlockCollectionView = require '../../components/block_collection/client/block_co
 BlockSkeletonView = require './client/block_skeleton_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
+ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 
 module.exports = class ChannelView extends Backbone.View
-  events:
-    'dragenter'                     : 'handleDrag'
-    'dragleave .channel--drop-zone' : 'clearDrag'
 
   initialize: (options)->
     @channel = options.channel
     @blocks = options.blocks
 
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
-
-  handleDrag: (e)->
-    $('.channel--drop-zone').addClass('is-droppable')
-
-  clearDrag: (e) ->
-    $('.channel--drop-zone').removeClass('is-droppable')
 
   checkUserAbilities: (collaborators) ->
     if (_.contains collaborators.pluck('id'), mediator.shared.current_user.id) or mediator.shared.current_user.canAddToChannel(@channel)
@@ -38,6 +30,10 @@ module.exports = class ChannelView extends Backbone.View
         blocks: @blocks
         autoRender: should_render
 
+      new ChannelFileDropView
+        el: @$el
+        channel: @channel
+        blocks: @blocks
 
 module.exports.init = ->
   current_user = mediator.shared.current_user

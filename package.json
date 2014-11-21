@@ -26,7 +26,8 @@
     "forever": "*",
     "moment": "*",
     "backbone-fetch-cache": "*",
-    "blueimp-file-upload": "*"
+    "blueimp-file-upload": "*",
+    "jquery.ui.widget": "*"
   },
   "devDependencies": {
     "jquery": "*",
