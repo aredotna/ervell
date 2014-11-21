@@ -58,6 +58,9 @@ clearfix()
     display table
     clear both
 
+stripe($1, $2, angle)
+  linear-gradient(angle, $1 25%, $2 25%, $2 50%, $1 50%, $1 75%, $2 75%, $2)
+
 caret()
   display inline-block
   content ''
@@ -95,6 +98,7 @@ privacy-color-hover(prefix, attr)
   for value in colors
     {prefix + value[0] + ':hover'}
       {attr} value[1] - 15%
+
 
 .serif-text
   font-family font_serif
