@@ -24,7 +24,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
             - if(block.get('class') == 'User')
               h2=block.get('username')
               +avatar(block)
-              .button--inblock.button--inblock--bottom Follow
+              .button--inblock.button--inblock--bottom.grid__block__follow_btn &nbsp;
 
         .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
           if user
@@ -32,10 +32,10 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
               .button--inblock.button--inblock--left.grid__block__source__link Source
               .button--inblock.button--inblock--right.grid__block__connect-btn Connect &#x279d;
             - if(block.get('class') == 'Channel')
-              .button--inblock.button--inblock--left Follow
+              .button--inblock.button--inblock--left.grid__block__follow_btn &nbsp;
               .button--inblock.button--inblock--right.grid__block__connect-btn Connect &#x279d;
             - if(block.get('class') == 'Image' || block.get('class') == 'Text')
-              .button--inblock.button--inblock--center.grid__block__connect-btn Connect &#x279d;  
+              .button--inblock.button--inblock--center.grid__block__connect-btn Connect &#x279d;
           .grid__block__mini-feed
             - if(channel)
               ul.bare-list

@@ -1,8 +1,8 @@
 if user.isFollowing(model)
   | Unfollow
-  if showTitle
+  if showTitle === true
     | &nbsp; #{model.title()}
 else
   | Follow
-  if showTitle
+  if showTitle === true
     | &nbsp; #{model.title()}

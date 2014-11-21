@@ -5,6 +5,7 @@ mediator = require '../../../lib/mediator.coffee'
 ConnectView = require '../../connect/client/connect_view.coffee'
 LightboxView = require '../../lightbox/client/lightbox_view.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
+FollowButtonView = require '../../follow_button/client/follow_button_view.coffee'
 User = require '../../../models/user.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
@@ -13,7 +14,6 @@ module.exports = class BlockView extends Backbone.View
   autoRender: true
   container: null
   containerMethod: 'append'
-
 
   events:
     'click .grid__block__source__link': 'openLink'
@@ -29,6 +29,7 @@ module.exports = class BlockView extends Backbone.View
 
     @render() if @autoRender
     @$el = $("##{@model.id}")
+    @renderFollowButton()
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
@@ -81,3 +82,14 @@ module.exports = class BlockView extends Backbone.View
       @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
     else
       @container.find('.grid__block--new-block')[@containerMethod] blockTemplate(block: @model, user: @current_user)
+
+    @renderFollowButton()
+
+  renderFollowButton: ->
+    if @model.get('class') is 'Channel' or @model.get('class') is 'User' && sd.CURRENT_USER
+      console.log 'renderFollowButton'
+
+      new FollowButtonView
+        el: @$('.grid__block__follow_btn')
+        model: @model
+        showTitle: false
