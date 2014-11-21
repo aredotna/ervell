@@ -73,8 +73,8 @@
   
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
-// privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
-// privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
+privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
+privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
 
 /* BLOCK */
 .grid__block--block // don't display non processed blocks
@@ -115,8 +115,6 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
 
 /* CHANNEL */
 .grid__block--channel
-  opacity 0.75
-  
   h2
     font-weight normal
     padding 15px 0 0 0
@@ -129,9 +127,7 @@ privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
   .grid__block__inner
     border-width 2px
     
-  &:hover
-    opacity 1.0
-    
+  &:hover    
     .grid__block__channel__stats
       visibility visible
       
