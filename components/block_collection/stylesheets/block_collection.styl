@@ -1,6 +1,7 @@
 @import '../../../node_modules/jeet/stylus/jeet'
 @import '../../layout/variables'
 
+/* GENERAL */
 .grid
   display -webkit-box
   display -moz-box
@@ -27,95 +28,21 @@
   padding-bottom 60px
   position relative
   margin-bottom 20px
-
-// don't display non processed blocks
-.grid__block--block
-  display none
-    
-.grid__block--user .grid__block__inner
-  background-color backgroundgray
-  border 2px solid bordergray
   
-  h2
-    margin 40px 0 22px 0
-    
-.grid__block--user:hover
-  color hovergray
-  
-  .grid__block__inner
-    border 2px solid lightgray
-
-.grid__block--text .valign-inner
-  vertical-align top
-
-.grid__block--channel .grid__block__inner
-  border-width 2px
-
-.grid__block__inner, .grid__block__connect-container
-  width 100%
-  height block_width
-  position relative
-  overflow hidden
-  word-break break-word
-  border 1px solid #fff
-
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
-privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
-
-.grid__block__channel__stats
-  visibility hidden
-  font-weight normal
-  line-height 1.5em
-  height 25px
-  margin 5px 0 0 0
-
-.grid__block.grid__block--channel
-  h2
-    font-weight normal
-    transition(0.1s)
-    padding 15px 0 0 0
   &:hover
-    .grid__block__inner
-      border-width 3px
-    h2
-    //   font-size 1.53em
-    //   transition(0.1s)
-
-    .grid__block__channel__stats
-      font-size s_caption + 1
+    .grid__block__author
       visibility visible
+    
+    .grid__block__title
+      display none
+      
+.grid__block__inner:hover, .grid__block__inner.is-active
+  border 1px solid bordergray
+  cursor pointer
 
-.grid__block__content .valign-inner
-  padding 0
-
-.grid__block__content__image
-  max-width block_width - 1
-  height auto
-  max-height block_width
-
-.grid__block__content__text
-  @extend .serif-text
-  height 100%
-  padding 1em 1.2em 0 1.2em
-  font-size 1em
-
-  a
-    font-weight normal
-  p
-    margin 0
-
-.grid__block__content__comment
-  height 100%
-  background-color backgroundgray
-  padding 0 1.1em 0 1.1em
-  border-top 1px solid lightgray
-
-  p
-    @extend .serif-text
-    font-size s_caption + 1
-    padding 15px
+  .grid__block__overlay
+    opacity 1
+    pointer-events all
 
 .grid__block__overlay
   opacity 0
@@ -124,54 +51,6 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   background-size: 40%
   background-repeat: no-repeat
   cursor pointer
-
-.grid__block__content__link
-  position absolute
-  top 40%
-  width 20%
-  height 20%
-  margin-left 40%
-  line-height 4.5em
-  background-color rgba(255,255,255, 0.85)
-
-  svg
-    fill textgray
-
-  &:hover
-    background-color rgba(255,255,255, 0.95)
-
-    svg
-      fill hovergray
-
-.grid__block__inner:hover, .grid__block__inner.is-active
-  border 1px solid bordergray
-  cursor pointer
-
-.grid__block__inner:hover .grid__block__overlay
-  opacity 1
-  pointer-events all
-
-.grid__block.grid__block--channel .grid__block__content
-  padding s_margin
-
-.grid__block__mini-feed
-  display none
-  font-size s_caption
-  padding-top 135px
-  font-weight bold
-  color textgray
-
-  span
-    padding 0 5px
-
-.grid__block__connect-container
-  pointer-events none
-  opacity 0
-  background-color #fff
-
-  &.is-active
-    opacity 1
-    pointer-events all
 
 .grid__block__title, .grid__block__author
   color lightgray
@@ -191,12 +70,114 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 
 .grid__block__author
   visibility hidden
+  
+privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
+privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
+privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
+privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
 
-.grid__block:hover .grid__block__author
-  visibility visible
-
-.grid__block:hover .grid__block__title
+/* BLOCK */
+.grid__block--block // don't display non processed blocks
   display none
+  
+.grid__block__content__image
+  max-width block_width - 1
+  height auto
+  max-height block_width
+
+.grid__block__content__text
+  @extend .serif-text
+  height 100%
+  padding 1em 1.2em 0 1.2em
+  font-size 1em
+
+  a
+    font-weight normal
+  p
+    margin 0
+  
+  .valign-inner
+    vertical-align top
+    
+/* USER */  
+.grid__block--user .grid__block__inner
+  background-color backgroundgray
+  border 2px solid bordergray
+  
+  h2
+    margin 40px 0 22px 0
+  
+  .grid__block__inner
+    border 2px solid lightgray
+    
+  &:hover
+    color hovergray
+
+/* CHANNEL */
+.grid__block--channel
+  h2
+    font-weight normal
+    padding 15px 0 0 0
+    //   font-size 1.53em
+    //   transition(0.1s)
+  
+  .grid__block__content
+    padding s_margin
+
+  .grid__block__inner
+    border-width 2px
+    
+  &:hover
+    .grid__block__channel__stats
+      visibility visible
+
+.grid__block__channel__stats
+  visibility hidden
+  font-weight normal
+  line-height 1.5em
+  font-size s_caption + 1
+  height 25px
+  margin 5px 0 0 0
+
+.grid__block__mini-feed
+  display none
+  font-size s_caption
+  padding-top 135px
+  font-weight bold
+  color textgray
+
+  span
+    padding 0 5px
+  
+/* COMMENT */
+.grid__block__content__comment
+  height 100%
+  background-color backgroundgray
+  padding 0 1.1em 0 1.1em
+  border-top 1px solid lightgray
+
+  p
+    @extend .serif-text
+    font-size s_caption + 1
+    padding 15px
+
+/* CONNECT */
+.grid__block__inner, .grid__block__connect-container
+  width 100%
+  height block_width
+  position relative
+  overflow hidden
+  word-break break-word
+  border 1px solid #fff
+
+.grid__block__connect-container
+  pointer-events none
+  opacity 0
+  background-color #fff
+
+  &.is-active
+    opacity 1
+    pointer-events all
 
 @media (max-width:(block_width_mar * 3) + 30)
   .grid
