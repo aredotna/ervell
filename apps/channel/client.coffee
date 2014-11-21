@@ -11,6 +11,7 @@ BlockSkeletonView = require './client/block_skeleton_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
+Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
 
@@ -19,6 +20,13 @@ module.exports = class ChannelView extends Backbone.View
     @blocks = options.blocks
 
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
+
+    @maybeSubscribe()
+
+  maybeSubscribe: ->
+    @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
+    @listener = new Bp.Backpusher @pusher, @blocks
+    console.log 'Backpusher', @listener
 
   checkUserAbilities: (collaborators) ->
     if (_.contains collaborators.pluck('id'), mediator.shared.current_user.id) or mediator.shared.current_user.canAddToChannel(@channel)

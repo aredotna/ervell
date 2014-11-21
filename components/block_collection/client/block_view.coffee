@@ -31,6 +31,8 @@ module.exports = class BlockView extends Backbone.View
     @$el = $("##{@model.id}")
     @renderFollowButton()
 
+    @model.on 'remote_update', @update, @
+
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
 
