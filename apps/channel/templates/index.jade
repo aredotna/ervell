@@ -11,8 +11,11 @@ block body
     include ../../../components/block_collection/templates/block_collection
 
   .channel--drop-zone.abs-fill
-    .inner: h1 Drop files here to add to #{channel.get('title')}
-      include ./filedrop
+    .channel--drop-zone__progress.progress.abs-fill
+    .inner
+      h1.channel--drop-zone__instructions Drop files here to add to #{channel.get('title')}
+      h1.channel--drop-zone__feedback Uploading file(s)...
+    include ./filedrop
 
 block scripts
   script( src=sd.ASSET_PATH + 'channel' + sd.JS_EXT )

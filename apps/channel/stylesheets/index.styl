@@ -3,6 +3,9 @@
   background-color rgba(255,255,255, 0.96)
   z-index lightbox_z
 
+  &.is-droppable
+    display block
+
   .inner
     pointer-events none
     position absolute
@@ -11,8 +14,27 @@
     text-align center
     v-align()
 
+  .channel--drop-zone__progress
+    width 0px
+    background-color rgba(221, 221, 221, 0.17)
+
+  input[type='file']
+    display none
+
   h1
     font-weight normal
 
-  &.is-droppable
+  .channel--drop-zone__feedback
+    display none
+
+  .channel--drop-zone__instructions
     display block
+
+  &.is-uploading
+
+    .channel--drop-zone__feedback
+      display block
+
+    .channel--drop-zone__instructions
+      display none
+

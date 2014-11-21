@@ -15,12 +15,22 @@ module.exports = class ChannelFileDropView extends Backbone.View
     @setupFileDrop()
 
   handleDrag: (e)->
-    $('.channel--drop-zone').addClass('is-droppable')
+    @$('.channel--drop-zone').addClass('is-droppable')
 
   clearDrag: (e) ->
-    $('.channel--drop-zone').removeClass('is-droppable')
+    @$('.channel--drop-zone').removeClass('is-droppable')
+    @$('.channel--drop-zone__progress').css('width', '0%')
+
+  uniqueId: (length=8) ->
+    id = ""
+    id += Math.random().toString(36).substr(2) while id.length < length
+    id.substr 0, length
 
   setupFileDrop: ->
+
+    view = @
+
+    console.log '@$("#fileupload")', @$("#fileupload")
 
     @$("#fileupload").fileupload
       acceptFileTypes: /(\.|\/)(gif|jpe?g|png|ai|eps|kml|kmz|mb|ma|tex|texi|texinfo|tfm|fla|webm|ind|indd|key|pages|pdf|epub|psd|torrent|mp3|wav|aac|oga|ogg|wma|midi|aiff|mpeg|mpg|mpg4|mp4|mp4v|swa|swf|ttc|ttf|otf|pgp|numbers|fxp|latex|mov|avi|h264|ogv|docx|doc|ppt|pptx|xls|xlsx|xlt|tif|tiff|webloc)$/i
@@ -29,10 +39,11 @@ module.exports = class ChannelFileDropView extends Backbone.View
       autoUpload: true
       dataType: "XML"
       fileInput: @$("input:file")
+      url:  mediator.shared.current_user.get('manifest').bucket
 
-      drop: (e, data) ->
-        console.log 'drop', e, data
-        mediator.publish "files:dropped",
+      drop: (e, data) =>
+        @$('.channel--drop-zone').addClass('is-uploading')
+        mediator.trigger "files:dropped",
           count: data.files.length
 
       formData: (form) ->
@@ -48,23 +59,26 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
         return data
 
-      fail: (e, data) ->
-        mediator.publish "files:fail"
+      fail: (e, data) =>
+        mediator.trigger "files:fail"
 
-      start: (e, data) ->
-        mediator.publish "files:start"
+      start: (e, data) =>
+        mediator.trigger "files:start"
 
-      done: (e, data) ->
+      done: (e, data) =>
         # Parse XML response and get image URL
         xmlDoc   = $.parseXML(data.jqXHR.responseText)
         location = $(xmlDoc).find("Location").text()
 
-        mediator.publish "upload:done", location
+        mediator.trigger "upload:done", location
 
-      stop: ->
-        mediator.publish "upload:complete"
+        @clearDrag()
 
-      progressall: (e, data) ->
+      stop: =>
+        mediator.trigger "upload:complete"
+
+      progressall: (e, data) =>
         console.log('file upload progress', e, data)
         progress = parseInt(data.loaded / data.total * 100, 10)
-        mediator.publish 'file:upload', progress
+        @$('.channel--drop-zone__progress').css('width', "#{progress}%")
+        mediator.trigger 'file:upload', progress
