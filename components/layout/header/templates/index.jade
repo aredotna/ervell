@@ -15,13 +15,13 @@ header#layout-header
       .logo-icon.dropdown--menu__trigger
         include ../../../../public/images/arena-mark.svg
       .dropdown.dropdown--size
+        a.dropdown__link(href="/#{user.get('slug')}")
+          = user.get('username')
         .dropdown__notification
           a(href="#").dropdown__link Charles Broskoski added 4 items to Color Schemes
           a(href="#").dropdown__link Chris Sherron added 43 items to This Is A Very Long Channel Name
           a(href="#").dropdown__link Charles Broskoski added 4 items to Color Schemes
-        a.dropdown__link(href="/#{user.get('slug')}")
-          = user.get('username')
-          //- [avatar]
+          a(href="#").dropdown__link Chris Sherron added 43 items to This Is A Very Long Channel Name
         a.dropdown__link(href="/about/tools")
           | Tools
           span.iconic.dropdown__icon(data-glyph="tools")

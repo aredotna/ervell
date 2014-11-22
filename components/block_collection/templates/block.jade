@@ -21,7 +21,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
                   //- li #{block.get('follower_count')} followers
             - if(block.get('class') == 'Attachment')
               img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-            - if(block.get('class') == 'User')
+            - if(block.get('class') == 'User' && user.has('username'))
               h2=block.get('username')
               +avatar(block)
               .button--inblock.button--inblock--bottom.grid__block__follow_btn &nbsp;

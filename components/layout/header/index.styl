@@ -162,29 +162,32 @@
   font-size 1em
   text-align left
   background-color backgroundgray
-  z-index 3001
   border-radius 0px
+  border 1px solid bordergray
   padding 0
+  z-index 3001
 
   &.dropdown--size
     width 300px
     right 0
-    border 1px solid bordergray
 
   .dropdown__link
     display block
-    padding 4px 14px 4px 14px
-    border-top 0px solid bordergray
-    font-weight 700
+    padding 0 14px 0 14px
+    line-height 4em
+    font-weight bold
 
   .dropdown__icon
     float right
 
   .dropdown__notification
     width 100%
+    height 200px
+    overflow scroll
     padding 8px 0 8px 0
     border-bottom 1px solid bordergray
-    background-color backgroundgray
+    border-top 1px solid bordergray
+    background-color secondbackgroundgray
 
     a
       display block
@@ -213,7 +216,6 @@
 
 .dropdown--is_active .dropdown--menu__trigger:after
   transform rotate(180deg)
-
 
 @media (max-width:500px)
 
