@@ -30,15 +30,15 @@
   margin-bottom 20px
 
 .grid__block--block .grid__block__inner
-  background-size 30px 30px
+  background-size 80px 80px
   background-image linear-gradient(
     45deg,
-    rgba(black, 0.1)  25%,
-    transparent       25%,
-    transparent       50%,
-    rgba(black, 0.1)  50%,
-    rgba(black, 0.1)  75%,
-    transparent       75%,
+    rgba(bordergray, 0.2)   25%,
+    transparent             25%,
+    transparent             50%,
+    rgba(bordergray, 0.2)   50%,
+    rgba(bordergray, 0.2)   75%,
+    transparent             75%,
     transparent
   )
   -webkit-animation loading 0.5s linear infinite
@@ -48,7 +48,7 @@
   from
     background-position 0 0
   to
-    background-position 60px 30px
+    background-position 160px 80px
 
 .grid__block--user .grid__block__inner
   background-color backgroundgray
@@ -132,16 +132,14 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 /* USER */
 .grid__block--user .grid__block__inner
   background-color backgroundgray
-  border 2px solid bordergray
+  border 2px solid lightgray
 
   h2
     margin 40px 0 22px 0
 
-  .grid__block__inner
-    border 2px solid lightgray
-
   &:hover
     color hovergray
+    border 2px solid bordergray
 
 /* CHANNEL */
 .grid__block--channel
