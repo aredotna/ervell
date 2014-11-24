@@ -48,9 +48,8 @@ block body
 				input.input--wide.input--relative.is-block(
           name='email', type='email', placeholder='Email', required, autofocus= autofocus
         )
-				| You can attach two channels worth of notice below:
-				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
-				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel name', required, autofocus= autofocus)
+				| You can attach channels worth of notice below:
+				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel names, comma separated', required, autofocus= autofocus)
 				button.button--wide.button--border.button--add Send invitation &rarr;
 
 			h2#find-friends.static--title Find Friends
@@ -74,7 +73,6 @@ block body
 				a(href="arena/feedback") feedback channel.
 				br
 				br
-
 	// 
 		h3.static__menu
 			br
