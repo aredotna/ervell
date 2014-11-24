@@ -15,6 +15,10 @@ s:
 sf:
 	$(BIN)/forever $(BIN)/coffee index.coffee
 
+# Start server in debug mode & open node inspector
+ssd:
+	$(BIN)/node-inspector & $(BIN)/coffee --nodejs --debug index.coffee
+
 # Run all of the project-level tests, followed by app-level tests
 test: assets
 	$(BIN)/mocha $(shell find test -name '*.coffee' -not -path 'test/helpers/*')
