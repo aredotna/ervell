@@ -36,7 +36,6 @@ module.exports = class UserBlocks extends SearchBlocks
 
     collection = _.flatten _.values grouped_blocks
 
-    collection.concat(grouped_blocks['undefined']) if grouped_blocks['undefined']
+    collection = collection.concat(grouped_blocks['undefined']) if grouped_blocks['undefined']
 
-    collection
-
+    return collection
