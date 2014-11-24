@@ -17,7 +17,7 @@ sf:
 
 # Start server in debug mode & open node inspector
 ssd:
-	$(BIN)/node-inspector & $(BIN)/coffee --nodejs --debug index.coffee
+	$(BIN)/node-inspector --web-port=7777 & $(BIN)/coffee --nodejs --debug index.coffee
 
 # Run all of the project-level tests, followed by app-level tests
 test: assets
