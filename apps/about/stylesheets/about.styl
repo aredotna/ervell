@@ -38,14 +38,18 @@
 	&:hover
 		color hovergray
 
-.static--title
+.static--title, .static--title--top
 	position relative
 	float left
 	width 100%
-	font-weight bold
+	text-align center
 	color hovergray
 	margin 0 0 24px 0
 
+.static--title--top
+	text-align left
+	font-weight bold
+	
 .static--text
 	position relative
 	float left
@@ -71,7 +75,7 @@
 	font-size 1em
 	line-height 1.5em
 	font-weight normal
-	margin 0 0 130px 0
+	margin 0 0 110px 0
 	
 	input
 		background-color bordergray
@@ -85,15 +89,15 @@
 	button
 		margin 10px 0 0 0
 	
-	.static__tools__frame--premium, .static__tools__frame--supporter
-		text-align left
-		color hovergray
-		
-		span
-			background-color #D0F097
+.static__tools__frame--supporter
+	text-align left
+	border 2px solid public
+	
+	span
+		// background-color #D0F097
 	
 .static__tools__frame--premium
-	opacity 0.4
+	opacity 0.5
 
 .static__tools__bookmarklet-button, .static__tools__social-button
 	width 100%

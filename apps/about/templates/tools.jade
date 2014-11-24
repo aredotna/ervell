@@ -9,15 +9,16 @@ block body
 			img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 
 		.static__tools.static--text
-			h2.static--title Tools
+			h2.static--title--top Tools
+
 			h2#bookmarklet.static--title Bookmarklet
 			h2.static__tools__frame
 				.static__tools__bookmarklet-button Drag this to your browser toolbar &#10548;
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
-
+			
 			h2#extra-tools.static--title Supporter tools
-			h2.static__tools__frame
-				ul.static__tools__frame--supporter
+			h2.static__tools__frame.static__tools__frame--supporter
+				ul
 					li 
 					// span &#10687; 
 					| &#8226; 
@@ -29,14 +30,10 @@ block body
 				button.button--wide.button--border.button--add $12 / year - Activate &rarr;
 				br
 				br
-				| In order to sustain its expenses and future development without advertising, Arena needs the support of its users. By activating these tools packages you contribute to our 
+				span In order to sustain its expenses and future development without advertising, Arena needs the support of its users. By activating these tools packages you contribute to our 
 				a(href="/about#principles") self-sustainability 
 				| goal.
-				br
-				br
-				| If there are features or tools you would like to see implemented feel free to add suggestions in our 
-				a(href="arena/feedback") feedback channel.
-			
+
 			h2#extra-tools.static--title.static__tools__frame--premium Premium tools (coming soon)
 			h2.static__tools__frame.static__tools__frame--premium
 				ul
@@ -45,7 +42,7 @@ block body
 					li &#8226; one more feature
 					li &#8226; new features will be added periodically
 				button.button--wide.button--border.button--add(style="opacity: 0.4") $45 / year - Activate &rarr;
-			
+
 			h2#invite.static--title Invite someone
 			h2.static__tools__frame
 				| Add an email address to collaborate with someone:
@@ -73,7 +70,12 @@ block body
 				br
 				br
 				strong Note: 
-				| anyone possessing your personal 'Add via E-mail' address can post to your account.
+				| anyone possessing your personal "Add via E-mail" address can post to your account.
+
+			h2.static--title.light If there are features or tools you would like to see implemented feel free to add suggestions in our 
+				a(href="arena/feedback") feedback channel.
+				br
+				br
 
 	// 
 		h3.static__menu
@@ -95,7 +97,6 @@ block body
 			a(href="#find-friends").static__menu--light Find friends
 			br
 			a(href="#add-via-email").static__menu--light Add via email
-
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

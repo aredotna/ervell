@@ -63,7 +63,6 @@ body
       color textgray
       border-bottom 2px solid textgray
 
-
 a.home__section-intro__menu, a.home__section-intro__menu--mobile
   position relative
   float left
@@ -213,7 +212,7 @@ a.home__section-intro__menu--mobile
       border 0
       
 for i in (1..5)
-  @media (min-width: (block_width_mar * i) + 20)
+  @media (min-width:(block_width_mar * i) + 20)
     .home__section__container
       center(block_width_mar * i)
 
