@@ -63,7 +63,6 @@ body
       color textgray
       border-bottom 2px solid textgray
 
-
 a.home__section-intro__menu, a.home__section-intro__menu--mobile
   position relative
   float left
@@ -180,9 +179,11 @@ a.home__section-intro__menu--mobile
     width 280px
     margin auto
     color lightgray
+    border-top 1px solid bordergray
 
     &:hover
       color hovergray
+      border-top 1px solid textgray
 
 .home__section--footer
   position relative
@@ -211,7 +212,7 @@ a.home__section-intro__menu--mobile
       border 0
       
 for i in (1..5)
-  @media (min-width: (block_width_mar * i) + 20)
+  @media (min-width:(block_width_mar * i) + 20)
     .home__section__container
       center(block_width_mar * i)
 
@@ -237,7 +238,7 @@ for i in (1..5)
 
   .home__section-intro__text
     clear both
-    padding 20px 10px 40px 10px
+    padding 20px 0 40px 0
 
   a.home__section-intro__menu--mobile
     display inline
