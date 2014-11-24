@@ -20,21 +20,23 @@ module.exports = class UserBlocks extends SearchBlocks
 
     channel_ids = _.pluck data.channels, 'id'
 
+    existing_channel_ids = _.pluck @getAllWithClass('Channel'), 'id'
+
+    channel_ids = channel_ids.concat(existing_channel_ids)
+
     grouped_blocks = _.groupBy data.blocks, (block) ->
       ids = _.intersection channel_ids, block.channel_ids
-      return (if ids? then ids[0] else 'default')
+      return (if ids? then ids[0] else 'undefined')
 
-    for id in channel_ids
+    for id in _.keys grouped_blocks
       if grouped_blocks[id]
-        channel = _.find data.channels, (channel) -> channel.id is id
+        channel = _.findWhere data.channels, id: id
+        channel = @findWhere({class: 'Channel', id: id})?.attributes if !channel
         grouped_blocks[id].unshift channel if channel
 
     collection = _.flatten _.values grouped_blocks
 
     collection.concat(grouped_blocks['undefined']) if grouped_blocks['undefined']
 
-    console.log 'collection', collection
-
     collection
-
 

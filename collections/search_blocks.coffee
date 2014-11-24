@@ -24,4 +24,4 @@ module.exports = class SearchBlocks extends Blocks
     return false if @options.page > @total_pages
 
     ++@options.page
-    @fetch remove: false
+    @fetch remove: false, merge: true
