@@ -48,6 +48,7 @@
     "jeet": "*",
     "rupture": "*",
     "axis": "*",
-    "cookies-js": "*"
+    "cookies-js": "*",
+    "node-inspector": "*"
   }
 }
