@@ -8,6 +8,9 @@ FollowButtonView = require '../../follow_button/client/follow_button_view.coffee
 
 module.exports = class PathView extends Backbone.View
 
+  events:
+    'click .toggle-group a' : 'filterBlocks'
+
   initialize: (options) ->
     super
 
@@ -19,3 +22,14 @@ module.exports = class PathView extends Backbone.View
       new FollowButtonView
         el: @$('.follow_button')
         model: @model
+
+  filterBlocks: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+
+    $ct = $(e.currentTarget)
+
+    mediator.trigger 'blocks:filtered', key: $ct.data('key'), value: $ct.data('value')
+
+    $('.toggle-group a').removeClass 'is-active'
+    $ct.addClass 'is-active'

@@ -32,11 +32,21 @@ module.exports = class BlockView extends Backbone.View
     @renderFollowButton()
 
     @model.on 'remote_update', @update, @
+    @model.on 'show', @show, @
+    @model.on 'hide', @hide, @
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
 
     super
+
+  show: ->
+    console.log 'show model', @model.get('class'), @$el
+    @$el.show()
+
+  hide: ->
+    console.log 'hide model', @model.get('class'), @$el
+    @$el.hide()
 
   loadConnectView: (e)=>
     e.preventDefault()
