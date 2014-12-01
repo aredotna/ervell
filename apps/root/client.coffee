@@ -1,5 +1,3 @@
-# // TODO: make into a block view
-
 Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data

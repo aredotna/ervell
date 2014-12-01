@@ -4,6 +4,8 @@ SearchBarView = require '../../search_bar/client/view.coffee'
 AuthModalView = require '../../auth_modal/view.coffee'
 AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
+Notifications = require "../../../collections/notifications.coffee"
+SmallFeedView = require '../../feed/client/small_feed_view.coffee'
 sd = require('sharify').data
 Backbone.$ = $
 
@@ -30,6 +32,11 @@ module.exports = class HeaderView extends Backbone.View
 
     if !sd.CURRENT_USER
       new AuthRouter pushState: false
+    else
+      notifications = new Notifications()
+      new SmallFeedView
+        collection: notifications
+        el: @$('.dropdown__notifications')
 
   setActive: (e)->
     @$el.addClass 'is-active'
