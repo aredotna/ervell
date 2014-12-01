@@ -1,4 +1,5 @@
-mixin avatar(user)
+mixin avatar(user, avatar_size)
+  - avatar_size = avatar_size || 'display'
   - var splitName = user.get('username').split(" ")
 
   if splitName
@@ -9,9 +10,9 @@ mixin avatar(user)
 
     - var initials = initials.join("").substring(0,4)
 
-  .user__avatar
+  .user__avatar(class="user__avatar--#{avatar_size}")
     .user__avatar__initials.valign-outer
       .valign-inner
         .user__avatar__initials__content=initials
 
-    img(src="#{user.get('avatar_image').display}").user__avatar__image
+    img(src="#{user.get('avatar_image')[avatar_size]}").user__avatar__image
