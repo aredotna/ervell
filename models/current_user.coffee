@@ -60,3 +60,10 @@ module.exports = class CurrentUser extends User
       type: method
       success: (response)->
         mediator.trigger successEvent, response
+
+
+  resetNotificationCount: -> @set 'notification_count', 0
+
+  incrementNotificationCount: -> @set 'notification_count', parseInt(@attributes.notification_count) + 1
+
+  decrementNotificationCount: -> @set 'notification_count', parseInt(@attributes.notification_count) - 1

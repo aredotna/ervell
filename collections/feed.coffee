@@ -95,7 +95,7 @@ module.exports = class Feed extends Base
 
       - new Date group[0].created_at
 
-    groups = _.map groups, (group) -> 
+    groups = _.map groups, (group) ->
       _.map group, (item) -> new FeedItem(item)
 
     groups
