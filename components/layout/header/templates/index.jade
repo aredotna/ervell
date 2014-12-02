@@ -11,8 +11,12 @@ header#layout-header
       //- rendered by client
 
   if user && user.has('username')
-    .new-channel-btn.iconic(data-glyph="plus") &nbsp;
-      .new-channel-btn--caption New channel
+    .new-channel-dropdown.dropdown--menu
+      .new-channel-btn.iconic(data-glyph="plus").dropdown--menu__trigger &nbsp;
+        .new-channel-btn--caption New channel
+      .dropdown.new-channel-dropdown
+        //- rendered by client
+
     .logo.dropdown--menu.right
       .logo-icon.dropdown--menu__trigger
         include ../../../../public/images/arena-mark.svg

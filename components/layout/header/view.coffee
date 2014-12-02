@@ -45,7 +45,7 @@ module.exports = class HeaderView extends Backbone.View
   unsetActive: (e)-> @$el.removeClass 'is-active'
 
   toggleDropdown: (e)->
-    $el = $(e.currentTarget).parent().parent()
+    $el = $(e.currentTarget).parent()
     ac = $el.toggleClass('dropdown--is_active')
 
   openAuth: (options) ->
