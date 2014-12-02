@@ -2,11 +2,11 @@
 # Model for Channel, takes a username and channel_slug as params
 #
 
-Base = require "./base.coffee"
+Block = require "./block.coffee"
 sd = require("sharify").data
 params = require 'query-params'
 
-module.exports = class Channel extends Base
+module.exports = class Channel extends Block
   defaultOptions:
     direction: 'desc'
     sort: 'position'

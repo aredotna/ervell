@@ -6,6 +6,7 @@ AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
 Notifications = require "../../../collections/notifications.coffee"
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
+NewChannelView = require '../../new_channel/client/new_channel_view.coffee'
 sd = require('sharify').data
 Backbone.$ = $
 
@@ -37,6 +38,9 @@ module.exports = class HeaderView extends Backbone.View
       new SmallFeedView
         collection: notifications
         el: @$('.dropdown__notifications')
+
+      new NewChannelView
+        el: @$('.new-channel-dropdown__container')
 
   setActive: (e)->
     @$el.addClass 'is-active'

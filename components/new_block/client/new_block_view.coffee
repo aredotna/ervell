@@ -19,8 +19,6 @@ module.exports = class NewBlockView extends Backbone.View
     @$container = options.container
     @$field = @$('.grid__block--new-block__content-field')
 
-    console.log 'initialize NewBlockView'
-
     @render() if options.autoRender
 
   showAddBlockForm: ->
