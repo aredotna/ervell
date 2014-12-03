@@ -95,5 +95,5 @@ module.exports = (app) ->
   app.use require "../apps/user"
   app.use require "../apps/channel"
 
-  require('artsy-error-handler') app,
-    template: path.resolve(__dirname, '../components/layout/templates/error.jade')
+  # require('artsy-error-handler') app,
+  #   template: path.resolve(__dirname, '../components/layout/templates/error.jade')
