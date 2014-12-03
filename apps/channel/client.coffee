@@ -26,17 +26,18 @@ module.exports = class ChannelView extends Backbone.View
   maybeSubscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
     @listener = new Bp.Backpusher @pusher, @blocks
-    console.log 'Backpusher', @listener
 
   checkUserAbilities: (collaborators) ->
     if (_.contains collaborators.pluck('id'), mediator.shared.current_user.id) or mediator.shared.current_user.canAddToChannel(@channel)
       should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
-      new NewBlockView
-        el: $ ".grid__block--new-block"
-        container: $ '.grid'
-        model: @channel
-        blocks: @blocks
-        autoRender: should_render
+
+      if should_render
+        new NewBlockView
+          el: $ ".grid__block--new-block"
+          container: $ '.grid'
+          model: @channel
+          blocks: @blocks
+          autoRender: should_render
 
       new ChannelFileDropView
         el: @$el

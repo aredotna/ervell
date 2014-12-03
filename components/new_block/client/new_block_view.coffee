@@ -39,7 +39,6 @@ module.exports = class NewBlockView extends Backbone.View
     @$field.val() isnt ""
 
   createBlock: ->
-    console.log 'fieldIsntEmpty', @fieldIsntEmpty()
     if @fieldIsntEmpty()
       block = new Block
 
@@ -47,8 +46,6 @@ module.exports = class NewBlockView extends Backbone.View
         block.set source: @$field.val(), { silent: true }
       else
         block.set content: @$field.val(), { silent: true }
-
-      console.log 'our new block', block.toJSON(), @blocks, @blocks.create
 
       @blocks.create block.toJSON(),
         url: "#{sd.API_URL}/channels/#{@model.get('slug')}/blocks"
