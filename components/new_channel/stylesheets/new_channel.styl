@@ -1,25 +1,33 @@
 @import '../../layout/variables'
 
 .new-channel-dropdown__container
-
+  
   .grid__block
     margin 0
+    max-width 298px
+    min-width 298px
 
+  .grid__block__inner
+    height 298px
+    
+  .grid__block--channel .grid__block__content
+    padding 0
+  
   .grid__block__editable-title, .grid__block__editable-title:focus
     color inherit
     font-size 1.5em
     text-align center
+    padding 0
 
   .grid__block__channel__stats
-    visibility: visible
+    visibility visible
 
   .grid__block__privacy--setting
-    font-size 13px
+    font-size s_caption
     font-weight bold
     text-align center
     line-height 2
-    margin-bottom 15px
-
+    margin 10px 0 15px 0
 
     label
       font-weight normal
@@ -29,4 +37,4 @@
       display inline-block
 
       a
-        color #9d9d9d
+        color lightgray
