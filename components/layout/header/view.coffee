@@ -51,6 +51,7 @@ module.exports = class HeaderView extends Backbone.View
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()
     ac = $el.toggleClass('dropdown--is_active')
+    $el.find('input').focus()
 
   openAuth: (options) ->
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
