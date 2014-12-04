@@ -3,7 +3,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}")
     .grid__block__content.valign-outer
       .valign-inner
         - if(block.get('class') == 'Channel')
-          h2=block.get('title')
+          input.grid__block__editable-title(type="text" value="")
           .grid__block__channel__stats
             ul.grid__block__channel__stats__list
               li by #{block.get('user').username}
