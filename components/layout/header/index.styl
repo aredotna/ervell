@@ -185,6 +185,7 @@
 
   .dropdown__icon
     float right
+    height 100%
 
   .dropdown__notifications
     width 100%
@@ -238,6 +239,10 @@
 
   .new-channel-btn--caption
     display none
+    
+  .dropdown
+    .user__avatar--thumb .user__avatar__image
+      top 6px
 
 @media (max-width:350px)
   .dropdown
@@ -251,8 +256,17 @@
 
     .dropdown__link
       max-width 280px
-      height 50px
+      height 40px
+      line-height 40px
       margin auto
+    
+    .user__avatar--thumb
+      height 30px
+      width 30px
+      line-height 30px
+    
+    .user__avatar--thumb .user__avatar__image
+      top 5px
 
   .dropdown.dropdown--size
     width 100%
