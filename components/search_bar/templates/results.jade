@@ -1,10 +1,10 @@
 ul.search__results__list
   for result in results
-    li.search__results__result
+    li.search__results__result: a(href="/#{result.get('user').slug}/#{result.get('slug')}")
       if result.get('kind') != 'profile'
         ul.breadcrumb
-          li: a(href="/#{result.get('user').slug}")= result.get('user').username
-          li(class="search__results__result--privacy-#{result.getVisibility()}"): a(href="/#{result.get('user').slug}/#{result.get('slug')}")= result.get('title')
+          li: = result.get('user').username
+          li(class="search__results__result--privacy-#{result.getVisibility()}"): = result.get('title')
       else
         ul.breadcrumb
-          li: a(href="/#{result.get('user').slug}")= result.get('user').username
+          li: = result.get('user').username
