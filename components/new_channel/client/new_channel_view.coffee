@@ -8,6 +8,9 @@ newChannelTemplate = -> require('../templates/new_channel.jade') arguments...
 
 module.exports = class NewChannelView extends Backbone.View
 
+  events:
+    'click .metadata--selector__option' : 'toggleVisibility'
+
   initialize: (options)->
     @model = new Channel
       class: 'Channel'
@@ -17,5 +20,22 @@ module.exports = class NewChannelView extends Backbone.View
 
     @render()
 
+  toggleVisibility: (e)->
+    e.stopPropagation()
+    e.preventDefault()
+
+    $selection = $(e.currentTarget)
+
+    @$(".grid__block__inner").
+      attr('class', 'grid__block__inner').
+      addClass "grid__block__inner--privacy-#{$selection.data('value')}"
+
+    @$('.metadata--selector__option.is-active').removeClass 'is-active'
+    $selection.addClass 'is-active'
+
+    @model.set 'status', $selection.data('value')
+
+    @$('#layout-header__search__input').focus()
+
   render: ->
-    @$el.append newChannelTemplate(block: @model)
+    @$el.html newChannelTemplate(block: @model)
