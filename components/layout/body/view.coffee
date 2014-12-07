@@ -9,6 +9,7 @@ LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 module.exports = class BodyView extends Backbone.View
 
   events:
+    'click'                                       : 'bodyClick'
     'click a[data-disabled]'                      : 'disable'
     'click a[data-client]:not([data-disabled])'   : 'intercept'
 
@@ -38,3 +39,5 @@ module.exports = class BodyView extends Backbone.View
   disable: (e)->
     e.preventDefault()
     e.stopPropagation()
+
+  bodyClick: (e) -> mediator.trigger 'body:click', e

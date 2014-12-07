@@ -28,8 +28,6 @@ module.exports = class Feed extends Base
     # name while other object resource access urls take the plural
     # /user/:id/feed | /users/:id/channels
 
-    console.log 'FEED @options.type', @options.type
-
     switch @options.type
       when "primary"
         url += "/feed"

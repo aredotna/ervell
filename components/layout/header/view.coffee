@@ -20,6 +20,7 @@ module.exports = class HeaderView extends Backbone.View
     'click .btn-signup'                   : 'signup'
     'click .dropdown--menu__trigger'      : 'toggleDropdown'
 
+
   initialize: (options) ->
     @searchBarView = new SearchBarView
       el: @$('.layout-header__search')
@@ -27,6 +28,7 @@ module.exports = class HeaderView extends Backbone.View
       $results: @$('.layout-header__search__results')
 
     mediator.on 'open:auth', @openAuth, @
+    mediator.on 'body:click', @closeDropdown, @
 
     $('section > .path').waypoint 'sticky',
       offset: 1
@@ -55,6 +57,10 @@ module.exports = class HeaderView extends Backbone.View
 
   openAuth: (options) ->
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
+
+  closeDropdown: (e)->
+    if !@$el.is(e.target) and @$el.has(e.target).length is 0
+      $('.dropdown--is_active').removeClass 'dropdown--is_active'
 
   signup: (e) ->
     e.preventDefault()
