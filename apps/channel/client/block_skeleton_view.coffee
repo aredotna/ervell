@@ -30,7 +30,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
       wait: true
 
   appendBlock: (model)->
-    console.log 'appendBlock', model
     containerMethod = if model?.options?.wait is true then 'after' else 'append'
     new BlockView
       container: @$el

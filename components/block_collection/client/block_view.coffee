@@ -41,11 +41,9 @@ module.exports = class BlockView extends Backbone.View
     super
 
   show: ->
-    console.log 'show model', @model.get('class'), @$el
     @$el.show()
 
   hide: ->
-    console.log 'hide model', @model.get('class'), @$el
     @$el.hide()
 
   loadConnectView: (e)=>

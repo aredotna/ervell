@@ -7,6 +7,7 @@ LightboxView = require './client/lightbox_view.coffee'
 module.exports = class LightboxRouter extends Backbone.Router
 
   routes:
+    '' : 'hideBlock'
     'block/:id': 'showBlock'
 
   initialize: ->
@@ -14,12 +15,17 @@ module.exports = class LightboxRouter extends Backbone.Router
     mediator.on 'lightbox:closed', @removeRoute, @
     mediator.on 'lightbox:opened', @showBlock, @
 
-  closeLightbox: -> # nothing for now
+  hideBlock: -> # nothing for now
 
   removeRoute: ->
     loc = window.location
     history.pushState "", document.title, loc.pathname + loc.search
     @navigate '', trigger: false, replace: false
+
+  hideBlock: ->
+    console.log 'hideBlock'
+    if @lbv
+      @lbv.remove()
 
   showBlock: (id)->
     block = new Block {id: id}

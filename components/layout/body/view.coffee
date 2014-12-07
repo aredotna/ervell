@@ -33,7 +33,7 @@ module.exports = class BodyView extends Backbone.View
   intercept: (e)->
     e.preventDefault()
 
-    Backbone.history.navigate "#{$(e.currentTarget).attr('href')}", trigger: true, replace: true
+    Backbone.history.navigate "#{$(e.currentTarget).attr('href')}", trigger: true, replace: false
 
   disable: (e)->
     e.preventDefault()
