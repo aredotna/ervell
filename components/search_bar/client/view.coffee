@@ -2,6 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
 sd = require("sharify").data
+mediator = require '../../../lib/mediator.coffee'
 SearchBlocks = require '../../../collections/search_blocks.coffee'
 
 resultsTemplate = -> require('../templates/results.jade') arguments...
@@ -66,6 +67,8 @@ module.exports = class SearchBarView extends Backbone.View
     @$el.addClass('is-active')
     @$el.addClass('has-results')
     @$results.html resultsTemplate(results: @collection.models)
+
+    mediator.trigger 'search:loaded'
 
   searchUnloaded: ->
     @$el.removeClass('is-loading')

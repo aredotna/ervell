@@ -29,6 +29,7 @@ module.exports = class HeaderView extends Backbone.View
 
     mediator.on 'open:auth', @openAuth, @
     mediator.on 'body:click', @closeDropdown, @
+    mediator.on 'search:loaded', @closeDropdown, @
 
     $('section > .path').waypoint 'sticky',
       offset: 1
@@ -59,7 +60,8 @@ module.exports = class HeaderView extends Backbone.View
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
 
   closeDropdown: (e)->
-    if !@$el.is(e.target) and @$el.has(e.target).length is 0
+    console.log 'trying to closeDropdown'
+    if !e or (!@$el.is(e.target) and @$el.has(e.target).length is 0)
       $('.dropdown--is_active').removeClass 'dropdown--is_active'
 
   signup: (e) ->
