@@ -18,10 +18,10 @@ module.exports = class FeedView extends Chaplin.View
 
     @current_user = new User sd.CURRENT_USER
 
-    # @infinite_view = new InfiniteView
-    #   context: @$el
-    #   collection: @collection
-    #   itemSelector: @$el
+    @infinite_view = new InfiniteView
+      context: @$el
+      collection: @collection
+      itemSelector: @$el
 
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)

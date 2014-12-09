@@ -20,7 +20,6 @@ module.exports = class ConnectResultsView extends Backbone.View
   makeConnection: (e)=>
     target = $(e.currentTarget)
     id = target.data('id')
-    console.log('make connection to channel id', id, @block)
     target.addClass 'is-loading'
 
     url = "#{sd.API_URL}/channels/#{id}/connections"
