@@ -92,9 +92,9 @@ body.is-lightbox
   font-family Georgia
   font-size 1.2em
   line-height 1.5
-  top 50%
   max-width 80%
   position relative
+  top 50%
   v-align()
 
   .lightbox__content__text__inner
@@ -103,6 +103,12 @@ body.is-lightbox
     box-shadow 0px 0px 4px rgba(0,0,0,0.1)
     max-width 650px
     margin 0 auto
+    position relative
+    float left
+    left 50%
+    height auto
+    margin-left -325px
+    margin-bottom 50px
 
 .lightbox__feed
   position relative
@@ -118,6 +124,16 @@ body.is-lightbox
     width 65%
     margin auto
 
+@media (max-width:650px)
+  .lightbox__content__text
+    max-width 100%
+    
+    .lightbox__content__text__inner
+      width 100%
+      left 0
+      margin-left 0
+      padding 15px
+    
 @media (max-width:500px)
   .lightbox__content
     padding 10px
