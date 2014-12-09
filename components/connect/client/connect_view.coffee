@@ -98,6 +98,7 @@ module.exports = class ConnectView extends Backbone.View
     @collection.fetch
       data:
         per: 3
+        show_open: true
         filter:
           type: 'channel'
 

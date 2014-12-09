@@ -10,9 +10,10 @@ newBlockTemplate = -> require('../templates/new_block.jade') arguments...
 module.exports = class NewBlockView extends Backbone.View
 
   events:
-    'click .grid__block--new-block__plus_button' : 'showAddBlockForm'
-    'click .grid__block--new-block__cancel' : 'cancelForm'
-    'click .grid__block--new-block__submit' : 'createBlock'
+    'click #grid__block--new-block__content-field'          : 'setActive'
+    'focus textarea#grid__block--new-block__content-field'  : 'setActive'
+    'click .grid__block--new-block__cancel'                 : 'cancelForm'
+    'click .grid__block--new-block__submit'                 : 'createBlock'
 
   initialize: (options)->
     @blocks = options.blocks
@@ -21,9 +22,9 @@ module.exports = class NewBlockView extends Backbone.View
 
     @render() if options.autoRender
 
-  showAddBlockForm: ->
+  setActive: ->
+    console.log 'should set active'
     @$el.addClass 'active'
-    @$('.grid__block--new-block__add-block').addClass 'active'
 
   cancelForm: (e)->
     $parent = $(e.target).closest('.grid__block--new-block__form')

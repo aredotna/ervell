@@ -2,17 +2,17 @@
 
 /* add block field */
 
-.grid__block--new-block 
+.grid__block--new-block
   .grid__block__inner
     background-color backgroundgray
-    
+
     &:hover
       border 1px solid #fff
       cursor text
 
   fieldset
     margin 0
-  
+
   .plus-placeholder
     position absolute
     width 90%
@@ -20,6 +20,7 @@
     top 38%
     font-size 40px
     text-align center
+    pointer-events none
     color lightgray
 
 .grid__block--new-block__content-field
@@ -31,11 +32,11 @@
   background none
   antialiased()
 
-.grid__block__inner:hover 
+.grid__block__inner:hover, .grid__block__inner.active
   .grid__block--new-block__content-field
     opacity 1
     background-color secondbackgroundgray
-  
+
   .plus-placeholder
     display none
 
