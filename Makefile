@@ -44,6 +44,7 @@ verify:
 	if [ $(shell wc -c < public/assets/layout.min.js.cgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "layout JS exists" ; else echo; echo "Layout JS asset compilation failed" ; exit 1 ; fi
 
 deploy: assets verify
+	ulimit -n 10000
 	$(BIN)/bucketassets -d public/assets -b ervell-production
 	$(BIN)/bucketassets -d public/images -b ervell-production
 	heroku config:add \
