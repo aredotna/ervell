@@ -14,7 +14,6 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     @blocks.each (block) => @renderBlockView block
     IconicJS().inject 'img.iconic'
-
     super
 
   renderBlockView: (block, autoRender = false)=>

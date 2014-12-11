@@ -23,7 +23,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
     super
 
   makeBlock: (location) ->
-    console.log 'makeBlock'
     block = new Block block_type: "Block", source: location
     @collection.create block.toJSON(),
       url: "#{sd.API_URL}/channels/#{@channel.get('slug')}/blocks"

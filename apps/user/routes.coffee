@@ -35,7 +35,6 @@ _ = require 'underscore'
     res.render "index", author: user, blocks: blocks.models
 
 @followers = (req, res, next) ->
-
   user = new User
     id: req.params.username
 
@@ -58,7 +57,11 @@ _ = require 'underscore'
     error: (m, err) -> next err
 
 
-  render = _.after 2, -> res.render "index", blocks: blocks.models, author: user, followers: true
+  render = _.after 2, =>
+    res.render "index",
+      blocks: blocks.models
+      author: user
+      followers: true
 
 @following = (req, res, next) ->
 

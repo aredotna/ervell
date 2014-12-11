@@ -13,7 +13,7 @@ UserBlockCollectionView = require '../../components/block_collection/client/user
 
 module.exports.init = ->
   if sd.FOLLOWING || sd.FOLLOWERS
-    blocks = new FollowBlocks null,
+    blocks = new FollowBlocks sd.BLOCKS,
       object_id: sd.USER.id
       object_type: 'users'
       suffix: if sd.FOLLOWING then 'ing' else 'ers'

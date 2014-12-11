@@ -97,8 +97,6 @@ module.exports = class BlockView extends Backbone.View
 
   renderFollowButton: ->
     if @model.get('class') is 'Channel' or @model.get('class') is 'User' && sd.CURRENT_USER
-      console.log 'renderFollowButton'
-
       new FollowButtonView
         el: @$('.grid__block__follow_btn')
         model: @model
