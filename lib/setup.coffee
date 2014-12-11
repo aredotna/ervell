@@ -20,6 +20,7 @@ path = require "path"
 stylus = require "stylus"
 nib = require "nib"
 rupture = require 'rupture'
+artsyError = require 'artsy-error-handler'
 
 # Inject some constant data into sharify
 sharify.data =
@@ -85,6 +86,7 @@ module.exports = (app) ->
     SECURE_ARENA_URL: API_URL
     userKeys: ['id', 'first_name', 'last_name', 'email', 'slug', 'following_ids', 'notification_count', 'username', 'authentication_token', 'manifest', 'announcements', 'shortcuts_id', 'avatar_image']
 
+  app.use artsyError.helpers
   app.use arena_pp
   app.use localsMiddleware
 
@@ -95,5 +97,7 @@ module.exports = (app) ->
   app.use require "../apps/user"
   app.use require "../apps/channel"
 
-  # require('artsy-error-handler') app,
-  #   template: path.resolve(__dirname, '../components/layout/templates/error.jade')
+  # Finally 404 and error handling middleware when the request wasn't handled
+  # successfully by anything above.
+  artsyError.handlers app,
+    template: path.resolve(__dirname, '../components/layout/templates/error.jade')
