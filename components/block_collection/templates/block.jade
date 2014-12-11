@@ -7,7 +7,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
         .grid__block__content.valign-outer
           .valign-inner
             - if(block.has('image'))
-              img(src="#{block.getImageSize('display')}" alt="#{block.get('description')}").grid__block__content__image
+              img(src="#{block.resizeImage()}" alt="#{block.get('description')}").grid__block__content__image
             - if(block.get('class') == 'Text')
               .grid__block__content__text
                 != block.get('content_html')

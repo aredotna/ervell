@@ -15,6 +15,9 @@ module.exports = class Block extends Base
     else
       @get('title')
 
+  resizeImage: (width = 330, height = 330)->
+    "http://images.are.na/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize('display'))}"
+
   getImageSize: (size) ->
     if @has('image')
       @get('image')?[size]?.url
