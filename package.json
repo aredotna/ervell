@@ -27,6 +27,7 @@
     "moment": "*",
     "backbone-fetch-cache": "*",
     "blueimp-file-upload": "*",
+    "diacritics" : "*",
     "jquery.ui.widget": "*"
   },
   "devDependencies": {

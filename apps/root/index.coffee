@@ -1,8 +1,6 @@
 #
-# Handles all root requests
-#
-# TODO: If logged in, show feed, if not show landing
-#
+# /
+# (root requests)
 #
 
 express = require "express"

@@ -1,7 +1,3 @@
-#
-# Routes file that exports route handlers for ease of testing.
-#
-
 User = require "../../models/user"
 UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
