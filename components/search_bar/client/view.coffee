@@ -19,6 +19,7 @@ module.exports = class SearchBarView extends Backbone.View
     @$input = options.$input
     @$results = options.$results
     @collection = new SearchBlocks()
+    @collection.url = "#{sd.API_URL}/search/channels"
 
   onKeyUp: (e)->
     e.preventDefault()
@@ -28,7 +29,7 @@ module.exports = class SearchBarView extends Backbone.View
 
     switch e.keyCode
       when 13
-        console.log 'enter'
+        document.location.href = "/search/#{@getQuery()}"
       when 40
         console.log 'down'
       when 38
