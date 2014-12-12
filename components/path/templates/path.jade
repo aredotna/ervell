@@ -5,7 +5,7 @@ section.path--header
         li.root
           a(href='/') Are.na
 
-        if !channel && !author
+        if !channel && !author &&!search
           li
             .root__toggle
               .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
@@ -20,6 +20,8 @@ section.path--header
           li.path__sub followers
         if following
           li.path__sub following
+        if search
+          li.path__sub Search results for '#{search}'
 
     if channel
       .channel-settings.show-info
@@ -59,14 +61,15 @@ section.path--header
           .metadata__title Followers
           .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
 
-    else if author
+    else if author || search
       .metadata
-        .metadata__column
-          .metadata__title Info
-            if author.has('metadata')
-              .metadata__text Son of @broskoski, father of a cat. NYC.
-            else
-              .metadata__text —
+        if author
+          .metadata__column
+            .metadata__title Info
+              if author.has('metadata')
+                .metadata__text Son of @broskoski, father of a cat. NYC.
+              else
+                .metadata__text —
         if !following && !followers
           .metadata__column
             .metadata__title View
@@ -75,11 +78,11 @@ section.path--header
                 li: a(href="#" data-key='base_class' data-value='all').metadata--selector__option.default.is-active All
                 li: a(href="#" data-key='base_class' data-value='Channel').metadata--selector__option Channels
                 li: a(href="#" data-key='base_class' data-value='Block').metadata--selector__option Blocks
+        if author
+          .metadata__column
+            .metadata__title Followers
+            .metadata__text: a(href="/" + author.get('slug') + '/followers')= author.get('follower_count')
 
-        .metadata__column
-          .metadata__title Followers
-          .metadata__text: a(href="/" + author.get('slug') + '/followers')= author.get('follower_count')
-
-        .metadata__column
-          .metadata__title Following
-          .metadata__text: a(href="/" + author.get('slug') + '/following')= author.get('following_count')
+          .metadata__column
+            .metadata__title Following
+            .metadata__text: a(href="/" + author.get('slug') + '/following')= author.get('following_count')

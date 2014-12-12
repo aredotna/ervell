@@ -11,7 +11,10 @@ block body
         a(href="mailto:info@are.na") info@are.na
         |  if the problem persists
 
-      p=detail
+      if detail
+        pre= detail
+      if error
+        pre= error
     else if code == 401
       p You aren't allow to see this
       if !user

@@ -6,15 +6,17 @@ Blocks = require("./blocks.coffee")
 sd = require("sharify").data
 _ = require 'underscore'
 Block = require("../models/block.coffee")
+params = require 'query-params'
 
 module.exports = class SearchBlocks extends Blocks
   defaultOptions:
     page: 1
     per: 20
+    q: ''
 
   model: Block
 
-  url: -> "#{sd.API_URL}/search/channels"
+  url: -> "#{sd.API_URL}/search?#{params.encode(@options)}"
 
   parse: (data)->
     @total_pages = data.total_pages

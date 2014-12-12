@@ -1,19 +1,22 @@
-SearchBlocks = require "../../collections/user_blocks"
+SearchBlocks = require "../../collections/search_blocks"
 sd = require("sharify").data
 _ = require 'underscore'
 removeDiacritics = require('diacritics').remove
 
 @search = (req, res, next) ->
   blocks = new SearchBlocks()
-  block.url = "#{sd.API_URL}/search"
 
   if req.params.block_id
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
+  q = removeDiacritics req.params.query
+  res.locals.sd.SEARCH = q
+
   blocks.fetch
-    data: removeDiacritics query
+    data:
+      q: q
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()
-      res.render "index", author: user, blocks: blocks.models
+      res.render "index", blocks: blocks.models, search: q
     error: (m, err) -> next err
 
