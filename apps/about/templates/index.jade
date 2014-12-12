@@ -7,30 +7,20 @@ block body
 	a(href="/")
 		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 	.static__left-column
-		h2.static__about.static--text
-			.static--title--top#about-arena About
-			|	Are.na is a flexible platform for private and collaborative research, designed to support arbitrary applications.
-			br
-			br
-			|	We like to think of Are.na as an evolving archive where people collaboratively create ideas over time by combining found and original material.
-			br
-			br
-			| Are.na is also regularly adopted by professionals to research and organize projects. Brick-and-mortar shops use it to manage inventory, art institutions use it to curate exhibitions, creative teams use it to share inspiration, and academics use it to collect references.
-			br
-			br
-			|	Users have created 19,971 channels and connected 302,047 blocks.
+		.static__about.static--text
+			h2.static--title--top#about-arena About
+			p Are.na is a flexible platform for private and collaborative research, designed to support arbitrary applications.
+			p We like to think of Are.na as an evolving archive where people collaboratively create ideas over time by combining found and original material.
+			p Are.na is also regularly adopted by professionals to research and organize projects. Brick-and-mortar shops use it to manage inventory, art institutions use it to curate exhibitions, creative teams use it to share inspiration, and academics use it to collect references.
+			p	Users have created 19,971 channels and connected 302,047 blocks.
 
-		h2.static__team.static--text
-			.static--title--top#team Team
-			a(href="http://charlesbroskoski.com/_/") Charles Broskoski
-			br
-			a(href="http://chrissherron.net") Chris Sherron
-			br
-			a(href="http://no-plans.com") Daniel Pianetti
-			br
-			br
-			|	Advisors:
-			br
+		.static__team.static--text
+			h2.static--title--top#team Team
+			ul
+				li: a(href="http://charlesbroskoski.com/_/") Charles Broskoski
+				li: a(href="http://chrissherron.net") Chris Sherron
+				li: a(href="http://no-plans.com") Daniel Pianetti
+			p Advisors:
 			a(href="/morgan-sutherland") Morgan Sutherland,
 			a(href="/damon-zucconi")  Damon Zucconi,
 			a(href="/dena-yago")  Dena Yago,
@@ -39,136 +29,67 @@ block body
 			| and,
 			a(href="/j-stuart-moore")  J. Stuart Moore
 
-		h2.static__premium.static--text
-			.static--title--top#principles Principles
-			| We aim at being self-sustainable working to perfectionate and evolve the current product rather than seeking external funding.
-			br
-			br
-			|	We offer
-			a(href="/about/tools") advanced tools
-			|	at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
-			br
-			br
+		.static__premium.static--text
+			h2.static--title--top#principles Principles
+			p We aim at being self-sustainable working to perfectionate and evolve the current product rather than seeking external funding.
+			p We offer #[a(href="/about/tools")] advanced tools at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
 			.static--highlight Total Are.na users: 4200
 			.static--highlight Supporting users needed to cover costs: 290
 			.static--highlight Total supporting users: 24
-			br
-			| We also value transparency: we will never sell data without explicit autorization from the user, we will never use advertisment as revenue model and we're committed to retain complete control of the platform.
+			p We also value transparency: we will never sell data without explicit autorization from the user, we will never use advertisment as revenue model and we're committed to retain complete control of the platform.
 
-		h2.static__labs.static--text
-			.static--title--top#labs Labs
-			| Our API can be used as a CMS and to experiment with new ways of presenting and interacting with content.
-			a(href="http://beta.are.na/are-na/powered-by-are-na") Here's
-			| a selection of public applications powered by Are.na.
-			br
-			br
-			| We're always happy to hear ideas on how the platform can be used and we are open to collaborations such as for custom archives, CMS, research and consulting. Contact us if you'd like to discuss or have any question.
+		.static__labs.static--text
+			h2.static--title--top#labs Labs
+			p Our API can be used as a CMS and to experiment with new ways of presenting and interacting with content. #[a(href="http://beta.are.na/are-na/powered-by-are-na") Here ] is a selection of public applications powered by Are.na.
+			p We're always happy to hear ideas on how the platform can be used and we are open to collaborations such as for custom archives, CMS, research and consulting. Contact us if you'd like to discuss or have any question.
 
-		h2.static__faq.static--text
-			.static--title--top#faq FAQs
-			strong What should I use Are.na for? Why should I use it instead of other bookmarking and organization tools?
-			br
-			| Answer
-			br
-			br
-			strong I'm lost, not sure how to use Are.na, can you help?
-			br
-			| You can go through the
-			a(href="#") tutorial tips,
-			| post in the
-			a(href="http://beta.are.na/are-na/feedback") feedback channel
-			| or contact us below.
-			br
-			br
-			strong What are channels?
-			br
-			| A channel is a grouping of texts, images, links, embeddable media, and files. You can create and organize them privately, publicly and collaboratively.
-			br
-			br
-			strong What's the difference between public, closed and private channels?
-			br
-			| Channels have privacy settings that determine who can view or add to them. When creating a channel, you will be prompted to choose your privacy settings.
-			br
-			| You can make a channel open, which means that anyone can add to and view the channel; private so only you and your collaborators can add to and view it; or closed so that only you and your collaborators can add to it, but everyone can view it.
-			br
-			br
-			strong Can someone else moderate or modify my channels?
-			br
-			| Only contributors can delete blocks, anyone can add blocks on public ones.
-			br
-			br
-			strong What is a bookmarklet?
-			br
-			| Are.na's bookmarklet allows you to add information from your browser bar while you are out and about surfing the net. You can install it in one step
-			a(href="/about/tools#bookmarklet") here.
-			br
-			br
-			strong What sites currently use arena as a CMS?
-			br
-			| List of projects
-			a(href="http://beta.are.na/are-na/powered-by-are-na") powered by Are.na.
-			br
-			br
-			strong Who owns Are.na?
-			br
-			| 100% of shares are owned by the founders and advisors.
-			br
-			br
-			strong How do you make money?
-			br
-			| Our goal is to sustain Are.na through the help of its loyal users, by offering
-			a(href="/about/tools#premium") premium tools.
-			| We do not sell data nor advertising space.
-			br
-			br
-			strong Can I suggest features?
-			br
-			| Yes, you can post suggestions, comments, bugs and complaints in our
-			a(href="http://beta.are.na/are-na/feedback") feedback channel.
-			br
-			br
-			strong Are there any restrictions on kind of content?
-			br
-			| We trust our users' common sense and have no graphic or adult restrictions in the name of research freedom. Our team will intervene in case of explicit criminal offence (i.e. child pornography).
-			br
-			br
-			strong Can I only add content I own?
-			br
-			| There are no restrictions, users are responsible for the content they link or upload. For research purposes we believe in the fair use of intellectual property, please credit authorship and sources when possible.
+		.static__faq.static--text
+			h2.static--title--top#faq FAQs
+			h2 What should I use Are.na for? Why should I use it instead of other bookmarking and organization tools?
+			p Answer
+			h2 I'm lost, not sure how to use Are.na, can you help?
+			p You can go through the #[a(href="#") tutorial tips], post in the #[a(href="http://beta.are.na/are-na/feedback") feedback channel ] or contact us below.
+			h2 What are channels?
+			p A channel is a grouping of texts, images, links, embeddable media, and files. You can create and organize them privately, publicly and collaboratively.
+			h2 What's the difference between public, closed and private channels?
+			p Channels have privacy settings that determine who can view or add to them. When creating a channel, you will be prompted to choose your privacy settings.
+			p You can make a channel open, which means that anyone can add to and view the channel; private so only you and your collaborators can add to and view it; or closed so that only you and your collaborators can add to it, but everyone can view it.
+			h2 Can someone else moderate or modify my channels?
+			p Only contributors can delete blocks, anyone can add blocks on public ones.
+			h2 What is a bookmarklet?
+			p Are.na's bookmarklet allows you to add information from your browser bar while you are out and about surfing the net. You can install it in one step #[a(href="/about/tools#bookmarklet")] here.
+			h2 What sites currently use arena as a CMS?
+			p List of projects #[a(href="http://beta.are.na/are-na/powered-by-are-na") powered by Are.na].
+			h2 Who owns Are.na?
+			p 100% of shares are owned by the founders and advisors.
+			h2 How do you make money?
+			p Our goal is to sustain Are.na through the help of its loyal users, by offering #[a(href="/about/tools#premium") premium tools]. We do not sell data nor advertising space.
+			h2 Can I suggest features?
+			p Yes, you can post suggestions, comments, bugs and complaints in our #[a(href="http://beta.are.na/are-na/feedback") feedback channel].
+			h2 Are there any restrictions on kind of content?
+			p We trust our users' common sense and have no graphic or adult restrictions in the name of research freedom. Our team will intervene in case of explicit criminal offence (i.e. child pornography).
+			h2 Can I only add content I own?
+			p There are no restrictions, users are responsible for the content they link or upload. For research purposes we believe in the fair use of intellectual property, please credit authorship and sources when possible.
 
-		h2.static__contact.static--text
-			.static--title--top#contact Contact
-			| The team is mainly based in New York City.
-			br
-			br
-			a(mailto="info@are.na") info@are.na
-			br
-			a(href="http://twitter.com/aredotna") Twitter
-			br
-			a(href="http://instagram.com/aredotna") Instagram
-			br
-			br
+		.static__contact.static--text
+			h2.static--title--top#contact Contact
+			p The team is mainly based in New York City.
+			p: a(mailto="info@are.na") info@are.na
+			p: a(href="http://twitter.com/aredotna") Twitter
+			p: a(href="http://instagram.com/aredotna") Instagram
 
 	h3.static__menu
-		a(href="#about-arena").static__menu--dark About
-		br
-		a(href="#team").static__menu--light Team
-		br
-		a(href="#principles").static__menu--light Principles
-		br
-		a(href="#labs").static__menu--light Labs
-		br
-		a(href="#faq").static__menu--light FAQ
-		br
-		a(href="#contact").static__menu--light Contact
-		br
-		if !user
-			br
-			a(href="/").static__menu--dark Home
-			br
-			a(href="#log_in").static__menu--dark Login
-			br
-			a(href="#sign_up").static__menu--dark Register
+		ul
+			li: a(href="#about-arena").static__menu--dark About
+			li: a(href="#team").static__menu--light Team
+			li: a(href="#principles").static__menu--light Principles
+			li: a(href="#labs").static__menu--light Labs
+			li: a(href="#faq").static__menu--light FAQ
+			li: a(href="#contact").static__menu--light Contact
+			if !user
+				li: a(href="/").static__menu--dark Home
+				li: a(href="#log_in").static__menu--dark Login
+				li: a(href="#sign_up").static__menu--dark Register
 
 
 block scripts
