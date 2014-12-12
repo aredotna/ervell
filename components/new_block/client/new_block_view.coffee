@@ -9,8 +9,6 @@ newBlockTemplate = -> require('../templates/new_block.jade') arguments...
 
 module.exports = class NewBlockView extends Backbone.View
 
-
-
   events:
     'click #grid__block--new-block__content-field'          : 'setActive'
     'focus textarea#grid__block--new-block__content-field'  : 'setActive'
@@ -26,6 +24,7 @@ module.exports = class NewBlockView extends Backbone.View
     @render() if options.autoRender
 
   setActive: ->
+    console.log 'should be setting active', @$el
     @$el.addClass 'active'
 
   removeActive: ->
@@ -62,3 +61,5 @@ module.exports = class NewBlockView extends Backbone.View
 
   render: ->
     @$container.prepend newBlockTemplate(channel: @model)
+    @$el = $ '.grid__block--new-block'
+    @delegateEvents()
