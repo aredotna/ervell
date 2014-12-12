@@ -9,6 +9,8 @@ newBlockTemplate = -> require('../templates/new_block.jade') arguments...
 
 module.exports = class NewBlockView extends Backbone.View
 
+
+
   events:
     'click #grid__block--new-block__content-field'          : 'setActive'
     'focus textarea#grid__block--new-block__content-field'  : 'setActive'
