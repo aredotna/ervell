@@ -14,6 +14,7 @@ module.exports = class SearchBarView extends Backbone.View
     'click .layout-header__search__close' : 'clearSearch'
     'blur #layout-header__search__input'  : 'blurSearch'
     'focus #layout-header__search__input' : 'focusSearch'
+    'click .search__results__see-all'     : 'fullResults'
 
   initialize: (options)->
     @$input = options.$input
@@ -36,6 +37,11 @@ module.exports = class SearchBarView extends Backbone.View
         console.log 'up'
       else
         @search(e)
+
+  fullResults: (e)->
+    e.stopPropagation()
+    e.preventDefault()
+    document.location.href = "/search/#{@getQuery()}"
 
   search: (e) ->
     e.preventDefault()
