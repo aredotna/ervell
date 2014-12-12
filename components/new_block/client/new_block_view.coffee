@@ -12,6 +12,7 @@ module.exports = class NewBlockView extends Backbone.View
   events:
     'click #grid__block--new-block__content-field'          : 'setActive'
     'focus textarea#grid__block--new-block__content-field'  : 'setActive'
+    'blur  textarea#grid__block--new-block__content-field'  : 'removeActive'
     'click .grid__block--new-block__cancel'                 : 'cancelForm'
     'click .grid__block--new-block__submit'                 : 'createBlock'
 
@@ -23,8 +24,10 @@ module.exports = class NewBlockView extends Backbone.View
     @render() if options.autoRender
 
   setActive: ->
-    console.log 'should set active'
     @$el.addClass 'active'
+
+  removeActive: ->
+    @$el.removeClass 'active'
 
   cancelForm: (e)->
     $parent = $(e.target).closest('.grid__block--new-block__form')
