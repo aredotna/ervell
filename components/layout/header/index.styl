@@ -13,7 +13,7 @@
   justify-content space-between
   z-index header_z
 
-  &.is-active
+  &.is-active, .has-results
     z-index header_z + 2
 
     .header--icon
@@ -83,7 +83,7 @@
       font-weight bold
       border-top 1px solid bordergray
       cursor pointer
-      
+
       &:hover
         background-color backgroundgray
 
@@ -102,6 +102,9 @@
 
       &:hover
         color textgray
+
+    &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
+      display block
 
     &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
       display block
@@ -244,19 +247,19 @@
 
   .new-channel-btn--caption
     display none
-    
+
   .dropdown
     .user__avatar--thumb .user__avatar__image
       top 6px
 
 @media (max-width:350px)
-  #layout-header 
-    .layout-header__search 
+  #layout-header
+    .layout-header__search
       .layout-header__search__results
         position fixed
         overflow scroll
         width 100%
-    
+
     li
       line-height 30px
 
@@ -264,22 +267,22 @@
     position fixed
     overflow scroll
     margin 0
-    
+
     .dropdown__notifications
       height 100px
 
     .dropdown__link
       height 45px
       line-height 45px
-    
+
     .user__avatar--thumb
       height 30px
       width 30px
       line-height 30px
-    
+
     .user__avatar--thumb .user__avatar__image
       top 7px
-    
+
     .dropdown__icon
       float left
       margin-right 12px
@@ -291,5 +294,5 @@
   .dropdown.dropdown--size
     width 100%
     height 100%
-  
+
 
