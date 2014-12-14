@@ -5,7 +5,7 @@ block styles
 
 block body
   include ../../../components/path/templates/path
-  .grid
+  .grid(class=user.id == channel.get('user').id ? 'is-editable' : '')
     if channel && !following && !followers && user && user.canAddToChannel(channel)
       include ../../../components/new_block/templates/new_block
     include ../../../components/block_collection/templates/block_collection

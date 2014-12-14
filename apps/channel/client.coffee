@@ -28,7 +28,9 @@ module.exports = class ChannelView extends Backbone.View
     @listener = new Bp.Backpusher @pusher, @blocks
 
   checkUserAbilities: (collaborators) ->
-    if (_.contains collaborators.pluck('id'), mediator.shared.current_user.id) or mediator.shared.current_user.canAddToChannel(@channel)
+    collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
+
+    if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
       should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
 
       if should_render
@@ -43,6 +45,11 @@ module.exports = class ChannelView extends Backbone.View
         el: @$el
         channel: @channel
         blocks: @blocks
+
+      @$('.grid').addClass 'is-addable'
+
+    if collaborator or mediator.shared.current_user.canEditChannel(@channel)
+      @$('.grid').addClass 'is-editable'
 
 module.exports.init = ->
   current_user = mediator.shared.current_user

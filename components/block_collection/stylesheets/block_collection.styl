@@ -139,7 +139,7 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 
   .valign-inner
     vertical-align top
-    
+
 .button--delete-block
   float right
   width 26px
@@ -147,9 +147,13 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   line-height 32px
   font-size 12px
   color lightgray
-  
+  display none
+
   &:hover
     color private
+
+.grid.is-editable .button--delete-block
+  display block
 
 /* USER */
 .grid__block--user .grid__block__inner
@@ -269,10 +273,10 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
       min-width 98%
       left 1%
       top 1%
-      
+
     .grid__block__inner
       height 120px
-    
+
       .grid__block__channel__stats
         display none
 
