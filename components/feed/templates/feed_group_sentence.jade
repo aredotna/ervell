@@ -11,12 +11,12 @@ h2.feed-group__sentence
       em.feed-group__sentence__comment=group.single_subject()
     else
       span
-        a(href="#{group.single_subject_link()}")=group.single_subject()
+        a(href="#{group.single_subject_link()}" class="privacy--#{group.subject_privacy()}")=group.single_subject()
   else
     span=group.grouped_subject()
   if group.connector()
     span &nbsp;
     span=group.connector()
     span &nbsp;
-    a(href="#{group.single_target_link()}")=group.single_target()
+    a(href="#{group.single_target_link()}" class="privacy--#{group.target_privacy()}")=group.single_target()
   .feed-group__timestamp=group.timestamp()

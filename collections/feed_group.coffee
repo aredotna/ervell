@@ -100,6 +100,18 @@ module.exports = class FeedGroup extends Base
     else
       "/#/block/#{@models[0].get('target').id}"
 
+  subject_privacy: ->
+    if @models[0].has('item') and @models[0].get('item').class is "Channel"
+      return @models[0].get('item').status
+
+    return ''
+
+  target_privacy: ->
+    if @models[0].has('target') and @models[0].get('target').class is "Channel"
+      return @models[0].get('target').status
+
+    return ''
+
   single_target: ->
     if @models[0].has('target')
       if @models[0].get('target').username?
