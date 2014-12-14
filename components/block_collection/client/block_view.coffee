@@ -19,12 +19,14 @@ module.exports = class BlockView extends Backbone.View
     'click .grid__block__source__link': 'openLink'
     'click .grid__block__overlay'     : 'openLightbox'
     'click .grid__block__connect-btn' : 'loadConnectView'
+    'click .grid__block__delete-block': 'destroyConnection'
 
   initialize: (options)->
     @container = options.container if options.container?
     @autoRender = options.autoRender if options.autoRender?
     @containerMethod = options.containerMethod if options.containerMethod?
 
+    @channel = options.channel if options.channel?
     @current_user = mediator.shared.current_user
 
     @render() if @autoRender
@@ -75,7 +77,13 @@ module.exports = class BlockView extends Backbone.View
     window.open url,'_blank'
 
   update: (model)->
-    $("##{model.id}").replaceWith blockTemplate(block: model, user: @current_user)
+    args =
+      block: model
+      user: @current_user
+
+    args['channel'] = @channel if @channel?
+
+    $("##{model.id}").replaceWith blockTemplate args
     @$el = $("##{model.id}")
     @model = model
 
@@ -94,6 +102,18 @@ module.exports = class BlockView extends Backbone.View
       @container.find('.grid__block--new-block')[@containerMethod] blockTemplate(block: @model, user: @current_user)
 
     @renderFollowButton()
+
+  destroyConnection: (e) ->
+    model = @model
+    view = @
+
+    @model.destroy
+      channel: @channel
+
+    view.remove()
+
+    e.preventDefault()
+    e.stopPropagation()
 
   renderFollowButton: ->
     if @model.get('class') is 'Channel' or @model.get('class') is 'User' && sd.CURRENT_USER

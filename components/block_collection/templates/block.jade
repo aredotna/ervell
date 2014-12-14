@@ -39,7 +39,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
             - if((block.get('class') == 'Image' || block.get('class') == 'Text') && user.has('id'))
               .button--inblock.button--inblock--center.grid__block__connect-btn Connect &#x279d;
             - if(channel && user.has('id'))
-              .button--delete-block.iconic(data-glyph="trash")
+              .grid__block__delete-block.button--delete-block.iconic(data-glyph="trash")
           .grid__block__mini-feed
             - if(channel)
               ul.bare-list

@@ -21,3 +21,4 @@ module.exports = class BlockCollectionView extends Backbone.View
       container: $('.grid')
       model: block
       autoRender: autoRender
+      channel: @channel if @channel

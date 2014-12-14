@@ -9,6 +9,11 @@ module.exports = class Block extends Base
 
   url: -> "#{sd.API_URL}/blocks/#{@id}"
 
+  sync: (method, model, options) ->
+    switch method
+      when 'delete' then options.url = "#{sd.API_URL}/channels/#{options.channel.id}/blocks/#{model.id}"
+    super
+
   title: ->
     if @has('username')
       @get('username')

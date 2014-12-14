@@ -34,6 +34,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
       container: @$el
       model: model
       containerMethod: containerMethod
+      channel: @channel
 
   renderSkeleton: ->
     @queue = []
