@@ -82,7 +82,7 @@ module.exports.init = ->
       channel: channel
       el: $ ".grid"
 
-    if current_user.canEditChannel channel
+    if current_user.canAddToChannel channel
       new NewBlockView
         el: $ ".grid__block--new-block"
         model: channel
