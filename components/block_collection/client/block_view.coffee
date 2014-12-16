@@ -74,7 +74,12 @@ module.exports = class BlockView extends Backbone.View
     else
       url = @model.getImageSize('display')
 
-    window.open url,'_blank'
+    if @channel.get('status') is 'private'
+      instance = window.open("about:blank")
+      instance.document.write("<meta http-equiv=\"refresh\" content=\"0;url=#{url}\">");
+      instance.document.close()
+    else
+      window.open url,'_blank'
 
   update: (model)->
     args =
