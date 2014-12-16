@@ -124,6 +124,17 @@
   .logo
     padding 0 container_pad 0 container_pad
 
+    &.has-notifications:after
+      display block
+      content ' '
+      height 8px
+      width 8px
+      border-radius 100px
+      background-color #d13f19
+      position absolute
+      top 8px
+      right 45px
+
     .logo-icon svg
       display inline-block
       fill textgray

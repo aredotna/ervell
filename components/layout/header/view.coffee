@@ -30,6 +30,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'open:auth', @openAuth, @
     mediator.on 'body:click', @closeDropdown, @
     mediator.on 'search:loaded', @closeDropdown, @
+    mediator.on 'notifications:synced', @maybeSetNotifications, @
 
     $('section > .path').waypoint 'sticky',
       offset: 1
@@ -37,10 +38,13 @@ module.exports = class HeaderView extends Backbone.View
     if !sd.CURRENT_USER
       new AuthRouter pushState: false
     else
-      notifications = new Notifications()
+      @notifications = new Notifications()
       new SmallFeedView
-        collection: notifications
+        feedType: 'notifications'
+        collection: @notifications
         el: @$('.dropdown__notifications')
+
+      @notifications.on 'sync', -> mediator.trigger 'notifications:synced', @
 
       new NewChannelView
         el: @$('.new-channel-dropdown__container')
@@ -51,6 +55,10 @@ module.exports = class HeaderView extends Backbone.View
 
   unsetActive: (e)-> @$el.removeClass 'is-active'
 
+  maybeSetNotifications: ->
+    if @notifications.getNumberUnread() > 0
+      @$('.logo').addClass 'has-notifications'
+
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()
     ac = $el.toggleClass('dropdown--is_active')
@@ -60,7 +68,6 @@ module.exports = class HeaderView extends Backbone.View
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
 
   closeDropdown: (e)->
-    console.log 'trying to closeDropdown'
     if !e or (!@$el.is(e.target) and @$el.has(e.target).length is 0)
       $('.dropdown--is_active').removeClass 'dropdown--is_active'
 

@@ -54,7 +54,7 @@ module.exports = class Feed extends Base
 
     items = _.filter data.items, (model) =>
       # model.user? && !(model.user.id is @options.user.id and model.action is 'has joined Arena') && model?.item?.kind != "shortcuts"
-      model.user?
+      model.user? && model.item?
 
     groups = _.groupBy items, (model) ->
       if model.action is 'commented on'
