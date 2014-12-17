@@ -19,7 +19,7 @@ module.exports = class HeaderView extends Backbone.View
     'click .btn-login'                    : 'login'
     'click .btn-signup'                   : 'signup'
     'click .dropdown--menu__trigger'      : 'toggleDropdown'
-
+    'click .logo-icon'                    : 'clearNotifications'
 
   initialize: (options) ->
     @searchBarView = new SearchBarView
@@ -54,6 +54,10 @@ module.exports = class HeaderView extends Backbone.View
     @$('#layout-header__search__input').focus()
 
   unsetActive: (e)-> @$el.removeClass 'is-active'
+
+  clearNotifications: (e)->
+    @notifications.markRead()
+    @$('.logo').removeClass 'has-notifications'
 
   maybeSetNotifications: ->
     if @notifications.getNumberUnread() > 0

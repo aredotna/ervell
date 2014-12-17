@@ -1,4 +1,4 @@
-h2.feed-group__sentence
+h2.feed-group__sentence(class=group.isNew() ? 'is_unread' : '')
   a(href="/#{group.actor().slug}" class="username")=group.actor().username
   -if(group.action() == "said")
     span :

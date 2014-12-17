@@ -45,7 +45,7 @@ module.exports = class FeedGroup extends Base
   is_single: -> @length is 1
 
   is_comment: ->
-    @models[0].get('item').class is 'Comment'
+    @models[0].has('item') && @models[0].get('item').class is 'Comment'
 
   single_subject_link: (subject)->
     if @models[0].get('item').class is 'Channel'
