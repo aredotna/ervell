@@ -65,6 +65,9 @@ module.exports = class HeaderView extends Backbone.View
 
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()
+    if !@$('.dropdown--is_active').is($el)
+      @$('.dropdown--is_active').removeClass 'dropdown--is_active'
+
     ac = $el.toggleClass('dropdown--is_active')
     $el.find('input').focus()
 
