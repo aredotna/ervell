@@ -81,16 +81,16 @@ block body
 
 	h3.static__menu
 		ul
-			li: a(href="#about-arena").static__menu--dark About
-			li: a(href="#team").static__menu--light Team
-			li: a(href="#principles").static__menu--light Principles
-			li: a(href="#labs").static__menu--light Labs
-			li: a(href="#faq").static__menu--light FAQ
-			li: a(href="#contact").static__menu--light Contact
+			li: a(data-section="about-arena").static__menu__item.is-active About
+			li: a(data-section="team").static__menu__item Team
+			li: a(data-section="principles").static__menu__item Principles
+			li: a(data-section="labs").static__menu__item Labs
+			li: a(data-section="faq").static__menu__item FAQ
+			li: a(data-section="contact").static__menu__item Contact
 			if !user
-				li: a(href="/").static__menu--dark Home
-				li: a(href="#log_in").static__menu--dark Login
-				li: a(href="#sign_up").static__menu--dark Register
+				li: a(href="/").static__menu__item Home
+				li: a(href="#log_in").static__menu__item Login
+				li: a(href="#sign_up").static__menu__item Register
 
 
 block scripts
