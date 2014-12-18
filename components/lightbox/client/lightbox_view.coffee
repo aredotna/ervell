@@ -17,10 +17,14 @@ module.exports = class LightboxView extends Backbone.View
     $('body').addClass 'is-lightbox'
     @$el.addClass 'is-active'
 
+    mediator.trigger 'load:start'
+
     @model.on "sync", @render, @
     @model.fetch()
 
   render: ->
+    mediator.trigger 'load:stop'
+
     @$el.html lightboxTemplate(block: @model)
 
     feed = new Feed null,
