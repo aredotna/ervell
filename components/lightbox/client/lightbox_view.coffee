@@ -22,6 +22,8 @@ module.exports = class LightboxView extends Backbone.View
     @model.on "sync", @render, @
     @model.fetch()
 
+    @$el.html lightboxTemplate(block: @model)
+
   render: ->
     mediator.trigger 'load:stop'
 
