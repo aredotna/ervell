@@ -1,4 +1,6 @@
-@keyframes dot--anim
+@import '../../variables'
+
+/* @keyframes dot--anim
   0%
     opacity 0
   50%
@@ -32,6 +34,42 @@
 
 body.is-loading #l-loader-container
   display block
+*/
 
+body.is-loading #l-loader-container
+  display block
 
+#l-loader-container
+  position absolute
+  width 100%
+  height 100%
+  top 0
+  left 0
+  z-index loader_z
+  pointer-events none
+  display none
+  opacity 0.85
+
+@-webkit-keyframes rotate 
+  from 
+    -webkit-transform rotate(0deg)
+  to
+    -webkit-transform rotate(360deg)
+
+#l-loader-container .asterisk
+  -webkit-animation-name rotate
+  -webkit-animation-duration 1.4s
+  -webkit-animation-iteration-count infinite
+  -webkit-transition-timing-function linear
+
+.asterisk
+  position relative
+  overflow hidden
+  width 15px
+  left 50%
+
+.asterisk svg
+  width 30px
+  color textgray
+  
 
