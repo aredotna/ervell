@@ -50,27 +50,20 @@ body.is-loading #l-loader-container
   display none
   opacity 0.85
 
-@-webkit-keyframes rotate 
-  from 
-    -webkit-transform rotate(0deg)
-  to
-    -webkit-transform rotate(360deg)
+@-webkit-keyframes rotate
+  100%
+    transform rotate(360deg)
 
 #l-loader-container .asterisk
-  -webkit-animation-name rotate
-  -webkit-animation-duration 1.4s
-  -webkit-animation-iteration-count infinite
-  -webkit-transition-timing-function linear
-  transform-origin 55% 50%
+  animation rotate 1s infinite linear
+  transform-origin 50% 50%
 
 .asterisk
   position relative
   overflow hidden
-  width 15px
-  height 15px
-  left 50%
 
   svg
-    width 30px
-    height 16px
-    color textgray
+    width 39px
+    height 25px
+    fill #616161
+    padding-top 3px
