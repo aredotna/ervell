@@ -52,7 +52,6 @@ _ = require 'underscore'
       render()
     error: (m, err) -> next err
 
-
   render = _.after 2, =>
     res.render "index",
       blocks: blocks.models

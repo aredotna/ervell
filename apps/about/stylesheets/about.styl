@@ -13,15 +13,14 @@
 
 .static__left-column
   position relative
-  float left
   max-width 750px
-  margin 0
+  margin 0 0 400px 40px
 
 .static__menu
-  position relative
-  float right
+  position fixed
   margin 110px 0 0 0
   right 0
+  top 5px
   width 130px
   text-align left
   z-index 199
@@ -52,7 +51,6 @@
 
 .static--text
   position relative
-  float left
   width 100%
   max-width 700px
   font-weight normal
@@ -69,7 +67,7 @@
 
     &:hover
       color hovergray
-      
+
 .static__tools.static--text
   font-size 1em
 
@@ -166,6 +164,7 @@ body
   .static__left-column
     clear both
     max-width 500px
+    margin-left 0
 
   .static--title
     margin 0 0 4px 0
