@@ -130,7 +130,7 @@
       height 5px
       width 8px
       border-radius 100px 100px 0 0
-      background-color #d13f19
+      background-color private
       position absolute
       top 45px
       right 45px
@@ -217,29 +217,29 @@
     border-bottom 1px solid bordergray
     border-top 1px solid bordergray
     background-color secondbackgroundgray
+    cursor default
 
     .feed-group__sentence
       font-size s_caption
       margin 0
       color textgray
+      
+      a
+        color textgray
+
+        &:hover
+          color hovergray
 
     .feed-group__sentence.is_unread
-      background-color rgba(255, 255, 255, .75)
       color private
+      
+      a
+        color private
 
     .feed-group__timestamp
       padding-top 5px
       text-align center
-
-    a
-      height auto
-      font-size s_caption
-      font-weight bold
-      line-height 17px
-      color textgray
-
-      &:hover
-        color hovergray
+      color lightgray
 
 .dropdown--is_active .dropdown
   display block
