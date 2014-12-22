@@ -12,15 +12,21 @@ body.is-loading #l-loader-container
   z-index loader_z
   pointer-events none
   display none
-  opacity 0.85
+  opacity 0.8
 
-@-webkit-keyframes rotate
-  100%
-    transform rotate(360deg)
+@-webkit-keyframes pulsate 
+    0% 
+      -webkit-transform scale(0.85, 0.85)
+    30%
+      -webkit-transform scale(1, 1)
+    100% 
+      -webkit-transform scale(0.85, 0.85)
 
 #l-loader-container .asterisk
-  animation rotate 1s infinite linear
-  transform-origin 50% 50%
+  animation pulsate 0.8s ease-in
+  animation-iteration-count infinite
+  -webkit-animation pulsate 0.8s ease-in
+  -webkit-animation-iteration-count infinite
 
 .asterisk
   position relative
