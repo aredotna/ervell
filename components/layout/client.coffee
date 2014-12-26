@@ -39,10 +39,7 @@ setupAjaxHeaders = ->
     beforeSend: (xhr)->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
 
-setupFastClick = ->
-  ft = ft()
-  console.log 'ft', ft
-  ft.attach document.body, {}
+setupFastClick = -> ft document.body, {}
 
 showAnnouncements = (announcements) ->
   # stub

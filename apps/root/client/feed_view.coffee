@@ -28,6 +28,8 @@ module.exports = class FeedView extends Chaplin.View
 
     blocks = new Blocks @collection.getAllItems()
 
+    sd.BLOCKS = blocks.toJSON()
+
     new BlockCollectionView
       el: $ ".grid"
       blocks: blocks
