@@ -13,4 +13,5 @@ $ ->
 
   $('.static__menu a').click (e)->
     e.preventDefault()
-    $('body').scrollTo $(this).data 'section'
+    section = $(this).data 'section'
+    $("html, body").animate { scrollTop: $("##{section}").offset().top + 1}, 300
