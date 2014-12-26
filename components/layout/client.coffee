@@ -6,7 +6,7 @@ BodyView = require './body/view.coffee'
 mediator = require '../../lib/mediator.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 sd = require('sharify').data
-FastClick = require('fastclick')
+ft = require('fastclick')
 # analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
@@ -39,7 +39,10 @@ setupAjaxHeaders = ->
     beforeSend: (xhr)->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
 
-setupFastClick = -> FastClick.attach document.body, {}
+setupFastClick = ->
+  ft = ft()
+  console.log 'ft', ft
+  ft.attach document.body, {}
 
 showAnnouncements = (announcements) ->
   # stub

@@ -37,6 +37,19 @@ body.is-lightbox
   display block
   padding 20px
 
+.directional-arrows
+  position absolute
+  top 50%
+  cursor pointer
+  color lightgray
+  v-align()
+
+.directional-arrows--left
+  left 20px
+
+.directional-arrows--right
+  right 20px
+
 .lightbox__content__img
   max-width 80%
   max-height 100%
@@ -72,6 +85,8 @@ body.is-lightbox
 
   &:hover
     color hovergray
+
+
 
 .lightbox__content__description, .lightbox__content__text
   width 100%
@@ -128,13 +143,13 @@ body.is-lightbox
 @media (max-width:650px)
   .lightbox__content__text
     max-width 100%
-    
+
     .lightbox__content__text__inner
       width 100%
       left 0
       margin-left 0
       padding 15px
-    
+
 @media (max-width:500px)
   .lightbox__content
     padding 10px

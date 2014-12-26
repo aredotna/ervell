@@ -11,7 +11,8 @@ lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 module.exports = class LightboxView extends Backbone.View
 
   events:
-    'click .lightbox--close': 'close'
+    'click .lightbox--close'    : 'close'
+    'click .directional-arrows' : 'slide'
 
   initialize: ->
     $('body').addClass 'is-lightbox'
@@ -38,6 +39,12 @@ module.exports = class LightboxView extends Backbone.View
       collection: feed
 
     IconicJS().inject 'img.iconic'
+
+  slide: (e)->
+    e.preventDefault()
+
+    direction = $(e.currentTarget).data('direction')
+    console.log 'sd', sd.BLOCKS
 
   close: ->
     @$el.html ""
