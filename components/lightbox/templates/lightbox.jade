@@ -1,9 +1,6 @@
 #l-lightbox-container_inner
   .lightbox__content.valign-outer
     .valign-inner
-      span(class="iconic directional-arrows directional-arrows--right" data-direction="next" data-glyph="chevron-right" title="chevron right")
-      span(class="iconic directional-arrows directional-arrows--left" data-direction="prev" data-glyph="chevron-left" title="chevron left")
-
       a.lightbox--close: span(class="iconic iconic-sm" data-glyph="x" title="x" aria-hidden="true")
       - if(block.has('image') && block.get('class') != 'Media')
         img.lightbox__content__img(src="#{block.resizeImage(1000,1000)}")
@@ -17,6 +14,9 @@
 
       - if(block.get('class') == 'Media')
         .lightbox__content__media!= block.get('embed').html
+
+      span(class="iconic directional-arrows directional-arrows--right" data-direction="next" data-glyph="chevron-right" title="chevron right")
+      span(class="iconic directional-arrows directional-arrows--left" data-direction="prev" data-glyph="chevron-left" title="chevron left")
 
     - if(block && block.has('title'))
       h3.lightbox__content__title= block.get('title')
