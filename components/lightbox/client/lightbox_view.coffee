@@ -40,15 +40,21 @@ module.exports = class LightboxView extends Backbone.View
 
     IconicJS().inject 'img.iconic'
 
-  slide: (e)->
+  slide: (e) =>
     e.preventDefault()
 
     direction = $(e.currentTarget).data('direction')
-    console.log 'sd', sd.BLOCKS
+
+    @model = mediator.shared.blocks[direction](@model)
+
+    @render() # to get rid of the current block
+
+    @model.fetch success: => @render()
 
   close: ->
     @$el.html ""
     $('body').removeClass 'is-lightbox'
     @$el.removeClass 'is-active'
+    @undelegateEvents()
 
     mediator.trigger 'lightbox:closed'

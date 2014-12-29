@@ -12,6 +12,8 @@ module.exports = class BlockCollectionView extends Backbone.View
     @channel = options.channel
     @blocks = options.blocks
 
+    mediator.shared.blocks = @blocks
+
     @blocks.each (block) => @renderBlockView block
     IconicJS().inject 'img.iconic'
     super

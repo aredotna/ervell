@@ -45,10 +45,16 @@ module.exports = class Base extends Collection
     @setOptions(options)
     super
 
+  indexOf: (model) ->
+    model = @findWhere id: model.id
+    super model
+
   next: (model) ->
+    model = @findWhere id: model.id
     @at((@indexOf(model) + 1) % _.size(@models))
 
   prev: (model) ->
+    model = @findWhere id: model.id
     index = @indexOf(model) - 1
     @at(if index > -1 then index else _.size(@models) - 1)
 

@@ -11,9 +11,9 @@ module.exports = class LightboxRouter extends Backbone.Router
     'block/:id': 'showBlock'
 
   initialize: ->
-    console.log 'LightboxRouter init'
     mediator.on 'lightbox:closed', @removeRoute, @
     mediator.on 'lightbox:opened', @showBlock, @
+    mediator.on 'lightbox:slide', @slideBlock, @
 
   hideBlock: -> # nothing for now
 
@@ -23,12 +23,17 @@ module.exports = class LightboxRouter extends Backbone.Router
     @navigate '', trigger: false, replace: false
 
   hideBlock: ->
-    console.log 'hideBlock'
     if @lbv
       @lbv.remove()
+      delete @lbv
+
+  slideBlock: (block) ->
+    console.log 'slideBlock', block
+    @navigate "/block/#{block.id}", trigger: true, replace: true
 
   showBlock: (id)->
     block = new Block {id: id}
+
     @lbv = new LightboxView
       el: $('#l-lightbox-container')
       model: block
