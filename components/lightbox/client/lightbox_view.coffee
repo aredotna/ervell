@@ -25,6 +25,10 @@ module.exports = class LightboxView extends Backbone.View
 
     @$el.html lightboxTemplate(block: @model)
 
+    mediator.on "lightbox:slide:next", => @slide 'next'
+    mediator.on "lightbox:slide:prev", => @slide 'prev'
+    mediator.on "lightbox:close",      => @close()
+
   render: ->
     mediator.trigger 'load:stop'
 
@@ -40,21 +44,24 @@ module.exports = class LightboxView extends Backbone.View
 
     IconicJS().inject 'img.iconic'
 
-  slide: (e) =>
+  clickSlide: (e) =>
     e.preventDefault()
-
     direction = $(e.currentTarget).data('direction')
+    console.log 'direction', direction
+    @slide direction
 
+  slide: (direction)->
     @model = mediator.shared.blocks[direction](@model)
-
     @render() # to get rid of the current block
-
     @model.fetch success: => @render()
 
   close: ->
     @$el.html ""
     $('body').removeClass 'is-lightbox'
     @$el.removeClass 'is-active'
+    mediator.off "lightbox:slide:next"
+    mediator.off "lightbox:slide:prev"
+    mediator.off "lightbox:close"
     @undelegateEvents()
 
     mediator.trigger 'lightbox:closed'

@@ -27,10 +27,6 @@ module.exports = class LightboxRouter extends Backbone.Router
       @lbv.remove()
       delete @lbv
 
-  slideBlock: (block) ->
-    console.log 'slideBlock', block
-    @navigate "/block/#{block.id}", trigger: true, replace: true
-
   showBlock: (id)->
     block = new Block {id: id}
 

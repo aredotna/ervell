@@ -2,6 +2,7 @@ Backbone = require 'backbone'
 Backbone.$ = $
 _ = require 'underscore'
 HeaderView = require './header/view.coffee'
+km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 mediator = require '../../lib/mediator.coffee'
 CurrentUser = require '../../models/current_user.coffee'
@@ -14,6 +15,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupFastClick()
+  initShortCuts()
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
@@ -40,6 +42,11 @@ setupAjaxHeaders = ->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
 
 setupFastClick = -> ft document.body, {}
+
+initShortCuts = ->
+  km 'right', -> mediator.trigger 'lightbox:slide:next'
+  km 'left',  -> mediator.trigger 'lightbox:slide:prev'
+  km 'esc',   -> mediator.trigger 'lightbox:close'
 
 showAnnouncements = (announcements) ->
   # stub
