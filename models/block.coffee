@@ -21,7 +21,11 @@ module.exports = class Block extends Base
       @get('title')
 
   resizeImage: (width = 330, height = 330)->
-    "http://images.are.na/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize('display'))}"
+    # ignore gifs
+    if @getImageSize('display').split('.').pop() == 'gif'
+      @getImageSize('display')
+    else
+      "http://images.are.na/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize('display'))}"
 
   getImageSize: (size) ->
     if @has('image')
