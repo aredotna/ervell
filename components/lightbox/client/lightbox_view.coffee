@@ -12,7 +12,7 @@ module.exports = class LightboxView extends Backbone.View
 
   events:
     'click .lightbox--close'    : 'close'
-    'click .directional-arrows' : 'slide'
+    'click .directional-arrows' : 'clickSlide'
 
   initialize: ->
     $('body').addClass 'is-lightbox'
@@ -44,10 +44,9 @@ module.exports = class LightboxView extends Backbone.View
 
     IconicJS().inject 'img.iconic'
 
-  clickSlide: (e) =>
+  clickSlide: (e) ->
     e.preventDefault()
     direction = $(e.currentTarget).data('direction')
-    console.log 'direction', direction
     @slide direction
 
   slide: (direction)->

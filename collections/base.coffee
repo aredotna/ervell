@@ -48,13 +48,13 @@ module.exports = class Base extends Collection
   onlyBlocks: -> new Collection @where base_class: 'Block'
 
   next: (model) ->
-    model = @onlyBlocks().findWhere id: model.id, base_class: 'Block'
-    @onlyBlocks().at((@indexOf(model) + 1) % _.size(@models))
+    model = @onlyBlocks().find (block) -> model.id == parseInt(block.id)
+    @onlyBlocks().at((@onlyBlocks().indexOf(model) + 1) % _.size(@onlyBlocks().models))
 
   prev: (model) ->
-    model = @findWhere id: model.id, base_class: 'Block'
-    index = @indexOf(model) - 1
-    @onlyBlocks().at(if index > -1 then index else _.size(@models) - 1)
+    model = @onlyBlocks().findWhere id: model.id
+    index = @onlyBlocks().indexOf(model) - 1
+    @onlyBlocks().at(if index > -1 then index else _.size(@onlyBlocks().models) - 1)
 
   last: ->
     @at @length - 1

@@ -12,6 +12,7 @@ module.exports = class UserBlockCollectionView extends BlockCollectionView
 
   initialize: (options)->
     super
+
     @blocks.on 'add', @appendBlockView, @
 
     mediator.on 'blocks:filtered', @filterBlocks, @

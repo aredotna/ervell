@@ -29,8 +29,6 @@ module.exports = class UserBlocks extends SearchBlocks
         ids = _.intersection channel_ids, block.channel_ids
         return (if ids? then ids[0] else 'undefined')
 
-      # for id in _.keys grouped_blocks
-
       for id in channel_ids
         if grouped_blocks[id]
           channel = _.findWhere data.channels, id: id
