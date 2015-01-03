@@ -44,3 +44,4 @@ module.exports = class Block extends Base
       "/#{@get('slug')}"
     else
       "/block/#{@id}"
+
