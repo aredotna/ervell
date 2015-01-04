@@ -66,7 +66,6 @@ module.exports = class SearchBarView extends Backbone.View
     if query.length
       return query
     else
-      @searchUnloaded()
       false
 
   searchLoaded: ->
