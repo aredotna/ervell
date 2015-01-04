@@ -60,8 +60,10 @@ module.exports = class ConnectView extends Backbone.View
       data:
         q: query
         per: 3
+        show_open: true
         filter:
           type: 'channel'
+
       success: => @searchLoaded()
 
   getQuery: ->
