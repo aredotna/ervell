@@ -22,10 +22,12 @@ module.exports = class UserBlocks extends SearchBlocks
   parse: (data) ->
     @total_pages = data.total_pages
 
-    if data.blocks.length
+    contents = data.blocks || data.results
+
+    if contents.length
       channel_ids = _.pluck data.channels, 'id'
 
-      grouped_blocks = _.groupBy data.blocks, (block) ->
+      grouped_blocks = _.groupBy contents, (block) ->
         ids = _.intersection channel_ids, block.channel_ids
         return (if ids? then ids[0] else 'undefined')
 
