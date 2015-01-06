@@ -3,7 +3,7 @@
     .valign-inner
       a.lightbox--close: span(class="iconic iconic-sm" data-glyph="x" title="x" aria-hidden="true")
       - if(block.has('image') && block.get('class') != 'Media')
-        img.lightbox__content__img(src="#{block.resizeImage(1000,1000)}")
+        img.lightbox__content__img(src="#{block.resizeImage(1000,1000, 'original')}")
 
       - if(block.get('class') == 'Attachment')
         img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
