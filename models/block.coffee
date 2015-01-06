@@ -7,6 +7,7 @@ sd = require("sharify").data
 
 module.exports = class Block extends Base
 
+
   url: -> "#{sd.API_URL}/blocks/#{@id}"
 
   sync: (method, model, options) ->
