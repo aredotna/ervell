@@ -36,9 +36,11 @@ sd = require("sharify").data
 
 @explore = (req, res, next) ->
   blocks = new SearchBlocks
-  blocks.url = "#{res.locals.sd.API_URL}/search"
+  blocks.url = "#{res.locals.sd.API_URL}/search/channels"
 
   blocks.fetch
+    data:
+      per: 100
     success: ->
       res.render "explore", blocks: blocks.models, path: 'explore'
     error: (m, err) -> next err
