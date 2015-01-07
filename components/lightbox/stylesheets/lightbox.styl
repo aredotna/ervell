@@ -57,17 +57,60 @@ body.is-lightbox
   top 50%
   v-align()
 
+.lightbox__content__text
+  position relative
+  float left
+  clear both
+  left 50%
+  margin-left -370px
+  max-width 740px
+  text-align left
+  width 100%
+  min-height 80%
+  top 10%
+  background-color rgba(255,255,255, 1)
+  box-shadow 0px 0px 5px rgba(0,0,0,0.2)
+  
+  .lightbox__content__text__inner
+    font-family Times New Roman
+    height auto
+    margin 0 auto
+    padding 1.3em 2em 2em 2em
+    font-size 1.2em
+    line-height 1.5
+    color hovergray
+    antialiased()
+
 .lightbox__content__media
   top 50%
   position relative
   v-align()
 
 .lightbox__content__title
-  position relative
-  float left
-  width 100%
-  margin 20px 0 20px 0
+  position absolute
+  left 50%
+  top 101%
+  width 300px
+  margin-left -150px
+  text-align left
+  font-size 0.9em
   text-align center
+  color textgray
+
+.lightbox__content__description
+  position absolute
+  width 330px
+  left 50%
+  top 103%
+  margin-left -165px
+  padding 0
+  text-align left
+  font-size s_caption
+  line-height 1.5em
+  color lightgray
+
+  p
+    margin 0.8em 0
 
 .lightbox--close
   display block
@@ -85,46 +128,6 @@ body.is-lightbox
 
   &:hover
     color hovergray
-
-
-
-.lightbox__content__description, .lightbox__content__text
-  width 100%
-  max-width 600px
-  min-height 400px
-  margin 0 auto
-  padding 0
-  line-height 1.4em
-  text-align left
-
-  p
-    margin 0.8em 0
-
-.lightbox__content__description
-  font-size 1em
-
-.lightbox__content__text
-  font-family Georgia
-  font-size 1.2em
-  line-height 1.5
-  max-width 80%
-  position relative
-  top 50%
-  v-align()
-
-  .lightbox__content__text__inner
-    padding 1.3em 2em 2em 2em
-    background-color rgba(255,255,255, 1)
-    box-shadow 0px 0px 4px rgba(0,0,0,0.1)
-    width 100%
-    max-width 650px
-    margin 0 auto
-    position relative
-    float left
-    left 50%
-    height auto
-    margin-left -325px
-    margin-bottom 50px
 
 .lightbox__feed
   position relative
