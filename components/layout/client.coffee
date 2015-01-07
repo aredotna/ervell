@@ -14,7 +14,7 @@ module.exports = ->
   setupPusherAndCurrentUser()
   setupViews()
   setupAjaxHeaders()
-  setupFastClick()
+  # setupFastClick()
   initShortCuts()
 
 setupViews = ->
