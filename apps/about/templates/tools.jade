@@ -4,10 +4,10 @@ block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-	.static__left-column
-		a(href="/")
-			img.static__mark(src="../images/arena-mark.svg", alt="Arena")
+	a(href="/")
+		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 
+	.static__left-column
 		.static__tools.static--text
 			h2.static--title--top Tools
 
@@ -16,38 +16,38 @@ block body
 				.static__tools__bookmarklet-button Drag this to your browser toolbar &#10548;
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
 			
-			h2#extra-tools.static--title Supporter tools
+			h2#extra-tools.static--title Premium tools
 			h2.static__tools__frame.static__tools__frame--supporter
-				ul
-					li 
-						| &#8226; 
-						span Search inside channels
-					li 
-						| &#8226; 
-						span Follow our work in progress and test our beta features
-				button.button--wide.button--border.button--add $12 / year - Activate &rarr;
+				form(action='a')
+					.static__tools__checkbox
+						input(type='checkbox' name='a' value='supporter')
+						| Supporter: follow our behind the scenes and try new features first
+					.static__tools__checkbox
+						input(type='checkbox' name='a' value='search')
+						| Search inside channels
+					.static__tools__checkbox
+						input(type='checkbox' name='a' value='dashboard')
+						| Dashboard: visualize and sort every channel on Are.na
+					.static__tools__checkbox.transparent
+						input(type='checkbox' name='a' value='special' disabled='disabled')
+						| Special channel type (coming soon)
+				button.button--wide.button--border.button--add $12/year per tool - Activate &rarr;
 				br
 				br
-				span In order to sustain its expenses and future development without advertising, Arena needs the support of its users. By activating these tools packages you contribute to our 
+				br
+				span In order to sustain its expenses and future development without advertising, Are.na needs the support of its users. By activating these tools packages you contribute to our 
 				a(href="/about#principles") self-sustainability 
 				| goal.
-
-			h2#extra-tools.static--title.static__tools__frame--premium Premium tools (coming soon)
-			h2.static__tools__frame.static__tools__frame--premium
-				ul
-					li &#8226; Same supporter privileges as described above
-					li &#8226; Dashboard: see and sort of every channel on Arena, their connections and authors
-					li &#8226; One more feature
-					li &#8226; New features will be added periodically
-				button.button--wide.button--border.button--add(style="opacity: 0.4") $45 / year - Activate &rarr;
 
 			h2#invite.static--title Invite someone
 			h2.static__tools__frame
 				| Add an email address to collaborate with someone:
 				br
-				input.input--wide.input--relative.is-block(
-          name='email', type='email', placeholder='Email', required, autofocus= autofocus
-        )
+				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Email', required, autofocus= autofocus)
+				br
+				br
+				br
+				br
 				| You can attach channels worth of notice below:
 				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Suggested channel names, comma separated', required, autofocus= autofocus)
 				button.button--wide.button--border.button--add Send invitation &rarr;
