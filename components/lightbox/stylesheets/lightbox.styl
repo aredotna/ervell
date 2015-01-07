@@ -35,7 +35,6 @@ body.is-lightbox
 
 .lightbox__content .valign-inner
   display block
-  padding 20px
 
 .directional-arrows
   position absolute
@@ -52,7 +51,7 @@ body.is-lightbox
 
 .lightbox__content__img
   max-width 80%
-  max-height 100%
+  max-height 90%
   position relative
   top 50%
   v-align()
@@ -87,30 +86,32 @@ body.is-lightbox
   v-align()
 
 .lightbox__content__title
-  position absolute
-  left 50%
-  top 101%
-  width 300px
-  margin-left -150px
-  text-align left
+  position relative
+  float left
+  left 0
+  width 100%
+  margin -10px 0 0 0
+  padding 25px 0 25px 0
   font-size 0.9em
   text-align center
+  font-weight bold
   color textgray
+  background-color secondbackgroundgray
+  antialiased()
 
-.lightbox__content__description
-  position absolute
-  width 330px
-  left 50%
-  top 103%
-  margin-left -165px
-  padding 0
-  text-align left
-  font-size s_caption
-  line-height 1.5em
-  color lightgray
-
-  p
-    margin 0.8em 0
+  .lightbox__content__description
+    p
+      position relative
+      text-align left
+      width 100%
+      max-width 400px
+      font-size s_caption
+      font-weight normal
+      line-height 1.5em
+      left 50%
+      margin-left -200px
+      padding 5px 0 0 0
+      color textgray
 
 .lightbox--close
   display block
@@ -136,7 +137,7 @@ body.is-lightbox
   height auto
   text-align center
   background-color backgroundgray
-  margin 40px 0 0 0
+  margin 0 0 0 0
   padding 40px 0 40px 0
 
   .lightbox__feed__inner

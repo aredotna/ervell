@@ -18,11 +18,11 @@
       span(class="iconic directional-arrows directional-arrows--right" data-direction="next" data-glyph="chevron-right" title="chevron right")
       span(class="iconic directional-arrows directional-arrows--left" data-direction="prev" data-glyph="chevron-left" title="chevron left")
 
-      - if(block && block.has('title'))
-        .lightbox__content__title= block.get('title')
+    - if(block && block.has('title'))
+      .lightbox__content__title= block.get('title')
 
-      - if(block && block.has('description'))
-        .lightbox__content__description!= block.get('description_html')
+        - if(block && block.has('description'))
+          .lightbox__content__description!= block.get('description_html')
     #lightbox__feed.lightbox__feed
       #lightbox__feed_inner.lightbox__feed__inner
       //- rendered by client
