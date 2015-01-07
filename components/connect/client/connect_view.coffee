@@ -22,6 +22,7 @@ module.exports = class ConnectView extends Backbone.View
     super
 
   clear: (e)->
+    console.log 'should clear'
     e.stopPropagation()
     e.preventDefault()
     @$el.html ""
