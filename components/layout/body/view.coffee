@@ -12,6 +12,7 @@ module.exports = class BodyView extends Backbone.View
     'click'                                       : 'bodyClick'
     'click a[data-disabled]'                      : 'disable'
     'click a[data-client]:not([data-disabled])'   : 'intercept'
+    'click span[data-client]:not([data-disabled])': 'intercept'
 
   initialize: (options) ->
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
