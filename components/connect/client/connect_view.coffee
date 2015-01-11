@@ -2,7 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
-UserBlocks = require '../../../collections/user_blocks.coffee'
+ConnectionBlocks = require '../../../collections/connection_blocks.coffee'
 
 ConnectResultsView = require './connect_results_view.coffee'
 
@@ -21,7 +21,6 @@ module.exports = class ConnectView extends Backbone.View
     super
 
   clear: (e)->
-    console.log 'should clear'
     e.stopPropagation()
     e.preventDefault()
     @$el.html ""
@@ -93,15 +92,12 @@ module.exports = class ConnectView extends Backbone.View
     @$('.new-connection__search').focus()
 
   renderChannels: =>
-    @collection = new UserBlocks null,
+    @collection = new ConnectionBlocks null,
       user_slug: sd.CURRENT_USER.slug
 
     @collection.fetch
       data:
         per: 3
-        show_open: true
-        filter:
-          type: 'channel'
 
     new ConnectResultsView
       el: @$('.new-connection__search-results')
