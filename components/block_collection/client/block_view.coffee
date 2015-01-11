@@ -67,6 +67,8 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
+    console.log 'model', @model
+
     if @model.get('source').url
       url = @model.get('source').url
     else if @model.get('attachment').url
@@ -74,7 +76,7 @@ module.exports = class BlockView extends Backbone.View
     else
       url = @model.getImageSize('display')
 
-    if @channel.get('status') is 'private'
+    if @channel and @channel.get('status') is 'private'
       instance = window.open("about:blank")
       instance.document.write("<meta http-equiv=\"refresh\" content=\"0;url=#{url}\">");
       instance.document.close()
