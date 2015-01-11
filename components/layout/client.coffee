@@ -4,6 +4,7 @@ _ = require 'underscore'
 HeaderView = require './header/view.coffee'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
+MessageView = require '../message/client/message_view.coffee'
 mediator = require '../../lib/mediator.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 sd = require('sharify').data
@@ -16,6 +17,7 @@ module.exports = ->
   setupAjaxHeaders()
   # setupFastClick()
   initShortCuts()
+  showBetaMessage()
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
@@ -47,6 +49,14 @@ initShortCuts = ->
   km 'right', -> mediator.trigger 'lightbox:slide:next'
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
+
+showBetaMessage = ->
+  model = new Backbone.Model
+    id: 'beta_message'
+    title: "Beta"
+    body: "Welcome to the beta preview of Are.na. Expect us to have some bugs here for the time being. Please submit any feedback to our <a href='http://are.na/feedback'>feedback channel</a>. Follow our progress <a href='http://github.com/arenahq/ervell'>here</a>."
+    type: 'announcement'
+  new MessageView el: $('#message-container'), model: model
 
 showAnnouncements = (announcements) ->
   # stub
