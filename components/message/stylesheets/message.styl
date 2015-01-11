@@ -2,20 +2,26 @@
 
 .message
   position fixed
-  bottom 0
-  right 0
-  background-color secondbackgroundgray
-  width 500px
-  padding container_pad
-
+  bottom 12px
+  right 12px
+  background-color backgroundgray
+  border 1px solid bordergray
+  width 300px
+  padding 15px
+  font-size s_caption + 1
+  
+.message--red
+  color private
+    
 .message__inner
   position relative
+  margin -12px 0 0 0
 
 .message__inner__close
   position absolute
-  top -10px
-  right -10px
-  color lightgray
+  top 8px
+  right -8px
+  color private
 
 .message__inner__title
   font-weight bold
