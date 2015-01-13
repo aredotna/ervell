@@ -1,5 +1,4 @@
 extends ../../../components/layout/index
-@import '../../layout/variables'
 
 block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
@@ -91,6 +90,7 @@ block body
 			li: a(data-section="faq").static__menu__item FAQ
 			li: a(data-section="contact").static__menu__item Contact
 			if !user
+				li: &nbsp;
 				li: a(href="/").static__menu__item Home
 				li: a(href="#log_in").static__menu__item Login
 				li: a(href="#sign_up").static__menu__item Register
