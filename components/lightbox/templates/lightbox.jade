@@ -1,28 +1,28 @@
 #l-lightbox-container_inner
-  .lightbox__content.valign-outer
-    .valign-inner
-      a.lightbox--close: span(class="iconic iconic-sm" data-glyph="x" title="x" aria-hidden="true")
-      - if(block.has('image') && block.get('class') != 'Media')
-        img.lightbox__content__img(src="#{block.resizeImage(1000,1000, 'original')}")
+  a.lightbox--close: span(class="iconic iconic-sm" data-glyph="x" title="x" aria-hidden="true")
+  - if(block.has('image') && block.get('class') != 'Media')
+    .lightbox__content__img
+      img(src="#{block.resizeImage(1000,1000, 'original')}")
 
-      - if(block.get('class') == 'Attachment')
-        img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+  - if(block.get('class') == 'Attachment')
+    .lightbox__content__img
+      img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
 
-      - if(block.get('class') == 'Text')
-        .lightbox__content__text
-          .lightbox__content__text__inner!= block.get('content_html')
+  - if(block.get('class') == 'Text')
+    .lightbox__content__text
+      .lightbox__content__text__inner!= block.get('content_html')
 
-      - if(block.get('class') == 'Media')
-        .lightbox__content__media!= block.get('embed').html
+  - if(block.get('class') == 'Media')
+    .lightbox__content__media!= block.get('embed').html
 
-      span(class="iconic directional-arrows directional-arrows--right" data-direction="next" data-glyph="chevron-right" title="chevron right")
-      span(class="iconic directional-arrows directional-arrows--left" data-direction="prev" data-glyph="chevron-left" title="chevron left")
+  span(class="iconic directional-arrows directional-arrows--right" data-direction="next" data-glyph="chevron-right" title="chevron right")
+  span(class="iconic directional-arrows directional-arrows--left" data-direction="prev" data-glyph="chevron-left" title="chevron left")
 
-    - if(block && block.has('title'))
-      .lightbox__content__title= block.get('title')
+  - if(block && block.has('title'))
+    .lightbox__content__title= block.get('title')
 
-        - if(block && block.has('description'))
-          .lightbox__content__description!= block.get('description_html')
-    #lightbox__feed.lightbox__feed
-      #lightbox__feed_inner.lightbox__feed__inner
-      //- rendered by client
+      - if(block && block.has('description'))
+        .lightbox__content__description!= block.get('description_html')
+  #lightbox__feed.lightbox__feed
+    #lightbox__feed_inner.lightbox__feed__inner
+    //- rendered by client
