@@ -19,6 +19,10 @@
     .header--icon
       display none
 
+  &:hover .header--icon svg *
+    fill hovergray
+    stroke hovergray
+
   .header--icon
     position absolute
     left 0
@@ -59,9 +63,9 @@
       padding 0 container_pad 0 topbar_h
       background-color backgroundgray
 
+
       &:focus
         background-color secondbackgroundgray
-        // transition(0.1s)
 
     .layout-header__search__results
       position absolute
@@ -71,8 +75,11 @@
       box-shadow downshadow
       background secondbackgroundgray
 
-    &.is-active .layout-header__search__results
-      display block
+    &.is-active
+      .layout-header__search__results
+        display block
+      .header--icon
+        display none
 
     .search__results__list
       list-style-type none
@@ -251,7 +258,6 @@
   vertical-align top
   margin-left 0.3em
   display inline-block
-  transition transform 0s ease-in-quad
 
 .dropdown--is_active .dropdown--menu__trigger:after
   transform rotate(180deg)
