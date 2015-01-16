@@ -29,7 +29,7 @@ body.is-lightbox
 
 .lightbox__content__img
   height 100%
-  text-align center 
+  text-align center
   img
     max-width 80%
     max-height 90%
@@ -50,7 +50,7 @@ body.is-lightbox
   border 1px solid bordergray
   background-color rgba(255,255,255, 1)
   box-shadow 0px 0px 20px rgba(0,0,0,0.02)
-  
+
   .lightbox__content__text__inner
     font-family Times New Roman
     height auto
@@ -65,7 +65,7 @@ body.is-lightbox
   height 100%
   position relative
   text-align center
-  
+
   iframe
     position relative
     top 50%
@@ -117,17 +117,22 @@ body.is-lightbox
   position absolute
   top 48%
   cursor pointer
-  color lightgray
+  color white
+  padding 40% 0 40%
   v-align()
-  
+
   &:hover
     color hovergray
 
 .directional-arrows--left
-  left 30px
+  left 0
+  padding-left 120px
+  padding-right 20%
 
 .directional-arrows--right
-  right 30px
+  right 0
+  padding-right 120px
+  padding-left 20%
 
 .lightbox--close
   display block
@@ -155,13 +160,13 @@ body.is-lightbox
 
     .lightbox__content__text__inner
       padding 1.4em 1.8em 1.8em 1.8em
-  
+
   .directional-arrows--left
     left 5px
 
   .directional-arrows--right
     right 5px
-  
+
   .lightbox--close
     top 4px
     right 4px

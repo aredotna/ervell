@@ -15,8 +15,11 @@
   - if(block.get('class') == 'Media')
     .lightbox__content__media!= block.get('embed').html
 
-  span(class="iconic directional-arrows directional-arrows--right" data-direction="next" data-glyph="chevron-right" title="chevron right")
-  span(class="iconic directional-arrows directional-arrows--left" data-direction="prev" data-glyph="chevron-left" title="chevron left")
+  .lightbox__arrow-container.directional-arrows.directional-arrows--right(data-direction="next")
+    span(class="iconic" data-glyph="chevron-right" title="chevron right")
+
+  .lightbox__arrow-container.directional-arrows.directional-arrows--left(data-direction="prev")
+    span(class="iconic" data-glyph="chevron-left" title="chevron left")
 
   - if(block && block.has('title'))
     .lightbox__content__title= block.get('title')
