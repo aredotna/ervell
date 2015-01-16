@@ -53,4 +53,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
     - if(block.get('class') != 'Channel' && block.get('class') != 'User')
       p.grid__block__title= block.smartTruncate(block.get('title'))
       - if(block.has('user'))
-        p.grid__block__author Added by #{block.get('user').username}
+        p.grid__block__author
+          | Added by #{block.get('user').username}
+          br
+          | #{block.updatedAtAgo()}
