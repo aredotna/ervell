@@ -141,7 +141,7 @@
       width 25px
       height 50px
 
-    .logo-icon:hover
+    .logo-icon:hover, &.dropdown--is_active .logo-icon
       svg
         fill hovergray
 
@@ -167,10 +167,10 @@
     font-size 11px !important
     top 0px !important
 
-  &:hover
-    border 0px solid lightgray
-    color hovergray
-    cursor pointer
+.dropdown--is_active .new-channel-btn, .new-channel-btn:hover
+  border 0px solid lightgray
+  color hovergray
+  cursor pointer
 
 .new-channel-btn--caption
   display inline-block
@@ -223,7 +223,7 @@
       font-size s_caption
       margin 0
       color textgray
-      
+
       a
         color textgray
 
@@ -232,7 +232,7 @@
 
     .feed-group__sentence.is_unread
       color private
-      
+
       a
         color private
 
@@ -279,7 +279,7 @@
 
     li
       line-height 30px
-    
+
     .logo
       &.has-notifications:after
         right 34px
