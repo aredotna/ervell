@@ -11,7 +11,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()}" data-id
             .grid__block__content__text
               != block.get('content_html')
           - if(block.get('class') == 'Channel')
-            h2=block.smartTruncate(block.get('title'), 30)
+            h2=block.smartTruncate(block.get('title'), 50)
             .grid__block__channel__stats
               ul.grid__block__channel__stats__list
                 li by #{block.get('user').username}
