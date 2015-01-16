@@ -131,16 +131,18 @@
   .logo
     padding 0 container_pad 0 container_pad
 
-    &.has-notifications:after
-      display block
-      content ' '
-      height 4px
-      width 8px
-      border-radius 100px 100px 0 0
-      background-color private
-      position absolute
-      top 46px
-      right 45px
+    &.has-notifications .logo-icon
+      svg
+        fill alert
+      // display block
+      // content ' '
+      // height 4px
+      // width 8px
+      // border-radius 100px 100px 0 0
+      // background-color alert
+      // position absolute
+      // top 46px
+      // right 45px
 
     .logo-icon svg
       display inline-block
@@ -238,10 +240,10 @@
           color hovergray
 
     .feed-group__sentence.is_unread
-      color private
+      color alert
 
       a
-        color private
+        color alert
 
     .feed-group__timestamp
       padding-top 5px
