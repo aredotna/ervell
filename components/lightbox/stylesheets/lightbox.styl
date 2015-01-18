@@ -30,12 +30,14 @@ body.is-lightbox
 .lightbox__content__img
   height 100%
   text-align center
+  
   img
     max-width 80%
     max-height 90%
     position relative
     top 50%
     v-align()
+    z-index lightbox_z + 1
 
 .lightbox__content__text
   position relative
@@ -44,12 +46,13 @@ body.is-lightbox
   max-width 740px
   width 100%
   min-height 80%
-  top 10%
+  top 7%
   margin 0 0 8% -370px
   text-align left
   border 1px solid bordergray
   background-color rgba(255,255,255, 1)
   box-shadow 0px 0px 20px rgba(0,0,0,0.02)
+  z-index lightbox_z + 1
 
   .lightbox__content__text__inner
     font-family Times New Roman
@@ -68,6 +71,7 @@ body.is-lightbox
   height 100%
   position relative
   text-align center
+  z-index lightbox_z + 1
 
   iframe
     position relative
@@ -131,11 +135,13 @@ body.is-lightbox
   left 0
   padding-left 120px
   padding-right 20%
+  z-index lightbox_z 
 
 .directional-arrows--right
   right 0
   padding-right 120px
   padding-left 20%
+  z-index lightbox_z 
 
 .lightbox--close
   display block
@@ -148,12 +154,27 @@ body.is-lightbox
   width 40px
   height 40px
   cursor pointer
-  z-index 2
+  z-index lightbox_z + 2
   text-align center
   color lightgray
 
   &:hover
     color hovergray
+    
+@media (max-width:(block_width_mar * 4))
+  .directional-arrows--left
+    left 30px
+    width 150px
+    text-align left
+    padding-right 0
+    padding-left 0
+
+  .directional-arrows--right
+    right 30px
+    width 150px
+    text-align right
+    padding-right 0
+    padding-left 0
 
 @media (max-width:850px)
   .lightbox__content__text
@@ -164,15 +185,17 @@ body.is-lightbox
     .lightbox__content__text__inner
       padding 1.4em 1.8em 1.8em 1.8em
 
-  .directional-arrows--left
-    left 5px
-
-  .directional-arrows--right
-    right 5px
-
   .lightbox--close
     top 4px
     right 4px
+    
+  .directional-arrows--left
+    left 1%
+    width 100px
+
+  .directional-arrows--right
+    right 1%
+    width 100px
 
 @media (max-width:500px)
   .lightbox__content
