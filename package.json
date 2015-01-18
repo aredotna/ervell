@@ -28,7 +28,8 @@
     "backbone-fetch-cache": "*",
     "blueimp-file-upload": "*",
     "diacritics" : "*",
-    "jquery.ui.widget": "*"
+    "jquery.ui.widget": "*",
+    "q" : "*"
   },
   "devDependencies": {
     "jquery": "*",
