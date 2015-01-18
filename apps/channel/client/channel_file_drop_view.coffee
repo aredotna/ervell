@@ -12,7 +12,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
     @channel = options.channel
     @blocks = options.blocks
 
-    @setupFileDrop() if mediator.shared.current_user.has('manifest')
+    @setupFileDrop()
 
   handleDrag: (e)->
     @$('.channel--drop-zone').addClass('is-droppable')
