@@ -21,6 +21,7 @@ stylus = require "stylus"
 nib = require "nib"
 rupture = require 'rupture'
 artsyError = require 'artsy-error-handler'
+cache = require './cache'
 
 # Inject some constant data into sharify
 sharify.data =
@@ -42,6 +43,8 @@ module.exports = (app) ->
   Backbone.sync = require "backbone-super-sync"
   # console.log 'REDIS_URL', REDIS_URL
   # backboneCacheSync(Backbone.sync, REDIS_URL, 3000, NODE_ENV) if REDIS_URL
+  Backbone.sync.cacheClient = cache.client
+
 
   # Mount sharify
   app.use sharify

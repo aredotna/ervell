@@ -20,6 +20,7 @@ module.exports =
   COOKIE_DOMAIN: null
   ASSET_PATH: '/assets/'
   IMAGE_PATH: '/images/'
+  REDIS_URL: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports

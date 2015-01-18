@@ -29,7 +29,8 @@
     "blueimp-file-upload": "*",
     "diacritics" : "*",
     "jquery.ui.widget": "*",
-    "q" : "*"
+    "q" : "*",
+    "redis" : "*"
   },
   "devDependencies": {
     "jquery": "*",
