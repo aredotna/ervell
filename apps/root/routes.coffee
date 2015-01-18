@@ -1,10 +1,11 @@
 #
-# Routes file that exports route handlers for ease of testing.
+# Handles / (authenticated gets feed, otherwise about) and /explore
 #
-
+Q = require 'q'
+_ = require 'underscore'
 Feed = require "../../collections/feed"
 Channel = require "../../models/channel"
-SearchBlocks = require "../../collections/search_blocks"
+ExploreBlocks = require "../../collections/explore_blocks"
 Blocks = require "../../collections/blocks"
 CurrentUser = require '../../models/current_user'
 sd = require("sharify").data
@@ -35,13 +36,25 @@ sd = require("sharify").data
       error: (m, err) -> next err
 
 @explore = (req, res, next) ->
-  blocks = new SearchBlocks
-  blocks.url = "#{res.locals.sd.API_URL}/search/channels"
+  channels = new ExploreBlocks
 
-  blocks.fetch
+  channels.fetch
     data:
-      per: 100
+      per: 20
+    cache: true
     success: ->
-      res.render "explore", blocks: blocks.models, path: 'explore'
+      promises = _.compact _.flatten [
+          channels.map (channel) ->
+            channel.fetch
+              success: (model)->
+                blocks = new Blocks _.take(model.get('contents'), 4)
+                model.set 'contents', blocks
+              error: (model, error) ->
+                console.log 'error fetching', error
+        ]
+      Q.allSettled(promises).then(->
+        res.locals.sd.CHANNELS = channels.toJSON()
+        res.render "explore", channels: channels.models, path: 'explore'
+      ).done()
     error: (m, err) -> next err
 

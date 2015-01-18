@@ -11,10 +11,13 @@ module.exports = class Channel extends Block
     direction: 'desc'
     sort: 'position'
 
-  url: -> "#{sd.API_URL}/channels/#{@slug}/thumb?#{params.encode(@options)}"
+  url: -> "#{sd.API_URL}/channels/#{@slugOrId()}/thumb?#{params.encode(@options)}"
+
+  slugOrId: ->
+    @slug || @id
 
   initialize: (options) ->
     super
-    if options
+    if options.channel_slug
       @slug = options.channel_slug
       @username = options.username
