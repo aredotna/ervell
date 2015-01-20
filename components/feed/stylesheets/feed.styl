@@ -28,7 +28,6 @@
 
 .explore
   position relative
-  float left
   padding 0
 
 .explore__channel
@@ -64,6 +63,24 @@
   .grid__block
     max-width 300px
     min-width 300px
+
+for i in (1..5)
+  @media (min-width:(block_width_mar * i) + 20)
+    .explore
+      center(block_width_mar * i)
+
+@media (max-width:(block_width_mar * 4) + 20)
+  .explore__channel 
+    .grid__block
+      max-width 220px
+      min-width 220px
+  
+    .grid__block__inner
+      height 220px
+      
+    .grid__block__content__image
+      max-width 219px
+      max-height 220px
 
 @media (max-width:500px)
   .feed-group
