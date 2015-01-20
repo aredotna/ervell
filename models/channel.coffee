@@ -18,6 +18,6 @@ module.exports = class Channel extends Block
 
   initialize: (options) ->
     super
-    if options.channel_slug
+    if options and options.channel_slug
       @slug = options.channel_slug
       @username = options.username
