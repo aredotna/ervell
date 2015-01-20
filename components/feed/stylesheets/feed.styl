@@ -1,9 +1,9 @@
 @import '../../layout/variables'
 
 .feed-group
-  margin 0
+  margin 0 0 40px 0
   border-top 1px dotted #eee
-  padding-top 50px
+  padding 12px 0 0 0
 
 .feed-group__sentence
   max-width 900px
@@ -25,6 +25,45 @@
     font-size s_caption
     color textgray
     font-weight normal
+
+.explore
+  position relative
+  float left
+  padding 0
+
+.explore__channel
+  position relative
+  float left
+  width 100%
+  border-top 1px dotted #eee
+  margin 0 0 50px 0
+  padding 0 0 0 10px
+
+  .explore__channel__path
+    position relative
+    float left
+    color textgray
+    padding 20px 0 12px 0
+    margin 0
+
+  privacy-color('.search__results__result--privacy-', color)
+
+.explore__channel a:hover .search__results__result--privacy-closed,
+.explore__channel a:hover .search__results__result--privacy-private,
+.explore__channel a:hover .search__results__result--privacy-public
+  color hovergray
+
+.explore__channel__blocks
+  position relative
+  float left
+  width 100%
+  overflow hidden
+  text-align center
+  padding 0
+
+  .grid__block
+    max-width 300px
+    min-width 300px
 
 @media (max-width:500px)
   .feed-group
