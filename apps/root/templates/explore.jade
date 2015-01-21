@@ -13,6 +13,7 @@ block body
             ul.breadcrumb
               li=channel.get('user').username
               li(class="search__results__result--privacy-#{channel.getVisibility()}")=channel.get('title')
+          .explore__timestamp Updated #{channel.updatedAtAgo()}
         .explore__channel__blocks
           .grid
             for block in channel.get('contents').models
