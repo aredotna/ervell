@@ -1,5 +1,4 @@
-Chaplin = require 'chaplin'
-Chaplin.$ = $
+Backbone = require 'backbone'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 InfiniteView = require '../../../components/pagination/infinite_view.coffee'
@@ -8,7 +7,7 @@ BlockCollectionView = require '../../../components/block_collection/client/block
 User = require '../../../models/user.coffee'
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
 
-module.exports = class FeedView extends Chaplin.View
+module.exports = class FeedView extends Backbone.View
 
   initialize: ->
     mediator.trigger 'load:start'

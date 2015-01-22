@@ -2,13 +2,12 @@
 # Base model to extend from
 #
 Backbone = require 'backbone'
-Model = require("chaplin").Model
 moment = require 'moment'
 _ = require 'underscore'
 ModelLib = require '../lib/model_lib.coffee'
 sd = require("sharify").data
 
-module.exports = class Base extends Model
+module.exports = class Base extends Backbone.Model
   _.extend @prototype, ModelLib
 
   initialize: (attributes, options={})->
@@ -27,15 +26,6 @@ module.exports = class Base extends Model
       return @calculated[key].apply(@, [options])
     else
       super
-
-  fetch: (options = {})->
-    @beginSync()
-    success = options.success
-    options.success = (model, response) =>
-      @finishSync()
-      success? model, response
-
-    super options
 
   saveMeta: (key, value, options = {})->
     if not @has('metadata')
