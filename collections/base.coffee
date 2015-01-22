@@ -1,7 +1,8 @@
 #
 # General collection
 #
-Collection = require("chaplin").Collection
+Backbone = require 'backbone'
+Collection = Backbone.Collection
 sd = require("sharify").data
 _ = require 'underscore'
 Model = require("../models/base.coffee")

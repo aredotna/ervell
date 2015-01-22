@@ -15,8 +15,8 @@ module.exports = class Feed extends Base
 
   initialize: (models, options) ->
     super
-    @subscribeEvent 'feed:loaded', @setupListener
-    @subscribeEvent 'activity:recieved', @maybeGetActivity
+    @on 'feed:loaded', @setupListener
+    @on 'activity:recieved', @maybeGetActivity
 
   comparator: (group)->
     date = new Date group.models[0].get('created_at')
