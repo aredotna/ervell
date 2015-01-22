@@ -1,4 +1,3 @@
-Chaplin = require 'chaplin'
 _ = require 'underscore'
 
 ModelLib =
@@ -18,4 +17,4 @@ ModelLib =
     @subscribeEvent(type, handler)
 
 
-module.exports = _.extend ModelLib, Chaplin.SyncMachine
+module.exports = ModelLib
