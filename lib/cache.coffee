@@ -5,7 +5,7 @@ redis = require 'redis'
 
 # Setup redis client
 @setup = (callback) ->
-  return callback() if NODE_ENV is "test" or not OPENREDIS_URL
+  return callback() if NODE_ENV is "test" or not REDIS_URL
   red = require("url").parse(REDIS_URL)
   @client = redis.createClient(red.port, red.hostname)
   @client.on 'error', _.once (err) =>
@@ -21,6 +21,7 @@ redis = require 'redis'
 # @param {String} val
 # @param {Number} expiresIn Defaults to 30 mins
 @set = (key, val, expiresIn = 1800) =>
+  console.log 'set', key, val
   return unless @client?
   @client.set key, val
   @client.expire key, expiresIn

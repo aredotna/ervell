@@ -4,14 +4,16 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET, SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY, COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL, PUSHER_KEY} = config = require "../config"
+{ API_URL, NODE_ENV, SESSION_SECRET,
+SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
+COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
+PUSHER_KEY} = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
 Backbone = require "backbone"
 sharify = require "sharify"
 arenaPassport = require 'arena-passport'
-backboneCacheSync = require 'backbone-cache-sync'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
 cookieParser = require 'cookie-parser'
@@ -41,10 +43,7 @@ CurrentUser = require '../models/current_user'
 module.exports = (app) ->
 
   Backbone.sync = require "backbone-super-sync"
-  # console.log 'REDIS_URL', REDIS_URL
-  # backboneCacheSync(Backbone.sync, REDIS_URL, 3000, NODE_ENV) if REDIS_URL
   Backbone.sync.cacheClient = cache.client
-
 
   # Mount sharify
   app.use sharify
