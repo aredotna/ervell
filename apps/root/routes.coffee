@@ -46,6 +46,7 @@ sd = require("sharify").data
       promises = _.compact _.flatten [
           channels.map (channel) ->
             channel.fetch
+              cache: true
               success: (model)->
                 blocks = new Blocks _.take(model.get('contents'), 4)
                 model.set 'contents', blocks
