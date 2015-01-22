@@ -7,12 +7,17 @@
 { PORT } = require "./config"
 express = require "express"
 setup = require "./lib/setup"
+cache = require './lib/cache'
 
 app = module.exports = express()
-setup app
 
 # Start the server and send a message to IPC for the integration test
 # helper to hook into.
-app.listen PORT, ->
-  console.log "Listening on port " + PORT
-  process.send? "listening"
+cache.setup ->
+  setup app
+
+  # Start the server and send a message to IPC for the integration test helper
+  # to hook into.
+  app.listen PORT, ->
+    console.log "Listening on port " + PORT
+    process.send? "listening"
