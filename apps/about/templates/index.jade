@@ -28,15 +28,41 @@ block body
 				a(href="/daniel-brewster")  Dan Brewster,
 				a(href="/john-michael-boling")  John Michael Boling&nbsp;
 				| and
-				a(href="/j-stuart-moore")  J. Stuart Moore
+				a(href="/j-stuart-moore")  J. Stuart Moore.
 
 		.static__premium.static--text
 			h2.static--title--top#principles Principles
 			p We aim at being self-sustainable working to perfect and evolve the current product rather than seeking external funding.
-			p We offer #[a(href="/about/tools")] advanced tools at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
-			.static--highlight Total Are.na users: <strong>6520</strong>
-			.static--highlight Supporting users needed to cover costs: <strong>290</strong>
-			.static--highlight Currently supporting users: <strong>24</strong>
+			p We offer #[a(href="/about/tools#premium") premium tools] at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
+			//	.static--highlight Total Are.na users: <strong>6520</strong>
+			//	.static--highlight Supporting users needed to cover costs: <strong>290</strong>
+			//	.static--highlight Currently supporting users: <strong>24</strong> 
+			.static__graph
+				.static__graph-fill.step-1
+					.static__graph-mark
+						.mark-label 
+							| Current premium users
+							br
+							strong 25
+				.static__graph-fill.step-2
+					.static__graph-mark
+						.mark-label
+							strong 290 
+							br
+							| Premium users needed to cover basic expenses
+				.static__graph-fill.step-3
+					.static__graph-mark
+						.mark-label
+							strong 
+							br
+							| New milestones to come
+				.static__graph-fill.step-4
+					.static__graph-mark
+						.mark-label
+							strong 6900
+							br
+							| Total Are.na users
+			
 			p We also value transparency: we will never sell data without explicit autorization from the user, we will never show ads or join an ad network and we're committed to retain complete control of the platform.
 
 		.static__labs.static--text
@@ -75,6 +101,12 @@ block body
 			p.static--half-p We trust our users' common sense and have no particular graphic or adult restrictions in the name of research freedom. Our team can intervene in case of explicit criminal offence, read our #[a(href="/terms") terms and conditions] for more information.
 			strong Can I only add content I own?
 			p.static--half-p Users are responsible for the content they link or upload, for research purposes we believe in the fair use of intellectual property, please credit authorship and sources when possible. Read our #[a(href="/terms") terms and conditions] for more information.
+		
+		.static__contact.static--text
+			h2.static--title--top#supporters Supporters
+			p We are grateful to our supporters who donated trusting the project from the beginning:
+			p Names
+			p If you would like to donate or help the Are.na in any way feel free to contact us via email.
 
 		.static__contact.static--text
 			h2.static--title--top#contact Contact
@@ -90,13 +122,13 @@ block body
 			li: a(data-section="principles").static__menu__item Principles
 			li: a(data-section="labs").static__menu__item Labs
 			li: a(data-section="faq").static__menu__item FAQ
+			li: a(data-section="supporters").static__menu__item Supporters
 			li: a(data-section="contact").static__menu__item Contact
 			if !user
 				li: &nbsp;
 				li: a(href="/").static__menu__item Home
 				li: a(href="#log_in").static__menu__item Login
 				li: a(href="#sign_up").static__menu__item Register
-
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
