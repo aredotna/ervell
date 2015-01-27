@@ -17,12 +17,11 @@ module.exports = class FeedGroup extends Base
 
   isNew: -> @any (model) -> model.get('is_read') is false
 
-  # Necessary because we're using this collection inside another collection,
-  # and that collection calls _validate on instantiated models
-  _validate: -> true
+
+  first_item: -> @models[0].get('item')
 
   items: -> @map (model)->
-    if model.get('item').class is 'Comment'
+    if model.get('item')?.class is 'Comment'
       block = new Block model.get('target')
     else
       block = new Block model.get('item')
@@ -32,7 +31,7 @@ module.exports = class FeedGroup extends Base
 
   channel: ->
     if @models[0].get('action') is 'added'
-      new Channel @models[0].get('target')
+      new Channel @first_target()
 
   actor: -> @models[0].get('user')
 
@@ -45,25 +44,25 @@ module.exports = class FeedGroup extends Base
   is_single: -> @length is 1
 
   is_comment: ->
-    @models[0].has('item') && @models[0].get('item').class is 'Comment'
+    @models[0].has('item') && @first_item().class is 'Comment'
 
   single_subject_link: (subject)->
-    if @models[0].get('item').class is 'Channel'
-      "/#{@models[0].get('item').user.slug}/#{@models[0].get('item').slug}"
-    else if @models[0].get('item').class is 'User'
-      "/#{@models[0].get('item').slug}"
+    if @first_item()?.class is 'Channel'
+      "/#{@first_item()?.user.slug}/#{@first_item().slug}"
+    else if @first_item()?.class is 'User'
+      "/#{@first_item()?.slug}"
     else
-      "/#/block/#{@models[0].get('item').id}"
+      "/#/block/#{@first_item()?.id}"
 
-  single_subject_class: -> @models[0].get('item').base_class.toLowerCase()
+  single_subject_class: -> @first_item()?.base_class.toLowerCase()
 
   single_subject: ->
-    if @models[0].get('item').username?
-      @models[0].get('item').username
+    if @first_item()?.username?
+      @first_item()?.username
     else if @is_comment()
-      "\"#{@models[0].get('item').body}\""
-    else if @models[0].get('item').class is "Channel"
-      @models[0].get('item').title
+      "\"#{@first_item()?.body}\""
+    else if @first_item()?.class is "Channel"
+      @first_item()?.title
     else
       @_format_subject()
 
@@ -79,7 +78,7 @@ module.exports = class FeedGroup extends Base
 
   _format_subject: ->
     a = "a"
-    klass = @models[0].get('item').class.toLowerCase()
+    klass = @first_item()?.class.toLowerCase()
 
     if klass is "media"
       klass = "embed"
@@ -92,32 +91,34 @@ module.exports = class FeedGroup extends Base
 
   connector: -> @models[0].get('connector')
 
+  first_target: -> @models[0].get('target')
+
   single_target_link: (subject)->
-    if @models[0].get('target').class is 'Channel'
-      "/#{@models[0].get('target').user.slug}/#{@models[0].get('target').slug}"
-    else if @models[0].get('target').class is 'User'
-      "/#{@models[0].get('target').slug}"
+    if @first_target()?.class is 'Channel'
+      "/#{@first_target()?.user.slug}/#{@first_target().slug}"
+    else if @first_target()?.class is 'User'
+      "/#{@first_target()?.slug}"
     else
-      "/#/block/#{@models[0].get('target').id}"
+      "/#/block/#{@first_target()?.id}"
 
   subject_privacy: ->
-    if @models[0].has('item') and @models[0].get('item').class is "Channel"
-      return @models[0].get('item').status
+    if @models[0].has('item') and @first_item().class is "Channel"
+      return @first_item()?.status
 
     return ''
 
   target_privacy: ->
-    if @models[0].has('target') and @models[0].get('target').class is "Channel"
-      return @models[0].get('target').status
+    if @models[0].has('target') and @first_target().class is "Channel"
+      return @first_target()?.status
 
     return ''
 
   single_target: ->
     if @models[0].has('target')
-      if @models[0].get('target').username?
-        @models[0].get('target').username
-      else if @models[0].get('target').class is "Channel"
-        @models[0].get('target').title
+      if @first_target()?.username?
+        @first_target()?.username
+      else if @first_target()?.class is "Channel"
+        @first_target()?.title
       else
         # @_format_subject()
 
