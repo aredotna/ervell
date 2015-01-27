@@ -32,8 +32,9 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
 
-    new Waypoint.Sticky
-      element: $('.path__inner')
+    if $('.path__inner')[0]
+      new Waypoint.Sticky
+        element: $('.path__inner')
 
     if !sd.CURRENT_USER
       new AuthRouter pushState: false
