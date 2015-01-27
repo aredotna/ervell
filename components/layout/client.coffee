@@ -30,13 +30,23 @@ setupPusherAndCurrentUser = ->
   mediator.shared.current_user = user
 
   if user.id
+
     user.fetch
       cache: true
       prefill: true
-      prefillSuccess: -> mediator.trigger 'current_user:prefetched'
+      prefillSuccess: (data)->
+        ensureFreshUser data
+        mediator.trigger 'current_user:prefetched'
       success: -> mediator.trigger 'current_user:fetched'
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
+
+ensureFreshUser = (data) ->
+  return unless sd.CURRENT_USER
+  for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
+               'last_name', 'manifest', 'notification_count', 'shortcuts_id', 'slug', 'username']
+    if not _.isEqual data[attr], sd.CURRENT_USER[attr]
+      return $.ajax('/me/refresh').then -> mediator.trigger 'current_user:refreshed'
 
 setupAjaxHeaders = ->
   $.ajaxSetup

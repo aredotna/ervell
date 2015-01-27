@@ -14,6 +14,8 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
     @setupFileDrop()
 
+    mediator.on 'current_user:refreshed', @setupFileDrop, @
+
   handleDrag: (e)->
     @$('.channel--drop-zone').addClass('is-droppable')
 
@@ -27,7 +29,6 @@ module.exports = class ChannelFileDropView extends Backbone.View
     id.substr 0, length
 
   setupFileDrop: ->
-
     view = @
 
     @$("#fileupload").fileupload
@@ -76,7 +77,6 @@ module.exports = class ChannelFileDropView extends Backbone.View
         mediator.trigger "upload:complete"
 
       progressall: (e, data) =>
-        console.log('file upload progress', e, data)
         progress = parseInt(data.loaded / data.total * 100, 10)
         @$('.channel--drop-zone__progress').css('width', "#{progress}%")
         mediator.trigger 'file:upload', progress
