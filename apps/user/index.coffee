@@ -1,8 +1,5 @@
 #
-# The express app for the "commits" app.
-#
-# Simply exports the express instance to be mounted into the project,
-# and loads the routes.
+# /:username -- a user's profile
 #
 
 express = require "express"
