@@ -20,7 +20,6 @@ _ = require 'underscore'
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
   channel.fetch
-    cache: true
     success: ->
       blocks.add channel.get 'contents'
 
