@@ -13,7 +13,7 @@ Backbone.$ = $
 module.exports = class HeaderView extends Backbone.View
 
   events:
-    'focus #layout-header__search__input' : 'setActive'
+    'click #layout-header__search__input' : 'setActive'
     'blur #layout-header__search__input'  : 'unsetActive'
     'click .header--icon'                 : 'setActive'
     'click .btn-login'                    : 'login'
