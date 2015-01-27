@@ -3,11 +3,11 @@
 #
 
 $ ->
-  require('../lib/vendor/waypoints.coffee')
+  require('../lib/vendor/waypoints.js')
 
   $('.static--title--top').waypoint
     handler: (direction) ->
-      id = $(this).attr 'id'
+      id = $(this.element).attr 'id'
       $(".static__menu a.is-active").removeClass 'is-active'
       $(".static__menu a[data-section=#{id}]").addClass 'is-active'
 

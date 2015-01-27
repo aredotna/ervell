@@ -64,7 +64,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @resetQueue([1, 2, 3])
 
   checkWaypoint: (el, direction)->
-    current = $(el).data('page')
+    current = $(el.element).data('page')
 
     if current is 'last'
       direction = 'up'
