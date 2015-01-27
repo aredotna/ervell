@@ -14,7 +14,7 @@
 .static__left-column
   position relative
   max-width 750px
-  margin 0 0 400px 40px
+  margin 0 0 700px 40px
 
 .static__menu
   position fixed
@@ -118,6 +118,62 @@
   text-align center
   margin 10px 0 10px 0
   border 2px solid bordergray
+
+.static__graph
+  width 98%
+  height 18px
+  margin 120px 0 150px 0
+  border 0px solid lightgray
+  background-color white
+  
+  .static__graph-fill
+    position realtive
+    float left
+    height 100%
+    
+  .step-1
+    background-color #6AD065
+    width 1%
+  
+    .static__graph-mark
+      margin-top -36px
+      
+      .mark-label
+        margin-top -40px
+    
+  .step-2
+    background-color #E5E5E5
+    width 5%
+  
+  .step-3
+    background-color #B6B6B6
+    width 30%
+  
+  .step-4
+    background-color #B6B6B6
+    width 64%
+    
+    .mark-label
+      float right
+      text-align right
+      margin 16px 6px 0 0 
+
+.static__graph-mark
+  position relative
+  float right
+  width 1px
+  background-color #C2C2C2
+  margin 22px 0 0 0
+  height 30px
+
+.mark-label
+  position relative
+  float left
+  font-size s_caption + 3
+  line-height 18px
+  margin 16px 0 0 6px
+  color textgray
+  width 100px
 
 .static__tools__bookmarklet-button, .static__tools__social-button
   width 100%
