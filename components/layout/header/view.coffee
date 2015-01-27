@@ -35,6 +35,7 @@ module.exports = class HeaderView extends Backbone.View
     if $('.path__inner')[0]
       new Waypoint.Sticky
         element: $('.path__inner')
+        offset: 3
 
     if !sd.CURRENT_USER
       new AuthRouter pushState: false
