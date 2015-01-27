@@ -8,17 +8,6 @@
   req.logout()
   next()
 
-@refresh = (req, res, next) ->
-  # return res.redirect("/") unless req.user
-  # req.user.fetch
-  #   error: res.backboneError
-  #   success: ->
-  #     req.login req.user, (error) ->
-  #       if (error)
-  #         next error
-  #       else
-  #         res.json req.user.attributes
-
 @redirectBack = (req, res, next) ->
   url = req.body['redirect-to'] or
         req.query['redirect-to'] or
