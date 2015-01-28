@@ -279,6 +279,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 @media (max-width:350px)
   #layout-header
+    position absolute
 
     li
       line-height 30px
@@ -291,6 +292,11 @@ privacy-color('.search__results__result--privacy-', color)
     position fixed
     overflow scroll
     width 100%
+  input#layout-header__search__input
+    padding 0 container_pad 0 40px
+
+  .layout-header__register
+    width 185px
 
   .dropdown
     position fixed
