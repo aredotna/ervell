@@ -12,12 +12,17 @@ ft = require('fastclick')
 # analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
+  setMobileClass()
   setupPusherAndCurrentUser()
   setupViews()
   setupAjaxHeaders()
   # setupFastClick()
   initShortCuts()
   showBetaMessage()
+
+setMobileClass = ->
+  if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    $('body').addClass 'is-mobile'
 
 setupViews = ->
   new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')

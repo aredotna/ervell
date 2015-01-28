@@ -32,7 +32,8 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
 
-    if $('.path__inner')[0]
+    if $('.path__inner')[0]? and !$('body').hasClass('is-mobile')
+      console.log 'setting up sticky', $('body').hasClass('is-mobile')
       new Waypoint.Sticky
         element: $('.path__inner')
         offset: 3
