@@ -11,8 +11,8 @@ lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 module.exports = class LightboxView extends Backbone.View
 
   events:
-    'click .lightbox--close'    : 'close'
-    'click .directional-arrows' : 'clickSlide'
+    'tap .lightbox--close'    : 'close'
+    'tap .directional-arrows' : 'clickSlide'
 
   initialize: ->
     $('body').addClass 'is-lightbox'
