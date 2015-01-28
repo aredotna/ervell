@@ -29,7 +29,8 @@
     "diacritics" : "*",
     "jquery.ui.widget": "*",
     "q" : "*",
-    "redis" : "*"
+    "redis" : "*",
+    "jquery.finger": "*"
   },
   "devDependencies": {
     "jquery": "*",
