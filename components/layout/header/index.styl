@@ -24,136 +24,135 @@
     fill hovergray
     stroke hovergray
 
+.header--icon
+  position absolute
+  left 0
+  top 0
+  width 40px
+
+  svg
+    width 46px
+    height 46px
+    line-height 2em
+    padding 18px 15px 12px 15px
+    outline none
+
+    .iconic-magnifying-glass-lg
+      display none
+
+    .iconic-magnifying-glass-md
+      display none
+
+    .iconic-magnifying-glass-sm
+      display inline
+
+    & *
+      stroke lightgray
+      fill lightgray
+
+.layout-header__search
+  flex-grow 3
+  position relative
+
+input#layout-header__search__input
+  width 100%
+  height 50px
+  font-size 1em
+  border none
+  outline 0
+  font-weight normal
+  padding 0 container_pad 0 topbar_h
+  background-color backgroundgray
+
+  &:focus
+    background-color secondbackgroundgray
+
+.layout-header__search__results
+  position absolute
+  left 0
+  width 100%
+  display none
+  box-shadow downshadow
+  background secondbackgroundgray
+
+.layout-header__search.is-active
+  .layout-header__search__results
+    display block
   .header--icon
-    position absolute
-    left 0
-    top 0
-    width 40px
+    display none
 
+.search__results__list
+  list-style-type none
+
+.search__results__result
+  padding 4px 0 4px 50px
+  font-size 1em
+  font-weight bold
+  border-top 1px solid bordergray
+  cursor pointer
+
+  &:hover
+    background-color backgroundgray
+
+    li
+      color hovergray
+
+.search__results__see-all
+  background-color bordergray
+
+privacy-color('.search__results__result--privacy-', color)
+
+.layout-header__search__close
+  position absolute
+  left 16px
+  font-size 31px
+  top 1px
+  display none
+  color lightgray
+
+  &:hover
+    color textgray
+
+&.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
+  display block
+
+&.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
+  display block
+
+.layout-header__register
+  padding 0 container_pad 0 container_pad
+  a
+    font-weight bold
+
+.right
+  text-align right
+  margin 0
+
+.logo
+  padding 0 container_pad 0 container_pad
+
+  &.has-notifications .logo-icon
     svg
-      width 46px
-      height 46px
-      line-height 2em
-      padding 18px 15px 12px 15px
-      outline none
+      fill alert
+    // display block
+    // content ' '
+    // height 4px
+    // width 8px
+    // border-radius 100px 100px 0 0
+    // background-color alert
+    // position absolute
+    // top 46px
+    // right 45px
 
-      .iconic-magnifying-glass-lg
-        display none
+  .logo-icon svg
+    display inline-block
+    fill textgray
+    width 25px
+    height 50px
 
-      .iconic-magnifying-glass-md
-        display none
-
-      .iconic-magnifying-glass-sm
-        display inline
-
-      & *
-        stroke lightgray
-        fill lightgray
-
-  .layout-header__search
-    flex-grow 3
-    position relative
-
-    input#layout-header__search__input
-      width 100%
-      height 50px
-      font-size 1em
-      border none
-      outline 0
-      font-weight normal
-      padding 0 container_pad 0 topbar_h
-      background-color backgroundgray
-
-
-      &:focus
-        background-color secondbackgroundgray
-
-    .layout-header__search__results
-      position absolute
-      left 0
-      width 100%
-      display none
-      box-shadow downshadow
-      background secondbackgroundgray
-
-    &.is-active
-      .layout-header__search__results
-        display block
-      .header--icon
-        display none
-
-    .search__results__list
-      list-style-type none
-
-    .search__results__result
-      padding 4px 0 4px 50px
-      font-size 1em
-      font-weight bold
-      border-top 1px solid bordergray
-      cursor pointer
-
-      &:hover
-        background-color backgroundgray
-
-        li
-          color hovergray
-
-    .search__results__see-all
-      background-color bordergray
-
-    privacy-color('.search__results__result--privacy-', color)
-
-    .layout-header__search__close
-      position absolute
-      left 16px
-      font-size 31px
-      top 1px
-      display none
-      color lightgray
-
-      &:hover
-        color textgray
-
-    &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
-      display block
-
-    &.is-loading .layout-header__search__close, &.is-active .layout-header__search__close, &.has-results .layout-header__search__close
-      display block
-
-  .layout-header__register
-    padding 0 container_pad 0 container_pad
-    a
-      font-weight bold
-
-  .right
-    text-align right
-    margin 0
-
-  .logo
-    padding 0 container_pad 0 container_pad
-
-    &.has-notifications .logo-icon
-      svg
-        fill alert
-      // display block
-      // content ' '
-      // height 4px
-      // width 8px
-      // border-radius 100px 100px 0 0
-      // background-color alert
-      // position absolute
-      // top 46px
-      // right 45px
-
-    .logo-icon svg
-      display inline-block
-      fill textgray
-      width 25px
-      height 50px
-
-    .logo-icon:hover, &.dropdown--is_active .logo-icon
-      svg
-        fill hovergray
+  .logo-icon:hover, &.dropdown--is_active .logo-icon
+    svg
+      fill hovergray
 
 .new-channel-dropdown
   display inline-block
