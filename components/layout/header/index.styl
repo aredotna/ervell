@@ -207,48 +207,48 @@ privacy-color('.search__results__result--privacy-', color)
     width 300px
     right 0
 
-  .dropdown__link
-    display block
-    padding 0 14px 0 14px
-    line-height 4em
-    font-weight bold
+.dropdown__link
+  display block
+  padding 0 14px 0 14px
+  line-height 4em
+  font-weight bold
 
-  .dropdown__icon
-    float right
-    height 100%
+.dropdown__icon
+  float right
+  height 100%
 
-  .dropdown__notifications
-    width 100%
-    height 160px
-    overflow scroll
-    -webkit-overflow-scrolling touch
-    margin 0 0 8px 0
-    border-bottom 1px solid bordergray
-    border-top 1px solid bordergray
-    background-color secondbackgroundgray
-    cursor default
+.dropdown__notifications
+  width 100%
+  height 160px
+  overflow scroll
+  -webkit-overflow-scrolling touch
+  margin 0 0 8px 0
+  border-bottom 1px solid bordergray
+  border-top 1px solid bordergray
+  background-color secondbackgroundgray
+  cursor default
 
-    .feed-group__sentence
-      font-size s_caption
-      margin 0
+  .feed-group__sentence
+    font-size s_caption
+    margin 0
+    color textgray
+
+    a
       color textgray
 
-      a
-        color textgray
+      &:hover
+        color hovergray
 
-        &:hover
-          color hovergray
+  .feed-group__sentence.is_unread
+    color alert
 
-    .feed-group__sentence.is_unread
+    a
       color alert
 
-      a
-        color alert
-
-    .feed-group__timestamp
-      padding-top 5px
-      text-align center
-      color lightgray
+  .feed-group__timestamp
+    padding-top 5px
+    text-align center
+    color lightgray
 
 .dropdown--is_active .dropdown
   display block
@@ -279,11 +279,6 @@ privacy-color('.search__results__result--privacy-', color)
 
 @media (max-width:350px)
   #layout-header
-    .layout-header__search
-      .layout-header__search__results
-        position fixed
-        overflow scroll
-        width 100%
 
     li
       line-height 30px
@@ -292,29 +287,34 @@ privacy-color('.search__results__result--privacy-', color)
       &.has-notifications:after
         right 34px
 
+  .layout-header__search__results
+    position fixed
+    overflow scroll
+    width 100%
+
   .dropdown
     position fixed
     overflow scroll
     margin 0
 
-    .dropdown__notifications
-      height 100px
+  .dropdown__notifications
+    height 100px
 
-    .dropdown__link
-      height 45px
-      line-height 45px
+  .dropdown__link
+    height 45px
+    line-height 45px
 
-    .user__avatar--thumb
-      height 30px
-      width 30px
-      line-height 30px
+  .user__avatar--thumb
+    height 30px
+    width 30px
+    line-height 30px
 
-    .user__avatar--thumb .user__avatar__image
-      top 7px
+  .user__avatar--thumb .user__avatar__image
+    top 7px
 
-    .dropdown__icon
-      float left
-      margin-right 12px
+  .dropdown__icon
+    float left
+    margin-right 12px
 
   .new-channel-dropdown__container
     width 100%
