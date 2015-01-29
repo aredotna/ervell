@@ -277,9 +277,9 @@ privacy-color('.search__results__result--privacy-', color)
     .user__avatar--thumb .user__avatar__image
       top 6px
 
-@media (max-width:350px)
+@media (max-width:375px)
   #layout-header
-    position absolute
+    position fixed
 
     li
       line-height 30px
@@ -299,28 +299,31 @@ privacy-color('.search__results__result--privacy-', color)
     width 185px
 
   .dropdown
-    position fixed
-    overflow scroll
+    position absolute
+    overflow hidden
+    border 0
     margin 0
+    background-color #E5E5E5
+    z-index lightbox_z + 2
 
   .dropdown__notifications
-    height 100px
-
+    height 35%
+    width 100%
+    position absolute
+    bottom 0
+    margin 0
+    background-color #C8C8C8
+    
   .dropdown__link
-    height 45px
-    line-height 45px
-
-  .user__avatar--thumb
-    height 30px
-    width 30px
-    line-height 30px
-
-  .user__avatar--thumb .user__avatar__image
-    top 7px
+    height 13%
+    font-size 16px
+    line-height 75px
+    border-top 1px solid backgroundgray
 
   .dropdown__icon
     float left
-    margin-right 12px
+    margin-right 20px
+    margin-left 5px
 
   .new-channel-dropdown__container
     width 100%
@@ -328,4 +331,4 @@ privacy-color('.search__results__result--privacy-', color)
 
   .dropdown.dropdown--size
     width 100%
-    height auto
+    height -webkit-calc(100vh - 50px)
