@@ -51,6 +51,9 @@ module.exports = class LightboxView extends Backbone.View
 
   slide: (direction)->
     @model = mediator.shared.blocks[direction](@model)
+
+    mediator.trigger 'slide:to:block', @model
+
     @render() # to get rid of the current block
     @model.fetch success: => @render()
 
