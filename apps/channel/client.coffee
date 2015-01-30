@@ -31,25 +31,34 @@ module.exports = class ChannelView extends Backbone.View
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
     if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
-      should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
-
-      if should_render
-        new NewBlockView
-          el: $ ".grid__block--new-block"
-          container: $ '.grid'
-          model: @channel
-          blocks: @blocks
-          autoRender: should_render
-
-      new ChannelFileDropView
-        el: @$el
-        channel: @channel
-        blocks: @blocks
+      @setupNewBlockView()
+      @setupFileDropView()
 
       @$('.grid').addClass 'is-addable'
 
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
       @$('.grid').addClass 'is-editable'
+
+  setupFileDropView:->
+    $.ajax
+      url: "#{sd.API_URL}/uploads/policy"
+      success: (policy) =>
+        new ChannelFileDropView
+          el: @$el
+          channel: @channel
+          blocks: @blocks
+          policy: policy
+
+  setupNewBlockView: ->
+    should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
+
+    if should_render
+      new NewBlockView
+        el: $ ".grid__block--new-block"
+        container: $ '.grid'
+        model: @channel
+        blocks: @blocks
+        autoRender: should_render
 
 module.exports.init = ->
   current_user = mediator.shared.current_user

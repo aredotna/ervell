@@ -140,23 +140,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @markPageLoaded(page_id)
     @startLoad()
 
-    # Remove any empty placeholders from loaded page
-    # $start = if page_id is 1 then @$('> .grid-connectable:first') else @$(".pagemarker[data-page=#{page_id}]")
-    # $pageElements = $start.nextUntil('.pagemarker').andSelf()
-
-    # $pageElements = $pageElements.filter('.is-placeholder')
-
-    # view = this
-    # # went around the world and this is what i came up with....im not pleased with myself -cab
-    # _.delay =>
-    #   $pageElements.remove()
-    #   # if @pagesLoaded()
-    #   #   clearTimeout(@hideTimer) if @hideTimer
-    #   #   @hideTimer = setTimeout( =>
-    #   #     @$el.addClass('is-loaded')
-    #   #   , 1000)
-    # , 100
-
     mediator.trigger 'page:loaded'
 
   markPageLoaded: (id) ->

@@ -3,6 +3,8 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 
+channelFileDropTemplate = -> require('../templates/filedrop.jade') arguments...
+
 module.exports = class ChannelFileDropView extends Backbone.View
   events:
     'dragenter'                     : 'handleDrag'
@@ -11,10 +13,10 @@ module.exports = class ChannelFileDropView extends Backbone.View
   initialize: (options)->
     @channel = options.channel
     @blocks = options.blocks
+    @policy = options.policy
 
+    @renderFileDrop()
     @setupFileDrop()
-
-    mediator.on 'current_user:refreshed', @setupFileDrop, @
 
   handleDrag: (e)->
     @$('.channel--drop-zone').addClass('is-droppable')
@@ -28,6 +30,9 @@ module.exports = class ChannelFileDropView extends Backbone.View
     id += Math.random().toString(36).substr(2) while id.length < length
     id.substr 0, length
 
+  renderFileDrop: ->
+    @$('.channel__filedrop').html channelFileDropTemplate(policy: @policy, channel: @channel)
+
   setupFileDrop: ->
     view = @
 
@@ -38,7 +43,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
       autoUpload: true
       dataType: "XML"
       fileInput: @$("input:file")
-      url:  mediator.shared.current_user.get('manifest').bucket
+      url: @policy.bucket
 
       drop: (e, data) =>
         @$('.channel--drop-zone').addClass('is-uploading')

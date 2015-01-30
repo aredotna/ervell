@@ -13,13 +13,13 @@ Backbone.$ = $
 module.exports = class HeaderView extends Backbone.View
 
   events:
-    'tap #layout-header__search__input' : 'setActive'
+    'tap #layout-header__search__input'   : 'setActive'
     'blur #layout-header__search__input'  : 'unsetActive'
-    'tap .header--icon'                 : 'setActive'
-    'tap .btn-login'                    : 'login'
-    'tap .btn-signup'                   : 'signup'
-    'tap .dropdown--menu__trigger'      : 'toggleDropdown'
-    'tap .logo-icon'                    : 'clearNotifications'
+    'tap .header--icon'                   : 'setActive'
+    'tap .btn-login'                      : 'login'
+    'tap .btn-signup'                     : 'signup'
+    'tap .dropdown--menu__trigger'        : 'toggleDropdown'
+    'tap .logo-icon'                      : 'clearNotifications'
 
   initialize: (options) ->
     @searchBarView = new SearchBarView
