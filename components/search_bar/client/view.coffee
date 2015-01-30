@@ -85,7 +85,7 @@ module.exports = class SearchBarView extends Backbone.View
   blurSearch: (e) ->
     _.delay =>
       @$el.removeClass('is-active')
-    , 100
+    , 200
 
   clearSearch: ->
     @searchUnloaded()
