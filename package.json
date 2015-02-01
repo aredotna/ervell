@@ -30,7 +30,8 @@
     "jquery.ui.widget": "*",
     "q" : "*",
     "redis" : "*",
-    "jquery.finger": "*"
+    "jquery.finger": "*",
+    "s3-policy": "*"
   },
   "devDependencies": {
     "jquery": "*",
