@@ -22,6 +22,7 @@ module.exports = class HeaderView extends Backbone.View
     'tap .logo-icon'                      : 'clearNotifications'
 
   initialize: (options) ->
+
     @searchBarView = new SearchBarView
       el: @$('.layout-header__search')
       $input: @$('#layout-header__search__input')
@@ -31,6 +32,10 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'body:click', @closeDropdown, @
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
+
+    if $('body').hasClass('is-mobile')
+      @$windowH = $(window).height()
+      @$('.dropdown--size').css('height', @$windowH - 50)
 
     if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
       new Waypoint.Sticky
