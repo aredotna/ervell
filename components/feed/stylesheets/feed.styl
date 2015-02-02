@@ -66,18 +66,36 @@
   text-align center
   padding 0
 
-@media (max-width:(block_width_mar * 4) + 20)
-  .explore__channel 
-    .grid__block
-      max-width 220px
-      min-width 220px
-  
-    .grid__block__inner
-      height 220px
+@media (max-width:(block_width_mar * 4) + 19)
+  .explore__channel
+    .grid
+      -webkit-justify-content center
+      justify-content center 
       
-    .grid__block__content__image
-      max-width 219px
-      max-height 220px
+      .grid__block
+        max-width 220px
+        min-width 220px
+    
+      .grid__block__inner
+        height 220px
+        
+      .grid__block__content__image
+        max-width 220px
+        max-height 220px
+
+@media (max-width:(block_width_mar * 3) + 30)
+  .explore__channel 
+    .grid
+      .grid__block
+        max-width 300px
+        min-width 300px
+    
+      .grid__block__inner
+        height 300px
+        
+      .grid__block__content__image
+        max-width 300px
+        max-height 300px
 
 @media (max-width:500px)
   .feed-group
@@ -85,3 +103,16 @@
   
   .feed-group__sentence
     font-size 1.2em
+  
+  .explore__channel 
+    .grid
+      .grid__block
+        max-width 280px
+        min-width 280px
+    
+      .grid__block__inner
+        height 280px
+        
+      .grid__block__content__image
+        max-width 280px
+        max-height 280px
