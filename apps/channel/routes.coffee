@@ -56,7 +56,12 @@ _ = require 'underscore'
       render()
     error: (m, err) -> next err
 
-
-  render = _.after 2, -> res.render "index", channel: channel, blocks: blocks.models, author: author, followers: true
+  render = _.after 2, ->
+    res.render "index",
+      channel: channel
+      blocks: blocks.models
+      author: author
+      followers: true
+      policy: getPolicy()
 
 
