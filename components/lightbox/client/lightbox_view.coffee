@@ -5,6 +5,7 @@ mediator = require '../../../lib/mediator.coffee'
 Feed = require '../../../collections/feed.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
+NewCommentView = require '../../new_comment/client/new_comment_view.coffee'
 
 lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 
@@ -34,6 +35,7 @@ module.exports = class LightboxView extends Backbone.View
 
     @$el.html lightboxTemplate(block: @model)
 
+    # TODO - make sure to dispose these things when lightbox slides
     feed = new Feed null,
       type: 'block'
       object_id: @model.id
@@ -41,6 +43,11 @@ module.exports = class LightboxView extends Backbone.View
     new SmallFeedView
       el: @$ "#lightbox__feed_inner"
       collection: feed
+
+    new NewCommentView
+      el: @$ "#lightbox__new-comment"
+      collection: feed
+      autoRender: true
 
     IconicJS().inject 'img.iconic'
 
