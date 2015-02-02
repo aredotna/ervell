@@ -12,7 +12,7 @@ module.exports = class ConnectView extends Backbone.View
 
   events:
     'keyup .new-connection__search' : 'onKeyUp'
-    'click .new-connection__done-button' : 'clear'
+    'tap .new-connection__done-button' : 'clear'
 
   initialize: (options)->
     @block = options.block

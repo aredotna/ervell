@@ -16,10 +16,10 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
-    'click .grid__block__source__link': 'openLink'
-    'click .grid__block__overlay'     : 'openLightbox'
-    'click .grid__block__connect-btn' : 'loadConnectView'
-    'click .grid__block__delete-block': 'destroyConnection'
+    'tap .grid__block__source__link': 'openLink'
+    'tap .grid__block__overlay'     : 'openLightbox'
+    'tap .grid__block__connect-btn' : 'loadConnectView'
+    'tap .grid__block__delete-block': 'destroyConnection'
 
   initialize: (options)->
     @container = options.container if options.container?
