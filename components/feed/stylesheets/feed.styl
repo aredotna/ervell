@@ -36,13 +36,12 @@
   width 100%
   border-top 1px dotted #eee
   margin 0 0 50px 0
-  padding 0 0 0 10px
 
   .explore__channel__path
     position relative
     float left
     color textgray
-    padding 20px 0 12px 0
+    padding 20px 10px 12px 10px
     margin 0
 
   privacy-color('.search__results__result--privacy-', color)
@@ -66,15 +65,6 @@
   overflow hidden
   text-align center
   padding 0
-
-  .grid__block
-    max-width 300px
-    min-width 300px
-
-for i in (1..5)
-  @media (min-width:(block_width_mar * i) + 20)
-    .explore
-      center(block_width_mar * i)
 
 @media (max-width:(block_width_mar * 4) + 20)
   .explore__channel 
