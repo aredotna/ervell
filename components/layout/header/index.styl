@@ -125,9 +125,11 @@ privacy-color('.search__results__result--privacy-', color)
   text-align right
   margin 0
 
-.logo
+.logo-icon.dropdown--menu__trigger
+  height topbar_h
   padding 0 container_pad 0 container_pad
 
+.logo
   &.has-notifications .logo-icon
     svg
       fill alert
@@ -136,7 +138,7 @@ privacy-color('.search__results__result--privacy-', color)
     display inline-block
     fill textgray
     width 25px
-    height 50px
+    height topbar_h
 
   .logo-icon:hover, &.dropdown--is_active .logo-icon
     svg
@@ -149,7 +151,7 @@ privacy-color('.search__results__result--privacy-', color)
     content ""
 
 .new-channel-btn
-  height 50px
+  height topbar_h
   font-size 13px
   line-height 53px
   color textgray
