@@ -1,6 +1,7 @@
 Backbone = require "backbone"
 Backbone.$ = $
 Comment = require "../../../models/comment.coffee"
+mediator = require '../../../lib/mediator.coffee'
 sd = require("sharify").data
 
 newCommentTemplate = -> require('../templates/new_comment.jade') arguments...
@@ -11,13 +12,12 @@ module.exports = class NewCommentView extends Backbone.View
     'keyup .new-comment__field' : 'onKeyUp'
 
   initialize: (options)->
+    @block_id = options.block_id
     @render() if options.autoRender
 
   onKeyUp: (e)->
     e.preventDefault()
     e.stopPropagation()
-
-    console.log 'onKeyUp'
 
     switch e.keyCode
       when 13
@@ -27,9 +27,17 @@ module.exports = class NewCommentView extends Backbone.View
 
   addComment: ->
     if not @fieldIsEmpty()
-      userAttrs = _.pick(mediator.shared.user.attributes, ['slug', 'username', 'avatar', 'id'])
+      userAttrs = _.pick(mediator.shared.current_user.attributes, ['slug', 'username', 'avatar', 'id'])
 
       comment = new Comment
+        body: @$input.val()
+        user: userAttrs
+        created_at: new Date()
+      , block_id: @block_id
+
+      comment.save
+        success: ->
+          console.log 'saved new comment'
 
   render: ->
     @$el.html newCommentTemplate()
