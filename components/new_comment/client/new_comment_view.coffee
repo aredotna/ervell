@@ -1,5 +1,6 @@
 Backbone = require "backbone"
 Backbone.$ = $
+Comment = require "../../../models/comment.coffee"
 sd = require("sharify").data
 
 newCommentTemplate = -> require('../templates/new_comment.jade') arguments...
@@ -28,6 +29,7 @@ module.exports = class NewCommentView extends Backbone.View
     if not @fieldIsEmpty()
       userAttrs = _.pick(mediator.shared.user.attributes, ['slug', 'username', 'avatar', 'id'])
 
+      comment = new Comment
 
   render: ->
     @$el.html newCommentTemplate()
