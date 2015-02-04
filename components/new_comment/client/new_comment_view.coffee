@@ -36,8 +36,11 @@ module.exports = class NewCommentView extends Backbone.View
         created_at: new Date()
       , block_id: @block_id
 
+      @$input.attr "disabled", "disabled"
+
       comment.save {},
         success: =>
+          @$input.removeAttr 'disabled'
           @$input.val ""
           console.log 'triggering new comment'
           mediator.trigger 'new:comment', comment
