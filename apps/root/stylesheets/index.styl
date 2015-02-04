@@ -25,9 +25,6 @@ body
   padding 0 10px
   background-color backgroundgray
 
-.home__section__container
-  center(1400px)
-
 .home__section--stats, .home__section--footer
   background-color #EFEFEF
 
@@ -134,20 +131,20 @@ a.home__section-intro__menu--mobile
 
   h2
     color hovergray
-    padding 0 0 0 38px
+    padding 0 0 0 10px
 
 .home__section--channels__channels
   position relative
   float left
   width 100%
   margin 0
-  padding 0 0 0 38px
+  padding 0
 
   h2
     position relative
     float left
     color lightgray
-    padding 40px 0 20px 0
+    padding 20px 0 10px 10px
     margin 0
 
 .home__section-channels__channels a:hover .home__path--closed,
@@ -158,13 +155,7 @@ a.home__section-intro__menu--mobile
   position relative
   float left
   width 100%
-  overflow hidden
-  text-align center
   padding 0
-
-  .grid__block
-    max-width 300px
-    min-width 300px
 
 .home__section-channels__button
   position relative
@@ -216,22 +207,29 @@ for i in (1..5)
     .home__section__container
       center(block_width_mar * i)
 
-@media (max-width:(block_width_mar * 4) + 20)
-  .home__section-channels__images 
-    .grid__block
-      max-width 220px
-      min-width 220px
-  
-    .grid__block__inner
-      height 220px
+@media (max-width:(block_width_mar * 4) + 19)
+  .home__section--channels__channels 
+    .grid
+      -webkit-justify-content center
+      justify-content center
       
-    .grid__block__content__image
-      max-width 219px
-      max-height 220px
+      .grid__block
+        max-width 220px
+        min-width 220px
+    
+      .grid__block__inner
+        height 220px
+        
+      .grid__block__content__image
+        max-width 220px
+        max-height 220px
 
-@media (max-width:(block_width_mar * 3) + 19)
+@media (max-width:(block_width_mar * 3) + 16)
   html, body
     font-size 13px
+  
+  .home__section__container
+    center(94%)
 
   .home__mark
     margin 40px 0 0 0
@@ -271,6 +269,18 @@ for i in (1..5)
     h2
       padding 0
       margin-bottom 20px
+  
+    .grid
+      .grid__block
+        max-width 300px
+        min-width 300px
+    
+      .grid__block__inner
+        height 300px
+        
+      .grid__block__content__image
+        max-width 300px
+        max-height 300px
 
   .home__section-footer
     margin 0 0 40px 0
@@ -279,5 +289,22 @@ for i in (1..5)
     display none
 
 @media (max-width:(block_width_mar * 2) + 20)
+  .home__section--channels
+    padding 20px 10px 20px 10px
+    
   .home__section--stats
     display none
+
+@media (max-width:500px)
+  .home__section--channels__channels
+    .grid
+      .grid__block
+        max-width 280px
+        min-width 280px
+    
+      .grid__block__inner
+        height 280px
+        
+      .grid__block__content__image
+        max-width 280px
+        max-height 280px

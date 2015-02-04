@@ -9,7 +9,7 @@ connectResultsTemplate = -> require('../templates/connect_results.jade') argumen
 module.exports = class ConnectResultsView extends Backbone.View
 
   events:
-    'click .new-connection__search-result' : 'makeConnection'
+    'tap .new-connection__search-result' : 'makeConnection'
 
   initialize: (options) ->
     @block = options.block

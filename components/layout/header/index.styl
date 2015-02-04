@@ -125,9 +125,11 @@ privacy-color('.search__results__result--privacy-', color)
   text-align right
   margin 0
 
-.logo
+.logo-icon.dropdown--menu__trigger
+  height topbar_h
   padding 0 container_pad 0 container_pad
 
+.logo
   &.has-notifications .logo-icon
     svg
       fill alert
@@ -136,7 +138,7 @@ privacy-color('.search__results__result--privacy-', color)
     display inline-block
     fill textgray
     width 25px
-    height 50px
+    height topbar_h
 
   .logo-icon:hover, &.dropdown--is_active .logo-icon
     svg
@@ -149,7 +151,7 @@ privacy-color('.search__results__result--privacy-', color)
     content ""
 
 .new-channel-btn
-  height 50px
+  height topbar_h
   font-size 13px
   line-height 53px
   color textgray
@@ -303,13 +305,15 @@ privacy-color('.search__results__result--privacy-', color)
   .dropdown__link
     height 13%
     font-size 16px
-    line-height 75px
     border-top 1px solid backgroundgray
 
   .dropdown__icon
     float left
     margin-right 20px
     margin-left 5px
+  
+  .iconic.dropdown__icon
+    margin-left 10px
 
   .new-channel-dropdown__container
     width 100%
@@ -317,4 +321,4 @@ privacy-color('.search__results__result--privacy-', color)
 
   .dropdown.dropdown--size
     width 100%
-    height -webkit-calc(100vh - 50px)
+    height auto
