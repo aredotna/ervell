@@ -40,6 +40,9 @@ module.exports = class LightboxView extends Backbone.View
       type: 'block'
       object_id: @model.id
 
+    feed.comparator = (group) ->
+      new Date group.models[0].get('created_at')
+
     new SmallFeedView
       el: @$ "#lightbox__feed_inner"
       collection: feed
@@ -47,6 +50,7 @@ module.exports = class LightboxView extends Backbone.View
     new NewCommentView
       el: @$ "#lightbox__new-comment"
       collection: feed
+      block_id: @model.id
       autoRender: true
 
     IconicJS().inject 'img.iconic'
