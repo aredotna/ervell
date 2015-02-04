@@ -1,11 +1,13 @@
-UserBlocks = require "../../collections/user_blocks"
+ManageBlocks = require "../../collections/manage_blocks"
 
 @manage = (req, res, next) ->
 
-  blocks = new UserBlocks null,
+  blocks = new ManageBlocks null,
     user_slug: req.user.get('slug')
-    per: 50,
+    per: 50
     'filter[type]': 'channel'
+
+  res.locals.sd.USER = req.user.toJSON();
 
   blocks.fetch
     success: ->
