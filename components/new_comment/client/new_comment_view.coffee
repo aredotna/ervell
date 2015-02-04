@@ -1,3 +1,4 @@
+_ = require 'underscore'
 Backbone = require "backbone"
 Backbone.$ = $
 Comment = require "../../../models/comment.coffee"
@@ -35,9 +36,11 @@ module.exports = class NewCommentView extends Backbone.View
         created_at: new Date()
       , block_id: @block_id
 
-      comment.save
-        success: ->
-          console.log 'saved new comment'
+      comment.save {},
+        success: =>
+          @$input.val ""
+          console.log 'triggering new comment'
+          mediator.trigger 'new:comment', comment
 
   render: ->
     @$el.html newCommentTemplate()

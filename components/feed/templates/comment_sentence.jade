@@ -1,0 +1,6 @@
+h2.feed-group__sentence
+  a(href="/#{comment.get('user').slug}" class="username")=comment.get('user').username
+  span :
+  span &nbsp;
+  em.feed-group__sentence__comment=comment.get('body')
+  .feed-group__timestamp=comment.createdAtAgo()
