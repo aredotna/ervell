@@ -19,12 +19,10 @@ module.exports = class NewBlockView extends Backbone.View
   initialize: (options)->
     @blocks = options.blocks
     @$container = options.container
-    @$field = @$('.grid__block--new-block__content-field')
 
     @render() if options.autoRender
 
   setActive: ->
-    console.log 'should be setting active', @$el
     @$el.addClass 'active'
 
   removeActive: ->
@@ -62,4 +60,5 @@ module.exports = class NewBlockView extends Backbone.View
   render: ->
     @$container.prepend newBlockTemplate(channel: @model)
     @$el = $ '.grid__block--new-block'
+    @$field = @$('.grid__block--new-block__content-field')
     @delegateEvents()
