@@ -1,0 +1,13 @@
+.manage__block
+  .manage__block__title.manage__block__column
+    = block.smartTruncate(block.get('title'), 50)
+  .manage__block__block_count.manage__block__column
+    = block.get('length')
+  .manage__block__status.manage__block__column
+    = block.get('status')
+  .manage__block__collaborator_count.manage__block__column
+    if block.get('owned_by_ids')
+      = block.get('owned_by_ids').length
+  .manage__block__follower_count.manage__block__column
+    if block.get('followed_by_ids')
+      = block.get('followed_by_ids').length

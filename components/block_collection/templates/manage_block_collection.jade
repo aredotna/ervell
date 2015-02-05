@@ -1,0 +1,10 @@
+.manage__block__collection__header
+  .manage__block__title.manage__block__column.manage__block__sort__link(data-sort="title") Title
+  .manage__block__block_count.manage__block__column.manage__block__sort__link(data-sort="length") Length
+  .manage__block__status.manage__block__column.manage__block__sort__link(data-sort="status") Status
+  .manage__block__collaborator_count.manage__block__column.manage__block__sort__link(data-sort="collaboratore_ids.length") Collaborators
+  .manage__block__follower_count.manage__block__column.manage__block__sort__link(data-sort="followed_by_ids.length") Followers
+
+.manage__block__collection__contents
+  for block in blocks
+    include block_manage
