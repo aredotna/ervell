@@ -5,16 +5,15 @@ sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
 ManageBlockView = require './manage_block_view.coffee'
-BlockCollectionView = require './block_collection_view.coffee'
+UserBlockCollectionView = require './user_block_collection_view.coffee'
 
-module.exports = class ManageBlockCollectionView extends BlockCollectionView
+module.exports = class ManageBlockCollectionView extends UserBlockCollectionView
   
   events: 
     "click .manage__block__sort__link": "sortBlocks"
 
   initialize: (options)->
     super
-    @blocks.on 'add', @appendBlockView, @
 
   sortBlocks: (e)->
     column = $(e.target).data('sort')
@@ -27,11 +26,9 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
     @blocks.fetch
       success: =>
         @$('.manage__block__collection__contents').html('')
-        debugger
+
         for model in @blocks.models
           @renderBlockView(model, true)
-
-        debugger
 
   renderBlockView: (block, autoRender = false)->
     new ManageBlockView
@@ -39,4 +36,3 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
       model: block
       autoRender: autoRender
       channel: @channel if @channel
-
