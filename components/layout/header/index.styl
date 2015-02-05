@@ -254,6 +254,13 @@ privacy-color('.search__results__result--privacy-', color)
 
 @media (max-width:500px)
 
+  .logo-icon.dropdown--menu__trigger
+    height topbar_h
+    padding 0 15px 0 15px
+  
+  .dropdown--menu__trigger:after
+    margin 0
+
   .new-channel-btn--caption
     display none
 
@@ -281,13 +288,6 @@ privacy-color('.search__results__result--privacy-', color)
 
   .layout-header__register
     width 185px
-  
-  .logo-icon.dropdown--menu__trigger
-    height topbar_h
-    padding 0 15px 0 15px
-  
-  .dropdown--menu__trigger:after
-    margin 0
 
   .dropdown
     position absolute
@@ -309,6 +309,14 @@ privacy-color('.search__results__result--privacy-', color)
     height 13%
     font-size 16px
     border-top 1px solid backgroundgray
+
+  .dropdown__icon
+    float left
+    margin-right 20px
+    margin-left 5px
+  
+  .iconic.dropdown__icon
+    margin-left 10px
 
   .new-channel-dropdown__container
     width 100%
