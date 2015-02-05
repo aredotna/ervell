@@ -13,6 +13,7 @@ module.exports = class BodyView extends Backbone.View
     'click a[data-disabled]'                      : 'disable'
     'click a[data-client]:not([data-disabled])'   : 'intercept'
     'click span[data-client]:not([data-disabled])': 'intercept'
+    'click a'                                     : 'maybeIntercept'
     'tap #scroll-top'                             : 'scrollToTop'
 
 
@@ -47,6 +48,16 @@ module.exports = class BodyView extends Backbone.View
     e.stopPropagation()
 
   bodyClick: (e) -> mediator.trigger 'body:click', e
+
+  maybeIntercept: (e)->
+    return unless $('body').hasClass 'is-mobile'
+
+    href = $(e.currentTarget).attr("href")
+
+    if href.indexOf(location.hostname) > -1 and href isnt "#" and $(e.currentTarget).attr("target") isnt "_blank"
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      window.location = href
 
   scrollToTop: (e) ->
     e.preventDefault()
