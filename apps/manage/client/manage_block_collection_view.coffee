@@ -4,9 +4,10 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
+BlockCollectionView = require '../../../components/block_collection/client/block_collection_view.coffee'
 ManageBlockView = require './manage_block_view.coffee'
 
-module.exports = class ManageBlockCollectionView extends Backbone.View
+module.exports = class ManageBlockCollectionView extends BlockCollectionView
   
   events: 
     "click .manage__block__sort__link": "sortBlocks"
