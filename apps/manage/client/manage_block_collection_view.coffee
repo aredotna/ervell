@@ -5,15 +5,16 @@ sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
 ManageBlockView = require './manage_block_view.coffee'
-UserBlockCollectionView = require './user_block_collection_view.coffee'
 
-module.exports = class ManageBlockCollectionView extends UserBlockCollectionView
+module.exports = class ManageBlockCollectionView extends Backbone.View
   
   events: 
     "click .manage__block__sort__link": "sortBlocks"
 
   initialize: (options)->
     super
+    @blocks = options.blocks
+    @blocks.on 'add', @appendBlockView, @
 
   sortBlocks: (e)->
     column = $(e.target).data('sort')
@@ -29,6 +30,9 @@ module.exports = class ManageBlockCollectionView extends UserBlockCollectionView
 
         for model in @blocks.models
           @renderBlockView(model, true)
+
+  appendBlockView: (model) ->
+    @renderBlockView model, true
 
   renderBlockView: (block, autoRender = false)->
     new ManageBlockView

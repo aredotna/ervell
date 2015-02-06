@@ -1,18 +1,14 @@
 Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
-BlockView = require './block_view.coffee'
+BlockView = require '../../../components/block_collection/client/block_view.coffee'
 
 blockTemplate = -> require('../templates/block_manage.jade') arguments...
 
-module.exports = class ManageBlockView extends Backbone.View
+module.exports = class ManageBlockView extends BlockView
   
   events: 
     'click .manage__block__export_link': 'exportChannel'
-
-  initialize: ->
-    super
-    @setElement $("##{@model.id}")
   
   render: ->
     @container.append blockTemplate(block: @model, user: @current_user)
