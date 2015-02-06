@@ -21,6 +21,7 @@ module.exports = class NewBlockView extends Backbone.View
     @$container = options.container
 
     @render() if options.autoRender
+    @setElCaches() unless options.autoRender
 
   setActive: ->
     @$el.addClass 'active'
@@ -41,7 +42,7 @@ module.exports = class NewBlockView extends Backbone.View
   fieldIsntEmpty: ->
     @$field.val() isnt ""
 
-  createBlock: ->
+  createBlock: =>
     if @fieldIsntEmpty()
       block = new Block
 
@@ -57,8 +58,12 @@ module.exports = class NewBlockView extends Backbone.View
           @$field.val ""
           @$field.blur()
 
+  setElCaches: ->
+    @$field = @$('.grid__block--new-block__content-field')
+
   render: ->
     @$container.prepend newBlockTemplate(channel: @model)
     @$el = $ '.grid__block--new-block'
-    @$field = @$('.grid__block--new-block__content-field')
     @delegateEvents()
+
+    @setElCaches()
