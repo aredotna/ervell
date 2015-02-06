@@ -1,4 +1,4 @@
-.manage__block
+.manage__block(id=block.id)
   .manage__block__title.manage__block__column
     = block.smartTruncate(block.get('title'), 50)
   .manage__block__block_count.manage__block__column
@@ -11,3 +11,5 @@
   .manage__block__follower_count.manage__block__column
     if block.get('followed_by_ids')
       = block.get('followed_by_ids').length
+  .manage__block__export.manage__block__column
+    a.manage__block__export_link Export

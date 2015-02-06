@@ -4,8 +4,8 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
+BlockCollectionView = require '../../../components/block_collection/client/block_collection_view.coffee'
 ManageBlockView = require './manage_block_view.coffee'
-BlockCollectionView = require './block_collection_view.coffee'
 
 module.exports = class ManageBlockCollectionView extends BlockCollectionView
   
@@ -14,6 +14,7 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
 
   initialize: (options)->
     super
+    @blocks = options.blocks
     @blocks.on 'add', @appendBlockView, @
 
   sortBlocks: (e)->
@@ -27,11 +28,12 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
     @blocks.fetch
       success: =>
         @$('.manage__block__collection__contents').html('')
-        debugger
+
         for model in @blocks.models
           @renderBlockView(model, true)
 
-        debugger
+  appendBlockView: (model) ->
+    @renderBlockView model, true
 
   renderBlockView: (block, autoRender = false)->
     new ManageBlockView
@@ -39,4 +41,3 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
       model: block
       autoRender: autoRender
       channel: @channel if @channel
-
