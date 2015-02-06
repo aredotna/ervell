@@ -5,10 +5,28 @@ BlockView = require './block_view.coffee'
 
 blockTemplate = -> require('../templates/block_manage.jade') arguments...
 
-module.exports = class ManageBlockView extends BlockView
+module.exports = class ManageBlockView extends Backbone.View
+  
+  events: 
+    'click .manage__block__export_link': 'exportChannel'
 
+  initialize: ->
+    super
+    @setElement $("##{@model.id}")
+  
   render: ->
-    if @containerMethod isnt 'before' and @containerMethod isnt 'after'
-      @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
-    else
-      @container.find('.grid__block--new-block')[@containerMethod] blockTemplate(block: @model, user: @current_user)
+    @container.append blockTemplate(block: @model, user: @current_user)
+
+  exportChannel: (e)->
+    e.preventDefault()
+
+    format = 'json'
+
+    $.ajax
+      type: 'POST'
+      url: "https://export-are-na.herokuapp.com/#{@model.get('slug')}.#{format}"
+      success: (response) => @renderExportStatus(response)
+      error: (response) => @renderExportStatus(response)
+
+  renderExportStatus: (status)->
+    @$('.manage__block__export').html(status.message)
