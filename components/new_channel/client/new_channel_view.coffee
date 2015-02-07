@@ -45,7 +45,7 @@ module.exports = class NewChannelView extends Backbone.View
 
   renderChannelVisibility: ->
     new ChannelVisibilityView
-      el: @$('.grid__block__privacy--setting')
+      el: @$('.grid__block__privacy--setting__inner')
       model: @model
 
   createChannel: (e) ->
