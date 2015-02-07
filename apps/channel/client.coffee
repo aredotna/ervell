@@ -82,7 +82,7 @@ module.exports.init = ->
 
     new ChannelCollaborationView
       collection: collaborators
-      el: $ "#metadata--collaborators"
+      el: $ "#metadata--collaborators .metadata__text"
 
   if not sd.FOLLOWERS
 
