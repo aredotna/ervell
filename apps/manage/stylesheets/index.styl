@@ -1,15 +1,34 @@
+@import '../components/layout/variables'
+
 .manage__block,
 .manage__block__collection__header
   display flex
-  flex-direction: row
-  justify-content: space-between
-  overflow: auto
-  padding: 20px 0
-  border-top: 1px solid #EFEFEF
-  margin: 0 10px
+  flex-direction row
+  justify-content space-between
+  overflow auto
+  padding 20px 0
+  border-top 1px solid #EFEFEF
+  margin 0 10px
+  font-size s_caption + 2
+  line-height 1.2
+
+  a
+    font-weight bold
+
+.manage__block:hover
+  background backgroundgray
 
 .manage__block__collection__header
-  font-weight: bold
+  font-weight bold
 
 .manage__block__column
-  width: 200px
+  width 200px
+
+.channel__privacy--setting
+
+  a
+    font-weight normal
+
+  a.is-active
+    font-weight bold
+

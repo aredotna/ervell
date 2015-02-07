@@ -52,7 +52,10 @@ section#main-path.path--header
               .metadata__text —
         if channel.get('collaboration')
           #metadata--collaborators.metadata__column
-            //- Rendered by client
+            .metadata__title
+              | Collaborators
+            .metadata__text
+              //- Rendered by client
         else
           .metadata__column
             .metadata__title Collaborators
