@@ -17,7 +17,7 @@ module.exports = class ChannelVisibilityView extends Backbone.View
     @render() if @autoRender
 
   render: ->
-    @$el.html template()
+    @$el.html template channel: @model
 
   toggleVisibility: (e) =>
     e.stopPropagation()
@@ -29,7 +29,7 @@ module.exports = class ChannelVisibilityView extends Backbone.View
     $selection.addClass 'is-active'
 
     @model.set 'status', $selection.data('value')
-    @model.url = "#{sd.API_URL}/channels/"
+    @model.url = "#{sd.API_URL}/channels/#{@model.id}"
     @model.save() if @autoSync
 
 
