@@ -4,6 +4,8 @@ sd = require("sharify").data
 Channel = require '../../../models/channel.coffee'
 mediator = require '../../../lib/mediator.coffee'
 
+ChannelVisibilityView = require '../../channel_visibility/client/channel_visibility_view.coffee'
+
 newChannelTemplate = -> require('../templates/new_channel.jade') arguments...
 
 module.exports = class NewChannelView extends Backbone.View
@@ -20,32 +22,31 @@ module.exports = class NewChannelView extends Backbone.View
       user: mediator.shared.current_user.attributes
       length: 0
 
+    @listenTo @model, 'change:status', @toggleVisibility
+
     @render()
 
   onKeyUp: (e)->
     console.log '@$input.val()?.trim()', @$input.val()?.trim()
     @model.set 'title', @$input.val()?.trim()
 
-  toggleVisibility: (e)->
-    e.stopPropagation()
-    e.preventDefault()
-
-    $selection = $(e.currentTarget)
-
+  toggleVisibility: (model)->
     @$(".grid__block__inner").
       attr('class', 'grid__block__inner').
-      addClass "grid__block__inner--privacy-#{$selection.data('value')}"
-
-    @$('.metadata--selector__option.is-active').removeClass 'is-active'
-    $selection.addClass 'is-active'
-
-    @model.set 'status', $selection.data('value')
+      addClass "grid__block__inner--privacy-#{@model.get('status')}"
 
     @$input.focus()
 
   render: ->
     @$el.html newChannelTemplate(block: @model)
     @$input = $('.grid__block__editable-title')
+
+    @renderChannelVisibility()
+
+  renderChannelVisibility: ->
+    new ChannelVisibilityView
+      el: @$('.grid__block__privacy--setting')
+      model: @model
 
   createChannel: (e) ->
     return if @saving
