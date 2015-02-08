@@ -13,7 +13,7 @@ module.exports = class UserBlocks extends SearchBlocks
     page: 1
     per: 20
 
-  url: -> 
+  url: ->
     console.log "#{sd.API_URL}/user/#{@slug}/search?#{params.encode(@options)}"
     "#{sd.API_URL}/user/#{@slug}/search?#{params.encode(@options)}"
 
@@ -23,8 +23,6 @@ module.exports = class UserBlocks extends SearchBlocks
 
   parse: (data) ->
     @total_pages = data.total_pages
-    debugger
-
     contents = data.blocks || data.results
 
     if contents.length

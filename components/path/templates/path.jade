@@ -39,6 +39,8 @@ section#main-path.path--header
     else if author && user && author.id == user.id
       .channel-settings.edit-profile
         a(href="#") Profile settings
+        br
+        a(href="/manage") Manage channels
 
     else if author && user && author.id != user.id && !channel
       .channel-settings.edit-profile
