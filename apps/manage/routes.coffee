@@ -7,10 +7,12 @@ ManageBlocks = require "../../collections/manage_blocks"
     per: 50
     'filter[type]': 'channel'
 
-  res.locals.sd.USER = req.user.toJSON();
+  res.locals.sd.USER = req.user.toJSON()
 
   blocks.fetch
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()
-      res.render 'index', blocks: blocks.models
+      res.render 'index',
+        blocks: blocks.models
+        managedUser: req.user
     error: (m, err) -> next err
