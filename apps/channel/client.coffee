@@ -30,7 +30,9 @@ module.exports = class ChannelView extends Backbone.View
     @maybeSubscribe()
 
   openChannelSettings: ->
-    @modal = new ChannelSettingsModalView {width: '500px'}
+    @modal = new ChannelSettingsModalView
+      width: '380px'
+      model: @channel
 
   maybeSubscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
