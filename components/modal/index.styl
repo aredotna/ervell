@@ -13,10 +13,10 @@ body.is-modal
   // Default is a simple fade in
   &[data-state='open'], &.is-open
     opacity 1
-    transition opacity 0.25s
+    transition opacity 0.15s
     > .modal-backdrop > .modal-dialog
       // Avoid transitioning the initial open
-      transition all 0.25s, width 0
+      transition all 0.15s, width 0
   // Slide modal dialog in
   &.is-slide-in
     > .modal-backdrop > .modal-dialog
@@ -27,7 +27,7 @@ body.is-modal
       > .modal-backdrop > .modal-dialog
         transform translateY(0)
         // Avoid transitioning the initial open
-        transition all 0.25s, width 0, transform 0.4s
+        transition all 0.15s, width 0, transform 0.4s
 
   &.is-loading
     > .modal-backdrop::before
@@ -43,13 +43,13 @@ body.is-modal
       margin-top 20px
       font-size 24px
 
-#modal
-.modal-backdrop
+#modal, .modal-backdrop
   position fixed
   top 0
   right 0
   bottom 0
   left 0
+  height 100%
 
 .modal-backdrop
   background rgba(240, 240, 240, 0.85)
@@ -128,11 +128,11 @@ body.is-modal
 @media (max-width:500px)
   .modal-body
     padding 25% 0 0 0
-  
+
   .modal-title
     top 4%
     left 5%
-    
+
   .modal-close
     top 3.5%
     right 5%

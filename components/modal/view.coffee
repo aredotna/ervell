@@ -22,7 +22,7 @@ module.exports = class ModalView extends Backbone.View
     'click.internal .modal-backdrop': '__announceBackdropClick__'
 
   initialize: (options = {}) ->
-    { @transition, @backdrop } = _.defaults options, transition: 'fade', backdrop: true
+    { @transition, @backdrop, @width, @height} = _.defaults options, transition: 'fade', backdrop: true
 
     _.extend @templateData, autofocus: @autofocus()
 
