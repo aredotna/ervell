@@ -62,6 +62,5 @@ _ = require 'underscore'
       blocks: blocks.models
       author: author
       followers: true
-      policy: getPolicy()
 
 
