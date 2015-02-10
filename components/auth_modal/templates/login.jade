@@ -1,8 +1,6 @@
 #auth-page.vam-outer
   .vam-inner
-    h2.modal-title
-      = 'Are.na / login'
-    //- include ./_header
+    h2.modal-title Are.na / login
     section#auth-body
       form.auth-login-email.auth-form( action='/me/sign_in' )
         .auth-errors
@@ -20,5 +18,3 @@
             a.faux-underline.auth-toggle( href='/forgot', data-mode='forgot', rel='nofollow' ) Forgot?
 
         button#auth-submit.button--wide.button--border.button--relative &rarr;
-
-     //- include ./_login_footer.jade
