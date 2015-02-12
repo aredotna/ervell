@@ -12,17 +12,25 @@ module.exports = class ConnectView extends Backbone.View
 
   events:
     'keyup .new-connection__search' : 'onKeyUp'
-    'tap .new-connection__done-button' : 'clear'
+    'tap .new-connection__done-button' : 'onClear'
 
   initialize: (options)->
     @block = options.block
     @$input = @$('.new-connection__search')
     @render()
+    $(window).one('tap', @maybeClear);
     super
 
-  clear: (e)->
+  maybeClear: (e)=>
+    @clear() unless $(e.target).closest('.new-connection').length
+
+  onClear: (e)->
     e.stopPropagation()
     e.preventDefault()
+    @clear()
+
+  clear: ->
+    $(window).off('tap', @maybeClear)
     @$el.html ""
     @$el.removeClass 'is-active'
     @undelegateEvents()
