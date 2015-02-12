@@ -5,9 +5,10 @@ block styles
 
 block body
   include ../../../components/path/templates/path
-  .explore.expanded-list
-    for channel in channels
-      .explore__channel
+  
+  for channel in channels
+    .explore-group
+      .explore__channel.flex-container
         h2.explore__channel__path
           ul.breadcrumb
             li
