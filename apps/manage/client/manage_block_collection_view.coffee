@@ -8,8 +8,8 @@ BlockCollectionView = require '../../../components/block_collection/client/block
 ManageBlockView = require './manage_block_view.coffee'
 
 module.exports = class ManageBlockCollectionView extends BlockCollectionView
-  
-  events: 
+
+  events:
     "click .manage__block__sort__link": "sortBlocks"
 
   initialize: (options)->
@@ -23,7 +23,7 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
     _.extend @blocks.options,
       page: 1
       sort: column
-      type: 'channel'
+      subject: 'channel'
 
     @blocks.fetch
       success: =>
