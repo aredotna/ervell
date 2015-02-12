@@ -9,10 +9,11 @@ block body
     for channel in channels
       .explore__channel
         h2.explore__channel__path
-          a(href="/#{channel.get('user').slug}/#{channel.get('slug')}")
-            ul.breadcrumb
-              li=channel.get('user').username
-              li(class="search__results__result--privacy-#{channel.getVisibility()}")=channel.get('title')
+          ul.breadcrumb
+            li
+              a(href="/#{channel.get('user').slug}")=channel.get('user').username
+            li
+              a(href="/#{channel.get('user').slug}/#{channel.get('slug')}" class="search__results__result--privacy-#{channel.getVisibility()}")=channel.get('title')
           .explore__timestamp Last interaction #{channel.updatedAtAgo()}
         .explore__channel__blocks
           .grid

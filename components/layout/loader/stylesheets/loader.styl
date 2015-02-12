@@ -5,31 +5,45 @@ body.is-loading #l-loader-container
 
 #l-loader-container
   position fixed
-  width 100%
-  height 100%
-  top 0
-  left 0
+  display none
+  height 3px
+  width 52px
+  position absolute
+  left 50%
+  margin-left -30px
+  top 45%
   z-index loader_z
   pointer-events none
-  display none
-  opacity 0.75
+  opacity 0.90
 
-@-webkit-keyframes pulsate 
-    0% 
-      -webkit-transform scale(0.6, 0.6)
-    30%
-      -webkit-transform scale(0.7, 0.7)
-    100% 
-      -webkit-transform scale(0.6, 0.6)
-
-#l-loader-container .asterisk
+#l-loader
+  background-color hovergray
   position relative
-  overflow hidden
-  animation pulsate 0.8s ease-in
-  animation-iteration-count infinite
-  -webkit-animation pulsate 0.8s ease-in
-  -webkit-animation-iteration-count infinite
-  
-  svg
-    width 40px
-    padding-top 4px
+  top 0
+  left 0
+  width 5px
+  height 100%
+  -webkit-animation throbbin 0.58s infinite /* Safari 4+ */
+  -moz-animation throbbin 0.58s infinite /* Fx 5+ */
+  -o-animation throbbin 0.58s infinite /* Opera 12+ */
+  animation throbbin 0.58s infinite /* IE 10+, Fx 29+ */
+
+@-webkit-keyframes throbbin
+  0%   {margin-left: 0px; width: 5px;}
+  14%  {margin-left: 10px; width: 5px;}
+  27%  {margin-left: 20px; width: 5px;}
+  41%  {margin-left: 30px; width: 5px;}
+  55%  {margin-left: 40px; width: 5px;}
+  69%  {margin-left: 47px; width: 5px;}
+  83% {margin-left: 26px; width: 26px;}
+  100% {margin-left: 10px; width: 20px;}
+
+@keyframes throbbin
+  0%   {margin-left: 0px; width: 5px;}
+  14%  {margin-left: 10px; width: 5px;}
+  27%  {margin-left: 20px; width: 5px;}
+  41%  {margin-left: 30px; width: 5px;}
+  55%  {margin-left: 40px; width: 5px;}
+  69%  {margin-left: 50px; width: 5px;}
+  83% {margin-left: 30px; width: 30px;}
+  100% {margin-left: 10px; width: 20px;}

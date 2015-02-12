@@ -127,7 +127,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 .logo-icon.dropdown--menu__trigger
   height topbar_h
-  padding 0 container_pad 0 container_pad
+  padding 0 22px 0 25px
 
 .logo
   &.has-notifications .logo-icon
@@ -201,6 +201,14 @@ privacy-color('.search__results__result--privacy-', color)
   line-height 4em
   font-weight bold
 
+.dropdown__link--user
+  .user__avatar
+    opacity 0.85
+
+  &:hover
+    .user__avatar
+      opacity 1
+
 .dropdown__icon
   float right
   height 100%
@@ -242,19 +250,11 @@ privacy-color('.search__results__result--privacy-', color)
   display block
 
 .dropdown--menu__trigger:after
-  content " \25be"
-  color textgray
-  font-size s_caption
-  vertical-align top
-  margin-left 0.3em
-  display inline-block
-
-.dropdown--is_active .dropdown--menu__trigger:after
-  transform rotate(180deg)
+  content ""
 
 @media (max-width:500px)
   #layout-header .logo
-    width 80px
+    width 70px
 
   .logo-icon.dropdown--menu__trigger
     height topbar_h
@@ -269,6 +269,10 @@ privacy-color('.search__results__result--privacy-', color)
   .dropdown
     .user__avatar--thumb .user__avatar__image
       top 6px
+  
+  .dropdown__link--user
+    .user__avatar
+      opacity 1
 
 @media (max-width:375px)
   #layout-header
@@ -276,10 +280,6 @@ privacy-color('.search__results__result--privacy-', color)
 
     li
       line-height 30px
-
-    .logo
-      &.has-notifications:after
-        right 34px
 
   .layout-header__search__results
     position fixed
@@ -316,9 +316,6 @@ privacy-color('.search__results__result--privacy-', color)
     float left
     margin-right 20px
     margin-left 5px
-  
-  .iconic.dropdown__icon
-    margin-left 10px
 
   .new-channel-dropdown__container
     width 100%
