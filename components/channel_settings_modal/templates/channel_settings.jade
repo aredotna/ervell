@@ -1,0 +1,13 @@
+.channel-settings__inner
+  div(class="grid__block grid__block--#{block.get('class').toLowerCase()}")
+    .grid__block__inner(class="grid__block__inner--privacy-#{ block.getVisibility() }")
+      .grid__block__content.valign-outer
+        .valign-inner
+          - if(block.get('class') == 'Channel')
+            .grid__block__editable-title(contenteditable="true")= block.get('title')
+            .grid__block__channel__stats
+              ul.grid__block__channel__stats__list
+                li by #{block.get('user').username}
+                li #{block.get('length')} blocks
+
+  .channel-settings__inner__privacy

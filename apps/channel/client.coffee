@@ -11,9 +11,15 @@ BlockSkeletonView = require './client/block_skeleton_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
+
+ChannelSettingsModalView = require '../../components/channel_settings_modal/client/channel_settings_modal_view.coffee'
+
 Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
+
+  events:
+    'click .channel-settings__trigger' : 'openChannelSettings'
 
   initialize: (options)->
     @channel = options.channel
@@ -22,6 +28,11 @@ module.exports = class ChannelView extends Backbone.View
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
 
     @maybeSubscribe()
+
+  openChannelSettings: ->
+    @modal = new ChannelSettingsModalView
+      width: '380px'
+      model: @channel
 
   maybeSubscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"

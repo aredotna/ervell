@@ -38,10 +38,17 @@ module.exports = class BodyView extends Backbone.View
   intercept: (e)->
     e.preventDefault()
 
-    if $(e.currentTarget).data('client') is 'Block'
-      Backbone.history.navigate "#{$(e.currentTarget).attr('href')}", trigger: true, replace: false
+    isBlock = $(e.currentTarget).data('client') is 'Block'
+    url = $(e.currentTarget).attr('href')
+
+    if e.metaKey || e.ctrlKey
+      url = url.replace(/^\//, '/#') if isBlock
+      return window.open(url, '_blank')
+
+    if isBlock
+      Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
-      window.location = $(e.currentTarget).attr('href')
+      window.location = url
 
   disable: (e)->
     e.preventDefault()

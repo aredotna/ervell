@@ -31,7 +31,7 @@ section#main-path.path--header
         a(href="#") Show info
       if user && user.canEditChannel(channel)
         .channel-settings.edit-channel
-          a(href="#") Edit channel
+          a.channel-settings__trigger(href="#") Edit channel
       else
         .channel-settings.follow_button.pointer
           a(data-type="Channel", data-id="#{author.id}")
