@@ -5,13 +5,14 @@ block styles
 
 block body
   include ../../../components/path/templates/path
-  .grid.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
-    if channel && !following && !followers && user && user.canAddToChannel(channel)
-      include ../../../components/new_block/templates/new_block
-    include ../../../components/block_collection/templates/block_collection
+  .channel-container
+    .grid.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
+      if channel && !following && !followers && user && user.canAddToChannel(channel)
+        include ../../../components/new_block/templates/new_block
+      include ../../../components/block_collection/templates/block_collection
 
-  if user
-    .channel__filedrop.flex-container
+    if user
+      .channel__filedrop.flex-container
 
 block scripts
   script( src=sd.ASSET_PATH + 'channel' + sd.JS_EXT )
