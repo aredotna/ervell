@@ -29,6 +29,9 @@
   position relative
   margin-bottom 20px
 
+  &:hover
+    cursor pointer
+
 .grid__block--block .grid__block__inner, .grid__block--loading .grid__block__inner
   background-size 80px 80px
   background-image linear-gradient(
@@ -96,8 +99,8 @@
   opacity 0
   pointer-events none
   background-position center
-  background-size: 40%
-  background-repeat: no-repeat
+  background-size 40%
+  background-repeat no-repeat
   cursor pointer
 
 .grid__block__title, .grid__block__author
@@ -106,7 +109,7 @@
   font-size s_caption
   font-weight bold
   text-align center
-  margin 20px 0 5px 0
+  padding 20px 0 5px 0
   bottom 20px
   left 0
   position absolute
@@ -115,7 +118,7 @@
   line-height 1.2
 
   &:hover
-    color hovergray
+    color lightgray
 
 .grid__block__author
   bottom 10px
