@@ -8,6 +8,7 @@ BlockCollectionView = require '../../../components/block_collection/client/block
 ManageBlockView = require './manage_block_view.coffee'
 
 module.exports = class ManageBlockCollectionView extends BlockCollectionView
+  direction: 'asc'
 
   events:
     "click .manage__block__sort__link": "sortBlocks"
@@ -17,6 +18,9 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
     @blocks = options.blocks
     @blocks.on 'add', @appendBlockView, @
 
+  toggleDirection: ->
+    @direction = if @direction is 'asc' then 'desc' else 'asc'
+
   sortBlocks: (e)->
     column = $(e.target).data('sort')
 
@@ -24,6 +28,9 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
       page: 1
       sort: column
       subject: 'channel'
+      direction: @direction
+
+    @toggleDirection()
 
     @blocks.fetch
       success: =>

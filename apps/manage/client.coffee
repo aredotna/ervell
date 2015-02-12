@@ -13,7 +13,7 @@ InfiniteView = require '../../components/pagination/infinite_view.coffee'
 module.exports.init = ->
   blocks = new ManageBlocks sd.BLOCKS,
     user_slug: sd.USER.slug
-    'filter[type]': 'channel'
+    subject: 'channel'
 
   view = new ManageBlockCollectionView
     blocks: blocks
