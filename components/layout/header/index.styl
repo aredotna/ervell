@@ -201,6 +201,14 @@ privacy-color('.search__results__result--privacy-', color)
   line-height 4em
   font-weight bold
 
+.dropdown__link--user
+  .user__avatar
+    opacity 0.85
+
+  &:hover
+    .user__avatar
+      opacity 1
+
 .dropdown__icon
   float right
   height 100%
@@ -261,6 +269,10 @@ privacy-color('.search__results__result--privacy-', color)
   .dropdown
     .user__avatar--thumb .user__avatar__image
       top 6px
+  
+  .dropdown__link--user
+    .user__avatar
+      opacity 1
 
 @media (max-width:375px)
   #layout-header
