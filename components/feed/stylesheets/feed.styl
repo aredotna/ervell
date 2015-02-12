@@ -39,9 +39,23 @@
   .explore__channel__path
     position relative
     float left
+    width 100%
     color textgray
-    padding 0 10px 0 10px
+    padding 0 10px 10px 10px
     margin 0
+    
+    .breadcrumb
+      position relative
+      float left
+    
+    .explore__timestamp
+      position relative
+      float right
+      font-size s_caption
+      color lightgray
+      font-weight normal
+      line-height 12px
+      padding 14px 2px 0 20px
 
   privacy-color('.search__results__result--privacy-', color)
 
@@ -50,12 +64,7 @@
 .explore__channel .search__results__result--privacy-public:hover
   color hovergray
   
-.explore__timestamp
-  font-size s_caption
-  color lightgray
-  font-weight normal
-  line-height 22px
-  padding 0 0 0 1px
+
 
 .explore__channel__blocks
   position relative
