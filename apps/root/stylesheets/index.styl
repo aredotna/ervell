@@ -142,15 +142,22 @@ a.home__section-intro__menu--mobile
   margin 0
   padding 0
 
-  h2
+  .home__path
     position relative
     float left
-    color lightgray
-    padding 20px 0 10px 10px
+    width 100%
+    color textgray
+    padding 0 10px 10px 10px
     margin 0
+    
+    .breadcrumb
+      position relative
+      float left
+  
+privacy-color('.privacy--', color)
 
-.home__section-channels__channels a:hover .home__path--closed,
-.home__section-channels__channels a:hover .home__path--public
+.home__section-channels__channels .home__path--closed:hover,
+.home__section-channels__channels .home__path--public:hover
   color hovergray
 
 .home__section-channels__images
