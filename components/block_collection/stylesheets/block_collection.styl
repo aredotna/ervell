@@ -8,29 +8,30 @@
   display -ms-flexbox
   display -webkit-flex
   display flex
-  -webkit-justify-content
-  justify-content flex-start
   -webkit-flex-flow row wrap
   -moz-flex-flow row wrap
   -ms-flex-flow row wrap
   flex-flow row wrap
+  align-items center
 
-.grid.grid--feed
+.grid--feed
   -webkit-justify-content center
   justify-content center
 
 .grid__block
-  flex 0 0 20%
-  max-width block_width
-  min-width block_width
+  flex 1 1 285px
+  -webkit-flex 1 1 285px
+  -ms-flex 1 1 285px
+  max-width 315px
   text-align center
-  margin 10px 10px 60px
-  padding-bottom 60px
+  margin 0 10px 90px 10px
   position relative
-  margin-bottom 20px
 
   &:hover
     cursor pointer
+
+.block-padding
+  padding-top 100%
 
 .grid__block--block .grid__block__inner, .grid__block--loading .grid__block__inner
   background-size 80px 80px
@@ -52,13 +53,6 @@
     background-position 0 0
   to
     background-position 160px 80px
-
-.grid__block--user .grid__block__inner
-  background-color backgroundgray
-  border 2px solid bordergray
-
-  h2
-    margin 40px 0 22px 0
 
 .grid__block--user:hover
   color hovergray
@@ -87,30 +81,22 @@
   .grid__block__author
       visibility visible
 
-.grid__block:hover
+.grid__block__author
+  visibility hidden
 
+.grid__block:hover
   .grid__block__author
     visibility visible
 
   .grid__block__title
       display none
 
-.grid__block__overlay
-  opacity 0
-  pointer-events none
-  background-position center
-  background-size 40%
-  background-repeat no-repeat
-  cursor pointer
-
 .grid__block__title, .grid__block__author
   color lightgray
-  position relative
   font-size s_caption
   font-weight bold
   text-align center
   padding 20px 0 5px 0
-  bottom 20px
   left 0
   position absolute
   width 100%
@@ -120,9 +106,13 @@
   &:hover
     color lightgray
 
-.grid__block__author
-  bottom 10px
-  visibility hidden
+.grid__block__overlay
+  opacity 0
+  pointer-events none
+  background-position center
+  background-size 40%
+  background-repeat no-repeat
+  cursor pointer
 
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
@@ -132,9 +122,8 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 privacy-color('.list__block--channel--', color)
 
 .grid__block__content__image
-  max-width block_width - 1
-  height auto
-  max-height block_width
+  max-width 100%
+  max-height 100%
 
 .grid__block--text .valign-inner
   vertical-align top
@@ -163,7 +152,9 @@ privacy-color('.list__block--channel--', color)
   &:hover
     color alert
 
-.grid.is-editable .button--delete-block
+.grid.is-editable .button--delete-block,
+.grid__block.can-edit .button--delete-block,
+.grid__block.can-edit .button--delete-block
   display block
 
 /* USER */
@@ -228,8 +219,6 @@ privacy-color('.list__block--channel--', color)
 
 /* CONNECT */
 .grid__block__inner, .grid__block__connect-container
-  width 100%
-  height block_width
   position relative
   overflow hidden
   word-break break-word
@@ -244,40 +233,18 @@ privacy-color('.list__block--channel--', color)
     opacity 1
     pointer-events all
 
-@media (max-width:(block_width_mar * 3) + 30)
+.grid__block__inner
+  position absolute
+  top 0
+  height 100%
+  width 100%
+
+@media (max-width:(block_width_mar * 3))
   .grid
     -webkit-justify-content center
     justify-content center
 
-  .grid__block
-    max-width 294px
-    min-width 294px
-
-  .grid__block__inner, .grid__block__connect-container
-    height 294px
-
-  .grid__block__content__image
-    max-width 293px
-    max-height 294px
-
 @media (max-width:500px)
-  body
-    padding 0
-
-  .container
-    max-width 96%
-
-  .grid__block
-    max-width 280px
-    min-width 280px
-
-  .grid__block__inner, .grid__block__connect-container
-    height 280px
-
-  .grid__block__content__image
-    max-width 280px
-    max-height 280px
-
   .new-channel-dropdown__container
     .grid__block
       max-width 98%

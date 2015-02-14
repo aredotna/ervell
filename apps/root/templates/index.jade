@@ -41,12 +41,13 @@ block body
       h2 Example channels:
       .home__section--channels__channels
         - for e_channel in example_channel.get('contents')
-          h2
-            a(href="/#{e_channel.user.slug}/#{e_channel.slug}")
+          h2.home__path
               ul.breadcrumb
                 li Are.na
-                li=e_channel.user.username
-                li=e_channel.title
+                li
+                  a(href="/#{e_channel.user.slug}")=e_channel.user.username
+                li
+                  a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="")=e_channel.title
           .home__section-channels__images.grid
             - for block in e_channel.contents.models.slice(0,4)
               include ../../../components/block_collection/templates/block
@@ -59,7 +60,7 @@ block body
     .home__section__container
       h2
         a(href='/about') Learn more
-        |  about Arena or 
+        |  about Are.na or 
         a(href='#register') register.
 
 block scripts

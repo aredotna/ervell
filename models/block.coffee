@@ -4,6 +4,7 @@
 
 Base = require "./base.coffee"
 sd = require("sharify").data
+_ = require 'underscore'
 
 module.exports = class Block extends Base
 
@@ -36,6 +37,27 @@ module.exports = class Block extends Base
       @get('status')
     else
       @get('visibility')
+
+  getPermissions: (user, channel)->
+    return "" unless @has('user') && channel?
+
+    permissions = ['can-read']
+
+    # Block owner can edit
+    if @belongsToCurrentUser(user)
+      permissions.push 'can-edit'
+
+    # Block owner or connector can manage if block is in channel
+    if (@connectedByCurrentUser(user) or @belongsToCurrentUser(user))
+      permissions.push 'can-manage'
+
+    (_.uniq permissions).join ' '
+
+  belongsToCurrentUser: (user)->
+    @get('user').id is user.id
+
+  connectedByCurrentUser: (user)->
+    @get('connected_by_user_id') is user.id
 
   getHref: ->
     if @get('class') is 'Channel'
