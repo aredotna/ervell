@@ -1,6 +1,7 @@
 .feed-group
-  include feed_group_sentence
-  - blocks = group.items()
-  - channel = group.channel()
-  .grid.grid--feed
-    include ../../block_collection/templates/block_collection
+  .flex-container
+    include feed_group_sentence
+    - blocks = group.items()
+    - channel = group.channel()
+    .grid.grid--feed
+      include ../../block_collection/templates/block_collection

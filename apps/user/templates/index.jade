@@ -6,8 +6,9 @@ block styles
 block body
   include ../../../components/path/templates/path
   if blocks
-    .grid
-      include ../../../components/block_collection/templates/block_collection
+    .channel-container
+      .grid.flex-container
+        include ../../../components/block_collection/templates/block_collection
 
 block scripts
   script( src= sd.ASSET_PATH + 'user' + sd.JS_EXT )

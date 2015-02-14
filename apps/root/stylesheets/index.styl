@@ -25,8 +25,16 @@ body
   padding 0 10px
   background-color backgroundgray
 
-.home__section--stats, .home__section--footer
-  background-color #EFEFEF
+.home__section--footer
+  background-color bordergray
+  
+.home__section--stats
+  position relative
+  float left
+  width 100%
+  padding 40px 0 40px 0
+  background-color #fff
+  border-top 1px solid #e7e7e7
 
 .home__section--channels
   background-color #fff
@@ -54,7 +62,7 @@ body
 
   a
     border-bottom 2px solid hovergray
-    padding 0 0 1px 0
+    padding 0
 
     &:hover
       color textgray
@@ -99,12 +107,6 @@ a.home__section-intro__menu--mobile
 
   &:hover
     color hovergray
-
-.home__section--stats
-  position relative
-  float left
-  width 100%
-  padding 70px 0 70px 0
 
 .home__section--stats__column
   position relative
@@ -167,7 +169,7 @@ a.home__section-intro__menu--mobile
   .button--inblock
     position relative
     left 0
-    width 280px
+    width 200px
     margin auto
     color lightgray
     border-top 1px solid bordergray
@@ -196,11 +198,6 @@ a.home__section-intro__menu--mobile
     &:hover
       color textgray
       border-bottom 2px solid textgray
-
-  .static__menu--footer
-    margin 12px 0 0 0
-    a
-      border 0
       
 for i in (1..5)
   @media (min-width:(block_width_mar * i) + 20)
@@ -245,7 +242,7 @@ for i in (1..5)
     display none
 
   .home__section--stats
-    padding 80px 0 80px 0
+    padding 40px 0 40px 0
 
   .home__section--stats__column
     width 50%
@@ -284,9 +281,6 @@ for i in (1..5)
 
   .home__section-footer
     margin 0 0 40px 0
-
-  .static__menu--footer
-    display none
 
 @media (max-width:(block_width_mar * 2) + 20)
   .home__section--channels
