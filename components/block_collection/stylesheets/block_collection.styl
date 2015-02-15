@@ -133,7 +133,7 @@ privacy-color('.list__block--channel--', color)
   height 100%
   padding 1em 1.2em 0 1.2em
   font-size 1.04em
-  
+
   a
     font-weight normal
   p
@@ -152,7 +152,9 @@ privacy-color('.list__block--channel--', color)
   &:hover
     color alert
 
-.grid.is-editable .button--delete-block
+.grid.is-editable .button--delete-block,
+.grid__block.can-edit .button--delete-block,
+.grid__block.can-edit .button--delete-block
   display block
 
 /* USER */

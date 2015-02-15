@@ -11,14 +11,17 @@ block body
 
 			h2#bookmarklet.static--title Bookmarklet
 			h2.static__tools__frame
-				.static__tools__bookmarklet-button Drag this to your browser toolbar &#10548;
+				a(href="javascript:(function(){var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','UTF-8');s.setAttribute('src','https://marklet.are.na/loader.js');document.documentElement.appendChild(s);})()").static__tools__bookmarklet-button Add to Are.na
+				| Drag the above bar to your toolbar &#10548;
+				br
+				br
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
-			
+
 			h2#extra-tools.static--title Premium tools
 			h2.static__tools__frame.static__tools__frame--supporter
 				form(action='a')
 					.static__tools__checkbox
-						input(type='checkbox' name='a' value='supporter') 
+						input(type='checkbox' name='a' value='supporter')
 						| Supporter
 						.small Follow our behind the scenes and try new features. $12 / year
 					.static__tools__checkbox
@@ -37,8 +40,8 @@ block body
 				br
 				br
 				br
-				span In order to sustain its expenses and future development without advertising, Are.na needs the support of its users. By activating these tools packages you contribute to our 
-				a(href="/about#principles") self-sustainability 
+				span In order to sustain its expenses and future development without advertising, Are.na needs the support of its users. By activating these tools packages you contribute to our
+				a(href="/about#principles") self-sustainability
 				| goal.
 
 			h2#invite.static--title Invite someone
@@ -68,12 +71,13 @@ block body
 				| Sending an e-mail to this address will post the contents (including attachments) to an automatically generated private channel called “Add via Email.” You can send emails to specific channels by writing a channel title in the subject line.
 				br
 				br
-				strong Note: 
+				strong Note:
 				| anyone possessing your personal "Add via E-mail" address can post to your account.
 
-			h2.static--title.light If there are features or tools you would like to see implemented feel free to add suggestions in our 
-				a(href="arena/feedback") feedback channel.
+			h2.static--title.light If there are features or tools you would like to see implemented feel free to add suggestions in our
+				a(href="http://beta.are.na/are-na/feedback") feedback channel.
 				br
+<<<<<<< HEAD
 
 	h3.static__menu
 		ul
@@ -83,6 +87,8 @@ block body
 			if !user
 				li: a(href="#log_in").static__menu__item Login
 				li: a(href="#sign_up").static__menu__item Register
+=======
+>>>>>>> 1d23a29052b7e26dfb2eaa84d6c09fc197d0144f
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
