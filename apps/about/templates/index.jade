@@ -4,9 +4,8 @@ block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-	a(href="/")
-		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 	.static__left-column.flex-container
+		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 		.static__about.static--text
 			h2.static--title--top#about-arena About
 			p Are.na is a flexible platform for private and collaborative research, designed to support arbitrary applications.
@@ -117,6 +116,13 @@ block body
 
 	h3.static__menu
 		ul
+			li: a(href="/").static__menu__item Home
+			li: a(href="/").static__menu__item Profile
+			li: a(href="/tools").static__menu__item Tools
+			if !user
+				li: a(href="#log_in").static__menu__item Login
+				li: a(href="#sign_up").static__menu__item Register
+			li: &nbsp;
 			li: a(data-section="about-arena").static__menu__item.is-active About
 			li: a(data-section="team").static__menu__item Team
 			li: a(data-section="principles").static__menu__item Principles
@@ -124,11 +130,6 @@ block body
 			li: a(data-section="faq").static__menu__item FAQ
 			li: a(data-section="supporters").static__menu__item Supporters
 			li: a(data-section="contact").static__menu__item Contact
-			if !user
-				li: &nbsp;
-				li: a(href="/").static__menu__item Home
-				li: a(href="#log_in").static__menu__item Login
-				li: a(href="#sign_up").static__menu__item Register
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
