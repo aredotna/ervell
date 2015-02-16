@@ -11,7 +11,7 @@ $ ->
       $(".static__menu a.is-active").removeClass 'is-active'
       $(".static__menu a[data-section=#{id}]").addClass 'is-active'
 
-  $('.static__menu a').click (e)->
+  $('.static__menu a.anchor').click (e)->
     e.preventDefault()
     section = $(this).data 'section'
     $("html, body").animate { scrollTop: $("##{section}").offset().top + 1}, 300
