@@ -122,15 +122,17 @@ blockquote
 #scroll-top
   display none
   position fixed
-  bottom 12px
-  right 12px
-  width 30px
-  height 30px
+  bottom 9px
+  right 9px
+  width 40px
+  height 40px
+  opacity 0.9
+  border-radius 50%
   background-color backgroundgray
   color textgray
   border 1px solid bordergray
   text-align center
-  line-height 38px
+  line-height 34px
   font-size 22px
   z-index header_z - 1
 
@@ -179,7 +181,7 @@ for i in (1..5)
   #scroll-top
     display block
 
-@media (max-height:414px) and (max-width:780px) and (orientation:landscape)
+@media (max-height:414px) and (max-width:780px) and (min-aspect-ratio: 5/4)
   .rotate
     display block
 

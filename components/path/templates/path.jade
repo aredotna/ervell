@@ -55,16 +55,11 @@ section#main-path.path--header.flex-container
               .metadata__text= channel.get('metadata').description
             else
               .metadata__text —
-        if channel.get('collaboration')
-          #metadata--collaborators.metadata__column
-            .metadata__title
-              | Collaborators
-            .metadata__text
-              //- Rendered by client
-        else
-          .metadata__column
-            .metadata__title Collaborators
-            .metadata__text —
+        #metadata--collaborators.metadata__column
+          .metadata__title
+            | Collaborators
+          .metadata__text
+            //- rendered on the client
         .metadata__column
           .metadata__title Followers
           .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')

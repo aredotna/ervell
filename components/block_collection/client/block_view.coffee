@@ -17,7 +17,6 @@ module.exports = class BlockView extends Backbone.View
 
   events:
     'tap .grid__block__source__link': 'openLink'
-    'tap .grid__block__overlay'     : 'openLightbox'
     'tap .grid__block__connect-btn' : 'loadConnectView'
     'tap .grid__block__delete-block': 'destroyConnection'
 
@@ -65,9 +64,7 @@ module.exports = class BlockView extends Backbone.View
 
   openLink: (e)->
     e.preventDefault()
-    e.stopPropagation()
-
-    console.log 'model', @model
+    e.stopImmediatePropagation()
 
     if @model.get('source').url
       url = @model.get('source').url
@@ -82,6 +79,7 @@ module.exports = class BlockView extends Backbone.View
       instance.document.close()
     else
       window.open url,'_blank'
+      return false
 
   update: (model)->
     args =

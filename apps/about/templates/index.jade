@@ -4,15 +4,15 @@ block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-	a(href="/")
-		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 	.static__left-column.flex-container
+		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 		.static__about.static--text
 			h2.static--title--top#about-arena About
 			p Are.na is a flexible platform for private and collaborative research, designed to support arbitrary applications.
 			p We like to think of Are.na as an evolving archive where people collaboratively create ideas over time by combining found and original material.
+			img.static__img(src="../images/arena-screenshot.jpg", alt="Arena")
 			p Are.na is also regularly adopted by professionals to research and organize projects. Brick-and-mortar shops use it to manage inventory, art institutions use it to curate exhibitions, creative teams use it to share inspiration, and academics use it to collect references.
-			p	Users have created 23,591 channels and connected 302,047 blocks.
+			p Users have created 23,591 channels and connected 302,047 blocks.
 
 		.static__team.static--text
 			h2.static--title--top#team Team
@@ -36,24 +36,24 @@ block body
 			p We offer #[a(href="/about/tools#premium") premium tools] at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
 			//	.static--highlight Total Are.na users: <strong>6520</strong>
 			//	.static--highlight Supporting users needed to cover costs: <strong>290</strong>
-			//	.static--highlight Currently supporting users: <strong>24</strong> 
+			//	.static--highlight Currently supporting users: <strong>24</strong>
 			.static__graph
 				.static__graph-fill.step-1
 					.static__graph-mark
-						.mark-label 
+						.mark-label
 							| Current premium users
 							br
 							strong 25
 				.static__graph-fill.step-2
 					.static__graph-mark
 						.mark-label
-							strong 290 
+							strong 290
 							br
 							| Premium users needed to cover basic expenses
 				.static__graph-fill.step-3
 					.static__graph-mark
 						.mark-label
-							strong 
+							strong
 							br
 							| New milestones to come
 				.static__graph-fill.step-4
@@ -62,7 +62,7 @@ block body
 							strong 6900
 							br
 							| Total Are.na users
-			
+
 			p We also value transparency: we will never sell data without explicit autorization from the user, we will never show ads or join an ad network and we're committed to retain complete control of the platform.
 
 		.static__labs.static--text
@@ -74,7 +74,7 @@ block body
 		.static__faq.static--text
 			h2.static--title--top#faq FAQs
 			strong What should I use Are.na for? Why should I use it instead of other bookmarking and organization tools?
-			p.static--half-p People who adopt Are.na as a daily tool appreciate its dynamism between private and public collaboration. The content is easily connected between different topics and channels, resulting in discovery of information and organic archives. 
+			p.static--half-p People who adopt Are.na as a daily tool appreciate its dynamism between private and public collaboration. The content is easily connected between different topics and channels, resulting in discovery of information and organic archives.
 			p.static--half-p We suggest you to play around for a while: adding content, connecting and discovering users is the best way to find out the platform's qualities.
 			strong I'm lost, not sure how to use Are.na, can you help?
 			p.static--half-p You can go through the #[a(href="#") tutorial], post in the #[a(href="http://beta.are.na/are-na/feedback") feedback channel ] or contact us below.
@@ -101,7 +101,7 @@ block body
 			p.static--half-p We trust our users' common sense and have no particular graphic or adult restrictions in the name of research freedom. Our team can intervene in case of explicit criminal offence, read our #[a(href="/terms") terms and conditions] for more information.
 			strong Can I only add content I own?
 			p.static--half-p Users are responsible for the content they link or upload, for research purposes we believe in the fair use of intellectual property, please credit authorship and sources when possible. Read our #[a(href="/terms") terms and conditions] for more information.
-		
+
 		.static__contact.static--text
 			h2.static--title--top#supporters Supporters
 			p We are grateful to our supporters who donated trusting the project from the beginning:
@@ -117,18 +117,20 @@ block body
 
 	h3.static__menu
 		ul
-			li: a(data-section="about-arena").static__menu__item.is-active About
-			li: a(data-section="team").static__menu__item Team
-			li: a(data-section="principles").static__menu__item Principles
-			li: a(data-section="labs").static__menu__item Labs
-			li: a(data-section="faq").static__menu__item FAQ
-			li: a(data-section="supporters").static__menu__item Supporters
-			li: a(data-section="contact").static__menu__item Contact
+			li: a(href="/").static__menu__item Home
+			li: a(href="/").static__menu__item Profile
+			li: a(href="/tools").static__menu__item Tools
 			if !user
-				li: &nbsp;
-				li: a(href="/").static__menu__item Home
 				li: a(href="#log_in").static__menu__item Login
 				li: a(href="#sign_up").static__menu__item Register
+			li: &nbsp;
+			li: a.anchor(data-section="about-arena").static__menu__item.is-active About
+			li: a.anchor(data-section="team").static__menu__item Team
+			li: a.anchor(data-section="principles").static__menu__item Principles
+			li: a.anchor(data-section="labs").static__menu__item Labs
+			li: a.anchor(data-section="faq").static__menu__item FAQ
+			li: a.anchor(data-section="supporters").static__menu__item Supporters
+			li: a.anchor(data-section="contact").static__menu__item Contact
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

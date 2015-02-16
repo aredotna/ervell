@@ -4,10 +4,8 @@ block styles
 	link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-	a(href="/")
-		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
-
 	.static__left-column.flex-container
+		img.static__mark(src="../images/arena-mark.svg", alt="Arena")
 		.static__tools.static--text.static--small-text
 			h2.static--title--top Tools
 
@@ -79,6 +77,15 @@ block body
 			h2.static--title.light If there are features or tools you would like to see implemented feel free to add suggestions in our
 				a(href="http://beta.are.na/are-na/feedback") feedback channel.
 				br
+
+	h3.static__menu
+		ul
+			li: a(href="/").static__menu__item Home
+			li: a(href="/").static__menu__item Profile
+			li: a(href="/tools").static__menu__item About
+			if !user
+				li: a(href="#log_in").static__menu__item Login
+				li: a(href="#sign_up").static__menu__item Register
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

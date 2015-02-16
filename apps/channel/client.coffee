@@ -50,6 +50,8 @@ module.exports = class ChannelView extends Backbone.View
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
       @$('.grid').addClass 'is-editable'
 
+      mediator.trigger 'channel:is-editable'
+
   setupFileDropView:->
     $.ajax
       url: "#{sd.API_URL}/uploads/policy"
@@ -87,13 +89,15 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
 
-  if channel.has('collaboration')
-    collaborators = new Collaborators
-      channel_slug: channel.get('slug')
+  collaborators = new Collaborators
+    channel_slug: channel.get('slug')
 
-    new ChannelCollaborationView
-      collection: collaborators
-      el: $ "#metadata--collaborators .metadata__text"
+  new ChannelCollaborationView
+    collection: collaborators
+    el: $("#metadata--collaborators .metadata__text")
+    isCollaboration: channel.has('collaboration')
+    isEditable: mediator.shared.current_user.canEditChannel channel
+    channel: channel
 
   if not sd.FOLLOWERS
 

@@ -38,6 +38,9 @@ module.exports = class BodyView extends Backbone.View
   intercept: (e)->
     e.preventDefault()
 
+    # do not continue if clicking button
+    return false if $(e.target).hasClass 'button--inblock'
+
     isBlock = $(e.currentTarget).data('client') is 'Block'
     url = $(e.currentTarget).attr('href')
 
@@ -48,6 +51,7 @@ module.exports = class BodyView extends Backbone.View
     if isBlock
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
+      console.log 'intercepted'
       window.location = url
 
   disable: (e)->
