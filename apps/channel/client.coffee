@@ -87,13 +87,13 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
 
-  if channel.has('collaboration')
-    collaborators = new Collaborators
-      channel_slug: channel.get('slug')
+  collaborators = new Collaborators
+    channel_slug: channel.get('slug')
 
-    new ChannelCollaborationView
-      collection: collaborators
-      el: $ "#metadata--collaborators"
+  new ChannelCollaborationView
+    collection: collaborators
+    el: $("#metadata--collaborators .metadata__text")
+    isCollaboration: channel.has('collaboration')
 
   if not sd.FOLLOWERS
 

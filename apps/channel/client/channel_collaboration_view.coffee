@@ -6,12 +6,15 @@ collaboratorsTemplate = -> require('../templates/collaborators.jade') arguments.
 
 module.exports = class ChannelCollaborationView extends Backbone.View
 
-  initialize: ->
+  initialize: (options)->
+    @isCollaboration = options.isCollaboration
+
     @collection.on "sync", @render, @
 
-    @collection.fetch()
-
-    super
+    if @isCollaboration
+      @collection.fetch()
+    else
+      @render()
 
   render: ->
     @$el.html collaboratorsTemplate(collaborators: @collection.models)
