@@ -22,13 +22,22 @@
     span(class="iconic" data-glyph="chevron-left" title="chevron left")
 
   - if(block && block.has('title'))
-    .lightbox__content__title= block.get('title')
+    .lightbox__content__title
+      p= block.get('title')
 
       - if(block && block.has('description'))
         .lightbox__content__description!= block.get('description_html')
+      - if(block && block.has('source'))
+        .lightbox__content__source
+          p (#[a(href="#") Source])
+
   #lightbox__feed.lightbox__feed
     #lightbox__feed_inner.lightbox__feed__inner
     //- rendered by client
 
   #lightbox__new-comment
     //- rendered by client
+
+  #lightbox__connect
+    #lightbox__connect__inner
+      .button--inblock Conncect &rarr;
