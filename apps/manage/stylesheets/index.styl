@@ -10,7 +10,7 @@
   border-top 1px solid #EFEFEF
   margin 0 10px
   font-size s_caption + 2
-  line-height 1.2
+  line-height 1.3
 
   a
     font-weight bold
@@ -20,10 +20,25 @@
 
 .manage__block__collection__header
   font-weight bold
+  color lightgray
 
 .manage__block__column
   width 200px
+  padding 0 20px 0 0
 
+.manage__block__sort__link
+  &:hover
+    cursor pointer
+    color hovergray
+    &::after
+      color hovergray
+     
+  &::after
+    content "⇅"
+    margin 0 0 0 3px
+    font-size 1.1em
+    color lightgray
+    
 .channel__privacy--setting
 
   a
@@ -32,3 +47,24 @@
   a.is-active
     font-weight bold
 
+@media (max-width:(block_width_mar * 3) + 20)
+  .manage__block__follower_count
+    display none
+  
+  .manage__block,
+  .manage__block__collection__header
+    font-size s_caption
+
+@media (max-width:(block_width_mar * 2) + 20)
+  .manage__block__collaborator_count,
+  .manage__block__export
+    display none
+  
+  .manage__block__block_count
+    width 120px
+
+@media (max-width:500px)
+  .manage__block,
+  .manage__block__collection__header
+    font-size s_caption - 1
+    padding 10px 0
