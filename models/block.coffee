@@ -39,7 +39,7 @@ module.exports = class Block extends Base
       @get('visibility')
 
   getPermissions: (user, channel)->
-    return "" unless @has('user') && channel?
+    return "" unless @has('user') && channel? and user?
 
     permissions = ['can-read']
 
