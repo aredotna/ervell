@@ -11,4 +11,7 @@ if collaborators.length
       else if i < collaborators.length - 2
         a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')},&nbsp;
 else
-  p —
+  p.collaborators__empty-collaborators —
+
+//- .collaborators__new-collaborator
+  //- rendered via the client

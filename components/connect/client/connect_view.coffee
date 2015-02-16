@@ -18,7 +18,7 @@ module.exports = class ConnectView extends Backbone.View
     @block = options.block
     @$input = @$('.new-connection__search')
     @render()
-    $(window).one('tap', @maybeClear);
+    $(window).one('tap', @maybeClear)
     super
 
   maybeClear: (e)=>
