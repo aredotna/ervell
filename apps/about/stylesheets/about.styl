@@ -19,7 +19,7 @@
   top 5px
   width 130px
   text-align left
-  z-index 199
+  z-index modal_z
 
 .static__menu__item
   color lightgray
@@ -63,6 +63,12 @@
 
     &:hover
       color hovergray
+
+.static__img
+  width 98%
+  -moz-box-shadow 0px 0px 15px 0px bordergrayp
+  -webkit-box-shadow 0px 0px 15px 0px bordergray
+  box-shadow 0px 0px 15px 0px bordergray
 
 .static--small-text
   font-size 1em
@@ -208,30 +214,36 @@
 body
   background-color backgroundgray
 
-@media (max-width:(block_width_mar * 4) + 30)
+@media (max-width:(block_width_mar * 4) + 20)
   .static__menu
-    margin 110px 120px 0 0
+    margin 160px 70px 0 0
+    width 100px
 
-@media (max-width:(block_width_mar * 3) + 30)
+@media (max-width:(block_width_mar * 3) + 20)
   body, html
     font-size 13px
 
   .static__mark
-    margin 43px 0 0 4px
+    margin 40px 0 4px 0
 
   .static__left-column
     clear both
-    max-width 500px
-    margin-left 0
 
   .static--title
     margin 0 0 4px 0
 
   .static--text
     padding-top 40px
-
-  .static__menu
-    display none
+    width 100%
+    max-width 500px
+    margin-left 0
 
   .static__tools__frame
     margin 0 0 80px 0
+    
+  .static__menu 
+    margin 85px 0 0 0
+
+@media (max-width:(block_width_mar * 2) + 20)
+  .static__menu
+    display none

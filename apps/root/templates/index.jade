@@ -5,7 +5,7 @@ block styles
 
 block body
   .home__section.home__section--intro
-    .home__section__container
+    .home__section__container.flex-container
       img.home__mark(src="images/arena-mark.svg", alt="Arena")
       h2.home__section-intro__text
         p.
@@ -19,14 +19,13 @@ block body
         a(href="/about").home__section-intro__menu--mobile About
 
       h3.static__menu
-        a(href="#log_in").static__menu--dark Login
-        br
-        a(href="#sign_up").static__menu--dark Register
-        br
-        a(href="/about").static__menu--dark About
+        ul
+          li: a(href="#log_in").static__menu__item Login
+          li: a(href="#sign_up").static__menu__item Register
+          li: a(href="/about").static__menu__item About
 
   .home__section.home__section--stats
-    .home__section__container
+    .home__section__container.flex-container
       .home__section--stats__column
         h1 19,971
         h2 Total channels
@@ -37,7 +36,7 @@ block body
         h1 357,304
         h2 Total connections
   .home__section.home__section--channels
-    .home__section__container
+    .home__section__container.flex-container
       h2 Example channels:
       .home__section--channels__channels
         - for e_channel in example_channel.get('contents')
@@ -57,7 +56,7 @@ block body
               a(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
 
   .home__section.home__section--footer
-    .home__section__container
+    .home__section__container.flex-container
       h2
         a(href='/about') Learn more
         |  about Are.na or 
