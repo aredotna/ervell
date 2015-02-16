@@ -3,12 +3,22 @@
     top 5px
     right 5px
 
+  .modal-body
+    width 80%
+
 .channel-settings__inner
   text-align center
 
   .grid__block
     cursor default
     padding-bottom 0px
+    max-width 298px
+    min-width 298px
+    padding-top 102%
+    margin 0
+
+  .grid__block__inner
+    height 298px
 
   .grid__block__editable-title, .grid__block__editable-title:focus
     color inherit
@@ -23,8 +33,12 @@
     visibility visible
 
 .channel-settings__inner__privacy
-  margin-bottom 40px
+  margin-bottom 10px
 
   .breadcrumb li
     float none
     display inline-block
+
+
+.channel-settings__inner .grid__block__connect-container
+  opacity 1
