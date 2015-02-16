@@ -87,25 +87,19 @@ a.home__section-intro__menu--mobile
     color public
     border-bottom 2px solid public
 
-.static__menu, .static__menu--footer
-  position relative
-  float right
-  margin 110px 0 0 0
+.static__menu
+  position absolute
+  margin 105px 170px 0 0
   right 0
+  top 5px
   width 130px
   text-align left
-  z-index 199
+  z-index modal_z
 
-.static__menu--dark
-  color hovergray
-
-  &:hover
-    color textgray
-
-.static__menu--light
+.static__menu__item
   color lightgray
 
-  &:hover
+  &:hover, &.is-active
     color hovergray
 
 .home__section--stats__column
@@ -205,13 +199,12 @@ privacy-color('.privacy--', color)
     &:hover
       color textgray
       border-bottom 2px solid textgray
-      
-for i in (1..5)
-  @media (min-width:(block_width_mar * i) + 20)
-    .home__section__container
-      center(block_width_mar * i)
 
 @media (max-width:(block_width_mar * 4) + 19)
+  .static__menu
+    margin 105px 70px 0 0
+    width 100px
+    
   .home__section--channels__channels 
     .grid
       -webkit-justify-content center
@@ -232,21 +225,20 @@ for i in (1..5)
   html, body
     font-size 13px
   
-  .home__section__container
-    center(94%)
-
   .home__mark
     margin 40px 0 0 0
+  
+  .static__menu
+    margin 70px 0 0 0
 
   .home__section-intro__text
     clear both
     padding 20px 0 40px 0
+    width 500px
+    max-width 100%
 
   a.home__section-intro__menu--mobile
     display inline
-
-  .static__menu
-    display none
 
   .home__section--stats
     padding 40px 0 40px 0
@@ -270,7 +262,7 @@ for i in (1..5)
   .home__section--channels__channels
     padding 0
 
-    h2
+    .home__path
       padding 0
       margin-bottom 20px
   
@@ -294,6 +286,9 @@ for i in (1..5)
     padding 20px 10px 20px 10px
     
   .home__section--stats
+    display none
+  
+  .static__menu
     display none
 
 @media (max-width:500px)
