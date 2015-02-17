@@ -29,7 +29,7 @@
         .lightbox__content__description!= block.get('description_html')
       - if(block && block.has('source'))
         .lightbox__content__source
-          p (#[a(href="#") Source])
+          p (#[a(href="#{block.getSourceUrl()}" target="_blank") Source])
 
   #lightbox__feed.lightbox__feed
     #lightbox__feed_inner.lightbox__feed__inner
@@ -40,4 +40,4 @@
 
   #lightbox__connect
     #lightbox__connect__inner
-      .button--inblock Conncect &rarr;
+      .button--inblock Connect &rarr;
