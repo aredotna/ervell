@@ -22,6 +22,9 @@ module.exports = class Block extends Base
     else
       @get('title')
 
+  getSourceUrl: ->
+    @get('source').url || @get('attachment').url || @getImageSize('display')
+
   resizeImage: (width = 330, height = 330, source = 'display')->
     # ignore gifs
     if @getImageSize('display').split('.').pop() == 'gif'
