@@ -66,12 +66,7 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
 
-    if @model.get('source').url
-      url = @model.get('source').url
-    else if @model.get('attachment').url
-      url = @model.get('attachment').url
-    else
-      url = @model.getImageSize('display')
+    url = @model.getSourceUrl()
 
     if @channel and @channel.get('status') is 'private'
       instance = window.open("about:blank")

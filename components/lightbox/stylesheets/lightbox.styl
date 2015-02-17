@@ -70,54 +70,86 @@ body.is-lightbox
   height 100%
   position relative
   text-align center
-  z-index lightbox_z + 1
 
   iframe
     position relative
+    width w=853px
+    height (w / 1.777777)
     top 50%
     v-align()
+    z-index lightbox_z + 1
 
 .lightbox__content__title
   position relative
   left 0
   width 100%
-  margin -10px 0 0 0
-  padding 25px 0 25px 0
-  font-size 0.9em
+  margin 0
+  padding 30px 0 20px 0
+  font-size 1em
   text-align center
   font-weight bold
-  color textgray
-  background-color secondbackgroundgray
+  color lightgray
+  border-top 1px solid bordergray
+  border-bottom 1px solid bordergray
+  background-color #fff
   antialiased()
+  
+  p
+    width 90%
+    margin auto
+    max-width 760px
+    text-align left
+    margin-bottom 5px
 
-  .lightbox__content__description
+  .lightbox__content__description, .lightbox__content__source
     p
       position relative
       text-align left
       width 100%
-      max-width 400px
-      font-size s_caption
+      font-size s_caption + 1
       font-weight normal
       line-height 1.5em
-      left 50%
-      margin-left -200px
       padding 5px 0 0 0
-      color textgray
+      color lightgray
+      
+      a
+        font-weight bold
 
 .lightbox__feed
   position relative
   width 100%
   height auto
   text-align center
-  background-color backgroundgray
+  background-color #fff
   margin 0 0 0 0
-  padding 40px 0 40px 0
+  padding 60px 0 30px 0
   z-index rotate_z
 
   .lightbox__feed__inner
     width 65%
     margin auto
+    
+#lightbox__connect
+  position relative
+  width 100%
+  height 100px
+  margin 0
+  text-align center
+  background-color #fff
+  padding 30px 0 60px 0
 
+  #lightbox__connect__inner
+    position relative
+    margin 0 auto
+    width 100%
+    max-width 550px
+    
+    .button--inblock
+      position relative
+      border-top 1px solid bordergray
+      width 125px
+      margin auto
+      
 .directional-arrows
   position absolute
   top 48%
@@ -175,6 +207,12 @@ body.is-lightbox
     padding-right 0
     padding-left 0
 
+@media (max-width:980px), (max-height:600px)
+  .lightbox__content__media
+    iframe
+      width w=640px
+      height (w / 1.777777)
+
 @media (max-width:850px)
   .lightbox__content__text
     width 90%
@@ -183,7 +221,7 @@ body.is-lightbox
 
     .lightbox__content__text__inner
       padding 1.4em 1.8em 1.8em 1.8em
-
+  
   .lightbox--close
     top 4px
     right 4px
@@ -196,6 +234,18 @@ body.is-lightbox
     right 1%
     width 100px
 
+@media (max-width:760px), (max-height:500px)
+  .lightbox__content__media
+    iframe
+      width w=500px
+      height (w / 1.777777)
+      
+@media (max-width:600px), (max-height:400px)
+  .lightbox__content__media
+    iframe
+      width w=400px
+      height (w / 1.777777)
+
 @media (max-width:500px)
   .lightbox__content
     padding 10px
@@ -205,5 +255,10 @@ body.is-lightbox
 
   .lightbox__feed
     padding 20px 0 20px 0
+  
+  .lightbox__content__media
+    iframe
+      width w=310px
+      height (w / 1.777777)
 
 @import '../../new_comment/stylesheets/new_comment'

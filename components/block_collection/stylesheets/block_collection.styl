@@ -183,6 +183,13 @@ privacy-color('.list__block--channel--', color)
   .grid__block__inner
     border-width 2px
 
+  .button--inblock
+    color inherit
+    border-color inherit
+    
+    &:hover
+      color hovergray
+
   &:hover
     .grid__block__channel__stats
       visibility visible
@@ -245,6 +252,11 @@ privacy-color('.list__block--channel--', color)
     justify-content center
 
 @media (max-width:500px)
+  .path--header
+    padding 0 0 20px 0
+  .grid__block
+    margin 0 0 80px 0
+
   .new-channel-dropdown__container
     .grid__block
       max-width 98%
