@@ -2,6 +2,8 @@ ManageBlocks = require "../../collections/manage_blocks"
 
 @manage = (req, res, next) ->
 
+  res.redirect '/' unless req.user
+
   blocks = new ManageBlocks null,
     user_slug: req.user.get('slug')
     per: 50
