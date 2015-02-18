@@ -65,10 +65,11 @@
       color hovergray
 
 .static__img
-  width 98%
-  -moz-box-shadow 0px 0px 15px 0px bordergrayp
+  width 100%
+  -moz-box-shadow 0px 0px 15px 0px bordergray
   -webkit-box-shadow 0px 0px 15px 0px bordergray
   box-shadow 0px 0px 15px 0px bordergray
+  border 1px solid bordergray
 
 .static--small-text
   font-size 1em
@@ -91,18 +92,11 @@
   button
     margin 20px 0 0 0
 
-  .static__tools__checkbox
-    position relative
-    float left
-    width 100%
-    color public
-    line-height 1.8em
-
-    .small
-      font-size s_caption + 1
-      color textgray
-      margin 0 0 15px 25px
-      line-height 14px
+  .small
+    font-size s_caption + 1
+    color textgray
+    margin 0 0 8px 0
+    line-height 14px
 
   .transparent
     opacity 0.4
@@ -111,7 +105,17 @@
   text-align left
 
   input
-    margin 0 10px 0 0
+    width 150px
+    height 24px
+    padding 0 0 0 3px
+    margin 0 4px 0 0
+    clear both
+  
+  button
+    color public
+    margin 0
+    &:hover
+      color hovergray
 
 .static--highlight
   width 100%

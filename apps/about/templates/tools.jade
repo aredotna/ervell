@@ -17,33 +17,29 @@ block body
 				br
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
 
-			h2#extra-tools.static--title Premium tools
+			h2#extra-tools.static--title Premium
 			h2.static__tools__frame.static__tools__frame--supporter
-				form(action='a')
-					.static__tools__checkbox
-						input(type='checkbox' name='a' value='supporter')
-						| Supporter
-						.small Follow our behind the scenes and try new features. $12 / year
-					.static__tools__checkbox
-						input(type='checkbox' name='a' value='search')
-						| Search inside channels
-						.small Search for block titles inside a channel. $12 / year
-					.static__tools__checkbox
-						input(type='checkbox' name='a' value='dashboard')
-						| Dashboard
-						.small Visualize, edit and sort your channels. $12 / year
-					.static__tools__checkbox.transparent
-						input(type='checkbox' name='a' value='special' disabled='disabled')
-						| Special channel type
-						.small Coming soon. $12 / year
-				button.button--wide.button--border.button--add Activate &rarr;
+				strong Manage channels
+				br
+				| Dashboard to browse, sort, edit and manage your channels.
+				img.static__img(src="../images/arena-screenshot-manage.jpg", alt="Arena")
+				br
+				br
+				strong Quick search
+				br
+				| Search for blocks inside a channel.
+				img.static__img(src="../images/arena-screenshot-quicksearch.jpg", alt="Arena")
+				br
+				br
+				button.button--wide.button--border.button--add $45 / year - Activate premium &rarr;
 				br
 				br
 				br
-				span In order to sustain its expenses and future development without advertising, Are.na needs the support of its users. By activating these tools packages you contribute to our
-				a(href="/about#principles") self-sustainability
-				| goal.
-
+				| More tools will be added to the premium package soon. You can also make an annual donation to help our #[a(href="/about#principles") self-sustainablity] goals, you'll get access to our behind the scenes work and other perks.
+				br
+				input.input--wide.input--relative.is-block(name='email', type='email', placeholder='Enter 10 or more', required, autofocus= autofocus)
+				| $
+				button.button--add Donate &rarr;
 			h2#invite.static--title Invite someone
 			h2.static__tools__frame
 				| Add an email address to collaborate with someone:
@@ -73,10 +69,6 @@ block body
 				br
 				strong Note:
 				| anyone possessing your personal "Add via E-mail" address can post to your account.
-
-			h2.static--title.light If there are features or tools you would like to see implemented feel free to add suggestions in our
-				a(href="http://beta.are.na/are-na/feedback") feedback channel.
-				br
 
 	h3.static__menu
 		ul
