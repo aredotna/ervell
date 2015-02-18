@@ -17,7 +17,7 @@ block body
 				br
 				| With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
 
-			h2#extra-tools.static--title Premium
+			h2#premium.static--title Premium
 			h2.static__tools__frame.static__tools__frame--supporter
 				strong Manage channels
 				br
@@ -74,10 +74,16 @@ block body
 		ul
 			li: a(href="/").static__menu__item Home
 			li: a(href="/").static__menu__item Profile
-			li: a(href="/tools").static__menu__item About
+			li: a(href="/about").static__menu__item About
 			if !user
 				li: a(href="#log_in").static__menu__item Login
 				li: a(href="#sign_up").static__menu__item Register
+			li: &nbsp;
+			li: a.anchor(data-section="bookmarklet").static__menu__item.is-active Bookmarklet
+			li: a.anchor(data-section="premium").static__menu__item Premium
+			li: a.anchor(data-section="invite").static__menu__item Invite
+			li: a.anchor(data-section="find-friends").static__menu__item Find friends
+			li: a.anchor(data-section="add-via-email").static__menu__item Add via email
 
 block scripts
 	script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
