@@ -1,3 +1,4 @@
+vendor-prefixes ?= webkit moz official
 @import '../../node_modules/nib'
 @import '../../node_modules/jeet/stylus/jeet'
 @import '../../node_modules/rupture/rupture'
@@ -115,7 +116,7 @@ blockquote
 
 .container
   width 100%
-  
+
 .flex-container
   center(1400)
 
@@ -177,7 +178,7 @@ for i in (1..5)
   html, body
     font-size 13px
     padding 0
-    
+
   #scroll-top
     display block
 

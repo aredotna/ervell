@@ -1,7 +1,14 @@
+vendor-prefixes ?= webkit moz official
+
 @import '../components/layout/variables'
+@import '../../node_modules/nib'
 
 .manage__block,
 .manage__block__collection__header
+  display -webkit-box
+  display -moz-box
+  display -ms-flexbox
+  display -webkit-flex
   display flex
   flex-direction row
   justify-content space-between
@@ -32,13 +39,13 @@
     color hovergray
     &::after
       color hovergray
-     
+
   &::after
     content "⇅"
     margin 0 0 0 3px
     font-size 1.1em
     color lightgray
-    
+
 .channel__privacy--setting
 
   a
@@ -50,7 +57,7 @@
 @media (max-width:(block_width_mar * 3) + 20)
   .manage__block__follower_count
     display none
-  
+
   .manage__block,
   .manage__block__collection__header
     font-size s_caption
@@ -59,7 +66,7 @@
   .manage__block__collaborator_count,
   .manage__block__export
     display none
-  
+
   .manage__block__block_count
     width 120px
 
