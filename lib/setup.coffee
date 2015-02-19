@@ -97,6 +97,7 @@ module.exports = (app) ->
   app.use require "../apps/auth"
   app.use require "../apps/about"
   app.use require "../apps/search"
+  app.use require "../apps/manage"
   app.use require "../apps/user"
   app.use require "../apps/channel"
 

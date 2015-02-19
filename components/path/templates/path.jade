@@ -5,7 +5,7 @@ section#main-path.path--header.flex-container
         li.root
           a(href='/') Are.na
 
-        if !channel && !author &&!search
+        if !channel && !author &&!search &&! managedUser
           li
             .root__toggle
               .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
@@ -13,6 +13,9 @@ section#main-path.path--header.flex-container
         if author
           li.path__username
             a(href="/" + author.get('slug'))=author.get('username')
+        if managedUser
+          li.path__username
+            a(href="/" + managedUser.get('slug'))=managedUser.get('username')
         if channel
           li.path__channel.channel(class="privacy-#{channel.get('status')}")
             a(href="/" + author.get('slug') + '/' + channel.get('slug'))= channel.get('title')
@@ -36,6 +39,8 @@ section#main-path.path--header.flex-container
     else if author && user && author.id == user.id
       .channel-settings.edit-profile
         a(href="#") Profile settings
+        br
+        a(href="/manage") Manage channels
 
     else if author && user && author.id != user.id && !channel
       .channel-settings.edit-profile
