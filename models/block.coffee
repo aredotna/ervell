@@ -8,7 +8,6 @@ _ = require 'underscore'
 
 module.exports = class Block extends Base
 
-
   url: -> "#{sd.API_URL}/blocks/#{@id}"
 
   sync: (method, model, options) ->
@@ -43,7 +42,7 @@ module.exports = class Block extends Base
       @get('visibility')
 
   getPermissions: (user, channel)->
-    return "" unless @has('user') && channel?
+    return "" unless @has('user') && channel? and user?
 
     permissions = ['can-read']
 
