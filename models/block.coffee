@@ -42,7 +42,7 @@ module.exports = class Block extends Base
       @get('visibility')
 
   getPermissions: (user, channel)->
-    return "" unless @has('user') && channel? and user?
+    return "" unless @has('user') and user?
 
     permissions = ['can-read']
 
@@ -51,13 +51,16 @@ module.exports = class Block extends Base
       permissions.push 'can-edit'
 
     # Block owner or connector can manage if block is in channel
-    if (@connectedByCurrentUser(user) or @belongsToCurrentUser(user))
+    if (@connectedByCurrentUser(user) or @belongsToCurrentUser(user)) && channel?
       permissions.push 'can-manage'
 
     (_.uniq permissions).join ' '
 
   belongsToCurrentUser: (user)->
     @get('user').id is user.id
+
+  allows: (permission, user) ->
+    _.include @getPermissions(user), permission
 
   connectedByCurrentUser: (user)->
     @get('connected_by_user_id') is user.id
