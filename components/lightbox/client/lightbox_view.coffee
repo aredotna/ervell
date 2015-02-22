@@ -1,11 +1,13 @@
 Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
+md = require 'marked'
 mediator = require '../../../lib/mediator.coffee'
 Feed = require '../../../collections/feed.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
 NewCommentView = require '../../new_comment/client/new_comment_view.coffee'
+EditableAttributeView = require '../../editable_attribute/client/editable_attribute_view.coffee'
 
 lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 
@@ -14,6 +16,11 @@ module.exports = class LightboxView extends Backbone.View
   events:
     'tap .lightbox--close'    : 'close'
     'tap .directional-arrows' : 'clickSlide'
+
+  editableAttributes:
+    'title'       : 'plaintext'
+    'description' : 'markdown'
+    'content'     : 'markdown'
 
   initialize: ->
     $('body').addClass 'is-lightbox'
@@ -33,27 +40,45 @@ module.exports = class LightboxView extends Backbone.View
   render: ->
     mediator.trigger 'load:stop'
 
-    @$el.html lightboxTemplate(block: @model)
+    @$el.html lightboxTemplate block: @model, md: md
 
+    @postRender()
+
+  postRender: ->
+    @setupFeed()
+    @setUpNewComment()
+    @setupEditableAttributes()
+
+    IconicJS().inject 'img.iconic'
+
+  setupFeed: ->
     # TODO - make sure to dispose these things when lightbox slides
-    feed = new Feed null,
+    @feed = new Feed null,
       type: 'block'
       object_id: @model.id
 
-    feed.comparator = (group) ->
+    @feed.comparator = (group) ->
       new Date group.models[0].get('created_at')
 
     new SmallFeedView
       el: @$ "#lightbox__feed_inner"
-      collection: feed
+      collection: @feed
 
+  setUpNewComment: ->
     new NewCommentView
       el: @$ "#lightbox__new-comment"
-      collection: feed
+      collection: @feed
       block_id: @model.id
       autoRender: true
 
-    IconicJS().inject 'img.iconic'
+  setupEditableAttributes: ->
+    for attribute, kind of @editableAttributes
+      new EditableAttributeView
+        model: @model
+        el:@$("#attribute-#{attribute}_#{@model.id}")
+        _attribute: attribute
+        _kind: kind
+
 
   clickSlide: (e) ->
     e.preventDefault()

@@ -10,7 +10,7 @@
 
   - if(block.get('class') == 'Text')
     .lightbox__content__text
-      .lightbox__content__text__inner!= block.get('content_html')
+      .lightbox__content__text__inner(id="attribute-content_#{block.id}")!= md(block.get('content'))
 
   - if(block.get('class') == 'Media')
     .lightbox__content__media!= block.get('embed').html
@@ -23,10 +23,10 @@
 
   - if(block && block.has('title'))
     .lightbox__content__title
-      p= block.get('title')
+      p(id="attribute-title_#{block.id}")= block.get('title')
 
-      - if(block && block.has('description'))
-        .lightbox__content__description!= block.get('description_html')
+      - if(block)
+        .lightbox__content__description(id="attribute-description_#{block.id}")!= md(block.get('description'))
       - if(block && block.has('source'))
         .lightbox__content__source
           p (#[a(href="#{block.getSourceUrl()}" target="_blank") Source])
