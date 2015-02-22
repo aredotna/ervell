@@ -11,7 +11,6 @@ CurrentUser = require '../../models/current_user'
 sd = require("sharify").data
 
 @index = (req, res, next) ->
-
   if req.params.block_id
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
