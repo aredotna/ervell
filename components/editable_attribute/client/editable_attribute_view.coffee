@@ -8,6 +8,8 @@ md = require 'marked'
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
 
 module.exports = class EditableAttributeView extends Backbone.View
+  wait: false
+
   className: ->
     "#{@_attribute} attribute-group #{@_isPresentClass()} #{@model.getPermissions(@currentUser)}"
 
@@ -61,13 +63,13 @@ module.exports = class EditableAttributeView extends Backbone.View
     @endEdit()
 
     attributes = {}
-    attributes[@options.locals._attribute] = @$('.editor').val()
+    attributes[@_attribute] = @$('.editor').val()
 
     afterSaved = =>
       @model.trigger 'edit:success'
       @render()
 
-    if @options.wait is true
+    if @wait is true
       @model.save attributes,
         success: afterSaved
     else
