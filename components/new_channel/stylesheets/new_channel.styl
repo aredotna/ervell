@@ -45,3 +45,18 @@
 
       a.is-active, &:hover
         color hovergray
+
+@media (max-width:500px)
+  .new-channel-dropdown__container
+    .grid__block
+      width 100%
+      max-width 100%
+      left 0
+      top 0
+      padding-top 100%
+
+    .grid__block__inner
+      height 120px
+
+      .grid__block__channel__stats
+        display none
