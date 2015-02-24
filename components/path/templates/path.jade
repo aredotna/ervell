@@ -60,9 +60,10 @@ section#main-path.path--header.flex-container
             | Collaborators
           .metadata__text
             //- rendered on the client
-        .metadata__column
-          .metadata__title Followers
-          .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
+        if channel.get('status') != 'private'
+          .metadata__column
+            .metadata__title Followers
+            .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
 
     else if author || search
       .metadata
