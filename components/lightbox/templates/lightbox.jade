@@ -24,7 +24,7 @@
   .lightbox__content__title
     p(id="attribute-title_#{block.id}")= block.get('title')
 
-    .lightbox__content__description(id="attribute-description_#{block.id}")!= block.get('description')
+    p.lightbox__content__description(id="attribute-description_#{block.id}")!= block.get('description')
 
     - if(block && block.has('source'))
       .lightbox__content__source
