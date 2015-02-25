@@ -18,6 +18,9 @@
   left 0
   display none
 
+.attr-value
+  height 100%
+
 .attribute-group
   display inline-block
   position relative
@@ -28,10 +31,20 @@
     width 100%
     height 100%
     margin 0
+    padding 0
     background-color #fff
+  
+  textarea
+    font-size 16px
+    color #222
 
   &.can-edit:hover
-    background-color highlight
+    background-color backgroundgray
+    -moz-box-shadow inset 0 0 2px highlight
+    -webkit-box-shadow inset 0 0 2px highlight
+    box-shadow inset 0 0 2px highlight
+    cursor text
+    color textgray
 
 .is-absent
   width 100%
@@ -52,4 +65,8 @@
 
   .attr-editor, .attr-help
     display block
+    padding 40px 35px
     z-index 8004
+  
+  textarea
+    padding 0
