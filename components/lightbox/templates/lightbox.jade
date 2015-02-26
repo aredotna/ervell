@@ -1,5 +1,8 @@
 #l-lightbox-container_inner
   a.lightbox--close: span(class="iconic iconic-sm" data-glyph="x" title="x" aria-hidden="true")
+
+  #l-lightbox-loading-spacer
+
   - if(block.has('image') && block.get('class') != 'Media')
     .lightbox__content__img
       img(src="#{block.resizeImage(1000,1000, 'original')}")

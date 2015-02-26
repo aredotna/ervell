@@ -23,20 +23,14 @@ module.exports = class EditableAttributeView extends Backbone.View
     'clickMarkdownHelp' : 'showMarkdownHelp'
 
   initialize: (options)->
-    super
+    { @_attribute, @_kind, @wait } = options
 
     @currentUser = mediator.shared.current_user
     @listenTo @model, 'remote:update', @render
 
-    @_attribute = options._attribute
-    @_kind = options._kind
-
-    console.log 'model permissions', @model.getPermissions(@currentUser), @currentUser
-
     @render()
 
   beginEdit: ->
-    console.log 'beginning edit', @model.allows('can-edit',  @currentUser)
     return unless @model.allows('can-edit',  @currentUser) and !@editing
     @editing = true
     @$el.addClass('is-editing')
@@ -71,7 +65,8 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     if @wait is true
       @model.save attributes,
+        silent: true
         success: afterSaved
     else
-      @model.save attributes
+      @model.save attributes, silent: true
       afterSaved()
