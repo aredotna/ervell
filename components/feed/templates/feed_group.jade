@@ -4,4 +4,5 @@
     - blocks = group.items()
     - channel = group.channel()
     .grid.grid--feed
-      include ../../block_collection/templates/block_collection
+      if blocks.length
+        include ../../block_collection/templates/block_collection
