@@ -23,13 +23,14 @@ module.exports = class LightboxView extends Backbone.View
     'content'     : 'markdown'
 
   initialize: ->
-    $('body').addClass 'is-lightbox'
-    @$el.addClass 'is-active'
+    $('body').addClass 'is-lightbox is-loading'
+    @$el.addClass 'is-active is-loading'
 
     mediator.trigger 'load:start'
 
-    @model.on "sync", @render, @
-    @model.fetch()
+    @model.fetch
+      success: =>
+        @render()
 
     @$el.html lightboxTemplate(block: @model)
 
@@ -38,10 +39,9 @@ module.exports = class LightboxView extends Backbone.View
     mediator.on "lightbox:close",      => @close()
 
   render: ->
-    mediator.trigger 'load:stop'
-
+    $('body').removeClass 'is-loading'
+    @$el.removeClass 'is-loading'
     @$el.html lightboxTemplate block: @model, md: md
-
     @postRender()
 
   postRender: ->
@@ -50,6 +50,8 @@ module.exports = class LightboxView extends Backbone.View
     @setupEditableAttributes()
 
     IconicJS().inject 'img.iconic'
+
+    @postRendered = true
 
   setupFeed: ->
     # TODO - make sure to dispose these things when lightbox slides
@@ -78,6 +80,7 @@ module.exports = class LightboxView extends Backbone.View
         el:@$("#attribute-#{attribute}_#{@model.id}")
         _attribute: attribute
         _kind: kind
+        wait: true
 
 
   clickSlide: (e) ->
@@ -95,7 +98,7 @@ module.exports = class LightboxView extends Backbone.View
 
   close: ->
     @$el.html ""
-    $('body').removeClass 'is-lightbox'
+    $('body').removeClass 'is-lightbox is-loading'
     @$el.removeClass 'is-active'
     mediator.off "lightbox:slide:next"
     mediator.off "lightbox:slide:prev"
