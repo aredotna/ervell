@@ -49,13 +49,15 @@ section#main-path.path--header.flex-container
   .metadata--container
     if channel
       .metadata
-        .metadata__column
+        .metadata__column.is-minimized
+          .metadata__expand
           .metadata__title Description
             if channel.has('metadata')
               .metadata__text= channel.get('metadata').description
             else
               .metadata__text —
-        #metadata--collaborators.metadata__column
+        #metadata--collaborators.metadata__column.is-minimized
+          .metadata__expand
           .metadata__title
             | Collaborators
           .metadata__text
@@ -64,11 +66,11 @@ section#main-path.path--header.flex-container
           .metadata__column
             .metadata__title Followers
             .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
-
     else if author || search
       .metadata
         if author
-          .metadata__column
+          .metadata__column.is-minimized
+            .metadata__expand
             .metadata__title Info
               if author.has('metadata')
                 .metadata__text Son of @broskoski, father of a cat. NYC.

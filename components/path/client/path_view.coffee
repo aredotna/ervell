@@ -10,6 +10,7 @@ module.exports = class PathView extends Backbone.View
 
   events:
     'click .toggle-group a' : 'filterBlocks'
+    'click .metadata__expand' : 'metadataExpand'
 
   initialize: (options) ->
     super
@@ -33,3 +34,7 @@ module.exports = class PathView extends Backbone.View
 
     $('.toggle-group a').removeClass 'is-active'
     $ct.addClass 'is-active'
+
+  metadataExpand: (e)->
+    $('.metadata__column').toggleClass 'is-minimized'
+    $('.metadata__expand').toggleClass 'metadata__expand--text'
