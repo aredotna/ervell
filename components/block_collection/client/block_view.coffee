@@ -97,9 +97,15 @@ module.exports = class BlockView extends Backbone.View
 
   render: ->
     if @containerMethod isnt 'before' and @containerMethod isnt 'after'
-      @container[@containerMethod] blockTemplate(block: @model, user: @current_user)
+      @container[@containerMethod] blockTemplate
+        block: @model
+        user: @current_user
+        channel: @channel
     else
-      @container.find('.grid__block--new-block')[@containerMethod] blockTemplate(block: @model, user: @current_user)
+      @container.find('.grid__block--new-block')[@containerMethod] blockTemplate
+        block: @model
+        user: @current_user
+        channel: @channel
 
     @renderFollowButton()
 
