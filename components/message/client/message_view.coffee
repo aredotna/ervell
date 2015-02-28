@@ -11,7 +11,7 @@ module.exports = class MessageView extends Backbone.View
 
   initialize: ->
     # only render if user does not have cookie
-    @render() if not Cookies.get @model.id
+    @render() unless Cookies.get(@model.id) or $('body').hasClass 'is-mobile'
 
   render: ->
     # do this directly for now, thinking of different templates with the same view
