@@ -14,7 +14,6 @@ module.exports = class UserBlocks extends SearchBlocks
     per: 20
 
   url: ->
-    console.log "#{sd.API_URL}/user/#{@slug}/search?#{params.encode(@options)}"
     "#{sd.API_URL}/user/#{@slug}/search?#{params.encode(@options)}"
 
   initialize: (models, options) ->

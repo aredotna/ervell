@@ -15,6 +15,12 @@ _ = require 'underscore'
   if req.params.block_id
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
+  if req.query.subject
+    _.extend blocks.options,
+      subject: req.query.subject
+
+    res.locals.sd.SUBJECT = req.query.subject
+
   user.fetch
     success: ->
       res.locals.sd.USER = user.toJSON()

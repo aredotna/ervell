@@ -4,6 +4,7 @@
 
 Backbone = require "backbone"
 Backbone.$ = $
+_ = require 'underscore'
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
@@ -20,6 +21,9 @@ module.exports.init = ->
   else
     blocks = new UserBlocks sd.BLOCKS,
       user_slug: sd.USER.slug
+
+    _.extend blocks.options,
+      subject: sd.SUBJECT
 
   new UserBlockCollectionView
     el: $ ".grid"
