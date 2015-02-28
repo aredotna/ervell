@@ -33,15 +33,21 @@ vendor-prefixes ?= webkit moz official
   width 200px
   padding 0 20px 0 0
 
-.manage__block__sort__link
+.manage__block__sort__link.is-active
   &:hover
     cursor pointer
     color hovergray
     &::after
       color hovergray
 
-  &::after
-    content "⇅"
+  &.is-asc::after
+    content "↑"
+    margin 0 0 0 3px
+    font-size 1.1em
+    color lightgray
+
+  &.is-desc::after
+    content "↓"
     margin 0 0 0 3px
     font-size 1.1em
     color lightgray

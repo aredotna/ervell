@@ -24,13 +24,15 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
   sortBlocks: (e)->
     column = $(e.target).data('sort')
 
+    @$('.manage__block__sort__link').removeClass 'is-active is-asc is-desc'
+
     _.extend @blocks.options,
       page: 1
       sort: column
       subject: 'channel'
       direction: @direction
 
-    @toggleDirection()
+    $(e.target).addClass "is-active is-#{@direction}"
 
     @blocks.fetch
       success: =>
@@ -38,6 +40,9 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
 
         for model in @blocks.models
           @renderBlockView(model, true)
+
+    @toggleDirection()
+
 
   appendBlockView: (model) ->
     @renderBlockView model, true
