@@ -82,8 +82,8 @@ section#main-path.path--header.flex-container
             .metadata__text
               ul.breadcrumb
                 li: a(href="/#{author.get('slug')}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
-                li: a(href="/#{author.get('slug')}?subject=channel" class=sd.SUBJECT == 'channel' ? "is-active" : "" ).metadata--selector__option Channels
-                li: a(href="/#{author.get('slug')}?subject=block" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
+                li: a(href="/#{author.get('slug')}/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "" ).metadata--selector__option Channels
+                li: a(href="/#{author.get('slug')}/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
         if author
           .metadata__column
             .metadata__title Followers
