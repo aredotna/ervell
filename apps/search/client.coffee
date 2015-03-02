@@ -4,6 +4,7 @@
 
 Backbone = require "backbone"
 Backbone.$ = $
+_ = require 'underscore'
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
 SearchBlocks = require '../../collections/search_blocks.coffee'
@@ -12,7 +13,8 @@ UserBlockCollectionView = require '../../components/block_collection/client/user
 
 module.exports.init = ->
   blocks = new SearchBlocks sd.BLOCKS, {q: sd.SEARCH}
-  console.log 'search_blocks', blocks
+
+  _.extend blocks.options, subject: sd.SUBJECT
 
   new UserBlockCollectionView
     el: $ ".grid"

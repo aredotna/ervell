@@ -16,7 +16,11 @@ module.exports = class SearchBlocks extends Blocks
 
   model: Block
 
-  url: -> "#{sd.API_URL}/search?#{params.encode(@options)}"
+  url: ->
+    if @options.subject
+      return "#{sd.API_URL}/search/#{@options.subject}?#{params.encode(@options)}"
+    else
+      return "#{sd.API_URL}/search?#{params.encode(@options)}"
 
   parse: (data)->
     @total_pages = data.total_pages
