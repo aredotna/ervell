@@ -9,8 +9,9 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
           .valign--flex
             img(src="#{block.resizeImage()}" alt="#{block.get('description')}").grid__block__content__image
         - if(block.get('class') == 'Text')
-          .grid__block__content__text
-            != block.get('content_html')
+          .valign--flex
+            .grid__block__content__text
+              != block.get('content_html')
         - if(block.get('class') == 'Channel')
           .valign-outer
             .valign-inner
