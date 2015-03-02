@@ -4,18 +4,21 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
   .block-padding
   span(href="#{block.getHref()}" data-client="#{block.get('base_class')}" class="grid__block__link needsclick")
     .grid__block__inner.halign--flex(class="grid__block__inner--privacy-#{ block.getVisibility() }")
-      .grid__block__content.valign--flex
+      .grid__block__content
         - if(block.has('image'))
-          img(src="#{block.resizeImage()}" alt="#{block.get('description')}").grid__block__content__image
+          .valign--flex
+            img(src="#{block.resizeImage()}" alt="#{block.get('description')}").grid__block__content__image
         - if(block.get('class') == 'Text')
           .grid__block__content__text
             != block.get('content_html')
         - if(block.get('class') == 'Channel')
-          h2=block.smartTruncate(block.get('title'), 50)
-          .grid__block__channel__stats
-            ul.grid__block__channel__stats__list
-              li by #{block.get('user').username}
-              li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
+          .valign-outer
+            .valign-inner
+              h2=block.smartTruncate(block.get('title'), 50)
+              .grid__block__channel__stats
+                ul.grid__block__channel__stats__list
+                  li by #{block.get('user').username}
+                  li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
         - if(block.get('class') == 'Attachment' && !block.has('image'))
           img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
         - if(block.get('class') == 'User' && block.has('username'))
