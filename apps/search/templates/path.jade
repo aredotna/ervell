@@ -10,5 +10,6 @@ block metadata
       .metadata__text
         ul.breadcrumb
           li: a(href="/search/#{search}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
-          li: a(href="/search/#{search}/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "" ).metadata--selector__option Channels
-          li: a(href="/search/#{search}/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
+          li: a(href="/search/#{search}/channels" class=sd.SUBJECT == 'channels' ? "is-active" : "" ).metadata--selector__option Channels
+          li: a(href="/search/#{search}/blocks" class=sd.SUBJECT == 'blocks' ? "is-active" : "").metadata--selector__option Blocks
+          li: a(href="/search/#{search}/users" class=sd.SUBJECT == 'users' ? "is-active" : "").metadata--selector__option Users

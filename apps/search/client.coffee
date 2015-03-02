@@ -4,6 +4,7 @@
 
 Backbone = require "backbone"
 Backbone.$ = $
+_ = require 'underscore'
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
 SearchBlocks = require '../../collections/search_blocks.coffee'
