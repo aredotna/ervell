@@ -12,7 +12,8 @@ UserBlockCollectionView = require '../../components/block_collection/client/user
 
 module.exports.init = ->
   blocks = new SearchBlocks sd.BLOCKS, {q: sd.SEARCH}
-  console.log 'search_blocks', blocks
+
+  _.extend blocks.options, subject: sd.SUBJECT
 
   new UserBlockCollectionView
     el: $ ".grid"
