@@ -1,0 +1,14 @@
+extends ../../../components/path/templates/path
+
+block path
+  li.path__sub Search results for '#{search}'
+
+block metadata
+  .metadata
+    .metadata__column
+      .metadata__title View
+      .metadata__text
+        ul.breadcrumb
+          li: a(href="/search/#{search}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
+          li: a(href="/search/#{search}/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "" ).metadata--selector__option Channels
+          li: a(href="/search/#{search}/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks

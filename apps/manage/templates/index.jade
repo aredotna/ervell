@@ -4,7 +4,7 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'manage' + sd.CSS_EXT) )
 
 block body
-  include ../../../components/path/templates/path
+  include ./path
   if blocks
     .grid.flex-container
       include manage_block_collection

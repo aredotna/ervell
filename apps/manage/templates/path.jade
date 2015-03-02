@@ -1,0 +1,12 @@
+extends ../../../components/path/templates/path
+
+block path
+  li.path__username
+    a(href="/" + author.get('slug'))=author.get('username')
+
+block right
+  if author && user && author.id == user.id
+    .channel-settings.edit-profile
+      a(href="#") Profile settings
+      br
+      a(href="/manage") Manage channels

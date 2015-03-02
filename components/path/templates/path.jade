@@ -5,90 +5,9 @@ section#main-path.path--header.flex-container
         li.root
           a(href='/') Are.na
 
-        if !channel && !author &&!search &&! managedUser
-          li
-            .root__toggle
-              .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
-              .root__toggle__item(class="#{path == 'explore' ? 'active' : ''}"): a(href="/explore") explore
-        if author
-          li.path__username
-            a(href="/" + author.get('slug'))=author.get('username')
-        if managedUser
-          li.path__username
-            a(href="/" + managedUser.get('slug'))=managedUser.get('username')
-        if channel
-          li.path__channel.channel(class="privacy-#{channel.get('status')}")
-            a(href="/" + author.get('slug') + '/' + channel.get('slug'))= channel.get('title')
-        if followers
-          li.path__sub followers
-        if following
-          li.path__sub following
-        if search
-          li.path__sub Search results for '#{search}'
+        block path
 
-    if channel
-      .channel-settings.show-info
-        a(href="#") Show info
-      if user && user.canEditChannel(channel)
-        .channel-settings.edit-channel
-          a.channel-settings__trigger(href="#") Edit channel
-      else
-        .channel-settings.follow_button.pointer
-          a(data-type="Channel", data-id="#{author.id}")
-
-    else if author && user && author.id == user.id
-      .channel-settings.edit-profile
-        a(href="#") Profile settings
-        br
-        a(href="/manage") Manage channels
-
-    else if author && user && author.id != user.id && !channel
-      .channel-settings.edit-profile
-        a.follow_button.pointer(data-type="User", data-id="#{author.id}")
+    block right
 
   .metadata--container
-    if channel
-      .metadata
-        .metadata__column.is-minimized
-          .metadata__expand
-          .metadata__title Description
-            if channel.has('metadata')
-              .metadata__text= channel.get('metadata').description
-            else
-              .metadata__text —
-        #metadata--collaborators.metadata__column.is-minimized
-          .metadata__expand
-          .metadata__title
-            | Collaborators
-          .metadata__text
-            //- rendered on the client
-        if channel.get('status') != 'private'
-          .metadata__column
-            .metadata__title Followers
-            .metadata__text: a(href="/" + author.get('slug') + '/' + channel.get('slug') + '/' + 'followers')= channel.get('follower_count')
-    else if author || search
-      .metadata
-        if author
-          .metadata__column.is-minimized
-            .metadata__expand
-            .metadata__title Info
-              if author.has('metadata')
-                .metadata__text Son of @broskoski, father of a cat. NYC.
-              else
-                .metadata__text —
-        if !following && !followers
-          .metadata__column
-            .metadata__title View
-            .metadata__text
-              ul.breadcrumb
-                li: a(href="/#{author.get('slug')}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
-                li: a(href="/#{author.get('slug')}/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "" ).metadata--selector__option Channels
-                li: a(href="/#{author.get('slug')}/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
-        if author
-          .metadata__column
-            .metadata__title Followers
-            .metadata__text: a(href="/" + author.get('slug') + '/followers')= author.get('follower_count')
-
-          .metadata__column
-            .metadata__title Following
-            .metadata__text: a(href="/" + author.get('slug') + '/following')= author.get('following_count')
+    block metadata

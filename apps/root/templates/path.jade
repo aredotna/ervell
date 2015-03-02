@@ -1,0 +1,7 @@
+extends ../../../components/path/templates/path
+
+block path
+  li
+    .root__toggle
+      .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
+      .root__toggle__item(class="#{path == 'explore' ? 'active' : ''}"): a(href="/explore") explore

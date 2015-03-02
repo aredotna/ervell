@@ -16,5 +16,5 @@ ManageBlocks = require "../../collections/manage_blocks"
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render 'index',
         blocks: blocks.models
-        managedUser: req.user
+        author: req.user
     error: (m, err) -> next err

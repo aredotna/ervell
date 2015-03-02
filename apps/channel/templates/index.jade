@@ -4,7 +4,7 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'channel' + sd.CSS_EXT) )
 
 block body
-  include ../../../components/path/templates/path
+  include ./path
   .channel-container
     .grid.grid--channel.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
       if channel && !following && !followers && user && user.canAddToChannel(channel)
