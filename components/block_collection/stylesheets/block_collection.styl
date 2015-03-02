@@ -26,12 +26,27 @@
   text-align center
   margin 0 10px 90px 10px
   position relative
+  display inline-block
 
   &:hover
     cursor pointer
 
 .block-padding
   padding-top 100%
+
+.grid__block__inner:hover, .grid__block__inner.is-active
+  border 1px solid bordergray
+  cursor pointer
+
+  .grid__block__overlay
+    opacity 1
+    pointer-events all
+
+  .grid__block__author
+      visibility visible
+
+.grid__block__content
+  height 100%
 
 .grid__block--block .grid__block__inner, .grid__block--loading .grid__block__inner
   background-size 80px 80px
@@ -54,32 +69,16 @@
   to
     background-position 160px 80px
 
-.grid__block--user:hover
-  color hovergray
-
-  .grid__block__inner
-    border 2px solid lightgray
-
-  &:hover
-    .grid__block__author
-      visibility visible
-
-    .grid__block__title
-      display none
+.grid__block__inner
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  border 1px solid #fff
 
 .grid__block--placeholder.loading .grid__block__inner
   border 1px dashed bordergray
-
-.grid__block__inner:hover, .grid__block__inner.is-active
-  border 1px solid bordergray
-  cursor pointer
-
-  .grid__block__overlay
-    opacity 1
-    pointer-events all
-
-  .grid__block__author
-      visibility visible
 
 .grid__block__author
   visibility hidden
@@ -198,6 +197,19 @@ privacy-color('.list__block--channel--', color)
   display block
 
 /* USER */
+.grid__block--user:hover
+  color hovergray
+
+  .grid__block__inner
+    border 2px solid lightgray
+
+  &:hover
+    .grid__block__author
+      visibility visible
+
+    .grid__block__title
+      display none
+
 .grid__block--user .grid__block__inner
   background-color backgroundgray
   border 2px solid lightgray
@@ -213,12 +225,10 @@ privacy-color('.list__block--channel--', color)
 .grid__block--channel
   h2
     font-weight normal
-    padding 15px 0 0 0
-    //   font-size 1.53em
-    //   transition(0.1s)
+    padding 15px 12px 0 12px
 
   .grid__block__content
-    padding 12px
+    width 100%
 
   .grid__block__inner
     border-width 2px
@@ -265,8 +275,8 @@ privacy-color('.list__block--channel--', color)
     padding 15px
 
 /* CONNECT */
-.grid__block__inner, .grid__block__connect-container
-  position relative
+.grid__block__connect-container
+  position absolute
   overflow hidden
   word-break break-word
   border 1px solid #fff
@@ -279,12 +289,6 @@ privacy-color('.list__block--channel--', color)
   &.is-active
     opacity 1
     pointer-events all
-
-.grid__block__inner
-  position absolute
-  top 0
-  height 100%
-  width 100%
 
 @media (max-width:(block_width_mar * 3))
   .grid
