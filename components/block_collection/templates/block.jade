@@ -21,7 +21,8 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
                   li by #{block.get('user').username}
                   li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
         - if(block.get('class') == 'Attachment' && !block.has('image'))
-          img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+          .valign--flex
+            img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
         - if(block.get('class') == 'User' && block.has('username'))
           h2=block.get('username')
           +avatar(block)
