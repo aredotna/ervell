@@ -54,6 +54,7 @@
     "rupture": "*",
     "axis": "*",
     "cookies-js": "*",
-    "node-inspector": "*"
+    "node-inspector": "*",
+    "morgan": "*"
   }
 }

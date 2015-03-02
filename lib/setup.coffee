@@ -19,6 +19,7 @@ localsMiddleware = require './middleware/locals'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
+logger = require "morgan"
 stylus = require "stylus"
 nib = require "nib"
 rupture = require 'rupture'
@@ -74,6 +75,7 @@ module.exports = (app) ->
   app.use express.static(path.resolve __dirname, "../public")
 
   # session management
+  app.use logger('dev')
   app.use bodyParser.json()
   app.use bodyParser.urlencoded(extended: true)
   app.use cookieParser()
