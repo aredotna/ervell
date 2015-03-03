@@ -48,6 +48,8 @@ body.is-lightbox
     z-index lightbox_z + 1
 
 .lightbox__content__text
+  display flex
+  flex-direction column
   position relative
   left 50%
   max-width 740px
@@ -64,6 +66,7 @@ body.is-lightbox
   z-index lightbox_z + 1
 
   .lightbox__content__text__inner
+    flex 1
     font-family font_serif
     margin 0 auto
     color #333
