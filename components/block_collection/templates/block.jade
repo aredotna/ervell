@@ -6,7 +6,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
     .grid__block__inner.halign--flex(class="grid__block__inner--privacy-#{ block.getVisibility() }")
       .grid__block__content
         - if(block.has('image'))
-          .valign--flex
+          .valign--flex.halign--flex
             img(src="#{block.resizeImage()}" alt="#{block.get('description')}").grid__block__content__image
         - if(block.get('class') == 'Text')
           .valign--flex
