@@ -11,3 +11,5 @@ app.set "view engine", "jade"
 app.get "/about", routes.home
 app.get "/about/:page", routes.page
 app.get "/tools", (req, res)-> res.render 'tools'
+app.get "/terms", (req, res)-> res.render 'terms'
+app.get "/privacy", (req, res)-> res.render 'privacy'
