@@ -45,6 +45,12 @@
   .grid__block__author
     visibility visible
 
+body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-active
+  .grid__block__overlay
+    opacity 0
+    pointer-events none
+    display none !important
+
 .grid__block__content
   height 100%
   width 100%
@@ -148,33 +154,33 @@ privacy-color('.list__block--channel--', color)
     font-size 1em
     line-height 1.4em
     margin 0 0 10px 0
-        
+
   a
     font-weight bold
     padding 0
-  
+
   ul
     list-style disc inside none
     margin-bottom 10px
-  
+
   li
     font-size 1em
     line-height 1.4em
     margin-bottom 5px
-  
+
   ol
     list-style decimal inside none
     margin-bottom 5px
-    
+
   em, strong, blockquote, ul, ol
     padding 0
-  
+
   hr
     margin 30px 35px
     border 0
     border-top 1px solid bordergray
     box-sizing none
-  
+
   blockquote
     margin 10px 0 10px 2px
     border-left 1px solid bordergray
@@ -238,13 +244,18 @@ privacy-color('.list__block--channel--', color)
   .button--inblock
     color inherit
     border-color inherit
-    
+
     &:hover
       color hovergray
 
   &:hover
     .grid__block__channel__stats
       visibility visible
+
+.is-mobile .grid__block--channel
+  &:hover
+    .grid__block__channel__stats
+      visibility hidden
 
 .grid__block__channel__stats
   visibility hidden
