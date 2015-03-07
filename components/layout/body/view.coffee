@@ -9,11 +9,11 @@ LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 module.exports = class BodyView extends Backbone.View
 
   events:
-    'click'                                       : 'bodyClick'
-    'click a[data-disabled]'                      : 'disable'
-    'click a[data-client]:not([data-disabled])'   : 'intercept'
-    'click span[data-client]:not([data-disabled])': 'intercept'
-    'click a'                                     : 'maybeIntercept'
+    'tap'                                       : 'bodyClick'
+    'tap a[data-disabled]'                      : 'disable'
+    'tap a[data-client]:not([data-disabled])'   : 'intercept'
+    'tap span[data-client]:not([data-disabled])': 'intercept'
+    'tap a'                                     : 'maybeIntercept'
     'tap #scroll-top'                             : 'scrollToTop'
 
 
