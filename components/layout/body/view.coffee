@@ -14,7 +14,7 @@ module.exports = class BodyView extends Backbone.View
     'tap a[data-client]:not([data-disabled])'   : 'intercept'
     'tap span[data-client]:not([data-disabled])': 'intercept'
     'tap a'                                     : 'maybeIntercept'
-    'tap #scroll-top'                             : 'scrollToTop'
+    'tap #scroll-top'                           : 'scrollToTop'
 
 
   initialize: (options) ->
