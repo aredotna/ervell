@@ -30,13 +30,16 @@ body.is-loading #l-loader-container
   animation throbbin 0.58s infinite /* IE 10+, Fx 29+ */
 
 #l-infinite-loader-container
-  display block
+  display none
   height 2px
   width 32px
   margin 150px auto
   z-index loader_z
   pointer-events none
   opacity 0.85
+
+  &.is-loading
+    display block
 
 @-webkit-keyframes throbbin
   0%    {margin-left: 0px; width: 3px;}
