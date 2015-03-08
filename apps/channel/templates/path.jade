@@ -15,15 +15,13 @@ block right
     .channel-settings.show-info
       a(href="#") Show info
   if user && user.canEditChannel(channel)
-    .channel-settings.edit-channel
-      a.channel-settings__trigger(href="#") Edit channel
-  else
-    .channel-settings.follow_button.pointer
-      a(data-type="Channel", data-id="#{author.id}")
+    .channel-settings
+      a.toggle-settings-trigger.pointer Channel settings
 
 block metadata
   .metadata
     include meta_pockets/description
     include meta_pockets/collaborators
+    include meta_pockets/actions
     if channel.get('status') != 'private'
       include meta_pockets/followers
