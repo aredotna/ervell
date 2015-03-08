@@ -21,13 +21,13 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
                   li by #{block.get('user').username}
                   li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
         - if(block.get('class') == 'Attachment' && !block.has('image'))
-          .valign--flex.halign--flex
+          .valign--flex.halign--flex.grid__block__channel--attachment-bk
             if(block.get('attachment').extension == 'mp3')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
             if(block.get('attachment').extension == 'pdf')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
             if(block.get('attachment').extension == 'embed')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
         - if(block.get('class') == 'User' && block.has('username'))
           h2=block.get('username')
           +avatar(block)
