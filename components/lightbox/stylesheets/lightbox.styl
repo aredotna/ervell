@@ -232,16 +232,19 @@ body.is-lightbox
       margin auto
 
 .directional-arrows
+  opacity 0
   position absolute
   top 48%
   cursor pointer
-  color white
   padding 20% 0
   max-height 100%
   v-align()
 
   &:hover
-    color hovergray
+    opacity 1
+  
+  svg
+    fill hovergray
 
 .directional-arrows--left
   left 0

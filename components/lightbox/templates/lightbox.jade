@@ -19,10 +19,10 @@
     .lightbox__content__media!= block.get('embed').html
 
   .lightbox__arrow-container.directional-arrows.directional-arrows--right(data-direction="next")
-    span(class="iconic" data-glyph="chevron-right" title="chevron right")
+    img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-r.svg" class="iconic iconic-sm")
 
   .lightbox__arrow-container.directional-arrows.directional-arrows--left(data-direction="prev")
-    span(class="iconic" data-glyph="chevron-left" title="chevron left")
+    img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm")
 
   .lightbox__content__title
     p(id="attribute-title_#{block.id}")= block.get('title')
