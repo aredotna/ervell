@@ -1,0 +1,9 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Followers"
+  - extraClasses = "is-readable"
+  - id = "metadata--followers"
+
+block content
+  a(href="/#{channel.href()}/followers")= channel.get('follower_count')

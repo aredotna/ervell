@@ -1,0 +1,12 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Description"
+  - extraClasses = "is-readable"
+  - id = "metadata--description"
+
+block content
+  if channel.has('metadata')
+    | #{channel.get('metadata').description}
+  else
+    | —

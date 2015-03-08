@@ -1,0 +1,68 @@
+.metadata
+  padding 0
+  height auto
+
+.metadata__column
+  display inline-block
+  position relative
+  vertical-align top
+  margin 0 20px 0 0
+  width 225px
+  height auto
+  min-height 80px
+  overflow hidden
+  padding-bottom 10px
+  font-size s_caption + 1
+  line-height 1.5
+
+  a
+    font-weight bold
+    color textgray
+
+  &:hover
+    color hovergray
+
+  &:hover .metadata__expand
+    display block
+
+  &.is-minimized
+    max-height 163px
+
+.metadata__title
+  width 100%
+  color lightgray
+
+.metadata__text, .metadata__content
+  width 100%
+  font-weight normal
+  color lightgray
+
+.metadata--selector__option
+  color lightgray
+  font-weight bold
+  hover-color hovergray
+
+  &.is-active
+    color hovergray
+
+.metadata__expand
+  display none
+  position absolute
+  bottom 0
+  width inherit
+  height 40px
+  font-weight bold
+  background-color rgba(255,255,255,0.9)
+  cursor pointer
+  text-align center
+  line-height 42px
+  font-size s_caption + 1
+
+  &:after
+    content 'See all'
+
+  &:hover
+    color hovergray
+
+  &.metadata__expand--text:after
+    content 'Hide'
