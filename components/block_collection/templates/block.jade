@@ -60,7 +60,7 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
       p(href="#{block.getHref()}" data-client="#{block.get('base_class')}")
         .grid__block__title= block.smartTruncate(block.get('title'))
           - if(block.get('class') == 'Media')
-          img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+            img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
         - if(block.has('user'))
           p.grid__block__author
             | Added by #{block.get('user').username}
