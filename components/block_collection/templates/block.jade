@@ -22,7 +22,12 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
                   li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
         - if(block.get('class') == 'Attachment' && !block.has('image'))
           .valign--flex
-            img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+            if(block.get('attachment').extension == 'mp3')
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-sm")
+            if(block.get('attachment').extension == 'pdf')
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-sm")
+            if(block.get('attachment').extension == 'embed')
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-sm")
         - if(block.get('class') == 'User' && block.has('username'))
           h2=block.get('username')
           +avatar(block)
@@ -51,9 +56,18 @@ div(class="grid__block grid__block--#{block.get('class').toLowerCase()} #{block.
       if user
         .grid__block__connect-container.abs-fill
           //- rendered by the client
-    - if(block.get('class') != 'Channel' && block.get('class') != 'User')
+    - if(block.get('class') != 'Channel' && block.get('class') != 'User' && block.get('class') != 'Media')
       p(href="#{block.getHref()}" data-client="#{block.get('base_class')}")
         .grid__block__title= block.smartTruncate(block.get('title'))
+        - if(block.has('user'))
+          p.grid__block__author
+            | Added by #{block.get('user').username}
+            br
+            | #{block.updatedAtAgo()}
+    - if(block.get('class') == 'Media')
+      p(href="#{block.getHref()}" data-client="#{block.get('base_class')}")
+        .grid__block__title= block.smartTruncate(block.get('title'))
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
         - if(block.has('user'))
           p.grid__block__author
             | Added by #{block.get('user').username}
