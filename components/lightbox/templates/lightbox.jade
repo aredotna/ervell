@@ -7,9 +7,15 @@
     .lightbox__content__img
       img(src="#{block.resizeImage(1000,1000, 'original')}")
 
-  - if(block.get('class') == 'Attachment')
-    .lightbox__content__img
-      img(data-src="#{sd.IMAGE_PATH}iconic/file.svg", data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+  - if(block.get('class') == 'Attachment' && !block.has('image'))
+    .lightbox__content__attachment.valign--flex.halign--flex
+      if(block.get('attachment').extension == 'mp3')
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
+      if(block.get('attachment').extension == 'pdf')
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+      if(block.get('attachment').extension == 'embed')
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
 
   - if(block.get('class') == 'Text')
     .lightbox__content__text
@@ -19,10 +25,10 @@
     .lightbox__content__media!= block.get('embed').html
 
   .lightbox__arrow-container.directional-arrows.directional-arrows--right(data-direction="next")
-    span(class="iconic" data-glyph="chevron-right" title="chevron right")
+    img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-r.svg" class="iconic iconic-sm")
 
   .lightbox__arrow-container.directional-arrows.directional-arrows--left(data-direction="prev")
-    span(class="iconic" data-glyph="chevron-left" title="chevron left")
+    img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm")
 
   .lightbox__content__title
     p(id="attribute-title_#{block.id}")= block.get('title')
