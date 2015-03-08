@@ -1,0 +1,11 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Actions"
+  - extraClasses = "is-readable"
+  - id = "metadata--actions"
+
+block content
+  if !user.canEditChannel(channel)
+    .follow_button.pointer: a(data-type="Channel", data-id="#{channel.id}")
+  .connect_button.pointer: a(data-type="Channel", data-id="#{channel.id}") Connect
