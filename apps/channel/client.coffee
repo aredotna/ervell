@@ -11,15 +11,11 @@ BlockSkeletonView = require './client/block_skeleton_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
-
-ChannelSettingsModalView = require '../../components/channel_settings_modal/client/channel_settings_modal_view.coffee'
+ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
 
 Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
-
-  events:
-    'click .channel-settings__trigger' : 'openChannelSettings'
 
   initialize: (options)->
     @channel = options.channel
@@ -28,11 +24,6 @@ module.exports = class ChannelView extends Backbone.View
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
 
     @maybeSubscribe()
-
-  openChannelSettings: ->
-    @modal = new ChannelSettingsModalView
-      width: '380px'
-      model: @channel
 
   maybeSubscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
@@ -44,6 +35,7 @@ module.exports = class ChannelView extends Backbone.View
     if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
       @setupNewBlockView()
       @setupFileDropView()
+      @setupVisibilityView()
 
       @$('.grid').addClass 'is-addable'
 
@@ -72,6 +64,20 @@ module.exports = class ChannelView extends Backbone.View
         model: @channel
         blocks: @blocks
         autoRender: should_render
+
+  setupVisibilityView: ->
+    @channelVisibilityView = new ChannelVisibilityView
+      el: @$ "#metadata--privacy .metadata__content"
+      model: @channel
+      autoSync: true
+
+      @channel.on 'change:status', @updateTitle, @
+
+  updateTitle: =>
+    $('.path__channel').removeClass (index, css) ->
+      klass = css.match (/(^|\s)privacy-\S+/g) || []
+      return klass.join(' ')
+    $('.path__channel').addClass "privacy-#{@channel.get('status')}"
 
 module.exports.init = ->
   current_user = mediator.shared.current_user

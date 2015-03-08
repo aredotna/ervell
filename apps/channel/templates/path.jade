@@ -16,7 +16,7 @@ block right
       a(href="#") Show info
   if user && user.canEditChannel(channel)
     .channel-settings
-      a.toggle-settings-trigger.pointer Channel settings
+      a.toggle-settings-trigger.pointer Admin
 
 block metadata
   .metadata
@@ -25,3 +25,7 @@ block metadata
     include meta_pockets/actions
     if channel.get('status') != 'private'
       include meta_pockets/followers
+    include meta_pockets/privacy
+    include meta_pockets/share
+    include meta_pockets/export
+    include meta_pockets/delete
