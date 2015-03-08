@@ -54,7 +54,7 @@ module.exports = class FeedGroup extends Base
     else
       "/#/block/#{@first_item()?.id}"
 
-  single_subject_class: -> @first_item()?.base_class.toLowerCase()
+  single_subject_class: -> @first_item()?.base_class?.toLowerCase()
 
   single_subject: ->
     if @first_item()?.username?
@@ -78,7 +78,7 @@ module.exports = class FeedGroup extends Base
 
   _format_subject: ->
     a = "a"
-    klass = @first_item()?.class.toLowerCase()
+    klass = @first_item()?.class?.toLowerCase()
 
     if klass is "media"
       klass = "embed"

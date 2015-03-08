@@ -41,6 +41,9 @@ module.exports = class Block extends Base
     else
       @get('visibility')
 
+  getClass: ->
+    @get('class')?.toLowerCase()
+
   getPermissions: (user, channel)->
     return "" unless @has('user') and user?
 
