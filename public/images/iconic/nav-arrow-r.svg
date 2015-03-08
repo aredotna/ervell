@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="134.698px" height="210.953px" viewBox="0 0 134.698 210.953" enable-background="new 0 0 134.698 210.953"
+	 xml:space="preserve">
+<g>
+	<title>Chevron</title>
+</g>
+<polygon points="134.698,105.393 106.393,77.254 106.393,77.254 28.305,-1 0,27.305 78.088,105.393 0.833,182.648 29.137,210.953
+	106.393,133.697 106.393,133.697 134.698,105.56 "/>
+<g transform="scale(4) translate(1)" display="none">
+	<g display="inline">
+		<g>
+			<defs>
+				<rect id="SVGID_1_" x="-2030.75" y="-2101.6" width="3900" height="4800"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  overflow="visible"/>
+			</clipPath>
+
+				<path clip-path="url(#SVGID_2_)" fill="none" stroke="#000000" stroke-width="6" stroke-linecap="square" stroke-miterlimit="10" d="
+				M-212,92.15L-5.75,298.4L-212,504.65"/>
+		</g>
+	</g>
+</g>
+<g transform="scale(8)" display="none">
+	<g display="inline">
+		<g>
+			<defs>
+				<rect id="SVGID_3_" x="-4239.875" y="-4650.8" width="8400" height="9600"/>
+			</defs>
+			<clipPath id="SVGID_4_">
+				<use xlink:href="#SVGID_3_"  overflow="visible"/>
+			</clipPath>
+
+				<path clip-path="url(#SVGID_4_)" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="square" stroke-miterlimit="10" d="
+				M-89.562,62.012L-2.375,149.2l-122.812,122.812"/>
+		</g>
+	</g>
+</g>
+<script  type="application/ecmascript" class="iconic-api">//<![CDATA[
+var iconicApis=window._Iconic?window._Iconic.smartIconApis:{};iconicApis["chevron"]=iconicApis["chevron"]||function(t){function e(e){t.setAttribute("data-direction",e);var n=0;switch(e){case"top":n=270;break;case"left":n=180;break;case"bottom":n=90;break;default:n=0}r.setAttribute("transform","rotate("+n+" 64 64) translate(12) "),a.setAttribute("transform","scale(4) rotate("+n+" 16 16) translate(1)"),i.setAttribute("transform","scale(8) rotate("+n+" 8 8)")}var r=t.querySelector(".iconic-lg"),a=t.querySelector(".iconic-md"),i=t.querySelector(".iconic-sm"),n=function(){var r=t.getAttribute("data-direction")||"";e(r)};return{update:n,setDirection:e}};
+//
+
+	]]>
+</script>
+</svg>
