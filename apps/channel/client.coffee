@@ -94,7 +94,7 @@ module.exports.init = ->
 
   new ChannelCollaborationView
     collection: collaborators
-    el: $("#metadata--collaborators .metadata__text")
+    el: $("#metadata--collaborators .metadata__content")
     isCollaboration: channel.has('collaboration')
     isEditable: mediator.shared.current_user.canEditChannel channel
     channel: channel

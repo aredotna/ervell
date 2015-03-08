@@ -16,6 +16,9 @@ module.exports = class Channel extends Block
   slugOrId: ->
     @slug || @id
 
+  href: ->
+    "#{@get('user')?.slug}/#{@get('slug')}"
+
   initialize: (options) ->
     super
     if options and options.channel_slug

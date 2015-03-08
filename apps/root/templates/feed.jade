@@ -1,15 +1,12 @@
 extends ../../../components/layout/index
 
-
 block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'feed' + sd.CSS_EXT) )
-
 
 block body
   include ./path
   .feed-container
     //- rendered via client
-
 
 block scripts
   script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )
