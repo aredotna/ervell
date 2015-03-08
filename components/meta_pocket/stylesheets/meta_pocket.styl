@@ -1,6 +1,19 @@
-.metadata
+.metadata--container
   padding 0
   height auto
+  font-size s_caption + 1
+
+  a
+    font-weight bold
+    color textgray
+
+.metadata--container__settings__done
+  text-align center
+  padding s_margin * 3 0
+  display none
+
+.settings-is-active .metadata--container__settings__done
+  display block
 
 .metadata__column
   display inline-block
@@ -11,21 +24,16 @@
   min-height 80px
   overflow hidden
   padding-bottom 10px
-  font-size s_caption + 1
   line-height 1.5
-
-  a
-    font-weight bold
-    color textgray
 
   &:hover
     color hovergray
 
-  &:hover .metadata__expand
-    display block
+  &.is-settings
+    display none
 
-  &.is-minimized
-    max-height 163px
+.settings-is-active .metadata__column.is-settings
+  display inline-block
 
 .metadata__title
   width 100%
