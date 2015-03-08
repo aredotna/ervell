@@ -1,0 +1,12 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Export"
+  - extraClasses = "is-settings"
+  - id = "metadata--export"
+
+block content
+  .export--option(data-type="pdf"): a PDF
+  .export--option(data-type="zip"): a ZIP
+  .export--option(data-type="html"): a HTML
+  .export--option(data-type="json"): a JSON

@@ -1,0 +1,13 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Share"
+  - extraClasses = "is-settings"
+  - id = "metadata--share"
+
+block content
+  if channel.get('share_link')
+    .channel--share-copy-link: a Copy link to clipboard
+    .channel--share-unshare: a Unshare
+  else
+    .channel--share-generate: a Generate shareable link

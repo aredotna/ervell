@@ -22,6 +22,7 @@ module.exports = class PathView extends Backbone.View
       new FollowButtonView
         el: @$('.follow_button')
         model: @model
+        showTitle: no
 
   toggleSettings: (e)->
-    @$('.metadata--container').addClass 'settings-is-active'
+    @$('.metadata--container').toggleClass 'settings-is-active'
