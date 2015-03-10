@@ -1,5 +1,20 @@
 .channel__privacy--setting
   ul.breadcrumb.toggle-group(data-key="filter")
-    li: a(href="#" data-key='privacy' data-value='public' class=channel.get('status') == 'public' ? 'is-active' : '').metadata--selector__option.default Open
-    li: a(href="#" data-key='privacy' data-value='closed' class=channel.get('status') == 'closed' ? 'is-active' : '').metadata--selector__option Closed
-    li: a(href="#" data-key='privacy' data-value='private' class=channel.get('status') == 'private' ? 'is-active' : '').metadata--selector__option Private
+    li: a(
+        href="#"
+        data-key='privacy'
+        data-value='public'
+        class=channel.get('status') == 'public' ? 'is-active' : ''
+      ).metadata--selector__option.metadata--selector__option--public.default Open
+    li: a(
+        href="#"
+        data-key='privacy'
+        data-value='closed'
+        class=channel.get('status') == 'closed' ? 'is-active' : ''
+      ).metadata--selector__option.metadata--selector__option--closed Closed
+    li: a(
+        href="#"
+        data-key='privacy'
+        data-value='private'
+        class=channel.get('status') == 'private' ? 'is-active' : ''
+      ).metadata--selector__option.metadata--selector__option--private Private
