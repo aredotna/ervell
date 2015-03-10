@@ -12,6 +12,7 @@ NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
+ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
 
 Bp = require('../../lib/vendor/backpusher.js')
 
@@ -35,12 +36,15 @@ module.exports = class ChannelView extends Backbone.View
     if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
       @setupNewBlockView()
       @setupFileDropView()
-      @setupVisibilityView()
 
       @$('.grid').addClass 'is-addable'
 
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
       @$('.grid').addClass 'is-editable'
+      @$('.channel-settings').addClass 'is-editable'
+
+      @setupVisibilityView()
+      @setupShareLinkView()
 
       mediator.trigger 'channel:is-editable'
 
@@ -72,6 +76,11 @@ module.exports = class ChannelView extends Backbone.View
       autoSync: true
 
       @channel.on 'change:status', @updateTitle, @
+
+  setupShareLinkView: ->
+    @shareLinkView = new ShareLinkView
+      el: @$ "#metadata--share .metadata__content"
+      model: @channel
 
   updateTitle: =>
     $('.path__channel').removeClass (index, css) ->

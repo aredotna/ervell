@@ -9,13 +9,20 @@ LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 module.exports = class BodyView extends Backbone.View
 
   events:
-    'tap'                                       : 'bodyClick'
-    'tap a[data-disabled]'                      : 'disable'
-    'tap a[data-client]:not([data-disabled])'   : 'intercept'
-    'tap span[data-client]:not([data-disabled])': 'intercept'
-    'tap a'                                     : 'maybeIntercept'
-    'tap #scroll-top'                           : 'scrollToTop'
+    'click'                                       : 'bodyClick'
+    'click a[data-disabled]'                      : 'disable'
+    'click a[data-client]:not([data-disabled])'   : 'intercept'
+    'click span[data-client]:not([data-disabled])': 'intercept'
+    'click a'                                     : 'maybeIntercept'
+    'click #scroll-top'                           : 'scrollToTop'
 
+  mobileEvents:
+    'tap'                                         : 'bodyClick'
+    'tap a[data-disabled]'                        : 'disable'
+    'tap a[data-client]:not([data-disabled])'     : 'intercept'
+    'tap span[data-client]:not([data-disabled])'  : 'intercept'
+    'tap a'                                       : 'maybeIntercept'
+    'tap #scroll-top'                             : 'scrollToTop'
 
   initialize: (options) ->
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
@@ -31,12 +38,15 @@ module.exports = class BodyView extends Backbone.View
 
     new PathView el: @$('section.path--header')
 
+    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
+
   startLoading: -> $('body').addClass 'is-loading'
 
   stopLoading: -> $('body').removeClass 'is-loading'
 
   intercept: (e)->
     e.preventDefault()
+    e.stopImmediatePropagation()
 
     # do not continue if clicking button
     return false if $(e.target).hasClass 'button--inblock'
