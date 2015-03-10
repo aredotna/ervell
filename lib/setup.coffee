@@ -4,10 +4,10 @@
 # populating sharify data
 #
 
-{ API_URL, NODE_ENV, SESSION_SECRET,
+{ APP_URL, API_URL, NODE_ENV, SESSION_SECRET,
 SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
 COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
-PUSHER_KEY} = config = require "../config"
+PUSHER_KEY } = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -30,6 +30,7 @@ cache = require './cache'
 sharify.data =
   NODE_ENV: NODE_ENV
   API_URL: API_URL
+  APP_URL: APP_URL
   JS_EXT: (if ("production" is NODE_ENV ) then ".min.js.cgz" else ".js")
   CSS_EXT: (if ("production" is NODE_ENV) then ".min.css.cgz" else ".css")
   ASSET_PATH: ASSET_PATH
