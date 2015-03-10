@@ -17,13 +17,12 @@ module.exports = class BodyView extends Backbone.View
     'click #scroll-top'                           : 'scrollToTop'
 
   mobileEvents:
-    'tap'                                       : 'bodyClick'
-    'tap a[data-disabled]'                      : 'disable'
-    'tap a[data-client]:not([data-disabled])'   : 'intercept'
-    'tap span[data-client]:not([data-disabled])': 'intercept'
-    'tap a'                                     : 'maybeIntercept'
-    'tap #scroll-top'                           : 'scrollToTop'
-
+    'tap'                                         : 'bodyClick'
+    'tap a[data-disabled]'                        : 'disable'
+    'tap a[data-client]:not([data-disabled])'     : 'intercept'
+    'tap span[data-client]:not([data-disabled])'  : 'intercept'
+    'tap a'                                       : 'maybeIntercept'
+    'tap #scroll-top'                             : 'scrollToTop'
 
   initialize: (options) ->
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
