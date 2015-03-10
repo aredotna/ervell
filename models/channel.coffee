@@ -24,3 +24,18 @@ module.exports = class Channel extends Block
     if options and options.channel_slug
       @slug = options.channel_slug
       @username = options.username
+
+  generateShareLink: ->
+    mediator.publish 'sharelink:created'
+
+    $.post "#{sd.API_URL}/channels/#{@slugOrId()}/share", (response) =>
+      @set 'share_link', response.share_link
+
+  removeShareLink: ->
+    mediator.publish 'sharelink:removed'
+
+    $.ajax
+      type: "DELETE"
+      url: "#{sd.API_URL}/channels/#{@slugOrId()}/share"
+      success: =>
+        @unset 'share_link'
