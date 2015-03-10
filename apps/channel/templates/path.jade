@@ -12,10 +12,7 @@ block path
 
 block right
   if channel
-    .channel-settings.show-info
-      a(href="#") Show info
-  if user && user.canEditChannel(channel)
-    .channel-settings
+    .channel-settings(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
       a.toggle-settings-trigger.pointer Admin
 
 block metadata
