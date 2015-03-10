@@ -9,7 +9,7 @@
 
 .metadata--container__settings__done
   text-align center
-  padding s_margin * 3 0
+  padding s_margin * 2 0
   display none
 
 .settings-is-active .metadata--container__settings__done
@@ -21,6 +21,7 @@
   margin 0 20px 0 0
   width 225px
   height auto
+  max-height 163px
   min-height 80px
   overflow hidden
   padding-bottom 10px
@@ -31,6 +32,9 @@
 
   &.is-settings
     display none
+  
+  &.is-expanded
+    max-height none
 
   .channel__privacy--setting
     text-align left
