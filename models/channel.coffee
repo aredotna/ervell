@@ -5,6 +5,7 @@
 Block = require "./block.coffee"
 sd = require("sharify").data
 params = require 'query-params'
+mediator = require '../lib/mediator.coffee'
 
 module.exports = class Channel extends Block
   defaultOptions:
@@ -29,13 +30,13 @@ module.exports = class Channel extends Block
     "#{sd.APP_URL}/share/#{@get('share_link')}"
 
   generateShareLink: ->
-    mediator.publish 'sharelink:created'
+    mediator.trigger 'sharelink:created'
 
     $.post "#{sd.API_URL}/channels/#{@slugOrId()}/share", (response) =>
       @set 'share_link', response.share_link
 
   removeShareLink: ->
-    mediator.publish 'sharelink:removed'
+    mediator.trigger 'sharelink:removed'
 
     $.ajax
       type: "DELETE"
