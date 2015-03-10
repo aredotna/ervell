@@ -1,0 +1,7 @@
+if channel.get('share_link')
+  input.channel--share-input(disabled value="#{channel.shareHref()}")
+  .channel--share-copy-link: a Copy link to clipboard
+  .channel--share-unshare: a Unshare
+else
+  .channel--share-generate: a Generate shareable link
+
