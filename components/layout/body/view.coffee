@@ -9,6 +9,14 @@ LightboxRouter = require '../../lightbox/lightbox_router.coffee'
 module.exports = class BodyView extends Backbone.View
 
   events:
+    'click'                                       : 'bodyClick'
+    'click a[data-disabled]'                      : 'disable'
+    'click a[data-client]:not([data-disabled])'   : 'intercept'
+    'click span[data-client]:not([data-disabled])': 'intercept'
+    'click a'                                     : 'maybeIntercept'
+    'click #scroll-top'                           : 'scrollToTop'
+
+  mobileEvents:
     'tap'                                       : 'bodyClick'
     'tap a[data-disabled]'                      : 'disable'
     'tap a[data-client]:not([data-disabled])'   : 'intercept'
@@ -31,12 +39,15 @@ module.exports = class BodyView extends Backbone.View
 
     new PathView el: @$('section.path--header')
 
+    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
+
   startLoading: -> $('body').addClass 'is-loading'
 
   stopLoading: -> $('body').removeClass 'is-loading'
 
   intercept: (e)->
     e.preventDefault()
+    e.stopImmediatePropagation()
 
     # do not continue if clicking button
     return false if $(e.target).hasClass 'button--inblock'
