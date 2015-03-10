@@ -25,6 +25,9 @@ module.exports = class Channel extends Block
       @slug = options.channel_slug
       @username = options.username
 
+  shareHref: ->
+    "#{sd.APP_URL}/share/#{@get('share_link')}"
+
   generateShareLink: ->
     mediator.publish 'sharelink:created'
 
