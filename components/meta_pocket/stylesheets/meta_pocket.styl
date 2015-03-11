@@ -2,11 +2,11 @@
   padding 0
   height auto
   font-size s_caption + 1
-  
-  a  
+
+  a
     font-weight bold
     color textgray
-    
+
     &:hover
       color hovergray
 
@@ -36,21 +36,12 @@
 
   &.is-settings
     display none
-  
+
   &.is-expanded
     max-height none
 
   .channel__privacy--setting
     text-align left
-  
-  .metadata--selector__option--public
-    color public
-
-  .metadata--selector__option--private
-    color private
-  
-  .metadata--selector__option--closed
-    color closed
 
 .settings-is-active .metadata__column.is-settings
   display inline-block
@@ -71,13 +62,15 @@
 
   &:hover
     color hovergray
-  
+
   &.is-active
     color hovergray
-    
+
     &:hover
       cursor default
-    
+
+privacy-color('.is-active.metadata--selector__option--', color)
+
 .metadata__expand
   display none
   position absolute
