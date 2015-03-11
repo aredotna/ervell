@@ -24,6 +24,7 @@ module.exports = class ShareLinkView extends Backbone.View
     @model.removeShareLink()
 
   render: ->
+    @setupZeroClipboard()
     @$el.html shareTemplate channel: @model
 
   setupZeroClipboard: ->
