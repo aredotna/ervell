@@ -8,7 +8,7 @@
 module.exports =
   NODE_ENV: "development"
   PORT: 4000
-  APP_URL: "http://beta.are.na"
+  APP_URL: "http://localhost:4000"
   API_URL: "http://arena-api.herokuapp.com/v2"
   # API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
   # API_URL: "http://localhost:3000/v2"

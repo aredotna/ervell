@@ -13,15 +13,21 @@ html
     link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'layout' + sd.CSS_EXT) )
     include ../../components/meta/templates/meta
     block styles
-  body
+  body.body--bare
     #modal-container
       //- rendered by client
     #l-lightbox-container
       //- rendered by client
-    block body
+    .container
+      block body
 
     #l-loader-container
       include loader/templates/index
+
+    #message-container
+
+    a(data-section="#")#scroll-top &uarr;
+
     #scripts
       != sharify.script()
       script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )

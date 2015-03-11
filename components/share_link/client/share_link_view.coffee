@@ -29,6 +29,7 @@ module.exports = class ShareLinkView extends Backbone.View
   setupZeroClipboard: ->
     ZeroClipboard.config swfPath: "../swf/ZeroClipboard.swf"
     @clip = new ZeroClipboard @$(".channel--share-copy-link")
-    @clip.on 'complete', ( client, args ) ->
-      console.log 'link copied'
+    @clip.on 'ready', ( client, args ) =>
+      @clip.on 'copy', ( client, args ) =>
+        @$('.channel--share-success').addClass 'is-active'
 
