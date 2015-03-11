@@ -10,6 +10,7 @@ module.exports = class PathView extends Backbone.View
 
   events:
     'click .toggle-settings-trigger' : 'toggleSettings'
+    'click .toggle-expand-trigger' : 'toggleExpand'
 
   initialize: (options) ->
     super
@@ -26,3 +27,9 @@ module.exports = class PathView extends Backbone.View
 
   toggleSettings: (e)->
     @$('.metadata--container').toggleClass 'settings-is-active'
+    if !$('.metadata__column').hasClass 'is-expanded'
+      @$('.metadata__column').toggleClass 'is-expanded'
+
+  toggleExpand: (e)->
+    @$('.metadata__column').toggleClass 'is-expanded'
+    @$('.metadata--container').removeClass 'settings-is-active'

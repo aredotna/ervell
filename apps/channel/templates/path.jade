@@ -13,7 +13,8 @@ block path
 block right
   if channel
     .channel-settings(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
-      a.toggle-settings-trigger.pointer Admin
+      .toggle-settings-trigger.pointer: a Manage channel
+      .toggle-expand-trigger.pointer: a Expand
 
 block metadata
   .metadata

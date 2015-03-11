@@ -2,14 +2,17 @@
   padding 0
   height auto
   font-size s_caption + 1
-
-  a
+  
+  a  
     font-weight bold
     color textgray
+    
+    &:hover
+      color hovergray
 
 .metadata--container__settings__done
   text-align center
-  padding s_margin * 3 0
+  padding s_margin * 2 0
   display none
 
 .settings-is-active .metadata--container__settings__done
@@ -21,19 +24,33 @@
   margin 0 20px 0 0
   width 225px
   height auto
+  max-height 163px
   min-height 80px
   overflow hidden
   padding-bottom 10px
   line-height 1.5
+  color textgray
 
   &:hover
     color hovergray
 
   &.is-settings
     display none
+  
+  &.is-expanded
+    max-height none
 
   .channel__privacy--setting
     text-align left
+  
+  .metadata--selector__option--public
+    color public
+
+  .metadata--selector__option--private
+    color private
+  
+  .metadata--selector__option--closed
+    color closed
 
 .settings-is-active .metadata__column.is-settings
   display inline-block
@@ -52,9 +69,15 @@
   font-weight bold
   hover-color hovergray
 
+  &:hover
+    color hovergray
+  
   &.is-active
     color hovergray
-
+    
+    &:hover
+      cursor default
+    
 .metadata__expand
   display none
   position absolute
