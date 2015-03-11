@@ -1,0 +1,18 @@
+extends ../../../components/layout/index--bare
+
+block styles
+  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'channel' + sd.CSS_EXT) )
+
+block body
+  include ./path
+  .channel-container
+    .grid.grid--channel.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
+      if channel && !following && !followers && user && user.canAddToChannel(channel)
+        include ../../../components/new_block/templates/new_block
+      include ../../../components/block_collection/templates/block_collection
+
+  if user
+    .channel__filedrop.flex-container
+
+block scripts
+  script( src=sd.ASSET_PATH + 'channel' + sd.JS_EXT )
