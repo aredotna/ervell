@@ -6,7 +6,10 @@ block vars
   - id = "metadata--export"
 
 block content
-  .export--option(data-type="pdf"): a PDF
-  .export--option(data-type="zip"): a ZIP
-  .export--option(data-type="html"): a HTML
-  .export--option(data-type="json"): a JSON
+  .export--option(data-format="pdf"): a PDF
+  .export--option(data-format="zip"): a ZIP
+  .export--option(data-format="html"): a HTML
+  unless channel.get('status') == 'private'
+    .export--link(data-format="json"): a(href="#{sd.API_URL}/channels/#{channel.get('slug')}" target="_blank") JSON
+
+  .export__status

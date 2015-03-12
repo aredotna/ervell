@@ -13,6 +13,7 @@ ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
 ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
+ChannelExportView = require '../../components/channel_export/client/channel_export_view.coffee'
 
 Bp = require('../../lib/vendor/backpusher.js')
 
@@ -45,6 +46,7 @@ module.exports = class ChannelView extends Backbone.View
 
       @setupVisibilityView()
       @setupShareLinkView()
+      @setupExportView()
 
       mediator.trigger 'channel:is-editable'
 
@@ -80,6 +82,11 @@ module.exports = class ChannelView extends Backbone.View
   setupShareLinkView: ->
     @shareLinkView = new ShareLinkView
       el: @$ "#metadata--share .metadata__content"
+      model: @channel
+
+  setupExportView: ->
+    @exportView = new ChannelExportView
+      el: @$ "#metadata--export .metadata__content"
       model: @channel
 
   updateTitle: =>
