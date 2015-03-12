@@ -10,13 +10,13 @@ block path
 
 block right
   if author && user && author.id == user.id
-    .channel-settings.edit-profile
+    .channel-settings.edit-profile.is-editable
       a(href="#") Profile settings
       br
       a(href="/manage") Manage channels
 
   else if author && user && author.id != user.id && !channel
-    .channel-settings.edit-profile
+    .channel-settings.edit-profile.is-editable
       a.follow_button.pointer(data-type="User", data-id="#{author.id}")
 
 block metadata
