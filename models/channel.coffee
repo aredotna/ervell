@@ -14,6 +14,13 @@ module.exports = class Channel extends Block
 
   url: -> "#{sd.API_URL}/channels/#{@slugOrId()}/thumb?#{params.encode(@options)}"
 
+  sync: (method, model, options) ->
+    switch method
+      when 'delete'
+        console.log 'setting options url'
+        options.url = "#{sd.API_URL}/channels/#{@id}"
+    super
+
   slugOrId: ->
     @slug || @id
 
@@ -21,6 +28,7 @@ module.exports = class Channel extends Block
     "#{@get('user')?.slug}/#{@get('slug')}"
 
   initialize: (options) ->
+    console.log 'channel init'
     super
     if options and options.channel_slug
       @slug = options.channel_slug

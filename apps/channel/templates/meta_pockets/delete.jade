@@ -7,3 +7,10 @@ block vars
 
 block content
   .delete-channel: a Delete channel
+
+  .delete-channel--confirmation
+    | Are you sure you want to delete&nbsp;
+    strong #{channel.get('title')}
+    | ? &nbsp;
+    span.delete-channel--confirmation__yes: a Yes
+    span.delete-channel--confirmation__no: a No

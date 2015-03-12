@@ -19,6 +19,11 @@ Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
 
+  events:
+    'click .delete-channel' : 'showConfirmation'
+    'click .delete-channel--confirmation__yes' : 'deleteChannel'
+    'click .delete-channel--confirmation__no'  : 'hideConfirmation'
+
   initialize: (options)->
     @channel = options.channel
     @blocks = options.blocks
@@ -26,6 +31,17 @@ module.exports = class ChannelView extends Backbone.View
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
 
     @maybeSubscribe()
+
+  showConfirmation: ->
+    @$('.delete-channel--confirmation').addClass 'is-active'
+
+  hideConfirmation: ->
+    @$('.delete-channel--confirmation').removeClass 'is-active'
+
+  deleteChannel: ->
+    @channel.destroy
+      success: (model) ->
+        window.location = "#{sd.APP_URL}"
 
   maybeSubscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
