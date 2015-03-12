@@ -23,8 +23,7 @@ block metadata
     include meta_pockets/actions
     unless channel.get('status') == 'private'
       include meta_pockets/followers
-    if channel.get('status') == 'private'
-      include meta_pockets/privacy
+    include meta_pockets/privacy
     include meta_pockets/share
     include meta_pockets/export
     include meta_pockets/delete
