@@ -48,12 +48,59 @@
     .channel--drop-zone__instructions
       display none
 
+.collaborators__edit
+  display none
+
+.is-editing
+  .collaborators__edit
+    display block
+
+  .collaborators__read
+    display none
+
+  .collaborators__edit__result__remove
+    font-size 10px
+    margin-right 6px
+    color alert
+    cursor pointer
+
+    &:before
+      top -1px
+      font-size 8px
+
+  .collaborators__edit__result
+    color hovergray
+    font-weight bold
+
+.collaborators__new-collaborator
+  padding-top 3px
+
 #new-collaborator__search, .new-collaborator__results
   display none
 
 .is-active
   #new-collaborator__search, .new-collaborator__results
     display block
+
+  .new-collaborator__results__result
+    background #fff
+    padding 6px
+    font-weight bold
+    cursor pointer
+    width 151px
+
+  .new-collaborator__results__result:hover
+    background-color lightgrayplus
+    color hovergray
+
+  .new-collaborator__result__add
+    font-size 10px
+    margin-right 6px
+    color hovergray
+
+    &:before
+      top -1px
+      font-size 8px
 
   #new-collaborator__search
     padding 3px

@@ -1,2 +1,4 @@
 for collaborator in collaborators
-  .new-collaborator__results__result(data-id="#{collaborator.id}")= collaborator.username
+  .new-collaborator__results__result(data-id="#{collaborator.id}")
+    span(class="iconic new-collaborator__result__add" data-glyph="plus" title="plus" aria-hidden="true")
+    | #{collaborator.username}

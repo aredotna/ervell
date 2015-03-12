@@ -7,24 +7,31 @@ collaboratorsTemplate = -> require('../templates/collaborators.jade') arguments.
 
 module.exports = class ChannelCollaborationView extends Backbone.View
 
+  events:
+    'click .collaborators__edit__result__remove' : 'removeCollaborator'
+
   initialize: (options)->
     @isCollaboration = options.isCollaboration
     @isEditable = options.isEditable
     @channel = options.channel
 
     @collection.on "sync", @render, @
+    @collection.on "reset", @render, @
+    @collection.on "remove", @render, @
 
     if @isCollaboration
-      @collection.fetch()
+      @collection.fetch
+        success: => mediator.trigger 'collaborators:fetched', @collection
+
     else
       @render()
 
     mediator.on 'channel:is-editable', @postRender, @
+    mediator.on 'collaborators:editing', @editMode, @
+    mediator.on 'collaborators:reading', @readMode, @
 
   render: ->
     @$el.html collaboratorsTemplate(collaborators: @collection.models)
-    mediator.trigger 'collaborators:fetched', @collection
-
     @postRender() if @isEditable
 
   postRender: ->
@@ -35,3 +42,11 @@ module.exports = class ChannelCollaborationView extends Backbone.View
       collaborators: @collection
       channel: @channel
 
+  editMode: ->
+    @$el.addClass 'is-editing'
+
+  readMode: ->
+    @$el.removeClass 'is-editing'
+
+  removeCollaborator: (e)->
+    @collection._remove $(e.target).data 'id'

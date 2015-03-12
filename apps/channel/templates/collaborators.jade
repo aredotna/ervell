@@ -1,15 +1,22 @@
 if collaborators.length
-  each collaborator, i in collaborators
-    if collaborators.length == 1
-      a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
-    else
-      if i == collaborators.length - 2
-        a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}&nbsp;
-        span and&nbsp;
-      else if i == collaborators.length - 1
+  .collaborators__read
+    each collaborator, i in collaborators
+      if collaborators.length == 1
         a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
-      else if i < collaborators.length - 2
-        a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')},&nbsp;
+      else
+        if i == collaborators.length - 2
+          a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}&nbsp;
+          span and&nbsp;
+        else if i == collaborators.length - 1
+          a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
+        else if i < collaborators.length - 2
+          a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')},&nbsp;
+
+  .collaborators__edit
+    each collaborator, i in collaborators
+      .collaborators__edit__result
+        span(class="iconic collaborators__edit__result__remove" data-id="#{collaborator.id}" data-glyph="minus" title="Remove #{collaborator.get('username')}" aria-hidden="true")
+        | #{collaborator.get('username')}
 else
   p.collaborators__empty-collaborators —
 

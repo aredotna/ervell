@@ -8,8 +8,9 @@ collaboratorResultsTemplate = -> require('../templates/collaborator_results.jade
 module.exports = class newCollaboratorView extends Backbone.View
 
   events:
-    'keyup #new-collaborator__search' : 'searchCollaborators'
-    'click .new-collaborator__add'    : 'openSearch'
+    'keyup #new-collaborator__search'          : 'searchCollaborators'
+    'click .new-collaborator__add'             : 'openSearch'
+    'click .new-collaborator__results__result' : 'addCollaborator'
 
   initialize: (options)->
     @channel = options.channel
@@ -19,10 +20,11 @@ module.exports = class newCollaboratorView extends Backbone.View
   maybeClear: (e)=>
     @clear() unless $(e.target).closest('#metadata--collaborators').length
 
+  addCollaborator: (e) ->
+    @currentCollaborators._add $(e.target).data 'id'
+
   searchCollaborators: ->
     query = @$('#new-collaborator__search').val()
-
-    console.log 'searchCollaborators', query
 
     $.get "#{sd.API_URL}/search/users/?q=#{query}&per=10", (response) =>
       # IDs of the current channel collaborators, author
@@ -38,13 +40,13 @@ module.exports = class newCollaboratorView extends Backbone.View
       @showResults()
 
   showResults: ->
-    console.log 'results', @results
     @$('.new-collaborator__results').html collaboratorResultsTemplate collaborators: @results
 
   openSearch: ->
     @$el.addClass 'is-active'
     @$('#new-collaborator__search').focus()
     $(window).one 'tap', @maybeClear
+    mediator.trigger 'collaborators:editing'
 
   render: ->
     @$el.html newCollaboratorTemplate()
@@ -52,3 +54,4 @@ module.exports = class newCollaboratorView extends Backbone.View
   clear: ->
     $(window).off 'tap', @maybeClear
     @$el.removeClass 'is-active'
+    mediator.trigger 'collaborators:reading'

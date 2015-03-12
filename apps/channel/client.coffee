@@ -31,6 +31,7 @@ module.exports = class ChannelView extends Backbone.View
     @listener = new Bp.Backpusher @pusher, @blocks
 
   checkUserAbilities: (collaborators) ->
+    console.log 'checkUserAbilities'
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
     if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
