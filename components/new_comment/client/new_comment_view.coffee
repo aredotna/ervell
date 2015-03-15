@@ -42,7 +42,6 @@ module.exports = class NewCommentView extends Backbone.View
         success: =>
           @$input.removeAttr 'disabled'
           @$input.val ""
-          console.log 'triggering new comment'
           mediator.trigger 'new:comment', comment
 
   render: ->

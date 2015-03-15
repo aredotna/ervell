@@ -85,7 +85,6 @@ module.exports = class ModalView extends Backbone.View
     @$dialog.css { width: width or @width }
 
   setup: ->
-    console.log 'modal setup'
     backdropClass = if @backdrop then 'has-backdrop' else 'has-nobackdrop'
 
     @$el.

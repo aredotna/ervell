@@ -61,7 +61,6 @@ module.exports = class BodyView extends Backbone.View
     if isBlock
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
-      console.log 'intercepted'
       window.location = url
 
   disable: (e)->

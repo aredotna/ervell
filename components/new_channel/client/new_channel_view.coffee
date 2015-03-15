@@ -27,7 +27,6 @@ module.exports = class NewChannelView extends Backbone.View
     @render()
 
   onKeyUp: (e)->
-    console.log '@$input.val()?.trim()', @$input.val()?.trim()
     @model.set 'title', @$input.val()?.trim()
 
   toggleVisibility: (model)->
@@ -60,6 +59,5 @@ module.exports = class NewChannelView extends Backbone.View
     @model.save null,
       success: =>
         @$('.grid__block').removeClass 'grid__block--loading'
-        console.log 'saved channel'
         document.location.href = "/#{@model.get('user').username}/#{@model.get('slug')}"
 

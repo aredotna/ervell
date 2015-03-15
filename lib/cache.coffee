@@ -9,7 +9,6 @@ redis = require 'redis'
   red = require("url").parse(REDIS_URL)
   @client = redis.createClient(red.port, red.hostname)
   @client.on 'error', _.once (err) =>
-    console.warn 'REDIS_CONNECTION_ERROR', err
     @client = null
     callback()
   @client.on 'ready', _.once callback
@@ -21,7 +20,6 @@ redis = require 'redis'
 # @param {String} val
 # @param {Number} expiresIn Defaults to 30 mins
 @set = (key, val, expiresIn = 1800) =>
-  console.log 'set', key, val
   return unless @client?
   @client.set key, val
   @client.expire key, expiresIn

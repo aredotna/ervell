@@ -12,8 +12,6 @@ module.exports = class ChannelExportView extends Backbone.View
   exportChannel: (e) ->
     format = $(e.currentTarget).data 'format'
 
-    console.log 'format', format
-
     $.ajax
       type: 'POST'
       url: "https://export-are-na.herokuapp.com/#{@model.get('slug')}.#{format}"

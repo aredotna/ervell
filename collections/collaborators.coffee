@@ -25,7 +25,6 @@ module.exports = class Collaborators extends Base
       url: @url()
       data: { ids: [id] }
       success: (response) =>
-        console.log 'response', response
         mediator.trigger 'collaborator:removed'
         @reset response.users
 

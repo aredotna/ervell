@@ -13,7 +13,6 @@ module.exports = class SmallFeedView extends FeedView
     mediator.on 'new:comment', @addComment
 
   addComment: (comment)=>
-    console.log 'adding comment', comment
     @$el.append commentTemplate comment: comment
 
   renderGroup: (group)->
