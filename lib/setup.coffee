@@ -59,7 +59,6 @@ module.exports = (app) ->
       compile: (str, path) ->
         stylus(str)
         .set('filename', path)
-        .set('compress', true)
         .use(rupture())
         .use(require("nib")())
 
