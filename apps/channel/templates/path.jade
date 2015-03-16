@@ -20,10 +20,11 @@ block metadata
   .metadata
     include meta_pockets/description
     include meta_pockets/collaborators
-    include meta_pockets/actions
-    unless channel.get('status') == 'private'
-      include meta_pockets/followers
-    include meta_pockets/privacy
-    include meta_pockets/share
-    include meta_pockets/export
-    include meta_pockets/delete
+    if user
+      include meta_pockets/actions
+      unless channel.get('status') == 'private'
+        include meta_pockets/followers
+      include meta_pockets/privacy
+      include meta_pockets/share
+      include meta_pockets/export
+      include meta_pockets/delete
