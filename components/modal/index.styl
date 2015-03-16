@@ -57,12 +57,11 @@ body.is-modal
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
 
-
 .modal-dialog
   position fixed
   overflow-y auto
   background-color #fff
-  border 2px solid bordergray
+  border 4px solid bordergray
   &.is-notransition
     transition none !important
 
@@ -125,6 +124,51 @@ body.is-modal
   max-width 400px
   margin auto
 
+#auth-submit
+  font-size 16px
+  color hovergray
+  position relative
+
+  &[data-state=loading]:before, &[data-state=success]:before
+    background white
+    position absolute
+    left 0
+    height 100%
+    width 100%
+    line-height 45px
+
+  &[data-state=loading]:before
+    content "Logging in..."
+
+  &[data-state=success]:before
+    content "Redirecting..."
+
+.auth-logo
+  text-align center
+  margin-bottom s_margin
+
+.auth-nav
+  text-align center
+
+  .breadcrumb
+    display inline-block
+    margin (s_margin) auto 0
+    font-size 14px
+
+  li
+    font-weight bold
+
+  li.is-active
+    color hovergray
+
+.auth-errors
+  text-align center
+  font-weight bold
+  color alert
+
+  &.is-active
+    margin-top 30px
+
 @media (max-width:500px)
   .modal-body
     padding 25% 0 0 0
@@ -136,3 +180,7 @@ body.is-modal
   .modal-close
     top 3.5%
     right 5%
+
+  .auth-logo
+    svg
+      width 100px

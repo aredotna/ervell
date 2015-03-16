@@ -1,9 +1,8 @@
 #auth-page.vam-outer
   .vam-inner
-    h2.modal-title Are.na / login
     section#auth-body
+      include ./header
       form.auth-login-email.auth-form( action='/me/sign_in' )
-        .auth-errors
         input.input--wide.input--relative.is-block(
           name='email', type='email', placeholder='Email', required, autofocus= autofocus
         )
@@ -17,4 +16,6 @@
           .modal-forgot
             a.faux-underline.auth-toggle( href='/forgot', data-mode='forgot', rel='nofollow' ) Forgot?
 
-        button#auth-submit.button--wide.button--border.button--relative &rarr;
+        .auth-errors &nbsp;
+
+        button#auth-submit.button--wide.button--border.button--relative Login
