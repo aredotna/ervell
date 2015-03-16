@@ -1,0 +1,13 @@
+#auth-page.vam-outer
+  .vam-inner
+    section#auth-body
+      include ./header
+
+      form.auth-login-email.auth-form
+        input.input--wide.input--relative.is-block(
+          name='email', type='email', placeholder='Email', required, autofocus= autofocus
+        )
+
+        .auth-errors &nbsp;
+
+        button#auth-forgot.auth-submit.button--wide.button--border.button--relative Reset password
