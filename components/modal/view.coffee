@@ -1,6 +1,7 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../lib/mediator.coffee'
+Transition = require '../mixins/transition.coffee'
 
 modalTemplate = -> require('./modal.jade') arguments...
 
@@ -53,10 +54,10 @@ module.exports = class ModalView extends Backbone.View
 
   updatePosition: =>
     @$dialog.css
-      width: (@$el.width() - (@$el.width() * 0.06)) + 'px'
-      height: (@$el.height() - (@$el.width() * 0.06)) + 'px'
-      top: (@$el.width() * 0.03) + 'px'
-      left: (@$el.width() * 0.03) + 'px'
+      width: (@$el.width() + 'px')
+      height: (@$el.height() + 'px')
+      top: '0px'
+      left: '0px'
 
   autofocus: -> true
 
@@ -106,6 +107,8 @@ module.exports = class ModalView extends Backbone.View
     _.defer => @$el.attr 'data-state', 'open'
 
   renderInner: =>
+    $('body').addClass 'is-lightbox'
+
     @$body = @$('.modal-body')
     @$body.html @template(@templateData)
     @$dialog = @$('.modal-dialog')
@@ -128,5 +131,9 @@ module.exports = class ModalView extends Backbone.View
 
     @$el.attr('data-state', 'closed')
 
+    $('body').removeClass 'is-lightbox'
+
     mediator.trigger 'modal:closed', { view: this }
+    mediator.trigger 'lightbox:closed'
+
     @remove()
