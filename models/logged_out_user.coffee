@@ -24,13 +24,12 @@ module.exports = class LoggedOutUser extends User
 
   signup: (options = {}) ->
     settings = _.defaults options,
-      url: '/users/invitation/accept'
-      success: injectToken -> location.reload()
-    settings.success = injectToken settings.success
-    new Backbone.Model().save (@pick 'name', 'email', 'password'), settings
+      url: "#{sd.API_URL}/invitees"
+    new Backbone.Model().save (@pick 'email', 'code'), settings
 
   # Alias #signup
-  register: @::signup
+  register: ()->
+
 
   forgot: (options = {}) ->
     settings = _.defaults options,
