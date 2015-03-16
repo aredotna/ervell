@@ -54,8 +54,8 @@ module.exports = class AuthModalView extends ModalView
 
   toggleMode: (e) ->
     e.preventDefault()
-    @state.set 'mode', $(e.target).data('mode')
-    @templateData.mode = state.get('mode')
+    @templateData.mode = $(e.currentTarget).data('mode')
+    @state.set 'mode', $(e.currentTarget).data('mode')
 
   submit: (e) ->
     return unless @validateForm()
@@ -77,8 +77,9 @@ module.exports = class AuthModalView extends ModalView
   onSubmitSuccess: (model, response, options) =>
     @$('button').attr 'data-state', 'success'
 
-    if response.error?
-      @showError _s.capitalize response.error
+    if response?.error?
+      @reenableForm()
+      @showError "Invalid login, try again."
     else
       Cookies.set('destination', @destination, expires: 60 * 60 * 24) if @destination
 
@@ -89,11 +90,10 @@ module.exports = class AuthModalView extends ModalView
             location.href = @redirectTo
           else
             location.reload()
-        when 'register'
-          mediator.trigger 'auth:sign_up:success'
-          location.href = @redirectTo or '/personalize'
+        when 'signup'
+          @showError "Registration recieved. Please check your email for registration details."
         when 'forgot'
-          mediator.trigger 'auth:change:mode', 'reset'
+          @showError "Please check your email for password reset details."
 
   showError: (msg) =>
     @$('button').attr 'data-state', 'error'

@@ -124,7 +124,7 @@ body.is-modal
   max-width 400px
   margin auto
 
-#auth-submit
+.auth-submit
   font-size 16px
   color hovergray
   position relative
@@ -137,11 +137,23 @@ body.is-modal
     width 100%
     line-height 45px
 
-  &[data-state=loading]:before
+  #auth-login&[data-state=loading]:before
     content "Logging in..."
 
-  &[data-state=success]:before
+  #auth-login&[data-state=success]:before
     content "Redirecting..."
+
+  #auth-register&[data-state=loading]:before
+    content "Sending..."
+
+  #auth-register&[data-state=success]:before
+    content "Success"
+
+  #auth-forgot&[data-state=loading]:before
+    content "Requesting..."
+
+  #auth-forgot&[data-state=success]:before
+    content "Success"
 
 .auth-logo
   text-align center

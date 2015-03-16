@@ -1,7 +1,6 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../lib/mediator.coffee'
-Transition = require '../mixins/transition.coffee'
 
 modalTemplate = -> require('./modal.jade') arguments...
 
@@ -75,12 +74,7 @@ module.exports = class ModalView extends Backbone.View
   # re-render the (presumably changed) template,
   # then fade back in and re-center
   reRender: ->
-    Transition.fade @$body,
-      out: =>
-        @$body.html @template(@templateData)
-        @trigger 'rerendered'
-      in: =>
-        @updatePosition()
+    @$body.html @template(@templateData)
 
   setWidth: (width) ->
     @$dialog.css { width: width or @width }
