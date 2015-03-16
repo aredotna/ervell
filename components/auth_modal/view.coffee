@@ -7,7 +7,7 @@ Form = require '../mixins/form.coffee'
 mediator = require '../../lib/mediator.coffee'
 LoggedOutUser = require '../../models/logged_out_user.coffee'
 
-{ templateMap, stateEventMap, successEventMap, routeCopyMap } = require './maps.coffee'
+{ templateMap } = require './maps.coffee'
 
 class State extends Backbone.Model
   defaults: mode: 'register'
@@ -21,9 +21,9 @@ module.exports = class AuthModalView extends ModalView
     templateMap[@state.get 'mode'] arguments...
 
   events: -> _.extend super,
-    'click .auth-toggle': 'toggleMode'
-    'submit form': 'submit'
-    'click #auth-submit': 'submit'
+    'click .auth-toggle' : 'toggleMode'
+    'submit form'        : 'submit'
+    'click #auth-submit' : 'submit'
 
   initialize: (options) ->
     { @destination } = options
@@ -38,34 +38,16 @@ module.exports = class AuthModalView extends ModalView
     @state = new State mode
 
     @templateData =
-      copy: @renderCopy(options.copy)
       pathname: location.pathname
       redirectTo: @redirectTo
+      mode: @state.get('mode')
 
     @listenTo @state, 'change:mode', @reRender
-    # @listenTo @state, 'change:mode', @logState
+    @listenTo @state, 'change:mode', @logState
 
     mediator.on 'auth:change:mode', @setMode, this
     mediator.on 'auth:error', @showError
     mediator.on 'modal:closed', @logClose
-
-    # @logState()
-
-  renderCopy: (copy) ->
-    # attrs = if copy?
-    #   if _.isObject copy
-    #     containsRequired = _.partial _.contains, ['signup', 'register', 'login']
-    #     # Ensure the object has one of the required copy keys
-    #     copy if _.any _.keys(copy), containsRequired
-    #   else if _.isString copy
-    #     # Return an object with the initialized state + the specified copy
-    #     _.tap {}, (hsh) =>
-    #       hsh[@state.get 'mode'] = copy
-    # else # Fallback to route copy
-    #   routeCopy = routeCopyMap[@redirectTo]
-    # # Ensure we return an object
-    # attrs or {}
-    # new Backbone.Model attrs
 
   setMode: (mode) ->
     @state.set 'mode', mode
@@ -73,6 +55,7 @@ module.exports = class AuthModalView extends ModalView
   toggleMode: (e) ->
     e.preventDefault()
     @state.set 'mode', $(e.target).data('mode')
+    @templateData.mode = state.get('mode')
 
   submit: (e) ->
     return unless @validateForm()
@@ -83,18 +66,19 @@ module.exports = class AuthModalView extends ModalView
     @$('button').attr 'data-state', 'loading'
 
     @user.set (data = @serializeForm())
+
     @user[@state.get 'mode']
       success: @onSubmitSuccess
       error: (model, response, options) =>
         @reenableForm()
         message = @errorMessage response
-        @showError message
+        @showError response
 
   onSubmitSuccess: (model, response, options) =>
-    @reenableForm null, reset: false
+    @$('button').attr 'data-state', 'success'
 
     if response.error?
-      @showError _.capitalize response.error
+      @showError _s.capitalize response.error
     else
       Cookies.set('destination', @destination, expires: 60 * 60 * 24) if @destination
 
@@ -106,13 +90,14 @@ module.exports = class AuthModalView extends ModalView
           else
             location.reload()
         when 'register'
+          mediator.trigger 'auth:sign_up:success'
           location.href = @redirectTo or '/personalize'
         when 'forgot'
           mediator.trigger 'auth:change:mode', 'reset'
 
   showError: (msg) =>
     @$('button').attr 'data-state', 'error'
-    @$('.auth-errors').text msg
+    @$('.auth-errors').addClass('is-active').text msg
 
   remove: ->
     mediator.off 'auth:change:mode'
