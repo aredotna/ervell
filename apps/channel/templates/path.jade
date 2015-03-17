@@ -10,7 +10,7 @@ block path
   if following
     li.path__sub following
 
-//- block right
+block right
   if channel
     .channel-settings(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
       .toggle-settings-trigger.pointer: a Manage channel

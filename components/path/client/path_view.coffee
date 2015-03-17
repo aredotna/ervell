@@ -9,8 +9,7 @@ FollowButtonView = require '../../follow_button/client/follow_button_view.coffee
 module.exports = class PathView extends Backbone.View
 
   events:
-    'click .metadata' : 'toggleSettings'
-    'click .metadata--container__settings__done' : 'toggleSettings'
+    'click .toggle-settings-trigger' : 'toggleSettings'
 
   initialize: (options) ->
     super

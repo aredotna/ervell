@@ -2,7 +2,6 @@
   padding 0
   height auto
   font-size s_caption + 1
-  border-bottom 1px solid #fff
 
   a
     font-weight bold
@@ -10,27 +9,14 @@
 
     &:hover
       color hovergray
-      
-  &:hover
-    cursor pointer
-    border-bottom 1px solid #cacaca
-      
-    .metadata--container__settings__done:before
-      opacity 1
-    
+
 .metadata--container__settings__done
   text-align center
-  padding 0 0 8px 0
+  padding s_margin * 2 0
+  display none
+
+.settings-is-active .metadata--container__settings__done
   display block
-  margin-top -21px
-
-.metadata--container__settings__done:before
-  color lightgray
-  content 'more'
-  opacity 0
-
-.settings-is-active .metadata--container__settings__done:before
-  content 'close'
 
 .metadata__column
   display inline-block
