@@ -5,3 +5,5 @@ block path
     .root__toggle
       .root__toggle__item(class="#{path == 'feed' ? 'active' : ''}"): a(href="/") feed
       .root__toggle__item(class="#{path == 'explore' ? 'active' : ''}"): a(href="/explore") explore
+      .root__toggle__item: a(href="/#{user.get('slug')}") profile
+     
