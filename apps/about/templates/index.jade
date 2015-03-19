@@ -144,13 +144,12 @@ block body
       p.static--no-p: a(mailto="info@are.na") info@are.na
       p.static--no-p: a(href="http://twitter.com/aredotna") Twitter
       p.static--no-p: a(href="http://instagram.com/aredotna") Instagram
+      p #[a(href="/terms") Terms of Service & Privacy Policy]
 
   h3.static__menu
     ul
       li: a(href="/").static__menu__item Home
       li: a(href="/tools").static__menu__item Tools
-      li: a(href="/terms").static__menu__item Terms of Service
-      li: a(href="/terms").static__menu__item Privacy Policy
       if !user
         li: a(href="#log_in").static__menu__item Login
         li: a(href="#sign_up").static__menu__item Register
@@ -162,6 +161,8 @@ block body
       li: a.anchor(data-section="faq").static__menu__item FAQ
       li: a.anchor(data-section="supporters").static__menu__item Supporters
       li: a.anchor(data-section="contact").static__menu__item Contact
+      li: a.anchor(data-section="contact").static__menu__item Terms of Service
+      li: a.anchor(data-section="contact").static__menu__item Privacy Policy
 
 block scripts
   script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
