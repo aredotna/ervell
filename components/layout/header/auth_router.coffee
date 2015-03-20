@@ -12,7 +12,7 @@ module.exports = class AuthRouter extends Backbone.Router
     mediator.trigger 'open:auth', mode: 'login'
 
   signup: ->
-    mediator.trigger 'open:auth', mode: 'register'
+    mediator.trigger 'open:auth', mode: 'signup'
 
   forgot: ->
     mediator.trigger 'open:auth', mode: 'forgot'
