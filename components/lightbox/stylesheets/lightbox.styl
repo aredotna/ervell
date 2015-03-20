@@ -88,7 +88,7 @@ body.is-lightbox
 
     .attr-value
       padding 40px 0
-    
+
     .attr-editor
       padding 40px 35px
 
@@ -176,7 +176,7 @@ body.is-lightbox
 
     .placeholder
       font-weight normal
-  
+
   .is-editing .attr-editor
     padding 0 0 0 6px
 
@@ -218,8 +218,8 @@ body.is-lightbox
     width 65%
     margin auto
 
-#lightbox__connect
-  display none
+.lightbox__connect
+  display block
   position static
   width 100%
   height 100px
@@ -228,17 +228,32 @@ body.is-lightbox
   background-color #fff
   padding 0 0 60px 0
 
-  #lightbox__connect__inner
-    position relative
-    margin 0 auto
-    width 100%
-    max-width 550px
+.lightbox__connect__inner
+  position relative
+  margin 0 auto
+  width 100%
+  max-width 550px
 
-    .button--inblock
-      position relative
-      border-top 1px solid bordergray
-      width 125px
-      margin auto
+  .button--inblock
+    position relative
+    border-top 1px solid bordergray
+    width 125px
+    margin auto
+
+.lightbox__connect__container
+  position absolute
+  top -100px
+  height 315px
+  width 315px
+  z-index 99999
+  pointer-events none
+  top -215px
+  left 115px
+
+  &.is-active
+    background #fff
+    border 1px solid bordergray
+    pointer-events all
 
 .directional-arrows
   opacity 0
@@ -251,7 +266,7 @@ body.is-lightbox
 
   &:hover
     opacity 1
-  
+
   svg
     fill hovergray
 

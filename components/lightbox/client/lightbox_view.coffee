@@ -6,6 +6,7 @@ mediator = require '../../../lib/mediator.coffee'
 Feed = require '../../../collections/feed.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
+ConnectView = require '../../connect/client/connect_view.coffee'
 NewCommentView = require '../../new_comment/client/new_comment_view.coffee'
 EditableAttributeView = require '../../editable_attribute/client/editable_attribute_view.coffee'
 
@@ -14,8 +15,9 @@ lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 module.exports = class LightboxView extends Backbone.View
 
   events:
-    'tap .lightbox--close'    : 'close'
-    'tap .directional-arrows' : 'clickSlide'
+    'tap .lightbox--close'            : 'close'
+    'tap .directional-arrows'         : 'clickSlide'
+    'tap .lightbox__connect__trigger' : 'loadConnectView'
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -82,6 +84,16 @@ module.exports = class LightboxView extends Backbone.View
         _kind: kind
         wait: true
 
+  loadConnectView: (e)=>
+    e.preventDefault()
+    e.stopPropagation()
+
+    $connect_container = @$('.lightbox__connect__container')
+    $connect_container.addClass 'is-active'
+
+    new ConnectView
+      el: $connect_container
+      block: @model
 
   clickSlide: (e) ->
     e.preventDefault()
