@@ -3,6 +3,7 @@
 #
 Q = require 'q'
 _ = require 'underscore'
+Backbone = require "backbone"
 Feed = require "../../collections/feed"
 Channel = require "../../models/channel"
 ExploreBlocks = require "../../collections/explore_blocks"
@@ -17,22 +18,29 @@ sd = require("sharify").data
   if req.user
     res.render 'feed', path: 'feed'
   else
+
+    render = _.after 2, ->
+      res.render 'index', example_channel: channel, stats: stats
+
     channel = new Channel()
     channel.url = "#{sd.API_URL}/channels/arena-front-example-channels"
 
     channel.parse = (data) ->
       for c_channel in data.contents
         c_channel.contents = new Blocks c_channel.contents
-
-      data
+      return data
 
     channel.fetch
       data:
         per: 4
       cache: true
-      success: ->
-        res.render 'index', example_channel: channel
-      error: (m, err) -> next err
+      success: render
+
+    stats = new Backbone.Model
+    stats.url = "#{sd.API_URL}/utilities/statistics"
+    stats.formatNumber = (attr) -> @get(attr).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+
+    stats.fetch cache: true, success: render
 
 @explore = (req, res, next) ->
   channels = new ExploreBlocks

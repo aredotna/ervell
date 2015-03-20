@@ -27,13 +27,13 @@ block body
   .home__section.home__section--stats
     .home__section__container.flex-container
       .home__section--stats__column
-        h1 19,971
+        h1= stats.formatNumber('channels')
         h2 Total channels
       .home__section--stats__column
-        h1 302,047
+        h1= stats.formatNumber('blocks')
         h2 Total blocks
       .home__section--stats__column.home__section-stats__column--connections
-        h1 357,304
+        h1= stats.formatNumber('connections')
         h2 Total connections
   .home__section.home__section--channels
     .home__section__container.flex-container
@@ -59,8 +59,8 @@ block body
     .home__section__container.flex-container
       h2
         a(href='/about') Learn more
-        |  about Are.na or
-        a(href='#register') register.
+        |  about Are.na or&nbsp;
+        a(href='#sign_up') sign up.
 
 block scripts
   script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )
