@@ -19,4 +19,4 @@ module.exports = class SmallFeedView extends FeedView
     @$el.append feedTemplate group: group
 
   render: =>
-    @collection.each (group)=> @renderGroup group
+    @collection.each (group) => @renderGroup group

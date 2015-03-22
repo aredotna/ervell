@@ -30,7 +30,7 @@ module.exports = class LightboxView extends Backbone.View
 
     mediator.trigger 'load:start'
 
-    @model.fetch
+    @initialXHR = @model.fetch
       success: =>
         @render()
 
@@ -64,7 +64,7 @@ module.exports = class LightboxView extends Backbone.View
     @feed.comparator = (group) ->
       new Date group.models[0].get('created_at')
 
-    new SmallFeedView
+    @feedView = new SmallFeedView
       el: @$ "#lightbox__feed_inner"
       collection: @feed
 
@@ -101,16 +101,22 @@ module.exports = class LightboxView extends Backbone.View
     @slide direction
 
   slide: (direction)->
-    console.log 'mediator.shared.blocks', mediator.shared.blocks
     @model = mediator.shared.blocks[direction](@model)
 
     mediator.trigger 'slide:to:block', @model
 
     @render() # to get rid of the current block
-    @model.fetch success: => @render()
+    @cancelRequests()
+    @initialXHR = @model.fetch success: => @render()
+
+  cancelRequests: ->
+    console.log '@initialXHR', @initialXHR, 'feedView', @feedView
+    @initialXHR.abort() if @initialXHR.readyState > 0 && @initialXHR.readyState < 4
+    @feedView.cancelRequest()
 
   close: ->
     @$el.html ""
+    @cancelRequests()
     $('body').removeClass 'is-lightbox is-loading'
     @$el.removeClass 'is-active'
     mediator.off "lightbox:slide:next"
