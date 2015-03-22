@@ -8,7 +8,10 @@ module.exports = class FeedView extends Backbone.View
 
   initialize: ->
     @collection.on "sync", @render
-    @collection.fetch()
+    @initialXHR = @collection.fetch()
 
   render: =>
     @$el.html feedTemplate(feed: @collection.models)
+
+  cancelRequest: =>
+    @initialXHR.abort() if @initialXHR.readyState > 0 && @initialXHR.readyState < 4

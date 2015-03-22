@@ -1,1 +1,2 @@
-require('jquery') require("../apps/manage/client.coffee").init
+$ ->
+  require("../apps/manage/client.coffee").init()

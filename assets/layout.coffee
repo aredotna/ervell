@@ -4,4 +4,6 @@ require('../lib/vendor/waypoints-sticky.js')
 require('jquery.transition')
 require('../node_modules/backbone-fetch-cache/backbone.fetch-cache.min.js')
 require('../node_modules/jquery.finger/dist/jquery.finger.min.js')
-require('jquery') require('../components/layout/client.coffee')()
+
+$ ->
+  require('../components/layout/client.coffee')()
