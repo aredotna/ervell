@@ -8,6 +8,8 @@ BlockView = require '../../../components/block_collection/client/block_view.coff
 module.exports = class BlockSkeletonView extends Backbone.View
 
   initialize: (options)->
+    mediator.shared.blocks = @collection
+
     @channel = options.channel if options?.channel
 
     @collection.on "add", @appendBlock, @

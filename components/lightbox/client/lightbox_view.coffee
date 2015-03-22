@@ -101,6 +101,7 @@ module.exports = class LightboxView extends Backbone.View
     @slide direction
 
   slide: (direction)->
+    console.log 'mediator.shared.blocks', mediator.shared.blocks
     @model = mediator.shared.blocks[direction](@model)
 
     mediator.trigger 'slide:to:block', @model

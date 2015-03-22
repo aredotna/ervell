@@ -16,6 +16,7 @@ module.exports = class FeedView extends Backbone.View
     @collection.on "sync", @render, @
     @collection.fetch
       success: =>
+        @setSharedBlocks()
         mediator.trigger 'load:stop'
 
     @current_user = new User sd.CURRENT_USER
@@ -29,6 +30,11 @@ module.exports = class FeedView extends Backbone.View
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)
 
     @$('.grid__block').each @initBlockView
+
+    @setSharedBlocks()
+
+  setSharedBlocks: ->
+    mediator.shared.blocks = new Blocks @collection.getAllItems()
 
   initBlockView: (index, el) =>
     $block = $(el)

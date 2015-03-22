@@ -49,7 +49,10 @@ module.exports = class Base extends Collection
   onlyBlocks: -> new Collection @where base_class: 'Block'
 
   next: (model) ->
-    model = @onlyBlocks().find (block) -> model.id == parseInt(block.id)
+    console.log '@onlyBlocks()', @onlyBlocks(), @models
+    model = @onlyBlocks().find (block) ->
+      parseInt(model.id) == parseInt(block.id)
+    console.log 'found model', model
     @onlyBlocks().at((@onlyBlocks().indexOf(model) + 1) % _.size(@onlyBlocks().models))
 
   prev: (model) ->
