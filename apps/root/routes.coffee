@@ -51,14 +51,14 @@ sd = require("sharify").data
     cache: true
     success: ->
       promises = _.compact _.flatten [
-          channels.map (channel) ->
-            channel.fetch
-              cache: true
-              success: (model)->
-                blocks = new Blocks _.take(model.get('contents'), 4)
-                model.set 'contents', blocks
-              error: (model, error) ->
-                console.log 'error fetching', error
+        channels.map (channel) ->
+          channel.fetch
+            cache: true
+            success: (model)->
+              blocks = new Blocks _.take(model.get('contents'), 4)
+              model.set 'contents', blocks
+            error: (model, error) ->
+              console.log 'error fetching', error
         ]
       Q.allSettled(promises).then(->
         res.locals.sd.CHANNELS = channels.toJSON()

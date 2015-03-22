@@ -23,3 +23,9 @@ module.exports = class ExploreBlocks extends SearchBlocks
     contents = data.channels || data.results
 
     return contents
+
+  getBlocks: ->
+    blocks = _.flatten @map (channel) ->
+      channel.get('contents')
+
+    new SearchBlocks blocks
