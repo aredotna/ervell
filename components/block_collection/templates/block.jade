@@ -1,6 +1,6 @@
 include ../../avatar/templates/avatar
 
-div(class="grid__block grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}" data-id="#{block.id}" id="#{block.id}")
+div(class="grid__block grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}" data-id="#{block.id}" data-class="#{block.get('base_class')}" id="#{block.id}")
   .block-padding
   span(href="#{block.getHref()}" data-client="#{block.get('base_class')}" class="grid__block__link needsclick")
     .grid__block__inner.halign--flex(class="grid__block__inner--privacy-#{ block.getVisibility() }")

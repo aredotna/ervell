@@ -14,26 +14,20 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     mediator.shared.blocks = @blocks
 
-    @blocks.each (block) => @renderBlockView block
     IconicJS().inject 'img.iconic'
 
-    mediator.on 'slide:to:block', @scrollToBlock
+    @$('.grid__block').each @initBlockView
 
-    super
+  initBlockView: (index, el) =>
+    $block = $(el)
+    block = @blocks.get $block.data('id')
 
-  scrollToBlock: (block)->
-    $el = $("##{block.id}")
-    elOffset = $el.offset().top
-    elHeight = $el.height()
-    windowHeight = $(window).height()
-    offset
-
-    if elHeight < windowHeight
-      offset = elOffset - ((windowHeight / 2) - (elHeight / 2))
-    else
-      offset = elOffset
-
-    $('html, body').animate {scrollTop: offset}, 100
+    if block
+      new BlockView
+        container: $('.grid')
+        model: block
+        autoRender: false
+        el: $block
 
   renderBlockView: (block, autoRender = false)=>
     new BlockView

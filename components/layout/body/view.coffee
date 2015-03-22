@@ -35,6 +35,7 @@ module.exports = class BodyView extends Backbone.View
 
     mediator.on 'load:start', @startLoading, @
     mediator.on 'load:stop', @stopLoading, @
+    mediator.on 'slide:to:block', @scrollToBlock
 
     new PathView el: @$('section.path--header')
 
@@ -43,6 +44,20 @@ module.exports = class BodyView extends Backbone.View
   startLoading: -> $('body').addClass 'is-loading'
 
   stopLoading: -> $('body').removeClass 'is-loading'
+
+  scrollToBlock: (block)->
+    $el = $("##{block.id}")
+    elOffset = $el.offset().top
+    elHeight = $el.height()
+    windowHeight = $(window).height()
+    offset
+
+    if elHeight < windowHeight
+      offset = elOffset - ((windowHeight / 2) - (elHeight / 2))
+    else
+      offset = elOffset
+
+    $('html, body').animate {scrollTop: offset}, 100
 
   intercept: (e)->
     e.preventDefault()

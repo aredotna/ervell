@@ -29,7 +29,7 @@ module.exports = class BlockView extends Backbone.View
     @current_user = mediator.shared.current_user
 
     @render() if @autoRender
-    @$el = $("##{@model.id}")
+    @$el = $("##{@model.id}") unless @el
     @renderFollowButton()
 
     @model.on 'remote_update', @update, @
@@ -83,6 +83,8 @@ module.exports = class BlockView extends Backbone.View
 
     args['channel'] = @channel if @channel?
 
+    console.log 'updating model', @model.get('title')
+
     $("##{model.id}").replaceWith blockTemplate args
     @$el = $("##{model.id}")
     @model = model
@@ -106,6 +108,8 @@ module.exports = class BlockView extends Backbone.View
         block: @model
         user: @current_user
         channel: @channel
+
+    @$el = $("##{@model.id}")
 
     @renderFollowButton()
 

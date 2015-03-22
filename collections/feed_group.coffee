@@ -17,7 +17,6 @@ module.exports = class FeedGroup extends Base
 
   isNew: -> @any (model) -> model.get('is_read') is false
 
-
   first_item: -> @models[0].get('item')
 
   items: -> @map (model)->
@@ -28,6 +27,15 @@ module.exports = class FeedGroup extends Base
 
     block.set 'connected_by_username', model.get('user').username
     block.set 'connected_by_user_slug', model.get('user').slug
+
+    block
+
+  findItem: (id, klass) ->
+    item = _.find @items(), (model) ->
+      model.id is id and
+      model.get('base_class') is klass
+
+    item
 
   channel: ->
     if @models[0].get('action') is 'added'

@@ -109,6 +109,17 @@ module.exports = class Feed extends Base
 
     return group
 
+  getModel: (id, klass) ->
+    foundModel = {}
+
+    @find (model) ->
+      found = model.findItem id, klass
+      if found
+        foundModel = found
+        return found
+
+    return foundModel
+
   getAllItems: ->
     items = @map (model)-> model.items()
     items = _.flatten items, true
@@ -118,7 +129,8 @@ module.exports = class Feed extends Base
     return false if @exhausted
 
     ++@options.page
-    @fetch remove: false
+    @fetch
+      remove: false
 
   setupListener: ->
     # return unless @options.type is 'primary'

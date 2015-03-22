@@ -4,6 +4,7 @@ mediator = require '../../../lib/mediator.coffee'
 InfiniteView = require '../../../components/pagination/infinite_view.coffee'
 Blocks = require '../../../collections/blocks.coffee'
 BlockCollectionView = require '../../../components/block_collection/client/block_collection_view.coffee'
+BlockView = require '../../../components/block_collection/client/block_view.coffee'
 User = require '../../../models/user.coffee'
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
 
@@ -13,7 +14,9 @@ module.exports = class FeedView extends Backbone.View
     mediator.trigger 'load:start'
 
     @collection.on "sync", @render, @
-    @collection.fetch success: =>  mediator.trigger 'load:stop'
+    @collection.fetch
+      success: =>
+        mediator.trigger 'load:stop'
 
     @current_user = new User sd.CURRENT_USER
 
@@ -25,8 +28,16 @@ module.exports = class FeedView extends Backbone.View
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)
 
-    blocks = new Blocks @collection.getAllItems()
+    @$('.grid__block').each @initBlockView
 
-    new BlockCollectionView
-      el: $ ".grid"
-      blocks: blocks
+  initBlockView: (index, el) =>
+    $block = $(el)
+    block = @collection.getModel $block.data('id'), $block.data('class')
+
+    if block
+      new BlockView
+        container: $('.grid')
+        model: block
+        autoRender: false
+        el: $block
+
