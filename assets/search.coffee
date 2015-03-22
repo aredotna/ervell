@@ -3,3 +3,4 @@
 #
 $ ->
   require("../apps/search/client.coffee").init()
+
