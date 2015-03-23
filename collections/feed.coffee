@@ -100,7 +100,6 @@ module.exports = class Feed extends Base
 
 
   findGroupByItem: (item)->
-    # "#{model.user?.id}_#{model.target?.id}_#{model.action}"
     group = @find (group)->
       if group.models
         group.models[0].get('action') == item.action and
