@@ -51,17 +51,14 @@ body.is-modal
   left 0
   height 100%
 
-.modal-backdrop
-  background rgba(240, 240, 240, 0.85)
-
 #modal.has-nobackdrop > .modal-backdrop
   background-color transparent
 
 .modal-dialog
   position fixed
   overflow-y auto
-  background-color #fff
-  border 4px solid bordergray
+  background #fff
+  border 0px solid bordergray
   &.is-notransition
     transition none !important
 
@@ -114,6 +111,7 @@ body.is-modal
 
   a
     color lightgray
+    font-weight bold
     &:hover
       color textgray
 
@@ -124,9 +122,13 @@ body.is-modal
   max-width 400px
   margin auto
 
+#auth-login, #auth-register, #auth-forgot
+  margin-top 4px
+  border-top 1px solid bordergray
+
 .auth-submit
-  font-size 16px
-  color hovergray
+  font-size 1em
+  color textgray
   position relative
 
   &[data-state=loading]:before, &[data-state=success]:before
@@ -157,18 +159,24 @@ body.is-modal
 
 .auth-logo
   text-align center
-  margin-bottom s_margin
+  height 20px
+  
+  svg
+    width 28px
+    height 100%
 
 .auth-nav
   text-align center
+  margin-bottom 50px
 
   .breadcrumb
     display inline-block
     margin (s_margin) auto 0
-    font-size 14px
+    font-size 1em
 
   li
     font-weight bold
+    color lightgray
 
   li.is-active
     color hovergray
