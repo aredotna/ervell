@@ -16,16 +16,13 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
-    'tap .grid__block__source__link': 'openLink'
-    'tap .grid__block__connect-btn' : 'loadConnectView'
-    'tap .grid__block__delete-block': 'destroyConnection'
+    'tap .grid__block__source__link'  : 'openLink'
+    'tap .grid__block__connect-btn'   : 'loadConnectView'
+    'tap .grid__block__delete-block'  : 'destroyConnection'
 
   initialize: (options)->
-    @container = options.container if options.container?
-    @autoRender = options.autoRender if options.autoRender?
-    @containerMethod = options.containerMethod if options.containerMethod?
+    { @container, @autoRender, @containerMethod, @channel } = options
 
-    @channel = options.channel if options.channel?
     @current_user = mediator.shared.current_user
 
     @render() if @autoRender
@@ -83,8 +80,6 @@ module.exports = class BlockView extends Backbone.View
 
     args['channel'] = @channel if @channel?
 
-    console.log 'updating model', @model.get('title')
-
     $("##{model.id}").replaceWith blockTemplate args
     @$el = $("##{model.id}")
     @model = model
@@ -113,14 +108,15 @@ module.exports = class BlockView extends Backbone.View
 
     @renderFollowButton()
 
-  destroyConnection: (e) ->
-    model = @model
-    view = @
+  destroyConnection: (e) =>
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
 
     @model.destroy
       channel: @channel
 
-    view.remove()
+    @remove()
 
     e.preventDefault()
     e.stopPropagation()
