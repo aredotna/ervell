@@ -20,6 +20,7 @@ _ = require 'underscore'
       blocks.add channel.get 'contents'
       blocks.slug = channel.get('slug')
 
+      res.locals.sd.SHARE_TOKEN = req.params.share_token
       res.locals.sd.CHANNEL = channel.toJSON()
       res.locals.sd.BLOCKS = blocks.toJSON()
       author = new User channel.get('user')
