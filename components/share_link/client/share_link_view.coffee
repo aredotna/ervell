@@ -33,4 +33,5 @@ module.exports = class ShareLinkView extends Backbone.View
     @clip.on 'ready', ( client, args ) =>
       @clip.on 'copy', ( client, args ) =>
         @$('.channel--share-success').addClass 'is-active'
+        @$('.channel--share-copy-link').hide()
 
