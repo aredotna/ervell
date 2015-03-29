@@ -86,6 +86,7 @@ module.exports = class SearchBarView extends Backbone.View
     _.delay =>
       @$el.removeClass('is-active')
     , 200
+    $('.path.stuck').show()
 
   clearSearch: ->
     @searchUnloaded()
@@ -93,3 +94,4 @@ module.exports = class SearchBarView extends Backbone.View
 
   focusSearch: (e)->
     @$el.addClass('is-active')
+    $('.path.stuck').hide()
