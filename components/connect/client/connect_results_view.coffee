@@ -13,7 +13,7 @@ module.exports = class ConnectResultsView extends Backbone.View
 
   initialize: (options) ->
     @block = options.block
-    @collection.on "sync", @render, @
+    @collection.on "sync add", @render, @
     super
 
   toggleConnection: (e)=>
@@ -25,7 +25,8 @@ module.exports = class ConnectResultsView extends Backbone.View
         type: 'DELETE'
         url: "#{sd.API_URL}/channels/#{id}/blocks/#{@block.id}"
     else
-      reqOpts = 
+      mediator.shared.recent_connections.create @collection.get(id).toJSON()
+      reqOpts =
         type: "POST"
         url: "#{sd.API_URL}/channels/#{id}/connections"
         data:
@@ -58,4 +59,5 @@ module.exports = class ConnectResultsView extends Backbone.View
     $.ajax(opts)
 
   render: ->
+    console.log 'should be rendering', @collection.models
     @$el.html connectResultsTemplate(blocks: @collection.models)

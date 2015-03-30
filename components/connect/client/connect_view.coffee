@@ -1,5 +1,6 @@
 Backbone = require "backbone"
 Backbone.$ = $
+_ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 ConnectionBlocks = require '../../../collections/connection_blocks.coffee'
@@ -100,14 +101,16 @@ module.exports = class ConnectView extends Backbone.View
     @$('.new-connection__search').focus()
 
   renderChannels: =>
-    @collection = new ConnectionBlocks null,
-      user_slug: sd.CURRENT_USER.slug
-
-    @collection.fetch
-      data:
-        per: 3
+    @collection = new ConnectionBlocks null, user_slug: sd.CURRENT_USER.slug
 
     new ConnectResultsView
       el: @$('.new-connection__search-results')
       block: @block
       collection: @collection
+
+    mediator.shared.recent_connections?.fetch()
+
+    if mediator.shared.recent_connections.length
+      @collection.add _.map mediator.shared.recent_connections.models, (block)-> block.toJSON()
+    else
+      @collection.fetch data: per: 3
