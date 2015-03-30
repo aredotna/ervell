@@ -4,7 +4,10 @@ block path
   li.path__username
     a(href="/" + author.get('slug'))=author.get('username')
   li.path__channel.channel(class="privacy-#{channel.get('status')}")
-      a(href="/" + author.get('slug') + '/' + channel.get('slug'))= channel.get('title')
+    if (followers || following)
+      a(href="#{channel.href()}")= channel.get('title')
+    else
+      span(id="attribute-title_#{channel.id}")= channel.get('title')
   if followers
     li.path__sub followers
   if following

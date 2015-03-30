@@ -25,10 +25,6 @@ module.exports = class ChannelView extends Backbone.View
     'click .delete-channel--confirmation__yes' : 'deleteChannel'
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
 
-  editableAttributes:
-    'title'       : 'plaintext'
-    'description' : 'markdown'
-
   initialize: (options)->
     @channel = options.channel
     @blocks = options.blocks
@@ -68,9 +64,17 @@ module.exports = class ChannelView extends Backbone.View
       @setupVisibilityView()
       @setupShareLinkView()
       @setupExportView()
-      @setupDescriptionView()
+      @setupEditDescriptionView()
 
       mediator.trigger 'channel:is-editable'
+
+  setupEditDescriptionView: ->
+    new EditableAttributeView
+      model: @channel
+      el:@$("#attribute-title_#{@channel.id}")
+      _attribute: 'title'
+      _kind: 'plaintext'
+      wait: true
 
   setupFileDropView:->
     $.ajax
