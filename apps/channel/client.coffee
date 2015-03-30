@@ -14,6 +14,7 @@ ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
 ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
 ChannelExportView = require '../../components/channel_export/client/channel_export_view.coffee'
+EditableAttributeView = require '../../components/editable_attribute/client/editable_attribute_view.coffee'
 
 Bp = require('../../lib/vendor/backpusher.js')
 
@@ -23,6 +24,10 @@ module.exports = class ChannelView extends Backbone.View
     'click .delete-channel' : 'showConfirmation'
     'click .delete-channel--confirmation__yes' : 'deleteChannel'
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
+
+  editableAttributes:
+    'title'       : 'plaintext'
+    'description' : 'markdown'
 
   initialize: (options)->
     @channel = options.channel
@@ -63,6 +68,7 @@ module.exports = class ChannelView extends Backbone.View
       @setupVisibilityView()
       @setupShareLinkView()
       @setupExportView()
+      @setupDescriptionView()
 
       mediator.trigger 'channel:is-editable'
 
