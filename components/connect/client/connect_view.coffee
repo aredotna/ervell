@@ -111,6 +111,7 @@ module.exports = class ConnectView extends Backbone.View
     mediator.shared.recent_connections?.fetch()
 
     if mediator.shared.recent_connections.length
-      @collection.add _.map mediator.shared.recent_connections.models, (block)-> block.toJSON()
+      models = _.map mediator.shared.recent_connections.models, (block)-> block.toJSON()
+      @collection.add _.first models, 3
     else
       @collection.fetch data: per: 3

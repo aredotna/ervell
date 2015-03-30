@@ -39,7 +39,6 @@ module.exports = class FeedView extends Backbone.View
   initBlockView: (index, el) =>
     $block = $(el)
     block = mediator.shared.blocks.findWhere { id: $block.data('id'), base_class: $block.data('class') }
-    # block = @collection.getModel $block.data('id'), $block.data('class')
 
     if block
       new BlockView
