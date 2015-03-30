@@ -6,7 +6,7 @@ km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
 mediator = require '../../lib/mediator.coffee'
-Storage = require '../../models/storage.coffee'
+RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 sd = require('sharify').data
 ft = require('fastclick')
@@ -15,7 +15,6 @@ ft = require('fastclick')
 module.exports = ->
   setMobileClass()
   setupPusherAndCurrentUser()
-  setupStorage()
   setupViews()
   setupAjaxHeaders()
   # setupFastClick()
@@ -36,6 +35,8 @@ setupPusherAndCurrentUser = ->
   user = new CurrentUser sd.CURRENT_USER
   mediator.shared.current_user = user
 
+  mediator.shared.recent_connections = new RecentConnections
+
   if user.id
 
     user.fetch
@@ -45,9 +46,6 @@ setupPusherAndCurrentUser = ->
       success: -> mediator.trigger 'current_user:fetched'
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
-
-setupStorage = ->
-  mediator.shared.storage = new Storage
 
 ensureFreshUser = (data) ->
   return unless sd.CURRENT_USER

@@ -9,6 +9,7 @@ _ = require 'underscore'
 Backbone = require 'backbone'
 
 module.exports = class CurrentUser extends User
+  recentConnectionCount: 3
 
   url: -> "#{sd.API_URL}/accounts"
 
@@ -24,6 +25,9 @@ module.exports = class CurrentUser extends User
       announcements: response.announcements if response.announcements?
       following_channels: response.following_ids?.channels
       following_users: response.following_ids?.users
+
+  storage: ->
+    @get('storage')
 
   canAddToChannel: (channel) ->
     if channel.get('user').id is @id or channel.get('status') is 'public'
@@ -61,9 +65,11 @@ module.exports = class CurrentUser extends User
       success: (response)->
         mediator.trigger successEvent, response
 
-
   resetNotificationCount: -> @set 'notification_count', 0
 
   incrementNotificationCount: -> @set 'notification_count', parseInt(@attributes.notification_count) + 1
 
   decrementNotificationCount: -> @set 'notification_count', parseInt(@attributes.notification_count) - 1
+
+
+
