@@ -29,9 +29,9 @@ module.exports = class FeedView extends Backbone.View
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)
 
-    @$('.grid__block').each @initBlockView
-
     @setSharedBlocks()
+
+    @$('.grid__block').each @initBlockView
 
   setSharedBlocks: ->
     mediator.shared.blocks = new Blocks @collection.getAllItems()
