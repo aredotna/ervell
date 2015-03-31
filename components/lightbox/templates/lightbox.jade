@@ -30,14 +30,19 @@
   .lightbox__arrow-container.directional-arrows.directional-arrows--left(data-direction="prev")
     img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm")
 
-  .lightbox__content__title
-    p(id="attribute-title_#{block.id}")= block.get('title')
-
-    p.lightbox__content__description(id="attribute-description_#{block.id}")!= block.get('description')
-
-    - if(block && block.has('source'))
-      .lightbox__content__source
-        p (#[a(href="#{block.getSourceUrl()}" target="_blank") Source])
+  .lightbox__content__footer
+    .lightbox__content__footer__inner
+      .lightbox__content__footer__inner__col-1
+        p.lightbox__content__title(id="attribute-title_#{block.id}")= block.get('title')
+        p.lightbox__content__description(id="attribute-description_#{block.id}")!= block.get('description')
+        - if(block && block.has('source'))
+          .lightbox__content__source
+            p (#[a(href="#{block.getSourceUrl()}" target="_blank") Source])
+      .lightbox__content__footer__inner__col-2
+        .lightbox__connect
+          .lightbox__connect__inner
+            .lightbox__connect__container
+            .lightbox__connect__trigger.button--inblock Connect &rarr;
 
   #lightbox__feed.lightbox__feed
     #lightbox__feed_inner.lightbox__feed__inner
@@ -45,8 +50,3 @@
 
   #lightbox__new-comment
     //- rendered by client
-
-  .lightbox__connect
-    .lightbox__connect__inner
-      .lightbox__connect__container
-      .lightbox__connect__trigger.button--inblock Connect &rarr;
