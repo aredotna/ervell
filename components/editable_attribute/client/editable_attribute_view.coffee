@@ -23,7 +23,6 @@ module.exports = class EditableAttributeView extends Backbone.View
     'clickMarkdownHelp' : 'showMarkdownHelp'
 
   initialize: (options)->
-    console.log 'initialize', options
     { @_attribute, @_kind, @wait } = options
 
     @currentUser = mediator.shared.current_user
@@ -41,7 +40,6 @@ module.exports = class EditableAttributeView extends Backbone.View
     @$el.removeClass('is-editing')
 
   render: ->
-    console.log 'rendering', @$el
     @$el.html(attributeTemplate
       id: @model.id
       attribute: @_attribute
@@ -63,6 +61,7 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     afterSaved = =>
       @model.trigger 'edit:success'
+      @model.trigger "edit:#{@_attribute}:success"
       @render()
 
     if @wait is true

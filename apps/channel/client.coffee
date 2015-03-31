@@ -31,7 +31,16 @@ module.exports = class ChannelView extends Backbone.View
 
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
 
-    @maybeSubscribe()
+    @channel.on 'edit:title:success', @updateSlug, @
+
+    @subscribe()
+
+  subscribe: ->
+    @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
+    @listener = new Bp.Backpusher @pusher, @blocks
+
+  updateSlug: ->
+    window.location.href = @channel.href()
 
   showConfirmation: ->
     @$('.delete-channel--confirmation').addClass 'is-active'
@@ -44,10 +53,6 @@ module.exports = class ChannelView extends Backbone.View
       success: (model) ->
         window.location = "#{sd.APP_URL}"
 
-  maybeSubscribe: ->
-    @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
-    @listener = new Bp.Backpusher @pusher, @blocks
-
   checkUserAbilities: (collaborators) ->
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
@@ -56,17 +61,18 @@ module.exports = class ChannelView extends Backbone.View
       @setupFileDropView()
 
       @$('.grid').addClass 'is-addable'
+      mediator.trigger 'channel:is-addable'
 
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
       @$('.grid').addClass 'is-editable'
       @$('.channel-settings').addClass 'is-editable'
+      mediator.trigger 'channel:is-editable'
 
       @setupVisibilityView()
       @setupShareLinkView()
       @setupExportView()
       @setupEditDescriptionView()
 
-      mediator.trigger 'channel:is-editable'
 
   setupEditDescriptionView: ->
     new EditableAttributeView

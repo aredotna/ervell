@@ -18,7 +18,7 @@ module.exports = class Channel extends Block
 
   sync: (method, model, options) ->
     switch method
-      when 'delete'
+      when 'update', 'delete'
         options.url = "#{sd.API_URL}/channels/#{@id}"
     super
 
@@ -26,7 +26,7 @@ module.exports = class Channel extends Block
     @slug || @id
 
   href: ->
-    "#{@get('user')?.slug}/#{@get('slug')}"
+    "/#{@get('user')?.slug}/#{@get('slug')}"
 
   initialize: (options) ->
     super
