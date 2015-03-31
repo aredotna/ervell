@@ -15,7 +15,7 @@ ChannelVisibilityView = require '../../components/channel_visibility/client/chan
 ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
 ChannelExportView = require '../../components/channel_export/client/channel_export_view.coffee'
 EditableAttributeView = require '../../components/editable_attribute/client/editable_attribute_view.coffee'
-
+MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
@@ -71,15 +71,23 @@ module.exports = class ChannelView extends Backbone.View
       @setupVisibilityView()
       @setupShareLinkView()
       @setupExportView()
+      @setupEditTitleView()
       @setupEditDescriptionView()
 
-
-  setupEditDescriptionView: ->
+  setupEditTitleView: ->
     new EditableAttributeView
       model: @channel
       el:@$("#attribute-title_#{@channel.id}")
       _attribute: 'title'
       _kind: 'plaintext'
+      wait: true
+
+  setupEditDescriptionView: ->
+    new MetaEditableAttributeView
+      model: @channel
+      el:@$("#metadata--description .metadata__content")
+      _attribute: 'description'
+      _kind: 'markdown'
       wait: true
 
   setupFileDropView:->

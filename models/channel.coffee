@@ -14,6 +14,8 @@ module.exports = class Channel extends Block
 
   url: -> "#{sd.API_URL}/channels/#{@slugOrId()}/thumb?#{params.encode(@options)}"
 
+  urlRoot: -> "#{sd.API_URL}/channels/#{@slugOrId()}"
+
   href: -> "/#{@get('user').slug}/#{@slugOrId()}"
 
   sync: (method, model, options) ->

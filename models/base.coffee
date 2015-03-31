@@ -27,7 +27,7 @@ module.exports = class Base extends Backbone.Model
     else
       super
 
-  saveMeta: (key, value, options = {})->
+  saveMeta: (key, value, options = {})=>
     if not @has('metadata')
       @set('metadata', {})
 
@@ -37,12 +37,12 @@ module.exports = class Base extends Backbone.Model
       currentMeta = @get('metadata')
       currentMeta = {} if not currentMeta
       currentMeta[key] = value
-      $.post "#{@get('urlRoot')}/metadata",
+      $.post "#{@urlRoot()}/metadata",
         metadata: currentMeta
         success: ->
           options.success() if options.success
     else
-      $.ajax "#{@get('urlRoot')}/metadata/#{key}",
+      $.ajax "#{@urlRoot()}/metadata/#{key}",
         type: "DELETE"
         success: ->
           options.success() if options.success

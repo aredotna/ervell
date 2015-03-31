@@ -1,6 +1,7 @@
 _ = require 'underscore'
 mediator = require '../../../lib/mediator.coffee'
 EditableAttributeView = require './editable_attribute_view.coffee'
+md = require 'marked'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
 
@@ -15,7 +16,7 @@ module.exports = class MetaEditableAttributeView extends EditableAttributeView
       md: md
     ).addClass @className()
 
-  save: (e) ->
+  save: (e)=>
     e.preventDefault()
 
     @endEdit()
@@ -24,7 +25,7 @@ module.exports = class MetaEditableAttributeView extends EditableAttributeView
       @model.trigger 'edit:success'
       @render()
 
-    if @options.wait is true
+    if @wait is true
       @model.saveMeta @_attribute, @$('.editor').val(),
         success: afterSaved
     else
