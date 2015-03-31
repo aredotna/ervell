@@ -32,7 +32,7 @@ sd = require("sharify").data
 
     channel.fetch
       data:
-        per: 4
+        per: 10
       cache: true
       success: render
 
