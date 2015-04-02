@@ -37,7 +37,9 @@
         p.lightbox__content__description(id="attribute-description_#{block.id}")!= block.get('description')
         - if(block && block.has('source'))
           .lightbox__content__source
-            p (#[a(href="#{block.getSourceUrl()}" target="_blank") Source])
+            a(href="#{block.getSourceUrl()}" target="_blank") (Source)
+            - if(block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link')
+              a(href="https://www.google.com/searchbyimage?&image_url=#{block.getSourceUrl()}" target="_blank")  - (Find original)
       .lightbox__content__footer__inner__col-2
         .lightbox__connect
           .lightbox__connect__inner
