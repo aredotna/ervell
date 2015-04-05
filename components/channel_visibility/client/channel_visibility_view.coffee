@@ -1,5 +1,6 @@
 Backbone = require 'backbone'
 Backbone.$ = $
+analytics = require '../../../lib/analytics.coffee'
 
 template = -> require('../templates/channel_visibility.jade') arguments...
 
@@ -27,6 +28,9 @@ module.exports = class ChannelVisibilityView extends Backbone.View
 
     @$('.metadata--selector__option.is-active').removeClass 'is-active'
     $selection.addClass 'is-active'
+
+    analytics.track.click "Channel visibility changed to #{$selection.data('value')}",
+      label: analytics.modelNameAndIdToLabel 'Channel', @model.id
 
     @model.set 'status', $selection.data('value')
     @model.url = "#{sd.API_URL}/channels/#{@model.id}"
