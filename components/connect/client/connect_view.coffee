@@ -3,6 +3,7 @@ Backbone.$ = $
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 ConnectionBlocks = require '../../../collections/connection_blocks.coffee'
 
 ConnectResultsView = require './connect_results_view.coffee'
@@ -16,6 +17,10 @@ module.exports = class ConnectView extends Backbone.View
     'tap .new-connection__done-button' : 'onClear'
 
   initialize: (options)->
+    require('./analytics.coffee')()
+
+    analytics.track.click 'Connect view opened'
+
     @block = options.block
     @$input = @$('.new-connection__search')
     @render()

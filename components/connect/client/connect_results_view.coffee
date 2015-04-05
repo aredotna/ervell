@@ -2,6 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 UserBlocks = require '../../../collections/user_blocks.coffee'
 
 connectResultsTemplate = -> require('../templates/connect_results.jade') arguments...
@@ -12,6 +13,8 @@ module.exports = class ConnectResultsView extends Backbone.View
     'tap .new-connection__search-result' : 'toggleConnection'
 
   initialize: (options) ->
+    require('./analytics.coffee')()
+
     @block = options.block
     @collection.on "sync add", @render, @
     super
@@ -21,11 +24,16 @@ module.exports = class ConnectResultsView extends Backbone.View
     id = target.data('id')
 
     if target.hasClass('is-connected')
+      analytics.track.click 'Connection removed'
+        label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
+
       reqOpts =
         type: 'DELETE'
         url: "#{sd.API_URL}/channels/#{id}/blocks/#{@block.id}"
     else
       mediator.shared.recent_connections.create @collection.get(id).toJSON()
+      analytics.track.click 'Connection created'
+        label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
       reqOpts =
         type: "POST"
         url: "#{sd.API_URL}/channels/#{id}/connections"
@@ -59,5 +67,4 @@ module.exports = class ConnectResultsView extends Backbone.View
     $.ajax(opts)
 
   render: ->
-    console.log 'should be rendering', @collection.models
     @$el.html connectResultsTemplate(blocks: @collection.models)
