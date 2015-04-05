@@ -2,6 +2,7 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 channelFileDropTemplate = -> require('../templates/filedrop.jade') arguments...
 
@@ -46,6 +47,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
       url: @policy.bucket
 
       drop: (e, data) =>
+        analytics.track.click "Files dropped on #{@channel.get('status')} channel"
         @$('.channel--drop-zone').addClass('is-uploading')
         mediator.trigger "files:dropped",
           count: data.files.length
