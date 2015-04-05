@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require("sharify").data
 Channel = require '../../../models/channel.coffee'
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 ChannelVisibilityView = require '../../channel_visibility/client/channel_visibility_view.coffee'
 
@@ -58,6 +59,7 @@ module.exports = class NewChannelView extends Backbone.View
 
     @model.save null,
       success: =>
+        analytics.track.click "New Channel created"
         @$('.grid__block').removeClass 'grid__block--loading'
         document.location.href = "/#{@model.get('user').username}/#{@model.get('slug')}"
 
