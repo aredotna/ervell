@@ -17,8 +17,6 @@ module.exports = class ConnectView extends Backbone.View
     'tap .new-connection__done-button' : 'onClear'
 
   initialize: (options)->
-    require('./analytics.coffee')()
-
     analytics.track.click 'Connect view opened'
 
     @block = options.block

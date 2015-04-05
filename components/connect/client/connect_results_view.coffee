@@ -13,8 +13,6 @@ module.exports = class ConnectResultsView extends Backbone.View
     'tap .new-connection__search-result' : 'toggleConnection'
 
   initialize: (options) ->
-    require('./analytics.coffee')()
-
     @block = options.block
     @collection.on "sync add", @render, @
     super
@@ -24,7 +22,7 @@ module.exports = class ConnectResultsView extends Backbone.View
     id = target.data('id')
 
     if target.hasClass('is-connected')
-      analytics.track.click 'Connection removed'
+      analytics.track.click 'Connection removed',
         label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
 
       reqOpts =
@@ -32,7 +30,7 @@ module.exports = class ConnectResultsView extends Backbone.View
         url: "#{sd.API_URL}/channels/#{id}/blocks/#{@block.id}"
     else
       mediator.shared.recent_connections.create @collection.get(id).toJSON()
-      analytics.track.click 'Connection created'
+      analytics.track.click 'Connection created',
         label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
       reqOpts =
         type: "POST"
