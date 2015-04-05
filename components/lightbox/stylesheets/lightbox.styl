@@ -330,7 +330,7 @@ body.is-lightbox
     iframe
       width w=640px
       height (w / 1.777777)
-
+          
 @media (max-width:850px)
   .lightbox__content__text
     width 90%
@@ -351,6 +351,27 @@ body.is-lightbox
   .directional-arrows--right
     right 1%
     width 100px
+  
+  .lightbox__content__footer__inner
+    max-width 100%
+    width 94%
+  
+  .lightbox__content__footer__inner 
+    .lightbox__content__footer__inner__col-1
+      width 50%
+
+    .lightbox__content__footer__inner__col-2
+      width 50%
+      height 315px
+      
+      .lightbox__connect
+        height 100%
+        
+        .lightbox__connect__inner
+          height 100%
+          
+          .lightbox__connect__container
+            top 0
 
 @media (max-width:760px), (max-height:500px)
   .lightbox__content__media
@@ -363,6 +384,30 @@ body.is-lightbox
     iframe
       width w=400px
       height (w / 1.777777)
+
+@media (max-width:(block_width_mar * 2))
+  .lightbox__content__footer__inner 
+    .lightbox__content__footer__inner__col-1
+      width 100%
+
+    .lightbox__content__footer__inner__col-2
+      width 100%
+      height 80px
+      margin-top 20px
+      
+      .lightbox__connect
+        height 100%
+        border-top 1px solid bordergray
+        border-left 0
+        padding-bottom 20px
+        
+        .lightbox__connect__inner
+          height 100%
+          
+          .lightbox__connect__container
+            top -215px
+            left 50%
+            margin-left -162px
 
 @media (max-width:500px)
   .lightbox__content
