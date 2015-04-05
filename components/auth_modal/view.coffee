@@ -5,8 +5,8 @@ Cookies = require 'cookies-js'
 ModalView = require '../modal/view.coffee'
 Form = require '../mixins/form.coffee'
 mediator = require '../../lib/mediator.coffee'
+analytics = require '../../lib/analytics.coffee'
 LoggedOutUser = require '../../models/logged_out_user.coffee'
-
 { templateMap } = require './maps.coffee'
 
 class State extends Backbone.Model
@@ -26,6 +26,8 @@ module.exports = class AuthModalView extends ModalView
     'click #auth-submit' : 'submit'
 
   initialize: (options) ->
+    require('./analytics.coffee')()
+
     { @destination } = options
     @redirectTo = options.redirectTo if options.redirectTo
     @preInitialize options
@@ -35,6 +37,7 @@ module.exports = class AuthModalView extends ModalView
     { @copy } = options
     @user = new LoggedOutUser
     mode = mode: options.mode if options.mode
+    mediator.trigger 'auth:change:mode', mode
     @state = new State mode
 
     @templateData =
@@ -43,9 +46,7 @@ module.exports = class AuthModalView extends ModalView
       mode: @state.get('mode')
 
     @listenTo @state, 'change:mode', @reRender
-    @listenTo @state, 'change:mode', @logState
 
-    mediator.on 'auth:change:mode', @setMode, this
     mediator.on 'auth:error', @showError
     mediator.on 'modal:closed', @logClose
 
@@ -56,6 +57,7 @@ module.exports = class AuthModalView extends ModalView
     e.preventDefault()
     @templateData.mode = $(e.currentTarget).data('mode')
     @state.set 'mode', $(e.currentTarget).data('mode')
+    mediator.trigger 'auth:change:mode', $(e.currentTarget).data('mode')
 
   submit: (e) ->
     return unless @validateForm()
@@ -79,12 +81,14 @@ module.exports = class AuthModalView extends ModalView
 
     if response?.error?
       @reenableForm()
+      analytics.track.error 'Error: "Invalid login, try again."'
       @showError "Invalid login, try again."
     else
       Cookies.set('destination', @destination, expires: 60 * 60 * 24) if @destination
 
       switch @state.get('mode')
         when 'login'
+          mediator.trigger 'current_user:logged_in'
           Cookies.set('signed_in', true, expires: 60 * 60 * 24 * 7)
           if @redirectTo
             location.href = @redirectTo

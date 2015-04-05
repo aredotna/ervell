@@ -44,7 +44,6 @@ module.exports.track = track =
   _.reduce(Object.keys(categories), (memo, kind) ->
     memo[kind] = (description, options = {}) ->
       # Send google analytics event
-      console.log 'options.category', options.category
       ga? 'send', {
         hitType: 'event'
         eventCategory: options.category
