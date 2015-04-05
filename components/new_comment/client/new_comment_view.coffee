@@ -41,7 +41,7 @@ module.exports = class NewCommentView extends Backbone.View
 
       comment.save {},
         success: =>
-          analytics.track.click "New Channel created"
+          analytics.track.click "Comment added"
           @$input.removeAttr 'disabled'
           @$input.val ""
           mediator.trigger 'new:comment', comment
