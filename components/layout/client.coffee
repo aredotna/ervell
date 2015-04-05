@@ -10,13 +10,15 @@ RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 sd = require('sharify').data
 ft = require('fastclick')
-# analytics = require '../../lib/analytics.coffee'
+Cookies = require 'cookies-js'
+analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
   setMobileClass()
   setupPusherAndCurrentUser()
   setupViews()
   setupAjaxHeaders()
+  setupAnalytics()
   # setupFastClick()
   initShortCuts()
   showBetaMessage()
@@ -58,6 +60,20 @@ setupAjaxHeaders = ->
   $.ajaxSetup
     beforeSend: (xhr)->
       xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
+
+setupAnalytics = ->
+  # Initialize analytics & track page view.
+  analytics ga: ga
+  analytics.registerCurrentUser()
+  analytics.trackPageview()
+
+  # Log a visit once per session
+  unless Cookies.get('active_session')?
+    Cookies.set 'active_session', true
+    analytics.track.funnel if sd.CURRENT_USER
+      'Visited logged in'
+    else
+      'Visited logged out'
 
 setupFastClick = -> ft document.body, {}
 

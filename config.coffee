@@ -22,6 +22,7 @@ module.exports =
   ASSET_PATH: '/assets/'
   IMAGE_PATH: '/images/'
   REDIS_URL: null
+  GOOGLE_ANALYTICS_ID: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports

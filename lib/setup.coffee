@@ -7,7 +7,7 @@
 { APP_URL, API_URL, NODE_ENV, SESSION_SECRET,
 SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
 COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
-PUSHER_KEY } = config = require "../config"
+PUSHER_KEY, GOOGLE_ANALYTICS_ID } = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -37,7 +37,7 @@ sharify.data =
   IMAGE_PATH: IMAGE_PATH
   REDIS_URL: REDIS_URL
   PUSHER_KEY: PUSHER_KEY
-
+  GOOGLE_ANALYTICS_ID: GOOGLE_ANALYTICS_ID
 
 # current user management
 CurrentUser = require '../models/current_user'
@@ -88,7 +88,22 @@ module.exports = (app) ->
   arena_pp = arenaPassport _.extend config,
     CurrentUser: CurrentUser
     SECURE_ARENA_URL: API_URL
-    userKeys: ['id', 'first_name', 'last_name', 'email', 'slug', 'following_ids', 'notification_count', 'username', 'authentication_token', 'manifest', 'announcements', 'shortcuts_id', 'avatar_image']
+    userKeys: [
+      'id',
+      'first_name',
+      'last_name',
+      'email',
+      'slug',
+      'following_ids',
+      'notification_count',
+      'username',
+      'authentication_token',
+      'manifest',
+      'announcements',
+      'shortcuts_id',
+      'avatar_image',
+      'registered'
+    ]
 
   app.use artsyError.helpers
   app.use arena_pp
