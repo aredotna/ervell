@@ -3,6 +3,7 @@ sd = require('sharify').data
 Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 module.exports = class ChannelExportView extends Backbone.View
 
@@ -11,6 +12,9 @@ module.exports = class ChannelExportView extends Backbone.View
 
   exportChannel: (e) ->
     format = $(e.currentTarget).data 'format'
+
+    analytics.track.click 'Channel exported',
+      label: analytics.modelNameAndIdToLabel 'Channel', @model.id
 
     $.ajax
       type: 'POST'

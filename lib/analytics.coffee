@@ -26,8 +26,10 @@ module.exports.registerCurrentUser = ->
   ga?('set', 'dimension1', userType)
   ga?('set', 'dimension2', sd.CURRENT_USER?.registered) if sd.CURRENT_USER
 
-# This basically just sets some defaults loosely based on the
-# Analytics wrapper class from Gravity
+module.exports.modelNameAndIdToLabel = (modelName, id) ->
+  throw new Error('Requires modelName and id') unless modelName? and id?
+  "#{_s.capitalize(modelName)}:#{id}"
+
 categories =
   impression: 'Impressions'
   hover: 'UI Interactions'
