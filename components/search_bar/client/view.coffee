@@ -4,6 +4,7 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 SearchBlocks = require '../../../collections/search_blocks.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 resultsTemplate = -> require('../templates/results.jade') arguments...
 
@@ -59,7 +60,9 @@ module.exports = class SearchBarView extends Backbone.View
       data:
         q: query
         per: 4
-      success: => @searchLoaded()
+      success: =>
+        analytics.track.click "Search query"
+        @searchLoaded()
 
   getQuery: ->
     query = @$input.val()?.trim()
