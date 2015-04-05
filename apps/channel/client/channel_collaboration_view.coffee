@@ -2,6 +2,7 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 newCollaboratorView = require './channel_new_collaborator_view.coffee'
 collaboratorsTemplate = -> require('../templates/collaborators.jade') arguments...
 
@@ -49,4 +50,5 @@ module.exports = class ChannelCollaborationView extends Backbone.View
     @$el.removeClass 'is-editing'
 
   removeCollaborator: (e)->
+    analytics.track.click "Collaborator removed on #{@channel.get('status')} channel"
     @collection._remove $(e.target).data 'id'
