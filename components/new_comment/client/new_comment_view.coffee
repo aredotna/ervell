@@ -4,6 +4,7 @@ Backbone.$ = $
 Comment = require "../../../models/comment.coffee"
 mediator = require '../../../lib/mediator.coffee'
 sd = require("sharify").data
+analytics = require '../../../lib/analytics.coffee'
 
 newCommentTemplate = -> require('../templates/new_comment.jade') arguments...
 
@@ -40,6 +41,7 @@ module.exports = class NewCommentView extends Backbone.View
 
       comment.save {},
         success: =>
+          analytics.track.click "New Channel created"
           @$input.removeAttr 'disabled'
           @$input.val ""
           mediator.trigger 'new:comment', comment
