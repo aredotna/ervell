@@ -4,6 +4,7 @@ sd = require("sharify").data
 Blocks = require '../../../collections/blocks.coffee'
 Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 newBlockTemplate = -> require('../templates/new_block.jade') arguments...
 
@@ -55,6 +56,7 @@ module.exports = class NewBlockView extends Backbone.View
         url: "#{sd.API_URL}/channels/#{@model.get('slug')}/blocks"
         wait: true
         success: (block) =>
+          analytics.track.click "New #{block.get('class')} block created"
           @$field.val ""
           @$field.blur()
 
