@@ -8,6 +8,7 @@ IconicJS = require '../../../components/iconic/client/iconic.min.js'
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
 ConnectView = require '../../connect/client/connect_view.coffee'
 NewCommentView = require '../../new_comment/client/new_comment_view.coffee'
+analytics = require '../../../lib/analytics.coffee'
 EditableAttributeView = require '../../editable_attribute/client/editable_attribute_view.coffee'
 
 lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
@@ -41,6 +42,8 @@ module.exports = class LightboxView extends Backbone.View
     mediator.on "lightbox:close",      => @close()
 
   render: ->
+    analytics.track.impression "Lightbox"
+
     $('body').removeClass 'is-loading'
     @$el.removeClass 'is-loading'
     @$el.html lightboxTemplate block: @model, md: md
@@ -110,7 +113,6 @@ module.exports = class LightboxView extends Backbone.View
     @initialXHR = @model.fetch success: => @render()
 
   cancelRequests: ->
-    console.log '@initialXHR', @initialXHR, 'feedView', @feedView
     @initialXHR.abort() if @initialXHR.readyState > 0 && @initialXHR.readyState < 4
     @feedView.cancelRequest()
 
