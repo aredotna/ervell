@@ -3,6 +3,7 @@ sd = require('sharify').data
 Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 md = require 'marked'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
@@ -32,6 +33,10 @@ module.exports = class EditableAttributeView extends Backbone.View
 
   beginEdit: ->
     return unless @model.allows('can-edit',  @currentUser) and !@editing
+
+    analytics.track.click "#{@_attribute} edited",
+      label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
+
     @editing = true
     @$el.addClass('is-editing')
 
