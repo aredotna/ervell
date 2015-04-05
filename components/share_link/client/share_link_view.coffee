@@ -4,6 +4,7 @@ Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 ZeroClipboard = require 'zeroclipboard'
+analytics = require '../../../lib/analytics.coffee'
 
 shareTemplate = -> require('../templates/share_link.jade') arguments...
 
@@ -18,9 +19,11 @@ module.exports = class ShareLinkView extends Backbone.View
     @model.on 'change:share_link', @render, @
 
   generateShareLink: ->
+    analytics.track.click "Share link generated"
     @model.generateShareLink()
 
   removeShareLink: ->
+    analytics.track.click "Share link removed"
     @model.removeShareLink()
 
   render: ->
