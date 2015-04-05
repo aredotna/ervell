@@ -7,6 +7,7 @@ LightboxView = require '../../lightbox/client/lightbox_view.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../follow_button/client/follow_button_view.coffee'
 User = require '../../../models/user.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
 
@@ -63,6 +64,8 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
 
+    analytics.track.click "Block source opened"
+
     url = @model.getSourceUrl()
 
     if @channel and @channel.get('status') is 'private'
@@ -112,9 +115,10 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
 
-
     @model.destroy
       channel: @channel
+
+    analytics.track.click "Block removed from channel"
 
     @remove()
 
