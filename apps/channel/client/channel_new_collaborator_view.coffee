@@ -2,6 +2,8 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
+
 newCollaboratorTemplate = -> require('../templates/new_collaborator.jade') arguments...
 collaboratorResultsTemplate = -> require('../templates/collaborator_results.jade') arguments...
 
@@ -18,6 +20,7 @@ module.exports = class newCollaboratorView extends Backbone.View
     @render()
 
   maybeClear: (e)=>
+    analytics.track.click "Collaborator added on #{@channel.get('status')} channel"
     @clear() unless $(e.target).closest('#metadata--collaborators').length
 
   addCollaborator: (e) ->
