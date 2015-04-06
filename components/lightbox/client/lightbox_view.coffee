@@ -19,6 +19,7 @@ module.exports = class LightboxView extends Backbone.View
     'tap .lightbox--close'            : 'close'
     'tap .directional-arrows'         : 'clickSlide'
     'tap .lightbox__connect__trigger' : 'loadConnectView'
+    'tap .lightbox__content__source'  : 'openSource'
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -40,6 +41,22 @@ module.exports = class LightboxView extends Backbone.View
     mediator.on "lightbox:slide:next", => @slide 'next'
     mediator.on "lightbox:slide:prev", => @slide 'prev'
     mediator.on "lightbox:close",      => @close()
+
+  openSource: (e)->
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
+    analytics.track.click "Block source opened"
+
+    url = @model.getSourceUrl()
+
+    if @model.get('visibility') is 'private'
+      instance = window.open("about:blank")
+      instance.document.write("<meta http-equiv=\"refresh\" content=\"0;url=#{url}\">");
+      instance.document.close()
+    else
+      window.open url,'_blank'
+      return false
 
   render: ->
     analytics.track.impression "Lightbox"
