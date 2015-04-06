@@ -22,16 +22,14 @@ module.exports = class ConnectResultsView extends Backbone.View
     id = target.data('id')
 
     if target.hasClass('is-connected')
-      analytics.track.click 'Connection removed',
-        label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
+      analytics.track.click 'Connection removed'
 
       reqOpts =
         type: 'DELETE'
         url: "#{sd.API_URL}/channels/#{id}/blocks/#{@block.id}"
     else
       mediator.shared.recent_connections.create @collection.get(id).toJSON()
-      analytics.track.click 'Connection created',
-        label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
+      analytics.track.click 'Connection created'
       reqOpts =
         type: "POST"
         url: "#{sd.API_URL}/channels/#{id}/connections"
