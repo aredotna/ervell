@@ -43,18 +43,18 @@ module.exports = class LightboxView extends Backbone.View
     mediator.on "lightbox:close",      => @close()
 
   openSource: (e)->
-    e.preventDefault()
-    e.stopImmediatePropagation()
-
     analytics.track.click "Block source opened"
 
     url = @model.getSourceUrl()
 
     if @model.get('visibility') is 'private'
-      instance = window.open("about:blank")
-      instance.document.write("<meta http-equiv=\"refresh\" content=\"0;url=#{url}\">");
-      instance.document.close()
+      a = e.target
+      a = a.parentNode if a and a.tagName isnt 'A'
+      a.rel = 'noreferrer' if a and a.tagName is 'A'
     else
+      e.preventDefault()
+      e.stopImmediatePropagation()
+
       window.open url,'_blank'
       return false
 
