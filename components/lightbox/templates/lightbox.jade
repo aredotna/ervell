@@ -39,7 +39,7 @@
           .lightbox__content__source
             a(href="#{block.getSourceUrl()}" target="_blank").lightbox__content__source__original (Source)
             - if(block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link')
-              |  - #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getSourceUrl()}") (Find original)]
+              |  - #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getSourceUrl()}" target="_blank") (Find original)]
       .lightbox__content__footer__inner__col-2
         .lightbox__connect
           .lightbox__connect__inner
