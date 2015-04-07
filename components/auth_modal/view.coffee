@@ -89,14 +89,17 @@ module.exports = class AuthModalView extends ModalView
       switch @state.get('mode')
         when 'login'
           mediator.trigger 'current_user:logged_in'
+          analytics.track.submit 'User logged in'
           Cookies.set('signed_in', true, expires: 60 * 60 * 24 * 7)
           if @redirectTo
             location.href = @redirectTo
           else
             location.reload()
         when 'signup'
+          analytics.track.submit 'User requested invitation'
           @showError "Registration recieved. Please check your email for registration details."
         when 'forgot'
+          analytics.track.submit 'User reset password'
           @showError "Please check your email for password reset details."
 
   showError: (msg) =>
