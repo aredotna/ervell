@@ -1,4 +1,4 @@
-.manage__block(id=block.id)
+.manage__block(id=block.id data-id=block.id)
   .manage__block__title.manage__block__column
     a(href="#{block.getHref()}" class="privacy--#{block.getVisibility()}")= block.smartTruncate(block.get('title'), 50)
   .manage__block__block_count.manage__block__column

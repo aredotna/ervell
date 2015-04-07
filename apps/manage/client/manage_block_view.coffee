@@ -14,20 +14,11 @@ module.exports = class ManageBlockView extends BlockView
     'click .manage__block__export_link': 'exportChannel'
 
   initialize: ->
+    @model.on 'change:status', @updateTitle
+
     super
-    collaborators = new Collaborators
-      channel_slug: @model.get('slug')
 
-    @collaborationView = new ChannelCollaborationView
-      collection: collaborators
-      el: @$ ".manage__block__collaborator_count"
-
-    @channelVisibilityView = new ChannelVisibilityView
-      el: @$ ".manage__block__status"
-      model: @model
-      autoSync: true
-
-      @model.on 'change:status', @updateTitle
+    @postRender()
 
   updateTitle: (model, status) =>
     @$('.manage__block__title a').removeClass()
@@ -35,6 +26,21 @@ module.exports = class ManageBlockView extends BlockView
 
   render: ->
     @container.append blockTemplate(block: @model, user: @current_user)
+    @$el = $("##{@model.id}")
+    @postRender()
+
+  postRender: ->
+    # collaborators = new Collaborators
+    #   channel_slug: @model.get('slug')
+
+    # @collaborationView = new ChannelCollaborationView
+    #   collection: collaborators
+    #   el: @$ ".manage__block__collaborator_count"
+
+    @channelVisibilityView = new ChannelVisibilityView
+      el: @$(".manage__block__status")
+      model: @model
+      autoSync: true
 
   exportChannel: (e)->
     e.preventDefault()

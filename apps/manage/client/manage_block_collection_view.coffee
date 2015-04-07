@@ -18,6 +18,20 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
     @blocks = options.blocks
     @blocks.on 'add', @appendBlockView, @
 
+    @$('.manage__block').each @initBlockView
+
+  initBlockView: (index, el) =>
+    console.log 'init block view'
+    $block = $(el)
+    block = @blocks.get $block.data('id')
+
+    if block
+      new ManageBlockView
+        container: $('.manage__block__collection__contents')
+        model: block
+        autoRender: false
+        el: $block
+
   toggleDirection: ->
     @direction = if @direction is 'asc' then 'desc' else 'asc'
 
@@ -43,7 +57,6 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
 
     @toggleDirection()
 
-
   appendBlockView: (model) ->
     @renderBlockView model, true
 
@@ -52,4 +65,3 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
       container: $('.manage__block__collection__contents')
       model: block
       autoRender: autoRender
-      channel: @channel if @channel
