@@ -16,10 +16,10 @@ lightboxTemplate = -> require('../templates/lightbox.jade') arguments...
 module.exports = class LightboxView extends Backbone.View
 
   events:
-    'tap .lightbox--close'            : 'close'
-    'tap .directional-arrows'         : 'clickSlide'
-    'tap .lightbox__connect__trigger' : 'loadConnectView'
-    'tap .lightbox__content__source'  : 'openSource'
+    'tap .lightbox--close'                      : 'close'
+    'tap .directional-arrows'                   : 'clickSlide'
+    'tap .lightbox__connect__trigger'           : 'loadConnectView'
+    'tap .lightbox__content__source__original'  : 'openSource'
 
   editableAttributes:
     'title'       : 'plaintext'
