@@ -68,8 +68,13 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
 
+    console.log "@model.get('visibility')", @model.get('visibility')
+
     if @model.get('visibility') is 'private'
-      window.open "#{sd.APP_URL}/go?redirect-to=#{url}",'_blank'
+      site = window.open "", "hide_referrer"
+      site.document.open()
+      site.document.writeln '<script type="text/javascript">window.location = "' + "#{sd.APP_URL}/go?redirect-to=#{url}" + '";</script>'
+      site.document.close()
     else
       window.open url,'_blank'
       return false
