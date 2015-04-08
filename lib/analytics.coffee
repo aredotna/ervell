@@ -56,6 +56,9 @@ module.exports.track = track =
     memo
   , {})
 
+module.exports.exception = (errorObj) ->
+  ga? 'send', 'exception', errorObj
+
 # These need to be set up individually before using. Read this non-sense:
 # https://developers.google.com/analytics/devguides/platform/customdimsmets
 module.exports.setDimension = (index, value) ->

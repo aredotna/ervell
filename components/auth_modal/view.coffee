@@ -73,8 +73,7 @@ module.exports = class AuthModalView extends ModalView
       success: @onSubmitSuccess
       error: (model, response, options) =>
         @reenableForm()
-        message = @errorMessage response
-        @showError response
+        analytics.exception response
 
   onSubmitSuccess: (model, response, options) =>
     @$('button').attr 'data-state', 'success'
