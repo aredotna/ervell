@@ -33,7 +33,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
 
-    if $('body').hasClass('is-mobile')
+    if $(window).height() < 700
       @$windowH = $(window).height()
       @$('.dropdown--size').css('height', @$windowH - 50)
 
