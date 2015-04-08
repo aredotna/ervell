@@ -11,3 +11,4 @@ app.set "view engine", "jade"
 
 # Log out
 app.get '/me/sign_out', routes.logout, routes.redirectBack
+app.get '/go', routes.redirect

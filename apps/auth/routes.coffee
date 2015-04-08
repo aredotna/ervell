@@ -15,3 +15,7 @@
         parse(req.get('Referrer') or '').path or
         '/'
   res.redirect url
+
+@redirect = (req, res, next) ->
+  url = req.body['redirect-to'] or req.query['redirect-to']
+  res.redirect url
