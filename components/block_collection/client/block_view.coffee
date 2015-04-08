@@ -68,8 +68,6 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
 
-    console.log "@model.get('visibility')", @model.get('visibility')
-
     if @model.get('visibility') is 'private'
       site = window.open "", "hide_referrer"
       site.document.open()
