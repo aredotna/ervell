@@ -65,14 +65,14 @@ module.exports = class BlockView extends Backbone.View
 
     url = @model.getSourceUrl()
 
-    if @model.get('visibility') is 'private'
-      a = e.target
-      a = a.parentNode if a and a.tagName isnt 'A'
-      a.rel = 'noreferrer' if a and a.tagName is 'A'
-    else
-      e.preventDefault()
-      e.stopImmediatePropagation()
+    e.preventDefault()
+    e.stopImmediatePropagation()
 
+    console.log "@model.get('visibility')", @model.get('visibility')
+
+    if @model.get('visibility') is 'private'
+      window.open "#{sd.APP_URL}/go?redirect-to=#{url}",'_blank'
+    else
       window.open url,'_blank'
       return false
 
