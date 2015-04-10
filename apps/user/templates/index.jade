@@ -5,13 +5,16 @@ block styles
 
 block body
   include ./path
-  if blocks
+  if blocks.length
     .channel-container
       .grid.flex-container
         include ../../../components/block_collection/templates/block_collection
-
-      #l-infinite-loader-container
-        #l-loader
+  else
+    .channel-empty.valign-outer
+      .valign-inner.center
+        include ./empty
+    #l-infinite-loader-container
+      #l-loader
 
 block scripts
   script( src= sd.ASSET_PATH + 'user' + sd.JS_EXT )
