@@ -5,19 +5,18 @@ block styles
 
 block body
   include ./path
-  if blocks.length
-    .channel-container
-      .grid.grid--channel.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
-        if channel && !following && !followers && user && user.canAddToChannel(channel)
-          include ../../../components/new_block/templates/new_block
-        include ../../../components/block_collection/templates/block_collection
+  .channel-container
+    .grid.grid--channel.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
+      if channel && !following && !followers && user && user.canAddToChannel(channel)
+        include ../../../components/new_block/templates/new_block
+      include ../../../components/block_collection/templates/block_collection
 
-    if user
-      .channel__filedrop.flex-container
-  else
-    .channel-empty.valign-outer
-      .valign-inner.center
-        include ./empty
+  if user
+    .channel__filedrop.flex-container
+  //- else
+  //-   .channel-empty.valign-outer
+  //-     .valign-inner.center
+  //-       include ./empty
 
   #l-infinite-loader-container
     #l-loader
