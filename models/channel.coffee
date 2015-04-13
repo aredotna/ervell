@@ -16,7 +16,7 @@ module.exports = class Channel extends Block
 
   urlRoot: -> "#{sd.API_URL}/channels/#{@slugOrId()}"
 
-  href: -> "/#{@get('user').slug}/#{@slugOrId()}"
+  href: -> "#{sd.APP_URL}/#{@get('user').slug}/#{@slugOrId()}"
 
   sync: (method, model, options) ->
     switch method
