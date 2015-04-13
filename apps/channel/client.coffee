@@ -74,6 +74,12 @@ module.exports = class ChannelView extends Backbone.View
       @setupEditTitleView()
       @setupEditDescriptionView()
 
+    @maybeSetEmpty()
+
+  maybeSetEmpty: ->
+    unless @$('.grid').hasClass('is-addable') or @blocks.length > 0
+      @$('.channel-container').addClass('is-empty')
+
   setupEditTitleView: ->
     new EditableAttributeView
       model: @channel

@@ -5,11 +5,9 @@ block styles
 
 block body
   include ./path
-  if blocks.length
-    .channel-container
-      .grid.flex-container
-        include ../../../components/block_collection/templates/block_collection
-  else
+  .channel-container( class=blocks.length ? '' : 'is-empty' )
+    .grid.flex-container
+      include ../../../components/block_collection/templates/block_collection
     .channel-empty.valign-outer
       .valign-inner.center
         include ./empty
