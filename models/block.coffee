@@ -31,7 +31,7 @@ module.exports = class Block extends Base
     if @getImageSize('display').split('.').pop() == 'gif'
       @getImageSize('display')
     else
-      "http://images.are.na/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
+      "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
 
   getImageSize: (size) ->
     if @has('image')

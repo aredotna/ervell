@@ -21,6 +21,7 @@ module.exports =
   COOKIE_DOMAIN: null
   ASSET_PATH: '/assets/'
   IMAGE_PATH: '/images/'
+  IMAGE_PROXY_URL: 'http://images.are.na'
   REDIS_URL: null
   GOOGLE_ANALYTICS_ID: null
 

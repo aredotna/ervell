@@ -7,7 +7,7 @@
 { APP_URL, API_URL, NODE_ENV, SESSION_SECRET,
 SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
 COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
-PUSHER_KEY, GOOGLE_ANALYTICS_ID } = config = require "../config"
+PUSHER_KEY, IMAGE_PROXY_URL, GOOGLE_ANALYTICS_ID } = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -16,6 +16,7 @@ sharify = require "sharify"
 arenaPassport = require 'arena-passport'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
+ensureSSL = require './middleware/ensure_ssl'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
@@ -38,6 +39,7 @@ sharify.data =
   REDIS_URL: REDIS_URL
   PUSHER_KEY: PUSHER_KEY
   GOOGLE_ANALYTICS_ID: GOOGLE_ANALYTICS_ID
+  IMAGE_PROXY_URL: IMAGE_PROXY_URL
 
 # current user management
 CurrentUser = require '../models/current_user'
@@ -108,6 +110,7 @@ module.exports = (app) ->
   app.use artsyError.helpers
   app.use arena_pp
   app.use localsMiddleware
+  app.use ensureSSL
 
   # Mount apps
   app.use require "../apps/root"
