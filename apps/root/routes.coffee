@@ -36,12 +36,13 @@ sd = require("sharify").data
         per: 10
       cache: true
       success: render
+      error: next
 
     stats = new Backbone.Model
     stats.url = "#{sd.API_URL}/utilities/statistics"
     stats.formatNumber = (attr) -> @get(attr).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 
-    stats.fetch cache: true, success: render
+    stats.fetch cache: true, success: render, error: next
 
 @notifications = (req, res, next) ->
   res.locals.sd.FEED_TYPE = 'notifications'
