@@ -19,4 +19,4 @@ h2.feed-group__sentence(class=group.isNew() ? 'is_unread' : '')
     span=group.connector()
     span &nbsp;
     a(href="#{group.single_target_link()}" class="privacy--#{group.target_privacy()}")=group.single_target()
-  .feed-group__timestamp=group.timestamp()
+  .feed-group__timestamp(class=group.isNew() ? 'is_unread' : '')=group.timestamp()

@@ -19,12 +19,17 @@ module.exports = class FeedView extends Backbone.View
         @setSharedBlocks()
         mediator.trigger 'load:stop'
 
+        @collection.markRead() if sd.FEED_TYPE is 'notifications'
+
+
     @current_user = new User sd.CURRENT_USER
 
-    @infinite_view = new InfiniteView
-      context: @$el
-      collection: @collection
-      itemSelector: @$el
+    if sd.FEED_TYPE is 'primary'
+      # notifications api updates to be paginated :/
+      @infinite_view = new InfiniteView
+        context: @$el
+        collection: @collection
+        itemSelector: @$el
 
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)

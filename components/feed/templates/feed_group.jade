@@ -1,4 +1,4 @@
-.feed-group
+.feed-group(class=group.isNew() ? 'is_unread' : '')
   .flex-container
     include feed_group_sentence
     - blocks = group.items()
