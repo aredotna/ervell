@@ -144,8 +144,21 @@ privacy-color('.search__results__result--privacy-', color)
     svg
       fill hovergray
 
+.dropdown--menu .user__avatar--thumb
+  width 30px
+  opacity 0.8
+
+  &:hover
+    opacity 1
+
+  .user__avatar__image
+    top 10px
+    opacity 50%
+
+
 .new-channel-dropdown
   display inline-block
+  margin-right 20px
 
   .dropdown--menu__trigger:after
     content ""
@@ -202,15 +215,18 @@ privacy-color('.search__results__result--privacy-', color)
   font-weight bold
   border-top 1px solid bordergray
 
+
 .dropdown__link--user
   border-top 0px
-
-  .user__avatar
-    opacity 0.85
+.dropdown__link--small
+  line-height 3em
+  font-size 12px
+  font-weight normal
+  color lightgray
+  text-align center
 
   &:hover
-    .user__avatar
-      opacity 1
+    color lightgrayplus
 
 .dropdown__icon
   float right
@@ -261,10 +277,10 @@ privacy-color('.search__results__result--privacy-', color)
 
     .logo
       width 70px
-      
+
     li
       line-height 30px
-  
+
   .logo-icon.dropdown--menu__trigger
     height topbar_h
     padding 0 15px 0 15px
@@ -278,7 +294,7 @@ privacy-color('.search__results__result--privacy-', color)
 
   .layout-header__register
     width 185px
-  
+
   .new-channel-btn--caption
     display none
 

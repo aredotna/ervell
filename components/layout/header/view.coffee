@@ -33,9 +33,9 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
 
-    if $(window).height() < 700
-      @$windowH = $(window).height()
-      @$('.dropdown--size').css('height', @$windowH - 50)
+    # if $(window).height() < 700
+    #   @$windowH = $(window).height()
+    #   @$('.dropdown--size').css('height', @$windowH - 50)
 
     if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
       new Waypoint.Sticky
