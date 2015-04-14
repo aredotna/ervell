@@ -15,7 +15,9 @@ module.exports = class InfiniteView extends Backbone.View
     @timer = setInterval @maybeLoad, 150
 
   maybeLoad: =>
-    return if @loading or @disabled
+    return if @loading or @disabled or @collection.exhausted
+
+    console.log '@collection', @collection
 
     threshold = 0
     total = $('body').prop('scrollHeight')

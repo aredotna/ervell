@@ -8,6 +8,8 @@ params = require 'query-params'
 
 module.exports = class Feed extends Base
   model: FeedGroup
+  exhaustedRetry: 0
+  exhaustedLimit: 5
   defaultOptions:
     page: 1
     per: 50
@@ -52,7 +54,8 @@ module.exports = class Feed extends Base
     params.encode parameters
 
   parse: (data)->
-    @exhausted = true if data.item_count is 0
+    @exhaustedRetry++ if data.total is 0
+    @exhausted = true if @exhaustedRetry > @exhaustedLimit
 
     items = _.filter data.items, (model) =>
       # model.user? && !(model.user.id is @options.user.id and model.action is 'has joined Arena') && model?.item?.kind != "shortcuts"

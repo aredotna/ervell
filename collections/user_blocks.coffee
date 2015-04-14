@@ -24,6 +24,8 @@ module.exports = class UserBlocks extends SearchBlocks
     @total_pages = data.total_pages
     contents = data.blocks || data.results
 
+    @exhausted = true if @total_pages is 0
+
     if contents.length
       channel_ids = _.pluck data.channels, 'id'
 
