@@ -70,8 +70,9 @@ module.exports = class SearchBarView extends Backbone.View
     else
       false
 
+  #
   # Highlight management
-
+  #
   highlightFirst: ->
     @clearHighlight()
     @$('.search__results__result:first').addClass('is-active')
