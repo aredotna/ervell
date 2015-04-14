@@ -7,13 +7,9 @@ block styles
 block body
   include ./path
   .channel-container
-    .grid.grid--channel.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
-      if channel && !following && !followers && user && user.canAddToChannel(channel)
-        include ../../../components/new_block/templates/new_block
+    .grid.grid--channel.flex-container
       include ../../../components/block_collection/templates/block_collection
 
-  if user
-    .channel__filedrop.flex-container
 
 block scripts
   script( src=sd.ASSET_PATH + 'share' + sd.JS_EXT )
