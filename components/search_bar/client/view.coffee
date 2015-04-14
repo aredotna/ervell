@@ -31,11 +31,11 @@ module.exports = class SearchBarView extends Backbone.View
 
     switch e.keyCode
       when 13
-        document.location.href = "/search/#{@getQuery()}"
+        @activateHighlighted e
       when 40
-        console.log 'down'
+        @moveHighlight('down')
       when 38
-        console.log 'up'
+        @moveHighlight('up')
       else
         @search(e)
 
@@ -50,7 +50,6 @@ module.exports = class SearchBarView extends Backbone.View
     return @reset() unless query = @getQuery()
     return if (query.length < 2) or (query is @lastQuery)
 
-    # @$(".search-bar-clear").fadeIn()
     @$el.addClass('is-loading')
 
     @lastQuery = query
@@ -71,12 +70,74 @@ module.exports = class SearchBarView extends Backbone.View
     else
       false
 
+  # Highlight management
+
+  highlightFirst: ->
+    @clearHighlight()
+    @$('.search__results__result:first').addClass('is-active')
+
+  activateHighlighted: (e) ->
+    e.stopPropagation()
+    $selected = @$('.is-active:first')
+    if $selected.length
+      action = $selected.data('action')
+      if action and (action isnt "")
+        mediator.publish(action)
+      else
+        document.location.href = @$('.is-active:first > a').attr('href')
+    else
+      @fullResults e
+
+  moveHighlight: (direction) ->
+    $container = @$el
+
+    $items = $container.find('.search__results__result')
+
+    $current = $items.filter('.is-active')
+    $current = $items.has('.is-active') unless $current.length
+    $current = false unless $current.length
+
+    @clearHighlight()
+
+    if $current
+      index = $items.index($current)
+      length = $items.length
+
+      delta = if direction is 'down' then 1 else -1
+      nextIndex = index + delta
+
+      if (nextIndex > length - 1) then nextIndex = 0
+      if (nextIndex < 0 ) then nextIndex = length - 1
+    else
+      nextIndex = 0
+
+    $($items[nextIndex]).addClass('is-active')
+
+    @scrollToHighlight()
+
+  scrollToHighlight: () ->
+    $list =  @$el
+    $highlighted = @$('.is-active:first')
+
+    listBounds = $list[0].getBoundingClientRect()
+    highlightBounds = $highlighted[0].getBoundingClientRect()
+
+    curScroll = $list.scrollTop()
+    if highlightBounds.top < listBounds.top
+      scroll = curScroll - (listBounds.top - highlightBounds.top)
+    else if highlightBounds.bottom > listBounds.bottom
+      scroll = curScroll + (highlightBounds.bottom - listBounds.bottom)
+
+    $list.scrollTop(scroll)
+
+  clearHighlight: ->
+    @$('.is-active').removeClass('is-active')
+
   searchLoaded: ->
     @$el.removeClass('is-loading')
     @$el.addClass('is-active')
     @$el.addClass('has-results')
-    @$results.html resultsTemplate(results: @collection.models)
-
+    @$results.html resultsTemplate(results: @collection.models, query: @getQuery())
     mediator.trigger 'search:loaded'
 
   searchUnloaded: ->

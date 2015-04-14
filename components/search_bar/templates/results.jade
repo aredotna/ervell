@@ -9,5 +9,5 @@ ul.search__results__list
       li.search__results__result: a(href="/#{result.get('user').slug}")
         ul.breadcrumb
           li: = result.get('user').username
-  li.search__results__result.search__results__see-all: a(href="/search/")
+  li.search__results__result.search__results__see-all: a(href="/search/#{query}")
     | See all results
