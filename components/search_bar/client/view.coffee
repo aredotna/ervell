@@ -150,8 +150,9 @@ module.exports = class SearchBarView extends Backbone.View
   blurSearch: (e) ->
     _.delay =>
       @$el.removeClass('is-active')
+      $('.path').removeClass('is-hidden')
     , 200
-    $('.path.stuck').show()
+
 
   clearSearch: ->
     @searchUnloaded()
@@ -159,4 +160,4 @@ module.exports = class SearchBarView extends Backbone.View
 
   focusSearch: (e)->
     @$el.addClass('is-active')
-    $('.path.stuck').hide()
+    $('.path.stuck').addClass('is-hidden')

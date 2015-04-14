@@ -15,81 +15,77 @@
 
   clearfix()
 
-  .path__headline
-    @extend h1
-    margin 0
-    position relative
-    float left
-    width auto
+.path__headline
+  @extend h1
+  margin 0
+  position relative
+  float left
+  width auto
 
-  &.stuck
-    position fixed
-    z-index header_z
-    top 1px
-    left 0px
-    height 38px
-    margin 0
-    text-align center
-    width 100%
+.path.stuck
+  position fixed
+  z-index header_z
+  top 1px
+  left 0px
+  height 38px
+  margin 0
+  text-align center
+  width 100%
+  pointer-events none
+
+  &.is-hidden, &.is-hidden.path__headline
+    opacity 0
     pointer-events none
 
-    .path__headline
-      display inline-block
-      font-size 1em
-      line-height 3.1em
-      float none
-      pointer-events all
-
-    .path__breadcrumb
-      min-width initial
-
-    .edit-channel, .edit-profile, .channel-settings
-      display none
-
-    .root__toggle
-      height auto
-      margin 2px 0 0 0
-      line-height 0.5em
-
-      .root__toggle__item
-        font-size s_caption
+  .path__headline
+    display inline-block
+    font-size 1em
+    line-height 3.1em
+    float none
+    pointer-events all
 
   .path__breadcrumb
-    min-width 115px
-    breadcrumb: '/' 8px lightgray
+    min-width initial
 
-    li:after
-      font-weight normal
+  .edit-channel, .edit-profile, .channel-settings
+    display none
 
-    .path__channel
-      font-weight normal
-      color textgray
+.path__breadcrumb
+  min-width 115px
+  breadcrumb: '/' 8px lightgray
 
-    li:last-child
-      color textgray
-
-    .path__sub
-      font-weight normal
-
-
-  privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
-
-  .username
-    font-weight bold
-
-  .username:hover
-    border-bottom 0
-
-  .channel
-    // nothing
-
-  .active
+  li:after
     font-weight normal
-    color hovergray
 
-  .separator
-    margin 0 0.25em
-    font-weight 400
+  .path__channel
+    font-weight normal
+    color textgray
+
+  li:last-child
+    color textgray
+
+  .path__sub
+    font-weight normal
+
+
+privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
+
+.username
+  font-weight bold
+
+.username:hover
+  border-bottom 0
+
+.channel
+  // nothing
+
+.active
+  font-weight normal
+  color hovergray
+
+.separator
+  margin 0 0.25em
+  font-weight 400
 
 .channel-settings
   position relative
