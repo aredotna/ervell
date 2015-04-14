@@ -1,0 +1,35 @@
+extends ../../../components/layout/index--bare
+
+block styles
+  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'registration' + sd.CSS_EXT) )
+
+block body
+  #registration-page.valign-outer
+    .valign-inner
+      section#auth-body
+        .auth-logo
+          include ../../../public/images/arena-mark.svg
+
+        form.auth-login-email.auth-form
+          input.input--wide.input--relative.is-block(
+            name='email' type='email' placeholder='Email' required disabled value="#{invitee.get('email')}"
+          )
+          input.input--wide.input--relative.is-block(
+            id="first_name" name="first_name" required placeholder="First name" type="text"
+          )
+          input.input--wide.input--relative.is-block(
+            id="last_name" name="last_name" required placeholder="Last name" type="text"
+          )
+          input.input--wide.input--relative.is-block(
+            id="password" name="password" required placeholder="Password (at least 6 characters)" type="password" pattern=".{6,}"
+          )
+          input.input--wide.input--relative.is-block(
+            id="password_confirmation" required name="password_confirmation" placeholder="Confirm password (at least 6 characters)" type="password" pattern=".{6,}"
+          )
+
+          .auth-errors &nbsp;
+
+          button#auth-register.auth-submit.button--wide.button--border.button--relative Register
+
+block scripts
+  script( src=sd.ASSET_PATH + 'registration' + sd.JS_EXT )
