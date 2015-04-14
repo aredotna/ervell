@@ -9,7 +9,7 @@ User = require './user.coffee'
 injectToken = (success) ->
   _.wrap success, (success, model, response, options) ->
     $.ajaxSettings.headers = _.extend ($.ajaxSettings.headers or {}),
-      'X-ACCESS-TOKEN': response.user.accessToken
+      'X-ACCESS-TOKEN': response.user?.accessToken
     success model, response, options
 
 module.exports = class LoggedOutUser extends User
@@ -19,7 +19,11 @@ module.exports = class LoggedOutUser extends User
   login: (options = {}) ->
     settings = _.defaults options,
       url: '/me/sign_in'
-      success: injectToken -> location.reload()
+      success: injectToken ->
+        if options.redirect
+          document.location.href = options.redirect
+        else
+          location.reload()
     new Backbone.Model().save (@pick 'email', 'password'), settings
 
   signup: (options = {}) ->
