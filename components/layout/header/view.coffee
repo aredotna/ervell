@@ -80,6 +80,9 @@ module.exports = class HeaderView extends Backbone.View
     if $el.hasClass 'dropdown--is_active'
       $el.find('input').focus()
 
+    if $(window).width() < 410
+      $('.container').toggleClass 'transparent'
+
   openAuth: (options) ->
     @modal = new AuthModalView _.extend({ width: '500px' }, options)
 
