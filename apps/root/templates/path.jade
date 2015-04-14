@@ -14,4 +14,5 @@ block metadata
     .metadata__text
       ul.breadcrumb
         li: a(href="/" class=sd.FEED_TYPE == "primary" ? "is-active" : "" ).metadata--selector__option Feed
-        li: a(href="/notifications" class=sd.FEED_TYPE == "notifications" ? "is-active" : "").metadata--selector__option Notifications
+        li: a(href="/notifications" class=sd.FEED_TYPE == "notifications" ? "is-active" : "").metadata--selector__option.metadata--selector--notifications Notifications
+        li: a(href="/explore" class=sd.FEED_TYPE == "explore" ? "is-active" : "").metadata--selector__option Explore
