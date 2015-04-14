@@ -33,6 +33,8 @@ module.exports = class Feed extends Base
         url += "/feed"
       when "global"
         url += "/feed/global"
+      when "notifications"
+        url += "/notifications"
       when "network"
         object_id = if @options.object_id? then @options.object_id else CurrentUser.id
         url += "/user/#{object_id}/network"

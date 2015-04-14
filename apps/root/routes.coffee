@@ -16,6 +16,7 @@ sd = require("sharify").data
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
   if req.user
+    res.locals.sd.FEED_TYPE = 'primary'
     res.render 'feed', path: 'feed'
   else
 
@@ -41,6 +42,10 @@ sd = require("sharify").data
     stats.formatNumber = (attr) -> @get(attr).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 
     stats.fetch cache: true, success: render
+
+@notifications = (req, res, next) ->
+  res.locals.sd.FEED_TYPE = 'notifications'
+  res.render 'feed', path: 'notifications'
 
 @explore = (req, res, next) ->
   channels = new ExploreBlocks
