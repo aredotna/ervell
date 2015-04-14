@@ -17,8 +17,6 @@ module.exports = class InfiniteView extends Backbone.View
   maybeLoad: =>
     return if @loading or @disabled or @collection.exhausted
 
-    console.log '@collection', @collection
-
     threshold = 0
     total = $('body').prop('scrollHeight')
     progress = $('body').scrollTop() + $(window).height() * 2

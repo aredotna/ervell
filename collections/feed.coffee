@@ -54,7 +54,7 @@ module.exports = class Feed extends Base
     params.encode parameters
 
   parse: (data)->
-    @exhaustedRetry++ if data.total is 0
+    @exhaustedRetry++ unless data.items.length
     @exhausted = true if @exhaustedRetry > @exhaustedLimit
 
     items = _.filter data.items, (model) =>
