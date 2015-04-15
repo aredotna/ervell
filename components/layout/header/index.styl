@@ -196,74 +196,98 @@ privacy-color('.search__results__result--privacy-', color)
   top topbar_h
   right 0
   margin 14px 12px 0 0
-  font-size 1em
+  font-size 0.9em
   text-align left
-  background-color backgroundgray
   border-radius 0px
-  border 1px solid lightgrayplus
-  padding 0
+  border 1px solid bordergray
   z-index 3001
+  background-color secondbackgroundgray
 
   &.dropdown--size
     width 300px
     right 0
 
+.dropdown__top
+  background-color secondbackgroundgray
+  
+  .dropdown__link
+    line-height 4em
+    border-bottom 1px solid bordergray
+
+.dropdown__bottom
+  background-color bordergray
+  padding 12px 0 12px 0
+  font-size 0.9em
+
 .dropdown__link
   display block
   padding 0 14px 0 14px
-  line-height 4em
+  line-height 2.6em
   font-weight bold
-  border-top 1px solid bordergray
+  border 0
+  
+  span
+    color lightgray
+  
+  &.no-border
+    border 0
 
-
-.dropdown__link--user
-  border-top 0px
-.dropdown__link--small
-  line-height 3em
-  font-size 12px
-  font-weight normal
-  color lightgray
-  text-align center
-
-  &:hover
-    color lightgrayplus
+.dropdown__link--notifications
+  color alert
+  
+  .notifications--count
+    text-align right
+    position relative
+    float right
 
 .dropdown__icon
   float right
   height 100%
 
-.dropdown__notifications
-  width 100%
-  height 160px
-  overflow scroll
-  -webkit-overflow-scrolling touch
-  margin 0
-  border-top 1px solid bordergray
-  background-color secondbackgroundgray
-  cursor default
-  padding-top 10px
-
-  .feed-group__sentence
-    font-size s_caption
+/* 
+  .dropdown__notifications
+    width 100%
+    height 160px
+    overflow scroll
+    -webkit-overflow-scrolling touch
     margin 0
-    color textgray
+    border-top 1px solid bordergray
+    background-color secondbackgroundgray
+    cursor default
+    padding-top 10px
 
-    a
+    .feed-group__sentence
+      font-size s_caption
+      margin 0
       color textgray
 
-      &:hover
-        color hovergray
+      a
+        color textgray
 
-  .feed-group__sentence.is_unread
-    color alert
+        &:hover
+          color hovergray
 
-    a
+    .feed-group__sentence.is_unread
       color alert
 
-  .feed-group__timestamp
-    padding-top 5px
-    text-align center
+      a
+        color alert
+
+    .feed-group__timestamp
+      padding-top 5px
+      text-align center
+      color lightgray
+
+  .dropdown__link--small
+    line-height 3em
+    font-size 12px
+    font-weight normal
     color lightgray
+    text-align center
+
+    &:hover
+      color lightgrayplus  
+*/
 
 .dropdown--is_active .dropdown
   display block
