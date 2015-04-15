@@ -69,6 +69,7 @@ module.exports = class HeaderView extends Backbone.View
   maybeSetNotifications: ->
     if @notifications.getNumberUnread() > 0
       @$('.user-avatar').addClass 'has-notifications'
+      $('.dropdown__link--notifications').addClass 'has-notifications'
 
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()
