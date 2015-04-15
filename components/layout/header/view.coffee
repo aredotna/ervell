@@ -19,7 +19,7 @@ module.exports = class HeaderView extends Backbone.View
     'tap .btn-login'                      : 'login'
     'tap .btn-signup'                     : 'signup'
     'tap .dropdown--menu__trigger'        : 'toggleDropdown'
-    'tap .logo-icon'                      : 'clearNotifications'
+    'tap .user__avatar'                   : 'clearNotifications'
 
   initialize: (options) ->
 
@@ -64,11 +64,11 @@ module.exports = class HeaderView extends Backbone.View
 
   clearNotifications: (e)->
     @notifications.markRead()
-    @$('.logo').removeClass 'has-notifications'
+    @$('.user-avatar').removeClass 'has-notifications'
 
   maybeSetNotifications: ->
     if @notifications.getNumberUnread() > 0
-      @$('.logo').addClass 'has-notifications'
+      @$('.user-avatar').addClass 'has-notifications'
 
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()
