@@ -19,7 +19,6 @@ module.exports = class HeaderView extends Backbone.View
     'tap .btn-login'                      : 'login'
     'tap .btn-signup'                     : 'signup'
     'tap .dropdown--menu__trigger'        : 'toggleDropdown'
-    'tap .user__avatar'                   : 'clearNotifications'
 
   initialize: (options) ->
 
@@ -32,10 +31,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'body:click', @closeDropdown, @
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
-
-    # if $(window).height() < 700
-    #   @$windowH = $(window).height()
-    #   @$('.dropdown--size').css('height', @$windowH - 50)
+    mediator.on 'notifications:cleared', @unsetNotifications, @
 
     if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
       new Waypoint.Sticky
@@ -46,11 +42,8 @@ module.exports = class HeaderView extends Backbone.View
       new AuthRouter pushState: false
     else
       @notifications = new Notifications()
-      new SmallFeedView
-        feedType: 'notifications'
-        collection: @notifications
-        el: @$('.dropdown__notifications')
-
+      mediator.shared.notifications = @notifications
+      @notifications.fetch()
       @notifications.on 'sync', -> mediator.trigger 'notifications:synced', @
 
       new NewChannelView
@@ -67,9 +60,13 @@ module.exports = class HeaderView extends Backbone.View
     @$('.user-avatar').removeClass 'has-notifications'
 
   maybeSetNotifications: ->
-    if @notifications.getNumberUnread() > 0
-      @$('.user-avatar').addClass 'has-notifications'
-      $('.dropdown__link--notifications').addClass 'has-notifications'
+    if (count = @notifications.getNumberUnread()) > 0
+      @$('.user-avatar, .dropdown__link--notifications').addClass 'has-notifications'
+      @$('.notifications--count').text count
+
+  unsetNotifications: ->
+    @$('.user-avatar, .dropdown__link--notifications').removeClass 'has-notifications'
+    @$('.notifications--count').text ""
 
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()

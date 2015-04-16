@@ -19,8 +19,6 @@ module.exports = class FeedView extends Backbone.View
         @setSharedBlocks()
         mediator.trigger 'load:stop'
 
-        @collection.markRead() if sd.FEED_TYPE is 'notifications'
-
         if sd.FEED_TYPE is 'primary'
           # notifications api updates to be paginated :/
           @infinite_view = new InfiniteView
