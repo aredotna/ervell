@@ -65,8 +65,8 @@ body
   float left
   height auto
   width 100%
-  height 17px
-  margin 112px auto 0 auto
+  height 19px
+  margin 82px auto 0 auto
   opacity 0.90
   z-index 199
 
@@ -75,7 +75,7 @@ body
   float left
   width 70%
   left 15%
-  margin 60px 0 70px 0
+  margin 50px 0 90px 0
   line-height 1.4em
   text-align center
   color hovergray
@@ -91,8 +91,8 @@ body
 a.home__section-intro__menu, a.home__section-intro__menu--mobile
   position relative
   border-bottom 2px solid hovergray
-  padding 0 0 1px 0
-  margin 0
+  padding 0 0 3px 0
+  margin 0 20px 0 20px
 
   &:hover
     color public
@@ -114,6 +114,9 @@ a.home__section-intro__menu--mobile
   text-align left
   z-index modal_z - 1
 
+.home__static__menu
+  display none
+
 .static__menu__item
   color lightgray
 
@@ -127,7 +130,7 @@ a.home__section-intro__menu--mobile
   text-align center
 
   h1
-    font-size 4.5em
+    font-size 4.4em
     font-weight normal
     color lightgray
     margin 0
@@ -202,6 +205,11 @@ privacy-color('.privacy--', color)
     margin 105px 70px 0 0
     width 100px
 
+
+  .home__section-intro__text
+    width 90%
+    left 5%
+
   .home__section--channels__channels
     .grid
       -webkit-justify-content center
@@ -230,9 +238,8 @@ privacy-color('.privacy--', color)
 
   .home__section-intro__text
     clear both
-    padding 20px 0 40px 0
-    width 500px
     max-width 100%
+    margin 20px 0 60px 0
 
   a.home__section-intro__menu--mobile
     display inline
@@ -289,6 +296,11 @@ privacy-color('.privacy--', color)
     display none
 
 @media (max-width:500px)
+  .home__section-intro__text
+    width 96%
+    left 2%
+    text-align left
+
   .home__section--channels__channels
     .grid
       .grid__block
