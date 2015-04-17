@@ -54,7 +54,7 @@ module.exports = class ConnectResultsView extends Backbone.View
     setTimeout ->
       loadReady = true
       maybeEndLoad()
-    , 600
+    , 800
 
     opts.complete = ->
       loadComplete = true
