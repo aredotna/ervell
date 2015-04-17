@@ -18,7 +18,7 @@ module.exports = class HeaderView extends Backbone.View
     'tap .header--icon'                   : 'setActive'
     'tap .btn-login'                      : 'login'
     'tap .btn-signup'                     : 'signup'
-    'touchstart .dropdown--menu__trigger'      : 'toggleDropdown'
+    'tap .dropdown--menu__trigger'        : 'toggleDropdown'
 
   initialize: (options) ->
 
