@@ -53,7 +53,7 @@ body
   position relative
   float left
   width 100%
-  padding 40px 0 40px 0
+  padding 60px 0 30px 0
   background-color #fff
   border-top 1px solid #e7e7e7
 
@@ -115,7 +115,15 @@ a.home__section-intro__menu--mobile
   z-index modal_z - 1
 
 .home__static__menu
-  display none
+  display block
+  position absolute
+  top 25px
+  right 25px
+  margin 0
+  width auto
+  
+  a
+    color textgray
 
 .static__menu__item
   color lightgray
@@ -130,15 +138,16 @@ a.home__section-intro__menu--mobile
   text-align center
 
   h1
-    font-size 4.4em
+    font-size 3.4em
     font-weight normal
-    color lightgray
+    color lightgrayplus
     margin 0
 
   h2
     font-weight normal
-    color lightgray
+    color lightgrayplus
     margin 0
+    font-size 1.2em
 
 .home__section--channels
   position relative
@@ -201,10 +210,6 @@ privacy-color('.privacy--', color)
       border-top 1px solid textgray
 
 @media (max-width:(block_width_mar * 4) + 19)
-  .static__menu
-    margin 105px 70px 0 0
-    width 100px
-
 
   .home__section-intro__text
     width 90%
@@ -232,9 +237,6 @@ privacy-color('.privacy--', color)
 
   .home__mark
     margin 40px 0 0 0
-
-  .static__menu
-    margin 70px 0 0 0
 
   .home__section-intro__text
     clear both
@@ -293,13 +295,21 @@ privacy-color('.privacy--', color)
     display none
 
   .static__menu
-    display none
+    top 10px
+    right 15px
 
 @media (max-width:500px)
   .home__section-intro__text
     width 96%
     left 2%
     text-align left
+  
+  a.home__section-intro__menu
+    margin 0
+    float left
+    clear both
+    padding 0
+    margin-bottom 12px
 
   .home__section--channels__channels
     .grid
