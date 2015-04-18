@@ -25,8 +25,6 @@ module.exports = class BodyView extends Backbone.View
     'tap #scroll-top'                             : 'scrollToTop'
 
   initialize: (options) ->
-    console.log 'BodyView', @$el
-
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
 
     new LightboxRouter
@@ -45,9 +43,7 @@ module.exports = class BodyView extends Backbone.View
     # view loses event delegation only on a channel.
     _.defer => @delegateEvents()
 
-    if $('body').hasClass 'is-mobile'
-      console.log 'delegating mobile events'
-      @delegateEvents(@mobileEvents)
+    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
 
   startLoading: -> $('body').addClass 'is-loading'
 
@@ -58,7 +54,6 @@ module.exports = class BodyView extends Backbone.View
     elOffset = $el.offset().top
     elHeight = $el.height()
     windowHeight = $(window).height()
-    offset
 
     if elHeight < windowHeight
       offset = elOffset - ((windowHeight / 2) - (elHeight / 2))
@@ -68,15 +63,11 @@ module.exports = class BodyView extends Backbone.View
     $('html, body').animate {scrollTop: offset}, 100
 
   intercept: (e)->
-    console.log 'intercept'
-
     e.preventDefault()
     e.stopImmediatePropagation()
 
     # do not continue if clicking button
     return false if $(e.target).hasClass 'button--inblock'
-
-    console.log 'isBlock', isBlock
 
     isBlock = $(e.currentTarget).data('client') is 'Block'
     url = $(e.currentTarget).attr('href')
@@ -95,11 +86,9 @@ module.exports = class BodyView extends Backbone.View
     e.stopPropagation()
 
   bodyClick: (e) ->
-    console.log 'bodyClick'
     mediator.trigger 'body:click', e
 
   maybeIntercept: (e)->
-    console.log 'maybeIntercept'
     return unless $('body').hasClass 'is-mobile'
 
     href = $(e.currentTarget).attr("href")
@@ -110,11 +99,7 @@ module.exports = class BodyView extends Backbone.View
       window.location = href
 
   scrollToTop: (e) ->
-    console.log 'scrollToTop'
     e.preventDefault()
     e.stopPropagation()
 
     $("html, body").animate { scrollTop: 0 }, 300
-
-  dispose: ->
-    console.log 'here disposing'
