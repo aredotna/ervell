@@ -15,6 +15,7 @@
   margin-top 0
 
 privacy-color('.new-connection__search-result-', border-color)
+privacy-color('.feedback-', border-color)
 privacy-color('.new-connection__search-result-', color)
 privacy-light-color('.new-connection__search-result-', background-color)
 
@@ -38,12 +39,18 @@ privacy-light-color('.new-connection__search-result-', background-color)
     position absolute
 
 .new-connection__search-result.is-loading
-  -webkit-animation: glow .15s ease; /* Safari 4+ */
-  -moz-animation:    glow .15s ease; /* Fx 5+ */
-  -o-animation:      glow .15s ease; /* Opera 12+ */
-  animation:         glow .15s ease; /* IE 10+, Fx 29+ */
   background-color #fff
+  border 0
   .feedback
+    border 1px solid
+    position absolute
+    padding: 13px 5px 12px 7px;
+    width:94%;
+    margin: -13px 10px 0 -7px;
+    -webkit-animation: glow .14s ; /* Safari 4+ */
+    -moz-animation:    glow .14s ; /* Fx 5+ */
+    -o-animation:      glow .14s ; /* Opera 12+ */
+    animation:         glow .14s ; /* IE 10+, Fx 29+ */
     display block
     font-weight bold
   
@@ -51,12 +58,8 @@ privacy-light-color('.new-connection__search-result-', background-color)
     display none
 
 .new-connection__search-result.is-connected
-  border 1px solid
+  position relative
   opacity 0.3
-  width 100%
-  height 38px
-  padding 1em .5em 1em .5em
-  margin .7em 0 .7em 0
 
   .breadcrumb
     display block
@@ -65,9 +68,10 @@ privacy-light-color('.new-connection__search-result-', background-color)
     display none
 
 @-webkit-keyframes glow
-  100%  {border: 0px; padding: 1.3em .5em 1em 0.9em ; margin: -0.3em -0.3em .5em -0.4em; width: 105%; height: 48px;}
-
-
+  0% {border: 1px solid; padding: 13px 5px 12px 7px; width:94%; margin: -13px 10px 0 -7px; position: absolute;}
+  99% {border: 1px solid; padding: 18px 5px 17px 14px; margin: -18px 10px 0px -14px; width: 98.5%; position: absolute;}
+  100% {border: 0; padding: 13px 5px 12px 7px; width:94%; margin: -13px 10px 0 -7px; position: absolute;}
+  
 .new-connection__done-button
   position absolute
 
