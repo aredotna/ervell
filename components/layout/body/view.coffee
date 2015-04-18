@@ -25,6 +25,8 @@ module.exports = class BodyView extends Backbone.View
     'tap #scroll-top'                             : 'scrollToTop'
 
   initialize: (options) ->
+    console.log 'BodyView', @$el
+
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
 
     new LightboxRouter
@@ -39,7 +41,13 @@ module.exports = class BodyView extends Backbone.View
 
     new PathView el: @$('section.path--header')
 
-    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
+    # need to investigate this further.
+    # view loses event delegation only on a channel.
+    _.defer => @delegateEvents()
+
+    if $('body').hasClass 'is-mobile'
+      console.log 'delegating mobile events'
+      @delegateEvents(@mobileEvents)
 
   startLoading: -> $('body').addClass 'is-loading'
 
@@ -60,11 +68,15 @@ module.exports = class BodyView extends Backbone.View
     $('html, body').animate {scrollTop: offset}, 100
 
   intercept: (e)->
+    console.log 'intercept'
+
     e.preventDefault()
     e.stopImmediatePropagation()
 
     # do not continue if clicking button
     return false if $(e.target).hasClass 'button--inblock'
+
+    console.log 'isBlock', isBlock
 
     isBlock = $(e.currentTarget).data('client') is 'Block'
     url = $(e.currentTarget).attr('href')
@@ -82,9 +94,12 @@ module.exports = class BodyView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-  bodyClick: (e) -> mediator.trigger 'body:click', e
+  bodyClick: (e) ->
+    console.log 'bodyClick'
+    mediator.trigger 'body:click', e
 
   maybeIntercept: (e)->
+    console.log 'maybeIntercept'
     return unless $('body').hasClass 'is-mobile'
 
     href = $(e.currentTarget).attr("href")
@@ -95,7 +110,11 @@ module.exports = class BodyView extends Backbone.View
       window.location = href
 
   scrollToTop: (e) ->
+    console.log 'scrollToTop'
     e.preventDefault()
     e.stopPropagation()
 
     $("html, body").animate { scrollTop: 0 }, 300
+
+  dispose: ->
+    console.log 'here disposing'
