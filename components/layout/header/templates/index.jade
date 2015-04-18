@@ -25,18 +25,18 @@ header#layout-header
           a.dropdown__link.dropdown__link--notifications(href="/notifications") Notifications
             .notifications--count 0
         .dropdown__bottom
-          a.dropdown__link(href="/") Feed
-          a.dropdown__link(href="/#{user.get('slug')}/channels") My channels 
-          a.dropdown__link(href="/manage") #[span &boxur; manage]
-          a.dropdown__link(href="/#{user.get('slug')}/blocks") My blocks
-          a.dropdown__link(href="#") Settings
-          a.dropdown__link(href="/me/sign_out") Sign Out
+          span.dropdown__link: #[a(href="/#{user.get('slug')}/channels") My channels] (#[a(href="/manage") manage])
+          span.dropdown__link: a(href="/manage")
+          span.dropdown__link: a(href="/#{user.get('slug')}/blocks") My blocks
+          span.dropdown__link: a(href="#") Settings
+          span.dropdown__link: a(href="/me/sign_out") Sign Out
 
     .logo.dropdown--menu.right
       .logo-icon.dropdown--menu__trigger
         include ../../../../public/images/arena-mark.svg
       .dropdown.dropdown--size
         .dropdown__top
+          a.dropdown__link(href="/") Feed
           a.dropdown__link(href="/explore") Explore
           a.dropdown__link(href="/about/tools") Tools
           a.dropdown__link.no-border(href="/about") About &amp; FAQ
