@@ -66,8 +66,11 @@ block body
 
       p We also value transparency: we will never sell data without explicit authorization from the user. We will never show ads or join an ad network, and we're committed to retain complete control of the platform.
 
-    .static__labs.static--text
-      //.static-expandable
+    .static__api.static--text
+      h2.static--title--top#api API
+      p Our #[a(href="http://dev.are.na/documentation/channels") API] can be used as a CMS, and to experiment with new ways of presenting and interacting with content. #[a(href="http://beta.are.na/are-na/powered-by-are-na") Here ] is a selection of public applications powered by Are.na.
+
+    .static__roadmap.static--text
       h2.static--title--top#roadmap Roadmap
       p Here's a list of what we're working, planned features and recently completed ones:
         .static--small-text
@@ -99,9 +102,8 @@ block body
 
     .static__labs.static--text
       h2.static--title--top#labs Labs
-      p Our API can be used as a CMS, and to experiment with new ways of presenting and interacting with content. #[a(href="http://beta.are.na/are-na/powered-by-are-na") Here ] is a selection of public applications powered by Are.na.
-      p Education:Are.na is often used to organize educational material, research and group projects. We can offer support, workshops and tutorials to teachers and students.
-      p Generally, we welcome ideas on for different uses of the platform, and we are open to collaborations such as custom archives, CMS, research and consulting. Please contact us if you have something in mind.
+      p Are.na is often used to organize educational material, research and group projects. We can offer support, workshops and tutorials to teachers and students.
+      p Generally, we welcome ideas on for different uses of the platform, and we are open to collaborations such as custom archives, CMS, research and consulting. Please #[a(href="mailto:info@are.na") contact us] if you have something in mind.
 
     .static__faq.static--text
       h2.static--title--top#faq FAQs
@@ -175,7 +177,7 @@ block body
       p.static--no-p: a(mailto="info@are.na") info@are.na
       p.static--no-p: a(href="http://twitter.com/aredotna") Twitter
       p.static--no-p: a(href="http://instagram.com/aredotna") Instagram
-      p #[a(href="/terms") Terms of Service & Privacy Policy]
+      p.static: #[a.anchor(data-section="terms" href="/terms") Terms of Service] | #[a(href="/privacy") Privacy Policy]
 
   h3.static__menu
     ul
@@ -188,12 +190,13 @@ block body
       li: a.anchor(data-section="about-arena").static__menu__item.is-active About
       li: a.anchor(data-section="team").static__menu__item Team
       li: a.anchor(data-section="principles").static__menu__item Principles
+      li: a.anchor(data-section="api").static__menu__item API
       li: a.anchor(data-section="roadmap").static__menu__item Roadmap
       li: a.anchor(data-section="labs").static__menu__item Labs
       li: a.anchor(data-section="faq").static__menu__item FAQ
       li: a.anchor(data-section="supporters").static__menu__item Supporters
       li: a.anchor(data-section="contact").static__menu__item Contact
-      li: a.anchor(data-section="contact").static__menu__item Terms & Privacy
+      li: a.anchor(data-section="terms").static__menu__item Terms & Privacy
 
 block scripts
   script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
