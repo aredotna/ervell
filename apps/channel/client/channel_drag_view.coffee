@@ -44,7 +44,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
     blocks = @$(".grid__block:not(.grid__block--new-block)")
     if @viewOrder is 'desc'
-      index = (blocks.length - blocks.index(this)) + 1
+      index = (blocks.length - blocks.index(item)) + 1
     else
       index = blocks.index($(item)) + 1
 
