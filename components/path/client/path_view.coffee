@@ -12,8 +12,6 @@ module.exports = class PathView extends Backbone.View
     'click .toggle-settings-trigger' : 'toggleSettings'
 
   initialize: (options) ->
-    super
-
     if (sd.USER or sd.CHANNEL) and sd.CURRENT_USER
 
       model = if sd.USER then sd.USER else sd.CHANNEL

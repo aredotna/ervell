@@ -20,6 +20,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
     @setupFileDrop()
 
   handleDrag: (e)->
+    return false if mediator.shared.state.get('isDraggingBlocks')
     @$('.channel--drop-zone').addClass('is-droppable')
 
   clearDrag: (e) ->

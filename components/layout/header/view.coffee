@@ -32,6 +32,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
     mediator.on 'notifications:cleared', @unsetNotifications, @
+    mediator.shared.state.on 'change', @toggle, @
 
     if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
       new Waypoint.Sticky
@@ -48,6 +49,13 @@ module.exports = class HeaderView extends Backbone.View
 
       new NewChannelView
         el: @$('.new-channel-dropdown__container')
+
+
+  toggle: ->
+    if mediator.shared.state.get('isDraggingBlocks')
+      @$el.hide()
+    else
+      @$el.show()
 
   setActive: (e)->
     @$el.addClass 'is-active'
