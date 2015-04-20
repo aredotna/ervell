@@ -12,7 +12,6 @@ module.exports = class NewBlockView extends Backbone.View
 
   events:
     'click #grid__block--new-block__content-field'          : 'setActive'
-    'focus textarea#grid__block--new-block__content-field'  : 'setActive'
     'blur  textarea#grid__block--new-block__content-field'  : 'removeActive'
     'click .grid__block--new-block__cancel'                 : 'cancelForm'
     'click .grid__block--new-block__submit'                 : 'createBlock'
@@ -26,6 +25,7 @@ module.exports = class NewBlockView extends Backbone.View
 
   setActive: ->
     @$el.addClass 'active'
+    @$('#grid__block--new-block__content-field').focus()
 
   removeActive: ->
     @$el.removeClass 'active'
