@@ -11,6 +11,7 @@ BlockSkeletonView = require './client/block_skeleton_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
+ChannelDragView = require './client/channel_drag_view.coffee'
 ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
 ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
 ChannelExportView = require '../../components/channel_export/client/channel_export_view.coffee'
@@ -73,6 +74,7 @@ module.exports = class ChannelView extends Backbone.View
       @setupExportView()
       @setupEditTitleView()
       @setupEditDescriptionView()
+      @setUpDragView()
 
     @maybeSetEmpty()
 
@@ -116,6 +118,13 @@ module.exports = class ChannelView extends Backbone.View
         model: @channel
         blocks: @blocks
         autoRender: should_render
+
+  setUpDragView: ->
+    @dragView = new ChannelDragView
+      el: @$('.grid')
+      model: @channel
+
+    @dragView.setupDragAndDrop()
 
   setupVisibilityView: ->
     @channelVisibilityView = new ChannelVisibilityView
