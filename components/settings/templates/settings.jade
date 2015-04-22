@@ -1,0 +1,32 @@
+#auth-page.vam-outer
+  .vam-inner
+    section#auth-body
+      form.auth-login-email.auth-form( action='/me/sign_in' )
+        .form__field
+          label First name
+          input.input--wide.input--relative.is-block(
+            name='first_name' type='text' value="#{user.get('first_name')}" placeholder='First name' required autofocus= autofocus
+          )
+        .form__field
+          label Last name
+          input.input--wide.input--relative.is-block(
+            name='first_name' type='text' value="#{user.get('last_name')}" placeholder='Last name' required autofocus= autofocus
+          )
+        .form__field
+          label Email
+          input.input--wide.input--relative.is-block(
+            name='email' type='email' value="#{user.get('email')}" placeholder='Email' required autofocus= autofocus
+          )
+        .form__field
+          label Password
+          input.input--wide.input--relative.is-block(
+            name='password' type='password' value="#{user.get('Password')}" placeholder='Password' required autofocus= autofocus
+          )
+        .form__field
+          label Repeat password
+          input.input--wide.input--relative.is-block(
+            name='password_confirmation' type='password' value="#{user.get('Password')}" placeholder='Password' required autofocus= autofocus
+          )
+        .auth-errors &nbsp;
+
+        button#auth-login.auth-submit.button--wide.button--border.button--relative Login

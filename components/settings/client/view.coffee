@@ -23,7 +23,10 @@ module.exports = class SettingsView extends ModalView
     super
 
   preInitialize: (options = {}) ->
+    @model = mediator.shared.current_user
+
     @templateData =
+      user: @model
       pathname: location.pathname
 
     mediator.on 'modal:closed', @logClose

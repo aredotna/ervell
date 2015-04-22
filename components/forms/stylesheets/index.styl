@@ -58,6 +58,18 @@ input, input[type='text'], input[type='number'], input[type="search"], textarea
 fieldset
   margin 0.6em 0
 
+.form__field
+  field right
+
+  .input--wide, input[type="text"].input--wide
+    width 250px
+    margin 0
+
+label
+  label()
+  margin-right s_caption
+  font-size s_caption
+
 textarea
   resize none
   outline none
@@ -78,7 +90,7 @@ button
   font-family font_sans
 
   &:hover
-    background-color backgroundgray
+    hover-color backgroundgray
 
   &.button--border
     border-top 1px solid textgray
