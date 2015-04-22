@@ -28,7 +28,7 @@ header#layout-header
           span.dropdown__link: #[a(href="/#{user.get('slug')}/channels") My channels] (#[a(href="/manage") manage])
           span.dropdown__link: a(href="/manage")
           span.dropdown__link: a(href="/#{user.get('slug')}/blocks") My blocks
-          span.dropdown__link: a(href="#") Settings
+          span.dropdown__link.dropdown__link--settings: a(href="#") Settings
           span.dropdown__link: a(href="/me/sign_out") Sign Out
 
     .logo.dropdown--menu.right

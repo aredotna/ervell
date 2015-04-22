@@ -2,6 +2,7 @@ _ = require 'underscore'
 Backbone = require 'backbone'
 SearchBarView = require '../../search_bar/client/view.coffee'
 AuthModalView = require '../../auth_modal/view.coffee'
+SettingsView = require '../../settings/client/view.coffee'
 AuthRouter = require './auth_router.coffee'
 mediator = require '../../../lib/mediator.coffee'
 Notifications = require "../../../collections/notifications.coffee"
@@ -19,6 +20,7 @@ module.exports = class HeaderView extends Backbone.View
     'tap .btn-login'                      : 'login'
     'tap .btn-signup'                     : 'signup'
     'tap .dropdown--menu__trigger'        : 'toggleDropdown'
+    'tap .dropdown__link--settings'       : 'openSettings'
 
   initialize: (options) ->
 
@@ -89,9 +91,6 @@ module.exports = class HeaderView extends Backbone.View
     if $(window).width() < 410
       $('.container').toggleClass 'transparent'
 
-  openAuth: (options) ->
-    @modal = new AuthModalView _.extend({ width: '500px' }, options)
-
   closeDropdown: (e)->
     if !e or (!@$el.is(e.target) and @$el.has(e.target).length is 0)
       $('.dropdown--is_active').removeClass 'dropdown--is_active'
@@ -103,3 +102,10 @@ module.exports = class HeaderView extends Backbone.View
   login: (e) ->
     e.preventDefault()
     mediator.trigger 'open:auth', mode: 'login'
+
+  openAuth: (options) ->
+    @modal = new AuthModalView _.extend({ width: '500px' }, options)
+
+  openSettings: (options) ->
+    @modal = new SettingsView
+
