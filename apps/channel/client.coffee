@@ -74,7 +74,7 @@ module.exports = class ChannelView extends Backbone.View
       @setupExportView()
       @setupEditTitleView()
       @setupEditDescriptionView()
-      @setUpDragView()
+      @setUpDragView() unless $('body').hasClass 'is-mobile'
 
     @maybeSetEmpty()
 
