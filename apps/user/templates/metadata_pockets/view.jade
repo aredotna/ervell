@@ -1,0 +1,13 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "View"
+  - extraClasses = "is-readable"
+  - id = "metadata--view"
+
+block content
+  ul.breadcrumb
+    li: a(href="/#{author.get('slug')}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
+    li: a(href="/#{author.get('slug')}/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "").metadata--selector__option Channels
+    li: a(href="/#{author.get('slug')}/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
+

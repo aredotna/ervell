@@ -11,34 +11,14 @@ block path
 block right
   if author && user && author.id == user.id
     .channel-settings.edit-profile.is-editable
-      a(href="#") Profile settings
-      br
       a(href="/manage") Manage channels
-
-  else if author && user && author.id != user.id && !channel
-    .channel-settings.edit-profile.is-editable
-      a.follow_button.pointer(data-type="User", data-id="#{author.id}")
 
 block metadata
   .metadata
-    .metadata__column.is-minimized
-      .metadata__expand
-      .metadata__title Info
-        if author.has('metadata')
-          .metadata__text Son of @broskoski, father of a cat. NYC.
-        else
-          .metadata__text —
+    include metadata_pockets/info
     if !following && !followers
-      .metadata__column
-        .metadata__title View
-        .metadata__text
-          ul.breadcrumb
-            li: a(href="/#{author.get('slug')}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
-            li: a(href="/#{author.get('slug')}/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "" ).metadata--selector__option Channels
-            li: a(href="/#{author.get('slug')}/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
-      .metadata__column
-        .metadata__title Followers
-        .metadata__text: a(href="/" + author.get('slug') + '/followers')= author.get('follower_count')
-      .metadata__column
-        .metadata__title Following
-        .metadata__text: a(href="/" + author.get('slug') + '/following')= author.get('following_count')
+      include metadata_pockets/view
+      if author && user && author.id != user.id
+        include metadata_pockets/actions
+      include metadata_pockets/followers
+      include metadata_pockets/following

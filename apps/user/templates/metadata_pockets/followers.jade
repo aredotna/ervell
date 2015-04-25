@@ -1,0 +1,9 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Followers"
+  - extraClasses = "is-readable"
+  - id = "metadata--actions"
+
+block content
+  a(href="/" + author.get('slug') + '/followers')= author.get('follower_count')
