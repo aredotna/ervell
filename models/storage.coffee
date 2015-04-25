@@ -7,7 +7,6 @@ module.exports = class Storage extends Base
     JSON.parse localStorage.getItem(key)
 
   setItem: (key, value) ->
-    console.log 'typeof value is Array', typeof value is Array
     value = JSON.stringify(value) if typeof value is Array
     localStorage.setItem(key, value)
     @set key, value

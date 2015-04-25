@@ -14,4 +14,3 @@ module.exports = class RecentConnections extends Backbone.Collection
       success: =>
         @sync('delete', found) if (found = @get model.id)
         create = @create model.toJSON()
-        console.log 'create successful', create

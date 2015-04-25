@@ -21,7 +21,6 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
     @$('.manage__block').each @initBlockView
 
   initBlockView: (index, el) =>
-    console.log 'init block view'
     $block = $(el)
     block = @blocks.get $block.data('id')
 
