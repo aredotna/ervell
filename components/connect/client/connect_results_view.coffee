@@ -28,7 +28,7 @@ module.exports = class ConnectResultsView extends Backbone.View
         type: 'DELETE'
         url: "#{sd.API_URL}/channels/#{id}/blocks/#{@block.id}"
     else
-      mediator.shared.recent_connections.create @collection.get(id).toJSON()
+      mediator.shared.recent_connections.shove @collection.get(id)
       analytics.track.click 'Connection created'
       reqOpts =
         type: "POST"

@@ -8,3 +8,10 @@ module.exports = class RecentConnections extends Backbone.Collection
   model: Block
 
   localStorage: new Backbone.LocalStorage "RecentConnections"
+
+  shove: (model) ->
+    @fetch
+      success: =>
+        @sync('delete', found) if (found = @get model.id)
+        create = @create model.toJSON()
+        console.log 'create successful', create
