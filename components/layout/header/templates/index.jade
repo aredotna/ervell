@@ -22,24 +22,21 @@ header#layout-header
       .dropdown.dropdown--size
         .dropdown__top
           a.dropdown__link.dropdown__link--profile(href="/#{user.get('slug')}") My profile
+          a.dropdown__link.dropdown__link--feed(href="/") Feed
+          a.dropdown__link.dropdown__link--explore(href="/explore") Explore
           a.dropdown__link.dropdown__link--notifications(href="/notifications") Notifications
             .notifications--count 0
         .dropdown__bottom
           span.dropdown__link: #[a(href="/#{user.get('slug')}/channels") My channels] (#[a(href="/manage") manage])
-          span.dropdown__link: a(href="/manage")
           span.dropdown__link: a(href="/#{user.get('slug')}/blocks") My blocks
+          span.dropdown__link: a(href="/about/tools") Tools
           span.dropdown__link.dropdown__link--settings: a(href="#") Settings
+          span.dropdown__link: a(href="/about") About &amp; FAQ
           span.dropdown__link: a(href="/me/sign_out") Sign Out
 
     .logo.dropdown--menu.right
-      .logo-icon.dropdown--menu__trigger
+      a(href="/").logo-icon.dropdown--menu__trigger
         include ../../../../public/images/arena-mark.svg
-      .dropdown.dropdown--size
-        .dropdown__top
-          a.dropdown__link(href="/") Feed
-          a.dropdown__link(href="/explore") Explore
-          a.dropdown__link(href="/about/tools") Tools
-          a.dropdown__link.no-border(href="/about") About &amp; FAQ
 
   else
     .layout-header__register
