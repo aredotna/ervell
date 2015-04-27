@@ -11,10 +11,12 @@ newBlockTemplate = -> require('../templates/new_block.jade') arguments...
 module.exports = class NewBlockView extends Backbone.View
 
   events:
+    'click .add-block__placeholder__choose'                 : 'triggerFileDialog'
     'click #grid__block--new-block__content-field'          : 'setActive'
     'blur  textarea#grid__block--new-block__content-field'  : 'removeActive'
     'click .grid__block--new-block__cancel'                 : 'cancelForm'
     'click .grid__block--new-block__submit'                 : 'createBlock'
+    'click .add-block__placeholder'                         : 'setActive'
 
   initialize: (options)->
     @blocks = options.blocks
@@ -23,12 +25,18 @@ module.exports = class NewBlockView extends Backbone.View
     @render() if options.autoRender
     @setElCaches() unless options.autoRender
 
-  setActive: ->
+  setActive: (e) ->
+    $target = $(e.currentTarget)
+    return false if $target.hasClass '.add-block__placeholder__choose'
     @$el.addClass 'active'
     @$('#grid__block--new-block__content-field').focus()
 
   removeActive: ->
     @$el.removeClass 'active'
+
+  triggerFileDialog: ->
+    $('#fileupload input:file').trigger('click')
+    return false
 
   cancelForm: (e)->
     $parent = $(e.target).closest('.grid__block--new-block__form')

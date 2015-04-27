@@ -13,7 +13,7 @@
   fieldset
     margin 0
 
-  .plus-placeholder
+  .plus-placeholder, .add-block__placeholder
     position absolute
     width 90%
     left 5%
@@ -22,6 +22,18 @@
     text-align center
     pointer-events none
     color lightgray
+
+  .add-block__placeholder
+    top 13%
+    font-size 28px
+    line-height 1.7
+    display none
+    pointer-events all
+
+  .pointer
+    font-weight normal
+    color lightgray
+
 
 .grid__block--new-block__content-field
   opacity 0
@@ -39,6 +51,15 @@
 
   .plus-placeholder
     display none
+
+  .add-block__placeholder
+    display block
+
+.grid__block.active .add-block__placeholder
+    display none
+
+.add-block__placeholder__choose
+  border-bottom 2px solid lightgray
 
 .grid__block--new-block__content-field::-webkit-input-placeholder
   font-size 22px

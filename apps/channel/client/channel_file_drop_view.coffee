@@ -49,7 +49,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
       drop: (e, data) =>
         analytics.track.click "Files dropped on #{@channel.get('status')} channel"
-        @$('.channel--drop-zone').addClass('is-uploading')
+        @$('.channel--drop-zone').addClass('is-droppable is-uploading')
         mediator.trigger "files:dropped",
           count: data.files.length
 
@@ -70,6 +70,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
         mediator.trigger "files:fail"
 
       start: (e, data) =>
+        @$('.channel--drop-zone').addClass('is-droppable is-uploading')
         mediator.trigger "files:start"
 
       done: (e, data) =>

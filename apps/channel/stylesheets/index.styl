@@ -12,12 +12,12 @@
     display table
 
 .channel--drop-zone
-  display none
+  transform translateY(-1000%)
   background-color rgba(255,255,255, 0.96)
   z-index lightbox_z
 
   &.is-droppable
-    display block
+    transform translateY(0)
 
   .abs-fill, &.abs-fill
     position fixed
