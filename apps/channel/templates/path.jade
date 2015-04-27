@@ -9,9 +9,9 @@ block path
     else
       span(id="attribute-title_#{channel.id}")= channel.get('title')
   if followers
-    li.path__sub followers
+    li.path__sub Followers
   if following
-    li.path__sub following
+    li.path__sub Following
 
 block right
   if channel
