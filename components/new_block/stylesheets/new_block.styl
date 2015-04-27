@@ -24,7 +24,7 @@
     color lightgray
 
   .add-block__placeholder
-    top 13%
+    top 10%
     font-size 28px
     line-height 1.7
     display none
@@ -96,3 +96,9 @@
   position absolute
   bottom 1em
   right 1em
+
+@media (max-width:500px)
+  .grid__block--new-block .plus-placeholder
+    display none
+  .grid__block--new-block .add-block__placeholder
+    display block
