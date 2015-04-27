@@ -93,7 +93,7 @@ module.exports = class BodyView extends Backbone.View
 
     href = $(e.currentTarget).attr("href")
 
-    if href.indexOf(location.hostname) > -1 and href isnt "#" and $(e.currentTarget).attr("target") isnt "_blank"
+    if href?.indexOf(location.hostname) > -1 and href isnt "#" and $(e.currentTarget).attr("target") isnt "_blank"
       e.preventDefault()
       e.stopImmediatePropagation()
       window.location = href
