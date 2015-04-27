@@ -12,7 +12,11 @@
   display flex
   justify-content space-between
   z-index header_z
-  transform translate3d(0, 0, 0)
+  transform translate3d(0, 0, 1px)
+  -webkit-transform translate3d(0, 0, 1px)
+  -moz-transform translate3d(0, 0, 1px)
+  -o-transform translate3d(0, 0, 1px)
+  transform translate3d(0, 0, 1px)
 
   &.is-active, .has-results
     z-index header_z + 2
@@ -225,7 +229,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown__top
   background-color secondbackgroundgray
-  
+
   .dropdown__link
     line-height 4em
     border-bottom 1px solid bordergray
@@ -241,10 +245,10 @@ privacy-color('.search__results__result--privacy-', color)
   line-height 2.6em
   font-weight bold
   border 0
-  
+
   span
     color lightgray
-  
+
   &:hover
     span
       color hovergray
@@ -265,7 +269,7 @@ privacy-color('.search__results__result--privacy-', color)
   float right
   height 100%
 
-/* 
+/*
   .dropdown__notifications
     width 100%
     height 160px
@@ -307,7 +311,7 @@ privacy-color('.search__results__result--privacy-', color)
     text-align center
 
     &:hover
-      color lightgrayplus  
+      color lightgrayplus
 */
 
 .dropdown--is_active .dropdown
@@ -339,11 +343,11 @@ privacy-color('.search__results__result--privacy-', color)
 
   .new-channel-btn--caption
     display none
-    
+
   .dropdown
     border 0
     border-bottom 1px solid lightgrayplus
-  
+
     &.dropdown--size
       width 100%
       height auto
