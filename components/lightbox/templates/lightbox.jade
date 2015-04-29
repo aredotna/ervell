@@ -5,17 +5,19 @@
 
   - if(block.has('image') && block.get('class') != 'Media')
     .lightbox__content__img
-      img(src="#{block.resizeImage(1000,1000, 'original')}")
+      a(href="#{block.getSourceUrl()}" target="_blank")
+        img(src="#{block.resizeImage(1000,1000, 'original')}")
 
   - if(block.get('class') == 'Attachment' && !block.has('image'))
     .lightbox__content__attachment.valign--flex.halign--flex
-      if(block.get('attachment').extension == 'mp3')
-        img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
-      if(block.get('attachment').extension == 'pdf')
-        img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-      if(block.get('attachment').extension == 'embed')
-        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+      a(href="#{block.getSourceUrl()}" target="_blank")
+        if(block.get('attachment').extension == 'mp3')
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
+        if(block.get('attachment').extension == 'pdf')
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+        if(block.get('attachment').extension == 'embed')
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
 
   - if(block.get('class') == 'Text')
     .lightbox__content__text
