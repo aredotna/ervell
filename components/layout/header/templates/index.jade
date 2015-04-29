@@ -1,6 +1,5 @@
 include ../../../avatar/templates/avatar
 header#layout-header
-  //- img(src="#{sd.IMAGE_PATH}iconic/magnifying-glass.svg", class="iconic iconic-md header--icon")
   .layout-header__search
     input#layout-header__search__input(type="text" placeholder="Search Are.na")
     .header--icon
@@ -27,7 +26,7 @@ header#layout-header
           a.dropdown__link.dropdown__link--notifications(href="/notifications") Notifications
             .notifications--count 0
         .dropdown__bottom
-          span.dropdown__link: #[a(href="/#{user.get('slug')}/channels") My channels] (#[a(href="/manage") manage])
+          span.dropdown__link: #[a(href="/#{user.get('slug')}/channels") My channels ] (#[a(href="/manage") manage ])
           span.dropdown__link: a(href="/#{user.get('slug')}/blocks") My blocks
           span.dropdown__link: a(href="/about/tools") Tools
           span.dropdown__link.dropdown__link--settings: a(href="#") Settings
@@ -45,8 +44,3 @@ header#layout-header
       span or &nbsp;
       span
         a(href="#log_in").btn-signup Sign Up
-
-.rotate
-  .rotate__text
-    .iconic(data-glyph="loop-circular")
-    | Please rotate your device for an optimal Are.na experience.
