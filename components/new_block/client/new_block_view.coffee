@@ -32,7 +32,7 @@ module.exports = class NewBlockView extends Backbone.View
     @$('#grid__block--new-block__content-field').focus()
 
   removeActive: ->
-    @$el.removeClass 'active'
+    @$el.removeClass 'active' unless @$field.val()
 
   triggerFileDialog: ->
     $('#fileupload input:file').trigger('click')

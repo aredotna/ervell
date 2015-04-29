@@ -11,8 +11,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
   setupDragAndDrop: ->
     @sortable = new Sortable @el,
-      draggable: '.grid__block'
-      filter: '.grid__block--new-block'
+      draggable: '.grid__block--item'
       scroll: true
       onStart: @freezeNewBlock
       onMove: @onMove
