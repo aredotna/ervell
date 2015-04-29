@@ -11,7 +11,8 @@ div(class="grid__block grid__block--#{block.getClass()} #{block.getPermissions(u
         block content
 
       .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
-        block overlay
+        - if(user)
+          block overlay
 
         - if(channel && user.has('id'))
           .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
