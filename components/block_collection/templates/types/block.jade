@@ -14,7 +14,7 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
         - if(user)
           block overlay
 
-        - if(channel && user.has('id'))
+        - if(channel && user && user.has('id'))
           .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
 
       if user
