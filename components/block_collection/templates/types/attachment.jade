@@ -1,0 +1,21 @@
+extends block
+
+block content
+  - if(block.has('image'))
+    img(
+      src="#{block.resizeImage()}"
+      alt="#{block.get('description')}"
+    ).grid__block__content__image
+  - else
+    .valign--flex.halign--flex.grid__block__channel--attachment-bk
+      - if((block.get('attachment').extension === 'mp3' || block.get('attachment').extension === 'pdf'))
+        img(
+          data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg"
+          data-file-extension="#{block.get('attachment').extension}"
+          class="iconic iconic-lg"
+        )
+
+block overlay
+  .button--inblock.button--inblock--left.grid__block__source__link Source
+  if user.has('id')
+    .button--inblock.button--inblock--right.grid__block__connect-btn Connect &rarr;
