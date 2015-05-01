@@ -1,6 +1,6 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-Poller = require 'backbone-poller'
+# Poller = require 'backbone-poller'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 InfiniteView = require '../../../components/pagination/infinite_view.coffee'
@@ -39,10 +39,10 @@ module.exports = class FeedView extends Backbone.View
         itemSelector: @$el
 
   startPolling: ->
-    poller = Poller.get(@collection,
-      delay: [3000]
-      delayed: 10000
-    ).start()
+    # poller = Poller.get(@collection,
+    #   delay: [3000]
+    #   delayed: 10000
+    # ).start()
 
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)
