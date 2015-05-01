@@ -25,7 +25,7 @@ module.exports = class FeedView extends Backbone.View
 
   initialFetch: =>
     @setSharedBlocks()
-    @startPolling()
+    # @startPolling()
 
     mediator.trigger 'load:stop'
 
@@ -57,7 +57,7 @@ module.exports = class FeedView extends Backbone.View
   setSharedBlocks: ->
     blocks = new Blocks @collection.getAllItems()
     if mediator.shared.blocks?
-      @updateTitle(diff) if (diff = blocks.length - mediator.shared.blocks.length)
+      # @updateTitle(diff) if (diff = blocks.length - mediator.shared.blocks.length)
     mediator.shared.blocks = blocks
 
   initBlockView: (index, el) =>
