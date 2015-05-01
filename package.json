@@ -11,7 +11,6 @@
     "backbone": "*",
     "backbone-cache-sync": "*",
     "backbone-fetch-cache": "*",
-    "backbone-poller": "^1.0.1",
     "backbone-super-sync": "*",
     "backbone.localstorage": "^1.1.16",
     "blueimp-file-upload": "*",
