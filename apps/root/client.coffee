@@ -1,10 +1,12 @@
 Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
+scrollFrame = require 'scroll-frame'
 sd = require("sharify").data
 Feed = require "../../collections/feed.coffee"
 Notifications = require "../../collections/notifications.coffee"
 FeedView = require './client/feed_view.coffee'
+
 mediator = require '../../lib/mediator.coffee'
 
 module.exports = class RootUserView extends Backbone.View
@@ -30,6 +32,8 @@ module.exports.init = ->
       new FeedView
         el: $ ".feed-container"
         collection: feed
+
+      scrollFrame '.feed-container a'
 
     else if sd.FEED_TYPE is 'notifications'
       feed = new Notifications()

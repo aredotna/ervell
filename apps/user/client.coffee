@@ -5,6 +5,7 @@
 Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
+scrollFrame = require 'scroll-frame'
 sd = require("sharify").data
 Channel = require "../../models/channel.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
@@ -28,6 +29,8 @@ module.exports.init = ->
   new UserBlockCollectionView
     el: $ ".grid"
     blocks: blocks
+
+  scrollFrame '.grid a'
 
   new InfiniteView
     context: $ ".grid"
