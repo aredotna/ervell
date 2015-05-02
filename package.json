@@ -32,6 +32,7 @@
     "query-params": "*",
     "redis": "*",
     "s3-policy": "*",
+    "scroll-frame": "0.0.10",
     "sharify": "*",
     "sortablejs": "^1.1.1",
     "underscore": "*",
