@@ -30,7 +30,7 @@ module.exports.init = ->
     el: $ ".grid"
     blocks: blocks
 
-  scrollFrame '.grid a'
+  # scrollFrame '.grid__block--channel a'
 
   new InfiniteView
     context: $ ".grid"

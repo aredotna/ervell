@@ -63,11 +63,11 @@ module.exports = class BodyView extends Backbone.View
     $('html, body').animate {scrollTop: offset}, 100
 
   intercept: (e)->
+    # do not continue if clicking button
+    return true if $(e.target).hasClass('button--inblock') || $(e.currentTarget).data('client') is 'Channel'
+
     e.preventDefault()
     e.stopImmediatePropagation()
-
-    # do not continue if clicking button
-    return false if $(e.target).hasClass 'button--inblock'
 
     isBlock = $(e.currentTarget).data('client') is 'Block'
     url = $(e.currentTarget).attr('href')
