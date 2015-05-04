@@ -4,6 +4,7 @@ ModalView = require '../../modal/view.coffee'
 Form = require '../../mixins/form.coffee'
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
+AvatarView = require './avatar_view.coffee'
 CurrentUser = require '../../../models/logged_out_user.coffee'
 
 template = -> require('../templates/settings.jade') arguments...
@@ -15,7 +16,7 @@ module.exports = class SettingsView extends ModalView
 
   events: -> _.extend super,
     'click .auth-toggle' : 'toggleMode'
-    'submit form'        : 'submit'
+    'submit .auth-login-settings' : 'submit'
     'click #auth-submit' : 'submit'
 
   initialize: (options) ->
@@ -30,6 +31,13 @@ module.exports = class SettingsView extends ModalView
       pathname: location.pathname
 
     mediator.on 'modal:closed', @logClose
+
+    $.ajax
+      url: "#{sd.API_URL}/uploads/policy"
+      success: (policy) =>
+        new AvatarView
+          el: @$('#avatar')
+          policy: policy
 
   submit: (e) ->
     return unless @validateForm()

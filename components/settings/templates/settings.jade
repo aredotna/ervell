@@ -1,10 +1,9 @@
-include ../../avatar/templates/avatar
-
 #auth-page.vam-outer
   .vam-inner
-    +avatar(user)
+    #avatar
+      //- rendered client side
     section#auth-body
-      form.auth-login-email.auth-form( action='/me/sign_in' )
+      form.auth-login-settings.auth-form( action='/me/sign_in' )
         .form__field
           label First name
           input.input--wide.input--relative.is-block(
