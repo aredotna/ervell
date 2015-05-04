@@ -19,6 +19,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
+  # syncAuth()
   # setupFastClick()
   initShortCuts()
   showBetaMessage()
@@ -69,11 +70,24 @@ setupPusherAndCurrentUser = ->
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
 
+syncAuth = module.exports.syncAuth = ->
+  # Log out of Force if you're not logged in to Gravity
+  if sd.CURRENT_USER
+    $.ajax
+      url: "#{sd.API_URL}/accounts"
+      success: ensureFreshUser
+      error: ->
+        $.ajax
+          method: 'GET'
+          url: '/me/sign_out'
+          complete: ->
+            window.location.reload()
+
 ensureFreshUser = (data) ->
-  return unless sd.CURRENT_USER
+  return unless sd.CURRENT_USER and sd.CURRENT_USER.id is 15
   for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
                'last_name', 'manifest', 'notification_count', 'shortcuts_id', 'slug', 'username']
-    if not _.isEqual data[attr], sd.CURRENT_USER[attr]
+    if not _.isEqual data.user[attr], sd.CURRENT_USER[attr]
       return $.ajax('/me/refresh').then -> mediator.trigger 'current_user:refreshed'
 
 setupAjaxHeaders = ->
