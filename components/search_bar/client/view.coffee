@@ -44,6 +44,9 @@ module.exports = class SearchBarView extends Backbone.View
     e.preventDefault()
     document.location.href = "/search/#{@getQuery()}"
 
+  reset: ->
+    # nothing
+
   search: (e) ->
     e.preventDefault()
 
