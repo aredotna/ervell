@@ -9,7 +9,8 @@ Notifications = require "../../../collections/notifications.coffee"
 SmallFeedView = require '../../feed/client/small_feed_view.coffee'
 NewChannelView = require '../../new_channel/client/new_channel_view.coffee'
 sd = require('sharify').data
-Backbone.$ = $
+
+template = -> require('./templates/index.jade') arguments...
 
 module.exports = class HeaderView extends Backbone.View
 
@@ -35,6 +36,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'notifications:synced', @maybeSetNotifications, @
     mediator.on 'notifications:cleared', @unsetNotifications, @
     mediator.shared.state.on 'change', @toggle, @
+    @listenTo mediator.shared.current_user, 'change', @render
 
     if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
       new Waypoint.Sticky
@@ -51,7 +53,6 @@ module.exports = class HeaderView extends Backbone.View
 
       new NewChannelView
         el: @$('.new-channel-dropdown__container')
-
 
   toggle: ->
     if mediator.shared.state.get('isDraggingBlocks')
@@ -108,4 +109,8 @@ module.exports = class HeaderView extends Backbone.View
 
   openSettings: (options) ->
     @modal = new SettingsView
+
+  render: =>
+    @$el.html template
+      user: mediator.shared.current_user
 
