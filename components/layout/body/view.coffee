@@ -64,7 +64,7 @@ module.exports = class BodyView extends Backbone.View
 
   intercept: (e)->
     # do not continue if clicking button
-    return true if $(e.target).hasClass('button--inblock') || $(e.currentTarget).data('client') is 'Channel'
+    return true if $(e.target).hasClass('button--inblock')
 
     e.preventDefault()
     e.stopImmediatePropagation()

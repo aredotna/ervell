@@ -32,21 +32,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.shared.state.on 'change', @toggle, @
     @listenTo mediator.shared.current_user, 'change', @render
 
-    if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
-      new Waypoint.Sticky
-        element: $('.path__inner')
-        offset: 3
-
-    if !sd.CURRENT_USER
-      new AuthRouter pushState: false
-    else
-      @notifications = new Notifications()
-      mediator.shared.notifications = @notifications
-      @notifications.fetch()
-      @notifications.on 'sync', -> mediator.trigger 'notifications:synced', @
-
-      new NewChannelView
-        el: @$('.new-channel-dropdown__container')
+    @postRender()
 
   toggle: ->
     if mediator.shared.state.get('isDraggingBlocks')
@@ -108,8 +94,27 @@ module.exports = class HeaderView extends Backbone.View
     @$el.html template
       user: mediator.shared.current_user
 
+    @postRender()
+
+  postRender: ->
     @searchBarView = new SearchBarView
       el: @$('.layout-header__search')
       $input: @$('#layout-header__search__input')
       $results: @$('.layout-header__search__results')
+
+    if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
+      new Waypoint.Sticky
+        element: $('.path__inner')
+        offset: 3
+
+    if !sd.CURRENT_USER
+      new AuthRouter pushState: false
+    else
+      @notifications = new Notifications()
+      mediator.shared.notifications = @notifications
+      @notifications.fetch()
+      @notifications.on 'sync', -> mediator.trigger 'notifications:synced', @
+
+      new NewChannelView
+        el: @$('.new-channel-dropdown__container')
 
