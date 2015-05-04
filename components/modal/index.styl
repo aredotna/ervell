@@ -122,8 +122,9 @@ body.is-modal
   max-width 400px
   margin auto
 
-#auth-login, #auth-register, #auth-forgot
+#auth-login, #auth-register, #auth-forgot, #auth-settings
   margin-top 4px
+  line-height 45px
   border-top 1px solid bordergray
 
 .auth-submit
@@ -155,6 +156,12 @@ body.is-modal
     content "Requesting..."
 
   #auth-forgot&[data-state=success]:before
+    content "Success"
+
+  #auth-settings&[data-state=loading]:before
+    content "Updating your profile"
+
+  #auth-settings&[data-state=success]:before
     content "Success"
 
 .auth-logo

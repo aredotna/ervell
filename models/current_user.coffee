@@ -14,8 +14,9 @@ module.exports = class CurrentUser extends User
   url: -> "#{sd.API_URL}/accounts"
 
   sync: (method, model, options = {}) ->
-    options.data ?= {}
-    options.data.auth_token = @get 'access_token'
+    if method is 'read'
+      options.data ?= {}
+      options.data.auth_token = @get 'access_token'
     super
 
   parse: (response) ->

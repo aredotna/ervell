@@ -1,5 +1,8 @@
+include ../../avatar/templates/avatar
+
 #auth-page.vam-outer
   .vam-inner
+    +avatar(user)
     section#auth-body
       form.auth-login-email.auth-form( action='/me/sign_in' )
         .form__field
@@ -10,7 +13,7 @@
         .form__field
           label Last name
           input.input--wide.input--relative.is-block(
-            name='first_name' type='text' value="#{user.get('last_name')}" placeholder='Last name' required autofocus= autofocus
+            name='last_name' type='text' value="#{user.get('last_name')}" placeholder='Last name' required autofocus= autofocus
           )
         .form__field
           label Email
@@ -20,13 +23,13 @@
         .form__field
           label Password
           input.input--wide.input--relative.is-block(
-            name='password' type='password' value="#{user.get('Password')}" placeholder='Password' required autofocus= autofocus
+            name='password' type='password' placeholder='Password'
           )
         .form__field
           label Repeat password
           input.input--wide.input--relative.is-block(
-            name='password_confirmation' type='password' value="#{user.get('Password')}" placeholder='Password' required autofocus= autofocus
+            name='password_confirmation' type='password' placeholder='Repeat password'
           )
         .auth-errors &nbsp;
 
-        button#auth-login.auth-submit.button--wide.button--border.button--relative Save
+        button#auth-settings.auth-submit.button--wide.button--border.button--relative Save
