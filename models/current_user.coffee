@@ -11,6 +11,10 @@ Backbone = require 'backbone'
 module.exports = class CurrentUser extends User
   recentConnectionCount: 3
 
+  initialize: ->
+    mediator.on 'current_user:prefetched', @subscribeToPusherEvents, @
+    super
+
   url: -> "#{sd.API_URL}/accounts"
 
   sync: (method, model, options = {}) ->
@@ -65,6 +69,17 @@ module.exports = class CurrentUser extends User
       type: method
       success: (response)->
         mediator.trigger successEvent, response
+
+  subscribeToPusherEvents: ->
+    user_pusher = mediator.shared.pusher.subscribe "user_#{@id}"
+    console.log 'user_pusher', user_pusher
+    user_pusher.bind 'user:updated', (data) =>
+      console.log 'user:updated'
+      @set(data)
+      mediator.trigger 'user:updated', this
+    user_pusher.bind 'notification', (data) =>
+      @incrementNotificationCount()
+      mediator.trigger 'notification:received', data
 
   resetNotificationCount: -> @set 'notification_count', 0
 
