@@ -27,7 +27,7 @@ module.exports = class RegistrationView extends Backbone.View
       success: =>
         @$('button').attr 'data-state', 'success'
         user = new LoggedOutUser @model.pick 'email', 'password'
-        user.login { redirect: "/#{@model.get('slug')}" }
+        user.login { redirect: "/getting-started" }
       error: =>
         @showError "Invalid registration, try retyping your password and submitting again."
 
