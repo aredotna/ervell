@@ -26,7 +26,7 @@ header#layout-header
           a.dropdown__link.dropdown__link--notifications(href="/notifications") Notifications
             .notifications--count 0
         .dropdown__bottom
-          span.dropdown__link: #[a(href="/#{user.get('slug')}/channels") My channels ] (#[a(href="/manage") manage ])
+          span.dropdown__link.dropdown__link--channels: #[a(href="/#{user.get('slug')}/channels") My channels ] / #[a(href="/manage") Manage channels]
           span.dropdown__link: a(href="/#{user.get('slug')}/blocks") My blocks
           span.dropdown__link: a(href="/about/tools") Tools
           span.dropdown__link.dropdown__link--settings: a(href="#") Settings
