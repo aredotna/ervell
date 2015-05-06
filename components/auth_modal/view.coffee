@@ -96,7 +96,7 @@ module.exports = class AuthModalView extends ModalView
             location.reload()
         when 'signup'
           analytics.track.submit 'User requested invitation'
-          @showError "Registration recieved. Please check your email for registration details."
+          @showError "Please check your email for registration details."
         when 'forgot'
           analytics.track.submit 'User reset password'
           @showError "Please check your email for password reset details."
