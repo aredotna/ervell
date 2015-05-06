@@ -145,24 +145,28 @@ body.is-modal
 
   #auth-login&[data-state=success]:before
     content "Redirecting..."
+    color public
 
   #auth-register&[data-state=loading]:before
     content "Submitting"
 
   #auth-register&[data-state=success]:before
     content "Success: logging in"
+    color public
 
   #auth-forgot&[data-state=loading]:before
     content "Requesting..."
 
   #auth-forgot&[data-state=success]:before
     content "Success"
+    color public
 
   #auth-settings&[data-state=loading]:before
     content "Updating your profile"
 
   #auth-settings&[data-state=success]:before
     content "Success"
+    color public
 
 #avatar-upload input[type="file"]
   display none
