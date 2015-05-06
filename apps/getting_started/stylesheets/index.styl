@@ -1,8 +1,8 @@
 @import '../../components/layout/variables'
 
 #getting-started--page h1
-  margin-top s_margin * 1
-  margin-bottom s_margin * 5
+  margin-top s_margin * 2
+  margin-bottom s_margin * 3
 
 .getting-started--column
   width 320px
@@ -29,15 +29,36 @@
   display block
   margin s_margin * 8 auto
 
+@media (max-height:700px)
+  .getting-started--column
+    width 270px
+    margin 0 35px 0 35px
+  
+  .getting-started--button
+    margin s_margin * 3 auto
+  
+  #getting-started--page h1
+    margin-top s_margin * 3
+    margin-bottom s_margin * 3
+  
+  .getting-started--column__caption
+    font-size 13px
+    li
+      margin 10px 0 10px 0px
+
 @media (max-width:(block_width_mar * 4) + 20)
   .getting-started--column
     width 270px
     margin 0 35px 0 35px
+  
+  .getting-started--button
+    margin s_margin * 3 auto
 
 @media (max-width:(block_width_mar * 3) + 20)
   .getting-started--column
     width 190px
     margin 0 30px 40px 30px
+
   .getting-started--column__caption
     font-size 13px
     li
