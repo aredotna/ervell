@@ -48,7 +48,7 @@ module.exports = class ChannelBlocks extends Blocks
       if !@get(model.id)
         @add model
 
-      _.defer mergeSkeletonModel
+      mergeSkeletonModel()
 
     )()
 
