@@ -68,7 +68,7 @@ module.exports = class FeedGroup extends Base
     if @first_item()?.username?
       @first_item()?.username
     else if @is_comment()
-      "\"#{@first_item()?.body}\""
+      "#{@first_item()?.body}"
     else if @first_item()?.class is "Channel"
       @first_item()?.title
     else

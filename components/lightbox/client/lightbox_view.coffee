@@ -87,6 +87,7 @@ module.exports = class LightboxView extends Backbone.View
     @feedView = new SmallFeedView
       el: @$ "#lightbox__feed_inner"
       collection: @feed
+      block_id: @model.id
 
   setUpNewComment: ->
     new NewCommentView
