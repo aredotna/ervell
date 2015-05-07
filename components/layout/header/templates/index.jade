@@ -27,11 +27,11 @@ header#layout-header
             .notifications--count 0
         .dropdown__bottom
           span.dropdown__link.dropdown__link--channels: #[a(href="/#{user.get('slug')}/channels") My channels] / #[a(href="/manage") Manage channels]
-          span.dropdown__link: a(href="/#{user.get('slug')}/blocks") My blocks
-          span.dropdown__link: a(href="/about/tools") Tools
-          span.dropdown__link.dropdown__link--settings: a(href="#") Settings
-          span.dropdown__link: a(href="/about") About &amp; FAQ
-          span.dropdown__link: a(href="/me/sign_out") Sign Out
+          a.dropdown__link(href="/#{user.get('slug')}/blocks") My blocks
+          a.dropdown__link(href="/about/tools") Tools
+          a.dropdown__link.dropdown__link--settings(href="#") Settings
+          a.dropdown__link(href="/about") About &amp; FAQ
+          a.dropdown__link(href="/me/sign_out") Sign Out
 
     .logo.dropdown--menu.right
       a(href="/").logo-icon.dropdown--menu__trigger
