@@ -3,7 +3,7 @@
     #avatar
       //- rendered client side
     section#auth-body
-      form.auth-login-settings.auth-form( action='/me/sign_in' )
+      form.auth-login-settings.auth-form
         .form__field
           input.input--wide.input--relative.is-block(
             name='first_name' type='text' value="#{user.get('first_name')}" placeholder='First name' required autofocus= autofocus

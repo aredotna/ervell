@@ -3,7 +3,7 @@
     section#auth-body
       include ./header
 
-      form.auth-login-email.auth-form
+      form.auth-login-email.auth-form(method="POST")
         input.input--wide.input--relative.is-block(
           name='email', type='email', placeholder='Email', required, autofocus= autofocus
         )
