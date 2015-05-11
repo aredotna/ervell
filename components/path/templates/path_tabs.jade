@@ -1,0 +1,18 @@
+mixin tab(path, slug, title)
+  li.tab--container__nav__item(class= tab == slug ? 'is-active' : '' )
+    h5: a(href="/#{path}/#{slug}") #{title}
+
+section#main-path.path--header.flex-container
+  .path__inner.path
+    .path__headline
+      ul.path__breadcrumb
+        li.root
+          a(href='/') Are.na
+
+        block path
+
+    block right
+
+  .tab--container
+    ul.tab--container__nav
+      block tabs

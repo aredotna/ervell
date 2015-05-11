@@ -1,0 +1,28 @@
+.tab--container
+  // margin-top s_margin * 2
+  border-bottom 1px solid bordergray
+
+ul.tab--container__nav
+  inline-list 40px
+
+li.tab--container__nav__item
+  color lightgray
+  margin-bottom -1px
+
+  &.is-active
+    color textgray
+    border-bottom 2px solid hovergray
+
+.tab-content
+  display none
+  padding s_margin * 3
+
+  &.is-active
+    display block
+
+@media (max-width:800px)
+  .tab--container
+    border-bottom none
+  li.tab--container__nav__item
+    float none
+    width 100%
