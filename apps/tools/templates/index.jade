@@ -1,0 +1,11 @@
+extends ../../../components/layout/index
+
+block body
+  include ./path
+  .tools.tabs__content
+    include ./tabs/bookmarklet
+    include ./tabs/add_via_email
+    include ./tabs/find_friends
+
+block scripts
+  script( src= sd.ASSET_PATH + 'tools' + sd.JS_EXT )
