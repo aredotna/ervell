@@ -104,7 +104,8 @@ module.exports = (app) ->
       'announcements',
       'shortcuts_id',
       'avatar_image',
-      'registered'
+      'registered',
+      'post_address'
     ]
 
   app.use artsyError.helpers
@@ -116,6 +117,7 @@ module.exports = (app) ->
   app.use require "../apps/root"
   app.use require "../apps/registration"
   app.use require "../apps/getting_started"
+  app.use require "../apps/tools"
   app.use require "../apps/auth"
   app.use require "../apps/about"
   app.use require "../apps/search"
