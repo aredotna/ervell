@@ -1,17 +1,19 @@
 .tab--container
-  // margin-top s_margin * 2
   border-bottom 1px solid bordergray
 
 ul.tab--container__nav
   inline-list 40px
+  text-align center
 
-li.tab--container__nav__item
+ul li.tab--container__nav__item
+  float none
+  display inline-block
   color lightgray
   margin-bottom -1px
 
   &.is-active
     color textgray
-    border-bottom 2px solid hovergray
+    border-bottom 1px solid hovergray
 
 .tab-content
   display none
