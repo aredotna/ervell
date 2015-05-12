@@ -7,6 +7,9 @@
   font-weight normal
   line-height 1.4
 
+  img
+    max-width 100%
+
   strong
     text-align center
 
@@ -42,6 +45,55 @@
   background-color bordergray
   border 1px dashed lightgray
   margin 12px 0 12px 0
+
+ul.friend-list
+  reset-list()
+  display table
+  width 100%
+
+li.friend-list__friend
+  display table-row
+  line-height 2
+  width 100%
+  border-bottom 1px solid bordergray
+
+  &:nth-child(odd)
+    background-color secondbackgroundgray
+
+  span
+    display table-cell
+    width 100%
+    padding 4px
+
+  .follow_button
+    text-align right
+
+#send-invitation__button
+  line-height 45px
+
+  &[data-state=loading]:before, &[data-state=success]:before
+    background white
+    position absolute
+    left 0
+    height 100%
+    width 100%
+    line-height 45px
+
+  &[data-state=loading]:before
+    content "Sending invitation..."
+
+  &[data-state=success]:before
+    content "Invitation sent."
+    color public
+
+.invitation-errors
+  font-size s_caption
+  text-align center
+  font-weight bold
+  color alert
+
+  &.is-active
+    margin 20px 0 10px 0
 
 @media (max-width:800px)
   .tools__frame

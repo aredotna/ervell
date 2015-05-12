@@ -1,0 +1,14 @@
+extends ../../../../components/path/templates/tab_content
+
+block vars
+  - slug = "premium"
+
+block content
+  .tools__frame
+    strong Manage channels
+    p Dashboard to browse, sort, edit and manage your channels.
+    p: img.static__img(src="../images/arena-screenshot-manage.jpg", alt="Arena")
+    p: strong Quick search
+    p Search for blocks inside a channel.
+    p: img.static__img(src="../images/arena-screenshot-quicksearch.jpg", alt="Arena")
+    //- button.button--wide.button--border.button--add $xx / year - Activate premium &rarr;

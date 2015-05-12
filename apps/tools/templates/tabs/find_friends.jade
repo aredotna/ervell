@@ -5,5 +5,15 @@ block vars
 
 block content
   .tools__frame
-   p Connect your Twitter account to find friends who are already on Are.na.
-    .static__tools__social-button Connect to Twitter #[span(class="iconic" data-glyph="social-twitter" title="social twitter" aria-hidden="true")]
+    p Connect your Twitter account to find friends who are already on Are.na.
+
+    if auth
+      .static__tools__social-button.pointer #[span(class="iconic" data-glyph="social-twitter" title="social twitter" aria-hidden="true")] #{auth.actionReadable()} Twitter
+      ul.friend-list
+        for friend in auth.get('users')
+          if friend
+            li.friend-list__friend
+              span: a(href="/#{friend.slug}")= friend.username
+              span.follow_button.pointer(id="follow_button--#{friend.id}"): a(data-type="User", data-id="#{friend.id}")
+    else
+      .static__tools__social-button.pointer #[span(class="iconic" data-glyph="social-twitter" title="social twitter" aria-hidden="true")] Connect to Twitter
