@@ -1,5 +1,5 @@
 _ = require 'underscore'
-_.mixin(require 'underscore.string')
+_s = require 'underscore.string'
 
 # Extract out into a site-wide language file (?)
 en =
@@ -47,7 +47,7 @@ module.exports =
     , {}
 
     form = _.reduce $form.serializeArray(), (memo, input) ->
-      memo[input.name] = _.trim input.value
+      memo[input.name] = _s.trim input.value
       memo
     , {}
 
@@ -77,19 +77,19 @@ module.exports =
       parsed = text: 'There was an error'
 
     # Pull out the appropriate string
-    message = if _.has(parsed, 'text')
+    message = if _s.has(parsed, 'text')
       parsed.text
-    else if _.has(parsed, 'error')
+    else if _s.has(parsed, 'error')
       parsed.error.message or parsed.error
-    else if _.has(parsed, 'details') and _.isArray(parsed.details)
+    else if _s.has(parsed, 'details') and _.isArray(parsed.details)
       parsed.details.join('; ')
-    else if _.has(parsed, 'detail')
+    else if _s.has(parsed, 'detail')
       _.map(parsed.detail, (v, k) =>
         # For param_errors we can point out the problematic fields
         # provided they have name attributes
         @$("[name=#{k}]").attr 'data-state', 'error'
 
-        "#{_.humanize(k)} #{v}"
+        "#{_s.humanize(k)} #{v}"
       )
         .join('; ')
         # Multiple errors on a single param are
@@ -97,7 +97,7 @@ module.exports =
         .replace(/(.),(.)/, '$1; $2')
 
     # Check for alternate copy mapping
-    if _.has(en.errors, message)
+    if _s.has(en.errors, message)
       en.errors[message]
     else
       # Always return a string
