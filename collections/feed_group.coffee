@@ -3,7 +3,7 @@ FeedItem = require '../models/feed_item.coffee'
 Block = require '../models/block.coffee'
 Channel = require '../models/channel.coffee'
 _ = require 'underscore'
-_.mixin(require 'underscore.string')
+_s = require 'underscore.string'
 
 module.exports = class FeedGroup extends Base
   model: FeedItem
@@ -82,7 +82,7 @@ module.exports = class FeedGroup extends Base
       type = "embed" if type is "media"
       s = if group.length > 1 then "s" else ""
       "#{group.length} #{type}#{s}"
-    _.toSentence(groups)
+    _s.toSentence(groups)
 
   _format_subject: ->
     a = "a"
