@@ -61,5 +61,5 @@ module.exports = class NewChannelView extends Backbone.View
       success: =>
         analytics.track.click "New Channel created"
         @$('.grid__block').removeClass 'grid__block--loading'
-        document.location.href = "/#{@model.get('user').username}/#{@model.get('slug')}"
+        document.location.href = "/#{@model.get('user').slug}/#{@model.get('slug')}"
 
