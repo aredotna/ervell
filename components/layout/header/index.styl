@@ -219,55 +219,54 @@ privacy-color('.search__results__result--privacy-', color)
   font-size 0.9em
   text-align left
   border-radius 0px
-  border 1px solid bordergray
+  border 1px solid lightgray
   z-index 3001
-  background-color secondbackgroundgray
+  background-color #fff
 
   &.dropdown--size
     width 300px
     right 0
 
-.dropdown__top
-  background-color secondbackgroundgray
-
-  .dropdown__link
-    line-height 4em
-    border-bottom 1px solid bordergray
-
-.dropdown__bottom
-  background-color bordergray
-  padding 12px 0 12px 0
-  font-size 0.9em
-
 .dropdown__link
   display block
-  padding 0 14px 0 14px
-  line-height 2.6em
   font-weight bold
-  border 0
-
-  span
-    color lightgray
+  line-height: 1.5em;
+  padding-bottom 6px
 
   &:not(.dropdown__link--channels):hover
     a
       color hovergray
 
-  &.no-border
-    border 0
+.dropdown__section
+  font-size 1.2em
+  padding 18px 20px 12px 20px
+  border-top 1px solid secondbackgroundgray
+
+.dropdown__text--small
+  padding 0 0 0 11px
+  font-size 13px
+  line-height 1.9em
+  color lightgray
+
+.dropdown__link--profile
+  border 0
 
 .dropdown__link--notifications
   &.has-notifications
-    color alert
+    .notifications--count
+      color alert
 
   .notifications--count
-    text-align right
     position relative
-    float right
+    display inline
 
 .dropdown__icon
   float right
   height 100%
+  color #CACACA
+  
+  .iconic[data-glyph]:before
+    font-size 14px
 
 /*
   .dropdown__notifications

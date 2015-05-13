@@ -19,19 +19,28 @@ header#layout-header
         .notifications__flag.notifications--count
         +avatar(user, 'thumb')
       .dropdown.dropdown--size
-        .dropdown__top
-          a.dropdown__link.dropdown__link--profile(href="/#{user.get('slug')}") My profile
-          a.dropdown__link.dropdown__link--feed(href="/") Feed
-          a.dropdown__link.dropdown__link--explore(href="/explore") Explore
-          a.dropdown__link.dropdown__link--notifications(href="/notifications") Notifications
+        .dropdown__section
+          a.dropdown__link.dropdown__link--profile(href="/#{user.get('slug')}") / #{user.get('username')}
+          .dropdown__link.dropdown__text--small.dropdown__link--channels: #[a(href="/#{user.get('slug')}/channels") My channels]
+            .dropdown__icon: #[a(href="/manage").iconic(data-glyph="cog")]
+          a.dropdown__link.dropdown__text--small(href="/#{user.get('slug')}/blocks") My blocks
+          a.dropdown__link.dropdown__text--small.dropdown__link--settings(href="#") Settings
+          a.dropdown__link.dropdown__text--small(href="/me/sign_out") Sign Out
+        .dropdown__section
+          a.dropdown__link.dropdown__link--feed(href="/") / Feed
+          a.dropdown__link.dropdown__text--small.dropdown__link--notifications(href="/notifications") Notifications 
+            | (
             .notifications--count 0
-        .dropdown__bottom
-          span.dropdown__link.dropdown__link--channels: #[a(href="/#{user.get('slug')}/channels") My channels] / #[a(href="/manage") Manage channels]
-          a.dropdown__link(href="/#{user.get('slug')}/blocks") My blocks
-          a.dropdown__link(href="/about/tools") Tools
-          a.dropdown__link.dropdown__link--settings(href="#") Settings
-          a.dropdown__link(href="/about") About &amp; FAQ
-          a.dropdown__link(href="/me/sign_out") Sign Out
+            | )
+        .dropdown__section
+          a.dropdown__link.dropdown__link--explore(href="/explore") / Explore
+        .dropdown__section
+          a.dropdown__link(href="/tools") / Tools
+          a.dropdown__link.dropdown__text--small.dropdown__link--settings(href="/tools/find-friends") Find friends
+          a.dropdown__link.dropdown__text--small.dropdown__link--settings(href="/tools/premium") Premium tools
+          a.dropdown__link.dropdown__text--small.dropdown__link--settings(href="/tools/bookmarklet") Bookmarklet
+        .dropdown__section
+          a.dropdown__link(href="/about") / About &amp; FAQ
 
     .logo.dropdown--menu.right
       a(href="/").logo-icon.dropdown--menu__trigger
