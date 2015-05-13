@@ -16,6 +16,7 @@ ChannelVisibilityView = require '../../components/channel_visibility/client/chan
 ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
 ChannelExportView = require '../../components/channel_export/client/channel_export_view.coffee'
 EditableAttributeView = require '../../components/editable_attribute/client/editable_attribute_view.coffee'
+ConnectView = require '../../components/connect/client/connect_view.coffee'
 MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 Bp = require('../../lib/vendor/backpusher.js')
 
@@ -25,6 +26,7 @@ module.exports = class ChannelView extends Backbone.View
     'click .delete-channel' : 'showConfirmation'
     'click .delete-channel--confirmation__yes' : 'deleteChannel'
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
+    'click .connect_button': 'loadConnectView'
 
   initialize: (options)->
     @channel = options.channel
@@ -35,6 +37,17 @@ module.exports = class ChannelView extends Backbone.View
     @channel.on 'edit:title:success', @updateSlug, @
 
     @subscribe()
+
+  loadConnectView: (e)=>
+    e.preventDefault()
+    e.stopPropagation()
+
+    $connect_container = @$('.connect-container')
+    $connect_container.addClass 'is-active'
+
+    new ConnectView
+      el: $connect_container
+      block: @channel
 
   subscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
@@ -66,7 +79,7 @@ module.exports = class ChannelView extends Backbone.View
 
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
       @$('.grid').addClass 'is-editable'
-      @$('.channel-settings').addClass 'is-editable'
+      @$('#metadata--actions').addClass 'is-editable'
       mediator.trigger 'channel:is-editable'
 
       @setupVisibilityView()

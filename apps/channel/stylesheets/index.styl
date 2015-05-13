@@ -143,3 +143,20 @@
 
   .new-collaborator__add
     display none
+
+#metadata--actions
+  position relative
+
+.connect-container
+  position absolute
+  top -100px
+  height 315px
+  width 315px
+  z-index 99999
+  pointer-events none
+  left -1px
+
+  &.is-active
+    background #fff
+    border 1px solid bordergray
+    pointer-events all
