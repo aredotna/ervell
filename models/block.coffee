@@ -11,7 +11,7 @@ module.exports = class Block extends Base
   url: -> "#{sd.API_URL}/blocks/#{@id}"
 
   sync: (method, model, options) ->
-    unless @get('class') is 'Channel'
+    if options?.channel?.id
       switch method
         when 'delete' then options.url = "#{sd.API_URL}/channels/#{options.channel.id}/blocks/#{model.id}"
 
