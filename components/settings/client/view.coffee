@@ -64,8 +64,7 @@ module.exports = class SettingsView extends ModalView
       @showError "Invalid, try again"
     else
       analytics.track.submit 'User settings changed'
-      $.ajax('/me/refresh').then -> window.location.reload()
-
+      window.location.reload()
 
   showError: (msg) =>
     @$('button').attr 'data-state', 'error'
