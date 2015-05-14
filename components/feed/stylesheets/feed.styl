@@ -21,36 +21,38 @@
     &:hover
       color hovergray
 
-  .feed-group__sentence__comment
-    display inline-block
-    font-family font_serif
-    max-width 100%
-
-    &.attribute-group .attr-value
-      &:before
-        content "“"
-
-      &:after
-        content "”"
-
-    &:not(.attribute-group)
-      &:before
-        content "“"
-
-      &:after
-        content "”"
-
-
-
-  .feed-group__timestamp
-    font-size s_caption
-    color lightgray
-    font-weight normal
-
-    &.is_unread
-      color alert
-
   &.is_unread, &.is_unread a
+    color alert
+
+
+.feed-group__sentence__comment
+  display inline-block
+  font-family font_serif
+  max-width 100%
+
+  &.attribute-group .attr-value
+    &:before
+      content "“"
+
+    &:after
+      content "”"
+
+    p
+      display inline-block
+
+  &:not(.attribute-group)
+    &:before
+      content "“"
+
+    &:after
+      content "”"
+
+.feed-group__timestamp
+  font-size s_caption
+  color lightgray
+  font-weight normal
+
+  &.is_unread
     color alert
 
 .explore-group

@@ -27,7 +27,7 @@ module.exports = class SmallFeedView extends FeedView
         model: comment
         el: @$("#attribute-body_#{comment.id}")
         _attribute: 'body'
-        _kind: 'plaintext'
+        _kind: 'markdown'
         wait: true
 
   render: =>
