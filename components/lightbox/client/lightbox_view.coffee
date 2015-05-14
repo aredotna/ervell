@@ -68,7 +68,7 @@ module.exports = class LightboxView extends Backbone.View
 
   postRender: ->
     @setupFeed()
-    @setUpNewComment()
+    @setUpNewComment() if mediator.shared.current_user?.id
     @setupEditableAttributes()
 
     IconicJS().inject 'img.iconic'
