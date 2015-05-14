@@ -1,56 +1,24 @@
 extends ../../../components/layout/index--bare
 
+block vars
+  - extraClasses = 'body--home'
+
 block styles
-  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'root' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'all' + sd.CSS_EXT) )
 
 block body
-  .home__section.home__section--intro
-    .home__section__container.flex-container
-      img.home__mark(src="images/arena-mark.svg", alt="Arena")
-      h2.home__section-intro__text
-        p.
-          Are.na is a flexible platform for private, public and collaborative research.
-        br
-        p.
-          The platform is designed to support arbitrary applications: it is adopted professionally or for personal use to research projects, manage inventory, curate exhibitions, share inspiration, collect references.
-        br
-        a(href="#sign_up").home__section-intro__menu Sign up
-        a(href="/about").home__section-intro__menu About
+  .home__section.home__section--intro.flex-container
+    p: h1.haarlemmer Are.na helps you build and organize ideas over time.
+    p: h1.haarlemmer You can collect and recombine blocks of information – texts, images, links, and files – by yourself or with collaborators.
+    p: h1.haarlemmer There is no wrong way to use Are.na.
+    p: h2 #[a(href="#log_in") Log in]
+    p: h2 #[a(href="#sign_up") Sign up]
+    p: h2 #[a(href="/about") Learn more]
 
-      h3.static__menu.home__static__menu
-        ul
-          li: a(href="#log_in").static__menu__item Login
-
-  .home__section.home__section--stats
-    .home__section__container.flex-container
-      .home__section--stats__column
-        h1= stats.formatNumber('channels')
-        h2 Channels
-      .home__section--stats__column
-        h1= stats.formatNumber('blocks')
-        h2 Blocks
-      .home__section--stats__column.home__section-stats__column--connections
-        h1= stats.formatNumber('connections')
-        h2 Connections
   .home__section.home__section--channels
-    .home__section__container.flex-container
-      h2 Example channels:
-      .home__section--channels__channels
-        - for e_channel in example_channel.get('contents')
-          h2.home__path
-              ul.breadcrumb
-                li Are.na
-                li
-                  a(href="/#{e_channel.user.slug}")=e_channel.user.username
-                li
-                  a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="")=e_channel.title
-          .home__section-channels__images.grid
-            - for block in e_channel.contents.models.slice(0,4)
-              include ../../../components/block_collection/templates/block
-
-          .home__section-channels__button
-            .button--inblock
-              a(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
+    .grid.grid--channel.flex-container
+      for block in blocks
+        include ../../../components/block_collection/templates/block
 
   .home__section.home__section--footer
     .home__section__container.flex-container

@@ -11,8 +11,7 @@ module.exports.init = ->
         xhr.setRequestHeader 'X-SHARE-TOKEN', sd.SHARE_TOKEN
 
     channel = new Channel sd.CHANNEL
-    blocks = new ChannelBlocks sd.BLOCKS,
-      channel_slug: sd.CHANNEL.slug
+    blocks = new ChannelBlocks sd.BLOCKS, channel_slug: sd.CHANNEL.slug
 
     new BlockSkeletonView
       collection: blocks

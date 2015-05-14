@@ -20,29 +20,17 @@ sd = require("sharify").data
     res.render 'feed', path: 'feed'
   else
 
-    render = _.after 2, ->
-      res.render 'index', example_channel: channel, stats: stats
-
     channel = new Channel()
     channel.url = "#{sd.API_URL}/channels/arena-front-example-channels"
 
-    channel.parse = (data) ->
-      for c_channel in data.contents
-        c_channel.contents = new Blocks c_channel.contents
-      return data
-
     channel.fetch
-      data:
-        per: 10
+      data: per: 50
       cache: true
-      success: render
       error: next
+      success: (channel, response)->
+        blocks = new Blocks response.contents
+        res.render 'index', blocks: blocks.models
 
-    stats = new Backbone.Model
-    stats.url = "#{sd.API_URL}/utilities/statistics"
-    stats.formatNumber = (attr) -> @get(attr).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
-
-    stats.fetch cache: true, success: render, error: next
 
 @notifications = (req, res, next) ->
   res.locals.sd.FEED_TYPE = 'notifications'

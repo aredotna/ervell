@@ -1,33 +1,37 @@
-body
-  padding 0px
+.body--home #layout-header
+  position absolute
+  background transparent
+  color hovergray
+  svg
+    fill hovergray
 
-.path
-  display none
-
-.home__path--public
-  color public
-  font-weight normal
-
-.home__path--closed
-  color closed
-  font-weight normal
-
-#layout-header
-  display none
-
-.home__section
-  clearfix()
+.home__section--intro
   width 100%
   height auto
   padding 0 10px
-  background-color backgroundgray
+  background-color #fff
+  padding 4em 3em 4em
+  margin-bottom 3em
+  color hovergray
+  border-bottom 1px solid bordergray
+  text-align left
+
+  h1
+    font-size 2.5em
+
+  a
+    padding-bottom 4px
+    border-bottom 2px solid hovergray
+
+.home__section--intro__mark
+  margin 2em 0 4em 0
 
 .home__section--footer
   position relative
   float left
   width 100%
   color hovergray
-  background-color backgroundgray
+  background-color #fff
   border-top 1px solid bordergray
   padding 60px 0 60px 0
 
@@ -46,30 +50,7 @@ body
       color textgray
       border-bottom 2px solid textgray
 
-.home__section--stats
-  position relative
-  float left
-  width 100%
-  padding 60px 0 30px 0
-  background-color #fff
-  border-top 1px solid #e7e7e7
-
-.home__section--channels
-  background-color #fff
-
-.home__mark
-  position relative
-  left 50%
-  height auto
-  width 32px
-  margin 82px auto 0 -16px
-  opacity 0.90
-  z-index 199
-
 .home__section-intro__text
-  position relative
-  width 70%
-  left 15%
   margin 50px 0 90px 0
   line-height 1.4em
   text-align center
@@ -83,238 +64,12 @@ body
       color textgray
       border-bottom 2px solid textgray
 
-a.home__section-intro__menu, a.home__section-intro__menu--mobile
-  position relative
-  border-bottom 2px solid hovergray
-  padding 0 0 3px 0
-  margin 0 20px 0 20px
-
-  &:hover
-    color public
-    border-bottom 2px solid public
-
-a.home__section-intro__menu--mobile
-  display none
-
-  &:hover
-    color public
-    border-bottom 2px solid public
-
-.static__menu
-  position absolute
-  margin 105px 170px 0 0
-  right 0
-  top 5px
-  width 130px
-  text-align left
-  z-index modal_z - 1
-
-.home__static__menu
-  display block
-  position absolute
-  top 25px
-  right 25px
-  margin 0
-  width auto
-
-  a
-    color textgray
-
-.static__menu__item
-  color lightgray
-
-  &:hover, &.is-active
-    color hovergray
-
-.home__section--stats__column
-  position relative
-  float left
-  width 33%
-  text-align center
-
-  h1
-    font-size 3.4em
-    font-weight normal
-    color lightgrayplus
-    margin 0
-
-  h2
-    font-weight normal
-    color lightgrayplus
-    margin 0
-    font-size 1.2em
-
-.home__section--channels
-  position relative
-  float left
-  background-color none
-  padding 40px 0 70px 0
-
-  h2
-    color hovergray
-    padding 0 0 0 10px
-
-.home__section--channels__channels
-  position relative
-  float left
-  width 100%
-  margin 0
-  padding 0
-
-  .home__path
-    position relative
-    float left
-    width 100%
-    color textgray
-    padding 0 10px 10px 10px
-    margin 0
-
-    .breadcrumb
-      position relative
-      float left
-
-privacy-color('.privacy--', color)
-
-.home__section-channels__channels .home__path--closed:hover,
-.home__section-channels__channels .home__path--public:hover
-  color hovergray
-
-.home__section-channels__images
-  position relative
-  float left
-  width 100%
-  padding 0
-
-.home__section-channels__button
-  position relative
-  float left
-  width 100%
-  margin 0 0 40px 0
-  text-align center
-
-  .button--inblock
-    position relative
-    left 0
-    width 200px
-    margin auto
-    color lightgray
-    border-top 1px solid bordergray
-
-    &:hover
-      color hovergray
-      border-top 1px solid textgray
-
 @media (max-width:(block_width_mar * 4) + 19)
-
   .home__section-intro__text
     width 90%
     left 5%
 
-  .home__section--channels__channels
-    .grid
-      -webkit-justify-content center
-      justify-content center
-
-      .grid__block
-        max-width 220px
-        min-width 220px
-
-      .grid__block__inner
-        height 220px
-
-      .grid__block__content__image
-        max-width 220px
-        max-height 220px
-
-@media (max-width:(block_width_mar * 3) + 16)
-  html, body
-    font-size 13px
-
-  .home__mark
-    margin 40px 0 0 0
-
-  .home__section-intro__text
-    clear both
-    max-width 100%
-    margin 20px 0 60px 0
-
-  a.home__section-intro__menu--mobile
-    display inline
-
-  .home__section--stats
-    padding 40px 0 40px 0
-
-  .home__section--stats__column
-    width 50%
-    h1
-      font-size 4em
-    h2
-      font-size 1.5em
-
-  .home__section-stats__column--connections
-    display none
-
-  .home__section--channels
-    padding 20px 0 20px
-
-    h2
-      padding 0
-
-  .home__section--channels__channels
-    padding 0
-
-    .home__path
-      padding 0
-      margin-bottom 20px
-
-    .grid
-      .grid__block
-        max-width 300px
-        min-width 300px
-
-      .grid__block__inner
-        height 300px
-
-      .grid__block__content__image
-        max-width 300px
-        max-height 300px
-
-  .home__section-footer
-    margin 0 0 40px 0
-
-@media (max-width:(block_width_mar * 2) + 20)
-  .home__section--channels
-    padding 20px 10px 20px 10px
-
-  .home__section--stats
-    display none
-
-  .static__menu
-    top 10px
-    right 15px
-
 @media (max-width:500px)
   .home__section-intro__text
     width 96%
-    left 2%
     text-align left
-
-  a.home__section-intro__menu
-    margin 0
-    float left
-    clear both
-    padding 0
-    margin-bottom 12px
-
-  .home__section--channels__channels
-    .grid
-      .grid__block
-        max-width 280px
-        min-width 280px
-
-      .grid__block__inner
-        height 280px
-
-      .grid__block__content__image
-        max-width 280px
-        max-height 280px
