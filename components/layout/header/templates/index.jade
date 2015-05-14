@@ -2,11 +2,12 @@ include ../../../avatar/templates/avatar
 header#layout-header
   .layout-header__search
     input#layout-header__search__input(type="text" placeholder="Search Are.na")
-    .header--icon.glass-icon
-      include ../../../../public/images/iconic/magnifying-glass.svg
-    .header--icon.logo-icon
-      a(href="/")
-        include ../../../../public/images/arena-mark.svg
+    .header--icon
+      .glass-icon
+        include ../../../../public/images/iconic/magnifying-glass.svg
+      .logo-icon
+        a(href="/")
+          include ../../../../public/images/arena-mark.svg
     .layout-header__search__close.pointer &times;
     .layout-header__search__results
       //- rendered by client

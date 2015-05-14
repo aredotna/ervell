@@ -23,6 +23,17 @@
 
     .header--icon
       display none
+      
+.layout-header__search
+  flex-grow 3
+  position relative
+  
+  &:hover
+    .logo-icon
+      opacity 0
+    
+    .glass-icon
+      opacity 1
 
 .header--icon
   position absolute
@@ -30,9 +41,18 @@
   top 0
   width 40px
   height topbar_h
-
-  &.glass-icon
-    display none
+  
+  &:hover
+    .glass-icon
+      opacity 0
+    
+    .logo-icon
+      opacity 1
+    
+  .glass-icon
+    opacity 0
+    position absolute
+    height topbar_h
     
     svg
       width 46px
@@ -54,9 +74,10 @@
         stroke lightgray
         fill lightgray
   
-  &.logo-icon
-    display block
-    pointer
+  .logo-icon
+    position absolute
+    cursor pointer
+    height topbar_h
     
     svg
       width 46px
@@ -67,20 +88,6 @@
     &:hover
       svg
         fill hovergray
-
-.layout-header__search
-  flex-grow 3
-  position relative
-  
-  &:hover
-    .logo-icon
-      display none
-    
-      &:hover
-        display block
-    
-    .glass-icon
-      display block
 
 input#layout-header__search__input
   width 100%
