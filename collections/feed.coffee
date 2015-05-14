@@ -130,7 +130,7 @@ module.exports = class Feed extends Base
     return items
 
   loadNext: ->
-    return false if @exhausted
+    return false if @exhausted or @options.page > 100
 
     ++@options.page
     @fetch
