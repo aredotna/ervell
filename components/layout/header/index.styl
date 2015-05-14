@@ -23,40 +23,71 @@
 
     .header--icon
       display none
-
-.layout-header__search:hover .header--icon svg *
-  fill hovergray
-  stroke hovergray
+      
+.layout-header__search
+  flex-grow 3
+  position relative
+  
+  &:hover
+    .logo-icon
+      opacity 0
+    
+    .glass-icon
+      opacity 1
 
 .header--icon
   position absolute
   left 0
   top 0
   width 40px
+  height topbar_h
+  
+  &:hover
+    .glass-icon
+      opacity 0
+    
+    .logo-icon
+      opacity 1
+    
+  .glass-icon
+    opacity 0
+    position absolute
+    height topbar_h
+    
+    svg
+      width 46px
+      height topbar_h
+      line-height 2em
+      padding 16px 16px 16px 16px
+      outline none
 
-  svg
-    width 46px
-    height 46px
-    line-height 2em
-    padding 18px 15px 12px 15px
-    outline none
+      .iconic-magnifying-glass-lg
+        display none
 
-    .iconic-magnifying-glass-lg
-      display none
+      .iconic-magnifying-glass-md
+        display none
 
-    .iconic-magnifying-glass-md
-      display none
+      .iconic-magnifying-glass-sm
+        display inline
 
-    .iconic-magnifying-glass-sm
-      display inline
-
-    & *
-      stroke lightgray
-      fill lightgray
-
-.layout-header__search
-  flex-grow 3
-  position relative
+      & *
+        stroke lightgray
+        fill lightgray
+  
+  .logo-icon
+    position absolute
+    cursor pointer
+    height topbar_h
+    
+    svg
+      width 46px
+      height topbar_h
+      fill textgray
+      padding 10px 8px 10px 12px
+      
+    &:hover
+      svg
+        fill hovergray
 
 input#layout-header__search__input
   width 100%
@@ -128,25 +159,6 @@ privacy-color('.search__results__result--privacy-', color)
   text-align right
   margin 0
 
-.logo-icon.dropdown--menu__trigger
-  height topbar_h
-  padding 0 22px 0 22px
-
-.logo
-  &.has-notifications .logo-icon
-    svg
-      fill alert
-
-  .logo-icon svg
-    display inline-block
-    fill textgray
-    width 25px
-    height topbar_h
-
-  .logo-icon:hover, &.dropdown--is_active .logo-icon
-    svg
-      fill hovergray
-
 .dropdown--menu .user__avatar--thumb
   width 30px
   opacity 0.95
@@ -209,6 +221,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown--menu
   cursor pointer
+  margin-right 25px
 
 .dropdown
   position absolute
