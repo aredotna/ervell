@@ -24,39 +24,63 @@
     .header--icon
       display none
 
-.layout-header__search:hover .header--icon svg *
-  fill hovergray
-  stroke hovergray
-
 .header--icon
   position absolute
   left 0
   top 0
   width 40px
+  height topbar_h
 
-  svg
-    width 46px
-    height 46px
-    line-height 2em
-    padding 18px 15px 12px 15px
-    outline none
+  &.glass-icon
+    display none
+    
+    svg
+      width 46px
+      height topbar_h
+      line-height 2em
+      padding 16px 16px 16px 16px
+      outline none
 
-    .iconic-magnifying-glass-lg
-      display none
+      .iconic-magnifying-glass-lg
+        display none
 
-    .iconic-magnifying-glass-md
-      display none
+      .iconic-magnifying-glass-md
+        display none
 
-    .iconic-magnifying-glass-sm
-      display inline
+      .iconic-magnifying-glass-sm
+        display inline
 
-    & *
-      stroke lightgray
-      fill lightgray
+      & *
+        stroke lightgray
+        fill lightgray
+  
+  &.logo-icon
+    display block
+    pointer
+    
+    svg
+      width 46px
+      height topbar_h
+      fill textgray
+      padding 10px 8px 10px 12px
+      
+    &:hover
+      svg
+        fill hovergray
 
 .layout-header__search
   flex-grow 3
   position relative
+  
+  &:hover
+    .logo-icon
+      display none
+    
+      &:hover
+        display block
+    
+    .glass-icon
+      display block
 
 input#layout-header__search__input
   width 100%
@@ -128,25 +152,6 @@ privacy-color('.search__results__result--privacy-', color)
   text-align right
   margin 0
 
-.logo-icon.dropdown--menu__trigger
-  height topbar_h
-  padding 0 22px 0 22px
-
-.logo
-  &.has-notifications .logo-icon
-    svg
-      fill alert
-
-  .logo-icon svg
-    display inline-block
-    fill textgray
-    width 25px
-    height topbar_h
-
-  .logo-icon:hover, &.dropdown--is_active .logo-icon
-    svg
-      fill hovergray
-
 .dropdown--menu .user__avatar--thumb
   width 30px
   opacity 0.95
@@ -209,6 +214,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown--menu
   cursor pointer
+  margin-right 25px
 
 .dropdown
   position absolute
