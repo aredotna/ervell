@@ -26,7 +26,7 @@ module.exports = class Comment extends Base
     if @belongsToCurrentUser(user)
       permissions.push 'can-edit'
 
-    (_.uniq permissions).join ' '
+    (_.uniq permissions)
 
   belongsToCurrentUser: (user)->
     @get('user').id is user.id
