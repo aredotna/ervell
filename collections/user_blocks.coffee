@@ -27,7 +27,7 @@ module.exports = class UserBlocks extends SearchBlocks
     @exhausted = true if @total_pages is 0
 
     if contents.length
-      channel_ids = _.pluck data.channels, 'id'
+      channel_ids = _.map data.channels, (channel) -> parseInt(channel.id)
 
       grouped_blocks = _.groupBy contents, (block) ->
         ids = _.intersection channel_ids, block.channel_ids
@@ -35,7 +35,7 @@ module.exports = class UserBlocks extends SearchBlocks
 
       for id in channel_ids
         if grouped_blocks[id]
-          channel = _.findWhere data.channels, id: id
+          channel = _.find data.channels, (channel) -> parseInt(channel.id) is id
           grouped_blocks[id].unshift channel if channel
 
       collection = _.flatten _.values grouped_blocks
