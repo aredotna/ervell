@@ -15,12 +15,15 @@ html
 
     block styles
 
+    - extraClasses = ''
+    block vars
 
-  body.body--bare
+  body.body--bare(class=extraClasses)
     #modal-container
       //- rendered by client
     #l-lightbox-container
       //- rendered by client
+    include header/templates/index--bare
     .container
       block body
 
