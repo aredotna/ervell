@@ -13,6 +13,7 @@ module.exports = class BodyView extends Backbone.View
     'click a[data-disabled]'                      : 'disable'
     'click a[data-client]:not([data-disabled])'   : 'intercept'
     'click span[data-client]:not([data-disabled])': 'intercept'
+    'click .trigger-mediator'                     : 'triggerMediator'
     'click a'                                     : 'maybeIntercept'
     'click #scroll-top'                           : 'scrollToTop'
 
@@ -80,6 +81,11 @@ module.exports = class BodyView extends Backbone.View
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
       window.location = url
+
+  triggerMediator: (e)->
+    console.log 'triggerMediator'
+    $link = $(e.currentTarget)
+    mediator.trigger $link.data('trigger')
 
   disable: (e)->
     e.preventDefault()
