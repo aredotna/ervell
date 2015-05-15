@@ -13,11 +13,6 @@ block path
   if following
     li.path__sub Following
 
-block right
-  if channel
-    .channel-settings(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
-      .toggle-settings-trigger.pointer: a Manage channel
-
 block metadata
   .metadata
     include meta_pockets/description
@@ -30,3 +25,7 @@ block metadata
       include meta_pockets/share
       include meta_pockets/export
       include meta_pockets/delete
+
+    if channel
+      #metadata__column-manage.metadata__column.metadata__column--right(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
+        .toggle-settings-trigger.pointer: a Manage channel
