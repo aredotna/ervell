@@ -5,6 +5,7 @@ HeaderView = require './header/view.coffee'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
+NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
@@ -66,7 +67,9 @@ setupPusherAndCurrentUser = ->
       cache: true
       prefill: true
       prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
-      success: -> mediator.trigger 'current_user:fetched'
+      success: ->
+        mediator.trigger 'current_user:fetched'
+        showNewUserMessages() if user.get('show_tour')
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
 
@@ -123,6 +126,10 @@ showBetaMessage = ->
     body: "Welcome to the beta preview of Are.na. Expect us to have some bugs here for the time being. Please submit any feedback to our <a href='http://are.na/feedback'>feedback channel</a>. Follow our progress <a href='http://github.com/arenahq/ervell'>here</a>."
     type: 'announcement'
   new MessageView el: $('#message-container'), model: model
+
+showNewUserMessages = ->
+  new NewUserMessagesView
+    container: $('#message-container')
 
 showAnnouncements = (announcements) ->
   # stub
