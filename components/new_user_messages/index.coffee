@@ -10,7 +10,7 @@ module.exports = class NewUserMessageView extends Backbone.View
     {
       id: 'help_message'
       title: "Welcome"
-      body: "If you need help check the <a href='/about'>FAQs</a> or <a href='mailto:everyone@are.na'>contact us</a>. Also, feel free to give us any suggestions or report bugs in our <a href='/are-na/feedback'>feedback channel</a>. Follow our progress <a href='http://github.com/arenahq/ervell' target='_blank'>here</a>"
+      body: "If you need help check the <a href='/about'>FAQs</a> or <a href='mailto:everyone@are.na'>contact us</a>. Also, feel free to give us any suggestions or report bugs in our <a href='/are-na/feedback'>feedback channel</a>"
       type: 'announcement'
     },
     {
