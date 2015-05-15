@@ -282,51 +282,6 @@ privacy-color('.search__results__result--privacy-', color)
   .iconic[data-glyph]:before
     font-size 14px
 
-/*
-  .dropdown__notifications
-    width 100%
-    height 160px
-    overflow scroll
-    -webkit-overflow-scrolling touch
-    margin 0
-    border-top 1px solid bordergray
-    background-color secondbackgroundgray
-    cursor default
-    padding-top 10px
-
-    .feed-group__sentence
-      font-size s_caption
-      margin 0
-      color textgray
-
-      a
-        color textgray
-
-        &:hover
-          color hovergray
-
-    .feed-group__sentence.is_unread
-      color alert
-
-      a
-        color alert
-
-    .feed-group__timestamp
-      padding-top 5px
-      text-align center
-      color lightgray
-
-  .dropdown__link--small
-    line-height 3em
-    font-size 12px
-    font-weight normal
-    color lightgray
-    text-align center
-
-    &:hover
-      color lightgrayplus
-*/
-
 .dropdown--is_active .dropdown
   display block
 
@@ -334,6 +289,8 @@ privacy-color('.search__results__result--privacy-', color)
   content ""
 
 @media (max-width:410px)
+
+
   #layout-header
     position fixed
 
@@ -348,11 +305,12 @@ privacy-color('.search__results__result--privacy-', color)
     position fixed
     overflow scroll
     width 100%
-  input#layout-header__search__input
-    padding 0 container_pad 0 40px
 
   .layout-header__register
     width 185px
+
+  .new-channel-btn
+    font-size 0
 
   .new-channel-btn--caption
     display none
