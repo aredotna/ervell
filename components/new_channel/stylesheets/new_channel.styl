@@ -28,6 +28,8 @@
     border 1px solid lightgray
     border-top 0px
     padding-top 10px
+  
+  privacy-color('.is-active.metadata--selector__option--', color)
 
   .grid__block__privacy--setting
     font-size s_caption
@@ -42,8 +44,9 @@
       float none
       display inline-block
       color lightgray
+      font-weight bold
 
-      a.is-active, &:hover
+      a:hover
         color hovergray
   
   .button--base
