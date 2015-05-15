@@ -17,7 +17,7 @@ sd = require("sharify").data
 
   if req.user
     res.locals.sd.FEED_TYPE = 'primary'
-    res.render 'feed', path: 'feed'
+    res.render 'feed', path: 'Feed'
   else
 
     render = _.after 2, ->
@@ -46,7 +46,7 @@ sd = require("sharify").data
 
 @notifications = (req, res, next) ->
   res.locals.sd.FEED_TYPE = 'notifications'
-  res.render 'feed', path: 'notifications'
+  res.render 'feed', path: 'Notifications'
 
 @explore = (req, res, next) ->
   channels = new ExploreBlocks
@@ -68,7 +68,7 @@ sd = require("sharify").data
         ]
       Q.allSettled(promises).then(->
         res.locals.sd.CHANNELS = channels.toJSON()
-        res.render "explore", channels: channels.models, path: 'explore'
+        res.render "explore", channels: channels.models, path: 'Explore'
       ).done()
     error: (m, err) -> next err
 
