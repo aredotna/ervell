@@ -23,15 +23,15 @@
 
     .header--icon
       display none
-      
+
 .layout-header__search
   flex-grow 3
   position relative
-  
+
   &:hover
     .logo-icon
       opacity 0
-    
+
     .glass-icon
       opacity 1
 
@@ -41,19 +41,19 @@
   top 0
   width 40px
   height topbar_h
-  
+
   &:hover
     .glass-icon
       opacity 0
-    
+
     .logo-icon
       opacity 1
-    
+
   .glass-icon
     opacity 0
     position absolute
     height topbar_h
-    
+
     svg
       width 46px
       height topbar_h
@@ -73,18 +73,18 @@
       & *
         stroke lightgray
         fill lightgray
-  
+
   .logo-icon
     position absolute
     cursor pointer
     height topbar_h
-    
+
     svg
       width 46px
       height topbar_h
       fill textgray
       padding 10px 8px 10px 12px
-      
+
     &:hover
       svg
         fill hovergray
@@ -198,14 +198,15 @@ privacy-color('.search__results__result--privacy-', color)
 .new-channel-btn
   height topbar_h
   font-size 13px
-  line-height 53px
   color textgray
   border 0px solid bordergray
   text-align center
   margin 0 0 0 15px
   font-weight bold
 
-  &:before
+  &.iconic:before
+    vertical-align middle !important
+    padding-right .5em
     font-size 11px !important
     top 0px !important
 
@@ -277,7 +278,7 @@ privacy-color('.search__results__result--privacy-', color)
   float right
   height 100%
   color #CACACA
-  
+
   .iconic[data-glyph]:before
     font-size 14px
 
@@ -364,11 +365,11 @@ privacy-color('.search__results__result--privacy-', color)
       width 100%
       height auto
       margin 0
-    
+
     .dropdown__section
       font-size 1.5em
       padding 14px 15px 8px 15px
-  
+
     .dropdown__link--tools
       .dropdown__text--small
         display none
