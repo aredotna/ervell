@@ -4,21 +4,25 @@ sd = require("sharify").data
 Cookies = require 'cookies-js'
 mediator = require '../../../lib/mediator.coffee'
 
+template = -> require("../templates/announcement.jade") arguments...
+
 module.exports = class MessageView extends Backbone.View
 
   events:
     'tap .message__inner__close' : 'remove'
 
-  initialize: ->
+  initialize: ({ @container })->
     # only render if user does not have cookie
     @render() unless Cookies.get(@model.id) or $('body').hasClass 'is-mobile'
 
   render: ->
-    # do this directly for now, thinking of different templates with the same view
-    # but may just have to be different views (similar to other components)
-    @$el.append require("../templates/announcement.jade") message: @model
+    html = template message: @model
+    @$el = $(html)
+    @container.append @$el
+
+    return @$el
 
   remove: ->
-    # user has now seen the model
+    # user gets the message
     Cookies.set @model.id, true
     super
