@@ -125,7 +125,7 @@ showBetaMessage = ->
     title: "Beta"
     body: "Welcome to the beta preview of Are.na. Expect us to have some bugs here for the time being. Please submit any feedback to our <a href='http://are.na/feedback'>feedback channel</a>. Follow our progress <a href='http://github.com/arenahq/ervell'>here</a>."
     type: 'announcement'
-  new MessageView el: $('#message-container'), model: model
+  new MessageView container: $('#message-container'), model: model
 
 showNewUserMessages = ->
   new NewUserMessagesView
