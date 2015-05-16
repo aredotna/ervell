@@ -13,7 +13,7 @@ s:
 
 # Start the server with forever
 sf:
-	$(BIN)/pm2 start index.coffee
+	$(BIN)/forever $(BIN)/coffee index.coffee
 
 # Start the server with foreman and Redis
 spc:
