@@ -1,13 +1,21 @@
 User = require "../../models/user"
 UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
+Channel = require "../../models/channel"
 sd = require("sharify").data
 _ = require 'underscore'
 
-@user = (req, res, next) ->
+@fetchAuthor = (req, res, next) ->
+  author = new User id: req.params.username
+  author.fetch
+    cache: true
+    success: (author) ->
+      res.locals.author = author
+      res.locals.sd.USER = author.toJSON()
+    complete: -> next()
 
-  user = new User
-    id: req.params.username
+@user = (req, res, next) ->
+  return next() unless res.locals.author
 
   blocks = new UserBlocks null,
     user_slug: req.params.username
@@ -19,70 +27,53 @@ _ = require 'underscore'
     _.extend blocks.options, subject: req.query.subject
     res.locals.sd.SUBJECT = req.query.subject
 
-  user.fetch
-    success: ->
-      res.locals.sd.USER = user.toJSON()
-      render()
-    error: (m, err) -> next err
-
   blocks.fetch
+    error: (m, err) -> next err
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()
-      render()
-    error: (m, err) -> next err
-
-  render = _.after 2, ->
-    res.render "index", author: user, blocks: blocks.models
+      res.render "index", author: res.locals.author, blocks: blocks.models
 
 @followers = (req, res, next) ->
-  user = new User
-    id: req.params.username
+  return next() unless res.locals.author
 
   blocks = new FollowBlocks null,
     object_id: req.params.username
     object_type: 'users'
-    suffix:'ers'
-
-  user.fetch
-    success: =>
-      res.locals.sd.USER = user.toJSON()
-      render()
+    suffix: 'ers'
 
   blocks.fetch
     cache: true
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWERS = blocks.toJSON()
-      render()
+      res.render "index",
+        blocks: blocks.models
+        author: res.locals.user
+        followers: true
     error: (m, err) -> next err
 
-  render = _.after 2, =>
-    res.render "index",
-      blocks: blocks.models
-      author: user
-      followers: true
-
 @following = (req, res, next) ->
-
-  user = new User
-    id: req.params.username
+  return next() unless res.locals.author
 
   blocks = new FollowBlocks null,
     object_id: req.params.username
     object_type: 'users'
-    suffix: 'ing'
-
-  user.fetch
-    success: =>
-      res.locals.sd.USER = user.toJSON()
-      render()
+    suffix: 'ers'
 
   blocks.fetch
     cache: true
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
-      res.locals.sd.FOLLOWING = blocks.toJSON()
-      render()
+      res.locals.sd.FOLLOWERS = blocks.toJSON()
+      res.render "index",
+        blocks: blocks.models
+        author: res.locals.user
+        followers: true
     error: (m, err) -> next err
 
-  render = _.after 2, -> res.render "index", blocks: blocks.models, author: user, following: true
+@catchChannel = (req, res, next) ->
+  channel = new Channel id: req.params.username
+  channel.fetch
+    success: ->
+      res.redirect 301, "/#{channel.get('user').slug}/#{channel.get('slug')}"
+    error: (m, err) -> next err
