@@ -1,29 +1,10 @@
-
 /*
  * browser.js: Browser specific functionality for director.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins, Paolo Fragomeni, & the Contributors.
  * MIT LICENSE
  *
  */
-
-if (!Array.prototype.filter) {
-  Array.prototype.filter = function(filter, that) {
-    var other = [], v;
-    for (var i = 0, n = this.length; i < n; i++) {
-      if (i in this && filter.call(that, v = this[i], i, this)) {
-        other.push(v);
-      }
-    }
-    return other;
-  };
-}
-
-if (!Array.isArray){
-  Array.isArray = function(obj) {
-    return Object.prototype.toString.call(obj) === '[object Array]';
-  };
-}
 
 var dloc = document.location;
 
@@ -188,11 +169,12 @@ var Router = exports.Router = function (routes) {
 };
 
 Router.prototype.init = function (r) {
-  var self = this;
+  var self = this
+    , routeTo;
   this.handler = function(onChangeEvent) {
     var newURL = onChangeEvent && onChangeEvent.newURL || window.location.hash;
     var url = self.history === true ? self.getPath() : newURL.replace(/.*#/, '');
-    self.dispatch('on', url);
+    self.dispatch('on', url.charAt(0) === '/' ? url : '/' + url);
   };
 
   listener.init(this.handler, this.history);
@@ -201,13 +183,20 @@ Router.prototype.init = function (r) {
     if (dlocHashEmpty() && r) {
       dloc.hash = r;
     } else if (!dlocHashEmpty()) {
-      self.dispatch('on', dloc.hash.replace(/^#/, ''));
+      self.dispatch('on', '/' + dloc.hash.replace(/^(#\/|#|\/)/, ''));
     }
   }
   else {
-    var routeTo = dlocHashEmpty() && r ? r : !dlocHashEmpty() ? dloc.hash.replace(/^#/, '') : null;
-    if (routeTo) {
-      window.history.replaceState({}, document.title, routeTo);
+    if (this.convert_hash_in_init) {
+      // Use hash as route
+      routeTo = dlocHashEmpty() && r ? r : !dlocHashEmpty() ? dloc.hash.replace(/^#/, '') : null;
+      if (routeTo) {
+        window.history.replaceState({}, document.title, routeTo);
+      }
+    }
+    else {
+      // Use canonical url
+      routeTo = this.getPath();
     }
 
     // Router has been initialized, but due to the chrome bug it will not
