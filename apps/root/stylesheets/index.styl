@@ -159,6 +159,60 @@ privacy-color('.privacy--', color)
       color hovergray
       border-top 1px solid textgray
 
+@media (max-width:(block_width_mar * 4) + 19)
+
+  .home__section--channels__channels
+    .grid
+      -webkit-justify-content center
+      justify-content center
+
+      .grid__block
+        max-width 220px
+        min-width 220px
+
+      .grid__block__inner
+        height 220px
+
+      .grid__block__content__image
+        max-width 220px
+        max-height 220px
+
+@media (max-width:(block_width_mar * 3) + 16)
+  html, body
+    font-size 13px
+
+  .home__section--channels
+    padding 20px 0 20px
+
+    h2
+      padding 0
+
+  .home__section--channels__channels
+    padding 0
+
+    .home__path
+      padding 0
+      margin-bottom 20px
+
+    .grid
+      .grid__block
+        max-width 300px
+        min-width 300px
+
+      .grid__block__inner
+        height 300px
+
+      .grid__block__content__image
+        max-width 300px
+        max-height 300px
+
+  .home__section-footer
+    margin 0 0 40px 0
+
+@media (max-width:(block_width_mar * 2) + 20)
+  .home__section--channels
+    padding 20px 10px 20px 10px
+
 @media (max-width:500px)
   .home__section--intro
     padding 4em 0
