@@ -8,10 +8,9 @@ html
       else if author
         |  / #{author.get('username')}
 
-    meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=0")
     link(rel="shortcut icon" href="#{sd.IMAGE_PATH}favicon.ico" type="image/x-icon")
     link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'all' + sd.CSS_EXT) )
-    //- include ../../components/meta/templates/meta
+    include ../../components/meta/templates/meta
 
     block styles
 
