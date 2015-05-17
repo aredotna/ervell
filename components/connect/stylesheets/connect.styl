@@ -32,6 +32,7 @@ privacy-light-color('.new-connection__search-result-', background-color)
   &:hover
     opacity 0.7
     transition opacity 0.1s
+    cursor pointer
 
   .feedback
     display none
@@ -40,7 +41,7 @@ privacy-light-color('.new-connection__search-result-', background-color)
     position absolute
 
     li
-      white-space: nowrap
+      white-space nowrap
       max-width 165px
       overflow hidden
       text-overflow ellipsis
@@ -85,3 +86,90 @@ privacy-light-color('.new-connection__search-result-', background-color)
 @media (max-width:(block_width_mar * 1) + 20)
   .new-connection__search-result
     padding 0.7em 0.5em 0.7em 0.5em
+
+.button--inblock--mini
+  display none
+
+/* mini connection interface */
+.metadata__content
+  .connect-container
+    top 20px
+    height 61px
+    width 100%
+
+    .new-connection
+      padding 0
+      
+      input
+        height 30px
+    
+      .new-connection__caption
+        display none
+      
+      .new-connection__search-results
+        height 30px
+        width 100%
+        overflow hidden
+        
+        ul
+          position relative
+        
+        .new-connection__search-result
+          height 30px
+          border 0px
+          margin 0
+          padding 6px 0 0 10px
+          border-top 1px solid bordergray
+      
+      .button--inblock--bottom
+        display none
+      
+      .button--inblock--mini
+        display block
+        position absolute
+        left 0
+        top 0
+        width 15px
+        height 30px
+        line-height 14px
+        font-size 22px
+        margin 0 0 0 -20px
+        color lightgrayplus
+        
+        &:hover
+          background-color transparent
+          color hovergray
+  .new-connection__search-result
+    &.is-loading
+      .feedback
+        -webkit-animation: 0s ; /* Safari 4+ */
+        -moz-animation:    0s ; /* Fx 5+ */
+        -o-animation:      0s ; /* Opera 12+ */
+        animation:         0s ; /* IE 10+, Fx 29+ */
+        border 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
