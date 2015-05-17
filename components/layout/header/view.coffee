@@ -31,7 +31,6 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'notifications:cleared', @unsetNotifications, @
     mediator.on 'new:channel', @openChannelToggle, @
     mediator.shared.state.on 'change', @toggle, @
-    @listenTo mediator.shared.current_user, 'change', @render
 
     @postRender()
 
