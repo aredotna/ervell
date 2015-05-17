@@ -19,17 +19,21 @@ sd = require("sharify").data
     res.locals.sd.FEED_TYPE = 'primary'
     res.render 'feed', path: 'Feed'
   else
-
     channel = new Channel()
     channel.url = "#{sd.API_URL}/channels/arena-front-example-channels"
 
+    channel.parse = (data) ->
+      for c_channel in data.contents
+        c_channel.contents = new Blocks c_channel.contents
+      return data
+
     channel.fetch
-      data: per: 50
+      data:
+        per: 10
       cache: true
+      success: ->
+        res.render 'index', example_channel: channel
       error: next
-      success: (channel, response)->
-        blocks = new Blocks response.contents
-        res.render 'index', blocks: blocks.models
 
 
 @notifications = (req, res, next) ->

@@ -7,17 +7,21 @@
 
 .home__section--intro
   width 100%
-  height auto
+  height 100%
   padding 0 10px
   background-color #fff
   padding 4em 3em 4em
   margin-bottom 3em
   color hovergray
   border-bottom 1px solid bordergray
-  text-align left
+  text-align center
 
   h1
     font-size 2.5em
+    font-weight normal
+
+  h2:nth-of-type(1)
+    margin-top 2em
 
   a
     padding-bottom 4px
@@ -64,12 +68,74 @@
       color textgray
       border-bottom 2px solid textgray
 
-@media (max-width:(block_width_mar * 4) + 19)
-  .home__section-intro__text
-    width 90%
-    left 5%
+.home__section--channels
+  position relative
+  float left
+  background-color none
+  padding 0 0 70px 0
+
+  h2
+    color hovergray
+    padding 0 0 0 10px
+
+.home__section--channels__channels
+  position relative
+  float left
+  width 100%
+  margin 0
+  padding 0
+
+  .home__path
+    position relative
+    float left
+    width 100%
+    color textgray
+    padding 0 10px 10px 10px
+    margin 0
+
+    .breadcrumb
+      position relative
+      float left
+
+privacy-color('.privacy--', color)
+
+.home__section-channels__channels .home__path--closed:hover,
+.home__section-channels__channels .home__path--public:hover
+  color hovergray
+
+.home__section-channels__images
+  position relative
+  float left
+  width 100%
+  padding 0
+
+.home__section-channels__button
+  position relative
+  float left
+  width 100%
+  margin 0 0 40px 0
+  text-align center
+
+  .button--inblock
+    position relative
+    left 0
+    width 200px
+    margin auto
+    color lightgray
+    border-top 1px solid bordergray
+
+    &:hover
+      color hovergray
+      border-top 1px solid textgray
 
 @media (max-width:500px)
-  .home__section-intro__text
-    width 96%
+  .home__section--intro
+    padding 4em 0
     text-align left
+
+    h1
+      font-size 1.5em
+      font-weight 100
+
+  .home__section--channels
+    padding 0 0 70px 0
