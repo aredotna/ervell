@@ -48,7 +48,7 @@ _ = require 'underscore'
       res.locals.sd.FOLLOWERS = blocks.toJSON()
       res.render "index",
         blocks: blocks.models
-        author: res.locals.user
+        author: res.locals.author
         followers: true
     error: (m, err) -> next err
 
@@ -58,7 +58,7 @@ _ = require 'underscore'
   blocks = new FollowBlocks null,
     object_id: req.params.username
     object_type: 'users'
-    suffix: 'ers'
+    suffix: 'ing'
 
   blocks.fetch
     cache: true
@@ -67,8 +67,8 @@ _ = require 'underscore'
       res.locals.sd.FOLLOWERS = blocks.toJSON()
       res.render "index",
         blocks: blocks.models
-        author: res.locals.user
-        followers: true
+        author: res.locals.author
+        following: true
     error: (m, err) -> next err
 
 @catchChannel = (req, res, next) ->
