@@ -1,31 +1,68 @@
-.body--home #layout-header
-  position absolute
-  background transparent
-  color hovergray
-  svg
-    fill hovergray
+.body--home 
+  #layout-header
+    position absolute
+    background transparent
+    color hovergray
+    
+    .logo
+      opacity 0.9
+      svg
+        fill hovergray
+      &:hover
+        cursor default
+    
+    .layout-header__register
+      padding 0 12px 0 20px
+
+    .btn-signup
+      display none
+    
+    .layout-header__or
+      display none
+    
+    .layout-header__login
+      color textgray
+      
+      &:hover
+        color hovergray
+
+  .container
+    background-color backgroundgray
 
 .home__section--intro
   width 100%
   height 100%
   padding 0 10px
-  background-color #fff
-  padding 4em 3em 4em
-  margin-bottom 3em
+  background-color transparent
+  padding 7em 6em 10em 6em
   color hovergray
-  border-bottom 1px solid bordergray
   text-align center
 
   h1
-    font-size 2.5em
+    font-size 2.2em
     font-weight normal
 
   h2:nth-of-type(1)
     margin-top 2em
-
-  a
-    padding-bottom 4px
-    border-bottom 2px solid hovergray
+  
+  .intro__button
+    width 110px
+    display inline-block
+    text-align center
+    border-bottom 1px solid textgray
+    padding 0 0 16px 0
+    margin 50px 25px 0 25px
+    
+    a
+      color textgray
+      font-size 1.2em
+      font-weight bold
+      padding-bottom 12px
+    
+    &:hover
+      border-bottom 1px solid hovergray
+      a
+        color hovergray
 
 .home__section--intro__mark
   margin 2em 0 4em 0
@@ -60,19 +97,13 @@
   text-align center
   color hovergray
 
-  a
-    border-bottom 2px solid hovergray
-    padding 0
-
-    &:hover
-      color textgray
-      border-bottom 2px solid textgray
-
 .home__section--channels
   position relative
   float left
+  width 100%
   background-color none
-  padding 0 0 70px 0
+  padding 3em 0 70px 0
+  border-top 1px solid bordergray
 
   h2
     color hovergray
