@@ -1,7 +1,8 @@
 header#layout-header
   .logo.dropdown--menu
-    a(href="/").logo-icon.dropdown--menu__trigger
-      include ../../../../public/images/arena-mark.svg
+    .header--icon
+      a(href="/").logo-icon.dropdown--menu__trigger
+        include ../../../../public/images/arena-mark.svg
 
   unless user && user.has('username')
     .layout-header__register
