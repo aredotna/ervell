@@ -1,8 +1,9 @@
 @import '../../../components/layout/variables'
 
 #getting-started--page h1
-  margin-top s_margin * 2
-  margin-bottom s_margin * 3
+  margin-top s_margin * 3
+  margin-bottom s_margin * 6
+  font-weight 400
 
 .getting-started--column
   width 320px
@@ -12,22 +13,36 @@
   margin 0 50px 0 50px
 
   img
-    max-width 100%
+    max-width 65%
 
 .getting-started--column__caption
   margin-top s_margin * 2
-  line-height 1.5
+  line-height 1.4
   text-align left
-  font-size 15px
+  font-size 14px
   padding 0 2px 0 2px
+  text-align left
+  margin 25px 0 0 0
 
   li
-    margin 10px 0 20px 0px
+    margin 0 0 20px 0px
+    list-style none
+    font-size 20px
+    line-height 1.2
+    text-align center
+
+.getting-starte-button-container
+  position relative
+  width 100%
+  float left
+  text-align center
 
 .getting-started--button
-  max-width 320px
-  display block
-  margin s_margin * 8 auto
+  display inline-block
+  margin s_margin * 8 20px
+  padding 0
+  font-weight bold
+  font-size 20px
 
 @media (max-height:700px)
   .getting-started--column
@@ -35,7 +50,7 @@
     margin 0 35px 0 35px
 
   .getting-started--button
-    margin s_margin * 3 auto
+    margin s_margin * 3 20px
 
   #getting-started--page h1
     margin-top s_margin * 3

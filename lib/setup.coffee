@@ -105,7 +105,8 @@ module.exports = (app) ->
       'shortcuts_id',
       'avatar_image',
       'registered',
-      'post_address'
+      'post_address',
+      'show_tour'
     ]
 
   app.use artsyError.helpers

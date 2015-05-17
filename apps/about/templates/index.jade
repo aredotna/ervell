@@ -10,7 +10,7 @@ block body
       h2.static--title--top#about-arena About
       p Are.na is a flexible platform for private and collaborative research.
       p We like to think of Are.na as an evolving archive where people collaboratively build up their ideas over time by combining found and original material.
-      p There are no limitations on the subject or scope of an idea, Arena is intended to be used for pretty much any purpose.
+      p There are no limitations on the subject or scope of an idea, Are.na is intended to be used for pretty much any purpose.
       img.static__img(src="../images/arena-screenshot.jpg", alt="Arena")
       p Are.na is also regularly utilized by professionals to research and organize projects. Brick-and-mortar shops use it to manage inventory, art institutions use it to curate exhibitions, creative teams use it to share inspiration, and academics use it to collect references.
       p Users have created 29,303 channels and connected 377,072 blocks.
@@ -19,9 +19,9 @@ block body
       h2.static--title--top#team Team
       p
         ul
-          li: a(href="http://charlesbroskoski.com/_/") Charles Broskoski
-          li: a(href="http://chrissherron.net") Chris Sherron
-          li: a(href="http://no-plans.com") Daniel Pianetti
+          li: a(href="/charles-broskoski") Charles Broskoski
+          li: a(href="/daniel-pianetti") Daniel Pianetti
+          li: a(href="/chris-sherron") Chris Sherron
       p Advisors:
         a(href="/morgan-sutherland")  Morgan Sutherland,
         a(href="/damon-zucconi")  Damon Zucconi,
@@ -34,7 +34,7 @@ block body
     .static__premium.static--text
       h2.static--title--top#principles Principles
       p We aim at being self-sustainable, and are working to perfect and evolve the current product rather than seeking external funding.
-      p We will soon offer #[a(href="/tools#premium") premium tools]  at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
+      p We will soon offer #[a(href="/tools/premium") premium tools]  at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
       //  .static--highlight Total Are.na users: <strong>6520</strong>
       //  .static--highlight Supporting users needed to cover costs: <strong>290</strong>
       //  .static--highlight Currently supporting users: <strong>24</strong>
@@ -68,22 +68,22 @@ block body
 
     .static__api.static--text
       h2.static--title--top#api API
-      p Our #[a(href="http://dev.are.na/documentation/channels") API] can be used as a CMS, and to experiment with new ways of presenting and interacting with content. #[a(href="http://beta.are.na/are-na/powered-by-are-na") Here ] is a selection of public applications powered by Are.na.
+      p Our #[a(href="http://dev.are.na/documentation/channels") API] can be used as a CMS, and to experiment with new ways of presenting and interacting with content. #[a(href="/are-na/powered-by-are-na") Here ] is a selection of public applications powered by Are.na.
 
     .static__roadmap.static--text
       h2.static--title--top#roadmap Roadmap
       p Here's a list of what we're working, planned features and recently completed ones:
         .static--small-text
-          li Connect channel from open channel
           li Channel order and view settings
-          li Edit profile (description and avatar)
-          li Invite friends
-          li Find friends
+          li Profile bio
           li Infinite scrolling on /explore
-          li Onboarding
           li Filter search inside channels and profiles [Premium]
           li Render svg images
           li Channel scoped comments
+          li: strike Connect channel from open channel
+          li: strike Invite friends
+          li: strike Find friends
+          li: strike Onboarding
           li: strike Drag and drop to order blocks
           li: strike Connect block from open lightbox
           li: strike Channel settings
@@ -105,7 +105,7 @@ block body
       p.static--half-p People who use Are.na as a daily tool appreciate the dynamism between private and public collaboration. Content is easily connected between different topics and channels, resulting in discovery of information and organic archives.
       p.static--half-p Play around for a while: adding content, connecting and discovering users is the best way to find out the platform's qualities.
       strong I'm lost, not sure how to use Are.na, can you help?
-      p.static--half-p You can go through the #[a(href="#") tutorial], post in the #[a(href="http://beta.are.na/are-na/feedback") feedback channel ] or contact us below.
+      p.static--half-p You can go through the #[a(href="#") tutorial], post in the #[a(href="/are-na/feedback") feedback channel ] or contact us below.
       strong What are channels?
       p.static--half-p A channel is a grouping of texts, images, links, embeddable media, and files. You can create and organize them privately, publicly and collaboratively.
       strong What's the difference between public, closed and private channels?
@@ -116,15 +116,15 @@ block body
       strong What is a bookmarklet?
       p.static--half-p Are.na's bookmarklet allows you to add information from your browser bar while you are out and about surfing the net. You can install it in one step #[a(href="/tools#bookmarklet") here].
       strong What sites currently use arena as a CMS?
-      p.static--half-p List of projects #[a(href="http://beta.are.na/are-na/powered-by-are-na") powered by Are.na].
+      p.static--half-p List of projects #[a(href="/are-na/powered-by-are-na") powered by Are.na].
       strong Is there a mobile app?
       p.static--half-p Not yet.
       strong Who owns Are.na?
       p.static--half-p 100% of shares are owned by the founders and advisors.
       strong How do you make money?
-      p.static--half-p Our goal is to sustain Are.na through the help of its loyal users by offering #[a(href="/tools#premium") premium tools]. We do not sell data or advertising space.
+      p.static--half-p Our goal is to sustain Are.na through the help of its loyal users by offering #[a(href="/tools/premium") premium tools]. We do not sell data or advertising space.
       strong Can I suggest features?
-      p.static--half-p Yes, you can post suggestions, comments, bugs and complaints in our #[a(href="http://beta.are.na/are-na/feedback") feedback channel].
+      p.static--half-p Yes, you can post suggestions, comments, bugs and complaints in our #[a(href="/are-na/feedback") feedback channel].
       strong Are there any restrictions on kind of content?
       p.static--half-p We trust our users' common sense and have no particular graphic or adult restrictions in the name of research freedom. Our team can intervene in case of explicit criminal offence, read our #[a(href="/terms") terms and conditions] for more information.
       strong Can I only add content I own?
@@ -176,7 +176,6 @@ block body
   h3.static__menu
     ul
       li: a(href="/").static__menu__item Home
-      li: a(href="/tools").static__menu__item Tools
       if !user
         li: a(href="#log_in").static__menu__item Login
         li: a(href="#sign_up").static__menu__item Sign up

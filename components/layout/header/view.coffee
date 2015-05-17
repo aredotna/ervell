@@ -29,6 +29,7 @@ module.exports = class HeaderView extends Backbone.View
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'notifications:synced', @maybeSetNotifications, @
     mediator.on 'notifications:cleared', @unsetNotifications, @
+    mediator.on 'new:channel', @openChannelToggle, @
     mediator.shared.state.on 'change', @toggle, @
     @listenTo mediator.shared.current_user, 'change', @render
 
@@ -59,6 +60,9 @@ module.exports = class HeaderView extends Backbone.View
     @$('.user-avatar, .dropdown__link--notifications').removeClass 'has-notifications'
     @$('.notifications--count').text ""
 
+  openChannelToggle: ->
+    @$('.new-channel-dropdown').addClass 'dropdown--is_active'
+
   toggleDropdown: (e)->
     $el = $(e.currentTarget).parent()
     if !@$('.dropdown--is_active').is($el)
@@ -73,7 +77,7 @@ module.exports = class HeaderView extends Backbone.View
       $('.container').toggleClass 'transparent'
 
   closeDropdown: (e)->
-    if !e or (!@$el.is(e.target) and @$el.has(e.target).length is 0)
+    if !e or (!@$el.is(e.target) and @$el.has(e.target).length is 0 and !$(e.target).hasClass 'trigger-mediator')
       $('.dropdown--is_active').removeClass 'dropdown--is_active'
 
   signup: (e) ->

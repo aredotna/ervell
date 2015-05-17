@@ -1,10 +1,4 @@
 extends ../../../components/path/templates/path
 
-block metadata
-  .metadata__column.show-on-mobile
-    .metadata__title View
-    .metadata__text
-      ul.breadcrumb
-        li: a(href="/" class=sd.FEED_TYPE == "primary" ? "is-active" : "" ).metadata--selector__option Feed
-        li: a(href="/notifications" class=sd.FEED_TYPE == "notifications" ? "is-active" : "").metadata--selector__option.metadata--selector--notifications Notifications#[span(class="notifications--count")]
-        li: a(href="/explore" class=path == "explore" ? "is-active" : "").metadata--selector__option Explore
+block path
+  li.path__sub= path

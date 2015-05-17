@@ -3,14 +3,18 @@ header#layout-header
   .layout-header__search
     input#layout-header__search__input(type="text" placeholder="Search Are.na")
     .header--icon
-      include ../../../../public/images/iconic/magnifying-glass.svg
+      .glass-icon
+        include ../../../../public/images/iconic/magnifying-glass.svg
+      .logo-icon
+        a(href="/")
+          include ../../../../public/images/arena-mark.svg
     .layout-header__search__close.pointer &times;
     .layout-header__search__results
       //- rendered by client
 
   if user && user.has('username')
     .new-channel-dropdown.dropdown--menu
-      .new-channel-btn.iconic(data-glyph="plus").dropdown--menu__trigger &nbsp;
+      .new-channel-btn.iconic(data-glyph="plus").dropdown--menu__trigger &nbsp;New channel
       .dropdown.new-channel-dropdown__container
         //- rendered by client
 
@@ -41,10 +45,6 @@ header#layout-header
           a.dropdown__link.dropdown__text--small(href="/tools/bookmarklet") Bookmarklet
         .dropdown__section
           a.dropdown__link(href="/about") / About &amp; FAQ
-
-    .logo.dropdown--menu.right
-      a(href="/").logo-icon.dropdown--menu__trigger
-        include ../../../../public/images/arena-mark.svg
 
   else
     .layout-header__register

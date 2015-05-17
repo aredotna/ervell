@@ -5,58 +5,64 @@
 
 body.is-loading #l-loader-container
   display block
-
-#l-loader-inner
   position fixed
-  height 2px
-  width 32px
-  left 50%
-  margin-left -18px
-  top 45%
   z-index loader_z
   pointer-events none
-  opacity 0.85
+ 
+#l-loader img
+	width 80px
 
-#l-loader
-  background-color hovergray
-  position relative
-  top 0
-  left 0
-  width 3px
-  height 100%
-  -webkit-animation throbbin 0.58s infinite /* Safari 4+ */
-  -moz-animation throbbin 0.58s infinite /* Fx 5+ */
-  -o-animation throbbin 0.58s infinite /* Opera 12+ */
-  animation throbbin 0.58s infinite /* IE 10+, Fx 29+ */
+// #l-loader-inner
+//   position fixed
+//   height 2px
+//   width 32px
+//   left 50%
+//   margin-left -18px
+//   top 45%
+//   z-index loader_z
+//   pointer-events none
+//   opacity 0.85
 
-#l-infinite-loader-container
-  display none
-  height 2px
-  width 32px
-  margin 150px auto
-  z-index loader_z
-  pointer-events none
-  opacity 0.85
+// #l-loader
+//   background-color hovergray
+//   position relative
+//   top 0
+//   left 0
+//   width 3px
+//   height 100%
+//   -webkit-animation throbbin 0.58s infinite /* Safari 4+ */
+//   -moz-animation throbbin 0.58s infinite /* Fx 5+ */
+//   -o-animation throbbin 0.58s infinite /* Opera 12+ */
+//   animation throbbin 0.58s infinite /* IE 10+, Fx 29+ */
 
-  &.is-loading
-    display block
+// #l-infinite-loader-container
+//   display none
+//   height 2px
+//   width 32px
+//   margin 150px auto
+//   z-index loader_z
+//   pointer-events none
+//   opacity 0.85
 
-@-webkit-keyframes throbbin
-  0%    {margin-left: 0px; width: 3px;}
-  14%   {margin-left: 6px; width: 3px;}
-  27%   {margin-left: 12px; width: 3px;}
-  41%   {margin-left: 18px; width: 3px;}
-  55%   {margin-left: 24px; width: 3px;}
-  69%   {margin-left: 29px; width: 3px;}
-  83%   {margin-left: 22px; width: 10px;}
-  100%  {margin-left: 0px; width: 6px;}
+//   &.is-loading
+//     display block
 
-@keyframes throbbin
-  0%   {margin-left: 0px; width: 3px;}
-  14%  {margin-left: 6px; width: 3px;}
-  27%  {margin-left: 12px; width: 3px;}
-  41%  {margin-left: 18px; width: 3px;}
-  55%  {margin-left: 24px; width: 3px;}
-  69%  {margin-left: 29px; width: 3px;}
-  83% {margin-left: 22px; width: 10px;}
-  100% {margin-left: 0px; width: 6px;}
+// @-webkit-keyframes throbbin
+//   0%    {margin-left: 0px; width: 3px;}
+//   14%   {margin-left: 6px; width: 3px;}
+//   27%   {margin-left: 12px; width: 3px;}
+//   41%   {margin-left: 18px; width: 3px;}
+//   55%   {margin-left: 24px; width: 3px;}
+//   69%   {margin-left: 29px; width: 3px;}
+//   83%   {margin-left: 22px; width: 10px;}
+//   100%  {margin-left: 0px; width: 6px;}
+
+// @keyframes throbbin
+//   0%   {margin-left: 0px; width: 3px;}
+//   14%  {margin-left: 6px; width: 3px;}
+//   27%  {margin-left: 12px; width: 3px;}
+//   41%  {margin-left: 18px; width: 3px;}
+//   55%  {margin-left: 24px; width: 3px;}
+//   69%  {margin-left: 29px; width: 3px;}
+//   83% {margin-left: 22px; width: 10px;}
+//   100% {margin-left: 0px; width: 6px;}

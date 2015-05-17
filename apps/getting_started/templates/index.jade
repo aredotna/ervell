@@ -1,5 +1,8 @@
 extends ../../../components/layout/index--bare
 
+block vars
+  - extraClasses = 'no-header no-messages'
+
 block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'getting_started' + sd.CSS_EXT) )
 
@@ -13,7 +16,6 @@ block body
 
         .getting-started--column__caption
           li #[strong Channels are collections of content.]
-          br
           | They can be #[strong.privacy--public public] (anyone can see and add), #[strong.privacy--closed closed] (anyone can see it, only you and your collaborators can add), #[strong.privacy--private private] (only you and your collaborators can see and add).
 
       .getting-started--column
@@ -28,7 +30,8 @@ block body
         img(src="../images/connection.png", alt="Connection")
 
         .getting-started--column__caption
-          li #[strong A connection is made when a person puts a block in a channel.] 
+          li #[strong A connection is made when a person puts a block in a channel.]
           | Blocks can have an infinite number of connections and connections can be made to private and public channels.
 
-      h3: a.getting-started--button.button--wide(href="/explore") Get started &rarr;
+      .getting-starte-button-container
+        a.getting-started--button.button--wide(href="/explore") Start exploring &rarr;

@@ -24,39 +24,73 @@
     .header--icon
       display none
 
-.layout-header__search:hover .header--icon svg *
-  fill hovergray
-  stroke hovergray
+body.no-header #layout-header
+  display none
+
+.layout-header__search
+  flex-grow 3
+  position relative
+
+  &:hover
+    .logo-icon
+      opacity 0
+
+    .glass-icon
+      opacity 1
 
 .header--icon
   position absolute
   left 0
   top 0
   width 40px
+  height topbar_h
 
-  svg
-    width 46px
-    height 46px
-    line-height 2em
-    padding 18px 15px 12px 15px
-    outline none
+  &:hover
+    .glass-icon
+      opacity 0
 
-    .iconic-magnifying-glass-lg
-      display none
+    .logo-icon
+      opacity 1
 
-    .iconic-magnifying-glass-md
-      display none
+  .glass-icon
+    opacity 0
+    position absolute
+    height topbar_h
 
-    .iconic-magnifying-glass-sm
-      display inline
+    svg
+      width 46px
+      height topbar_h
+      line-height 2em
+      padding 16px 16px 16px 16px
+      outline none
 
-    & *
-      stroke lightgray
-      fill lightgray
+      .iconic-magnifying-glass-lg
+        display none
 
-.layout-header__search
-  flex-grow 3
-  position relative
+      .iconic-magnifying-glass-md
+        display none
+
+      .iconic-magnifying-glass-sm
+        display inline
+
+      & *
+        stroke lightgray
+        fill lightgray
+
+  .logo-icon
+    position absolute
+    cursor pointer
+    height topbar_h
+
+    svg
+      width 46px
+      height topbar_h
+      fill textgray
+      padding 10px 8px 10px 12px
+
+    &:hover
+      svg
+        fill hovergray
 
 input#layout-header__search__input
   width 100%
@@ -128,25 +162,6 @@ privacy-color('.search__results__result--privacy-', color)
   text-align right
   margin 0
 
-.logo-icon.dropdown--menu__trigger
-  height topbar_h
-  padding 0 22px 0 22px
-
-.logo
-  &.has-notifications .logo-icon
-    svg
-      fill alert
-
-  .logo-icon svg
-    display inline-block
-    fill textgray
-    width 25px
-    height topbar_h
-
-  .logo-icon:hover, &.dropdown--is_active .logo-icon
-    svg
-      fill hovergray
-
 .dropdown--menu .user__avatar--thumb
   width 30px
   opacity 0.95
@@ -186,14 +201,15 @@ privacy-color('.search__results__result--privacy-', color)
 .new-channel-btn
   height topbar_h
   font-size 13px
-  line-height 53px
   color textgray
   border 0px solid bordergray
   text-align center
   margin 0 0 0 15px
   font-weight bold
 
-  &:before
+  &.iconic:before
+    vertical-align middle !important
+    padding-right .5em
     font-size 11px !important
     top 0px !important
 
@@ -209,6 +225,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown--menu
   cursor pointer
+  margin-right 25px
 
 .dropdown
   position absolute
@@ -264,54 +281,9 @@ privacy-color('.search__results__result--privacy-', color)
   float right
   height 100%
   color #CACACA
-  
+
   .iconic[data-glyph]:before
     font-size 14px
-
-/*
-  .dropdown__notifications
-    width 100%
-    height 160px
-    overflow scroll
-    -webkit-overflow-scrolling touch
-    margin 0
-    border-top 1px solid bordergray
-    background-color secondbackgroundgray
-    cursor default
-    padding-top 10px
-
-    .feed-group__sentence
-      font-size s_caption
-      margin 0
-      color textgray
-
-      a
-        color textgray
-
-        &:hover
-          color hovergray
-
-    .feed-group__sentence.is_unread
-      color alert
-
-      a
-        color alert
-
-    .feed-group__timestamp
-      padding-top 5px
-      text-align center
-      color lightgray
-
-  .dropdown__link--small
-    line-height 3em
-    font-size 12px
-    font-weight normal
-    color lightgray
-    text-align center
-
-    &:hover
-      color lightgrayplus
-*/
 
 .dropdown--is_active .dropdown
   display block
@@ -320,6 +292,8 @@ privacy-color('.search__results__result--privacy-', color)
   content ""
 
 @media (max-width:410px)
+
+
   #layout-header
     position fixed
 
@@ -334,11 +308,12 @@ privacy-color('.search__results__result--privacy-', color)
     position fixed
     overflow scroll
     width 100%
-  input#layout-header__search__input
-    padding 0 container_pad 0 40px
 
   .layout-header__register
     width 185px
+
+  .new-channel-btn
+    font-size 0
 
   .new-channel-btn--caption
     display none
@@ -351,11 +326,11 @@ privacy-color('.search__results__result--privacy-', color)
       width 100%
       height auto
       margin 0
-    
+
     .dropdown__section
       font-size 1.5em
       padding 14px 15px 8px 15px
-  
+
     .dropdown__link--tools
       .dropdown__text--small
         display none
