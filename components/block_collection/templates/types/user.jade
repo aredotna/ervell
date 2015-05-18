@@ -24,4 +24,5 @@ block content
   - if(block.get('class') == 'User' && block.has('username'))
     h2= block.get('username')
     +avatar(block)
-    .button--inblock.button--inblock--bottom.grid__block__follow_btn &nbsp;
+    - if(user && user.id != block.id)
+      .button--inblock.button--inblock--bottom.grid__block__follow_btn &nbsp;
