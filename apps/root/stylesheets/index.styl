@@ -1,9 +1,9 @@
-.body--home 
+.body--home
   #layout-header
     position absolute
     background transparent
     color hovergray
-    
+
     .logo
       opacity 0.9
       svg
@@ -12,19 +12,19 @@
     .header--icon
       &:hover
         cursor default
-    
+
     .layout-header__register
       padding 0 12px 0 20px
 
     .btn-signup
       display none
-    
+
     .layout-header__or
       display none
-    
+
     .layout-header__login
       color textgray
-      
+
       &:hover
         color hovergray
 
@@ -46,7 +46,7 @@
 
   h2:nth-of-type(1)
     margin-top 2em
-  
+
   .intro__button
     width 110px
     display inline-block
@@ -54,13 +54,13 @@
     border-bottom 1px solid textgray
     padding 0 0 16px 0
     margin 50px 25px 0 25px
-    
+
     a
       color textgray
       font-size 1.2em
       font-weight bold
       padding-bottom 12px
-    
+
     &:hover
       cursor pointer
       border-bottom 1px solid hovergray
@@ -126,8 +126,11 @@
     float left
     width 100%
     color textgray
-    padding 0 10px 10px 10px
+    padding 0 30px 10px 10px
     margin 0
+
+    li:last-child
+      font-weight normal
 
     .breadcrumb
       position relative
@@ -221,11 +224,18 @@ privacy-color('.privacy--', color)
 @media (max-width:500px)
   .home__section--intro
     padding 4em 0
-    text-align left
+
+    .intro__button
+      width 110px
+      display inline-block
+      text-align center
+      border-bottom 1px solid textgray
+      padding 0 0 16px 0
+      margin 50px 5px 0 5px
 
     h1
       font-size 1.5em
       font-weight 100
 
   .home__section--channels
-    padding 0 0 70px 0
+    padding 20px 0 70px 0
