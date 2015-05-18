@@ -15,8 +15,15 @@
   padding s_margin * 2 0
   display none
 
-.settings-is-active .metadata--container__settings__done
+div#metadata__column-manage
   display block
+
+.settings-is-active 
+  .metadata--container__settings__done
+    display block
+  
+  div#metadata__column-manage
+    display none
 
 .metadata__column
   display inline-block
@@ -51,10 +58,6 @@
   
 #metadata--actions
   overflow-y visible
-
-div#metadata__column-manage
-  &.is-expanded
-    display none
 
 .settings-is-active .metadata__column--right
   display none
