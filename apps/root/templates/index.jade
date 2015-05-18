@@ -25,7 +25,7 @@ block body
                 li
                   a(href="/#{e_channel.user.slug}")=e_channel.user.username
                 li
-                  a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="")=e_channel.title
+                  a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="privacy--#{e_channel.status}")=e_channel.title
           .home__section-channels__images.grid
             - for block in e_channel.contents.models.slice(0,4)
               include ../../../components/block_collection/templates/block
