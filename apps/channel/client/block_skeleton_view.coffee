@@ -67,7 +67,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @resetQueue([1, 2, 3])
 
   checkWaypoint: (el, direction)->
-    console.log 'check waypoint', el
     current = $(el.element).data('page')
 
     if current is 'last'
@@ -84,7 +83,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @resetQueue(toLoad)
 
   addPage: (id)->
-    console.log 'addPage', id
     @pages[id] =
       loaded: false
       loading: false
@@ -141,7 +139,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
   unsetPlaceholdersLoading: (id) -> $("#page-#{id}").nextUntil("#page-#{id + 1}").removeClass('loading')
 
   completeRequest: (page_id) ->
-    console.log 'completeRequest', page_id
     @pagesLoaded()
     @markPageLoaded(page_id)
     @startLoad()
