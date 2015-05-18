@@ -35,6 +35,7 @@ _ = require 'underscore'
 
 @followers = (req, res, next) ->
   return next() unless res.locals.author
+  return next() if res.locals.author?.id is 21
 
   blocks = new FollowBlocks null,
     object_id: req.params.username
@@ -54,6 +55,7 @@ _ = require 'underscore'
 
 @following = (req, res, next) ->
   return next() unless res.locals.author
+  return next() if res.locals.author?.id is 21
 
   blocks = new FollowBlocks null,
     object_id: req.params.username

@@ -20,5 +20,6 @@ block metadata
       include metadata_pockets/view
       if author && user && author.id != user.id
         include metadata_pockets/actions
-      include metadata_pockets/followers
-      include metadata_pockets/following
+      if author.id != 21
+        include metadata_pockets/followers
+        include metadata_pockets/following
