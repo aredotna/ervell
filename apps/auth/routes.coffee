@@ -1,7 +1,8 @@
 #
 # Auth routes
 #
-
+Backbone = require 'backbone'
+sd = require("sharify").data
 { parse } = require 'url'
 
 @logout = (req, res, next) ->
@@ -18,6 +19,12 @@
           next error
         else
           res.json req.user.attributes
+
+@resetPassword = (req, res, next) ->
+  next() if req.user
+  res.locals.sd.TOKEN = req.params.token
+  res.render 'reset_password'
+
 
 @redirectBack = (req, res, next) ->
   url = req.body['redirect-to'] or
