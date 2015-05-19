@@ -5,6 +5,7 @@
 Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
+_s = require 'underscore.string'
 
 module.exports = class Block extends Base
 
@@ -65,7 +66,7 @@ module.exports = class Block extends Base
     @get('user').id is user.id
 
   allows: (permission, user) ->
-    _.include @getPermissions(user), permission
+    _s.include @getPermissions(user), permission
 
   connectedByCurrentUser: (user)->
     @get('connected_by_user_id') is user.id
