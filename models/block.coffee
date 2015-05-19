@@ -59,7 +59,7 @@ module.exports = class Block extends Base
     if (@connectedByCurrentUser(user) or @belongsToCurrentUser(user)) && channel?
       permissions.push 'can-manage'
 
-    (_.uniq permissions)
+    (_.uniq permissions).join ' '
 
   belongsToCurrentUser: (user)->
     @get('user').id is user.id
