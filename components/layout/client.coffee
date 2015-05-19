@@ -63,7 +63,6 @@ setupPusherAndCurrentUser = ->
   if user.id
 
     user.fetch
-      cache: true
       prefill: true
       prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
       success: ->
