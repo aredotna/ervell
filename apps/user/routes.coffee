@@ -66,7 +66,7 @@ _ = require 'underscore'
     cache: true
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
-      res.locals.sd.FOLLOWERS = blocks.toJSON()
+      res.locals.sd.FOLLOWING = blocks.toJSON()
       res.render "index",
         blocks: blocks.models
         author: res.locals.author

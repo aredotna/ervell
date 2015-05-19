@@ -15,7 +15,7 @@ module.exports =
   PUSHER_KEY: '19beda1f7e2ca403abab'
   S3_KEY: null
   S3_SECRET: null
-  SESSION_SECRET: '3rv3ll-mAn'
+  SESSION_SECRET: '3rv3ll-mAnd1ngo'
   SESSION_COOKIE_MAX_AGE: 31536000000
   SESSION_COOKIE_KEY: 'arena.session'
   COOKIE_DOMAIN: null
