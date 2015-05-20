@@ -184,15 +184,16 @@ body.is-lightbox
   padding 20px 0 20px 0
 
   .lightbox__content__footer__inner__col-1
+    display table-cell
     position relative
-    float left
     width 50%
 
   .lightbox__content__footer__inner__col-2
+    display table-cell
     position relative
-    float left
     width 50%
     height 100%
+    vertical-align middle
 
   .attribute-group
     display block
@@ -403,9 +404,13 @@ body.is-lightbox
 @media (max-width:(block_width_mar * 2))
   .lightbox__content__footer__inner
     .lightbox__content__footer__inner__col-1
+      display block
+      float left
       width 100%
 
     .lightbox__content__footer__inner__col-2
+      display block
+      float left
       width 100%
       height 80px
       margin-top 20px
