@@ -101,5 +101,13 @@
 @media (max-width:500px)
   .grid__block--new-block .plus-placeholder
     display none
+    
   .grid__block--new-block .add-block__placeholder
     display block
+    
+  .grid__block--new-block__content-field
+    background-color transparent
+  
+  .grid__block__inner:hover, .grid__block.active
+    .grid__block--new-block__content-field
+      background-color transparent
