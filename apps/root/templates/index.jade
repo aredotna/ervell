@@ -7,12 +7,13 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'all' + sd.CSS_EXT) )
 
 block body
-  .home__section.home__section--intro.flex-container
-    p: h1 Are.na helps you build and organize ideas over time.
-    p: h1 You can collect and recombine blocks of information – texts, images, links, and files – by yourself or with collaborators.
-    p: h1 There is no wrong way to use Are.na &darr;
-    .intro__button #[a(href="#sign_up") Sign up]
-    .intro__button #[a(href="/about") About]
+  .home__section.home__section--intro
+    .home__section--intro__inner
+       p: h1 Are.na helps you build and organize ideas over time.
+       p: h1 You can collect and recombine blocks of information – texts, images, links, and files– by yourself or with collaborators.
+       p: h1 There is no wrong way to use Are.na &darr;
+       .intro__button #[a(href="#sign_up") Sign up]
+       .intro__button #[a(href="/about") About]
 
   .home__section.home__section--channels
     .home__section__container.flex-container

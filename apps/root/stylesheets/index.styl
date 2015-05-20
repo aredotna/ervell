@@ -1,3 +1,9 @@
+html, body
+  min-height 100% !important
+  height 100%
+  margin 0
+  padding 0
+
 .body--home
   #layout-header
     position absolute
@@ -29,16 +35,24 @@
         color hovergray
 
   .container
-    background-color backgroundgray
+    position absolute
+    height 100%
 
 .home__section--intro
   width 100%
   height 100%
   padding 0 10px
-  background-color transparent
-  padding 7em 6em 10em 6em
+  background-color backgroundgray
   color hovergray
   text-align center
+  display table
+  padding 25px 7em 0
+
+  .home__section--intro__inner
+    display table-cell
+    width 100%
+    height 100%
+    vertical-align middle
 
   h1
     font-size 2.2em
@@ -67,12 +81,8 @@
       a
         color hovergray
 
-.home__section--intro__mark
-  margin 2em 0 4em 0
 
 .home__section--footer
-  position relative
-  float left
   width 100%
   color hovergray
   background-color #fff
@@ -96,17 +106,9 @@
       color textgray
       border-bottom 2px solid textgray
 
-.home__section-intro__text
-  margin 50px 0 90px 0
-  line-height 1.4em
-  text-align center
-  color hovergray
-
 .home__section--channels
-  position relative
-  float left
   width 100%
-  background-color none
+  background-color #fff
   padding 3em 0 70px 0
   border-top 1px solid bordergray
 
@@ -223,7 +225,7 @@ privacy-color('.privacy--', color)
 
 @media (max-width:500px)
   .home__section--intro
-    padding 4em 0
+    padding 4em 1em
 
     .intro__button
       width 110px
