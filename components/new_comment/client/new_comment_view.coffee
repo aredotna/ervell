@@ -11,19 +11,11 @@ newCommentTemplate = -> require('../templates/new_comment.jade') arguments...
 module.exports = class NewCommentView extends Backbone.View
 
   events:
-    'keyup .new-comment__field' : 'onKeyUp'
+    'click .new-comment__submit': 'addComment'
 
   initialize: (options)->
     @block_id = options.block_id
     @render() if options.autoRender
-
-  onKeyUp: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-
-    switch e.keyCode
-      when 13
-        @addComment()
 
   fieldIsEmpty: -> @$input.val() is ""
 
@@ -48,4 +40,4 @@ module.exports = class NewCommentView extends Backbone.View
 
   render: ->
     @$el.html newCommentTemplate()
-    @$input = @$('input.new-comment__field')
+    @$input = @$('textarea.new-comment__field')
