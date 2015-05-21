@@ -26,11 +26,9 @@
   - if(block.get('class') == 'Media')
     .lightbox__content__media!= block.get('embed').html
 
-  .lightbox__arrow-container.directional-arrows.directional-arrows--right(data-direction="next")
-    img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-r.svg" class="iconic iconic-sm")
+  .lightbox__arrow-container.directional-arrows.directional-arrows--right(data-direction="next"): img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-r.svg" class="iconic iconic-sm")
 
-  .lightbox__arrow-container.directional-arrows.directional-arrows--left(data-direction="prev")
-    img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm")
+  .lightbox__arrow-container.directional-arrows.directional-arrows--left(data-direction="prev"): img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm")
 
   .lightbox__content__footer
     .lightbox__content__footer__inner

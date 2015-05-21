@@ -1,14 +1,19 @@
-h2.feed-group__sentence(class=group.isNew() ? 'is_unread' : '')
-  a(href="/#{group.actor().slug}" class="username")=group.actor().username
-  -if(group.action() == "said")
-    span :
-  span &nbsp;
-  -if(group.action() != "said")
+- className = [];
+- group.isNew() ? className.push('is_unread') : '';
+- group.is_comment() ? className.push('is_comment') : '';
+
+h2.feed-group__sentence(class=className.join(' '))
+  span.feed-group__sentence__username
+    a(href="/#{group.actor().slug}" class="username")=group.actor().username
+    - if(group.is_comment())
+      | :
+    span &nbsp;
+  unless (group.is_comment())
     span=group.action()
     span &nbsp;
   if group.is_single()
     if group.is_comment()
-      .feed-group__sentence__comment(id="attribute-body_#{group.first_item().id}")=group.single_subject()
+      span.feed-group__sentence__comment(id="attribute-body_#{group.first_item().id}")=group.single_subject()
     else
       span
         a(href="#{group.single_subject_link()}" class="privacy--#{group.subject_privacy()}")=group.single_subject()

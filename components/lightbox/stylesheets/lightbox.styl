@@ -248,6 +248,43 @@ body.is-lightbox
     width 65%
     margin auto
 
+.lightbox__feed .feed-group__sentence.is_comment
+  width 550px
+
+  .feed-group__sentence__username
+    display block
+
+.lightbox__feed .feed-group__sentence__comment
+  display inline-block
+  font-family font_serif
+  width 550px
+  font-size .8em
+  line-height 1.2
+  text-align left
+
+  ol
+    ol()
+
+  p, li
+    margin 15px 0
+
+  &.attribute-group .attr-value
+    &:before
+      content ""
+
+    &:after
+      content ""
+
+    p
+      display block
+
+  &:not(.attribute-group)
+    &:before
+      content ""
+
+    &:after
+      content ""
+
 .lightbox__connect
   width 100%
   height 80px
