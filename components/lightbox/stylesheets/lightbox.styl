@@ -157,13 +157,14 @@ body.is-lightbox
   position relative
   text-align center
 
-  iframe
+  .lightbox__content__media__inner
     position relative
-    width w=853px
-    height (w / 1.777777)
     top 50%
     v-align()
     z-index lightbox_z + 1
+
+  iframe
+    max-width 90%
 
 .lightbox__content__footer
   position relative
@@ -427,17 +428,6 @@ body.is-lightbox
           .lightbox__connect__container
             top 0
 
-@media (max-width:760px), (max-height:500px)
-  .lightbox__content__media
-    iframe
-      width w=500px
-      height (w / 1.777777)
-
-@media (max-width:600px), (max-height:400px)
-  .lightbox__content__media
-    iframe
-      width w=400px
-      height (w / 1.777777)
 
 @media (max-width:(block_width_mar * 2))
   .lightbox__content__footer__inner
@@ -479,11 +469,6 @@ body.is-lightbox
 
   .lightbox__feed
     padding 20px 0 20px 0
-
-  .lightbox__content__media
-    iframe
-      width w=310px
-      height (w / 1.777777)
 
 @import '../../new_comment/stylesheets/new_comment'
 @import '../../editable_attribute/stylesheets/editable_attribute'
