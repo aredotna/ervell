@@ -16,7 +16,6 @@ module.exports = class AvatarView extends Backbone.View
     @listenTo mediator.shared.current_user, 'change', @updateAvatar
 
   updateAvatar: ->
-    $.ajax '/me/refresh'
     @render()
 
   setAvatar: (location) ->
