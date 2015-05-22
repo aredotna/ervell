@@ -1,8 +1,10 @@
+//- ensure private share links don't get indexed
+if channel && author && channel.get('status') == 'private'
+ meta(name="robots" content="noindex")
 //- mobile
 meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui")
 meta(name="apple-mobile-web-app-capable" content="yes")
 meta(name="apple-mobile-web-app-status-bar-style" content="black")
-meta(name="google-site-verification" content="yEDzyeh9dYsQoRw7VJA6X5aVthUCYVTNK6nOUQU1eEE")
 link(rel="apple-touch-icon" href="#{sd.IMAGE_PATH}touch-icon-iphone.png")
 link(rel="apple-touch-icon" sizes="76x76" href="#{sd.IMAGE_PATH}touch-icon-ipad.png")
 link(rel="apple-touch-icon" sizes="120x120" href="#{sd.IMAGE_PATH}touch-icon-iphone-retina.png")
