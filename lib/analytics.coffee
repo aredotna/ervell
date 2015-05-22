@@ -5,6 +5,8 @@ qs = require('querystring')
 
 module.exports = (options) =>
   return if module.exports.getUserAgent()?.indexOf?('PhantomJS') > -1
+  return if sd?.CHANNEL?.status is 'private'
+
   { @ga, @location } = options
   @location ?= window?.location
   if sd.GOOGLE_ANALYTICS_ID
