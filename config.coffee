@@ -24,6 +24,7 @@ module.exports =
   IMAGE_PROXY_URL: 'http://images.are.na'
   REDIS_URL: null
   GOOGLE_ANALYTICS_ID: null
+  STRIPE_PUBLISHABLE_KEY: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports
