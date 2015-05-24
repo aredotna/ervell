@@ -74,11 +74,10 @@ block body
       h2.static--title--top#roadmap Roadmap
       p Here's a list of what we're working, planned features and recently completed ones:
         .static--small-text
-          li Channel order and view settings
+          li Channel view settings
           li Profile bio
-          li Infinite scrolling on /explore
           li Filter search inside channels and profiles [Premium]
-          li Render svg images
+          li @mentions
           li Channel scoped comments
           li: strike Connect channel from open channel
           li: strike Invite friends
@@ -134,35 +133,37 @@ block body
       h2.static--title--top#supporters Supporters
       p We are grateful to our supporters who donated trusting the project from the beginning:
       ul.static--small-text
-        li Rafael Rozendaal
-        li Laurel Schwulst
-        li Harm van den Dorpel
-        li Anne Spalter
-        li Joel Holmberg
-        li Bryce Wilner
-        li Adam Sammons
-        li Loic Bernasconi
-        li Esen Karol
-        li Splnlss
-        li Chris Coy
-        li Mike Tully
-        li Nick DeMarco
-        li Csaba Osvath
-        li Nick Moore
-        li Zach Rose
-        li David Hilmer Rex
-        li David Berezin
-        li Julia Panek
-        li Cleopatra's US
-        li Juliana Romano
-        li Grace Robinson-Leo
-        li Alexandros Stamatelatos
-        li Robert D Matthews
-        li Aslak Aamot Kjærulff
-        li James Chae
-        li Christopher Pappas
-        li Elizabeth Sutherland
-        li Sun An
+        .static--half-column
+          li Rafael Rozendaal
+          li Laurel Schwulst
+          li Harm van den Dorpel
+          li Anne Spalter
+          li Joel Holmberg
+          li Bryce Wilner
+          li Adam Sammons
+          li Loic Bernasconi
+          li Esen Karol
+          li Splnlss
+          li Chris Coy
+          li Mike Tully
+          li Nick DeMarco
+          li Csaba Osvath
+          li Nick Moore
+        .static--half-column
+          li Zach Rose
+          li David Hilmer Rex
+          li David Berezin
+          li Julia Panek
+          li Cleopatra's US
+          li Juliana Romano
+          li Grace Robinson-Leo
+          li Alexandros Stamatelatos
+          li Robert D Matthews
+          li Aslak Aamot Kjærulff
+          li James Chae
+          li Christopher Pappas
+          li Elizabeth Sutherland
+          li Sun An
       p If you would like to donate or help the Are.na in any way feel free to contact us via email.
 
     .static__contact.static--text
@@ -172,6 +173,7 @@ block body
       p.static--no-p: a(href="http://twitter.com/aredotna") Twitter
       p.static--no-p: a(href="http://instagram.com/aredotna") Instagram
       p.static: #[a.anchor(data-section="terms" href="/terms") Terms of Service] | #[a(href="/privacy") Privacy Policy]
+      .static--padding
 
   h3.static__menu
     ul
@@ -188,8 +190,10 @@ block body
       li: a.anchor(data-section="labs").static__menu__item Labs
       li: a.anchor(data-section="faq").static__menu__item FAQ
       li: a.anchor(data-section="supporters").static__menu__item Supporters
-      li: a.anchor(data-section="contact").static__menu__item Contact
-      li: a.anchor(data-section="terms").static__menu__item Terms & Privacy
+      li 
+        a.anchor(data-section="contact").static__menu__item Contact
+          br
+          | Terms & Privacy
 
 block scripts
   script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
