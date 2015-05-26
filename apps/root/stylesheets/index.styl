@@ -67,7 +67,7 @@ html, body
     text-align center
     border-bottom 1px solid textgray
     padding 0 0 16px 0
-    margin 50px 25px 0 25px
+    margin 50px 20px 0 20px
     color textgray
     font-size 1.2em
     font-weight bold
@@ -219,14 +219,19 @@ privacy-color('.privacy--', color)
 
 @media (max-width:(block_width_mar * 2) + 20)
   .home__section--channels
-    padding 20px 10px 20px 10px
+    padding 20px 8px 20px 8px
+  
+  .home__section--intro 
+    a.intro__button
+      width 100px
+      margin 50px 12px 0 12px
 
 @media (max-width:500px)
   .home__section--intro
     padding 4em 1em
 
     a.intro__button
-      width 110px
+      width 100px
       display inline-block
       text-align center
       border-bottom 1px solid textgray
