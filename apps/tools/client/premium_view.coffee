@@ -17,10 +17,17 @@ module.exports = class PremiumView extends Backbone.View
   openCheckout: (e) =>
     @handler.open
       name: 'Are.na'
-      description: 'Premium Subscription'
+      description: '1 year / Premium subscription'
       amount: 4500
 
     e.preventDefault()
 
   handleToken: (token)->
-    console.log 'handle token', token
+    $.ajax
+      url: "#{sd.API_URL}/charges"
+      type: 'POST'
+      data: stripeToken: token
+      success: (response) ->
+        console.log 'successful charge', response
+      error: (response) ->
+        console.log 'charge error', response
