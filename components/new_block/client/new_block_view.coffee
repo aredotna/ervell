@@ -11,12 +11,12 @@ newBlockTemplate = -> require('../templates/new_block.jade') arguments...
 module.exports = class NewBlockView extends Backbone.View
 
   events:
-    'click .add-block__placeholder__choose'                 : 'triggerFileDialog'
-    'click #grid__block--new-block__content-field'          : 'setActive'
+    'tap .add-block__placeholder__choose'                 : 'triggerFileDialog'
+    'tap #grid__block--new-block__content-field'          : 'setActive'
     'blur  textarea#grid__block--new-block__content-field'  : 'removeActive'
-    'click .grid__block--new-block__cancel'                 : 'cancelForm'
-    'click .grid__block--new-block__submit'                 : 'createBlock'
-    'click .add-block__placeholder'                         : 'setActive'
+    'tap .grid__block--new-block__cancel'                 : 'cancelForm'
+    'tap .grid__block--new-block__submit'                 : 'createBlock'
+    'tap .add-block__placeholder'                         : 'setActive'
 
   initialize: (options)->
     @blocks = options.blocks

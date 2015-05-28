@@ -9,7 +9,7 @@ followButtonTemplate = -> require('../templates/follow_button.jade') arguments..
 module.exports = class FollowButtonView extends Backbone.View
 
   events:
-    'click' : 'toggleFollow'
+    'tap' : 'toggleFollow'
 
   initialize: (options) ->
     super
