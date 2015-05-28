@@ -34,7 +34,9 @@ module.exports = class NewBlockView extends Backbone.View
   removeActive: ->
     @$el.removeClass 'active' unless @$field.val()
 
-  triggerFileDialog: ->
+  triggerFileDialog: (e)->
+    e.preventDefault()
+    e.stopImmediatePropagation()
     $('#fileupload input:file').trigger('click')
     return false
 
