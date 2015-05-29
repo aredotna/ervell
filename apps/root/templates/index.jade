@@ -8,13 +8,20 @@ block styles
 
 block body
   .home__section.home__section--intro
+    .home__section--intro-bk
     .home__section--intro__inner
        p: h1 Are.na helps you build and organize ideas over time.
-       p: h1 You can collect and recombine blocks of information – texts, images, links, and files– by yourself or with collaborators.
+       p: h1 You can collect and recombine blocks of information — texts, images, links, and files — by yourself or with collaborators.
        p: h1 There is no wrong way to use Are.na &darr;
-       a.intro__button(href="#sign_up") Register
-       a.intro__button(href="#log_in") Login
-       a.intro__button(href="/about") About
+       a.intro__button(href="#sign_up")
+        .intro__button--inner
+        p Register
+       a.intro__button(href="#log_in") 
+        .intro__button--inner
+        p Login
+       a.intro__button(href="/about")
+        .intro__button--inner
+        p About
 
   .home__section.home__section--channels
     .home__section__container.flex-container

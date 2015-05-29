@@ -8,13 +8,13 @@ html, body
   #layout-header
     position absolute
     background transparent
-    color hovergray
+    color #fff
 
     .logo
       opacity 0.9
       svg
-        fill hovergray
-
+        fill #fff
+        
     .header--icon
       &:hover
         cursor default
@@ -29,10 +29,7 @@ html, body
       display none
 
     .layout-header__login
-      color textgray
-
-      &:hover
-        color hovergray
+      color #fff
 
   .container
     position absolute
@@ -40,43 +37,72 @@ html, body
 
 .home__section--intro
   width 100%
-  height 85%
-  padding 0 10px
-  background-color backgroundgray
+  height 90%
+  background-color black
   color hovergray
   text-align center
   display table
-  padding 25px 7em 0
+  padding 0 7em 0
+  margin-top -30px
+  
+  .home__section--intro-bk
+    position absolute
+    width 100%
+    height 90%
+    left 0
+    top 0
+    background-image url('../images/arena-background.jpg')
+    background-repeat no-repeat
+    background-size 100% auto
+    opacity 0.55
+    margin-top -30px
 
   .home__section--intro__inner
+    position relative
     display table-cell
     width 100%
     height 100%
     vertical-align middle
 
   h1
-    font-size 2.2em
+    font-size 2.5em
     font-weight normal
+    color #fff
+    antialiased()
 
   h2:nth-of-type(1)
     margin-top 2em
 
   a.intro__button
-    width 110px
+    width 180px
+    height 50px
     display inline-block
     text-align center
-    border-bottom 1px solid textgray
-    padding 0 0 16px 0
-    margin 50px 20px 0 20px
-    color textgray
-    font-size 1.2em
-    font-weight bold
-    padding-bottom 12px
+    border 1px solid white
+    padding 0
+    margin 40px 15px 0 15px
+    
+    .intro__button--inner
+      width 100%
+      height 100%
+      background-color #fff
+      opacity 0.08
 
+    p
+      margin-top -34px
+      color #fff
+      font-size 1.2em
+      font-weight bold
+      antialiased()
+    
     &:hover
-      cursor pointer
-      border-bottom 1px solid hovergray
-      color hovergray
+      border 1px solid public
+        
+      .intro__button--inner
+        background-color transparent
+      
+      p
+        color public
 
 .home__section--footer
   width 100%
