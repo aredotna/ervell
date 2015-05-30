@@ -5,10 +5,13 @@
 Base = require "./base.coffee"
 analytics = require '../lib/analytics.coffee'
 sd = require("sharify").data
+_ = require 'underscore'
+_s = require 'underscore.string'
 
 module.exports = class User extends Base
 
   url: -> "#{sd.API_URL}/users/#{@id}"
+  urlRoot: -> "#{sd.API_URL}/users/#{@id}"
 
   startPrivateChannel: ->
     $.ajax
@@ -17,3 +20,17 @@ module.exports = class User extends Base
       success: (response) =>
         analytics.track.click "Collaborative private channel made"
         location.href = "/#{response.user.slug}/#{response.slug}"
+
+  getPermissions: (user)->
+    return "" unless user?
+
+    permissions = ['can-read']
+
+    # user is user
+    if user.id is @id
+      permissions.push 'can-edit'
+
+    (_.uniq permissions).join ' '
+
+  allows: (permission, user) ->
+    _s.include @getPermissions(user), permission

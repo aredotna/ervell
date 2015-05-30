@@ -7,13 +7,15 @@ Backbone.$ = $
 _ = require 'underscore'
 scrollFrame = require 'scroll-frame'
 sd = require("sharify").data
-Channel = require "../../models/channel.coffee"
+User = require "../../models/user.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
 FollowBlocks = require '../../collections/follow_blocks.coffee'
 InfiniteView = require '../../components/pagination/infinite_view.coffee'
+MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
 
 module.exports.init = ->
+
   if sd.FOLLOWING || sd.FOLLOWERS
     blocks = new FollowBlocks sd.BLOCKS,
       object_id: sd.USER.id
@@ -36,3 +38,13 @@ module.exports.init = ->
     context: $ ".grid"
     collection: blocks
     itemSelector: $ ".grid"
+
+  if sd.USER.id is sd.CURRENT_USER.id
+    user = new User sd.USER
+
+    new MetaEditableAttributeView
+      model: user
+      el: $("#metadata--info .metadata__content")
+      _attribute: 'description'
+      _kind: 'markdown'
+      wait: true

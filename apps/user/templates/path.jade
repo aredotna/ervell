@@ -3,7 +3,7 @@ extends ../../../components/path/templates/path
 block path
   li.path__username
     a(href="/" + author.get('slug'))=author.get('username')
-    if author.get('is_premium') == true
+    if author.get('is_pro') == true
      .is-premium-user ✶✶
   if followers
     li.path__sub Followers
