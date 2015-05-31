@@ -4,7 +4,8 @@ block path
   li.path__username
     a(href="/" + author.get('slug'))=author.get('username')
     if author.get('is_pro') == true
-     .is-premium-user ✶✶
+      .is-premium-user
+        a(href="/tools/premium") ✶✶
   if followers
     li.path__sub Followers
   if following
