@@ -13,6 +13,8 @@ module.exports = class User extends Base
   url: -> "#{sd.API_URL}/users/#{@id}"
   urlRoot: -> "#{sd.API_URL}/users/#{@id}"
 
+  href: -> "#{sd.APP_URL}/#{@get('slug')}"
+
   startPrivateChannel: ->
     $.ajax
       type: "POST"

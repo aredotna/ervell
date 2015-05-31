@@ -32,6 +32,14 @@ redis = require 'redis'
   return callback() unless @client?
   @client.get key, callback
 
+# Safe alias of del
+#
+# @param {String} key
+# @param {Function} callback
+@del = (key, callback) =>
+  return callback() unless @client?
+  @client.del key, callback
+
 # Iterates through a hash and calls JSON.stringify on each value. This is useful
 # when storing a big hash of models/collections to be deserialized later (e.g. on the fair page).
 #

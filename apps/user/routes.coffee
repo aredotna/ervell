@@ -3,6 +3,7 @@ UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
 Channel = require "../../models/channel"
 sd = require("sharify").data
+cache = require "../../lib/cache.coffee"
 _ = require 'underscore'
 
 @fetchAuthor = (req, res, next) ->
@@ -72,6 +73,11 @@ _ = require 'underscore'
         author: res.locals.author
         following: true
     error: (m, err) -> next err
+
+@update = (req, res, next) ->
+  return next() unless res.locals.author and (res.locals.author.id is res.locals.user.id)
+  cache.del "#{res.locals.author.href()}{}"
+  res.send 200
 
 @catchChannel = (req, res, next) ->
   channel = new Channel id: req.params.username

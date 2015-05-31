@@ -48,3 +48,8 @@ module.exports.init = ->
       _attribute: 'description'
       _kind: 'markdown'
       wait: true
+
+    user.on 'edit:success', ->
+      $.ajax
+        method: 'GET'
+        url: "#{user.href()}/update"
