@@ -17,7 +17,7 @@ sf:
 
 # Start the server with foreman and Redis
 spc:
-	REDIS_URL=redis://127.0.0.1:6379 foreman start
+	REDIS_URL=redis://127.0.0.1:6379 APP_URL=http://localhost:5000 foreman start
 
 # Start server in debug mode & open node inspector
 ssd:
