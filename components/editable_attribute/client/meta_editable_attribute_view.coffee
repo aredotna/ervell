@@ -7,6 +7,9 @@ attributeTemplate = -> require('../templates/editable_attribute.jade') arguments
 
 module.exports = class MetaEditableAttributeView extends EditableAttributeView
 
+  _isPresentClass: ->
+    if @model.get('metadata')[@_attribute] then 'is-present' else 'is-absent'
+
   render: ->
     @$el.html(attributeTemplate
       id: @model.id

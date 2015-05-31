@@ -76,7 +76,7 @@ _ = require 'underscore'
 
 @update = (req, res, next) ->
   return next() unless res.locals.author and (res.locals.author.id is res.locals.user.id)
-  cache.del "#{res.locals.author.href()}{}"
+  cache.del "#{res.locals.author.url()}{}"
   res.send 200
 
 @catchChannel = (req, res, next) ->

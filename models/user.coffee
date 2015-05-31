@@ -10,10 +10,14 @@ _s = require 'underscore.string'
 
 module.exports = class User extends Base
 
-  url: -> "#{sd.API_URL}/users/#{@id}"
-  urlRoot: -> "#{sd.API_URL}/users/#{@id}"
+  url: -> "#{sd.API_URL}/users/#{@slugOrId()}"
+
+  urlRoot: -> "#{sd.API_URL}/users/#{@slugOrId()}"
 
   href: -> "#{sd.APP_URL}/#{@get('slug')}"
+
+  slugOrId: ->
+    @get('slug') || @id
 
   startPrivateChannel: ->
     $.ajax

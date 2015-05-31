@@ -39,17 +39,16 @@ module.exports.init = ->
     collection: blocks
     itemSelector: $ ".grid"
 
-  if sd.USER.id is sd.CURRENT_USER.id
-    user = new User sd.USER
+  user = new User sd.USER
 
-    new MetaEditableAttributeView
-      model: user
-      el: $("#metadata--info .metadata__content")
-      _attribute: 'description'
-      _kind: 'markdown'
-      wait: true
+  new MetaEditableAttributeView
+    model: user
+    el: $("#metadata--info .metadata__content")
+    _attribute: 'description'
+    _kind: 'markdown'
+    wait: true
 
-    user.on 'edit:success', ->
-      $.ajax
-        method: 'GET'
-        url: "#{user.href()}/update"
+  user.on 'edit:success', ->
+    $.ajax
+      method: 'GET'
+      url: "#{user.href()}/update"
