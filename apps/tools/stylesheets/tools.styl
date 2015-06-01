@@ -74,15 +74,15 @@ li.friend-list__friend
     text-align center
     margin 55px 0 -20px 0
     font-weight normal
-  
+
   h3
     font-size 1em
     margin 0 0 0 1px
-    
+
   .tools__frame
     background-color backgroundgray
     font-size 1.2em
-    
+
     button
       margin 10px 0 0 0
       font-size 18px
@@ -91,12 +91,43 @@ li.friend-list__friend
   text-align left
   font-size 0.9em
   margin -2px 0 0 1px
-  
+
 .premium--img
   margin 12px 0 60px 0
   border 1px solid bordergray
-  box-shadow downshadow 
-  
+  box-shadow downshadow
+
+.premium--is-premium
+  color success
+
+.premium--status
+  -webkit-transform translateY(-1000%)
+  -ms-transform translateY(-1000%)
+  transform translateY(-1000%)
+  background-color rgba(255,255,255, 0.96)
+  z-index lightbox_z
+
+  &.is-active
+    -webkit-transform translateY(0)
+    -ms-transform translateY(0)
+    transform translateY(0)
+
+  &.abs-fill
+    position fixed
+
+  .inner
+    pointer-events none
+    position fixed
+    top 50%
+    width 100%
+    text-align center
+    v-align()
+
+  &.is-successful
+    color success
+
+  &.is-error
+    color alert
 
 #send-invitation__button
   line-height 45px
