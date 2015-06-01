@@ -9,6 +9,6 @@ _ = require 'underscore'
 
 module.exports = (req, res, next) ->
   res.locals.sd.CURRENT_PATH = parse(req.url).pathname
-  res.locals.sd.ARENA_XAUTH_TOKEN = res.locals.arenaXappToken
+  res.locals._ = _
 
   next()
