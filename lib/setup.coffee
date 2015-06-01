@@ -108,7 +108,8 @@ module.exports = (app) ->
       'avatar_image',
       'registered',
       'post_address',
-      'show_tour'
+      'show_tour',
+      'is_pro'
     ]
 
   app.use artsyError.helpers
