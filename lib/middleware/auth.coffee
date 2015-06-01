@@ -7,6 +7,7 @@ Backbone.sync = require "backbone-super-sync"
 _ = require 'underscore'
 
 module.exports = (p_req, res, next) ->
+  console.log 'editing request'
 
   Backbone.sync.editRequest = (req) ->
     if p_req.user?
