@@ -25,7 +25,6 @@ sd = require("sharify").data
   res.locals.sd.TOKEN = req.params.token
   res.render 'reset_password'
 
-
 @redirectBack = (req, res, next) ->
   url = req.body['redirect-to'] or
         req.query['redirect-to'] or
