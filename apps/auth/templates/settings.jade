@@ -1,0 +1,11 @@
+extends ../../../components/layout/index
+
+block vars
+  - extraClasses = 'no-messages'
+
+block body
+  .path--header
+    include ../../../components/settings/templates/settings.jade
+
+block scripts
+  script( src=sd.ASSET_PATH + 'settings' + sd.JS_EXT )

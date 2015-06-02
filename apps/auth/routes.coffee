@@ -11,9 +11,11 @@ sd = require("sharify").data
 
 @refresh = (req, res, next) ->
   return res.redirect("/") unless req.user
+  console.log 'refresh before fetch', req.user.id
   req.user.fetch
     error: res.backboneError
     success: ->
+      console.log 'refresh after fetch', req.user.id
       req.login req.user, (error) ->
         if (error)
           next error
@@ -21,9 +23,13 @@ sd = require("sharify").data
           res.json req.user.attributes
 
 @resetPassword = (req, res, next) ->
-  next() if req.user
+  return next() if req.user
   res.locals.sd.TOKEN = req.params.token
   res.render 'reset_password'
+
+@settings = (req, res, next) ->
+  return next() unless req.user
+  res.render 'settings'
 
 @redirectBack = (req, res, next) ->
   url = req.body['redirect-to'] or
