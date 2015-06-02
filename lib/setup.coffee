@@ -107,6 +107,8 @@ module.exports = (app) ->
       'shortcuts_id',
       'avatar_image',
       'registered',
+      'receive_email',
+      'receive_newsletter',
       'post_address',
       'show_tour',
       'is_pro'
