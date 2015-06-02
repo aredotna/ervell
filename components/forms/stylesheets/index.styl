@@ -209,3 +209,41 @@ button
     margin 0 auto 12px auto
     border-top 1px solid lightgrayplus
 
+bordered-select-caret-width = 8px
+bordered-select-border-width = 2px
+.bordered-select // label
+  margin-top 20px
+  position relative
+  display inline-block
+  // Hides the default caret button in FF
+  &:before
+    display block
+    position absolute
+    content ''
+    top bordered-select-border-width
+    right @top
+    bottom @top
+    width (bordered-select-caret-width * 3)
+    background-color white
+    border-top 10px solid white // faux margins
+    border-bottom @border-top
+    border-left 1px solid bordergray
+    pointer-events none
+  &:after
+    caret(bordergray)
+    position absolute
+    top 50%
+    right (bordered-select-caret-width + (bordered-select-border-width / 2))
+    margin-top -(bordered-select-border-width * 2)
+  > select
+    appearance none
+    outline none
+    display inline-block
+    width 200px
+    margin 0
+    padding 0
+    padding 8px 10px 7px
+    border 2px solid bordergray
+    border-radius 0
+    box-shadow none
+    background-color white

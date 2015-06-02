@@ -16,6 +16,15 @@
           input.input--wide.input--relative.is-block(
             name='email' type='email' value="#{user.get('email')}" placeholder='Email' required autofocus= autofocus
           )
+        .bordered-select
+          select(name="receive_email")
+            option(value="none" selected=user.get('receive_email') == 'none' ? 'selected' : null) No email notifications
+            option(value="digest" selected=user.get('receive_email') == 'digest' ? 'selected' : null) Receive periodic digest email
+            option(value="notifications" selected=user.get('receive_email') == 'notifications' ? 'selected' : null) Recieve one email per notification
+        .bordered-select
+          select(name="receive_newsletter")
+            option(value="digest" selected=user.get('receive_newsletter') == 'true' ? 'selected' : null) Subscribed to newsletter
+            option(value="notifications" selected=user.get('receive_newsletter') == 'false' ? 'selected' : null) Unsubscribed to newsletter
         .form__field
           input.input--wide.input--relative.is-block(
             name='password' type='password' placeholder='Password'
