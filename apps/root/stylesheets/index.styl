@@ -215,6 +215,16 @@ privacy-color('.privacy--', color)
 @media (max-width:(block_width_mar * 3) + 16)
   html, body
     font-size 13px
+    
+  .home__section--intro
+    a.intro__button
+      width 100px
+      height 40px
+      line-height 30px
+      margin 15px 12px 0 12px
+      
+    h1
+      font-size 1.8em
 
   .home__section--channels
     padding 20px 0 20px
@@ -248,22 +258,9 @@ privacy-color('.privacy--', color)
   .home__section--channels
     padding 20px 8px 20px 8px
 
-  .home__section--intro
-    a.intro__button
-      width 100px
-      margin 50px 12px 0 12px
-
 @media (max-width:500px)
   .home__section--intro
-    padding 4em 1em
-
-    a.intro__button
-      width 100px
-      display inline-block
-      text-align center
-      border-bottom 1px solid textgray
-      padding 0 0 16px 0
-      margin 50px 5px 0 5px
+    padding 5em 1em
 
     h1
       font-size 1.5em
