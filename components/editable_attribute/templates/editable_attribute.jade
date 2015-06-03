@@ -6,8 +6,10 @@ div(id="#{attribute}_display_#{id}" class="attr-value")
       != md(value)
     else
       = value
-  else
+  else if canEdit
     .placeholder Add #{attribute}
+  else
+    .placeholder —
 
 form.attr-editor
   if kind == 'markdown'

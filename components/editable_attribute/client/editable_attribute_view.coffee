@@ -1,4 +1,5 @@
 _ = require 'underscore'
+_s = require 'underscore.string'
 sd = require('sharify').data
 Backbone = require 'backbone'
 Backbone.$ = $
@@ -51,6 +52,7 @@ module.exports = class EditableAttributeView extends Backbone.View
       kind: @_kind
       value: @model.get @_attribute
       md: md
+      canEdit: _s.contains @model.getPermissions(@currentUser), 'can-edit'
     ).addClass @className()
 
   showMarkdownHelp: ->
