@@ -26,9 +26,11 @@ header#layout-header
         .dropdown__section
           a.dropdown__link.dropdown__link--profile(href="/#{user.get('slug')}") / #{user.get('username')}
           .dropdown__link.dropdown__text--small.dropdown__link--channels: #[a(href="/#{user.get('slug')}/channels") My channels]
-            .dropdown__icon: #[a(href="/manage").iconic(data-glyph="cog")]
+            if user.get('is_pro') == true
+              .dropdown__icon: #[a(href="/manage").iconic(data-glyph="cog")]
+
           a.dropdown__link.dropdown__text--small(href="/#{user.get('slug')}/blocks") My blocks
-          a.dropdown__link.dropdown__text--small.dropdown__link--settings(href="#") Settings
+          a.dropdown__link.dropdown__text--small(href="/settings") Settings
           a.dropdown__link.dropdown__text--small(href="/me/sign_out") Sign Out
         .dropdown__section
           a.dropdown__link.dropdown__link--feed(href="/") / Feed
