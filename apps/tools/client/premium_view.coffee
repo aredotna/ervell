@@ -2,6 +2,7 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 module.exports = class PremiumView extends Backbone.View
 
@@ -35,6 +36,7 @@ module.exports = class PremiumView extends Backbone.View
       success: (response) =>
         @$('.premium--status').addClass('is-successful')
         @$('.premium--status .inner').text "Registration successful."
+        analytics.track.submit 'User paid for pro account'
         $.ajax
           url: '/me/refresh'
           type: 'GET'
@@ -43,6 +45,7 @@ module.exports = class PremiumView extends Backbone.View
           success: ->
             location.reload()
       error: (response) =>
+        analytics.exception "Error registering pro account: #{response}"
         @$('.premium--status').addClass('is-error')
         @$('.premium--status .inner').text "Sorry, error registering your account, please try again."
         setTimeout (=> @$('.premium--status').removeClass('is-active')), 2000

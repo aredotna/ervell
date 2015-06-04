@@ -61,7 +61,6 @@ module.exports = class SettingsView extends Backbone.View
     @$('button').attr 'data-state', 'error'
     @$('.auth-errors').addClass('is-active').text msg
 
-
 module.exports.init = ->
   new SettingsView
     el: $ '#auth-page'
