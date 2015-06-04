@@ -16,7 +16,13 @@ module.exports = class AvatarView extends Backbone.View
     @listenTo mediator.shared.current_user, 'change', @updateAvatar
 
   updateAvatar: ->
-    @render()
+    $.ajax
+      url: '/me/refresh'
+      type: 'GET'
+      beforeSend: (xhr)->
+        xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
+      success: ->
+        @render()
 
   setAvatar: (location) ->
     @$('#avatar img').addClass 'is-loading'

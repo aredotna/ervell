@@ -35,11 +35,13 @@ module.exports = class PremiumView extends Backbone.View
       success: (response) =>
         @$('.premium--status').addClass('is-successful')
         @$('.premium--status .inner').text "Registration successful."
-        # $.ajax
-        #   url: '/me/refresh'
-        #   type: 'GET'
-        #   success: ->
-        location.reload()
+        $.ajax
+          url: '/me/refresh'
+          type: 'GET'
+          beforeSend: (xhr)->
+            xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
+          success: ->
+            location.reload()
       error: (response) =>
         @$('.premium--status').addClass('is-error')
         @$('.premium--status .inner').text "Sorry, error registering your account, please try again."

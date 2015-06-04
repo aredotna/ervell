@@ -3,7 +3,13 @@
 #
 Backbone = require 'backbone'
 sd = require("sharify").data
+User = require "../../models/user"
+cache = require "../../lib/cache.coffee"
 { parse } = require 'url'
+
+clearCache = (user) ->
+  user = new User user.attributes
+  cache.del "#{user.url()}{}"
 
 @logout = (req, res, next) ->
   req.logout()
@@ -11,15 +17,14 @@ sd = require("sharify").data
 
 @refresh = (req, res, next) ->
   return res.redirect("/") unless req.user
-  console.log 'refresh before fetch', req.user.id
   req.user.fetch
     error: res.backboneError
     success: ->
-      console.log 'refresh after fetch', req.user.id
       req.login req.user, (error) ->
         if (error)
           next error
         else
+          clearCache req.user
           res.json req.user.attributes
 
 @resetPassword = (req, res, next) ->

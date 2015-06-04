@@ -49,11 +49,13 @@ module.exports = class SettingsView extends Backbone.View
       @showError "Invalid, try again"
     else
       analytics.track.submit 'User settings changed'
-      # $.ajax
-      #   url: '/me/refresh'
-      #   type: 'GET'
-      #   success: ->
-      location.reload()
+      $.ajax
+        url: '/me/refresh'
+        type: 'GET'
+        beforeSend: (xhr)->
+          xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
+        success: ->
+          location.reload()
 
   showError: (msg) =>
     @$('button').attr 'data-state', 'error'
@@ -61,6 +63,5 @@ module.exports = class SettingsView extends Backbone.View
 
 
 module.exports.init = ->
-  console.log 'initing settings view'
   new SettingsView
     el: $ '#auth-page'
