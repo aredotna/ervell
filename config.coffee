@@ -10,7 +10,6 @@ module.exports =
   PORT: 4000
   APP_URL: "http://localhost:4000"
   API_URL: "http://arena-api.herokuapp.com/v2"
-  # API_URL: "http://arenaprototyperefactorb843.ninefold-apps.com/v3"
   # API_URL: "http://localhost:3000/v2"
   PUSHER_KEY: '19beda1f7e2ca403abab'
   S3_KEY: null
