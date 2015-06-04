@@ -7,10 +7,10 @@ block content
   .tools__frame
     p By subscribing to the premium membership you'll have access to a series of tools and features we'll be adding over time.
     p It's a fundamental part of Are.na's self-sustainability goal, we're still working on some of the features (see below) but there are extra goodies for the first 50 supporters.
-    //- if user.get('is_pro') == true
-    //-   .premium--is-premium Thank you for registering!
-    //- else
-    //-   button.button--wide.button--border.button--add $45 / year - Activate premium &rarr;
+    if user.get('is_pro') == true
+      .premium--is-premium Thank you for registering!
+    else
+      button.button--wide.button--border.button--add $45 / year — Activate premium &rarr;
   h2 What you get:
   .tools__frame
     h3 Bio in profile
