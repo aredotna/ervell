@@ -1,4 +1,4 @@
-.is-premium-user
+a.premium-badge
   position absolute
   display inline-block
   letter-spacing -1px
@@ -6,20 +6,18 @@
   line-height 19px
   padding 9px 2px 0px 9px
   antialiased()
+  color special
 
-  a 
-    color #E7DB5F
-    
-    &:hover
-      cursor pointer
-      color transparent
+  &:hover
+    cursor pointer
+    color transparent
 
-      &:after
-        content "PREMIUM"
-        color hovergray
-        font-weight 400
-        font-size 8.5px
-        vertical-align top
-        margin-left -23px
-        letter-spacing 0px
-        padding-top 1px
+    &:after
+      content "PREMIUM"
+      color hovergray
+      font-weight 400
+      font-size 8.5px
+      vertical-align top
+      margin-left -23px
+      letter-spacing 0px
+      padding-top 1px

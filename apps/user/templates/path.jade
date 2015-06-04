@@ -1,11 +1,10 @@
 extends ../../../components/path/templates/path
 
 block path
-  li.path__username
+  li.path__username(class=author.get('is_pro') == true ? 'is-premium' : '')
     a(href="/" + author.get('slug'))=author.get('username')
-    //- if author.get('is_pro') == true
-    //-   .is-premium-user
-    //-     a(href="/tools/premium") ✶✶
+    if author.get('is_pro') == true
+      a(href="/tools/premium").premium-badge ✶✶
   if followers
     li.path__sub Followers
   if following
