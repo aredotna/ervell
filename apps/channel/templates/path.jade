@@ -17,6 +17,7 @@ block metadata
   .metadata
     include meta_pockets/description
     include meta_pockets/collaborators
+    include meta_pockets/connections
     if user
       include meta_pockets/actions
       unless channel.get('status') == 'private'

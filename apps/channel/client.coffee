@@ -3,6 +3,7 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../lib/mediator.coffee'
 Channel = require '../../models/channel.coffee'
+ChannelConnections = require '../../collections/channel_connections.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 Collaborators = require '../../collections/collaborators.coffee'
 CurrentUser = require '../../models/current_user.coffee'
@@ -10,6 +11,7 @@ BlockCollectionView = require '../../components/block_collection/client/block_co
 BlockSkeletonView = require './client/block_skeleton_view.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
+ChannelConnectionsView = require './client/channel_connections_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
 ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
@@ -189,6 +191,14 @@ module.exports.init = ->
     isCollaboration: channel.has('collaboration')
     isEditable: mediator.shared.current_user.canEditChannel channel
     channel: channel
+
+  connections = new ChannelConnections [], { slug: channel.get('slug') }
+
+  new ChannelConnectionsView
+    collection: connections
+    el: $("#metadata--connections")
+
+  connections.fetch()
 
   if not sd.FOLLOWERS
 

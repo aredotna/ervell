@@ -1,0 +1,12 @@
+if connections.length
+  each connection, i in connections
+    if connections.length == 1
+      a(href="/#{connection.get('slug')}") #{connection.get('title')}
+    else
+      if i == connections.length - 2
+        a(href="/#{connection.get('slug')}") #{connection.get('title')}&nbsp;
+        span and&nbsp;
+      else if i == connections.length - 1
+        a(href="/#{connection.get('slug')}") #{connection.get('title')}
+      else if i < connections.length - 2
+        a(href="/#{connection.get('slug')}") #{connection.get('title')},&nbsp;
