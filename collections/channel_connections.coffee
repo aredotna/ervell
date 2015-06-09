@@ -14,4 +14,5 @@ module.exports = class ChannelConnections extends Backbone.Collection
   initialize: ( models, { @slug } ) ->
     super
 
-  parse: (data) -> data.channels
+  parse: (data) ->
+    channels = _.reject data.channels, (channel) -> channel.kind is 'profile'
