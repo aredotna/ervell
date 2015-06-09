@@ -7,12 +7,11 @@ template = -> require('../templates/connections.jade') arguments...
 module.exports = class ChannelConnectionsView extends Backbone.View
 
   initialize: (options)->
-    console.log 'initialize'
     @collection.on "sync", @render, @
 
   render: ->
     if @collection.length
       @$('.metadata__content').html template(connections: @collection.models)
-      @$el.show()
+      @$el.css 'display', 'inline-block'
     else
       @$el.hide()
