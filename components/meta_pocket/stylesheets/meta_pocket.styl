@@ -2,6 +2,7 @@
   padding 0
   height auto
   font-size s_caption + 1
+  position relative
 
   a
     font-weight bold
@@ -16,7 +17,10 @@
   display none
 
 div#metadata__column-manage
-  display nonef
+  display none
+
+  &.is-editable
+    display block
 
 .settings-is-active
   .metadata--container__settings__done
