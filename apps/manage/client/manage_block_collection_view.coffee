@@ -11,11 +11,11 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
   direction: 'asc'
 
   events:
-    "click .manage__block__sort__link": "sortBlocks"
+    "click .manage__block__sort__link" : "sortBlocks"
+    "keyup input"                      : "searchBlocks"
 
-  initialize: (options)->
+  initialize: ({ @blocks })->
     super
-    @blocks = options.blocks
     @blocks.on 'add', @appendBlockView, @
 
     @$('.manage__block').each @initBlockView
@@ -34,27 +34,48 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
   toggleDirection: ->
     @direction = if @direction is 'asc' then 'desc' else 'asc'
 
+  updateOptions: (options) ->
+    _.extend @blocks.options, options
+
+  getQuery: ->
+    query = @$('input').val()?.trim()
+    if query.length
+      return query
+    else
+      false
+
+  reset: ->
+    @updateOptions q: undefined
+    @fetchBlocks()
+
+  searchBlocks: (e) ->
+    return @reset() unless query = @getQuery()
+    return if (query.length < 2) or (query is @lastQuery)
+
+    @updateOptions q: query, page: 1
+    @fetchBlocks()
+
   sortBlocks: (e)->
     column = $(e.target).data('sort')
 
-    @$('.manage__block__sort__link').removeClass 'is-active is-asc is-desc'
-
-    _.extend @blocks.options,
+    @updateOptions
       page: 1
       sort: column
       subject: 'channel'
       direction: @direction
 
+    @$('.manage__block__sort__link').removeClass 'is-active is-asc is-desc'
     $(e.target).addClass "is-active is-#{@direction}"
+    @fetchBlocks()
+    @toggleDirection()
 
-    @blocks.fetch
+  fetchBlocks: ->
+    @xhr?.abort()
+    @xhr = @blocks.fetch
       success: =>
         @$('.manage__block__collection__contents').html('')
-
         for model in @blocks.models
           @renderBlockView(model, true)
-
-    @toggleDirection()
 
   appendBlockView: (model) ->
     @renderBlockView model, true
