@@ -4,6 +4,7 @@ Authentication = require '../../models/authentication.coffee'
 @tools = (req, res, next) ->
   res.redirect("/#log_in") unless req.user
   res.redirect("/tools/bookmarklet") unless req.params.tab
+  res.redirect("/manage") if req.params.tab is 'manage'
 
   tab = res.locals.sd.TAB = req.params.tab
 
