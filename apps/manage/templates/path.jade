@@ -3,7 +3,7 @@ extends ../../../components/path/templates/path
 block path
   li.path__username
     a(href="/" + author.get('slug'))=author.get('username')
-  li.path__sub Manage
+  li.path__sub Manage channels
 
 block right
   if author && user && author.id == user.id
