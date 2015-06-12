@@ -8,13 +8,9 @@ BlockView = require './block_view.coffee'
 
 module.exports = class BlockCollectionView extends Backbone.View
 
-  initialize: (options)->
-    { @channel, @blocks } = options
-
+  initialize: ({ @channel, @blocks })->
     mediator.shared.blocks = @blocks if @blocks
-
     IconicJS().inject 'img.iconic'
-
     @$('.grid__block').each @initBlockView
 
   initBlockView: (index, el) =>

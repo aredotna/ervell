@@ -29,23 +29,31 @@ vendor-prefixes ?= webkit moz official
   font-weight bold
   color lightgray
 
+.manage__block__collection__header, .manage__block__collection__contents
+  width 100%
+
 .manage__block__column
   width 200px
   padding 0 20px 0 0
 
-.manage__block__sort__link.is-active
+.manage__block__sort__link
+  cursor pointer
+
+.manage__block__sort__link
+  &.is-active
+    color hovergray
   &:hover
-    cursor pointer
+    cursor n-resize
     color hovergray
     &::after
       color hovergray
-
+  &.is-asc
+    cursor s-resize
   &.is-asc::after
     content "↑"
     margin 0 0 0 3px
     font-size 1.1em
     color lightgray
-
   &.is-desc::after
     content "↓"
     margin 0 0 0 3px
@@ -59,6 +67,41 @@ vendor-prefixes ?= webkit moz official
 
   a.is-active
     font-weight bold
+
+.form__field__manage-filter
+  height 50px
+  width 100%
+  position relative
+
+  input
+    width 100%
+    margin 0
+    padding-left 50px
+
+.form__field__manage-filter--icon
+  position absolute
+  left 0
+  top 0
+  padding 11px
+  max-width 40px
+  max-height 50px
+
+  svg
+    height 30px
+    width 20px
+
+    .iconic-magnifying-glass-lg
+      display none
+
+    .iconic-magnifying-glass-md
+      display none
+
+    .iconic-magnifying-glass-sm
+      display inline
+
+    & *
+      stroke lightgray
+      fill lightgray
 
 @media (max-width:(block_width_mar * 3) + 20)
   .manage__block__follower_count

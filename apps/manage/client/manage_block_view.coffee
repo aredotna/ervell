@@ -4,14 +4,12 @@ sd = require("sharify").data
 Collaborators = require '../../../collections/collaborators.coffee'
 ChannelCollaborationView = require '../../channel/client/channel_collaboration_view.coffee'
 ChannelVisibilityView = require '../../../components/channel_visibility/client/channel_visibility_view.coffee'
+ChannelExportView = require '../../../components/channel_export/client/channel_export_view.coffee'
 BlockView = require '../../../components/block_collection/client/block_view.coffee'
 
 blockTemplate = -> require('../templates/block_manage.jade') arguments...
 
 module.exports = class ManageBlockView extends BlockView
-
-  events:
-    'click .manage__block__export_link': 'exportChannel'
 
   initialize: ->
     @model.on 'change:status', @updateTitle
@@ -30,28 +28,12 @@ module.exports = class ManageBlockView extends BlockView
     @postRender()
 
   postRender: ->
-    # collaborators = new Collaborators
-    #   channel_slug: @model.get('slug')
-
-    # @collaborationView = new ChannelCollaborationView
-    #   collection: collaborators
-    #   el: @$ ".manage__block__collaborator_count"
-
     @channelVisibilityView = new ChannelVisibilityView
       el: @$(".manage__block__status")
       model: @model
       autoSync: true
 
-  exportChannel: (e)->
-    e.preventDefault()
-
-    format = 'json'
-
-    $.ajax
-      type: 'POST'
-      url: "https://export-are-na.herokuapp.com/#{@model.get('slug')}.#{format}"
-      success: (response) => @renderExportStatus(response)
-      error: (response) => @renderExportStatus(response)
-
-  renderExportStatus: (status)->
-    @$('.manage__block__export').html(status.message)
+    @channelExportView = new ChannelExportView
+      el: @$(".manage__block__export")
+      model: @model
+      autoSync: true
