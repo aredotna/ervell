@@ -9,6 +9,7 @@ Channel = require "../../models/channel"
 ExploreBlocks = require "../../collections/explore_blocks"
 Blocks = require "../../collections/blocks"
 CurrentUser = require '../../models/current_user'
+bullet_points = require './fixtures/bullet_points.coffee'
 sd = require("sharify").data
 
 @index = (req, res, next) ->
@@ -32,7 +33,9 @@ sd = require("sharify").data
         per: 10
       cache: true
       success: ->
-        res.render 'index', example_channel: channel
+        res.render 'index',
+          bullet_points: bullet_points
+          example_channel: channel
       error: next
 
 

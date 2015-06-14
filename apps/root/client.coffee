@@ -6,6 +6,7 @@ sd = require("sharify").data
 Feed = require "../../collections/feed.coffee"
 Notifications = require "../../collections/notifications.coffee"
 FeedView = require './client/feed_view.coffee'
+bullet_points = require './fixtures/bullet_points.coffee'
 
 mediator = require '../../lib/mediator.coffee'
 
@@ -19,6 +20,19 @@ module.exports = class RootUserView extends Backbone.View
     if (count = @notifications.getNumberUnread()) > 0
       @$('.metadata--selector--notifications').addClass 'has-notifications'
       @$('.notifications--count').text count
+
+module.exports = class HomeView extends Backbone.View
+  slideDuration: 3000
+  slideIndex: 0
+
+  initialize: ->
+    setInterval @setSlide, @slideDuration
+
+  setSlide: =>
+    ++@slideIndex
+    @slideIndex = 0 if @slideIndex > bullet_points.length
+    @$('.home__section--intro__inner__copy').text bullet_points[@slideIndex]
+
 
 module.exports.init = ->
   if sd.CURRENT_USER
@@ -43,3 +57,8 @@ module.exports.init = ->
         collection: feed
 
       feed.on 'sync', -> _.defer => feed.markRead()
+
+  else
+    new HomeView
+      el: $ '.container'
+
