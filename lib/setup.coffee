@@ -111,7 +111,8 @@ module.exports = (app) ->
       'receive_newsletter',
       'post_address',
       'show_tour',
-      'is_pro'
+      'is_pro',
+      'exclude_from_indexes'
     ]
 
   app.use artsyError.helpers
