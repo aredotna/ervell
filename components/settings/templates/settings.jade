@@ -29,7 +29,7 @@
           .bordered-select.bordered-select--wide
             select(name="exclude_from_indexes")
               option(value="true" selected=user.get('exclude_from_indexes') == 'true' ? 'selected' : null) Exclude my content from external search engines
-              option(value="false" selected=user.get('exclude_from_indexes') == 'false' ? 'selected' : null) Allow search engines to crawl my content
+              option(value="false" selected=user.get('exclude_from_indexes') != 'true' ? 'selected' : null) Allow search engines to crawl my content
         .form__field
           input.input--wide.input--relative.is-block(
             name='password' type='password' placeholder='Password'
