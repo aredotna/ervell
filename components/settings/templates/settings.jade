@@ -23,8 +23,13 @@
             option(value="notifications" selected=user.get('receive_email') == 'notifications' ? 'selected' : null) Recieve one email per notification
         .bordered-select
           select(name="receive_newsletter")
-            option(value="digest" selected=user.get('receive_newsletter') == 'true' ? 'selected' : null) Subscribed to newsletter
-            option(value="notifications" selected=user.get('receive_newsletter') == 'false' ? 'selected' : null) Unsubscribed to newsletter
+            option(value="true" selected=user.get('receive_newsletter') == 'true' ? 'selected' : null) Subscribed to newsletter
+            option(value="false" selected=user.get('receive_newsletter') == 'false' ? 'selected' : null) Unsubscribed to newsletter
+        if user.get('is_pro') == true
+          .bordered-select.bordered-select--wide
+            select(name="exclude_from_indexes")
+              option(value="true" selected=user.get('exclude_from_indexes') == 'true' ? 'selected' : null) Exclude my content from external search engines
+              option(value="false" selected=user.get('exclude_from_indexes') == 'false' ? 'selected' : null) Allow search engines to crawl my content
         .form__field
           input.input--wide.input--relative.is-block(
             name='password' type='password' placeholder='Password'
