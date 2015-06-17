@@ -3,11 +3,11 @@
     a(href="#{block.getHref()}" class="privacy--#{block.getVisibility()}")= block.smartTruncate(block.get('title'), 50)
   .manage__block__updated_at.manage__block__column
     = block.updatedAtAgo()
-  .manage__block__block_count.manage__block__column
+  .manage__block__block_count.manage__block__column.manage__block__column--small
     = block.get('length')
   .manage__block__status.manage__block__column
     = block.get('status')
-  .manage__block__follower_count.manage__block__column
+  .manage__block__follower_count.manage__block__column.manage__block__column--small
     if block.get('followed_by_ids')
       = block.get('followed_by_ids').length
   .manage__block__export.manage__block__column

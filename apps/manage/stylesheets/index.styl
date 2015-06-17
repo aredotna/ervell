@@ -36,6 +36,12 @@ vendor-prefixes ?= webkit moz official
   width 200px
   padding 0 20px 0 0
 
+  &.manage__block__title
+    width 250px
+
+  &.manage__block__column--small
+    width 100px
+
 .manage__block__sort__link
   cursor pointer
 
@@ -43,12 +49,14 @@ vendor-prefixes ?= webkit moz official
   &.is-active
     color hovergray
   &:hover
-    cursor n-resize
+    cursor s-resize
     color hovergray
     &::after
       color hovergray
   &.is-asc
     cursor s-resize
+  &.is-desc
+    cursor n-resize
   &.is-asc::after
     content "↑"
     margin 0 0 0 3px

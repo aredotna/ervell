@@ -8,8 +8,6 @@ BlockCollectionView = require '../../../components/block_collection/client/block
 ManageBlockView = require './manage_block_view.coffee'
 
 module.exports = class ManageBlockCollectionView extends BlockCollectionView
-  direction: 'asc'
-
   events:
     "click .manage__block__sort__link" : "sortBlocks"
     "keyup input"                      : "searchBlocks"
@@ -32,7 +30,7 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
         el: $block
 
   toggleDirection: ->
-    @direction = if @direction is 'asc' then 'desc' else 'asc'
+    @direction = if @direction is 'desc' then 'asc' else 'desc'
 
   updateOptions: (options) ->
     _.extend @blocks.options, options
@@ -57,17 +55,20 @@ module.exports = class ManageBlockCollectionView extends BlockCollectionView
 
   sortBlocks: (e)->
     column = $(e.target).data('sort')
+    direction = $(e.target).data('direction')
+    direction = if direction is 'desc' then 'asc' else 'desc'
 
     @updateOptions
       page: 1
       sort: column
       subject: 'channel'
-      direction: @direction
+      direction: direction
 
-    @$('.manage__block__sort__link').removeClass 'is-active is-asc is-desc'
-    $(e.target).addClass "is-active is-#{@direction}"
+    @$('.manage__block__sort__link').removeClass 'is-active'
+    $(e.target).removeClass "is-asc is-desc"
+    $(e.target).addClass "is-active is-#{direction}"
+    $(e.target).data 'direction', direction
     @fetchBlocks()
-    @toggleDirection()
 
   fetchBlocks: ->
     @xhr?.abort()
