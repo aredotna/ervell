@@ -65,14 +65,14 @@ setupPusherAndCurrentUser = ->
     user.fetch
       prefill: true
       prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
-      success: ->
+      success: (user, response)->
         mediator.trigger 'current_user:fetched'
+        ensureFreshUser response.user
         showNewUserMessages() if user.get('show_tour')
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
 
 syncAuth = module.exports.syncAuth = ->
-  # Log out of Force if you're not logged in to Gravity
   if sd.CURRENT_USER
     $.ajax
       url: "#{sd.API_URL}/accounts"
@@ -85,10 +85,10 @@ syncAuth = module.exports.syncAuth = ->
             window.location.reload()
 
 ensureFreshUser = (data) ->
-  return unless sd.CURRENT_USER and sd.CURRENT_USER.id is 15
+  return unless sd.CURRENT_USER
   for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
-               'last_name', 'manifest', 'notification_count', 'shortcuts_id', 'slug', 'username']
-    if not _.isEqual data.user[attr], sd.CURRENT_USER[attr]
+               'last_name', 'slug', 'username', 'is_pro']
+    if not _.isEqual data[attr], sd.CURRENT_USER[attr]
       return $.ajax('/me/refresh').then -> mediator.trigger 'current_user:refreshed'
 
 setupAjaxHeaders = ->
