@@ -3,13 +3,15 @@ Authentication = require '../../models/authentication.coffee'
 
 @tools = (req, res, next) ->
   res.redirect("/#log_in") unless req.user
-  res.redirect("/tools/bookmarklet") unless req.params.tab
+  res.redirect("/tools/premium") unless req.params.tab
   res.redirect("/manage") if req.params.tab is 'manage'
 
   tab = res.locals.sd.TAB = req.params.tab
+  coupon = res.locals.sd.COUPON = req.query.coupon
 
   res.render "index",
     tab: tab
+    coupon: coupon
 
 @callback = (req, res, next) ->
   auth = new Authentication req.query

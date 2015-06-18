@@ -10,14 +10,15 @@ block content
     if user.get('is_pro') == true
       .premium--is-premium Thank you for registering!
     else
-      button.button--wide.button--border.button--add $45 / year — Activate premium &rarr;
+      - price = coupon ? '$27.50' : '$45'
+      button.button--wide.button--border.button--add #{price} / year — Activate premium &rarr;
   h2 You get:
   .tools__frame
     h3 Embroidered Are.na patch
-    .premium--caption For your backpack. Limited edition for the first premium users, 36/50 left. 
+    .premium--caption For your backpack. Limited edition for the first premium users, 36/50 left.
     br
     h3 Search engines privacy settings
-    .premium--caption You can decide if your profile and channels will be crawled by search engines. 
+    .premium--caption You can decide if your profile and channels will be crawled by search engines.
     br
     h3 Manage channels
     .premium--caption Dashboard to browse, sort, edit and manage your channels
