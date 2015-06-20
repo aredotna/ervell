@@ -50,6 +50,14 @@ verify:
 deploy: assets verify
 	ulimit -n 10000
 	$(BIN)/bucketassets -d public/assets -b ervell-production
+	heroku config:add \
+		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
+		--app=ervell
+	git push git@heroku.com:ervell.git $(branch):master
+
+deploy-with-images: assets verify
+	ulimit -n 10000
+	$(BIN)/bucketassets -d public/assets -b ervell-production
 	$(BIN)/bucketassets -d public/images -b ervell-production
 	heroku config:add \
 		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
