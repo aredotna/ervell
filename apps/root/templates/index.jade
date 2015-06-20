@@ -12,15 +12,9 @@ block body
       img.feynman(src="../images/feynman-arena.svg")
       h1 Fig.1 Forgotten facts can be recreated by triangulating from known facts
       .home__section--intro__inner__buttons
-        a.intro__button(href="#sign_up")
-          .intro__button--inner
-          p Register
-        a.intro__button(href="#log_in")
-          .intro__button--inner
-          p Login
-        a.intro__button(href="/about")
-          .intro__button--inner
-          p About
+        a.intro__button(href="#sign_up") Register
+        a.intro__button(href="#log_in")  Login
+        a.intro__button(href="/about") About
       img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm").home-arrow
   .home__section.home__section--intro
     .home__section--intro__inner
@@ -28,17 +22,6 @@ block body
       h1 Build new ideas over time by assembling collections of links, images, files and text.
       h1.home__section--intro__inner__copy= bullet_points[0]
       img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm").home-arrow
-      //- .home__section--intro-bullets
-      //-   .home__section--intro-bullets-1
-      //-     li There's no wrong way to use Are.na.
-      //-     li More Wikipedia than Pinterest.
-      //-     li Save links, text, images, files to collections called channels.
-      //-     li No ads, no social media.
-      //-   .home__section--intro-bullets-2
-      //-     li Export as PDF, HTML, ZIP or use our Public API to display channels offsite.
-      //-     li 26932 channels.
-      //-     li Email notes and images directly to channels.
-      //-     li Free to use, pay $45 for pro features.
 
   .home__section.home__section--channels
     .home__section__container.flex-container
@@ -46,12 +29,12 @@ block body
         h1 Channel examples
         - for e_channel in example_channel.get('contents')
           h2.home__path
-              ul.breadcrumb
-                li Are.na
-                li
-                  a(href="/#{e_channel.user.slug}")=e_channel.user.username
-                li
-                  a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="privacy--#{e_channel.status}")=e_channel.title
+            ul.breadcrumb
+              li Are.na
+              li
+                a(href="/#{e_channel.user.slug}")=e_channel.user.username
+              li
+                a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="privacy--#{e_channel.status}")=e_channel.title
           .home__section-channels__images.grid
             - for block in e_channel.contents.models.slice(0,4)
               include ../../../components/block_collection/templates/block
