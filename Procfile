@@ -1,1 +1,1 @@
-web: make sf
+web: node_modules/.bin/forever node_modules/.bin/coffee index.coffee
