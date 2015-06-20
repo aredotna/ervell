@@ -68,7 +68,7 @@ deploy-staging: assets verify
 		--app=ervell-staging
 	heroku config:add \
 		IMAGE_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
-		--app=ervell=staging
+		--app=ervell-staging
 	git push git@heroku.com:ervell-staging.git $(branch):master
 
 .PHONY: test assets
