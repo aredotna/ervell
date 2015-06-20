@@ -25,6 +25,9 @@ module.exports = class HomeView extends Backbone.View
   slideDuration: 2300
   slideIndex: 0
 
+  events:
+    'click .home-arrow' : 'scrollDown'
+
   initialize: ->
     setInterval @setSlide, @slideDuration
 
@@ -32,6 +35,11 @@ module.exports = class HomeView extends Backbone.View
     ++@slideIndex
     @slideIndex = 0 if @slideIndex > bullet_points.length
     @$('.home__section--intro__inner__copy').text bullet_points[@slideIndex]
+
+  scrollDown: (e)->
+    multiplier = $(e.currentTarget).data('multiplier')
+    top = $(window).height() * multiplier
+    $('html, body').animate {scrollTop: top}, 300
 
 
 module.exports.init = ->

@@ -15,13 +15,21 @@ block body
         a.intro__button(href="#sign_up") Register
         a.intro__button(href="#log_in")  Login
         a.intro__button(href="/about") About
-      img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm").home-arrow
+      img(
+        data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
+        class="iconic iconic-sm home-arrow pointer"
+        data-multiplier="1"
+      )
   .home__section.home__section--intro
     .home__section--intro__inner
       h1 Are.na is an open-ended platform for collaborative, private and public research.
       h1 Build new ideas over time by assembling collections of links, images, files and text.
       h1.home__section--intro__inner__copy= bullet_points[0]
-      img(data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg" class="iconic iconic-sm").home-arrow
+      img(
+        data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
+        class="iconic iconic-sm home-arrow pointer"
+        data-multiplier="2"
+      )
 
   .home__section.home__section--channels
     .home__section__container.flex-container
