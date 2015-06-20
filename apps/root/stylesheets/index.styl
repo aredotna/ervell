@@ -141,19 +141,16 @@ html, body
   border-top 1px solid bordergray
   padding 60px 0 60px 0
 
-  h2
+  h1
     font-size 2.1em
-    width 100%
-    text-align center
-    position relative
-    float left
     font-weight normal
+    color hovergray
+    antialiased()
+    text-align center
 
   a
     font-weight bold
     color hovergray
-    border-bottom 0
-    padding 0 0 1px 0
 
     &:hover
       color textgray
@@ -226,6 +223,8 @@ privacy-color('.privacy--', color)
       border-top 1px solid textgray
 
 @media (max-width:(block_width_mar * 4) + 19)
+  html, body
+    font-size 13px
 
   .home__section--channels__channels
     .grid
@@ -244,9 +243,6 @@ privacy-color('.privacy--', color)
         max-height 220px
 
 @media (max-width:(block_width_mar * 3) + 16)
-  html, body
-    font-size 13px
-    
   .home__section--intro
     a.intro__button
       width 100px
@@ -291,7 +287,10 @@ privacy-color('.privacy--', color)
 
 @media (max-width:500px)
   .home__section--intro
-    padding 5em 1em
+    padding 0 15px 0 15px
+    
+    .feynman
+      width 250px
 
     h1
       font-size 1.5em
@@ -299,3 +298,8 @@ privacy-color('.privacy--', color)
 
   .home__section--channels
     padding 20px 0 70px 0
+
+@media (max-height:500px)
+  .home__section--intro
+    .feynman
+      width 250px
