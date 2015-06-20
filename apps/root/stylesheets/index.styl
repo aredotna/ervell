@@ -29,7 +29,7 @@ html, body
       display none
 
     .layout-header__login
-      color textgray
+      color #A6A6A6
 
   .container
     position absolute
@@ -37,19 +37,18 @@ html, body
 
 .home__section--intro
   width 100%
-  height 90%
+  height 100%
   background-color backgroundgray
   color hovergray
   text-align center
   display table
-  padding 0 9em 0
-  margin-top -30px
+  padding 0
   
   .home__section--intro-bk
     display none
     position absolute
     width 100%
-    height 90%
+    height 100%
     left 0
     top 0
     background-image url('../images/arena-background.jpg')
@@ -57,6 +56,21 @@ html, body
     background-size 100% auto
     opacity 0.55
     margin-top -30px
+    
+  .feynman
+    width 480px
+    opacity 0.9
+    margin -60px 0 0px 0
+  
+  .home-arrow
+    position absolute
+    top 94%
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    fill #A6A6A6
 
   .home__section--intro__inner
     position relative
@@ -66,7 +80,7 @@ html, body
     vertical-align middle
   
     .home__section--intro__inner__copy
-      margin 120px 0 0 0
+      color #A6A6A6
       
       .home__section--intro-bullets-1, .home__section--intro-bullets-2
         position relative
@@ -81,7 +95,7 @@ html, body
         margin 0 5% 0 0
     
   h1
-    font-size 2.2em
+    font-size 2.1em
     font-weight normal
     color hovergray
     antialiased()
@@ -96,7 +110,7 @@ html, body
     text-align center
     border 1px solid hovergray
     padding 0
-    margin 25px 15px 0 15px
+    margin 50px 15px 0 15px
     
     .intro__button--inner
       width 100%
@@ -123,11 +137,12 @@ html, body
 .home__section--footer
   width 100%
   color hovergray
-  background-color #fff
+  background-color backgroundgray
   border-top 1px solid bordergray
   padding 60px 0 60px 0
 
   h2
+    font-size 2.1em
     width 100%
     text-align center
     position relative
@@ -147,13 +162,14 @@ html, body
 .home__section--channels
   width 100%
   background-color #fff
-  padding 3em 0 70px 0
+  padding 0 0 70px 0
   border-top 1px solid bordergray
+  text-align center
 
   h1
-    font-size 2.2em
+    font-size 2.1em
     color hovergray
-    padding 0 0 0 10px
+    margin 80px 0 120px 0
     font-weight normal
 
 .home__section--channels__channels
@@ -168,6 +184,7 @@ html, body
     float left
     width 100%
     color textgray
+    text-align center
     padding 0 10px 30px 10px
     margin 0
 

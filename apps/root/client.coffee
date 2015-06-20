@@ -22,7 +22,7 @@ module.exports = class RootUserView extends Backbone.View
       @$('.notifications--count').text count
 
 module.exports = class HomeView extends Backbone.View
-  slideDuration: 2500
+  slideDuration: 2300
   slideIndex: 0
 
   initialize: ->
