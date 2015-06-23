@@ -85,3 +85,6 @@ _ = require 'underscore'
     success: ->
       res.redirect 301, "/#{channel.get('user').slug}/#{channel.get('slug')}"
     error: (m, err) -> next err
+
+@redirectUser = (req, res, next) ->
+  res.redirect 301, "/#{req.params.username}"
