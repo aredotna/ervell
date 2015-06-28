@@ -20,3 +20,4 @@ app.get "/:username/followers", auth, routes.fetchAuthor, routes.followers
 app.get "/:username/following", auth, routes.fetchAuthor, routes.following
 app.get "/:username/update", auth, routes.fetchAuthor, routes.update
 app.get "/:username/block/:block_id", auth, routes.fetchAuthor, routes.user
+app.get "/users/:username", auth, routes.redirectUser

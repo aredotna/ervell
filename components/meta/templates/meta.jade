@@ -10,6 +10,9 @@ if channel && channel.get('can_index') == false
 
 if sd.SUBJECT
   meta(name="robots" content="noindex")
+    
+//- default
+meta(property="description" content="Arena is a platform for private and collaborative research.")
 
 //- mobile
 meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui")
@@ -24,7 +27,6 @@ link(rel="apple-touch-startup-image" href="#{sd.IMAGE_PATH}loading.png")
 //- twitter & fb meta
 meta(name="twitter:description", content="Are.na is a platform for private and collaborative research.")
 meta(name="twitter:site", content="@aredotna")
-meta(property="description" content="Are.na is a platform for private and collaborative research.")
 meta(property="og:description" content="Are.na is a platform for private and collaborative research.")
 if channel && author
   meta(name="twitter:title", content="Are.na / #{channel.get('title')}")
