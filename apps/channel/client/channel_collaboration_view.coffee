@@ -27,13 +27,17 @@ module.exports = class ChannelCollaborationView extends Backbone.View
     else
       @render()
 
-    mediator.on 'channel:is-editable', @postRender, @
+    mediator.on 'channel:is-editable', @setEditable, @
     mediator.on 'collaborators:editing', @editMode, @
     mediator.on 'collaborators:reading', @readMode, @
 
   render: ->
     @$el.html collaboratorsTemplate(collaborators: @collection.models)
     @postRender() if @isEditable
+
+  setEditable: ->
+    @isEditable = true
+    @postRender()
 
   postRender: ->
     @$('.collaborators__empty-collaborators').html ""
