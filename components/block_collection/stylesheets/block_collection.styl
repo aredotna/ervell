@@ -92,19 +92,19 @@ body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-
 .grid__block__author
   visibility hidden
 
-.grid__block:hover
+body:not(.is-mobile) .grid__block:hover
   .grid__block__author
     visibility visible
 
   .grid__block__title
-      display none
+    display none
 
 .is-mobile .grid__block:hover
   .grid__block__author
     visibility hidden
 
   .grid__block__title
-      display static
+    display static
 
 .grid__block__title, .grid__block__author
   color lightgray
@@ -376,6 +376,12 @@ privacy-color('.list__block--channel--', color)
     padding 0 0 20px 0
   .grid__block
     margin 0 0 80px 0
+    
+  .grid__block--text .grid__block__inner
+    border 1px solid lightgrayplus  
+  
+  .is-mobile .grid__block:hover .grid__block__inner .grid__block__title, .is-mobile .grid__block__title
+    display static !important
 
 @import '../../lightbox/stylesheets/lightbox'
 @import '../../connect/stylesheets/connect'
