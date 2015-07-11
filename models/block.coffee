@@ -24,6 +24,12 @@ module.exports = class Block extends Base
     else
       @get('title')
 
+  parse: (data) ->
+    if data.kind is 'profile'
+      data.user
+    else
+      data
+
   getSourceUrl: ->
     @get('source')?.url || @get('attachment')?.url || @getImageSize('original')
 
