@@ -39,7 +39,7 @@ module.exports = class Block extends Base
     #   @getImageSize('display')
     # else
     #   "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
-    @getImageSize('display')
+    @getImageSize source
 
   getImageSize: (size) ->
     if @has('image')

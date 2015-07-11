@@ -5,9 +5,10 @@
 h2.feed-group__sentence(class=className.join(' '))
   span.feed-group__sentence__username
     a(href="/#{group.actor().slug}" class="username")=group.actor().username
-    - if(group.is_comment())
+    if group.is_comment()
       | :
-    span &nbsp;
+    else
+      span &nbsp;
   unless (group.is_comment())
     span=group.action()
     span &nbsp;
