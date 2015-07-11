@@ -41,11 +41,12 @@
             a(href="#{block.getSourceUrl()}" target="_blank").lightbox__content__source__original (Source)
             - if(block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link')
               |  - #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}" target="_blank") (Find original)]
-      .lightbox__content__footer__inner__col-2
-        .lightbox__connect
-          .lightbox__connect__inner
-            .lightbox__connect__container
-            .lightbox__connect__trigger.button--inblock Connect block &rarr;
+      if sd.CURRENT_USER
+        .lightbox__content__footer__inner__col-2
+          .lightbox__connect
+            .lightbox__connect__inner
+              .lightbox__connect__container
+              .lightbox__connect__trigger.button--inblock Connect block &rarr;
 
   #lightbox__feed.lightbox__feed
     #lightbox__feed_inner.lightbox__feed__inner

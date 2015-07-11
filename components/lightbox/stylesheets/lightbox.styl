@@ -189,6 +189,7 @@ body.is-lightbox
     position relative
     width 50%
     padding-right 1em
+    padding-top .75em
 
   .lightbox__content__footer__inner__col-2
     display table-cell
@@ -223,6 +224,7 @@ body.is-lightbox
     line-height 1.6em
     text-align left
     padding 0 6px 0 6px
+    word-break break-all
 
   .lightbox__content__description, .lightbox__content__source
     margin 0
@@ -461,6 +463,12 @@ body.is-lightbox
     position absolute
 
 @media (max-width:500px)
+  .lightbox__content__img
+
+    img
+      max-width 95%
+      max-height 90%
+      
   .lightbox__content
     padding 10px
 
