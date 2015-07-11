@@ -1,13 +1,13 @@
 ul.search__results__list
   for result in results
-    if result.get('kind') != 'profile'
+    if result.get('class') != 'User'
       li.search__results__result: a(href="/#{result.get('user').slug}/#{result.get('slug')}")
         ul.breadcrumb
           li: = result.get('user').username
           li(class="search__results__result--privacy-#{result.getVisibility()}"): = result.get('title')
     else
-      li.search__results__result: a(href="/#{result.get('user').slug}")
+      li.search__results__result: a(href="/#{result.get('slug')}")
         ul.breadcrumb
-          li: = result.get('user').username
+          li: = result.get('username')
   li.search__results__result.search__results__see-all: a(href="/search/#{query}")
     | See all results
