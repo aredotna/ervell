@@ -29,10 +29,11 @@ module.exports = class Block extends Base
 
   resizeImage: (width = 330, height = 330, source = 'display')->
     # ignore gifs
-    if @getImageSize('display').split('.').pop() == 'gif'
-      @getImageSize('display')
-    else
-      "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
+    # if @getImageSize('display').split('.').pop() == 'gif'
+    #   @getImageSize('display')
+    # else
+    #   "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
+    @getImageSize('display')
 
   getImageSize: (size) ->
     if @has('image')
