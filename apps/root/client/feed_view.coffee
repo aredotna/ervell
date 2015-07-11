@@ -8,7 +8,7 @@ Blocks = require '../../../collections/blocks.coffee'
 BlockCollectionView = require '../../../components/block_collection/client/block_collection_view.coffee'
 BlockView = require '../../../components/block_collection/client/block_view.coffee'
 User = require '../../../models/user.coffee'
-
+IconicJS = require '../../../components/iconic/client/iconic.min.js'
 
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
 
@@ -50,6 +50,9 @@ module.exports = class FeedView extends Backbone.View
     @setSharedBlocks()
 
     @$('.grid__block').each @initBlockView
+
+    _.defer -> 
+      IconicJS().inject 'img.iconic'
 
   updateTitle: (diff) =>
     window.document.title = "Arena (#{diff})"
