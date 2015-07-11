@@ -2,7 +2,7 @@
 
 
 .path--header
-  margin 6em auto 0 auto
+  margin 100px auto 0 auto
   padding 0 10px 0 10px
 
 .path__inner
@@ -152,6 +152,10 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
     display block
 
 @media (max-width:500px)
+  .path__breadcrumb li
+    text-align left
+    float none
+    
   .path.stuck
     display none
 
