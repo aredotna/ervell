@@ -92,19 +92,19 @@ body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-
 .grid__block__author
   visibility hidden
 
-.grid__block:hover
+body:not(.is-mobile) .grid__block:hover
   .grid__block__author
     visibility visible
 
   .grid__block__title
-      display none
+    display none
 
 .is-mobile .grid__block:hover
   .grid__block__author
     visibility hidden
 
   .grid__block__title
-      display static
+    display static
 
 .grid__block__title, .grid__block__author
   color lightgray
@@ -132,6 +132,39 @@ body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-
   background-size 40%
   background-repeat no-repeat
   cursor pointer
+  
+.grid__block__delete-block
+  position relative
+  
+  &:hover .grid__block__delete-block__confirm
+    color textgray 
+
+.grid__block__delete-block__confirm
+  bubble top center backgroundgray 
+  width 120px
+  left -47px
+  z-index rotate_z 
+  position absolute
+  background backgroundgray 
+  box-shadow none
+  border none
+  border-radius 0
+  display none
+  
+  &.is-active
+    display block
+  
+  &:hover
+    color textgray 
+  
+  &:after
+    border-bottom 10px solid backgroundgray
+    
+.grid__block__delete-block__confirm__choice
+  padding 0 10px
+  font-weight bold
+  cursor pointer
+  
 
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
@@ -343,6 +376,12 @@ privacy-color('.list__block--channel--', color)
     padding 0 0 20px 0
   .grid__block
     margin 0 0 80px 0
+    
+  .grid__block--text .grid__block__inner
+    border 1px solid lightgrayplus  
+  
+  .is-mobile .grid__block:hover .grid__block__inner .grid__block__title, .is-mobile .grid__block__title
+    display static !important
 
 @import '../../lightbox/stylesheets/lightbox'
 @import '../../connect/stylesheets/connect'

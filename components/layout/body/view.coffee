@@ -65,7 +65,7 @@ module.exports = class BodyView extends Backbone.View
 
   intercept: (e)->
     # do not continue if clicking button
-    return true if $(e.target).hasClass('button--inblock')
+    return true if $(e.target).hasClass('button--inblock') || $(e.target).hasClass('grid__block__delete-block') || $(e.target).hasClass('grid__block__delete-block__confirm__choice') || $(e.target).hasClass('grid__block__delete-block__confirm')
 
     e.preventDefault()
     e.stopImmediatePropagation()
@@ -83,7 +83,6 @@ module.exports = class BodyView extends Backbone.View
       window.location = url
 
   triggerMediator: (e)->
-    console.log 'triggerMediator'
     $link = $(e.currentTarget)
     mediator.trigger $link.data('trigger')
 

@@ -44,8 +44,8 @@ assets:
 	)
 
 verify:
-	if [ $(shell wc -c < public/assets/layout.min.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "layout CSS exists" ; else echo ; echo "Layout CSS asset compilation failed" ; exit 1 ; fi
-	if [ $(shell wc -c < public/assets/layout.min.js.cgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "layout JS exists" ; else echo; echo "Layout JS asset compilation failed" ; exit 1 ; fi
+	if [ $(shell wc -c < public/assets/root.min.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "root CSS exists" ; else echo ; echo "root CSS asset compilation failed" ; exit 1 ; fi
+	if [ $(shell wc -c < public/assets/root.min.js.cgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "root JS exists" ; else echo; echo "root JS asset compilation failed" ; exit 1 ; fi
 
 deploy: assets verify
 	ulimit -n 10000

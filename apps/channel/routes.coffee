@@ -21,6 +21,7 @@ _ = require 'underscore'
 
   channel.fetch
     success: ->
+      return res.redirect 301, "/#{channel.get('slug')}" if channel.get('class') is 'User'
       blocks.add channel.get 'contents'
 
       res.locals.sd.CHANNEL = channel.toJSON()
@@ -44,6 +45,7 @@ _ = require 'underscore'
 
   channel.fetch
     success: =>
+      return res.redirect 301, "/#{channel.get('slug')}" if channel.get('class') is 'User'
       res.locals.sd.CHANNEL = channel.toJSON()
       author = new User channel.get('user')
       render()

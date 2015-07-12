@@ -34,7 +34,6 @@ module.exports = class ChannelBlocks extends Blocks
     options = @options
     options.page = page
     $.get "#{sd.API_URL}/channels/#{@slug}/contents?#{params.encode(options)}", (response) =>
-      console.log 'replacePlaceholders', page
       @replacePlaceholders(response.contents, page, @loadDirection)
 
   mergeSkeleton: (models) ->

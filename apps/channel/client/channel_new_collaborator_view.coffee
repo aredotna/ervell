@@ -14,9 +14,7 @@ module.exports = class newCollaboratorView extends Backbone.View
     'click .new-collaborator__add'             : 'openSearch'
     'click .new-collaborator__results__result' : 'addCollaborator'
 
-  initialize: (options)->
-    @channel = options.channel
-    @currentCollaborators = options.collaborators
+  initialize: ({ @channel, @collaborators} )->
     @render()
 
   maybeClear: (e)=>
@@ -24,14 +22,14 @@ module.exports = class newCollaboratorView extends Backbone.View
     @clear() unless $(e.target).closest('#metadata--collaborators').length
 
   addCollaborator: (e) ->
-    @currentCollaborators._add $(e.target).data 'id'
+    @collaborators._add $(e.target).data 'id'
 
   searchCollaborators: ->
     query = @$('#new-collaborator__search').val()
 
     $.get "#{sd.API_URL}/search/users/?q=#{query}&per=10", (response) =>
       # IDs of the current channel collaborators, author
-      ids = @currentCollaborators.pluck 'id'
+      ids = @collaborators.pluck 'id'
       ids.push @channel.get('user').id
 
       if response.length > 1

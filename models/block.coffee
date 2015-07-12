@@ -24,15 +24,22 @@ module.exports = class Block extends Base
     else
       @get('title')
 
+  parse: (data) ->
+    if data.kind is 'profile'
+      data.user
+    else
+      data
+
   getSourceUrl: ->
     @get('source')?.url || @get('attachment')?.url || @getImageSize('original')
 
   resizeImage: (width = 330, height = 330, source = 'display')->
     # ignore gifs
-    if @getImageSize('display').split('.').pop() == 'gif'
-      @getImageSize('display')
-    else
-      "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
+    # if @getImageSize('display').split('.').pop() == 'gif'
+    #   @getImageSize('display')
+    # else
+    #   "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
+    @getImageSize source
 
   getImageSize: (size) ->
     if @has('image')

@@ -17,6 +17,10 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
 
         - if(channel && user && user.has('id'))
           .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
+            .grid__block__delete-block__confirm
+              | Are you sure?
+              a.grid__block__delete-block__confirm__choice.confirm__choice__yes Yes
+              a.grid__block__delete-block__confirm__choice.confirm__choice__no No
 
       if user
         .grid__block__connect-container.abs-fill

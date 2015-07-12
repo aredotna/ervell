@@ -19,7 +19,9 @@ module.exports = class BlockView extends Backbone.View
   events:
     'tap .grid__block__source__link'  : 'openLink'
     'tap .grid__block__connect-btn'   : 'loadConnectView'
-    'tap .grid__block__delete-block'  : 'destroyConnection'
+    'tap .grid__block__delete-block'  : 'confirmDestroy'
+    'tap .confirm__choice__yes'       : 'destroyConnection'
+    'tap .confirm__choice__no'        : 'cancelDestroy'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -36,6 +38,7 @@ module.exports = class BlockView extends Backbone.View
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
+    mediator.on "body:click", @removeActiveClass, @
 
     super
 
@@ -89,7 +92,8 @@ module.exports = class BlockView extends Backbone.View
 
     @delegateEvents()
 
-  removeActiveClass: ->
+  removeActiveClass: (e)->
+    return false unless !e or (!@$el.is(e.target) and @$el.has(e.target).length is 0)
     @$('.grid__block__inner').removeClass 'is-active'
     @$('.grid__block__link').removeAttr('data-disabled')
 
@@ -108,6 +112,16 @@ module.exports = class BlockView extends Backbone.View
     @$el = $("##{@model.id}")
 
     @renderFollowButton()
+
+  confirmDestroy: (e) =>
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    @$('.grid__block__delete-block__confirm, .grid__block__inner').addClass 'is-active'
+
+  cancelDestroy: (e) =>
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    @$('.grid__block__delete-block__confirm, .grid__block__inner').removeClass 'is-active'
 
   destroyConnection: (e) =>
     e.preventDefault()

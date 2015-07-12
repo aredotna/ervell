@@ -83,6 +83,7 @@ module.exports = class ChannelView extends Backbone.View
       @$('.grid').addClass 'is-editable'
       @$('#metadata--actions').addClass 'is-editable'
       @$('#metadata__column-manage').addClass 'is-editable'
+      @$('#metadata--collaborators').addClass 'is-editable'
       mediator.trigger 'channel:is-editable'
 
       @setupVisibilityView()
