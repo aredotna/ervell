@@ -72,8 +72,7 @@ module.exports = class CurrentUser extends User
 
   subscribeToPusherEvents: ->
     user_pusher = mediator.shared.pusher.subscribe "user_#{@id}"
-    user_pusher.bind 'user:updated', (data) =>
-      console.log 'user:updated'
+    user_pusher.bind 'user-updated', (data) =>
       @set(data)
       mediator.trigger 'user:updated', this
     user_pusher.bind 'notification', (data) =>
