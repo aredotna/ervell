@@ -3,11 +3,12 @@ extends ../../../components/layout/index
 block body
   include ./path
   .tools.tabs__content
-    include ./tabs/bookmarklet
-    include ./tabs/add_via_email
-    include ./tabs/find_friends
-    include ./tabs/invite
     include ./tabs/premium
+    include ./tabs/bookmarklet
+    if user
+      include ./tabs/add_via_email
+      include ./tabs/find_friends
+      include ./tabs/invite
 
 block scripts
   script( src="https://checkout.stripe.com/checkout.js" )

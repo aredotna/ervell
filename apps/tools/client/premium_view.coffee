@@ -13,20 +13,23 @@ module.exports = class PremiumView extends Backbone.View
   initialize: ->
     @price = 2250 if sd.COUPON
 
-    @handler = StripeCheckout.configure
-      key: sd.STRIPE_PUBLISHABLE_KEY
-      image: 'https://s3.amazonaws.com/stripe-uploads/acct_14Lg6j411YkgzhRMmerchant-icon-1432502887007-arena-mark.png'
-      token: @handleToken
-      bitcoin: true
-      email: sd.CURRENT_USER.email
+    if sd.CURRENT_USER
+      @handler = StripeCheckout.configure
+        key: sd.STRIPE_PUBLISHABLE_KEY
+        image: 'https://s3.amazonaws.com/stripe-uploads/acct_14Lg6j411YkgzhRMmerchant-icon-1432502887007-arena-mark.png'
+        token: @handleToken
+        bitcoin: true
+        email: sd.CURRENT_USER.email
 
   openCheckout: (e) =>
-    @handler.open
-      name: 'Are.na'
-      description: '1 year / Premium subscription'
-      amount: @price
-
-    @$('.premium--status').addClass('is-active')
+    if sd.CURRENT_USER
+      @handler.open
+        name: 'Are.na'
+        description: '1 year / Premium subscription'
+        amount: @price
+      @$('.premium--status').addClass('is-active')
+    else
+      mediator.trigger 'open:auth', mode: 'login'
 
     e.preventDefault()
 

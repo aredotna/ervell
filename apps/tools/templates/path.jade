@@ -6,8 +6,9 @@ block path
 block tabs
   +tab("tools", "premium", "Premium tools")
   +tab("tools", "bookmarklet", "Bookmarklet")
-  +tab("tools", "find-friends", "Find friends")
-  +tab("tools", "add-via-email", "Add via email")
-  +tab("tools", "send-invitation", "Send invitation")
-  if user.get('is_pro')
-    +tab("tools", "manage", "Manage channels")
+  if user
+    +tab("tools", "find-friends", "Find friends")
+    +tab("tools", "add-via-email", "Add via email")
+    +tab("tools", "send-invitation", "Send invitation")
+    if user.get('is_pro')
+      +tab("tools", "manage", "Manage channels")

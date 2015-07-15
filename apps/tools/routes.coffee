@@ -2,8 +2,8 @@ sd = require("sharify").data
 Authentication = require '../../models/authentication.coffee'
 
 @tools = (req, res, next) ->
-  res.redirect("/#log_in") unless req.user
   res.redirect("/tools/premium") unless req.params.tab
+  res.redirect("/#log_in") unless req.params.tab is 'premium' or req.user
   res.redirect("/manage") if req.params.tab is 'manage'
 
   tab = res.locals.sd.TAB = req.params.tab
