@@ -7,14 +7,17 @@ Backbone.$ = $
 _ = require 'underscore'
 scrollFrame = require 'scroll-frame'
 sd = require("sharify").data
+mediator = require '../../lib/mediator.coffee'
 User = require "../../models/user.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
 FollowBlocks = require '../../collections/follow_blocks.coffee'
 InfiniteView = require '../../components/pagination/infinite_view.coffee'
+Filter = require '../../components/filter/index.coffee'
 MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
 
 module.exports.init = ->
+  current_user = mediator.shared.current_user
 
   if sd.FOLLOWING || sd.FOLLOWERS
     blocks = new FollowBlocks sd.BLOCKS,
@@ -29,15 +32,15 @@ module.exports.init = ->
       subject: sd.SUBJECT
 
   new UserBlockCollectionView
-    el: $ ".grid"
+    el: $ ".grid--user"
     blocks: blocks
 
   # scrollFrame '.grid__block--channel a'
 
   new InfiniteView
-    context: $ ".grid"
+    context: $ ".grid--user"
     collection: blocks
-    itemSelector: $ ".grid"
+    itemSelector: $ ".grid--user"
 
   user = new User sd.USER
 
@@ -47,6 +50,17 @@ module.exports.init = ->
     _attribute: 'description'
     _kind: 'markdown'
     wait: true
+
+  if current_user.isPremium()
+    options =
+      model: user
+      $searchBar: $('.form__field__channel-filter')
+      $resultContainer: $('.channel-results-container')
+      $channelContainer: $('.grid--user')
+
+    _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
+
+    new Filter options
 
   user.on 'edit:success', ->
     $.ajax

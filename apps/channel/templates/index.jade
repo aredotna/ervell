@@ -2,6 +2,10 @@ extends ../../../components/layout/index
 
 block body
   include ./path
+  if user && user.isPremium() && !following && !followers
+    .flex-container
+      - title = channel.get('title')
+      include ../../../components/filter/templates/search_bar
   .channel-container
     .grid.grid--channel.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
       if channel && !following && !followers && user && user.canAddToChannel(channel)
@@ -11,6 +15,10 @@ block body
     .channel-empty.valign-outer
       .valign-inner.center
         include ./empty
+
+    .channel-results-container
+      .grid.grid--channel-filter.flex-container
+        //- rendered client side
 
   if user
     .channel__filedrop.flex-container

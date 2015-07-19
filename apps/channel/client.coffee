@@ -20,6 +20,7 @@ ChannelExportView = require '../../components/channel_export/client/channel_expo
 EditableAttributeView = require '../../components/editable_attribute/client/editable_attribute_view.coffee'
 ConnectView = require '../../components/connect/client/connect_view.coffee'
 MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
+Filter = require '../../components/filter/index.coffee'
 Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
@@ -179,7 +180,7 @@ module.exports.init = ->
     blocks: blocks
 
   new BlockCollectionView
-    el: $ ".grid"
+    el: $ ".grid--channel"
     channel: channel
     blocks: blocks
 
@@ -201,12 +202,19 @@ module.exports.init = ->
 
   connections.fetch()
 
+  if current_user.isPremium()
+    new Filter
+      model: channel
+      $searchBar: $('.form__field__channel-filter')
+      $resultContainer: $('.channel-results-container')
+      $channelContainer: $('.grid--channel')
+
   if not sd.FOLLOWERS
 
     new BlockSkeletonView
       collection: blocks
       channel: channel
-      el: $ ".grid"
+      el: $('.grid--channel')
 
     if current_user.canAddToChannel channel
       new NewBlockView

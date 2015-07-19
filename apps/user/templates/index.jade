@@ -2,12 +2,20 @@ extends ../../../components/layout/index
 
 block body
   include ./path
+  if user && user.isPremium()
+    .flex-container
+      - content = sd.SUBJECT ? sd.SUBJECT + "s" : "content"
+      - title = author.get('username') + "'s public " + content
+      include ../../../components/filter/templates/search_bar
   .channel-container( class=blocks.length ? '' : 'is-empty' )
-    .grid.flex-container
+    .grid.grid--user.flex-container
       include ../../../components/block_collection/templates/block_collection
     .channel-empty.valign-outer
       .valign-inner.center
         include ./empty
+    .channel-results-container
+      .grid.grid--channel-filter.flex-container
+        //- rendered client side
     #l-infinite-loader-container
       #l-loader
 

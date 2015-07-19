@@ -1,6 +1,7 @@
 .channel-container
   padding 32px 0 0 0
   border-top 1px solid #F2F2F2
+  position relative
 
   .flex-container:before, .flex-container:after
     display none
@@ -174,3 +175,68 @@
     background #fff
     border 1px solid bordergray
     pointer-events all
+
+.form__field__channel-filter
+  height 50px
+  width 100%
+  position relative
+
+  input
+    background #fff
+    width 100%
+    margin 0
+    padding-left 50px
+
+  input:focus
+    background backgroundgray
+
+.form__field__channel-filter--icon
+  position absolute
+  left 0
+  top 0
+  padding 11px
+  max-width 40px
+  max-height 50px
+
+  svg
+    height 30px
+    width 20px
+
+    .iconic-magnifying-glass-lg
+      display none
+
+    .iconic-magnifying-glass-md
+      display none
+
+    .iconic-magnifying-glass-sm
+      display inline
+
+    & *
+      stroke lightgray
+      fill lightgray
+
+.form__field__channel-filter--close
+  position absolute
+  left 16px
+  font-size 31px
+  top 10px
+  display none
+  color lightgray
+
+.form__field__channel-filter.is-active
+  .form__field__channel-filter--close
+    display block
+  .form__field__channel-filter--icon
+    display none
+
+
+.channel-results-container
+  position absolute
+  top 0
+  left 0
+  width 100%
+  padding-top 32px
+  display none
+
+  &.is-active
+    display block
