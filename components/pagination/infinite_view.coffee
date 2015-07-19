@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 _ = require 'underscore'
 Backbone.$ = $
+mediator = require '../../lib/mediator.coffee'
 IconicJS = require '../iconic/client/iconic.min.js'
 
 module.exports = class InfiniteView extends Backbone.View
@@ -9,6 +10,8 @@ module.exports = class InfiniteView extends Backbone.View
     @context = options.context
     @itemSelector = options.itemSelector
     @initListener()
+    mediator.on 'stop:infinite', @disable, @
+    mediator.on 'start:infinite', @enable, @
     super
 
   initListener: ->

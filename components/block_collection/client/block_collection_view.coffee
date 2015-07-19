@@ -19,7 +19,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     if block
       new BlockView
-        container: $('.grid')
+        container: @$el
         model: block
         channel: @channel
         autoRender: false
@@ -27,7 +27,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   renderBlockView: (block, autoRender = false)=>
     new BlockView
-      container: $('.grid')
+      container: @$el
       model: block
       autoRender: autoRender
       containerMethod: 'append'
