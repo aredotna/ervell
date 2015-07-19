@@ -19,6 +19,9 @@ module.exports = class User extends Base
   slugOrId: ->
     @get('slug') || @id
 
+  isPremium: ->
+    @get('is_pro') is true or @get('is_pro') is 'true'
+
   startPrivateChannel: ->
     $.ajax
       type: "POST"
