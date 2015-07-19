@@ -2,7 +2,7 @@ extends ../../../components/layout/index
 
 block body
   include ./path
-  if user && user.isPremium()
+  if user && user.isPremium() && !following && !followers
     .flex-container
       - content = sd.SUBJECT ? sd.SUBJECT + "s" : "content"
       - title = author.get('username') + "'s public " + content
