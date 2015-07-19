@@ -7,11 +7,8 @@ Authentication = require '../../models/authentication.coffee'
   res.redirect("/manage") if req.params.tab is 'manage'
 
   tab = res.locals.sd.TAB = req.params.tab
-  coupon = res.locals.sd.COUPON = req.query.coupon
 
-  res.render "index",
-    tab: tab
-    coupon: coupon
+  res.render "index", tab: tab
 
 @callback = (req, res, next) ->
   auth = new Authentication req.query

@@ -10,8 +10,7 @@ block content
     if user && user.get('is_pro') == true
       .premium--is-premium Thank you for registering!
     else
-      - price = coupon ? '$22.50' : '$45'
-      button.button--wide.button--border.button--add #{price} / year — Activate premium &rarr;
+      button.button--wide.button--border.button--add $45 / year — Activate premium &rarr;
   h2 You get:
   .tools__frame
     h3 Additional privacy settings
