@@ -12,14 +12,16 @@ module.exports = class ChannelFileDropView extends Backbone.View
   setupDragAndDrop: ->
     @sortable = new Sortable @el,
       draggable: '.grid__block--item'
-      scroll: true
-      onStart: @freezeNewBlock
+      onStart: @onStart
       onMove: @onMove
       onEnd: @onEnd
-      scrollSensitivity: 100
       onUpdate: @updateOrder
+      animation: 0
 
-  freezeNewBlock: =>
+  onStart: (e) =>
+    index = if e.oldIndex - 4 > 0 then e.oldIndex - 4 else 0
+    $item = $('.grid__block--item').eq(index)
+    _.defer => mediator.trigger 'slide:to:block', $item.data('id'), 0
     @frozen = this.el.querySelector '.grid__block--new-block'
     mediator.shared.state.set 'isDraggingBlocks', yes
 
@@ -46,6 +48,9 @@ module.exports = class ChannelFileDropView extends Backbone.View
       index = (blocks.length - blocks.index(item))
     else
       index = blocks.index($(item)) + 1
+
+    _.defer =>
+      mediator.trigger 'slide:to:block', $(item).data('id'), 0
 
     $.ajax
       url: "#{sd.API_URL}/channels/#{@model.id}/sort"

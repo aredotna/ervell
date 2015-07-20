@@ -29,6 +29,7 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     @currentUser = mediator.shared.current_user
     @listenTo @model, 'remote:update', @render
+    @listenTo @model, 'change', @render
 
     @render()
 

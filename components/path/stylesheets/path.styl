@@ -52,12 +52,15 @@
 
   .path__breadcrumb
     min-width initial
-    
+
     .premium-badge
       line-height 31px
 
   .edit-channel, .edit-profile, .channel-settings
     display none
+
+.is-dragging .path.stuck
+  visibility hidden
 
 .path__breadcrumb
   min-width 115px
@@ -155,7 +158,7 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
   .path__breadcrumb li
     text-align left
     float none
-    
+
   .path.stuck
     display none
 

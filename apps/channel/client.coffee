@@ -36,10 +36,17 @@ module.exports = class ChannelView extends Backbone.View
     @blocks = options.blocks
 
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
+    mediator.shared.state.on 'change', @toggleDragClass, @
 
     @channel.on 'edit:title:success', @updateSlug, @
 
     @subscribe()
+
+  toggleDragClass: ->
+    if mediator.shared.state.get('isDraggingBlocks')
+      @$el.addClass 'is-dragging'
+    else
+      @$el.removeClass 'is-dragging'
 
   loadConnectView: (e)=>
     e.preventDefault()

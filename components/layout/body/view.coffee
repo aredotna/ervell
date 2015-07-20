@@ -37,6 +37,7 @@ module.exports = class BodyView extends Backbone.View
     mediator.on 'load:start', @startLoading, @
     mediator.on 'load:stop', @stopLoading, @
     mediator.on 'slide:to:block', @scrollToBlock
+    mediator.shared.state.on 'change:isDraggingBlocks', @triggerReflow, @
 
     new PathView el: @$('section.path--header')
 
@@ -50,8 +51,8 @@ module.exports = class BodyView extends Backbone.View
 
   stopLoading: -> $('body').removeClass 'is-loading'
 
-  scrollToBlock: (block)->
-    $el = $("##{block.id}")
+  scrollToBlock: (id, delay = 100)->
+    $el = $("##{id}")
     elOffset = $el.offset().top
     elHeight = $el.height()
     windowHeight = $(window).height()
@@ -61,7 +62,7 @@ module.exports = class BodyView extends Backbone.View
     else
       offset = elOffset
 
-    $('html, body').animate {scrollTop: offset}, 100
+    $('html, body').animate { scrollTop: offset }, delay
 
   intercept: (e)->
     # do not continue if clicking button
@@ -102,6 +103,14 @@ module.exports = class BodyView extends Backbone.View
       e.preventDefault()
       e.stopImmediatePropagation()
       window.location = href
+
+  triggerReflow: =>
+    console.log 'triggerReflow'
+    top = $(window).scrollTop()
+    $('body').css display: 'none'
+    $('body').offset().height
+    $('body').css display: 'block'
+    $(window).scrollTop top
 
   scrollToTop: (e) ->
     e.preventDefault()
