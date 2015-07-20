@@ -25,7 +25,7 @@ module.exports = class Block extends Base
       @get('title')
 
   parse: (data) ->
-    if data.kind is 'profile'
+    if data?.kind is 'profile'
       data.user
     else
       data
