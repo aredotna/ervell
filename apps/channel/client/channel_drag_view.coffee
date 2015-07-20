@@ -19,7 +19,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
       animation: 0
 
   onStart: (e) =>
-    index = if e.oldIndex - 4 > 0 then e.oldIndex - 4 else 0
+    index = if e.oldIndex - 10 > 0 then e.oldIndex - 10 else 0
     $item = $('.grid__block--item').eq(index)
     _.defer => mediator.trigger 'slide:to:block', $item.data('id'), 0
     @frozen = this.el.querySelector '.grid__block--new-block'
