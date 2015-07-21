@@ -4,7 +4,7 @@ html, body
   margin 0
   padding 0
 
-.body--home
+.body--home, .body--labs
   #layout-header
     position absolute
     background transparent
@@ -34,6 +34,52 @@ html, body
   .container
     position absolute
     height 100%
+
+.body--labs
+  .home__section--intro, .home__section--footer
+    background-color #D4EA93
+    border 0
+  
+    h1
+      max-width 980px
+      margin auto
+  
+    .home-arrow
+      fill textgray
+      
+      &:hover
+        fill hovergray
+    
+    .labs-hint
+      position absolute
+      bottom 2%
+      width 100%
+      
+    .home-arrow-right
+      position absolute
+      top 50%
+      left 95%
+      -webkit-transform rotate(180deg)
+      -moz-transform rotate(180deg)
+      -o-transform rotate(180deg)
+      -ms-transform rotate(180deg)
+      transform rotate(180deg)
+      fill textgray
+      
+      &:hover
+        fill hovergray
+        
+  .labs-bullets
+    li
+      h1
+        max-width 800px
+        margin auto
+        text-align left
+        list-style circle
+        margin-top 40px
+  
+  .home__section.home__section--footer
+    padding-top 200px
 
 .home__section--intro
   width 100%
