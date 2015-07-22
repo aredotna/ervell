@@ -48,7 +48,7 @@ sd = require("sharify").data
 
   channels.fetch
     data:
-      per: 20
+      per: 40
     cache: true
     success: ->
       promises = _.compact _.flatten [
