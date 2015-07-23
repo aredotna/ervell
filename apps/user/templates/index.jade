@@ -4,8 +4,9 @@ block body
   include ./path
   if user && user.isPremium() && !following && !followers
     .flex-container
-      - content = sd.SUBJECT ? sd.SUBJECT + "s" : "content"
-      - title = author.get('username') + "'s public " + content
+      - content = sd.SUBJECT ? sd.SUBJECT + "s" : "blocks and channels"
+      - searchee =  author.id == user.id ? "your " : author.get('username') + "'s public "
+      - title = searchee + content
       include ../../../components/filter/templates/search_bar
   .channel-container( class=blocks.length ? '' : 'is-empty' )
     .grid.grid--user.flex-container
