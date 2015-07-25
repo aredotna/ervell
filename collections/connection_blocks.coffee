@@ -20,5 +20,5 @@ module.exports = class ConnectionBlocks extends UserBlocks
     @slug = options.user_slug
 
   comparator: (model) ->
-    return 1 if model.has('marked')
+    return 1 if model.get('marked')
     return model.get('score')

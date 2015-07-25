@@ -25,7 +25,6 @@ module.exports = class SaveConnectView extends ConnectView
     return @reset() unless query = @getQuery()
     return if (query.length < 2) or (query is @lastQuery)
 
-    # @$(".search-bar-clear").fadeIn()
     @$el.addClass('is-loading')
 
     @lastQuery = query

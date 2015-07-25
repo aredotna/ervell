@@ -21,7 +21,7 @@ module.exports = class ConnectResultsView extends Backbone.View
     target = $(e.currentTarget)
     id = target.data('id')
     target.toggleClass('is-connected')
-    @collection.get(id).set marked: true
+    @collection.get(id).set marked: target.hasClass('is-connected')
 
   render: ->
     @$el.html connectResultsTemplate(blocks: @collection.models)

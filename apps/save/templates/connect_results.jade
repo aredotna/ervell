@@ -2,7 +2,7 @@ ul.new-connection__search-results__list.new-connection__search-results__list--sa
   for block in blocks
     - className = "new-connection__search-result new-connection__search-result--save"
     - className += "  new-connection__search-result-" + block.getVisibility()
-    if block.has('marked')
+    if block.get('marked')
       - className += " is-connected"
     li(class=className data-id="#{block.id}")
       ul.breadcrumb
