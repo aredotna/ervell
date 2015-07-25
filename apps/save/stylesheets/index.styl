@@ -14,3 +14,17 @@ label.save-label
 
   .new-connection
     padding 0
+
+.new-connection__search-result--save.is-connected
+  opacity 1 !important
+  background #fff
+
+  &:after
+    position absolute
+    right 6px
+    content "✔"
+
+  &:hover:after
+    position absolute
+    right 6px
+    content "✕"
