@@ -20,6 +20,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
+  showPremiumMessage()
   # syncAuth()
   # setupFastClick()
   initShortCuts()
@@ -117,11 +118,11 @@ initShortCuts = ->
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
 
-showBetaMessage = ->
+showPremiumMessage = ->
   model = new Backbone.Model
-    id: 'beta_message'
-    title: "Beta"
-    body: "Welcome to the beta preview of Are.na. Expect us to have some bugs here for the time being. Please submit any feedback to our <a href='http://are.na/feedback'>feedback channel</a>. Follow our progress <a href='http://github.com/arenahq/ervell'>here</a>."
+    id: 'channel_search_message'
+    title: "New premium features"
+    body: "We recently added search functionality inside all channels and profiles for premium members. More features to come. If you find Are.na useful, please consider in <a href='/tools/premium'>upgrading to a premium account</a> and contributing to our self-sustanability goal, every single subscriber helps. Thank you."
     type: 'announcement'
   new MessageView container: $('#message-container'), model: model
 
