@@ -5,46 +5,68 @@ block vars
 
 block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'all' + sd.CSS_EXT) )
-  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'labs' + sd.CSS_EXT) )
 
 block body
   .home__section.home__section--intro
     .home__section--intro__inner
       img.feynman(src="../images/arena-labs.png")
       h1 Thanks to its flexibility and the open-ended proprities of its community, Are.na is used by professionals as integral part of their activity.
-      br
-      br
-      h1 Our team offerst support and custom services to educational and art institutions, researchers and commercial entities.
-      .labs-hint 
-        h1 Case studies:
-  .home__section.home__section--intro
-    .home__section--intro__inner
-      h1 1. [Diakron logo]
-      h1 Used the site to compile and develop research on hybrid organizations.
-      br
-      br
-      h1 Why Are.na: ...
-      img(
-        data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
-        class="iconic iconic-sm home-arrow home-arrow-right pointer"
-        data-multiplier="1"
-      )
-      .labs-hint
-        h1 Services:
-  .home__section.home__section--intro
-    .home__section--intro__inner.labs-bullets
-      li: h1 Consulting and guidance from Are.na's team on the best ways to use the platform for research.
-      li: h1 A ready-to-use custom version of the platform, with themes and view options.
-      li: h1 Our developer's time to help you build a website using Are.na's API
-      li: h1 A focus group of expert Are.na users to complement and participate in your research, targeted or not
-      li: h1 Your own private platform and url (name.are.na), giving access to only the users you want.
-      li: h1 A particular feature or add-on to the existing experience
-      li: h1 Tools to gather material from other sources programmatically (I.e. Algoritmically pulling tweets or images from social media, markov chain web crawlers, extended Wikipedia searches)
-      li: h1 Map / graph visualizations of your content
+      h1 Our team offers support and custom services to educational and art institutions, researchers and commercial entities. 
+      h1.labs-hint Case studies
+    .home__section--intro__inner.labs__case-studies
+      .labs__case-studies__item
+        h1.labs__case-studies--title Diakron
+        .labs__case-studies--separator
+        .labs--text Used the site to compile and develop research on hybrid organizations.
+        .labs__case-studies--title Why Are.na
+        .labs__case-studies--text Explain
+        .labs__case-studies--title Links
+        .labs__case-studies--text Link1, Link2, Link3
+      .labs__case-studies__item
+        h1.labs__case-studies--title Museum of Arts and Design
+        .labs__case-studies--separator
+        .labs--text Blah blah blah
+        .labs__case-studies--title Why Are.na
+        .labs__case-studies--text Explain
+        .labs__case-studies--title Links
+        .labs__case-studies--text Link1, Link2, Link3
+      .labs__case-studies__item
+        h1.labs__case-studies--title Cleopatra
+        .labs__case-studies--separator
+        .labs--text Blah blah blah
+        .labs__case-studies--title Why Are.na
+        .labs__case-studies--text Explain
+        .labs__case-studies--title Links
+        .labs__case-studies--text Link1, Link2, Link3
+      .labs__case-studies__item
+        h1.labs__case-studies--title Other
+        .labs__case-studies--separator
+        .labs--text List of projects who used Are.na as a base
+        .labs__case-studies--title Links
+        .labs__case-studies--text Troy Conrad Therrien, Cambridge Book, No Layout, Whyte Hotel, Zak Group
+    h1.labs-hint Type of services and products:
+    .home__section--intro__inner.labs__services
+      li: h1 Map / graph visualizations 
+      .labs--text Visualize content etc
+      li: h1 A ready-to-use template to show Are.na content
+      .labs--text with themes and view options, examples.
+      li: h1 Gather material from other sources programmatically 
+      .labs--text Custom tools to i.e. algoritmically pulling tweets or images from social media, markov chain web crawlers, extended Wikipedia searches)
+      li: h1 Developers' time 
+      .labs--text To help you build a website using Are.na's API
+      li: h1 Research
+      .labs--text A focus group of expert Are.na users to complement and participate in your research, targeted or not
+      li: h1 Your-name.are.na 
+      .labs--text Your own private platform and url giving access to only the users you want.
+      li: h1 Custom features
+      .labs--text or add-on to the existing plafform.
+      li: h1 Tracking
+      .labs--text Insert your content/product/image/link into an Are.na network and study the spontaneous reactions
+      li: h1 Consulting 
+      .labs--text Guidance from Are.na's team on the best ways to use the platform for research.
 
-  .home__section.home__section--footer
-    .home__section__container.flex-container
-      h1 Contact us info @ are.na
+    h1.labs-hint Contact 
+      .labs--text info @ are.na
 
 block scripts
   script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
