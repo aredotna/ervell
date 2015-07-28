@@ -2,6 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
 sd = require("sharify").data
+validator = require 'validator'
 mediator = require '../../../lib/mediator.coffee'
 ConnectView = require '../../../components/connect/client/connect_view.coffee'
 ConnectionBlocks = require '../../../collections/connection_blocks.coffee'
@@ -11,8 +12,45 @@ connectTemplate = -> require('../templates/connect.jade') arguments...
 
 module.exports = class SaveConnectView extends ConnectView
 
+  events:
+    'tap .new-connection__done-button' : 'saveBlock'
+
+  saveBlock: (e) =>
+    e.preventDefault()
+    marked = @collection.where marked: true
+
+    @$el.addClass 'is-loading'
+
+    if marked
+      data =
+        channel_ids: _.map marked, (marked) -> marked.get('slug')
+
+      attr = if @isURL() then 'source' else 'content'
+
+      data[attr] = @getContent
+
+      $.ajax
+        url: "#{sd.API_URL}/blocks/multi"
+        type: 'POST'
+        data: data
+        success: @successfulSave
+        error: @unsuccessfulSave
+
+  successfulSave: =>
+    @$el.removeClass('is-loading').addClass 'is-successful'
+    @$('button').prop('disabled', true).text 'Block saved.'
+
+  isURL: ->
+    validator.isURL @getContent()
+
   clear: -> # no op
 
+  getContent: ->
+    query = $('input#content').val()?.trim()
+    if query.length
+      return query
+    else
+      false
 
   render: =>
     @$el.html connectTemplate()
