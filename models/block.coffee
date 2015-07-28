@@ -6,6 +6,7 @@ Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
+moment = require 'moment'
 
 module.exports = class Block extends Base
 
@@ -71,6 +72,9 @@ module.exports = class Block extends Base
 
   belongsToCurrentUser: (user)->
     @get('user').id is user.id
+
+  connectedAtAgo: ->
+    moment(@get('connected_at')).fromNow()
 
   allows: (permission, user) ->
     _s.include @getPermissions(user), permission
