@@ -34,7 +34,15 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
           - if(block.get('class') == 'Media')
             img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
         - if(block.has('user'))
-          p.grid__block__author
-            | Added by #{block.get('user').username}
-            br
-            | #{block.updatedAtAgo()}
+
+          - if(channel)
+            p.grid__block__author
+              | Connected by #{block.get('connected_by_username')}
+              br
+              | #{block.connectedAtAgo()}
+
+          - else
+            p.grid__block__author
+              | Added by #{block.get('user').username}
+              br
+              | Updated #{block.updatedAtAgo()}
