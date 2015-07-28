@@ -14,16 +14,21 @@ module.exports = class SaveConnectView extends ConnectView
 
   events:
     'tap .new-connection__done-button' : 'saveBlock'
+    'keyup .new-connection__search'    : 'onKeyUp'
 
   saveBlock: (e) =>
     e.preventDefault()
     marked = @collection.where marked: true
 
-    @$el.addClass 'is-loading'
+    @$el.addClass 'is-saving'
 
     if marked
       data =
         channel_ids: _.map marked, (marked) -> marked.get('slug')
+
+      _.map marked, (block) ->
+        block.unset('marked')
+        mediator.shared.recent_connections.shove block
 
       attr = if @isURL() then 'source' else 'content'
 
@@ -37,7 +42,7 @@ module.exports = class SaveConnectView extends ConnectView
         error: @unsuccessfulSave
 
   successfulSave: =>
-    @$el.removeClass('is-loading').addClass 'is-successful'
+    @$el.removeClass('is-saving').addClass 'is-successful'
     @$('button').prop('disabled', true).text 'Block saved.'
 
   isURL: ->
