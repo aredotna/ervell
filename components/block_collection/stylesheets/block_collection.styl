@@ -142,34 +142,34 @@ body:not(.is-mobile) .grid__block:hover
   position relative
 
   &:hover .grid__block__delete-block__confirm
-    color textgray
+    color #fff
 
 .grid__block__delete-block__confirm
-  bubble top center backgroundgray
+  bubble top center alert
   width 120px
   left -47px
   z-index rotate_z
   position absolute
-  background backgroundgray
+  background alert
   box-shadow none
   border none
   border-radius 0
   display none
+  color #fff
 
   &.is-active
     display block
 
   &:hover
-    color textgray
+    color #fff
 
   &:after
-    border-bottom 10px solid backgroundgray
+    border-bottom 10px solid alert
 
 .grid__block__delete-block__confirm__choice
   padding 0 10px
   font-weight bold
   cursor pointer
-
 
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
 privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
