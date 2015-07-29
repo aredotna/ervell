@@ -1,4 +1,7 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index--bare
+
+block vars
+  - extraClasses = 'no-header no-messages no-scroll'
 
 block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
@@ -41,7 +44,7 @@ block body
             .mark-label
               | Total premium users
               br
-              strong 42
+              strong 52
         .static__graph-fill.step-2
           .static__graph-mark
             .mark-label
