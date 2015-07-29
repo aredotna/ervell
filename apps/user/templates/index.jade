@@ -17,8 +17,7 @@ block body
     .channel-results-container
       .grid.grid--channel-filter.flex-container
         //- rendered client side
-    #l-infinite-loader-container
-      #l-loader
+    include ../../../components/layout/loader/templates/infinite
 
 block scripts
   script( src= sd.ASSET_PATH + 'user' + sd.JS_EXT )
