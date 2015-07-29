@@ -1,22 +1,34 @@
 a.premium-badge
-  position absolute
+  antialiased()
   display inline-block
   letter-spacing 0px
   font-size 13px
-  line-height 19px
-  padding 9px 2px 0px 9px
-  antialiased()
   color success
+  position absolute
+  margin-left s_margin
+
+  > div
+    position absolute
+    transition opacity 0.2s
+
+  .premium-badge__stars
+    opacity 1
+
+  .premium-badge__cracker
+    opacity 0
+
+    & > svg
+      vertical-align middle
 
   &:hover
-    cursor pointer
-    color transparent
+    .premium-badge__stars
+      opacity 0
 
-    &:after
-      content url('../images/premium.svg')
-      color hovergray
-      font-weight 400
-      vertical-align top
-      position absolute
-      top 12px
-      left 10px
+    .premium-badge__cracker
+      opacity 1
+
+.path.stuck a.premium-badge:hover
+  .premium-badge__stars
+    opacity 1
+  .premium-badge__cracker
+    opacity 0

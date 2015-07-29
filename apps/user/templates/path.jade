@@ -4,7 +4,10 @@ block path
   li.path__username(class=author.get('is_pro') == true ? 'is-premium' : '')
     a(href="/" + author.get('slug'))=author.get('username')
     if author.get('is_pro') == true && !followers && !following
-      a(href="/tools/premium").premium-badge ✶✶
+      a.premium-badge(href="/tools/premium")
+        .premium-badge__stars ✶✶
+        .premium-badge__cracker
+          include ../../../public/images/premium.svg
   if followers
     li.path__sub Followers
   if following
