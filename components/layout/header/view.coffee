@@ -42,10 +42,12 @@ module.exports = class HeaderView extends Backbone.View
       @$el.show()
 
   setActive: (e)->
-    @$el.addClass 'is-active'
-    @$('#layout-header__search__input').focus()
+    unless $('body').hasClass('is-mobile')
+      @$el.addClass 'is-active'
+      @$('#layout-header__search__input').focus()
 
-  unsetActive: (e)-> @$el.removeClass 'is-active'
+  unsetActive: (e)->
+    @$el.removeClass 'is-active'
 
   clearNotifications: (e)->
     @notifications.markRead()
