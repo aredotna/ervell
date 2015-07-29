@@ -51,7 +51,7 @@ module.exports = class FeedView extends Backbone.View
 
     @$('.grid__block').each @initBlockView
 
-    _.defer -> 
+    _.defer ->
       IconicJS().inject 'img.iconic'
 
   updateTitle: (diff) =>
