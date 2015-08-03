@@ -13,8 +13,13 @@ connectTemplate = -> require('../templates/connect.jade') arguments...
 module.exports = class SaveConnectView extends ConnectView
 
   events:
+    'tap .save-page__close'            : 'sendCloseMsg'
     'tap .new-connection__done-button' : 'saveBlock'
     'keyup .new-connection__search'    : 'onKeyUp'
+
+  sendCloseMsg: ->
+    console.log 'close'
+    window.top.postMessage { action: 'close' }, '*'
 
   saveBlock: (e) =>
     e.preventDefault()
@@ -24,7 +29,19 @@ module.exports = class SaveConnectView extends ConnectView
 
     if marked
       data =
-        channel_ids: _.map marked, (marked) -> marked.get('slug')
+        channel_ids: _.map marked, (marked) ->
+          extensionId = 'djhgfjcbmfpbpcednojonohkecinmphk'
+          message =
+            action: 'connection:saved'
+            slug: marked.get('slug')
+            title: marked.get('title')
+
+          window.top.postMessage(message, '*')
+
+          chrome.runtime.sendMessage extensionId, message, (response) ->
+            console.log 'message sent'
+
+          marked.get('slug')
 
       _.map marked, (block) ->
         block.unset('marked')
