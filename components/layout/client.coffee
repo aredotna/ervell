@@ -99,9 +99,9 @@ setupAjaxHeaders = ->
 
 setupAnalytics = ->
   # Initialize analytics & track page view.
+  return if sd.SAVE
   analytics ga: ga
   analytics.registerCurrentUser()
-  return if sd.SAVE
   unless (sd.CHANNEL and sd.CHANNEL.status is 'private')
     analytics.trackPageview()
 
