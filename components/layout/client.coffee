@@ -101,7 +101,8 @@ setupAnalytics = ->
   # Initialize analytics & track page view.
   analytics ga: ga
   analytics.registerCurrentUser()
-  unless (sd.CHANNEL and sd.CHANNEL.status is 'private') or sd.SAVE
+  return if sd.SAVE
+  unless (sd.CHANNEL and sd.CHANNEL.status is 'private')
     analytics.trackPageview()
 
   # Log a visit once per session
