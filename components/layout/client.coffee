@@ -20,7 +20,6 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  showPremiumMessage() if sd.CURRENT_USER?
   # syncAuth()
   # setupFastClick()
   initShortCuts()
@@ -119,14 +118,6 @@ initShortCuts = ->
   km 'right', -> mediator.trigger 'lightbox:slide:next'
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
-
-showPremiumMessage = ->
-  model = new Backbone.Model
-    id: 'channel_search_message'
-    title: "New premium features"
-    body: "We recently added search functionality inside all channels and profiles for premium members. More features to come. If you find Are.na useful, please consider <a href='/tools/premium' class='is-successful'>upgrading to a premium account</a> and contributing to our self-sustanability goal, every single subscriber helps. Thank you."
-    type: 'announcement'
-  new MessageView container: $('#message-container'), model: model
 
 showNewUserMessages = ->
   new NewUserMessagesView
