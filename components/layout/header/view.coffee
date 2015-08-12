@@ -60,7 +60,7 @@ module.exports = class HeaderView extends Backbone.View
 
   unsetNotifications: ->
     @$('.user-avatar, .dropdown__link--notifications').removeClass 'has-notifications'
-    @$('.notifications--count').text ""
+    @$('.notifications--count').text "0"
 
   openChannelToggle: ->
     @$('.new-channel-dropdown').addClass 'dropdown--is_active'
