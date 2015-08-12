@@ -12,7 +12,7 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
         block content
 
       .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
-        - if(user)
+        - if(user && user.has('id'))
           block overlay
 
         - if(channel && user && user.has('id'))
