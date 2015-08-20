@@ -14,7 +14,7 @@ module.exports = class ChannelVisibilityView extends Backbone.View
     'click .metadata--selector__option' : 'toggleVisibility'
 
   initialize: (options) ->
-    { @autoRender, @autoSync } = _.defaults @defaults, options
+    { @autoRender, @autoSync } = _.defaults options, @defaults
 
     @render() if @autoRender
 
