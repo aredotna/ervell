@@ -1,19 +1,20 @@
 Backbone = require 'backbone'
 Backbone.$ = $
+_ = require 'underscore'
 analytics = require '../../../lib/analytics.coffee'
 
 template = -> require('../templates/channel_visibility.jade') arguments...
 
 module.exports = class ChannelVisibilityView extends Backbone.View
-  autoRender: true
-  autoSync: false
+  defaults:
+    autoRender: true
+    autoSync: false
 
   events:
     'click .metadata--selector__option' : 'toggleVisibility'
 
   initialize: (options) ->
-    @autoRender = options.autoRender || @autoRender
-    @autoSync = options.autoSync || @autoSync
+    { @autoRender, @autoSync } = _.defaults @defaults, options
 
     @render() if @autoRender
 
