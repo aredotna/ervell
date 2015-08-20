@@ -18,12 +18,9 @@ module.exports = class NewBlockView extends Backbone.View
     'tap .grid__block--new-block__submit'                 : 'createBlock'
     'tap .add-block__placeholder'                         : 'setActive'
 
-  initialize: (options)->
-    @blocks = options.blocks
-    @$container = options.container
-
-    @render() if options.autoRender
-    @setElCaches() unless options.autoRender
+  initialize: ({ @blocks, @$container, @autoRender })->
+    @render() if @autoRender
+    @setElCaches() unless @autoRender
 
   setActive: (e) ->
     $target = $(e.currentTarget)
