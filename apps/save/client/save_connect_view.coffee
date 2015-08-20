@@ -18,7 +18,6 @@ module.exports = class SaveConnectView extends ConnectView
     'keyup .new-connection__search'    : 'onKeyUp'
 
   sendCloseMsg: ->
-    console.log 'close'
     window.top.postMessage { action: 'close' }, '*'
 
   saveBlock: (e) =>
@@ -30,17 +29,6 @@ module.exports = class SaveConnectView extends ConnectView
     if marked
       data =
         channel_ids: _.map marked, (marked) ->
-          extensionId = 'djhgfjcbmfpbpcednojonohkecinmphk'
-          message =
-            action: 'connection:saved'
-            slug: marked.get('slug')
-            title: marked.get('title')
-
-          window.top.postMessage(message, '*')
-
-          chrome.runtime.sendMessage extensionId, message, (response) ->
-            console.log 'message sent'
-
           marked.get('slug')
 
       _.map marked, (block) ->
@@ -49,7 +37,11 @@ module.exports = class SaveConnectView extends ConnectView
 
       attr = if @isURL() then 'source' else 'content'
 
-      data[attr] = @getContent
+      data[attr] = @getContent()
+
+      _.extend data, sd.QUERY
+
+      console.log('data', data)
 
       $.ajax
         url: "#{sd.API_URL}/blocks/multi"

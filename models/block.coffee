@@ -25,6 +25,12 @@ module.exports = class Block extends Base
     else
       @get('title')
 
+  sourceTitle: ->
+    if @get('source')?.title?
+      "Source: #{@get('source')?.title}"
+    else
+      "Source"
+
   parse: (data) ->
     if data?.kind is 'profile'
       data.user
