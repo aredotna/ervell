@@ -1,17 +1,18 @@
+sd = require('sharify').data
+ft = require('fastclick')
+Cookies = require 'cookies-js'
+_ = require 'underscore'
 Backbone = require 'backbone'
 Backbone.$ = $
-_ = require 'underscore'
 HeaderView = require './header/view.coffee'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
+Notifications = require "../../collections/notifications.coffee"
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
-sd = require('sharify').data
-ft = require('fastclick')
-Cookies = require 'cookies-js'
 analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
@@ -61,6 +62,10 @@ setupPusherAndCurrentUser = ->
   mediator.shared.recent_connections = new RecentConnections
 
   if user.id
+    mediator.shared.notifications = new Notifications()
+    mediator.shared.notifications.fetch()
+    mediator.shared.notifications.on 'sync', ->
+      mediator.trigger 'notifications:synced', @
 
     user.fetch
       prefill: true

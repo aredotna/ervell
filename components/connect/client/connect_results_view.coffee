@@ -12,10 +12,8 @@ module.exports = class ConnectResultsView extends Backbone.View
   events:
     'tap .new-connection__search-result' : 'toggleConnection'
 
-  initialize: (options) ->
-    @block = options.block
+  initialize: ({ @block }) ->
     @collection.on "sync add", @render, @
-    super
 
   toggleConnection: (e)=>
     target = $(e.currentTarget)
@@ -63,4 +61,4 @@ module.exports = class ConnectResultsView extends Backbone.View
     $.ajax(opts)
 
   render: ->
-    @$el.html connectResultsTemplate(blocks: @collection.models)
+    @$el.html connectResultsTemplate blocks: @collection.models

@@ -139,7 +139,7 @@ module.exports = class ChannelView extends Backbone.View
     if should_render
       new NewBlockView
         el: $ ".grid__block--new-block"
-        container: $ '.grid'
+        $container: $ '.grid'
         model: @channel
         blocks: @blocks
         autoRender: should_render

@@ -156,7 +156,6 @@ module.exports = class SearchBarView extends Backbone.View
       $('.path').removeClass('is-hidden')
     , 200
 
-
   clearSearch: ->
     @searchUnloaded()
     @$input.val ""

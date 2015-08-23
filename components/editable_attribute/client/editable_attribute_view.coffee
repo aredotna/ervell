@@ -24,9 +24,7 @@ module.exports = class EditableAttributeView extends Backbone.View
     'submit'            : 'save'
     'clickMarkdownHelp' : 'showMarkdownHelp'
 
-  initialize: (options)->
-    { @_attribute, @_kind, @wait } = options
-
+  initialize: ({ @_attribute, @_kind, @wait })->
     @currentUser = mediator.shared.current_user
     @listenTo @model, 'remote:update', @render
     @listenTo @model, 'change', @render

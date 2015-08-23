@@ -11,7 +11,6 @@ module.exports = class SmallFeedView extends FeedView
 
   initialize: ({ @block_id })->
     super
-
     mediator.on 'new:comment', @addComment
 
   addComment: (comment)=>

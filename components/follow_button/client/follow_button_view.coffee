@@ -12,8 +12,6 @@ module.exports = class FollowButtonView extends Backbone.View
     'tap' : 'toggleFollow'
 
   initialize: (options) ->
-    super
-
     @showTitle = if options.showTitle? then options.showTitle else true
 
     mediator.on 'current_user:prefetched', @render, @

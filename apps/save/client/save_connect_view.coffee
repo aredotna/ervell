@@ -41,8 +41,6 @@ module.exports = class SaveConnectView extends ConnectView
 
       _.extend data, sd.QUERY
 
-      console.log('data', data)
-
       $.ajax
         url: "#{sd.API_URL}/blocks/multi"
         type: 'POST'
