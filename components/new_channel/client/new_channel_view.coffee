@@ -1,15 +1,14 @@
-Backbone = require "backbone"
-Backbone.$ = $
+_ = require 'underscore'
 sd = require("sharify").data
 Channel = require '../../../models/channel.coffee'
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
-
+DropdownView = require '../../dropdown/client/dropdown_view.coffee'
 ChannelVisibilityView = require '../../channel_visibility/client/channel_visibility_view.coffee'
 
-newChannelTemplate = -> require('../templates/new_channel.jade') arguments...
+template = -> require('../templates/new_channel.jade') arguments...
 
-module.exports = class NewChannelView extends Backbone.View
+module.exports = class NewChannelView extends DropdownView
 
   events:
     'keyup .grid__block__editable-title' : 'onKeyUp'
@@ -17,6 +16,9 @@ module.exports = class NewChannelView extends Backbone.View
     'click .new-channel__done-button'   : 'createChannel'
 
   initialize: (options)->
+    super
+    _.extend @events, DropdownView.prototype.events
+
     @model = new Channel
       class: 'Channel'
       status: 'public'
@@ -38,7 +40,7 @@ module.exports = class NewChannelView extends Backbone.View
     @$input.focus()
 
   render: ->
-    @$el.html newChannelTemplate(block: @model)
+    @$('.new-channel-dropdown__container').html template block: @model
     @$input = $('.grid__block__editable-title')
 
     @renderChannelVisibility()

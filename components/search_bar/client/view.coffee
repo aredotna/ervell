@@ -18,8 +18,8 @@ module.exports = class SearchBarView extends Backbone.View
     'click .search__results__see-all'     : 'fullResults'
 
   initialize: (options)->
-    @$input = options.$input
-    @$results = options.$results
+    @$input = @$('#layout-header__search__input')
+    @$results = @$('.layout-header__search__results')
     @collection = new SearchBlocks()
     @collection.url = "#{sd.API_URL}/search/channels"
 

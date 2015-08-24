@@ -194,7 +194,6 @@ privacy-color('.search__results__result--privacy-', color)
 
 .new-channel-dropdown
   display inline-block
-  margin-right 20px
 
   .dropdown--menu__trigger:after
     content ""
@@ -226,7 +225,7 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown--menu
   cursor pointer
-  margin-right 25px
+  padding-right 25px
 
 .dropdown
   position absolute
@@ -289,8 +288,13 @@ privacy-color('.search__results__result--privacy-', color)
   .iconic[data-glyph]:before
     font-size 14px
 
-.dropdown--is_active .dropdown
-  display block
+.dropdown--is_active
+  .dropdown
+    display block
+
+  &:after
+    position absolute
+    width 300px
 
 .dropdown--menu__trigger:after
   content ""

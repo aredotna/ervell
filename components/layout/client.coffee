@@ -1,13 +1,16 @@
+Backbone = require 'backbone'
+Backbone.$ = $
 sd = require('sharify').data
 ft = require('fastclick')
 Cookies = require 'cookies-js'
 _ = require 'underscore'
-Backbone = require 'backbone'
-Backbone.$ = $
-HeaderView = require './header/view.coffee'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
+AuthRouter = require '../auth_modal/auth_router.coffee'
 MessageView = require '../message/client/message_view.coffee'
+SearchBarView = require '../search_bar/client/view.coffee'
+NewChannelView = require '../new_channel/client/new_channel_view.coffee'
+UserMenuView = require '../user_menu/client/user_menu_view.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 Notifications = require "../../collections/notifications.coffee"
@@ -50,8 +53,18 @@ setMobileClass = ->
     , false
 
 setupViews = ->
-  new HeaderView el: $('#layout-header'), $window: $(window), $body: $('body')
-  new BodyView el: $('body')
+  new BodyView
+    el: $('body')
+  new SearchBarView
+    el: $('.layout-header__search')
+
+  if mediator.shared.current_user.id
+    new UserMenuView
+      el: $('.dropdown--menu--user')
+    new NewChannelView
+      el: $('.dropdown--menu--new-channel')
+
+    mediator.shared.notifications.fetch()
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}
@@ -63,7 +76,6 @@ setupPusherAndCurrentUser = ->
 
   if user.id
     mediator.shared.notifications = new Notifications()
-    mediator.shared.notifications.fetch()
     mediator.shared.notifications.on 'sync', ->
       mediator.trigger 'notifications:synced', @
 
@@ -74,6 +86,9 @@ setupPusherAndCurrentUser = ->
         mediator.trigger 'current_user:fetched'
         ensureFreshUser response.user
         showNewUserMessages() if user.get('show_tour')
+
+  if !user.id
+    new AuthRouter pushState: false
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
 

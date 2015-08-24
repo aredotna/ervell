@@ -92,6 +92,7 @@ module.exports = class BodyView extends Backbone.View
     e.stopPropagation()
 
   bodyClick: (e) ->
+    console.log 'bodyClick', e
     mediator.trigger 'body:click', e
 
   maybeIntercept: (e)->
