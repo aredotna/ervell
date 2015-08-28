@@ -29,4 +29,5 @@ block metadata
 
     if channel
       #metadata__column-manage.metadata__column.metadata__column--right(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
-        .toggle-settings-trigger.pointer: a Manage channel
+        .toggle-settings-trigger.pointer
+          include ../../../public/images/iconic/cog.svg
