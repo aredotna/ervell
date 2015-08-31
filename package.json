@@ -21,6 +21,7 @@
     "cookie-session": "*",
     "diacritics": "*",
     "express": "*",
+    "feed": "^0.2.6",
     "forever": "*",
     "jade": "*",
     "jquery.finger": "*",
