@@ -20,9 +20,7 @@ ChannelBlocks = require "../../collections/channel_blocks"
     res.render 'channel',
       channel: channel
       blocks: blocks.models
-  .catch ->
-    console.log 'error here'
-    next()
+  .catch next
   .done()
 
 @userRSS = (req, res, next) ->
@@ -40,4 +38,5 @@ ChannelBlocks = require "../../collections/channel_blocks"
     res.render 'user',
       user: user
       blocks: blocks.models
+  .catch next
   .done()

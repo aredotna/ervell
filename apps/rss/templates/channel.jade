@@ -12,7 +12,12 @@ rss(version='2.0')
     each block in blocks
       item
         title= block.get('title')
-        link <a href="#{sd.APP_URL}#{channel.href()}#block/#{block.id}" rel="nofollow">#{sd.APP_URL}#{channel.href()}#block/#{block.id}</a>
-        description= block.contentOrDescription()
+        link #{sd.APP_URL}#{channel.href()}#block/#{block.id}
         pubDate= new Date(block.get('updated_at')).toUTCString()
-        guid(isPermaLink='false') <a href="#{sd.APP_URL}#{channel.href()}#block/#{block.id}" rel="nofollow">#{sd.APP_URL}#{channel.href()}#block/#{block.id}</a>
+        guid(isPermaLink='false') #{sd.APP_URL}#{channel.href()}#block/#{block.id}
+        description
+          | <![CDATA[
+          if block.get('image')
+            img(src="#{block.getImageSize('display')}")
+          p= block.contentOrDescription()
+          | ]]>
