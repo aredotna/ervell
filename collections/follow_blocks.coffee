@@ -10,3 +10,7 @@ params = require 'query-params'
 
 module.exports = class FollowBlocks extends SearchBlocks
   url: -> "#{sd.API_URL}/#{@options.object_type}/#{@options.object_id}/follow#{@options.suffix}?#{params.encode(@options)}"
+
+  parse: (data) ->
+    data = super
+    _.filter data, (block) -> block.status isnt 'private'
