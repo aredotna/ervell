@@ -37,6 +37,9 @@ module.exports = class Block extends Base
     else
       data
 
+  contentOrDescription: ->
+    @get('content') || @get('description')
+
   getSourceUrl: ->
     @get('source')?.url || @get('attachment')?.url || @getImageSize('original')
 
