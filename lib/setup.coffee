@@ -133,6 +133,7 @@ module.exports = (app) ->
   app.use require "../apps/save"
   app.use require "../apps/user"
   app.use require "../apps/channel"
+  app.use require "../apps/rss"
 
   # Finally 404 and error handling middleware when the request wasn't handled
   # successfully by anything above.
