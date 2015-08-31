@@ -1,0 +1,18 @@
+doctype xml
+rss(version='2.0')
+  channel
+    title Are.na / #{channel.get('title')}
+    link <a href="#{sd.APP_URL}#{channel.href()}" rel="nofollow">#{sd.APP_URL}#{channel.href()}</a>
+    atom:link(href='<a href="#{sd.APP_URL}#{channel.href()}/feed/rss" rel="nofollow">#{sd.APP_URL}#{channel.href()}/feed/rss</a>', rel='self', type='application/rss+xml')
+    language en-US
+    if channel.has('metadata')
+      description #{channel.get('metadata').description}
+    if blocks.length
+      lastBuildDate= new Date(channel.get('updated_at')).toUTCString()
+    each block in blocks
+      item
+        title= block.get('title')
+        link <a href="#{sd.APP_URL}#{channel.href()}#block/#{block.id}" rel="nofollow">#{sd.APP_URL}#{channel.href()}#block/#{block.id}</a>
+        description= block.contentOrDescription()
+        pubDate= new Date(block.get('updated_at')).toUTCString()
+        guid(isPermaLink='false') <a href="#{sd.APP_URL}#{channel.href()}#block/#{block.id}" rel="nofollow">#{sd.APP_URL}#{channel.href()}#block/#{block.id}</a>
