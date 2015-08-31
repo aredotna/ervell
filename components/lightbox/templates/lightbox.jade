@@ -36,11 +36,11 @@
       .lightbox__content__footer__inner__col-1
         p.lightbox__content__title(id="attribute-title_#{block.id}")= block.get('title')
         p.lightbox__content__description(id="attribute-description_#{block.id}")!= block.get('description')
-        - if(block && block.has('source'))
-          .lightbox__content__source
-            a(href="#{block.getSourceUrl()}" target="_blank").lightbox__content__source__original (#{block.sourceTitle()})
-            - if(block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link')
-              |  - #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}" target="_blank") (Find original)]
+        .lightbox__content__source
+          - if(block && (block.has('source') || block.has('image')))
+              a(href="#{block.getSourceUrl()}" target="_blank").lightbox__content__source__original (#{block.sourceTitle()})
+          - if(block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link')
+            |  - #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}" target="_blank") (Find original)]
       if sd.CURRENT_USER
         .lightbox__content__footer__inner__col-2
           .lightbox__connect
