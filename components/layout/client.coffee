@@ -58,6 +58,11 @@ setupViews = ->
   new SearchBarView
     el: $('.layout-header__search')
 
+  if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
+    new Waypoint.Sticky
+      element: $('.path__inner')
+      offset: 3
+
   if mediator.shared.current_user.id
     new UserMenuView
       el: $('.dropdown--menu--user')
