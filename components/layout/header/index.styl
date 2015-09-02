@@ -225,25 +225,40 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown--menu
   cursor pointer
-  padding-right 25px
+  padding 0
+
+.dropdown--menu--user
+  padding 0 25px 0 25px
+
+.dropdown--menu--new-channel
+  padding 0
 
 .dropdown
   position absolute
   display none
   top topbar_h
   right 0
-  margin 14px 12px 0 0
+  margin 0
+  padding 14px 12px 0 0
   font-size 0.9em
   text-align left
   border-radius 0px
-  border 1px solid lightgray
   z-index 3001
-  background-color #fff
+  background-color transparent
 
   &.dropdown--size
     width 300px
     right 0
+  
+.dropdown__inner
+  border 1px solid lightgray
+  background-color #fff
 
+.dropdown__section
+  font-size 1.2em
+  padding 18px 20px 12px 20px
+  border-top 1px solid secondbackgroundgray
+  
 .dropdown__link
   display block
   font-weight bold
@@ -253,11 +268,6 @@ privacy-color('.search__results__result--privacy-', color)
   &:not(.dropdown__link--channels):hover
     a
       color hovergray
-
-.dropdown__section
-  font-size 1.2em
-  padding 18px 20px 12px 20px
-  border-top 1px solid secondbackgroundgray
 
 .dropdown__text--small
   padding 0 0 0 11px
