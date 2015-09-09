@@ -17,6 +17,7 @@ Notifications = require "../../collections/notifications.coffee"
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
+initNightMode = require '../night_mode/index.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -143,6 +144,8 @@ initShortCuts = ->
   km 'right', -> mediator.trigger 'lightbox:slide:next'
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
+
+  initNightMode()
 
 showNewUserMessages = ->
   new NewUserMessagesView
