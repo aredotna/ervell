@@ -19,6 +19,7 @@
     "coffee-script": "*",
     "cookie-parser": "*",
     "cookie-session": "*",
+    "cookies": "^0.5.0",
     "diacritics": "*",
     "express": "*",
     "feed": "^0.2.6",
