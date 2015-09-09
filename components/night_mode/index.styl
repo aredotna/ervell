@@ -7,10 +7,10 @@ html.is-inverted
     filter @filter
     -webkit-filter @filter
   // chrome
-  @media screen and (-webkit-min-device-pixel-ratio:0)
+  @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm)
     body
       background-color #000
   // safari 8+
-  _::-webkit-full-page-media, _:future, :root .safari_only
+  _::-webkit-full-page-media, _:future, :root
     body
       background-color #fff
