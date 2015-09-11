@@ -5,6 +5,7 @@ Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
+DOMPurify = require 'dompurify'
 md = require 'marked'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
@@ -63,7 +64,7 @@ module.exports = class EditableAttributeView extends Backbone.View
     @endEdit()
 
     attributes = {}
-    attributes[@_attribute] = @$('.editor').val()
+    attributes[@_attribute] = DOMPurify.sanitize @$('.editor').val()
 
     afterSaved = =>
       @model.trigger 'edit:success'
