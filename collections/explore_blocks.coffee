@@ -12,4 +12,4 @@ module.exports = class ExploreBlocks extends UserBlocks
     page: 1
     per: 20
 
-  url: -> "#{sd.API_URL}/search?#{params.encode(@options)}"
+  url: -> "#{sd.API_URL}/search/explore?#{params.encode(@options)}"
