@@ -16,6 +16,12 @@
 
   clearfix()
 
+.path__below a
+  color lightgrayplus
+
+  &:hover
+    color textgray
+
 .path__headline
   @extend h1
   margin 0
@@ -53,7 +59,7 @@
   .path__breadcrumb
     min-width initial
 
-  .edit-channel, .edit-profile, .channel-settings
+  .edit-channel, .edit-profile, .channel-settings, .path__below
     display none
 
 .is-dragging .path.stuck
