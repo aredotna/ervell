@@ -44,26 +44,18 @@ sd = require("sharify").data
   res.render 'feed', path: 'Notifications'
 
 @explore = (req, res, next) ->
-  channels = new ExploreBlocks
+  blocks = new ExploreBlocks null
 
-  channels.fetch
-    data:
-      per: 40
-    cache: true
-    success: ->
-      promises = _.compact _.flatten [
-        channels.map (channel) ->
-          channel.fetch
-            cache: true
-            success: (model)->
-              blocks = new Blocks _.take(model.get('contents'), 4)
-              model.set 'contents', blocks
-            error: (model, error) ->
-              console.log 'error fetching', error
-        ]
-      Q.allSettled(promises).then(->
-        res.locals.sd.CHANNELS = channels.toJSON()
-        res.render "explore", channels: channels.models, path: 'Explore'
-      ).done()
+  if req.params.block_id
+    res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
+
+  if req.query.subject
+    _.extend blocks.options, subject: req.query.subject
+    res.locals.sd.SUBJECT = req.query.subject
+
+  blocks.fetch
     error: (m, err) -> next err
+    success: ->
+      res.locals.sd.BLOCKS = blocks.toJSON()
+      res.render "explore", blocks: blocks.models
 

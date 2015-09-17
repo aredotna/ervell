@@ -55,8 +55,6 @@ module.exports.init = ->
         el: $ ".feed-container"
         collection: feed
 
-      # scrollFrame '.feed-container a'
-
     else if sd.FEED_TYPE is 'notifications'
       feed = new Notifications()
 

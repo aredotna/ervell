@@ -1,17 +1,24 @@
+
 #
-# minimal js for about page
+# /explore
 #
 
 Backbone = require "backbone"
 Backbone.$ = $
+_ = require 'underscore'
 sd = require("sharify").data
-BlockCollectionView = require '../components/block_collection/client/block_collection_view.coffee'
-ExploreBlocks = require "../collections/explore_blocks.coffee"
+ExploreBlocks = require '../collections/explore_blocks.coffee'
+InfiniteView = require '../components/pagination/infinite_view.coffee'
+UserBlockCollectionView = require '../components/block_collection/client/user_block_collection_view.coffee'
 
 $ ->
-  explore = new ExploreBlocks sd.CHANNELS
-  blocks = explore.getBlocks()
+  blocks = new ExploreBlocks sd.BLOCKS
 
-  new BlockCollectionView
-    el: $ ".grid"
+  new UserBlockCollectionView
+    el: $ ".grid--explore"
     blocks: blocks
+
+  new InfiniteView
+    context: $ ".grid--explore"
+    collection: blocks
+    itemSelector: $ ".grid--explore"
