@@ -21,6 +21,7 @@
     "cookie-session": "*",
     "cookies": "^0.5.0",
     "diacritics": "*",
+    "dompurify": "^0.6.5",
     "express": "*",
     "feed": "^0.2.6",
     "forever": "*",
