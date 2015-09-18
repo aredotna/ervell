@@ -10,6 +10,17 @@
     height 32px
     font-size s_caption
     border 1px solid bordergray
+    
+  .button--inblock--bottom
+    font-size 20px
+    height 30px
+    bottom 15px
+    color lightgray
+    border-top 0px solid bordergray
+
+    &:hover
+      border-top 0px solid textgray
+      color hovergray
 
 .new-connection__caption
   font-size s_caption
@@ -149,6 +160,7 @@ privacy-color('.new-connection__search-result-', color)
         &:hover
           background-color transparent
           color hovergray
+          
   .new-connection__search-result
     &.is-loading
       .feedback
