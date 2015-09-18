@@ -48,6 +48,7 @@ module.exports = class ConnectResultsView extends Backbone.View
       if loadReady && loadComplete
         target.removeClass('is-loading')
         target.toggleClass('is-connected')
+        target.delay(5000).toggleClass('disconnect-label')
 
     setTimeout ->
       loadReady = true
