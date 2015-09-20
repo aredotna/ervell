@@ -158,9 +158,15 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
     display block
 
 @media (max-width:500px)
+  .path--header
+    margin 80px auto 0 auto
+    padding 0
+
   .path__breadcrumb li
     text-align left
-    float none
+  
+  .path__headline
+    line-height 1.2em
 
   .path.stuck
     display none
@@ -170,6 +176,9 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
 
   .path__inner
     padding 0
+  
+  .dropdown--menu--user
+    padding 0 15px 0 15px;
 
 @import './tabs'
 

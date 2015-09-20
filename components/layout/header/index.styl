@@ -309,7 +309,7 @@ privacy-color('.search__results__result--privacy-', color)
 .dropdown--menu__trigger:after
   content ""
 
-@media (max-width:410px)
+@media (max-width:500px)
 
   .header--icon:hover
     .glass-icon
@@ -349,19 +349,22 @@ privacy-color('.search__results__result--privacy-', color)
   .dropdown
     border 0
     border-bottom 1px solid lightgrayplus
+  
+  .dropdown.dropdown--size
+    width 100%
+    height 100%
+    padding 0
+  
+  .dropdown__inner
+    border 0
 
-    &.dropdown--size
-      width 100%
-      height auto
-      margin 0
+  .dropdown__section
+    font-size 1.5em
+    padding 14px 15px 8px 15px
 
-    .dropdown__section
-      font-size 1.5em
-      padding 14px 15px 8px 15px
-
-    .dropdown__link--tools
-      .dropdown__text--small
-        display none
+  .dropdown__link--tools
+    .dropdown__text--small
+      display none
 
   .new-channel-dropdown__container
     width 100%
