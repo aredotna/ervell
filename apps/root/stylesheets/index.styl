@@ -38,7 +38,7 @@ html, body
 /* LABS */
 
 .body--labs
-  background-color backgroundgray
+  background-color #fff
 
   .home__section--intro, .home__section--footer
     border 0
@@ -51,9 +51,6 @@ html, body
       &:hover
         border 0
 
-    .feynman
-      margin 8% 0 40px 0
-
     h1
       width 100%
       max-width 900px
@@ -63,6 +60,9 @@ html, body
     .labs-hint
       margin 120px auto 30px auto
       font-weight 700
+    
+    .labs-hint.labs-footer
+      padding-bottom 100px
 
     .labs--text
       font-size 16px
@@ -73,6 +73,9 @@ html, body
     .home__section--intro__inner
       display block
       width: 100%
+      
+      .feynman
+        margin 8% 0 40px 0
 
     .labs__case-studies
       display flex
@@ -110,7 +113,7 @@ html, body
       margin auto
 
       h1
-        margin 50px 0 6px 0
+        margin 40px 0 6px 0
         list-style circle
 
       .labs--text
@@ -344,6 +347,11 @@ privacy-color('.privacy--', color)
 
   .home__section-footer
     margin 0 0 40px 0
+  
+  /* LABS */
+  .body--labs .home__section--intro
+    width 90%
+    margin-left 5%
 
 @media (max-width:(block_width_mar * 2) + 20)
   .home__section--channels
@@ -370,6 +378,32 @@ privacy-color('.privacy--', color)
       width 70px
       font-size 0.9em
       font-weight normal
+
+  /* LABS */
+  .body--labs 
+    .home__section--intro
+      .feynman
+        width 80%
+      
+      .labs-hint
+        margin 50px 0 0 0
+        padding 0
+      
+      .labs-hint.labs-footer
+        padding-bottom 50px
+        
+      .labs__case-studies
+        .labs__case-studies__item
+          width 100%
+          padding 20px
+          margin 10px 0
+
+    .home__section--footer
+      .labs__case-studies
+        .labs__case-studies__item
+          width 100%
+          padding 20px
+          margin 10px 0
 
 @media (max-height:600px)
   .home__section--intro
