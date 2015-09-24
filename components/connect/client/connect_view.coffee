@@ -59,7 +59,7 @@ module.exports = class ConnectView extends Backbone.View
   search: (e) ->
     e.preventDefault()
 
-    return @reset() unless query = @getQuery()
+    return @collection.reset() unless query = @getQuery()
     return if (query.length < 2) or (query is @lastQuery)
 
     # @$(".search-bar-clear").fadeIn()
@@ -98,23 +98,31 @@ module.exports = class ConnectView extends Backbone.View
   render: =>
     @$el.html connectTemplate()
     @focusSearch()
-    @renderChannels()
+    @renderRecentChannels()
+    @setupSearchResults()
 
   focusSearch: ->
     @$('.new-connection__search').focus()
 
-  renderChannels: =>
-    @collection = new ConnectionBlocks null, user_slug: sd.CURRENT_USER.slug
+  renderRecentChannels: =>
+    collection = new ConnectionBlocks null, user_slug: sd.CURRENT_USER.slug
 
     new ConnectResultsView
-      el: @$('.new-connection__search-results')
+      el: @$('.new-connection__recent-channels')
       block: @block
-      collection: @collection
+      collection: collection
 
     mediator.shared.recent_connections?.fetch()
 
     if mediator.shared.recent_connections.length
       models = _.map mediator.shared.recent_connections.models, (block)-> block.toJSON()
-      @collection.add (_.last models, 3).reverse()
+      collection.add (_.last models, 3).reverse()
     else
-      @collection.fetch data: per: 3
+      collection.fetch data: per: 3
+
+  setupSearchResults: ->
+    @collection = new ConnectionBlocks null, user_slug: sd.CURRENT_USER.slug
+    new ConnectResultsView
+      el: @$('.new-connection__search-results')
+      block: @block
+      collection: @collection
