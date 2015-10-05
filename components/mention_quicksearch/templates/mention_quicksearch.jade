@@ -1,0 +1,5 @@
+ul.mention-quicksearch__content
+  each user in users
+    li.mention-quicksearch__user(data-slug=user.slug)
+      a
+        .mention-quicksearch__user__name=user.full_name

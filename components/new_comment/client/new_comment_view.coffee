@@ -5,6 +5,7 @@ Comment = require "../../../models/comment.coffee"
 mediator = require '../../../lib/mediator.coffee'
 sd = require("sharify").data
 analytics = require '../../../lib/analytics.coffee'
+MentionQuicksearchView = require '../../mention_quicksearch/client/mention_quicksearch_view.coffee'
 
 newCommentTemplate = -> require('../templates/new_comment.jade') arguments...
 
@@ -16,6 +17,10 @@ module.exports = class NewCommentView extends Backbone.View
   initialize: (options)->
     @block_id = options.block_id
     @render() if options.autoRender
+
+    @quicksearch = new MentionQuicksearchView
+      container: @$el,
+      input: @$('.new-comment__field')
 
   fieldIsEmpty: -> @$input.val() is ""
 
