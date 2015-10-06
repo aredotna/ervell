@@ -46,7 +46,7 @@ module.exports.expose = function(_globals) {
 // tests can run without being harmed.
 
 module.exports.teardown = function(clearDOM) {
-  if (clearDOM !== false) {
+  if (clearDOM === true) {
     delete global.window;
     domGlobals.forEach(function(varName) {
       delete global[varName];

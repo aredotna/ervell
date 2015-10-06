@@ -26,7 +26,7 @@ describe('benv.teardown', function() {
   it('removes globals', function(done) {
     benv.setup(function(){
       should.exist(navigator);
-      benv.teardown();
+      benv.teardown(true);
       (typeof navigator).should.equal('undefined');
       done();
     });
@@ -35,7 +35,7 @@ describe('benv.teardown', function() {
   it('doesnt have to remove DOM globals', function(done) {
     benv.setup(function(){
       should.exist(navigator);
-      benv.teardown(false);
+      benv.teardown();
       (typeof navigator).should.not.equal('undefined');
       done();
     });
