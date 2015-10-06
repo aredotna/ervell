@@ -30,23 +30,14 @@ module.exports = class MentionQuicksearchView extends Backbone.View
   onClickUser: (e) =>
     e.preventDefault()
     e.stopPropagation()
-
-    @$el.hide()
-
-    { start, end } = @workingToken
-    text = @$input.val()
-    slug = $(e.currentTarget).data('slug')
-    newText = text.slice(0, start + 1) + slug + text.slice(end)
-    caretPosition = start + 1 + slug.length
-
-    @$input.val(newText)
-    @$input[0].setSelectionRange(caretPosition, caretPosition)
+    @onSelectUser(e.currentTarget)
 
   bindInputEvents: =>
     @$input.on('focus.mq', @onFocus)
     @$input.on('blur.mq', @onBlur)
-    @$input.on('keyup.mq', @setState)
-    @$input.on('click.mq', @setState)
+    @$input.on('keyup.mq', @onKeyUp)
+    @$input.on('keydown.mq', @onKeyDown)
+    @$input.on('click.mq', @extractWorkingToken)
 
   onFocus: =>
     @active = true
@@ -57,7 +48,57 @@ module.exports = class MentionQuicksearchView extends Backbone.View
     @active = false
     @setVisibility()
 
-  setState: =>
+  onKeyDown: (e) =>
+    if @isVisible() and e.keyCode in [13, 38, 40]
+      @updateHighlight(e)
+
+  onKeyUp: (e) =>
+    # if quicksearch results are visible and the
+    # user has just pressed up, down, or enter
+    @extractWorkingToken(e)
+
+  updateHighlight: (e)->
+    highlightableSelector = '.mention-quicksearch__user'
+    highlightedSelector = highlightableSelector + '.is-highlighted'
+    highlighted = @$el.find(highlightedSelector)
+
+    # dont interfere with enter keypress
+    # when nothing is selected
+    return if e.keyCode == 13 && !highlighted.length
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    # enter key
+    if e.keyCode == 13
+      return @onSelectUser(highlighted)
+    # up arrow
+    if e.keyCode == 38
+      if !highlighted.length
+        next = @$el.find(highlightableSelector + ':last')
+      else
+        next = highlighted.prev()
+    # down arrow
+    else if e.keyCode == 40
+      if highlighted.length
+        next = highlighted.next()
+
+    if next?.length
+      highlighted.removeClass('is-highlighted')
+      next.addClass('is-highlighted')
+
+  onSelectUser: (userEl) =>
+    slug = $(userEl).data('slug')
+    { start, end } = @workingToken
+    text = @$input.val()
+    newText = text.slice(0, start + 1) + slug + text.slice(end)
+    caretPosition = start + 1 + slug.length
+
+    @$el.hide()
+    @$input.val(newText)
+    @$input[0].setSelectionRange(caretPosition, caretPosition)
+
+  extractWorkingToken: =>
     cursorStart = @$input[0].selectionStart
     cursorEnd = @$input[0].selectionEnd
 
@@ -117,10 +158,13 @@ module.exports = class MentionQuicksearchView extends Backbone.View
     @render()
 
   setVisibility: =>
-    if @active && @results.length
+    if @isVisible()
       @$el.show()
     else
       @$el.hide()
+
+  isVisible: =>
+    @active && @results.length
 
   render: =>
     @$container.append(@$el) unless @$el.parent().length
@@ -129,7 +173,7 @@ module.exports = class MentionQuicksearchView extends Backbone.View
       users: @results.toJSON()
 
   dispose: ->
-    @$input.off('focus.mq blur.mq keyup.mq click.mq')
+    @$input.off('focus.mq blur.mq keyup.mq click.mq keydown.mq')
     @$input = null
     @$container = null
     @undelegateEvents()
