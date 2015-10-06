@@ -24,6 +24,7 @@ module.exports = class DropdownView extends Backbone.View
       @undelegateEvents()
       @delegateEvents(@mobileEvents)
     else
+      @undelegateEvents()
       @delegateEvents(@desktopEvents)
 
   openDropdown: =>
