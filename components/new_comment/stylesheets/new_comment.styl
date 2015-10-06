@@ -8,6 +8,9 @@
   text-align center
   background-color #fff
 
+  +below(500px)
+    padding-bottom 50%
+
   .new-comment__field
     font-size 1em
     font-weight normal
@@ -29,7 +32,7 @@
     &:focus
       background-color secondbackgroundgray
       height 100px
-  
+
   .new-comment__submit
     font-size 1em
     position relative
@@ -38,7 +41,7 @@
     text-align center
     font-weight bold
     margin 20px 0 40px 0
-    
+
     &:hover
       background-color transparent
       color hovergray

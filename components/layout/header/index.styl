@@ -24,6 +24,9 @@
     .header--icon
       display none
 
+  +below(600px)
+    position absolute
+
 body.no-header #layout-header
   display none
 
@@ -249,7 +252,7 @@ privacy-color('.search__results__result--privacy-', color)
   &.dropdown--size
     width 300px
     right 0
-  
+
 .dropdown__inner
   border 1px solid lightgray
   background-color #fff
@@ -258,7 +261,7 @@ privacy-color('.search__results__result--privacy-', color)
   font-size 1.2em
   padding 18px 20px 12px 20px
   border-top 1px solid secondbackgroundgray
-  
+
 .dropdown__link
   display block
   font-weight bold
@@ -317,13 +320,6 @@ privacy-color('.search__results__result--privacy-', color)
     .logo-icon
       opacity 0
 
-
-  #layout-header
-    position fixed
-
-    li
-      line-height 30px
-
   .logo-icon.dropdown--menu__trigger
     height topbar_h
     padding 0 15px 0 15px
@@ -349,12 +345,12 @@ privacy-color('.search__results__result--privacy-', color)
   .dropdown
     border 0
     border-bottom 1px solid lightgrayplus
-  
+
   .dropdown.dropdown--size
     width 100%
     height 100%
     padding 0
-  
+
   .dropdown__inner
     border 0
 
@@ -370,3 +366,4 @@ privacy-color('.search__results__result--privacy-', color)
     width 100%
     height auto
     margin 0
+    padding 0

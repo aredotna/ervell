@@ -10,9 +10,15 @@ module.exports = class DropdownView extends Backbone.View
     'mouseover' : 'onMouseOver'
     'mouseout' : 'onMouseOut'
 
+  mobileEvents:
+    'tap' : 'onMouseOver'
+    'mouseout' : 'onMouseOut'
+
   initialize: ->
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'body:click', @onBodyClick, @
+
+    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
 
   openDropdown: =>
     @$el.addClass 'dropdown--is_active'
@@ -21,6 +27,7 @@ module.exports = class DropdownView extends Backbone.View
     @$el.removeClass 'dropdown--is_active' unless @$el.is(':hover')
 
   onMouseOver: =>
+    console.log 'onMouseOver'
     $('.dropdown--is_active').removeClass 'dropdown--is_active'
     @openDropdown()
     @$('input').focus()

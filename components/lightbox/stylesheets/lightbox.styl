@@ -19,7 +19,6 @@ body.is-lightbox
   background-color rgba(255,255,255, 0.96)
   opacity 0
   pointer-events none
-  // transition(0.1s)
 
   &.is-active
     opacity 1
@@ -51,6 +50,7 @@ body.is-lightbox
     top 50%
     v-align()
     z-index lightbox_z + 1
+
 
 .lightbox__content__attachment
   svg
@@ -401,6 +401,9 @@ body.is-lightbox
     top 0
     right 0
 
+  .directional-arrows
+    display none
+
   .directional-arrows--left
     left 1%
     width 100px
@@ -466,9 +469,9 @@ body.is-lightbox
   .lightbox__content__img
 
     img
-      max-width 95%
+      max-width 100%
       max-height 90%
-      
+
   .lightbox__content
     padding 10px
 
