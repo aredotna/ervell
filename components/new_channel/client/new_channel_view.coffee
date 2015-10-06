@@ -16,9 +16,6 @@ module.exports = class NewChannelView extends DropdownView
     'click .new-channel__done-button'   : 'createChannel'
 
   initialize: (options)->
-    super
-    _.extend @events, DropdownView.prototype.events
-
     @model = new Channel
       class: 'Channel'
       status: 'public'
@@ -28,6 +25,11 @@ module.exports = class NewChannelView extends DropdownView
     @listenTo @model, 'change:status', @toggleVisibility
 
     @render()
+
+    super
+
+    if $('body').hasClass 'is-mobile'
+      @$el.on 'tap .js-dropdown-trigger', @toggleDropdown
 
   onKeyUp: (e)->
     @model.set 'title', @$input.val()?.trim()

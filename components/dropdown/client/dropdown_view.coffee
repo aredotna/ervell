@@ -6,25 +6,35 @@ mediator = require '../../../lib/mediator.coffee'
 module.exports = class DropdownView extends Backbone.View
   interval: 200
 
-  events:
+  desktopEvents:
     'mouseover' : 'onMouseOver'
     'mouseout' : 'onMouseOut'
 
   mobileEvents:
-    'tap' : 'onMouseOver'
-    'mouseout' : 'onMouseOut'
+    'tap .js-dropdown-trigger' : 'toggleDropdown'
 
   initialize: ->
     mediator.on 'search:loaded', @closeDropdown, @
     mediator.on 'body:click', @onBodyClick, @
 
-    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
+    @setEvents()
+
+  setEvents: ->
+    if $('body').hasClass 'is-mobile'
+      @undelegateEvents()
+      @delegateEvents(@mobileEvents)
+    else
+      @undelegateEvents()
+      @delegateEvents(@normalEvents)
 
   openDropdown: =>
     @$el.addClass 'dropdown--is_active'
 
   closeDropdown: (e) =>
     @$el.removeClass 'dropdown--is_active' unless @$el.is(':hover')
+
+  toggleDropdown: =>
+    @$el.toggleClass 'dropdown--is_active'
 
   onMouseOver: =>
     console.log 'onMouseOver'

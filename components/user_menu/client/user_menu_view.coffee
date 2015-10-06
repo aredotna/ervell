@@ -9,14 +9,13 @@ template = -> require('../templates/index.jade') arguments...
 module.exports = class UserMenuView extends DropdownView
 
   initialize: ->
-    super
-    _.extend @events, DropdownView.prototype.events
-
     mediator.on 'notifications:synced', @maybeSetNotifications, @
     mediator.on 'notifications:cleared', @unsetNotifications, @
     mediator.on 'current_user:refreshed', @render, @
 
     @notifications = mediator.shared.notifications
+
+    super
 
   clearNotifications: (e)->
     @notifications.markRead()
