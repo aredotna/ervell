@@ -90,6 +90,7 @@ module.exports = class BlockView extends Backbone.View
 
     IconicJS().inject 'img.iconic'
 
+    @renderFollowButton()
     @delegateEvents()
 
   removeActiveClass: (e)->

@@ -4,23 +4,6 @@
   height 100%
   width 100%
   padding .6em
-  
-  input.input--wide, input[type='text'].input--wide
-    color lightgray
-    height 32px
-    font-size s_caption
-    border 1px solid bordergray
-    
-  .button--inblock--bottom
-    font-size 20px
-    height 30px
-    bottom 15px
-    color lightgray
-    border-top 0px solid bordergray
-
-    &:hover
-      border-top 0px solid textgray
-      color hovergray
 
 .new-connection__caption
   font-size s_caption
@@ -33,27 +16,23 @@
   margin-top 0
 
 privacy-color('.new-connection__search-result-', border-color)
-/* privacy-color('.feedback-', border-color) */
+privacy-color('.feedback-', border-color)
 privacy-color('.new-connection__search-result-', color)
-/* privacy-light-color('.new-connection__search-result-', background-color) */
+privacy-light-color('.new-connection__search-result-', background-color)
 
 .new-connection__search-result
   font-size s_caption
   text-align left
   width 100%
-  height 34px
-  padding 0.9em .5em 1em .5em
-  margin 0
-  border 1px solid bordergray
-  border-bottom 0
+  height 38px
+  padding 1em .5em 1em .5em
+  margin .7em 0 .7em 0
+  border 1px solid
 
   &:hover
+    opacity 0.7
+    transition opacity 0.1s
     cursor pointer
-    
-    .breadcrumb li:first-child:before
-      content '→'
-      margin 0 5px 0 0
-      transition(0.2s)
 
   .feedback
     display none
@@ -66,29 +45,39 @@ privacy-color('.new-connection__search-result-', color)
       max-width 165px
       overflow hidden
       text-overflow ellipsis
-      
-    &:before
-      content ''
-
-.new-connection__search-result:last-child
-  border-bottom 1px solid bordergray
 
 .new-connection__search-result.is-loading
-  .breadcrumb li:first-child:before
-    margin 0 15px 0 0
-    transition(0.4s)
+  background-color #fff
+  border 0
+  .feedback
+    border 1px solid
+    position absolute
+    padding: 13px 5px 12px 7px;
+    width:94%;
+    margin: -13px 10px 0 -7px;
+    -webkit-animation: glow .14s ; /* Safari 4+ */
+    -moz-animation:    glow .14s ; /* Fx 5+ */
+    -o-animation:      glow .14s ; /* Opera 12+ */
+    animation:         glow .14s ; /* IE 10+, Fx 29+ */
+    display block
+    font-weight bold
+
+  .breadcrumb
+    display none
 
 .new-connection__search-result.is-connected
   position relative
-  opacity 0.4
-  
-  .breadcrumb li:first-child:before
-    content '→'
-    margin 0 5px 0 0
-    transition(0.1s)
+  opacity 0.3
+
+  .breadcrumb
+    display block
+
+  .feedback
+    display none
 
   &:hover
-    opacity 0.8
+    opacity 1
+
     .disconnect
       display block
       position absolute
@@ -97,8 +86,14 @@ privacy-color('.new-connection__search-result-', color)
       background-color #fff
       width 100%
       height 100%
-      padding 10px 0 0 6px
+      padding 12px 0 0 6px
+      font-weight bold
       color hovergray
+
+@-webkit-keyframes glow
+  0% {border: 1px solid; padding: 13px 5px 12px 7px; width:94%; margin: -13px 10px 0 -7px; position: absolute;}
+  100% {border: 1px solid; padding: 18px 5px 17px 14px; margin: -18px 10px 0px -14px; width: 98.5%; position: absolute;}
+  100% {border: 0; padding: 18px 5px 17px 14px; margin: -18px 10px 0px -14px; width: 98.5%; position: absolute;}
 
 .new-connection__done-button
   position absolute
@@ -121,7 +116,6 @@ privacy-color('.new-connection__search-result-', color)
 
       input
         height 29px
-        border 0
 
       .new-connection__caption
         display none
@@ -165,7 +159,6 @@ privacy-color('.new-connection__search-result-', color)
         &:hover
           background-color transparent
           color hovergray
-          
   .new-connection__search-result
     &.is-loading
       .feedback

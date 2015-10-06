@@ -122,6 +122,7 @@ module.exports = class ConnectView extends Backbone.View
 
   setupSearchResults: ->
     @collection = new ConnectionBlocks null, user_slug: sd.CURRENT_USER.slug
+
     new ConnectResultsView
       el: @$('.new-connection__search-results')
       block: @block
