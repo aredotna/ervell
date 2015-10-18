@@ -7,78 +7,78 @@ block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-  .home__section.home__section--intro
-    .home__section--intro__inner
-      h1.static--hint About
-      p Are.na is an evolving archive of private/public collaborative research.
-      p Users can organically build ideas over time by adding images, links, files, texts (called blocks) and organize them into collections (called channels).
-      p It's intended for pretty much any purpose. For example:
-      h1
-        li Academics use it to collect references.
-        li Art institutions use it to curate exhibitions.
-        li Creative teams use it to share inspiration. 
-      img.static__img(src="../images/arena-screenshot.jpg", alt="Arena")
-      p So far, users have created 32,303 channels and made 435,154 connections.
+  .static__section
+    h1.static--hint About
+    p Are.na is an evolving archive of private/public collaborative research.
+    p Users can organically build ideas over time by adding images, links, files, texts (called blocks) and organize them into collections (called channels).
+    p It's intended for pretty much any purpose. For example:
+    h1
+      li Academics use it to collect references.
+      li Art institutions use it to curate exhibitions.
+      li Creative teams use it to share inspiration. 
+    .static__img
+      img(src="../images/arena-screenshot.jpg", alt="Arena")
+    p So far, users have created 32,303 channels and made 435,154 connections.
 
-      h1.static--hint Team
-      h1
-        ul
-          li: a(href="/charles-broskoski") Charles Broskoski
-          li: a(href="/daniel-pianetti") Daniel Pianetti
-          li: a(href="/chris-sherron") Chris Sherron
-      p Advisors:
-        a(href="/morgan-sutherland")  Morgan Sutherland,
-        a(href="/damon-zucconi")  Damon Zucconi,
-        a(href="/dena-yago")  Dena Yago,
-        a(href="/daniel-brewster")  Dan Brewster,
-        a(href="/john-michael-boling")  John Michael Boling&nbsp;
-        | and
-        a(href="/j-stuart-moore")  J. Stuart Moore.
+    h1.static--hint Team
+    h1
+      ul
+        li: a(href="/charles-broskoski") Charles Broskoski
+        li: a(href="/daniel-pianetti") Daniel Pianetti
+        li: a(href="/chris-sherron") Chris Sherron
+    p Advisors:
+      a(href="/morgan-sutherland")  Morgan Sutherland,
+      a(href="/damon-zucconi")  Damon Zucconi,
+      a(href="/dena-yago")  Dena Yago,
+      a(href="/daniel-brewster")  Dan Brewster,
+      a(href="/john-michael-boling")  John Michael Boling&nbsp;
+      | and
+      a(href="/j-stuart-moore")  J. Stuart Moore.
 
-      h1.static--hint Principles
-      p We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network, and we're committed to retain complete control of the platform.
-      p For our long-term plans we rely on our premium users who have access to a #[a(href="/tools/premium") growing series of extra features] for a yearly subscription.
-      .static__graph
-        .static__graph-fill.step-1
-          .static__graph-mark
-            .mark-label
-              | Total premium users
-              br
-              strong 60
-        .static__graph-fill.step-2
-          .static__graph-mark
-            .mark-label
-              strong 250
-              br
-              | Premium users needed to cover basic expenses
-        .static__graph-fill.step-3
-          .static__graph-mark
-            .mark-label
-              strong
-              br
-              | New milestones to come
-        .static__graph-fill.step-4
-          .static__graph-mark
-            .mark-label
-              strong 8500
-              br
-              | Total Are.na users
+    h1.static--hint Principles
+    p We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network, and we're committed to retain complete control of the platform.
+    p For our long-term plans we rely on our premium users who have access to a #[a(href="/tools/premium") growing series of extra features] for a yearly subscription.
+    .static__graph
+      .static__graph-fill.step-1
+        .static__graph-mark
+          .mark-label
+            | Total premium users
+            br
+            strong 60
+      .static__graph-fill.step-2
+        .static__graph-mark
+          .mark-label
+            strong 250
+            br
+            | Premium users needed to cover basic expenses
+      .static__graph-fill.step-3
+        .static__graph-mark
+          .mark-label
+            strong
+            br
+            | New milestones to come
+      .static__graph-fill.step-4
+        .static__graph-mark
+          .mark-label
+            strong 8500
+            br
+            | Total Are.na users
 
-      h1.static--hint Labs 
-      p Are.na is often used for professional and research applications. We can offer tailored services and support for projects, as well as API consulting for displaying content offsite. Contact us for any question.
+    h1.static--hint Labs 
+    p Are.na is often used for professional and research applications. We can offer tailored services and support for projects, as well as API consulting for displaying content offsite. Contact us for any question.
 
-      h1.static--hint FAQs
-      p View our list of #[a(href="/faqs") frequently asked questions] or view our #[a(href="/faqs") getting started page] for help.
+    h1.static--hint FAQs
+    p View our list of #[a(href="/faqs") frequently asked questions] or view our #[a(href="/faqs") getting started page] for help.
 
-      h1.static--hint Contact us
-      h1
-        ul
-          li: a(mailto="info@are.na") info@are.na
-          li: a(href="http://twitter.com/aredotna") Twitter
-          li: a(href="http://instagram.com/aredotna") Instagram
-      h1
-        ul
-          li #[a.anchor(data-section="terms" href="/terms") Terms of Service] | #[a(href="/privacy") Privacy Policy]
-          li New York City — 2015
+    h1.static--hint Contact us
+    h1
+      ul
+        li: a(mailto="info@are.na") info@are.na
+        li: a(href="http://twitter.com/aredotna") Twitter
+        li: a(href="http://instagram.com/aredotna") Instagram
+    h1
+      ul
+        li #[a.anchor(data-section="terms" href="/terms") Terms of Service] | #[a(href="/privacy") Privacy Policy]
+        li New York City — 2015
 block scripts
   script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
