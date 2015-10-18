@@ -9,19 +9,38 @@ block styles
 block body
   #getting-started--page
     .getting-started--container
-      h1 Using Are.na
+      h1 #[strong Using Are.na]
       .getting-started__column1
         .getting-started__column--inner
           img(src="../images/channel.png", alt="Channel")
         .getting-started__column--inner
-          img(src="../images/block2.png", alt="Block")
+          img(src="../images/block.png", alt="Block")
+        .getting-started__column--inner
+          img(src="../images/connect.gif", alt="Connection")
+        .getting-started__column--inner
+          img(src="../images/profile.gif", alt="Profile")
+        .getting-started__column--inner
+          img(src="../images/feed.png", alt="Feed")
 
       .getting-started__column2
         .getting-started__column--inner
           p #[strong Channels are collections of content.]
           p They can be #[span.privacy--public open] (anyone can see and add), #[span.privacy--closed closed] (anyone can see it, only you and your collaborators can add), #[span.privacy--private private] (only you and your collaborators can see and add).
+          p You can create new channels or search for an existing one on the same topic and contribute to it.
         .getting-started__column--inner
           p #[strong Blocks are the content you connect to channels.]
-          p A block can be a file or an image you upload, raw text, a link to a website, an embed (Vimeo, YouTube, SoundCloud, etc), a pdf, etc. A connection is made when a person puts a block in a channel.
+          p A block can be a file or an image you upload, raw text, a link to a website, an embed (Vimeo, YouTube, SoundCloud, etc), a pdf, etc.
+        .getting-started__column--inner
+          p #[strong Connections]
+          p A connection is made when a person puts a block in a channel. 
+          p You can connect blocks to your own channels or other people's public ones.
+        .getting-started__column--inner
+          p #[strong Users]
+          p On user profiles, including yours, you can see their channels and the blocks they interact with.
+        .getting-started__column--inner
+          p #[strong Feed]
+          p On your main feed you can see the recent activity of channels and people you follow, or explore the raw stream of Are.na content.
 
-    .getting-started--button.button--wide #[a(href="/explore") Start exploring &rarr;]
+    .getting-started--button.button--wide 
+      #[a(href="/explore") Start exploring &rarr;]
+      #[a(href="/explore") Go to your profile &rarr;]
