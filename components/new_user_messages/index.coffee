@@ -10,13 +10,13 @@ module.exports = class NewUserMessageView extends Backbone.View
     {
       id: 'help_message'
       title: "Welcome"
-      body: "If you need help check the <a href='/about'>FAQs</a> or <a href='mailto:everyone@are.na'>contact us</a>. Also, feel free to give us any suggestions or report bugs in our <a href='/are-na/feedback'>feedback channel</a>"
+      body: "If you need help check the <a href='/about'>FAQs</a>. Also feel free to give us suggestions or report bugs in our <a href='/are-na/feedback'>feedback channel</a>"
       type: 'announcement'
     },
     {
       id: 'channel_message'
       title: "Channels"
-      body: "<a class='pointer trigger-mediator' data-trigger='new:channel'>Create a new channel</a>, or <a href='/explore'>explore</a> existing ones"
+      body: "<a class='pointer trigger-mediator' data-trigger='new:channel'>Create a new channel</a>, <a href='/explore'>explore</a> recent activity or search for existing ones."
       type: 'announcement'
     },
     {
