@@ -1,26 +1,27 @@
 extends ../../../components/layout/index--bare
 
 block vars
-  - extraClasses = 'no-header no-messages'
+  - extraClasses = 'no-messages body--static'
 
 block styles
   link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
 
 block body
-  .static__left-column.flex-container
-    img.static__mark(src="../images/arena-mark.svg", alt="Arena")
-    .static__about.static--text
-      h2.static--title--top#about-arena About
-      p Are.na is an evolving archive where people privately or collaboratively build up their ideas over time by combining found and original material.
-      p You can collect images, links, files, and texts and organize them into collections.
-      p Are.na is regularly utilized by professionals to research and organize projects. Brick-and-mortar shops use it to manage inventory, art institutions use it to curate exhibitions, creative teams use it to share inspiration, and academics use it to collect references.
-      p There are no limitations on the subject or scope of an idea, Are.na is intended to be used for pretty much any purpose.
+  .home__section.home__section--intro
+    .home__section--intro__inner
+      h1.static--hint About
+      p Are.na is an evolving archive of private/public collaborative research.
+      p Users can organically build ideas over time by adding images, links, files, texts (called blocks) and organize them into collections (called channels).
+      p It's intended for pretty much any purpose. For example:
+      h1
+        li Academics use it to collect references.
+        li Art institutions use it to curate exhibitions.
+        li Creative teams use it to share inspiration. 
       img.static__img(src="../images/arena-screenshot.jpg", alt="Arena")
-      p Users have created 29,303 channels and connected 377,072 blocks.
+      p So far, users have created 32,303 channels and made 435,154 connections.
 
-    .static__team.static--text
-      h2.static--title--top#team Team
-      p
+      h1.static--hint Team
+      h1
         ul
           li: a(href="/charles-broskoski") Charles Broskoski
           li: a(href="/daniel-pianetti") Daniel Pianetti
@@ -34,17 +35,16 @@ block body
         | and
         a(href="/j-stuart-moore")  J. Stuart Moore.
 
-    .static__premium.static--text
-      h2.static--title--top#principles Principles
-      p We aim at being self-sustainable, and are working to perfect and evolve the current product.
-      p We will soon offer #[a(href="/tools/premium") premium tools]  at a fair price so that people who use Are.na regularly can contribute to the project's long-term plans:
+      h1.static--hint Principles
+      p We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network, and we're committed to retain complete control of the platform.
+      p For our long-term plans we rely on our premium users who have access to a #[a(href="/tools/premium") growing series of extra features] for a yearly subscription.
       .static__graph
         .static__graph-fill.step-1
           .static__graph-mark
             .mark-label
               | Total premium users
               br
-              strong 57
+              strong 60
         .static__graph-fill.step-2
           .static__graph-mark
             .mark-label
@@ -64,133 +64,21 @@ block body
               br
               | Total Are.na users
 
-      p We also value transparency: we will never sell data without explicit authorization from the user. We will never display ads or join an ad network, and we're committed to retain complete control of the platform.
+      h1.static--hint Labs 
+      p Are.na is often used for professional and research applications. We can offer tailored services and support for projects, as well as API consulting for displaying content offsite. Contact us for any question.
 
-    .static__api.static--text
-      h2.static--title--top#api API
-      p Our #[a(href="http://dev.are.na/documentation/channels") API] can be used as a CMS, and to experiment with new ways of presenting and interacting with content. #[a(href="/are-na/powered-by-are-na") Here ] is a selection of public applications powered by Are.na.
+      h1.static--hint FAQs
+      p View our list of #[a(href="/faqs") frequently asked questions] or view our #[a(href="/faqs") getting started page] for help.
 
-    .static__roadmap.static--text
-      h2.static--title--top#roadmap Roadmap
-      p Here's a list of what we're working on, planned features and recently completed ones:
-        .static--small-text
-          li @mentions
-          li Channel view settings
-          li Channel scoped comments
-          li: strike Filter search inside channels and profiles [Premium]
-          li: strike Advanced privacy settings for users [Premium]
-          li: strike Profile bio [Premium]
-          li: strike Connect channel from open channel
-          li: strike Invite friends
-          li: strike Find friends
-          li: strike Drag and drop to order blocks
-          li: strike Connect block from open lightbox
-          li: strike Channel settings
-          li: strike Manage channels dashboard [Premium]
-          li: strike Explore section
-    //.static-expandable__button
-        a(href="#expand") See more
-
-    .static__labs.static--text
-      h2.static--title--top#labs Labs
-      p Are.na is often used to organize educational material, research and group projects. We can offer support, workshops and tutorials to teachers and students and we have done consulting projects using the Are.na API to display content offsite.
-      p #[a(href="mailto:info@are.na") Contact us].
-
-    .static__faq.static--text
-      h2.static--title--top#faq FAQs
-      strong What should I use Are.na for? Why should I use it instead of other bookmarking and organization tools?
-      p.static--half-p People who use Are.na as a daily tool appreciate the dynamism between private and public collaboration. Content is easily connected between different topics and channels, resulting in discovery of information and organic archives.
-      p.static--half-p Play around for a while: adding content, connecting and discovering users is the best way to find out the platform's qualities.
-      strong I'm lost, not sure how to use Are.na, can you help?
-      p.static--half-p You can #[a(href="/explore") explore] to see how other people use it, ask questions in the #[a(href="/are-na/feedback") feedback channel ] or contact us below.
-      strong What are channels?
-      p.static--half-p A channel is a grouping of images, links, files, and texts. You can create and organize them privately, publicly and collaboratively.
-      strong What's the difference between open, closed and private channels?
-      p.static--half-p Channels have privacy settings that determine who can view or add to them. When creating a channel, you can choose your privacy settings.
-      p.static--half-p An open channel can be added to or viewed by anyone, a closed channel is viewable by anyone but editable only by you and your collaborators, and a private channel is only viewable and editable by you and your collaborators.
-      strong Can someone else moderate or modify my channels?
-      p.static--half-p A block owner can remove their blocks from any channel, as long as they can view it. Only channel owners and collaborators can update the order of a channel, change its visibility and change its title.
-      strong What is a bookmarklet?
-      p.static--half-p Are.na's bookmarklet allows you to add information from your browser bar while you are out and about surfing the net. You can install it in one step #[a(href="/tools#bookmarklet") here].
-      strong What sites currently use arena as a CMS?
-      p.static--half-p List of projects #[a(href="/are-na/powered-by-are-na") powered by Are.na].
-      strong Is there a mobile app?
-      p.static--half-p Not yet.
-      strong Who owns Are.na?
-      p.static--half-p 100% of shares are owned by the founders and advisors.
-      strong How do you make money?
-      p.static--half-p Our goal is to sustain Are.na through the help of its loyal users by offering #[a(href="/tools/premium") premium tools]. We do not sell data or advertising space.
-      strong Can I suggest features?
-      p.static--half-p Yes, you can post suggestions, comments, bugs and complaints in our #[a(href="/are-na/feedback") feedback channel].
-      strong Are there any restrictions on kind of content?
-      p.static--half-p We trust our users' common sense and have no particular graphic or adult restrictions in the name of research freedom. Our team can intervene in case of explicit criminal offense, read our #[a(href="/terms") terms and conditions] for more information.
-      strong Can I only add content I own?
-      p.static--half-p Users are responsible for the content they link or upload, for research purposes we believe in the fair use of intellectual property, please credit authorship and sources when possible. Read our #[a(href="/terms") terms and conditions] for more information.
-
-    .static__contact.static--text
-      h2.static--title--top#supporters Supporters
-      p We are grateful to our early supporters:
-      ul.static--small-text
-        .static--half-column
-          li Rafael Rozendaal
-          li Laurel Schwulst
-          li Harm van den Dorpel
-          li Anne Spalter
-          li Joel Holmberg
-          li Bryce Wilner
-          li Adam Sammons
-          li Loic Bernasconi
-          li Esen Karol
-          li Splnlss
-          li Chris Coy
-          li Mike Tully
-          li Nick DeMarco
-          li Csaba Osvath
-          li Nick Moore
-        .static--half-column
-          li Zach Rose
-          li David Hilmer Rex
-          li David Berezin
-          li Julia Panek
-          li Cleopatra's US
-          li Juliana Romano
-          li Grace Robinson-Leo
-          li Alexandros Stamatelatos
-          li Robert D Matthews
-          li Aslak Aamot Kjærulff
-          li James Chae
-          li Christopher Pappas
-          li Elizabeth Sutherland
-          li Sun An
-
-    .static__contact.static--text
-      h2.static--title--top#contact Contact
-      p.static--half-p The team is mainly based in New York City.
-      p.static--no-p: a(mailto="info@are.na") info@are.na
-      p.static--no-p: a(href="http://twitter.com/aredotna") Twitter
-      p.static--no-p: a(href="http://instagram.com/aredotna") Instagram
-      p.static: #[a.anchor(data-section="terms" href="/terms") Terms of Service] | #[a(href="/privacy") Privacy Policy]
-      .static--padding
-
-  h3.static__menu
-    ul
-      li: a(href="/").static__menu__item Home
-      if !user
-        li: a(href="#log_in").static__menu__item Login
-        li: a(href="#sign_up").static__menu__item Sign up
-      li: &nbsp;
-      li: a.anchor(data-section="about-arena").static__menu__item.is-active About
-      li: a.anchor(data-section="team").static__menu__item Team
-      li: a.anchor(data-section="principles").static__menu__item Principles
-      li: a.anchor(data-section="api").static__menu__item API
-      li: a.anchor(data-section="roadmap").static__menu__item Roadmap
-      li: a.anchor(data-section="labs").static__menu__item Labs
-      li: a.anchor(data-section="faq").static__menu__item FAQ
-      li: a.anchor(data-section="supporters").static__menu__item Supporters
-      li
-        a.anchor(data-section="contact").static__menu__item Contact
-          br
-          | Terms &amp; Privacy
-
+      h1.static--hint Contact us
+      h1
+        ul
+          li: a(mailto="info@are.na") info@are.na
+          li: a(href="http://twitter.com/aredotna") Twitter
+          li: a(href="http://instagram.com/aredotna") Instagram
+      h1
+        ul
+          li #[a.anchor(data-section="terms" href="/terms") Terms of Service] | #[a(href="/privacy") Privacy Policy]
+          li New York City — 2015
 block scripts
   script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )

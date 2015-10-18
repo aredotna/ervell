@@ -1,287 +1,305 @@
 @import '../components/avatar/stylesheets/avatar'
+@import '../components/avatar/stylesheets/avatar'
 
-.static__mark
-  position relative
-  float left
-  width 28px
-  margin 115px 0 0 0
-  opacity 0.90
-  z-index 199
+/* GENERAL STATIC PAGES */
+.body--static
+  background-color #fff
+  
+  #layout-header
+    position absolute
+    background transparent
+    color #fff
 
-.static__left-column
-  position relative
-  margin 0 auto 460px auto
+    .logo
+      opacity 0.9
+      a
+        border 0
+      svg
+        fill hovergray
 
-.static__menu
-  position fixed
-  margin 160px 170px 0 0
-  right 0
-  top 5px
-  width 130px
-  text-align left
-  z-index loader_z
+    .header--icon
+      &:hover
+        cursor pointer
+        opacity 0.6
 
-.static__menu__item
-  color lightgray
+    .layout-header__register
+      padding 0 12px 0 20px
 
-  &:hover, &.is-active
-    color hovergray
+    .btn-signup
+      display none
 
-.static--title, .static--title--top
-  position relative
-  float left
-  width 100%
-  text-align center
-  color hovergray
-  margin 0 0 24px 0
+    .layout-header__or
+      display none
 
-.static--title--top
-  text-align left
-  font-weight bold
-  padding-top 50px
+    .layout-header__login
+      color #A6A6A6
+  
+  .static--hint
+    margin 110px auto 20px auto
+    font-weight 700
+    
+  .static--hint.labs-footer
+    padding-bottom 100px
+  
+  .static__img
+    width 100%
+    max-width 900px
+    margin 20px auto 50px auto
+    -moz-box-shadow 0px 0px 15px 0px bordergray
+    -webkit-box-shadow 0px 0px 15px 0px bordergray
+    box-shadow 0px 0px 15px 0px bordergray
+    border 1px solid bordergray
+    
 
-.static--text
-  position relative
-  width 100%
-  max-width 760px
-  font-weight normal
-  line-height 1.3em
-  padding 0 0 0 38px
-  font-size 1.5em
-  margin-top 58px
-
-  p
-    margin 1.3em 0
-
-  .static--half-p
-    margin-top 10px
-
-  .static--no-p
-    margin 0
-
+/* STATIC PAGES EXCEPT HOME */
+.body--static
   a
-    font-weight bold
+    border-bottom 2px solid hovergray
 
     &:hover
-      color hovergray
+      border 0
+  
+  h1, p
+    width 100%
+    max-width 900px
+    font-size 2rem
+    line-height 1.3em
+    color hovergray
+    font-weight normal
+    antialiased()
+    margin 20px auto 50px auto
+    text-align left
+  
+  .static__section
+    color hovergray
+  
+  .static__section__inner
+    width 100%
 
-.static--half-column
-  width 49%
-  position relative
-  float left
-  margin-right 1%
-  margin-bottom 1.5em
+  /* ABOUT */
+  .static__graph
+    width 98%
+    max-width 900px
+    height 18px
+    margin 100px auto 200px auto
+    border 0px solid lightgray
+    background-color white
 
-.static--padding
-  height 100px
-  width 100%
+    .static__graph-fill
+      position realtive
+      float left
+      height 100%
 
-.static-expandable
-  height 450px
-  overflow hidden
-  border-bottom 1px solid bordergray
+    .step-1
+      background-color #6AD065
+      width 2%
 
-.static-expandable__button
-  font-size 0.6em
-  text-align center
+      .static__graph-mark
+        margin-top -36px
 
-.static__img
-  width 100%
-  -moz-box-shadow 0px 0px 15px 0px bordergray
-  -webkit-box-shadow 0px 0px 15px 0px bordergray
-  box-shadow 0px 0px 15px 0px bordergray
-  border 1px solid bordergray
+        .mark-label
+          margin-top -40px
 
-.static--small-text
-  position relative
-  float left
-  font-size 14px
-  line-height 24px
-  width 100%
+    .step-2
+      background-color #E5E5E5
+      width 4%
 
-.static__tools__frame
-  position relative
-  float left
-  width 100%
-  border 2px solid bordergray
-  padding 30px 20px 30px 20px
-  font-size 1em
-  line-height 1.5em
-  font-weight normal
-  margin 0 0 110px 0
+    .step-3
+      background-color #B6B6B6
+      width 32%
 
-  input
-    background-color bordergray
-    margin 5px 0 10px 0
-
-  button
-    margin 20px 0 0 0
-
-  .small
-    font-size s_caption + 1
-    color textgray
-    margin 0 0 8px 0
-    line-height 14px
-
-.static__tools__frame--supporter
-  text-align left
-
-  input
-    width 150px
-    height 24px
-    padding 0 0 0 3px
-    margin 0 4px 0 0
-    clear both
-
-  button
-    color public
-    margin 0
-    &:hover
-      color hovergray
-
-.static--highlight
-  width 100%
-  height 60px
-  line-height 54px
-  text-align center
-  margin 10px 0 10px 0
-  border 2px solid bordergray
-
-.static__graph
-  width 98%
-  height 18px
-  margin 120px 0 150px 0
-  border 0px solid lightgray
-  background-color white
-
-  .static__graph-fill
-    position realtive
-    float left
-    height 100%
-
-  .step-1
-    background-color #6AD065
-    width 2%
-
-    .static__graph-mark
-      margin-top -36px
+    .step-4
+      background-color #B6B6B6
+      width 62%
 
       .mark-label
-        margin-top -40px
+        float right
+        text-align right
+        margin 16px 6px 0 0
 
-  .step-2
-    background-color #E5E5E5
-    width 4%
-
-  .step-3
-    background-color #B6B6B6
-    width 32%
-
-  .step-4
-    background-color #B6B6B6
-    width 62%
-
-    .mark-label
-      float right
-      text-align right
-      margin 16px 6px 0 0
-
-.static__graph-mark
-  position relative
-  float right
-  width 1px
-  background-color #C2C2C2
-  margin 22px 0 0 0
-  height 30px
-
-.mark-label
-  position relative
-  float left
-  font-size s_caption + 2
-  line-height 18px
-  margin 16px 0 0 6px
-  color textgray
-  width 100px
-
-.static__tools__bookmarklet-button, .static__tools__social-button
-  display block
-  width 100%
-  height 50px
-  line-height 50px
-  font-weight bold
-  text-align center
-  background-color bordergray
-  border 1px dashed lightgray
-  margin 12px 0 12px 0
-
-  &:hover
-    opacity 0.6
-    cursor pointer
-
-.static__tools__social-button
-  border 1px solid lightgray
-
-#layout-header
-  display none
-
-  .right
-    position absolute
-    right 0
-
-  .layout-header__search
-    display none
-
-.new-channel-btn
-  display none
-
-.layout-header__register
-  display none
-
-body
-  background-color backgroundgray
-
-@media (max-width:(block_width_mar * 4) + 20)
-  .static__menu
-    margin 160px 70px 0 0
-    width 100px
-
-@media (max-width:(block_width_mar * 3) + 20)
-  body, html
-    font-size 13px
-
-  .static__mark
-    margin 44px 0 4px 0
-
-  .static__left-column
-    clear both
-
-  .static--title
-    margin 0 0 4px 0
-
-  .static--text
-    padding-top 40px
-    width 100%
-    max-width 500px
-    margin-left 0
-
-  .static__tools__frame
-    margin 0 0 80px 0
-
-  .static__menu
-    margin 85px 0 0 0
-
-@media (max-width:(block_width_mar * 2) + 20)
-  .static__menu
-    display none
-
-  .static--text
-    padding 40px 0 0 0
+  .static__graph-mark
+    position relative
+    float right
+    width 1px
+    background-color #C2C2C2
+    margin 22px 0 0 0
+    height 30px
 
   .mark-label
-    width 80px
-    font-size s_caption
+    position relative
+    float left
+    text-align left
+    font-size s_caption + 1
+    line-height 18px
+    margin 16px 0 0 6px
+    color textgray
+    width 100px
 
-  .static--small-text
-    font-size 15px
+
+  /* LABS */    
+  .labs-logo
+    position relative
+    width 100%
+    margin 8% 0 50px 0
+    text-align center
+    
+    img
+      position relative
+      width 90%
+      max-width 480px
+      margin auto
+
+  .labs--text
+    font-size 18px
+    font-weight 400
+    text-align left
     line-height 1.5em
 
+  .labs__case-studies
+    display flex
+    flex-wrap wrap
+    justify-content center
+    line-height 20px
+
+    .labs__case-studies__item
+      font-size 19px
+      width 100%
+      max-width 960px
+      margin 30px 0 30px 0
+      padding 0 30px 30px 30px
+      text-align left
+      border 0px solid #D2D2D2
+      -moz-box-shadow 0px 0px 15px 0px bordergray
+      -webkit-box-shadow 0px 0px 15px 0px bordergray
+      box-shadow 0px 0px 15px 0px bordergray
+      border 1px solid bordergray
+      
+      .labs__case-studies__img
+        position relative
+        float left
+        width 100%
+        height 450px
+        margin auto
+        margin-bottom 30px
+      
+      .labs__screenshot
+        position absolute
+        height 100%
+        -webkit-animation-name fade
+        -webkit-animation-iteration-count infinite
+        -webkit-animation-duration 8s
+        animation-name fade
+        animation-iteration-count infinite
+        animation-duration 8s
+        border 1px solid bordergray
+
+      .labs__screenshot:first-child
+        -webkit-animation-delay -6.4s
+        animation-delay -6.4s
+
+      .labs__screenshot:nth-child(2)
+        -webkit-animation-delay -2.4s
+        animation-delay -2.4s
+
+      .labs__case-studies--title
+        position relative
+        font-weight 700
+        margin 40px 0 2px 0
+
+      h1.labs__case-studies--title
+        position relative
+        font-weight 400
+        margin 20px 0 20px 0
+
+      .labs__case-studies--separator
+        position relative
+        border-top 1px solid #D2D2D2
+        margin 0 0 10px 0
+
+  .labs__services
+    width 100%
+    max-width 900px
+    margin auto
+
+    h1
+      margin 18px 0 0 0
+      list-style circle
+
+    .labs--text
+      margin-left 15px
+      color textgray
+      
+      a
+        border-color textgray
+        
+        &:hover
+          color textgray
+
+@-webkit-keyframes fade
+  0% {opacity: 0;}
+  20% {opacity: 0;}
+  30% {opacity: 1;}
+  70% {opacity: 1;}
+  80% {opacity: 0;}
+  100% {opacity: 0;}
+
+@keyframes fade
+  0% {opacity: 0;}
+  20% {opacity: 0;}
+  30% {opacity: 1;}
+  70% {opacity: 1;}
+  80% {opacity: 0;}
+  100% {opacity: 0;}
+
+
+@media (max-width:(block_width_mar * 4) + 19)
+
+  /* LABS */
+  .body--static  
+    .labs__case-studies__img
+      max-height 300px
+
+@media (max-width:(block_width_mar * 3) + 16)
+  
+  /* LABS */
+  .body--static 
+    p, h1
+      width 90%
+      margin-left 5%
+  
+    .labs__case-studies__img
+      max-height 200px
+    
+    .labs__case-studies 
+      .labs__case-studies__item
+        max-width 90%
+        left 5%
+    
+    .labs__services
+      max-width 90%
+      left 5%
+    
+    .labs-logo 
+      img
+        width 80%
+
+@media (max-width:500px)
+
+  /* LABS */
+  .body--static 
+    
+    .labs-hint
+      margin 50px 0 0 0
+      padding 0
+    
+    .labs-hint.labs-footer
+      padding-bottom 50px
+      
+    .labs__case-studies
+      .labs__case-studies__item
+        width 100%
+        padding 20px
+        margin 10px 0
+    
+    .labs__case-studies__img
+      max-height 100px
