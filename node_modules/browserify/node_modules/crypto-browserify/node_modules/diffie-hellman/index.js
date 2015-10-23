@@ -1,3 +1,10 @@
-exports.__browserify = require('./inject');
+var crypto = require('crypto');
 
-exports.__browserify(require('crypto'), exports);
+//getDiffieHellman
+exports.DiffieHellmanGroup = crypto.DiffieHellmanGroup;
+exports.createDiffieHellmanGroup = crypto.createDiffieHellmanGroup;
+exports.getDiffieHellman = crypto.getDiffieHellman;
+
+//createDiffieHellman
+exports.createDiffieHellman = crypto.createDiffieHellman;
+exports.DiffieHellman = crypto.DiffieHellman;

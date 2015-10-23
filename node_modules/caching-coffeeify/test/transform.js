@@ -5,16 +5,16 @@ var fs        =  require('fs');
 var path      =  require('path');
 var through   =  require('through');
 var convert   =  require('convert-source-map');
-var coffee    =  require('coffee-script');
+var coffeeify =  require('coffeeify');
 var transform =  require('..');
 
 test('transform adds sourcemap comment and uses cache on second time', function (t) {
     t.plan(2);
     var data = '';
     var compiles = 0;
-    var originalCompile = coffee.compile;
+    var originalCompile = coffeeify.compile;
 
-    coffee.compile = function () {
+    coffeeify.compile = function () {
       compiles++;
       var args = [].slice.call(arguments);
       return originalCompile.apply(this, args);

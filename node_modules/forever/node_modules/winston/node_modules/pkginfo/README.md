@@ -26,7 +26,7 @@ How often when writing node.js modules have you written the following line(s) of
 * Programmatically expose the version from the package.json
 
 ``` js
-  exports.version = JSON.parse(fs.readFileSync('/path/to/package.json', 'utf8')).version;
+  exports.version = require('/path/to/package.json').version;
 ```
 
 In other words, how often have you wanted to expose basic information from your package.json onto your module programmatically? **WELL NOW YOU CAN!**

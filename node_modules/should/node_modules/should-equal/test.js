@@ -4,7 +4,10 @@ var equal = require('./index');
 function eq(a, b) {
   var r = equal(a, b);
   var msg = !r.result && (r.reason + ' at ' + r.path + ' ' + r.a + ' =/= ' + r.b);
-  assert.ok(r.result, msg);
+  if(!r.result) {
+    assert.equal(a, b, msg);
+  }
+
 }
 
 function ne(a, b) {
@@ -377,5 +380,41 @@ it('typed arrays and array buffer', function() {
     eq(arr1, arr2);
 
     eq(arr1.buffer, arr2.buffer);
+  }
+});
+
+it('es6 sets', function() {
+  if(typeof Set !== 'undefined') {
+    var s1 = new Set([1, 2, 3]);
+    var s2 = new Set([1, 2, 3]);
+    var s3 = new Set(['a', 'b', 'c']);
+    var s4 = new Set([]);
+
+    var s5 = new Set([{ a: 1}, { a: 1}, { a: 1}]);
+    var s6 = new Set([{ a: 1}, { a: 1}, { a: 1}]);
+
+    eq(s1, s2);
+    ne(s1, s3);
+    ne(s1, s4);
+    ne(s1, s5);
+    eq(s5, s6);
+  }
+});
+
+it('es6 maps', function() {
+  if(typeof Map !== 'undefined') {
+    var m1 = new Map([[1, 1], [2, 2], [3, 3]]);
+    var m2 = new Map([[1, 1], [2, 2], [3, 3]]);
+
+    var m3 = new Map([[1, 2], [2, 3], [3, 4]]);
+    var m4 = new Map([[{ a: 10}, 2], [{ a: 11}, 2], [{ a: 12}, 2]]);
+    var m5 = new Map([[{ a: 11}, 2], [{ a: 12}, 2], [{ a: 13}, 2]]);
+    var m6 = new Map([[{ a: 11}, 2], [{ a: 12}, 2], [{ a: 13}, 2]]);
+
+    eq(m1, m1);
+    eq(m1, m2);
+    ne(m3, m2);
+    ne(m4, m5);
+    eq(m5, m6);
   }
 });

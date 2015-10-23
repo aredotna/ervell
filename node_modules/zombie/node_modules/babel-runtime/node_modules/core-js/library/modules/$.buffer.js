@@ -1,4 +1,6 @@
 'use strict';
+var DEBUG = true;
+
 if(require('./$.support-desc')){
   var global          = require('./$.global')
     , $               = require('./$')
@@ -11,7 +13,10 @@ if(require('./$.support-desc')){
     , $DataView       = global.DataView
     , Math            = global.Math
     , parseInt        = global.parseInt
+    , BYTE_LENGTH     = 'byteLength'
     , useNativeBuffer = !!($ArrayBuffer && $DataView);
+
+  if(DEBUG)useNativeBuffer = false;
 
   var abs   = Math.abs
     , pow   = Math.pow
@@ -74,7 +79,7 @@ if(require('./$.support-desc')){
   };
   var packIEEE754 = function(v, ebits, fbits) {
     var bias = (1 << ebits - 1) - 1
-      , s, e, f, ln, i, bits, str, bytes;
+      , s, e, f, i, bits, str, bytes;
     // Compute sign, exponent, fraction
     if (v !== v) {
       // NaN
@@ -205,21 +210,23 @@ if(require('./$.support-desc')){
     for(var i = 0; i < bytes; i++)store[start + i] = pack[i];
   };
 
-  if(!(useNativeBuffer = false)){
+  if(!useNativeBuffer){
     $ArrayBuffer = function ArrayBuffer(length){
       strictNew(this, $ArrayBuffer, 'ArrayBuffer');
-      this._b = $fill.call(Array(length), 0);
-      this._l = length;
+      var numberLength = +length
+        , byteLength   = toLength(numberLength);
+      if(numberLength != byteLength)throw RangeError();
+      this._b = $fill.call(Array(byteLength), 0);
+      this._l = byteLength;
     };
-    addGetter($ArrayBuffer, 'byteLength', '_l');
+    addGetter($ArrayBuffer, BYTE_LENGTH, '_l');
 
-    $DataView = function DataView(buffer /*, byteOffset, byteLength */){
+    $DataView = function DataView(buffer, byteOffset, byteLength){
       strictNew(this, $DataView, 'DataView');
       if(!(buffer instanceof $ArrayBuffer))throw TypeError();
-      var bufferLength = buffer._b.length
-        , byteLength   = arguments[2]
-        , offset       = toInteger(arguments[1]);
-      if(offset < 0)throw RangeError();
+      var bufferLength = buffer._l
+        , offset       = toInteger(byteOffset);
+      if(offset < 0 || offset > bufferLength)throw RangeError();
       byteLength = byteLength === undefined ? bufferLength - offset : toLength(byteLength);
       if(offset + byteLength > bufferLength)throw RangeError();
       this._b = buffer;
@@ -227,7 +234,7 @@ if(require('./$.support-desc')){
       this._l = byteLength;
     };
     addGetter($DataView, 'buffer', '_b');
-    addGetter($DataView, 'byteLength', '_l');
+    addGetter($DataView, BYTE_LENGTH, '_l');
     addGetter($DataView, 'byteOffset', '_o');
     $mix($DataView.prototype, {
       getInt8: function getInt8(byteOffset){
@@ -237,22 +244,22 @@ if(require('./$.support-desc')){
         return get(this, 1, byteOffset, unpackU8);
       },
       getInt16: function getInt16(byteOffset /*, littleEndian */){
-        return get(this, 2, byteOffset, unpackI16, arguments[1]);
+        return get(this, 2, byteOffset, unpackI16, arguments.length > 1 ? arguments[1] : undefined);
       },
       getUint16: function getUint16(byteOffset /*, littleEndian */){
-        return get(this, 2, byteOffset, unpackU16, arguments[1]);
+        return get(this, 2, byteOffset, unpackU16, arguments.length > 1 ? arguments[1] : undefined);
       },
       getInt32: function getInt32(byteOffset /*, littleEndian */){
-        return get(this, 4, byteOffset, unpackI32, arguments[1]);
+        return get(this, 4, byteOffset, unpackI32, arguments.length > 1 ? arguments[1] : undefined);
       },
       getUint32: function getUint32(byteOffset /*, littleEndian */){
-        return get(this, 4, byteOffset, unpackU32, arguments[1]);
+        return get(this, 4, byteOffset, unpackU32, arguments.length > 1 ? arguments[1] : undefined);
       },
       getFloat32: function getFloat32(byteOffset /*, littleEndian */){
-        return get(this, 4, byteOffset, unpackF32, arguments[1]);
+        return get(this, 4, byteOffset, unpackF32, arguments.length > 1 ? arguments[1] : undefined);
       },
       getFloat64: function getFloat64(byteOffset /*, littleEndian */){
-        return get(this, 8, byteOffset, unpackF64, arguments[1]);
+        return get(this, 8, byteOffset, unpackF64, arguments.length > 1 ? arguments[1] : undefined);
       },
       setInt8: function setInt8(byteOffset, value){
         return set(this, 1, byteOffset, packI8, value);
@@ -261,22 +268,22 @@ if(require('./$.support-desc')){
         return set(this, 1, byteOffset, packU8, value);
       },
       setInt16: function setInt16(byteOffset, value /*, littleEndian */){
-        return set(this, 2, byteOffset, packI16, value, arguments[2]);
+        return set(this, 2, byteOffset, packI16, value, arguments.length > 2 ? arguments[2] : undefined);
       },
       setUint16: function setUint16(byteOffset, value /*, littleEndian */){
-        return set(this, 2, byteOffset, packU16, value, arguments[2]);
+        return set(this, 2, byteOffset, packU16, value, arguments.length > 2 ? arguments[2] : undefined);
       },
       setInt32: function setInt32(byteOffset, value /*, littleEndian */){
-        return set(this, 4, byteOffset, packI32, value, arguments[2]);
+        return set(this, 4, byteOffset, packI32, value, arguments.length > 2 ? arguments[2] : undefined);
       },
       setUint32: function setUint32(byteOffset, value /*, littleEndian */){
-        return set(this, 4, byteOffset, packU32, value, arguments[2]);
+        return set(this, 4, byteOffset, packU32, value, arguments.length > 2 ? arguments[2] : undefined);
       },
       setFloat32: function setFloat32(byteOffset, value /*, littleEndian */){
-        return set(this, 4, byteOffset, packF32, value, arguments[2]);
+        return set(this, 4, byteOffset, packF32, value, arguments.length > 2 ? arguments[2] : undefined);
       },
       setFloat64: function setFloat64(byteOffset, value /*, littleEndian */){
-        return set(this, 8, byteOffset, packF64, value, arguments[2]);
+        return set(this, 8, byteOffset, packF64, value, arguments.length > 2 ? arguments[2] : undefined);
       }
     });
   }

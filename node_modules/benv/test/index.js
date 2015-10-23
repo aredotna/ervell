@@ -40,6 +40,16 @@ describe('benv.teardown', function() {
       done();
     });
   });
+
+  it('clears the body', function(done) {
+    benv.setup(function(){
+      document.body.innerHTML = 'foobar'
+      should.exist(navigator);
+      benv.teardown();
+      document.body.innerHTML.should.equal('');
+      done();
+    });
+  });
 });
 
 describe('benv.teardown retaining the document', function() {

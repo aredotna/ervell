@@ -17,35 +17,10 @@ property_files.forEach(function (property) {
     if (property.substr(-3) === '.js') {
         property = path.basename(property, '.js');
         dashed = camelToDashed(property);
-        out_file.write('    Object.defineProperty(prototype, \'' + property + '\', {\n');
-        out_file.write('        get: function () {\n');
-        out_file.write('            var definition = require(\'./properties/' + property + '\').definition;\n');
-        out_file.write('            Object.defineProperty(prototype, \'' + property + '\', definition);\n');
-        out_file.write('            return this.' + property + ';\n');
-        out_file.write('        },\n');
-        out_file.write('        set: function (v) {\n');
-        out_file.write('            var definition = require(\'./properties/' + property + '\').definition;\n');
-        out_file.write('            Object.defineProperty(prototype, \'' + property + '\', definition);\n');
-        out_file.write('            this.' + property + ' = v;\n');
-        out_file.write('        },\n');
-        out_file.write('        enumerable: true,\n');
-        out_file.write('        configurable: true\n');
-        out_file.write('    });\n');
+        out_file.write('    var '+property+' = require(\'./properties/' + property + '\').definition;\n');
+        out_file.write('    Object.defineProperty(prototype, \'' + property + '\', '+property+')\n');
         if (property !== dashed) {
-            out_file.write('    Object.defineProperty(prototype, \'' + dashed + '\', {\n');
-            out_file.write('        get: function () {\n');
-            out_file.write('            var definition = require(\'./properties/' + property + '\').definition;\n');
-            out_file.write('            Object.defineProperty(prototype, \'' + property + '\', definition);\n');
-            out_file.write('            return this.' + property + ';\n');
-            out_file.write('        },\n');
-            out_file.write('        set: function (v) {\n');
-            out_file.write('            var definition = require(\'./properties/' + property + '\').definition;\n');
-            out_file.write('            Object.defineProperty(prototype, \'' + property + '\', definition);\n');
-            out_file.write('            this.' + property + ' = v;\n');
-            out_file.write('        },\n');
-            out_file.write('        enumerable: true,\n');
-            out_file.write('        configurable: true\n');
-            out_file.write('    });\n');
+            out_file.write('    Object.defineProperty(prototype, \'' + dashed + '\', '+property+')\n');
         }
     }
 });

@@ -73,7 +73,7 @@ benv.expose({
 
 Clean up the globals exposed by `setup` and `expose` so other tests can run without being harmed.
 
-Use `benv.teardown(true)` to remove references to `window`, `document`, and other DOM globals. This is enabled by default because a lot of libraries cache references to DOM globals and don't work so nicely when trying to clear globals and re-require these libs.
+Use `benv.teardown(true)` to remove references to `window`, `document`, and other DOM globals. This isn't enabled by default because a lot of libraries cache references to DOM globals and don't work so nicely when trying to clear globals and re-require these libs.
 
 ### benv.require(filename, globalVarName)
 

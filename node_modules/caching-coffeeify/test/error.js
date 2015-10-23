@@ -5,10 +5,10 @@ var fs = require('fs');
 
 var file = path.resolve(__dirname, '../example/error.coffee');
 var multilineFile = path.resolve(__dirname, '../example/multiline_error.coffee');
-var transform = path.join(__dirname, '..');
+var transform = require(path.join(__dirname, '..'));
 
 test('transform error', function (t) {
-    t.plan(5);
+    t.plan(6);
 
     var b = browserify([file]);
     b.transform(transform);
@@ -19,6 +19,7 @@ test('transform error', function (t) {
         t.ok(error.column !== undefined, "error.column should be defined");
         t.equal(error.line, 5, "error should be on line 5");
         t.equal(error.column, 15, "error should be on column 15");
+        t.equal(Object.keys(transform.cache).length, 0, "should not be cached")
     });
 });
 

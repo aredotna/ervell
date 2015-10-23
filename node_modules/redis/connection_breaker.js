@@ -1,3 +1,5 @@
+'use strict';
+
 var net = require('net');
 
 var proxyPort = 6379;
@@ -39,8 +41,6 @@ var server = net.createServer(function(conn) {
 server.listen(6479);
 
 var redis = require('./');
-
-var port = 6479;
 
 var client = redis.createClient(6479, 'localhost');
 

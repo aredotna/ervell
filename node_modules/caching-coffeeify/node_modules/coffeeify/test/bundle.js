@@ -20,6 +20,25 @@ function bundle (file) {
             t.equal(msg, 555);
         }
     });
+    
+    test('bundle transform (no-debug)', function (t) {
+      t.plan(1);
+
+      var b = browserify();
+      b.add(__dirname + file);
+      b.transform(__dirname + '/../no-debug');
+      b.bundle(function (err, src) {
+        if (err) t.fail(err);
+        vm.runInNewContext(src, {
+          console: { log: log }
+        });
+      });
+
+      function log (msg) {
+        t.equal(msg, 555);
+      }
+    });
+    
 }
 
 bundle('/../example/foo.coffee');

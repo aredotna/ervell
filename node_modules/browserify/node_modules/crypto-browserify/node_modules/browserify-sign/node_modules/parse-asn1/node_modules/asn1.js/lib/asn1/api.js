@@ -1,6 +1,5 @@
 var asn1 = require('../asn1');
 var inherits = require('inherits');
-var vm = require('vm');
 
 var api = exports;
 
@@ -17,9 +16,18 @@ function Entity(name, body) {
 };
 
 Entity.prototype._createNamed = function createNamed(base) {
-  var named = vm.runInThisContext('(function ' + this.name + '(entity) {\n' +
-    '  this._initNamed(entity);\n' +
-    '})');
+  var named;
+  try {
+    named = require('vm').runInThisContext(
+      '(function ' + this.name + '(entity) {\n' +
+      '  this._initNamed(entity);\n' +
+      '})'
+    );
+  } catch (e) {
+    named = function (entity) {
+      this._initNamed(entity);
+    };
+  }
   inherits(named, base);
   named.prototype._initNamed = function initnamed(entity) {
     base.call(this, entity);

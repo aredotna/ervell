@@ -16,7 +16,7 @@ function testIt(priv, run) {
     t.plan(len);
     var i = 0;
     while(i++ < len) {
-      var r = crt.getr(priv, crypto);
+      var r = crt.getr(priv);
       t.equals(r.gcd(priv.modulus).toString(), '1', 'are coprime run ' + i);
     }
   });
@@ -45,7 +45,7 @@ function testMessage(key, run) {
         padding: constants.RSA_NO_PADDING,
         key: key
       }, buf).toString('hex');
-      var myEncrypt = crt(buf, priv, crypto).toString('hex');
+      var myEncrypt = crt(buf, priv).toString('hex');
       t.equals(nodeEncrypt, myEncrypt, 'equal encrypts');
     });
   }

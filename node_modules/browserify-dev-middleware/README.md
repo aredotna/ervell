@@ -29,7 +29,7 @@ Add transforms by passing it as an option.
 
 ````javascript
 app.use(require('browserify-dev-middleware')({
-  src: '...'
+  src: '...',
   transforms: [require('jadeify')]
 }));
 ````
@@ -38,7 +38,7 @@ Specify global transforms too.
 
 ````javascript
 app.use(require('browserify-dev-middleware')({
-  src: '...'
+  src: '...',
   globalTransforms: [require('deamdify')]
 }));
 ````
@@ -47,12 +47,23 @@ Or pass any browserify options in
 
 ````javascript
 app.use(require('browserify-dev-middleware')({
-  src: '...'
+  src: '...',
   noParse: [
     require.resolve('./test/assets/jquery'),
     require.resolve('./test/assets/ember')
   ],
   insertGlobals: true
+}));
+````
+
+Or intercept the bundle and act on it programatically
+
+````javascript
+app.use(require('browserify-dev-middleware')({
+  src: '...',
+  intercept: function(b) {
+    b.add('./browser/main.js');
+  }
 }));
 ````
 

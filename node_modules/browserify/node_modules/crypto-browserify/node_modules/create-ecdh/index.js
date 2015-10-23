@@ -1,3 +1,3 @@
-exports.__browserify = require('./inject');
+var createECDH = require('crypto').createECDH;
 
-exports.__browserify(require('crypto'), exports);
+module.exports = createECDH || require('./browser');

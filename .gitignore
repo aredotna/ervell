@@ -2,5 +2,6 @@
 .idea
 .env
 public/assets
+node_modules
 *.sublime-project
 *.sublime-workspace

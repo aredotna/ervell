@@ -20,7 +20,7 @@ if (b.argv._[0] === 'help' || b.argv.h || b.argv.help
         .on('close', function () { process.exit(1) })
     ;
 }
-if (b.argv.v || b.argv.version) {
+if (b.argv.version) {
     return console.log(require('../package.json').version);
 }
 
@@ -61,14 +61,6 @@ if (outfile) {
 }
 else {
     bundle.pipe(process.stdout);
-}
-
-function packageFilter (info) {
-    if (info && typeof info.browserify === 'string' && !info.browser) {
-        info.browser = info.browserify;
-        delete info.browserify;
-    }
-    return info || {};
 }
 
 function errorExit(err) {

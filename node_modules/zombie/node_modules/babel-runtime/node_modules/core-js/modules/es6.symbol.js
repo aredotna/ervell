@@ -15,7 +15,6 @@ var $              = require('./$')
   , $names         = require('./$.get-names')
   , enumKeys       = require('./$.enum-keys')
   , isArray        = require('./$.is-array')
-  , isObject       = require('./$.is-object')
   , anObject       = require('./$.an-object')
   , toIObject      = require('./$.to-iobject')
   , createDesc     = require('./$.property-desc')
@@ -115,8 +114,9 @@ var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
 var $stringify = function stringify(it){
   var args = [it]
     , i    = 1
+    , $$   = arguments
     , replacer, $replacer;
-  while(arguments.length > i)args.push(arguments[i++]);
+  while($$.length > i)args.push($$[i++]);
   replacer = args[1];
   if(typeof replacer == 'function')$replacer = replacer;
   if($replacer || !isArray(replacer))replacer = function(key, value){
@@ -138,7 +138,7 @@ var buggyJSON = $fails(function(){
 if(!useNative){
   $Symbol = function Symbol(){
     if(isSymbol(this))throw TypeError('Symbol is not a constructor');
-    return wrap(uid(arguments[0]));
+    return wrap(uid(arguments.length > 0 ? arguments[0] : undefined));
   };
   $redef($Symbol.prototype, 'toString', function toString(){
     return this._k;
@@ -187,13 +187,12 @@ var symbolStatics = {
 // 19.4.2.13 Symbol.toStringTag
 // 19.4.2.14 Symbol.unscopables
 $.each.call((
-    'hasInstance,isConcatSpreadable,iterator,match,replace,search,' +
-    'species,split,toPrimitive,toStringTag,unscopables'
-  ).split(','), function(it){
-    var sym = wks(it);
-    symbolStatics[it] = useNative ? sym : wrap(sym);
-  }
-);
+  'hasInstance,isConcatSpreadable,iterator,match,replace,search,' +
+  'species,split,toPrimitive,toStringTag,unscopables'
+).split(','), function(it){
+  var sym = wks(it);
+  symbolStatics[it] = useNative ? sym : wrap(sym);
+});
 
 setter = true;
 

@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var async = require('async');
 var glob = require('glob');
+var debug = require('debug')('node-inspector:ScriptFileStorage');
 
 var MODULE_HEADER = '(function (exports, require, module, __filename, __dirname) { ';
 var MODULE_TRAILER = '\n});';
@@ -23,9 +24,9 @@ function escapeRegex(str) {
  * @param {ScriptManager} scriptManager
  * @constructor
  */
-function ScriptFileStorage(config, scriptManager) {
+function ScriptFileStorage(config, session) {
   config = config || {};
-  this._scriptManager = scriptManager;
+  this._scriptManager = session.scriptManager;
   this._noPreload = config.preload === false;
 }
 
@@ -57,19 +58,27 @@ $class.save = function(path, content, callback) {
  * @param {function(Object, string)} callback
  */
 $class.load = function(path, callback) {
-  fs.readFile(
-    path,
-    'utf-8',
-    function(err, content) {
-      if (err) return callback(err);
+  var scriptId = this._scriptManager.findScriptIdByPath(path);
+  // If requested source was loaded in app (scriptId != null), we can't expect that it is equal
+  // to the file with requested name stored in fs.
+  // So, if requested source was loaded in app, we need to require it from app.
+  if (scriptId != null) {
+    this._scriptManager.getScriptSourceById(scriptId, callback);
+  } else {
+    fs.readFile(
+      path,
+      'utf-8',
+      function(err, content) {
+        if (err) return callback(err);
 
-      // remove shebang
-      content = content.replace(/^\#\!.*/, '');
+        // remove shebang
+        content = content.replace(/^\#\!.*/, '');
 
-      var source = MODULE_HEADER + content + MODULE_TRAILER;
-      return callback(null, source);
-    }
-  );
+        var source = MODULE_HEADER + content + MODULE_TRAILER;
+        return callback(null, source);
+      }
+    );
+  }
 };
 
 /**
@@ -149,17 +158,20 @@ $class.listScripts = function(rootFolder, pattern, callback) {
   //    callback
   // );
 
+  debug('glob %s on %s', pattern, rootFolder);
+
   glob(
     pattern,
     {
       cwd: rootFolder,
+      follow: true,
+      realpath: true,
       strict: false
     },
     function(err, result) {
       if (result) {
-        result = result.map(function(relativeUnixPath) {
-          var relativePath = relativeUnixPath.split('/').join(path.sep);
-          return path.join(rootFolder, relativePath);
+        result = result.map(function(unixPath) {
+          return unixPath.split('/').join(path.sep);
         });
       }
 
@@ -170,6 +182,7 @@ $class.listScripts = function(rootFolder, pattern, callback) {
         result: result
       };
 
+      debug('glob returned %s files', err || result.length);
       callback(err, result);
     }.bind(this)
   );
@@ -230,6 +243,7 @@ $class.findAllApplicationScripts = function(startDirectory, mainScriptFile, call
         return arr.indexOf(elem) >= ix && !this._scriptManager.isScriptHidden(elem);
       }.bind(this));
 
+      debug('findAllApplicationScripts returned %s files', files.length);
       return callback(null, files);
     }.bind(this)
   );

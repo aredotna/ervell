@@ -1,6 +1,6 @@
 /*
 Make a Sortable reactive by binding it to a Mongo.Collection.
-Calls `rubaxa:sortable/collection-update` on the server to update the sortField or affected records.
+Calls `rubaxa:sortable/collection-update` on the server to update the sortField of affected records.
 
 TODO:
   * supply consecutive values if the `order` field doesn't have any
@@ -90,7 +90,7 @@ Template.sortable.created = function () {
 	 */
 	templateInstance.adjustOrders = function adjustOrders(itemId, orderPrevItem, orderNextItem) {
 		var orderField = templateInstance.options.sortField;
-		var selector = {}, modifier = {$set: {}};
+		var selector = templateInstance.options.selector || {}, modifier = {$set: {}};
 		var ids = [];
 		var startOrder = templateInstance.collection.findOne(itemId)[orderField];
 		if (orderPrevItem !== null) {
@@ -197,5 +197,5 @@ Template.sortable.rendered = function () {
 
 
 Template.sortable.destroyed = function () {
-	this.sortable.destroy();
+	if(this.sortable) this.sortable.destroy();
 };

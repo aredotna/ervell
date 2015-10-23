@@ -5,11 +5,13 @@ var through   =  require('through');
 var convert   =  require('convert-source-map');
 var transform =  require('..');
 
-test('transform adds sourcemap comment', function (t) {
+test('transform adds sourcemap comment when sourceMap is true', function (t) {
     t.plan(1);
     var data = '';
+    
+    transform.sourceMap = true;
 
-    var file = path.join(__dirname, '../example/foo.coffee')
+    var file = path.join(__dirname, '../example/foo.coffee');
     fs.createReadStream(file)
         .pipe(transform(file))
         .pipe(through(write, end));
@@ -30,4 +32,24 @@ test('transform adds sourcemap comment', function (t) {
             'adds sourcemap comment including original source'
       );
     }
+});
+
+test('transform does not add sourcemap when sourceMap is false', function (t) {
+
+  t.plan(1);
+  var data = '';
+
+  transform.sourceMap = false;
+
+  var file = path.join(__dirname, '../example/foo.coffee');
+  fs.createReadStream(file)
+    .pipe(transform(file))
+    .pipe(through(write, end));
+
+  function write (buf) { data += buf }
+  function end () {
+    var sourceMap = convert.fromSource(data);
+    t.equal(sourceMap, null);
+  }
+
 });

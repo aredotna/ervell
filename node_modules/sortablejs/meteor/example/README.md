@@ -9,33 +9,32 @@ It also shows list grouping and control over what lists can give or receive
 elements. You can only drag elements from the list to the left onto the list
 to the right.
 
+
 ## Usage
 
-The example uses the local package from the checkout, so it needs to wire
-up some files (`package.js` and `package.json`). This is done by the handy
-run script:
+The example uses the local package from the checkout, with the help of the run script:
 
 ### Windows
 
     git clone https://github.com/RubaXa/Sortable.git
     cd Sortable
-    git checkout dev
-    cd meteor\example
-    run.bat
+    # git checkout dev  # optional
+    meteor\example\run.bat
 
 ### Elsewhere
 
     git clone https://github.com/RubaXa/Sortable.git
     cd Sortable
-    git checkout dev
-    meteor/example./run.sh
+    # git checkout dev  # optional
+    meteor/example/run.sh
 
-## Prior art
+
+## [Prior art](http://slides.com/dandv/prior-art)
 
 ### Differential
 
 Differential wrote [a blog post on reorderable lists with
-Meteor](differential.com/blog/sortable-lists-in-meteor-using-jquery-ui) and
+Meteor](http://differential.com/blog/sortable-lists-in-meteor-using-jquery-ui) and
 [jQuery UI Sortable](http://jqueryui.com/sortable/). It served as inspiration
 for integrating [rubaxa:sortable](rubaxa.github.io/Sortable/),
 which uses the HTML5 native drag&drop API (not without [its

@@ -35,7 +35,7 @@
         options          = options || {};
         options.ellipsis = (typeof options.ellipsis === "undefined") ? DEFAULT_TRUNCATE_SYMBOL : options.ellipsis;
 
-        if(!string || string.length === 0){
+        if(!string || string.length === 0){
             return '';
         }
 

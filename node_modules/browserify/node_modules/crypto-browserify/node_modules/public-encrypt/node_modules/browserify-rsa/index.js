@@ -1,7 +1,8 @@
 var bn = require('bn.js');
+var randomBytes = require('randombytes');
 module.exports = crt;
-function blind(priv, crypto) {
-  var r = getr(priv, crypto);
+function blind(priv) {
+  var r = getr(priv);
   var blinder = r.toRed(bn.mont(priv.modulus))
   .redPow(new bn(priv.publicExponent)).fromRed();
   return {
@@ -9,8 +10,8 @@ function blind(priv, crypto) {
     unblinder:r.invm(priv.modulus)
   };
 }
-function crt(msg, priv, crypto) {
-  var blinds = blind(priv, crypto);
+function crt(msg, priv) {
+  var blinds = blind(priv);
   var len = priv.modulus.byteLength();
   var mod = bn.mont(priv.modulus);
   var blinded = new bn(msg).mul(blinds.blinder).mod(priv.modulus);
@@ -35,11 +36,11 @@ function crt(msg, priv, crypto) {
   return out;
 }
 crt.getr = getr;
-function getr(priv, crypto) {
+function getr(priv) {
   var len = priv.modulus.byteLength();
-  var r = new bn(crypto.randomBytes(len));
+  var r = new bn(randomBytes(len));
   while (r.cmp(priv.modulus) >=  0 || !r.mod(priv.prime1) || !r.mod(priv.prime2)) {
-    r = new bn(crypto.randomBytes(len));
+    r = new bn(randomBytes(len));
   }
   return r;
 }

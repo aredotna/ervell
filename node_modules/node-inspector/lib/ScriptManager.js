@@ -1,6 +1,10 @@
 var events = require('events'),
+    path = require('path'),
     async = require('async'),
     debug = require('debug')('node-inspector:ScriptManager'),
+    semver = require('semver'),
+    dataUri = require('strong-data-uri'),
+    pathIsAbsolute = require('path-is-absolute'),
     convert = require('./convert.js');
 
 // see Blink inspector > ContentSearchUtils.cpp > findMagicComment()
@@ -12,13 +16,13 @@ var SOURCE_MAP_URL_REGEX = /\/\/[@#][ \t]sourceMappingURL=[ \t]*([^\s'"]*)[ \t]*
  * @param {DebuggerClient} debuggerClient
  * @constructor
  */
-function ScriptManager(config, frontendClient, debuggerClient) {
+function ScriptManager(config, session) {
   config = config || {};
   var self = Object.create(ScriptManager.prototype, {
     _sources: { value: {}, writable: true },
     _hidden: { value: config.hidden || [] },
-    _frontendClient: { value: frontendClient },
-    _debuggerClient: { value: debuggerClient }
+    _frontendClient: { value: session.frontendClient },
+    _debuggerClient: { value: session.debuggerClient }
   });
   self._registerDebuggerEventHandlers();
   return self;
@@ -27,11 +31,17 @@ function ScriptManager(config, frontendClient, debuggerClient) {
 ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
   mainAppScript: { value: null, writable: true },
 
+  realMainAppScript: { value: null, writable: true },
+
   _registerDebuggerEventHandlers: {
     value: function() {
       this._debuggerClient.on(
         'afterCompile',
         this._onAfterCompile.bind(this)
+      );
+      this._debuggerClient.on(
+        'compileError',
+        this._onCompileError.bind(this)
       );
     }
   },
@@ -46,6 +56,22 @@ ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
         return;
       }
       this.addScript(event.script);
+    }
+  },
+
+  _onCompileError: {
+    value: function(event) {
+      var cb = function() {
+        var version = this._debuggerClient.target.nodeVersion;
+        if (semver.satisfies(version, '~0.12'))
+          // Relative to https://github.com/joyent/node/issues/25266
+          this._onAfterCompile(event);
+      }.bind(this);
+
+      if (this._debuggerClient.isReady)
+        process.nextTick(cb);
+      else
+        this._debuggerClient.once('connect', cb);
     }
   },
 
@@ -79,7 +105,72 @@ ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
       });
     }
   },
-  
+
+  resolveScriptById: {
+    value: function(id, done) {
+      var source = this.findScriptByID(id);
+
+      if (!source) {
+        this._requireScriptFromApp(id, done);
+      } else {
+        process.nextTick(function() {
+          done(null, source);
+        });
+      }
+    }
+  },
+
+  getScriptSourceById: {
+    value: function(id, callback) {
+      this._debuggerClient.request(
+        'scripts',
+        {
+          includeSource: true,
+          types: 4,
+          ids: [id]
+        },
+        function handleScriptSourceResponse(err, result) {
+          if (err) return callback(err);
+
+          // Some modules gets unloaded (?) after they are parsed,
+          // e.g. node_modules/express/node_modules/methods/index.js
+          // V8 request 'scripts' returns an empty result in such case
+          var source = result.length > 0 ? result[0].source : undefined;
+
+          callback(null, source);
+        }
+      );
+    }
+  },
+
+  _requireScriptFromApp: {
+    value: function(id, done) {
+      // NOTE: We can step in this function only if `afterCompile` event is broken
+      // This is issue for node v0.12: https://github.com/joyent/node/issues/25266
+      this._debuggerClient.request(
+        'scripts',
+        {
+          includeSource: false,
+          filter: id
+        },
+        function(error, scripts) {
+          if (error) return done(error);
+          if (!scripts[0]) return done(null);
+
+          this.addScript(scripts[0], done);
+        }.bind(this)
+      );
+    }
+  },
+
+  findScriptIdByPath: {
+    value: function(path) {
+      return Object.keys(this._sources).filter(function(key) {
+        return this._sources[key].v8name == path;
+      }, this)[0];
+    }
+  },
+
   findScriptByID: {
     /**
      * @param {string} id script id.
@@ -91,8 +182,14 @@ ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
   },
 
   addScript: {
-    value: function(v8data) {
+    value: function(v8data, done) {
+      done = done || function() {};
+
       var localPath = v8data.name;
+      if (this._isMainAppScript(localPath)) {
+        v8data.name = localPath = this.realMainAppScript;
+      }
+
       var hidden = this.isScriptHidden(localPath) && localPath != this.mainAppScript;
 
       var inspectorScriptData = this._doAddScript(v8data, hidden);
@@ -100,8 +197,11 @@ ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
       debug('addScript id: %s localPath: %s hidden? %s source? %s',
         v8data.id, localPath, hidden, !!v8data.source);
 
-      if (hidden || this._isNodeInternal(localPath)) {
-        notifyFrontEnd.call(this);
+      if (hidden) return done(null, inspectorScriptData);
+
+      if (this._isNodeInternal(localPath)) {
+        this._notifyScriptParsed(inspectorScriptData);
+        done(null, inspectorScriptData);
       } else {
         this._getSourceMapUrl(
           v8data.id,
@@ -114,22 +214,100 @@ ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
                 v8data.id,
                 err);
             }
-            debug('sourceMapUrl for script %s:%s is %s',
-              v8data.id, localPath, sourceMapUrl);
+
+            debug('sourceMapUrl for script %s:%s is %s', v8data.id, localPath, sourceMapUrl);
+
             inspectorScriptData.sourceMapURL = sourceMapUrl;
-            notifyFrontEnd.call(this);
+
+            this._checkInlineSourceMap(inspectorScriptData);
+            this._notifyScriptParsed(inspectorScriptData);
+
+            done(null, inspectorScriptData);
           }.bind(this)
         );
       }
+    }
+  },
 
-      function notifyFrontEnd() {
-        if (hidden) return;
+  _checkInlineSourceMap: {
+    value: function(inspectorScriptData) {
+      // Source maps have some issues in different libraries.
+      // If source map exposed in inline mode, we can easy fix some potential issues.
+      var sourceMapUrl = inspectorScriptData.sourceMapURL;
+      if (!sourceMapUrl) return;
 
-        this._frontendClient.sendEvent(
-          'Debugger.scriptParsed',
-          inspectorScriptData
-        );
+      var sourceMap;
+      try {
+        sourceMap = dataUri.decode(sourceMapUrl).toString();
+      } catch (err) {
+        return;
       }
+
+      sourceMap = JSON.parse(sourceMap.toString());
+      this._checkSourceMapIssues(inspectorScriptData, sourceMap);
+      sourceMap = JSON.stringify(sourceMap);
+
+      inspectorScriptData.sourceMapURL = dataUri.encode(sourceMap, 'application/json');
+    }
+  },
+
+  _checkSourceMapIssues: {
+    value: function(inspectorScriptData, sourceMap) {
+      var scriptName = inspectorScriptData.url.replace(/^file:\/\/\//, '');
+      var scriptOrigin = path.dirname(scriptName);
+      fixAbsoluteSourcePaths();
+      fixWrongFileName();
+
+      function fixAbsoluteSourcePaths() {
+        // Documentation says what source maps can contain absolute paths,
+        // but DevTools strictly expects relative paths.
+        sourceMap.sources = sourceMap.sources.map(function(source) {
+          if (!pathIsAbsolute(source)) return source;
+
+          return path.relative(scriptOrigin, source);
+        });
+      }
+
+      function fixWrongFileName() {
+        // Documentation says nothing about file name of bundled script.
+        // So, we expect a situation, when original source and bundled script have equal name.
+        // We need to fix this case.
+        sourceMap.sources = sourceMap.sources.map(function(source) {
+          var sourceUrl = path.resolve(scriptOrigin, source).replace(/\\/g, '/');
+          if (sourceUrl == scriptName) source += '.source';
+
+          return source;
+        });
+      }
+    }
+  },
+
+  _notifyScriptParsed: {
+    value: function(scriptData) {
+      this._frontendClient.sendEvent(
+        'Debugger.scriptParsed',
+        scriptData
+      );
+    }
+  },
+
+  _isMainAppScript: {
+    value: function(path) {
+      if (!path || !this.mainAppScript) return false;
+      if (process.platform == 'win32')
+        return this.mainAppScript.toLowerCase() == path.replace(/\//g, '\\').toLowerCase();
+      else
+        return this.mainAppScript == path;
+    }
+  },
+
+  normalizeName: {
+    value: function(name) {
+      if (this._isMainAppScript(name.replace(/^file:\/\/\//, ''))) {
+        return convert.v8NameToInspectorUrl(this.mainAppScript);
+      }
+
+      return name;
     }
   },
 
@@ -166,8 +344,7 @@ ScriptManager.prototype = Object.create(events.EventEmitter.prototype, {
       var getSource;
       if (scriptSource == null) {
         debug('_getSourceMapUrl(%s) - fetching source from V8', scriptId);
-        getSource = this._debuggerClient.getScriptSourceById
-            .bind(this._debuggerClient, scriptId);
+        getSource = this.getScriptSourceById.bind(this, scriptId);
       } else {
         debug('_getSourceMapUrl(%s) - using the suplied source', scriptId);
         getSource = function(cb) { cb(null, scriptSource); };

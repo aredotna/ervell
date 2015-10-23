@@ -11,17 +11,6 @@ Supports cross-domain, chunked and resumable file uploads and client-side image 
 * [How to setup the plugin on your website](https://github.com/blueimp/jQuery-File-Upload/wiki/Setup)
 * [How to use only the basic plugin (minimal setup guide).](https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin)
 
-## Support
-
-* **[Support Forum](https://groups.google.com/d/forum/jquery-fileupload)**  
-**Support requests** and **general discussions** about the File Upload plugin can be posted to the official
-[Support Forum](https://groups.google.com/d/forum/jquery-fileupload).  
-If your question is not directly related to the File Upload plugin, you might have a better chance to get a reply by posting to [Stack Overflow](http://stackoverflow.com/questions/tagged/blueimp+jquery+file-upload).
-
-* Bugs and Feature requests  
-**Bugs** and **Feature requests** can be reported using the [issues tracker](https://github.com/blueimp/jQuery-File-Upload/issues).  
-Please read the [issue guidelines](https://github.com/blueimp/jQuery-File-Upload/blob/master/CONTRIBUTING.md) before posting.
-
 ## Features
 * **Multiple file upload:**  
   Allows to select multiple files at once and upload them simultaneously.
@@ -72,7 +61,7 @@ The jQuery Iframe Transport is required for [browsers without XHR file upload su
 * [JavaScript Load Image library](https://github.com/blueimp/JavaScript-Load-Image) v. 1.13.0+
 * [JavaScript Canvas to Blob polyfill](https://github.com/blueimp/JavaScript-Canvas-to-Blob) v. 2.1.1+
 * [blueimp Gallery](https://github.com/blueimp/Gallery) v. 2.15.1+
-* [Bootstrap CSS framework](http://getbootstrap.com/) v. 3.2.0+
+* [Bootstrap](http://getbootstrap.com/) v. 3.2.0+
 * [Glyphicons](http://glyphicons.com/)
 
 The JavaScript Templates engine is used to render the selected and uploaded files for the Basic Plus UI and jQuery UI versions.
@@ -81,7 +70,7 @@ The JavaScript Load Image library and JavaScript Canvas to Blob polyfill are req
 
 The blueimp Gallery is used to display the uploaded images in a lightbox.
 
-The user interface of all versions except the jQuery UI version is built with Twitter's [Bootstrap](http://getbootstrap.com/) framework and icons from [Glyphicons](http://glyphicons.com/).
+The user interface of all versions except the jQuery UI version is built with [Bootstrap](http://getbootstrap.com/) and icons from [Glyphicons](http://glyphicons.com/).
 
 ### Cross-domain requirements
 [Cross-domain File Uploads](https://github.com/blueimp/jQuery-File-Upload/wiki/Cross-domain-uploads) using the [Iframe Transport plugin](https://github.com/blueimp/jQuery-File-Upload/blob/master/js/jquery.iframe-transport.js) require a redirect back to the origin server to retrieve the upload results. The [example implementation](https://github.com/blueimp/jQuery-File-Upload/blob/master/js/main.js) makes use of [result.html](https://github.com/blueimp/jQuery-File-Upload/blob/master/cors/result.html) as a static redirect page for the origin server.
@@ -110,14 +99,15 @@ The File Upload plugin has been tested with and supports the following mobile br
 * Opera Mobile 12.0+
 
 ### Supported features
-For a detailed overview of the features supported by each browser version please have a look at the [Extended browser support information](https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support).
+For a detailed overview of the features supported by each browser version, please have a look at the [Extended browser support information](https://github.com/blueimp/jQuery-File-Upload/wiki/Browser-support).
+
+## Contributing
+**Bug fixes** and **new features** can be proposed using [pull requests](https://github.com/blueimp/jQuery-File-Upload/pulls).
+Please read the [contribution guidelines](https://github.com/blueimp/jQuery-File-Upload/blob/master/CONTRIBUTING.md) before submitting a pull request.
+
+## Support
+This project is actively maintained, but there is no official support channel.  
+If you have a question that another developer might help you with, please post to [Stack Overflow](http://stackoverflow.com/questions/tagged/blueimp+jquery+file-upload) and tag your question with `blueimp jquery file upload`.
 
 ## License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
-
-## Donations
-jQuery File Upload is free software, but you can donate to support the developer, Sebastian Tschan:
-
-Flattr: [![Flattr](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/thing/286433/jQuery-File-Upload-Plugin)
-
-PayPal: [![PayPal](https://www.paypalobjects.com/WEBSCR-640-20110429-1/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PYWYSYP77KL54)

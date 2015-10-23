@@ -1,4 +1,22 @@
 
+2.2.0 / 2015-05-09
+==================
+
+  * package: update "ms" to v0.7.1 (#202, @dougwilson)
+  * README: add logging to file example (#193, @DanielOchoa)
+  * README: fixed a typo (#191, @amir-s)
+  * browser: expose `storage` (#190, @stephenmathieson)
+  * Makefile: add a `distclean` target (#189, @stephenmathieson)
+
+2.1.3 / 2015-03-13
+==================
+
+  * Updated stdout/stderr example (#186)
+  * Updated example/stdout.js to match debug current behaviour
+  * Renamed example/stderr.js to stdout.js
+  * Update Readme.md (#184)
+  * replace high intensity foreground color for bold (#182, #183)
+
 2.1.2 / 2015-03-01
 ==================
 

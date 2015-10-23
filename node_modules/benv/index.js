@@ -55,6 +55,7 @@ module.exports.teardown = function(clearDOM) {
   for(var key in globals) {
     delete global[key];
   }
+  if (typeof document != 'undefined') document.body.innerHTML = '';
 }
 
 // Require non-commonjs modules by specifying their global variable.

@@ -2,6 +2,7 @@
   'targets': [
     {
       'target_name': 'debug',
+      'win_delay_load_hook': 'true',
       'sources': [
         'src/debug.cc',
       ],

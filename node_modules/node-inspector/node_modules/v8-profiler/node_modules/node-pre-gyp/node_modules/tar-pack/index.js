@@ -11,12 +11,7 @@ var packer = require('fstream-ignore')
 var PassThrough = require('stream').PassThrough || require('readable-stream').PassThrough
 var zlib = require('zlib')
 var path = require('path')
-var fs
-try {
-  fs = require('graceful-fs')
-} catch (ex) {
-  fs = require('fs')
-}
+var fs = require('graceful-fs')
 
 var win32 = process.platform === 'win32'
 var myUid = process.getuid && process.getuid()

@@ -6,16 +6,30 @@ var convert = require('./convert.js'),
 /**
  * @param {Object} config
  * @param {DebuggerClient} debuggerClient
+ * @param {FrontendClient} frontendClient
+ * @param {ConsoleClient} consoleClient
+ * @param {HeapProfilerClient} heapProfilerClient
  * @constructor
  */
-function RuntimeAgent(config, debuggerClient) {
-  this._debuggerClient = debuggerClient;
-  this._callFramesProvider = new CallFramesProvider(config, debuggerClient);
+function RuntimeAgent(config, session) {
+  this._debuggerClient = session.debuggerClient;
+  this._frontendClient = session.frontendClient;
+  this._consoleClient = session.consoleClient;
+  this._heapProfilerClient = session.heapProfilerClient;
+  this._callFramesProvider = new CallFramesProvider(config, session);
 }
 
 RuntimeAgent.prototype = {
   enable: function(params, done) {
     done();
+    //Relative to WorkerRuntimeAgent::enable in core/inspector/WorkerRuntimeAgent.cpp
+    this._frontendClient.sendEvent('Runtime.executionContextCreated', {
+      context: {
+        id: 1,
+        isPageContext: true,
+        name: ''
+      }
+    });
   },
 
   evaluate: function(params, done) {
@@ -184,6 +198,10 @@ RuntimeAgent.prototype = {
     };
     if (this._callFramesProvider.isScopeId(params.objectId)) {
       this._getPropertiesOfScopeId(params.objectId, options, done);
+    } else if (this._consoleClient.isConsoleId(params.objectId)) {
+      this._getPropertiesOfConsoleId(params.objectId, options, done);
+    } else if (this._heapProfilerClient.isHeapObjectId(params.objectId)) {
+      this._getPropertiesOfHeapObjectId(params.objectId, options, done);
     } else {
       this._getPropertiesOfObjectId(params.objectId, options, done);
     }
@@ -218,6 +236,32 @@ RuntimeAgent.prototype = {
 
         done(null, { result: props });
       }
+    );
+  },
+
+  _getPropertiesOfConsoleId: function(objectId, options, done) {
+    this._consoleClient.lookupConsoleId(
+      objectId,
+      function(error, responseBody, responseRefs) {
+        if (error) return done(error);
+
+        var props = convert.v8ObjectToInspectorProperties(responseBody, responseRefs, options);
+
+        done(null, { result: props });
+      }.bind(this)
+    );
+  },
+
+  _getPropertiesOfHeapObjectId: function(objectId, options, done) {
+    this._heapProfilerClient.lookupHeapObjectId(
+      objectId,
+      function(error, responseBody, responseRefs) {
+        if (error) return done(error);
+
+        var props = convert.v8ObjectToInspectorProperties(responseBody, responseRefs, options);
+
+        done(null, { result: props });
+      }.bind(this)
     );
   },
 

@@ -15,10 +15,11 @@ var fs = require('fs'),
  * @param {ScriptManager} scriptManager
  * @constructor
  */
-function PageAgent(config, debuggerClient, scriptManager) {
-  this._debuggerClient = debuggerClient;
-  this._scriptManager = scriptManager;
-  this._scriptStorage = new ScriptFileStorage(config, scriptManager);
+function PageAgent(config, session) {
+  this._session = session;
+  this._debuggerClient = session.debuggerClient;
+  this._scriptManager = session.scriptManager;
+  this._scriptStorage = new ScriptFileStorage(config, session);
 }
 
 inherits(PageAgent, EventEmitter);
@@ -28,12 +29,12 @@ extend(PageAgent.prototype, {
     done();
   },
 
-  canShowFPSCounter: function(params, done) {
-    done(null, { show: false });
+  canEmulate: function(params, done) {
+    done(null, { result: false });
   },
 
-  canContinuouslyPaint: function(params, done) {
-    done(null, { value: false });
+  canScreencast: function(params, done) {
+    done(null, { result: false });
   },
 
   setTouchEmulationEnabled: function(params, done) {
@@ -43,10 +44,10 @@ extend(PageAgent.prototype, {
   getResourceTree: function(params, done) {
     var cb = function() {
       done.apply(null, arguments);
-      this.emit('resource-tree');
+      this._session.emit('resource-tree-resolved');
     }.bind(this);
 
-    if (this._debuggerClient.isConnected) {
+    if (this._debuggerClient.isReady) {
       this._doGetResourceTree(params, cb);
     } else {
       this._debuggerClient.once(
@@ -57,18 +58,13 @@ extend(PageAgent.prototype, {
   },
 
   _doGetResourceTree: function(params, done) {
-    var describeProgram = '[process.cwd(), ' +
-      'process.mainModule ? process.mainModule.filename : process.argv[1]]';
+    var cwd = this._debuggerClient.target.cwd;
+    var filename = this._debuggerClient.target.filename;
 
     async.waterfall(
       [
-        this._debuggerClient.evaluateGlobal
-          .bind(this._debuggerClient, describeProgram),
-        function(evaluateResult, cb) {
-          cb(null, evaluateResult[0], evaluateResult[1]);
-        },
-        this._resolveMainAppScript.bind(this),
-        this._getResourceTreeForAppScript.bind(this)
+        this._resolveMainAppScript.bind(this, cwd, filename),
+        this._getResourceTreeForAppScript.bind(this, this._debuggerClient.target)
       ],
       done
     );
@@ -76,7 +72,6 @@ extend(PageAgent.prototype, {
 
   _resolveMainAppScript: function(startDirectory, mainAppScript, done) {
     this._scriptManager.mainAppScript = mainAppScript;
-
     if (mainAppScript == null) {
       // mainScriptFile is null when running in the REPL mode
       return done(null, startDirectory, mainAppScript);
@@ -86,22 +81,40 @@ extend(PageAgent.prototype, {
       if (err && !/\.js$/.test(mainAppScript)) {
         mainAppScript += '.js';
       }
-      return done(null, startDirectory, mainAppScript);
-    });
+
+      if (process.platform !== 'win32') {
+        this._scriptManager.realMainAppScript = mainAppScript;
+        return done(null, startDirectory, mainAppScript);
+      }
+
+      var dirname = path.dirname(mainAppScript);
+      var basename = path.basename(mainAppScript);
+
+      fs.readdir(dirname, function(err, files) {
+        var realBaseName = files.filter(function(filename) {
+          return filename.toLowerCase() == basename.toLowerCase();
+        })[0];
+
+        mainAppScript = path.join(dirname, realBaseName);
+        this._scriptManager.realMainAppScript = mainAppScript;
+
+        return done(null, startDirectory, mainAppScript);
+      }.bind(this));
+    }.bind(this));
   },
 
-  _getResourceTreeForAppScript: function(startDirectory, mainAppScript, done) {
+  _getResourceTreeForAppScript: function(target, startDirectory, mainAppScript, done) {
     async.waterfall(
       [
         this._scriptStorage.findAllApplicationScripts
           .bind(this._scriptStorage, startDirectory, mainAppScript),
-        this._createResourceTreeResponse.bind(this, mainAppScript)
+        this._createResourceTreeResponse.bind(this, target, mainAppScript)
       ],
       done
     );
   },
 
-  _createResourceTreeResponse: function(mainAppScript, scriptFiles, done) {
+  _createResourceTreeResponse: function(target, mainAppScript, scriptFiles, done) {
     var resources = scriptFiles.map(function(filePath) {
       return {
         url: convert.v8NameToInspectorUrl(filePath),
@@ -115,18 +128,13 @@ extend(PageAgent.prototype, {
         frame: {
           id: 'nodeinspector-toplevel-frame',
           url: convert.v8NameToInspectorUrl(mainAppScript),
+          securityOrigin: 'node-inspector',
 
           // Front-end keeps a history of local modifications based
           // on loaderId. Ideally we should return such id that it remains
           // same as long as the the debugger process has the same content
           // of scripts and that changes when a new content is loaded.
-          //
-          // To keep things easy, we are returning an unique value for now.
-          // This means that every reload of node-inspector page discards
-          // the history of live-edit changes.
-          //
-          // Perhaps we can use PID as loaderId instead?
-          loaderId: createUniqueLoaderId(),
+          loaderId: target.pid,
           _isNodeInspectorScript: true
         },
         resources: resources
@@ -135,7 +143,8 @@ extend(PageAgent.prototype, {
   },
 
   getResourceContent: function(params, done) {
-    var scriptName = convert.inspectorUrlToV8Name(params.url);
+    var scriptName = convert.inspectorUrlToV8Name(params.url,
+      this._scriptManager.normalizeName.bind(this._scriptManager));
 
     if (scriptName === '') {
       // When running REPL, main application file is null
@@ -171,8 +180,3 @@ extend(PageAgent.prototype, {
 });
 
 exports.PageAgent = PageAgent;
-
-function createUniqueLoaderId() {
-  var randomPart = String(Math.random()).slice(2);
-  return Date.now() + '-' + randomPart;
-}

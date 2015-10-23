@@ -25,6 +25,9 @@ describe('isConstant(src)', function () {
   it('handles "this.myVar"', function () {
     assert(constaninople.isConstant('this.myVar') === false)
   })
+  it('handles "(function () { while (true); return 10; }())"', function () {
+    assert(constaninople.isConstant('(function () { while (true); return 10; }())') === false)
+  })
 })
 
 
@@ -56,5 +59,13 @@ describe('toConstant(src)', function () {
   })
   it('handles "Math.floor(10.5)" with {Math: Math} as constants', function () {
     assert(constaninople.toConstant('Math.floor(10.5)', {Math: Math}) === 10)
+  })
+  it('handles "(function () { while (true); return 10; }())"', function () {
+    try {
+      constaninople.toConstant('(function () { while (true); return 10; }())')
+    } catch (ex) {
+      return
+    }
+    assert(false, '(function () { while (true); return 10; }()) should result in an error')
   })
 })

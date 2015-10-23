@@ -3,7 +3,7 @@ create-hash
 
 [![Build Status](https://travis-ci.org/crypto-browserify/createHash.svg)](https://travis-ci.org/crypto-browserify/createHash)
 
-Node style hashes for use in the browser, with native has functions in node. Api is the same as hashes in node:
+Node style hashes for use in the browser, with native hash functions in node. Api is the same as hashes in node:
 
 ```js
 var createHash = require('create-hash');

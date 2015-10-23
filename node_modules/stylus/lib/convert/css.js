@@ -1,6 +1,6 @@
 /*!
  * Stylus - CSS to Stylus conversion
- * Copyright(c) 2010 LearnBoost <dev@learnboost.com>
+ * Copyright (c) Automattic <developer.wordpress.com>
  * MIT Licensed
  */
 
@@ -137,7 +137,7 @@ Converter.prototype.visitDeclaration = function(node){
  */
 
 Converter.prototype.visitRule = function(node){
-  var buf = this.indent + node.selectors.join(',\n') + '\n';
+  var buf = this.indent + node.selectors.join(',\n' + this.indent) + '\n';
   ++this.indents;
   for (var i = 0, len = node.declarations.length; i < len; ++i) {
     buf += this.visitDeclaration(node.declarations[i]);

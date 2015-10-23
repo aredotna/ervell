@@ -53,13 +53,13 @@ setInterval(function(){
 
 #### Windows note
 
- On Windows the environment variable is set using the `set` command. 
- 
+ On Windows the environment variable is set using the `set` command.
+
  ```cmd
  set DEBUG=*,-not_this
  ```
 
-Then, run the program to be debugged as ususal.
+Then, run the program to be debugged as usual.
 
 ## Millisecond diff
 
@@ -77,7 +77,7 @@ Then, run the program to be debugged as ususal.
 
 ## Wildcards
 
-  The `*` character may be used as a wildcard. Suppose for example your library has debuggers named "connect:bodyParser", "connect:compress", "connect:session", instead of listing all three with `DEBUG=connect:bodyParser,connect.compress,connect:session`, you may simply do `DEBUG=connect:*`, or to run everything using this module simply use `DEBUG=*`.
+  The `*` character may be used as a wildcard. Suppose for example your library has debuggers named "connect:bodyParser", "connect:compress", "connect:session", instead of listing all three with `DEBUG=connect:bodyParser,connect:compress,connect:session`, you may simply do `DEBUG=connect:*`, or to run everything using this module simply use `DEBUG=*`.
 
   You can also exclude specific debuggers by prefixing them with a "-" character.  For example, `DEBUG=*,-connect:*` would include all debuggers except those starting with "connect:".
 
@@ -125,26 +125,36 @@ setInterval(function(){
 
 You can set an alternative logging method per-namespace by overriding the `log` method on a per-namespace or globally:
 
-Example _stderr.js_:
+Example _stdout.js_:
 
 ```js
-var debug = require('../');
-var log = debug('app:log');
-
-// by default console.log is used
-log('goes to stdout!');
-
+var debug = require('debug');
 var error = debug('app:error');
-// set this namespace to log via console.error
-error.log = console.error.bind(console); // don't forget to bind to console!
-error('goes to stderr');
-log('still goes to stdout!');
 
-// set all output to go via console.warn
+// by default stderr is used
+error('goes to stderr!');
+
+var log = debug('app:log');
+// set this namespace to log via console.log
+log.log = console.log.bind(console); // don't forget to bind to console!
+log('goes to stdout');
+error('still goes to stderr!');
+
+// set all output to go via console.info
 // overrides all per-namespace log settings
-debug.log = console.warn.bind(console);
-log('now goes to stderr via console.warn');
-error('still goes to stderr, but via console.warn now');
+debug.log = console.info.bind(console);
+error('now goes to stdout via console.info');
+log('still goes to stdout, but via console.info now');
+```
+
+### Save debug output to a file
+
+You can save all debug statements to a file by piping them.
+
+Example:
+
+```bash
+$ DEBUG_FD=3 node your-app.js 3> whatever.log
 ```
 
 ## Authors
