@@ -27,6 +27,7 @@ stylus = require "stylus"
 nib = require "nib"
 rupture = require 'rupture'
 artsyError = require 'artsy-error-handler'
+bucketAssets = require 'bucket-assets'
 cache = require './cache'
 
 # Inject some constant data into sharify
@@ -78,6 +79,9 @@ module.exports = (app) ->
 
   # More general middleware
   app.use express.static(path.resolve __dirname, "../public")
+
+  # Assets
+  app.use bucketAssets()
 
   # session management
   app.use logger('dev')
