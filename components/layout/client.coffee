@@ -1,7 +1,6 @@
 Backbone = require 'backbone'
 Backbone.$ = $
 sd = require('sharify').data
-ft = require('fastclick')
 Cookies = require 'cookies-js'
 _ = require 'underscore'
 km = require('../../lib/vendor/keymaster.js').noConflict()
@@ -25,8 +24,6 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  # syncAuth()
-  # setupFastClick()
   initShortCuts()
 
 setMobileClass = ->

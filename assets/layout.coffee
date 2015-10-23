@@ -7,6 +7,7 @@ require('../node_modules/jquery.finger/dist/jquery.finger.min.js')
 require('../node_modules/jquery.ui.widget/jquery.ui.widget.js')
 require('../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js')
 require('../node_modules/blueimp-file-upload/js/jquery.fileupload.js')
+require('../node_modules/dompurify/src/purify.js')
 
 $ ->
   require('../components/layout/client.coffee')()

@@ -1,7 +1,6 @@
 _ = require 'underscore'
 mediator = require '../../../lib/mediator.coffee'
 EditableAttributeView = require './editable_attribute_view.coffee'
-DOMPurify = require 'dompurify'
 md = require 'marked'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...

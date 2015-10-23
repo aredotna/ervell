@@ -5,7 +5,6 @@ Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
-DOMPurify = require 'dompurify'
 md = require 'marked'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...

@@ -1,9 +1,0 @@
-.hello {
-  background: linear-gradient(to bottom, #f8f8f8, #f4f4f4);
-  color: #f00;
-}
-@media only screen and (max-width: 600px) {
-  .hello {
-    color: #00f;
-  }
-}

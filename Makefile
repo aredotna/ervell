@@ -30,18 +30,7 @@ test: assets
 
 # Generate minified assets from the /assets folder and output it to /public.
 assets:
-	$(foreach file, $(shell find assets -name '*.coffee' | cut -d '.' -f 1), \
-		$(BIN)/browserify $(file).coffee -t jadeify -t caching-coffeeify -u config.coffee > public/$(file).js; \
-		$(BIN)/uglifyjs public/$(file).js > public/$(file).min.js; \
-		gzip -f public/$(file).min.js; \
-		mv public/$(file).min.js.gz public/$(file).min.js.cgz; \
-	)
-	$(BIN)/stylus assets -o public/assets --inline --include public/
-	$(foreach file, $(shell find assets -name '*.styl' | cut -d '.' -f 1), \
-		$(BIN)/sqwish public/$(file).css -o public/$(file).min.css; \
-		gzip -f public/$(file).min.css; \
-		mv public/$(file).min.css.gz public/$(file).min.css.cgz; \
-	)
+	$(BIN)/ezel-assets
 
 verify:
 	if [ $(shell wc -c < public/assets/root.min.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "root CSS exists" ; else echo ; echo "root CSS asset compilation failed" ; exit 1 ; fi

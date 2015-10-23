@@ -23,6 +23,7 @@
     "diacritics": "*",
     "dompurify": "^0.6.5",
     "express": "*",
+    "ezel-assets": "0.0.13",
     "feed": "^0.2.6",
     "forever": "*",
     "jade": "*",
