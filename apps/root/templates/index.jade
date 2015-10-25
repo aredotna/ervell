@@ -4,7 +4,7 @@ block vars
   - extraClasses = 'body--home'
 
 block styles
-  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'all' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
 
 block body
   .home__section.home__section--intro
@@ -60,4 +60,4 @@ block body
         a(href='#sign_up') sign up.
 
 block scripts
-  script( src=sd.ASSET_PATH + 'root' + sd.JS_EXT )
+  script( src=asset('/assets/root.js') )

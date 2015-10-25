@@ -4,7 +4,7 @@ block vars
   - extraClasses = 'no-messages body--static'
 
 block styles
-  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=asset('/assets/about.css') )
 
 block body
   .static--break
@@ -31,7 +31,7 @@ block body
   p Effective Date: July 15, 2014
 
   h1
-    ul 
+    ul
       li When It Changed Inc.
       li 26 St. James Pl #3F
       li Brooklyn, NY 11205

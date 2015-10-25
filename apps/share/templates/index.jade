@@ -4,7 +4,7 @@ block vars
   - extraClasses = 'no-header no-messages'
 
 block styles
-  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'share' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=asset('/assets/share.css') )
 
 block body
   include ./path
@@ -16,4 +16,4 @@ block body
       img(src="/images/arena-mark.svg", alt="Are.na")
 
 block scripts
-  script( src=sd.ASSET_PATH + 'share' + sd.JS_EXT )
+  script( src=asset('/assets/share.js') )
