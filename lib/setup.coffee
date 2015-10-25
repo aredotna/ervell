@@ -77,11 +77,11 @@ module.exports = (app) ->
     # Mount fake API server
     app.use "/__api", require("../test/helpers/integration.coffee").api
 
-  # More general middleware
-  app.use express.static(path.resolve __dirname, "../public")
-
   # Assets
   app.use bucketAssets()
+
+  # More general middleware
+  app.use express.static(path.resolve __dirname, "../public")
 
   # session management
   app.use logger('dev')
