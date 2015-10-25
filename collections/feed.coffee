@@ -72,7 +72,6 @@ module.exports = class Feed extends Base
     # two items when ordered by date
     splitGroups = []
     _.each groups, (group)->
-
       # Sort group by date internally
       group = _.sortBy group, (model)->
         - new Date model.created_at
