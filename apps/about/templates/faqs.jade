@@ -4,7 +4,7 @@ block vars
   - extraClasses = 'no-messages body--static'
 
 block styles
-  link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'about' + sd.CSS_EXT) )
+  link( type='text/css', rel='stylesheet', href=asset('/assets/about.css') )
 
 block body
   .static__section
@@ -79,4 +79,4 @@ block body
       .static--break
       .static--break
 block scripts
-  script( src=sd.ASSET_PATH + 'about' + sd.JS_EXT )
+  script( src=asset('/assets/about.js') )

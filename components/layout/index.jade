@@ -8,9 +8,7 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
       else if author
         |  / #{author.get('username')}
 
-    link(rel="shortcut icon" href="#{sd.IMAGE_PATH}favicon.ico" type="image/x-icon")
     include ../../components/meta/templates/meta
-
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
     block styles
 
@@ -28,7 +26,7 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
 
     #message-container
 
-    a(data-section="#")#scroll-top &uarr;
+    a#scroll-top(data-section="#") &uarr;
 
     include analytics
 

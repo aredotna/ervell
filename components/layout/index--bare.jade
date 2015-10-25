@@ -8,8 +8,7 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
       else if author
         |  / #{author.get('username')}
 
-    link(rel="shortcut icon" href="#{sd.IMAGE_PATH}favicon.ico" type="image/x-icon")
-    link( type='text/css', rel='stylesheet', href=(sd.ASSET_PATH + 'all' + sd.CSS_EXT) )
+    link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
     include ../../components/meta/templates/meta
 
     block styles
@@ -39,5 +38,5 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
       != sharify.script()
       script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )
       script( src="//js.pusher.com/2.2/pusher.min.js")
-      script( src=(sd.ASSET_PATH + 'layout' + sd.JS_EXT) )
+      script( src=asset('/assets/layout.js') )
       block scripts

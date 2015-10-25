@@ -38,10 +38,8 @@ verify:
 
 deploy: assets verify
 	ulimit -n 10000
-	$(BIN)/bucketassets -d public/assets -b ervell-production
-	heroku config:add \
-		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
-		--app=ervell
+	$(BIN)/bucket-assets --bucket ervell-$(env)
+	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
 	git push git@heroku.com:ervell.git $(branch):master -f
 
 deploy-with-images: assets verify
@@ -58,10 +56,8 @@ deploy-with-images: assets verify
 
 deploy-staging: assets verify
 	ulimit -n 10000
-	$(BIN)/bucket-assets -d public/assets -b ervell-production
-	heroku config:add \
-		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
-		--app=ervell-staging
+	$(BIN)/bucket-assets --bucket ervell-$(env)
+	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
 	git push git@heroku.com:ervell-staging.git $(branch):master -f
 
 .PHONY: test assets
