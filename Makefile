@@ -38,7 +38,7 @@ verify:
 
 deploy: assets verify
 	ulimit -n 10000
-	$(BIN)/bucket-assets --bucket ervell-$(env)
+	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
 	git push git@heroku.com:ervell.git $(branch):master -f
 
@@ -56,7 +56,7 @@ deploy-with-images: assets verify
 
 deploy-staging: assets verify
 	ulimit -n 10000
-	$(BIN)/bucket-assets --bucket ervell-$(env)
+	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
 	git push git@heroku.com:ervell-staging.git $(branch):master -f
 
