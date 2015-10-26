@@ -1145,9 +1145,9 @@
       }
     },
     "blueimp-file-upload": {
-      "version": "9.11.2",
+      "version": "9.8.0",
       "from": "blueimp-file-upload@*",
-      "resolved": "https://registry.npmjs.org/blueimp-file-upload/-/blueimp-file-upload-9.11.2.tgz"
+      "resolved": "https://registry.npmjs.org/blueimp-file-upload/-/blueimp-file-upload-9.8.0.tgz"
     },
     "body-parser": {
       "version": "1.14.1",
@@ -8695,6 +8695,33 @@
       "version": "0.0.10",
       "from": "scroll-frame@0.0.10",
       "resolved": "https://registry.npmjs.org/scroll-frame/-/scroll-frame-0.0.10.tgz"
+    },
+    "serve-favicon": {
+      "version": "2.3.0",
+      "from": "serve-favicon@",
+      "resolved": "https://registry.npmjs.org/serve-favicon/-/serve-favicon-2.3.0.tgz",
+      "dependencies": {
+        "etag": {
+          "version": "1.7.0",
+          "from": "etag@~1.7.0",
+          "resolved": "https://registry.npmjs.org/etag/-/etag-1.7.0.tgz"
+        },
+        "fresh": {
+          "version": "0.3.0",
+          "from": "fresh@0.3.0",
+          "resolved": "https://registry.npmjs.org/fresh/-/fresh-0.3.0.tgz"
+        },
+        "ms": {
+          "version": "0.7.1",
+          "from": "ms@0.7.1",
+          "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz"
+        },
+        "parseurl": {
+          "version": "1.3.0",
+          "from": "parseurl@~1.3.0",
+          "resolved": "https://registry.npmjs.org/parseurl/-/parseurl-1.3.0.tgz"
+        }
+      }
     },
     "sharify": {
       "version": "0.1.6",
