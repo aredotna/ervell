@@ -37,7 +37,6 @@ module.exports = class DropdownView extends Backbone.View
     @$el.toggleClass 'dropdown--is_active'
 
   onMouseOver: =>
-    console.log 'onMouseOver'
     $('.dropdown--is_active').removeClass 'dropdown--is_active'
     @openDropdown()
     @$('input').focus()
@@ -53,4 +52,5 @@ module.exports = class DropdownView extends Backbone.View
         @$el.has(e.target).length is 0 and
         !$(e.target).hasClass 'trigger-mediator'
       )
+        console.log 'closeDropdown'
         @closeDropdown() if @$el

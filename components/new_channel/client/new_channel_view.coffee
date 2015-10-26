@@ -11,9 +11,9 @@ template = -> require('../templates/new_channel.jade') arguments...
 module.exports = class NewChannelView extends DropdownView
 
   events:
+    'click .new-channel__done-button' : 'createChannel'
     'keyup .grid__block__editable-title' : 'onKeyUp'
     'click .metadata--selector__option' : 'toggleVisibility'
-    'click .new-channel__done-button'   : 'createChannel'
 
   initialize: (options)->
     @model = new Channel
@@ -26,7 +26,8 @@ module.exports = class NewChannelView extends DropdownView
 
     @render()
 
-    super
+    mediator.on 'search:loaded', @closeDropdown, @
+    mediator.on 'body:click', @onBodyClick, @
 
     if $('body').hasClass 'is-mobile'
       @$el.on 'tap .js-dropdown-trigger', @toggleDropdown
@@ -36,6 +37,21 @@ module.exports = class NewChannelView extends DropdownView
 
   onKeyUp: (e)->
     @model.set 'title', @$input.val()?.trim()
+
+  createChannel: (e) ->
+    console.log 'createChannel', e
+    @saving = true
+
+    @$('.grid__block').addClass 'grid__block--loading'
+    @model.unset 'user'
+
+    @model.url = "#{sd.API_URL}/channels/"
+
+    @model.save null,
+      success: =>
+        analytics.track.click "New Channel created"
+        @$('.grid__block').removeClass 'grid__block--loading'
+        document.location.href = "/#{@model.get('user').slug}/#{@model.get('slug')}"
 
   toggleVisibility: (model)->
     @$(".grid__block__inner").
@@ -54,19 +70,3 @@ module.exports = class NewChannelView extends DropdownView
     new ChannelVisibilityView
       el: @$('.grid__block__privacy--setting__inner')
       model: @model
-
-  createChannel: (e) ->
-    return if @saving
-    @saving = true
-
-    @$('.grid__block').addClass 'grid__block--loading'
-    @model.unset 'user'
-
-    @model.url = "#{sd.API_URL}/channels/"
-
-    @model.save null,
-      success: =>
-        analytics.track.click "New Channel created"
-        @$('.grid__block').removeClass 'grid__block--loading'
-        document.location.href = "/#{@model.get('user').slug}/#{@model.get('slug')}"
-

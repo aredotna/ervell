@@ -37,6 +37,7 @@
     "redis": "*",
     "s3-policy": "*",
     "scroll-frame": "0.0.10",
+    "serve-favicon": "^2.3.0",
     "sharify": "*",
     "sortablejs": "^1.1.1",
     "underscore": "*",

@@ -32,7 +32,9 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
 
     #scripts
       != sharify.script()
-      script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )
+      //- Add Google's jQuery
+      script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" )
       script( src="//js.pusher.com/2.2/pusher.min.js")
+      script( src=asset('/assets/vendor.js') )
       script( src=asset('/assets/layout.js') )
       block scripts

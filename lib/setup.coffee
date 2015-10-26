@@ -29,6 +29,7 @@ rupture = require 'rupture'
 artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
 cache = require './cache'
+favicon = require 'serve-favicon'
 
 # Inject some constant data into sharify
 sharify.data =
@@ -82,6 +83,7 @@ module.exports = (app) ->
 
   # More general middleware
   app.use express.static(path.resolve __dirname, "../public")
+  app.use favicon(path.resolve __dirname, '../public/images/favicon.ico')
 
   # session management
   app.use logger('dev')

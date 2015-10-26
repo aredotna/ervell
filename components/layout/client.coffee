@@ -135,8 +135,6 @@ setupAnalytics = ->
     else
       'Visited logged out'
 
-setupFastClick = -> ft document.body, {}
-
 initShortCuts = ->
   km 'right', -> mediator.trigger 'lightbox:slide:next'
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'

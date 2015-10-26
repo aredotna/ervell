@@ -46,6 +46,8 @@ module.exports = class BlockSkeletonView extends Backbone.View
 
   addWaypoints: ->
     sel = '.grid__block'
+    @addPage 0
+    @addPage 1
     @$("#{sel}:nth-child(#{@collection.options.per}n)").not('.grid__block--new-block').each (i, el)=>
       unless $(el).is(@$("#{sel}:last"))
         @addPage i+2
@@ -106,7 +108,7 @@ module.exports = class BlockSkeletonView extends Backbone.View
     @startLoad()
 
   cancelStaleRequests: ->
-    _.each @pages, (page) =>
+    for page, key in @pages
       if page.loading and not _.include(@queue, page.num)
         @cancelRequest(page.num)
 
