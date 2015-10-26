@@ -47,6 +47,8 @@ _ = require 'underscore'
 
   blocks.fetch
     cache: true
+    data:
+      auth_token: req.user?.get('authentication_token')
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWERS = blocks.toJSON()
@@ -67,6 +69,8 @@ _ = require 'underscore'
 
   blocks.fetch
     cache: true
+    data:
+      auth_token: req.user?.get('authentication_token')
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWING = blocks.toJSON()
