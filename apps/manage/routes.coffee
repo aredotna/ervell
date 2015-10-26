@@ -12,6 +12,8 @@ ManageBlocks = require "../../collections/manage_blocks"
   res.locals.sd.USER = req.user.toJSON()
 
   blocks.fetch
+    data:
+      auth_token: req.user?.get('authentication_token')
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render 'index',

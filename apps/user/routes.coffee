@@ -29,6 +29,8 @@ _ = require 'underscore'
     res.locals.sd.SUBJECT = req.query.subject
 
   blocks.fetch
+    data:
+      auth_token: req.user?.get('authentication_token')
     error: (m, err) -> next err
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()

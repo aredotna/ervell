@@ -20,6 +20,8 @@ _ = require 'underscore'
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
   channel.fetch
+    data:
+      auth_token: req.user?.get('authentication_token')
     success: ->
       return res.redirect 301, "/#{channel.get('slug')}" if channel.get('class') is 'User'
       blocks.add channel.get 'contents'

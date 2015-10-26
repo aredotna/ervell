@@ -37,7 +37,6 @@ verify:
 	if [ $(shell wc -c < public/assets/root.js.jgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "root JS exists" ; else echo; echo "root JS asset compilation failed" ; exit 1 ; fi
 
 deploy: assets verify
-	ulimit -n 10000
 	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
 	git push git@heroku.com:ervell.git $(branch):master -f
@@ -55,7 +54,6 @@ deploy-with-images: assets verify
 	git push git@heroku.com:ervell.git $(branch):master
 
 deploy-staging: assets verify
-	ulimit -n 10000
 	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
 	git push git@heroku.com:ervell-staging.git $(branch):master -f
