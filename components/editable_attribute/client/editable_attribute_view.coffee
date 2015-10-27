@@ -8,8 +8,6 @@ analytics = require '../../../lib/analytics.coffee'
 md = require 'marked'
 DOMPurify = require 'dompurify'
 
-attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
-
 module.exports = class EditableAttributeView extends Backbone.View
   wait: false
 
@@ -46,14 +44,19 @@ module.exports = class EditableAttributeView extends Backbone.View
     @$el.removeClass('is-editing')
 
   render: ->
-    @$el.html(attributeTemplate
-      id: @model.id
-      attribute: @_attribute
-      kind: @_kind
-      value: @model.get @_attribute
-      md: md
-      canEdit: _s.contains @model.getPermissions(@currentUser), 'can-edit'
-    ).addClass @className()
+    @$el.html(@getTemplate @getRenderData())
+      .addClass @className()
+
+  getTemplate: ->
+    require('../templates/editable_attribute.jade') arguments...
+
+  getRenderData: ->
+    id: @model.id
+    attribute: @_attribute
+    kind: @_kind
+    value: @model.get @_attribute,
+    value_html: @_kind == 'markdown' && md(@model.get @_attribute)
+    canEdit: _s.contains @model.getPermissions(@currentUser), 'can-edit'
 
   showMarkdownHelp: ->
     console.log 'nothing for now'

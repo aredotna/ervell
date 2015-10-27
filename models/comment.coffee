@@ -1,10 +1,11 @@
 #
 # Model for a comment
 #
-
+DOMPurify = require 'dompurify'
 Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
+config = require '../config.coffee'
 
 module.exports = class Comment extends Base
 
@@ -16,6 +17,23 @@ module.exports = class Comment extends Base
   sync: (method, model, options)->
     model.set('body', '[deleted]') if model.get('body') is ''
     super
+
+  getHtml: ->
+    text = @get('body')
+    entities = @get('entities')
+    return DOMPurify.sanitize(text) unless entities and entities.length
+
+    html = ""
+    lastPosition = 0
+
+    for entity in entities
+      if entity.type == 'user'
+        html = html + text.slice(lastPosition, entity.start) +
+          "<a href=\"#{config.APP_URL}/#{entity.user_slug}\">@#{entity.user_name}</a>"
+        lastPosition = entity.end
+
+    html += text.slice(lastPosition)
+    DOMPurify.sanitize(html)
 
   getPermissions: (user)->
     return "" unless @has('user') and user?

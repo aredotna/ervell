@@ -3,5 +3,5 @@ h2.feed-group__sentence.is_comment
     a(href="/#{comment.get('user').slug}" class="username")=comment.get('user').username
     span :
     span &nbsp;
-  .feed-group__sentence__comment=comment.get('body')
+  .feed-group__sentence__comment!=comment.getHtml()
   .feed-group__timestamp=comment.createdAtAgo()

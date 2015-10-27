@@ -1,6 +1,7 @@
 Base = require("./base.coffee")
 FeedItem = require '../models/feed_item.coffee'
 Block = require '../models/block.coffee'
+Comment = require '../models/comment.coffee'
 Channel = require '../models/channel.coffee'
 _ = require 'underscore'
 _s = require 'underscore.string'
@@ -66,7 +67,7 @@ module.exports = class FeedGroup extends Base
     if @first_item()?.username?
       @first_item()?.username
     else if @is_comment()
-      "#{@first_item()?.body}"
+      "#{new Comment(@first_item(), { block_id: @first_item.commentable_id}).getHtml()}"
     else if @first_item()?.class is "Channel"
       @first_item()?.title
     else

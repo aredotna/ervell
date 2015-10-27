@@ -2,8 +2,8 @@
 
 div(id="#{attribute}_display_#{id}" class="attr-value")
   if value
-    if kind == 'markdown'
-      != md(value)
+    if value_html
+      != value_html
     else
       = value
   else if canEdit
