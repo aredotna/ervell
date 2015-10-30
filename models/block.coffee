@@ -7,6 +7,8 @@ sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
 moment = require 'moment'
+parseDomain = require 'parse-domain'
+Blocks = require '../collections/blocks.coffee'
 
 module.exports = class Block extends Base
 
@@ -40,15 +42,13 @@ module.exports = class Block extends Base
   contentOrDescription: ->
     @get('content') || @get('description')
 
+  connections: ->
+    _.map @get('connections'), (connection) -> new Block connection
+
   getSourceUrl: ->
     @get('source')?.url || @get('attachment')?.url || @getImageSize('original')
 
   resizeImage: (width = 330, height = 330, source = 'display')->
-    # ignore gifs
-    # if @getImageSize('display').split('.').pop() == 'gif'
-    #   @getImageSize('display')
-    # else
-    #   "#{sd.IMAGE_PROXY_URL}/resize/#{width}/#{height}/#{encodeURIComponent(@getImageSize(source))}"
     @getImageSize source
 
   getImageSize: (size) ->
