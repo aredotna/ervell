@@ -32,6 +32,7 @@
     "jquery.ui.widget": "*",
     "marked": "^0.3.3",
     "moment": "*",
+    "parse-domain": "^0.2.0",
     "q": "*",
     "query-params": "*",
     "redis": "*",
@@ -46,7 +47,7 @@
   },
   "devDependencies": {
     "jquery": "*",
-    "browserify": "*",
+    "browserify": "11.2.0",
     "stylus": "*",
     "jadeify": "*",
     "browserify-dev-middleware": "*",
