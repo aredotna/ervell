@@ -140,6 +140,7 @@ module.exports = (app) ->
   app.use require "../apps/share"
   app.use require "../apps/save"
   app.use require "../apps/user"
+  app.use require "../apps/block"
   app.use require "../apps/channel"
   app.use require "../apps/rss"
 

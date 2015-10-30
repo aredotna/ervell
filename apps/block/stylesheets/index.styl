@@ -1,0 +1,72 @@
+.block-container
+  // nothing
+
+.block-content
+  position absolute
+  top 0
+  left 0
+  height 100%
+  width 100%
+
+.block-img
+  img
+    max-height 80vh
+    width auto
+
+.block-description
+  p()
+  margin-top unit * 2
+  padding 0 (unit * 2)
+
+.block-meta
+  margin-top unit * 3
+  > a
+    font-weight bold
+
+.block-text
+  p()
+  background-color #fff
+  border 1px solid bordergray
+  width 40%
+  margin 0 auto
+  overflow-x auto
+  padding unit * 2
+  text-align left
+  max-height 70vh
+
+.block-text, .block-description
+  > p
+    p()
+    margin-top unit
+
+  a
+    font-weight bold
+
+  > h1, h2, h3, h4, h5, pre
+    margin-bottom unit
+
+
+.block-date
+  p()
+  font-style italic
+  font-size 0.8rem
+  padding-right (unit * 2)
+  text-align right
+  > a
+    font-weight bold
+
+.tab--container--block
+  position absolute
+  top 100%
+  width 100%
+  margin-top -50px
+
+  .tab--container__nav
+    border-bottom 1px solid bordergray
+
+  .tab--container__nav__item
+    padding 0 unit
+
+  .tab-content
+    width 60%
+    margin unit auto
