@@ -12,19 +12,24 @@
       if block.get('class') == 'Text'
         .block-text(id="attribute-content_#{block.id}")!= md(block.get('content'))
 
+      .block-arrow.block-arrow--right.v-outer(data-direction="next"): .v-inner
+        img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-sm")
+      .block-arrow.block-arrow--left.v-outer(data-direction="prev"): .v-inner
+        img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-sm")
+
 
   .tab--container.tab--container--block
     ul.tab--container__nav
-      li.tab--container__nav__item.is-active
+      li.tab--container__nav__item.is-active(data-tab="info")
         h5: a(href="/#") Info
-      li.tab--container__nav__item
+      li.tab--container__nav__item(data-tab="connections")
         h5: a(href="/#") #{block.get('connections').length} Connections
-      li.tab--container__nav__item
+      li.tab--container__nav__item(data-tab="comments")
         h5: a(href="/#") #{block.get('comment_count')} Comments
 
     #tab-info.tab-content.is-active
       h2.block-title.center(id="attribute-title_#{block.id}")= block.get('title')
-      .block-description(id="attribute-description_#{block.id}")!= md(block.get('description'))
+      .block-description(id="attribute-description_#{block.id}")!= block.get('description')
 
       .block-meta.center
         if block && (block.has('source') || block.has('image'))
@@ -45,7 +50,11 @@
         include ../../../components/list_view/templates/_channel
 
     #tab-comments.tab-content
-      h3.block-title.center #{block.get('title')}
+      for comment in comments.models
+        include ../../../components/comments/templates/_comment
+
+      .block-new-comment-container.center
+        include ../../../components/new_comment/templates/new_comment
 
 
 

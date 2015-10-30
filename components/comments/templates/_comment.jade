@@ -1,0 +1,4 @@
+.comment
+  span.comment-user #{comment.get('user').username}
+  span.comment-date-time #{comment.updatedAtAgo()}
+  .comment-body!= md(comment.getHtml())

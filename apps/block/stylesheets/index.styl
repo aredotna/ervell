@@ -23,17 +23,6 @@
   > a
     font-weight bold
 
-.block-text
-  p()
-  background-color #fff
-  border 1px solid bordergray
-  width 40%
-  margin 0 auto
-  overflow-x auto
-  padding unit * 2
-  text-align left
-  max-height 70vh
-
 .block-text, .block-description
   > p
     p()
@@ -45,6 +34,31 @@
   > h1, h2, h3, h4, h5, pre
     margin-bottom unit
 
+.block-text
+  p()
+  background-color #fff
+  border 1px solid bordergray
+  width 60%
+  margin 0 auto
+  overflow-x auto
+  padding unit * 2
+  text-align left
+  max-height 70vh
+  font-size 1.1rem
+  line-height 1.7em
+
+  > p
+    font-size 1.1rem
+    line-height 1.7em
+
+    &:first-child
+      margin-top 0
+
+    &:last-child
+      margin-bottom 0
+
+  > ul
+    ul: 'square'
 
 .block-date
   p()
@@ -54,6 +68,20 @@
   text-align right
   > a
     font-weight bold
+
+.block-arrow
+  position absolute
+  top 0
+  cursor pointer
+  height 100vh
+  width 20vw
+  opacity 0
+
+  &:hover
+    opacity 1
+
+.block-arrow--right
+  right 0
 
 .tab--container--block
   position absolute
@@ -70,3 +98,6 @@
   .tab-content
     width 60%
     margin unit auto
+
+.block-new-comment-container
+  margin-top unit * 2
