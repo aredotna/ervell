@@ -13,9 +13,8 @@ module.exports = class Comments extends Base
 
   url: -> "#{sd.API_URL}/blocks/#{@block.id}/comments"
 
-  initialize: (models, options)->
+  initialize: (models, {@block})->
     super
-    @block = options.block
 
   comparator: (comment)->
     new Date(comment.get('created_at')).valueOf()
