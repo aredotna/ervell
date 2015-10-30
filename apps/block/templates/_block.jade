@@ -50,11 +50,12 @@
         include ../../../components/list_view/templates/_channel
 
     #tab-comments.tab-content
-      for comment in comments.models
-        include ../../../components/comments/templates/_comment
+      if comments
+        for comment in comments.models
+          include ../../../components/comments/templates/_comment
 
-      .block-new-comment-container.center
-        include ../../../components/new_comment/templates/new_comment
+        .block-new-comment-container.center
+          include ../../../components/new_comment/templates/new_comment
 
 
 
