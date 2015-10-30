@@ -8,7 +8,6 @@ _ = require 'underscore'
 _s = require 'underscore.string'
 moment = require 'moment'
 parseDomain = require 'parse-domain'
-Blocks = require '../collections/blocks.coffee'
 
 module.exports = class Block extends Base
 

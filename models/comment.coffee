@@ -21,7 +21,7 @@ module.exports = class Comment extends Base
   getHtml: ->
     text = @get('body')
     entities = @get('entities')
-    return DOMPurify.sanitize(text) unless entities and entities.length
+    return text unless entities and entities.length
 
     html = ""
     lastPosition = 0
@@ -33,7 +33,8 @@ module.exports = class Comment extends Base
         lastPosition = entity.end
 
     html += text.slice(lastPosition)
-    DOMPurify.sanitize(html)
+    # DOMPurify.sanitize(html, {KEEP_CONTENT: false})
+    html
 
   getPermissions: (user)->
     return "" unless @has('user') and user?
