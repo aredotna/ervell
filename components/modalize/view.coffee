@@ -6,7 +6,7 @@ Scrollbar = require '../scrollbar/index.coffee'
 module.exports = class Modalize extends Backbone.View
   className: 'modalize'
 
-  defaults: dimensions: width: '400px'
+  defaults: dimensions: width: '100%'
 
   events:
     'click .js-modalize-backdrop': 'maybeClose'
@@ -18,20 +18,15 @@ module.exports = class Modalize extends Backbone.View
     $(window).on 'keyup.modalize', @escape
 
   state: (state, callback = $.noop) -> _.defer =>
-    @$el
-      .attr 'data-state', state
-      .one $.support.transition.end, callback
-      .emulateTransitionEnd 250
+    @$el.attr 'data-state', state
+    callback()
 
   dialog: (state, callback = $.noop) ->
     duration = {
       slide: 500, fade: 250
     }[state.replace /-in|-out$/, '']
 
-    @$dialog
-      .attr 'data-state', state
-      .one $.support.transition.end, callback
-      .emulateTransitionEnd duration
+    @$dialog.attr 'data-state', state
 
   __render__: ->
     @$el.html template()

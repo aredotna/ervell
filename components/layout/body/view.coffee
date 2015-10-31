@@ -29,7 +29,7 @@ module.exports = class BodyView extends Backbone.View
     current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
 
     new LightboxRouter
-    Backbone.history.start pushState: false, root: current_path
+    Backbone.history.start pushState: true
 
     if sd.CLIENT_PATH
       Backbone.history.navigate sd.CLIENT_PATH, trigger: true, replace: false
@@ -71,14 +71,14 @@ module.exports = class BodyView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
 
-    isBlock = $(e.currentTarget).data('client') is 'Block'
+    clientRoute = $(e.currentTarget).data('client')
     url = $(e.currentTarget).attr('href')
 
     if e.metaKey || e.ctrlKey
-      url = url.replace(/^\//, '/#') if isBlock
+      url = url.replace(/^\//, '/#') if clientRoute
       return window.open(url, '_blank')
 
-    if isBlock
+    if clientRoute and clientRoute isnt 'Channel'
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
       window.location = url
@@ -105,7 +105,6 @@ module.exports = class BodyView extends Backbone.View
       window.location = href
 
   triggerReflow: =>
-    console.log 'triggerReflow'
     top = $(window).scrollTop()
     $('body').css display: 'none'
     $('body').offset().height

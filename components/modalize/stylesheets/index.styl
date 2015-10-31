@@ -1,7 +1,5 @@
-@require '../../stylus_lib'
-
 .modalize
-  z-index zindex-modal
+  z-index modal_z
   transition opacity 0.25s
   opacity 0
 
@@ -18,7 +16,7 @@
     .modalize-backdrop::before
       display block
       content ''
-      spinner(20px, 5px, white)
+      // spinner(20px, 5px, white)
 
     .modalize-dialog
       opacity 0
@@ -34,7 +32,7 @@
 .modalize-backdrop
   display flex
   align-items center
-  background-color rgba(black, 0.75)
+  background-color rgba(white, 0.75)
 
 .has-nobackdrop > .modalize-backdrop
   background-color transparent
@@ -42,8 +40,8 @@
 .modalize-dialog
   position relative
   margin 0 auto
-  max-width 90%
-  max-height 90%
+  width 100%
+  height 100%
   text-align left
   overflow-y auto
   -webkit-overflow-scrolling touch

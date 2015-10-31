@@ -7,7 +7,7 @@ header#layout-header
   unless user && user.has('username')
     .layout-header__register
       span.layout-header__login
-        a(href="#log_in").btn-login Login &nbsp;
+        span(data-client="auth" href="/log_in").btn-login Login &nbsp;
       span.layout-header__or or &nbsp;
       span
-        a(href="#sign_up").btn-signup Sign up
+        span(data-client="auth" href="/sign_up").btn-signup Sign up

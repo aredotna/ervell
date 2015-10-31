@@ -9,7 +9,7 @@ header#layout-header
   else
     .layout-header__register
       span
-        a(href="#log_in").btn-login Login &nbsp;
+        span(data-client="auth" href="/log_in").btn-login Login &nbsp;
       span or &nbsp;
       span
-        a(href="#sign_up").btn-signup Sign up
+        span(data-client="auth" href="/#sign_up").btn-signup Sign up
