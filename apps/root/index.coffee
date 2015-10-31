@@ -11,5 +11,7 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 app.get "/", auth, routes.index
+app.get "/log_in", routes.index
+app.get "/sign_up", routes.index
 app.get "/notifications", auth, routes.notifications
 app.get "/explore", auth, routes.explore

@@ -11,7 +11,13 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
   events:
     'click .tab--container__nav__item' : 'toggleTab'
 
-  toggleTabs: (e)->
+  initialize: ->
+    @comments = new Comments [], block: @model
+    @comments.on 'sync', @render, @
+
+    @comments.fetch()
+
+  toggleTab: (e)->
     e.preventDefault()
 
     $('.tab--container__nav__item.is-active, .tab-content.is-active').removeClass 'is-active'
@@ -20,7 +26,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     $("#tab-#{tab}").addClass 'is-active'
 
   render: ->
-    @$el.html template block: @model
+    @$el.html template block: @model, md: markdown, comments: @comments
 
     @postRender()
 
@@ -34,4 +40,4 @@ module.exports.init = ->
 
   new FullBlockView
     model: block
-    el: $(".container")
+    $el: $(".container")

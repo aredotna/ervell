@@ -13,8 +13,8 @@ block body
         include ../../../public/images/feynman-arena.svg
       h1 Fig.1 Forgotten facts can be recreated by triangulating from known facts
       .home__section--intro__inner__buttons
-        a.intro__button(href="#sign_up") Sign up
-        a.intro__button(href="#log_in")  Login
+        span.intro__button(data-client="auth" href="/sign_up") Sign up
+        span.intro__button(data-client="auth" href="/log_in")  Login
         a.intro__button(href="/about") About
       img(
         data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
@@ -57,7 +57,7 @@ block body
       h1
         a(href='/about') Learn more
         |  about Are.na or&nbsp;
-        a(href='#sign_up') sign up.
+        a(href='/sign_up') sign up.
 
 block scripts
   script( src=asset('/assets/root.js') )
