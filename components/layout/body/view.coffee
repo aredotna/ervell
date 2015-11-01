@@ -4,7 +4,7 @@ Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 PathView = require '../../path/client/path_view.coffee'
-LightboxRouter = require '../../lightbox/lightbox_router.coffee'
+Router = require '../router.coffee'
 
 module.exports = class BodyView extends Backbone.View
 
@@ -26,13 +26,8 @@ module.exports = class BodyView extends Backbone.View
     'tap #scroll-top'                             : 'scrollToTop'
 
   initialize: (options) ->
-    current_path = sd.CURRENT_PATH?.replace sd.CLIENT_PATH, ""
-
-    new LightboxRouter
+    new Router
     Backbone.history.start pushState: true
-
-    if sd.CLIENT_PATH
-      Backbone.history.navigate sd.CLIENT_PATH, trigger: true, replace: false
 
     mediator.on 'load:start', @startLoading, @
     mediator.on 'load:stop', @stopLoading, @
@@ -75,10 +70,9 @@ module.exports = class BodyView extends Backbone.View
     url = $(e.currentTarget).attr('href')
 
     if e.metaKey || e.ctrlKey
-      url = url.replace(/^\//, '/#') if clientRoute
       return window.open(url, '_blank')
 
-    if clientRoute and clientRoute isnt 'Channel'
+    if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User'
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
       window.location = url

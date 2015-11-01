@@ -5,7 +5,6 @@ Cookies = require 'cookies-js'
 _ = require 'underscore'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
-AuthRouter = require '../auth_modal/auth_router.coffee'
 MessageView = require '../message/client/message_view.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 NewChannelView = require '../new_channel/client/new_channel_view.coffee'
@@ -89,9 +88,6 @@ setupPusherAndCurrentUser = ->
         mediator.trigger 'current_user:fetched'
         ensureFreshUser response.user
         showNewUserMessages() if user.get('show_tour')
-
-  if !user.id
-    new AuthRouter pushState: false
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
 
