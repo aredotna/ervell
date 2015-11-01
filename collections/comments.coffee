@@ -13,7 +13,7 @@ module.exports = class Comments extends Base
 
   url: -> "#{sd.API_URL}/blocks/#{@block.id}/comments"
 
-  initialize: (models, {@block})->
+  initialize: (models, { @block })->
     super
 
   comparator: (comment)->

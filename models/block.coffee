@@ -98,3 +98,5 @@ module.exports = class Block extends Base
     else
       "/block/#{@id}"
 
+  href: -> @getHref()
+

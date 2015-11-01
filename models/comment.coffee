@@ -5,13 +5,17 @@ DOMPurify = require 'dompurify'
 Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
+_s = require 'underscore.string'
 config = require '../config.coffee'
 
 module.exports = class Comment extends Base
 
-  urlRoot: -> "#{sd.API_URL}/blocks/#{@block_id}/comments"
+  urlRoot: -> "#{sd.API_URL}/blocks/#{@blockId()}/comments"
 
-  initialize: (attrs, {@block_id})->
+  blockId: ->
+    @block_id or @collection.block.id
+
+  initialize: (attrs, { @block_id })->
     super
 
   sync: (method, model, options)->
@@ -33,7 +37,7 @@ module.exports = class Comment extends Base
         lastPosition = entity.end
 
     html += text.slice(lastPosition)
-    # DOMPurify.sanitize(html, {KEEP_CONTENT: false})
+    DOMPurify.sanitize(html, {KEEP_CONTENT: false})
     html
 
   getPermissions: (user)->
@@ -45,10 +49,10 @@ module.exports = class Comment extends Base
     if @belongsToCurrentUser(user)
       permissions.push 'can-edit'
 
-    (_.uniq permissions)
+    (_.uniq permissions).join ' '
 
   belongsToCurrentUser: (user)->
     @get('user').id is user.id
 
   allows: (permission, user) ->
-    _.include @getPermissions(user), permission
+    _s.include @getPermissions(user), permission
