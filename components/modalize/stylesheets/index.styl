@@ -45,24 +45,24 @@
   text-align left
   overflow-y auto
   -webkit-overflow-scrolling touch
-  background-color white
+  background-color rgba(white, 0.75)
   &.is-notransition
     transition none !important
 
 .modalize-close
   position absolute
-  top 25px
-  right 25px
+  top 50px
+  right 50px
   cursor pointer
   transition opacity 0.25s
-  opacity 0.15
+  opacity 0.45
   z-index 2
   prevent-content-shift()
   &:hover
     opacity 1
-  > i
-    font-size 26px
-    line-height @font-size
+  .iconic-sm:before
+    font-weight 400
+    font-size 26px !important
 
 .modalize-body
   height 100%
