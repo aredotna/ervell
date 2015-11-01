@@ -2,7 +2,7 @@
 
 div(id="#{attribute}_display_#{id}" class="attr-value")
   if value
-    if value_html
+    if kind == 'markdown'
       != value_html
     else
       = value

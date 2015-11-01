@@ -1,8 +1,15 @@
 .list-item
   height 50px
   width 100%
-  line-height 50px
-  margin unit 0
   padding (unit / 2)
+  display table-cell
+  vertical-align middle
+
+.list-item-inner
+  display flex
+
+.list-item-cell
+  flex 1
+  vertical-align middle
 
 @import '_channel'

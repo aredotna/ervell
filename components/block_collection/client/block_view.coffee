@@ -3,7 +3,6 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 ConnectView = require '../../connect/client/connect_view.coffee'
-LightboxView = require '../../lightbox/client/lightbox_view.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../follow_button/client/follow_button_view.coffee'
 User = require '../../../models/user.coffee'

@@ -54,8 +54,8 @@ module.exports = class EditableAttributeView extends Backbone.View
     id: @model.id
     attribute: @_attribute
     kind: @_kind
-    value: @model.get @_attribute,
-    value_html: @_kind == 'markdown' && md(@model.get @_attribute)
+    value: @model.get @_attribute
+    value_html: @model.has(@_attribute) && md(@model.get(@_attribute))
     canEdit: _s.contains @model.getPermissions(@currentUser), 'can-edit'
 
   showMarkdownHelp: ->
