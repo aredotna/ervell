@@ -13,16 +13,18 @@ module.exports = class NewCommentView extends Backbone.View
 
   events:
     'click .new-comment__submit': 'addComment'
+    'click' : 'checkClick'
 
   initialize: (options)->
-    @block_id = options.block_id
-    @render() if options.autoRender
+    { @block_id, @comments, @autoRender } = options
+    @render() if @autoRender
 
     @quicksearch = new MentionQuicksearchView
       container: @$el,
       input: @$('.new-comment__field')
 
-  fieldIsEmpty: -> @$input.val() is ""
+  fieldIsEmpty: ->
+    @$input.val() is ""
 
   addComment: ->
     if not @fieldIsEmpty()
@@ -36,13 +38,14 @@ module.exports = class NewCommentView extends Backbone.View
 
       @$input.attr "disabled", "disabled"
 
+      @comments.add comment
+
       comment.save {},
         success: =>
           analytics.track.click "Comment added"
           @$input.removeAttr 'disabled'
           @$input.val ""
-          mediator.trigger 'new:comment', comment
 
   render: ->
     @$el.html newCommentTemplate()
-    @$input = @$('textarea.new-comment__field')
+    @$input = @$('input.new-comment__field')

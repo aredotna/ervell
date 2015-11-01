@@ -1,4 +1,6 @@
 .comment
   span.comment-user #{comment.get('user').username}
-  span.comment-date-time #{comment.updatedAtAgo()}
-  .comment-body!= md(comment.getHtml())
+  span.comment-date-time #{comment.createdAtAgo()}
+  if comment.createdAtAgo() != comment.updatedAtAgo()
+    span.comment-edited-date-time Edited #{comment.updatedAtAgo()}
+  .comment-body(id="attribute-body_#{comment.id}")= comment.get('body')

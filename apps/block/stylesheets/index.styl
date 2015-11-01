@@ -12,11 +12,7 @@
   img
     max-height 80vh
     width auto
-
-.block-description
-  p()
-  margin-top unit * 2
-  padding 0 (unit * 2)
+    max-width 80vw
 
 .block-meta
   margin-top unit * 3
@@ -39,6 +35,7 @@
   background-color #fff
   border 1px solid bordergray
   width 60%
+  height auto
   margin 0 auto
   overflow-x auto
   padding unit * 2
@@ -59,6 +56,10 @@
 
   > ul
     ul: 'square'
+
+  > form textarea
+    resize vertical
+    padding unit * 2
 
 .block-date
   p()
@@ -96,8 +97,30 @@
     padding 0 unit
 
   .tab-content
+    background-color white
+
+  .tab-content__inner
     width 60%
     margin unit auto
+
+.block-connection-outer
+  display table
+  width 100%
+  margin-bottom unit
+
+#tab-info
+  .block-title
+    display block
+    > form input
+      text-align center
+
+  .block-description
+    p()
+    display block
+    margin (unit * 2) auto 0
+    width 80%
+    p
+      p()
 
 .block-new-comment-container
   margin-top unit * 2
