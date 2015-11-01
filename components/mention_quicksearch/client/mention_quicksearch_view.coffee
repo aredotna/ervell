@@ -1,3 +1,4 @@
+_ = require 'underscore'
 Backbone = require 'backbone'
 Backbone.$ = $
 sd = require('sharify').data
@@ -41,11 +42,10 @@ module.exports = class MentionQuicksearchView extends Backbone.View
 
   onFocus: =>
     @active = true
-    @setState()
     @setVisibility()
 
   onBlur: (e)=>
-    @active = false
+    @active = true
     @setVisibility()
 
   onKeyDown: (e) =>
@@ -82,6 +82,8 @@ module.exports = class MentionQuicksearchView extends Backbone.View
     else if e.keyCode == 40
       if highlighted.length
         next = highlighted.next()
+      else
+        next = @$el.find(highlightableSelector + ':first')
 
     if next?.length
       highlighted.removeClass('is-highlighted')
@@ -92,10 +94,10 @@ module.exports = class MentionQuicksearchView extends Backbone.View
     { start, end } = @workingToken
     text = @$input.val()
     newText = text.slice(0, start + 1) + slug + text.slice(end)
-    caretPosition = start + 1 + slug.length
+    caretPosition = start + 2 + slug.length
 
     @$el.hide()
-    @$input.val(newText)
+    @$input.val(newText + " ")
     @$input[0].setSelectionRange(caretPosition, caretPosition)
 
   extractWorkingToken: =>
@@ -160,6 +162,7 @@ module.exports = class MentionQuicksearchView extends Backbone.View
   setVisibility: =>
     if @isVisible()
       @$el.show()
+      _.defer => @$('.mention-quicksearch__user:first').addClass 'is-highlighted'
     else
       @$el.hide()
 
