@@ -1,7 +1,6 @@
 #
 # Model for a comment
 #
-DOMPurify = require 'dompurify'
 Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
@@ -37,7 +36,6 @@ module.exports = class Comment extends Base
         lastPosition = entity.end
 
     html += text.slice(lastPosition)
-    DOMPurify.sanitize(html, {KEEP_CONTENT: false})
     html
 
   getPermissions: (user)->
