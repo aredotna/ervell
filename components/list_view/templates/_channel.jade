@@ -4,6 +4,6 @@
       a(href="#{channel.href()}")= channel.get('title')
       span.list-item__channel__block-count &nbsp;(#{channel.get('length')})
 
-    .list-item-cell #{channel.get('user').username}
-    .list-item-cell #{channel.updatedAtAgo()}
-    .list-item-cell Connect &rarr;
+    .list-item-cell: a(href="/#{channel.get('user').slug}") #{channel.get('user').username}
+    .list-item-cell Last updated #{channel.updatedAtAgo()}
+    //- .list-item-cell Connect &rarr;
