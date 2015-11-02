@@ -19,8 +19,10 @@ module.exports = class FeedGroup extends Base
   first_item: -> @models[0].get('item')
 
   items: -> @map (model)->
-    if model.get('item')?.class is 'Comment'
+    if model.get('action') is 'commented on'
       block = new Block model.get('target')
+    else if model.get('action') is 'mentioned you'
+      block = new Block model.get('parent')
     else
       block = new Block model.get('item')
 
@@ -67,7 +69,7 @@ module.exports = class FeedGroup extends Base
     if @first_item()?.username?
       @first_item()?.username
     else if @is_comment()
-      "#{new Comment(@first_item(), { block_id: @first_item.commentable_id}).getHtml()}"
+      "#{new Comment(@first_item(), { block_id: @first_item.commentable_id}).getHTML()}"
     else if @first_item()?.class is "Channel"
       @first_item()?.title
     else
