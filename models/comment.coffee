@@ -21,7 +21,7 @@ module.exports = class Comment extends Base
     model.set('body', '[deleted]') if model.get('body') is ''
     super
 
-  getMarkdown: ->
+  getHTML: ->
     text = @get('body')
     entities = @get('entities')
     return text unless entities and entities.length
@@ -32,7 +32,7 @@ module.exports = class Comment extends Base
     for entity in entities
       if entity.type == 'user'
         html = html + text.slice(lastPosition, entity.start) +
-          "[/@#{entity.user_name}](/#{entity.user_slug})"
+          "<a href=\"/#{entity.user_slug}\">@#{entity.user_name}</a>"
         lastPosition = entity.end
 
     html += text.slice(lastPosition)

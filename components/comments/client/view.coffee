@@ -2,7 +2,7 @@ sd = require('sharify').data
 Backbone = require 'backbone'
 markdown = require 'marked'
 mediator = require '../../../lib/mediator.coffee'
-EditableAttributeView = require '../../editable_attribute/client/editable_attribute_view.coffee'
+CommentEditableAttributeView = require '../../editable_attribute/client/comment_editable_attribute_view.coffee'
 
 template =-> require('../templates/index.jade') arguments...
 
@@ -23,7 +23,7 @@ module.exports = class CommentsView extends Backbone.View
   postRender: ->
     # editable attribute
     @collection.each (comment) =>
-      new EditableAttributeView
+      new CommentEditableAttributeView
         model: comment
         el: @$("#attribute-body_#{comment.id}")
         _attribute: 'body'

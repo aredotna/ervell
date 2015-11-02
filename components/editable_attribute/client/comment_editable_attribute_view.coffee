@@ -24,4 +24,4 @@ module.exports = class CommentEditableAttributeView extends EditableAttributeVie
 
   getRenderData: ->
     _.extend super,
-      value_html: md(@model.getHtml())
+      value_html: md(@model.getHTML())

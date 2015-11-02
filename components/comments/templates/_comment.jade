@@ -3,4 +3,4 @@
   span.comment-date-time #{comment.createdAtAgo()}
   if comment.createdAtAgo() != comment.updatedAtAgo()
     span.comment-edited-date-time Edited #{comment.updatedAtAgo()}
-  .comment-body(id="attribute-body_#{comment.id}")= comment.getMarkdown()
+  .comment-body(id="attribute-body_#{comment.id}")= comment.getHTML()
