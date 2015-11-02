@@ -2,6 +2,7 @@ _ = require 'underscore'
 mediator = require '../../../lib/mediator.coffee'
 EditableAttributeView = require './editable_attribute_view.coffee'
 md = require 'marked'
+DOMPurify = require 'dompurify'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
 
@@ -16,6 +17,7 @@ module.exports = class MetaEditableAttributeView extends EditableAttributeView
       attribute: @_attribute
       kind: @_kind
       value: @model.get('metadata')?[@_attribute]
+      value_html: md(@model.get('metadata')?[@_attribute])
       md: md
     ).addClass @className()
 
