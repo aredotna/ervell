@@ -29,17 +29,17 @@
         img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-sm")
 
 
-  .tab--container.tab--container--block
+  #block-tabs.tab--container.tab--container--block
     ul.tab--container__nav
-      li.tab--container__nav__item.is-active(data-tab="info")
+      li.tab--container__nav__item(data-tab="info", class=tab == 'info' ? 'is-active' : '')
         h5: a(href="/#") Info
       if block.get('connections')
-        li.tab--container__nav__item(data-tab="connections")
+        li.tab--container__nav__item(data-tab="connections" class=tab == 'connections' ? 'is-active' : '')
           h5: a(href="/#") #{block.get('connections').length} Connections
-      li.tab--container__nav__item(data-tab="comments")
+      li.tab--container__nav__item(data-tab="comments" class=tab == 'comments' ? 'is-active' : '')
         h5: a(href="/#") #{block.get('comment_count')} Comments
 
-    #tab-info.tab-content.is-active
+    #tab-info.tab-content(class=tab == 'info' ? 'is-active' : '')
       .tab-content__inner
         h2.block-title.center(id="attribute-title_#{block.id}")= block.get('title')
         .block-description(id="attribute-description_#{block.id}")!= block.get('description')
@@ -58,14 +58,14 @@
         if block.createdAtAgo() != block.updatedAtAgo()
           .block-date Last updated #{block.updatedAtAgo()}
 
-    #tab-connections.tab-content
+    #tab-connections.tab-content(class=tab == 'connections' ? 'is-active' : '')
       .tab-content__inner
         if block.connections()
           for channel in block.connections()
             .block-connection-outer
               include ../../../components/list_view/templates/_channel
 
-    #tab-comments.tab-content
+    #tab-comments.tab-content(class=tab == 'comments' ? 'is-active' : '')
       .tab-content__inner
         if comments
           include ../../../components/comments/templates/index

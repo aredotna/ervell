@@ -26,7 +26,7 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
         .grid__block__connect-container.abs-fill
           //- rendered by the client
       if block.get('comment_count') > 0
-        .grid__block__comment-count= block.get('comment_count')
+        span.grid__block__comment-count(href="#{block.getHref()}/comments" data-client="#{block.get('base_class')}")= block.get('comment_count')
 
     - if(block.get('class') != 'Channel' && block.get('class') != 'User')
       p(href="#{block.getHref()}" data-client="#{block.get('base_class')}")

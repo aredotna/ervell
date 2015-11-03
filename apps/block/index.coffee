@@ -9,3 +9,4 @@ app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 
 app.get "/block/:block_id", auth, routes.block
+app.get "/block/:block_id/:tab", auth, routes.block

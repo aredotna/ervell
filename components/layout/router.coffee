@@ -10,6 +10,7 @@ module.exports = class Router extends Backbone.Router
   routes:
     '' : 'hideBlock'
     'block/:id': 'showBlock'
+    'block/:id/:tab': 'showBlock'
     'log_in': 'login'
     'sign_up': 'signup'
 
@@ -30,10 +31,10 @@ module.exports = class Router extends Backbone.Router
   hideBlock: ->
     @modal?.close => @removeRoute()
 
-  showBlock: (id)->
+  showBlock: (id, tab)->
     return if (sd.CURRENT_PATH.indexOf('block') > 0)
     block = new Block {id: id}
-    view = new FullBlockView model: block
+    view = new FullBlockView model: block, tab: tab
 
     @modal = modalize view,
       className: 'modalize things-modal'

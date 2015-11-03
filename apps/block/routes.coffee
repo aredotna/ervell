@@ -26,6 +26,7 @@ _ = require 'underscore'
       block: block
       comments: comments
       md: markdown
+      tab: req.params.tab || 'info'
 
   .catch res.backboneError
   .done()

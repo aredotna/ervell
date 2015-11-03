@@ -1,3 +1,4 @@
+_ = require 'underscore'
 sd = require('sharify').data
 Backbone = require 'backbone'
 markdown = require 'marked'
@@ -20,7 +21,8 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'description' : 'markdown'
     'content'     : 'markdown'
 
-  initialize: ->
+  initialize: (options)->
+    @tab = options.tab || 'info'
     mediator.on "lightbox:slide:next", => @slide 'next'
     mediator.on "lightbox:slide:prev", => @slide 'prev'
 
@@ -36,6 +38,8 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     tab = $(e.currentTarget).data 'tab'
     $(e.currentTarget).addClass 'is-active'
     $("#tab-#{tab}").addClass 'is-active'
+
+    @scrollToTabs()
 
   clickSlide: (e) ->
     e.preventDefault()
@@ -53,7 +57,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @xHR = @model.fetch()
 
   render: ->
-    @$el.html template block: @model, md: markdown, comments: @comments
+    @$el.html template block: @model, md: markdown, comments: @comments, tab: @tab
 
     @postRender()
 
@@ -63,6 +67,9 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     initComments @model, @$('#tab-comments .tab-content__inner')
     IconicJS().inject('img.iconic')
 
+    unless @tab is 'info'
+      _.defer => @scrollToTabs()
+
     for attribute, kind of @editableAttributes
       new EditableAttributeView
         model: @model
@@ -70,6 +77,9 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
         _attribute: attribute
         _kind: kind
         wait: true
+
+  scrollToTabs: ->
+    $("#block-tabs").get(0).scrollIntoView()
 
 module.exports.init = ->
   block = new Block sd.BLOCK
