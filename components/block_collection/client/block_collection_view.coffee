@@ -26,7 +26,7 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $block
 
   renderBlockView: (block, autoRender = false)=>
-s    new BlockView
+    new BlockView
       container: @$el
       model: block
       autoRender: autoRender
