@@ -380,7 +380,10 @@ privacy-color('.list__block--channel--', color)
   line-height unit * 1.5
   font-size .8rem
   text-align center
-  background-color white
+  background-color rgba(255,255,255, 0.85)
+
+  &:hover
+    background-color rgba(255,255,255, 1)
 
 @media (max-width:(block_width_mar * 3))
   .grid
