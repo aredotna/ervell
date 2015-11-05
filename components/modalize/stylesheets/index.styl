@@ -1,6 +1,6 @@
 .modalize
-  z-index modal_z
-  // transition opacity 0.25s
+  z-index rotate_z
+  -webkit-transform translate3d(0,0,1px)
   opacity 0
 
   // Fade transition
@@ -22,9 +22,10 @@
 .modalize-backdrop
   position fixed
   top 0
-  right 0
-  bottom 0
   left 0
+  height 100%
+  width 100%
+  min-height 100%
 
 .modalize-backdrop
   display flex
@@ -58,7 +59,7 @@
     opacity 1
   .iconic-sm:before
     font-weight 400
-    font-size 18px !important
+    font-size 16px !important
 
   +below(800px)
     top 25px
