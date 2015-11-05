@@ -14,6 +14,9 @@ module.exports = class Router extends Backbone.Router
     'log_in': 'login'
     'sign_up': 'signup'
 
+  initialize: ->
+    mediator.on 'slide:to:block', @updateRoute, @
+
   login: ->
     @openAuthModal
       mode: 'login'
@@ -44,6 +47,9 @@ module.exports = class Router extends Backbone.Router
 
     @modal.view.on 'closed', =>
       @removeRoute()
+
+  updateRoute: (id)->
+    @navigate "/block/#{id}", trigger: false, replace: true
 
   removeRoute: ->
     loc = window.location
