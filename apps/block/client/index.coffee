@@ -65,7 +65,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   postRender: ->
     initComments @model, @$('#tab-comments .tab-content__inner')
-    IconicJS().inject('img.iconic')
+    _.defer => IconicJS().inject('img.iconic')
 
     unless @tab is 'info'
       _.defer => @scrollToTabs()
