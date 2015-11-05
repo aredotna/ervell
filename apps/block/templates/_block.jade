@@ -50,9 +50,9 @@
           if block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link'
             |  &mdash; #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}" target="_blank") (Find original)]
 
-      .block-meta
+      .block-meta.block-meta--attribution
         .block-date
-          | Created #{block.createdAtAgo()}
+          | Added #{block.createdAtAgo()}
           |  by
           a(href="/#{block.get('user').slug}")  #{block.get('user').username}
         if block.createdAtAgo() != block.updatedAtAgo()
@@ -63,7 +63,8 @@
         if block.connections()
           for channel in block.connections()
             .block-connection-outer
-              include ../../../components/list_view/templates/_channel
+              include ../../../components/list_view/templates/_connection
+        //- .button--base.button--base--connect.js-connect-button Connect &rarr;
 
     #tab-comments.tab-content(class=tab == 'comments' ? 'is-active' : '')
       .tab-content__inner

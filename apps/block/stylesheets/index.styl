@@ -51,17 +51,19 @@
   > h1, h2, h3, h4, h5, pre
     margin-bottom unit
 
+  blockquote
+    margin unit 0
+
 .block-text
   p()
   background-color #fff
   border 1px solid bordergray
-  width 60%
-  height auto
+  width 55%
   margin 0 auto
   overflow-x auto
   padding unit * 2
   text-align left
-  max-height 70vh
+  height 80vh
   font-size 1.1rem
   line-height 1.7em
 
@@ -82,12 +84,19 @@
     resize vertical
     padding unit * 2
 
+.block-meta--attribution
+  position absolute
+  bottom unit
+  right unit
+  color lightgray
+
+.button--base--connect
+  text-align center
+
 .block-date
-  p()
-  font-style italic
   font-size 0.8rem
-  padding-right (unit * 2)
   text-align right
+  line-height 1.3rem
   > a
     font-weight bold
 
@@ -114,7 +123,6 @@
   top 100%
   width 100%
   margin-top -50px
-  min-height 50vh
 
   .tab--container__nav
     border-bottom 1px solid bordergray
@@ -131,6 +139,8 @@
 
   .tab-content
     background-color white
+    min-height 30vh
+    padding-bottom (unit * 3)
 
   .tab-content__inner
     width 60%
