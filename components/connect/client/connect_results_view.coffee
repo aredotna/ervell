@@ -9,10 +9,17 @@ connectResultsTemplate = -> require('../templates/connect_results.jade') argumen
 
 module.exports = class ConnectResultsView extends Backbone.View
 
-  events:
-    'tap .new-connection__search-result' : 'toggleConnection'
+  getTemplate: ->
+    if @kind is 'block'
+      require('../templates/block_connect_results.jade') arguments...
+    else
+      require('../templates/connect_results.jade') arguments...
 
-  initialize: ({ @block }) ->
+  events:
+    'click .new-connection__search-result' : 'toggleConnection'
+    'click .list-item__connection' : 'toggleConnection'
+
+  initialize: ({ @block, @kind }) ->
     @collection.on "sync add", @render, @
 
   toggleConnection: (e)=>
@@ -26,7 +33,9 @@ module.exports = class ConnectResultsView extends Backbone.View
         type: 'DELETE'
         url: "#{sd.API_URL}/channels/#{id}/blocks/#{@block.id}"
     else
-      mediator.shared.recent_connections.shove @collection.get(id)
+      connection = @collection.get(id)
+      mediator.shared.recent_connections.shove connection
+      mediator.trigger "connection:added:#{@block.id}", connection
       analytics.track.click 'Connection created'
       reqOpts =
         type: "POST"
@@ -62,4 +71,4 @@ module.exports = class ConnectResultsView extends Backbone.View
     $.ajax(opts)
 
   render: ->
-    @$el.html connectResultsTemplate blocks: @collection.models
+    @$el.html @getTemplate(blocks: @collection.models)

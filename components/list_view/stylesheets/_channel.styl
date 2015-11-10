@@ -1,5 +1,8 @@
 .list-item__connection
   vertical-align middle
+  display block
+  cursor pointer
+
   .list-item-cell
     font-size 0.9rem
     overflow hidden
@@ -18,5 +21,9 @@
     a
       font-weight bold
 
+  &.is-loading, &.is-connected
+    display none
+
 privacy-color('.list-item__channel--privacy-', border-color)
 privacy-color('.list-item__channel--privacy-', color)
+privacy-color-border-hover('.list-item__channel--privacy-', border-color)

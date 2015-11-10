@@ -22,10 +22,10 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
               a.grid__block__delete-block__confirm__choice.confirm__choice__yes Yes
               a.grid__block__delete-block__confirm__choice.confirm__choice__no No
 
-      if user
+      if user && user.id
         .grid__block__connect-container.abs-fill
           //- rendered by the client
-      if block.get('comment_count') > 0
+      if block.get('comment_count') > 0 && user && user.id
         span.grid__block__comment-count(href="#{block.getHref()}/comments" data-client="#{block.get('base_class')}")= block.get('comment_count')
 
     - if(block.get('class') != 'Channel' && block.get('class') != 'User')

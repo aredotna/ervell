@@ -7,6 +7,7 @@ Feed = require "../../collections/feed.coffee"
 Notifications = require "../../collections/notifications.coffee"
 FeedView = require './client/feed_view.coffee'
 bullet_points = require './fixtures/bullet_points.coffee'
+IconicJS = require '../../components/iconic/client/iconic.min.js'
 
 mediator = require '../../lib/mediator.coffee'
 
@@ -30,6 +31,7 @@ module.exports = class HomeView extends Backbone.View
 
   initialize: ->
     setInterval @setSlide, @slideDuration
+    _.defer => IconicJS().inject('img.iconic')
 
   setSlide: =>
     ++@slideIndex

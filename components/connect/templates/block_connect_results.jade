@@ -1,0 +1,13 @@
+.new-connection__search-results__list
+  for channel in blocks
+    .block-connection-outer
+      span.list-item.list-item__connection(data-id="#{channel.id}" class="list-item__channel--privacy-#{channel.getVisibility()}")
+        .list-item-inner
+          .list-item-cell.list-item-cell--title
+            span(href="#{channel.href()}")= channel.get('title')
+            span.list-item__channel__block-count &nbsp; #{channel.get('length')} blocks
+
+          .list-item-cell.list-item-cell--attribution
+            div
+              | by&nbsp;
+              strong(href="/#{channel.get('user').slug}") #{channel.get('user').username}

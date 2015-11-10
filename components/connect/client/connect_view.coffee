@@ -16,10 +16,9 @@ module.exports = class ConnectView extends Backbone.View
     'keyup .new-connection__search' : 'onKeyUp'
     'tap .new-connection__done-button' : 'onClear'
 
-  initialize: (options)->
+  initialize: ({ @block, @kind })->
     analytics.track.click 'Connect view opened'
 
-    @block = options.block
     @$input = @$('.new-connection__search')
     @render()
     $(window).one('tap', @maybeClear)
@@ -100,6 +99,9 @@ module.exports = class ConnectView extends Backbone.View
     @focusSearch()
     @renderChannels()
 
+  reset: ->
+    # nothing yet
+
   focusSearch: ->
     @$('.new-connection__search').focus()
 
@@ -110,6 +112,7 @@ module.exports = class ConnectView extends Backbone.View
       el: @$('.new-connection__search-results')
       block: @block
       collection: @collection
+      kind: @kind
 
     mediator.shared.recent_connections?.fetch()
 

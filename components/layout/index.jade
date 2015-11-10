@@ -1,5 +1,7 @@
 doctype html
-html(class=sd.IS_INVERTED ? 'is-inverted' : '')
+- colorClass = sd.IS_INVERTED ? 'is-inverted' : ''
+- loggedInClass = user ? 'is-logged-in' : 'not-logged-in'
+html(class="#{colorClass} #{loggedInClass}")
   head
     title
       | Are.na

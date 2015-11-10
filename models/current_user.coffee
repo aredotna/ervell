@@ -11,6 +11,9 @@ Backbone = require 'backbone'
 module.exports = class CurrentUser extends User
   recentConnectionCount: 3
 
+  @orNull: ->
+    if sd.CURRENT_USER then new @(sd.CURRENT_USER) else null
+
   initialize: ->
     mediator.on 'current_user:prefetched', @subscribeToPusherEvents, @
     super

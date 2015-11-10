@@ -31,11 +31,13 @@
     ul.tab--container__nav
       li.tab--container__nav__item(data-tab="info", class=tab == 'info' ? 'is-active' : '')
         h5: a(href="/#") Info
-      if block.get('connections')
-        li.tab--container__nav__item(data-tab="connections" class=tab == 'connections' ? 'is-active' : '')
-          h5: a(href="/#") #{block.get('connections').length} Connections
-      li.tab--container__nav__item(data-tab="comments" class=tab == 'comments' ? 'is-active' : '')
-        h5: a(href="/#") #{block.get('comment_count')} Comments
+      li.tab--container__nav__item(data-tab="connections" class=tab == 'connections' ? 'is-active' : '')
+        - s = block.get('connections').length == 1 ? '' : 's'
+        h5: a(id="tab-connection-count" href="/#") #{block.get('connections').length} Connection#{s}
+      if user && user.id
+        li.tab--container__nav__item(data-tab="comments" class=tab == 'comments' ? 'is-active' : '')
+          - s = block.get('comment_count') == 1 ? '' : 's'
+          h5: a(href="/#") #{block.get('comment_count')} Comment#{s}
 
     #tab-info.tab-content(class=tab == 'info' ? 'is-active' : '')
       .tab-content__inner
@@ -58,11 +60,12 @@
 
     #tab-connections.tab-content(class=tab == 'connections' ? 'is-active' : '')
       .tab-content__inner
-        if block.connections()
-          for channel in block.connections()
-            .block-connection-outer
-              include ../../../components/list_view/templates/_connection
-        //- .button--base.button--base--connect.js-connect-button Connect &rarr;
+        .tab-connections-list
+          include ./_connections
+        if user && user.id
+          .button--base.button--base--connect.js-connect-button Connect &rarr;
+          .block-connect-container
+            //- rendered on the client
 
     #tab-comments.tab-content(class=tab == 'comments' ? 'is-active' : '')
       .tab-content__inner

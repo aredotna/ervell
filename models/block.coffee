@@ -41,6 +41,11 @@ module.exports = class Block extends Base
   contentOrDescription: ->
     @get('content') || @get('description')
 
+  addConnection: (connection) ->
+    connections = @get('connections')
+    connections.unshift connection
+    @set 'connections', connections
+
   connections: ->
     _.map @get('connections'), (connection) -> new Block connection
 

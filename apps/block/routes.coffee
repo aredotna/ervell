@@ -16,7 +16,7 @@ _ = require 'underscore'
 
   Q.all [
     block.fetch data: auth_token: req.user?.get('authentication_token')
-    comments.fetch data: auth_token: req.user?.get('authentication_token')
+    comments.fetch(data: auth_token: req.user?.get('authentication_token')) if req.user?
   ]
   .then ->
     res.locals.sd.BLOCK = block.toJSON()
@@ -27,6 +27,7 @@ _ = require 'underscore'
       comments: comments
       md: markdown
       tab: req.params.tab || 'info'
+      connections: block.connections()
 
   .catch res.backboneError
   .done()
