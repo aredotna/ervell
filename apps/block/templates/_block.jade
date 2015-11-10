@@ -15,18 +15,16 @@
       - if(block.get('class') == 'Attachment' && !block.has('image'))
           a.block-attachment(href="#{block.getSourceUrl()}" target="_blank")
             if(block.get('attachment').extension == 'mp3')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-md")
-            if(block.get('attachment').extension == 'pdf')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-            if(block.get('attachment').extension == 'embed')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" class="iconic iconic-lg")
+            else if(block.get('attachment').extension == 'pdf')
+              img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" class="iconic iconic-lg")
+            else
+              img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
 
       .block-arrow.block-arrow--right.v-outer(data-direction="next"): .v-inner
-        img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-sm")
+        img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-md")
       .block-arrow.block-arrow--left.v-outer(data-direction="prev"): .v-inner
-        img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-sm")
+        img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-md")
 
 
   #block-tabs.tab--container.tab--container--block

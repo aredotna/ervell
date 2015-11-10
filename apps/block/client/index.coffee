@@ -4,6 +4,7 @@ Backbone = require 'backbone'
 markdown = require 'marked'
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
+Blocks = require '../../../collections/blocks.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 initComments = require '../../../components/comments/index.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
@@ -23,6 +24,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   initialize: (options)->
     @tab = options.tab || 'info'
+
     mediator.on "lightbox:slide:next", => @slide 'next'
     mediator.on "lightbox:slide:prev", => @slide 'prev'
 
@@ -30,6 +32,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   initModel: ->
     @model.on 'sync', @render, @
+    @connections = new Blocks @model.connections()
 
   toggleTab: (e)->
     e.preventDefault()
@@ -86,5 +89,6 @@ module.exports.init = ->
 
   new FullBlockView
     model: block
+    connections: connections
     el: $(".container")
   .postRender()

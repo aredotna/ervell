@@ -1,7 +1,6 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
 template = require './templates/index.coffee'
-Scrollbar = require '../scrollbar/index.coffee'
 
 module.exports = class Modalize extends Backbone.View
   className: 'modalize'
@@ -14,7 +13,6 @@ module.exports = class Modalize extends Backbone.View
 
   initialize: (options = {}) ->
     { @subView, @dimensions } = _.defaults options, @defaults
-    @scrollbar = new Scrollbar
     $(window).on 'keyup.modalize', @escape
 
   state: (state, callback = $.noop) -> _.defer =>
@@ -31,8 +29,8 @@ module.exports = class Modalize extends Backbone.View
   __render__: ->
     @$el.html template()
     @__rendered__ = true
-    @scrollbar.disable()
     @state 'open'
+    $('body').addClass 'is-scrolling-disabled'
     this
 
   render: ->
@@ -64,9 +62,9 @@ module.exports = class Modalize extends Backbone.View
 
   close: (callback, e) ->
     $(window).off 'keyup.modalize'
-    @scrollbar.reenable()
     @trigger 'closing'
     @state 'close', =>
+      $('body').removeClass 'is-scrolling-disabled'
       @subView?.remove?()
       @remove()
       callback?()
