@@ -185,57 +185,32 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
   @extend .serif-text
   height 100%
   padding .8em 1em 0 1em
-  font-size 1.04em
+  p()
   overflow  hidden
   word-wrap break-word
 
   h1, h2
-    font-family font_sans
-    font-size 1.2em
-    line-height 1.1em
-    margin 0 0 8px 0
-  h2
-    font-size 1em
-    line-height 1.3em
-
-  h3
-    font-size 1em
-    line-height 1.3em
+    font-size 1.3rem
 
   p
-    margin-bottom 15px
-    font-size 1em
-    line-height 1.3em
-    margin 0 0 10px 0
+    p()
+    margin 0 auto
 
   a
     font-weight bold
     padding 0
 
   ul
-    list-style disc inside none
-    margin-bottom 10px
-
-  li
-    font-size 1em
-    line-height 1.4em
-    margin-bottom 5px
-    margin-top 5px
-    text-indent -1em
-    padding-left 1em
+    ul: 'square'
 
   ol
-    list-style decimal inside none
-    margin-bottom 5px
+    ol()
 
   em, strong, blockquote, ul, ol
     padding 0
 
   hr
-    margin 20px 0px
-    border 0
-    border-top 1px solid bordergray
-    box-sizing none
+    rule()
 
   blockquote
     margin 10px 0 10px 2px
