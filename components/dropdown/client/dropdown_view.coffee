@@ -52,5 +52,4 @@ module.exports = class DropdownView extends Backbone.View
         @$el.has(e.target).length is 0 and
         !$(e.target).hasClass 'trigger-mediator'
       )
-        console.log 'closeDropdown'
         @closeDropdown() if @$el
