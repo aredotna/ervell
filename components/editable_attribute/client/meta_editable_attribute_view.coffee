@@ -17,7 +17,7 @@ module.exports = class MetaEditableAttributeView extends EditableAttributeView
       attribute: @_attribute
       kind: @_kind
       value: @model.get('metadata')?[@_attribute]
-      value_html: md(@model.get('metadata')?[@_attribute])
+      value_html: md(@model.get('metadata')?[@_attribute] || '-')
       md: md
     ).addClass @className()
 
