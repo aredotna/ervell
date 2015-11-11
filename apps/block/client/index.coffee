@@ -122,7 +122,9 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
         wait: true
 
   scrollToTabs: ->
-    $("#block-tabs").get(0).scrollIntoView()
+    $modal = $('.js-modalize-dialog')
+    $tabs = $('#block-tabs')
+    $modal.scrollTop($modal.scrollTop() - $modal.offset().top + $tabs.offset().top)
 
   remove: ->
     mediator.stopListening "lightbox:slide:next"
