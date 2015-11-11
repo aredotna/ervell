@@ -49,16 +49,18 @@
     font-weight bold
 
   > h1, h2, h3, h4, h5, pre
-    margin-bottom unit
+    margin unit 0
 
   blockquote
     margin unit 0
 
 .block-text
   p()
+  font-family font_serif
   background-color #fff
   border 1px solid bordergray
   width 55%
+  max-width 740px
   margin 0 auto
   overflow-x auto
   padding unit * 2
@@ -77,12 +79,18 @@
     &:last-child
       margin-bottom 0
 
-  > ul
+  ul
     ul: 'square'
+
+  hr
+    rule()
 
   > form textarea
     resize vertical
     padding unit * 2
+
+  .attr-value
+    height auto
 
 .block-attachment
   .iconic-property-fill
