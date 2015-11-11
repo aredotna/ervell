@@ -32,8 +32,8 @@
       li.tab--container__nav__item(data-tab="info", class=tab == 'info' ? 'is-active' : '')
         h5: a(href="/#") Info
       li.tab--container__nav__item(data-tab="connections" class=tab == 'connections' ? 'is-active' : '')
-        - s = block.get('connections').length == 1 ? '' : 's'
-        h5: a(id="tab-connection-count" href="/#") #{block.get('connections').length} Connection#{s}
+        - s = connections.length == 1 ? '' : 's'
+        h5: a(id="tab-connection-count" href="/#") #{connections.length} Connection#{s}
       if user && user.id
         li.tab--container__nav__item(data-tab="comments" class=tab == 'comments' ? 'is-active' : '')
           - s = block.get('comment_count') == 1 ? '' : 's'

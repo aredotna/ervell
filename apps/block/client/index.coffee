@@ -32,13 +32,14 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
     mediator.on "lightbox:slide:next", => @slide 'next'
     mediator.on "lightbox:slide:prev", => @slide 'prev'
-    mediator.on "connection:added:#{@model.id}", @addConnections, @
 
     @initModel()
 
   initModel: ->
     @model.on 'sync', @render, @
     @connections = new Blocks @model.connections()
+
+    mediator.on "connection:added:#{@model.id}", @addConnections, @
 
   toggleTab: (e)->
     e.preventDefault()
@@ -71,6 +72,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
       $(".new-connection__done-button").get(0).scrollIntoView()
 
   slide: (direction)->
+    mediator.stopListening "connection:added:#{@model.id}"
     @model = mediator.shared.blocks[direction](@model)
 
     mediator.trigger 'slide:to:block', @model.id
@@ -121,6 +123,13 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   scrollToTabs: ->
     $("#block-tabs").get(0).scrollIntoView()
+
+  remove: ->
+    mediator.stopListening "lightbox:slide:next"
+    mediator.stopListening "lightbox:slide:prev"
+    mediator.stopListening "connection:added:#{@model.id}"
+
+    super
 
 module.exports.init = ->
   block = new Block sd.BLOCK
