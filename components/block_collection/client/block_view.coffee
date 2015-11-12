@@ -16,11 +16,11 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
-    'tap .grid__block__source__link'  : 'openLink'
-    'tap .grid__block__connect-btn'   : 'loadConnectView'
-    'tap .grid__block__delete-block'  : 'confirmDestroy'
-    'tap .confirm__choice__yes'       : 'destroyConnection'
-    'tap .confirm__choice__no'        : 'cancelDestroy'
+    'click .grid__block__source__link'  : 'openLink'
+    'click .grid__block__connect-btn'   : 'loadConnectView'
+    'click .grid__block__delete-block'  : 'confirmDestroy'
+    'click .confirm__choice__yes'       : 'destroyConnection'
+    'click .confirm__choice__no'        : 'cancelDestroy'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -31,6 +31,8 @@ module.exports = class BlockView extends Backbone.View
     @$el = $("##{@model.id}") unless @el
     @renderFollowButton()
 
+    @delegateEvents()
+
     @model.on 'remote_update', @update, @
     @model.on 'show', @show, @
     @model.on 'hide', @hide, @
@@ -38,8 +40,6 @@ module.exports = class BlockView extends Backbone.View
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
     mediator.on "body:click", @removeActiveClass, @
-
-    super
 
   show: ->
     @$el.show()
