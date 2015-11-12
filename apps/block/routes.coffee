@@ -29,5 +29,5 @@ _ = require 'underscore'
       tab: req.params.tab || 'info'
       connections: block.connections()
 
-  .catch res.backboneError
+  .catch next
   .done()

@@ -1,7 +1,7 @@
 span.list-item.list-item__connection(data-client="Channel" href="#{channel.href()}" class="list-item__channel--privacy-#{channel.getVisibility()}")
   .list-item-inner
     .list-item-cell.list-item-cell--title
-      a(href="#{channel.href()}")= channel.get('title')
+      = channel.get('title')
       span.list-item__channel__block-count &nbsp; #{channel.get('length')} blocks
 
     .list-item-cell.list-item-cell--attribution

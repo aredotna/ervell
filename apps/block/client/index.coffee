@@ -66,7 +66,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     new ConnectView
       el: $connect_container
       block: @model
-      kind: 'block'
 
     _.defer =>
       $(".new-connection__done-button").get(0).scrollIntoView()
