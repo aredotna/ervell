@@ -37,6 +37,7 @@ module.exports.init = ->
 
   # scrollFrame '.grid__block--channel a'
 
+  console.log 'hello InfiniteView'
   new InfiniteView
     context: $ ".grid--user"
     collection: blocks

@@ -12,6 +12,7 @@ module.exports = class InfiniteView extends Backbone.View
     @initListener()
     mediator.on 'stop:infinite', @disable, @
     mediator.on 'start:infinite', @enable, @
+
     super
 
   initListener: ->
@@ -21,8 +22,8 @@ module.exports = class InfiniteView extends Backbone.View
     return if @loading or @disabled or @collection.exhausted
 
     threshold = 0
-    total = $('body').prop('scrollHeight')
-    progress = $('body').scrollTop() + $(window).height() * 2
+    total = document.body.scrollHeight
+    progress = (document.documentElement.scrollTop||document.body.scrollTop) + window.innerHeight * 4
 
     if total - progress < threshold
       @loadNextPage()
