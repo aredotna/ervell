@@ -141,7 +141,7 @@
   width 20vw
   opacity 0
   display none
-  z-index 1
+  z-index -1
 
   &:hover
     opacity 1
@@ -149,10 +149,12 @@
 .modalize .block-arrow
   display table
 
-
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
     height 20px
+
+  +below(700px)
+    display none
 
 .block-arrow--right
   right 0

@@ -55,13 +55,17 @@
   opacity 0.45
   z-index rotate_z + 1
   prevent-content-shift()
-  &:hover
-    opacity 1
+  transform translateZ(100)
   .iconic-sm:before
     font-weight 400
     font-size 16px !important
 
+  +above(800px)
+    &:hover
+      opacity 1
+
   +below(800px)
+    pointer-events all
     top 25px
     right 25px
     .iconic-sm:before
