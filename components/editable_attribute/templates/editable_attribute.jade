@@ -1,7 +1,8 @@
 .attr-backdrop.save
 
 div(id="#{attribute}_display_#{id}" class="attr-value")
-  if value != ''
+  - console.log('value', value)
+  if value && value != ''
     if kind == 'markdown'
       != value_html
     else
@@ -15,4 +16,4 @@ form.attr-editor
   if kind == 'markdown'
     textarea(class="markdown editor" autofocus="autofocus" placeholder="Add #{attribute}")= value
   else
-    input(class="plaintext editor full" value="#{value}" autofocus="autofocus" placeholder="Add #{attribute}" type="text")
+    input(class="plaintext editor full" value=value ? value : '' autofocus="autofocus" type="text")
