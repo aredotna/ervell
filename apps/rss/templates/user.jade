@@ -1,14 +1,14 @@
 doctype xml
 rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
   channel
-    title Are.na / #{channel.get('title')}
-    link #{sd.APP_URL}#{channel.href()}
-    atom:link(href="#{sd.APP_URL}#{channel.href()}/feed/rss", rel='self', type='application/rss+xml')
-    if channel.has('metadata')
-      description #{channel.get('metadata').description}
+    title Are.na / #{user.get('username')}
+    link #{sd.APP_URL}#{author.href()}
+    atom:link(href="#{sd.APP_URL}#{author.href()}/feed/rss", rel='self', type='application/rss+xml')
+    if author.has('metadata')
+      description #{author.get('metadata').description}
     language en-US
     if blocks.length
-      lastBuildDate= new Date(channel.get('updated_at')).toUTCString()
+      lastBuildDate= new Date(author.get('updated_at')).toUTCString()
     each block in blocks
       item
         if block.get('class') == 'Link'
