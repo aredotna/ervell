@@ -2,7 +2,9 @@ Q = require 'q'
 _ = require 'underscore'
 sd = require("sharify").data
 Channel = require "../../models/channel"
+User = require "../../models/user"
 ChannelBlocks = require "../../collections/channel_blocks"
+UserBlocks = require "../../collections/user_blocks"
 
 @channelRSS = (req, res, next) ->
   channel = new Channel
@@ -24,19 +26,19 @@ ChannelBlocks = require "../../collections/channel_blocks"
   .done()
 
 @userRSS = (req, res, next) ->
-  channel = new Channel
-    channel_slug: req.params.channel_slug
+  author = new User
+    channel_slug: req.params.username
 
-  blocks = new ChannelBlocks null,
-    channel_slug: req.params.channel_slug
+  blocks = new UserBlocks null,
+    user_slug: req.params.username
     per: 25
 
   Q.allSettled([
-    channel.fetch()
+    author.fetch()
     blocks.fetch()
   ]).then ->
     res.render 'user',
-      user: user
+      author: author
       blocks: blocks.models
   .catch next
   .done()

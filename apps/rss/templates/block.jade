@@ -1,0 +1,18 @@
+case block.get('class')
+  when "User"
+    a(href="#{block.getHref()}")
+  when "Channel"
+    a(href="#{block.getHref()}")
+  when "Media"
+    != block.get('embed').html
+  when "Image"
+    a(href="#{block.getSourceUrl()}" target="_blank")
+      img(src="#{block.resizeImage(1000,1000, 'large')}")
+  when "Link"
+    != block.get('description_html')
+    a(href="#{block.getSourceUrl()}" target="_blank")
+      img(src="#{block.resizeImage(1000,1000, 'large')}")
+  when "Attachment"
+    a.block-attachment(href="#{block.getSourceUrl()}" target="_blank")= block.get('title')
+  when "Text"
+    != block.get('content_html')
