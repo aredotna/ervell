@@ -4,24 +4,23 @@ block vars
   - extraClasses = 'no-header no-messages no-scroll'
 
 block body
+  #save-tabs.tab--container.tab--container--save
+    ul.tab--container__nav
+      li.tab--container__nav__item(data-tab="url", class=tab == 'url' ? 'is-active' : '')
+        h5: a(href="/#") URL
+      li.tab--container__nav__item(data-tab="drop", class=tab == 'drop' ? 'is-active' : '')
+        h5: a(href="/#") Drop
   #save-page
-    .auth-logo
-      include ../../../public/images/arena-mark.svg
-
-    - text = isURL ? 'URL' : 'text'
-    label.save-label Save #{text}
     if isURL
-      input#content.input--wide.input--relative.is-block(
+      input#save-content.input--wide.input--relative.is-block(
         name='content' type='text' placeholder='URL' value="#{content}"
       )
     else
-      input#content.input--wide.input--relative.is-block(
+      input#save-content.input--wide.input--relative.is-block(
         name='content' type='text' placeholder='Text' value="#{content}"
       )
-    label.save-label to
-
     #save--connect
       //- rendered on the client
 
 block scripts
-  script( src=asset('/assets/save.js') )
+  script( src=asset('/assets/marklet.js') )

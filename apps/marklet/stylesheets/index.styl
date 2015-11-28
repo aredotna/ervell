@@ -15,6 +15,9 @@ label.save-label
   display block
   line-height 2
 
+#save-content
+  background-color white
+
 #save--connect
   margin (s_margin * 2) 0
 
@@ -55,6 +58,20 @@ label.save-label
   )
   -webkit-animation loading 0.5s linear infinite
   animation loading 0.5s linear infinite
+
+.tab--container--save
+  .tab--container__nav
+    position relative
+    width 100%
+
+  .tab--container__nav__item
+    padding 0 unit
+
+    +below(800px)
+      display inline-block
+      width 50%
+      padding 0 (unit/2)
+      margin-right 0
 
 @keyframes loading
   from
