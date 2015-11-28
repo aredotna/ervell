@@ -31,7 +31,7 @@ module.exports = class DropdownView extends Backbone.View
     @$el.addClass 'dropdown--is_active'
 
   closeDropdown: (e) =>
-    @$el.removeClass 'dropdown--is_active' unless @$el.is(':hover')
+    @$el.removeClass 'dropdown--is_active' unless @$el.filter( -> $(this).is(":hover")).length
 
   toggleDropdown: =>
     @$el.toggleClass 'dropdown--is_active'
