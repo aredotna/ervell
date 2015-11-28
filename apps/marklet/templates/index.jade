@@ -1,0 +1,27 @@
+extends ../../../components/layout/index--bare
+
+block vars
+  - extraClasses = 'no-header no-messages no-scroll'
+
+block body
+  #save-page
+    .auth-logo
+      include ../../../public/images/arena-mark.svg
+
+    - text = isURL ? 'URL' : 'text'
+    label.save-label Save #{text}
+    if isURL
+      input#content.input--wide.input--relative.is-block(
+        name='content' type='text' placeholder='URL' value="#{content}"
+      )
+    else
+      input#content.input--wide.input--relative.is-block(
+        name='content' type='text' placeholder='Text' value="#{content}"
+      )
+    label.save-label to
+
+    #save--connect
+      //- rendered on the client
+
+block scripts
+  script( src=asset('/assets/save.js') )
