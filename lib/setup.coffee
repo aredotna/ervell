@@ -138,6 +138,7 @@ module.exports = (app) ->
   app.use require "../apps/search"
   app.use require "../apps/manage"
   app.use require "../apps/share"
+  app.use require "../apps/marklet"
   app.use require "../apps/save"
   app.use require "../apps/user"
   app.use require "../apps/block"
