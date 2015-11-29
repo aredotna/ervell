@@ -15,6 +15,7 @@ module.exports = class Router extends Backbone.Router
     'sign_up': 'signup'
 
   initialize: ->
+    console.log 'initialize router'
     mediator.on 'slide:to:block', @updateRoute, @
 
   login: ->
@@ -35,7 +36,7 @@ module.exports = class Router extends Backbone.Router
     @modal?.close => @removeRoute()
 
   showBlock: (id, tab)->
-    return if (sd.CURRENT_PATH.indexOf('block') > 0)
+    return if (sd.CURRENT_PATH.indexOf('block') > 0) && (sd.CURRENT_PATH.indexOf('blocks') < 0)
     block = new Block {id: id}
     view = new FullBlockView model: block, tab: tab
 

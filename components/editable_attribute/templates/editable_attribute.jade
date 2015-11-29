@@ -1,7 +1,6 @@
 .attr-backdrop.save
 
 div(id="#{attribute}_display_#{id}" class="attr-value")
-  - console.log('value', value)
   if value && value != ''
     if kind == 'markdown'
       != value_html
