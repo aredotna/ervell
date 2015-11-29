@@ -10,8 +10,8 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 
-# Log out
-app.get '/log_in', routes.logIn
+app.get "/log_in", routes.logIn
+app.get "/sign_up", routes.signUp
 app.get '/me/sign_out', routes.logout, routes.redirectBack
 app.get '/me/refresh', auth, routes.refresh
 app.get '/go', routes.redirect

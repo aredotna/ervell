@@ -18,11 +18,13 @@ module.exports = class Router extends Backbone.Router
     mediator.on 'slide:to:block', @updateRoute, @
 
   login: ->
+    return if (sd.CURRENT_PATH.indexOf('log_in') > 0)
     @openAuthModal
       mode: 'login'
       redirectTo: sd.CURRENT_PATH
 
   signup: ->
+    return if (sd.CURRENT_PATH.indexOf('sign_up') > 0)
     @openAuthModal
       mode: 'signup'
       redirectTo: sd.CURRENT_PATH

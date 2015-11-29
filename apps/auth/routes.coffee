@@ -12,7 +12,14 @@ clearCache = (user) ->
   cache.del "#{user.url()}{}"
 
 @logIn = (req, res, next) ->
+  return res.redirect('/') if req.user?.id
+  res.locals.sd.MODE = 'login'
+  res.render 'log_in'
 
+@signUp = (req, res, next) ->
+  return res.redirect('/') if req.user?.id
+  res.locals.sd.MODE = 'signup'
+  res.render 'sign_up'
 
 @logout = (req, res, next) ->
   req.logout()
