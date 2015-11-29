@@ -1,0 +1,13 @@
+#auth-page.valign-outer
+  .valign-inner
+    section#auth-body
+      include ./header
+
+      form.auth-login-email.auth-form(method="POST")
+        input.input--wide.input--relative.is-block(
+          name='email', type='email', placeholder='Email', required, autofocus= autofocus
+        )
+
+        .auth-errors &nbsp;
+
+        button#auth-register.auth-submit.button--wide.button--border.button--relative Create account

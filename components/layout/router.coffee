@@ -1,7 +1,7 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../lib/mediator.coffee'
-AuthModalView = require '../auth_modal/view.coffee'
+AuthView = require '../auth/view.coffee'
 Block = require '../../models/block.coffee'
 modalize = require '../modalize/index.coffee'
 { FullBlockView } = require '../../apps/block/client/index.coffee'
@@ -15,7 +15,6 @@ module.exports = class Router extends Backbone.Router
     'sign_up': 'signup'
 
   initialize: ->
-    console.log 'initialize router'
     mediator.on 'slide:to:block', @updateRoute, @
 
   login: ->
@@ -30,7 +29,15 @@ module.exports = class Router extends Backbone.Router
 
   openAuthModal: (options) ->
     mediator.trigger 'open:auth', options
-    @modal = new AuthModalView options
+    view = new AuthView options
+
+    @modal = modalize view,
+      className: 'modalize things-modal'
+
+    @modal.open()
+
+    @modal.view.on 'closed', =>
+      @removeRoute()
 
   hideBlock: ->
     @modal?.close => @removeRoute()

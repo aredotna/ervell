@@ -11,6 +11,9 @@ clearCache = (user) ->
   user = new User user.attributes
   cache.del "#{user.url()}{}"
 
+@logIn = (req, res, next) ->
+
+
 @logout = (req, res, next) ->
   req.logout()
   next()
