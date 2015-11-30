@@ -49,4 +49,4 @@ module.exports.init = ->
 
       new ResetPasswordView
         el: $('#reset-password-page')
-      model: pwReset
+        model: pwReset
