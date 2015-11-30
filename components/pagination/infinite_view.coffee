@@ -5,15 +5,12 @@ mediator = require '../../lib/mediator.coffee'
 IconicJS = require '../iconic/client/iconic.min.js'
 
 module.exports = class InfiniteView extends Backbone.View
+  disabled: false
 
-  initialize: (options)->
-    @context = options.context
-    @itemSelector = options.itemSelector
+  initialize: ({ @context, @itemSelector, @nextPageCallback = $.noop })->
     @initListener()
     mediator.on 'stop:infinite', @disable, @
     mediator.on 'start:infinite', @enable, @
-
-    super
 
   initListener: ->
     @timer = setInterval @maybeLoad, 150
@@ -25,7 +22,7 @@ module.exports = class InfiniteView extends Backbone.View
     total = document.body.scrollHeight
     progress = (document.documentElement.scrollTop||document.body.scrollTop) + window.innerHeight * 4
 
-    if total - progress < threshold
+    if (total - progress < threshold) and not @disabled
       @loadNextPage()
 
   loadNextPage: ->
@@ -35,6 +32,7 @@ module.exports = class InfiniteView extends Backbone.View
     @startLoader()
 
     $.when(request).then =>
+      @nextPageCallback request
       @stopLoader()
 
       _.delay =>
