@@ -13,15 +13,30 @@ connectTemplate = -> require('../templates/connect.jade') arguments...
 module.exports = class SaveConnectView extends ConnectView
 
   events:
-    'tap .save-page__close'            : 'sendCloseMsg'
-    'tap .new-connection__done-button' : 'saveBlock'
+    'tap .new-connection__done-button' : 'saveOrClose'
     'keyup .new-connection__search'    : 'onKeyUp'
+
+  updateButtonCopy: ->
+    if @marked()?.length
+      @$('.new-connection__done-button').text 'Save and close'
+    else
+      @$('.new-connection__done-button').text 'Close'
 
   sendCloseMsg: ->
     window.top.postMessage { action: 'close' }, '*'
 
+  saveOrClose: (e)->
+    if @marked()?.length
+      @saveBlock(e)
+    else
+      @sendCloseMsg(e)
+
+  marked: ->
+    @collection.where marked: true
+
   saveBlock: (e) =>
     e.preventDefault()
+
     marked = @collection.where marked: true
 
     @$el.addClass 'is-saving'
@@ -51,6 +66,7 @@ module.exports = class SaveConnectView extends ConnectView
   successfulSave: =>
     @$el.removeClass('is-saving').addClass 'is-successful'
     @$('button').prop('disabled', true).text 'Block saved.'
+    @sendCloseMsg()
 
   isURL: ->
     validator.isURL @getContent()
@@ -58,7 +74,7 @@ module.exports = class SaveConnectView extends ConnectView
   clear: -> # no op
 
   getContent: ->
-    query = $('input#content').val()?.trim()
+    query = $('#save-content').val()?.trim()
     if query.length
       return query
     else
@@ -66,8 +82,13 @@ module.exports = class SaveConnectView extends ConnectView
 
   render: =>
     @$el.html connectTemplate()
+
+    @postRender()
+
+  postRender: ->
     @focusSearch()
     @renderChannels()
+    @collection.on 'change:marked', @updateButtonCopy, @
 
   search: (e) ->
     e.preventDefault()

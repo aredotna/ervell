@@ -10,17 +10,16 @@ block body
         h5: a(href="/#") URL
       li.tab--container__nav__item(data-tab="drop", class=tab == 'drop' ? 'is-active' : '')
         h5: a(href="/#") Drop
-  #save-page
-    if isURL
+
+    #tab-url.tab-content(class=tab == 'url' ? 'is-active' : '')
       input#save-content.input--wide.input--relative.is-block(
         name='content' type='text' placeholder='URL' value="#{content}"
       )
-    else
-      input#save-content.input--wide.input--relative.is-block(
-        name='content' type='text' placeholder='Text' value="#{content}"
-      )
-    #save--connect
-      //- rendered on the client
+      #save--connect
+        //- rendered on the client
+
+    #tab-drop.tab-content(class=tab == 'drop' ? 'is-active' : '')
+      h1 Drop zone
 
 block scripts
   script( src=asset('/assets/marklet.js') )
