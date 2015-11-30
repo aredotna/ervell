@@ -96,14 +96,18 @@ module.exports = class AuthView extends Backbone.View
             location.reload()
         when 'signup'
           analytics.track.submit 'User requested invitation'
-          @showError "Please check your email for registration details."
+          @showSuccess "Please check your email for registration details."
         when 'forgot'
           analytics.track.submit 'User reset password'
-          @showError "Please check your email for password reset details."
+          @showSuccess "Please check your email for password reset details."
 
   showError: (msg) =>
     @$('button').attr 'data-state', 'error'
     @$('.auth-errors').addClass('is-active').text msg
+
+  showSuccess: (msg) ->
+    @$('button').attr 'data-state', 'error'
+    @$('.auth-errors').addClass('is-active is-success').text msg
 
   render: ->
     @$el.html @template @templateData
