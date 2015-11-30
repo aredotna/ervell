@@ -11,9 +11,11 @@ User = require '../../../models/user.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
+emptyTemplate = -> require('../../../components/feed/templates/empty.jade') arguments...
 
 module.exports = class FeedView extends Backbone.View
-  count: 0
+  retryCount: 0
+  maxRetry: 3
 
   initialize: ->
     mediator.trigger 'load:start'
@@ -25,24 +27,20 @@ module.exports = class FeedView extends Backbone.View
 
   initialFetch: =>
     @setSharedBlocks()
-    # @startPolling()
 
     mediator.trigger 'load:stop'
 
-    _.defer => @count = mediator.shared.blocks.length
-
     if sd.FEED_TYPE is 'primary'
       # notifications api updates to be paginated :/
-      @infinite_view = new InfiniteView
+      @paginator = new InfiniteView
         context: @$el
         collection: @collection
         itemSelector: @$el
-
-  startPolling: ->
-    # poller = Poller.get(@collection,
-    #   delay: [3000]
-    #   delayed: 10000
-    # ).start()
+        nextPageCallback: (request) =>
+          unless request.responseJSON.items.length
+            @retryCount++
+            @paginator.disable() if @retryCount > @maxRetry
+            @showEmpty()
 
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)
@@ -54,14 +52,15 @@ module.exports = class FeedView extends Backbone.View
     _.defer ->
       IconicJS().inject 'img.iconic'
 
+  showEmpty: ->
+    @$el.html emptyTemplate()
+
   updateTitle: (diff) =>
     window.document.title = "Arena (#{diff})"
 
   setSharedBlocks: ->
     blocks = new Blocks []
     blocks.reset @collection.getAllItems()
-    # if mediator.shared.blocks?
-      # @updateTitle(diff) if (diff = blocks.length - mediator.shared.blocks.length)
     mediator.shared.blocks = blocks
 
   initBlockView: (index, el) =>
