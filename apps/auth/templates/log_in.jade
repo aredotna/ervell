@@ -1,0 +1,10 @@
+extends ../../../components/layout/index--bare
+
+block vars
+  - extraClasses = 'no-header no-messages'
+
+block body
+  include ../../../components/auth/templates/login
+
+block scripts
+  script( src=asset('/assets/auth.js') )

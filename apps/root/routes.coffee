@@ -13,8 +13,7 @@ bullet_points = require './fixtures/bullet_points.coffee'
 sd = require("sharify").data
 
 @index = (req, res, next) ->
-  if req.params.block_id
-    res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
+  res.locals.sd.CURRENT_PATH = "/"
 
   if req.user
     res.locals.sd.FEED_TYPE = 'primary'
