@@ -16,6 +16,34 @@ module.exports = class SaveConnectView extends ConnectView
     'tap .new-connection__done-button' : 'saveOrClose'
     'keyup .new-connection__search'    : 'onKeyUp'
 
+  initialize: ->
+    window.addEventListener 'message', (e) =>
+      @trigger(e.data.action, e.data) if e.data isnt 'close'
+
+    @on 'drop', @handleDrop
+
+    super
+
+  handleDrop: (data) ->
+    $html = $(data.value['text/html'])
+    src   = $html.find('img').attr('src')
+    src   = $html.first().next().attr('src')  if not src
+    src   = $html.first().next().attr('href') if not src
+
+    type = if src then "Block" else "Text"
+
+    if type is "Text"
+      data =
+        content: data.value['text/plain']
+    else
+      $value = $(data.value['text/html'])
+      imgsrc = $value.find('img').attr('src')
+      data = source: src
+
+    data.type = type
+
+    console.log 'data', data
+
   updateButtonCopy: ->
     if @marked()?.length
       @$('.new-connection__done-button').text 'Save and close'

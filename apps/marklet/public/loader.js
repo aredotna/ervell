@@ -153,6 +153,14 @@
     return false;
   }
 
+  function closest(that, tagname) {
+    while (that.parentNode) {
+      that = that.parentNode;
+      if (that.tagName == tagname) return that
+    }
+    return false;
+  }
+
   function sendMessage(data) {
     markletFrame.contentWindow.postMessage(data, "*")
   }
