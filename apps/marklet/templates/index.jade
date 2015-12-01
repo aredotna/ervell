@@ -15,11 +15,16 @@ block body
       input#save-content.input--wide.input--relative.is-block(
         name='content' type='text' placeholder='URL' value="#{content}"
       )
-      #save--connect
-        //- rendered on the client
+
 
     #tab-drop.tab-content(class=tab == 'drop' ? 'is-active' : '')
-      h1 Drop zone
+      .grid.flex-container
+        include ./drop_zone
+
+    #save--connect
+      //- rendered on the client
+
+
 
 block scripts
   script( src=asset('/assets/marklet.js') )
