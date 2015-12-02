@@ -39,8 +39,9 @@ module.exports = class FeedView extends Backbone.View
         nextPageCallback: (request) =>
           unless request.responseJSON.items.length
             @retryCount++
-            @paginator.disable() if (@retryCount > @maxRetry) and not @collection.length
-            @showEmpty()
+            if (@retryCount > @maxRetry) and (@collection.length < 1)
+              @paginator.disable()
+              @showEmpty()
 
   render: ->
     @$el.html feedTemplate(feed: @collection.models, user: @current_user)

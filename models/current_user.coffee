@@ -47,9 +47,9 @@ module.exports = class CurrentUser extends User
 
   isFollowing: (model) ->
     if model.get('base_class') is 'Channel'
-      _.include @get('following_channels'), model.id
+      _.include @get('following_channels'), parseInt(model.id)
     else
-      _.include @get('following_users'), model.id
+      _.include @get('following_users'), parseInt(model.id)
 
   toggleFollow: (followable)->
     type = followable.get('base_class').toLowerCase() + 's'

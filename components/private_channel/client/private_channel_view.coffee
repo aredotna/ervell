@@ -16,7 +16,6 @@ module.exports = class PrivateChannelView extends Backbone.View
     @render()
 
   render: ->
-    console.log 'rendering', @$el
     @$el.html messageButtonTemplate
       model: @model
       showTitle: @showTitle

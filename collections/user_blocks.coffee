@@ -43,6 +43,6 @@ module.exports = class UserBlocks extends SearchBlocks
 
       collection = collection.concat(grouped_blocks['undefined']) if grouped_blocks['undefined']
 
-      return collection
+      return _.reject collection, (item) -> item.class is 'Block' and item.channel_ids.length < 1
     else
       super
