@@ -27,11 +27,13 @@ module.exports = class ChannelView extends Backbone.View
 
   events:
     'click .delete-channel' : 'showConfirmation'
+    'click .delete-channel a' : 'showConfirmation'
     'click .delete-channel--confirmation__yes' : 'deleteChannel'
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
     'click .connect_button': 'loadConnectView'
 
   initialize: (options)->
+    console.log 'initialize', @$('.delete-channel')
     @channel = options.channel
     @blocks = options.blocks
 
@@ -67,6 +69,7 @@ module.exports = class ChannelView extends Backbone.View
     window.location.href = @channel.href()
 
   showConfirmation: ->
+    console.log 'showConfirmation'
     @$('.delete-channel--confirmation').addClass 'is-active'
 
   hideConfirmation: ->
@@ -99,6 +102,7 @@ module.exports = class ChannelView extends Backbone.View
       @setupExportView()
       @setupEditTitleView()
       @setUpDragView() unless $('body').hasClass 'is-mobile'
+      @delegateEvents()
 
     @setupEditDescriptionView()
     @maybeSetEmpty()
