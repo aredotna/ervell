@@ -24,7 +24,7 @@
   }
 
   function getURL(msg){
-    baseUrl = "http://marklet.arena.dev:5000/save/";
+    baseUrl = "https://www.are.na/save/";
 
     url = baseUrl + encodeURIComponent(msg.url);
     url += "?original_source_url=" + encodeURIComponent(msg.url);
