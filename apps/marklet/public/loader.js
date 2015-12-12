@@ -24,7 +24,7 @@
   }
 
   function getURL(msg){
-    baseUrl = "https://www.are.na/save/";
+    baseUrl = "https://ervell-staging.are.na/save/";
 
     url = baseUrl + encodeURIComponent(msg.url);
     url += "?original_source_url=" + encodeURIComponent(msg.url);
