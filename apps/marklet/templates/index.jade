@@ -4,27 +4,7 @@ block vars
   - extraClasses = 'no-header no-messages no-scroll'
 
 block body
-  #save-tabs.tab--container.tab--container--save
-    ul.tab--container__nav
-      li.tab--container__nav__item(data-tab="url", class=tab == 'url' ? 'is-active' : '')
-        h5: a(href="/#") URL
-      li.tab--container__nav__item(data-tab="drop", class=tab == 'drop' ? 'is-active' : '')
-        h5: a(href="/#") Drop
-
-    #tab-url.tab-content(class=tab == 'url' ? 'is-active' : '')
-      input#save-content.input--wide.input--relative.is-block(
-        name='content' type='text' placeholder='URL' value="#{content}"
-      )
-
-
-    #tab-drop.tab-content(class=tab == 'drop' ? 'is-active' : '')
-      .grid.flex-container
-        include ./drop_zone
-
-    #save--connect
-      //- rendered on the client
-
-
+  include ./save
 
 block scripts
   script( src=asset('/assets/marklet.js') )

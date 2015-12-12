@@ -1,5 +1,9 @@
 { parse } = require 'url'
 validator = require 'validator'
+Backbone = require 'backbone'
+
+class TabState extends Backbone.Model
+  defaults: mode: 'url'
 
 @save = (req, res, next) ->
   next() unless req.user
@@ -12,5 +16,5 @@ validator = require 'validator'
   res.render 'index',
     content: content
     isURL: isURL
-    tab: req.params.tab || 'url'
+    tab: new TabState()
     query: query

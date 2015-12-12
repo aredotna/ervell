@@ -74,6 +74,14 @@
       case "close":
         closeBookmarklet();
         break;
+      case "expand":
+        el = document.getElementById('arena_frame');
+        addClass(el, 'is-expanded');
+        break;
+      case "contract":
+        el = document.getElementById('arena_frame');
+        removeClass(el, 'is-expanded');
+        break;
     }
   });
 
@@ -85,6 +93,10 @@
 
   function startDrag(e) {
     var targetParent;
+
+    sendMessage({
+      action: "drag"
+    });
 
     if (typeof e.dataTransfer.getData("text/html") == "undefined"
       || e.target.tagName == "IMG") {
@@ -163,6 +175,28 @@
 
   function sendMessage(data) {
     markletFrame.contentWindow.postMessage(data, "*")
+  }
+
+  function hasClass(el, className) {
+    if (el.classList)
+      return el.classList.contains(className)
+    else
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
+
+  function addClass(el, className) {
+    if (el.classList)
+      el.classList.add(className)
+    else if (!hasClass(el, className)) el.className += " " + className
+  }
+
+  function removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className)
+    else if (hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+      el.className=el.className.replace(reg, ' ')
+    }
   }
 
 })();

@@ -8,47 +8,88 @@ ConnectView = require '../../../components/connect/client/connect_view.coffee'
 ConnectionBlocks = require '../../../collections/connection_blocks.coffee'
 SaveConnectResultsView = require './save_connect_results_view.coffee'
 
-connectTemplate = -> require('../templates/connect.jade') arguments...
+template = -> require('../templates/save.jade') arguments...
+textDropTemplate = -> require('../templates/text_drop.jade') arguments...
+imageDropTemplate = -> require('../templates/image_drop.jade') arguments...
+
+class TabState extends Backbone.Model
+  defaults: mode: 'url'
 
 module.exports = class SaveConnectView extends ConnectView
 
   events:
     'tap .new-connection__done-button' : 'saveOrClose'
+    'tap .tab--container__nav__item'   : 'handleTab'
     'keyup .new-connection__search'    : 'onKeyUp'
 
   initialize: ->
+    @tabState = new TabState()
+
     window.addEventListener 'message', (e) =>
       @trigger(e.data.action, e.data) if e.data isnt 'close'
 
+    @on 'drag', @handleDrag
     @on 'drop', @handleDrop
+
+    @tabState.on 'change', @render, @
 
     super
 
+  handleDrag: (data) ->
+    @switchTab 'drop'
+
   handleDrop: (data) ->
     $html = $(data.value['text/html'])
-    src   = $html.find('img').attr('src')
-    src   = $html.first().next().attr('src')  if not src
-    src   = $html.first().next().attr('href') if not src
+    src = $html.find('img').attr('src')
+    src = $html.first().next().attr('src')  if not src
+    href = $html.first().next().attr('href') if not src
+
+    if href
+      @newURL = href
+      return @switchTab 'url'
 
     type = if src then "Block" else "Text"
 
     if type is "Text"
-      data =
-        content: data.value['text/plain']
+      @content = data.value['text/plain']
+      @renderPreview type: 'text', content: @content
     else
       $value = $(data.value['text/html'])
       imgsrc = $value.find('img').attr('src')
-      data = source: src
+      @content =  src
+      @renderPreview type: 'image', src: src
 
-    data.type = type
+    @sendExpandMsg()
 
-    console.log 'data', data
+  handleTab: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+
+    tab = $(e.currentTarget).data 'tab'
+    @switchTab tab
+
+  switchTab: (tab) ->
+    @tabState.set mode: tab
+
+  renderPreview: (options) ->
+    if options.type is 'text'
+      @$("#tab-drop .grid").html textDropTemplate
+        text: options.content
+    else
+      @$("#tab-drop .grid").html imageDropTemplate
+        src: options.src
 
   updateButtonCopy: ->
     if @marked()?.length
       @$('.new-connection__done-button').text 'Save and close'
     else
       @$('.new-connection__done-button').text 'Close'
+
+  sendExpandMsg: ->
+    window.top.postMessage { action: 'expand' }, '*'
+
+  sendContractMsg: ->
+    window.top.postMessage { action: 'contract' }, '*'
 
   sendCloseMsg: ->
     window.top.postMessage { action: 'close' }, '*'
@@ -102,24 +143,34 @@ module.exports = class SaveConnectView extends ConnectView
   clear: -> # no op
 
   getContent: ->
-    query = $('#save-content').val()?.trim()
-    if query.length
-      return query
+    if @tabState.get('mode') is 'url'
+      query = $('#save-content').val()?.trim()
+      if query.length
+        return query
+      else
+        false
     else
-      false
+      return @content
 
   render: =>
-    @$el.html connectTemplate()
+    @$el.html template
+      content:  @newURL || sd.CONTENT
+      isURL: sd.IS_URL
+      tab: @tabState
+      query: sd.QUERY
 
     @postRender()
 
   postRender: ->
+    @sendContractMsg()
     @focusSearch()
     @renderChannels()
     @collection.on 'change:marked', @updateButtonCopy, @
 
   search: (e) ->
     e.preventDefault()
+
+    console.log '@getQuery()', @getQuery()
 
     return @reset() unless query = @getQuery()
     return if (query.length < 2) or (query is @lastQuery)
