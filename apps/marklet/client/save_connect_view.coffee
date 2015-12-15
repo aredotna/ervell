@@ -79,10 +79,12 @@ module.exports = class SaveConnectView extends ConnectView
       @$("#tab-drop .grid").html imageDropTemplate
         src: options.src
 
-  updateButtonCopy: ->
+  updateStatus: ->
     if @marked()?.length
+      @$('.grid__block--image, #save-content').addClass 'is-connected'
       @$('.new-connection__done-button').text 'Save and close'
     else
+      @$('.grid__block--image, #save-content').removeClass 'is-connected'
       @$('.new-connection__done-button').text 'Close'
 
   sendExpandMsg: ->
@@ -165,7 +167,7 @@ module.exports = class SaveConnectView extends ConnectView
     @sendContractMsg()
     @focusSearch()
     @renderChannels()
-    @collection.on 'change:marked', @updateButtonCopy, @
+    @collection.on 'change:marked', @updateStatus, @
 
   search: (e) ->
     e.preventDefault()

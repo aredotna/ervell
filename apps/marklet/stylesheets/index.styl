@@ -23,6 +23,10 @@ label.save-label
   background-color white
   font-size 1.2rem
   margin 0
+  opacity 0.5
+
+#save-content.is-connected
+  opacity 1
 
 textarea.save-text_drop
   width 280px
@@ -32,9 +36,14 @@ textarea.save-text_drop
   .grid__block
     margin-top 12px
     margin-bottom 0
+  .grid__block--new-block
     border 2px dashed bordergray
-  .grid__block--new-block .add-block__placeholder
-    top 20%
+    .add-block__placeholder
+      top 20%
+  .grid__block--image
+    opacity 0.5
+  .grid__block--image.is-connected
+    opacity 1
   .flex-container
     max-width 100%
 
