@@ -6,6 +6,5 @@ SaveConnectView = require './client/save_connect_view.coffee'
 
 module.exports.init = ->
   new SaveConnectView
-    el: $('#save--connect')
+    el: $('#save-tabs')
     block: new Backbone.Model
-

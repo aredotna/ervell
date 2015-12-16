@@ -1,7 +1,11 @@
+
 #save-page
   margin (s_margin * 2) auto
   max-width block_width * 2
   padding 0 (s_margin * 2)
+
+  .tab-content
+    padding 5px
 
 .save-page__close
   position absolute
@@ -15,8 +19,36 @@ label.save-label
   display block
   line-height 2
 
+#save-content
+  background-color white
+  font-size 1.2rem
+  margin 0
+  opacity 0.5
+
+#save-content.is-connected
+  opacity 1
+
+textarea.save-text_drop
+  width 280px
+  height 280px
+
+#save-tabs
+  .grid__block
+    margin-top 12px
+    margin-bottom 0
+  .grid__block--new-block
+    border 2px dashed bordergray
+    .add-block__placeholder
+      top 20%
+  .grid__block--image
+    opacity 0.5
+  .grid__block--image.is-connected
+    opacity 1
+  .flex-container
+    max-width 100%
+
 #save--connect
-  margin (s_margin * 2) 0
+  margin s_margin
 
   .new-connection
     padding 0
@@ -56,6 +88,23 @@ label.save-label
   -webkit-animation loading 0.5s linear infinite
   animation loading 0.5s linear infinite
 
+.tab--container--save
+  .tab--container__nav
+    position relative
+    width 100%
+
+  .tab--container__nav__item
+    padding 0 unit
+    cursor pointer
+    a
+      display block
+
+    +below(800px)
+      display inline-block
+      width 50%
+      padding 0 (unit/2)
+      margin-right 0
+
 @keyframes loading
   from
     background-position 0 0
@@ -63,5 +112,7 @@ label.save-label
     background-position 160px 80px
 
 #save--connect .new-connection__done-button.button--inblock.button--inblock--bottom
-  position static
-  width 100%
+  position absolute
+  bottom 0px
+  width 280px
+  background-color white

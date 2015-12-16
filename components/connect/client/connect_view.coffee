@@ -78,7 +78,7 @@ module.exports = class ConnectView extends Backbone.View
       success: => @searchLoaded()
 
   getQuery: ->
-    query = @$('input').val()?.trim()
+    query = @$('input.new-connection__search').val()?.trim()
     if query.length
       return query
     else
