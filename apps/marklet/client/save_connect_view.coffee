@@ -80,8 +80,7 @@ module.exports = class SaveConnectView extends ConnectView
         src: options.src
 
   updateStatus: ->
-    console.log 'updateStatus'
-    if @marked()?.length
+    if @marked()?.length or @$el.hasClass 'is-saving'
       @$('.grid__block--image, #save-content').addClass 'is-connected'
       @$('.new-connection__done-button').text 'Save and close'
     else
@@ -119,6 +118,7 @@ module.exports = class SaveConnectView extends ConnectView
           marked.get('slug')
 
       _.map marked, (block) ->
+        block.unset('marked')
         mediator.shared.recent_connections.shove block
 
       attr = if @isURL() then 'source' else 'content'
