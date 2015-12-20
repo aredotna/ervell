@@ -23,6 +23,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
+  showBookmarkletMessage() if sd.CURRENT_USER?
   initShortCuts()
 
 setMobileClass = ->
@@ -141,6 +142,14 @@ initShortCuts = ->
 showNewUserMessages = ->
   new NewUserMessagesView
     container: $('#message-container')
+
+showBookmarkletMessage = ->
+  model = new Backbone.Model
+    id: 'bookmarklet_updates_message'
+    title: "Bookmarklet updates"
+    body: "We recently made some updates to our bookmarklet. <a href='https://www.are.na/block/506001'>Read more...</a>"
+    type: 'announcement'
+  new MessageView container: $('#message-container'), model: model
 
 showAnnouncements = (announcements) ->
   # stub
