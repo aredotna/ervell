@@ -30,4 +30,4 @@ router.get "/loader.js", (req, res, next) ->
     else
       console.log('Sent:')
 
-app.use subdomain('marklet-beta', router)
+app.use subdomain('marklet', router)
