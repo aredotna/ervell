@@ -21,7 +21,6 @@
     "cookie-session": "*",
     "cookies": "^0.5.0",
     "diacritics": "*",
-    "dompurify": "^0.6.5",
     "express": "*",
     "express-subdomain": "^1.0.4",
     "ezel-assets": "0.0.13",
@@ -36,7 +35,6 @@
     "parse-domain": "^0.2.0",
     "q": "*",
     "query-params": "*",
-    "readability": "^0.1.0",
     "redis": "*",
     "s3-policy": "*",
     "scroll-frame": "0.0.10",
@@ -45,7 +43,8 @@
     "sortablejs": "^1.1.1",
     "underscore": "*",
     "underscore.string": "*",
-    "validator": "*"
+    "validator": "*",
+    "xss": "^0.2.9"
   },
   "devDependencies": {
     "jquery": "*",

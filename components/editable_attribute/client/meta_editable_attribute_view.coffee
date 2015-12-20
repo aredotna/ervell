@@ -2,7 +2,7 @@ _ = require 'underscore'
 mediator = require '../../../lib/mediator.coffee'
 EditableAttributeView = require './editable_attribute_view.coffee'
 md = require 'marked'
-DOMPurify = require 'dompurify'
+xss = require 'xss'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
 
@@ -31,8 +31,8 @@ module.exports = class MetaEditableAttributeView extends EditableAttributeView
       @render()
 
     if @wait is true
-      @model.saveMeta @_attribute, DOMPurify.sanitize(@$('.editor').val()),
+      @model.saveMeta @_attribute, xss(@$('.editor').val()),
         success: afterSaved
     else
-      @model.saveMeta @_attribute, DOMPurify.sanitize(@$('.editor').val())
+      @model.saveMeta @_attribute, xss(@$('.editor').val())
       afterSaved()?

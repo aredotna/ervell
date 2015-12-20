@@ -6,7 +6,7 @@ Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
 md = require 'marked'
-DOMPurify = require 'dompurify'
+xss = require 'xss'
 
 module.exports = class EditableAttributeView extends Backbone.View
   wait: false
@@ -69,7 +69,7 @@ module.exports = class EditableAttributeView extends Backbone.View
     @endEdit()
 
     attributes = {}
-    attributes[@_attribute] = DOMPurify.sanitize @$('.editor').val()
+    attributes[@_attribute] = xss @$('.editor').val()
 
     afterSaved = =>
       @model.trigger 'edit:success'
