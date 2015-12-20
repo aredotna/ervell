@@ -37,9 +37,9 @@ module.exports = class ResetPasswordView extends Backbone.View
 module.exports.init = ->
   switch sd.CURRENT_PATH
     when '/log_in', '/sign_up'
-      console.log 'sd.MODE', sd.MODE
       view = new AuthView
         mode: sd.MODE
+        redirectTo: sd.REDIRECT_TO
         el: $('.container')
 
       view.render()

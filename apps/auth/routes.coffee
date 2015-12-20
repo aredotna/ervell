@@ -5,6 +5,7 @@ Backbone = require 'backbone'
 sd = require("sharify").data
 User = require "../../models/user"
 cache = require "../../lib/cache.coffee"
+sanitizeRedirect = require '../../components/sanitize_redirect/index'
 { parse } = require 'url'
 
 clearCache = (user) ->
@@ -13,6 +14,7 @@ clearCache = (user) ->
 
 @logIn = (req, res, next) ->
   return res.redirect('/') if req.user?.id
+  res.locals.sd.REDIRECT_TO = req.session.redirectTo
   res.locals.sd.MODE = 'login'
   res.render 'log_in'
 
@@ -50,6 +52,7 @@ clearCache = (user) ->
   url = req.body['redirect-to'] or
         req.query['redirect-to'] or
         req.param('redirect_uri') or
+        req.session.redirectTo or
         parse(req.get('Referrer') or '').path or
         '/'
   res.redirect url
