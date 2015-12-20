@@ -52,7 +52,7 @@
   function createStyle(){
     markletStyle = document.createElement("style");
     markletStyle.type = "text/css";
-    markletCSS = "#arena_frame,#arena_div{overflow:hidden;width:300px;height:420px;position:fixed;top:20px;right:20px;border:none}#arena_frame.is-expanded{height:670px}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);box-shadow: 3px 4px 10px rgba(0, 0, 0, .4);}#arena_frame:hover{background:rgba(255,255,255,0.9); box-shadow: 3px 4px 10px rgba(0, 0, 0, .5);}#arena_div{z-index:9999999999;display:none;opacity:0}";
+    markletCSS = "#arena_frame,#arena_div{overflow:hidden;width:300px;height:420px;position:fixed;top:0px;right:0px;border:none}#arena_frame.is-expanded{height:670px}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);box-shadow: 3px 4px 10px rgba(0, 0, 0, .4);}#arena_frame:hover{background:rgba(255,255,255,0.9); box-shadow: 3px 4px 10px rgba(0, 0, 0, .5);}#arena_div{z-index:9999999999;display:none;opacity:0}";
 
     if (markletStyle.styleSheet) {
       markletStyle.styleSheet.cssText = markletCSS;
