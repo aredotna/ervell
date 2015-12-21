@@ -146,8 +146,8 @@ showNewUserMessages = ->
 showBookmarkletMessage = ->
   model = new Backbone.Model
     id: 'bookmarklet_updates_message'
-    title: "Bookmarklet updates"
-    body: "We recently made some updates to our bookmarklet. <a href='https://www.are.na/block/506001'>Read more...</a>"
+    title: "New Bookmarklet"
+    body: "Quickly save to Are.na while browsing the web. Drag and drop, add to multiple channels, and more. <a href='https://www.are.na/block/506001'>Read more...</a>"
     type: 'announcement'
   new MessageView container: $('#message-container'), model: model
 
