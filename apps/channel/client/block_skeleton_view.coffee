@@ -147,6 +147,15 @@ module.exports = class BlockSkeletonView extends Backbone.View
 
     mediator.trigger 'page:loaded'
 
+    $start = if page_id is 1 then @$('> .grid__block:first') else @$(".pagemarker[data-page=#{page_id}]")
+    $pageElements = $start.nextUntil('.pagemarker').andSelf()
+
+    $pageElements = $pageElements.filter('.grid__block--placeholder')
+
+    _.delay =>
+      $pageElements.remove()
+    , 100
+
   markPageLoaded: (id) ->
     @pages[id]?.loaded = true
     @pages[id]?.loading = false
