@@ -8,5 +8,3 @@ block vars
 block content
   if !user.canEditChannel(channel)
     .follow_button.pointer: a(data-type="Channel", data-id="#{channel.id}")
-  .connect-container
-  .connect_button.pointer: a(data-type="Channel", data-id="#{channel.id}") Connect

@@ -71,7 +71,7 @@
 
   &.is-active
     display block
-  
+
   .delete-channel--confirmation__no
     margin 0 0 0 6px
 
@@ -88,6 +88,9 @@
 
   span:hover
     hovergray
+
+#metadata--info__collaborators span
+  color lightgray
 
 .is-editing
   .collaborators__edit
@@ -150,18 +153,24 @@
   .new-collaborator__add
     display none
 
-#metadata--actions, #metadata--container
+#metadata--connections, #metadata--container
   position relative
 
-#metadata__column-manage, #metadata--connections
+#metadata--connections
+  overflow-y visible
+
+#metadata__column-manage
   display none
+
+.connect_button a
+  color textgray
 
 #metadata__column-manage
   .toggle-settings-trigger
     width 14px
     float right
     margin 4px 4px 0 0
-    svg 
+    svg
       width 14px
       height 14px
       fill lightgray
@@ -177,20 +186,6 @@
   top 0
   right 0
   padding-top 0
-
-.connect-container
-  position absolute
-  top -100px
-  height 315px
-  width 315px
-  z-index 99999
-  pointer-events none
-  left -1px
-
-  &.is-active
-    background #fff
-    border 1px solid bordergray
-    pointer-events all
 
 .form__field__channel-filter
   height 50px

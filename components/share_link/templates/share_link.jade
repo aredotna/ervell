@@ -1,6 +1,6 @@
 if channel.get('share_link')
   input#channel--share-input.channel--share-input(value="#{channel.shareHref()}" readonly)
-  .channel--share-unshare: a Unshare
+  .channel--share-unshare: a Remove public link
 else
-  .channel--share-generate: a Generate shareable link
+  .channel--share-generate: a Create public link
 

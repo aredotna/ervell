@@ -6,10 +6,15 @@ block vars
   - id = "metadata--export"
 
 block content
-  .export--option(data-format="pdf"): a PDF
-  .export--option(data-format="zip"): a ZIP
-  .export--option(data-format="html"): a HTML
-  unless channel.get('status') == 'private'
-    .export--link(data-format="json"): a(href="#{sd.API_URL}/channels/#{channel.get('slug')}" target="_blank") JSON
+  if channel.get('status') == 'private'
+    .metadata__content__section.js-share-link
+      include ../../../../components/share_link/templates/share_link
+  .metadata__content__section
+    unless channel.get('status') == 'private'
+      .export--link(data-format="rss"): a(href="#{channel.get('slug')}/feed/rss" target="_blank") RSS Feed
+      .export--link(data-format="json"): a(href="#{sd.API_URL}/channels/#{channel.get('slug')}" target="_blank") JSON
+    .export--option(data-format="pdf"): a PDF
+    .export--option(data-format="zip"): a ZIP
+    .export--option(data-format="html"): a HTML
 
-  .export__status
+    .export__status

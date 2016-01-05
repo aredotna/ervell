@@ -13,6 +13,7 @@ NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelCollaborationView = require './client/channel_collaboration_view.coffee'
 ChannelConnectionsView = require './client/channel_connections_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
+PathView = require '../../components/path/client/path_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
 ChannelVisibilityView = require '../../components/channel_visibility/client/channel_visibility_view.coffee'
 ShareLinkView = require '../../components/share_link/client/share_link_view.coffee'
@@ -32,17 +33,17 @@ module.exports = class ChannelView extends Backbone.View
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
     'click .connect_button': 'loadConnectView'
 
-  initialize: (options)->
-    console.log 'initialize', @$('.delete-channel')
-    @channel = options.channel
-    @blocks = options.blocks
-
+  initialize: ({ @channel, @blocks })->
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
     mediator.shared.state.on 'change', @toggleDragClass, @
 
     @channel.on 'edit:title:success', @updateSlug, @
+    @channel.on 'change:follower_count', @updateFollowerCount, @
 
     @subscribe()
+
+  updateFollowerCount: ->
+    @$('.js-channel-follower-count').html "<a href='#{@channel.href()}/followers'> #{@channel.get('follower_count')} Followers</a>"
 
   toggleDragClass: ->
     if mediator.shared.state.get('isDraggingBlocks')
@@ -69,7 +70,6 @@ module.exports = class ChannelView extends Backbone.View
     window.location.href = @channel.href()
 
   showConfirmation: ->
-    console.log 'showConfirmation'
     @$('.delete-channel--confirmation').addClass 'is-active'
 
   hideConfirmation: ->
@@ -122,7 +122,7 @@ module.exports = class ChannelView extends Backbone.View
   setupEditDescriptionView: ->
     new MetaEditableAttributeView
       model: @channel
-      el:@$("#metadata--description .metadata__content")
+      el:@$("#metadata--info__description")
       _attribute: 'description'
       _kind: 'markdown'
       wait: true
@@ -165,7 +165,7 @@ module.exports = class ChannelView extends Backbone.View
 
   setupShareLinkView: ->
     @shareLinkView = new ShareLinkView
-      el: @$ "#metadata--share .metadata__content"
+      el: @$ ".js-share-link"
       model: @channel
 
   setupExportView: ->
@@ -185,6 +185,10 @@ module.exports.init = ->
   blocks = new ChannelBlocks sd.BLOCKS,
     channel_slug: sd.CHANNEL.slug
 
+  new PathView
+    el: $('section.path--header')
+    model: channel
+
   new ChannelView
     el: $ "body"
     channel: channel
@@ -200,7 +204,7 @@ module.exports.init = ->
 
   new ChannelCollaborationView
     collection: collaborators
-    el: $("#metadata--collaborators .metadata__content")
+    el: $("#metadata--info__collaborators")
     isCollaboration: channel.has('collaboration')
     isEditable: mediator.shared.current_user.canEditChannel channel
     channel: channel

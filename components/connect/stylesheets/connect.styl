@@ -81,9 +81,16 @@ privacy-light-color('.new-connection__search-result-', background-color)
 /* mini connection interface */
 .metadata__content
   .connect-container
-    top 20px
+    position absolute
     height 121px
     width 300px
+    z-index 99999
+    pointer-events none
+
+    &.is-active
+      background #fff
+      border 1px solid bordergray
+      pointer-events all
 
     .new-connection
       padding 0

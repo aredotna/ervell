@@ -15,10 +15,7 @@ module.exports = class PathView extends Backbone.View
 
   initialize: (options) ->
     if (sd.USER or sd.CHANNEL) and sd.CURRENT_USER
-
-      model = if sd.USER then sd.USER else sd.CHANNEL
-      @model = new Block model
-
+      console.log 'model', @model
       new FollowButtonView
         el: @$('.follow_button')
         model: @model

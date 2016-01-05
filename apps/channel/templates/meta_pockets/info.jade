@@ -1,0 +1,15 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Info"
+  - extraClasses = "is-readable"
+  - id = "metadata--info"
+
+block content
+  .metadata__content__section#metadata--info__description
+    if channel.has('metadata')
+      | #{channel.get('metadata').description}
+    else
+      | —
+  .metadata__content__section#metadata--info__collaborators
+    //- rendered on the client

@@ -40,7 +40,6 @@ div#metadata__column-manage
   margin 0 20px 0 0
   width 225px
   height auto
-  max-height 163px
   min-height 80px
   overflow-x visible
   overflow-y hidden
@@ -65,14 +64,14 @@ div#metadata__column-manage
     float right
     text-align right
 
-#metadata--actions
-  overflow-y visible
-
 .settings-is-active .metadata__column--right
   display none
 
 .settings-is-active .metadata__column.is-settings
   display inline-block
+
+.metadata__content__section
+  padding-bottom s_margin
 
 .metadata__title
   width 100%
@@ -129,16 +128,16 @@ privacy-color('.is-active.metadata--selector__option--', color)
     width 100%
     margin 0
     min-height 50px
-  
+
   .metadata__content
     .connect-container
       margin-left 1px
       padding 0
-      
+
       .new-connection
         .button--inblock--mini
           line-height 15px
           margin: 0 0 0 -16px
-  
+
   #metadata__column-manage.is-editable
     width 20px
