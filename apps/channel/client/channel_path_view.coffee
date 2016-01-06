@@ -34,7 +34,7 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
     super
 
   updateFollowerCount: ->
-    @$('.js-channel-follower-count').html "<a href='#{@channel.href()}/followers'> #{@channel.get('follower_count')} Followers</a>"
+    @$('.js-channel-follower-count').html "<a href='#{@model.href()}/followers'> #{@model.get('follower_count')} Followers</a>"
 
   toggleSettings: (e)->
     @$('.metadata--container').toggleClass 'settings-is-active'
