@@ -15,12 +15,14 @@ block path
 
 block metadata
   .metadata
-    include meta_pockets/info
+    if author.id == user.id || channel.has('metadata') || channel.get('collaboration') == true
+      include meta_pockets/info
     include meta_pockets/connections
     if user
       unless channel.get('status') == 'private'
         include meta_pockets/followers
       include meta_pockets/privacy
+      include meta_pockets/edit_collaborators
       include meta_pockets/export
       include meta_pockets/delete
 

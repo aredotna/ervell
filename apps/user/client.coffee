@@ -13,11 +13,13 @@ UserBlocks = require '../../collections/user_blocks.coffee'
 FollowBlocks = require '../../collections/follow_blocks.coffee'
 InfiniteView = require '../../components/pagination/infinite_view.coffee'
 Filter = require '../../components/filter/index.coffee'
+PathView = require '../../components/path/client/path_view.coffee'
 MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
 
 module.exports.init = ->
   current_user = mediator.shared.current_user
+  user = new User sd.USER
 
   if sd.FOLLOWING || sd.FOLLOWERS
     blocks = new FollowBlocks sd.BLOCKS,
@@ -35,6 +37,11 @@ module.exports.init = ->
     el: $ ".grid--user"
     blocks: blocks
 
+
+  new PathView
+    el: $('section.path--header')
+    model: user
+
   # scrollFrame '.grid__block--channel a'
 
   new InfiniteView
@@ -46,7 +53,7 @@ module.exports.init = ->
 
   new MetaEditableAttributeView
     model: user
-    el: $("#metadata--info .metadata__content")
+    el: $("#metadata--about .metadata__content")
     _attribute: 'description'
     _kind: 'markdown'
     wait: true

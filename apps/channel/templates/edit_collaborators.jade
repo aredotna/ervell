@@ -1,0 +1,11 @@
+if collaborators.length
+  .collaborators__edit
+    each collaborator, i in collaborators
+      .collaborators__edit__result
+        span(class="iconic collaborators__edit__result__remove" data-id="#{collaborator.id}" data-glyph="minus" title="Remove #{collaborator.get('username')}" aria-hidden="true")
+        | #{collaborator.get('username')}
+else
+  p.collaborators__empty-collaborators —
+
+.collaborators__new-collaborator
+  //- rendered via the client

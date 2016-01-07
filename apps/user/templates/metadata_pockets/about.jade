@@ -1,0 +1,10 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "About"
+  - extraClasses = "is-readable"
+  - id = "metadata--about"
+
+block content
+  if author.has('metadata')
+    span= author.get('metadata').description

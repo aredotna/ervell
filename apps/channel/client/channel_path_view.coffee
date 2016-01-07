@@ -9,6 +9,7 @@ EditableAttributeView = require '../../../components/editable_attribute/client/e
 MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 ConnectView = require '../../../components/connect/client/connect_view.coffee'
 ChannelCollaborationView = require './channel_collaboration_view.coffee'
+ChannelEditCollaboratorsView = require './channel_edit_collaborators_view.coffee'
 ChannelConnectionsView = require './channel_connections_view.coffee'
 ChannelVisibilityView = require '../../../components/channel_visibility/client/channel_visibility_view.coffee'
 ChannelExportView = require '../../../components/channel_export/client/channel_export_view.coffee'
@@ -32,6 +33,14 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
 
   setupSubViews: ->
     super
+
+    # description
+    new MetaEditableAttributeView
+      el: @$("#metadata--info__description")
+      model: @model
+      _attribute: 'description'
+      _kind: 'markdown'
+      wait: true
 
   updateFollowerCount: ->
     @$('.js-channel-follower-count').html "<a href='#{@model.href()}/followers'> #{@model.get('follower_count')} Followers</a>"
@@ -77,14 +86,6 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
       _kind: 'plaintext'
       wait: true
 
-    # description
-    new MetaEditableAttributeView
-      el: @$("#metadata--info__description")
-      model: @model
-      _attribute: 'description'
-      _kind: 'markdown'
-      wait: true
-
     # privacy
     new ChannelVisibilityView
       el: @$("#metadata--privacy .metadata__content")
@@ -118,6 +119,13 @@ module.exports.initChannelPath = (channel) ->
   new ChannelCollaborationView
     collection: collaborators
     el: $("#metadata--info__collaborators")
+    isCollaboration: channel.has('collaboration')
+    isEditable: mediator.shared.current_user.canEditChannel channel
+    channel: channel
+
+  new ChannelEditCollaboratorsView
+    collection: collaborators
+    el: $("#metadata--edit-collaborators .metadata__content")
     isCollaboration: channel.has('collaboration')
     isEditable: mediator.shared.current_user.canEditChannel channel
     channel: channel
