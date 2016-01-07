@@ -78,6 +78,10 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
       block: @model
 
   setupEditableViews: ->
+    @$('#metadata--actions').addClass 'is-editable'
+    @$('#metadata__column-manage').addClass 'is-editable'
+    @$('#metadata--collaborators').addClass 'is-editable'
+
     # title
     new EditableAttributeView
       el: @$("#attribute-title_#{@model.id}")
