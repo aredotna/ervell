@@ -16,13 +16,6 @@ module.exports = class ChannelCollaborationView extends Backbone.View
     @collection.on "reset", @render, @
     @collection.on "remove", @render, @
 
-    if @isCollaboration
-      @collection.fetch
-        success: => mediator.trigger 'collaborators:fetched', @collection
-
-    else
-      @render()
-
     mediator.on 'channel:is-editable', @setEditable, @
 
   render: ->
