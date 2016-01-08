@@ -6,5 +6,11 @@ block vars
   - id = "metadata--info"
 
 block content
-  if author.has('metadata')
-    span= author.get('metadata').description
+  ul
+    if author.id != 21
+      li: a(href="/" + author.get('slug') + '/following') #{author.get('following_count')} Following
+      li: a(href="/" + author.get('slug') + '/followers') #{author.get('follower_count')} Followers
+    if author && user && author.id != user.id
+      li: &nbsp;
+      li: a.follow_button.pointer(data-type="User", data-id="#{author.id}")
+      li: a.message_button.pointer(data-type="User", data-id="#{author.id}")

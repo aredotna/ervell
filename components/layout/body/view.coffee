@@ -3,7 +3,6 @@ sd = require('sharify').data
 Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
-PathView = require '../../path/client/path_view.coffee'
 Router = require '../router.coffee'
 
 module.exports = class BodyView extends Backbone.View
@@ -33,8 +32,6 @@ module.exports = class BodyView extends Backbone.View
     mediator.on 'load:stop', @stopLoading, @
     mediator.on 'slide:to:block', @scrollToBlock
     mediator.shared.state.on 'change:isDraggingBlocks', @triggerReflow, @
-
-    new PathView el: @$('section.path--header')
 
     # need to investigate this further.
     # view loses event delegation only on a channel.

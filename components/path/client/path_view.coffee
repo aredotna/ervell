@@ -10,15 +10,11 @@ PrivateChannelView = require '../../private_channel/client/private_channel_view.
 
 module.exports = class PathView extends Backbone.View
 
-  events:
-    'click .toggle-settings-trigger' : 'toggleSettings'
-
   initialize: (options) ->
+    @setupSubViews()
+
+  setupSubViews: ->
     if (sd.USER or sd.CHANNEL) and sd.CURRENT_USER
-
-      model = if sd.USER then sd.USER else sd.CHANNEL
-      @model = new Block model
-
       new FollowButtonView
         el: @$('.follow_button')
         model: @model
@@ -29,9 +25,3 @@ module.exports = class PathView extends Backbone.View
           el: @$('.message_button')
           model: new User sd.USER
           showTitle: no
-
-
-  toggleSettings: (e)->
-    @$('.metadata--container').toggleClass 'settings-is-active'
-    if !$('.metadata__column').hasClass 'is-expanded'
-      @$('.metadata__column').toggleClass 'is-expanded'

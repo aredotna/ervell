@@ -71,9 +71,12 @@
 
   &.is-active
     display block
-  
+
   .delete-channel--confirmation__no
     margin 0 0 0 6px
+
+#metadata--info__description
+  width 100%
 
 #metadata--description, #metadata--info
   .attribute-group textarea
@@ -89,79 +92,80 @@
   span:hover
     hovergray
 
-.is-editing
-  .collaborators__edit
-    display block
+#metadata--info__collaborators span
+  color lightgray
 
-  .collaborators__read
-    display none
+.collaborators__edit
+  display block
 
-  .collaborators__edit__result__remove
-    font-size 10px
-    margin-right 6px
-    color alert
-    cursor pointer
+.collaborators__edit__result__remove
+  font-size 10px
+  margin-right 6px
+  color alert
+  cursor pointer
 
-    &:before
-      top -1px
-      font-size 8px
+  &:before
+    top -1px !important
+    font-size 8px !important
 
-  .collaborators__edit__result
-    color hovergray
-    font-weight bold
+.collaborators__edit__result
+  color hovergray
+  font-weight bold
 
 #new-collaborator__search, .new-collaborator__results
-  display none
+  display block
 
-.is-active
-  #new-collaborator__search, .new-collaborator__results
-    display block
+.new-collaborator__results__result
+  background #fff
+  padding 6px
+  font-weight bold
+  cursor pointer
+  width 151px
 
-  .new-collaborator__results__result
-    background #fff
-    padding 6px
-    font-weight bold
-    cursor pointer
-    width 151px
-
-  .new-collaborator__results__result:hover
-    background-color secondbackgroundgray
-    color hovergray
-
-    .new-collaborator__result__add
-      color hovergray
+.new-collaborator__results__result:hover
+  background-color secondbackgroundgray
+  color hovergray
 
   .new-collaborator__result__add
-    font-size 10px
-    margin-right 6px
-    color textgray
+    color hovergray
 
-    &:before
-      top -1px
-      font-size 7px
+.new-collaborator__result__add
+  font-size 10px
+  margin-right 6px
+  color textgray
 
-  #new-collaborator__search
-    padding 3px
+  &:before
+    top -1px !important
+    font-size 7px !important
 
-  .new-collaborator__results
-    position absolute
-    z-index 9999
+#new-collaborator__search
+  padding 3px
 
-  .new-collaborator__add
-    display none
+.new-collaborator__results
+  position absolute
+  z-index 9999
 
-#metadata--actions, #metadata--container
+.new-collaborator__add
+  display none
+
+#metadata--connections, #metadata--container
   position relative
 
-#metadata__column-manage, #metadata--connections
+#metadata--connections
+  overflow-y visible
+
+#metadata__column-manage
   display none
+
+.connect_button a
+  color textgray
 
 #metadata__column-manage
   .toggle-settings-trigger
     width 14px
     float right
     margin 4px 4px 0 0
-    svg 
+    svg
       width 14px
       height 14px
       fill lightgray
@@ -177,20 +181,6 @@
   top 0
   right 0
   padding-top 0
-
-.connect-container
-  position absolute
-  top -100px
-  height 315px
-  width 315px
-  z-index 99999
-  pointer-events none
-  left -1px
-
-  &.is-active
-    background #fff
-    border 1px solid bordergray
-    pointer-events all
 
 .form__field__channel-filter
   height 50px

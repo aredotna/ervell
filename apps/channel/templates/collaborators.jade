@@ -1,24 +1,14 @@
 if collaborators.length
   .collaborators__read
+    span With
     each collaborator, i in collaborators
       if collaborators.length == 1
         a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
       else
         if i == collaborators.length - 2
           a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}&nbsp;
-          span and&nbsp;
+          span and
         else if i == collaborators.length - 1
           a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')}
         else if i < collaborators.length - 2
           a(href="/#{collaborator.get('slug')}") #{collaborator.get('username')},&nbsp;
-
-  .collaborators__edit
-    each collaborator, i in collaborators
-      .collaborators__edit__result
-        span(class="iconic collaborators__edit__result__remove" data-id="#{collaborator.id}" data-glyph="minus" title="Remove #{collaborator.get('username')}" aria-hidden="true")
-        | #{collaborator.get('username')}
-else
-  p.collaborators__empty-collaborators —
-
-.collaborators__new-collaborator
-  //- rendered via the client
