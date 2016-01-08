@@ -6,4 +6,5 @@ block vars
   - id = "metadata--about"
 
 block content
-  span= author.get('metadata').description
+  if author.has('metadata')
+    span= author.get('metadata').description
