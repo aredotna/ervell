@@ -20,7 +20,7 @@ block right
 
 block metadata
   .metadata
-    if author.get('is_pro') == true && ( author.id == user.id || author.has('metadata') )
+    if author.get('is_pro') == true && ( (user && author.id == user.id) || author.has('metadata') )
       include metadata_pockets/about
     include metadata_pockets/info
     if !following && !followers
