@@ -43,6 +43,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
       maxFileSize: 104857600 # 100MB
       dropZone: @$el
       autoUpload: true
+      limitMultiFileUploads: 300
       dataType: "XML"
       fileInput: @$("input:file")
       url: @policy.bucket
