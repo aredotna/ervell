@@ -106,7 +106,7 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
     # export
     new ChannelExportView
       el: @$("#metadata--export .metadata__content")
-      model: @channel
+      model: @model
 
 module.exports.initChannelPath = (channel) ->
   connections = new ChannelConnections [], { slug: channel.get('slug') }

@@ -11,6 +11,7 @@ module.exports = class ChannelExportView extends Backbone.View
     'click .export--option' : 'exportChannel'
 
   exportChannel: (e) ->
+    console.log 'export', @model
     format = $(e.currentTarget).data 'format'
 
     analytics.track.click 'Channel exported',
