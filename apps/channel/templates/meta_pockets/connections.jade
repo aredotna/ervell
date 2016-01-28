@@ -8,7 +8,8 @@ block vars
 block content
   .js-metadata--connection-list
 
-  .connect-container
-      //- rendered on the client
-  .metadata__content__section
-    .connect_button.pointer: a(data-type="Channel", data-id="#{channel.id}") Connect
+  if(user)
+    .connect-container
+        //- rendered on the client
+    .metadata__content__section
+      .connect_button.pointer: a(data-type="Channel", data-id="#{channel.id}") Connect
