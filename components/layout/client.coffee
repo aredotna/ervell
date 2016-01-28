@@ -23,7 +23,6 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  showBookmarkletMessage() if sd.CURRENT_USER?
   initShortCuts()
 
 setMobileClass = ->
