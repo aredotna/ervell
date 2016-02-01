@@ -6,10 +6,10 @@ template = -> require('../templates/connections.jade') arguments...
 
 module.exports = class ChannelConnectionsView extends Backbone.View
 
-  initialize: (options)->
+  initialize: ({ @channel })->
     @collection.on "sync add remove", @render, @
-    mediator.on 'connection:added', @addConnection, @
-    mediator.on 'connection:removed', @removeConnection, @
+    mediator.on "connection:added:#{@channel.id}", @addConnection, @
+    mediator.on "connection:removed:#{@channel.id}", @removeConnection, @
 
   addConnection: (connection) ->
     @collection.add connection

@@ -113,6 +113,7 @@ module.exports.initChannelPath = (channel) ->
 
   new ChannelConnectionsView
     collection: connections
+    channel: channel
     el: $("#metadata--connections")
 
   connections.fetch()

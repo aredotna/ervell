@@ -29,6 +29,7 @@ module.exports = class ConnectResultsView extends Backbone.View
     if target.hasClass('is-connected')
       analytics.track.click 'Connection removed'
       mediator.trigger 'connection:removed', @collection.get(id)
+      mediator.trigger "connection:removed:#{@block.id}", @collection.get(id)
 
       reqOpts =
         type: 'DELETE'
