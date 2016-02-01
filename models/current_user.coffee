@@ -53,21 +53,18 @@ module.exports = class CurrentUser extends User
 
   toggleFollow: (followable)->
     type = followable.get('base_class').toLowerCase() + 's'
-    id = followable.id
+    id = parseInt followable.id
     count = followable.get('follower_count')
-    console.log('count', count, followable)
     ids = @get("following_#{type}")
 
     isFollowing = _.include ids, id
 
     if isFollowing
       @set "following_#{type}", _.without @get("following_#{type}"), id
-      successEvent = "current_user:unfollowed"
       method = "DELETE"
       followable.set follower_count: count - 1
     else
       @push "following_#{type}", id
-      successEvent = "current_user:followed"
       method = "POST"
       followable.set follower_count: count + 1
 
