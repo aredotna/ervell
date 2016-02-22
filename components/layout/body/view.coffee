@@ -3,6 +3,7 @@ sd = require('sharify').data
 Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
+{ trackOutboundLink } = require '../../../lib/analytics.coffee'
 Router = require '../router.coffee'
 
 module.exports = class BodyView extends Backbone.View
@@ -66,13 +67,14 @@ module.exports = class BodyView extends Backbone.View
     clientRoute = $(e.currentTarget).data('client')
     url = $(e.currentTarget).attr('href')
 
-    if e.metaKey || e.ctrlKey
-      return window.open(url, '_blank')
-
     if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User'
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
-      window.location = url
+      trackOutboundLink url, =>
+        if e.metaKey || e.ctrlKey
+          window.open(url, '_blank')
+        else
+          window.location = url
 
   triggerMediator: (e)->
     $link = $(e.currentTarget)
@@ -86,14 +88,18 @@ module.exports = class BodyView extends Backbone.View
     mediator.trigger 'body:click', e
 
   maybeIntercept: (e)->
-    return unless $('body').hasClass 'is-mobile'
-
+    console.log 'maybeIntercept',  href?.indexOf(location.hostname), location.hostname
     href = $(e.currentTarget).attr("href")
+    target = $(e.currentTarget).attr("target") || '_self'
 
-    if href?.indexOf(location.hostname) > -1 and href isnt "#" and $(e.currentTarget).attr("target") isnt "_blank"
+    unless href?.indexOf(location.hostname) > -1
       e.preventDefault()
       e.stopImmediatePropagation()
-      window.location = href
+      trackOutboundLink href, =>
+        if e.metaKey || e.ctrlKey
+          window.open href, '_blank'
+        else
+          window.open href, target
 
   triggerReflow: =>
     top = $(window).scrollTop()

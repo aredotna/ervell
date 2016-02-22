@@ -6,6 +6,7 @@ ConnectView = require '../../connect/client/connect_view.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../follow_button/client/follow_button_view.coffee'
 User = require '../../../models/user.coffee'
+{ trackOutboundLink } = require '../../../lib/analytics.coffee'
 analytics = require '../../../lib/analytics.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
@@ -69,12 +70,12 @@ module.exports = class BlockView extends Backbone.View
 
     e.preventDefault()
     e.stopImmediatePropagation()
-
-    if @model.get('visibility') is 'private'
-      site = window.open "#{sd.APP_URL}/go?redirect-to=#{url}", "_blank"
-    else
-      window.open url,'_blank'
-      return false
+    trackOutboundLink url, =>
+      if @model.get('visibility') is 'private'
+        site = window.open "#{sd.APP_URL}/go?redirect-to=#{url}", "_blank"
+      else
+        window.open url,'_blank'
+        return false
 
   update: (model)->
     args =

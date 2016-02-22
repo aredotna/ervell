@@ -21,7 +21,12 @@ module.exports.getUserAgent = ->
   window?.navigator?.userAgent
 
 module.exports.trackPageview = =>
-  @ga? 'send', 'pageview'
+  ga? 'send', 'pageview'
+
+module.exports.trackOutboundLink = (url, cb = $.noop) =>
+  ga? 'send', 'event', 'outbound', 'click', url,
+    'transport': 'beacon'
+    'hitCallback': cb
 
 module.exports.registerCurrentUser = ->
   userType = if sd.CURRENT_USER then "Logged In" else "Logged Out"
@@ -59,9 +64,9 @@ module.exports.track = track =
   , {})
 
 module.exports.exception = (errorObj) ->
-  ga? 'send', 'exception', errorObj
+  @ga? 'send', 'exception', errorObj
 
 # These need to be set up individually before using. Read this non-sense:
 # https://developers.google.com/analytics/devguides/platform/customdimsmets
 module.exports.setDimension = (index, value) ->
-  ga? 'set', index, value
+  @ga? 'set', index, value
