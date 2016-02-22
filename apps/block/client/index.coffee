@@ -43,6 +43,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   toggleTab: (e)->
     e.preventDefault()
+    e.stopPropagation()
 
     $('.tab--container__nav__item.is-active, .tab-content.is-active').removeClass 'is-active'
     tab = $(e.currentTarget).data 'tab'
