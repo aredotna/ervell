@@ -55,7 +55,7 @@ module.exports.track = track =
       # Send google analytics event
       ga? 'send', {
         hitType: 'event'
-        eventCategory: options.category
+        eventCategory: options.category || 'UI Interactions'
         eventAction: description
         eventLabel: options.label
         nonInteraction: (if options.category in ['Funnel Progressions', 'Impressions', 'Timing'] then 1 else 0)
