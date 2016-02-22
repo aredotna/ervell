@@ -70,7 +70,7 @@ module.exports = class BodyView extends Backbone.View
     if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User'
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
-      trackOutboundLink url
+      trackOutboundLink(url) if url.indexOf('http')
       if e.metaKey || e.ctrlKey
         window.open(url, '_blank')
       else
