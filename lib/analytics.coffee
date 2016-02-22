@@ -24,7 +24,7 @@ module.exports.trackPageview = =>
   ga? 'send', 'pageview'
 
 module.exports.trackOutboundLink = (url, cb = $.noop) =>
-  ga? 'send', 'event', 'outbound', 'click', url,
+  ga? 'send', 'event', 'Outbound link', 'click', url,
     'transport': 'beacon'
     'hitCallback': cb
 
