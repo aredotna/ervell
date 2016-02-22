@@ -88,7 +88,6 @@ module.exports = class BodyView extends Backbone.View
     mediator.trigger 'body:click', e
 
   maybeIntercept: (e)->
-    console.log 'maybeIntercept',  href?.indexOf(location.hostname), location.hostname
     href = $(e.currentTarget).attr("href")
     target = $(e.currentTarget).attr("target") || '_self'
 
