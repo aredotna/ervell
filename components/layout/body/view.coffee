@@ -94,11 +94,12 @@ module.exports = class BodyView extends Backbone.View
     unless href?.indexOf(location.hostname) > -1
       e.preventDefault()
       e.stopImmediatePropagation()
-      trackOutboundLink href, =>
-        if e.metaKey || e.ctrlKey
-          window.open href, '_blank'
-        else
-          window.open href, target
+      trackOutboundLink href
+
+      if e.metaKey || e.ctrlKey
+        window.open href, '_blank'
+      else
+        window.open href, target
 
   triggerReflow: =>
     top = $(window).scrollTop()
