@@ -54,8 +54,8 @@ deploy-with-images: assets verify
 	git push git@heroku.com:ervell.git $(branch):master
 
 deploy-staging: assets verify
-	$(BIN)/bucket-assets -d public/assets -b ervell-production
-	$(BIN)/bucket-assets -d public/assets -b ervell-production
+	$(BIN)/bucket-assets --files public/assets --bucket ervell-production
+	$(BIN)/bucket-assets --files public/assets --bucket ervell-production
 	heroku config:add \
 		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
 		--app=ervell
