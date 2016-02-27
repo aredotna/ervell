@@ -54,8 +54,14 @@ deploy-with-images: assets verify
 	git push git@heroku.com:ervell.git $(branch):master
 
 deploy-staging: assets verify
-	$(BIN)/bucket-assets --bucket ervell-production
-	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
+	$(BIN)/bucket-assets -d public/assets -b ervell-production
+	$(BIN)/bucket-assets -d public/assets -b ervell-production
+	heroku config:add \
+		ASSET_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
+		--app=ervell
+	heroku config:add \
+		IMAGE_PATH=//d2hp0ptr16qg89.cloudfront.net/assets/$(shell git rev-parse --short HEAD)/ \
+		--app=ervell
 	git push git@heroku.com:ervell-staging.git $(branch):master -f
 
 .PHONY: test assets
