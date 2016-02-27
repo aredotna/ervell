@@ -1,0 +1,18 @@
+extends ../../../../components/layout/index--bare
+
+block vars
+  - extraClasses = 'body--home'
+
+block styles
+  link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
+
+block body
+  include ./sections/landing
+  include ./sections/pitch
+  include ./sections/examples
+  include ./sections/team
+  include ./sections/labs
+  include ./sections/footer
+
+block scripts
+  script( src=asset('/assets/root.js') )

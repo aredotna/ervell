@@ -1,0 +1,108 @@
+.body--home
+  .container
+    position absolute
+    height 100%
+
+svg.iconic.iconic-sm
+  max-width 16px
+
+svg.iconic.iconic-md
+  max-width 32px
+
+.home-header
+  font-size 2.1em
+  font-weight normal
+  color hovergray
+  max-width 58%
+  margin 0 auto
+  antialiased()
+  padding-bottom 5px
+
+  a
+    text-decoration underline
+
+  &__light
+    color lightgray
+
+  &__wide
+    max-width 100%
+
+  &__inline
+    display inline-block
+    margin-right .3em
+
+.home-section
+  width 100%
+  height 100%
+  background-color #fff
+  color hovergray
+  text-align center
+  display table
+  padding 0
+
+  .home-section__inner__diagram svg
+    height 350px
+    max-width 100%
+
+    +below(800px)
+      height 250px
+
+    +below(400px)
+      height 165px
+
+  &__inner
+    position relative
+    display table-cell
+    width 100%
+    height 100%
+    vertical-align middle
+
+  &__inner__buttons
+    margin-top 4em
+
+  .intro__button
+    width 180px
+    height 50px
+    display inline-block
+    text-align center
+    border 1px solid hovergray
+    padding 0
+    margin 0 15px
+    color hovergray
+    font-size 1.2em
+    font-weight bold
+    line-height 47px
+    cursor pointer
+    antialiased()
+
+    &:hover
+      border 1px solid success
+      color success
+
+  .home-arrow
+    position absolute
+    bottom unit
+    left calc(50% - 8px)
+    transform rotate(-90deg)
+    fill #A6A6A6
+    z-index 1
+    &:hover
+      fill hovergray
+
+  &__extended
+    .home-section__inner
+      padding 20% 0
+
+    .home-header
+      margin-top unit
+
+  &--team__advisors
+    max-width 58%
+    margin unit auto
+
+  &--footer
+    .home-header
+      padding-bottom (unit)
+
+  &__figure
+    margin (unit * 6) 0

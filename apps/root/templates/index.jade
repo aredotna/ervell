@@ -23,34 +23,87 @@ block body
       )
   .home__section.home__section--intro
     .home__section--intro__inner
-      h1 Are.na is an open-ended platform for collaborative, private and public research.
-      h1 Build new ideas over time by assembling collections of links, images, files and text.
-      h1.home__section--intro__inner__copy= bullet_points[0]
+      h1 Are.na is the simplest way to manage ideas
+      br
+      br
+      h1.home__section--intro__inner__copy clean and minimal interface
+      h1.home__section--intro__inner__copy no ads, social media buttons or algorithms
+      h1.home__section--intro__inner__copy multiple privacy settings
+      h1.home__section--intro__inner__copy supports most file types, URLs and embeds
+      h1.home__section--intro__inner__copy public API to show content offsite
+      h1.home__section--intro__inner__copy export collections as HTML, PDF or ZIP
       img(
         data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
         class="iconic iconic-sm home-arrow pointer"
         data-multiplier="2"
       )
 
-  .home__section.home__section--channels
-    .home__section__container.flex-container
-      .home__section--channels__channels
-        h1 Channel examples
-        - for e_channel in example_channel.get('contents')
-          h2.home__path
-            ul.breadcrumb
-              li Are.na
-              li
-                a(href="/#{e_channel.user.slug}")=e_channel.user.username
-              li
-                a(href="/#{e_channel.user.slug}/#{e_channel.slug}" class="privacy--#{e_channel.status}")=e_channel.title
-          .home__section-channels__images.grid
-            - for block in e_channel.contents.models.slice(0,4)
-              include ../../../components/block_collection/templates/block
+  .home__section.home__section--intro.home__section--intro--examples
+    .home__section--intro__inner
+      h1
+        | On Are.na, you organically combine images, links, files and texts into collections (we call them channels).
+        br
+        | Use it collaboratively, publicly or privately.
+      br
+      br
+      h1
+        | Once you get the hang of it, its dead-simple to use for just about any idea.
+      br
+      br
+      h1
+        | Think of it as a connected archive of human knowledge.
 
-          .home__section-channels__button
-            .button--inblock
-              a(href="/#{e_channel.user.slug}/#{e_channel.slug}") +#{e_channel.length - 4} more blocks &rarr;
+      figure.home__section--intro__figure
+        figcaption
+          h1.home__section--intro__inner__copy An example profile
+        img(src="#{sd.IMAGE_PATH}home/profile-1.png")
+
+      figure.home__section--intro__figure
+        figcaption
+          h1.home__section--intro__inner__copy An example channel
+        img(src="#{sd.IMAGE_PATH}home/channel-2.png")
+
+      figure.home__section--intro__figure
+        figcaption
+          h1.home__section--intro__inner__copy Save images, text, and links with the bookmarklet
+        img(src="#{sd.IMAGE_PATH}home/bookmarklet-2.png")
+
+      figure.home__section--intro__figure
+        figcaption
+          h1.home__section--intro__inner__copy Connect existing content to other channels
+        img(src="#{sd.IMAGE_PATH}home/connect-2.png")
+      br
+      br
+      h1.home--wide-header
+        | So far, users have created #[span.is-successful #{stats.format('channels')}] channels and made #[span.is-successful #{stats.format('connections')}] connections.
+      br
+      br
+      img(
+        data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
+        class="iconic iconic-sm home-arrow pointer"
+        data-multiplier="7"
+      )
+
+
+  .home__section.home__section--intro
+    .home__section--intro__inner
+      h1
+        ul
+          li: a(href="/charles-broskoski") Charles Broskoski
+          li: a(href="/daniel-pianetti") Daniel Pianetti
+          li: a(href="/chris-sherron") Chris Sherron
+      .home__team-advisors Advisors:
+          h1: a(href="/morgan-sutherland")  Morgan Sutherland
+          | ,
+          h1: a(href="/damon-zucconi")  Damon Zucconi
+          | ,
+          h1: a(href="/dena-yago")  Dena Yago
+          | ,
+          h1: a(href="/daniel-brewster")  Dan Brewster
+          | ,
+          h1: a(href="/john-michael-boling")  John Michael Boling&nbsp;
+          | and
+          h1: a(href="/j-stuart-moore")  J. Stuart Moore.
 
   .home__section.home__section--footer
     .home__section__container.flex-container

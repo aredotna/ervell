@@ -1,42 +1,27 @@
-#
-# Handles / (authenticated gets feed, otherwise about) and /explore
-#
-Q = require 'q'
 _ = require 'underscore'
-Backbone = require "backbone"
-Feed = require "../../collections/feed"
-Channel = require "../../models/channel"
-ExploreBlocks = require "../../collections/explore_blocks"
-Blocks = require "../../collections/blocks"
-CurrentUser = require '../../models/current_user'
-bullet_points = require './fixtures/bullet_points.coffee'
-sd = require("sharify").data
+Backbone = require 'backbone'
+ExploreBlocks = require '../../collections/explore_blocks'
+sd = require('sharify').data
+numeral = require 'numeraljs'
+
+class Statistics extends Backbone.Model
+  url: -> "#{sd.API_URL}/utilities/statistics"
+
+  format: (attr) ->
+    numeral(@get(attr)).format('0,0')
 
 @index = (req, res, next) ->
   res.locals.sd.CURRENT_PATH = "/"
-
   if req.user
     res.locals.sd.FEED_TYPE = 'primary'
     res.render 'feed', path: 'Feed'
   else
-    channel = new Channel()
-    channel.url = "#{sd.API_URL}/channels/arena-front-example-channels"
-
-    channel.parse = (data) ->
-      for c_channel in data.contents
-        c_channel.contents = new Blocks c_channel.contents
-      return data
-
-    channel.fetch
-      data:
-        per: 10
+    stats = new Statistics
+    stats.fetch
       cache: true
-      success: ->
-        res.render 'index',
-          bullet_points: bullet_points
-          example_channel: channel
-      error: next
-
+      complete: ->
+        res.render 'home/index',
+          stats: stats
 
 @notifications = (req, res, next) ->
   res.locals.sd.FEED_TYPE = 'notifications'

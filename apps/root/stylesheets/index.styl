@@ -66,6 +66,8 @@ svg.iconic.iconic-md
     font-size 2.1em
     font-weight normal
     color hovergray
+    max-width 58%
+    margin 0 auto
     antialiased()
 
     +below(800px)
@@ -73,6 +75,22 @@ svg.iconic.iconic-md
 
   h2:nth-of-type(1)
     margin-top 2em
+
+h1.home--wide-header
+  max-width 100%
+  width auto
+  margin 4em 0
+
+.home__team-advisors > h1
+  display inline-block
+
+.home__section--intro--examples .home__section--intro__inner
+  display table-cell
+  width 100%
+  min-height 100%
+  height auto
+  vertical-align middle
+  padding-top 10%
 
 .home__section--intro__inner__buttons
   margin-top 4em
@@ -96,20 +114,11 @@ svg.iconic.iconic-md
       border 1px solid success
       color success
 
+.home__section--intro__figure
+  margin-top 4em
+
 h1.home__section--intro__inner__copy
   color lightgray
-
-.home__section--intro__bullets
-  ol 'upper-roman'
-  text-align left
-  width 65%
-  margin 60px auto 0
-  font-size 1.3em
-
-  li
-    display inline-block
-    width 50%
-    margin .5em 0
 
 .home__section--footer
   width 100%
@@ -131,92 +140,9 @@ h1.home__section--intro__inner__copy
     &:hover
       color textgray
 
-.home__section--channels
-  width 100%
-  background-color #fff
-  padding 0 0 70px 0
-  border-top 1px solid bordergray
-  text-align center
-
-  h1
-    font-size 2.1em
-    color hovergray
-    margin 80px 0 120px 0
-    font-weight normal
-
-.home__section--channels__channels
-  position relative
-  float left
-  width 100%
-  margin 0
-  padding 0
-
-  .home__path
-    position relative
-    float left
-    width 100%
-    color textgray
-    text-align center
-    padding 0 10px 30px 10px
-    margin 0
-
-    li:last-child
-      font-weight normal
-
-    .breadcrumb
-      position relative
-      float left
-
-privacy-color('.privacy--', color)
-
-.home__section-channels__channels .home__path--closed:hover,
-.home__section-channels__channels .home__path--public:hover
-  color hovergray
-
-.home__section-channels__images
-  position relative
-  float left
-  width 100%
-  padding 0
-
-.home__section-channels__button
-  position relative
-  float left
-  width 100%
-  margin 0 0 40px 0
-  text-align center
-
-  .button--inblock
-    position relative
-    left 0
-    width 200px
-    margin auto
-    color lightgray
-    border-top 1px solid bordergray
-
-    &:hover
-      color hovergray
-      border-top 1px solid textgray
-
 @media (max-width:(block_width_mar * 4) + 19)
   html, body
     font-size 13px
-
-  .home__section--channels__channels
-    .grid
-      -webkit-justify-content center
-      justify-content center
-
-      .grid__block
-        max-width 220px
-        min-width 220px
-
-      .grid__block__inner
-        height 220px
-
-      .grid__block__content__image
-        max-width 220px
-        max-height 220px
 
 @media (max-width:(block_width_mar * 3) + 16)
   .home__section--intro
@@ -229,38 +155,6 @@ privacy-color('.privacy--', color)
     h1
       font-size 1.8em
 
-  .home__section--channels
-    padding 20px 0 20px
-
-    h2
-      padding 0
-
-  .home__section--channels__channels
-    padding 0
-
-    .home__path
-      padding 0
-      margin-bottom 20px
-
-    .grid
-      .grid__block
-        max-width 300px
-        min-width 300px
-
-      .grid__block__inner
-        height 300px
-
-      .grid__block__content__image
-        max-width 300px
-        max-height 300px
-
-  .home__section-footer
-    margin 0 0 40px 0
-
-@media (max-width:(block_width_mar * 2) + 20)
-  .home__section--channels
-    padding 20px 8px 20px 8px
-
 @media (max-width:500px)
   .home__section--intro
     padding 0 15px 0 15px
@@ -268,9 +162,6 @@ privacy-color('.privacy--', color)
     h1
       font-size 1.2em
       font-weight 100
-
-  .home__section--channels
-    padding 20px 0 70px 0
 
   .home__section--intro__inner__buttons
     margin-top 2em

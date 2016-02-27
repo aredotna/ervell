@@ -1,14 +1,10 @@
 Backbone = require "backbone"
-Backbone.$ = $
 _ = require 'underscore'
-scrollFrame = require 'scroll-frame'
 sd = require("sharify").data
 Feed = require "../../collections/feed.coffee"
 Notifications = require "../../collections/notifications.coffee"
 FeedView = require './client/feed_view.coffee'
-bullet_points = require './fixtures/bullet_points.coffee'
 IconicJS = require '../../components/iconic/client/iconic.min.js'
-
 mediator = require '../../lib/mediator.coffee'
 
 module.exports = class RootUserView extends Backbone.View
@@ -30,18 +26,12 @@ module.exports = class HomeView extends Backbone.View
     'click .home-arrow' : 'scrollDown'
 
   initialize: ->
-    setInterval @setSlide, @slideDuration
     _.defer => IconicJS().inject('img.iconic')
 
-  setSlide: =>
-    ++@slideIndex
-    @slideIndex = 0 if @slideIndex > bullet_points.length
-    @$('.home__section--intro__inner__copy').text bullet_points[@slideIndex]
-
   scrollDown: (e)->
-    multiplier = $(e.currentTarget).data('multiplier')
-    top = $(window).height() * multiplier
-    $('html, body').animate {scrollTop: top}, 300
+    $nextSibling = $(e.currentTarget).closest('.home-section').next()
+    top = $nextSibling.offset()?.top
+    $('html, body').animate { scrollTop: top }, 300
 
 
 module.exports.init = ->
