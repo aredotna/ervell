@@ -46,8 +46,9 @@
       )
     br
     br
-    h1.home-header.home-header__wide
-      | So far, users have created #[span.is-successful #{stats.format('channels')}] channels and made #[span.is-successful #{stats.format('connections')}] connections.
+    if stats
+      h1.home-header.home-header__wide
+        | So far, users have created #[span.is-successful #{stats.format('channels')}] channels and made #[span.is-successful #{stats.format('connections')}] connections.
     br
     br
     img(
