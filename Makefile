@@ -54,7 +54,7 @@ deploy-with-images: assets verify
 	git push git@heroku.com:ervell.git $(branch):master
 
 deploy-staging: assets verify
-	$(BIN)/bucket-assets --files public/assets --bucket ervell-production
+	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
 	git push git@heroku.com:ervell-staging.git $(branch):master -f
 
