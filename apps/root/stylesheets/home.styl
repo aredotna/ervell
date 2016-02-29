@@ -31,6 +31,10 @@ svg.iconic.iconic-md
     display inline-block
     margin-right .3em
 
+  +below(900px)
+    font-size 1.6em
+    max-width 90%
+
 .home-section
   width 100%
   height 100%
@@ -44,8 +48,8 @@ svg.iconic.iconic-md
     height 350px
     max-width 100%
 
-    +below(800px)
-      height 250px
+    +below(900px)
+      height 200px
 
     +below(400px)
       height 165px
@@ -59,6 +63,9 @@ svg.iconic.iconic-md
 
   &__inner__buttons
     margin-top 4em
+
+    +below(900px)
+      margin-top 2em
 
   .intro__button
     width 180px
@@ -79,7 +86,13 @@ svg.iconic.iconic-md
       border 1px solid success
       color success
 
-  .home-arrow
+    +below(900px)
+      width 100px
+      font-size 1em
+      font-weight normal
+      margin 0 1px
+
+  .iconic-sm.home-arrow
     position absolute
     bottom unit
     left calc(50% - 8px)
