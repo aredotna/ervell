@@ -66,72 +66,22 @@
     &:hover
       border 0
 
+  h1, p
+    width 100%
+    max-width 900px
+    font-size 2rem
+    line-height 1.3em
+    color hovergray
+    font-weight normal
+    antialiased()
+    margin 20px auto 50px auto
+    text-align left
+
   .static__section
     color hovergray
 
   .static__section__inner
     width 100%
-
-/* ABOUT */
-.static__graph
-  width 98%
-  max-width 900px
-  height 18px
-  margin 100px auto 200px auto
-  border 0px solid lightgray
-  background-color white
-
-  .static__graph-fill
-    position realtive
-    float left
-    height 100%
-
-  .step-1
-    background-color #6AD065
-    width 2%
-
-    .static__graph-mark
-      margin-top -36px
-
-      .mark-label
-        margin-top -40px
-
-  .step-2
-    background-color #E5E5E5
-    width 4%
-
-  .step-3
-    background-color #B6B6B6
-    width 32%
-
-  .step-4
-    background-color #B6B6B6
-    width 62%
-
-    .mark-label
-      float right
-      text-align right
-      margin 16px 6px 0 0
-
-.static__graph-mark
-  position relative
-  float right
-  width 1px
-  background-color #C2C2C2
-  margin 22px 0 0 0
-  height 30px
-
-.mark-label
-  position relative
-  float left
-  text-align left
-  font-size s_caption + 1
-  line-height 18px
-  margin 16px 0 0 6px
-  color textgray
-  width 100px
-
-
   /* LABS */
   .labs-logo
     position relative
@@ -230,6 +180,65 @@
 
         &:hover
           color textgray
+
+/* ABOUT */
+.static__graph
+  width 98%
+  max-width 900px
+  height 18px
+  margin 100px auto 200px auto
+  border 0px solid lightgray
+  background-color white
+
+  .static__graph-fill
+    position realtive
+    float left
+    height 100%
+
+  .step-1
+    background-color #6AD065
+    width 2%
+
+    .static__graph-mark
+      margin-top -36px
+
+      .mark-label
+        margin-top -40px
+
+  .step-2
+    background-color #E5E5E5
+    width 4%
+
+  .step-3
+    background-color #B6B6B6
+    width 32%
+
+  .step-4
+    background-color #B6B6B6
+    width 62%
+
+    .mark-label
+      float right
+      text-align right
+      margin 16px 6px 0 0
+
+.static__graph-mark
+  position relative
+  float right
+  width 1px
+  background-color #C2C2C2
+  margin 22px 0 0 0
+  height 30px
+
+.mark-label
+  position relative
+  float left
+  text-align left
+  font-size s_caption + 1
+  line-height 18px
+  margin 16px 0 0 6px
+  color textgray
+  width 100px
 
 @-webkit-keyframes fade
   0% {opacity: 0;}
