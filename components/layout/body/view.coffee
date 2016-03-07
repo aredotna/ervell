@@ -70,11 +70,11 @@ module.exports = class BodyView extends Backbone.View
     if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User'
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
-      trackOutboundLink url, =>
-        if e.metaKey || e.ctrlKey
-          window.open(url, '_blank')
-        else
-          window.location = url
+      trackOutboundLink(url) if url.indexOf('http')
+      if e.metaKey || e.ctrlKey
+        window.open(url, '_blank')
+      else
+        window.location = url
 
   triggerMediator: (e)->
     $link = $(e.currentTarget)
@@ -88,18 +88,18 @@ module.exports = class BodyView extends Backbone.View
     mediator.trigger 'body:click', e
 
   maybeIntercept: (e)->
-    console.log 'maybeIntercept',  href?.indexOf(location.hostname), location.hostname
     href = $(e.currentTarget).attr("href")
     target = $(e.currentTarget).attr("target") || '_self'
 
-    unless href?.indexOf(location.hostname) > -1
+    unless href?.indexOf(location.hostname) > -1 or href is '#'
       e.preventDefault()
       e.stopImmediatePropagation()
-      trackOutboundLink href, =>
-        if e.metaKey || e.ctrlKey
-          window.open href, '_blank'
-        else
-          window.open href, target
+      trackOutboundLink href
+
+      if e.metaKey || e.ctrlKey
+        window.open href, '_blank'
+      else
+        window.open href, target
 
   triggerReflow: =>
     top = $(window).scrollTop()
