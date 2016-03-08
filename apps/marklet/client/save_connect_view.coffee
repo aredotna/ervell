@@ -88,6 +88,7 @@ module.exports = class SaveConnectView extends ConnectView
       @$('.new-connection__done-button').text 'Close'
 
   sendExpandMsg: ->
+    console.log 'sendExpandMsg'
     window.top.postMessage { action: 'expand' }, '*'
 
   sendContractMsg: ->
@@ -164,7 +165,10 @@ module.exports = class SaveConnectView extends ConnectView
     @postRender()
 
   postRender: ->
-    @sendContractMsg()
+    if @tabState.get('mode') is 'url'
+      @sendContractMsg()
+    else
+      @sendExpandMsg()
     @focusSearch()
     @renderChannels()
     @collection.on 'change:marked', @updateStatus, @
