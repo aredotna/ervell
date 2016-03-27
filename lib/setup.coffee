@@ -30,6 +30,7 @@ artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
 cache = require './cache'
 favicon = require 'serve-favicon'
+blocker = require 'express-spam-referral-blocker'
 
 # Inject some constant data into sharify
 sharify.data =
@@ -56,6 +57,10 @@ module.exports = (app) ->
 
   # Mount sharify
   app.use sharify
+
+  # Referral spam blocker
+  blocker.setReferrers ['tkpassword.com']
+  app.use blocker.send404
 
   # Development only
   if "development" is NODE_ENV

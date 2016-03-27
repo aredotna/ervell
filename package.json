@@ -22,6 +22,7 @@
     "cookies": "^0.5.0",
     "diacritics": "*",
     "express": "*",
+    "express-spam-referral-blocker": "^1.2.1",
     "express-subdomain": "^1.0.4",
     "ezel-assets": "0.0.13",
     "feed": "^0.2.6",
