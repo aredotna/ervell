@@ -123,7 +123,8 @@ module.exports = (app) ->
       'post_address',
       'show_tour',
       'is_pro',
-      'exclude_from_indexes'
+      'exclude_from_indexes',
+      'following_count'
     ]
 
   app.use artsyError.helpers

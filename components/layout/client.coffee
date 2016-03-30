@@ -23,6 +23,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
+  syncAuth()
   initShortCuts()
 
 setMobileClass = ->
