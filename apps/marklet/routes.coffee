@@ -7,8 +7,7 @@ class TabState extends Backbone.Model
 
 @save = (req, res, next) ->
   unless req.user
-    req.session.redirectTo = req.url
-    return res.redirect('/log_in')
+    return res.redirect "/log_in?redirect_uri=#{req.url}"
 
   res.locals.sd.SAVE = true
   res.locals.sd.CONTENT = content = req.params.content
