@@ -109,7 +109,7 @@ ensureFreshUser = (data) ->
   for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
                'last_name', 'slug', 'username', 'is_pro']
     if not _.isEqual data[attr], sd.CURRENT_USER[attr]
-      return $.ajax('/me/refresh').then -> mediator.trigger 'current_user:refreshed'
+      return $.ajax('/me/refresh')
 
 setupAjaxHeaders = ->
   $.ajaxSetup
