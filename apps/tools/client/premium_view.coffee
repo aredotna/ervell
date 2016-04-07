@@ -11,6 +11,8 @@ module.exports = class PremiumView extends Backbone.View
     'click .button--add': 'openCheckout'
 
   initialize: ->
+    @price = 2250 if sd.COUPON
+
     if sd.CURRENT_USER
       @handler = StripeCheckout.configure
         key: sd.STRIPE_PUBLISHABLE_KEY

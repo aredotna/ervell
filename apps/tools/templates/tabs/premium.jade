@@ -10,13 +10,14 @@ block content
     if user && user.get('is_pro') == true
       .premium--is-premium Thank you for registering!
     else
-      button.button--wide.button--border.button--add $45 / year — Activate premium &rarr;
+      - price = coupon ? '$22.50' : '$45'
+      button.button--wide.button--border.button--add #{price} / year — Activate premium &rarr;
   h2 You get:
   .tools__frame
     h3 Additional privacy settings
     .premium--caption You can decide if your profile and channels will be crawled by search engines.
     br
-    h3 
+    h3
       strike Embroidered iron-on Are.na patch
     .premium--caption
       strike Limited edition for the first 50 premium users, all gone.
