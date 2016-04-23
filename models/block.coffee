@@ -56,7 +56,9 @@ module.exports = class Block extends Base
     @getImageSize source
 
   getImageSize: (size) ->
-    if @has('image')
+    console.log "@get('image').content_type isnt 'image/svg+xml'", @get('image').content_type isnt 'image/svg+xml'
+    console.log "@get('image').content_type", @get('image').content_type
+    if @has('image') and @get('image').content_type isnt 'image/svg+xml'
       @get('image')?[size]?.url
 
   getVisibility: ->

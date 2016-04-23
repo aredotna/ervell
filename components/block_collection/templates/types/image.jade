@@ -1,7 +1,7 @@
 extends block
 
 block content
-  - if(block.has('image'))
+  - if(block.has('image') && block.resizeImage())
     .valign--flex.halign--flex
       img(
         src="#{block.resizeImage()}"
