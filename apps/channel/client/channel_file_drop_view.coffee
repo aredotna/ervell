@@ -8,7 +8,8 @@ channelFileDropTemplate = -> require('../templates/filedrop.jade') arguments...
 
 module.exports = class ChannelFileDropView extends Backbone.View
   events:
-    'dragenter'                     : 'handleDrag'
+    'dragenter' : 'handleDrag'
+    'dragend' : 'clearDrag'
     'dragleave .channel--drop-zone' : 'clearDrag'
 
   initialize: (options)->
