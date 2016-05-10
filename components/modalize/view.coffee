@@ -18,7 +18,6 @@ module.exports = class Modalize extends Backbone.View
     mediator.on 'position:updated', @updatePosition
 
   updatePosition: (pos) =>
-    console.log 'updatePosition', pos
     @scrollPosition = pos
 
   state: (state, callback = $.noop) -> _.defer =>
@@ -37,7 +36,6 @@ module.exports = class Modalize extends Backbone.View
     @__rendered__ = true
     @state 'open'
     @scrollPosition = $(document).scrollTop()
-    console.log 'scrollPosition', @scrollPosition
     $('body').addClass 'is-scrolling-disabled'
     $('.container').css
       width: '100%'

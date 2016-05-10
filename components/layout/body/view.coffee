@@ -45,8 +45,9 @@ module.exports = class BodyView extends Backbone.View
   stopLoading: -> $('body').removeClass 'is-loading'
 
   scrollToBlock: (id, delay = 100)->
+    isLightBox = $('body').hasClass 'is-scrolling-disabled'
     $el = $("##{id}")
-    elOffset = $el.offset().top
+    elOffset = if isLightBox then $el.position().top else $el.offset().top
     elHeight = $el.height()
     windowHeight = $(window).height()
 
@@ -55,9 +56,8 @@ module.exports = class BodyView extends Backbone.View
     else
       offset = elOffset
 
-    if $('body').hasClass 'is-scrolling-disabled'
-      offset = $el.position().top + ((windowHeight / 2) - (elHeight / 2))
-      console.log('offset', offset)
+    if isLightBox
+      offset = elOffset + ((windowHeight / 2) - (elHeight / 2))
       $('.container').css { top: -offset }
       mediator.trigger 'position:updated', offset
     else
