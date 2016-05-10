@@ -32,6 +32,9 @@
   align-items center
   background-color rgba(white, 0.85)
 
+  +below(800px)
+    background-color rgba(white, 1)
+
 .has-nobackdrop > .modalize-backdrop
   background-color transparent
 
@@ -67,8 +70,8 @@
 
   +below(800px)
     pointer-events all
-    top 25px
-    right 25px
+    top 0px
+    right 0px
     display block
     padding 10px
     .iconic-sm:before

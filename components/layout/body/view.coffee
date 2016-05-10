@@ -55,7 +55,13 @@ module.exports = class BodyView extends Backbone.View
     else
       offset = elOffset
 
-    $('html, body').animate { scrollTop: offset }, delay
+    if $('body').hasClass 'is-scrolling-disabled'
+      offset = $el.position().top + ((windowHeight / 2) - (elHeight / 2))
+      console.log('offset', offset)
+      $('.container').css { top: -offset }
+      mediator.trigger 'position:updated', offset
+    else
+      $('html, body').animate { scrollTop: offset }, delay
 
   intercept: (e)->
     # do not continue if clicking button
