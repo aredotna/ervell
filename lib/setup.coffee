@@ -18,7 +18,8 @@ arenaPassport = require 'arena-passport'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
-isInverted = require '../components/night_mode/middleware.coffee'
+viewMode = require './middleware/view_mode'
+isInverted = require '../components/night_mode/middleware'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
@@ -132,6 +133,7 @@ module.exports = (app) ->
   app.use localsMiddleware
   app.use ensureSSL
   app.use isInverted
+  app.use viewMode
 
   # Mount apps
   app.use require "../apps/root"

@@ -9,8 +9,10 @@ MessageView = require '../message/client/message_view.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 NewChannelView = require '../new_channel/client/new_channel_view.coffee'
 UserMenuView = require '../user_menu/client/user_menu_view.coffee'
+ViewMenuView = require '../view_menu/client/view_menu_view.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
+State = require "../../models/state.coffee"
 Notifications = require "../../collections/notifications.coffee"
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
@@ -50,6 +52,29 @@ setMobileClass = ->
 
     , false
 
+setupPusherAndCurrentUser = ->
+  mediator.shared = {}
+
+  user = new CurrentUser sd.CURRENT_USER
+  mediator.shared.current_user = user
+  mediator.shared.state = new State view_mode: sd.VIEW_MODE
+  mediator.shared.recent_connections = new RecentConnections
+
+  if user.id
+    mediator.shared.notifications = new Notifications()
+    mediator.shared.notifications.on 'sync', ->
+      mediator.trigger 'notifications:synced', @
+
+    user.fetch
+      prefill: true
+      prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
+      success: (user, response)->
+        mediator.trigger 'current_user:fetched'
+        ensureFreshUser response.user
+        showNewUserMessages() if user.get('show_tour')
+
+  mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
+
 setupViews = ->
   new BodyView
     el: $('body')
@@ -67,30 +92,12 @@ setupViews = ->
     new NewChannelView
       el: $('.dropdown--menu--new-channel')
 
+    if mediator.shared.current_user.get('is_pro')
+      new ViewMenuView
+        el: $('.dropdown--menu--view')
+        model: mediator.shared.state
+
     mediator.shared.notifications.fetch()
-
-setupPusherAndCurrentUser = ->
-  mediator.shared = {}
-
-  user = new CurrentUser sd.CURRENT_USER
-  mediator.shared.current_user = user
-  mediator.shared.state = new Backbone.Model
-  mediator.shared.recent_connections = new RecentConnections
-
-  if user.id
-    mediator.shared.notifications = new Notifications()
-    mediator.shared.notifications.on 'sync', ->
-      mediator.trigger 'notifications:synced', @
-
-    user.fetch
-      prefill: true
-      prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
-      success: (user, response)->
-        mediator.trigger 'current_user:fetched'
-        ensureFreshUser response.user
-        showNewUserMessages() if user.get('show_tour')
-
-  mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
 
 syncAuth = module.exports.syncAuth = ->
   if sd.CURRENT_USER

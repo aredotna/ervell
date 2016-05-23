@@ -1,0 +1,24 @@
+.view-menu
+  margin 0 (unit / 2)
+
+  &__selected.iconic:before
+    vertical-align middle !important
+    top -1px !important
+
+  &__dropdown
+    width unit * 15
+    &__option
+      font-weight bold
+      padding (unit / 3) unit
+      border-bottom 1px solid bordergray
+    &__option:last-child
+      border-bottom none
+    &__option:hover
+      color hovergray
+    &__option.iconic:before
+      vertical-align middle !important
+      top -1px !important
+
+.dropdown--is_active
+  .view-menu__selected
+    color hovergray

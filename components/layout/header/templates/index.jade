@@ -3,6 +3,9 @@ header#layout-header
     include ../../../search_bar/templates/index
 
   if user && user.has('username')
+    if user.get('is_pro')
+      - glyph = view_mode == 'grid' ? 'grid-three-up' : 'list'
+      include ../../../view_menu/templates/index
     include ../../../new_channel/templates/index
     include ../../../user_menu/templates/index
 
