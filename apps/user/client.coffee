@@ -16,6 +16,7 @@ Filter = require '../../components/filter/index.coffee'
 PathView = require '../../components/path/client/path_view.coffee'
 MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
+setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->
   current_user = mediator.shared.current_user
@@ -33,21 +34,13 @@ module.exports.init = ->
     _.extend blocks.options,
       subject: sd.SUBJECT
 
-  new UserBlockCollectionView
-    el: $ ".grid--user"
-    blocks: blocks
-
+  setupBlockCollection
+    $el: $('.profile-contents')
+    collection: blocks
 
   new PathView
     el: $('section.path--header')
     model: user
-
-  # scrollFrame '.grid__block--channel a'
-
-  new InfiniteView
-    context: $ ".grid--user"
-    collection: blocks
-    itemSelector: $ ".grid--user"
 
   user = new User sd.USER
 

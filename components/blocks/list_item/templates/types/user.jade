@@ -1,0 +1,13 @@
+.block-collection--list__row
+  .block-collection--list__column(data-attr="icon")
+    //- icon
+  .block-collection--list__column
+    a(href="#{block.getHref()}")= block.smartTruncate(block.title(), 50)
+  .block-collection--list__column
+    //- icon
+  .block-collection--list__column
+    //- source / follow
+  .block-collection--list__column
+    //- connect
+  .block-collection--list__column
+    | Updated #{block.updatedAtAgo()}

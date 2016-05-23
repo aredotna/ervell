@@ -18,7 +18,7 @@ module.exports = class ChannelView extends Backbone.View
 
   initialize: ({ @channel, @blocks })->
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
-    mediator.shared.state.on 'change', @toggleDragClass, @
+    mediator.shared.state.on 'change:isDraggingBlocks', @toggleDragClass, @
     @channel.on 'edit:title:success', @updateSlug, @
 
     @subscribe()

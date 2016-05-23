@@ -39,7 +39,6 @@ module.exports = class NewChannelView extends DropdownView
     @model.set 'title', @$input.val()?.trim()
 
   createChannel: (e) ->
-    console.log 'createChannel', e
     @saving = true
 
     @$('.grid__block').addClass 'grid__block--loading'

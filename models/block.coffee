@@ -23,8 +23,10 @@ module.exports = class Block extends Base
   title: ->
     if @has('username')
       @get('username')
-    else
+    else if @get('title')
       @get('title')
+    else
+      @get('generated_title')
 
   sourceTitle: ->
     if @get('source')?.title?

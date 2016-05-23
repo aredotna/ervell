@@ -4,8 +4,8 @@ block body
   include ./explore_path
 
   .channel-container( class=blocks.length ? '' : 'is-empty' )
-    .grid.grid--explore.flex-container
-      include ../../../components/block_collection/templates/block_collection
+    .explore-contents
+      include ../../../components/blocks/container/templates/index
     .channel-results-container
       .grid.grid--channel-filter.flex-container
         //- rendered client side

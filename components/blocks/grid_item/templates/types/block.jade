@@ -1,0 +1,57 @@
+div(class="block-item grid__block grid__block--item grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}" data-id="#{block.id}" data-class="#{block.get('base_class')}" id="#{block.id}")
+  .block-padding
+
+  span(
+    href="#{block.getHref()}"
+    data-client="#{block.get('base_class')}"
+    class="grid__block__link needsclick"
+  )
+
+    .grid__block__inner.halign--flex(class="grid__block__inner--privacy-#{block.getVisibility() }")
+      .grid__block__content
+        block content
+
+      .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+        - if(user && user.has('id'))
+          block overlay
+
+        - if(channel && user && user.has('id'))
+          .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
+            .grid__block__delete-block__confirm
+              | Are you sure?
+              a.grid__block__delete-block__confirm__choice.confirm__choice__yes Yes
+              a.grid__block__delete-block__confirm__choice.confirm__choice__no No
+
+      if user && user.id
+        .grid__block__connect-container.abs-fill
+          //- rendered by the client
+      if block.get('comment_count') > 0 && user && user.id
+        span.grid__block__comment-count(href="#{block.getHref()}/comments" data-client="#{block.get('base_class')}")= block.get('comment_count')
+
+    - if(block.get('class') != 'Channel' && block.get('class') != 'User')
+      p(href="#{block.getHref()}" data-client="#{block.get('base_class')}")
+        .grid__block__title= block.smartTruncate(block.get('title'))
+          - if(block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension))
+            img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
+          - if(block.get('class') == 'Media')
+            img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+        - if(block.has('user'))
+
+          - if(channel)
+
+            - if(block.get('connected_by_username') == block.get('user').username)
+              p.grid__block__author
+                | Added by #{block.get('user').username}
+                br
+                | Updated #{block.updatedAtAgo()}
+            - else
+              p.grid__block__author
+                | Connected by #{block.get('connected_by_username')}
+                br
+                | #{block.connectedAtAgo()}
+
+          - else
+            p.grid__block__author
+              | Added by #{block.get('user').username}
+              br
+              | Updated #{block.updatedAtAgo()}

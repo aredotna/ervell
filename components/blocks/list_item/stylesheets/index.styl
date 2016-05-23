@@ -1,0 +1,48 @@
+.block-collection--list
+  display table
+  width 100%
+
+  &__header
+    display table-header-group
+
+  &__contents
+    display table-row-group
+
+  &__column
+    display table-cell
+    padding 20px 10px
+    border-bottom 1px solid bordergray
+    vertical-align middle
+    img
+      max-width unit * 2
+      max-height unit * 2
+      margin 0 auto
+    a
+      font-weight bold
+    &:first-child
+      padding-left 0px
+    &:last-child
+      padding-right 0px
+    &[data-attr="icon"]
+      text-align center
+    &__small
+      font-size s_caption
+      padding-top 10px
+    &__channel-icon
+      width unit * 2
+      height unit * 2
+      border 3px solid black
+      margin 0 auto
+      &.privacy--closed
+        border-color closed
+      &.privacy--public
+        border-color public
+      &.privacy--private
+        border-color private
+
+  &__row
+    display table-row
+    border-bottom 1px solid bordergray
+    cursor pointer
+    &:hover
+      background-color secondbackgroundgray

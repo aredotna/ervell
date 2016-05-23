@@ -1,0 +1,12 @@
+.block-collection.block-collection--list.flex-container
+  .block-collection--list__header
+    .block-collection--list__column(data-attr="icon")
+    .block-collection--list__column(data-attr="title") Title
+    .block-collection--list__column(data-attr="icon")
+    .block-collection--list__column(data-attr="action")
+    .block-collection--list__column(data-attr="connect")
+    .block-collection--list__column(data-attr="date") Date
+
+  .block-collection--list__contents
+    for block in blocks
+      include ../../list_item/templates/block

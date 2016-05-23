@@ -1,0 +1,17 @@
+.block-collection--list__row.block-collection--list__row--channel
+  .block-collection--list__column(data-attr="icon")
+    .block-collection--list__column__channel-icon(class="privacy--#{block.getVisibility()}")
+  .block-collection--list__column(data-attr="title")
+    strong
+      a(href="#{block.getHref()}" class="privacy--#{block.getVisibility()}")= block.smartTruncate(block.title(), 50)
+    .block-collection--list__column__small
+      | By&nbsp;
+      a(href="/#{block.get('user').slug}") #{block.get('user').username}
+  .block-collection--list__column
+    //- icon
+  .block-collection--list__column
+    //- source / follow
+  .block-collection--list__column
+    //- connect
+  .block-collection--list__column
+    | Updated #{block.updatedAtAgo()}

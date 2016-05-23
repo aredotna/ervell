@@ -9,8 +9,8 @@ block body
       - title = searchee + content
       include ../../../components/filter/templates/search_bar
   .channel-container( class=blocks.length ? '' : 'is-empty' )
-    .grid.grid--user.flex-container
-      include ../../../components/block_collection/templates/block_collection
+    .profile-contents
+      include ../../../components/blocks/container/templates/index
     .channel-empty.valign-outer
       .valign-inner.center
         include ./empty

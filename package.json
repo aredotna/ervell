@@ -20,6 +20,7 @@
     "cookie-parser": "*",
     "cookie-session": "*",
     "cookies": "^0.5.0",
+    "cookies-js": "https://registry.npmjs.org/cookies-js/-/cookies-js-1.2.2.tgz",
     "diacritics": "*",
     "express": "*",
     "express-spam-referral-blocker": "^1.2.1",

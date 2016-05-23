@@ -1,0 +1,28 @@
+mixin avatar(user, avatar_size)
+  if user.has('avatar_image') && user.has('username')
+    - avatar_size = avatar_size || 'display'
+    - var splitName = user.get('username').split(" ")
+
+    if splitName
+      - var initials = []
+
+      for name in splitName
+        - initials.push(name.substring(0, 1))
+
+      - var initials = initials.join("").substring(0,4)
+
+    .user__avatar(class="user__avatar--#{avatar_size}")
+      .user__avatar__initials.valign-outer
+        .valign-inner
+          .user__avatar__initials__content=initials
+
+      img(src="#{user.get('avatar_image')[avatar_size]}").user__avatar__image
+
+extends block
+
+block content
+  - if(block.get('class') == 'User' && block.has('username'))
+    h2= block.get('username')
+    +avatar(block)
+    - if(user && user.id != block.id)
+      .button--inblock.button--inblock--bottom.grid__block__follow_btn &nbsp;
