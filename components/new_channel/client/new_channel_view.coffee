@@ -17,6 +17,7 @@ module.exports = class NewChannelView extends DropdownView
 
   initialize: (options)->
     @model = new Channel
+      base_class: 'Channel'
       class: 'Channel'
       status: 'public'
       user: mediator.shared.current_user.attributes
@@ -39,7 +40,6 @@ module.exports = class NewChannelView extends DropdownView
     @model.set 'title', @$input.val()?.trim()
 
   createChannel: (e) ->
-    console.log 'createChannel', e
     @saving = true
 
     @$('.grid__block').addClass 'grid__block--loading'
