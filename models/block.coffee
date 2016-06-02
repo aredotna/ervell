@@ -60,7 +60,7 @@ module.exports = class Block extends Base
       @get('image')?[size]?.url
 
   getVisibility: ->
-    if @get('class') is 'Channel'
+    if @get('base_class') is 'Channel'
       @get('status')
     else
       @get('visibility')
