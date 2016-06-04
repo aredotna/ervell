@@ -102,7 +102,7 @@ syncAuth = module.exports.syncAuth = ->
           method: 'GET'
           url: '/me/sign_out'
           complete: ->
-            window.location.reload()
+            # window.location.reload()
 
 ensureFreshUser = (data) ->
   return unless sd.CURRENT_USER
