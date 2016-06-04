@@ -6,6 +6,7 @@ Invitee = require '../../models/invitee'
   invitee = new Invitee invitation_token: req.params.token
   invitee.fetch
     success: ->
+      invitee.set invitation_token: req.query.invite_token
       res.locals.sd.INVITEE = invitee.toJSON()
       res.render 'index', invitee: invitee
     error: ->

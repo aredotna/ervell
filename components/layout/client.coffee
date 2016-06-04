@@ -70,7 +70,7 @@ setupPusherAndCurrentUser = ->
       prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
       success: (user, response)->
         mediator.trigger 'current_user:fetched'
-        ensureFreshUser response.user
+        # ensureFreshUser response.user
         showNewUserMessages() if user.get('show_tour')
 
   mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?

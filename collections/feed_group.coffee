@@ -53,12 +53,12 @@ module.exports = class FeedGroup extends Base
   is_single: -> @length is 1
 
   is_comment: ->
-    @models[0].has('item') && @first_item().class is 'Comment'
+    @models[0].has('item') && @first_item().base_class is 'Comment'
 
   single_subject_link: (subject)->
-    if @first_item()?.class is 'Channel'
+    if @first_item()?.base_class is 'Channel'
       "/#{@first_item()?.user.slug}/#{@first_item().slug}"
-    else if @first_item()?.class is 'User'
+    else if @first_item()?.base_class is 'User'
       "/#{@first_item()?.slug}"
     else
       "/#/block/#{@first_item()?.id}"
@@ -69,14 +69,15 @@ module.exports = class FeedGroup extends Base
     if @first_item()?.username?
       @first_item()?.username
     else if @is_comment()
+      console.log 'is_comment', new Comment(@first_item(), { block_id: @first_item.commentable_id})
       "#{new Comment(@first_item(), { block_id: @first_item.commentable_id}).getHTML()}"
-    else if @first_item()?.class is "Channel"
+    else if @first_item()?.base_class is "Channel"
       @first_item()?.title
     else
       @_format_subject()
 
   grouped_subject: ->
-    grouped = @groupBy (model)-> model.get('item').class
+    grouped = @groupBy (model)-> model.get('item').base_class
     groups = _.map grouped, (group)->
       first = group[0]
       type = if first.get('item_type') is 'Comment' then "\"#{first.get('item')?.body}\"" else first.get('item').class?.toLowerCase()
@@ -103,7 +104,7 @@ module.exports = class FeedGroup extends Base
   first_target: -> @models[0].get('target')
 
   single_target_link: (subject)->
-    if @first_target()?.class is 'Channel'
+    if @first_target()?.base_class is 'Channel'
       "/#{@first_target()?.user.slug}/#{@first_target().slug}"
     else if @first_target()?.class is 'User'
       "/#{@first_target()?.slug}"
@@ -111,13 +112,13 @@ module.exports = class FeedGroup extends Base
       "/#/block/#{@first_target()?.id}"
 
   subject_privacy: ->
-    if @models[0].has('item') and @first_item().class is "Channel"
+    if @models[0].has('item') and @first_item().base_class is "Channel"
       return @first_item()?.status
 
     return ''
 
   target_privacy: ->
-    if @models[0].has('target') and @first_target().class is "Channel"
+    if @models[0].has('target') and @first_target().base_class is "Channel"
       return @first_target()?.status
 
     return ''
@@ -126,7 +127,7 @@ module.exports = class FeedGroup extends Base
     if @models[0].has('target')
       if @first_target()?.username?
         @first_target()?.username
-      else if @first_target()?.class is "Channel"
+      else if @first_target()?.base_class is "Channel"
         @first_target()?.title
       else
         # @_format_subject()

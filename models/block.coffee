@@ -49,7 +49,9 @@ module.exports = class Block extends Base
     @set 'connections', connections
 
   connections: ->
-    _.map @get('connections'), (connection) -> new Block connection
+    _.map @get('connections'), (connection) ->
+      connection.base_class = 'Channel'
+      new Block connection
 
   getSourceUrl: ->
     @get('source')?.url || @get('attachment')?.url || @getImageSize('original')
@@ -62,7 +64,7 @@ module.exports = class Block extends Base
       @get('image')?[size]?.url
 
   getVisibility: ->
-    if @get('class') is 'Channel'
+    if @get('base_class') is 'Channel'
       @get('status')
     else
       @get('visibility')
@@ -98,9 +100,9 @@ module.exports = class Block extends Base
     @get('connected_by_user_id') is user.id
 
   getHref: ->
-    if @get('class') is 'Channel'
+    if @get('base_class') is 'Channel'
       "/#{@get('user').slug}/#{@get('slug')}"
-    else if @get('class') is 'User'
+    else if @get('base_class') is 'User'
       "/#{@get('slug')}"
     else
       "/block/#{@id}"

@@ -17,6 +17,7 @@ module.exports = class NewChannelView extends DropdownView
 
   initialize: (options)->
     @model = new Channel
+      base_class: 'Channel'
       class: 'Channel'
       status: 'public'
       user: mediator.shared.current_user.attributes
