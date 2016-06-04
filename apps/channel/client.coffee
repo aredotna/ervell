@@ -5,8 +5,7 @@ mediator = require '../../lib/mediator.coffee'
 Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 CurrentUser = require '../../models/current_user.coffee'
-BlockCollectionView = require '../../components/block_collection/client/block_collection_view.coffee'
-BlockSkeletonView = require './client/block_skeleton_view.coffee'
+setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
@@ -19,9 +18,17 @@ module.exports = class ChannelView extends Backbone.View
   initialize: ({ @channel, @blocks })->
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
     mediator.shared.state.on 'change:isDraggingBlocks', @toggleDragClass, @
+    mediator.on 'upload:done', @makeBlock, @
+
     @channel.on 'edit:title:success', @updateSlug, @
 
-    @subscribe()
+    @pusherSubscribe()
+
+  makeBlock: (src) ->
+    block = new Block block_type: "Block", source: src
+    @blocks.create block.toJSON(),
+      url: "#{sd.API_URL}/channels/#{@channel.get('slug')}/blocks"
+      wait: true
 
   toggleDragClass: ->
     if mediator.shared.state.get('isDraggingBlocks')
@@ -29,7 +36,7 @@ module.exports = class ChannelView extends Backbone.View
     else
       @$el.removeClass 'is-dragging'
 
-  subscribe: ->
+  pusherSubscribe: ->
     @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
     @listener = new Bp.Backpusher @pusher, @blocks
 
@@ -100,10 +107,10 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
 
-  new BlockCollectionView
-    el: $ ".grid--channel"
-    channel: channel
-    blocks: blocks
+  setupBlockCollection
+    $el: $('.channel-contents')
+    collection: blocks
+    mode: 'skeleton'
 
   initChannelPath channel
 
@@ -114,15 +121,9 @@ module.exports.init = ->
       $resultContainer: $('.channel-results-container')
       $channelContainer: $('.grid--channel')
 
-  if not sd.FOLLOWERS
 
-    new BlockSkeletonView
-      collection: blocks
-      channel: channel
-      el: $('.grid--channel')
-
-    if current_user.canAddToChannel channel
-      new NewBlockView
-        el: $ ".grid__block--new-block"
-        model: channel
-        blocks: blocks
+  if current_user.canAddToChannel channel
+    new NewBlockView
+      el: $ ".grid__block--new-block"
+      model: channel
+      blocks: blocks

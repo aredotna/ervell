@@ -37,20 +37,10 @@ module.exports = class ChannelBlocks extends Blocks
       @replacePlaceholders(response.contents, page, @loadDirection)
 
   mergeSkeleton: (models) ->
-
-    (mergeSkeletonModel = =>
-      unless models.length
-        return @trigger 'merge:skeleton'
-
-      model = models.shift()
-
-      # if model doesn't exist, add
-      if !@get(model.id)
-        @add model
-
-      mergeSkeletonModel()
-
-    )()
+    collection = new Blocks models
+    collection.add @toJSON(), merge: true, silent: true
+    @refill collection.toJSON()
+    @trigger 'merge:skeleton'
 
   replacePlaceholders: (models, page, direction) ->
     (replacePlaceholder = =>

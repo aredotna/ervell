@@ -1,57 +1,23 @@
 Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
-mediator = require '../../../lib/mediator.coffee'
-Block = require '../../../models/block.coffee'
-BlockView = require '../../../components/block_collection/client/block_view.coffee'
+mediator = require '../../lib/mediator.coffee'
 
-template = -> require('../../../components/block_collection/templates/block_collection.jade') arguments...
+module.exports = class SkeletonView extends Backbone.View
 
-module.exports = class BlockSkeletonView extends Backbone.View
-
-  initialize: (options)->
-    mediator.shared.blocks = @collection
-
-    @channel = options.channel if options?.channel
-
-    @collection.on "add", @appendBlock, @
-    @collection.on "created:block", @appendBlock, @
-    @collection.on "placeholder:added", @appendBlock, @
-    @collection.on "merge:skeleton", @renderSkeleton, @
+  initialize: ->
     @collection.on "placeholders:replaced", @completeRequest, @
 
-    mediator.on 'upload:done', @makeBlock, @
+    @setupSkeleton()
 
-    @collection.loadSkeleton()
-
-    super
-
-  makeBlock: (location) ->
-    block = new Block block_type: "Block", source: location
-    @collection.create block.toJSON(),
-      url: "#{sd.API_URL}/channels/#{@channel.get('slug')}/blocks"
-      wait: true
-
-  appendBlock: (model)->
-    containerMethod = if model?.options?.wait is true then 'after' else 'append'
-    new BlockView
-      container: @$el
-      model: model
-      containerMethod: containerMethod
-      autoRender: true
-      channel: @channel
-
-  renderSkeleton: ->
-    console.log 'rendering skeleton'
-    @$el.html template
-      blocks: @collection.models
+  setupSkeleton: ->
     _.defer =>
       @queue = []
       @pages = []
       @addWaypoints()
 
   addWaypoints: ->
-    sel = '.grid__block'
+    sel = '.block-item'
     @addPage 0
     @addPage 1
     @$("#{sel}:nth-child(#{@collection.options.per}n)").not('.grid__block--new-block').each (i, el)=>
@@ -153,14 +119,14 @@ module.exports = class BlockSkeletonView extends Backbone.View
 
     mediator.trigger 'page:loaded'
 
-    $start = if page_id is 1 then @$('> .grid__block:first') else @$(".pagemarker[data-page=#{page_id}]")
-    $pageElements = $start.nextUntil('.pagemarker').andSelf()
+    # $start = if page_id is 1 then @$('> .grid__block:first') else @$(".pagemarker[data-page=#{page_id}]")
+    # $pageElements = $start.nextUntil('.pagemarker').andSelf()
 
-    $pageElements = $pageElements.filter('.grid__block--placeholder')
+    # $pageElements = $pageElements.filter('.grid__block--placeholder')
 
-    _.delay =>
-      $pageElements.remove()
-    , 100
+    # _.delay =>
+    #   $pageElements.remove()
+    # , 100
 
   markPageLoaded: (id) ->
     @pages[id]?.loaded = true

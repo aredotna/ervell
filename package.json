@@ -12,6 +12,7 @@
     "backbone-cache-sync": "*",
     "backbone-fetch-cache": "*",
     "backbone-super-sync": "*",
+    "backbone.conduit": "^1.0.0",
     "backbone.localstorage": "^1.1.16",
     "blueimp-file-upload": "*",
     "body-parser": "*",

@@ -2,15 +2,15 @@
 # General collection
 #
 Backbone = require 'backbone'
-Collection = Backbone.Collection
+Conduit = require 'backbone.conduit'
 sd = require("sharify").data
 _ = require 'underscore'
 Model = require("../models/base.coffee")
 ModelLib = require '../lib/model_lib.coffee'
 
-module.exports = class Base extends Collection
+module.exports = class Base extends Conduit.QuickCollection
 
-  model:Model
+  model: Model
 
   _.extend @prototype, ModelLib
 
@@ -20,27 +20,6 @@ module.exports = class Base extends Collection
         options.headers = {}
       options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token
     super
-
-  fetchUntilEnd: (options = {}) ->
-    page = options.data?.page - 1 or 0
-    opts = _.clone(options)
-    fetchPage = =>
-      @fetch _.extend opts,
-        data: _.extend (opts.data ? {}), page: page += 1
-        remove: false
-        complete: ->
-        success: (col, res) =>
-          options.each? col, res
-
-          if res.length < page * 12
-            options.success?(@)
-            options.complete?(@)
-          else
-            fetchPage()
-        error: ->
-          options.error? arguments...
-          options.complete?()
-    fetchPage()
 
   initialize: (models, options={})->
     @setOptions(options)

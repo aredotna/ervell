@@ -1,3 +1,5 @@
-.block-collection.block-collection--grid.grid.flex-container
+.block-collection.block-collection--grid.grid.flex-container(class= user && user.id == channel.get('user').id ? 'is-editable' : '')
+  if channel && !following && !followers && user && user.canAddToChannel(channel)
+    include ../../../new_block/templates/new_block
   for block in blocks
     include ../../grid_item/templates/block

@@ -11,8 +11,10 @@ module.exports = class Channel extends Block
   defaultOptions:
     direction: 'desc'
     sort: 'position'
+    per: 6
+    page: 1
 
-  url: -> "#{sd.API_URL}/channels/#{@slugOrId()}/thumb?#{params.encode(@options)}"
+  url: -> "#{sd.API_URL}/channels/#{@slugOrId()}/skeleton?#{params.encode(@options)}"
 
   urlRoot: -> "#{sd.API_URL}/channels/#{@slugOrId()}"
 

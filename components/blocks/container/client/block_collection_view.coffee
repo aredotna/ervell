@@ -1,11 +1,13 @@
 { defer } = require 'underscore'
 Backbone = require 'backbone'
 InfiniteView = require '../../../pagination/infinite_view.coffee'
+SkeletonView = require '../../../pagination/skeleton_view.coffee'
 GridBlockView = require '../../grid_item/client/block_view.coffee'
 ListBlockView = require '../../list_item/client/block_view.coffee'
 template = -> require('../templates/index.jade') arguments...
 
 module.exports = class BlockCollectionView extends Backbone.View
+  postRendered: false
   views:
     grid: GridBlockView
     list: ListBlockView
@@ -15,15 +17,19 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $el
         collection: collection
         context: $el
-    skeleton: ->
-      # no op
+    skeleton: ({ $el, collection })->
+      new SkeletonView
+        el: $el
+        collection: collection
 
   initialize: ({ @mode, @state }) ->
     @listenTo @state, 'change:view_mode', @render
+    @listenTo @collection, 'merge:skeleton', @render
 
     if @mode is 'infinite'
       @listenTo @collection, 'add', @appendBlockView, @
-      @postRender()
+
+    @postRender()
 
   appendBlockView: (model) ->
     @renderBlockView model, true
@@ -33,7 +39,7 @@ module.exports = class BlockCollectionView extends Backbone.View
       blocks: @collection.models
       view_mode: @state.get('view_mode')
 
-    defer => @postRender()
+    defer (=> @postRender()) unless @postRendered
 
   postRender: =>
     # setup pagination mode
@@ -43,6 +49,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     # setup block item views
     @$('.block-item').each @initBlockView
+    @postRendered = true
 
   initBlockView: (index, el) =>
     $block = $(el)

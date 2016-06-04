@@ -5,3 +5,5 @@ case block.get('base_class')
     include types/channel
   when "Block"
     include types/block
+  default
+    include types/placeholder
