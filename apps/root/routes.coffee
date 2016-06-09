@@ -18,7 +18,6 @@ class Statistics extends Backbone.Model
   else
     stats = new Statistics
     stats.fetch
-      cache: true
       complete: ->
         res.render 'home/index',
           stats: stats
