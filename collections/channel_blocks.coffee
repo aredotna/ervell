@@ -33,6 +33,7 @@ module.exports = class ChannelBlocks extends Blocks
   loadPage: (page)->
     options = @options
     options.page = page
+    console.log('loadPage options', options)
     $.get "#{sd.API_URL}/channels/#{@slug}/contents?#{params.encode(options)}", (response) =>
       @replacePlaceholders(response.contents, page, @loadDirection)
 
