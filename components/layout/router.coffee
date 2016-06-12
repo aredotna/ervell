@@ -53,9 +53,11 @@ module.exports = class Router extends Backbone.Router
       className: 'modalize things-modal'
 
     @modal.load (done) ->
+      mediator.shared.state.set lightbox: true
       block.fetch().then done
 
     @modal.view.on 'closed', =>
+      mediator.shared.state.set lightbox: false
       @removeRoute()
 
   updateRoute: (id)->

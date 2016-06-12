@@ -34,7 +34,7 @@ module.exports = class EditableAttributeView extends Backbone.View
     return unless @model.allows('can-edit',  @currentUser) and !@editing
 
     analytics.track.click "#{@_attribute} edited",
-      label: analytics.modelNameAndIdToLabel @model.get('class'), @model.id
+      label: analytics.modelNameAndIdToLabel @model.get('base_class'), @model.id
 
     @editing = true
     @$el.addClass('is-editing')
