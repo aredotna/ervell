@@ -15,7 +15,7 @@
     "backbone.localstorage": "^1.1.16",
     "blueimp-file-upload": "*",
     "body-parser": "*",
-    "bucket-assets": "*",
+    "bucket-assets": "^0.2.11",
     "coffee-script": "*",
     "cookie-parser": "*",
     "cookie-session": "*",
