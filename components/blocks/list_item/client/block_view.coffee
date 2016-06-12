@@ -84,7 +84,6 @@ module.exports = class BlockView extends Backbone.View
 
     args['channel'] = @channel if @channel?
 
-    console.log "update", $("##{model.id}")
     $("##{model.id}").replaceWith blockTemplate args
     @$el = $("##{model.id}")
     @model = model

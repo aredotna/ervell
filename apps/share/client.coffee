@@ -3,6 +3,7 @@ Backbone.$ = $
 Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 BlockSkeletonView = require '../channel/client/block_skeleton_view.coffee'
+setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->
   if sd.SHARE_TOKEN
@@ -13,8 +14,8 @@ module.exports.init = ->
     channel = new Channel sd.CHANNEL
     blocks = new ChannelBlocks sd.BLOCKS, channel_slug: sd.CHANNEL.slug
 
-    new BlockSkeletonView
+    setupBlockCollection
+      $el: $('.channel-contents')
       collection: blocks
-      channel: channel
-      el: $ ".grid"
+      mode: 'skeleton'
 

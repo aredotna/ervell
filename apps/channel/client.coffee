@@ -107,6 +107,10 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
 
+
+  console.log("sd.BLOCKS", sd.BLOCKS)
+  console.log('492522', blocks.get(492522))
+
   setupBlockCollection
     $el: $('.channel-contents')
     collection: blocks

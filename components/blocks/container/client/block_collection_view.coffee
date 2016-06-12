@@ -23,7 +23,7 @@ module.exports = class BlockCollectionView extends Backbone.View
         collection: collection
 
   initialize: ({ @mode, @state }) ->
-    @listenTo @state, 'change:view_mode', @render
+    # @listenTo @state, 'change:view_mode', @render
     @listenTo @collection, 'merge:skeleton', @render
 
     if @mode is 'infinite'
@@ -39,7 +39,7 @@ module.exports = class BlockCollectionView extends Backbone.View
       blocks: @collection.models
       view_mode: @state.get('view_mode')
 
-    defer (=> @postRender()) unless @postRendered
+    defer (=> @postRender())
 
   postRender: =>
     # setup pagination mode
@@ -48,11 +48,13 @@ module.exports = class BlockCollectionView extends Backbone.View
       collection: @collection
 
     # setup block item views
-    @$('.block-item').each @initBlockView
+    unless @postRendered
+      @$('.block-item').each @initBlockView
     @postRendered = true
 
   initBlockView: (index, el) =>
     $block = $(el)
+
     block = @collection.get $block.data('id')
 
     if block

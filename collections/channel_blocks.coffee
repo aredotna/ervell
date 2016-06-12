@@ -40,7 +40,7 @@ module.exports = class ChannelBlocks extends Blocks
   mergeSkeleton: (models) ->
     collection = new Blocks models
     collection.add @toJSON(), merge: true, silent: true
-    @refill collection.toJSON()
+    @reset collection
     @trigger 'merge:skeleton'
 
   replacePlaceholders: (models, page, direction) ->
@@ -53,6 +53,7 @@ module.exports = class ChannelBlocks extends Blocks
       model = new Block models[retrieveFn]()
 
       @get(model.id).set(model.attributes)
+      console.log "model:#{model.id}:updated"
       mediator.trigger "model:#{model.id}:updated", model
 
       _.defer replacePlaceholder

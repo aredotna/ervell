@@ -2,13 +2,12 @@
 # General collection
 #
 Backbone = require 'backbone'
-Conduit = require 'backbone.conduit'
 sd = require("sharify").data
 _ = require 'underscore'
 Model = require("../models/base.coffee")
 ModelLib = require '../lib/model_lib.coffee'
 
-module.exports = class Base extends Conduit.QuickCollection
+module.exports = class Base extends Backbone.Collection
 
   model: Model
 
@@ -25,7 +24,8 @@ module.exports = class Base extends Conduit.QuickCollection
     @setOptions(options)
     super
 
-  onlyBlocks: -> new Collection @where base_class: 'Block'
+  onlyBlocks: ->
+    new Backbone.Collection @where base_class: 'Block'
 
   next: (model) ->
     model = @onlyBlocks().find (block) ->

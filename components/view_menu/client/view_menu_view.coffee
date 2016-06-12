@@ -24,3 +24,4 @@ module.exports = class UserMenuView extends DropdownView
     @model.set 'view_mode', mode
     @$('.view-menu__selected').attr 'data-glyph', glyph
     @$el.removeClass 'dropdown--is_active'
+    window.location.reload()
