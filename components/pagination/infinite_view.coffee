@@ -22,7 +22,7 @@ module.exports = class InfiniteView extends Backbone.View
     total = document.body.scrollHeight
     progress = (document.documentElement.scrollTop||document.body.scrollTop) + window.innerHeight * 4
 
-    if (total - progress < threshold) and not @disabled
+    if (total - progress < threshold) and not @disabled and not mediator.shared.state.get 'lightbox'
       @loadNextPage()
 
   loadNextPage: ->
