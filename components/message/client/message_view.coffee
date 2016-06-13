@@ -11,14 +11,12 @@ module.exports = class MessageView extends Backbone.View
   events:
     'click .message__inner__close' : 'remove'
 
-  initialize: ({ @container })->
+  initialize: ({ @container, @useCookie = true })->
     super
-    console.log 'initialize'
     # only render if user does not have cookie
-    @render() unless Cookies.get(@model.id) or $('body').hasClass 'is-mobile'
+    @render() unless (Cookies.get(@model.id) or $('body').hasClass 'is-mobile') and @useCookie
 
   render: ->
-    console.log 'rendering'
     html = template message: @model
     @$el = $(html)
     @delegateEvents()
