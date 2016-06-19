@@ -3,10 +3,13 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
+MessageView = require '../../../components/message/client/message_view.coffee'
 
 channelFileDropTemplate = -> require('../templates/filedrop.jade') arguments...
 
 module.exports = class ChannelFileDropView extends Backbone.View
+  dropLimit: 30
+
   events:
     'dragenter' : 'handleDrag'
     'dragend' : 'clearDrag'
@@ -27,6 +30,21 @@ module.exports = class ChannelFileDropView extends Backbone.View
   clearDrag: (e) ->
     @$('.channel--drop-zone').removeClass('is-droppable')
     @$('.channel--drop-zone__progress').css('width', '0%')
+    false
+
+  dropLimitMessage: ->
+    model = new Backbone.Model
+      id: 'bookmarklet_updates_message'
+      title: "File limit"
+      body: "Sorry, you can only drop #{@dropLimit} files at once."
+      type: 'Error'
+
+    new MessageView
+      container: $('#message-container')
+      model: model
+      useCookie: false
+
+    @clearDrag()
 
   uniqueId: (length=8) ->
     id = ""
@@ -44,12 +62,13 @@ module.exports = class ChannelFileDropView extends Backbone.View
       maxFileSize: 104857600 # 100MB
       dropZone: @$el
       autoUpload: true
-      limitMultiFileUploads: 300
+      limitMultiFileUploads: 3
       dataType: "XML"
       fileInput: @$("input:file")
       url: @policy.bucket
 
       drop: (e, data) =>
+        return @dropLimitMessage() if data.files.length > @dropLimit
         analytics.track.click "Files dropped on #{@channel.get('status')} channel"
         @$('.channel--drop-zone').addClass('is-droppable is-uploading')
         mediator.trigger "files:dropped",
