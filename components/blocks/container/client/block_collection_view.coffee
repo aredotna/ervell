@@ -1,5 +1,6 @@
 { defer } = require 'underscore'
 Backbone = require 'backbone'
+mediator = require '../../../../lib/mediator.coffee'
 InfiniteView = require '../../../pagination/infinite_view.coffee'
 SkeletonView = require '../../../pagination/skeleton_view.coffee'
 GridBlockView = require '../../grid_item/client/block_view.coffee'
@@ -22,9 +23,10 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $el
         collection: collection
 
-  initialize: ({ @mode, @state }) ->
+  initialize: ({ @mode, @state, @resultsCollection }) ->
     # @listenTo @state, 'change:view_mode', @render
     @listenTo @collection, 'merge:skeleton', @render
+    @listenTo @resultsCollection, 'sync reset', @render
 
     if @mode is 'infinite'
       @listenTo @collection, 'add', @appendBlockView, @
@@ -35,27 +37,32 @@ module.exports = class BlockCollectionView extends Backbone.View
     @renderBlockView model, true
 
   render: ->
+    models = if @resultsCollection.length then @resultsCollection.models else @collection.models
+
     @$el.html template
-      blocks: @collection.models
+      blocks: models
       view_mode: @state.get('view_mode')
+      user: mediator.shared.current_user
 
     defer (=> @postRender())
 
   postRender: =>
-    # setup pagination mode
-    @modes[@mode]
-      $el: @$('.block-collection')
-      collection: @collection
-
     # setup block item views
+    @$('.block-item').each @initBlockView
+
     unless @postRendered
-      @$('.block-item').each @initBlockView
+      @modes[@mode]
+        $el: @$('.block-collection')
+        collection: @collection
+
     @postRendered = true
 
   initBlockView: (index, el) =>
     $block = $(el)
 
-    block = @collection.get $block.data('id')
+    collection = if @resultsCollection.length then @resultsCollection else @collection
+
+    block = collection.get $block.data('id')
 
     if block
       new @views[@state.get('view_mode')]

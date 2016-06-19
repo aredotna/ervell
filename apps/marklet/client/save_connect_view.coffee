@@ -88,7 +88,6 @@ module.exports = class SaveConnectView extends ConnectView
       @$('.new-connection__done-button').text 'Close'
 
   sendExpandMsg: ->
-    console.log 'sendExpandMsg'
     window.top.postMessage { action: 'expand' }, '*'
 
   sendContractMsg: ->

@@ -22,7 +22,6 @@ module.exports = class InviteView extends Backbone.View
 
     data = @serializeForm()
 
-    console.log 'data', data.email
     if data.email?
       $.ajax
         url: "#{sd.API_URL}/invitees/invite"
@@ -34,7 +33,6 @@ module.exports = class InviteView extends Backbone.View
     @$('button').attr 'data-state', 'success'
 
     if response.error?
-      console.log 'error?', response
       @reenableForm()
       analytics.track.error 'Invitation not sent, try again.'
       @showError "Invitation not sent, try again."

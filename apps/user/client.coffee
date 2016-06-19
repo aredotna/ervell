@@ -34,15 +34,18 @@ module.exports.init = ->
     _.extend blocks.options,
       subject: sd.SUBJECT
 
-  setupBlockCollection
+  options =
+    model: user
     $el: $('.profile-contents')
     collection: blocks
+
+  _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
+
+  setupBlockCollection options
 
   new PathView
     el: $('section.path--header')
     model: user
-
-  user = new User sd.USER
 
   new MetaEditableAttributeView
     model: user
@@ -50,17 +53,6 @@ module.exports.init = ->
     _attribute: 'description'
     _kind: 'markdown'
     wait: true
-
-  if current_user.isPremium()
-    options =
-      model: user
-      $searchBar: $('.form__field__channel-filter')
-      $resultContainer: $('.channel-results-container')
-      $channelContainer: $('.grid--user')
-
-    _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
-
-    new Filter options
 
   user.on 'edit:success', ->
     $.ajax

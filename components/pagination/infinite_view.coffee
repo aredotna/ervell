@@ -13,7 +13,6 @@ module.exports = class InfiniteView extends Backbone.View
     mediator.on 'start:infinite', @enable, @
 
   initListener: ->
-    console.log 'initListener'
     @timer = setInterval @maybeLoad, 150
 
   maybeLoad: =>

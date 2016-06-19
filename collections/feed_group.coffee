@@ -69,7 +69,6 @@ module.exports = class FeedGroup extends Base
     if @first_item()?.username?
       @first_item()?.username
     else if @is_comment()
-      console.log 'is_comment', new Comment(@first_item(), { block_id: @first_item.commentable_id})
       "#{new Comment(@first_item(), { block_id: @first_item.commentable_id}).getHTML()}"
     else if @first_item()?.base_class is "Channel"
       @first_item()?.title

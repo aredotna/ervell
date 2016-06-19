@@ -107,24 +107,13 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
 
-
-  console.log("sd.BLOCKS", sd.BLOCKS)
-  console.log('492522', blocks.get(492522))
-
   setupBlockCollection
+    model: channel
     $el: $('.channel-contents')
     collection: blocks
     mode: 'skeleton'
 
   initChannelPath channel
-
-  if current_user.isPremium()
-    new Filter
-      model: channel
-      $searchBar: $('.form__field__channel-filter')
-      $resultContainer: $('.channel-results-container')
-      $channelContainer: $('.grid--channel')
-
 
   if current_user.canAddToChannel channel
     new NewBlockView

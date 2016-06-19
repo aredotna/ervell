@@ -73,7 +73,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   slide: (direction)->
     mediator.stopListening "connection:added:#{@model.id}"
-    console.log 'direction', direction
     @model = mediator.shared.blocks[direction](@model)
 
     mediator.trigger 'slide:to:block', @model.id

@@ -25,6 +25,7 @@ module.exports = class SearchBarView extends Backbone.View
     mediator.trigger 'start:infinite'
 
   clear: ->
+    @collection.reset()
     @$el.removeClass 'is-active'
 
   onKeyUp: (e)->

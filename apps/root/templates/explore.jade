@@ -4,11 +4,12 @@ block body
   include ./explore_path
 
   .channel-container( class=blocks.length ? '' : 'is-empty' )
+    if user && user.isPremium() && !following && !followers
+      .flex-container
+        - title = "Search everyone's public blocks and channels"
+        include ../../../components/filter/templates/search_bar
     .explore-contents
       include ../../../components/blocks/container/templates/index
-    .channel-results-container
-      .grid.grid--channel-filter.flex-container
-        //- rendered client side
     include ../../../components/layout/loader/templates/infinite
 
 block scripts

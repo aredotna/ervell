@@ -42,7 +42,6 @@ module.exports = class BlockSkeletonView extends Backbone.View
       channel: @channel
 
   renderSkeleton: ->
-    console.log 'rendering skeleton'
     @$el.html template
       blocks: @collection.models
     _.defer =>

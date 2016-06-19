@@ -33,7 +33,6 @@ module.exports = class ChannelBlocks extends Blocks
   loadPage: (page)->
     options = @options
     options.page = page
-    console.log('loadPage options', options)
     $.get "#{sd.API_URL}/channels/#{@slug}/contents?#{params.encode(options)}", (response) =>
       @replacePlaceholders(response.contents, page, @loadDirection)
 
@@ -53,7 +52,6 @@ module.exports = class ChannelBlocks extends Blocks
       model = new Block models[retrieveFn]()
 
       @get(model.id).set(model.attributes)
-      console.log "model:#{model.id}:updated"
       mediator.trigger "model:#{model.id}:updated", model
 
       _.defer replacePlaceholder
