@@ -17,11 +17,8 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
-    'click .grid__block__source__link'  : 'openLink'
-    'click .grid__block__connect-btn'   : 'loadConnectView'
-    'click .grid__block__delete-block'  : 'confirmDestroy'
-    'click .confirm__choice__yes'       : 'destroyConnection'
-    'click .confirm__choice__no'        : 'cancelDestroy'
+    'click .block-collection--list__column__source'  : 'openLink'
+    'click .block-collection--list__column__connect' : 'loadConnectView'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -52,12 +49,8 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    $connect_container = @$('.grid__block__connect-container')
+    $connect_container = @$('.connect-container')
     $connect_container.addClass 'is-active'
-    @$('.grid__block__inner').addClass 'is-active'
-
-    $connect_link = @$('.grid__block__link')
-    $connect_link.attr('data-disabled', 'true')
 
     new ConnectView
       el: $connect_container

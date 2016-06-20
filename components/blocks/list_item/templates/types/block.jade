@@ -18,18 +18,23 @@ span.block-item.block-collection--list__row(
       .iconic(data-glyph="file-#{block.get('attachment').extension}")
   .block-collection--list__column
     strong
-      a(href="#{block.getHref()}")= block.smartTruncate(block.title(), 50)
+      a(href="#{block.getHref()}")!= block.smartTruncate(block.titleOrContent(), 50)
     .block-collection--list__column__small
       | By&nbsp;
       a(href="/#{block.get('user').slug}") #{block.get('user').username}
   .block-collection--list__column
-    - if(block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension))
-      img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
-    - if(block.get('class') == 'Media')
-      img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+    .block-collection--list__column__source
+      if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
+      if block.get('class') == 'Media'
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+      if block.get('class') == 'Link'
+        .iconic(data-glyph="link-intact")
   .block-collection--list__column
     //- source / follow
   .block-collection--list__column
-    //- connect
+    .block-collection--list__column__connect Connect
+    .connect-container
+      //- rendered on the client
   .block-collection--list__column
     | Updated #{block.updatedAtAgo()}

@@ -23,7 +23,7 @@ module.exports = class Block extends Base
   title: ->
     if @has('username')
       @get('username')
-    else if @get('title')
+    else if @has('title')
       @get('title')
     else
       @get('generated_title')
@@ -39,6 +39,18 @@ module.exports = class Block extends Base
       data.user
     else
       data
+
+  titleOrContent: ->
+    if @has('username')
+      @get('username')
+    else if @has('title')
+      @get('title')
+    else if @has('content')
+      @get('content')
+    else if @has('description')
+      @get('description')
+    else
+      @get('generated_title')
 
   contentOrDescription: ->
     @get('content') || @get('description')

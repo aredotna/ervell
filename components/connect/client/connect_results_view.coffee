@@ -23,6 +23,9 @@ module.exports = class ConnectResultsView extends Backbone.View
     @collection.on "sync add", @render, @
 
   toggleConnection: (e)=>
+    e.preventDefault()
+    e.stopPropagation()
+
     target = $(e.currentTarget)
     id = target.data('id')
 
