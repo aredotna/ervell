@@ -24,7 +24,7 @@ span.block-item.block-collection--list__row(
     .block-collection--list__column__small
       | Added by&nbsp;
       a(href="/#{block.get('user').slug}") #{block.get('user').username}
-      if block.get('connected_by_username') != block.get('user').username
+      if block.get('connected_by_username') && block.get('connected_by_username') != block.get('user').username
         | ,&nbsp;connected by&nbsp;
         a(href="/#{block.get('connected_by_user_slug')}") #{block.get('connected_by_username')}
   .block-collection--list__column

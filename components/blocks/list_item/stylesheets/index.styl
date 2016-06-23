@@ -12,12 +12,16 @@
 
   &__column
     display table-cell
-    padding 20px 10px
+    padding (unit / 2)
     border-bottom 1px solid bordergray
     vertical-align middle
+    font-size s_normal
     &__comment-count
       position relative
       margin-left (unit / 2)
+      vertical-align text-bottom
+    &__comment-count:before
+      transform scaleX(-1)
     &__comment-count:after
       content attr(data-count)
       position absolute
