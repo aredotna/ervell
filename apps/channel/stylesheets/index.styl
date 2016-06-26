@@ -185,7 +185,7 @@
   padding-top 0
 
 .form__field__channel-filter
-  height 50px
+  height 51px
   width 100%
   position relative
 
@@ -198,38 +198,46 @@
   input:focus
     background backgroundgray
 
-.form__field__channel-filter--icon
-  position absolute
-  left 0
-  top 0
-  padding 11px
-  max-width 40px
-  max-height 50px
+  &__icon
+    position absolute
+    left 0
+    top 0
+    padding 11px
+    max-width 40px
+    max-height 50px
 
-  svg
-    height 30px
-    width 20px
+    svg
+      height 30px
+      width 20px
 
-    .iconic-magnifying-glass-lg
-      display none
+      .iconic-magnifying-glass-lg
+        display none
 
-    .iconic-magnifying-glass-md
-      display none
+      .iconic-magnifying-glass-md
+        display none
 
-    .iconic-magnifying-glass-sm
-      display inline
+      .iconic-magnifying-glass-sm
+        display inline
 
-    & *
-      stroke lightgray
-      fill lightgray
+      & *
+        stroke lightgray
+        fill lightgray
 
-.form__field__channel-filter--close
-  position absolute
-  left 16px
-  font-size 31px
-  top 10px
-  display none
-  color lightgray
+  &__close
+    position absolute
+    left 16px
+    font-size 31px
+    top 10px
+    display none
+    color lightgray
+
+  &--list
+    font-size 13px
+    border-bottom 1px dotted bordergray
+    .form__field__channel-filter__icon
+      padding 18px
+      svg
+        height 15px
 
 .form__field__channel-filter.is-active
   .form__field__channel-filter--close

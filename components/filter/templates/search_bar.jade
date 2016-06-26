@@ -1,7 +1,9 @@
-.form__field.form__field__channel-filter
+.form__field.form__field__channel-filter(
+  class="form__field__channel-filter--#{view_mode}"
+)
   input.input--wide(
     name='title' type='text' placeholder="Search #{title}"
   )
-  .form__field__channel-filter--close.pointer &times;
-  .form__field__channel-filter--icon
+  .form__field__channel-filter__close.pointer &times;
+  .form__field__channel-filter__icon
     include ../../../public/images/iconic/magnifying-glass.svg

@@ -5,12 +5,9 @@ block styles
 
 block body
   include ./path
-  if user && user.isPremium() && !following && !followers
-    .flex-container
-      - title = channel.get('title')
-      include ../../../components/filter/templates/search_bar
   .channel-container
     .channel-contents
+      - title = channel.get('title')
       include ../../../components/blocks/container/templates/index
     .channel-empty.valign-outer
       .valign-inner.center

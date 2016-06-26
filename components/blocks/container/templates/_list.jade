@@ -7,6 +7,9 @@
     .block-collection--list__column(data-attr="connect")
     .block-collection--list__column(data-attr="date") Date
 
+  .block-collection--list__filter
+    include ../../../filter/templates/search_bar
   .block-collection--list__contents.block-collection__contents
+
     for block in blocks
       include ../../list_item/templates/block

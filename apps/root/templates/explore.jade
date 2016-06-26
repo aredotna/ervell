@@ -5,10 +5,8 @@ block body
 
   .channel-container( class=blocks.length ? '' : 'is-empty' )
     if user && user.isPremium() && !following && !followers
-      .flex-container
-        - title = "Search everyone's public blocks and channels"
-        include ../../../components/filter/templates/search_bar
     .explore-contents
+      - title = "everyone's public blocks and channels"
       include ../../../components/blocks/container/templates/index
     include ../../../components/layout/loader/templates/infinite
 

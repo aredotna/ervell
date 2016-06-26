@@ -1,3 +1,6 @@
+if user && user.isPremium() && !following && !followers
+  .flex-container
+    include ../../../filter/templates/search_bar
 .block-collection.block-collection__contents.block-collection--grid.grid.flex-container(class= user && channel && user.id == channel.get('user').id ? 'is-editable' : '')
   if channel && !following && !followers && user && user.canAddToChannel(channel)
     include ../../../new_block/templates/new_block

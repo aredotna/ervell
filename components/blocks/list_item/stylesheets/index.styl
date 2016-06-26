@@ -7,12 +7,15 @@
     font-size s_small
     color lightgray
 
+  &__filter
+    display table-caption
+
   &__contents
     display table-row-group
 
   &__column
     display table-cell
-    padding 5px (unit / 2)
+    padding (unit / 2)
     border-bottom 1px solid bordergray
     vertical-align middle
     font-size s_small
@@ -31,7 +34,9 @@
       color white
     &__source
       cursor pointer
-    &__connect
+    &__source:hover
+      color hovergray
+    &__connect, &__follow
       font-weight bold
       @extend .inline-link
     .connect-container
