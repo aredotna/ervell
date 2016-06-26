@@ -12,7 +12,6 @@ module.exports = class SearchBlocks extends Blocks
   defaultOptions:
     page: 1
     per: 20
-    q: ''
 
   model: Block
 
