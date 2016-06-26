@@ -16,11 +16,11 @@ removeDiacritics = require('diacritics').remove
   q = removeDiacritics req.params.query
   res.locals.sd.SEARCH = q
 
-  blocks.fetch
+  request = blocks.fetch
     data:
       q: q
-    success: ->
+      auth_token: req.user?.get('authentication_token')
+    success: (blocks, response, options)->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render "index", blocks: blocks.models, search: q
     error: (m, err) -> next err
-

@@ -3,8 +3,8 @@ extends ../../../components/layout/index
 block body
   include ./path
   if blocks
-    .grid.flex-container
-      include ../../../components/block_collection/templates/block_collection
+    .search-contents
+      include ../../../components/blocks/container/templates/index
 
 block scripts
   script( src=asset('/assets/search.js') )

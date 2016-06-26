@@ -1,26 +1,16 @@
 #
 # The client-side code for a search page
 #
-
-Backbone = require "backbone"
-Backbone.$ = $
 _ = require 'underscore'
 sd = require("sharify").data
-Channel = require "../../models/channel.coffee"
 SearchBlocks = require '../../collections/search_blocks.coffee'
-InfiniteView = require '../../components/pagination/infinite_view.coffee'
-UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
+setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->
-  blocks = new SearchBlocks sd.BLOCKS, {q: sd.SEARCH}
+  blocks = new SearchBlocks sd.BLOCKS, { q: sd.SEARCH }
 
   _.extend blocks.options, subject: sd.SUBJECT
 
-  new UserBlockCollectionView
-    el: $ ".grid"
-    blocks: blocks
-
-  new InfiniteView
-    context: $ ".grid"
+  setupBlockCollection
+    $el: $('.search-contents')
     collection: blocks
-    itemSelector: $ ".grid"
