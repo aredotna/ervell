@@ -1,12 +1,19 @@
-.block-collection--list__row
-  .block-collection--list__column(data-attr="icon")
-    //- icon
+include ../../../../avatar/templates/avatar
+
+.block-collection--list__row.block-item(
+  id=block.id
+  data-id=block.id
+)
+  .block-collection--list__column
+    .block-collection--list__column__user
+      +avatar(block, 'thumb')
   .block-collection--list__column
     a(href="#{block.getHref()}")= block.smartTruncate(block.title(), 50)
   .block-collection--list__column
     //- icon
   .block-collection--list__column
-    //- source / follow
+    .block-collection--list__column__follow
+      //- renderered on the client
   .block-collection--list__column
     //- connect
   .block-collection--list__column

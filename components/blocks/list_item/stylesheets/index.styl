@@ -39,6 +39,12 @@
     &__connect, &__follow
       font-weight bold
       @extend .inline-link
+    &__user
+      .user__avatar
+        margin 0 auto
+        background backgroundgray
+      .user__avatar--thumb .user__avatar__image
+        top 0
     .connect-container
       margin-top -(unit)
     img
@@ -72,5 +78,6 @@
     display table-row
     border-bottom 1px solid bordergray
     cursor pointer
+    height 40px
     &:hover
       background-color secondbackgroundgray

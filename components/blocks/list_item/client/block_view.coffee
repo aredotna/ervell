@@ -132,7 +132,8 @@ module.exports = class BlockView extends Backbone.View
     e.stopPropagation()
 
   renderFollowButton: ->
-    if @model.get('class') is 'Channel' or @model.get('class') is 'User' && sd.CURRENT_USER
+    console.log "@model.get('base_class')", @model.get('base_class')
+    if @model.get('base_class') is 'Channel' or @model.get('base_class') is 'User' && sd.CURRENT_USER
       new FollowButtonView
         el: @$('.block-collection--list__column__follow')
         model: @model
