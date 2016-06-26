@@ -4,24 +4,22 @@
 
   &__header
     display table-header-group
-    font-size 12px
-    font-weight bold
+    font-size s_small
+    color lightgray
 
   &__contents
     display table-row-group
 
   &__column
     display table-cell
-    padding (unit / 2)
+    padding 5px (unit / 2)
     border-bottom 1px solid bordergray
     vertical-align middle
-    font-size s_normal
+    font-size s_small
     &__comment-count
       position relative
       margin-left (unit / 2)
       vertical-align text-bottom
-    &__comment-count:before
-      transform scaleX(-1)
     &__comment-count:after
       content attr(data-count)
       position absolute
@@ -69,6 +67,5 @@
     display table-row
     border-bottom 1px solid bordergray
     cursor pointer
-    height 80px
     &:hover
       background-color secondbackgroundgray

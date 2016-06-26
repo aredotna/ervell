@@ -15,7 +15,7 @@ module.exports = class Router extends Backbone.Router
     'sign_up': 'signup'
 
   initialize: ->
-    mediator.on 'slide:to:block', @updateRoute, @
+    # mediator.on 'slide:to:block', @updateRoute, @
 
   login: ->
     return if sd.CURRENT_PATH is '/log_in'

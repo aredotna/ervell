@@ -91,7 +91,7 @@ module.exports = class ChannelView extends Backbone.View
 
   setUpDragView: ->
     @dragView = new ChannelDragView
-      el: @$('.grid')
+      el: $('.block-collection__contents')
       model: @channel
 
     @dragView.setupDragAndDrop()

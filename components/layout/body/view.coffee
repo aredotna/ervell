@@ -65,6 +65,7 @@ module.exports = class BodyView extends Backbone.View
 
   intercept: (e)->
     # do not continue if clicking button
+    console.log 'intercept'
     return true if $(e.target).hasClass('button--inblock') || $(e.target).hasClass('grid__block__delete-block') || $(e.target).hasClass('grid__block__delete-block__confirm__choice') || $(e.target).hasClass('grid__block__delete-block__confirm')
 
     e.preventDefault()
