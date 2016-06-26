@@ -13,6 +13,6 @@ module.exports = ({ $el, model, collection, mode = 'infinite'} ) ->
   new BlockCollectionView
     collection: collection
     resultsCollection: resultsCollection
-    el: $el
+    el: $el.find('.block-collection__contents')
     mode: mode
     state: mediator.shared.state

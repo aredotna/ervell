@@ -5,10 +5,12 @@ InfiniteView = require '../../../pagination/infinite_view.coffee'
 SkeletonView = require '../../../pagination/skeleton_view.coffee'
 GridBlockView = require '../../grid_item/client/block_view.coffee'
 ListBlockView = require '../../list_item/client/block_view.coffee'
-template = -> require('../templates/index.jade') arguments...
 
 module.exports = class BlockCollectionView extends Backbone.View
   postRendered: false
+  template:
+    grid: -> require('../templates/_grid_contents.jade') arguments...
+    list: -> require('../templates/_list_contents.jade') arguments...
   views:
     grid: GridBlockView
     list: ListBlockView
@@ -39,7 +41,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   render: ->
     models = if @resultsCollection.length then @resultsCollection.models else @collection.models
 
-    @$el.html template
+    @$el.html @template[@state.get('view_mode')]
       blocks: models
       view_mode: @state.get('view_mode')
       user: mediator.shared.current_user
@@ -51,8 +53,9 @@ module.exports = class BlockCollectionView extends Backbone.View
     @$('.block-item').each @initBlockView
 
     unless @postRendered
+      console.log 'setting up pagination mode', @mode
       @modes[@mode]
-        $el: @$('.block-collection')
+        $el: @$el
         collection: @collection
 
     @postRendered = true
@@ -66,7 +69,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     if block
       new @views[@state.get('view_mode')]
-        container: @$('.block-collection')
+        container: @$('.block-collection__contents')
         model: block
         channel: @channel if @channel
         autoRender: false
@@ -74,7 +77,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   renderBlockView: (block, autoRender = false)=>
     new @views[@state.get('view_mode')]
-      container: @$('.block-collection')
+      container: @$el
       model: block
       autoRender: autoRender
       containerMethod: 'append'
