@@ -10,7 +10,7 @@ module.exports = class SearchBarView extends Backbone.View
   events:
     'keyup input'                             : 'onKeyUp'
     'tap .search-clear'                       : 'onClear'
-    'tap .form__field__channel-filter--close' : 'onClear'
+    'tap .form__field__channel-filter__close' : 'onClear'
 
   initialize: ->
     @$input = @$('input')

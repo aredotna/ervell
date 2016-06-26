@@ -10,7 +10,8 @@ include ../../../../avatar/templates/avatar
   .block-collection--list__column
     a(href="#{block.getHref()}")= block.smartTruncate(block.title(), 50)
   .block-collection--list__column
-    //- icon
+    .block-collection--list__column__user-icon
+      .iconic(data-glyph="person-genderless")
   .block-collection--list__column
     .block-collection--list__column__follow
       //- renderered on the client
