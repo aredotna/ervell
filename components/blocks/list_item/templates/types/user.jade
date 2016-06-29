@@ -4,18 +4,18 @@ include ../../../../avatar/templates/avatar
   id=block.id
   data-id=block.id
 )
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--thumb
     .block-collection--list__column__user
       +avatar(block, 'thumb')
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--title
     a(href="#{block.getHref()}")= block.smartTruncate(block.title(), 50)
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--source
     .block-collection--list__column__user-icon
       .iconic(data-glyph="person-genderless")
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--follow
     .block-collection--list__column__follow
       //- renderered on the client
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--connect
     //- connect
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--date
     | Updated #{block.updatedAtAgo()}

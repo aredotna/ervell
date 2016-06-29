@@ -6,7 +6,7 @@ span.block-item.block-collection--list__row(
   data-client="#{block.get('base_class')}"
   class="needsclick"
 )
-  .block-collection--list__column(data-attr="icon")
+  .block-collection--list__column.block-collection--list__column--thumb
     if block.has('image')
       img(
           src="#{block.resizeImage(50, 50, 'thumb')}"
@@ -16,7 +16,7 @@ span.block-item.block-collection--list__row(
       .iconic(data-glyph="text")
     else if block.get('class') == 'Attachment'
       .iconic(data-glyph="file-#{block.get('attachment').extension}")
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--title
     strong
       a(href="#{block.getHref()}")!= block.smartTruncate(block.titleOrContent(), 50)
       if block.get('comment_count') > 0
@@ -27,7 +27,7 @@ span.block-item.block-collection--list__row(
       if block.get('connected_by_username') && block.get('connected_by_username') != block.get('user').username
         | ,&nbsp;connected by&nbsp;
         a(href="/#{block.get('connected_by_user_slug')}") #{block.get('connected_by_username')}
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--source
     .block-collection--list__column__source
       if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
         img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
@@ -35,11 +35,11 @@ span.block-item.block-collection--list__row(
         img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
       if block.get('class') == 'Link'
         .iconic(data-glyph="link-intact")
-  .block-collection--list__column
-    //- source / follow
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--follow
+    //- follow
+  .block-collection--list__column.block-collection--list__column--connect
     .block-collection--list__column__connect Connect
     .connect-container
       //- rendered on the client
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--date
     | Updated #{block.updatedAtAgo()}

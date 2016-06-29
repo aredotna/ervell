@@ -1,5 +1,4 @@
 if user && user.isPremium() && !following && !followers
-  - console.log('rendering this')
   .flex-container
     include ../../../filter/templates/search_bar
 .block-collection.block-collection__contents.block-collection--grid.grid.flex-container(class= user && channel && user.id == channel.get('user').id ? 'is-editable' : '')

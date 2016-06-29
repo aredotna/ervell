@@ -6,22 +6,17 @@ span.block-item.block-collection--list__row(
   data-client="#{block.get('base_class')}"
   class="needsclick"
 )
-  .block-collection--list__column(data-attr="icon")
+  .block-collection--list__column.block-collection--list__column--thumb
     .block-collection--list__column__channel-icon(class="privacy--#{block.getVisibility()}")
-  .block-collection--list__column(data-attr="title")
-    strong
-      a(href="#{block.getHref()}" class="privacy--#{block.getVisibility()}")= block.smartTruncate(block.title(), 50)
-    .block-collection--list__column__small
-      | By&nbsp;
-      a(href="/#{block.get('user').slug}") #{block.get('user').username}
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--title
+  .block-collection--list__column.block-collection--list__column--source
 
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--follow
     .block-collection--list__column__follow
       //- rendered on the client
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--connect
     .block-collection--list__column__connect Connect
     .connect-container
       //- rendered on the client
-  .block-collection--list__column
+  .block-collection--list__column.block-collection--list__column--date
     | Updated #{block.updatedAtAgo()}

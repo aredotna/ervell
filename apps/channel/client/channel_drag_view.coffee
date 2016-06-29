@@ -20,9 +20,6 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
   onStart: (e) =>
     e.stopPropagation()
-    index = if e.oldIndex - 10 > 0 then e.oldIndex - 10 else 0
-    $item = $('.block-item').eq(index)
-    # _.defer => mediator.trigger 'slide:to:block', $item.data('id'), 0
     @frozen = this.el.querySelector '.grid__block--new-block'
     mediator.shared.state.set 'isDraggingBlocks', yes
 

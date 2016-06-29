@@ -1,24 +1,33 @@
 .block-collection--list
-  display table
   width 100%
-
-  &__header
-    display table-header-group
+  &__header, .block-item
+    display flex
     font-size s_small
     color lightgray
-
-  &__filter
-    display table-caption
-
-  &__contents
-    display table-row-group
-
+    display -webkit-box
+    display flex
+    flex-direction row
+    justify-content space-between
+  // &__filter
+    // display table-caption
   &__column
-    display table-cell
+    width 200px
     padding (unit / 2)
     border-bottom 1px solid bordergray
     vertical-align middle
     font-size s_small
+    &--thumb
+      width 50px
+    &--title
+      width 400px
+    &--source
+      width 50px
+    &--follow
+      width 50px
+    &--connect
+      width 50px
+    &--date
+      width 100px
     &__comment-count
       position relative
       margin-left (unit / 2)
@@ -80,6 +89,6 @@
     display table-row
     border-bottom 1px solid bordergray
     cursor pointer
-    height 40px
+    height (unit * 4)
     &:hover
       background-color secondbackgroundgray
