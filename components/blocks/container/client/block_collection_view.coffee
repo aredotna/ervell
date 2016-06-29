@@ -28,10 +28,8 @@ module.exports = class BlockCollectionView extends Backbone.View
   initialize: ({ @mode, @state, @resultsCollection }) ->
     # @listenTo @state, 'change:view_mode', @render
     @listenTo @collection, 'merge:skeleton', @render
+    @listenTo @collection, 'add', @appendBlockView, @
     @listenTo @resultsCollection, 'sync reset', @render
-
-    if @mode is 'infinite'
-      @listenTo @collection, 'add', @appendBlockView, @
 
     @postRender()
 
@@ -76,6 +74,7 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $block
 
   renderBlockView: (block, autoRender = false)=>
+    containerMethod = if block?.options?.wait is true then 'after' else 'append'
     new @views[@state.get('view_mode')]
       container: @$el
       model: block
