@@ -2,6 +2,7 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../lib/mediator.coffee'
+Block = require '../../models/block.coffee'
 Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 CurrentUser = require '../../models/current_user.coffee'
