@@ -7,7 +7,7 @@ FeedView = require './client/feed_view.coffee'
 IconicJS = require '../../components/iconic/client/iconic.min.js'
 mediator = require '../../lib/mediator.coffee'
 
-module.exports = class RootUserView extends Backbone.View
+module.exports.RootUserView = class RootUserView extends Backbone.View
 
   initialize: ->
     @notifications = mediator.shared.notifications
@@ -18,7 +18,7 @@ module.exports = class RootUserView extends Backbone.View
       @$('.metadata--selector--notifications').addClass 'has-notifications'
       @$('.notifications--count').text count
 
-module.exports = class HomeView extends Backbone.View
+module.exports.HomeView = class HomeView extends Backbone.View
   slideDuration: 2300
   slideIndex: 0
 
