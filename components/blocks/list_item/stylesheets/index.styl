@@ -3,31 +3,39 @@
   &__header, .block-item
     display flex
     font-size s_small
-    color lightgray
+    color textgray
     display -webkit-box
     display flex
     flex-direction row
-    justify-content space-between
-  // &__filter
-    // display table-caption
+    justify-content left
+    align-items center
+    border-bottom 1px solid bordergray
+  &__header
+    color lightgray
   &__column
     width 200px
     padding (unit / 2)
-    border-bottom 1px solid bordergray
     vertical-align middle
     font-size s_small
     &--thumb
-      width 50px
+      text-align center
+      min-width 100px
+      flex 1
     &--title
-      width 400px
+      min-width 400px
+      flex 5
     &--source
-      width 50px
+      min-width 100px
+      flex 1
     &--follow
-      width 50px
+      min-width 100px
+      flex 1
     &--connect
-      width 50px
+      min-width 100px
+      flex 1
     &--date
-      width 100px
+      min-width 100px
+      flex 2
     &__comment-count
       position relative
       margin-left (unit / 2)
@@ -35,7 +43,7 @@
     &__comment-count:after
       content attr(data-count)
       position absolute
-      top 1px
+      top 0px
       left 0px
       font-size 9px
       width 100%
@@ -86,9 +94,15 @@
         border-color private
 
   &__row
-    display table-row
     border-bottom 1px solid bordergray
     cursor pointer
-    height (unit * 4)
+    height (unit * 3)
     &:hover
       background-color secondbackgroundgray
+    &--new
+      background-color backgroundgray
+      height auto
+      &:hover
+        background-color backgroundgray
+
+@require 'new_block'
