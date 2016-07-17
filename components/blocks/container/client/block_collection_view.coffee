@@ -5,6 +5,8 @@ InfiniteView = require '../../../pagination/infinite_view.coffee'
 SkeletonView = require '../../../pagination/skeleton_view.coffee'
 GridBlockView = require '../../grid_item/client/block_view.coffee'
 ListBlockView = require '../../list_item/client/block_view.coffee'
+GridNewBlockView = require '../../grid_item/client/new_block_view.coffee'
+ListNewBlockView = require '../../list_item/client/new_block_view.coffee'
 
 module.exports = class BlockCollectionView extends Backbone.View
   postRendered: false
@@ -14,6 +16,9 @@ module.exports = class BlockCollectionView extends Backbone.View
   views:
     grid: GridBlockView
     list: ListBlockView
+  newBlockView:
+    grid: GridNewBlockView
+    list: ListNewBlockView
   modes:
     infinite: ({ $el, collection })->
       new InfiniteView
@@ -34,6 +39,7 @@ module.exports = class BlockCollectionView extends Backbone.View
     @postRender()
 
   appendBlockView: (model) ->
+    console.log 'appendBlockView', model
     @renderBlockView model, true
 
   render: ->
@@ -51,7 +57,6 @@ module.exports = class BlockCollectionView extends Backbone.View
     @$('.block-item').each @initBlockView
 
     unless @postRendered
-      console.log 'setting up pagination mode', @mode
       @modes[@mode]
         $el: @$el
         collection: @collection
@@ -73,11 +78,20 @@ module.exports = class BlockCollectionView extends Backbone.View
         autoRender: false
         el: $block
 
+  setupNewBlockView: ({ channel, autoRender =  false }) ->
+    new @newBlockView[@state.get('view_mode')]
+      el: $('.block-item--new')
+      blocks: @collection
+      autoRender: autoRender
+      model: channel
+      $container: $('.block-collection__contents')
+
   renderBlockView: (block, autoRender = false)=>
+    console.log "$('.block-collection__contents')", $('.block-collection__contents')
     containerMethod = if block?.options?.wait is true then 'after' else 'append'
     new @views[@state.get('view_mode')]
-      container: @$el
+      container: $('.block-collection__contents')
       model: block
       autoRender: autoRender
-      containerMethod: 'append'
+      containerMethod: containerMethod
       channel: @channel if @channel

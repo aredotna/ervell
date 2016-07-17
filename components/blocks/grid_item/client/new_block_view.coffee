@@ -1,12 +1,11 @@
 Backbone = require "backbone"
-Backbone.$ = $
 sd = require("sharify").data
-Blocks = require '../../../collections/blocks.coffee'
-Block = require '../../../models/block.coffee'
-Channel = require '../../../models/channel.coffee'
-analytics = require '../../../lib/analytics.coffee'
+Blocks = require '../../../../collections/blocks.coffee'
+Block = require '../../../../models/block.coffee'
+Channel = require '../../../../models/channel.coffee'
+analytics = require '../../../../lib/analytics.coffee'
 
-newBlockTemplate = -> require('../templates/new_block.jade') arguments...
+newBlockTemplate = -> require('../templates/types/new_block.jade') arguments...
 
 module.exports = class NewBlockView extends Backbone.View
 

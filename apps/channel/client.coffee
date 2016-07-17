@@ -7,7 +7,6 @@ Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
-NewBlockView = require '../../components/new_block/client/new_block_view.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
 Filter = require '../../components/filter/index.coffee'
@@ -16,7 +15,7 @@ Bp = require('../../lib/vendor/backpusher.js')
 
 module.exports = class ChannelView extends Backbone.View
 
-  initialize: ({ @channel, @blocks })->
+  initialize: ({ @channel, @blocks, @blockCollectionView })->
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
     mediator.shared.state.on 'change:isDraggingBlocks', @toggleDragClass, @
     mediator.on 'upload:done', @makeBlock, @
@@ -49,15 +48,17 @@ module.exports = class ChannelView extends Backbone.View
 
     # addable
     if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
-      @setupNewBlockView()
       @setupFileDropView()
 
-      @$('.grid').addClass 'is-addable'
+      @$('.block-collection').addClass 'is-addable'
       mediator.trigger 'channel:is-addable'
+
+      @blockCollectionView.setupNewBlockView
+        channel: @channel
 
     # editable
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
-      @$('.grid').addClass 'is-editable'
+      @$('.block-collection').addClass 'is-editable'
       mediator.trigger 'channel:is-editable'
 
       @setUpDragView() unless $('body').hasClass 'is-mobile'
@@ -66,7 +67,7 @@ module.exports = class ChannelView extends Backbone.View
     @maybeSetEmpty()
 
   maybeSetEmpty: ->
-    unless @$('.grid').hasClass('is-addable') or @blocks.length > 0
+    unless @$('.block-collection').hasClass('is-addable') or @blocks.length > 0
       @$('.channel-container').addClass('is-empty')
 
   setupFileDropView:->
@@ -78,17 +79,6 @@ module.exports = class ChannelView extends Backbone.View
           channel: @channel
           blocks: @blocks
           policy: policy
-
-  setupNewBlockView: ->
-    should_render = if mediator.shared.current_user.canAddToChannel(@channel) then false else true
-
-    if should_render
-      new NewBlockView
-        el: $ ".grid__block--new-block"
-        $container: $ '.grid'
-        model: @channel
-        blocks: @blocks
-        autoRender: should_render
 
   setUpDragView: ->
     @dragView = new ChannelDragView
@@ -103,21 +93,16 @@ module.exports.init = ->
   blocks = new ChannelBlocks sd.BLOCKS,
     channel_slug: sd.CHANNEL.slug
 
-  new ChannelView
-    el: $ "body"
-    channel: channel
-    blocks: blocks
-
-  setupBlockCollection
+  { view } = setupBlockCollection
     model: channel
     $el: $('.channel-contents')
     collection: blocks
     mode: 'skeleton'
 
-  initChannelPath channel
+  new ChannelView
+    el: $ "body"
+    channel: channel
+    blocks: blocks
+    blockCollectionView: view
 
-  if current_user.canAddToChannel channel
-    new NewBlockView
-      el: $ ".grid__block--new-block"
-      model: channel
-      blocks: blocks
+  initChannelPath channel

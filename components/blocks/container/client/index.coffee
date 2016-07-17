@@ -6,13 +6,15 @@ module.exports = ({ $el, model, collection, mode = 'infinite'} ) ->
   mediator.shared.blocks = collection
 
   if mediator.shared.current_user.isPremium()
-    { resultsCollection } = new Filter
+    { resultsCollection, searchBar } = new Filter
       model: model
       $searchBar: $('.form__field__channel-filter')
 
-  new BlockCollectionView
+  view = new BlockCollectionView
     collection: collection
     resultsCollection: resultsCollection
     el: $el.find('.block-collection__contents')
     mode: mode
     state: mediator.shared.state
+
+  { view, resultsCollection, searchBar }

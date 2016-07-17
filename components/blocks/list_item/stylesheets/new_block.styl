@@ -1,13 +1,43 @@
 .block-collection--list
+  &__row
+    &--new
+      background-color backgroundgray
+      &:hover
+        background-color backgroundgray
+      &.active .block-collection--list__column--new-field__placeholder
+        display none
   &__column
     &--new-field
       flex 6
-      padding (unit) unit !important
       color lightgray
+      position relative
+      padding 0
+      height 100%
+      top 0
       &__placeholder
-        //
+        position absolute
+        width 100%
+        height 100%
+        top 0
+        left 0
+        line-height 60px
+        padding 0 unit
       &__field
-        //
+        position absolute
+        width 100%
+        height 100%
+        top 0
+        left 0
+        fieldset
+          margin 0
+          height 100%
+        textarea
+          padding 0
+          width 100%
+          height 100%
+          line-height 60px
+          padding 0 unit
+          vertical-align middle
     &--new-button
       flex 1
       text-align center
@@ -17,3 +47,5 @@
       button
         margin-top 0
         font-size s_small
+      &:hover
+        background-color darken(secondbackgroundgray, 10%)

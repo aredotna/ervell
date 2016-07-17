@@ -10,6 +10,7 @@
     justify-content left
     align-items center
     border-bottom 1px solid bordergray
+    position relative
   &__header
     color lightgray
   &__column
@@ -97,12 +98,27 @@
     border-bottom 1px solid bordergray
     cursor pointer
     height (unit * 3)
+    &--loading
+      background-size 80px 80px
+      background-image linear-gradient(
+        45deg,
+        rgba(bordergray, 0.5)   25%,
+        transparent             25%,
+        transparent             50%,
+        rgba(bordergray, 0.5)   50%,
+        rgba(bordergray, 0.5)   75%,
+        transparent             75%,
+        transparent
+      )
+      -webkit-animation loading 0.5s linear infinite
+      animation loading 0.5s linear infinite
     &:hover
       background-color secondbackgroundgray
-    &--new
-      background-color backgroundgray
-      height auto
-      &:hover
-        background-color backgroundgray
+
+@keyframes loading
+  from
+    background-position 0 0
+  to
+    background-position 160px 80px
 
 @require 'new_block'
