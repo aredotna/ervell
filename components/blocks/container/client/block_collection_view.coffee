@@ -16,7 +16,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   views:
     grid: GridBlockView
     list: ListBlockView
-  newBlockView:
+  newBlockViews:
     grid: GridNewBlockView
     list: ListNewBlockView
   modes:
@@ -30,8 +30,7 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $el
         collection: collection
 
-  initialize: ({ @mode, @state, @resultsCollection }) ->
-    # @listenTo @state, 'change:view_mode', @render
+  initialize: ({ @mode, @state, @resultsCollection, @channel }) ->
     @listenTo @collection, 'merge:skeleton', @render
     @listenTo @collection, 'add', @appendBlockView, @
     @listenTo @resultsCollection, 'sync reset', @render
@@ -39,7 +38,6 @@ module.exports = class BlockCollectionView extends Backbone.View
     @postRender()
 
   appendBlockView: (model) ->
-    console.log 'appendBlockView', model
     @renderBlockView model, true
 
   render: ->
@@ -49,6 +47,7 @@ module.exports = class BlockCollectionView extends Backbone.View
       blocks: models
       view_mode: @state.get('view_mode')
       user: mediator.shared.current_user
+      channel: @channel
 
     defer (=> @postRender())
 
@@ -79,7 +78,8 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $block
 
   setupNewBlockView: ({ channel, autoRender =  false }) ->
-    new @newBlockView[@state.get('view_mode')]
+    return false if @newBlockView?
+    @newBlockView = new @newBlockViews[@state.get('view_mode')]
       el: $('.block-item--new')
       blocks: @collection
       autoRender: autoRender
@@ -87,7 +87,6 @@ module.exports = class BlockCollectionView extends Backbone.View
       $container: $('.block-collection__contents')
 
   renderBlockView: (block, autoRender = false)=>
-    console.log "$('.block-collection__contents')", $('.block-collection__contents')
     containerMethod = if block?.options?.wait is true then 'after' else 'append'
     new @views[@state.get('view_mode')]
       container: $('.block-collection__contents')

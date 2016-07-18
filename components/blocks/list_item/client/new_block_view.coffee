@@ -15,14 +15,13 @@ module.exports = class NewBlockView extends Backbone.View
     'blur .block-collection--list__column--new-field__textarea'  : 'removeActive'
     'tap .block-collection--list__column--new-button' : 'createBlock'
     'tap .block-collection--list__column--new-field__placeholder'  : 'setActive'
+    'keydown .block-collection--list__column--new-field__textarea' : 'onKeyUp'
 
   initialize: ({ @blocks, @$container, @autoRender })->
-    console.log 'here'
     @render() if @autoRender
     @setElCaches() unless @autoRender
 
   setActive: (e) ->
-    console.log 'setActive'
     $target = $(e.currentTarget)
     return false if $target.hasClass '.pointer'
     @$el.addClass 'active'
@@ -45,6 +44,11 @@ module.exports = class NewBlockView extends Backbone.View
   fieldIsntEmpty: ->
     @$field.val() isnt ""
 
+  onKeyUp: (e)->
+    if e.keyCode is 13 and e.shiftKey
+      @createBlock()
+      return false
+
   createBlock: =>
     if @fieldIsntEmpty()
       block = new Block
@@ -60,7 +64,6 @@ module.exports = class NewBlockView extends Backbone.View
         success: (block) =>
           analytics.track.click "New #{block.get('class')} block created"
           @$field.val ""
-          @$field.blur()
 
   render: ->
     @$container.prepend newBlockTemplate(channel: @model)

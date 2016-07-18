@@ -55,6 +55,7 @@ module.exports = class ChannelView extends Backbone.View
 
       @blockCollectionView.setupNewBlockView
         channel: @channel
+        autoRender: true
 
     # editable
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
@@ -98,6 +99,7 @@ module.exports.init = ->
     $el: $('.channel-contents')
     collection: blocks
     mode: 'skeleton'
+    channel: channel
 
   new ChannelView
     el: $ "body"
@@ -106,3 +108,6 @@ module.exports.init = ->
     blockCollectionView: view
 
   initChannelPath channel
+
+  if current_user.canAddToChannel channel
+    view.setupNewBlockView channel: channel
