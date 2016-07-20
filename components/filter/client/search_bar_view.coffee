@@ -44,6 +44,9 @@ module.exports = class SearchBarView extends Backbone.View
       else
         @search(e)
 
+  updateOptions: (options) ->
+    _.extend @collection.options, options
+
   search: (e) ->
     e.preventDefault()
 
@@ -56,11 +59,10 @@ module.exports = class SearchBarView extends Backbone.View
 
     @lastQuery = query
 
+    @updateOptions q: query, page: 1
+
     @searchRequest.abort() if @searchRequest
-    @searchRequest = @collection.fetch
-      data:
-        q: query
-      success: => @searchLoaded()
+    @searchRequest = @collection.fetch success: => @searchLoaded()
 
   getQuery: ->
     query = @$('input').val()?.trim()

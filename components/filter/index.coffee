@@ -6,13 +6,12 @@ FilterResultsView = require './client/results_view.coffee'
 FilterBlocks = require '../../collections/filter_blocks.coffee'
 
 module.exports = ({ model, subject, $searchBar, $resultContainer, $channelContainer }) ->
-
   if model
     options =
       slug: model.get('slug')
       type: model.get('base_class').toLowerCase()
 
-    _.extend(options, subject: subject) if subject
+    _.extend(options, subject: sd.SUBJECT) if sd.SUBJECT
 
   resultsCollection = new FilterBlocks [], options
 
