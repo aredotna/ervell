@@ -62,6 +62,12 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     @postRendered = true
 
+    if @resultsCollection.length
+      console.log '@resultsCollection.length', @resultsCollection.length
+      @modes['infinite']
+        $el: @$el
+        collection: @resultsCollection
+
   initBlockView: (index, el) =>
     $block = $(el)
 

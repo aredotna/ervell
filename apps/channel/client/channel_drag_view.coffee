@@ -11,7 +11,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
   setupDragAndDrop: ->
     @sortable = new Sortable @el,
-      draggable: '.block-item'
+      draggable: '.block-item--content'
       onStart: @onStart
       onMove: @onMove
       onEnd: @onEnd
@@ -20,7 +20,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
   onStart: (e) =>
     e.stopPropagation()
-    @frozen = this.el.querySelector '.grid__block--new-block'
+    @frozen = this.el.querySelector '.block-item--new'
     mediator.shared.state.set 'isDraggingBlocks', yes
 
   onMove: (e) =>
@@ -43,7 +43,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
   updateOrder: (e) =>
     item = e.item
 
-    blocks = @$(".block-item:not(.grid__block--new-block)")
+    blocks = @$(".block-item:not(.block-item--new)")
     if @viewOrder is 'desc'
       index = (blocks.length - blocks.index(item))
     else
