@@ -9,10 +9,10 @@
     flex-direction row
     justify-content left
     align-items center
-    border-bottom 1px solid bordergray
     position relative
   &__header
     color lightgray
+    border-bottom 1px solid bordergray
   &__column
     width 200px
     padding (unit / 2)
@@ -96,6 +96,8 @@
     border-bottom 1px solid bordergray
     cursor pointer
     height (unit * 3)
+    &--placeholder
+      border-bottom 1px dotted bordergray
     &--loading
       background-size 80px 80px
       background-image linear-gradient(
