@@ -19,6 +19,16 @@ module.exports = class BlockCollectionView extends Backbone.View
   newBlockViews:
     grid: GridNewBlockView
     list: ListNewBlockView
+  newBlockContainer:
+    grid: '.block-collection__contents'
+    list: '.block-collection--list__new-block'
+  containerMethods:
+    grid:
+      default: 'append'
+      wait: 'after'
+    list:
+      default: 'append'
+      wait: 'prepend'
   modes:
     infinite: ({ $el, collection })->
       new InfiniteView
@@ -63,7 +73,6 @@ module.exports = class BlockCollectionView extends Backbone.View
     @postRendered = true
 
     if @resultsCollection.length
-      console.log '@resultsCollection.length', @resultsCollection.length
       @modes['infinite']
         $el: @$el
         collection: @resultsCollection
@@ -90,13 +99,13 @@ module.exports = class BlockCollectionView extends Backbone.View
       blocks: @collection
       autoRender: autoRender
       model: channel
-      $container: $('.block-collection__contents')
+      $container: $(@newBlockContainer[@state.get('view_mode')])
 
-  renderBlockView: (block, autoRender = false)=>
-    containerMethod = if block?.options?.wait is true then 'after' else 'append'
+  renderBlockView: (block, autoRender = false) =>
+    containerMethodType = if block?.options?.wait is true then 'wait' else 'default'
     new @views[@state.get('view_mode')]
       container: $('.block-collection__contents')
       model: block
       autoRender: autoRender
-      containerMethod: containerMethod
+      containerMethod: @containerMethods[@state.get('view_mode')][containerMethodType]
       channel: @channel if @channel
