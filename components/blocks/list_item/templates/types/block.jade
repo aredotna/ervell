@@ -18,7 +18,7 @@ span.block-item.block-item--content.block-collection--list__row(
       .iconic(data-glyph="file-#{block.get('attachment').extension}")
   .block-collection--list__column.block-collection--list__column--title
     strong
-      a(href="#{block.getHref()}")!= block.smartTruncate(block.titleOrContent(), 50)
+      a(href="#{block.getHref()}")!= block.smartTruncate(block.titleOrContent(), 80)
       if block.get('comment_count') > 0
         span.iconic.block-collection--list__column__comment-count(data-glyph="comment-square" data-count=block.get('comment_count'))
     .block-collection--list__column__small
@@ -28,13 +28,12 @@ span.block-item.block-item--content.block-collection--list__row(
         | ,&nbsp;connected by&nbsp;
         a(href="/#{block.get('connected_by_user_slug')}") #{block.get('connected_by_username')}
   .block-collection--list__column.block-collection--list__column--source
-    .block-collection--list__column__source
-      if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
-        img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
-      if block.get('class') == 'Media'
-        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
-      if block.get('class') == 'Link'
-        .iconic(data-glyph="link-intact")
+    if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
+      img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
+    if block.get('class') == 'Media'
+      img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+    if block.get('class') == 'Link'
+      .iconic(data-glyph="link-intact")
   .block-collection--list__column.block-collection--list__column--follow
     //- follow
   .block-collection--list__column.block-collection--list__column--connect

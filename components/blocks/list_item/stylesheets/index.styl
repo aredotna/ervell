@@ -23,17 +23,23 @@
       max-width 80px
       flex 1
     &--title
-      min-width 400px
+      min-width 500px
       flex 5
     &--source
       min-width 100px
       flex 1
+      cursor pointer
+    &__source:hover
+      color hovergray
     &--follow
       min-width 100px
       flex 1
     &--connect
       min-width 100px
       flex 1
+    &__connect, &__follow
+      font-weight bold
+      @extend .inline-link
     &--date
       min-width 100px
       flex 2
@@ -50,13 +56,6 @@
       width 100%
       text-align center
       color white
-    &__source
-      cursor pointer
-    &__source:hover
-      color hovergray
-    &__connect, &__follow
-      font-weight bold
-      @extend .inline-link
     &__user
       .user__avatar
         margin 0 auto
