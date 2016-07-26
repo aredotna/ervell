@@ -3,7 +3,6 @@
   &__header, .block-item
     display flex
     font-size s_small
-    color textgray
     display -webkit-box
     display flex
     flex-direction row
@@ -31,15 +30,16 @@
       cursor pointer
     &__source:hover
       color hovergray
-    &--follow
-      min-width 100px
+    &--action
+      min-width 200px
       flex 1
-    &--connect
-      min-width 100px
-      flex 1
+      text-align right
+      padding-right unit * 2
     &__connect, &__follow
+      display inline-block
       font-weight bold
       @extend .inline-link
+      margin 0 (unit / 2)
     &--date
       min-width 100px
       flex 2
@@ -80,21 +80,29 @@
       font-size s_caption
       padding-top 10px
     &__channel-icon
-      width unit * 2
-      height unit * 2
-      border 3px solid black
+      width 10px
+      height 10px
+      background-color black
+      border-radius 10px
       margin 0 auto
       &.privacy--closed
-        border-color closed
+        background-color closed
       &.privacy--public
-        border-color public
+        background-color public
       &.privacy--private
-        border-color private
+        background-color private
 
   &__row
     border-bottom 1px solid bordergray
     cursor pointer
     height (unit * 3)
+    color textgray
+    &--private
+      color private
+    &--closed
+      color closed
+    &--public
+      color public
     &--placeholder
       border-bottom 1px dotted bordergray
     &--loading

@@ -4,7 +4,7 @@ span.block-item.block-item--content.block-collection--list__row(
   id="#{block.id}"
   href="#{block.getHref()}"
   data-client="#{block.get('base_class')}"
-  class="needsclick"
+  class="needsclick #{block.getPermissions(user, channel)} block-collection--list__row--#{block.getVisibility()}"
 )
   .block-collection--list__column.block-collection--list__column--thumb
     .block-collection--list__column__channel-icon(class="privacy--#{block.getVisibility()}")
@@ -16,10 +16,10 @@ span.block-item.block-item--content.block-collection--list__row(
       a(href="/#{block.get('user').slug}") #{block.get('user').username}
   .block-collection--list__column.block-collection--list__column--source
 
-  .block-collection--list__column.block-collection--list__column--follow
+  .block-collection--list__column.block-collection--list__column--action
     .block-collection--list__column__follow
       //- rendered on the client
-  .block-collection--list__column.block-collection--list__column--connect
+    | |
     .block-collection--list__column__connect Connect
     .connect-container
       //- rendered on the client

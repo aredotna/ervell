@@ -47,7 +47,7 @@ module.exports = class ConnectResultsView extends Backbone.View
         type: "POST"
         url: "#{sd.API_URL}/channels/#{id}/connections"
         data:
-          connectable_type: @block.get('class')
+          connectable_type: @block.get('base_class')
           connectable_id: @block.id
           channel_id: id
 
