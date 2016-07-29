@@ -13,3 +13,9 @@ app.set "view engine", "jade"
 app.get "/", auth, routes.index
 app.get "/notifications", auth, routes.notifications
 app.get "/explore", auth, routes.explore
+app.get "/explore/channels", auth, (req, res, next) ->
+  req.query = subject: 'channel'
+  routes.explore req, res, next
+app.get "/explore/blocks", auth, (req, res, next) ->
+  req.query = subject: 'block'
+  routes.explore req, res, next

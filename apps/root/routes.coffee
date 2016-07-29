@@ -29,12 +29,16 @@ class Statistics extends Backbone.Model
 @explore = (req, res, next) ->
   blocks = new ExploreBlocks null
 
-  if req.params.block_id
-    res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
+  # if req.query.subject
+  #   _.extend blocks.options, filter: req.query.subject
+  #   res.locals.sd.SUBJECT = req.query.subject
 
-  if req.query.subject
-    _.extend blocks.options, subject: req.query.subject
-    res.locals.sd.SUBJECT = req.query.subject
+  if req.query.sort
+    res.locals.sd.SORT = sort_by = req.query.sort
+    res.locals.sd.SEED = seed = Math.floor(Math.random() * 100000000) + 1
+    _.extend blocks.options,
+      sort: sort_by
+      seed: seed
 
   blocks.fetch
     error: (m, err) -> next err

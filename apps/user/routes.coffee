@@ -28,6 +28,13 @@ _ = require 'underscore'
     _.extend blocks.options, subject: req.query.subject
     res.locals.sd.SUBJECT = req.query.subject
 
+  if req.query.sort
+    res.locals.sd.SORT = sort_by = req.query.sort
+    res.locals.sd.SEED = seed = Math.floor(Math.random() * 100000000) + 1
+    _.extend blocks.options,
+      sort: sort_by
+      seed: seed
+
   blocks.fetch
     data:
       auth_token: req.user?.get('authentication_token')

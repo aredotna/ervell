@@ -18,8 +18,7 @@ module.exports = class UserBlocks extends SearchBlocks
 
   initialize: (models, options) ->
     super
-    if options?.user_slug
-      @slug = options.user_slug
+    @slug = options?.user_slug
 
   parse: (data) ->
     @total_pages = data.total_pages

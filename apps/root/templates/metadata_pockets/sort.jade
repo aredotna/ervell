@@ -1,0 +1,12 @@
+extends ../../../../components/meta_pocket/templates/meta_pocket
+
+block vars
+  - title = "Sort"
+  - extraClasses = "is-readable"
+  - id = "metadata--sort"
+
+block content
+  ul.breadcrumb
+    li: a(href="#{sd.CURRENT_PATH}" class=sd.SORT ? "" : "is-active" ).metadata--selector__option Recently updated
+    li: a(href="#{sd.CURRENT_PATH}?sort=random" class=sd.SORT == 'random' ? "is-active" : "" ).metadata--selector__option Random
+

@@ -33,6 +33,8 @@ module.exports.init = ->
 
     _.extend blocks.options,
       subject: sd.SUBJECT
+      sort: sd.SORT || ''
+      seed: sd.SEED || ''
 
   options =
     model: user
@@ -40,6 +42,7 @@ module.exports.init = ->
     collection: blocks
 
   _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
+  _.extend(options, { sort: sd.SORT }) if sd.SORT
 
   setupBlockCollection options
 
