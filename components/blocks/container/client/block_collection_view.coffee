@@ -51,7 +51,7 @@ module.exports = class BlockCollectionView extends Backbone.View
     @renderBlockView model, true
 
   render: ->
-    models = if @resultsCollection.length then @resultsCollection.models else @collection.models
+    models = if @resultsCollection?.length then @resultsCollection.models else @collection.models
 
     @$el.html @template[@state.get('view_mode')]
       blocks: models
@@ -72,7 +72,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     @postRendered = true
 
-    if @resultsCollection.length
+    if @resultsCollection?.length
       @modes['infinite']
         $el: @$el
         collection: @resultsCollection
@@ -80,7 +80,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   initBlockView: (index, el) =>
     $block = $(el)
 
-    collection = if @resultsCollection.length then @resultsCollection else @collection
+    collection = if @resultsCollection?.length then @resultsCollection else @collection
 
     block = collection.get $block.data('id')
 
