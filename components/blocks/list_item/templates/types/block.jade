@@ -19,14 +19,17 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--title
     strong
       span(class="attribute-title")= block.smartTruncate(block.titleOrContent(), 80)
-      if block.get('comment_count') > 0
-        span.iconic.block-collection--list__column__comment-count(data-glyph="comment-square" data-count=block.get('comment_count'))
     .block-collection--list__column__small
       | Added by&nbsp;
       a(href="/#{block.get('user').slug}") #{block.get('user').username}
       if block.get('connected_by_username') && block.get('connected_by_username') != block.get('user').username
         | ,&nbsp;connected by&nbsp;
         a(href="/#{block.get('connected_by_user_slug')}") #{block.get('connected_by_username')}
+  .block-collection--list__column.block-collection--list__column--comment
+    if block.get('comment_count') > 0
+      .comment-count
+        | +
+        = block.get('comment_count')
   .block-collection--list__column.block-collection--list__column--source
     if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
       img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")

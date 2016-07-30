@@ -1,3 +1,4 @@
+editPadding = 4px
 .block-collection--list
   width 100%
   &__header, .block-item
@@ -25,7 +26,7 @@
       min-width 500px
       flex 5
       .can-edit
-        padding 2px
+        padding editPadding 0
         background-color lighthighlight
     &--source
       min-width 100px
@@ -46,10 +47,12 @@
     &--date
       min-width 100px
       flex 1
-    &__comment-count
-      position relative
-      margin-left (unit / 2)
-      vertical-align text-bottom
+    &--comment
+      .comment-count
+        border 2px solid bordergray
+        font-family "Courier"
+        display inline-block
+        padding (unit / 2)
     &__comment-count:after
       content attr(data-count)
       position absolute
@@ -155,8 +158,23 @@
       )
       -webkit-animation loading 0.5s linear infinite
       animation loading 0.5s linear infinite
-    &:hover
-      background-color secondbackgroundgray
+    &:hover, &.is-being-edited
+      .block-collection--list__column--thumb
+        padding 0
+        img
+          max-width 80px
+          max-height 59px
+          vertical-align middle
+      .block-collection--list__column--title
+        font-size s_middle
+        .attribute-title
+          padding editPadding 0
+          display block
+          overflow-x hidden
+          text-overflow ellipsis
+          white-space nowrap
+        .block-collection--list__column__small
+          display none
 
 @keyframes loading
   from
