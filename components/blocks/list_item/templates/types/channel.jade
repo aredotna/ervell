@@ -11,6 +11,7 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--title
     strong
       a(href="#{block.getHref()}" class="privacy--#{block.getVisibility()}")= block.smartTruncate(block.title(), 50)
+    | &nbsp;(#{block.get('length')} blocks)
     .block-collection--list__column__small
       | By&nbsp;
       a(href="/#{block.get('user').slug}") #{block.get('user').username}

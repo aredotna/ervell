@@ -64,9 +64,13 @@ module.exports = class BodyView extends Backbone.View
       $('html, body').animate { scrollTop: offset }, delay
 
   intercept: (e)->
-    # do not continue if clicking button
-    console.log 'intercept'
-    return true if $(e.target).hasClass('button--inblock') || $(e.target).hasClass('grid__block__delete-block') || $(e.target).hasClass('grid__block__delete-block__confirm__choice') || $(e.target).hasClass('grid__block__delete-block__confirm')
+    shouldIgnore = $(e.target).hasClass('button--inblock') or
+     $(e.target).hasClass('grid__block__delete-block') or
+     $(e.target).hasClass('grid__block__delete-block__confirm__choice') or
+     $(e.target).hasClass('grid__block__delete-block__confirm') or
+     $(e.currentTarget).hasClass('is-being-edited')
+
+    return true if shouldIgnore
 
     e.preventDefault()
     e.stopImmediatePropagation()
