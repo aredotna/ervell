@@ -19,6 +19,10 @@ module.exports = class BlockView extends Backbone.View
   events:
     'click .block-collection--list__column__source'  : 'openLink'
     'click .block-collection--list__column__connect' : 'loadConnectView'
+    'click .edit-button' : 'startEditMode'
+    'click .check-button' : 'quitEditMode'
+    'click .delete-button'  : 'confirmDestroy'
+    'click .tooltip__choice' : 'confirmChoice'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -34,6 +38,7 @@ module.exports = class BlockView extends Backbone.View
     @model.on 'remote_update', @update, @
     @model.on 'show', @show, @
     @model.on 'hide', @hide, @
+    @model.on 'change:is_editing', @update
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
@@ -44,6 +49,16 @@ module.exports = class BlockView extends Backbone.View
 
   hide: ->
     @$el.hide()
+
+  startEditMode: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    @$el.addClass 'is-being-edited'
+
+  quitEditMode: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    @$el.removeClass 'is-being-edited'
 
   loadConnectView: (e)=>
     e.preventDefault()
@@ -104,26 +119,25 @@ module.exports = class BlockView extends Backbone.View
   confirmDestroy: (e) =>
     e.preventDefault()
     e.stopImmediatePropagation()
-    @$('.grid__block__delete-block__confirm, .grid__block__inner').addClass 'is-active'
+    @$('.tooltip').addClass 'tooltip--is-active'
 
-  cancelDestroy: (e) =>
+  confirmChoice: (e) =>
     e.preventDefault()
     e.stopImmediatePropagation()
-    @$('.grid__block__delete-block__confirm, .grid__block__inner').removeClass 'is-active'
+    choice = $(e.currentTarget).data('choice')
 
-  destroyConnection: (e) =>
-    e.preventDefault()
-    e.stopImmediatePropagation()
+    @cancelDestroy() if choice is 'cancel'
+    @destroyConnection() if choice is 'destroy'
 
-    @model.destroy
-      channel: @channel
+  cancelDestroy: ->
+    @$('.tooltip').removeClass 'tooltip--is-active'
+
+  destroyConnection: ->
+    @model.destroy channel: @channel
 
     analytics.track.click "Block removed from channel"
 
     @remove()
-
-    e.preventDefault()
-    e.stopPropagation()
 
   renderFollowButton: ->
     if @model.get('base_class') is 'Channel' or @model.get('base_class') is 'User' && sd.CURRENT_USER

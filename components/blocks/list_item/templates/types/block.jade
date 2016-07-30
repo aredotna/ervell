@@ -9,9 +9,9 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--thumb
     if block.has('image')
       img(
-          src="#{block.resizeImage(50, 50, 'thumb')}"
-          alt="#{block.get('description')}"
-        )
+        src="#{block.resizeImage(50, 50, 'thumb')}"
+        alt="#{block.get('description')}"
+      )
     else if block.get('class') == 'Text'
       .iconic(data-glyph="text")
     else if block.get('class') == 'Attachment'
@@ -41,4 +41,10 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--date
     | #{block.updatedAtAgo()}
   .block-collection--list__column.block-collection--list__column--edit
-    .iconic(data-glyph="pencil")
+    .iconic.iconic-size-sm.edit-button(data-glyph="pencil")
+    .iconic.iconic-size-sm.delete-button(data-glyph="trash")
+    .tooltip
+      | Are you sure?
+      a.tooltip__choice(data-choice='destroy') Yes
+      a.tooltip__choice(data-choice='cancel') No
+    .iconic.iconic-size-sm.check-button(data-glyph="check")

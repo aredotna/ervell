@@ -43,11 +43,6 @@
     &--date
       min-width 100px
       flex 1
-    &--edit
-      max-width 100px
-      padding-right unit * 2
-      text-align right
-      flex 1
     &__comment-count
       position relative
       margin-left (unit / 2)
@@ -100,12 +95,41 @@
         background-color public
       &.privacy--private
         background-color private
-
+    &--edit
+      max-width 100px
+      padding-right unit * 2
+      text-align right
+      flex 1
+      position relative
+      .tooltip
+        left calc(-50% - 2px)
+        top 35px
+        padding unit
+        line-height 2
+        text-align center
+      .iconic
+        padding 0 5px
+      .edit-button
+        display none
+      .delete-button
+        display none
+      .check-button
+        display none
   &__row
     border-bottom 1px solid bordergray
     cursor pointer
     height (unit * 3)
     color textgray
+    &.can-edit:not(.is-being-edited):hover, &.can-manage:not(.is-being-edited):hover
+      .edit-button
+        display inline-block
+    &.is-being-edited
+      .edit-button
+        display none
+      .delete-button
+        display inline-block
+      .check-button
+        display inline-block
     &--private
       color private
     &--closed

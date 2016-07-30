@@ -20,8 +20,7 @@ module.exports = class BlockView extends Backbone.View
     'click .grid__block__source__link'  : 'openLink'
     'click .grid__block__connect-btn'   : 'loadConnectView'
     'click .grid__block__delete-block'  : 'confirmDestroy'
-    'click .confirm__choice__yes'       : 'destroyConnection'
-    'click .confirm__choice__no'        : 'cancelDestroy'
+    'click .tooltip__choice' : 'confirmChoice'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -117,26 +116,27 @@ module.exports = class BlockView extends Backbone.View
   confirmDestroy: (e) =>
     e.preventDefault()
     e.stopImmediatePropagation()
-    @$('.grid__block__delete-block__confirm, .grid__block__inner').addClass 'is-active'
+    @$('.grid__block__inner').addClass 'is-active'
+    @$('.tooltip').addClass 'tooltip--is-active'
 
-  cancelDestroy: (e) =>
+  confirmChoice: (e) =>
     e.preventDefault()
     e.stopImmediatePropagation()
-    @$('.grid__block__delete-block__confirm, .grid__block__inner').removeClass 'is-active'
+    choice = $(e.currentTarget).data('choice')
 
-  destroyConnection: (e) =>
-    e.preventDefault()
-    e.stopImmediatePropagation()
+    @cancelDestroy() if choice is 'cancel'
+    @destroyConnection() if choice is 'destroy'
 
-    @model.destroy
-      channel: @channel
+  cancelDestroy: ->
+    @$('.grid__block__inner').removeClass 'is-active'
+    @$('.tooltip').removeClass 'tooltip--is-active'
+
+  destroyConnection: ->
+    @model.destroy channel: @channel
 
     analytics.track.click "Block removed from channel"
 
     @remove()
-
-    e.preventDefault()
-    e.stopPropagation()
 
   renderFollowButton: ->
     if @model.get('class') is 'Channel' or @model.get('class') is 'User' && sd.CURRENT_USER

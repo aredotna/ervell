@@ -60,6 +60,10 @@ module.exports = class ChannelView extends Backbone.View
     # editable
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
       @$('.block-collection').addClass 'is-editable'
+      @$('.block-item').addClass 'can-manage'
+
+      @channel.set is_managable: true
+
       mediator.trigger 'channel:is-editable'
 
       @setUpDragView() unless $('body').hasClass 'is-mobile'

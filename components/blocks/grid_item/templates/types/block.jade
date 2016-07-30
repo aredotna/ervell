@@ -22,10 +22,10 @@ div(
 
         - if(channel && user && user.has('id'))
           .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
-            .grid__block__delete-block__confirm
+            .tooltip
               | Are you sure?
-              a.grid__block__delete-block__confirm__choice.confirm__choice__yes Yes
-              a.grid__block__delete-block__confirm__choice.confirm__choice__no No
+              a.tooltip__choice(data-choice='destroy') Yes
+              a.tooltip__choice(data-choice='cancel') No
 
       if user && user.id
         .grid__block__connect-container.abs-fill

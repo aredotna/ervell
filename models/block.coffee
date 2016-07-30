@@ -94,7 +94,7 @@ module.exports = class Block extends Base
       permissions.push 'can-edit'
 
     # Block owner or connector can manage if block is in channel
-    if (@connectedByCurrentUser(user) or @belongsToCurrentUser(user)) && channel?
+    if (@connectedByCurrentUser(user, channel) or @belongsToCurrentUser(user)) && channel?
       permissions.push 'can-manage'
 
     (_.uniq permissions).join ' '
@@ -108,8 +108,8 @@ module.exports = class Block extends Base
   allows: (permission, user) ->
     _s.include @getPermissions(user), permission
 
-  connectedByCurrentUser: (user)->
-    @get('connected_by_user_id') is user.id
+  connectedByCurrentUser: (user, channel = null)->
+    @get('connected_by_user_id') is user.id or channel?.get('is_managable')
 
   getHref: ->
     if @get('base_class') is 'Channel'

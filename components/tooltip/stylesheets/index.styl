@@ -1,0 +1,20 @@
+.tooltip
+  bubble top center alert
+  z-index rotate_z
+  position absolute
+  background alert
+  box-shadow none
+  border none
+  border-radius 0
+  display none
+  color #fff
+  &--is-active
+    display block
+  &:hover
+    color #fff
+  &:after
+    border-bottom 10px solid alert
+  &__choice
+    padding 0 10px
+    font-weight bold
+    cursor pointer
