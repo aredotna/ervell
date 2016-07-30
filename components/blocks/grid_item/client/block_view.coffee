@@ -3,11 +3,12 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
 ConnectView = require '../../../connect/client/connect_view.coffee'
-IconicJS = require '../../../../components/iconic/client/iconic.min.js'
+IconicJS = require '../../../iconic/client/iconic.min.js'
 FollowButtonView = require '../../../follow_button/client/follow_button_view.coffee'
 User = require '../../../../models/user.coffee'
 { trackOutboundLink } = require '../../../../lib/analytics.coffee'
 analytics = require '../../../../lib/analytics.coffee'
+EditableAttributeView = require '../../../editable_attribute/client/editable_attribute_view.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
 
@@ -111,7 +112,7 @@ module.exports = class BlockView extends Backbone.View
 
     @$el = $("##{@model.id}")
 
-    @renderFollowButton()
+    @postRender()
 
   confirmDestroy: (e) =>
     e.preventDefault()
@@ -137,6 +138,9 @@ module.exports = class BlockView extends Backbone.View
     analytics.track.click "Block removed from channel"
 
     @remove()
+
+  postRender: ->
+    @renderFollowButton()
 
   renderFollowButton: ->
     if @model.get('class') is 'Channel' or @model.get('class') is 'User' && sd.CURRENT_USER

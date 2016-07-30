@@ -3,7 +3,6 @@ span.block-item.block-item--content.block-collection--list__row(
   data-class="#{block.get('base_class')}"
   id="#{block.id}"
   href="#{block.getHref()}"
-  data-client="#{block.get('base_class')}"
   class="needsclick #{block.getPermissions(user, channel)}"
 )
   .block-collection--list__column.block-collection--list__column--thumb
@@ -18,7 +17,7 @@ span.block-item.block-item--content.block-collection--list__row(
       .iconic(data-glyph="file-#{block.get('attachment').extension}")
   .block-collection--list__column.block-collection--list__column--title
     strong
-      a(href="#{block.getHref()}")!= block.smartTruncate(block.titleOrContent(), 80)
+      span(class="attribute-title")= block.smartTruncate(block.titleOrContent(), 80)
       if block.get('comment_count') > 0
         span.iconic.block-collection--list__column__comment-count(data-glyph="comment-square" data-count=block.get('comment_count'))
     .block-collection--list__column__small
@@ -41,10 +40,4 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--date
     | #{block.updatedAtAgo()}
   .block-collection--list__column.block-collection--list__column--edit
-    .iconic.iconic-size-sm.edit-button(data-glyph="pencil")
-    .iconic.iconic-size-sm.delete-button(data-glyph="trash")
-    .tooltip
-      | Are you sure?
-      a.tooltip__choice(data-choice='destroy') Yes
-      a.tooltip__choice(data-choice='cancel') No
-    .iconic.iconic-size-sm.check-button(data-glyph="check")
+    include partials/_edit

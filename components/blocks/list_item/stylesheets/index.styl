@@ -24,6 +24,9 @@
     &--title
       min-width 500px
       flex 5
+      .can-edit
+        padding 2px
+        background-color lighthighlight
     &--source
       min-width 100px
       flex 1
@@ -70,7 +73,7 @@
       color lightgray
     .iconic:hover
       color hovergray
-      & > g:first-child > path
+      & > g:last-child > path
         fill hovergray
     img
       max-width unit * 2

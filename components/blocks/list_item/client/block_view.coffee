@@ -8,6 +8,7 @@ FollowButtonView = require '../../../follow_button/client/follow_button_view.cof
 User = require '../../../../models/user.coffee'
 { trackOutboundLink } = require '../../../../lib/analytics.coffee'
 analytics = require '../../../../lib/analytics.coffee'
+EditableAttributeView = require '../../../editable_attribute/client/editable_attribute_view.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
 
@@ -54,11 +55,13 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
     @$el.addClass 'is-being-edited'
+    @renderEditableAttribute()
 
   quitEditMode: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    @$el.removeClass 'is-being-edited'
+    @editable.remove()
+    @update @model
 
   loadConnectView: (e)=>
     e.preventDefault()
@@ -145,3 +148,11 @@ module.exports = class BlockView extends Backbone.View
         el: @$('.block-collection--list__column__follow')
         model: @model
         showTitle: false
+
+  renderEditableAttribute: ->
+    @editable = new EditableAttributeView
+      model: @model
+      el: @$(".attribute-title")
+      _attribute: 'title'
+      _kind: 'plaintext'
+      wait: true
