@@ -15,8 +15,10 @@ span.block-item.block-item--content.block-collection--list__row(
     .block-collection--list__column__small
       | By&nbsp;
       a(href="/#{block.get('user').slug}") #{block.get('user').username}
+  .block-collection--list__column.block-collection--list__column--comment
+    //- nothing
   .block-collection--list__column.block-collection--list__column--source
-
+    //- nothing
   .block-collection--list__column.block-collection--list__column--action
     .block-collection--list__column__follow
       //- rendered on the client
@@ -25,6 +27,6 @@ span.block-item.block-item--content.block-collection--list__row(
     .connect-container
       //- rendered on the client
   .block-collection--list__column.block-collection--list__column--date
-    | Updated #{block.updatedAtAgo()}
+    | #{block.updatedAtAgo()}
   .block-collection--list__column.block-collection--list__column--edit
     include partials/_edit
