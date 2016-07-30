@@ -28,8 +28,14 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--comment
     if block.get('comment_count') > 0
       .comment-count
+        - var commentCount = block.get('last_comment') ? parseInt(block.get('comment_count')) - 1 : block.get('comment_count')
+        - console.log('commentCount', commentCount, "block.get('comment_count')", parseInt(block.get('comment_count')))
+
+        if block.get('last_comment')
+          "#{block.get('last_comment')}"&nbsp;
         | +
-        = block.get('comment_count')
+        = commentCount
+
   .block-collection--list__column.block-collection--list__column--source
     if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
       img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")

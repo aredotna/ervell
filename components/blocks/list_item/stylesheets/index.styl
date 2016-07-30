@@ -53,6 +53,10 @@ editPadding = 4px
         font-family "Courier"
         display inline-block
         padding (unit / 2)
+        overflow-x hidden
+        text-overflow ellipsis
+        white-space nowrap
+        max-width 100%
     &__comment-count:after
       content attr(data-count)
       position absolute

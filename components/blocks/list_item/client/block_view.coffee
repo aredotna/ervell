@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
 ConnectView = require '../../../connect/client/connect_view.coffee'
+Comments = require '../../../../collections/comments.coffee'
 IconicJS = require '../../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../../follow_button/client/follow_button_view.coffee'
 User = require '../../../../models/user.coffee'
@@ -20,6 +21,7 @@ module.exports = class BlockView extends Backbone.View
   events:
     'click .block-collection--list__column__source'  : 'openLink'
     'click .block-collection--list__column__connect' : 'loadConnectView'
+    'mouseenter .block-collection--list__column--comment' : 'loadLastComment'
     'click .edit-button' : 'startEditMode'
     'click .check-button' : 'quitEditMode'
     'click .delete-button'  : 'confirmDestroy'
@@ -73,6 +75,15 @@ module.exports = class BlockView extends Backbone.View
     new ConnectView
       el: $connect_container
       block: @model
+
+  loadLastComment: ->
+    return false if @model.has('last_comment')
+    comments = new Comments null, block: @model
+    comments.fetch
+      data: per: 1
+      success: (comments) =>
+        @model.set last_comment: comments.first().get('body')
+        @update @model
 
   openLink: (e)->
     analytics.track.click "Block source opened"
