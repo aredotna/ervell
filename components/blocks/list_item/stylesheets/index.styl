@@ -42,7 +42,12 @@
       margin 0 (unit / 2)
     &--date
       min-width 100px
-      flex 2
+      flex 1
+    &--edit
+      max-width 100px
+      padding-right unit * 2
+      text-align right
+      flex 1
     &__comment-count
       position relative
       margin-left (unit / 2)
@@ -66,14 +71,18 @@
       color lightgray
     .connect-container
       margin-top -(unit)
+    .iconic
+      color lightgray
+    .iconic:hover
+      color hovergray
+      & > g:first-child > path
+        fill hovergray
     img
       max-width unit * 2
       max-height unit * 2
       margin 0 auto
     a
       font-weight bold
-    &:last-child
-      padding-right 0px
     &[data-attr="icon"]
       text-align center
     &__small

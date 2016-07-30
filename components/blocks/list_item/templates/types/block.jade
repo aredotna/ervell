@@ -4,7 +4,7 @@ span.block-item.block-item--content.block-collection--list__row(
   id="#{block.id}"
   href="#{block.getHref()}"
   data-client="#{block.get('base_class')}"
-  class="needsclick"
+  class="needsclick #{block.getPermissions(user, channel)}"
 )
   .block-collection--list__column.block-collection--list__column--thumb
     if block.has('image')
@@ -40,3 +40,5 @@ span.block-item.block-item--content.block-collection--list__row(
       //- rendered on the client
   .block-collection--list__column.block-collection--list__column--date
     | #{block.updatedAtAgo()}
+  .block-collection--list__column.block-collection--list__column--edit
+    .iconic(data-glyph="pencil")
