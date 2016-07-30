@@ -26,16 +26,7 @@ span.block-item.block-item--content.block-collection--list__row(
         | ,&nbsp;connected by&nbsp;
         a(href="/#{block.get('connected_by_user_slug')}") #{block.get('connected_by_username')}
   .block-collection--list__column.block-collection--list__column--comment
-    if block.get('comment_count') > 0
-      .comment-count
-        - var commentCount = block.get('last_comment') ? parseInt(block.get('comment_count')) - 1 : parseInt(block.get('comment_count'))
-        if block.get('last_comment')
-          "#{block.get('last_comment')}"
-          if commentCount > 0
-            | &nbsp;
-        if commentCount > 0
-          | +
-          = commentCount
+    include partials/_comments
 
   .block-collection--list__column.block-collection--list__column--source
     if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)

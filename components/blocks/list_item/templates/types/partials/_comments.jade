@@ -1,0 +1,10 @@
+if block.get('comment_count') > 0
+  .comment-count
+    - var commentCount = block.get('last_comment') ? parseInt(block.get('comment_count')) - 1 : parseInt(block.get('comment_count'))
+    if block.get('last_comment')
+      "#{block.get('last_comment')}"
+      if commentCount > 0
+        | &nbsp;
+    if commentCount > 0
+      | +
+      = commentCount

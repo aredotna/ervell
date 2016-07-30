@@ -12,6 +12,7 @@ analytics = require '../../../../lib/analytics.coffee'
 EditableAttributeView = require '../../../editable_attribute/client/editable_attribute_view.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
+commentsTemplate = -> require('../templates/types/partials/_comments.jade') arguments...
 
 module.exports = class BlockView extends Backbone.View
   autoRender: true
@@ -83,7 +84,7 @@ module.exports = class BlockView extends Backbone.View
       data: per: 1
       success: (comments) =>
         @model.set last_comment: comments.first().get('body')
-        @update @model
+        @$('.block-collection--list__column--comment').html commentsTemplate block: @model
 
   openLink: (e)->
     analytics.track.click "Block source opened"
