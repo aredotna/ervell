@@ -61,7 +61,7 @@ module.exports = class FeedGroup extends Base
     else if @first_item()?.base_class is 'User'
       "/#{@first_item()?.slug}"
     else
-      "/#/block/#{@first_item()?.id}"
+      "/block/#{@first_item()?.id}"
 
   single_subject_class: -> @first_item()?.base_class?.toLowerCase()
 

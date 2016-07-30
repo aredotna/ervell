@@ -1,6 +1,6 @@
-#
-# minimal js for about page
-#
+{ HomeView } = require "../apps/root/client.coffee"
+console.log 'HomeView', HomeView
 
 $ ->
-  require("../apps/root/client.coffee").init()
+  new HomeView el: $ '.container'
+

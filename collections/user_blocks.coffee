@@ -39,7 +39,7 @@ module.exports = class UserBlocks extends SearchBlocks
           grouped_blocks[id].unshift channel if channel
 
       collection = _.flatten _.values grouped_blocks
-
+      collection = collection.concat(data.channels)
       collection = collection.concat(grouped_blocks['undefined']) if grouped_blocks['undefined']
 
       return _.reject collection, (item) -> item.class is 'Block' and item.channel_ids.length < 1
