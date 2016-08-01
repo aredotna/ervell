@@ -108,8 +108,8 @@ module.exports = class Block extends Base
   allows: (permission, user) ->
     _s.include @getPermissions(user), permission
 
-  connectedByCurrentUser: (user, channel = null)->
-    @get('connected_by_user_id') is user.id or channel?.get('is_managable')
+  connectedByCurrentUser: (user, channel = false)->
+    @get('connected_by_user_id') is user.id or channel?.get?('is_managable')
 
   getHref: ->
     if @get('base_class') is 'Channel'
