@@ -78,7 +78,7 @@ module.exports = class BlockView extends Backbone.View
       block: @model
 
   loadLastComment: ->
-    return false if @model.has('last_comment')
+    return false if @model.has('last_comment') or @model.get('comment_count') is 0
     comments = new Comments null, block: @model
     comments.fetch
       data: per: 1

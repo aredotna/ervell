@@ -1,6 +1,7 @@
 _ = require 'underscore'
 { API_URL } = require("sharify").data
 params = require 'query-params'
+Backbone = require 'backbone'
 SearchBarView = require './client/search_bar_view.coffee'
 FilterResultsView = require './client/results_view.coffee'
 FilterBlocks = require '../../collections/filter_blocks.coffee'

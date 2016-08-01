@@ -50,11 +50,18 @@ module.exports = class BlockCollectionView extends Backbone.View
   appendBlockView: (model) ->
     @renderBlockView model, true
 
-  render: ->
-    models = if @resultsCollection?.length then @resultsCollection.models else @collection.models
+  isSearching: ->
+    mediator.shared.state.get 'is_searching'
 
+  blocks: ->
+    if @isSearching()
+      @resultsCollection
+    else
+      @collection
+
+  render: ->
     @$el.html @template[@state.get('view_mode')]
-      blocks: models
+      blocks: @blocks().models
       view_mode: @state.get('view_mode')
       user: mediator.shared.current_user
       channel: @channel
@@ -72,7 +79,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     @postRendered = true
 
-    if @resultsCollection?.length
+    if @isSearching()
       @modes['infinite']
         $el: @$el
         collection: @resultsCollection
@@ -80,9 +87,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   initBlockView: (index, el) =>
     $block = $(el)
 
-    collection = if @resultsCollection?.length then @resultsCollection else @collection
-
-    block = collection.get $block.data('id')
+    block = @blocks().get $block.data('id')
 
     if block
       new @views[@state.get('view_mode')]

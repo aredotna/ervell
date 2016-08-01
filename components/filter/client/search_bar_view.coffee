@@ -12,7 +12,7 @@ module.exports = class SearchBarView extends Backbone.View
     'tap .search-clear'                       : 'onClear'
     'tap .form__field__channel-filter__close' : 'onClear'
 
-  initialize: ->
+  initialize: ({ @state })->
     @$input = @$('input')
     $(window).one('tap', @maybeClear)
 
@@ -27,6 +27,7 @@ module.exports = class SearchBarView extends Backbone.View
   clear: ->
     @collection.reset()
     @$el.removeClass 'is-active'
+    mediator.shared.state.set is_searching: false
 
   onKeyUp: (e)->
     e.preventDefault()
@@ -52,6 +53,8 @@ module.exports = class SearchBarView extends Backbone.View
 
     return @onClear() unless query = @getQuery()
     return if (query.length < 2) or (query is @lastQuery)
+
+    mediator.shared.state.set is_searching: true
 
     mediator.trigger 'stop:infinite'
 
