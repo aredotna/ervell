@@ -1,4 +1,5 @@
 editPadding = 4px
+listBreakPoint = 1050px
 .block-collection--list
   width 100%
   &__header, .block-item
@@ -20,7 +21,7 @@ editPadding = 4px
     font-size s_small
     &--thumb
       text-align center
-      max-width 80px
+      min-width 80px
       flex 1
     &--title
       min-width 500px
@@ -32,6 +33,8 @@ editPadding = 4px
       min-width 100px
       flex 1
       cursor pointer
+      +below(listBreakPoint)
+        display none
     &__source:hover
       color hovergray
     &--action
@@ -39,6 +42,8 @@ editPadding = 4px
       flex 1
       text-align right
       padding-right unit * 2
+      +below(listBreakPoint)
+        display none
     &__connect, &__follow
       display inline-block
       font-weight bold
@@ -48,6 +53,8 @@ editPadding = 4px
       min-width 100px
       flex 1
     &--comment
+      +below(listBreakPoint)
+        display none
       .comment-count
         border 2px solid bordergray
         font-family "Courier"
@@ -111,6 +118,8 @@ editPadding = 4px
       text-align right
       flex 1
       position relative
+      +below(listBreakPoint)
+        display none
       .tooltip
         left calc(-50% - 2px)
         top 35px

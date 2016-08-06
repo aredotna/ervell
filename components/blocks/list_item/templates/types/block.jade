@@ -29,12 +29,13 @@ span.block-item.block-item--content.block-collection--list__row(
     include partials/_comments
 
   .block-collection--list__column.block-collection--list__column--source
-    if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
-      img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
-    if block.get('class') == 'Media'
-      img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
-    if block.get('class') == 'Link'
-      .iconic(data-glyph="link-intact")
+    a(href="#{block.getSourceUrl()}" target="_blank")
+      if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
+      if block.get('class') == 'Media'
+        img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+      if block.get('class') == 'Link'
+        .iconic(data-glyph="link-intact")
   .block-collection--list__column.block-collection--list__column--action
     .block-collection--list__column__connect Connect
     .connect-container
