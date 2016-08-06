@@ -2,7 +2,6 @@ Backbone = require "backbone"
 Backbone.$ = $
 Channel = require '../../models/channel.coffee'
 ChannelBlocks = require '../../collections/channel_blocks.coffee'
-BlockSkeletonView = require '../channel/client/block_skeleton_view.coffee'
 setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->

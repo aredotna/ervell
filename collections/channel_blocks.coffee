@@ -51,7 +51,7 @@ module.exports = class ChannelBlocks extends Blocks
 
       model = new Block models[retrieveFn]()
 
-      @get(model.id).set(model.attributes)
+      @get(model.id)?.set(model.attributes)
       mediator.trigger "model:#{model.id}:updated", model
 
       _.defer replacePlaceholder

@@ -1,4 +1,4 @@
-if user && user.isPremium() && !following && !followers
+if user && user.isPremium() && !following && !followers && !sd.SHARE_TOKEN
   .flex-container
     include ../../../filter/templates/search_bar
 .block-collection.block-collection__contents.block-collection--grid.grid.flex-container(class= user && channel && user.id == channel.get('user').id ? 'is-editable' : '')
