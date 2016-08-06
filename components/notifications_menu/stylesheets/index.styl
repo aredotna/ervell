@@ -1,0 +1,45 @@
+countSize = 18px
+
+.notifications-menu
+  padding-left 0
+
+  &__count
+    width countSize
+    height countSize
+    background-color lightgrayplus
+    margin-top (topbar_h / 2) - (countSize / 2)
+    line-height countSize
+    color white
+    text-align center
+    font-size s_caption - 1
+    font-weight bold
+
+    &--has-notifications
+      background-color alert
+
+  &__dropdown
+    width unit * 15
+
+    .dropdown__inner
+      padding unit
+      max-height unit * 20
+      overflow scroll
+      padding-bottom topbar_h + unit
+
+    .feed-group__sentence
+      font-size s_caption
+      text-align left
+      padding 0
+      padding-bottom unit
+
+    &__all
+      position absolute
+      bottom 0
+      left 0
+      width (unit * 15) - 12px
+      height topbar_h
+      text-align center
+      background-color white
+      line-height topbar_h
+      border 1px solid lightgray
+      font-weight bold
