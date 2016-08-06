@@ -39,3 +39,19 @@ module.exports = class Notifications extends Feed
 
   maybeGetActivity: -> # does nothing
 
+  parse: (data)->
+    @exhaustedRetry++ unless data.items.length
+    @exhausted = true if @exhaustedRetry > @exhaustedLimit
+
+    items = _.filter data.items, (model) =>
+      # model.user? && !(model.user.id is @options.user.id and model.action is 'has joined Arena') && model?.item?.kind != "shortcuts"
+      model.user? && model.item?
+
+    groups = _.groupBy items, (model) ->
+      "#{model.user?.id}_#{model.target?.id}_#{model.id}"
+
+    groups = _.map groups, (group) ->
+      _.map group, (item) -> new FeedItem(item)
+
+    groups
+

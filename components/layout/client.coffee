@@ -10,6 +10,7 @@ SearchBarView = require '../search_bar/client/view.coffee'
 NewChannelView = require '../new_channel/client/new_channel_view.coffee'
 UserMenuView = require '../user_menu/client/user_menu_view.coffee'
 ViewMenuView = require '../view_menu/client/view_menu_view.coffee'
+NotificationsView = require '../notifications_menu/client/notifications_view.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 State = require "../../models/state.coffee"
@@ -91,6 +92,8 @@ setupViews = ->
       el: $('.dropdown--menu--user')
     new NewChannelView
       el: $('.dropdown--menu--new-channel')
+    new NotificationsView
+      el: $('.dropdown--menu--notifications')
 
     if mediator.shared.current_user.get('is_pro')
       new ViewMenuView

@@ -10,16 +10,11 @@ module.exports = class UserMenuView extends DropdownView
 
   initialize: ->
     mediator.on 'notifications:synced', @maybeSetNotifications, @
-    mediator.on 'notifications:cleared', @unsetNotifications, @
     mediator.on 'current_user:refreshed', @render, @
 
     @notifications = mediator.shared.notifications
 
     super
-
-  clearNotifications: (e)->
-    @notifications.markRead()
-    @$('.user-avatar').removeClass 'has-notifications'
 
   maybeSetNotifications: ->
     if (count = @notifications.getNumberUnread()) > 0
