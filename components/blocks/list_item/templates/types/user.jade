@@ -16,4 +16,6 @@ include ../../../../avatar/templates/avatar
     .block-collection--list__column__follow
       //- renderered on the client
   .block-collection--list__column.block-collection--list__column--date
-    | Updated #{block.updatedAtAgo()}
+    | #{block.updatedAtAgo()}
+  .block-collection--list__column.block-collection--list__column--edit
+    //- nothing
