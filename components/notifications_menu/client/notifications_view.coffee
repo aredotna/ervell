@@ -17,15 +17,19 @@ module.exports = class NotificationsView extends DropdownView
 
   clearNotifications: (e)->
     @notifications.markRead()
-    @$('.user-avatar').removeClass 'has-notifications'
+    @unsetNotifications()
+
+  openDropdown: ->
+    super
+    @clearNotifications()
 
   maybeSetNotifications: ->
     if (count = @notifications.getNumberUnread()) > 0
-      @$('.notifications-menu__count').addClass '.notifications-menu__count--has-notifications'
+      @$('.notifications-menu__count').addClass 'notifications-menu__count--has-notifications'
       @$('.notifications-menu__count').text count
 
   unsetNotifications: ->
-    @$('.user-avatar, .dropdown__link--notifications').removeClass '.notifications-menu__count--has-notifications'
+    @$('.notifications-menu__count').removeClass 'notifications-menu__count--has-notifications'
     @$('.notifications-menu__count').text "0"
 
   renderFeed: ->
