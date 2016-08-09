@@ -1,14 +1,12 @@
-countSize = 18px
+countSize = 19px
 
 .notifications-menu
   padding-left 0
   cursor default
-
   &__count
     width countSize
     height countSize
     background-color lightgrayplus
-    margin-top (topbar_h / 2) - (countSize / 2)
     line-height countSize
     color white
     text-align center
@@ -45,3 +43,7 @@ countSize = 18px
       line-height topbar_h
       border 1px solid lightgray
       font-weight bold
+      display block
+      +below(500px)
+        position static
+        width 100%

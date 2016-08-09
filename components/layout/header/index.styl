@@ -11,6 +11,7 @@
   padding 0
   display flex
   justify-content space-between
+  align-items center
   z-index header_z
   transform translate3d(0, 0, 1px)
   -webkit-transform translate3d(0, 0, 1px)
@@ -183,6 +184,7 @@ privacy-color('.search__results__result--privacy-', color)
     opacity 50%
 
 .user-avatar
+  height topbar_h
   &.has-notifications .notifications__flag
     display block
 
@@ -233,13 +235,10 @@ privacy-color('.search__results__result--privacy-', color)
 
 .dropdown--menu
   cursor pointer
-  padding 0 unit
+  padding 0 unit 0 0
 
 .dropdown--menu--user
   padding 0 unit 0 0
-
-.dropdown--menu--new-channel
-  padding 0
 
 .dropdown
   position absolute
@@ -317,7 +316,7 @@ privacy-color('.search__results__result--privacy-', color)
 .dropdown--menu__trigger:after
   content ""
 
-@media (max-width:500px)
+@media (max-width: 500px)
 
   .header--icon:hover
     .glass-icon
