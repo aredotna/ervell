@@ -73,7 +73,8 @@ module.exports = class FeedGroup extends Base
     else if @first_item()?.base_class is "Channel"
       @first_item()?.title
     else
-      @first_item()?.title || @_format_subject()
+      title = if ['jpg', 'png', 'gif', 'jpeg'].indexOf(@first_item()?.title?.split('.').pop().toLowerCase()) > -1 then @_format_subject() else @first_item()?.title
+      title || @_format_subject()
 
   grouped_subject: ->
     grouped = @groupBy (model)-> model.get('item').base_class

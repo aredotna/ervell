@@ -12,13 +12,13 @@ module.exports = class UserMenuView extends DropdownView
     list: 'list'
 
   events:
-    'click .view-menu__dropdown__option' : 'toggleMode'
+    'click .view-menu__dropdown__option' : 'setMode'
 
   initialize: ->
     @desktopEvents = _.extend @desktopEvents, @events
     super
 
-  toggleMode: (e) ->
+  setMode: (e) ->
     mode = $(e.currentTarget).data 'mode'
     glyph = $(e.currentTarget).data 'glyph'
     @model.set 'view_mode', mode
