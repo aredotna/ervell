@@ -29,9 +29,9 @@ class Statistics extends Backbone.Model
 @explore = (req, res, next) ->
   blocks = new ExploreBlocks null
 
-  # if req.query.subject
-  #   _.extend blocks.options, filter: req.query.subject
-  #   res.locals.sd.SUBJECT = req.query.subject
+  if req.query.subject
+    _.extend blocks.options, filter: req.query.subject
+    res.locals.sd.SUBJECT = req.query.subject
 
   if req.query.sort
     res.locals.sd.SORT = sort_by = req.query.sort

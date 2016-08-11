@@ -3,6 +3,7 @@
 # (root requests)
 #
 
+_ = require "underscore"
 express = require "express"
 routes = require "./routes"
 auth = require '../../lib/middleware/auth'
@@ -14,8 +15,8 @@ app.get "/", auth, routes.index
 app.get "/notifications", auth, routes.notifications
 app.get "/explore", auth, routes.explore
 app.get "/explore/channels", auth, (req, res, next) ->
-  req.query = subject: 'channel'
+  req.query = _.extend req.query, subject: 'channel'
   routes.explore req, res, next
 app.get "/explore/blocks", auth, (req, res, next) ->
-  req.query = subject: 'block'
+  req.query = _.extend req.query, subject: 'block'
   routes.explore req, res, next

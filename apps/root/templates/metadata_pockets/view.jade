@@ -7,7 +7,8 @@ block vars
 
 block content
   ul.breadcrumb
-    li: a(href="/explore" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
-    li: a(href="/explore/channels" class=sd.SUBJECT == 'channel' ? "is-active" : "").metadata--selector__option Channels
-    li: a(href="/explore/blocks" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
+    - var sort = sd.SORT ? "?sort=" + sd.SORT : ""
+    li: a(href="/explore#{sort}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
+    li: a(href="/explore/channels#{sort}" class=sd.SUBJECT == 'channel' ? "is-active" : "").metadata--selector__option Channels
+    li: a(href="/explore/blocks#{sort}" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
 
