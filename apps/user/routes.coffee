@@ -25,13 +25,13 @@ _ = require 'underscore'
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
 
   if req.query.subject
-    _.extend blocks.options, subject: req.query.subject
+    blocks.options = _.extend blocks.options, subject: req.query.subject
     res.locals.sd.SUBJECT = req.query.subject
 
   if req.query.sort
     res.locals.sd.SORT = sort_by = req.query.sort
     res.locals.sd.SEED = seed = Math.floor(Math.random() * 100000000) + 1
-    _.extend blocks.options,
+    blocks.options = _.extend blocks.options,
       sort: sort_by
       seed: seed
 
