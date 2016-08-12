@@ -64,6 +64,7 @@ setupPusherAndCurrentUser = ->
   if user.id
     mediator.shared.notifications = new Notifications()
     mediator.shared.notifications.on 'sync', ->
+      console.log 'notifications synced'
       mediator.trigger 'notifications:synced', @
 
     user.fetch
