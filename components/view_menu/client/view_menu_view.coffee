@@ -12,7 +12,7 @@ module.exports = class UserMenuView extends DropdownView
     list: 'list'
 
   events:
-    'click .view-menu__dropdown__option' : 'setMode'
+    'tap .view-menu__dropdown__option' : 'setMode'
 
   initialize: ->
     @desktopEvents = _.extend @desktopEvents, @events

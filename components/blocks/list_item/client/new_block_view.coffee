@@ -11,10 +11,12 @@ module.exports = class NewBlockView extends Backbone.View
 
   events:
     'tap .block-collection--list__column--new-field__placeholder .pointer' : 'triggerFileDialog'
+    'tap .block-collection--list__column--new-field__mobile-placeholder .pointer' : 'triggerFileDialog'
     'tap .block-collection--list__column--new-field__textarea' : 'setActive'
     'blur .block-collection--list__column--new-field__textarea'  : 'removeActive'
     'tap .block-collection--list__column--new-button' : 'createBlock'
     'tap .block-collection--list__column--new-field__placeholder'  : 'setActive'
+    'tap .block-collection--list__column--new-field__mobile-placeholder' : 'setActive'
     'keydown .block-collection--list__column--new-field__textarea' : 'onKeyUp'
 
   initialize: ({ @blocks, @$container, @autoRender })->
@@ -22,6 +24,7 @@ module.exports = class NewBlockView extends Backbone.View
     @setElCaches() unless @autoRender
 
   setActive: (e) ->
+    console.log 'setActive'
     $target = $(e.currentTarget)
     return false if $target.hasClass '.pointer'
     @$el.addClass 'active'
@@ -31,6 +34,7 @@ module.exports = class NewBlockView extends Backbone.View
     @$el.removeClass 'active' unless @$field.val()
 
   triggerFileDialog: (e)->
+    console.log 'triggerFileDialog'
     e.preventDefault()
     e.stopImmediatePropagation()
     $('#fileupload input:file').trigger('click')

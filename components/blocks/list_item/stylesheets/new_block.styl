@@ -4,7 +4,8 @@
       background-color backgroundgray
       &:hover
         background-color backgroundgray
-      &.active .block-collection--list__column--new-field__placeholder
+      &.active .block-collection--list__column--new-field__placeholder,
+      &.active .block-collection--list__column--new-field__mobile-placeholder
         display none
   &__column
     &--new-field
@@ -14,6 +15,8 @@
       padding 0
       height 100%
       top 0
+      +below(smallListBp)
+        flex 4
       &__placeholder
         cursor text
         position absolute
@@ -23,6 +26,14 @@
         left 0
         line-height 60px
         padding 0 unit
+        +below(smallListBp)
+          display none
+      &__mobile-placeholder
+        @extend .block-collection--list__column--new-field__placeholder
+        display none
+        +below(smallListBp)
+          display block
+          font-size s_small - 1
       &__field
         position absolute
         width 100%
@@ -45,8 +56,11 @@
       background-color secondbackgroundgray
       padding (unit) unit !important
       color lightgray
+      height 59px
       button
         margin-top 0
         font-size s_small
       &:hover
         background-color darken(secondbackgroundgray, 10%)
+      +below(smallListBp)
+        padding (unit / 2) !important

@@ -1,5 +1,7 @@
 editPadding = 4px
-listBreakPoint = 1050px
+mediumListBp = 1050px
+smallListBp = 400px
+
 .block-collection--list
   width 100%
   &__header, .block-item
@@ -24,17 +26,27 @@ listBreakPoint = 1050px
       min-width 120px
       flex 1
       padding (unit / 2) 0
+      +below(smallListBp)
+        min-width 80px
     &--title
       min-width 500px
       flex 5
       .can-edit
         padding editPadding 0
         background-color lighthighlight
+      +below(smallListBp)
+        min-width 100px
+        .attribute-title
+          width 100%
+          display inline-block
+          white-space nowrap
+          overflow hidden
+          text-overflow ellipsis
     &--source
       min-width 100px
       flex 1
       cursor pointer
-      +below(listBreakPoint)
+      +below(mediumListBp)
         display none
     &__source:hover
       color hovergray
@@ -43,18 +55,22 @@ listBreakPoint = 1050px
       flex 1
       text-align right
       padding-right unit * 2
-      +below(listBreakPoint)
+      +below(mediumListBp)
         display none
     &__connect, &__follow
       display inline-block
       font-weight bold
       @extend .inline-link
       margin 0 (unit / 2)
+      +below(smallListBp)
+        min-width 80px
     &--date
       min-width 100px
       flex 1
+      +below(smallListBp)
+        display none
     &--comment
-      +below(listBreakPoint)
+      +below(mediumListBp)
         display none
       .comment-count
         border 2px solid bordergray
@@ -119,7 +135,7 @@ listBreakPoint = 1050px
       text-align right
       flex 1
       position relative
-      +below(listBreakPoint)
+      +below(mediumListBp)
         display none
       .tooltip
         left calc(-50% - 2px)
