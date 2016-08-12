@@ -23,6 +23,10 @@ module.exports = class NotificationsView extends DropdownView
     super
     @clearNotifications()
 
+  toggleDropdown: ->
+    super
+    @clearNotifications()
+
   maybeSetNotifications: ->
     if (count = @notifications.getNumberUnread()) > 0
       @$('.notifications-menu__count').addClass 'notifications-menu__count--has-notifications'
