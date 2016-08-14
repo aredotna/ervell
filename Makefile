@@ -9,19 +9,11 @@ MIN_FILE_SIZE = 1000
 
 # Start the server
 s:
-	$(BIN)/coffee index.coffee
-
-# Start the server with forever
-sf:
-	$(BIN)/forever $(BIN)/coffee index.coffee
+	API_URL=http://localhost:3000/v2 APP_URL=http://localhost:5000 foreman start
 
 # Start the server with foreman and Redis
 spc:
 	REDIS_URL=redis://127.0.0.1:6379 APP_URL=http://localhost:5000 foreman start
-
-# Start server in debug mode & open node inspector
-ssd:
-	$(BIN)/node-inspector --web-port=7777 & $(BIN)/coffee --nodejs --debug index.coffee
 
 # Run all of the project-level tests, followed by app-level tests
 test: assets
