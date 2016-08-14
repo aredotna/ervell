@@ -17,6 +17,11 @@ $ ->
     sort: sd.SORT || ''
     seed: sd.SEED || ''
 
-  setupBlockCollection
+  options =
     $el: $('.explore-contents')
     collection: blocks
+
+  _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
+  _.extend(options, { sort: sd.SORT }) if sd.SORT
+
+  setupBlockCollection options
