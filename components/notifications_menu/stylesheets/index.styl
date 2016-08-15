@@ -3,6 +3,9 @@ countSize = 19px
 .notifications-menu
   padding-left 0
   cursor default
+  &__outer
+    height 50px
+
   &__count
     width countSize
     height countSize
@@ -13,6 +16,9 @@ countSize = 19px
     font-size s_caption - 1
     font-weight bold
     cursor pointer
+    position relative
+    top 50%
+    transform translateY(-50%)
 
     &--has-notifications
       background-color alert
