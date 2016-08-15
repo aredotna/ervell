@@ -37,6 +37,5 @@ module.exports = class NotificationsView extends DropdownView
     @$('.notifications-menu__count').text "0"
 
   renderFeed: ->
-    console.log 'rendering', @notifications.models
     @$('.dropdown__inner').html template
       feed: @notifications.models

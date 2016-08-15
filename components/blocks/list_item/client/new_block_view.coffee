@@ -24,7 +24,6 @@ module.exports = class NewBlockView extends Backbone.View
     @setElCaches() unless @autoRender
 
   setActive: (e) ->
-    console.log 'setActive'
     $target = $(e.currentTarget)
     return false if $target.hasClass '.pointer'
     @$el.addClass 'active'
@@ -34,7 +33,6 @@ module.exports = class NewBlockView extends Backbone.View
     @$el.removeClass 'active' unless @$field.val()
 
   triggerFileDialog: (e)->
-    console.log 'triggerFileDialog'
     e.preventDefault()
     e.stopImmediatePropagation()
     $('#fileupload input:file').trigger('click')

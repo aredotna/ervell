@@ -162,7 +162,6 @@ module.exports = class BlockView extends Backbone.View
         showTitle: false
 
   renderEditableAttribute: ->
-    console.log 'hery', @$(".attribute-title")
     @editable = new EditableAttributeView
       model: @model
       el: @$(".attribute-title")
