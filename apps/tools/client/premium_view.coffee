@@ -29,7 +29,7 @@ module.exports = class PremiumView extends Backbone.View
         amount: @price
       @$('.premium--status').addClass('is-active')
     else
-      window.location.href = "#{sd.APP_URL}/log_in"
+      window.location.href = "#{sd.APP_URL}/log_in?redirect-to=/tools/premium"
 
     e.preventDefault()
 

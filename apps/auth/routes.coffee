@@ -14,7 +14,7 @@ clearCache = (user) ->
 
 @logIn = (req, res, next) ->
   return res.redirect('/') if req.user?.id
-  res.locals.sd.REDIRECT_TO = req.session.redirectTo
+  res.locals.sd.REDIRECT_TO = req.session.redirectTo || req.query['redirect-to']
   res.locals.sd.MODE = 'login'
   res.render 'log_in'
 
