@@ -29,7 +29,7 @@ module.exports = class PremiumView extends Backbone.View
         amount: @price
       @$('.premium--status').addClass('is-active')
     else
-      mediator.trigger 'open:auth', mode: 'login'
+      window.location.href = "#{sd.APP_URL}/log_in"
 
     e.preventDefault()
 
