@@ -62,6 +62,6 @@ clearCache = (user) ->
   res.redirect url
 
 @flushall = (req, res, next) ->
-  return @next() unless req.user.id is 15
+  return @next() unless req.user?.id is 15
   cache.flushall()
   res.redirect '/'
