@@ -27,14 +27,9 @@ module.exports = class NewChannelView extends DropdownView
 
     @render()
 
-    mediator.on 'search:loaded', @closeDropdown, @
-    mediator.on 'body:click', @onBodyClick, @
-
-    if $('body').hasClass 'is-mobile'
-      @$el.on 'tap .js-dropdown-trigger', @toggleDropdown
-    else
-      @$el.on 'mouseover', @onMouseOver
-      @$el.on 'mouseout', @onMouseOut
+    @desktopEvents = _.extend @desktopEvents, @events
+    @mobileEvents = _.extend @mobileEvents, @events
+    super
 
   onKeyUp: (e)->
     @model.set 'title', @$input.val()?.trim()

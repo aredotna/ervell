@@ -16,6 +16,7 @@ module.exports = class UserMenuView extends DropdownView
 
   initialize: ->
     @desktopEvents = _.extend @desktopEvents, @events
+    @mobileEvents = _.extend @mobileEvents, @events
     super
 
   setMode: (e) ->
