@@ -19,3 +19,4 @@ app.get '/me/refresh', auth, routes.refresh
 app.get '/go', routes.redirect
 app.get '/reset/:token', routes.resetPassword
 app.get '/settings', routes.settings
+app.get '/cache/flushall', routes.flushall
