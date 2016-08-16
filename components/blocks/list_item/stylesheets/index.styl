@@ -1,4 +1,5 @@
 editPadding = 4px
+largeListBp = 1359px
 mediumListBp = 1050px
 smallListBp = 400px
 
@@ -34,14 +35,16 @@ smallListBp = 400px
       .can-edit
         padding editPadding 0
         background-color lighthighlight
+      .attribute-title
+        width 100%
+        display inline-block
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+      +below(largeListBp)
+        min-width 320px
       +below(smallListBp)
         min-width 100px
-        .attribute-title
-          width 100%
-          display inline-block
-          white-space nowrap
-          overflow hidden
-          text-overflow ellipsis
     &--source
       min-width 20px
       flex 1
@@ -70,6 +73,7 @@ smallListBp = 400px
       +below(smallListBp)
         display none
     &--comment
+      min-width 200px
       +below(mediumListBp)
         display none
       .comment-count
@@ -117,6 +121,9 @@ smallListBp = 400px
     &__small
       font-size s_caption
       padding-top 10px
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
     &__channel-icon
       width 10px
       height 10px
