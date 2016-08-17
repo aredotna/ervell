@@ -17,7 +17,19 @@ module.exports = class UserMenuView extends DropdownView
   initialize: ->
     @desktopEvents = _.extend @desktopEvents, @events
     @mobileEvents = _.extend @mobileEvents, @events
+
     super
+
+    @$el.on 'click', @toggleView
+
+  toggleView: (e) ->
+    return if $(e.currentTarget).hasClass 'view-menu__dropdown__option'
+    mode = if @model.get('view_mode') is 'list' then 'grid' else 'list'
+    model.set view_mode: setMode
+    glyph = @glyphs[mode]
+    @$el.removeClass 'dropdown--is_active'
+    @$('.view-menu__selected').attr 'data-glyph', glyph
+    window.location.reload()
 
   setMode: (e) ->
     mode = $(e.currentTarget).data 'mode'
