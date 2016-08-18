@@ -12,7 +12,8 @@ module.exports = class UserMenuView extends DropdownView
     list: 'list'
 
   events:
-    'tap .view-menu__dropdown__option' : 'setMode'
+    'tap .view-menu__dropdown__option' : 'switchMode'
+    'tap .js-dropdown-trigger' : 'toggleView'
 
   initialize: ->
     @desktopEvents = _.extend @desktopEvents, @events
@@ -20,21 +21,19 @@ module.exports = class UserMenuView extends DropdownView
 
     super
 
-    @$el.on 'click', @toggleView
-
-  toggleView: (e) ->
-    return if $(e.currentTarget).hasClass 'view-menu__dropdown__option'
+  toggleView: (e) =>
     mode = if @model.get('view_mode') is 'list' then 'grid' else 'list'
-    model.set view_mode: setMode
-    glyph = @glyphs[mode]
-    @$el.removeClass 'dropdown--is_active'
-    @$('.view-menu__selected').attr 'data-glyph', glyph
-    window.location.reload()
+    @_setMode mode
 
-  setMode: (e) ->
-    mode = $(e.currentTarget).data 'mode'
-    glyph = $(e.currentTarget).data 'glyph'
-    @model.set 'view_mode', mode
-    @$('.view-menu__selected').attr 'data-glyph', glyph
+  switchMode: (e) ->
+    console.log 'switchMode', $(e.currentTarget).data 'mode'
+    @_setMode $(e.currentTarget).data 'mode'
+
+  _setMode: (mode)->
+    console.log '_setMode', mode
+    return unless mode is 'list' or mode is 'grid'
+    console.log 'should set mode'
+    @model.set view_mode: mode
     @$el.removeClass 'dropdown--is_active'
+    @$('.view-menu__selected').attr 'data-glyph', @glyphs[mode]
     window.location.reload()
