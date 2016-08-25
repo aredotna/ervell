@@ -34,6 +34,7 @@ link(rel="mask-icon" href="#{sd.IMAGE_PATH}arena-mark.svg" color="black")
 meta(name="twitter:description", content="Are.na is a platform for private and collaborative research.")
 meta(name="twitter:site", content="@aredotna")
 meta(property="og:description" content="Are.na is a platform for private and collaborative research.")
+
 if channel && author
   meta(name="twitter:title", content="Are.na / #{channel.get('title')}")
   meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}/#{channel.get('slug')}")
@@ -49,6 +50,7 @@ else
   meta(name="twitter:url", content="https://www.are.na")
   meta(property="og:title" content="Are.na")
   meta(property="og:url" content="https://www.are.na")
+
 if blocks
   meta(name="twitter:card", content="photo")
   - var filtered = _.filter(blocks, function(block){ return block.has('image'); })
@@ -56,7 +58,8 @@ if blocks
     if block.has('image')
       meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
-else
+
+unless block && block.has('image')
   meta(name="twitter:card", content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
-  meta(name="twitter:image", content="logo.jpg")
-  meta(property="og:image" content="logo.jpg")
+  meta(name="twitter:image", content="#{sd.IMAGE_PATH}feynman-arena.png")
+  meta(property="og:image" content="#{sd.IMAGE_PATH}feynman-arena.png")

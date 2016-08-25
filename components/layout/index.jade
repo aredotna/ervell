@@ -11,6 +11,7 @@ html(class="#{colorClass} #{loggedInClass}")
         |  / #{author.get('username')}
 
     include ../../components/meta/templates/meta
+    block meta
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
     block styles
 
