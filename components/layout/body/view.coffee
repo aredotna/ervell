@@ -78,7 +78,9 @@ module.exports = class BodyView extends Backbone.View
     clientRoute = $(e.currentTarget).data('client')
     url = $(e.currentTarget).attr('href')
 
-    if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User'
+    modifier = e.metaKey || e.ctrlKey
+
+    if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User' and !modifier
       Backbone.history.navigate "#{url}", trigger: true, replace: false
     else
       trackOutboundLink(url) if url.indexOf('http')
