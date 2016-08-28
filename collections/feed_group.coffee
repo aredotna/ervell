@@ -50,7 +50,8 @@ module.exports = class FeedGroup extends Base
     else
       @models[0].get('action')
 
-  is_single: -> @length is 1
+  is_single: ->
+    @length is 1
 
   is_comment: ->
     @models[0].has('item') && @first_item().base_class is 'Comment'
@@ -77,7 +78,7 @@ module.exports = class FeedGroup extends Base
       title || @_format_subject()
 
   grouped_subject: ->
-    grouped = @groupBy (model)-> model.get('item').base_class
+    grouped = @groupBy (model)-> model.get('item').class
     groups = _.map grouped, (group)->
       first = group[0]
       type = if first.get('item_type') is 'Comment' then "\"#{first.get('item')?.body}\"" else first.get('item').class?.toLowerCase()
