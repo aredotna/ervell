@@ -72,6 +72,7 @@ module.exports = class AuthView extends Backbone.View
     @user[@state.get 'mode']
       success: @onSubmitSuccess
       error: (model, response, options) =>
+        @showError(response?.responseJSON?.message) if response?.responseJSON?.message
         @reenableForm()
         analytics.exception response
 

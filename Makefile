@@ -9,7 +9,7 @@ MIN_FILE_SIZE = 1000
 
 # Start the server
 s:
-	API_URL=http://localhost:3000/v2 APP_URL=http://localhost:5000 foreman start
+	REDIS_URL=redis://127.0.0.1:6379 API_URL=http://localhost:3000/v2 APP_URL=http://localhost:5000 foreman start
 
 # Start the server with foreman and Redis
 spc:
