@@ -76,7 +76,6 @@ setupPusherAndCurrentUser = ->
 
   pusher= mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
   chan = mediator.shared.current_user_channel = pusher.subscribe "user_#{user.id}" if user.id and Pusher?
-  console.log 'current_user_channel', chan
 
 setupViews = ->
   new BodyView
