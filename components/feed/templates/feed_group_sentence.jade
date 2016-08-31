@@ -14,7 +14,11 @@ h2.feed-group__sentence(class=className.join(' '))
     span &nbsp;
   if group.is_single()
     if group.is_comment()
-      span.feed-group__sentence__comment(id="attribute-body_#{group.first_item().id}")
+      span.feed-group__sentence__comment(
+        id="attribute-body_#{group.first_item().id}"
+        href="#{group.single_target_link()}#comments"
+        data-client="#{group.first_item().base_class}"
+      )
         != group.single_subject()
     else
       span

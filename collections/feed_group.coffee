@@ -61,6 +61,8 @@ module.exports = class FeedGroup extends Base
       "/#{@first_item()?.user.slug}/#{@first_item().slug}"
     else if @first_item()?.base_class is 'User'
       "/#{@first_item()?.slug}"
+    else if @first_item()?.base_class is 'Comment'
+      "/#{@first_item()?.slug}"
     else
       "/block/#{@first_item()?.id}"
 
@@ -110,7 +112,7 @@ module.exports = class FeedGroup extends Base
     else if @first_target()?.class is 'User'
       "/#{@first_target()?.slug}"
     else
-      "/#/block/#{@first_target()?.id}"
+      "/block/#{@first_target()?.id}"
 
   subject_privacy: ->
     if @models[0].has('item') and @first_item().base_class is "Channel"
