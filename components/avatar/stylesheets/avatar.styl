@@ -8,6 +8,24 @@
   background-color backgroundgray
   // border-radius 50px
 
+  &.is-loading
+    background-size 140px 140px
+    background-image linear-gradient(
+      45deg,
+      rgba(bordergray, 0.5)   25%,
+      transparent             25%,
+      transparent             50%,
+      rgba(bordergray, 0.5)   50%,
+      rgba(bordergray, 0.5)   75%,
+      transparent             75%,
+      transparent
+    )
+    -webkit-animation loading-avatar 0.5s linear infinite
+    animation loading-avatar 0.5s linear infinite
+
+    .user__avatar__image
+      display none
+
   .user__avatar__image
     position absolute
     left 0
@@ -56,3 +74,9 @@
       width 30px
       line-height 30px
       top 5px
+
+@keyframes loading-avatar
+  from
+    background-position 0 0
+  to
+    background-position 280px 140px

@@ -74,7 +74,8 @@ setupPusherAndCurrentUser = ->
         # ensureFreshUser response.user
         showNewUserMessages() if user.get('show_tour')
 
-  mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
+  pusher= mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
+  chan = mediator.shared.current_user_channel = pusher.subscribe "user_#{user.id}" if user.id and Pusher?
 
 setupViews = ->
   new BodyView
