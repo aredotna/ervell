@@ -1,6 +1,7 @@
 include ../../avatar/templates/avatar
 
 +avatar(user)
+
 form(id="avatar-upload" action="#{policy.bucket}" method="POST" enctype="multipart/form-data" data-fileupload="")
   input(type="hidden" name="key" value="#{policy.key}")
   input(type="hidden" name="AWSAccessKeyId" value="#{policy.AWSAccessKeyId}")

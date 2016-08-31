@@ -10,10 +10,10 @@ module.exports = class AvatarView extends Backbone.View
   events:
     'click .avatar-upload-pointer' : 'triggerFileDialog'
 
-  initialize: ({@policy})->
+  initialize: ({ @policy })->
     @render()
     @setupFileDrop()
-    @listenTo mediator.shared.current_user, 'change', @updateAvatar
+    mediator.shared.current_user_channel.bind_all @updateAvatar, @
 
   updateAvatar: ->
     $.ajax
@@ -22,14 +22,15 @@ module.exports = class AvatarView extends Backbone.View
       beforeSend: (xhr)->
         xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
       success: ->
-        @render()
+        window.location.reload()
 
   setAvatar: (location) ->
-    @$('#avatar img').addClass 'is-loading'
+    @$('#avatar user__avatar--display').addClass 'is-loading'
     $.ajax
       type: "PUT"
       url: "#{sd.API_URL}/accounts/avatar"
       data: { url: location }
+
 
   triggerFileDialog: ->
     @$('#avatar-upload input:file').trigger('click')
