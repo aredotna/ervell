@@ -53,9 +53,7 @@
 
 body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-active
   .grid__block__overlay
-    opacity 0
-    pointer-events none
-    display none !important
+    opacity 1
 
 .grid__block__content
   height 100%
@@ -136,8 +134,6 @@ body:not(.is-mobile) .grid__block:hover
   background-size 40%
   background-repeat no-repeat
   cursor pointer
-
-
 
 .grid__block__delete-block
   position relative
@@ -344,6 +340,12 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 @media (max-width:500px)
   .grid__block
     margin 0 0 80px 0
+
+  .grid__block__overlay
+    opacity 1
+
+    .button--inblock
+      display none
 
   .grid__block--text .grid__block__inner
     border 1px solid lightgrayplus
