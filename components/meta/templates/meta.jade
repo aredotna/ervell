@@ -56,7 +56,8 @@ if blocks
   - var filtered = _.filter(blocks, function(block){ return block.has('image'); })
   each block, index in filtered.slice(0,4)
     if block.has('image')
-      meta(name="twitter:image", content="#{block.get('image').display.url}")
+      if index == 0
+        meta(name="twitter:image", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
 
 unless block && block.has('image')
