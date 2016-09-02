@@ -60,7 +60,7 @@ if blocks
         meta(name="twitter:image", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
 
-unless block && block.has('image')
+unless block && block.has('image') && !blocks
   meta(name="twitter:card", content="summary_large_image")
   meta(name="twitter:image", content="#{sd.IMAGE_PATH}feynman-arena.png")
   meta(property="og:image" content="#{sd.IMAGE_PATH}feynman-arena.png")
