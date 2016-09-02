@@ -52,14 +52,14 @@ else
   meta(property="og:url" content="https://www.are.na")
 
 if blocks
-  meta(name="twitter:card", content="photo")
+  meta(name="twitter:card", content="summary_large_image")
   - var filtered = _.filter(blocks, function(block){ return block.has('image'); })
   each block, index in filtered.slice(0,4)
     if block.has('image')
-      meta(name="twitter:image#{index}", content="#{block.get('image').display.url}")
+      meta(name="twitter:image", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
 
 unless block && block.has('image')
-  meta(name="twitter:card", content="Arena is a platform for private and collaborative research where you can save links, images, and files and organize them into collections.")
+  meta(name="twitter:card", content="summary_large_image")
   meta(name="twitter:image", content="#{sd.IMAGE_PATH}feynman-arena.png")
   meta(property="og:image" content="#{sd.IMAGE_PATH}feynman-arena.png")
