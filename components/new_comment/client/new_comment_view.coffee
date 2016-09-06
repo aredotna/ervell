@@ -14,6 +14,7 @@ module.exports = class NewCommentView extends Backbone.View
   events:
     'click .new-comment__submit': 'addComment'
     'click' : 'checkClick'
+    'keydown .new-comment__field' : 'onKeyDown'
 
   initialize: (options)->
     { @block_id, @comments, @autoRender } = options
@@ -25,6 +26,11 @@ module.exports = class NewCommentView extends Backbone.View
 
   fieldIsEmpty: ->
     @$input.val() is ""
+
+  onKeyDown: (e)->
+    if e.keyCode is 13 and e.shiftKey
+      @addComment()
+      return false
 
   addComment: ->
     if not @fieldIsEmpty()
