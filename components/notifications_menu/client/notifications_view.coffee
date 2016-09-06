@@ -1,3 +1,4 @@
+{ extend } = require 'underscore'
 Backbone = require 'backbone'
 DropdownView = require '../../dropdown/client/dropdown_view.coffee'
 mediator = require '../../../lib/mediator.coffee'
@@ -6,7 +7,12 @@ template = -> require('../templates/_dropdown_content.jade') arguments...
 
 module.exports = class NotificationsView extends DropdownView
 
+  events:
+    'tap .js-dropdown-trigger' : 'openNotifications'
+
   initialize: ->
+    @desktopEvents = extend @desktopEvents, @events
+
     super
 
     mediator.on 'notifications:synced', @maybeSetNotifications, @
@@ -22,6 +28,9 @@ module.exports = class NotificationsView extends DropdownView
   openDropdown: ->
     super
     @clearNotifications()
+
+  openNotifications: ->
+    window.location.href = "#{sd.APP_URL}/notifications"
 
   toggleDropdown: ->
     super

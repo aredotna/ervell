@@ -26,13 +26,10 @@ module.exports = class UserMenuView extends DropdownView
     @_setMode mode
 
   switchMode: (e) ->
-    console.log 'switchMode', $(e.currentTarget).data 'mode'
     @_setMode $(e.currentTarget).data 'mode'
 
   _setMode: (mode)->
-    console.log '_setMode', mode
     return unless mode is 'list' or mode is 'grid'
-    console.log 'should set mode'
     @model.set view_mode: mode
     @$el.removeClass 'dropdown--is_active'
     @$('.view-menu__selected').attr 'data-glyph', @glyphs[mode]

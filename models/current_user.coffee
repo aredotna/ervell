@@ -18,6 +18,8 @@ module.exports = class CurrentUser extends User
     mediator.on 'current_user:prefetched', @subscribeToPusherEvents, @
     super
 
+  href: -> "#{sd.APP_URL}/#{@get('slug')}"
+
   url: -> "#{sd.API_URL}/accounts"
 
   sync: (method, model, options = {}) ->
