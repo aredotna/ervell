@@ -1,4 +1,5 @@
 @require '../variables'
+@require '../../dropdown/stylesheets'
 
 #layout-header
   position fixed
@@ -185,27 +186,11 @@ privacy-color('.search__results__result--privacy-', color)
 
 .user-avatar
   height topbar_h
-  &.has-notifications .notifications__flag
-    display block
-
-.notifications__flag
-  display none
-  position absolute
-  width 18px
-  height 18px
-  margin 10px 0 0 12px
-  font-size 11px
-  color white
-  line-height 18px
-  font-weight bold
-  text-align center
-  z-index header_z
-  background-color alert
 
 .new-channel-dropdown
   display inline-block
 
-  .dropdown--menu__trigger:after
+  .dropdown--menu__padder:after
     content ""
 
 .new-channel-btn
@@ -233,103 +218,18 @@ privacy-color('.search__results__result--privacy-', color)
   vertical-align top
   margin -1px 0 0 6px
 
-.dropdown--menu
-  cursor pointer
-  padding 0 unit 0 0
-
-.dropdown--menu--user
-  padding 0 unit 0 0
-
-.dropdown
-  position absolute
-  display none
-  top topbar_h
-  right 0
-  margin 0
-  padding 14px 12px 0 0
-  font-size 0.9em
-  text-align left
-  border-radius 0px
-  z-index 3001
-  background-color transparent
-
-  &.dropdown--size
-    width 310px
-    right 0
-
-
-.dropdown__inner
-  border 1px solid lightgray
-  background-color #fff
-
-.dropdown__section
-  font-size 1.2em
-  padding 18px 20px 12px 20px
-  border-top 1px solid secondbackgroundgray
-
-.dropdown__link
-  display block
-  font-weight bold
-  line-height: 1.5em;
-  padding-bottom 6px
-
-  &:not(.dropdown__link--channels):hover
-    a
-      color hovergray
-
-.dropdown__text--small
-  padding 0 0 0 11px
-  font-size 13px
-  line-height 1.9em
-  color lightgray
-
-.dropdown__link--profile
-  border 0
-
-.dropdown__link--premium
-  color success
-
-.dropdown__link--notifications
-  &.has-notifications
-    .notifications--count
-      color alert
-
-  .notifications--count
-    position relative
-    display inline
-
-.dropdown__icon
-  float right
-  height 100%
-  color #CACACA
-
-  .iconic[data-glyph]:before
-    font-size 14px
-
-.dropdown--is_active
-  .dropdown
-    display block
-
-  &:after
-    position absolute
-    width 300px
-
-.dropdown--menu__trigger:after
-  content ""
-
 @media (max-width: 500px)
-
   .header--icon:hover
     .glass-icon
       opacity 1
     .logo-icon
       opacity 0
 
-  .logo-icon.dropdown--menu__trigger
+  .logo-icon.dropdown--menu__padder
     height topbar_h
     padding 0 15px 0 15px
 
-  .body--bare .logo-icon.dropdown--menu__trigger
+  .body--bare .logo-icon
     padding 0px
 
   .layout-header__search__results
@@ -374,3 +274,4 @@ privacy-color('.search__results__result--privacy-', color)
     height auto
     margin 0
     padding 0
+
