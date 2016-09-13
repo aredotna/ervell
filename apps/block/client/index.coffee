@@ -14,6 +14,8 @@ EditableAttributeView = require '../../../components/editable_attribute/client/e
 template =-> require('../templates/_block.jade') arguments...
 connectionsTemplate =-> require('../templates/_connections.jade') arguments...
 
+class State extends Backbone.Model
+
 module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   events:
@@ -27,8 +29,9 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'content'     : 'markdown'
 
   initialize: (options)->
-    @tab = options.tab || 'info'
+    @state = new State tab: options.tab || 'info'
     @user = CurrentUser.orNull()
+    @postRendered = false
 
     mediator.on "lightbox:slide:next", => @slide 'next'
     mediator.on "lightbox:slide:prev", => @slide 'prev'
@@ -46,9 +49,9 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     e.stopPropagation()
 
     $('.tab--container__nav__item.is-active, .tab-content.is-active').removeClass 'is-active'
-    tab = $(e.currentTarget).data 'tab'
+    @state.set tab: $(e.currentTarget).data 'tab'
     $(e.currentTarget).addClass 'is-active'
-    $("#tab-#{tab}").addClass 'is-active'
+    $("#tab-#{@state.get('tab')}").addClass 'is-active'
 
     @scrollToTabs()
 
@@ -98,7 +101,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
       block: @model
       md: markdown
       comments: @comments
-      tab: @tab
+      tab: @state.get 'tab'
       user: @user
       connections: @model.connections()
 
@@ -110,9 +113,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     initComments @model, @$('#tab-comments .tab-content__inner')
     _.defer => IconicJS().inject('img.iconic')
 
-    unless @tab is 'info'
-      _.defer => @scrollToTabs()
-
     for attribute, kind of @editableAttributes
       new EditableAttributeView
         model: @model
@@ -120,6 +120,11 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
         _attribute: attribute
         _kind: kind
         wait: true
+
+    if @state.get('tab') isnt 'info' and not @postRendered
+      _.defer =>
+        @scrollToTabs()
+        @postRendered = true
 
   scrollToTabs: ->
     $modal = $('.js-modalize-dialog')
