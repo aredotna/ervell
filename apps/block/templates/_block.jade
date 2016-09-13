@@ -50,27 +50,25 @@
           if block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link'
             |  &mdash; #[a(href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}" target="_blank") (Find original)]
 
-      .block-meta.block-meta--attribution
-        .block-date
-          | Added #{block.createdAtAgo()}
-          |  by
-          a(href="/#{block.get('user').slug}")  #{block.get('user').username}
-        if block.createdAtAgo() != block.updatedAtAgo()
-          .block-date Last updated #{block.updatedAtAgo()}
+      include _attribution
 
     #tab-connections.tab-content(class=tab == 'connections' ? 'is-active' : '')
       .tab-content__inner
         .tab-connections-list
-          include ./_connections
+          include _connections
         if user && user.id
           .button--base.button--base--connect.js-connect-button Connect &rarr;
           .block-connect-container
             //- rendered on the client
 
+      include _attribution
+
     #tab-comments.tab-content(class=tab == 'comments' ? 'is-active' : '')
       .tab-content__inner
         if comments
           include ../../../components/comments/templates/index
+
+      include _attribution
 
 
 
