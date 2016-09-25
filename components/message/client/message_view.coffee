@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require("sharify").data
 Cookies = require 'cookies-js'
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 template = -> require("../templates/announcement.jade") arguments...
 
@@ -26,5 +27,6 @@ module.exports = class MessageView extends Backbone.View
 
   remove: ->
     # # user gets the message
+    analytics.track.click "Message closed", id: @model.id
     Cookies.set @model.id, true
     super

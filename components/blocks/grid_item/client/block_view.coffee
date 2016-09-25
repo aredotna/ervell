@@ -142,6 +142,7 @@ module.exports = class BlockView extends Backbone.View
     @remove()
 
   hideTip: ->
+    analytics.track.click "Block tip closed", id: @model.id
     Cookies.set @model.id, true
     @model.collection.remove @model
     @remove()

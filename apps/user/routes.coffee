@@ -19,7 +19,7 @@ tips = require './tips.coffee'
 
 showTips = (req, res) ->
   (req.user?.id is res.locals.author.id and
-    req.user.get('show_tour') isnt false
+    req.user?.get('show_tour') isnt false and
     res.locals.sd.AFTER_ONBOARDING is 'profile')
 
 addTips = (req) ->
