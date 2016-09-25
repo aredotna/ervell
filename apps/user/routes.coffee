@@ -18,15 +18,12 @@ tips = require './tips.coffee'
     complete: -> next()
 
 showTips = (req, res) ->
-  (req.user?.id is res.locals.author.id) and
-    req.user.get('show_tour') is true
-    res.locals.sd.AFTER_ONBOARDING is 'profile'
+  (req.user?.id is res.locals.author.id and
+    req.user.get('show_tour') isnt false
+    res.locals.sd.AFTER_ONBOARDING is 'profile')
 
 addTips = (req) ->
-  _.reject tips, (tip) ->
-    cookie = req.cookies[tip.id]
-    console.log 'cookie', cookie
-    cookie
+  _.reject tips, (tip) -> req.cookies[tip.id]
 
 @user = (req, res, next) ->
   return next() unless res.locals.author
