@@ -17,9 +17,9 @@
 module.exports =
   # Set up so we can slowly activate new_homepage_buckets
   # as we are comfortable with the load and performance
-  onboarding:
-    key: 'onboarding'
+  after_onboarding:
+    key: 'after_onboarding'
     outcomes:
-      old: 5
-      new: 5
+      explore: 5
+      profile: 5
     dimension: 'dimension1'
