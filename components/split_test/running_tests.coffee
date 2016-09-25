@@ -1,4 +1,5 @@
 # Centralizes configuration for currently running split tests
+# Duplicated from https://github.com/artsy/force/tree/master/components/split_test
 #
 # eg.
 # header_design:
