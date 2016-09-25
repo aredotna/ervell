@@ -34,9 +34,6 @@ module.exports = class SplitTest
   cssClass: ->
     "is-splittest-#{@key}--#{@outcome()}"
 
-  admin: ->
-    CURRENT_USER?.type is 'Admin'
-
   toss: ->
     _.sample _.flatten _.map @outcomes, (probability, outcome) ->
       _.times(probability, -> outcome)
@@ -47,7 +44,7 @@ module.exports = class SplitTest
     , 0
 
   outcome: ->
-    outcome = if (@admin() and @edge?) then @edge else @get()
+    outcome = @get()
     if outcome?
       @set outcome
     else

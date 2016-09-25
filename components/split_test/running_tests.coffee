@@ -22,4 +22,4 @@ module.exports =
     outcomes:
       explore: 5
       profile: 5
-    dimension: 'dimension1'
+    dimension: 'dimension3'
