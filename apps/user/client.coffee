@@ -50,9 +50,6 @@ module.exports.init = ->
     unless ( blocks.any (block) -> block.get('class') is 'Tip' )
       mediator.shared.current_user.save show_tour: false
 
-  unless ( blocks.any (block) -> block.get('class') is 'Tip' )
-    mediator.shared.current_user.save show_tour: false
-
   new PathView
     el: $('section.path--header')
     model: user
