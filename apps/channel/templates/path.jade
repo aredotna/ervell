@@ -2,7 +2,10 @@ extends ../../../components/path/templates/path
 
 block path
   li.path__username
-    a(href="/" + author.get('slug'))=author.get('username')
+    a(href="/" + author.get('slug'))
+      | #{author.get('username')}
+    if channel.get('collaborator_count') > 1
+      | &nbsp;(+#{channel.get('collaborator_count')})
   li.path__channel.channel(class="privacy-#{channel.get('status')}")
     if (followers || following)
       a(href="#{channel.href()}")= channel.get('title')
