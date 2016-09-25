@@ -36,7 +36,7 @@ module.exports = class NewUserMessageView extends Backbone.View
   initialize: ({ @container })->
     hasReadMessages = _.every @messages, (message) -> Cookies.get message.id
     # if they all have cookies, update the user, don't show the tour
-    if hasReadMessages
+    if hasReadMessages and mediator.shared.current_user.get('show_tour') is true
       mediator.shared.current_user.save show_tour: false
     else
       for message in @messages
