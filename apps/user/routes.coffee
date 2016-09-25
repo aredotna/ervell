@@ -1,10 +1,12 @@
+_ = require 'underscore'
+Backbone = require 'backbone'
 User = require "../../models/user"
 UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
 Channel = require "../../models/channel"
 sd = require("sharify").data
 cache = require "../../lib/cache.coffee"
-_ = require 'underscore'
+tips = require './tips.coffee'
 
 @fetchAuthor = (req, res, next) ->
   author = new User id: req.params.username
@@ -14,6 +16,14 @@ _ = require 'underscore'
       res.locals.author = author
       res.locals.sd.USER = author.toJSON()
     complete: -> next()
+
+showTips = (req, res) ->
+  (req.user?.id is res.locals.author.id and
+    req.user?.get('show_tour') isnt false and
+    res.locals.sd.AFTER_ONBOARDING is 'profile')
+
+addTips = (req) ->
+  _.reject tips, (tip) -> req.cookies[tip.id]
 
 @user = (req, res, next) ->
   return next() unless res.locals.author
@@ -40,6 +50,7 @@ _ = require 'underscore'
       auth_token: req.user?.get('authentication_token')
     error: (m, err) -> next err
     success: ->
+      blocks.unshift(addTips(req)) if showTips(req, res)
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render "index", author: res.locals.author, blocks: blocks.models
 

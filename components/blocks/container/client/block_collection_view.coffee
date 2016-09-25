@@ -86,7 +86,6 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   initBlockView: (index, el) =>
     $block = $(el)
-
     block = @blocks().get $block.data('id')
 
     if block

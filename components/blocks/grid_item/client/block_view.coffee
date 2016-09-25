@@ -8,6 +8,7 @@ FollowButtonView = require '../../../follow_button/client/follow_button_view.cof
 User = require '../../../../models/user.coffee'
 { trackOutboundLink } = require '../../../../lib/analytics.coffee'
 analytics = require '../../../../lib/analytics.coffee'
+Cookies = require 'cookies-js'
 EditableAttributeView = require '../../../editable_attribute/client/editable_attribute_view.coffee'
 
 blockTemplate = -> require('../templates/block.jade') arguments...
@@ -22,6 +23,7 @@ module.exports = class BlockView extends Backbone.View
     'click .grid__block__connect-btn'   : 'loadConnectView'
     'click .grid__block__delete-block'  : 'confirmDestroy'
     'click .tooltip__choice' : 'confirmChoice'
+    'click .grid__block--tip__close a' : 'hideTip'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -137,6 +139,12 @@ module.exports = class BlockView extends Backbone.View
 
     analytics.track.click "Block removed from channel"
 
+    @remove()
+
+  hideTip: ->
+    analytics.track.click "Block tip closed", id: @model.id
+    Cookies.set @model.id, true
+    @model.collection.remove @model
     @remove()
 
   postRender: ->

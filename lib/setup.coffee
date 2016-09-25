@@ -20,6 +20,7 @@ localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
 viewMode = require './middleware/view_mode'
 isInverted = require '../components/night_mode/middleware'
+splitTestMiddleware = require '../components/split_test/middleware'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
@@ -131,6 +132,7 @@ module.exports = (app) ->
   app.use artsyError.helpers
   app.use arena_pp
   app.use localsMiddleware
+  app.use splitTestMiddleware
   app.use ensureSSL
   app.use isInverted
   app.use viewMode

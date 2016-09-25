@@ -13,7 +13,6 @@ module.exports = class AvatarView extends Backbone.View
   initialize: ({ @policy })->
     @render()
     @setupFileDrop()
-    mediator.shared.current_user_channel.bind_all @updateAvatar, @
 
   updateAvatar: ->
     $.ajax
