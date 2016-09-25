@@ -24,6 +24,7 @@ module.exports = class NewChannelView extends DropdownView
       length: 0
 
     @listenTo @model, 'change:status', @toggleVisibility
+    @listenTo mediator, 'new:channel', @openDropdown
 
     @render()
 
