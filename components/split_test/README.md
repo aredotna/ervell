@@ -65,17 +65,3 @@ test = new SplitTest req, res, testConfig
 test.set 'old'
 res.locals.sd[testConfig.key.toUpperCase()] = 'old' # manually set the Sharify variable
 ```
-
-## Forcing a test down a specific path via url params
-
-Logged in Artsy admins can override the outcome of a particular split test by passing query params.
-
-For forcing the test `header_design` to have the outcome `old`:
-http://www.artsy.net?split_test[header_design]=old
-
-## Tracking experiments
-```coffeescript
-# On the client
-splitTest = require '../../../components/split_test/index.coffee'
-test = splitTest('header_design').view()
-```
