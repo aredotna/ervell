@@ -18,6 +18,7 @@ Notifications = require "../../collections/notifications.coffee"
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
+setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 
 module.exports = ->
@@ -132,6 +133,7 @@ setupAnalytics = ->
   return if sd.SAVE
   analytics ga: ga
   analytics.registerCurrentUser()
+  setupSplitTests()
   unless (sd.CHANNEL and sd.CHANNEL.status is 'private')
     analytics.trackPageview()
 
