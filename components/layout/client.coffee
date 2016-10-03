@@ -149,6 +149,12 @@ initShortCuts = ->
   km 'right', -> mediator.trigger 'lightbox:slide:next'
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
+  km 'l',     ->
+    mediator.shared.state.set view_mode: 'list'
+    window.location.reload()
+  km 'g',     ->
+    mediator.shared.state.set view_mode: 'grid'
+    window.location.reload()
 
   initNightMode()
 
