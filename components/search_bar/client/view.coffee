@@ -42,7 +42,10 @@ module.exports = class SearchBarView extends Backbone.View
   fullResults: (e)->
     e.stopPropagation()
     e.preventDefault()
-    document.location.href = "/search/#{@getQuery()}"
+    if @getQuery()
+      document.location.href = "/search/#{@getQuery()}"
+    else
+      document.location.href = "/explore?sort=random"
 
   reset: ->
     # nothing
