@@ -63,6 +63,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   openChannel: (e) ->
     href = $(e.currentTarget).attr('href')
+    target = $(e.currentTarget).attr('target') || '_self'
 
     if e.metaKey || e.ctrlKey
       window.open href, '_blank'
