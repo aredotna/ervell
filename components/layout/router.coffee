@@ -46,6 +46,7 @@ module.exports = class Router extends Backbone.Router
 
   showBlock: (id, tab)->
     return if (sd.CURRENT_PATH.indexOf('block') > 0) && (sd.CURRENT_PATH.indexOf('blocks') < 0)
+
     block = new Block {id: id}
     view = new FullBlockView model: block, tab: tab
 

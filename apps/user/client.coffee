@@ -1,21 +1,12 @@
-#
-# The client-side code for a User Profile
-#
-
-Backbone = require "backbone"
-Backbone.$ = $
+sd = require("sharify").data
 _ = require 'underscore'
 scrollFrame = require 'scroll-frame'
-sd = require("sharify").data
 mediator = require '../../lib/mediator.coffee'
 User = require "../../models/user.coffee"
 UserBlocks = require '../../collections/user_blocks.coffee'
 FollowBlocks = require '../../collections/follow_blocks.coffee'
-InfiniteView = require '../../components/pagination/infinite_view.coffee'
-Filter = require '../../components/filter/index.coffee'
 PathView = require '../../components/path/client/path_view.coffee'
 MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
-UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
 setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->
@@ -45,6 +36,8 @@ module.exports.init = ->
   _.extend(options, { sort: sd.SORT }) if sd.SORT
 
   setupBlockCollection options
+
+  scrollFrame ".profile-contents span.grid__block__link"
 
   blocks.on 'remove', ->
     unless ( blocks.any (block) -> block.get('class') is 'Tip' )

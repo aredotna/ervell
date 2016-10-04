@@ -1,6 +1,7 @@
 Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
+scrollFrame = require 'scroll-frame'
 mediator = require '../../lib/mediator.coffee'
 Block = require '../../models/block.coffee'
 Channel = require '../../models/channel.coffee'
@@ -9,7 +10,6 @@ CurrentUser = require '../../models/current_user.coffee'
 setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
-Filter = require '../../components/filter/index.coffee'
 Bp = require('../../lib/vendor/backpusher.js')
 { initChannelPath } = require './client/channel_path_view.coffee'
 
@@ -104,6 +104,8 @@ module.exports.init = ->
     collection: blocks
     mode: 'skeleton'
     channel: channel
+
+  scrollFrame ".channel-contents span.grid__block__link"
 
   new ChannelView
     el: $ "body"

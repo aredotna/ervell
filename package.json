@@ -41,7 +41,7 @@
     "query-params": "*",
     "redis": "*",
     "s3-policy": "*",
-    "scroll-frame": "1.0.0",
+    "scroll-frame": "git://github.com/broskoski/scroll-frame",
     "serve-favicon": "^2.3.0",
     "sharify": "*",
     "sortablejs": "^1.1.1",
