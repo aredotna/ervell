@@ -62,7 +62,6 @@ module.exports = class SaveConnectView extends ConnectView
     @sendExpandMsg()
 
   handleTab: (e) ->
-    console.log 'ehere'
     e.preventDefault()
     e.stopPropagation()
 
