@@ -1,0 +1,91 @@
+.home
+  a.btn
+    display inline-block
+    text-align center
+    font-weight bold
+    border 2px solid black
+    color black
+    width unit * 9
+    font-size 20px
+    line-height 50px
+    &:hover
+      background-color black
+      color white
+    &--white
+      border 2px solid white
+      color white
+      background-color transparent
+      &:hover
+        background-color white
+        color textgray
+
+  &--splash
+    width 100%
+    height 80vh
+    bg '/images/home/hero.jpg'
+    background-size 60%
+    background-position right center
+    margin-top topbar_h * 2
+
+    &__copy
+      position relative
+      top 50%
+      transform translateY(-50%)
+      width (unit * 22)
+      padding-left unit * 3
+      color black
+
+      h1
+        font-weight normal
+        font-size 50px
+
+  &--features
+    width 900px
+    margin (unit * 2) auto (unit * 4)
+    h2
+      text-align center
+      font-weight normal
+      color black
+      margin-top 0
+    &__row
+      padding-top unit * 4
+      &__copy
+        display inline-block
+        width 330px
+        padding-right unit * 2
+        vertical-align top
+        line-height unit
+        h2
+          text-align left
+          padding-bottom unit
+        ul
+          ul()
+          padding-left 0
+      &__thumbnails
+        display inline-block
+        width 570px
+        img
+          width 170px
+          border 1px solid textgray
+          margin-right (unit / 2)
+
+  &--posts
+    &__post
+      background-position center center
+      background-size cover
+      height 590px
+      h1
+        font-size 50px
+        line-height 60px
+        font-weight normal
+        margin 0
+      &__overlay
+        background-color rgba(0,0,0,0.35)
+        width 100%
+        height 100%
+        &__content
+          position relative
+          top 50%
+          transform translateY(-50%)
+          color white
+          text-align center

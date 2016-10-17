@@ -1,0 +1,34 @@
+.header--info
+  position absolute
+  top 0
+  left 0
+  height topbar_h
+  width 100%
+  background-color white
+  padding 0
+  display flex
+  justify-content space-between
+  align-items center
+  z-index header_z
+  transform translate3d(0, 0, 1px)
+
+  &__menu
+    a
+      font-weight bold
+      margin 0 unit
+
+  &__logo
+    cursor pointer
+    height topbar_h
+    font-weight bold
+    color black
+
+    svg
+      width topbar_h
+      height topbar_h
+      fill black
+      padding 10px 8px 13px 10px
+      vertical-align middle
+
+    span
+      margin-top 1px

@@ -1,14 +1,10 @@
 _ = require 'underscore'
-Backbone = require 'backbone'
+{ Collection } = require 'backbone'
 ExploreBlocks = require '../../collections/explore_blocks'
 sd = require('sharify').data
-numeral = require 'numeraljs'
 
-class Statistics extends Backbone.Model
-  url: -> "#{sd.API_URL}/utilities/statistics"
-
-  format: (attr) ->
-    numeral(@get(attr)).format('0,0')
+class Posts extends Collection
+  url: -> "#{sd.BLOG_URL}/featured.json"
 
 @index = (req, res, next) ->
   res.locals.sd.CURRENT_PATH = "/"
@@ -16,11 +12,12 @@ class Statistics extends Backbone.Model
     res.locals.sd.FEED_TYPE = 'primary'
     res.render 'feed', path: 'Feed'
   else
-    stats = new Statistics
-    stats.fetch
-      complete: ->
+    posts = new Posts
+    posts.fetch
+      complete: (posts) ->
+        res.locals.sd.POSTS = posts
         res.render 'home/index',
-          stats: stats
+          posts: posts
 
 @notifications = (req, res, next) ->
   res.locals.sd.FEED_TYPE = 'notifications'

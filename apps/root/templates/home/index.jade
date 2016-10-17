@@ -1,15 +1,13 @@
-extends ../../../../components/layout/index--bare
+extends ../../../../components/layout/index--info
 
 block vars
   - extraClasses = 'body--home'
 
 block body
-  include ./sections/landing
-  include ./sections/pitch
-  include ./sections/examples
-  include ./sections/team
-  include ./sections/labs
-  include ./sections/footer
+  .home
+    include new_sections/splash.jade
+    include new_sections/features.jade
+    include new_sections/posts.jade
 
 block scripts
   script( src=asset('/assets/root.js') )

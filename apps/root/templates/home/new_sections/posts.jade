@@ -1,0 +1,15 @@
+if posts && posts.length
+  .home--posts
+    each post in posts
+      - img = post.image
+      .home--posts__post(style="background-image:url('#{img}')")
+        .home--posts__post__overlay
+          .home--posts__post__overlay__content
+            h1 #{post.category}:
+            h1= post.title
+            br
+            br
+            br
+            br
+            a(href="#{sd.BLOG_URL}#{post.url}").btn.btn--white Read more
+

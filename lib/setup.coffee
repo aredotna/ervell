@@ -8,7 +8,7 @@
 SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
 COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
 PUSHER_KEY, IMAGE_PROXY_URL, GOOGLE_ANALYTICS_ID,
-STRIPE_PUBLISHABLE_KEY } = config = require "../config"
+STRIPE_PUBLISHABLE_KEY, BLOG_URL } = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -47,6 +47,7 @@ sharify.data =
   GOOGLE_ANALYTICS_ID: GOOGLE_ANALYTICS_ID
   IMAGE_PROXY_URL: IMAGE_PROXY_URL
   STRIPE_PUBLISHABLE_KEY: STRIPE_PUBLISHABLE_KEY
+  BLOG_URL: BLOG_URL
 
 # current user management
 CurrentUser = require '../models/current_user'
