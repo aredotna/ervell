@@ -1,23 +1,12 @@
 _ = require 'underscore'
-{ Collection } = require 'backbone'
-ExploreBlocks = require '../../collections/explore_blocks'
 sd = require('sharify').data
-
-class Posts extends Collection
-  url: -> "#{sd.BLOG_URL}/featured.json"
+ExploreBlocks = require '../../collections/explore_blocks'
 
 @index = (req, res, next) ->
+  return next() unless req.user
   res.locals.sd.CURRENT_PATH = "/"
-  if req.user
-    res.locals.sd.FEED_TYPE = 'primary'
-    res.render 'feed', path: 'Feed'
-  else
-    posts = new Posts
-    posts.fetch
-      complete: (posts) ->
-        res.locals.sd.POSTS = posts
-        res.render 'home/index',
-          posts: posts
+  res.locals.sd.FEED_TYPE = 'primary'
+  res.render 'feed', path: 'Feed'
 
 @notifications = (req, res, next) ->
   res.locals.sd.FEED_TYPE = 'notifications'

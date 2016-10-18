@@ -139,7 +139,8 @@ module.exports = (app) ->
   app.use viewMode
 
   # Mount apps
-  app.use require "../apps/root"
+  app.use require "../apps/feed"
+  app.use require "../apps/home"
   app.use require "../apps/registration"
   app.use require "../apps/getting_started"
   app.use require "../apps/tools"

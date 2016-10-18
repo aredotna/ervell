@@ -1,8 +1,3 @@
-#
-# /
-# (root requests)
-#
-
 _ = require "underscore"
 express = require "express"
 routes = require "./routes"
