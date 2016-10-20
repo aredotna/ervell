@@ -1,3 +1,3 @@
 
 $ ->
-  require("../apps/root/client.coffee").init()
+  require("../apps/feed/client.coffee").init()

@@ -141,6 +141,7 @@ module.exports = (app) ->
   # Mount apps
   app.use require "../apps/feed"
   app.use require "../apps/home"
+  app.use require "../apps/blog"
   app.use require "../apps/registration"
   app.use require "../apps/getting_started"
   app.use require "../apps/tools"
