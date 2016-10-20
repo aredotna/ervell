@@ -1,18 +1,15 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/index--info
 
 block vars
-  - extraClasses = 'body--bare body--home'
+  - extraClasses = 'no-messages body--static'
 
 block styles
   link( type='text/css', rel='stylesheet', href=asset('/assets/about.css') )
 
 block body
-  include ../../root/templates/home/sections/pitch
-  include ../../root/templates/home/sections/examples
+  include ./sections/pitch
+  include ./sections/team
   include ./sections/principles
-  include ../../root/templates/home/sections/team
-  include ../../root/templates/home/sections/labs
-  include ../../root/templates/home/sections/footer
-
-block scripts
-  script( src=asset('/assets/about.js') )
+  include ./sections/labs
+  include ./sections/api
+  include ./sections/contact
