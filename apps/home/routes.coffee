@@ -8,6 +8,6 @@ class Posts extends Collection
 @index = (req, res, next) ->
   posts = new Posts
   posts.fetch
-    success: ->
+    complete: ->
       res.locals.sd.POSTS
       res.render 'index', posts: posts.models
