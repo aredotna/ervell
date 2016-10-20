@@ -3,11 +3,14 @@
 header.header--info
   a(href=homeHref).header--info__logo
     include ../../../../public/images/arena-mark.svg
-    | #[span Are.na]
+    | #[span Are.na&nbsp;]
+    if title
+      | #[span / #{title}]
   .header--info__menu
     unless loggedIn
       a(data-client="auth" href="/sign_up") Sign up
     a(href="/about") About
     a(href="/premium") Premium
     a(href="/blog") Blog
-    a(data-client="auth" href="/log_in") Log in
+    unless loggedIn
+      a(data-client="auth" href="/log_in") Log in
