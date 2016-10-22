@@ -1,4 +1,5 @@
 - loggedIn = user && user.has('username')
+- isCurrentPath = function(path) { return sd.CURRENT_PATH.indexOf(path) > -1 }
 
 header.header--info
   a(href=homeHref).header--info__logo
@@ -9,8 +10,8 @@ header.header--info
   .header--info__menu
     unless loggedIn
       a(data-client="auth" href="/sign_up") Sign up
-    a(href="/about") About
-    a(href="/premium") Premium
-    a(href="/blog") Blog
+    a(data-slug="about" href="/about" class=isCurrentPath('about') ? 'selected' : '') About
+    a(data-slug="pricing" href="/pricing" class=isCurrentPath('pricing') ? 'selected' : '') Pricing
+    a(data-slug="blog" href="/blog" class=isCurrentPath('blog') ? 'selected' : '') Blog
     unless loggedIn
       a(data-client="auth" href="/log_in") Log in
