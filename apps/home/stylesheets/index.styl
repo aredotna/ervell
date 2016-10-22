@@ -25,32 +25,50 @@
     margin-top topbar_h * 2
     position relative
     overflow hidden
-
     &__image
       position absolute
       top 50%
       right -(unit)
       transform translateY(-50%)
       width 60vw
-      box-shadow 0px 0px 20px rgba(68,68,68,0.1)
       img
+        box-shadow 0px 0px 20px rgba(68,68,68,0.1)
         max-width 100%
-
     &__copy
       position relative
       top 50%
       transform translateY(-50%)
       width (unit * 22)
-      padding-left unit * 3
+      padding 0 (unit * 3)
       color black
-
       h1
         font-weight normal
         font-size 50px
+    +below(1100px)
+      height auto
+      &__copy
+        width 100%
+        position static
+        transform none
+        text-align center
+        margin-bottom (unit * 4)
+        padding 0 (unit)
+      &__image
+        position static
+        width 100%
+        transform none
+        img
+          display block
+          width 80%
+          margin 0 auto
+      +mobile()
+        &__copy h1
+          font-size 30px
 
   &--features
-    width 900px
+    max-width 900px
     margin (unit * 2) auto (unit * 4)
+    font-size 16px
     h2
       text-align center
       font-weight normal
@@ -77,6 +95,21 @@
           width 170px
           border 1px solid textgray
           margin-right (unit / 2)
+    +below(900px)
+      margin-top (unit * 4)
+      padding unit
+      &__row
+        &__thumbnails
+          max-width 100%
+          white-space nowrap
+          overflow scroll
+          margin-top unit
+    +mobile()
+      img
+        display none
+      &__row
+        &__copy
+          padding-right 0
 
   &--posts
     &__post
@@ -98,3 +131,9 @@
           transform translateY(-50%)
           color white
           text-align center
+
+      +below(900px)
+        height 390px
+        h1
+          font-size 30px
+          line-height 40px
