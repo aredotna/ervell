@@ -1,7 +1,10 @@
+@require '../../../node_modules/rupture/rupture'
 @require 'labs'
 @require 'graph'
 @require 'pricing'
 @require 'features'
+
+rupture.mobile-cutoff = 500px
 
 .body--static
   background-color #fff
@@ -44,9 +47,5 @@
   p
     p()
     margin-bottom unit
-
-  +tablet()
-    padding unit
-
-  +mobile()
-    padding unit
+  +below(900px)
+    padding (unit)

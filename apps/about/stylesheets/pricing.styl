@@ -11,15 +11,9 @@ premiumWidth = 900px
     vertical-align top
     padding (unit / 2)
     color black
-
-    +tablet()
+    +below(premiumWidth)
       display block
       margin unit auto
-
-    +mobile()
-      display block
-      margin unit auto
-
     &__title
       text-align center
       margin-bottom unit * 2
