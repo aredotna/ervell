@@ -10,6 +10,7 @@
   justify-content space-between
   align-items center
   z-index header_z
+  font-size 16px
   transform translate3d(0, 0, 1px)
 
   &__menu
@@ -17,9 +18,45 @@
       font-weight bold
       margin 0 unit
       border-bottom none !important
-
       &.selected
         color black
+    +mobile()
+      display none
+
+  &__mobile-menu
+    display none
+    +mobile()
+      display block
+      &__trigger
+        color black
+        padding-right unit
+        &__close
+          display none
+        &__menu
+          display block
+      &__contents
+        display none
+        position fixed
+        width 100%
+        top topbar_h
+        left 0
+        background-color white
+        a
+          display block
+          font-weight bold
+          color black
+          padding (unit / 2)
+        a:active
+          background-color black
+          color white
+      &.is-open .header--info__mobile-menu
+        &__contents
+          display block
+        &__trigger
+          &__close
+            display block
+          &__menu
+            display none
 
   &__logo
     cursor pointer
