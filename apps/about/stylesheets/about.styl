@@ -1,5 +1,7 @@
 @require 'labs'
 @require 'graph'
+@require 'pricing'
+@require 'features'
 
 .body--static
   background-color #fff
@@ -7,6 +9,11 @@
     margin (unit * 6) auto (unit * 3)
     text-align center
     max-width 600px
+  p
+
+  ul
+    margin 0
+    padding 0
   h1, h2
     text-align center
     antialiased()
@@ -18,6 +25,10 @@
     margin (unit * 2) 0 (unit * 4)
   h2
     margin (unit * 2) 0
+  img
+    max-width 100%
+    margin unit auto
+    display block
 
 .about-section
   max-width 600px
@@ -38,13 +49,5 @@
     p()
     margin-bottom unit
 
-@media (max-width:(block_width_mar * 3) + 16)
-  .body--static
-    p, h1
-      width 90%
-      margin-left 5%
-
-    .static__img
-      img
-        max-width 90%
-        left 5%
+  +below(900px)
+    padding (unit / 2)

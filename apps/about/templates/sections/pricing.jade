@@ -1,0 +1,42 @@
+.premium--status.abs-fill
+  .inner
+
+.about-section.about-section--premium
+  h2.center Pricing
+  .premium-tiers
+    .premium-tiers__tier.premium-tiers__tier--basic
+      .premium-tiers__tier__title Are.na
+      .premium-tiers__tier__price(class= user ? '' : 'selectable')
+        | Free
+        unless user
+          br
+          strong Sign up
+      .premium-tiers__tier__includes Includes
+      ul.premium-tiers__tier__features
+        li Multiple privacy settings
+        li Unlimited channels
+        li Unlimited blocks
+        li 25MB upload limit
+    .premium-tiers__tier.premium-tiers__tier--premium
+      .premium-tiers__tier__title Premium
+      .premium-tiers__tier__price(class= user && user.isPremium() ? '' : 'selectable')
+        if user && user.isPremium()
+          strong You are premium.
+        else
+          | $45 / year&nbsp;
+          br
+          strong Activate Premium
+      .premium-tiers__tier__includes Are.na +
+      ul.premium-tiers__tier__features
+        li Quick Search
+        li List view
+        li Hide from search engines
+        li Channel management tool
+        li Custom profile bio
+    .premium-tiers__tier.premium-tiers__tier--enterprise
+      .premium-tiers__tier__title Enterprise
+      .premium-tiers__tier__price.selectable: strong Contact Us
+      .premium-tiers__tier__includes Are.na + Premium +
+      ul.premium-tiers__tier__features
+        li Custom Domains
+        li White-label support
