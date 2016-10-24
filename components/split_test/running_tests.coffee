@@ -14,12 +14,4 @@
 # this should export empty Object
 # module.exports = {}
 
-module.exports =
-  # Set up so we can slowly activate new_homepage_buckets
-  # as we are comfortable with the load and performance
-  after_onboarding:
-    key: 'after_onboarding'
-    outcomes:
-      explore: 5
-      profile: 5
-    dimension: 'dimension3'
+module.exports = {}
