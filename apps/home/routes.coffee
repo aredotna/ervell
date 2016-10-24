@@ -7,8 +7,8 @@ class Posts extends Collection
 
 @index = (req, res, next) ->
   res.render 'index', posts: []
-  # posts = new Posts
-  # posts.fetch
-  #   complete: ->
-  #     res.locals.sd.POSTS
+  posts = new Posts
+  posts.fetch
+    complete: ->
+      res.locals.sd.POSTS
 
