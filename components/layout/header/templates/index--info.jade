@@ -5,8 +5,6 @@ header.header--info
   a(href=homeHref).header--info__logo
     include ../../../../public/images/arena-mark.svg
     | #[span Are.na&nbsp;]
-    if title
-      | #[span / #{title}]
   .header--info__menu
     unless loggedIn
       a(data-client="auth" href="/sign_up") Sign up
