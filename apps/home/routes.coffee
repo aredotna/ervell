@@ -6,9 +6,9 @@ class Posts extends Collection
   url: -> "#{sd.BLOG_URL}/featured.json"
 
 @index = (req, res, next) ->
-  res.render 'index', posts: []
   posts = new Posts
   posts.fetch
     complete: ->
-      res.locals.sd.POSTS
+      res.locals.sd.POSTS = posts
+      res.render 'index', posts: posts.models
 
