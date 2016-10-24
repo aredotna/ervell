@@ -1,13 +1,14 @@
 sd = require("sharify").data
 Backbone = require 'backbone'
 mediator = require '../../../lib/mediator.coffee'
+analytics = require '../../../lib/analytics.coffee'
 
 class PricingView extends Backbone.View
   price: 4500
 
   events:
     'click .premium-tiers__tier--basic .premium-tiers__tier__price' : 'openSignup'
-    'click .premium-tiers__tier--premium .premium-tiers__tier__price' : 'openPremium'
+    'click .premium-tiers__tier--premium .premium-tiers__tier__price.selectable' : 'openPremium'
     'click .premium-tiers__tier--enterprise .premium-tiers__tier__price' : 'openContact'
 
   initialize: ->
@@ -32,9 +33,34 @@ class PricingView extends Backbone.View
         amount: @price
       @$('.premium--status').addClass('is-active')
     else
-      window.location.href = "#{sd.APP_URL}/log_in?redirect-to=/tools/premium"
+      window.location.href = "#{sd.APP_URL}/log_in?redirect-to=/pricing"
 
     e.preventDefault()
+
+  handleToken: (token) =>
+    @$('.premium--status .inner').text "Registering your premium account..."
+    $.ajax
+      url: "#{sd.API_URL}/charges"
+      type: 'POST'
+      data:
+        stripeToken: token
+        coupon: sd.COUPON
+      success: (response) =>
+        @$('.premium--status').addClass('is-successful')
+        @$('.premium--status .inner').text "Registration successful."
+        analytics.track.submit 'User paid for pro account'
+        $.ajax
+          url: '/me/refresh'
+          type: 'GET'
+          beforeSend: (xhr)->
+            xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
+          success: ->
+            location.reload()
+      error: (response) =>
+        analytics.exception "Error registering pro account: #{response}"
+        @$('.premium--status').addClass('is-error')
+        @$('.premium--status .inner').text "Sorry, error registering your account, please try again."
+        setTimeout (=> @$('.premium--status').removeClass('is-active')), 2000
 
 module.exports.init = ->
   new PricingView

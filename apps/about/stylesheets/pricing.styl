@@ -31,9 +31,10 @@ premiumWidth = 900px
         margin-bottom (unit / 2)
       &.selectable
         cursor pointer
-      &.selectable:hover
+      &.selectable:hover, &.selected
         background-color black
         color white
+        font-weight bold
     &__includes
       margin-top unit
       font-size 14px
@@ -42,11 +43,11 @@ premiumWidth = 900px
       color success
       .premium-tiers__tier__price
         border-color success
-        &.selectable:hover
+        &.selectable:hover, &.selected
           background-color success
     &--enterprise
       color public
       .premium-tiers__tier__price
         border-color public
-        &.selectable:hover
+        &.selectable:hover, &.selected
           background-color public
