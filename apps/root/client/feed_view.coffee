@@ -8,6 +8,7 @@ Blocks = require '../../../collections/blocks.coffee'
 BlockCollectionView = require '../../../components/block_collection/client/block_collection_view.coffee'
 BlockView = require '../../../components/block_collection/client/block_view.coffee'
 User = require '../../../models/user.coffee'
+scrollFrame = require 'scroll-frame'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
@@ -52,6 +53,7 @@ module.exports = class FeedView extends Backbone.View
 
     _.defer ->
       IconicJS().inject 'img.iconic'
+
 
   showEmpty: ->
     @$el.html emptyTemplate()

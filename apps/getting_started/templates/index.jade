@@ -42,7 +42,5 @@ block body
           p On your main feed you can browse the recent activity of the channels and people you follow, or explore the recent stream of Are.na content from all users.
 
     .getting-started--button.button--wide
-      if sd.AFTER_ONBOARDING == 'explore'
-        #[a(href="/explore") Start exploring &rarr;]
-      if user && sd.AFTER_ONBOARDING == 'profile'
+      if user
         #[a(href="/#{user.get('slug')}") Go to your profile &rarr;]

@@ -18,9 +18,7 @@ tips = require './tips.coffee'
     complete: -> next()
 
 showTips = (req, res) ->
-  (req.user?.id is res.locals.author.id and
-    req.user?.get('show_tour') isnt false and
-    res.locals.sd.AFTER_ONBOARDING is 'profile')
+  (req.user?.id is res.locals.author.id and req.user?.get('show_tour') isnt false)
 
 addTips = (req) ->
   _.reject tips, (tip) -> req.cookies[tip.id]

@@ -34,26 +34,6 @@ setMobileClass = ->
   if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     $('body').addClass 'is-mobile'
 
-  if "standalone" in window.navigator and window.navigator.standalone
-
-    { noddy, remotes } = false
-
-    document.addEventListener 'click', (event) ->
-
-      noddy = event.target
-
-      while noddy.nodeName isnt "A" and noddy.nodeName isnt "HTML"
-        noddy = noddy.parentNode
-
-      if 'href' in noddy and noddy.href.indexOf('http') isnt -1 and (noddy.href.indexOf(document.location.host) isnt -1 || remotes)
-
-        event.preventDefault()
-        event.stopImmediatePropagation()
-
-        document.location.href = noddy.href
-
-    , false
-
 setupPusherAndCurrentUser = ->
   mediator.shared = {}
 
