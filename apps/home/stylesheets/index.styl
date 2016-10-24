@@ -21,14 +21,14 @@
 
   &--splash
     width 100%
-    height 80vh
+    height 70vh
     margin-top topbar_h * 2
     position relative
     overflow hidden
     &__image
       position absolute
       top 50%
-      right -(unit)
+      right -(unit * 6)
       transform translateY(-50%)
       width 60vw
       img
@@ -69,6 +69,9 @@
     max-width 900px
     margin (unit * 2) auto (unit * 4)
     font-size 16px
+    &__learn-more
+      text-align center
+      padding (unit * 4) 0 (unit * 2)
     h2
       text-align center
       font-weight normal
@@ -78,7 +81,7 @@
       padding-top unit * 4
       &__copy
         display inline-block
-        width 330px
+        width 350px
         padding-right unit * 2
         vertical-align top
         line-height unit
@@ -90,10 +93,10 @@
           padding-left 0
       &__thumbnails
         display inline-block
-        width 570px
+        width 550px
         img
           width 170px
-          border 1px solid textgray
+          border 1px solid bordergray
           margin-right (unit / 2)
     +below(900px)
       margin-top (unit * 4)
