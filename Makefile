@@ -25,7 +25,7 @@ assets:
 	$(BIN)/ezel-assets
 
 verify:
-	if [ $(shell wc -c < public/assets/root.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "root CSS exists" ; else echo ; echo "root CSS asset compilation failed" ; exit 1 ; fi
+	if [ $(shell wc -c < public/assets/all.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "All CSS exists" ; else echo ; echo "All CSS asset compilation failed" ; exit 1 ; fi
 	if [ $(shell wc -c < public/assets/root.js.jgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "root JS exists" ; else echo; echo "root JS asset compilation failed" ; exit 1 ; fi
 
 deploy: assets verify
