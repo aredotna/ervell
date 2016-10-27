@@ -4,7 +4,7 @@ node_js:
 script:
 - make test
 before_script:
-- npm install --dev
+- npm install --only=dev
 deploy:
   provider: heroku
   api_key:
