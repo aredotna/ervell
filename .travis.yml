@@ -3,6 +3,8 @@ node_js:
 - 5.11.1
 script:
 - make test
+before_script:
+- npm install
 deploy:
   provider: heroku
   api_key:
