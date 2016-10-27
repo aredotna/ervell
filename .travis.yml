@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- 5.11.1
+script:
+- make test
+deploy:
+  provider: heroku
+  api_key:
+    secure: jZIwuTvmr1Ez4eClIPKILBicnQpVRwrRmr2z9jvLgpOA7a225JZct8S+Dpe/4caLVAQCLr9DNFSnyI0ZhoheCxyeHKmOJ+bxzuPbmoufHJ+GcCGbEMfKNOTnf3uYPO/TWZKb/2JKzfpQo/85NQ8ykNdOe87eIcLNBqW9a5RQbFw=
+  app:
+    master: ervell-staging
+    production: ervell
