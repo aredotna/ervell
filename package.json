@@ -27,7 +27,7 @@
     "express": "*",
     "express-spam-referral-blocker": "^1.2.1",
     "express-subdomain": "^1.0.4",
-    "ezel-assets": "1.0.2",
+    "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "feed": "^0.2.6",
     "forever": "*",
     "jade": "*",
