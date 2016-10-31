@@ -1,0 +1,5 @@
+if urlConnections && urlConnections.length
+  h5 Blocks with this URL also appear in
+  for channel in urlConnections
+    .block-connection-outer
+      include ../../../components/list_view/templates/_connection
