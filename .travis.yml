@@ -6,7 +6,7 @@ script:
 before_script:
 - npm install --only=dev
 before_deploy:
-  script: make deploy-assets-staging
+- make deploy-assets-staging
 deploy:
   provider: heroku
   on: develop
