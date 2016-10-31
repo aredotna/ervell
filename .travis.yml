@@ -12,8 +12,8 @@ addons:
 before_script:
 - npm install --only=dev
 before_deploy:
-- if [ $TRAVIS_BRANCH = 'develop' ]; make deploy-assets-staging
-- if [ $TRAVIS_BRANCH = 'deploy' ]; make deploy-assets
+- if [ $TRAVIS_BRANCH = 'develop' ]; then make deploy-assets-staging; fi
+- if [ $TRAVIS_BRANCH = 'deploy' ]; then make deploy-assets; fi
 deploy:
   provider: heroku
   api_key:
