@@ -13,6 +13,7 @@ EditableAttributeView = require '../../../components/editable_attribute/client/e
 
 template =-> require('../templates/_block.jade') arguments...
 connectionsTemplate =-> require('../templates/_connections.jade') arguments...
+urlConnectionsTemplate =-> require('../templates/_url_connections.jade') arguments...
 
 class State extends Backbone.Model
 
@@ -41,8 +42,21 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
   initModel: ->
     @model.on 'sync', @render, @
     @connections = new Blocks @model.connections()
+    @setupUrlConnections()
 
     mediator.on "connection:added:#{@model.id}", @addConnections, @
+
+  setupUrlConnections: ->
+    @urlConnections = new Blocks []
+    @urlConnections.url = "#{sd.API_URL}/blocks/#{@model.id}/channels_by_url"
+    @urlConnections.on 'sync', @renderUrlConnections, @
+    @urlConnections.parse = (data) -> data.channels
+    @urlConnections.fetch()
+
+  renderUrlConnections: ->
+    console.log('@urlConnections.models', @urlConnections.models)
+    @$(".tab-url-connections-list").html urlConnectionsTemplate
+      urlConnections: @urlConnections.models
 
   toggleTab: (e)->
     e.preventDefault()
