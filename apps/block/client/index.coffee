@@ -54,9 +54,16 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @urlConnections.fetch()
 
   renderUrlConnections: ->
-    console.log('@urlConnections.models', @urlConnections.models)
     @$(".tab-url-connections-list").html urlConnectionsTemplate
       urlConnections: @urlConnections.models
+
+    @updateConnectionCount()
+
+  updateConnectionCount: ->
+    count = @model.get('connections').length + @urlConnections.models.length
+
+    s = if count == 1 then '' else 's'
+    @$('#tab-connection-count').text "#{count} Connection#{s}"
 
   toggleTab: (e)->
     e.preventDefault()
@@ -107,8 +114,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @$(".tab-connections-list").html connectionsTemplate
       connections: connections
 
-    s = if @model.get('connections').length == 1 then '' else 's'
-    @$('#tab-connection-count').text "#{@model.get('connections').length} Connection#{s}"
+    @updateConnectionCount()
 
   render: ->
     @$el.html template
