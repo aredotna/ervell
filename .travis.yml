@@ -3,17 +3,24 @@ node_js:
 - 5.11.1
 script:
 - make test
+addons:
+  apt:
+    sources:
+    - heroku
+    packages:
+    - heroku-toolbelt
 before_script:
 - npm install --only=dev
 before_deploy:
-- make deploy-assets-staging
+- if [ $TRAVIS_BRANCH = 'develop' ]; make deploy-assets-staging
+- if [ $TRAVIS_BRANCH = 'deploy' ]; make deploy-assets
 deploy:
   provider: heroku
-  on: develop
   api_key:
     secure: jZIwuTvmr1Ez4eClIPKILBicnQpVRwrRmr2z9jvLgpOA7a225JZct8S+Dpe/4caLVAQCLr9DNFSnyI0ZhoheCxyeHKmOJ+bxzuPbmoufHJ+GcCGbEMfKNOTnf3uYPO/TWZKb/2JKzfpQo/85NQ8ykNdOe87eIcLNBqW9a5RQbFw=
   app:
     develop: ervell-staging
+    deploy: ervell
 env:
   global:
   - secure: WJGcHqZmm2PTFcuyT9HMcJYp2Oosb9VCyZxAQ56Y/PAChM6uhvWryJlTQdaOymXpbOHLXv0X3zE3tbmJhH7i1f2cgQpXV9fzgqx35zGxVcgGLWMSerEw77828/ZBVlhbhYX9o0gUel0Z3Rz4U5LOw4Uy4YgBQab3Q/W8Qf04vj4=

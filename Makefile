@@ -33,6 +33,10 @@ deploy: assets verify
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
 	git push git@heroku.com:ervell.git $(branch):master -f
 
+deploy-assets: assets verify
+	$(BIN)/bucket-assets --bucket ervell-production
+	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
+
 deploy-assets-staging: assets verify
 	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
