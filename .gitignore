@@ -1,7 +1,8 @@
 .DS_Store
 .idea
 .env
-public/assets
+public/assets/*
+!public/assets/.gitkeep
 *.sublime-project
 *.sublime-workspace
 node_modules
