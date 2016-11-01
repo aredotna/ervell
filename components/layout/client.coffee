@@ -111,11 +111,23 @@ setupAjaxHeaders = ->
 setupAnalytics = ->
   # Initialize analytics & track page view.
   return if sd.SAVE
+
   analytics ga: ga
   analytics.registerCurrentUser()
   setupSplitTests()
-  unless (sd.CHANNEL and sd.CHANNEL.status is 'private')
-    analytics.trackPageview()
+
+  args =
+    title: document.title
+    location: window.location.href
+    page: window.location.pathname
+
+  if (sd.CHANNEL and sd.CHANNEL.status is 'private')
+    args =
+      page: '/'
+      title: 'Arena / [Private]'
+      location: 'https://www.are.na/401-private'
+
+  analytics.trackPageview(args)
 
   # Log a visit once per session
   unless Cookies.get('active_session')?
