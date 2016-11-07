@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
 _ = require 'underscore'
+attachFastClick = require 'fastclick'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
@@ -33,6 +34,7 @@ module.exports = ->
 setMobileClass = ->
   if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     $('body').addClass 'is-mobile'
+    attachFastClick(document.body)
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}

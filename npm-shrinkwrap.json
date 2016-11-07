@@ -1611,6 +1611,11 @@
       "from": "fast-levenshtein@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-1.1.3.tgz"
     },
+    "fastclick": {
+      "version": "1.0.6",
+      "from": "fastclick@*",
+      "resolved": "https://registry.npmjs.org/fastclick/-/fastclick-1.0.6.tgz"
+    },
     "feed": {
       "version": "0.2.6",
       "from": "feed@>=0.2.6 <0.3.0",
