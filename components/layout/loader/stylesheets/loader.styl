@@ -1,6 +1,6 @@
 @require '../../variables'
 
-delayQuotient = 2
+delayQuotient = 3
 loadSize = 35px
 pixelSize = 2px
 
@@ -47,6 +47,6 @@ body.is-loading #l-loader-container
     transform translate3D(0, 0, 0)
     position absolute
     animation aroundTheSquare (0.4s * delayQuotient) infinite linear
-    for num in (1..40)
+    for num in (1..50)
       &--{num}
-        animation-delay ((0.005s * num) * delayQuotient)
+        animation-delay (-(0.015s * num))

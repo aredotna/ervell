@@ -112,6 +112,7 @@ module.exports = class AuthView extends Backbone.View
 
   render: ->
     @$el.html @template @templateData
+    _.defer => @$('input[name="email"]').focus()
 
     this
 

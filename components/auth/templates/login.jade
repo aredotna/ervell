@@ -5,7 +5,7 @@
       - formUrl = sd.REDIRECT_TO ? "/me/sign_in?redirect-to=" + sd.REDIRECT_TO : '/me/sign_in'
       form.auth-login-email.auth-form( action=formUrl method="POST" )
         input.input--wide.input--relative.is-block(
-          name='email', type='email', placeholder='Email', required, autofocus= autofocus
+          name='email', type='email', placeholder='Email', required, autofocus=true
         )
         input.input--wide.input--relative.is-block(
           name='password', type='password', placeholder='Password', autocomplete='on', required
