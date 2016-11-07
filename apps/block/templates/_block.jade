@@ -56,6 +56,8 @@
       .tab-content__inner
         .tab-connections-list
           include _connections
+        .tab-url-connections-list
+          include _url_connections
         if user && user.id
           .button--base.button--base--connect.js-connect-button Connect &rarr;
           .block-connect-container

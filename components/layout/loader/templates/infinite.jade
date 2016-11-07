@@ -1,3 +1,7 @@
 #l-infinite-loader-container
-  #l-loader
-    img(src="https://s3.amazonaws.com/ervell-production/images/loading.gif", alt="")
+  .valign-outer
+    .valign-inner
+      .loader
+        - var n = 0
+        while n < 40
+          .loader__pixel(class="loader__pixel--#{n++}")
