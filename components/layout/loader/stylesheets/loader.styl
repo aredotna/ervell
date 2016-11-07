@@ -1,5 +1,9 @@
 @require '../../variables'
 
+@keyframes dash
+  to
+    stroke-dashoffset 0
+
 #l-loader-container
   display none
 
@@ -9,19 +13,24 @@ body.is-loading #l-loader-container
   z-index loader_z
   pointer-events none
 
-#l-loader img
-	width 80px
-
 #l-infinite-loader-container
-  display none
+  opacity 0
   width 100%
-  margin 150px auto
-  z-index loader_z
+  height 200px
   pointer-events none
-  text-align center
-
-  img
-    width 80px
-
+  position absolute
+  bottom 0
+  left 0
   &.is-loading
-    display block
+    opacity 1
+
+.loader
+  background-color transparent
+  margin 0 auto
+  svg rect
+    fill rgba(255,255,255,0)
+    stroke hovergray
+    stroke-dasharray 100
+    stroke-dashoffset 600
+    -webkit-animation dash 1.5s steps(20, end) infinite
+    animation dash 1.5s steps(20, end) infinite
