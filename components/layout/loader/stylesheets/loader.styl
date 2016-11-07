@@ -1,5 +1,19 @@
 @require '../../variables'
 
+delayQuotient = 2
+loadSize = 35px
+pixelSize = 2px
+
+@keyframes aroundTheSquare
+  0%
+    transform translate3D(0, 0, 0)
+  25%
+    transform translate3D((loadSize), 0, 0)
+  50%
+    transform translate3D((loadSize), (loadSize), 0)
+  75%
+    transform translate3D(0, (loadSize), 0)
+
 #l-loader-container
   display none
 
@@ -9,19 +23,30 @@ body.is-loading #l-loader-container
   z-index loader_z
   pointer-events none
 
-#l-loader img
-	width 80px
-
 #l-infinite-loader-container
-  display none
+  opacity 0
   width 100%
-  margin 150px auto
-  z-index loader_z
+  height 200px
   pointer-events none
-  text-align center
-
-  img
-    width 80px
-
+  position absolute
+  bottom 0
+  left 0
   &.is-loading
-    display block
+    opacity 1
+
+.loader
+  width loadSize
+  height loadSize
+  background-color transparent
+  margin 0 auto
+  position relative
+  &__pixel
+    width pixelSize
+    height pixelSize
+    background-color #333
+    transform translate3D(0, 0, 0)
+    position absolute
+    animation aroundTheSquare (0.4s * delayQuotient) infinite linear
+    for num in (1..40)
+      &--{num}
+        animation-delay ((0.005s * num) * delayQuotient)
