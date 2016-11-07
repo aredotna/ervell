@@ -1,6 +1,5 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-# Poller = require 'backbone-poller'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 InfiniteView = require '../../../components/pagination/infinite_view.coffee'
@@ -25,6 +24,9 @@ module.exports = class FeedView extends Backbone.View
     @collection.on "sync", @render, @
 
     @current_user = new User sd.CURRENT_USER
+
+    frame = scrollFrame ".feed-container a"
+    frame = scrollFrame ".feed-container span.grid__block__link"
 
   initialFetch: =>
     @setSharedBlocks()
@@ -53,7 +55,6 @@ module.exports = class FeedView extends Backbone.View
 
     _.defer ->
       IconicJS().inject 'img.iconic'
-
 
   showEmpty: ->
     @$el.html emptyTemplate()

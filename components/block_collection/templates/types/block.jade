@@ -11,7 +11,7 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
       .grid__block__content
         block content
 
-      .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+      .grid__block__overlay.abs-fill(href="#{block.getHref()}" class="grid__block__overlay--privacy-#{ block.getVisibility() }")
         - if(user && user.has('id'))
           block overlay
 

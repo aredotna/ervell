@@ -23,6 +23,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'click .block-arrow' : 'clickSlide'
     'click .tab--container__nav__item' : 'toggleTab'
     'click .js-connect-button' : 'loadConnectView'
+    'click .list-item__connection' : 'openChannel'
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -80,6 +81,15 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     e.preventDefault()
     direction = $(e.currentTarget).data('direction')
     @slide direction
+
+  openChannel: (e) ->
+    href = $(e.currentTarget).attr('href')
+    target = $(e.currentTarget).attr('target') || '_self'
+
+    if e.metaKey || e.ctrlKey
+      window.open href, '_blank'
+    else
+      window.open href, target
 
   loadConnectView: (e)->
     e.preventDefault()
