@@ -30,7 +30,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'content'     : 'markdown'
 
   initialize: (options)->
-    @state = new State tab: options.tab || 'info'
+    @state = new State tab: options.tab || 'connections'
     @user = CurrentUser.orNull()
     @postRendered = false
 

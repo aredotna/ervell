@@ -1,7 +1,0 @@
-.block-meta.block-meta--attribution
-  .block-date
-    | Added #{block.createdAtAgo()}
-    |  by
-    a(href="/#{block.get('user').slug}")  #{block.get('user').username}
-  if block.createdAtAgo() != block.updatedAtAgo()
-    .block-date Last updated #{block.updatedAtAgo()}

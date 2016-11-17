@@ -1,5 +1,4 @@
 .block-container
-  // nothing
   clearfix()
 
 .block-content
@@ -7,7 +6,7 @@
   top 0
   left 0
   height 100%
-  width 100%
+  width 70%
 
 .block-img
   img
@@ -60,13 +59,13 @@
   color #333
   background-color #fff
   border 1px solid bordergray
-  width 55%
-  max-width 740px
-  margin 0 auto
+  width 90%
+  max-width 840px
+  margin (unit * 2) auto
   overflow-x auto
   padding unit * 2
   text-align left
-  height 80vh
+  min-height 80vh
   font-size 1.1rem
   line-height 1.7em
 
@@ -205,7 +204,6 @@
     padding-bottom (unit * 3)
 
   .tab-content__inner
-    width 50%
     margin unit auto
 
     +below(800px)
@@ -234,3 +232,5 @@
 
 .block-new-comment-container
   margin-top unit * 2
+
+@require 'sidebar'

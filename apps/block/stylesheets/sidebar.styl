@@ -1,0 +1,54 @@
+.block-sidebar
+  width 30%
+  height 100%
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  background backgroundgray
+  overflow scroll
+
+  &__info, &__tabs
+    position absolute
+    width 100%
+    height 50%
+    left 0
+
+  &__info 
+    top 0
+    padding unit
+
+    &__title
+      h3()
+      text-align center
+      margin unit auto
+      width 80%
+      line-height 1.2
+      &.attribute-group
+        display block
+    
+    &__source
+      font-weight bold
+      text-align center
+      font-size s_caption 
+      &__original
+        ellipsis(200px)
+        vertical-align bottom
+
+    &__description
+      p()
+      margin-top unit
+      max-height 120px
+      overflow hidden
+    
+    &__attribution
+      position absolute
+      bottom unit
+      right unit
+  
+  &__tabs
+    background #fff
+    bottom 0
+    #block-tabs
+      top 0
+      margin-top 0

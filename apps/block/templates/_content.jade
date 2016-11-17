@@ -1,0 +1,26 @@
+.block-content.v-outer
+  .v-inner
+    if block.has('image') && block.get('class') != 'Media'
+      .block-img
+        a(href="#{block.getSourceUrl()}" target="_blank")
+          img(src="#{block.resizeImage(1000,1000, 'large')}")
+
+    if block.get('class') == 'Media'
+      .block-media!= block.get('embed').html
+
+    if block.get('class') == 'Text'
+      .block-text(id="attribute-content_#{block.id}")!= md(block.get('content'))
+
+    - if(block.get('class') == 'Attachment' && !block.has('image'))
+        a.block-attachment(href="#{block.getSourceUrl()}" target="_blank")
+          if(block.get('attachment').extension == 'mp3')
+            img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" class="iconic iconic-lg")
+          else if(block.get('attachment').extension == 'pdf')
+            img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" class="iconic iconic-lg")
+          else
+            img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+
+    .block-arrow.block-arrow--right.v-outer(data-direction="next"): .v-inner
+      img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-md")
+    .block-arrow.block-arrow--left.v-outer(data-direction="prev"): .v-inner
+      img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-md")
