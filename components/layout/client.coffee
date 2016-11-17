@@ -41,7 +41,8 @@ setupPusherAndCurrentUser = ->
 
   user = new CurrentUser sd.CURRENT_USER
   mediator.shared.current_user = user
-  mediator.shared.state = new State view_mode: sd.VIEW_MODE
+  mediator.shared.state = new State()
+  mediator.shared.state.set view_mode: sd.VIEW_MODE
   mediator.shared.recent_connections = new RecentConnections
 
   if user.id
@@ -144,11 +145,13 @@ initShortCuts = ->
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
   km 'l',     ->
-    mediator.shared.state.set view_mode: 'list'
-    window.location.reload()
+    if mediator.shared.current_user.get('is_pro')
+      mediator.shared.state.set view_mode: 'list'
+      window.location.reload()
   km 'g',     ->
-    mediator.shared.state.set view_mode: 'grid'
-    window.location.reload()
+    if mediator.shared.current_user.get('is_pro')
+      mediator.shared.state.set view_mode: 'grid'
+      window.location.reload()
 
   initNightMode()
 
