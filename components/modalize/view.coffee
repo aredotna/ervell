@@ -16,6 +16,7 @@ module.exports = class Modalize extends Backbone.View
     { @subView, @dimensions } = _.defaults options, @defaults
     $(window).on 'keyup.modalize', @escape
     mediator.on 'position:updated', @updatePosition
+    mediator.on 'modal:close', @close, @
 
   updatePosition: (pos) =>
     @scrollPosition = pos
