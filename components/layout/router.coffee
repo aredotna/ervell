@@ -14,9 +14,11 @@ module.exports = class Router extends Backbone.Router
     'block/:id/:tab': 'showBlock'
     'log_in': 'login'
     'sign_up': 'signup'
+    ':user_id/:channel_id' : 'hideBlock'
+    ':user_id' : 'hideBlock'
 
   initialize: ->
-    # mediator.on 'slide:to:block', @updateRoute, @
+    mediator.on 'slide:to:block', @updateRoute, @
 
   login: ->
     return if sd.CURRENT_PATH is '/log_in'
@@ -42,6 +44,7 @@ module.exports = class Router extends Backbone.Router
       @removeRoute()
 
   hideBlock: ->
+    return location.reload() if sd.BLOCK
     @modal?.close => @removeRoute()
 
   showBlock: (id, tab)->

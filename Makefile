@@ -25,13 +25,21 @@ assets:
 	$(BIN)/ezel-assets
 
 verify:
-	if [ $(shell wc -c < public/assets/root.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "root CSS exists" ; else echo ; echo "root CSS asset compilation failed" ; exit 1 ; fi
+	if [ $(shell wc -c < public/assets/all.css.cgz) -gt $(MIN_FILE_SIZE) ] ; then echo ; echo "All CSS exists" ; else echo ; echo "All CSS asset compilation failed" ; exit 1 ; fi
 	if [ $(shell wc -c < public/assets/root.js.jgz) -gt  $(MIN_FILE_SIZE) ] ; then echo ; echo "root JS exists" ; else echo; echo "root JS asset compilation failed" ; exit 1 ; fi
 
 deploy: assets verify
 	$(BIN)/bucket-assets --bucket ervell-production
 	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
 	git push git@heroku.com:ervell.git $(branch):master -f
+
+deploy-assets: assets verify
+	$(BIN)/bucket-assets --bucket ervell-production
+	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell
+
+deploy-assets-staging: assets verify
+	$(BIN)/bucket-assets --bucket ervell-production
+	heroku config:set COMMIT_HASH=$(shell git rev-parse --short HEAD) --app=ervell-staging
 
 deploy-with-images: assets verify
 	ulimit -n 10000

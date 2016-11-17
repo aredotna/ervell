@@ -1,6 +1,6 @@
 # Ervell
 
-In-progress front-end Are.na client, built using Artsy's [Ezel](https://github.com/artsy/ezel). Also made possible by Artsy's very generous decision to open source their front-end client. Many patterns (also bits of code, probably) adopted from [Force](https://github.com/artsy/force-public). Thanks dudes.
+Front-end Are.na client, built using Artsy's [Ezel](https://github.com/artsy/ezel). Also made possible by Artsy's very generous decision to open source their front-end client. Many patterns (also bits of code, probably) adopted from [Force](https://github.com/artsy/force-public). Thanks dudes.
 
 The general idea here is something minimal, utilitarian, unobtrusive and adaptible to many different situations. We try to make use of re-usable components and views as often as possible.
 

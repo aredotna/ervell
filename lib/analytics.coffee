@@ -5,7 +5,6 @@ qs = require('querystring')
 
 module.exports = (options) =>
   return if module.exports.getUserAgent()?.indexOf?('PhantomJS') > -1
-  return if sd?.CHANNEL?.status is 'private'
 
   { @ga, @location } = options
   @location ?= window?.location
@@ -20,8 +19,9 @@ module.exports = (options) =>
 module.exports.getUserAgent = ->
   window?.navigator?.userAgent
 
-module.exports.trackPageview = =>
-  ga? 'send', 'pageview'
+module.exports.trackPageview = (args = {}) =>
+  opts = _.extend { hitType: 'pageview' }, args
+  ga? 'send', opts
 
 module.exports.trackOutboundLink = (url, cb = $.noop) =>
   ga? 'send', 'event', 'Outbound link', 'click', url,

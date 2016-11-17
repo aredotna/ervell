@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
 _ = require 'underscore'
+attachFastClick = require 'fastclick'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
@@ -34,6 +35,7 @@ module.exports = ->
 setMobileClass = ->
   if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     $('body').addClass 'is-mobile'
+    attachFastClick(document.body)
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}
@@ -114,11 +116,23 @@ setupAjaxHeaders = ->
 setupAnalytics = ->
   # Initialize analytics & track page view.
   return if sd.SAVE
+
   analytics ga: ga
   analytics.registerCurrentUser()
   setupSplitTests()
-  unless (sd.CHANNEL and sd.CHANNEL.status is 'private')
-    analytics.trackPageview()
+
+  args =
+    title: document.title
+    location: window.location.href
+    page: window.location.pathname
+
+  if (sd.CHANNEL and sd.CHANNEL.status is 'private')
+    args =
+      page: '/'
+      title: 'Arena / [Private]'
+      location: 'https://www.are.na/401-private'
+
+  analytics.trackPageview(args)
 
   # Log a visit once per session
   unless Cookies.get('active_session')?
