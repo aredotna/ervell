@@ -3,6 +3,7 @@ mediator = require '../../lib/mediator.coffee'
 template = -> require('./template.jade') arguments...
 
 module.exports = class ImageView extends Backbone.View
+  className: 'image-view-outer'
   events: 
     'click .image-view' : 'close'
 
