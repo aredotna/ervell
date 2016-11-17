@@ -18,8 +18,5 @@ module.exports =
   homepage_slogan:
     key: 'homepage_slogan'
     outcomes:
-      everyone: 25
-      reassemble: 25
-      plaground: 25
-      platform: 25
+      platform: 100
     dimension: 'dimension4'
