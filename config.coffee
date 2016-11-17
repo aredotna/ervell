@@ -16,7 +16,7 @@ module.exports =
   SESSION_SECRET: '3rv3ll-mAnd1ngo'
   SESSION_COOKIE_MAX_AGE: 31536000000
   SESSION_COOKIE_KEY: 'arena.session'
-  BLOG_URL: 'http://127.0.0.1:4000/'
+  BLOG_URL: 'http://posts.are.na'
   COOKIE_DOMAIN: null
   ASSET_PATH: '/assets/'
   IMAGE_PATH: '/images/'
