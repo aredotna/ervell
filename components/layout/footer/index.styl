@@ -1,0 +1,26 @@
+.footer--info
+  height 240px
+  text-align center
+  &__menu
+    position relative
+    top 60%
+    transform translateY(-60%)
+    a
+      font-weight bold
+      margin 0 unit
+      border-bottom none !important
+      color lightgray
+    &__logo
+      margin-top unit * 2
+      svg
+        fill lightgray
+  +mobile()
+    padding-top (unit * 5)
+    &__menu
+      text-align center
+      a
+        display block
+        margin unit (unit * 3)
+      &__logo
+        text-align center
+

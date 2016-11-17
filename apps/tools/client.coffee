@@ -4,7 +4,6 @@ Backbone.$ = $
 Authentication = require '../../models/authentication.coffee'
 FindFriendsView = require './client/find_friends_view.coffee'
 InviteView = require './client/invite_view.coffee'
-PremiumView = require './client/premium_view.coffee'
 
 module.exports.init = ->
 
@@ -19,7 +18,3 @@ module.exports.init = ->
     when 'send-invitation'
       new InviteView
         el: $('#tab--send-invitation')
-
-    when 'premium'
-      new PremiumView
-        el: $('#tab--premium')

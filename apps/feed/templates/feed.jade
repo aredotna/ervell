@@ -1,0 +1,10 @@
+extends ../../../components/layout/index
+
+block body
+  include ./feed_path
+  .feed-container
+    //- rendered via client
+
+block scripts
+  script( src=asset('/assets/feed.js') )
+

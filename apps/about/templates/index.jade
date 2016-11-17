@@ -1,15 +1,15 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/index--info
 
 block vars
-  - extraClasses = 'body--bare body--home'
+  - extraClasses = 'no-messages body--static'
 
 block body
-  include ../../root/templates/home/sections/pitch
-  include ../../root/templates/home/sections/examples
+  include ./sections/pitch
+  include ./sections/team
   include ./sections/principles
-  include ../../root/templates/home/sections/team
-  include ../../root/templates/home/sections/labs
-  include ../../root/templates/home/sections/footer
+  include ./sections/labs
+  include ./sections/api
+  include ./sections/contact
 
 block scripts
-  script( src=asset('/assets/about.js') )
+  script( src=asset('/assets/home.js') )

@@ -18,6 +18,7 @@
     "blueimp-file-upload": "git://github.com/arenahq/jQuery-File-Upload.git",
     "body-parser": "*",
     "bucket-assets": "^0.2.12npm ",
+    "cheerio": "^0.22.0",
     "coffee-script": "*",
     "cookie-parser": "*",
     "cookie-session": "*",

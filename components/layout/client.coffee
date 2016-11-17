@@ -7,6 +7,7 @@ attachFastClick = require 'fastclick'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
+HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 NewChannelView = require '../new_channel/client/new_channel_view.coffee'
 UserMenuView = require '../user_menu/client/user_menu_view.coffee'
@@ -66,6 +67,8 @@ setupViews = ->
     el: $('body')
   new SearchBarView
     el: $('.layout-header__search')
+
+  new HeaderInfoView
 
   if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
     new Waypoint.Sticky
