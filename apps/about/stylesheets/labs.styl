@@ -1,0 +1,160 @@
+@require '../../../components/layout/variables'
+
+/* LABS */
+.labs-logo
+  position relative
+  width 100%
+  margin 8% 0 50px 0
+  text-align center
+
+  img
+    position relative
+    width 90%
+    max-width 480px
+    margin auto
+
+.labs--text
+  font-size 18px
+  font-weight 400
+  text-align left
+  line-height 1.5em
+
+.labs__case-studies
+  display flex
+  flex-wrap wrap
+  justify-content center
+  line-height 20px
+
+  .labs__case-studies__item
+    font-size 19px
+    width 100%
+    max-width 960px
+    margin 30px 0 30px 0
+    padding 0 30px 30px 30px
+    text-align left
+    border 0px solid #D2D2D2
+    -moz-box-shadow 0px 0px 15px 0px bordergray
+    -webkit-box-shadow 0px 0px 15px 0px bordergray
+    box-shadow 0px 0px 15px 0px bordergray
+    border 1px solid bordergray
+
+    .labs__case-studies__img
+      position relative
+      float left
+      width 100%
+      height 450px
+      margin auto
+      margin-bottom 30px
+
+    .labs__screenshot
+      position absolute
+      height 100%
+      -webkit-animation-name fade
+      -webkit-animation-iteration-count infinite
+      -webkit-animation-duration 8s
+      animation-name fade
+      animation-iteration-count infinite
+      animation-duration 8s
+      border 1px solid bordergray
+
+    .labs__screenshot:first-child
+      -webkit-animation-delay -6.4s
+      animation-delay -6.4s
+
+    .labs__screenshot:nth-child(2)
+      -webkit-animation-delay -2.4s
+      animation-delay -2.4s
+
+    .labs__case-studies--title
+      position relative
+      font-weight 700
+      margin 40px 0 2px 0
+
+    h1.labs__case-studies--title
+      position relative
+      font-weight 400
+      margin 20px 0 20px 0
+
+    .labs__case-studies--separator
+      position relative
+      border-top 1px solid #D2D2D2
+      margin 0 0 10px 0
+
+.labs__services
+  width 100%
+  max-width 900px
+  margin auto
+
+  h1
+    margin 18px 0 0 0
+    list-style circle
+
+  .labs--text
+    margin-left 15px
+    color textgray
+
+    a
+      border-color textgray
+
+      &:hover
+        color textgray
+
+@-webkit-keyframes fade
+  0% {opacity: 0;}
+  20% {opacity: 0;}
+  30% {opacity: 1;}
+  70% {opacity: 1;}
+  80% {opacity: 0;}
+  100% {opacity: 0;}
+
+@keyframes fade
+  0% {opacity: 0;}
+  20% {opacity: 0;}
+  30% {opacity: 1;}
+  70% {opacity: 1;}
+  80% {opacity: 0;}
+  100% {opacity: 0;}
+
+@media (max-width:(block_width_mar * 4) + 19)
+  /* LABS */
+  .body--static
+    .labs__case-studies__img
+      max-height 300px
+
+@media (max-width:(block_width_mar * 3) + 16)
+  .labs__case-studies__img
+    max-height 200px
+
+  .labs__case-studies
+    .labs__case-studies__item
+      max-width 90%
+      left 5%
+
+  .labs__services
+    max-width 90%
+    left 5%
+
+  .labs-logo
+    img
+      width 80%
+
+@media (max-width:500px)
+
+  /* LABS */
+  .body--static
+
+    .labs-hint
+      margin 50px 0 0 0
+      padding 0
+
+    .labs-hint.labs-footer
+      padding-bottom 50px
+
+    .labs__case-studies
+      .labs__case-studies__item
+        width 100%
+        padding 20px
+        margin 10px 0
+
+    .labs__case-studies__img
+      max-height 100px

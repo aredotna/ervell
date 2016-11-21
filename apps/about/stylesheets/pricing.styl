@@ -1,0 +1,53 @@
+premiumWidth = 900px
+
+.about-section.about-section--premium
+  max-width premiumWidth
+
+.premium-tiers
+  margin-top unit
+  &__tier
+    width 300px
+    display inline-block
+    vertical-align top
+    padding (unit / 2)
+    color black
+    +below(premiumWidth)
+      display block
+      margin unit auto
+    &__title
+      text-align center
+      margin-bottom unit * 2
+    &__price
+      width 300px
+      height 100px
+      border 1px solid black
+      text-align center
+      display table-cell
+      vertical-align middle
+      margin unit 0
+      line-height 1.2
+      small
+        font-size 10px
+        margin-bottom (unit / 2)
+      &.selectable
+        cursor pointer
+      &.selectable:hover, &.selected
+        background-color black
+        color white
+        font-weight bold
+    &__includes
+      margin-top unit
+      font-size 14px
+      font-weight bold
+    &--premium
+      color success
+      .premium-tiers__tier__price
+        border-color success
+        &.selectable:hover, &.selected
+          background-color success
+    &--enterprise
+      color public
+      .premium-tiers__tier__price
+        border-color public
+        &.selectable:hover, &.selected
+          background-color public

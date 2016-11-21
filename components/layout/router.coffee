@@ -2,6 +2,7 @@ _ = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../lib/mediator.coffee'
 AuthView = require '../auth/view.coffee'
+ImageView = require '../image/view.coffee'
 Block = require '../../models/block.coffee'
 modalize = require '../modalize/index.coffee'
 { FullBlockView } = require '../../apps/block/client/index.coffee'
@@ -32,7 +33,6 @@ module.exports = class Router extends Backbone.Router
       redirectTo: sd.CURRENT_PATH
 
   openAuthModal: (options) ->
-    mediator.trigger 'open:auth', options
     view = new AuthView options
 
     @modal = modalize view,

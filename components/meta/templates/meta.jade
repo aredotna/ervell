@@ -59,3 +59,9 @@ if blocks
       if index == 0
         meta(name="twitter:image", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
+
+else if image
+  meta(name="twitter:card", content="summary_large_image")
+  meta(name="twitter:image", content="#{image}")
+  meta(property="og:image" content="#{image}")
+

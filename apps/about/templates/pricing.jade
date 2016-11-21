@@ -1,0 +1,18 @@
+extends ../../../components/layout/index--info
+
+block vars
+  - extraClasses = 'no-messages body--static'
+
+block styles
+  link( type='text/css', rel='stylesheet', href=asset('/assets/about.css') )
+
+block body
+  include ./sections/pricing
+  include ./sections/premium_features
+  include ./sections/principles
+
+block scripts
+  script( src="https://checkout.stripe.com/checkout.js" )
+  script( src=asset('/assets/home.js') )
+  script( src=asset('/assets/pricing.js') )
+

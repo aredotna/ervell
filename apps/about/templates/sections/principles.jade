@@ -1,38 +1,28 @@
-.home-section
-  .home-section__inner
-    h1.home-header We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network, and we're committed to retain complete control of the platform.
-    br
-    h1.home-header We partly rely on our premium users who have access to a #[a(href="/tools/premium") series of extra features] for a yearly subscription.
-    br
-    .static__graph
-      .static__graph-title
-        | Expenses, goals and revenue for the year 2016
-      .static__graph-fill.step-1
-        .static__graph-mark
-          .mark-label
-            | Premium users
-            br
-            | (85 out of 11,000 total users)
-      .static__graph-fill.step-2
-        .static__graph-mark
-          .mark-label
-            | Labs projects, store, grants and donations
-        .expense.expense-1
-          .expense-label
-            | $20,000
-            br
-            | Basic infrastructure costs
-      .static__graph-fill.step-3
-        .expense.expense-2
-          .expense-label
-            | $70,000
-            br
-            | Part-time
-            br
-            | salaries
-
-    img(
-      data-src="#{sd.IMAGE_PATH}iconic/nav-arrow-l.svg"
-      class="iconic iconic-sm home-arrow pointer"
-      data-multiplier="1"
-    )
+.about-section.about-section__principles
+  h2.center Transparency
+  p We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network, and we're committed to retain complete control of the platform.
+  p We partly rely on our premium users who have access to a #[a(href="/pricing") series of extra features] for a yearly subscription.
+  .static__graph
+    .static__graph-title
+      | Expenses, goals and revenue for the year 2016
+    .static__graph-fill.step-1
+      .static__graph-mark
+        .mark-label
+          | Premium users
+    .static__graph-fill.step-2
+      .static__graph-mark.static__graph-mark__lower
+        .mark-label.mark-label__lower
+          | Labs projects, store, grants and donations
+      .expense.expense-1
+        .expense-label
+          | $20,000
+          br
+          | Basic infrastructure costs
+    .static__graph-fill.step-3
+      .expense.expense-2
+        .expense-label
+          | $70,000
+          br
+          | Part-time
+          br
+          | salaries

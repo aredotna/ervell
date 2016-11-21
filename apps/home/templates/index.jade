@@ -1,0 +1,13 @@
+extends ../../../components/layout/index--info
+
+block vars
+  - extraClasses = 'body--home'
+
+block body
+  .home
+    include sections/splash.jade
+    include sections/features.jade
+    include sections/posts.jade
+
+block scripts
+  script( src=asset('/assets/home.js') )

@@ -1,331 +1,54 @@
-/* GENERAL STATIC PAGES */
+@require '../../../node_modules/rupture/rupture'
+@require 'labs'
+@require 'graph'
+@require 'pricing'
+@require 'features'
+
+rupture.mobile-cutoff = 500px
+
 .body--static
   background-color #fff
-
-  #layout-header
-    position absolute
-    background transparent
-    color #fff
-
-    .logo
-      opacity 0.9
-      a
-        border 0
-      svg
-        fill hovergray
-
-    .header--icon
-      &:hover
-        cursor pointer
-        opacity 0.6
-
-    .layout-header__register
-      padding 0 20px 0 20px
-      color textgray
-      display inline-block
-
-      a
-        border 0
-
-    .btn-signup, .btn-login, .layout-header__or
-      display inline-block
-      font-weight bold
-
-  .static--hint
-    margin 110px auto 20px auto
-    font-weight 700
-
-  .static--hint.labs-footer
-    padding-bottom 100px
-
-  .static__img
-    width 100%
-    margin 20px 0 50px 0
+  &__header
+    margin (unit * 6) auto (unit * 3)
     text-align center
+    max-width 600px
+  p
 
-    img
-      max-width 900px
-      -moz-box-shadow 0px 0px 15px 0px bordergray
-      -webkit-box-shadow 0px 0px 15px 0px bordergray
-      box-shadow 0px 0px 15px 0px bordergray
-      border 1px solid bordergray
-
-  .static--break
-    width 100%
-    position relative
-    float left
-    padding-top 2em
-
-/* STATIC PAGES EXCEPT HOME */
-.body--static
-  a
-    border-bottom 2px solid hovergray
-
-    &:hover
-      border 0
-
-  h1, p
-    width 100%
-    max-width 900px
-    font-size 2rem
-    line-height 1.3em
+  ul
+    margin 0
+    padding 0
+  h1, h2
+    text-align center
+    antialiased()
     color hovergray
     font-weight normal
-    antialiased()
-    margin 20px auto 50px auto
-    text-align left
-
-  .static__section
-    color hovergray
-
-  .static__section__inner
-    width 100%
-  /* LABS */
-  .labs-logo
-    position relative
-    width 100%
-    margin 8% 0 50px 0
+  h1.center, h2.center
     text-align center
-
-    img
-      position relative
-      width 90%
-      max-width 480px
-      margin auto
-
-  .labs--text
-    font-size 18px
-    font-weight 400
+  h1
+    margin (unit * 2) 0 (unit * 4)
+  h2
+    margin (unit * 2) 0
+  h2.is-left
     text-align left
-    line-height 1.5em
 
-  .labs__case-studies
-    display flex
-    flex-wrap wrap
-    justify-content center
-    line-height 20px
-
-    .labs__case-studies__item
-      font-size 19px
-      width 100%
-      max-width 960px
-      margin 30px 0 30px 0
-      padding 0 30px 30px 30px
-      text-align left
-      border 0px solid #D2D2D2
-      -moz-box-shadow 0px 0px 15px 0px bordergray
-      -webkit-box-shadow 0px 0px 15px 0px bordergray
-      box-shadow 0px 0px 15px 0px bordergray
-      border 1px solid bordergray
-
-      .labs__case-studies__img
-        position relative
-        float left
-        width 100%
-        height 450px
-        margin auto
-        margin-bottom 30px
-
-      .labs__screenshot
-        position absolute
-        height 100%
-        -webkit-animation-name fade
-        -webkit-animation-iteration-count infinite
-        -webkit-animation-duration 8s
-        animation-name fade
-        animation-iteration-count infinite
-        animation-duration 8s
-        border 1px solid bordergray
-
-      .labs__screenshot:first-child
-        -webkit-animation-delay -6.4s
-        animation-delay -6.4s
-
-      .labs__screenshot:nth-child(2)
-        -webkit-animation-delay -2.4s
-        animation-delay -2.4s
-
-      .labs__case-studies--title
-        position relative
-        font-weight 700
-        margin 40px 0 2px 0
-
-      h1.labs__case-studies--title
-        position relative
-        font-weight 400
-        margin 20px 0 20px 0
-
-      .labs__case-studies--separator
-        position relative
-        border-top 1px solid #D2D2D2
-        margin 0 0 10px 0
-
-  .labs__services
-    width 100%
-    max-width 900px
-    margin auto
-
-    h1
-      margin 18px 0 0 0
-      list-style circle
-
-    .labs--text
-      margin-left 15px
-      color textgray
-
-      a
-        border-color textgray
-
-        &:hover
-          color textgray
-
-/* ABOUT */
-.static__graph
-  width 98%
-  max-width 900px
-  height 100px
-  margin 100px auto 200px auto
-  border 0px solid lightgray
-  background-color white
-
-  .static__graph-title
+.about-section
+  max-width 600px
+  margin (unit * 6) auto 0
+  font-size 20px
+  line-height 1.5
+  overflow hidden
+  img
+    max-width 100%
+    margin (unit * 2) auto
+    display block
+  img:not(.no-border)
+    border 1px solid bordergray
+  &:last-of-type
+    margin-bottom (unit * 10)
+  a
     font-weight bold
-    color hovergray
-    text-align left
-    font-size 1rem
-    margin 0 0 10px 0
-
-  .static__graph-fill
-    position realtive
-    float left
-    height 100%
-
-  .step-1
-    background-color success
-    width 4%
-
-  .step-2
-    background-color #6AD065
-    width 46%
-
-  .step-3
-    background-color secondbackgroundgray
-    width 50%
-
-.static__graph-mark
-  position relative
-  width 1px
-  background-color textgray
-  margin 82px 0 0 0
-  margin-left 50%
-  height 42px
-
-.mark-label
-  position relative
-  float left
-  text-align left
-  font-size s_caption + 2
-  line-height 18px
-  margin 45px 0 0 0
-  color hovergray
-  width 180px
-
-.expense
-  position relative
-  width 1px
-  border-right 1px dashed textgray
-  margin 0 0 0 0
-  height 100px
-  color hovergray
-
-.expense-1
-  margin -124px 0 0 80%
-
-  .expense-label
-    margin-top -160px
-
-.expense-2
-  margin 0 0 0 70%
-
-.expense-label
-  position relative
-  float left
-  line-height 18px
-  text-align left
-  width 180px
-  font-size s_caption + 2
-  margin-top 0
-  margin 5px 0 0 8px
-
-@-webkit-keyframes fade
-  0% {opacity: 0;}
-  20% {opacity: 0;}
-  30% {opacity: 1;}
-  70% {opacity: 1;}
-  80% {opacity: 0;}
-  100% {opacity: 0;}
-
-@keyframes fade
-  0% {opacity: 0;}
-  20% {opacity: 0;}
-  30% {opacity: 1;}
-  70% {opacity: 1;}
-  80% {opacity: 0;}
-  100% {opacity: 0;}
-
-@media (max-width:(block_width_mar * 4) + 19)
-
-  /* LABS */
-  .body--static
-    .labs__case-studies__img
-      max-height 300px
-
-@media (max-width:(block_width_mar * 3) + 16)
-
-  /* LABS */
-  .body--static
-    p, h1
-      width 90%
-      margin-left 5%
-
-    .labs__case-studies__img
-      max-height 200px
-
-    .labs__case-studies
-      .labs__case-studies__item
-        max-width 90%
-        left 5%
-
-    .labs__services
-      max-width 90%
-      left 5%
-
-    .static__img
-      img
-        max-width 90%
-        left 5%
-
-    .labs-logo
-      img
-        width 80%
-
-@media (max-width:500px)
-
-  /* LABS */
-  .body--static
-
-    .labs-hint
-      margin 50px 0 0 0
-      padding 0
-
-    .labs-hint.labs-footer
-      padding-bottom 50px
-
-    .labs__case-studies
-      .labs__case-studies__item
-        width 100%
-        padding 20px
-        margin 10px 0
-
-    .labs__case-studies__img
-      max-height 100px
+  p
+    p()
+    margin-bottom unit
+  +below(900px)
+    padding (unit)
