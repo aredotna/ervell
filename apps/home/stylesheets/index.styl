@@ -72,8 +72,12 @@
     margin (unit * 3) auto (unit * 4)
     font-size 16px
     &__learn-more
-      text-align center
+      text-align left
       padding (unit * 4) 0 (unit * 2)
+      a.btn
+        width 300px
+        +mobile()
+          width 100%
     h2
       text-align center
       font-weight normal
@@ -119,6 +123,12 @@
           padding-right 0
 
   &--posts
+    &__headline
+      text-align center
+      font-weight normal
+      color black
+      margin-top 0
+      margin-bottom unit * 2
     &__post
       background-position center center
       background-size cover
