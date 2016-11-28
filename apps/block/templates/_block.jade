@@ -13,13 +13,18 @@
         .block-text(id="attribute-content_#{block.id}")!= md(block.get('content'))
 
       - if(block.get('class') == 'Attachment' && !block.has('image'))
-          a.block-attachment(href="#{block.getSourceUrl()}" target="_blank")
-            if(block.get('attachment').extension == 'mp3')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" class="iconic iconic-lg")
-            else if(block.get('attachment').extension == 'pdf')
-              img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" class="iconic iconic-lg")
-            else
-              img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
+          if block.isMovie()
+            .block-video
+              video(preload controls)
+                source(src=block.getSourceUrl())
+          else
+            a.block-attachment(href="#{block.getSourceUrl()}" target="_blank")
+              if(block.get('attachment').extension == 'mp3')
+                img(data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg" class="iconic iconic-lg")
+              else if(block.get('attachment').extension == 'pdf')
+                img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" class="iconic iconic-lg")
+              else
+                img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
 
       .block-arrow.block-arrow--right.v-outer(data-direction="next"): .v-inner
         img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-md")
