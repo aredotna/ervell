@@ -13,7 +13,6 @@ class Posts extends Collection
     .end (err, response) ->
       $html = $(response?.text)
       title = if $html.find('title').html() is "Blog" then "Blog" else "Blog – #{$html.find('title').html()}"
-      console.log 'title', title
       res.render 'index',
         title: title
         html: $html.find('.page-content').html()
