@@ -12,7 +12,8 @@ class Posts extends Collection
   request("#{sd.BLOG_URL}#{url}")
     .end (err, response) ->
       $html = $(response?.text)
+      title = if $html.find('title').html() is "Blog" then "Blog" else "Blog – #{$html.find('title').html()}"
       res.render 'index',
-        title: $html.find('title').html() or "Blog"
+        title: title
         html: $html.find('.page-content').html()
         image: $html.find('img').attr('src')
