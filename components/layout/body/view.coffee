@@ -19,11 +19,11 @@ module.exports = class BodyView extends Backbone.View
 
   mobileEvents:
     'tap'                                         : 'bodyClick'
+    'tap #scroll-top'                             : 'scrollToTop'
     'tap a[data-disabled]'                        : 'disable'
     'tap a[data-client]:not([data-disabled])'     : 'intercept'
     'tap span[data-client]:not([data-disabled])'  : 'intercept'
     'tap a'                                       : 'maybeIntercept'
-    'tap #scroll-top'                             : 'scrollToTop'
 
   initialize: (options) ->
     new Router
@@ -38,7 +38,8 @@ module.exports = class BodyView extends Backbone.View
     # view loses event delegation only on a channel.
     _.defer => @delegateEvents()
 
-    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
+    if $('body').hasClass 'is-mobile'
+      _.defer => @delegateEvents(@mobileEvents) 
 
   startLoading: -> $('body').addClass 'is-loading'
 
