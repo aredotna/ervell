@@ -42,9 +42,14 @@ if channel && author
   meta(property="og:url" content="https://www.are.na/#{author.get('slug')}/#{channel.get('slug')}")
 else if author
   meta(name="twitter:title", content="Are.na / #{author.get('username')}")
-  meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}}")
+  meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}")
   meta(property="og:title" content="Are.na / #{author.get('username')}")
   meta(property="og:url" content="https://www.are.na/#{author.get('slug')}")
+else if title
+  meta(name="twitter:title", content="Are.na / #{title}")
+  meta(name="twitter:url", content="https://www.are.na#{sd.CURRENT_PATH}")
+  meta(property="og:title" content="Are.na / #{title}")
+  meta(property="og:url" content="https://www.are.na#{sd.CURRENT_PATH}")
 else
   meta(name="twitter:title", content="Are.na")
   meta(name="twitter:url", content="https://www.are.na")
