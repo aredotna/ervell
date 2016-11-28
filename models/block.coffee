@@ -65,6 +65,10 @@ module.exports = class Block extends Base
       connection.base_class = 'Channel'
       new Block connection
 
+  isMovie: ->
+    extension = @get('attachment')?.extension.toLowerCase()
+    extension is 'mp4' or extension is 'mov'
+
   getSourceUrl: ->
     @get('source')?.url || @get('attachment')?.url || @getImageSize('original')
 
