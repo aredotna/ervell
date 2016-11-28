@@ -13,6 +13,6 @@ class Posts extends Collection
     .end (err, response) ->
       $html = $(response?.text)
       res.render 'index',
-        title: "Blog"
+        title: $html.find('title').html() or "Blog"
         html: $html.find('.page-content').html()
         image: $html.find('img').attr('src')
