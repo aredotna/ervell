@@ -61,7 +61,7 @@ module.exports = (app) ->
   app.use sharify
 
   # Referral spam blocker
-  blocker.addToReferrers ['tkpassword.com']
+  blocker.addToReferrers ['tkpassword.com', 'lifehacĸer.com']
   app.use blocker.send404
 
   # Development only
