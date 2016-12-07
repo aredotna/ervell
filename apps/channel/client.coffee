@@ -37,8 +37,9 @@ module.exports = class ChannelView extends Backbone.View
       @$el.removeClass 'is-dragging'
 
   pusherSubscribe: ->
-    @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
-    @listener = new Bp.Backpusher @pusher, @blocks
+    @pusher = mediator.shared.pusher?.subscribe "channel-production-#{@channel.id}"
+    if @pusher
+      @listener = new Bp.Backpusher @pusher, @blocks
 
   updateSlug: ->
     window.location.href = @channel.href()
