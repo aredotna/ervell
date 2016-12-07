@@ -6,13 +6,13 @@
         data-key='privacy'
         data-value='public'
         class=channel.get('status') == 'public' ? 'is-active' : ''
-      ).metadata--selector__option.metadata--selector__option--public.default Public
+      ).metadata--selector__option.metadata--selector__option--public.default Open
     li: a(
         href="#"
         data-key='privacy'
         data-value='closed'
         class=channel.get('status') == 'closed' ? 'is-active' : ''
-      ).metadata--selector__option.metadata--selector__option--closed Default
+      ).metadata--selector__option.metadata--selector__option--closed Public
     li: a(
         href="#"
         data-key='privacy'
