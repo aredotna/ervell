@@ -5,6 +5,11 @@ analytics = require '../../../lib/analytics.coffee'
 
 template = -> require('../templates/channel_visibility.jade') arguments...
 
+copyMap = 
+  public: 'Everyone can view the channel and anyone logged-in can add to it.'
+  closed: 'Everyone can view the channel but only you and your collaborators can add to it.'
+  private: 'Only you and your collaborators can view and add to the channel.'
+
 module.exports = class ChannelVisibilityView extends Backbone.View
   defaults:
     autoRender: true
@@ -18,17 +23,18 @@ module.exports = class ChannelVisibilityView extends Backbone.View
 
     @render() if @autoRender
 
+    @listenTo @model, 'change:status', @render, @
+
   render: ->
-    @$el.html template channel: @model
+    @$el.html template 
+      channel: @model
+      description: copyMap[@model.get('status')]
 
   toggleVisibility: (e) =>
     e.stopPropagation()
     e.preventDefault()
 
     $selection = $(e.currentTarget)
-
-    @$('.metadata--selector__option.is-active').removeClass 'is-active'
-    $selection.addClass 'is-active'
 
     analytics.track.click "Channel visibility changed to #{$selection.data('value')}"
 
