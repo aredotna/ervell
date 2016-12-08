@@ -65,6 +65,7 @@ module.exports = class BlockCollectionView extends Backbone.View
       view_mode: @state.get('view_mode')
       user: mediator.shared.current_user
       channel: @channel
+      isSearching: @isSearching()
 
     defer (=> @postRender())
 
@@ -97,7 +98,7 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $block
 
   setupNewBlockView: ({ channel, autoRender =  false }) ->
-    return false if @newBlockView?
+    console.log 'setupNewBlockView autoRender', autoRender
     @newBlockView = new @newBlockViews[@state.get('view_mode')]
       el: $('.block-item--new')
       blocks: @collection
