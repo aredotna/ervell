@@ -15,14 +15,12 @@ module.exports = class BodyView extends Backbone.View
     'click span[data-client]:not([data-disabled])': 'intercept'
     'click .trigger-mediator'                     : 'triggerMediator'
     'click a'                                     : 'maybeIntercept'
-    'click #scroll-top'                           : 'scrollToTop'
 
   mobileEvents:
-    'tap'                                         : 'bodyClick'
-    'tap #scroll-top'                             : 'scrollToTop'
     'tap a[data-disabled]'                        : 'disable'
     'tap a[data-client]:not([data-disabled])'     : 'intercept'
     'tap span[data-client]:not([data-disabled])'  : 'intercept'
+    'tap #scroll-top'                             : 'scrollToTop'
     'tap a'                                       : 'maybeIntercept'
 
   initialize: (options) ->
