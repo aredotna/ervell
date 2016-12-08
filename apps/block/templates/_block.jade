@@ -34,15 +34,15 @@
 
   #block-tabs.tab--container.tab--container--block
     ul.tab--container__nav
-      li.tab--container__nav__item(data-disabled data-tab="info", class=tab == 'info' ? 'is-active' : '')
-        h5: a(href="/#") Info
-      li.tab--container__nav__item(data-disabled data-tab="connections" class=tab == 'connections' ? 'is-active' : '')
+      li.tab--container__nav__item(data-tab="info", class=tab == 'info' ? 'is-active' : '')
+        h5: a(href="/#" data-disabled=true) Info
+      li.tab--container__nav__item(data-tab="connections" class=tab == 'connections' ? 'is-active' : '')
         - s = connections.length == 1 ? '' : 's'
-        h5: a(id="tab-connection-count" href="/#") #{connections.length} Connection#{s}
+        h5: a(id="tab-connection-count" href="/#" data-disabled=true ) #{connections.length} Connection#{s}
       if user && user.id
-        li.tab--container__nav__item(data-disabled data-tab="comments" class=tab == 'comments' ? 'is-active' : '')
+        li.tab--container__nav__item(data-tab="comments" class=tab == 'comments' ? 'is-active' : '')
           - s = block.get('comment_count') == 1 ? '' : 's'
-          h5: a(href="/#") #{block.get('comment_count')} Comment#{s}
+          h5: a(href="/#" data-disabled=true ) #{block.get('comment_count')} Comment#{s}
 
     #tab-info.tab-content(class=tab == 'info' ? 'is-active' : '')
       .tab-content__inner

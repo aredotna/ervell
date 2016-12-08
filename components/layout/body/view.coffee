@@ -94,7 +94,7 @@ module.exports = class BodyView extends Backbone.View
 
   disable: (e)->
     e.preventDefault()
-    e.stopPropagation()
+    e.stopImmediatePropagation()
 
   bodyClick: (e) ->
     mediator.trigger 'body:click', e
