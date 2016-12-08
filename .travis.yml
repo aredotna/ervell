@@ -12,7 +12,7 @@ addons:
 before_script:
 - npm install --only=dev
 before_deploy:
-- if [ $TRAVIS_BRANCH = 'develop' ]; then make deploy-assets-staging; fi
+- if [ $TRAVIS_BRANCH = 'master' ]; then make deploy-assets-staging; fi
 - if [ $TRAVIS_BRANCH = 'deploy' ]; then make deploy-assets; fi
 deploy:
   provider: heroku
@@ -20,7 +20,7 @@ deploy:
   api_key:
     secure: jZIwuTvmr1Ez4eClIPKILBicnQpVRwrRmr2z9jvLgpOA7a225JZct8S+Dpe/4caLVAQCLr9DNFSnyI0ZhoheCxyeHKmOJ+bxzuPbmoufHJ+GcCGbEMfKNOTnf3uYPO/TWZKb/2JKzfpQo/85NQ8ykNdOe87eIcLNBqW9a5RQbFw=
   app:
-    develop: ervell-staging
+    master: ervell-staging
     deploy: ervell
 env:
   global:
