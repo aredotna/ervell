@@ -24,13 +24,12 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
     include header/templates/index--bare
     .container
       block body
+      include footer/templates/index--bare
 
     #l-loader-container
       include loader/templates/index
 
     #message-container
-
-    //- a(data-section="#")#scroll-top &uarr;
 
     include analytics
 
