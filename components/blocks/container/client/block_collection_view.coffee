@@ -98,7 +98,6 @@ module.exports = class BlockCollectionView extends Backbone.View
         el: $block
 
   setupNewBlockView: ({ channel, autoRender =  false }) ->
-    console.log 'setupNewBlockView autoRender', autoRender
     @newBlockView = new @newBlockViews[@state.get('view_mode')]
       el: $('.block-item--new')
       blocks: @collection
