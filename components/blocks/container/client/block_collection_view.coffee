@@ -1,4 +1,4 @@
-{ defer } = require 'underscore'
+{ defer, each } = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../../../lib/mediator.coffee'
 InfiniteView = require '../../../pagination/infinite_view.coffee'
@@ -45,6 +45,8 @@ module.exports = class BlockCollectionView extends Backbone.View
     @listenTo @collection, 'add', @appendBlockView, @
     @listenTo @resultsCollection, 'sync reset', @render
 
+    mediator.shared.state.on 'change:hovered_channel', @onChannelHover, @
+
     @postRender()
 
   appendBlockView: (model) ->
@@ -52,6 +54,19 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   isSearching: ->
     mediator.shared.state.get 'is_searching'
+
+  onChannelHover: ->
+    channelId = mediator.shared.state.get 'hovered_channel'
+    if channelId
+      visibleBlockIds = $('.block-item').withinviewport().map(-> $(this).data('id')).get()
+      blockPool = @collection.filter (block) -> 
+        visibleBlockIds.indexOf(parseInt(block.id)) > -1
+      each blockPool, (block) ->
+        unless block.get('channel_ids').indexOf(parseInt(channelId)) > -1 or block.id is channelId
+          block.set deselected: true
+    else
+      blockPool = @collection.where deselected: true
+      each blockPool, (block) -> block.unset 'deselected'
 
   blocks: ->
     if @isSearching()
@@ -94,6 +109,7 @@ module.exports = class BlockCollectionView extends Backbone.View
         container: @$('.block-collection__contents')
         model: block
         channel: @channel if @channel
+        parentView: @
         autoRender: false
         el: $block
 
@@ -113,3 +129,4 @@ module.exports = class BlockCollectionView extends Backbone.View
       autoRender: autoRender
       containerMethod: @containerMethods[@state.get('view_mode')][containerMethodType]
       channel: @channel if @channel
+      parentView: @
