@@ -61,7 +61,6 @@ module.exports = class BlockCollectionView extends Backbone.View
       visibleBlockIds = $('.block-item').withinviewport().map(-> $(this).data('id')).get()
       blockPool = @collection.filter (block) -> 
         visibleBlockIds.indexOf(parseInt(block.id)) > -1
-      console.log('blockPool', blockPool)
       each blockPool, (block) ->
         unless block.get('channel_ids').indexOf(parseInt(channelId)) > -1 or block.id is channelId
           block.set deselected: true

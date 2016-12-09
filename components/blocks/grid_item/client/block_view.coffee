@@ -60,11 +60,11 @@ module.exports = class BlockView extends Backbone.View
       @$el.removeClass 'is-deselected'
   
   onMouseOver: ->
-    unless @channel or @model.get('base_class') is 'Block'
+    unless @channel or @model.get('base_class') is 'Block' or sd.CURRENT_PATH isnt "/explore"
       mediator.shared.state.set hovered_channel: @model.id
 
   onMouseOut: ->
-    unless @channel and @model.get('base_class') is 'Channel'
+    unless @channel and @model.get('base_class') is 'Channel' or sd.CURRENT_PATH isnt "/explore"
       mediator.shared.state.unset 'hovered_channel'
 
   loadConnectView: (e)=>
