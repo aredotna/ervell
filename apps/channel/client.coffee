@@ -9,6 +9,7 @@ CurrentUser = require '../../models/current_user.coffee'
 setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
+MuteView  = require './components/mute/client.coffee'
 Filter = require '../../components/filter/index.coffee'
 Bp = require('../../lib/vendor/backpusher.js')
 { initChannelPath } = require './client/channel_path_view.coffee'
@@ -73,6 +74,16 @@ module.exports = class ChannelView extends Backbone.View
 
       @setUpDragView() unless $('body').hasClass 'is-mobile'
       @delegateEvents()
+
+    # if user is logged in but can't edit channel
+    if mediator.shared.current_user.id && !mediator.shared.current_user.canEditChannel(@channel)
+      @$('.metadata__column--manage').removeClass 'is-hidden'
+
+      new MuteView
+        el: $('.metadata__column--manage')
+        model: @channel
+
+      @channel.checkIfMuted()
 
     @maybeSetEmpty()
 
