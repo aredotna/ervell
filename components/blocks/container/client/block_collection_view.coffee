@@ -1,4 +1,4 @@
-{ defer, each } = require 'underscore'
+{ defer, each, delay } = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../../../lib/mediator.coffee'
 InfiniteView = require '../../../pagination/infinite_view.coffee'
@@ -57,14 +57,22 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   onChannelHover: ->
     channelId = mediator.shared.state.get 'hovered_channel'
+    clearTimeout @delayId
+    
     if channelId
-      visibleBlockIds = $('.block-item').withinviewport().map(-> $(this).data('id')).get()
-      blockPool = @collection.filter (block) -> 
-        visibleBlockIds.indexOf(parseInt(block.id)) > -1
-      each blockPool, (block) ->
-        unless block.get('channel_ids').indexOf(parseInt(channelId)) > -1 or block.id is channelId
-          block.set deselected: true
+      @delayId = setTimeout((=> @highlightBlocks(channelId)), 500)
     else
+      @unhighlightBlocks()
+
+  highlightBlocks: (channelId)->
+    visibleBlockIds = $('.block-item').withinviewport().map(-> $(this).data('id')).get()
+    blockPool = @collection.filter (block) -> 
+      visibleBlockIds.indexOf(parseInt(block.id)) > -1
+    each blockPool, (block) ->
+      unless block.get('channel_ids').indexOf(parseInt(channelId)) > -1 or block.id is channelId
+        block.set deselected: true
+  
+  unhighlightBlocks: ->
       blockPool = @collection.where deselected: true
       each blockPool, (block) -> block.unset 'deselected'
 
