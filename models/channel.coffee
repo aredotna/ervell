@@ -41,6 +41,24 @@ module.exports = class Channel extends Block
   shareHref: ->
     "#{sd.APP_URL}/share/#{@get('share_link')}"
 
+  checkIfMuted: ->
+    $.get "#{sd.API_URL}/channels/#{@slugOrId()}/is_muted", (response) =>
+      @set response
+
+  toggleMute: ->
+    if @get('is_muted') is false then @muteChannel() else @unmuteChannel()
+
+  muteChannel: ->
+    $.post "#{sd.API_URL}/channels/#{@slugOrId()}/mute", (response) =>
+      @set 'is_muted', true
+
+  unmuteChannel: ->
+    $.ajax
+      type: "DELETE"
+      url: "#{sd.API_URL}/channels/#{@slugOrId()}/mute"
+      success: =>
+        @set 'is_muted', false
+
   generateShareLink: ->
     mediator.trigger 'sharelink:created'
 
