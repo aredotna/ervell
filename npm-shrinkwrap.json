@@ -4241,7 +4241,14 @@
         "glob": {
           "version": "7.0.6",
           "from": "glob@7.0.x",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz",
+          "dependencies": {
+            "fs.realpath": {
+              "version": "1.0.0",
+              "from": "fs.realpath@>=1.0.0 <2.0.0",
+              "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
+            }
+          }
         },
         "minimatch": {
           "version": "3.0.3",
@@ -4878,6 +4885,11 @@
           "resolved": "https://registry.npmjs.org/acorn/-/acorn-1.2.2.tgz"
         }
       }
+    },
+    "withinviewport": {
+      "version": "1.0.0",
+      "from": "withinviewport@*",
+      "resolved": "https://registry.npmjs.org/withinviewport/-/withinviewport-1.0.0.tgz"
     },
     "wordwrap": {
       "version": "0.0.3",

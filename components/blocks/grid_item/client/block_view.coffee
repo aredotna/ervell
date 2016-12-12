@@ -24,6 +24,8 @@ module.exports = class BlockView extends Backbone.View
     'click .grid__block__delete-block'  : 'confirmDestroy'
     'click .tooltip__choice' : 'confirmChoice'
     'click .grid__block--tip__close a' : 'hideTip'
+    'mouseover' : 'onMouseOver'
+    'mouseout' : 'onMouseOut'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -39,6 +41,7 @@ module.exports = class BlockView extends Backbone.View
     @model.on 'remote_update', @update, @
     @model.on 'show', @show, @
     @model.on 'hide', @hide, @
+    @model.on 'change:deselected', @toggleDeselect, @
 
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
@@ -49,6 +52,20 @@ module.exports = class BlockView extends Backbone.View
 
   hide: ->
     @$el.hide()
+
+  toggleDeselect: ->
+    if @model.get('deselected') is true
+      @$el.addClass 'is-deselected'
+    else
+      @$el.removeClass 'is-deselected'
+  
+  onMouseOver: ->
+    unless @channel or @model.get('base_class') is 'Block' or sd.CURRENT_PATH isnt "/explore"
+      mediator.shared.state.set hovered_channel: @model.id
+
+  onMouseOut: ->
+    unless @channel and @model.get('base_class') is 'Channel' or sd.CURRENT_PATH isnt "/explore"
+      mediator.shared.state.unset 'hovered_channel'
 
   loadConnectView: (e)=>
     e.preventDefault()

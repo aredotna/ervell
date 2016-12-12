@@ -43,6 +43,9 @@ module.exports = class CurrentUser extends User
     if channel.get('user').id is @id or channel.get('status') is 'public'
       true
 
+  isCollaborator: (collaborators) ->
+    _.contains collaborators.pluck('id'), @id
+
   canEditChannel: (channel) ->
     if channel.get('user').id is @id
       true
