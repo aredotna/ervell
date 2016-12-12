@@ -76,7 +76,7 @@ module.exports = class ChannelView extends Backbone.View
       @delegateEvents()
 
     # if user is logged in but can't edit channel
-    if mediator.shared.current_user.id && !mediator.shared.current_user.canEditChannel(@channel)
+    if mediator.shared.current_user.id && !collaborator
       @$('.metadata__column--manage').removeClass 'is-hidden'
 
       new MuteView
