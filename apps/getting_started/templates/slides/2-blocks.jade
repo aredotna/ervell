@@ -1,0 +1,15 @@
+- title = 'Blocks'
+- var index = 2
+- var img_url = "https://d2w9rnfcy7mm78.cloudfront.net/800854/original_f6f0e9b37a1053d46d052d0a5464966e.jpg"
+- copy = "Blocks are the content you connect to channels. A block can be a file or an image you upload, raw text, a link to a website, an embed (Vimeo, YouTube, SoundCloud, etc), a pdf, etc."
+
+.gs-slide(data-slide="#{index}")
+  h2
+    | #{title} 
+    span.color-lg (#{index}/5)
+  .gs-slide__img
+    img(src="#{img_url}")
+    //- .gs-slide__img__nav.gs-slide__img__nav--right
+    //-   include ../../../../public/images/iconic/nav-arrow-r.svg
+  p.gs-slide__copy!= copy
+    

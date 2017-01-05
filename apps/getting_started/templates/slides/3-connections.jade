@@ -1,0 +1,15 @@
+- title = 'Connections'
+- var index = 3
+- var img_url = "https://d2w9rnfcy7mm78.cloudfront.net/823669/original_b9aeb497548afe6de26932175ae7e94d.jpg"
+- copy = "A connection is made when a person puts a block in a channel. Blocks can be connected to your own channels or other people's <strong class='privacy--public'>open</strong> channels. Channels can also be connected to other channels."
+
+.gs-slide(data-slide="#{index}")
+  h2
+    | #{title} 
+    span.color-lg (#{index}/5)
+  .gs-slide__img
+    img(src="#{img_url}")
+    //- .gs-slide__img__nav.gs-slide__img__nav--right
+    //-   include ../../../../public/images/iconic/nav-arrow-r.svg
+  p.gs-slide__copy!= copy
+    
