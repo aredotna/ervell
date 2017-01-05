@@ -31,6 +31,7 @@ module.exports = ->
   setupAnalytics()
   syncAuth()
   initShortCuts()
+  showSurveyMessage()
 
 setMobileClass = ->
   if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -158,17 +159,14 @@ initShortCuts = ->
 
   initNightMode()
 
-showNewUserMessages = ->
-  new NewUserMessagesView
-    container: $('#message-container')
-
-showBookmarkletMessage = ->
-  model = new Backbone.Model
-    id: 'bookmarklet_updates_message'
-    title: "New Bookmarklet"
-    body: "Quickly save to Are.na while browsing the web. Drag and drop, add to multiple channels, and more. <a href='https://www.are.na/block/506001'>Read more...</a>"
-    type: 'announcement'
-  new MessageView container: $('#message-container'), model: model
+showSurveyMessage = ->
+  if sd.CURRENT_USER and (sd.CURRENT_USER.following_count > 1 or sd.CURRENT_USER.channel_count > 1 )
+    model = new Backbone.Model
+      id: 'survey_message'
+      title: "We have questions, you have answers."
+      body: "Want to help us make Are.na better? Fill out this <a href='https://goo.gl/forms/sakWD5lzZHxc7upK2' target='_blank'>quick survey</a>. As thanks, we will give away premium accounts to a few random responders. Thanks!"
+      type: 'announcement'
+    new MessageView container: $('#message-container'), model: model
 
 showAnnouncements = (announcements) ->
   # stub
