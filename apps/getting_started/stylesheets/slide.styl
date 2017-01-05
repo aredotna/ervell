@@ -1,12 +1,19 @@
+slideWidth = 750px
+
 .gs-slide
   text-align center
   margin-bottom unit * 6
   &__img 
     position relative
     margin-bottom unit * 2
+    +below(slideWidth)
+      margin-bottom unit
     img
-      width 800px
+      width slideWidth
       margin 0 auto
+      +below(slideWidth)
+        width 100%
+        padding 0 unit 
     &__nav
       position absolute
       top 50%
@@ -21,6 +28,9 @@
 
   &__copy
     width 600px
+    +below(slideWidth)
+      width 100%
+      padding 0 unit
     text-align left
     margin 0 auto !important
     line-height 1.5 !important
