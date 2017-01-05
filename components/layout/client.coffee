@@ -31,10 +31,13 @@ module.exports = ->
   setupAnalytics()
   syncAuth()
   initShortCuts()
-  showSurveyMessage()
+  showSurveyMessage() unless isMobile()
+
+isMobile = ->
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 setMobileClass = ->
-  if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  if isMobile()
     $('body').addClass 'is-mobile'
     attachFastClick(document.body)
 
