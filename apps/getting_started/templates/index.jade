@@ -12,5 +12,6 @@ block body
       include ./slides/3-connections.jade
       include ./slides/4-users.jade
       include ./slides/5-feed.jade
-    .gs__profile
-      a.btn(href="/") Go to your profile
+    if user
+      .gs__profile
+        a.btn(href="/#{user.get('slug')}") Go to your profile
