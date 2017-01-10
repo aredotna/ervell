@@ -2,9 +2,10 @@ sd = require("sharify").data
 Authentication = require '../../models/authentication.coffee'
 
 @tools = (req, res, next) ->
-  res.redirect("/tools/bookmarklet") unless req.params.tab
-  res.redirect("/#log_in") unless req.user
-  res.redirect("/manage") if req.params.tab is 'manage'
+  return res.redirect("/tools/bookmarklet") unless req.params.tab
+  return res.redirect("/log_in") unless req.user
+  return res.redirect("/manage") if req.params.tab is 'manage'
+  return res.redirect("/pricing") if req.params.tab is 'premium'
 
   tab = res.locals.sd.TAB = req.params.tab
   coupon = res.locals.sd.COUPON = req.query.coupon
