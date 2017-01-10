@@ -14,12 +14,13 @@ module.exports = class ChannelVisibilityView extends Backbone.View
   defaults:
     autoRender: true
     autoSync: false
+    showDescription: true
 
   events:
     'click .metadata--selector__option' : 'toggleVisibility'
 
   initialize: (options) ->
-    { @autoRender, @autoSync } = _.defaults options, @defaults
+    { @autoRender, @autoSync, @showDescription } = _.defaults options, @defaults
 
     @render() if @autoRender
 
@@ -29,6 +30,7 @@ module.exports = class ChannelVisibilityView extends Backbone.View
     @$el.html template 
       channel: @model
       description: copyMap[@model.get('status')]
+      showDescription: @showDescription
 
   toggleVisibility: (e) =>
     e.stopPropagation()
