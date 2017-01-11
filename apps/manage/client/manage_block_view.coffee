@@ -32,6 +32,7 @@ module.exports = class ManageBlockView extends BlockView
       el: @$(".manage__block__status")
       model: @model
       autoSync: true
+      showDescription: false
 
     @channelExportView = new ChannelExportView
       el: @$(".manage__block__export")

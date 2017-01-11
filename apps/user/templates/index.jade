@@ -3,7 +3,7 @@ extends ../../../components/layout/index
 block body
   include ./path
   if user && user.isPremium() && !following && !followers
-  .channel-container( class=blocks.length ? '' : 'is-empty' )
+  .channel-container.channel-container--user( class=blocks.length ? '' : 'is-empty' )
     .profile-contents
       - content = sd.SUBJECT ? sd.SUBJECT + "s" : "blocks and channels"
       - searchee = (user && author.id == user.id) ? "your " : author.get('username') + "'s public "
