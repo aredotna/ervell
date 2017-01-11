@@ -49,7 +49,7 @@ module.exports = class ChannelView extends Backbone.View
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
     # addable
-    if collaborator or mediator.shared.current_user.canAddToChannel(@channel) 
+    if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
       @setupFileDropView()
 
       @$('.block-collection').addClass 'is-addable'
