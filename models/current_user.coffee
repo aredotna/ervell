@@ -40,7 +40,7 @@ module.exports = class CurrentUser extends User
     @get('storage')
 
   canAddToChannel: (channel) ->
-    if channel.get('user').id is @id or channel.get('status') is 'public'
+    if channel.get('user').id is @id or (channel.get('status') is 'public' and @id?)
       true
 
   isCollaborator: (collaborators) ->
