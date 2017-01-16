@@ -5,6 +5,7 @@ Comment = require "../../../models/comment.coffee"
 mediator = require '../../../lib/mediator.coffee'
 sd = require("sharify").data
 analytics = require '../../../lib/analytics.coffee'
+xss = require 'xss'
 MentionQuicksearchView = require '../../mention_quicksearch/client/mention_quicksearch_view.coffee'
 
 newCommentTemplate = -> require('../templates/new_comment.jade') arguments...
@@ -37,7 +38,7 @@ module.exports = class NewCommentView extends Backbone.View
       userAttrs = _.pick(mediator.shared.current_user.attributes, ['slug', 'username', 'avatar', 'id'])
 
       comment = new Comment
-        body: @$input.val()
+        body: xss @$input.val()
         user: userAttrs
         created_at: new Date()
       , block_id: @block_id

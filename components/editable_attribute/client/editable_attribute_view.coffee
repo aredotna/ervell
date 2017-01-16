@@ -28,17 +28,16 @@ module.exports = class EditableAttributeView extends Backbone.View
     @listenTo @model, 'remote:update', @render
     @listenTo @model, 'change', @render
 
-    @render()
-
-    md.setOptions
-      renderer: new md.Renderer(),
-      gfm: true,
-      tables: true,
-      breaks: true,
-      pedantic: false,
-      sanitize: true,
-      smartLists: true,
+    md.setOptions		
+      renderer: new md.Renderer(),		
+      gfm: true,		
+      tables: true,		
+      breaks: true,		
+      pedantic: false,		
+      smartLists: true,		
       smartypants: false
+
+    @render()
 
   beginEdit: ->
     return unless @model.allows('can-edit',  @currentUser) and !@editing
