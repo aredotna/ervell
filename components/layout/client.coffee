@@ -22,6 +22,7 @@ CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
+initLoggedOutCta = require '../logged_out_cta/index.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -32,6 +33,7 @@ module.exports = ->
   syncAuth()
   initShortCuts()
   showSurveyMessage() unless isMobile()
+  initLoggedOutCta() unless sd.CURRENT_USER?.id
 
 isMobile = ->
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)

@@ -1,0 +1,58 @@
+.lo-cta
+  -webkit-perspective 1000
+  -webkit-backface-visibility hidden
+  position fixed
+  z-index header_z  
+  bottom -(unit * 4)
+  width 100%
+  border-top 1px solid hovergray
+  height unit * 4
+  background #fff
+  text-align center
+  color hovergray
+  transition transform .1s
+  display flex
+  justify-content center
+  align-items center
+  +mobile()
+    bottom -120px
+    height unit * 6
+  &--visible
+    transform translateY(-(unit * 4))
+    +mobile()
+      transform translateY(-(unit * 6))
+  &__inner
+    font-size 1.3rem
+    font-weight normal
+    +mobile()
+      padding 0 20% 
+      line-height 1.3
+    &__btn
+      display inline-block
+      text-align center
+      font-weight bold
+      border 2px solid hovergray
+      color black
+      width unit * 6
+      font-size 14px
+      line-height 30px
+      margin 0 unit
+      +mobile()
+        display block
+        margin 10px auto
+        font-size 12px
+      &:hover
+        background-color hovergray
+        color white
+  &__close
+    position absolute
+    top (unit / 2)
+    right (unit / 2)
+    line-height 1
+    color textgray
+    font-size 12px
+    cursor pointer
+    .iconic[data-glyph].iconic-sm:before
+      font-size 12px
+    &:hover
+      color hovergray
