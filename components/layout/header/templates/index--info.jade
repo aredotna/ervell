@@ -2,17 +2,20 @@
 - isCurrentPath = function(path) { return sd.CURRENT_PATH.indexOf(path) > -1 }
 
 header.header--info
-  a(href=homeHref).header--info__logo
-    include ../../../../public/images/arena-mark.svg
-    | #[span Are.na&nbsp;]
-  .header--info__menu
-    unless loggedIn
-      a(data-client="auth" href="/sign_up") Sign up
-    a(data-slug="about" href="/about" class=isCurrentPath('about') ? 'selected' : '') About
-    a(data-slug="pricing" href="/pricing" class=isCurrentPath('pricing') ? 'selected' : '') Pricing
-    a(data-slug="blog" href="/blog" class=isCurrentPath('blog') ? 'selected' : '') Blog
-    unless loggedIn
-      a(data-client="auth" href="/log_in") Log in
+  .header--info__left
+    a(href=homeHref).header--info__logo
+      include ../../../../public/images/arena-mark.svg
+      | #[span Are.na&nbsp;]
+    .header--info__menu
+      a(data-slug="about" href="/about" class=isCurrentPath('about') ? 'selected' : '') About
+      a(data-slug="pricing" href="/pricing" class=isCurrentPath('pricing') ? 'selected' : '') Pricing
+      a(data-slug="getting-started" href="/getting-started" class=isCurrentPath('getting-started') ? 'selected' : '') Getting Started
+      a(data-slug="blog" href="/blog" class=isCurrentPath('blog') ? 'selected' : '') Blog
+  .header--info__right
+    .header--info__auth
+      unless loggedIn
+        a(data-client="auth" href="/sign_up") Sign up
+        a(data-client="auth" href="/log_in") Log in
   .header--info__mobile-menu
     .header--info__mobile-menu__trigger
       .header--info__mobile-menu__trigger__menu
@@ -21,11 +24,11 @@ header.header--info
         span(class="iconic" data-glyph="x" title="close" aria-hidden="true")
 
 
-    .header--info__mobile-menu__contents
-      unless loggedIn
-        a(data-client="auth" href="/sign_up") Sign up
+    .header--info__mobile-menu__contents        
       a(data-slug="about" href="/about" class=isCurrentPath('about') ? 'selected' : '') About
       a(data-slug="pricing" href="/pricing" class=isCurrentPath('pricing') ? 'selected' : '') Pricing
+      a(data-slug="getting-started" href="/getting-started" class=isCurrentPath('getting-started') ? 'selected' : '') Getting Started
       a(data-slug="blog" href="/blog" class=isCurrentPath('blog') ? 'selected' : '') Blog
       unless loggedIn
+        a(data-client="auth" href="/sign_up") Sign up
         a(data-client="auth" href="/log_in") Log in
