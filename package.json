@@ -32,7 +32,6 @@
     "fastclick": "^1.0.6",
     "feed": "^0.2.6",
     "forever": "*",
-    "fsevents": "^1.0.17",
     "imagesloaded": "^4.1.1",
     "jade": "*",
     "jquery.finger": "*",
