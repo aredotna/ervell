@@ -42,6 +42,8 @@
         top 0
         left 0
         opacity 0
+        width 100%
+        
         &.visible
           opacity 1
     &__copy
@@ -99,11 +101,14 @@
     max-width 900px
     margin (unit * 3) auto (unit * 6)
     font-size 16px
+    +below(1100px)
+      height auto
+      padding 0 unit
     &__introduction
       p()
       font-size 1.2rem
-      width 50%
-      margin unit auto
+      max-width 600px
+      margin unit auto (unit * 4)
       +mobile()
         width 90%
     h2, h1
@@ -112,7 +117,7 @@
       color black
       margin-top 0
     h1
-      width 50%
+      max-width 600px
       margin 0 auto
       +mobile()
         width 90%
@@ -147,7 +152,7 @@
           color textgray
           
   &--diatribe
-    max-width 900px
+    max-width 600px
     margin (unit * 4) auto (unit * 6)
     padding 0 unit
     h2, h1
@@ -159,11 +164,11 @@
       margin (unit * 3) 0 0
     p
       p()
+      font-size 1.2rem
       margin unit auto
-      width 50%
     img
       margin unit 0
-      width 90%
+      width 60%
     +mobile()
       p
         width 90%
@@ -178,10 +183,12 @@
     &__post
       background-position center center
       background-size cover
-      height 590px
+      height 400px
+      line-height 60px
+      a.btn 
+        margin-top unit 
       h1
-        font-size 50px
-        line-height 60px
+        font-size 35px
         font-weight normal
         margin 0
       &__overlay
