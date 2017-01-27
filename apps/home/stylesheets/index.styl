@@ -18,38 +18,57 @@
       &:hover
         background-color white
         color textgray
-
   &--splash
     width 100%
-    height 60vh
+    height 65vh
     margin-top topbar_h * 2
     position relative
     overflow hidden
     &__image
       position absolute
       top 50%
-      right (unit * 3)
+      right -(unit * 4)
       transform translateY(-50%)
-      width 50vw
+      width 60vw
       cursor pointer
+      max-height 100%
+      border 1px solid #ddd
+      overflow hidden
       img
-        box-shadow 0px 0px 20px rgba(68,68,68,0.1)
         max-width 100%
+        max-height 100%
+      &__scroller
+        position absolute
+        top 0
+        left 0
+        opacity 0
+        &.visible
+          opacity 1
     &__copy
       position relative
       top 50%
       transform translateY(-50%)
-      width (unit * 34)
-      padding 0 (unit * 3)
+      width (unit * 40)
+      padding 0 (unit * 2)
       color black
       h1
         font-weight normal
-        font-size 50px
-      .btn
+        font-size 35px
+        line-height 0.75
+        .underline
+          padding-bottom 2px
+          border-bottom 2px solid black          
+      &__cta
+        margin-top unit * 3
+      a.btn
         margin-right unit
         margin-bottom unit
+        +mobile()
+          display block
+          margin 0 auto unit
     +below(1100px)
       height auto
+      padding 0 unit
       &__copy
         width 100%
         position static
@@ -57,74 +76,98 @@
         text-align center
         margin-bottom (unit * 4)
         padding 0 (unit)
+        h1
+          line-height 1
       &__image
-        position static
-        width 100%
+        position relative
         transform none
-        margin-top unit
+        margin unit auto
+        width auto
+        right auto
+        overflow hidden
+        max-width 760px
         img
           display block
-          width 70%
           margin 0 auto
       +mobile()
         &__copy h1
-          font-size 30px
+          font-size 25px
+          line-height 1.3
+          
 
   &--features
     max-width 900px
-    margin (unit * 3) auto (unit * 4)
+    margin (unit * 3) auto (unit * 6)
     font-size 16px
-    &__learn-more
-      text-align left
-      padding (unit * 4) 0 (unit * 2)
-      a.btn
-        width 300px
-        +mobile()
-          width 100%
-    h2
+    &__introduction
+      p()
+      font-size 1.2rem
+      width 50%
+      margin unit auto
+      +mobile()
+        width 90%
+    h2, h1
       text-align center
       font-weight normal
       color black
       margin-top 0
-    &__row
-      padding-top unit * 3
-      &__copy
+    h1
+      width 50%
+      margin 0 auto
+      +mobile()
+        width 90%
+    &__cta
+      text-align center
+    &__list
+      padding (unit * 1.5)
+      &__feature
+        width 280px
         display inline-block
-        width 350px
-        padding-right unit * 2
+        text-align center
+        color black
         vertical-align top
-        line-height unit
-        h2
-          text-align left
-          padding-bottom unit
-        ul
-          ul()
-          padding-left 0
-      &__thumbnails
-        display inline-block
-        width 550px
-        img
-          width 170px
-          border 1px solid bordergray
-          margin-right (unit / 2)
-          &:hover
-            border-color textgray
-    +below(900px)
-      margin-top (unit * 4)
-      padding unit
-      &__row
-        &__thumbnails
-          max-width 100%
-          white-space nowrap
-          overflow-x scroll
-          margin-top unit
-          padding unit 0
+        padding unit * 1.5
+        +below(900px)
+          display block
+          margin unit auto
+        &__image
+          margin-bottom unit
+          img
+            width 170px
+            height 130px
+            border 1px solid bordergray
+            &:hover
+              border-color textgray !important
+        &__title
+          margin unit 0
+        &__desc
+          p()
+          font-size 14px
+          font-size size
+          color textgray
+          
+  &--diatribe
+    max-width 900px
+    margin (unit * 4) auto (unit * 6)
+    padding 0 unit
+    h2, h1
+      text-align center
+      font-weight normal
+      color black
+      margin-top 0
+    &__cta
+      margin (unit * 3) 0 0
+    p
+      p()
+      margin unit auto
+      width 50%
+    img
+      margin unit 0
+      width 90%
     +mobile()
-      &__row
-        &__copy
-          width 100%
-          padding-right 0
-
+      p
+        width 90%
+        font-size 1.1rem
   &--posts
     &__headline
       text-align center
