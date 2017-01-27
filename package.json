@@ -79,5 +79,8 @@
     "cookies-js": "*",
     "node-inspector": "*",
     "morgan": "*"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
   }
 }
