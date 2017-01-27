@@ -14,6 +14,7 @@ class Posts extends Collection
       res.locals.sd.POSTS = posts
       res.render 'index',
         posts: posts.models
+        title: "Blog"
 
 @blog = (req, res, next) ->
   url = req.path.replace('/blog', '')
