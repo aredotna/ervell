@@ -27,15 +27,23 @@
     &__image
       position absolute
       top 50%
-      right -(unit * 8)
+      right -(unit * 4)
       transform translateY(-50%)
       width 60vw
       cursor pointer
       max-height 100%
+      border 1px solid #ddd
+      overflow hidden
       img
-        border 1px solid #ddd
         max-width 100%
         max-height 100%
+      &__scroller
+        position absolute
+        top 0
+        left 0
+        opacity 0
+        &.visible
+          opacity 1
     &__copy
       position relative
       top 50%
@@ -60,6 +68,7 @@
           margin 0 auto unit
     +below(1100px)
       height auto
+      padding 0 unit
       &__copy
         width 100%
         position static
@@ -70,13 +79,15 @@
         h1
           line-height 1
       &__image
-        position static
-        width 100%
+        position relative
         transform none
-        margin-top unit
+        margin unit auto
+        width auto
+        right auto
+        overflow hidden
+        max-width 760px
         img
           display block
-          width 90%
           margin 0 auto
       +mobile()
         &__copy h1

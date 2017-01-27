@@ -32,6 +32,7 @@
     "fastclick": "^1.0.6",
     "feed": "^0.2.6",
     "forever": "*",
+    "imagesloaded": "^4.1.1",
     "jade": "*",
     "jquery.finger": "*",
     "jquery.transition": "git://github.com/dzucconi/jquery.transition.git",

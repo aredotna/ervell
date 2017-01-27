@@ -17,4 +17,18 @@ module.exports = ->
     $('a.image-view').on 'tap', openImageView
   else
     $('a.image-view').on 'click',openImageView
+
+  $('.home--splash__image__scroller').imagesLoaded ->
+    $('.home--splash__image__scroller').addClass 'visible'
     
+    height = $('.home--splash__image__placeholder').height()
+    
+    $(".home--splash__image__scroller")
+      .css(
+        'top': 'auto'
+        'transform' : 'translateY(' + -height + 'px)'
+      )
+      .animate(
+        { bottom: 0 }
+        , 120000, 'linear'
+      )
