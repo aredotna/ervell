@@ -1,15 +1,17 @@
 extends ../../../components/layout/index--info
 
 block vars
-  - extraClasses = 'no-messages body--static'
+  - extraClasses = 'body--home no-messages body--static'
 
 block body
-  include ./sections/pitch
-  include ./sections/team
-  include ./sections/principles
-  include ./sections/labs
-  include ./sections/api
-  include ./sections/contact
+  .home.home--about
+    include ../../home/templates/sections/features
+    include ../../home/templates/sections/diatribe
+    include sections/team
+    include sections/principles
+    include sections/labs
+    include sections/api
+    include sections/contact
 
 block scripts
   script( src=asset('/assets/home.js') )

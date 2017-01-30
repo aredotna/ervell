@@ -1,6 +1,6 @@
 if posts && posts.length
   .home--posts
-    h2.home--posts__headline From our blog
+    h2.home--posts__headline Blog
     each post in posts
       - img = post.get('image')
       .home--posts__post(style="background-image:url('#{img}')")
@@ -8,9 +8,5 @@ if posts && posts.length
           .home--posts__post__overlay__content
             h1 #{post.get('category')}:
             h1= post.get('title')
-            br
-            br
-            br
-            br
             a(href="/blog#{post.get('url')}").btn.btn--white Read more
 

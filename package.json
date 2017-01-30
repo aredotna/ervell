@@ -32,12 +32,14 @@
     "fastclick": "^1.0.6",
     "feed": "^0.2.6",
     "forever": "*",
+    "imagesloaded": "^4.1.1",
     "jade": "*",
     "jquery.finger": "*",
     "jquery.transition": "git://github.com/dzucconi/jquery.transition.git",
     "jquery.ui.widget": "*",
     "marked": "^0.3.3",
     "moment": "*",
+    "morgan": "^1.7.0",
     "numeraljs": "^1.5.6",
     "parse-domain": "^0.2.0",
     "q": "*",
@@ -48,6 +50,7 @@
     "serve-favicon": "^2.3.0",
     "sharify": "*",
     "sortablejs": "^1.1.1",
+    "stylus": "^0.54.5",
     "underscore": "*",
     "underscore.string": "*",
     "validator": "*",
@@ -76,5 +79,8 @@
     "cookies-js": "*",
     "node-inspector": "*",
     "morgan": "*"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
   }
 }

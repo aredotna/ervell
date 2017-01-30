@@ -1,8 +1,11 @@
 extends ../../../components/layout/index--info
 
-block body
-  .blog-body
-    .site-header
-      h1 Are.na / Blog
-    != html
+block vars
+  - extraClasses = 'body--home'
 
+block body
+  .home.home--blog
+    include ../../home/templates/sections/posts
+
+block scripts
+  script( src=asset('/assets/home.js') )
