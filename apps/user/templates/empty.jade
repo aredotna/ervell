@@ -1,2 +1,7 @@
-h2 No public content available
-h2 Try #[a(href="/explore") explore] to view recently edited public channels from other users
+if followers
+  h2 No followers yet.
+else if following
+  h2 No follows yet.
+else
+  h2 No public content available.
+  h2 Try #[a(href="/explore") explore] to view recently edited public channels from other users.
