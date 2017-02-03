@@ -1,2 +1,5 @@
-h1 Nothing here yet...
-h1 Go to #{channel.get('user').username}'s #[a(href="/#{channel.get('user').slug}") profile] or #[a(href="/explore") explore] recent public channels from other users
+if followers
+  h2 No followers yet
+else
+  h2 Nothing here yet...
+  h2 Go to #{channel.get('user').username}'s #[a(href="/#{channel.get('user').slug}") profile] or #[a(href="/explore") explore] recent public channels from other users

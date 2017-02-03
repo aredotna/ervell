@@ -4,17 +4,16 @@ block body
   include ./error_path
   .is-empty
     .grid.grid--channel.flex-container
-    .channel-empty.valign-outer
-      .valign-inner
-        if code == 404
-          img(src="https://images.are.na/resize/300/300/https%3A%2F%2Fd2w9rnfcy7mm78.cloudfront.net%2F287311%2Foriginal_d82a5186d9d2308faa366a33323328f1.jpg", alt="Not found")
-          h1 Page not found.
-        else if code == 500
-          h1 Something went wrong, please contact #[a(href="mailto:info@are.na") info@are.na] if the problem persists.
-          if detail
-            pre= detail
-        else if code == 401
-          h1 You aren't allowed to see this ¯\_(ツ)_/¯
-          img(src="https://d2w9rnfcy7mm78.cloudfront.net/86997/display_943935a4ce06d1fffd8cf3ee6137c9ab.gif", alt="Nah ah")
-          if !user
-            h1 Maybe you need to #[a(href="#log_in") log in]?
+    .channel-empty
+      if code == 404
+        img(src="https://images.are.na/resize/300/300/https%3A%2F%2Fd2w9rnfcy7mm78.cloudfront.net%2F287311%2Foriginal_d82a5186d9d2308faa366a33323328f1.jpg", alt="Not found")
+        h1 Page not found.
+      else if code == 500
+        h1 Something went wrong, please contact #[a(href="mailto:info@are.na") info@are.na] if the problem persists.
+        if detail
+          pre= detail
+      else if code == 401
+        h1 You aren't allowed to see this ¯\_(ツ)_/¯
+        img(src="https://d2w9rnfcy7mm78.cloudfront.net/86997/display_943935a4ce06d1fffd8cf3ee6137c9ab.gif", alt="Nah ah")
+        if !user
+          h1 Maybe you need to #[a(href="#log_in") log in]?

@@ -9,9 +9,8 @@ block body
       - searchee = (user && author.id == user.id) ? "your " : author.get('username') + "'s public "
       - title = searchee + content
       include ../../../components/blocks/container/templates/index
-    .channel-empty.valign-outer
-      .valign-inner.center
-        include ./empty
+    .channel-empty
+      include ./empty
     include ../../../components/layout/loader/templates/infinite
 
 block scripts
