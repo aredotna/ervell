@@ -21,14 +21,11 @@ module.exports = ->
   $('.home--splash__image__scroller').imagesLoaded ->
     $('.home--splash__image__scroller').addClass 'visible'
     
-    height = $('.home--splash__image__placeholder').height()
-    
+    scrollerHeight = $('.home--splash__image__scroller img').height()
+    placeholderHeight = $('.home--splash__image__placeholder img').height()
+
     $(".home--splash__image__scroller")
-      .css(
-        'top': 'auto'
-        'transform' : 'translateY(' + -height + 'px)'
-      )
       .animate(
-        { bottom: 0 }
+        { top: -scrollerHeight + placeholderHeight }
         , 120000, 'linear'
       )

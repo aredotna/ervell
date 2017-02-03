@@ -29,7 +29,6 @@
       top 50%
       right -(unit * 4)
       transform translateY(-50%)
-      width 60vw
       cursor pointer
       max-height 100%
       border 1px solid #ddd
@@ -43,7 +42,11 @@
         left 0
         opacity 0
         width 100%
-        
+        padding-bottom 1000%
+        img
+          object-fit cover
+          width 100%
+          height auto
         &.visible
           opacity 1
     &__copy
