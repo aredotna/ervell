@@ -49,7 +49,7 @@ module.exports = class ChannelView extends Backbone.View
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
     # addable
-    if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
+    if collaborator or mediator.shared.current_user.canAddToChannel(@channel) and not (sd.FOLLOWERS? or sd.FOLLOWING?)
       @setupFileDropView()
 
       @$('.block-collection').addClass 'is-addable'
@@ -130,7 +130,7 @@ module.exports.init = ->
 
   initChannelPath channel
 
-  if current_user.canAddToChannel channel
+  if current_user.canAddToChannel(channel) and not (sd.FOLLOWERS? or sd.FOLLOWING?)
     view.setupNewBlockView channel: channel
 
     resultsCollection.on 'reset', -> 

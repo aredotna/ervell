@@ -31,7 +31,6 @@ class PricingView extends Backbone.View
         name: 'Are.na'
         description: '1 year / Premium subscription'
         amount: @price
-      @$('.premium--status').addClass('is-active')
     else
       window.location.href = "#{sd.APP_URL}/log_in?redirect-to=/pricing"
 
