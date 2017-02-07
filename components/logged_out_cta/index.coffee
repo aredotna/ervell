@@ -9,6 +9,6 @@ module.exports = ->
 
     $el.on 'click', '.lo-cta__close', (e) ->
       $el.removeClass 'lo-cta--visible'
-      analytics.track.click 'Clicked on CTA / "Learn More"'
+      analytics.track.click 'Closed "Learn More" CTA'
       # Cookie expires in 1 day
       Cookies.set 'lo-cta', true, { expires: 86400000 }
