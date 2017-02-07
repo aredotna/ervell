@@ -138,6 +138,17 @@ module.exports = (app) ->
   app.use isInverted
   app.use viewMode
 
+  app.get "/robots.txt", (req, res) ->
+    res.set 'Content-Type', 'text/plain'
+    robotsText = """
+      User-agent: *
+    """
+    res.send switch NODE_ENV
+      when 'production'
+        robotsText
+      else
+        "User-agent: *\nNoindex: /"
+
   # Mount apps
   app.use require "../apps/feed"
   app.use require "../apps/home"
