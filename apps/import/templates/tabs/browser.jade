@@ -4,4 +4,14 @@ block vars
   - slug = "browser"
 
 block content
-  h1 Browser
+  .import__header
+    h3 Step 1 of 3
+    h2 Export your bookmarks as an HTML file
+  .import__body
+    p To import your browser bookmarks to Are.na, start by exporting your bookmarks as an HTML file.
+    ul
+      li: a.pointer(href="https://support.google.com/chrome/answer/96816?hl=en" target="_blank") Instructions for Chrome
+      li: a.pointer(href="https://support.mozilla.org/t5/Basic-Browsing/Export-bookmarks-to-Safari/ta-p/3442" target="_blank") Instructions for Firefox
+      li: a.pointer(href="http://in5stepstutorials.com/safari/export-safari-bookmarks-to-chrome-firefox-html-file.php" target="_blank") Instructions for Safari
+  .import__button
+    a.btn(href="/import/browser-2") Next step &#10142;
