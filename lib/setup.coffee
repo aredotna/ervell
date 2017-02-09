@@ -25,6 +25,7 @@ cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
 logger = require "morgan"
+multipart = require 'connect-multiparty'
 stylus = require "stylus"
 nib = require "nib"
 rupture = require 'rupture'
@@ -95,6 +96,7 @@ module.exports = (app) ->
   # session management
   app.use logger('dev')
   app.use bodyParser.json()
+  app.use multipart()
   app.use bodyParser.urlencoded(extended: true)
   app.use cookieParser()
   app.use session
