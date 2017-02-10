@@ -1,9 +1,18 @@
 .import
   &__status
+    display none
     &[data-visible="true"]
+      display block
       position fixed
       bottom 0
       left 0
       width 100%
-      height (unit * 10)
+      height (unit * 6)
       background white
+      border-top 1px solid bordergray
+    &__inner
+      padding (unit / 2) 0
+      width (unit * 40)
+      margin 0 auto
+      h2
+        color lightgray
