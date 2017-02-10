@@ -1,0 +1,20 @@
+.import
+  &__bookmarks
+    &__item
+      line-height 1.4
+      padding (unit / 2) unit
+      cursor pointer
+      &:hover
+        background-color secondbackgroundgray
+      &[data-selected=true]
+        background-color lighthighlight 
+      &__title, &__href
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+      &__title
+        color textgray 
+      &__href
+        line-height 1.2
+        font-size 12px
+        color lightgray

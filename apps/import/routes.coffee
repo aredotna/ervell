@@ -1,9 +1,32 @@
 sd = require("sharify").data
-Authentication = require '../../models/authentication.coffee'
+fs = require "fs"
+cheerio = require "cheerio"
+Backbone = require "backbone"
+
+parseBookmarks = (data) ->
+  $ = cheerio.load data
+  $('a').map((i, el) ->
+    unless $(this).attr('href').indexOf('javascript:') > -1
+      return {
+        id: i
+        href: $(this).attr('href')
+        title: $(this).text()
+      }  
+  ).get()
 
 @import = (req, res, next) ->
   return res.redirect("/log_in") unless req.user
-
   tab = res.locals.sd.TAB = req.params.tab
-
   res.render "index", tab: tab
+
+@parseBookmarks = (req, res, next) ->
+  fs.readFile req.files.bookmarks.path, (err, data) ->
+    links = parseBookmarks data.toString('utf-8')
+    res.locals.sd.BOOKMARKS = links
+    tab = res.locals.sd.TAB = 'upload'
+
+    res.render "make_connections", 
+      bookmarks: new Backbone.Collection links
+      error: err
+      tab:  tab
+  

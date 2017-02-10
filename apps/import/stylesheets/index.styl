@@ -1,10 +1,11 @@
 .import
-  width 60%
+  width (unit * 40)
   margin unit auto
   &__header
     padding unit 0
-    text-align left
+    text-align center
     border-bottom 1px solid bordergray
+    margin-bottom unit * 2
     h3
       color lightgray
     h2
@@ -14,8 +15,17 @@
       p()
     ul
       ul()
+    input
+      display block
+      margin unit 0
+      width 100%
+      background white
+      cursor pointer
   &__button
     margin (unit * 3) 0
     text-align center
     a.btn
       width 100%
+
+@require 'bookmarks'
+@require 'status'
