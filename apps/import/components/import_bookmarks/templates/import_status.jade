@@ -1,7 +1,6 @@
 - links = collection.filter('selected')
 - s = links.length == 1 ? '' : 's'
-//- - visible = collection.any('selected') || status.get('connecting') ? true : false
-- visible = true
+- visible = collection.any('selected') || status.get('connecting') ? true : false
 
 .import__status(
   data-visible="#{visible}"
