@@ -16,8 +16,9 @@ parseBookmarks = (data) ->
 
 @import = (req, res, next) ->
   return res.redirect("/log_in") unless req.user
+  return res.redirect("/import/browser") unless req.params.tab
   tab = res.locals.sd.TAB = req.params.tab
-  res.render "index", tab: tab
+  res.render "index", tab: tab, title: 'Import'
 
 @parseBookmarks = (req, res, next) ->
   fs.readFile req.files.bookmarks.path, (err, data) ->
@@ -29,4 +30,5 @@ parseBookmarks = (data) ->
       bookmarks: new Backbone.Collection links
       error: err
       tab:  tab
+      title: "Import"
   
