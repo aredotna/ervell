@@ -29,7 +29,7 @@ module.exports = class ImportStatusView extends Backbone.View
     @blocks = new Blocks()
 
     @listenTo @collection, 'model:selected', @render
-    @listenTo @status, 'change:connecting', @render
+    @listenTo @status, 'change', @render
 
   initConnectBlocks: ->
     @status.set connecting: true
@@ -56,17 +56,30 @@ module.exports = class ImportStatusView extends Backbone.View
     blocks = @blocks
     selectedChannel = @selectedChannel
     block = new Block source: link.get('href')
+    existingConnections = link.get('connections') or []
     blocks.create block.toJSON(),
       url: "#{sd.API_URL}/channels/#{selectedChannel.get('slug')}/blocks"
       success: (block) ->
-        link.set selected: false
+        connections = existingConnections.concat [
+          {
+            title: selectedChannel.get('title')
+            status: selectedChannel.get('status')
+            slug: selectedChannel.get('slug')
+            user_slug: selectedChannel.get('user').slug
+          }
+        ]
+        link.set 
+          selected: false
+          connections: connections
         link.collection.trigger 'model:selected'
         dfd.resolve()
     dfd.promise
       
-
-  showSuccess: ->
-    console.log('success')
+  showSuccess: =>
+    @status.set
+      selecting: false
+      connecting: false
+    @selectedChannel.reset()
 
   showError: (e) ->
     console.log('error', e, e.stack)
