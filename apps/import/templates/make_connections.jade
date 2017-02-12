@@ -4,11 +4,12 @@ block body
   include ./path
   .import.flex-container.tabs__content
     .import__header
-      h3 Step 2 of 3
+      h3 Step 3 of 3
       h2 Choose URLs to import to Are.na
     .import__bookmarks
       include ../components/select_bookmarks/templates/bookmark_list
     .import__status-container
       //- rendered on the client
+
 block scripts
   script( src=asset('/assets/import.js') )
