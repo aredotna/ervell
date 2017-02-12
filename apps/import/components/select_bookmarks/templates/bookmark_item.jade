@@ -3,6 +3,9 @@
   .import__bookmarks__item__href= item.get('href')
   if item.get('connections')
     .import__bookmarks__item__connections 
-      strong Connections:
+      strong Connections:&nbsp;
       for connection in item.get('connections')
-        span(class="privacy--#{connection.status}") connection.title&nbsp;
+        a(
+          class="privacy--#{connection.status}" 
+          href="/#{connection.user_slug}/#{connection.slug}"
+        ) #{connection.title}&nbsp;
