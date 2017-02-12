@@ -10,7 +10,7 @@ module.exports = class ImportSelectChannelView extends Backbone.View
     'click .search-results__result': 'setSelectedChannel'
     'click .search-results__result--new': 'setNewSelectedChannel'
 
-  initialize: ({ @status, @search })->
+  initialize: ({ @status, @search }) ->
     @listenTo @status, 'change:selecting', @render
 
   onKeyUp: (e) ->
@@ -96,7 +96,6 @@ module.exports = class ImportSelectChannelView extends Backbone.View
       title: @getQuery()
       status: 'private'
       is_new: true
-    console.log('@model', @model)
     @status.set 'selecting', false
 
   searchLoaded: ->
