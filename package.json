@@ -45,6 +45,7 @@
     "numeraljs": "^1.5.6",
     "parse-domain": "^0.2.0",
     "q": "*",
+    "qlimit": "^0.1.1",
     "query-params": "*",
     "redis": "*",
     "s3-policy": "*",
