@@ -26,9 +26,6 @@ session = require 'cookie-session'
 path = require "path"
 logger = require "morgan"
 multipart = require 'connect-multiparty'
-stylus = require "stylus"
-nib = require "nib"
-rupture = require 'rupture'
 artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
 cache = require './cache'
@@ -67,6 +64,9 @@ module.exports = (app) ->
 
   # Development only
   if "development" is NODE_ENV
+    nib = require "nib"
+    stylus = require "stylus"
+    rupture = require 'rupture'
     # Compile assets on request in development
     app.use require("stylus").middleware
       src: path.resolve(__dirname, "../")
