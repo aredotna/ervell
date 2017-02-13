@@ -1,6 +1,10 @@
 .import__bookmarks__item(id=item.id data-href=item.get('href') data-selected="#{item.get('selected')}")
   .import__bookmarks__item__title= item.get('title')
   .import__bookmarks__item__href= item.get('href')
+  if item.get('tags')
+    .import__bookmarks__item__connections
+      strong Tags: 
+      | #{item.get('tags')}
   if item.get('connections')
     .import__bookmarks__item__connections 
       strong Connections:&nbsp;
