@@ -1,28 +1,34 @@
 .import
-  width (unit * 40)
-  margin unit auto
+  padding 0 (unit / 2)
   &__header
-    padding unit 0
-    text-align center
+    width (unit * 30)
+    padding 0 0 unit
+    text-align left
     border-bottom 1px solid bordergray
-    margin-bottom unit * 2
+    margin-bottom unit
     h3
       color lightgray
     h2
       margin 0
+    p
+      p()
   &__body
+    width (unit * 30)
     p
       p()
     ul
       ul()
+    form
+      margin (unit * 2) 0
     input
       display block
-      margin unit 0
+      margin unit 0 (unit * 2)
       width 100%
       background white
       cursor pointer
   &__button
-    margin (unit * 3) 0
+    width (unit * 30)
+    margin (unit * 2) 0
     text-align center
     a.btn
       width 100%
