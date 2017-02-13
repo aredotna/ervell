@@ -3,6 +3,4 @@ sd = require('sharify').data
 initBookmarksViews = require './client/select_bookmarks_view.coffee'
 
 module.exports.init = ->
-  switch sd.TAB
-    when 'upload'
-      initBookmarksViews(new Collection sd.BOOKMARKS)
+  initBookmarksViews(new Collection sd.BOOKMARKS)

@@ -1,0 +1,19 @@
+extends ../../../components/layout/index
+
+block body
+  include ./path
+  .import.flex-container.tabs__content
+    .import__header
+      h3 Step 2 of 3
+      h2 Upload your bookmarks file
+    .import__body
+      p Upload the file you exported in step 1. In the next step you will choose which bookmarks you want to connect to Are.na.
+      form(id="uploadForm"
+        enctype="multipart/form-data"
+        action="/import/upload"
+        method="post")
+        input(type="file" name="bookmarks")
+        input.btn(type="submit" value="Upload bookmarks")
+
+block scripts
+  script( src=asset('/assets/import.js') )
