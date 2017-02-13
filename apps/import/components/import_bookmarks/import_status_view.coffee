@@ -16,7 +16,7 @@ class Status extends Backbone.Model
 
 module.exports = class ImportStatusView extends Backbone.View
   events:
-    'click .import__status__inner__connect' : 'initConnectBlocks'
+    'click .import__status__inner__connect' : 'connectLinks'
 
   initialize: ->    
     @selectedChannel = new Channel()
@@ -31,7 +31,7 @@ module.exports = class ImportStatusView extends Backbone.View
     @listenTo @collection, 'model:selected', @render
     @listenTo @status, 'change', @render
 
-  initConnectBlocks: ->
+  connectLinks: ->
     @status.set connecting: true
     blocks = @collection.filter('selected')
     @maybeCreateChannel()
@@ -57,9 +57,7 @@ module.exports = class ImportStatusView extends Backbone.View
     selectedChannel = @selectedChannel
     block = new Block source: link.get('href')
     existingConnections = link.get('connections') or []
-    blocks.create block.toJSON(),
-      url: "#{sd.API_URL}/channels/#{selectedChannel.get('slug')}/blocks"
-      success: (block) ->
+    @createOrConnectBlock.then (block) ->
         connections = existingConnections.concat [
           {
             title: selectedChannel.get('title')
@@ -68,11 +66,31 @@ module.exports = class ImportStatusView extends Backbone.View
             user_slug: selectedChannel.get('user').slug
           }
         ]
-        link.set 
+        link.set
+          block_id: block.id
           selected: false
           connections: connections
         link.collection.trigger 'model:selected'
         dfd.resolve()
+    dfd.promise
+
+  createOrConnectBlock: (link, selectedChannel)->
+    dfd = Q.defer()
+    if link.has('connections')
+      $.ajax
+        type: "POST"
+        url: "#{sd.API_URL}/channels/#{id}/connections"
+        data:
+          connectable_type: 'Block'
+          connectable_id: link.get('block_id')
+          channel_id: selectedChannel.id
+        success: dfd.resolve
+        error: dfd.error
+    else
+      blocks.create block.toJSON(),
+        url: "#{sd.API_URL}/channels/#{selectedChannel.get('slug')}/blocks"
+        success: dfd.resolve
+        error: dfd.reject
     dfd.promise
       
   showSuccess: =>
