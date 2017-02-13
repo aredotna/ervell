@@ -55,9 +55,8 @@ module.exports = class ImportStatusView extends Backbone.View
     dfd = Q.defer()
     blocks = @blocks
     selectedChannel = @selectedChannel
-    block = new Block source: link.get('href')
     existingConnections = link.get('connections') or []
-    @createOrConnectBlock.then (block) ->
+    @createOrConnectBlock(link, selectedChannel, blocks).then (block) ->
         connections = existingConnections.concat [
           {
             title: selectedChannel.get('title')
@@ -74,12 +73,12 @@ module.exports = class ImportStatusView extends Backbone.View
         dfd.resolve()
     dfd.promise
 
-  createOrConnectBlock: (link, selectedChannel)->
+  createOrConnectBlock: (link, selectedChannel, blocks)->
     dfd = Q.defer()
-    if link.has('connections')
+    if link.get('block_id')
       $.ajax
         type: "POST"
-        url: "#{sd.API_URL}/channels/#{id}/connections"
+        url: "#{sd.API_URL}/channels/#{selectedChannel.id}/connections"
         data:
           connectable_type: 'Block'
           connectable_id: link.get('block_id')
@@ -87,6 +86,7 @@ module.exports = class ImportStatusView extends Backbone.View
         success: dfd.resolve
         error: dfd.error
     else
+      block = new Block source: link.get('href')
       blocks.create block.toJSON(),
         url: "#{sd.API_URL}/channels/#{selectedChannel.get('slug')}/blocks"
         success: dfd.resolve
@@ -97,7 +97,7 @@ module.exports = class ImportStatusView extends Backbone.View
     @status.set
       selecting: false
       connecting: false
-    @selectedChannel.reset()
+    @selectedChannel.clear()
 
   showError: (e) ->
     console.log('error', e, e.stack)
