@@ -25,9 +25,7 @@ cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
 logger = require "morgan"
-stylus = require "stylus"
-nib = require "nib"
-rupture = require 'rupture'
+multipart = require 'connect-multiparty'
 artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
 cache = require './cache'
@@ -66,6 +64,9 @@ module.exports = (app) ->
 
   # Development only
   if "development" is NODE_ENV
+    nib = require "nib"
+    stylus = require "stylus"
+    rupture = require 'rupture'
     # Compile assets on request in development
     app.use require("stylus").middleware
       src: path.resolve(__dirname, "../")
@@ -95,6 +96,7 @@ module.exports = (app) ->
   # session management
   app.use logger('dev')
   app.use bodyParser.json()
+  app.use multipart()
   app.use bodyParser.urlencoded(extended: true)
   app.use cookieParser()
   app.use session
@@ -162,6 +164,9 @@ module.exports = (app) ->
   app.use require "../apps/manage"
   app.use require "../apps/share"
   app.use require "../apps/marklet"
+  app.use require "../apps/import"
+
+  # Apps that use dynamic routes
   app.use require "../apps/user"
   app.use require "../apps/block"
   app.use require "../apps/channel"

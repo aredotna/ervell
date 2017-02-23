@@ -1,0 +1,22 @@
+.import
+  &__status
+    display none
+    &[data-visible="true"]
+      display flex
+      position fixed
+      bottom 0
+      left 0
+      width 100%
+      height (unit * 5)
+      background white
+      border-top 1px solid bordergray
+      align-items center
+      justify-content center
+    &__inner
+      padding (unit / 2) 0
+      &--dark
+        color textgray
+      h2
+        color lightgray
+      &__connect
+        margin-left (unit)

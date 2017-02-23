@@ -1,0 +1,8 @@
+.search-results
+  if results
+    for channel in results
+      .search-results__result(data-id=channel.id)
+        h3(class="privacy--#{channel.get('status')}")= channel.get('title')
+    if results.length < 4
+      .search-results__result--new
+          h3 Create new channel "#{query}"
