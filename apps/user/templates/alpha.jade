@@ -1,0 +1,24 @@
+extends ../../../components/layout/index
+
+block body
+  - var range = '!@#$%^&*()_-+=<>.,?/ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  - range.unshift('0-9')  
+
+  include ./path
+  .channel-container.flex-container
+    .alpha
+      for letter in range
+        - group = alpha[letter]
+        if group
+          .alpha__group
+            .alpha__group__letter= letter
+            - sortedGroup = _.sortBy(group, function(channel, i){ return channel.title().toUpperCase() })
+            for channel in sortedGroup
+              h3.alpha__group__channel
+                a(href=channel.href() class="privacy--#{channel.get('status')}")= channel.title()
+
+
+
+block scripts
+  script( src=asset('/assets/user.js') )
+
