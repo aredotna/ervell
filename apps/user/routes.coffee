@@ -46,11 +46,29 @@ addTips = (req) ->
   blocks.fetch
     data:
       auth_token: req.user?.get('authentication_token')
-    error: (m, err) -> next err
+    error: (m, err) -> 
+      next err
     success: ->
       blocks.unshift(addTips(req)) if showTips(req, res)
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render "index", author: res.locals.author, blocks: blocks.models
+
+@userChannelsByAlpha = (req, res, next) ->
+  return next() unless res.locals.author
+
+  blocks = new UserBlocks null,
+    user_slug: req.params.username
+    subject: 'channels'
+    
+  blocks.fetchUntilEnd
+    cache: false
+    data:
+      auth_token: req.user?.get('authentication_token')
+    error: (m, err) ->  next err
+    success: (response)->
+      alpha = res.locals.sd.ALPHA = blocks.groupByAlpha()
+      res.render 'alpha',
+        alpha: alpha
 
 @followers = (req, res, next) ->
   return next() unless res.locals.author

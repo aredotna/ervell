@@ -46,6 +46,7 @@
     "parse-domain": "^0.2.0",
     "q": "*",
     "qlimit": "^0.1.1",
+    "qs": "https://registry.npmjs.org/qs/-/qs-0.6.6.tgz",
     "query-params": "*",
     "redis": "*",
     "s3-policy": "*",
