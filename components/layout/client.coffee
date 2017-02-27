@@ -32,7 +32,6 @@ module.exports = ->
   setupAnalytics()
   syncAuth()
   initShortCuts()
-  showSurveyMessage() unless isMobile()
   initLoggedOutCta() unless sd.CURRENT_USER?.id
 
 isMobile = ->
@@ -163,15 +162,6 @@ initShortCuts = ->
       window.location.reload()
 
   initNightMode()
-
-showSurveyMessage = ->
-  if sd.CURRENT_USER and (sd.CURRENT_USER.following_count > 1 or sd.CURRENT_USER.channel_count > 1 )
-    model = new Backbone.Model
-      id: 'survey_message'
-      title: "We have questions, you have answers."
-      body: "Want to help us make Are.na better? Fill out this <a href='https://goo.gl/forms/sakWD5lzZHxc7upK2' target='_blank'>quick survey</a>. As thanks, we will give away premium accounts to a few random responders. Thanks!"
-      type: 'announcement'
-    new MessageView container: $('#message-container'), model: model
 
 showAnnouncements = (announcements) ->
   # stub
