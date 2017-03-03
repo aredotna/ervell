@@ -32,8 +32,8 @@ module.exports = ->
   setupAnalytics()
   syncAuth()
   initShortCuts()
-  showSurveyMessage() unless isMobile()
   initLoggedOutCta() unless sd.CURRENT_USER?.id
+  showPremiumMessage() if sd.CURRENT_USER?.id
 
 isMobile = ->
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -164,12 +164,15 @@ initShortCuts = ->
 
   initNightMode()
 
-showSurveyMessage = ->
-  if sd.CURRENT_USER and (sd.CURRENT_USER.following_count > 1 or sd.CURRENT_USER.channel_count > 1 )
+showPremiumMessage = ->
+  console.log('!sd.CURRENT_USER.is_pro', !sd.CURRENT_USER.is_pro)
+  console.log('sd.CURRENT_USER.channel_count >= 3', sd.CURRENT_USER.channel_count >= 3)
+  if (!sd.CURRENT_USER.is_pro and sd.CURRENT_USER.channel_count >= 2 )
+    console.log('should show premium')
     model = new Backbone.Model
-      id: 'survey_message'
-      title: "We have questions, you have answers."
-      body: "Want to help us make Are.na better? Fill out this <a href='https://goo.gl/forms/sakWD5lzZHxc7upK2' target='_blank'>quick survey</a>. As thanks, we will give away premium accounts to a few random responders. Thanks!"
+      id: 'premium_message'
+      title: "Help support Are.na"
+      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://wwww.are.na/about/pricing'>premium account</a>."
       type: 'announcement'
     new MessageView container: $('#message-container'), model: model
 
