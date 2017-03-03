@@ -164,6 +164,7 @@ initShortCuts = ->
 
   initNightMode()
 
+<<<<<<< HEAD
 showPremiumMessage = ->
   if (!sd.CURRENT_USER.is_pro and sd.CURRENT_USER.channel_count >= 2 )
     console.log('should show premium')
@@ -174,6 +175,8 @@ showPremiumMessage = ->
       type: 'announcement'
     new MessageView container: $('#message-container'), model: model
 
+=======
+>>>>>>> master
 showAnnouncements = (announcements) ->
   # stub
 
