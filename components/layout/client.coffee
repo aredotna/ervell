@@ -169,7 +169,7 @@ showPremiumMessage = ->
     model = new Backbone.Model
       id: 'premium_message'
       title: "Help support Are.na"
-      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://wwww.are.na/about/pricing?utm_campaign=pmessage'>premium account</a>."
+      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/about/pricing?utm_campaign=pmessage'>premium account</a>."
       type: 'announcement'
     new MessageView container: $('#message-container'), model: model
 
