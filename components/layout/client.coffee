@@ -165,8 +165,6 @@ initShortCuts = ->
   initNightMode()
 
 showPremiumMessage = ->
-  console.log('!sd.CURRENT_USER.is_pro', !sd.CURRENT_USER.is_pro)
-  console.log('sd.CURRENT_USER.channel_count >= 3', sd.CURRENT_USER.channel_count >= 3)
   if (!sd.CURRENT_USER.is_pro and sd.CURRENT_USER.channel_count >= 2 )
     console.log('should show premium')
     model = new Backbone.Model
