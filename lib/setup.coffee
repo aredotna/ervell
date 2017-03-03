@@ -128,6 +128,7 @@ module.exports = (app) ->
       'post_address',
       'show_tour',
       'is_pro',
+      'channel_count',
       'exclude_from_indexes',
       'following_count'
     ]
