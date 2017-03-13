@@ -1,7 +1,3 @@
-#
-# The client-side code for the channel manager
-#
-
 Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data

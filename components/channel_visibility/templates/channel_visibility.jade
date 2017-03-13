@@ -1,4 +1,6 @@
-.channel__privacy--setting
+.channel-privacy
+  if showDescription
+    p.channel-privacy__description= description
   ul.breadcrumb.toggle-group(data-key="filter")
     li: a(
         href="#"

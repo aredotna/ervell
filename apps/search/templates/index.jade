@@ -4,6 +4,7 @@ block body
   include ./path
   if blocks
     .search-contents
+      - title = "results for '" + search + "'"
       include ../../../components/blocks/container/templates/index
 
 block scripts

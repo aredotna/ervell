@@ -1,5 +1,7 @@
 @require 'initial'
 
+rupture.mobile-cutoff = 500px
+
 global-reset()
 
 *
@@ -182,6 +184,27 @@ privacy-color('.privacy--', color)
 force-hardware-acceleration()
   transform translate3d(0, 0, 0)
 
+a.btn, input.btn
+  display inline-block
+  text-align center
+  font-weight bold
+  border 2px solid black
+  color black
+  width unit * 9
+  font-size 20px
+  line-height 50px
+  pointer cursor
+  &:hover
+    background-color black
+    color white
+  &--white
+    border 2px solid white
+    color white
+    background-color transparent
+    &:hover
+      background-color white
+      color textgray
+
 .rotate
   display none
   position fixed
@@ -230,6 +253,7 @@ for i in (1..8)
     display block
 
 @require 'header/index'
+@require 'footer/index'
 @require 'loader/stylesheets/loader'
 @require 'empty/index'
 @require '../iconic/stylesheets/index'

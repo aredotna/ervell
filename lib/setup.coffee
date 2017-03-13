@@ -8,7 +8,7 @@
 SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
 COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
 PUSHER_KEY, IMAGE_PROXY_URL, GOOGLE_ANALYTICS_ID,
-STRIPE_PUBLISHABLE_KEY } = config = require "../config"
+STRIPE_PUBLISHABLE_KEY, BLOG_URL } = config = require "../config"
 
 _ = require 'underscore'
 express = require "express"
@@ -25,9 +25,7 @@ cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
 path = require "path"
 logger = require "morgan"
-stylus = require "stylus"
-nib = require "nib"
-rupture = require 'rupture'
+multipart = require 'connect-multiparty'
 artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
 cache = require './cache'
@@ -47,6 +45,7 @@ sharify.data =
   GOOGLE_ANALYTICS_ID: GOOGLE_ANALYTICS_ID
   IMAGE_PROXY_URL: IMAGE_PROXY_URL
   STRIPE_PUBLISHABLE_KEY: STRIPE_PUBLISHABLE_KEY
+  BLOG_URL: BLOG_URL
 
 # current user management
 CurrentUser = require '../models/current_user'
@@ -60,11 +59,14 @@ module.exports = (app) ->
   app.use sharify
 
   # Referral spam blocker
-  blocker.addToReferrers ['tkpassword.com']
+  blocker.addToReferrers ['tkpassword.com', 'lifehacĸer.com']
   app.use blocker.send404
 
   # Development only
   if "development" is NODE_ENV
+    nib = require "nib"
+    stylus = require "stylus"
+    rupture = require 'rupture'
     # Compile assets on request in development
     app.use require("stylus").middleware
       src: path.resolve(__dirname, "../")
@@ -94,6 +96,7 @@ module.exports = (app) ->
   # session management
   app.use logger('dev')
   app.use bodyParser.json()
+  app.use multipart()
   app.use bodyParser.urlencoded(extended: true)
   app.use cookieParser()
   app.use session
@@ -125,6 +128,7 @@ module.exports = (app) ->
       'post_address',
       'show_tour',
       'is_pro',
+      'channel_count',
       'exclude_from_indexes',
       'following_count'
     ]
@@ -137,8 +141,21 @@ module.exports = (app) ->
   app.use isInverted
   app.use viewMode
 
+  app.get "/robots.txt", (req, res) ->
+    res.set 'Content-Type', 'text/plain'
+    robotsText = """
+      User-agent: *
+    """
+    res.send switch NODE_ENV
+      when 'production'
+        robotsText
+      else
+        "User-agent: *\nNoindex: /"
+
   # Mount apps
-  app.use require "../apps/root"
+  app.use require "../apps/feed"
+  app.use require "../apps/home"
+  app.use require "../apps/blog"
   app.use require "../apps/registration"
   app.use require "../apps/getting_started"
   app.use require "../apps/tools"
@@ -148,6 +165,9 @@ module.exports = (app) ->
   app.use require "../apps/manage"
   app.use require "../apps/share"
   app.use require "../apps/marklet"
+  app.use require "../apps/import"
+
+  # Apps that use dynamic routes
   app.use require "../apps/user"
   app.use require "../apps/block"
   app.use require "../apps/channel"

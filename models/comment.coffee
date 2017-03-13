@@ -6,6 +6,7 @@ sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
 config = require '../config.coffee'
+xss = require 'xss'
 
 module.exports = class Comment extends Base
 
@@ -36,7 +37,7 @@ module.exports = class Comment extends Base
         lastPosition = entity.end
 
     html += text.slice(lastPosition)
-    html
+    xss html
 
   getPermissions: (user)->
     return "" unless @has('user') and user?

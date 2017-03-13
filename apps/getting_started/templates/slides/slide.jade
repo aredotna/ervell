@@ -1,0 +1,16 @@
+- var title = 'Channel'
+- var index = 0
+- var img_url = ''
+- var copy = ''
+
+block vars
+
+.gs-slide(data-slide="#{index}")
+  h2
+    | #{title} 
+    span.color-lg (#{index}/5)
+  .gs-slide__img
+    img(src="#{img_url}")
+  p.gs-slide__copy!= copy
+    
+    

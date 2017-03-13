@@ -1,3 +1,5 @@
+@require '../components/mute/index.styl'
+
 .channel-container
   padding-top unit
   position relative
@@ -9,7 +11,7 @@
     display none
 
   &.is-empty .channel-empty
-    display table
+    display block
 
 .channel--drop-zone
   -webkit-transform translateY(-1000%)
@@ -240,7 +242,7 @@
         height 15px
 
   &--grid
-    margin 0 10px unit
+    margin 0 10px unit 0
     padding-right unit
 
 .form__field__channel-filter.is-active

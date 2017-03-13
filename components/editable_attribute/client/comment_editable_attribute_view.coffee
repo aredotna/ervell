@@ -8,6 +8,9 @@ module.exports = class CommentEditableAttributeView extends EditableAttributeVie
   events: _.extend EditableAttributeView.prototype.events,
     'click .attr-value a': 'preventEdit'
 
+  initialize: ->
+    super
+
   preventEdit: (e) ->
     e.stopPropagation()
 

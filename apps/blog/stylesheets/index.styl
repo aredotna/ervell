@@ -1,0 +1,63 @@
+blogPadding = 30px
+
+.home--blog
+  margin (unit * 6)  0
+  h2
+    font-size 28px
+    margin 40px 0 80px
+
+.blog-body
+  margin ((unit * 5) + topbar_h) 0
+  color black
+  .site-header
+    text-align center
+    margin-bottom (unit * 3)
+    h1
+      h1()
+      font-weight normal
+  .site-title
+    font-weight 300
+    color black
+  .wrapper
+    max-width 600px
+    margin 0 auto
+    padding 0 blogPadding
+  .page-content
+    padding (unit * 1.5) 0
+  .post-header
+    margin-bottom (unit * 1.5)
+  .post-category-title
+    margin-bottom (unit / 2)
+  .post-meta
+    font-size 14px
+  .post
+    margin-top (unit * 7)
+  .post:first-child
+    margin-top 0
+  a
+    color success
+    &:hover
+      color hovergray
+  h1
+    margin 0
+    padding 0
+    font-weight 300
+  h2
+    font-weight normal
+  img
+    max-width 100%
+  iframe 
+    margin unit 0
+  p
+    p()
+    margin-bottom (unit * 1.5)
+  .post-content > h4
+    display block
+    font-style normal
+    font-weight normal
+    font-size 1rem
+    margin-bottom unit * 2
+    em
+      font-style normal
+  p a + em
+    font-style normal

@@ -15,15 +15,13 @@ module.exports = class BodyView extends Backbone.View
     'click span[data-client]:not([data-disabled])': 'intercept'
     'click .trigger-mediator'                     : 'triggerMediator'
     'click a'                                     : 'maybeIntercept'
-    'click #scroll-top'                           : 'scrollToTop'
 
   mobileEvents:
-    'tap'                                         : 'bodyClick'
     'tap a[data-disabled]'                        : 'disable'
     'tap a[data-client]:not([data-disabled])'     : 'intercept'
     'tap span[data-client]:not([data-disabled])'  : 'intercept'
-    'tap a'                                       : 'maybeIntercept'
     'tap #scroll-top'                             : 'scrollToTop'
+    'tap a'                                       : 'maybeIntercept'
 
   initialize: (options) ->
     new Router
@@ -38,7 +36,8 @@ module.exports = class BodyView extends Backbone.View
     # view loses event delegation only on a channel.
     _.defer => @delegateEvents()
 
-    @delegateEvents(@mobileEvents) if $('body').hasClass 'is-mobile'
+    if $('body').hasClass 'is-mobile'
+      _.defer => @delegateEvents(@mobileEvents) 
 
   startLoading: -> $('body').addClass 'is-loading'
 
@@ -95,7 +94,7 @@ module.exports = class BodyView extends Backbone.View
 
   disable: (e)->
     e.preventDefault()
-    e.stopPropagation()
+    e.stopImmediatePropagation()
 
   bodyClick: (e) ->
     mediator.trigger 'body:click', e

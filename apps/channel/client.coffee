@@ -9,13 +9,14 @@ CurrentUser = require '../../models/current_user.coffee'
 setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
 ChannelFileDropView = require './client/channel_file_drop_view.coffee'
 ChannelDragView = require './client/channel_drag_view.coffee'
+MuteView  = require './components/mute/client.coffee'
 Filter = require '../../components/filter/index.coffee'
 Bp = require('../../lib/vendor/backpusher.js')
 { initChannelPath } = require './client/channel_path_view.coffee'
 
 module.exports = class ChannelView extends Backbone.View
 
-  initialize: ({ @channel, @blocks, @blockCollectionView })->
+  initialize: ({ @channel, @blocks, @blockCollectionView, @resultsCollection })->
     mediator.on 'collaborators:fetched', @checkUserAbilities, @
     mediator.shared.state.on 'change:isDraggingBlocks', @toggleDragClass, @
     mediator.on 'upload:done', @makeBlock, @
@@ -37,8 +38,9 @@ module.exports = class ChannelView extends Backbone.View
       @$el.removeClass 'is-dragging'
 
   pusherSubscribe: ->
-    @pusher = mediator.shared.pusher.subscribe "channel-production-#{@channel.id}"
-    @listener = new Bp.Backpusher @pusher, @blocks
+    @pusher = mediator.shared.pusher?.subscribe "channel-production-#{@channel.id}"
+    if @pusher
+      @listener = new Bp.Backpusher @pusher, @blocks
 
   updateSlug: ->
     window.location.href = @channel.href()
@@ -47,15 +49,19 @@ module.exports = class ChannelView extends Backbone.View
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
     # addable
-    if collaborator or mediator.shared.current_user.canAddToChannel(@channel)
+    if collaborator or mediator.shared.current_user.canAddToChannel(@channel) and not (sd.FOLLOWERS? or sd.FOLLOWING?)
       @setupFileDropView()
 
       @$('.block-collection').addClass 'is-addable'
       mediator.trigger 'channel:is-addable'
 
-      @blockCollectionView.setupNewBlockView
-        channel: @channel
-        autoRender: true
+      unless @$('.block-item--new').length
+        @blockCollectionView.setupNewBlockView
+          channel: @channel
+          autoRender: true
+
+        @resultsCollection.on 'reset', => 
+          @blockCollectionView.setupNewBlockView channel: @channel, autoRender: true
 
     # editable
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
@@ -68,6 +74,16 @@ module.exports = class ChannelView extends Backbone.View
 
       @setUpDragView() unless $('body').hasClass 'is-mobile'
       @delegateEvents()
+
+    # if user is logged in but can't edit channel
+    if mediator.shared.current_user.id and mediator.shared.current_user.isPremium() and !collaborator
+      @$('.metadata__column--manage').removeClass 'is-hidden'
+
+      new MuteView
+        el: $('.metadata__column--manage')
+        model: @channel
+
+      @channel.checkIfMuted()
 
     @maybeSetEmpty()
 
@@ -98,7 +114,7 @@ module.exports.init = ->
   blocks = new ChannelBlocks sd.BLOCKS,
     channel_slug: sd.CHANNEL.slug
 
-  { view } = setupBlockCollection
+  { view, resultsCollection } = setupBlockCollection
     model: channel
     $el: $('.channel-contents')
     collection: blocks
@@ -110,8 +126,13 @@ module.exports.init = ->
     channel: channel
     blocks: blocks
     blockCollectionView: view
+    resultsCollection: resultsCollection
 
   initChannelPath channel
 
-  if current_user.canAddToChannel channel
+  if current_user.canAddToChannel(channel) and not (sd.FOLLOWERS? or sd.FOLLOWING?)
     view.setupNewBlockView channel: channel
+
+    resultsCollection.on 'reset', -> 
+      view.setupNewBlockView channel: channel
+

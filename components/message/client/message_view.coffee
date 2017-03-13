@@ -28,5 +28,5 @@ module.exports = class MessageView extends Backbone.View
   remove: ->
     # # user gets the message
     analytics.track.click "Message closed", id: @model.id
-    Cookies.set @model.id, true
+    Cookies.set @model.id, true, { expires: 86400000 * 365 } # expires in 1 year
     super

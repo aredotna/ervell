@@ -43,6 +43,9 @@
     p()
     margin-top unit
 
+  ul
+    ul()
+
   a
     font-weight bold
 
@@ -111,6 +114,11 @@
   .iconic-property-fill
     fill textgray
 
+.block-video
+  video
+    max-width 65%
+    height auto
+
 .block-meta--attribution
   position absolute
   bottom unit
@@ -149,14 +157,14 @@
   top 0
   cursor pointer
   height 100vh
-  width 20vw
+  width 15vw
   opacity 0
   display none
   z-index 1
 
   +below(800px)
     height 90vh
-    width 15vw
+    width 10vw
 
   &:hover
     opacity 1

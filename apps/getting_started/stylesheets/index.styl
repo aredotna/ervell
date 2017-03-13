@@ -1,130 +1,25 @@
-.getting-started--container
-  position relative
-  width 64%
-  left 18%
-  display inline-block
-  vertical-align top
-  padding 0
-  margin auto
-  margin-bottom 100px
-  color #333
-  font-size 24px
-  line-height 1.3
-
-  h1
-    width 68%
-    height 65px
-    margin-left 32%
-    font-weight 400
-    font-size 24px
-    margin-top 26px
-
-.getting-started__column1
-  position relative
-  float left
-  padding 0
-  margin 0
-  width 30%
-  text-align right
-
-  img
-    width 280px
-    max-width 100%
-    padding 0
-    margin 6px 0 0 0
-    -moz-box-shadow 0px 0px 15px 0px bordergray
-    -webkit-box-shadow 0px 0px 15px 0px bordergray
-    box-shadow 0px 0px 15px 0px bordergray
-
-.getting-started__column2
-  position relative
-  float right
-  padding 0
-  margin 0
-  width 68%
-
-.getting-started__column--inner
-  position relative
-  height 280px
-  margin 50px 0 0 0
-
-  p
-    margin 0 0 20px 0
-
-.getting-started--button
-  position fixed
-  top 0
-  right 10px
-  color #333
-  padding 0
-  margin 26px 18px 0 0
-  font-weight bold
-  font-size 24px
-
-  a
-    position relative
-    clear both
-    float right
-    margin-bottom 12px
-
+.gs
+  margin (unit * 6) auto (unit * 10)
+  text-align center
+  h1, h2
+    font-weight normal
+    color hovergray
+  h2
+    margin-bottom unit * 2
+  a.btn
+    margin (unit * 4) auto
+    display inline-block
+    text-align center
+    font-weight bold
+    border 2px solid black
+    color black
+    width unit * 12
+    font-size 20px
+    line-height 50px
     &:hover
-      color success
+      background-color black
+      color white
+  &__body
+    min-height calc(100vh \- 180px)
 
-@media (max-height:700px)
-  .getting-started--container
-    h1
-      height 40px
-
-  .getting-started__column1
-    img
-      width 200px
-
-  .getting-started__column--inner
-    height 200px
-
-@media (max-width:(block_width_mar * 4) + 20)
-  .getting-started--container
-    font-size 18px
-
-  .getting-started--button
-    position absolute
-
-@media (max-width:(block_width_mar * 3) + 20)
-  .getting-started--container
-    width 94%
-    left 3%
-    font-size 18px
-
-    h1
-      height 30px
-      font-size 18px
-
-  .getting-started--button
-    font-size 18px
-
-@media (max-width:(block_width_mar * 2) + 20)
-  .getting-started__column1
-    img
-      width 180px
-
-  .getting-started__column--inner
-    height 180px
-
-  .getting-started--container
-    font-size 14px
-    margin-bottom 0
-
-    h1
-      height 20px
-      font-size 14px
-
-  .getting-started--button
-    position relative
-    margin 25px 0 50px 35%
-    height 100px
-    font-size 14px
-    line-height 2em
-
-    a
-      float left
-      margin-bottom 0
+@require './slide.styl'

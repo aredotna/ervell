@@ -1,0 +1,32 @@
+.about-section.about-section--features
+  max-width 900px
+
+.premium-features
+  padding 0 (unit * 1.5)
+  &__feature
+    width 280px
+    display inline-block
+    text-align center
+    color black
+    vertical-align top
+    padding unit * 1.5
+    +below(900px)
+      display block
+      margin unit auto
+    &__image
+      margin-bottom unit
+      img
+        width 170px
+        height 130px
+        border 1px solid bordergray
+        &:hover
+          border-color textgray !important
+    &__title
+      margin unit 0
+    &__desc
+      font-size 16px
+      font-size size
+      color textgray
+
+
+

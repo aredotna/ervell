@@ -1,0 +1,21 @@
+- links = collection.filter('selected')
+- s = links.length == 1 ? '' : 's'
+- visible = collection.any('selected') || status.get('connecting') ? true : false
+
+.import__status(
+  data-visible="#{visible}"
+  )
+  .import__status__inner
+    if status.get('connecting')
+      h2 
+        | Creating&nbsp;
+        span.import__status__inner--dark #{links.length} block#{s} 
+        | and connecting them to&nbsp;
+        span(class="import__status__inner__channel privacy--#{selectedChannel.get('status')}") #{selectedChannel.get('title')}
+    else
+      h2 
+        | Connect 
+        span.import__status__inner--dark #{links.length} link#{s} 
+        | to&nbsp;
+        .import__status__inner__select
+          //- rendered on the client

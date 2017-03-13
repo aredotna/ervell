@@ -7,8 +7,13 @@ sd = require("sharify").data
 _ = require 'underscore'
 Block = require("../models/block.coffee")
 params = require 'query-params'
+Fetch = require '../lib/fetch.coffee'
+AtoZ = require '../lib/a_to_z.coffee'
 
 module.exports = class SearchBlocks extends Blocks
+  _.extend @prototype, Fetch
+  _.extend @prototype, AtoZ
+
   defaultOptions:
     page: 1
     per: 20

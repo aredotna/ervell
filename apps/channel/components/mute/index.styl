@@ -1,0 +1,25 @@
+.metadata__column--manage
+  a
+    padding unit 0 unit unit
+    text-transform uppercase
+    font-weight normal
+    font-size 11px
+    &:before
+      content attr(data-static)
+  svg
+    vertical-align middle
+    height 18px
+    width 18px
+    margin-bottom 2px
+    margin-left 5px
+    fill lightgray
+  a.is-muted
+    color alert
+    svg
+      fill alert
+  a:hover:before
+    content attr(data-hover)
+    color hovergray
+  a:hover svg
+    color hovergray
+    fill hovergray

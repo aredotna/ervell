@@ -60,7 +60,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @updateConnectionCount()
 
   updateConnectionCount: ->
-    count = @model.get('connections').length + @urlConnections.models.length
+    count = @model.get('connections')?.length + @urlConnections.models.length
 
     s = if count == 1 then '' else 's'
     @$('#tab-connection-count').text "#{count} Connection#{s}"

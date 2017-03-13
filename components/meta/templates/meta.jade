@@ -12,10 +12,11 @@ if sd.SUBJECT
   meta(name="robots" content="none")
 
 //- default
-meta(property="description" content="Arena is a platform for private and collaborative research.")
+meta(property="description" content="Arena is a platform for collaborative research.")
 
 //- verification
 meta(name="google-site-verification" content="yEDzyeh9dYsQoRw7VJA6X5aVthUCYVTNK6nOUQU1eEE")
+meta(name="google-site-verification" content="YlzaBIQnBQhN5JFfKeoinJXrTlfdmdtFZ6s8Ez_O8vc")
 
 //- mobile
 meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui")
@@ -31,9 +32,9 @@ link(rel="apple-touch-startup-image" href="#{sd.IMAGE_PATH}loading.png")
 link(rel="mask-icon" href="#{sd.IMAGE_PATH}arena-mark.svg" color="black")
 
 //- twitter & fb meta
-meta(name="twitter:description", content="Are.na is a platform for private and collaborative research.")
+meta(name="twitter:description", content="Are.na is a platform for collaborative research.")
 meta(name="twitter:site", content="@aredotna")
-meta(property="og:description" content="Are.na is a platform for private and collaborative research.")
+meta(property="og:description" content="Are.na is a platform for collaborative research.")
 
 if channel && author
   meta(name="twitter:title", content="Are.na / #{channel.get('title')}")
@@ -42,9 +43,14 @@ if channel && author
   meta(property="og:url" content="https://www.are.na/#{author.get('slug')}/#{channel.get('slug')}")
 else if author
   meta(name="twitter:title", content="Are.na / #{author.get('username')}")
-  meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}}")
+  meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}")
   meta(property="og:title" content="Are.na / #{author.get('username')}")
   meta(property="og:url" content="https://www.are.na/#{author.get('slug')}")
+else if title
+  meta(name="twitter:title", content="Are.na / #{title}")
+  meta(name="twitter:url", content="https://www.are.na#{sd.CURRENT_PATH}")
+  meta(property="og:title" content="Are.na / #{title}")
+  meta(property="og:url" content="https://www.are.na#{sd.CURRENT_PATH}")
 else
   meta(name="twitter:title", content="Are.na")
   meta(name="twitter:url", content="https://www.are.na")
@@ -59,3 +65,9 @@ if blocks
       if index == 0
         meta(name="twitter:image", content="#{block.get('image').display.url}")
       meta(property="og:image" content="#{block.get('image').display.url}")
+
+else if image
+  meta(name="twitter:card", content="summary_large_image")
+  meta(name="twitter:image", content="#{image}")
+  meta(property="og:image" content="#{image}")
+

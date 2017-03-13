@@ -1,43 +1,19 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/index--info
 
 block vars
-  - extraClasses = 'no-header no-messages'
+  - extraClasses = 'no-messages body--static'
 
 block body
-  #getting-started--page
-    .getting-started--container
-      h1 #[strong Using Are.na]
-      .getting-started__column1
-        .getting-started__column--inner
-          img(src="../images/channel.png", alt="Channel")
-        .getting-started__column--inner
-          img(src="../images/block.png", alt="Block")
-        .getting-started__column--inner
-          img(src="../images/connect.gif", alt="Connection")
-        .getting-started__column--inner
-          img(src="../images/profile.gif", alt="Profile")
-        .getting-started__column--inner
-          img(src="../images/feed.png", alt="Feed")
-
-      .getting-started__column2
-        .getting-started__column--inner
-          p #[strong Channels are collections of content.]
-          p They can be #[strong.privacy--public open] (anyone can see and add), #[strong.privacy--closed closed] (anyone can see it, only you and your collaborators can add), #[strong.privacy--private private] (only you and your collaborators can see and add).
-          p You can create new channels or search for an existing one on the same topic and contribute to it.
-        .getting-started__column--inner
-          p #[strong Blocks are the content you connect to channels.]
-          p A block can be a file or an image you upload, raw text, a link to a website, an embed (Vimeo, YouTube, SoundCloud, etc), a pdf, etc.
-        .getting-started__column--inner
-          p #[strong Connections]
-          p A connection is made when a person puts a block in a channel.
-          p Blocks can be connected to your own channels or other people's #[span.privacy--public open] channels.
-        .getting-started__column--inner
-          p #[strong Users]
-          p Profiles show a users most recent blocks, channels, and connections.
-        .getting-started__column--inner
-          p #[strong Feed]
-          p On your main feed you can browse the recent activity of the channels and people you follow, or explore the recent stream of Are.na content from all users.
-
-    .getting-started--button.button--wide
+  .gs
+    h1 Getting Started
+    .gs__body
+      include ./slides/1-channels.jade
+      include ./slides/2-blocks.jade
+      include ./slides/3-connections.jade
+      include ./slides/4-users.jade
+      include ./slides/5-feed.jade
+    .gs__profile
       if user
-        #[a(href="/#{user.get('slug')}") Go to your profile &rarr;]
+        a.btn(href="/#{user.get('slug')}") Go to your profile
+      else
+        a.btn(href="/sign_up") Sign up

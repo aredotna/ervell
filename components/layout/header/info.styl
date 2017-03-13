@@ -1,0 +1,87 @@
+mobileMenuBreak = 730px
+
+.header--info
+  position fixed
+  top 0
+  left 0
+  height topbar_h
+  width 100%
+  background-color white
+  padding 0
+  display flex
+  justify-content space-between
+  align-items center
+  z-index header_z
+  font-size 16px
+  transform translate3d(0, 0, 1px)
+  &__menu, &__auth
+    display inline-block
+    vertical-align middle
+    a
+      font-weight bold
+      margin 0 unit
+      padding-top 1px
+      border-bottom none !important
+      &.selected, &:hover
+        color black
+    +below(mobileMenuBreak)
+      display none
+  &__menu
+    margin-left unit
+    a
+      color lightgray 
+  &__mobile-menu
+    display none
+    +below(mobileMenuBreak)
+      display block
+      &__trigger
+        color black
+        padding-right unit
+        &__close
+          display none
+        &__menu
+          display block
+      &__contents
+        display none
+        position fixed
+        width 100%
+        height 100vh
+        top topbar_h
+        left 0
+        background-color white
+        a
+          display block
+          font-weight bold
+          color black
+          height topbar_h
+          line-height topbar_h
+          vertical-align middle
+          padding-left topbar_h
+        a:active, a:hover
+          background-color black
+          color white
+      &.is-open .header--info__mobile-menu
+        &__contents
+          display block
+        &__trigger
+          &__close
+            display block
+          &__menu
+            display none
+
+  &__logo
+    cursor pointer
+    height topbar_h
+    font-weight bold
+    color black
+    border-bottom none !important
+
+    svg
+      width 46px
+      height topbar_h
+      fill black
+      padding 10px 8px 10px 12px
+      vertical-align middle
+
+    span
+      vertical-align middle

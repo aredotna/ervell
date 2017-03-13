@@ -9,9 +9,8 @@ block body
     .channel-contents
       - title = channel.get('title')
       include ../../../components/blocks/container/templates/index
-    .channel-empty.valign-outer
-      .valign-inner.center
-        include ./empty
+    .channel-empty
+      include ./empty
 
   if user
     .channel__filedrop.flex-container

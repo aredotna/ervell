@@ -28,6 +28,15 @@ module.exports = class EditableAttributeView extends Backbone.View
     @listenTo @model, 'remote:update', @render
     @listenTo @model, 'change', @render
 
+    md.setOptions		
+      renderer: new md.Renderer(),		
+      gfm: true,		
+      tables: true,		
+      breaks: true,		
+      pedantic: false,		
+      smartLists: true,		
+      smartypants: false
+
     @render()
 
   beginEdit: ->

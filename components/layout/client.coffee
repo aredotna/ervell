@@ -7,6 +7,7 @@ attachFastClick = require 'fastclick'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
+HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 NewChannelView = require '../new_channel/client/new_channel_view.coffee'
 UserMenuView = require '../user_menu/client/user_menu_view.coffee'
@@ -21,6 +22,7 @@ CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
+initLoggedOutCta = require '../logged_out_cta/index.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -30,9 +32,14 @@ module.exports = ->
   setupAnalytics()
   syncAuth()
   initShortCuts()
+  initLoggedOutCta() unless sd.CURRENT_USER?.id
+  showPremiumMessage() if sd.CURRENT_USER?.id
+
+isMobile = ->
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 setMobileClass = ->
-  if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  if isMobile()
     $('body').addClass 'is-mobile'
     attachFastClick(document.body)
 
@@ -41,7 +48,8 @@ setupPusherAndCurrentUser = ->
 
   user = new CurrentUser sd.CURRENT_USER
   mediator.shared.current_user = user
-  mediator.shared.state = new State view_mode: sd.VIEW_MODE
+  mediator.shared.state = new State()
+  mediator.shared.state.set view_mode: sd.VIEW_MODE
   mediator.shared.recent_connections = new RecentConnections
 
   if user.id
@@ -65,6 +73,8 @@ setupViews = ->
     el: $('body')
   new SearchBarView
     el: $('.layout-header__search')
+
+  new HeaderInfoView
 
   if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
     new Waypoint.Sticky
@@ -144,25 +154,24 @@ initShortCuts = ->
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
   km 'l',     ->
-    mediator.shared.state.set view_mode: 'list'
-    window.location.reload()
+    if mediator.shared.current_user.get('is_pro')
+      mediator.shared.state.set view_mode: 'list'
+      window.location.reload()
   km 'g',     ->
-    mediator.shared.state.set view_mode: 'grid'
-    window.location.reload()
+    if mediator.shared.current_user.get('is_pro')
+      mediator.shared.state.set view_mode: 'grid'
+      window.location.reload()
 
   initNightMode()
 
-showNewUserMessages = ->
-  new NewUserMessagesView
-    container: $('#message-container')
-
-showBookmarkletMessage = ->
-  model = new Backbone.Model
-    id: 'bookmarklet_updates_message'
-    title: "New Bookmarklet"
-    body: "Quickly save to Are.na while browsing the web. Drag and drop, add to multiple channels, and more. <a href='https://www.are.na/block/506001'>Read more...</a>"
-    type: 'announcement'
-  new MessageView container: $('#message-container'), model: model
+showPremiumMessage = ->
+  if (!sd.CURRENT_USER.is_pro and sd.CURRENT_USER.channel_count >= 2 )
+    model = new Backbone.Model
+      id: 'premium_message'
+      title: "Help support Are.na"
+      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/about/pricing?utm_campaign=pmessage'>premium account</a>."
+      type: 'announcement'
+    new MessageView container: $('#message-container'), model: model
 
 showAnnouncements = (announcements) ->
   # stub

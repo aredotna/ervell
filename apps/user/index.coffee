@@ -11,6 +11,7 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 app.get "/:username", auth, routes.fetchAuthor, routes.user, routes.catchChannel
+app.get "/:username/index", auth, routes.fetchAuthor, routes.userChannelsByAlpha, routes.catchChannel
 app.get "/:username/channels", auth, routes.fetchAuthor, (req, res, next) ->
   req.query = _.extend req.query, subject: 'channel'
   routes.user req, res, next
