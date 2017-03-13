@@ -1,10 +1,10 @@
 .block-sidebar
   width unit * 18
-  height 100%
+  min-width unit * 18
+  height 100vh
   background white
   overflow scroll
-  position relative
-  padding-right (unit * 2)
+  padding topbar_h unit 0
 
   &__separator
     font-size 0.8rem
@@ -14,12 +14,38 @@
     margin (unit * 2) 0 unit
     padding-bottom (unit / 2)
 
+  &__wrapper
+    height auto !important
+    margin 0 auto -50px
+    min-height "calc(100% - %s)" % 30px
+    padding 0 0 30px
+    &:after
+      content ""
+      display block
+      height 30px
+
+  &__toggle-info
+    padding unit 0
+    &:before
+      content 'Show info'
+      display block
+      color lightgray
+      font-weight bold
+      font-size 0.8rem
+      cursor pointer
+      text-align right
+    &[data-visible=true]:before
+      content 'Hide info'
+    &:hover:before
+      color hovergray
+
   &__info
     &__title
       h3()
       text-align left
       margin unit auto
       line-height 1.2
+      word-break break-word
       &.attribute-group
         display block
 
@@ -35,16 +61,18 @@
       font-size 0.8rem
       line-height 1.2rem
       &__original
-        ellipsis(200px)
+        ellipsis(100%)
         vertical-align bottom
 
     &__description
       p 14px
       margin-top 0
       overflow hidden
+      p
+        p 14px
+        margin-top 0
+        word-break break-word
+        a
+          font-weight bold
 
   
-  &__tabs
-    background #fff
-    #block-tabs
-      margin-top 0

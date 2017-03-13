@@ -2,7 +2,7 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
-template = -> require('../templates/connections.jade') arguments...
+template = -> require('../../../components/connection_list/index.jade') arguments...
 
 module.exports = class ChannelConnectionsView extends Backbone.View
 

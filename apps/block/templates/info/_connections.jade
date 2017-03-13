@@ -1,4 +1,10 @@
-if connections
+if connections && connections.length
   - s = connections.length == 1 ? '' : 's'
   .block-sidebar__separator(id="tab-connection-count") #{connections.length} Connection#{s}
-  include ../../../../components/connection_list/index
+  for channel in connections
+    .block-connection-outer
+      include ../../../../components/list_view/templates/_connection
+  
+  .tab-url-connections-list
+    //- rendered on the client
+

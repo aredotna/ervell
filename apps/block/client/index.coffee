@@ -130,7 +130,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     this
 
   postRender: ->
-    initComments @model, @$('#tab-comments .tab-content__inner')
+    initComments @model, @$('#tab-comments')
     _.defer => IconicJS().inject('img.iconic')
 
     for attribute, kind of @editableAttributes
@@ -149,7 +149,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
   scrollToTabs: ->
     $modal = $('.js-modalize-dialog')
     $tabs = $('#block-tabs')
-    $modal.scrollTop($modal.scrollTop() - $modal.offset().top + $tabs.offset().top)
+    $modal.scrollTop($modal.scrollTop() - $modal.offset()?.top + $tabs.offset()?.top)
 
   remove: ->
     mediator.stopListening "lightbox:slide:next"

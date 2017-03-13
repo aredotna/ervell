@@ -1,4 +1,6 @@
 .block-content
+  .block-arrow.block-arrow--left(data-direction="prev")
+    img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-md")
   if block.has('image') && block.get('class') != 'Media'
     .block-img
       a(href="#{block.getSourceUrl()}" target="_blank")
@@ -18,8 +20,5 @@
           img(data-src="#{sd.IMAGE_PATH}iconic/type-pdf.svg" class="iconic iconic-lg")
         else
           img(data-src="#{sd.IMAGE_PATH}iconic/file.svg" data-file-extension="#{block.get('attachment').extension}" class="iconic iconic-lg")
-
-  .block-arrow.block-arrow--right.v-outer(data-direction="next"): .v-inner
+  .block-arrow.block-arrow--right(data-direction="next")
     img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-md")
-  .block-arrow.block-arrow--left.v-outer(data-direction="prev"): .v-inner
-    img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-md")

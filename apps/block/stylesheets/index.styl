@@ -2,14 +2,15 @@
   clearfix()
   display flex
   flex-flow row nowrap
-  margin-top topbar_h
+  position relative    
 
 .block-content
-  height 100%
+  height 100vh
   flex-grow 1
   position relative
-  text-align center
-  max-width "calc(100vw - %s)" % 360px
+  display flex
+  align-items center
+  justify-content center
 
 .block-img
   padding 0 unit
@@ -21,17 +22,8 @@
       max-width 100vw
 
 .block-media
-  ratio-box(16/9)
-  max-width 50vw
   position relative
   margin 0 auto
-
-  iframe
-    position absolute
-    top 0
-    left 0
-    width 100%
-    height 100%
 
   +below(800px)
     max-width 100vw
@@ -66,13 +58,13 @@
   background-color #fff
   border 1px solid bordergray
   width 90%
-  max-width 840px
+  max-width 740px
   margin (unit * 2) auto
   overflow-x auto
   padding unit * 2
   text-align left
   min-height 80vh
-  font-size 1.1rem
+  font-size 1.2rem
   line-height 1.7em
 
   +below(800px)
@@ -82,7 +74,7 @@
 
   p
     p()
-    font-size 1.1rem
+    font-size 1.2rem
     line-height 1.7em
 
     &:first-child
@@ -106,6 +98,8 @@
   > form textarea
     resize vertical
     padding unit * 2
+    font-family font_serif
+    line-height 1.7em
 
   .attr-value
     height auto
@@ -149,14 +143,15 @@
     border-top none
     
 .block-arrow
-  position absolute
-  top 0
   cursor pointer
-  height 100vh
-  width 15vw
+  height 100%
+  width 10vw
   opacity 0
   display none
   z-index 1
+  margin-right auto
+  align-items center
+  justify-content center
 
   +below(800px)
     height 90vh
@@ -166,14 +161,15 @@
     opacity 1
 
 .modalize .block-arrow
-  display table
+  display flex
 
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
     height 20px
 
 .block-arrow--right
-  right 0
+  margin-right 0
+  margin-left auto
 
 .tab-url-connections-list h5
   text-align center
@@ -213,7 +209,7 @@
 .block-connection-outer
   display table
   width 100%
-  margin-bottom unit
+  margin-bottom (unit / 2)
 
 #tab-info
   .block-title
