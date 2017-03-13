@@ -1,0 +1,4 @@
+if connections
+  - s = connections.length == 1 ? '' : 's'
+  .block-sidebar__separator(id="tab-connection-count") #{connections.length} Connection#{s}
+  include ../../../../components/connection_list/index
