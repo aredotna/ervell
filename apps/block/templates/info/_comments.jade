@@ -1,4 +1,5 @@
-- s = block.get('comment_count') == 1 ? '' : 's'
-.block-sidebar__separator(id="tab-connection-count") #{block.get('comment_count')} Comment#{s}
-#tab-comments
-  include ../../../../components/comments/templates/index
+.block-sidebar__section
+  - s = block.get('comment_count') == 1 ? '' : 's'
+  .block-sidebar__separator(id="tab-connection-count") #{block.get('comment_count')} Comment#{s}
+  #tab-comments
+    include ../../../../components/comments/templates/index

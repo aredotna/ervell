@@ -1,4 +1,6 @@
-.block-content
+- extraClass = hideSidebar == 'true' ? 'is-wide' : ''
+
+.block-content(class=extraClass)
   .block-arrow.block-arrow--left(data-direction="prev")
     img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-md")
   include _content-info

@@ -9,48 +9,53 @@
   &.is-hidden
     display none
 
+  &__section
+    margin (unit * 4) 0 (unit * .75)
+    &--first
+      margin-top (unit * 2)
+
   &__separator
     font-size 0.8rem
     font-weight bold
     color lightgray
     border-bottom 1px solid bordergray
-    margin (unit * 2) 0 unit
     padding-bottom (unit / 2)
+    margin-bottom (unit / 2)
 
   &__wrapper
     height auto !important
-    margin 0 auto -50px
-    min-height "calc(100% - %s)" % 30px
-    padding 0 0 30px
+    margin 0 auto -55px
+    min-height "calc(100% - %s)" % 20px
+    padding 0 0 20px
     &:after
       content ""
       display block
-      height 30px
+      height 20px
 
   &__toggle-info
     padding unit 0
-    &:before
-      content 'Show info'
-      display block
-      color lightgray
-      font-weight bold
-      font-size 0.8rem
-      cursor pointer
-      text-align right
-    &[data-visible=true]:before
-      content 'Hide info'
-    &:hover:before
-      color hovergray
+    display block
+    color lightgray
+    font-weight bold
+    font-size 0.8rem
+    cursor pointer
+    text-align right
+    display block
 
   &__info
     &__title
-      h3()
+      h4()
       text-align left
-      margin unit auto
+      margin unit auto (unit / 2)
       line-height 1.2
       word-break break-word
       &.attribute-group
         display block
+      &.is-absent.can-read:not(.can-edit)
+        min-height (unit * 2)
+        display block !important
+        .placeholder
+          display none
 
     &__date
       font-size 0.8rem
@@ -62,14 +67,14 @@
     &__source
       font-weight bold
       font-size 0.8rem
-      line-height 1.2rem
+      line-height 1.6rem
       &__original
         ellipsis(100%)
         vertical-align bottom
 
     &__description
       p 14px
-      margin-top 0
+      margin 0
       overflow hidden
       p
         p 14px

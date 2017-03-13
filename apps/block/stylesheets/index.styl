@@ -4,7 +4,6 @@
   flex-flow row nowrap
   position relative  
     
-
 .block-content
   height 100vh
   flex-grow 1
@@ -12,6 +11,7 @@
   display flex
   align-items center
   justify-content center
+  overflow scroll
 
   &__info
     position absolute
@@ -20,18 +20,27 @@
     padding unit 0
     text-align center
     display none
-    &__title
-      padding-bottom (unit / 2)
-    &__title, &__source
+    &__title, &__date
+      padding-bottom (unit / 4)
+    &__title, &__source, &__toggle-info
       font-weight bold
-    &__date, &__source
+    &__date, &__source, &__toggle-info
       font-size 0.8rem
       line-height 1.2rem
       color lightgray
+    &__toggle-info
+      z-index 2001
+      position absolute
+      bottom unit
+      right unit
+      display inline-block
+      cursor pointer
+      &:hover
+        color hovergray
 
   &.is-wide
     .block-content__info
-      display block
+      display block  
 
 .block-img
   padding 0 unit
@@ -54,7 +63,7 @@
   > a
     font-weight bold
 
-.block-text, .block-description
+.block-text
   > p
     p()
     margin-top unit
@@ -87,6 +96,8 @@
   min-height 80vh
   font-size 1.2rem
   line-height 1.7em
+  max-height 80vh
+  overflow scroll
 
   +below(800px)
     height 50vh
@@ -192,10 +203,10 @@
   margin-right 0
   margin-left auto
 
-.tab-url-connections-list h5
+.js-url-connections-list h5
   text-align center
   font-weight normal
-  margin-bottom unit
+  margin unit 0
   font-size 0.7rem
   text-transform uppercase
   color lightgray
@@ -250,5 +261,11 @@
 
 .block-new-comment-container
   margin-top unit * 2
+  font-size 14px
+
+.comment-list
+  font-size 14px
+  p
+    p 14px
 
 @require 'sidebar'
