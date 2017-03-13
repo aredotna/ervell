@@ -2,7 +2,8 @@
   clearfix()
   display flex
   flex-flow row nowrap
-  position relative    
+  position relative  
+    
 
 .block-content
   height 100vh
@@ -11,6 +12,26 @@
   display flex
   align-items center
   justify-content center
+
+  &__info
+    position absolute
+    bottom 0
+    width 100%
+    padding unit 0
+    text-align center
+    display none
+    &__title
+      padding-bottom (unit / 2)
+    &__title, &__source
+      font-weight bold
+    &__date, &__source
+      font-size 0.8rem
+      line-height 1.2rem
+      color lightgray
+
+  &.is-wide
+    .block-content__info
+      display block
 
 .block-img
   padding 0 unit

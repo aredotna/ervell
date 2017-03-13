@@ -21,8 +21,8 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   events:
     'click .block-arrow' : 'clickSlide'
-    'click .tab--container__nav__item' : 'toggleTab'
     'click .js-connect-button' : 'loadConnectView'
+    'click .js-toggle-info' : 'toggleSidebar'
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -46,6 +46,10 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
     mediator.on "connection:added:#{@model.id}", @addConnections, @
 
+  toggleSidebar: ->
+    @$('.block-sidebar').toggleClass 'is-hidden'
+    @$('.block-content').toggleClass 'is-wide'
+
   setupUrlConnections: ->
     @urlConnections = new Blocks []
     @urlConnections.url = "#{sd.API_URL}/blocks/#{@model.id}/channels_by_url"
@@ -54,7 +58,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @urlConnections.fetch()
 
   renderUrlConnections: ->
-    @$(".tab-url-connections-list").html urlConnectionsTemplate
+    @$(".js-url-connections-list").html urlConnectionsTemplate
       urlConnections: @urlConnections.models
 
     @updateConnectionCount()
@@ -64,17 +68,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
     s = if count == 1 then '' else 's'
     @$('#tab-connection-count').text "#{count} Connection#{s}"
-
-  toggleTab: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-
-    $('.tab--container__nav__item.is-active, .tab-content.is-active').removeClass 'is-active'
-    @state.set tab: $(e.currentTarget).data 'tab'
-    $(e.currentTarget).addClass 'is-active'
-    $("#tab-#{@state.get('tab')}").addClass 'is-active'
-
-    @scrollToTabs()
 
   clickSlide: (e) ->
     e.preventDefault()
@@ -111,7 +104,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     connections.unshift connection
     @model.addConnection connection.toJSON()
 
-    @$(".tab-connections-list").html connectionsTemplate
+    @$(".js-connections-list").html connectionsTemplate
       connections: connections
 
     @updateConnectionCount()
