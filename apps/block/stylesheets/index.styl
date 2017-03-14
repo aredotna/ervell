@@ -2,7 +2,10 @@
   clearfix()
   display flex
   flex-flow row nowrap
-  position relative  
+  position relative
+
+  +below(950px)
+    display block
     
 .block-content
   height 100vh
@@ -13,9 +16,14 @@
   justify-content center
   overflow scroll
 
+  +below(950px)
+    height 100vh
+    padding 0 unit
+
   &__info
     position absolute
     bottom 0
+    left 0
     width 100%
     padding unit 0
     text-align center
@@ -45,7 +53,7 @@
 .block-img
   padding 0 unit
   img
-    max-height 80vh
+    max-height 75vh
     width auto
     max-width 100%
     +below(800px)
@@ -96,7 +104,7 @@
   min-height 80vh
   font-size 1.2rem
   line-height 1.7em
-  max-height 80vh
+  max-height 75vh
   overflow scroll
 
   +below(800px)
