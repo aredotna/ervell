@@ -3,8 +3,3 @@ span.list-item.list-item__connection(data-client="Channel" href="#{channel.href(
     .list-item-cell.list-item-cell--title
       = channel.get('title')
       span.list-item__channel__block-count &nbsp; #{channel.get('length')} blocks
-
-    .list-item-cell.list-item-cell--attribution
-      div
-        | by&nbsp;
-        a(href="/#{channel.get('user').slug}") #{channel.get('user').username}

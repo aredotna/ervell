@@ -2,6 +2,7 @@ _ = require 'underscore'
 sd = require('sharify').data
 Backbone = require 'backbone'
 markdown = require 'marked'
+Cookies = require 'cookies-js'
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
 CurrentUser = require '../../../models/current_user.coffee'
@@ -18,11 +19,11 @@ urlConnectionsTemplate =-> require('../templates/_url_connections.jade') argumen
 class State extends Backbone.Model
 
 module.exports.FullBlockView = class FullBlockView extends Backbone.View
-
+  cookieKey: 'sidebar-hidden'
   events:
     'click .block-arrow' : 'clickSlide'
-    'click .tab--container__nav__item' : 'toggleTab'
     'click .js-connect-button' : 'loadConnectView'
+    'click .js-toggle-info' : 'toggleSidebar'
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -30,7 +31,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'content'     : 'markdown'
 
   initialize: (options)->
-    @state = new State tab: options.tab || 'info'
+    @state = new State tab: options.tab || 'connections'
     @user = CurrentUser.orNull()
     @postRendered = false
 
@@ -46,6 +47,14 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
     mediator.on "connection:added:#{@model.id}", @addConnections, @
 
+  toggleSidebar: ->
+    currentValue = Cookies.get @cookieKey
+    newValue = if currentValue is 'true' then 'false' else 'true'
+    console.log('currentValue', currentValue)
+    @$('.block-sidebar').toggleClass 'is-hidden'
+    @$('.block-content').toggleClass 'is-wide'
+    Cookies.set @cookieKey, newValue 
+
   setupUrlConnections: ->
     @urlConnections = new Blocks []
     @urlConnections.url = "#{sd.API_URL}/blocks/#{@model.id}/channels_by_url"
@@ -54,7 +63,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @urlConnections.fetch()
 
   renderUrlConnections: ->
-    @$(".tab-url-connections-list").html urlConnectionsTemplate
+    @$(".js-url-connections-list").html urlConnectionsTemplate
       urlConnections: @urlConnections.models
 
     @updateConnectionCount()
@@ -63,18 +72,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     count = @model.get('connections')?.length + @urlConnections.models.length
 
     s = if count == 1 then '' else 's'
-    @$('#tab-connection-count').text "#{count} Connection#{s}"
-
-  toggleTab: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-
-    $('.tab--container__nav__item.is-active, .tab-content.is-active').removeClass 'is-active'
-    @state.set tab: $(e.currentTarget).data 'tab'
-    $(e.currentTarget).addClass 'is-active'
-    $("#tab-#{@state.get('tab')}").addClass 'is-active'
-
-    @scrollToTabs()
+    @$('#tab-connection-count').text "#{count or 0} Connection#{s}"
 
   clickSlide: (e) ->
     e.preventDefault()
@@ -111,7 +109,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     connections.unshift connection
     @model.addConnection connection.toJSON()
 
-    @$(".tab-connections-list").html connectionsTemplate
+    @$(".js-connections-list").html connectionsTemplate
       connections: connections
 
     @updateConnectionCount()
@@ -124,13 +122,14 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
       tab: @state.get 'tab'
       user: @user
       connections: @model.connections()
+      hideSidebar: Cookies.get @cookieKey
 
     @postRender()
 
     this
 
   postRender: ->
-    initComments @model, @$('#tab-comments .tab-content__inner')
+    initComments @model, @$('#tab-comments')
     _.defer => IconicJS().inject('img.iconic')
 
     for attribute, kind of @editableAttributes
@@ -149,7 +148,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
   scrollToTabs: ->
     $modal = $('.js-modalize-dialog')
     $tabs = $('#block-tabs')
-    $modal.scrollTop($modal.scrollTop() - $modal.offset().top + $tabs.offset().top)
+    $modal.scrollTop($modal.scrollTop() - $modal.offset()?.top + $tabs.offset()?.top)
 
   remove: ->
     mediator.stopListening "lightbox:slide:next"

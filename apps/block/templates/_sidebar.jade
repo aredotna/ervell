@@ -1,0 +1,11 @@
+- extraClass = hideSidebar == 'true' ? 'is-hidden' : ''
+
+.block-sidebar(class=extraClass)
+  .block-sidebar__wrapper
+    .block-sidebar__info
+      include info/_description
+      include info/_connections
+      include info/_comments
+  .block-sidebar__toggle-info
+    a.js-toggle-info Hide info
+    

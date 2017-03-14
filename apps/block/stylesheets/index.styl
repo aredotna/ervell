@@ -1,35 +1,59 @@
 .block-container
-  // nothing
   clearfix()
-
+  display flex
+  flex-flow row nowrap
+  position relative  
+    
 .block-content
-  position absolute
-  top 0
-  left 0
-  height 100%
-  width 100%
+  height 100vh
+  flex-grow 1
+  position relative
+  display flex
+  align-items center
+  justify-content center
+  overflow scroll
+
+  &__info
+    position absolute
+    bottom 0
+    width 100%
+    padding unit 0
+    text-align center
+    display none
+    &__title, &__date
+      padding-bottom (unit / 4)
+    &__title, &__source, &__toggle-info
+      font-weight bold
+    &__date, &__source, &__toggle-info
+      font-size 0.8rem
+      line-height 1.2rem
+      color lightgray
+    &__toggle-info
+      z-index 2001
+      position absolute
+      bottom unit - 3
+      right unit
+      display inline-block
+      cursor pointer
+      &:hover
+        color hovergray
+
+  &.is-wide
+    .block-content__info
+      display block  
 
 .block-img
+  padding 0 unit
   img
     max-height 80vh
     width auto
-    max-width 80vw
-
+    max-width 100%
     +below(800px)
       max-width 100vw
 
 .block-media
-  ratio-box(16/9)
-  max-width 50vw
   position relative
   margin 0 auto
-
-  iframe
-    position absolute
-    top 0
-    left 0
-    width 100%
-    height 100%
 
   +below(800px)
     max-width 100vw
@@ -39,7 +63,7 @@
   > a
     font-weight bold
 
-.block-text, .block-description
+.block-text
   > p
     p()
     margin-top unit
@@ -63,15 +87,17 @@
   color #333
   background-color #fff
   border 1px solid bordergray
-  width 55%
+  width 90%
   max-width 740px
-  margin 0 auto
+  margin (unit * 2) auto
   overflow-x auto
   padding unit * 2
   text-align left
-  height 80vh
-  font-size 1.1rem
+  min-height 80vh
+  font-size 1.2rem
   line-height 1.7em
+  max-height 80vh
+  overflow scroll
 
   +below(800px)
     height 50vh
@@ -80,7 +106,7 @@
 
   p
     p()
-    font-size 1.1rem
+    font-size 1.2rem
     line-height 1.7em
 
     &:first-child
@@ -104,6 +130,8 @@
   > form textarea
     resize vertical
     padding unit * 2
+    font-family font_serif
+    line-height 1.7em
 
   .attr-value
     height auto
@@ -145,23 +173,17 @@
 
   &:hover
     border-top none
-
-.block-date
-  font-size 0.8rem
-  text-align right
-  line-height 1.3rem
-  > a
-    font-weight bold
-
+    
 .block-arrow
-  position absolute
-  top 0
   cursor pointer
-  height 100vh
-  width 15vw
+  height 100%
+  width 10vw
   opacity 0
   display none
   z-index 1
+  margin-right auto
+  align-items center
+  justify-content center
 
   +below(800px)
     height 90vh
@@ -171,28 +193,26 @@
     opacity 1
 
 .modalize .block-arrow
-  display table
+  display flex
 
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
     height 20px
 
 .block-arrow--right
-  right 0
+  margin-right 0
+  margin-left auto
 
-.tab-url-connections-list h5
+.js-url-connections-list h5
   text-align center
   font-weight normal
-  margin-bottom unit
+  margin unit 0
   font-size 0.7rem
   text-transform uppercase
   color lightgray
 
 .tab--container--block
-  position absolute
-  top 100%
   width 100%
-  margin-top -50px
 
   .tab--container__nav
     border-bottom 1px solid bordergray
@@ -213,7 +233,6 @@
     padding-bottom (unit * 3)
 
   .tab-content__inner
-    width 50%
     margin unit auto
 
     +below(800px)
@@ -222,7 +241,7 @@
 .block-connection-outer
   display table
   width 100%
-  margin-bottom unit
+  margin-bottom (unit / 2)
 
 #tab-info
   .block-title
@@ -242,3 +261,11 @@
 
 .block-new-comment-container
   margin-top unit * 2
+  font-size 14px
+
+.comment-list
+  font-size 14px
+  p
+    p 14px
+
+@require 'sidebar'

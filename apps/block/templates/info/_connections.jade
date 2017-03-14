@@ -1,0 +1,12 @@
+.block-sidebar__section
+  if connections && connections.length
+    - s = connections.length == 1 ? '' : 's'
+    .block-sidebar__separator(id="tab-connection-count") #{connections.length} Connection#{s}
+    .js-connections-list
+      for channel in connections
+        .block-connection-outer
+          include ../../../../components/list_view/templates/_connection
+    
+    .js-url-connections-list
+      //- rendered on the client
+
