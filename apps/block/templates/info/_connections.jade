@@ -1,4 +1,4 @@
-.block-sidebar__section
+.block-sidebar__section.block-sidebar__section--connect
   if connections && connections.length
     - s = connections.length == 1 ? '' : 's'
     .block-sidebar__separator(id="tab-connection-count") #{connections.length} Connection#{s}
@@ -9,8 +9,6 @@
     
     .js-url-connections-list
       //- rendered on the client
-
-    //- strong.js-connect-button Connect &rarr;
-    //- .block-connect-container
-    //-   //- rendered on the client
-
+    .block-sidebar__section--connect__button.pointer.js-connect-button Connect
+    .block-connect-container.connect-container
+      //- rendered on the client

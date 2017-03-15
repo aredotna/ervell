@@ -17,8 +17,9 @@
   overflow scroll
 
   +below(950px)
-    height 100vh
+    height 90vh
     padding 0 unit
+    margin-top topbar_h
 
   &__info
     position absolute
@@ -168,18 +169,6 @@
   right unit
   color lightgray
 
-.block-connect-container
-  position relative
-
-  &.is-active
-    border 1px solid bordergray
-    margin -(unit * 3) auto 0
-    width 315px
-    height 315px
-
-  .new-connection
-    background-color #fff
-
 .button--base--connect
   text-align center
   width 100%
@@ -199,9 +188,15 @@
   align-items center
   justify-content center
 
-  +below(800px)
+  +below(950px)
     height 90vh
     width 10vw
+    position absolute
+    left 0
+    top 0
+    &.block-arrow--right
+      left auto
+      right 0
 
   &:hover
     opacity 1
@@ -283,3 +278,4 @@
     p 14px
 
 @require 'sidebar'
+@require 'connect'
