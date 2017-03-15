@@ -1,4 +1,4 @@
-.block-sidebar__section
+.block-sidebar__section.block-sidebar__section--comments
   - s = block.get('comment_count') == 1 ? '' : 's'
   .block-sidebar__separator(id="tab-connection-count") #{block.get('comment_count')} Comment#{s}
   #tab-comments

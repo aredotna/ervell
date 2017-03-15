@@ -18,7 +18,7 @@ module.exports = class EditableAttributeView extends Backbone.View
     if @model.get(@_attribute) then 'is-present' else 'is-absent'
 
   events:
-    'click .attr-value' : 'beginEdit'
+    'click .attr-content' : 'beginEdit'
     'click .save'       : 'save'
     'submit'            : 'save'
     'clickMarkdownHelp' : 'showMarkdownHelp'
@@ -47,6 +47,7 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     @editing = true
     @$el.addClass('is-editing')
+    _.defer => @$('.editor').focus()
 
   endEdit: ->
     @editing = false

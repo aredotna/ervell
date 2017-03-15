@@ -98,29 +98,28 @@ privacy-light-color('.new-connection__search-result-', background-color)
       input
         height 29px
 
-      .new-connection__caption
+      &__caption
         display none
 
-      .new-connection__search-results
+      &__search-results
         height 90px
         width 100%
         overflow hidden
-
         ul
           position relative
 
-        .new-connection__search-result
-          height 30px
-          border 0px
-          margin 0
-          padding 6px 0 0 10px
-          border-top 1px solid bordergray
-          background-color transparent
+      &__search-result
+        height 30px
+        border 0px
+        margin 0
+        padding 6px 0 0 10px
+        border-top 1px solid bordergray
+        background-color transparent
 
-          &.is-connected
-            &:hover
-              .disconnect
-                padding 6px 0 0 10px
+        &.is-connected
+          &:hover
+            .disconnect
+              padding 6px 0 0 10px
 
       .button--inblock--bottom
         display none
