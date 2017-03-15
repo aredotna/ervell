@@ -50,7 +50,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
   toggleSidebar: ->
     currentValue = Cookies.get @cookieKey
     newValue = if currentValue is 'true' then 'false' else 'true'
-    console.log('currentValue', currentValue)
     @$('.block-sidebar').toggleClass 'is-hidden'
     @$('.block-content').toggleClass 'is-wide'
     Cookies.set @cookieKey, newValue 
