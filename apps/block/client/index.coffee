@@ -21,7 +21,7 @@ class State extends Backbone.Model
 module.exports.FullBlockView = class FullBlockView extends Backbone.View
   cookieKey: 'sidebar-hidden'
   events:
-    'tap .block-mobile-arrow' : 'scrollDown'
+    'click .block-mobile-arrow' : 'scrollDown'
     'click .block-arrow' : 'clickSlide'
     'click .js-connect-button' : 'loadConnectView'
     'click .js-toggle-info' : 'toggleSidebar'
@@ -90,7 +90,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     @slide direction
 
   scrollDown: ->
-    $el = $('.modalize-body') or $('html,body')
+    $el = $('.modalize-body, html, body')
     $el.animate { scrollTop: $(".block-sidebar").offset().top }, 200
 
   loadConnectView: (e)->
