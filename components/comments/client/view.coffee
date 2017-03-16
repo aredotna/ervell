@@ -12,7 +12,10 @@ module.exports = class CommentsView extends Backbone.View
     @collection.on 'sync add', @render, @
 
   render: ->
-    @$el.html template md: markdown, comments: @collection
+    @$el.html template 
+      md: markdown
+      comments: @collection
+      user: mediator.shared.current_user
 
     @trigger 'render'
 
