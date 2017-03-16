@@ -34,25 +34,32 @@
       padding-bottom (unit / 2)
     &__date
       padding-bottom (unit / 4)
+    &__source
+      vertical-align bottom
     &__title, &__source, &__toggle-info
       font-weight bold
-    &__date, &__source, &__toggle-info
+    &__date, &__source
       font-size 0.8rem
       line-height 1.2rem
       color lightgray
     &__toggle-info
+      display none
       z-index 2001
       position absolute
-      bottom unit
-      right unit
-      display inline-block
+      bottom 0
+      right 0
+      padding unit + 3
+      font-size 0.8rem
+      color lightgray
       cursor pointer
       &:hover
         color hovergray
 
   &.is-wide
     .block-content__info
-      display block  
+      display block 
+      &__toggle-info
+        display block
 
 .block-img
   padding 0 unit
