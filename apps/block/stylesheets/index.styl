@@ -57,7 +57,7 @@
     max-height 75vh
     width auto
     max-width 100%
-    +below(800px)
+    +below(950px)
       max-width 100%
 
 .block-media
@@ -67,8 +67,9 @@
   iframe
     max-width 100%
 
-  +below(800px)
-    max-width 100vw
+  +below(950px)
+    padding 0 unit
+    max-width 100%
 
 .block-meta
   margin-top unit * 3
@@ -219,6 +220,9 @@
 
 .modalize .block-arrow
   display flex
+
+  +below(950px)
+    opacity 0.2
 
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
