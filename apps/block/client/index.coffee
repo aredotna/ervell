@@ -25,7 +25,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'click .block-arrow' : 'clickSlide'
     'click .js-connect-button' : 'loadConnectView'
     'click .js-toggle-info' : 'toggleSidebar'
-    'swipeLeft' : -> @slide('next')
+    'flick' : 'handleFlick'
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -42,7 +42,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
     @initModel()
   initModel: ->
-    @model.on 'sync', @render, @
+    @model.on 'sync', @renderConnections, @
     @connections = new Blocks @model.connections()
     @setupUrlConnections()
 
@@ -68,11 +68,21 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
     @updateConnectionCount()
 
+  renderConnections: ->
+    connections = new Blocks @model.get('connections')
+    @$('.js-connections-list').html connectionsTemplate
+      connections: connections.models
+    @updateConnectionCount()
+
   updateConnectionCount: ->
     count = @model.get('connections')?.length + @urlConnections.models.length
 
     s = if count == 1 then '' else 's'
     @$('#tab-connection-count').text "#{count or 0} Connection#{s}"
+
+  handleFlick: (e) ->
+    direction = if e.direction is 1 then 'left' else 'right'
+    @slide direction
 
   clickSlide: (e) ->
     e.preventDefault()
