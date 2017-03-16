@@ -13,13 +13,14 @@
   position relative
   display flex
   align-items center
-  justify-content center
-  overflow auto
+  justify-content space-between
+  overflow hidden
 
   +below(950px)
     height 90vh
     padding 0 unit
-    margin-top topbar_h
+    margin-top 0
+    overflow hidden
 
   &__info
     position absolute
@@ -29,27 +30,36 @@
     padding unit 0
     text-align center
     display none
-    &__title, &__date
+    &__title
+      padding-bottom (unit / 2)
+    &__date
       padding-bottom (unit / 4)
+    &__source
+      vertical-align bottom
     &__title, &__source, &__toggle-info
       font-weight bold
-    &__date, &__source, &__toggle-info
+    &__date, &__source
       font-size 0.8rem
       line-height 1.2rem
       color lightgray
     &__toggle-info
+      display none
       z-index 2001
       position absolute
-      bottom unit - 3
-      right unit
-      display inline-block
+      bottom 0
+      right 0
+      padding unit + 3
+      font-size 0.8rem
+      color lightgray
       cursor pointer
       &:hover
         color hovergray
 
   &.is-wide
     .block-content__info
-      display block  
+      display block 
+      &__toggle-info
+        display block
 
 .block-img
   padding 0 unit
@@ -184,11 +194,10 @@
 .block-arrow
   cursor pointer
   height 100%
-  width 10vw
+  min-width 10%
   opacity 0
   display none
   z-index 1
-  margin-right auto
   align-items center
   justify-content center
 
@@ -208,8 +217,9 @@
 .block-mobile-arrow 
   display none
   +below(950px)
+    display block
     position absolute
-    bottom 0
+    bottom unit
     left 0
     width 100%
     text-align center
@@ -222,16 +232,9 @@
 .modalize .block-arrow
   display flex
 
-  +below(950px)
-    opacity 0.2
-
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
     height 20px
-
-.block-arrow--right
-  margin-right 0
-  margin-left auto
 
 .js-url-connections-list h5
   text-align center

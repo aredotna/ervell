@@ -5,6 +5,8 @@
   background white
   overflow auto
   padding topbar_h unit 0
+  display flex
+  flex-direction column
 
   +below(950px)
     width 100%
@@ -30,17 +32,10 @@
     margin-bottom (unit / 2)
 
   &__wrapper
-    height auto !important
-    margin 0 auto -60px
-    min-height "calc(100% - %s)" % 20px
-    padding 0 0 20px
-    &:after
-      content ""
-      display block
-      height 20px
+    flex 1
 
   &__toggle-info
-    padding unit 0 0
+    padding (unit + 3) 3px
     display block
     color lightgray
     font-weight bold
