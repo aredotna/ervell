@@ -2,6 +2,6 @@
   if comments
     for comment in comments.models
       include ../../../components/comments/templates/_comment
-
-  .block-new-comment-container.center
-    include ../../../components/new_comment/templates/new_comment
+  if user
+    .block-new-comment-container.center
+      include ../../../components/new_comment/templates/new_comment
