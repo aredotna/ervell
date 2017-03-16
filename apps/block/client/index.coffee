@@ -25,6 +25,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     'click .block-arrow' : 'clickSlide'
     'click .js-connect-button' : 'loadConnectView'
     'click .js-toggle-info' : 'toggleSidebar'
+    'swipeLeft' : -> @slide('next')
 
   editableAttributes:
     'title'       : 'plaintext'
