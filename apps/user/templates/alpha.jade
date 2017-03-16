@@ -1,11 +1,13 @@
 extends ../../../components/layout/index
 
 block body
-  - var range = '!@#$%^&*()_-+=<>.,?/ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  - var range = '!~@#$%^&*()_-+=<>.,?/ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   - range.unshift('0-9')  
 
   include ./path
-  .channel-container.flex-container
+  .channel-container.flex-container.channel-container--alpha
+    include ./partials/_focus
+    h2 Channels
     .alpha
       for letter in range
         - group = alpha[letter]
@@ -16,9 +18,4 @@ block body
             for channel in sortedGroup
               h3.alpha__group__channel
                 a(href=channel.href() class="privacy--#{channel.get('status')}")= channel.title()
-
-
-
-block scripts
-  script( src=asset('/assets/user.js') )
 

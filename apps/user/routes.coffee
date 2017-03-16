@@ -1,6 +1,8 @@
 _ = require 'underscore'
+Q = require 'q'
 Backbone = require 'backbone'
 User = require "../../models/user"
+ChannelBlocks = require "../../collections/channel_blocks.coffee"
 UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
 Channel = require "../../models/channel"
@@ -22,6 +24,22 @@ showTips = (req, res) ->
 
 addTips = (req) ->
   _.reject tips, (tip) -> req.cookies[tip.id]
+
+fetchFocus = (user, per=1)->
+  dfd = Q.defer()
+  
+  blocks = new ChannelBlocks [], 
+    channel_slug: user.get('profile_id'),
+    direction: 'asc'
+    per: per
+  
+  blocks.fetch
+    success: ->
+      blocks.map (block) -> block.set silent: true
+      dfd.resolve blocks
+    error: (blocks, err) -> dfd.resolve()
+
+  dfd.promise
 
 @user = (req, res, next) ->
   return next() unless res.locals.author
@@ -46,8 +64,7 @@ addTips = (req) ->
   blocks.fetch
     data:
       auth_token: req.user?.get('authentication_token')
-    error: (m, err) -> 
-      next err
+    error: (m, err) -> next err
     success: ->
       blocks.unshift(addTips(req)) if showTips(req, res)
       res.locals.sd.BLOCKS = blocks.toJSON()
@@ -56,19 +73,20 @@ addTips = (req) ->
 @userChannelsByAlpha = (req, res, next) ->
   return next() unless res.locals.author
 
-  blocks = new UserBlocks null,
+  channels = new UserBlocks null,
     user_slug: req.params.username
     subject: 'channels'
-    
-  blocks.fetchUntilEnd
-    cache: false
-    data:
-      auth_token: req.user?.get('authentication_token')
-    error: (m, err) ->  next err
-    success: (response)->
-      alpha = res.locals.sd.ALPHA = blocks.groupByAlpha()
-      res.render 'alpha',
-        alpha: alpha
+
+  Q.all [
+    channels.fetchUntilEnd data: auth_token: req.user?.get('authentication_token')
+    fetchFocus res.locals.author, req.query.per
+  ]
+  .then ([response, focus]) ->  
+    res.locals.sd.FOCUS = focus.toJSON()
+    alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
+    res.render 'alpha',
+      alpha: alpha
+      focus: focus
 
 @followers = (req, res, next) ->
   return next() unless res.locals.author

@@ -30,11 +30,11 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     md.setOptions		
       renderer: new md.Renderer(),		
-      gfm: true,		
-      tables: true,		
-      breaks: true,		
-      pedantic: false,		
-      smartLists: true,		
+      gfm: true	
+      tables: true
+      breaks: true	
+      pedantic: false		
+      smartLists: true
       smartypants: false
 
     @render()
@@ -47,6 +47,7 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     @editing = true
     @$el.addClass('is-editing')
+    _.defer => @$('.editor').focus()
 
   endEdit: ->
     @editing = false

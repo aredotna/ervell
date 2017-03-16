@@ -1,0 +1,99 @@
+.block-sidebar
+  width unit * 18
+  min-width unit * 18
+  height 100vh
+  background white
+  overflow auto
+  padding topbar_h unit 0
+  display flex
+  flex-direction column
+
+  +below(950px)
+    width 100%
+    height auto
+    .block-sidebar__toggle-info
+      display none
+
+  &.is-hidden
+    display none
+
+  &__section
+    margin (unit * 4) 0 (unit * .75)
+    &--first
+      margin-top (unit * 2)
+    &--comments
+      margin-top 0
+
+  &__separator
+    font-size 0.8rem
+    color lightgray
+    border-bottom 1px solid bordergray
+    padding-bottom (unit / 2)
+    margin-bottom (unit / 2)
+
+  &__wrapper
+    flex 1
+
+  &__toggle-info
+    padding (unit + 3) 3px
+    display block
+    color lightgray
+    font-weight bold
+    font-size 0.8rem
+    cursor pointer
+    text-align right
+    display block
+
+  &__info
+    &__title
+      text-align left
+      margin unit auto (unit / 2)
+      word-break break-word
+      height 100%
+      min-height 50px
+      h4
+        h4()
+        line-height 1.2
+        margin 0
+      &.attribute-group
+        display block
+      &.is-absent.can-read:not(.can-edit)
+        min-height (unit * 2)
+        display block !important
+        .placeholder
+          display none
+
+    &__date
+      font-size 0.8rem
+      line-height 1.3rem
+      color lightgray
+      > a
+        font-weight bold
+    
+    &__source
+      font-weight bold
+      font-size 0.8rem
+      line-height 1.6rem
+      &__original
+        ellipsis(100%)
+        vertical-align bottom
+
+    &__description
+      p 14px
+      margin 0
+      overflow hidden
+      margin-bottom unit
+      p
+        p 14px
+        margin-top 0
+        word-break break-word
+      li
+        word-break break-word
+      a
+        font-weight bold
+
+    &__connect-container
+      // nothing
+      color black
+
+  

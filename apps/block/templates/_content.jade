@@ -1,0 +1,12 @@
+- extraClass = hideSidebar == 'true' ? 'is-wide' : ''
+
+.block-content(class=extraClass)
+  .block-arrow.block-arrow--left(data-direction="prev")
+    img(data-src="/images/iconic/nav-arrow-l.svg" class="iconic iconic-md")
+  include _content-info
+  include _content-inner
+  .block-arrow.block-arrow--right(data-direction="next")
+    img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-md")
+  .block-mobile-arrow
+    img(data-src="/images/iconic/nav-arrow-r.svg" class="iconic iconic-md")
+  .block-content__info__toggle-info.js-toggle-info Show info

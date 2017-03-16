@@ -1,0 +1,19 @@
+.block-sidebar__info__title
+  h4(id="attribute-title_#{block.id}") #{block.get('title')}&nbsp;
+.block-sidebar__info__attribution
+  .block-sidebar__info__date
+    | Added #{block.createdAtAgo()}
+    |  by
+    a(href="/#{block.get('user').slug}")  #{block.get('user').username}
+  if block.createdAtAgo() != block.updatedAtAgo()
+   .block-sidebar__info__date Last updated #{block.updatedAtAgo()}
+.block-sidebar__section.block-sidebar__section--first
+  .block-sidebar__separator Info
+  .block-sidebar__info__description(id="attribute-description_#{block.id}")!= block.get('description')
+  .block-sidebar__info__source
+    if block && (block.has('source') || block.has('image'))
+      a(href="#{block.getSourceUrl()}" target="_blank").block-sidebar__info__source__original #{block.sourceTitle()}
+  .block-sidebar__info__source
+    if block.has('image') && block.get('class') != 'Media' && block.get('class') != 'Link'
+      a(href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}" target="_blank") Find original
+
