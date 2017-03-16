@@ -15,7 +15,11 @@ html(class="#{colorClass} #{loggedInClass}")
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
     block styles
 
-  body
+    - extraClasses = ''
+
+    block vars
+
+  body(class=extraClasses)
     #modal-container
       //- rendered by client
     #l-lightbox-container

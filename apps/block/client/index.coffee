@@ -21,9 +21,11 @@ class State extends Backbone.Model
 module.exports.FullBlockView = class FullBlockView extends Backbone.View
   cookieKey: 'sidebar-hidden'
   events:
+    'tap .block-mobile-arrow' : 'scrollDown'
     'click .block-arrow' : 'clickSlide'
     'click .js-connect-button' : 'loadConnectView'
     'click .js-toggle-info' : 'toggleSidebar'
+    'swipeLeft' : -> @slide('next')
 
   editableAttributes:
     'title'       : 'plaintext'
@@ -39,7 +41,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     mediator.on "lightbox:slide:prev", => @slide 'prev'
 
     @initModel()
-
   initModel: ->
     @model.on 'sync', @render, @
     @connections = new Blocks @model.connections()
@@ -50,7 +51,6 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
   toggleSidebar: ->
     currentValue = Cookies.get @cookieKey
     newValue = if currentValue is 'true' then 'false' else 'true'
-    console.log('currentValue', currentValue)
     @$('.block-sidebar').toggleClass 'is-hidden'
     @$('.block-content').toggleClass 'is-wide'
     Cookies.set @cookieKey, newValue 
@@ -78,6 +78,10 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     e.preventDefault()
     direction = $(e.currentTarget).data('direction')
     @slide direction
+
+  scrollDown: ->
+    $el = $('.modalize-body') or $('html,body')
+    $el.animate { scrollTop: $(".block-sidebar").offset().top }, 200
 
   loadConnectView: (e)->
     e.preventDefault()

@@ -14,7 +14,7 @@
   display flex
   align-items center
   justify-content center
-  overflow scroll
+  overflow auto
 
   +below(950px)
     height 90vh
@@ -57,15 +57,19 @@
     max-height 75vh
     width auto
     max-width 100%
-    +below(800px)
-      max-width 100vw
+    +below(950px)
+      max-width 100%
 
 .block-media
   position relative
   margin 0 auto
 
-  +below(800px)
-    max-width 100vw
+  iframe
+    max-width 100%
+
+  +below(950px)
+    padding 0 unit
+    max-width 100%
 
 .block-meta
   margin-top unit * 3
@@ -201,8 +205,24 @@
   &:hover
     opacity 1
 
+.block-mobile-arrow
+  +below(950px)
+    position absolute
+    bottom 0
+    left 0
+    width 100%
+    text-align center
+    svg
+      width 25px !important
+      height 25px !important
+      fill lightgrayplus
+      transform rotate(90deg)
+
 .modalize .block-arrow
   display flex
+
+  +below(950px)
+    opacity 0.2
 
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
@@ -251,22 +271,6 @@
   display table
   width 100%
   margin-bottom (unit / 2)
-
-#tab-info
-  .block-title
-    display block
-    > form input
-      text-align center
-
-  .block-description
-    p()
-    display block
-    margin (unit * 2) auto 0
-    p
-      p()
-
-    +below(800px)
-      width 100%
 
 .block-new-comment-container
   margin-top unit * 2

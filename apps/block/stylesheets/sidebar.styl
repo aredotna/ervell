@@ -3,7 +3,7 @@
   min-width unit * 18
   height 100vh
   background white
-  overflow scroll
+  overflow auto
   padding topbar_h unit 0
 
   +below(950px)
@@ -24,7 +24,6 @@
 
   &__separator
     font-size 0.8rem
-    font-weight bold
     color lightgray
     border-bottom 1px solid bordergray
     padding-bottom (unit / 2)
@@ -32,7 +31,7 @@
 
   &__wrapper
     height auto !important
-    margin 0 auto -50px
+    margin 0 auto -60px
     min-height "calc(100% - %s)" % 20px
     padding 0 0 20px
     &:after
@@ -41,7 +40,7 @@
       height 20px
 
   &__toggle-info
-    padding unit 0
+    padding unit 0 0
     display block
     color lightgray
     font-weight bold
@@ -57,6 +56,8 @@
       margin unit auto (unit / 2)
       line-height 1.2
       word-break break-word
+      height 100%
+      min-height 50px
       &.attribute-group
         display block
       &.is-absent.can-read:not(.can-edit)
