@@ -77,7 +77,6 @@ module.exports = class FeedGroup extends Base
       @first_item()?.title
     else
       title = if ['jpg', 'png', 'gif', 'jpeg'].indexOf(@first_item()?.title?.split('.').pop().toLowerCase()) > -1 then @_format_subject() else @first_item()?.title
-      console.log('unescaping', title, _.unescape(title))
       _.unescape title || @_format_subject()
 
   grouped_subject: ->
