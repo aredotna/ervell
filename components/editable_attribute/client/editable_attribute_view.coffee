@@ -61,13 +61,13 @@ module.exports = class EditableAttributeView extends Backbone.View
     require('../templates/editable_attribute.jade') arguments...
 
   getRenderData: ->
-    html = if @model.has(@_attribute) then md(@model.get(@_attribute)) else ''
+    html = if @model.has(@_attribute) then _.unescape(md(@model.get(@_attribute))) else ''
 
     id: @model.id
     attribute: @_attribute
     kind: @_kind
-    value: @model.get @_attribute
-    value_html: html
+    value: _.unescape(@model.get @_attribute)
+    value_html: _.unescape(html)
     canEdit: _s.contains @model.getPermissions(@currentUser), 'can-edit'
 
   showMarkdownHelp: ->

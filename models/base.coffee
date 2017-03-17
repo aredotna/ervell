@@ -54,7 +54,7 @@ module.exports = class Base extends Backbone.Model
       size += (token.length + 1)
       break if size > limit
       token
-    textArray.join(" ") + (if text.length > limit then "..." else "")
+    _.unescape(textArray.join(" ")) + (if text.length > limit then "..." else "")
 
   createdAtAgo:  -> moment(@get('created_at')).fromNow()
 
