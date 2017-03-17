@@ -42,15 +42,17 @@ module.exports = class Block extends Base
 
   titleOrContent: ->
     if @has('username')
-      @get('username')
+      title = @get('username')
     else if @has('title')
-      @get('title')
+      title = @get('title')
     else if @has('content')
-      @get('content')
+      title = @get('content')
     else if @has('description')
-      @get('description')
+      title = @get('description')
     else
-      @get('generated_title')
+      title = @get('generated_title')
+    
+    _.unescape title
 
   contentOrDescription: ->
     @get('content') || @get('description')

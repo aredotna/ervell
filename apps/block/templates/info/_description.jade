@@ -1,5 +1,5 @@
 .block-sidebar__info__title
-  h4(id="attribute-title_#{block.id}") #{block.get('title')}&nbsp;
+  h4(id="attribute-title_#{block.id}") #{_.unescape(block.get('title'))}&nbsp;
 .block-sidebar__info__attribution
   .block-sidebar__info__date
     | Added #{block.createdAtAgo()}
