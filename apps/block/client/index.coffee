@@ -137,6 +137,7 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
       user: @user
       connections: @model.connections()
       hideSidebar: Cookies.get @cookieKey
+      _: _
 
     @postRender()
 
