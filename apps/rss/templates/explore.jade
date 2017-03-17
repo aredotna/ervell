@@ -1,0 +1,20 @@
+doctype xml
+rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
+  channel
+    title Are.na / Recent channels
+    link #{sd.APP_URL}/explore
+    atom:link(href="#{sd.APP_URL}/explore/feed/rss", rel='self', type='application/rss+xml')
+    language en-US
+    description Recently updated Are.na channels
+    if blocks.length
+      lastBuildDate= new Date(blocks[0].get('updated_at')).toUTCString()
+    each block in blocks
+      item
+        title= block.get('title')
+        link #{sd.APP_URL}/#{block.href()}
+        pubDate= new Date(block.get('updated_at')).toUTCString()
+        guid(isPermaLink='false') #{sd.APP_URL}/#{block.href()}
+        description
+          | <![CDATA[
+          include block
+          | ]]>

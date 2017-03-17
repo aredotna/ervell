@@ -5,6 +5,7 @@ Channel = require "../../models/channel"
 User = require "../../models/user"
 ChannelBlocks = require "../../collections/channel_blocks"
 UserBlocks = require "../../collections/user_blocks"
+ExploreBlocks = require "../../collections/explore_blocks"
 
 @channelRSS = (req, res, next) ->
   channel = new Channel
@@ -39,6 +40,19 @@ UserBlocks = require "../../collections/user_blocks"
   ]).then ->
     res.render 'user',
       author: author
+      blocks: blocks.models
+  .catch next
+  .done()
+
+@exploreRSS = (req, res, next) ->
+  blocks = new ExploreBlocks null,
+    filter: 'channel'
+    per: 25
+
+  Q.allSettled([
+    blocks.fetch()
+  ]).then ->
+    res.render 'explore',
       blocks: blocks.models
   .catch next
   .done()
