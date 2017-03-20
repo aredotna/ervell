@@ -30,7 +30,7 @@ module.exports = class EditableAttributeView extends Backbone.View
 
     md.setOptions		
       renderer: new md.Renderer(),		
-      gfm: false
+      gfm: true
       tables: true
       breaks: true	
       pedantic: false		
