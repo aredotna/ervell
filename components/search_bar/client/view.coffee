@@ -64,7 +64,7 @@ module.exports = class SearchBarView extends Backbone.View
     @searchRequest = @collection.fetch
       data:
         q: query
-        per: 4
+        per: 6
       success: =>
         analytics.track.click "Search query"
         @searchLoaded()
@@ -154,10 +154,10 @@ module.exports = class SearchBarView extends Backbone.View
     @$results.html ""
 
   blurSearch: (e) ->
-    _.delay =>
-      @$el.removeClass('is-active')
-      $('.path').removeClass('is-hidden')
-    , 200
+    # _.delay =>
+    #   @$el.removeClass('is-active')
+    #   $('.path').removeClass('is-hidden')
+    # , 200
 
   clearSearch: ->
     @searchUnloaded()
