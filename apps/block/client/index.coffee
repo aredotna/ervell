@@ -41,12 +41,16 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
     mediator.on "lightbox:slide:prev", => @slide 'prev'
 
     @initModel()
+
   initModel: ->
     @model.on 'sync', @renderConnections, @
     @connections = new Blocks @model.connections()
     @setupUrlConnections()
 
     mediator.on "connection:added:#{@model.id}", @addConnections, @
+
+    if @model.get('class') is 'placeholder'
+      @model.on 'sync', @render, @
 
   toggleSidebar: ->
     currentValue = Cookies.get @cookieKey

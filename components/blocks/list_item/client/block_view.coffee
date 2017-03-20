@@ -83,8 +83,9 @@ module.exports = class BlockView extends Backbone.View
     comments.fetch
       data: per: 1
       success: (comments) =>
-        @model.set last_comment: comments.first().get('body')
-        @$('.block-collection--list__column--comment').html commentsTemplate block: @model
+        if comments
+          @model.set last_comment: comments?.first()?.get('body')
+          @$('.block-collection--list__column--comment').html commentsTemplate block: @model
 
   openLink: (e)->
     analytics.track.click "Block source opened"

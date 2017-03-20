@@ -5,24 +5,35 @@ mediator = require '../../lib/mediator.coffee'
 IconicJS = require '../iconic/client/iconic.min.js'
 
 module.exports = class InfiniteView extends Backbone.View
+  threshold: -500
+  progress: 0
   disabled: false
 
   initialize: ({ @context, @itemSelector, @nextPageCallback = $.noop })->
     @initListener()
     mediator.on 'stop:infinite', @disable, @
     mediator.on 'start:infinite', @enable, @
+    mediator.on 'position:updated', @updatePosition, @
 
   initListener: ->
     @timer = setInterval @maybeLoad, 150
 
+  updatePosition: (pos) =>
+    return if @disabled
+    if parseInt($('.container').css('top')) + @progress < -(@threshold) 
+      @loadNextPage()
+      @progress = parseInt($('.container').height())
+
   maybeLoad: =>
-    return if @loading or @disabled or @collection.exhausted
+    return if @loading or 
+      @disabled or 
+      @collection.exhausted or 
+      mediator.shared.state.get 'lightbox'
 
-    threshold = -500
     total = document.body.scrollHeight
-    progress = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight * 4
+    @progress = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight * 4
 
-    if (total - progress < threshold) and not @disabled and not mediator.shared.state.get 'lightbox'
+    if (total - @progress < @threshold) and not @disabled 
       @loadNextPage()
 
   loadNextPage: ->
