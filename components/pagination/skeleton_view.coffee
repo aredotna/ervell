@@ -1,6 +1,7 @@
 Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
+Blocks = require '../../collections/blocks.coffee'
 mediator = require '../../lib/mediator.coffee'
 
 module.exports = class SkeletonView extends Backbone.View
@@ -118,6 +119,7 @@ module.exports = class SkeletonView extends Backbone.View
     @startLoad()
 
     mediator.trigger 'page:loaded'
+    mediator.shared.blocks = @collection
 
     # $start = if page_id is 1 then @$('> .grid__block:first') else @$(".pagemarker[data-page=#{page_id}]")
     # $pageElements = $start.nextUntil('.pagemarker').andSelf()
