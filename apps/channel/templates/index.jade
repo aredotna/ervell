@@ -4,13 +4,13 @@ block styles
   link(rel="alternate" type="application/rss+xml" title="Are.na / #{channel.get('title')} / Feed" href="#{channel.href()}/feed/rss/")
 
 block body
-  include ./path
+  include _path
   .channel-container
     .channel-contents
       - title = channel.get('title')
       include ../../../components/blocks/container/templates/index
     .channel-empty
-      include ./empty
+      include _empty
 
   if user
     .channel__filedrop.flex-container

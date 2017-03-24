@@ -4,7 +4,7 @@ sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
 newCollaboratorView = require './channel_new_collaborator_view.coffee'
-collaboratorsTemplate = -> require('../templates/edit_collaborators.jade') arguments...
+collaboratorsTemplate = -> require('../templates/collaborators/edit_collaborators.jade') arguments...
 
 module.exports = class ChannelCollaborationView extends Backbone.View
 

@@ -134,9 +134,51 @@ body:not(.is-mobile) .grid__block:hover
   background-size 40%
   background-repeat no-repeat
   cursor pointer
+  display flex
+  justify-content center
+  align-items center
+
+.block-item__bottom-buttons
+  position absolute
+  width 100%
+  bottom 0
+  display flex
+  justify-content center
+
+.button--inblock
+  font-size 15px
+  font-weight bold
+  color textgray
+  padding 18px 20px
+  margin 1%
+  background-color rgba(255,255,255, 0.85)
+  cursor pointer
+  width 125px
+  &:hover
+    color hovergray
+    background-color rgba(255,255,255, 1)
+  &--view
+    width 150px
+
+.grid__block--channel, .grid__block--user
+  .button--inblock
+    z-index 1
+    border-top 1px solid bordergray
+    background-color transparent
+
+    &:hover
+      border-top 1px solid textgray
+      background-color transparent
+
+.grid__block--user
+  .button--inblock
+    width 140px
+    border-top 1px solid lightgrayplus
 
 .grid__block__delete-block
-  position relative
+  position absolute
+  top 5px
+  right 5px
 
   &:hover .grid__block__delete-block__confirm
     color #fff
@@ -192,7 +234,6 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
       padding 0 25px 0 10px
 
 .button--delete-block
-  float right
   width 28px
   height 28px
   line-height 32px

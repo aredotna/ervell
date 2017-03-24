@@ -1,0 +1,19 @@
+if channel
+  .block-item.block-item--content.grid__block.grid__block--item.grid__block--embedded
+    .block-padding
+    span(
+      href="#{channel.href()}"
+      data-client="channel"
+    )
+      .grid__block__inner
+        .valign-outer
+          .valign-inner
+            .grid__block--embedded__content
+
+              p.lg(data-length=(channel.get('length') - 7)) more blocks
+              p.md(data-length=(channel.get('length') - 5)) more blocks
+              p.sm(data-length=(channel.get('length') - 3)) more blocks
+              p.xs(data-length=(channel.get('length') - 2)) more blocks
+              
+              a(href="#{channel.href()}") visit channel
+    
