@@ -10,7 +10,7 @@ sd = require("sharify").data
 Q = require 'q'
 _ = require 'underscore'
 
-fetchChannel = (slug, authToken = false) ->
+fetchChannel = ({slug, authToken = null, url = null, cache = false}) ->
   dfd = Q.defer()
   channel = new Channel
     channel_slug: slug
@@ -18,7 +18,11 @@ fetchChannel = (slug, authToken = false) ->
   blocks = new ChannelBlocks null,
     channel_slug: slug
 
+  if url
+    channel.url = url
+
   channel.fetch
+    cache: cache
     data:
       auth_token: authToken
     success: -> 
@@ -31,7 +35,7 @@ fetchChannel = (slug, authToken = false) ->
   slug = req.params.channel_slug
   authToken = req.user?.get('authentication_token')
 
-  fetchChannel(slug, authToken)
+  fetchChannel({ slug, authToken })
     .then ({ channel, blocks }) ->
       return res.redirect 301, "/#{channel.get('slug')}" if channel.get('class') is 'User'
       blocks.add channel.get 'contents'
@@ -50,8 +54,10 @@ fetchChannel = (slug, authToken = false) ->
 
 @embed = (req, res, next) ->
   slug = req.params.channel_slug
+  channel = new Channel channel_slug: slug
+  url = "#{channel.urlRoot()}?per=7&direction=desc"
 
-  fetchChannel(slug)
+  fetchChannel({ slug, url, cache: true } )
     .then ({ channel, blocks }) ->
       blocks.add channel.get 'contents'
 
@@ -63,6 +69,7 @@ fetchChannel = (slug, authToken = false) ->
         channel: channel
         blocks: blocks.models
         author: author
+        isEmbedded: true
 
     .catch next
 
