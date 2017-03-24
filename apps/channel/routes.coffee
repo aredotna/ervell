@@ -11,15 +11,12 @@ Q = require 'q'
 _ = require 'underscore'
 
 fetchChannel = (slug, authToken = false) ->
-  console.log 'start ere'
   dfd = Q.defer()
   channel = new Channel
     channel_slug: slug
 
   blocks = new ChannelBlocks null,
     channel_slug: slug
-
-  console.log('we got here')
 
   channel.fetch
     data:
