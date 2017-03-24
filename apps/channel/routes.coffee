@@ -55,7 +55,7 @@ fetchChannel = (slug, authToken = false) ->
   slug = req.params.channel_slug
 
   fetchChannel(slug)
-    .then({ channel, blocks }) ->
+    .then ({ channel, blocks }) ->
       blocks.add channel.get 'contents'
 
       res.locals.sd.CHANNEL = channel.toJSON()
