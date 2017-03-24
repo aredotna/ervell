@@ -1,0 +1,24 @@
+.grid__block--embedded
+  .grid__block__inner:hover
+    border-color transparent
+  &__content
+    a,p
+      line-height 1.5
+    a
+      font-weight bold
+    p
+      display none
+    p:before
+      content "+" attr(data-length) " "
+    @media (min-width:(block_width_mar * 4) + 20)
+      p.lg
+        display block
+    @media (min-width:(block_width_mar * 3) + 20) and (max-width:(block_width_mar * 4) + 20)
+      p.md
+        display block
+    @media (min-width:(block_width_mar * 2) + 20) and (max-width:(block_width_mar * 3) + 20)
+      p.sm
+        display block
+    @media (min-width:0) and (max-width:(block_width_mar * 2) + 20)
+      p.xs
+        display block
