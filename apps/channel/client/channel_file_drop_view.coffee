@@ -5,7 +5,7 @@ mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
 MessageView = require '../../../components/message/client/message_view.coffee'
 
-channelFileDropTemplate = -> require('../templates/filedrop.jade') arguments...
+channelFileDropTemplate = -> require('../templates/_filedrop.jade') arguments...
 
 module.exports = class ChannelFileDropView extends Backbone.View
   dropLimit: 30
