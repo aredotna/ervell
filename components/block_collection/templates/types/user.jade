@@ -25,4 +25,5 @@ block content
     h2= block.get('username')
     +avatar(block)
     - if(user && user.id != block.id)
-      .button--inblock.button--inblock--bottom.grid__block__follow_btn &nbsp;
+      .block-item__bottom-buttons
+        .button--inblock.grid__block__follow_btn &nbsp;
