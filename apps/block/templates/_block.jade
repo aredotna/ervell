@@ -1,3 +1,4 @@
-.block-container
-  include _content
-  include _sidebar
+if block.has('base_class')
+  .block-container
+    include _content
+    include _sidebar

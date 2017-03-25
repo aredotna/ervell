@@ -64,7 +64,7 @@ module.exports = class SearchBarView extends Backbone.View
     @searchRequest = @collection.fetch
       data:
         q: query
-        per: 4
+        per: 6
       success: =>
         analytics.track.click "Search query"
         @searchLoaded()

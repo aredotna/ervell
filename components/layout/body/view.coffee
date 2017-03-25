@@ -67,8 +67,9 @@ module.exports = class BodyView extends Backbone.View
      $(e.target).hasClass('grid__block__delete-block') or
      $(e.target).hasClass('grid__block__delete-block__confirm__choice') or
      $(e.target).hasClass('grid__block__delete-block__confirm') or
-     $(e.currentTarget).hasClass('is-being-edited')
-
+     $(e.currentTarget).hasClass('is-being-edited') or 
+     $(e.target).hasClass('block-collection--list__column__follow')
+    
     return true if shouldIgnore
 
     e.preventDefault()

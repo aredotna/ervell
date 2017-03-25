@@ -49,6 +49,7 @@
       a.btn
         margin-right unit
         margin-bottom unit
+        line-height 60px
         +mobile()
           display block
           margin 0 auto unit
@@ -167,23 +168,36 @@
     &__post
       background-position center center
       background-size cover
-      height 400px
+      height 300px
       line-height 60px
-      a.btn 
+      display block
+      input.btn 
         margin-top unit 
+        color black
+        border-color black
+        font-size 16px
+        margin-top 30px
+        width 150px
+        line-height 60px
+        &:hover
+          background-color black
+          color white
       h1
         font-size 35px
         font-weight normal
+        line-height 40px
         margin 0
       &__overlay
-        background-color rgba(0,0,0,0.35)
+        background-color rgba(255,255,255,0.95)
         width 100%
         height 100%
+        &:hover
+          background-color rgba(255,255,255,0.8)
         &__content
           position relative
           top 50%
           transform translateY(-50%)
-          color white
+          color black
           text-align center
 
       +below(900px)

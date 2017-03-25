@@ -10,5 +10,7 @@ block content
           li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
 
 block overlay
-  .button--inblock.button--inblock--left.grid__block__follow_btn &nbsp;
-  .button--inblock.button--inblock--right.grid__block__connect-btn Connect &rarr;
+  if !isEmbedded
+    .block-item__bottom-buttons
+      .button--inblock.grid__block__follow_btn &nbsp;
+      .button--inblock.grid__block__connect-btn Connect &rarr;
