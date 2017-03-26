@@ -33,6 +33,7 @@ module.exports = class NewChannelView extends DropdownView
     super
 
   onKeyUp: (e)->
+    return @createChannel() if e.keyCode is 13
     @model.set 'title', @$input.val()?.trim()
 
   createChannel: (e) ->
