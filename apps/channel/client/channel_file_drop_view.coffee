@@ -8,7 +8,9 @@ MessageView = require '../../../components/message/client/message_view.coffee'
 channelFileDropTemplate = -> require('../templates/_filedrop.jade') arguments...
 
 module.exports = class ChannelFileDropView extends Backbone.View
-  dropLimit: 30
+  maxFileSize: 50000000 # 50MB
+  dropLimit: 15
+  currentCount: 0
 
   events:
     'dragenter' : 'handleDrag'
@@ -36,7 +38,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
     model = new Backbone.Model
       id: 'bookmarklet_updates_message'
       title: "File limit"
-      body: "Sorry, you can only drop #{@dropLimit} files at once."
+      body: "Sorry, you cannot upload more than #{@dropLimit} files at a time."
       type: 'Error'
 
     new MessageView
@@ -59,13 +61,18 @@ module.exports = class ChannelFileDropView extends Backbone.View
 
     @$("#fileupload").fileupload
       acceptFileTypes: /(\.|\/)(gif|jpe?g|png|ai|eps|kml|kmz|mb|ma|tex|texi|texinfo|tfm|fla|webm|ind|indd|key|pages|pdf|epub|psd|torrent|mp3|wav|aac|oga|ogg|wma|midi|aiff|mpeg|mpg|mpg4|mp4|mp4v|swa|swf|ttc|ttf|otf|pgp|numbers|fxp|latex|mov|avi|h264|ogv|docx|doc|ppt|pptx|xls|xlsx|xlt|tif|tiff|webloc)$/i
-      maxFileSize: 104857600 # 100MB
+      maxFileSize: @maxFileSize
       dropZone: @$el
       autoUpload: true
-      limitMultiFileUploads: 3
+      limitMultiFileUploadSize: @maxFileSize
       dataType: "XML"
       fileInput: @$("input:file")
       url: @policy.bucket
+
+      add: (e, data) =>
+        @currentCount++
+        return @dropLimitMessage() if @currentCount > @dropLimit
+        data.submit()
 
       drop: (e, data) =>
         return @dropLimitMessage() if data.files.length > @dropLimit
@@ -95,6 +102,8 @@ module.exports = class ChannelFileDropView extends Backbone.View
         mediator.trigger "files:start"
 
       done: (e, data) =>
+        @currentCount = 0
+
         # Parse XML response and get image URL
         xmlDoc   = $.parseXML(data.jqXHR.responseText)
         location = $(xmlDoc).find("Location").text()

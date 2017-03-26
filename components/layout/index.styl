@@ -233,6 +233,10 @@ for i in (1..8)
     .flex-container
       center(block_width_mar * i)
 
+@media (max-width:(block_width_mar * 3) + 20)		
+  .flex-container		
+    center(90%)
+
 @media (max-width:500px)
   html, body
     font-size 13px
