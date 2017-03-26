@@ -3,6 +3,10 @@
   margin auto
   padding 0 unit
 
+#auth-page
+  padding (unit * 2) 0
+  background white
+
 #auth-login, #auth-register, #auth-forgot, #auth-settings
   margin-top 8px
   line-height 45px
@@ -14,7 +18,7 @@
   position relative
 
   &[data-state=loading]:before, &[data-state=success]:before
-    background transparent
+    background white
     position absolute
     left 0
     height 100%
