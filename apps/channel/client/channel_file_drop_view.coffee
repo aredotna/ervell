@@ -9,7 +9,7 @@ channelFileDropTemplate = -> require('../templates/_filedrop.jade') arguments...
 
 module.exports = class ChannelFileDropView extends Backbone.View
   maxFileSize: 50000000 # 50MB
-  dropLimit: 20
+  dropLimit: 15
   currentCount: 0
 
   events:
@@ -38,7 +38,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
     model = new Backbone.Model
       id: 'bookmarklet_updates_message'
       title: "File limit"
-      body: "Sorry, you cannot upload more than #{@dropLimit} files at once."
+      body: "Sorry, you cannot upload more than #{@dropLimit} files at a time."
       type: 'Error'
 
     new MessageView
@@ -102,6 +102,8 @@ module.exports = class ChannelFileDropView extends Backbone.View
         mediator.trigger "files:start"
 
       done: (e, data) =>
+        @currentCount = 0
+
         # Parse XML response and get image URL
         xmlDoc   = $.parseXML(data.jqXHR.responseText)
         location = $(xmlDoc).find("Location").text()
