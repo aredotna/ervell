@@ -7,9 +7,17 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
 * * *
 
 ### Local installation
-	git clone git@github.com:arenahq/ervell.git
-	cd ervell
-	npm install
+
+```bash
+  git clone git@github.com:arenahq/ervell.git
+  cd ervell
+  npm install
+  gem install foreman
+```
 
 ### Running the server
-	make s
+
+```bash
+  foreman start -f Procfile.dev -e .env.dev
+  # => Listening on port 5000
+```
