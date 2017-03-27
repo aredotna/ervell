@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 sd = require('sharify').data
-Q = require 'q'
+Q = require 'bluebird-q'
 { map } = require 'underscore'
 qlimit = require 'qlimit'
 Block = require '../../../../models/block.coffee'
