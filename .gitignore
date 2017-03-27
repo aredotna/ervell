@@ -6,3 +6,4 @@ public/assets/*
 *.sublime-project
 *.sublime-workspace
 node_modules
+dump.rdb
