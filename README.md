@@ -9,9 +9,9 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
 ### Local installation
 
 ```bash
-	git clone git@github.com:arenahq/ervell.git
-	cd ervell
-	npm install
+  git clone git@github.com:arenahq/ervell.git
+  cd ervell
+  npm install
   gem install foreman
 ```
 
