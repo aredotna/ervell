@@ -8,10 +8,11 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
 
     link( type='text/css', rel='stylesheet', href=asset('/assets/embed.css') )
     include ../../../components/meta/templates/meta
-  body
-    .container.channel-embed
+  body(class="body--embed")
+    .channel-embed
       include _embed-header
-      include ../../../components/blocks/container/templates/index
+      .channel-embed__contents
+        include ../../../components/blocks/container/templates/index
     include ../../../components/layout/analytics
 
     #scripts
