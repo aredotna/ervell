@@ -5,8 +5,6 @@
     font-weight normal
     padding 0 0 unit * 2
   &__focus
-    border-top 1px solid bordergray
-    border-bottom 1px solid bordergray
     margin 0 (unit / 2) (unit * 3)
     h5
       color lightgray
@@ -17,12 +15,15 @@
         display none
       .grid
         justify-content center
+        &__block
+          max-width 400px
+
 .alpha
   padding 0 (unit/2) (unit * 2)
-  column-count 3
+  column-count 1
   column-gap unit * 3
   +tablet()
-    column-count 2
+    column-count 1
   +mobile()
     column-count 1
     padding 0
@@ -35,11 +36,5 @@
       border-bottom 1px solid bordergray
       margin-bottom 5px
       padding-bottom 5px
-    &__channel
-      max-width 100%
-      white-space nowrap
-      overflow hidden
-      text-overflow ellipsis
-      font-size 15px
-      +tablet()
-        font-size 14px
+    .list-item__connection
+      margin (unit) 0

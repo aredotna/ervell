@@ -7,7 +7,6 @@ block body
   include ./path
   .channel-container.flex-container.channel-container--alpha
     include ./partials/_focus
-    h2 Channels
     .alpha
       for letter in range
         - group = alpha[letter]
@@ -16,6 +15,5 @@ block body
             .alpha__group__letter= letter
             - sortedGroup = _.sortBy(group, function(channel, i){ return channel.title().toUpperCase() })
             for channel in sortedGroup
-              h3.alpha__group__channel
-                a(href=channel.href() class="privacy--#{channel.get('status')}")= channel.title()
+              include ../../../components/list_view/templates/_connection.jade
 
