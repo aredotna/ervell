@@ -4,7 +4,7 @@ Blocks = require "../../collections/blocks"
 User = require "../../models/user"
 sd = require("sharify").data
 _ = require 'underscore'
-Q = require 'q'
+Q = require 'bluebird-q'
 
 @channel = (req, res, next) ->
   channel = new Channel

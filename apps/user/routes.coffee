@@ -1,5 +1,5 @@
 _ = require 'underscore'
-Q = require 'q'
+Q = require 'bluebird-q'
 Backbone = require 'backbone'
 User = require "../../models/user"
 ChannelBlocks = require "../../collections/channel_blocks.coffee"

@@ -1,7 +1,7 @@
 #
 # Routes file that exports route handlers for ease of testing.
 #
-Q = require 'q'
+Q = require 'bluebird-q'
 Channel = require "../../models/channel"
 Block = require "../../models/block"
 Comments = require "../../collections/comments"

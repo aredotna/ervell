@@ -7,7 +7,7 @@ ChannelBlocks = require "../../collections/channel_blocks"
 Blocks = require "../../collections/blocks"
 User = require "../../models/user"
 sd = require("sharify").data
-Q = require 'q'
+Q = require 'bluebird-q'
 _ = require 'underscore'
 
 fetchChannel = ({slug, authToken = null, url = null, cache = false}) ->
