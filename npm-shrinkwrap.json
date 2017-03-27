@@ -247,53 +247,6 @@
       "from": "backbone@*",
       "resolved": "https://registry.npmjs.org/backbone/-/backbone-1.3.3.tgz"
     },
-    "backbone-cache-sync": {
-      "version": "0.0.3",
-      "from": "backbone-cache-sync@*",
-      "resolved": "https://registry.npmjs.org/backbone-cache-sync/-/backbone-cache-sync-0.0.3.tgz",
-      "dependencies": {
-        "backbone-super-sync": {
-          "version": "0.0.5",
-          "from": "backbone-super-sync@0.0.5",
-          "resolved": "https://registry.npmjs.org/backbone-super-sync/-/backbone-super-sync-0.0.5.tgz"
-        },
-        "cookiejar": {
-          "version": "1.3.0",
-          "from": "cookiejar@1.3.0",
-          "resolved": "https://registry.npmjs.org/cookiejar/-/cookiejar-1.3.0.tgz"
-        },
-        "debug": {
-          "version": "0.7.4",
-          "from": "debug@>=0.7.2 <0.8.0",
-          "resolved": "https://registry.npmjs.org/debug/-/debug-0.7.4.tgz"
-        },
-        "formidable": {
-          "version": "1.0.14",
-          "from": "formidable@1.0.14",
-          "resolved": "https://registry.npmjs.org/formidable/-/formidable-1.0.14.tgz"
-        },
-        "methods": {
-          "version": "0.0.1",
-          "from": "methods@0.0.1",
-          "resolved": "https://registry.npmjs.org/methods/-/methods-0.0.1.tgz"
-        },
-        "mime": {
-          "version": "1.2.5",
-          "from": "mime@1.2.5",
-          "resolved": "https://registry.npmjs.org/mime/-/mime-1.2.5.tgz"
-        },
-        "qs": {
-          "version": "0.6.5",
-          "from": "qs@0.6.5",
-          "resolved": "https://registry.npmjs.org/qs/-/qs-0.6.5.tgz"
-        },
-        "superagent": {
-          "version": "0.15.7",
-          "from": "superagent@>=0.15.0 <0.16.0",
-          "resolved": "https://registry.npmjs.org/superagent/-/superagent-0.15.7.tgz"
-        }
-      }
-    },
     "backbone-fetch-cache": {
       "version": "2.0.1",
       "from": "backbone-fetch-cache@*",
@@ -390,6 +343,11 @@
       "version": "3.4.7",
       "from": "bluebird@*",
       "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.4.7.tgz"
+    },
+    "bluebird-q": {
+      "version": "2.1.1",
+      "from": "bluebird-q@latest",
+      "resolved": "https://registry.npmjs.org/bluebird-q/-/bluebird-q-2.1.1.tgz"
     },
     "blueimp-file-upload": {
       "version": "9.12.5",
@@ -1553,11 +1511,6 @@
       "from": "elliptic@>=6.0.0 <7.0.0",
       "resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.3.3.tgz",
       "dev": true
-    },
-    "emitter-component": {
-      "version": "1.0.0",
-      "from": "emitter-component@1.0.0",
-      "resolved": "https://registry.npmjs.org/emitter-component/-/emitter-component-1.0.0.tgz"
     },
     "encodeurl": {
       "version": "1.0.1",
@@ -4052,11 +4005,6 @@
       "version": "1.4.1",
       "from": "punycode@>=1.4.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/punycode/-/punycode-1.4.1.tgz"
-    },
-    "q": {
-      "version": "1.4.1",
-      "from": "q@*",
-      "resolved": "https://registry.npmjs.org/q/-/q-1.4.1.tgz"
     },
     "qlimit": {
       "version": "0.1.1",
