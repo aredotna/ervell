@@ -77,9 +77,15 @@ module.exports = (app) ->
         .use(rupture())
         .use(require("nib")())
 
-    app.use require("browserify-dev-middleware")
-      src: path.resolve(__dirname, "../")
-      transforms: [require("jadeify"), require('caching-coffeeify')]
+    webpack = require 'webpack'
+    webpackDevMiddleware = require 'webpack-dev-middleware'
+    webpackDevConfig = require '../webpack.dev.config'
+    compiler = webpack webpackDevConfig
+    app.use webpackDevMiddleware compiler, {
+      lazy: true,
+      quiet: true,
+      publicPath: "/assets/",
+    }
 
   # Test only
   if "test" is NODE_ENV
