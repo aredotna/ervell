@@ -1,10 +1,10 @@
-extends block
+extends block.jade
 
 block content
   - if(block.has('image'))
     img(
-      src="#{block.resizeImage()}"
-      alt="#{block.get('description')}"
+      src= block.resizeImage()
+      alt= block.get('description')
     ).grid__block__content__image
   - else
     .valign--flex.halign--flex.grid__block__channel--attachment-bk

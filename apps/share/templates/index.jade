@@ -1,15 +1,15 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/index--bare.jade
 
 block vars
   - extraClasses = 'no-header no-messages'
 
 block body
-  include ./path
+  include ./path.jade
   .channel-container
     .channel-contents
-      include ../../../components/blocks/container/templates/index
+      include ../../../components/blocks/container/templates/index.jade
 
-  include ../../../components/layout/footer/templates/index--bare
+  include ../../../components/layout/footer/templates/index--bare.jade
 
 block scripts
   script( src=asset('/assets/share.js') )

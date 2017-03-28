@@ -1,15 +1,15 @@
 case block.get('class')
   when "User"
-    include types/user
+    include types/user.jade
   when "Channel"
-    include types/channel
+    include types/channel.jade
   when "Text"
   when "Image"
   when "Link"
   when "Media"
   when "Attachment"
-    include types/block
+    include types/block.jade
   when "Block"
-    include types/loading
+    include types/loading.jade
   default
-    include types/placeholder
+    include types/placeholder.jade

@@ -1,14 +1,14 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index.jade
 
 block body
-  include ./path
+  include ./path.jade
   .tools.tabs__content
-    include ./tabs/bookmarklet
-    include ./tabs/bookmarklet-beta
+    include ./tabs/bookmarklet.jade
+    include ./tabs/bookmarklet-beta.jade
     if user
-      include ./tabs/add_via_email
-      include ./tabs/find_friends
-      include ./tabs/invite
+      include ./tabs/add_via_email.jade
+      include ./tabs/find_friends.jade
+      include ./tabs/invite.jade
 
 block scripts
   script( src=asset('/assets/tools.js') )

@@ -11,13 +11,12 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
 ```bash
   git clone git@github.com:arenahq/ervell.git
   cd ervell
-  npm install
-  gem install foreman
+  yarn install
 ```
 
 ### Running the server
 
 ```bash
-  foreman start -f Procfile.dev -e .env.dev
+  npm run dev
   # => Listening on port 5000
 ```

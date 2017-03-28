@@ -1,11 +1,11 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index.jade
 
 block body
-  include ./path
+  include ./path.jade
   if blocks
     .grid.flex-container
-      include search_bar
-      include manage_block_collection
+      include search_bar.jade
+      include manage_block_collection.jade
 
 block scripts
   script( src=asset('/assets/manage.js') )

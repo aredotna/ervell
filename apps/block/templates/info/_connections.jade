@@ -1,14 +1,15 @@
 .block-sidebar__section.block-sidebar__section--connect
   - s = connections.length == 1 ? '' : 's'
   - connectionLabel = connections.length + " Connection" + s
-  - if(connections.length == 0) 
+  - if(connections.length == 0)
     - connectionLabel = "Loading Connections..."
   .block-sidebar__separator(id="tab-connection-count")= connectionLabel
   .js-connections-list
     for channel in connections
+      - locals.channel = channel
       .block-connection-outer
-        include ../../../../components/list_view/templates/_connection
-  
+        include ../../../../components/list_view/templates/_connection.jade
+
   .js-url-connections-list
     //- rendered on the client
   if user

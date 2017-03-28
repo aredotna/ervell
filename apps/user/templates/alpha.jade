@@ -1,12 +1,12 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index.jade
 
 block body
   - var range = '!~@#$%^&*()_-+=<>.,?/ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   - range.unshift('0-9')  
 
-  include ./path
+  include ./path.jade
   .channel-container.flex-container.channel-container--alpha
-    include ./partials/_focus
+    include ./partials/_focus.jade
     .alpha
       for letter in range
         - group = alpha[letter]

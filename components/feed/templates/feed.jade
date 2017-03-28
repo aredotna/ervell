@@ -1,4 +1,5 @@
 for group in feed
-  include feed_group
+  - locals.group = group
+  include feed_group.jade
 
-include ../../layout/loader/templates/infinite
+include ../../layout/loader/templates/infinite.jade

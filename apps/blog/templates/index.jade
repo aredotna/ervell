@@ -1,11 +1,11 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/index--info.jade
 
 block vars
   - extraClasses = 'body--home'
 
 block body
   .home.home--blog
-    include ../../home/templates/sections/posts
+    include ../../home/templates/sections/posts.jade
 
 block scripts
   script( src=asset('/assets/home.js') )

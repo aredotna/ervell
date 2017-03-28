@@ -1,10 +1,10 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/index--bare.jade
 
 block vars
   - extraClasses = 'no-header no-messages no-scroll'
 
 block body
-  include ./save
+  include ./save.jade
 
 block scripts
   script( src=asset('/assets/marklet.js') )

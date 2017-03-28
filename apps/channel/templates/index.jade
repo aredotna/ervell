@@ -1,16 +1,16 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index.jade
 
 block styles
   link(rel="alternate" type="application/rss+xml" title="Are.na / #{channel.get('title')} / Feed" href="#{channel.href()}/feed/rss/")
 
 block body
-  include _path
+  include _path.jade
   .channel-container
     .channel-contents
-      - title = channel.get('title')
-      include ../../../components/blocks/container/templates/index
+      - locals.title = channel.get('title')
+      include ../../../components/blocks/container/templates/index.jade
     .channel-empty
-      include _empty
+      include _empty.jade
 
   if user
     .channel__filedrop.flex-container

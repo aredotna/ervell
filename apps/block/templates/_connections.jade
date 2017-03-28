@@ -1,4 +1,5 @@
 if connections
   for channel in connections
     .block-connection-outer
-      include ../../../components/list_view/templates/_connection
+      - locals.channel = channel
+      include ../../../components/list_view/templates/_connection.jade

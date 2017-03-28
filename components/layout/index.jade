@@ -10,7 +10,7 @@ html(class="#{colorClass} #{loggedInClass}")
       else if author
         |  / #{author.get('username')}
 
-    include ../../components/meta/templates/meta
+    include ../../components/meta/templates/meta.jade
     block meta
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
     block styles
@@ -24,21 +24,21 @@ html(class="#{colorClass} #{loggedInClass}")
       //- rendered by client
     #l-lightbox-container
       //- rendered by client
-    include header/templates/index
+    include header/templates/index.jade
     .container
       block body
 
     #l-loader-container.abs-fill
-      include loader/templates/index
+      include loader/templates/index.jade
 
     #message-container
 
     a#scroll-top(data-section="#") &uarr;
 
     unless user && user.id
-      include ../logged_out_cta/index
+      include ../logged_out_cta/index.jade
 
-    include analytics
+    include analytics.jade
 
     #scripts
       != sharify.script()
