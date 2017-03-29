@@ -69,9 +69,12 @@ module.exports = (app) ->
     webpackDevConfig = require '../webpack.dev.config'
     compiler = webpack webpackDevConfig
     app.use webpackDevMiddleware compiler,
-      lazy: true
-      quiet: false
+      lazy: false
       publicPath: '/assets/'
+      quiet: false
+      watchOptions:
+        aggregateTimeout: 300
+        poll: true
 
   # Test only
   if "test" is NODE_ENV
