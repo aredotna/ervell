@@ -73,6 +73,9 @@
     "browserify-dev-middleware": "*",
     "caching-coffeeify": "*",
     "coffee-loader": "^0.7.3",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
     "html5": "*",
     "imports-loader": "^0.7.1",
     "jade-loader": "^0.8.0",
@@ -85,7 +88,10 @@
     "should": "*",
     "sinon": "*",
     "sqwish": "*",
+    "style-loader": "^0.16.1",
+    "stylus-loader": "^3.0.1",
     "uglify-js": "*",
+    "url-loader": "^0.5.8",
     "zombie": "*"
   },
   "optionalDependencies": {

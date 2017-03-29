@@ -1,12 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   entry: {
+    all: './assets/all.styl',
     auth: './assets/auth.coffee',
     block: './assets/block.coffee',
     channel: './assets/channel.coffee',
-    embed: './assets/embed.coffee',
+    embed: [
+      './assets/embed.coffee',
+      './assets/embed.styl',
+    ],
     explore: './assets/explore.coffee',
     feed: './assets/feed.coffee',
     home: './assets/home.coffee',
@@ -32,10 +37,24 @@ const config = {
     rules: [
       { test: /\.coffee$/, use: 'coffee-loader' },
       { test: /\.jade$/, use: 'jade-loader' },
+      { test: /\.styl$/, use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'stylus-loader' },
+          ]
+        }),
+      },
+      {
+        test: /\.(png|jpg|gif|svg|otf|eot|ttf|woff|woff2)$/,
+        loader: 'url-loader', options: { limit: 10000 }
+      },
       { test: /blueimp-file-upload/, use: 'imports-loader?define=>false' },
     ],
   },
-  plugins: [],
+  plugins: [
+    new ExtractTextPlugin('[name].css'),
+  ],
 };
 
 module.exports = config;
