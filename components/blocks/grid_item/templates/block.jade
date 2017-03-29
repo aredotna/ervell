@@ -1,19 +1,19 @@
 case block.get('class')
   when "User"
-    include types/user
+    include types/user.jade
   when "Channel"
-    include types/channel
+    include types/channel.jade
   when "Media"
-    include types/embed
+    include types/embed.jade
   when "Image"
-    include types/image
+    include types/image.jade
   when "Link"
-    include types/link
+    include types/link.jade
   when "Attachment"
-    include types/attachment
+    include types/attachment.jade
   when "Text"
-    include types/text
+    include types/text.jade
   when "Tip"
-    include types/tip
+    include types/tip.jade
   default
-    include types/block
+    include types/block.jade

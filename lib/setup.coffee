@@ -64,22 +64,17 @@ module.exports = (app) ->
 
   # Development only
   if "development" is NODE_ENV
-    nib = require "nib"
-    stylus = require "stylus"
-    rupture = require 'rupture'
-    # Compile assets on request in development
-    app.use require("stylus").middleware
-      src: path.resolve(__dirname, "../")
-      dest: path.resolve(__dirname, "../public")
-      compile: (str, path) ->
-        stylus(str)
-        .set('filename', path)
-        .use(rupture())
-        .use(require("nib")())
-
-    app.use require("browserify-dev-middleware")
-      src: path.resolve(__dirname, "../")
-      transforms: [require("jadeify"), require('caching-coffeeify')]
+    webpack = require 'webpack'
+    webpackDevMiddleware = require 'webpack-dev-middleware'
+    webpackDevConfig = require '../webpack.dev.config'
+    compiler = webpack webpackDevConfig
+    app.use webpackDevMiddleware compiler,
+      lazy: false
+      publicPath: '/assets/'
+      quiet: false
+      watchOptions:
+        aggregateTimeout: 300
+        poll: true
 
   # Test only
   if "test" is NODE_ENV

@@ -7,7 +7,7 @@ html
         |  / #{title}
 
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
-    include ../../components/meta/templates/meta
+    include ../../components/meta/templates/meta.jade
     block meta
 
     block styles
@@ -17,12 +17,12 @@ html
     block vars
 
   body.body--info(class=extraClasses)
-    include header/templates/index--info
+    include header/templates/index--info.jade
     .container
       block body
-      include footer/templates/index--info
+      include footer/templates/index--info.jade
 
-    include analytics
+    include analytics.jade
 
     #scripts
       != sharify.script()

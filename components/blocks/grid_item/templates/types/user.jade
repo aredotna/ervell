@@ -1,3 +1,5 @@
+extends block.jade
+
 mixin avatar(user, avatar_size)
   if user.has('avatar_image') && user.has('username')
     - avatar_size = avatar_size || 'display'
@@ -17,8 +19,6 @@ mixin avatar(user, avatar_size)
           .user__avatar__initials__content=initials
 
       img(src="#{user.get('avatar_image')[avatar_size]}").user__avatar__image
-
-extends block
 
 block content
   - if(block.get('class') == 'User' && block.has('username'))

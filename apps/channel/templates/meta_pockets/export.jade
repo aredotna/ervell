@@ -1,4 +1,4 @@
-extends ../../../../components/meta_pocket/templates/meta_pocket
+extends ../../../../components/meta_pocket/templates/meta_pocket.jade
 
 block vars
   - title = "Export"
@@ -8,7 +8,7 @@ block vars
 block content
   if channel.get('status') == 'private'
     .metadata__content__section.js-share-link
-      include ../../../../components/share_link/templates/share_link
+      include ../../../../components/share_link/templates/share_link.jade
   .metadata__content__section
     unless channel.get('status') == 'private'
       .export--link(data-format="rss"): a(href="#{channel.get('slug')}/feed/rss" target="_blank") RSS Feed

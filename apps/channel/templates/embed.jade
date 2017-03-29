@@ -7,13 +7,13 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
         |  / #{channel.get('title')}
 
     link( type='text/css', rel='stylesheet', href=asset('/assets/embed.css') )
-    include ../../../components/meta/templates/meta
+    include ../../../components/meta/templates/meta.jade
   body(class="body--embed")
     .channel-embed
-      include _embed-header
+      include _embed-header.jade
       .channel-embed__contents
-        include ../../../components/blocks/container/templates/index
-    include ../../../components/layout/analytics
+        include ../../../components/blocks/container/templates/index.jade
+    include ../../../components/layout/analytics.jade
 
     #scripts
       != sharify.script()

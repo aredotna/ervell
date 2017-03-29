@@ -1,14 +1,14 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index.jade
 
 block vars
   - extraClasses = 'no-scroll-button no-banner'
 
 block meta
-  include _meta
+  include _meta.jade
 
 
 block body
-  include _block
+  include _block.jade
 
 block scripts
   script( src=asset('/assets/block.js') )

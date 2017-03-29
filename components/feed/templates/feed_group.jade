@@ -1,8 +1,8 @@
 .feed-group(class=group.isNew() ? 'is_unread' : '')
   .flex-container
-    include feed_group_sentence
+    include feed_group_sentence.jade
     - blocks = group.items()
     - channel = group.channel()
     .grid.grid--feed
       if blocks.length
-        include ../../block_collection/templates/block_collection
+        include ../../block_collection/templates/block_collection.jade

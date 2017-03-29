@@ -26,7 +26,7 @@ span.block-item.block-item--content.block-collection--list__row(
         | ,&nbsp;connected by&nbsp;
         a(href="/#{block.get('connected_by_user_slug')}") #{block.get('connected_by_username')}
   .block-collection--list__column.block-collection--list__column--comment
-    include partials/_comments
+    include partials/_comments.jade
 
   .block-collection--list__column.block-collection--list__column--source
     a(href="#{block.getSourceUrl()}" target="_blank")
@@ -43,4 +43,4 @@ span.block-item.block-item--content.block-collection--list__row(
   .block-collection--list__column.block-collection--list__column--date
     | #{block.updatedAtAgo()}
   .block-collection--list__column.block-collection--list__column--edit
-    include partials/_edit
+    include partials/_edit.jade

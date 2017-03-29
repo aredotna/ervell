@@ -1,10 +1,11 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/index--bare.jade
+extends ../../../components/layout/index--bare.jade
 
 block vars
   - extraClasses = 'no-header no-messages'
 
 block body
-  include ../../../components/auth/templates/login
+  include ../../../components/auth/templates/login.jade
 
 block scripts
   script( src=asset('/assets/auth.js') )

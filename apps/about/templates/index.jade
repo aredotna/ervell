@@ -1,17 +1,17 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/index--info.jade
 
 block vars
   - extraClasses = 'body--home no-messages body--static'
 
 block body
   .home.home--about
-    include ../../home/templates/sections/features
-    include ../../home/templates/sections/diatribe
-    include sections/team
-    include sections/principles
-    include sections/labs
-    include sections/api
-    include sections/contact
+    include ../../home/templates/sections/features.jade
+    include ../../home/templates/sections/diatribe.jade
+    include sections/team.jade
+    include sections/principles.jade
+    include sections/labs.jade
+    include sections/api.jade
+    include sections/contact.jade
 
 block scripts
   script( src=asset('/assets/home.js') )

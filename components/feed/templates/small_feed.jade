@@ -1,2 +1,3 @@
-for group in feed
-  include feed_group_sentence
+each group in feed
+  - locals.group = group
+  include ./feed_group_sentence.jade

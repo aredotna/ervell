@@ -1,5 +1,6 @@
 if urlConnections && urlConnections.length
   h5 Blocks with this URL also appear in
   for channel in urlConnections
+    - locals.channel = channel
     .block-connection-outer
-      include ../../../components/list_view/templates/_connection
+      include ../../../components/list_view/templates/_connection.jade

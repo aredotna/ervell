@@ -1,4 +1,4 @@
-extends ../../../components/path/templates/path
+extends ../../../components/path/templates/path.jade
 
 block path
   li.path__username
@@ -19,15 +19,15 @@ block path
 block metadata
   .metadata
     if (user && author.id == user.id) || channel.has('metadata') || channel.get('collaboration') == true
-      include meta_pockets/info
-    include meta_pockets/connections
+      include meta_pockets/info.jade
+    include meta_pockets/connections.jade
     if user
       unless channel.get('status') == 'private'
-        include meta_pockets/followers
-      include meta_pockets/privacy
-      include meta_pockets/edit_collaborators
-      include meta_pockets/export
-      include meta_pockets/delete
+        include meta_pockets/followers.jade
+      include meta_pockets/privacy.jade
+      include meta_pockets/edit_collaborators.jade
+      include meta_pockets/export.jade
+      include meta_pockets/delete.jade
 
     if channel
       #metadata__column-manage.metadata__column.metadata__column--right(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
@@ -36,5 +36,5 @@ block metadata
 
     if user && user.id != author.id
       .metadata__column.metadata__column--right.metadata__column--manage.is-hidden
-        include ../components/mute/index
+        include ../components/mute/index.jade
           

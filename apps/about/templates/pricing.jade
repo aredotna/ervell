@@ -1,12 +1,12 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/index--info.jade
 
 block vars
   - extraClasses = 'no-messages body--static'
 
 block body
-  include ./sections/pricing
-  include ./sections/premium_features
-  include ./sections/principles
+  include ./sections/pricing.jade
+  include ./sections/premium_features.jade
+  include ./sections/principles.jade
 
 block scripts
   script( src="https://checkout.stripe.com/checkout.js" )

@@ -9,7 +9,7 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
         |  / #{author.get('username')}
 
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
-    include ../../components/meta/templates/meta
+    include ../../components/meta/templates/meta.jade
 
     block styles
 
@@ -21,16 +21,16 @@ html(class=sd.IS_INVERTED ? 'is-inverted' : '')
       //- rendered by client
     #l-lightbox-container
       //- rendered by client
-    include header/templates/index--bare
+    include header/templates/index--bare.jade
     .container
       block body
 
     #l-loader-container
-      include loader/templates/index
+      include loader/templates/index.jade
 
     #message-container
 
-    include analytics
+    include analytics.jade
 
     #scripts
       != sharify.script()
