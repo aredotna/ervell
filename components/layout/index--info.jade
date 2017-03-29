@@ -1,10 +1,10 @@
+- var displayTitle = "Are.na"
+- if (title) 
+  - var displayTitle = "Are.na / " + title
 doctype html
 html
   head
-    title
-      | Are.na
-      if title
-        |  / #{title}
+    title!= displayTitle
 
     link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
     include ../../components/meta/templates/meta
