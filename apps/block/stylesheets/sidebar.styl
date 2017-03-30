@@ -1,4 +1,8 @@
+sb_font_size = 13px
+sb_line_height = 1.5
+
 .block-sidebar
+
   width unit * 18
   min-width unit * 18
   height 100vh
@@ -26,21 +30,19 @@
       margin-top 0
 
   &__separator
-    font-size 0.8rem
+    font-size sb_font_size
     color lightgray
     border-bottom 1px solid bordergray
     padding-bottom (unit / 2)
     margin-bottom (unit / 2)
-
   &__wrapper
     flex 1
-
   &__toggle-info
     padding (unit + 3) 3px
     display block
     color lightgray
     font-weight bold
-    font-size 0.8rem
+    font-size sb_font_size
     cursor pointer
     text-align right
     display block
@@ -65,16 +67,16 @@
           display none
 
     &__date
-      font-size 0.8rem
-      line-height 1.3rem
+      font-size sb_font_size
+      line-height sb_line_height
       color lightgray
       > a
         font-weight bold
     
     &__source
       font-weight bold
-      font-size 0.8rem
-      line-height 1.6rem
+      font-size sb_font_size
+      line-height sb_line_height
       &__original
         ellipsis(100%)
         vertical-align bottom
