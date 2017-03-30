@@ -64,7 +64,6 @@
   "devDependencies": {
     "jquery": "*",
     "browserify": "11.2.0",
-    "stylus": "*",
     "jadeify": "*",
     "browserify-dev-middleware": "*",
     "should": "*",
@@ -81,8 +80,7 @@
     "rupture": "*",
     "axis": "*",
     "cookies-js": "*",
-    "node-inspector": "*",
-    "morgan": "*"
+    "node-inspector": "*"
   },
   "optionalDependencies": {
     "fsevents": "*"
