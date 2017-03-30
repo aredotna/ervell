@@ -79,7 +79,6 @@
     "jeet": "*",
     "rupture": "*",
     "axis": "*",
-    "cookies-js": "*",
     "node-inspector": "*"
   },
   "optionalDependencies": {
