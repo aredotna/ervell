@@ -1,5 +1,7 @@
 .tab--container
   border-bottom 1px solid bordergray
+  +mobile()
+    display none
 
 ul.tab--container__nav
   display flex
@@ -30,3 +32,5 @@ ul li.tab--container__nav__item
   li.tab--container__nav__item
     float none
     width 100%
+  .tab-content
+    display block

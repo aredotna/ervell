@@ -165,10 +165,11 @@
     left 0
     width 100%
     height 100%
-
-
+    
   +below(800px)
-    width 90%
+    width 100%
+    .attr-value
+      padding unit
 
 .block-attachment
   .iconic-property-fill
@@ -202,6 +203,9 @@
   z-index 1
   align-items center
   justify-content center
+  
+  &:hover
+    opacity 1
 
   +below(950px)
     height 90vh
@@ -209,19 +213,18 @@
     position absolute
     left 0
     top 0
+    &:hover 
+      opacity 0
     &.block-arrow--right
       left auto
       right 0
-
-  &:hover
-    opacity 1
 
 .block-mobile-arrow 
   display none
   +below(950px)
     display block
     position absolute
-    bottom unit
+    bottom (unit / 2)
     left 0
     width 100%
     text-align center

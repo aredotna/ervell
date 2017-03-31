@@ -20,19 +20,21 @@ module.exports = class Collaborators extends Base
     super
 
   _remove: (id) ->
+    mediator.trigger 'collaborator:removed'
+    @remove @get(id)
     $.ajax
       type: 'DELETE'
       url: @url()
       data: { ids: [id] }
       success: (response) =>
-        mediator.trigger 'collaborator:removed'
         @reset response.users
 
-  _add: (id)->
+  _add: (collaborator)->
+    mediator.trigger 'collaborator:added'
+    @add collaborator
     $.ajax
       type: 'POST'
       url: @url()
-      data: { ids: [id] }
+      data: { ids: [collaborator.id] }
       success: (response) =>
-        mediator.trigger 'collaborator:added'
         @reset response.users
