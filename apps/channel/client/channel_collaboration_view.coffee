@@ -15,6 +15,5 @@ module.exports = class ChannelCollaborationView extends Backbone.View
       @render()
 
   render: ->
-    console.log 'render collaborators', @collection.models, @$el
     @$el.html collaboratorsTemplate 
       collaborators: @collection.models
