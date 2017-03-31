@@ -202,6 +202,9 @@
   z-index 1
   align-items center
   justify-content center
+  
+  &:hover
+    opacity 1
 
   +below(950px)
     height 90vh
@@ -209,12 +212,12 @@
     position absolute
     left 0
     top 0
+    display none
+    &:hover 
+      opacity 0
     &.block-arrow--right
       left auto
       right 0
-
-  &:hover
-    opacity 1
 
 .block-mobile-arrow 
   display none
