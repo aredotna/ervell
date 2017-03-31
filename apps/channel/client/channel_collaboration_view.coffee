@@ -6,9 +6,7 @@ collaboratorsTemplate = -> require('../templates/collaborators/collaborators.jad
 
 module.exports = class ChannelCollaborationView extends Backbone.View
   initialize: ({ @isCollaboration, @isEditable, @channel })->
-    @collection.on "sync", @render, @
-    @collection.on "reset", @render, @
-    @collection.on "remove", @render, @
+    @collection.on "sync reset remove add update", @render, @
 
     if @isCollaboration
       @collection.fetch
@@ -17,4 +15,6 @@ module.exports = class ChannelCollaborationView extends Backbone.View
       @render()
 
   render: ->
-    @$el.html collaboratorsTemplate(collaborators: @collection.models)
+    console.log 'render collaborators', @collection.models, @$el
+    @$el.html collaboratorsTemplate 
+      collaborators: @collection.models

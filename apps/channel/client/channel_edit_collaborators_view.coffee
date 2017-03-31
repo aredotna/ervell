@@ -12,9 +12,7 @@ module.exports = class ChannelCollaborationView extends Backbone.View
     'click .collaborators__edit__result__remove' : 'removeCollaborator'
 
   initialize: ({ @isCollaboration, @isEditable, @channel })->
-    @collection.on "sync", @render, @
-    @collection.on "reset", @render, @
-    @collection.on "remove", @render, @
+    @collection.on "sync reset remove add", @render, @
 
     mediator.on 'channel:is-editable', @setEditable, @
 
