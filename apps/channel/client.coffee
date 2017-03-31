@@ -60,7 +60,7 @@ module.exports = class ChannelView extends Backbone.View
           channel: @channel
           autoRender: true
 
-        @resultsCollection.on 'reset', => 
+        @resultsCollection?.on 'reset', => 
           @blockCollectionView.setupNewBlockView channel: @channel, autoRender: true
 
     # editable
@@ -133,6 +133,6 @@ module.exports.init = ->
   if current_user.canAddToChannel(channel) and not (sd.FOLLOWERS? or sd.FOLLOWING?)
     view.setupNewBlockView channel: channel
 
-    resultsCollection.on 'reset', -> 
+    resultsCollection?.on 'reset', -> 
       view.setupNewBlockView channel: channel
 
