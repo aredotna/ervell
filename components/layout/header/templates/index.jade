@@ -4,7 +4,7 @@ header#layout-header
 
   if user && user.has('username')
     include ../../../new_channel/templates/index
-    if user.get('is_pro')
+    if user.get('is_pro') && sd.CURRENT_PATH != "/"
       - glyph = view_mode == 'grid' ? 'grid-three-up' : 'list'
       include ../../../view_menu/templates/index
     include ../../../notifications_menu/templates/index

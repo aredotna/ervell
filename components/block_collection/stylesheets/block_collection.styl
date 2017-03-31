@@ -378,15 +378,16 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
     -webkit-justify-content center
     justify-content center
 
-@media (max-width:500px)
-  .grid__block
-    margin 0 0 80px 0
-
+body.is-mobile
   .grid__block__overlay
     opacity 1
 
     .button--inblock
       display none
+
++mobile()
+  .grid__block
+    margin 0 0 80px 0
 
   .grid__block--text .grid__block__inner
     border 1px solid lightgrayplus
