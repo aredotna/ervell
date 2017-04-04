@@ -3,8 +3,8 @@ section#main-path.channel-embed__header
     .path__headline
       .channel-embed__header__title
         ul.path__breadcrumb
-          li.channel-embed__header__title__author: a(href="/#{author.get('slug')}")= author.get('username')
-          li.channel-embed__header__title__channel: a(href="/#{author.get('slug')}/#{channel.get('slug')}" class="privacy--#{channel.get('status')}")= channel.get('title')
+          li.channel-embed__header__title__author: a(href="/#{author.get('slug')}" target="_blank")= author.get('username')
+          li.channel-embed__header__title__channel: a(href="/#{author.get('slug')}/#{channel.get('slug')}" class="privacy--#{channel.get('status')}" target="_blank")= channel.get('title')
       .channel-embed__header__logo
-        a(href="/")
+        a(href="/" target="_blank")
           include ../../../public/images/arena-mark.svg
