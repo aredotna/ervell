@@ -41,7 +41,11 @@ fetchFocus = (user, per=4)->
   dfd.promise
 
 @user = (req, res, next) ->
-  return res.redirect(302, "/#{req.params.username}/index") if req.user?.get('slug') is 'chris-sherron' # force chris to look at index page
+  console.log('sd', sd)
+  
+  if (_.find sd.ADMIN_SLUGS?.split(','), (slug) -> slug is req.user?.get('slug'))
+    return res.redirect(302, "/#{req.params.username}/index")
+  
   return next() unless res.locals.author
 
   blocks = new UserBlocks null,

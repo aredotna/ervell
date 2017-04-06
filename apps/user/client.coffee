@@ -22,33 +22,34 @@ module.exports.init = ->
   current_user = mediator.shared.current_user
   user = new User sd.USER
 
-  if sd.FOLLOWING || sd.FOLLOWERS
-    blocks = new FollowBlocks sd.BLOCKS,
-      object_id: sd.USER.id
-      object_type: 'users'
-      suffix: if sd.FOLLOWING then 'ing' else 'ers'
-  else
-    blocks = new UserBlocks sd.BLOCKS,
-      user_slug: sd.USER.slug
+  unless sd.CURRENT_PATH.indexOf('/index')
+    if sd.FOLLOWING || sd.FOLLOWERS
+      blocks = new FollowBlocks sd.BLOCKS,
+        object_id: sd.USER.id
+        object_type: 'users'
+        suffix: if sd.FOLLOWING then 'ing' else 'ers'
+    else
+      blocks = new UserBlocks sd.BLOCKS,
+        user_slug: sd.USER.slug
 
-    _.extend blocks.options,
-      subject: sd.SUBJECT
-      sort: sd.SORT || ''
-      seed: sd.SEED || ''
+      _.extend blocks.options,
+        subject: sd.SUBJECT
+        sort: sd.SORT || ''
+        seed: sd.SEED || ''
 
-  options =
-    model: user
-    $el: $('.profile-contents')
-    collection: blocks
+    options =
+      model: user
+      $el: $('.profile-contents')
+      collection: blocks
 
-  _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
-  _.extend(options, { sort: sd.SORT }) if sd.SORT
+    _.extend(options, { subject: sd.SUBJECT }) if sd.SUBJECT
+    _.extend(options, { sort: sd.SORT }) if sd.SORT
 
-  setupBlockCollection options
+    setupBlockCollection options
 
-  blocks.on 'remove', ->
-    unless ( blocks.any (block) -> block.get('class') is 'Tip' )
-      mediator.shared.current_user.save show_tour: false
+    blocks.on 'remove', ->
+      unless ( blocks.any (block) -> block.get('class') is 'Tip' )
+        mediator.shared.current_user.save show_tour: false
 
   new PathView
     el: $('section.path--header')
