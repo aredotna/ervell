@@ -1,27 +1,27 @@
 .channel-container--alpha
   h2
     text-align center
-    color lightgray
     font-weight normal
     padding 0 0 unit * 2
   &__focus
     margin 0 (unit / 2) (unit * 3)
-    h5
-      color lightgray
     &__inner
       padding unit 0
       text-align center
       .form__field__channel-filter
         display none
       .grid
-        justify-content center
+        justify-content space-around
         &__block
+          flex 1 1 350px
           max-width 400px
 
 .alpha
   padding 0 (unit/2) (unit * 2)
-  column-count 1
   column-gap unit * 3
+  column-count 1
+  &__two-columns
+    column-count 2
   +tablet()
     column-count 1
   +mobile()

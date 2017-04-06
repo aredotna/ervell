@@ -25,23 +25,23 @@ showTips = (req, res) ->
 addTips = (req) ->
   _.reject tips, (tip) -> req.cookies[tip.id]
 
-fetchFocus = (user, per=1)->
+fetchFocus = (user, per=4)->
   dfd = Q.defer()
   
-  blocks = new ChannelBlocks [], 
-    channel_slug: user.get('profile_id'),
-    direction: 'asc'
+  blocks = new UserBlocks null,
+    user_slug: user.get('slug')
     per: per
   
   blocks.fetch
     success: ->
       blocks.map (block) -> block.set silent: true
       dfd.resolve blocks
-    error: (blocks, err) -> dfd.resolve()
+    error: (blocks, err) -> dfd.resolve blocks
 
   dfd.promise
 
 @user = (req, res, next) ->
+  return res.redirect(302, "/#{req.params.username}/index") if req.user?.get('slug') is 'chris-sherron' # force chris to look at index page
   return next() unless res.locals.author
 
   blocks = new UserBlocks null,
@@ -82,11 +82,13 @@ fetchFocus = (user, per=1)->
     fetchFocus res.locals.author, req.query.per
   ]
   .then ([response, focus]) ->  
-    res.locals.sd.FOCUS = focus.toJSON()
+    res.locals.sd.FOCUS = focus?.toJSON()
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.render 'alpha',
       alpha: alpha
       focus: focus
+      count: channels.length
+  .catch next
 
 @followers = (req, res, next) ->
   return next() unless res.locals.author

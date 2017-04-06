@@ -6,8 +6,9 @@ block body
 
   include ./path
   .channel-container.flex-container.channel-container--alpha
-    include ./partials/_focus
-    .alpha
+    include ./partials/_focus 
+    - extraclass = count > 10 ? "alpha__two-columns" : ""
+    .alpha(class=extraclass)
       for letter in range
         - group = alpha[letter]
         if group
