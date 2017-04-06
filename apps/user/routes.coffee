@@ -40,9 +40,7 @@ fetchFocus = (user, per=4)->
 
   dfd.promise
 
-@user = (req, res, next) ->
-  console.log('sd', sd)
-  
+@user = (req, res, next) ->  
   if (_.find sd.ADMIN_SLUGS?.split(','), (slug) -> slug is req.user?.get('slug'))
     return res.redirect(302, "/#{req.params.username}/index")
   
