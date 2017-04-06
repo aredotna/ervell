@@ -22,7 +22,9 @@ module.exports.init = ->
   current_user = mediator.shared.current_user
   user = new User sd.USER
 
-  unless sd.CURRENT_PATH.indexOf('/index')
+  console.log "sd.CURRENT_PATH.indexOf('/index') ", sd.CURRENT_PATH.indexOf('/index') 
+
+  unless sd.CURRENT_PATH.indexOf('/index') > -1
     if sd.FOLLOWING || sd.FOLLOWERS
       blocks = new FollowBlocks sd.BLOCKS,
         object_id: sd.USER.id
