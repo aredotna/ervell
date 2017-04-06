@@ -3,16 +3,15 @@
     .tab--container
       +mobile()
         display none
-    .tab-content
-      +mobile()
-        display block
   &__mobile-title
     display none
     +mobile()
       display block
       h4()
       margin-left (unit / 2)
-
+  .tab-content
+    +mobile()
+      display block
   &__frame
     width 50%
     margin (s_margin * 3) auto
@@ -174,8 +173,6 @@ li.friend-list__friend
   &.is-active
     margin 20px 0 10px 0
 
-@media (max-width:800px)
+@media (max-width: 800px)
   .tools__frame
     width 100%
-  #tab--bookmarklet
-    display none

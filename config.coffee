@@ -24,6 +24,7 @@ module.exports =
   REDIS_URL: null
   GOOGLE_ANALYTICS_ID: null
   STRIPE_PUBLISHABLE_KEY: null
+  ADMIN_SLUGS: 'chris-sherron,charles-broskoski,damon-zucconi,daniel-pianetti'
 
 # Override any values with env variables if they exist
 for key, val of module.exports

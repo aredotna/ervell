@@ -6,8 +6,9 @@ block body
 
   include ./path
   .channel-container.flex-container.channel-container--alpha
-    include ./partials/_focus
-    .alpha
+    include ./partials/_focus 
+    - extraclass = count > 10 ? "alpha__two-columns" : ""
+    .alpha(class=extraclass)
       for letter in range
         - group = alpha[letter]
         if group
@@ -17,3 +18,5 @@ block body
             for channel in sortedGroup
               include ../../../components/list_view/templates/_connection.jade
 
+block scripts
+  script( src=asset('/assets/user.js') )
