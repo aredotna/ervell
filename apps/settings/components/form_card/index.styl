@@ -1,0 +1,53 @@
+.form-card
+  width (block_width * 2)
+  margin 0 auto
+  padding unit
+  border 2px solid bordergray
+
+  // Base
+  hr
+    height 1px
+    margin unit 0
+    border none
+
+  label
+  select
+    font-size s_small
+
+  select
+    width inherit
+    padding-right (unit * 2)
+
+  label
+    margin 0
+
+  // Elements
+  &__errors
+    display none
+    margin 0 0 unit 0
+    text-align center
+    font-size s_small
+    color red
+
+  &__field
+    display flex
+    flex-direction row
+    justify-content space-between
+    align-items center
+    margin (unit / 1.5) 0
+
+    &:first-child
+      margin-top 0
+    &:last-child
+      margin-bottom 0
+
+    > .bordered-select
+      margin 0
+
+  &__submit
+    margin unit 0 0 0
+
+    > button
+      border-top 1px solid bordergray
+      font-size s_middle
+      color textgray

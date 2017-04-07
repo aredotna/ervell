@@ -5,10 +5,10 @@ block body
     .settings__path
       include ./path
 
-    .settings__content
+    .settings__content.js-settings
       include ./tabs/general
       include ./tabs/notifications
       include ./tabs/billing
 
 block scripts
-  //- script( src=asset('/assets/settings.js') )
+  script( src= asset('/assets/settings.js') )

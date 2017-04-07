@@ -8,4 +8,28 @@ block content
     | Plan &amp; Billing
 
   .tab-content__frame
-    | Plan &amp; Billing content
+    form.form-card
+      .form-card__errors
+        //- Rendered client-side
+
+      .form-card__fields
+        .form-card__field
+          label Current Plan
+          .bordered-select
+              select(name='plan')
+                option(
+                  value='premium_yearly'
+                  selected= user.get('plan') ? 'premium_yearly' : null
+                ) Premium $45 / year
+                option(
+                  value='premium_monthly'
+                  selected= user.get('plan') ? 'premium_monthly' : null
+                ) Premium $5 / month
+
+        .form-card__field
+          label Next billing date
+          label 1/1/2018
+
+      .form-card__submit
+        button.button--wide.button--border
+          | Save
