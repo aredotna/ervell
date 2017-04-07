@@ -1,3 +1,1 @@
-
-$ ->
-  require("../apps/auth/client/settings.coffee").init()
+$ require('../apps/settings/client/index.coffee')

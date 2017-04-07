@@ -1,0 +1,14 @@
+extends ../../../components/layout/index
+
+block body
+  .settings
+    .settings__path
+      include ./path
+
+    .settings__content
+      include ./tabs/general
+      include ./tabs/notifications
+      include ./tabs/billing
+
+block scripts
+  //- script( src=asset('/assets/settings.js') )
