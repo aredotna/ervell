@@ -1,6 +1,7 @@
 express = require 'express'
 routes = require './routes'
 ensureLoggedIn = require '../../lib/middleware/ensure_logged_in'
+to = require '../../lib/to'
 
 app = module.exports = express()
 
@@ -16,5 +17,5 @@ tabs = [
 validateTab = (req, res, next) ->
   if req.params.tab in tabs then next() else res.redirect('/settings')
 
-app.get '/settings', ensureLoggedIn, routes.index
+app.get '/settings', ensureLoggedIn, to("/settings/#{tabs[0]}")
 app.get '/settings/:tab', validateTab, ensureLoggedIn, routes.index
