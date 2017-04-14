@@ -1,9 +1,9 @@
 extends ../../../components/path/templates/path
 
 block path
-  li.path__username(class=author.get('is_pro') == true ? 'is-premium' : '')
+  li.path__username(class=author.isPremium() ? 'is-premium' : '')
     a(href="/" + author.get('slug'))=author.get('username')
-    if author.get('is_pro') == true && !followers && !following
+    if author.isPremium() && !followers && !following
       a.premium-badge(href="/tools/premium")
         .premium-badge__stars ✶✶
         .premium-badge__cracker
@@ -20,7 +20,7 @@ block right
 
 block metadata
   .metadata
-    if author.get('is_pro') == true && ( (user && author.id == user.id) || author.has('metadata') )
+    if user.isPremium() && ( (user && author.id == user.id) || author.has('metadata') )
       include metadata_pockets/about
     if user
       include metadata_pockets/info

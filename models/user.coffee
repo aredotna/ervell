@@ -18,7 +18,7 @@ module.exports = class User extends Base
     @get('slug') or @id
 
   isPremium: ->
-    @get('is_pro') is true or @get('is_pro') is 'true'
+    @get('is_premium')
 
   startPrivateChannel: ->
     $.ajax

@@ -9,5 +9,5 @@ block tabs
     +tab("tools", "find-friends", "Find friends")
     +tab("tools", "add-via-email", "Add via email")
     +tab("tools", "send-invitation", "Send invitation")
-    if user.get('is_pro')
+    if user.isPremium()
       +tab("tools", "manage", "Manage channels")

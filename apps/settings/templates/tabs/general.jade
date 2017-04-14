@@ -62,7 +62,7 @@ block content
             name='password_confirmation' type='password' placeholder='Repeat password'
           )
 
-        if user.get('is_pro')
+        if user.isPremium()
           hr
 
           .form-card__field
