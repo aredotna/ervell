@@ -1,6 +1,7 @@
 _ = require 'underscore'
 _s = require 'underscore.string'
 Base = require './base.coffee'
+Customer = require './customer.coffee'
 analytics = require '../lib/analytics.coffee'
 { API_URL, APP_URL } = require('sharify').data
 
@@ -40,3 +41,9 @@ module.exports = class User extends Base
 
   allows: (permission, user) ->
     _s.include @getPermissions(user), permission
+
+  related: ->
+    return @__related__ if @__related__?
+
+    @__related__ =
+      customer: new Customer
