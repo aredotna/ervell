@@ -10,6 +10,7 @@ secondbackgroundgray  = #F0F0F0             // search results, dropdown
 bordergray            = #E7E7E5             // borders
 hovergray             = #050505             // any hovered element
 success               = #00C5FF
+premium               = #00C5FF
 alert                 = #E24D4D
 modal_bg              = rgba(58, 58, 58, 0.85)
 lighthighlight        = #FDFFDB
@@ -31,6 +32,7 @@ font_serif            = 'Times New Roman', serif
 s_caption             = 12px
 s_small               = 13px
 s_normal              = 14px
+s_form                = 16px
 s_middle              = 18px
 s_feed                = 23px
 
@@ -50,15 +52,10 @@ downshadow            = 0px 0px 12px -7px rgba(0,0,0,0.75)
   color lightgray
 
 v-align()
-  -webkit-transform translateY(-50%)
-  -ms-transform translateY(-50%)
   transform translateY(-50%)
 
 // transitions
 transition(n, property = all)
-  -webkit-transition property ease-in n
-  -moz-transition property ease-in n
-  -o-transition property ease-in n
   transition property ease-in n
 
 // antialiased
@@ -133,3 +130,18 @@ font-face('DTLHaarlemmerD-Medium', '../fonts')
 
   p
     margin .6em 0
+
+collapsed-margins($a, $b = auto)
+  margin $a $b
+
+  if $b == 'auto'
+    &:first-child
+      margin-top: 0
+    &:last-child
+      margin-bottom: 0
+
+  else
+    &:first-child
+      margin-left: 0
+    &:last-child
+      margin-right: 0
