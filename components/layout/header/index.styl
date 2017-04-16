@@ -17,6 +17,7 @@
   transform translate3d(0, 0, 1px)
   +mobile()
     position sticky
+    border-bottom 1px solid bordergray
 
   &.is-active, .has-results
     z-index header_z + 2
@@ -105,6 +106,9 @@ input#layout-header__search__input
   font-weight normal
   padding 0 container_pad 0 topbar_h
   background-color white
+
+  +mobile()
+    height 49px
 
   &:focus
     background-color backgroundgray
