@@ -33,8 +33,6 @@ html(class="#{colorClass} #{loggedInClass}")
 
     #message-container
 
-    a#scroll-top(data-section="#") &uarr;
-
     unless user && user.id
       include ../logged_out_cta/index
 
