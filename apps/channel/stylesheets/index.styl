@@ -13,6 +13,10 @@
   &.is-empty .channel-empty
     display block
 
+.channel 
+  .metadata--container
+    padding-bottom 0
+
 .channel--drop-zone
   -webkit-transform translateY(-1000%)
   -ms-transform translateY(-1000%)
@@ -158,35 +162,26 @@
 #metadata--connections
   overflow-y visible
   .connection-list
-    margin-bottom unit
+    margin-bottom unit  
 
 #metadata__column-manage
-  display none
-
-.connect_button a
-  color textgray
-
-#metadata__column-manage
+  margin-top unit
+  position relative
+  text-align center
+  opacity 0
   .toggle-settings-trigger
-    width 14px
-    float right
-    margin 4px 4px 0 0
-    svg
-      width 14px
-      height 14px
-      fill lightgray
+    color lightgray
+    font-size 36px
+    letter-spacing -4px
+    font-family font_serif 
     &:hover
-      svg
-        fill hovergray
+      color hovergray
+
+#metadata__column-manage.is-editable
+  opacity 1
 
 #metadata--connections
   word-break break-word
-
-#metadata__column-manage.is-editable
-  position absolute
-  top 0
-  right 0
-  padding-top 0
 
 .form__field__channel-filter
   height 51px
