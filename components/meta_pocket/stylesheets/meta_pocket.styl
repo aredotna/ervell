@@ -14,12 +14,18 @@
 
 .metadata--container__settings__done
   text-align center
-  padding s_margin * 2 0
   display none
+  height 40px
 
 .settings-is-active
   .metadata--container__settings__done
     display block
+    a
+      display block
+      vertical-align middle
+      line-height 40px
+    &:hover
+      background backgroundgray
 
   div#metadata__column-manage
     display none
