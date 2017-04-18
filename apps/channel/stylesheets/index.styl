@@ -174,8 +174,22 @@
     font-size 36px
     letter-spacing -4px
     font-family font_serif 
+    height (unit * 2)
+    line-height (unit * 2)
+    &:before
+      content "···"
     &:hover
+      background-color backgroundgray
       color hovergray
+    &:hover:before
+      content attr(data-message)
+      color textgray
+      font-size 12px 
+      font-family font_sans !important
+      letter-spacing 0px
+      line-height (unit * 2)
+      vertical-align middle
+      display block
 
 #metadata__column-manage.is-editable
   opacity 1

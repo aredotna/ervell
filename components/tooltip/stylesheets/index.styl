@@ -34,7 +34,7 @@
     position absolute
     pointer-events none
     opacity 0
-    transition 0.125s
+    transition 0s
     z-index 1
     font-size s_caption 
     font-family font_sans
@@ -46,12 +46,12 @@
     content ''
     background transparent
     border 6px solid transparent
-    border-bottom-color black
+    border-bottom-color textgray
   &:after
     content attr(data-message)
     width 135px
     color #fff
-    background-color black
+    background-color textgray
     padding 10px
     margin-left -((@width / 2) + 10px) 
     text-align center
