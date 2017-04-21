@@ -1,6 +1,6 @@
 .form-card
   width (block_width * 2)
-  margin 0 auto
+  margin (unit * 2) auto
   padding unit
   border 2px solid bordergray
 
@@ -9,6 +9,7 @@
     height 1px
     margin unit 0
     border none
+    background-color bordergray
 
   label
   select
@@ -20,6 +21,22 @@
 
   label
     margin 0
+    font-weight bold
+
+  h2
+  h3
+    collapsed-margins(unit)
+    font-size s_middle
+    font-weight normal
+
+  ul
+  ol
+    collapsed-margins(unit)
+
+  li
+    margin-left unit
+    line-height 1.5
+    list-style-type disc
 
   // Elements
   &__errors
@@ -44,6 +61,11 @@
     > .bordered-select
       margin 0
 
+  &__field--stripe
+    display block
+    background-color backgroundgray
+    padding (unit / 1.5)
+
   &__submit
     margin unit 0 0 0
 
@@ -51,3 +73,8 @@
       border-top 1px solid bordergray
       font-size s_middle
       color textgray
+
+      &[disabled]
+        opacity 0.5
+        cursor pointer
+        pointer-events none

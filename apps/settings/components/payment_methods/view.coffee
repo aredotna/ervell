@@ -1,31 +1,54 @@
+Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { extend } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
 styles = require './lib/styles.coffee'
+template = -> require('./index.jade') arguments...
 
 module.exports = class PaymentMethodsView extends Backbone.View
+  className: 'payment-methods'
+
   events:
-    'submit .js-add': 'addPaymentMethod'
+    'click .js-add': 'addPaymentMethod'
     'click .js-default': 'defaultPaymentMethod'
     'click .js-remove': 'removePaymentMethod'
+    'click .js-charge': 'createCharge'
+    'click .js-reenable': 'reenablePremium'
+    'click .js-submit': 'clearErrors'
 
   initialize: ->
     @stripe = Stripe STRIPE_PUBLISHABLE_KEY
 
+  tokenizeCard: (card) ->
+    @stripe.createToken(card)
+      .then ({ token, error }) =>
+        return Promise.reject(error) if error
+        token
+
+  clearErrors: ->
+    @els.errors.empty().hide()
+
+  getToken: (card) ->
+    if @complete or (not @model.has('default_source'))
+      @stripe.createToken(card)
+        .then ({ token, error }) =>
+          return Promise.reject(error) if error
+          token
+    else
+      Promise.resolve(id: @model.get('default_source'))
+
   addPaymentMethod: (e) ->
     e.preventDefault()
 
-    form = $(e.currentTarget)
+    label = ($target = $(e.currentTarget)).text()
 
-    @els.submit
+    $target
       .prop 'disabled', true
       .text 'Saving...'
 
-    @stripe.createToken(@card)
-      .then ({ token, error }) =>
-        return Promise.reject(error) if error
-
-        $.ajax
+    @tokenizeCard(@card)
+      .then (token) =>
+        Promise $.ajax
           method: 'POST'
           url: @collection.url
           data: token: token.id
@@ -33,17 +56,16 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .then =>
         location.reload()
 
-        @els.submit
-          .text 'Added card'
+        $target.text 'Added card'
 
-      , (error) =>
+      .catch (error) =>
+        $target
+          .prop 'disabled', false
+          .text label
+
         @els.errors
           .show()
           .text error.message
-
-        @els.submit
-          .prop 'disabled', false
-          .text 'Error'
 
   defaultPaymentMethod: (e) ->
     e.preventDefault()
@@ -58,18 +80,12 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
         $target.text 'Saved!'
 
-      , (error) =>
+      .catch (error) =>
         $target.text label
 
         @els.errors
           .show()
           .text error.message
-
-        setTimeout () =>
-          @els.errors
-            .empty()
-            .hide()
-        , 2000
 
   removePaymentMethod: (e) ->
     e.preventDefault()
@@ -85,24 +101,80 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
         $target.text 'Removed!'
 
-      , (error) =>
+      .catch (error) =>
         $target.text label
 
         @els.errors
           .show()
           .text error.message
 
-        setTimeout () =>
-          @els.errors
-            .empty()
-            .hide()
-        , 2000
+  createCharge: (e) ->
+    e.preventDefault()
+
+    label = ($target = $(e.currentTarget)).text()
+
+    $target
+      .prop 'disabled', true
+      .text 'Subscribing'
+
+    @getToken(@card)
+      .then (token) =>
+        subscription = @model.related().subscriptions.add
+          token: token.id
+          plan_id: @model.get('plan_id')
+
+        subscription.save()
+
+      .then =>
+        Promise($.get('/me/refresh'))
+
+      .then =>
+        location.reload()
+
+        $target.text 'Thank you!'
+
+      .catch (error) =>
+        $target
+          .prop 'disabled', false
+          .text 'Error'
+
+        @els.errors
+          .show()
+          .text error.message
+
+  reenablePremium: (e) ->
+    e.preventDefault()
+
+    label = ($target = $(e.currentTarget)).text()
+
+    $target
+      .prop 'disabled', true
+      .text 'Resubscribing'
+
+    @getToken(@card)
+      .then (token) =>
+        @model.related().subscription.save
+          token: token.id
+          plan_id: @model.get('plan_id')
+
+      .then =>
+        location.reload()
+
+        $target.text 'Thank you!'
+
+      .catch (error) =>
+        $target
+          .prop 'disabled', false
+          .text 'Error'
+
+        @els.errors
+          .show()
+          .text error.message
 
   postRender: ->
     @els =
       card: @$('.js-card-element')
       errors: @$('.js-form-errors')
-      submit: @$('.js-form-submit')
 
     # Pass Stripe Element our default input style
     valid = ['color', 'font-size', 'font-family']
@@ -113,15 +185,25 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     # Mount Stripe Element
     @card.mount @els.card[0]
-    @card.addEventListener 'change', ({ error }) =>
+
+    @card.on 'change', ({ complete, error }) =>
+      @complete = complete
+
       if error
         @els.errors
           .show()
           .text error.message
       else
-        @els.errors
-          .empty()
-          .hide()
+        @els.errors.empty().hide()
+
+  render: ->
+    @$el.html template
+      customer: @model
+
+    @postRender()
+
+    this
 
   remove: ->
-    throw new Error 'not implemented yet'
+    @card.unmount()
+    super

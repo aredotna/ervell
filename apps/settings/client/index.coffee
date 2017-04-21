@@ -1,8 +1,6 @@
-formCard = require '../components/form_card/index.coffee'
+Backbone = require 'backbone'
+SettingsRouter = require './router.coffee'
 
 module.exports = ->
-  $el = $('.js-settings')
-
-  $el.find('form')
-    .each (_i, form) ->
-      formCard $(form)
+  new SettingsRouter
+  Backbone.history.start pushState: true
