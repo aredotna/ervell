@@ -10,6 +10,13 @@ module.exports = class Customer extends Model
 
   url: "#{API_URL}/account/customer"
 
+  requiresPayment: ->
+    ((not @get('is_premium')) or @get('is_canceled')) and
+      @has('plan_id')
+
+  requiresPaymentMethod: ->
+    @requiresPayment() and @related().sources.length is 0
+
   related: ->
     return @__related__ if @__related__?
 
