@@ -17,7 +17,7 @@ block path
     li.path__sub Following
 
 block metadata
-  .metadata
+  .metadata.metadata--channel
     if (user && author.id == user.id) || channel.has('metadata') || channel.get('collaboration') == true
       include meta_pockets/info
     include meta_pockets/connections
@@ -29,12 +29,13 @@ block metadata
       include meta_pockets/export
       include meta_pockets/delete
 
-    if channel
-      #metadata__column-manage.metadata__column.metadata__column--right(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
-        .toggle-settings-trigger.pointer
-          include ../../../public/images/iconic/cog.svg
-
+    
     if user && user.id != author.id
       .metadata__column.metadata__column--right.metadata__column--manage.is-hidden
         include ../components/mute/index
+
+    if channel
+      #metadata__column-manage.metadata__column--bottom(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
+        .toggle-settings-trigger.pointer(data-message="Privacy, Collaborators, Export, Delete")
+
           
