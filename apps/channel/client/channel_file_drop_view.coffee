@@ -17,11 +17,10 @@ module.exports = class ChannelFileDropView extends Backbone.View
     'dragend' : 'clearDrag'
     'dragleave .channel--drop-zone' : 'clearDrag'
 
-  initialize: (options)->
-    @channel = options.channel
-    @blocks = options.blocks
-    @policy = options.policy
-
+  initialize: ({ @channel, @blocks, @policy })->
+    if mediator.shared.current_user.isPremium() 
+      @dropLimit = 100 
+      
     @renderFileDrop()
     @setupFileDrop()
 
