@@ -29,11 +29,13 @@ block metadata
       include meta_pockets/export
       include meta_pockets/delete
 
+    
+    if user && user.id != author.id
+      .metadata__column.metadata__column--right.metadata__column--manage.is-hidden
+        include ../components/mute/index
+
     if channel
       #metadata__column-manage.metadata__column--bottom(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
         .toggle-settings-trigger.pointer(data-message="Privacy, Collaborators, Export, Delete")
 
-    if user && user.id != author.id
-      .metadata__column.metadata__column--right.metadata__column--manage.is-hidden
-        include ../components/mute/index
           
