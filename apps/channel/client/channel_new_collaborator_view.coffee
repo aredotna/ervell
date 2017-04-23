@@ -8,7 +8,7 @@ Collaborators = require '../../../collections/collaborators.coffee'
 newCollaboratorTemplate = -> require('../templates/collaborators/new_collaborator.jade') arguments...
 collaboratorResultsTemplate = -> require('../templates/collaborators/collaborator_results.jade') arguments...
 
-module.exports = class newCollaboratorView extends Backbone.View
+module.exports = class NewCollaboratorView extends Backbone.View
 
   events:
     'keyup #new-collaborator__search'          : 'searchCollaborators'
