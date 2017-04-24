@@ -1,11 +1,12 @@
 _ = require 'underscore'
 _s = require 'underscore.string'
-Base = require './base.coffee'
+Model = require './base.coffee'
 Customer = require './customer.coffee'
+Policy = require './policy.coffee'
 analytics = require '../lib/analytics.coffee'
 { API_URL, APP_URL } = require('sharify').data
 
-module.exports = class User extends Base
+module.exports = class User extends Model
   url: ->
     "#{API_URL}/users/#{@slugOrId()}"
 
@@ -47,3 +48,4 @@ module.exports = class User extends Base
 
     @__related__ =
       customer: new Customer
+      policy: new Policy
