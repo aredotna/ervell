@@ -1,6 +1,8 @@
-Backbone = require 'backbone'
-SettingsRouter = require './router.coffee'
+general = require './tabs/general.coffee'
+notifications = require './tabs/notifications.coffee'
+billing = require './tabs/billing.coffee'
 
 module.exports = ->
-  new SettingsRouter
-  Backbone.history.start pushState: true
+  general $('.js-general')
+  notifications $('.js-notifications')
+  billing $('.js-billing')

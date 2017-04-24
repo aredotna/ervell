@@ -1,3 +1,4 @@
+Promise = require 'bluebird-q'
 Serializer = require '../../../../components/form/serializer.coffee'
 
 module.exports = ($el) ->
@@ -15,25 +16,28 @@ module.exports = ($el) ->
       .prop 'disabled', true
       .text 'Saving...'
 
-    $.ajax
+    Promise $.ajax
       url: $el.data('action')
       method: $el.data('method')
       data: serializer.data()
 
-      success: ->
-        $submit.text 'Success'
-        location.reload()
+    .then ->
+      Promise $.get('/me/refresh')
 
-      error: (xhr) ->
-        $errors
-          .show()
-          .html """
-            #{xhr.responseJSON.message}<br>
-            #{xhr.responseJSON.description}
-          """
+    .then ->
+      $submit.text 'Success'
+      location.reload()
 
-        $submit
-          .prop 'disabled', false
-          .text 'Error'
+    .catch (err) ->
+      $errors
+        .show()
+        .html """
+          #{err.responseJSON.message}<br>
+          #{err.responseJSON.description}
+        """
 
-        setTimeout (-> $submit.text label), 5000
+      $submit
+        .prop 'disabled', false
+        .text 'Error'
+
+      setTimeout (-> $submit.text label), 5000

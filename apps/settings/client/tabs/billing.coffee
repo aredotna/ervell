@@ -6,10 +6,10 @@ Customer = require '../../../../models/customer.coffee'
 User = require '../../../../models/user.coffee'
 { USER, CUSTOMER } = require('sharify').data
 
-module.exports = ->
+module.exports = ($el) ->
   models = user: new User(USER), customer: new Customer(CUSTOMER)
 
-  paymentMethods $('.js-payment-methods'), models
-  yourPlan $('.js-your-plan'), models
-  cancelPlan $('.js-cancel-plan'), models
-  premiumCTA $('.js-premium-cta'), models
+  paymentMethods $el.find('.js-payment-methods'), models
+  yourPlan $el.find('.js-your-plan'), models
+  cancelPlan $el.find('.js-cancel-plan'), models
+  premiumCTA $el.find('.js-premium-cta'), models

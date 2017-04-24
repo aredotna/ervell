@@ -5,10 +5,15 @@ block body
     .settings__path
       include ./path
 
-    .settings__content.js-settings
-      include ./tabs/general
-      include ./tabs/notifications
-      include ./tabs/billing
+    .settings__content
+      .js-general
+        include ./tabs/general
+
+      .js-notifications
+        include ./tabs/notifications
+
+      .js-billing
+        include ./tabs/billing
 
 block scripts
   script( src='https://js.stripe.com/v3/' )
