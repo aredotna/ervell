@@ -1,11 +1,7 @@
 PaymentMethodsView = require './view.coffee'
-Customer = require '../../../../models/customer.coffee'
-{ CUSTOMER } = require('sharify').data
 
-module.exports = ($el) ->
+module.exports = ($el, { customer }) ->
   return unless $el.length
-
-  customer = new Customer CUSTOMER
 
   view = new PaymentMethodsView
     el: $el
