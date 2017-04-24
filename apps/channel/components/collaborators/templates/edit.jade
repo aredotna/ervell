@@ -1,9 +1,20 @@
 if collaborators.length
-  .collaborators__edit
+  .edit-collaborators
     each collaborator, i in collaborators
-      .collaborators__edit__result
-        span(class="iconic collaborators__edit__result__remove" data-id="#{collaborator.id}" data-glyph="minus" title="Remove #{collaborator.get('username')}" aria-hidden="true")
-        | #{collaborator.get('username')}
+
+      - var msg = collaborator.has('first_name') ? "Remove " + collaborator.get('username') : "Uninvite " + collaborator.get('username')
+
+      .edit-collaborators__result.js-collaborators-remove(
+        data-id="#{collaborator.id}" 
+        title="Remove #{collaborator.get('username')}"
+        data-name=collaborator.get('username')
+        data-msg=msg
+      )
+        span.edit-collaborators__result__remove(
+          class="iconic " 
+          data-glyph="minus"
+          aria-hidden="true"
+        )
 else
   p.collaborators__empty-collaborators —
 
