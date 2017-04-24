@@ -19,7 +19,11 @@
         li 25MB upload limit
     .premium-tiers__tier.premium-tiers__tier--premium
       .premium-tiers__tier__title Premium
-      .premium-tiers__tier__price(class= user && user.isPremium() ? 'selected' : 'selectable')
+
+      a.premium-tiers__tier__price(
+        href= (user ? '/settings/billing' : "#{sd.APP_URL}/log_in?redirect-to=/settings/billing")
+        class= user && user.isPremium() ? 'selected' : 'selectable'
+      )
         if user && user.isPremium()
           strong Thank you!
         else
