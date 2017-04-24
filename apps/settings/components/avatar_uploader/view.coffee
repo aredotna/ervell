@@ -1,8 +1,7 @@
 Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { API_URL } = require('sharify').data
-guid = require './lib/guid.coffee'
-fileTypeRegex = require './lib/file_type_regex.coffee'
+uuid = require './lib/uuid.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class AvatarUploaderView extends Backbone.View
@@ -49,8 +48,8 @@ module.exports = class AvatarUploaderView extends Backbone.View
       submit: @$('.js-submit')
 
     @els.form.fileupload
-      acceptFileTypes: fileTypeRegex
-      maxFileSize: 104857600 # 100MB # TODO: Extract
+      acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+      maxFileSize: 20971520 # 20MB
       dropZone: @$el
       singleFileUploads: true
       autoUpload: true
@@ -62,7 +61,7 @@ module.exports = class AvatarUploaderView extends Backbone.View
         data = form.serializeArray()
         fileType = @files[0]?.type or ''
         data.push name: 'Content-Type', value: fileType
-        data[0].value = data[0].value.replace ':uuid', guid()
+        data[0].value = data[0].value.replace ':uuid', uuid()
         data
 
       fail: (e, data) =>
