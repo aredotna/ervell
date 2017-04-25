@@ -128,7 +128,7 @@ module.exports = (app) ->
       'receive_newsletter',
       'post_address',
       'show_tour',
-      'is_pro',
+      'is_premium',
       'channel_count',
       'exclude_from_indexes',
       'following_count'
@@ -167,6 +167,7 @@ module.exports = (app) ->
   app.use require "../apps/share"
   app.use require "../apps/marklet"
   app.use require "../apps/import"
+  app.use require '../apps/settings'
 
   # Apps that use dynamic routes
   app.use require "../apps/user"

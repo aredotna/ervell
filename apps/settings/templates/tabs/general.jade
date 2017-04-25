@@ -1,0 +1,86 @@
+extends ../../../../components/path/templates/tab_content
+
+block vars
+  - slug = 'general'
+
+block content
+  .tab-content__title
+    | General
+
+  .tab-content__frame
+    .form-card
+      .avatar-uploader.js-avatar-uploader
+        include ../../components/avatar_uploader/index.jade
+
+      form(
+        data-action= user.url()
+        data-method='PUT'
+      )
+        .form-card__errors.js-form-errors
+          //- Rendered client-side
+
+        .form-card__fields
+          .form-card__field
+            input.input--wide.is-block(
+              name='first_name'
+              type='text'
+              value="#{user.get('first_name')}"
+              placeholder='First name'
+              autofocus= autofocus
+              required
+            )
+
+          .form-card__field
+            input.input--wide.is-block(
+              name='last_name'
+              type='text'
+              value="#{user.get('last_name')}"
+              placeholder='Last name'
+              autofocus= autofocus
+              required
+            )
+
+          .form-card__field
+            input.input--wide.is-block(
+              name='email'
+              type='email'
+              value="#{user.get('email')}"
+              placeholder='Email'
+              autofocus= autofocus
+              required
+            )
+
+          hr
+
+          .form-card__field
+            input.input--wide.is-block(
+              name='password' type='password' placeholder='Password'
+            )
+
+          .form-card__field
+            input.input--wide.is-block(
+              name='password_confirmation' type='password' placeholder='Repeat password'
+            )
+
+          if user.isPremium()
+            hr
+
+            .form-card__field
+              label
+                | Exclude my content from search engines?
+              .bordered-select
+                select(name='exclude_from_indexes')
+                  option(
+                    value='true'
+                    selected= user.get('exclude_from_indexes') ? 'selected' : null
+                  ) Yes
+
+                  option(
+                    value='false'
+                    selected= !user.get('exclude_from_indexes') ? 'selected' : null
+                  ) No
+
+
+        .form-card__submit
+          button.button--wide.button--border
+            | Save

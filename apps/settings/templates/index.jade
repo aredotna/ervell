@@ -1,0 +1,20 @@
+extends ../../../components/layout/index
+
+block body
+  .settings
+    .settings__path
+      include ./path
+
+    .settings__content
+      .js-general
+        include ./tabs/general
+
+      .js-notifications
+        include ./tabs/notifications
+
+      .js-billing
+        include ./tabs/billing
+
+block scripts
+  script( src='https://js.stripe.com/v3/' )
+  script( src= asset('/assets/settings.js') )

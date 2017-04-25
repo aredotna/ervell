@@ -89,7 +89,7 @@ setupViews = ->
     new NotificationsView
       el: $('.dropdown--menu--notifications')
 
-    if mediator.shared.current_user.get('is_pro')
+    if mediator.shared.current_user.isPremium()
       new ViewMenuView
         el: $('.dropdown--menu--view')
         model: mediator.shared.state
@@ -111,7 +111,7 @@ syncAuth = module.exports.syncAuth = ->
 ensureFreshUser = (data) ->
   return unless sd.CURRENT_USER
   for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
-               'last_name', 'slug', 'username', 'is_pro']
+               'last_name', 'slug', 'username', 'is_premium']
     if not _.isEqual data[attr], sd.CURRENT_USER[attr]
       return $.ajax('/me/refresh')
 
@@ -154,22 +154,22 @@ initShortCuts = ->
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
   km 'l',     ->
-    if mediator.shared.current_user.get('is_pro')
+    if mediator.shared.current_user.isPremium()
       mediator.shared.state.set view_mode: 'list'
       window.location.reload()
   km 'g',     ->
-    if mediator.shared.current_user.get('is_pro')
+    if mediator.shared.current_user.isPremium()
       mediator.shared.state.set view_mode: 'grid'
       window.location.reload()
 
   initNightMode()
 
 showPremiumMessage = ->
-  if (!sd.CURRENT_USER.is_pro and sd.CURRENT_USER.channel_count >= 2 )
+  if (!sd.CURRENT_USER.is_premium and sd.CURRENT_USER.channel_count >= 2 )
     model = new Backbone.Model
       id: 'premium_message'
       title: "Help support Are.na"
-      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/about/pricing?utm_campaign=pmessage'>premium account</a>."
+      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/settings/billing?utm_campaign=pmessage'>premium account</a>."
       type: 'announcement'
     new MessageView container: $('#message-container'), model: model
 
