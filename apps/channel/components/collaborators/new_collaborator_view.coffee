@@ -32,19 +32,23 @@ module.exports = class NewCollaboratorView extends Backbone.View
     if isEmail query
       @showInvite query
     else
-      $.get "#{sd.API_URL}/search/users/?q=#{query}&per=6", (response) =>
-        # IDs of the current channel collaborators, author
-        ids = @collaborators.pluck 'id'
-        ids.push @channel.get('user').id
+      _.throttle @searchCollaborators, 100
 
-        if response.length > 1
-          results = _.reject response.users, (user) -> 
-            _.contains ids, parseInt(user.id)
-        else
-          results = response.users if not _.contains ids, response.users.id
-        
-        @results = new Collaborators results
-        @showResults()
+  searchCollaborators: =>
+    query = @$input.val()
+    $.get "#{sd.API_URL}/search/users/?q=#{query}&per=6", (response) =>
+      # IDs of the current channel collaborators, author
+      ids = @collaborators.pluck 'id'
+      ids.push @channel.get('user').id
+
+      if response.length > 1
+        results = _.reject response.users, (user) -> 
+          _.contains ids, parseInt(user.id)
+      else
+        results = response.users if not _.contains ids, response.users.id
+      
+      @results = new Collaborators results
+      @showResults()
 
   showInvite: (email) ->
     @$('.js-collaborator-results').html inviteTemplate 
