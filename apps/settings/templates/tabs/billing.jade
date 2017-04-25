@@ -15,6 +15,6 @@ block content
       .premium-cta.js-premium-cta
         include ../../components/premium_cta/index
 
-    if user.get('is_premium') && !customer.get('is_canceled')
+    if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
       .cancel-plan.js-cancel-plan
         include ../../components/cancel_plan/index

@@ -6,22 +6,29 @@
     .form-card__field
       label Current Plan
       .bordered-select
-          select( name='plan' )
-            unless customer.get('is_premium')
+          select( name='plan', disabled=(customer.get('is_lifetime') ? 'disabled' : null) )
+            if customer.get('is_lifetime')
+                option(
+                  value='lifetime_premium'
+                  selected
+                ) Lifetime Premium
+
+            else
+              unless customer.get('is_premium')
+                option(
+                  value='free'
+                  selected= (!customer.get('plan_id')) ? 'selected' : null
+                ) Free version
+
               option(
-                value='free'
-                selected= (!customer.get('plan_id')) ? 'selected' : null
-              ) Free version
+                value='premium_monthly'
+                selected= (customer.get('plan_id') === 'premium_monthly') ? 'selected' : null
+              ) Premium $5 / month
 
-            option(
-              value='premium_monthly'
-              selected= (customer.get('plan_id') === 'premium_monthly') ? 'selected' : null
-            ) Premium $5 / month
-
-            option(
-              value='premium_1'
-              selected= (customer.get('plan_id') === 'premium_1') ? 'selected' : null
-            ) Premium $45 / year
+              option(
+                value='premium_1'
+                selected= (customer.get('plan_id') === 'premium_1') ? 'selected' : null
+              ) Premium $45 / year
 
     if sd.CUSTOMER.plan_id && sd.CUSTOMER.plan_id !== customer.get('plan_id')
       .form-card__submit
@@ -36,9 +43,13 @@
           else
             | Next billing date
         label
-          = customer.formatDate('current_period_end_at', 'D MMMM, YYYY')
+          if customer.get('is_lifetime')
+            | Never
+          else
+            = customer.formatDate('current_period_end_at', 'D MMMM, YYYY')
 
-      hr
+      unless customer.get('is_lifetime')
+        hr
 
-      .payment-methods.js-payment-methods
-        include ../payment_methods/index
+        .payment-methods.js-payment-methods
+          include ../payment_methods/index
