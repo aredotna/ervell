@@ -3,6 +3,7 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
 analytics = require '../../../../lib/analytics.coffee'
+isEmail = require '../../../../lib/is_email.coffee'
 Collaborators = require '../../../../collections/collaborators.coffee'
 
 newCollaboratorTemplate = -> require('./templates/new.jade') arguments...
@@ -24,15 +25,11 @@ module.exports = class NewCollaboratorView extends Backbone.View
 
   inviteCollaborator: (e) ->
     @collaborators._invite $(e.currentTarget).data 'email'
-
-  isEmail: (query)->
-    is_email = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-    is_email.test query
-
+    
   searchCollaborators: ->
     query = @$input.val()
 
-    if @isEmail query
+    if isEmail query
       @showInvite query
     else
       $.get "#{sd.API_URL}/search/users/?q=#{query}&per=6", (response) =>
