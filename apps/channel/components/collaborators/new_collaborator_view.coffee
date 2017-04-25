@@ -18,7 +18,7 @@ module.exports = class NewCollaboratorView extends Backbone.View
     'click .js-collaborator-invite' : 'inviteCollaborator'
 
   initialize: ({ @channel, @collaborators} )->
-    @render()
+    # nothing
 
   addCollaborator: (e) ->
     @collaborators._add @results.get $(e.currentTarget).data 'id'

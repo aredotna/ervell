@@ -3,7 +3,7 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
 analytics = require '../../../../lib/analytics.coffee'
-newCollaboratorView = require './new_collaborator_view.coffee'
+NewCollaboratorView = require './new_collaborator_view.coffee'
 collaboratorsTemplate = -> require('./templates/edit.jade') arguments...
 
 module.exports = class ChannelCollaborationView extends Backbone.View
@@ -27,10 +27,12 @@ module.exports = class ChannelCollaborationView extends Backbone.View
   _postRender: ->
     @$('.collaborators__empty-collaborators').html ""
 
-    new newCollaboratorView
+    view = new NewCollaboratorView
       el: $('.collaborators__new-collaborator')
       collaborators: @collection
       channel: @channel
+    
+    view.render()
 
   removeCollaborator: (e)->
     analytics.track.click "Collaborator removed on #{@channel.get('status')} channel"
