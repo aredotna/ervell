@@ -1,0 +1,80 @@
+.form-card
+  max-width (block_width * 2)
+  margin (unit * 2) auto
+  padding unit
+  border 2px solid bordergray
+
+  // Base
+  hr
+    height 1px
+    margin unit 0
+    border none
+    background-color bordergray
+
+  label
+  select
+    font-size s_small
+
+  select
+    width inherit
+    padding-right (unit * 2)
+
+  label
+    margin 0
+    font-weight bold
+
+  h2
+  h3
+    collapsed-margins(unit)
+    font-size s_middle
+    font-weight normal
+
+  ul
+  ol
+    collapsed-margins(unit)
+
+  li
+    margin-left unit
+    line-height 1.5
+    list-style-type disc
+
+  // Elements
+  &__errors
+    display none
+    margin 0 0 unit 0
+    text-align center
+    font-size s_small
+    color red
+
+  &__field
+    display flex
+    flex-direction row
+    justify-content space-between
+    align-items center
+    margin (unit / 1.5) 0
+
+    &:first-child
+      margin-top 0
+    &:last-child
+      margin-bottom 0
+
+    > .bordered-select
+      margin 0
+
+  &__field--stripe
+    display block
+    background-color backgroundgray
+    padding (unit / 1.5)
+
+  &__submit
+    margin unit 0 0 0
+
+    > button
+      border-top 1px solid bordergray
+      font-size s_middle
+      color textgray
+
+      &[disabled]
+        opacity 0.5
+        cursor pointer
+        pointer-events none

@@ -10,15 +10,17 @@ sd = require("sharify").data
 module.exports = class Base extends Backbone.Model
   _.extend @prototype, ModelLib
 
-  initialize: (attributes, options={})->
+  initialize: (attributes, options = {}) ->
     @setOptions(options)
     super
 
+  authenticate: (token) ->
+    @token = token
+
   sync: (method, model, options) ->
-    if sd.CURRENT_USER
-      if !options.headers
-        options.headers = {}
-      options.headers['X-AUTH-TOKEN'] = sd.CURRENT_USER.authentication_token
+    if @token or sd.CURRENT_USER
+      options.headers ?= {}
+      options.headers['X-AUTH-TOKEN'] = @token or sd.CURRENT_USER.authentication_token
     super
 
   get: (key, options)->

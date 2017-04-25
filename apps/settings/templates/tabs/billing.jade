@@ -1,0 +1,20 @@
+extends ../../../../components/path/templates/tab_content
+
+block vars
+  - slug = 'billing'
+
+block content
+  .tab-content__title
+    | Plan &amp; Billing
+
+  .tab-content__frame
+    .your-plan.js-your-plan
+      include ../../components/your_plan/index
+
+    unless user.get('is_premium')
+      .premium-cta.js-premium-cta
+        include ../../components/premium_cta/index
+
+    if user.get('is_premium') && !customer.get('is_canceled')
+      .cancel-plan.js-cancel-plan
+        include ../../components/cancel_plan/index

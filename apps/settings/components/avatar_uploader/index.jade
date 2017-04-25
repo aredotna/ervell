@@ -1,0 +1,20 @@
+include ../../../../components/avatar/templates/avatar
+
++avatar(user)
+
+form(
+  class='js-upload'
+  method='POST'
+  enctype='multipart/form-data'
+  action= policy.get('bucket')
+)
+  input( type='hidden' name='key' value= policy.get('key') )
+  input( type='hidden' name='AWSAccessKeyId' value= policy.get('AWSAccessKeyId') )
+  input( type='hidden' name='acl' value= policy.get('acl') )
+  input( type='hidden' name='success_action_status' value= policy.get('success_action_status') )
+  input( type='hidden' name='policy' value= policy.get('policy') )
+  input( type='hidden' name='signature' value= policy.get('signature') )
+  input( type='file' name='file' )
+
+  .avatar-uploader__submit.js-submit
+    | Upload new avatar

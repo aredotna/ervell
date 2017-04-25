@@ -1,6 +1,7 @@
 .DS_Store
 .idea
-.env
+.env*
+Procfile.*
 public/assets/*
 !public/assets/.gitkeep
 *.sublime-project

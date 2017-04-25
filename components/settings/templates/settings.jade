@@ -64,7 +64,7 @@
               selected= !user.get('receive_newsletter') ? 'selected' : null
             ) Unsubscribed to newsletter
 
-        if user.get('is_pro')
+        if user.isPremium()
           .bordered-select.bordered-select--wide
             select(name='exclude_from_indexes')
               option(

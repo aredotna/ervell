@@ -1,0 +1,14 @@
+extends ../../../components/path/templates/path_tabs
+
+block path
+  li.path__sub
+    a( href= "/#{user.get('slug')}" )
+      = user.get('username')
+
+  li.path__sub
+    span Settings
+
+block tabs
+  +tab('settings', 'general', 'General')
+  +tab('settings', 'notifications', 'Email Notifications')
+  +tab('settings', 'billing', 'Plan & Billing')

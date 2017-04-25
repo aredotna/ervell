@@ -21,9 +21,11 @@ html(class="#{colorClass} #{loggedInClass}")
 
   body(class=extraClasses)
     #modal-container
-      //- rendered by client
+      //- Rendered client-side
+
     #l-lightbox-container
-      //- rendered by client
+      //- Rendered client-side
+
     include header/templates/index
     .container
       block body
@@ -32,8 +34,10 @@ html(class="#{colorClass} #{loggedInClass}")
       include loader/templates/index
 
     #message-container
+      //- Rendered client-side
 
-    a#scroll-top(data-section="#") &uarr;
+    a#scroll-top(data-section="#")
+      | &uarr;
 
     unless user && user.id
       include ../logged_out_cta/index
@@ -42,9 +46,8 @@ html(class="#{colorClass} #{loggedInClass}")
 
     #scripts
       != sharify.script()
-      //- Add Google's jQuery
-      script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" )
-      script( src="//js.pusher.com/2.2/pusher.min.js")
-      script( src=asset('/assets/vendor.js') )
-      script( src=asset('/assets/layout.js') )
+      script( src='//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js' )
+      script( src='//js.pusher.com/2.2/pusher.min.js' )
+      script( src= asset('/assets/vendor.js') )
+      script( src= asset('/assets/layout.js') )
       block scripts

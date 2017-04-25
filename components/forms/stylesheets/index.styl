@@ -1,58 +1,40 @@
-input, input[type='text'], input[type='number'], input[type="search"], textarea
-  font-size 1em
-  font-weight normal
+input-default-placeholder()
+  color lightgray
+  font-family font_sans
+
+input-focus-placeholder()
+  color textgray
+
+input
+input[type='text']
+input[type='number']
+input[type='search']
+textarea
+  appearance none
   margin 0 0 0 0
+  padding 0 0 0 (unit / 2) // Weird
   color textgray
   background-color backgroundgray
-  border 0px solid white
-  padding 0 0 0 10px
+  border none
+  font-size s_form
   font-family font_sans
   antialiased()
-  -webkit-appearance none
-
-  ::-webkit-input-placeholder
-     color lightgray
-     font-family font_sans
-
-  :-moz-placeholder /* Firefox 18- */
-     color lightgray
-     font-family font_sans
-
-  ::-moz-placeholder /* Firefox 19+ */
-     color lightgray
-     font-family font_sans
-
-  :-ms-input-placeholder
-     color lightgray
-     font-family font_sans
+  placeholder(input-default-placeholder)
 
   &:focus
     outline none
-    font-size 1em
-    border 0px solid bordergray
+    border none
     background-color secondbackgroundgray
-    // transition(0.1s)
-
-  &:focus::-webkit-input-placeholder
-    color textgray
-
-  &:focus:-moz-placeholder /* Firefox 18- */
-    color textgray
-
-  &:focus::-moz-placeholder /* Firefox 19+ */
-    color textgray
-
-  &:focus:-ms-input-placeholder
-    color textgray
+    placeholder(input-focus-placeholder)
 
   &.input--wide
-    width: 100%
-    height 50px
+    width 100%
+    padding (unit / 1.5)
 
   &.input--relative
     position relative
     float none
-    margin 20px 0 0 0
+    margin unit 0 0 0
 
 fieldset
   margin 0.6em 0
@@ -73,6 +55,7 @@ textarea
   color textgray
 
 button
+.button
   border 0
   outline none
   background-color transparent
@@ -80,35 +63,33 @@ button
   font-size 1.5em
   font-weight bold
   font-family font_sans
+  color textgray
+  margin unit 0 0 0
+  antialiased()
 
-  &.button--border
+  &:active
+    background-color transparent
+    border-bottom 0
+
+  &--border
     border-top 1px solid textgray
 
     &:hover
       background-color transparent
       border-top 1px solid hovergray
       color hovergray
-      // transition(0.1s)
 
-  &.button--wide
+  &--wide
     width 100%
     height 45px
 
-  &.button--relative
+  &--relative
     position relative
     float left
-    margin 40px 0 0 0
+    margin (unit * 2) 0 0 0
 
-  &.button--add
+  &--add
     font-size 15px
-
-  color textgray
-  margin 20px 0 0 0
-  antialiased()
-
-  &:active
-    background-color transparent
-    border-bottom 0
 
 .button--base
   width 93%
@@ -128,7 +109,7 @@ button
 bordered-select-caret-width = 8px
 bordered-select-border-width = 2px
 .bordered-select // label
-  margin-top 20px
+  margin-top unit
   position relative
   display inline-block
   // Hides the default caret button in FF
