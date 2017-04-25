@@ -20,7 +20,7 @@ block right
 
 block metadata
   .metadata
-    if user && user.isPremium() && ((user && author.id == user.id) || author.has('metadata'))
+    if author.isPremium() && ((user && author.id == user.id) || author.has('metadata'))
       include metadata_pockets/about
     if user
       include metadata_pockets/info
