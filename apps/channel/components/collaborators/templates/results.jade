@@ -1,10 +1,10 @@
 include ../../../../../components/avatar/templates/avatar.jade
 
 for collaborator in collaborators
-  .new-collaborator__result.js-collaborator-result(data-id="#{collaborator.id}")
+  .new-collaborator__result.js-collaborator-result(data-id=collaborator.id)
     span(class="iconic new-collaborator__result__add" data-glyph="plus" title="plus" aria-hidden="true")
     .new-collaborator__result__name
-      | #{collaborator.get('username')}
+      = collaborator.get('username')
       .new-collaborator__result__email= collaborator.get('hidden_email')
     .new-collaborator__result__avatar
       +avatar(collaborator, 'thumb')
