@@ -1,4 +1,5 @@
 @require '../components/mute/index.styl'
+@require '../components/collaborators/index.styl'
 
 .channel-container
   padding-top unit
@@ -64,9 +65,6 @@
     .channel--drop-zone__instructions
       display none
 
-.collaborators__edit
-  display none
-
 .export__status
   color alert
 
@@ -102,59 +100,6 @@
 
 #metadata--info__collaborators span
   color lightgray
-
-.collaborators__edit
-  display block
-
-.collaborators__edit__result__remove
-  font-size 10px
-  margin-right 6px
-  color alert
-  cursor pointer
-
-  &:before
-    top -1px !important
-    font-size 8px !important
-
-.collaborators__edit__result
-  color hovergray
-  font-weight bold
-
-#new-collaborator__search, .new-collaborator__results
-  display block
-
-.new-collaborator__results__result
-  background #fff
-  padding 6px
-  font-weight bold
-  cursor pointer
-  width 151px
-
-.new-collaborator__results__result:hover
-  background-color secondbackgroundgray
-  color hovergray
-
-  .new-collaborator__result__add
-    color hovergray
-
-.new-collaborator__result__add
-  font-size 10px
-  margin-right 6px
-  color textgray
-
-  &:before
-    top -1px !important
-    font-size 7px !important
-
-#new-collaborator__search
-  padding 3px
-
-.new-collaborator__results
-  position absolute
-  z-index 9999
-
-.new-collaborator__add
-  display none
 
 #metadata--connections, #metadata--container
   position relative
