@@ -13,6 +13,8 @@ module.exports = class Collaborators extends Base
 
   url: -> "#{sd.API_URL}/channels/#{@channel_slug}/collaborators"
 
+  inviteUrl: -> "#{sd.API_URL}/channels/#{@channel_slug}/collaborators/invite"
+
   parse: (data) -> data.users
 
   initialize: (options) ->
@@ -29,7 +31,7 @@ module.exports = class Collaborators extends Base
       success: (response) =>
         @reset response.users
 
-  _add: (collaborator)->
+  _add: (collaborator) ->
     mediator.trigger 'collaborator:added'
     @add collaborator
     $.ajax
@@ -38,3 +40,15 @@ module.exports = class Collaborators extends Base
       data: { ids: [collaborator.id] }
       success: (response) =>
         @reset response.users
+
+  _invite: (email) ->
+    user = new User username: email
+    mediator.trigger 'collaborator:added'
+    @add user
+    $.ajax
+      type: 'POST'
+      url: @inviteUrl()
+      data: 
+        email: email
+
+    
