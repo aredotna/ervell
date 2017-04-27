@@ -1,0 +1,64 @@
+.channel-filter
+  width 100%
+  position relative
+  padding-right 20px
+
+  input.input--wide
+    padding-left 50px
+    margin 0 (unit / 2)
+
+  input:focus
+    background backgroundgray
+
+  &__status
+    position absolute
+    height 100%
+    width 50px
+    left 10px
+    top 0
+    display flex
+    align-items center
+    justify-content center
+
+    &__icon
+      svg
+        height 20px
+        width 20px
+
+        .iconic-magnifying-glass-lg
+          display none
+
+        .iconic-magnifying-glass-md
+          display none
+
+        .iconic-magnifying-glass-sm
+          display inline
+
+        & *
+          stroke lightgray
+          fill lightgray
+
+    &__close
+      font-size 31px
+      display none
+      color lightgray
+      cursor pointer
+      &:hover
+        color textgray
+
+  &--list
+    font-size 13px
+    border-bottom 1px dotted bordergray
+    .form__field__channel-filter__icon
+      padding 18px
+      svg
+        height 15px
+
+  &--grid
+    margin-bottom unit
+  
+  &.is-active
+    .channel-filter__status__close
+      display block
+    .channel-filter__status__icon
+      display none
