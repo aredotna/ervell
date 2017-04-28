@@ -1,11 +1,11 @@
 .channel-filter
   width 100%
   position relative
-  padding-right 20px
 
   input.input--wide
     padding-left 50px
     margin 0 (unit / 2)
+    background white
 
   input:focus
     background backgroundgray
@@ -49,14 +49,15 @@
   &--list
     font-size 13px
     border-bottom 1px dotted bordergray
-    .form__field__channel-filter__icon
-      padding 18px
-      svg
-        height 15px
+    input.input--wide
+      margin 0 
+    .channel-filter__status
+      left 0
 
   &--grid
+    padding-right 20px
     margin-bottom unit
-  
+
   &.is-active
     .channel-filter__status__close
       display block
