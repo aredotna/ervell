@@ -19,6 +19,17 @@
       color alert
 
 .new-collaborator
+  &__close
+    display none
+    position absolute
+    margin-left -(unit / 1.5)
+    font-size s_middle 
+    font-weight bold
+    cursor pointer
+    &.is-active
+      display block
+    &:hover
+      color hovergray
   &__search
     width 100%
     padding (unit / 4)

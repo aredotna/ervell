@@ -18,7 +18,7 @@ module.exports = class Collaborators extends Base
   parse: (data) -> data.users
 
   initialize: (options) ->
-    @channel_slug = options.channel_slug
+    @channel_slug = options?.channel_slug
     super
 
   _remove: (id) ->
