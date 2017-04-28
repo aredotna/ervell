@@ -1,9 +1,10 @@
-.form__field.form__field__channel-filter(
-  class="form__field__channel-filter--#{view_mode}"
+.form__field.channel-filter(
+  class="channel-filter--#{view_mode}"
 )
   input.input--wide(
     name='title' type='text' placeholder="Filter #{title}"
   )
-  .form__field__channel-filter__close.pointer &times;
-  .form__field__channel-filter__icon
-    include ../../../public/images/iconic/magnifying-glass.svg
+  .channel-filter__status
+    .channel-filter__status__close.js-clear-input &times;
+    .channel-filter__status__icon
+      include ../../../public/images/iconic/magnifying-glass.svg

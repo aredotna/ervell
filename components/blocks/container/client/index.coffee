@@ -8,7 +8,7 @@ module.exports = ({ $el, model, collection, mode = 'infinite', channel = false }
   if mediator.shared.current_user.isPremium() and not sd.SHARE_TOKEN
     { resultsCollection, searchBar } = new Filter
       model: model
-      $searchBar: $('.form__field__channel-filter')
+      $searchBar: $('.channel-filter')
 
   view = new BlockCollectionView
     collection: collection
