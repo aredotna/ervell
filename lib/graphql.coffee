@@ -7,7 +7,7 @@ module.exports = ({ query, variables, user }) ->
       .post METAPHYSICS_ENDPOINT
       .set 'Accept', 'application/json'
 
-    if (token = req?.user?.get?('accessToken') or req?.user?.accessToken)?
+    if (token = user?.get?('access_token') or user?.access_token)?
       post.set 'X-AUTH-TOKEN"': token
 
     post
