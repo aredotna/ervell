@@ -13,29 +13,40 @@ resultsTemplate = -> require('./templates/results.jade') arguments...
 module.exports = class NewCollaboratorView extends Backbone.View
 
   events:
-    'keyup .new-collaborator__search' : 'searchCollaborators'
+    'keyup .new-collaborator__search' : 'processQuery'
     'click .js-collaborator-result' : 'addCollaborator'
     'click .js-collaborator-invite' : 'inviteCollaborator'
+    'click .js-collaborator-close' : 'removeResults'
 
   initialize: ({ @channel, @collaborators} )->
-    # nothing
+    @_searchCollaborators = _.throttle @_searchCollaborators, 100
 
   addCollaborator: (e) ->
     @collaborators._add @results.get $(e.currentTarget).data 'id'
 
   inviteCollaborator: (e) ->
     @collaborators._invite $(e.currentTarget).data 'email'
-    
-  searchCollaborators: ->
-    query = @$input.val()
 
+  query: ->
+    @$input.val()
+
+  processQuery: ->
+    query = @query()
+    if query.length > 0
+      @getResults query
+    else
+      @removeResults()
+    
+  getResults: (query) -> 
+    @$('.new-collaborator__close').addClass 'is-active' 
     if isEmail query
       @showInvite query
     else
-      _.throttle @searchCollaborators, 100
+      @_searchCollaborators()
 
-  searchCollaborators: =>
-    query = @$input.val()
+  _searchCollaborators: =>
+    query = @query()
+
     $.get "#{sd.API_URL}/search/users/?q=#{query}&per=6", (response) =>
       # IDs of the current channel collaborators, author
       ids = @collaborators.pluck 'id'
@@ -47,29 +58,25 @@ module.exports = class NewCollaboratorView extends Backbone.View
       else
         results = response.users if not _.contains ids, response.users.id
       
-      @results = new Collaborators results
+      @results = new Collaborators results, 
+        channel_slug: @channel.get('slug')
+
       @showResults()
 
   showInvite: (email) ->
     @$('.js-collaborator-results').html inviteTemplate 
       email: email
+      query: @query()
 
   showResults: ->
     @$('.js-collaborator-results').html resultsTemplate 
       collaborators: @results.models
+      query: @query()
 
   removeResults: ->
+    @$input.val ""
+    @$('.new-collaborator__close').removeClass 'is-active' 
     @$('.js-collaborator-results').html ""
-
-  openSearch: ->
-    @$el.addClass 'is-active'
-    @$input.focus()
-    $(window).one 'tap', @clear
-
-  clear: =>
-    $(window).off 'tap', @clear
-    @$el.removeClass 'is-active'
-    @removeResults()
 
   render: ->
     @$el.html newCollaboratorTemplate()
@@ -78,6 +85,7 @@ module.exports = class NewCollaboratorView extends Backbone.View
 
   _postRender: ->
     @$input = @$('input.new-collaborator__search')
-    @openSearch()
+    @$input.focus()
+
 
   

@@ -8,9 +8,9 @@ analytics = require '../../../lib/analytics.coffee'
 module.exports = class SearchBarView extends Backbone.View
 
   events:
-    'keyup input'                             : 'onKeyUp'
-    'tap .search-clear'                       : 'onClear'
-    'tap .form__field__channel-filter__close' : 'onClear'
+    'keyup input' : 'onKeyUp'
+    'tap .search-clear' : 'onClear'
+    'tap .js-clear-input' : 'onClear'
 
   initialize: ({ @state })->
     @$input = @$('input')
