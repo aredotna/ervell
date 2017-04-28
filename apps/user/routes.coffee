@@ -6,6 +6,8 @@ ChannelBlocks = require "../../collections/channel_blocks.coffee"
 UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
 Channel = require "../../models/channel"
+graphQL = require "../../lib/graphql.coffee"
+query = require "./queries/profile.coffee"
 sd = require("sharify").data
 cache = require "../../lib/cache.coffee"
 tips = require './tips.coffee'
@@ -88,6 +90,21 @@ fetchFocus = (user, per=4)->
       focus: focus
       count: channels.length
   .catch next
+
+@profileAPI = (req, res, next) ->
+  send = 
+    query: query
+    variables:
+      id: req.params.username
+      per: 4,
+      perBlocks: 3
+      page: parseInt(req.query.page) or 1
+  
+  graphQL send
+    .then (response) ->
+      res.setHeader 'Content-Type', 'application/json'
+      res.send response
+    .catch next
 
 @followers = (req, res, next) ->
   return next() unless res.locals.author

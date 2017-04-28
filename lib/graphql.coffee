@@ -1,10 +1,12 @@
 Q = require 'bluebird-q'
 request = require 'superagent'
+{ GRAPHQL_ENDPOINT } = require '../config.coffee'
+{ some } = require 'underscore'
 
 module.exports = ({ query, variables, user }) ->
   Q.promise (resolve, reject) ->
     post = request
-      .post METAPHYSICS_ENDPOINT
+      .post GRAPHQL_ENDPOINT
       .set 'Accept', 'application/json'
 
     if (token = user?.get?('access_token') or user?.access_token)?
