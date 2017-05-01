@@ -7,6 +7,8 @@ User = require '../../../../models/user.coffee'
 { USER, CUSTOMER } = require('sharify').data
 
 module.exports = ($el) ->
+  return unless $el.length
+
   models = user: new User(USER), customer: new Customer(CUSTOMER)
 
   paymentMethods $el.find('.js-payment-methods'), models
