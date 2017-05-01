@@ -74,11 +74,11 @@ module.exports = class YourPlanView extends Backbone.View
 
     invoke @subViews, 'remove'
 
-    if @model.has('plan_id')
+    if @model.has('plan_id') and @$('.js-payment-methods').length
       paymentMethodsView = new PaymentMethodsView
+        el: @$('.js-payment-methods')
         model: @model
         collection: @model.related().sources
-        el: @$('.js-payment-methods')
 
       paymentMethodsView.render()
 
