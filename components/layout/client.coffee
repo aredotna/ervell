@@ -167,9 +167,9 @@ initShortCuts = ->
 showPremiumMessage = ->
   if (!sd.CURRENT_USER.is_premium and sd.CURRENT_USER.channel_count >= 2 )
     model = new Backbone.Model
-      id: 'premium_message'
-      title: "Help support Are.na"
-      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/settings/billing?utm_campaign=pmessage'>premium account</a>."
+      id: 'premium_monthly_message'
+      title: "Monthly premium"
+      body: "We recently added a monthly option for premium account subscriptions. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/settings/billing?utm_campaign=mmessage'>premium account</a>. Thank you."
       type: 'announcement'
     new MessageView container: $('#message-container'), model: model
 
