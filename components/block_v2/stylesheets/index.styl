@@ -1,0 +1,68 @@
+.Block
+  flex 1 1 315px
+  text-align center
+  margin 0 10px 90px 10px
+  max-width 315px
+  position relative
+
+  &__caption
+    position absolute
+    font-size s_caption
+    font-weight bold
+    color lightgray 
+    padding unit 0 (unit / 4)
+    width 100%
+    text-align center
+
+  &__inner  
+    position relative
+    height 315px
+    border 1px solid transparent
+
+    &:hover
+      border 1px solid bordergray
+
+    &--channel
+      display flex
+      border 2px solid bordergray
+      justify-content center
+      align-items center
+      h2
+        font-weight normal
+      &--closed
+        border-color closed 
+        color closed 
+        &:hover
+          border 2px solid alpha(closed, 0.6)
+          color closed
+      &--private
+        border-color private
+        color private 
+        &:hover
+          border 2px solid alpha(private, 0.6)
+          color private 
+      &--public
+        border-color public
+        color public
+        &:hover
+          border 2px solid alpha(public, 0.6)
+          color public
+    
+    &--text
+      border 1px solid bordergray
+      display block
+      padding unit
+      overflow hidden
+      font-family font_serif 
+      text-align left
+      p
+        p()
+
+    &--image, &--link, &--attachment, &--media
+      display flex
+      align-items center
+      justify-content center
+      position relative
+      img
+        max-width 100%
+        max-height 100%

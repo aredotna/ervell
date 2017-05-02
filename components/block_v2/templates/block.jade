@@ -1,0 +1,20 @@
+- extraClass = block.kind.__typename === 'Channel' ? "Block__inner--channel--" + block.kind.visibility : ''
+
+a.Block(href=block.kind.href)
+
+  .Block__inner(class="Block__inner--#{block.kind.__typename.toLowerCase()} #{extraClass}")
+    if block.kind.__typename === 'Channel'
+      h2= block.title
+    
+    if block.kind.__typename === 'Text'
+      p!= block.kind.content
+    
+    if block.kind.image_url
+      img(src=block.kind.image_url)
+
+  if block.kind.__typename !== 'Channel'
+    .Block__caption
+      .Block__caption__title= block.title
+      .Block__caption__author-date
+        #{block.updated_at}
+

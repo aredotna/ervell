@@ -1,0 +1,7 @@
+extends ../../../components/layout/index
+
+block body
+  include ./path
+  .profile
+    for channel in channels
+      include ../../../components/channel_block_group/templates/index
