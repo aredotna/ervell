@@ -12,7 +12,6 @@ module.exports = class YourPlanView extends Backbone.View
 
   events:
     'change select': 'selectPlan'
-    'click .js-update': 'updatePremium'
 
   initialize: ({ @user }) ->
     @listenTo @model, 'change:plan_id', @render
@@ -35,30 +34,6 @@ module.exports = class YourPlanView extends Backbone.View
     else
       @model.set
         plan_id: plan_id
-
-  updatePremium: (e) ->
-    e.preventDefault()
-
-    label = ($target = $(e.currentTarget)).text()
-
-    $target
-      .text 'Updating'
-
-    @model.related().subscription.save(plan_id: @model.get('plan_id'))
-      .then =>
-        location.reload()
-
-        $target
-          .text 'Thank you!'
-
-      , (error) =>
-        @els.errors
-          .show()
-          .text error.message
-
-        $target
-          .prop 'disabled', false
-          .text 'Error'
 
   render: ->
     @$el.html template
