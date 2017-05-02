@@ -94,9 +94,10 @@ fetchFocus = (user, per=4)->
 @profileAPI = (req, res, next) ->
   send = 
     query: query
+    user: req.user
     variables:
       id: req.params.username
-      per: 4,
+      per: 3,
       perBlocks: 3
       page: parseInt(req.query.page) or 1
   
@@ -104,6 +105,23 @@ fetchFocus = (user, per=4)->
     .then (response) ->
       res.setHeader 'Content-Type', 'application/json'
       res.send response
+    .catch next
+
+@profile = (req, res, next) ->
+  send = 
+    query: query
+    user: req.user
+    variables:
+      id: req.params.username
+      per: 3,
+      perBlocks: 3
+      page: 4
+  
+  graphQL send
+    .then (response) ->
+      res.render 'profile',
+        channels: response.user.contents
+        author: res.locals.author
     .catch next
 
 @followers = (req, res, next) ->
