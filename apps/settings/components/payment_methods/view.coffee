@@ -74,13 +74,13 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     $target.text 'Saving'
 
-    @model.save(default_source: $target.data('id'))
+    @model.save(default_soturce: $target.data('id'))
       .then =>
         location.reload()
 
         $target.text 'Saved!'
 
-      .catch (error) =>
+      , (error) =>
         $target.text label
 
         @els.errors
@@ -101,7 +101,7 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
         $target.text 'Removed!'
 
-      .catch (error) =>
+      , (error) =>
         $target.text label
 
         @els.errors
@@ -153,9 +153,12 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     @getToken(@card)
       .then (token) =>
-        @model.related().subscription.save
-          token: token.id
-          plan_id: @model.get('plan_id')
+        Promise $.ajax
+          method: 'POST'
+          url: "#{@model.related().subscriptions.url}/reenable"
+          data:
+            token: token.id
+            plan_id: @model.get('plan_id')
 
       .then =>
         location.reload()
