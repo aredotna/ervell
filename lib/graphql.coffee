@@ -10,7 +10,7 @@ module.exports = ({ query, variables, user }) ->
       .set 'Accept', 'application/json'
 
     if (token = user?.get?('access_token') or user?.access_token)?
-      post.set 'X-AUTH-TOKEN"': token
+      post.set 'X-AUTH-TOKEN': token
 
     post
       .send
