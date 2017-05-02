@@ -74,7 +74,7 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     $target.text 'Saving'
 
-    @model.save(default_soturce: $target.data('id'))
+    @model.save(default_source: $target.data('id'))
       .then =>
         location.reload()
 
