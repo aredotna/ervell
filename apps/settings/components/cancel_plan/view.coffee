@@ -1,3 +1,4 @@
+Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 template = -> require('./index.jade') arguments...
 
@@ -14,24 +15,27 @@ module.exports = class CancelPlanView extends Backbone.View
 
     $target.text 'Canceling'
 
-    @model.related().subscription.destroy()
-      .then =>
-        location.reload()
+    Promise $.ajax
+      method: 'POST'
+      url: "#{@model.related().subscriptions.url}/cancel"
 
-        $target.text 'Canceled'
+    .then =>
+      location.reload()
 
-      , (error) =>
-        $target.text label
+      $target.text 'Canceled'
 
+    .catch (error) =>
+      $target.text label
+
+      @els.errors
+        .show()
+        .text error.message
+
+      setTimeout () =>
         @els.errors
-          .show()
-          .text error.message
-
-        setTimeout () =>
-          @els.errors
-            .empty()
-            .hide()
-        , 2000
+          .empty()
+          .hide()
+      , 2000
 
   postRender: ->
     @els =
