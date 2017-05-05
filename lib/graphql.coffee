@@ -1,6 +1,6 @@
 Q = require 'bluebird-q'
 request = require 'superagent'
-{ GRAPHQL_ENDPOINT } = require '../config.coffee'
+{ GRAPHQL_ENDPOINT, X_APP_TOKEN } = require '../config.coffee'
 { some } = require 'underscore'
 
 module.exports = ({ query, variables, user }) ->
@@ -11,6 +11,9 @@ module.exports = ({ query, variables, user }) ->
 
     if (token = user?.get?('access_token') or user?.access_token)?
       post.set 'X-AUTH-TOKEN': token
+    
+    if X_APP_TOKEN
+      post.set 'X-APP-TOKEN': X_APP_TOKEN
 
     post
       .send
