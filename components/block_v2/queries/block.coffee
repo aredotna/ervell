@@ -9,8 +9,20 @@ module.exports =
     user {
       name
     }
+    source {
+      provider_name
+      url
+      title
+    }
     kind {
       __typename
+      ... on Channel {
+        visibility
+        href
+        counts {
+          blocks
+        }
+      }
       ... on Embed {
         image_url
         embed_html
@@ -19,7 +31,7 @@ module.exports =
         image_url
       }
       ... on Text {
-        content
+        content(format: MARKDOWN)
       }
       ... on Link {
         image_url
