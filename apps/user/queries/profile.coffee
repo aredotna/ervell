@@ -13,7 +13,10 @@ module.exports =
           ... on Channel {
             href
             visibility
-            blocks(per: $perBlocks) {
+            counts {
+              blocks
+            }
+            blocks(per: $perBlocks, sort_by: UPDATED_AT, direction: DESC) {
               ... blockThumb
             }
           }
