@@ -3,3 +3,14 @@
   border-top 1px solid bordergray
   display flex
   padding (unit * 2) 0
+  justify-content center
+
+  @media (min-width:(block_width_mar * 3) + 20) and (max-width:(block_width_mar * 4) + 20)
+    .Block:nth-of-type(1n+4)
+      display none
+  @media (min-width:(block_width_mar * 2) + 20) and (max-width:(block_width_mar * 3) + 20)
+    .Block:nth-of-type(1n+3)
+      display none
+  @media (min-width:(block_width_mar * 1) + 20) and (max-width:(block_width_mar * 2) + 20)
+    .Block:nth-of-type(1n+2)
+      display none
