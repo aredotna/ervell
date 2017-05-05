@@ -104,7 +104,7 @@ fetchFocus = (user, per=4)->
   graphQL send
     .then (response) ->
       res.setHeader 'Content-Type', 'application/json'
-      res.send response
+      res.send channels: response.user.contents
     .catch next
 
 @profile = (req, res, next) ->
@@ -115,7 +115,7 @@ fetchFocus = (user, per=4)->
       id: req.params.username
       per: 3,
       perBlocks: 3
-      page: 4
+      page: 1
   
   graphQL send
     .then (response) ->
