@@ -1,10 +1,23 @@
-- extraClass = block.kind.__typename === 'Channel' ? "Block__inner--channel--" + block.kind.visibility : ''
+- visibilityClass = block.kind.__typename === 'Channel' ? "Block__inner--channel--" + block.kind.visibility : ''
 
 a.Block(href=block.kind.href)
 
-  .Block__inner(class="Block__inner--#{block.kind.__typename.toLowerCase()} #{extraClass}")
+  .Block__inner(class="Block__inner--#{block.kind.__typename.toLowerCase()} #{visibilityClass}")
+
+    //- Hover overlay
+    .Block__inner__overlay
+      if block.kind.__typename !== 'Channel' 
+        if block.source && block.source.url
+          .Block__inner__overlay__button.js-source Source
+        .Block__inner__overlay__button.js-connect Connect →
+
+    //- Main content
     if block.kind.__typename === 'Channel'
       h2= block.title
+      .Block__inner--channel__stats
+         ul.Block__inner--channel__stats__list
+          li by #{block.user.name}
+          li #{block.kind.counts.blocks} blocks &bull; #{block.updated_at}
     
     if block.kind.__typename === 'Text'
       p!= block.kind.content
@@ -12,9 +25,11 @@ a.Block(href=block.kind.href)
     if block.kind.image_url
       img(src=block.kind.image_url)
 
+  //- Bottom caption
   if block.kind.__typename !== 'Channel'
     .Block__caption
       .Block__caption__title= block.title
-      .Block__caption__author-date
-        #{block.updated_at}
+      .Block__caption__meta
+        .Block__caption__meta__author Added by #{block.user.name}
+        .Block__caption__meta__author Updated #{block.updated_at}
 
