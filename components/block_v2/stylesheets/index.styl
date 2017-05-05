@@ -1,7 +1,7 @@
 .Block
   flex 1 1 315px
   text-align center
-  margin 0 10px 90px 10px
+  margin 20px 10px 60px 10px
   max-width 315px
   position relative
 
@@ -13,6 +13,15 @@
     padding unit 0 (unit / 4)
     width 100%
     text-align center
+    line-height 1.2
+    &__meta
+      display none
+
+  &:hover &__caption__title
+    display none
+
+  &:hover &__caption__meta
+    display block
 
   &__inner  
     position relative
@@ -21,14 +30,46 @@
 
     &:hover
       border 1px solid bordergray
+    &:hover &__overlay
+      display flex
+
+    &__overlay
+      display none
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+      justify-content center
+      align-items center
+      &__button
+        background-color rgba(255,255,255, 0.85)
+        font-size 15px
+        font-weight bold
+        color textgray
+        padding 18px 20px
+        margin 1%
+        cursor pointer
+        width 125px
+        &:hover
+          color hovergray
+          background-color rgba(255,255,255, 1)
 
     &--channel
       display flex
       border 2px solid bordergray
       justify-content center
       align-items center
+      flex-direction column
       h2
         font-weight normal
+        padding (unit * 2) 0 0
+      &__stats
+        font-size s_small 
+        line-height 1.5em
+        visibility hidden
+      &:hover &__stats
+        visibility visible
       &--closed
         border-color closed 
         color closed 
@@ -53,12 +94,12 @@
       display block
       padding unit
       overflow hidden
-      font-family font_serif 
       text-align left
       p
+        font-family font_serif 
         p()
 
-    &--image, &--link, &--attachment, &--media
+    &--image, &--link, &--attachment, &--embed
       display flex
       align-items center
       justify-content center
