@@ -101,6 +101,7 @@ fetchFocus = (user, per=4)->
       perBlocks: 3
       page: parseInt(req.query.page) or 1
       q: req.query.q
+      sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
   
   graphQL send
     .then (response) ->
@@ -109,6 +110,8 @@ fetchFocus = (user, per=4)->
     .catch next
 
 @profile = (req, res, next) ->
+  sort = req.query.sort?.toUpperCase() or 'UPDATED_AT'
+
   send = 
     query: query
     user: req.user or null
@@ -118,10 +121,14 @@ fetchFocus = (user, per=4)->
       perBlocks: 3
       page: 1
       q: req.query.q
+      sort: sort
   
   graphQL send
     .then (response) ->
       res.locals.sd.QUERY = req.query.q
+      res.locals.sd.PROFILE_CHANNELS = response.user.contents
+      res.locals.sd.SORT = sort
+
       res.render 'profile',
         channels: response.user.contents
         author: res.locals.author
