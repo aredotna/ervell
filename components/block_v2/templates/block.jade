@@ -1,9 +1,13 @@
 - visibilityClass = block.kind.__typename === 'Channel' ? "Block__inner--channel--" + block.kind.visibility : ''
 
-a.Block(href=block.kind.href)
-
-  .Block__inner(class="Block__inner--#{block.kind.__typename.toLowerCase()} #{visibilityClass}")
-
+a.Block(
+  href="/block/#{block.id}"
+  data-client=block.klass
+  data-id=block.id
+)
+  .Block__inner(
+    class="Block__inner--#{block.kind.__typename.toLowerCase()} #{visibilityClass}"
+  )
     //- Hover overlay
     .Block__inner__overlay
       if block.kind.__typename !== 'Channel' 
