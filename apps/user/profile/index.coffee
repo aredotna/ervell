@@ -1,7 +1,9 @@
 Backbone = require 'backbone'
+{ QUERY, PROFILE_CHANNELS, SORT } = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+ChannelGroupView = require '../../../components/channel_block_group/view.coffee'
+
 template = -> require('../templates/partials/_channel_groups.jade') arguments...
-{ QUERY } = require("sharify").data
 
 class ProfileView extends Backbone.View
   loading: false
@@ -29,7 +31,8 @@ class ProfileView extends Backbone.View
     $.ajax 
       data: 
         page: @page
-        q: sd.QUERY
+        q: QUERY
+        sort: SORT
       url: "/api/#{sd.USER.slug}/profile"
       success: (response) =>
         @page++
@@ -38,9 +41,21 @@ class ProfileView extends Backbone.View
         if response.channels.length
           $('.profile').append template 
             channels: response.channels
+          
+          @setUpChannelGroupViews(response.channels)
         else
           @disabled = true
+
+  setUpChannelGroupViews: (channels) ->
+    for channel in channels
+      view = new ChannelGroupView
+        channel: channel
+        el: @$(".ChannelBlockGroup[data-id=#{channel.id}]")
+      
+      view.initBlockViews()
       
 module.exports.init = ->
-  new ProfileView
+  view = new ProfileView
     el: $('.profile')
+
+  view.setUpChannelGroupViews(PROFILE_CHANNELS)
