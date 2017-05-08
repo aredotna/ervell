@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 mediator = require '../../../lib/mediator.coffee'
 template = -> require('../templates/partials/_channel_groups.jade') arguments...
+{ QUERY } = require("sharify").data
 
 class ProfileView extends Backbone.View
   loading: false
@@ -28,6 +29,7 @@ class ProfileView extends Backbone.View
     $.ajax 
       data: 
         page: @page
+        q: sd.QUERY
       url: "/api/#{sd.USER.slug}/profile"
       success: (response) =>
         @page++

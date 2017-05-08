@@ -94,12 +94,13 @@ fetchFocus = (user, per=4)->
 @profileAPI = (req, res, next) ->
   send = 
     query: query
-    user: req.user
+    user: req.user or null
     variables:
       id: req.params.username
       per: 2,
       perBlocks: 3
       page: parseInt(req.query.page) or 1
+      q: req.query.q
   
   graphQL send
     .then (response) ->
@@ -110,15 +111,17 @@ fetchFocus = (user, per=4)->
 @profile = (req, res, next) ->
   send = 
     query: query
-    user: req.user
+    user: req.user or null
     variables:
       id: req.params.username
       per: 2,
       perBlocks: 3
       page: 1
+      q: req.query.q
   
   graphQL send
     .then (response) ->
+      res.locals.sd.QUERY = req.query.q
       res.render 'profile',
         channels: response.user.contents
         author: res.locals.author
