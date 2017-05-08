@@ -4,6 +4,7 @@ module.exports =
     id
     title
     description
+    klass
     created_at(relative: true)
     updated_at(relative: true)
     user {
@@ -18,7 +19,6 @@ module.exports =
       __typename
       ... on Channel {
         visibility
-        href
         counts {
           blocks
         }
@@ -39,6 +39,7 @@ module.exports =
       }
       ... on Attachment {
         file_url
+        image_url
       }
     }
   }
