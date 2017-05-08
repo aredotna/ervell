@@ -1,8 +1,8 @@
 module.exports = 
   """
-  query user($id: ID! $per: Int, $page: Int, $perBlocks: Int) {
+  query user($id: ID! $per: Int, $page: Int, $perBlocks: Int, $q: String) {
     user(id: $id) {
-      contents(per: $per, type: "channel", page: $page) {
+      contents(per: $per, type: "channel", page: $page, q: $q) {
         title
         updated_at(relative: true)
         user {
@@ -16,7 +16,7 @@ module.exports =
             counts {
               blocks
             }
-            blocks(per: $perBlocks, sort_by: UPDATED_AT, direction: DESC) {
+            blocks(per: $perBlocks, sort_by: UPDATED_AT, direction: DESC, type: BLOCK) {
               ... blockThumb
             }
           }
