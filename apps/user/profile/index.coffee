@@ -24,7 +24,6 @@ class ProfileView extends Backbone.View
       @loadNextPage() 
 
   loadNextPage: ->
-    console.log('loadNextPage')
     @loading = true
     $.ajax 
       data: 
