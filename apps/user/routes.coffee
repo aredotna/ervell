@@ -97,7 +97,7 @@ fetchFocus = (user, per=4)->
     user: req.user
     variables:
       id: req.params.username
-      per: 3,
+      per: 2,
       perBlocks: 3
       page: parseInt(req.query.page) or 1
   
@@ -113,7 +113,7 @@ fetchFocus = (user, per=4)->
     user: req.user
     variables:
       id: req.params.username
-      per: 3,
+      per: 2,
       perBlocks: 3
       page: 1
   
