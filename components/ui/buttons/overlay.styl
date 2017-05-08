@@ -1,0 +1,30 @@
+.Button
+  &--overlay
+    font-size font-size-base
+    background-color colors-gray-translucent
+    border none
+    padding 0.5em 1em
+
+    &:hover
+      background-color white
+      color colors-gray-hover
+
+    &:active
+      border none
+
+    &[data-state='loading']
+      background-color white
+
+    &[data-state='error']
+      background-color colors-gray-translucent
+      color colors-state-alert
+      &:hover
+        background-color white
+        color colors-gray-hover
+
+    &[data-state='success']
+      background-color colors-gray-translucent
+      color colors-state-success
+      &:hover
+        background-color white
+        color colors-gray-hover

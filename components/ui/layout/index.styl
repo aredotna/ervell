@@ -1,0 +1,12 @@
+.Page
+  margin topbar_h auto
+  padding unit
+
+for i in (1..8)
+  @media (min-width: (block_width_mar * i) + unit)
+    .Page
+      center(block_width_mar * i)
+
+@media (max-width: (block_width_mar * 3) + unit)
+  .Page
+    center(90%)
