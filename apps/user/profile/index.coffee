@@ -33,9 +33,12 @@ class ProfileView extends Backbone.View
       success: (response) =>
         @page++
         @loading = false
-        
-        $('.profile').append template 
-          channels: response.channels
+
+        if response.channels.length
+          $('.profile').append template 
+            channels: response.channels
+        else
+          @disabled = true
       
 module.exports.init = ->
   new ProfileView
