@@ -26,12 +26,21 @@
       | button.Button( disabled, data-state='loading' ) Loading
       | button.Button( disabled, data-state='error' ) Error
 
+  .UI__section__component
+    h6.Type
+      | Default Button Sizes
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      for size, key in font
+        button.Button( class="Button--#{key}" )
+          | .Button--#{key}
+        br
 
   .UI__section__component
     h6.Type
       | Overlay Button
 
-    .UI__section__component__rendered.UI__section__component__rendered--spaced.UI__section__component__rendered--constrain( style='background-color: black; padding: 1em;' )
+    .UI__section__component__rendered.UI__section__component__rendered--spaced( style='background-color: black; padding: 1em;' )
       button.Button.Button--overlay Connect ➝
       button.Button.Button--overlay Source
 
@@ -54,7 +63,7 @@
     h6.Type
       | Divider Button
 
-    .UI__section__component__rendered.UI__section__component__rendered--constrain
+    .UI__section__component__rendered
       button.Button.Button--divider Create Channel
       button.Button.Button--divider( data-state='loading' ) Loading
       button.Button.Button--divider( data-state='error' ) Error
@@ -89,6 +98,16 @@
       | button.Button.Button--divider.Button--closed Follow
       | button.Button.Button--divider.Button--closed Connect ➝
 
+
+  .UI__section__component
+    h6.Type
+      | Default Button Sizes
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      for size, key in font
+        button.Button.Button--divider( class="Button--#{key}" )
+          | .Button--#{key}
+        br
 
   .UI__section__component
     h6.Type
