@@ -1,0 +1,79 @@
+.UI__section
+  h3.Type
+    | Forms
+
+  .UI__section__component
+    h6.Type
+      | Input
+
+    .UI__section__component__rendered.UI__section__component__rendered--constrain
+      input.Input( placeholder='First Name' )
+      input.Input( placeholder='First Name', data-state='error' )
+      input.Input( placeholder='First Name', disabled )
+
+    pre.Type
+      | input.Input( placeholder='First Name' )
+      | input.Input( placeholder='First Name', data-state='error' )
+      | input.Input( placeholder='First Name', disabled )
+
+  .UI__section__component
+    h6.Type
+      | Textarea
+
+    .UI__section__component__rendered.UI__section__component__rendered--constrain
+      textarea.Input( placeholder='Add new comment' )
+      textarea.Input( placeholder='Add new comment', data-state='error' )
+      textarea.Input( placeholder='Add new comment', disabled )
+
+    pre.Type
+      | textarea.Input( placeholder='Add new comment' )
+      | textarea.Input( placeholder='Add new comment', data-state='error' )
+      | textarea.Input( placeholder='Add new comment', disabled )
+
+  .UI__section__component
+    h6.Type
+      | Select
+
+    .UI__section__component__rendered.UI__section__component__rendered--constrain
+      .Select
+        select
+          option First Option
+          option Second Option
+          option Third Option
+
+    pre.Type
+      | .Select
+      |   select
+      |     option First Option
+      |     option Second Option
+      |     option Third Option
+
+  .UI__section__component
+    h6.Type
+      | Example Form
+
+    .UI__section__component__rendered.UI__section__component__rendered--constrain
+      form
+        .Fieldset
+          label.Label Personal Information
+          input.Input( placeholder='First Name' )
+          input.Input( placeholder='Last Name' )
+          input.Input( placeholder='Email', type='email' )
+
+        .Fieldset
+          label.Label Change Your Password
+          input.Input( placeholder='Password', type='password' )
+          input.Input( placeholder='Password Confirmation', type='password' )
+
+        .Fieldset
+          label.Label
+            | Exclude my content from search engines?
+
+          .Select.Select--block
+            select
+              option Yes
+              option No
+
+        .Fieldset
+          button.Button.Button--divider( type='submit' )
+            | Save

@@ -27,6 +27,7 @@ rotate_z              = 7001
 // fonts
 font_sans             = 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif
 font_serif            = 'Times New Roman', serif
+font_mono             = Menlo, Monaco, 'Bitstream Vera Sans Mono', Consolas, Courier, monospace
 
 // font sizes
 s_tiny                = 10px
@@ -146,3 +147,15 @@ collapsed-margins($a, $b = auto)
       margin-left: 0
     &:last-child
       margin-right: 0
+
+candy-striped(color)
+  background-image linear-gradient(
+    45deg,
+    rgba(color, 0.5) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(color, 0.5) 50%,
+    rgba(color, 0.5) 75%,
+    transparent 75%,
+    transparent
+  )

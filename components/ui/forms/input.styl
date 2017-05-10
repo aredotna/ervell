@@ -1,0 +1,60 @@
+.Input
+  // Reset any styles that might be inherited from the base object
+  // This property can be removed once the existing UI is retired
+  all initial
+  box-sizing border-box
+
+.Input
+  appearance none
+  antialiased()
+
+Input--default-placeholder()
+  color colors-gray-light
+  font-family font_sans
+
+Input--focus-placeholder()
+  color colors-gray-text
+
+Input--error-placeholder()
+  color colors-state-alert
+
+input.Input
+input[type='text'].Input
+input[type='number'].Input
+input[type='search'].Input
+textarea.Input
+  display block
+  width 100%
+  appearance none
+  padding input-padding
+  border-radius 2px
+  color colors-gray-text
+  background-color colors-gray-background
+  font-size font-size-base
+  font-family font_sans
+  placeholder(Input--default-placeholder)
+
+  & + &
+  & + .Button
+    collapsed-margins(unit / 2)
+
+  &:hover
+    background-color colors-gray-secondary
+
+  &:focus
+    outline none
+    background-color colors-gray-secondary
+    placeholder(Input--focus-placeholder)
+
+  &:disabled
+    opacity 0.5
+
+  &[data-state='error']
+    background-color lighten(colors-state-alert, 90%)
+    placeholder(Input--error-placeholder)
+    color colors-state-alert
+    &:focus
+      background-color lighten(colors-state-alert, 90%)
+      placeholder(Input--error-placeholder)
+    &:hover
+      background-color darken(lighten(colors-state-alert, 90%), 2%)

@@ -1,0 +1,15 @@
+.UI__section
+  h3.Type
+    | Colors
+
+  .UI__section__component
+    for set, namespace in colors
+      h6.Type
+        = namespace
+
+      .UISwatches
+        for hex, name in set
+          .UISwatch
+            .UISwatch__color( style="background-color: #{hex};" )
+            .UISwatch__label
+              | colors-#{namespace}-#{name}: #{hex}

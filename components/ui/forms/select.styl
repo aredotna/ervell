@@ -1,0 +1,54 @@
+.Select
+  // Reset any styles that might be inherited from the base object
+  // This property can be removed once the existing UI is retired
+  all initial
+  box-sizing border-box
+
+  position relative
+  display inline-block
+
+  area = 2em
+
+  // Caret
+  &:after
+    display inline-block
+    content ''
+    width 0
+    height 0
+    position absolute
+    top 50%
+    right (area / 2)
+    size = 0.5em
+    transform translate((size / 2), -50%)
+    border-top size solid colors-gray-text
+    border-right (size / 2) solid transparent
+    border-left (size / 2) solid transparent
+    pointer-events none
+
+  > select
+    appearance none
+    antialiased()
+    display inline-block
+    margin 0
+    padding input-v-padding (area + input-h-padding) input-v-padding input-h-padding
+    box-shadow none
+    border none
+    border-radius 2px
+    color colors-gray-text
+    background-color colors-gray-background
+    font-size font-size-base
+    font-family font_sans
+
+    &:focus
+      outline none
+      background-color colors-gray-secondary
+
+    &:hover
+      background-color colors-gray-secondary
+
+  &--block
+    display block
+
+    > select
+      display block
+      width 100%

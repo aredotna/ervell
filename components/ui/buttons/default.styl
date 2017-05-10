@@ -1,0 +1,66 @@
+.Button
+  // Reset any styles that might be inherited from the base object
+  // This property can be removed once the existing UI is retired
+  all initial
+  box-sizing border-box
+
+  antialiased()
+  display inline-block
+  padding 0.5em 1em 0.6em 1em // Buttom is padded slightly more to visually seat text
+  text-align center
+  font-family font_sans
+  font-size font-size-lg
+  font-weight bold
+  line-height 1
+  background-color transparent
+  color colors-gray-text
+  border 1px solid lighten(@color, 75%)
+  border-radius 2px
+  cursor pointer
+  user-select none
+
+  // States
+  // ------
+  &:hover
+    background-color colors-gray-hover
+    border-color @background-color
+    color white
+
+  &:active
+    // Annoyingly: have to set the border width/style/color here
+    // because the default is overwritten in the old stylesheets using `border-bottom: 0`
+    border 1px solid colors-gray-hover
+    opacity 0.75
+
+  &:disabled
+    opacity 0.5
+    pointer-events none
+
+  &[data-state='error']
+    color colors-state-alert
+    border-color lighten(@color, 75%)
+    &:hover
+      background-color @color
+      color white
+
+  &[data-state='success']
+    color colors-state-success
+    border-color lighten(@color, 75%)
+    &:hover
+      background-color @color
+      color white
+
+  &[data-state='loading']
+    position relative
+    pointer-events none
+    color transparent
+    &:after
+      display block
+      content ''
+      position absolute
+      top 50%
+      left 50%
+      width 2em
+      height 2px
+      background-color textgray
+      transform translate(-50%, -50%)
