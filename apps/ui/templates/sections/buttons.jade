@@ -7,27 +7,23 @@
       | Default Button
 
     .UI__section__component__rendered.UI__section__component__rendered--spaced
-      button.Button Accept
+      button.Button Save
       button.Button( data-state='loading' ) Loading
-      button.Button( data-state='success' ) Success
       button.Button( data-state='error' ) Error
 
       br
 
-      button.Button( disabled ) Accept
+      button.Button( disabled ) Save
       button.Button( disabled, data-state='loading' ) Loading
-      button.Button( disabled, data-state='success' ) Success
       button.Button( disabled, data-state='error' ) Error
 
     pre.Type
-      | button.Button Accept
+      | button.Button Save
       | button.Button( data-state='loading' ) Loading
-      | button.Button( data-state='success' ) Success
       | button.Button( data-state='error' ) Error
       | 
-      | button.Button( disabled ) Accept
+      | button.Button( disabled ) Save
       | button.Button( disabled, data-state='loading' ) Loading
-      | button.Button( disabled, data-state='success' ) Success
       | button.Button( disabled, data-state='error' ) Error
 
 
@@ -46,18 +42,12 @@
 
       br
 
-      button.Button.Button--overlay( data-state='success' ) Connected
-      button.Button.Button--overlay Source
-
-      br
-
       button.Button.Button--overlay( data-state='error' ) Error
       button.Button.Button--overlay Source
 
     pre.Type
       | button.Button.Button--overlay Connect ➝
       | button.Button.Button--overlay( data-state='loading' ) Connect ➝
-      | button.Button.Button--overlay( data-state='success' ) Connected
       | button.Button.Button--overlay( data-state='error' ) Error
 
   .UI__section__component
@@ -67,7 +57,6 @@
     .UI__section__component__rendered.UI__section__component__rendered--constrain
       button.Button.Button--divider Create Channel
       button.Button.Button--divider( data-state='loading' ) Loading
-      button.Button.Button--divider( data-state='success' ) Created
       button.Button.Button--divider( data-state='error' ) Error
 
       br
@@ -86,7 +75,7 @@
         button.Button.Button--divider.Button--closed( style='width: 50%' ) Connect ➝
 
     pre.Type
-      | button.Button.Button--divider Accept
+      | button.Button.Button--divider Save
       | button.Button.Button--divider( data-state='loading' ) Loading
       | button.Button.Button--divider( data-state='success' ) Success
       | button.Button.Button--divider( data-state='error' ) Error
