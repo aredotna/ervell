@@ -77,3 +77,11 @@
         .Fieldset
           button.Button.Button--divider( type='submit' )
             | Save
+
+  .UI__section__component
+    h6.Type
+      | Default Input Sizes
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      for size, key in font
+        input.Input( class="Input--#{key}", placeholder=".Input--#{key}" )
