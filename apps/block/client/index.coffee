@@ -7,7 +7,7 @@ mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
 CurrentUser = require '../../../models/current_user.coffee'
 Blocks = require '../../../collections/blocks.coffee'
-IconicJS = require '../../../components/iconic/client/iconic.min.js'
+IconicJS = -> require '../../../components/iconic/client/iconic.min.js'
 initComments = require '../../../components/comments/index.coffee'
 ConnectView = require '../../../components/connect/client/connect_view.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
@@ -149,7 +149,9 @@ module.exports.FullBlockView = class FullBlockView extends Backbone.View
 
   postRender: ->
     initComments @model, @$('#tab-comments')
-    _.defer => IconicJS().inject('img.iconic')
+
+    if @$('.iconic').length
+      _.defer => IconicJS()().inject('img.iconic') # ლ(｡-﹏-｡ ლ)
 
     for attribute, kind of @editableAttributes
       new EditableAttributeView
