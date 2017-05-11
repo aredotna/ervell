@@ -6,9 +6,9 @@ module.exports = class BlockView extends LegacyBlockView
   subViews: []
 
   events: extend {}, LegacyBlockView::events,
-    'click .js-connect-button': 'loadConnectView'
+    'click .js-connect': 'connect'
 
-  loadConnectView: (e) ->
+  connect: (e) ->
     e.preventDefault()
 
     $el = @$('.block-connect-container')
