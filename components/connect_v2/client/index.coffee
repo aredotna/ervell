@@ -1,22 +1,30 @@
+ConnectView = require './view.coffee'
+
+{ last } = require 'underscore'
+{ API_URL, CURRENT_USER } = require('sharify').data
+Block = require '../../../models/block.coffee'
+Channels = require '../../../collections/connection_blocks.coffee'
+mediator = require '../../../lib/mediator.coffee'
+
 module.exports = ($el) ->
-  $input = $el.find 'input'
-  $channels = $el.find 'a'
+  block = new Block
+  channels = new Channels [], user_slug: CURRENT_USER.slug
 
-  $input
-    .on 'input', (e) ->
-      e.preventDefault()
+  replenish = if (recentConnections = mediator.shared.recent_connections)?
+    recentConnections
+      .fetch().then (response) =>
+        channels.add(last(response, 3).reverse())
 
-      $el.attr 'data-state', if $input.val() isnt '' then 'active' else 'inactive'
+  else
+    Promise.resolve()
 
-      console.log $input.val()
+  replenish.then ->
+    channels.fetch(data: per: 3 - channels.length) if channels.length < 0
 
-  $channels
-    .on 'click', (e) ->
-      e.preventDefault()
+  view = new ConnectView
+    el: $el
+    model: block
+    collection: channels
 
-      $(this).attr 'data-selected'
-
-      selected = $(this).attr('data-selected') is 'true'
-      toggled = not selected
-
-      $(this).attr 'data-selected', toggled
+  view.render()
+  view

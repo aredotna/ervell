@@ -1,2 +1,21 @@
-@require './default'
-@require './active'
+.Connect
+  position relative
+  font-size font-size-sm
+
+  &[data-state='active']
+    border 5px solid colors-gray-border
+    border-radius 0.25em
+
+    .Connect
+      &__header
+        display none
+      &__search
+      &__results
+        border none
+      &__results
+        margin-top -1px
+
+@require '../components/search/index'
+@require '../components/header/index'
+@require '../components/results/index'
+@require '../components/item/index'

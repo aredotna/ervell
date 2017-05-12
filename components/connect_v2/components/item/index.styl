@@ -1,0 +1,25 @@
+.Connect__item
+  > a
+    position relative
+    display block
+    line-height 1
+    padding input-padding
+    border 1px solid colors-gray-light
+    margin 0 0 -1px 0
+
+    &:hover
+      border 1px solid colors-gray-text
+      z-index 1
+
+    &[data-selected]
+      &:after
+        display block
+        content '✔'
+        position absolute
+        top 50%
+        right 1em
+        transform translateY(-50%)
+        color colors-gray-light
+
+      > span
+        opacity 0.5
