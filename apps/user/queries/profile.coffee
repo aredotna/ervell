@@ -9,10 +9,10 @@ module.exports =
           name
         }
         id
+        href
         kind {
           __typename
           ... on Channel {
-            href
             visibility
             counts {
               blocks

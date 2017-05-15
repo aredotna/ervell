@@ -10,6 +10,7 @@ module.exports =
     user {
       name
     }
+    href
     source {
       provider_name
       url
@@ -38,6 +39,7 @@ module.exports =
         source_url
       }
       ... on Attachment {
+        file_extension
         file_url
         image_url
       }
