@@ -12,7 +12,6 @@ module.exports = class YourPlanView extends Backbone.View
 
   events:
     'change select': 'selectPlan'
-    'click .js-update': 'updatePremium'
 
   initialize: ({ @user }) ->
     @listenTo @model, 'change:plan_id', @render
@@ -36,30 +35,6 @@ module.exports = class YourPlanView extends Backbone.View
       @model.set
         plan_id: plan_id
 
-  updatePremium: (e) ->
-    e.preventDefault()
-
-    label = ($target = $(e.currentTarget)).text()
-
-    $target
-      .text 'Updating'
-
-    @model.related().subscription.save(plan_id: @model.get('plan_id'))
-      .then =>
-        location.reload()
-
-        $target
-          .text 'Thank you!'
-
-      , (error) =>
-        @els.errors
-          .show()
-          .text error.message
-
-        $target
-          .prop 'disabled', false
-          .text 'Error'
-
   render: ->
     @$el.html template
       customer: @model
@@ -74,11 +49,11 @@ module.exports = class YourPlanView extends Backbone.View
 
     invoke @subViews, 'remove'
 
-    if @model.has('plan_id')
+    if @model.has('plan_id') and @$('.js-payment-methods').length
       paymentMethodsView = new PaymentMethodsView
+        el: @$('.js-payment-methods')
         model: @model
         collection: @model.related().sources
-        el: @$('.js-payment-methods')
 
       paymentMethodsView.render()
 
