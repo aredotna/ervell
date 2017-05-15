@@ -21,6 +21,10 @@ tips = require './tips.coffee'
       res.locals.sd.USER = author.toJSON()
     complete: -> next()
 
+
+isAdmin = (user) ->
+  _.find sd.ADMIN_SLUGS?.split(','), (slug) -> slug is user?.get('slug')
+
 showTips = (req, res) ->
   (req.user?.id is res.locals.author.id and req.user?.get('show_tour') isnt false)
 
@@ -43,6 +47,9 @@ fetchFocus = (user, per=4)->
   dfd.promise
 
 @user = (req, res, next) ->  
+  if isAdmin req.user
+    return res.redirect 302, "/#{req.params.username}/profile"
+
   return next() unless res.locals.author
 
   blocks = new UserBlocks null,
