@@ -1,7 +1,7 @@
 - visibilityClass = block.kind.__typename === 'Channel' ? "Block__inner--channel--" + block.kind.visibility : ''
 
 a.Block(
-  href="/block/#{block.id}"
+  href=block.href
   data-client=block.klass
   data-id=block.id
 )
@@ -17,7 +17,7 @@ a.Block(
 
     //- Main content
     if block.kind.__typename === 'Channel'
-      h2= block.title
+      h2!= block.title
       .Block__inner--channel__stats
          ul.Block__inner--channel__stats__list
           li by #{block.user.name}
@@ -25,8 +25,14 @@ a.Block(
     
     if block.kind.__typename === 'Text'
       p!= block.kind.content
-    
-    if block.kind.image_url
+
+    if block.kind.file_extension && block.kind.file_extension !== 'pdf'
+      img(
+        data-src="#{sd.IMAGE_PATH}iconic/file.svg"
+        data-file-extension=block.kind.file_extension
+        class="iconic iconic-lg"
+      )
+    else if block.kind.image_url
       img(src=block.kind.image_url)
 
   //- Bottom caption
