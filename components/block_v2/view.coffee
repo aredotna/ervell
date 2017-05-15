@@ -12,7 +12,7 @@ module.exports = class BlockView extends Backbone.View
   openSource: (e) ->
     analytics.track.click "Block source opened"
 
-    url = @block.source.url
+    url = @block.source.url or @block.kind.file_url
 
     e.preventDefault()
     e.stopImmediatePropagation()

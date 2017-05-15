@@ -11,7 +11,7 @@ a.Block(
     //- Hover overlay
     .Block__inner__overlay
       if block.kind.__typename !== 'Channel' 
-        if block.source && block.source.url
+        if (block.source && block.source.url) || block.kind.file_url
           .Block__inner__overlay__button.js-source Source
         .Block__inner__overlay__button.js-connect Connect →
 
