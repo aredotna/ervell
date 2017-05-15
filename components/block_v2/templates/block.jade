@@ -8,6 +8,10 @@ a.Block(
   .Block__inner(
     class="Block__inner--#{block.kind.__typename.toLowerCase()} #{visibilityClass}"
   )
+    //- Connect interface
+    .Block__inner__connect
+      //- Rendered client-side
+
     //- Hover overlay
     .Block__inner__overlay
       if block.kind.__typename !== 'Channel' 
@@ -23,9 +27,11 @@ a.Block(
           li by #{block.user.name}
           li #{block.kind.counts.blocks} blocks &bull; #{block.updated_at}
     
+    //- Text content
     if block.kind.__typename === 'Text'
       p!= block.kind.content
 
+    //- Image / Attachment content
     if block.kind.file_extension && block.kind.file_extension !== 'pdf'
       img(
         data-src="#{sd.IMAGE_PATH}iconic/file.svg"
