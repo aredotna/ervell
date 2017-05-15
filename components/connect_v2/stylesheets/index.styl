@@ -1,21 +1,29 @@
+connect-outer-border-size = 5px
+
 .Connect
   position relative
-  font-size font-size-sm
+  font-size font-size-xs
 
   &[data-state='active']
-    border 5px solid colors-gray-border
+    border connect-outer-border-size solid colors-gray-border
     border-radius 0.25em
 
     .Connect
       &__header
         display none
+
+      &__create
+        display block
+
       &__search
       &__results
         border none
+
       &__results
         margin-top -1px
 
 @require '../components/search/index'
 @require '../components/header/index'
 @require '../components/results/index'
+@require '../components/create/index'
 @require '../components/item/index'

@@ -1,4 +1,4 @@
-{ invoke } = require 'underscore'
+{ invoke, compact } = require 'underscore'
 Backbone = require 'backbone'
 ConnectSearchView = require '../components/search/view.coffee'
 ConnectHeaderView = require '../components/header/view.coffee'
@@ -11,27 +11,30 @@ module.exports = class ConnectView extends Backbone.View
     'data-state': 'inactive'
 
   initialize: ->
+    @state = new Backbone.Model active: false, query: ''
+
+    options = model: @model, collection: @collection, state: @state
+
     @subViews = [
-      @searchView = new ConnectSearchView collection: @collection
-      @headerView = new ConnectHeaderView
-      @resultsView = new ConnectResultsView collection: @collection
+      @searchView = new ConnectSearchView options
+      @headerView = new ConnectHeaderView options
+      @resultsView = new ConnectResultsView options
     ]
 
-    @listenTo @searchView, 'reset', @deactivate
-    @listenTo @searchView, 'query', @activate
+    @listenTo @state, 'change:active', @toggle
 
-  activate: ->
-    @$el.attr 'data-state', 'active'
-
-  deactivate: ->
-    @$el.attr 'data-state', 'inactive'
+  toggle: (_state, active) ->
+    @$el.attr 'data-state', if active
+      'active'
+    else
+      'inactive'
 
   render: ->
-    @$el.html [
+    @$el.html compact([
       @searchView.render().$el
       @headerView.render().$el
       @resultsView.render().$el
-    ]
+    ])
 
     this
 

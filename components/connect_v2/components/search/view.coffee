@@ -1,10 +1,9 @@
 { throttle } = require 'underscore'
 Backbone = require 'backbone'
+config = require '../../config.coffee'
 
 module.exports = class ConnectSearchView extends Backbone.View
   tagName: 'input'
-
-  amount: 3
 
   className: 'Connect__search Input'
 
@@ -16,29 +15,41 @@ module.exports = class ConnectSearchView extends Backbone.View
     input: ->
       @search arguments...
 
-  initialize: ->
+  initialize: ({ @state }) ->
+    @__collection__ = @collection.toJSON()
+
     @search = throttle @perform, 250
+
+  restore: ->
+    @collection.reset @__collection__
 
   perform: (e) ->
     e.preventDefault()
 
     query = $(e.currentTarget).val().trim()
 
-    return if query is @query
+    return if query is @state.get 'query'
 
-    @query = query
+    @state.set query: query
 
-    return @trigger 'reset' if @query.length < 2
+    if query.length < 1
+      @restore() if @collection.length is 0
+      @state.set active: false
 
-    @trigger 'query', @query
+      return
+
+    else
+      @state.set active: true
 
     @request?.abort()
-    @request = @collection.fetch
-      data:
-        q: @query
-        per: @amount
-        show_open: true
-        filter: type: 'channel'
+
+    @request = @collection
+      .fetch
+        data:
+          q: query
+          per: config.amount
+          show_open: true
+          filter: type: 'channel'
 
   render: ->
     this
