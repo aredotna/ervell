@@ -1,0 +1,9 @@
+extends ../../../components/layout/index
+
+block body
+  include ./path
+  .profile
+    include ./partials/_channel_groups.jade
+
+block scripts
+  script( src=asset('/assets/profile.js') )
