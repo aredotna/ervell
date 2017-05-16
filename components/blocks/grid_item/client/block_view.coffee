@@ -2,7 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
-ConnectView = require '../../../connect/client/connect_view.coffee'
+BlockCollectionConnectIntegrationView = require '../../../connect_v2/integration/block_collection/view.coffee'
 IconicJS = require '../../../iconic/client/iconic.min.js'
 FollowButtonView = require '../../../follow_button/client/follow_button_view.coffee'
 User = require '../../../../models/user.coffee'
@@ -58,7 +58,7 @@ module.exports = class BlockView extends Backbone.View
       @$el.addClass 'is-deselected'
     else
       @$el.removeClass 'is-deselected'
-  
+
   onMouseOver: ->
     unless @channel or @model.get('base_class') is 'Block' or sd.CURRENT_PATH isnt "/explore"
       mediator.shared.state.set hovered_channel: @model.id
@@ -67,20 +67,20 @@ module.exports = class BlockView extends Backbone.View
     unless @channel and @model.get('base_class') is 'Channel' or sd.CURRENT_PATH isnt "/explore"
       mediator.shared.state.unset 'hovered_channel'
 
-  loadConnectView: (e)=>
+  loadConnectView: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    $connect_container = @$('.grid__block__connect-container')
-    $connect_container.addClass 'is-active'
-    @$('.grid__block__inner').addClass 'is-active'
+    $target = @$('.grid__block__connect-container')
 
-    $connect_link = @$('.grid__block__link')
-    $connect_link.attr('data-disabled', 'true')
+    view = new BlockCollectionConnectIntegrationView model: @model
 
-    new ConnectView
-      el: $connect_container
-      block: @model
+    view.once 'remove', ->
+      $target.removeClass 'is-active'
+
+    $target
+      .addClass 'is-active'
+      .html view.render().$el
 
   openLink: (e)->
     analytics.track.click "Block source opened"

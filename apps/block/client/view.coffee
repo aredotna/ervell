@@ -1,6 +1,6 @@
-{ extend, defer, invoke } = require 'underscore'
+{ extend, invoke } = require 'underscore'
 LegacyBlockView = require './legacy_view.coffee'
-ConnectView = require '../../../components/connect/client/connect_view.coffee'
+InlineConnectIntegrationView = require '../../../components/connect_v2/integration/inline/view.coffee'
 
 module.exports = class BlockView extends LegacyBlockView
   subViews: []
@@ -11,19 +11,18 @@ module.exports = class BlockView extends LegacyBlockView
   connect: (e) ->
     e.preventDefault()
 
-    $el = @$('.block-connect-container')
-    $el.addClass 'is-active'
+    $target = $(e.currentTarget)
 
-    view = new ConnectView
-      el: $el
-      block: @model
+    view = new InlineConnectIntegrationView model: @model
+    view.once 'remove', -> $target.show()
+
+    $target
+      .hide()
+      .after view.render().$el
 
     @subViews.push view
 
-    defer =>
-      $('.new-connection__done-button').get(0).scrollIntoView()
-
   remove: ->
     invoke @subViews, 'remove'
-
     super
+
