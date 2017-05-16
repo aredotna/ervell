@@ -1,6 +1,6 @@
 // Base styles
+@require '../components/ui/variables'
 @require '../components/layout/index'
-@require '../components/ui/index'
 
 // App styles
 @require '../apps/block/stylesheets/index'
@@ -21,7 +21,8 @@
 @require '../apps/settings/stylesheets/index'
 @require '../apps/ui/stylesheets/index'
 
-// Component styles
+// Component styles (in order of specificity)
+@require '../components/ui/index'
 @require '../components/auth/stylesheets/index'
 @require '../components/feed/stylesheets/feed'
 @require '../components/block_collection/stylesheets/block_collection'
