@@ -14,43 +14,50 @@ module.exports = class ConnectItemView extends Backbone.View
   initialize: ({ @connectable }) ->
     @queue = new AsyncSerialQueue
 
-    @listenTo @model, 'change:selected', @render
-    @listenTo @model, 'change:selected', @perform
+    @key = "selected:#{@connectable.get 'base_class'}:#{@connectable.id}"
+
+    @listenTo @model, "change:#{@key}", @render
+    @listenTo @model, "change:#{@key}", @perform
 
   toggle: (e) ->
     e.preventDefault()
-    @model.set 'selected', not @model.get('selected')
+    e.stopPropagation()
 
-  connect: (channel) ->
-    mediator.shared.recent_connections.shove channel
+    @model.set @key, not @model.get(@key)
 
-    mediator.trigger "connection:added:#{@connectable.id}", channel
-    mediator.trigger 'connection:added', channel
+  connect: ->
+    @queue
+      .enqueue =>
+        Promise $.ajax
+          type: 'POST'
+          url: "#{API_URL}/channels/#{@model.id}/connections"
+          data:
+            connectable_id: @connectable.id
+            connectable_type: @connectable.get('base_class')
 
-    @queue.enqueue () =>
-      Promise $.ajax
-        type: 'POST'
-        url: "#{API_URL}/channels/#{channel.id}/connections"
-        data:
-          connectable_id: @connectable.id
-          connectable_type: @connectable.get('base_class')
+        .then =>
+          mediator.shared.recent_connections.shove @model
+          mediator.trigger "connection:added:#{@connectable.id}", @model
+          mediator.trigger 'connection:added', @model
 
-  disconnect: (channel) ->
-    mediator.shared.recent_connections.unshove channel
+  disconnect: ->
+    @queue
+      .enqueue =>
+        Promise $.ajax
+          type: 'DELETE'
+          url: "#{API_URL}/channels/#{@model.id}/blocks/#{@connectable.id}"
 
-    mediator.trigger 'connection:removed', channel
-    mediator.trigger "connection:removed:#{@connectable.id}", channel
+        .then =>
+          mediator.shared.recent_connections.unshove @model
+          mediator.trigger 'connection:removed', @model
+          mediator.trigger "connection:removed:#{@connectable.id}", @model
 
-    @queue.enqueue () =>
-      Promise $.ajax
-        type: 'DELETE'
-        url: "#{API_URL}/channels/#{channel.id}/blocks/#{@connectable.id}"
-
-  perform: (channel, shouldConnect) ->
-    if shouldConnect then @connect(channel) else @disconnect(channel)
+  perform: (_channel, shouldConnect) ->
+    if shouldConnect then @connect() else @disconnect()
 
   render: ->
     @$el.html template
+      key: @key
       channel: @model.toJSON()
 
     this

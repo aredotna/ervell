@@ -15,6 +15,7 @@ module.exports = class ConnectCreateView extends Backbone.View
 
   create: (e) ->
     e.preventDefault()
+    e.stopPropagation()
 
     @$el.text 'Creating'
 
@@ -27,28 +28,30 @@ module.exports = class ConnectCreateView extends Backbone.View
     channel.url = "#{API_URL}/channels"
 
     Promise(channel.save())
-      .then (x) =>
+      .then =>
         @$el.text 'Connecting'
         @connect channel
+
       .then =>
         @render()
-        channel.set('selected', true)
-        @collection.add(channel)
+        channel.set "selected:#{@connectable.get 'base_class'}:#{@connectable.id}", true
+        @collection.add channel
+
       .catch =>
         @$el.text 'Error'
 
   connect: (channel) ->
-    mediator.shared.recent_connections.shove channel
-
-    mediator.trigger "connection:added:#{@connectable.id}", channel
-    mediator.trigger 'connection:added', channel
-
     Promise $.ajax
       type: 'POST'
       url: "#{API_URL}/channels/#{channel.id}/connections"
       data:
         connectable_id: @connectable.id
         connectable_type: @connectable.get('base_class')
+
+    .then =>
+      mediator.shared.recent_connections.shove channel
+      mediator.trigger "connection:added:#{@connectable.id}", channel
+      mediator.trigger 'connection:added', channel
 
   render: ->
     @$el.text "+ New Private Channel “#{@state.get('query')}”"

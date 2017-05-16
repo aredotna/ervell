@@ -8,10 +8,14 @@ config = require '../../config.coffee'
 module.exports = class ConnectResultsView extends Backbone.View
   className: 'Connect__results'
 
+  subViews: []
+
   initialize: ({ @state }) ->
     @listenTo @collection, 'sync add reset', @render
 
   render: ->
+    invoke @subViews, 'remove'
+
     subViews = @collection.first(config.amount)
       .map (model) =>
         new ConnectItemView
@@ -25,9 +29,8 @@ module.exports = class ConnectResultsView extends Backbone.View
 
     @subViews = [connectCreateView].concat subViews
 
-    @$el.empty()
-      .html @subViews.map (view) ->
-        view.render().$el
+    @$el.html @subViews.map (view) ->
+      view.render().$el
 
     this
 
