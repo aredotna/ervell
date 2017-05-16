@@ -1,14 +1,10 @@
-ConnectView = require './view.coffee'
+{ CURRENT_USER } = require('sharify').data
 config = require '../config.coffee'
-
-{ last } = require 'underscore'
-{ API_URL, CURRENT_USER } = require('sharify').data
-Block = require '../../../models/block.coffee'
+ConnectView = require './view.coffee'
 Channels = require '../../../collections/connection_blocks.coffee'
 mediator = require '../../../lib/mediator.coffee'
 
-module.exports = ($el) ->
-  block = new Block id: 1, base_class: 'Block'
+module.exports = (block) ->
   channels = new Channels [], user_slug: CURRENT_USER.slug
 
   replenish = if (recentConnections = mediator.shared.recent_connections)?
@@ -18,13 +14,14 @@ module.exports = ($el) ->
   else
     Promise.resolve()
 
-  replenish.then ->
-    channels.fetch(data: per: config.amount - channels.length) unless channels.length
+  replenish
+    .then ->
+      if channels.length < config.amount
+        channels.fetch(data: per: config.amount - channels.length)
+    .then (connections) ->
+      channels.each (channel) ->
+        mediator.shared.recent_connections.shove
 
-  view = new ConnectView
-    el: $el
+  new ConnectView
     model: block
     collection: channels
-
-  view.render()
-  view
