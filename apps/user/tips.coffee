@@ -17,20 +17,20 @@ module.exports = [
     class: 'Tip',
     base_class: 'Block',
     content: '<h1>Find existing contacts via Twitter</h1>',
-    sub_content: '<a href="/tools/find-friends">Connect Twitter account &rarr;</a>'
+    sub_content: '<a href="/tools/find-friends">Connect Twitter account ➝</a>'
   },
   {
     id: 'explore_message',
     class: 'Tip',
     base_class: 'Block',
     content: '<h1>Explore what other Are.na users are connecting</h1>',
-    sub_content: '<a href="/explore">Are.na / Explore &rarr;</a>'
+    sub_content: '<a href="/explore">Are.na / Explore ➝</a>'
   },
   {
     id: 'bookmarklet_message',
     class: 'Tip',
     base_class: 'Block',
     content: '<h1>Add blocks easily while browsing the web</h1>',
-    sub_content: '<a href="/tools/bookmarklet">Install the bookmarklet &rarr;</a>'
+    sub_content: '<a href="/tools/bookmarklet">Install the bookmarklet ➝</a>'
   },
 ]
