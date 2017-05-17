@@ -8,7 +8,7 @@ module.exports = class ConnectSearchView extends Backbone.View
   className: 'Connect__search Input'
 
   attributes:
-    placeholder: 'Type Channel Name'
+    placeholder: 'Type channel name'
     autofocus: true
 
   events:
