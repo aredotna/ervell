@@ -1,5 +1,10 @@
 .Button
   &--overlay
+    // Fit 2-up on block hover
+    min-width (block_width / 2.25)
+    // Non-even vertical padding will visually center more accurately
+    padding (button-v-padding * 1.9) (button-h-padding * 1.5)
+    font-size font-size-base
     background-color colors-gray-translucent
     border none
 
