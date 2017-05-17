@@ -22,9 +22,7 @@
   // States
   // ------
   &:hover
-    background-color colors-gray-hover
-    border-color @background-color
-    color white
+    border-color colors-gray-hover
 
   &:active
     // Annoyingly: have to set the border width/style/color here
@@ -40,8 +38,7 @@
     color colors-state-alert
     border-color lighten(@color, 75%)
     &:hover
-      background-color @color
-      color white
+      border-color @color
 
   &[data-state='loading']
     position relative
