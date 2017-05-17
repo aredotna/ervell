@@ -1,0 +1,32 @@
+.Connect__item
+  > a
+    display block
+    position relative
+    line-height 1
+    padding input-padding
+    border 1px solid colors-gray-lighter
+    margin 0 0 -1px 0
+    overflow hidden
+    text-overflow ellipsis
+    white-space pre
+    text-align left
+    font-weight normal !important // Sigh
+
+    &:hover
+      border 1px solid colors-gray-text
+      z-index 1
+
+    &:hover
+    &[data-selected]
+      &:after
+        display block
+        content '✔'
+        position absolute
+        top 50%
+        right 1em
+        transform translateY(-50%)
+        color colors-gray-light
+
+    &[data-selected]
+      > span
+        opacity 0.5

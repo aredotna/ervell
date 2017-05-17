@@ -1,2 +1,34 @@
-@require './default'
-@require './active'
+connect-outer-border-size = 5px
+
+.Connect
+  position relative
+  font-size font-size-xs
+
+  &[data-state='active']
+    border connect-outer-border-size solid colors-gray-border
+    border-radius 0.25em
+
+    .Connect
+      &__header
+        display none
+
+      &__create
+        display block
+
+      &__search
+      &__results
+        border none
+
+      &__results
+        margin-top -1px
+
+// Sub-components
+@require '../components/search/index'
+@require '../components/header/index'
+@require '../components/results/index'
+@require '../components/create/index'
+@require '../components/item/index'
+
+// Integrations
+@require '../integration/block_collection/index'
+@require '../integration/inline/index'

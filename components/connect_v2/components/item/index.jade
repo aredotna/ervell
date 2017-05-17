@@ -1,0 +1,9 @@
+a(
+  href="/#{channel.user.slug}/#{channel.slug}"
+  data-selected= channel[key]
+)
+  span
+    = channel.user.full_name
+    span.Separator
+    span( class="Color--#{channel.status}" )
+      = channel.title

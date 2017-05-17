@@ -1,22 +1,27 @@
-module.exports = ($el) ->
-  $input = $el.find 'input'
-  $channels = $el.find 'a'
+{ CURRENT_USER } = require('sharify').data
+config = require '../config.coffee'
+ConnectView = require './view.coffee'
+Channels = require '../../../collections/connection_blocks.coffee'
+mediator = require '../../../lib/mediator.coffee'
 
-  $input
-    .on 'input', (e) ->
-      e.preventDefault()
+module.exports = (block) ->
+  channels = new Channels [], user_slug: CURRENT_USER.slug
 
-      $el.attr 'data-state', if $input.val() isnt '' then 'active' else 'inactive'
+  replenish = if (recentConnections = mediator.shared.recent_connections)?
+    recentConnections
+      .fetch().then (response) =>
+        channels.reset(response.reverse())
+  else
+    Promise.resolve()
 
-      console.log $input.val()
+  replenish
+    .then ->
+      if channels.length < config.amount
+        channels.fetch(data: per: config.amount - channels.length)
+    .then (connections) ->
+      channels.each (channel) ->
+        mediator.shared.recent_connections.shove
 
-  $channels
-    .on 'click', (e) ->
-      e.preventDefault()
-
-      $(this).attr 'data-selected'
-
-      selected = $(this).attr('data-selected') is 'true'
-      toggled = not selected
-
-      $(this).attr 'data-selected', toggled
+  new ConnectView
+    model: block
+    collection: channels
