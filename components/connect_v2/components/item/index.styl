@@ -3,7 +3,8 @@
     display block
     position relative
     line-height 1
-    padding input-padding
+    // Extra rightmost padding to account check/remove glyphs
+    padding input-v-padding (input-h-padding * 3) input-v-padding input-h-padding
     border 1px solid colors-gray-lighter
     margin 0 0 -1px 0
     overflow hidden
