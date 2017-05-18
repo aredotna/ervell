@@ -1,11 +1,15 @@
 .Button
   &--overlay
     // Fit 2-up on block hover
+    extra-padding = 0.125em
+    padding (button-v-padding + extra-padding) (button-h-padding + extra-padding)
     min-width (block_width / 2.25)
-    padding (button-v-padding * 1.5) (button-h-padding * 1.5)
     font-size font-size-base
     background-color colors-gray-translucent
     border none
+
+    & + &
+      margin-left (button-h-padding / 2)
 
     &:hover
       background-color white
@@ -13,6 +17,7 @@
 
     &:active
       border none
+      color colors-gray-light
 
     &[data-state='loading']
       background-color white
