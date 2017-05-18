@@ -1,17 +1,25 @@
 .Connect__item
+  &:nth-child(2) > a
+    border-top-left-radius input-border-radius
+    border-top-right-radius input-border-radius
+
+  &:last-child > a
+    border-bottom-left-radius input-border-radius
+    border-bottom-right-radius input-border-radius
+
   > a
     display block
     position relative
-    line-height 1
+    margin 0 0 -1px 0
     // Extra rightmost padding to account check/remove glyphs
     padding input-v-padding (input-h-padding * 3) input-v-padding input-h-padding
     border 1px solid colors-gray-lighter
-    margin 0 0 -1px 0
-    overflow hidden
-    text-overflow ellipsis
-    white-space pre
+    line-height 1
     text-align left
     font-weight normal !important // Sigh
+
+    > span
+      overflow ellipsis
 
     &:hover
       border 1px solid colors-gray-text
