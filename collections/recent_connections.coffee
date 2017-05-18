@@ -10,6 +10,7 @@ module.exports = class RecentConnections extends Backbone.Collection
 
   shove: (model) ->
     @create(model.toJSON())
+    @unshift @pop()
 
   unshove: (model) ->
     @sync('delete', @get model.id)
