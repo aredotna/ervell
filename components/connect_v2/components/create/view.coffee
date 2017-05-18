@@ -26,6 +26,7 @@ module.exports = class ConnectCreateView extends Backbone.View
       status: 'private'
 
     channel.url = "#{API_URL}/channels"
+    channel.set "selected:#{@connectable.get 'base_class'}:#{@connectable.id}", true
 
     Promise(channel.save())
       .then =>
@@ -34,7 +35,6 @@ module.exports = class ConnectCreateView extends Backbone.View
 
       .then =>
         @render()
-        channel.set "selected:#{@connectable.get 'base_class'}:#{@connectable.id}", true
         @collection.unshift channel
 
       .catch =>
