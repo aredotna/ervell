@@ -21,7 +21,6 @@ tips = require './tips.coffee'
       res.locals.sd.USER = author.toJSON()
     complete: -> next()
 
-
 isAdmin = (user) ->
   _.find sd.ADMIN_SLUGS?.split(','), (slug) -> slug is user?.get('slug')
 
@@ -87,10 +86,8 @@ fetchFocus = (user, per=4)->
 
   Q.all [
     channels.fetchUntilEnd data: auth_token: req.user?.get('authentication_token')
-    fetchFocus res.locals.author, req.query.per
   ]
   .then ([response, focus]) ->  
-    res.locals.sd.FOCUS = focus?.toJSON()
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.render 'alpha',
       alpha: alpha
@@ -98,27 +95,7 @@ fetchFocus = (user, per=4)->
       count: channels.length
   .catch next
 
-@profileAPI = (req, res, next) ->
-  send = 
-    query: query
-    user: req.user or null
-    variables:
-      id: req.params.username
-      per: 2,
-      perBlocks: 3
-      page: parseInt(req.query.page) or 1
-      q: req.query.q
-      sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
-  
-  graphQL send
-    .then (response) ->
-      res.setHeader 'Content-Type', 'application/json'
-      res.send channels: response.user.contents
-    .catch next
-
-@profile = (req, res, next) ->
-  sort = req.query.sort?.toUpperCase() or 'UPDATED_AT'
-
+channelVariables = (req) ->
   send = 
     query: query
     user: req.user or null
@@ -127,9 +104,19 @@ fetchFocus = (user, per=4)->
       per: 2,
       perBlocks: 3
       page: 1
-      q: req.query.q
-      sort: sort
-  
+      q: parseInt(req.query.page) or 1
+      sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
+
+@channelsAPI = (req, res, next) ->
+  send = channelVariables req
+  graphQL send
+    .then (response) ->
+      res.setHeader 'Content-Type', 'application/json'
+      res.send channels: response.user.contents
+    .catch next
+
+@profile = (req, res, next) ->
+  send = channelVariables req
   graphQL send
     .then (response) ->
       res.locals.sd.QUERY = req.query.q
