@@ -21,9 +21,6 @@ tips = require './tips.coffee'
       res.locals.sd.USER = author.toJSON()
     complete: -> next()
 
-isAdmin = (user) ->
-  _.find sd.ADMIN_SLUGS?.split(','), (slug) -> slug is user?.get('slug')
-
 showTips = (req, res) ->
   (req.user?.id is res.locals.author.id and req.user?.get('show_tour') isnt false)
 
@@ -46,9 +43,6 @@ fetchFocus = (user, per=4)->
   dfd.promise
 
 @user = (req, res, next) ->  
-  if isAdmin req.user
-    return res.redirect 302, "/#{req.params.username}/profile"
-
   return next() unless res.locals.author
 
   blocks = new UserBlocks null,
@@ -78,7 +72,6 @@ fetchFocus = (user, per=4)->
       res.render "index", author: res.locals.author, blocks: blocks.models
 
 @index = (req, res, next) ->
-
   return next() unless res.locals.author
 
   channels = new UserBlocks null,
@@ -103,12 +96,12 @@ channelsVariables = (req) ->
       id: req.params.username
       per: 2,
       perBlocks: 5
-      page: 1
-      q: parseInt(req.query.page) or 1
+      page: parseInt(req.query.page, 10) or 1
+      q: req.query.q
       sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
 
 @channelsAPI = (req, res, next) ->
-  send = channelVariables req
+  send = channelsVariables req
   graphQL send
     .then (response) ->
       res.setHeader 'Content-Type', 'application/json'
@@ -118,12 +111,12 @@ channelsVariables = (req) ->
 @channels = (req, res, next) ->
   return next() unless res.locals.author
 
-  send = channelVariables req
+  send = channelsVariables req
   graphQL send
     .then (response) ->
       res.locals.sd.QUERY = req.query.q
       res.locals.sd.PROFILE_CHANNELS = response.user.contents
-      res.locals.sd.SORT = sort
+      res.locals.sd.SORT = send.variables.sort
 
       res.render 'profile',
         channels: response.user.contents
