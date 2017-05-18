@@ -35,7 +35,7 @@ module.exports = class ConnectCreateView extends Backbone.View
       .then =>
         @render()
         channel.set "selected:#{@connectable.get 'base_class'}:#{@connectable.id}", true
-        @collection.add channel
+        @collection.unshift channel
 
       .catch =>
         @$el.text 'Error'
@@ -54,5 +54,5 @@ module.exports = class ConnectCreateView extends Backbone.View
       mediator.trigger 'connection:added', channel
 
   render: ->
-    @$el.text "+ New Private Channel “#{@state.get('query')}”"
+    @$el.text "+ New private channel “#{@state.get('query')}”"
     this

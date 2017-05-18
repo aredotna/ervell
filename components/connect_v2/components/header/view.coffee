@@ -4,5 +4,5 @@ module.exports = class ConnectHeaderView extends Backbone.View
   className: 'Connect__header'
 
   render: ->
-    @$el.text 'Recent Channels'
+    @$el.text 'Recent channels'
     this

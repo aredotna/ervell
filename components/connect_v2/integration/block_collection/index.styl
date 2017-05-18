@@ -1,12 +1,19 @@
 .BlockCollectionConnectIntegration
   position relative
   height 100%
-  padding 0.5em 0.5em 1em 0.5em
+  min-height block_width
 
   &__close
-    margin-top 1em
+    position absolute
+    width auto
+    right 0.5em
+    bottom @right
+    left @right
+    padding-bottom (button-v-padding * 1.5)
 
   .Connect
+    margin 0.5em
+
     &[data-state='active']
       border none
 

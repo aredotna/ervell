@@ -6,31 +6,29 @@
 
   antialiased()
   display inline-block
-  padding 0.5em 1em
+  padding button-padding
   text-align center
   font-family font_sans
-  font-size font-size-lg
+  font-size font-size-base
   font-weight bold
   line-height 1
   background-color transparent
   color colors-gray-text
   border 1px solid lighten(@color, 75%)
-  border-radius 0.125em
+  border-radius button-border-radius
   cursor pointer
   user-select none
 
   // States
   // ------
   &:hover
-    background-color colors-gray-hover
-    border-color @background-color
-    color white
+    border-color colors-gray-hover
 
   &:active
     // Annoyingly: have to set the border width/style/color here
     // because the default is overwritten in the old stylesheets using `border-bottom: 0`
     border 1px solid colors-gray-hover
-    opacity 0.75
+    color lighten(@color, 50%)
 
   &:disabled
     opacity 0.5
@@ -40,8 +38,7 @@
     color colors-state-alert
     border-color lighten(@color, 75%)
     &:hover
-      background-color @color
-      color white
+      border-color @color
 
   &[data-state='loading']
     position relative

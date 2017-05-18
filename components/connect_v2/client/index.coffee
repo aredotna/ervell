@@ -20,7 +20,7 @@ module.exports = (block) ->
         channels.fetch(data: per: config.amount - channels.length)
     .then (connections) ->
       channels.each (channel) ->
-        mediator.shared.recent_connections.shove
+        mediator.shared.recent_connections.shove channel
 
   new ConnectView
     model: block
