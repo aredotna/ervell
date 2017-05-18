@@ -48,7 +48,7 @@ module.exports = class ConnectItemView extends Backbone.View
           url: "#{API_URL}/channels/#{@model.id}/blocks/#{@connectable.id}"
 
         .then =>
-          mediator.shared.recent_connections.unshove @model
+          mediator.shared.recent_connections.shove @model
           mediator.trigger 'connection:removed', @model
           mediator.trigger "connection:removed:#{@connectable.id}", @model
 
