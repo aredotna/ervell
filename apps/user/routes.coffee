@@ -77,32 +77,32 @@ fetchFocus = (user, per=4)->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render "index", author: res.locals.author, blocks: blocks.models
 
-@userChannelsByAlpha = (req, res, next) ->
+@index = (req, res, next) ->
+
   return next() unless res.locals.author
 
   channels = new UserBlocks null,
     user_slug: req.params.username
     subject: 'channels'
 
-  Q.all [
-    channels.fetchUntilEnd data: auth_token: req.user?.get('authentication_token')
-  ]
-  .then ([response, focus]) ->  
+  channels.fetchUntilEnd 
+    data: 
+      auth_token: req.user?.get('authentication_token')
+  .then ->  
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.render 'alpha',
       alpha: alpha
-      focus: focus
       count: channels.length
   .catch next
 
-channelVariables = (req) ->
+channelsVariables = (req) ->
   send = 
     query: query
     user: req.user or null
     variables:
       id: req.params.username
       per: 2,
-      perBlocks: 3
+      perBlocks: 5
       page: 1
       q: parseInt(req.query.page) or 1
       sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
@@ -115,7 +115,9 @@ channelVariables = (req) ->
       res.send channels: response.user.contents
     .catch next
 
-@profile = (req, res, next) ->
+@channels = (req, res, next) ->
+  return next() unless res.locals.author
+
   send = channelVariables req
   graphQL send
     .then (response) ->
@@ -126,6 +128,7 @@ channelVariables = (req) ->
       res.render 'profile',
         channels: response.user.contents
         author: res.locals.author
+
     .catch next
 
 @followers = (req, res, next) ->
