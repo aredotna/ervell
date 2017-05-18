@@ -2,7 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
-ConnectView = require '../../connect/client/connect_view.coffee'
+BlockCollectionConnectIntegrationView = require '../../../components/connect_v2/integration/block_collection/view.coffee'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../follow_button/client/follow_button_view.coffee'
 User = require '../../../models/user.coffee'
@@ -17,11 +17,11 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
-    'click .grid__block__source__link'  : 'openLink'
-    'click .grid__block__connect-btn'   : 'loadConnectView'
-    'click .grid__block__delete-block'  : 'confirmDestroy'
-    'click .confirm__choice__yes'       : 'destroyConnection'
-    'click .confirm__choice__no'        : 'cancelDestroy'
+    'click .js-overlay-source': 'openLink'
+    'click .js-overlay-connect': 'loadConnectView'
+    'click .grid__block__delete-block': 'confirmDestroy'
+    'click .confirm__choice__yes': 'destroyConnection'
+    'click .confirm__choice__no': 'cancelDestroy'
 
   initialize: (options)->
     { @container, @autoRender, @containerMethod, @channel } = options
@@ -34,13 +34,13 @@ module.exports = class BlockView extends Backbone.View
 
     @delegateEvents()
 
-    @model.on 'remote_update', @update, @
-    @model.on 'show', @show, @
-    @model.on 'hide', @hide, @
+    @listenTo @model, 'remote_update', @update
+    @listenTo @model, 'show', @show
+    @listenTo @model, 'hide', @hide
 
-    mediator.on "model:#{@model.id}:updated", @update, @
-    mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
-    mediator.on "body:click", @removeActiveClass, @
+    @listenTo mediator, "model:#{@model.id}:updated", @update
+    @listenTo mediator, "connection:#{@model.id}:complete", @removeActiveClass
+    @listenTo mediator, "body:click", @removeActiveClass
 
   show: ->
     @$el.show()
@@ -48,20 +48,20 @@ module.exports = class BlockView extends Backbone.View
   hide: ->
     @$el.hide()
 
-  loadConnectView: (e)=>
+  loadConnectView: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    $connect_container = @$('.grid__block__connect-container')
-    $connect_container.addClass 'is-active'
-    @$('.grid__block__inner').addClass 'is-active'
+    $target = @$('.grid__block__connect-container')
 
-    $connect_link = @$('.grid__block__link')
-    $connect_link.attr('data-disabled', 'true')
+    view = new BlockCollectionConnectIntegrationView model: @model
 
-    new ConnectView
-      el: $connect_container
-      block: @model
+    view.once 'remove', ->
+      $target.removeClass 'is-active'
+
+    $target
+      .addClass 'is-active'
+      .html view.render().$el
 
   openLink: (e)->
     analytics.track.click "Block source opened"

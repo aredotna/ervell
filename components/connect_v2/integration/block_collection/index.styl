@@ -1,0 +1,29 @@
+.BlockCollectionConnectIntegration
+  position relative
+  height 100%
+  min-height block_width
+
+  &__close
+    position absolute
+    width auto
+    right 0.5em
+    bottom @right
+    left @right
+    padding-bottom (button-v-padding * 1.5)
+
+  .Connect
+    margin 0.5em
+
+    &[data-state='active']
+      border none
+
+    &__search
+      &
+      &:focus
+        border none
+
+    &__header
+      margin 0 0 0 0
+
+    &__results
+      border none

@@ -1,0 +1,51 @@
+.UI
+  &__section
+    collapsed-margins(unit * 2)
+
+    &__component
+      collapsed-margins(unit * 2)
+      text-align center
+
+      &__rendered
+        &--spaced
+          > a
+          > button
+          > div
+            margin (unit / 4)
+
+        &--constrain
+          max-width (block_width * 2)
+          margin auto
+
+.UISwatches
+  display flex
+  flex-wrap wrap
+  text-align center
+  align-items center
+
+.UISwatch
+  display inline-block
+  position relative
+  width block_width
+  height (@width / 2)
+  margin (unit / 2)
+  background-size unit unit
+  candy-striped(black)
+
+  &__color
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    z-index 0
+
+  &__label
+    position relative
+    background-color colors-gray-translucent
+    color black
+    padding (unit / 4) (unit / 2)
+    font-size 0.8rem
+    line-height 1.33
+    text-align center
+    z-index 1
