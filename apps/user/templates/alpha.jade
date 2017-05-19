@@ -7,7 +7,7 @@ block body
   include ./path
   
   .channel-container.flex-container.channel-container--alpha
-    - extraclass = count > 10 ? "alpha__two-columns" : ""
+    - extraclass = count > 10 ? "alpha--two-columns" : ""
     .alpha(class=extraclass)
       for letter in range
         - group = alpha[letter]
@@ -16,7 +16,7 @@ block body
             .alpha__group__letter= letter
             - sortedGroup = _.sortBy(group, function(channel, i){ return channel.title().toUpperCase() })
             for channel in sortedGroup
-              include ../../../components/list_view/templates/_connection.jade
+              include ../../../components/connection_list/index.jade
 
 block scripts
   script( src=asset('/assets/user.js') )
