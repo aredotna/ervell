@@ -116,7 +116,7 @@ channelsVariables = (req) ->
     .then (response) ->
       res.locals.sd.QUERY = req.query.q
       res.locals.sd.PROFILE_CHANNELS = response.user.contents
-      res.locals.sd.SORT = send.variables.sort
+      res.locals.sd.SORT = send.variables.sort.toLowerCase()
 
       res.render 'profile',
         channels: response.user.contents
