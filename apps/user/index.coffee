@@ -10,7 +10,7 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 
-app.get "/api/:username/channels", routes.channelsAPI
+app.get "/api/:username/profile", routes.fetchAuthor, routes.channelsAPI
 
 # All routes below need an author to render
 app.get "/:username/channels", routes.fetchAuthor, (req, res, next) ->
