@@ -21,10 +21,6 @@ tips = require './tips.coffee'
       res.locals.sd.USER = author.toJSON()
     complete: -> next()
 
-
-isAdmin = (user) ->
-  _.find sd.ADMIN_SLUGS?.split(','), (slug) -> slug is user?.get('slug')
-
 showTips = (req, res) ->
   (req.user?.id is res.locals.author.id and req.user?.get('show_tour') isnt false)
 
@@ -47,9 +43,6 @@ fetchFocus = (user, per=4)->
   dfd.promise
 
 @user = (req, res, next) ->  
-  if isAdmin req.user
-    return res.redirect 302, "/#{req.params.username}/profile"
-
   return next() unless res.locals.author
 
   blocks = new UserBlocks null,
@@ -78,67 +71,57 @@ fetchFocus = (user, per=4)->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render "index", author: res.locals.author, blocks: blocks.models
 
-@userChannelsByAlpha = (req, res, next) ->
+@index = (req, res, next) ->
   return next() unless res.locals.author
 
   channels = new UserBlocks null,
     user_slug: req.params.username
     subject: 'channels'
 
-  Q.all [
-    channels.fetchUntilEnd data: auth_token: req.user?.get('authentication_token')
-    fetchFocus res.locals.author, req.query.per
-  ]
-  .then ([response, focus]) ->  
-    res.locals.sd.FOCUS = focus?.toJSON()
+  channels.fetchUntilEnd 
+    data: 
+      auth_token: req.user?.get('authentication_token')
+  .then ->  
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.render 'alpha',
       alpha: alpha
-      focus: focus
       count: channels.length
   .catch next
 
-@profileAPI = (req, res, next) ->
+channelsVariables = (req) ->
   send = 
     query: query
     user: req.user or null
     variables:
       id: req.params.username
       per: 2,
-      perBlocks: 3
-      page: parseInt(req.query.page) or 1
+      perBlocks: 5
+      page: parseInt(req.query.page, 10) or 1
       q: req.query.q
       sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
-  
+
+@channelsAPI = (req, res, next) ->
+  send = channelsVariables req
   graphQL send
     .then (response) ->
       res.setHeader 'Content-Type', 'application/json'
       res.send channels: response.user.contents
     .catch next
 
-@profile = (req, res, next) ->
-  sort = req.query.sort?.toUpperCase() or 'UPDATED_AT'
+@channels = (req, res, next) ->
+  return next() unless res.locals.author
 
-  send = 
-    query: query
-    user: req.user or null
-    variables:
-      id: req.params.username
-      per: 2,
-      perBlocks: 3
-      page: 1
-      q: req.query.q
-      sort: sort
-  
+  send = channelsVariables req
   graphQL send
     .then (response) ->
       res.locals.sd.QUERY = req.query.q
       res.locals.sd.PROFILE_CHANNELS = response.user.contents
-      res.locals.sd.SORT = sort
+      res.locals.sd.SORT = send.variables.sort
 
       res.render 'profile',
         channels: response.user.contents
         author: res.locals.author
+
     .catch next
 
 @followers = (req, res, next) ->

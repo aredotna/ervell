@@ -24,6 +24,7 @@ block metadata
       include metadata_pockets/about
     if user
       include metadata_pockets/info
-    if !following && !followers
+    unless following || followers
       include metadata_pockets/view
+    unless following || followers || alpha
       include metadata_pockets/sort
