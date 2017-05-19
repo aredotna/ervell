@@ -10,10 +10,14 @@ module.exports = class ConnectView extends Backbone.View
   attributes:
     'data-state': 'inactive'
 
-  initialize: ->
+  initialize: ({ @search }) ->
     @state = new Backbone.Model active: false, query: ''
 
-    options = model: @model, collection: @collection, state: @state
+    options =
+      model: @model
+      collection: @collection
+      search: @search
+      state: @state
 
     @subViews = [
       @searchView = new ConnectSearchView options

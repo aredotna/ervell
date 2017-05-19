@@ -5,24 +5,21 @@ ConnectableChannels = require '../collections/connectable_channels.coffee'
 mediator = require '../../../lib/mediator.coffee'
 
 module.exports = (block) ->
-  channels = new ConnectableChannels [], user_slug: CURRENT_USER.slug
+  search = new ConnectableChannels [], user_slug: CURRENT_USER.slug
+  collection = mediator.shared.recent_connections
 
-  replenish = if (recentConnections = mediator.shared.recent_connections)?
-    recentConnections
-      .fetch().then (response) =>
-        channels.reset(response)
-  else
-    Promise.resolve()
-
-  replenish
+  collection.fetch()
     .then ->
-      if channels.length < config.amount
-        channels.fetch remove: false, data: per: config.amount - channels.length
+      if collection.length < config.amount
+        search.fetch data: per: config.amount - search.length
 
-    .then (connections) ->
-      channels.each (channel) ->
-        mediator.shared.recent_connections.append channel
+    .then ->
+      search.each (channel) ->
+        collection.append channel
+
+      search.reset collection.toJSON()
 
   new ConnectView
     model: block
-    collection: channels
+    collection: collection
+    search: search
