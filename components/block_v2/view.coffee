@@ -3,6 +3,7 @@ Block = require '../../models/block.coffee'
 ConnectView = require '../connect/client/connect_view.coffee'
 analytics = require '../../lib/analytics.coffee'
 mediator = require '../../lib/mediator.coffee'
+BlockCollectionConnectIntegrationView = require '../connect_v2/integration/block_collection/view.coffee'
 
 module.exports = class BlockView extends Backbone.View
 
@@ -11,7 +12,7 @@ module.exports = class BlockView extends Backbone.View
     'click .js-connect' : 'openConnect'
 
   initialize: ({ @block }) ->
-    mediator.on "connection:#{@block.id}:complete", @removeActiveClass, @
+    # nothing
 
   openSource: (e) ->
     analytics.track.click "Block source opened"
@@ -27,14 +28,11 @@ module.exports = class BlockView extends Backbone.View
 
     false
 
-  removeActiveClass: ->
-    @$el.removeClass 'Block--is_connecting'
-
   openConnect: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    $connectContainer = @$('.Block__inner__connect')
+    $target = @$('.Block__inner__connect')
     @$el.addClass 'Block--is_connecting'
 
     # temp: get a real block
@@ -42,6 +40,11 @@ module.exports = class BlockView extends Backbone.View
 
     block.fetch 
       success: =>
-        new ConnectView
-          el: $connectContainer
-          block: block
+        view = new BlockCollectionConnectIntegrationView model: block
+
+        view.once 'remove', =>
+          @$el.removeClass 'Block--is_connecting'
+
+        $target
+          .addClass 'is-active'
+          .html view.render().$el
