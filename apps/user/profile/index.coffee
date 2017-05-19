@@ -1,6 +1,9 @@
 Backbone = require 'backbone'
-{ QUERY, PROFILE_CHANNELS, SORT } = require("sharify").data
+{ QUERY, PROFILE_CHANNELS, SORT, USER } = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+User = require "../../../models/user.coffee"
+PathView = require '../../../components/path/client/path_view.coffee'
+MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 ChannelGroupView = require '../../../components/channel_block_group/view.coffee'
 
 template = -> require('../templates/partials/_channel_groups.jade') arguments...
@@ -55,7 +58,20 @@ class ProfileView extends Backbone.View
       view.initBlockViews()
       
 module.exports.init = ->
+  user = new User USER
+
   view = new ProfileView
     el: $('.profile')
 
   view.setUpChannelGroupViews(PROFILE_CHANNELS)
+
+  new PathView
+    el: $('section.path--header')
+    model: user
+
+  new MetaEditableAttributeView
+    model: user
+    el: $("#metadata--about .metadata__content")
+    _attribute: 'description'
+    _kind: 'markdown'
+    wait: true
