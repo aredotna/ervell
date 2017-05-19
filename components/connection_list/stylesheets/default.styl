@@ -1,0 +1,47 @@
+borderColor(color)
+  rgba(color, 30%)
+
+.Connection
+  display block
+  collapsed-margins(0.5em)
+  border 2px solid
+  cursor pointer
+
+  title-width = 65%
+
+  > span
+    display flex
+    align-items center
+    justify-content space-between
+    padding input-padding
+
+  &__title
+    max-width title-width
+    font-size font-size-lg
+    line-height line-height-base
+    ellipsis(title-width)
+    > span
+      font-size font-size-xs
+
+  &__author
+    font-size font-size-xs
+    line-height line-height-base
+    ellipsis(100% - title-width)
+
+  &[data-visibility='private']
+    border-color borderColor(colors-channel-private)
+    color colors-channel-private
+    &:hover
+      border-color colors-channel-private
+
+  &[data-visibility='public']
+    border-color borderColor(colors-channel-public)
+    color colors-channel-public
+    &:hover
+      border-color colors-channel-public
+
+  &[data-visibility='closed']
+    border-color borderColor(colors-channel-closed)
+    color colors-channel-closed
+    &:hover
+      border-color colors-channel-closed

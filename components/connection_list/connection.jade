@@ -1,0 +1,9 @@
+span
+  .Connection__title
+    = channel.get('title')
+    span
+      | &nbsp; #{channel.get('length')} blocks
+
+  .Connection__author
+    span by&nbsp;
+    strong= channel.get('user').username
