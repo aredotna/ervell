@@ -10,7 +10,7 @@ module.exports = class ConnectCreateView extends Backbone.View
   events:
     click: 'create'
 
-  initialize: ({ @connectable, @state }) ->
+  initialize: ({ @connectable, @search, @state }) ->
     @listenTo @state, 'change:query', @render
 
   create: (e) ->
@@ -35,7 +35,6 @@ module.exports = class ConnectCreateView extends Backbone.View
 
       .then =>
         @render()
-        @collection.unshift channel
 
       .catch =>
         @$el.text 'Error'
@@ -49,7 +48,8 @@ module.exports = class ConnectCreateView extends Backbone.View
         connectable_type: @connectable.get('base_class')
 
     .then =>
-      mediator.shared.recent_connections.shove channel
+      @search.unshift channel
+      @collection.shove channel
       mediator.trigger "connection:added:#{@connectable.id}", channel
       mediator.trigger 'connection:added', channel
 

@@ -13,15 +13,13 @@ module.exports = class ConnectSearchView extends Backbone.View
 
   events:
     input: ->
-      @search arguments...
+      @query arguments...
 
-  initialize: ({ @state }) ->
-    @__collection__ = @collection.toJSON()
-
-    @search = throttle @perform, 250
+  initialize: ({ @state, @search }) ->
+    @query = throttle @perform, 200
 
   restore: ->
-    @collection.reset @__collection__
+    @search.reset @collection.toJSON()
 
   perform: (e) ->
     e.preventDefault()
@@ -33,23 +31,19 @@ module.exports = class ConnectSearchView extends Backbone.View
     @state.set query: query
 
     if query.length < 1
-      @restore() if @collection.length is 0
-      @state.set active: false
-
+      @restore()
+      @state.set 'active', false
       return
-
     else
-      @state.set active: true
+      @state.set 'active', true
 
     @request?.abort()
-
-    @request = @collection
-      .fetch
-        data:
-          q: query
-          per: config.amount
-          show_open: true
-          filter: type: 'channel'
+    @request = @search.fetch
+      data:
+        q: query
+        per: config.amount
+        show_open: true
+        filter: type: 'channel'
 
   render: ->
     this

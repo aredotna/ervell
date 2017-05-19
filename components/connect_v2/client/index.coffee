@@ -1,27 +1,25 @@
 { CURRENT_USER } = require('sharify').data
 config = require '../config.coffee'
 ConnectView = require './view.coffee'
-Channels = require '../../../collections/connection_blocks.coffee'
+ConnectableChannels = require '../collections/connectable_channels.coffee'
 mediator = require '../../../lib/mediator.coffee'
 
 module.exports = (block) ->
-  channels = new Channels [], user_slug: CURRENT_USER.slug
+  search = new ConnectableChannels [], user_slug: CURRENT_USER.slug
+  collection = mediator.shared.recent_connections
 
-  replenish = if (recentConnections = mediator.shared.recent_connections)?
-    recentConnections
-      .fetch().then (response) =>
-        channels.reset(response.reverse())
-  else
-    Promise.resolve()
-
-  replenish
+  collection.fetch()
     .then ->
-      if channels.length < config.amount
-        channels.fetch(data: per: config.amount - channels.length)
-    .then (connections) ->
-      channels.each (channel) ->
-        mediator.shared.recent_connections.shove channel
+      if collection.length < config.amount
+        search.fetch data: per: config.amount - search.length
+
+    .then ->
+      search.each (channel) ->
+        collection.append channel
+
+      search.reset collection.toJSON()
 
   new ConnectView
     model: block
-    collection: channels
+    collection: collection
+    search: search

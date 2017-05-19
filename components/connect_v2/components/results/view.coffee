@@ -10,22 +10,24 @@ module.exports = class ConnectResultsView extends Backbone.View
 
   subViews: []
 
-  initialize: ({ @state }) ->
-    @listenTo @collection, 'sync add reset', @render
+  initialize: ({ @state, @search }) ->
+    @listenTo @search, 'sync add reset', @render
 
   render: ->
     invoke @subViews, 'remove'
 
-    subViews = @collection.first(config.amount)
+    subViews = @search.first(config.amount)
       .map (model) =>
         new ConnectItemView
           model: model
+          collection: @collection
           connectable: @model
 
     connectCreateView = new ConnectCreateView
-      state: @state
+      search: @search
       collection: @collection
       connectable: @model
+      state: @state
 
     @subViews = [connectCreateView].concat subViews
 
