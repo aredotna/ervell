@@ -32,7 +32,6 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    $target = @$('.Block__inner__connect')
     @$el.addClass 'Block--is_connecting'
 
     # temp: get a real block
