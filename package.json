@@ -6,6 +6,10 @@
     "start": "make s",
     "test": "make test"
   },
+  "engines": {
+    "node": "7.x.x",
+    "npm": "4.x.x"
+  },
   "dependencies": {
     "arena-passport": "git://github.com/arenahq/arena-passport.git",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
