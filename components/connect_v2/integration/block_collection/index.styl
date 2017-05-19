@@ -2,6 +2,15 @@
   position relative
   height 100%
   min-height block_width
+  background-color white
+  border-radius connect-border-radius
+  box-shadow 0 0 0 connect-outer-border-size colors-gray-border
+
+  &__border
+    height @height
+    min-height @min-height
+    padding 0.5em
+    border 1px solid colors-gray-lighter
 
   &__close
     position absolute
@@ -12,8 +21,6 @@
     padding-bottom (button-v-padding * 1.5)
 
   .Connect
-    margin 0.5em
-
     &[data-state='active']
       border none
 
