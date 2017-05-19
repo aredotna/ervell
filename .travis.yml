@@ -9,8 +9,6 @@ addons:
     - heroku
     packages:
     - heroku-toolbelt
-before_script:
-- npm install --only=dev
 before_deploy:
 - if [ $TRAVIS_BRANCH = 'master' ]; then make deploy-assets-staging; fi
 - if [ $TRAVIS_BRANCH = 'deploy' ]; then make deploy-assets; fi
