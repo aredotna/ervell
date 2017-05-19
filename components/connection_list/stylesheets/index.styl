@@ -2,9 +2,7 @@ borderColor(color)
   alpha(color, 30%)
 
 .Connection
-  height 45px
   margin unit 0
-  padding (unit / 4) (unit / 2)
   border 2px solid
   cursor pointer
   display block
@@ -32,6 +30,7 @@ borderColor(color)
     width 100%
     height 100%
     table-layout fixed
+    padding (unit / 2)
 
     &__left, &__right
       display table-cell
@@ -43,10 +42,8 @@ borderColor(color)
       width 65%
       overflow hidden
       &__title
-        display inline
         font-size font-size-lg
       &__block-count
-        display inline
         vertical-align middle
         font-size font-size-xs
     &__right

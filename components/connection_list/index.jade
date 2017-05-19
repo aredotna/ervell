@@ -4,9 +4,11 @@ a.Connection(
   data-visibility=channel.getVisibility()
 ) 
   .Connection__inner
+
     .Connection__inner__left
-      .Connection__inner__left__title= channel.get('title')
-      .Connection__inner__left__block-count &nbsp; #{channel.get('length')} blocks
+      span.Connection__inner__left__title= channel.get('title')
+      span.Connection__inner__left__block-count &nbsp; #{channel.get('length')} blocks
+    
     .Connection__inner__right
       | by&nbsp;
       strong= channel.get('user').username
