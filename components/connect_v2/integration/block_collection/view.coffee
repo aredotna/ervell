@@ -25,8 +25,8 @@ module.exports = class BlockCollectionConnectIntegrationView extends Backbone.Vi
     this
 
   remove: (e) ->
-    e.stopPropagation()
-    e.preventDefault()
+    e?.stopPropagation()
+    e?.preventDefault()
     
     @trigger 'remove'
     invoke @subViews, 'remove'
