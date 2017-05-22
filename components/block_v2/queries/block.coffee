@@ -28,7 +28,7 @@ module.exports =
         image_url
       }
       ... on Text {
-        content(format: MARKDOWN)
+        content(format: HTML, no_links: true)
       }
       ... on Link {
         image_url
