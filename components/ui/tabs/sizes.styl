@@ -1,0 +1,6 @@
+font = json('../typography/font.json', { hash: true })
+
+.Tab
+  for key, size in font.font
+    &--{key}
+      font-size size
