@@ -1,25 +1,29 @@
-{ CURRENT_USER } = require('sharify').data
-config = require '../config.coffee'
-ConnectView = require './view.coffee'
-ConnectableChannels = require '../collections/connectable_channels.coffee'
+Promise = require 'bluebird-q'
+{ API_URL } = require('sharify').data
 mediator = require '../../../lib/mediator.coffee'
+ConnectView = require './view.coffee'
+ConnectCollections = require './collections.coffee'
 
 module.exports = (block) ->
-  search = new ConnectableChannels [], user_slug: CURRENT_USER.slug
-  collection = mediator.shared.recent_connections
+  { search, recentConnections } = ConnectCollections()
 
-  collection.fetch()
-    .then ->
-      if collection.length < config.amount
-        search.fetch data: per: config.amount - search.length
+  mediator
+    .on 'connection:added', (channel, connectable, queue) ->
+      queue.enqueue ->
+        Promise $.ajax
+          type: 'POST'
+          url: "#{API_URL}/channels/#{channel.id}/connections"
+          data:
+            connectable_id: connectable.id
+            connectable_type: connectable.get 'base_class'
 
-    .then ->
-      search.each (channel) ->
-        collection.append channel
-
-      search.reset collection.toJSON()
+    .on 'connection:removed', (channel, connectable, queue) ->
+      queue.enqueue ->
+        Promise $.ajax
+          type: 'DELETE'
+          url: "#{API_URL}/channels/#{channel.id}/blocks/#{connectable.id}"
 
   new ConnectView
     model: block
-    collection: collection
+    collection: recentConnections
     search: search
