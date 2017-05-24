@@ -12,6 +12,9 @@ module.exports = class RecentConnections extends Backbone.Collection
 
   localStorage: new Backbone.LocalStorage RecentConnections
 
+  @keyify: (model) ->
+    "selected:#{model.get 'base_class'}:#{model.id}"
+
   shove: (model) ->
     timestamp = __timestamp__: new Date().getTime()
     attrs = extend {}, model.attributes, timestamp

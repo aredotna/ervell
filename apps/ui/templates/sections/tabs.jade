@@ -1,0 +1,27 @@
+.UI__section
+  h3.Type
+    | Tabs
+
+  .UI__section__component
+    .UI__section__component__rendered
+      .Tabs
+        a.Tab( data-active ) Tab 1
+        a.Tab Tab 2
+        a.Tab Tab 3
+
+    pre.Type
+      | .Tabs
+      |   a.Tab( data-state='active' ) Tab 1
+      |   a.Tab Tab 2
+      |   a.Tab Tab 3
+
+  .UI__section__component
+    h6.Type
+      | Tab Sizes
+
+    .UI__section__component__rendered
+      for size, key in font
+        .Tabs
+          a.Tab( class="Tab--#{key}", data-active ) Tab 1 .Tab--#{key}
+          a.Tab( class="Tab--#{key}" ) Tab 2 .Tab--#{key}
+          a.Tab( class="Tab--#{key}" ) Tab 3 .Tab--#{key}

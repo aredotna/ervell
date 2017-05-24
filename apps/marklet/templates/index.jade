@@ -1,10 +1,11 @@
 extends ../../../components/layout/index--bare
 
 block vars
-  - extraClasses = 'no-header no-messages no-scroll'
+  - extraClasses = 'no-header no-messages'
 
 block body
-  include ./save
+  .Marklet.js-marklet( style='display: none;' )
+    include ../components/marklet/index
 
 block scripts
-  script( src=asset('/assets/marklet.js') )
+  script( src= asset('/assets/marklet.js') )

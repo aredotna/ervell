@@ -1,7 +1,7 @@
 Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { API_URL } = require('sharify').data
-uuid = require './lib/uuid.coffee'
+uuid = require '../../../../lib/uuid.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class AvatarUploaderView extends Backbone.View

@@ -1,8 +1,12 @@
 (function(){
-
   var markletFrame;
   var markletDiv;
   var markletStyle;
+
+  var markletWidth = '335px'
+  var markletHeightContracted = '460px'
+  var markletHeightExpanded = '710px'
+  var apiEndpoint = 'https://www.are.na';
 
   if (!document.getElementById("arena")) {
     initialize()
@@ -24,7 +28,7 @@
   }
 
   function getURL(msg){
-    baseUrl = "https://www.are.na/save/";
+    baseUrl = apiEndpoint + "/save/";
 
     url = baseUrl + encodeURIComponent(msg.url);
     url += "?original_source_url=" + encodeURIComponent(msg.url);
@@ -52,7 +56,7 @@
   function createStyle(){
     markletStyle = document.createElement("style");
     markletStyle.type = "text/css";
-    markletCSS = "#arena_frame,#arena_div{overflow:hidden;width:300px;height:420px;position:fixed;top:0px;right:0px;border:none}#arena_frame.is-expanded{height:670px}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);box-shadow: 3px 4px 10px rgba(0, 0, 0, .4);}#arena_frame:hover{background:rgba(255,255,255,0.9); box-shadow: 3px 4px 10px rgba(0, 0, 0, .5);}#arena_div{z-index:9999999999;display:none;opacity:0}";
+    markletCSS = "#arena_frame,#arena_div{overflow-x:hidden;overflow-y:auto;width:"+markletWidth+";height:"+markletHeightContracted+";position:fixed;top:10px;right:10px;border:none}#arena_frame.is-expanded{height:"+markletHeightExpanded+"}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}#arena_frame:hover{background:rgba(255,255,255,0.9);}#arena_div{z-index:9999999999;display:none;opacity:0}";
 
     if (markletStyle.styleSheet) {
       markletStyle.styleSheet.cssText = markletCSS;
@@ -86,9 +90,13 @@
   });
 
   function closeBookmarklet() {
-    if (markletFrame) document.body.removeChild(markletFrame)
-    if (markletDiv) document.body.removeNode(markletDiv)
-    if (markletStyle) document.body.removeNode(markletStyle)
+    document.removeEventListener('dragstart', startDrag, true);
+    document.removeEventListener('dragend', stopDrag, true);
+    document.removeEventListener('mousedown', sendClick, true);
+
+    if (markletFrame && markletFrame.parentNode) markletFrame.parentNode.removeChild(markletFrame);
+    if (markletDiv && markletDiv.parentNode) markletDiv.parentNode.removeChild(markletDiv);
+    if (markletStyle && markletStyle.parentNode) markletStyle.parentNode.removeChild(markletStyle);
   }
 
   function startDrag(e) {
@@ -174,7 +182,7 @@
   }
 
   function sendMessage(data) {
-    markletFrame.contentWindow.postMessage(data, "*")
+    (markletFrame && markletFrame.contentWindow).postMessage(data, "*")
   }
 
   function hasClass(el, className) {
