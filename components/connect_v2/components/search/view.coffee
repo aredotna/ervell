@@ -46,4 +46,5 @@ module.exports = class ConnectSearchView extends Backbone.View
         filter: type: 'channel'
 
   render: ->
+    @$el.val @state.get('query')
     this
