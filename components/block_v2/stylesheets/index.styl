@@ -82,6 +82,7 @@
       align-items center
       flex-direction column
       padding (unit / 2)
+      border 2px solid
       h2
         font-weight normal
         padding (unit * 2) 0 0
@@ -89,23 +90,20 @@
         font-size s_small 
         line-height 1.5em
       &--closed
-        border-color closed 
-        color closed 
+        border-color borderColor(colors-channel-closed)
+        color colors-channel-closed
         &:hover
-          border 2px solid alpha(closed, 0.6)
-          color closed
+          border-color colors-channel-closed
       &--private
-        border-color private
-        color private 
+        border-color borderColor(colors-channel-private)
+        color colors-channel-private
         &:hover
-          border 2px solid alpha(private, 0.6)
-          color private 
+          border-color colors-channel-private
       &--public
-        border-color public
-        color public
+        border-color borderColor(colors-channel-public)
+        color colors-channel-public
         &:hover
-          border 2px solid alpha(public, 0.6)
-          color public
+          border-color colors-channel-public
     
     &--text
       display block

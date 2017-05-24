@@ -7,11 +7,11 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
     class="grid__block__link needsclick"
   )
 
-    .grid__block__inner.halign--flex(class="grid__block__inner--privacy-#{block.getVisibility() }")
+    .grid__block__inner.halign--flex(class="grid__block__inner--#{block.getVisibility() }")
       .grid__block__content
         block content
 
-      .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+      .grid__block__overlay.abs-fill(class="grid__block__overlay--#{ block.getVisibility() }")
         - if(user && user.has('id'))
           block overlay
 
