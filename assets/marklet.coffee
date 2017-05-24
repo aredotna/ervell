@@ -1,2 +1,5 @@
+Backbone = require 'backbone'
+
 $ ->
-  require("../apps/marklet/client.coffee").init()
+  Backbone.$ = $
+  require('../apps/marklet/client/index.coffee')()
