@@ -1,6 +1,6 @@
 Comments = require '../../collections/comments.coffee'
 CommentsView = require './client/view.coffee'
-NewCommentView = require '../new_comment/client/new_comment_view.coffee'
+NewCommentView = require '../new_comment/client/view.coffee'
 
 module.exports = (block, $el) ->
   @comments = new Comments [], block: block
