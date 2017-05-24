@@ -32,13 +32,15 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    @$el.addClass 'Block--is_connecting'
+    $target = @$('.Block__inner__connect')
 
     # temp: get a real block
     block = new Block id: @block.id
 
     block.fetch 
       success: =>
+        @$el.addClass 'Block--is_connecting'
+
         view = new BlockCollectionConnectIntegrationView model: block
 
         view.once 'remove', =>
