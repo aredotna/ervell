@@ -1,8 +1,10 @@
 Backbone = require 'backbone'
+Channel = require '../../models/channel.coffee'
 Block = require '../../models/block.coffee'
 ConnectView = require '../connect/client/connect_view.coffee'
 analytics = require '../../lib/analytics.coffee'
 mediator = require '../../lib/mediator.coffee'
+FollowButtonView = require '../follow_button/client/follow_button_view.coffee'
 BlockCollectionConnectIntegrationView = require '../connect_v2/integration/block_collection/view.coffee'
 
 module.exports = class BlockView extends Backbone.View
@@ -28,14 +30,22 @@ module.exports = class BlockView extends Backbone.View
 
     false
 
+  getModel: ->
+    if @block.kind.__typename is 'Channel'
+      model = new Channel id: @block.id
+    else
+      model = new Block id: @block.id
+    
+    model
+
   openConnect: (e) ->
     e.preventDefault()
-    e.stopPropagation()
+    e.stopImmediatePropagation()
 
     $target = @$('.Block__inner__connect')
 
     # temp: get a real block
-    block = new Block id: @block.id
+    block = @getModel()
 
     block.fetch 
       success: =>
@@ -49,3 +59,12 @@ module.exports = class BlockView extends Backbone.View
         $target
           .addClass 'is-active'
           .html view.render().$el
+  
+  renderFollowButton: ->
+    model = @getModel()
+    model.fetch
+      success: =>
+        new FollowButtonView
+          el: @$('.js-follow')
+          model: model
+          showTitle: false
