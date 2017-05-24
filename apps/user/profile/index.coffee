@@ -67,7 +67,7 @@ module.exports.init = ->
   user = new User USER
 
   view = new ProfileView
-    el: $('.UserChannels__groups')
+    el: $('.js-user-channels')
 
   view.setUpChannelGroupViews(PROFILE_CHANNELS)
 
