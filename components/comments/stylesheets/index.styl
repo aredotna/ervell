@@ -1,22 +1,25 @@
-.comment
-  margin-top unit
-  margin-bottom unit * 1.5
-  > .comment-user
+.Comment
+  margin 1em 0 1.5em 0
+
+  &__header
+    //
+
+  &__user
     font-weight bold
-    margin-right (unit/2)
-  > .comment-date-time, > .comment-edited-date-time
+    font-size font-size-sm
+    margin-right 0.5em
+
+  &__datetime
+  &__edited-datetime
+    font-size font-size-xs
     text-transform uppercase
-    font-size 0.7rem
-    color lightgray
-  > .comment-edited-date-time
-    background-color backgroundgray
-    margin-left (unit/2)
-  > .comment-body
+    color colors-gray-light
+
+  &__body
+    collapsed-margins(0.5em)
     display block
-    p 14px
-    p
-      p 14px
-      margin 0.45rem 0
-    margin 0
+    font-size font-size-sm
+    line-height line-height-tall
+
     a
       font-weight bold
