@@ -4,7 +4,18 @@
   min-height block_width
   background-color white
   border-radius connect-border-radius
-  box-shadow 0 0 0 connect-outer-border-size colors-gray-border
+
+  &:after
+    display block
+    content ''
+    position absolute
+    pointer-events none
+    top -(connect-outer-border-size)
+    right @top
+    bottom @top
+    left @top
+    border connect-outer-border-size solid colors-gray-border
+    border-radius connect-border-radius
 
   &__border
     display flex
