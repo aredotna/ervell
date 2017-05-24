@@ -7,18 +7,17 @@
   box-shadow 0 0 0 connect-outer-border-size colors-gray-border
 
   &__border
+    display flex
+    flex-direction column
+    justify-content space-between
+    width 100%
     height @height
     min-height @min-height
     padding 0.5em
     border 1px solid colors-gray-lighter
 
   &__close
-    position absolute
     width auto
-    right 0.5em
-    bottom @right
-    left @right
-    padding-bottom (button-v-padding * 1.5)
 
   .Connect
     &[data-state='active']
