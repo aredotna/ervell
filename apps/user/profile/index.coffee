@@ -24,7 +24,7 @@ class ProfileView extends Backbone.View
 
     total = document.body.scrollHeight
     scrollPos = (document.documentElement.scrollTop || document.body.scrollTop)
-    progress = scrollPos + window.innerHeight * 4
+    progress = scrollPos + window.innerHeight * 6
 
     if (total - progress < @threshold)
       @loadNextPage() 

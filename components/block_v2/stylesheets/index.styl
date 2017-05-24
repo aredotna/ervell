@@ -112,9 +112,13 @@
       padding unit
       overflow hidden
       text-align left
+      p:first-of-type:empty
+        display none
       p
-        font-family font_serif 
-        p()
+        font-family font_serif
+        font-size 1rem
+        margin 0.75em 0
+        line-height 1.6em
 
     &--image, &--link, &--attachment, &--embed
       display flex
