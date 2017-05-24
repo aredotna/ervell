@@ -88,12 +88,12 @@ fetchFocus = (user, per=4)->
       count: channels.length
   .catch next
 
-channelsVariables = (req) ->
+channelsVariables = (req, res) ->
   send = 
     query: query
     user: req.user or null
     variables:
-      id: req.params.username
+      id: res.locals.author.id
       per: 2,
       perBlocks: 5
       page: parseInt(req.query.page, 10) or 1
@@ -101,7 +101,7 @@ channelsVariables = (req) ->
       sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
 
 @channelsAPI = (req, res, next) ->
-  send = channelsVariables req
+  send = channelsVariables req, res
   graphQL send
     .then (response) ->
       res.setHeader 'Content-Type', 'application/json'
@@ -111,7 +111,7 @@ channelsVariables = (req) ->
 @channels = (req, res, next) ->
   return next() unless res.locals.author
 
-  send = channelsVariables req
+  send = channelsVariables req, res
   graphQL send
     .then (response) ->
       res.locals.sd.QUERY = req.query.q
