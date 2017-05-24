@@ -2,12 +2,15 @@ extends ../../../components/layout/index
 
 block body
   include ./path
-  .profile
-    include ./partials/_channel_groups.jade
+  .UserChannels
+    .UserChannels__groups
+      include ./partials/_channel_groups.jade
+    include ../../../components/layout/loader/templates/infinite
   
   unless channels.length
     .channel-empty
       include ./empty
+  
 
 block scripts
   script( src=asset('/assets/profile.js') )

@@ -30,7 +30,7 @@ class ProfileView extends Backbone.View
       @loadNextPage() 
 
   loadNextPage: ->
-    @loading = true
+    @startLoader()
     $.ajax 
       data: 
         page: @page
@@ -39,15 +39,21 @@ class ProfileView extends Backbone.View
       url: "/api/#{sd.USER.slug}/profile"
       success: (response) =>
         @page++
-        @loading = false
+        @stopLoader()
 
         if response.channels.length
-          $('.profile').append template 
-            channels: response.channels
-          
+          @$el.append template channels: response.channels
           @setUpChannelGroupViews(response.channels)
         else
           @disabled = true
+
+  startLoader: ->
+    @loading = true
+    $('#l-infinite-loader-container').addClass 'is-loading'
+
+  stopLoader: ->
+    @loading = false
+    $('#l-infinite-loader-container').removeClass 'is-loading'
 
   setUpChannelGroupViews: (channels) ->
     for channel in channels
@@ -61,7 +67,7 @@ module.exports.init = ->
   user = new User USER
 
   view = new ProfileView
-    el: $('.profile')
+    el: $('.UserChannels__groups')
 
   view.setUpChannelGroupViews(PROFILE_CHANNELS)
 
