@@ -13,7 +13,7 @@ module.exports = (block, $el) ->
 
   view.on 'render', =>
     new NewCommentView
-      el: $ ".block-new-comment-container"
+      el: $('.js-new-comment')
       comments: @comments
       block_id: block.id
       autoRender: true

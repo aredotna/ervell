@@ -1,6 +1,9 @@
 font = json('../typography/font.json', { hash: true })
 
 .Button
+  &--compact
+    padding input-padding
+
   for key, size in font.font
     &--{key}
       font-size size

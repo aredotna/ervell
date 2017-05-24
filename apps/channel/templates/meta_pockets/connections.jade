@@ -11,7 +11,9 @@ block content
 
   if user
     .metadata__content__section
-      .connect_button.pointer: a(
+      a.Button.Button--size-xs.Button--compact.js-connect(
+        //- Match position of connect component input
+        style='margin-top: 5px'
         data-type='Channel'
         data-id= channel.id
       ) Connect &rarr;
