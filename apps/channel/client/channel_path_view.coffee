@@ -24,7 +24,7 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
     'click .delete-channel a' : 'showConfirmation'
     'click .delete-channel--confirmation__yes' : 'deleteChannel'
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
-    'click .connect_button': 'loadConnectView'
+    'click .js-connect': 'loadConnectView'
 
   initialize: ->
     super
