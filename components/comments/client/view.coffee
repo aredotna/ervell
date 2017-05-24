@@ -1,18 +1,15 @@
-sd = require('sharify').data
 Backbone = require 'backbone'
 markdown = require 'marked'
 mediator = require '../../../lib/mediator.coffee'
 CommentEditableAttributeView = require '../../editable_attribute/client/comment_editable_attribute_view.coffee'
-
-template =-> require('../templates/index.jade') arguments...
+template = -> require('../templates/index.jade') arguments...
 
 module.exports = class CommentsView extends Backbone.View
-
   initialize: ->
-    @collection.on 'sync add', @render, @
+    @listenTo @collection, 'sync add', @render
 
   render: ->
-    @$el.html template 
+    @$el.html template
       md: markdown
       comments: @collection
       user: mediator.shared.current_user

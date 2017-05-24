@@ -1,6 +1,15 @@
-.comment
-  span.comment-user #{comment.get('user').username}
-  span.comment-date-time #{comment.createdAtAgo()}
-  if comment.createdAtAgo() != comment.updatedAtAgo()
-    span.comment-edited-date-time Edited #{comment.updatedAtAgo()}
-  .comment-body(id="attribute-body_#{comment.id}")= comment.getHTML()
+.Comment
+  header.Comment__header
+    span.Comment__user
+      = comment.get('user').username
+
+    span.Comment__datetime
+      = comment.createdAtAgo()
+
+    if comment.createdAtAgo() !== comment.updatedAtAgo()
+      span.Comment__edited-datetime
+        = ' '
+        | (Edited #{comment.updatedAtAgo()})
+
+  .Comment__body( id="attribute-body_#{comment.id}" )
+    = comment.getHTML()
