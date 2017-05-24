@@ -28,7 +28,7 @@
   }
 
   function getURL(msg){
-    baseUrl = apiEndpoint + "/save/"; // Change this back
+    baseUrl = apiEndpoint + "/save/";
 
     url = baseUrl + encodeURIComponent(msg.url);
     url += "?original_source_url=" + encodeURIComponent(msg.url);
