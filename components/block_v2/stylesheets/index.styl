@@ -10,10 +10,19 @@
     font-size s_caption
     font-weight bold
     color lightgray 
-    padding unit 0 (unit / 4)
+    padding 2em 0 .5em
     width 100%
     text-align center
     line-height 1.2
+    &__title
+      padding 0 4em
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      vertical-align middle
+      svg
+        vertical-align bottom
+        margin-left .5em
     &__meta
       display none
 
@@ -82,9 +91,6 @@
       &__stats
         font-size s_small 
         line-height 1.5em
-        visibility hidden
-      &:hover &__stats
-        visibility visible
       &--closed
         border-color closed 
         color closed 
