@@ -11,11 +11,6 @@ module.exports =
       name
     }
     href
-    source {
-      provider_name
-      url
-      title
-    }
     kind {
       __typename
       ... on Channel {
@@ -27,12 +22,13 @@ module.exports =
       ... on Embed {
         image_url
         embed_html
+        source_url
       }
       ... on Image {
         image_url
       }
       ... on Text {
-        content(format: MARKDOWN)
+        content(format: HTML, no_links: true)
       }
       ... on Link {
         image_url

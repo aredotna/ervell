@@ -9,15 +9,19 @@ a.Block(
     class="Block__inner--#{block.kind.__typename.toLowerCase()} #{visibilityClass}"
   )
     //- Connect interface
-    .Block__inner__connect
+    .Block__inner__connect.js-connect-container
       //- Rendered client-side
 
     //- Hover overlay
     .Block__inner__overlay
       if block.kind.__typename !== 'Channel' 
-        if (block.source && block.source.url) || block.kind.file_url
-          .Block__inner__overlay__button.js-source Source
-        .Block__inner__overlay__button.js-connect Connect →
+        if block.kind.source_url || block.kind.file_url
+          button.Button.Button--overlay.js-source Source
+        button.Button.Button--overlay.js-connect Connect →
+      else
+        .Block__inner__overlay__channel-actions
+          button.Button.Button--divider.js-follow(class="Button--#{block.kind.visibility}") Follow
+          button.Button.Button--divider.js-connect(class="Button--#{block.kind.visibility}") Connect →
 
     //- Main content
     if block.kind.__typename === 'Channel'
@@ -44,7 +48,13 @@ a.Block(
   //- Bottom caption
   if block.kind.__typename !== 'Channel'
     .Block__caption
-      .Block__caption__title= block.title
+      .Block__caption__title
+        = block.title
+        - if(block.kind.__typename === 'Attachment' && ['mp3', 'pdf'].indexOf(block.kind.file_extension))
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.kind.file_extension}.svg" class="iconic iconic-sm")
+        - if(block.kind.__typename ==='Media')
+          img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
+
       .Block__caption__meta
         .Block__caption__meta__author Added by #{block.user.name}
         .Block__caption__meta__author Updated #{block.updated_at}

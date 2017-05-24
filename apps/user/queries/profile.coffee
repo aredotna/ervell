@@ -17,7 +17,7 @@ module.exports =
             counts {
               blocks
             }
-            blocks(per: $perBlocks, sort_by: UPDATED_AT, direction: DESC, type: BLOCK) {
+            blocks(per: $perBlocks, sort_by: UPDATED_AT, direction: DESC, type: BLOCK, user_id: $id) {
               ... blockThumb
             }
           }
