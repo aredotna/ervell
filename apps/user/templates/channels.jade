@@ -1,15 +1,16 @@
 extends ../../../components/layout/index
 
 block body
-  include ./path
+  include _path
   .UserChannels
     .UserChannels__groups.js-user-channels
       include ./partials/_channel_groups.jade
+    
     include ../../../components/layout/loader/templates/infinite
   
   unless channels.length
     .channel-empty
-      include ./empty
+      include _empty
   
 
 block scripts
