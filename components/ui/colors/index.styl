@@ -1,7 +1,7 @@
 .Color
-  &--public
-    color colors-channel-public
-  &--closed
-    color colors-channel-closed
-  &--private
-    color colors-channel-private
+  color-states = channel-public channel-closed channel-private state-premium
+
+  for state in color-states
+    &--{state}
+      &, input
+        color lookup('colors-' + state)
