@@ -161,3 +161,16 @@ candy-striped(color)
     transparent 75%,
     transparent
   )
+
+outline-border(size, color, radius)
+  &:after
+    display block
+    content ''
+    position absolute
+    pointer-events none
+    top -(size + 1)
+    right @top
+    bottom @top
+    left @top
+    border size solid color
+    border-radius radius
