@@ -10,12 +10,9 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 
-app.get "/api/:username/profile", routes.fetchAuthor, routes.channelsAPI
+app.get "/api/:username/channels", routes.fetchAuthor, routes.channelsAPI
 
 # All routes below need an author to render
-app.get "/:username/channels", routes.fetchAuthor, (req, res, next) ->
-  req.query = _.extend req.query, subject: 'block'
-  routes.user req, res, next
 app.get "/:username/blocks", routes.fetchAuthor, (req, res, next) ->
   req.query = _.extend req.query, subject: 'block'
   routes.user req, res, next
@@ -24,7 +21,7 @@ app.get "/:username/followers", routes.fetchAuthor, routes.followers
 app.get "/:username/following", routes.fetchAuthor, routes.following
 
 # New profile, will take over /channels
-app.get "/:username/profile", routes.fetchAuthor, routes.channels
+app.get "/:username/channels", routes.fetchAuthor, routes.channels
 
 # Route to clear a user's cache'
 app.get "/:username/update", routes.update

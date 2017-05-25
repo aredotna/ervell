@@ -36,7 +36,7 @@ class ProfileView extends Backbone.View
         page: @page
         q: QUERY
         sort: SORT
-      url: "/api/#{sd.USER.slug}/profile"
+      url: "/api/#{sd.USER.slug}/channels"
       success: (response) =>
         @page++
         @stopLoader()

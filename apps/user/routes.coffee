@@ -83,6 +83,7 @@ fetchFocus = (user, per=4)->
       auth_token: req.user?.get('authentication_token')
   .then ->  
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
+    res.locals.sd.SUBJECT = 'index'
     res.render 'alpha',
       alpha: alpha
       count: channels.length
@@ -117,6 +118,7 @@ channelsVariables = (req, res) ->
       res.locals.sd.QUERY = req.query.q
       res.locals.sd.PROFILE_CHANNELS = response.user.contents
       res.locals.sd.SORT = send.variables.sort.toLowerCase()
+      res.locals.sd.SUBJECT = 'channels'
 
       res.render 'profile',
         channels: response.user.contents
