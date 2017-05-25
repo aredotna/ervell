@@ -69,7 +69,10 @@ fetchFocus = (user, per=4)->
     success: ->
       blocks.unshift(addTips(req)) if showTips(req, res)
       res.locals.sd.BLOCKS = blocks.toJSON()
-      res.render "index", author: res.locals.author, blocks: blocks.models
+
+      res.render "all",
+        author: res.locals.author
+        blocks: blocks.models
 
 @index = (req, res, next) ->
   return next() unless res.locals.author
@@ -84,7 +87,7 @@ fetchFocus = (user, per=4)->
   .then ->  
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.locals.sd.SUBJECT = 'index'
-    res.render 'alpha',
+    res.render 'index',
       alpha: alpha
       count: channels.length
   .catch next
@@ -120,7 +123,7 @@ channelsVariables = (req, res) ->
       res.locals.sd.SORT = send.variables.sort.toLowerCase()
       res.locals.sd.SUBJECT = 'channels'
 
-      res.render 'profile',
+      res.render 'channels',
         channels: response.user.contents
         author: res.locals.author
 
@@ -142,7 +145,7 @@ channelsVariables = (req, res) ->
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWERS = blocks.toJSON()
-      res.render "index",
+      res.render "all",
         blocks: blocks.models
         author: res.locals.author
         followers: true
@@ -164,7 +167,7 @@ channelsVariables = (req, res) ->
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWING = blocks.toJSON()
-      res.render "index",
+      res.render "all",
         blocks: blocks.models
         author: res.locals.author
         following: true
