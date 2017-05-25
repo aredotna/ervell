@@ -6,7 +6,7 @@
       include info/_description
       include info/_connections
 
-      if user
+      if user && user.has('name')
         include info/_comments
 
   .block-sidebar__toggle-info
