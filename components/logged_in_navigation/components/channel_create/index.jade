@@ -1,0 +1,38 @@
+.DropdownHover__trigger
+  span.NewChannel
+    | New channel
+
+.Dropdown
+  .ChannelCreate
+    .ChannelCreate__block.Color--channel-private( data-visibility='private' )
+      input.Input.ChannelCreate__input(
+        name='title'
+        placeholder='Type channel name'
+        autofocus
+      )
+
+      .ChannelCreate__metadata
+        | by #{user.get('username')}
+        br
+        | 0 blocks
+
+  .ChannelCreatePrivacy
+    .ChannelCreatePrivacy__label
+      | Select channel privacy:
+
+    .ChannelCreatePrivacy__selector
+      a( data-value='open' )
+        | Open
+      span.Separator
+      a( data-value='closed' )
+        | Closed
+      span.Separator
+      a( data-value='private' )
+        | Private
+
+    .ChannelCreatePrivacy__caption
+      | Only you and your collaborators can view and add to the channel.
+
+  .ChannelCreateSubmit
+    a.Button.Button--divider
+      | Create channel

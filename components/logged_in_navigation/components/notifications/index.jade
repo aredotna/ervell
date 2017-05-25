@@ -1,0 +1,19 @@
+.DropdownHover__trigger
+  span.Badge 0
+
+.Dropdown
+  a.DropdownItem
+    | Notifications
+    span.DropdownItem__count
+      | 0
+
+  .Notifications
+    .Notification
+      | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-public'>Bar</a>
+    .Notification
+      | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-closed'>Bar</a>
+    .Notification
+      | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-private'>Bar</a>
+
+  a.Button.Button--divider
+    | View all notifications

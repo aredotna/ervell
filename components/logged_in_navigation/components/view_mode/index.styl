@@ -1,0 +1,18 @@
+// Iconic glyphs aren't quite vertically centered
+// unsure if this is endemic to the whole implementation
+// or just this context
+
+.ViewModeToggle
+  &:before
+    top 3px !important // 1px by default
+
+.ViewModeThumbnail
+.ViewModeList
+  &:before
+    top 2px !important // 1px by default
+    line-height 0 !important
+    margin-right 1.66em
+
+  &[data-active]
+    color colors-gray-lighter
+    pointer-events none
