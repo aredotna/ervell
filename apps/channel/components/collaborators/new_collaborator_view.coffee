@@ -13,7 +13,7 @@ resultsTemplate = -> require('./templates/results.jade') arguments...
 module.exports = class NewCollaboratorView extends Backbone.View
 
   events:
-    'keyup .new-collaborator__search' : 'processQuery'
+    'keyup .js-collaborator-input' : 'processQuery'
     'click .js-collaborator-result' : 'addCollaborator'
     'click .js-collaborator-invite' : 'inviteCollaborator'
     'click .js-collaborator-close' : 'removeResults'
@@ -84,7 +84,7 @@ module.exports = class NewCollaboratorView extends Backbone.View
     @_postRender()
 
   _postRender: ->
-    @$input = @$('input.new-collaborator__search')
+    @$input = @$('input.js-collaborator-input')
     @$input.focus()
 
 

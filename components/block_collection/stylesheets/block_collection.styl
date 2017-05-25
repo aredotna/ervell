@@ -1,4 +1,7 @@
 /* GENERAL */
+borderColor(color)
+  rgba(color, 30%)
+
 .grid
   display -webkit-box
   display -moz-box
@@ -184,11 +187,6 @@ body:not(.is-mobile) .grid__block:hover
   &:hover .grid__block__delete-block__confirm
     color #fff
 
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
-privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
-
 .grid__block__content__image
   max-width 100%
   max-height 100%
@@ -284,6 +282,23 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 
 /* CHANNEL */
 .grid__block--channel
+  .grid__block__inner, .grid__block__overlay
+    &--closed
+      border-color borderColor(colors-channel-closed)
+      color colors-channel-closed
+      &:hover
+        border-color colors-channel-closed
+    &--private
+      border-color borderColor(colors-channel-private)
+      color colors-channel-private
+      &:hover
+        border-color colors-channel-private
+    &--public
+      border-color borderColor(colors-channel-public)
+      color colors-channel-public
+      &:hover
+        border-color colors-channel-public
+  
   h2
     font-weight normal
     padding 15px 12px 0 12px
