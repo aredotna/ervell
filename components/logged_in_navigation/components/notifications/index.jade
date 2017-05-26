@@ -1,19 +1,26 @@
+- var count = feed && feed.getNumberUnread() || 0
+
 .DropdownHover__trigger
-  span.Badge 0
+  span.Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
+    = count
 
 .Dropdown
   a.DropdownItem
     | Notifications
     span.DropdownItem__count
-      | 0
+      = count
 
   .Notifications
-    .Notification
-      | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-public'>Bar</a>
-    .Notification
-      | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-closed'>Bar</a>
-    .Notification
-      | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-private'>Bar</a>
+    if feed
+      if feed.length
+        for group in feed.models
+          include ./templates/notification
+      else
+        .Notification
+          | No notifications yet
+    else
+      .Notification
+        | Loading
 
   a.Button.Button--divider
     | View all notifications
