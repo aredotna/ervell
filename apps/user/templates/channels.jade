@@ -2,8 +2,11 @@ extends ../../../components/layout/index
 
 block body
   include _path
-  .UserChannels
-    .UserChannels__groups.js-user-channels
+  .UserChannels.js-user-channels
+    if user && user.isPremium()
+    .flex-container
+      include ../../../components/filter/templates/search_bar
+    .UserChannels__groups.js-user-channels-contents
       include ./partials/_channel_groups.jade
     
     include ../../../components/layout/loader/templates/infinite

@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+Promise = require 'bluebird-q'
 { QUERY, PROFILE_CHANNELS, SORT, USER } = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 User = require '../../../models/user.coffee'
@@ -14,6 +15,9 @@ class ProfileView extends Backbone.View
   disabled: false
   threshold: -500
   page: 2
+
+  events: 
+    'keyup .js-channel-filter' : 'searchChannels'
 
   initialize: ->
     @timer = setInterval @maybeLoad, 150
@@ -31,25 +35,49 @@ class ProfileView extends Backbone.View
     if (total - progress < @threshold)
       @loadNextPage() 
 
-  loadNextPage: ->
-    @startLoader()
-    $.ajax 
+  query: ->
+    @$('.js-channel-filter').val()
+
+  searchChannels: ->
+    @page = 1
+    @disabled = false
+    @fetchResults().then (results) =>
+      @replaceResults(results.channels)
+
+  getQuery: ->
+    @query() or QUERY
+
+  fetchResults: ->
+    Promise $.ajax 
+      url: "/api/#{sd.USER.slug}/channels"
       data: 
         page: @page
-        q: QUERY
+        q: @getQuery()
         sort: SORT
-      url: "/api/#{sd.USER.slug}/channels"
-      success: (response) =>
+  
+  appendResults: (channels) ->
+    @$('.js-user-channels-contents').append template 
+      channels: channels
+      user: @user
+
+  replaceResults: (channels) ->
+    @$('.js-user-channels-contents').html template 
+      channels: channels
+      user: @user
+
+  loadNextPage: ->
+    @startLoader()
+    @fetchResults()
+      .then (response) =>
         @page++
         @stopLoader()
-
         if response.channels.length
-          @$el.append template 
-            channels: response.channels
-            user: @user
+          @appendResults(response.channels)
           @setUpChannelGroupViews(response.channels)
         else
           @disabled = true
+      .catch =>
+        @stopLoader()
 
   startLoader: ->
     @loading = true
