@@ -12,7 +12,7 @@
   .js-url-connections-list
     //- Rendered client-side
 
-  if user
+  if user && user.has('name')
     .block-sidebar__section--connect__button
       .Button.Button--size-sm.js-connect
         | Connect &rarr;
