@@ -1,7 +1,8 @@
 Backbone = require 'backbone'
 { QUERY, PROFILE_CHANNELS, SORT, USER } = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
-User = require "../../../models/user.coffee"
+User = require '../../../models/user.coffee'
+CurrentUser = require '../../../models/current_user.coffee'
 PathView = require '../../../components/path/client/path_view.coffee'
 MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 ChannelGroupView = require '../../../components/channel_block_group/view.coffee'
@@ -16,6 +17,7 @@ class ProfileView extends Backbone.View
 
   initialize: ->
     @timer = setInterval @maybeLoad, 150
+    @user = CurrentUser.orNull()
 
   maybeLoad: =>
     return false if @loading or 
@@ -42,7 +44,9 @@ class ProfileView extends Backbone.View
         @stopLoader()
 
         if response.channels.length
-          @$el.append template channels: response.channels
+          @$el.append template 
+            channels: response.channels
+            user: @user
           @setUpChannelGroupViews(response.channels)
         else
           @disabled = true

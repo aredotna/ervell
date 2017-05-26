@@ -17,8 +17,9 @@ a.Block(
       if block.kind.__typename !== 'Channel' 
         if block.kind.source_url || block.kind.file_url
           button.Button.Button--overlay.js-source Source
-        button.Button.Button--overlay.js-connect Connect →
-      else
+        if user && user.has('username')
+          button.Button.Button--overlay.js-connect Connect →
+      else if user && user.has('username')
         .Block__inner__overlay__channel-actions
           button.Button.Button--divider.js-follow(class="Button--#{block.kind.visibility}") Follow
           button.Button.Button--divider.js-connect(class="Button--#{block.kind.visibility}") Connect →
