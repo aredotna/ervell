@@ -1,14 +1,23 @@
 .ChannelBlockGroup
   width 100%
-  border-top 1px solid bordergray
-  padding 2em 0
   &__inner
     margin 0 auto
     display flex
     justify-content flex-start
+  &__divider
+    border-top 1px solid bordergray
+    margin 2em auto
+    height 0
+
   for i in (1..5)
     @media (min-width:(block_width_mar * i) + 20) and (max-width:(block_width_mar * (i + 1)) + 20)
       &__inner
         width (block_width_mar * i)
+      &__divider
+        width (block_width_mar * i) - 20
       .Block:nth-of-type(1n+{i+1})
         display none
+
+  +mobile()
+    border-color transparent
+
