@@ -4,11 +4,13 @@
 
 .Dropdown
   .ChannelCreate
-    .ChannelCreate__block.Color--channel-private( data-visibility='private' )
-      input.Input.ChannelCreate__input(
+    .ChannelCreate__block(
+      class="Color--channel-#{channel && channel.get('status')}"
+    )
+      input.Input.ChannelCreate__input.js-title(
         name='title'
+        value= channel && channel.get('title')
         placeholder='Type channel name'
-        autofocus
       )
 
       .ChannelCreate__metadata
@@ -21,18 +23,30 @@
       | Select channel privacy:
 
     .ChannelCreatePrivacy__selector
-      a( data-value='open' )
-        | Open
+      a.js-status(
+        data-value='public'
+        data-selected=(channel && channel.get('status') === 'public' ? true : undefined)
+      ) Open
       span.Separator
-      a( data-value='closed' )
-        | Closed
+      a.js-status(
+        data-value='closed'
+        data-selected=(channel && channel.get('status') === 'closed' ? true : undefined)
+      ) Closed
       span.Separator
-      a( data-value='private' )
-        | Private
+      a.js-status(
+        data-value='private'
+        data-selected=(channel && channel.get('status') === 'private' ? true : undefined)
+      ) Private
 
     .ChannelCreatePrivacy__caption
-      | Only you and your collaborators can view and add to the channel.
+      case (channel && channel.get('status'))
+        when 'public'
+          | Everyone can view the channel and anyone logged-in can add to it.
+        when 'closed'
+          | Everyone can view the channel but only you and your collaborators can add to it.
+        when 'private'
+          | Only you and your collaborators can view and add to the channel.
 
   .ChannelCreateSubmit
-    a.Button.Button--divider
+    a.Button.Button--divider.js-create
       | Create channel

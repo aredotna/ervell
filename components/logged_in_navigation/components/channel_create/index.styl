@@ -28,7 +28,8 @@
     max-width 100%
     height @width
     margin 1em auto
-    border 2px solid
+    border-width 2px
+    border-style solid
 
   &__input
     font-size font-size-h4 !important
@@ -63,6 +64,15 @@
     font-size font-size-base
     font-weight bold
     color colors-gray-light
+
+    > a
+      &[data-selected]
+        &[data-value='private']
+          color colors-channel-private
+        &[data-value='closed']
+          color colors-channel-closed
+        &[data-value='public']
+          color colors-channel-public
 
   &__caption
     font-size font-size-xs
