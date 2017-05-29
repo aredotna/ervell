@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+{ throttle } = require 'underscore'
 Promise = require 'bluebird-q'
 { QUERY, SORT } = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
@@ -17,6 +18,8 @@ module.exports = class ProfileView extends Backbone.View
   initialize: ({ @collection, @params }) ->
     @timer = setInterval @maybeLoad, @interval
     @user = CurrentUser.orNull()
+
+    @searchChannels = throttle(@searchChannels, 100)
 
     @state = new Backbone.Model
       loading: false
@@ -50,7 +53,7 @@ module.exports = class ProfileView extends Backbone.View
     val = @$('.js-channel-filter').val()
     if val is '' then null else val 
 
-  searchChannels: ->
+  searchChannels: =>
     @state.set loading: true, disabled: false
 
     @params.set
@@ -82,4 +85,4 @@ module.exports = class ProfileView extends Backbone.View
         channel: channel
         el: @$(".ChannelBlockGroup[data-id=#{channel.id}]")
       
-      view.initBlockViews()
+      view.initBlockViews()      
