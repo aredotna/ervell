@@ -7,7 +7,7 @@ block body
     .flex-container
       include ../../../components/filter/templates/search_bar
     .UserChannels__groups.js-user-channels-contents
-      include ./partials/_channel_groups.jade
+      include ../components/channels/groups
     
     include ../../../components/layout/loader/templates/infinite
   
@@ -17,4 +17,4 @@ block body
   
 
 block scripts
-  script( src=asset('/assets/profile.js') )
+  script( src=asset('/assets/user_channels.js') )
