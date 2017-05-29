@@ -4,8 +4,8 @@ block body
   include _path
   .UserChannels.js-user-channels
     if user && user.isPremium()
-    .flex-container
-      include ../../../components/filter/templates/search_bar
+      .flex-container
+        include ../../../components/filter/templates/search_bar
     .UserChannels__groups.js-user-channels-contents
       include ../components/channels/groups
     
