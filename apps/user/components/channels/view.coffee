@@ -8,83 +8,75 @@ ChannelGroupView = require '../../../../components/channel_block_group/view.coff
 template = -> require('./groups.jade') arguments...
 
 module.exports = class ProfileView extends Backbone.View
-  loading: false
-  disabled: false
   threshold: -500
-  page: 2
+  interval: 150
 
   events: 
     'keyup .js-channel-filter' : 'searchChannels'
 
-  initialize: ->
-    @timer = setInterval @maybeLoad, 150
+  initialize: ({ @collection, @params }) ->
+    @timer = setInterval @maybeLoad, @interval
     @user = CurrentUser.orNull()
 
+    @state = new Backbone.Model
+      loading: false
+      disabled: false
+
+    @listenTo @collection, 'sync', @unsetLoading
+    @listenTo @collection, 'sync', @render
+    @listenTo @state, 'change', @setLoading
+
+  loadingOrExpired: ->
+    @state.get('loading') or 
+    @state.get('disabled') or 
+    mediator.shared.state.get('lightbox')
+
+  setLoading: ->
+    if @state.get('loading') is true
+      $('#l-infinite-loader-container').addClass 'is-loading'
+    else
+      $('#l-infinite-loader-container').removeClass 'is-loading'
+
   maybeLoad: =>
-    return false if @loading or 
-      @disabled or 
-      mediator.shared.state.get 'lightbox'
+    return false if @loadingOrExpired()
 
     total = document.body.scrollHeight
     scrollPos = (document.documentElement.scrollTop || document.body.scrollTop)
     progress = scrollPos + window.innerHeight * 6
 
-    if (total - progress < @threshold)
-      @loadNextPage() 
+    @loadNextPage()  if total - progress < @threshold
 
   query: ->
-    @$('.js-channel-filter').val()
+    val = @$('.js-channel-filter').val()
+    if val is '' then null else val 
 
   searchChannels: ->
-    @page = 1
-    @disabled = false
-    @fetchResults().then (results) =>
-      @replaceResults(results.channels)
+    @state.set loading: true, disabled: false
 
-  getQuery: ->
-    @query() or QUERY
+    @params.set
+      q: @query()
+      page: 1
 
-  fetchResults: ->
-    Promise $.ajax 
-      url: "/api/#{sd.USER.slug}/channels"
-      data: 
-        page: @page
-        q: @getQuery()
-        sort: SORT
+  loadNextPage: -> 
+    @state.set 'loading', true
+    @params.set page: @params.get('page') + 1
   
-  appendResults: (channels) ->
-    @$('.js-user-channels-contents').append template 
-      channels: channels
-      user: @user
+  unsetLoading: (collection, response) ->
+    @state.set 'loading', false
+    @state.set('disabled', true) unless response.channels.length
 
-  replaceResults: (channels) ->
+  render: ->
+    channels = @collection.toJSON()
+
     @$('.js-user-channels-contents').html template 
       channels: channels
       user: @user
+    
+    @setUpChannelGroupViews()
 
-  loadNextPage: ->
-    @startLoader()
-    @fetchResults()
-      .then (response) =>
-        @page++
-        @stopLoader()
-        if response.channels.length
-          @appendResults(response.channels)
-          @setUpChannelGroupViews(response.channels)
-        else
-          @disabled = true
-      .catch =>
-        @stopLoader()
-
-  startLoader: ->
-    @loading = true
-    $('#l-infinite-loader-container').addClass 'is-loading'
-
-  stopLoader: ->
-    @loading = false
-    $('#l-infinite-loader-container').removeClass 'is-loading'
-
-  setUpChannelGroupViews: (channels) ->
+  setUpChannelGroupViews: ->
+    channels = @collection.toJSON()
+    
     for channel in channels
       view = new ChannelGroupView
         channel: channel
