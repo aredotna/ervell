@@ -18,7 +18,6 @@ app.get "/:username/blocks", routes.fetchAuthor, (req, res, next) ->
   routes.user req, res, next
 
 app.get "/:username/channels", routes.fetchAuthor, (req, res, next) ->
-  console.log('res.locals.view_mode', res.locals.view_mode)
   if res.locals.view_mode is 'list'
     req.query = _.extend req.query, subject: 'channel'
     routes.user req, res, next
