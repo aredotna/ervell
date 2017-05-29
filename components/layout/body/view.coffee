@@ -45,7 +45,7 @@ module.exports = class BodyView extends Backbone.View
 
   scrollToBlock: (id, delay = 100)->
     isLightBox = $('body').hasClass 'is-scrolling-disabled'
-    $el = $("##{id}")
+    $el = $("[data-id=#{id}]")
     elOffset = if isLightBox then $el.position().top else $el.offset().top
     elHeight = $el.height()
     windowHeight = $(window).height()

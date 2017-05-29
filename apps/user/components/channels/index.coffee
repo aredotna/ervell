@@ -1,4 +1,5 @@
 { USER, PROFILE_CHANNELS } = require("sharify").data
+mediator = require '../../../../lib/mediator.coffee'
 ChannelsView = require './view.coffee'
 ChannelGroups = require './collection.coffee'
 Params = require './params.coffee'
@@ -17,3 +18,4 @@ module.exports = ->
 
   view.setUpChannelGroupViews()
 
+  mediator.shared.blocks = collection
