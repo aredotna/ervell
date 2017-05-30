@@ -80,8 +80,6 @@ module.exports = class ProfileView extends Backbone.View
 
   setUpChannelGroupViews: ->
     channels = @collection.toJSON()
-    invoke @subviews, 'remove'
-    @subviews = []
     
     for channel in channels
       view = new ChannelGroupView
