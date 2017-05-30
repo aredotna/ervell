@@ -5,7 +5,7 @@ block body
   - range.unshift('0-9')  
 
   include _path
-  if alpha.length
+  if _.keys(alpha).length
     .channel-container.flex-container.channel-container--alpha
       - extraclass = count > 10 ? "alpha--two-columns" : ""
       .alpha(class=extraclass)
