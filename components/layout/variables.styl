@@ -19,6 +19,7 @@ special               = #E7DB5F
 
 // z-index
 header_z              = 4001
+dropdown_z            = 4002
 loader_z              = 5001
 modal_z               = 6001
 lightbox_z            = 6001
@@ -161,3 +162,45 @@ candy-striped(color)
     transparent 75%,
     transparent
   )
+
+outline-border(size, color, radius)
+  &:after
+    display block
+    content ''
+    position absolute
+    pointer-events none
+    top -(size + 1)
+    right @top
+    bottom @top
+    left @top
+    border size solid color
+    border-radius radius
+
+initials(font-size, color, background-color = transparent)
+  &[data-initials]
+    position relative
+
+    &:before
+    &:after
+      display block
+      position absolute
+      z-index -1
+
+    &:before
+      content ''
+      top 0
+      left 0
+      right 0
+      bottom 0
+      background-color background-color
+
+    &:after
+      content attr(data-initials)
+      font-size font-size
+      color color
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      font-weight normal
+      overflow hidden
+      white-space nowrap

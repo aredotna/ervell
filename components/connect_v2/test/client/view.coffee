@@ -40,7 +40,7 @@ describe 'ConnectView', ->
   it 'renders the view heirarchy', ->
     html = @view.render().$el.html()
     html.should.containEql '<a href="/user1/slug1">'
-    html.should.containEql '<span class="Color--private">title1</span>'
+    html.should.containEql '<span class="Color--channel-private">title1</span>'
 
   describe 'when clicked', ->
     beforeEach ->

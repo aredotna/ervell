@@ -3,12 +3,7 @@ header#layout-header
     include ../../../search_bar/templates/index
 
   if user && user.has('username')
-    include ../../../new_channel/templates/index
-    if user.isPremium() && sd.CURRENT_PATH != "/"
-      - glyph = view_mode == 'grid' ? 'grid-three-up' : 'list'
-      include ../../../view_menu/templates/index
-    include ../../../notifications_menu/templates/index
-    include ../../../user_menu/templates/index
+    include ../../../logged_in_navigation/index
 
   else
     .layout-header__register
