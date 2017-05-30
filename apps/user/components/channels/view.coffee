@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-{ throttle } = require 'underscore'
+{ throttle, invoke } = require 'underscore'
 Promise = require 'bluebird-q'
 { QUERY, SORT } = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
@@ -18,6 +18,7 @@ module.exports = class ProfileView extends Backbone.View
   initialize: ({ @collection, @params }) ->
     @timer = setInterval @maybeLoad, @interval
     @user = CurrentUser.orNull()
+    @subviews = []
 
     @searchChannels = throttle(@searchChannels, 100)
 
@@ -79,10 +80,18 @@ module.exports = class ProfileView extends Backbone.View
 
   setUpChannelGroupViews: ->
     channels = @collection.toJSON()
+    invoke @subviews, 'remove'
+    @subviews = []
     
     for channel in channels
       view = new ChannelGroupView
         channel: channel
-        el: @$(".ChannelBlockGroup[data-id=#{channel.id}]")
+        el: @$(".js-channel-group[data-id=#{channel.id}]")
       
-      view.initBlockViews()      
+      view.initBlockViews()   
+
+      @subviews.push view
+
+    remove: ->
+      invoke @subviews, 'remove'
+      super
