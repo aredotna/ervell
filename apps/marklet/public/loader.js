@@ -4,7 +4,7 @@
   var markletStyle;
 
   var markletWidth = '335px'
-  var markletHeightContracted = '460px'
+  var markletHeightContracted = '475px'
   var markletHeightExpanded = '710px'
   var apiEndpoint = 'https://www.are.na';
 
