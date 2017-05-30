@@ -174,3 +174,32 @@ outline-border(size, color, radius)
     left @top
     border size solid color
     border-radius radius
+
+initials(font-size, color, background-color = transparent)
+  &[data-initials]
+    position relative
+
+    &:before
+    &:after
+      display block
+      position absolute
+      z-index -1
+
+    &:before
+      content ''
+      top 0
+      left 0
+      right 0
+      bottom 0
+      background-color background-color
+
+    &:after
+      content attr(data-initials)
+      font-size font-size
+      color color
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      font-weight normal
+      overflow hidden
+      white-space nowrap
