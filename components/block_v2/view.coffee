@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-{ API_URL } = require '../../config.coffee'
+{ API_URL } = require('sharify').data
 Channel = require '../../models/channel.coffee'
 Block = require '../../models/block.coffee'
 ConnectView = require '../connect/client/connect_view.coffee'
