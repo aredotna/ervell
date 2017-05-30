@@ -13,6 +13,15 @@
   margin topbar_h auto
   padding unit
 
+.Container
+  width 100%
+  display flex
+  min-height 100vh
+  flex-direction column
+
+  &__content
+    flex 1
+
 for i in (1..8)
   @media (min-width: (block_width_mar * i) + unit)
     .Page
