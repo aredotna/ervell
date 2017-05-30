@@ -32,7 +32,7 @@
     top topbar_h + dropdown-border-width
     margin-top 1em
     right 1em
-    z-index 3001 // Extract
+    z-index dropdown_z
     font-weight normal
 
     // Invisible hit area
@@ -41,7 +41,6 @@
       position absolute
       display block
       content ''
-      position absolute
       margin-top -(@margin-top)
       top -(dropdown-border-width + 1)
       right -(dropdown-border-width * 5)

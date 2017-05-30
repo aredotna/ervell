@@ -1,0 +1,20 @@
+.NewChannel
+  position relative
+  margin-left 1.25em
+
+  // Plus sign
+  &:before
+  &:after
+    content ''
+    display block
+    position absolute
+    background-color colors-gray-text
+    width 10px
+    height 2px
+    top 50%
+    left 0
+    margin-left -(@margin-left)
+    transform translateY(-50%)
+
+  &:after
+    transform translateY(-50%) rotate(90deg)

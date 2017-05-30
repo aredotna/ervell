@@ -1,13 +1,13 @@
 .LoggedInNavigation.js-logged-in-navigation
-  .DropdownHover.js-channel-create
+  .DropdownHover.js-dropdown-hover.js-channel-create
     include ./components/channel_create/index
 
   if user.isPremium() && sd.CURRENT_PATH !== '/'
-    .DropdownHover.js-view-mode
+    .DropdownHover.js-dropdown-hover.js-view-mode
       include ./components/view_mode/index
 
-  .DropdownHover.js-notifications
+  .DropdownHover.js-dropdown-hover.js-notifications
     include ./components/notifications/index
 
-  .DropdownHover
+  .DropdownHover.js-dropdown-hover
     include ./components/you/index

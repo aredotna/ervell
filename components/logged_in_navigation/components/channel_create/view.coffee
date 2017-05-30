@@ -27,6 +27,8 @@ module.exports = class ChannelCreateView extends Backbone.View
   create: (e) ->
     e.preventDefault()
 
+    return unless @model.has('title')
+
     @dom.create.text 'Creating...'
 
     Promise(@model.save())

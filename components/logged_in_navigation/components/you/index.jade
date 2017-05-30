@@ -2,7 +2,7 @@
   .Avatar( data-initials= user.initials() )
     img( src= user.get('avatar_image').thumb, alt= user.initials() )
 
-.Dropdown
+.Dropdown.js-dropdown
   .DropdownSection
     a.DropdownItem.DropdownItem--primary( href="/#{user.get('slug')}" )
       = user.get('username')
@@ -18,6 +18,9 @@
 
   a.DropdownItem( href='/explore' )
     | Explore
+
+  a.DropdownItem( href='/tools' )
+    | Tools
 
   .DropdownSection
     a.DropdownItem.DropdownItem--secondary( href='/settings' )
