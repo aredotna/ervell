@@ -1,5 +1,5 @@
 _ = require 'underscore'
-{ isTouchDevice } = require '../util/device.coffee'
+{ isTouch } = require '../util/device.coffee'
 
 module.exports =
   firstVisibleInput: ($el) ->
@@ -13,7 +13,7 @@ module.exports =
     $el.is('input') or $el.is('textarea')
 
   autofocus: ($el, defer = false) ->
-    return if isTouchDevice()
+    return if isTouch()
 
     focus = =>
       if not @isFocusable $el
