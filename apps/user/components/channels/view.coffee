@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-{ throttle, map } = require 'underscore'
+{ throttle, invoke } = require 'underscore'
 Promise = require 'bluebird-q'
 { QUERY, SORT } = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
