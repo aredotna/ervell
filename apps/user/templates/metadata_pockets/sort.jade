@@ -7,6 +7,6 @@ block vars
 
 block content
   ul.breadcrumb
-    li: a(href="#{sd.CURRENT_PATH}" class=sd.SORT ? "" : "is-active" ).metadata--selector__option Recently updated
+    li: a(href="#{sd.CURRENT_PATH}" class= !sd.SORT || sd.SORT == "updated_at" ? "is-active" : "" ).metadata--selector__option Recently updated
     li: a(href="#{sd.CURRENT_PATH}?sort=random" class=sd.SORT == 'random' ? "is-active" : "" ).metadata--selector__option Random
 

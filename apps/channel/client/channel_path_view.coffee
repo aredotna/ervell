@@ -7,7 +7,7 @@ ChannelConnections = require '../../../collections/channel_connections.coffee'
 Collaborators = require '../../../collections/collaborators.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
 MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
-ConnectView = require '../../../components/connect/client/connect_view.coffee'
+InlineConnectIntegrationView = require '../../../components/connect_v2/integration/inline/view.coffee'
 ChannelCollaborationView = require './channel_collaboration_view.coffee'
 ChannelEditCollaboratorsView = require '../components/collaborators/edit_collaborators_view.coffee'
 ChannelConnectionsView = require './channel_connections_view.coffee'
@@ -16,15 +16,15 @@ ChannelExportView = require '../../../components/channel_export/client/channel_e
 ShareLinkView = require '../../../components/share_link/client/share_link_view.coffee'
 
 module.exports.ChannelPathView = class ChannelPathView extends PathView
+  subViews: []
 
-  # _.extend PathView.prototype.events,
   events:
     'click .toggle-settings-trigger' : 'toggleSettings'
     'click .delete-channel' : 'showConfirmation'
     'click .delete-channel a' : 'showConfirmation'
     'click .delete-channel--confirmation__yes' : 'deleteChannel'
     'click .delete-channel--confirmation__no'  : 'hideConfirmation'
-    'click .connect_button': 'loadConnectView'
+    'click .js-connect': 'loadConnectView'
 
   initialize: ->
     super
@@ -66,16 +66,19 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
       return klass.join(' ')
     @$('.path__channel').addClass "privacy-#{@model.get('status')}"
 
-  loadConnectView: (e)=>
+  loadConnectView: (e) ->
     e.preventDefault()
-    e.stopPropagation()
 
-    $connect_container = @$('.connect-container')
-    $connect_container.addClass 'is-active'
+    $target = $(e.currentTarget)
 
-    new ConnectView
-      el: $connect_container
-      block: @model
+    view = new InlineConnectIntegrationView model: @model
+    view.once 'remove', -> $target.show()
+
+    $target
+      .hide()
+      .after view.render().$el
+
+    @subViews.push view
 
   setupEditableViews: ->
     @$('#metadata--actions').addClass 'is-editable'

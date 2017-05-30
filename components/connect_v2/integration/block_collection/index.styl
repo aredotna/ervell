@@ -1,0 +1,46 @@
+.BlockCollectionConnectIntegration
+  position relative
+  height 100%
+  min-height block_width
+  background-color white
+  border-radius connect-border-radius
+
+  &:after
+    display block
+    content ''
+    position absolute
+    pointer-events none
+    top -(connect-outer-border-size)
+    right @top
+    bottom @top
+    left @top
+    border connect-outer-border-size solid colors-gray-border
+    border-radius connect-border-radius
+
+  &__border
+    display flex
+    flex-direction column
+    justify-content space-between
+    width 100%
+    height @height
+    min-height @min-height
+    padding 0.5em
+    border 1px solid colors-gray-lighter
+
+  &__close
+    width auto
+
+  .Connect
+    &[data-state='active']
+      border none
+
+    &__search
+      &
+      &:focus
+        border none
+
+    &__header
+      margin 0 0 0 0
+
+    &__results
+      border none

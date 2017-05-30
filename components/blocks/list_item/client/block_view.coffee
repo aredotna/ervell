@@ -2,7 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
-ConnectView = require '../../../connect/client/connect_view.coffee'
+BlockCollectionConnectIntegrationView = require '../../../connect_v2/integration/block_collection/view.coffee'
 Comments = require '../../../../collections/comments.coffee'
 IconicJS = require '../../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../../follow_button/client/follow_button_view.coffee'
@@ -66,16 +66,20 @@ module.exports = class BlockView extends Backbone.View
     @editable.remove()
     @update @model
 
-  loadConnectView: (e)=>
+  loadConnectView: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    $connect_container = @$('.connect-container')
-    $connect_container.addClass 'is-active'
+    $target = @$('.connect-container')
 
-    new ConnectView
-      el: $connect_container
-      block: @model
+    view = new BlockCollectionConnectIntegrationView model: @model
+
+    view.once 'remove', ->
+      $target.removeClass 'is-active'
+
+    $target
+      .addClass 'is-active'
+      .html view.render().$el
 
   loadLastComment: ->
     return false if @model.has('last_comment') or @model.get('comment_count') is 0

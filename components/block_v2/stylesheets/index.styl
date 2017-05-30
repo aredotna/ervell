@@ -1,0 +1,135 @@
+.Block
+  flex 1 1 315px
+  text-align center
+  margin 20px 10px 60px 10px
+  max-width 315px
+  position relative
+
+  &__caption
+    position absolute
+    font-size s_caption
+    font-weight bold
+    color lightgray 
+    padding 2em 0 .5em
+    width 100%
+    text-align center
+    line-height 1.2
+    &__title
+      padding 0 4em
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      vertical-align middle
+      svg
+        vertical-align bottom
+        margin-left .5em
+    &__meta
+      display none
+
+  &--connecting
+    .Block__inner__connect
+      display block
+      z-index 10
+
+  &:hover &__caption__title
+    display none
+
+  &:hover &__caption__meta
+    display block
+
+  &__inner  
+    position relative
+    height 315px
+    border 1px solid transparent
+
+    &:hover
+      border 1px solid bordergray
+    &:hover &__overlay
+      display flex
+
+    &__connect
+      display none
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+      background white
+
+    &__overlay
+      display none
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+      justify-content center
+      align-items center
+      &__channel-actions
+        position absolute
+        left 0
+        bottom .25em
+        display flex
+        width 100%
+        padding 0 1em
+        button
+          width 50%
+          margin 0 .25em
+
+    &--channel
+      display flex
+      border 2px solid bordergray
+      justify-content center
+      align-items center
+      flex-direction column
+      padding (unit / 2)
+      border 2px solid
+      h2
+        font-weight normal
+        padding (unit * 2) 0 0
+        margin 0 0 0.4em
+      &__stats
+        font-size s_small 
+        line-height 1.5em
+      &--closed
+        border-color borderColor(colors-channel-closed)
+        color colors-channel-closed
+        &:hover
+          border 2px solid colors-channel-closed
+      &--private
+        border-color borderColor(colors-channel-private)
+        color colors-channel-private
+        &:hover
+          border 2px solid colors-channel-private
+      &--public
+        border-color borderColor(colors-channel-public)
+        color colors-channel-public
+        &:hover
+          border 2px solid colors-channel-public
+    
+    &--text
+      display block
+      padding unit
+      overflow hidden
+      text-align left
+      font-size font-size-base
+      font-family font_serif
+      p:first-of-type:empty
+        display none
+      p
+        margin 0.75em 0
+        line-height line-height-tall
+
+    &--image, &--link, &--attachment, &--embed
+      display flex
+      align-items center
+      justify-content center
+      position relative
+      img
+        max-width 100%
+        max-height 100%
+
+    &--attachment
+      background backgroundgray 
+      .iconic-property-fill
+        fill textgray 

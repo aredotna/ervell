@@ -11,11 +11,11 @@ div(
     data-client="#{block.get('base_class')}"
     class="grid__block__link needsclick"
   )
-    .grid__block__inner.halign--flex(class="grid__block__inner--privacy-#{ block.getVisibility() }")
+    .grid__block__inner.halign--flex(class="grid__block__inner--#{ block.getVisibility() }")
       .grid__block__content
         block content
 
-      .grid__block__overlay.abs-fill(class="grid__block__overlay--privacy-#{ block.getVisibility() }")
+      .grid__block__overlay.abs-fill(class="grid__block__overlay--#{ block.getVisibility() }")
         - if(isEmbedded && block.get('class') != 'Channel') 
           a(href="#{block.getHref()}" target="_blank").button--inblock.button--inblock--view View on Are.na
         - else if(user && user.has('id'))

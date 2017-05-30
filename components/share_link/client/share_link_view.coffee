@@ -10,9 +10,9 @@ shareTemplate = -> require('../templates/share_link.jade') arguments...
 module.exports = class ShareLinkView extends Backbone.View
 
   events:
-    'click .channel--share-generate' : 'generateShareLink'
-    'click .channel--share-unshare'  : 'removeShareLink'
-    'click #channel--share-input'    : 'selectAll'
+    'click .js-share-generate' : 'generateShareLink'
+    'click .js-share-unshare' : 'removeShareLink'
+    'click .js-share-input' : 'selectAll'
 
   initialize: ->
     @model.on 'change:share_link', @render, @

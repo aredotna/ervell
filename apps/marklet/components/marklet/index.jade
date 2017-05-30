@@ -1,0 +1,47 @@
+.Marklet__border
+  section
+    .Marklet__tabs.Tabs
+      a.Tab.Tab--size-sm.js-mode(
+        data-mode='url'
+        data-active=(state.mode === 'url' ? 'active' : null)
+      ) URL
+      a.Tab.Tab--size-sm.js-mode(
+        data-mode='drop'
+        data-active=(state.mode !== 'url' ? 'active' : null)
+      ) Drop
+
+    case state.mode
+      when 'url'
+        .Marklet__url
+          input.Input.js-input(
+            name='content'
+            type='text'
+            placeholder='URL'
+            value= block.content
+          )
+      when 'drop'
+        .Marklet__drop
+          span
+            | Drag and drop text or images you want to&nbsp;save.
+
+      when 'text'
+        .Marklet__drop
+          textarea.js-input( name='content' )
+            = block.content
+
+      when 'image'
+        .Marklet__drop
+          img( src= block.content )
+
+    .Marklet__body.js-body
+      //- Rendered separately
+
+  section
+    .Marklet__button
+      a.Button.Button--divider.js-button(
+        data-action=(connections.length ? 'save' : 'close')
+      )
+        if connections.length
+          | Save &amp; Close
+        else
+          | Close

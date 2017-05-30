@@ -1,18 +1,25 @@
 extends ../../../components/layout/index
 
 block body
-  include ./path
-  if user && user.isPremium() && !following && !followers
-  .channel-container.channel-container--user( class=blocks.length ? '' : 'is-empty' )
-    .profile-contents
-      - content = sd.SUBJECT ? sd.SUBJECT + "s" : "blocks and channels"
-      - searchee = (user && author.id == user.id) ? "your " : author.get('username') + "'s public "
-      - title = searchee + content
-      include ../../../components/blocks/container/templates/index
+  - var range = '!~@#$%^&*()_-+=<>.,?/ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  - range.unshift('0-9')  
+
+  include _path
+  if alpha.length
+    .channel-container.flex-container.channel-container--alpha
+      - extraclass = count > 10 ? "alpha--two-columns" : ""
+      .alpha(class=extraclass)
+        for letter in range
+          - group = alpha[letter]
+          if group
+            .alpha__group
+              .alpha__group__letter= letter
+              - sortedGroup = _.sortBy(group, function(channel, i){ return channel.title().toUpperCase() })
+              for channel in sortedGroup
+                include ../../../components/connection_list/index.jade
+  else
     .channel-empty
-      include ./empty
-    include ../../../components/layout/loader/templates/infinite
+      include _empty
 
 block scripts
   script( src=asset('/assets/user.js') )
-

@@ -1,15 +1,19 @@
 extends ../../../../components/meta_pocket/templates/meta_pocket
 
 block vars
-  - title = "Connections"
+  - title = 'Connections'
   - extraClasses = ''
-  - id = "metadata--connections"
+  - id = 'metadata--connections'
 
 block content
   .js-metadata--connection-list
+    //- Rendered client-side
 
-  if(user)
-    .connect-container
-        //- rendered on the client
+  if user && user.has('username')
     .metadata__content__section
-      .connect_button.pointer: a(data-type="Channel", data-id="#{channel.id}") Connect
+      a.Button.Button--size-xs.Button--compact.js-connect(
+        //- Match position of connect component input
+        style='margin-top: 5px'
+        data-type='Channel'
+        data-id= channel.id
+      ) Connect &rarr;

@@ -1,0 +1,14 @@
+.connection-list
+  each connection, i in connections
+    if connections.length == 1
+      include _connection
+    else
+      if i == connections.length - 2
+        include _connection
+        | &nbsp;
+        span and&nbsp;
+      else if i == connections.length - 1
+        include _connection
+      else if i < connections.length - 2
+        include _connection
+        | ,&nbsp;

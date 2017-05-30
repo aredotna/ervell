@@ -26,7 +26,7 @@ _ = require 'underscore'
 
   Q.all [
     block.fetch data: auth_token: req.user?.get('authentication_token')
-    comments.fetch(data: auth_token: req.user?.get('authentication_token')) if req.user?
+    comments.fetch(data: auth_token: req.user?.get('authentication_token')) if req.user.has('username')
   ]
   .then ->
     res.locals.sd.BLOCK = block.toJSON()

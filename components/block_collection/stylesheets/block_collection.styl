@@ -1,4 +1,7 @@
 /* GENERAL */
+borderColor(color)
+  rgba(color, 30%)
+
 .grid
   display -webkit-box
   display -moz-box
@@ -184,11 +187,6 @@ body:not(.is-mobile) .grid__block:hover
   &:hover .grid__block__delete-block__confirm
     color #fff
 
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color('.grid__block--channel .grid__block__inner--privacy-', color)
-privacy-color-border-hover('.grid__block--channel .grid__block__inner--privacy-', border-color)
-privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color)
-
 .grid__block__content__image
   max-width 100%
   max-height 100%
@@ -284,6 +282,23 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 
 /* CHANNEL */
 .grid__block--channel
+  .grid__block__inner, .grid__block__overlay
+    &--closed
+      border-color borderColor(colors-channel-closed)
+      color colors-channel-closed
+      &:hover
+        border-color colors-channel-closed
+    &--private
+      border-color borderColor(colors-channel-private)
+      color colors-channel-private
+      &:hover
+        border-color colors-channel-private
+    &--public
+      border-color borderColor(colors-channel-public)
+      color colors-channel-public
+      &:hover
+        border-color colors-channel-public
+  
   h2
     font-weight normal
     padding 15px 12px 0 12px
@@ -302,17 +317,7 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
     &:hover
       color hovergray
 
-  &:hover
-    .grid__block__channel__stats
-      visibility visible
-
-.is-mobile .grid__block--channel
-  &:hover
-    .grid__block__channel__stats
-      visibility hidden
-
 .grid__block__channel__stats
-  visibility hidden
   font-weight normal
   line-height 1.5em
   font-size s_caption + 1
@@ -344,15 +349,13 @@ privacy-color-hover('.grid__block--channel .grid__block__inner--privacy-', color
 /* CONNECT */
 .grid__block__connect-container
   position absolute
-  overflow hidden
-  word-break break-word
-  border 1px solid #fff
+  top 0
+  right 0
+  bottom 0
+  left 0
   z-index 10
-
-.grid__block__connect-container
-  pointer-events none
   opacity 0
-  background-color #fff
+  pointer-events none
 
   &.is-active
     opacity 1
@@ -382,6 +385,7 @@ body.is-mobile
   .grid__block__overlay
     opacity 1
 
+    .Button
     .button--inblock
       display none
 
@@ -396,4 +400,5 @@ body.is-mobile
     display static !important
 
 @require '../../lightbox/stylesheets/lightbox'
-@require '../../connect/stylesheets/connect'
+@require '../../connect/stylesheets/connect' // This includes some really random styles unrelated to actual connect, so we still need it for now... :\
+@require '../../connect_v2/stylesheets/index'

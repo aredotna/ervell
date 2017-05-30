@@ -1,0 +1,20 @@
+extends ../../../components/layout/index
+
+block body
+  include _path
+  .UserChannels.js-user-channels
+    if user && user.isPremium()
+      .flex-container
+        include ../../../components/filter/templates/search_bar
+    .UserChannels__groups.js-user-channels-contents
+      include ../components/channels/groups
+    
+    include ../../../components/layout/loader/templates/infinite
+  
+  unless channels.length
+    .channel-empty
+      include _empty
+  
+
+block scripts
+  script( src=asset('/assets/user_channels.js') )

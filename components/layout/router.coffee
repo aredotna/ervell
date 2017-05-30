@@ -5,7 +5,7 @@ AuthView = require '../auth/view.coffee'
 ImageView = require '../image/view.coffee'
 Block = require '../../models/block.coffee'
 modalize = require '../modalize/index.coffee'
-{ FullBlockView } = require '../../apps/block/client/index.coffee'
+FullBlockView = require '../../apps/block/client/view.coffee'
 
 module.exports = class Router extends Backbone.Router
   routes:

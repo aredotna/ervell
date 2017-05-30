@@ -168,6 +168,7 @@ module.exports = (app) ->
   app.use require "../apps/marklet"
   app.use require "../apps/import"
   app.use require '../apps/settings'
+  app.use require '../apps/ui'
 
   # Apps that use dynamic routes
   app.use require "../apps/user"

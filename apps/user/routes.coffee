@@ -6,6 +6,8 @@ ChannelBlocks = require "../../collections/channel_blocks.coffee"
 UserBlocks = require "../../collections/user_blocks"
 FollowBlocks = require "../../collections/follow_blocks"
 Channel = require "../../models/channel"
+graphQL = require "../../lib/graphql.coffee"
+query = require "./queries/profile.coffee"
 sd = require("sharify").data
 cache = require "../../lib/cache.coffee"
 tips = require './tips.coffee'
@@ -67,27 +69,65 @@ fetchFocus = (user, per=4)->
     success: ->
       blocks.unshift(addTips(req)) if showTips(req, res)
       res.locals.sd.BLOCKS = blocks.toJSON()
-      res.render "index", author: res.locals.author, blocks: blocks.models
 
-@userChannelsByAlpha = (req, res, next) ->
+      res.render "all",
+        author: res.locals.author
+        blocks: blocks.models
+
+@index = (req, res, next) ->
   return next() unless res.locals.author
 
   channels = new UserBlocks null,
     user_slug: req.params.username
     subject: 'channels'
 
-  Q.all [
-    channels.fetchUntilEnd data: auth_token: req.user?.get('authentication_token')
-    fetchFocus res.locals.author, req.query.per
-  ]
-  .then ([response, focus]) ->  
-    res.locals.sd.FOCUS = focus?.toJSON()
+  channels.fetchUntilEnd 
+    data: 
+      auth_token: req.user?.get('authentication_token')
+  .then ->  
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
-    res.render 'alpha',
+    res.locals.sd.SUBJECT = 'index'
+    res.render 'index',
       alpha: alpha
-      focus: focus
       count: channels.length
   .catch next
+
+channelsVariables = (req, res) ->
+  send = 
+    query: query
+    user: req.user or null
+    variables:
+      id: res.locals.author.id
+      per: 2,
+      perBlocks: 5
+      page: parseInt(req.query.page, 10) or 1
+      q: req.query.q
+      sort: req.query.sort?.toUpperCase() or 'UPDATED_AT'
+
+@channelsAPI = (req, res, next) ->
+  send = channelsVariables req, res
+  graphQL send
+    .then (response) ->
+      res.setHeader 'Content-Type', 'application/json'
+      res.send channels: response.user.contents
+    .catch next
+
+@channels = (req, res, next) ->
+  return next() unless res.locals.author
+
+  send = channelsVariables req, res
+  graphQL send
+    .then (response) ->
+      res.locals.sd.QUERY = req.query.q
+      res.locals.sd.PROFILE_CHANNELS = response.user.contents
+      res.locals.sd.SORT = send.variables.sort.toLowerCase()
+      res.locals.sd.SUBJECT = 'channel'
+
+      res.render 'channels',
+        channels: response.user.contents
+        author: res.locals.author
+
+    .catch next
 
 @followers = (req, res, next) ->
   return next() unless res.locals.author
@@ -105,7 +145,7 @@ fetchFocus = (user, per=4)->
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWERS = blocks.toJSON()
-      res.render "index",
+      res.render "all",
         blocks: blocks.models
         author: res.locals.author
         followers: true
@@ -127,7 +167,7 @@ fetchFocus = (user, per=4)->
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWING = blocks.toJSON()
-      res.render "index",
+      res.render "all",
         blocks: blocks.models
         author: res.locals.author
         following: true
