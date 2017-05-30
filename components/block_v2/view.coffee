@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+{ API_URL } = require '../../config.coffee'
 Channel = require '../../models/channel.coffee'
 Block = require '../../models/block.coffee'
 ConnectView = require '../connect/client/connect_view.coffee'
@@ -31,10 +32,12 @@ module.exports = class BlockView extends Backbone.View
     false
 
   getModel: ->
+    model = new Block id: @block.id
+    
     if @block.kind.__typename is 'Channel'
-      model = new Channel id: @block.id
+      model.url = "#{API_URL}/channels/#{@block.id}/thumb"
     else
-      model = new Block id: @block.id
+      model.url = "#{API_URL}/blocks/#{@block.id}"
     
     model
 

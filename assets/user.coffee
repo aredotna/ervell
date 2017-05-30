@@ -1,2 +1,2 @@
 $ ->
-  require("../apps/user/client.coffee").init()
+  require("../apps/user/client/all.coffee").init()

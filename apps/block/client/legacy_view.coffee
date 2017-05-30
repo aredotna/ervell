@@ -40,12 +40,12 @@ module.exports = class LegacyBlockView extends Backbone.View
 
   initModel: ->
     @model.on 'sync', @renderConnections, this
-    @connections = new Blocks @model.connections()
+    @connections = new Blocks @model?.connections()
     @setupUrlConnections()
 
     mediator.on "connection:added:#{@model.id}", @addConnections, this
 
-    if @model.get('class') is 'placeholder'
+    if @model.get('class') is 'placeholder' or @model.has('kind')
       @model.on 'sync', @render, this
 
   toggleSidebar: ->

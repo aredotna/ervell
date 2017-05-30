@@ -1,22 +1,23 @@
 #
-# The client-side code for a User Profile
+# Client-side code for 
+# /:username, /:username/blocks, /:username/following
 #
 
 Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
 scrollFrame = require 'scroll-frame'
-sd = require("sharify").data
-mediator = require '../../lib/mediator.coffee'
-User = require "../../models/user.coffee"
-UserBlocks = require '../../collections/user_blocks.coffee'
-FollowBlocks = require '../../collections/follow_blocks.coffee'
-InfiniteView = require '../../components/pagination/infinite_view.coffee'
-Filter = require '../../components/filter/index.coffee'
-PathView = require '../../components/path/client/path_view.coffee'
-MetaEditableAttributeView = require '../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
-UserBlockCollectionView = require '../../components/block_collection/client/user_block_collection_view.coffee'
-setupBlockCollection = require '../../components/blocks/container/client/index.coffee'
+sd = require('sharify').data
+mediator = require '../../../lib/mediator.coffee'
+User = require '../../../models/user.coffee'
+UserBlocks = require '../../../collections/user_blocks.coffee'
+FollowBlocks = require '../../../collections/follow_blocks.coffee'
+InfiniteView = require '../../../components/pagination/infinite_view.coffee'
+Filter = require '../../../components/filter/index.coffee'
+PathView = require '../../../components/path/client/path_view.coffee'
+MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
+UserBlockCollectionView = require '../../../components/block_collection/client/user_block_collection_view.coffee'
+setupBlockCollection = require '../../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->
   current_user = mediator.shared.current_user

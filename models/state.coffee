@@ -5,6 +5,7 @@ cookies = require 'cookies-js'
 module.exports = class State extends Backbone.Model
   defaults:
     view_mode: 'grid'
+    lightbox: false
 
   initialize: ->
     # set values from cookies
