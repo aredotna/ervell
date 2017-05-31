@@ -19,8 +19,13 @@ module.exports = ($el) ->
 
     deactivate = ->
       $dropdown.removeAttr 'data-active'
+
       document.documentElement.classList.remove 'HTML--disabled-scrolling'
+
       $surface.remove()
+
+      # Simulate mouseleave incase anything has bound to it
+      $target.trigger 'mouseleave'
 
     $surface.on 'click', (e) ->
       e.stopPropagation()

@@ -2,7 +2,7 @@
   display inline-block
   padding 0.2em 0.4em
   line-height 1
-  border-radius 0.15em
+  border-radius 0.1em
   background-color colors-gray-lighter
   color white
   font-weight bold
@@ -10,3 +10,8 @@
 
   &--alert
     background-color colors-state-alert
+
+  // Sort of specific padding to how `font-size-mobile` renders
+  // when it's specified as 13px
+  +mobile()
+    padding 0.3em 0.4em 0.2em 0.4em

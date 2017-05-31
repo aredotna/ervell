@@ -1,5 +1,6 @@
 {
   "font-size-root": "16px",
+  "font-size-mobile": "13px",
   "font": {
     "size-base": "1rem",
     "size-lg": "1.25rem",

@@ -20,6 +20,7 @@ analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCta = require '../logged_out_cta/index.coffee'
+{ isTouch } = require '../util/device.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -36,9 +37,13 @@ isMobile = ->
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 setMobileClass = ->
+  $body = $('body')
   if isMobile()
-    $('body').addClass 'is-mobile'
-    attachFastClick(document.body)
+    $body.addClass 'is-mobile'
+    attachFastClick document.body
+
+  if isTouch()
+    $body.addClass 'Body--touch'
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}

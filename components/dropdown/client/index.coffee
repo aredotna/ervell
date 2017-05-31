@@ -1,7 +1,7 @@
-{ isTouchDevice } = require '../../util/device.coffee'
+{ isTouch } = require '../../util/device.coffee'
 initMobile = require './mobile.coffee'
 
 module.exports = ($el) ->
-  return unless isTouchDevice()
+  return unless isTouch()
 
   initMobile $el
