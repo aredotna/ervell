@@ -40,7 +40,7 @@ module.exports = class Modalize extends Backbone.View
     $('body').addClass 'is-scrolling-disabled'
     $('#layout-header').css 'pointer-events', 'none'
 
-    $('.container').css
+    $('.js-container').css
       width: '100%'
       position: 'fixed'
       left: 0
@@ -81,7 +81,7 @@ module.exports = class Modalize extends Backbone.View
     @state 'close', =>
       $('body').removeClass 'is-scrolling-disabled'
       _.delay (=> $('#layout-header').css 'pointerEvents', 'auto'), 500
-      $('.container').removeAttr 'style'
+      $('.js-container').removeAttr 'style'
       $(document).scrollTop(@scrollPosition)
       @subView?.remove?()
       @remove()

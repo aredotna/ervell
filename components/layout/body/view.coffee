@@ -37,7 +37,7 @@ module.exports = class BodyView extends Backbone.View
     _.defer => @delegateEvents()
 
     if $('body').hasClass 'is-mobile'
-      _.defer => @delegateEvents(@mobileEvents) 
+      _.defer => @delegateEvents(@mobileEvents)
 
   startLoading: -> $('body').addClass 'is-loading'
 
@@ -57,7 +57,7 @@ module.exports = class BodyView extends Backbone.View
 
     if isLightBox
       offset = elOffset + ((windowHeight / 2) - (elHeight / 2))
-      $('.container').css { top: -offset }
+      $('.js-container').css { top: -offset }
       mediator.trigger 'position:updated', offset
     else
       $('html, body').animate { scrollTop: offset }, delay
@@ -67,9 +67,9 @@ module.exports = class BodyView extends Backbone.View
      $(e.target).hasClass('grid__block__delete-block') or
      $(e.target).hasClass('grid__block__delete-block__confirm__choice') or
      $(e.target).hasClass('grid__block__delete-block__confirm') or
-     $(e.currentTarget).hasClass('is-being-edited') or 
+     $(e.currentTarget).hasClass('is-being-edited') or
      $(e.target).hasClass('block-collection--list__column__follow')
-    
+
     return true if shouldIgnore
 
     e.preventDefault()
