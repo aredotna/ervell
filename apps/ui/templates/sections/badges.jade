@@ -1,0 +1,9 @@
+.UI__section
+  h3.Type
+    | Badges
+
+  .UI__section__component
+    .UI__section__component__rendered
+      for size, key in font
+        p.Type( style="font-size: #{size}" )
+          | font-#{key}: #{size}: You have <span class='Badge'>2</span> new messages

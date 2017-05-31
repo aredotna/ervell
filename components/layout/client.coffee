@@ -9,10 +9,7 @@ BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
 HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
-NewChannelView = require '../new_channel/client/new_channel_view.coffee'
-UserMenuView = require '../user_menu/client/user_menu_view.coffee'
-ViewMenuView = require '../view_menu/client/view_menu_view.coffee'
-NotificationsView = require '../notifications_menu/client/notifications_view.coffee'
+initLoggedInNavigation = require '../logged_in_navigation/client/index.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 State = require "../../models/state.coffee"
@@ -23,6 +20,7 @@ analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCta = require '../logged_out_cta/index.coffee'
+{ isTouch } = require '../util/device.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -39,9 +37,13 @@ isMobile = ->
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 setMobileClass = ->
+  $body = $('body')
   if isMobile()
-    $('body').addClass 'is-mobile'
-    attachFastClick(document.body)
+    $body.addClass 'is-mobile'
+    attachFastClick document.body
+
+  if isTouch()
+    $body.addClass 'Body--touch'
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}
@@ -82,19 +84,7 @@ setupViews = ->
       offset: 3
 
   if mediator.shared.current_user.id
-    new UserMenuView
-      el: $('.dropdown--menu--user')
-    new NewChannelView
-      el: $('.dropdown--menu--new-channel')
-    new NotificationsView
-      el: $('.dropdown--menu--notifications')
-
-    if mediator.shared.current_user.isPremium()
-      new ViewMenuView
-        el: $('.dropdown--menu--view')
-        model: mediator.shared.state
-
-    mediator.shared.notifications.fetch()
+    initLoggedInNavigation $('.js-logged-in-navigation')
 
 syncAuth = module.exports.syncAuth = ->
   if sd.CURRENT_USER

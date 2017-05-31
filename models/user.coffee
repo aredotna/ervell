@@ -49,3 +49,7 @@ module.exports = class User extends Model
     @__related__ =
       customer: new Customer
       policy: new Policy
+
+  initials: ->
+    @get('initials') or
+    _.first(@get('username').split(' ').map((name) => name[0]), 4).join('')

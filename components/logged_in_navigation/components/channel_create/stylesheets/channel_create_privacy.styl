@@ -1,0 +1,33 @@
+.ChannelCreatePrivacy
+  text-align center
+  margin 1em 0
+  padding 0 2em
+
+  &__label
+  &__selector
+  &__caption
+    line-height line-height-base !important
+
+  &__label
+    padding 0 !important
+    font-size font-size-xs !important
+    color colors-gray-light !important
+
+  &__selector
+    margin 0.5em 0
+    font-size font-size-base
+    font-weight bold
+    color colors-gray-light
+
+    > a
+      &[data-selected]
+        &[data-value='private']
+          color colors-channel-private
+        &[data-value='closed']
+          color colors-channel-closed
+        &[data-value='public']
+          color colors-channel-public
+
+  &__caption
+    font-size font-size-xs
+    color colors-gray-light

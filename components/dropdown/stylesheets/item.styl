@@ -1,0 +1,49 @@
+.DropdownItem
+  position relative
+  display block
+  font-size font-size-base
+  font-weight bold
+  line-height 1
+  padding button-padding
+  margin 0 0 -1px 0
+  border-bottom 1px solid colors-gray-lighter
+  text-align left
+  color colors-gray-text
+
+  &:before
+    display inline-block
+    content '/'
+    width 0.33em
+    margin-right 0.33em
+    text-align right
+
+  &:hover
+    color colors-gray-hover
+
+  &:active
+    color lighten(@color, 50%)
+
+  &__count
+    position absolute
+    top 50%
+    right 1em
+    transform translateY(-50%)
+
+  &--secondary
+    color colors-gray-light
+    padding (button-v-padding / 3) button-h-padding
+
+    > span
+      font-size font-size-sm
+
+    &:first-child
+      padding-top (button-h-padding)
+
+    &:last-child
+      padding-bottom (button-h-padding)
+
+    &:before
+      color transparent
+
+  &--primary + &--secondary
+    padding-top 0

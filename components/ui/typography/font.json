@@ -1,10 +1,12 @@
 {
   "font-size-root": "16px",
+  "font-size-mobile": "13px",
   "font": {
     "size-base": "1rem",
     "size-lg": "1.25rem",
     "size-sm": "0.875rem",
     "size-xs": "0.75rem",
+    "size-xx": "0.625rem",
     "size-h1": "2.5rem",
     "size-h2": "2rem",
     "size-h3": "1.75rem",

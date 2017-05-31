@@ -1,0 +1,67 @@
+.DropdownHover
+  position relative
+  display flex
+  align-items center
+  align-content center
+  justify-content center
+  padding 0 0.75em
+
+  // Pointer
+  &:after
+    size = 1em
+    display none
+    content ''
+    width 0
+    height 0
+    position absolute
+    left 50%
+    bottom 0
+    transform translate(-50%, 200%)
+    border-bottom (size / 2) solid colors-gray-border
+    border-right (size / 3) solid transparent
+    border-left (size / 3) solid transparent
+
+  &__trigger
+    font-size font-size-sm
+    font-weight bold
+    cursor pointer
+
+  > .Dropdown
+    display none
+    position fixed
+    top topbar_h + dropdown-border-width
+    margin-top 1em
+    right 1em
+    z-index dropdown_z
+    font-weight normal
+
+    // Invisible hit area
+    // for hover persistence
+    &:before
+      position absolute
+      display block
+      content ''
+      margin-top -(@margin-top)
+      top -(dropdown-border-width + 1)
+      right -(dropdown-border-width * 5)
+      bottom @right
+      left @right
+      z-index -1
+
+  &:hover
+    // Invisible hit area that
+    // overlaps adjacent targets
+    &:before
+      position absolute
+      content ''
+      display block
+      top 0
+      right -1em
+      bottom 0
+      left -1em
+
+    &:after
+      display block
+
+    > .Dropdown
+      display block

@@ -234,13 +234,13 @@ for i in (1..8)
     .flex-container
       center(block_width_mar * i)
 
-@media (max-width:(block_width_mar * 3) + 20)		
-  .flex-container		
+@media (max-width:(block_width_mar * 3) + 20)
+  .flex-container
     center(90%)
 
-@media (max-width:500px)
++mobile()
   html, body
-    font-size 13px
+    font-size font-size-mobile
     padding 0
 
   #scroll-top
@@ -261,9 +261,6 @@ for i in (1..8)
 @require '../iconic/iconic-glyphs'
 @require '../avatar/stylesheets/avatar'
 @require '../modal/index'
-@require '../new_channel/stylesheets/new_channel'
-@require '../view_menu/stylesheets/index'
-@require '../notifications_menu/stylesheets/index'
 @require '../path/stylesheets/path'
 @require '../meta_pocket/stylesheets/meta_pocket'
 @require '../share_link/stylesheets/share_link'

@@ -1,0 +1,37 @@
+.DropdownHover__trigger
+  .Avatar( data-initials= user.initials() )
+    img( src= user.get('avatar_image').thumb, alt= user.initials() )
+
+.Dropdown.js-dropdown
+  .DropdownSection
+    a.DropdownItem.DropdownItem--primary( href="/#{user.get('slug')}" )
+      = user.get('username')
+
+    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/channels" )
+      span Channels
+
+    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/blocks" )
+      span Blocks
+
+  a.DropdownItem( href='/' )
+    | Feed
+
+  a.DropdownItem( href='/explore' )
+    | Explore
+
+  a.DropdownItem( href='/tools' )
+    | Tools
+
+  a.DropdownItem( href='/about' )
+    | About &amp; FAQ
+
+  .DropdownSection
+    a.DropdownItem.DropdownItem--secondary( href='/settings' )
+      span Settings
+
+    unless user.isPremium()
+      a.DropdownItem.DropdownItem--secondary.Color--state-premium( href='/settings/billing' )
+        span Upgrade to Premium
+
+    a.DropdownItem.DropdownItem--secondary( href='/me/sign_out' )
+      span Log Out
