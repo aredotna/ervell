@@ -20,20 +20,20 @@ module.exports = class InfiniteView extends Backbone.View
 
   updatePosition: (pos) =>
     return if @disabled
-    if parseInt($('.container').css('top')) + @progress < -(@threshold) 
+    if parseInt($('.js-container').css('top')) + @progress < -(@threshold)
       @loadNextPage()
-      @progress = parseInt($('.container').height())
+      @progress = parseInt($('.js-container').height())
 
   maybeLoad: =>
-    return if @loading or 
-      @disabled or 
-      @collection.exhausted or 
+    return if @loading or
+      @disabled or
+      @collection.exhausted or
       mediator.shared.state.get 'lightbox'
 
     total = document.body.scrollHeight
     @progress = (document.documentElement.scrollTop || document.body.scrollTop) + window.innerHeight * 4
 
-    if (total - @progress < @threshold) and not @disabled 
+    if (total - @progress < @threshold) and not @disabled
       @loadNextPage()
 
   loadNextPage: ->

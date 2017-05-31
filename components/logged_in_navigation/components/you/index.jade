@@ -13,19 +13,22 @@
     a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/blocks" )
       span Blocks
 
+    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/index" )
+      span Index
+
   a.DropdownItem( href='/' )
     | Feed
 
   a.DropdownItem( href='/explore' )
     | Explore
 
-  a.DropdownItem( href='/tools' )
-    | Tools
-
-  a.DropdownItem( href='/about' )
-    | About &amp; FAQ
-
   .DropdownSection
+    a.DropdownItem.DropdownItem--secondary( href='/tools' )
+      span Tools
+
+    a.DropdownItem.DropdownItem--secondary( href='/about' )
+      span About &amp; FAQ
+
     a.DropdownItem.DropdownItem--secondary( href='/settings' )
       span Settings
 
