@@ -89,7 +89,7 @@ fetchFocus = (user, per=4)->
     res.locals.sd.SUBJECT = 'index'
     res.render 'index',
       alpha: alpha
-      count: channels.length
+      channelsCount: channels.length
   .catch next
 
 channelsVariables = (req, res) ->

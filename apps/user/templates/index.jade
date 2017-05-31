@@ -7,8 +7,7 @@ block body
   include _path
   if _.keys(alpha).length
     .channel-container.flex-container.channel-container--alpha
-      - extraclass = count > 10 ? "alpha--two-columns" : ""
-      .alpha(class=extraclass)
+      .alpha(class=channelsCount > 10 ? "alpha--two-columns" : "")
         for letter in range
           - group = alpha[letter]
           if group
