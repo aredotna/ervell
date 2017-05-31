@@ -1,3 +1,10 @@
+ChannelCreate__input--private-placeholder()
+  color colors-channel-private
+ChannelCreate__input--closed-placeholder()
+  color colors-channel-closed
+ChannelCreate__input--public-placeholder()
+  color colors-channel-public
+
 .ChannelCreate
   &__block
     display flex
@@ -17,6 +24,25 @@
     padding 0 !important
     text-align center !important
     border-radius 0
+
+    &--private
+      &
+      &:focus
+      &:hover
+        background-color transparent
+        placeholder(ChannelCreate__input--private-placeholder)
+    &--closed
+      &
+      &:focus
+      &:hover
+        background-color transparent
+        placeholder(ChannelCreate__input--closed-placeholder)
+    &--public
+      &
+      &:focus
+      &:hover
+        background-color transparent
+        placeholder(ChannelCreate__input--public-placeholder)
 
   &__metadata
     margin-top 1em
