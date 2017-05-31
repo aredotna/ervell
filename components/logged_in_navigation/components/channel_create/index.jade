@@ -8,7 +8,7 @@
       class="Color--channel-#{channel && channel.get('status')}"
     )
       input.Input.ChannelCreate__input.js-title(
-        class="ChannelCreate__input--#{channel.get('status')}"
+        class="ChannelCreate__input--#{channel && channel.get('status')}"
         name='title'
         value= channel && channel.get('title')
         placeholder='Type channel name'
