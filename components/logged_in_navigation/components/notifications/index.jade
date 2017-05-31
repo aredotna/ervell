@@ -5,7 +5,7 @@
     = count
 
 .Dropdown.js-dropdown
-  a.DropdownItem
+  a.DropdownItem( href='/notifications' )
     | Notifications
     span.DropdownItem__count
       = count
@@ -22,5 +22,5 @@
       .Notification
         | Loading
 
-  a.Button.Button--divider
+  a.Button.Button--divider( href='/notifications' )
     | View all notifications
