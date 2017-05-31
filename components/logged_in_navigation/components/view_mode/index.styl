@@ -14,8 +14,17 @@
     margin-right 1.66em
 
   &[data-active]
-    color colors-gray-lighter
+    position relative
     pointer-events none
+
+    &:after
+      display block
+      content '✔'
+      position absolute
+      top 50%
+      right 1.33em
+      transform translateY(-50%)
+      color colors-gray-light
 
 +mobile()
   .ViewModeToggle
