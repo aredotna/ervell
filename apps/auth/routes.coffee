@@ -48,11 +48,10 @@ clearCache = (user) ->
   url = req.body['redirect-to'] or
         req.query['redirect-to'] or
         req.param('redirect_uri') or
-        res.locals.sd.REDIRECT_TO or
         req.session.redirectTo or
         parse(req.get('Referrer') or '').path or
         '/'
-  console.log('redirect-back', url)
+
   res.redirect url
 
 @redirect = (req, res, next) ->
