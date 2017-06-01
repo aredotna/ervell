@@ -3,7 +3,7 @@ Backbone = require 'backbone'
 Block = require '../../models/block.coffee'
 analytics = require '../../lib/analytics.coffee'
 FollowButtonView = require '../follow_button/client/follow_button_view.coffee'
-BlockCollectionConnectIntegrationView = require '../connect_v2/integration/block_collection/view.coffee'
+BlockCollectionConnectIntegrationView = require '../connect/integration/block_collection/view.coffee'
 
 module.exports = class BlockView extends Backbone.View
   events:

@@ -1,6 +1,6 @@
 { extend, invoke } = require 'underscore'
 LegacyBlockView = require './legacy_view.coffee'
-InlineConnectIntegrationView = require '../../../components/connect_v2/integration/inline/view.coffee'
+InlineConnectIntegrationView = require '../../../components/connect/integration/inline/view.coffee'
 
 module.exports = class BlockView extends LegacyBlockView
   subViews: []

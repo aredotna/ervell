@@ -2,7 +2,7 @@ Backbone = require "backbone"
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
-BlockCollectionConnectIntegrationView = require '../../../connect_v2/integration/block_collection/view.coffee'
+BlockCollectionConnectIntegrationView = require '../../../connect/integration/block_collection/view.coffee'
 Comments = require '../../../../collections/comments.coffee'
 IconicJS = require '../../../../components/iconic/client/iconic.min.js'
 FollowButtonView = require '../../../follow_button/client/follow_button_view.coffee'
@@ -21,7 +21,7 @@ module.exports = class BlockView extends Backbone.View
 
   events:
     'click .block-collection--list__column__source'  : 'openLink'
-    'click .block-collection--list__column__connect' : 'loadConnectView'
+    'click .js-connect' : 'loadConnectView'
     'mouseenter .block-collection--list__column--comment' : 'loadLastComment'
     'click .edit-button' : 'startEditMode'
     'click .check-button' : 'quitEditMode'
