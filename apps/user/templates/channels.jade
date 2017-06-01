@@ -5,6 +5,8 @@ block body
   .UserChannels.js-user-channels
     if user && user.isPremium()
       .flex-container
+        - searchee = (user && author.id == user.id) ? "your " : author.get('username') + "'s public "
+        - title = searchee + "channels"
         include ../../../components/filter/templates/search_bar
     .UserChannels__groups.js-user-channels-contents
       include ../components/channels/groups

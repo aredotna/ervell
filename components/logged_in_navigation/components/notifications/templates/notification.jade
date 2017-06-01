@@ -17,7 +17,7 @@
 
   if group.is_single()
     if group.is_comment()
-      span.Notification__comment( href="#{group.single_target_link()}#comments" )
+      a.Notification__comment( href="#{group.single_target_link()}#comments" )
         != group.single_subject()
 
     else

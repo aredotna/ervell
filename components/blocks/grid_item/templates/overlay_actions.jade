@@ -1,4 +1,6 @@
-if block.get('class') === 'Link' || block.get('class') == 'Media'
+- attachmentExtension = block.get('attachment') && block.get('attachment').extension
+
+if block.get('class') === 'Link' || block.get('class') == 'Media' || attachmentExtension === 'mp3' || attachmentExtension === 'pdf'
   button.Button.Button--overlay.js-overlay-source
     | Source
 

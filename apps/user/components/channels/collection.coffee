@@ -19,7 +19,7 @@ module.exports = class UserChannelGroupCollection extends Base
 
   prepareAndFetch: ->
     paginating = contains(keys(@params.changed), 'page') and keys(@params.changed).length is 1
-    options = if paginating then { remove: false } else {}
+    options = if paginating then { remove: false } else { success: => @trigger 'searched'}
     @fetch options
 
   onlyBlocks: ->
