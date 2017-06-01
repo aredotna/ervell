@@ -30,6 +30,12 @@
     &[data-visibility=\'{visibility}\']
       color lookup('colors-channel-' + visibility)
       border-color rgba(@color, colors-border-alpha)
-
       &:hover
         border-color @color
+
+  &[data-visibility='placeholder']
+    cursor default
+    color colors-gray-light
+    border-color rgba(@color, colors-border-alpha)
+    &:hover
+      border-color @color

@@ -5,8 +5,11 @@ header.BlockSidebar__header.js-connection-count
   = connectionLabel
 
 .BlockConnectionsList.js-connections-list
-  for channel in connections
-    include ../../../../components/connection_list/compact
+  if connections.length
+    for channel in connections
+      include ../../../../components/connection_list/compact
+  else
+    include ../../../../components/connection_list/placeholder
 
 .BlockConnectionsList.js-url-connections-list
   //- Rendered client-side
