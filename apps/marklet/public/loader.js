@@ -3,9 +3,9 @@
   var markletDiv;
   var markletStyle;
 
-  var markletWidth = '335px'
-  var markletHeightContracted = '475px'
-  var markletHeightExpanded = '710px'
+  var markletWidth = 335;
+  var markletHeightContracted = 475;
+  var markletHeightExpanded = 710;
   var apiEndpoint = 'https://www.are.na';
 
   if (!document.getElementById("arena")) {
@@ -56,7 +56,12 @@
   function createStyle(){
     markletStyle = document.createElement("style");
     markletStyle.type = "text/css";
-    markletCSS = "#arena_frame,#arena_div{overflow-x:hidden;overflow-y:auto;width:"+markletWidth+";height:"+markletHeightContracted+";position:fixed;top:10px;right:10px;border:none}#arena_frame.is-expanded{height:"+markletHeightExpanded+"}#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}#arena_frame:hover{background:rgba(255,255,255,0.9);}#arena_div{z-index:9999999999;display:none;opacity:0}";
+    markletCSS = "" +
+      "#arena_frame,#arena_div{width:"+markletWidth+"px !important;height:"+markletHeightContracted+"px !important;position:fixed;top:20px;right:20px;border:5px solid #e7e7e5;border-radius:0.25em;overflow-x:hidden;overflow-y:auto;}" +
+      "#arena_frame.is-expanded{height:"+markletHeightExpanded+"px !important}" +
+      "#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}" +
+      "#arena_frame:hover{background:rgba(255,255,255,0.9);}" +
+      "#arena_div{z-index:9999999999;display:none;opacity:0}";
 
     if (markletStyle.styleSheet) {
       markletStyle.styleSheet.cssText = markletCSS;
