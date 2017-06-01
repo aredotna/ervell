@@ -1,96 +1,103 @@
-sb_font_size = 13px
-sb_line_height = 1.5
-
-.block-sidebar
-
-  width unit * 18
-  min-width unit * 18
-  height 100vh
-  background white
-  overflow auto
-  padding topbar_h unit 0
+.BlockSidebar
+  position relative
   display flex
   flex-direction column
+  height 100vh
+  font-size font-size-sm
+  width (block-sidebar-width + topbar_h)
+  min-width @width
+  padding topbar_h 2em 2em 2em
+  background-color white
+  overflow-y auto
 
-  +below(950px)
-    width 100%
-    height auto
-    min-width auto
-    .block-sidebar__toggle-info
-      display none
+  // General
+  &__content
+    flex 1
+    padding 1em 0 0 0
 
-  &.is-hidden
-    display none
+  &__header
+    margin 0.5em 0
+    padding-bottom 0.5em
+    font-size font-size-sm
+    line-height 1
+    color colors-gray-light
+    border-bottom 1px solid colors-gray-border
 
   &__section
-    margin (unit * 4) 0 (unit * .75)
-    &--first
-      margin-top (unit * 2)
-    &--comments
-      margin-top 0
+    collapsed-margins(4em)
 
-  &__separator
-    font-size sb_font_size
-    color lightgray
-    border-bottom 1px solid bordergray
-    padding-bottom (unit / 2)
-    margin-bottom (unit / 2)
-  &__wrapper
-    flex 1
-  &__toggle-info
-    padding (unit + 3) 3px
-    display block
-    color lightgray
-    font-weight bold
-    font-size sb_font_size
-    cursor pointer
-    text-align right
-    display block
+  // Specific attributes
+  &__title
+    collapsed-margins(0.5em)
+    width 100%
+    padding-right 0.5em
+    text-align left
+    font-size font-size-h5
+    line-height line-height-base
+    word-break break-word
 
-  &__info
-    &__title
-      text-align left
-      margin unit auto (unit / 2)
-      word-break break-word
-      height 100%
-      min-height 50px
-      h4
-        h4()
-        line-height 1.2
-        margin 0
-      &.attribute-group
-        display block
-      &.is-absent.can-read:not(.can-edit)
-        min-height (unit * 2)
-        display block !important
-        .placeholder
-          display none
+  &__timestamps
+    collapsed-margins(0.5em)
+    font-size font-size-xs
+    line-height line-height-tall
+    color colors-gray-light
 
-    &__date
-      font-size sb_font_size
-      line-height sb_line_height
-      color lightgray
+    > time
+      display block
       > a
         font-weight bold
 
-    &__source
-      font-weight bold
-      font-size sb_font_size
-      line-height sb_line_height
-      &__original
-        ellipsis(100%)
-        vertical-align bottom
+  &__description
+    collapsed-margins(0.5em)
+    overflow hidden
+    font-size font-size-sm
+    line-height line-height-tall
 
-    &__description
-      p 14px
-      margin 0
-      overflow hidden
-      margin-bottom unit
-      p
-        p 14px
-        margin-top 0
-        word-break break-word
-      li
-        word-break break-word
-      a
-        font-weight bold
+    *
+      word-break break-word
+    p
+      collapsed-margins(1em)
+    a
+      font-weight bold
+
+  &__provenance
+    collapsed-margins(0.5em)
+    font-size font-size-xs
+    line-height line-height-base
+
+    > a
+      display block
+      font-weight bold
+      > span
+        ellipsis(85%)
+
+    &:empty
+      display none
+
+  &__description + &__provenance
+    collapsed-margins(2em)
+
+  &__toggle
+    display block
+    text-align right
+    color colors-gray-light
+    font-weight bold
+    font-size font-size-sm
+    user-select none
+
+    > a
+      cursor pointer
+
+  // State
+  &--hidden
+    display none
+
+  // Responsive
+  +below(block-sidebar-breakpoint)
+    width 100%
+    min-width auto
+    height auto
+    padding 0 2em
+
+    .BlockSidebar__toggle
+      display none

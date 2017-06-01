@@ -1,9 +1,8 @@
-.block-sidebar__section--connect
-  margin-bottom 4em
+.BlockConnect
+  margin 1em 0 0 0
+  text-align center
 
-  &__button
-    margin 1em 0
-    text-align center
-
-    > .Button
-      margin connect-outer-border-size auto
+  > .Button
+    // Offset by size of outer border so that
+    // top border does not visually jump
+    margin-top connect-outer-border-size
