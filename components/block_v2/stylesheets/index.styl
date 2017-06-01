@@ -89,24 +89,24 @@
         padding (unit * 2) 0 0
         margin 0 0 0.4em
       &__stats
-        font-size s_small 
+        font-size s_small
         line-height 1.5em
       &--closed
-        border-color borderColor(colors-channel-closed)
+        border-color rgba(colors-channel-closed, colors-border-alpha)
         color colors-channel-closed
         &:hover
           border 2px solid colors-channel-closed
       &--private
-        border-color borderColor(colors-channel-private)
+        border-color rgba(colors-channel-private, colors-border-alpha)
         color colors-channel-private
         &:hover
           border 2px solid colors-channel-private
       &--public
-        border-color borderColor(colors-channel-public)
+        border-color rgba(colors-channel-public, colors-border-alpha)
         color colors-channel-public
         &:hover
           border 2px solid colors-channel-public
-    
+
     &--text
       display block
       padding unit

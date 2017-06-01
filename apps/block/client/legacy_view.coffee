@@ -10,9 +10,9 @@ IconicJS = -> require '../../../components/iconic/client/iconic.min.js'
 initComments = require '../../../components/comments/index.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
 
-template = -> require('../templates/_block.jade') arguments...
-connectionsTemplate = -> require('../templates/_connections.jade') arguments...
-urlConnectionsTemplate = -> require('../templates/_url_connections.jade') arguments...
+template = -> require('../templates/block.jade') arguments...
+connectionsTemplate = -> require('../templates/connections.jade') arguments...
+urlConnectionsTemplate = -> require('../templates/url_connections.jade') arguments...
 
 module.exports = class LegacyBlockView extends Backbone.View
   cookieKey: 'sidebar-hidden'
@@ -39,8 +39,10 @@ module.exports = class LegacyBlockView extends Backbone.View
     @initModel()
 
   initModel: ->
-    @model.on 'sync', @renderConnections, this
+    @listenTo @model,  'sync', @renderConnections
+
     @connections = new Blocks @model?.connections()
+
     @setupUrlConnections()
 
     mediator.on "connection:added:#{@model.id}", @addConnections, this
@@ -51,8 +53,8 @@ module.exports = class LegacyBlockView extends Backbone.View
   toggleSidebar: ->
     currentValue = Cookies.get @cookieKey
     newValue = if currentValue is 'true' then 'false' else 'true'
-    @$('.block-sidebar').toggleClass 'is-hidden'
-    @$('.block-content').toggleClass 'is-wide'
+    @$('.js-block-sidebar').toggleClass 'BlockSidebar--hidden'
+    @$('.js-block-content').toggleClass 'BlockContent--wide'
     Cookies.set @cookieKey, newValue
 
   setupUrlConnections: ->
@@ -77,8 +79,8 @@ module.exports = class LegacyBlockView extends Backbone.View
   updateConnectionCount: ->
     count = @model.get('connections')?.length + @urlConnections.models.length
 
-    s = if count == 1 then '' else 's'
-    @$('#tab-connection-count').text "#{count or 0} Connection#{s}"
+    s = if count is 1 then '' else 's'
+    @$('.js-connection-count').text "#{count or 0} Connection#{s}"
 
   handleFlick: (e) ->
     direction = if e.direction is 1 then 'left' else 'right'

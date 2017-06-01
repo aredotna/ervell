@@ -1,7 +1,0 @@
-.block-sidebar__section.block-sidebar__section--comments
-  #tab-connection-count.block-sidebar__separator
-    - s = block.get('comment_count') == 1 ? '' : 's'
-    | #{block.get('comment_count')} Comment#{s}
-
-  .BlockComments.js-comments
-    include ../../../../components/comments/templates/index

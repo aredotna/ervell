@@ -1,27 +1,13 @@
-/* GENERAL */
-borderColor(color)
-  rgba(color, 30%)
-
 .grid
-  display -webkit-box
-  display -moz-box
-  display -ms-flexbox
-  display -webkit-flex
   display flex
-  -webkit-flex-flow row wrap
-  -moz-flex-flow row wrap
-  -ms-flex-flow row wrap
   flex-flow row wrap
   align-items center
 
 .grid--feed
-  -webkit-justify-content center
   justify-content center
 
 .grid__block
   flex 1 1 285px
-  -webkit-flex 1 1 285px
-  -ms-flex 1 1 285px
   max-width 315px
   text-align center
   margin 0 10px 90px 10px
@@ -284,21 +270,21 @@ body:not(.is-mobile) .grid__block:hover
 .grid__block--channel
   .grid__block__inner, .grid__block__overlay
     &--closed
-      border-color borderColor(colors-channel-closed)
+      border-color rgba(colors-channel-closed, colors-border-alpha)
       color colors-channel-closed
       &:hover
         border-color colors-channel-closed
     &--private
-      border-color borderColor(colors-channel-private)
+      border-color rgba(colors-channel-private, colors-border-alpha)
       color colors-channel-private
       &:hover
         border-color colors-channel-private
     &--public
-      border-color borderColor(colors-channel-public)
+      border-color rgba(colors-channel-public, colors-border-alpha)
       color colors-channel-public
       &:hover
         border-color colors-channel-public
-  
+
   h2
     font-weight normal
     padding 15px 12px 0 12px
@@ -378,7 +364,6 @@ body:not(.is-mobile) .grid__block:hover
 
 @media (max-width:(block_width_mar * 3))
   .grid
-    -webkit-justify-content center
     justify-content center
 
 body.is-mobile
@@ -400,5 +385,4 @@ body.is-mobile
     display static !important
 
 @require '../../lightbox/stylesheets/lightbox' // Includes random styles that need to be deprecated
-@require '../../connect/stylesheets/connect' // This includes some really random styles unrelated to actual connect, so we still need it for now... :\
 @require '../../connect_v2/stylesheets/index'
