@@ -4,8 +4,6 @@
   border 2px solid
   cursor pointer
 
-  title-width = 65%
-
   > span
     display flex
     align-items center
@@ -13,10 +11,17 @@
     padding button-padding
 
   &__title
-    max-width title-width
+  &__author
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+    max-width 75%
+
+  &__title
+    flex 1
     font-size font-size-base
     line-height line-height-base
-    ellipsis(title-width)
+    margin-right 0.5em
 
     > span
       font-size font-size-xs
@@ -24,7 +29,6 @@
   &__author
     font-size font-size-xs
     line-height line-height-base
-    ellipsis(100% - title-width)
 
   for visibility in 'public' 'closed' 'private'
     &[data-visibility=\'{visibility}\']
