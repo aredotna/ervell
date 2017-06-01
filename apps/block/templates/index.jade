@@ -1,14 +1,13 @@
-extends ../../../components/layout/index
+extends ../../../components/layout/index--infinite
 
 block vars
   - extraClasses = 'no-scroll-button no-banner'
 
 block meta
-  include _meta
-
+  include meta
 
 block body
-  include _block
+  include block
 
 block scripts
-  script( src=asset('/assets/block.js') )
+  script( src= asset('/assets/block.js') )

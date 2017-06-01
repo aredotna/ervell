@@ -1,21 +1,16 @@
 Backbone = require 'backbone'
 { API_URL } = require('sharify').data
-Channel = require '../../models/channel.coffee'
 Block = require '../../models/block.coffee'
-ConnectView = require '../connect/client/connect_view.coffee'
 analytics = require '../../lib/analytics.coffee'
-mediator = require '../../lib/mediator.coffee'
 FollowButtonView = require '../follow_button/client/follow_button_view.coffee'
 BlockCollectionConnectIntegrationView = require '../connect_v2/integration/block_collection/view.coffee'
 
 module.exports = class BlockView extends Backbone.View
-
-  events: 
+  events:
     'click .js-source' : 'openSource'
     'click .js-connect' : 'openConnect'
 
-  initialize: ({ @block }) ->
-    # nothing
+  initialize: ({ @block }) -> #
 
   openSource: (e) ->
     analytics.track.click "Block source opened"
@@ -33,12 +28,12 @@ module.exports = class BlockView extends Backbone.View
 
   getModel: ->
     model = new Block id: @block.id
-    
+
     if @block.kind.__typename is 'Channel'
       model.url = "#{API_URL}/channels/#{@block.id}/thumb"
     else
       model.url = "#{API_URL}/blocks/#{@block.id}"
-    
+
     model
 
   openConnect: (e) ->
@@ -47,10 +42,10 @@ module.exports = class BlockView extends Backbone.View
 
     $target = @$('.js-connect-container')
 
-    # temp: get a real block
+    # TODO: get a real block
     block = @getModel()
 
-    block.fetch 
+    block.fetch
       success: =>
         @$el.addClass 'Block--connecting'
 
@@ -62,7 +57,7 @@ module.exports = class BlockView extends Backbone.View
         $target
           .addClass 'is-active'
           .html view.render().$el
-  
+
   renderFollowButton: ->
     model = @getModel()
     model.fetch

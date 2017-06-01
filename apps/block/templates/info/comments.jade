@@ -1,0 +1,7 @@
+- s = block.get('comment_count') === 1 ? '' : 's'
+
+header.BlockSidebar__header
+  | #{block.get('comment_count')} Comment#{s}
+
+.BlockComments.js-comments
+  include ../../../../components/comments/templates/index
