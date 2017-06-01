@@ -7,6 +7,7 @@ CurrentUser = require '../../../../models/current_user.coffee'
 ChannelGroupView = require '../../../../components/channel_block_group/view.coffee'
 
 template = -> require('./groups.jade') arguments...
+channelGroupTemplate = -> require('../../../../components/channel_block_group/templates/index.jade') arguments...
 
 module.exports = class ProfileView extends Backbone.View
   threshold: -500
@@ -27,7 +28,8 @@ module.exports = class ProfileView extends Backbone.View
       disabled: false
 
     @listenTo @collection, 'sync', @unsetLoading
-    @listenTo @collection, 'sync', @render
+    @listenTo @collection, 'add', @appendChannel
+    @listenTo @collection, 'searched', @render
     @listenTo @state, 'change', @setLoading
 
   loadingOrExpired: ->
@@ -68,6 +70,17 @@ module.exports = class ProfileView extends Backbone.View
   unsetLoading: (collection, response) ->
     @state.set 'loading', false
     @state.set('disabled', true) unless response.channels.length
+
+  appendChannel: (model) ->
+    @$('.js-user-channels-contents').append channelGroupTemplate
+      channel: model.toJSON()
+      user: @user
+    
+    view = new ChannelGroupView
+      channel: model.toJSON()
+      el: @$(".js-channel-group[data-id=#{model.id}]")
+    
+    view.initBlockViews()  
 
   render: ->
     channels = @collection.toJSON()
