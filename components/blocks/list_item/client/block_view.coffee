@@ -21,7 +21,7 @@ module.exports = class BlockView extends Backbone.View
 
   events:
     'click .block-collection--list__column__source'  : 'openLink'
-    'click .block-collection--list__column__connect' : 'loadConnectView'
+    'click .js-connect' : 'loadConnectView'
     'mouseenter .block-collection--list__column--comment' : 'loadLastComment'
     'click .edit-button' : 'startEditMode'
     'click .check-button' : 'quitEditMode'
