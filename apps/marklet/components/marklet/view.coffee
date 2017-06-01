@@ -4,8 +4,8 @@ Backbone = require 'backbone'
 { isURL } = require 'validator'
 { API_URL, QUERY } = require('sharify').data
 mediator = require '../../../../lib/mediator.coffee'
-ConnectView = require '../../../../components/connect_v2/client/view.coffee'
-ConnectCollections = require '../../../../components/connect_v2/client/collections.coffee'
+ConnectView = require '../../../../components/connect/client/view.coffee'
+ConnectCollections = require '../../../../components/connect/client/collections.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class MarkletView extends Backbone.View

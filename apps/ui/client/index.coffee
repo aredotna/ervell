@@ -1,4 +1,4 @@
-Connect = require '../../../components/connect_v2/client/index.coffee'
+Connect = require '../../../components/connect/client/index.coffee'
 
 module.exports = ->
   Connect $('.js-connect')
