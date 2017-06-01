@@ -51,6 +51,7 @@ clearCache = (user) ->
         req.session.redirectTo or
         parse(req.get('Referrer') or '').path or
         '/'
+
   res.redirect url
 
 @redirect = (req, res, next) ->
