@@ -22,7 +22,7 @@ block metadata
   .metadata
     if author.isPremium() && ((user && author.id == user.id) || author.has('metadata'))
       include metadata_pockets/about
-    if user
+    if user && user.has('username')
       include metadata_pockets/info
     unless following || followers
       include metadata_pockets/view
