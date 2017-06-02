@@ -17,26 +17,29 @@
           time( datetime= block.get('updated_at'), title= block.get('updated_at') )
             | Last updated #{block.updatedAtAgo()}
 
-    section.BlockSidebar__section
-      header.BlockSidebar__header
-        | Info
 
-      //- Conditional here prevents content shifting when logged out
-      if (user && user.id === block.get('user').id) || block.get('description')
-        .BlockSidebar__description( id="attribute-description_#{block.id}" )
-          //- Non-breaking space here prevents content shifting when logged in
-          != block.get('description') || '&nbsp;'
+    //- Possibly hide entire info section
+    if (user && user.id === block.get('user').id) || block.get('description') || block.has('source') || block.has('image')
+      section.BlockSidebar__section
+        header.BlockSidebar__header
+          | Info
 
-      .BlockSidebar__provenance
-        if block && (block.has('source') || block.has('image'))
-          a( href= block.getSourceUrl() target='_blank' )
-            span= block.sourceTitle()
+        //- Conditional here prevents content shifting when logged out
+        if (user && user.id === block.get('user').id) || block.get('description')
+          .BlockSidebar__description( id="attribute-description_#{block.id}" )
+            //- Non-breaking space here prevents content shifting when logged in
+            != block.get('description') || '&nbsp;'
 
-        if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
-          a(
-            href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}"
-            target='_blank'
-          ) Find original
+        .BlockSidebar__provenance
+          if block.has('source') || block.has('image')
+            a( href= block.getSourceUrl() target='_blank' )
+              span= block.sourceTitle()
+
+          if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
+            a(
+              href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}"
+              target='_blank'
+            ) Find original
 
     section.BlockSidebar__section
       include info/connections
