@@ -3,6 +3,7 @@ Promise = require 'bluebird-q'
 AsyncSerialQueue = require '../../../../lib/async_serial_queue.coffee'
 mediator = require '../../../../lib/mediator.coffee'
 { API_URL } = require('sharify').data
+marquee = require '../../lib/marquee.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class ConnectItemView extends Backbone.View
@@ -10,6 +11,10 @@ module.exports = class ConnectItemView extends Backbone.View
 
   events:
     click: 'toggle'
+    mouseenter: ->
+      @marquee().start()
+    mouseleave: ->
+      @marquee().end()
 
   initialize: ({ @connectable }) ->
     @queue = new AsyncSerialQueue
@@ -39,6 +44,10 @@ module.exports = class ConnectItemView extends Backbone.View
 
   perform: (_channel, shouldConnect) ->
     if shouldConnect then @connect() else @disconnect()
+
+  marquee: ->
+    @__marquee__ ?=
+      marquee(@$el, @$('.js-label'), { offset: 40 })
 
   render: ->
     @$el.html template
