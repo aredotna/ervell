@@ -2,7 +2,7 @@ a(
   href="/#{channel.user.slug}/#{channel.slug}"
   data-selected= channel[key]
 )
-  span
+  span.Connect__item-label.js-label
     = channel.user.full_name
     span.Separator
     span( class="Color--channel-#{channel.status}" )

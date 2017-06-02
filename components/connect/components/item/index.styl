@@ -11,20 +11,31 @@
     display block
     position relative
     margin 0 0 -1px 0
-    // Extra rightmost padding to account check/remove glyphs
-    padding input-v-padding (input-h-padding * 3) input-v-padding input-h-padding
+    padding input-padding
     border 1px solid colors-gray-lighter
     line-height 1
     text-align left
-    font-weight normal !important // Sigh
+    font-weight normal !important
     color colors-gray-text
+    overflow hidden
 
-    > span
-      overflow ellipsis
+    &:before
+      content ''
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      width 1em
+      background linear-gradient(to left, colors-gray-background, rgba(white, 0))
+      z-index 1
 
     &:hover
       border 1px solid colors-gray-text
       z-index 1
+
+      &:before
+        width 3em
+        background linear-gradient(to left, colors-gray-background 60%, rgba(white, 0))
 
     &:hover
     &[data-selected]
@@ -36,12 +47,17 @@
         right 1em
         transform translateY(-50%)
         color colors-gray-light
+        z-index 2
 
     &[data-selected]
-      > span
+      .Connect__item-label
         opacity 0.5
 
       &:hover:after
         content '×'
         font-size font-size-lg
         right 0.5em
+
+.Connect__item-label
+  display block
+  white-space nowrap

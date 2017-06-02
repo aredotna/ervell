@@ -1,4 +1,7 @@
+Backbone = require 'backbone'
 Connect = require '../../../components/connect/client/index.coffee'
 
 module.exports = ->
-  Connect $('.js-connect')
+  view = Connect new Backbone.Model
+
+  $('.js-connect').html view.render().$el
