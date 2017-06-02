@@ -47,11 +47,13 @@ module.exports = class ConnectItemView extends Backbone.View
 
   marquee: ->
     @__marquee__ ?=
-      marquee(@$el, @$('.js-label'), { offset: 40 })
+      marquee @$el, @$('.js-label'), offset: 20
 
   render: ->
     @$el.html template
       key: @key
       channel: @model.toJSON()
+
+    @__marquee__ = null
 
     this
