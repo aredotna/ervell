@@ -19,6 +19,8 @@ module.exports = class Router extends Backbone.Router
 
   initialize: ->
     mediator.on 'slide:to:block', @updateRoute, @
+    @onChangeCaptureUrlParams()
+
 
   login: ->
     return if sd.CURRENT_PATH is '/log_in'
@@ -69,5 +71,11 @@ module.exports = class Router extends Backbone.Router
   removeRoute: ->
     loc = window.location
     history.pushState "", document.title, sd.CURRENT_PATH
-    @navigate sd.CURRENT_PATH, trigger: false, replace: true
+    @navigate sd.CURRENT_PATH + @urlSearchParams, trigger: false, replace: true
 
+  onChangeCaptureUrlParams: ->
+    @urlSearchParams = ''
+
+    @on 'route', ->
+      { search } = window.location
+      @urlSearchParams = search if !_.isEmpty(search)
