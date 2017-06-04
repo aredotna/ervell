@@ -81,6 +81,7 @@ module.exports = (app) ->
     app.use require("browserify-dev-middleware")
       src: path.resolve(__dirname, "../")
       transforms: [require("jadeify"), require('caching-coffeeify')]
+      debug: true
 
   # Test only
   if "test" is NODE_ENV
