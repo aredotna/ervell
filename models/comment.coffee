@@ -39,6 +39,11 @@ module.exports = class Comment extends Base
     html += text.slice(lastPosition)
     xss html
 
+  getStrippedHTML: ->
+    @getHTML()
+      .replace("<a", "<strong")
+      .replace("</a", "</strong")
+
   getPermissions: (user)->
     return "" unless @has('user') and user?
 
