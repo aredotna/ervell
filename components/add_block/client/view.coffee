@@ -43,10 +43,10 @@ module.exports = class AddBlockView extends Backbone.View
 
   checkInput: ->
     if (@dom.input.val().trim()) isnt ''
-      @$el.addClass 'AddBlock--typing'
+      @$el.addClass "#{@className}--typing"
       @dom.button.removeAttr 'disabled'
     else
-      @$el.removeClass 'AddBlock--typing'
+      @$el.removeClass "#{@className}--typing"
       @dom.button.attr 'disabled', true
 
   choose: (e) ->
