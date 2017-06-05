@@ -12,6 +12,9 @@ module.exports = ($el) ->
 
     $target = $(this)
 
+    # Simulate mouseenter incase anything has bound to it
+    $target.trigger 'mouseenter'
+
     $dropdown = $target.find('.js-dropdown')
     $dropdown.attr 'data-active', true
 
