@@ -23,7 +23,6 @@ module.exports = class BlockView extends Backbone.View
     'click .js-overlay-connect': 'loadConnectView'
     'click .grid__block__delete-block': 'confirmDestroy'
     'click .tooltip__choice': 'confirmChoice'
-    'click .grid__block--tip__close a': 'hideTip'
     'mouseover': 'onMouseOver'
     'mouseout': 'onMouseOut'
 
@@ -153,15 +152,7 @@ module.exports = class BlockView extends Backbone.View
 
   destroyConnection: ->
     @model.destroy channel: @channel
-
     analytics.track.click "Block removed from channel"
-
-    @remove()
-
-  hideTip: ->
-    analytics.track.click "Block tip closed", id: @model.id
-    Cookies.set @model.id, true
-    @model.collection.remove @model
     @remove()
 
   postRender: ->

@@ -10,7 +10,7 @@ graphQL = require "../../lib/graphql.coffee"
 query = require "./queries/profile.coffee"
 sd = require("sharify").data
 cache = require "../../lib/cache.coffee"
-tips = require './tips.coffee'
+{ addTips } = require './components/tips/helpers.coffee'
 
 @fetchAuthor = (req, res, next) ->
   author = new User id: req.params.username
@@ -19,28 +19,8 @@ tips = require './tips.coffee'
     success: (author) ->
       res.locals.author = author
       res.locals.sd.USER = author.toJSON()
+      res.locals.tips = res.locals.sd.TIPS = addTips(req.user, author, req.cookies)
     complete: -> next()
-
-showTips = (req, res) ->
-  (req.user?.id is res.locals.author.id and req.user?.get('show_tour') isnt false)
-
-addTips = (req) ->
-  _.reject tips, (tip) -> req.cookies[tip.id]
-
-fetchFocus = (user, per=4)->
-  dfd = Q.defer()
-  
-  blocks = new UserBlocks null,
-    user_slug: user.get('slug')
-    per: per
-  
-  blocks.fetch
-    success: ->
-      blocks.map (block) -> block.set silent: true
-      dfd.resolve blocks
-    error: (blocks, err) -> dfd.resolve blocks
-
-  dfd.promise
 
 @user = (req, res, next) ->  
   return next() unless res.locals.author
@@ -67,7 +47,6 @@ fetchFocus = (user, per=4)->
       auth_token: req.user?.get('authentication_token')
     error: (m, err) -> next err
     success: ->
-      blocks.unshift(addTips(req)) if showTips(req, res)
       res.locals.sd.BLOCKS = blocks.toJSON()
 
       res.render "all",
