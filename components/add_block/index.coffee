@@ -1,10 +1,7 @@
 AddBlockView = require './client/view.coffee'
-Collection = require '../../collections/base.coffee'
 
-module.exports = ($el, blocks = null) ->
-  unless blocks
-    blocks = new Collection
-    blocks.url = '/statuses/200'
+module.exports = ($el, blocks) ->
+  throw new Error 'requires Blocks collection' unless blocks
 
   view = new AddBlockView
     el: $el

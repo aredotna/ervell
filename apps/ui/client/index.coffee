@@ -1,7 +1,8 @@
-Backbone = require 'backbone'
-Connect = require '../../../components/connect/client/index.coffee'
+AddBlock = require '../../../components/add_block/index.coffee'
+Collection = require '../../../collections/base.coffee'
 
 module.exports = ->
-  view = Connect new Backbone.Model
+  blocks  = new Collection
+  blocks.url = '/statuses/200'
 
-  $('.js-connect').html view.render().$el
+  $('.js-add-block').each -> AddBlock $(this), blocks
