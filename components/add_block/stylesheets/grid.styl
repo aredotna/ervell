@@ -1,0 +1,95 @@
+.AddBlock
+  display flex
+  flex-direction column
+  justify-content space-between
+  width block_width
+  height @width
+  background-color colors-gray-background
+
+  &__hover
+    position relative
+    display flex
+    align-items center
+    flex 1
+    margin 1em 1em 0 1em
+    background-color colors-gray-background
+    cursor text
+
+    // +
+    &:before
+      content '+'
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      color colors-gray-light
+      font-size font-size-h1
+
+    > textarea
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      left 0
+      z-index -1
+
+      &
+      &:hover
+        background-color transparent
+
+      &:focus
+        background-color colors-gray-secondary
+        z-index 1
+
+    // Placeholder message
+    > span
+      display none
+      padding 0 1em
+      text-align center
+      font-size font-size-h5
+      line-height line-height-base
+      color colors-gray-light
+      background-color colors-gray-secondary
+
+      > a
+        text-decoration none
+        box-shadow inset 0 -1px 0 0 colors-gray-light
+        cursor pointer
+        &:hover
+          box-shadow inset 0 -1px 0 0 colors-gray-hover
+
+    &:hover
+      background-color colors-gray-secondary
+
+      // Hide plus
+      &:before
+        display none
+
+      // Show placeholder message
+      > span
+        display block
+
+  &__tip
+    position absolute
+    font-size font-size-xx
+    line-height 1
+    z-index 1
+    left 50%
+    bottom 1em
+    transform translateX(-50%)
+    opacity 0
+    transition opacity 250ms
+    pointer-events none
+
+  &__button
+    &:after
+      content ' →'
+
+  // States
+  &--typing
+    .AddBlock
+      &__hover
+        z-index 1
+
+      &__tip
+        opacity 0.5
