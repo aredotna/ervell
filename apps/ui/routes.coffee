@@ -3,8 +3,8 @@
 colors = require '../../components/ui/colors/colors.json'
 font = require '../../components/ui/typography/font.json'
 
-@index = (req, res, next) ->
+@index = (_req, res) ->
   res.render 'index', extend {}, colors, font
 
-@page = (req, res, next) ->
+@page = (req, res) ->
   res.render "pages/#{req.params.page}"

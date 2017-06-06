@@ -14,7 +14,7 @@ module.exports.init = ->
     blocks = new ChannelBlocks sd.BLOCKS, channel_slug: sd.CHANNEL.slug
 
     setupBlockCollection
-      $el: $('.channel-contents')
+      $el: $('.js-channel-contents')
       collection: blocks
       mode: 'skeleton'
 

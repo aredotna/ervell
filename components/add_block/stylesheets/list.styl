@@ -1,0 +1,34 @@
+.AddBlock
+  &--list
+    flex-direction row
+    width 100%
+    height auto
+
+    .AddBlock
+      &__hover
+        background-color colors-gray-secondary
+        margin 0
+        // https://css-tricks.com/flexbox-truncated-text/
+        min-width 0
+
+        // Disables +
+        &:before
+          display none
+
+        // Show placeholder
+        > span
+          font-size font-size-base
+          padding-right button-h-padding
+          padding-left @padding-right
+          ellipsis(100%)
+          max-width 100%
+
+        > textarea
+          padding button-padding
+
+      &__button
+        white-space nowrap
+        flex-basis 25%
+
+        &:after
+          content ' ↓'

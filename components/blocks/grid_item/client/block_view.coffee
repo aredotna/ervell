@@ -123,7 +123,7 @@ module.exports = class BlockView extends Backbone.View
         user: @current_user
         channel: @channel
     else
-      @container.find('.grid__block--new-block')[@containerMethod] blockTemplate
+      @container.find('.js-add-block')[@containerMethod] blockTemplate
         block: @model
         user: @current_user
         channel: @channel

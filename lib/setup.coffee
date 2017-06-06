@@ -171,6 +171,10 @@ module.exports = (app) ->
   app.use require '../apps/settings'
   app.use require '../apps/ui'
 
+  # Dev only routes
+  if "development" is NODE_ENV
+    app.use require "../apps/statuses"
+
   # Apps that use dynamic routes
   app.use require "../apps/user"
   app.use require "../apps/block"

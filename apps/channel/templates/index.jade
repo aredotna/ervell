@@ -4,10 +4,10 @@ block styles
   link(rel="alternate" type="application/rss+xml" title="Are.na / #{channel.get('title')} / Feed" href="#{channel.href()}/feed/rss/")
 
 block body
-  .channel
+  .channel.js-channel
     include _path
     .channel-container
-      .channel-contents
+      .channel-contents.js-channel-contents
         - title = channel.get('title')
         include ../../../components/blocks/container/templates/index
       .channel-empty

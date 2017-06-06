@@ -1,12 +1,11 @@
-{ defer, each, delay } = require 'underscore'
 Backbone = require 'backbone'
+{ defer, each, delay } = require 'underscore'
+{ API_URL } = require('sharify').data
 mediator = require '../../../../lib/mediator.coffee'
 InfiniteView = require '../../../pagination/infinite_view.coffee'
 SkeletonView = require '../../../pagination/skeleton_view.coffee'
 GridBlockView = require '../../grid_item/client/block_view.coffee'
 ListBlockView = require '../../list_item/client/block_view.coffee'
-GridNewBlockView = require '../../grid_item/client/new_block_view.coffee'
-ListNewBlockView = require '../../list_item/client/new_block_view.coffee'
 
 module.exports = class BlockCollectionView extends Backbone.View
   postRendered: false
@@ -16,9 +15,6 @@ module.exports = class BlockCollectionView extends Backbone.View
   views:
     grid: GridBlockView
     list: ListBlockView
-  newBlockViews:
-    grid: GridNewBlockView
-    list: ListNewBlockView
   newBlockContainer:
     grid: '.block-collection__contents'
     list: '.block-collection--list__new-block'
@@ -42,7 +38,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   initialize: ({ @mode, @state, @resultsCollection, @channel }) ->
     @listenTo @collection, 'merge:skeleton', @render
-    @listenTo @collection, 'add', @appendBlockView, @
+    @listenTo @collection, 'add', @appendBlockView
     @listenTo @resultsCollection, 'sync reset', @render
 
     mediator.shared.state.on 'change:hovered_channel', @onChannelHover, @
@@ -58,7 +54,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   onChannelHover: ->
     channelId = mediator.shared.state.get 'hovered_channel'
     clearTimeout @delayId
-    
+
     if channelId
       @delayId = setTimeout((=> @highlightBlocks(channelId)), 500)
     else
@@ -66,12 +62,12 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   highlightBlocks: (channelId)->
     visibleBlockIds = $('.block-item').withinviewport().map(-> $(this).data('id')).get()
-    blockPool = @collection.filter (block) -> 
+    blockPool = @collection.filter (block) ->
       visibleBlockIds.indexOf(parseInt(block.id)) > -1
     each blockPool, (block) ->
       unless block.get('channel_ids').indexOf(parseInt(channelId)) > -1 or block.id is channelId
         block.set deselected: true
-  
+
   unhighlightBlocks: ->
       blockPool = @collection.where deselected: true
       each blockPool, (block) -> block.unset 'deselected'
@@ -120,14 +116,6 @@ module.exports = class BlockCollectionView extends Backbone.View
         parentView: @
         autoRender: false
         el: $block
-
-  setupNewBlockView: ({ channel, autoRender =  false }) ->
-    @newBlockView = new @newBlockViews[@state.get('view_mode')]
-      el: $('.block-item--new')
-      blocks: @collection
-      autoRender: autoRender
-      model: channel
-      $container: $(@newBlockContainer[@state.get('view_mode')])
 
   renderBlockView: (block, autoRender = false) =>
     containerMethodType = if block?.options?.wait is true then 'wait' else 'default'
