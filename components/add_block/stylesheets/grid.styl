@@ -31,7 +31,6 @@
       right 0
       bottom 0
       left 0
-      z-index -1
 
       &
       &:hover
@@ -86,6 +85,17 @@
       content ' →'
 
   // States
+  &--initialized
+    .AddBlock
+      &__hover
+        // Move textarea down a layer so that 'choose'
+        // can be clicked
+        > textarea
+          z-index -1
+          // Move back up on focus
+          &:focus
+            z-index 1
+
   &--typing
     .AddBlock
       &__hover

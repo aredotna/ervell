@@ -42,7 +42,7 @@ module.exports = class AddBlockView extends Backbone.View
       @dom.input.focus()
 
   checkInput: ->
-    if (@dom.input.val().trim()) isnt ''
+    if (@dom.input.val()?.trim()) isnt ''
       @$el.addClass "#{@className}--typing"
       @dom.button.removeAttr 'disabled'
     else
@@ -91,6 +91,8 @@ module.exports = class AddBlockView extends Backbone.View
       button: @$('.js-button')
 
     @checkInput()
+
+    @$el.addClass "#{@className}--initialized"
 
   render: ->
     @$el.html template()
