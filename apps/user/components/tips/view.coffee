@@ -30,10 +30,10 @@ module.exports = class TipView extends Backbone.View
       switch trigger
         when "new:channel"
           # jQuery to open the new channel dialog, and close when body is clicked
-          $dropdown = $('.js-channel-create .js-dropdown')
+          $dropdown = $('.js-channel-dropdown')
           $dropdown.show()
           $('body').on 'click', (e) ->
-            unless $(e.currentTarget).closest('js-channel-create').length
+            unless $(e.currentTarget).closest('.js-channel-create').length
               $dropdown.hide()
 
     else
