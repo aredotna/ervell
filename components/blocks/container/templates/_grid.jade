@@ -1,7 +1,7 @@
 if user && user.isPremium() && !following && !followers && !sd.SHARE_TOKEN && !isEmbedded
   .flex-container
     include ../../../filter/templates/search_bar
-.block-collection.block-collection__contents.block-collection--grid.grid.flex-container(class= user && channel && user.id == channel.get('user').id ? 'is-editable' : '')
+.block-collection.block-collection__contents.block-collection--grid.grid.flex-container.js-block-collection(class= user && channel && user.id == channel.get('user').id ? 'is-editable' : '')
   include _grid_contents.jade
   if isEmbedded
     include ../../grid_item/templates/types/embedded

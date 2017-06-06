@@ -1,7 +1,7 @@
-.block-collection.block-collection--list.flex-container
-  .block-collection--list__new-block
-    if channel && !following && !followers && user && user.canAddToChannel(channel)
-      include ../../list_item/templates/types/new_block
+.block-collection.block-collection--list.flex-container.js-block-collection
+  if channel && !following && !followers && user && user.canAddToChannel(channel)
+    include ../../list_item/templates/types/new_block
+
   .block-collection--list__filter
     if title && user && user.isPremium() && !following && !followers
       include ../../../filter/templates/search_bar
