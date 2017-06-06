@@ -2,7 +2,7 @@ extends ../../../components/layout/index
 
 block body
   include _path
-  if user && user.isPremium() && !following && !followers
+  include ../components/tips/index
   .channel-container.channel-container--user( class=blocks.length ? '' : 'is-empty' )
     .profile-contents
       - content = sd.SUBJECT ? sd.SUBJECT + "s" : "blocks and channels"

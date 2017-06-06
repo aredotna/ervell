@@ -2,7 +2,7 @@
   span.NewChannel
     span New channel
 
-.Dropdown.js-dropdown
+.Dropdown.js-dropdown.js-channel-dropdown
   .ChannelCreate
     .ChannelCreate__block(
       class="Color--channel-#{channel && channel.get('status')}"
@@ -12,6 +12,7 @@
         name='title'
         value= channel && channel.get('title')
         placeholder='Type channel name'
+        autocomplete='off'
       )
 
       .ChannelCreate__metadata

@@ -6,13 +6,12 @@
 Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
-scrollFrame = require 'scroll-frame'
 sd = require('sharify').data
 mediator = require '../../../lib/mediator.coffee'
 User = require '../../../models/user.coffee'
+initTips = require '../components/tips/index.coffee'
 UserBlocks = require '../../../collections/user_blocks.coffee'
 FollowBlocks = require '../../../collections/follow_blocks.coffee'
-InfiniteView = require '../../../components/pagination/infinite_view.coffee'
 Filter = require '../../../components/filter/index.coffee'
 PathView = require '../../../components/path/client/path_view.coffee'
 MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
@@ -22,6 +21,8 @@ setupBlockCollection = require '../../../components/blocks/container/client/inde
 module.exports.init = ->
   current_user = mediator.shared.current_user
   user = new User sd.USER
+
+  initTips()
 
   unless sd.CURRENT_PATH.indexOf('/index') > -1
     if sd.FOLLOWING || sd.FOLLOWERS
@@ -47,10 +48,6 @@ module.exports.init = ->
     _.extend(options, { sort: sd.SORT }) if sd.SORT
 
     setupBlockCollection options
-
-    blocks.on 'remove', ->
-      unless ( blocks.any (block) -> block.get('class') is 'Tip' )
-        mediator.shared.current_user.save show_tour: false
 
   new PathView
     el: $('section.path--header')

@@ -3,8 +3,11 @@ extends ../../../../components/layout/index--bare
 block body
   .Page
     .UI
-      .Connect.js-connect
-        //- Rendered client-side
+      .AddBlock.js-add-block
+        include ../../../../components/add_block/index
+
+      .AddBlock.AddBlock--list.js-add-block
+        include ../../../../components/add_block/index
 
 block scripts
   script( src= asset('/assets/ui.js') )
