@@ -8,16 +8,21 @@ Authentication = require '../../models/authentication.coffee'
   return res.redirect("/pricing") if req.params.tab is 'premium'
 
   tab = res.locals.sd.TAB = req.params.tab
-  coupon = res.locals.sd.COUPON = req.query.coupon
 
-  res.render "index", tab: tab, coupon: coupon
+  res.render "index",
+    tab: tab
 
-@callback = (req, res, next) ->
+@findFriends = (req, res, next) ->
+  tab = res.locals.sd.TAB = 'find-friends'
+
+  res.render "index",
+    tab: tab
+    auth: new Authentication provider: 'twitter'
+
+@findFriendsCallback = (req, res, next) ->
   auth = new Authentication req.query
   auth.save {},
     headers:
       'X-AUTH-TOKEN': req.user.get('authentication_token')
-    success: (model, response)->
-      res.redirect("/tools/find-friends")
-    error: (model, response, error)->
+    complete: ->
       res.redirect("/tools/find-friends")

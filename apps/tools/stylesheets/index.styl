@@ -60,28 +60,6 @@
   border 1px dashed lightgray
   margin 12px 0 12px 0
 
-ul.friend-list
-  reset-list()
-  display table
-  width 100%
-
-li.friend-list__friend
-  display table-row
-  line-height 2
-  width 100%
-  border-bottom 1px solid bordergray
-
-  &:nth-child(odd)
-    background-color secondbackgroundgray
-
-  span
-    display table-cell
-    width 100%
-    padding 4px
-
-  .follow_button
-    text-align right
-
 #tab--premium
   h2
     color lightgray
@@ -176,3 +154,5 @@ li.friend-list__friend
 @media (max-width: 800px)
   .tools__frame
     width 100%
+
+@require './friends.styl'
