@@ -15,9 +15,6 @@ module.exports = class BlockCollectionView extends Backbone.View
   views:
     grid: GridBlockView
     list: ListBlockView
-  newBlockContainer:
-    grid: '.block-collection__contents'
-    list: '.block-collection--list__new-block'
   containerMethods:
     grid:
       default: 'append'
@@ -110,7 +107,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
     if block
       new @views[@state.get('view_mode')]
-        container: @$('.block-collection__contents')
+        container: @$('.js-block-collection')
         model: block
         channel: @channel if @channel
         parentView: @
@@ -120,7 +117,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   renderBlockView: (block, autoRender = false) =>
     containerMethodType = if block?.options?.wait is true then 'wait' else 'default'
     new @views[@state.get('view_mode')]
-      container: $('.block-collection__contents')
+      container: $('.js-block-collection')
       model: block
       autoRender: autoRender
       containerMethod: @containerMethods[@state.get('view_mode')][containerMethodType]

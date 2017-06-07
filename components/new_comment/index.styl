@@ -1,0 +1,23 @@
+.NewComment
+  &__input
+    position relative
+
+  &__tip
+    position absolute
+    font-size font-size-xx
+    line-height 1
+    z-index 1
+    left 50%
+    bottom 1em
+    transform translateX(-50%)
+    opacity 0
+    transition opacity 250ms
+    pointer-events none
+
+  &__submit
+    text-align center
+
+  &--typing
+    .NewComment
+      &__tip
+        opacity 0.5

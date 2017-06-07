@@ -4,7 +4,7 @@ template = -> require('./index.jade') arguments...
 
 module.exports = class NotificationsView extends Backbone.View
   events:
-    'click a': => delay (=> @render()), 250
+    'click a': -> delay (=> @render()), 250
 
   initialize: ->
     @listenTo @collection, 'sync', @render

@@ -1,6 +1,6 @@
 .Comment
   header.Comment__header
-    span.Comment__user
+    a.Comment__user( href="/#{comment.get('user').slug}" )
       = comment.get('user').username
 
     span.Comment__datetime
