@@ -1,61 +1,51 @@
-.lo-cta
-  -webkit-perspective 1000
-  -webkit-backface-visibility hidden
-  position fixed
-  z-index header_z  
-  bottom -(unit * 4)
-  width 100%
-  border-top 1px solid hovergray
-  height unit * 4
-  background #fff
-  text-align center
-  color hovergray
-  transition transform .1s
+.LoggedOutCTA
   display flex
+  flex-direction row
   justify-content center
   align-items center
-  +mobile()
-    bottom -120px
-    height unit * 6
+  text-align center
+  position fixed
+  z-index header_z
+  top 100%
+  width 100%
+  padding 1em
+  border-top 1px solid colors-gray-border
+  background-color white
+  color colors-gray-text
+  transition transform 100ms
+  font-size font-size-lg
+  line-height line-height-base
+  transform translateZ(0)
+
+  > .Button
+    margin-left 2em
+
   &--visible
-    transform translateY(-(unit * 4))
-    +mobile()
-      transform translateY(-(unit * 6))
-  &__inner
-    font-size 1.3rem
-    font-weight normal
-    +mobile()
-      padding 0 20% 
-      line-height 1.3
-    &__btn
-      display inline-block
-      text-align center
-      font-weight bold
-      border 2px solid hovergray
-      color black
-      width unit * 6
-      font-size 14px
-      line-height 30px
-      margin 0 unit
-      +mobile()
-        display block
-        margin 10px auto
-        font-size 12px
-      &:hover
-        background-color hovergray
-        color white
+    transform translateY(-100%) translateZ(0)
+
   &__close
     position absolute
-    top (unit / 2)
-    right (unit / 2)
+    top 0
+    right 0
     line-height 1
-    color textgray
-    font-size 12px
+    padding 1em
+    color colors-gray-text
+    font-size font-size-sm
     cursor pointer
-    .iconic[data-glyph].iconic-sm:before
-      font-size 12px
-    &:hover
-      color hovergray
 
-.no-banner .lo-cta
+    .iconic[data-glyph].iconic-sm:before
+      font-size font-size-sm
+
+    &:hover
+      color colors-gray-hover
+
++mobile()
+  .LoggedOutCTA
+    flex-direction column
+
+    > .Button
+      margin-top 1em
+      margin-left 0
+
+.no-banner .LoggedOutCTA
   display none
