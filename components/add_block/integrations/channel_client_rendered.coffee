@@ -10,7 +10,11 @@ module.exports = ({ $el, collection }) ->
 
     # Add needed classes for context
     viewMode = mediator.shared.state.get 'view_mode'
-    addBlockView.$el.addClass if viewMode is 'list' then 'AddBlock--list' else 'grid__block'
+    addBlockView.$el
+      # `js-` hook used to find for Block insertion
+      .addClass 'js-add-block'
+      # Context appropriate modifiers
+      .addClass if viewMode is 'list' then 'AddBlock--list' else 'grid__block'
 
     # Insert
     $el.prepend addBlockView.$el
