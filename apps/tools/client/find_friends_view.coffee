@@ -2,38 +2,43 @@ Backbone = require "backbone"
 _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
+Contacts = require '../../../collections/contacts.coffee'
+
 FollowButtonView = require '../../../components/follow_button/client/follow_button_view.coffee'
-Block = require '../../../models/block.coffee'
 
 template = -> require('../templates/tabs/find_friends.jade') arguments...
 
 module.exports = class FindFriendsView extends Backbone.View
 
   events:
-    'click .static__tools__social-button': 'toggleConnect'
+    'click .js-toggle-auth': 'toggleConnect'
 
-  initialize: ({ @$container })->
+  initialize: ->
     @listenTo @model, 'sync', @render
 
-  render: ->
-    @$el.html template tab: 'find-friends', auth: @model
-    for user in @model.get('users')
-      new FollowButtonView
-        el: @$("#follow_button--#{user.id}")
-        model: new Block user
-        showTitle: false
-
   toggleConnect: ->
-    if @model.id
-      @disconnect()
-    else
-      @connect()
+    if @model.id then @disconnect() else @connect()
 
   connect: (e) ->
-    window.location.href = "#{sd.API_URL.replace('/v2', '')}/auth/#{@model.get('provider')}"
+    url = "#{sd.API_URL.replace('/v2', '')}/auth/#{@model.get('provider')}"
+    window.location.href = url
 
   disconnect: (e) ->
     @model.destroy
       success: =>
         @model.clear()
         @render()
+
+  render: ->
+    collection = new Contacts @model.get('users')
+
+    @$el.html template 
+      tab: 'find-friends'
+      auth: @model
+      users: collection.models
+
+    for user in collection.models
+      new FollowButtonView
+        el: @$(".js-follow[data-id=#{user.id}]")
+        model: user
+        showTitle: false

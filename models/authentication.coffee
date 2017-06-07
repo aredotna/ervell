@@ -1,6 +1,6 @@
-Base = require "./base.coffee"
-sd = require("sharify").data
 _ = require 'underscore'
+sd = require('sharify').data
+Base = require './base.coffee'
 
 module.exports = class Authentication extends Base
 
@@ -17,3 +17,4 @@ module.exports = class Authentication extends Base
 
   actionReadable: ->
     if @get('created_at')? then 'Disconnect from' else 'Connect to'
+    
