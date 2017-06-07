@@ -1,0 +1,45 @@
+.HomeSection
+  position relative
+  display flex
+  flex-direction column
+  align-items center
+  justify-content space-between
+  width 100%
+  min-height 60vh
+
+  &:first-of-type
+    min-height 100vh
+
+  &__content
+    display flex
+    width 100%
+    flex-direction column
+    justify-content center
+    align-items center
+    flex 1
+    padding 1em
+
+  &__cta
+    display flex
+    width 100%
+    flex-direction row
+    justify-content center
+    align-items center
+    // Match font size to button size
+    // for consistent em value
+    font-size font-size-lg
+    margin-top 2em
+
+    > .Button
+      display block
+      margin 0 1em
+      max-width block_width
+      flex-basis 50%
+
+  &__footer
+    padding 1em
+    text-align center
+
+    > a
+      display inline-block
+      padding 1em 0.5em
