@@ -78,12 +78,12 @@ module.exports = class AddBlockView extends Backbone.View
         @dom.input.val ''
         @dom.input.focus()
         @checkInput()
-        setTimeout (=> @dom.button.text 'Add Block'), 2000
+        setTimeout (=> @dom.button.text 'Add block'), 2000
 
       error: (_m, e) =>
         console.error e
         @dom.button.text 'Error'
-        setTimeout (=> @dom.button.text 'Add Block'), 2000
+        setTimeout (=> @dom.button.text 'Add block'), 2000
 
   postRender: ->
     @dom =
