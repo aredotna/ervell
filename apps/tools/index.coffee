@@ -6,4 +6,4 @@ app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 app.get "/tools", routes.tools
 app.get "/tools/:tab", routes.tools
-app.get "/tools/find-friends/callback", routes.callback
+app.get "/tools/find-friends/callback", routes.findFriendsCallback
