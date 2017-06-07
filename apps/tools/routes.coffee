@@ -11,6 +11,7 @@ Authentication = require '../../models/authentication.coffee'
 
   res.render "index",
     tab: tab
+    auth: new Authentication provider: 'twitter'
 
 @findFriends = (req, res, next) ->
   tab = res.locals.sd.TAB = 'find-friends'
