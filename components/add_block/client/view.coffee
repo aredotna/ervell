@@ -14,7 +14,7 @@ module.exports = class AddBlockView extends Backbone.View
     'click .js-button': 'save'
 
   initialize: ->
-    @state = new Backbone.Model saving: false
+    @saving = false
 
   onInput: (e) ->
     @checkInput()
@@ -61,14 +61,15 @@ module.exports = class AddBlockView extends Backbone.View
     false
 
   save: ->
-    return false if @state.get('saving')
+    return if @saving
 
     val = @dom.input.val().trim()
 
     return if val is ''
 
-    @state.set saving: true
+    @saving = true
     @dom.button.text 'Adding'
+    @dom.button.attr 'disabled', true
 
     attrs = if isURL val
       source: val
@@ -83,14 +84,16 @@ module.exports = class AddBlockView extends Backbone.View
         @dom.button.text 'Added'
         @dom.input.val ''
         @dom.input.focus()
-        @state.set saving: false
+        @dom.button.attr 'disabled', false
+        @saving = false
         @checkInput()
         setTimeout (=> @dom.button.text 'Add block'), 2000
 
       error: (_m, e) =>
         console.error e
-        @state.set saving: false
+        @saving = false
         @dom.button.text 'Error'
+        @dom.button.attr 'disabled', false
         setTimeout (=> @dom.button.text 'Add block'), 2000
 
   postRender: ->
