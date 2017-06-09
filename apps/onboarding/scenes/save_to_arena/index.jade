@@ -1,0 +1,31 @@
+.OnboardingGuide
+  .OnboardingGuide__pane
+    ol.OnboardingSteps
+      li.OnboardingStep
+        | <span>1.</span> Channels
+      li.OnboardingStep
+        | <span>2.</span> Connecting
+      li.OnboardingStep
+        | <span>3.</span> Profile and Feed
+      li.OnboardingStep.OnboardingStep--active
+        | <span>4.</span> Save to Are.na
+      li.OnboardingStep
+        | <span>5.</span> Find Friends
+
+    .OnboardingGuide__actions
+      .OnboardingBookmarklet.Button.Button--size-lg
+        a( href= bookmarklet )
+          | Add to Are.na
+        span
+          | Drag this onto your bookmarks bar
+
+      a.Button.Button--secondary.js-next
+        | Next
+
+  .OnboardingGuide__pane
+    p The Are.na bookmarklet lets you save content from any web page to your channels in a few clicks.
+
+    .OnboardingDemoPane__animation
+      //-
+
+    p &hellip; selecting between three different levels of privacy.
