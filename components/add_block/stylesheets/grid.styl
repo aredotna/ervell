@@ -81,6 +81,8 @@
     pointer-events none
 
   &__button
+    &:hover
+      color colors-gray-hover
     &:after
       content ' →'
 
@@ -100,6 +102,8 @@
     .AddBlock
       &__hover
         z-index 1
+        &:before, span
+          display none
 
       &__tip
         opacity 0.5
