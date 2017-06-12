@@ -16,15 +16,16 @@ module.exports = class ChannelFileDropView extends Backbone.View
       onMove: @onMove
       onEnd: @onEnd
       onUpdate: @updateOrder
-      animation: 0
+      animation: 0,
+      scroll: true
+      scrollSpeed: 40
+      scrollSensitivity: 100
 
   onStart: (e) =>
-    e.stopPropagation()
     @frozen = this.el.querySelector '.js-add-block'
     mediator.shared.state.set 'isDraggingBlocks', yes
 
   onMove: (e) =>
-    e.stopPropagation()
     clearTimeout @pid
 
     @pid = setTimeout ->
@@ -36,7 +37,7 @@ module.exports = class ChannelFileDropView extends Backbone.View
     return false if e.related.nextElementSibling is @frozen
     return @frozen isnt e.related
 
-  onEnd: (e)=>
+  onEnd: (e) =>
     mediator.shared.state.set 'isDraggingBlocks', no
     e.stopPropagation()
 
@@ -48,9 +49,6 @@ module.exports = class ChannelFileDropView extends Backbone.View
       index = (blocks.length - blocks.index(item))
     else
       index = blocks.index($(item)) + 1
-
-    _.defer =>
-      mediator.trigger 'slide:to:block', $(item).data('id'), 0
 
     $.ajax
       url: "#{sd.API_URL}/channels/#{@model.id}/sort"
