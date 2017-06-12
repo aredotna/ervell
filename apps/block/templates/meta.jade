@@ -1,0 +1,8 @@
+meta( name='twitter:title', content="Are.na / #{block.get('title')}" )
+meta( name='twitter:url', content="https://www.are.na/block/#{block.id}" )
+meta( property='og:title' content="Are.na / #{block.get('title')}" )
+meta( property='og:url' content="https://www.are.na/block/#{block.id}" )
+
+if block.has('image')
+  meta( name='twitter:image1', content= block.get('image').display.url )
+  meta( property='og:image' content= block.get('image').display.url )

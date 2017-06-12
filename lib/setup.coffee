@@ -81,6 +81,7 @@ module.exports = (app) ->
     app.use require("browserify-dev-middleware")
       src: path.resolve(__dirname, "../")
       transforms: [require("jadeify"), require('caching-coffeeify')]
+      debug: true
 
   # Test only
   if "test" is NODE_ENV
@@ -128,7 +129,7 @@ module.exports = (app) ->
       'receive_newsletter',
       'post_address',
       'show_tour',
-      'is_pro',
+      'is_premium',
       'channel_count',
       'exclude_from_indexes',
       'following_count'
@@ -167,6 +168,12 @@ module.exports = (app) ->
   app.use require "../apps/share"
   app.use require "../apps/marklet"
   app.use require "../apps/import"
+  app.use require '../apps/settings'
+  app.use require '../apps/ui'
+
+  # Dev only routes
+  if "development" is NODE_ENV
+    app.use require "../apps/statuses"
 
   # Apps that use dynamic routes
   app.use require "../apps/user"

@@ -44,10 +44,6 @@ clearCache = (user) ->
   res.locals.sd.TOKEN = req.params.token
   res.render 'reset_password'
 
-@settings = (req, res, next) ->
-  return next() unless req.user
-  res.render 'settings'
-
 @redirectBack = (req, res, next) ->
   url = req.body['redirect-to'] or
         req.query['redirect-to'] or
@@ -55,6 +51,7 @@ clearCache = (user) ->
         req.session.redirectTo or
         parse(req.get('Referrer') or '').path or
         '/'
+
   res.redirect url
 
 @redirect = (req, res, next) ->

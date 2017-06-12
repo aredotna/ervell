@@ -1,0 +1,40 @@
+.channel-container--alpha
+  h2
+    text-align center
+    font-weight normal
+    padding 0 0 unit * 2
+  &__focus
+    margin 0 (unit / 2) (unit * 3)
+    &__inner
+      padding unit 0
+      text-align center
+      .form__field__channel-filter
+        display none
+      .grid
+        justify-content space-around
+        &__block
+          flex 1 1 50%
+          max-width 33%
+
+.alpha
+  padding 0 (unit/2) (unit * 2)
+  column-gap unit * 3
+  column-count 1
+  &--two-columns
+    column-count 2
+  +tablet()
+    column-count 1
+  +mobile()
+    column-count 1
+    padding 0
+  &__group
+    padding 0 0 (unit * 2)
+    break-inside avoid
+    &__letter
+      color lightgray
+      font-weight normal
+      margin-bottom 5px
+      padding-bottom 5px
+      text-align center
+    .list-item__connection
+      margin (unit) 0

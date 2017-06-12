@@ -1,0 +1,18 @@
+extends ../../../components/layout/index
+
+block body
+  include _path
+  include ../components/tips/index
+  .channel-container.channel-container--user( class=blocks.length ? '' : 'is-empty' )
+    .profile-contents
+      - content = sd.SUBJECT ? sd.SUBJECT + "s" : "blocks and channels"
+      - searchee = (user && author.id == user.id) ? "your " : author.get('username') + "'s public "
+      - title = searchee + content
+      include ../../../components/blocks/container/templates/index
+    .channel-empty
+      include _empty
+    include ../../../components/layout/loader/templates/infinite
+
+block scripts
+  script( src=asset('/assets/user.js') )
+

@@ -1,0 +1,53 @@
+.BlockSidebar.js-block-sidebar( class=(hideSidebar === 'true' ? 'BlockSidebar--hidden' : '') )
+  .BlockSidebar__content
+    section.BlockSidebar__section
+      //- Conditional here prevents content shifting when logged out
+      if (user && user.id === block.get('user').id) || block.get('title')
+        h5.BlockSidebar__title( id="attribute-title_#{block.id}" )
+          | #{_.unescape(block.get('title'))}&nbsp;
+
+      .BlockSidebar__timestamps
+        time( datetime= block.get('created_at'), title= block.get('created_at')  )
+          | Added #{block.createdAtAgo()} by
+          = ' '
+          a( href="/#{block.get('user').slug}" )
+            = block.get('user').username
+
+        if block.createdAtAgo() !== block.updatedAtAgo()
+          time( datetime= block.get('updated_at'), title= block.get('updated_at') )
+            | Last updated #{block.updatedAtAgo()}
+
+
+    //- Possibly hide entire info section
+    if (user && user.id === block.get('user').id) || block.get('description') || block.has('source') || block.has('image')
+      section.BlockSidebar__section
+        header.BlockSidebar__header
+          | Info
+
+        //- Conditional here prevents content shifting when logged out
+        if (user && user.id === block.get('user').id) || block.get('description')
+          .BlockSidebar__description( id="attribute-description_#{block.id}" )
+            //- Non-breaking space here prevents content shifting when logged in
+            != block.get('description') || '&nbsp;'
+
+        .BlockSidebar__provenance
+          if block.has('source') || block.has('image')
+            a( href= block.getSourceUrl() target='_blank' )
+              span= block.sourceTitle()
+
+          if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
+            a(
+              href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}"
+              target='_blank'
+            ) Find original
+
+    section.BlockSidebar__section
+      include info/connections
+
+    if user && user.has('username')
+      section.BlockSidebar__section
+        include info/comments
+
+  .BlockSidebar__toggle
+    a.js-toggle-info
+      | Hide info

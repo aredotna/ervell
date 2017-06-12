@@ -40,7 +40,7 @@ module.exports.init = ->
       view = new AuthView
         mode: sd.MODE
         redirectTo: sd.REDIRECT_TO
-        el: $('.container')
+        el: $('.js-container')
 
       view.render()
     else

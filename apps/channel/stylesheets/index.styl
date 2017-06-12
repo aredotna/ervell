@@ -1,4 +1,5 @@
 @require '../components/mute/index.styl'
+@require '../components/collaborators/index.styl'
 
 .channel-container
   padding-top unit
@@ -12,6 +13,10 @@
 
   &.is-empty .channel-empty
     display block
+
+.channel 
+  .metadata--container
+    padding-bottom 0
 
 .channel--drop-zone
   -webkit-transform translateY(-1000%)
@@ -60,9 +65,6 @@
     .channel--drop-zone__instructions
       display none
 
-.collaborators__edit
-  display none
-
 .export__status
   color alert
 
@@ -99,159 +101,47 @@
 #metadata--info__collaborators span
   color lightgray
 
-.collaborators__edit
-  display block
-
-.collaborators__edit__result__remove
-  font-size 10px
-  margin-right 6px
-  color alert
-  cursor pointer
-
-  &:before
-    top -1px !important
-    font-size 8px !important
-
-.collaborators__edit__result
-  color hovergray
-  font-weight bold
-
-#new-collaborator__search, .new-collaborator__results
-  display block
-
-.new-collaborator__results__result
-  background #fff
-  padding 6px
-  font-weight bold
-  cursor pointer
-  width 151px
-
-.new-collaborator__results__result:hover
-  background-color secondbackgroundgray
-  color hovergray
-
-  .new-collaborator__result__add
-    color hovergray
-
-.new-collaborator__result__add
-  font-size 10px
-  margin-right 6px
-  color textgray
-
-  &:before
-    top -1px !important
-    font-size 7px !important
-
-#new-collaborator__search
-  padding 3px
-
-.new-collaborator__results
-  position absolute
-  z-index 9999
-
-.new-collaborator__add
-  display none
-
 #metadata--connections, #metadata--container
   position relative
 
 #metadata--connections
   overflow-y visible
   .connection-list
-    margin-bottom unit
+    margin-bottom unit  
 
 #metadata__column-manage
-  display none
-
-.connect_button a
-  color textgray
-
-#metadata__column-manage
+  margin-top unit
+  position relative
+  text-align center
+  opacity 0
+  pointer-events none
   .toggle-settings-trigger
-    width 14px
-    float right
-    margin 4px 4px 0 0
-    svg
-      width 14px
-      height 14px
-      fill lightgray
+    color lightgray
+    font-size 36px
+    letter-spacing -4px
+    font-family font_serif 
+    height (unit * 2)
+    line-height (unit * 2)
+    &:before
+      content "···"
     &:hover
-      svg
-        fill hovergray
+      color hovergray
+    &:hover:before
+      content attr(data-message)
+      color textgray
+      font-size 12px 
+      font-family font_sans !important
+      letter-spacing 0px
+      line-height (unit * 2)
+      vertical-align middle
+      display block
+
+#metadata__column-manage.is-editable
+  opacity 1
+  pointer-events all
 
 #metadata--connections
   word-break break-word
-
-#metadata__column-manage.is-editable
-  position absolute
-  top 0
-  right 0
-  padding-top 0
-
-.form__field__channel-filter
-  height 51px
-  width 100%
-  position relative
-
-  input
-    background #fff
-    width 100%
-    margin 0
-    padding-left 50px
-
-  input:focus
-    background backgroundgray
-
-  &__icon
-    position absolute
-    left 0
-    top 0
-    padding 11px
-    max-width 40px
-    max-height 50px
-
-    svg
-      height 30px
-      width 20px
-
-      .iconic-magnifying-glass-lg
-        display none
-
-      .iconic-magnifying-glass-md
-        display none
-
-      .iconic-magnifying-glass-sm
-        display inline
-
-      & *
-        stroke lightgray
-        fill lightgray
-
-  &__close
-    position absolute
-    left 16px
-    font-size 31px
-    top 10px
-    display none
-    color lightgray
-
-  &--list
-    font-size 13px
-    border-bottom 1px dotted bordergray
-    .form__field__channel-filter__icon
-      padding 18px
-      svg
-        height 15px
-
-  &--grid
-    margin 0 10px unit 0
-    padding-right unit
-
-.form__field__channel-filter.is-active
-  .form__field__channel-filter__close
-    display block
-  .form__field__channel-filter__icon
-    display none
 
 .channel-results-container
   position absolute

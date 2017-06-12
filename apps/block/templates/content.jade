@@ -1,0 +1,12 @@
+.BlockContent.js-block-content( class=(hideSidebar === 'true' ? 'BlockContent--wide' : '') )
+  .block-arrow.block-arrow--left( data-direction='prev' )
+    img( data-src='/images/iconic/nav-arrow-l.svg', class='iconic iconic-md' )
+
+  include content_inner
+  include content_info
+
+  .block-arrow.block-arrow--right( data-direction='next' )
+    img( data-src='/images/iconic/nav-arrow-r.svg', class='iconic iconic-md' )
+
+  .block-mobile-arrow
+    img( data-src='/images/iconic/nav-arrow-r.svg', class='iconic iconic-md' )

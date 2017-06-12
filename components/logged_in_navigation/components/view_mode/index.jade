@@ -1,0 +1,17 @@
+.DropdownHover__trigger
+  span.ViewModeToggle.iconic.js-indicator(
+    data-glyph=(view_mode === 'grid' ? 'grid-three-up' : 'list')
+  )
+
+.Dropdown.js-dropdown
+  a.DropdownItem.ViewModeThumbnail.iconic.js-toggle(
+    data-mode='grid'
+    data-glyph='grid-three-up'
+    data-active=(view_mode === 'grid' ? 'active' : undefined)
+  ) Thumbnail view
+
+  a.DropdownItem.ViewModeList.iconic.js-toggle(
+    data-mode='list'
+    data-glyph='list'
+    data-active=(view_mode === 'list' ? 'active' : undefined)
+  ) List view

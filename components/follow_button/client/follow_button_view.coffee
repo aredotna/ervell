@@ -9,7 +9,7 @@ followButtonTemplate = -> require('../templates/follow_button.jade') arguments..
 module.exports = class FollowButtonView extends Backbone.View
 
   events:
-    'tap' : 'toggleFollow'
+    'click' : 'toggleFollow'
 
   initialize: (options) ->
     @showTitle = if options.showTitle? then options.showTitle else true
@@ -22,11 +22,11 @@ module.exports = class FollowButtonView extends Backbone.View
     @render()
 
   render: ->
-    @$el.html followButtonTemplate(model: @model, user: mediator.shared.current_user, showTitle: @showTitle)
+    @$el.html followButtonTemplate model: @model, user: mediator.shared.current_user, showTitle: @showTitle
 
   toggleFollow: (e) ->
     e.preventDefault()
-    e.stopPropagation()
+    e.stopImmediatePropagation()
 
     mediator.shared.current_user.toggleFollow @model
 

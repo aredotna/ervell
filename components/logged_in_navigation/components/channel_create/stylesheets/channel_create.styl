@@ -1,0 +1,51 @@
+ChannelCreate__input--private-placeholder()
+  color colors-channel-private
+ChannelCreate__input--closed-placeholder()
+  color colors-channel-closed
+ChannelCreate__input--public-placeholder()
+  color colors-channel-public
+
+.ChannelCreate
+  &__block
+    display flex
+    justify-content center
+    flex-direction column
+    align-items center
+    max-width 100%
+    width (block_width * 0.9)
+    height @width
+    margin 1em auto
+    border-width 2px
+    border-style solid
+
+  &__input
+    font-size font-size-h4 !important
+    margin-top 1em !important
+    padding 0 !important
+    text-align center !important
+    border-radius 0
+
+    &--private
+      &
+      &:focus
+      &:hover
+        background-color transparent
+        placeholder(ChannelCreate__input--private-placeholder)
+    &--closed
+      &
+      &:focus
+      &:hover
+        background-color transparent
+        placeholder(ChannelCreate__input--closed-placeholder)
+    &--public
+      &
+      &:focus
+      &:hover
+        background-color transparent
+        placeholder(ChannelCreate__input--public-placeholder)
+
+  &__metadata
+    margin-top 1em
+    font-size font-size-sm
+    line-height line-height-base
+    text-align center

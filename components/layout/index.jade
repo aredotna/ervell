@@ -1,48 +1,41 @@
-doctype html
 - colorClass = sd.IS_INVERTED ? 'is-inverted' : ''
 - loggedInClass = user ? 'is-logged-in' : 'not-logged-in'
-html(class="#{colorClass} #{loggedInClass}")
+- extraClasses = ''
+
+doctype html
+html( class="#{colorClass} #{loggedInClass}" )
   head
-    title
-      | Are.na
-      if channel
-        |  / #{channel.get('title')}
-      else if author
-        |  / #{author.get('username')}
-
-    include ../../components/meta/templates/meta
-    block meta
-    link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
-    block styles
-
-    - extraClasses = ''
+    include modules/title
+    include modules/meta
+    include modules/styles
 
     block vars
 
-  body(class=extraClasses)
+  body( class= extraClasses )
+    //- TODO: Refactor to use modalize, only thing that uses this is AuthView
     #modal-container
-      //- rendered by client
-    #l-lightbox-container
-      //- rendered by client
-    include header/templates/index
-    .container
-      block body
+      //- Rendered client-side
 
+    include header/templates/index
+
+    .Container.js-container
+      .Container__content
+        block body
+
+      include ../footer/index
+
+    //- TODO: Refactor to append/remove
     #l-loader-container.abs-fill
       include loader/templates/index
 
+    //- TODO: Refactor to append/remove
     #message-container
+      //- Rendered client-side
+
+    include modules/scrolltop
 
     unless user && user.id
       include ../logged_out_cta/index
 
-    include analytics
-
-    #scripts
-      != sharify.script()
-      //- Add Google's jQuery
-      script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" )
-      script( src="//js.pusher.com/2.2/pusher.min.js")
-      script( src=asset('/assets/vendor.js') )
-      script( src=asset('/assets/layout.js') )
-      block scripts
+    include modules/analytics
+    include modules/scripts

@@ -3,4 +3,4 @@
 #
 $(document).ready ->
   require('../lib/vendor/backpusher.js')
-  require('../apps/channel/client.coffee').init()
+  require('../apps/channel/client/index.coffee')()

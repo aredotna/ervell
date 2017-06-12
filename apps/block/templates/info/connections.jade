@@ -1,0 +1,20 @@
+- s = connections.length === 1 ? '' : 's'
+- connectionLabel = connections.length === 0 ? 'Loading Connections…' : connections.length + ' Connection' + s
+
+header.BlockSidebar__header.js-connection-count
+  = connectionLabel
+
+.BlockConnectionsList.js-connections-list
+  if connections.length
+    for channel in connections
+      include ../../../../components/connection_list/compact
+  else
+    include ../../../../components/connection_list/placeholder
+
+.BlockConnectionsList.js-url-connections-list
+  //- Rendered client-side
+
+if user && user.has('username')
+  .BlockConnect
+    .Button.Button--size-sm.js-connect
+      | Connect &rarr;

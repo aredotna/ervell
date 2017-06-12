@@ -1,0 +1,20 @@
+.BlockContent
+  height 100vh
+  flex-grow 1
+  position relative
+  display flex
+  align-items center
+  justify-content space-between
+  overflow hidden
+
+  +below(block-sidebar-breakpoint)
+    height 90vh
+    margin-top 0
+    padding 0 unit
+    overflow hidden
+
+  &--wide
+    .BlockContentInfo
+      &
+      &__toggle
+        display block

@@ -1,0 +1,17 @@
+.BlockContentInfo
+  .BlockContentInfo__title
+    | #{_.unescape(block.get('title'))}&nbsp;
+
+  .BlockContentInfo__date
+    | Added #{block.createdAtAgo()} by
+    = ' '
+    a( href="/#{block.get('user').slug}" )
+    = block.get('user').username
+
+  .BlockContentInfo__source
+    if block && (block.has('source') || block.has('image'))
+      a( href= block.getSourceUrl(), target='_blank' )
+        = block.sourceTitle()
+
+  .BlockContentInfo__toggle.js-toggle-info
+    | Show info

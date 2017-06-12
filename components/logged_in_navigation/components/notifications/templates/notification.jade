@@ -1,0 +1,37 @@
+- klasses = [];
+
+- group.isNew() ? klasses.push('Notification--unread') : '';
+- group.is_comment() ? klasses.push('Notification--comment') : '';
+
+.Notification( class= klasses.join(' ') )
+  a( href="/#{group.actor().slug}" )
+    = group.actor().username
+
+  if group.is_comment()
+    | :&nbsp;
+  else
+    | &nbsp;
+
+  unless group.is_comment()
+    | #{group.action()}&nbsp;
+
+  if group.is_single()
+    if group.is_comment()
+      a.Notification__comment( href="#{group.single_target_link()}#comments" )
+        != group.single_subject()
+
+    else
+      a( class="Color--channel-#{group.subject_privacy()}", href= group.single_subject_link() )
+        = group.single_subject()
+
+  else
+    = group.grouped_subject()
+
+  if group.connector()
+    | &nbsp;#{group.connector()}&nbsp;
+
+    a( class="Color--channel-#{group.target_privacy()}", href= group.single_target_link() )
+      = group.single_target()
+
+  .Notification__timestamp
+    = group.timestamp()

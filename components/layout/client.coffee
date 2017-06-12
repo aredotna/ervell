@@ -9,10 +9,7 @@ BodyView = require './body/view.coffee'
 MessageView = require '../message/client/message_view.coffee'
 HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
-NewChannelView = require '../new_channel/client/new_channel_view.coffee'
-UserMenuView = require '../user_menu/client/user_menu_view.coffee'
-ViewMenuView = require '../view_menu/client/view_menu_view.coffee'
-NotificationsView = require '../notifications_menu/client/notifications_view.coffee'
+initLoggedInNavigation = require '../logged_in_navigation/client/index.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 State = require "../../models/state.coffee"
@@ -23,6 +20,7 @@ analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCta = require '../logged_out_cta/index.coffee'
+{ isTouch } = require '../util/device.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -39,9 +37,13 @@ isMobile = ->
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 setMobileClass = ->
+  $body = $('body')
   if isMobile()
-    $('body').addClass 'is-mobile'
-    attachFastClick(document.body)
+    $body.addClass 'is-mobile'
+    attachFastClick document.body
+
+  if isTouch()
+    $body.addClass 'Body--touch'
 
 setupPusherAndCurrentUser = ->
   mediator.shared = {}
@@ -82,19 +84,7 @@ setupViews = ->
       offset: 3
 
   if mediator.shared.current_user.id
-    new UserMenuView
-      el: $('.dropdown--menu--user')
-    new NewChannelView
-      el: $('.dropdown--menu--new-channel')
-    new NotificationsView
-      el: $('.dropdown--menu--notifications')
-
-    if mediator.shared.current_user.get('is_pro')
-      new ViewMenuView
-        el: $('.dropdown--menu--view')
-        model: mediator.shared.state
-
-    mediator.shared.notifications.fetch()
+    initLoggedInNavigation $('.js-logged-in-navigation')
 
 syncAuth = module.exports.syncAuth = ->
   if sd.CURRENT_USER
@@ -111,7 +101,7 @@ syncAuth = module.exports.syncAuth = ->
 ensureFreshUser = (data) ->
   return unless sd.CURRENT_USER
   for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
-               'last_name', 'slug', 'username', 'is_pro']
+               'last_name', 'slug', 'username', 'is_premium']
     if not _.isEqual data[attr], sd.CURRENT_USER[attr]
       return $.ajax('/me/refresh')
 
@@ -154,22 +144,22 @@ initShortCuts = ->
   km 'left',  -> mediator.trigger 'lightbox:slide:prev'
   km 'esc',   -> mediator.trigger 'lightbox:close'
   km 'l',     ->
-    if mediator.shared.current_user.get('is_pro')
+    if mediator.shared.current_user.isPremium()
       mediator.shared.state.set view_mode: 'list'
       window.location.reload()
   km 'g',     ->
-    if mediator.shared.current_user.get('is_pro')
+    if mediator.shared.current_user.isPremium()
       mediator.shared.state.set view_mode: 'grid'
       window.location.reload()
 
   initNightMode()
 
 showPremiumMessage = ->
-  if (!sd.CURRENT_USER.is_pro and sd.CURRENT_USER.channel_count >= 2 )
+  if (!sd.CURRENT_USER.is_premium and sd.CURRENT_USER.channel_count >= 2 )
     model = new Backbone.Model
-      id: 'premium_message'
-      title: "Help support Are.na"
-      body: "The more Are.na is supported by our users, the more freedom we have to make it the best it can be. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/about/pricing?utm_campaign=pmessage'>premium account</a>."
+      id: 'premium_monthly_message'
+      title: "Monthly premium"
+      body: "We recently added a monthly option for premium account subscriptions. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/settings/billing?utm_campaign=mmessage'>premium account</a>. Thank you."
       type: 'announcement'
     new MessageView container: $('#message-container'), model: model
 

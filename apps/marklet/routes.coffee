@@ -2,20 +2,21 @@
 validator = require 'validator'
 Backbone = require 'backbone'
 
-class TabState extends Backbone.Model
-  defaults: mode: 'url'
-
-@save = (req, res, next) ->
-  unless req.user
-    return res.redirect "/log_in?redirect_uri=#{req.url}"
+@save = (req, res) ->
+  return res.redirect "/log_in?redirect-to=#{req.url}" unless req.user?
 
   res.locals.sd.SAVE = true
   res.locals.sd.CONTENT = content = req.params.content
   res.locals.sd.QUERY = query = req.query
   res.locals.sd.IS_URL = isURL = validator.isURL content
 
+  state = new Backbone.Model mode: 'url'
+  block = new Backbone.Model content: content
+  connections = new Backbone.Collection
+
   res.render 'index',
-    content: content
+    state: state.toJSON()
+    block: block.toJSON()
     isURL: isURL
-    tab: new TabState()
     query: query
+    connections: connections.toJSON()

@@ -1,0 +1,29 @@
+.Notifications
+  max-height block_width
+  overflow-y auto
+  padding 1em 1.33em
+
+.Notification
+  collapsed-margins(1.25em)
+  text-align left
+  font-size font-size-xs
+  line-height line-height-base
+
+  a
+    font-weight bold
+
+  &__timestamp
+    text-transform uppercase
+    font-size font-size-xx
+    letter-spacing 0.025em
+    color colors-gray-light
+
+  &__comment
+    font-weight normal !important
+
+  &--unread
+    &
+    .Notification__timestamp
+      &
+      & *
+        color colors-state-alert !important

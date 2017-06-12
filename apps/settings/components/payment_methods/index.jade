@@ -1,0 +1,57 @@
+form
+  if customer.related().sources.length > 0
+    h3 Payment Methods
+
+    table.payment-methods__cards: tbody
+      each source in customer.related().sources.models
+        tr.payment-method
+          td.payment-method__card
+            = source.get('brand')
+            = ' '
+            span **** **** **** #{source.get('last4')}
+            span #{source.get('exp_month')}/#{source.get('exp_year')}
+
+          td.payment-method__default
+            if customer.get('default_source') === source.id
+              span Default
+            else
+              a.js-default( data-id= source.id )
+                | Make Default
+
+          td.payment-method__remove
+            a.js-remove( data-id= source.id )
+              | Remove
+
+  //- Has card on file aready
+  .form-card__submit
+    if customer.requiresPayment() && !customer.requiresPaymentMethod() && !customer.get('is_canceled')
+      button.button--wide.button--border.js-submit.js-charge
+        | Pay
+
+    else if customer.requiresPayment() && !customer.requiresPaymentMethod() && customer.get('is_canceled')
+      button.button--wide.button--border.js-submit.js-reenable
+        | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
+        | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
+
+  h3 Card Info
+
+  .form-card__errors.js-form-errors
+    //- Rendered client-side
+
+  .form-card__fields
+    .form-card__field.form-card__field--stripe.js-card-element
+      input.input--wide.is-block( style='display: none' )
+
+  .form-card__submit
+    if customer.requiresPayment() && customer.requiresPaymentMethod() && !customer.get('is_canceled')
+      button.button--wide.button--border.js-submit.js-charge
+        | Pay
+
+    else if customer.requiresPayment() && customer.requiresPaymentMethod() && customer.get('is_canceled')
+      button.button--wide.button--border.js-submit.js-reenable
+        | Continue my premium membership ($) on
+        | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
+
+    else
+      button.button--wide.button--border.js-submit.js-add
+        | Add New Card

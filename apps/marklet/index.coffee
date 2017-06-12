@@ -1,21 +1,16 @@
-#
-# Save routes
-#
-
-express = require "express"
+express = require 'express'
 subdomain = require 'express-subdomain'
-routes = require "./routes"
+routes = require './routes'
 
 app = module.exports = express()
 router = express.Router()
 
-app.set "views", __dirname + "/templates"
-app.set "view engine", "jade"
+app.set 'views', __dirname + '/templates'
+app.set 'view engine', 'jade'
 
 app.get '/save/:content', routes.save
 
-# serves loader file
-router.get "/loader.js", (req, res, next) ->
+loader = (req, res, next) ->
   options =
     root: __dirname + '/public/'
     dotfiles: 'deny'
@@ -29,5 +24,8 @@ router.get "/loader.js", (req, res, next) ->
       res.status(err.status).end()
     else
       console.log('Sent:')
+
+app.get '/loader.js', loader
+router.get '/loader.js', loader
 
 app.use subdomain('marklet', router)

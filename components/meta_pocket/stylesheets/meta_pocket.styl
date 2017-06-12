@@ -14,19 +14,18 @@
 
 .metadata--container__settings__done
   text-align center
-  padding s_margin * 2 0
   display none
-
-div#metadata__column-manage
-  display none
-  margin-right 0
-
-  &.is-editable
-    display block
+  height 40px
 
 .settings-is-active
   .metadata--container__settings__done
     display block
+    a
+      display block
+      vertical-align middle
+      line-height 40px
+    a:hover
+      color textgray
 
   div#metadata__column-manage
     display none
@@ -143,6 +142,3 @@ privacy-color('.is-active.metadata--selector__option--', color)
         .button--inblock--mini
           line-height 15px
           margin: 0 0 0 -16px
-
-  #metadata__column-manage.is-editable
-    width 20px

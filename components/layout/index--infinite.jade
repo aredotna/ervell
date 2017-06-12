@@ -1,0 +1,41 @@
+- colorClass = sd.IS_INVERTED ? 'is-inverted' : ''
+- loggedInClass = user ? 'is-logged-in' : 'not-logged-in'
+- extraClasses = ''
+
+doctype html
+html( class="#{colorClass} #{loggedInClass}" )
+  head
+    include modules/title
+    include modules/meta
+    include modules/styles
+
+    block vars
+
+  body( class= extraClasses )
+    //- TODO: Refactor to use modalize, only thing that uses this is AuthView
+    #modal-container
+      //- Rendered client-side
+
+    include header/templates/index
+
+    .Container.js-container
+      .Container__content
+        block body
+
+      //- Intentionally absent footer
+
+    //- TODO: Refactor to append/remove
+    #l-loader-container.abs-fill
+      include loader/templates/index
+
+    //- TODO: Refactor to append/remove
+    #message-container
+      //- Rendered client-side
+
+    include modules/scrolltop
+
+    unless user && user.id
+      include ../logged_out_cta/index
+
+    include modules/analytics
+    include modules/scripts

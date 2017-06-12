@@ -1,0 +1,83 @@
+.edit-collaborators
+  padding-bottom (unit / 2)
+  &__result
+    display flex
+    align-items center
+    cursor pointer
+    font-weight bold
+    &:after
+      content attr(data-name)
+    &__remove
+      padding 0 (unit / 2) 0 (unit / 4)
+      &.iconic[data-glyph]:before
+        font-size s_tiny + 1
+    &:hover
+      color hovergray
+    &:hover:after
+      content attr(data-msg)
+    &:hover &__remove
+      color alert
+
+.new-collaborator
+  .Input.Input--collaborator
+    font-size font-size-xs
+  &__close
+    display none
+    position absolute
+    margin-left -(unit / 1.5)
+    font-size s_middle 
+    font-weight bold
+    cursor pointer
+    &.is-active
+      display block
+    &:hover
+      color hovergray
+  &__search
+    width 100%
+    padding (unit / 4)
+    border 1px solid transparent
+    font-size s_caption
+    &:focus
+      border 1px solid bordergray
+  &__results
+    position absolute
+    z-index 9999
+    width 225px
+    &:not(:empty)
+      border 1px solid bordergray
+      border-top none
+  &__result
+    background white
+    cursor pointer
+    border-bottom 1px solid bordergray
+    display flex
+    align-items center
+    padding (unit / 4) 0
+    &__invite
+      padding 0 (unit / 4)
+      font-weight bold
+    &__add
+      padding 0 (unit / 2)
+      &.iconic[data-glyph]:before
+        font-size s_tiny + 1
+    &__name
+      font-weight bold
+    &__email
+      font-weight normal
+      font-size s_tiny + 1
+    &__avatar
+      margin-left auto
+      padding 0 (unit / 4)
+      .user__avatar--thumb
+        height 30px
+        width @height
+      .user__avatar__initials
+        background backgroundgray
+      .user__avatar--thumb .user__avatar__image
+        top 0
+    &:last-child
+      border-bottom none
+    &:hover
+      background secondbackgroundgray
+      color hovergray
+

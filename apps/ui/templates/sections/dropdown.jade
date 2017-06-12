@@ -1,0 +1,95 @@
+.UI__section
+  h3.Type
+    | Dropdown
+
+  .UI__section__component
+    h6.Type
+      | Menus
+
+    .UI__section__component__rendered
+      .Dropdown
+        .DropdownSection
+          a.DropdownItem.DropdownItem--primary
+            | User Name
+          a.DropdownItem.DropdownItem--secondary
+            span Channels
+          a.DropdownItem.DropdownItem--secondary
+            span Blocks
+
+        a.DropdownItem
+          | Feed
+
+        a.DropdownItem
+          | Explore
+
+        .DropdownSection
+          a.DropdownItem.DropdownItem--secondary
+            span Settings
+          a.DropdownItem.DropdownItem--secondary.Color--state-premium
+            span Upgrade to Premium
+          a.DropdownItem.DropdownItem--secondary
+            span Log Out
+
+      hr.Base
+
+      .Dropdown
+        a.DropdownItem
+          | Notifications
+          span.DropdownItem__count
+            | 0
+
+        .Notifications
+          .Notification
+            | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-public'>Bar</a>
+          .Notification
+            | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-closed'>Bar</a>
+          .Notification
+            | <a>User Name</a> connected <a>Foo</a> to <a class='Color--channel-private'>Bar</a>
+
+        a.Button.Button--divider
+          | View all notifications
+
+      hr.Base
+
+      .Dropdown
+        a.DropdownItem.ViewModeThumbnail.iconic( data-glyph='grid-three-up' )
+          | Thumbnail view
+        a.DropdownItem.ViewModeList.iconic( data-glyph='list' )
+          | List view
+
+      hr.Base
+
+      .Dropdown
+        .ChannelCreate
+          .ChannelCreate__block.Color--channel-private( data-visibility='private' )
+            input.Input.ChannelCreate__input(
+              name='title'
+              placeholder='Type channel name'
+              autofocus
+            )
+
+            .ChannelCreate__metadata
+              | by User Name
+              br
+              | 0 blocks
+
+        .ChannelCreatePrivacy
+          label.Label.ChannelCreatePrivacy__label
+            | Select channel privacy:
+
+          .ChannelCreatePrivacy__selector
+            a( data-value='open' )
+              | Open
+            span.Separator
+            a( data-value='closed' )
+              | Closed
+            span.Separator
+            a( data-value='private' )
+              | Private
+
+          .ChannelCreatePrivacy__caption
+            | Only you and your collaborators can view and add to the channel.
+
+        .ChannelCreateSubmit
+          a.Button.Button--divider
+            | Create channel

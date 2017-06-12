@@ -1,0 +1,15 @@
+.Comment
+  header.Comment__header
+    a.Comment__user( href="/#{comment.get('user').slug}" )
+      = comment.get('user').username
+
+    span.Comment__datetime
+      = comment.createdAtAgo()
+
+    if comment.createdAtAgo() !== comment.updatedAtAgo()
+      span.Comment__edited-datetime
+        = ' '
+        | (Edited #{comment.updatedAtAgo()})
+
+  .Comment__body( id="attribute-body_#{comment.id}" )
+    = comment.getHTML()

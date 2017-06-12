@@ -1,75 +1,23 @@
+block-sidebar-width = 320px
+block-sidebar-breakpoint = 950px
+
 .block-container
-  clearfix()
   display flex
   flex-flow row nowrap
   position relative
 
-  +below(950px)
+  +below(block-sidebar-breakpoint)
     display block
-    
-.block-content
-  height 100vh
-  flex-grow 1
-  position relative
-  display flex
-  align-items center
-  justify-content space-between
-  overflow hidden
-
-  +below(950px)
-    height 90vh
-    padding 0 unit
-    margin-top 0
-    overflow hidden
-
-  &__info
-    position absolute
-    bottom 0
-    left 0
-    width 100%
-    padding unit 0
-    text-align center
-    display none
-    &__title
-      padding-bottom (unit / 2)
-    &__date
-      padding-bottom (unit / 4)
-    &__source
-      vertical-align bottom
-    &__title, &__source, &__toggle-info
-      font-weight bold
-    &__date, &__source
-      font-size 0.8rem
-      line-height 1.2rem
-      color lightgray
-    &__toggle-info
-      display none
-      z-index 2001
-      position absolute
-      bottom 0
-      right 0
-      padding unit + 3
-      font-size 0.8rem
-      color lightgray
-      cursor pointer
-      &:hover
-        color hovergray
-
-  &.is-wide
-    .block-content__info
-      display block 
-      &__toggle-info
-        display block
 
 .block-img
   padding 0 unit
   margin 0 auto
-  
+
   img
     max-height 75vh
     width auto
     max-width 100%
-    +below(950px)
+    +below(block-sidebar-breakpoint)
       max-width 100%
 
 .block-media
@@ -79,7 +27,7 @@
   iframe
     max-width 100%
 
-  +below(950px)
+  +below(block-sidebar-breakpoint)
     padding 0 unit
     max-width 100%
 
@@ -165,7 +113,7 @@
     left 0
     width 100%
     height 100%
-    
+
   +below(800px)
     width 100%
     .attr-value
@@ -193,7 +141,7 @@
 
   &:hover
     border-top none
-    
+
 .block-arrow
   cursor pointer
   height 100%
@@ -203,25 +151,25 @@
   z-index 1
   align-items center
   justify-content center
-  
+
   &:hover
     opacity 1
 
-  +below(950px)
+  +below(block-sidebar-breakpoint)
     height 90vh
     width 10vw
     position absolute
     left 0
     top 0
-    &:hover 
+    &:hover
       opacity 0
     &.block-arrow--right
       left auto
       right 0
 
-.block-mobile-arrow 
+.block-mobile-arrow
   display none
-  +below(950px)
+  +below(block-sidebar-breakpoint)
     display block
     position absolute
     bottom (unit / 2)
@@ -240,14 +188,6 @@
   svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg)
     width 20px
     height 20px
-
-.js-url-connections-list h5
-  text-align center
-  font-weight normal
-  margin unit 0
-  font-size 0.7rem
-  text-transform uppercase
-  color lightgray
 
 .tab--container--block
   width 100%
@@ -276,19 +216,8 @@
     +below(800px)
       width 90%
 
-.block-connection-outer
-  display table
-  width 100%
-  margin-bottom (unit / 2)
-
-.block-new-comment-container
-  margin-top unit * 2
-  font-size 14px
-
-.comment-list
-  font-size 14px
-  p
-    p 14px
-
 @require 'sidebar'
 @require 'connect'
+@require 'connections_list'
+@require 'content'
+@require 'content_info'

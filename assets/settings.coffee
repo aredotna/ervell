@@ -1,3 +1,5 @@
+Backbone = require 'backbone'
 
 $ ->
-  require("../apps/auth/client/settings.coffee").init()
+  Backbone.$ = $
+  require('../apps/settings/client/index.coffee')()

@@ -1,0 +1,41 @@
+.BlockContentInfo
+  display none
+  position absolute
+  bottom 0
+  left 0
+  width 100%
+  padding 2em 0
+  text-align center
+
+  &__title
+    margin-bottom 1em
+    font-size font-size-base
+    line-height line-height-base
+    font-weight bold
+
+  &__date
+  &__source
+    font-size font-size-xs
+    line-height line-height-tall
+    color colors-gray-light
+
+  &__source
+    font-weight bold
+
+  &__toggle
+    display none
+    position absolute
+    bottom 0
+    right 0
+    padding 2em
+    font-size font-size-sm
+    color colors-gray-light
+    font-weight bold
+    cursor pointer
+    user-select none
+    // Position above lightbox arrows which
+    // have a z-index of 1 in this context
+    z-index 2
+
+    &:hover
+      color colors-gray-hover

@@ -1,41 +1,34 @@
+- extraClasses = ''
+
 doctype html
-html(class=sd.IS_INVERTED ? 'is-inverted' : '')
+html(class= sd.IS_INVERTED ? 'is-inverted' : '' )
   head
-    title
-      | Are.na
-      if channel
-        |  / #{channel.get('title')}
-      else if author
-        |  / #{author.get('username')}
+    include modules/title
+    include modules/styles
+    include modules/meta
 
-    link( type='text/css', rel='stylesheet', href=asset('/assets/all.css') )
-    include ../../components/meta/templates/meta
-
-    block styles
-
-    - extraClasses = ''
     block vars
 
-  body.body--bare(class=extraClasses)
+  body.body--bare( class= extraClasses )
+    //- TODO: Refactor to use modalize, only thing that uses this is AuthView
     #modal-container
-      //- rendered by client
-    #l-lightbox-container
-      //- rendered by client
-    include header/templates/index--bare
-    .container
-      block body
+      //- Rendered client-side
 
+    include header/templates/index--bare
+
+    .Container.js-container
+      .Container__content
+        block body
+
+      //- Intentionally missing footer
+
+    //- TODO: Refactor to append/remove
     #l-loader-container
       include loader/templates/index
 
+    //- TODO: Refactor to append/remove
     #message-container
+      //- Rendered client-side
 
-    include analytics
-
-    #scripts
-      != sharify.script()
-      script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )
-      script( src="//js.pusher.com/2.2/pusher.min.js")
-      script( src=asset('/assets/vendor.js') )
-      script( src=asset('/assets/layout.js') )
-      block scripts
+    include modules/analytics
+    include modules/scripts

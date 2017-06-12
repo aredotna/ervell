@@ -1,0 +1,118 @@
+.UI__section
+  h3.Type
+    | Buttons
+
+  .UI__section__component
+    h6.Type
+      | Default Button
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      button.Button Save
+      button.Button( data-state='loading' ) Loading
+      button.Button( data-state='error' ) Error
+
+      br
+
+      button.Button( disabled ) Save
+      button.Button( disabled, data-state='loading' ) Loading
+      button.Button( disabled, data-state='error' ) Error
+
+    pre.Type
+      | button.Button Save
+      | button.Button( data-state='loading' ) Loading
+      | button.Button( data-state='error' ) Error
+      | 
+      | button.Button( disabled ) Save
+      | button.Button( disabled, data-state='loading' ) Loading
+      | button.Button( disabled, data-state='error' ) Error
+
+  .UI__section__component
+    h6.Type
+      | Default Button Sizes
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      for size, key in font
+        button.Button( class="Button--#{key}" )
+          | .Button--#{key}
+        br
+
+  .UI__section__component
+    h6.Type
+      | Overlay Button
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced( style='background-color: black; padding: 1em;' )
+      button.Button.Button--overlay Source
+      button.Button.Button--overlay Connect &rarr;
+
+      hr.Base
+
+      button.Button.Button--overlay Source
+      button.Button.Button--overlay( data-state='loading' ) Connect &rarr;
+
+      hr.Base
+
+      button.Button.Button--overlay Source
+      button.Button.Button--overlay( data-state='error' ) Error
+
+    pre.Type
+      | button.Button.Button--overlay Connect &rarr;
+      | button.Button.Button--overlay( data-state='loading' ) Connect &rarr;
+      | button.Button.Button--overlay( data-state='error' ) Error
+
+  .UI__section__component
+    h6.Type
+      | Divider Button
+
+    .UI__section__component__rendered
+      button.Button.Button--divider Create Channel
+      button.Button.Button--divider( data-state='loading' ) Loading
+      button.Button.Button--divider( data-state='error' ) Error
+
+      br
+      br
+
+      div( style='display: flex' )
+        button.Button.Button--divider.Button--public( style='width: 50%' ) Follow
+        button.Button.Button--divider.Button--public( style='width: 50%' ) Connect &rarr;
+
+      div( style='display: flex' )
+        button.Button.Button--divider.Button--private( style='width: 50%' ) Follow
+        button.Button.Button--divider.Button--private( style='width: 50%' ) Connect &rarr;
+
+      div( style='display: flex' )
+        button.Button.Button--divider.Button--closed( style='width: 50%' ) Follow
+        button.Button.Button--divider.Button--closed( style='width: 50%' ) Connect &rarr;
+
+    pre.Type
+      | button.Button.Button--divider Save
+      | button.Button.Button--divider( data-state='loading' ) Loading
+      | button.Button.Button--divider( data-state='error' ) Error
+      | 
+      | button.Button.Button--divider.Button--public Follow
+      | button.Button.Button--divider.Button--public Connect &rarr;
+      | 
+      | button.Button.Button--divider.Button--private Follow
+      | button.Button.Button--divider.Button--private Connect &rarr;
+      | 
+      | button.Button.Button--divider.Button--closed Follow
+      | button.Button.Button--divider.Button--closed Connect &rarr;
+
+  .UI__section__component
+    h6.Type
+      | Divider Button Sizes
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      for size, key in font
+        button.Button.Button--divider( class="Button--#{key}" )
+          | .Button--#{key}
+        br
+
+  .UI__section__component
+    h6.Type
+      | Invisible Button
+
+    .UI__section__component__rendered.UI__section__component__rendered--spaced
+      button.Button.Button--invisible Add Comment
+
+    pre.Type
+      | button.Button.Button--invisible Add Comment

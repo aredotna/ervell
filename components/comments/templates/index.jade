@@ -1,7 +1,8 @@
-.comment-list
+.Comments
   if comments
     for comment in comments.models
-      include ../../../components/comments/templates/_comment
+      include ../../../components/comments/templates/comment
+
   if user
-    .block-new-comment-container.center
-      include ../../../components/new_comment/templates/new_comment
+    .NewComment.js-new-comment
+      include ../../../components/new_comment/templates/index

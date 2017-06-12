@@ -1,0 +1,28 @@
+.Button
+  &--overlay
+    // Fit 2-up on block hover
+    min-width (block_width / 2.42)
+    font-size font-size-base
+    background-color colors-gray-translucent
+    border none
+
+    & + &
+      margin-left (button-h-padding / 2)
+
+    &:hover
+      background-color white
+      color colors-gray-hover
+
+    &:active
+      border none
+      color colors-gray-light
+
+    &[data-state='loading']
+      background-color white
+
+    &[data-state='error']
+      background-color colors-gray-translucent
+      color colors-state-alert
+      &:hover
+        background-color white
+        color colors-gray-hover
