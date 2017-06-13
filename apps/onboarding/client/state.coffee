@@ -7,9 +7,9 @@ module.exports = class OnboardingState extends Backbone.Model
       'welcome',
       'channels',
       'connecting',
-      'profile_and_feed',
-      'save_to_arena',
-      'find_friends',
+      'profile-and-feed',
+      'save-to-arena',
+      'find-friends',
     ]
 
   index: ->
