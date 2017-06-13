@@ -13,12 +13,16 @@
         | <span>5.</span> Find Friends
 
     .OnboardingGuide__actions
-      a.Button.Button--size-lg.js-connect-twitter
-        | Find Twitter friends
+      if authentication && authentication.id
+        button.Button.Button--size-lg( disabled )
+          | Connected to Twitter
+      else
+        button.Button.Button--size-lg.js-connect-twitter
+          | Find Twitter friends
 
-      a.Button.Button--secondary.js-next
+      button.Button.Button--secondary.js-next
         | Start using Are.na
 
   .OnboardingGuide__pane
-    .OnboardingFindFriends.js-find-friends
+    .OnboardingFoundFriends.js-found-friends
       //- Rendered client-side
