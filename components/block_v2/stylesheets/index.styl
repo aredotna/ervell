@@ -108,17 +108,18 @@
           border 2px solid colors-channel-public
 
     &--text
-      display block
-      padding unit
-      overflow hidden
-      text-align left
-      font-size font-size-base
-      font-family font_serif
-      p:first-of-type:empty
-        display none
-      p
-        margin 0.75em 0
-        line-height line-height-tall
+      &__content
+        display block
+        padding unit
+        overflow hidden
+        text-align left
+        font-size font-size-base
+        font-family font_serif
+        p:first-of-type:empty
+          display none
+        p
+          margin 0.75em 0
+          line-height line-height-tall
 
     &--image, &--link, &--attachment, &--embed
       display flex
