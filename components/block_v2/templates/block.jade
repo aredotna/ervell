@@ -34,7 +34,8 @@ a.Block(
     
     //- Text content
     if block.kind.__typename === 'Text'
-      p!= block.kind.content
+      .Block__inner--text__content
+        p!= block.kind.content
 
     //- Image / Attachment content
     if block.kind.file_extension && block.kind.file_extension !== 'pdf'
