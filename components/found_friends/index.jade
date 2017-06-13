@@ -1,0 +1,17 @@
+for user in contacts.models
+  .FoundFriendsContact
+    span.FoundFriendsContact__identifier
+      .Avatar( data-initials= user.initials() )
+        img(
+          src= user.get('avatar_image').thumb
+          alt= user.initials()
+        )
+
+      a( href="/#{user.get('slug')}", target='_blank' )
+        = user.get('full_name')
+
+    .FoundFriendsContact__follow.js-follow(
+      data-type='User'
+      data-id= user.id
+    )
+      //- Rendered client-side

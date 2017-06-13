@@ -1,0 +1,46 @@
+.FoundFriends
+  //
+
+.FoundFriendsContact
+  display flex
+  flex-direction row
+  justify-content space-between
+
+  &__identifier
+    display flex
+    justify-content flex-start
+    align-items center
+    flex 1
+    max-width 50%
+    padding 2px 0
+    border-bottom 1px solid colors-gray-border
+    font-size font-size-base
+
+    > .Avatar
+      display inline-block
+      width 40px
+      height @width
+      margin-right 1em
+
+      > img
+        border-radius input-border-radius
+
+    > a
+      overflow ellipsis
+
+  &__follow
+    border-bottom 1px solid colors-gray-border
+    display flex
+    justify-content center
+    align-items center
+    font-weight bold
+    padding 2px 0 2px 1em
+    font-size font-size-base
+    line-height 1
+    cursor pointer
+
+    > .FollowButton[data-following='true']
+      color colors-gray-lighter
+
+    &:hover > .FollowButton
+      color colors-gray-hover
