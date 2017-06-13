@@ -7,8 +7,13 @@ module.exports = class BlockCollectionConnectIntegrationView extends Backbone.Vi
   className: 'BlockCollectionConnectIntegration'
 
   events:
-    'click': (e) -> e.stopPropagation() # Prevent clicks from propagating down to the Block link
+    'click': 'preventDefault' 
     'click .js-close': 'remove'
+
+  preventDefault: (e) ->
+    # Prevent clicks from propagating down to the Block link
+    e.stopPropagation()
+    e.preventDefault()
 
   render: ->
     invoke @subViews, 'remove'
