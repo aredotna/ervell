@@ -1,11 +1,30 @@
 +mobile()
+  .OnboardingWelcome
+    padding 1em
+
+    &__headline
+    &__subheadline
+      font-size font-size-h3 !important
+
+    &__subheadline
+      padding 0 1em
+
+    &__cta > a
+      font-size font-size-base
+
   .OnboardingGuide
     position relative
     flex-direction column
+    padding-bottom 10em // Space for `__actions`
 
     &__pane
+      height auto
       flex-basis 100%
       border none
+      padding 0
+
+      &:last-child
+        padding 0.5em 1em
 
     &__actions
       position absolute
@@ -13,3 +32,6 @@
       bottom 0
       left 0
       padding 1em
+
+  .FoundFriendsContact__identifier
+    max-width 100%
