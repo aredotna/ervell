@@ -8,3 +8,4 @@ app.set 'view engine', 'jade'
 
 app.get '/welcome', routes.index
 app.get '/welcome/:scene', routes.index
+app.get '/welcome/find-friends/callback', routes.findFriendsCallback
