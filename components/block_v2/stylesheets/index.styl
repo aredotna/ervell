@@ -1,8 +1,9 @@
+blockHeight = 315px
 .Block
-  flex 1 1 315px
+  flex 1 1 blockHeight
   text-align center
   margin 20px 10px 60px 10px
-  max-width 315px
+  max-width blockHeight
   position relative
 
   &__caption
@@ -39,7 +40,7 @@
 
   &__inner  
     position relative
-    height 315px
+    height blockHeight
     border 1px solid transparent
 
     &:hover
@@ -115,6 +116,7 @@
         text-align left
         font-size font-size-base
         font-family font_serif
+        max-height blockHeight
         p:first-of-type:empty
           display none
         p

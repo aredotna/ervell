@@ -54,7 +54,7 @@ a.Block(
         = block.title
         - if(block.kind.__typename === 'Attachment' && ['mp3', 'pdf'].indexOf(block.kind.file_extension))
           img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.kind.file_extension}.svg" class="iconic iconic-sm")
-        - if(block.kind.__typename ==='Media')
+        - if(block.kind.__typename === 'Embed')
           img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
 
       .Block__caption__meta
