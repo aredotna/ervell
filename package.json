@@ -59,7 +59,7 @@
     "scroll-frame": "1.0.0",
     "serve-favicon": "^2.3.0",
     "sharify": "*",
-    "sortablejs": "^1.1.1",
+    "sortablejs": "^1.6.0",
     "stylus": "^0.54.5",
     "underscore": "*",
     "underscore.deep": "^0.5.1",

@@ -33,7 +33,7 @@ module.exports = ->
   initChannelPath channel
 
   # Add Block initialization:
-  if current_user.canAddToChannel(channel) and not (FOLLOWERS? or FOLLOWING?)
+  if current_user.canAddToChannel(channel) and not (FOLLOWERS? and FOLLOWING?)
     integration = addBlockChannelServerRenderedIntegration
       $el: $('.js-add-block')
       collection: blocks
@@ -43,6 +43,7 @@ module.exports = ->
 
   mediator.once 'collaborators:fetched', (collaborators) ->
     return if $('.js-add-block').length # Already rendered
+    return if FOLLOWERS? or FOLLOWING?
     return unless mediator.shared.current_user.id in collaborators.pluck 'id'
 
     integration = addBlockChannelClientRenderedIntegration

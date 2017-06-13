@@ -4895,9 +4895,9 @@
       "resolved": "https://registry.npmjs.org/sntp/-/sntp-1.0.9.tgz"
     },
     "sortablejs": {
-      "version": "1.5.1",
+      "version": "1.6.0",
       "from": "sortablejs@>=1.1.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/sortablejs/-/sortablejs-1.5.1.tgz"
+      "resolved": "https://registry.npmjs.org/sortablejs/-/sortablejs-1.6.0.tgz"
     },
     "source-map": {
       "version": "0.4.4",

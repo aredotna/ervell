@@ -118,8 +118,8 @@ channelsVariables = (req, res) ->
     suffix: 'ers'
 
   blocks.fetch
-    cache: true
     data:
+      per: 20
       auth_token: req.user?.get('authentication_token')
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
@@ -140,8 +140,8 @@ channelsVariables = (req, res) ->
     suffix: 'ing'
 
   blocks.fetch
-    cache: true
     data:
+      per: 20
       auth_token: req.user?.get('authentication_token')
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
