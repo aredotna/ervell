@@ -1,5 +1,5 @@
 .OnboardingSteps
-  //
+  flex 1
 
 .OnboardingStep
   padding input-padding
@@ -9,6 +9,7 @@
   line-height 1
   color colors-gray-lighter
   text-align left
+  cursor default
 
   > span
     display inline-block
@@ -16,3 +17,9 @@
 
   &--active
     color colors-gray-hover
+
+  &--secondary
+    padding-left 2em
+
+    > span
+      width 1.5em

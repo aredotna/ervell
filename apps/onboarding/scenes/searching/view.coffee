@@ -1,9 +1,9 @@
-{ defer, delay } = require 'underscore'
+{ defer } = require 'underscore'
 Backbone = require 'backbone'
 template = -> require('./index.jade') arguments...
 
-module.exports = class OnboardingChannelsSceneView extends Backbone.View
-  className: 'OnboardingChannels'
+module.exports = class OnboardingSearchingSceneView extends Backbone.View
+  className: 'OnboardingSearching'
 
   events:
     'click .js-next': 'next'
@@ -17,11 +17,6 @@ module.exports = class OnboardingChannelsSceneView extends Backbone.View
   render: ->
     @$el.html template()
 
-    defer =>
-      @$el.addClass "#{@className}--active"
-
-    delay =>
-      @$('video').trigger 'play'
-    , 500
+    defer => @$el.addClass "#{@className}--active"
 
     this

@@ -1,4 +1,5 @@
 +mobile()
+  // Generic
   .OnboardingWelcome
     padding 1em
 
@@ -22,7 +23,6 @@
       flex-basis 100%
       border none
       padding 0
-
       &:last-child
         padding 0.5em 1em
 
@@ -33,5 +33,13 @@
       left 0
       padding 1em
 
+  .OnboardingDemo
+    &__mobile
+      display block
+
+    &__desktop
+      display none
+
+  // Scene-specific
   .FoundFriendsContact__identifier
     max-width 100%

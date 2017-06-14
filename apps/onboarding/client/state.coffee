@@ -6,8 +6,11 @@ module.exports = class OnboardingState extends Backbone.Model
     scenes: [
       'welcome',
       'channels',
+      'searching',
       'connecting',
       'profile-and-feed',
+      'feed',
+      'explore',
       'save-to-arena',
       'find-friends',
     ]

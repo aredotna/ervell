@@ -17,9 +17,24 @@
         | Next
 
   .OnboardingGuide__pane
-    p You can connect any kind of content to a channel by dragging files, pasting a link, or using the Are.na bookmarklet.
+    p
+      | You can connect any kind of content to a channel by dragging files,
+      | pasting a link, or using the Are.na bookmarklet.
+      | Blocks of content can be connected to many different channels at once,
+      | expanding their context across the Are.na community.
 
-    .OnboardingDemoPane__animation
-      //-
+    .OnboardingDemo
+      img.OnboardingDemo__mobile(
+        src='https://d2w9rnfcy7mm78.cloudfront.net/1073865/original_e974086b4118d3eb5beb3797ed160eef.gif'
+        alt='Adding a block on Are.na'
+      )
 
-    p Blocks of content can be connected to many different channels at once, expanding their context across the Are.na community.
+      video.OnboardingDemo__desktop(
+        loop autoplay muted
+        poster='https://d2w9rnfcy7mm78.cloudfront.net/1073863/original_420ef38b91e43511fc940a2fab68310a.jpg'
+      )
+        source( src='https://d2br4gmjd4xnka.cloudfront.net/1073864/9ef2ba52319f7fa988efe09642db3ee9.mp4', type='video/mp4' )
+        source( src='https://d2br4gmjd4xnka.cloudfront.net/1073862/bef1c7160a4781fd2461de9bf37cd426.webm', type='video/webm' )
+
+    //- Re: justify-content space-between
+    div &nbsp;
