@@ -1,32 +1,37 @@
-_ = require 'underscore'
-sd = require('sharify').data
 Backbone = require 'backbone'
-Backbone.$ = $
+Backbone.$ = $ # TODO: remove?
 mediator = require '../../../lib/mediator.coffee'
-
-followButtonTemplate = -> require('../templates/follow_button.jade') arguments...
+template = -> require('../templates/follow_button.jade') arguments...
 
 module.exports = class FollowButtonView extends Backbone.View
+  className: 'FollowButton'
 
   events:
-    'click' : 'toggleFollow'
+    'click': 'toggleFollow'
 
-  initialize: (options) ->
-    @showTitle = if options.showTitle? then options.showTitle else true
+  initialize: ({ showTitle }) ->
+    @user = mediator.shared.current_user
+    @showTitle = if showTitle? then showTitle else true
 
-    mediator.on 'current_user:prefetched', @render, @
-    mediator.on 'current_user:fetched', @render, @
-    mediator.shared.current_user.on 'change:following_channels', @render, @
-    mediator.shared.current_user.on 'change:following_users', @render, @
+    @listenTo mediator, 'current_user:prefetched', @render
+    @listenTo mediator, 'current_user:fetched', @render
+    @listenTo @user, 'change:following_channels', @render
+    @listenTo @user, 'change:following_users', @render
 
-    @render()
-
-  render: ->
-    @$el.html followButtonTemplate model: @model, user: mediator.shared.current_user, showTitle: @showTitle
+    @render() # TODO: remove
 
   toggleFollow: (e) ->
     e.preventDefault()
     e.stopImmediatePropagation()
 
-    mediator.shared.current_user.toggleFollow @model
+    @user.toggleFollow @model
 
+  render: ->
+    @$el
+      .attr 'data-following', @user.isFollowing(@model)
+      .html template
+        model: @model
+        user: @user
+        showTitle: @showTitle
+
+    this

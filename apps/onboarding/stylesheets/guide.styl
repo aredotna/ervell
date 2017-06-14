@@ -1,0 +1,27 @@
+.OnboardingGuide
+  display flex
+  flex-direction row
+  min-height 100vh
+  width 100%
+  flex 1
+
+  &__pane
+    display flex
+    flex-direction column
+    flex-basis 50%
+    justify-content space-between
+    padding 1em 1em 2em 1em
+    height 100vh
+    text-align center
+    margin-left -1px
+    border-left 1px solid colors-gray-border
+    font-size font-size-lg
+    line-height line-height-base
+
+  &__actions
+    > .Button
+      display block
+      width 100%
+
+    > .Button + .Button
+      margin-top 0.5em

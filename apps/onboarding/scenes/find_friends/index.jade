@@ -1,0 +1,28 @@
+.OnboardingGuide
+  .OnboardingGuide__pane
+    ol.OnboardingSteps
+      li.OnboardingStep
+        | <span>1.</span> Channels
+      li.OnboardingStep
+        | <span>2.</span> Connecting
+      li.OnboardingStep
+        | <span>3.</span> Profile and Feed
+      li.OnboardingStep
+        | <span>4.</span> Save to Are.na
+      li.OnboardingStep.OnboardingStep--active
+        | <span>5.</span> Find Friends
+
+    .OnboardingGuide__actions
+      if authentication && authentication.id
+        button.Button.Button--size-lg( disabled )
+          | Connected to Twitter
+      else
+        button.Button.Button--size-lg.js-connect-twitter
+          | Find Twitter friends
+
+      button.Button.Button--secondary.js-next
+        | Start using Are.na
+
+  .OnboardingGuide__pane
+    .OnboardingFoundFriends.js-found-friends
+      //- Rendered client-side
