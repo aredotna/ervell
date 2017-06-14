@@ -27,7 +27,7 @@ module.exports = class OnboardingSceneView extends Backbone.View
 
     unless isTouch()
       delay =>
-        @$('video').trigger 'play'
+        console.log 'Play video'
       , 500
 
     this
