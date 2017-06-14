@@ -1,18 +1,6 @@
-Backbone = require 'backbone'
+OnboardingSceneView  = require '../view.coffee'
 template = -> require('./index.jade') arguments...
 
-module.exports = class OnboardingConnectingSceneView extends Backbone.View
+module.exports = class OnboardingConnectingSceneView extends OnboardingSceneView
   className: 'OnboardingConnecting'
-
-  events:
-    'click .js-next': 'next'
-
-  initialize: ({ @state }) -> #
-
-  next: (e) ->
-    e.preventDefault()
-    @state.next()
-
-  render: ->
-    @$el.html template()
-    this
+  template: template

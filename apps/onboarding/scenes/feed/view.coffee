@@ -1,22 +1,6 @@
-{ defer } = require 'underscore'
-Backbone = require 'backbone'
+OnboardingSceneView  = require '../view.coffee'
 template = -> require('./index.jade') arguments...
 
-module.exports = class OnboardingFeedSceneView extends Backbone.View
+module.exports = class OnboardingFeedSceneView extends OnboardingSceneView
   className: 'OnboardingFeed'
-
-  events:
-    'click .js-next': 'next'
-
-  initialize: ({ @state }) -> #
-
-  next: (e) ->
-    e.preventDefault()
-    @state.next()
-
-  render: ->
-    @$el.html template()
-
-    defer => @$el.addClass "#{@className}--active"
-
-    this
+  template: template
