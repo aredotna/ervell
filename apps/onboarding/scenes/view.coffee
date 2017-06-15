@@ -1,6 +1,5 @@
 Backbone = require 'backbone'
-{ defer, delay } = require 'underscore'
-{ isTouch } = require '../../../components/util/device.coffee'
+{ defer } = require 'underscore'
 
 module.exports = class OnboardingSceneView extends Backbone.View
   className: 'NotImplemented'
@@ -17,17 +16,13 @@ module.exports = class OnboardingSceneView extends Backbone.View
   template: ->
     throw new Error 'Not Implemented'
 
-  locals: -> {}
+  locals: ->
+    state: @state
 
   render: ->
     @$el.html @template(@locals())
 
     defer =>
       @$el.addClass "#{@className}--active"
-
-    unless isTouch()
-      delay =>
-        console.log 'Play video'
-      , 500
 
     this
