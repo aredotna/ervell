@@ -40,6 +40,7 @@ module.exports = class OnboardingFindFriendsSceneView extends Backbone.View
 
   render: ->
     @$el.html template
+      state: @state
       authentication: @authentication
 
     @postRender()

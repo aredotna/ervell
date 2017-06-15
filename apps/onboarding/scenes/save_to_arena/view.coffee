@@ -5,4 +5,5 @@ module.exports = class OnboardingSaveToArenaSceneView extends OnboardingSceneVie
   className: 'OnboardingSaveToArenaScene'
   template: template
   locals: ->
+    state: @state
     bookmarklet: require '../../../../lib/bookmarklet.coffee'
