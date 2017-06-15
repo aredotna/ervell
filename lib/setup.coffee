@@ -175,6 +175,7 @@ module.exports = (app) ->
   # Dev only routes
   if 'development' is NODE_ENV
     app.use require '../apps/statuses'
+    app.use require '../apps/reload_app_example' # TODO: Remove
 
   # Apps that use dynamic routes
   app.use require '../apps/user'
