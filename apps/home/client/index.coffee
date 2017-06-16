@@ -1,3 +1,7 @@
+{ DEMO_BLOCKS } = require('sharify').data
+blockTemplate = ->
+  require('../../../components/block_v2/templates/block.jade') arguments...
+
 module.exports = ->
   $html = $('html, body')
   $el = $('.js-home')
@@ -17,3 +21,12 @@ module.exports = ->
           $el.addClass 'Home--active'
         else
           $el.removeClass 'Home--active'
+
+
+  changeBlock = ->
+    block = DEMO_BLOCKS.shift()
+    $el.find('.js-demo-block')
+      .html blockTemplate block: block
+    DEMO_BLOCKS.push block
+
+  setInterval changeBlock, 100

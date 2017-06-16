@@ -1,5 +1,25 @@
 .HomeHero
   //
 
-  &__video
-    //
+  &__focus
+    position relative
+    padding 2em 2em 0 2em
+
+  &__demo-block
+    display flex
+    justify-content flex-start
+    width block_width
+
+    > .Block
+      margin 0 0 block-b-margin 0
+
+      .Block__inner__overlay
+        display none
+
+  &__connect
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    // Offset to account for Block bottom margin
+    margin-top -(block-b-margin / 2)

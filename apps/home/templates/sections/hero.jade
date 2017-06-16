@@ -2,8 +2,14 @@
   h2.Type
     | Connect everything
 
-  .HomeHero__video.Placeholder( style='width: 950px; height: 480px' )
-    //-
+  .HomeHero__focus
+    .HomeHero__demo-block.js-demo-block
+      - block = demoBlocks[0]
+      include ../../../../components/block_v2/templates/block
+
+    .HomeHero__connect
+      button.Button.Button--overlay
+        | Connect →
 
   .HomeSection__cta
     a.Button.Button--size-lg( href='/sign_up' )
