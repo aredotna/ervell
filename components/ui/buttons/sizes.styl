@@ -7,3 +7,5 @@ font = json('../typography/font.json', { hash: true })
   for key, size in font.font
     &--{key}
       font-size size
+      if size >= font.font['size-lg']
+        border-width 2px
