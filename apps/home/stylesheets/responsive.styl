@@ -1,39 +1,70 @@
-+below(1224px)
-  // .Home
-  //   //
-
-  // .HomeHeader
-  //   //
-
-  // .HomeSection
-  //   //
-
-  .HomeSplit
-    &__description
-      max-width 100%
-
-    &__pane > .Placeholder
-        width 100%
-
 +mobile()
-  // .Home
-  //   //
+  .HomeHero
+    min-height 100vh !important
+    justify-content center
 
-  // .HomeHeader
-  //   //
-
-  // .HomeSection
-  //   //
-
-  .HomeSplit
-    flex-direction column
-
-    &__pane
-      collapsed-margins(1em)
+    &__focus
+      padding 0
       width 100%
 
-      > .Placeholder
+    &__demo-block
+      width 100%
+      > .Block
         width 100%
+        max-width 100%
+        margin 0
+        .Block
+          &__inner
+            border none
+            height 100vw
+          &__caption
+            display none
+
+    &__connect
+      margin-top 0
+
+    > .HomeSection
+      &__content
+        justify-content center
+      &__footer
+        display none
+
+  .HomeSection
+    min-height auto
+
+    &__content
+      padding 0
+      justify-content flex-start
+
+    &__cta
+      > .Button
+        flex-basis 50%
+        &:first-child
+          margin-right 0.5em
+        &:last-child
+          margin-left 0.5em
+
+    &__footer
+      margin-top 4em
+
+      > a
+        padding 0.5em
+
+  .HomeSplit
+    display block
+    collapsed-margins(4em)
+
+    &__pane
+      display block
+      width 100%
+      collapsed-margins(2em)
+      padding 0 1em
 
     &__description
       max-width 100%
+
+  .HomeExample
+    width 100%
+
+  .HomeNext
+    display none

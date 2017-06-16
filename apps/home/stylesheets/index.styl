@@ -1,15 +1,11 @@
-.Placeholder
-  display inline-block
-  max-width 100%
-  vertical-align bottom
-  background-color colors-gray-light
-
 .Home
   //
 
+  img
   iframe
     max-width 100%
     vertical-align bottom
+    // Hover artificating on Vimeo embeds
     transform translateZ(0)
 
   &--active
@@ -17,14 +13,17 @@
       &__logo
         > span
           opacity 0
+
       &__cta
         opacity 1
 
     .HomeToFold
       opacity 0
 
+@require './example'
 @require './header'
 @require './hero'
+@require './next'
 @require './section'
 @require './split'
 @require './to_fold'

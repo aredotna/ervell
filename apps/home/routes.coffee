@@ -9,7 +9,7 @@ GQL = require '../../lib/graphql'
     query: """
       {
         channel(id: "are-na-connect-everything") {
-          blocks(per: 20) {
+          blocks(per: 100) {
             ... blockThumb
           }
         }

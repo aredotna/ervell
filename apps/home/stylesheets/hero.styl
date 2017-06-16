@@ -3,7 +3,10 @@
 
   &__focus
     position relative
-    padding 2em 2em 0 2em
+    padding 2em
+
+    &:hover > .HomeHero__demo-block
+      opacity 0.5
 
   &__demo-block
     display flex
@@ -21,5 +24,4 @@
     top 50%
     left 50%
     transform translate(-50%, -50%)
-    // Offset to account for Block bottom margin
     margin-top -(block-b-margin / 2)
