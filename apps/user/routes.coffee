@@ -22,7 +22,7 @@ cache = require "../../lib/cache.coffee"
       res.locals.tips = res.locals.sd.TIPS = addTips(req.user, author, req.cookies)
     complete: -> next()
 
-@user = (req, res, next) ->  
+@user = (req, res, next) ->
   return next() unless res.locals.author
 
   blocks = new UserBlocks null,
@@ -60,10 +60,10 @@ cache = require "../../lib/cache.coffee"
     user_slug: req.params.username
     subject: 'channels'
 
-  channels.fetchUntilEnd 
-    data: 
+  channels.fetchUntilEnd
+    data:
       auth_token: req.user?.get('authentication_token')
-  .then ->  
+  .then ->
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.locals.sd.SUBJECT = 'index'
     res.render 'index',
@@ -72,7 +72,7 @@ cache = require "../../lib/cache.coffee"
   .catch next
 
 channelsVariables = (req, res) ->
-  send = 
+  send =
     query: query
     user: req.user or null
     variables:
