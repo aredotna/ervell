@@ -14,7 +14,7 @@ a.Block(
 
     //- Hover overlay
     .Block__inner__overlay
-      if block.kind.__typename !== 'Channel' 
+      if block.kind.__typename !== 'Channel'
         if block.kind.source_url || block.kind.file_url
           button.Button.Button--overlay.js-source Source
         if user && user.has('username')
@@ -31,7 +31,7 @@ a.Block(
          ul.Block__inner--channel__stats__list
           li by #{block.user.name}
           li #{block.kind.counts.blocks} blocks &bull; #{block.updated_at}
-    
+
     //- Text content
     if block.kind.__typename === 'Text'
       .Block__inner--text__content
@@ -60,4 +60,3 @@ a.Block(
       .Block__caption__meta
         .Block__caption__meta__author Added by #{block.user.name}
         .Block__caption__meta__author Updated #{block.updated_at}
-

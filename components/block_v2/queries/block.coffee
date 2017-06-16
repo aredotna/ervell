@@ -1,5 +1,4 @@
-module.exports = 
-  """
+module.exports = """
   fragment blockThumb on Block {
     id
     title
@@ -41,5 +40,4 @@ module.exports =
       }
     }
   }
-  
-  """
+"""
