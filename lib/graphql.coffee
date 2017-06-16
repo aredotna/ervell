@@ -3,15 +3,15 @@ request = require 'superagent'
 { GRAPHQL_ENDPOINT, X_APP_TOKEN } = require '../config.coffee'
 { some } = require 'underscore'
 
-module.exports = ({ query, variables, user }) ->
+module.exports = ({ query, variables, user, token }) ->
   Q.promise (resolve, reject) ->
     post = request
       .post GRAPHQL_ENDPOINT
       .set 'Accept', 'application/json'
 
-    if (token = user?.get?('access_token') or user?.access_token)?
+    if (token ?= user?.get?('access_token') or user?.access_token)?
       post.set 'X-AUTH-TOKEN': token
-    
+
     if X_APP_TOKEN
       post.set 'X-APP-TOKEN': X_APP_TOKEN
 
