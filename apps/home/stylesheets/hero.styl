@@ -5,9 +5,6 @@
     position relative
     padding 2em
 
-    &:hover > .HomeHero__demo-block
-      opacity 0.5
-
   &__demo-block
     display flex
     justify-content flex-start
@@ -16,8 +13,19 @@
     > .Block
       margin 0 0 block-b-margin 0
 
+      // Hide default overlay buttons (Source / Connect)
       .Block__inner__overlay
         display none
+
+      // Only display captions on hover
+      .Block__caption
+        display none
+      &:hover
+        .Block__caption
+          display block
+
+    &--hover
+      opacity 0.5
 
   &__connect
     position absolute

@@ -8,7 +8,7 @@ module.exports = ->
   $el = $('.js-home')
 
   # Next links
-  $el.find('.js-to-fold, .js-next')
+  $el.find '.js-to-fold, .js-next'
     .on 'click', (e) ->
       e.preventDefault()
 
@@ -16,7 +16,7 @@ module.exports = ->
       $html.animate scrollTop: $target.offset().top, 'fast'
 
   # Toggle header
-  $el.find('.js-fold')
+  $el.find '.js-fold'
     .waypoint
       offset: 'bottom-in-view'
       handler: (direction) ->
@@ -26,7 +26,7 @@ module.exports = ->
           $el.removeClass 'Home--active'
 
   # Render example blocks for hero
-  $demoBlock = $el.find('.js-demo-block')
+  $demoBlock = $el.find '.js-demo-block'
 
   changeBlock = ->
     block = DEMO_BLOCKS.shift()
@@ -50,3 +50,10 @@ module.exports = ->
       .attr 'href', href
       .attr('target', '_blank')[0]
       .click()
+
+  # Trigger faded hover state on demo block
+  $el.find '.js-connect'
+    .on 'mouseenter', ->
+      $demoBlock.addClass 'HomeHero__demo-block--hover'
+    .on 'mouseout', ->
+      $demoBlock.removeClass 'HomeHero__demo-block--hover'
