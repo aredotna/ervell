@@ -1,3 +1,21 @@
+@media (max-width: 64em)
+  .HomeSplit
+    &__description
+      max-width 100%
+
+@media (max-width: 50em)
+  // Switch from side by side layout to stacked
+  .HomeSplit
+    display block
+    collapsed-margins(4em)
+
+    &__pane
+      display block
+      width 100%
+      collapsed-margins(2em)
+      padding 0 1em
+
+// Small height screens (MBA, etcetera...)
 @media (max-height: 45em)
   .HomeHero
     &__focus
@@ -26,7 +44,7 @@
         .Block
           &__inner
             border none
-            height 100vw
+            height 35vh
           &__caption
             display none
 
@@ -47,6 +65,8 @@
       justify-content flex-start
 
     &__cta
+      margin-bottom 2em
+
       > .Button
         flex-basis 50%
         &:first-child
@@ -59,19 +79,6 @@
 
       > a
         padding 0.5em
-
-  .HomeSplit
-    display block
-    collapsed-margins(4em)
-
-    &__pane
-      display block
-      width 100%
-      collapsed-margins(2em)
-      padding 0 1em
-
-    &__description
-      max-width 100%
 
   .HomeExample
     width 100%
