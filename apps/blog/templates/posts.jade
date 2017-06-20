@@ -1,0 +1,10 @@
+if posts && posts.length
+  .home--posts
+    h2.home--posts__headline Blog
+    each post in posts
+      - img = post.get('image')
+      a(href="/blog#{post.get('url')}" style="background-image:url('#{img}')" class="home--posts__post ")
+        .home--posts__post__overlay
+          .home--posts__post__overlay__content
+            h1 #{post.get('category')}:
+            h1= post.get('title')
