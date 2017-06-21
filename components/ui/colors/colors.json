@@ -15,7 +15,7 @@
       "background": "#f7f7f7",
       "secondary": "#f0f0f0",
       "border": "#e7e7e5",
-      "border-dark": "#c6c6c6",
+      "border-bold": "#c6c6c6",
       "lighter": "#cbcbcb",
       "light": "#9d9d9d",
       "modal": "rgba(58,58,58,.85)",
