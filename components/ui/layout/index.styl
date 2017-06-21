@@ -9,9 +9,21 @@
     height 100%
     overflow hidden
 
+.Constrain
+  for i in (1..8)
+    @media (min-width: (block_width_mar * i) + unit)
+      center(block_width_mar * i)
+
+  @media (max-width: (block_width_mar * 3) + unit)
+    center(90%)
+
+  &--narrow
+    max-width (block_width_mar * 2)
+
 .Page
+  @extends .Constrain
   margin topbar_h auto
-  padding unit
+  padding 1em 0
 
 .Container
   width 100%
@@ -21,12 +33,3 @@
 
   &__content
     flex 1
-
-for i in (1..8)
-  @media (min-width: (block_width_mar * i) + unit)
-    .Page
-      center(block_width_mar * i)
-
-@media (max-width: (block_width_mar * 3) + unit)
-  .Page
-    center(90%)
