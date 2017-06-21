@@ -13,8 +13,6 @@
   z-index 1
 
   &__logo
-    cursor default
-
     // **
     > span:first-child
       display inline-block
@@ -35,6 +33,10 @@
     // Are.na
     > span:last-child
       opacity 0
+
+    &:hover
+      > span > svg
+        fill colors-gray-hover
 
   &__cta
     opacity 0
