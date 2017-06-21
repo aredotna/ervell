@@ -1,9 +1,11 @@
 .HomeHero
-  //
+  padding 2em 0 0 0
 
   &__focus
     position relative
-    padding 2em
+    padding 0 2em
+    font-size font-size-h2
+    margin 2em auto
 
   &__demo-block
     display flex
@@ -11,36 +13,30 @@
     width block_width
 
     > .Block
-      margin 0 0 block-b-margin 0
+      margin 0 auto
 
       // Hide default overlay buttons (Source / Connect)
       .Block__inner__overlay
-      // Hide timestamp
+        display none
+      // Enable border
+      .Block__inner
+        border-color colors-gray-border
+      // Hide title & timestamp, display attribution
+      .Block__caption__meta
+        display block
+      .Block__caption__title
       .Block__caption__meta__timestamp
         display none
-
-      // Only display captions on hover
+      // Relative caption
       .Block__caption
-        display none
-      &:hover
-        .Block__caption
-          display block
+        position relative
 
+    // Enabled when hovering faux 'Connect' button
     &--hover
       opacity 0.5
 
-      // :'(
-      .Block__inner
-        border-color colors-gray-border
-      .Block__caption
-      .Block__caption__meta
-        display block !important
-      .Block__caption__title
-        display none
-
   &__connect
     position absolute
-    top 50%
+    top (block_width / 2)
     left 50%
     transform translate(-50%, -50%)
-    margin-top -(block-b-margin / 2)

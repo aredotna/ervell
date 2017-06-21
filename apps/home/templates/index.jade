@@ -1,9 +1,9 @@
 extends ../../../components/layout/layouts/blank
 
 block container
-  .Home.js-home
-    include ./header
+  include ../../../components/logged_out_nav/templates/header
 
+  .Home.js-home
     section.HomeSection.HomeHero.js-section
       include ./sections/hero
 
@@ -18,6 +18,8 @@ block container
 
     section.HomeSection.js-section
       include ./sections/get_started
+
+  include ../../../components/logged_out_nav/templates/footer
 
 block scripts
   script( src= asset('/assets/home.js') )

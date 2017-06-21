@@ -1,4 +1,4 @@
-.HomeHeader
+.LoggedOutHeader
   position fixed
   transform translateZ(0)
   display flex
@@ -34,13 +34,10 @@
 
     // Are.na
     > span:last-child
-      opacity 1
+      opacity 0
 
   &__cta
     opacity 0
-
-    &:hover
-      opacity 1
 
     > a
       display inline-block
@@ -52,3 +49,17 @@
       // Log in
       &:last-child
         padding-left 0
+
+    &:hover
+      opacity 1
+
+  // States
+  &--active
+    .LoggedOutHeader
+      &__logo
+        // Are.na
+        > span:last-child
+          opacity 1
+
+      &__cta
+        opacity 1

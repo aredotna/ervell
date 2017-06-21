@@ -1,29 +1,32 @@
 { DEMO_BLOCKS } = require('sharify').data
 imagesLoaded = require 'imagesloaded'
+loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 blockTemplate = ->
   require('../../../components/block_v2/templates/block.jade') arguments...
 
 module.exports = ->
+  loggedOutNav()
+
   $html = $('html, body')
   $el = $('.js-home')
+  $sections = $el.find('.js-section')
 
   # Next links
   $el.find '.js-to-fold, .js-next'
     .on 'click', (e) ->
       e.preventDefault()
 
-      $target = $(this).closest('.js-section').next('.js-section')
-      $html.animate scrollTop: $target.offset().top, 'fast'
+      $target = $(this)
+        .closest '.js-section'
+        .next '.js-section'
 
-  # Toggle header
-  $el.find '.js-fold'
-    .waypoint
-      offset: 'bottom-in-view'
-      handler: (direction) ->
-        if direction is 'down'
-          $el.addClass 'Home--active'
-        else
-          $el.removeClass 'Home--active'
+      # If we're at the last section, just scroll to the actual bottom
+      yPos = if $sections.index($target) is $sections.length - 1
+        $html.height()
+      else
+        $target.offset().top
+
+      $html.animate scrollTop: yPos, 'fast'
 
   # Render example blocks for hero
   $demoBlock = $el.find '.js-demo-block'
