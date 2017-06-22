@@ -1,0 +1,36 @@
+.OnboardingSaveToArena
+  //
+
+  .OnboardingBookmarklet
+    opacity 0
+    transform translateY(-0.5em)
+    transition opacity 300ms, transform 500ms
+    transition-delay 500ms
+
+  &--active
+    .OnboardingBookmarklet
+      opacity 1
+      transform none
+
+.OnboardingBookmarklet
+  position relative
+
+  // Overlays "Drag this onto your bookmarks bar"
+  // so that bookmark has correct title
+  > a
+    display block
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    color transparent
+
+  &:after
+    display block
+    position absolute
+    content '⤵'
+    left 50%
+    bottom 100%
+    transform translateX(-50%) rotate(240deg)
+    padding 1em

@@ -2,13 +2,16 @@ Cookies = require 'cookies-js'
 analytics = require '../../lib/analytics.coffee'
 
 module.exports = ->
-  $el = $('.lo-cta')
+  $el = $('.LoggedOutCTA')
 
-  unless Cookies.get('lo-cta')
-    $el.addClass 'lo-cta--visible'
+  unless Cookies.get 'LoggedOutCTA'
+    $el.addClass 'LoggedOutCTA--visible'
 
-    $el.on 'click', '.lo-cta__close', (e) ->
-      $el.removeClass 'lo-cta--visible'
+    $el.on 'click', '.js-close', (e) ->
+      e.preventDefault()
+
+      $el.removeClass 'LoggedOutCTA--visible'
+
+      Cookies.set 'LoggedOutCTA', true, expires: 86400000 # 1 day
+
       analytics.track.click 'Closed "Learn More" CTA'
-      # Cookie expires in 1 day
-      Cookies.set 'lo-cta', true, { expires: 86400000 }

@@ -1,0 +1,87 @@
+@media (max-width: 64em)
+  .HomeSplit
+    width 100%
+
+  .HomeSection
+    &__cta
+      > .Button
+        flex-basis 25%
+
+@media (max-width: 50em)
+  // Switch from side by side layout to stacked
+  .HomeSplit
+    display block
+    collapsed-margins(4em)
+
+    &__pane
+      display block
+      width 100%
+      collapsed-margins(2em)
+      padding 0 1em
+
+// Small height screens (MBA, etcetera...)
+@media (max-height: 45em)
+  .HomeHero
+    &__focus
+      padding 0
+      margin 0 auto
+
+  .HomeSection
+    &__cta
+      > .Button
+        font-size font-size-base
+
++mobile()
+  .HomeHero
+    min-height 100vh !important
+    justify-content center
+
+    &__focus
+      width 100%
+      padding 0
+      margin 0 auto
+
+    &__demo-block
+      width 100%
+      transform scale(0.9)
+
+      .Block__caption
+        display none
+
+    &__connect
+      margin-top 0
+
+    > .HomeSection
+      &__content
+        justify-content center
+      &__footer
+        display none
+
+  .HomeSection
+    min-height auto
+
+    &__content
+      padding 0
+      justify-content flex-start
+
+    &__cta
+      margin-bottom 2em
+
+      > .Button
+        flex-basis 50%
+        &:first-child
+          margin-right 0.5em
+        &:last-child
+          margin-left 0.5em
+
+    &__footer
+      margin-top 4em
+
+      > a
+        padding 0.5em
+
+  .HomeExample
+    width 100%
+
+  .HomeNext
+    display none

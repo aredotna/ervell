@@ -1,8 +1,8 @@
 .Color
-  color-states = channel-public channel-closed channel-private state-premium
+  kolors = channel-public channel-closed channel-private state-premium gray-light
 
-  for state in color-states
-    &--{state}
+  for kolor in kolors
+    &--{kolor}
       &, input
-        color lookup('colors-' + state)
-        border-color rgba(@color, 0.3)
+        color lookup('colors-' + kolor)
+        border-color rgba(@color, colors-border-alpha)

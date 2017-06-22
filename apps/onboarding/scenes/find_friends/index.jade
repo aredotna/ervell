@@ -1,0 +1,18 @@
+.OnboardingGuide
+  .OnboardingGuide__pane
+    include ../steps
+
+    .OnboardingGuide__actions
+      if authentication && authentication.id
+        button.Button.Button--size-lg( disabled )
+          | Connected to Twitter
+      else
+        button.Button.Button--size-lg.js-connect-twitter
+          | Find Twitter friends
+
+      button.Button.Button--secondary.js-next
+        | Start using Are.na
+
+  .OnboardingGuide__pane
+    .OnboardingFoundFriends.js-found-friends
+      //- Rendered client-side

@@ -21,3 +21,13 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
   foreman start -f Procfile.dev -e .env.dev
   # => Listening on port 5000
 ```
+
+-----
+
+## Deploy staging
+
+```
+make deploy-staging branch=branch
+```
+
+(This doesn't work.)

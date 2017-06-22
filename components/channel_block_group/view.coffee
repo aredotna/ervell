@@ -1,7 +1,7 @@
 { union, invoke } = require 'underscore'
 Backbone = require 'backbone'
 BlockView = require '../block_v2/view.coffee'
-
+IconicJS = require '../iconic/client/iconic.min.js'
 
 module.exports = class ChannelBlockView extends Backbone.View
 
@@ -15,7 +15,7 @@ module.exports = class ChannelBlockView extends Backbone.View
         block: block
       
       view.renderFollowButton() if block.kind.__typename is 'Channel'
-
+      IconicJS().inject 'img.iconic'
       @subviews.push view
 
   remove: ->

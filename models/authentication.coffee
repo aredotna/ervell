@@ -1,15 +1,16 @@
-_ = require 'underscore'
-sd = require('sharify').data
+{ API_URL } = require('sharify').data
 Base = require './base.coffee'
+Contacts = require '../collections/contacts.coffee'
 
 module.exports = class Authentication extends Base
-
-  url: -> "#{sd.API_URL}/accounts/authentications/friends?service=#{@get('provider')}"
+  url: ->
+    "#{API_URL}/accounts/authentications/friends?service=#{@get('provider')}"
 
   sync: (method, model, options) ->
     switch method
-      when 'create' then options.url = "#{sd.API_URL}/accounts/authentications"
-      when 'delete' then options.url = "#{sd.API_URL}/accounts/authentications/#{@id}"
+      when 'create' then options.url = "#{API_URL}/accounts/authentications"
+      when 'delete' then options.url = "#{API_URL}/accounts/authentications/#{@id}"
+
     super
 
   action: ->
@@ -17,4 +18,7 @@ module.exports = class Authentication extends Base
 
   actionReadable: ->
     if @get('created_at')? then 'Disconnect from' else 'Connect to'
-    
+
+  related: ->
+    contacts = new Contacts(@get('users'))
+    contacts: contacts

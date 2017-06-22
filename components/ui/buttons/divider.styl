@@ -2,11 +2,11 @@
   &--divider
     display block
     width 100%
-    border-width 1px
     padding button-padding
-    border-right-color transparent !important
-    border-bottom-color transparent !important
-    border-left-color transparent !important
+    border-top-width button-border-width
+    border-right-width 0
+    border-bottom-width 0
+    border-left-width 0
     border-radius 0
 
     &:hover
@@ -16,4 +16,7 @@
 
     &:active
       border-top-color colors-gray-light !important
+      border-right-width 0
+      border-bottom-width 0
+      border-left-width 0
       color colors-gray-light !important

@@ -1,59 +1,38 @@
-premiumWidth = 900px
+.PricingTiers
+  display flex
+  flex-direction row
 
-.about-section
-  h2, h1
-    font-weight normal
-    color hovergray
-    margin (unit * 2) 0 (unit * 4)
-
-.about-section.about-section--premium
-  max-width premiumWidth
-
-.premium-tiers
-  margin-top unit
   &__tier
-    width 300px
-    display inline-block
-    vertical-align top
-    padding (unit / 2)
-    color black
-    +below(premiumWidth)
-      display block
-      margin unit auto
-    &__title
+    flex-basis 33.33%
+    margin 0 2em
+
+    > h5
+      margin 4em auto
       text-align center
-      margin-bottom unit * 2
-    &__price
-      width 300px
-      height 100px
-      border 1px solid black
-      text-align center
-      display table-cell
-      vertical-align middle
-      margin unit 0
-      line-height 1.2
-      small
-        font-size 10px
-        margin-bottom (unit / 2)
-      &.selectable
-        cursor pointer
-      &.selectable:hover, &.selected
-        background-color black
-        color white
-        font-weight bold
-    &__includes
-      margin-top unit
-      font-size 14px
       font-weight bold
+
     &--premium
-      color success
-      .premium-tiers__tier__price
-        border-color success
-        &.selectable:hover, &.selected
-          background-color success
-    &--enterprise
-      color public
-      .premium-tiers__tier__price
-        border-color public
-        &.selectable:hover, &.selected
-          background-color public
+      &, & > *
+        color colors-state-premium
+
+  &__includes
+    font-size font-size-lg
+    line-height line-height-tall
+
+    > li
+      collapsed-margins(0.5em)
+
+      > p
+        font-size font-size-base
+        line-height line-height-base
+        font-weight bold
+
+  @media (max-width: 48em)
+    flex-direction column
+
+    &__tier
+      collapsed-margins(2em)
+      width 100%
+
+      > h5
+        margin 2em auto

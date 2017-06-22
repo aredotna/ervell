@@ -1,2 +1,1 @@
-$ ->
-  require("../apps/home/client.coffee")()
+$ require('../apps/home/client/index.coffee')

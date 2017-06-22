@@ -1,91 +1,15 @@
-blogPadding = 30px
+.BlogPosts
+  //
 
-.home--blog
-  margin (unit * 6) 0 
-  h2
-    font-size 28px
-    margin 40px 0 80px
-
-.blog-body
-  margin (unit * 6) 0 (unit * 2)
-  color black
-  .site-header
-    text-align center
-    margin-bottom (unit * 3)
-    h1
-      h1()
-      font-weight normal
-  .site-title
-    font-weight 300
-    color black
-  .wrapper
-    max-width 600px
-    margin 0 auto
-    padding 0 blogPadding
-  .page-content
-    padding (unit * 1.5) 0
-  .post-header
-    margin-bottom (unit * 1.5)
-  .post-category-title
-    margin-bottom (unit / 1.5)
-    text-align center
-  .post-author
-    text-align center
-    font-size 15px
-    padding-bottom (unit / 2)
-    font-weight bold
-  .post-meta
-    font-size 15px
-    color textgray
-    padding-bottom 50px
-    text-align center
-  .post
-    margin-top (unit * 7)
-  .post:first-child
-    margin-top 0
-  a
-    color black
-    border-bottom 1px solid black
-    &:hover
-      color hovergray
-  h1
-    margin 0
-    padding 0
-    font-weight 300
-    font size 30px
-  h2
-    font-weight normal
-  img
-    max-width 100%
+  &__post
     display block
-  iframe 
-    margin unit 0
-  p
-    p()
-    margin-bottom (unit * 1.5)
-  .post-content > h4
-    display block
-    font-style normal
-    font-weight normal
-    font-size 1rem
-    margin-bottom unit * 2
-    em
-      font-style normal
-  hr
-    border 1px solid bordergray
-    margin (unit * 2.5) (unit * 2)
-  .index-link
-    margin (unit * 3) 0
-    text-align center
-  .arena-iframe
-    border 1px solid textgray
-    box-shadow 4px 4px 4px #eee
-    height 2150px !important
-    padding 1px
-    +below(400px)
-      height 2000px !important
-    +below(380px)
-      height 1950px !important
-    +below(340px)
-      height 1700px !important
+    collapsed-margins(8em)
 
+    > h2
+    > h5
+      text-align center
+
+    > img
+      max-width 100%
+
+@require './show'

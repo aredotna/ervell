@@ -1,0 +1,21 @@
+.OnboardingGuide
+  .OnboardingGuide__pane
+    include ../steps
+
+    .OnboardingGuide__actions
+      .OnboardingBookmarklet.Button.Button--size-lg
+        a( href= bookmarklet )
+          | Add to Are.na
+        span
+          | Drag this onto your bookmarks bar
+
+      a.Button.Button--secondary.js-next
+        | Next
+
+  .OnboardingGuide__pane
+    p
+      | The Are.na bookmarklet lets you save content from any
+      | web page to your channels in a few clicks.
+
+    .OnboardingDemo
+      <iframe width="1031" height="1022" src="https://www.youtube.com/embed/YXPrN05yHrI?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;version=3&amp;vq=hd1440" frameborder="0" allowfullscreen></iframe>

@@ -73,6 +73,7 @@
     "browserify": "11.2.0",
     "browserify-dev-middleware": "*",
     "caching-coffeeify": "*",
+    "chokidar": "^1.7.0",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "html5": "*",
     "jadeify": "*",

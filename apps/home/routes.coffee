@@ -1,17 +1,28 @@
-_ = require 'underscore'
-sd = require('sharify').data
-slogans = require './slogans.coffee'
-{ Collection } = require 'backbone'
+{ shuffle } = require 'underscore'
+{ API_URL } = require('sharify').data
+{ DEMO_USER_AUTH_TOKEN } = process.env
+GQL = require '../../lib/graphql'
 
-class Posts extends Collection
-  url: -> "#{sd.BLOG_URL}/featured.json"
+@index = (_req, res, next) ->
+  send =
+    token: DEMO_USER_AUTH_TOKEN
+    query: """
+      {
+        channel(id: "are-na-connect-everything") {
+          blocks(per: 100) {
+            ... blockThumb
+          }
+        }
+      }
 
-@index = (req, res, next) ->
-  posts = new Posts
-  posts.fetch
-    complete: ->
-      res.locals.sd.POSTS = posts
+      #{require '../../components/block_v2/queries/block'}
+    """
+
+  GQL send
+    .then ({ channel: { blocks }}) ->
+      res.locals.sd.DEMO_BLOCKS = demoBlocks = shuffle blocks
+
       res.render 'index',
-        posts: posts.models
-        slogan: slogans[res.locals.sd.HOMEPAGE_SLOGAN]
+        demoBlocks: demoBlocks
 
+    .catch next

@@ -1,11 +1,30 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/layouts/blank
 
-block vars
-  - extraClasses = 'body--home'
-
-block body
-  .home.home--blog
-    include ../../home/templates/sections/posts
+block title
+  |  / Blog
 
 block scripts
-  script( src=asset('/assets/home.js') )
+  script( src= asset('/assets/blog.js') )
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--narrow
+    h1.PageTitle
+      | Blog
+
+    .BlogPosts
+      for post in posts
+        a.BlogPosts__post( href="/blog#{post.get('url')}" )
+          h2.Type
+            | #{post.get('category')}:
+            br
+            = post.get('title')
+
+          h5.Type
+            = post.get('date')
+
+          img( src= post.get('image'), alt= post.get('title') )

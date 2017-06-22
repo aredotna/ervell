@@ -1,28 +1,41 @@
+// TODO:
+// - Simplify DOM structure; unnest BEM
+// - Use existing font sizes
+// - Remove `unit`s; convert to ems
+
+block-size = 315px
+block-t-margin = 20px
+block-h-margin = 10px
+block-b-margin = 60px
+
 .Block
-  flex 1 1 315px
-  text-align center
-  margin 20px 10px 60px 10px
-  max-width 315px
   position relative
+  flex 1 1 block-size
+  max-width block-size
+  margin block-t-margin block-h-margin block-b-margin block-h-margin
+  text-align center
 
   &__caption
     position absolute
     font-size s_caption
     font-weight bold
-    color lightgray 
-    padding 2em 0 .5em
+    color colors-gray-light
+    padding 2em 0 0.5em
     width 100%
     text-align center
     line-height 1.2
+
     &__title
       padding 0 4em
       white-space nowrap
       overflow hidden
       text-overflow ellipsis
       vertical-align middle
+
       svg
         vertical-align bottom
         margin-left .5em
+
     &__meta
       display none
 
@@ -37,13 +50,14 @@
   &:hover &__caption__meta
     display block
 
-  &__inner  
+  &__inner
     position relative
-    height 315px
+    height block-size
     border 1px solid transparent
 
     &:hover
-      border 1px solid bordergray
+      border 1px solid colors-gray-border
+
     &:hover &__overlay
       display flex
 
@@ -65,6 +79,7 @@
       height 100%
       justify-content center
       align-items center
+
       &__channel-actions
         position absolute
         left 0
@@ -72,13 +87,14 @@
         display flex
         width 100%
         padding 0 1em
+
         button
           width 50%
-          margin 0 .25em
+          margin 0 0.25em
 
     &--channel
       display flex
-      border 2px solid bordergray
+      border 2px solid colors-gray-border
       justify-content center
       align-items center
       flex-direction column
@@ -88,19 +104,23 @@
         font-weight normal
         padding (unit * 2) 0 0
         margin 0 0 0.4em
+
       &__stats
         font-size s_small
         line-height 1.5em
+
       &--closed
         border-color rgba(colors-channel-closed, colors-border-alpha)
         color colors-channel-closed
         &:hover
           border 2px solid colors-channel-closed
+
       &--private
         border-color rgba(colors-channel-private, colors-border-alpha)
         color colors-channel-private
         &:hover
           border 2px solid colors-channel-private
+
       &--public
         border-color rgba(colors-channel-public, colors-border-alpha)
         color colors-channel-public
@@ -115,22 +135,30 @@
         text-align left
         font-size font-size-base
         font-family font_serif
-        p:first-of-type:empty
-          display none
+        max-height block-size
+
         p
           margin 0.75em 0
           line-height line-height-tall
 
-    &--image, &--link, &--attachment, &--embed
+          &:first-of-type:empty
+            display none
+
+    &--image
+    &--link
+    &--attachment
+    &--embed
       display flex
       align-items center
       justify-content center
       position relative
+
       img
         max-width 100%
         max-height 100%
 
     &--attachment
-      background backgroundgray 
+      background colors-gray-background
+
       .iconic-property-fill
-        fill textgray 
+        fill colors-gray-text

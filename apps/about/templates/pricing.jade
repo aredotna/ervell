@@ -1,12 +1,76 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/layouts/blank
 
-block vars
-  - extraClasses = 'no-messages body--static'
-
-block body
-  include ./sections/pricing
-  include ./sections/premium_features
-  include ./sections/principles
+block title
+  |  / Pricing
 
 block scripts
-  script( src= asset('/assets/home.js') )
+  script( src= asset('/assets/about.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page
+    h1.PageTitle
+      | Pricing
+
+    section.AboutSection.PricingTiers
+      .PricingTiers__tier
+        h5.Type
+          | Are.na
+        a.Button.Button--size-lg.Button--fill( href='/sign_up' )
+          | Free
+        p.Type
+          | Includes
+        ul.PricingTiers__includes
+          li Multiple privacy settings
+          li Unlimited channels
+          li Unlimited blocks
+          li 25MB upload limit
+
+      .PricingTiers__tier.PricingTiers__tier--premium
+        h5.Type.Color--state-premium
+          | Premium
+        a.Button.Button--size-lg.Button--fill.Color--state-premium( href='/settings/billing' )
+          | $45 / year
+          if user && user.isPremium()
+            |  - Thank you!
+        p.Type.Color--state-premium
+          | Are.na +
+        ul.PricingTiers__includes
+          li
+            | Manage channels
+            p
+              | Manage all the details of your channels in one place.
+          li
+            | Quick search
+            p
+              | Search content within channels to narrow down what you&rsquo;re looking for.
+          li
+            | List view
+            p
+              | Great for channels where you need to scan titles, text, or URLs.
+          li Channel mute
+          li Hide from search engines
+          li Custom profile bio
+
+      .PricingTiers__tier
+        h5.Type
+          | Enterprise
+        a.Button.Button--size-lg.Button--fill( href='mailto:info@are.na' )
+          | Contact us
+        p.Type
+          | Are.na + Premium +
+        ul.PricingTiers__includes
+          li Custom Domains
+          li White-label support
+
+    .AboutSection.AboutSection--focus.Constrain.Constrain--narrow
+      h3.Type.Utility--align-center
+        | Transparency
+      p.Type
+        | We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network.
+      p.Type
+        | We partly rely on our premium users who have access to a series of extra features for a yearly subscription.
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer

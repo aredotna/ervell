@@ -155,31 +155,33 @@ module.exports = (app) ->
         "User-agent: *\nNoindex: /"
 
   # Mount apps
-  app.use require "../apps/feed"
-  app.use require "../apps/home"
-  app.use require "../apps/blog"
-  app.use require "../apps/registration"
-  app.use require "../apps/getting_started"
-  app.use require "../apps/tools"
-  app.use require "../apps/auth"
-  app.use require "../apps/about"
-  app.use require "../apps/search"
-  app.use require "../apps/manage"
-  app.use require "../apps/share"
-  app.use require "../apps/marklet"
-  app.use require "../apps/import"
+  app.use require '../apps/feed'
+  app.use require '../apps/home'
+  app.use require '../apps/blog'
+  app.use require '../apps/registration'
+  app.use require '../apps/getting_started'
+  app.use require '../apps/tools'
+  app.use require '../apps/auth'
+  app.use require '../apps/about'
+  app.use require '../apps/search'
+  app.use require '../apps/manage'
+  app.use require '../apps/share'
+  app.use require '../apps/marklet'
+  app.use require '../apps/import'
   app.use require '../apps/settings'
+  app.use require '../apps/onboarding'
   app.use require '../apps/ui'
 
   # Dev only routes
-  if "development" is NODE_ENV
-    app.use require "../apps/statuses"
+  if 'development' is NODE_ENV
+    app.use require '../apps/statuses'
+    app.use require '../apps/reload_app_example' # TODO: Remove
 
   # Apps that use dynamic routes
-  app.use require "../apps/user"
-  app.use require "../apps/block"
-  app.use require "../apps/channel"
-  app.use require "../apps/rss"
+  app.use require '../apps/user'
+  app.use require '../apps/block'
+  app.use require '../apps/channel'
+  app.use require '../apps/rss'
 
   # Finally 404 and error handling middleware when the request wasn't handled
   # successfully by anything above.

@@ -1,0 +1,53 @@
++mobile()
+  // Generic
+  .OnboardingWelcome
+    padding 1em
+
+    &__headline
+    &__subheadline
+      font-size font-size-h3 !important
+
+    &__subheadline
+      padding 0 1em
+
+    &__cta > a
+      font-size font-size-base
+
+  .OnboardingSteps
+    margin 0 1em
+
+  .OnboardingGuide
+    position relative
+    flex-direction column
+    padding-bottom 10em // Space for `__actions`
+
+    &__pane
+      height auto
+      flex-basis 100%
+      border none
+      padding 0
+      font-size font-size-base
+      line-height line-height-base
+
+      &:last-child
+        padding 0.5em 1em
+
+    &__actions
+      position fixed
+      right 0
+      bottom 0
+      left 0
+      padding 1em
+      background-color white
+      z-index 1
+
+  .OnboardingDemo
+    width 100%
+    height 200px
+
+    > iframe
+      max-height 100%
+
+  // Scene-specific
+  .FoundFriendsContact__identifier
+    max-width 100%

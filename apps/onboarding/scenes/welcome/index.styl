@@ -1,0 +1,33 @@
+.OnboardingWelcome
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+  min-height 100vh
+  padding 1em
+  opacity 0
+  transition opacity 300ms
+
+  &__subheadline
+    max-width 1024px
+    text-align center
+
+  &__cta
+    display flex
+    width 100%
+    flex-direction row
+    justify-content center
+    align-items center
+    // Match font size to button size
+    // for consistent em value
+    font-size font-size-lg
+    margin-top 2em
+
+    > .Button
+      display block
+      margin 0 1em
+      max-width block_width
+      flex-basis 50%
+
+  &--active
+    opacity 1

@@ -1,0 +1,44 @@
+.OnboardingSteps
+  flex 1
+  counter-reset section
+
+  &__subsection
+    display none
+
+    &--active
+      display block
+
+.OnboardingStep
+  padding input-v-padding 0
+  border-bottom 1px solid colors-gray-border
+  font-weight bold
+  font-size font-size-base
+  line-height 1
+  color colors-gray-lighter
+  text-align left
+  cursor default
+
+  &:before
+    counter-increment section
+    content counters(section, '') '. '
+
+  > ol
+    counter-reset subsection
+    margin-bottom -(input-v-padding)
+
+    > li
+      padding-left 1em
+
+      &:first-child
+        margin-top input-v-padding
+        border-top 1px solid colors-gray-border
+
+      &:last-child
+        border-bottom 0
+
+      &:before
+        counter-increment subsection
+        content counter(subsection, lower-latin) '. '
+
+  &--active
+    color colors-gray-hover

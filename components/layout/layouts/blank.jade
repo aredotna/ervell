@@ -1,0 +1,19 @@
+doctype html
+html( data-logged-in=(user && true) )
+  head
+    include ../modules/title
+    include ../modules/meta
+    include ../modules/styles
+
+    block head
+  body
+    .Container.js-container
+      .Container__content
+        block container
+
+      block footer
+
+    block body
+
+    include ../modules/analytics
+    include ../modules/scripts
