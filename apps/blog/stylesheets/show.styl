@@ -1,0 +1,47 @@
+.BlogPost
+  // Classes come through with Jekyll generated HTML
+  // Not going to bother with correcting *that*
+  // So for now, force things to look correct
+
+  .post
+    //
+
+    > .post-header
+      collapsed-margins(2em)
+
+      > .post-category-title
+        collapsed-margins(2em)
+
+        > h1
+          margin 0
+          text-align center
+          font-size font-size-h2
+          font-weight normal
+
+      > .post-author
+      > .post-meta
+        text-align center
+        font-size font-size-base
+        line-height line-height-base
+
+      > .post-author
+        font-weight bold
+
+    > .post-content
+      //
+
+      p
+        collapsed-margins(1em)
+        font-size font-size-base
+        line-height line-height-tall
+
+        > a
+          text-decoration underline
+
+      img
+      iframe
+        display block
+        max-width 100%
+        margin 4em auto
+        vertical-align bottom
+        border 1px solid colors-gray-border
