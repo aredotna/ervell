@@ -9,13 +9,16 @@
     height 100%
     overflow hidden
 
-.Constrain
+constrain()
   for i in (1..8)
     @media (min-width: (block_width_mar * i) + unit)
       center(block_width_mar * i)
 
   @media (max-width: (block_width_mar * 3) + unit)
     center(90%)
+
+.Constrain
+  constrain()
 
   &--narrow
     max-width (block_width_mar * 2)
