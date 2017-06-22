@@ -8,6 +8,16 @@
   color colors-gray-text
   line-height line-height-base
 
+  &--lg
+    font-size font-size-lg
+  &--sm
+    font-size font-size-sm
+  &--xs
+    font-size font-size-xs
+
+  &--tall
+    line-height line-height-tall
+
 h1.Type
 h2.Type
 h3.Type
@@ -43,14 +53,6 @@ h6.Type
   letter-spacing 0.0625em
 
 p.Type
-  font-size font-size-base
-  &--lg
-    font-size font-size-lg
-  &--sm
-    font-size font-size-sm
-  &--xs
-    font-size font-size-xs
-
   > a
     font-weight bold
 
@@ -60,13 +62,17 @@ code.Type
   font-size font-size-sm
   background-color colors-gray-background
   color black
-  border-radius 2px
+  border-radius input-border-radius
 
 pre.Type
-  padding (1em / 4) (1em / 2)
+  padding 0.25em 0.5em
   line-height line-height-tall
   white-space pre
   overflow-x auto
 
 code.Type
-  padding (1em / 6) (1em / 4)
+  padding (1em / 6) 0.25em
+
+ul.Type
+ol.Type
+  list-style none
