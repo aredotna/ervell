@@ -1,14 +1,25 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/layouts/blank
 
-block vars
-  - extraClasses = 'body--home'
+block container
+  include ../../../components/logged_out_nav/templates/header
 
-block body
-  .home
-    include sections/splash.jade
-    include sections/features.jade
-    include sections/diatribe.jade
-    include sections/posts.jade
+  .Home.js-home
+    section.HomeSection.HomeHero.js-section
+      include ./sections/hero
+
+    section.HomeSection.js-section.js-fold
+      include ./sections/platform_for_organizing
+
+    section.HomeSection.js-section
+      include ./sections/connect_ideas
+
+    section.HomeSection.js-section
+      include ./sections/explore_and_collaborate
+
+    section.HomeSection.js-section
+      include ./sections/get_started
+
+  include ../../../components/logged_out_nav/templates/footer
 
 block scripts
-  script( src=asset('/assets/home.js') )
+  script( src= asset('/assets/home.js') )

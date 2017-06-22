@@ -1,0 +1,67 @@
+.LoggedOutHeader
+  position fixed
+  transform translateZ(0)
+  display flex
+  flex-direction row
+  justify-content space-between
+  top 0
+  right 0
+  left 0
+  padding 1em 0.75em
+  font-size font-size-base
+  line-height 1
+  z-index 1
+
+  &__logo
+    // **
+    > span:first-child
+      display inline-block
+      position relative
+      width @font-size * 2
+      height @font-size
+      top 0.125em
+      margin-right 0.25em
+
+      > svg
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        fill colors-gray-text
+
+    // Are.na
+    > span:last-child
+      opacity 0
+
+    &:hover
+      > span > svg
+        fill colors-gray-hover
+
+  &__cta
+    opacity 0
+
+    > a
+      display inline-block
+      padding 0 1em
+      font-weight bold
+      // Join
+      &:first-child
+        padding-right 0
+      // Log in
+      &:last-child
+        padding-left 0
+
+    &:hover
+      opacity 1
+
+  // States
+  &--active
+    .LoggedOutHeader
+      &__logo
+        // Are.na
+        > span:last-child
+          opacity 1
+
+      &__cta
+        opacity 1

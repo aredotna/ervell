@@ -1,0 +1,16 @@
+.HomeNext
+  position absolute
+  bottom 0
+  left 50%
+  transform translateX(-50%) rotate(90deg)
+  height 4em
+  padding 1em
+  margin 2em
+  opacity alpha(transparentify(colors-gray-border-bold))
+
+  > img
+    max-height 100%
+    max-width 100%
+
+  &:hover
+    opacity alpha(transparentify(colors-gray-hover))

@@ -1,0 +1,82 @@
+.Type
+  // Reset any styles that might be inherited from the base object
+  // This property can be removed once the existing UI is retired
+  all initial
+
+  antialiased()
+  font-family font_sans
+  color colors-gray-text
+  line-height line-height-base
+
+  &--lg
+    font-size font-size-lg
+  &--sm
+    font-size font-size-sm
+  &--xs
+    font-size font-size-xs
+
+  &--tall
+    line-height line-height-tall
+
+h1.Type
+h2.Type
+h3.Type
+h4.Type
+h5.Type
+h6.Type
+p.Type
+pre.Type
+  display block
+  collapsed-margins(1em)
+
+h1.Type
+h2.Type
+h3.Type
+h4.Type
+h5.Type
+h6.Type
+  font-weight normal
+
+h1.Type
+  font-size font-size-h1
+h2.Type
+  font-size font-size-h2
+h3.Type
+  font-size font-size-h3
+h4.Type
+  font-size font-size-h4
+h5.Type
+  font-size font-size-h5
+h6.Type
+  font-size font-size-h6
+  text-transform uppercase
+  letter-spacing 0.0625em
+
+p.Type
+  > a
+    font-weight bold
+
+  > img
+    max-width 100%
+    vertical-align bottom
+
+pre.Type
+code.Type
+  font-family font_mono
+  font-size font-size-sm
+  background-color colors-gray-background
+  color black
+  border-radius input-border-radius
+
+pre.Type
+  padding 0.25em 0.5em
+  line-height line-height-tall
+  white-space pre
+  overflow-x auto
+
+code.Type
+  padding (1em / 6) 0.25em
+
+ul.Type
+ol.Type
+  list-style none

@@ -1,0 +1,29 @@
+.HomeSplit
+  display flex
+  width 80%
+  flex-direction row
+  align-items center
+
+  &__pane
+    display flex
+    justify-content flex-start
+    flex-direction column
+    padding 0 2em
+
+    &:first-child
+      flex-basis 33.33%
+      align-items flex-end
+
+    &:last-child
+      flex-basis 66.66%
+      align-items center
+
+  &__description
+    //
+
+    > h5
+      //
+
+    > p
+      font-size font-size-base
+      line-height line-height-tall

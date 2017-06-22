@@ -1,17 +1,100 @@
-extends ../../../components/layout/index--info
+extends ../../../components/layout/layouts/blank
 
-block vars
-  - extraClasses = 'body--home no-messages body--static'
-
-block body
-  .home.home--about
-    include ../../home/templates/sections/features
-    include ../../home/templates/sections/diatribe
-    include sections/team
-    include sections/principles
-    include sections/labs
-    include sections/api
-    include sections/contact
+block title
+  |  / About
 
 block scripts
-  script( src=asset('/assets/home.js') )
+  script( src= asset('/assets/about.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page
+    h1.PageTitle
+      | About
+
+    .AboutSection
+      .AboutHeroVideo
+        iframe(
+          src='https://player.vimeo.com/video/221811390?autoplay=1&autopause=0'
+          frameborder='0'
+          allowfullscreen
+        )
+
+    .AboutBlurbs.AboutSection
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Are.na is a platform for organizing your internet.
+        p Are.na is a simple tool for connecting what you find and building knowledge. It’s a space where you can save anything, structure your thinking however you want, and discover new things together.
+
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Make channels. Add content. Connect ideas.
+        p Channels are collections of content that can hold images, websites, text, videos, and files. Connect anything you want to a channel by dragging a file from your desktop, using our bookmarklet.
+
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Explore and collaborate with others.
+        p Are.na is a community of people thinking together. Explore the entire Are.na universe, collaborate on shared channels, or work privately to organize your own thoughts.
+
+    .AboutSection.AboutSection--focus.Constrain.Constrain--narrow
+      h2.Type.Utility--align-center
+        | Connect information, together
+
+      p.Type.Utility--align-center
+        img( src='images/feynman-arena.svg', )
+
+      p.Type
+        | Our intention behind Are.na is to build a platform that helps people continually recontextualize information into new ideas and help us all understand the vast amount information we face on a daily basis.
+      p.Type
+        | As a society, we should think about what mainstream tools we have for unpacking our own perspectives. Is &ldquo;sharing&rdquo; enough? &ldquo;Likes&rdquo;? What happens to the things you shared last year? And how can the tools we build today help you understand how your thinking has changed over time?
+
+    .AboutBlurbs.AboutSection
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Team
+        p.Type
+          a( href='/charles-broskoski')
+            | Charles Broskoski
+          br
+          a( href='/daniel-pianetti')
+            | Daniel Pianetti
+          br
+          a( href='/chris-sherron')
+            | Chris Sherron
+          br
+          a( href='/damon-zucconi')
+            | Damon Zucconi
+          br
+          a( href='/christopher-barley' )
+            | Chris Barley
+          br
+          a( href='/meg-miller' )
+            | Meg Miller (Blog Editor)
+
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Labs
+        p.Type
+          | The Are.na team offers development and API consulting for professional applications.
+        p.Type
+          | We recently launched a beta version of a tool for exploring hypertext connections called <a href='http://pilgrim.are.na' target='_blank'>Pilgrim</a>, with generous support from the <a href='http://knightfoundation.org' target='_blank'>Knight Foundation</a>.
+        p.Type
+          | Before that, our most recent collaboration was with the <a href='http://guggenheim.org' target='_blank'>Guggenheim Museum</a> to build the <a href='http://azone.guggenheim.org/' target='_blank'>Azone Futures Market</a>.
+
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Transparency
+        p.Type
+          | We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network.
+        p.Type
+          | We partly rely on our <a href='/pricing'>Premium</a> users who have access to a series of extra features for a yearly subscription.
+
+      .AboutBlurbs__blurb
+        h5.Type
+          strong Contact
+        p.Type
+          | Questions? <a href='mailto:everyone@are.na'>We&rsquo;d love to hear from you.</a>
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer

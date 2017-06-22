@@ -1,61 +1,41 @@
-@require '../../../node_modules/rupture/rupture'
-@require 'labs'
-@require 'graph'
-@require 'pricing'
-@require 'features'
+.AboutHeroVideo
+  ratio-box(2880 / 1750)
+  width 66.66%
+  margin 0 auto
+  outline 1px solid colors-gray-border-bold
 
-rupture.mobile-cutoff = 500px
+  > iframe
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    background-color white
 
-.body--static
-  background-color #fff
-  &__header
-    margin (unit * 6) auto (unit * 3)
-    text-align center
-    max-width 600px
-  p
-    p()
-    margin 0.75em auto
-    font-size 20px
-  ul
-    margin 0
-    padding 0
-  h1, h2
-    text-align center
-    antialiased()
-    color hovergray
-    font-weight normal
-  h1.center, h2.center
-    text-align center
-  h1
-    font-size 28px
-    margin 0 auto (unit * 4)
-  h2
-    margin (unit * 2) 0
-  h2.is-left
-    text-align left
-
-.home--about
-  margin-top unit * 6
-
-.about-section
-  max-width 600px
-  margin (unit * 6) auto 0
-  font-size 20px
-  line-height 1.5
-  overflow hidden
-  img
-    max-width 100%
-    margin (unit * 2) auto
+  &:after
     display block
-  img:not(.no-border)
-    border 1px solid bordergray
-  &:last-of-type
-    margin-bottom (unit * 10)
-  a
-    font-weight bold
-  p
-    p()
-    font-size 20px
-    margin-bottom unit
-  +below(900px)
-    padding (unit)
+    content ''
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    box-shadow inset 0 0 0 1px white
+    pointer-events none
+
+.AboutBlurbs
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  justify-content center
+
+  &__blurb
+    flex-basis 33.33%
+    margin 2em 0
+    padding 0 2em
+
+    > h5
+      text-align center
+
+    > p
+      line-height line-height-tall
