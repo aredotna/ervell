@@ -6,8 +6,12 @@ mixin onboardingStepsSubsection(ids)
 
 mixin onboardingStep(id, label, active)
   if state.isAvailable(id)
-    li.OnboardingStep( class=(active || state.get('scene') === id ? 'OnboardingStep--active' : '') )
-      = label
+    li.OnboardingStep(
+      class=(active || state.get('scene') === id ? 'OnboardingStep--active' : '')
+    )
+      a( href="/welcome/#{id}" )
+        = label
+
       if block
         block
 
