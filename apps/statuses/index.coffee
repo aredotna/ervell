@@ -9,9 +9,18 @@ statuses = [
 
 statuses.map ([code, status]) ->
   send = (_req, res) ->
+    response = switch code
+      when 400, 404, 500
+        code: code
+        message: status
+        description: "#{code}: #{status}"
+
+      else
+        status: status
+
     res
       .status code
-      .send status: status
+      .send response
 
   app
     .get "/statuses/#{code}", send
