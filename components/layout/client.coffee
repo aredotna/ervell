@@ -12,7 +12,7 @@ SearchBarView = require '../search_bar/client/view.coffee'
 initLoggedInNavigation = require '../logged_in_navigation/client/index.coffee'
 NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
-State = require "../../models/state.coffee"
+UIState = require "../../models/ui_state.coffee"
 Notifications = require "../../collections/notifications.coffee"
 RecentConnections = require '../../collections/recent_connections.coffee'
 CurrentUser = require '../../models/current_user.coffee'
@@ -50,7 +50,7 @@ setupPusherAndCurrentUser = ->
 
   user = new CurrentUser sd.CURRENT_USER
   mediator.shared.current_user = user
-  mediator.shared.state = new State()
+  mediator.shared.state = new UIState()
   mediator.shared.state.set view_mode: sd.VIEW_MODE
   mediator.shared.recent_connections = new RecentConnections
 
