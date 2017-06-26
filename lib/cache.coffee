@@ -4,7 +4,7 @@ redis = require 'redis'
 @client = null
 
 # Setup redis client
-@setup = (callback) ->
+@setup = (callback = ->) ->
   return callback() if NODE_ENV is "test" or not REDIS_URL
   red = require("url").parse(REDIS_URL)
   @client = redis.createClient(red.port, red.hostname)
@@ -28,7 +28,7 @@ redis = require 'redis'
 #
 # @param {String} key
 # @param {Function} callback
-@get = (key, callback) =>
+@get = (key, callback = ->) =>
   return callback() unless @client?
   @client.get key, callback
 
@@ -36,7 +36,7 @@ redis = require 'redis'
 #
 # @param {String} key
 # @param {Function} callback
-@del = (key, callback) =>
+@del = (key, callback = ->) =>
   return callback() unless @client?
   @client.del key, callback
 
@@ -68,7 +68,7 @@ redis = require 'redis'
 # @param {Object} hash key: Model/Collection pairs
 # @param {Function} callack Calls back with (err, deserializedHash)
 
-@getHash = (key, hash, callback) =>
+@getHash = (key, hash, callback = ->) =>
   return callback() unless @client?
   @client.get key, (err, json) ->
     return callback(err) if err
@@ -78,10 +78,10 @@ redis = require 'redis'
       for key, json of data
         klass = hash[key]
         deserialized[key] = if klass? then new klass(json) else json
-      callback null, deserialized
+      callback(null, deserialized) if callback
     else
-      callback()
+      callback() if callback
 
-@flushall = (callback) =>
+@flushall = (callback = ->) =>
   return callback() unless @client?
   @client.flushall callback
