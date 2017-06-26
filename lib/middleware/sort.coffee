@@ -2,7 +2,7 @@
 #
 module.exports = (req, res, next) ->
   # if the sort cookie is set, use that, otherwise default to updated_at
-  sort = if req.cookies['sort']? then req.cookies['sort'] else 'updated_at'
+  sort = req.cookies.sort or 'updated_at'
   
   # override the cookie if the request has a query param
   sort = req.query.sort if req.query.sort
