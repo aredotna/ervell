@@ -2,7 +2,7 @@ Backbone = require 'backbone'
 cookies = require 'cookies-js'
 { keys, each } = require 'underscore'
 
-module.exports = class State extends Backbone.Model
+module.exports = class UIState extends Backbone.Model
   defaults:
     view_mode: 'grid'
     lightbox: false
