@@ -7,6 +7,7 @@ module.exports = class UIState extends Backbone.Model
     view_mode: 'grid'
     lightbox: false
     sort: 'updated_at'
+    filter: 'all'
 
   initialize: ->
     # set values from cookies
@@ -15,6 +16,7 @@ module.exports = class UIState extends Backbone.Model
 
     @on 'change:view_mode', @setCookie
     @on 'change:sort', @setCookie
+    @on 'change:filter', @setCookie
 
   setCookie: (model, value)->
     cookies.set keys(model.changed)[0], value

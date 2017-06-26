@@ -11,6 +11,7 @@ app = module.exports = express()
 app.set "views", __dirname + "/templates"
 app.set "view engine", "jade"
 
+# API for user channels view
 app.get "/api/:username/channels", routes.fetchAuthor, routes.channelsAPI
 
 # All routes below need an author to render
@@ -37,5 +38,18 @@ app.get "/:username/block/:block_id", routes.user
 app.get "/:username/show/:block_id", routes.catchChannel
 app.get "/users/:username", routes.redirectUser
 
+# Middleware to determine what type of profile to show when the mode isn't specified
+filterMiddleware = (req, res, next) ->
+  filter = req.cookies.filter or "all"
+  switch filter
+    when "all"
+      return next()
+    when "channels"
+      return res.redirect 302, "/#{req.params.username}/channels"
+    when "index"
+      return res.redirect 302, "/#{req.params.username}/index"
+    when "blocks"
+      return res.redirect 302, "/#{req.params.username}/blocks"
+
 # Default profile view
-app.get "/:username", routes.fetchAuthor, sortMiddleware, routes.user, routes.catchChannel
+app.get "/:username", filterMiddleware, routes.fetchAuthor, sortMiddleware, routes.user, routes.catchChannel
