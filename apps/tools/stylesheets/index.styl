@@ -124,33 +124,6 @@
 .is-successful
   color success
 
-#send-invitation__button
-  line-height 45px
-
-  &[data-state=loading]:before, &[data-state=success]:before
-    background white
-    position absolute
-    left 0
-    height 100%
-    width 100%
-    line-height 45px
-
-  &[data-state=loading]:before
-    content "Sending invitation..."
-
-  &[data-state=success]:before
-    content "Invitation sent."
-    color public
-
-.invitation-errors
-  font-size s_caption
-  text-align center
-  font-weight bold
-  color alert
-
-  &.is-active
-    margin 20px 0 10px 0
-
 @media (max-width: 800px)
   .tools__frame
     width 100%
