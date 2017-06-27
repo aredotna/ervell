@@ -61,6 +61,26 @@ block content
             input.input--wide.is-block(
               name='password_confirmation' type='password' placeholder='Repeat password'
             )
+          hr
+          .form-card__field
+            label
+              | Default landing page
+            .bordered-select
+              select(name='home_path')
+                option(
+                  value='/'
+                  selected= user.get('home_path') == '/'
+                ) Feed
+
+                option(
+                  value='/explore'
+                  selected= user.get('home_path') == '/explore'
+                ) Explore
+
+                option(
+                  value="/#{user.get('slug')}"
+                  selected= user.get('home_path') == "/#{user.get('slug')}"
+                ) Profile
 
           if user.isPremium()
             hr
