@@ -49,7 +49,7 @@ form
 
     else if customer.requiresPayment() && customer.requiresPaymentMethod() && customer.get('is_canceled')
       button.button--wide.button--border.js-submit.js-reenable
-        | Continue my premium membership ($) on
+        | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
         | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
     else
