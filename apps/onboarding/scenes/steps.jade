@@ -19,14 +19,37 @@ ol.OnboardingSteps
   +onboardingStep('channels', 'Channels', state.isActive(['channels', 'searching']))
     +onboardingStepsSubsection(['channels', 'searching'])
       +onboardingStep('channels', 'Creating New Channels')
+        .OnboardingStep__caption
+          | Channels are the collections of content that make up Are.na
+
       +onboardingStep('searching', 'Finding Existing Channels')
+        .OnboardingStep__caption
+          | You can create your own channels and/or add to channels started by other people.
 
   +onboardingStep('connecting', 'Connecting')
+    .OnboardingStep__caption
+      | You can connect any kind of content to a channel by dragging files,
+      | pasting a link, or using the Are.na bookmarklet.
+      | Blocks of content can be connected to many different channels at once,
+      | expanding their context across Are.na.
+
   +onboardingStep('profile-and-feed', 'Profile and Feed', state.isActive(['profile-and-feed', 'feed', 'explore']))
     +onboardingStepsSubsection(['profile-and-feed', 'feed', 'explore'])
       +onboardingStep('profile-and-feed', 'Profile')
+        .OnboardingStep__caption
+          | Your profile shows all of your channels and everything you&rsquo;ve connected in one place.
+
       +onboardingStep('feed', 'Feed')
+        .OnboardingStep__caption
+          | Your feed shows new connections by everyone you follow on Are.na.
+
       +onboardingStep('explore', 'Explore')
+        .OnboardingStep__caption
+          | Explore shows connections and channels made by everyone.
 
   +onboardingStep('save-to-arena', 'Save to Are.na')
+    .OnboardingStep__caption
+      | The Are.na bookmarklet lets you save content from any
+      | web page to your channels in a few clicks.
+
   +onboardingStep('find-friends', 'Find Friends')
