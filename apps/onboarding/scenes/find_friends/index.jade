@@ -4,13 +4,15 @@
 
     .OnboardingGuide__actions
       if authentication && authentication.id
-        button.Button.Button--size-lg( disabled )
+        button.Button( disabled )
           | Connected to Twitter
       else
-        button.Button.Button--size-lg.js-connect-twitter
+        button.Button.js-connect-twitter
           | Find Twitter friends
 
-      button.Button.Button--secondary.js-next
+      button.Button.js-next(
+        class=(authentication && authentication.id ? '' : 'Button--secondary')
+      )
         | Start using Are.na
 
   .OnboardingGuide__pane

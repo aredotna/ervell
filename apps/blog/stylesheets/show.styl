@@ -42,6 +42,25 @@
       iframe
         display block
         max-width 100%
-        margin 4em auto
         vertical-align bottom
         border 1px solid colors-gray-border
+        margin 2em auto
+
+      iframe
+        box-shadow 4px 4px 4px colors-gray-background
+        height 2150px !important
+        padding 1px
+        +below(400px)
+          height 2000px !important
+        +below(380px)
+          height 1950px !important
+        +below(340px)
+          height 1700px !important
+
+      h2 
+        collapsed-margins(4em)
+
+      hr
+        height 2px
+        background-color colors-gray-border
+        border none

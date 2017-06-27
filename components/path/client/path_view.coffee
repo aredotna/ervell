@@ -8,6 +8,8 @@ User = require '../../../models/user.coffee'
 FollowButtonView = require '../../follow_button/client/follow_button_view.coffee'
 PrivateChannelView = require '../../private_channel/client/private_channel_view.coffee'
 
+SortView = require '../components/sort/view.coffee'
+
 module.exports = class PathView extends Backbone.View
 
   initialize: (options) ->
@@ -21,6 +23,10 @@ module.exports = class PathView extends Backbone.View
         showTitle: no
 
       unless sd.CHANNEL
+        new SortView
+          el: @$('.js-profile-sort')
+          model: mediator.shared.state
+          
         new PrivateChannelView
           el: @$('.message_button')
           model: new User sd.USER

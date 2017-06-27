@@ -15,15 +15,33 @@
 
   .OnboardingSteps
     margin 0 1em
+    border-bottom 1px solid colors-gray-border
+
+  .OnboardingStep
+    display none
+    margin-top 0 !important
+    border-top none !important
+    border-bottom none !important
+
+    // Disables numbering/lettering
+    &:before
+    > ol > li:before
+      content ''
+
+    > ol > li
+      padding-left 0
+
+    &--active
+      display block
 
   .OnboardingGuide
     position relative
-    flex-direction column
+    display block
     padding-bottom 10em // Space for `__actions`
 
     &__pane
+      display block
       height auto
-      flex-basis 100%
       border none
       padding 0
       font-size font-size-base

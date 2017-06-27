@@ -6,16 +6,20 @@ mixin onboardingStepsSubsection(ids)
 
 mixin onboardingStep(id, label, active)
   if state.isAvailable(id)
-    li.OnboardingStep( class=(active || state.get('scene') === id ? 'OnboardingStep--active' : '') )
-      = label
+    li.OnboardingStep(
+      class=(active || state.get('scene') === id ? 'OnboardingStep--active' : '')
+    )
+      a( href="/welcome/#{id}" )
+        = label
+
       if block
         block
 
 ol.OnboardingSteps
   +onboardingStep('channels', 'Channels', state.isActive(['channels', 'searching']))
     +onboardingStepsSubsection(['channels', 'searching'])
-      +onboardingStep('channels', 'Creating a New Channel')
-      +onboardingStep('searching', 'Searching for Existing Channels')
+      +onboardingStep('channels', 'Creating New Channels')
+      +onboardingStep('searching', 'Finding Existing Channels')
 
   +onboardingStep('connecting', 'Connecting')
   +onboardingStep('profile-and-feed', 'Profile and Feed', state.isActive(['profile-and-feed', 'feed', 'explore']))
