@@ -4,10 +4,12 @@ block vars
   - slug = "send-invitation"
 
 block content
-  .tools__mobile-title Invite a collaborator
-  .tools__frame
+  .tools__mobile-title
+    | Invite a collaborator
+
+  .Section.Section--narrow.Section--bordered
     p.Type
       | Invite as many friends and collaborators to Are.na as you'd like. Once the person you invited creates an account, you will automatically be following one another.
 
-    .SendInvitation.js-send-invitation
+    p.SendInvitation.js-send-invitation
       include ../../components/send_invitation/index

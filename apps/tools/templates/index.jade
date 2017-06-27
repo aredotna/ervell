@@ -4,12 +4,14 @@ block body
   .tools
     .tools--path
       include ./path
+
     .tools--content.tabs__content
       include ./tabs/bookmarklet
+
       if user
         include ./tabs/add_via_email
         include ./tabs/find_friends
         include ./tabs/invite
 
 block scripts
-  script( src=asset('/assets/tools.js') )
+  script( src= asset('/assets/tools.js') )
