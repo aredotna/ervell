@@ -22,6 +22,9 @@ module.exports = class User extends Model
   isPremium: ->
     @get('is_premium')
 
+  homePath: ->
+    if parseInt(@get('following_count')) <= 1 then '/explore' else (@get('home_path') or '/')
+
   startPrivateChannel: ->
     $.ajax
       type: 'POST'
