@@ -2,15 +2,35 @@ extends ../../../../components/meta_pocket/templates/meta_pocket
 
 block vars
   - title = "View"
-  - extraClasses = ''
+  - extraClasses = 'js-profile-filter'
   - id = "metadata--view"
 
 block content
   ul.breadcrumb
     - var sort = sd.SORT ? "?sort=" + sd.SORT : ""
 
-    li: a(href="/#{author.get('slug')}#{sort}" class=sd.SUBJECT ? "" : "is-active" ).metadata--selector__option All
-    li: a(href="/#{author.get('slug')}/channels#{sort}" class=sd.SUBJECT == 'channel' ? "is-active" : "").metadata--selector__option Channels
-    li: a(href="/#{author.get('slug')}/blocks#{sort}" class=sd.SUBJECT == 'block' ? "is-active" : "").metadata--selector__option Blocks
-    li: a(href="/#{author.get('slug')}/index" class=sd.SUBJECT == 'index' ? "is-active" : "").metadata--selector__option Index
+    li
+      a(
+        href="/#{author.get('slug')}#{sort}"
+        class=sd.SUBJECT ? "" : "is-active" 
+        data-filter="all"
+      ).js-filter-option.metadata--selector__option All
+    li
+      a(
+        href="/#{author.get('slug')}/channels#{sort}"
+        class=sd.SUBJECT == 'channel' ? "is-active" : ""
+        data-filter="channels"
+      ).js-filter-option.metadata--selector__option Channels
+    li
+      a(
+        href="/#{author.get('slug')}/blocks#{sort}"
+        class=sd.SUBJECT == 'block' ? "is-active" : ""
+        data-filter="blocks"
+      ).js-filter-option.metadata--selector__option Blocks
+    li
+      a(
+        href="/#{author.get('slug')}/index"
+        class=sd.SUBJECT == 'index' ? "is-active" : ""
+        data-filter="index"
+      ).js-filter-option.metadata--selector__option Index
 
