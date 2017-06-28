@@ -25,6 +25,11 @@ module.exports = class User extends Model
   homePath: ->
     if parseInt(@get('following_count')) <= 1 then '/explore' else (@get('home_path') or '/')
 
+  hasCustomHomePath: ->
+    @get('home_path') != '/explore' and
+    @get('home_path') != '/' and
+    @get('home_path') != "/#{@get('slug')}"
+
   startPrivateChannel: ->
     $.ajax
       type: 'POST'
