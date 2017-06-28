@@ -10,6 +10,6 @@ _ = require 'underscore'
 module.exports = (req, res, next) ->
   res.locals.sd.CURRENT_PATH = parse(req.url).pathname
   res.locals._ = _
-  res.locals.homeHref = if parseInt(req.user?.get('following_count')) <= 1 then '/explore' else '/'
+  res.locals.homeHref = req.user?.homePath() or '/'
 
   next()

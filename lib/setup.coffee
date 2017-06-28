@@ -132,7 +132,8 @@ module.exports = (app) ->
       'is_premium',
       'channel_count',
       'exclude_from_indexes',
-      'following_count'
+      'following_count',
+      'home_path'
     ]
 
   app.use artsyError.helpers
