@@ -10,7 +10,6 @@ _ = require 'underscore'
 module.exports = (req, res, next) ->
   res.locals.sd.CURRENT_PATH = parse(req.url).pathname
   res.locals._ = _
-  console.log('req.user?.homePath()', req.user?.homePath())
   res.locals.homeHref = req.user?.homePath() or '/'
 
   next()
