@@ -23,35 +23,33 @@ form
               | Remove
 
   //- Has card on file aready
-  .form-card__submit
-    if customer.requiresPayment() && !customer.requiresPaymentMethod() && !customer.get('is_canceled')
-      button.button--wide.button--border.js-submit.js-charge
-        | Pay
+  if customer.requiresPayment() && !customer.requiresPaymentMethod() && !customer.get('is_canceled')
+    button.Button.Button--divider.js-submit.js-charge
+      | Pay
 
-    else if customer.requiresPayment() && !customer.requiresPaymentMethod() && customer.get('is_canceled')
-      button.button--wide.button--border.js-submit.js-reenable
-        | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
-        | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
+  else if customer.requiresPayment() && !customer.requiresPaymentMethod() && customer.get('is_canceled')
+    button.Button.Button--divider.js-submit.js-reenable
+      | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
+      | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
   h3 Card Info
 
   .form-card__errors.js-form-errors
     //- Rendered client-side
 
-  .form-card__fields
-    .form-card__field.form-card__field--stripe.js-card-element
-      input.input--wide.is-block( style='display: none' )
+  .Fieldset
+    .Input.js-card-element
+      input.Input.Input--fill( style='display: none' )
 
-  .form-card__submit
-    if customer.requiresPayment() && customer.requiresPaymentMethod() && !customer.get('is_canceled')
-      button.button--wide.button--border.js-submit.js-charge
-        | Pay
+  if customer.requiresPayment() && customer.requiresPaymentMethod() && !customer.get('is_canceled')
+    button.Button.Button--divider.js-submit.js-charge
+      | Pay
 
-    else if customer.requiresPayment() && customer.requiresPaymentMethod() && customer.get('is_canceled')
-      button.button--wide.button--border.js-submit.js-reenable
-        | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
-        | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
+  else if customer.requiresPayment() && customer.requiresPaymentMethod() && customer.get('is_canceled')
+    button.Button.Button--divider.js-submit.js-reenable
+      | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
+      | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
-    else
-      button.button--wide.button--border.js-submit.js-add
-        | Add New Card
+  else
+    button.Button.Button--divider.js-submit.js-add
+      | Add New Card

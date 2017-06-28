@@ -3,47 +3,50 @@
     //- Rendered client-side
 
   .form-card__fields
-    .form-card__field
-      label Current Plan
-      .bordered-select
-          select( name='plan', disabled=(customer.get('is_premium') ? 'disabled' : null) )
-            if customer.get('is_lifetime')
-                option(
-                  value='lifetime_premium'
-                  selected
-                ) Lifetime Premium
-
-            else
-              option(
-                value='free'
-                selected= (!customer.get('plan_id')) ? 'selected' : null
-              ) Free version
-
-              option(
-                value='monthly_premium'
-                selected= (customer.get('plan_id') === 'monthly_premium') ? 'selected' : null
-              ) Premium $5 / month
-
-              option(
-                value='premium_1'
-                selected= (customer.get('plan_id') === 'premium_1') ? 'selected' : null
-              ) Premium $45 / year
-
-    if customer.has('plan_id')
-      .form-card__field
-        label
+    .Fieldset
+      h3
+        | Current Plan
+        if customer.has('plan_id')
+          |  (
           if customer.get('is_canceled')
             | Premium ends on
           else
-            | Next billing date
-        label
+            | Next billing date is on
+
+          = ' '
+
           if customer.get('is_lifetime')
             | Never
           else
             = customer.formatDate('current_period_end_at', 'D MMMM, YYYY')
+          | )
 
-      unless customer.get('is_lifetime')
-        hr
+      .Select.Select--fill( disabled=(customer.get('is_premium') ? 'disabled' : null) )
+        select( name='plan', disabled=(customer.get('is_premium') ? 'disabled' : null) )
+          if customer.get('is_lifetime')
+              option(
+                value='lifetime_premium'
+                selected
+              ) Lifetime Premium
 
-        .payment-methods.js-payment-methods
-          include ../payment_methods/index
+          else
+            option(
+              value='free'
+              selected= (!customer.get('plan_id')) ? 'selected' : null
+            ) Free version
+
+            option(
+              value='monthly_premium'
+              selected= (customer.get('plan_id') === 'monthly_premium') ? 'selected' : null
+            ) Premium $5 / month
+
+            option(
+              value='premium_1'
+              selected= (customer.get('plan_id') === 'premium_1') ? 'selected' : null
+            ) Premium $45 / year
+
+    if customer.has('plan_id') && !customer.get('is_lifetime')
+      //- hr.Base
+
+      .payment-methods.js-payment-methods
+        include ../payment_methods/index
