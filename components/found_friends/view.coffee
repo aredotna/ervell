@@ -12,7 +12,6 @@ module.exports = class FindFriendsView extends Backbone.View
 
   initialize: ->
     @listenTo @model, 'sync', @render
-    @listenTo @model, 'error', @error
 
   postRender: ->
     invoke @subViews, 'remove'
@@ -22,11 +21,6 @@ module.exports = class FindFriendsView extends Backbone.View
         followButtonView = new FollowButtonView model: user, showTitle: false
         @$(".js-follow[data-id=#{user.id}]").html followButtonView.render().$el
         followButtonView
-
-  error: (_authentication, { responseJSON: { description } }) ->
-    @$el.html """
-      Try again later: #{description}
-    """
 
   render: ->
     @$el.html template
