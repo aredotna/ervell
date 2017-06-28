@@ -9,10 +9,13 @@ app.set "view engine", "jade"
 homePathMiddleware = (req, res, next) -> 
   return next() unless req.user
   
-  path = req.user.get('home_path') 
-  return res.redirect 302, path unless path is "/" or !path
+  path = req.user.get('home_path')
   
-  next()
+  # keep going in the middleware unless the path is "/" or the path is not present
+  return next() unless path or path is "/"
+
+  # otherwise redirect to the homepath
+  res.redirect 302, path
 
 app.get "/", homePathMiddleware, routes.index
 
