@@ -13,8 +13,8 @@ module.exports = class ProfileView extends Backbone.View
   threshold: -500
   interval: 150
 
-  events: 
-    'keyup .js-channel-filter' : 'searchChannels'
+  events:
+    'keyup .js-channel-filter-input' : 'searchChannels'
 
   initialize: ({ @collection, @params }) ->
     @timer = setInterval @maybeLoad, @interval
@@ -33,8 +33,8 @@ module.exports = class ProfileView extends Backbone.View
     @listenTo @state, 'change', @setLoading
 
   loadingOrExpired: ->
-    @state.get('loading') or 
-    @state.get('disabled') or 
+    @state.get('loading') or
+    @state.get('disabled') or
     mediator.shared.state.get('lightbox')
 
   setLoading: ->
@@ -53,8 +53,8 @@ module.exports = class ProfileView extends Backbone.View
     @loadNextPage()  if total - progress < @threshold
 
   query: ->
-    val = @$('.js-channel-filter').val()
-    if val is '' then null else val 
+    val = @$('.js-channel-filter-input').val()
+    if val is '' then null else val
 
   searchChannels: =>
     @state.set loading: true, disabled: false
@@ -63,10 +63,10 @@ module.exports = class ProfileView extends Backbone.View
       q: @query()
       page: 1
 
-  loadNextPage: -> 
+  loadNextPage: ->
     @state.set 'loading', true
     @params.set page: @params.get('page') + 1
-  
+
   unsetLoading: (collection, response) ->
     @state.set 'loading', false
     @state.set('disabled', true) unless response.channels.length
@@ -75,31 +75,31 @@ module.exports = class ProfileView extends Backbone.View
     @$('.js-user-channels-contents').append channelGroupTemplate
       channel: model.toJSON()
       user: @user
-    
+
     view = new ChannelGroupView
       channel: model.toJSON()
       el: @$(".js-channel-group[data-id=#{model.id}]")
-    
-    view.initBlockViews()  
+
+    view.initBlockViews()
 
   render: ->
     channels = @collection.toJSON()
 
-    @$('.js-user-channels-contents').html template 
+    @$('.js-user-channels-contents').html template
       channels: channels
       user: @user
-    
+
     @setUpChannelGroupViews()
 
   setUpChannelGroupViews: ->
     channels = @collection.toJSON()
-    
+
     for channel in channels
       view = new ChannelGroupView
         channel: channel
         el: @$(".js-channel-group[data-id=#{channel.id}]")
-      
-      view.initBlockViews()   
+
+      view.initBlockViews()
 
       @subviews.push view
 
