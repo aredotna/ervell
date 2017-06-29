@@ -10,7 +10,6 @@ MessageView = require '../message/client/message_view.coffee'
 HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 initLoggedInNavigation = require '../logged_in_navigation/client/index.coffee'
-NewUserMessagesView = require '../new_user_messages/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 UIState = require "../../models/ui_state.coffee"
 Notifications = require "../../collections/notifications.coffee"
