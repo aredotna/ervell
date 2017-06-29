@@ -18,10 +18,17 @@
   text-align left
   cursor default
 
+  &__caption
+    display none
+    font-weight normal
+    padding-left 1.5em
+
   > a
     color inherit
 
   &:before
+    display inline-block
+    width 1.5em
     counter-increment section
     content counters(section, '') '. '
 
@@ -41,7 +48,12 @@
 
       &:before
         counter-increment subsection
-        content counter(subsection, lower-latin) '. '
+        content ''
 
   &--active
     color colors-gray-hover
+
+    > .OnboardingStep
+      &__caption
+        display block
+        color colors-gray-text

@@ -19,68 +19,62 @@ block content
         .form-card__errors.js-form-errors
           //- Rendered client-side
 
-        .form-card__fields
-          .form-card__field
-            input.input--wide.is-block(
-              name='first_name'
-              type='text'
-              value="#{user.get('first_name')}"
-              placeholder='First name'
-              autofocus= autofocus
-              required
-            )
+        .Fieldset
+          input.Input(
+            name='first_name'
+            type='text'
+            value="#{user.get('first_name')}"
+            placeholder='First name'
+            autofocus= autofocus
+            required
+          )
 
-          .form-card__field
-            input.input--wide.is-block(
-              name='last_name'
-              type='text'
-              value="#{user.get('last_name')}"
-              placeholder='Last name'
-              autofocus= autofocus
-              required
-            )
+          input.Input(
+            name='last_name'
+            type='text'
+            value="#{user.get('last_name')}"
+            placeholder='Last name'
+            autofocus= autofocus
+            required
+          )
 
-          .form-card__field
-            input.input--wide.is-block(
-              name='email'
-              type='email'
-              value="#{user.get('email')}"
-              placeholder='Email'
-              autofocus= autofocus
-              required
-            )
+          input.Input(
+            name='email'
+            type='email'
+            value="#{user.get('email')}"
+            placeholder='Email'
+            autofocus= autofocus
+            required
+          )
 
-          hr
+        .Fieldset
+          input.Input(
+            name='password' type='password' placeholder='Password'
+          )
 
-          .form-card__field
-            input.input--wide.is-block(
-              name='password' type='password' placeholder='Password'
-            )
+          input.Input(
+            name='password_confirmation' type='password' placeholder='Repeat password'
+          )
 
-          .form-card__field
-            input.input--wide.is-block(
-              name='password_confirmation' type='password' placeholder='Repeat password'
-            )
+        .Fieldset.js-home-path-field
+          include ../../components/home_path_field/index
 
-          if user.isPremium()
-            hr
+        if user.isPremium()
+          .Fieldset
+            label.Label
+              | Exclude my content from search engines?
 
-            .form-card__field
-              label
-                | Exclude my content from search engines?
-              .bordered-select
-                select(name='exclude_from_indexes')
-                  option(
-                    value='true'
-                    selected= user.get('exclude_from_indexes') ? 'selected' : null
-                  ) Yes
+            .Select.Select--fill
+              select(name='exclude_from_indexes')
+                option(
+                  value='true'
+                  selected= user.get('exclude_from_indexes') ? 'selected' : null
+                ) Yes
 
-                  option(
-                    value='false'
-                    selected= !user.get('exclude_from_indexes') ? 'selected' : null
-                  ) No
+                option(
+                  value='false'
+                  selected= !user.get('exclude_from_indexes') ? 'selected' : null
+                ) No
 
-
-        .form-card__submit
-          button.button--wide.button--border
-            | Save
+        button.Button.Button--divider
+          | Save
