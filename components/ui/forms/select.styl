@@ -46,7 +46,15 @@
     &:hover
       background-color colors-gray-secondary
 
-  &--block
+    &:disabled
+      &:hover
+        background-color colors-gray-background
+
+  &[disabled]
+    &:after
+      display none
+
+  &--fill
     display block
 
     > select

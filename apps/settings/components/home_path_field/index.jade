@@ -1,0 +1,35 @@
+- var defaultLandingPageOptions = ['/', '/explore', '/' + user.get('slug')]
+- var isCustom = defaultLandingPageOptions.indexOf(user.get('home_path')) === -1
+
+label.Label
+  | Default landing page
+
+.Select.Select--fill
+  select( name= (isCustom ? null : 'home_path') )
+    option(
+      value='/'
+      selected= (user.get('home_path') === '/')
+    ) Feed
+
+    option(
+      value='/explore'
+      selected= (user.get('home_path') === '/explore')
+    ) Explore
+
+    option(
+      value="/#{user.get('slug')}"
+      selected= (user.get('home_path') === "/#{user.get('slug')}")
+    ) Profile
+
+    option(
+      value=''
+      selected= isCustom
+    ) Custom
+
+if isCustom
+  input.Input.js-custom-home-path(
+    name='home_path'
+    value= user.get('home_path')
+    autofocus
+    required
+  )

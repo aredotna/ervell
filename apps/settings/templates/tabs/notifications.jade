@@ -15,37 +15,39 @@ block content
       .form-card__errors.js-form-errors
         //- Rendered client-side
 
-      .form-card__fields
-        .form-card__field
-          label Email notification type
-          .bordered-select
-            select(name='receive_email')
-              option(
-                value='none'
-                selected= (user.get('receive_email') === 'none') ? 'selected' : null
-              ) None
-              option(
-                value='digest'
-                selected= (user.get('receive_email') === 'digest') ? 'selected' : null
-              ) Periodic digest email
-              option(
-                value='notifications'
-                selected= (user.get('receive_email') === 'notifications') ? 'selected' : null
-              ) One email per notification
+      .Fieldset
+        label.Label
+          | Email notification type
 
-        .form-card__field
-          label Subscribe to newsletter?
-          .bordered-select
-            select(name='receive_newsletter')
-              option(
-                value='true'
-                selected= user.get('receive_newsletter') ? 'selected' : null
-              ) Yes
-              option(
-                value='false'
-                selected= !user.get('receive_newsletter') ? 'selected' : null
-              ) No
+        .Select.Select--fill
+          select(name='receive_email')
+            option(
+              value='none'
+              selected= (user.get('receive_email') === 'none') ? 'selected' : null
+            ) None
+            option(
+              value='digest'
+              selected= (user.get('receive_email') === 'digest') ? 'selected' : null
+            ) Periodic digest email
+            option(
+              value='notifications'
+              selected= (user.get('receive_email') === 'notifications') ? 'selected' : null
+            ) One email per notification
 
-      .form-card__submit
-        button.button--wide.button--border
-          | Save
+      .Fieldset
+        label.Label
+          | Subscribe to newsletter?
+
+        .Select.Select--fill
+          select(name='receive_newsletter')
+            option(
+              value='true'
+              selected= user.get('receive_newsletter') ? 'selected' : null
+            ) Yes
+            option(
+              value='false'
+              selected= !user.get('receive_newsletter') ? 'selected' : null
+            ) No
+
+      button.Button.Button--divider
+        | Save
