@@ -8,14 +8,16 @@ module.exports = class OnboardingWelcomeSceneView extends Backbone.View
   events:
     'click .js-next': 'next'
 
-  initialize: ({ @state }) -> #
+  initialize: ({ @state, @user }) -> #
 
   next: (e) ->
     e.preventDefault()
+
     @state.next()
 
   render: ->
-    @$el.html template()
+    @$el.html template
+      user: @user.toJSON()
 
     defer => @$el.addClass "#{@className}--active"
 
