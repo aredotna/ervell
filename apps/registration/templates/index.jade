@@ -1,35 +1,62 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/layouts/blank
 
-block vars
-  - extraClasses = 'no-header no-messages'
-
-block body
-  #registration-page.valign-outer
-    .valign-inner
-      section#auth-body
-        .auth-logo
-          include ../../../public/images/arena-mark.svg
-
-        form.auth-login-email.auth-form
-          input.input--wide.input--relative.is-block(
-            name='email' type='email' placeholder='Email' required disabled value="#{invitee.get('email')}"
-          )
-          input.input--wide.input--relative.is-block(
-            id="first_name" name="first_name" required placeholder="First name" type="text"
-          )
-          input.input--wide.input--relative.is-block(
-            id="last_name" name="last_name" required placeholder="Last name" type="text"
-          )
-          input.input--wide.input--relative.is-block(
-            id="password" name="password" required placeholder="Password (at least 6 characters)" type="password" pattern=".{6,}"
-          )
-          input.input--wide.input--relative.is-block(
-            id="password_confirmation" required name="password_confirmation" placeholder="Confirm password (at least 6 characters)" type="password" pattern=".{6,}"
-          )
-
-          .auth-errors &nbsp;
-
-          button#auth-register.auth-submit.button--wide.button--border.button--relative Register
+block title
+  |  / Register
 
 block scripts
-  script( src=asset('/assets/registration.js') )
+  script( src= asset('/assets/registration.js') )
+
+block container
+  .Registration.js-registration
+    .Registration__logo
+      span
+        include ../../../public/images/arena-mark.svg
+
+    form.Registration__form.js-form
+      .Fieldset
+        input.Input(
+          name='email'
+          type='email'
+          placeholder='Email'
+          value= invitee.get('email')
+          required
+          readonly
+        )
+
+        input.Input(
+          id='first_name'
+          name='first_name'
+          placeholder='First name'
+          type='text'
+          required
+        )
+
+        input.Input(
+          id='last_name'
+          name='last_name'
+          placeholder='Last name'
+          type='text'
+          required
+        )
+        input.Input(
+          id='password'
+          name='password'
+          placeholder='Password (at least 6 characters)'
+          type='password'
+          pattern='.{6,}'
+          required
+        )
+        input.Input(
+          id='password_confirmation'
+          name='password_confirmation'
+          placeholder='Confirm password (at least 6 characters)'
+          type='password'
+          pattern='.{6,}'
+          required
+        )
+
+      .Errors.js-errors
+        //-
+
+      button.Button.Button--divider.js-submit
+        | Register

@@ -1,3 +1,1 @@
-
-$ ->
-  require("../apps/registration/client.coffee").init()
+$ require('../apps/registration/client/index.coffee')
