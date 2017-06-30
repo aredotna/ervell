@@ -127,7 +127,8 @@ module.exports = class PaymentMethodsView extends Backbone.View
         subscription.save()
 
         analytics.track.submit 'User paid for pro account', 
-          plan_id: @model.get('plan_id')
+          label: 'Plan type'
+          value: @model.get('plan_id')
 
       .then =>
         Promise($.get('/me/refresh'))
