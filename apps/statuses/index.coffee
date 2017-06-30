@@ -25,3 +25,5 @@ statuses.map ([code, status]) ->
   app
     .get "/statuses/#{code}", send
     .post "/statuses/#{code}", send
+    .put "/statuses/#{code}", send
+    .delete "/statuses/#{code}", send
