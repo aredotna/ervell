@@ -1,7 +1,5 @@
 { defer } = require 'underscore'
-{ CURRENT_USER } = require('sharify').data
 Backbone = require 'backbone'
-CurrentUser = require '../../../../models/current_user.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class OnboardingWelcomeSceneView extends Backbone.View
@@ -10,8 +8,7 @@ module.exports = class OnboardingWelcomeSceneView extends Backbone.View
   events:
     'click .js-next': 'next'
 
-  initialize: ({ @state }) ->
-    @user = new CurrentUser CURRENT_USER
+  initialize: ({ @state, @user }) -> #
 
   next: (e) ->
     e.preventDefault()
