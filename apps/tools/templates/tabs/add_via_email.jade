@@ -4,9 +4,21 @@ block vars
   - slug = "add-via-email"
 
 block content
-  .tools__mobile-title Add via Email
-  .tools__frame
-   strong= user.get('post_address')
-   p Sending an e-mail to this address will post the contents (including attachments) to an automatically generated private channel called “Add via Email.”
-   p You can send emails to specific channels by writing a channel title in the subject line.
-   p #[strong.privacy--private Note] anyone possessing your personal "Add via E-mail" address can post to your account.
+  .tools__mobile-title
+    | Add via Email
+
+  .Section.Section--narrow.Section--bordered
+    input.Input(
+      value= user.get('post_address')
+      type='email'
+      readonly
+    )
+
+    p.Type
+      | Sending an e-mail to this address will post the contents (including attachments) to an automatically generated private channel called “Add via Email.”
+
+    p.Type
+      | You can send emails to specific channels by writing a channel title in the subject line.
+
+    p.Type
+      | Your emails must be sent from the address <strong>#{user.get('email')}</strong>.

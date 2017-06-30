@@ -34,6 +34,14 @@ constrain()
     max-width (block_width_mar * 2)
     padding 1em
 
+  &--bordered
+    padding 1em
+    border 2px solid colors-gray-border
+
+.Section
+  @extend .Page
+  collapsed-margins(1em)
+
 .Container
   width 100%
   display flex

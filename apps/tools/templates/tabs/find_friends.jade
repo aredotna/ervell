@@ -4,11 +4,14 @@ block vars
   - slug = "find-friends"
 
 block content
-  .tools__mobile-title Find friends
-  .tools__frame
-    p Connect your Twitter account to find friends who are already on Are.na.
-     
-    if users && users.length 
+  .tools__mobile-title
+    | Find friends
+
+  .Section.Section--narrow.Section--bordered
+    p.Type
+      | Connect your Twitter account to find friends who are already on Are.na.
+
+    if users && users.length
       .friends
         for user in users
           .friend
@@ -19,11 +22,11 @@ block content
             span.friend__follow.js-follow(data-id=user.id)
               a(data-type="User", data-id="#{user.id}")
 
-    .button.Button.Button--divider.js-toggle-auth
+    button.Button.Button--divider.js-toggle-auth
       span(
-        class="iconic" 
-        data-glyph="social-twitter"
-        title="social twitter" 
-        aria-hidden="true"
+        class='iconic'
+        data-glyph='social-twitter'
+        title='social twitter'
+        aria-hidden='true'
       )
-        | &nbsp;#{auth.actionReadable()} Twitter
+      | &nbsp;#{auth.actionReadable()} Twitter
