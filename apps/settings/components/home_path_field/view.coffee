@@ -1,4 +1,5 @@
 Backbone = require 'backbone'
+analytics = require '../../../../lib/analytics.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class HomePathFieldView extends Backbone.View
@@ -13,6 +14,10 @@ module.exports = class HomePathFieldView extends Backbone.View
   select: (e) ->
     $target = $(e.currentTarget)
     @model.set 'home_path', $target.val()
+
+    analytics.track.submit 'User switched home path', 
+      label: 'Home path'
+      value: $target.text()
 
   render: ->
     @$el.html template
