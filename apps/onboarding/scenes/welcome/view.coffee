@@ -1,6 +1,5 @@
 { defer } = require 'underscore'
 { CURRENT_USER } = require('sharify').data
-Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 CurrentUser = require '../../../../models/current_user.coffee'
 template = -> require('./index.jade') arguments...
@@ -10,7 +9,6 @@ module.exports = class OnboardingWelcomeSceneView extends Backbone.View
 
   events:
     'click .js-next': 'next'
-    'click .js-skip': 'skip'
 
   initialize: ({ @state }) ->
     @user = new CurrentUser CURRENT_USER
@@ -20,16 +18,9 @@ module.exports = class OnboardingWelcomeSceneView extends Backbone.View
 
     @state.next()
 
-  skip: (e) ->
-    e.preventDefault()
-    e.stopPropagation()
-
-    Promise @user.save(show_tour: false)
-      .finally ->
-        window.location = '/'
-
   render: ->
-    @$el.html template()
+    @$el.html template
+      user: @user.toJSON()
 
     defer => @$el.addClass "#{@className}--active"
 
