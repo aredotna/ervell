@@ -44,12 +44,12 @@ module.exports = class ChannelView extends Backbone.View
     if collaborator or mediator.shared.current_user.canAddToChannel(@channel) and not (FOLLOWERS? or FOLLOWING?)
       @setupFileDropView()
 
-      @$('.block-collection').addClass 'is-addable'
+      @$('.js-block-collection').addClass 'is-addable'
       mediator.trigger 'channel:is-addable'
 
     # Editable
     if collaborator or mediator.shared.current_user.canEditChannel(@channel)
-      @$('.block-collection').addClass 'is-editable'
+      @$('.js-block-collection').addClass 'is-editable'
       @$('.block-item').addClass 'can-manage'
 
       @channel.set is_managable: true
@@ -72,7 +72,7 @@ module.exports = class ChannelView extends Backbone.View
     @maybeSetEmpty()
 
   maybeSetEmpty: ->
-    unless @$('.block-collection').hasClass('is-addable') or @blocks.length > 0
+    unless @$('.js-block-collection').hasClass('is-addable') or @blocks.length > 0
       @$('.channel-container').addClass('is-empty')
 
   setupFileDropView:->
@@ -87,7 +87,7 @@ module.exports = class ChannelView extends Backbone.View
 
   setUpDragView: ->
     @dragView = new ChannelDragView
-      el: $('.block-collection__contents')
+      el: $('.js-block-collection')
       model: @channel
 
     @dragView.setupDragAndDrop()

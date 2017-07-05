@@ -1,5 +1,6 @@
 { invoke } = require 'underscore'
 Backbone = require 'backbone'
+Cookies = require 'cookies-js'
 { API_URL } = require('sharify').data
 Authentication = require '../../../../models/authentication.coffee'
 FoundFriendsView = require '../../../../components/found_friends/view.coffee'
@@ -37,6 +38,10 @@ module.exports = class OnboardingFindFriendsSceneView extends Backbone.View
     ]
 
     @$('.js-found-friends').html view.render().$el
+
+    if @authentication.id?
+      # Hide "Find Friends" tip on profile
+      Cookies.set 'find_friends_message', true
 
   render: ->
     @$el.html template

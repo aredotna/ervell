@@ -2,6 +2,7 @@ Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { extend } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
+analytics = require '../../../../lib/analytics.coffee'
 styles = require './lib/styles.coffee'
 template = -> require('./index.jade') arguments...
 
@@ -124,6 +125,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
           plan_id: @model.get('plan_id')
 
         subscription.save()
+
+        analytics.track.submit 'User paid for pro account', 
+          label: 'Plan type'
+          value: @model.get('plan_id')
 
       .then =>
         Promise($.get('/me/refresh'))

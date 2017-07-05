@@ -1,6 +1,30 @@
-#registration-page, #reset-password-page
-  padding 0 30%
+.Registration
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+  width 100%
+  height 100vh
 
-@media (max-width: 700px)
-  #registration-page, #reset-password-page
-    padding 0 10%
+  &__logo
+    collapsed-margins(fieldset-margin)
+
+    // **
+    > span:first-child
+      display inline-block
+      position relative
+      font-size font-size-base
+      width @font-size * 2
+      height @font-size
+      top 0.125em
+
+      > svg
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        fill colors-gray-text
+
+  &__form
+    width block_width_mar

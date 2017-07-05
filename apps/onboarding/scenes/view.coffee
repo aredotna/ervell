@@ -1,8 +1,11 @@
 Backbone = require 'backbone'
 { defer } = require 'underscore'
+preserveAspectBind = require '../lib/preserve_aspect_bind.coffee'
 
 module.exports = class OnboardingSceneView extends Backbone.View
   className: 'NotImplemented'
+
+  aspect: null
 
   events:
     'click .js-next': 'next'
@@ -24,5 +27,10 @@ module.exports = class OnboardingSceneView extends Backbone.View
 
     defer =>
       @$el.addClass "#{@className}--active"
+      @aspect = preserveAspectBind @$('iframe')
 
     this
+
+  remove: ->
+    @aspect.unbind()
+    super

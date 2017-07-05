@@ -58,6 +58,7 @@ module.exports.track = track =
         eventCategory: options.category || 'UI Interactions'
         eventAction: description
         eventLabel: options.label
+        eventValue: options.value
         nonInteraction: (if options.category in ['Funnel Progressions', 'Impressions', 'Timing'] then 1 else 0)
       }
     memo

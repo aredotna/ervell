@@ -1,26 +1,23 @@
 .Tips
-  padding 0 .5em
-  +mobile()
-    margin 2em auto
-  h3
-    font-weight normal
-  
+  //
+
 .Tip
-  padding .75em
-  border 2px solid colors-gray-lighter
-  margin 1.2em 0
+  collapsed-margins(1em)
   display flex
-  justify-content space-between
   align-items center
+  justify-content space-between
+  padding button-padding
+  border button-border-width solid colors-gray-border
   cursor pointer
+
   &__title
+    font-size font-size-base
+    line-height 1
     font-weight bold
-    color colors-gray-text
+
   &__close
-    color colors-gray-lighter
     padding-left 1em
+    color colors-gray-lighter
+
     &:hover
       color colors-gray-hover
-
-  &:hover .Tip__title
-    color colors-gray-hover

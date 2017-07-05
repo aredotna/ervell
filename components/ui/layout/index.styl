@@ -1,3 +1,12 @@
+constrain()
+  for i in (1..8)
+    @media (min-width: (block_width_mar * i) + unit)
+      center(block_width_mar * i)
+
+  @media (max-width: (block_width_mar * 3) + unit)
+    // TODO: I'm not positive this does anything...
+    center(90%)
+
 .HTML
   &--font-size-invariant
     // 500px as defined in `layout/index.styl`
@@ -10,14 +19,14 @@
     height 100%
     overflow hidden
 
-constrain()
-  for i in (1..8)
-    @media (min-width: (block_width_mar * i) + unit)
-      center(block_width_mar * i)
+.Container
+  width 100%
+  display flex
+  min-height 100vh
+  flex-direction column
 
-  @media (max-width: (block_width_mar * 3) + unit)
-    // TODO: I'm not positive this does anything...
-    center(90%)
+  &__content
+    flex 1
 
 .Constrain
   constrain()
@@ -34,11 +43,9 @@ constrain()
     max-width (block_width_mar * 2)
     padding 1em
 
-.Container
-  width 100%
-  display flex
-  min-height 100vh
-  flex-direction column
-
-  &__content
-    flex 1
+.Blocks
+  // Blocks have margins of `0 10px`
+  // In collections of them, pull out the left and
+  // right sides to be flush with the container
+  margin-right -(unit / 2)
+  margin-left -(unit / 2)

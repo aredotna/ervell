@@ -1,4 +1,4 @@
-.block-collection.block-collection--list.flex-container.js-block-collection
+.block-collection.block-collection--list.flex-container
   if channel && !following && !followers && user && user.canAddToChannel(channel)
     include ../../list_item/templates/types/new_block
 
@@ -13,5 +13,5 @@
     .block-collection--list__column.block-collection--list__column--action(data-attr="action")
     .block-collection--list__column.block-collection--list__column--date(data-attr="date") Last updated
     .block-collection--list__column.block-collection--list__column--edit(data-attr="edit")
-  .block-collection--list__contents.block-collection__contents
+  .block-collection--list__contents.js-block-collection
     include _list_contents

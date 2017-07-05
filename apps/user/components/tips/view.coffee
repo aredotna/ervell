@@ -1,48 +1,57 @@
 Backbone = require 'backbone'
 Cookies = require 'cookies-js'
-
 analytics = require '../../../../lib/analytics.coffee'
-mediator = require '../../../../lib/mediator.coffee'
+Promise = require 'bluebird-q'
 
 module.exports = class TipView extends Backbone.View
+  events:
+    'click': 'onClick'
+    'click .js-close' : 'close'
 
-  events: 
-    'click': 'handleClick'
-    'click .js-close' : 'removeTip'
+  initialize: ({ @user }) -> #
 
-  removeTip: (e) ->
-    e.preventDefault()
-    e.stopImmediatePropagation()
-    @setClosed()
-    @remove()
-
-  setClosed: ->
-    analytics.track.click "Block tip closed", id: @model.id
-    Cookies.set @model.id, true
-
-  handleClick: (e) ->
+  onClick: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    @setClosed()
+    @collection.remove @model
 
-    if trigger = @$el.data('trigger')
-      switch trigger
-        when "new:channel"
-          # jQuery to open the new channel dialog, and close when body is clicked
-          $dropdown = $('.js-channel-dropdown')
-          $dropdown.show()
-          $('body').on 'click', (e) ->
-            unless $(e.currentTarget).closest('.js-channel-create').length
-              $dropdown.hide()
+    switch @model.get 'trigger'
+      when 'new:channel'
+        # Opens the new channel dialog
+        $dropdown = $('.js-triggerable-channel-create')
+        $dropdown.addClass hoverClass = 'DropdownHover--hover'
 
+        # Closes it when the body is clicked
+        $('body').one 'click', (e) ->
+          $dropdown.removeClass hoverClass
+
+    @maybeDisable()
+      .finally =>
+        @maybeRedirect()
+        @remove()
+
+  maybeDisable: ->
+    if @collection.length
+      Promise.resolve()
     else
-      window.location = @$el.attr('href')
-    
-    @remove()
+      Promise @user.save(show_tour: false)
+
+  maybeRedirect: ->
+    if @model.has 'href'
+      window.location = @model.get 'href'
+
+  close: (e) ->
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
+    @collection.remove @model
+
+    @maybeDisable()
+      .finally =>
+        @remove()
 
   remove: ->
-    @model.collection.remove @model
+    Cookies.set @model.id, true
+    analytics.track.click 'Block tip closed', id: @model.id
     super
-    
-
