@@ -1,5 +1,6 @@
 Promise = require 'bluebird-q'
 Backbone = require 'backbone'
+{ track, en } = require '../../../../lib/analytics.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class ChannelCreateView extends Backbone.View
@@ -39,10 +40,14 @@ module.exports = class ChannelCreateView extends Backbone.View
     Promise(@model.save())
       .then =>
         @dom.create.text 'Redirecting...'
-        window.location.href = "/#{@model.get('user').slug}/#{@model.get('slug')}"
+
+        window.location.href =
+          "/#{@model.get('user').slug}/#{@model.get('slug')}"
 
       .catch =>
         @dom.create.text 'Error'
+
+    track.submit en.CREATE_CHANNEL
 
   render: ->
     @$el.html template
