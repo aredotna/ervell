@@ -1,6 +1,8 @@
 Backbone = require 'backbone'
 { defer } = require 'underscore'
 preserveAspectBind = require '../lib/preserve_aspect_bind.coffee'
+mobilizeVideo = require '../lib/mobilize_video.coffee'
+{ isTouch } = require '../../../components/util/device.coffee'
 
 module.exports = class OnboardingSceneView extends Backbone.View
   className: 'NotImplemented'
@@ -27,7 +29,12 @@ module.exports = class OnboardingSceneView extends Backbone.View
 
     defer =>
       @$el.addClass "#{@className}--active"
+
+      # Set up video resizing
       @aspect = preserveAspectBind @$('iframe')
+
+      # Deal with mobile video params
+      mobilizeVideo @$('iframe') if isTouch()
 
     this
 
