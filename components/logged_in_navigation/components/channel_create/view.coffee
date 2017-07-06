@@ -5,12 +5,17 @@ template = -> require('./index.jade') arguments...
 module.exports = class ChannelCreateView extends Backbone.View
   events:
     'mouseover': 'focus'
+    'keyup .js-title': 'onKeyup'
     'input .js-title': 'title'
     'click .js-status': 'status'
     'click .js-create': 'create'
 
   initialize: ({ @user }) ->
     @listenTo @model, 'change', @render
+
+  onKeyup: (e) ->
+    return unless e.keyCode is 13
+    @create e
 
   focus: ->
     @dom.title.focus()
