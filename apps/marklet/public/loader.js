@@ -57,7 +57,7 @@
     markletStyle = document.createElement("style");
     markletStyle.type = "text/css";
     markletCSS = "" +
-      "#arena_frame,#arena_div{width:"+markletWidth+"px !important;height:"+markletHeightContracted+"px !important;position:fixed;top:20px;right:20px;border:5px solid #e7e7e5;border-radius:0.25em;overflow-x:hidden;overflow-y:auto;}" +
+      "#arena_frame,#arena_div{width:"+markletWidth+"px !important;height:"+markletHeightContracted+"px !important;position:fixed;top:20px;right:20px;border:5px solid #e7e7e5;border-radius:0.25em;overflow-x:hidden;overflow-y:auto;max-height:calc(100% - 50px);}" +
       "#arena_frame.is-expanded{height:"+markletHeightExpanded+"px !important}" +
       "#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}" +
       "#arena_frame:hover{background:rgba(255,255,255,0.9);}" +

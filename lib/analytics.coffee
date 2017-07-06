@@ -71,3 +71,6 @@ module.exports.exception = (errorObj) ->
 # https://developers.google.com/analytics/devguides/platform/customdimsmets
 module.exports.setDimension = (index, value) ->
   @ga? 'set', index, value
+
+module.exports.en =
+  CREATE_CHANNEL: 'New Channel created'
