@@ -17,3 +17,5 @@ module.exports = ($el) ->
     $indicator.attr 'data-glyph', glyphs[mode]
 
     window.location.reload()
+
+  null
