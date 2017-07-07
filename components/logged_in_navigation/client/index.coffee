@@ -2,6 +2,7 @@
 initChannelCreate = require '../components/channel_create/index.coffee'
 initNotifications = require '../components/notifications/index.coffee'
 initViewMode = require '../components/view_mode/index.coffee'
+initYou = require '../components/you/index.coffee'
 initDropdowns = require '../../dropdown/client/index.coffee'
 
 module.exports = ($el) ->
@@ -9,6 +10,7 @@ module.exports = ($el) ->
     channel: initChannelCreate $el.find('.js-channel-create')
     notifications: initNotifications $el.find('.js-notifications')
     view_mode: initViewMode $el.find('.js-view-mode')
+    you: initYou $el.find('.js-you')
 
   initDropdowns $el
 
