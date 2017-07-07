@@ -2,7 +2,7 @@ Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { extend } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
-analytics = require '../../../../lib/analytics.coffee'
+{ track, en } = require '../../../../lib/analytics.coffee'
 styles = require './lib/styles.coffee'
 template = -> require('./index.jade') arguments...
 
@@ -126,10 +126,6 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
         subscription.save()
 
-        analytics.track.submit 'User paid for pro account', 
-          label: 'Plan type'
-          value: @model.get('plan_id')
-
       .then =>
         Promise($.get('/me/refresh'))
 
@@ -137,6 +133,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
         location.reload()
 
         $target.text 'Thank you!'
+
+        track.submit en.PREMIUM_PAID,
+          label: 'Plan type'
+          value: @model.get('plan_id')
 
       .catch (error) =>
         $target
@@ -146,6 +146,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
         @els.errors
           .show()
           .text error.message
+
+    track.click en.PREMIUM_CHARGE_INITIATED,
+      label: 'Plan type'
+      value: @model.get('plan_id')
 
   reenablePremium: (e) ->
     e.preventDefault()
