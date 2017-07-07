@@ -32,15 +32,13 @@
 
     // Are.na
     > span:last-child
-      opacity 0
+      visibility hidden
 
     &:hover
       > span > svg
         fill colors-gray-hover
 
   &__cta
-    opacity 0
-
     > a
       display inline-block
       padding 0 1em
@@ -48,12 +46,16 @@
       // Join
       &:first-child
         padding-right 0
+
       // Log in
       &:last-child
         padding-left 0
 
-    &:hover
-      opacity 1
+    // Join
+    > a:first-child
+    // or
+    > span
+      visibility hidden
 
   // States
   &--active
@@ -61,7 +63,11 @@
       &__logo
         // Are.na
         > span:last-child
-          opacity 1
+          visibility visible
 
       &__cta
-        opacity 1
+        // Join
+        > a:first-child
+        // or
+        > span
+          visibility visible
