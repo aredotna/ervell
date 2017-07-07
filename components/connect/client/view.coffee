@@ -10,7 +10,7 @@ module.exports = class ConnectView extends Backbone.View
   attributes:
     'data-state': 'inactive'
 
-  initialize: ({ @search, @state, @eventBus }) ->
+  initialize: ({ @search, @state }) ->
     @state ?= new Backbone.Model active: false, query: ''
 
     options =
@@ -18,7 +18,6 @@ module.exports = class ConnectView extends Backbone.View
       collection: @collection
       search: @search
       state: @state
-      eventBus: @eventBus
 
     @subViews = [
       @searchView = new ConnectSearchView options
@@ -45,6 +44,4 @@ module.exports = class ConnectView extends Backbone.View
 
   remove: ->
     invoke @subViews, 'remove'
-    @trigger 'remove'
-
     super
