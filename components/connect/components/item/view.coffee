@@ -16,7 +16,7 @@ module.exports = class ConnectItemView extends Backbone.View
     mouseleave: ->
       @marquee().end()
 
-  initialize: ({ @connectable, @eventBus }) ->
+  initialize: ({ @connectable }) ->
     @queue = new AsyncSerialQueue
 
     @key = @collection.constructor.keyify @connectable
@@ -33,14 +33,12 @@ module.exports = class ConnectItemView extends Backbone.View
   connect: ->
     @collection.shove @model
 
-    @eventBus.trigger 'connection:added', @model, @connectable, @queue
     mediator.trigger 'connection:added', @model, @connectable, @queue
     mediator.trigger "connection:added:#{@connectable.id}", @model
 
   disconnect: ->
     @collection.shove @model
 
-    @eventBus.trigger 'connection:removed', @model, @connectable, @queue
     mediator.trigger 'connection:removed', @model, @connectable, @queue
     mediator.trigger "connection:removed:#{@connectable.id}", @model
 

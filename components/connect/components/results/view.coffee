@@ -10,7 +10,7 @@ module.exports = class ConnectResultsView extends Backbone.View
 
   subViews: []
 
-  initialize: ({ @state, @search, @eventBus }) ->
+  initialize: ({ @state, @search }) ->
     @listenTo @search, 'sync add reset', @render
 
   render: ->
@@ -22,14 +22,12 @@ module.exports = class ConnectResultsView extends Backbone.View
           model: model
           collection: @collection
           connectable: @model
-          eventBus: @eventBus
 
     connectCreateView = new ConnectCreateView
       search: @search
       collection: @collection
       connectable: @model
       state: @state
-      eventBus: @eventBus
 
     @subViews = [connectCreateView].concat subViews
 
