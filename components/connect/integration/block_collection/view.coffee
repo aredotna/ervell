@@ -7,7 +7,7 @@ module.exports = class BlockCollectionConnectIntegrationView extends Backbone.Vi
   className: 'BlockCollectionConnectIntegration'
 
   events:
-    'click': 'preventDefault' 
+    'click': 'preventDefault'
     'click .js-close': 'remove'
 
   preventDefault: (e) ->
@@ -32,7 +32,8 @@ module.exports = class BlockCollectionConnectIntegrationView extends Backbone.Vi
   remove: (e) ->
     e?.stopPropagation()
     e?.preventDefault()
-    
+
     @trigger 'remove'
     invoke @subViews, 'remove'
+
     super
