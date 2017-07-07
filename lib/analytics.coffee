@@ -74,3 +74,5 @@ module.exports.setDimension = (index, value) ->
 
 module.exports.en =
   CREATE_CHANNEL: 'New Channel created'
+  PREMIUM_PAID: 'User paid for pro account'
+  PREMIUM_CHARGE_INITIATED: 'User clicked to submit charge for premium'
