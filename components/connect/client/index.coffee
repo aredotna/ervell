@@ -1,6 +1,7 @@
+{ extend } = require 'underscore'
+Backbone = require 'backbone'
 Promise = require 'bluebird-q'
 { API_URL } = require('sharify').data
-mediator = require '../../../lib/mediator.coffee'
 { track, en } = require '../../../lib/analytics.coffee'
 ConnectView = require './view.coffee'
 ConnectCollections = require './collections.coffee'
@@ -8,27 +9,40 @@ ConnectCollections = require './collections.coffee'
 module.exports = (block) ->
   { search, recentConnections } = ConnectCollections()
 
-  mediator
-    .on 'connection:added', (channel, connectable, queue) ->
-      queue.enqueue ->
-        Promise $.ajax
-          type: 'POST'
-          url: "#{API_URL}/channels/#{channel.id}/connections"
-          data:
-            connectable_id: connectable.id
-            connectable_type: connectable.get 'base_class'
+  eventBus = extend {}, Backbone.Events
 
-      track.submit en.CREATE_CONNECTION
+  remove = (channel, connectable, queue) ->
+    queue.enqueue ->
+      Promise $.ajax
+        type: 'DELETE'
+        url: "#{API_URL}/channels/#{channel.id}/blocks/#{connectable.id}"
 
-    .on 'connection:removed', (channel, connectable, queue) ->
-      queue.enqueue ->
-        Promise $.ajax
-          type: 'DELETE'
-          url: "#{API_URL}/channels/#{channel.id}/blocks/#{connectable.id}"
+    track.submit en.DESTROY_CONNECTION
 
-      track.submit en.DESTROY_CONNECTION
+  add =  (channel, connectable, queue) ->
+    queue.enqueue ->
+      Promise $.ajax
+        type: 'POST'
+        url: "#{API_URL}/channels/#{channel.id}/connections"
+        data:
+          connectable_id: connectable.id
+          connectable_type: connectable.get 'base_class'
 
-  new ConnectView
+    track.submit en.CREATE_CONNECTION
+
+  eventBus
+    .on 'connection:added', add
+    .on 'connection:removed', remove
+
+  view = new ConnectView
     model: block
     collection: recentConnections
     search: search
+    eventBus: eventBus
+
+  view.on 'remove', ->
+    eventBus
+      .off 'connection:added', add
+      .off 'connection:removed', add
+
+  view
