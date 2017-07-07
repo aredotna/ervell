@@ -16,4 +16,7 @@ mixin avatar(user, avatar_size)
         .valign-inner
           .user__avatar__initials__content=initials
 
-      img(src="#{user.get('avatar_image')[avatar_size]}").user__avatar__image
+      img.user__avatar__image(
+        src= user.get('avatar_image')[avatar_size]
+        onerror='this.style.display="none"'
+      )
