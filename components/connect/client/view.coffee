@@ -1,4 +1,4 @@
-{ invoke, compact } = require 'underscore'
+{ invoke, compact, extend } = require 'underscore'
 Backbone = require 'backbone'
 ConnectSearchView = require '../components/search/view.coffee'
 ConnectHeaderView = require '../components/header/view.coffee'
@@ -10,14 +10,16 @@ module.exports = class ConnectView extends Backbone.View
   attributes:
     'data-state': 'inactive'
 
-  initialize: ({ @search, @state }) ->
+  initialize: ({ @search, @state, @eventBus }) ->
     @state ?= new Backbone.Model active: false, query: ''
+    @eventBus ?= extend {}, Backbone.Events
 
     options =
       model: @model
       collection: @collection
       search: @search
       state: @state
+      eventBus: @eventBus
 
     @subViews = [
       @searchView = new ConnectSearchView options
@@ -44,4 +46,6 @@ module.exports = class ConnectView extends Backbone.View
 
   remove: ->
     invoke @subViews, 'remove'
+    @trigger 'remove'
+
     super
