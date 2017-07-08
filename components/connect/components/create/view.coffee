@@ -11,7 +11,7 @@ module.exports = class ConnectCreateView extends Backbone.View
   events:
     click: 'create'
 
-  initialize: ({ @connectable, @search, @state }) ->
+  initialize: ({ @connectable, @search, @state, @eventBus }) ->
     @queue = new AsyncSerialQueue
 
     @listenTo @state, 'change:query', @render
@@ -44,6 +44,7 @@ module.exports = class ConnectCreateView extends Backbone.View
     @search.unshift channel
     @collection.shove channel
 
+    @eventBus.trigger 'connection:added', channel, @connectable, @queue
     mediator.trigger 'connection:added', channel, @connectable, @queue
     mediator.trigger "connection:added:#{@connectable.id}", channel
 
