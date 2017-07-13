@@ -1,14 +1,10 @@
 language: node_js
 node_js:
 - '7'
+before_install:
+- wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 script:
 - make test
-addons:
-  apt:
-    sources:
-    - heroku
-    packages:
-    - heroku-toolbelt
 before_deploy:
 - if [ $TRAVIS_BRANCH = 'master' ]; then make deploy-assets-staging; fi
 - if [ $TRAVIS_BRANCH = 'deploy' ]; then make deploy-assets; fi
