@@ -1,5 +1,5 @@
 module.exports = """
-  fragment blockThumb on Block {
+  fragment blockThumb on Connectable {
     id
     title
     description
