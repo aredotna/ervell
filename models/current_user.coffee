@@ -40,15 +40,13 @@ module.exports = class CurrentUser extends User
     @get('storage')
 
   canAddToChannel: (channel) ->
-    if channel.get('user').id is @id or (channel.get('status') is 'public' and @id?)
-      true
+    channel.get('user').id is @id or (channel.get('status') is 'public' and @id?)
+
+  canEditChannel: (channel) ->
+    channel.get('user').id is @id
 
   isCollaborator: (collaborators) ->
     _.contains collaborators.pluck('id'), @id
-
-  canEditChannel: (channel) ->
-    if channel.get('user').id is @id
-      true
 
   isFollowing: (model) ->
     if model.get('base_class') is 'Channel'
