@@ -1,15 +1,22 @@
 extends ../../../components/layout/index
 
 block styles
-  link(rel="alternate" type="application/rss+xml" title="Are.na / #{channel.get('title')} / Feed" href="#{channel.href()}/feed/rss/")
+  link(
+    rel='alternate'
+    type='application/rss+xml'
+    title="Are.na / #{channel.get('title')} / Feed"
+    href="#{channel.href()}/feed/rss"
+  )
 
 block body
   .channel.js-channel
     include _path
+
     .channel-container
       .channel-contents.js-channel-contents
         - title = channel.get('title')
         include ../../../components/blocks/container/templates/index
+
       .channel-empty
         include _empty
 
@@ -20,4 +27,4 @@ block body
       #l-loader
 
 block scripts
-  script( src=asset('/assets/channel.js') )
+  script( src= asset('/assets/channel.js') )

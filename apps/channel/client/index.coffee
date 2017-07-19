@@ -6,8 +6,7 @@ setupBlockCollection = require '../../../components/blocks/container/client/inde
 ChannelBlocks = require '../../../collections/channel_blocks.coffee'
 Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
-addBlockChannelServerRenderedIntegration = require '../../../components/add_block/integrations/channel_server_rendered.coffee'
-addBlockChannelClientRenderedIntegration = require '../../../components/add_block/integrations/channel_client_rendered.coffee'
+addBlock = require '../../../components/add_block/client/index.coffee'
 
 module.exports = ->
   { current_user } = mediator.shared
@@ -32,23 +31,11 @@ module.exports = ->
 
   initChannelPath channel
 
-  # Add Block initialization:
-  if current_user.canAddToChannel(channel) and not (FOLLOWERS? and FOLLOWING?)
-    integration = addBlockChannelServerRenderedIntegration
-      $el: $('.js-add-block')
-      collection: blocks
+  return unless ($addBlock = $('.js-add-block')).length
 
-    integration.init()
-    resultsCollection?.on 'reset', integration.reset
+  integration = addBlock
+    $el: $addBlock
+    collection: blocks
 
-  mediator.once 'collaborators:fetched', (collaborators) ->
-    return if $('.js-add-block').length # Already rendered
-    return if FOLLOWERS? or FOLLOWING?
-    return unless mediator.shared.current_user.id in collaborators.pluck 'id'
-
-    integration = addBlockChannelClientRenderedIntegration
-      $el: $('.js-block-collection')
-      collection: blocks
-
-    integration.init()
-    resultsCollection?.on 'reset', integration.reset
+  integration.init()
+  resultsCollection?.on 'reset', integration.reset
