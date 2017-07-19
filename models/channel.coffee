@@ -29,12 +29,8 @@ module.exports = class Channel extends Block
         options.url = "#{API_URL}/channels/#{@id}"
     super
 
-  initialize: ({ channel_slug, username }) ->
-    @slug = channel_slug
-    @username = username
-
   slugOrId: ->
-    @slug or @id
+    @id or @get('slug')
 
   shareHref: ->
     "#{APP_URL}/share/#{@get('share_link')}"
