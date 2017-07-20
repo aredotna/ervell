@@ -1,6 +1,6 @@
 { extend } = require 'underscore'
 params = require 'query-params'
-{ API_URL } = require('sharify').data
+{ API_URL, APP_URL } = require('sharify').data
 mediator = require '../lib/mediator.coffee'
 Block = require './block.coffee'
 User = require './user.coffee'
