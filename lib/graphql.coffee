@@ -25,8 +25,12 @@ module.exports = ({ query, variables, user, token }) ->
 
         if response.body.errors?
           error = new Error JSON.stringify response.body.errors
-          error.status = 404 if some(response.body.errors, ({ message }) -> message.match /Not Found/)
+
+          if some(response.body.errors, ({ message }) -> message.match /Not Found/)
+            error.status = 404
+
           error.data = response.body.data
+
           return reject error
 
         resolve response.body.data

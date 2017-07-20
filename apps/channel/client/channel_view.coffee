@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 { contains } = require 'underscore'
-{ API_URL, FOLLOWERS, FOLLOWING } = require('sharify').data
+{ API_URL, CAN } = require('sharify').data
 Bp = require '../../../lib/vendor/backpusher.js'
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
@@ -41,14 +41,14 @@ module.exports = class ChannelView extends Backbone.View
     collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
 
     # Addable
-    if collaborator or mediator.shared.current_user.canAddToChannel(@channel) and not (FOLLOWERS? or FOLLOWING?)
+    if CAN.add_to
       @setupFileDropView()
 
       @$('.js-block-collection').addClass 'is-addable'
       mediator.trigger 'channel:is-addable'
 
     # Editable
-    if collaborator or mediator.shared.current_user.canEditChannel(@channel)
+    if CAN.update
       @$('.js-block-collection').addClass 'is-editable'
       @$('.block-item').addClass 'can-manage'
 
@@ -60,7 +60,7 @@ module.exports = class ChannelView extends Backbone.View
       @delegateEvents()
 
     # if user is logged in but can't edit channel
-    if mediator.shared.current_user.id and mediator.shared.current_user.isPremium() and !collaborator
+    if CAN.mute
       @$('.metadata__column--manage').removeClass 'is-hidden'
 
       new MuteView

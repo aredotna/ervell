@@ -1,5 +1,5 @@
 .block-collection.block-collection--list.flex-container
-  if channel && !following && !followers && user && user.canAddToChannel(channel)
+  if can && can.add_to
     include ../../list_item/templates/types/new_block
 
   .block-collection--list__filter
