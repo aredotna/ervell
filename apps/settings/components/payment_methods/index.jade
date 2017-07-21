@@ -32,10 +32,10 @@ form
       | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
       | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
-  h3 Card Info
-
   .form-card__errors.js-form-errors
     //- Rendered client-side
+
+  h3 Card Info
 
   .Fieldset
     .Input.js-card-element
