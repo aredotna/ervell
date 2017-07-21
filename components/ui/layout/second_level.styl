@@ -1,0 +1,19 @@
+.Constrain
+  grid-block-constrain()
+
+  &--narrow
+    max-width (block_width_mar * 2)
+
+.Page
+  grid-block-constrain()
+  // Offsets for default logged-in-nav
+  margin topbar_h auto
+  padding 1em 0
+
+  &--narrow
+    max-width (block_width_mar * 2)
+    padding 1em
+
+.Section
+  @extend .Page
+  collapsed-margins(1em)
