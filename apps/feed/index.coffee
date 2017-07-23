@@ -1,21 +1,22 @@
 { extend } = require 'underscore'
 express = require 'express'
 routes = require './routes'
+ensureLoggedIn = require '../../lib/middleware/ensure_logged_in.coffee'
 
 app = module.exports = express()
 app.set 'views', "#{__dirname}/templates"
 app.set 'view engine', 'jade'
 
 homePathMiddleware = (req, res, next) ->
-  return next() unless req.user?
-
+  return next() unless req.user
+  
   path = req.user.get 'home_path'
   res.redirect 302, path if path? and path isnt '/'
 
   next()
 
 app.get '/', homePathMiddleware, routes.index
-app.get '/feed', routes.index
+app.get '/feed', ensureLoggedIn, routes.index
 app.get '/notifications', routes.notifications
 app.get '/explore', routes.explore
 
