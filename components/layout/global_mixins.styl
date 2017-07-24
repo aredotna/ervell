@@ -1,0 +1,153 @@
+v-align()
+  transform translateY(-50%)
+
+antialiased()
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
+clearfix()
+  &:after
+    content ""
+    display table
+    clear both
+
+caret()
+  display inline-block
+  content ''
+  width 0
+  height 0
+  vertical-align middle
+
+  border-top 8px solid
+  border-right 4px solid transparent
+  border-left 4px solid transparent
+  margin 2px 0 4px 4px
+
+privacy-color(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0]}
+      if attr == border-color
+        border 2px solid
+      {attr} value[1]
+
+privacy-light-color(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0]}
+      if attr == border-color
+        border 2px solid
+      {attr} alpha(value[1], 0.3)
+
+privacy-color-border-hover(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0] + ':hover'}
+      {attr} alpha(value[1], 0.6)
+
+privacy-color-hover(prefix, attr)
+  colors = 'closed' closed, 'public' public, 'private' private
+  for value in colors
+    {prefix + value[0] + ':hover'}
+      {attr} value[1]
+
+serif-text()
+  font-family font_serif
+  font-weight 100
+  font-size 19px
+  text-align left
+  line-height 1.6em
+
+  p
+    margin .6em 0
+
+collapsed-margins($a, $b = auto)
+  margin $a $b
+
+  if $b == 'auto'
+    &:first-child
+      margin-top: 0
+    &:last-child
+      margin-bottom: 0
+
+  else
+    &:first-child
+      margin-left: 0
+    &:last-child
+      margin-right: 0
+
+candy-striped(color)
+  background-image linear-gradient(
+    45deg,
+    rgba(color, 0.5) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(color, 0.5) 50%,
+    rgba(color, 0.5) 75%,
+    transparent 75%,
+    transparent
+  )
+
+outline-border(size, color, radius)
+  &:after
+    display block
+    content ''
+    position absolute
+    pointer-events none
+    top -(size + 1)
+    right @top
+    bottom @top
+    left @top
+    border size solid color
+    border-radius radius
+
+initials(font-size, color, background-color = transparent)
+  &[data-initials]
+    position relative
+
+    &:before
+    &:after
+      display block
+      position absolute
+      z-index -1
+
+    &:before
+      content ''
+      top 0
+      left 0
+      right 0
+      bottom 0
+      background-color background-color
+
+    &:after
+      content attr(data-initials)
+      font-size font-size
+      color color
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      font-weight normal
+      overflow hidden
+      white-space nowrap
+
+break-all()
+  break-word()
+  hyphens auto
+
+break-word()
+  overflow-wrap break-word
+  word-wrap break-word
+  -ms-word-break break-all
+  word-break break-word
+
+cover-seams($color = white, $size = 1px)
+  &:after
+    display block
+    content ''
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    box-shadow inset 0 0 0 $size $color
+    pointer-events none
