@@ -19,12 +19,12 @@ block container
     .BlogPosts
       for post in posts
         a.BlogPosts__post( href="/blog#{post.get('url')}" )
-          h2.Type
+          h2.Type.Type--size-h2
             | #{post.get('category')}:
             br
             = post.get('title')
 
-          h5.Type
+          h5.Type.Type--size-h5
             = post.get('date')
 
           img( src= post.get('image'), alt= post.get('title') )
