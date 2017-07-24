@@ -1,53 +1,38 @@
 .UI__section
-  h3.Type
+  h3.Type.Type--size-h3.Utility--align-center
     | Typography
 
   .UI__section__component
-    h6.Type
-      | Headline
+    h4.Type.Type--size-h4.Utility--align-center
+      | Sizes
 
     .UI__section__component__rendered
-      h1.Type
-        | h1 Headline  #{font['size-h1']}: font-size-h1
-
-      h2.Type
-        | h2 Headline  #{font['size-h2']}: font-size-h2
-
-      h3.Type
-        | h3 Headline  #{font['size-h3']}: font-size-h3
-
-      h4.Type
-        | h4 Headline  #{font['size-h4']}: font-size-h4
-
-      h5.Type
-        | h5 Headline  #{font['size-h5']}: font-size-h5
-
-      h6.Type
-        | h6 Headline  #{font['size-h6']}: font-size-h6
-
-      hr.Base
+      for size, key in font
+        h1.Type.Utility--align-center( class="Type--#{key}" )
+          | .Type--#{key}: #{font[key]}:
+          | <code class='Type'>font-#{key}</code>
 
   .UI__section__component
-    h6.Type
+    h4.Type.Type--size-h4.Utility--align-center
       | Paragraph
 
     .UI__section__component__rendered
-      p.Type.Type--lg
+      p.Type.Type--size-lg
         | Large paragraph #{font['size-lg']}: font-size-lg: On <a href='/'>Are.na</a> you collect, connect and contextualize information collaboratively. People use it to save text, images, links, files, PDFs, etc into flexible containers called channels. Our users have started channels to gather materials for news articles, build business ideas, do academic research and start creative projects.
 
       p.Type
         | Default paragraph #{font['size-base']}: font-size-base: On <a href='/'>Are.na</a> you collect, connect and contextualize information collaboratively. People use it to save text, images, links, files, PDFs, etc into flexible containers called channels. Our users have started channels to gather materials for news articles, build business ideas, do academic research and start creative projects.
 
-      p.Type.Type--sm
+      p.Type.Type--size-sm
         | Small paragraph #{font['size-sm']}: font-size-sm: On <a href='/'>Are.na</a> you collect, connect and contextualize information collaboratively. People use it to save text, images, links, files, PDFs, etc into flexible containers called channels. Our users have started channels to gather materials for news articles, build business ideas, do academic research and start creative projects.
 
-      p.Type.Type--xs
+      p.Type.Type--size-xs
         | Extra-small paragraph #{font['size-xs']}: font-size-xs: On <a href='/'>Are.na</a> you collect, connect and contextualize information collaboratively. People use it to save text, images, links, files, PDFs, etc into flexible containers called channels. Our users have started channels to gather materials for news articles, build business ideas, do academic research and start creative projects.
 
       hr.Base
 
     .UI__section__component
-      h6.Type
+      h4.Type.Type--size-h4.Utility--align-center
         | Code
 
       .UI__section__component__rendered
@@ -63,7 +48,7 @@
       hr.Base
 
     .UI__section__component
-      h6.Type
+      h4.Type.Type--size-h4.Utility--align-center
         | Available Size Variables
 
       .UI__section__component__rendered
