@@ -1,17 +1,17 @@
 .Constrain
-  grid-block-constrain()
+  layout-block-constrain()
 
   &--narrow
-    max-width (block_width_mar * 2)
+    max-width layout-narrow-width
 
 .Page
-  grid-block-constrain()
-  // Offsets for default logged-in-nav
-  margin topbar_h auto
+  layout-block-constrain()
   padding 1em 0
+  // Offset height for default logged-in-nav
+  margin topbar_h auto 0 auto
 
   &--narrow
-    max-width (block_width_mar * 2)
+    max-width layout-narrow-width
     padding 1em
 
 .Section

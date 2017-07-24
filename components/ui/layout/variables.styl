@@ -1,4 +1,6 @@
-grid-block-constrain()
+layout-narrow-width = block_width_mar * 2
+
+layout-block-constrain()
   for i in (1..8)
     @media (min-width: (block_width_mar * i) + unit)
       center(block_width_mar * i)
