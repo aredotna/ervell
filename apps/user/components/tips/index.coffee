@@ -8,7 +8,7 @@ module.exports = ->
 
   tips.each (tip) ->
     new TipView
-      el: $(".js-tip[data-id=#{tip.id}")
+      el: $(".js-tip[data-id='#{tip.id}']")
       model: tip
       collection: tips
       user: current_user

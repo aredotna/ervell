@@ -7,9 +7,9 @@ if tips && tips.length
     .Tips__tips
       for tip in tips
         a.Tip.js-tip(
-          href= tip.href
-          data-id= tip.id
-          data-trigger= tip.trigger
+          href=tip.href
+          data-id=tip.id
+          data-trigger=tip.trigger
         )
           .Tip__title
             = tip.title
