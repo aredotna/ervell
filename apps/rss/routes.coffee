@@ -9,7 +9,7 @@ ExploreBlocks = require "../../collections/explore_blocks"
 
 @channelRSS = (req, res, next) ->
   channel = new Channel
-    channel_slug: req.params.channel_slug
+    id: req.params.channel_slug
 
   blocks = new ChannelBlocks null,
     channel_slug: req.params.channel_slug

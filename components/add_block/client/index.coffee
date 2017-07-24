@@ -1,4 +1,4 @@
-AddBlockView = require '../client/view.coffee'
+AddBlockView = require './view.coffee'
 
 module.exports = ({ $el, collection }) ->
   addBlockView = new AddBlockView el: $el, collection: collection

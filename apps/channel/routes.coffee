@@ -1,109 +1,102 @@
-#
-# Routes file that exports route handlers for ease of testing.
-#
-
-Channel = require "../../models/channel"
-ChannelBlocks = require "../../collections/channel_blocks"
-Blocks = require "../../collections/blocks"
-User = require "../../models/user"
-sd = require("sharify").data
-Q = require 'bluebird-q'
-_ = require 'underscore'
-
-fetchChannel = ({slug, authToken = null, url = null, cache = false}) ->
-  dfd = Q.defer()
-  channel = new Channel
-    channel_slug: slug
-
-  blocks = new ChannelBlocks null,
-    channel_slug: slug
-
-  if url
-    channel.url = url
-
-  channel.fetch
-    cache: cache
-    data:
-      auth_token: authToken
-    success: -> 
-      dfd.resolve { channel, blocks }
-    error: (m, err) -> dfd.reject err
-
-  dfd.promise
+Channel = require '../../models/channel'
+graphQL = require '../../lib/graphql'
 
 @channel = (req, res, next) ->
-  slug = req.params.channel_slug
-  authToken = req.user?.get('authentication_token')
+  token = req.user?.get('authentication_token')
+  options = id: req.params.channel_slug
+  channel = new Channel options
 
-  fetchChannel({ slug, authToken })
-    .then ({ channel, blocks }) ->
-      return res.redirect 301, "/#{channel.get('slug')}" if channel.get('class') is 'User'
-      blocks.add channel.get 'contents'
+  canQuery = """
+    query channel_can($id: ID!) {
+      channel(id: $id) {
+        can {
+          add_to
+          update
+          mute
+          follow
+        }
+      }
+    }
+  """
+
+  Promise
+    .all [
+      channel.fetch data: auth_token: token
+      graphQL token: token, query: canQuery, variables: options
+    ]
+
+    .then ([_channel, { channel: { can }}]) ->
+      if channel.get('class') is 'User'
+        return res.redirect 301, "/#{channel.get 'slug'}"
 
       res.locals.sd.CHANNEL = channel.toJSON()
-      res.locals.sd.BLOCKS = blocks.toJSON()
-      author = new User channel.get('user')
+      res.locals.sd.BLOCKS = channel.related().blocks.toJSON()
+      res.locals.sd.CAN = can
 
-      res.render "index", 
+      res.render 'index',
         channel: channel
-        blocks: blocks.models
-        author: author
+        blocks: channel.related().blocks.models
+        author: channel.related().author
+        can: can
 
-    .catch ->
-      next()
+    .catch next
 
 @embed = (req, res, next) ->
-  slug = req.params.channel_slug
-  channel = new Channel channel_slug: slug
-  url = "#{channel.urlRoot()}?per=7&direction=desc"
+  token = req.user?.get('authentication_token')
+  channel = new Channel id: req.params.channel_slug
+  channel.url = "#{channel.urlRoot()}?per=7&direction=desc"
 
-  fetchChannel({ slug, url, cache: true } )
-    .then ({ channel, blocks }) ->
-      blocks.add channel.get 'contents'
-
+  channel
+    .fetch cache: true, data: auth_token: token
+    .then ->
       res.locals.sd.CHANNEL = channel.toJSON()
-      res.locals.sd.BLOCKS = blocks.toJSON()
-      author = new User channel.get('user')
+      res.locals.sd.BLOCKS = channel.related().blocks.toJSON()
 
-      res.render "embed", 
+      res.render 'embed',
         channel: channel
-        blocks: blocks.models
-        author: author
+        blocks: channel.related().blocks.models
+        author: channel.related().author
         isEmbedded: true
 
     .catch next
 
 @followers = (req, res, next) ->
-  channel = new Channel
-    channel_slug: req.params.channel_slug
+  token = req.user?.get('authentication_token')
+  options = id: req.params.channel_slug
+  channel = new Channel options
 
-  author = new User {}
+  canQuery = """
+    query channel_can($id: ID!) {
+      channel(id: $id) {
+        can {
+          follow
+          mute
+        }
+      }
+    }
+  """
 
-  blocks = new Blocks null
-  blocks.url = "#{sd.API_URL}/channels/#{req.params.channel_slug}/followers"
+  Promise
+    .all [
+      channel.fetch()
+      channel.related().followers.fetch cache: true
+      graphQL token: token, query: canQuery, variables: options
+    ]
 
-  blocks.parse = (data)-> data.users
+    .then ([_channel, _followers, { channel: { can }}]) ->
+      if channel.get('class') is 'User'
+        return res.redirect 301, "/#{channel.get 'slug'}"
 
-  channel.fetch
-    success: =>
-      return res.redirect 301, "/#{channel.get('slug')}" if channel.get('class') is 'User'
       res.locals.sd.CHANNEL = channel.toJSON()
-      author = new User channel.get('user')
-      render()
+      res.locals.sd.BLOCKS = channel.related().followers.toJSON()
+      res.locals.sd.FOLLOWERS = channel.related().followers.toJSON()
+      res.locals.sd.CAN = can
 
-  blocks.fetch
-    cache: true
-    success: (data, response) ->
-      res.locals.sd.BLOCKS = blocks.toJSON()
-      res.locals.sd.FOLLOWERS = blocks.toJSON()
-      render()
-    error: (m, err) -> next err
+      res.render 'index',
+        channel: channel
+        blocks: channel.related().followers.models # TODO: Odd naming
+        author: channel.related().author
+        followers: true
+        can: can
 
-  render = _.after 2, ->
-    res.render "index",
-      channel: channel
-      blocks: blocks.models
-      author: author
-      followers: true
-
-
+    .catch next

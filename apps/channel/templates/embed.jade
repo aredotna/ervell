@@ -1,21 +1,25 @@
 doctype html
-html(class=sd.IS_INVERTED ? 'is-inverted' : '')
+html( class=(sd.IS_INVERTED ? 'is-inverted' : '') )
   head
     title
       | Are.na
       if channel
         |  / #{channel.get('title')}
 
-    link( type='text/css', rel='stylesheet', href=asset('/assets/embed.css') )
+    link( type='text/css', rel='stylesheet', href= asset('/assets/embed.css') )
+
     include ../../../components/meta/templates/meta
-  body(class="body--embed")
+
+  body( class='body--embed' )
     .channel-embed
       include _embed-header
+
       .channel-embed__contents
         include ../../../components/blocks/container/templates/index
+
     include ../../../components/layout/modules/analytics
 
     #scripts
       != sharify.script()
-      script( src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" )
+      script( src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js' )
       script( src=asset('/assets/embed.js') )
