@@ -23,6 +23,9 @@ module.exports = class Channel extends Block
   href: ->
     "/#{@get('user')?.slug}/#{@get('slug')}"
 
+  nMoreBlocks: (n) ->
+    @get('length') - n
+
   sync: (method, model, options) ->
     switch method
       when 'update', 'delete'

@@ -1,5 +1,5 @@
 if channel
-  .block-item.block-item--content.grid__block.grid__block--item.grid__block--embedded
+  .block-item.block-item--content.grid__block.grid__block--item.grid__block--embedded.js-embedded-block(data-length=channel.length)
     .block-padding
     span(
       href="#{channel.href()}"
@@ -9,11 +9,11 @@ if channel
         .valign-outer
           .valign-inner
             .grid__block--embedded__content
-
-              p.lg(data-length=(channel.get('length') - 7)) more blocks
-              p.md(data-length=(channel.get('length') - 5)) more blocks
-              p.sm(data-length=(channel.get('length') - 3)) more blocks
-              p.xs(data-length=(channel.get('length') - 2)) more blocks
               
+              p.gt7(data-length=channel.nMoreBlocks(7)) more blocks
+              p.gt5(data-length=channel.nMoreBlocks(5)) more blocks
+              p.gt3(data-length=channel.nMoreBlocks(3)) more blocks
+              p.gt2(data-length=channel.nMoreBlocks(2)) more blocks
+            
               a(href="#{channel.href()}") visit channel
     
