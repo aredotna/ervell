@@ -7,6 +7,7 @@ module.exports = ->
   tips = new Backbone.Collection TIPS
 
   tips.each (tip) ->
+    return if Cookies.get(tip.id) 
     new TipView
       el: $(".js-tip[data-id='#{tip.id}']")
       model: tip
