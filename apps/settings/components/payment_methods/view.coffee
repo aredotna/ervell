@@ -138,14 +138,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
           label: 'Plan type'
           value: @model.get('plan_id')
 
-      .catch (error) =>
+      .catch ({ responseJSON: { message, description }}) =>
         $target
           .prop 'disabled', false
-          .text 'Error'
+          .text message
 
         @els.errors
           .show()
-          .text error.message
+          .text description
 
     track.click en.PREMIUM_CHARGE_INITIATED,
       label: 'Plan type'
@@ -174,14 +174,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
         $target.text 'Thank you!'
 
-      .catch (error) =>
+      .catch ({ responseJSON: { message, description }}) =>
         $target
           .prop 'disabled', false
-          .text 'Error'
+          .text message
 
         @els.errors
           .show()
-          .text error.message
+          .text description
 
   postRender: ->
     @els =
