@@ -15,8 +15,14 @@ module.exports = class ConnectSearchView extends Backbone.View
     input: ->
       @query arguments...
 
-  initialize: ({ @state, @search }) ->
+  initialize: ({ @state, @search, @eventBus }) ->
     @query = throttle @perform, 200
+    
+    @eventBus.on 'connection:added', @afterConnection
+
+  afterConnection: =>
+    @$el.focus()
+    @$el.select()
 
   restore: ->
     @search.reset @collection.toJSON()
