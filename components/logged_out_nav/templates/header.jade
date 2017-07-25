@@ -2,14 +2,13 @@ header.LoggedOutHeader.js-logged-out-header
   a.LoggedOutHeader__logo( href='/' )
     span
       include ../../../public/images/arena-mark.svg
-    span
-      | &nbsp;Are.na
 
-  .LoggedOutHeader__cta
-    a( href='/sign_up' )
-      | Join
-    = ' '
-    span or
-    = ' '
-    a( href='/log_in' )
-      | Log in
+  unless user
+    .LoggedOutHeader__cta
+      a( href='/sign_up' )
+        | Join
+      = ' '
+      span or
+      = ' '
+      a( href='/log_in' )
+        | Log in
