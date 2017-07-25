@@ -1,7 +1,11 @@
 module.exports = ->
+  $html = $('html, body')
   $el = $('.js-logged-out-menu')
   $links = $el.find('a')
   $sections = $('.js-section[id]')
+
+  STATE =
+    navigating: false
 
   activate = (id) ->
     $links
@@ -13,6 +17,7 @@ module.exports = ->
     activate this.element.id
 
   handle = (desired) -> (direction) ->
+    return if STATE.navigating
     return unless direction is desired
     handler.bind(this)(direction)
 
@@ -25,6 +30,20 @@ module.exports = ->
     handler: handle 'down'
 
   $links.on 'click', (e) ->
+    e.preventDefault()
+
+    STATE.navigating = true
+
     id = $(this).attr('href').split('#').pop()
-    # Ensures the click handler always wins
-    setTimeout (-> activate id), 1
+
+    activate id
+
+    $target = $sections.filter("[id='#{id}']")
+
+    yPos = $target.offset().top
+
+    $html
+      .animate(scrollTop: yPos, 'fast')
+      .promise()
+      .then ->
+        STATE.navigating = false
