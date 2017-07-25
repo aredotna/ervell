@@ -1,11 +1,22 @@
 .AboutSection
-  margin 8em auto
+  margin-bottom 12em
 
-  &--focus
-    > p
-      font-size font-size-lg
-      line-height line-height-tall
+  &__buttons
+    text-align center
 
-@require 'about'
-@require 'pricing'
-@require 'mobile'
+    > .Button
+      margin 0 1em
+
+.AboutFeynman
+  margin 2em 0
+
+  > svg
+    display block
+    margin 0 auto
+    max-width 75%
+    fill colors-gray-text
+
+@require '../components/pricing_table/index'
+@require '../components/posts/index'
+@require '../components/lab_posts/index'
+@require '../components/store_posts/index'
