@@ -1,0 +1,17 @@
+- active = active || 'top'
+
+- function activate(id) { return active === id ? 'active' : 'inactive'; }
+
+nav.LoggedOutMenu.js-logged-out-menu
+  a( href='about#top', data-state='active' )
+    | About
+  a( href='about#pricing' )
+    | Plans and Pricing
+  a( href='about#blog' )
+    | Blog
+  a( href='about#store' )
+    | Store
+  a( href='about#contact' )
+    | Contact
+  a( href='about#faqs' )
+    | FAQs

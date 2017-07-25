@@ -11,9 +11,10 @@ block footer
 
 block container
   include ../../../components/logged_out_nav/templates/header
+  include ../../../components/logged_out_menu/index
 
   .About.Page.Page--narrow
-    section.AboutSection
+    section.AboutSection.js-section( id='top' )
       h2.Type.Type--size-h2.Utility--align-center
         | Tools for Thinking, Together
 
@@ -33,7 +34,7 @@ block container
         a.Button( href='/sign_up' )
           | Join Are.na
 
-    section.AboutSection
+    section.AboutSection.js-section
       h2.Type.Type--size-h2.Utility--align-center
         | Your Ideas, Your Data
 
@@ -47,7 +48,7 @@ block container
         a.Button( href='/about#pricing' )
           | Join Premium
 
-    section.AboutSection
+    section.AboutSection.js-section
       h2.Type.Type--size-h2.Utility--align-center
         | Are.na Labs
 
@@ -63,7 +64,7 @@ block container
         a.Button( href='https://dev.are.na/' )
           | Browse the API
 
-    section.AboutSection
+    section.AboutSection.js-section
       h2.Type.Type--size-h2.Utility--align-center
         | Team and Collaborators
 
@@ -92,7 +93,7 @@ block container
         a( href='/meg-miller' )
           | Meg Miller
 
-    section.AboutSection
+    section.AboutSection.js-section( id='pricing' )
       h2.Type.Type--size-h2.Utility--align-center
         | Plans and Pricing
 
@@ -101,7 +102,7 @@ block container
 
       include ../components/pricing_table/index
 
-    section.AboutSection
+    section.AboutSection.js-section( id='blog' )
       h2.Type.Type--size-h2.Utility--align-center
         | Blog
 
@@ -114,7 +115,7 @@ block container
         a.Button( href='/blog' )
           | Read more&hellip;
 
-    section.AboutSection
+    section.AboutSection.js-section( id='store' )
       h2.Type.Type--size-h2.Utility--align-center
         | Store
 
@@ -127,7 +128,7 @@ block container
         a.Button( href='http://store.are.na/' )
           | Go to store
 
-    section.AboutSection
+    section.AboutSection.js-section( id='contact' )
       h2.Type.Type--size-h2.Utility--align-center
         | Contact
 
@@ -141,7 +142,7 @@ block container
         a( href='https://instagram.com/aredotna' )
           | instagram.com/aredotna
 
-    section.AboutSection
+    section.AboutSection.js-section( id='faqs' )
       h2.Type.Type--size-h2.Utility--align-center
         | FAQs
 
