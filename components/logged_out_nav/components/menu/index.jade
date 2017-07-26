@@ -1,22 +1,38 @@
-- active = active || 'top'
+- loggedOutMenu_active = loggedOutMenu_active
 
-//- TODO
-- function activate(id) { return active === id ? 'active' : 'inactive'; }
+- function activate(id) { return loggedOutMenu_active === id ? 'active' : 'inactive'; }
 
 nav.LoggedOutMenu.js-logged-out-menu
   a.LoggedOutMenu__toggle.js-toggle: span
     //-
 
   .LoggedOutMenu__options.js-options
-    a( href='about#top' )
-      | About
-    a( href='about#pricing' )
-      | Plans and Pricing
-    a( href='about#blog' )
-      | Blog
-    a( href='about#store' )
-      | Store
-    a( href='about#contact' )
-      | Contact
-    a( href='about#faqs' )
-      | FAQs
+    a(
+      href='about#top'
+      data-state= activate('top')
+    ) About
+
+    a(
+      href='about#pricing'
+      data-state= activate('pricing')
+    ) Plans and Pricing
+
+    a(
+      href='about#blog'
+      data-state= activate('blog')
+    ) Blog
+
+    a(
+      href='about#store'
+      data-state= activate('store')
+    ) Store
+
+    a(
+      href='about#contact'
+      data-state= activate('contact')
+    ) Contact
+
+    a(
+      href='about#faqs'
+      data-state= activate('faqs')
+    ) FAQs
