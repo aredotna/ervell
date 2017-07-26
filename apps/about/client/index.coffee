@@ -9,10 +9,24 @@ module.exports = ->
   loggedOutNav
     $sections: $sections
 
+  scrollToId = (id) ->
+    $target = $sections.filter("[id='#{id}']")
+    yPos = $target.offset().top
+    $html.animate scrollTop: yPos, 'fast'
+
   $links
     .on 'click', (e) ->
       e.preventDefault()
+
       id = $(this).attr('href').split('#').pop()
-      $target = $sections.filter("[id='#{id}']")
-      yPos = $target.offset().top
-      $html.animate scrollTop: yPos, 'fast'
+
+      scrollToId id
+
+  return unless location.hash
+
+  # Prevent default anchor jump
+  setTimeout (-> window.scrollTo(0, 0)), 1
+
+  id = location.hash.substring(1)
+
+  scrollToId id
