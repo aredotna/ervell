@@ -1,8 +1,6 @@
-module.exports = ->
+module.exports = ({ $el, $sections }) ->
   $html = $('html, body')
-  $el = $('.js-logged-out-menu')
   $links = $el.find('a')
-  $sections = $('.js-section[id]')
 
   STATE =
     navigating: false
