@@ -30,9 +30,10 @@ block container
       p.Type.Type--lh-tall
         | Whether you’re writing a story, designing a product, or just exploring your interests, we believe Are.na should help you think and discover in a way that feels natural. <a href='https://www.are.na/blog/hello%20world/2017/07/06/summer-update.html'>Learn more about our thinking.</a>
 
-      .AboutSection__buttons
-        a.Button( href='/sign_up' )
-          | Join Are.na
+      unless user
+        .AboutSection__buttons
+          a.Button( href='/sign_up' )
+            | Join Are.na
 
     section.AboutSection.js-section
       h2.Type.Type--size-h2.Utility--align-center
@@ -44,9 +45,10 @@ block container
       p.Type.Type--lh-tall
         | Premium members help us improve Are.na and make the platform accessible to everyone. Consider signing up for a yearly membership in order to access extra tools and privacy options.
 
-      .AboutSection__buttons
-        a.Button( href='/about#pricing' )
-          | Join Premium
+      unless user && user.isPremium()
+        .AboutSection__buttons
+          a.Button( href='/about#pricing' )
+            | Join Premium
 
     section.AboutSection.js-section
       h2.Type.Type--size-h2.Utility--align-center
