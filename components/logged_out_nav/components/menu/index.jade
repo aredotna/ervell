@@ -23,7 +23,7 @@ nav.LoggedOutMenu.js-logged-out-menu
     ) Blog
 
     a(
-      href='/about#store'
+      href=(sd.CURRENT_PATH.indexOf('about') !== -1 ? '/about#store' : 'http://store.are.na/')
       data-state= loggedOutMenuState('store')
     ) Store
 
