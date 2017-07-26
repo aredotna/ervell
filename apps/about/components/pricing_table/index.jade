@@ -1,0 +1,49 @@
+.AboutPricingTable
+  .AboutPricingTable__tier
+    header.AboutPricingTable__header
+      h3.Type Basic
+      p.Type FREE
+
+    if user && !user.isPremium()
+      button.Button.Button--size-lg.Button--fill( disabled )
+        | Your current plan
+    else if user && user.isPremium()
+      button.Button.Button--size-lg.Button--fill( disabled )
+        | Join Basic
+    else
+      a.Button.Button--size-lg.Button--fill( href='/sign_up' )
+        | Join Basic
+
+    .AboutPricingTable__includes
+      ul
+        li Multiple privacy settings
+        li Unlimited channels
+        li Unlimited blocks
+        li 25MB upload limit
+
+  .AboutPricingTable__tier.AboutPricingTable__tier--premium
+    header.AboutPricingTable__header
+      h3.Type Premium
+      p.Type
+        | $5 / month or $45 / year
+
+    if user && user.isPremium()
+      button.Button.Button--size-lg.Button--fill.Color--state-premium( disabled )
+        | Your current plan
+    else
+      a.Button.Button--size-lg.Button--fill.Color--state-premium(
+        href=(user && user ? '/settings/billing' : '/sign_up')
+      )
+        | Join Premium
+
+    .AboutPricingTable__includes
+      ul
+        li Manage channels
+        li Manage all the details of your channels in one place.
+        li Quick search
+        li Search content within channels to narrow down what you’re looking for.
+        li List view
+        li Great for channels where you need to scan titles, text, or URLs.
+        li Channel mute
+        li Hide from search engines
+        li Custom profile bio

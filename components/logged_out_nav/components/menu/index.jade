@@ -1,0 +1,38 @@
+- function loggedOutMenuState(id) {
+-   return sd.CURRENT_PATH.indexOf(id) !== -1 ? 'active' : 'inactive';
+- }
+
+nav.LoggedOutMenu.js-logged-out-menu
+  a.LoggedOutMenu__toggle.js-toggle: span
+    //-
+
+  .LoggedOutMenu__options.js-options
+    a(
+      href='/about#top'
+      data-state= loggedOutMenuState('top')
+    ) About
+
+    a(
+      href='/about#pricing'
+      data-state= loggedOutMenuState('pricing')
+    ) Plans and Pricing
+
+    a(
+      href=(sd.CURRENT_PATH.indexOf('about') ? '/about#blog' : '/blog')
+      data-state= loggedOutMenuState('blog')
+    ) Blog
+
+    a(
+      href='/about#store'
+      data-state= loggedOutMenuState('store')
+    ) Store
+
+    a(
+      href='/about#contact'
+      data-state= loggedOutMenuState('contact')
+    ) Contact
+
+    a(
+      href='/about#faqs'
+      data-state= loggedOutMenuState('faqs')
+    ) FAQs

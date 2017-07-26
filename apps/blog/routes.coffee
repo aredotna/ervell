@@ -1,7 +1,12 @@
 $ = require 'cheerio'
 request = require 'superagent'
+{ take } = require 'underscore'
 { BLOG_URL } = require('sharify').data
 { Collection } = require 'backbone'
+
+truncate = (text, length = 50) ->
+  tokens = text.split ' '
+  take(tokens, length).join ' '
 
 class Posts extends Collection
   url: "#{BLOG_URL}/all.json"
@@ -14,6 +19,7 @@ class Posts extends Collection
       res.locals.POSTS = posts
       res.render 'index',
         posts: posts.models
+        truncate: truncate
 
 @show = (req, res, next) ->
   url = req.path.replace '/blog', ''

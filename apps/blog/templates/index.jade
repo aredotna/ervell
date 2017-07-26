@@ -13,18 +13,28 @@ block container
   include ../../../components/logged_out_nav/templates/header
 
   .Page.Page--narrow
-    h1.PageTitle
-      | Blog
+    h1.Type.Type--size-h2.Utility--align-center
+      strong Blog
+
+    .BlogIntro
+      | Learn about how people use Are.na to do work and pursue personal projects through case studies,
+      | interviews, and highlights.
 
     .BlogPosts
       for post in posts
         a.BlogPosts__post( href="/blog#{post.get('url')}" )
-          h2.Type
+          h2.Type.Type--size-h2
             | #{post.get('category')}:
             br
             = post.get('title')
 
-          h5.Type
+          h5.Type.Type--size-h5
             = post.get('date')
 
-          img( src= post.get('image'), alt= post.get('title') )
+          img(
+            src= post.get('image')
+            alt= post.get('title')
+          )
+
+          .BlogPosts__excerpt.PageNarrowBreakout
+            | #{truncate(post.get('excerpt'), 50)} …

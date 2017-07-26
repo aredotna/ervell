@@ -14,7 +14,7 @@
 
   &__logo
     // **
-    > span:first-child
+    > span
       display inline-block
       position relative
       width @font-size * 2
@@ -30,10 +30,6 @@
         height 100%
         fill colors-gray-text
 
-    // Are.na
-    > span:last-child
-      visibility hidden
-
     &:hover
       > span > svg
         fill colors-gray-hover
@@ -41,33 +37,28 @@
   &__cta
     > a
       display inline-block
-      padding 0 1em
       font-weight bold
-      // Join
-      &:first-child
-        padding-right 0
 
-      // Log in
-      &:last-child
-        padding-left 0
-
-    // Join
+    // "Join"
     > a:first-child
-    // or
+    // "or"
     > span
       visibility hidden
 
   // States
   &--active
     .LoggedOutHeader
-      &__logo
-        // Are.na
-        > span:last-child
-          visibility visible
-
       &__cta
-        // Join
+        // "Join"
         > a:first-child
-        // or
+        // "or"
         > span
           visibility visible
+
++mobile()
+  .LoggedOutHeader
+    background-color white
+    padding 1em
+
+    &__logo
+      display none
