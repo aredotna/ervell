@@ -1,5 +1,4 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
-loggedOutMenu = require '../../../components/logged_out_menu/index.coffee'
 
 module.exports = ->
   $html = $('html, body')
@@ -7,10 +6,7 @@ module.exports = ->
   $links = $el.find('a[href*=#]')
   $sections = $el.find('.js-section[id]')
 
-  loggedOutNav()
-
-  loggedOutMenu
-    $el: $('.js-logged-out-menu')
+  loggedOutNav
     $sections: $sections
 
   $links

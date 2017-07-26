@@ -1,0 +1,22 @@
+- active = active || 'top'
+
+//- TODO
+- function activate(id) { return active === id ? 'active' : 'inactive'; }
+
+nav.LoggedOutMenu.js-logged-out-menu
+  a.LoggedOutMenu__toggle.js-toggle: span
+    //-
+
+  .LoggedOutMenu__options.js-options
+    a( href='about#top' )
+      | About
+    a( href='about#pricing' )
+      | Plans and Pricing
+    a( href='about#blog' )
+      | Blog
+    a( href='about#store' )
+      | Store
+    a( href='about#contact' )
+      | Contact
+    a( href='about#faqs' )
+      | FAQs
