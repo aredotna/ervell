@@ -10,11 +10,16 @@ block footer
   include ../../../components/logged_out_nav/templates/footer
 
 block container
+  - var loggedOutMenu_active = 'blog'
   include ../../../components/logged_out_nav/templates/header
 
   .Page.Page--narrow
     h1.Type.Type--size-h2.Utility--align-center
       strong Blog
+
+    .BlogIntro
+      | Learn about how people use Are.na to do work and pursue personal projects through case studies,
+      | interviews, and highlights.
 
     .BlogPosts
       for post in posts
@@ -27,4 +32,10 @@ block container
           h5.Type.Type--size-h5
             = post.get('date')
 
-          img( src= post.get('image'), alt= post.get('title') )
+          img(
+            src= post.get('image')
+            alt= post.get('title')
+          )
+
+          .BlogPosts__excerpt.PageNarrowBreakout
+            | #{truncate(post.get('excerpt'), 50)} …
