@@ -7,6 +7,9 @@
     if user && !user.isPremium()
       button.Button.Button--size-lg.Button--fill( disabled )
         | Your current plan
+    else if user && user.isPremium()
+      button.Button.Button--size-lg.Button--fill( disabled )
+        | Join Basic
     else
       a.Button.Button--size-lg.Button--fill( href='/sign_up' )
         | Join Basic
