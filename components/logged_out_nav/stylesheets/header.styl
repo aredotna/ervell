@@ -55,10 +55,13 @@
         > span
           visibility visible
 
-+below(logged-out-nav-breakpoint)
-  .LoggedOutHeader
-    background-color white
-    padding 1em
+// Since the hamburger nav is not present on the index,
+// it's not necessary to toggle out the logo
+html:not([data-path='/'])
+  +below(logged-out-nav-breakpoint)
+    .LoggedOutHeader
+      background-color white
+      padding 1em
 
-    &__logo
-      display none
+      &__logo
+        display none
