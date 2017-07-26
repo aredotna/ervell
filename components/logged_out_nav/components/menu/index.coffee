@@ -50,7 +50,7 @@ module.exports = ({ $el, $sections }) ->
   activate = (id) ->
     $links
       .attr('data-state', 'inactive')
-      .filter("[href='about##{id}']")
+      .filter("[href='/about##{id}']")
       .attr('data-state', 'active')
 
   handler = (direction) ->
