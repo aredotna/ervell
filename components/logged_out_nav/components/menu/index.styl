@@ -50,6 +50,9 @@
         font-weight bold
         color colors-gray-hover
 
+      &:first-child
+        display none
+
   &--active
     .LoggedOutMenu
       &__options
@@ -62,7 +65,7 @@
           &:after
             background-color colors-gray-lighter
 
-+mobile()
++below(logged-out-nav-breakpoint)
   .LoggedOutMenu
     position relative
     top 0
@@ -74,3 +77,6 @@
 
     &__options
       display none
+
+      > a:first-child
+        display block

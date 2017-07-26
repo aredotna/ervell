@@ -7,6 +7,9 @@ nav.LoggedOutMenu.js-logged-out-menu
     //-
 
   .LoggedOutMenu__options.js-options
+    a( href='/' )
+      | Home
+
     a(
       href='/about#top'
       data-state= loggedOutMenuState('top')
@@ -18,12 +21,12 @@ nav.LoggedOutMenu.js-logged-out-menu
     ) Plans and Pricing
 
     a(
-      href=(sd.CURRENT_PATH.indexOf('about') ? '/about#blog' : '/blog')
+      href=(sd.CURRENT_PATH.indexOf('about') !== -1 ? '/about#blog' : '/blog')
       data-state= loggedOutMenuState('blog')
     ) Blog
 
     a(
-      href='/about#store'
+      href=(sd.CURRENT_PATH.indexOf('about') !== -1 ? '/about#store' : 'http://store.are.na/')
       data-state= loggedOutMenuState('store')
     ) Store
 
