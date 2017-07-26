@@ -18,7 +18,7 @@ nav.LoggedOutMenu.js-logged-out-menu
     ) Plans and Pricing
 
     a(
-      href=(sd.CURRENT_PATH.indexOf('about') ? '/about#blog' : '/blog')
+      href=(sd.CURRENT_PATH.indexOf('about') !== -1 ? '/about#blog' : '/blog')
       data-state= loggedOutMenuState('blog')
     ) Blog
 
