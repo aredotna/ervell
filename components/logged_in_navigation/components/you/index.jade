@@ -7,7 +7,7 @@
     )
 
 .Dropdown.js-dropdown
-  .DropdownSection
+  .DropdownSection.DropdownSection--expandable.js-expandable( data-state='active' )
     a.DropdownItem.DropdownItem--primary( href="/#{user.get('slug')}" )
       = user.get('username')
 
@@ -32,7 +32,10 @@
   a.DropdownItem( href='/explore' )
     | Explore
 
-  .DropdownSection
+  .DropdownSection.DropdownSection--expandable.js-expandable
+    a.DropdownItem.DropdownItem--primary( href='/about' )
+      span About
+
     a.DropdownItem.DropdownItem--secondary( href='/about' )
       span About
 
