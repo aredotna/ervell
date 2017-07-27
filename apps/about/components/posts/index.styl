@@ -1,0 +1,32 @@
+.AboutPosts
+  display flex
+  flex-direction row
+  margin 2em 0
+
+.AboutPost
+  flex-basis 33.33%
+  padding 0 1em
+
+  &__cover
+    width 100%
+    padding-bottom 75% // 4:3
+    background-size cover
+    background-position center center
+    background-color colors-gray-background
+
+  > h3
+    font-size font-size-h5
+
+  > p
+    font-size font-size-base
+    line-height line-height-base
+    color colors-gray-light
+
++mobile()
+  .AboutPosts
+    display block
+
+  .AboutPost
+    display block
+    margin 2em 0
+    padding 0

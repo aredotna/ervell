@@ -1,0 +1,82 @@
+.LoggedOutMenu
+  position absolute
+  top 2em
+  left 1em
+  font-size font-size-base
+  line-height line-height-tall
+
+  &__toggle
+    display none
+    position relative
+    cursor pointer
+    width 1.5em
+    height @width
+
+    // Patties
+    > span
+      width 1.5em
+      height 2px
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+
+      &
+      &:before
+      &:after
+        display block
+        position absolute
+        background-color colors-gray-text
+
+      &:before
+      &:after
+        content ''
+        width 100%
+        height 100%
+
+      &:before
+        top 300%
+
+      &:after
+        bottom 300%
+
+  &__options
+    margin-top 1em
+
+    > a
+      display block
+      text-decoration none
+
+      &[data-state='active']
+        font-weight bold
+        color colors-gray-hover
+
+      &:first-child
+        display none
+
+  &--active
+    .LoggedOutMenu
+      &__options
+        display block
+
+      &__toggle
+        > span
+          &
+          &:before
+          &:after
+            background-color colors-gray-lighter
+
++below(logged-out-nav-breakpoint)
+  .LoggedOutMenu
+    position relative
+    top 0
+    left 0
+    background-color white
+
+    &__toggle
+      display block
+
+    &__options
+      display none
+
+      > a:first-child
+        display block

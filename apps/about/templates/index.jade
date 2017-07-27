@@ -6,95 +6,159 @@ block title
 block scripts
   script( src= asset('/assets/about.js') )
 
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
 block container
   include ../../../components/logged_out_nav/templates/header
 
-  .Page
-    h1.PageTitle
-      | About
+  .About.Page.Page--narrow.js-about
+    section.AboutSection.js-section( id='top' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | Tools for Thinking, Together
 
-    .AboutSection
-      .AboutHeroVideo
-        iframe(
-          src='https://player.vimeo.com/video/221811390?autoplay=1&autopause=0'
-          frameborder='0'
-          allowfullscreen
-        )
+      .AboutFeynman
+        include ../public/feynman.svg
 
-    .AboutBlurbs.AboutSection
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Are.na is a platform for organizing your internet.
-        p Are.na is a simple tool for connecting what you find and building knowledge. It’s a space where you can save anything, structure your thinking however you want, and discover new things together.
+      p.Type.Type--lh-tall
+        | Our intention behind Are.na is to build a platform for creative thinking and research that is open to everyone.
 
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Make channels. Add content. Connect ideas.
-        p Channels are collections of content that can hold images, websites, text, videos, and files. Connect anything you want to a channel by dragging a file from your desktop, copying and pasting, or by using our bookmarklet.
+      p.Type.Type--lh-tall
+        | It’s a distraction-free space where you can collect anything, organize your thoughts, and develop ideas over time. It’s also a community where curiosity and collaboration are more important than algorithms and likes.
 
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Explore and collaborate with others.
-        p Are.na is a community of people thinking together. Explore the entire Are.na universe, collaborate on shared channels, or work privately to organize your own thoughts.
+      p.Type.Type--lh-tall
+        | Whether you’re writing a story, designing a product, or just exploring your interests, we believe Are.na should help you think and discover in a way that feels natural. <a href='https://www.are.na/blog/hello%20world/2017/07/06/summer-update.html'>Learn more about our thinking.</a>
 
-    .AboutSection.AboutSection--focus.Constrain.Constrain--narrow
-      h2.Type.Utility--align-center
-        | Connect information, together
+      unless user
+        .AboutSection__buttons
+          a.Button( href='/sign_up' )
+            | Join Are.na
 
-      p.Type.Utility--align-center
-        img( src='images/feynman-arena.svg', )
+    section.AboutSection.js-section
+      h2.Type.Type--size-h2.Utility--align-center
+        | Your Ideas, Your Data
 
-      p.Type
-        | Our intention behind Are.na is to build a platform that helps people continually recontextualize information into new ideas and help us all understand the vast amount information we face on a daily basis.
-      p.Type
-        | As a society, we should think about what mainstream tools we have for unpacking our own perspectives. Is &ldquo;sharing&rdquo; enough? &ldquo;Likes&rdquo;? What happens to the things you shared last year? And how can the tools we build today help you understand how your thinking has changed over time?
+      p.Type.Type--lh-tall
+        | Are.na is powered by members, not advertisers. We will never display ads and we will never hand over your data without your explicit permission.
 
-    .AboutBlurbs.AboutSection
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Team
-        p.Type
-          a( href='/charles-broskoski')
-            | Charles Broskoski
+      p.Type.Type--lh-tall
+        | Premium members help us improve Are.na and make the platform accessible to everyone. Consider signing up for a yearly membership in order to access extra tools and privacy options.
+
+      unless user && user.isPremium()
+        .AboutSection__buttons
+          a.Button( href='/about#pricing' )
+            | Join Premium
+
+    section.AboutSection.js-section( id='labs' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | Are.na Labs
+
+      p.Type.Type--lh-tall
+        | We work with creative teams, institutions, and brands to develop custom digital projects powered by the Are.na API.
+
+      include ../components/lab_posts/index
+
+      .AboutSection__buttons
+        a.Button( href='mailto:info@are.na' )
+          | Work with us
+
+        a.Button( href='https://dev.are.na/documentation/channels' )
+          | Browse the API
+
+    section.AboutSection.js-section
+      h2.Type.Type--size-h2.Utility--align-center
+        | Team and Collaborators
+
+      p.Type.Type--lh-tall.Utility--align-center
+        a( href='/charles-broskoski' )
+          | Charles Broskoski
           br
-          a( href='/daniel-pianetti')
-            | Daniel Pianetti
+        a( href='/daniel-pianetti' )
+          | Daniel Pianetti
           br
-          a( href='/chris-sherron')
-            | Chris Sherron
+        a( href='/chris-sherron' )
+          | Chris Sherron
           br
-          a( href='/damon-zucconi')
-            | Damon Zucconi
+        a( href='/damon-zucconi' )
+          | Damon Zucconi
           br
-          a( href='/christopher-barley' )
-            | Chris Barley
+        a( href='/christopher-barley' )
+          | Chris Barley
           br
-          a( href='/meg-miller' )
-            | Meg Miller (Blog Editor)
+        a( href='/christina-badal' )
+          | Christina Badal
+          br
+        a( href='/leo-shaw' )
+          | Leo Shaw
+          br
+        a( href='/meg-miller' )
+          | Meg Miller
 
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Labs
-        p.Type
-          | The Are.na team offers development and API consulting for professional applications.
-        p.Type
-          | We recently launched a beta version of a tool for exploring hypertext connections called <a href='http://pilgrim.are.na' target='_blank'>Pilgrim</a>, with generous support from the <a href='http://knightfoundation.org' target='_blank'>Knight Foundation</a>.
-        p.Type
-          | Before that, our most recent collaboration was with the <a href='http://guggenheim.org' target='_blank'>Guggenheim Museum</a> to build the <a href='http://azone.guggenheim.org/' target='_blank'>Azone Futures Market</a>.
+    section.AboutSection.js-section( id='pricing' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | Plans and Pricing
 
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Transparency
-        p.Type
-          | We value transparency and we aim at being self-sustainable. We will never sell data without explicit authorization from the user. We will never display ads or join an ad network.
-        p.Type
-          | We partly rely on our <a href='/pricing'>Premium</a> users who have access to a series of extra features for a yearly subscription.
+      p.Type.Type--lh-tall
+        | Everyone can join Are.na for free and add unlimited public content. Becoming a Premium member allows you to work in complete privacy on personal or professional projects, and gives you early access to new products and features.
 
-      .AboutBlurbs__blurb
-        h5.Type
-          strong Contact
-        p.Type
-          | Questions? <a href='mailto:everyone@are.na'>We&rsquo;d love to hear from you.</a>
+      include ../components/pricing_table/index
 
-block footer
-  include ../../../components/logged_out_nav/templates/footer
+    section.AboutSection.js-section( id='blog' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | Blog
+
+      p.Type.Type--lh-tall
+        | See what the Are.na community is thinking about and how members are using Are.na in their own creative projects.
+
+      include ../components/blog_posts/index
+
+      .AboutSection__buttons
+        a.Button( href='/blog' )
+          | Read more&hellip;
+
+    section.AboutSection.js-section( id='store' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | Store
+
+      include ../components/store_posts/index
+
+      .AboutSection__buttons
+        a.Button( href='http://store.are.na/' )
+          | Go to store
+
+    section.AboutSection.js-section( id='contact' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | Contact
+
+      p.Type.Type--size-h4.Type--lh-tall.Utility--align-center
+        | Questions? <a href='mailto:info@are.na'>We’d love to hear from you.</a>
+
+      p.Type.Type--size-h4.Type--lh-tall.Utility--align-center
+        a( href='https://twitter.com/aredotna' )
+          | twitter.com/aredotna
+        br
+        a( href='https://instagram.com/aredotna' )
+          | instagram.com/aredotna
+
+    section.AboutSection.js-section( id='faqs' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | FAQs
+
+      p.Type.Type--lh-tall
+        strong What should I use Are.na for? Why should I use it instead of other bookmarking and organization tools?
+
+      p.Type.Type--lh-tall
+        | People who use Are.na as a daily tool appreciate the dynamism between private and public collaboration. Content is easily connected between different topics and channels, resulting in discovery of information and organic archives.
+
+      p.Type.Type--lh-tall
+        | Play around for a while: adding content, connecting and discovering users is the best way to find out the platform's qualities.
+
+      p.Type.Type--lh-tall
+        strong I'm lost, not sure how to use Are.na, can you help?
+
+      p.Type.Type--lh-tall
+        | You can explore to see how other people use it, ask questions in the feedback channel, look at the getting started page or contact us.
+
+      .AboutSection__buttons
+        a.Button.js-more-faqs( href='/faqs' )
+          | More FAQs

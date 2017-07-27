@@ -1,15 +1,15 @@
 if tips && tips.length
   .Tips.js-tips
-    h4.Type
+    h4.Type.Type--size-h4
       | This is your profile.
       | Here's what you can do to get started:
 
     .Tips__tips
       for tip in tips
         a.Tip.js-tip(
-          href= tip.href
-          data-id= tip.id
-          data-trigger= tip.trigger
+          href=tip.href
+          data-id=tip.id
+          data-trigger=tip.trigger
         )
           .Tip__title
             = tip.title

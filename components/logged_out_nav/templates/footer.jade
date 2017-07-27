@@ -1,9 +1,16 @@
 footer.LoggedOutFooter
-  a( href='/about' ) About
-  a( href='/blog' ) Blog
-  a( href='/pricing' ) Pricing
-  a( href='/faqs' ) FAQs
-  a( href='http://store.are.na' ) Store
-  a( href='https://twitter.com/AREdotNA' ) Twitter
-  a( href='/terms' ) Terms
-  a( href='/privacy' ) Privacy
+  unless sd.CURRENT_PATH.indexOf('/about') > -1
+    a( href='/about' )
+      | About
+
+  a( href='/about#labs' )
+    | Work With Us
+
+  a( href='https://dev.are.na/documentation/channels' )
+    | API
+
+  a( href='/terms' )
+    | Terms
+
+  a( href='/privacy' )
+    | Privacy

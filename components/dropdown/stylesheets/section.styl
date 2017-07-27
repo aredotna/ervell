@@ -11,3 +11,38 @@
   > .DropdownItem
     border-bottom none
     margin 0
+
+  &--expandable
+    > .DropdownItem--primary
+      &:before
+      &:after
+        content ''
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        background-color colors-gray-text
+
+      x = base-font-size // 1em
+
+      // Horizontal bar of "+"
+      &:before
+        height 2px
+        width (x / 2)
+        right x
+
+      // Vertical bar of "+"
+      &:after
+        height (x / 2)
+        width 2px
+        right x + (x / 4) - 1
+
+    > .DropdownItem--secondary
+      display none
+
+    &[data-state='active']
+      // Turn "+" into "-"
+      > .DropdownItem--primary:after
+        display none
+
+      > .DropdownItem--secondary
+        display block

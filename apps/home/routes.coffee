@@ -1,13 +1,13 @@
-{ shuffle } = require 'underscore'
+{ shuffle, extend } = require 'underscore'
 { API_URL } = require('sharify').data
 { DEMO_USER_AUTH_TOKEN } = process.env
-GQL = require '../../lib/graphql'
+graphQL = require '../../lib/graphql'
 cached = require '../../lib/cached'
 
 @index = (_req, res, next) ->
   # Caches for 24 hours
   cached 'homepage:demo-blocks', 86400, ->
-    send =
+    graphQL
       token: DEMO_USER_AUTH_TOKEN
       query: """
         {
@@ -21,12 +21,16 @@ cached = require '../../lib/cached'
         #{require '../../components/block_v2/queries/block'}
       """
 
-    GQL send
+  .catch (->) # Ignore query errors
 
-  .then ({ channel: { blocks }}) ->
-    res.locals.sd.DEMO_BLOCKS = demoBlocks = shuffle blocks
+  .then (response) ->
+    locals = {}
 
-    res.render 'index',
-      demoBlocks: demoBlocks
+    if response?
+      { channel: { blocks } } = response
+      res.locals.sd.DEMO_BLOCKS = demoBlocks = shuffle blocks
+      extend locals, demoBlocks: demoBlocks
+
+    res.render 'index', locals
 
   .catch next
