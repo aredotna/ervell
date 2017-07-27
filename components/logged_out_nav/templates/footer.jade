@@ -1,6 +1,7 @@
 footer.LoggedOutFooter
-  a( href='/about' )
-    | About
+  unless sd.CURRENT_PATH.indexOf('/about') > -1
+    a( href='/about' )
+      | About
 
   a( href='/about#labs' )
     | Work With Us
