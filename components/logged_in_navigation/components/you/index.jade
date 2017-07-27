@@ -20,6 +20,12 @@
     a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/index" )
       span Index
 
+    a.DropdownItem.DropdownItem--secondary( href='/settings' )
+      span Settings
+
+    a.DropdownItem.DropdownItem--secondary.js-log-out( href='/me/sign_out' )
+      span Log Out
+
   a.DropdownItem( href='/feed' )
     | Feed
 
@@ -27,18 +33,22 @@
     | Explore
 
   .DropdownSection
-    a.DropdownItem.DropdownItem--secondary( href='/tools' )
-      span Tools
-
     a.DropdownItem.DropdownItem--secondary( href='/about' )
-      span About &amp; FAQ
+      span About
 
-    a.DropdownItem.DropdownItem--secondary( href='/settings' )
-      span Settings
+    a.DropdownItem.DropdownItem--secondary( href='/blog' )
+      span Blog
 
-    unless user.isPremium()
-      a.DropdownItem.DropdownItem--secondary.Color--state-premium( href='/settings/billing' )
-        span Upgrade to Premium
+    a.DropdownItem.DropdownItem--secondary( href='http://store.are.na/' )
+      span Store
 
-    a.DropdownItem.DropdownItem--secondary.js-log-out( href='/me/sign_out' )
-      span Log Out
+    a.DropdownItem.DropdownItem--secondary( href='/about#faqs' )
+      span Help / FAQs
+
+    a.DropdownItem.DropdownItem--secondary( href='/about#contact' )
+      span Contact
+
+  unless user.isPremium()
+    .DropdownSection
+      a.DropdownItem.DropdownItem--primary.Color--state-premium( href='/about#pricing' )
+        span Premium Membership
