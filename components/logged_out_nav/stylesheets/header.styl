@@ -65,3 +65,8 @@ html:not([data-path='/'])
 
       &__logo
         display none
+
+// No hiding shenanigans when we're logged in
+html[data-logged-in]
+  .LoggedOutHeader__cta > a
+    visibility visible
