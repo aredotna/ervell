@@ -11,6 +11,9 @@
     a.DropdownItem.DropdownItem--primary( href="/#{user.get('slug')}" )
       = user.get('username')
 
+    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}" )
+      span Profile
+
     a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/channels" )
       span Channels
 
