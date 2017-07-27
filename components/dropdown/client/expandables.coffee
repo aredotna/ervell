@@ -23,7 +23,9 @@ init = ($el) ->
 
   $el.attr 'data-state', currentState
 
-  $el.on 'click', (e) ->
+  $links = $el.find 'a'
+
+  $links.first().on 'click', (e) ->
     e.preventDefault()
     e.stopPropagation()
 
