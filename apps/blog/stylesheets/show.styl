@@ -28,10 +28,10 @@
         font-weight bold
 
     > .post-content
-      //
+      margin-bottom 8em
 
       p
-        collapsed-margins(1em)
+        collapsed-margins(2em)
         font-size font-size-base
         line-height line-height-tall
 
@@ -41,16 +41,24 @@
       img
       iframe
         display block
-        max-width 100%
+        max-width 500px
         vertical-align bottom
-        border 1px solid colors-gray-border
         margin 2em auto
 
+      img 
+        margin 4em auto
+        max-width 100%
+
       .arena-iframe
+        border 1px solid colors-gray-border
         box-shadow 4px 4px 4px colors-gray-background
         height 2150px !important
+        margin 4em
         padding 1px
 
+        +mobile()
+          margin 4em 0
+          min-width 100%
         +below(400px)
           height 2000px !important
         +below(380px)
