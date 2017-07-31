@@ -1,6 +1,5 @@
 header#layout-header
-  .layout-header__search
-    include ../../../search_bar/templates/index
+  include ../../../search_bar/templates/index
 
   if user && user.has('username')
     include ../../../logged_in_navigation/index

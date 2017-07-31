@@ -1,10 +1,17 @@
-input#layout-header__search__input(type="text" placeholder="Search Are.na")
-.header--icon
-  .glass-icon
-    include ../../../public/images/iconic/magnifying-glass.svg
-  .logo-icon
-    a(href=homeHref)
-      include ../../../public/images/arena-mark.svg
-.layout-header__search__close.pointer &times;
-.layout-header__search__results
-  //- rendered by client
+.LayoutHeaderSearch.js-layout-header-search
+  .LayoutHeaderIcon
+    a.LayoutHeaderIcon__logo( href= homeHref )
+      include ../../primary_icon/index
+
+      .LayoutHeaderIcon__search
+        include ../../../public/images/search.svg
+
+  input.Input.js-layout-header-search-input(
+    placeholder='Search Are.na'
+  )
+
+  //- .layout-header__search__close.pointer.js-layout-header-search
+  //-   | &times;
+
+  .LayoutHeaderSearch__results.js-layout-header-search-results
+    //- Rendered client-side
