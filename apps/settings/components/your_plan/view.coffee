@@ -37,6 +37,7 @@ module.exports = class YourPlanView extends Backbone.View
 
   render: ->
     @$el.html template
+      user: @user
       customer: @model
 
     @postRender()
