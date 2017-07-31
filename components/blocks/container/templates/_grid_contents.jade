@@ -1,5 +1,13 @@
 if can && can.add_to
   include ../../grid_item/templates/types/new_block
 
+else if channel.get('status') === 'private'
+  //- If we can't add to the channel but it's private then that means
+  //- the user needs to upgrade to premium to add to it
+  //-
+  //- The reason this only exists in grid view is because
+  //- list view is premium-only so this will never be seen in that view mode.
+  include ../../../premium_cta_block/index
+
 for block in blocks
   include ../../grid_item/templates/block
