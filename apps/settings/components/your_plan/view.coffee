@@ -15,6 +15,12 @@ module.exports = class YourPlanView extends Backbone.View
 
   initialize: ({ @user }) ->
     @listenTo @model, 'change:plan_id', @render
+    @listenTo @model, 'change:plan_id', @updateQueryString
+
+  updateQueryString: (_model, plan_id) ->
+    return unless plan_id?
+    base = [location.protocol, '//', location.host, location.pathname].join ''
+    window.history.pushState null, null, "#{base}?plan_id=#{plan_id}"
 
   selectPlan: (e) ->
     e.preventDefault()
