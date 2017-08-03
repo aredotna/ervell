@@ -1,6 +1,7 @@
 { extend } = require 'underscore'
 { API_URL } = require('sharify').data
 Model = require './base.coffee'
+Coupon = require './coupon.coffee'
 Sources = require '../collections/sources.coffee'
 Subscriptions = require '../collections/subscriptions.coffee'
 Moment = require './mixins/moment.coffee'
@@ -20,6 +21,7 @@ module.exports = class Customer extends Model
   related: ->
     return @__related__ if @__related__?
 
+    coupon = new Coupon
     sources = new Sources(@get('sources'))
     subscriptions = new Subscriptions(@get('subscriptions'))
 
@@ -27,3 +29,4 @@ module.exports = class Customer extends Model
       sources: sources
       subscriptions: subscriptions
       subscription: subscriptions.first()
+      coupon: coupon
