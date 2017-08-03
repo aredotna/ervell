@@ -1,13 +1,16 @@
 Promise = require 'bluebird-q'
 Backbone = require 'backbone'
-{ extend } = require 'underscore'
+{ extend, invoke } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
 { track, en } = require '../../../../lib/analytics.coffee'
 styles = require './lib/styles.coffee'
+CouponCodeView = require '../coupon_code/view.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class PaymentMethodsView extends Backbone.View
   className: 'payment-methods'
+
+  subViews: []
 
   events:
     'click .js-add': 'addPaymentMethod'
@@ -120,10 +123,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     @getToken(@card)
       .then (token) =>
-        subscription = @model.related().subscriptions.add
+        attrs =
           token: token.id
           plan_id: @model.get('plan_id')
 
+        if (coupon = @model.related().coupon.get('code')) isnt ''
+          extend attrs, coupon: coupon
+
+        subscription = @model.related().subscriptions.add attrs
         subscription.save()
 
       .then =>
@@ -188,6 +195,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
       card: @$('.js-card-element')
       errors: @$('.js-form-errors')
 
+    @subViews = [
+      @couponCodeView = new CouponCodeView
+        el: @$('.js-coupon-code')
+        model: @model.related().coupon
+    ]
+
+    @couponCodeView.render()
+
     # Pass Stripe Element our default input style
     valid = ['color', 'font-size', 'font-family']
     placeholder = '::placeholder': color: lightgray = '#9D9D9D'
@@ -218,4 +233,7 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
   remove: ->
     @card.unmount()
+
+    invoke @subViews, 'remove'
+
     super
