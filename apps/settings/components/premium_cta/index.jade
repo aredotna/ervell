@@ -1,11 +1,23 @@
-h3 Premium features you&rsquo;re missing out on
+if user.get('is_premium')
+  h3 Premium features
+else
+  h3 Premium features you&rsquo;re missing out on
+
+p
+  strong Privacy
 
 ul
-  li Unlimited Private Blocks
+  li Unlimited private blocks
   li Hide from search engines
+
+p
+  strong Access
+
+ul
   li Early access to new products and features (mobile app coming Fall 2017)
   li Custom research support and consultation session
 
-.premium-cta__submit
-  button.Button.Button--divider.js-cta
-    | Register for Premium
+unless user.get('is_premium')
+  .premium-cta__submit
+    button.Button.Button--divider.js-cta
+      | Register for Premium
