@@ -1,6 +1,6 @@
 form
   if customer.related().sources.length > 0
-    h3 Payment Methods
+    h3 Payment methods
 
     table.payment-methods__cards: tbody
       each source in customer.related().sources.models
@@ -16,26 +16,35 @@ form
               span Default
             else
               a.js-default( data-id= source.id )
-                | Make Default
+                | Make default
 
           td.payment-method__remove
             a.js-remove( data-id= source.id )
               | Remove
 
+  if customer.requiresPayment() && !customer.get('is_canceled')
+    h3 Coupon
+
+    .Fieldset.js-coupon-code
+      include ../coupon_code/index
+
   //- Has card on file aready
   if customer.requiresPayment() && !customer.requiresPaymentMethod() && !customer.get('is_canceled')
     button.Button.Button--divider.js-submit.js-charge
-      | Pay
+      | Upgrade to Premium (using #{customer.defaultSource().get('last4')})
 
   else if customer.requiresPayment() && !customer.requiresPaymentMethod() && customer.get('is_canceled')
     button.Button.Button--divider.js-submit.js-reenable
-      | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
+      | Continue my Premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
       | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
   .form-card__errors.js-form-errors
     //- Rendered client-side
 
-  h3 Card Info
+  if customer.related().sources.length > 0
+    h3 Add another payment source
+  else
+    h3 Card info
 
   .Fieldset
     .Input.js-card-element
@@ -43,13 +52,13 @@ form
 
   if customer.requiresPayment() && customer.requiresPaymentMethod() && !customer.get('is_canceled')
     button.Button.Button--divider.js-submit.js-charge
-      | Pay
+      | Upgrade to Premium
 
   else if customer.requiresPayment() && customer.requiresPaymentMethod() && customer.get('is_canceled')
     button.Button.Button--divider.js-submit.js-reenable
-      | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
+      | Continue my Premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
       | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
   else
     button.Button.Button--divider.js-submit.js-add
-      | Add New Card
+      | Add new card
