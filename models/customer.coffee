@@ -18,6 +18,9 @@ module.exports = class Customer extends Model
   requiresPaymentMethod: ->
     @requiresPayment() and @related().sources.length is 0
 
+  defaultSource: ->
+    @related().sources.get(@get 'default_source')
+
   related: ->
     return @__related__ if @__related__?
 
