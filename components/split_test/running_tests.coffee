@@ -15,8 +15,9 @@
 # module.exports = {}
 
 module.exports =
-  homepage_slogan:
-    key: 'homepage_slogan'
+  homepage_splash:
+    key: 'homepage_splash'
     outcomes:
-      platform: 100
-    dimension: 'dimension4'
+      video: 50
+      connect: 50
+    dimension: 'dimension5'

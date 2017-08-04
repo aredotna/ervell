@@ -38,7 +38,8 @@ module.exports = ->
       $demoBlock.html $next
     DEMO_BLOCKS.push block
 
-  setInterval changeBlock, 500
+  if DEMO_BLOCKS
+    setInterval changeBlock, 500
 
   # Intercept block clicks and open in new tab
   $demoBlock.on 'click', (e) ->
