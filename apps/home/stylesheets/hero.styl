@@ -38,3 +38,21 @@
     top (block_width / 2)
     left 50%
     transform translate(-50%, -50%)
+
+  &__video
+    width 60%
+    position relative
+    +tablet()
+      width 90%
+    +mobile()
+      width 90%
+    > span
+      border 1px solid colors-gray-border
+      display block
+      ratio-box(960 / 540)
+      > iframe
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
