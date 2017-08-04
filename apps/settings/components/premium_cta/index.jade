@@ -1,43 +1,34 @@
-//- TODO: [premium_2] Refactor out isEligibleForFreeYear
+//- TODO: [premium_2] Delete
+//- TODO: Insert links to, as of yet unwritten, blog posts
 
-if user.isEligibleForFreeYear()
-  h5.Type.Type--size-h5
-    span.Color--state-premium
-      | Congrats, you&rsquo;re eligible for 1 year of FREE Premium.
+if user.get('is_premium')
+  section.Section
+    h5.Type.Type--size-h5: span.Color--state-premium
+      | Announcing new plan structures
 
-  p.Type.Type--lh-tall
-    span.Color--state-premium
-      | Since you&rsquo;re affected by Are.na&rsquo;s new pricing,
-      | we want to make the transition a little easier.
-      | Upgrade to Premium below, and use the code FREEYEAR.
-
-else
-  h5.Type.Type--size-h5
-    span.Color--state-premium
-      if user.get('is_premium')
-        | Premium features
-      else
-        | Premium features you’re missing out on
-
-  p.Type
-    strong.Color--state-premium Privacy
-
-  ul.Type
-    li.Color--state-premium
-      | Unlimited private blocks
-    li.Color--state-premium
-      | Hide from search engines
-
-  p.Type
-    strong.Color--state-premium Access
-
-  ul.Type
-    li.Color--state-premium
-      | Early access to new products and features (mobile app coming Fall 2017)
-    li.Color--state-premium
-      | Custom research support and consultation session
+    p.Type.Type--lh-tall: span.Color--state-premium
+      | Starting on August 23, Are.na is changing the way Basic and Premium plans work. Among other changes, free users will be limited to 100 total private blocks. Premium members will have all the same tools and features, along with early access to the new mobile app and additional support. To learn more about how plans and pricing are changing, visit here.
 
 unless user.get('is_premium')
+  if user.isEligibleForFreeYear()
+    h5.Type.Type--size-h5: span.Color--state-premium
+      | Congrats, you&rsquo;re eligible for 1 year of FREE Premium.
+
+    p.Type.Type--lh-tall: span.Color--state-premium
+      | Starting on August 23, Are.na is changing the way Basic and Premium plans work (learn more here). Among other changes, free users will be limited to 100 total private blocks. Since you’re affected by Are.na’s new pricing, we want to make the transition a little easier. Upgrade to Premium below, and use the code FREEYEAR.
+
+  else
+    h5.Type.Type--size-h5: span.Color--state-premium
+      | Congrats, you’re eligible for 1 month of FREE Premium.
+
+    p.Type.Type--lh-tall: span.Color--state-premium
+      | Starting on August 23, Are.na is changing the way Basic and Premium plans work (learn more here). Among other changes, free users will be limited to 100 total private blocks. You’re not affected right now, but if you reach the limit we want to make the transition a little easier. Upgrade to Premium below, and use the code FREEMONTH.
+
+  p.Type: strong.Color--state-premium
+    | Premium Features
+
+  include ./features
+
   button.Button.Button--divider.Color--state-premium.js-cta(
-    data-coupon= (user.isEligibleForFreeYear() ? 'freeyear' : '')
+    data-coupon= (user.isEligibleForFreeYear() ? 'freeyear' : 'freemonth')
   ) Upgrade to Premium

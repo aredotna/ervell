@@ -14,5 +14,3 @@ module.exports = ($el, { customer }) ->
 
       code = $(this).data 'coupon'
       customer.related().coupon.set code: code
-
-      $el.remove()
