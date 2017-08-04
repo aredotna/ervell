@@ -1,52 +1,51 @@
-.form-card
-  .form-card__errors.js-form-errors
-    //- Rendered client-side
+.Errors.js-form-errors
+  //- Rendered client-side
 
-  .form-card__fields
-    .Fieldset
-      h3
-        //- Either premium or basic and hasn't selected a plan yet
-        if customer.get('is_premium') || !customer.has('plan_id')
-          | Current plan
-        else
-          | Choose plan
+.Fieldset
+  h5.Type.Type--size-h5
+    //- Either premium or basic and hasn't selected a plan yet
+    if customer.get('is_premium') || !customer.has('plan_id')
+      | Current plan
+    else
+      | Choose plan
 
-      //- Just displays "Premium"
-      if customer.get('is_premium')
-        .Select.Select--fill( disabled )
-          select( name='plan', disabled )
-            option(
-              value= customer.get('plan_id')
-              selected
-            ) Premium
+  //- Just displays "Premium"
+  if customer.get('is_premium')
+    .Select.Select--fill( disabled )
+      select( name='plan', disabled )
+        option(
+          value= customer.get('plan_id')
+          selected
+        ) Premium
 
+  else
+    .Select.Select--fill
+      select( name='plan' )
+        option(
+          value='free'
+          selected= (!customer.get('plan_id')) ? 'selected' : null
+        ) Basic
+
+        option(
+          value='monthly_premium'
+          selected= (customer.get('plan_id') === 'monthly_premium') ? 'selected' : null
+        ) Premium $5 / month
+
+        option(
+          value='premium_1'
+          selected= (customer.get('plan_id') === 'premium_1') ? 'selected' : null
+        ) Premium $45 / year
+
+  if customer.get('is_premium') && !customer.get('is_lifetime')
+    p.Type.Type--size-xs.Utility--align-right
+      if customer.get('is_canceled')
+        | Your plan will end on #{customer.formatDate('current_period_end_at', 'MM/DD/YY')}.
       else
-        .Select.Select--fill
-          select( name='plan' )
-            option(
-              value='free'
-              selected= (!customer.get('plan_id')) ? 'selected' : null
-            ) Basic
+        | Your plan will automatically renew on #{customer.formatDate('current_period_end_at', 'MM/DD/YY')}.
 
-            option(
-              value='monthly_premium'
-              selected= (customer.get('plan_id') === 'monthly_premium') ? 'selected' : null
-            ) Premium $5 / month
+//- TODO: Should this be moved up a level (template/view-wise)?
+if customer.has('plan_id') && !customer.get('is_lifetime')
+  section.js-payment-methods
+    include ../payment_methods/index
 
-            option(
-              value='premium_1'
-              selected= (customer.get('plan_id') === 'premium_1') ? 'selected' : null
-            ) Premium $45 / year
-
-      if customer.get('is_premium') && !customer.get('is_lifetime')
-        p.Type.Type--size-xs.Utility--align-right
-          if customer.get('is_canceled')
-            | Your plan will end on #{customer.formatDate('current_period_end_at', 'MM/DD/YY')}.
-          else
-            | Your plan will automatically renew on #{customer.formatDate('current_period_end_at', 'MM/DD/YY')}.
-
-    if customer.has('plan_id') && !customer.get('is_lifetime')
-      .payment-methods.js-payment-methods
-        include ../payment_methods/index
-
-    include ../private_connections_counter/index
+include ../private_connections_counter/index

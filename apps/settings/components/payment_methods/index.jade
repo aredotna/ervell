@@ -1,6 +1,7 @@
 form
   if customer.related().sources.length > 0
-    h3 Payment methods
+    h5.Type.Type--size-h5
+      | Payment methods
 
     table.payment-methods__cards: tbody
       each source in customer.related().sources.models
@@ -23,7 +24,8 @@ form
               | Remove
 
   if customer.requiresPayment() && !customer.get('is_canceled')
-    h3 Coupon
+    h5.Type.Type--size-h5
+      | Coupon
 
     .Fieldset.js-coupon-code
       include ../coupon_code/index
@@ -38,13 +40,14 @@ form
       | Continue my Premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
       | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
 
-  .form-card__errors.js-form-errors
+  .Errors.js-form-errors
     //- Rendered client-side
 
-  if customer.related().sources.length > 0
-    h3 Add another payment source
-  else
-    h3 Card info
+  h5.Type.Type--size-h5
+    if customer.related().sources.length > 0
+      | Add another payment source
+    else
+      | Card info
 
   .Fieldset
     .Input.js-card-element
