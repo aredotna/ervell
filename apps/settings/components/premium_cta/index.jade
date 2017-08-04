@@ -1,23 +1,43 @@
-if user.get('is_premium')
-  h3 Premium features
+//- TODO: [premium_2] Refactor out isEligibleForFreeYear
+
+if user.isEligibleForFreeYear()
+  h5.Type.Type--size-h5
+    span.Color--state-premium
+      | Congrats, you&rsquo;re eligible for 1 year of FREE Premium.
+
+  p.Type.Type--lh-tall
+    span.Color--state-premium
+      | Since you&rsquo;re affected by Are.na&rsquo;s new pricing,
+      | we want to make the transition a little easier.
+      | Upgrade to Premium below, and use the code FREEYEAR.
+
 else
-  h3 Premium features you&rsquo;re missing out on
+  h5.Type.Type--size-h5
+    span.Color--state-premium
+      if user.get('is_premium')
+        | Premium features
+      else
+        | Premium features you’re missing out on
 
-p
-  strong Privacy
+  p.Type
+    strong.Color--state-premium Privacy
 
-ul
-  li Unlimited private blocks
-  li Hide from search engines
+  ul.Type
+    li.Color--state-premium
+      | Unlimited private blocks
+    li.Color--state-premium
+      | Hide from search engines
 
-p
-  strong Access
+  p.Type
+    strong.Color--state-premium Access
 
-ul
-  li Early access to new products and features (mobile app coming Fall 2017)
-  li Custom research support and consultation session
+  ul.Type
+    li.Color--state-premium
+      | Early access to new products and features (mobile app coming Fall 2017)
+    li.Color--state-premium
+      | Custom research support and consultation session
 
 unless user.get('is_premium')
-  .premium-cta__submit
-    button.Button.Button--divider.js-cta
-      | Register for Premium
+  button.Button.Button--divider.Color--state-premium.js-cta(
+    data-coupon= (user.isEligibleForFreeYear() ? 'freeyear' : '')
+  ) Upgrade to Premium
