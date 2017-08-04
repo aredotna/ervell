@@ -26,7 +26,9 @@ module.exports = class PaymentMethodsView extends Backbone.View
   tokenizeCard: (card) ->
     @stripe.createToken(card)
       .then ({ token, error }) =>
-        return Promise.reject(error) if error
+        if error?
+          error.responseJSON = {}
+          return Promise.reject(error)
         token
 
   clearErrors: ->
@@ -36,7 +38,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
     if @complete or (not @model.has('default_source'))
       @stripe.createToken(card)
         .then ({ token, error }) =>
-          return Promise.reject(error) if error
+          if error?
+            error.responseJSON = {}
+            return Promise.reject(error)
+
           token
     else
       Promise.resolve(id: @model.get('default_source'))
@@ -148,11 +153,12 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .catch ({ responseJSON: { message, description }}) =>
         $target
           .prop 'disabled', false
-          .text message
+          .text message or label
 
-        @els.errors
-          .show()
-          .text description
+        if description?
+          @els.errors
+            .show()
+            .text description
 
     track.click en.PREMIUM_CHARGE_INITIATED,
       label: 'Plan type'
@@ -184,11 +190,12 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .catch ({ responseJSON: { message, description }}) =>
         $target
           .prop 'disabled', false
-          .text message
+          .text message or label
 
-        @els.errors
-          .show()
-          .text description
+        if description?
+          @els.errors
+            .show()
+            .text description
 
   postRender: ->
     @els =
