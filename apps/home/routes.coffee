@@ -1,5 +1,5 @@
 { shuffle, extend } = require 'underscore'
-{ API_URL } = require('sharify').data
+{ API_URL, HOMEPAGE_SPLASH } = require('sharify').data
 { DEMO_USER_AUTH_TOKEN } = process.env
 graphQL = require '../../lib/graphql'
 cached = require '../../lib/cached'
@@ -31,6 +31,7 @@ cached = require '../../lib/cached'
       res.locals.sd.DEMO_BLOCKS = demoBlocks = shuffle blocks
       extend locals, demoBlocks: demoBlocks
 
+    extend locals, splash: res.locals.sd.HOMEPAGE_SPLASH
     res.render 'index', locals
 
   .catch next
