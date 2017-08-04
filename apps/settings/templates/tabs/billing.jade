@@ -8,12 +8,13 @@ block content
     | Plan &amp; Billing
 
   .tab-content__frame
-    .your-plan.js-your-plan
-      include ../../components/your_plan/index
+    .Narrow
+      section.Section.js-premium-cta
+        include ../../components/premium_cta/index
 
-    .premium-cta.js-premium-cta
-      include ../../components/premium_cta/index
+      section.Section.js-your-plan
+        include ../../components/your_plan/index
 
-    if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
-      .cancel-plan.js-cancel-plan
-        include ../../components/cancel_plan/index
+      if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
+        section.Section.js-cancel-plan
+          include ../../components/cancel_plan/index
