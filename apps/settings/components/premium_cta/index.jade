@@ -1,13 +1,43 @@
-h3 Premium features you&rsquo;re missing out on
+//- TODO: [premium_2] Refactor out isEligibleForFreeYear
 
-ul
-  li Quick search
-  li Channel mute
-  li List view
-  li Hide from search engines
-  li Channel management tool
-  li Custom profile info
+if user.isEligibleForFreeYear()
+  h5.Type.Type--size-h5
+    span.Color--state-premium
+      | Congrats, you&rsquo;re eligible for 1 year of FREE Premium.
 
-.premium-cta__submit
-  button.Button.Button--divider.js-cta
-    | Register for Premium
+  p.Type.Type--lh-tall
+    span.Color--state-premium
+      | Since you&rsquo;re affected by Are.na&rsquo;s new pricing,
+      | we want to make the transition a little easier.
+      | Upgrade to Premium below, and use the code FREEYEAR.
+
+else
+  h5.Type.Type--size-h5
+    span.Color--state-premium
+      if user.get('is_premium')
+        | Premium features
+      else
+        | Premium features you’re missing out on
+
+  p.Type
+    strong.Color--state-premium Privacy
+
+  ul.Type
+    li.Color--state-premium
+      | Unlimited private blocks
+    li.Color--state-premium
+      | Hide from search engines
+
+  p.Type
+    strong.Color--state-premium Access
+
+  ul.Type
+    li.Color--state-premium
+      | Early access to new products and features (mobile app coming Fall 2017)
+    li.Color--state-premium
+      | Custom research support and consultation session
+
+unless user.get('is_premium')
+  button.Button.Button--divider.Color--state-premium.js-cta(
+    data-coupon= (user.isEligibleForFreeYear() ? 'freeyear' : '')
+  ) Upgrade to Premium

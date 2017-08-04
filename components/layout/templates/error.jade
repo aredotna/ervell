@@ -2,16 +2,24 @@ extends ../../../components/layout/index
 
 block body
   include ./error_path
-  .is-empty
-    .grid.grid--channel.flex-container
-    .channel-empty
-      if code == 404
-        h2 Page not found.
-      else if code == 500
-        h2 Something went wrong, please contact #[a(href="mailto:info@are.na") info@are.na] if the problem persists.
+
+  .Page
+    case code
+      when 404
+        h2.Type.Type--size-h4
+          | Page not found.
+
+      when 500
+        h2.Type.Type--size-h4
+          | Something went wrong, please contact #[a( href="mailto:info@are.na" ) info@are.na] if the problem persists.
+
         if detail
-          pre= detail
-      else if code == 401
-        h2 You do not have permission to access this private channel.
-        if !user
-          h2 Maybe you need to #[a(href="/log_in") log in]?
+          pre.Type= detail
+
+      when 401
+        h2.Type.Type--size-h4
+          | You do not have permission to access this private channel.
+
+        unless user
+          h2.Type.Type--size-h4
+            | Maybe you need to #[a( href="/log_in" ) log in]?

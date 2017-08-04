@@ -1,0 +1,20 @@
+unless user.get('is_premium') || customer.has('plan_id')
+  .PrivateConnectionCount(
+    data-state=(user.get('private_connections_count') >= user.get('private_connections_limit') ? 'exceeded' : 'default')
+  )
+    h5.Type.Type--size-h5
+      | Private block count
+
+      .PrivateConnectionCount__count
+        | <span>#{user.get('private_connections_count')}</span> / #{user.get('private_connections_limit')}
+
+    .PrivateConnectionsMeter
+      .PrivateConnectionsMeter__fill(
+        style="width: #{(user.get('private_connections_count') / user.get('private_connections_limit')) * 100.0}%"
+      )
+
+    if user.get('private_connections_count') >= user.get('private_connections_limit')
+      p.PrivateConnectionCount__warning.Type
+        | You&rsquo;ve reached the 100 block limit for free users.
+        br
+        | Your existing private blocks will be saved, but won’t be able to add any more under the Basic plan.
