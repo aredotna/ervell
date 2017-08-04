@@ -11,6 +11,7 @@ module.exports = class CouponCodeView extends Backbone.View
 
   initialize: ->
     @listenTo @model, 'change:description', @render
+    @listenTo @model, 'change:code', @render
     @listenTo @model, 'change:code', debounce(@checkCode, 500)
 
   onInput: ->
