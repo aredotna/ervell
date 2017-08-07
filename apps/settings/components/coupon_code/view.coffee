@@ -21,8 +21,9 @@ module.exports = class CouponCodeView extends Backbone.View
 
   checkCode: (_model, code) ->
     return unless code?
-
     return if code is ''
+
+    @model.set id: code, code: code
 
     Promise(@model.fetch())
       .catch ({ responseJSON: { description }}) =>
