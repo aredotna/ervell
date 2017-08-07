@@ -1,7 +1,7 @@
 if can && can.add_to
   include ../../grid_item/templates/types/new_block
 
-else if channel.get('status') === 'private'
+else if channel && channel.get('status') === 'private'
   //- If we can't add to the channel but it's private then that means
   //- the user needs to upgrade to premium to add to it
   //-
