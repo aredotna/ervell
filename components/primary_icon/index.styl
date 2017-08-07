@@ -1,0 +1,22 @@
+primary-icon-original-width = 153.38
+primary-icon-original-height = 88.986
+
+// Set to 1rem
+primary-icon-height = font-size-base
+// Calculates new width preserving aspect ratio
+primary-icon-width = (primary-icon-original-width / primary-icon-original-height) * primary-icon-height
+
+.PrimaryIcon
+  position relative
+  display inline-block
+  width primary-icon-width
+  height primary-icon-height
+  vertical-align bottom
+
+  > svg
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    fill colors-gray-text

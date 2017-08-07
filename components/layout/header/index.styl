@@ -1,20 +1,75 @@
 @require '../variables'
 @require '../../dropdown/stylesheets'
 
+.LayoutHeaderSearch
+  position relative
+  display flex
+  flex-drection row
+  flex 1
+  height 100%
+  background-color pink
+
+  > input
+    flex 1
+    padding-left 0
+
+    &
+    &:hover
+    &:focus
+      background-color transparent
+
+  &:hover
+  &--active
+    .LayoutHeaderIcon
+      &__logo
+        visibility hidden
+      &__search
+        visibility visible
+
+.LayoutHeaderIcon
+  //
+
+  &__logo
+    position relative
+    display block
+    padding 1em
+
+    &:hover
+      > span > svg
+        fill colors-gray-hover
+
+  &__search
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    visibility hidden
+    // Width & height of SVG
+    width 1em
+    height 1em
+
+    > svg
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+
+      > g
+        stroke colors-gray-text
+
 #layout-header
   position fixed
   top 0
   left 0
-  height topbar_h
-  line-height topbar_h
+  display flex
+  height 3em
   width 100%
   background-color white
-  padding 0
-  display flex
   justify-content space-between
   align-items center
   z-index header_z
-  transform translate3d(0, 0, 1px)
+  transform translateZ(0)
 
   &.is-active, .has-results
     z-index header_z + 2
@@ -83,23 +138,25 @@ body.no-header #layout-header
         fill lightgray
 
   .logo-icon
-    position absolute
-    cursor pointer
-    height topbar_h
+    font-size font-size-base
+    padding-left 1em
 
-    svg
-      width 46px
-      height topbar_h
-      fill textgray
-      padding 10px 8px 10px 12px
+    > a
+      display block
 
-    &:hover
-      svg
-        fill hovergray
+    // svg
+    //   width 46px
+    //   height topbar_h
+    //   fill textgray
+    //   padding 10px 8px 10px 12px
+
+    // &:hover
+    //   svg
+    //     fill hovergray
 
 input#layout-header__search__input
   width 100%
-  height 50px
+  height topbar_h
   font-size 1em
   border none
   outline 0
@@ -170,59 +227,10 @@ privacy-color('.search__results__result--privacy-', color)
   a
     font-weight bold
 
+// LOL
 .right
   text-align right
   margin 0
-
-.dropdown--menu .user__avatar--thumb
-  width 30px
-  opacity 0.95
-
-  &:hover
-    opacity 1
-
-  .user__avatar__initials
-    width 30px
-    overflow hidden
-    font-size s_caption
-
-  .user__avatar__image
-    top 10px
-    opacity 50%
-
-.user-avatar
-  height topbar_h
-
-.new-channel-dropdown
-  display inline-block
-
-  .dropdown--menu__padder:after
-    content ""
-
-.new-channel-btn
-  height topbar_h
-  font-size 13px
-  color textgray
-  border 0px solid bordergray
-  text-align center
-  margin 0 0 0 15px
-  font-weight bold
-
-  &.iconic:before
-    vertical-align middle !important
-    padding-right .5em
-    font-size 11px !important
-    top 0px !important
-
-.dropdown--is_active .new-channel-btn, .new-channel-btn:hover
-  border 0px solid lightgray
-  color hovergray
-  cursor pointer
-
-.new-channel-btn--caption
-  display inline-block
-  vertical-align top
-  margin -1px 0 0 6px
 
 .body--bare .header--icon
   position static
@@ -277,11 +285,3 @@ privacy-color('.search__results__result--privacy-', color)
   .dropdown__link--tools
     .dropdown__text--small
       display none
-
-  .new-channel-dropdown__container
-    width 100%
-    height auto
-    margin 0
-    padding 0
-
-@require 'info'

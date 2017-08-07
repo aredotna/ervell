@@ -1,29 +1,29 @@
 Backbone = require "backbone"
 Backbone.$ = $
-_ = require 'underscore'
-sd = require("sharify").data
+{ delay } = require 'underscore'
+{ API_URL } = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 SearchBlocks = require '../../../collections/search_blocks.coffee'
 analytics = require '../../../lib/analytics.coffee'
-
 resultsTemplate = -> require('../templates/results.jade') arguments...
 
 module.exports = class SearchBarView extends Backbone.View
+  className: 'LayoutHeaderSearch'
 
   events:
-    'keyup #layout-header__search__input' : 'onKeyUp'
-    'click .layout-header__search__close' : 'clearSearch'
-    'blur #layout-header__search__input'  : 'blurSearch'
-    'focus #layout-header__search__input' : 'focusSearch'
-    'click .search__results__see-all'     : 'fullResults'
+    'keyup .js-layout-header-search-input': 'onKeyUp'
+    'click .js-layout-header-search-input-close': 'clearSearch'
+    'blur .js-layout-header-search-input': 'blurSearch'
+    'focus .js-layout-header-search-input': 'focusSearch'
+    'click .search__results__see-all': 'fullResults'
 
-  initialize: (options)->
-    @$input = @$('#layout-header__search__input')
-    @$results = @$('.layout-header__search__results')
-    @collection = new SearchBlocks()
-    @collection.url = "#{sd.API_URL}/search/channels"
+  initialize: (options) ->
+    @$input = @$('.js-layout-header-search-input')
+    @$results = @$('.js-layout-header-search-results')
+    @collection = new SearchBlocks
+    @collection.url = "#{API_URL}/search/channels"
 
-  onKeyUp: (e)->
+  onKeyUp: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
@@ -39,9 +39,10 @@ module.exports = class SearchBarView extends Backbone.View
       else
         @search(e)
 
-  fullResults: (e)->
+  fullResults: (e) ->
     e.stopPropagation()
     e.preventDefault()
+
     if @getQuery()
       document.location.href = "/search/#{@getQuery()}"
     else
@@ -122,7 +123,7 @@ module.exports = class SearchBarView extends Backbone.View
 
     @scrollToHighlight()
 
-  scrollToHighlight: () ->
+  scrollToHighlight: ->
     $list =  @$el
     $highlighted = @$('.is-active:first')
 
@@ -154,15 +155,17 @@ module.exports = class SearchBarView extends Backbone.View
     @$results.html ""
 
   blurSearch: (e) ->
-    _.delay =>
-      @$el.removeClass('is-active')
+    delay =>
+      @$el.removeClass "#{@className}--active"
+
       $('.path').removeClass('is-hidden')
     , 200
 
   clearSearch: ->
     @searchUnloaded()
-    @$input.val ""
+    @$input.val ''
 
-  focusSearch: (e)->
-    @$el.addClass('is-active')
+  focusSearch: (e) ->
+    @$el.addClass "#{@className}--active"
+
     $('.path.stuck').addClass('is-hidden')

@@ -73,7 +73,7 @@ setupViews = ->
   new BodyView
     el: $('body')
   new SearchBarView
-    el: $('.layout-header__search')
+    el: $('.js-layout-header-search')
 
   new HeaderInfoView
 
