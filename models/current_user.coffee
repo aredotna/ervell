@@ -1,12 +1,9 @@
-#
-# Model for the current user
-#
-
-User = require "./user.coffee"
-mediator = require '../lib/mediator.coffee'
-sd = require("sharify").data
 _ = require 'underscore'
+sd = require('sharify').data
 Backbone = require 'backbone'
+moment = require 'moment'
+User = require './user.coffee'
+mediator = require '../lib/mediator.coffee'
 
 module.exports = class CurrentUser extends User
   recentConnectionCount: 3
@@ -92,5 +89,11 @@ module.exports = class CurrentUser extends User
 
   decrementNotificationCount: -> @set 'notification_count', parseInt(@attributes.notification_count) - 1
 
-
-
+  # TODO: [premium_2] Delete this
+  isEligibleForFreeYear: ->
+    # Not yet already premium
+    not @get('is_premium') and
+    # Created prior to August 8, 2017
+    moment(@get('created_at')).isBefore('2017-08-07', 'day') and
+    # And has exceed the private connection threshold
+    @get('private_connections_count') >= @get('private_connections_limit')
