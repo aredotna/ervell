@@ -152,7 +152,6 @@ initShortCuts = ->
   initNightMode()
 
 showPremiumMessage = ->
-  # TODO: Link to blog post
   # TODO: [premium_2] Delete this
   user = mediator.shared.current_user
 
@@ -161,19 +160,19 @@ showPremiumMessage = ->
       Starting on August 23, Are.na is changing the way Basic and Premium plans work.
       Premium members will have all the same tools and features,
       along with early access to the new mobile app.
-      <a href='#'>Learn more here.</a>
+      <a href='/blog/hello%20world/2017/08/06/premium-and-mobile.html' target='_blank'>Learn more here.</a>
     """
   else if user.isEligibleForFreeYear()
     """
       Starting on August 23, Are.na is changing the way Basic and Premium plans work
-      <a href='#'>(learn more here).</a>
+      <a href='/blog/hello%20world/2017/08/06/premium-and-mobile.html' target='_blank'>(learn more here).</a>
       To make the transition a little easier, we’re giving you 1 year of FREE Premium.
       <a href='/settings/billing'>Upgrade now and use the code FREEYEAR.</a>
     """
   else
     """
       Starting on August 23, Are.na is changing the way Basic and Premium plans work
-      <a href='#'>(learn more here).</a>
+      <a href='/blog/hello%20world/2017/08/06/premium-and-mobile.html' target='_blank'>(learn more here).</a>
       To make the transition a little easier, we’re giving you 1 month of FREE Premium.
       <a href='/settings/billing'>Upgrade now and use the code FREEMONTH.</a>
     """
