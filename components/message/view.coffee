@@ -10,7 +10,6 @@ module.exports = class MessageView extends Backbone.View
 
   events:
     'click .js-close': 'remove'
-    'click a': 'remove'
 
   initialize: ({ @persist = true }) ->
     if @persist
