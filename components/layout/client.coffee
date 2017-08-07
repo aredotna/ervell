@@ -19,7 +19,7 @@ analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCta = require '../logged_out_cta/index.coffee'
-{ isTouch } = require '../util/device.coffee'
+{ isTouch, isMobile } = require '../util/device.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -32,13 +32,11 @@ module.exports = ->
   initLoggedOutCta() unless sd.CURRENT_USER?.id
   showPremiumMessage() if sd.CURRENT_USER?.id
 
-isMobile = ->
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-
 setMobileClass = ->
   $body = $('body')
+
   if isMobile()
-    $body.addClass 'is-mobile'
+    $body.addClass 'is-mobile Body--mobile'
     attachFastClick document.body
 
   if isTouch()
