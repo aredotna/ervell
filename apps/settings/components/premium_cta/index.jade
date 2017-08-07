@@ -30,5 +30,6 @@ unless user.get('is_premium')
   include ./features
 
   button.Button.Button--divider.Color--state-premium.js-cta(
+    data-plan= (user.isEligibleForFreeYear() ? 'premium_1' : 'monthly_premium')
     data-coupon= (user.isEligibleForFreeYear() ? 'freeyear' : 'freemonth')
   ) Upgrade to Premium

@@ -8,9 +8,10 @@ module.exports = ($el, { customer }) ->
     .click (e) ->
       e.preventDefault()
 
+      { coupon, plan } = $(this).data()
+
       customer.set
-        plan_id: 'premium_1'
+        plan_id: plan
         current_period_end_at: moment().format()
 
-      code = $(this).data 'coupon'
-      customer.related().coupon.set code: code
+      customer.related().coupon.set code: coupon
