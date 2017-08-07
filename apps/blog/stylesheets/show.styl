@@ -31,23 +31,28 @@
       margin-bottom 8em
       position relative
 
+      a
+        text-decoration underline
+
+      ol
+        ol()
+
+      blockquote
+        collapsed-margins(2em)
+
       p
         collapsed-margins(2em)
         font-size font-size-base
         line-height line-height-tall
-
-        a
-          text-decoration underline
 
       img
       iframe
         display block
         max-width 80%
         vertical-align bottom
-        margin 2em auto
+        margin 4em auto
 
       img 
-        margin 4em auto
         max-width 100%
 
       .arena-iframe
@@ -68,9 +73,10 @@
           height 1700px !important
 
       h2
-        collapsed-margins(4em)
+        collapsed-margins(2em)
 
       hr
+        collapsed-margins(2em)
         height 2px
         background-color colors-gray-border
         border none
