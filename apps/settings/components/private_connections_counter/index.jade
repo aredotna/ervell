@@ -14,7 +14,13 @@ unless user.get('is_premium') || customer.has('plan_id')
       )
 
     if user.get('private_connections_count') >= user.get('private_connections_limit')
-      p.PrivateConnectionCount__warning.Type
-        | You&rsquo;ve reached the 100 block limit for free users.
+      p.Type.Type--size-xs.Utility--align-right
+        span.Color--state-alert
+          | You&rsquo;ve reached the 100 block limit for free users.
+          br
+          | Your existing private blocks will be saved, but won’t be able to add any more under the Basic plan starting 8/23/17.
+    else
+      p.Type.Type--size-xs.Utility--align-right
+        | Free users can add up to 100 Private blocks.
         br
-        | Your existing private blocks will be saved, but won’t be able to add any more under the Basic plan starting 8/23/17.
+        | If you’d like to add more, you can sign up for Premium.
