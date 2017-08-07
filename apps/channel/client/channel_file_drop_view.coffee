@@ -3,7 +3,7 @@ _ = require 'underscore'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
-MessageView = require '../../../components/message/client/message_view.coffee'
+MessageView = require '../../../components/message/view.coffee'
 
 channelFileDropTemplate = -> require('../templates/_filedrop.jade') arguments...
 
@@ -18,9 +18,9 @@ module.exports = class ChannelFileDropView extends Backbone.View
     'dragleave .channel--drop-zone' : 'clearDrag'
 
   initialize: ({ @channel, @blocks, @policy })->
-    if mediator.shared.current_user.isPremium() 
-      @dropLimit = 100 
-      
+    if mediator.shared.current_user.isPremium()
+      @dropLimit = 100
+
     @renderFileDrop()
     @setupFileDrop()
 
@@ -36,14 +36,14 @@ module.exports = class ChannelFileDropView extends Backbone.View
   dropLimitMessage: ->
     model = new Backbone.Model
       id: 'bookmarklet_updates_message'
-      title: "File limit"
+      title: 'File limit'
       body: "Sorry, you cannot upload more than #{@dropLimit} files at a time."
-      type: 'Error'
 
-    new MessageView
-      container: $('#message-container')
+    messageView = new MessageView
       model: model
-      useCookie: false
+      persist: false
+
+    $('body').appendChild messageView.render().$el
 
     @clearDrag()
 
