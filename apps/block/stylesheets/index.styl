@@ -124,9 +124,15 @@ block-sidebar-breakpoint = 950px
     fill textgray
 
 .block-video
+  margin 0 auto
+  max-width 65%
+  +below(block-sidebar-breakpoint)
+    max-width 100%
+
   video
-    max-width 65%
-    height auto
+    max-height 75vh
+    width auto
+    max-width 100%
 
 .block-meta--attribution
   position absolute
