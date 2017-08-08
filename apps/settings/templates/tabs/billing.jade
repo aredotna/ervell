@@ -9,7 +9,7 @@ block content
 
   .tab-content__frame
     .Narrow
-      section.Section.js-premium-cta
+      section.Section.SettingsPremiumCTA.js-premium-cta
         include ../../components/premium_cta/index
 
       section.Section.js-your-plan
@@ -17,10 +17,11 @@ block content
 
       //- TODO: [premium_2] Delete this
       if user.get('is_premium')
-        h5.Type.Type--size-h5: span.Color--state-premium
-          | New Premium features (starting August 23, 2017)
+        section.Section.SettingsPremiumCTA
+          h6.SectionHeader.Type.Type--size-h6
+            | New Premium features (starting August 23, 2017)
 
-        include ../../components/premium_cta/features
+          include ../../components/premium_cta/features
 
       if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
         section.Section.js-cancel-plan

@@ -1,26 +1,26 @@
-unless user.get('is_premium') || customer.has('plan_id')
-  .PrivateConnectionCount(
-    data-state=(user.get('private_connections_count') >= user.get('private_connections_limit') ? 'exceeded' : 'default')
-  )
-    h5.Type.Type--size-h5
-      | Private block count
+.PrivateConnectionCount(
+  data-state=(user.get('private_connections_count') >= user.get('private_connections_limit') ? 'exceeded' : 'default')
+)
 
-      .PrivateConnectionCount__count
-        | <span>#{user.get('private_connections_count')}</span> / #{user.get('private_connections_limit')}
+  h6.SectionHeader.Type.Type--size-h6
+    | Private block count
 
-    .PrivateConnectionsMeter
-      .PrivateConnectionsMeter__fill(
-        style="width: #{(user.get('private_connections_count') / user.get('private_connections_limit')) * 100.0}%"
-      )
+    .PrivateConnectionCount__count
+      | <span>#{user.get('private_connections_count')}</span> / #{user.get('private_connections_limit')}
 
-    if user.get('private_connections_count') >= user.get('private_connections_limit')
-      p.Type.Type--size-xs.Utility--align-right
-        span.Color--state-alert
-          | You&rsquo;ve reached the 100 block limit for free users.
-          br
-          | Your existing private blocks will be saved, but won’t be able to add any more under the Basic plan starting 8/23/17.
-    else
-      p.Type.Type--size-xs.Utility--align-right
-        | Free users can add up to 100 Private blocks.
+  .PrivateConnectionsMeter
+    .PrivateConnectionsMeter__fill(
+      style="width: #{(user.get('private_connections_count') / user.get('private_connections_limit')) * 100.0}%"
+    )
+
+  if user.get('private_connections_count') >= user.get('private_connections_limit')
+    p.Type.Type--size-xs.Utility--align-right
+      span.Color--state-alert
+        | You&rsquo;ve reached the 100 block limit for free users.
         br
-        | If you’d like to add more, you can sign up for Premium.
+        | Your existing private blocks will be saved, but won’t be able to add any more under the Basic plan starting 8/23/17.
+  else
+    p.Type.Type--size-xs.Utility--align-right
+      | Free users can add up to 100 Private blocks.
+      br
+      | If you’d like to add more, you can sign up for Premium.

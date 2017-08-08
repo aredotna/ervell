@@ -23,7 +23,7 @@ module.exports = ($el) ->
       plan_id: plan_id
       current_period_end_at: moment().format()
 
+  premiumCTA $el.find('.js-premium-cta'), models
   paymentMethods $el.find('.js-payment-methods'), models
   yourPlan $el.find('.js-your-plan'), models
   cancelPlan $el.find('.js-cancel-plan'), models
-  premiumCTA $el.find('.js-premium-cta'), models
