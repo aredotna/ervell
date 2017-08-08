@@ -31,7 +31,7 @@ block container
 
       unless user
         .AboutSection__buttons
-          a.Button( href='/sign_up' )
+          a.Button.Button--size-lg( href='/sign_up' )
             | Join Are.na
 
     section.AboutSection.js-section
@@ -46,7 +46,7 @@ block container
 
       unless user && user.isPremium()
         .AboutSection__buttons
-          a.Button( href='/about#pricing' )
+          a.Button.Button--size-lg( href='/about#pricing' )
             | Join Premium
 
     section.AboutSection.js-section( id='labs' )
@@ -59,10 +59,10 @@ block container
       include ../components/lab_posts/index
 
       .AboutSection__buttons
-        a.Button( href='mailto:info@are.na' )
+        a.Button.Button--size-lg( href='mailto:info@are.na' )
           | Work with us
 
-        a.Button( href='https://dev.are.na/documentation/channels' )
+        a.Button.Button--size-lg( href='https://dev.are.na/documentation/channels' )
           | Browse the API
 
     section.AboutSection.js-section
@@ -113,7 +113,7 @@ block container
       include ../components/blog_posts/index
 
       .AboutSection__buttons
-        a.Button( href='/blog' )
+        a.Button.Button--size-lg( href='/blog' )
           | Read more&hellip;
 
     section.AboutSection.js-section( id='store' )
@@ -123,7 +123,7 @@ block container
       include ../components/store_posts/index
 
       .AboutSection__buttons
-        a.Button( href='http://store.are.na/' )
+        a.Button.Button--size-lg( href='http://store.are.na/' )
           | Go to store
 
     section.AboutSection.js-section( id='contact' )
@@ -160,5 +160,5 @@ block container
         | You can explore to see how other people use it, ask questions in the feedback channel, look at the getting started page or contact us.
 
       .AboutSection__buttons
-        a.Button.js-more-faqs( href='/faqs' )
+        a.Button.Button--size-lg.js-more-faqs( href='/faqs' )
           | More FAQs
