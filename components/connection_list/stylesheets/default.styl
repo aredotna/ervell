@@ -4,31 +4,34 @@
   border 2px solid
   cursor pointer
 
-  > span
+  &__item
     display flex
     align-items center
     justify-content space-between
     padding button-padding
 
+  &__info
+    align-items baseline
+    display flex
+    margin-right 0.5em
+
+  &__info
   &__title
   &__author
     white-space nowrap
     overflow hidden
     text-overflow ellipsis
-    max-width 75%
 
   &__title
-    flex 1
-    font-size font-size-base
+  &__author
     line-height line-height-base
-    margin-right 0.5em
 
-    > span
-      font-size font-size-xs
+  &__title
+    font-size font-size-base
 
+  &__blocks
   &__author
     font-size font-size-xs
-    line-height line-height-base
 
   for visibility in 'public' 'closed' 'private'
     &[data-visibility=\'{visibility}\']

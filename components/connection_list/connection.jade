@@ -1,7 +1,10 @@
-span
-  .Connection__title
-    = channel.get('title')
-    span
+.Connection__item
+
+  .Connection__info
+    .Connection__title
+      = channel.get('title')
+
+    .Connection__blocks
       | &nbsp; #{channel.get('length')} blocks
 
   .Connection__author
