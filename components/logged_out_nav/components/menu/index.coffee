@@ -26,10 +26,16 @@ module.exports = ({ $el, $sections }) ->
 
     $target = $sections.filter("[id='#{id}']")
 
+    offset = if ($page = $('.js-page')).length
+      parseInt($page.css('margin-top'), 10) +
+      parseInt($page.css('padding-top'), 10)
+    else
+      0
+
     yPos = if id is 'top'
       0
     else
-      $target.offset().top
+      $target.offset().top - offset
 
     $html
       .animate(scrollTop: yPos, 'fast')
