@@ -36,5 +36,5 @@ block container
             alt= post.get('title')
           )
 
-          .BlogPosts__excerpt.PageNarrowBreakout
+          .BlogPosts__excerpt
             | #{truncate(post.get('excerpt'), 50)} …
