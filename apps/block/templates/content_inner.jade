@@ -11,7 +11,12 @@ if block.get('class') === 'Text'
   .block-text( id="attribute-content_#{block.id}" )
     != md(block.get('content'))
 
-if block.get('class') === 'Attachment' && !block.has('image')
+if block.isMovie()
+  .block-video
+    a( href= block.getSourceUrl() target='_blank' )
+      video( src= block.getSourceUrl(), controls)
+
+if block.get('class') === 'Attachment' && !block.has('image') && !block.isMovie()
   a.block-attachment( href= block.getSourceUrl() target='_blank' )
     if block.get('attachment').extension === 'mp3'
       img.iconic.iconic-lg(
