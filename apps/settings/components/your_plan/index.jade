@@ -1,8 +1,11 @@
+h6.SectionHeader.Type.Type--size-h6
+  | Plan &amp; Billing
+
 .Errors.js-form-errors
   //- Rendered client-side
 
 .Fieldset
-  h5.Type.Type--size-h5
+  label.Label
     //- Either premium or basic and hasn't selected a plan yet
     if customer.get('is_premium') || !customer.has('plan_id')
       | Current plan
@@ -48,4 +51,6 @@ if customer.has('plan_id') && !customer.get('is_lifetime')
   section.js-payment-methods
     include ../payment_methods/index
 
-include ../private_connections_counter/index
+unless user.get('is_premium') || customer.has('plan_id')
+  section.Section
+    include ../private_connections_counter/index

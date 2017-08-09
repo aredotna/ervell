@@ -1,0 +1,15 @@
+each source in customer.related().sources.models
+  .Input
+    | #{source.get('brand').toUpperCase()} **** #{source.get('last4')} - #{source.get('exp_month')}/#{source.get('exp_year')}
+
+    if customer.related().sources.models > 1
+      = ' '
+      if customer.get('default_source') === source.id
+        span.Color--gray-light
+          | (Default)
+      else
+        a.Color--gray-light.js-default( data-id= source.id )
+          | Make default
+
+    a.Utility--float-right.js-remove( data-id= source.id )
+      | Remove

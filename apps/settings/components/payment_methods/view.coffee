@@ -201,14 +201,19 @@ module.exports = class PaymentMethodsView extends Backbone.View
     @els =
       card: @$('.js-card-element')
       errors: @$('.js-form-errors')
+      coupon: @$('.js-coupon-code')
 
+    # Set up CouponCodeView
     @subViews = [
       @couponCodeView = new CouponCodeView
-        el: @$('.js-coupon-code')
+        el: @els.coupon
         model: @model.related().coupon
     ]
 
     @couponCodeView.render()
+
+    # Set up Stripe Element
+    return unless @els.card.length
 
     # Pass Stripe Element our default input style
     valid = ['color', 'font-size', 'font-family']
