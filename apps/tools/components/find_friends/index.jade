@@ -1,0 +1,13 @@
+if authentication && authentication.id
+  p.Type
+    button.Button.Button--fill.js-disconnect-twitter
+      | Disconnect from Twitter
+
+.ToolsFoundFriends.js-found-friends
+  p.Type
+    | &hellip;
+
+unless authentication && authentication.id
+  p.Type
+    button.Button.Button--divider.js-connect-twitter
+      | Connect to Twitter
