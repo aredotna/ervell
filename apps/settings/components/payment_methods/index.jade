@@ -1,55 +1,36 @@
 form
-  if customer.related().sources.length > 0
-    h3 Payment Methods
-
-    table.payment-methods__cards: tbody
-      each source in customer.related().sources.models
-        tr.payment-method
-          td.payment-method__card
-            = source.get('brand')
-            = ' '
-            span **** **** **** #{source.get('last4')}
-            span #{source.get('exp_month')}/#{source.get('exp_year')}
-
-          td.payment-method__default
-            if customer.get('default_source') === source.id
-              span Default
-            else
-              a.js-default( data-id= source.id )
-                | Make Default
-
-          td.payment-method__remove
-            a.js-remove( data-id= source.id )
-              | Remove
-
-  //- Has card on file aready
-  if customer.requiresPayment() && !customer.requiresPaymentMethod() && !customer.get('is_canceled')
-    button.Button.Button--divider.js-submit.js-charge
-      | Pay
-
-  else if customer.requiresPayment() && !customer.requiresPaymentMethod() && customer.get('is_canceled')
-    button.Button.Button--divider.js-submit.js-reenable
-      | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
-      | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
-
-  .form-card__errors.js-form-errors
+  //- TODO: Move up a level in the view hierarchy (reconsiders the parent)
+  .Errors.js-form-errors
     //- Rendered client-side
 
-  h3 Card Info
-
   .Fieldset
-    .Input.js-card-element
-      input.Input.Input--fill( style='display: none' )
+    label.Label
+      | Card info
 
-  if customer.requiresPayment() && customer.requiresPaymentMethod() && !customer.get('is_canceled')
+    if customer.related().sources.length > 0
+      include ./sources
+    else
+      .Input.js-card-element
+        input.Input.Input--fill( style='display: none' )
+
+  if customer.requiresPayment() && !customer.get('is_canceled')
+    .Fieldset.js-coupon-code
+      include ../coupon_code/index
+
+  if customer.requiresPayment() && !customer.requiresPaymentMethod() && !customer.get('is_canceled')
+    //- Not canceled. Needs to pay, but has a card on file already.
     button.Button.Button--divider.js-submit.js-charge
-      | Pay
+      | Upgrade to Premium
+      if customer.related().sources.length > 1
+        | (using #{customer.defaultSource().get('last4')})
 
-  else if customer.requiresPayment() && customer.requiresPaymentMethod() && customer.get('is_canceled')
+  else if customer.requiresPayment() && customer.requiresPaymentMethod() && !customer.get('is_canceled')
+    //- Not canceled. Needs to pay and doesn't have a card on file.
+    button.Button.Button--divider.js-submit.js-charge
+      | Upgrade to Premium
+
+  else if customer.requiresPayment() && customer.get('is_canceled')
+    //- Has previously canceled. Needs to pay, doesn't matter if there is a card on file or not.
     button.Button.Button--divider.js-submit.js-reenable
-      | Continue my premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
+      | Continue my Premium membership ($#{customer.get('current_plan_amount')} / #{customer.get('current_plan_term')}) on
       | #{customer.formatDate('current_period_end_at', 'D MMMM, YYYY')}
-
-  else
-    button.Button.Button--divider.js-submit.js-add
-      | Add New Card

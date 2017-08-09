@@ -6,7 +6,7 @@ _ = require 'underscore'
 attachFastClick = require 'fastclick'
 km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
-MessageView = require '../message/client/message_view.coffee'
+MessageView = require '../message/view.coffee'
 HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 initLoggedInNavigation = require '../logged_in_navigation/client/index.coffee'
@@ -19,7 +19,7 @@ analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCta = require '../logged_out_cta/index.coffee'
-{ isTouch } = require '../util/device.coffee'
+{ isTouch, isMobile } = require '../util/device.coffee'
 
 module.exports = ->
   setMobileClass()
@@ -32,13 +32,11 @@ module.exports = ->
   initLoggedOutCta() unless sd.CURRENT_USER?.id
   showPremiumMessage() if sd.CURRENT_USER?.id
 
-isMobile = ->
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-
 setMobileClass = ->
   $body = $('body')
+
   if isMobile()
-    $body.addClass 'is-mobile'
+    $body.addClass 'is-mobile Body--mobile'
     attachFastClick document.body
 
   if isTouch()
@@ -154,19 +152,40 @@ initShortCuts = ->
   initNightMode()
 
 showPremiumMessage = ->
-  if (!sd.CURRENT_USER.is_premium and sd.CURRENT_USER.channel_count >= 2 )
-    model = new Backbone.Model
-      id: 'premium_monthly_message'
-      title: "Monthly premium"
-      body: "We recently added a monthly option for premium account subscriptions. If you're finding Are.na useful, consider upgrading to a <a href='https://www.are.na/settings/billing?utm_campaign=mmessage'>premium account</a>. Thank you."
-      type: 'announcement'
-    new MessageView container: $('#message-container'), model: model
+  # TODO: [premium_2] Delete this
+  user = mediator.shared.current_user
 
-showAnnouncements = (announcements) ->
-  # stub
+  body = if user.get('is_premium')
+    """
+      Starting on August 23, Are.na is changing the way Basic and Premium plans work.
+      Premium members will have all the same tools and features,
+      along with early access to the new mobile app.
+      <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>Learn more here.</a>
+    """
+  else if user.isEligibleForFreeYear()
+    """
+      Starting on August 23, Are.na is changing the way Basic and Premium plans work
+      <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>(learn more here).</a>
+      To make the transition a little easier, we’re giving you 1 year of FREE Premium.
+      <a href='/settings/billing'>Upgrade now and use the code FREEYEAR.</a>
+    """
+  else
+    """
+      Starting on August 23, Are.na is changing the way Basic and Premium plans work
+      <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>(learn more here).</a>
+      To make the transition a little easier, we’re giving you 1 month of FREE Premium.
+      <a href='/settings/billing'>Upgrade now and use the code FREEMONTH.</a>
+    """
 
-showNotifications = (notifications) ->
-  # stub
+  model = new Backbone.Model
+    id: 'premium_2_announcement'
+    title: 'Announcing new plan structures'
+    body: body
+
+  messageView = new MessageView model: model
+
+  if messageView.isRenderable()
+    $('body').append messageView.render().$el
 
 setFollows = (following_ids) ->
   mediator.shared.current_user.set 'following_ids', following_ids

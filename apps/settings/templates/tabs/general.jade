@@ -8,73 +8,74 @@ block content
     | General
 
   .tab-content__frame
-    .form-card
-      .avatar-uploader.js-avatar-uploader
-        include ../../components/avatar_uploader/index.jade
+    .Narrow
+      section.Section
+        .avatar-uploader.js-avatar-uploader
+          include ../../components/avatar_uploader/index.jade
 
-      form(
-        data-action= user.url()
-        data-method='PUT'
-      )
-        .form-card__errors.js-form-errors
-          //- Rendered client-side
+        form(
+          data-action= user.url()
+          data-method='PUT'
+        )
+          .Errors.js-form-errors
+            //- Rendered client-side
 
-        .Fieldset
-          input.Input(
-            name='first_name'
-            type='text'
-            value="#{user.get('first_name')}"
-            placeholder='First name'
-            autofocus= autofocus
-            required
-          )
-
-          input.Input(
-            name='last_name'
-            type='text'
-            value="#{user.get('last_name')}"
-            placeholder='Last name'
-            autofocus= autofocus
-            required
-          )
-
-          input.Input(
-            name='email'
-            type='email'
-            value="#{user.get('email')}"
-            placeholder='Email'
-            autofocus= autofocus
-            required
-          )
-
-        .Fieldset
-          input.Input(
-            name='password' type='password' placeholder='Password'
-          )
-
-          input.Input(
-            name='password_confirmation' type='password' placeholder='Repeat password'
-          )
-
-        .Fieldset.js-home-path-field
-          include ../../components/home_path_field/index
-
-        if user.isPremium()
           .Fieldset
-            label.Label
-              | Exclude my content from search engines?
+            input.Input(
+              name='first_name'
+              type='text'
+              value="#{user.get('first_name')}"
+              placeholder='First name'
+              autofocus= autofocus
+              required
+            )
 
-            .Select.Select--fill
-              select(name='exclude_from_indexes')
-                option(
-                  value='true'
-                  selected= user.get('exclude_from_indexes') ? 'selected' : null
-                ) Yes
+            input.Input(
+              name='last_name'
+              type='text'
+              value="#{user.get('last_name')}"
+              placeholder='Last name'
+              autofocus= autofocus
+              required
+            )
 
-                option(
-                  value='false'
-                  selected= !user.get('exclude_from_indexes') ? 'selected' : null
-                ) No
+            input.Input(
+              name='email'
+              type='email'
+              value="#{user.get('email')}"
+              placeholder='Email'
+              autofocus= autofocus
+              required
+            )
 
-        button.Button.Button--divider
-          | Save
+          .Fieldset
+            input.Input(
+              name='password' type='password' placeholder='Password'
+            )
+
+            input.Input(
+              name='password_confirmation' type='password' placeholder='Repeat password'
+            )
+
+          .Fieldset.js-home-path-field
+            include ../../components/home_path_field/index
+
+          if user.isPremium()
+            .Fieldset
+              label.Label
+                | Exclude my content from search engines?
+
+              .Select.Select--fill
+                select(name='exclude_from_indexes')
+                  option(
+                    value='true'
+                    selected= user.get('exclude_from_indexes') ? 'selected' : null
+                  ) Yes
+
+                  option(
+                    value='false'
+                    selected= !user.get('exclude_from_indexes') ? 'selected' : null
+                  ) No
+
+          button.Button.Button--divider
+            | Save

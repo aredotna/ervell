@@ -1,0 +1,16 @@
+label.Label
+  | Coupon
+
+input.Input.Input--fill.js-input(
+  name='coupon'
+  value= coupon && coupon.code
+  placeholder='Enter coupon code'
+)
+
+if coupon && coupon.description
+  p.Type.Type--size-xs.Utility--align-right
+    span( class=(!coupon.is_valid ? 'Color--state-alert' : '') )
+      if coupon.is_valid
+        | #{coupon.description} will be applied to your order
+      else
+        = coupon.description

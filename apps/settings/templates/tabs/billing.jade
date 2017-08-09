@@ -8,13 +8,21 @@ block content
     | Plan &amp; Billing
 
   .tab-content__frame
-    .your-plan.js-your-plan
-      include ../../components/your_plan/index
-
-    unless user.get('is_premium')
-      .premium-cta.js-premium-cta
+    .Narrow
+      section.Section.SettingsPremiumCTA.js-premium-cta
         include ../../components/premium_cta/index
 
-    if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
-      .cancel-plan.js-cancel-plan
-        include ../../components/cancel_plan/index
+      section.Section.js-your-plan
+        include ../../components/your_plan/index
+
+      //- TODO: [premium_2] Delete this
+      if user.get('is_premium')
+        section.Section.SettingsPremiumCTA
+          h6.SectionHeader.Type.Type--size-h6
+            | New Premium features (starting August 23, 2017)
+
+          include ../../components/premium_cta/features
+
+      if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
+        section.Section.js-cancel-plan
+          include ../../components/cancel_plan/index

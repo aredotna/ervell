@@ -1,13 +1,16 @@
 Promise = require 'bluebird-q'
 Backbone = require 'backbone'
-{ extend } = require 'underscore'
+{ extend, invoke } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
 { track, en } = require '../../../../lib/analytics.coffee'
 styles = require './lib/styles.coffee'
+CouponCodeView = require '../coupon_code/view.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class PaymentMethodsView extends Backbone.View
   className: 'payment-methods'
+
+  subViews: []
 
   events:
     'click .js-add': 'addPaymentMethod'
@@ -23,7 +26,9 @@ module.exports = class PaymentMethodsView extends Backbone.View
   tokenizeCard: (card) ->
     @stripe.createToken(card)
       .then ({ token, error }) =>
-        return Promise.reject(error) if error
+        if error?
+          error.responseJSON = {}
+          return Promise.reject(error)
         token
 
   clearErrors: ->
@@ -33,7 +38,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
     if @complete or (not @model.has('default_source'))
       @stripe.createToken(card)
         .then ({ token, error }) =>
-          return Promise.reject(error) if error
+          if error?
+            error.responseJSON = {}
+            return Promise.reject(error)
+
           token
     else
       Promise.resolve(id: @model.get('default_source'))
@@ -120,10 +128,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     @getToken(@card)
       .then (token) =>
-        subscription = @model.related().subscriptions.add
+        attrs =
           token: token.id
           plan_id: @model.get('plan_id')
 
+        if (coupon = @model.related().coupon.get('code')) isnt ''
+          extend attrs, coupon: coupon
+
+        subscription = @model.related().subscriptions.add attrs
         subscription.save()
 
       .then =>
@@ -141,11 +153,12 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .catch ({ responseJSON: { message, description }}) =>
         $target
           .prop 'disabled', false
-          .text message
+          .text message or label
 
-        @els.errors
-          .show()
-          .text description
+        if description?
+          @els.errors
+            .show()
+            .text description
 
     track.click en.PREMIUM_CHARGE_INITIATED,
       label: 'Plan type'
@@ -177,16 +190,30 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .catch ({ responseJSON: { message, description }}) =>
         $target
           .prop 'disabled', false
-          .text message
+          .text message or label
 
-        @els.errors
-          .show()
-          .text description
+        if description?
+          @els.errors
+            .show()
+            .text description
 
   postRender: ->
     @els =
       card: @$('.js-card-element')
       errors: @$('.js-form-errors')
+      coupon: @$('.js-coupon-code')
+
+    # Set up CouponCodeView
+    @subViews = [
+      @couponCodeView = new CouponCodeView
+        el: @els.coupon
+        model: @model.related().coupon
+    ]
+
+    @couponCodeView.render()
+
+    # Set up Stripe Element
+    return unless @els.card.length
 
     # Pass Stripe Element our default input style
     valid = ['color', 'font-size', 'font-family']
@@ -218,4 +245,7 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
   remove: ->
     @card.unmount()
+
+    invoke @subViews, 'remove'
+
     super

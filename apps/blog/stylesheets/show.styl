@@ -10,7 +10,8 @@
       collapsed-margins(2em)
 
       > .post-category-title
-        collapsed-margins(2em)
+        // No top margin because of hidden image
+        margin 0 0 2em 0
 
         > h1
           margin 0
@@ -31,23 +32,28 @@
       margin-bottom 8em
       position relative
 
+      a
+        text-decoration underline
+
+      ol
+        ol()
+
+      blockquote
+        collapsed-margins(2em)
+
       p
         collapsed-margins(2em)
         font-size font-size-base
         line-height line-height-tall
-
-        a
-          text-decoration underline
 
       img
       iframe
         display block
         max-width 80%
         vertical-align bottom
-        margin 2em auto
+        margin 4em auto
 
       img 
-        margin 4em auto
         max-width 100%
 
       .arena-iframe
@@ -68,9 +74,19 @@
           height 1700px !important
 
       h2
-        collapsed-margins(4em)
+        collapsed-margins(2em)
 
       hr
+        collapsed-margins(3em)
         height 2px
         background-color colors-gray-border
         border none
+
+      figure
+        collapsed-margins(4em)
+        h5
+          collapsed-margins(1em)
+        img, iframe, video
+          collapsed-margins(2em)
+        figcaption
+          line-height line-height-tall

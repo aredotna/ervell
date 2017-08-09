@@ -19,3 +19,7 @@ module.exports =
   isFirefox: ->
     navigator.userAgent.toLowerCase()
       .indexOf('firefox') > -1
+
+  isMobile: ->
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+      .test navigator.userAgent

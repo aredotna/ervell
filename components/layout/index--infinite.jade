@@ -28,10 +28,6 @@ html( class="#{colorClass} #{loggedInClass}" )
     #l-loader-container.abs-fill
       include loader/templates/index
 
-    //- TODO: Refactor to append/remove
-    #message-container
-      //- Rendered client-side
-
     include modules/scrolltop
 
     unless user && user.id

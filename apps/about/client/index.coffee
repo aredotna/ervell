@@ -11,7 +11,15 @@ module.exports = ->
 
   scrollToId = (id) ->
     $target = $sections.filter("[id='#{id}']")
-    yPos = $target.offset().top
+
+    offset = if ($page = $('.js-page')).length
+      parseInt($page.css('margin-top'), 10) +
+      parseInt($page.css('padding-top'), 10)
+    else
+      0
+
+    yPos = $target.offset().top - offset
+
     $html.animate scrollTop: yPos, 'fast'
 
   $links
