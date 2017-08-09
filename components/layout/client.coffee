@@ -75,7 +75,7 @@ setupViews = ->
 
   new HeaderInfoView
 
-  if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
+  if $('.path__inner')[0]
     new Waypoint.Sticky
       element: $('.path__inner')
       offset: 3
