@@ -2,13 +2,14 @@ form.js-form
   .Errors.js-errors
     //- Rendered client-side
 
-  input.Input(
-    placeholder='Email'
-    type='email'
-    name='email'
-    autofocus
-    required
-  )
+  .Fieldset
+    input.Input(
+      placeholder='Email'
+      type='email'
+      name='email'
+      autofocus
+      required
+    )
 
   button.Button.Button--divider.js-submit
     | Send invitation

@@ -1,29 +1,13 @@
 extends ../../../../components/path/templates/tab_content
 
 block vars
-  - slug = "find-friends"
+  - slug = 'find-friends'
 
 block content
-  .tools__mobile-title Find friends
-  .tools__frame
-    p Connect your Twitter account to find friends who are already on Are.na.
-     
-    if users && users.length 
-      .friends
-        for user in users
-          .friend
-            span
-              .Avatar.friend__avatar( data-initials= user.initials() )
-                img( src= user.get('avatar_image').thumb, alt= user.initials() )
-              a(href="/#{user.get('slug')}")= user.get('username')
-            span.friend__follow.js-follow(data-id=user.id)
-              a(data-type="User", data-id="#{user.id}")
+  .tab-content__title
+    | Find friends
 
-    .button.Button.Button--divider.js-toggle-auth
-      span(
-        class="iconic" 
-        data-glyph="social-twitter"
-        title="social twitter" 
-        aria-hidden="true"
-      )
-        | &nbsp;#{auth.actionReadable()} Twitter
+  .tab-content__frame
+    .Narrow
+      .ToolsFindFriends.js-find-friends
+        include ../../components/find_friends/index

@@ -4,13 +4,16 @@ block vars
   - slug = "bookmarklet"
 
 block content
-  .tools__mobile-title Bookmarklet
-  .tools__frame
-    a.Button.Button--draggable.Button--fill( href= bookmarklet )
-      | Add to Are.na
+  .tab-content__title
+    | Add to Are.na
 
-    p.Type.Type--xs.Utility--align-center
-      | Drag this button to your bookmarks bar &#10548;
+  .tab-content__frame
+    .Narrow
+      a.Button.Button--draggable.Button--fill( href= bookmarklet )
+        | Add to Are.na
 
-    p.Type
-      | With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.
+      p.Type.Type--size-sm.Type--lh-tall.Type--xs.Utility--align-center
+        | Drag this button to your bookmarks bar &#10548;
+
+      p.Type.Type--lh-tall
+        | With the bookmarklet, you can easily add images, videos, links, and text to your Arena channels while surfing the web.

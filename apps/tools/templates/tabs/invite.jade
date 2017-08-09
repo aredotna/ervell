@@ -1,13 +1,17 @@
 extends ../../../../components/path/templates/tab_content
 
 block vars
-  - slug = "send-invitation"
+  - slug = 'send-invitation'
 
 block content
-  .tools__mobile-title Invite a collaborator
-  .tools__frame
-    p.Type
-      | Invite as many friends and collaborators to Are.na as you'd like. Once the person you invited creates an account, you will automatically be following one another.
+  .tab-content__title
+    | Invite a collaborator
 
-    .SendInvitation.js-send-invitation
-      include ../../components/send_invitation/index
+  .tab-content__frame
+    .Narrow
+      p.Type.Type--lh-tall
+        | Invite as many friends and collaborators to Are.na as you&rsquo;d like.
+        | Once the person you invited creates an account, you will automatically be following one another.
+
+      .SendInvitation.js-send-invitation
+        include ../../components/send_invitation/index
