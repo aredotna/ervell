@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 cookies = require 'cookies-js'
 { keys, each } = require 'underscore'
+CurrentUser = require './current_user.coffee'
 
 module.exports = class UIState extends Backbone.Model
   defaults:
