@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 cookies = require 'cookies-js'
 { keys, each } = require 'underscore'
+CurrentUser = require './current_user.coffee'
 
 module.exports = class UIState extends Backbone.Model
   defaults:
@@ -19,4 +20,6 @@ module.exports = class UIState extends Backbone.Model
     @on 'change:filter', @setCookie
 
   setCookie: (model, value)->
+    # Cookie should only be set for logged in users
+    return false unless CurrentUser.orNull()
     cookies.set keys(model.changed)[0], value
