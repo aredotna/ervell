@@ -19,6 +19,7 @@ bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
 viewMode = require './middleware/view_mode'
+checkSession = require './middleware/check_session.coffee'
 isInverted = require '../components/night_mode/middleware'
 splitTestMiddleware = require '../components/split_test/middleware'
 cookieParser = require 'cookie-parser'
@@ -141,6 +142,7 @@ module.exports = (app) ->
 
   app.use artsyError.helpers
   app.use arena_pp
+  app.use checkSession
   app.use localsMiddleware
   app.use splitTestMiddleware
   app.use ensureSSL
