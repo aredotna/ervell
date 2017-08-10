@@ -1,6 +1,12 @@
-extends ../../../../components/layout/index--bare
+extends ../../../../components/layout/layouts/blank
 
-block body
+block title
+  |  / UI / Components
+
+block scripts
+  script( src= asset('/assets/ui.js') )
+
+block container
   .Page
     .UI
       .AddBlock.js-add-block
@@ -8,6 +14,3 @@ block body
 
       .AddBlock.AddBlock--list.js-add-block
         include ../../../../components/add_block/index
-
-block scripts
-  script( src= asset('/assets/ui.js') )

@@ -1,6 +1,12 @@
-extends ../../../components/layout/index--bare
+extends ../../../components/layout/layouts/blank
 
-block body
+block title
+  |  / UI
+
+block scripts
+  script( src= asset('/assets/ui.js') )
+
+block container
   .Page
     .UI
       include ./sections/colors
