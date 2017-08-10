@@ -1,0 +1,45 @@
+extends ../../../../components/layout/layouts/blank
+
+block title
+  |  / UI / Grid
+
+block scripts
+  script( src= asset('/assets/ui.js') )
+
+block container
+  .Page
+    .UI
+      h2.Type
+        | .GridBlocks
+
+      .GridBlocks
+        .AddBlock.js-add-block
+          include ../../../../components/add_block/index
+
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+        .GridBlock
+          | Hello
+
+        //- Left-align last row by filling with 0-height elements
+        for i in new Array(8)
+          .GridBlock.GridBlock--filler
+            //-

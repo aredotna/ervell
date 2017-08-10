@@ -1,0 +1,19 @@
+.GridBlocks
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  justify-content space-between
+
+  > *
+    margin 0 0 (grid-block-gutter * 4) 0
+
+.GridBlock
+  position relative
+  width grid-block-size
+  height grid-block-size
+
+  // Used in Flexbox hack at end of `.GridBlocks`
+  // to left align the last row.
+  &--filler
+    height 0
+    opacity 0
