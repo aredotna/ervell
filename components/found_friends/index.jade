@@ -1,9 +1,10 @@
 .FoundFriendsContact
-  if !authentication.id
-    | Connect to Twitter to find friends on Are.na.
+  p.Type
+    if !authentication.id
+      | Connect to Twitter to find friends on Are.na
 
-  else if authentication.id && contacts.models.length === 0
-    | Could not find any friends on Are.na.
+    else if authentication.id && contacts.models.length === 0
+      | Could not find any friends on Are.na
 
 for user in contacts.models
   .FoundFriendsContact

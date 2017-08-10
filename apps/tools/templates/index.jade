@@ -1,15 +1,15 @@
 extends ../../../components/layout/index
 
 block body
-  .tools
-    .tools--path
+  .Tools
+    .Tools__path
       include ./path
-    .tools--content.tabs__content
+
+    .Tools__content.tabs__content
       include ./tabs/bookmarklet
-      if user
-        include ./tabs/add_via_email
-        include ./tabs/find_friends
-        include ./tabs/invite
+      include ./tabs/add_via_email
+      include ./tabs/find_friends
+      include ./tabs/invite
 
 block scripts
-  script( src=asset('/assets/tools.js') )
+  script( src= asset('/assets/tools.js') )
