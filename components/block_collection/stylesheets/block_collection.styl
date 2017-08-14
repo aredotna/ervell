@@ -13,12 +13,13 @@
   margin 0 10px 90px 10px
   position relative
   display inline-block
-  background #fff
+  background-color white
   user-select none
 
   &:hover
     cursor pointer
 
+  // TODO
   .tooltip
     width 120px
     left -47px
@@ -26,8 +27,9 @@
 .block-padding
   padding-top 100%
 
-.grid__block__inner:hover, .grid__block__inner.is-active
-  border 1px solid bordergray
+.grid__block__inner:hover
+.grid__block__inner.is-active
+  border 1px solid colors-gray-border
   cursor pointer
 
   .grid__block__overlay
@@ -38,9 +40,10 @@
     visibility visible
 
 .grid__block__inner.is-active
-  border 1px dashed bordergray
+  border 1px dashed colors-gray-border
 
-body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-active
+body.is-mobile .grid__block__inner:hover
+body.is-mobile .grid__block__inner.is-active
   .grid__block__overlay
     opacity 1
 
@@ -48,19 +51,19 @@ body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-
   height 100%
   width 100%
 
-.grid__block--block .grid__block__inner, .grid__block--loading .grid__block__inner
+.grid__block--block .grid__block__inner
+.grid__block--loading .grid__block__inner
   background-size 80px 80px
   background-image linear-gradient(
     45deg,
-    rgba(bordergray, 0.5)   25%,
-    transparent             25%,
-    transparent             50%,
-    rgba(bordergray, 0.5)   50%,
-    rgba(bordergray, 0.5)   75%,
-    transparent             75%,
+    rgba(colors-gray-border, 0.5) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(colors-gray-border, 0.5) 50%,
+    rgba(colors-gray-border, 0.5) 75%,
+    transparent 75%,
     transparent
   )
-  -webkit-animation loading 0.5s linear infinite
   animation loading 0.5s linear infinite
 
 @keyframes loading
@@ -75,10 +78,10 @@ body.is-mobile .grid__block__inner:hover, body.is-mobile .grid__block__inner.is-
   bottom 0
   left 0
   right 0
-  border 1px solid #fff
+  border 1px solid white
 
 .grid__block--placeholder.loading .grid__block__inner
-  border 1px dashed bordergray
+  border 1px dashed colors-gray-border
 
 .grid__block__author
   visibility hidden
@@ -97,8 +100,9 @@ body:not(.is-mobile) .grid__block:hover
   .grid__block__title
     display static
 
-.grid__block__title, .grid__block__author
-  color lightgray
+.grid__block__title
+.grid__block__author
+  color colors-gray-light
   font-size s_caption
   font-weight bold
   text-align center
@@ -110,7 +114,7 @@ body:not(.is-mobile) .grid__block:hover
   line-height 1.2
 
   &:hover
-    color lightgray
+    color colors-gray-light
 
   svg
     position absolute
@@ -138,40 +142,41 @@ body:not(.is-mobile) .grid__block:hover
 .button--inblock
   font-size 15px
   font-weight bold
-  color textgray
+  color colors-gray-text
   padding 18px 20px
   margin 1%
-  background-color rgba(255,255,255, 0.85)
+  background-color rgba(white, 0.85)
   cursor pointer
   width 125px
   &:hover
-    color hovergray
-    background-color rgba(255,255,255, 1)
+    color colors-gray-hover
+    background-color rgba(white, 1)
   &--view
     width 150px
 
-.grid__block--channel, .grid__block--user
+.grid__block--channel
+.grid__block--user
   .button--inblock
     z-index 1
-    border-top 1px solid bordergray
+    border-top 1px solid colors-gray-border
     background-color transparent
 
     &:hover
-      border-top 1px solid textgray
+      border-top 1px solid colors-gray-text
       background-color transparent
 
 .grid__block--user
   .button--inblock
     width 140px
-    border-top 1px solid lightgrayplus
+    border-top 1px solid colors-gray-lightplus
 
-.grid__block__delete-block
-  position absolute
-  top 5px
-  right 5px
+// .grid__block__delete-block
+//   position absolute
+//   top 5px
+//   right 5px
 
-  &:hover .grid__block__delete-block__confirm
-    color #fff
+//   &:hover .grid__block__delete-block__confirm
+//     color white
 
 .grid__block__content__image
   max-width 100%
@@ -181,24 +186,23 @@ body:not(.is-mobile) .grid__block:hover
   vertical-align top
 
 .grid__block__content__text
-  serif-text()
   height 100%
-  padding .8em 1em 0 1em
-  p()
+  padding 1em
   overflow  hidden
   word-wrap break-word
+  font-family font_serif
+  font-size font-size-base
+  line-height line-height-tall
 
-  h1, h2
-    font-size 1.3rem
+  h1
+  h2
+    font-size font-size-large
 
   p
-    p()
-    margin unit auto 0
-
+    collapsed-margins(1em)
 
   a
     font-weight bold
-    padding 0
 
   ul
     ul: 'square'
@@ -206,7 +210,11 @@ body:not(.is-mobile) .grid__block:hover
   ol
     ol()
 
-  em, strong, blockquote, ul, ol
+  em
+  strong
+  blockquote
+  ul
+  ol
     padding 0
 
   hr
@@ -214,32 +222,32 @@ body:not(.is-mobile) .grid__block:hover
 
   blockquote
     margin 10px 0 10px 2px
-    border-left 1px solid bordergray
+    border-left 1px solid colors-gray-border
     p
       padding 0 25px 0 10px
 
-.button--delete-block
-  width 28px
-  height 28px
-  line-height 32px
-  font-size 12px
-  color lightgray
+.GridBlockRemove
   display none
+  position absolute
+  top 1em
+  right 1em
+  color colors-gray-light
 
   &:hover
-    color alert
+    color colors-state-alert
 
-.grid.is-editable .button--delete-block,
-.grid__block.can-edit .button--delete-block,
-.grid__block.can-manage .button--delete-block
-  display block
+.GridBlocks.is-editable
+.GridBlock.can-edit
+.GridBlock.can-manage
+  .GridBlockRemove
+    display block
 
 /* USER */
 .grid__block--user:hover
-  color hovergray
+  color colors-gray-hover
 
   .grid__block__inner
-    border 2px solid lightgray
+    border 2px solid colors-gray-light
 
   &:hover
     .grid__block__author
@@ -249,26 +257,29 @@ body:not(.is-mobile) .grid__block:hover
       display none
 
 .grid__block--user .grid__block__inner
-  background-color backgroundgray
-  border 2px solid lightgray
+  background-color colors-gray-background
+  border 2px solid colors-gray-light
 
   h2
     height 60px
     margin 30px 0 0 0
 
   &:hover
-    color hovergray
-    border 2px solid bordergray
+    color colors-gray-hover
+    border 2px solid colors-gray-border
 
 /* ATTACHMENT */
 .grid__block__channel--attachment-bk
+  // TODO: wut
   background-color #EAEAEA
+
   .iconic-property-fill
-    fill textgray
+    fill colors-gray-text
 
 /* CHANNEL */
 .grid__block--channel
-  .grid__block__inner, .grid__block__overlay
+  .grid__block__inner
+  .grid__block__overlay
     &--closed
       border-color rgba(colors-channel-closed, colors-border-alpha)
       color colors-channel-closed
@@ -290,7 +301,9 @@ body:not(.is-mobile) .grid__block:hover
     padding 15px 12px 0 12px
     word-break break-word
 
-  .grid__block__content, .valign-inner, .valign-outer
+  .grid__block__content
+  .valign-inner
+  .valign-outer
     width 100%
 
   .grid__block__inner
@@ -301,7 +314,7 @@ body:not(.is-mobile) .grid__block:hover
     border-color inherit
 
     &:hover
-      color hovergray
+      color colors-gray-hover
 
 .grid__block__channel__stats
   font-weight normal
@@ -315,7 +328,7 @@ body:not(.is-mobile) .grid__block:hover
   font-size s_caption
   padding-top 135px
   font-weight bold
-  color textgray
+  color colors-gray-text
 
   span
     padding 0 5px
@@ -323,14 +336,15 @@ body:not(.is-mobile) .grid__block:hover
 /* COMMENT */
 .grid__block__content__comment
   height 100%
-  background-color backgroundgray
+  background-color colors-gray-background
   padding 0 1.1em 0 1.1em
-  border-top 1px solid lightgray
+  border-top 1px solid colors-gray-light
 
   p
-    serif-text()
-    font-size s_caption + 1
-    padding 15px
+    padding 1em
+    font-family font_serif
+    font-size font-size-base
+    line-height line-height-tall
 
 /* CONNECT */
 .grid__block__connect-container
@@ -357,10 +371,10 @@ body:not(.is-mobile) .grid__block:hover
   line-height unit * 1.5
   font-size .8rem
   text-align center
-  background-color rgba(255,255,255, 0.85)
+  background-color rgba(white, 0.85)
 
   &:hover
-    background-color rgba(255,255,255, 1)
+    background-color rgba(white, 1)
 
 @media (max-width:(block_width_mar * 3))
   .grid
@@ -379,7 +393,7 @@ body.is-mobile
     margin 0 0 80px 0
 
   .grid__block--text .grid__block__inner
-    border 1px solid lightgrayplus
+    border 1px solid colors-gray-lightplus
 
   .is-mobile .grid__block:hover .grid__block__inner .grid__block__title, .is-mobile .grid__block__title
     display static !important

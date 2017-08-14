@@ -13,9 +13,9 @@ module.exports.init = ->
 
   view = new ManageBlockCollectionView
     blocks: blocks
-    el: $ ".grid"
+    el: $('.js-block-collection')
 
   new InfiniteView
-    context: $ ".grid"
+    context: $('.js-block-collection')
     collection: blocks
-    itemSelector: $ ".grid"
+    itemSelector: $('.js-block-collection')

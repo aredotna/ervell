@@ -1,61 +1,62 @@
 @require '../../layout/variables'
 
+// TODO: Fix all this
 .path--header
-  margin 100px auto 0 auto
+  // margin 100px auto 0 auto
 
 .path__inner
   padding-bottom 3em
 
 .path
   position relative
-  color lightgray
+  color colors-gray-light
   text-align left
   font-weight normal
 
   clearfix()
 
 .path__below a
-  color lightgrayplus
+  color colors-gray-lighter
 
   &:hover
     color textgray
 
 .path__headline
-  @extend h1
-  font-weight normal
+  font-size font-size-h2
+  font-weight bold
   margin 0
   position relative
   float left
   width auto
-  line-height 1em
+  line-height line-height-tall
 
-  li a, li span
+  li
+    a
+    span
     font-weight bold
 
 .path.stuck
   position fixed
   z-index header_z
-  transform translate3d(0, 0, 1px)
-  -webkit-transform translate3d(0, 0, 1px)
-  -moz-transform translate3d(0, 0, 1px)
-  -o-transform translate3d(0, 0, 1px)
-  transform translate3d(0, 0, 1px)
-  top 1px
-  left 0px
-  height 38px
+  transform translateZ(0)
+  top 0
+  left 0
+  height topbar_h
   margin 0
   text-align center
   width 100%
   pointer-events none
 
-  &.is-hidden, &.is-hidden.path__headline
+  &.is-hidden
+  &.is-hidden.path__headline
     opacity 0
     pointer-events none
 
   .path__headline
     display inline-block
-    font-size 1em
-    line-height 3.1em
+    font-size font-size-base
+    // line-height 3.1em // OK...?
+    line-height topbar_h
     float none
     pointer-events all
 
@@ -74,7 +75,7 @@
 
 .path__breadcrumb
   min-width 115px
-  breadcrumb: '/' 8px lightgray
+  breadcrumb: '/' 8px colors-gray-light
 
   li:after
     font-weight normal
@@ -114,7 +115,7 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
   clear right
   width auto
   height 20px
-  color lightgray
+  color colors-gray-light
   font-size s_caption + 1
   line-height 20px
   font-weight bold
@@ -138,7 +139,7 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
   margin 4px 0 0 0
 
   .root__toggle__item
-    color lightgray
+    color colors-gray-light
     font-size s_caption + 1
     line-height 1.3em
 
@@ -146,7 +147,7 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
       color hovergray
       font-weight bold
 
-@media (max-width:(block_width_mar * 3) + 30)
+@media (max-width: (block_width_mar * 3) + 30)
   .path
     .path__headline
       margin-bottom 15px
@@ -162,7 +163,7 @@ privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
   .show-info
     display block
 
-@media (max-width:500px)
+@media (max-width: 500px)
   .path--header
     margin 80px auto 0 auto
     padding 0

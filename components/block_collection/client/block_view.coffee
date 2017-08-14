@@ -19,7 +19,7 @@ module.exports = class BlockView extends Backbone.View
   events:
     'click .js-overlay-source': 'openLink'
     'click .js-overlay-connect': 'loadConnectView'
-    'click .grid__block__delete-block': 'confirmDestroy'
+    'click .js-destroy': 'confirmDestroy'
     'click .confirm__choice__yes': 'destroyConnection'
     'click .confirm__choice__no': 'cancelDestroy'
 
@@ -52,7 +52,7 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    $target = @$('.grid__block__connect-container')
+    $target = @$('.js-connect')
 
     view = new BlockCollectionConnectIntegrationView model: @model
 
@@ -99,6 +99,7 @@ module.exports = class BlockView extends Backbone.View
     @$('.grid__block__link').removeAttr('data-disabled')
 
   render: ->
+    # TODO: Hmmm
     if @containerMethod isnt 'before' and @containerMethod isnt 'after'
       @container[@containerMethod] blockTemplate
         block: @model

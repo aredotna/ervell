@@ -50,7 +50,7 @@ module.exports = class ChannelView extends Backbone.View
     # Editable
     if CAN.update
       @$('.js-block-collection').addClass 'is-editable'
-      @$('.block-item').addClass 'can-manage'
+      @$('.js-block').addClass 'can-manage'
 
       @channel.set is_managable: true
 

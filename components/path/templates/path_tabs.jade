@@ -2,7 +2,7 @@ mixin tab(path, slug, title)
   li.tab--container__nav__item(class= tab == slug ? "tab--container__nav__item--#{slug} is-active" : "tab--container__nav__item--#{slug}" )
     h5: a(href="/#{path}/#{slug}") #{title}
 
-section#main-path.path--header.flex-container
+section#main-path.path--header
   .path__inner.path
     .path__headline
       ul.path__breadcrumb

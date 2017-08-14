@@ -4,7 +4,7 @@ span.block-item.block-item--content.block-collection--list__row(
   id="#{block.id}"
   href="#{block.getHref()}"
   data-client="#{block.get('base_class')}"
-  class="needsclick #{block.getPermissions(user, channel)} block-collection--list__row--#{block.getVisibility()}"
+  class="#{block.getPermissions(user, channel)} block-collection--list__row--#{block.getVisibility()}"
 )
   .block-collection--list__column.block-collection--list__column--thumb
     .block-collection--list__column__channel-icon(class="privacy--#{block.getVisibility()}")

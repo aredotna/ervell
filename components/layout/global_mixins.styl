@@ -23,6 +23,7 @@ caret()
   border-left 4px solid transparent
   margin 2px 0 4px 4px
 
+// TODO: Kill these
 privacy-color(prefix, attr)
   colors = 'closed' closed, 'public' public, 'private' private
   for value in colors
@@ -51,30 +52,20 @@ privacy-color-hover(prefix, attr)
     {prefix + value[0] + ':hover'}
       {attr} value[1]
 
-serif-text()
-  font-family font_serif
-  font-weight 100
-  font-size 19px
-  text-align left
-  line-height 1.6em
-
-  p
-    margin .6em 0
-
 collapsed-margins($a, $b = auto)
   margin $a $b
 
   if $b == 'auto'
     &:first-child
-      margin-top: 0
+      margin-top 0
     &:last-child
-      margin-bottom: 0
+      margin-bottom 0
 
   else
     &:first-child
-      margin-left: 0
+      margin-left 0
     &:last-child
-      margin-right: 0
+      margin-right 0
 
 candy-striped(color)
   background-image linear-gradient(

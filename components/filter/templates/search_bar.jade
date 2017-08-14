@@ -1,10 +1,10 @@
-.form__field.channel-filter.js-channel-filter(
-  class="channel-filter--#{view_mode}"
-)
-  input.input--wide.js-channel-filter-input(
-    name='title' type='text' placeholder="Filter #{title}"
+.Fieldset.js-channel-filter( data-view-mode= view_mode )
+  input.Input.js-channel-filter-input(
+    name='title'
+    type='text'
+    placeholder="Filter #{title}"
   )
-  .channel-filter__status
-    .channel-filter__status__close.js-clear-input &times;
-    .channel-filter__status__icon
-      include ../../../public/images/iconic/magnifying-glass.svg
+  //- .channel-filter__status
+  //-   .channel-filter__status__close.js-clear-input &times;
+  //-   .channel-filter__status__icon
+  //-     include ../../../public/images/iconic/magnifying-glass.svg

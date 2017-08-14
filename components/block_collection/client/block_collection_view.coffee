@@ -11,7 +11,7 @@ module.exports = class BlockCollectionView extends Backbone.View
   initialize: ({ @channel, @blocks })->
     mediator.shared.blocks = @blocks if @blocks
     IconicJS().inject 'img.iconic'
-    @$('.grid__block').each @initBlockView
+    @$('.js-block').each @initBlockView
 
   initBlockView: (index, el) =>
     $block = $(el)
