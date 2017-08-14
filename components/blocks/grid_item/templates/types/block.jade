@@ -1,62 +1,78 @@
-div(
-  class="block-item block-item--content grid__block grid__block--item grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}"
-  data-id="#{block.id}"
-  data-class="#{block.get('base_class')}"
-  id="#{block.id}"
+//- div(
+//-   class="block-item block-item--content grid__block grid__block--item grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}"
+//-   data-id="#{block.id}"
+//-   data-class="#{block.get('base_class')}"
+//-   id="#{block.id}"
+//- )
+//-   .block-padding
+
+.GridBlock.js-block(
+  class="grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}"
+  data-id= block.id
+  data-class= block.get('base_class')
+  id= block.id
 )
   .block-padding
-
-  span(
-    href="#{block.getHref()}"
-    data-client="#{block.get('base_class')}"
-    class="grid__block__link needsclick"
+  span.grid__block__link(
+    href= block.getHref()
+    data-client= block.get('base_class')
   )
-    .grid__block__inner.halign--flex(class="grid__block__inner--#{ block.getVisibility() }")
+    .grid__block__inner.halign--flex( class="grid__block__inner--#{ block.getVisibility() }" )
       .grid__block__content
         block content
 
       .grid__block__overlay.abs-fill(class="grid__block__overlay--#{ block.getVisibility() }")
-        - if(isEmbedded && block.get('class') != 'Channel') 
-          a(href="#{block.getHref()}" target="_blank").button--inblock.button--inblock--view View on Are.na
-        - else if(user && user.has('id'))
+        if isEmbedded && block.get('class') != 'Channel'
+          a(href="#{block.getHref()}" target="_blank").button--inblock.button--inblock--view
+            | View on Are.na
+
+        else if(user && user.has('id'))
           block overlay
 
-        - if(channel && user && user.has('id') && !isEmbedded)
-          .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
-            .tooltip
+        if channel && user && user.has('id') && !isEmbedded
+          //- .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm( data-glyph='trash' )
+          .GridBlockRemove.iconic.iconic-size-sm.js-destroy( data-glyph='trash' )
+            .Tooltip
               | Are you sure?
-              a.tooltip__choice(data-choice='destroy') Yes
-              a.tooltip__choice(data-choice='cancel') No
+
+              //- a.js-destroy( data-choice='destroy' )
+              //-   | Yes
+              //- a.tooltip__choice( data-choice='cancel' )
+              //-   | No
 
       if user && user.id
-        .grid__block__connect-container.abs-fill
-          //- rendered by the client
+        .grid__block__connect-container.abs-fill.js-connect
+          //- Rendered client-side
+
       if block.get('comment_count') > 0 && user && user.id
-        span.grid__block__comment-count(href="#{block.getHref()}/comments" data-client="#{block.get('base_class')}")= block.get('comment_count')
+        span.grid__block__comment-count(href="#{block.getHref()}/comments" data-client="#{block.get('base_class')}")
+          = block.get('comment_count')
 
-    - if(block.get('class') != 'Channel' && block.get('class') != 'User')
-      p(href="#{block.getHref()}" data-client="#{block.get('base_class')}")
-        .grid__block__title= block.smartTruncate(block.get('title'))
-          - if(block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension))
+    if block.get('class') != 'Channel' && block.get('class') != 'User'
+      p( href="#{block.getHref()}" data-client="#{block.get('base_class')}" )
+        .grid__block__title
+          = block.smartTruncate(block.get('title'))
+
+          if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
             img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
-          - if(block.get('class') == 'Media')
+
+          if block.get('class') == 'Media'
             img(data-src="#{sd.IMAGE_PATH}iconic/type-embed.svg" class="iconic iconic-sm")
-        - if(block.has('user'))
 
-          - if(channel)
-
-            - if(block.get('connected_by_username') == block.get('user').username)
+        if block.has('user')
+          if channel
+            if block.get('connected_by_username') == block.get('user').username
               p.grid__block__author
                 | Added by #{block.get('user').username}
                 br
                 | Updated #{block.updatedAtAgo()}
-            - else
+            else
               p.grid__block__author
                 | Connected by #{block.get('connected_by_username')}
                 br
                 | #{block.connectedAtAgo()}
 
-          - else
+          else
             p.grid__block__author
               | Added by #{block.get('user').username}
               br

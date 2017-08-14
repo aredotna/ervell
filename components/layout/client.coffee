@@ -58,13 +58,13 @@ setupPusherAndCurrentUser = ->
 
     user.fetch
       prefill: true
-      prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
+      prefillSuccess: (data) -> mediator.trigger 'current_user:prefetched'
       success: (user, response)->
         mediator.trigger 'current_user:fetched'
-        if user.get('show_tour') and sd.AFTER_ONBOARDING == 'explore'
+        if user.get('show_tour') and sd.AFTER_ONBOARDING is 'explore'
           showNewUserMessages()
 
-  pusher= mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
+  pusher = mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
   chan = mediator.shared.current_user_channel = pusher.subscribe "user_#{user.id}" if user.id and Pusher?
 
 setupViews = ->
@@ -75,10 +75,8 @@ setupViews = ->
 
   new HeaderInfoView
 
-  if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
-    new Waypoint.Sticky
-      element: $('.path__inner')
-      offset: 3
+  if (path = $('.js-path')[0]) and not isMobile()
+    new Waypoint.Sticky element: path
 
   if mediator.shared.current_user.id
     initLoggedInNavigation $('.js-logged-in-navigation')

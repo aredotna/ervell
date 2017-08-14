@@ -21,7 +21,7 @@ module.exports = class BlockView extends Backbone.View
   events:
     'click .js-overlay-source': 'openLink'
     'click .js-overlay-connect': 'loadConnectView'
-    'click .grid__block__delete-block': 'confirmDestroy'
+    'click .js-destroy': 'confirmDestroy'
     'click .tooltip__choice': 'confirmChoice'
     'mouseover': 'onMouseOver'
     'mouseout': 'onMouseOut'
@@ -70,7 +70,7 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    $target = @$('.grid__block__connect-container')
+    $target = @$('.js-connect')
 
     view = new BlockCollectionConnectIntegrationView model: @model
 
@@ -136,7 +136,7 @@ module.exports = class BlockView extends Backbone.View
     e.preventDefault()
     e.stopImmediatePropagation()
     @$('.grid__block__inner').addClass 'is-active'
-    @$('.tooltip').addClass 'tooltip--is-active'
+    @$('.js-tooltip').addClass 'Tooltip--active'
 
   confirmChoice: (e) =>
     e.preventDefault()
@@ -148,7 +148,7 @@ module.exports = class BlockView extends Backbone.View
 
   cancelDestroy: ->
     @$('.grid__block__inner').removeClass 'is-active'
-    @$('.tooltip').removeClass 'tooltip--is-active'
+    @$('.js-tooltip').removeClass 'Tooltip--active'
 
   destroyConnection: ->
     @model.destroy channel: @channel

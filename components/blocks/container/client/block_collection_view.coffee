@@ -58,7 +58,7 @@ module.exports = class BlockCollectionView extends Backbone.View
       @unhighlightBlocks()
 
   highlightBlocks: (channelId)->
-    visibleBlockIds = $('.block-item').withinviewport().map(-> $(this).data('id')).get()
+    visibleBlockIds = $('.js-block').withinviewport().map(-> $(this).data('id')).get()
     blockPool = @collection.filter (block) ->
       visibleBlockIds.indexOf(parseInt(block.id)) > -1
     each blockPool, (block) ->
@@ -87,7 +87,7 @@ module.exports = class BlockCollectionView extends Backbone.View
 
   postRender: =>
     # setup block item views
-    @$('.block-item').each @initBlockView
+    @$('.js-block').each @initBlockView
 
     unless @postRendered
       @modes[@mode]

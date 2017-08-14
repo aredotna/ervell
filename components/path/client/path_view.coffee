@@ -27,11 +27,11 @@ module.exports = class PathView extends Backbone.View
         new SortView
           el: @$('.js-profile-sort')
           model: mediator.shared.state
-        
+
         new FilterView
           el: @$('.js-profile-filter')
           model: mediator.shared.state
-          
+
         new PrivateChannelView
           el: @$('.message_button')
           model: new User sd.USER

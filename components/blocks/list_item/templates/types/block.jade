@@ -1,10 +1,10 @@
-span.block-item.block-item--content.block-collection--list__row(
+span.block-item.block-item--content.block-collection--list__row.js-block(
   data-id="#{block.id}"
   data-class="#{block.get('base_class')}"
   id="#{block.id}"
   href="#{block.getHref()}"
   data-client="#{block.get('base_class')}"
-  class="needsclick #{block.getPermissions(user, channel)}"
+  class="#{block.getPermissions(user, channel)}"
 )
   .block-collection--list__column.block-collection--list__column--thumb
     if block.has('image')

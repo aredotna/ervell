@@ -1,10 +1,9 @@
 div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{block.getPermissions(user, channel)}" data-id="#{block.id}" data-class="#{block.get('base_class')}" id="#{block.id}")
   .block-padding
 
-  span(
+  span.grid__block__link(
     href="#{block.getHref()}"
     data-client="#{block.get('base_class')}"
-    class="grid__block__link needsclick"
   )
 
     .grid__block__inner.halign--flex(class="grid__block__inner--#{block.getVisibility() }")
@@ -23,8 +22,9 @@ div(class="grid__block grid__block--item grid__block--#{block.getClass()} #{bloc
               a.grid__block__delete-block__confirm__choice.confirm__choice__no No
 
       if user && user.id
-        .grid__block__connect-container.abs-fill
-          //- rendered by the client
+        .grid__block__connect-container.abs-fill.js-connect
+          //- Rendered client-side
+
       if block.get('comment_count') > 0 && user && user.id
         span.grid__block__comment-count(href="#{block.getHref()}/comments" data-client="#{block.get('base_class')}")= block.get('comment_count')
 

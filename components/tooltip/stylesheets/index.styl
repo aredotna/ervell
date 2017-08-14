@@ -1,57 +1,24 @@
-.tooltip
-  bubble top center alert
-  z-index rotate_z
+.Tooltip
+  display none
   position absolute
-  background alert
+  bubble top center colors-state-alert
+  z-index rotate_z
   box-shadow none
   border none
   border-radius 0
-  display none
-  color #fff
-  &--is-active
-    display block
-  &:hover
-    color #fff
-  &:after
-    border-bottom 10px solid alert
-  &__choice
-    padding 0 10px
-    font-weight bold
-    cursor pointer
+  color white
+  background-color colors-state-alert
 
-.gray-tooltip
-  position relative
-  text-decoration none
+  &--active
+    display block
+
   &:hover
-    &:before
-    &:after
-      opacity 1
-      transition-delay 0.0625s
-  &:before
+    color white
+
   &:after
-    top calc(100% + 4px)
-    left 50%
-    position absolute
-    pointer-events none
-    opacity 0
-    transition 0s
-    z-index 1
-    font-size s_caption 
-    font-family font_sans
-    line-height 1.2
-    letter-spacing 0
-  &:before
-    margin-top -12px
-    margin-left -4px
-    content ''
-    background transparent
-    border 6px solid transparent
-    border-bottom-color textgray
-  &:after
-    content attr(data-message)
-    width 135px
-    color #fff
-    background-color textgray
-    padding 10px
-    margin-left -((@width / 2) + 10px) 
-    text-align center
+    border-bottom 1em solid colors-state-alert
+
+  // &__choice
+  //   padding 0 1em
+  //   font-weight bold
+  //   cursor pointer
