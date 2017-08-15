@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 { defer, each, delay } = require 'underscore'
-{ API_URL } = require('sharify').data
+{ API_URL, CAN } = require('sharify').data
 mediator = require '../../../../lib/mediator.coffee'
 InfiniteView = require '../../../pagination/infinite_view.coffee'
 SkeletonView = require '../../../pagination/skeleton_view.coffee'
@@ -82,6 +82,7 @@ module.exports = class BlockCollectionView extends Backbone.View
       user: mediator.shared.current_user
       channel: @channel
       isSearching: @isSearching()
+      can: CAN
 
     defer (=> @postRender())
 
