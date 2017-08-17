@@ -1,12 +1,14 @@
 if can && can.add_to
   include ../../grid_item/templates/types/new_block
 
-else if channel && channel.get('status') === 'private'
-  //- If we can't add to the channel but it's private then that means
+else if (channel && channel.get('status') === 'private') && !(sd && sd.SHARE_TOKEN)
+  //- If we can't add to the channel but it's private (and not via the share link) then that means
   //- the user needs to upgrade to premium to add to it
   //-
   //- The reason this only exists in grid view is because
   //- list view is premium-only so this will never be seen in that view mode.
+  //-
+  //- TODO: What is a better solution determining this state?
   include ../../../premium_cta_block/index
 
 for block in blocks
