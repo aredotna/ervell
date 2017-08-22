@@ -139,6 +139,9 @@ module.exports = (app) ->
       'private_connections_count'
       'private_connections_limit'
       'is_exceeding_private_connections_limit'
+      'is_confirmed'
+      'is_pending_reconfirmation'
+      'is_pending_confirmation'
     ]
 
   app.use artsyError.helpers
@@ -165,10 +168,10 @@ module.exports = (app) ->
   app.use require '../apps/feed'
   app.use require '../apps/home'
   app.use require '../apps/blog'
-  app.use require '../apps/registration'
+  app.use require '../apps/authentication'
   app.use require '../apps/getting_started'
   app.use require '../apps/tools'
-  app.use require '../apps/auth'
+  app.use require '../apps/util'
   app.use require '../apps/about'
   app.use require '../apps/search'
   app.use require '../apps/manage'
