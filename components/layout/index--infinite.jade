@@ -29,9 +29,5 @@ html( class="#{colorClass} #{loggedInClass}" )
       include loader/templates/index
 
     include modules/scrolltop
-
-    unless user && user.id
-      include ../logged_out_cta/index
-
     include modules/analytics
     include modules/scripts

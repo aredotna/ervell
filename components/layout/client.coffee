@@ -18,7 +18,7 @@ CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
-initLoggedOutCta = require '../logged_out_cta/index.coffee'
+initConfirmableMessage = require '../confirmable_message/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 
 module.exports = ->
@@ -29,8 +29,8 @@ module.exports = ->
   setupAnalytics()
   syncAuth()
   initShortCuts()
-  initLoggedOutCta() unless sd.CURRENT_USER?.id
   showLimitMessage()
+  initConfirmableMessage()
 
 setMobileClass = ->
   $body = $('body')
