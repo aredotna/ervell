@@ -12,10 +12,6 @@ html( class="#{colorClass} #{loggedInClass}" )
     block vars
 
   body( class= extraClasses )
-    //- TODO: Refactor to use modalize, only thing that uses this is AuthView
-    #modal-container
-      //- Rendered client-side
-
     include header/templates/index
 
     .Container.js-container

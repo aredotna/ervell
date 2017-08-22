@@ -7,8 +7,7 @@ header#layout-header
 
   else
     .layout-header__register
-      span
-        span(data-client="auth" href="/log_in").btn-login Log in &nbsp;
-      span or &nbsp;
-      span
-        span(data-client="auth" href="/sign_up").btn-signup Join
+      //- TODO: Margins
+      a( href='/sign_up' ) Join
+      |&nbsp;or&nbsp;
+      a( href="/log_in?redirect-to=#{sd.CURRENT_PATH}" ) Log in
