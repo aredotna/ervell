@@ -1,0 +1,11 @@
+extends ../../../components/layout/layouts/blank
+
+block scripts
+  script( src= asset('/assets/authentication.js') )
+
+block container
+  .Authentication.js-authentication
+    .AuthenticationNavigation.js-navigation
+      include ../components/navigation/index
+
+    block content

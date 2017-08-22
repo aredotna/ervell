@@ -1,0 +1,33 @@
+extends ./layout
+
+block title
+  |  / Log in
+
+block content
+  form.AuthenticationForm.js-form( action='/me/sign_in', method='post' )
+    .Fieldset
+      input.Input(
+        name='email'
+        type='email'
+        placeholder='Email'
+        required
+        autofocus
+      )
+
+      .AuthenticationForm__password
+        input.Input(
+          id='password'
+          name='password'
+          placeholder='Password'
+          type='password'
+          pattern='.{6,}'
+          required
+        )
+
+        a( href='/forgot' ) Forgot?
+
+    .Errors.js-errors
+      //-
+
+    button.Button.Button--divider.js-submit
+      | Log in

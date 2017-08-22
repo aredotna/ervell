@@ -1,0 +1,18 @@
+include ../../../../components/util/activator
+
+.AuthenticationNavigation__logo
+  a( href='/' )
+    include ../../../../public/images/arena-mark.svg
+
+.AuthenticationNavigation__links
+  a.AuthenticationNavigation__link(
+    href='/sign_up'
+    data-state= activeState('/sign_up')
+  ) Join
+
+  span or
+
+  a.AuthenticationNavigation__link(
+    href='/log_in'
+    data-state= activeState('/log_in')
+  ) Log in

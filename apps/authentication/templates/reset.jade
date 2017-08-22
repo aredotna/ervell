@@ -1,0 +1,31 @@
+extends ./layout
+
+block title
+  |  / Reset password
+
+block content
+  form.AuthenticationForm.js-form( action='#{sd.API_URL}/accounts/passwords/#{token}', method='put' )
+    .Fieldset
+      input.Input(
+        id='password'
+        name='password'
+        placeholder='New password (at least 6 characters)'
+        type='password'
+
+        required
+      )
+
+      input.Input(
+        id='password_confirmation'
+        name='password_confirmation'
+        placeholder='Confirm new password'
+        type='password'
+
+        required
+      )
+
+    .Errors.js-errors
+      //-
+
+    button.Button.Button--divider.js-submit
+      | Reset password
