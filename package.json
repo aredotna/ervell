@@ -11,7 +11,6 @@
     "npm": "4.x.x"
   },
   "dependencies": {
-    "arena-passport": "git://github.com/arenahq/arena-passport.git",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
     "axis": "*",
     "backbone": "*",
@@ -50,6 +49,8 @@
     "nib": "*",
     "numeraljs": "^1.5.6",
     "parse-domain": "^0.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "qlimit": "^0.1.1",
     "qs": "https://registry.npmjs.org/qs/-/qs-0.6.6.tgz",
     "query-params": "*",
