@@ -1,31 +1,38 @@
-#
-# Sets up intial project settings, middleware, mounted apps, and
-# global configuration such as overriding Backbone.sync and
-# populating sharify data
-#
-
-{ APP_URL, API_URL, NODE_ENV, SESSION_SECRET,
-SESSION_COOKIE_MAX_AGE, SESSION_COOKIE_KEY,
-COOKIE_DOMAIN, ASSET_PATH, IMAGE_PATH, REDIS_URL,
-PUSHER_KEY, IMAGE_PROXY_URL, GOOGLE_ANALYTICS_ID,
-STRIPE_PUBLISHABLE_KEY, BLOG_URL, ADMIN_SLUGS } = config = require "../config"
+{
+  APP_URL
+  API_URL
+  NODE_ENV
+  SESSION_SECRET
+  SESSION_COOKIE_MAX_AGE
+  SESSION_COOKIE_KEY
+  COOKIE_DOMAIN
+  ASSET_PATH
+  IMAGE_PATH
+  REDIS_URL
+  PUSHER_KEY
+  IMAGE_PROXY_URL
+  GOOGLE_ANALYTICS_ID
+  STRIPE_PUBLISHABLE_KEY
+  BLOG_URL
+  ADMIN_SLUGS
+} = require '../config'
 
 _ = require 'underscore'
-express = require "express"
-Backbone = require "backbone"
-sharify = require "sharify"
+express = require 'express'
+Backbone = require 'backbone'
+sharify = require 'sharify'
 arenaPassport = require './passport'
 bodyParser = require 'body-parser'
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
 viewMode = require './middleware/view_mode'
-checkSession = require './middleware/check_session.coffee'
+checkSession = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
 splitTestMiddleware = require '../components/split_test/middleware'
 cookieParser = require 'cookie-parser'
 session = require 'cookie-session'
-path = require "path"
-logger = require "morgan"
+path = require 'path'
+logger = require 'morgan'
 multipart = require 'connect-multiparty'
 artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
@@ -108,44 +115,8 @@ module.exports = (app) ->
     key: SESSION_COOKIE_KEY
     maxage: SESSION_COOKIE_MAX_AGE
 
-  arena_pp = arenaPassport _.extend config,
-    CurrentUser: CurrentUser
-    SECURE_ARENA_URL: API_URL
-    userKeys: [
-      'id'
-      'first_name'
-      'last_name'
-      'email'
-      'slug'
-      'following_ids'
-      'notification_count'
-      'username'
-      'authentication_token'
-      'manifest'
-      'announcements'
-      'shortcuts_id'
-      'avatar_image'
-      'registered'
-      'receive_email'
-      'receive_newsletter'
-      'post_address'
-      'show_tour'
-      'is_premium'
-      'channel_count'
-      'exclude_from_indexes'
-      'following_count'
-      'home_path'
-      'created_at'
-      'private_connections_count'
-      'private_connections_limit'
-      'is_exceeding_private_connections_limit'
-      'is_confirmed'
-      'is_pending_reconfirmation'
-      'is_pending_confirmation'
-    ]
-
   app.use artsyError.helpers
-  app.use arena_pp
+  app.use arenaPassport({ CurrentUser })
   app.use checkSession
   app.use localsMiddleware
   app.use splitTestMiddleware

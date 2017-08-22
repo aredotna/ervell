@@ -3,40 +3,60 @@ request = require 'superagent'
 express = require 'express'
 passport = require 'passport'
 LocalStrategy = require('passport-local').Strategy
-qs = require 'querystring'
-crypto = require 'crypto'
 { parse } = require 'url'
+{ API_URL } = require '../../config'
 
-arenaXappToken = null
-
-# Default options
 opts =
-  SECURE_ARENA_URL: 'https://secure.are.na'
+  SECURE_ARENA_URL: API_URL
   loginPath: '/me/sign_in'
-  signupPath: '/me/invitation/accept'
-  userKeys: ['id', 'first_name', 'last_name', 'email', 'slug', 'following_ids', 'notification_count', 'username', 'authentication_token']
+  userKeys: [
+    'id'
+    'first_name'
+    'last_name'
+    'email'
+    'slug'
+    'following_ids'
+    'notification_count'
+    'username'
+    'authentication_token'
+    'manifest'
+    'announcements'
+    'shortcuts_id'
+    'avatar_image'
+    'registered'
+    'receive_email'
+    'receive_newsletter'
+    'post_address'
+    'show_tour'
+    'is_premium'
+    'channel_count'
+    'exclude_from_indexes'
+    'following_count'
+    'home_path'
+    'created_at'
+    'private_connections_count'
+    'private_connections_limit'
+    'is_exceeding_private_connections_limit'
+    'is_confirmed'
+    'is_pending_reconfirmation'
+    'is_pending_confirmation'
+  ]
 
-#
 # Main function that overrides/injects any options, sets up passport, sets up an app to
 # handle routing and injecting locals, and returns that app to be mounted as middleware.
-#
 module.exports = (options) =>
   module.exports.options = _.extend opts, options
   initPassport()
   initApp()
   app
 
-#
 # Setup the mounted app that routes signup/login and injects necessary locals.
-#
 module.exports.app = app = express()
 
 initApp = ->
   app.use passport.initialize()
   app.use passport.session()
   app.post opts.loginPath, localAuth, afterLocalAuth
-  app.post opts.signupPath, signup, passport.authenticate('local'), afterLocalAuth
-  app.use headerLogin
   app.use addLocals
 
 localAuth = (req, res, next) ->
@@ -56,14 +76,6 @@ afterLocalAuth = (req, res, next) ->
   else
     next()
 
-signup = (req, res, next) ->
-  request.put(opts.SECURE_ARENA_URL + '/accounts/invitation').send(
-    name: req.body.name
-    email: req.body.email
-    password: req.body.password
-    xapp_token: res.locals.artsyXappToken
-  ).end onCreateUser(next)
-
 onCreateUser = (next) ->
   (err, res) ->
     if res.status isnt 201
@@ -78,32 +90,22 @@ addLocals = (req, res, next) ->
     res.locals.sd?.CURRENT_USER = req.user.toJSON()
   next()
 
-headerLogin = (req, res, next) ->
-  return next() if req.path is opts.logoutPath
-  if token = req.get('X-AUTH-TOKEN') or req.query.access_token
-    req.login new opts.CurrentUser(access_token: token), next
-  else
-    next()
-
-#
 # Setup passport.
-#
 initPassport = ->
   passport.serializeUser serializeUser
   passport.deserializeUser deserializeUser
-  passport.use new LocalStrategy(
-    { usernameField: 'email', passReqToCallback: true }
-    arenaCallback
-  )
 
-#
-# Passport callbacks
-#
-arenaCallback = (req, username, password, done) ->
-  request.post("#{opts.SECURE_ARENA_URL}/tokens").query(
-    email: username
-    password: password
-  ).end accessTokenCallback(done)
+  passport.use new LocalStrategy {
+    usernameField: 'email'
+    passReqToCallback: true
+  }, (req, email, password, done) ->
+    request
+      .post "#{opts.SECURE_ARENA_URL}/tokens"
+      .query {
+        email
+        password
+      }
+      .end accessTokenCallback(done)
 
 accessTokenCallback = (done, params) ->
   return (e, res) ->
@@ -129,9 +131,7 @@ accessTokenCallback = (done, params) ->
       console.warn "Error requesting an access token from Arena: " + res.text
       done err
 
-#
 # Serialize user by fetching and caching user data in the session.
-#
 serializeUser = (user, done) ->
   if user.get('access_token') isnt 'undefined'
     user.fetch
