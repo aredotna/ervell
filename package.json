@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
+    "axios": "^0.16.2",
     "axis": "*",
     "backbone": "*",
     "backbone-fetch-cache": "*",
