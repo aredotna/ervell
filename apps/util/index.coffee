@@ -3,5 +3,7 @@ routes = require './routes'
 
 app = module.exports = express()
 
-app.get '/go', routes.redirect # TODO: Not in this controller
-app.get '/cache/flushall', routes.flushall # TODO: Not in this controller
+app
+  .get '/go', routes.redirect
+  .get '/cache/flushall', routes.flushall
+  .get '/robots.txt', routes.robots
