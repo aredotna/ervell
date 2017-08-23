@@ -1,13 +1,4 @@
-//- TODO: [premium_2] Delete
-
-if user.get('is_premium')
-  h6.SectionHeader.Type.Type--size-h6
-    | Announcing new plan structures
-
-  p.Type.Type--lh-tall
-    | Starting on August 23, Are.na is changing the way Basic and Premium plans work. Among other changes, free users will be limited to 100 total private blocks. Premium members will have all the same tools and features, along with early access to the new mobile app and additional support.
-    | <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>To learn more about how plans and pricing are changing, visit here.</a>
-
+//- TODO: [premium_2] Keep until 9/15/17
 unless user.get('is_premium')
   if user.isEligibleForFreeYear()
     h6.SectionHeader.Type.Type--size-h6
