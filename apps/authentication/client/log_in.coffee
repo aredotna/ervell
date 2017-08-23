@@ -23,32 +23,19 @@ module.exports = ->
       .text 'Logging in...'
 
     Promise user.login()
-      .then ({ success, error }) ->
-        if success
-          $submit.text 'Redirecting...'
+      .then  ->
+        $submit.text 'Redirecting...'
 
-          location.href = REDIRECT_TO
+        location.href = REDIRECT_TO
 
-        else
-          # `arena-passport` (?) inexplicably sets up a route that 200 OKs on bad logins
-          # and just returns a response here with a string description of the error.
-          $errors.show().text 'Invalid email/password'
-
-          $submit
-            .prop 'disabled', false
-            .text 'Try again'
-
-          setTimeout ->
-            $submit.text label
-            $errors.empty()
-          , 2500
-
-      .catch ({ responseJSON: { message }}) ->
+      .catch ({ responseJSON: { message, description }}) ->
         # TODO: Redirect to resend page when login
         # fails due to an unconfirmed account
 
+        console.error message
+
         $errors.show()
-          .text message
+          .text description
 
         $submit
           .prop 'disabled', false
