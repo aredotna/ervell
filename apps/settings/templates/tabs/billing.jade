@@ -15,11 +15,10 @@ block content
       section.Section.js-your-plan
         include ../../components/your_plan/index
 
-      //- TODO: [premium_2] Delete this
       if user.get('is_premium')
         section.Section.SettingsPremiumCTA
           h6.SectionHeader.Type.Type--size-h6
-            | New Premium features (starting August 23, 2017)
+            | Premium features
 
           include ../../components/premium_cta/features
 
