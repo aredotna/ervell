@@ -30,7 +30,7 @@ module.exports = ->
   syncAuth()
   initShortCuts()
   initLoggedOutCta() unless sd.CURRENT_USER?.id
-  showPremiumMessage() if sd.CURRENT_USER?.id
+  showLimitMessage()
 
 setMobileClass = ->
   $body = $('body')
@@ -151,41 +151,36 @@ initShortCuts = ->
 
   initNightMode()
 
-showPremiumMessage = ->
-  # TODO: [premium_2] Delete this
-  user = mediator.shared.current_user
+# TODO: Extract?
+showLimitMessage = ->
+  return unless sd.CURRENT_USER?
 
-  body = if user.get('is_premium')
-    """
-      Starting on August 23, Are.na is changing the way Basic and Premium plans work.
-      Premium members will have all the same tools and features,
-      along with early access to the new mobile app.
-      <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>Learn more here.</a>
-    """
-  else if user.isEligibleForFreeYear()
-    """
-      Starting on August 23, Are.na is changing the way Basic and Premium plans work
-      <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>(learn more here).</a>
-      To make the transition a little easier, we’re giving you 1 year of FREE Premium.
-      <a href='/settings/billing'>Upgrade now and use the code FREEYEAR.</a>
-    """
-  else
-    """
-      Starting on August 23, Are.na is changing the way Basic and Premium plans work
-      <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>(learn more here).</a>
-      To make the transition a little easier, we’re giving you 1 month of FREE Premium.
-      <a href='/settings/billing'>Upgrade now and use the code FREEMONTH.</a>
-    """
+  { current_user } = mediator.shared
 
-  model = new Backbone.Model
-    id: 'premium_2_announcement'
-    title: 'Announcing new plan structures'
-    body: body
+  rendered = false
 
-  messageView = new MessageView model: model
+  exec = ->
+    return if rendered
 
-  if messageView.isRenderable()
-    $('body').append messageView.render().$el
+    return unless current_user.get('is_exceeding_private_connections_limit')
+
+    model = new Backbone.Model
+      id: 'exceeded_private_connections_count_limit'
+      title: 'Limit reached'
+      body: """
+        You’ve just surpassed the 100 private block limit for free accounts.
+        You won’t be able to add any more private blocks until you upgrade
+        to a <a href='/settings/billing'>premium account</a>.
+      """
+
+    messageView = new MessageView model: model
+
+    if messageView.isRenderable()
+      $('body').append messageView.render().$el
+      rendered = true
+
+  current_user.on 'sync', exec
+  exec()
 
 setFollows = (following_ids) ->
   mediator.shared.current_user.set 'following_ids', following_ids

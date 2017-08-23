@@ -1,6 +1,7 @@
 Backbone = require 'backbone'
 { isURL } = require 'validator'
 { isTouch } = require '../../util/device.coffee'
+mediator = require '../../../lib/mediator.coffee'
 template = -> require('../index.jade') arguments...
 
 module.exports = class AddBlockView extends Backbone.View
@@ -15,6 +16,10 @@ module.exports = class AddBlockView extends Backbone.View
 
   initialize: ->
     @saving = false
+
+    # By re-syncing the account it ensures we keep other parts of
+    # the UI-state in sync (permissions)
+    @listenTo @collection, 'add', -> mediator.shared.current_user.fetch()
 
   onInput: (e) ->
     @checkInput()
