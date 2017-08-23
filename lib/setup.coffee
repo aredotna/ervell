@@ -138,6 +138,7 @@ module.exports = (app) ->
       'created_at'
       'private_connections_count'
       'private_connections_limit'
+      'is_exceeding_private_connections_limit'
     ]
 
   app.use artsyError.helpers
