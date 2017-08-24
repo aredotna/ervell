@@ -4,6 +4,7 @@ passport = require 'passport'
 LocalStrategy = require('passport-local').Strategy
 { extend } = require 'underscore'
 { API_URL } = require '../../config'
+redirectTo = require '../middleware/redirect_to'
 
 CONFIG =
   userKeys: [
@@ -105,7 +106,7 @@ module.exports = (options = {}) ->
   app
     .use passport.initialize()
     .use passport.session()
-    .post '/me/sign_in', authenticate, respond
+    .post '/me/sign_in', authenticate, respond, redirectTo
     .use addLocals
 
   app

@@ -1,13 +1,5 @@
-qs = require 'qs'
-url = require 'url'
 request = require 'superagent'
 { API_URL } = require('sharify').data
-
-@return = (req, res) ->
-  referrer = url.parse req.get('Referrer') or '/'
-  query = qs.parse referrer.query
-
-  res.redirect query['redirect-to'] or referrer.path or '/'
 
 @logout = (req, _res, next) ->
   req.logout()
