@@ -28,11 +28,10 @@ module.exports = ->
 
         location.href = REDIRECT_TO
 
-      .catch ({ responseJSON: { message, description }}) ->
-        # TODO: Redirect to resend page when login
-        # fails due to an unconfirmed account
+      .catch (err) ->
+        console.error err
 
-        console.error message
+        { responseJSON: { message, description }, status } = err
 
         $errors.show()
           .text description
@@ -45,3 +44,7 @@ module.exports = ->
           $submit.text label
           $errors.empty()
         , 2500
+
+        switch status
+          when 401
+            location.href = '/confirm/expired'

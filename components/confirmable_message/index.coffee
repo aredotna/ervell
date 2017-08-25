@@ -1,4 +1,4 @@
-{ API_URL, CURRENT_USER } = require('sharify').data
+{ CURRENT_USER } = require('sharify').data
 CurrentUser = require '../../models/current_user.coffee'
 template = -> require('./index.jade') arguments...
 
@@ -9,14 +9,6 @@ module.exports = ->
   $el = $(template())
 
   $('body').append $el
-
-  $button = $el.find '.js-resend'
-  $button.click (e) ->
-    e.preventDefault()
-    label = $button.text()
-    $.post "#{API_URL}/confirmations/resend"
-    $button.text 'Sent'
-    setTimeout (-> $button.text label), 2000
 
   $el.one 'click', '.js-close', (e) ->
     e.preventDefault()

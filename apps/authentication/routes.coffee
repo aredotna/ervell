@@ -25,6 +25,12 @@ cache = require '../../lib/cache'
   return res.redirect '/' if req.user?
   res.render 'expired'
 
+@confirmed = (req, res, next) ->
+  res.render 'confirmed'
+
+@unconfirmed = (err, req, res, next) ->
+  res.render 'unconfirmed'
+
 @refresh = (req, res, next) ->
   return next() unless (user = req.user)?
 

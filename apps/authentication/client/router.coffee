@@ -6,3 +6,5 @@ module.exports = class AuthenticationRouter extends Backbone.Router
     'log_in': require './log_in.coffee'
     'forgot': require './forgot.coffee'
     'reset/:token': require './reset.coffee'
+    'confirm/expired': (->) # noop
+    'confirm/:token': require './confirm.coffee'
