@@ -44,29 +44,27 @@ app = express()
 
 authenticate = (req, res, next) ->
   passport.authenticate('local', (err, user) ->
+    return next(err) if err
     return req.login(user, next) if user
     next()
   )(req, res, next)
 
-respond = (req, res, next) ->
-  if req.xhr and req.user? # Successful XHR request
-    res.send
-      code: 200
-      user: req.user.toJSON()
+respond = (req, res) ->
+  res.send
+    code: 200
+    user: req.user.toJSON()
 
-  else if req.xhr and not req.user? # Unsuccessful XHR request
-    # Typically from a password check failure,
-    # but it is possible that some other kind of error caused it.
-    res
-      .status 401
-      .send
-        code: 401
-        message: 'Login failed'
-        description: 'Invalid log in'
+error = (err, req, res, next) ->
+  console.error(err.stack)
 
-  else # Non-XHR POST
-    # Pass to downstream handler which deals with redirects.
-    next()
+  # Pass on to next error handler
+  # if this is not an XHR request
+  next(err) unless req.xhr
+
+  # Propagate the error response to the client
+  res
+    .status err.response.status
+    .send err.response.data
 
 addLocals = (req, res, next) ->
   if req.user
@@ -106,7 +104,7 @@ module.exports = (options = {}) ->
   app
     .use passport.initialize()
     .use passport.session()
-    .post '/me/sign_in', authenticate, respond, redirectTo
+    .post '/me/sign_in', authenticate, respond, redirectTo, error
     .use addLocals
 
   app
