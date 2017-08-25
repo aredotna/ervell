@@ -22,17 +22,19 @@ initConfirmableMessage = require '../confirmable_message/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 
 module.exports = ->
-  setMobileClass()
+  setDeviceClasses()
   setupPusherAndCurrentUser()
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  syncAuth()
   initShortCuts()
+  initNightMode()
   showLimitMessage()
   initConfirmableMessage()
 
-setMobileClass = ->
+# TODO: Extract
+# TODO: Fix inconsistent class names
+setDeviceClasses = ->
   $body = $('body')
 
   if isMobile()
@@ -42,34 +44,42 @@ setMobileClass = ->
   if isTouch()
     $body.addClass 'Body--touch'
 
+# TODO: Extract
 setupPusherAndCurrentUser = ->
-  mediator.shared = {}
+  currentUser = new CurrentUser sd.CURRENT_USER
+  uiState = new UIState view_mode: sd.VIEW_MODE
+  recentConnections = new RecentConnections
+  notifications = new Notifications
 
-  user = new CurrentUser sd.CURRENT_USER
-  mediator.shared.current_user = user
-  mediator.shared.state = new UIState()
-  mediator.shared.state.set view_mode: sd.VIEW_MODE
-  mediator.shared.recent_connections = new RecentConnections
+  mediator.shared =
+    current_user: currentUser
+    state: uiState
+    recent_connections: recentConnections
+    notifications: notifications
 
-  if user.id
-    mediator.shared.notifications = new Notifications()
-    mediator.shared.notifications.on 'sync', ->
-      mediator.trigger 'notifications:synced', @
+  if currentUser.id
+    currentUser.fetch
+      # '/me/refresh' hits the account endpoint
+      # and re-logs in the resulting user
+      url: '/me/refresh'
+      error: ->
+        $.get '/me/sign_out', ->
+          location.reload()
 
-    user.fetch
-      prefill: true
-      prefillSuccess: (data)-> mediator.trigger 'current_user:prefetched'
-      success: (user, response)->
-        mediator.trigger 'current_user:fetched'
-        if user.get('show_tour') and sd.AFTER_ONBOARDING == 'explore'
-          showNewUserMessages()
+  # TODO: Extract; split this function out
+  if Pusher?
+    pusher = new Pusher sd.PUSHER_KEY
+    mediator.shared.pusher = pusher
 
-  pusher= mediator.shared.pusher = new Pusher(sd.PUSHER_KEY) if Pusher?
-  chan = mediator.shared.current_user_channel = pusher.subscribe "user_#{user.id}" if user.id and Pusher?
+    if currentUser.id
+      mediator.shared.current_user_channel = pusher.subscribe "user_#{currentUser.id}"
 
+# TODO: Extract
 setupViews = ->
+  # TODO: Fix all of these selectors
   new BodyView
     el: $('body')
+
   new SearchBarView
     el: $('.layout-header__search')
 
@@ -83,33 +93,18 @@ setupViews = ->
   if mediator.shared.current_user.id
     initLoggedInNavigation $('.js-logged-in-navigation')
 
-syncAuth = module.exports.syncAuth = ->
-  if sd.CURRENT_USER
-    $.ajax
-      url: "#{sd.API_URL}/accounts"
-      success: ensureFreshUser
-      error: ->
-        $.ajax
-          method: 'GET'
-          url: '/me/sign_out'
-          complete: ->
-            # window.location.reload()
-
-ensureFreshUser = (data) ->
-  return unless sd.CURRENT_USER
-  for attr in ['id', 'authentication_token', 'avatar_image', 'email', 'first_name', 'id',
-               'last_name', 'slug', 'username', 'is_premium']
-    if not _.isEqual data[attr], sd.CURRENT_USER[attr]
-      return $.ajax('/me/refresh')
-
+# TODO: Extract
 setupAjaxHeaders = ->
-  $.ajaxSetup
-    beforeSend: (xhr)->
-      xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER?.authentication_token
+  return unless sd.CURRENT_USER?
 
+  $.ajaxSetup
+    beforeSend: (xhr) ->
+      xhr.setRequestHeader 'X-AUTH-TOKEN', sd.CURRENT_USER.authentication_token
+
+# TODO: Extract
+# Initialize analytics & track page views
 setupAnalytics = ->
-  # Initialize analytics & track page view.
-  return if sd.SAVE
+  return if sd.SAVE # Doesn't track Bookmarklet view (?)
 
   analytics ga: ga
   analytics.registerCurrentUser()
@@ -120,7 +115,8 @@ setupAnalytics = ->
     location: window.location.href
     page: window.location.pathname
 
-  if (sd.CHANNEL and sd.CHANNEL.status is 'private')
+  # TODO: This is weird.
+  if sd.CHANNEL and sd.CHANNEL.status is 'private'
     args =
       page: '/'
       title: 'Arena / [Private]'
@@ -136,22 +132,28 @@ setupAnalytics = ->
     else
       'Visited logged out'
 
+# TODO: Extract
 initShortCuts = ->
-  km 'right', -> mediator.trigger 'lightbox:slide:next'
-  km 'left',  -> mediator.trigger 'lightbox:slide:prev'
-  km 'esc',   -> mediator.trigger 'lightbox:close'
-  km 'l',     ->
+  km 'right', ->
+    mediator.trigger 'lightbox:slide:next'
+
+  km 'left', ->
+    mediator.trigger 'lightbox:slide:prev'
+
+  km 'esc', ->
+    mediator.trigger 'lightbox:close'
+
+  km 'l', ->
     if mediator.shared.current_user.isPremium()
       mediator.shared.state.set view_mode: 'list'
       window.location.reload()
-  km 'g',     ->
+
+  km 'g', ->
     if mediator.shared.current_user.isPremium()
       mediator.shared.state.set view_mode: 'grid'
       window.location.reload()
 
-  initNightMode()
-
-# TODO: Extract?
+# TODO: Extract
 showLimitMessage = ->
   return unless sd.CURRENT_USER?
 
@@ -181,6 +183,3 @@ showLimitMessage = ->
 
   current_user.on 'sync', exec
   exec()
-
-setFollows = (following_ids) ->
-  mediator.shared.current_user.set 'following_ids', following_ids

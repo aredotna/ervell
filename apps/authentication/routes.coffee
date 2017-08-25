@@ -1,3 +1,4 @@
+Promise = require 'bluebird-q'
 User = require '../../models/user'
 cache = require '../../lib/cache'
 
@@ -25,15 +26,16 @@ cache = require '../../lib/cache'
   res.render 'expired'
 
 @refresh = (req, res, next) ->
-  return next() unless req.user?
+  return next() unless (user = req.user)?
 
-  req.user.fetch
-    error: next
-    success: ->
-      req.login req.user, (err) ->
+  Promise user.fetch()
+    .then (response) ->
+      req.login user, (err) ->
         return next(err) if err?
 
-        user = new User req.user.attributes
-        cache.del "#{user.url()}{}"
+        # IMPORTANT: return the `response` instead of the `user.toJSON()`
+        # Why? Because `user.toJSON()` is already parsed. Returning
+        # an already parsed response will make it unparesable.
+        res.json response
 
-        res.json req.user.attributes
+    .catch next
