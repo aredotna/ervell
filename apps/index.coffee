@@ -1,0 +1,20 @@
+express = require 'express'
+
+app = module.exports = express()
+
+app.use require './feed'
+app.use require './home'
+app.use require './blog'
+app.use require './registration'
+app.use require './getting_started'
+app.use require './tools'
+app.use require './auth'
+app.use require './about'
+app.use require './search'
+app.use require './manage'
+app.use require './share'
+app.use require './marklet'
+app.use require './import'
+app.use require './settings'
+app.use require './onboarding'
+app.use require './ui'
