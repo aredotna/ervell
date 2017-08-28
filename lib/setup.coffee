@@ -32,6 +32,7 @@ bucketAssets = require 'bucket-assets'
 cache = require './cache'
 favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
+{ createReloadable } = require '@artsy/express-reloadable'
 
 # Inject some constant data into sharify
 sharify.data =
@@ -161,27 +162,14 @@ module.exports = (app) ->
       else
         "User-agent: *\nNoindex: /"
 
-  # Mount apps
-  app.use require '../apps/feed'
-  app.use require '../apps/home'
-  app.use require '../apps/blog'
-  app.use require '../apps/registration'
-  app.use require '../apps/getting_started'
-  app.use require '../apps/tools'
-  app.use require '../apps/auth'
-  app.use require '../apps/about'
-  app.use require '../apps/search'
-  app.use require '../apps/manage'
-  app.use require '../apps/share'
-  app.use require '../apps/marklet'
-  app.use require '../apps/import'
-  app.use require '../apps/settings'
-  app.use require '../apps/onboarding'
-  app.use require '../apps/ui'
-
   # Dev only routes
   if 'development' is NODE_ENV
+    reloadAndMount = createReloadable(app, require)
+    app.use reloadAndMount path.join(__dirname, '..', 'apps')
     app.use require '../apps/statuses'
+  else
+    app.use require '../apps'
+
 
   # Apps that use dynamic routes
   app.use require '../apps/user'

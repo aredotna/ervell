@@ -11,6 +11,7 @@
     "npm": "4.x.x"
   },
   "dependencies": {
+    "@artsy/express-reloadable": "1.0.9",
     "arena-passport": "git://github.com/arenahq/arena-passport.git",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
     "axis": "*",
@@ -73,7 +74,6 @@
     "browserify": "11.2.0",
     "browserify-dev-middleware": "*",
     "caching-coffeeify": "*",
-    "chokidar": "^1.7.0",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "html5": "*",
     "jadeify": "*",

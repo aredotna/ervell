@@ -4,7 +4,7 @@ ExploreBlocks = require '../../collections/explore_blocks'
 
 @index = (req, res, next) ->
   return next() unless req.user
- 
+
   res.locals.sd.CURRENT_PATH = "/"
   res.locals.sd.FEED_TYPE = 'primary'
   res.render 'feed', path: 'Feed'
@@ -32,4 +32,3 @@ ExploreBlocks = require '../../collections/explore_blocks'
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.render "explore", blocks: blocks.models
-
