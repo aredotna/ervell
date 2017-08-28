@@ -8,3 +8,4 @@ module.exports = class AuthenticationRouter extends Backbone.Router
     'reset/:token': require './reset.coffee'
     'confirm/expired': (->) # noop
     'confirm/:token': require './confirm.coffee'
+    'register/:token': require './accept_invitation.coffee'

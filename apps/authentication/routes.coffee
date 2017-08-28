@@ -1,5 +1,6 @@
 Promise = require 'bluebird-q'
 User = require '../../models/user'
+Invitee = require '../../models/invitee'
 cache = require '../../lib/cache'
 
 @sign_up = (req, res) ->
@@ -28,7 +29,7 @@ cache = require '../../lib/cache'
 @confirmed = (req, res, next) ->
   res.render 'confirmed'
 
-@unconfirmed = (err, req, res, next) ->
+@unconfirmed = (_err, _req, res, _next) ->
   res.render 'unconfirmed'
 
 @refresh = (req, res, next) ->
@@ -45,3 +46,20 @@ cache = require '../../lib/cache'
         res.json response
 
     .catch next
+
+@acceptInvitation = (req, res, next) ->
+  return res.redirect '/' if req.user?
+
+  invitee = new Invitee invitation_token: req.params.token
+  Promise invitee.fetch()
+    .then ->
+      invitee.set invitation_token: req.query.invite_token
+
+      res.locals.sd.INVITEE = invitee.toJSON()
+      res.render 'accept_invitation',
+        invitee: invitee
+
+    .catch next
+
+@invalidInvitation = (_err, _req, res, _next) ->
+  res.render 'invalid_invitation'
