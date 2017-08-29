@@ -22,7 +22,7 @@
     "bluebird-q": "^2.1.1",
     "blueimp-file-upload": "git://github.com/arenahq/jQuery-File-Upload.git",
     "body-parser": "*",
-    "bucket-assets": "^1.0.2",
+    "bucket-assets": "^0.2.0",
     "cheerio": "^0.22.0",
     "coffee-script": "*",
     "connect-multiparty": "^2.0.0",
