@@ -59,8 +59,12 @@ sharify.data = {
 CurrentUser = require '../models/current_user'
 
 module.exports = (app) ->
+  console.log "Setting up... NODE_ENV=#{NODE_ENV}"
+
   Backbone.sync = require 'backbone-super-sync'
   Backbone.sync.cacheClient = cache.client
+
+  console.log 'Mounting middleware...'
 
   app.use sharify
 
@@ -114,6 +118,8 @@ module.exports = (app) ->
     .use isInverted
     .use viewMode
 
+  console.log 'Mounting apps...'
+
   app
     # Normal routing: In order
     .use require '../apps/feed'
@@ -146,3 +152,5 @@ module.exports = (app) ->
   # TODO: Kill this/replace with something that's not a Node module
   artsyError.handlers app,
     template: path.resolve(__dirname, '../components/layout/templates/error.jade')
+
+  console.log 'Completed set up.'
