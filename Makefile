@@ -16,7 +16,7 @@ spc:
 	REDIS_URL=redis://127.0.0.1:6379 APP_URL=http://localhost:5000 foreman start
 
 # Run all of the project-level tests, followed by app-level tests
-test: assets
+test:
 	$(BIN)/mocha $(shell find test -name '*.coffee' -not -path 'test/helpers/*')
 	$(BIN)/mocha $(shell find apps/*/test -name '*.coffee' -not -path 'test/helpers/*')
 
