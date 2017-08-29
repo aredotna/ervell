@@ -1,0 +1,55 @@
+extends ./layout
+
+block title
+  |  / Join
+
+block content
+  form.AuthenticationForm.js-form
+    .Fieldset
+      input.Input(
+        name='email'
+        type='email'
+        placeholder='Email'
+        required
+        autofocus
+      )
+
+      input.Input(
+        id='first_name'
+        name='first_name'
+        placeholder='First name'
+        type='text'
+        required
+      )
+
+      input.Input(
+        id='last_name'
+        name='last_name'
+        placeholder='Last name'
+        type='text'
+        required
+      )
+
+      input.Input(
+        id='password'
+        name='password'
+        placeholder='Password (at least 6 characters)'
+        type='password'
+        pattern='.{6,}'
+        required
+      )
+
+      input.Input(
+        id='password_confirmation'
+        name='password_confirmation'
+        placeholder='Confirm password'
+        type='password'
+        pattern='.{6,}'
+        required
+      )
+
+    .Errors.js-errors
+      //-
+
+    button.Button.Button--divider.js-submit
+      | Join

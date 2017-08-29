@@ -1,7 +1,6 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
 mediator = require '../../lib/mediator.coffee'
-AuthView = require '../auth/view.coffee'
 ImageView = require '../image/view.coffee'
 Block = require '../../models/block.coffee'
 modalize = require '../modalize/index.coffee'
@@ -12,38 +11,12 @@ module.exports = class Router extends Backbone.Router
     '' : 'hideBlock'
     'block/:id': 'showBlock'
     'block/:id/:tab': 'showBlock'
-    'log_in': 'login'
-    'sign_up': 'signup'
     ':user_id/:channel_id' : 'hideBlock'
     ':user_id' : 'hideBlock'
 
   initialize: ->
     mediator.on 'slide:to:block', @updateRoute, @
     @onChangeCaptureUrlParams()
-
-
-  login: ->
-    return if sd.CURRENT_PATH is '/log_in'
-    @openAuthModal
-      mode: 'login'
-      redirectTo: sd.CURRENT_PATH
-
-  signup: ->
-    return if sd.CURRENT_PATH is '/sign_up'
-    @openAuthModal
-      mode: 'signup'
-      redirectTo: sd.CURRENT_PATH
-
-  openAuthModal: (options) ->
-    view = new AuthView options
-
-    @modal = modalize view,
-      className: 'modalize things-modal'
-
-    @modal.open()
-
-    @modal.view.on 'closed', =>
-      @removeRoute()
 
   hideBlock: ->
     return location.reload() if sd.BLOCK

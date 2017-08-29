@@ -1,0 +1,34 @@
+.AuthenticationNavigation
+  text-align center
+
+  &__logo
+    > a // **
+      display inline-block
+      position relative
+      font-size font-size-base
+      width @font-size * 2
+      height @font-size
+      top 0.125em
+
+      > svg
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        fill colors-gray-text
+
+  &__links
+    margin fieldset-margin 0
+    font-size font-size-base
+    line-height line-height-base
+
+  &__link
+    display inline-block
+    margin 1em 0.5em
+    font-weight bold
+    text-decoration underline
+
+    &[data-state='active']
+      text-decoration none
+      font-weight normal

@@ -13,8 +13,6 @@ module.exports = class FollowButtonView extends Backbone.View
     @user = mediator.shared.current_user
     @showTitle = if showTitle? then showTitle else true
 
-    @listenTo mediator, 'current_user:prefetched', @render
-    @listenTo mediator, 'current_user:fetched', @render
     @listenTo @user, 'change:following_channels', @render
     @listenTo @user, 'change:following_users', @render
 
