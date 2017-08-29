@@ -1,0 +1,14 @@
+extends ./layout
+
+block title
+  |  / Thank you
+
+block content
+  .AuthenticationForm
+    p.Type.Type--lh-tall.Utility--align-center
+      | Your account has been confirmed.
+      | Redirecting you in 3 seconds&hellip;
+
+    p.Type.Type--size-xs.Type--lh-tall.Utility--align-center
+      a( href='/log_in' )
+        | Or click here to continue

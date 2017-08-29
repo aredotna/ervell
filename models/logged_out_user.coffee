@@ -19,21 +19,16 @@ module.exports = class LoggedOutUser extends User
   login: (options = {}) ->
     settings = _.defaults options,
       url: '/me/sign_in'
-      success: injectToken ->
-        if options.redirect
-          document.location.href = options.redirect
-        else
-          location.reload()
-    new Backbone.Model().save (@pick 'email', 'password'), settings
+      success: injectToken(options.success or (->))
+
+    new Backbone.Model()
+      .save (@pick 'email', 'password'), settings
 
   signup: (options = {}) ->
     settings = _.defaults options,
-      url: "#{sd.API_URL}/invitees"
+      url: "#{sd.API_URL}/registrations"
+
     new Backbone.Model().save (@pick 'email', 'code'), settings
-
-  # Alias #signup
-  register: ()->
-
 
   forgot: (options = {}) ->
     settings = _.defaults options,

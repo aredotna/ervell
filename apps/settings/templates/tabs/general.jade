@@ -39,6 +39,17 @@ block content
               required
             )
 
+            if user.get('unconfirmed_email')
+              label.Label
+                | Please check your email to confirm your new email address
+
+              input.Input(
+                type='email'
+                value="#{user.get('unconfirmed_email')}"
+                readonly
+                disabled
+              )
+
             input.Input(
               name='email'
               type='email'
