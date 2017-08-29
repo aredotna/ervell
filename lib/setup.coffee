@@ -66,6 +66,10 @@ module.exports = (app) ->
 
   console.log 'Mounting middleware...'
 
+  app.use (req, res, next) ->
+    console.log 'Passing through middleware'
+    next()
+
   app.use sharify
 
   blocker.addToReferrers [
@@ -119,6 +123,10 @@ module.exports = (app) ->
     .use viewMode
 
   console.log 'Mounting apps...'
+
+  app.use (req, res, next) ->
+    console.log 'Passing through routes'
+    next()
 
   app
     # Normal routing: In order
