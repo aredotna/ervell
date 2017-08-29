@@ -15,20 +15,16 @@
   border-top 1px solid colors-gray-border
   background-color white
   color colors-gray-text
-  font-size font-size-lg
+  font-size font-size-base
   line-height line-height-base
   transform translateZ(0)
 
-  > .Button
-    margin-left 2em
+  > a
+    text-decoration underline
 
 +mobile()
   .ConfirmableMessage
     flex-direction column
-
-    > .Button
-      margin-top 1em
-      margin-left 0
 
 // Hide message on specifc pages
 html[data-path='/welcome']

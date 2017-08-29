@@ -1,6 +1,8 @@
 .ConfirmableMessage
   span
-    | Please check your email to confirm your account
+    | Please check your email to confirm your account.
+    | &nbsp;
 
-  a.Button.Button--compact( href='mailto:help@are.na?subject=Account+confirmation+problem' )
-    | Didn&rsquo;t get it?
+  if displayLink
+    a( href='mailto:help@are.na?subject=Account+confirmation+problem' )
+      | Didn&rsquo;t get it?
