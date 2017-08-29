@@ -7,8 +7,8 @@
     "test": "make test"
   },
   "engines": {
-    "node": "7.x.x",
-    "npm": "4.x.x"
+    "node": "8.4.x",
+    "npm": "5.x.x"
   },
   "dependencies": {
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
@@ -30,9 +30,8 @@
     "cookie-session": "*",
     "cookies": "^0.5.0",
     "cookies-js": "https://registry.npmjs.org/cookies-js/-/cookies-js-1.2.2.tgz",
-    "destroy": "^1.0.4",
     "diacritics": "*",
-    "express": "*",
+    "express": "^4.15.4",
     "express-spam-referral-blocker": "^1.2.1",
     "express-subdomain": "^1.0.4",
     "fastclick": "^1.0.6",
