@@ -2,6 +2,7 @@ Promise = require 'bluebird-q'
 Serializer = require '../../../components/form/serializer.coffee'
 LoggedOutUser = require '../../../models/logged_out_user.coffee'
 Registration = require '../../../models/registration.coffee'
+{ track } = require '../../../lib/analytics.coffee'
 
 module.exports = ->
   $el = $('.js-authentication')
@@ -29,6 +30,8 @@ module.exports = ->
 
         user = new LoggedOutUser registration.pick 'email', 'password'
 
+        track.submit 'User successfully registered'
+
         Promise user.login()
 
       .then ->
@@ -48,3 +51,5 @@ module.exports = ->
           $submit.text label
           $errors.empty()
         , 5000
+
+        track.error 'User registration error'

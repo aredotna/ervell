@@ -2,6 +2,7 @@
 Promise = require 'bluebird-q'
 Serializer = require '../../../components/form/serializer.coffee'
 LoggedOutUser = require '../../../models/logged_out_user.coffee'
+{ track } = require '../../../lib/analytics.coffee'
 
 module.exports = ->
   $el = $('.js-authentication')
@@ -28,6 +29,8 @@ module.exports = ->
 
         location.href = REDIRECT_TO
 
+        track.submit 'User logged in'
+
       .catch (err) ->
         console.error err
 
@@ -48,3 +51,5 @@ module.exports = ->
         switch status
           when 401
             location.href = '/confirm/expired'
+
+        track.error "User logged in error (#{status}: #{description})"
