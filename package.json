@@ -11,6 +11,7 @@
     "npm": "5.x.x"
   },
   "dependencies": {
+    "@artsy/express-reloadable": "1.0.9",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
     "axios": "^0.16.2",
     "axis": "*",
@@ -76,7 +77,6 @@
     "browserify": "11.2.0",
     "browserify-dev-middleware": "*",
     "caching-coffeeify": "*",
-    "chokidar": "^1.7.0",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "html5": "*",
     "jadeify": "*",
