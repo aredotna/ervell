@@ -31,7 +31,7 @@ app.get "/:username/followers", routes.fetchAuthor, routes.followers
 app.get "/:username/following", routes.fetchAuthor, routes.following
 
 # Route to clear a user's cache'
-app.get "/:username/update", routes.update
+app.get "/:username/update", routes.fetchAuthor, routes.update
 
 # These support legacy routes
 app.get "/:username/block/:block_id", routes.user
