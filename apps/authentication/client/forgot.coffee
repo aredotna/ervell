@@ -1,4 +1,5 @@
 Serializer = require '../../../components/form/serializer.coffee'
+{ track } = require '../../../lib/analytics.coffee'
 
 module.exports = ->
   $el = $('.js-authentication')
@@ -33,6 +34,8 @@ module.exports = ->
           .prop 'disabled', true
           .text 'Sent'
 
+        track.submit 'User forgot password'
+
       error: ->
         $errors.show().text 'We were unable to locate that account'
 
@@ -44,3 +47,5 @@ module.exports = ->
           $submit.text label
           $errors.empty()
         , 5000
+
+        track.error 'User forgot password error'

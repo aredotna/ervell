@@ -3,6 +3,7 @@ Promise = require 'bluebird-q'
 Serializer = require '../../../components/form/serializer.coffee'
 Invitee = require '../../../models/invitee.coffee'
 LoggedOutUser = require '../../../models/logged_out_user.coffee'
+{ track } = require '../../../lib/analytics.coffee'
 
 module.exports = ->
   $el = $('.js-authentication')
@@ -29,6 +30,10 @@ module.exports = ->
         $submit.text 'Logging in...'
 
         user = new LoggedOutUser invitee.pick 'email', 'password'
+
+        track.submit 'User successfully registered'
+        track.submit 'User successfully accepted invitation'
+
         Promise user.login()
 
       .then ->
@@ -48,3 +53,5 @@ module.exports = ->
           $submit.text label
           $errors.empty()
         , 5000
+
+        track.error 'User invitation acceptance error'
