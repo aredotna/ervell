@@ -1,4 +1,5 @@
 Serializer = require '../../../components/form/serializer.coffee'
+{ track } = require '../../../lib/analytics.coffee'
 
 module.exports = (token) ->
   $el = $('.js-authentication')
@@ -34,6 +35,8 @@ module.exports = (token) ->
           .prop 'disabled', true
           .text 'Reset'
 
+        track.submit 'User successfully reset password'
+
       error: ({ responseJSON: { description }}) ->
         $errors.show()
           .text description
@@ -46,3 +49,5 @@ module.exports = (token) ->
           $submit.text label
           $errors.empty()
         , 5000
+
+        track.error 'User reset password error'
