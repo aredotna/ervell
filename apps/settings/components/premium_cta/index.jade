@@ -1,25 +1,8 @@
-//- TODO: [premium_2] Keep until 9/15/17
 unless user.get('is_premium')
-  if user.isEligibleForFreeYear()
-    h6.SectionHeader.Type.Type--size-h6
-      | Congrats, you&rsquo;re eligible for 1 year of FREE Premium
-
-    p.Type.Type--lh-tall
-      | Starting on August 23, Are.na is changing the way Basic and Premium plans work <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>(learn more here)</a>. Among other changes, free users will be limited to 100 total private blocks. Since you’re affected by Are.na’s new pricing, we want to make the transition a little easier. Upgrade to Premium below, and use the code FREEYEAR.
-
-  else
-    h6.SectionHeader.Type.Type--size-h6
-      | Congrats, you’re eligible for 1 month of FREE Premium
-
-    p.Type.Type--lh-tall
-      | Starting on August 23, Are.na is changing the way Basic and Premium plans work <a href='/blog/hello%20world/2017/08/09/new-pricing.html' target='_blank'>(learn more here)</a>. Among other changes, free users will be limited to 100 total private blocks. You’re not affected right now, but if you reach the limit we want to make the transition a little easier. Upgrade to Premium below, and use the code FREEMONTH.
-
   p.Type: strong.Color--state-premium
     | Premium Features
 
   include ./features
 
-  button.Button.Button--divider.Color--state-premium.js-cta(
-    data-plan= (user.isEligibleForFreeYear() ? 'premium_1' : 'monthly_premium')
-    data-coupon= (user.isEligibleForFreeYear() ? 'freeyear' : 'freemonth')
-  ) Upgrade to Premium
+  button.Button.Button--divider.Color--state-premium.js-cta( data-plan='premium_1' )
+    | Upgrade to Premium
