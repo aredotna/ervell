@@ -10,4 +10,4 @@ header#layout-header
       //- TODO: Margins
       a( href='/sign_up' ) Join
       |&nbsp;or&nbsp;
-      a( href="/log_in?redirect-to=#{sd.CURRENT_PATH}" ) Log in
+      a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" ) Log in

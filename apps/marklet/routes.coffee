@@ -3,7 +3,7 @@ validator = require 'validator'
 Backbone = require 'backbone'
 
 @save = (req, res) ->
-  return res.redirect "/log_in?redirect-to=#{req.url}" unless req.user?
+  return res.redirect "/log_in?redirect-to=#{encodeURIComponent(req.url)}" unless req.user?
 
   res.locals.sd.SAVE = true
   res.locals.sd.CONTENT = content = req.params.content
