@@ -22,4 +22,7 @@ block body
 
         unless user
           h2.Type.Type--size-h4
-            | Maybe you need to #[a( href="/log_in" ) log in]?
+            | Maybe you need to
+            = ' '
+            a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" ) log in
+            | ?
