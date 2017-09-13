@@ -49,7 +49,9 @@ authenticate = (req, res, next) ->
     next()
   )(req, res, next)
 
-respond = (req, res) ->
+respond = (req, res, next) ->
+  next() unless req.xhr
+
   res.send
     code: 200
     user: req.user.toJSON()
