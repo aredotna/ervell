@@ -104,7 +104,7 @@ module.exports = class BodyView extends Backbone.View
     href = $(e.currentTarget).attr("href")
     target = $(e.currentTarget).attr("target") || '_self'
 
-    unless href?.indexOf(location.hostname) > -1 or href is '#'
+    unless href?.indexOf(location.hostname) > -1 or href is '#' or !href
       e.preventDefault()
       e.stopImmediatePropagation()
       trackOutboundLink href
