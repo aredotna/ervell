@@ -1,4 +1,5 @@
 _ = require 'underscore'
+removeDiacritics = require('diacritics').remove
 
 # Lifted from:
 # https://raw.githubusercontent.com/artsy/artsy-backbone-mixins/master/lib/a_to_z.coffee
@@ -21,7 +22,7 @@ module.exports =
       if /^\d$/.test letter
         '0-9'
       else
-        letter.toUpperCase()
+        removeDiacritics(letter).toUpperCase()
 
   #
   # Groups collection output in a format suitable for rendering in an A-Z list with
