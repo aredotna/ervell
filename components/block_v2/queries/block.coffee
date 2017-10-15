@@ -2,7 +2,6 @@ module.exports = """
   fragment blockThumb on Connectable {
     id
     title
-    description
     klass
     created_at(relative: true)
     updated_at(relative: true)
