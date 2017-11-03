@@ -3,7 +3,7 @@
     include ../../list_item/templates/types/new_block
 
   .block-collection--list__filter
-    if title && user && user.isPremium() && !following && !followers
+    if title && !following && !followers
       include ../../../filter/templates/search_bar
   .block-collection--list__header
     .block-collection--list__column.block-collection--list__column--thumb(data-attr="icon")
