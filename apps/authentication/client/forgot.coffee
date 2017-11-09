@@ -13,6 +13,8 @@ module.exports = ->
   $form.on 'submit', (e) ->
     e.preventDefault()
 
+    $errors.empty()
+
     serializer = new Serializer $form
 
     $submit
@@ -36,16 +38,12 @@ module.exports = ->
 
         track.submit 'User forgot password'
 
-      error: ->
-        $errors.show().text 'We were unable to locate that account'
+      error: ({ responseJSON: { description }}) ->
+        $errors.show()
+          .text description
 
         $submit
           .prop 'disabled', false
           .text 'Try again'
-
-        setTimeout ->
-          $submit.text label
-          $errors.empty()
-        , 5000
 
         track.error 'User forgot password error'
