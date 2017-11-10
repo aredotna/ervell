@@ -1,0 +1,16 @@
+if tips
+  .Tips__tips
+    for tip in tips
+      a.Tip.js-tip(
+        href=tip.href
+        data-id=tip.id
+        data-trigger=tip.trigger
+      )
+        .Tip__title!= tip.title
+        .Tip__close.js-close
+          span(
+            class='iconic iconic-sm'
+            data-glyph='x'
+            title='x'
+            aria-hidden='true'
+          )
