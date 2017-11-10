@@ -1,6 +1,6 @@
 if block.has('image') && block.get('class') !== 'Media'
   .block-img
-    a( href= block.getSourceUrl(), target='_blank' )
+    a( href= block.getSourceUrl(), target='_blank', rel='nofollow'  )
       img( src= block.resizeImage(1000, 1000, 'large') )
 
 if block.get('class') === 'Media'
@@ -12,7 +12,7 @@ if block.get('class') === 'Text'
     != md(block.get('content'))
 
 if block.get('class') === 'Attachment' && !block.has('image')
-  a.block-attachment( href= block.getSourceUrl() target='_blank' )
+  a.block-attachment( href= block.getSourceUrl() target='_blank'  )
     if block.get('attachment').extension === 'mp3'
       img.iconic.iconic-lg(
         data-src="#{sd.IMAGE_PATH}iconic/type-mp3.svg"

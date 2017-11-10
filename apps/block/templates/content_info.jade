@@ -10,7 +10,7 @@
 
   .BlockContentInfo__source
     if block && (block.has('source') || block.has('image'))
-      a( href= block.getSourceUrl(), target='_blank' )
+      a( href= block.getSourceUrl(), target='_blank', rel='nofollow' )
         = block.sourceTitle()
 
   .BlockContentInfo__toggle.js-toggle-info

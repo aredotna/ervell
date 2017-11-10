@@ -32,13 +32,14 @@
 
         .BlockSidebar__provenance
           if block.has('source') || block.has('image')
-            a( href= block.getSourceUrl() target='_blank' )
+            a( href= block.getSourceUrl() target='_blank', rel='nofollow'  )
               span= block.sourceTitle()
 
           if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
             a(
               href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}"
               target='_blank'
+              rel='nofollow'
             ) Find original
 
     section.BlockSidebar__section
