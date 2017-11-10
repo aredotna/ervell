@@ -23,6 +23,20 @@
     font-size font-size-lg
     margin-top 2em
 
+    &__skip
+      position absolute
+      top 0
+      right 0
+      padding unit unit 40px 40px
+      cursor pointer
+      opacity 0.45
+      z-index rotate_z + 1
+      prevent-content-shift()
+      transform translateZ(100)
+      .iconic-sm:before
+        font-weight 400
+        font-size 16px !important
+
     > .Button
       display block
       margin 0 1em
