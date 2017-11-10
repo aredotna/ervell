@@ -29,7 +29,7 @@ span.block-item.block-item--content.block-collection--list__row(
     include partials/_comments
 
   .block-collection--list__column.block-collection--list__column--source
-    a(href="#{block.getSourceUrl()}" target="_blank")
+    a(href="#{block.getSourceUrl()}" target="_blank" rel="nofollow")
       if block.get('class') == 'Attachment' && ['mp3', 'pdf'].indexOf(block.get('attachment').extension)
         img(data-src="#{sd.IMAGE_PATH}iconic/type-#{block.get('attachment').extension}.svg" class="iconic iconic-sm")
       if block.get('class') == 'Media'
