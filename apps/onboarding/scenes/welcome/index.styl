@@ -23,6 +23,17 @@
     font-size font-size-lg
     margin-top 2em
 
+    &__skip
+      position absolute
+      top 0
+      right 0
+      padding 2em 3em
+      opacity 0.45
+      prevent-content-shift()
+      .iconic-sm:before
+        font-weight 400
+        font-size 16px !important
+
     > .Button
       display block
       margin 0 1em
