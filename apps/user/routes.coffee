@@ -20,7 +20,9 @@ tips = require './tips.coffee'
     success: (author) ->
       res.locals.author = author
       res.locals.sd.USER = author.toJSON()
-      res.locals.tips = res.locals.sd.TIPS = addTips(req.user, author, req.cookies, tips)
+
+      if req.user?.id is author?.id && user?.get('show_tour')
+        res.locals.tips = res.locals.sd.TIPS = addTips(req.cookies, tips)
   
     complete: -> next()
 
