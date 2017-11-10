@@ -1,8 +1,8 @@
 if tips && tips.length
   .Tips.js-tips
-    h4.Type.Type--size-h4
-      | This is your profile.
-      | Here's what you can do to get started:
+    h4.Type.Type--size-h5
+      | Welcome to Are.na, this is your profile.
+      | All of your channels and content will show up here.
 
     .Tips__tips
       for tip in tips
@@ -11,9 +11,7 @@ if tips && tips.length
           data-id=tip.id
           data-trigger=tip.trigger
         )
-          .Tip__title
-            = tip.title
-
+          .Tip__title!= tip.title
           .Tip__close.js-close
             span(
               class='iconic iconic-sm'
