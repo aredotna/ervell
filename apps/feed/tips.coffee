@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: 'explore_message'
-    title: 'Go to <strong>explore</strong> to see the global activity from the Are.na community in real time.'
+    title: 'Go to <strong>Explore</strong> to see everything the Are.na community is connecting in real time.'
     href: '/explore'
   }
   {
