@@ -10,7 +10,8 @@ graphQL = require "../../lib/graphql.coffee"
 query = require "./queries/profile.coffee"
 sd = require("sharify").data
 cache = require "../../lib/cache.coffee"
-{ addTips } = require './components/tips/helpers.coffee'
+tips = require './tips.coffee'
+{ addTips } = require '../../components/tips/helpers.coffee'
 
 @fetchAuthor = (req, res, next) ->
   author = new User id: req.params.username
@@ -19,7 +20,10 @@ cache = require "../../lib/cache.coffee"
     success: (author) ->
       res.locals.author = author
       res.locals.sd.USER = author.toJSON()
-      res.locals.tips = res.locals.sd.TIPS = addTips(req.user, author, req.cookies)
+
+      if req.user?.id is author?.id
+        res.locals.tips = res.locals.sd.TIPS = addTips(req.cookies, tips)
+  
     complete: -> next()
 
 @user = (req, res, next) ->

@@ -1,6 +1,5 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-# Poller = require 'backbone-poller'
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 InfiniteView = require '../../../components/pagination/infinite_view.coffee'
@@ -10,9 +9,10 @@ BlockView = require '../../../components/block_collection/client/block_view.coff
 User = require '../../../models/user.coffee'
 scrollFrame = require 'scroll-frame'
 IconicJS = require '../../../components/iconic/client/iconic.min.js'
+initTips = require '../../../components/tips/index.coffee'
 
 feedTemplate = -> require('../../../components/feed/templates/feed.jade') arguments...
-emptyTemplate = -> require('../../../components/feed/templates/empty.jade') arguments...
+emptyTemplate = -> require('../templates/empty.jade') arguments...
 
 module.exports = class FeedView extends Backbone.View
   retryCount: 0
@@ -56,7 +56,8 @@ module.exports = class FeedView extends Backbone.View
 
 
   showEmpty: ->
-    @$el.html emptyTemplate()
+    @$el.html emptyTemplate tips: sd.TIPS
+    initTips()
 
   updateTitle: (diff) =>
     window.document.title = "Arena (#{diff})"
