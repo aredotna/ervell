@@ -1,9 +1,14 @@
 _ = require 'underscore'
 sd = require('sharify').data
 ExploreBlocks = require '../../collections/explore_blocks'
+tips = require './tips.coffee'
+{ addTips } = require '../../components/tips/helpers.coffee'
 
 @index = (req, res, next) ->
   return next() unless req.user
+
+  if req.user?.get('show_tour')
+    res.locals.tips = res.locals.sd.TIPS = addTips(req.cookies, tips)
 
   res.locals.sd.CURRENT_PATH = "/"
   res.locals.sd.FEED_TYPE = 'primary'

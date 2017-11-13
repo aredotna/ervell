@@ -1,7 +1,7 @@
 Backbone = require 'backbone'
 TipView = require './view.coffee'
 { TIPS } = require('sharify').data
-{ shared: { current_user } } = require '../../../../lib/mediator.coffee'
+{ shared: { current_user } } = require '../../lib/mediator.coffee'
 
 module.exports = ->
   tips = new Backbone.Collection TIPS

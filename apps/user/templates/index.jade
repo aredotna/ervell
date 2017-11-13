@@ -5,6 +5,8 @@ block body
   - range.unshift('0-9')  
 
   include _path
+  include _tips
+  
   if _.keys(alpha).length
     .channel-container.flex-container.channel-container--alpha
       .alpha(class=channelsCount > 10 ? "alpha--two-columns" : "")

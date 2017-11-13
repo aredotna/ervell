@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 Cookies = require 'cookies-js'
-analytics = require '../../../../lib/analytics.coffee'
+analytics = require '../../lib/analytics.coffee'
 Promise = require 'bluebird-q'
 
 module.exports = class TipView extends Backbone.View

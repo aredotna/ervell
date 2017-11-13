@@ -2,9 +2,7 @@ extends ../../../components/layout/index
 
 block body
   include _path
-
-  .Constrain
-    include ../components/tips/index
+  include _tips
 
   .channel-container.channel-container--user( class=blocks.length ? '' : 'is-empty' )
     .profile-contents
