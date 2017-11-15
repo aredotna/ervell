@@ -35,7 +35,8 @@ module.exports = class CouponCodeView extends Backbone.View
     @els = input: @$('.js-input')
 
     @els.input.focus()
-    @els.input.val @els.input.val()
+    @els.input.val val = @els.input.val()
+    @els.input[0].setSelectionRange(val.length, val.length)
 
   render: ->
     @$el.html template
