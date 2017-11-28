@@ -1,26 +1,13 @@
-#
-# Routes file that exports route handlers for ease of testing.
-#
 Q = require 'bluebird-q'
 Channel = require "../../models/channel"
 Block = require "../../models/block"
 Comments = require "../../collections/comments"
 User = require "../../models/user"
-markdown = require 'marked'
+markdown = require '../../lib/markdown'
 sd = require("sharify").data
 _ = require 'underscore'
 
 @block = (req, res, next) ->
-  markdown.setOptions
-    renderer: new markdown.Renderer(),
-    gfm: true,
-    tables: true,
-    breaks: true,
-    pedantic: false,
-    sanitize: true,
-    smartLists: true,
-    smartypants: false
-
   block = new Block id: req.params.block_id
   comments = new Comments [], block: block
 

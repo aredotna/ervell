@@ -5,7 +5,7 @@ Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
-md = require 'marked'
+markdown = require '../../../lib/markdown.coffee'
 xss = require 'xss'
 
 module.exports = class EditableAttributeView extends Backbone.View
@@ -27,16 +27,6 @@ module.exports = class EditableAttributeView extends Backbone.View
     @currentUser = mediator.shared.current_user
     @listenTo @model, 'remote:update', @render
     @listenTo @model, 'change', @render
-
-    md.setOptions		
-      renderer: new md.Renderer(),		
-      gfm: true
-      tables: true
-      breaks: true	
-      pedantic: false		
-      smartLists: true
-      smartypants: false
-
     @render()
 
   beginEdit: ->
@@ -61,7 +51,7 @@ module.exports = class EditableAttributeView extends Backbone.View
     require('../templates/editable_attribute.jade') arguments...
 
   getRenderData: ->
-    html = if @model.has(@_attribute) then _.unescape(md(@model.get(@_attribute))) else ''
+    html = if @model.has(@_attribute) then _.unescape(markdown(@model.get(@_attribute))) else ''
 
     id: @model.id
     attribute: @_attribute
