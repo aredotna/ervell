@@ -1,13 +1,12 @@
 _ = require 'underscore'
 mediator = require '../../../lib/mediator.coffee'
 EditableAttributeView = require './editable_attribute_view.coffee'
-md = require 'marked'
 xss = require 'xss'
+markdown = require '../../../lib/markdown.coffee'
 
 attributeTemplate = -> require('../templates/editable_attribute.jade') arguments...
 
 module.exports = class MetaEditableAttributeView extends EditableAttributeView
-
   _isPresentClass: ->
     if @model.get('metadata')?[@_attribute] then 'is-present' else 'is-absent'
 
@@ -17,8 +16,7 @@ module.exports = class MetaEditableAttributeView extends EditableAttributeView
       attribute: @_attribute
       kind: @_kind
       value: @model.get('metadata')?[@_attribute]
-      value_html: md(@model.get('metadata')?[@_attribute] || '-')
-      md: md
+      value_html: markdown(@model.get('metadata')?[@_attribute] || '-')
     ).addClass @className()
 
   save: (e)=>
