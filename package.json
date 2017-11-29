@@ -63,7 +63,7 @@
     "serve-favicon": "^2.3.0",
     "sharify": "*",
     "sortablejs": "^1.6.0",
-    "striptags": "^3.1.0",
+    "striptags": "^2.2.1",
     "stylus": "^0.54.5",
     "superagent": "^3.6.0",
     "underscore": "*",
