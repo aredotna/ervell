@@ -63,6 +63,7 @@
     "serve-favicon": "^2.3.0",
     "sharify": "*",
     "sortablejs": "^1.6.0",
+    "striptags": "^3.1.0",
     "stylus": "^0.54.5",
     "superagent": "^3.6.0",
     "underscore": "*",
@@ -70,7 +71,7 @@
     "underscore.string": "*",
     "validator": "*",
     "withinviewport": "^1.0.0",
-    "xss": "^0.2.9"
+    "xss": "^0.3.4"
   },
   "devDependencies": {
     "benv": "*",
