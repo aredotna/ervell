@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-markdown = require 'marked'
+markdown = require '../../../lib/markdown.coffee'
 mediator = require '../../../lib/mediator.coffee'
 CommentEditableAttributeView = require '../../editable_attribute/client/comment_editable_attribute_view.coffee'
 template = -> require('../templates/index.jade') arguments...

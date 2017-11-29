@@ -1,7 +1,7 @@
 _ = require 'underscore'
 sd = require('sharify').data
 Backbone = require 'backbone'
-markdown = require 'marked'
+markdown = require '../../../lib/markdown.coffee'
 Cookies = require 'cookies-js'
 mediator = require '../../../lib/mediator.coffee'
 CurrentUser = require '../../../models/current_user.coffee'

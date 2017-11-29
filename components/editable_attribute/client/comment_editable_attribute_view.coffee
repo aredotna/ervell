@@ -1,5 +1,5 @@
 _ = require 'underscore'
-md = require 'marked'
+markdown = require '../../../lib/markdown.coffee'
 EditableAttributeView = require './editable_attribute_view.coffee'
 MentionQuicksearch = require '../../mention_quicksearch/client/mention_quicksearch_view.coffee'
 
@@ -27,4 +27,4 @@ module.exports = class CommentEditableAttributeView extends EditableAttributeVie
 
   getRenderData: ->
     _.extend super,
-      value_html: md(@model.getHTML())
+      value_html: markdown(@model.getHTML())
