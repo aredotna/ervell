@@ -33,7 +33,7 @@ module.exports = class Comment extends Base
     for entity in entities
       if entity.type == 'user'
         html = html + text.slice(lastPosition, entity.start) +
-          "<a href=\"/#{entity.user_slug}\">@#{entity.user_name}</a>"
+          "[@#{entity.user_name}](#{entity.user_slug})"
         lastPosition = entity.end
 
     html += text.slice(lastPosition)
