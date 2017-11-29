@@ -12,4 +12,4 @@
         | (Edited #{comment.updatedAtAgo()})
 
   .Comment__body( id="attribute-body_#{comment.id}" )
-    = comment.getHTML()
+    = comment.getBodyWithEntities()

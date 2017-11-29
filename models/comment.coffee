@@ -1,15 +1,12 @@
-#
-# Model for a comment
-#
 Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
 config = require '../config.coffee'
-xss = require 'xss'
+markdown = require '../lib/markdown.coffee'
+striptags = require 'striptags'
 
 module.exports = class Comment extends Base
-
   urlRoot: -> "#{sd.API_URL}/blocks/#{@blockId()}/comments"
 
   blockId: ->
@@ -22,27 +19,31 @@ module.exports = class Comment extends Base
     model.set('body', '[deleted]') if model.get('body') is ''
     super
 
-  getHTML: ->
+  getBodyWithEntities: ->
     text = @get('body')
     entities = @get('entities')
     return text unless entities and entities.length
 
-    html = ""
+    output = ''
     lastPosition = 0
 
     for entity in entities
       if entity.type == 'user'
-        html = html + text.slice(lastPosition, entity.start) +
+        output = output + text.slice(lastPosition, entity.start) +
           "[@#{entity.user_name}](#{entity.user_slug})"
         lastPosition = entity.end
 
-    html += text.slice(lastPosition)
-    xss html
+    output += text.slice(lastPosition)
+    output
+
+  getHTML: ->
+    markdown(@getBodyWithEntities())
 
   getStrippedHTML: ->
-    @getHTML()
-      .replace("<a", "<strong")
-      .replace("</a", "</strong")
+    # Highlight usernames
+    output = @getHTML().replace('<a', '<strong').replace('</a', '</strong')
+    # Strip out everything but basic inline text formatting
+    striptags(output, ['strong', 'em'])
 
   getPermissions: (user)->
     return "" unless @has('user') and user?
