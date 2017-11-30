@@ -20,6 +20,6 @@ meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}/#{cha
 meta(property="og:title" content="Are.na / #{channel.get('title')}")
 meta(property="og:url" content="https://www.are.na/#{author.get('slug')}/#{channel.get('slug')}")
 
-- description = (channel.has('metadata') && channel.get('metadata').description) || "Are.na is a social platform for creative and collaborative research."
+- description = (channel.has('metadata') && channel.get('metadata').description.replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
 meta(name="twitter:description", content=description)
 meta(property="og:description" content=description)
