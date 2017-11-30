@@ -6,6 +6,9 @@ link(
   href="https://www.are.na/#{author.get('slug')}/feed/rss"
 )
 
+if author.get('can_index') == false
+  meta(name="robots" content="none")
+
 meta(name="twitter:title", content="Are.na / #{author.get('username')}")
 meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}")
 meta(property="og:title" content="Are.na / #{author.get('username')}")

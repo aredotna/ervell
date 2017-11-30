@@ -1,8 +1,3 @@
-//- ensure private share links don't get indexed
-
-if author && author.get('can_index') == false
-  meta(name="robots" content="none")
-
 if sd.SUBJECT
   meta(name="robots" content="none")
 
