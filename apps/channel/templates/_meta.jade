@@ -1,0 +1,25 @@
+link(rel="canonical" href="#{channel.href()}")
+link(
+  rel='alternate'
+  type='application/rss+xml'
+  title="Are.na / #{channel.get('title')} / Feed"
+  href="#{channel.href()}/feed/rss"
+)
+
+//- Do not index private channels
+if channel.get('status') == 'private'
+  meta(name="robots" content="none")
+
+//- Do not index channels who's users have turned off search indexing
+if channel.get('can_index') == false
+  meta(name="robots" content="none")
+
+//- Standard channel meta
+meta(name="twitter:title", content="Are.na / #{channel.get('title')}")
+meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}/#{channel.get('slug')}")
+meta(property="og:title" content="Are.na / #{channel.get('title')}")
+meta(property="og:url" content="https://www.are.na/#{author.get('slug')}/#{channel.get('slug')}")
+
+- description = (channel.has('metadata') && channel.get('metadata').description) || "Are.na is a social platform for creative and collaborative research."
+meta(name="twitter:description", content=description)
+meta(property="og:description" content=description)
