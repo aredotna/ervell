@@ -1,12 +1,7 @@
 extends ../../../components/layout/index
 
-block styles
-  link(
-    rel='alternate'
-    type='application/rss+xml'
-    title="Are.na / #{channel.get('title')} / Feed"
-    href="#{channel.href()}/feed/rss"
-  )
+block meta
+  include _meta
 
 block body
   .channel.js-channel

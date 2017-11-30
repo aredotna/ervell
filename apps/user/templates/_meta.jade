@@ -1,0 +1,19 @@
+link(rel="canonical" href="https://www.are.na/#{author.get('slug')}")
+link(
+  rel='alternate'
+  type='application/rss+xml'
+  title="Are.na / #{author.get('slug')} / Feed"
+  href="https://www.are.na/#{author.get('slug')}/feed/rss"
+)
+
+unless author.get('can_index')
+  meta(name="robots" content="none")
+
+meta(name="twitter:title", content="Are.na / #{author.get('username')}")
+meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}")
+meta(property="og:title" content="Are.na / #{author.get('username')}")
+meta(property="og:url" content="https://www.are.na/#{author.get('slug')}")
+
+- description = (author.has('metadata') && author.get('metadata').description.replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
+meta(name="twitter:description", content=description)
+meta(property="og:description" content=description)
