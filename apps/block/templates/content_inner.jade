@@ -1,7 +1,10 @@
 if block.has('image') && block.get('class') !== 'Media'
   .block-img
     a( href= block.getSourceUrl(), target='_blank', rel='nofollow'  )
-      img( src= block.resizeImage(1000, 1000, 'large') )
+      img(
+        src= block.resizeImage(1000, 1000, 'large')
+        alt="#{block.get('description')}"
+      )
 
 if block.get('class') === 'Media'
   .block-media
