@@ -8,6 +8,6 @@ header#layout-header
   else
     .layout-header__register
       //- TODO: Margins
-      a( href='/sign_up' ) Join
+      a( href='/sign_up' rel="nofollow" ) Join
       |&nbsp;or&nbsp;
-      a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" ) Log in
+      a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" rel="nofollow" ) Log in
