@@ -6,7 +6,7 @@ link(
   href="https://www.are.na/#{author.get('slug')}/feed/rss"
 )
 
-if !author.get('can_index')
+unless author.get('can_index')
   meta(name="robots" content="none")
 
 meta(name="twitter:title", content="Are.na / #{author.get('username')}")

@@ -11,7 +11,7 @@ if channel.get('status') == 'private'
   meta(name="robots" content="none")
 
 //- Do not index channels who's users have turned off search indexing
-if !channel.get('can_index')
+unless channel.get('can_index')
   meta(name="robots" content="none")
 
 //- Standard channel meta
