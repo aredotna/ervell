@@ -7,7 +7,7 @@ if sd.SUBJECT
   meta(name="robots" content="none")
 
 //- default
-meta(property="description" content="Arena is a platform for collaborative research.")
+meta(property="description" content="Are.na is a social platform for creative and collaborative research.")
 
 //- verification
 meta(name="google-site-verification" content="yEDzyeh9dYsQoRw7VJA6X5aVthUCYVTNK6nOUQU1eEE")
@@ -27,16 +27,11 @@ link(rel="apple-touch-startup-image" href="#{sd.IMAGE_PATH}loading.png")
 link(rel="mask-icon" href="#{sd.IMAGE_PATH}arena-mark.svg" color="black")
 
 //- twitter & fb meta
-meta(name="twitter:description", content="Are.na is a platform for collaborative research.")
+meta(name="twitter:description", content="Are.na is a social platform for creative and collaborative research.")
 meta(name="twitter:site", content="@aredotna")
-meta(property="og:description" content="Are.na is a platform for collaborative research.")
+meta(property="og:description" content="Are.na is a social platform for creative and collaborative research.")
 
-if author
-  meta(name="twitter:title", content="Are.na / #{author.get('username')}")
-  meta(name="twitter:url", content="https://www.are.na/#{author.get('slug')}")
-  meta(property="og:title" content="Are.na / #{author.get('username')}")
-  meta(property="og:url" content="https://www.are.na/#{author.get('slug')}")
-else if title
+if title
   meta(name="twitter:title", content="Are.na / #{title}")
   meta(name="twitter:url", content="https://www.are.na#{sd.CURRENT_PATH}")
   meta(property="og:title" content="Are.na / #{title}")
