@@ -6,3 +6,7 @@ meta( property='og:url' content="https://www.are.na/block/#{block.id}" )
 if block.has('image')
   meta( name='twitter:image1', content= block.get('image').display.url )
   meta( property='og:image' content= block.get('image').display.url )
+
+- description = (block.has('description') && block.has('description').replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
+meta(name="twitter:description", content=description)
+meta(property="og:description" content=description)
