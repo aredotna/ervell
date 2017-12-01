@@ -6,10 +6,13 @@ div(
 )
   .block-padding
 
+  - var target = isEmbedded ? '_blank' : '_self'
+
   a(
     href="#{block.getHref()}"
     data-client="#{block.get('base_class')}"
     class="grid__block__link needsclick"
+    target=target
   )
     .grid__block__inner.halign--flex(class="grid__block__inner--#{ block.getVisibility() }")
       .grid__block__content
@@ -17,7 +20,7 @@ div(
 
       .grid__block__overlay.abs-fill(class="grid__block__overlay--#{ block.getVisibility() }")
         - if(isEmbedded && block.get('class') != 'Channel') 
-          a(href="#{block.getHref()}" target="_blank").button--inblock.button--inblock--view View on Are.na
+          span(href="#{block.getHref()}").button--inblock.button--inblock--view View on Are.na
         - else if(user && user.has('id'))
           block overlay
 
@@ -25,8 +28,8 @@ div(
           .grid__block__delete-block.button--delete-block.iconic.iconic-size-sm(data-glyph="trash")
             .tooltip
               | Are you sure?
-              a.tooltip__choice(data-choice='destroy') Yes
-              a.tooltip__choice(data-choice='cancel') No
+              span.tooltip__choice(data-choice='destroy') Yes
+              span.tooltip__choice(data-choice='cancel') No
 
       if user && user.id
         .grid__block__connect-container.abs-fill
