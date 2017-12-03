@@ -56,7 +56,7 @@ module.exports = class Block extends Base
     _.unescape title
 
   getStrippedHTML: ->
-    # fake links
+    # fake link formatting
     output = @get('content_html')?.replace('<a', '<strong').replace('</a', '</strong')
 
   contentOrDescription: ->
