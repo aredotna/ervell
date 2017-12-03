@@ -8,6 +8,7 @@ _ = require 'underscore'
 _s = require 'underscore.string'
 moment = require 'moment'
 parseDomain = require 'parse-domain'
+striptags = require 'striptags'
 
 module.exports = class Block extends Base
 
@@ -53,6 +54,10 @@ module.exports = class Block extends Base
       title = @get('generated_title')
     
     _.unescape title
+
+  getStrippedHTML: ->
+    # fake link formatting
+    output = @get('content_html')?.replace('<a', '<strong').replace('</a', '</strong')
 
   contentOrDescription: ->
     @get('content') || @get('description')

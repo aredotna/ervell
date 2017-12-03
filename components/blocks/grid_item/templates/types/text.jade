@@ -3,7 +3,7 @@ extends block
 block content
   .valign--flex
     .grid__block__content__text
-      != block.get('content_html')
+      != block.getStrippedHTML()
 
 block overlay
   include ../overlay_actions
