@@ -16,6 +16,24 @@
     max-width 60%
     fill colors-gray-text
 
+.AboutVideo
+  width 100%
+  position relative
+  +tablet()
+    width 90%
+  +mobile()
+    width 90%
+  > span
+    border 1px solid colors-gray-border
+    display block
+    ratio-box(960 / 540)
+    > iframe
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+
 img.FaqImage
   margin 2em auto
   max-width layout-narrow-width
