@@ -14,10 +14,4 @@
 # this should export empty Object
 # module.exports = {}
 
-module.exports =
-  homepage_splash:
-    key: 'homepage_splash'
-    outcomes:
-      video: 50
-      connect: 50
-    dimension: 'dimension5'
+module.exports = {}
