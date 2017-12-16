@@ -27,6 +27,7 @@ module.exports =
   GOOGLE_ANALYTICS_ID: null
   STRIPE_PUBLISHABLE_KEY: null
   X_APP_TOKEN: null
+  IOS_APP_ID: 1299153149
   ADMIN_SLUGS: 'chris-sherron,charles-broskoski,damon-zucconi,daniel-pianetti,christopher-barley,meg-miller,christina-badal,leo-shaw'
 
 # Override any values with env variables if they exist
