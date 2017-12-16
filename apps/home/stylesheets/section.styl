@@ -19,7 +19,7 @@
   &__cta
     display flex
     width 100%
-    flex-direction row
+    flex-flow row wrap
     justify-content center
     align-items center
     // Match font size to button size
@@ -31,8 +31,11 @@
       display block
       margin 0 1em
       max-width block_width
-      flex-basis 15%
+      flex-basis 10%
       white-space nowrap
+
+      &--app
+        display none
 
   &__footer
     padding 1em
