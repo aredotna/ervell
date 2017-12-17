@@ -1,16 +1,14 @@
 extends ../../../components/layout/index
 
 block body
-  - var range = '!~@#$%^&*()_-+=<>.,?/ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-  - range.unshift('0-9')  
-
   include _path
   include _tips
-  
-  if _.keys(alpha).length
+
+  - var alphaKeys = _.sortBy(_.keys(alpha))
+  if alphaKeys.length
     .channel-container.flex-container.channel-container--alpha
       .alpha(class=channelsCount > 10 ? "alpha--two-columns" : "")
-        for letter in range
+        for letter in alphaKeys
           - group = alpha[letter]
           if group
             .alpha__group
