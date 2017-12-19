@@ -15,6 +15,7 @@
   STRIPE_PUBLISHABLE_KEY
   BLOG_URL
   ADMIN_SLUGS
+  IOS_APP_ID
 } = require '../config'
 
 express = require 'express'
@@ -53,6 +54,7 @@ sharify.data = {
   STRIPE_PUBLISHABLE_KEY
   BLOG_URL
   ADMIN_SLUGS
+  IOS_APP_ID
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
