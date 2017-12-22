@@ -50,6 +50,6 @@ module.exports = ->
 
         switch status
           when 401
-            location.href = '/confirm/expired'
+            location.href = "/confirm/expired?email=#{user.get('email')}"
 
         track.error "User logged in error (#{status}: #{description})"
