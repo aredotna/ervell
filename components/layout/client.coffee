@@ -29,6 +29,7 @@ module.exports = ->
   setupAnalytics()
   initShortCuts()
   initNightMode()
+  showInviteMessage()
   showLimitMessage()
   initConfirmableMessage()
 
@@ -154,6 +155,22 @@ initShortCuts = ->
       window.location.reload()
 
 # TODO: Extract
+showInviteMessage = ->
+  return unless sd.CURRENT_USER?
+
+  model = new Backbone.Model
+    id: 'invite_friends'
+    title: 'Send an invitation'
+    body: """
+      If you're enjoying Are.na, <a href='/tools/send-invitation'>invite your friends</a>. 
+    """
+
+  messageView = new MessageView model: model
+
+  if messageView.isRenderable()
+    $('body').append messageView.render().$el
+
+
 showLimitMessage = ->
   return unless sd.CURRENT_USER?
 
