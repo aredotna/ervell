@@ -159,10 +159,10 @@ showInviteMessage = ->
   return unless sd.CURRENT_USER?
 
   model = new Backbone.Model
-    id: 'invite_friends'
+    id: 'invite_friend'
     title: 'Send an invitation'
     body: """
-      If you're enjoying Are.na, <a href='/tools/send-invitation'>invite your friends</a>. 
+      Are.na gets better when you <a href='/tools/send-invitation'>invite your friends</a>. 
     """
 
   messageView = new MessageView model: model
