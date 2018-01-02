@@ -16,6 +16,7 @@
   BLOG_URL
   ADMIN_SLUGS
   IOS_APP_ID
+  ITUNES_LINK
 } = require '../config'
 
 express = require 'express'
