@@ -1,0 +1,64 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  for Education
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small.js-section( id='top' )
+      img.EduImg(src="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+      
+      h1.Type.Type--size-h2.Utility--align-center
+        | Are.na for Education
+
+      p.Type.Type--lh-tall
+        | Are.na is an open-ended space for creative and collaborative thinking. It’s also a tool that lets you save and organize different types of content so you can more easily follow your thinking, notice patterns, and make new insights.
+      
+      p.Type.Type--lh-tall
+        | If you’re a student, you can use Are.na to collect research in all kinds of formats in one place — and structure it all visually. Because anyone on Are.na can link their public research to anyone else’s, you also have a growing archive of shared knowledge at your fingertips.
+
+      p.Type.Type--lh-tall
+        | To learn more about Are.na, visit our <a href="/about">about page</a>. Or <a href="https://www.are.na/christina-badal/teaching-on-are-na" target="_blank">see examples</a> of how students and teachers are using Are.na.
+
+    section.AboutSection.AboutSection--small.js-section
+      h4.Type.Type--size-h4.Utility--align-center
+        | Students get 50% off Are.na Premium
+
+      p.Type.Type--lh-tall
+        | We love that Are.na is home to a growing community of self-directed learners, but we also want to make sure Are.na is accessible to students in a range of actual learning environments. 
+
+      - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
+      p.Type.Type--lh-tall
+        | #[strong If you’re a student, you can take 50% off the price of any Are.na Premium membership (monthly or yearly)]. Just enter the coupon #[strong studenthalf] when you #[a(href=upgradeLink) upgrade your account].
+
+      p.Type.Type--lh-tall
+        | You’ll be able to upload as many files as you want and save unlimited content in private channels for your own use. No need to use an .edu email or send us a transcript — we’re doing this on the honor system for students anywhere in the world, from elementary school through advanced degree programs.
+
+    //- section.AboutSection.AboutSection--small.js-section
+    //-   h4.Type.Type--size-h4.Utility--align-center
+    //-     | Examples
+
+    //-   p.Type.Type--lh-tall
+    //-     | See how Are.na members are using the platform for teaching and learning in a variety of settings.
+
+    //-   include ../components/education_examples/index
+
+    //-   .AboutSection__buttons
+    //-     a.Button.Button--size-lg( href='https://www.are.na/christina-badal/teaching-on-are-na' )
+    //-       | See more&hellip;
+
+    section.AboutSection.AboutSection--small.js-section
+      h4.Type.Type--size-h4.Utility--align-center
+        | Contact Us for Support
+
+      p.Type.Type--lh-tall
+        | Are you a student, educator, or administrator working with a larger group or an institution? We’re happy to talk through your situation and help you set up with Are.na. Contact us at #[a(href="mailto:help@are.na") help@are.na] to start a conversation.
+
+      p.Type.Type--lh-tall
+        | We’re also working on a whole suite of team features so you can share accounts and manage your content in groups. <a href="https://confirmsubscription.com/h/d/728B9103B7704F3A">Sign up for our monthly newsletter</a> to get occasional updates.
+
