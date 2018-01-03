@@ -23,7 +23,7 @@ tips = require './tips.coffee'
 
       if req.user?.id is author?.id && req.user.get('show_tour')
         res.locals.tips = res.locals.sd.TIPS = addTips(req.cookies, tips)
-  
+
     complete: -> next()
 
 @user = (req, res, next) ->
@@ -38,10 +38,10 @@ tips = require './tips.coffee'
   if req.query.subject
     blocks.options = _.extend blocks.options, subject: req.query.subject
     res.locals.sd.SUBJECT = req.query.subject
-  
+
   if res.locals.sd.SORT
     blocks.options = _.extend blocks.options,
-      sort: res.locals.sd.SORT 
+      sort: res.locals.sd.SORT
       seed: res.locals.sd.SEED
 
   blocks.fetch
@@ -50,7 +50,7 @@ tips = require './tips.coffee'
     error: (m, err) -> next err
     success: ->
       res.locals.sd.BLOCKS = blocks.toJSON()
-
+      res.locals.sd.CURRENT_ACTION = 'profile'
       res.render "all",
         author: res.locals.author
         blocks: blocks.models
@@ -68,9 +68,11 @@ tips = require './tips.coffee'
   .then ->
     alpha = res.locals.sd.ALPHA = channels.groupByAlpha()
     res.locals.sd.SUBJECT = 'index'
+    res.locals.sd.CURRENT_ACTION = 'profile'
     res.render 'index',
       alpha: alpha
       channelsCount: channels.length
+
   .catch next
 
 channelsVariables = (req, res) ->
@@ -102,7 +104,7 @@ channelsVariables = (req, res) ->
       res.locals.sd.QUERY = req.query.q
       res.locals.sd.PROFILE_CHANNELS = response.user.contents
       res.locals.sd.SUBJECT = 'channel'
-
+      res.locals.sd.CURRENT_ACTION = 'profile'
       res.render 'channels',
         channels: response.user.contents
         author: res.locals.author
@@ -125,6 +127,7 @@ channelsVariables = (req, res) ->
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWERS = blocks.toJSON()
+      res.locals.sd.CURRENT_ACTION = 'profile'
       res.render "all",
         blocks: blocks.models
         author: res.locals.author
@@ -147,6 +150,7 @@ channelsVariables = (req, res) ->
     success: (data, response) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.FOLLOWING = blocks.toJSON()
+      res.locals.sd.CURRENT_ACTION = 'profile'
       res.render "all",
         blocks: blocks.models
         author: res.locals.author
