@@ -7,9 +7,9 @@ module.exports = ->
 
   call = switch CURRENT_ACTION
     when 'channel'
-      "Sign up for Are.na to #{if CHANNEL.visibility is 'public' then 'add to' else 'follow'} #{CHANNEL.title}"
+      "Join Are.na to #{if CHANNEL.visibility is 'public' then 'add to' else 'follow'} #{CHANNEL.title}"
     when 'profile'
-      "Sign up for Are.na to follow #{USER.full_name}"
+      "Join Are.na to follow #{USER.full_name}"
     else
       'Are.na is a platform for creative and collaborative research'
 
