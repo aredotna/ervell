@@ -1,12 +1,20 @@
 { truncate } = require 'underscore.string'
 { CURRENT_USER, USER, CURRENT_ACTION, CHANNEL } = require('sharify').data
 { isPhoneLike } = require '../util/device.coffee'
+Dismisser = require '../has_seen/dismisser.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = ->
   return if isPhoneLike()
   return if CURRENT_USER?
   return if CURRENT_ACTION not in ['channel', 'profile', 'block']
+
+  dismisser = new Dismisser
+    key: 'logged_out_cta'
+    limit: 1
+    expires: 2628000 # 1 month
+
+  return if dismisser.dismissed()
 
   call = switch CURRENT_ACTION
     when 'channel'
@@ -21,3 +29,4 @@ module.exports = ->
   $el.one 'click', '.js-close', (e) ->
     e.preventDefault()
     $el.remove()
+    dismisser.dismiss()
