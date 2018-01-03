@@ -18,6 +18,7 @@ _ = require 'underscore'
   .then ->
     res.locals.sd.BLOCK = block.toJSON()
     res.locals.sd.COMMENTS = comments.toJSON()
+    res.locals.sd.CURRENT_ACTION = 'block'
 
     res.render 'index',
       block: block
