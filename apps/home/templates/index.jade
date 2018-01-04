@@ -29,6 +29,10 @@ block container
     section.HomeSection.js-section
       include ./sections/explore_and_collaborate
 
+    if blocks && blocks.length > 0
+      section.HomeSection.js-section
+        include ./sections/explore
+
     section.HomeSection.js-section
       include ./sections/get_started
 
