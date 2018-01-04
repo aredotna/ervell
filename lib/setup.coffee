@@ -17,6 +17,7 @@
   ADMIN_SLUGS
   IOS_APP_ID
   ITUNES_LINK
+  HOMEPAGE_EXPLORE_USER_IDS
 } = require '../config'
 
 express = require 'express'
@@ -57,6 +58,7 @@ sharify.data = {
   ADMIN_SLUGS
   IOS_APP_ID
   ITUNES_LINK
+  HOMEPAGE_EXPLORE_USER_IDS
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
