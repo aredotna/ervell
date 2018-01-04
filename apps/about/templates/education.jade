@@ -3,6 +3,14 @@ extends ../../../components/layout/layouts/blank
 block title
   |  for Education
 
+block meta
+  meta(name="twitter:title", content="Are.na for Education")
+  meta(name="twitter:url", content="https://www.are.na/education")
+  meta(property="og:title" content="Are.na for Education")
+  meta(property="og:url" content="https://www.are.na/education")
+  meta(name="twitter:image", content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+  meta(property="og:image" content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+
 block scripts
   script( src= asset('/assets/about.js') )
 
@@ -10,6 +18,24 @@ block container
   include ../../../components/logged_out_nav/templates/header
 
   .Page.Page--narrow
+    section.AboutSection.AboutSection--small.js-section
+      h4.Type.Type--size-h4.Utility--align-center
+        | Students and educators get 50% off Are.na Premium
+
+      p.Type.Type--lh-tall
+        | We love that Are.na is home to a growing community of self-directed learners, but we also want to make sure Are.na is accessible as a tool for students and teachers in a range of academic environments. 
+
+      - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
+      p.Type.Type--lh-tall
+        | #[strong If you’re a student or educator, you can now take 50% off the price of any Are.na Premium membership (monthly or yearly)]. Just enter the coupon #[strong studenthalf] when you #[a(href=upgradeLink) upgrade your account].
+
+      p.Type.Type--lh-tall
+        | You’ll be able to upload as many files as you want and save unlimited content in private channels for your own use. No need to sign up with an .edu email or send us a transcript — we’re making this offer on the honor system to allow the widest range of learners to sign up.
+      
+      if user
+        p.Type.Type--lh-tall
+          | If you’re already enjoying Are.na, please feel free to <a href="/tools/send-invitation">invite students or academic collaborators</a> and share this offer with them.
+
     section.AboutSection.AboutSection--small.js-section( id='top' )
       img.EduImg(src="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
       
@@ -27,30 +53,16 @@ block container
 
     section.AboutSection.AboutSection--small.js-section
       h4.Type.Type--size-h4.Utility--align-center
-        | Students get 50% off Are.na Premium
+        | Examples
 
       p.Type.Type--lh-tall
-        | We love that Are.na is home to a growing community of self-directed learners, but we also want to make sure Are.na is accessible to students in a range of actual learning environments. 
+        | See how Are.na members are using the platform for teaching and learning in a variety of settings.
 
-      - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
-      p.Type.Type--lh-tall
-        | #[strong If you’re a student, you can take 50% off the price of any Are.na Premium membership (monthly or yearly)]. Just enter the coupon #[strong studenthalf] when you #[a(href=upgradeLink) upgrade your account].
+      include ../components/education_examples/index
 
-      p.Type.Type--lh-tall
-        | You’ll be able to upload as many files as you want and save unlimited content in private channels for your own use. No need to use an .edu email or send us a transcript — we’re doing this on the honor system for students anywhere in the world, from elementary school through advanced degree programs.
-
-    //- section.AboutSection.AboutSection--small.js-section
-    //-   h4.Type.Type--size-h4.Utility--align-center
-    //-     | Examples
-
-    //-   p.Type.Type--lh-tall
-    //-     | See how Are.na members are using the platform for teaching and learning in a variety of settings.
-
-    //-   include ../components/education_examples/index
-
-    //-   .AboutSection__buttons
-    //-     a.Button.Button--size-lg( href='https://www.are.na/christina-badal/teaching-on-are-na' )
-    //-       | See more&hellip;
+      .AboutSection__buttons
+        a.Button.Button--size-lg( href='https://www.are.na/christina-badal/teaching-on-are-na' )
+          | See more&hellip;
 
     section.AboutSection.AboutSection--small.js-section
       h4.Type.Type--size-h4.Utility--align-center
