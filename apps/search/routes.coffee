@@ -15,6 +15,7 @@ removeDiacritics = require('diacritics').remove
 
   q = removeDiacritics req.params.query
   res.locals.sd.SEARCH = q
+  res.locals.sd.CURRENT_ACTION = 'search'
 
   request = blocks.fetch
     data:
