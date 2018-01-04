@@ -29,6 +29,7 @@ module.exports =
   X_APP_TOKEN: null
   IOS_APP_ID: 1299153149
   ITUNES_LINK: null
+  HOMEPAGE_EXPLORE_USER_IDS: "449,3630,11465,9040,52,14031,17886,12341,14364,4094,9935,8743,23,9039,4620,17,4840,10850,5831,128,2471,7249,8565,2424,812,14,15,410,1036,7358,10465"
   ADMIN_SLUGS: 'chris-sherron,charles-broskoski,damon-zucconi,daniel-pianetti,christopher-barley,meg-miller,christina-badal,leo-shaw'
 
 # Override any values with env variables if they exist

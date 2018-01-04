@@ -5,11 +5,15 @@
 UserBlocks = require("./user_blocks.coffee")
 sd = require("sharify").data
 _ = require 'underscore'
-params = require 'query-params'
+qs = require 'qs'
 
 module.exports = class ExploreBlocks extends UserBlocks
   defaultOptions:
     page: 1
     per: 20
 
-  url: -> "#{sd.API_URL}/search/explore?#{params.encode(@options)}"
+  # see https://github.com/ljharb/qs#stringifying
+  # our API needs query strings with no indices for user_ids
+  url: ->
+    params = qs.stringify(@options, { arrayFormat: 'brackets', encode: false })
+    "#{sd.API_URL}/search/explore?#{params}"
