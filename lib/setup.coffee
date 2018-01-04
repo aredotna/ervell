@@ -134,6 +134,10 @@ module.exports = (app) ->
     else
       app.use require '../apps'
 
+
+  # Convert the GraphQL error messages into some kind of matching status code
+  app.use require('./middleware/error_status')
+
   # Drop down to error handling middleware if nothing else catches it
   # TODO: Kill this/replace with something that's not a Node module
   artsyError.handlers app,
