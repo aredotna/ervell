@@ -1,13 +1,15 @@
 Promise = require 'bluebird-q'
 { shuffle, extend } = require 'underscore'
-{ API_URL, HOMEPAGE_SPLASH } = require('sharify').data
+{ API_URL, HOMEPAGE_SPLASH, HOMEPAGE_EXPLORE_USER_IDS } = require('sharify').data
 { DEMO_USER_AUTH_TOKEN } = process.env
 graphQL = require '../../lib/graphql'
 cached = require '../../lib/cached'
 ExploreBlocks = require '../../collections/explore_blocks'
 
 @index = (_req, res, next) ->
+  userIds = (HOMEPAGE_EXPLORE_USER_IDS or '').split(',').map (x) -> parseInt(x, 10)
   exploreBlocks = new ExploreBlocks
+  extend exploreBlocks.options, user_ids: userIds
 
   Promise.all [
     # Cached for 1 hour
