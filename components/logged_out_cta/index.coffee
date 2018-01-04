@@ -2,6 +2,7 @@
 { CURRENT_USER, USER, CURRENT_ACTION, CHANNEL } = require('sharify').data
 { isPhoneLike } = require '../util/device.coffee'
 Dismisser = require '../has_seen/dismisser.coffee'
+analytics = require '../../lib/analytics.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = ->
@@ -26,7 +27,11 @@ module.exports = ->
 
   $('body').append $el = $ template call: call
 
+  $el.one 'click', '.js-sign_up', ->
+    analytics.track.click 'Clicked sign up from logged out CTA'
+
   $el.one 'click', '.js-close', (e) ->
     e.preventDefault()
+    analytics.track.click 'Closed logged out CTA'
     $el.remove()
     dismisser.dismiss()
