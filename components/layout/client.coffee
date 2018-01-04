@@ -19,6 +19,7 @@ analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initConfirmableMessage = require '../confirmable_message/index.coffee'
+initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 
 module.exports = ->
@@ -32,6 +33,7 @@ module.exports = ->
   showInviteMessage()
   showLimitMessage()
   initConfirmableMessage()
+  initLoggedOutCTA()
 
 # TODO: Extract
 # TODO: Fix inconsistent class names

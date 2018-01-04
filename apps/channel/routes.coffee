@@ -32,6 +32,7 @@ graphQL = require '../../lib/graphql'
       res.locals.sd.CHANNEL = channel.toJSON()
       res.locals.sd.BLOCKS = channel.related().blocks.toJSON()
       res.locals.sd.CAN = can
+      res.locals.sd.CURRENT_ACTION = 'channel'
 
       res.render 'index',
         channel: channel
