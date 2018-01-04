@@ -17,6 +17,7 @@
   ADMIN_SLUGS
   IOS_APP_ID
   ITUNES_LINK
+  HOMEPAGE_EXPLORE_USER_IDS
 } = require '../config'
 
 express = require 'express'
@@ -57,6 +58,7 @@ sharify.data = {
   ADMIN_SLUGS
   IOS_APP_ID
   ITUNES_LINK
+  HOMEPAGE_EXPLORE_USER_IDS
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
@@ -131,6 +133,10 @@ module.exports = (app) ->
       app.use reloadAndMount path.join(__dirname, '..', 'apps')
     else
       app.use require '../apps'
+
+
+  # Convert the GraphQL error messages into some kind of matching status code
+  app.use require('./middleware/error_status')
 
   # Drop down to error handling middleware if nothing else catches it
   # TODO: Kill this/replace with something that's not a Node module

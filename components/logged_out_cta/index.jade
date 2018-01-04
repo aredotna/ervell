@@ -5,5 +5,6 @@
   a.Button.Button--size-sm.js-sign_up( href='/sign_up?ref=logged_out_cta' )
     | Sign up
 
-  a.LoggedOutCTA__close.js-close
-    | &times;
+  unless action === 'explore'
+    a.Button.Button--size-sm( href='/explore?ref=logged_out_cta' )
+      | Explore

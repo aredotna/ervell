@@ -32,6 +32,8 @@ tips = require './tips.coffee'
       sort: sort_by
       seed: seed
 
+  res.locals.sd.CURRENT_ACTION = 'explore'
+
   blocks.fetch
     error: (m, err) -> next err
     success: ->
