@@ -12,24 +12,16 @@
   align-items center
   text-align center
   z-index header_z
-  border-top 1px solid colors-gray-border
+  border-top 3px solid colors-gray-border
   background-color white
   color colors-gray-text
   font-size font-size-base
   line-height line-height-base
   transform translateZ(0)
 
-  &__close
-    position absolute
-    top 0
-    right 0
-    padding 0.5em 1em
-    font-size font-size-h4
-    line-height 1
-    color colors-gray-text
-
+  > span
   > .Button
-    margin-left 2em
+    margin 0 0.5em
 
 +mobile()
   .LoggedOutCTA
