@@ -1,4 +1,5 @@
 mediator = require '../../../../lib/mediator.coffee'
+analytics = require '../../../../lib/analytics.coffee'
 
 glyphs =
   grid: 'grid-three-up'
@@ -15,6 +16,10 @@ module.exports = ($el) ->
 
     state.set 'view_mode', mode = $target.data 'mode'
     $indicator.attr 'data-glyph', glyphs[mode]
+
+    analytics.track.click 'View mode changed', 
+      label: 'Mode'
+      value: $target.data 'mode'
 
     window.location.reload()
 
