@@ -14,7 +14,10 @@ header.BlockSidebar__header.js-connection-count
 .BlockConnectionsList.js-url-connections-list
   //- Rendered client-side
 
-if user && user.has('username')
-  .BlockConnect
+.BlockConnect
+  if user && user.has('username')
     .Button.Button--size-sm.js-connect
+      | Connect &rarr;
+  else
+    a.Button.Button--size-sm( href='/sign_up?ref=connect' )
       | Connect &rarr;
