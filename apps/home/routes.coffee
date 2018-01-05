@@ -31,12 +31,10 @@ ExploreBlocks = require '../../collections/explore_blocks'
 
             #{require '../../components/block_v2/queries/block'}
           """
-    )
+    ).catch (->) # Ignore query errors
   ]
 
-  .catch (->) # Ignore query errors
-
-  .then ([exploreBlocksResponse, demoResponse]) ->
+  .spread (exploreBlocksResponse, demoResponse) ->
     locals = {}
 
     if demoResponse?
