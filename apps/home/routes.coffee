@@ -9,7 +9,7 @@ ExploreBlocks = require '../../collections/explore_blocks'
 @index = (_req, res, next) ->
   userIds = (HOMEPAGE_EXPLORE_USER_IDS or '').split(',').map (x) -> parseInt(x, 10)
   exploreBlocks = new ExploreBlocks
-  extend exploreBlocks.options, user_ids: userIds
+  extend exploreBlocks.options, user_ids: userIds, per: 60
 
   Promise.all [
     # Cached for 1 hour
