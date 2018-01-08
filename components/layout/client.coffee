@@ -158,7 +158,9 @@ initShortCuts = ->
 
 # TODO: Extract
 showInviteMessage = ->
-  return unless sd.CURRENT_USER?
+  # Don't show this message if the current user is not logged in
+  # or if they have a pending confirmation
+  return if CURRENT_USER?.is_pending_confirmation
 
   model = new Backbone.Model
     id: 'invite_friend'
