@@ -9,7 +9,6 @@ Blocks = require '../../../collections/blocks.coffee'
 IconicJS = -> require '../../../components/iconic/client/iconic.min.js'
 initComments = require '../../../components/comments/index.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
-initShare = require '../components/share/index.coffee'
 
 template = -> require('../templates/block.jade') arguments...
 connectionsTemplate = -> require('../templates/connections.jade') arguments...
@@ -133,7 +132,6 @@ module.exports = class LegacyBlockView extends Backbone.View
     this
 
   postRender: ->
-    initShare(block: @model)
     initComments @model, @$('.js-comments') if @user?
 
     if @$('.iconic').length

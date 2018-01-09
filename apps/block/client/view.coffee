@@ -1,6 +1,7 @@
 { extend, invoke } = require 'underscore'
 LegacyBlockView = require './legacy_view.coffee'
 InlineConnectIntegrationView = require '../../../components/connect/integration/inline/view.coffee'
+initShare = require '../components/share/index.coffee'
 
 module.exports = class BlockView extends LegacyBlockView
   subViews: []
@@ -19,6 +20,15 @@ module.exports = class BlockView extends LegacyBlockView
     $target
       .hide()
       .after view.render().$el
+
+    @subViews.push view
+
+  postRender: ->
+    super
+
+    view = initShare
+      $el: @$('.js-block-share')
+      block: @model
 
     @subViews.push view
 
