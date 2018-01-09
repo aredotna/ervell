@@ -1,38 +1,37 @@
-.ChannelShare
-  case status
-    when 'active'
-      input.Input.Input--size-xs.js-select-all(
-        value= url
-        readonly
-      )
+case status
+  when 'active'
+    input.Input.Input--size-xs.js-select-all(
+      value= url
+      readonly
+    )
 
-      a.js-copy-url
-        | Copy link
+    a.js-copy-url
+      | Copy link
 
-      if channel.status === 'private'
-        a.js-disable-public-link
-          | Disable public link
+    if channel.status === 'private'
+      a.js-disable-public-link
+        | Disable public link
 
-      unless channel.status === 'private'
-        a.js-share-external(
-          data-service='Twitter'
-          href="https://twitter.com/intent/tweet?original_referer=#{url}&text=#{text}&url=#{url}&via=aredotna"
-          target='_blank'
-        ) Twitter
+    unless channel.status === 'private'
+      a.js-share-external(
+        data-service='Twitter'
+        href="https://twitter.com/intent/tweet?original_referer=#{url}&text=#{text}&url=#{url}&via=aredotna"
+        target='_blank'
+      ) Twitter
 
-        a.js-share-external(
-          data-service='Facebook'
-          href="https://www.facebook.com/sharer/sharer.php?u=#{url}"
-          target='_blank'
-        ) Facebook
+      a.js-share-external(
+        data-service='Facebook'
+        href="https://www.facebook.com/sharer/sharer.php?u=#{url}"
+        target='_blank'
+      ) Facebook
 
-    when 'generating'
-      a Generating...
+  when 'generating'
+    a Generating...
 
-    when 'error'
-      a.js-reload
-        | Problem generating public link
+  when 'error'
+    a.js-reload
+      | Problem generating public link
 
-    default
-      a.js-toggle
-        | Share
+  default
+    a.js-toggle
+      | Share
