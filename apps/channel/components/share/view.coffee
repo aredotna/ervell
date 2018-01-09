@@ -86,7 +86,9 @@ module.exports = class ChannelShareView extends Backbone.View
 
     window.open $target.attr('href'), service, options
 
-    analytics.track.click 'Clicked a social share', service: service
+    analytics.track.click 'Clicked a social share',
+      label: 'service'
+      value: service
 
   disablePublicLink: (e) ->
     e.preventDefault()
