@@ -13,7 +13,6 @@ ChannelEditCollaboratorsView = require '../components/collaborators/edit_collabo
 ChannelConnectionsView = require './channel_connections_view.coffee'
 ChannelVisibilityView = require '../../../components/channel_visibility/client/channel_visibility_view.coffee'
 ChannelExportView = require '../../../components/channel_export/client/channel_export_view.coffee'
-ShareLinkView = require '../../../components/share_link/client/share_link_view.coffee'
 
 module.exports.ChannelPathView = class ChannelPathView extends PathView
   subViews: []
@@ -100,11 +99,6 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
       autoSync: true
 
       @model.on 'change:status', @updateTitle, @
-
-    # share link
-    new ShareLinkView
-      el: @$(".js-share-link")
-      model: @model
 
     # export
     new ChannelExportView
