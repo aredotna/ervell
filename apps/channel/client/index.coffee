@@ -7,6 +7,7 @@ ChannelBlocks = require '../../../collections/channel_blocks.coffee'
 Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
 addBlock = require '../../../components/add_block/client/index.coffee'
+initShare = require '../components/share/index.coffee'
 
 module.exports = ->
   { current_user } = mediator.shared
@@ -30,6 +31,7 @@ module.exports = ->
     resultsCollection: resultsCollection
 
   initChannelPath channel
+  initShare()
 
   return unless ($addBlock = $('.js-add-block')).length
 
