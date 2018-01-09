@@ -17,9 +17,7 @@
           time( datetime= block.get('updated_at'), title= block.get('updated_at') )
             | Last updated #{block.updatedAtAgo()}
 
-
-    //- Possibly hide entire info section
-    if (user && user.id === block.get('user').id) || block.get('description') || block.has('source') || block.has('image')
+    if (user && user.id === block.get('user').id) || block.get('description') || block.has('source') || block.has('image') || block.get('visibility') !== 'private'
       section.BlockSidebar__section
         header.BlockSidebar__header
           | Info
@@ -30,17 +28,23 @@
             //- Non-breaking space here prevents content shifting when logged in
             != block.get('description') || '&nbsp;'
 
-        .BlockSidebar__provenance
-          if block.has('source') || block.has('image')
-            a( href= block.getSourceUrl() target='_blank', rel='nofollow'  )
-              span= block.sourceTitle()
+        .BlockSidebar__actions
+          if block.get('visibility') !== 'private'
+            .BlockSidebar__share.BlockShare.js-block-share
+              include ../components/share/index
 
-          if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
-            a(
-              href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}"
-              target='_blank'
-              rel='nofollow'
-            ) Find original
+          if (block.has('source') || block.has('image')) || (block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link')
+            .BlockSidebar__provenance
+              if block.has('source') || block.has('image')
+                a( href= block.getSourceUrl() target='_blank', rel='nofollow'  )
+                  span= block.sourceTitle()
+
+              if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
+                a(
+                  href="https://www.google.com/searchbyimage?&image_url=#{block.getImageSize('original')}"
+                  target='_blank'
+                  rel='nofollow'
+                ) Find original
 
     section.BlockSidebar__section
       include info/connections
