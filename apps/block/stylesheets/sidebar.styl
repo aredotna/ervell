@@ -60,21 +60,23 @@
     a
       font-weight bold
 
-  &__provenance
+  &__actions
     collapsed-margins(0.5em)
     font-size font-size-xs
     line-height line-height-tall
 
-    > a
+    a
       display block
       font-weight bold
+
       > span
         ellipsis(85%)
+        display block // inline-block fucks with the line-height
 
     &:empty
       display none
 
-  &__description + &__provenance
+  &__description + &__actions
     collapsed-margins(2em)
 
   &__toggle
