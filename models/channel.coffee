@@ -1,3 +1,4 @@
+Promise = require 'bluebird-q'
 { extend } = require 'underscore'
 params = require 'query-params'
 { API_URL, APP_URL } = require('sharify').data
@@ -56,13 +57,13 @@ module.exports = class Channel extends Block
   generateShareLink: ->
     mediator.trigger 'sharelink:created'
 
-    $.post "#{API_URL}/channels/#{@slugOrId()}/share", (response) =>
+    Promise $.post "#{API_URL}/channels/#{@slugOrId()}/share", (response) =>
       @set 'share_link', response.share_link
 
   removeShareLink: ->
     mediator.trigger 'sharelink:removed'
 
-    $.ajax
+    Promise $.ajax
       type: "DELETE"
       url: "#{API_URL}/channels/#{@slugOrId()}/share"
       success: =>

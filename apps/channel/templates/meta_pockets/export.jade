@@ -6,9 +6,6 @@ block vars
   - id = "metadata--export"
 
 block content
-  if channel.get('status') == 'private'
-    .metadata__content__section.js-share-link
-      include ../../../../components/share_link/templates/share_link
   .metadata__content__section
     unless channel.get('status') == 'private'
       .export--link(data-format="rss"): a(href="#{channel.get('slug')}/feed/rss" target="_blank") RSS Feed
