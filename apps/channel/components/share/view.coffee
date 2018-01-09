@@ -1,8 +1,9 @@
 Backbone = require 'backbone'
 copy = require 'copy-to-clipboard'
-{ extend, map } = require 'underscore'
+{ extend } = require 'underscore'
 { APP_URL, CURRENT_PATH } = require('sharify').data
 analytics = require '../../../../lib/analytics.coffee'
+popOpen = require '../../../../lib/pop_open.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class ChannelShareView extends Backbone.View
@@ -68,23 +69,12 @@ module.exports = class ChannelShareView extends Backbone.View
     e.preventDefault()
 
     $target = $(e.currentTarget)
-    $window = $(window)
-
-    x = window?.screenLeft or window.screenX
-    y = window?.screenTop or window.screenY
-
-    properties =
-      status: 1
-      width: w = 750
-      height: h = 400
-      top: (y + ($window.height() / 2) - (h / 2)) or 0
-      left: (x + ($window.width() / 2) - (w / 2)) or 0
-
-    options = map(properties, (v, k) -> "#{k}=#{v}").join ','
-
+    href = $target.attr('href')
     service = $target.data('service')
 
-    window.open $target.attr('href'), service, options
+    popOpen
+      href: href
+      title: service
 
     analytics.track.click 'Clicked a social share',
       label: 'service'
