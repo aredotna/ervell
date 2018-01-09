@@ -31,6 +31,7 @@
     "cookie-session": "*",
     "cookies": "^0.5.0",
     "cookies-js": "https://registry.npmjs.org/cookies-js/-/cookies-js-1.2.2.tgz",
+    "copy-to-clipboard": "^3.0.8",
     "diacritics": "*",
     "express": "^4.15.4",
     "express-spam-referral-blocker": "^1.2.1",
