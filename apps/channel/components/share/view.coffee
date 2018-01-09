@@ -2,6 +2,7 @@ Backbone = require 'backbone'
 copy = require 'copy-to-clipboard'
 { extend, map } = require 'underscore'
 { APP_URL, CURRENT_PATH } = require('sharify').data
+analytics = require '../../../../lib/analytics.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class ChannelShareView extends Backbone.View
@@ -48,6 +49,8 @@ module.exports = class ChannelShareView extends Backbone.View
     else
       @state.set 'status', 'active'
 
+    analytics.track.click 'Clicked "Share"'
+
   copyURL: (e) ->
     e.preventDefault()
 
@@ -58,6 +61,8 @@ module.exports = class ChannelShareView extends Backbone.View
     $target.text 'Copied!'
 
     setTimeout (-> $target.text label), 2000
+
+    analytics.track.click 'Clicked "Copy link" from "Share"'
 
   shareExternal: (e) ->
     e.preventDefault()
@@ -77,9 +82,11 @@ module.exports = class ChannelShareView extends Backbone.View
 
     options = map(properties, (v, k) -> "#{k}=#{v}").join ','
 
-    window.open $target.attr('href'), $target.data('service'), options
+    service = $target.data('service')
 
-    options
+    window.open $target.attr('href'), service, options
+
+    analytics.track.click 'Clicked a social share', service: service
 
   disablePublicLink: (e) ->
     e.preventDefault()
