@@ -6,5 +6,5 @@ block vars
   - id = "metadata--actions"
 
 block content
-  if !user.canEditChannel(channel)
+  unless can.update
     .follow_button.pointer: a(data-type="Channel", data-id="#{channel.id}")

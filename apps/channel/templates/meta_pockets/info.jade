@@ -6,12 +6,13 @@ block vars
   - id = "metadata--info"
 
 block content
-  .metadata__content__section
-    .ChannelDescription.js-channel-description
-      if channel.has('metadata')
-        = channel.get('metadata').description
-      else
-        | —
+  if can.update || channel.has('metadata')
+    .metadata__content__section
+      .ChannelDescription.js-channel-description
+        if channel.has('metadata')
+          = channel.get('metadata').description || '—'
+        else
+          | —
 
   .metadata__content__section.js-channel-follower-count
     a( href="#{channel.href()}/followers" )

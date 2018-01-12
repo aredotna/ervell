@@ -1,0 +1,22 @@
+.metadata__column.metadata__column--mobile
+  .metadata__title
+    | Collaborators
+
+  .metadata__content
+    if collaborators.length
+      p.ManageCollaboratorsList
+        = 'With '
+
+        each collaborator, i in collaborators
+          a( href="/#{collaborator.get('slug')}" )
+            = collaborator.get('username')
+
+          if collaborators.length > 1 && i !== collaborators.length - 1
+            if i === collaborators.length - 2
+              = ' and '
+            else
+              = ', '
+
+    if can.manage_collaborators
+      a.ManageCollaboratorsButton.js-open-manage-collaborators
+        | Edit collaborators

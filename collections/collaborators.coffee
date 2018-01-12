@@ -1,26 +1,21 @@
-#
-# Collection for a channel's collaborators
-#
-
 Base = require "./base.coffee"
 sd = require("sharify").data
 User = require "../models/user.coffee"
 mediator = require '../lib/mediator.coffee'
 
 module.exports = class Collaborators extends Base
-
   model: User
 
-  url: -> "#{sd.API_URL}/channels/#{@channel_slug}/collaborators"
+  url: -> "#{sd.API_URL}/channels/#{@id}/collaborators"
 
-  inviteUrl: -> "#{sd.API_URL}/channels/#{@channel_slug}/collaborators/invite"
+  inviteUrl: -> "#{sd.API_URL}/channels/#{@id}/collaborators/invite"
 
   parse: (data) -> data.users
 
-  initialize: (options) ->
-    @channel_slug = options?.channel_slug
-    super
+  initialize: (_items, { id } = {}) ->
+    @id = id
 
+  # ...Interesting...
   _remove: (id) ->
     mediator.trigger 'collaborator:removed'
     @remove @get(id)
@@ -48,7 +43,5 @@ module.exports = class Collaborators extends Base
     $.ajax
       type: 'POST'
       url: @inviteUrl()
-      data: 
+      data:
         email: email
-
-    

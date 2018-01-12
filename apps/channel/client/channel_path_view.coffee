@@ -114,23 +114,6 @@ module.exports.initChannelPath = (channel) ->
 
   connections.fetch()
 
-  collaborators = new Collaborators
-    channel_slug: channel.get('slug')
-
-  new ChannelCollaborationView
-    collection: collaborators
-    el: $("#metadata--info__collaborators")
-    isCollaboration: channel.has('collaboration')
-    isEditable: mediator.shared.current_user.canEditChannel channel
-    channel: channel
-
-  new ChannelEditCollaboratorsView
-    collection: collaborators
-    el: $("#metadata--edit-collaborators .metadata__content")
-    isCollaboration: channel.has('collaboration')
-    isEditable: mediator.shared.current_user.canEditChannel channel
-    channel: channel
-
   new ChannelPathView
     el: $('section.path--header')
     model: channel

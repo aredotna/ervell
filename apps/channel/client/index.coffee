@@ -8,6 +8,7 @@ Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
 addBlock = require '../../../components/add_block/client/index.coffee'
 initShare = require '../components/share/index.coffee'
+initManageCollaborators = require '../components/manage_collaborators/index.coffee'
 
 module.exports = ->
   { current_user } = mediator.shared
@@ -23,15 +24,16 @@ module.exports = ->
     channel: channel
     mode: 'skeleton'
 
+  initChannelPath(channel)
+  initShare()
+  initManageCollaborators()
+
   channelView = new ChannelView
     el: $('.js-channel')
     channel: channel
     blocks: blocks
     blockCollectionView: view
     resultsCollection: resultsCollection
-
-  initChannelPath channel
-  initShare()
 
   return unless ($addBlock = $('.js-add-block')).length
 
