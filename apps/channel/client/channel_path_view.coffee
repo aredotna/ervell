@@ -8,38 +8,39 @@ Collaborators = require '../../../collections/collaborators.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
 MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 InlineConnectIntegrationView = require '../../../components/connect/integration/inline/view.coffee'
-ChannelCollaborationView = require './channel_collaboration_view.coffee'
-ChannelEditCollaboratorsView = require '../components/collaborators/edit_collaborators_view.coffee'
 ChannelConnectionsView = require './channel_connections_view.coffee'
 ChannelVisibilityView = require '../../../components/channel_visibility/client/channel_visibility_view.coffee'
 ChannelExportView = require '../../../components/channel_export/client/channel_export_view.coffee'
+{ CAN } = require('sharify').data
 
 module.exports.ChannelPathView = class ChannelPathView extends PathView
   subViews: []
 
   events:
-    'click .toggle-settings-trigger' : 'toggleSettings'
-    'click .delete-channel' : 'showConfirmation'
-    'click .delete-channel a' : 'showConfirmation'
-    'click .delete-channel--confirmation__yes' : 'deleteChannel'
-    'click .delete-channel--confirmation__no'  : 'hideConfirmation'
+    'click .toggle-settings-trigger': 'toggleSettings'
+    'click .delete-channel': 'showConfirmation'
+    'click .delete-channel a': 'showConfirmation'
+    'click .delete-channel--confirmation__yes': 'deleteChannel'
+    'click .delete-channel--confirmation__no' : 'hideConfirmation'
     'click .js-connect': 'loadConnectView'
 
   initialize: ->
     super
-    mediator.on 'channel:is-editable', @setupEditableViews, @
-    @model.on 'change:follower_count', @updateFollowerCount, @
+
+    @listenTo mediator, 'channel:is-editable', @setupEditableViews
+    @listenTo @model, 'change:follower_count', @updateFollowerCount
 
   setupSubViews: ->
     super
 
     # description
     new MetaEditableAttributeView
-      el: @$("#metadata--info__description")
+      el: @$('.js-channel-description')
       model: @model
       _attribute: 'description'
       _kind: 'markdown'
       wait: true
+      can: CAN
 
   updateFollowerCount: ->
     @$('.js-channel-follower-count').html "<a href='#{@model.href()}/followers'> #{@model.get('follower_count')} Followers</a>"
@@ -84,15 +85,14 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
     @$('#metadata__column-manage').addClass 'is-editable'
     @$('#metadata--collaborators').addClass 'is-editable'
 
-    # title
     new EditableAttributeView
       el: @$("#attribute-title_#{@model.id}")
       model: @model
       _attribute: 'title'
       _kind: 'plaintext'
       wait: true
+      can: CAN
 
-    # privacy
     new ChannelVisibilityView
       el: @$("#metadata--privacy .metadata__content")
       model: @model
@@ -100,7 +100,6 @@ module.exports.ChannelPathView = class ChannelPathView extends PathView
 
       @model.on 'change:status', @updateTitle, @
 
-    # export
     new ChannelExportView
       el: @$("#metadata--export .metadata__content")
       model: @model

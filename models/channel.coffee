@@ -76,3 +76,11 @@ module.exports = class Channel extends Block
     extend {}, @__related__,
       author: new User @get('user')
       blocks: new ChannelBlocks @get('contents'), channel_slug: @get('slug')
+
+  getPermissions: (can = {}) ->
+    return super(can) if can.id?
+
+    klassList = 'can-read'
+    klassList += ' can-edit' if can.update
+    klassList += ' can-manage' if can.manage
+    klassList
