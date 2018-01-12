@@ -18,9 +18,9 @@ block path
 
 block metadata
   .metadata.metadata--channel
-    if (user && author.id == user.id) || channel.has('metadata') || channel.get('collaboration')
-      include meta_pockets/info
+    include meta_pockets/info
     include meta_pockets/connections
+
     if user
       unless channel.get('status') == 'private'
         include meta_pockets/followers

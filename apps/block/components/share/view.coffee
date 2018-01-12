@@ -6,19 +6,16 @@ analytics = require '../../../../lib/analytics.coffee'
 popOpen = require '../../../../lib/pop_open.coffee'
 template = -> require('./index.jade') arguments...
 
-module.exports = class ChannelShareView extends Backbone.View
-  className: 'ChannelShare'
+module.exports = class BlockShareView extends Backbone.View
+  className: 'BlockShare'
 
   events:
     'click .js-toggle': 'toggle'
     'click .js-copy-url': 'copyURL'
     'click .js-share-external': 'shareExternal'
-    'click .js-reload': 'reload'
-    'click .js-disable-public-link': 'disablePublicLink'
     'click .js-select-all': 'selectAll'
 
-  initialize: ({ channel, text }) ->
-    @channel = channel
+  initialize: ({ text }) ->
     @state = new Backbone.Model
       status: 'inactive'
       url: APP_URL + CURRENT_PATH
@@ -29,26 +26,8 @@ module.exports = class ChannelShareView extends Backbone.View
   toggle: (e) ->
     e.preventDefault()
 
-    if @channel.get('status') is 'private' and not @channel.has('share_link')
-      @state.set 'status', 'generating'
-
-      @channel
-        .generateShareLink()
-        .then () =>
-          @state.set
-            status: 'active'
-            url: @channel.shareHref()
-
-        .catch () =>
-          @state.set 'status', 'error'
-
-    else if @channel.get('status') is 'private'
-      @state.set
-        status: 'active'
-        url: @channel.shareHref()
-
-    else
-      @state.set 'status', 'active'
+    @state.set 'status', 'active'
+    @$el.attr 'data-state', 'active'
 
     analytics.track.click 'Clicked "Share"'
 
@@ -80,33 +59,8 @@ module.exports = class ChannelShareView extends Backbone.View
       label: 'service'
       value: service
 
-  disablePublicLink: (e) ->
-    e.preventDefault()
-
-    $label = ($target = $(e.currentTarget)).text()
-
-    $target.text 'Disabling...'
-
-    @channel.removeShareLink()
-      .then () =>
-        @state.set 'status', 'inactive'
-
-      .catch () =>
-        $target.text 'Error disabling link'
-
-        setTimeout (-> $target.text label), 2000
-
-  selectAll: (e) ->
-    $(e.currentTarget).select()
-
-  reload: (e) ->
-    e.preventDefault()
-
-    window.location.reload(true)
-
   render: ->
     @$el.html template extend {},
-      @state.toJSON(),
-      channel: @channel.toJSON()
+      @state.toJSON()
 
     this
