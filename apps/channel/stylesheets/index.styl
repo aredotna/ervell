@@ -6,7 +6,8 @@
   padding-top unit
   position relative
 
-  .flex-container:before, .flex-container:after
+  .flex-container:before
+  .flex-container:after
     display none
 
   .channel-empty
@@ -15,20 +16,16 @@
   &.is-empty .channel-empty
     display block
 
-.channel 
+.channel
   .metadata--container
     padding-bottom 0
 
 .channel--drop-zone
-  -webkit-transform translateY(-1000%)
-  -ms-transform translateY(-1000%)
   transform translateY(-1000%)
   background-color rgba(255,255,255, 0.96)
   z-index lightbox_z
 
   &.is-droppable
-    -webkit-transform translateY(0)
-    -ms-transform translateY(0)
     transform translateY(0)
 
   .abs-fill, &.abs-fill
@@ -106,7 +103,7 @@
 #metadata--connections
   overflow-y visible
   .connection-list
-    margin-bottom unit  
+    margin-bottom unit
 
 #metadata__column-manage
   margin-top unit
@@ -118,7 +115,7 @@
     color lightgray
     font-size 36px
     letter-spacing -4px
-    font-family font_serif 
+    font-family font_serif
     height (unit * 2)
     line-height (unit * 2)
     &:before
@@ -128,7 +125,7 @@
     &:hover:before
       content attr(data-message)
       color textgray
-      font-size 12px 
+      font-size 12px
       font-family font_sans !important
       letter-spacing 0px
       line-height (unit * 2)
