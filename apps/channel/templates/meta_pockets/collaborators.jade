@@ -4,18 +4,8 @@
 
   .metadata__content
     if collaborators.length
-      p.ManageCollaboratorsList
-        = 'With '
-
-        each collaborator, i in collaborators
-          a( href="/#{collaborator.get('slug')}" )
-            = collaborator.get('username')
-
-          if collaborators.length > 1 && i !== collaborators.length - 1
-            if i === collaborators.length - 2
-              = ' and '
-            else
-              = ', '
+      p.ManageCollaboratorsList.js-collaborators-list
+        include ../../components/collaborators_list/index
 
     if can.manage_collaborators
       a.ManageCollaboratorsButton.js-open-manage-collaborators

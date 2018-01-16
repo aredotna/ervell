@@ -47,6 +47,7 @@ module.exports = class CollaboratorSearchView extends Backbone.View
     if isEmail @state.get('query')
       inviteCollaboratorView =
         new InviteCollaboratorView
+          collection: @collection
           email: @state.get 'query'
 
       @$el.append inviteCollaboratorView.render().$el

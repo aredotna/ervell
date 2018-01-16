@@ -2,11 +2,12 @@
   .CollaboratorItem__avatar(
     data-initials= collaborator.initials()
   )
-    img(
-      src= collaborator.get('avatar_image').display
-      alt= collaborator.initials()
-      onerror='this.style.display="none"'
-    )
+    if collaborator.has('avatar_image')
+      img(
+        src= collaborator.get('avatar_image').display
+        alt= collaborator.initials()
+        onerror='this.style.display="none"'
+      )
 
   .CollaboratorItem__metadata
     .CollaboratorItem__name

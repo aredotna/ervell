@@ -9,8 +9,7 @@ module.exports = class InviteCollaboratorView extends Backbone.View
   initialize: ({ @email }) -> #
 
   invite: ->
-    console.log('invite')
-    # @collection._invite @email
+    @collection._invite @email
 
   render: ->
     @$el.html template

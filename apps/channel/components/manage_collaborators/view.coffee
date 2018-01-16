@@ -12,18 +12,10 @@ module.exports = class ManageCollaboratorsView extends Backbone.View
 
   subViews: []
 
-  events:
-    'click .js-done': 'done'
-
   initialize: ({ @current_user }) ->
     @search = new CollaboratorSearch
 
     @listenTo @collection, 'add remove', @render
-
-  done: ->
-    # TODO: Use the same collection within the list on the page
-    # so that it's updated when we close.
-    # window.location.reload()
 
   render: ->
     @$el.html template

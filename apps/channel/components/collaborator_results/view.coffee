@@ -8,7 +8,7 @@ module.exports = class CollaboratorResultsView extends Backbone.View
   subViews: []
 
   initialize: ({ @search, @collection, @current_user }) ->
-    @listenTo @search, 'sync add remove reset', @render
+    @listenTo @search, 'sync remove reset', @render
 
   render: ->
     invoke @subViews, 'remove'

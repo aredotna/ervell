@@ -1,6 +1,3 @@
-{ CHANNEL, COLLABORATORS } = require('sharify').data
-mediator = require '../../../../lib/mediator.coffee'
-Collaborators = require '../../../../collections/collaborators.coffee'
 modalize = require '../../../../components/modalize/index.coffee'
 ManageCollaboratorsView = require './view.coffee'
 
@@ -10,11 +7,7 @@ openModal = (options = {}) ->
   modal.open()
   modal
 
-module.exports = ->
-  { shared: { current_user } } = mediator
-
-  collection = new Collaborators COLLABORATORS, id: CHANNEL.id
-
+module.exports = ({ collection, current_user }) ->
   openModal
     current_user: current_user
     collection: collection

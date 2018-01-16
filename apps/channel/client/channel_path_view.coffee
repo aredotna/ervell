@@ -4,7 +4,6 @@ sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
 PathView = require '../../../components/path/client/path_view.coffee'
 ChannelConnections = require '../../../collections/channel_connections.coffee'
-Collaborators = require '../../../collections/collaborators.coffee'
 EditableAttributeView = require '../../../components/editable_attribute/client/editable_attribute_view.coffee'
 MetaEditableAttributeView = require '../../../components/editable_attribute/client/meta_editable_attribute_view.coffee'
 InlineConnectIntegrationView = require '../../../components/connect/integration/inline/view.coffee'
