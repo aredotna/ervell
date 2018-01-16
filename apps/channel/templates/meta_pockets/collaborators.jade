@@ -1,0 +1,12 @@
+.metadata__column.metadata__column--mobile
+  .metadata__title
+    | Collaborators
+
+  .metadata__content
+    if collaborators.length
+      p.ManageCollaboratorsList.js-collaborators-list
+        include ../../components/collaborators_list/index
+
+    if can.manage_collaborators
+      a.ManageCollaboratorsButton.js-open-manage-collaborators
+        | Edit collaborators

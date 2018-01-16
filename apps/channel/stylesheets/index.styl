@@ -1,12 +1,19 @@
 @require '../components/mute/index.styl'
-@require '../components/collaborators/index.styl'
 @require '../components/share/index.styl'
+@require '../components/collaborator_item/index.styl'
+@require '../components/manage_collaborators/index.styl'
+@require '../components/managed_collaborator/index.styl'
+@require '../components/collaborator_search/index.styl'
+@require '../components/collaborator_results/index.styl'
+@require '../components/collaborator_result/index.styl'
+@require '../components/invite_collaborator/index.styl'
 
 .channel-container
   padding-top unit
   position relative
 
-  .flex-container:before, .flex-container:after
+  .flex-container:before
+  .flex-container:after
     display none
 
   .channel-empty
@@ -15,20 +22,16 @@
   &.is-empty .channel-empty
     display block
 
-.channel 
+.channel
   .metadata--container
     padding-bottom 0
 
 .channel--drop-zone
-  -webkit-transform translateY(-1000%)
-  -ms-transform translateY(-1000%)
   transform translateY(-1000%)
   background-color rgba(255,255,255, 0.96)
   z-index lightbox_z
 
   &.is-droppable
-    -webkit-transform translateY(0)
-    -ms-transform translateY(0)
     transform translateY(0)
 
   .abs-fill, &.abs-fill
@@ -79,18 +82,16 @@
   .delete-channel--confirmation__no
     margin 0 0 0 6px
 
-#metadata--info__description
-  width 100%
+.ChannelDescription
+.ProfileDescription
+  p
+    collapsed-margins(0.5em)
 
-  .attr-value p
-    margin-bottom (unit / 2)
-
-#metadata--description, #metadata--info
   .attribute-group textarea
     font-size 12px
 
     &:focus
-      height 80px
+      min-height 8em
 
   span
     margin-right 6px
@@ -108,7 +109,7 @@
 #metadata--connections
   overflow-y visible
   .connection-list
-    margin-bottom unit  
+    margin-bottom unit
 
 #metadata__column-manage
   margin-top unit
@@ -120,7 +121,7 @@
     color lightgray
     font-size 36px
     letter-spacing -4px
-    font-family font_serif 
+    font-family font_serif
     height (unit * 2)
     line-height (unit * 2)
     &:before
@@ -130,7 +131,7 @@
     &:hover:before
       content attr(data-message)
       color textgray
-      font-size 12px 
+      font-size 12px
       font-family font_sans !important
       letter-spacing 0px
       line-height (unit * 2)

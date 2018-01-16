@@ -55,7 +55,7 @@ module.exports.init = ->
 
   new MetaEditableAttributeView
     model: user
-    el: $("#metadata--about .metadata__content")
+    el: $('.js-profile-description')
     _attribute: 'description'
     _kind: 'markdown'
     wait: true

@@ -10,12 +10,11 @@ MuteView  = require '../components/mute/client.coffee'
 
 module.exports = class ChannelView extends Backbone.View
   initialize: ({ @channel, @blocks, @blockCollectionView, @resultsCollection }) ->
+    @listenTo mediator.shared.state, 'change:isDraggingBlocks', @toggleDragClass
+    @listenTo mediator, 'upload:done', @makeBlock
+    @listenTo @channel, 'edit:title:success', @updateSlug
 
-    mediator.on 'collaborators:fetched', @checkUserAbilities, @
-    mediator.shared.state.on 'change:isDraggingBlocks', @toggleDragClass, @
-    mediator.on 'upload:done', @makeBlock, @
-    @channel.on 'edit:title:success', @updateSlug, @
-
+    @checkUserAbilities()
     @pusherSubscribe()
 
   makeBlock: (src) ->
@@ -37,17 +36,13 @@ module.exports = class ChannelView extends Backbone.View
   updateSlug: ->
     window.location.href = @channel.href()
 
-  checkUserAbilities: (collaborators) ->
-    collaborator = _.contains collaborators.pluck('id'), mediator.shared.current_user.id
-
-    # Addable
+  checkUserAbilities: ->
     if CAN.add_to
       @setupFileDropView()
 
       @$('.js-block-collection').addClass 'is-addable'
       mediator.trigger 'channel:is-addable'
 
-    # Editable
     if CAN.update
       @$('.js-block-collection').addClass 'is-editable'
       @$('.block-item').addClass 'can-manage'
@@ -59,7 +54,6 @@ module.exports = class ChannelView extends Backbone.View
       @setUpDragView() unless $('body').hasClass 'is-mobile'
       @delegateEvents()
 
-    # if user is logged in but can't edit channel
     if CAN.mute
       @$('.metadata__column--manage').removeClass 'is-hidden'
 

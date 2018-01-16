@@ -7,6 +7,7 @@ Block = require './block.coffee'
 User = require './user.coffee'
 ChannelFollowers = require '../collections/channel_followers.coffee'
 ChannelBlocks = require '../collections/channel_blocks.coffee'
+Collaborators = require '../collections/collaborators.coffee'
 
 module.exports = class Channel extends Block
   defaultOptions:
@@ -72,7 +73,16 @@ module.exports = class Channel extends Block
   related: ->
     @__related__ ?=
       followers: new ChannelFollowers null, id: @slugOrId()
+      collaborators: new Collaborators null, id: @slugOrId()
 
     extend {}, @__related__,
       author: new User @get('user')
       blocks: new ChannelBlocks @get('contents'), channel_slug: @get('slug')
+
+  getPermissions: (can = {}) ->
+    return super(can) if can.id?
+
+    klassList = 'can-read'
+    klassList += ' can-edit' if can.update
+    klassList += ' can-manage' if can.manage
+    klassList

@@ -14,6 +14,8 @@ graphQL = require '../../lib/graphql'
           update
           mute
           follow
+          manage_collaborators
+          destroy
         }
       }
     }
@@ -21,15 +23,17 @@ graphQL = require '../../lib/graphql'
 
   Promise
     .all [
-      channel.fetch data: auth_token: token
-      graphQL token: token, query: canQuery, variables: options
+      channel.fetch(data: auth_token: token)
+      channel.related().collaborators.fetch(data: auth_token: token)
+      graphQL(token: token, query: canQuery, variables: options)
     ]
 
-    .then ([_channel, { channel: { can }}]) ->
+    .then ([_channel, _collaborators, { channel: { can }}]) ->
       if channel.get('class') is 'User'
         return res.redirect 301, "/#{channel.get 'slug'}"
 
       res.locals.sd.CHANNEL = channel.toJSON()
+      res.locals.sd.COLLABORATORS = channel.related().collaborators.toJSON()
       res.locals.sd.BLOCKS = channel.related().blocks.toJSON()
       res.locals.sd.CAN = can
       res.locals.sd.CURRENT_ACTION = 'channel'
@@ -37,8 +41,9 @@ graphQL = require '../../lib/graphql'
       res.render 'index',
         channel: channel
         blocks: channel.related().blocks.models
+        collaborators: channel.related().collaborators.models
         author: channel.related().author
-        can: can
+        can: can or {}
 
     .catch next
 
