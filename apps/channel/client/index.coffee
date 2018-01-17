@@ -1,4 +1,4 @@
-{ CHANNEL, BLOCKS, API_URL, FOLLOWERS, FOLLOWING } = require('sharify').data
+{ CHANNEL, BLOCKS, API_URL, FOLLOWERS, FOLLOWING, COLLABORATORS } = require('sharify').data
 mediator = require '../../../lib/mediator.coffee'
 { initChannelPath } = require './channel_path_view.coffee'
 ChannelView = require './channel_view.coffee'
@@ -6,15 +6,19 @@ setupBlockCollection = require '../../../components/blocks/container/client/inde
 ChannelBlocks = require '../../../collections/channel_blocks.coffee'
 Block = require '../../../models/block.coffee'
 Channel = require '../../../models/channel.coffee'
+Collaborators = require '../../../collections/collaborators.coffee'
 addBlock = require '../../../components/add_block/client/index.coffee'
 initShare = require '../components/share/index.coffee'
+initManageCollaborators = require '../components/manage_collaborators/index.coffee'
+initCollaboratorsList = require '../components/collaborators_list/index.coffee'
 
 module.exports = ->
-  { current_user } = mediator.shared
+  { shared: { current_user } } = mediator
 
   channel = new Channel CHANNEL
   blocks = new ChannelBlocks BLOCKS, channel_slug: CHANNEL.slug
   blocks.url = "#{API_URL}/channels/#{CHANNEL.slug}/blocks"
+  collaborators = new Collaborators COLLABORATORS, id: CHANNEL.id
 
   { view, resultsCollection } = setupBlockCollection
     $el: $('.js-channel-contents')
@@ -23,15 +27,20 @@ module.exports = ->
     channel: channel
     mode: 'skeleton'
 
+  initChannelPath(channel)
+  initShare()
+  initManageCollaborators
+    collection: collaborators
+    current_user: current_user
+  initCollaboratorsList
+    collection: collaborators
+
   channelView = new ChannelView
     el: $('.js-channel')
     channel: channel
     blocks: blocks
     blockCollectionView: view
     resultsCollection: resultsCollection
-
-  initChannelPath channel
-  initShare()
 
   return unless ($addBlock = $('.js-add-block')).length
 

@@ -19,13 +19,14 @@ block path
 block metadata
   .metadata.metadata--channel
     include meta_pockets/info
+
+    if can.manage_collaborators || channel.get('collaboration')
+      include meta_pockets/collaborators
+
     include meta_pockets/connections
 
     if user
-      unless channel.get('status') == 'private'
-        include meta_pockets/followers
       include meta_pockets/privacy
-      include meta_pockets/edit_collaborators
       include meta_pockets/export
       include meta_pockets/delete
 
@@ -34,5 +35,9 @@ block metadata
         include ../components/mute/index
 
     if channel
-      #metadata__column-manage.metadata__column--bottom(class= (user && user.canEditChannel(channel)) ? 'is-editable' : '')
-        .toggle-settings-trigger.pointer(data-message="Privacy, Collaborators, Export, Delete ▾")
+      #metadata__column-manage.metadata__column--bottom(
+        class= (can.update || can.destroy) ? 'is-editable' : ''
+      )
+        .toggle-settings-trigger.pointer(
+          data-message='Privacy, Collaborators, Export, Delete ▾'
+        )

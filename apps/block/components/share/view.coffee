@@ -18,7 +18,7 @@ module.exports = class BlockShareView extends Backbone.View
   initialize: ({ text }) ->
     @state = new Backbone.Model
       status: 'inactive'
-      url: APP_URL + CURRENT_PATH
+      url: window.location.href
       text: encodeURIComponent(text)
 
     @listenTo @state, 'change', @render

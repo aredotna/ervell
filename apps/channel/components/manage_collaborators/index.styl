@@ -1,0 +1,46 @@
+.ManageCollaboratorsList
+  margin-bottom 1em
+
+.ManageCollaboratorsButton
+  display block
+
+.ManageCollaboratorsModal
+  > .modalize-backdrop
+    > .modalize-dialog
+      height 90%
+      max-width 40em
+      max-height 60em
+      background-color colors-gray-border
+      border-radius dropdown-border-radius
+      padding dropdown-border-width
+
+      > .modalize-close
+        display none
+
+      > .modalize-body
+        background-color white
+        border 1px solid colors-gray-lighter
+
+
+.ManageCollaborators
+  display flex
+  flex-direction column
+  height 100%
+  padding 1em
+
+  &__title
+    text-align center
+    color colors-gray-light
+
+  &__body
+    flex 1
+    overflow-y auto
+
+  &__search
+    collapsed-margins(2em)
+
+  &__list
+    collapsed-margins(2em)
+
+  &__done
+    //

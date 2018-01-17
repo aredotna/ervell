@@ -12,25 +12,29 @@ module.exports = class EditableAttributeView extends Backbone.View
   wait: false
 
   className: ->
-    "#{@_attribute} attribute-group #{@_isPresentClass()} #{@model.getPermissions(@currentUser)}"
+    "#{@_attribute} attribute-group #{@_isPresentClass()} #{@getPermissions()}"
+
+  getPermissions: ->
+    @model.getPermissions(@can or @currentUser)
 
   _isPresentClass: ->
     if @model.get(@_attribute) then 'is-present' else 'is-absent'
 
   events:
-    'click .attr-value' : 'beginEdit'
-    'click .save'       : 'save'
-    'submit'            : 'save'
-    'clickMarkdownHelp' : 'showMarkdownHelp'
+    'click .attr-value': 'beginEdit'
+    'click .save': 'save'
+    'submit': 'save'
 
-  initialize: ({ @_attribute, @_kind, @wait })->
+  initialize: ({ @_attribute, @_kind, @wait, @can })->
     @currentUser = mediator.shared.current_user
+
     @listenTo @model, 'remote:update', @render
     @listenTo @model, 'change', @render
+
     @render()
 
   beginEdit: ->
-    return unless @model.allows('can-edit',  @currentUser) and !@editing
+    return unless @model.allows('can-edit', @can or @currentUser) and !@editing
 
     analytics.track.click "#{@_attribute} edited",
       label: analytics.modelNameAndIdToLabel @model.get('base_class'), @model.id
@@ -59,9 +63,6 @@ module.exports = class EditableAttributeView extends Backbone.View
     value: _.unescape(@model.get @_attribute)
     value_html: _.unescape(html)
     canEdit: _s.contains @model.getPermissions(@currentUser), 'can-edit'
-
-  showMarkdownHelp: ->
-    console.log 'nothing for now'
 
   save: (e) ->
     e.preventDefault()

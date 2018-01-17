@@ -1,0 +1,22 @@
+h2.ManageCollaborators__title.Type.Type--size-lg
+  strong Edit collaborators
+
+.ManageCollaborators__body
+  .ManageCollaborators__search
+    label.Label Invite
+
+    .js-collaborator-search
+      include ../collaborator_search/index
+
+  .ManageCollaborators__list
+    label.Label
+      | #{collaborators.length} Collaborator#{collaborators.length === 1 ? '' : 's'}
+
+    .ManagedCollaborators.js-managed-collaborators
+      each collaborator in collaborators
+        .ManagedCollaborator
+          include ../managed_collaborator/index
+
+.ManageCollaborators__done
+  button.Button.Button--divider.js-modalize-close
+    | Done
