@@ -3,8 +3,8 @@
     | Collaborators
 
   .metadata__content
-    if collaborators.length
-      p.ManageCollaboratorsList.js-collaborators-list
+    .js-collaborators-list
+      .CollaboratorsList
         include ../../components/collaborators_list/index
 
     if can.manage_collaborators
