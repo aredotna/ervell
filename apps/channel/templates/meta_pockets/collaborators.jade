@@ -9,4 +9,4 @@
 
     if can.manage_collaborators
       a.ManageCollaboratorsButton.js-open-manage-collaborators
-        | Edit collaborators
+        | #{collaborators.length ? 'Edit' : 'Add'} collaborators
