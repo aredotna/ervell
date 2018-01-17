@@ -1,16 +1,11 @@
 Backbone = require "backbone"
 Backbone.$ = $
-sd = require("sharify").data
-Collaborators = require '../../../collections/collaborators.coffee'
-ChannelCollaborationView = require '../../channel/client/channel_collaboration_view.coffee'
 ChannelVisibilityView = require '../../../components/channel_visibility/client/channel_visibility_view.coffee'
 ChannelExportView = require '../../../components/channel_export/client/channel_export_view.coffee'
 BlockView = require '../../../components/block_collection/client/block_view.coffee'
-
 blockTemplate = -> require('../templates/block_manage.jade') arguments...
 
 module.exports = class ManageBlockView extends BlockView
-
   initialize: ->
     @model.on 'change:status', @updateTitle
 
