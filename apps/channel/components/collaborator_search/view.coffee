@@ -2,6 +2,7 @@
 Backbone = require 'backbone'
 isEmail = require '../../../../lib/is_email.coffee'
 InviteCollaboratorView = require '../invite_collaborator/view.coffee'
+searchableInput = require '../../../../components/searchable_input/index.coffee'
 template = -> require('./index.jade') arguments...
 
 module.exports = class CollaboratorSearchView extends Backbone.View
@@ -10,8 +11,9 @@ module.exports = class CollaboratorSearchView extends Backbone.View
   subViews: []
 
   events:
-    'input input': ->
-      @query arguments...
+    'change input': -> @query arguments...
+    'paste input': -> @query arguments...
+    'keyup input': -> @query arguments...
 
   initialize: ({ @search, @current_user }) ->
     @state = new Backbone.Model query: ''
@@ -39,7 +41,7 @@ module.exports = class CollaboratorSearchView extends Backbone.View
     @request?.abort()
     @request = @search.fetch data:
       q: query
-      per: 7
+      per: 6
 
   maybeInvite: ->
     invoke @subViews, 'remove'
@@ -58,8 +60,18 @@ module.exports = class CollaboratorSearchView extends Backbone.View
     @$el.html template
       query: @state.get('query')
 
+    @postRender()
+
     this
+
+  postRender: ->
+    @searchableInput?.unbind()
+    @searchableInput = searchableInput(@$('.js-searchable-input'))
+    @searchableInput.bind()
 
   remove: ->
     invoke @subViews, 'remove'
+
+    @searchableInput.unbind()
+
     super
