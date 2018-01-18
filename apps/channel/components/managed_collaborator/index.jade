@@ -11,7 +11,8 @@
 
   .CollaboratorItem__metadata
     .CollaboratorItem__name
-      = collaborator.get('username')
+      a( href="/#{collaborator.get('slug')}" )
+        = collaborator.get('username')
 
     if action === 'confirm' && current_user.id === collaborator.id
       .CollaboratorItem__status.Color--state-alert
