@@ -15,11 +15,13 @@
         = collaborator.get('username')
 
     if action === 'confirm' && current_user.id === collaborator.id
-      .CollaboratorItem__status.Color--state-alert
-        | You will lose access to this channel. Are you sure?
+      .CollaboratorItem__status
+        span.Color--state-alert
+          | You will lose access to this channel. Are you sure?
     else if action === 'confirm'
-      .CollaboratorItem__status.Color--state-alert
-        | Are you sure?
+      .CollaboratorItem__status
+        span.Color--state-alert
+          | Are you sure?
 
 .CollaboratorItem__actions
   if action === 'inactive'
