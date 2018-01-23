@@ -1,8 +1,6 @@
 language: node_js
 node_js:
-- '7'
-before_install:
-- wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+- '8'
 script:
 - make test
 before_deploy:
