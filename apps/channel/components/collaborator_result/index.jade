@@ -11,7 +11,8 @@
 
   .CollaboratorItem__metadata
     .CollaboratorItem__name
-      = collaborator.get('username')
+      a( href="/#{collaborator.get('slug')}" )
+        = collaborator.get('username')
 
     .CollaboratorItem__status
       = collaborator.get('hidden_email')

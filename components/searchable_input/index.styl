@@ -1,0 +1,28 @@
+searchableInputIconWidth = 2.5em
+
+.SearchableInput
+  position relative
+  pointer-events none
+  overflow hidden
+
+  &:after
+    display block
+    position absolute
+    top 50%
+    left 0
+    transform translateY(-50%)
+    padding 1em 0
+    font-family 'Iconic'
+    content '\e1cf' // magnifying-glass
+    color colors-gray-light
+    cursor pointer
+    pointer-events all
+    width searchableInputIconWidth
+    text-align center
+
+  > .Input
+    padding-left searchableInputIconWidth
+
+  &[data-state='input']
+    &:after
+      content '\e233' // x
