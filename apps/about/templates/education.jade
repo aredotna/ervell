@@ -17,6 +17,8 @@ block scripts
 block container
   include ../../../components/logged_out_nav/templates/header
 
+  - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
+
   .Page.Page--narrow
     section.AboutSection.AboutSection--small.js-section
       img.EduImg(src="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
@@ -24,38 +26,34 @@ block container
         | Students and educators get 50% off Are.na Premium
 
       p.Type.Type--lh-tall
-        | We love that Are.na is home to a growing community of self-directed learners, but we also want to make sure Are.na is accessible as a tool for students and teachers in a range of academic environments. 
-
-      - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
-      p.Type.Type--lh-tall
-        | #[strong If you’re a student or educator, you can now take 50% off the price of any Are.na Premium membership (monthly or yearly)]. Just enter the coupon #[strong studenthalf] when you #[a(href=upgradeLink) upgrade your account].
+        | An Are.na premium membership allows you to save an unlimited amount of private content and gets you access to new features and support.
 
       p.Type.Type--lh-tall
-        | You’ll be able to upload as many files as you want and save unlimited content in private channels for your own use. No need to sign up with an .edu email or send us a transcript — we’re making this offer on the honor system to allow the widest range of learners to sign up.
-      
+        | Premium normally costs $5 / month or $45 / year, but #[strong students and educators can now take 50% off the price of either membership]. Just enter the coupon #[strong.Coupon studenthalf] when you #[a(href=upgradeLink) upgrade your account].
+
       if user
         p.Type.Type--lh-tall
           | If you’re already enjoying Are.na, please feel free to <a href="/tools/send-invitation">invite students or academic collaborators</a> and share this offer with them.
 
     section.AboutSection.AboutSection--small.js-section( id='top' )      
       h4.Type.Type--size-h4.Utility--align-center
-        | Are.na for Education
+        | About Are.na for Education
 
       p.Type.Type--lh-tall
-        | Are.na is an open-ended space for creative and collaborative thinking. It’s also a tool that lets you save and organize different types of content so you can more easily follow your thinking, notice patterns, and make new insights.
+        | If you’re a student, you can use Are.na to collect all kinds of research in one place — and structure it all visually. Because you can link your research to anyone else’s, Are.na gives puts a growing archive of shared knowledge at your fingertips.
       
       p.Type.Type--lh-tall
-        | If you’re a student, you can use Are.na to collect research in all kinds of formats in one place — and structure it all visually. Because anyone on Are.na can link their public research to anyone else’s, you also have a growing archive of shared knowledge at your fingertips.
+        | If you’re an educator, Are.na is a perfect place to host resources for classes and workshops. Check out our #[a(href="http://s3.amazonaws.com/arena-attachments/1635133/ad5e2459400e0dd0d6f3c07e2c9e686f.pdf?1516720354" target="_blank") step-by-step guide] to setting up a class on Are.na.
 
       p.Type.Type--lh-tall
-        | To learn more about Are.na, visit our <a href="/about">about page</a>. Or <a href="https://www.are.na/christina-badal/teaching-on-are-na" target="_blank">see examples</a> of how students and teachers are using Are.na.
+        | Keep scrolling to see examples of how students and teachers are using Are.na, or visit our <a href="/about">about page</a> to learn more.
 
     section.AboutSection.AboutSection--small.js-section
       h4.Type.Type--size-h4.Utility--align-center
         | Examples
 
       p.Type.Type--lh-tall
-        | See how Are.na members are using the platform for teaching and learning in a variety of settings.
+        | Click through the examples below to explore how Are.na members are using the platform for teaching and learning in a variety of settings.
 
       include ../components/education_examples/index
 
@@ -68,7 +66,7 @@ block container
         | Contact Us for Support
 
       p.Type.Type--lh-tall
-        | Are you a student, educator, or administrator working with a larger group or an institution? We’re happy to talk through your situation and help you set up with Are.na. Contact us at #[a(href="mailto:help@are.na") help@are.na] to start a conversation.
+        | Are you a student, educator, or administrator working with a larger group or an institution? We’re happy to talk through your situation and help you start using Are.na. Send an email to #[a(href="mailto:help@are.na") help@are.na] to get in touch.
 
       p.Type.Type--lh-tall
         | We’re also working on a whole suite of team features so you can share accounts and manage your content in groups. <a href="https://confirmsubscription.com/h/d/728B9103B7704F3A">Sign up for our monthly newsletter</a> to get occasional updates.
