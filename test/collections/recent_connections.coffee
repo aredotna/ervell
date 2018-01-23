@@ -5,7 +5,7 @@ Backbone = require 'backbone'
 clock = null
 RecentConnections = null
 
-describe 'RecentConnections', ->
+xdescribe 'RecentConnections', ->
   before (done) ->
     clock = sinon.useFakeTimers()
 
