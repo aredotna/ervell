@@ -29,7 +29,7 @@ block metadata
       include meta_pockets/privacy
       include meta_pockets/export
 
-    if can.manage
+    if can.destroy
       include meta_pockets/delete
 
     if user && user.id != author.id
