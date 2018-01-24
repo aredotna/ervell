@@ -3,8 +3,9 @@ extends ../../../components/path/templates/path
 block path
   li.path__sub
     span Explore
-    .path__below
-      a(href="/feed") Feed
+    if user
+      .path__below
+        a(href="/feed") Feed
 
 block metadata
   .metadata
