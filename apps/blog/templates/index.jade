@@ -3,6 +3,14 @@ extends ../../../components/layout/layouts/blank
 block title
   |  / Blog
 
+block meta
+  link(
+    rel='alternate'
+    type='application/rss+xml'
+    title="Are.na / Blog"
+    href="#{sd.APP_URL}/blog/feed/rss"
+  )
+
 block scripts
   script( src= asset('/assets/blog.js') )
 

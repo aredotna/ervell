@@ -25,9 +25,11 @@ block metadata
 
     include meta_pockets/connections
 
-    if user
+    if can.update
       include meta_pockets/privacy
       include meta_pockets/export
+
+    if can.destroy
       include meta_pockets/delete
 
     if user && user.id != author.id

@@ -16,6 +16,7 @@ auth = (p_req, res, next) ->
     req.set 'x-share-token': p_req.params.share_token
 
   res.locals._ = _
+  res.locals.sd.SHARE = true
 
   next()
 
