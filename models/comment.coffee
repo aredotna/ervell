@@ -30,7 +30,7 @@ module.exports = class Comment extends Base
     for entity in entities
       if entity.type == 'user'
         output = output + text.slice(lastPosition, entity.start) +
-          "[@#{entity.user_name}](#{entity.user_slug})"
+          "[@#{entity.user_name}](/#{entity.user_slug})"
         lastPosition = entity.end
 
     output += text.slice(lastPosition)
