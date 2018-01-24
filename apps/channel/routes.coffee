@@ -16,6 +16,7 @@ graphQL = require '../../lib/graphql'
           follow
           manage_collaborators
           destroy
+          manage
         }
       }
     }
