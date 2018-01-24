@@ -2,14 +2,12 @@ $ = require 'cheerio'
 request = require 'superagent'
 { take } = require 'underscore'
 { BLOG_URL } = require('sharify').data
-{ Collection } = require 'backbone'
+
+Posts = require '../../collections/posts.coffee'
 
 truncate = (text, length = 50) ->
   tokens = text.split ' '
   take(tokens, length).join ' '
-
-class Posts extends Collection
-  url: "#{BLOG_URL}/all.json"
 
 @index = (req, res, next) ->
   posts = new Posts
@@ -23,6 +21,7 @@ class Posts extends Collection
 
 @show = (req, res, next) ->
   url = req.path.replace '/blog', ''
+  return next() if url is "/feed/rss"
 
   request("#{BLOG_URL}#{url}")
     .end (err, response) ->
