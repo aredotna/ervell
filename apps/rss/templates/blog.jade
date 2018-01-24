@@ -1,0 +1,20 @@
+doctype xml
+rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
+  channel
+    title Are.na / Blog
+    link #{sd.APP_URL}/explore
+    atom:link(href="#{sd.APP_URL}/blog/feed/rss", rel='self', type='application/rss+xml')
+    language en-US
+    description Posts from the Are.na blog
+    if posts.length
+      lastBuildDate= new Date(posts[0].get('date')).toUTCString()
+    each post in posts
+      item
+        title= post.get('title')
+        link #{sd.APP_URL}/blog#{post.get('url')}
+        pubDate= new Date(post.get('date')).toUTCString()
+        guid(isPermaLink='false') #{sd.APP_URL}/blog#{post.get('url')}
+        description
+          | <![CDATA[
+          = post.get('excerpt')
+          | ]]>
