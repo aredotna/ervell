@@ -69,9 +69,10 @@ module.exports = class MarkletView extends Backbone.View
 
   onDrop: (data) ->
     $html = $(data.value['text/html'])
+    text = data.value['text/plain']
     src = $html.find('img').attr('src')
     src = $html.first().next().attr('src') unless src
-    href = $html.first().next().attr('href') unless src
+    href = if !src and isURL(text) then text
 
     # Dropped a link
     if href?
