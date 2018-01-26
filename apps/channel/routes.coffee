@@ -86,22 +86,25 @@ graphQL = require '../../lib/graphql'
   Promise
     .all [
       channel.fetch()
-      channel.related().followers.fetch cache: true
-      graphQL token: token, query: canQuery, variables: options
+      channel.related().collaborators.fetch(data: auth_token: token)
+      channel.related().followers.fetch(cache: true)
+      graphQL(token: token, query: canQuery, variables: options)
     ]
 
-    .then ([_channel, _followers, { channel: { can }}]) ->
+    .then ([_channel, _collaborators, _followers, { channel: { can }}]) ->
       if channel.get('class') is 'User'
         return res.redirect 301, "/#{channel.get 'slug'}"
 
       res.locals.sd.CHANNEL = channel.toJSON()
       res.locals.sd.BLOCKS = channel.related().followers.toJSON()
+      res.locals.sd.COLLABORATORS = channel.related().collaborators.toJSON()
       res.locals.sd.FOLLOWERS = channel.related().followers.toJSON()
       res.locals.sd.CAN = can
 
       res.render 'index',
         channel: channel
         blocks: channel.related().followers.models # TODO: Odd naming
+        collaborators: channel.related().collaborators.models
         author: channel.related().author
         followers: true
         can: can
