@@ -23,7 +23,7 @@ module.exports = class Router extends Backbone.Router
     @modal?.close => @removeRoute()
 
   showBlock: (id, tab)->
-    return if (sd.CURRENT_PATH.indexOf('block') > 0) && (sd.CURRENT_PATH.indexOf('blocks') < 0)
+    return if sd.CURRENT_ACTION is 'block'
     block = new Block {id: id}
     view = new FullBlockView model: block, tab: tab
 

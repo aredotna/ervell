@@ -12,7 +12,6 @@ module.exports = ->
     'explore'
     'channel'
     'profile'
-    'block'
   ]
 
   call = switch CURRENT_ACTION
