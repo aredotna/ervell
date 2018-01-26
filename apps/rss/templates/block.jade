@@ -6,13 +6,13 @@ case block.get('class')
   when "Media"
     != block.get('embed').html
   when "Image"
-    a(href="#{sd.APP_URL}/#{block.getSourceUrl()}" target="_blank")
-      img(src="#{sd.APP_URL}/#{block.resizeImage(1000,1000, 'large')}")
+    a(href="#{block.getSourceUrl()}" target="_blank")
+      img(src="#{block.resizeImage(1000,1000, 'large')}")
   when "Link"
     != block.get('description_html')
-    a(href="#{sd.APP_URL}/#{block.getSourceUrl()}" target="_blank")
-      img(src="#{sd.APP_URL}/#{block.resizeImage(1000,1000, 'large')}")
+    a(href="#{block.getSourceUrl()}" target="_blank")
+      img(src="#{block.resizeImage(1000,1000, 'large')}")
   when "Attachment"
-    a.block-attachment(href="#{sd.APP_URL}/#{block.getSourceUrl()}" target="_blank")= block.get('title')
+    a.block-attachment(href="#{block.getSourceUrl()}" target="_blank")= block.get('title')
   when "Text"
     != block.get('content_html')
