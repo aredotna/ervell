@@ -1,7 +1,11 @@
 extends ../../../components/path/templates/path
 
 block path
-  li.path__sub
-    span Feed
-    .path__below
-      a(href="/explore") Explore
+  if path == 'Feed'
+    li.path__sub
+      span Feed
+      .path__below
+        a(href="/explore") Explore
+  else if path == 'Notifications'
+    li.path__sub
+      span Notifications

@@ -6,7 +6,7 @@ block styles
 block body
   include ./explore_path
 
-  .channel-container( class=blocks.length ? '' : 'is-empty' )
+  .channel-container.channel-container--infinite( class=blocks.length ? '' : 'is-empty' )
     if user && user.isPremium() && !following && !followers
     .explore-contents
       - title = "everyone's public blocks and channels"
