@@ -40,6 +40,7 @@ module.exports = class NewCommentView extends Backbone.View
 
   maybeResizeTextarea: ->
     minRows = @dom.input.data('min-rows')
+    @dom.input.attr 'rows', minRows
     rows = Math.ceil((@dom.input[0].scrollHeight - @domValues.baseScrollHeight) / 16)
     @dom.input.attr 'rows', minRows + rows
 
