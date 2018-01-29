@@ -27,6 +27,8 @@ module.exports = class NewCommentView extends Backbone.View
       @dom.submit.attr 'disabled', true
 
   onKeyDown: (e) ->
+    @maybeResizeTextarea()
+
     if e.keyCode is 13 and e.shiftKey
       # <shift> + <enter>: pass through line break
       return
@@ -35,6 +37,11 @@ module.exports = class NewCommentView extends Backbone.View
       # <enter>: trigger save
       e.preventDefault()
       @addComment()
+
+  maybeResizeTextarea: ->
+    minRows = @dom.input.data('min-rows')
+    rows = Math.ceil((@dom.input[0].scrollHeight - @domVvalues.baseScrollHeight) / 16)
+    @dom.input.attr 'rows', minRows + rows
 
   addComment: ->
     if @dom.input.val()?.trim() isnt ''
@@ -68,6 +75,9 @@ module.exports = class NewCommentView extends Backbone.View
     @dom =
       input: @$('.js-input')
       submit: @$('.js-submit')
+
+    @domValues =
+      baseScrollHeight: @dom.input[0].scrollHeight
 
     mentionQuicksearchView = new MentionQuicksearchView
       container: @$('.js-comment-container'),
