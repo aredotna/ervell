@@ -30,4 +30,5 @@ const startWorker = (id) => {
   });
 };
 
+// TODO: Start up only one worker in development
 throng(startWorker);
