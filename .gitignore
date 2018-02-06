@@ -8,3 +8,4 @@ public/assets/*
 *.sublime-workspace
 node_modules
 dump.rdb
+manifest.json
