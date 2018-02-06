@@ -204,13 +204,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
       coupon: @$('.js-coupon-code')
 
     # Set up CouponCodeView
-    @subViews = [
-      @couponCodeView = new CouponCodeView
-        el: @els.coupon
-        model: @model.related().coupon
-    ]
+    if @els.coupon.length
+      @subViews = [
+        @couponCodeView = new CouponCodeView
+          el: @els.coupon
+          model: @model.related().coupon
+      ]
 
-    @couponCodeView.render()
+      @couponCodeView.render()
 
     # Set up Stripe Element
     return unless @els.card.length
