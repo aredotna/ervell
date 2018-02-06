@@ -8,8 +8,8 @@
     "test": "make test"
   },
   "engines": {
-    "node": "8.4.x",
-    "npm": "5.x.x"
+    "node": "8.x.x",
+    "yarn": "1.x.x"
   },
   "dependencies": {
     "@artsy/express-reloadable": "1.0.9",
