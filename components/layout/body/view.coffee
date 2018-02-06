@@ -4,10 +4,8 @@ Backbone = require 'backbone'
 Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 { trackOutboundLink } = require '../../../lib/analytics.coffee'
-Router = require '../router.coffee'
 
 module.exports = class BodyView extends Backbone.View
-
   events:
     'click'                                       : 'bodyClick'
     'click a[data-disabled]'                      : 'disable'
@@ -24,9 +22,6 @@ module.exports = class BodyView extends Backbone.View
     'tap a'                                       : 'maybeIntercept'
 
   initialize: (options) ->
-    new Router
-    Backbone.history.start pushState: true
-
     mediator.on 'load:start', @startLoading, @
     mediator.on 'load:stop', @stopLoading, @
     mediator.on 'slide:to:block', @scrollToBlock
