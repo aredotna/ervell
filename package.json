@@ -84,6 +84,7 @@
     "striptags": "^2.2.1",
     "stylus": "^0.54.5",
     "superagent": "^3.6.0",
+    "throng": "^4.0.0",
     "underscore": "*",
     "underscore.deep": "^0.5.1",
     "underscore.string": "*",
