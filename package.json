@@ -5,7 +5,8 @@
   "scripts": {
     "assets": "sh scripts/assets.sh",
     "deploy": "sh scripts/deploy.sh",
-    "test": "make test"
+    "mocha": "sh scripts/mocha.sh",
+    "test": "sh scripts/test.sh"
   },
   "engines": {
     "node": "8.x.x",
