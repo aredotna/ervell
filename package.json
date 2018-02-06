@@ -63,6 +63,7 @@
     "marked": "^0.3.8",
     "moment": "*",
     "morgan": "^1.7.0",
+    "mousetrap": "^1.6.1",
     "multer": "^1.3.0",
     "nib": "*",
     "numeraljs": "^1.5.6",

@@ -22,6 +22,7 @@ initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 GlobalBlockRouter = require './global_block_router.coffee'
 Blacklist = require('../../lib/blacklist.js').default
+initGlobalKeyboardShortcuts = require('./global_keyboard_shortcuts.js').default
 
 module.exports = ->
   setDeviceClasses()
@@ -29,13 +30,13 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  initShortCuts()
   initNightMode()
   showInviteMessage()
   showLimitMessage()
   initConfirmableMessage()
   initLoggedOutCTA()
   initGlobalBlockRouting()
+  initGlobalKeyboardShortcuts()
 
 initGlobalBlockRouting = ->
   # TODO: Extract and init block router only
@@ -155,36 +156,6 @@ setupAnalytics = ->
       'Visited logged in'
     else
       'Visited logged out'
-
-# TODO: Extract
-initShortCuts = ->
-  KEYMAP =
-    esc: 27
-    left: 37
-    right: 39
-    l: 76
-    g: 71
-
-  $(document).keydown (key) ->
-    switch parseInt(key.which, 10)
-      when KEYMAP.right
-        mediator.trigger 'lightbox:slide:next'
-
-      when KEYMAP.left
-        mediator.trigger 'lightbox:slide:prev'
-
-      when KEYMAP.esc
-        mediator.trigger 'lightbox:close'
-
-      when KEYMAP.l
-        if mediator.shared.current_user.isPremium()
-          mediator.shared.state.set view_mode: 'list'
-          window.location.reload()
-
-      when KEYMAP.g
-        if mediator.shared.current_user.isPremium()
-          mediator.shared.state.set view_mode: 'grid'
-          window.location.reload()
 
 # TODO: Extract
 showInviteMessage = ->
