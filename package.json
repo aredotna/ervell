@@ -5,6 +5,7 @@
   "scripts": {
     "assets": "sh scripts/assets.sh",
     "deploy": "sh scripts/deploy.sh",
+    "predeploy": "sh scripts/predeploy.sh",
     "mocha": "sh scripts/mocha.sh",
     "test": "sh scripts/test.sh"
   },
