@@ -85,6 +85,8 @@ module.exports = (app) ->
   switch NODE_ENV
     when 'development'
       app
+        .use(require('./webpack-dev-server'))
+
         .use (stylus = require 'stylus').middleware
           src: path.resolve(__dirname, '../')
           dest: path.resolve(__dirname, '../public')
@@ -93,11 +95,6 @@ module.exports = (app) ->
               .set('filename', path)
               .use(require('rupture')())
               .use(require('nib')())
-
-        .use require('browserify-dev-middleware')
-          src: path.resolve(__dirname, '../')
-          transforms: [require('jadeify'), require('caching-coffeeify')]
-          debug: true
 
     when 'test' # lol
       app.use '/__api', require('../test/helpers/integration.coffee').api
@@ -133,7 +130,6 @@ module.exports = (app) ->
       app.use reloadAndMount path.join(__dirname, '..', 'apps')
     else
       app.use require '../apps'
-
 
   # Convert the GraphQL error messages into some kind of matching status code
   app.use require('./middleware/error_status')

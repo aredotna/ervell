@@ -1,1 +1,1 @@
-web: node_modules/.bin/forever node_modules/.bin/coffee index.coffee
+web: node_modules/.bin/forever start index.js
