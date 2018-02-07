@@ -7,6 +7,8 @@ const throng = require('throng');
 const express = require('express');
 
 const { PORT } = require('./config.coffee');
+const WORKERS = process.env.WEB_CONCURRENCY || 1;
+
 const setup = require('./lib/setup.coffee');
 const cache = require('./lib/cache.coffee');
 
@@ -30,5 +32,7 @@ const startWorker = (id) => {
   });
 };
 
-// TODO: Start up only one worker in development
-throng(startWorker);
+throng({
+  workers: WORKERS,
+  lifetime: Infinity,
+}, startWorker);

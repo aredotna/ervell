@@ -98,9 +98,6 @@
   },
   "devDependencies": {
     "benv": "*",
-    "browserify": "11.2.0",
-    "browserify-dev-middleware": "*",
-    "caching-coffeeify": "*",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
@@ -108,7 +105,6 @@
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html5": "*",
-    "jadeify": "*",
     "mocha": "*",
     "progress-bar-webpack-plugin": "^1.10.0",
     "rewire": "https://registry.npmjs.org/rewire/-/rewire-2.5.2.tgz",
