@@ -4,7 +4,6 @@ sd = require('sharify').data
 Cookies = require 'cookies-js'
 _ = require 'underscore'
 attachFastClick = require 'fastclick'
-km = require('../../lib/vendor/keymaster.js').noConflict()
 BodyView = require './body/view.coffee'
 MessageView = require '../message/view.coffee'
 HeaderInfoView = require './header/client.coffee'
@@ -21,6 +20,9 @@ initNightMode = require '../night_mode/index.coffee'
 initConfirmableMessage = require '../confirmable_message/index.coffee'
 initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
+GlobalBlockRouter = require './global_block_router.coffee'
+Blacklist = require('../../lib/blacklist.js').default
+initGlobalKeyboardShortcuts = require('./global_keyboard_shortcuts.js').default
 
 module.exports = ->
   setDeviceClasses()
@@ -28,12 +30,34 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  initShortCuts()
   initNightMode()
   showInviteMessage()
   showLimitMessage()
   initConfirmableMessage()
   initLoggedOutCTA()
+  initGlobalBlockRouting()
+  initGlobalKeyboardShortcuts()
+
+initGlobalBlockRouting = ->
+  # TODO: Extract and init block router only
+  # where we actually need it.
+  # Since migrating to Webpack, histories can conflict.
+  # Simply starting one history isn't working as it should,
+  # due to split packages (I believe).
+  blacklist = Blacklist [
+    '/sign_up'
+    '/log_in'
+    '/forgot'
+    '/reset'
+    '/confirm'
+    '/register'
+    '/welcome'
+  ]
+
+  return if blacklist.isCurrentRouteBlacklisted()
+
+  new GlobalBlockRouter
+  Backbone.history.start pushState: true
 
 # TODO: Extract
 # TODO: Fix inconsistent class names
@@ -80,11 +104,9 @@ setupPusherAndCurrentUser = ->
 # TODO: Extract
 setupViews = ->
   # TODO: Fix all of these selectors
-  new BodyView
-    el: $('body')
+  new BodyView el: $('body')
 
-  new SearchBarView
-    el: $('.layout-header__search')
+  new SearchBarView el: $('.layout-header__search')
 
   new HeaderInfoView
 
@@ -134,27 +156,6 @@ setupAnalytics = ->
       'Visited logged in'
     else
       'Visited logged out'
-
-# TODO: Extract
-initShortCuts = ->
-  km 'right', ->
-    mediator.trigger 'lightbox:slide:next'
-
-  km 'left', ->
-    mediator.trigger 'lightbox:slide:prev'
-
-  km 'esc', ->
-    mediator.trigger 'lightbox:close'
-
-  km 'l', ->
-    if mediator.shared.current_user.isPremium()
-      mediator.shared.state.set view_mode: 'list'
-      window.location.reload()
-
-  km 'g', ->
-    if mediator.shared.current_user.isPremium()
-      mediator.shared.state.set view_mode: 'grid'
-      window.location.reload()
 
 # TODO: Extract
 showInviteMessage = ->

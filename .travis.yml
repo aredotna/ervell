@@ -4,8 +4,8 @@ node_js:
 script:
 - make test
 before_deploy:
-- if [ $TRAVIS_BRANCH = 'master' ]; then make deploy-assets-staging; fi
-- if [ $TRAVIS_BRANCH = 'deploy' ]; then make deploy-assets; fi
+- if [ $TRAVIS_BRANCH = 'master' ]; then APP_NAME=ervell-staging S3_BUCKET=ervell-staging yarn predeploy; fi
+- if [ $TRAVIS_BRANCH = 'deploy' ]; then APP_NAME=ervell S3_BUCKET=ervell-production yarn predeploy; fi
 deploy:
   provider: heroku
   skip_cleanup: true
