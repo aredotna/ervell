@@ -27,8 +27,7 @@ module.exports = class Router extends Backbone.Router
     block = new Block {id: id}
     view = new FullBlockView model: block, tab: tab
 
-    @modal = modalize view,
-      className: 'modalize things-modal'
+    @modal = modalize view
 
     @modal.load (done) ->
       mediator.shared.state.set lightbox: true
@@ -38,7 +37,7 @@ module.exports = class Router extends Backbone.Router
       mediator.shared.state.set lightbox: false
       @removeRoute()
 
-  updateRoute: (id)->
+  updateRoute: (id) ->
     @navigate "/block/#{id}", trigger: false, replace: true
 
   removeRoute: ->
