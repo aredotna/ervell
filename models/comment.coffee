@@ -2,7 +2,6 @@ Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
-config = require '../config.coffee'
 markdown = require '../lib/markdown.coffee'
 striptags = require 'striptags'
 
