@@ -21,6 +21,7 @@ app
   .use require '../apps/settings'
   .use require '../apps/onboarding'
   .use require '../apps/ui'
+  .use require '../apps/graphql'
 
   # Dynamic routing (in order)
   .use require '../apps/user'
