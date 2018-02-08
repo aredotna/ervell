@@ -96,9 +96,6 @@ module.exports = (app) ->
               .use(require('rupture')())
               .use(require('nib')())
 
-    when 'test' # lol
-      app.use '/__api', require('../test/helpers/integration.coffee').api
-
   app
     .use bucketAssets()
     .use express.static(path.resolve __dirname, '../public')
