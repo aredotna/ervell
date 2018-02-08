@@ -24,9 +24,6 @@ const Description = styled.div`
 
 const query = gql`
   {
-    me {
-      id
-    }
     channel(id: "arena-influences") {
       title
       description(format: HTML)
@@ -34,7 +31,7 @@ const query = gql`
   }
 `;
 
-class Hello extends React.Component {
+export class Hello extends React.Component {
   state = {
     message: 'Click me.',
   }
@@ -95,7 +92,7 @@ class Hello extends React.Component {
   }
 };
 
-const HelloWithData = graphql(query)(Hello)
+export const HelloWithData = graphql(query)(Hello);
 
 export default (selector = '#react-mount-hello') => {
   mount(HelloWithData, document.querySelector(selector));
