@@ -18,6 +18,8 @@
   IOS_APP_ID
   ITUNES_LINK
   HOMEPAGE_EXPLORE_USER_IDS
+  GRAPHQL_ENDPOINT
+  X_APP_TOKEN
 } = require '../config'
 
 express = require 'express'
@@ -59,6 +61,8 @@ sharify.data = {
   IOS_APP_ID
   ITUNES_LINK
   HOMEPAGE_EXPLORE_USER_IDS
+  GRAPHQL_ENDPOINT
+  X_APP_TOKEN
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
@@ -95,9 +99,6 @@ module.exports = (app) ->
               .set('filename', path)
               .use(require('rupture')())
               .use(require('nib')())
-
-    when 'test' # lol
-      app.use '/__api', require('../test/helpers/integration.coffee').api
 
   app
     .use bucketAssets()

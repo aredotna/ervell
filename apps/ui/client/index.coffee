@@ -1,4 +1,5 @@
 AddBlockView = require '../../../components/add_block/client/view.coffee'
+mountHello = require('../../../components/react/example/index.js').default
 Collection = require '../../../collections/base.coffee'
 
 module.exports = ->
@@ -11,3 +12,5 @@ module.exports = ->
       collection: blocks
 
     view.render()
+
+  mountHello()
