@@ -3,7 +3,6 @@ Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
 _ = require 'underscore'
-attachFastClick = require 'fastclick'
 BodyView = require './body/view.coffee'
 MessageView = require '../message/view.coffee'
 HeaderInfoView = require './header/client.coffee'
@@ -66,7 +65,6 @@ setDeviceClasses = ->
 
   if isMobile()
     $body.addClass 'is-mobile Body--mobile'
-    attachFastClick document.body
 
   if isTouch()
     $body.addClass 'Body--touch'
