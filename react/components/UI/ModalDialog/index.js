@@ -18,7 +18,6 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 2em 1em 0 1em;
   background-color: white;
   border: 1px solid ${Colors.gray.regular};
 `;
