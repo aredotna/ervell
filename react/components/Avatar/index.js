@@ -21,6 +21,7 @@ const Container = styled.a`
 const Initials = styled.div`
   font-size: ${x => x.size / 3}px;
   color: ${Styles.Colors.gray.medium};
+  text-transform: uppercase;
 `;
 
 const Image = styled.img`
@@ -29,6 +30,8 @@ const Image = styled.img`
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export default class Avatar extends Component {
@@ -41,7 +44,16 @@ export default class Avatar extends Component {
     size: PropTypes.number,
   }
 
+  state = {
+    hideImage: false,
+  }
+
+  hideImage = () => {
+    this.setState({ hideImage: true });
+  }
+
   render() {
+    const { hideImage } = this.state;
     const { user, size } = this.props;
 
     return (
@@ -50,7 +62,13 @@ export default class Avatar extends Component {
           {user.initials}
         </Initials>
 
-        <Image src={user.avatar} alt={user.initials} />
+        {!hideImage &&
+          <Image
+            src={user.avatar}
+            alt={user.initials}
+            onError={this.hideImage}
+          />
+        }
       </Container>
     );
   }
