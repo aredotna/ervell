@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
-import mount from 'lib/apollo';
-import formatErrors from 'components/react/util/formatErrors';
+import mount from 'react/apollo';
+import formatErrors from 'react/util/formatErrors';
 
 const Container = styled.div`
   border: 1px solid yellow;
@@ -31,16 +32,23 @@ const query = gql`
   }
 `;
 
-export class Hello extends React.Component {
-  state = {
-    message: 'Click me.',
-  }
-
+export class Hello extends Component {
   static defaultProps = {
     data: {
       loading: true,
       channel: {},
-    }
+    },
+  }
+
+  static propTypes = {
+    data: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+      channel: PropTypes.object,
+    }),
+  }
+
+  state = {
+    message: 'Click me.',
   }
 
   hello = () => {
@@ -59,7 +67,7 @@ export class Hello extends React.Component {
             Loading...
           </Message>
         </Container>
-      )
+      );
     }
 
     if (error) {
@@ -69,7 +77,7 @@ export class Hello extends React.Component {
             {formatErrors(error)}
           </Message>
         </Container>
-      )
+      );
     }
 
     const { message } = this.state;
@@ -85,15 +93,14 @@ export class Hello extends React.Component {
           {title}
         </Title>
 
-        <Description dangerouslySetInnerHTML={{__html: description}}>
-        </Description>
+        <Description dangerouslySetInnerHTML={{ __html: description }} />
       </Container>
     );
   }
-};
+}
 
 export const HelloWithData = graphql(query)(Hello);
 
 export default (selector = '#react-mount-hello') => {
-  mount(HelloWithData, document.querySelector(selector));
+  mount(HelloWithData, {}, document.querySelector(selector));
 };
