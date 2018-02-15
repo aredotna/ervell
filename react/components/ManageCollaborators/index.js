@@ -30,11 +30,12 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  padding: 2em 1em 0 1em;
 `;
 
 const Body = styled.div`
   flex: 1;
+  overflow-y: auto;
 `;
 
 const Section = styled.div`

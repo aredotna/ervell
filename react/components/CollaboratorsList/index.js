@@ -1,69 +1,54 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import { propType } from 'graphql-anywhere'
 import styled from 'styled-components';
 
-import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
+import collaboratorsListQuery from 'react/components/CollaboratorsList/queries/collaboratorsList';
 
-import LinksList from 'react/components/LinksList';
-
-export default class CollaboratorsList extends Component {
-  static defaultProps = {
-    collaborators: [],
-  }
-
-  static fragments = {
-    collaboratorLink: collaboratorLinkFragment,
-  }
-
-  static propTypes = {
-    collaborators: PropTypes.arrayOf(propType(collaboratorLinkFragment)),
-  }
-
-  render() {
-    const { collaborators, ...rest } = this.props;
-    const links = collaborators.map(collaborator => ({
-      id: collaborator.id,
-      href: collaborator.href,
-      label: collaborator.name,
-    }));
-
-    return (
-      <LinksList links={links} {...rest} />
-    );
-  }
-}
-
-const query = gql`
-  query ChannelCollaboratorsQuery($id: ID!) {
-    channel(id: $id) {
-      id
-      collaborators {
-        ...CollaboratorLink
-      }
-    }
-  }
-  ${collaboratorLinkFragment}
-`
+import Modal from 'react/components/UI/Modal';
+import ManageCollaborators from 'react/components/ManageCollaborators';
+import CollaboratorsList from 'react/components/CollaboratorsList/CollaboratorsList';
 
 const StyledCollaboratorsList = styled(CollaboratorsList)`
   margin-bottom: 1em;
 `;
 
 class CollaboratorsListContainer extends Component {
+  static propTypes = {
+    channel_id: PropTypes.number.isRequired,
+    // HACK: Until we wire up SSR; this requires an HTML fragment
+    // to render while loading.
+    htmlFragment: PropTypes.string.isRequired,
+    data: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+    }).isRequired,
+  }
+
+  openManageCollaborators = () => {
+    const { channel_id } = this.props;
+    const modal = new Modal(ManageCollaborators, { channel_id });
+    modal.open();
+  }
+
   render() {
-    const { data: { loading } } = this.props
+    const { htmlFragment, data: { loading } } = this.props;
 
-    if (loading) return <div />;
+    if (loading) return <div dangerouslySetInnerHTML={{ __html: htmlFragment }} />;
 
-    const { data: { channel: { collaborators } } } = this.props;
+    const { data: { channel: { can, collaborators } } } = this.props;
 
     return (
-      <StyledCollaboratorsList collaborators={collaborators} />
-    )
+      <div>
+        <StyledCollaboratorsList collaborators={collaborators} />
+
+        {can.manage_collaborators &&
+          <a onClick={this.openManageCollaborators} role="button" tabIndex={0}>
+            {collaborators.length ? 'Edit' : 'Add'} collaborators
+          </a>
+        }
+      </div>
+    );
   }
 }
 
-export const CollaboratorsListContainerWithData = graphql(query)(CollaboratorsListContainer);
+export default graphql(collaboratorsListQuery)(CollaboratorsListContainer);

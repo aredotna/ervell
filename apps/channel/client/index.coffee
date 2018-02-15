@@ -9,8 +9,9 @@ Channel = require '../../../models/channel.coffee'
 Collaborators = require '../../../collections/collaborators.coffee'
 addBlock = require '../../../components/add_block/client/index.coffee'
 initShare = require '../components/share/index.coffee'
-initManageCollaborators = require '../components/manage_collaborators/index.coffee'
-initCollaboratorsList = require '../components/collaborators_list/index.coffee'
+
+{ default: mount } = require '../../../react/apollo/index.js'
+{ default: CollaboratorsList } = require '../../../react/components/CollaboratorsList/index.js'
 
 module.exports = ->
   { shared: { current_user } } = mediator
@@ -28,12 +29,14 @@ module.exports = ->
     mode: 'skeleton'
 
   initChannelPath(channel)
+
   initShare()
-  initManageCollaborators
-    collection: collaborators
-    current_user: current_user
-  initCollaboratorsList
-    collection: collaborators
+
+  $collaboratorsListEl = $('.js-collaborators-list')
+  mount CollaboratorsList, {
+    channel_id: channel.id
+    htmlFragment: $collaboratorsListEl.html(),
+  }, $collaboratorsListEl
 
   channelView = new ChannelView
     el: $('.js-channel')
