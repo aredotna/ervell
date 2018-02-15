@@ -60,6 +60,7 @@
     "forever": "*",
     "global": "^4.3.2",
     "graphql": "^0.12.3",
+    "graphql-anywhere": "^4.1.3",
     "graphql-tag": "^2.7.3",
     "http-proxy-middleware": "^0.17.4",
     "imagesloaded": "^4.1.1",
