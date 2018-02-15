@@ -1,9 +1,10 @@
+const path = require('path');
+const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const fs = require('fs');
-const path = require('path');
-const webpack = require('webpack');
+const helpers = require('./webpack.helpers.js');
+
 const { NODE_ENV, PORT } = process.env;
 const isDevelopment = NODE_ENV === 'development';
 const isStaging = NODE_ENV === 'staging';
@@ -13,20 +14,23 @@ const isDeploy = isStaging || isProduction;
 const config = {
   devtool: 'cheap-module-source-map',
   entry: {
-    ...getEntrypoints(),
+    // webpack: [
+    //   'webpack-hot-middleware/client?reload=true',
+    // ],
+    ...helpers.getEntrypoints(),
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'public/assets'),
     publicPath: '/assets',
-    sourceMapFilename: '[file].map?[contenthash]'
+    sourceMapFilename: '[file].map?[contenthash]',
   },
   module: {
     rules: [
       {
         test: /\.coffee$/,
         exclude: /node_modules/,
-        loader: 'coffee-loader'
+        loader: 'coffee-loader',
       },
       {
         test: /\.(jade|pug)$/,
@@ -34,8 +38,8 @@ const config = {
         loader: 'pug-loader',
         options: {
           doctype: 'html',
-          root: __dirname
-        }
+          root: __dirname,
+        },
       },
       {
         test: /\.(js|jsx)$/,
@@ -53,135 +57,75 @@ const config = {
               //         transforms: [{
               //           transform: 'react-transform-hmr',
               //           imports: ['react'],
-              //           locals: ['module']
-              //         }]
-              //       }]
-              //     ]
-              //   }
-              // }
-            }
-          }
-        ]
+              //           locals: ['module'],
+              //         }],
+              //       }],
+              //     ],
+              //   },
+              // },
+            },
+          },
+        ],
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
+        exclude: /node_modules/,
+        loader: 'json-loader',
+      },
+    ],
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin({
       compilationSuccessInfo: {
-        messages: [`[Ervell] Listening on http://localhost:${PORT} \n`]
-      }
+        messages: [`[Ervell] Listening on http://localhost:${PORT} \n`],
+      },
     }),
     new ProgressBarPlugin(),
     new WebpackNotifierPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(NODE_ENV)
-      }
+        NODE_ENV: JSON.stringify(NODE_ENV),
+      },
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
+      $: 'jquery',
+      jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      'jade': 'jade/runtime.js',
-      'waypoints': 'jquery-waypoints/waypoints.js'
+      jade: 'jade/runtime.js',
+      waypoints: 'jquery-waypoints/waypoints.js',
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
-      minChunks: 10 // lower number for larger "common.js" bundle size
-    })
+      minChunks: 10, // lower number for larger "common.js" bundle size
+    }),
   ],
   resolve: {
     alias: {
-      'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js'
+      'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
     },
     extensions: ['.js', '.jsx', '.json', '.jade', '.coffee'],
     modules: [
-      'node_modules'
+      'node_modules',
     ],
-    symlinks: false
+    symlinks: false,
   },
   externals: {
-    request: 'request'
-  }
+    request: 'request',
+  },
 };
 
-
 if (isDevelopment) {
-  // TODO
-  // config.plugins.push(new webpack.HotModuleReplacementPlugin())
+  // config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Staging
 } else if (isDeploy) {
-  config.devtool = '#source-map'
+  config.devtool = '#source-map';
 
   // Prod
   if (isProduction) {
-    config.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true
-      })
-    )
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true }));
   }
-}
-
-// Helpers
-function getEntrypoints() {
-  return {
-    ...findAssets('assets'),
-  }
-}
-
-function findAssets(basePath) {
-  const files = fs.readdirSync(path.join(process.cwd(), basePath))
-
-  // Filter out .styl files
-  const validAssets = (file) => {
-    const whitelist = [
-      '.js',
-      '.coffee'
-    ]
-
-    const isValid = whitelist.some(extension => extension === path.extname(file))
-    return isValid
-  }
-
-  /**
-   * Construct key/value pairs representing Webpack entrypoints; e.g.,
-   * { desktop: [ path/to/desktop.js ] }
-   */
-  const assets = files
-    .filter(validAssets)
-    .reduce((assetMap, file) => {
-      const fileName = path.basename(file, path.extname(file))
-      const asset = {
-        [fileName]: [
-          path.join(__dirname, basePath, file)
-        ]
-      }
-
-      // Load oldschool global module dependencies
-      asset[fileName].unshift(
-        './lib/global_modules'
-      )
-
-      // if (isDevelopment) {
-      //   asset[fileName].unshift(
-      //     'webpack-hot-middleware/client?reload=true'
-      //   )
-      // }
-
-      return {
-        ...assetMap,
-        ...asset
-      }
-    }, {})
-
-  return assets
 }
 
 module.exports = config;
