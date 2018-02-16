@@ -4,7 +4,7 @@ import collaboratorSearchResultFragment from 'react/components/CollaboratorSearc
 
 export default gql`
   query CollaboratorSearchQuery($query: String!) {
-    results: search(q: $query, per: 15, type: USER) {
+    results: search(q: $query, per: 6, type: USER) {
       ... on User {
         ...CollaboratorSearchResult
       }
