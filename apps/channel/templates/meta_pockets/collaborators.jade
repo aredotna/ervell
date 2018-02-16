@@ -6,7 +6,3 @@
     .js-collaborators-list
       .CollaboratorsList
         include ../../components/collaborators_list/index
-
-    if can.manage_collaborators
-      a.ManageCollaboratorsButton.js-open-manage-collaborators
-        | #{collaborators.length ? 'Edit' : 'Add'} collaborators
