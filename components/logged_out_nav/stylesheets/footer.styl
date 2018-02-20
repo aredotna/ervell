@@ -1,10 +1,52 @@
 .LoggedOutFooter
-  padding 1em
-  text-align center
+  border-top 1px solid colors-gray-border
+  font-size font-size-base
+  padding 1em 1em 10em
+  display flex
+  justify-content space-between
+  align-items flex-start
 
-  > a
+  &__logo
     display inline-block
-    padding 1em
+    width 20%
+    > strong, > span
+      display inline-block
+      position relative
+      width @font-size * 2
+      height @font-size
+      margin-right 0.25em
+      vertical-align middle
+
+      > svg
+        position absolute
+        top 0
+        left -1
+        width 100%
+        height 100%
+        fill colors-gray-text
+
+    &:hover
+      > span > svg
+        fill colors-gray-hover
+
+  &__sections
+    display flex
+    align-self flex-end
+    width 100%
+
+    > section 
+      flex 1
+      width 20%
+      margin-right 5em
+
+      a
+        font-weight bold
+        display block
+        line-height line-height-tall
+
+        &:first-of-type
+          margin-top 1em
+
 
 +mobile()
   .LoggedOutFooter
