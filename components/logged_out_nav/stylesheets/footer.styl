@@ -1,5 +1,4 @@
 .LoggedOutFooter
-  border-top 1px solid colors-gray-border
   font-size font-size-base
   padding 1em 1em 10em
   display flex
@@ -8,7 +7,7 @@
 
   &__logo
     display inline-block
-    width 20%
+    width 30%
     > strong, > span
       display inline-block
       position relative
@@ -36,7 +35,7 @@
 
     > section 
       flex 1
-      width 20%
+      width 17.5%
       margin-right 5em
 
       a
@@ -51,6 +50,19 @@
 +mobile()
   .LoggedOutFooter
     padding 0.5em
+    display block
 
     > a
       padding 0.5em
+
+    &__logo
+      display block
+      width 100%
+
+    &__sections
+      display block
+      > section
+        padding-left .5em
+        display block
+        width 100%
+        margin 3em 0
