@@ -7,7 +7,8 @@
     "deploy": "sh scripts/deploy.sh",
     "predeploy": "sh scripts/predeploy.sh",
     "mocha": "sh scripts/mocha.sh",
-    "test": "sh scripts/test.sh"
+    "test": "sh scripts/test.sh",
+    "start-dev": "foreman start -f Procfile.dev"
   },
   "engines": {
     "node": "8.x.x",
