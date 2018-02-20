@@ -6,7 +6,7 @@ import { NODE_ENV, GRAPHQL_ENDPOINT, X_APP_TOKEN } from 'config.coffee';
 const app = module.exports = express();
 
 app.post('/graphql', (req, res, next) => {
-  if (NODE_ENV !== 'development' && req.hostname !== 'are.na') {
+  if (NODE_ENV !== 'development' && req.hostname.replace('www.', '') !== 'are.na') {
     const err = new Error('Requests must originate from are.na');
     return next(err);
   }

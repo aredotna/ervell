@@ -1,6 +1,6 @@
 AddBlockView = require '../../../components/add_block/client/view.coffee'
-mountHello = require('../../../components/react/example/index.js').default
 Collection = require '../../../collections/base.coffee'
+{ default: mountHello } = require '../../../react/components/Example/index.js'
 
 module.exports = ->
   blocks  = new Collection
