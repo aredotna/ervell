@@ -4,9 +4,11 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 
 import mount from 'react/util/mount';
+
+import introspectionQueryResultData from 'react/apollo/fragmentTypes.json';
 
 const { data: { GRAPHQL_ENDPOINT, X_APP_TOKEN } } = sharify;
 
@@ -25,10 +27,17 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData: {
+    __schema: {
+      types: introspectionQueryResultData,
+    },
+  },
 });
+
+const cache = new InMemoryCache({ fragmentMatcher });
+const link = authLink.concat(httpLink);
+const client = new ApolloClient({ link, cache });
 
 export const provide = (Component, props = {}) => (
   <ApolloProvider client={client}>
