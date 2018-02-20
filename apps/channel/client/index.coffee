@@ -32,11 +32,11 @@ module.exports = ->
 
   initShare()
 
-  $collaboratorsListEl = $('.js-collaborators-list')
-  mount CollaboratorsList, {
-    channel_id: channel.id
-    htmlFragment: $collaboratorsListEl.html(),
-  }, $collaboratorsListEl
+  if ($collaboratorsListEl = $('.js-collaborators-list')).length
+    mount CollaboratorsList, {
+      channel_id: channel.id
+      htmlFragment: $collaboratorsListEl.html(),
+    }, $collaboratorsListEl
 
   channelView = new ChannelView
     el: $('.js-channel')
