@@ -20,5 +20,6 @@ module.exports = {
     "import/no-unresolved": 0,
     "import/extensions": 0,
     "camelcase": 0,
+    "no-underscore-dangle": 0,
   }
 };
