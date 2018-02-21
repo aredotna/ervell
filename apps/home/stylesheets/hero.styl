@@ -5,33 +5,9 @@
     font-size font-size-h2
     margin 2em auto
 
-  &__demo-block
-    display flex
-    justify-content flex-start
-    width block_width
-
-    > .Block
-      margin 0 auto
-
-      // Hide default overlay buttons (Source / Connect)
-      .Block__inner__overlay
-        display none
-      // Enable border
-      .Block__inner
-        border-color colors-gray-border
-      // Hide title & timestamp, display attribution
-      .Block__caption__meta
-        display block
-      .Block__caption__title
-      .Block__caption__meta__timestamp
-        display none
-      // Relative caption
-      .Block__caption
-        position relative
-
-    // Enabled when hovering faux 'Connect' button
-    &--hover
-      opacity 0.5
+  &__copy
+    width 30%
+    
 
   &__connect
     position absolute
