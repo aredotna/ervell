@@ -87,7 +87,10 @@ setupPusherAndCurrentUser = ->
       # '/me/refresh' hits the account endpoint
       # and re-logs in the resulting user
       url: '/me/refresh'
-      error: ->
+      error: (_model, xhr) ->
+        # Ignore internal server errors
+        return if xhr.status is 500
+
         $.get '/me/sign_out', ->
           location.reload()
 
