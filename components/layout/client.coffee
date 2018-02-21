@@ -99,9 +99,6 @@ setupPusherAndCurrentUser = ->
     pusher = new Pusher sd.PUSHER_KEY
     mediator.shared.pusher = pusher
 
-    if currentUser.id
-      mediator.shared.current_user_channel = pusher.subscribe "user_#{currentUser.id}"
-
 # TODO: Extract
 setupViews = ->
   # TODO: Fix all of these selectors
