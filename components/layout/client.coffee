@@ -87,7 +87,10 @@ setupPusherAndCurrentUser = ->
       # '/me/refresh' hits the account endpoint
       # and re-logs in the resulting user
       url: '/me/refresh'
-      error: ->
+      error: (_model, xhr) ->
+        # Ignore internal server errors
+        return if xhr.status is 500
+
         $.get '/me/sign_out', ->
           location.reload()
 
@@ -95,9 +98,6 @@ setupPusherAndCurrentUser = ->
   if Pusher?
     pusher = new Pusher sd.PUSHER_KEY
     mediator.shared.pusher = pusher
-
-    if currentUser.id
-      mediator.shared.current_user_channel = pusher.subscribe "user_#{currentUser.id}"
 
 # TODO: Extract
 setupViews = ->
