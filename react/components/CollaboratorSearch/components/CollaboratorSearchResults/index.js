@@ -22,6 +22,7 @@ class CollaboratorSearchResults extends Component {
   static propTypes = {
     query: PropTypes.string.isRequired,
     onAdd: PropTypes.func.isRequired,
+    onInvite: PropTypes.func.isRequired,
     channel_id: PropTypes.number.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
@@ -31,14 +32,14 @@ class CollaboratorSearchResults extends Component {
 
   render() {
     const {
-      data: { loading }, channel_id, onAdd, query,
+      data: { loading }, channel_id, onAdd, onInvite, query,
     } = this.props;
 
     if (isEmail(query)) {
       return (
         <CollaboratorInviteButton
           email={query}
-          onAdd={onAdd}
+          onInvite={onInvite}
           channel_id={channel_id}
         />
       );

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import avatarFragment from 'react/components/Avatar/fragments/avatar';
+import userAvatarFragment from 'react/components/UserAvatar/fragments/userAvatar';
 
 export default gql`
   fragment CollaboratorSearchResult on User {
@@ -8,7 +8,7 @@ export default gql`
     name
     href
     hidden_email
-    ...Avatar
+    ...UserAvatar
   }
-  ${avatarFragment}
+  ${userAvatarFragment}
 `;

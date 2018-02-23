@@ -7,6 +7,8 @@ import CollaboratorSearchResults from './components/CollaboratorSearchResults';
 
 export default class CollaboratorSearch extends Component {
   static propTypes = {
+    onAdd: PropTypes.func.isRequired,
+    onInvite: PropTypes.func.isRequired,
     channel_id: PropTypes.number.isRequired,
   }
 
@@ -28,6 +30,25 @@ export default class CollaboratorSearch extends Component {
     this.setState({ query: '' });
   }
 
+  add = ({ member_id, member_type, channel_id }) => {
+    this.resetQuery();
+
+    return this.props.onAdd({
+      member_id,
+      member_type,
+      channel_id,
+    });
+  }
+
+  invite = ({ email, channel_id }) => {
+    this.resetQuery();
+
+    return this.props.onInvite({
+      email,
+      channel_id,
+    });
+  }
+
   render() {
     const { channel_id } = this.props;
     const { query, debouncedQuery } = this.state;
@@ -43,7 +64,8 @@ export default class CollaboratorSearch extends Component {
           <CollaboratorSearchResults
             channel_id={channel_id}
             query={debouncedQuery}
-            onAdd={this.resetQuery}
+            onAdd={this.add}
+            onInvite={this.invite}
           />
         }
       </div>

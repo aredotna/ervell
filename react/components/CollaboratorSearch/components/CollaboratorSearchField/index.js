@@ -31,7 +31,6 @@ export default class CollaboratorSearch extends Component {
         value={query}
         onChange={this.update}
         placeholder="search users or enter an email address"
-        autoFocus
       />
     );
   }

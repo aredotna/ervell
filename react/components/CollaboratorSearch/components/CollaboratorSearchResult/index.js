@@ -7,7 +7,7 @@ import collaboratorSearchResultFragment from 'react/components/CollaboratorSearc
 
 import Styles from 'react/styles';
 
-import Avatar from 'react/components/Avatar';
+import UserAvatar from 'react/components/UserAvatar';
 import CollaboratorAddButton from 'react/components/CollaboratorSearch/components/CollaboratorAddButton';
 import SearchResult from 'react/components/CollaboratorSearch/components/SearchResult';
 
@@ -40,7 +40,7 @@ export default class CollaboratorSearchResult extends Component {
 
     return (
       <SearchResult>
-        <Avatar user={result} />
+        <UserAvatar user={result} />
 
         <Information>
           <Name href={result.href}>{result.name}</Name>
@@ -48,7 +48,8 @@ export default class CollaboratorSearchResult extends Component {
         </Information>
 
         <CollaboratorAddButton
-          user_id={result.id}
+          member_id={result.id}
+          member_type="USER" // TODO
           channel_id={channel_id}
           onAdd={onAdd}
         />
