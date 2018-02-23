@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
-import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
+import CollaboratorsListItem from 'react/components/CollaboratorsList/components/CollaboratorsListItem';
 
-import LinksList from 'react/components/LinksList';
+import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
 
 export default class CollaboratorsList extends Component {
   static defaultProps = {
     collaborators: [],
-  }
-
-  static fragments = {
-    collaboratorLink: collaboratorLinkFragment,
   }
 
   static propTypes = {
@@ -21,14 +17,18 @@ export default class CollaboratorsList extends Component {
 
   render() {
     const { collaborators, ...rest } = this.props;
-    const links = collaborators.map(collaborator => ({
-      id: collaborator.id,
-      href: collaborator.href,
-      label: collaborator.name,
-    }));
 
     return (
-      <LinksList links={links} {...rest} />
+      <div {...rest}>
+        {collaborators.map((collaborator, i) => (
+          <span key={collaborator.id}>
+            <CollaboratorsListItem collaborator={collaborator} />
+
+            {i !== collaborators.length - 1 && ', '}
+            {i === collaborators.length - 2 && 'and '}
+          </span>
+        ))}
+      </div>
     );
   }
 }
