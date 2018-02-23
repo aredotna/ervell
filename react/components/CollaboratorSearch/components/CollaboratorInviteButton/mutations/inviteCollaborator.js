@@ -4,7 +4,7 @@ import manageCollaboratorsFragment from 'react/components/ManageCollaborators/fr
 
 export default gql`
   mutation inviteCollaborator($email: String!, $channel_id: ID!){
-    invite_collaborators(input: { email: $email, channel_id: $channel_id }) {
+    invite_collaborator(input: { email: $email, channel_id: $channel_id }) {
       channel {
         ...ManageCollaborators
       }
