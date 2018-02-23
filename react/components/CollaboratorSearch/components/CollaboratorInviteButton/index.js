@@ -19,7 +19,7 @@ class CollaboratorInviteButton extends Component {
     mutate: PropTypes.func.isRequired,
     onAdd: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
-    channel_id: PropTypes.string.isRequired,
+    channel_id: PropTypes.number.isRequired,
   }
 
   state = {
