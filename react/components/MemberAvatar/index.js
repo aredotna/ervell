@@ -5,18 +5,9 @@ import styled from 'styled-components';
 
 import Styles from 'react/styles';
 
-import avatarFragment from 'react/components/Avatar/fragments/avatar';
+import Avatar from 'react/Components/UI/Avatar';
 
-const Container = styled.a`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: ${x => x.size}px;
-  height: ${x => x.size}px;
-  background-color: ${Styles.Colors.gray.semiLight};
-`;
+import memberAvatarFragment from 'react/components/MemberAvatar/fragments/memberAvatar';
 
 const Initials = styled.div`
   font-size: ${x => x.size / 3}px;
@@ -34,13 +25,13 @@ const Image = styled.img`
   height: 100%;
 `;
 
-export default class Avatar extends Component {
+export default class MemberAvatar extends Component {
   static defaultProps = {
     size: 40,
   }
 
   static propTypes = {
-    user: propType(avatarFragment).isRequired,
+    member: propType(memberAvatarFragment).isRequired,
     size: PropTypes.number,
   }
 
@@ -54,22 +45,22 @@ export default class Avatar extends Component {
 
   render() {
     const { hideImage } = this.state;
-    const { user, size } = this.props;
+    const { member, size } = this.props;
 
     return (
-      <Container href={user.href} size={size}>
+      <Avatar href={member.href} size={size}>
         <Initials size={size}>
-          {user.initials}
+          {member.initials}
         </Initials>
 
-        {!hideImage &&
+        {member.avatar && !hideImage &&
           <Image
-            src={user.avatar}
-            alt={user.initials}
+            src={member.avatar}
+            alt={member.initials}
             onError={this.hideImage}
           />
         }
-      </Container>
+      </Avatar>
     );
   }
 }
