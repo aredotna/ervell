@@ -7,10 +7,10 @@ import { graphql } from 'react-apollo';
 
 import Styles from 'react/styles';
 
-import Avatar from 'react/components/Avatar';
+import MemberAvatar from 'react/components/MemberAvatar';
 
 import managedCollaboratorFragment from 'react/components/ManageCollaborators/components/ManagedCollaborator/fragments/managedCollaborator';
-import removeCollaboratorMutation from 'react/components/ManageCollaborators/components/ManagedCollaborator/mutations/removeCollaborator';
+import removeChannelMemberMutation from 'react/components/ManageCollaborators/components/ManagedCollaborator/mutations/removeChannelMember';
 
 const { data: { CURRENT_USER } } = sharify;
 
@@ -63,7 +63,8 @@ class ManagedCollaboratorsList extends Component {
 
       return mutate({
         variables: {
-          user_id: collaborator.id,
+          member_id: collaborator.id,
+          member_type: collaborator.__typename.toUpperCase(),
           channel_id,
         },
       })
@@ -84,7 +85,7 @@ class ManagedCollaboratorsList extends Component {
     return (
       <Container>
         <Representation>
-          <Avatar user={collaborator} />
+          <MemberAvatar member={collaborator} />
 
           <Information>
             <Name href={collaborator.href}>
@@ -110,6 +111,7 @@ class ManagedCollaboratorsList extends Component {
         <button
           className={`Button Button--size-xs ${mode === 'clicked' && 'Color--state-alert'}`}
           onClick={this.remove}
+          type="button"
         >
           {{
             resting: 'Remove',
@@ -123,4 +125,4 @@ class ManagedCollaboratorsList extends Component {
   }
 }
 
-export default graphql(removeCollaboratorMutation)(ManagedCollaboratorsList);
+export default graphql(removeChannelMemberMutation)(ManagedCollaboratorsList);

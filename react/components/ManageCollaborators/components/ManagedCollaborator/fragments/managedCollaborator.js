@@ -1,13 +1,21 @@
 import gql from 'graphql-tag';
 
-import avatarFragment from 'react/components/Avatar/fragments/avatar';
+import memberAvatarFragment from 'react/components/MemberAvatar/fragments/memberAvatar';
 
 export default gql`
-  fragment ManagedCollaborator on User {
-    id
-    name
-    href
-    ...Avatar
+  fragment ManagedCollaborator on Member {
+    __typename
+    ... on User {
+      id
+      name
+      href
+      ...MemberAvatar
+    }
+    ... on Group {
+      id
+      name
+      ...MemberAvatar
+    }
   }
-  ${avatarFragment}
+  ${memberAvatarFragment}
 `;

@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 import manageCollaboratorsFragment from 'react/components/ManageCollaborators/fragments/manageCollaborators';
 
 export default gql`
-  mutation removeCollaboratorsMutation($user_id: ID!, $channel_id: ID!) {
-    remove_collaborators(input: { user_ids: [$user_id], channel_id: $channel_id }) {
+  mutation addChannelMemberMutation($channel_id: ID!, $member_id: ID!, $member_type: MemberTypes) {
+    add_channel_member(input: { channel_id: $channel_id, member_id: $member_id, member_type: $member_type }) {
       channel {
         ...ManageCollaborators
       }
