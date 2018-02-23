@@ -7,6 +7,7 @@ const Container = styled.div`
 
 const Link = styled.a`
   font-weight: bold;
+  ${x => !x.href && 'cursor: default'}
 `;
 
 export default class LinksList extends Component {
@@ -17,7 +18,7 @@ export default class LinksList extends Component {
   static propTypes = {
     links: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.any.isRequired,
-      href: PropTypes.string.isRequired,
+      href: PropTypes.string,
       label: PropTypes.string.isRequired,
     })),
   }
