@@ -17,8 +17,14 @@ block container
   include ../../../components/logged_out_nav/templates/header
 
   .Home.js-home
-    section.HomeSection.HomeHero.js-section
+    section.HomeSection.HomeHero
       include ./sections/hero
+    section.HomeSection
+      include ./sections/more
+    section.HomeSection
+      include ./sections/quotes
+    section.HomeSection
+      include ./sections/explore
 
   include ../../../components/logged_out_nav/templates/footer
 
