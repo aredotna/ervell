@@ -1,14 +1,31 @@
 .HomeExplore
   width 100%
+  position relative
+  padding-top 3em
 
-  > h2
-    text-align center
-    margin-bottom 5em
+  &__overlay
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background-color rgba(0, 0, 0, 0.5)
+    z-index 1
+    display flex
+    align-items center
+    flex-direction column
+    justify-content center
+    > h2
+      color white
+      text-align center
+      margin-bottom 5em
+    > a.Button
+      background-color white
 
 
   &__blocks
     blockHeight = 315px + 90px
-    rows = 6
+    rows = 2
 
     max-height blockHeight * rows
     overflow hidden
