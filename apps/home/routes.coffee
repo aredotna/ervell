@@ -9,38 +9,14 @@ ExploreBlocks = require '../../collections/explore_blocks'
 @index = (_req, res, next) ->
   userIds = (HOMEPAGE_EXPLORE_USER_IDS or '').split(',').map (x) -> parseInt(x, 10)
   exploreBlocks = new ExploreBlocks
-  extend exploreBlocks.options, user_ids: userIds, per: 60
+  extend exploreBlocks.options, user_ids: userIds, per: 20, filter: 'block'
 
   Promise.all [
-    # Cached for 1 hour
     (cached 'homepage:explore-blocks', 3600, -> exploreBlocks.fetch())
-
-    # Caches for 24 hours
-    (
-      cached 'homepage:demo-blocks', 86400, ->
-        graphQL
-          token: DEMO_USER_AUTH_TOKEN
-          query: """
-            {
-              channel(id: "are-na-connect-everything") {
-                blocks(per: 100) {
-                  ... blockThumb
-                }
-              }
-            }
-
-            #{require '../../components/block_v2/queries/block'}
-          """
-    ).catch (->) # Ignore query errors
   ]
 
   .spread (exploreBlocksResponse, demoResponse) ->
     locals = {}
-
-    if demoResponse?
-      { channel: { blocks } } = demoResponse
-      res.locals.sd.DEMO_BLOCKS = demoBlocks = shuffle blocks
-      extend locals, demoBlocks: demoBlocks
 
     if exploreBlocksResponse?
       # Re-initialize the collection with the possibly cached response to parse it
