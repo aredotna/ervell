@@ -1,14 +1,18 @@
+bp = 1024px
+
 .HomeQuotes
   margin-bottom 6em
 
   &__cta
     margin-bottom 2em
 
-   &__quote
+  &__quote
     display flex
     flex-direction row
     width 100%
     margin 3em 0
+    +below(bp)
+      padding 0 2em
 
   &__icon
     width 120px
@@ -24,6 +28,6 @@
     font-size font-size-sm
     line-height line-height-tall
     max-width 475px
-
-    > span 
+    > span
       background-color rgb(255, 244, 107)
+    

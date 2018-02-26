@@ -1,3 +1,5 @@
+bp = 1024px
+
 .HomeMore
   &.HomeSection__content
     display flex
@@ -10,6 +12,8 @@
     background-size contain
     background-position center center
     background-repeat no-repeat
+    +below(bp)
+      display none
 
   &__left
     background-image url('https://d2w9rnfcy7mm78.cloudfront.net/1807276/original_fa89261f516897fae8d94dc3da63ace9.png')
@@ -20,6 +24,9 @@
   &__copy
     flex 1
     width 470px
+    +below(bp)
+      width auto
+      padding 0 2em
 
   &__cta
     margin-bottom 100px

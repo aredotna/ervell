@@ -43,6 +43,10 @@
       margin 0 1.25em
       &:last-child
         margin-right 0
+    +below(logged-out-nav-breakpoint)
+      a[data-id="blog"]
+        display none
+    
 
   // States
   &--active

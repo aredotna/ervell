@@ -31,9 +31,10 @@ const Headline = styled.h2`
 `;
 
 const Image = styled.img`
-  height: 450px;
+  max-height: 450px;
   width: auto;
   padding-bottom: 1rem;
+  user-drag: none;
 `;
 
 class HomeCarousel extends Component {
@@ -49,6 +50,12 @@ class HomeCarousel extends Component {
       centerMode: true,
       centerPadding: '25%',
       focusOnSelect: true,
+      responsive: [{
+        breakpoint: 1024,
+        settings: {
+          centerPadding: '0',
+        },
+      }],
     };
     return (
       <Slider {...settings}>
