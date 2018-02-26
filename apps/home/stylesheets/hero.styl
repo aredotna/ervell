@@ -1,4 +1,4 @@
-bp = 1024px
+mobile_breakpoint = 1024px
 
 .HomeHero
   &__focus
@@ -15,9 +15,6 @@ bp = 1024px
     align-items flex-start
     flex 1
     padding 6em 1em
-    +below(bp)
-      flex-direction column
-      flex-flow column-reverse
 
   &__copy
     width 25%
@@ -26,31 +23,37 @@ bp = 1024px
     flex-direction column
     align-items center
     align-self center
-    +below(bp)
-      width 100%
-      padding 0 1em
-      margin-right 0
 
   &__cta
     width 100%
     margin-top 2em
     > .Button--app
       display none
-    +below(bp)
-      text-align center
-      > .Button--app
-        display inline-block
-        margin 1em
 
   &__image
     width 60%
     align-self center
-    +below(bp)
-      display none
-      margin-bottom 2em
     
   &__connect
     position absolute
     top (block_width / 2)
     left 50%
     transform translate(-50%, -50%)
+
++below(mobile_breakpoint)
+  .HomeHero
+    &__content
+      flex-direction column
+      flex-flow column-reverse
+    &__copy
+      width 100%
+      padding 0 1em
+      margin-right 0
+    &__cta
+      text-align center
+      > .Button--app
+        display inline-block
+        margin 1em
+    &__image
+      display none
+      margin-bottom 2em

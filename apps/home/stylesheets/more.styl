@@ -1,4 +1,4 @@
-bp = 1024px
+mobile_breakpoint = 1024px
 
 .HomeMore
   &.HomeSection__content
@@ -12,8 +12,6 @@ bp = 1024px
     background-size contain
     background-position center center
     background-repeat no-repeat
-    +below(bp)
-      display none
 
   &__left
     background-image url('https://d2w9rnfcy7mm78.cloudfront.net/1807276/original_fa89261f516897fae8d94dc3da63ace9.png')
@@ -24,12 +22,18 @@ bp = 1024px
   &__copy
     flex 1
     width 470px
-    +below(bp)
-      width auto
-      padding 0 2em
 
   &__cta
-    margin-bottom 100px
+    margin-bottom 5em
 
   &__headline
     text-align center
+
++below(mobile_breakpoint)
+  .HomeMore
+    &__left, &__right
+      display none
+
+    &__copy
+      width auto
+      padding 0 2em

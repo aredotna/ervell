@@ -1,4 +1,4 @@
-bp = 1024px
+mobile_breakpoint = 1024px
 
 .HomeQuotes
   margin-bottom 6em
@@ -11,8 +11,6 @@ bp = 1024px
     flex-direction row
     width 100%
     margin 3em 0
-    +below(bp)
-      padding 0 2em
 
   &__icon
     width 120px
@@ -29,5 +27,9 @@ bp = 1024px
     line-height line-height-tall
     max-width 475px
     > span
-      background-color rgb(255, 244, 107)
-    
+      background-color colors-state-highlighted
+
++below(mobile_breakpoint)
+  .HomeQuotes
+    &__quote
+      padding 0 2em
