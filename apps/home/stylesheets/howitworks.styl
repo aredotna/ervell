@@ -1,0 +1,26 @@
+.HomeHowItWorks
+  border-top 1px solid colors-gray-border
+  border-bottom 1px solid colors-gray-border
+
+  &.HomeSection__content
+    padding-bottom 4em
+
+  &__carousel
+    display flex
+    flex-direction row
+    overflow hidden
+
+    .Slide
+      width 40%
+      display flex
+      flex-direction column
+      align-items center
+      padding 2em
+      opacity 0.3
+      &.active
+        opacity 1
+      img 
+        height 450px
+      &__copy
+        margin 2em 0
+        line-height line-height-tall
