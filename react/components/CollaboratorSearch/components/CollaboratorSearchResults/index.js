@@ -23,7 +23,6 @@ class CollaboratorSearchResults extends Component {
     query: PropTypes.string.isRequired,
     onAdd: PropTypes.func.isRequired,
     onInvite: PropTypes.func.isRequired,
-    channel_id: PropTypes.number.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       results: PropTypes.arrayOf(propType(collaboratorSearchResultFragment)),
@@ -32,7 +31,7 @@ class CollaboratorSearchResults extends Component {
 
   render() {
     const {
-      data: { loading }, channel_id, onAdd, onInvite, query,
+      data: { loading }, onAdd, onInvite, query,
     } = this.props;
 
     if (isEmail(query)) {
@@ -40,7 +39,6 @@ class CollaboratorSearchResults extends Component {
         <CollaboratorInviteButton
           email={query}
           onInvite={onInvite}
-          channel_id={channel_id}
         />
       );
     }
@@ -69,7 +67,6 @@ class CollaboratorSearchResults extends Component {
           <CollaboratorSearchResult
             key={result.id}
             result={result}
-            channel_id={channel_id}
             onAdd={onAdd}
           />
         ))}

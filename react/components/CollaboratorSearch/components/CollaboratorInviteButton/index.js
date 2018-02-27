@@ -15,7 +15,6 @@ export default class CollaboratorInviteButton extends Component {
   static propTypes = {
     onInvite: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
-    channel_id: PropTypes.number.isRequired,
   }
 
   state = {
@@ -23,13 +22,11 @@ export default class CollaboratorInviteButton extends Component {
   }
 
   invite = () => {
-    const {
-      email, channel_id, onInvite,
-    } = this.props;
+    const { email, onInvite } = this.props;
 
     this.setState({ mode: 'inviting' });
 
-    return onInvite({ email, channel_id })
+    return onInvite({ email })
       .catch(() => this.setState({ mode: 'error' }));
   }
 

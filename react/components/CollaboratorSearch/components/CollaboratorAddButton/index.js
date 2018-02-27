@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 export default class CollaboratorAddButton extends Component {
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
-    channel_id: PropTypes.number.isRequired,
     member_id: PropTypes.number.isRequired,
     member_type: PropTypes.string.isRequired,
   }
@@ -15,12 +14,12 @@ export default class CollaboratorAddButton extends Component {
 
   addCollaborator = () => {
     const {
-      member_id, member_type, channel_id, onAdd,
+      member_id, member_type, onAdd,
     } = this.props;
 
     this.setState({ mode: 'adding' });
 
-    return onAdd({ member_id, member_type, channel_id })
+    return onAdd({ member_id, member_type })
       .catch(() => this.setState({ mode: 'error' }));
   }
 

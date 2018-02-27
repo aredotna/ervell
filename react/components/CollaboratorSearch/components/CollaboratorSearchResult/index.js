@@ -31,12 +31,11 @@ const Email = styled.div`
 export default class CollaboratorSearchResult extends Component {
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
-    channel_id: PropTypes.number.isRequired,
     result: propType(collaboratorSearchResultFragment).isRequired,
   }
 
   render() {
-    const { channel_id, result, onAdd } = this.props;
+    const { result, onAdd } = this.props;
 
     return (
       <SearchResult>
@@ -49,8 +48,7 @@ export default class CollaboratorSearchResult extends Component {
 
         <CollaboratorAddButton
           member_id={result.id}
-          member_type="USER" // TODO
-          channel_id={channel_id}
+          member_type="USER" // TODO (BUMP)
           onAdd={onAdd}
         />
       </SearchResult>
