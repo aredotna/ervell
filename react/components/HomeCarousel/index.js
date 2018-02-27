@@ -64,6 +64,8 @@ class HomeCarousel extends Component {
         breakpoint: mobileBreakpoint,
         settings: {
           centerPadding: '0',
+          dots: true,
+          appendDots: dots => <ul>{dots}</ul>,
         },
       }],
     };

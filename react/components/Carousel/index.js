@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import Colors from '../../styles/Colors';
+import Type from '../../styles/Type';
 
 const Carousel = styled(Slider)`
   position: relative;
@@ -9,6 +11,7 @@ const Carousel = styled(Slider)`
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
   width 100%;
+  padding: 0 0 3em;
 
   .slick-list {
     position: relative;
@@ -84,7 +87,26 @@ const Carousel = styled(Slider)`
   &.slick-loading .slick-slide img {
     display: none;
   }
-  
+  .slick-dots {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .slick-dots li {
+    display: inline-block;
+    color: ${Colors.gray.semiLight};
+  }
+  .slick-dots li button {
+    display: none;
+  }
+  .slick-dots li:after {
+    content: "●";
+    font-size: ${Type.size.lg};
+  }
+  .slick-dots li.slick-active {
+    color: ${Colors.gray.semiBold};
+  }
 `;
 
 export default Carousel;
