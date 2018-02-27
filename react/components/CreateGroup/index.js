@@ -88,10 +88,10 @@ class CreateGroup extends Component {
       });
   }
 
-  handleAddMember = ({ member_id }) =>
+  handleAddMember = ({ member_id: user_id }) =>
     new Promise(resolve =>
       this.setState((prevState) => {
-        const user_ids = [...new Set(prevState.user_ids.concat([member_id]))];
+        const user_ids = [...new Set(prevState.user_ids.concat([user_id]))];
         return { user_ids };
       }, resolve));
 
