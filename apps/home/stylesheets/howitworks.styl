@@ -1,3 +1,5 @@
+mobile_breakpoint = 1024px
+
 .HomeHowItWorks.HomeSection__content
   padding 0 0 4em
 
@@ -8,3 +10,8 @@
   &__carousel
     height 700px
     width 100%
+
++below(mobile_breakpoint)
+  .HomeHowItWorks
+    &__carousel
+      height 500px

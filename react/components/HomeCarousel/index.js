@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Carousel from '../Carousel/index';
 import Type from '../../styles/Type';
 
+const mobileBreakpoint = 1024;
+
 const Slide = styled.div`
   text-align: center;
   transition: opacity .5s ease-in-out;
@@ -23,6 +25,10 @@ const Copy = styled.p`
   width: 70%;
   line-height: 1.5;
   text-align: left;
+
+  @media (max-width: ${mobileBreakpoint}px) {
+    width: 90%;
+  }
 `;
 
 const Headline = styled.h2`
@@ -35,6 +41,10 @@ const Image = styled.img`
   width: auto;
   padding-bottom: 1rem;
   user-drag: none;
+
+  @media (max-width: ${mobileBreakpoint}px) {
+    height: 300px;
+  }
 `;
 
 class HomeCarousel extends Component {
@@ -51,7 +61,7 @@ class HomeCarousel extends Component {
       centerPadding: '25%',
       focusOnSelect: true,
       responsive: [{
-        breakpoint: 1024,
+        breakpoint: mobileBreakpoint,
         settings: {
           centerPadding: '0',
         },
