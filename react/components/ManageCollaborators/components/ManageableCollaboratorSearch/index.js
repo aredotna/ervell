@@ -14,31 +14,34 @@ class ManageableCollaboratorSearch extends Component {
     inviteCollaborator: PropTypes.func.isRequired,
   }
 
-  add = ({ member_type, member_id, channel_id }) =>
-    this.props.addChannelMember({
+  add = ({ member_type, member_id }) => {
+    const { channel_id, addChannelMember } = this.props;
+
+    return addChannelMember({
       variables: {
         member_id,
         member_type,
         channel_id,
       },
     });
+  }
 
-  invite = ({ email, channel_id }) =>
-    this.props.inviteCollaborator({
+  invite = ({ email }) => {
+    const { channel_id, inviteCollaborator } = this.props;
+
+    return inviteCollaborator({
       variables: {
         email,
         channel_id,
       },
     });
+  }
 
   render() {
-    const { channel_id } = this.props;
-
     return (
       <CollaboratorSearch
         onAdd={this.add}
         onInvite={this.invite}
-        channel_id={channel_id}
       />
     );
   }
