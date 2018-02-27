@@ -8,7 +8,8 @@
     "predeploy": "sh scripts/predeploy.sh",
     "mocha": "sh scripts/mocha.sh",
     "test": "sh scripts/test.sh",
-    "start-dev": "foreman start -f Procfile.dev"
+    "start-dev": "foreman start -f Procfile.dev",
+    "deploy-staging": "APP_NAME=ervell-staging S3_BUCKET=ervell-staging yarn deploy"
   },
   "engines": {
     "node": "8.x.x",
