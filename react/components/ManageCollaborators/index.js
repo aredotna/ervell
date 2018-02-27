@@ -7,7 +7,7 @@ import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queri
 import manageCollaboratorsFragment from 'react/components/ManageCollaborators/fragments/manageCollaborators';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
-import ManagedCollaboratorsList from 'react/components/ManageCollaborators/components/ManagedCollaboratorsList';
+import ManagedCollaboratorList from 'react/components/ManageCollaborators/components/ManagedCollaboratorList';
 import ManageableCollaboratorSearch from 'react/components/ManageCollaborators/components/ManageableCollaboratorSearch';
 import GroupCallToAction from 'react/components/ManageCollaborators/components/GroupCallToAction';
 
@@ -61,7 +61,7 @@ class ManageCollaborators extends Component {
               {counts.collaborators} Collaborator{counts.collaborators === 1 ? '' : 's'}
             </TitledDialog.Label>
 
-            <ManagedCollaboratorsList
+            <ManagedCollaboratorList
               collaborators={collaborators}
               channel_id={channel_id}
             />

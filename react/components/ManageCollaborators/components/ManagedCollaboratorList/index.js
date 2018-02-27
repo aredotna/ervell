@@ -5,7 +5,7 @@ import { propType } from 'graphql-anywhere';
 import ManagedCollaborator from 'react/components/ManageCollaborators/components/ManagedCollaborator';
 import managedCollaboratorFragment from 'react/components/ManageCollaborators/components/ManagedCollaborator/fragments/managedCollaborator';
 
-export default class ManagedCollaboratorsList extends Component {
+export default class ManagedCollaboratorList extends Component {
   static propTypes = {
     channel_id: PropTypes.number.isRequired,
     collaborators: PropTypes.arrayOf(propType(managedCollaboratorFragment)).isRequired,
