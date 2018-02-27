@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import memberAvatarFragment from 'react/components/MemberAvatar/fragments/memberAvatar';
 
 export default gql`
-  fragment ManagedCollaborator on Member {
+  fragment ManagedMember on Member {
     __typename
     ... on User {
       id

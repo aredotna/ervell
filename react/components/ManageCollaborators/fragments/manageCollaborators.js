@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import managedCollaboratorFragment from 'react/components/ManageCollaborators/components/ManagedCollaborator/fragments/managedCollaborator';
+import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
 import collaboratorsListFragment from 'react/components/CollaboratorsList/fragments/collaboratorsList';
 
 export default gql`
@@ -10,10 +10,10 @@ export default gql`
       collaborators
     }
     collaborators: members {
-      ...ManagedCollaborator
+      ...ManagedMember
     }
     ...CollaboratorsList
   }
-  ${managedCollaboratorFragment}
+  ${managedMemberFragment}
   ${collaboratorsListFragment}
 `;

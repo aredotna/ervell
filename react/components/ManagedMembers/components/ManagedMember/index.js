@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
-import { graphql } from 'react-apollo';
 
 import Styles from 'react/styles';
 
 import MemberAvatar from 'react/components/MemberAvatar';
 
-import managedCollaboratorFragment from 'react/components/ManageCollaborators/components/ManagedCollaborator/fragments/managedCollaborator';
-import removeChannelMemberMutation from 'react/components/ManageCollaborators/components/ManagedCollaborator/mutations/removeChannelMember';
+import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
 
 const { data: { CURRENT_USER } } = sharify;
 
@@ -43,11 +41,17 @@ const Warning = styled.div`
   color: ${Styles.Colors.state.alert};
 `;
 
-class ManagedCollaboratorsList extends Component {
+export default class ManagedMembers extends Component {
   static propTypes = {
-    channel_id: PropTypes.number.isRequired,
-    mutate: PropTypes.func.isRequired,
-    collaborator: propType(managedCollaboratorFragment).isRequired,
+    confirmationWarning: PropTypes.string,
+    confirmationSelfWarning: PropTypes.string,
+    onRemove: PropTypes.func.isRequired,
+    member: propType(managedMemberFragment).isRequired,
+  }
+
+  static defaultProps = {
+    confirmationWarning: 'Are you sure?',
+    confirmationSelfWarning: null,
   }
 
   state = {
@@ -56,17 +60,14 @@ class ManagedCollaboratorsList extends Component {
 
   remove = () => {
     const { mode } = this.state;
-    const { mutate, collaborator, channel_id } = this.props;
+    const { onRemove, member } = this.props;
 
     if (mode === 'clicked') {
       this.setState({ mode: 'removing' });
 
-      return mutate({
-        variables: {
-          member_id: collaborator.id,
-          member_type: collaborator.__typename.toUpperCase(),
-          channel_id,
-        },
+      return onRemove({
+        member_id: member.id,
+        member_type: member.__typename.toUpperCase(),
       })
         .catch(() => this.setState({ mode: 'error' }));
     }
@@ -80,25 +81,25 @@ class ManagedCollaboratorsList extends Component {
 
   render() {
     const { mode } = this.state;
-    const { collaborator } = this.props;
+    const { member, confirmationWarning, confirmationSelfWarning } = this.props;
 
     return (
       <Container>
         <Representation>
-          <MemberAvatar member={collaborator} />
+          <MemberAvatar member={member} />
 
           <Information>
-            <Name href={collaborator.href}>
-              {collaborator.name}
+            <Name href={member.href}>
+              {member.name}
             </Name>
 
             {mode === 'clicked' &&
               <Warning>
-                {CURRENT_USER.id === collaborator.id &&
-                  'You will lose access to this channel.'
+                {CURRENT_USER.id === member.id &&
+                  confirmationSelfWarning
                 }
 
-                Are you sure?{' '}
+                {`${confirmationWarning} `}
 
                 <a onClick={this.cancel} role="button" tabIndex={0}>
                   Cancel
@@ -124,5 +125,3 @@ class ManagedCollaboratorsList extends Component {
     );
   }
 }
-
-export default graphql(removeChannelMemberMutation)(ManagedCollaboratorsList);

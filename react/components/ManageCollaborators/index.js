@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 
 import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queries/manageCollaborators';
 import manageCollaboratorsFragment from 'react/components/ManageCollaborators/fragments/manageCollaborators';
+import removeChannelMemberMutation from 'react/components/ManageCollaborators/mutations/removeChannelMember';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
-import ManagedCollaboratorList from 'react/components/ManageCollaborators/components/ManagedCollaboratorList';
+import ManagedMembers from 'react/components/ManagedMembers';
 import ManageableCollaboratorSearch from 'react/components/ManageCollaborators/components/ManageableCollaboratorSearch';
 import GroupCallToAction from 'react/components/ManageCollaborators/components/GroupCallToAction';
 
 class ManageCollaborators extends Component {
   static propTypes = {
     openCreateGroup: PropTypes.func,
+    removeChannelMember: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     channel_id: PropTypes.number.isRequired,
     data: PropTypes.shape({
@@ -24,6 +26,18 @@ class ManageCollaborators extends Component {
 
   static defaultProps = {
     openCreateGroup: null,
+  }
+
+  removeCollaborator = ({ member_id, member_type }) => {
+    const { removeChannelMember, channel_id } = this.props;
+
+    return removeChannelMember({
+      variables: {
+        member_id,
+        member_type,
+        channel_id,
+      },
+    });
   }
 
   render() {
@@ -61,14 +75,16 @@ class ManageCollaborators extends Component {
               {counts.collaborators} Collaborator{counts.collaborators === 1 ? '' : 's'}
             </TitledDialog.Label>
 
-            <ManagedCollaboratorList
-              collaborators={collaborators}
-              channel_id={channel_id}
+            <ManagedMembers
+              members={collaborators}
+              onRemove={this.removeCollaborator}
+              confirmationWarning="Are you sure?"
+              confirmationSelfWarning="You will lose access to this channel."
             />
           </TitledDialog.Section>
         }
 
-        {openCreateGroup &&
+        {openCreateGroup && counts.collaborators < 2 &&
           <GroupCallToAction onClick={openCreateGroup} />
         }
       </TitledDialog>
@@ -76,4 +92,7 @@ class ManageCollaborators extends Component {
   }
 }
 
-export default graphql(manageCollaboratorsQuery)(ManageCollaborators);
+export default compose(
+  graphql(manageCollaboratorsQuery),
+  graphql(removeChannelMemberMutation, { name: 'removeChannelMember' }),
+)(ManageCollaborators);
