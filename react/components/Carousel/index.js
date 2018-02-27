@@ -11,7 +11,6 @@ const Carousel = styled(Slider)`
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
   width 100%;
-  padding: 0 0 3em;
 
   .slick-list {
     position: relative;
@@ -27,6 +26,16 @@ const Carousel = styled(Slider)`
     &.dragging {
       cursor: pointer;
       cursor: hand;
+    }
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
     }
   }
 

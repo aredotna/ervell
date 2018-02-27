@@ -11,6 +11,9 @@ const Slide = styled.div`
   transition: opacity .5s ease-in-out;
   opacity: ${props => (props.className.includes('slick-center') ? 1 : 0.3)};
   cursor: pointer;
+  @media (max-width: ${mobileBreakpoint}px) {
+    width: 90%;
+  }
 `;
 
 const Inner = styled.div`
