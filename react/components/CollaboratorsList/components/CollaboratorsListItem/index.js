@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
+import Modal from 'react/components/UI/Modal';
+import ManageGroup from 'react/components/ManageGroup';
+
 import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
 
 const Link = styled.a.attrs({
@@ -18,26 +21,41 @@ export default class CollaboratorsListItem extends Component {
     mode: 'resting',
   }
 
-  toggleMode = () =>
+  handleClick = () => {
+    const { collaborator: { __typename } } = this.props;
+
+    if (__typename !== 'Group') return;
+
+    const { collaborator: { id, can } } = this.props;
+
+    if (can.manage) {
+      const modal = new Modal(ManageGroup, { id });
+      modal.open();
+      return;
+    }
+
     this.setState(({ mode: prevMode }) => ({
       mode: prevMode === 'active' ? 'resting' : 'active',
     }));
+  }
 
   render() {
     const { mode } = this.state;
-    const { collaborator, collaborator: { users } } = this.props;
+    const { collaborator, collaborator: { users, can } } = this.props;
 
     return (
       <strong>
         <Link
           href={collaborator.href}
-          onClick={this.toggleMode}
+          onClick={this.handleClick}
         >
           {collaborator.name}
 
           {mode === 'resting' && collaborator.__typename === 'Group' &&
             <span>
-              {' '}(...)
+              {' '}(
+                {can.manage ? 'edit' : '...'}
+              )
             </span>
           }
         </Link>

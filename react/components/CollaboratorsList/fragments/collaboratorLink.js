@@ -16,6 +16,9 @@ export default gql`
         name
         href
       }
+      can {
+        manage
+      }
     }
   }
 `;
