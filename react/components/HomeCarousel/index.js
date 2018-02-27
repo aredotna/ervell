@@ -10,10 +10,11 @@ const Slide = styled.div`
   text-align: center;
   transition: opacity .5s ease-in-out;
   opacity: ${props => (props.className.includes('slick-center') ? 1 : 0.3)};
+  cursor: pointer;
 `;
 
 const Inner = styled.div`
-  padding: 3rem;
+  padding: 2rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -37,13 +38,13 @@ const Headline = styled.h2`
 `;
 
 const Image = styled.img`
-  max-height: 450px;
+  max-height: 400px;
   width: auto;
   padding-bottom: 1rem;
   user-drag: none;
 
   @media (max-width: ${mobileBreakpoint}px) {
-    height: 300px;
+    max-height: 220px;
   }
 `;
 
@@ -73,7 +74,7 @@ class HomeCarousel extends Component {
       <Carousel {...settings}>
         <Slide>
           <Inner>
-            <Image alt="iphone screenshot" src="https://d2w9rnfcy7mm78.cloudfront.net/1586588/original_ac9783753f207990907118d62cae38bf.png" />
+            <Image alt="iphone screenshot" src="https://d2w9rnfcy7mm78.cloudfront.net/1586587/original_971cf68a81483a8c80a9f574a62ec24e.png" />
             <Headline>
               Save and organize anything
             </Headline>
@@ -86,7 +87,7 @@ class HomeCarousel extends Component {
         </Slide>
         <Slide>
           <Inner>
-            <Image alt="iphone screenshot" src="https://d2w9rnfcy7mm78.cloudfront.net/1813617/original_4f8ed79a8ab1e5a2ff58d1bf4a75c2a8.png" />
+            <Image alt="desktop screenshot / meg" src="https://d2w9rnfcy7mm78.cloudfront.net/1819604/original_ab9278398679a8b336190f220aea0649.png" />
             <Headline>
               Learn from your links
             </Headline>
@@ -98,7 +99,7 @@ class HomeCarousel extends Component {
         </Slide>
         <Slide>
           <Inner>
-            <Image alt="iphone screenshot" src="https://d2w9rnfcy7mm78.cloudfront.net/1201607/original_c2026c305f861e20a9e01cbb67ddf352.png" />
+            <Image alt="desktop screenshot / connections" src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png" />
             <Headline>
               Build ideas together
             </Headline>
