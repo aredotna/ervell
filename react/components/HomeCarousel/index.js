@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Slider from 'react-slick';
 
+import Carousel from '../Carousel/index';
 import Type from '../../styles/Type';
 
 const Slide = styled.div`
@@ -58,7 +58,7 @@ class HomeCarousel extends Component {
       }],
     };
     return (
-      <Slider {...settings}>
+      <Carousel {...settings}>
         <Slide>
           <Inner>
             <Image alt="iphone screenshot" src="https://d2w9rnfcy7mm78.cloudfront.net/1586588/original_ac9783753f207990907118d62cae38bf.png" />
@@ -96,7 +96,7 @@ class HomeCarousel extends Component {
             </Copy>
           </Inner>
         </Slide>
-      </Slider>
+      </Carousel>
     );
   }
 }
