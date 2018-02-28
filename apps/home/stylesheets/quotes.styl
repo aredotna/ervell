@@ -1,0 +1,39 @@
+mobile_breakpoint = 1024px
+
+.HomeQuotes
+  margin-bottom 1em
+  
+  &__cta&__cta
+    margin-top 1em
+  
+  &__quote
+    display flex
+    flex-direction row
+    width 100%
+    margin 3em 0
+    &:hover
+      color colors-gray-text
+
+  &__icon
+    width 100px
+    margin-right 1em
+    text-align center
+
+    > img 
+      width 70%
+
+  &__copy
+    font-family 'Courier New', Courier, monospace
+    font-weight bold
+    font-size font-size-base
+    line-height line-height-tall
+    max-width 475px
+    > span
+      background-color colors-state-highlighted
+
++below(mobile_breakpoint)
+  .HomeQuotes
+    &__quote
+      padding 0 2em
+    &__copy
+      font-size font-size-base

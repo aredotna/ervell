@@ -8,7 +8,8 @@
     "state": {
       "premium": "#00c5ff",
       "alert": "#e24d4d",
-      "editable": "#fdffdb"
+      "editable": "#fdffdb",
+      "highlighted": "rgb(255, 244, 107)"
     },
     "gray": {
       "translucent": "rgba(255,255,255,0.9)",

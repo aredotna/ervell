@@ -1,16 +1,20 @@
 footer.LoggedOutFooter
-  unless sd.CURRENT_PATH.indexOf('/about') > -1
-    a( href='/about' )
-      | About
-
-  a( href='/about#labs' )
-    | Work With Us
-
-  a( href='https://dev.are.na/documentation/channels' )
-    | API
-
-  a( href='/terms' )
-    | Terms
-
-  a( href='/privacy' )
-    | Privacy
+  .LoggedOutFooter__sections
+    section
+      span Contact
+      a(href="mailto:everyone@are.na") Email
+      a(href="https://twitter.com/AREdotNA") Twitter
+      a(href="https://www.instagram.com/aredotna/") Instagram
+    section
+      span Company
+      a(href="/about#team") Team
+      a(href="") Media Kit
+      a(href="/faqs") FAQs
+    section
+      span Community
+      a(href="/blog") Blog
+      a(href="/education") Education
+      a(href="/about") Projects
+    section
+      span Mobile
+      a(href=sd.ITUNES_LINK) Download iOS App
