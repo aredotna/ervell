@@ -64,6 +64,8 @@ class HomeCarousel extends Component {
       centerMode: true,
       centerPadding: '25%',
       focusOnSelect: true,
+      autoplay: true,
+      autoplaySpeed: 9000,
       responsive: [{
         breakpoint: mobileBreakpoint,
         settings: {
