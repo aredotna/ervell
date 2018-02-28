@@ -1,3 +1,5 @@
+mobile_breakpoint = 1024px
+
 .HomeHero
   &__focus
     position relative
@@ -5,36 +7,53 @@
     font-size font-size-h2
     margin 2em auto
 
-  &__demo-block
+  &__content
     display flex
-    justify-content flex-start
-    width block_width
+    width 100%
+    flex-direction row
+    justify-content center
+    align-items flex-start
+    flex 1
+    padding 2em 1em
 
-    > .Block
-      margin 0 auto
+  &__copy
+    width 25%
+    margin-right 2em
+    display flex
+    flex-direction column
+    align-items center
+    align-self center
 
-      // Hide default overlay buttons (Source / Connect)
-      .Block__inner__overlay
-        display none
-      // Enable border
-      .Block__inner
-        border-color colors-gray-border
-      // Hide title & timestamp, display attribution
-      .Block__caption__meta
-        display block
-      .Block__caption__title
-      .Block__caption__meta__timestamp
-        display none
-      // Relative caption
-      .Block__caption
-        position relative
+  &__cta
+    width 100%
+    margin-top 2em
+    > .Button--app
+      display none
 
-    // Enabled when hovering faux 'Connect' button
-    &--hover
-      opacity 0.5
-
+  &__image
+    width 60%
+    align-self center
+    
   &__connect
     position absolute
     top (block_width / 2)
     left 50%
     transform translate(-50%, -50%)
+
++below(mobile_breakpoint)
+  .HomeHero
+    &__content
+      flex-direction column
+      flex-flow column-reverse
+    &__copy
+      width 100%
+      padding 3em 1em
+      margin-right 0
+    &__cta
+      text-align center
+      > .Button
+        display block
+        margin 1em
+    &__image
+      display none
+      margin-bottom 2em

@@ -2,20 +2,18 @@ header.LoggedOutHeader.js-logged-out-header
   a.LoggedOutHeader__logo( href='/' )
     span
       include ../../../public/images/arena-mark.svg
+    strong Are.na
 
   unless sd.CURRENT_PATH === '/'
     include ../components/menu/index
 
-  .LoggedOutHeader__cta
-    if user
-      a.js-log-out( href='/me/sign_out' )
-        | Log out
+  .LoggedOutHeader__menu
+      if  sd.CURRENT_PATH === '/'
+        a( href='/about#pricing' data-id="pricing" ) Pricing
+        a( href='/explore' data-id="explore" ) Explore
+        a( href='/blog' data-id="blog" ) Blog
 
-    else
-      a( href='/sign_up' )
-        | Join
-      = ' '
-      span or
-      = ' '
-      a( href='/log_in' )
-        | Log in
+      if user
+        a.js-log-out( href='/me/sign_out' ) Log out
+      else
+        a( href='/log_in' ) Log in
