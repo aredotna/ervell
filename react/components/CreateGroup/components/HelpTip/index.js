@@ -11,8 +11,8 @@ const Container = styled.div`
   justify-content: center;
   text-align: center;
   max-width: 50%;
-  margin: 0 auto;
-  padding-bottom: 4em;
+  margin: 0 auto 2em auto;
+  padding: 2em 1em;
   font-size: ${Styles.Type.size.sm};
   line-height: ${Styles.Type.lineHeight.tall};
   color: ${Styles.Colors.gray.medium};
