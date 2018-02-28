@@ -11,3 +11,19 @@ module.exports = ->
   loggedOutNav()
 
   mount HomeCarousel, {}, $('.js-home-carousel')
+
+  $html = $('html, body')
+  $el = $('.js-home')
+  $sections = $el.find('.js-section')
+
+  $el.find '.js-to-fold'
+    .on 'click', (e) ->
+      e.preventDefault()
+
+      $target = $(this)
+        .closest '.js-section'
+        .next '.js-section'
+
+      yPos = $target.position().top
+
+      $html.animate scrollTop: yPos, 'fast'
