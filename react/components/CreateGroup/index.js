@@ -17,7 +17,10 @@ import addGroupUsersMutation from 'react/components/CreateGroup/mutations/addGro
 
 class CreateGroup extends Component {
   static propTypes = {
-    channel_id: PropTypes.number.isRequired,
+    channel_id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
     onClose: PropTypes.func.isRequired,
     createGroup: PropTypes.func.isRequired,
     addChannelMember: PropTypes.func.isRequired,

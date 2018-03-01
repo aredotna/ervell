@@ -17,7 +17,10 @@ class ManageCollaborators extends Component {
     openCreateGroup: PropTypes.func,
     removeChannelMember: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    channel_id: PropTypes.number.isRequired,
+    channel_id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       channel: propType(manageCollaboratorsFragment),

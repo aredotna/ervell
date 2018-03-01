@@ -33,10 +33,7 @@ module.exports = ->
   initShare()
 
   if ($collaboratorsListEl = $('.js-collaborators-list')).length
-    mount CollaboratorsList, {
-      channel_id: channel.id
-      htmlFragment: $collaboratorsListEl.html(),
-    }, $collaboratorsListEl
+    mount CollaboratorsList, { channel_id: CHANNEL.slug }, $collaboratorsListEl
 
   channelView = new ChannelView
     el: $('.js-channel')

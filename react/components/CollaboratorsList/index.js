@@ -20,10 +20,10 @@ const Link = styled.a`
 
 class CollaboratorsListContainer extends Component {
   static propTypes = {
-    channel_id: PropTypes.number.isRequired,
-    // HACK: Until we wire up SSR; this requires an HTML fragment
-    // to render while loading.
-    htmlFragment: PropTypes.string.isRequired,
+    channel_id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
     }).isRequired,
@@ -49,9 +49,9 @@ class CollaboratorsListContainer extends Component {
   }
 
   render() {
-    const { htmlFragment, data: { loading } } = this.props;
+    const { data: { loading } } = this.props;
 
-    if (loading) return <div dangerouslySetInnerHTML={{ __html: htmlFragment }} />;
+    if (loading) return <div />;
 
     const { data: { channel: { can, collaborators } } } = this.props;
 

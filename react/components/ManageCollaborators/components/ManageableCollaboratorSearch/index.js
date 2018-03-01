@@ -9,7 +9,10 @@ import inviteCollaboratorMutation from 'react/components/ManageCollaborators/com
 
 class ManageableCollaboratorSearch extends Component {
   static propTypes = {
-    channel_id: PropTypes.number.isRequired,
+    channel_id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
     addChannelMember: PropTypes.func.isRequired,
     inviteCollaborator: PropTypes.func.isRequired,
   }

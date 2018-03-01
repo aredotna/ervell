@@ -1,8 +1,9 @@
+!= collaboratorsList.styles
+
 .metadata__column.metadata__column--mobile
   .metadata__title
     | Collaborators
 
   .metadata__content
     .js-collaborators-list
-      .CollaboratorsList
-        include ../../components/collaborators_list/index
+      != collaboratorsList.html
