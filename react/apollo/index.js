@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import sharify from 'sharify';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -10,22 +11,11 @@ import mount from 'react/util/mount';
 
 import introspectionQueryResultData from 'react/apollo/fragmentTypes.json';
 
-const { data: { GRAPHQL_ENDPOINT, X_APP_TOKEN } } = sharify;
+const isClientSide = typeof window !== 'undefined';
 
-const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
+const { data: { GRAPHQL_ENDPOINT } } = sharify;
 
-const authLink = setContext((_, { headers }) => {
-  const { data: { CURRENT_USER } } = sharify;
-  const X_AUTH_TOKEN = (CURRENT_USER && CURRENT_USER.authentication_token) || '';
-
-  return {
-    headers: {
-      ...headers,
-      'X-AUTH-TOKEN': X_AUTH_TOKEN,
-      'X-APP-TOKEN': X_APP_TOKEN,
-    },
-  };
-});
+const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT, fetch });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: {
@@ -35,18 +25,55 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   },
 });
 
-const cache = new InMemoryCache({ fragmentMatcher });
-const link = authLink.concat(httpLink);
-const client = new ApolloClient({ link, cache });
-
-export const provide = (Component, props = {}) => (
+export const wrapWithApolloProvider = client => (Component, props = {}) => (
   <ApolloProvider client={client}>
     <Component {...props} />
   </ApolloProvider>
 );
 
+export const initApolloClient = (token) => {
+  const cache = new InMemoryCache({ fragmentMatcher });
+
+  if (isClientSide && window.__APOLLO_STATE__) {
+    cache.restore(window.__APOLLO_STATE__);
+  }
+
+  const { data: { X_APP_TOKEN, CURRENT_USER } } = sharify;
+
+  const authLink = setContext((_, { headers }) => {
+    const X_AUTH_TOKEN = (
+      token || (isClientSide && CURRENT_USER && CURRENT_USER.authentication_token) || ''
+    );
+
+    return {
+      headers: {
+        ...headers,
+        'X-AUTH-TOKEN': X_AUTH_TOKEN,
+        'X-APP-TOKEN': X_APP_TOKEN,
+      },
+    };
+  });
+
+  const link = authLink.concat(httpLink);
+
+  const client = new ApolloClient({
+    ssrMode: !isClientSide,
+    link,
+    cache,
+  });
+
+  return client;
+};
+
+if (isClientSide) {
+  initApolloClient();
+}
+
 export default (Component, props = {}, mountNode) => {
   if (!mountNode) return null;
 
-  return mount(provide(Component, props), mountNode);
+  const client = initApolloClient();
+  const WrappedComponent = wrapWithApolloProvider(client)(Component, props);
+
+  return mount(WrappedComponent, mountNode);
 };
