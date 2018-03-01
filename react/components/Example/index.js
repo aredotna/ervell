@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
-import mount from 'react/apollo';
+import { mountWithApolloProvider } from 'react/apollo';
 import formatErrors from 'react/util/formatErrors';
 
 const Container = styled.div`
@@ -102,5 +102,5 @@ export class Hello extends Component {
 export const HelloWithData = graphql(query)(Hello);
 
 export default (selector = '#react-mount-hello') => {
-  mount(HelloWithData, {}, document.querySelector(selector));
+  mountWithApolloProvider(HelloWithData, {}, document.querySelector(selector));
 };

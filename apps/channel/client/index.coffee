@@ -10,7 +10,7 @@ Collaborators = require '../../../collections/collaborators.coffee'
 addBlock = require '../../../components/add_block/client/index.coffee'
 initShare = require '../components/share/index.coffee'
 
-{ default: mount } = require '../../../react/apollo/index.js'
+{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
 { default: CollaboratorsList } = require '../../../react/components/CollaboratorsList/index.js'
 
 module.exports = ->
@@ -33,7 +33,11 @@ module.exports = ->
   initShare()
 
   if ($collaboratorsListEl = $('.js-collaborators-list')).length
-    mount CollaboratorsList, { channel_id: CHANNEL.slug }, $collaboratorsListEl
+    mountWithApolloProvider(
+      CollaboratorsList,
+      { channel_id: CHANNEL.slug },
+      $collaboratorsListEl
+    )
 
   channelView = new ChannelView
     el: $('.js-channel')
