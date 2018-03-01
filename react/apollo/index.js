@@ -25,13 +25,11 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   },
 });
 
-export const wrapWithApolloProvider = client => (Component, props = {}) => (
-  <ApolloProvider client={client}>
-    <Component {...props} />
-  </ApolloProvider>
-);
-
 export const initApolloClient = (token) => {
+  if (isClientSide && window.__APOLLO_CLIENT__) {
+    return window.__APOLLO_CLIENT__;
+  }
+
   const cache = new InMemoryCache({ fragmentMatcher });
 
   if (isClientSide && window.__APOLLO_STATE__) {
@@ -62,6 +60,10 @@ export const initApolloClient = (token) => {
     cache,
   });
 
+  if (isClientSide) {
+    window.__APOLLO_CLIENT__ = client;
+  }
+
   return client;
 };
 
@@ -69,7 +71,14 @@ if (isClientSide) {
   initApolloClient();
 }
 
-export default (Component, props = {}, mountNode) => {
+export const wrapWithApolloProvider = (client = isClientSide && window.__APOLLO_CLIENT__) =>
+  (Component, props = {}) => (
+    <ApolloProvider client={client}>
+      <Component {...props} />
+    </ApolloProvider>
+  );
+
+export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
   if (!mountNode) return null;
 
   const client = initApolloClient();
