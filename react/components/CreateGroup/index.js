@@ -141,6 +141,7 @@ class CreateGroup extends Component {
           </TitledDialog.Label>
 
           <CollaboratorSearch
+            types={['USER']}
             onAdd={this.handleAddMember}
             onInvite={() => console.log('TODO')}
             channel_id={channel_id}

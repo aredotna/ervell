@@ -9,6 +9,11 @@ export default class CollaboratorSearch extends Component {
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
     onInvite: PropTypes.func.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string),
+  }
+
+  static defaultProps = {
+    types: ['USER', 'GROUP'],
   }
 
   state = {
@@ -45,6 +50,7 @@ export default class CollaboratorSearch extends Component {
   }
 
   render() {
+    const { types } = this.props;
     const { query, debouncedQuery } = this.state;
 
     return (
@@ -57,6 +63,7 @@ export default class CollaboratorSearch extends Component {
         {query !== '' &&
           <CollaboratorSearchResults
             query={debouncedQuery}
+            types={types}
             onAdd={this.add}
             onInvite={this.invite}
           />

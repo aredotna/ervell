@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 import isEmail from 'lib/is_email.coffee';
 
-import collaboratorSearchQuery from 'react/components/CollaboratorSearch/queries/collaboratorSearch';
-import collaboratorSearchResultFragment from 'react/components/CollaboratorSearch/components/CollaboratorSearchResults/fragments/collaboratorSearchResult';
+import collaboratorSearchResultsQuery from 'react/components/CollaboratorSearch/components/CollaboratorSearchResults/queries/collaboratorSearchResults';
+import collaboratorSearchResultsFragment from 'react/components/CollaboratorSearch/components/CollaboratorSearchResults/fragments/collaboratorSearchResults';
 
 import SearchResult from 'react/components/CollaboratorSearch/components/SearchResult';
 import CollaboratorSearchResult from 'react/components/CollaboratorSearch/components/CollaboratorSearchResult';
@@ -25,7 +25,7 @@ class CollaboratorSearchResults extends Component {
     onInvite: PropTypes.func.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
-      results: PropTypes.arrayOf(propType(collaboratorSearchResultFragment)),
+      results: propType(collaboratorSearchResultsFragment),
     }).isRequired,
   }
 
@@ -51,9 +51,9 @@ class CollaboratorSearchResults extends Component {
       );
     }
 
-    const { data: { results } } = this.props;
+    const { data: { results: { collaborators } } } = this.props;
 
-    if (results.length === 0) {
+    if (collaborators.length === 0) {
       return (
         <Status>
           Nothing found.
@@ -63,10 +63,10 @@ class CollaboratorSearchResults extends Component {
 
     return (
       <div>
-        {results.map(result => (
+        {collaborators.map(collaborator => (
           <CollaboratorSearchResult
-            key={result.id}
-            result={result}
+            key={collaborator.id}
+            result={collaborator}
             onAdd={onAdd}
           />
         ))}
@@ -75,4 +75,4 @@ class CollaboratorSearchResults extends Component {
   }
 }
 
-export default graphql(collaboratorSearchQuery)(CollaboratorSearchResults);
+export default graphql(collaboratorSearchResultsQuery)(CollaboratorSearchResults);

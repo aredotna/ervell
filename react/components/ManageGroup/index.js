@@ -131,6 +131,7 @@ class ManageGroup extends Component {
           </TitledDialog.Label>
 
           <CollaboratorSearch
+            types={['USER']}
             onAdd={this.handleAddUser}
             onInvite={() => console.log('TODO (BUMP)')}
           />

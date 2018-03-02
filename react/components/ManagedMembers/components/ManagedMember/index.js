@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import Styles from 'react/styles';
 
+import Count from 'react/components/UI/Count';
 import MemberAvatar from 'react/components/MemberAvatar';
 
 import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
@@ -39,6 +40,10 @@ const Name = styled.a`
 
 const Warning = styled.div`
   color: ${Styles.Colors.state.alert};
+`;
+
+const Amount = styled.div`
+  color: ${Styles.Colors.gray.medium};
 `;
 
 export default class ManagedMembers extends Component {
@@ -86,12 +91,20 @@ export default class ManagedMembers extends Component {
     return (
       <Container>
         <Representation>
-          <MemberAvatar member={member} />
+          {member.__typename === 'User' &&
+            <MemberAvatar member={member} />
+          }
 
           <Information>
             <Name href={member.href}>
               {member.name}
             </Name>
+
+            {member.__typename === 'Group' && mode !== 'clicked' &&
+              <Amount>
+                Group (<Count amount={member.counts.users} label="user" />)
+              </Amount>
+            }
 
             {mode === 'clicked' &&
               <Warning>
