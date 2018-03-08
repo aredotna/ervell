@@ -18,3 +18,5 @@ module.exports = (block, $el) ->
       block_id: block.id
 
     newCommentView.postRender()
+  
+  return view
