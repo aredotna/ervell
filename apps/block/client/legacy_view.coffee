@@ -17,6 +17,7 @@ urlConnectionsTemplate = -> require('../templates/url_connections.jade') argumen
 module.exports = class LegacyBlockView extends Backbone.View
   cookieKey: 'sidebar-hidden'
   postRendered: false
+  subViews: []
 
   events:
     'click .block-mobile-arrow': 'scrollDown'
@@ -101,6 +102,8 @@ module.exports = class LegacyBlockView extends Backbone.View
 
     mediator.trigger 'slide:to:block', @model.id
 
+    _.invoke @subViews, 'remove'
+
     @initModel()
     @render()
     @xHR?.abort() if @xHR?.readyState > 0 && @xHR?.readyState < 4
@@ -132,7 +135,8 @@ module.exports = class LegacyBlockView extends Backbone.View
     this
 
   postRender: ->
-    initComments @model, @$('.js-comments') if @user?
+    commentView = initComments @model, @$('.js-comments') if @user?
+    @subViews.push commentView
 
     if @$('.iconic').length
       _.defer => IconicJS()().inject('img.iconic') # ლ(｡-﹏-｡ ლ)
