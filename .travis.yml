@@ -4,13 +4,15 @@ node_js:
 script:
 - make test
 before_deploy:
-- if [ $TRAVIS_BRANCH = 'master' ]; then APP_NAME=ervell-staging S3_BUCKET=ervell-staging yarn predeploy; fi
-- if [ $TRAVIS_BRANCH = 'deploy' ]; then APP_NAME=ervell S3_BUCKET=ervell-production yarn predeploy; fi
+- if [ $TRAVIS_BRANCH = 'master' ]; then APP_NAME=ervell-staging S3_BUCKET=ervell-staging
+  yarn predeploy; fi
+- if [ $TRAVIS_BRANCH = 'deploy' ]; then APP_NAME=ervell S3_BUCKET=ervell-production
+  yarn predeploy; fi
 deploy:
   provider: heroku
   skip_cleanup: true
   api_key:
-    secure: jZIwuTvmr1Ez4eClIPKILBicnQpVRwrRmr2z9jvLgpOA7a225JZct8S+Dpe/4caLVAQCLr9DNFSnyI0ZhoheCxyeHKmOJ+bxzuPbmoufHJ+GcCGbEMfKNOTnf3uYPO/TWZKb/2JKzfpQo/85NQ8ykNdOe87eIcLNBqW9a5RQbFw=
+    secure: PzC4fzFk/Mss618xUs2BuHw22MaLoJbrvYtT35rVjxFq4W+yox0q9kZFt8A4OM8bMryYBKQGSl/QQxBrz2fuSvNEm12S28luC5sC+ddBlqjDOImr9c89nYKUQh/Se2dBPed9cJSBCYxzJo3wCFw2ROX/Yp2CjQYVBmuZOwRqnRE=
   app:
     master: ervell-staging
     deploy: ervell
