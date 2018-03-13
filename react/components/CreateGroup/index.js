@@ -14,6 +14,7 @@ import HelpTip from 'react/components/CreateGroup/components/HelpTip';
 import createGroupMutation from 'react/components/CreateGroup/mutations/createGroup';
 import addChannelMemberMutation from 'react/components/CreateGroup/mutations/addChannelMember';
 import addGroupUsersMutation from 'react/components/CreateGroup/mutations/addGroupUsers';
+import inviteUserMutation from 'react/components/CreateGroup/mutations/inviteUser';
 
 class CreateGroup extends Component {
   static propTypes = {
@@ -25,6 +26,7 @@ class CreateGroup extends Component {
     createGroup: PropTypes.func.isRequired,
     addChannelMember: PropTypes.func.isRequired,
     addGroupUsers: PropTypes.func.isRequired,
+    inviteUser: PropTypes.func.isRequired,
   }
 
   state = {
@@ -68,20 +70,22 @@ class CreateGroup extends Component {
           },
         })
           // Pass along the ID of the now added Group
-          .then(() => ({ group_id: member_id })))
-      // Add users to the group
-      .then(({ group_id }) => {
+          .then(() => ({ id: member_id })))
+
+      // Add users to the Group
+      .then(({ id }) => {
         if (user_ids.length === 0) {
           return Promise.resolve();
         }
 
         return addGroupUsers({
           variables: {
-            group_id,
+            id,
             user_ids,
           },
         });
       })
+
       // Close it out
       .then(onClose)
       .catch((err) => {
@@ -91,12 +95,25 @@ class CreateGroup extends Component {
       });
   }
 
-  handleAddMember = ({ member_id: user_id }) =>
+  addUserId = user_id =>
     new Promise(resolve =>
       this.setState((prevState) => {
-        const user_ids = [...new Set(prevState.user_ids.concat([user_id]))];
+        const user_ids = [...new Set([...prevState.user_ids, user_id])];
         return { user_ids };
       }, resolve));
+
+  handleAddUser = ({ member_id: user_id }) =>
+    this.addUserId(user_id);
+
+  handleInviteUser = ({ email }) => {
+    const { inviteUser } = this.props;
+
+    return inviteUser({ variables: { email } })
+      .then(({ data: { invite_users: { users } } }) => {
+        const { id: user_id } = users[0];
+        return this.addUserId(user_id);
+      });
+  }
 
   removeUserId = id =>
     this.setState(({ user_ids }) => ({
@@ -142,8 +159,8 @@ class CreateGroup extends Component {
 
           <CollaboratorSearch
             types={['USER']}
-            onAdd={this.handleAddMember}
-            onInvite={() => console.log('TODO')}
+            onAdd={this.handleAddUser}
+            onInvite={this.handleInviteUser}
             channel_id={channel_id}
           />
         </TitledDialog.Section>
@@ -171,4 +188,5 @@ export default compose(
   graphql(createGroupMutation, { name: 'createGroup' }),
   graphql(addChannelMemberMutation, { name: 'addChannelMember' }),
   graphql(addGroupUsersMutation, { name: 'addGroupUsers' }),
+  graphql(inviteUserMutation, { name: 'inviteUser' }),
 )(CreateGroup);

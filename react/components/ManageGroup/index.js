@@ -8,6 +8,7 @@ import manageGroupQuery from 'react/components/ManageGroup/queries/manageGroup';
 import updateGroupMutation from 'react/components/ManageGroup/mutations/updateGroup';
 import addGroupUserMutation from 'react/components/ManageGroup/mutations/addGroupUser';
 import removeGroupUserMutation from 'react/components/ManageGroup/mutations/removeGroupUser';
+import inviteGroupUserMutation from 'react/components/ManageGroup/mutations/inviteGroupUser';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
@@ -20,6 +21,7 @@ class ManageGroup extends Component {
     updateGroup: PropTypes.func.isRequired,
     addGroupUser: PropTypes.func.isRequired,
     removeGroupUser: PropTypes.func.isRequired,
+    inviteGroupUser: PropTypes.func.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       group: propType(manageGroupFragment),
@@ -92,6 +94,17 @@ class ManageGroup extends Component {
     });
   }
 
+  handleInviteUser = ({ email }) => {
+    const { inviteGroupUser, id } = this.props;
+
+    return inviteGroupUser({
+      variables: {
+        id,
+        email,
+      },
+    });
+  }
+
   render() {
     const { data: { loading } } = this.props;
 
@@ -133,7 +146,7 @@ class ManageGroup extends Component {
           <CollaboratorSearch
             types={['USER']}
             onAdd={this.handleAddUser}
-            onInvite={() => console.log('TODO (BUMP)')}
+            onInvite={this.handleInviteUser}
           />
         </TitledDialog.Section>
 
@@ -160,4 +173,5 @@ export default compose(
   graphql(updateGroupMutation, { name: 'updateGroup' }),
   graphql(addGroupUserMutation, { name: 'addGroupUser' }),
   graphql(removeGroupUserMutation, { name: 'removeGroupUser' }),
+  graphql(inviteGroupUserMutation, { name: 'inviteGroupUser' }),
 )(ManageGroup);
