@@ -20,10 +20,7 @@ const Link = styled.a`
 
 class CollaboratorsListContainer extends Component {
   static propTypes = {
-    channel_id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
     }).isRequired,
@@ -53,12 +50,15 @@ class CollaboratorsListContainer extends Component {
 
     if (loading) return <div />;
 
-    const { data: { channel: { can, collaborators } } } = this.props;
+    const { channel_id, data: { channel: { can, collaborators } } } = this.props;
 
     return (
       <div>
         {collaborators.length > 0 &&
-          <StyledCollaboratorsList collaborators={collaborators} />
+          <StyledCollaboratorsList
+            collaborators={collaborators}
+            channel_id={channel_id}
+          />
         }
 
         {can.manage_collaborators &&

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
@@ -15,6 +16,7 @@ const Link = styled.a.attrs({
 export default class CollaboratorsListItem extends Component {
   static propTypes = {
     collaborator: propType(collaboratorLinkFragment).isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   }
 
   state = {
@@ -26,10 +28,10 @@ export default class CollaboratorsListItem extends Component {
 
     if (__typename !== 'Group') return;
 
-    const { collaborator: { id, can } } = this.props;
+    const { channel_id, collaborator: { id, can } } = this.props;
 
     if (can.manage) {
-      const modal = new Modal(ManageGroup, { id });
+      const modal = new Modal(ManageGroup, { id, channel_id });
       modal.open();
       return;
     }
