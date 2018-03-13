@@ -6,6 +6,7 @@ import { compose, graphql } from 'react-apollo';
 import manageGroupFragment from 'react/components/ManageGroup/fragments/manageGroup';
 import manageGroupQuery from 'react/components/ManageGroup/queries/manageGroup';
 import collaboratorsListQuery from 'react/components/CollaboratorsList/queries/collaboratorsList';
+import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queries/manageCollaborators';
 
 import updateGroupMutation from 'react/components/ManageGroup/mutations/updateGroup';
 import addGroupUserMutation from 'react/components/ManageGroup/mutations/addGroupUser';
@@ -104,13 +105,21 @@ class ManageGroup extends Component {
   }
 
   handleAddUser = ({ member_id: user_id }) => {
-    const { addGroupUser, id } = this.props;
+    const { addGroupUser, id, channel_id } = this.props;
 
     return addGroupUser({
       variables: {
         id,
         user_id,
       },
+      refetchQueries: [
+        {
+          query: manageCollaboratorsQuery,
+          variables: {
+            channel_id,
+          },
+        },
+      ],
     });
   }
 
