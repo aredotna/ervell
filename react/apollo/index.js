@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import 'isomorphic-fetch';
 import sharify from 'sharify';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -15,7 +15,7 @@ const isClientSide = typeof window !== 'undefined';
 
 const { data: { GRAPHQL_ENDPOINT } } = sharify;
 
-const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT, fetch });
+const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: {
