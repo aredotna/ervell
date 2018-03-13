@@ -71,22 +71,22 @@ class ManageGroup extends Component {
   }
 
   handleAddUser = ({ member_id: user_id }) => {
-    const { addGroupUser, id: group_id } = this.props;
+    const { addGroupUser, id } = this.props;
 
     return addGroupUser({
       variables: {
-        group_id,
+        id,
         user_id,
       },
     });
   }
 
   handleRemoveUser = ({ member_id: user_id }) => {
-    const { removeGroupUser, id: group_id } = this.props;
+    const { removeGroupUser, id } = this.props;
 
     return removeGroupUser({
       variables: {
-        group_id,
+        id,
         user_id,
       },
     });
