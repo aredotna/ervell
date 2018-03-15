@@ -16,7 +16,7 @@
     "yarn": "1.x.x"
   },
   "dependencies": {
-    "@artsy/express-reloadable": "1.0.9",
+    "@artsy/express-reloadable": "1.3.0",
     "apollo-client-preset": "^1.0.8",
     "apollo-link-context": "^1.0.3",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
@@ -116,6 +116,10 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/prop-types": "^15.5.2",
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^15.5.7",
     "babel-eslint": "^8.2.1",
     "benv": "*",
     "eslint": "^4.17.0",
