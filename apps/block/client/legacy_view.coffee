@@ -135,8 +135,9 @@ module.exports = class LegacyBlockView extends Backbone.View
     this
 
   postRender: ->
-    commentView = initComments @model, @$('.js-comments') if @user?
-    @subViews.push commentView
+    if @user?
+      commentView = initComments @model, @$('.js-comments') 
+      @subViews.push commentView
 
     if @$('.iconic').length
       _.defer => IconicJS()().inject('img.iconic') # ლ(｡-﹏-｡ ლ)
