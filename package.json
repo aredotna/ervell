@@ -16,7 +16,7 @@
     "yarn": "1.x.x"
   },
   "dependencies": {
-    "@artsy/express-reloadable": "1.0.9",
+    "@artsy/express-reloadable": "1.3.0",
     "apollo-client-preset": "^1.0.8",
     "apollo-link-context": "^1.0.3",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
