@@ -11,6 +11,10 @@ import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragmen
 const Link = styled.a.attrs({
   role: 'button',
 })`
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 `;
 
 export default class CollaboratorsListItem extends Component {
