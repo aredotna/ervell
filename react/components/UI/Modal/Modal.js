@@ -15,7 +15,6 @@ const ModalBackdrop = styled.div`
   left: 0;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 6001;
-  transform: translate3d(0, 0, 1px);
 `;
 
 export default class Modal extends Component {
