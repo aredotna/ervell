@@ -8,7 +8,7 @@ const Dialog = styled.div`
   width: 90%;
   height: 90%;
   max-width: 40em;
-  max-height: 60em;
+  max-height: calc(100vh - 7em);
   background-color: ${Colors.gray.semiLight};
   border-radius: .25em;
   padding: 5px;
