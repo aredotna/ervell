@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { without } from 'underscore';
 
-import serializeFormData from 'react/util/serializeFormData';
-
 import TitledDialog from 'react/components/UI/TitledDialog';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
@@ -31,6 +29,7 @@ class CreateGroup extends Component {
 
   state = {
     mode: 'resting',
+    name: '',
     user_ids: [],
   }
 
@@ -38,6 +37,7 @@ class CreateGroup extends Component {
     const isEdited = name !== '';
 
     this.setState({
+      name,
       mode: isEdited ? 'submit' : 'resting',
     });
   }
@@ -49,17 +49,14 @@ class CreateGroup extends Component {
       channel_id, onClose, createGroup, addChannelMember, addGroupUsers,
     } = this.props;
 
-    const { mode, user_ids } = this.state;
+    const { mode, name, user_ids } = this.state;
 
     if (mode === 'resting') return onClose();
 
     this.setState({ mode: 'submitting' });
 
-    const data = new FormData(e.target);
-    const variables = serializeFormData(data);
-
     // Create the group
-    return createGroup({ variables })
+    return createGroup({ variables: { name } })
       // Add it as a collaborator on the current channel
       .then(({ data: { create_group: { group: { id: member_id } } } }) =>
         addChannelMember({
@@ -121,7 +118,7 @@ class CreateGroup extends Component {
     }));
 
   render() {
-    const { mode, user_ids } = this.state;
+    const { mode, name, user_ids } = this.state;
     const { channel_id, onClose } = this.props;
 
     return (
@@ -149,6 +146,7 @@ class CreateGroup extends Component {
             className="Input"
             placeholder="enter group name"
             onChange={this.handleName}
+            value={name}
           />
         </TitledDialog.Section>
 
