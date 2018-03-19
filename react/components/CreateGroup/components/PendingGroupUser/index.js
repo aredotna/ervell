@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import Styles from 'react/styles';
 
-import Avatar from 'react/Components/UI/Avatar';
+import Avatar from 'react/components/UI/Avatar';
 import UserAvatar from 'react/components/UserAvatar';
 
 import pendingGroupUserQuery from 'react/components/CreateGroup/components/PendingGroupUser/queries/pendingGroupUser';

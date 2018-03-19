@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Styles from 'react/styles';
 
-import Avatar from 'react/Components/UI/Avatar';
+import Avatar from 'react/components/UI/Avatar';
 
 import userAvatarFragment from 'react/components/UserAvatar/fragments/userAvatar';
 
