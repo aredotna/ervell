@@ -12,4 +12,7 @@ module.exports = (req, res, next) ->
   res.locals._ = _
   res.locals.homeHref = req.user?.homePath() or '/'
 
+  # TODO: remove after campaign
+  res.locals.closedInvestCTA = req.cookies['invest_cta']?
+
   next()
