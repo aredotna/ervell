@@ -10,7 +10,6 @@ module.exports = ->
   $el = $('.js-invest-cta')
 
   $el.one 'click', '.js-close', ->
-    console.log('should close')
     analytics.track.click 'Closed Invest CTA'
     dismisser.dismiss()
     $el.remove()
