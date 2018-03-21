@@ -4,6 +4,8 @@ import { propType } from 'graphql-anywhere';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
 
+import currentUserService from 'react/util/currentUserService';
+
 import Styles from 'react/styles';
 
 import Avatar from 'react/components/UI/Avatar';
@@ -71,6 +73,7 @@ class PendingGroupUser extends Component {
     }
 
     const { data: { user } } = this.props;
+    const isOwner = currentUserService().id === user.id;
 
     return (
       <Container>
@@ -88,8 +91,9 @@ class PendingGroupUser extends Component {
           className="Button Button--size-xs"
           onClick={this.remove}
           type="button"
+          disabled={isOwner}
         >
-          Remove
+          {isOwner ? 'Owner' : 'Remove'}
         </button>
       </Container>
     );

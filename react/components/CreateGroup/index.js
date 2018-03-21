@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { without } from 'underscore';
 
+import currentUserService from 'react/util/currentUserService';
+
 import TitledDialog from 'react/components/UI/TitledDialog';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
@@ -30,7 +32,7 @@ class CreateGroup extends Component {
   state = {
     mode: 'resting',
     name: '',
-    user_ids: [],
+    user_ids: [currentUserService().id],
   }
 
   handleName = ({ target: { value: name } }) => {
@@ -57,31 +59,28 @@ class CreateGroup extends Component {
 
     // Create the group
     return createGroup({ variables: { name } })
-      // Add it as a collaborator on the current channel
-      .then(({ data: { create_group: { group: { id: member_id } } } }) =>
-        addChannelMember({
-          variables: {
-            channel_id,
-            member_id,
-            member_type: 'GROUP',
-          },
-        })
-          // Pass along the ID of the now added Group
-          .then(() => ({ id: member_id })))
-
       // Add users to the Group
-      .then(({ id }) => {
-        if (user_ids.length === 0) {
-          return Promise.resolve();
-        }
+      .then(({ data: { create_group: { group: { id } } } }) => {
+        if (user_ids.length === 0) return Promise.resolve();
 
         return addGroupUsers({
           variables: {
             id,
             user_ids,
           },
-        });
+        })
+          // Pass along the group id
+          .then(() => id);
       })
+      // Add the group to the channel
+      .then(member_id =>
+        addChannelMember({
+          variables: {
+            channel_id,
+            member_id,
+            member_type: 'GROUP',
+          },
+        }))
 
       // Close it out
       .then(onClose)

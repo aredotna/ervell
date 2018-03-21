@@ -11,7 +11,8 @@ const Button = styled.a`
   padding: 1em;
   font-size: ${Styles.Type.size.base};
   font-weight: bold;
-  color: ${Styles.Colors.gray.regular};
+  color: ${Styles.Colors.gray.medium};
+  line-height: 1;
 `;
 
 const Component = ({ onClick, children, ...rest }) => (

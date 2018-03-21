@@ -11,6 +11,11 @@ export default gql`
     ... on Group {
       id
       name
+      user {
+        id
+        name
+        href
+      }
       users {
         id
         name

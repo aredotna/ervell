@@ -151,15 +151,18 @@ class ManageGroup extends Component {
   handleDeleteClick = () =>
     this.setState({ mode: 'delete' });
 
+  handleDeleteCancel = () =>
+    this.setState({ mode: 'resting' });
+
   renderDialog() {
     const { mode, name } = this.state;
-    const { data: { group, group: { users } } } = this.props;
+    const { data: { group, group: { user, users } } } = this.props;
 
     switch (mode) {
       case 'delete':
       case 'deleting':
         return (
-          <DeleteConfirmation name={group.name} />
+          <DeleteConfirmation name={group.name} onCancel={this.handleDeleteCancel} />
         );
       default:
         return (
@@ -202,18 +205,17 @@ class ManageGroup extends Component {
               />
             </TitledDialog.Section>
 
-            {users.length > 0 &&
-              <TitledDialog.Section>
-                <TitledDialog.Label>
-                  {users.length} Collaborator{users.length === 1 ? '' : 's'}
-                </TitledDialog.Label>
+            <TitledDialog.Section>
+              <TitledDialog.Label>
+                {users.length + 1} Collaborator{(users.length + 1) === 1 ? '' : 's'}
+              </TitledDialog.Label>
 
-                <ManagedMembers
-                  members={users}
-                  onRemove={this.handleRemoveUser}
-                />
-              </TitledDialog.Section>
-            }
+              <ManagedMembers
+                owner={user}
+                members={[user, ...users]}
+                onRemove={this.handleRemoveUser}
+              />
+            </TitledDialog.Section>
           </div>
         );
     }

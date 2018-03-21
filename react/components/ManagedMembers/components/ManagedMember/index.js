@@ -1,8 +1,9 @@
-import sharify from 'sharify';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
+
+import currentUserService from 'react/util/currentUserService';
 
 import Styles from 'react/styles';
 
@@ -10,8 +11,6 @@ import Count from 'react/components/UI/Count';
 import MemberAvatar from 'react/components/MemberAvatar';
 
 import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
-
-const { data: { CURRENT_USER } } = sharify;
 
 const Container = styled.div`
   display: flex;
@@ -48,6 +47,7 @@ const Amount = styled.div`
 
 export default class ManagedMembers extends Component {
   static propTypes = {
+    isOwner: PropTypes.bool,
     confirmationWarning: PropTypes.string,
     confirmationSelfWarning: PropTypes.string,
     onRemove: PropTypes.func.isRequired,
@@ -55,12 +55,17 @@ export default class ManagedMembers extends Component {
   }
 
   static defaultProps = {
+    isOwner: false,
     confirmationWarning: 'Are you sure?',
     confirmationSelfWarning: null,
   }
 
-  state = {
-    mode: 'resting',
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: props.isOwner ? 'owned' : 'resting',
+    };
   }
 
   remove = () => {
@@ -102,20 +107,20 @@ export default class ManagedMembers extends Component {
 
             {member.__typename === 'Group' && mode !== 'clicked' &&
               <Amount>
-                Group (<Count amount={member.counts.users} label="user" />)
+                Group (<Count amount={member.counts.users + 1} label="user" />)
               </Amount>
             }
 
             {mode === 'clicked' &&
               <Warning>
-                {CURRENT_USER.id === member.id &&
+                {currentUserService().id === member.id &&
                   confirmationSelfWarning
                 }
 
                 {`${confirmationWarning} `}
 
                 <a onClick={this.cancel} role="button" tabIndex={0}>
-                  Cancel
+                  <strong>Cancel</strong>
                 </a>
               </Warning>
             }
@@ -126,8 +131,10 @@ export default class ManagedMembers extends Component {
           className={`Button Button--size-xs ${mode === 'clicked' && 'Color--state-alert'}`}
           onClick={this.remove}
           type="button"
+          disabled={mode === 'owned'}
         >
           {{
+            owned: 'Owner',
             resting: 'Remove',
             clicked: 'Confirm',
             removing: 'Removing...',

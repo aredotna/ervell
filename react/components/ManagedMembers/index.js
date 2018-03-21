@@ -7,6 +7,7 @@ import managedMemberFragment from 'react/components/ManagedMembers/components/Ma
 
 export default class ManagedMembers extends Component {
   static propTypes = {
+    owner: propType(managedMemberFragment),
     members: PropTypes.arrayOf(propType(managedMemberFragment)).isRequired,
     onRemove: PropTypes.func.isRequired,
     confirmationWarning: PropTypes.string,
@@ -14,12 +15,14 @@ export default class ManagedMembers extends Component {
   }
 
   static defaultProps = {
+    owner: null,
     confirmationWarning: undefined,
     confirmationSelfWarning: undefined,
   }
 
   render() {
     const {
+      owner,
       members,
       onRemove,
       confirmationWarning,
@@ -33,6 +36,7 @@ export default class ManagedMembers extends Component {
           <ManagedMember
             key={member.id}
             member={member}
+            isOwner={owner && owner.id === member.id}
             onRemove={onRemove}
             confirmationWarning={confirmationWarning}
             confirmationSelfWarning={confirmationSelfWarning}
