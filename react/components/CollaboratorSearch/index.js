@@ -34,20 +34,14 @@ export default class CollaboratorSearch extends Component {
     this.setState({ query: '' });
   }
 
-  add = ({ member_id, member_type }) => {
-    this.resetQuery();
+  add = ({ member_id, member_type }) => this.props.onAdd({
+    member_id,
+    member_type,
+  })
+    .then(() => this.resetQuery())
 
-    return this.props.onAdd({
-      member_id,
-      member_type,
-    });
-  }
-
-  invite = ({ email }) => {
-    this.resetQuery();
-
-    return this.props.onInvite({ email });
-  }
+  invite = ({ email }) => this.props.onInvite({ email })
+    .then(() => this.resetQuery())
 
   render() {
     const { types } = this.props;

@@ -48,12 +48,32 @@ const Input = styled.input`
 
 export default class SearchInput extends Component {
   static propTypes = {
+    query: PropTypes.string,
     onQueryChange: PropTypes.func.isRequired,
   }
 
-  state = {
-    mode: 'resting',
+  static defaultProps = {
     query: '',
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: 'resting',
+      query: props.query,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
+      this.resetState();
+    }
+  }
+
+  resetState = () => {
+    this.setState({ query: '', mode: 'resting' });
+    this.input.focus();
   }
 
   handleChange = ({ target: { value: query } }) => {
@@ -68,11 +88,8 @@ export default class SearchInput extends Component {
   }
 
   handleReset = () => {
-    const currentState = { query: '', mode: 'resting' };
-
-    this.setState(currentState);
-    this.props.onQueryChange(currentState.query);
-    this.input.focus();
+    this.resetState();
+    this.props.onQueryChange('');
   }
 
   render() {
