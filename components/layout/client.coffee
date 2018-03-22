@@ -18,6 +18,7 @@ setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initConfirmableMessage = require '../confirmable_message/index.coffee'
 initLoggedOutCTA = require '../logged_out_cta/index.coffee'
+initInvestCTA = require '../invest_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 GlobalBlockRouter = require './global_block_router.coffee'
 Blacklist = require('../../lib/blacklist.js').default
@@ -36,6 +37,9 @@ module.exports = ->
   initLoggedOutCTA()
   initGlobalBlockRouting()
   initGlobalKeyboardShortcuts()
+
+  # TODO: remove after campaign
+  initInvestCTA()
 
 initGlobalBlockRouting = ->
   # TODO: Extract and init block router only
