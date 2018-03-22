@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
-const SearchInput = styled.input`
-  border: 1px solid ${Styles.Colors.gray.regular};
-
-  &:focus {
-    border: 1px solid ${Styles.Colors.gray.regular};
-  }
-`;
+import SearchInput from 'react/components/UI/SearchInput';
 
 export default class CollaboratorSearch extends Component {
   static propTypes = {
@@ -18,18 +9,14 @@ export default class CollaboratorSearch extends Component {
     query: PropTypes.string.isRequired,
   }
 
-  update = ({ target: { value: query } }) => {
-    this.props.onChange(query);
-  }
-
   render() {
-    const { query } = this.props;
+    const { query, onChange } = this.props;
 
     return (
       <SearchInput
         className="Input"
         value={query}
-        onChange={this.update}
+        onQueryChange={onChange}
         placeholder="search users or enter an email address"
       />
     );

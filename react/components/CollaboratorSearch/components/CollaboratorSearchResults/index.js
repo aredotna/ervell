@@ -65,7 +65,7 @@ class CollaboratorSearchResults extends Component {
       <div>
         {collaborators.map(collaborator => (
           <CollaboratorSearchResult
-            key={collaborator.id}
+            key={`${collaborator.__typename}-${collaborator.id}`}
             result={collaborator}
             onAdd={onAdd}
           />
