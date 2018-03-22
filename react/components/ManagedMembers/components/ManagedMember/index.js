@@ -70,23 +70,24 @@ export default class ManagedMembers extends Component {
 
   remove = () => {
     const { mode } = this.state;
-    const { onRemove, member } = this.props;
 
     if (mode === 'clicked') {
-      this.setState({ mode: 'removing' });
-
-      return onRemove({
-        member_id: member.id,
-        member_type: member.__typename.toUpperCase(),
-      })
-        .catch(() => this.setState({ mode: 'error' }));
+      return this.setState({ mode: 'resting' });
     }
 
     return this.setState({ mode: 'clicked' });
   }
 
-  cancel = () => {
-    this.setState({ mode: 'resting' });
+  confirm = () => {
+    const { onRemove, member } = this.props;
+
+    this.setState({ mode: 'removing' });
+
+    return onRemove({
+      member_id: member.id,
+      member_type: member.__typename.toUpperCase(),
+    })
+      .catch(() => this.setState({ mode: 'error' }));
   }
 
   render() {
@@ -119,8 +120,8 @@ export default class ManagedMembers extends Component {
 
                 {`${confirmationWarning} `}
 
-                <a onClick={this.cancel} role="button" tabIndex={0}>
-                  <strong>Cancel</strong>
+                <a onClick={this.confirm} role="button" tabIndex={0}>
+                  <strong>Confirm</strong>
                 </a>
               </Warning>
             }
@@ -136,7 +137,7 @@ export default class ManagedMembers extends Component {
           {{
             owned: 'Owner',
             resting: 'Remove',
-            clicked: 'Confirm',
+            clicked: 'Cancel',
             removing: 'Removing...',
             error: 'Error',
           }[mode]}
