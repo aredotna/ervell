@@ -7,6 +7,7 @@
     },
     "state": {
       "premium": "#00c5ff",
+      "invest": "rgb(183, 158, 110)",
       "alert": "#e24d4d",
       "editable": "#fdffdb",
       "highlighted": "rgb(255, 244, 107)"

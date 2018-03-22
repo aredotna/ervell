@@ -12,4 +12,9 @@ module.exports = (req, res, next) ->
   res.locals._ = _
   res.locals.homeHref = req.user?.homePath() or '/'
 
+  # TODO: remove after campaign
+  # only show if the user is logged in and confirmed
+  # and hasn't closed the CTA
+  res.locals.showInvestCTA = (!req.cookies['invest_cta']? and req.user and req.user.get('is_confirmed'))
+
   next()
