@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import collaboratorsListQuery from 'react/components/CollaboratorsList/queries/collaboratorsList';
 
 import Modal from 'react/components/UI/Modal';
+import CreateGroup from 'react/components/CreateGroup';
 import ManageCollaborators from 'react/components/ManageCollaborators';
 import CollaboratorsList from 'react/components/CollaboratorsList/CollaboratorsList';
 
@@ -13,12 +14,13 @@ const StyledCollaboratorsList = styled(CollaboratorsList)`
   margin-bottom: 1em;
 `;
 
+const Link = styled.a`
+  display: block;
+`;
+
 class CollaboratorsListContainer extends Component {
   static propTypes = {
-    channel_id: PropTypes.number.isRequired,
-    // HACK: Until we wire up SSR; this requires an HTML fragment
-    // to render while loading.
-    htmlFragment: PropTypes.string.isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
     }).isRequired,
@@ -26,25 +28,49 @@ class CollaboratorsListContainer extends Component {
 
   openManageCollaborators = () => {
     const { channel_id } = this.props;
-    const modal = new Modal(ManageCollaborators, { channel_id });
+    const modal = new Modal(ManageCollaborators, {
+      channel_id,
+      openCreateGroup: () => {
+        modal.close();
+        this.openCreateGroup();
+      },
+    });
+
+    modal.open();
+  }
+
+  openCreateGroup = () => {
+    const { channel_id } = this.props;
+    const modal = new Modal(CreateGroup, { channel_id });
     modal.open();
   }
 
   render() {
-    const { htmlFragment, data: { loading } } = this.props;
+    const { data: { loading } } = this.props;
 
-    if (loading) return <div dangerouslySetInnerHTML={{ __html: htmlFragment }} />;
+    if (loading) return <div />;
 
-    const { data: { channel: { can, collaborators } } } = this.props;
+    const { channel_id, data: { channel: { can, collaborators } } } = this.props;
 
     return (
       <div>
-        <StyledCollaboratorsList collaborators={collaborators} />
+        {collaborators.length > 0 &&
+          <StyledCollaboratorsList
+            collaborators={collaborators}
+            channel_id={channel_id}
+          />
+        }
 
         {can.manage_collaborators &&
-          <a onClick={this.openManageCollaborators} role="button" tabIndex={0}>
-            {collaborators.length ? 'Edit' : 'Add'} collaborators
-          </a>
+          <div>
+            <Link onClick={this.openManageCollaborators} role="button" tabIndex={0}>
+              {collaborators.length ? 'Edit' : 'Add'} collaborators
+            </Link>
+
+            <Link onClick={this.openCreateGroup} role="button" tabIndex={0}>
+              Create group
+            </Link>
+          </div>
         }
       </div>
     );

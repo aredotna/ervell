@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import collaboratorSearchResultFragment from 'react/components/CollaboratorSearch/components/CollaboratorSearchResults/fragments/collaboratorSearchResult';
+import collaboratorSearchResultFragment from 'react/components/CollaboratorSearch/components/CollaboratorSearchResult/fragments/collaboratorSearchResult';
 
 import Styles from 'react/styles';
 
-import Avatar from 'react/components/Avatar';
+import Count from 'react/components/UI/Count';
+import UserAvatar from 'react/components/UserAvatar';
 import CollaboratorAddButton from 'react/components/CollaboratorSearch/components/CollaboratorAddButton';
 import SearchResult from 'react/components/CollaboratorSearch/components/SearchResult';
 
@@ -28,28 +29,42 @@ const Email = styled.div`
   color: ${Styles.Colors.gray.medium};
 `;
 
+const Amount = styled.div`
+  color: ${Styles.Colors.gray.medium};
+`;
+
 export default class CollaboratorSearchResult extends Component {
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
-    channel_id: PropTypes.number.isRequired,
     result: propType(collaboratorSearchResultFragment).isRequired,
   }
 
   render() {
-    const { channel_id, result, onAdd } = this.props;
+    const { result, onAdd } = this.props;
 
     return (
       <SearchResult>
-        <Avatar user={result} />
+        {result.__typename === 'User' &&
+          <UserAvatar user={result} />
+        }
 
         <Information>
           <Name href={result.href}>{result.name}</Name>
-          <Email>{result.hidden_email}</Email>
+
+          {result.hidden_email &&
+            <Email>{result.hidden_email}</Email>
+          }
+
+          {result.__typename === 'Group' &&
+            <Amount>
+              Group (<Count amount={result.counts.users + 1} label="user" />)
+            </Amount>
+          }
         </Information>
 
         <CollaboratorAddButton
-          user_id={result.id}
-          channel_id={channel_id}
+          member_id={result.id}
+          member_type={result.__typename.toUpperCase()}
           onAdd={onAdd}
         />
       </SearchResult>

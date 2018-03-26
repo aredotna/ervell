@@ -23,3 +23,5 @@ block body
 
 block scripts
   script( src= asset('/assets/channel.js') )
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(collaboratorsList.state).replace(/</g, '\\u003c')};

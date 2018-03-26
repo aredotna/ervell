@@ -7,7 +7,13 @@ import CollaboratorSearchResults from './components/CollaboratorSearchResults';
 
 export default class CollaboratorSearch extends Component {
   static propTypes = {
-    channel_id: PropTypes.number.isRequired,
+    onAdd: PropTypes.func.isRequired,
+    onInvite: PropTypes.func.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string),
+  }
+
+  static defaultProps = {
+    types: ['USER', 'GROUP'],
   }
 
   state = {
@@ -28,8 +34,17 @@ export default class CollaboratorSearch extends Component {
     this.setState({ query: '' });
   }
 
+  add = ({ member_id, member_type }) => this.props.onAdd({
+    member_id,
+    member_type,
+  })
+    .then(() => this.resetQuery())
+
+  invite = ({ email }) => this.props.onInvite({ email })
+    .then(() => this.resetQuery())
+
   render() {
-    const { channel_id } = this.props;
+    const { types } = this.props;
     const { query, debouncedQuery } = this.state;
 
     return (
@@ -41,9 +56,10 @@ export default class CollaboratorSearch extends Component {
 
         {query !== '' &&
           <CollaboratorSearchResults
-            channel_id={channel_id}
             query={debouncedQuery}
-            onAdd={this.resetQuery}
+            types={types}
+            onAdd={this.add}
+            onInvite={this.invite}
           />
         }
       </div>

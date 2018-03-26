@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
 
-import addCollaboratorMutation from 'react/components/CollaboratorSearch/components/CollaboratorAddButton/mutations/addCollaborator';
-
-class CollaboratorAddButton extends Component {
+export default class CollaboratorAddButton extends Component {
   static propTypes = {
     onAdd: PropTypes.func.isRequired,
-    channel_id: PropTypes.number.isRequired,
-    user_id: PropTypes.number.isRequired,
-    mutate: PropTypes.func.isRequired,
+    member_id: PropTypes.number.isRequired,
+    member_type: PropTypes.string.isRequired,
   }
 
   state = {
@@ -18,18 +14,12 @@ class CollaboratorAddButton extends Component {
 
   addCollaborator = () => {
     const {
-      user_id, channel_id, mutate, onAdd,
+      member_id, member_type, onAdd,
     } = this.props;
 
     this.setState({ mode: 'adding' });
 
-    return mutate({
-      variables: {
-        user_id,
-        channel_id,
-      },
-    })
-      .then(onAdd)
+    return onAdd({ member_id, member_type })
       .catch(() => this.setState({ mode: 'error' }));
   }
 
@@ -38,6 +28,7 @@ class CollaboratorAddButton extends Component {
 
     return (
       <button
+        type="button"
         className="Button Button--size-xs"
         onClick={this.addCollaborator}
       >
@@ -50,5 +41,3 @@ class CollaboratorAddButton extends Component {
     );
   }
 }
-
-export default graphql(addCollaboratorMutation)(CollaboratorAddButton);
