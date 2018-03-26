@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { graphql } from 'react-apollo';
-
-import inviteCollaboratorMutation from 'react/components/CollaboratorSearch/components/CollaboratorInviteButton/mutations/inviteCollaborator';
 
 import SearchResult from 'react/components/CollaboratorSearch/components/SearchResult';
 
@@ -14,12 +11,10 @@ const Button = styled(SearchResult)`
   font-weight: bold;
 `;
 
-class CollaboratorInviteButton extends Component {
+export default class CollaboratorInviteButton extends Component {
   static propTypes = {
-    mutate: PropTypes.func.isRequired,
-    onAdd: PropTypes.func.isRequired,
+    onInvite: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
-    channel_id: PropTypes.number.isRequired,
   }
 
   state = {
@@ -27,19 +22,11 @@ class CollaboratorInviteButton extends Component {
   }
 
   invite = () => {
-    const {
-      email, channel_id, mutate, onAdd,
-    } = this.props;
+    const { email, onInvite } = this.props;
 
     this.setState({ mode: 'inviting' });
 
-    return mutate({
-      variables: {
-        email,
-        channel_id,
-      },
-    })
-      .then(onAdd)
+    return onInvite({ email })
       .catch(() => this.setState({ mode: 'error' }));
   }
 
@@ -58,5 +45,3 @@ class CollaboratorInviteButton extends Component {
     );
   }
 }
-
-export default graphql(inviteCollaboratorMutation)(CollaboratorInviteButton);

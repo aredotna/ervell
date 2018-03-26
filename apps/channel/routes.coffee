@@ -1,3 +1,6 @@
+{ default: ssr } = require '../../react/apollo/ssr.js'
+{ default: CollaboratorsList } = require '../../react/components/CollaboratorsList/index.js'
+
 Channel = require '../../models/channel'
 graphQL = require '../../lib/graphql'
 
@@ -27,9 +30,18 @@ graphQL = require '../../lib/graphql'
       channel.fetch(data: auth_token: token)
       channel.related().collaborators.fetch(data: auth_token: token)
       graphQL(token: token, query: canQuery, variables: options)
+
+      req.apollo.render(CollaboratorsList, {
+        channel_id: req.params.channel_slug
+      })
     ]
 
-    .then ([_channel, _collaborators, { channel: { can }}]) ->
+    .then ([
+      _channel,
+      _collaborators,
+      { channel: { can } },
+      collaboratorsList
+    ]) ->
       if channel.get('class') is 'User'
         return res.redirect 301, "/#{channel.get 'slug'}"
 
@@ -45,6 +57,7 @@ graphQL = require '../../lib/graphql'
         collaborators: channel.related().collaborators.models
         author: channel.related().author
         can: can or {}
+        collaboratorsList: collaboratorsList
 
     .catch next
 

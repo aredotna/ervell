@@ -16,4 +16,8 @@ export default {
     h5: '1.25rem',
     h6: '1rem',
   },
+  lineHeight: {
+    base: 1.33,
+    tall: 1.5,
+  },
 };

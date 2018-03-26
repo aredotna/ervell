@@ -1,18 +1,12 @@
 import gql from 'graphql-tag';
 
-import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
+import collaboratorsListFragment from 'react/components/CollaboratorsList/fragments/collaboratorsList';
 
 export default gql`
   query ChannelCollaboratorsQuery($channel_id: ID!) {
     channel(id: $channel_id) {
-      id
-      can {
-        manage_collaborators
-      }
-      collaborators {
-        ...CollaboratorLink
-      }
+      ...CollaboratorsList
     }
   }
-  ${collaboratorLinkFragment}
+  ${collaboratorsListFragment}
 `;

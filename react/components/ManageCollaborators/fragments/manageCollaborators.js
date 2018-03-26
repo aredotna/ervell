@@ -1,16 +1,20 @@
 import gql from 'graphql-tag';
 
-import managedCollaboratorFragment from 'react/components/ManageCollaborators/components/ManagedCollaborator/fragments/managedCollaborator';
+import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
+import collaboratorsListFragment from 'react/components/CollaboratorsList/fragments/collaboratorsList';
 
 export default gql`
   fragment ManageCollaborators on Channel {
-    id
+    __typename
+    id: slug
     counts {
       collaborators
     }
-    collaborators {
-      ...ManagedCollaborator
+    collaborators: members {
+      ...ManagedMember
     }
+    ...CollaboratorsList
   }
-  ${managedCollaboratorFragment}
+  ${managedMemberFragment}
+  ${collaboratorsListFragment}
 `;

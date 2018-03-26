@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { provide } from 'react/apollo';
+import { wrapWithApolloProvider, initApolloClient } from 'react/apollo';
 import mount from 'react/util/mount';
 import unmount from 'react/util/unmount';
 
@@ -18,7 +18,7 @@ export default class Modal {
   open = () => {
     document.body.appendChild(this.el);
 
-    this.Provided = provide(this.Component, {
+    this.Provided = wrapWithApolloProvider(initApolloClient())(this.Component, {
       onClose: this.close,
       ...this.props,
     });

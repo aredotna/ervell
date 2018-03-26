@@ -11,6 +11,7 @@
   "plugins": [
     "transform-runtime",
     ["module-resolver", {
+      "extensions": [".js", ".jsx"],
       "root": ["./"]
     }],
     "transform-class-properties"
