@@ -121,5 +121,8 @@ graphQL = require '../../lib/graphql'
         author: channel.related().author
         followers: true
         can: can
+        # TODO: Consolidate these routes
+        collaboratorsList:
+          state: {}
 
     .catch next
