@@ -1,0 +1,14 @@
+- var hrefs = {}
+- hrefs.premium = 'https://www.are.na/tools/premium';
+- hrefs.investor = 'https://www.are.na/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html';
+- var href = hrefs[badge];
+
+a.UserFlair(
+  class="UserFlair--#{badge} #{isToggleable ? 'UserFlair--toggleable' : ''}"
+  href= href
+)
+  .UserFlair__logo
+    include ../../../../public/images/arena-mark.svg
+
+  .UserFlair__badge
+    span= badge

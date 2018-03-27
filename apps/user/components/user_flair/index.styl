@@ -1,0 +1,59 @@
+user-flair-badge-font-size = 16px
+user-flair-logo-width = 0.88em
+
+inexplicable-path-font-size = 1em
+empty-space-width = 0.33em
+
+.UserFlair
+  position relative
+  display inline-block
+  margin 0 0 0 empty-space-width
+  width user-flair-logo-width
+  height inexplicable-path-font-size
+  vertical-align bottom
+
+  &__badge
+  &__logo
+    position absolute
+    top 50%
+    left 0
+    transform translateY(-50%)
+
+  &__badge
+    display none
+    text-transform uppercase
+    font-family 'Arial Narrow', 'Arial', sans-serif
+    font-size user-flair-badge-font-size
+    font-weight bold
+
+    > span
+      vertical-align middle
+
+  &__logo
+    width user-flair-logo-width
+    height 100%
+
+    > svg
+      width 100%
+      height auto
+
+  // Modifiers
+  &--investor
+    &, &:hover, &:visited
+      color colors-state-invest
+      fill @color
+
+  &--premium
+    &, &:hover, &:visited
+      color colors-state-premium
+      fill @color
+
+  &--toggleable
+    &:hover
+      .UserFlair
+        &__logo
+          display none
+
+        &__badge
+          display block
+
