@@ -1,17 +1,21 @@
 extends ../../../components/path/templates/path
 
 block path
-  li.path__username(class=author.isPremium() ? 'is-premium' : '')
-    a(href="/" + author.get('slug'))=author.get('username')
-    if author.isPremium() && !followers && !following
-      a.premium-badge(href="/tools/premium")
-        .premium-badge__stars ✶✶
-        .premium-badge__cracker
-          include ../../../public/images/premium.svg
+  li.path__username
+    a( href="/#{author.get('slug')}" )
+      = author.get('username')
+
+    - var badge = author.get('badge');
+    - var isToggleable = !followers && !following;
+    if badge
+      include ../components/user_flair/index.jade
+
   if followers
-    li.path__sub Followers
+    li.path__sub
+      strong Followers
   if following
-    li.path__sub Following
+    li.path__sub
+      strong Following
 
 block right
   if author && user && author.id == user.id
