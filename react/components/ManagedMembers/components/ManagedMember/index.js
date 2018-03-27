@@ -115,7 +115,7 @@ export default class ManagedMembers extends Component {
             {mode === 'clicked' &&
               <Warning>
                 {currentUserService().id === member.id &&
-                  confirmationSelfWarning
+                  `${confirmationSelfWarning} `
                 }
 
                 {`${confirmationWarning} `}
