@@ -1,8 +1,9 @@
-user-flair-badge-font-size = 16px
-user-flair-logo-width = 0.88em
-
-inexplicable-path-font-size = 1em
+inexplicable-path-font-size = 28px
+inexplicable-path-font-size-sm = 16px
 empty-space-width = 0.33em
+user-flair-badge-font-size = unit(16 / inexplicable-path-font-size, 'em')
+user-flair-badge-font-size-sm = unit(12 / inexplicable-path-font-size-sm, 'em')
+user-flair-logo-width = 0.88em
 
 .UserFlair
   position relative
@@ -34,8 +35,13 @@ empty-space-width = 0.33em
     height 100%
 
     > svg
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      left 0
       width 100%
-      height auto
+      height 100%
 
   // Modifiers
   &--investor
@@ -57,3 +63,17 @@ empty-space-width = 0.33em
         &__badge
           display block
 
+// Handle sticky path case
+.stuck
+  .UserFlair
+    // Sticky path is vertically-centered using line-height
+    // Don't be like sticky path.
+    vertical-align middle
+
+    &__logo
+      position relative
+      top -1px // because line-height centering
+      transform none
+
+    &__badge
+      font-size user-flair-badge-font-size-sm
