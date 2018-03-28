@@ -45,6 +45,13 @@
                   target='_blank'
                   rel='nofollow'
                 ) Find original
+          
+          if block.get('class') == 'Text'
+            a(
+              href="https://www.google.com/#safe=off&q=\"#{block.get('content')}\""
+              target='_blank'
+              rel='nofollow'
+            ) Find original
 
     unless sd.SHARE
       section.BlockSidebar__section
