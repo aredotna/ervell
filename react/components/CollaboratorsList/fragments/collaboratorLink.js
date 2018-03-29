@@ -23,6 +23,7 @@ export default gql`
       }
       can {
         manage
+        manage_users
       }
     }
   }

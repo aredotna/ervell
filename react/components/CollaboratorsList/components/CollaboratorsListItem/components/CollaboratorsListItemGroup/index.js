@@ -21,7 +21,7 @@ export default class CollaboratorsListItemGroup extends Component {
   handleClick = () => {
     const { channel_id, group: { id, can } } = this.props;
 
-    if (can.manage) {
+    if (can.manage || can.manage_users) {
       const modal = new Modal(ManageGroup, { id, channel_id });
       modal.open();
       return;
@@ -51,7 +51,7 @@ export default class CollaboratorsListItemGroup extends Component {
           {mode === 'resting' &&
             <span>
               {' '}(
-                {can.manage ? 'edit' : '...'}
+                {can.manage || can.manage_users ? 'edit' : '...'}
               )
             </span>
           }
