@@ -6,11 +6,21 @@ export default gql`
   fragment ManageGroup on Group {
     id
     name
-    user {
+    owner: user {
       ...ManagedMember
     }
-    users {
-      ...ManagedMember
+    memberships {
+      id
+      member: user {
+        ...ManagedMember
+      }
+      can {
+        manage
+      }
+    }
+    can {
+      manage
+      manage_users
     }
   }
   ${managedMemberFragment}

@@ -54,7 +54,7 @@ class ManageCollaborators extends Component {
       data: {
         channel: {
           counts,
-          collaborators,
+          memberships,
         },
       },
     } = this.props;
@@ -79,7 +79,7 @@ class ManageCollaborators extends Component {
             </TitledDialog.Label>
 
             <ManagedMembers
-              members={collaborators}
+              memberships={memberships}
               onRemove={this.removeCollaborator}
               confirmationWarning="Are you sure?"
               confirmationSelfWarning="You will lose access to this channel."

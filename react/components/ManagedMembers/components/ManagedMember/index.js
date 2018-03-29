@@ -30,6 +30,7 @@ const Information = styled.div`
   justify-content: space-around;
   padding-left: 1em;
   font-size: ${Styles.Type.size.xs};
+  line-height: ${Styles.Type.lineHeight.base};
 `;
 
 const Name = styled.a`
@@ -45,9 +46,14 @@ const Amount = styled.div`
   color: ${Styles.Colors.gray.medium};
 `;
 
+const Button = styled.button`
+  align-self: flex-start;
+`;
+
 export default class ManagedMembers extends Component {
   static propTypes = {
     isOwner: PropTypes.bool,
+    isRemovable: PropTypes.bool,
     confirmationWarning: PropTypes.string,
     confirmationSelfWarning: PropTypes.string,
     onRemove: PropTypes.func.isRequired,
@@ -56,16 +62,13 @@ export default class ManagedMembers extends Component {
 
   static defaultProps = {
     isOwner: false,
+    isRemovable: true,
     confirmationWarning: 'Are you sure?',
     confirmationSelfWarning: null,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      mode: props.isOwner ? 'owned' : 'resting',
-    };
+  state = {
+    mode: 'resting',
   }
 
   remove = () => {
@@ -92,7 +95,14 @@ export default class ManagedMembers extends Component {
 
   render() {
     const { mode } = this.state;
-    const { member, confirmationWarning, confirmationSelfWarning } = this.props;
+
+    const {
+      member,
+      isOwner,
+      isRemovable,
+      confirmationWarning,
+      confirmationSelfWarning,
+    } = this.props;
 
     return (
       <Container>
@@ -128,20 +138,29 @@ export default class ManagedMembers extends Component {
           </Information>
         </Representation>
 
-        <button
-          className={`Button Button--size-xs ${mode === 'clicked' && 'Color--state-alert'}`}
-          onClick={this.remove}
-          type="button"
-          disabled={mode === 'owned'}
-        >
-          {{
-            owned: 'Owner',
-            resting: 'Remove',
-            clicked: 'Cancel',
-            removing: 'Removing...',
-            error: 'Error',
-          }[mode]}
-        </button>
+        {isOwner &&
+          <Button
+            className="Button Button--size-xs"
+            disabled
+          >
+            Owner
+          </Button>
+        }
+
+        {!isOwner && isRemovable &&
+          <Button
+            className={`Button Button--size-xs ${mode === 'clicked' && 'Color--state-alert'}`}
+            onClick={this.remove}
+            type="button"
+          >
+            {{
+              resting: 'Remove',
+              clicked: 'Cancel',
+              removing: 'Removing...',
+              error: 'Error',
+            }[mode]}
+          </Button>
+        }
       </Container>
     );
   }
