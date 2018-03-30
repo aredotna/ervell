@@ -89,6 +89,8 @@ class ManageGroup extends Component {
             this.setState({ mode: 'error' });
           });
       default:
+        this.setState({ mode: 'submitting' });
+
         return updateGroup({
           variables: {
             id,
