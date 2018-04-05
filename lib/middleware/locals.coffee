@@ -12,6 +12,10 @@ module.exports = (req, res, next) ->
   res.locals._ = _
   res.locals.homeHref = req.user?.homePath() or '/'
 
+  # respect do not track headers
+  res.locals.doNotTrack = res.locals.sd.DO_NOT_TRACK = req.headers.dnt 
+  
+
   # TODO: remove after campaign
   # only show if the user is logged in and confirmed
   # and hasn't closed the CTA
