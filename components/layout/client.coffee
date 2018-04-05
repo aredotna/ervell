@@ -132,6 +132,7 @@ setupAjaxHeaders = ->
 # Initialize analytics & track page views
 setupAnalytics = ->
   return if sd.SAVE # Doesn't track Bookmarklet view (?)
+  return if sd.DO_NOT_TRACK
 
   analytics ga: ga
   analytics.registerCurrentUser()

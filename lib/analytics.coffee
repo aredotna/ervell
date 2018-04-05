@@ -1,9 +1,10 @@
 { extend, reduce } = require 'underscore'
 { capitalize } = require 'underscore.string'
-{ NODE_ENV, CURRENT_USER, GOOGLE_ANALYTICS_ID } = require('sharify').data
+{ NODE_ENV, CURRENT_USER, GOOGLE_ANALYTICS_ID, DO_NOT_TRACK } = require('sharify').data
 
 module.exports = (options) =>
   return if module.exports.getUserAgent()?.indexOf?('PhantomJS') > -1
+  return if DO_NOT_TRACK
 
   { @ga, @location } = options
 
