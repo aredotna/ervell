@@ -10,9 +10,21 @@ export default gql`
     counts {
       collaborators
     }
+
     collaborators: members {
       ...ManagedMember
     }
+
+    memberships {
+      id
+      member {
+        ...ManagedMember
+      }
+      can {
+        manage
+      }
+    }
+
     ...CollaboratorsList
   }
   ${managedMemberFragment}

@@ -89,6 +89,8 @@ class ManageGroup extends Component {
             this.setState({ mode: 'error' });
           });
       default:
+        this.setState({ mode: 'submitting' });
+
         return updateGroup({
           variables: {
             id,
@@ -156,7 +158,7 @@ class ManageGroup extends Component {
 
   renderDialog() {
     const { mode, name } = this.state;
-    const { data: { group, group: { user, users } } } = this.props;
+    const { data: { group, group: { owner, memberships } } } = this.props;
 
     switch (mode) {
       case 'delete':
@@ -190,6 +192,7 @@ class ManageGroup extends Component {
                 placeholder="enter group name"
                 onChange={this.handleName}
                 value={name}
+                disabled={!group.can.manage}
               />
             </TitledDialog.Section>
 
@@ -207,13 +210,20 @@ class ManageGroup extends Component {
 
             <TitledDialog.Section>
               <TitledDialog.Label>
-                {users.length + 1} Collaborator{(users.length + 1) === 1 ? '' : 's'}
+                {memberships.length + 1} Collaborator{(memberships.length + 1) === 1 ? '' : 's'}
               </TitledDialog.Label>
 
               <ManagedMembers
-                owner={user}
-                members={[user, ...users]}
+                owner={owner}
+                memberships={memberships}
                 onRemove={this.handleRemoveUser}
+                confirmationWarning="Are you sure?"
+                confirmationSelfWarning={`
+                  Removing yourself from ${name} means you will
+                  lose access to all channels ${name} is collaborating on.
+                  There is no way to undo this action, and only the group’s
+                  creator can re-add you.
+                `}
               />
             </TitledDialog.Section>
           </div>

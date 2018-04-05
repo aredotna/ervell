@@ -8,7 +8,12 @@ import managedMemberFragment from 'react/components/ManagedMembers/components/Ma
 export default class ManagedMembers extends Component {
   static propTypes = {
     owner: propType(managedMemberFragment),
-    members: PropTypes.arrayOf(propType(managedMemberFragment)).isRequired,
+    memberships: PropTypes.arrayOf(PropTypes.shape({
+      can: PropTypes.shape({
+        manage: PropTypes.bool.isRequired,
+      }).isRequired,
+      member: propType(managedMemberFragment).isRequired,
+    })).isRequired,
     onRemove: PropTypes.func.isRequired,
     confirmationWarning: PropTypes.string,
     confirmationSelfWarning: PropTypes.string,
@@ -23,7 +28,7 @@ export default class ManagedMembers extends Component {
   render() {
     const {
       owner,
-      members,
+      memberships,
       onRemove,
       confirmationWarning,
       confirmationSelfWarning,
@@ -32,11 +37,23 @@ export default class ManagedMembers extends Component {
 
     return (
       <div {...rest}>
-        {members.map(member => (
+        {owner &&
+          <ManagedMember
+            key={owner.id}
+            member={owner}
+            isOwner
+            isRemovable={false}
+            onRemove={onRemove}
+            confirmationWarning={confirmationWarning}
+            confirmationSelfWarning={confirmationSelfWarning}
+          />
+        }
+
+        {memberships.map(({ can, member }) => (
           <ManagedMember
             key={member.id}
             member={member}
-            isOwner={owner && owner.id === member.id}
+            isRemovable={can.manage}
             onRemove={onRemove}
             confirmationWarning={confirmationWarning}
             confirmationSelfWarning={confirmationSelfWarning}
