@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-Cookies = require 'cookies-js'
+Dismisser = require '../has_seen/dismisser.coffee'
 analytics = require '../../lib/analytics.coffee'
 Promise = require 'bluebird-q'
 
@@ -8,7 +8,10 @@ module.exports = class TipView extends Backbone.View
     'click': 'onClick'
     'click .js-close' : 'close'
 
-  initialize: ({ @user }) -> #
+  initialize: ({ @user }) ->
+    @dismisser = new Dismisser
+      key: @model.id
+      limit: 1
 
   onClick: (e) ->
     e.preventDefault()
@@ -52,6 +55,9 @@ module.exports = class TipView extends Backbone.View
         @remove()
 
   remove: ->
-    Cookies.set @model.id, true
+    @dismisser.dismiss()
+    
     analytics.track.click 'Block tip closed', id: @model.id
+
     super
+
