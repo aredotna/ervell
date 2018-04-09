@@ -19,7 +19,7 @@ _ = require 'underscore'
     res.locals.sd.BLOCK = block.toJSON()
     res.locals.sd.COMMENTS = comments.toJSON()
     res.locals.sd.CURRENT_ACTION = 'block'
-    canIndexConnections = _.all block.get('connections'), (c) -> c.can_index
+    canIndexConnections = _.all block.get('connections'), (c) -> c.user?.can_index
     canIndexUser = block.get('user')?.can_index
 
     res.render 'index',
