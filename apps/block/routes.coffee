@@ -19,11 +19,14 @@ _ = require 'underscore'
     res.locals.sd.BLOCK = block.toJSON()
     res.locals.sd.COMMENTS = comments.toJSON()
     res.locals.sd.CURRENT_ACTION = 'block'
+    canIndexConnections = _.all block.get('connections'), (c) -> c.can_index is true
+    canIndexUser = block.get('user')?.can_index
 
     res.render 'index',
       block: block
       comments: comments
       md: markdown
+      canIndex: canIndexUser && canIndexConnections
       tab: req.params.tab || 'info'
       connections: block.connections()
 
