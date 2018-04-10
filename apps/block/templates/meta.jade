@@ -10,3 +10,6 @@ if block.has('image')
 - description = (block.has('description') && block.get('description').replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
 meta(name="twitter:description", content=description)
 meta(property="og:description" content=description)
+
+unless canIndex
+  meta(name="robots" content="none")
