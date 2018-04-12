@@ -1,0 +1,41 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  / Pricing
+
+block meta
+  meta(name="twitter:title", content="Are.na / Pricing")
+  meta(name="twitter:url", content="https://www.are.na/pricing")
+  meta(property="og:title" content="Are.na / Pricing")
+  meta(property="og:url" content="https://www.are.na/pricing")
+  meta(name="twitter:image", content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+  meta(property="og:image" content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
+
+  .Page
+    section.AboutSection.AboutSection--pricing
+      h3.Type.Type--size-h3.Utility--align-center
+        | Why upgrade to Premium?
+      p.Type.Type--lh-tall.Utility--align-center
+        | Are.na is free to use in public.
+        br
+        | Go Premium for privacy and support.
+      include ../components/pricing_squares/index
+      p.Type.Type--lh-tall.Utility--align-center
+        | We offer a 50% discount on Premium plans 
+        br
+        | for students and educators.&nbsp;
+        strong 
+          a(href="/education") Learn more
+      p.Type.Type--lh-tall.Utility--align-center
+        | Team plans design for businesses will be available soon.
+        br
+        | Get in touch with #[strong #[a(href="mailto:info@are.na") info@are.na]] to learn more.
+    hr.Base

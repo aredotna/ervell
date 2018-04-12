@@ -1,0 +1,52 @@
+base_square_height = 20em
+base_square_width = 17em
+
+.PricingSquares
+  display flex
+  flex-direction row
+  justify-content center
+  align-items center
+  margin 3em 0
+
+  .Square
+    border 2px solid colors-gray-border
+    height base_square_height
+    width base_square_width
+    padding 2em
+    margin-left -2px // collapsed borders
+    text-align center
+    display flex
+    flex-direction column
+
+    &__features
+      margin-bottom auto
+
+    &__price
+      font-size font-size-h5
+      &__sub
+        margin-top .5em
+        font-size font-size-h6
+
+    .Type
+      text-align center
+      collapsed-margins(.25em)
+
+    .Type.Type--size-h4
+      font-weight bold
+      margin-bottom 1em
+
+    &--arena
+      border 2px solid colors-gray-border-bold
+
+    &--premium
+      border 2px solid colors-state-premium
+      z-index 1
+      height base_square_height + 2em
+      color colors-state-premium
+      padding 2.5em 2em
+
+      .Type
+        color colors-state-premium
+
+      .Type.Type--size-h4
+          text-transform uppercase
