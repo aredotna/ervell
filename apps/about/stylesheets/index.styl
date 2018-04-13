@@ -4,6 +4,10 @@
   &--small
     margin-bottom 4em
 
+  &--narrow
+    max-width 30em
+    margin 0 auto
+
   &__buttons
     text-align center
 
@@ -12,6 +16,9 @@
 
   .Coupon
     color colors-state-premium
+
+  img
+    max-width 100%
 
 .AboutFeynman
   margin 2em 0
@@ -52,6 +59,7 @@ img.FaqImage
 
 @require '../components/pricing_table/index'
 @require '../components/pricing_squares/index'
+@require '../components/pricing_features/index'
 @require '../components/posts/index'
 @require '../components/lab_posts/index'
 @require '../components/store_posts/index'

@@ -14,13 +14,16 @@ block meta
 block scripts
   script( src= asset('/assets/about.js') )
 
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
 block container
   include ../../../components/logged_out_nav/templates/header
 
   - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
 
   .Page
-    section.AboutSection.AboutSection--pricing
+    section.AboutSection.AboutSection--small
       h3.Type.Type--size-h3.Utility--align-center
         | Why upgrade to Premium?
       p.Type.Type--lh-tall.Utility--align-center
@@ -38,4 +41,58 @@ block container
         | Team plans design for businesses will be available soon.
         br
         | Get in touch with #[strong #[a(href="mailto:info@are.na") info@are.na]] to learn more.
-    hr.Base
+  hr.Base
+  .Page
+    section.AboutSection.AboutSection--small
+      h3.Type.Type--size-h3.Utility--align-center
+        | What features come free?
+      include ../components/pricing_features/index
+  hr.Base
+  .Page
+    section.AboutSection.AboutSection--small
+      h3.Type.Type--size-h3.Utility--align-center
+        | Are.na is used by people and teams at:
+      br
+      img(src="https://d2w9rnfcy7mm78.cloudfront.net/2034139/original_c3a3a9bbb15964f69af8cc2bfdbc28f7.png")
+  hr.Base
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small.AboutSection--narrow
+      h3.Type.Type--size-h3.Utility--align-center
+        | FAQs
+      br
+      h4.Type.Type--size-h4.Utility--align-center
+        | Why do most people upgrade to Are.na Premium?
+      p.Type.Type--lh-tall
+        | The main reason is privacy. With a regular plan you can only hide 100 “blocks,” or individual pieces of content on Are.na. Premium gives you unlimited space to collaborate privately for personal or professional purposes.
+      br
+      h4.Type.Type--size-h4.Utility--align-center 
+        | What are blocks and channels?
+      p.Type.Type--lh-tall
+        | A block is any individual piece of content on Are.na, such as an image, a document, a video, or a web page. You add blocks to collections called channels.
+      p.Type.Type--lh-tall
+        | You can connect any block you see on Are.na to one of your own channels by clicking the “connect” button. You can also add one channel to another channel the same way. Very meta.
+      br
+      h4.Type.Type--size-h4.Utility--align-center 
+        | What happens if I hit the private block limit on the regular plan?
+      p.Type.Type--lh-tall
+        | You’ll be prompted to upgrade to Premium. You can still use Are.na as normal, you just won’t be able to add more private blocks.
+      br
+      h4.Type.Type--size-h4.Utility--align-center 
+        | Can I collaborate with other people on Are.na without paying?
+      p.Type.Type--lh-tall
+        | Of course! The whole point of Are.na is to build channels together and learn from one another. You’ll still be limited to 100 private blocks, but you can collaborate on as many public channels as you want.
+      br
+      h4.Type.Type--size-h4.Utility--align-center 
+        | Can I pay month-to-month for my Are.na Premium membership?
+      p.Type.Type--lh-tall
+        | Yes. 
+      p.Type.Type--lh-tall
+        | Are.na Premium costs $5 per month or $45 per year, depending on how you prefer to pay.
+      br
+      h4.Type.Type--size-h4.Utility--align-center 
+        | How does Are.na process my payment? Can I pay with Paypal?
+      p.Type.Type--lh-tall
+        | We handle billing via Stripe. If you’d like to use Paypal instead, please email us at help@are.na.
+  hr.Base
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small.AboutSection--narrow &nbsp;
