@@ -4,12 +4,14 @@ header.LoggedOutHeader.js-logged-out-header
       include ../../../public/images/arena-mark.svg
     strong Are.na
 
+  unless sd.CURRENT_PATH === '/'
+    include ../components/menu/index
 
   .LoggedOutHeader__menu
       a( href='/pricing' data-id="pricing" ) Pricing
       a( href='/explore' data-id="explore" ) Explore
       a( href='/blog' data-id="blog" ) Blog
-
+      
       if user
         a.js-log-out( href='/me/sign_out' ) Log out
       else
