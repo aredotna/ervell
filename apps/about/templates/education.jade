@@ -20,7 +20,7 @@ block footer
 block container
   include ../../../components/logged_out_nav/templates/header
 
-  - upgradeLink = user && user ? '/settings/billing' : '/about#pricing'
+  - upgradeLink = user ? '/settings/billing' : '/pricing'
 
   .Page.Page--narrow
     section.AboutSection.AboutSection--small.js-section
