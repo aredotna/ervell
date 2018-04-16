@@ -50,3 +50,11 @@ base_square_width = 17em
 
       .Type.Type--size-h4
           text-transform uppercase
+
+@media (max-width: 50em)
+  // Switch from side by side layout to stacked
+  .PricingSquares
+    flex-direction column
+
+    .Square
+      margin 1em 0
