@@ -22,7 +22,7 @@ ExploreBlocks = require '../../collections/explore_blocks'
       # Re-initialize the collection with the possibly cached response to parse it
       exploreBlocks = new ExploreBlocks exploreBlocksResponse, parse: true
       res.locals.sd.EXPLORE_BLOCKS = exploreBlocks.toJSON()
-      extend locals, blocks: exploreBlocks.models
+      extend locals, explore_blocks: exploreBlocks.models
 
     extend locals, splash: res.locals.sd.HOMEPAGE_SPLASH
 
