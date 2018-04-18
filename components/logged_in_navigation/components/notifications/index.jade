@@ -1,4 +1,4 @@
-- var count = feed && feed.getNumberUnread() || 0
+- var count = unread_count || feed && feed.getNumberUnread() || 0
 
 .DropdownHover__trigger
   span.Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
