@@ -15,6 +15,9 @@
       if feed.length
         for group in feed.models
           include ./templates/notification
+      else if is_fetching
+        .Notification
+          | Fetching notifications&hellip;
       else
         .Notification
           | No notifications yet
