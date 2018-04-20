@@ -20,9 +20,7 @@ module.exports = class NotificationsView extends Backbone.View
 
         @collection.markRead()
 
-        delay (=> @state.set('unread_count', 0)), 250
-
-      .one 'mouseleave', => delay (=> @render()), 250
+      .one 'mouseleave', => delay (=> @state.set('unread_count', 0)), 250
 
   render: ->
     @$el.html template
