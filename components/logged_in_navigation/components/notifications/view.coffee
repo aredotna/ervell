@@ -18,11 +18,9 @@ module.exports = class NotificationsView extends Backbone.View
         Promise(@collection.fetch())
           .then => @state.set('is_fetching', false)
 
+      .one 'mouseleave', =>
         @collection.markRead()
-
-        delay (=> @state.set('unread_count', 0)), 250
-
-      .one 'mouseleave', => delay (=> @render()), 250
+        @state.set('unread_count', 0)
 
   render: ->
     @$el.html template
