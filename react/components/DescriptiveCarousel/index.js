@@ -18,7 +18,7 @@ const Slide = styled.div`
 `;
 
 const Inner = styled.div`
-  padding: 2rem 2rem 0;
+  padding: 2rem 2rem 1rem;
   position: relative;
   display: flex;
   align-items: center;
