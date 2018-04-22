@@ -17,3 +17,5 @@ app.get '/pricing', (_req, res) ->
   res.redirect '/about#pricing'
 app.get '/education', (_req, res) ->
   res.render 'education'
+app.get '/experiments', (_req, res) ->
+  res.render 'experiments'

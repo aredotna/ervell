@@ -1,0 +1,47 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  Experiments
+
+block meta
+  meta(name="twitter:title", content="Are.na Experiments")
+  meta(name="twitter:url", content="https://www.are.na/experiments")
+  meta(property="og:title" content="Are.na Experiments")
+  meta(property="og:url" content="https://www.are.na/experiments")
+  meta(name="twitter:image", content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+  meta(property="og:image" content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page
+    section.AboutSection.AboutSection--small
+      h1.Type.Type--size-h2.Utility--align-center
+        | Are.na Experiments
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | We’ve been lucky to collaborate with some amazing creative teams and institutions to develop custom digital projects powered by the Are.na API. Here are a few of the projects we’ve worked on:
+      .PageNarrowBreakout
+        .AboutCarousel.js-experiments-carousel
+          | &nbsp;
+
+  hr.Base
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small
+      h1.Type.Type--size-h2.Utility--align-center
+        | Open Source
+
+      p.Type.Type--lh-tall
+        | Are.na is "#[a(href="http://code.dblock.org/2015/02/09/becoming-open-source-by-default.html") Open Source by Default]" and we’re always excited to see people using the platform in new ways. You can find a list of projects built with Are.na here and find more resources in the Are.na Community Dev Lounge. Don’t hesitate to reach out with any questions!
+      
+      .AboutSection__buttons
+        a.Button.Button--size-lg( href='https://dev.are.na' )
+          | Browse the API
+        a.Button.Button--size-lg( href='https://github.com/aredot' )
+          | GitHub
