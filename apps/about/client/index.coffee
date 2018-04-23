@@ -1,6 +1,13 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
+{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
+{ default: ExperimentsCarousel } = require '../../../react/components/ExperimentsCarousel/index.js'
+{ CURRENT_PATH } = require('sharify').data
 
 module.exports = ->
+  if CURRENT_PATH is '/experiments'
+    mountWithApolloProvider ExperimentsCarousel, {}, $('.js-experiments-carousel')
+
+
   $html = $('html, body')
   $el = $('.js-about')
   $links = $el.find('a[href]')
@@ -38,3 +45,5 @@ module.exports = ->
   id = location.hash.substring(1)
 
   scrollToId id
+
+

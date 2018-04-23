@@ -14,6 +14,10 @@ block meta
 block scripts
   script( src= asset('/assets/about.js') )
 
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+
 block container
   include ../../../components/logged_out_nav/templates/header
 
@@ -21,15 +25,17 @@ block container
 
   .Page.Page--narrow
     section.AboutSection.AboutSection--small.js-section
+      h2.Type.Type--size-h2.Utility--align-center
+        | Students and educators get 
+        br
+        | 50% off Are.na Premium
       img.EduImg(src="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
-      h4.Type.Type--size-h4.Utility--align-center
-        | Students and educators get 50% off Are.na Premium
 
-      p.Type.Type--lh-tall
+      p.Type.Type--lh-tall.AboutParagraph
         | An Are.na premium membership allows you to save an unlimited amount of private content and gets you access to new features and support.
 
-      p.Type.Type--lh-tall
-        | Premium normally costs $5 / month or $45 / year, but #[strong students and educators can now take 50% off the price of either membership]. Just enter the coupon #[strong.Coupon studenthalf] when you #[a(href=upgradeLink) upgrade your account].
+      p.Type.Type--lh-tall.AboutParagraph
+        | Premium normally costs $5 / month or $45 / year, but students and educators can take 50% off the price of either membership. Just enter the coupon <strong class="Coupon"> studenthalf</strong> when you <strong><a href=upgradeLink> upgrade your account</a></strong>.
 
       if user
         p.Type.Type--lh-tall
@@ -39,20 +45,22 @@ block container
       h4.Type.Type--size-h4.Utility--align-center
         | About Are.na for Education
 
-      p.Type.Type--lh-tall
-        | If you’re a student, you can use Are.na to collect all kinds of research in one place — and structure it all visually. Because you can link your research to anyone else’s, Are.na gives puts a growing archive of shared knowledge at your fingertips.
+      p.Type.Type--lh-tall.AboutParagraph
+        | If you’re a student, you can use Are.na to collect all kinds of research in one place — and structure it all visually. Because you can link your research to anyone else’s, Are.na puts a growing archive of shared knowledge at your fingertips.
       
-      p.Type.Type--lh-tall
-        | If you’re an educator, Are.na is a perfect place to host resources for classes and workshops. Check out our #[a(href="http://s3.amazonaws.com/arena-attachments/1635133/ad5e2459400e0dd0d6f3c07e2c9e686f.pdf?1516720354" target="_blank") step-by-step guide] to setting up a class on Are.na.
+      p.Type.Type--lh-tall.AboutParagraph
+        | If you’re an educator, Are.na is a perfect place to host resources for classes and workshops. Check out our <strong><a href="http://s3.amazonaws.com/arena-attachments/1635133/ad5e2459400e0dd0d6f3c07e2c9e686f.pdf?1516720354" target="_blank"> step-by-step guide</a></strong> to setting up a class on Are.na.
 
-      p.Type.Type--lh-tall
-        | Keep scrolling to see examples of how students and teachers are using Are.na, or visit our <a href="/about">about page</a> to learn more.
-
+      p.Type.Type--lh-tall.AboutParagraph
+        | Keep scrolling to see examples of how students and teachers are using Are.na, or visit our <strong><a href="/about">about page</a></strong> to learn more.
+  
+  hr.Base
+  .Page.Page--narrow
     section.AboutSection.AboutSection--small.js-section
       h4.Type.Type--size-h4.Utility--align-center
         | Examples
 
-      p.Type.Type--lh-tall
+      p.Type.Type--lh-tall.AboutParagraph
         | Click through the examples below to explore how Are.na members are using the platform for teaching and learning in a variety of settings.
 
       include ../components/education_examples/index
@@ -61,13 +69,15 @@ block container
         a.Button.Button--size-lg( href='https://www.are.na/christina-badal/teaching-on-are-na' )
           | See more&hellip;
 
+  hr.Base
+  .Page.Page--narrow
     section.AboutSection.AboutSection--small.js-section
       h4.Type.Type--size-h4.Utility--align-center
         | Contact Us for Support
 
-      p.Type.Type--lh-tall
-        | Are you a student, educator, or administrator working with a larger group or an institution? We’re happy to talk through your situation and help you start using Are.na. Send an email to #[a(href="mailto:help@are.na") help@are.na] to get in touch.
+      p.Type.Type--lh-tall.AboutParagraph
+        | Are you a student, educator, or administrator working with a larger group or an institution? We’re happy to talk through your situation and help you start using Are.na. Send an email to <strong><a href="mailto:help@are.na"> help@are.na</a></strong> to get in touch.
 
-      p.Type.Type--lh-tall
-        | We’re also working on a whole suite of team features so you can share accounts and manage your content in groups. <a href="https://confirmsubscription.com/h/d/728B9103B7704F3A">Sign up for our monthly newsletter</a> to get occasional updates.
+      p.Type.Type--lh-tall.AboutParagraph
+        | We’re also working on a whole suite of team features so you can share accounts and manage your content in groups. <strong><a href="https://confirmsubscription.com/h/d/728B9103B7704F3A">Sign up for our monthly newsletter</a></strong> to get occasional updates.
 
