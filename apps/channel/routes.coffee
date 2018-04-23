@@ -1,5 +1,5 @@
 { default: ssr } = require '../../react/apollo/ssr.js'
-{ default: CollaboratorsList } = require '../../react/components/CollaboratorsList/index.js'
+{ default: ChannelMetadata } = require '../../react/components/ChannelMetadata/index.js'
 
 Channel = require '../../models/channel'
 graphQL = require '../../lib/graphql'
@@ -31,8 +31,8 @@ graphQL = require '../../lib/graphql'
       channel.related().collaborators.fetch(data: auth_token: token)
       graphQL(token: token, query: canQuery, variables: options)
 
-      req.apollo.render(CollaboratorsList, {
-        channel_id: req.params.channel_slug
+      req.apollo.render(ChannelMetadata, {
+        id: req.params.channel_slug
       })
     ]
 
@@ -40,7 +40,7 @@ graphQL = require '../../lib/graphql'
       _channel,
       _collaborators,
       { channel: { can } },
-      collaboratorsList
+      channelMetadata
     ]) ->
       if channel.get('class') is 'User'
         return res.redirect 301, "/#{channel.get 'slug'}"
@@ -63,7 +63,7 @@ graphQL = require '../../lib/graphql'
         collaborators: channel.related().collaborators.models
         author: channel.related().author
         can: can or {}
-        collaboratorsList: collaboratorsList
+        channelMetadata: channelMetadata
 
     .catch next
 
@@ -128,7 +128,7 @@ graphQL = require '../../lib/graphql'
         followers: true
         can: can
         # TODO: Consolidate these routes
-        collaboratorsList:
+        channelMetadata:
           state: {}
 
     .catch next

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import collaboratorsListFragment from 'react/components/CollaboratorsList/fragments/collaboratorsList';
+import collaboratorsListFragment from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorsList';
 
 export default gql`
   query ChannelCollaboratorsQuery($channel_id: ID!) {

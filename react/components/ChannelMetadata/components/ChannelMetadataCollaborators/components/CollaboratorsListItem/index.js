@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
-import CollaboratorsListItemUser from 'react/components/CollaboratorsList/components/CollaboratorsListItem/components/CollaboratorsListItemUser';
-import CollaboratorsListItemGroup from 'react/components/CollaboratorsList/components/CollaboratorsListItem/components/CollaboratorsListItemGroup';
+import CollaboratorsListItemUser from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/CollaboratorsListItemUser';
+import CollaboratorsListItemGroup from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/CollaboratorsListItemGroup';
 
-import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
+import collaboratorLinkFragment from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink';
 
 export default class CollaboratorsListItem extends Component {
   static propTypes = {

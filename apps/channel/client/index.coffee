@@ -11,7 +11,7 @@ addBlock = require '../../../components/add_block/client/index.coffee'
 initShare = require '../components/share/index.coffee'
 
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
-{ default: CollaboratorsList } = require '../../../react/components/CollaboratorsList/index.js'
+{ default: ChannelMetadata } = require '../../../react/components/ChannelMetadata/index.js'
 
 module.exports = ->
   { shared: { current_user } } = mediator
@@ -32,11 +32,11 @@ module.exports = ->
 
   initShare()
 
-  if ($collaboratorsListEl = $('.js-collaborators-list')).length
+  if ($channelMetadataEl = $('.js-channel-metadata')).length
     mountWithApolloProvider(
-      CollaboratorsList,
-      { channel_id: CHANNEL.slug },
-      $collaboratorsListEl
+      ChannelMetadata,
+      { id: CHANNEL.slug },
+      $channelMetadataEl
     )
 
   channelView = new ChannelView

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
 import styled from 'styled-components';
-
-import collaboratorsListQuery from 'react/components/CollaboratorsList/queries/collaboratorsList';
 
 import Modal from 'react/components/UI/Modal';
 import CreateGroup from 'react/components/CreateGroup';
 import ManageCollaborators from 'react/components/ManageCollaborators';
-import CollaboratorsList from 'react/components/CollaboratorsList/CollaboratorsList';
+import CollaboratorsList from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsList';
 
 const StyledCollaboratorsList = styled(CollaboratorsList)`
   margin-bottom: 1em;
@@ -18,12 +15,10 @@ const Link = styled.a`
   display: block;
 `;
 
-class CollaboratorsListContainer extends Component {
+export default class CollaboratorsListContainer extends Component {
   static propTypes = {
     channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    data: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-    }).isRequired,
+    channel: PropTypes.shape({}).isRequired, // TODO
   }
 
   openManageCollaborators = () => {
@@ -46,11 +41,7 @@ class CollaboratorsListContainer extends Component {
   }
 
   render() {
-    const { data: { loading } } = this.props;
-
-    if (loading) return <div />;
-
-    const { channel_id, data: { channel: { can, collaborators } } } = this.props;
+    const { channel_id, channel: { can, collaborators } } = this.props;
 
     return (
       <div>
@@ -76,5 +67,3 @@ class CollaboratorsListContainer extends Component {
     );
   }
 }
-
-export default graphql(collaboratorsListQuery)(CollaboratorsListContainer);

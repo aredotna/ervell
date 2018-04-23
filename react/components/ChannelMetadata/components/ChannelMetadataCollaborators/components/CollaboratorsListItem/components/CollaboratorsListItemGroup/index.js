@@ -4,9 +4,9 @@ import { propType } from 'graphql-anywhere';
 
 import Modal from 'react/components/UI/Modal';
 import ManageGroup from 'react/components/ManageGroup';
-import Link from 'react/components/CollaboratorsList/components/CollaboratorsListItem/components/Link';
+import Link from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/Link';
 
-import collaboratorLinkFragment from 'react/components/CollaboratorsList/fragments/collaboratorLink';
+import collaboratorLinkFragment from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink';
 
 export default class CollaboratorsListItemGroup extends Component {
   static propTypes = {
