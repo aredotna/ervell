@@ -1,6 +1,6 @@
 Backbone = require 'backbone'
 { contains } = require 'underscore'
-{ API_URL, CAN } = require('sharify').data
+{ API_URL, CAN, NODE_ENV } = require('sharify').data
 Bp = require '../../../lib/vendor/backpusher.js'
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
@@ -30,7 +30,7 @@ module.exports = class ChannelView extends Backbone.View
       @$el.removeClass 'is-dragging'
 
   pusherSubscribe: ->
-    if @pusher = mediator.shared.pusher?.subscribe "channel-production-#{@channel.id}"
+    if @pusher = mediator.shared.pusher?.subscribe "channel-#{NODE_ENV}-#{@channel.id}"
       @listener = new Bp.Backpusher @pusher, @blocks
 
   updateSlug: ->

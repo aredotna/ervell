@@ -100,8 +100,11 @@ setupPusherAndCurrentUser = ->
 
   # TODO: Extract; split this function out
   if Pusher?
-    pusher = new Pusher sd.PUSHER_KEY
-    mediator.shared.pusher = pusher
+    mediator.shared.pusher = new Pusher sd.PUSHER_KEY, {
+      wsHost: 'ws.pusherapp.com'
+      httpHost: 'sockjs.pusher.com'
+      encrypted: true
+    }
 
 # TODO: Extract
 setupViews = ->
