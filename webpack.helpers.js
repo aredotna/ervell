@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// const { NODE_ENV } = process.env;
-// const isDevelopment = NODE_ENV === 'development';
+const { NODE_ENV } = process.env;
+const isDevelopment = NODE_ENV === 'development';
 
 function findAssets(basePath) {
   const files = fs.readdirSync(path.join(process.cwd(), basePath));
@@ -24,7 +24,7 @@ function findAssets(basePath) {
    * Construct key/value pairs representing Webpack entrypoints; e.g.,
    * { desktop: [ path/to/desktop.js ] }
    */
-  const assets = files
+  return files
     .filter(validAssets)
     .reduce((assetMap, file) => {
       const fileName = path.basename(file, path.extname(file));
@@ -37,17 +37,15 @@ function findAssets(basePath) {
       // Load oldschool global module dependencies
       asset[fileName].unshift('./lib/global_modules');
 
-      // if (isDevelopment) {
-      //   asset[fileName].unshift('webpack-hot-middleware/client?reload=true');
-      // }
+      if (isDevelopment) {
+        asset[fileName].unshift('webpack-hot-middleware/client?reload=true');
+      }
 
       return {
         ...assetMap,
         ...asset,
       };
     }, {});
-
-  return assets;
 }
 
 function getEntrypoints() {

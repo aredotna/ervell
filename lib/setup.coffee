@@ -36,6 +36,7 @@ bucketAssets = require 'bucket-assets'
 favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
 { createReloadable } = require '@artsy/express-reloadable'
+glob = require 'glob'
 
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
@@ -128,7 +129,12 @@ module.exports = (app) ->
   switch NODE_ENV
     when 'development'
       reloadAndMount = createReloadable(app, require)
-      app.use reloadAndMount path.join(__dirname, '..', 'apps')
+
+      modules = glob.sync('./react/**/*.js').map (name) => path.resolve(name)
+
+      app.use reloadAndMount(path.join(__dirname, '..', 'apps'), {
+        watchModules: modules
+      })
     else
       app.use require '../apps'
 
