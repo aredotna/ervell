@@ -1,0 +1,25 @@
+.PricingFeatures
+  display flex
+  flex-direction row
+  justify-content center
+  margin-top 2em
+
+.FeatureColumn
+  width 15em
+  margin 0 1.5em
+
+  &__feature
+    border-top 1px solid colors-gray-border
+    padding 1em 0
+    line-height line-height-tall
+    &:last-child
+      border-bottom 1px solid colors-gray-border
+
+@media (max-width: 50em)
+  // Switch from side by side layout to stacked
+  .PricingFeatures
+    flex-direction column
+    align-items center
+
+  .FeatureColumn
+    margin 1.5em 0

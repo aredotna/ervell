@@ -52,7 +52,7 @@ block container
 
       unless user && user.isPremium()
         .AboutSection__buttons
-          a.Button.Button--size-lg( href='/about#pricing' )
+          a.Button.Button--size-lg( href='/pricing' )
             | Join Premium
 
     section.AboutSection.js-section
@@ -112,19 +112,6 @@ block container
           br
         a( href='/meg-miller' )
           | Meg Miller
-
-    section.AboutSection.js-section( id='pricing' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Plans and Pricing
-
-      p.Type.Type--lh-tall
-        | Everyone can join Are.na for free and add unlimited public content. Becoming a Premium member allows you to work in complete privacy on personal or professional projects, and gives you early access to new products and features.
-
-      p.Type.Type--lh-tall 
-        | For student plans visit #[a(href="/education") this page], for teams and organizations please contact 
-        a(href="mailto:help@are.na") help@are.na
-
-      include ../components/pricing_table/index
 
     section.AboutSection.js-section( id='blog' )
       h2.Type.Type--size-h2.Utility--align-center

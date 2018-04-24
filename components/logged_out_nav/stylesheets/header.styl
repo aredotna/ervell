@@ -44,7 +44,7 @@
     > a
       display inline-block
       font-weight bold
-      margin 0 1.25em
+      margin 0 1em
       &:last-child
         margin-right .5em
     +below(logged-out-nav-breakpoint)
@@ -73,7 +73,6 @@ html:not([data-path='/'])
       &__logo
         display none
 
-// No hiding shenanigans when we're logged in
-html[data-logged-in]
-  .LoggedOutHeader__cta > a
-    visibility visible
+      &__menu
+        > a:not(:last-child)
+          display none
