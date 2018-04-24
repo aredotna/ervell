@@ -9,7 +9,8 @@
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "mocha": "sh scripts/mocha.sh",
     "test": "sh scripts/test.sh",
-    "start-dev": "foreman start -f Procfile.dev"
+    "start-dev": "foreman start -f Procfile.dev",
+    "lint": "eslint --ext .js ."
   },
   "engines": {
     "node": "8.x.x",
