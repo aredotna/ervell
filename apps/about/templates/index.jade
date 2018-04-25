@@ -12,8 +12,8 @@ block footer
 block container
   include ../../../components/logged_out_nav/templates/header
 
-  .About.Page.Page--narrow.js-about.js-page
-    section.AboutSection.js-section( id='top' )
+  .About.Page.Page--narrow
+    section.AboutSection
       h2.Type.Type--size-h2.Utility--align-center
         | Tools for Thinking, Together
 
@@ -25,144 +25,83 @@ block container
             frameborder='0'
             allowfullscreen
           )
+      br
+      p.Type.Type--lh-tall.AboutParagraph
+        | Are.na lets you save all kinds of content into simple, visual collections called channels. Channels and their contents can be reused by many people in different contexts, creating an interactive web of shared knowledge. 
 
-      p.Type.Type--lh-tall
-        | Our intention behind Are.na is to build a platform for creative thinking and research that is open to everyone.
+      p.Type.Type--lh-tall.AboutParagraph
+        | While Are.na brings together elements of social and productivity apps, it’s really a tool for visualizing, sharing, and building ideas together. Whether you’re making a mood board, organizing dissertation references, or just taking notes, it can help you structure your thoughts and make discoveries over time.
 
-      p.Type.Type--lh-tall
-        | It’s a distraction-free space where you can collect anything, organize your thoughts, and develop ideas over time. It’s also a community where curiosity and collaboration are more important than algorithms and likes.
+    section.AboutSection
+      h2.Type.Type--size-h2.Utility--align-center
+        | A more mindful community
 
-      p.Type.Type--lh-tall
-        | Whether you’re writing a story, designing a product, or just exploring your interests, we believe Are.na should help you think and discover in a way that feels natural. <a href='https://www.are.na/blog/hello%20world/2017/07/06/summer-update.html'>Learn more about our thinking.</a>
+      p.Type.Type--lh-tall.AboutParagraph
+        | The web today is dominated by platforms which make money by addicting, surveilling, and manipulating us. We think a better online social space means starting with a different value proposition.
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | Are.na’s mission is to build a member-supported community for shared knowledge and lifelong learning. Instead of distraction and fomo, it’s our goal to foster curiosity and collaboration. Because Are.na is supported by Premium members, our incentive is always to cultivate a tool and a social context that help you focus.
+
+    section.AboutSection.AboutSection--small
+      h2.Type.Type--size-h2.Utility--align-center
+        | Built by artists, designers, and 
+        br
+        |creative entrepreneurs
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | We built Are.na because we needed a better way to share projects and ideas with each other. Instead of showing off finished projects, we wanted a tool that invited other people into the creative process. Are.na is a space where every idea is a work in progress and you can always build on what your collaborators have started.
 
       unless user
         .AboutSection__buttons
           a.Button.Button--size-lg( href='/sign_up' )
             | Join Are.na
 
-    section.AboutSection.js-section
+  hr.Base
+
+  .About.Page
+    section.AboutSection.AboutSection--small
       h2.Type.Type--size-h2.Utility--align-center
-        | Your Ideas, Your Data
-
-      p.Type.Type--lh-tall
-        | Are.na is powered by members, not advertisers. We will never display ads and we will never hand over your data without your explicit permission.
-
-      p.Type.Type--lh-tall
-        | Premium members help us improve Are.na and make the platform accessible to everyone. Consider signing up for a yearly membership in order to access extra tools and privacy options.
-
-      unless user && user.isPremium()
-        .AboutSection__buttons
-          a.Button.Button--size-lg( href='/about#pricing' )
-            | Join Premium
-
-    section.AboutSection.js-section
-      h2.Type.Type--size-h2.Utility--align-center
-        | Are.na for iOS
-
-      img.AppImg(src="https://d2w9rnfcy7mm78.cloudfront.net/1511380/original_6b488f85f0d8bde6c073b91c02473a79.jpg")
-
-      p.Type.Type--lh-tall
-        | The Are.na mobile app lets you add content, browse channels, and make connections right from your phone. Take your ideas with you and browse a universe of shared knowledge, no matter where you are.
-
-      .AboutSection__buttons
-        a.Button.Button--size-lg( href=sd.ITUNES_LINK )
-          | Download Are.na for iOS
-
-    section.AboutSection.js-section( id='labs' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Are.na Labs
-
-      p.Type.Type--lh-tall
-        | We work with creative teams, institutions, and brands to develop custom digital projects powered by the Are.na API.
-
-      include ../components/lab_posts/index
-
-      .AboutSection__buttons
-        a.Button.Button--size-lg( href='mailto:info@are.na' )
-          | Work with us
-
-        a.Button.Button--size-lg( href='https://dev.are.na/documentation/channels' )
-          | Browse the API
-
-    section.AboutSection.js-section( id='teams' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Team and Collaborators
+        | Our Team
 
       p.Type.Type--lh-tall.Utility--align-center
-        a( href='/charles-broskoski' )
-          | Charles Broskoski
+        h4.Type.Type--size-h4.Utility--align-center
+          strong
+            a( href='/charles-broskoski' )
+              | Charles Broskoski
+          |, Co-founder and CEO
           br
-        a( href='/daniel-pianetti' )
-          | Daniel Pianetti
+          strong
+            a( href='/daniel-pianetti' )
+              | Daniel Pianetti
+          |, Co-founder and Product Lead
           br
-        a( href='/chris-sherron' )
-          | Chris Sherron
+          strong
+            a( href='/chris-sherron' )
+              | Chris Sherron
+          |, Co-founder and Design Lead
           br
-        a( href='/damon-zucconi' )
-          | Damon Zucconi
+          strong
+            a( href='/damon-zucconi' )
+              | Damon Zucconi
+          |, Co-founder and CTO
           br
-        a( href='/christopher-barley' )
-          | Chris Barley
+          strong
+            a( href='/christopher-barley' )
+              | Chris Barley
+          |, Co-founder and Marketing Lead
           br
-        a( href='/christina-badal' )
-          | Christina Badal
+          strong
+            a( href='/leo-shaw' )
+              | Leo Shaw
+          |, Communications & Special Projects
           br
-        a( href='/leo-shaw' )
-          | Leo Shaw
-          br
-        a( href='/meg-miller' )
-          | Meg Miller
+          strong
+            a( href='/meg-miller' )
+              | Meg Miller
+          |, Blog Editor
 
-    section.AboutSection.js-section( id='pricing' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Plans and Pricing
-
-      p.Type.Type--lh-tall
-        | Everyone can join Are.na for free and add unlimited public content. Becoming a Premium member allows you to work in complete privacy on personal or professional projects, and gives you early access to new products and features.
-
-      p.Type.Type--lh-tall 
-        | For student plans visit #[a(href="/education") this page], for teams and organizations please contact 
-        a(href="mailto:help@are.na") help@are.na
-
-      include ../components/pricing_table/index
-
-    section.AboutSection.js-section( id='blog' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Blog
-
-      p.Type.Type--lh-tall
-        | See what the Are.na community is thinking about and how members are using Are.na in their own creative projects.
-
-      include ../components/blog_posts/index
-
-      .AboutSection__buttons
-        a.Button.Button--size-lg( href='/blog' )
-          | Read more&hellip;
-
-    section.AboutSection.js-section( id='store' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Store
-
-      include ../components/store_posts/index
-
-      .AboutSection__buttons
-        a.Button.Button--size-lg( href='http://store.are.na/' )
-          | Go to store
-
-    section.AboutSection.js-section( id='contact' )
-      h2.Type.Type--size-h2.Utility--align-center
-        | Contact
-
-      p.Type.Type--size-h4.Type--lh-tall.Utility--align-center
-        | Questions? <a href='mailto:info@are.na'>We’d love to hear from you.</a>
-
-      p.Type.Type--size-h4.Type--lh-tall.Utility--align-center
-        a( href='https://twitter.com/aredotna' )
-          | Twitter
-        br
-        a( href='https://instagram.com/aredotna' )
-          | Instagram
-
+  hr.Base
+  About.Page.Page--narrow
     section.AboutSection.js-section( id='faqs' )
       h2.Type.Type--size-h2.Utility--align-center
         | FAQs
