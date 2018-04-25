@@ -19,10 +19,16 @@
   line-height line-height-base
   transform translateZ(0)
 
-  > span
-  > .Button
+  &__buttons
     margin 0 0.5em
+    > span
+    > .Button
+      margin 0 0.5em
 
 +mobile()
   .LoggedOutCTA
     flex-direction column
+    &__buttons
+      margin 0.5em 0
+      > .Button
+        margin 0 0.5em

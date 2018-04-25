@@ -42,6 +42,11 @@ block container
       p.Type.Type--lh-tall.AboutParagraph
         | Are.na’s mission is to build a member-supported community for shared knowledge and lifelong learning. Instead of distraction and fomo, it’s our goal to foster curiosity and collaboration. Because Are.na is supported by Premium members, our incentive is always to cultivate a tool and a social context that help you focus.
 
+      unless user && user.isPremium()
+        .AboutSection__buttons
+          a.Button.Button--size-lg( href='/pricing' )
+            | Join Premium
+
     section.AboutSection.AboutSection--small
       h2.Type.Type--size-h2.Utility--align-center
         | Built by artists, designers, and 
