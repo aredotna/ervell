@@ -1,6 +1,14 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
+slides = require './experiments.coffee'
+{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
+{ default: DescriptiveCarousel } = require '../../../react/components/DescriptiveCarousel/index.js'
+{ CURRENT_PATH } = require('sharify').data
 
 module.exports = ->
+  if CURRENT_PATH is '/experiments'
+    mountWithApolloProvider DescriptiveCarousel, { slides }, $('.js-experiments-carousel')
+
+
   $html = $('html, body')
   $el = $('.js-about')
   $links = $el.find('a[href]')

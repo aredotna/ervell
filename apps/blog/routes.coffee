@@ -6,8 +6,9 @@ request = require 'superagent'
 Posts = require '../../collections/posts.coffee'
 
 truncate = (text, length = 50) ->
+  return unless text
   tokens = text.split ' '
-  take(tokens, length).join ' '
+  take(tokens, length).join(' ') + "..."
 
 @index = (req, res, next) ->
   posts = new Posts

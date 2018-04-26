@@ -1,16 +1,17 @@
 { DEMO_BLOCKS } = require('sharify').data
 imagesLoaded = require 'imagesloaded'
+slides = require './slides.coffee'
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 blockTemplate = ->
   require('../../../components/block_v2/templates/block.jade') arguments...
 
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
-{ default: HomeCarousel } = require '../../../react/components/HomeCarousel/index.js'
+{ default: DescriptiveCarousel } = require '../../../react/components/DescriptiveCarousel/index.js'
 
 module.exports = ->
   loggedOutNav()
 
-  mountWithApolloProvider HomeCarousel, {}, $('.js-home-carousel')
+  mountWithApolloProvider DescriptiveCarousel, { slides }, $('.js-home-carousel')
 
   $html = $('html, body')
   $el = $('.js-home')

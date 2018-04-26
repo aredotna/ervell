@@ -20,9 +20,8 @@ block footer
 block container
   include ../../../components/logged_out_nav/templates/header
 
-  .Page.Page--narrow
-    h1.Type.Type--size-h2.Utility--align-center
-      strong Blog
+  .Page
+    h1.Type.Type--size-h2.Utility--align-center Are.na Blog
 
     .BlogIntro
       | Learn about how people use Are.na to do work and pursue personal projects through case studies,
@@ -31,18 +30,20 @@ block container
     .BlogPosts
       for post in posts
         a.BlogPosts__post( href="/blog#{post.get('url')}" )
-          h2.Type.Type--size-h2
-            | #{post.get('category')}:
-            br
-            = post.get('title')
-
-          h5.Type.Type--size-h5
-            = post.get('date')
-
-          img(
-            src= post.get('image')
+          .BlogPosts__post-image(
+            style= "background-image: url(#{post.get('image')})"
             alt= post.get('title')
           )
 
-          .BlogPosts__excerpt
-            | #{truncate(post.get('excerpt'), 50)} …
+          span.Type.Type--size-sm: strong= post.get('category')
+          h4.Type.Type--size-h4
+            = post.get('title')
+
+          .BlogPosts__excerpt.Type--size-sm
+            | #{truncate(post.snippet(), 20)}
+          
+          p.Type.Type--size-sm
+            = post.get('date')
+            br
+            = post.get('author')
+

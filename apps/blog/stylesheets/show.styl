@@ -11,22 +11,25 @@
 
       > .post-category-title
         // No top margin because of hidden image
-        margin 0 0 2em 0
+        margin 0 0 1.5em 0
+
+        > h1:first-child
+          font-size font-size-xs
+          text-transform uppercase
+          font-weight bold
+          margin-bottom 0.75em
 
         > h1
           margin 0
-          text-align center
-          font-size font-size-h2
-          font-weight normal
+          text-align left
+          font-size font-size-h3
+          font-weight bold
 
       > .post-author
       > .post-meta
-        text-align center
+        text-align left
         font-size font-size-base
         line-height line-height-base
-
-      > .post-author
-        font-weight bold
 
     > .post-content
       margin-bottom 8em
@@ -66,7 +69,7 @@
         display block
         max-width 80%
         vertical-align bottom
-        margin 4em auto
+        margin 2em auto
 
       img 
         max-width 100%
