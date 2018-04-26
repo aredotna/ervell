@@ -93,7 +93,7 @@ class DescriptiveCarousel extends Component {
     return (
       <Carousel {...settings}>
         {slides.map(slide => (
-          <Slide>
+          <Slide key={slide.id}>
             <Inner>
               <Image alt={slide.headline} src={slide.image} />
               <Headline>
