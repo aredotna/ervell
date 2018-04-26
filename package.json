@@ -6,6 +6,7 @@
     "assets": "sh scripts/assets.sh",
     "deploy": "sh scripts/deploy.sh",
     "predeploy": "sh scripts/predeploy.sh",
+    "deploy-staging": "sh scripts/deploy-staging.sh",
     "mocha": "sh scripts/mocha.sh",
     "test": "sh scripts/test.sh",
     "start-dev": "foreman start -f Procfile.dev"

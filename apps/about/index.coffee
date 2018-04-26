@@ -14,6 +14,8 @@ app.get '/privacy', (_req, res) ->
 app.get '/faqs', (_req, res) ->
   res.render 'faqs'
 app.get '/pricing', (_req, res) ->
-  res.redirect '/about#pricing'
+  res.render 'pricing'
 app.get '/education', (_req, res) ->
   res.render 'education'
+app.get '/experiments', (_req, res) ->
+  res.render 'experiments'
