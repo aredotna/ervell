@@ -45,5 +45,3 @@ module.exports = ->
   id = location.hash.substring(1)
 
   scrollToId id
-
-
