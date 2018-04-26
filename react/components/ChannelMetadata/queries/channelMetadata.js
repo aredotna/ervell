@@ -4,6 +4,7 @@ import channelMetadataCollaboratorsFragment from 'react/components/ChannelMetada
 import channelMetadataInfoFragment from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/fragments/channelMetadataInfo';
 import channelMetadataConnectionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataConnections/fragments/channelMetadataConnections';
 import channelMetadataActionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/fragments/channelMetadataActions';
+import channelShareButtonFragment from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton/fragments/channelShareButton';
 
 export default gql`
   query ChannelMetadata($id: ID!) {
@@ -25,6 +26,7 @@ export default gql`
       ...ChannelMetadataInfo
       ...CollaboratorsList
       ...ChannelMetadataConnections
+      ...ChannelShareButton
     }
   }
 
@@ -32,4 +34,5 @@ export default gql`
   ${channelMetadataInfoFragment}
   ${channelMetadataCollaboratorsFragment}
   ${channelMetadataConnectionsFragment}
+  ${channelShareButtonFragment}
 `;

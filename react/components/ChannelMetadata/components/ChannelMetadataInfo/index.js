@@ -3,6 +3,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import Count from 'react/components/UI/Count';
+import ChannelShareButton from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton';
 
 import channelMetadataInfoFragment from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/fragments/channelMetadataInfo';
 
@@ -16,10 +17,10 @@ const Buttons = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
-`;
 
-const Button = styled.a`
-  display: block;
+  a {
+    display: block;
+  }
 `;
 
 export default class ChannelMetadataInfo extends Component {
@@ -38,14 +39,12 @@ export default class ChannelMetadataInfo extends Component {
 
         <Buttons>
           {channel.visibility !== 'private' &&
-            <Button href={`${channel.href}/followers`}>
+            <a href={`${channel.href}/followers`} role="button" tabIndex={0}>
               <Count amount={channel.counts.followers} label="follower" />
-            </Button>
+            </a>
           }
 
-          <Button href="#TODO">
-            Share
-          </Button>
+          <ChannelShareButton channel={channel} />
         </Buttons>
       </div>
     );
