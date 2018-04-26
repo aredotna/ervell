@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
+import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
+import FollowButton from 'react/components/FollowButton';
 
 import channelMetadataActionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/fragments/channelMetadataActions';
 
@@ -10,22 +11,11 @@ const Buttons = styled.div`
   display: flex;
 `;
 
-const Button = styled.button`
-  display: inline-block;
-  padding: 0.5em 1em;
-  font-weight: bold;
-  font-size: ${Styles.Type.size.xs};
-  border: 1px solid ${Styles.Colors.gray.medium};
-  border-radius: 0.125em;
+const Button = styled(GenericButton).attrs({ size: 'xs' })`
+`;
 
-  &:first-child:not(:last-child) {
-    border-radius: 0.125em 0 0 0.125em;
-  }
-
-  & + & {
-    border-left: 0;
-    border-radius: 0 0.125em 0.125em 0;
-  }
+const ChannelFollowButton = styled(FollowButton).attrs({ size: 'xs' })`
+  ${buttonMixin}
 `;
 
 export default class ChannelMetadataActions extends Component {
@@ -34,13 +24,12 @@ export default class ChannelMetadataActions extends Component {
   }
 
   render() {
-    const { channel: { can } } = this.props;
+    const { channel: { id, can } } = this.props;
+
     return (
       <Buttons>
         {can.follow &&
-          <Button>
-            Follow
-          </Button>
+          <ChannelFollowButton id={id} type="CHANNEL" />
         }
 
         {can.mute &&
