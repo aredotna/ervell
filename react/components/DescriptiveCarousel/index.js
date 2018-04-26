@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Carousel from '../Carousel/index';
-import Type from '../../styles/Type';
+import Carousel from 'react/components/Carousel/index';
+import Type from 'react/styles/Type';
 
 const mobileBreakpoint = 1024;
 
