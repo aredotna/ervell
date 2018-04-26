@@ -1,7 +1,7 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 slides = require './experiments.coffee'
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
-{ default: DescriptiveCarousel } = require '../../../react/components/ExperimentsCarousel/index.js'
+{ default: DescriptiveCarousel } = require '../../../react/components/DescriptiveCarousel/index.js'
 { CURRENT_PATH } = require('sharify').data
 
 module.exports = ->
