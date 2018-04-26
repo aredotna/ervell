@@ -8,7 +8,9 @@ Posts = require '../../collections/posts.coffee'
 truncate = (text, length = 50) ->
   return unless text
   tokens = text.split ' '
-  take(tokens, length).join(' ') + "..."
+  truncated = take(tokens, length).join(' ')
+  truncated = truncated + "..." if tokens.length > length
+  truncated 
 
 @index = (req, res, next) ->
   posts = new Posts
