@@ -7,5 +7,3 @@ class Post extends Model
 module.exports = class Posts extends Collection
   url: "#{BLOG_URL}/all.json"
   model: Post
-
-  
