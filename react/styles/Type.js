@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 export default {
   size: {
     root: {
@@ -30,7 +32,7 @@ export default {
   },
 
   mixins: {
-    antialiased: `
+    antialiased: css`
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     `,
