@@ -40,7 +40,7 @@ block container
             = post.get('title')
 
           .BlogPosts__excerpt.Type--size-sm
-            | #{truncate(post.snippet(), 20)}
+            | #{truncate(post.snippet(), 30)}
           
           p.Type.Type--size-sm
             = post.get('date')
