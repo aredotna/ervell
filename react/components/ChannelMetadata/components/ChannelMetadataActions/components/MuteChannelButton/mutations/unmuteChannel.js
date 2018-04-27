@@ -3,15 +3,15 @@ import gql from 'graphql-tag';
 import muteChannelButtonFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton/fragments/muteChannelButton';
 
 export default gql`
-  fragment ChannelMetadataActions on Channel {
+  mutation unmuteChannelMutation($id: ID!) {
     __typename
-    id: slug
-    can {
-      follow
-      manage
-      mute
+    unmute_channel(input: { id: $id }) {
+      __typename
+      channel {
+        __typename
+        ...MuteChannelButton
+      }
     }
-    ...MuteChannelButton
   }
   ${muteChannelButtonFragment}
 `;

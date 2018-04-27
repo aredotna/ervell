@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 import FollowButton from 'react/components/FollowButton';
+import MuteChannelButton from 'react/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton';
 
 import channelMetadataActionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/fragments/channelMetadataActions';
 
@@ -25,7 +26,7 @@ export default class ChannelMetadataActions extends Component {
   }
 
   render() {
-    const { channel: { id, can } } = this.props;
+    const { channel, channel: { id, can } } = this.props;
 
     return (
       <Buttons>
@@ -34,9 +35,7 @@ export default class ChannelMetadataActions extends Component {
         }
 
         {can.mute &&
-          <Button>
-            Mute
-          </Button>
+          <MuteChannelButton channel={channel} />
         }
 
         {can.manage &&
