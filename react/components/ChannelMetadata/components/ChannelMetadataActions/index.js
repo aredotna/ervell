@@ -3,11 +3,12 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
+import ButtonGroup from 'react/components/UI/ButtonGroup';
 import FollowButton from 'react/components/FollowButton';
 
 import channelMetadataActionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/fragments/channelMetadataActions';
 
-const Buttons = styled.div`
+const Buttons = styled(ButtonGroup)`
   display: flex;
 `;
 
