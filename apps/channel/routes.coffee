@@ -45,6 +45,12 @@ graphQL = require '../../lib/graphql'
       if channel.get('class') is 'User'
         return res.redirect 301, "/#{channel.get 'slug'}"
 
+      if channel.get('user')?.slug isnt req.params.username
+        err = new Error
+        err.status = 404
+        err.message = 'Not Found'
+        return next err
+
       res.locals.sd.CHANNEL = channel.toJSON()
       res.locals.sd.COLLABORATORS = channel.related().collaborators.toJSON()
       res.locals.sd.BLOCKS = channel.related().blocks.toJSON()
