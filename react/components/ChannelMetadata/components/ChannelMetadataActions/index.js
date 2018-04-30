@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
+import Modal from 'react/components/UI/Modal';
+import ManageChannel from 'react/components/ManageChannel';
 import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 import FollowButton from 'react/components/FollowButton';
@@ -25,6 +27,12 @@ export default class ChannelMetadataActions extends Component {
     channel: propType(channelMetadataActionsFragment).isRequired,
   }
 
+  openEditChannel = () => {
+    const { channel: { id } } = this.props;
+    const modal = new Modal(ManageChannel, { id });
+    modal.open();
+  }
+
   render() {
     const { channel, channel: { id, can } } = this.props;
 
@@ -39,7 +47,7 @@ export default class ChannelMetadataActions extends Component {
         }
 
         {can.manage &&
-          <Button>
+          <Button onClick={this.openEditChannel}>
             Edit channel
           </Button>
         }
