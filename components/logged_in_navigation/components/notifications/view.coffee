@@ -18,7 +18,7 @@ module.exports = class NotificationsView extends Backbone.View
         Promise(@collection.fetch())
           .then => @state.set('is_fetching', false)
 
-      .one 'mouseleave', =>
+      .one 'mouseleave click', =>
         @collection.markRead()
         @state.set('unread_count', 0)
 
