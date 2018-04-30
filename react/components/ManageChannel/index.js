@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
+import { some } from 'underscore';
 
 import manageChannelFragment from 'react/components/ManageChannel/fragments/manageChannel';
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
-import GenericInput from 'react/components/UI/GenericInput';
+import { Input, Textarea } from 'react/components/UI/GenericInput';
 
 class ManageChannel extends Component {
   static propTypes = {
@@ -22,21 +23,27 @@ class ManageChannel extends Component {
   state = {
     mode: 'resting',
     title: '',
+    description: '',
   }
 
-  componentWillReceiveProps({ data: { channel: { title } } }) {
-    this.setState({ title });
+  componentWillReceiveProps({ data: { channel: { title, description } } }) {
+    this.setState({ title, description });
   }
 
-  handleTitle = ({ target: { value: title } }) => {
-    const { data: { channel: { title: originalName } } } = this.props;
-    const isEdited = title !== originalName;
+  handleInput = fieldName => ({ target: { value: fieldValue } }) => {
+    const { data: { channel: originalChannel } } = this.props;
+
+    const isEdited = some(originalChannel, (originalValue, key) =>
+      fieldName === key && originalValue !== fieldValue);
 
     this.setState({
-      title,
       mode: isEdited ? 'submit' : 'resting',
+      [fieldName]: fieldValue,
     });
   }
+
+  handleTitle = this.handleInput('title')
+  handleDescription = this.handleInput('description')
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +52,9 @@ class ManageChannel extends Component {
       onClose, updateChannel, data: { channel: { id } },
     } = this.props;
 
-    const { mode, title } = this.state;
+    const {
+      mode, title, description,
+    } = this.state;
 
     switch (mode) {
       case 'resting':
@@ -54,7 +63,7 @@ class ManageChannel extends Component {
         this.setState({ mode: 'submitting' });
 
         return updateChannel({
-          variables: { id, title },
+          variables: { id, title, description },
         })
           .then(({ data: { update_channel: { channel: { href } } } }) => {
             onClose();
@@ -69,8 +78,10 @@ class ManageChannel extends Component {
   }
 
   render() {
-    const { mode, title } = this.state;
     const { data: { loading } } = this.props;
+    const {
+      mode, title, description,
+    } = this.state;
 
     if (loading) return <div />;
 
@@ -90,7 +101,25 @@ class ManageChannel extends Component {
             Name
           </TitledDialog.Label>
 
-          <GenericInput value={title} onChange={this.handleTitle} />
+          <Input
+            name="title"
+            value={title}
+            onChange={this.handleTitle}
+          />
+        </TitledDialog.Section>
+
+        <TitledDialog.Section>
+          <TitledDialog.Label>
+            Description
+          </TitledDialog.Label>
+
+          <Textarea
+            name="description"
+            value={description}
+            onChange={this.handleDescription}
+            placeholder="describe your channel here"
+            rows="3"
+          />
         </TitledDialog.Section>
       </TitledDialog>
     );
