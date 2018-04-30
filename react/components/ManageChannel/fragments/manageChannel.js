@@ -6,5 +6,6 @@ export default gql`
     href
     title
     description(format: MARKDOWN)
+    visibility
   }
 `;

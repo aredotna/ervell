@@ -3,13 +3,20 @@ import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import { some } from 'underscore';
+import styled from 'styled-components';
 
 import manageChannelFragment from 'react/components/ManageChannel/fragments/manageChannel';
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { Input, Textarea } from 'react/components/UI/GenericInput';
+import { Input, Textarea, Select } from 'react/components/UI/GenericInput';
+
+const Caption = styled.div`
+  margin-top: 1em;
+  font-size: 0.75rem;
+  text-align: center;
+`;
 
 class ManageChannel extends Component {
   static propTypes = {
@@ -24,10 +31,11 @@ class ManageChannel extends Component {
     mode: 'resting',
     title: '',
     description: '',
+    visibility: '',
   }
 
-  componentWillReceiveProps({ data: { channel: { title, description } } }) {
-    this.setState({ title, description });
+  componentWillReceiveProps({ data: { channel: { title, description, visibility } } }) {
+    this.setState({ title, description, visibility });
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
@@ -44,6 +52,7 @@ class ManageChannel extends Component {
 
   handleTitle = this.handleInput('title')
   handleDescription = this.handleInput('description')
+  handleVisbility = this.handleInput('visibility')
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +62,7 @@ class ManageChannel extends Component {
     } = this.props;
 
     const {
-      mode, title, description,
+      mode, title, description, visibility,
     } = this.state;
 
     switch (mode) {
@@ -63,10 +72,13 @@ class ManageChannel extends Component {
         this.setState({ mode: 'submitting' });
 
         return updateChannel({
-          variables: { id, title, description },
+          variables: {
+            id, title, description, visibility,
+          },
         })
           .then(({ data: { update_channel: { channel: { href } } } }) => {
             onClose();
+            // Slug may have changed so redirect
             window.location = href;
           })
           .catch((err) => {
@@ -80,7 +92,7 @@ class ManageChannel extends Component {
   render() {
     const { data: { loading } } = this.props;
     const {
-      mode, title, description,
+      mode, title, description, visibility,
     } = this.state;
 
     if (loading) return <div />;
@@ -120,6 +132,30 @@ class ManageChannel extends Component {
             placeholder="describe your channel here"
             rows="3"
           />
+        </TitledDialog.Section>
+
+        <TitledDialog.Section>
+          <TitledDialog.Label>
+            Privacy
+          </TitledDialog.Label>
+
+          <Select
+            name="visibility"
+            value={visibility.toUpperCase()}
+            onChange={this.handleVisbility}
+          >
+            <option value="PUBLIC">Open</option>
+            <option value="CLOSED">Closed</option>
+            <option value="PRIVATE">Private</option>
+          </Select>
+
+          <Caption>
+            {{
+              PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
+              CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
+              PRIVATE: 'Only you and your collaborators can view and add to the channel.',
+            }[visibility.toUpperCase()]}
+          </Caption>
         </TitledDialog.Section>
       </TitledDialog>
     );
