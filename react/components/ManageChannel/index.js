@@ -12,6 +12,8 @@ import deleteChannelMutation from 'react/components/ManageChannel/mutations/dele
 
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Select } from 'react/components/UI/GenericInput';
+import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
+import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 
 import Styles from 'react/styles';
 
@@ -22,7 +24,7 @@ const Container = styled.div`
 
 const Caption = styled.div`
   margin-top: 1em;
-  font-size: 0.75rem;
+  font-size: ${Styles.Type.size.xs};
   text-align: center;
 `;
 
@@ -31,16 +33,9 @@ const DeleteConfirmation = styled.div`
 `;
 
 const Message = styled.div`
-  margin: 0.33em 0.5em;
-  font-size: 0.75rem;
+  padding: ${optionLinkPadding};
+  font-size: ${Styles.Type.size.xs};
   text-align: left;
-`;
-
-const SmallButton = styled.a`
-  display: block;
-  padding: 0.33em 0.5em;
-  font-size: 0.75rem;
-  font-weight: bold;
 `;
 
 class ManageChannel extends Component {
@@ -88,6 +83,9 @@ class ManageChannel extends Component {
     this.setState({ mode: 'resting' }); // Needs a better resetMode
   }
 
+  queueExport = format => () => {
+    console.log(format);
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -147,6 +145,8 @@ class ManageChannel extends Component {
 
     if (loading) return <div />;
 
+    const { data: { channel } } = this.props;
+
     return (
       <TitledDialog
         title="Edit channel"
@@ -179,7 +179,7 @@ class ManageChannel extends Component {
 
             <Textarea
               name="description"
-              value={description}
+              value={description || ''}
               onChange={this.handleDescription}
               placeholder="describe your channel here"
               rows="3"
@@ -210,14 +210,24 @@ class ManageChannel extends Component {
             </Caption>
           </TitledDialog.Section>
 
+          {channel.can.export &&
+            <TitledDialog.Section>
+              <TitledDialog.Label>
+                Export
+              </TitledDialog.Label>
+
+              <ExportChannel id={channel.id} />
+            </TitledDialog.Section>
+          }
+
           <TitledDialog.Section>
             <TitledDialog.Label>
               Delete
             </TitledDialog.Label>
 
-            <SmallButton onClick={this.handleDeleteClick}>
+            <OptionLink size="xs" onClick={this.handleDeleteClick}>
               Delete channel
-            </SmallButton>
+            </OptionLink>
 
             {mode === 'delete' &&
               <DeleteConfirmation>
@@ -225,13 +235,13 @@ class ManageChannel extends Component {
                   Are you sure? This action cannot be undone.
                 </Message>
 
-                <SmallButton onClick={this.handleSubmit}>
+                <OptionLink size="xs" onClick={this.handleSubmit}>
                   Yes
-                </SmallButton>
+                </OptionLink>
 
-                <SmallButton onClick={this.cancelDelete}>
+                <OptionLink size="xs" onClick={this.cancelDelete}>
                   No
-                </SmallButton>
+                </OptionLink>
               </DeleteConfirmation>
             }
           </TitledDialog.Section>

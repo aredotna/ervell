@@ -7,5 +7,8 @@ export default gql`
     title
     description(format: MARKDOWN)
     visibility
+    can {
+      export
+    }
   }
 `;
