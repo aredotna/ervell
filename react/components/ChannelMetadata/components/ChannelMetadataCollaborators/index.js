@@ -18,12 +18,11 @@ const Link = styled.a`
 
 export default class CollaboratorsListContainer extends Component {
   static propTypes = {
-    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     channel: PropTypes.shape({}).isRequired, // TODO
   }
 
   openManageCollaborators = () => {
-    const { channel_id } = this.props;
+    const { channel: { id: channel_id } } = this.props;
     const modal = new Modal(ManageCollaborators, {
       channel_id,
       openCreateGroup: () => {
@@ -36,13 +35,17 @@ export default class CollaboratorsListContainer extends Component {
   }
 
   openCreateGroup = () => {
-    const { channel_id } = this.props;
+    const { channel: { id: channel_id } } = this.props;
     const modal = new Modal(CreateGroup, { channel_id });
     modal.open();
   }
 
   render() {
-    const { channel_id, channel: { can, collaborators } } = this.props;
+    const {
+      channel: {
+        id: channel_id, can, collaborators,
+      },
+    } = this.props;
 
     return (
       <div>

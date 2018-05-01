@@ -12,6 +12,7 @@ import ChannelMetadataCollaborators from 'react/components/ChannelMetadata/compo
 import ChannelMetadataInfo from 'react/components/ChannelMetadata/components/ChannelMetadataInfo';
 import ChannelMetadataConnections from 'react/components/ChannelMetadata/components/ChannelMetadataConnections';
 import ChannelMetadataActions from 'react/components/ChannelMetadata/components/ChannelMetadataActions';
+import { ChannelMetadataExpandableContext } from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
 
 const Container = styled.div`
   position: relative;
@@ -31,7 +32,6 @@ const Actions = styled.div`
 
 class ChannelMetadata extends Component {
   static propTypes = {
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
     }).isRequired,
@@ -42,7 +42,7 @@ class ChannelMetadata extends Component {
 
     if (loading) return <div />;
 
-    const { id, data: { channel } } = this.props;
+    const { data: { channel } } = this.props;
 
     return (
       <Container>
@@ -69,19 +69,21 @@ class ChannelMetadata extends Component {
         </Actions>
 
         <Pockets>
-          <ChannelMetadataPocket title="Info">
-            <ChannelMetadataInfo channel={channel} />
-          </ChannelMetadataPocket>
-
-          {channel.can.manage_collaborators &&
-            <ChannelMetadataPocket title="Collaborators">
-              <ChannelMetadataCollaborators channel={channel} channel_id={id} />
+          <ChannelMetadataExpandableContext>
+            <ChannelMetadataPocket title="Info">
+              <ChannelMetadataInfo channel={channel} />
             </ChannelMetadataPocket>
-          }
 
-          <ChannelMetadataPocket title="Connected to">
-            <ChannelMetadataConnections channel={channel} />
-          </ChannelMetadataPocket>
+            {channel.can.manage_collaborators &&
+              <ChannelMetadataPocket title="Collaborators">
+                <ChannelMetadataCollaborators channel={channel} />
+              </ChannelMetadataPocket>
+            }
+
+            <ChannelMetadataPocket title="Connected to">
+              <ChannelMetadataConnections channel={channel} />
+            </ChannelMetadataPocket>
+          </ChannelMetadataExpandableContext>
         </Pockets>
       </Container>
     );

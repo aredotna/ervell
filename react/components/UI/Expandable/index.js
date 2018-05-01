@@ -31,24 +31,49 @@ export default class Expandable extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     height: PropTypes.string.isRequired,
+    onExpand: PropTypes.func,
+    mode: PropTypes.string,
   }
 
-  state = {
+  static defaultProps = {
+    onExpand: () => {},
     mode: 'resting',
   }
 
-  componentDidMount() {
-    if (this.contents.clientHeight <= this.container.clientHeight) {
-      this.setState({ mode: 'expanded' });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.mode !== nextProps.mode) {
+      return { mode: nextProps.mode };
     }
+
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: props.mode,
+      force: false,
+    };
+  }
+
+  componentDidMount() {
+    if (!this.isOverFlowing()) {
+      this.setState({ mode: 'expanded', force: true });
+    }
+  }
+
+  isOverFlowing() {
+    return this.contents.clientHeight > this.container.clientHeight;
   }
 
   expandContents = () => {
     this.setState({ mode: 'expanded' });
+    this.props.onExpand();
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode, force } = this.state;
     const {
       children, height, ...rest
     } = this.props;
@@ -64,7 +89,7 @@ export default class Expandable extends Component {
           {children}
         </div>
 
-        {mode === 'resting' &&
+        {mode === 'resting' && !force &&
           <Button onClick={this.expandContents} />
         }
       </Container>
