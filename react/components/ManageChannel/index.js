@@ -8,12 +8,11 @@ import styled from 'styled-components';
 import manageChannelFragment from 'react/components/ManageChannel/fragments/manageChannel';
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
-import deleteChannelMutation from 'react/components/ManageChannel/mutations/deleteChannel';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Select } from 'react/components/UI/GenericInput';
-import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
+import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 
 import Styles from 'react/styles';
 
@@ -28,23 +27,12 @@ const Caption = styled.div`
   text-align: center;
 `;
 
-const DeleteConfirmation = styled.div`
-  color: ${Styles.Colors.state.alert};
-`;
-
-const Message = styled.div`
-  padding: ${optionLinkPadding};
-  font-size: ${Styles.Type.size.xs};
-  text-align: left;
-`;
-
 class ManageChannel extends Component {
   static propTypes = {
     data: PropTypes.shape({
       channel: propType(manageChannelFragment),
     }).isRequired,
     updateChannel: PropTypes.func.isRequired,
-    deleteChannel: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
   }
 
@@ -56,7 +44,11 @@ class ManageChannel extends Component {
   }
 
   componentWillReceiveProps({ data: { channel: { title, description, visibility } } }) {
-    this.setState({ title, description, visibility });
+    this.setState({
+      title,
+      description,
+      visibility: visibility.toUpperCase(),
+    });
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
@@ -75,66 +67,36 @@ class ManageChannel extends Component {
   handleDescription = this.handleInput('description')
   handleVisbility = this.handleInput('visibility')
 
-  handleDeleteClick = () => {
-    this.setState({ mode: 'delete' });
-  }
-
-  cancelDelete = () => {
-    this.setState({ mode: 'resting' }); // Needs a better resetMode
-  }
-
-  queueExport = format => () => {
-    console.log(format);
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
 
     const {
-      onClose, updateChannel, deleteChannel, data: { channel: { id } },
+      onClose, updateChannel, data: { channel: { id } },
     } = this.props;
 
     const {
       mode, title, description, visibility,
     } = this.state;
 
-    switch (mode) {
-      case 'resting':
-        return onClose();
-      case 'delete':
-        this.setState({ mode: 'deleting' });
+    if (mode === 'resting') return onClose();
 
-        return deleteChannel({
-          variables: { id },
-        })
-          .then(() => {
-            onClose();
-            window.location = '/';
-          })
-          .catch((err) => {
-            console.error(err);
-            // TODO: Better error handling
-            this.setState({ mode: 'error' });
-          });
-      default:
-        this.setState({ mode: 'submitting' });
+    this.setState({ mode: 'submitting' });
 
-        return updateChannel({
-          variables: {
-            id, title, description, visibility,
-          },
-        })
-          .then(({ data: { update_channel: { channel: { href } } } }) => {
-            onClose();
-            // Slug may have changed so redirect
-            window.location = href;
-          })
-          .catch((err) => {
-            console.error(err);
-            // TODO: Better error handling
-            this.setState({ mode: 'error' });
-          });
-    }
+    return updateChannel({
+      variables: {
+        id, title, description, visibility,
+      },
+    })
+      .then(({ data: { update_channel: { channel: { href } } } }) => {
+        onClose();
+        // Slug may have changed so redirect
+        window.location = href;
+      })
+      .catch((err) => {
+        console.error(err);
+        // TODO: Better error handling
+        this.setState({ mode: 'error' });
+      });
   }
 
   render() {
@@ -225,25 +187,7 @@ class ManageChannel extends Component {
               Delete
             </TitledDialog.Label>
 
-            <OptionLink size="xs" onClick={this.handleDeleteClick}>
-              Delete channel
-            </OptionLink>
-
-            {mode === 'delete' &&
-              <DeleteConfirmation>
-                <Message>
-                  Are you sure? This action cannot be undone.
-                </Message>
-
-                <OptionLink size="xs" onClick={this.handleSubmit}>
-                  Yes
-                </OptionLink>
-
-                <OptionLink size="xs" onClick={this.cancelDelete}>
-                  No
-                </OptionLink>
-              </DeleteConfirmation>
-            }
+            <DeleteChannel id={channel.id} />
           </TitledDialog.Section>
         </Container>
       </TitledDialog>
@@ -254,5 +198,4 @@ class ManageChannel extends Component {
 export default compose(
   graphql(manageChannelQuery),
   graphql(updateChannelMutation, { name: 'updateChannel' }),
-  graphql(deleteChannelMutation, { name: 'deleteChannel' }),
 )(ManageChannel);
