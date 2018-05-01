@@ -18,4 +18,7 @@ export default {
     light: '#eee',
     hint: '#f7f7f7',
   },
+  utility: {
+    transparent: 'rgba(0, 0, 0, 0.001)',
+  },
 };
