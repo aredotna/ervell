@@ -21,6 +21,9 @@ module.exports = class Notifications extends Feed
     @addOrMergeNew data
     mediator.trigger 'notification:added'
 
+  clear: ->
+    $.post "#{sd.API_URL}/notifications/clear"
+
   markRead: ->
     mediator.shared.current_user.resetNotificationCount()
     @each (group)->
@@ -28,7 +31,7 @@ module.exports = class Notifications extends Feed
 
     mediator.trigger 'notifications:cleared'
 
-    $.post "#{sd.API_URL}/notifications/clear"
+    @clear()
 
   getNumberUnread: ->
     count = 0

@@ -16,11 +16,13 @@ module.exports = class NotificationsView extends Backbone.View
       .one 'mouseenter', =>
         @state.set('is_fetching', true)
         Promise(@collection.fetch())
-          .then => @state.set('is_fetching', false)
+          .then =>
+            @collection.clear()
+            @state.set('is_fetching', false)
 
-      .one 'mouseleave click', =>
-        @collection.markRead()
+      .on 'mouseleave click', (e) =>
         @state.set('unread_count', 0)
+        @collection.markRead()
 
   render: ->
     @$el.html template
