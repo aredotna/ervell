@@ -63,6 +63,7 @@ class DescriptiveCarousel extends Component {
       headline: PropTypes.any.isRequired,
       copy: PropTypes.string,
       image: PropTypes.string.isRequired,
+      link: PropTypes.string,
     })),
   }
   render() {
@@ -96,12 +97,18 @@ class DescriptiveCarousel extends Component {
           <Slide key={slide.id}>
             <Inner>
               <Image alt={slide.headline} src={slide.image} />
-              <Headline>
-                {slide.headline}
-              </Headline>
-              <Copy>
-                {slide.copy}
-              </Copy>
+              {slide.link ? (
+                <a href={slide.link} target="_blank">
+                  <Headline>
+                    {slide.headline}
+                  </Headline>
+                </a>
+              ) : (
+                <Headline>
+                  {slide.headline}
+                </Headline>
+              )}
+              <Copy dangerouslySetInnerHTML={{ __html: slide.copy }} />
             </Inner>
           </Slide>
         ))}
