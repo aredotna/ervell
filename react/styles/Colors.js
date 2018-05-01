@@ -6,7 +6,7 @@ export default {
   },
   state: {
     premium: '#00c5ff',
-    alert: '#e24d4d',
+    alert: 'rgb(255, 94, 0)',
     editable: '#fdffdb',
   },
   gray: {
