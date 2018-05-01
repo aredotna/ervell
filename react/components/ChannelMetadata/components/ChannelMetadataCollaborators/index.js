@@ -6,6 +6,7 @@ import Modal from 'react/components/UI/Modal';
 import CreateGroup from 'react/components/CreateGroup';
 import ManageCollaborators from 'react/components/ManageCollaborators';
 import CollaboratorsList from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsList';
+import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
 
 const StyledCollaboratorsList = styled(CollaboratorsList)`
   margin-bottom: 1em;
@@ -46,10 +47,12 @@ export default class CollaboratorsListContainer extends Component {
     return (
       <div>
         {collaborators.length > 0 &&
-          <StyledCollaboratorsList
-            collaborators={collaborators}
-            channel_id={channel_id}
-          />
+          <ChannelMetadataExpandable>
+            <StyledCollaboratorsList
+              collaborators={collaborators}
+              channel_id={channel_id}
+            />
+          </ChannelMetadataExpandable>
         }
 
         {can.manage_collaborators &&
