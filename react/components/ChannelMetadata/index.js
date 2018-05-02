@@ -74,7 +74,7 @@ class ChannelMetadata extends Component {
               <ChannelMetadataInfo channel={channel} />
             </ChannelMetadataPocket>
 
-            {channel.can.manage_collaborators &&
+            {(channel.can.manage_collaborators || channel.collaborators.length > 0) &&
               <ChannelMetadataPocket title="Collaborators">
                 <ChannelMetadataCollaborators channel={channel} />
               </ChannelMetadataPocket>
