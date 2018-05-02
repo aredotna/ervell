@@ -9,7 +9,9 @@ import CollaboratorsList from 'react/components/ChannelMetadata/components/Chann
 import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
 
 const Actions = styled.div`
-  margin-top: 1em;
+  div + & {
+    margin-top: 1em;
+  }
 `;
 
 const Link = styled.a`
