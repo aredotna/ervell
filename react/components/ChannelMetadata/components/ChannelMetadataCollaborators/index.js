@@ -8,8 +8,8 @@ import ManageCollaborators from 'react/components/ManageCollaborators';
 import CollaboratorsList from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsList';
 import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
 
-const StyledCollaboratorsList = styled(CollaboratorsList)`
-  margin-bottom: 1em;
+const Actions = styled.div`
+  margin-top: 1em;
 `;
 
 const Link = styled.a`
@@ -51,15 +51,12 @@ export default class CollaboratorsListContainer extends Component {
       <div>
         {collaborators.length > 0 &&
           <ChannelMetadataExpandable>
-            <StyledCollaboratorsList
-              collaborators={collaborators}
-              channel_id={channel_id}
-            />
+            <CollaboratorsList collaborators={collaborators} channel_id={channel_id} />
           </ChannelMetadataExpandable>
         }
 
         {can.manage_collaborators &&
-          <div>
+          <Actions>
             <Link onClick={this.openManageCollaborators} role="button" tabIndex={0}>
               {collaborators.length ? 'Edit' : 'Add'} collaborators
             </Link>
@@ -67,7 +64,7 @@ export default class CollaboratorsListContainer extends Component {
             <Link onClick={this.openCreateGroup} role="button" tabIndex={0}>
               Create group
             </Link>
-          </div>
+          </Actions>
         }
       </div>
     );
