@@ -6,7 +6,7 @@ import Styles from 'react/styles';
 
 export const inputVerticalPadding = '0.75em';
 export const inputHorizontalPadding = '1em';
-export const inputPadding = `${inputHorizontalPadding} ${inputVerticalPadding}`;
+export const inputPadding = `${inputVerticalPadding} ${inputHorizontalPadding}`;
 export const inputBorderRadius = '0.125em';
 
 export const mixin = css`
