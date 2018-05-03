@@ -7,21 +7,7 @@ import ChannelMetadataExpandable from 'react/components/ChannelMetadata/componen
 
 import channelMetadataConnectionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataConnections/fragments/channelMetadataConnections';
 
-import LegacyConnect from 'react/components/LegacyConnect';
-
-import gql from 'graphql-tag';
-import { initApolloClient } from 'react/apollo';
-
-const client = initApolloClient();
-
-const QUERY = id => gql`
-  {
-    channel(id: ${id}) {
-      ...ChannelMetadataConnections
-    }
-  }
-  ${channelMetadataConnectionsFragment}
-`;
+import Connect from 'react/components/Connect';
 
 const Actions = styled.div`
   div + & {
@@ -34,9 +20,6 @@ export default class ChannelMetadataConnections extends Component {
     channel: propType(channelMetadataConnectionsFragment).isRequired,
   }
 
-  onConnection = () =>
-    client.query({ query: QUERY(this.props.channel.id) });
-
   render() {
     const { channel } = this.props;
 
@@ -48,14 +31,11 @@ export default class ChannelMetadataConnections extends Component {
           </ChannelMetadataExpandable>
         }
 
-        <Actions>
-          <LegacyConnect
-            connectable_id={channel._id}
-            connectable_type="Channel"
-            onConnectionAdded={this.onConnection}
-            onConnectionRemoved={this.onConnection}
-          />
-        </Actions>
+        {channel.can.connect &&
+          <Actions>
+            <Connect id={channel.id} type="CHANNEL" />
+          </Actions>
+        }
       </div>
     );
   }
