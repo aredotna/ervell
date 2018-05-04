@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import selectableChannelFragment from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel/fragments/selectableChannel';
 
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
+import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
 import Styles from 'react/styles';
 import { inputPadding } from 'react/components/UI/GenericInput';
@@ -16,7 +17,6 @@ const Container = styled.div.attrs({
 })`
   position: relative;
   margin-top: -1px;
-  padding: ${inputPadding};
   line-height: 1;
   user-select: none;
   cursor: pointer;
@@ -58,6 +58,19 @@ const Container = styled.div.attrs({
       transform: translateY(-50%);
     }
   }
+
+  &[data-selected="true"] {
+    > div {
+      opacity: 0.5;
+    }
+  }
+`;
+
+const HoverableInner = styled(TickerTapeHover).attrs({
+  speed: 1,
+  offsetBuffer: 32,
+})`
+  padding: ${inputPadding};
 `;
 
 const Separator = styled.div`
@@ -100,13 +113,14 @@ export default class SelectableChannel extends Component {
 
     return (
       <Container onClick={this.toggleSelection} data-selected={isSelected}>
-        {name}
+        <HoverableInner>
+          {name}
+          <Separator />
 
-        <Separator />
-
-        <ColoredChannelSpan visibility={visibility}>
-          {title}
-        </ColoredChannelSpan>
+          <ColoredChannelSpan visibility={visibility}>
+            {title}
+          </ColoredChannelSpan>
+        </HoverableInner>
       </Container>
     );
   }
