@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isEmpty } from 'underscore';
+import { debounce, isEmpty } from 'underscore';
 
 import Styles from 'react/styles';
 
@@ -55,16 +55,22 @@ export default class ConnectionSelection extends Component {
 
   state = {
     query: '',
+    debouncedQuery: '',
     mode: 'resting',
   }
 
   handleChange = ({ target: { value: query } }) => {
     const mode = isEmpty(query) ? 'resting' : 'active';
     this.setState({ mode, query });
+    this.debouceQuery(query);
   }
 
+  debouceQuery = debounce((debouncedQuery) => {
+    this.setState({ debouncedQuery });
+  }, 200)
+
   render() {
-    const { query, mode } = this.state;
+    const { query, debouncedQuery, mode } = this.state;
     const { onConnectionSelection } = this.props;
 
     return (
@@ -89,7 +95,7 @@ export default class ConnectionSelection extends Component {
             />
 
             <SearchedChannels
-              query={query}
+              query={debouncedQuery}
               onConnectionSelection={onConnectionSelection}
             />
           </div>
