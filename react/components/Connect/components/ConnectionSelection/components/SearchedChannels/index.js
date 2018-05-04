@@ -15,11 +15,18 @@ class SearchedChannels extends Component {
   }
 
   render() {
-    const { data: { loading } } = this.props;
+    const { data: { loading, me } } = this.props;
 
-    if (loading) return <div />;
+    if (loading && !me) return <div />;
 
-    const { onConnectionSelection, data: { me: { searched_channels: channels } } } = this.props;
+    const {
+      onConnectionSelection,
+      data: {
+        me: {
+          searched_channels: channels,
+        },
+      },
+    } = this.props;
 
     return (
       <ChannelsList
