@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import Count from 'react/components/UI/Count';
 import ChannelShareButton from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton';
 import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
 
@@ -41,9 +40,9 @@ export default class ChannelMetadataInfo extends Component {
         }
 
         <Buttons>
-          {channel.visibility !== 'private' &&
+          {channel.visibility !== 'private' && channel.counts.followers > 0 &&
             <a href={`${channel.href}/followers`} role="button" tabIndex={0}>
-              <Count amount={channel.counts.followers} label="follower" />
+              Followers
             </a>
           }
 
