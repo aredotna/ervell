@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
 import ChannelsList from 'react/components/Connect/components/ConnectionSelection/components/ChannelsList';
+import LoadingIndicator from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels/components/LoadingIndicator';
 
 import recentChannelsQuery from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels/queries/recentChannels';
 
@@ -15,16 +16,15 @@ class RecentChannels extends Component {
   }
 
   render() {
-    const { data: { loading } } = this.props;
-
-    if (loading) return <div />;
-
     const {
-      onConnectionSelection, data: { me: { recent_channels } }, ...rest
+      onConnectionSelection, data: { loading }, ...rest
     } = this.props;
 
-    // Deals with the fucked up schema
-    // TODO: Fix the schema to prevent this non-sense
+    if (loading) return <LoadingIndicator {...rest} />;
+
+    const { data: { me: { recent_channels } } } = this.props;
+
+    // TODO: Fix the schema to prevent having map out `kind`
     const channels = recent_channels.map(({ kind }) => kind);
 
     return (
