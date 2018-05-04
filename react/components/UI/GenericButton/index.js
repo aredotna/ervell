@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import Styles from 'react/styles';
 
-export const buttonBorderWidth = '0.075em';
+export const buttonBorderWidth = '1px';
 export const buttonVerticalPadding = '0.75em';
 export const buttonHorizontalPadding = '1.25em';
 export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding}`;
