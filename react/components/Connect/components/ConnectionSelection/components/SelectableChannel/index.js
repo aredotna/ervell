@@ -39,6 +39,7 @@ const Container = styled.div.attrs({
     bottom: 0;
     width: 1em;
     background: linear-gradient(to left, ${Styles.Colors.gray.hint}, ${Styles.Colors.utility.transparent});
+    z-index: 1;
   }
 
   &:hover,
@@ -56,6 +57,7 @@ const Container = styled.div.attrs({
       width: 2em;
       text-align: center;
       transform: translateY(-50%);
+      z-index: 1;
     }
   }
 
