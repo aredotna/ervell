@@ -64,7 +64,10 @@ export default class TickerTapeHover extends Component {
       if (this.currentOffset >= this.offsetLimit + offsetBuffer) return;
 
       this.currentOffset += speed;
-      this.el.style.transform = `translateX(-${this.currentOffset}px)`;
+
+      if (this.el) {
+        this.el.style.transform = `translateX(-${this.currentOffset}px)`;
+      }
 
       window.requestAnimationFrame(tick);
     };
