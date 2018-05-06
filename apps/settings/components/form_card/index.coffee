@@ -1,7 +1,7 @@
 Promise = require 'bluebird-q'
 Serializer = require '../../../../components/form/serializer.coffee'
 
-module.exports = ($el, onSubmit) ->
+module.exports = ($el, onSubmit = Promise.resolve()) ->
   $submit = $el.find('button')
   $errors = $el.find('.js-form-errors')
 
@@ -11,10 +11,6 @@ module.exports = ($el, onSubmit) ->
     e.preventDefault()
 
     serializer = new Serializer $el
-
-    onSubmit = if onSubmit then onSubmit else ->
-      promise = new Promise
-      promise.resolve()
 
     $submit
       .prop 'disabled', true

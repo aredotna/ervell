@@ -15,7 +15,7 @@ module.exports = ($el) ->
     currentMeta = {} if not currentMeta
     currentMeta.description = $el.find('.js-bio').val()
 
-    $.post "#{models.user.urlRoot()}/metadata",
+    Promise $.post "#{models.user.urlRoot()}/metadata",
       metadata: currentMeta
 
   formCard $('form.js-upload')
