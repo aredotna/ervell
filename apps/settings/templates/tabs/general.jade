@@ -16,11 +16,13 @@ block content
         form(
           data-action= user.url()
           data-method='PUT'
+          class="js-settings"
         )
           .Errors.js-form-errors
             //- Rendered client-side
 
           .Fieldset
+            label.Label Info
             input.Input(
               name='first_name'
               type='text'
@@ -58,8 +60,11 @@ block content
               autofocus= autofocus
               required
             )
+          .Fieldset
+            include ../../components/bio_field/index
 
           .Fieldset
+            label.Label Password
             input.Input(
               name='password' type='password' placeholder='Password'
             )
