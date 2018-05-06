@@ -1,7 +1,7 @@
 Promise = require 'bluebird-q'
 Serializer = require '../../../../components/form/serializer.coffee'
 
-module.exports = ($el, onSubmit = Promise.resolve()) ->
+module.exports = ($el, onSubmit = -> Promise.resolve()) ->
   $submit = $el.find('button')
   $errors = $el.find('.js-form-errors')
 
