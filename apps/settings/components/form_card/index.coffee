@@ -17,7 +17,7 @@ module.exports = ($el, onSubmit = -> Promise.resolve()) ->
       .text 'Saving...'
 
     Promise.all [
-      $.ajax(
+      Promise $.ajax(
         url: $el.data('action')
         method: $el.data('method')
         data: serializer.data()
