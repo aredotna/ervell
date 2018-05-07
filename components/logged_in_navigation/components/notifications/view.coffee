@@ -6,6 +6,8 @@ template = -> require('./index.jade') arguments...
 module.exports = class NotificationsView extends Backbone.View
   events:
     'click a': -> delay (=> @render()), 250
+    'mouseleave': 'markAsRead'
+    'click': 'markAsRead'
 
   initialize: ({ @state }) ->
     @listenTo @collection, 'sync', @render
@@ -20,9 +22,9 @@ module.exports = class NotificationsView extends Backbone.View
             @collection.clear()
             @state.set('is_fetching', false)
 
-      .on 'mouseleave click', (e) =>
-        @collection.markRead()
-        @state.set('unread_count', 0)
+  markAsRead: ->
+    @collection.markRead()
+    @state.set('unread_count', 0)
         
   render: ->
     @$el.html template
