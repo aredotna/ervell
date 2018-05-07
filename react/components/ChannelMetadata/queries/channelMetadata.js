@@ -5,23 +5,12 @@ import channelMetadataInfoFragment from 'react/components/ChannelMetadata/compon
 import channelMetadataConnectionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataConnections/fragments/channelMetadataConnections';
 import channelMetadataActionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/fragments/channelMetadataActions';
 import channelShareButtonFragment from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton/fragments/channelShareButton';
+import channelBreadcrumbFragment from 'react/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb';
 
 export default gql`
   query ChannelMetadata($id: ID!) {
     channel(id: $id) {
-      __typename
-      id: slug
-      title
-      href
-      visibility
-
-      owner: user {
-        __typename
-        id
-        name
-        href
-      }
-
+      ...ChannelBreadcrumb
       ...ChannelMetadataActions
       ...ChannelMetadataInfo
       ...CollaboratorsList
@@ -30,6 +19,7 @@ export default gql`
     }
   }
 
+  ${channelBreadcrumbFragment}
   ${channelMetadataActionsFragment}
   ${channelMetadataInfoFragment}
   ${channelMetadataCollaboratorsFragment}

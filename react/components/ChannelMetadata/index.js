@@ -5,8 +5,7 @@ import { graphql } from 'react-apollo';
 
 import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
 
-import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
-import BreadcrumbPath from 'react/components/BreadcrumbPath';
+import ChannelBreadcrumb from 'react/components/ChannelMetadata/components/ChannelBreadcrumb';
 import ChannelMetadataPocket from 'react/components/ChannelMetadata/components/ChannelMetadataPocket';
 import ChannelMetadataCollaborators from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators';
 import ChannelMetadataInfo from 'react/components/ChannelMetadata/components/ChannelMetadataInfo';
@@ -46,23 +45,7 @@ class ChannelMetadata extends Component {
 
     return (
       <Container>
-        <BreadcrumbPath>
-          <BreadcrumbPath.Crumb>
-            <a href={channel.owner.href}>
-              {channel.owner.name}
-            </a>
-          </BreadcrumbPath.Crumb>
-
-          <BreadcrumbPath.Crumb>
-            <ColoredChannelLink
-              title={channel.title}
-              href={channel.href}
-              visibility={channel.visibility}
-            >
-              {channel.title}
-            </ColoredChannelLink>
-          </BreadcrumbPath.Crumb>
-        </BreadcrumbPath>
+        <ChannelBreadcrumb channel={channel} />
 
         <Actions>
           <ChannelMetadataActions channel={channel} />
