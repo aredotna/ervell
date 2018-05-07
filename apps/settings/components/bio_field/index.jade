@@ -1,0 +1,4 @@
+label.Label About
+textarea.Input.Input--bio(
+  name='bio' placeholder='Bio' class="js-bio" wrap="physical"
+)= user.get('metadata') && user.get('metadata').description
