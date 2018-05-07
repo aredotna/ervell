@@ -1,4 +1,5 @@
 { USER, CUSTOMER } = require('sharify').data
+Promise = require 'bluebird-q'
 User = require '../../../../models/user.coffee'
 formCard = require '../../components/form_card/index.coffee'
 avatarUploader = require '../../components/avatar_uploader/index.coffee'
@@ -9,7 +10,16 @@ module.exports = ($el) ->
 
   models = user: new User(USER)
 
-  $el.find('form').each (_i, form) -> formCard $(form)
+  onSubmit = ->
+    currentMeta = models.user.get('metadata')
+    currentMeta = {} if not currentMeta
+    currentMeta.description = $el.find('.js-bio').val()
+
+    Promise $.post "#{models.user.urlRoot()}/metadata",
+      metadata: currentMeta
+
+  formCard $('form.js-upload')
+  formCard $('form.js-settings'), onSubmit
 
   avatarUploader $el.find('.js-avatar-uploader')
   homePathField $el.find('.js-home-path-field'), models

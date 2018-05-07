@@ -1,7 +1,7 @@
 Promise = require 'bluebird-q'
 Serializer = require '../../../../components/form/serializer.coffee'
 
-module.exports = ($el) ->
+module.exports = ($el, onSubmit = -> Promise.resolve()) ->
   $submit = $el.find('button')
   $errors = $el.find('.js-form-errors')
 
@@ -16,11 +16,14 @@ module.exports = ($el) ->
       .prop 'disabled', true
       .text 'Saving...'
 
-    Promise $.ajax
-      url: $el.data('action')
-      method: $el.data('method')
-      data: serializer.data()
-
+    Promise.all [
+      Promise $.ajax(
+        url: $el.data('action')
+        method: $el.data('method')
+        data: serializer.data()
+      ),
+      onSubmit()
+    ]
     .then ->
       Promise $.get('/me/refresh')
 
