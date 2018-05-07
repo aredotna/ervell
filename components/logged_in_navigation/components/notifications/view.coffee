@@ -21,9 +21,9 @@ module.exports = class NotificationsView extends Backbone.View
             @state.set('is_fetching', false)
 
       .on 'mouseleave click', (e) =>
-        @state.set('unread_count', 0)
         @collection.markRead()
-
+        @state.set('unread_count', 0)
+        
   render: ->
     @$el.html template
       feed: @collection
