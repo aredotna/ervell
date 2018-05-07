@@ -63,14 +63,16 @@ block-sidebar-breakpoint = 950px
   width 90%
   max-width 740px
   margin (unit * 2) auto
-  overflow-x auto
   padding unit * 2
   text-align left
   min-height 80vh
   font-size 1.2rem
   line-height 1.7em
   max-height 75vh
-  overflow scroll
+  overflow-x scroll
+
+  &.is-editing
+    overflow-x visible
 
   +below(800px)
     height 50vh
