@@ -48,13 +48,13 @@ initGlobalBlockRouting = ->
   # Simply starting one history isn't working as it should,
   # due to split packages (I believe).
   blacklist = Blacklist [
-    '/sign_up'
-    '/log_in'
-    '/forgot'
-    '/reset'
-    '/confirm'
-    '/register'
-    '/welcome'
+    /^\/sign_up$/
+    /^\/log_in$/
+    /^\/forgot$/
+    /^\/reset(\/\w+)?$/
+    /^\/confirm(\/\w+)?$/
+    /^\/register(\/\w+)?$/
+    /^\/welcome(\/\w+)?$/
   ]
 
   return if blacklist.isCurrentRouteBlacklisted()
@@ -173,7 +173,7 @@ showInviteMessage = ->
     id: 'invite_friend'
     title: 'Send an invitation'
     body: """
-      Are.na gets better when you <a href='/tools/send-invitation'>invite your friends</a>. 
+      Are.na gets better when you <a href='/tools/send-invitation'>invite your friends</a>.
     """
 
   messageView = new MessageView model: model
