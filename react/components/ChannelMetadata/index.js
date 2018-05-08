@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
-import { graphql } from 'react-apollo';
 
-import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
+import channelMetadataFragment from 'react/components/ChannelMetadata/fragments/channelMetadata';
 
 import ChannelBreadcrumb from 'react/components/ChannelMetadata/components/ChannelBreadcrumb';
 import ChannelMetadataPocket from 'react/components/ChannelMetadata/components/ChannelMetadataPocket';
@@ -29,19 +28,13 @@ const Actions = styled.div`
   right: 0;
 `;
 
-class ChannelMetadata extends Component {
+export default class ChannelMetadata extends Component {
   static propTypes = {
-    data: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-    }).isRequired,
+    channel: propType(channelMetadataFragment).isRequired,
   }
 
   render() {
-    const { data: { loading } } = this.props;
-
-    if (loading) return <div />;
-
-    const { data: { channel } } = this.props;
+    const { channel } = this.props;
 
     return (
       <Container>
@@ -72,5 +65,3 @@ class ChannelMetadata extends Component {
     );
   }
 }
-
-export default graphql(channelMetadataQuery)(ChannelMetadata);
