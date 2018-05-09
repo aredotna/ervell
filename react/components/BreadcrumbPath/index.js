@@ -18,6 +18,7 @@ const Crumb = styled.div`
   &:after {
     content: '/';
     margin: 0 0.33em;
+    font-weight: normal;
   }
 
   &:last-child:after {
