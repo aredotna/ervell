@@ -19,6 +19,6 @@ export default {
     hint: '#f7f7f7',
   },
   utility: {
-    transparent: 'rgba(0, 0, 0, 0.001)',
+    transparent: 'rgba(255, 255, 255, 0.001)',
   },
 };
