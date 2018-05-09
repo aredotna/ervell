@@ -1,75 +1,38 @@
 { default: ssr } = require '../../react/apollo/ssr.js'
-{ default: ChannelMetadata } = require '../../react/components/ChannelMetadata/index.js'
+{ default: ChannelComponent } = require '../../react/components/Channel/index.js'
 
-Channel = require '../../models/channel'
-graphQL = require '../../lib/graphql'
+ChannelModel = require '../../models/channel'
 
 @channel = (req, res, next) ->
+  id = req.params.channel_slug
   token = req.user?.get('authentication_token')
-  options = id: req.params.channel_slug
-  channel = new Channel options
+  channelModel = new ChannelModel id: id
 
-  canQuery = """
-    query channel_can($id: ID!) {
-      channel(id: $id) {
-        can {
-          add_to
-          update
-          mute
-          follow
-          manage_collaborators
-          destroy
-          manage
-        }
-      }
-    }
-  """
+  Promise.all([
+    req.apollo.render(ChannelComponent, { id: id })
+    channelModel.fetch(data: auth_token: token)
+  ])
+    .then ([channelComponent, _channelModelResponse]) ->
+      if channelModel.get('class') is 'User'
+        return res.redirect 301, "/#{channelModel.get('slug')}"
 
-  Promise
-    .all [
-      channel.fetch(data: auth_token: token)
-      channel.related().collaborators.fetch(data: auth_token: token)
-      graphQL(token: token, query: canQuery, variables: options)
-
-      req.apollo.render(ChannelMetadata, {
-        id: req.params.channel_slug
-      })
-    ]
-
-    .then ([
-      _channel,
-      _collaborators,
-      { channel: { can } },
-      channelMetadata
-    ]) ->
-      if channel.get('class') is 'User'
-        return res.redirect 301, "/#{channel.get 'slug'}"
-
-      if channel.get('user')?.slug isnt req.params.username
-        err = new Error
-        err.status = 404
-        err.message = 'Not Found'
-        return next err
-
-      res.locals.sd.CHANNEL = channel.toJSON()
-      res.locals.sd.COLLABORATORS = channel.related().collaborators.toJSON()
-      res.locals.sd.BLOCKS = channel.related().blocks.toJSON()
-      res.locals.sd.CAN = can
       res.locals.sd.CURRENT_ACTION = 'channel'
+      res.locals.sd.CHANNEL = CHANNEL = channelModel.toJSON()
+      res.locals.sd.CAN = CHANNEL.can
+      res.locals.sd.BLOCKS = channelModel.related().blocks.toJSON()
 
       res.render 'index',
-        channel: channel
-        blocks: channel.related().blocks.models
-        collaborators: channel.related().collaborators.models
-        author: channel.related().author
-        can: can or {}
-        channelMetadata: channelMetadata
+        channel: channelModel
+        author: channelModel.related().author
+        blocks: channelModel.related().blocks.models
+        can: CHANNEL.can
+        channelComponent: channelComponent
 
-    .catch next
+    .catch(next)
 
 @embed = (req, res, next) ->
   token = req.user?.get('authentication_token')
-  channel = new Channel id: req.params.channel_slug
+  channel = new ChannelModel id: req.params.channel_slug
   channel.url = "#{channel.urlRoot()}?per=7&direction=desc"
 
   channel
@@ -87,48 +50,30 @@ graphQL = require '../../lib/graphql'
     .catch next
 
 @followers = (req, res, next) ->
+  id = req.params.channel_slug
   token = req.user?.get('authentication_token')
-  options = id: req.params.channel_slug
-  channel = new Channel options
+  channelModel = new ChannelModel id: id
 
-  canQuery = """
-    query channel_can($id: ID!) {
-      channel(id: $id) {
-        can {
-          follow
-          mute
-        }
-      }
-    }
-  """
+  Promise.all([
+    req.apollo.render(ChannelComponent, { id: id })
+    channelModel.fetch(data: auth_token: token)
+    channelModel.related().followers.fetch(cache: true)
+  ])
+    .then ([channelComponent, _channelModelResponse, _channelFollowersResponse]) ->
+      if channelModel.get('class') is 'User'
+        return res.redirect 301, "/#{channelModel.get('slug')}"
 
-  Promise
-    .all [
-      channel.fetch()
-      channel.related().collaborators.fetch(data: auth_token: token)
-      channel.related().followers.fetch(cache: true)
-      graphQL(token: token, query: canQuery, variables: options)
-    ]
-
-    .then ([_channel, _collaborators, _followers, { channel: { can }}]) ->
-      if channel.get('class') is 'User'
-        return res.redirect 301, "/#{channel.get 'slug'}"
-
-      res.locals.sd.CHANNEL = channel.toJSON()
-      res.locals.sd.BLOCKS = channel.related().followers.toJSON()
-      res.locals.sd.COLLABORATORS = channel.related().collaborators.toJSON()
-      res.locals.sd.FOLLOWERS = channel.related().followers.toJSON()
-      res.locals.sd.CAN = can
+      res.locals.sd.CURRENT_ACTION = 'channel_followers'
+      res.locals.sd.CHANNEL = CHANNEL = channelModel.toJSON()
+      res.locals.sd.CAN = CAN = { add_to: false, manage: false }
+      res.locals.sd.BLOCKS = channelModel.related().followers.toJSON()
 
       res.render 'index',
-        channel: channel
-        blocks: channel.related().followers.models # TODO: Odd naming
-        collaborators: channel.related().collaborators.models
-        author: channel.related().author
         followers: true
-        can: can
-        # TODO: Consolidate these routes
-        channelMetadata:
-          state: {}
+        channel: channelModel
+        author: channelModel.related().author
+        blocks: channelModel.related().followers.models # TODO: Odd naming
+        can: CAN
+        channelComponent: channelComponent
 
     .catch next

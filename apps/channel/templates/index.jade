@@ -2,12 +2,12 @@ extends ../../../components/layout/index
 
 block meta
   include _meta
-  != channelMetadata.styles
+  != channelComponent.styles
 
 block body
   .channel.js-channel
-    .Constrain.js-channel-metadata
-      != channelMetadata.html
+    .Constrain.js-channel-component
+      != channelComponent.html
 
     .channel-container
       .channel-contents.js-channel-contents
@@ -26,4 +26,4 @@ block body
 block scripts
   script( src= asset('/assets/channel.js') )
   script.
-    window.__APOLLO_STATE__ = !{JSON.stringify(channelMetadata.state).replace(/</g, '\\u003c')};
+    window.__APOLLO_STATE__ = !{JSON.stringify(channelComponent.state).replace(/</g, '\\u003c')};
