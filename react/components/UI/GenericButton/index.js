@@ -33,6 +33,12 @@ export const mixin = css`
   }
 `;
 
-export default styled.button`
+export const GenericButtonLink = styled.a`
   ${mixin}
 `;
+
+const GenericButton = styled.a`
+  ${mixin}
+`;
+
+export default GenericButton;
