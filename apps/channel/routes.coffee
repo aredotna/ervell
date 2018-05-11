@@ -1,4 +1,3 @@
-{ default: ssr } = require '../../react/apollo/ssr.js'
 { default: ChannelComponent } = require '../../react/components/Channel/index.js'
 
 ChannelModel = require '../../models/channel'
