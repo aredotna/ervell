@@ -17,9 +17,12 @@ const Container = styled.div`
   margin: 100px auto 0 auto;
 `;
 
+// TODO: Remove the negative margins once block grid is re-done.
 const Pockets = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
 `;
 
 const Actions = styled.div`
