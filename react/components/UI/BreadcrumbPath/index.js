@@ -10,19 +10,25 @@ const Container = styled.div`
   margin: 0 0 2em 0;
   line-height: 1;
   font-size: ${Styles.Type.size.h3};
-  font-weight: bold;
-  color: ${Styles.Colors.gray.medium};
 `;
 
 const Crumb = styled.div`
+  font-weight: bold;
+  color: ${Styles.Colors.gray.medium};
+
   &:after {
     content: '/';
     margin: 0 0.33em;
     font-weight: normal;
   }
 
-  &:last-child:after {
-    display: none;
+  &:last-child {
+    color: ${Styles.Colors.gray.semiBold};
+
+    // Hides trailing slash
+    &:after {
+      display: none;
+    }
   }
 `;
 

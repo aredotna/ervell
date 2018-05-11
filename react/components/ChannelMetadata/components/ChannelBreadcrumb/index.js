@@ -4,7 +4,7 @@ import { propType } from 'graphql-anywhere';
 import channelBreadcrumbFragment from 'react/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb';
 
 import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
-import BreadcrumbPath from 'react/components/BreadcrumbPath';
+import BreadcrumbPath from 'react/components/UI/BreadcrumbPath';
 
 export default class ChannelBreadcrumb extends Component {
   static propTypes = {
