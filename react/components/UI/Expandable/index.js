@@ -21,6 +21,12 @@ const Button = styled.a`
   left: 0;
   height: 2rem;
   background: linear-gradient(${Styles.Colors.utility.transparent}, white);
+  opacity: 0;
+  transition: opacity 0.25s;
+
+  &[data-enabled="true"] {
+    opacity: 1;
+  }
 
   &:hover {
     opacity: 0.75;
@@ -54,6 +60,7 @@ export default class Expandable extends Component {
     this.state = {
       mode: props.mode,
       force: false,
+      isEnabled: false,
     };
   }
 
@@ -61,6 +68,10 @@ export default class Expandable extends Component {
     if (!this.isOverFlowing()) {
       this.setState({ mode: 'expanded', force: true });
     }
+
+    this.setState({
+      isEnabled: typeof window !== 'undefined',
+    });
   }
 
   isOverFlowing() {
@@ -73,10 +84,8 @@ export default class Expandable extends Component {
   }
 
   render() {
-    const { mode, force } = this.state;
-    const {
-      children, height, ...rest
-    } = this.props;
+    const { mode, force, isEnabled } = this.state;
+    const { children, height, ...rest } = this.props;
 
     return (
       <Container
@@ -90,7 +99,7 @@ export default class Expandable extends Component {
         </div>
 
         {mode === 'resting' && !force &&
-          <Button onClick={this.expandContents} />
+          <Button data-enabled={isEnabled} onClick={this.expandContents} />
         }
       </Container>
     );
