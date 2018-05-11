@@ -138,7 +138,7 @@
     "rewire": "https://registry.npmjs.org/rewire/-/rewire-2.5.2.tgz",
     "should": "*",
     "sinon": "*",
-    "webpack": "^3.10.0",
+    "webpack": "^3.11.0",
     "webpack-dev-middleware": "^2.0.4",
     "webpack-notifier": "^1.5.1"
   },
