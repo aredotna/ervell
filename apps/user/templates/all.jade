@@ -2,21 +2,27 @@ extends ../../../components/layout/index
 
 block meta
   include _meta
+  != profileComponent.styles
 
 block body
-  include _path
+  .Constrain.js-profile-component
+    != profileComponent.html
+
   include _tips
 
-  .channel-container.channel-container--infinite( class=blocks.length ? '' : 'is-empty' )
+  .channel-container.channel-container--infinite( class= blocks.length ? '' : 'is-empty' )
     .profile-contents
       - content = sd.SUBJECT ? sd.SUBJECT + "s" : "blocks and channels"
       - searchee = (user && author.id == user.id) ? "your " : author.get('username') + "'s public "
       - title = searchee + content
       include ../../../components/blocks/container/templates/index
+
     .channel-empty
       include _empty
+
     include ../../../components/layout/loader/templates/infinite
 
 block scripts
-  script( src=asset('/assets/user.js') )
-
+  script( src= asset('/assets/user.js') )
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(profileComponent.state).replace(/</g, '\\u003c')};

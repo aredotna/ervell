@@ -1,8 +1,9 @@
-#
-# Client-side code for 
-# /:username, /:username/blocks, /:username/following
-#
+# React requires
+{ USER } = require('sharify').data
+{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
+{ default: ProfileComponent } = require '../../../react/components/Profile/index.js'
 
+# Legacy requires
 Backbone = require "backbone"
 Backbone.$ = $
 _ = require 'underscore'
@@ -19,6 +20,10 @@ UserBlockCollectionView = require '../../../components/block_collection/client/u
 setupBlockCollection = require '../../../components/blocks/container/client/index.coffee'
 
 module.exports.init = ->
+  # Sets up React component
+  if ($profileComponent = $('.js-profile-component')).length
+    mountWithApolloProvider(ProfileComponent, { id: USER.slug }, $profileComponent)
+
   current_user = mediator.shared.current_user
   user = new User sd.USER
 

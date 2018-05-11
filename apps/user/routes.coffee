@@ -1,5 +1,4 @@
 _ = require 'underscore'
-Q = require 'bluebird-q'
 Backbone = require 'backbone'
 User = require "../../models/user"
 ChannelBlocks = require "../../collections/channel_blocks.coffee"
@@ -8,10 +7,11 @@ FollowBlocks = require "../../collections/follow_blocks"
 Channel = require "../../models/channel"
 graphQL = require "../../lib/graphql.coffee"
 query = require "./queries/profile.coffee"
-sd = require("sharify").data
 cache = require "../../lib/cache.coffee"
 tips = require './tips.coffee'
 { addTips } = require '../../components/tips/helpers.coffee'
+
+{ default: ProfileComponent } = require '../../react/components/Profile/index.js'
 
 @fetchAuthor = (req, res, next) ->
   author = new User id: req.params.username
@@ -29,8 +29,10 @@ tips = require './tips.coffee'
 @user = (req, res, next) ->
   return next() unless res.locals.author
 
-  blocks = new UserBlocks null,
-    user_slug: req.params.username
+  id = req.params.username
+  token = req.user?.get('authentication_token')
+
+  blocks = new UserBlocks(null, user_slug: id)
 
   if req.params.block_id
     res.locals.sd.CLIENT_PATH = "block/#{req.params.block_id}"
@@ -44,16 +46,18 @@ tips = require './tips.coffee'
       sort: res.locals.sd.SORT
       seed: res.locals.sd.SEED
 
-  blocks.fetch
-    data:
-      auth_token: req.user?.get('authentication_token')
-    error: (m, err) -> next err
-    success: ->
+  Promise.all([
+    req.apollo.render(ProfileComponent, { id: id })
+    blocks.fetch(data: auth_token: token)
+  ])
+    .then ([profileComponent, _blocksResponse]) ->
       res.locals.sd.BLOCKS = blocks.toJSON()
       res.locals.sd.CURRENT_ACTION = 'profile'
-      res.render "all",
+
+      res.render 'all',
         author: res.locals.author
         blocks: blocks.models
+        profileComponent: profileComponent
 
 @index = (req, res, next) ->
   return next() unless res.locals.author
