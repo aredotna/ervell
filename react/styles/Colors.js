@@ -8,6 +8,7 @@ export default {
     premium: '#00c5ff',
     alert: 'rgb(255, 94, 0)',
     editable: '#fdffdb',
+    investor: 'rgb(183, 158, 110)',
   },
   gray: {
     bold: '#333',
