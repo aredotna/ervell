@@ -46,7 +46,7 @@ const Content = styled.div`
   }
 `;
 
-export default class ChannelMetadataPocket extends Component {
+export default class Pocket extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,

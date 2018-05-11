@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import channelMetadataFragment from 'react/components/ChannelMetadata/fragments/channelMetadata';
 
+import Pocket from 'react/components/UI/Pocket';
 import ChannelBreadcrumb from 'react/components/ChannelMetadata/components/ChannelBreadcrumb';
-import ChannelMetadataPocket from 'react/components/ChannelMetadata/components/ChannelMetadataPocket';
 import ChannelMetadataCollaborators from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators';
 import ChannelMetadataInfo from 'react/components/ChannelMetadata/components/ChannelMetadataInfo';
 import ChannelMetadataConnections from 'react/components/ChannelMetadata/components/ChannelMetadataConnections';
@@ -46,19 +46,19 @@ export default class ChannelMetadata extends Component {
 
         <Pockets>
           <ChannelMetadataExpandableContext>
-            <ChannelMetadataPocket title="Info">
+            <Pocket title="Info">
               <ChannelMetadataInfo channel={channel} />
-            </ChannelMetadataPocket>
+            </Pocket>
 
             {(channel.can.manage_collaborators || channel.collaborators.length > 0) &&
-              <ChannelMetadataPocket title="Collaborators">
+              <Pocket title="Collaborators">
                 <ChannelMetadataCollaborators channel={channel} />
-              </ChannelMetadataPocket>
+              </Pocket>
             }
 
-            <ChannelMetadataPocket title="Connected to">
+            <Pocket title="Connected to">
               <ChannelMetadataConnections channel={channel} />
-            </ChannelMetadataPocket>
+            </Pocket>
           </ChannelMetadataExpandableContext>
         </Pockets>
       </Container>
