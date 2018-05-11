@@ -34,9 +34,17 @@ class ChannelShareButton extends Component {
     shareChannel: PropTypes.func.isRequired,
   }
 
-  state = {
-    mode: 'resting',
-    remote: 'resting',
+  constructor(props) {
+    super(props);
+
+    const { channel: { visibility, share: { url } } } = props;
+
+    const isAlreadyGenerated = visibility === 'private' && !!url;
+
+    this.state = {
+      mode: isAlreadyGenerated ? 'active' : 'resting',
+      remote: 'resting',
+    };
   }
 
   disableShareLink = async () => {
@@ -57,9 +65,14 @@ class ChannelShareButton extends Component {
     if (isNull(channel.share.url)) {
       this.setState({ remote: 'generating' });
 
-      await shareChannel({
-        variables: { id: channel.id, enable: true },
-      });
+      try {
+        await shareChannel({
+          variables: { id: channel.id, enable: true },
+        });
+      } catch (err) {
+        this.setState({ mode: 'resting', remote: 'error' });
+        return;
+      }
     }
 
     this.setState({ mode: 'active', remote: 'resting' });
@@ -76,11 +89,12 @@ class ChannelShareButton extends Component {
             {{
               resting: 'Share',
               generating: 'Generating...',
+              error: 'An error has occurred. Try again.',
             }[remote]}
           </Button>
         }
 
-        {mode === 'active' &&
+        {mode === 'active' && channel.share.url &&
           <div>
             <GenericInput
               size="xs"
