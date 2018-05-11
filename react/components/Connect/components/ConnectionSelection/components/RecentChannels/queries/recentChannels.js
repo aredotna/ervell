@@ -7,12 +7,8 @@ export default gql`
     me {
       __typename
       id
-      recent_channels: contents(type: CHANNEL, sort_by: UPDATED_AT, per: 5) {
-        kind {
-          ... on Channel {
-            ...SelectableChannel
-          }
-        }
+      recent_channels: recent_connections(per: 5) {
+        ...SelectableChannel
       }
     }
   }

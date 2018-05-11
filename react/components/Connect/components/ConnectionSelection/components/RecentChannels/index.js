@@ -22,10 +22,7 @@ class RecentChannels extends Component {
 
     if (loading) return <LoadingIndicator {...rest} />;
 
-    const { data: { me: { recent_channels } } } = this.props;
-
-    // TODO: Fix the schema to prevent having map out `kind`
-    const channels = recent_channels.map(({ kind }) => kind);
+    const { data: { me: { recent_channels: channels } } } = this.props;
 
     return (
       <ChannelsList
