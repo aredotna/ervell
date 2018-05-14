@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
 
-const GET_CURRENT_ROUTE_URL = gql`
-  query {
-    currentRoute @client {
-      url
-      path
-    }
-  }
-`;
-
+import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
 class LinkUnlessCurrent extends Component {
   static propTypes = {
-    data: PropTypes.shape({
-      currentRoute: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-      }).isRequired,
+    currentRoute: PropTypes.shape({
+      href: PropTypes.string.isRequired,
     }).isRequired,
-
     href: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     predicate: PropTypes.func,
@@ -31,15 +18,25 @@ class LinkUnlessCurrent extends Component {
   }
 
   isCurrent = () => {
-    const { predicate, href, data: { currentRoute: { url, path } } } = this.props;
+    const {
+      predicate,
+      href: targetHref,
+      currentRoute,
+      currentRoute: { href: currentHref },
+    } = this.props;
 
-    if (predicate) return predicate({ href, url, path });
+    if (predicate) {
+      return predicate({ targetHref, currentRoute });
+    }
 
-    return href === url;
+    return targetHref === currentHref;
   }
 
   render() {
-    const { href, children, ...rest } = this.props;
+    const {
+      href, children, predicate: _predicate, currentRoute: _currentRoute,
+      ...rest
+    } = this.props;
 
     return (
       <a
@@ -52,4 +49,4 @@ class LinkUnlessCurrent extends Component {
   }
 }
 
-export default graphql(GET_CURRENT_ROUTE_URL)(LinkUnlessCurrent);
+export default WithCurrentRoute(LinkUnlessCurrent);
