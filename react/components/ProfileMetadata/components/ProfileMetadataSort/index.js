@@ -13,11 +13,15 @@ class ProfileMetadataSort extends Component {
     }).isRequired,
   }
 
-  isCurrentUpdatedAt = ({ currentRoute }) =>
-    currentRoute.search.indexOf('sort=updated_at') >= 0 || currentRoute.search.indexOf('sort=') === -1;
+  isCurrentUpdatedAt = ({ currentRoute: { search: queryString } }) => {
+    if (!queryString) return true; // Default sort
+    return queryString.indexOf('sort=updated_at') >= 0;
+  }
 
-  isCurrentRandom = ({ currentRoute }) =>
-    currentRoute.search.indexOf('sort=random') >= 0
+  isCurrentRandom = ({ currentRoute: { search: queryString } }) => {
+    if (!queryString) return false;
+    return queryString.indexOf('sort=random') >= 0;
+  }
 
   render() {
     const { currentRoute: { pathname } } = this.props;

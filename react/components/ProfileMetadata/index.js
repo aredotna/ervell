@@ -6,7 +6,6 @@ import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/
 
 import ProfileBreadcrumb from 'react/components/ProfileMetadata/components/ProfileBreadcrumb';
 import ProfileMetadataActions from 'react/components/ProfileMetadata/components/ProfileMetadataActions';
-import ProfileMetadataAbout from 'react/components/ProfileMetadata/components/ProfileMetadataAbout';
 import ProfileMetadataInfo from 'react/components/ProfileMetadata/components/ProfileMetadataInfo';
 import ProfileMetadataView from 'react/components/ProfileMetadata/components/ProfileMetadataView';
 import ProfileMetadataSort from 'react/components/ProfileMetadata/components/ProfileMetadataSort';
@@ -47,7 +46,6 @@ export default class ProfileMetadata extends Component {
         </Actions>
 
         <Pockets>
-          <ProfileMetadataAbout user={user} />
           <ProfileMetadataInfo user={user} />
           <ProfileMetadataView user={user} />
           <ProfileMetadataSort user={user} />

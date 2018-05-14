@@ -10,6 +10,10 @@ const Link = styled.a`
   display: block;
 `;
 
+const About = styled.div`
+  margin-bottom: 1em;
+`;
+
 export default class ProfileMetadataInfo extends Component {
   static propTypes = {
     user: propType(profileMetadataInfoFragment).isRequired,
@@ -20,6 +24,8 @@ export default class ProfileMetadataInfo extends Component {
 
     return (
       <Pocket title="Info">
+        <About dangerouslySetInnerHTML={{ __html: user.about || '<p>—</p>' }} />
+
         {user.counts.followers > 0 &&
           <Link href={`${user.href}/followers`}>
             Followers
