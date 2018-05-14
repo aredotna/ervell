@@ -140,8 +140,17 @@ module.exports = (app) ->
   app.use require('./middleware/error_status')
 
   # Drop down to error handling middleware if nothing else catches it
-  # TODO: Kill this/replace with something that's not a Node module
-  artsyError.handlers app,
-    template: path.resolve(__dirname, '../components/layout/templates/error.jade')
+  if NODE_ENV is 'development'
+    app.use (err, req, res, next) =>
+      res.status(err.status or 500)
+      res.json({
+        message: err.message,
+        status: err.status,
+        stack: err.stack,
+      })
+  else
+    # TODO: Kill this/replace with something that's not a Node module
+    artsyError.handlers app,
+      template: path.resolve(__dirname, '../components/layout/templates/error.jade')
 
   console.log 'Completed set up.'
