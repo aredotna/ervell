@@ -126,17 +126,15 @@ module.exports = (app) ->
 
   console.log 'Mounting apps...'
 
-  switch NODE_ENV
-    when 'development'
-      reloadAndMount = createReloadable(app, require)
+  if NODE_ENV is 'development'
+    mountAndReload = createReloadable(app, require)
+    modules = glob.sync('./react/**/*.js').map (name) => path.resolve(name)
 
-      modules = glob.sync('./react/**/*.js').map (name) => path.resolve(name)
-
-      app.use reloadAndMount(path.join(__dirname, '..', 'apps'), {
-        watchModules: modules
-      })
-    else
-      app.use require '../apps'
+    app.use mountAndReload path.join(__dirname, '..', 'apps'), {
+      watchModules: modules
+    }
+  else
+    app.use require '../apps'
 
   # Convert the GraphQL error messages into some kind of matching status code
   app.use require('./middleware/error_status')
