@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import url from 'url';
 import sharify from 'sharify';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -27,7 +28,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   },
 });
 
-export const initApolloClient = ({ token: X_AUTH_TOKEN, url, path } = {}) => {
+export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute } = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__;
   }
@@ -45,8 +46,7 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, url, path } = {}) => {
     defaults: {
       currentRoute: {
         __typename: 'CurrentRoute',
-        url,
-        path,
+        ...currentRoute,
       },
     },
   });
@@ -79,12 +79,12 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, url, path } = {}) => {
 };
 
 export const initClientSideApolloClient = () => {
-  const { data: { CURRENT_USER, CURRENT_URL, CURRENT_PATH } } = sharify;
+  const { data: { CURRENT_USER, CURRENT_URL } } = sharify;
+  const currentRoute = { ...url.parse(CURRENT_URL) };
 
   initApolloClient({
     token: CURRENT_USER && CURRENT_USER.authentication_token,
-    url: CURRENT_URL,
-    path: CURRENT_PATH,
+    currentRoute,
   });
 };
 
