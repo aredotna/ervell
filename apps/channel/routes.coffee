@@ -1,6 +1,18 @@
 { default: ChannelComponent } = require '../../react/components/Channel/index.js'
 
 ChannelModel = require '../../models/channel'
+graphQL = require '../../lib/graphql'
+
+channelCanQuery = """
+  query channel_can($id: ID!) {
+    channel(id: $id) {
+      can {
+        add_to
+        update
+      }
+    }
+  }
+"""
 
 @channel = (req, res, next) ->
   id = req.params.channel_slug
@@ -10,21 +22,23 @@ ChannelModel = require '../../models/channel'
   Promise.all([
     req.apollo.render(ChannelComponent, { id: id })
     channelModel.fetch(data: auth_token: token)
+    graphQL(token: token, query: channelCanQuery, variables: id: id)
   ])
-    .then ([channelComponent, _channelModelResponse]) ->
+    .then ([channelComponent, _channelModelResponse, channelCanResponse]) ->
+
       if channelModel.get('class') is 'User'
         return res.redirect 301, "/#{channelModel.get('slug')}"
 
       res.locals.sd.CURRENT_ACTION = 'channel'
       res.locals.sd.CHANNEL = CHANNEL = channelModel.toJSON()
-      res.locals.sd.CAN = CHANNEL.can
+      res.locals.sd.CAN = CAN = channelCanResponse.channel.can
       res.locals.sd.BLOCKS = channelModel.related().blocks.toJSON()
 
       res.render 'index',
         channel: channelModel
         author: channelModel.related().author
         blocks: channelModel.related().blocks.models
-        can: CHANNEL.can
+        can: CAN
         channelComponent: channelComponent
 
     .catch(next)
