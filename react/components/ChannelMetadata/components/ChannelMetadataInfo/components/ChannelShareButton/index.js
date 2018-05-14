@@ -14,6 +14,14 @@ import channelShareButtonFragment from 'react/components/ChannelMetadata/compone
 const Container = styled.div`
   ${x => x.mode === 'active' && `
     margin: 1em 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   `}
 `;
 
