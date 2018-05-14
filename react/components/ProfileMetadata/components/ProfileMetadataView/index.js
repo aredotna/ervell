@@ -11,24 +11,39 @@ export default class ProfileMetadataView extends Component {
     user: propType(profileMetadataViewFragment).isRequired,
   }
 
+  isCurrent = ({ targetHref, currentRoute }) =>
+    currentRoute.pathname === targetHref.split('?')[0];
+
   render() {
     const { user: { href } } = this.props;
 
     return (
       <Pocket title="View">
-        <ProfileLinkUnlessCurrent href={href}>
+        <ProfileLinkUnlessCurrent
+          href={href}
+          predicate={this.isCurrent}
+        >
           All
         </ProfileLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent href={`${href}/channels?sort=updated_at`}>
+        <ProfileLinkUnlessCurrent
+          href={`${href}/channels?sort=updated_at`}
+          predicate={this.isCurrent}
+        >
           Channels
         </ProfileLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent href={`${href}/blocks?sort=updated_at`}>
+        <ProfileLinkUnlessCurrent
+          href={`${href}/blocks?sort=updated_at`}
+          predicate={this.isCurrent}
+        >
           Blocks
         </ProfileLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent href={`${href}/index`}>
+        <ProfileLinkUnlessCurrent
+          href={`${href}/index`}
+          predicate={this.isCurrent}
+        >
           Index
         </ProfileLinkUnlessCurrent>
       </Pocket>

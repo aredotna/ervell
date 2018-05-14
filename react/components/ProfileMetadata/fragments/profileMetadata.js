@@ -5,7 +5,6 @@ import profileMetadataActionsFragment from 'react/components/ProfileMetadata/com
 import profileMetadataAboutFragment from 'react/components/ProfileMetadata/components/ProfileMetadataAbout/fragments/profileMetadataAbout';
 import profileMetadataInfoFragment from 'react/components/ProfileMetadata/components/ProfileMetadataInfo/fragments/profileMetadataInfo';
 import profileMetadataViewFragment from 'react/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView';
-import profileMetadataSortFragment from 'react/components/ProfileMetadata/components/ProfileMetadataSort/fragments/profileMetadataSort';
 
 export default gql`
   fragment ProfileMetadata on User {
@@ -14,7 +13,6 @@ export default gql`
     ...ProfileMetadataAbout
     ...ProfileMetadataInfo
     ...ProfileMetadataView
-    ...ProfileMetadataSort
   }
 
   ${profileBreadcrumbFragment}
@@ -22,5 +20,4 @@ export default gql`
   ${profileMetadataAboutFragment}
   ${profileMetadataInfoFragment}
   ${profileMetadataViewFragment}
-  ${profileMetadataSortFragment}
 `;
