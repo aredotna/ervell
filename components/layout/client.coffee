@@ -54,7 +54,7 @@ initGlobalBlockRouting = ->
     /^\/reset(\/\w+)?$/
     /^\/confirm(\/\w+)?$/
     /^\/register(\/\w+)?$/
-    /^\/welcome(\/\w+)?$/
+    /^\/welcome(\/.+)?$/
   ]
 
   return if blacklist.isCurrentRouteBlacklisted()
