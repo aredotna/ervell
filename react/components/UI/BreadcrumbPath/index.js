@@ -40,10 +40,10 @@ export default class BreadcrumbPath extends Component {
   static Crumb = Crumb;
 
   render() {
-    const { children } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
-      <Container>
+      <Container {...rest}>
         <Crumb>
           <a href="/">
             Are.na
