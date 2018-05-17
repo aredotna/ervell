@@ -19,17 +19,16 @@ const Button = styled.a`
   right: 0;
   bottom: 0;
   left: 0;
-  height: 2rem;
-  background: linear-gradient(${Styles.Colors.utility.transparent}, white);
+  height: 3rem;
+  background: linear-gradient(${Styles.Colors.utility.transparent} 0%, white 75%);
   opacity: 0;
-  transition: opacity 0.25s;
 
   &[data-enabled="true"] {
     opacity: 1;
   }
 
   &:hover {
-    opacity: 0.75;
+    background: linear-gradient(${Styles.Colors.utility.transparent} 25%, white 90%);
   }
 `;
 
@@ -85,7 +84,9 @@ export default class Expandable extends Component {
 
   render() {
     const { mode, force, isEnabled } = this.state;
-    const { children, height, ...rest } = this.props;
+    const {
+      children, height, mode: _initialMode, ...rest
+    } = this.props;
 
     return (
       <Container
