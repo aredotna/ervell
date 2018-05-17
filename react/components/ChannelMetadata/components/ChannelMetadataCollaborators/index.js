@@ -18,6 +18,10 @@ const Link = styled.a`
   display: block;
 `;
 
+const StyledCollaboratorsList = styled(CollaboratorsList)`
+  padding-right: 1em;
+`;
+
 export default class CollaboratorsListContainer extends Component {
   static propTypes = {
     channel: PropTypes.shape({}).isRequired, // TODO
@@ -53,7 +57,10 @@ export default class CollaboratorsListContainer extends Component {
       <div>
         {collaborators.length > 0 &&
           <ChannelMetadataExpandable>
-            <CollaboratorsList collaborators={collaborators} channel_id={channel_id} />
+            <StyledCollaboratorsList
+              collaborators={collaborators}
+              channel_id={channel_id}
+            />
           </ChannelMetadataExpandable>
         }
 

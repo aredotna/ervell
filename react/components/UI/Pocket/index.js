@@ -24,13 +24,14 @@ const Title = styled.h4`
 `;
 
 const Content = styled.div`
-  padding: 0.5em 0;
+  margin: 0.5em 0;
   color: ${Styles.Colors.gray.semiBold};
   font-size: ${Styles.Type.size.xs};
   line-height: ${Styles.Type.lineHeight.tall};
 
   p {
-    margin: 1em auto;
+    margin: 0.5em auto;
+    padding-right: 1em;
 
     &:first-child {
       margin-top: 0;

@@ -13,6 +13,14 @@ const Actions = styled.div`
   div + & {
     margin-top: 1em;
   }
+
+  &:first-child {
+    margin-top: 0.66em;
+  }
+`;
+
+const ConnectionsList = styled(LinksList)`
+  padding-right: 1em;
 `;
 
 export default class ChannelMetadataConnections extends Component {
@@ -27,7 +35,7 @@ export default class ChannelMetadataConnections extends Component {
       <div>
         {channel.connections.length > 0 &&
           <ChannelMetadataExpandable>
-            <LinksList links={channel.connections} />
+            <ConnectionsList links={channel.connections} />
           </ChannelMetadataExpandable>
         }
 
