@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
+import PropTypes from 'prop-types';
+
+import { SORTS, MODES, SORTABLE_MODES } from 'react/components/Profile/config';
 
 import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/profileMetadata';
 
@@ -32,10 +35,12 @@ const Actions = styled.div`
 export default class ProfileMetadata extends Component {
   static propTypes = {
     user: propType(profileMetadataFragment).isRequired,
+    mode: PropTypes.oneOf(MODES).isRequired,
+    sort: PropTypes.oneOf(SORTS).isRequired,
   }
 
   render() {
-    const { user } = this.props;
+    const { user, mode, sort } = this.props;
 
     return (
       <Container>
@@ -46,9 +51,11 @@ export default class ProfileMetadata extends Component {
         </Actions>
 
         <Pockets>
-          <ProfileMetadataInfo user={user} />
-          <ProfileMetadataView user={user} />
-          <ProfileMetadataSort user={user} />
+          <ProfileMetadataInfo user={user} mode={mode} />
+          <ProfileMetadataView user={user} mode={mode} sort={sort} />
+          {SORTABLE_MODES.includes(mode) &&
+            <ProfileMetadataSort user={user} sort={sort} />
+          }
         </Pockets>
       </Container>
     );

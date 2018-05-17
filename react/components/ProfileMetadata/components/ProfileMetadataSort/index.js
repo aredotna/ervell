@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { SORTS } from 'react/components/Profile/config';
+
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
 import Pocket from 'react/components/UI/Pocket';
@@ -11,17 +13,14 @@ class ProfileMetadataSort extends Component {
     currentRoute: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
+    sort: PropTypes.oneOf(SORTS).isRequired,
   }
 
-  isCurrentUpdatedAt = ({ currentRoute: { search: queryString } }) => {
-    if (!queryString) return true; // Default sort
-    return queryString.indexOf('sort=updated_at') >= 0;
-  }
+  isCurrentUpdatedAt = () =>
+    this.props.sort === 'updated_at';
 
-  isCurrentRandom = ({ currentRoute: { search: queryString } }) => {
-    if (!queryString) return false;
-    return queryString.indexOf('sort=random') >= 0;
-  }
+  isCurrentRandom = () =>
+    this.props.sort === 'random';
 
   render() {
     const { currentRoute: { pathname } } = this.props;
@@ -29,6 +28,8 @@ class ProfileMetadataSort extends Component {
     return (
       <Pocket title="Sort">
         <ProfileLinkUnlessCurrent
+          name="sort"
+          value="updated_at"
           href={`${pathname}?sort=updated_at`}
           predicate={this.isCurrentUpdatedAt}
         >
@@ -36,6 +37,8 @@ class ProfileMetadataSort extends Component {
         </ProfileLinkUnlessCurrent>
 
         <ProfileLinkUnlessCurrent
+          name="sort"
+          value="random"
           href={`${pathname}?sort=random`}
           predicate={this.isCurrentRandom}
         >
