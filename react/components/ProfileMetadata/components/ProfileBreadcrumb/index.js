@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
 import profileBreadcrumbFragment from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/fragments/profileBreadcrumb';
 
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import ProfileBadge from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge';
+import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
-export default class ProfileBreadcrumb extends Component {
+class ProfileBreadcrumb extends Component {
   static propTypes = {
     user: propType(profileBreadcrumbFragment).isRequired,
+    currentRoute: PropTypes.shape({
+      href: PropTypes.string.isRequired,
+    }).isRequired,
   }
 
   render() {
-    const { user } = this.props;
+    const { user, currentRoute: { href } } = this.props;
 
     return (
       <StickyBreadcrumbPath>
@@ -21,9 +26,25 @@ export default class ProfileBreadcrumb extends Component {
             {user.name}
           </a>
 
-          <ProfileBadge user={user} />
+          {href === user.href &&
+            <ProfileBadge user={user} />
+          }
         </StickyBreadcrumbPath.Crumb>
+
+        {/following$/.test(href) &&
+          <StickyBreadcrumbPath.Crumb>
+            Following
+          </StickyBreadcrumbPath.Crumb>
+        }
+
+        {/followers$/.test(href) &&
+          <StickyBreadcrumbPath.Crumb>
+            Followers
+          </StickyBreadcrumbPath.Crumb>
+        }
       </StickyBreadcrumbPath>
     );
   }
 }
+
+export default WithCurrentRoute(ProfileBreadcrumb);
