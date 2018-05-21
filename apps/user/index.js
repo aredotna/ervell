@@ -8,6 +8,7 @@ import apolloMiddleware from 'react/apollo/middleware';
 import setSortMiddleware from 'apps/user/middleware/setSort';
 import setSubjectModeMiddleware from 'apps/user/middleware/setSubjectMode';
 import redirectModeMiddleware from 'apps/user/middleware/redirectMode';
+import setTipsMiddleware from 'apps/user/middleware/setTips';
 
 import ProfileComponent from 'react/components/Profile';
 
@@ -181,6 +182,7 @@ const middlewareStack = [
   apolloMiddleware,
   setSortMiddleware,
   setSubjectModeMiddleware,
+  setTipsMiddleware,
 ];
 
 app.get('/:id', redirectModeMiddleware, ...middlewareStack, show);
