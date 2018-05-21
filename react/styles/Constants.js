@@ -20,5 +20,6 @@ export default {
   headerHeight: '50px',
   blockWidth: '315px', // TODO: 19.5em
   blockGutter: '10px', // TODO: 1em
+  containerOffset: '100px', // TODO: Something based on real values
   media,
 };
