@@ -4,14 +4,7 @@ import styled from 'styled-components';
 
 import Styles from 'react/styles';
 
-// Avoid fighting the shitty CSS for now and
-// replace this at a later date.
-const Container = styled.div.attrs({
-  className: 'grid__block',
-})`
-  text-align: left !important;
-  cursor: auto !important;
-  user-select: auto !important;
+const Container = styled.div`
 `;
 
 const Title = styled.h4`
