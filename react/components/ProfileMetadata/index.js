@@ -55,8 +55,12 @@ export default class ProfileMetadata extends Component {
         </Actions>
 
         <Grid>
-          <ProfileMetadataInfo user={user} mode={mode} />
+          {(user.about || user.counts.followers > 0 || user.counts.following > 1) &&
+            <ProfileMetadataInfo user={user} mode={mode} />
+          }
+
           <ProfileMetadataView user={user} mode={mode} sort={sort} />
+
           {SORTABLE_MODES.includes(mode) &&
             <ProfileMetadataSort user={user} sort={sort} />
           }

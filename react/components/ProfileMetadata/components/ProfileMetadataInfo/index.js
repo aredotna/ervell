@@ -25,24 +25,8 @@ export default class ProfileMetadataInfo extends Component {
     user: propType(profileMetadataInfoFragment).isRequired,
   }
 
-  isEmpty = () => {
-    const {
-      user: {
-        about,
-        counts: {
-          followers,
-          following,
-        },
-      },
-    } = this.props;
-
-    return !about && followers <= 0 && following <= 1;
-  }
-
   render() {
     const { user } = this.props;
-
-    if (this.isEmpty()) return <div />;
 
     return (
       <Pocket title="Info">
