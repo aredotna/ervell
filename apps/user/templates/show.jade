@@ -1,8 +1,8 @@
 extends ./layout
 
 block content
-  - content = sd.SUBJECT ? sd.SUBJECT + 's' : 'blocks and channels'
-  - searchee = (user && author.id == user.id) ? "your " : author.get('username') + '’s public '
+  - content = sd.SUBJECT ? sd.SUBJECT : 'blocks and channels'
+  - searchee = (user && author.id === user.id) ? 'your ' : author.get('username') + '’s public '
   - title = searchee + content
 
   .channel-container.channel-container--infinite( class= blocks.length > 0 ? '' : 'is-empty' )
