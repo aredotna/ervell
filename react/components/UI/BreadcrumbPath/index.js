@@ -2,19 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
+import styles from 'react/styles';
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 0 2em 0;
-  line-height: 1;
-  font-size: ${Styles.Type.size.h3};
+  font-size: ${styles.Type.size.h3};
+  line-height: ${styles.Type.lineHeight.base};
+
+  ${styles.Constants.media.mobile`
+    font-size: ${styles.Type.size.h4};
+    margin: 0 0 1em 0;
+    margin-right: ${styles.Constants.blockGutter}; // TODO: Remove
+    margin-left: ${styles.Constants.blockGutter}; // TODO: Remove
+  `}
 `;
 
 const Crumb = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  color: ${Styles.Colors.gray.medium};
+  color: ${styles.Colors.gray.medium};
 
   &:after {
     content: '/';
@@ -23,7 +33,7 @@ const Crumb = styled.div`
   }
 
   &:last-child {
-    color: ${Styles.Colors.gray.semiBold};
+    color: ${styles.Colors.gray.semiBold};
 
     // Hides trailing slash
     &:after {

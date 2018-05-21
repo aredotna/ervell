@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import styles from 'react/styles';
 
+import is from 'react/util/is';
+
 import BreadcrumbPath from 'react/components/UI/BreadcrumbPath';
 
 const Container = styled.div`
@@ -20,8 +22,18 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
   left: 0;
   right: 0;
   height: ${styles.Constants.headerHeight};
-  font-size: ${styles.Type.size.sm};
-  z-index: 9999999; // TODO
+  z-index: ${styles.Constants.z.header};
+  pointer-events: none;
+
+  > div {
+    pointer-events: auto;
+    height: 100%;
+    font-size: ${styles.Type.size.base};
+  }
+
+  ${styles.Constants.media.mobile`
+    display: none;
+  `}
 `;
 
 export default class StickyBreadcrumbPath extends Component {
@@ -35,11 +47,19 @@ export default class StickyBreadcrumbPath extends Component {
     mode: 'resting',
   }
 
-  handleEnter = () =>
-    this.setState({ mode: 'resting' });
+  componentDidMount() {
+    if (!is.elVisible(this.targetEl)) {
+      this.handleLeave();
+    }
+  }
 
-  handleLeave = () =>
+  handleEnter = () => {
+    this.setState({ mode: 'resting' });
+  }
+
+  handleLeave = () => {
     this.setState({ mode: 'stuck' });
+  }
 
   render() {
     const { mode } = this.state;
@@ -52,6 +72,8 @@ export default class StickyBreadcrumbPath extends Component {
           onLeave={this.handleLeave}
         >
           <BreadcrumbPath>
+            <div ref={(el) => { this.targetEl = el; }} />
+
             {children}
           </BreadcrumbPath>
         </Waypoint>
