@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
+import styles from 'react/styles';
+
 import channelMetadataFragment from 'react/components/ChannelMetadata/fragments/channelMetadata';
 
+import Grid from 'react/components/UI/Grid';
 import Pocket from 'react/components/UI/Pocket';
 import ChannelBreadcrumb from 'react/components/ChannelMetadata/components/ChannelBreadcrumb';
 import ChannelMetadataCollaborators from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators';
@@ -14,21 +17,22 @@ import { ChannelMetadataExpandableContext } from 'react/components/ChannelMetada
 
 const Container = styled.div`
   position: relative;
-  margin: 100px auto 0 auto;
-`;
-
-// TODO: Remove the negative margins once block grid is re-done.
-const Pockets = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -10px;
-  margin-right: -10px;
+  margin: ${styles.Constants.containerOffset} auto 0 auto;
 `;
 
 const Actions = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+
+  ${styles.Constants.media.mobile`
+    position: static;
+    width: 100%;
+    margin-bottom: 2em;
+    margin-right: ${styles.Constants.blockGutter}; // TODO: Remove
+    margin-left: ${styles.Constants.blockGutter}; // TODO: Remove
+  `}
+  }
 `;
 
 export default class ChannelMetadata extends Component {
@@ -47,8 +51,8 @@ export default class ChannelMetadata extends Component {
           <ChannelMetadataActions channel={channel} />
         </Actions>
 
-        <Pockets>
-          <ChannelMetadataExpandableContext>
+        <ChannelMetadataExpandableContext>
+          <Grid variableHeight>
             <Pocket title="Info">
               <ChannelMetadataInfo channel={channel} />
             </Pocket>
@@ -62,8 +66,8 @@ export default class ChannelMetadata extends Component {
             <Pocket title="Connected to">
               <ChannelMetadataConnections channel={channel} />
             </Pocket>
-          </ChannelMetadataExpandableContext>
-        </Pockets>
+          </Grid>
+        </ChannelMetadataExpandableContext>
       </Container>
     );
   }

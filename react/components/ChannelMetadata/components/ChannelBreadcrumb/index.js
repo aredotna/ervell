@@ -4,7 +4,7 @@ import { propType } from 'graphql-anywhere';
 import channelBreadcrumbFragment from 'react/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb';
 
 import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
-import BreadcrumbPath from 'react/components/UI/BreadcrumbPath';
+import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 
 export default class ChannelBreadcrumb extends Component {
   static propTypes = {
@@ -15,14 +15,14 @@ export default class ChannelBreadcrumb extends Component {
     const { channel } = this.props;
 
     return (
-      <BreadcrumbPath>
-        <BreadcrumbPath.Crumb>
+      <StickyBreadcrumbPath>
+        <StickyBreadcrumbPath.Crumb>
           <a href={channel.owner.href}>
             {channel.owner.name}
           </a>
-        </BreadcrumbPath.Crumb>
+        </StickyBreadcrumbPath.Crumb>
 
-        <BreadcrumbPath.Crumb>
+        <StickyBreadcrumbPath.Crumb>
           <ColoredChannelLink
             title={channel.title}
             href={channel.href}
@@ -30,8 +30,8 @@ export default class ChannelBreadcrumb extends Component {
           >
             {channel.title}
           </ColoredChannelLink>
-        </BreadcrumbPath.Crumb>
-      </BreadcrumbPath>
+        </StickyBreadcrumbPath.Crumb>
+      </StickyBreadcrumbPath>
     );
   }
 }

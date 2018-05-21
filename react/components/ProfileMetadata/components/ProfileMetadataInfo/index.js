@@ -25,14 +25,32 @@ export default class ProfileMetadataInfo extends Component {
     user: propType(profileMetadataInfoFragment).isRequired,
   }
 
+  isEmpty = () => {
+    const {
+      user: {
+        about,
+        counts: {
+          followers,
+          following,
+        },
+      },
+    } = this.props;
+
+    return !about && followers <= 0 && following <= 1;
+  }
+
   render() {
     const { user } = this.props;
 
+    if (this.isEmpty()) return <div />;
+
     return (
       <Pocket title="Info">
-        <Expandable height={FIVE_LINES}>
-          <About dangerouslySetInnerHTML={{ __html: user.about || '<p>—</p>' }} />
-        </Expandable>
+        {user.about &&
+          <Expandable height={FIVE_LINES}>
+            <About dangerouslySetInnerHTML={{ __html: user.about }} />
+          </Expandable>
+        }
 
         {user.counts.followers > 0 &&
           <Link href={`${user.href}/followers`}>
@@ -40,7 +58,8 @@ export default class ProfileMetadataInfo extends Component {
           </Link>
         }
 
-        {user.counts.following > 0 &&
+        {/* Subtract 1 to ignore the default Are.na follow */}
+        {(user.counts.following - 1) > 0 &&
           <Link href={`${user.href}/following`}>
             Following
           </Link>

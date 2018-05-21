@@ -8,60 +8,16 @@ import profileBadgeFragment from 'react/components/ProfileMetadata/components/Pr
 
 import ArenaMark from 'react/components/UI/ArenaMark/index.svg';
 
-const PATH_FONT_SIZE = Styles.Type.size.h3;
-const CALCULATED_FONT_SIZE = `${100 / parseFloat(PATH_FONT_SIZE)}%`;
-const LOGO_WIDTH = '0.66em';
-
 const Container = styled.a`
   position: relative;
-  display: inline-block;
+  display: block;
   margin: 0 0 0 ${Styles.Constants.emptySpaceWidth};
-  width: ${LOGO_WIDTH};
-  height: ${PATH_FONT_SIZE};
-  vertical-align: bottom;
-
-  > span {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-
-    &:first-child {
-      display: none;
-    }
-
-    &:last-child {
-      display: block;
-    }
-  }
-
-  &:hover > span {
-    &:first-child {
-      display: block;
-    }
-
-    &:last-child {
-      display: none;
-    }
-  }
 `;
 
-const Label = styled.span`
-  font-family: 'Arial Narrow', 'Arial', sans-serif;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: ${x => Styles.Colors.state[x.type]};
-  font-size: ${CALCULATED_FONT_SIZE};
-
-  > span {
-    vertical-align: middle;
-  }
-`;
-
-const Mark = styled.span`
-  display: inline-block;
-  width: ${LOGO_WIDTH};
-  height: 100%;
+const Mark = styled.div`
+  position: relative;
+  width: 1em;
+  height: 1em;
 
   > svg {
     position: absolute;
@@ -69,9 +25,31 @@ const Mark = styled.span`
     right: 0;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 75%;
     height: 100%;
     fill: ${x => Styles.Colors.state[x.type]};
+  }
+`;
+
+const Label = styled.div`
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+
+  font-family: 'Arial Narrow', 'Arial', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: ${x => Styles.Colors.state[x.type]};
+  font-size: 0.5em;
+
+  opacity: 0;
+  &:hover {
+    opacity: 1;
   }
 `;
 
@@ -92,13 +70,13 @@ export default class ProfileBadge extends Component {
 
     return (
       <Container href={HREFS[badge]} target="_blank">
-        <Label type={badge}>
-          <span>{badge}</span>
-        </Label>
-
         <Mark type={badge}>
           <ArenaMark />
         </Mark>
+
+        <Label type={badge}>
+          <span>{badge}</span>
+        </Label>
       </Container>
     );
   }
