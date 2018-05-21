@@ -148,14 +148,19 @@ module.exports = class SearchBarView extends Backbone.View
     mediator.trigger 'search:loaded'
 
   searchUnloaded: ->
-    @$el.removeClass('is-loading')
-    @$el.removeClass('is-active')
-    @$el.removeClass('has-results')
-    @$results.html ""
+    @$el
+      .removeClass('is-loading')
+      .removeClass('is-active')
+      .removeClass('has-results')
+        .parent().removeClass('is-active')
+
+    @$results.html ''
 
   blurSearch: (e) ->
     _.delay =>
       @$el.removeClass('is-active')
+        .parent().removeClass('is-active')
+
       $('.path').removeClass('is-hidden')
     , 200
 
@@ -163,6 +168,8 @@ module.exports = class SearchBarView extends Backbone.View
     @searchUnloaded()
     @$input.val ""
 
-  focusSearch: (e)->
+  focusSearch: (e) ->
     @$el.addClass('is-active')
+      .parent().addClass('is-active')
+
     $('.path.stuck').addClass('is-hidden')
