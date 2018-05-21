@@ -11,6 +11,8 @@ module.exports = class OnboardingRouter extends Backbone.Router
     'welcome/:scene': 'scene'
 
   initialize: ->
+    @route /welcome((\?)(.)+)?$/, 'welcome'
+
     @user = new CurrentUser CURRENT_USER
     @state = new OnboardingState
 
@@ -19,6 +21,8 @@ module.exports = class OnboardingRouter extends Backbone.Router
 
   exec: ->
     @navigate "/welcome/#{@state.get 'scene'}", trigger: true
+
+  welcome: -> @scene 'welcome'
 
   scene: (scene) ->
     @state.set 'scene', (scene or 'welcome'), silent: true
