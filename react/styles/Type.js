@@ -8,8 +8,10 @@ const size = {
 
   base: '1rem',
   lg: '1.25rem',
+  md: '1rem',
   sm: '0.875rem',
-  xs: '0.8125rem',
+  sx: '0.8125rem',
+  xs: '0.75rem',
   xx: '0.625rem',
   h1: '2.5rem',
   h2: '2rem',
