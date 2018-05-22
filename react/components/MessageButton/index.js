@@ -34,7 +34,11 @@ class MessageButton extends Component {
 
   render() {
     const { mode } = this.state;
-    const { id: _id, ...rest } = this.props;
+    const {
+      id: _id,
+      createUserMessageChannel: _createUserMessageChannel,
+      ...rest
+    } = this.props;
 
     return (
       <span onClick={this.handleClick} role="button" tabIndex={0} {...rest}>
