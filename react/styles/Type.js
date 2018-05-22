@@ -9,7 +9,7 @@ const size = {
   base: '1rem',
   lg: '1.25rem',
   sm: '0.875rem',
-  xs: '0.75rem',
+  xs: '0.8125rem',
   xx: '0.625rem',
   h1: '2.5rem',
   h2: '2rem',
