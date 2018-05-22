@@ -16,6 +16,7 @@ import Styles from 'react/styles';
 
 const Container = styled.div`
   position: relative;
+  font-size: ${Styles.Type.size.xs};
 `;
 
 const Fieldset = styled.div`

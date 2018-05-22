@@ -10,7 +10,7 @@ const Container = styled.div`
 const Title = styled.h4`
   margin: 0 0 0.5em 0;
   padding: 0 0 0.5em 0;
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${Styles.Type.size.sx};
   line-height: ${Styles.Type.lineHeight.tall};
   color: ${Styles.Colors.gray.medium};
   border-bottom: 1px solid ${Styles.Colors.gray.light};
@@ -19,7 +19,7 @@ const Title = styled.h4`
 const Content = styled.div`
   margin: 0.5em 0;
   color: ${Styles.Colors.gray.semiBold};
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${Styles.Type.size.sx};
   line-height: ${Styles.Type.lineHeight.tall};
 
   p {
