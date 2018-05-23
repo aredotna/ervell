@@ -8,7 +8,8 @@ export default gql`
     id: slug
     can {
       follow
-      manage
+      update
+      destroy
       mute
     }
     ...MuteChannelButton

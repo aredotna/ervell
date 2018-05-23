@@ -182,13 +182,15 @@ class ManageChannel extends Component {
             </TitledDialog.Section>
           }
 
-          <TitledDialog.Section>
-            <TitledDialog.Label>
-              Delete
-            </TitledDialog.Label>
+          {channel.can.destroy &&
+            <TitledDialog.Section>
+              <TitledDialog.Label>
+                Delete
+              </TitledDialog.Label>
 
-            <DeleteChannel id={channel.id} />
-          </TitledDialog.Section>
+              <DeleteChannel id={channel.id} />
+            </TitledDialog.Section>
+          }
         </Container>
       </TitledDialog>
     );

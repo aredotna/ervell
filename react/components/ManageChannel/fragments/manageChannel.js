@@ -8,6 +8,7 @@ export default gql`
     description(format: MARKDOWN)
     visibility
     can {
+      destroy
       export
     }
   }

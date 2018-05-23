@@ -46,7 +46,7 @@ export default class ChannelMetadataActions extends Component {
           <MuteChannelButton channel={channel} />
         }
 
-        {can.manage &&
+        {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
             Edit channel
           </Button>
