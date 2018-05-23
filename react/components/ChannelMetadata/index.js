@@ -63,9 +63,11 @@ export default class ChannelMetadata extends Component {
               </Pocket>
             }
 
-            <Pocket title="Connected to">
-              <ChannelMetadataConnections channel={channel} />
-            </Pocket>
+            {(channel.can.connect || channel.connections.length > 0) &&
+              <Pocket title="Connected to">
+                <ChannelMetadataConnections channel={channel} />
+              </Pocket>
+            }
           </Grid>
         </ChannelMetadataExpandableContext>
       </Container>
