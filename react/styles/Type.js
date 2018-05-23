@@ -22,6 +22,7 @@ const size = {
 };
 
 const lineHeight = {
+  compact: 1.15,
   base: 1.33,
   tall: 1.5,
 };
