@@ -13,5 +13,8 @@ export default gql`
       name
       href
     }
+    counts {
+      collaborators
+    }
   }
 `;

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
+import styled from 'styled-components';
 
 import channelBreadcrumbFragment from 'react/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb';
 
 import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
+
+const CollaboratorCount = styled.span`
+  font-weight: normal;
+`;
 
 export default class ChannelBreadcrumb extends Component {
   static propTypes = {
@@ -19,6 +24,13 @@ export default class ChannelBreadcrumb extends Component {
         <StickyBreadcrumbPath.Crumb>
           <a href={channel.owner.href}>
             {channel.owner.name}
+
+            {channel.counts.collaborators > 0 &&
+              <CollaboratorCount>
+                {' '}
+                (+{channel.counts.collaborators})
+              </CollaboratorCount>
+            }
           </a>
         </StickyBreadcrumbPath.Crumb>
 
