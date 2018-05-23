@@ -17,7 +17,7 @@ class ProfileBreadcrumb extends Component {
   }
 
   render() {
-    const { user, currentRoute: { href } } = this.props;
+    const { user, currentRoute: { pathname } } = this.props;
 
     return (
       <StickyBreadcrumbPath>
@@ -26,18 +26,18 @@ class ProfileBreadcrumb extends Component {
             {user.name}
           </a>
 
-          {href === user.href &&
+          {!/follow(ers|ing)$/.test(pathname) &&
             <ProfileBadge user={user} />
           }
         </StickyBreadcrumbPath.Crumb>
 
-        {/following$/.test(href) &&
+        {/following$/.test(pathname) &&
           <StickyBreadcrumbPath.Crumb>
             Following
           </StickyBreadcrumbPath.Crumb>
         }
 
-        {/followers$/.test(href) &&
+        {/followers$/.test(pathname) &&
           <StickyBreadcrumbPath.Crumb>
             Followers
           </StickyBreadcrumbPath.Crumb>
