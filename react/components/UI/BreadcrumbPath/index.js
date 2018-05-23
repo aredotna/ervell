@@ -7,9 +7,10 @@ import styles from 'react/styles';
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   margin: 0 0 2em 0;
   font-size: ${styles.Type.size.h3};
-  line-height: ${styles.Type.lineHeight.base};
+  line-height: ${styles.Type.lineHeight.compact};
 
   ${styles.Constants.media.mobile`
     font-size: ${styles.Type.size.h4};

@@ -2,83 +2,90 @@ import express from 'express';
 
 import ExploreBlocks from 'collections/explore_blocks.coffee';
 
+import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
 import setTipsMiddleware from 'apps/feed/middleware/setTips';
+import setSortMiddleware from 'apps/feed/middleware/setSort';
+import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
+
+import HomeComponent from 'react/components/Home';
 
 const app = express();
 
 app.set('views', `${__dirname}/templates`);
 app.set('view engine', 'jade');
 
-const generateSeed = () =>
-  Math.floor(Math.random() * 100000000) + 1;
+const setAndFetchBlocks = (req, res) => {
+  const { SEED, SORT, SUBJECT } = res.locals.sd;
 
-const setAndFetchBlocks = (options = {}) => (req, res) => {
-  const blocks = new ExploreBlocks([], options);
+  const blocks = new ExploreBlocks([], {
+    filter: SUBJECT,
+    sort: SORT,
+    seed: SEED,
+  });
 
   return blocks.fetch()
     .then(() => {
-      res.locals.sd.SORT = options.sort;
-      res.locals.sd.SEED = options.seed;
-      res.locals.sd.SUBJECT = options.filter;
       res.locals.sd.BLOCKS = blocks.toJSON();
       res.locals.blocks = blocks.models;
     });
 };
 
-const renderIndex = (req, res, next) => {
+const setHeaderMiddleware = (req, res, next) => {
+  const { SORT, MODE } = res.locals.sd;
+
+  return req.apollo.render(HomeComponent, {
+    sort: SORT,
+    mode: MODE,
+  })
+    .then((homeComponent) => {
+      res.locals.homeComponent = homeComponent;
+      next();
+    })
+    .catch(next);
+};
+
+const renderFeed = (req, res, next) => {
   if (!req.user) return next();
 
   res.locals.sd.CURRENT_ACTION = 'feed';
   res.locals.sd.CURRENT_PATH = '/';
   res.locals.sd.FEED_TYPE = 'primary';
 
-  return res.render('feed', {
-    path: 'Feed',
-  });
+  return res.render('feed');
 };
 
-app.get('/', homePathMiddleware, setTipsMiddleware, renderIndex);
-app.get('/feed', ensureLoggedInMiddleware, setTipsMiddleware, renderIndex);
-
-app.get('/notifications', ensureLoggedInMiddleware, (req, res) => {
+const renderNotifications = (req, res) => {
   res.locals.sd.FEED_TYPE = 'notifications';
-  res.render('feed', {
-    path: 'Notifications',
-  });
-});
+  res.locals.sd.CURRENT_ACTION = 'notifications';
+  res.render('feed');
+};
 
-app.get('/explore', (req, res, next) => {
+const renderExplore = (req, res, next) => {
+  res.locals.sd.FEED_TYPE = 'explore';
   res.locals.sd.CURRENT_ACTION = 'explore';
 
-  return setAndFetchBlocks({ sort: req.query.sort })(req, res)
+  return setAndFetchBlocks(req, res)
     .then(() => res.render('explore'))
     .catch(next);
-});
+};
 
-app.get('/explore/channels', (req, res, next) => {
-  res.locals.sd.CURRENT_ACTION = 'explore';
+const middlewareStack = [
+  apolloMiddleware,
+  setHeaderMiddleware,
+];
 
-  return setAndFetchBlocks({
-    filter: 'channel',
-    sort: req.query.sort,
-    seed: generateSeed(),
-  })(req, res)
-    .then(() => res.render('explore'))
-    .catch(next);
-});
+const exploreMiddlewareStack = [
+  setSortMiddleware,
+  setSubjectModeMiddleware,
+];
 
-app.get('/explore/blocks', (req, res, next) => {
-  res.locals.sd.CURRENT_ACTION = 'explore';
-
-  return setAndFetchBlocks({
-    filter: 'block',
-    sort: req.query.sort,
-    seed: generateSeed(),
-  })(req, res)
-    .then(() => res.render('explore'))
-    .catch(next);
-});
+app.get('/', homePathMiddleware, setTipsMiddleware, ...middlewareStack, renderFeed);
+app.get('/feed', ensureLoggedInMiddleware, setTipsMiddleware, ...middlewareStack, renderFeed);
+app.get('/notifications', ensureLoggedInMiddleware, ...middlewareStack, renderNotifications);
+app.get('/explore', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
+app.get('/explore/channels', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
+app.get('/explore/blocks', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
 
 module.exports = app;

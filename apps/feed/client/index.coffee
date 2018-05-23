@@ -1,18 +1,26 @@
-{ defer } = require 'underscore'
-{ FEED_TYPE, CURRENT_USER } = require('sharify').data
-Feed = require '../../../collections/feed.coffee'
-Notifications = require '../../../collections/notifications.coffee'
-FeedView = require './feed_view.coffee'
+# React requires
+{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
+{ default: HomeComponent } = require '../../../react/components/Home/index.js'
+
+# Legacy requires
+{ FEED_TYPE, SORT, MODE } = require('sharify').data
+{ default: initializeNotifications } = require './notifications.js'
+{ default: initializeFeed } = require './feed.js'
+{ default: initializeExplore } = require './explore.js'
 
 module.exports = ->
-  $el = $('.feed-container')
+  # Sets up React component for header
+  if ($homeComponent = $('.js-home-component')).length
+    mountWithApolloProvider(HomeComponent, {
+      sort: SORT,
+      mode: MODE,
+    }, $homeComponent)
 
+  # Legacy setup
   switch FEED_TYPE
     when 'primary'
-      feed = new Feed([], { type: 'primary', user: CURRENT_USER })
-      view = new FeedView({ el: $el, collection: feed })
-
+      initializeFeed($('.feed-container'))
     when 'notifications'
-      notificationsFeed = new Notifications
-      notificationsFeed.on 'sync', -> defer => notificationsFeed.markRead()
-      view = new FeedView({ el: $el, collection: notificationsFeed })
+      initializeNotifications($('.feed-container'))
+    when 'explore'
+      initializeExplore($('.explore-contents'))
