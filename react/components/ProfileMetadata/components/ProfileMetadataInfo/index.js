@@ -38,11 +38,9 @@ export default class ProfileMetadataInfo extends Component {
 
     return (
       <Pocket title="Info">
-        {user.about &&
-          <Expandable height={FIVE_LINES}>
-            <div dangerouslySetInnerHTML={{ __html: user.about }} />
-          </Expandable>
-        }
+        <Expandable height={FIVE_LINES}>
+          <div dangerouslySetInnerHTML={{ __html: user.about || '—' }} />
+        </Expandable>
 
         {(user.counts.followers > 0 || user.counts.following > 1) &&
           <Buttons>

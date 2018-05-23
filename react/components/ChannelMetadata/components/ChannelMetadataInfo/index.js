@@ -33,11 +33,9 @@ export default class ChannelMetadataInfo extends Component {
 
     return (
       <div>
-        {channel.info &&
-          <ChannelMetadataExpandable>
-            <div dangerouslySetInnerHTML={{ __html: channel.info }} />
-          </ChannelMetadataExpandable>
-        }
+        <ChannelMetadataExpandable>
+          <div dangerouslySetInnerHTML={{ __html: channel.info || '—' }} />
+        </ChannelMetadataExpandable>
 
         <Buttons>
           {channel.visibility !== 'private' && channel.counts.followers > 0 &&
