@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import selectableChannelFragment from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel/fragments/selectableChannel';
 
 import SelectableChannel from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel';
+import ListButton from 'react/components/Connect/components/ConnectionSelection/components/ListButton';
 
 const Container = styled.div`
 `;
@@ -21,6 +22,12 @@ export default class ChannelsList extends Component {
 
     return (
       <Container {...rest}>
+        {channels.length === 0 &&
+          <ListButton disabled>
+            Nothing yet.
+          </ListButton>
+        }
+
         {channels.map(channel => (
           <SelectableChannel
             key={channel.id}

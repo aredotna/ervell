@@ -1,34 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { graphql } from 'react-apollo';
-
-import Styles from 'react/styles';
 
 import createPrivateChannelMutation from 'react/components/Connect/components/ConnectionSelection/components/CreatePrivateChannelButton/mutations/createPrivateChannel';
 
-import { inputPadding } from 'react/components/UI/GenericInput';
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
-
-const Button = styled.a.attrs({
-  role: 'button',
-  tabIndex: 0,
-})`
-  position: relative;
-  display: block;
-  margin-top: -1px;
-  padding: ${inputPadding};
-  text-align: center;
-  font-weight: normal !important;
-  border: 1px solid ${Styles.Colors.gray.regular};
-  background-color: ${Styles.Colors.gray.hint};
-  line-height: 1;
-
-  &:hover {
-    z-index: 1;
-    border: 1px solid ${Styles.Colors.gray.semiBold};
-  }
-`;
+import ListButton from 'react/components/Connect/components/ConnectionSelection/components/ListButton';
 
 class CreatePrivateChannelButton extends Component {
   static propTypes = {
@@ -80,7 +57,7 @@ class CreatePrivateChannelButton extends Component {
     const { title } = this.props;
 
     return (
-      <Button onClick={this.createPrivateChannel}>
+      <ListButton onClick={this.createPrivateChannel}>
         <ColoredChannelSpan visibility="private">
           {{
             resting: `+ New private channel “${title}”`,
@@ -88,7 +65,7 @@ class CreatePrivateChannelButton extends Component {
             error: 'An error occurred',
           }[mode]}
         </ColoredChannelSpan>
-      </Button>
+      </ListButton>
     );
   }
 }
