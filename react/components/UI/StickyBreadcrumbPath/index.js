@@ -41,6 +41,11 @@ export default class StickyBreadcrumbPath extends Component {
 
   static propTypes = {
     children: PropTypes.node.isRequired,
+    stuckChildren: PropTypes.node,
+  }
+
+  static defaultProps = {
+    stuckChildren: null,
   }
 
   state = {
@@ -63,7 +68,7 @@ export default class StickyBreadcrumbPath extends Component {
 
   render() {
     const { mode } = this.state;
-    const { children } = this.props;
+    const { children, stuckChildren } = this.props;
 
     return (
       <Container>
@@ -80,7 +85,7 @@ export default class StickyBreadcrumbPath extends Component {
 
         {mode === 'stuck' &&
           <StuckBreadcrumbPath>
-            {children}
+            {stuckChildren || children}
           </StuckBreadcrumbPath>
         }
       </Container>
