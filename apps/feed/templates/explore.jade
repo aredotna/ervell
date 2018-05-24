@@ -1,17 +1,28 @@
 extends ../../../components/layout/index--infinite
 
 block styles
-  link(rel="alternate" type="application/rss+xml" title="Are.na / Explore / Feed" href="explore/feed/rss/")
+  link(
+    rel='alternate'
+    type='application/rss+xml'
+    title='Are.na / Explore / Feed'
+    href='explore/feed/rss/'
+  )
+
+block meta
+  != homeComponent.styles
 
 block body
-  include ./explore_path
+  .Constrain.js-home-component
+    != homeComponent.html
 
-  .channel-container.channel-container--infinite( class=blocks.length ? '' : 'is-empty' )
-    if user && user.isPremium() && !following && !followers
+  .channel-container.channel-container--infinite( class=(blocks.length ? '' : 'is-empty') )
     .explore-contents
-      - title = "everyone's public blocks and channels"
+      - title = 'everyone’s public blocks and channels'
       include ../../../components/blocks/container/templates/index
+
     include ../../../components/layout/loader/templates/infinite
 
 block scripts
-  script( src=asset('/assets/explore.js') )
+  script( src= asset('/assets/feed.js') )
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(homeComponent.state).replace(/</g, '\\u003c')};

@@ -16,6 +16,8 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": 0,
+    "react/no-danger": 0,
+    "react/no-did-mount-set-state": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
     "import/extensions": 0,

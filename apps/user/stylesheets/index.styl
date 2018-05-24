@@ -4,43 +4,6 @@
   height auto
   min-height 100vh
 
-a.premium-badge
-  antialiased()
-  display inline-block
-  letter-spacing 0px
-  font-size 13px
-  color success
-  position absolute
-  margin-left s_margin
-
-  > div
-    position absolute
-
-  .premium-badge__stars
-    opacity 1
-
-  .premium-badge__cracker
-    opacity 0
-
-    & > svg,
-    & > svg path:not(#path14889):not(#path14887)
-      fill success
-      vertical-align middle
-
-  &:hover
-    .premium-badge__stars
-      opacity 0
-
-    .premium-badge__cracker
-      opacity 1
-
-.path.stuck a.premium-badge:hover
-  .premium-badge__stars
-    opacity 1
-  .premium-badge__cracker
-    opacity 0
-
 @require '../components/index/index.styl'
 @require '../components/channels/index.styl'
 @require '../components/tips/index.styl'
-@require '../components/user_flair/index.styl'

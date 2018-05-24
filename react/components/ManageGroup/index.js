@@ -5,7 +5,7 @@ import { compose, graphql } from 'react-apollo';
 
 import manageGroupFragment from 'react/components/ManageGroup/fragments/manageGroup';
 import manageGroupQuery from 'react/components/ManageGroup/queries/manageGroup';
-import collaboratorsListQuery from 'react/components/CollaboratorsList/queries/collaboratorsList';
+import collaboratorsListQuery from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/queries/collaboratorsList';
 import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queries/manageCollaborators';
 
 import updateGroupMutation from 'react/components/ManageGroup/mutations/updateGroup';

@@ -7,38 +7,38 @@ mediator = require '../../../lib/mediator.coffee'
 
 module.exports = class BodyView extends Backbone.View
   events:
-    'click'                                       : 'bodyClick'
-    'click a[data-disabled]'                      : 'disable'
-    'click a[data-client]:not([data-disabled])'   : 'intercept'
-    'click span[data-client]:not([data-disabled])': 'intercept'
-    'click .trigger-mediator'                     : 'triggerMediator'
-    'click a'                                     : 'maybeIntercept'
+    'click': 'bodyClick'
+    'click a[data-disabled]': 'disable'
+    'click a[data-client]:not([data-disabled])': 'dataClientNavigate'
+    'click span[data-client]:not([data-disabled])': 'dataClientNavigate'
+    'click .trigger-mediator': 'triggerMediator'
 
   mobileEvents:
-    'tap a[data-disabled]'                        : 'disable'
-    'tap a[data-client]:not([data-disabled])'     : 'intercept'
-    'tap span[data-client]:not([data-disabled])'  : 'intercept'
-    'tap #scroll-top'                             : 'scrollToTop'
-    'tap a'                                       : 'maybeIntercept'
+    'tap a[data-disabled]': 'disable'
+    'tap a[data-client]:not([data-disabled])': 'dataClientNavigate'
+    'tap span[data-client]:not([data-disabled])': 'dataClientNavigate'
+    'tap #scroll-top': 'scrollToTop'
 
   initialize: (options) ->
-    mediator.on 'load:start', @startLoading, @
-    mediator.on 'load:stop', @stopLoading, @
-    mediator.on 'slide:to:block', @scrollToBlock
-    mediator.shared.state.on 'change:isDraggingBlocks', @triggerReflow, @
+    @listenTo mediator, 'load:start', @startLoading
+    @listenTo mediator, 'load:stop', @stopLoading
+    @listenTo mediator, 'slide:to:block', @scrollToBlock
+    @listenTo mediator.shared.state, 'change:isDraggingBlocks', @triggerReflow
 
     # need to investigate this further.
     # view loses event delegation only on a channel.
-    _.defer => @delegateEvents()
+    _.defer => @delegateEvents() # HM
 
     if $('body').hasClass 'is-mobile'
       _.defer => @delegateEvents(@mobileEvents)
 
-  startLoading: -> $('body').addClass 'is-loading'
+  startLoading: ->
+    $('body').addClass 'is-loading'
 
-  stopLoading: -> $('body').removeClass 'is-loading'
+  stopLoading: ->
+    $('body').removeClass 'is-loading'
 
-  scrollToBlock: (id, delay = 100)->
+  scrollToBlock: (id, delay = 100) ->
     isLightBox = $('body').hasClass 'is-scrolling-disabled'
     $el = $("[data-id=#{id}]")
     elOffset = if isLightBox then $el.position().top else $el.offset().top
@@ -57,57 +57,33 @@ module.exports = class BodyView extends Backbone.View
     else
       $('html, body').animate { scrollTop: offset }, delay
 
-  intercept: (e)->
-    shouldIgnore = $(e.target).hasClass('button--inblock') or
-     $(e.target).hasClass('grid__block__delete-block') or
-     $(e.target).hasClass('grid__block__delete-block__confirm__choice') or
-     $(e.target).hasClass('grid__block__delete-block__confirm') or
-     $(e.currentTarget).hasClass('is-being-edited') or
-     $(e.target).hasClass('block-collection--list__column__follow')
+  # TODO: This should be part of the related views
+  dataClientNavigate: (e) ->
+    $target = $(e.currentTarget)
 
-    return true if shouldIgnore
+    href = $target.attr('href')
+    clientRoute = $target.data('client')
+    isModified = e.metaKey or e.ctrlKey
+
+    return if clientRoute is 'Channel' or clientRoute is 'User' or isModified
 
     e.preventDefault()
-    e.stopImmediatePropagation()
 
-    clientRoute = $(e.currentTarget).data('client')
-    url = $(e.currentTarget).attr('href')
+    Backbone.history.navigate(href, {
+      trigger: true,
+      replace: false,
+    })
 
-    modifier = e.metaKey || e.ctrlKey
-
-    if clientRoute and clientRoute isnt 'Channel' and clientRoute isnt 'User' and !modifier
-      Backbone.history.navigate "#{url}", trigger: true, replace: false
-    else
-      trackOutboundLink(url) if url.indexOf('http')
-      if e.metaKey || e.ctrlKey
-        window.open(url, '_blank')
-      else
-        window.location = url
-
-  triggerMediator: (e)->
+  triggerMediator: (e) ->
     $link = $(e.currentTarget)
     mediator.trigger $link.data('trigger')
 
-  disable: (e)->
+  disable: (e) ->
     e.preventDefault()
     e.stopImmediatePropagation()
 
   bodyClick: (e) ->
     mediator.trigger 'body:click', e
-
-  maybeIntercept: (e)->
-    href = $(e.currentTarget).attr("href")
-    target = $(e.currentTarget).attr("target") || '_self'
-
-    unless href?.indexOf(location.hostname) > -1 or href is '#' or !href
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      trackOutboundLink href
-
-      if e.metaKey || e.ctrlKey
-        window.open href, '_blank'
-      else
-        window.open href, target
 
   triggerReflow: =>
     top = $(window).scrollTop()

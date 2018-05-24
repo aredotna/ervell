@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isEmpty } from 'underscore';
 
+import GenericInput from 'react/components/UI/GenericInput';
+
 import Styles from 'react/styles';
 
 const Container = styled.div`
@@ -37,7 +39,7 @@ const Icon = styled.div`
   }
 `;
 
-const Input = styled.input`
+const Input = styled(GenericInput)`
   padding-left: 2.5em;
   border: 1px solid ${Styles.Colors.gray.regular};
 
