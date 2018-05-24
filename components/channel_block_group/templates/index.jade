@@ -1,8 +1,8 @@
 .ChannelBlockGroup.js-channel-group(data-id=channel.id)
-  .ChannelBlockGroup__divider &nbsp;
   .ChannelBlockGroup__inner.js-channel
     - block = channel
     include ../../block_v2/templates/block
     if channel.kind.blocks
       for block in channel.kind.blocks
         include ../../block_v2/templates/block
+  .ChannelBlockGroup__divider &nbsp;

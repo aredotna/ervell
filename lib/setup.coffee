@@ -36,6 +36,7 @@ bucketAssets = require 'bucket-assets'
 favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
 { createReloadable } = require '@artsy/express-reloadable'
+glob = require 'glob'
 
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
@@ -125,19 +126,31 @@ module.exports = (app) ->
 
   console.log 'Mounting apps...'
 
-  switch NODE_ENV
-    when 'development'
-      reloadAndMount = createReloadable(app, require)
-      app.use reloadAndMount path.join(__dirname, '..', 'apps')
-    else
-      app.use require '../apps'
+  if NODE_ENV is 'development'
+    mountAndReload = createReloadable(app, require)
+    modules = glob.sync('./react/**/*.js').map (name) => path.resolve(name)
+
+    app.use mountAndReload path.join(__dirname, '..', 'apps'), {
+      watchModules: modules
+    }
+  else
+    app.use require '../apps'
 
   # Convert the GraphQL error messages into some kind of matching status code
   app.use require('./middleware/error_status')
 
   # Drop down to error handling middleware if nothing else catches it
-  # TODO: Kill this/replace with something that's not a Node module
-  artsyError.handlers app,
-    template: path.resolve(__dirname, '../components/layout/templates/error.jade')
+  if NODE_ENV is 'development'
+    app.use (err, req, res, next) =>
+      res.status(err.status or 500)
+      res.json({
+        message: err.message,
+        status: err.status,
+        stack: err.stack,
+      })
+  else
+    # TODO: Kill this/replace with something that's not a Node module
+    artsyError.handlers app,
+      template: path.resolve(__dirname, '../components/layout/templates/error.jade')
 
   console.log 'Completed set up.'

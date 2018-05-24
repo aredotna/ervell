@@ -22,6 +22,15 @@ const Body = styled.div`
 const Section = styled.div`
   width: 100%;
   margin: 2em auto;
+
+  & + &, // Margins don't collapse in flex context
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Title = styled.h3`

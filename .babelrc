@@ -14,6 +14,7 @@
       "extensions": [".js", ".jsx"],
       "root": ["./"]
     }],
-    "transform-class-properties"
+    "transform-class-properties",
+    "inline-react-svg"
   ]
 }

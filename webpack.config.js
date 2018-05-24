@@ -14,9 +14,9 @@ const isDeploy = isStaging || isProduction;
 const config = {
   devtool: 'cheap-module-source-map',
   entry: {
-    // webpack: [
-    //   'webpack-hot-middleware/client?reload=true',
-    // ],
+    webpack: [
+      'webpack-hot-middleware/client?reload=true',
+    ],
     ...helpers.getEntrypoints(),
   },
   output: {
@@ -49,20 +49,20 @@ const config = {
             loader: 'babel-loader',
             query: {
               cacheDirectory: true,
-              // env: {
-              //   development: {
-              //     presets: ['react-hmre'],
-              //     plugins: [
-              //       ['react-transform', {
-              //         transforms: [{
-              //           transform: 'react-transform-hmr',
-              //           imports: ['react'],
-              //           locals: ['module'],
-              //         }],
-              //       }],
-              //     ],
-              //   },
-              // },
+              env: {
+                development: {
+                  presets: ['react-hmre'],
+                  plugins: [
+                    ['react-transform', {
+                      transforms: [{
+                        transform: 'react-transform-hmr',
+                        imports: ['react'],
+                        locals: ['module'],
+                      }],
+                    }],
+                  ],
+                },
+              },
             },
           },
         ],
@@ -116,7 +116,7 @@ const config = {
 };
 
 if (isDevelopment) {
-  // config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Staging
 } else if (isDeploy) {

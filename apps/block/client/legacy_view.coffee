@@ -34,8 +34,8 @@ module.exports = class LegacyBlockView extends Backbone.View
     @state = new Backbone.Model tab: options.tab or 'connections'
     @user = CurrentUser.orNull()
 
-    mediator.on 'lightbox:slide:next', => @slide 'next'
-    mediator.on 'lightbox:slide:prev', => @slide 'prev'
+    @listenTo mediator, 'lightbox:slide:next', => @slide 'next'
+    @listenTo mediator, 'lightbox:slide:prev', => @slide 'prev'
 
     @initModel()
 
@@ -46,10 +46,10 @@ module.exports = class LegacyBlockView extends Backbone.View
 
     @setupUrlConnections()
 
-    mediator.on "connection:added:#{@model.id}", @addConnections, this
+    @listenTo mediator, "connection:added:#{@model.id}", @addConnections
 
     if @model.get('class') is 'placeholder' or @model.has('kind')
-      @model.on 'sync', @render, this
+      @listenTo @model, 'sync', @render
 
   toggleSidebar: ->
     currentValue = Cookies.get @cookieKey
@@ -61,7 +61,9 @@ module.exports = class LegacyBlockView extends Backbone.View
   setupUrlConnections: ->
     @urlConnections = new Blocks []
     @urlConnections.url = "#{sd.API_URL}/blocks/#{@model.id}/channels_by_url"
-    @urlConnections.on 'sync', @renderUrlConnections, @
+
+    @listenTo @urlConnections, 'sync', @renderUrlConnections
+
     @urlConnections.parse = (data) -> data.channels
     @urlConnections.fetch()
 
@@ -96,8 +98,11 @@ module.exports = class LegacyBlockView extends Backbone.View
     $el = $('.modalize-body, html, body')
     $el.animate { scrollTop: $(".block-sidebar").offset().top }, 200
 
-  slide: (direction)->
+  slide: (direction) ->
+    return unless mediator.shared.blocks?
+
     mediator.stopListening "connection:added:#{@model.id}"
+
     @model = mediator.shared.blocks[direction](@model)
 
     mediator.trigger 'slide:to:block', @model.id
@@ -136,7 +141,7 @@ module.exports = class LegacyBlockView extends Backbone.View
 
   postRender: ->
     if @user?
-      commentView = initComments @model, @$('.js-comments') 
+      commentView = initComments @model, @$('.js-comments')
       @subViews.push commentView
 
     if @$('.iconic').length

@@ -6,8 +6,9 @@ export default {
   },
   state: {
     premium: '#00c5ff',
-    alert: '#e24d4d',
+    alert: 'rgb(255, 94, 0)',
     editable: '#fdffdb',
+    investor: 'rgb(183, 158, 110)',
   },
   gray: {
     bold: '#333',
@@ -17,5 +18,8 @@ export default {
     semiLight: '#e8e8e8',
     light: '#eee',
     hint: '#f7f7f7',
+  },
+  utility: {
+    transparent: 'rgba(255, 255, 255, 0.001)',
   },
 };

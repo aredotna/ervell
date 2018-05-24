@@ -1,24 +1,23 @@
-extends ../../../components/layout/index
+extends ./layout
 
-block body
-  include _path
-  include _tips
+block content
+  - alphaKeys = _.sortBy(_.keys(alpha))
 
-  - var alphaKeys = _.sortBy(_.keys(alpha))
   if alphaKeys.length
     .channel-container.flex-container.channel-container--alpha
-      .alpha(class=channelsCount > 10 ? "alpha--two-columns" : "")
+      .alpha( class= channelsCount > 10 ? 'alpha--two-columns' : '' )
         for letter in alphaKeys
           - group = alpha[letter]
+
           if group
             .alpha__group
-              .alpha__group__letter= letter
-              - sortedGroup = _.sortBy(group, function(channel, i){ return channel.title().toUpperCase() })
+              .alpha__group__letter
+                = letter
+
+              - sortedGroup = _.sortBy(group, function(channel, i) { return channel.title().toUpperCase() })
+
               for channel in sortedGroup
                 include ../../../components/connection_list/index.jade
   else
     .channel-empty
-      include _empty
-
-block scripts
-  script( src=asset('/assets/user.js') )
+      include empty

@@ -1,18 +1,15 @@
 Backbone = require 'backbone'
-{ contains } = require 'underscore'
 { API_URL, CAN, NODE_ENV } = require('sharify').data
 Bp = require '../../../lib/vendor/backpusher.js'
 mediator = require '../../../lib/mediator.coffee'
 Block = require '../../../models/block.coffee'
 ChannelFileDropView = require './channel_file_drop_view.coffee'
 ChannelDragView = require './channel_drag_view.coffee'
-MuteView  = require '../components/mute/client.coffee'
 
 module.exports = class ChannelView extends Backbone.View
   initialize: ({ @channel, @blocks, @blockCollectionView, @resultsCollection }) ->
     @listenTo mediator.shared.state, 'change:isDraggingBlocks', @toggleDragClass
     @listenTo mediator, 'upload:done', @makeBlock
-    @listenTo @channel, 'edit:title:success', @updateSlug
 
     @checkUserAbilities()
     @pusherSubscribe()
@@ -33,9 +30,6 @@ module.exports = class ChannelView extends Backbone.View
     if @pusher = mediator.shared.pusher?.subscribe "channel-#{NODE_ENV}-#{@channel.id}"
       @listener = new Bp.Backpusher @pusher, @blocks
 
-  updateSlug: ->
-    window.location.href = @channel.href()
-
   checkUserAbilities: ->
     if CAN.add_to
       @setupFileDropView()
@@ -53,15 +47,6 @@ module.exports = class ChannelView extends Backbone.View
 
       @setUpDragView() unless $('body').hasClass 'is-mobile'
       @delegateEvents()
-
-    if CAN.mute
-      @$('.metadata__column--manage').removeClass 'is-hidden'
-
-      new MuteView
-        el: $('.metadata__column--manage')
-        model: @channel
-
-      @channel.checkIfMuted()
 
     @maybeSetEmpty()
 
