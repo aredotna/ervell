@@ -48,8 +48,20 @@ block content
         required
       )
 
+      .Checkbox
+        .Checkbox__check
+          input.js-comply( type='checkbox', id='agree', name='agree' )
+
+        label.Checkbox__label( for='agree' )
+          = 'Accept Are.na '
+          a( href='/terms', target='_blank' )
+            | Terms
+          = ' and '
+          a( href='/privacy', target='_blank' )
+            | Privacy conditions
+
     .Errors.js-errors
       //-
 
-    button.Button.Button--divider.js-submit
+    button.Button.Button--divider( disabled ).js-submit
       | Join

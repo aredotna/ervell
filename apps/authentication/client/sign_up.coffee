@@ -8,12 +8,16 @@ module.exports = ->
   $el = $('.js-authentication')
 
   $form = $el.find '.js-form'
+  $comply = $el.find '.js-comply'
   $submit = $el.find '.js-submit'
   $errors = $el.find '.js-errors'
 
   registration = new Registration
 
   label = $submit.text()
+
+  $comply.on 'change', (e) ->
+    $submit.prop 'disabled', !this.checked
 
   $form.on 'submit', (e) ->
     e.preventDefault()
