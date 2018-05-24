@@ -21,3 +21,5 @@ app.get '/experiments', (_req, res) ->
   res.render 'experiments'
 app.get '/community-guidelines', (_req, res) ->
   res.render 'community'
+app.get '/thankyou', (_req, res) ->
+  res.render 'thankyou'
