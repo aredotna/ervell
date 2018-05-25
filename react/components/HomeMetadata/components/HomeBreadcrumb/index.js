@@ -50,6 +50,7 @@ class HomeBreadcrumb extends Component {
       <StickyBreadcrumbPath.Crumb>
         {{
           '/': 'Feed',
+          '/feed': 'Feed',
           '/explore': 'Explore',
           '/explore/channels': 'Explore',
           '/explore/blocks': 'Explore',
@@ -63,6 +64,7 @@ class HomeBreadcrumb extends Component {
         <StickyBreadcrumbPath.Crumb>
           {{
             '/': feedOptions,
+            '/feed': feedOptions,
             '/explore': exploreOptions,
             '/explore/channels': exploreOptions,
             '/explore/blocks': exploreOptions,
