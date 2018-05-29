@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
+import styles from 'react/styles';
+
 const Link = styled.a.attrs({
   role: 'button',
 })`
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  hyphens: auto;
+  ${x => (x.length > 25 && styles.Mixins.hyphenate)}
 `;
 
 export default Link;

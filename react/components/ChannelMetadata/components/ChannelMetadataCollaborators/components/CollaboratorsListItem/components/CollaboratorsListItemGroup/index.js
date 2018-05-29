@@ -45,7 +45,7 @@ export default class CollaboratorsListItemGroup extends Component {
 
     return (
       <strong>
-        <Link onClick={this.handleClick}>
+        <Link onClick={this.handleClick} length={name.length}>
           {name}
 
           {mode === 'resting' &&

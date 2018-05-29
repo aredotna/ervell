@@ -6,6 +6,7 @@ import styles from 'react/styles';
 
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
+import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const Options = styled.div`
 `;
@@ -13,7 +14,7 @@ const Options = styled.div`
 const Option = styled.a`
   display: block;
 
-  &:last-child {
+  &:last-child:not(first-child) {
     color: ${styles.Colors.gray.regular};
 
     &:hover {
@@ -22,29 +23,37 @@ const Option = styled.a`
   }
 `;
 
-const feedOptions = (
+const FeedOptions = (
   <Options>
-    <Option>Feed</Option>
+    <div>Feed</div>
     <Option href="/explore">Explore</Option>
   </Options>
 );
 
-const exploreOptions = (
+const ExploreOptions = ({ isLoggedIn }) => (
   <Options>
-    <Option>Explore</Option>
-    <Option href="/feed">Feed</Option>
+    <div>Explore</div>
+
+    {isLoggedIn &&
+      <Option href="/feed">Feed</Option>
+    }
   </Options>
 );
+
+ExploreOptions.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+};
 
 class HomeBreadcrumb extends Component {
   static propTypes = {
     currentRoute: PropTypes.shape({
       href: PropTypes.string.isRequired,
     }).isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   render() {
-    const { currentRoute: { pathname } } = this.props;
+    const { currentRoute: { pathname }, isLoggedIn } = this.props;
 
     const stuckChildren = (
       <StickyBreadcrumbPath.Crumb>
@@ -63,11 +72,11 @@ class HomeBreadcrumb extends Component {
       <StickyBreadcrumbPath stuckChildren={stuckChildren}>
         <StickyBreadcrumbPath.Crumb>
           {{
-            '/': feedOptions,
-            '/feed': feedOptions,
-            '/explore': exploreOptions,
-            '/explore/channels': exploreOptions,
-            '/explore/blocks': exploreOptions,
+            '/': FeedOptions,
+            '/feed': FeedOptions,
+            '/explore': ExploreOptions({ isLoggedIn }),
+            '/explore/channels': ExploreOptions({ isLoggedIn }),
+            '/explore/blocks': ExploreOptions({ isLoggedIn }),
             '/notifications': 'Notifications',
           }[pathname]}
         </StickyBreadcrumbPath.Crumb>
@@ -76,4 +85,4 @@ class HomeBreadcrumb extends Component {
   }
 }
 
-export default WithCurrentRoute(HomeBreadcrumb);
+export default WithLoginStatus(WithCurrentRoute(HomeBreadcrumb));

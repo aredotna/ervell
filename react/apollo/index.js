@@ -28,7 +28,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   },
 });
 
-export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute } = {}) => {
+export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute, isLoggedIn } = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__;
   }
@@ -47,6 +47,10 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute } = {}) => 
       currentRoute: {
         __typename: 'CurrentRoute',
         ...currentRoute,
+      },
+      loginStatus: {
+        __typename: 'LoginStatus',
+        isLoggedIn,
       },
     },
   });
@@ -80,11 +84,14 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute } = {}) => 
 
 export const initClientSideApolloClient = () => {
   const { data: { CURRENT_USER, CURRENT_URL } } = sharify;
+
   const currentRoute = { ...url.parse(CURRENT_URL) };
+  const isLoggedIn = !!(CURRENT_USER && CURRENT_USER.id);
 
   initApolloClient({
     token: CURRENT_USER && CURRENT_USER.authentication_token,
     currentRoute,
+    isLoggedIn,
   });
 };
 

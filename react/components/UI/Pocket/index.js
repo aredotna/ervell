@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Styles from 'react/styles';
 
 const Container = styled.div`
+  margin-bottom: 1em;
 `;
 
 const Title = styled.h4`
@@ -14,6 +15,7 @@ const Title = styled.h4`
   line-height: ${Styles.Type.lineHeight.tall};
   color: ${Styles.Colors.gray.medium};
   border-bottom: 1px solid ${Styles.Colors.gray.light};
+  font-weight: normal;
 `;
 
 const Content = styled.div`
