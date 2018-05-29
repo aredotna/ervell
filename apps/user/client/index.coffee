@@ -7,7 +7,7 @@
 Backbone = require 'backbone'
 Backbone.$ = $
 _ = require 'underscore'
-{ USER, CURRENT_PATH, FOLLOWERS, FOLLOWING, BLOCKS, SUBJECT, SORT, SEED } = require('sharify').data
+{ USER, CURRENT_PATH, SUFFIX, BLOCKS, SUBJECT, SORT, SEED } = require('sharify').data
 User = require '../../../models/user.coffee'
 initTips = require '../../../components/tips/index.coffee'
 UserBlocks = require '../../../collections/user_blocks.coffee'
@@ -51,7 +51,7 @@ module.exports = ->
     collection = new FollowBlocks(BLOCKS, {
       object_id: USER.id
       object_type: 'users'
-      suffix: if FOLLOWING then 'ing' else 'ers'
+      suffix: SUFFIX
     })
 
     setupBlockCollection({

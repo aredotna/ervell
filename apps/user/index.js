@@ -126,13 +126,8 @@ const fetchAndSetFollow = suffix => (req, res) => {
   }).then(() => {
     res.locals.sd.BLOCKS = followBlocksCollection.toJSON();
     res.locals.blocks = followBlocksCollection.models;
-    if (suffix === 'ing') {
-      res.locals.sd.FOLLOWING = followBlocksCollection.toJSON();
-      res.locals.followers = false;
-    } else {
-      res.locals.sd.FOLLOWERS = followBlocksCollection.toJSON();
-      res.locals.followers = true;
-    }
+    res.locals.sd.SUFFIX = suffix;
+    res.locals.followers = true;
   });
 };
 
