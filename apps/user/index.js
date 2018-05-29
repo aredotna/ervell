@@ -125,9 +125,14 @@ const fetchAndSetFollow = suffix => (req, res) => {
     data: { per: 25, auth_token },
   }).then(() => {
     res.locals.sd.BLOCKS = followBlocksCollection.toJSON();
-    res.locals.sd.FOLLOWERS = followBlocksCollection.toJSON();
     res.locals.blocks = followBlocksCollection.models;
-    res.locals.followers = true;
+    if (suffix === 'ing') {
+      res.locals.sd.FOLLOWING = followBlocksCollection.toJSON();
+      res.locals.followers = false;
+    } else {
+      res.locals.sd.FOLLOWERS = followBlocksCollection.toJSON();
+      res.locals.followers = true;
+    }
   });
 };
 
