@@ -163,7 +163,7 @@ const index = (req, res, next) => {
 };
 
 const follow = suffix => (req, res, next) => {
-  if (!req.user) { return res.redirect(301, '/sign_up'); }
+  if (!req.user) { return res.redirect(302, '/sign_up'); }
 
   return Promise.all([
     fetchAndSetProfileModel(req, res),
