@@ -32,7 +32,7 @@ const feedOptions = (
 const exploreOptions = (
   <Options>
     <Option>Explore</Option>
-    <Option href="/">Feed</Option>
+    <Option href="/feed">Feed</Option>
   </Options>
 );
 
