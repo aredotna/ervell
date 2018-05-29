@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ import profileMetadataInfoFragment from 'react/components/ProfileMetadata/compon
 
 import Pocket from 'react/components/UI/Pocket';
 import Expandable from 'react/components/UI/Expandable';
+import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const N_LINES = 5;
 const FIVE_LINES = `${styles.Type.functions.calculateLineHeight('xs', 'tall') * N_LINES}rem`;
@@ -28,13 +30,14 @@ const Buttons = styled.div`
   }
 `;
 
-export default class ProfileMetadataInfo extends Component {
+class ProfileMetadataInfo extends Component {
   static propTypes = {
     user: propType(profileMetadataInfoFragment).isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   render() {
-    const { user } = this.props;
+    const { user, isLoggedIn } = this.props;
 
     return (
       <Pocket title="Info">
@@ -42,7 +45,7 @@ export default class ProfileMetadataInfo extends Component {
           <div dangerouslySetInnerHTML={{ __html: user.about || '—' }} />
         </Expandable>
 
-        {(user.counts.followers > 0 || user.counts.following > 1) &&
+        {isLoggedIn && (user.counts.followers > 0 || user.counts.following > 1) &&
           <Buttons>
             {user.counts.followers > 0 &&
               <a href={`${user.href}/followers`}>
@@ -62,3 +65,5 @@ export default class ProfileMetadataInfo extends Component {
     );
   }
 }
+
+export default WithLoginStatus(ProfileMetadataInfo);
