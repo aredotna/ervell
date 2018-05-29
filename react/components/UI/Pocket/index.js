@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Styles from 'react/styles';
 
 const Container = styled.div`
+  margin-bottom: 1em;
 `;
 
 const Title = styled.h4`
