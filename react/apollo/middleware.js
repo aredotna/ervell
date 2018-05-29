@@ -5,10 +5,12 @@ import ssr from 'react/apollo/ssr';
 
 export default (req, res, next) => {
   const currentRoute = { ...url.parse(req.url) };
+  const isLoggedIn = !!(req.user && req.user.id);
 
   const client = initApolloClient({
     token: req.user && req.user.get('authentication_token'),
     currentRoute,
+    isLoggedIn,
   });
 
   req.apollo = {
