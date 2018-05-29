@@ -125,8 +125,8 @@ const fetchAndSetFollow = suffix => (req, res) => {
     data: { per: 25, auth_token },
   }).then(() => {
     res.locals.sd.BLOCKS = followBlocksCollection.toJSON();
-    res.locals.sd.FOLLOWERS = followBlocksCollection.toJSON();
     res.locals.blocks = followBlocksCollection.models;
+    res.locals.sd.SUFFIX = suffix;
     res.locals.followers = true;
   });
 };
