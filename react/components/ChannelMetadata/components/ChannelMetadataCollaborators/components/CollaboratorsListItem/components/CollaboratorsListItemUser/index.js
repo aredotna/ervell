@@ -15,7 +15,7 @@ export default class CollaboratorsListItemUser extends Component {
 
     return (
       <strong>
-        <Link href={href}>
+        <Link href={href} length={name.length}>
           {name}
         </Link>
       </strong>
