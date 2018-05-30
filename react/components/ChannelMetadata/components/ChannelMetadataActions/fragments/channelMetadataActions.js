@@ -12,6 +12,7 @@ export default gql`
       destroy
       mute
     }
+    visibility
     ...MuteChannelButton
   }
   ${muteChannelButtonFragment}
