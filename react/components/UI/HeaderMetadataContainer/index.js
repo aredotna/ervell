@@ -26,6 +26,7 @@ const Header = styled.div`
 
 const Breadcrumb = styled.div`
   flex: 1;
+  padding-right: 1em;
 `;
 
 const Actions = styled.div`

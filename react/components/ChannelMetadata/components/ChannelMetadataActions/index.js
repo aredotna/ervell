@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
+import styles from 'react/styles';
+
 import Modal from 'react/components/UI/Modal';
+import Icon from 'react/components/UI/Icons';
+import Lock from 'react/components/UI/Icons/Lock/index.svg';
 import ManageChannel from 'react/components/ManageChannel';
 import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
@@ -20,6 +24,18 @@ const Button = styled(GenericButton).attrs({ size: 'xs' })`
 
 const ChannelFollowButton = styled(FollowButton).attrs({ size: 'xs' })`
   ${buttonMixin}
+`;
+
+const LockIcon = props => (
+  <Icon {...props}>
+    <Lock />
+  </Icon>
+);
+
+const PrivateChannelLockIcon = styled(LockIcon).attrs({
+  color: styles.Colors.gray.bold,
+})`
+  margin-right: 0.33em;
 `;
 
 export default class ChannelMetadataActions extends Component {
@@ -48,7 +64,9 @@ export default class ChannelMetadataActions extends Component {
 
         {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
-            Edit channel
+            {channel.visibility === 'private' &&
+              <PrivateChannelLockIcon />
+            } Edit channel
           </Button>
         }
       </Buttons>
