@@ -30,7 +30,7 @@ export default class LinksList extends Component {
       <Container {...rest}>
         {links.map((link, i) => (
           <span key={link.id}>
-            <Link href={link.href}>
+            <Link href={link.href} length={link.label.length}>
               {link.label}
             </Link>
 

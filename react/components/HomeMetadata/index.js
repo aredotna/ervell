@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
-import styles from 'react/styles';
 
 import { MODES, SORTS } from 'react/components/Home/config';
 
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
 import Grid from 'react/components/UI/Grid';
+import HeaderMetadataContainer from 'react/components/UI/HeaderMetadataContainer';
 import HomeBreadcrumb from 'react/components/HomeMetadata/components/HomeBreadcrumb';
 import HomeMetadataView from 'react/components/HomeMetadata/components/HomeMetadataView';
 import HomeMetadataSort from 'react/components/HomeMetadata/components/HomeMetadataSort';
 
-const Container = styled.div`
-  position: relative;
-  margin: ${styles.Constants.containerOffset} auto 0 auto;
-`;
 
 class HomeMetadata extends Component {
   static propTypes = {
@@ -36,16 +30,16 @@ class HomeMetadata extends Component {
     const { mode, sort, currentRoute: { href } } = this.props;
 
     return (
-      <Container>
-        <HomeBreadcrumb />
-
+      <HeaderMetadataContainer
+        breadcrumb={<HomeBreadcrumb />}
+      >
         {/^\/explore/.test(href) &&
           <Grid>
             <HomeMetadataView mode={mode} sort={sort} />
             <HomeMetadataSort mode={mode} sort={sort} />
           </Grid>
         }
-      </Container>
+      </HeaderMetadataContainer>
     );
   }
 }

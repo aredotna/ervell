@@ -16,6 +16,14 @@ const outlineBorder = (size = '5px', color = Colors.gray.light, radius = '0.25em
     border-radius: ${radius};
   `;
 
+const hyphenate = css`
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+`;
+
 export default {
   outlineBorder,
+  hyphenate,
 };
