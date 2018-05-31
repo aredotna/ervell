@@ -4,8 +4,6 @@ module.exports = ($el) ->
   deactivate = -> # Overwritten by activations
 
   $hovers.on 'click', (e) ->
-    e.preventDefault()
-
     deactivate()
 
     document.documentElement.classList.add 'HTML--disabled-scrolling'
