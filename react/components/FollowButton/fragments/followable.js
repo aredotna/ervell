@@ -6,10 +6,16 @@ export default gql`
     ... on User {
       id
       is_followed
+      counts {
+        followers
+      }
     }
     ... on Channel {
-      id
+      id: slug
       is_followed
+      counts {
+        followers
+      }
     }
   }
 `;
