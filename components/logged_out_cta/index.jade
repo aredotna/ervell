@@ -1,9 +1,11 @@
+- button_class = sd.BUTTON_COLOR == 'blue' ? 'Button--blue' : ''
+
 .LoggedOutCTA
   span.Type.Type--size-lg
     = call
 
   .LoggedOutCTA__buttons
-    a.Button.Button--size-sm.js-sign_up( href='/sign_up?ref=logged_out_cta' )
+    a.Button.Button--size-sm.js-sign_up( class=button_class href='/sign_up?ref=logged_out_cta' )
       | Sign up
 
     unless action === 'explore'
