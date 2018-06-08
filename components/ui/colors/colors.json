@@ -12,6 +12,13 @@
       "editable": "#fdffdb",
       "highlighted": "rgb(255, 244, 107)"
     },
+    "blue": {
+      "background": "rgb(0, 155, 226)",
+      "border": "rgb(0, 122, 178)",
+      "secondary": "rgb(0, 131, 192)",
+      "border-bold": "rgb(0, 89, 130)",
+      "light": "rgb(128, 193, 223)"
+    },
     "gray": {
       "translucent": "rgba(255,255,255,0.9)",
       "background": "#f7f7f7",

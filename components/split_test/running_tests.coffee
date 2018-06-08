@@ -14,4 +14,10 @@
 # this should export empty Object
 # module.exports = {}
 
-module.exports = {}
+module.exports = 
+  button_color:
+    key: 'button_color'
+    outcomes:
+      default: 50
+      blue: 50
+    dimension: 'dimension7'
