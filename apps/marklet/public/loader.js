@@ -61,7 +61,7 @@
       "#arena_frame.is-expanded{height:"+markletHeightExpanded+"px !important}" +
       "#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}" +
       "#arena_frame:hover{background:rgba(255,255,255,0.9);}" +
-      "#arena_div{z-index:9999999999;display:none;opacity:0}";
+      "#arena_div{z-index:9999999999;display:none;}";
 
     if (markletStyle.styleSheet) {
       markletStyle.styleSheet.cssText = markletCSS;
