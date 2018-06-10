@@ -616,6 +616,16 @@ apollo-link@^1.2.2:
     apollo-utilities "^1.0.0"
     zen-observable-ts "^0.8.9"
 
+apollo-storybook-core@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/apollo-storybook-core/-/apollo-storybook-core-0.3.4.tgz#5eae1e756add6d0a448c3673ba47544f4b41fbb8"
+
+apollo-storybook-react@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/apollo-storybook-react/-/apollo-storybook-react-0.1.4.tgz#c104ac97fb5f3b17551fef084f75bc3ccf834013"
+  dependencies:
+    apollo-storybook-core "^0.3.4"
+
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.6.tgz#7bfd7a702b5225c9a4591fe28c5899d9b5f08889"
