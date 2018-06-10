@@ -11,7 +11,7 @@
     "test": "sh scripts/test.sh",
     "start-dev": "foreman start -f Procfile.dev",
     "lint": "eslint --ext .js .",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c react/.storybook"
   },
   "engines": {
     "node": "8.x.x",
