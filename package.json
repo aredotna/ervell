@@ -138,6 +138,7 @@
     "eslint-plugin-react": "^7.6.1",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "graphql-tools": "^3.0.2",
     "html5": "*",
     "mocha": "*",
     "progress-bar-webpack-plugin": "^1.10.0",
