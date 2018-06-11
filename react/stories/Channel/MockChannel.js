@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { storiesOf } from '@storybook/react';
+import { Query } from 'react-apollo';
 import PropTypes from 'prop-types';
 import channelMetadataFragment from 'react/components/ChannelMetadata/fragments/channelMetadata';
-import ChannelBreadcrumb from 'react/components/ChannelMetadata/components/ChannelBreadcrumb';
-import ChannelMetadataInfo from 'react/components/ChannelMetadata/components/ChannelMetadataInfo';
 
-class MockChannel extends Component {
+export default class MockChannel extends Component {
   static propTypes = {
     ChannelComponent: PropTypes.node.isRequired,
   }
@@ -36,10 +33,3 @@ class MockChannel extends Component {
     );
   }
 }
-
-storiesOf('Channel', module)
-  .add('Breadcrumb', () => (
-    <MockChannel ChannelComponent={ChannelBreadcrumb} />
-  )).add('Info', () => (
-    <MockChannel ChannelComponent={ChannelMetadataInfo} />
-  ));

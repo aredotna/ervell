@@ -27,8 +27,8 @@ addDecorator(
 );
 
 function loadStories() {
-  require('../stories/index.js');
-  require('../stories/channel.js');
+  require('../stories/UI.js');
+  require('../stories/Channel');
 }
 
 configure(loadStories, module);
