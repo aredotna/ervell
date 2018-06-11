@@ -11,6 +11,7 @@ const Container = styled.div`
   margin: 0 0 2em 0;
   font-size: ${styles.Type.size.h3};
   line-height: ${styles.Type.lineHeight.compact};
+  font-family: ${styles.Type.font.sans};
 
   ${styles.Constants.media.mobile`
     font-size: ${styles.Type.size.h4};
@@ -26,6 +27,11 @@ const Crumb = styled.div`
   justify-content: center;
   font-weight: bold;
   color: ${styles.Colors.gray.medium};
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   &:after {
     content: '/';
