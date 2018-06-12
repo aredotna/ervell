@@ -9,6 +9,7 @@ app.set 'view engine', 'jade'
 exampleChannelQuery = """
   query example($id: ID!) {
     channel(id: $id) {
+      __typename
       title(truncate: 50)
       updated_at(relative: true)
       user {
