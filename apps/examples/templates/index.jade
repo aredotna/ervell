@@ -16,8 +16,11 @@ block container
         | Following channels is the best way to get the hang of Are.na
         br
         | Click <b>Follow</b> on any channel below to add it to your feed.
-    .Page--examples__example-section
-      h2.Type.Type--size-h2.Utility--align-center Collections
-      p.Type.Type--lh-tall.Utility--align-center
-        | Specific finds from internet treasure hunts
+    .flex-container
+      .Page--examples__example-section
+        h2.Type.Type--size-h2.Utility--align-center Collections
+        p.Type.Type--lh-tall.Utility--align-center
+          | Specific finds from internet treasure hunts
+        - channel = examplechannel
+        include ../../../components/channel_block_group/templates/index
   
