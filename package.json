@@ -10,7 +10,8 @@
     "mocha": "sh scripts/mocha.sh",
     "test": "sh scripts/test.sh",
     "start-dev": "foreman start -f Procfile.dev",
-    "lint": "eslint --ext .js ."
+    "lint": "eslint --ext .js .",
+    "storybook": "start-storybook -p 9001 -c react/.storybook"
   },
   "engines": {
     "node": "8.x.x",
@@ -122,10 +123,12 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
+    "@storybook/react": "^3.4.6",
     "@types/express": "^4.11.1",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^15.5.7",
+    "apollo-storybook-react": "^0.1.4",
     "babel-eslint": "^8.2.1",
     "benv": "*",
     "eslint": "^4.17.0",
@@ -135,6 +138,7 @@
     "eslint-plugin-react": "^7.6.1",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "graphql-tools": "^3.0.2",
     "html5": "*",
     "mocha": "*",
     "progress-bar-webpack-plugin": "^1.10.0",
