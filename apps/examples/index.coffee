@@ -1,5 +1,9 @@
 express = require 'express'
+Promise = require 'bluebird-q'
+
 graphQL = require '../../lib/graphql'
+examples = require './examples.coffee'
+{ first, map, each } = require 'underscore'
 
 app = module.exports = express()
 
@@ -7,8 +11,8 @@ app.set 'views', "#{__dirname}/templates"
 app.set 'view engine', 'jade'
 
 exampleChannelQuery = """
-  query example($id: ID!) {
-    channel(id: $id) {
+  query example($ids: [ID]!) {
+    channels(ids: $ids) {
       __typename
       title(truncate: 50)
       updated_at(relative: true)
@@ -31,15 +35,20 @@ exampleChannelQuery = """
 
 
 app.get '/examples', (req, res, next) ->
-  send =
-    query: exampleChannelQuery
-    user: req.user
-    variables:
-      id: 'fruit-crate-labels'
-
-  graphQL(send)
-    .then ({ channel }) ->
-      res.locals.sd.CHANNELS = channel
-      res.locals.examplechannel = channel
-      res.render 'index'
-    .catch(next)
+  Promise.all(
+    map first(examples, 3), (example) ->
+      send =
+        query: exampleChannelQuery
+        user: req.user
+        variables:
+          ids: first(example.channel_ids, 2)
+    
+      graphQL(send)
+  )
+  .then (results) ->
+    each results, (result, i) ->
+      examples[i].channels = result.channels
+   
+    res.locals.examples = examples
+    res.render 'index'
+  .catch(next)
