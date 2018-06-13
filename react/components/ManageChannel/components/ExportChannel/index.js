@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import styled from 'styled-components';
 
 import exportChannelMutation from 'react/components/ManageChannel/components/ExportChannel/mutations/exportChannel';
 
-import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
-
-import Styles from 'react/styles';
-
-const Status = styled.div`
-  max-width: 90%;
-  padding: ${optionLinkPadding};
-  font-size: ${Styles.Type.size.xs};
-  line-height: ${Styles.Type.lineHeight.tall};
-  color: ${Styles.Colors.state.alert};
-`;
+import OptionLink from 'react/components/UI/OptionLink';
+import Status from 'react/components/UI/Status';
 
 class ExportChannel extends Component {
   static propTypes = {
