@@ -1,0 +1,15 @@
+extends ../../../components/layout/index
+
+block title
+  |  / Rejection successful
+
+block body
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--narrow
+    h2.Type.Type--size-h2.Utility--align-center
+      | The request to transfer &ldquo;<a href=#{channel.href}>#{channel.title}</a>&rdquo; has been rejected.
+
+    p.Type.Type--lg.Type--lh-tall
+      | <a href='/'>Click here</a> to return home. If you are experiencing difficulty transferring a channel,
+      | contact us at <a href='mailto:help@are.na'>help@are.na</a>.
