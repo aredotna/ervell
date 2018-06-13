@@ -3,7 +3,7 @@ Promise = require 'bluebird-q'
 
 graphQL = require '../../lib/graphql'
 examples = require './examples.coffee'
-{ first, map, each } = require 'underscore'
+{ first, map, each, find } = require 'underscore'
 
 app = module.exports = express()
 
@@ -33,10 +33,21 @@ exampleChannelQuery = """
   #{require '../../components/block_v2/queries/block.coffee'}
 """
 
+app.get '/api/examples/:id', (req, res, next) ->
+  example = find(examples, (example) -> example.id is req.params.id)
+  send =
+    query: exampleChannelQuery
+    user: req.user
+    variables:
+      ids: example.channel_ids
+
+  graphQL(send).then ({ channels }) ->
+    example.channels = channels
+    res.json example
 
 app.get '/examples', (req, res, next) ->
   Promise.all(
-    map first(examples, 3), (example) ->
+    map first(examples, 6), (example) ->
       send =
         query: exampleChannelQuery
         user: req.user
