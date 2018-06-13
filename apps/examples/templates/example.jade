@@ -1,0 +1,11 @@
+if example.channels
+  .Page--examples__example-section(data-length=example.channel_ids.length data-id=example.id)
+    h2.Type.Type--size-h2.Utility--align-center= example.title
+    p.Type.Type--lh-tall.Utility--align-center= example.description
+    .Page--examples__channels
+      for channel in example.channels
+        include ../../../components/channel_block_group/templates/index
+    if example.channel_ids.length > example.channels.length
+      .Page--examples__button.Utility--align-center
+        a.Button.Button--size-lg.Button--border-heavy( href='#' )
+          | See more #{example.id} channels
