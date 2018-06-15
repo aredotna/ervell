@@ -26,12 +26,20 @@
 
     .ChannelBlockGroup__header 
       margin 2em .5em 1em
+      display flex
+      justify-content space-between
+
+    .ChannelBlockGroup__follow
+      vertical-align middle
+      > span 
+        border 1px solid colors-gray-border
+        border-radius .25em
+        padding 0.75em 1.25em
+        font-size font-size-xs
+        font-weight bold
 
     .ChannelBlockGroup__title > h4.Type
       font-weight bold
-
-    // .ChannelBlockGroup__inner
-    //   opacity 0.3
     
     .ChannelBlockGroup__inner:hover
       opacity 1
