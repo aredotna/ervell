@@ -11,13 +11,17 @@ block container
 
   .Page.Page--examples
     .Page--examples__cta
-      h4.Type.Type--size-h4.Utility--align-center Try following a few channels
-      p.Type.Type--lh-tall.Utility--align-center
-        | Following channels is the best way to get the hang of Are.na
+      h2.Type.Type--size-h2.Type--lh-tall Try following a few channels
+      h4.Type.Type--size-h4.Type--lh-tall
+        | Following channels is the best way to get the hang of Are.na.
         br
         | Click <b>Follow</b> on any channel below to add it to your feed.
-    .flex-container
-      if examples
-        for example in examples
+  hr.Base
+  if examples
+    for example in examples
+      .Page.Page--examples
+        .flex-container
           include ./example.jade
+      hr.Base
+      
   

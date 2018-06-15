@@ -1,13 +1,44 @@
 .Page--examples
   &__cta
-    border 1px solid colors-gray-border-bold
-    border-radius input-border-radius * 2
-    padding 2em
+    margin-left block_width_mar
+    margin-bottom 4em
 
   &__example-section
-    margin 5em 0 10em
+    margin 2em 0 6em
+
+  &__header
+    display flex
+    flex-direction row
+    margin-bottom 5em
+
+  &__title
+    width block_width_mar
+    > h3.Type
+      font-weight bold
+
+  &__description
+    max-width 40em
 
   &__channels
+
+    .ChannelBlockGroup
+      margin-bottom 4em
+
+    .ChannelBlockGroup__header 
+      margin 2em .5em 1em
+
+    .ChannelBlockGroup__title > h4.Type
+      font-weight bold
+
+    // .ChannelBlockGroup__inner
+    //   opacity 0.3
+    
+    .ChannelBlockGroup__inner:hover
+      opacity 1
+    
+    .ChannelBlockGroup__inner .Block__inner:hover .Block__inner__overlay
+      display none
+
     .ChannelBlockGroup:last-child > .ChannelBlockGroup__divider
       display none
   

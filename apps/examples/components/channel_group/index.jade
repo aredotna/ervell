@@ -1,0 +1,12 @@
+.ChannelBlockGroup.js-channel-group(data-id=channel.id)
+  .ChannelBlockGroup__header
+    .ChannelBlockGroup__title
+      h4.Type.Type--size-h4
+        | Are.na / #{channel.user.name} /&nbsp;
+        span(class='Color--channel-#{channel.visibility}')!= channel.title
+
+  .ChannelBlockGroup__inner.js-channel
+    if channel.blocks
+      for block in channel.blocks
+        include ../../../../components/block_v2/templates/block
+
