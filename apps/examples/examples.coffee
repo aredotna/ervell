@@ -120,5 +120,41 @@ module.exports = [
     #   "females-feminism"
     # ]
     channel_ids: [129609, 34790, 62810, 27502, 30712]
+  },
+  {
+    id: 'learning'
+    title: 'Learning and Teaching'
+    description: 'Crowdsourced perspectives on education'
+    channel_ids: [33665, 37233, 186607]
+  },
+  {
+    id: 'library'
+    title: 'Libraries'
+    description: 'Archives of important texts, compiled by thoughtful members'
+    channel_ids: [54676, 175024, 49024, 68396]
+  },
+  {
+    id: 'technology'
+    title: 'Humans and Technology'
+    description: 'Advice, manifestos, and research for living with tech'
+    channel_ids: [150596, 88828, 13560, 37234]
+  },
+  {
+    id: 'computer'
+    title: 'Computers and electronics'
+    description: 'Appreciations of personal technology both real and imagined'
+    channel_ids: [5526, 103682, 2178, 12162]
+  },
+  {
+    id: 'future'
+    title: 'The Future'
+    description: 'Speculations and theories on what comes next'
+    channel_ids: [113460, 15975, 50058]
+  },
+  {
+    id: 'information'
+    title: 'Visualizing Information'
+    description: 'Bottomless archives of maps, dataviz, and diagrams'
+    channel_ids: [70731, 13047, 8560]
   }
 ]
