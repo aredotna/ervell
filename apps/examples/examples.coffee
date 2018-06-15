@@ -1,5 +1,18 @@
 module.exports = [
   {
+    id: 'mood'
+    title: 'Mood'
+    description: 'Vibes, patterns, atmospheres, colors, and more'
+    # channel_ids: [
+    #   "sublime",
+    #   "color-schemes",
+    #   "hotel-concepts",
+    #   "color-files",
+    #   "life-luxury",
+    # ]
+    channel_ids: [13771, 28613, 7469, 158542, 46371]
+  },
+  {
     id: 'collections'
     title: 'Collections'
     description: 'Specific finds from internet treasure hunts'
@@ -57,19 +70,6 @@ module.exports = [
     #   "foodography",
     # ]
     channel_ids: [191639, 103614, 10956, 25149, 70109, 13958, 122061]
-  },
-  {
-    id: 'mood'
-    title: 'Mood'
-    description: 'Vibes, patterns, atmospheres, colors, and more'
-    # channel_ids: [
-    #   "sublime",
-    #   "color-schemes",
-    #   "hotel-concepts",
-    #   "color-files",
-    #   "life-luxury",
-    # ]
-    channel_ids: [28613, 7469, 158542, 46371, 13771]
   },
   {
     id: 'places'
