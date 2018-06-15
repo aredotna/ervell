@@ -2,7 +2,6 @@ import express from 'express';
 
 import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
-import formatErrors from 'react/util/formatErrors';
 
 import acceptChannelTransferMutation from 'apps/actions/mutations/acceptChannelTransfer';
 import rejectChannelTransferMutation from 'apps/actions/mutations/rejectChannelTransfer';
@@ -18,17 +17,16 @@ const middlewareStack = [
 ];
 
 const handleErrors = (_req, res, next) => (err) => {
-  const message = formatErrors(err);
-
-  if (message.toLowerCase() === 'not found') { // Invalid/incorrect correct token
-    return res.status(404).render('not_found');
+  switch (err.graphQLErrors[0].extensions.code) {
+    case 'UNAUTHORIZED':
+      // Wrong user
+      return res.status(401).render('access_denied');
+    case 'NOT_FOUND':
+      // Invalid/incorrect correct token
+      return res.status(404).render('not_found');
+    default:
+      return next(err);
   }
-
-  if (message.toLowerCase() === 'unauthorized') { // Wrong user
-    return res.status(401).render('access_denied');
-  }
-
-  return next(err);
 };
 
 app
@@ -64,7 +62,7 @@ app
     })
       .then(({ data }) => {
         const {
-          cancel_channel_transfer: {
+          reject_channel_transfer: {
             channel,
           },
         } = data;
