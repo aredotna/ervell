@@ -17,11 +17,11 @@ block container
         br
         | Click <b>Follow</b> on any channel below to add it to your feed.
   hr.Base
-  if examples
-    for example in examples
-      .Page.Page--examples
-        .flex-container
-          include ./example.jade
-      hr.Base
+  .Page--examples-list
+    include examples
+  .Page.Page--examples
+    .Page--examples__button-load-more.Utility--align-center
+      a.Button.Button--size-lg.Button--border-heavy.js-load-more-examples( href='#' data-current-page=1 data-total-pages=totalPages )
+        | See more examples
       
   
