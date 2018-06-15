@@ -4,7 +4,8 @@
       h4.Type.Type--size-h4
         | Are.na / #{channel.user.name} /&nbsp;
         span(class='Color--channel-#{channel.visibility}')!= channel.title
-
+    .ChannelBlockGroup__follow.js-example-channel-follow(data-id=example.id)
+      //- rendered on the client
   .ChannelBlockGroup__inner.js-channel
     if channel.blocks
       for block in channel.blocks
