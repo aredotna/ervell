@@ -33,11 +33,22 @@ export default class TransferChannel extends Component {
 
     if (channel.is_pending_transfer) {
       return (
-        <Status>
-          {channel.transfer_request.user_to.name} needs to confirm the transfer.
-          After they confirm you will no longer own this channel.
-          <CancelTransferButton channel_id={channel.id} />
-        </Status>
+        <div>
+          {!channel.transfer_request.is_user_to_member &&
+            <Status>
+              Note: {channel.transfer_request.user_to.name} does not have access to this channel.
+              Consider temporarily adding them as a collaborator
+              so they can view the channel before they accept the transfer
+            </Status>
+          }
+
+          <Status>
+            {channel.transfer_request.user_to.name} needs to confirm the transfer.
+            After they confirm you will no longer own this channel.
+
+            <CancelTransferButton channel_id={channel.id} />
+          </Status>
+        </div>
       );
     }
 

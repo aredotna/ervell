@@ -12,6 +12,7 @@ export default gql`
         id
         name
       }
+      is_user_to_member
     }
   }
 `;
