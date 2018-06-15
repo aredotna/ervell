@@ -3,10 +3,10 @@ Backbone = require 'backbone'
 { default: FollowButton } = require '../../../react/components/FollowButton'
 
 module.exports = class ExampleChannelView extends Backbone.View
-
   initialize: ->
-    console.log('initializing', @$el.data('id'))
     @initializeFollowButton()
 
   initializeFollowButton: ->
-    mountWithApolloProvider FollowButton, { id: @$el.data('id'), type: 'CHANNEL' }, $('.js-example-channel-follow')
+    props = { id: @$el.data('id'), type: 'CHANNEL' }
+    mountNode = @$('.js-example-channel-follow')
+    mountWithApolloProvider(FollowButton, props, mountNode)
