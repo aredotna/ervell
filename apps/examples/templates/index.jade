@@ -1,0 +1,30 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  / Examples
+
+block scripts
+  script( src= asset('/assets/examples.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--examples
+    .Page--examples__cta
+      h2.Type.Type--size-h2.Type--lh-tall Try following a few channels
+      h4.Type.Type--size-h4.Type--lh-tall
+        | Following channels is the best way to get the hang of Are.na.
+        br
+        | Click <b>Follow</b> on any channel below to add it to your feed.
+  
+  hr.Base
+  
+  .Examples-list
+    include examples
+  
+  .Page.Page--examples
+    .Page--examples__button-load-more.Utility--align-center
+      a.Button.Button--size-lg.Button--border-heavy.js-load-more-examples( href='#' data-current-page=1 data-total-pages=totalPages )
+        | See more examples
+      
+  
