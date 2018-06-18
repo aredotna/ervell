@@ -34,7 +34,7 @@ export default class TransferChannel extends Component {
     if (channel.is_pending_transfer) {
       return (
         <div>
-          {!channel.transfer_request.is_user_to_member &&
+          {channel.visibility === 'private' && !channel.transfer_request.is_user_to_member &&
             <Status>
               Note: {channel.transfer_request.user_to.name} does not have access to this channel.
               Consider temporarily adding them as a collaborator

@@ -14,5 +14,6 @@ export default gql`
       }
       is_user_to_member
     }
+    visibility
   }
 `;
