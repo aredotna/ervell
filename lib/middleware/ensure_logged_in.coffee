@@ -1,3 +1,5 @@
 module.exports = (req, res, next) ->
-  return res.redirect('/log_in') unless req.user
+  unless req.user
+    return res.redirect("/log_in?redirect-to=#{encodeURIComponent(req.originalUrl)}")
+
   next()
