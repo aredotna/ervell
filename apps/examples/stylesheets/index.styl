@@ -1,7 +1,7 @@
 .Page--examples
   &__cta
-    margin-left block_width_mar
-    margin-bottom 4em
+    max-width 650px
+    margin 0 auto 5em
 
   &__example-section
     margin 2em 0 6em
@@ -11,47 +11,48 @@
     flex-direction row
     margin-bottom 5em
 
-  &__title
-    width block_width_mar
-    > h3.Type
-      font-weight bold
-
   &__description
-    max-width 40em
+    max-width 650px
+    margin 0 auto
 
-  &__channels
-
-    .ChannelBlockGroup
-      margin-bottom 4em
-
-    .ChannelBlockGroup__header 
-      margin 2em .5em 1em
-      display flex
-      justify-content space-between
-
-    .ChannelBlockGroup__follow
-      vertical-align middle
-      > span 
-        border 1px solid colors-gray-border
-        border-radius .25em
-        padding 0.75em 1.25em
-        font-size font-size-xs
-        font-weight bold
-
-    .ChannelBlockGroup__title > h4.Type
-      font-weight bold
-    
-    .ChannelBlockGroup__inner:hover
-      opacity 1
-    
-    .ChannelBlockGroup__inner .Block__inner:hover .Block__inner__overlay
-      display none
-
-    .ChannelBlockGroup:last-child > .ChannelBlockGroup__divider
-      display none
-  
   &__button
     margin 3em 0 0
   
   &__button-load-more
     margin 3em 0
+
+.Example-channels
+
+  .ChannelBlockGroup
+    margin-bottom 4em
+
+  .ChannelBlockGroup__header 
+    margin 2em .5em 1em
+    display flex
+    justify-content space-between
+
+  .ChannelBlockGroup__follow
+    vertical-align middle
+    > span 
+      border 1px solid colors-gray-border
+      border-radius .25em
+      padding 0.75em 1.25em
+      font-size font-size-xs
+      font-weight bold
+      cursor pointer
+      &:hover
+        border-color colors-gray-border-bold
+        color colors-gray-hover
+
+
+  .ChannelBlockGroup__title > h4.Type
+    font-weight bold
+  
+  .ChannelBlockGroup__inner:hover
+    opacity 1
+  
+  .ChannelBlockGroup__inner .Block__inner:hover .Block__inner__overlay
+    display none
+
+  .ChannelBlockGroup:last-child > .ChannelBlockGroup__divider
+    display none
