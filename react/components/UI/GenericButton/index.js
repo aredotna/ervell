@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 
 import styles from 'react/styles';
 
+import get from 'react/util/get';
+
 export const buttonBorderWidth = '1px';
 export const buttonVerticalPadding = '0.75em';
 export const buttonHorizontalPadding = '1.25em';
@@ -10,6 +12,7 @@ export const buttonBorderRadius = '0.25em';
 
 const activeMixin = css`
   border: ${buttonBorderWidth} solid ${styles.Colors.gray.bold};
+  color: ${styles.Colors.gray.bold};
 `;
 
 export const mixin = css`
@@ -25,11 +28,30 @@ export const mixin = css`
   user-select: none;
   color: ${styles.Colors.gray.bold};
   cursor: pointer;
+  text-align: center;
+
+  ${x => x.minWidth && `
+    min-width: ${x.minWidth};
+  `}
+
+  ${({ color }) => {
+    if (color) {
+      const value = get(styles.Colors, color);
+
+      return `
+        color: ${value};
+        border-color: ${value};
+      `;
+    }
+
+    return '';
+  }}
 
   ${styles.Type.mixins.antialiased}
 
   &:hover {
     border: ${buttonBorderWidth} solid ${styles.Colors.gray.medium};
+    color: ${styles.Colors.gray.bold};
   }
 
   ${x => x.active && activeMixin}
@@ -38,15 +60,15 @@ export const mixin = css`
   ${x => x.disabled && `
     pointer-events: none;
     opacity: 0.5;
-  `}
-`;
+    `}
+  `;
 
 export const GenericButtonLink = styled.a`
   ${mixin}
-`;
+  `;
 
 const GenericButton = styled.a`
   ${mixin}
-`;
+  `;
 
 export default GenericButton;

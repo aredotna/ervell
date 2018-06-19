@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const TypeSpecimen = ({ family, size }) => (
   <Container family={family} size={size}>
-    {family}/{size} = The wizard quickly jinxed the gnomes before they vaporized.
+    {family} / {size} / {`${styles.Type.size[size]}`} = The wizard quickly jinxed the gnomes before they vaporized.
   </Container>
 );
 
