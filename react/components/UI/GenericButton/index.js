@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import Styles from 'react/styles';
+import styles from 'react/styles';
 
 export const buttonBorderWidth = '1px';
 export const buttonVerticalPadding = '0.75em';
@@ -8,29 +8,38 @@ export const buttonHorizontalPadding = '1.25em';
 export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding}`;
 export const buttonBorderRadius = '0.25em';
 
+const activeMixin = css`
+  border: ${buttonBorderWidth} solid ${styles.Colors.gray.medium};
+  background-color: ${styles.Colors.gray.hint};
+`;
+
 export const mixin = css`
   all: initial;
   display: inline-block;
   padding: ${buttonPadding};
   font-weight: bold;
-  border: ${buttonBorderWidth} solid ${Styles.Colors.gray.regular};
+  border: ${buttonBorderWidth} solid ${styles.Colors.gray.regular};
   border-radius: ${buttonBorderRadius};
-  font-size: ${x => Styles.Type.size[x.size || 'base']};
-  font-family: ${Styles.Type.font.sans};
+  font-size: ${x => styles.Type.size[x.size || 'base']};
+  font-family: ${styles.Type.font.sans};
   line-height: 1;
   user-select: none;
-  color: ${Styles.Colors.gray.bold};
+  color: ${styles.Colors.gray.bold};
   cursor: pointer;
 
-  ${Styles.Type.mixins.antialiased}
+  ${styles.Type.mixins.antialiased}
 
   &:hover {
-    border: ${buttonBorderWidth} solid ${Styles.Colors.gray.medium};
+    border: ${buttonBorderWidth} solid ${styles.Colors.gray.medium};
   }
 
-  &:active {
-    border: ${buttonBorderWidth} solid ${Styles.Colors.gray.regular};
-  }
+  ${x => x.active && activeMixin}
+  &:active { ${activeMixin} }
+
+  ${x => x.disabled && `
+    pointer-events: none;
+    opacity: 0.5;
+  `}
 `;
 
 export const GenericButtonLink = styled.a`
