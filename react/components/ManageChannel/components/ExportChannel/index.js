@@ -4,8 +4,9 @@ import { graphql } from 'react-apollo';
 
 import exportChannelMutation from 'react/components/ManageChannel/components/ExportChannel/mutations/exportChannel';
 
-import OptionLink from 'react/components/UI/OptionLink';
 import Status from 'react/components/UI/Status';
+import GenericButton from 'react/components/UI/GenericButton';
+import ButtonGroup from 'react/components/UI/ButtonGroup';
 
 class ExportChannel extends Component {
   static propTypes = {
@@ -41,17 +42,19 @@ class ExportChannel extends Component {
 
     return (
       <div>
-        <OptionLink size="xs" onClick={this.queueExportPDF}>
-          PDF
-        </OptionLink>
+        <ButtonGroup fill>
+          <GenericButton size="xs" onClick={this.queueExportPDF}>
+            PDF
+          </GenericButton>
 
-        <OptionLink size="xs" onClick={this.queueExportZIP}>
-          ZIP
-        </OptionLink>
+          <GenericButton size="xs" onClick={this.queueExportZIP}>
+            ZIP
+          </GenericButton>
 
-        <OptionLink size="xs" onClick={this.queueExportHTML}>
-          HTML
-        </OptionLink>
+          <GenericButton size="xs" onClick={this.queueExportHTML}>
+            HTML
+          </GenericButton>
+        </ButtonGroup>
 
         {mode !== 'resting' &&
           <Status>
