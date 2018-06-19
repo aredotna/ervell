@@ -7,7 +7,10 @@ export default styled.div`
   > div,
   > button,
   > a {
-    &:hover {
+    position: relative;
+
+    &:hover,
+    &:active {
       z-index: 1;
     }
 
