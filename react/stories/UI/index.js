@@ -54,11 +54,31 @@ storiesOf('UI', module)
         <GenericButton>Option 4</GenericButton>
       </ButtonGroup>
 
+      <HorizontalRule invisible />
+
       <ButtonGroup>
         <GenericButton size="xs">Option 1</GenericButton>
         <GenericButton size="xs">Option 2</GenericButton>
         <GenericButton size="xs">Option 3</GenericButton>
         <GenericButton size="xs">Option 4</GenericButton>
+      </ButtonGroup>
+
+      <HorizontalRule invisible />
+
+      <ButtonGroup fill>
+        <GenericButton size="xs">Option 1</GenericButton>
+        <GenericButton size="xs">Option 2</GenericButton>
+        <GenericButton size="xs">Option 3</GenericButton>
+        <GenericButton size="xs">Option 4</GenericButton>
+      </ButtonGroup>
+
+      <HorizontalRule invisible />
+
+      <ButtonGroup fill>
+        <GenericButton>Option 1</GenericButton>
+        <GenericButton>Option 2</GenericButton>
+        <GenericButton>Option 3</GenericButton>
+        <GenericButton>Option 4</GenericButton>
       </ButtonGroup>
     </div>
   ))

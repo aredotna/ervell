@@ -3,6 +3,18 @@ import styled from 'styled-components';
 import { buttonBorderWidth, buttonBorderRadius } from 'react/components/UI/GenericButton';
 
 export default styled.div`
+  ${x => x.fill && `
+    display: flex;
+
+    > span,
+    > div,
+    > button,
+    > a {
+      flex: 1;
+      text-align: center;
+    }
+  `}
+
   > span,
   > div,
   > button,
