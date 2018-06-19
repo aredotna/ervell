@@ -11,6 +11,7 @@ import TypeSpecimen from 'react/stories/components/TypeSpecimen';
 import ModalDialog from 'react/components/UI/ModalDialog';
 import GenericButton from 'react/components/UI/GenericButton';
 import GenericInput from 'react/components/UI/GenericInput';
+import ButtonGroup from 'react/components/UI/ButtonGroup';
 
 storiesOf('UI', module)
   .add('ModalDialog', () => (
@@ -41,6 +42,24 @@ storiesOf('UI', module)
           <GenericButton size={key} active>size={key} active</GenericButton>
         </div>
       ))}
+    </div>
+  ))
+
+  .add('ButtonGroup', () => (
+    <div>
+      <ButtonGroup>
+        <GenericButton>Option 1</GenericButton>
+        <GenericButton>Option 2</GenericButton>
+        <GenericButton>Option 3</GenericButton>
+        <GenericButton>Option 4</GenericButton>
+      </ButtonGroup>
+
+      <ButtonGroup>
+        <GenericButton size="xs">Option 1</GenericButton>
+        <GenericButton size="xs">Option 2</GenericButton>
+        <GenericButton size="xs">Option 3</GenericButton>
+        <GenericButton size="xs">Option 4</GenericButton>
+      </ButtonGroup>
     </div>
   ))
 
