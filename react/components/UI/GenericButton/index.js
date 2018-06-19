@@ -9,8 +9,7 @@ export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding
 export const buttonBorderRadius = '0.25em';
 
 const activeMixin = css`
-  border: ${buttonBorderWidth} solid ${styles.Colors.gray.medium};
-  background-color: ${styles.Colors.gray.hint};
+  border: ${buttonBorderWidth} solid ${styles.Colors.gray.bold};
 `;
 
 export const mixin = css`
