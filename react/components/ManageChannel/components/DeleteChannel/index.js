@@ -6,6 +6,7 @@ import { graphql } from 'react-apollo';
 import Styles from 'react/styles';
 
 import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
+import GenericButton from 'react/components/UI/GenericButton';
 
 import deleteChannelMutation from 'react/components/ManageChannel/components/DeleteChannel/mutations/deleteChannel';
 
@@ -17,6 +18,18 @@ const Message = styled.div`
   padding: ${optionLinkPadding};
   font-size: ${Styles.Type.size.xs};
   text-align: left;
+`;
+
+const Options = styled.div`
+  margin: 0.5em 0;
+  padding: ${optionLinkPadding};
+`;
+
+const Option = styled(GenericButton).attrs({
+  minWidth: '6em',
+  size: 'xs',
+  color: 'state.alert',
+})`
 `;
 
 class DeleteChannel extends Component {
@@ -90,13 +103,17 @@ class DeleteChannel extends Component {
               Are you sure? This action cannot be undone.
             </Message>
 
-            <OptionLink size="xs" onClick={this.deleteChannel}>
-              Yes
-            </OptionLink>
+            <Options>
+              <Option onClick={this.deleteChannel}>
+                Delete
+              </Option>
 
-            <OptionLink size="xs" onClick={this.cancelDeleteChannel}>
-              No
-            </OptionLink>
+              {' '}
+
+              <Option onClick={this.cancelDeleteChannel}>
+                Cancel
+              </Option>
+            </Options>
           </Alert>
         }
       </div>

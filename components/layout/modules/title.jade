@@ -1,9 +1,11 @@
 title
   | Are.na
 
-  if channel
+  //- TODO: Remove this completely in favor of locating
+  //- titles where they belong: in specific templates.
+  if channel && (typeof channel.get === 'function')
     |  / #{channel.get('title')}
-  else if author
+  else if author && (typeof author.get === 'function')
     |  / #{author.get('username')}
 
   block title

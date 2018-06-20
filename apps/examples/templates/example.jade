@@ -1,0 +1,15 @@
+if example.channels
+  .Page--examples__example-section.js-example
+    .Page--examples__header
+      .Page--examples__description
+        h2.Type.Type--size-h2
+          strong #{example.title}:&nbsp;
+          = example.description
+
+    .Example-channels
+      for channel in example.channels
+        include ../components/channel_group/index
+    if example.channel_ids.length > example.channels.length
+      .Page--examples__button.Utility--align-center
+        a.Button.Button--size-lg.Button--border-heavy.js-load-more( href='#' data-id=example.id )
+          | See more #{example.id} channels

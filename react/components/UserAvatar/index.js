@@ -45,10 +45,10 @@ export default class UserAvatar extends Component {
 
   render() {
     const { hideImage } = this.state;
-    const { user, size } = this.props;
+    const { user, size, ...rest } = this.props;
 
     return (
-      <Avatar href={user.href} size={size}>
+      <Avatar href={user.href} size={size} {...rest}>
         <Initials size={size}>
           {user.initials}
         </Initials>

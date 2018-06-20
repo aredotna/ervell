@@ -5,6 +5,7 @@ app = module.exports = express()
 
 app
   # Normal routing
+  .use require '../apps/actions'
   .use require '../apps/feed'
   .use require '../apps/home'
   .use require '../apps/blog'
@@ -22,6 +23,7 @@ app
   .use require '../apps/onboarding'
   .use require '../apps/ui'
   .use require '../apps/graphql'
+  .use require '../apps/examples'
 
   # Dynamic routing (in order)
   .use require '../apps/user'

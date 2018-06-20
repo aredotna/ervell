@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
-import styled from 'styled-components';
 
 import exportChannelMutation from 'react/components/ManageChannel/components/ExportChannel/mutations/exportChannel';
 
-import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
-
-import Styles from 'react/styles';
-
-const Status = styled.div`
-  max-width: 90%;
-  padding: ${optionLinkPadding};
-  font-size: ${Styles.Type.size.xs};
-  line-height: ${Styles.Type.lineHeight.tall};
-  color: ${Styles.Colors.state.alert};
-`;
+import Status from 'react/components/UI/Status';
+import GenericButton from 'react/components/UI/GenericButton';
+import ButtonGroup from 'react/components/UI/ButtonGroup';
 
 class ExportChannel extends Component {
   static propTypes = {
@@ -51,17 +42,19 @@ class ExportChannel extends Component {
 
     return (
       <div>
-        <OptionLink size="xs" onClick={this.queueExportPDF}>
-          PDF
-        </OptionLink>
+        <ButtonGroup fill>
+          <GenericButton size="xs" onClick={this.queueExportPDF}>
+            PDF
+          </GenericButton>
 
-        <OptionLink size="xs" onClick={this.queueExportZIP}>
-          ZIP
-        </OptionLink>
+          <GenericButton size="xs" onClick={this.queueExportZIP}>
+            ZIP
+          </GenericButton>
 
-        <OptionLink size="xs" onClick={this.queueExportHTML}>
-          HTML
-        </OptionLink>
+          <GenericButton size="xs" onClick={this.queueExportHTML}>
+            HTML
+          </GenericButton>
+        </ButtonGroup>
 
         {mode !== 'resting' &&
           <Status>

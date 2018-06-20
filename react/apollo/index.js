@@ -88,7 +88,7 @@ export const initClientSideApolloClient = () => {
   const currentRoute = { ...url.parse(CURRENT_URL) };
   const isLoggedIn = !!(CURRENT_USER && CURRENT_USER.id);
 
-  initApolloClient({
+  return initApolloClient({
     token: CURRENT_USER && CURRENT_USER.authentication_token,
     currentRoute,
     isLoggedIn,

@@ -1,3 +1,6 @@
+//- TODO: Helllllpppmeeeeeee
+- var isChannelModelAvailable = channel && (typeof channel.get === 'function')
+
 .DropdownHover__trigger
   span.NewChannel
     span New channel
@@ -5,12 +8,12 @@
 .Dropdown.js-dropdown
   .ChannelCreate
     .ChannelCreate__block(
-      class="Color--channel-#{channel && channel.get('status')}"
+      class="Color--channel-#{isChannelModelAvailable && channel.get('status')}"
     )
       input.Input.ChannelCreate__input.js-title(
-        class="ChannelCreate__input--#{channel && channel.get('status')}"
+        class="ChannelCreate__input--#{isChannelModelAvailable && channel.get('status')}"
         name='title'
-        value= channel && channel.get('title')
+        value= isChannelModelAvailable && channel.get('title')
         placeholder='Type channel name'
         autocomplete='off'
       )
@@ -27,21 +30,21 @@
     .ChannelCreatePrivacy__selector
       a.js-status(
         data-value='public'
-        data-selected=(channel && channel.get('status') === 'public' ? true : undefined)
+        data-selected=(isChannelModelAvailable && channel.get('status') === 'public' ? true : undefined)
       ) Open
       span.Separator
       a.js-status(
         data-value='closed'
-        data-selected=(channel && channel.get('status') === 'closed' ? true : undefined)
+        data-selected=(isChannelModelAvailable && channel.get('status') === 'closed' ? true : undefined)
       ) Closed
       span.Separator
       a.js-status(
         data-value='private'
-        data-selected=(channel && channel.get('status') === 'private' ? true : undefined)
+        data-selected=(isChannelModelAvailable && channel.get('status') === 'private' ? true : undefined)
       ) Private
 
     .ChannelCreatePrivacy__caption
-      case (channel && channel.get('status'))
+      case (isChannelModelAvailable && channel.get('status'))
         when 'public'
           | Everyone can view the channel and anyone logged-in can add to it.
         when 'closed'

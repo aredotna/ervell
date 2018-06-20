@@ -13,8 +13,9 @@ import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Select } from 'react/components/UI/GenericInput';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
+import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
 
-import Styles from 'react/styles';
+import styles from 'react/styles';
 
 const Container = styled.div`
   width: 100%;
@@ -23,7 +24,7 @@ const Container = styled.div`
 
 const Caption = styled.div`
   margin-top: 1em;
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${styles.Type.size.xs};
   text-align: center;
 `;
 
@@ -179,6 +180,16 @@ class ManageChannel extends Component {
               </TitledDialog.Label>
 
               <ExportChannel id={channel.id} />
+            </TitledDialog.Section>
+          }
+
+          {channel.can.transfer &&
+            <TitledDialog.Section>
+              <TitledDialog.Label>
+                Transfer ownership
+              </TitledDialog.Label>
+
+              <TransferChannel channel={channel} />
             </TitledDialog.Section>
           }
 
