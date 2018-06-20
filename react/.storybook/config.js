@@ -30,6 +30,7 @@ addDecorator(
 function loadStories() {
   require('../stories/UI');
   require('../stories/Channel');
+  require('../stories/Block');
 }
 
 configure(loadStories, module);
