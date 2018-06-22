@@ -12,6 +12,7 @@ export default {
   },
   gray: {
     bold: '#333',
+    base: '#585858', // Matches `textgray`
     semiBold: '#6d6d6d',
     medium: '#999',
     regular: '#ccc',

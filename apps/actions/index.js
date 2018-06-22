@@ -3,6 +3,11 @@ import express from 'express';
 import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 
+import TransferChannelConfirmedPage from 'react/pages/actions/TransferChannelConfirmedPage';
+import TransferChannelRejectedPage from 'react/pages/actions/TransferChannelRejectedPage';
+import TransferChannelNotFoundPage from 'react/pages/actions/TransferChannelNotFoundPage';
+import TransferChannelAccessDeniedPage from 'react/pages/actions/TransferChannelAccessDeniedPage';
+
 import acceptChannelTransferMutation from 'apps/actions/mutations/acceptChannelTransfer';
 import rejectChannelTransferMutation from 'apps/actions/mutations/rejectChannelTransfer';
 
@@ -16,14 +21,20 @@ const middlewareStack = [
   apolloMiddleware,
 ];
 
-const handleErrors = (_req, res, next) => (err) => {
-  switch (err.graphQLErrors[0].extensions.code) {
-    case 'UNAUTHORIZED':
-      // Wrong user
-      return res.status(401).render('access_denied');
-    case 'NOT_FOUND':
-      // Invalid/incorrect correct token
-      return res.status(404).render('not_found');
+const handleErrors = (req, res, next) => (err) => {
+  const STATUS_CODE = err.graphQLErrors[0].extensions.code;
+
+  res.locals.sd.STATUS_CODE = STATUS_CODE;
+
+  switch (STATUS_CODE) {
+    case 'UNAUTHORIZED': // Wrong user
+      return req.apollo.render(TransferChannelAccessDeniedPage)
+        .then(apollo => res.status(401).render('index', { apollo }));
+
+    case 'NOT_FOUND': // Invalid/incorrect correct token
+      return req.apollo.render(TransferChannelNotFoundPage)
+        .then(apollo => res.status(404).render('index', { apollo }));
+
     default:
       return next(err);
   }
@@ -41,15 +52,17 @@ app
         const {
           accept_channel_transfer: {
             channel_transfer_request: {
-              channel: {
-                href,
-              },
+              channel,
             },
           },
         } = data;
 
-        res.redirect(href);
+        res.locals.sd.STATUS_CODE = 'OK';
+        res.locals.sd.APOLLO = { channel };
+
+        return req.apollo.render(TransferChannelConfirmedPage, { channel });
       })
+      .then(apollo => res.render('index', { apollo }))
       .catch(handleErrors(req, res, next));
   })
 
@@ -67,8 +80,12 @@ app
           },
         } = data;
 
-        res.render('rejected', { channel });
+        res.locals.sd.STATUS_CODE = 'OK';
+        res.locals.sd.APOLLO = { channel };
+
+        return req.apollo.render(TransferChannelRejectedPage, { channel });
       })
+      .then(apollo => res.render('index', { apollo }))
       .catch(handleErrors(req, res, next));
   });
 

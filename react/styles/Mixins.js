@@ -23,7 +23,13 @@ const hyphenate = css`
   hyphens: auto;
 `;
 
+const antialiased = css`
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+`;
+
 export default {
   outlineBorder,
   hyphenate,
+  antialiased,
 };

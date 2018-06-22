@@ -4,7 +4,6 @@ import { map } from 'underscore';
 
 import styles from 'react/styles';
 
-import HorizontalRule from 'react/components/UI/HorizontalRule';
 import ColorSwatch from 'react/stories/components/ColorSwatch';
 import TypeSpecimen from 'react/stories/components/TypeSpecimen';
 import Specimen from 'react/stories/components/Specimen';
@@ -13,8 +12,14 @@ import ModalDialog from 'react/components/UI/ModalDialog';
 import GenericButton from 'react/components/UI/GenericButton';
 import GenericInput from 'react/components/UI/GenericInput';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
+import CountdownRedirect from 'react/components/UI/CountdownRedirect';
+import Type from 'react/components/UI/Type';
 
 storiesOf('UI', module)
+  .add('CountdownRedirect', () => (
+    <CountdownRedirect length={15} href="https://google.com" debug />
+  ))
+
   .add('ModalDialog', () => (
     <ModalDialog>
       <h1>Hello</h1>
@@ -92,7 +97,7 @@ storiesOf('UI', module)
       </Specimen>
 
       <Specimen>
-        <ButtonGroup fill>
+        <ButtonGroup stretch>
           <GenericButton size="xs">Option 1</GenericButton>
           <GenericButton size="xs">Option 2</GenericButton>
           <GenericButton size="xs">Option 3</GenericButton>
@@ -101,7 +106,7 @@ storiesOf('UI', module)
       </Specimen>
 
       <Specimen>
-        <ButtonGroup fill>
+        <ButtonGroup stretch>
           <GenericButton>Option 1</GenericButton>
           <GenericButton>Option 2</GenericButton>
           <GenericButton>Option 3</GenericButton>
@@ -127,6 +132,28 @@ storiesOf('UI', module)
   ))
 
   .add('Type', () => (
+    <Specimen>
+      <Type size="h1">A Headline</Type>
+      <Type size="h2">Now a sub-headline</Type>
+
+      <Type size="base">
+        Except that Bayard demonstrates how, when someone talks about a book he or she hasn’t read,
+        even those who have read it don’t realize what he or she has said about it is wrong.
+        Toward the end of his book, he admits he has introduced three false pieces of information
+        in his summaries of The Name of the Rose, Graham Greene’s The Third Man,
+        and David Lodge’s Changing Places. The amusing thing is that, when I read them,
+        I immediately noticed the error regarding Graham Greene, was doubtful about David Lodge,
+        but didn’t notice the error in my own book. This probably means that I didn’t read Bayard’s book properly,
+        or alternatively, and both he and my readers would be entitled to suspect this,
+        that I merely skimmed through it. But the most interesting thing is that Bayard has failed to notice that,
+        in admitting his three intentional errors, he implicitly assumes that one way of reading is more correct than others,
+        so that he carries out a meticulous study of the books he quotes in order to support his theory about not reading them.
+        The contradiction is so apparent that it makes one wonder whether Bayard has actually read the book he’s written.
+      </Type>
+    </Specimen>
+  ))
+
+  .add('Type/Sizes', () => (
     <div>
       {map(styles.Type.size, (_size, name) => (
         <Specimen>

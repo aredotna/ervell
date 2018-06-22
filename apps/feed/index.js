@@ -16,7 +16,7 @@ const app = express();
 app.set('views', `${__dirname}/templates`);
 app.set('view engine', 'jade');
 
-const setAndFetchBlocks = (req, res) => {
+const setAndFetchBlocks = (_req, res) => {
   const { SEED, SORT, SUBJECT } = res.locals.sd;
 
   const blocks = new ExploreBlocks([], {
@@ -56,7 +56,7 @@ const renderFeed = (req, res, next) => {
   return res.render('feed');
 };
 
-const renderNotifications = (req, res) => {
+const renderNotifications = (_req, res) => {
   res.locals.sd.FEED_TYPE = 'notifications';
   res.locals.sd.CURRENT_ACTION = 'notifications';
   res.render('feed');
