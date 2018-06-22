@@ -47,8 +47,6 @@ class MuteButton extends Component {
   render() {
     const { data: { loading } } = this.props;
 
-    console.log('data', this.props);
-
     if (loading) return <span>Mute</span>;
 
     const {
