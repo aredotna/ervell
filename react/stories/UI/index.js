@@ -4,9 +4,9 @@ import { map } from 'underscore';
 
 import styles from 'react/styles';
 
-import ColorSwatch from 'react/stories/components/ColorSwatch';
-import TypeSpecimen from 'react/stories/components/TypeSpecimen';
-import Specimen from 'react/stories/components/Specimen';
+import ColorSwatch from 'react/stories/__components__/ColorSwatch';
+import TypeSpecimen from 'react/stories/__components__/TypeSpecimen';
+import Specimen from 'react/stories/__components__/Specimen';
 
 import ModalDialog from 'react/components/UI/ModalDialog';
 import GenericButton from 'react/components/UI/GenericButton';
