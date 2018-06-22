@@ -78,10 +78,15 @@ module.exports.exception = (errorObj) ->
 module.exports.setDimension = (index, value) ->
   @ga? 'set', index, value
 
-# Event labels in alphabetical (key) order
+# Event labels
 module.exports.en =
   CREATE_CHANNEL: 'New Channel created'
   CREATE_CONNECTION: 'Connection created'
   DESTROY_CONNECTION: 'Connection removed'
+
+  STARTED_CHANNEL_TRANSFER: 'Initiated channel transfer'
+  ACCEPTED_CHANNEL_TRANSFER: 'Accepted channel transfer'
+  REJECTED_CHANNEL_TRANSFER: 'Rejected channel transfer'
+
   PREMIUM_CHARGE_INITIATED: 'User clicked to submit charge for premium'
   PREMIUM_PAID: 'User paid for pro account'

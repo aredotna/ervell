@@ -5,6 +5,7 @@ export default gql`
     accept_channel_transfer(input: { token: $token }) {
       channel_transfer_request {
         channel {
+          id
           title
           href
         }
