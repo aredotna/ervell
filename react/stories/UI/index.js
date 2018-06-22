@@ -97,7 +97,7 @@ storiesOf('UI', module)
       </Specimen>
 
       <Specimen>
-        <ButtonGroup fill>
+        <ButtonGroup stretch>
           <GenericButton size="xs">Option 1</GenericButton>
           <GenericButton size="xs">Option 2</GenericButton>
           <GenericButton size="xs">Option 3</GenericButton>
@@ -106,7 +106,7 @@ storiesOf('UI', module)
       </Specimen>
 
       <Specimen>
-        <ButtonGroup fill>
+        <ButtonGroup stretch>
           <GenericButton>Option 1</GenericButton>
           <GenericButton>Option 2</GenericButton>
           <GenericButton>Option 3</GenericButton>

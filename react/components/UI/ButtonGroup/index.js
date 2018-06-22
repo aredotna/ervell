@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { buttonBorderWidth, buttonBorderRadius } from 'react/components/UI/GenericButton';
 
-export default styled.div`
-  ${x => x.fill && `
+const ButtonGroup = styled.div`
+  ${x => x.stretch && `
     display: flex;
 
     > span,
@@ -47,3 +48,13 @@ export default styled.div`
     }
   }
 `;
+
+ButtonGroup.propTypes = {
+  stretch: PropTypes.bool,
+};
+
+ButtonGroup.defaultProps = {
+  stretch: false,
+};
+
+export default ButtonGroup;
