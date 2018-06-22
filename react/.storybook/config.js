@@ -13,7 +13,7 @@ const mocks = {
   },
   Channel: () => {
     return {
-      id: 'random-slug',
+      id: 555,
       title: 'Charles is cool',
       visibility: 'closed'
     }
@@ -30,6 +30,7 @@ addDecorator(
 function loadStories() {
   require('../stories/UI');
   require('../stories/Channel');
+  require('../stories/Components');
 }
 
 configure(loadStories, module);
