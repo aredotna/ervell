@@ -28,8 +28,10 @@ export default {
   emptySpaceWidth: '0.33em',
   headerHeight: '50px',
   blockWidth: '315px', // TODO: 19.5em
-  blockGutter: '10px', // TODO: 1em
+  blockGutter: '10px', // (legacyUnit / 2) TODO: 1em
+  blockAndGutter: '335px', // (blockWidth + blockGutter)
   containerOffset: '100px', // TODO: Something based on real values
+  legacyUnit: '20px',
   media,
   z: Z_INDEXES,
 };
