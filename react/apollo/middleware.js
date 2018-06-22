@@ -3,7 +3,7 @@ import url from 'url';
 import { initApolloClient } from 'react/apollo';
 import ssr from 'react/apollo/ssr';
 
-export default (req, res, next) => {
+export default (req, _res, next) => {
   const currentRoute = { ...url.parse(req.url) };
   const isLoggedIn = !!(req.user && req.user.id);
 

@@ -8,6 +8,8 @@ import GenericButton from 'react/components/UI/GenericButton';
 
 import initiateChannelTransferMutation from 'react/components/ManageChannel/components/TransferChannel/components/TransferChannelSearchResults/components/InitiateChannelTransferButton/mutations/initiateChannelTransfer';
 
+import { track, en } from 'lib/analytics.coffee';
+
 const Button = styled(GenericButton).attrs({
   size: 'xs',
 })`
@@ -37,6 +39,9 @@ class InitiateChannelTransferButton extends Component {
     return initiateChannelTransfer({
       variables: { channel_id, user_id },
     })
+      .then(() =>
+        track.submit(en.STARTED_CHANNEL_TRANSFER, { channel_id, user_id }))
+
       .catch((err) => {
         console.error(err);
 

@@ -1,0 +1,13 @@
+extends ../../../components/layout/index
+
+block meta
+  != apollo.styles
+
+block body
+  #apolloMount
+    != apollo.html
+
+block scripts
+  script( src= asset('/assets/actions.js') )
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(apollo.state).replace(/</g, '\\u003c')};

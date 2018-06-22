@@ -6,10 +6,10 @@ const parse = string => fn =>
 const value = string => parse(string)(n => n);
 const round = string => parse(string)(n => Math.round(n));
 const ceil = string => parse(string)(n => Math.ceil(n));
-const add = (string, i) => parse(string)(n => n + i);
-const subtract = (string, by) => parse(string)(n => n - by);
-const multiply = (string, factor) => parse(string)(n => n * factor);
-const divide = (string, divisor) => parse(string)(n => n / divisor);
+const add = (string, i) => parse(string)(n => n + parseFloat(i));
+const subtract = (string, by) => parse(string)(n => n - parseFloat(by));
+const multiply = (string, factor) => parse(string)(n => n * parseFloat(factor));
+const divide = (string, divisor) => parse(string)(n => n / parseFloat(divisor));
 
 export default {
   parse,

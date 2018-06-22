@@ -3,6 +3,10 @@ LegacyBlockView = require './legacy_view.coffee'
 InlineConnectIntegrationView = require '../../../components/connect/integration/inline/view.coffee'
 initShare = require '../components/share/index.coffee'
 
+{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
+{ default: MuteButton } = require '../../../react/components/MuteButton'
+
+
 module.exports = class BlockView extends LegacyBlockView
   subViews: []
 
@@ -29,6 +33,10 @@ module.exports = class BlockView extends LegacyBlockView
     view = initShare
       $el: @$('.js-block-share')
       block: @model
+
+    props = { id: @model.id, type: 'BLOCK' }
+    mountNode = @$('.js-block-mute')
+    mountWithApolloProvider(MuteButton, props, mountNode)
 
     @subViews.push view
 
