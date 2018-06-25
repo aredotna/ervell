@@ -12,7 +12,7 @@ app.set 'view engine', 'jade'
 
 DEFAULT_ARGS = 
   page: 1
-  per: 6
+  per: 4
 
 exampleChannelQuery = """
   query example($ids: [ID]!) {
@@ -54,7 +54,10 @@ getExamplePage = (page = 1, user) ->
     each results, (result, i) ->
       examplesPage[i].channels = result.channels
     examplesPage
-  
+
+#
+# API
+#
 
 app.get '/api/examples/:id', (req, res, next) ->
   example = find(examples, (example) -> example.id is req.params.id)
@@ -72,10 +75,31 @@ app.get '/api/examples', (req, res, next) ->
   getExamplePage(req.query.page, req.user).then (examplesPage) ->
     res.json examplesPage
 
+
+#
+# Rendered pages
+#
+
 app.get '/examples', (req, res, next) ->
   getExamplePage(1, req.user).then (examplesPage) ->
     res.locals.examples = examplesPage
     res.locals.totalExamples = examples.length
     res.locals.totalPages = Math.ceil(examples.length / DEFAULT_ARGS.per)
+    res.locals.categories = examples
+
     res.render 'index'
   .catch(next)
+
+app.get '/examples/:id', (req, res, next) ->
+  example = find(examples, (example) -> example.id is req.params.id)
+  send =
+    query: exampleChannelQuery
+    user: req.user
+    variables:
+      ids: example.channel_ids
+
+  graphQL(send).then ({ channels }) ->
+    example.channels = channels
+    res.locals.example = example
+    res.locals.categories = examples
+    res.render 'show'
