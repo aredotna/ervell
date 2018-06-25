@@ -1,24 +1,10 @@
-import { configure, addDecorator } from '@storybook/react';
+import { addDecorator, configure } from '@storybook/react';
+import { setOptions } from '@storybook/addon-options';
 import apolloStorybookDecorator from 'apollo-storybook-react';
 
-import typeDefs from '../apollo/schema.graphql';
+import typeDefs from 'react/apollo/schema.graphql';
 
-const mocks = {
-  Query: () => {
-    return {
-      status: () => {
-        return 'Up'
-      },
-    }
-  },
-  Channel: () => {
-    return {
-      id: 555,
-      title: 'Charles is cool',
-      visibility: 'closed'
-    }
-  }
-};
+import mocks from 'react/.storybook/mocks';
 
 addDecorator(
   apolloStorybookDecorator({
@@ -27,10 +13,14 @@ addDecorator(
   })
 );
 
-function loadStories() {
-  require('../stories/UI');
-  require('../stories/Channel');
-  require('../stories/Components');
-}
+setOptions({
+  name: 'Are.na',
+  url: 'https://www.are.na',
+  sortStoriesByKind: true,
+  sidebarAnimations: false,
+});
+
+const req = require.context('../stories', true, /\.stories\.js$/)
+const loadStories = () => req.keys().forEach((filename) => req(filename))
 
 configure(loadStories, module);
