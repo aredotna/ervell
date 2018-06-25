@@ -139,6 +139,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
+    "faker": "^4.1.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "graphql-tools": "^3.0.2",
     "html5": "*",
