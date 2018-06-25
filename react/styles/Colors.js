@@ -1,4 +1,6 @@
-export default {
+import get from 'react/util/get';
+
+const COLORS = {
   channel: {
     closed: '#4b3d67',
     public: '#17ac10',
@@ -24,3 +26,17 @@ export default {
     transparent: 'rgba(255, 255, 255, 0.001)',
   },
 };
+
+export const COLOR_KEYS = Object
+  .keys(COLORS)
+  .reduce(
+    (memo, namespace) =>
+      memo.concat(Object.keys(COLORS[namespace]).map(color =>
+        `${namespace}.${color}`)),
+    [],
+  );
+
+export const selectColor = ({ color }) =>
+  get(COLORS, color || 'gray.base');
+
+export default COLORS;

@@ -1,28 +1,34 @@
 .Page--examples
-  &__cta
+  &__cta, &__description
     max-width 650px
     margin 0 auto 5em
 
+    > .Type
+      text-align center
+
   &__example-section
-    margin 2em 0 6em
+    margin 1em 0 4em
 
   &__header
     display flex
     flex-direction row
-    margin-bottom 5em
-
-  &__description
-    max-width 650px
-    margin 0 auto
+    margin-bottom 1em
 
   &__button
     margin 3em 0 0
   
   &__button-load-more
-    margin 3em 0
+    margin 0em 0 3em
+
+.Categories
+  max-width 650px
+  margin 2em auto 3em
+  text-align center
+
+  h4
+    display inline
 
 .Example-channels
-
   .ChannelBlockGroup
     margin-bottom 4em
 
@@ -37,7 +43,7 @@
       border 1px solid colors-gray-border
       border-radius .25em
       padding 0.75em 1.25em
-      font-size font-size-xs
+      font-size font-size-sm
       font-weight bold
       cursor pointer
       &:hover

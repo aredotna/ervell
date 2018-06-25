@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  margin: 1em 0;
+  margin: 0.5em 0;
 
   &:first-child {
     margin-top: 0;

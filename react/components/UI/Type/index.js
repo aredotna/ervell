@@ -24,7 +24,7 @@ export const mixin = css`
   &:last-child {
     margin-bottom: 0;
   }
-  `;
+`;
 
 export default styled.div`
   ${mixin}
