@@ -18,6 +18,11 @@ block container
         | Click <b>Follow</b> on any channel below to add it to your feed.
   
   hr.Base
+
+  .Categories
+    include categories
+
+  hr.Base
   
   .Examples-list
     include examples
@@ -26,5 +31,6 @@ block container
     .Page--examples__button-load-more.Utility--align-center
       a.Button.Button--size-lg.Button--border-heavy.js-load-more-examples( href='#' data-current-page=1 data-total-pages=totalPages )
         | See more examples
-      
-  
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer

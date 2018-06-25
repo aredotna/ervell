@@ -1,0 +1,8 @@
+h6.Type.Type--size-h6.Type--lh-tall.Utility--align-center
+  strong Categories
+if categories
+  for category in categories
+      h4.Type.Type--size-h4
+        a(href="/examples/#{category.id}")
+          strong= category.title
+        |  /&nbsp;
