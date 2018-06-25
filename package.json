@@ -124,6 +124,7 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
+    "@storybook/addon-options": "^3.4.8",
     "@storybook/react": "^3.4.6",
     "@types/express": "^4.11.1",
     "@types/prop-types": "^15.5.2",
