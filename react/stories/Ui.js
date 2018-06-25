@@ -76,46 +76,6 @@ storiesOf('UI', module)
     </div>
   ))
 
-  .add('ButtonGroup', () => (
-    <div>
-      <Specimen>
-        <ButtonGroup>
-          <GenericButton>Option 1</GenericButton>
-          <GenericButton>Option 2</GenericButton>
-          <GenericButton>Option 3</GenericButton>
-          <GenericButton>Option 4</GenericButton>
-        </ButtonGroup>
-      </Specimen>
-
-      <Specimen>
-        <ButtonGroup>
-          <GenericButton size="xs">Option 1</GenericButton>
-          <GenericButton size="xs">Option 2</GenericButton>
-          <GenericButton size="xs">Option 3</GenericButton>
-          <GenericButton size="xs">Option 4</GenericButton>
-        </ButtonGroup>
-      </Specimen>
-
-      <Specimen>
-        <ButtonGroup stretch>
-          <GenericButton size="xs">Option 1</GenericButton>
-          <GenericButton size="xs">Option 2</GenericButton>
-          <GenericButton size="xs">Option 3</GenericButton>
-          <GenericButton size="xs">Option 4</GenericButton>
-        </ButtonGroup>
-      </Specimen>
-
-      <Specimen>
-        <ButtonGroup stretch>
-          <GenericButton>Option 1</GenericButton>
-          <GenericButton>Option 2</GenericButton>
-          <GenericButton>Option 3</GenericButton>
-          <GenericButton>Option 4</GenericButton>
-        </ButtonGroup>
-      </Specimen>
-    </div>
-  ))
-
   .add('Colors', () => (
     <div>
       {map(styles.Colors, (set, name) => (

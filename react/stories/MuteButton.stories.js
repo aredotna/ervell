@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import MuteButton from 'react/components/MuteButton/index';
 
-storiesOf('Components', module)
-  .add('MuteButton', () => (
+storiesOf('MuteButton', module)
+  .add('unstyled', () => (
     <MuteButton id={666} type="BLOCK" />
   ));

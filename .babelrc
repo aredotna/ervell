@@ -15,6 +15,9 @@
       "root": ["./"]
     }],
     "transform-class-properties",
-    "inline-react-svg"
+    "inline-react-svg",
+    ["babel-plugin-styled-components", {
+      "displayName": true
+    }]
   ]
 }
