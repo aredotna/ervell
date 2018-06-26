@@ -7,7 +7,6 @@ truncate = require '../../lib/truncate.coffee'
 Posts = require '../../collections/posts.coffee'
 
 @index = (req, res, next) ->
-  console.log('truncate', truncate)
   posts = new Posts
   posts.fetch
     error: next
