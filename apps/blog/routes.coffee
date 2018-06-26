@@ -1,16 +1,10 @@
 $ = require 'cheerio'
 request = require 'superagent'
-{ take } = require 'underscore'
 { BLOG_URL } = require('sharify').data
 
-Posts = require '../../collections/posts.coffee'
+truncate = require '../../lib/truncate.coffee'
 
-truncate = (text, length = 50) ->
-  return unless text
-  tokens = text.split ' '
-  truncated = take(tokens, length).join(' ')
-  truncated = truncated + "..." if tokens.length > length
-  truncated 
+Posts = require '../../collections/posts.coffee'
 
 @index = (req, res, next) ->
   posts = new Posts
