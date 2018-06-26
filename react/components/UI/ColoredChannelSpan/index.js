@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Colors from 'react/styles/Colors';
+import colors from 'react/styles/colors';
 
 const ColoredChannelSpan = ({
   children, visibility, ...rest
 }) => (
-  <span style={{ color: Colors.channel[visibility] }} {...rest}>
+  <span style={{ color: colors.channel[visibility] }} {...rest}>
     {children}
   </span>
 );

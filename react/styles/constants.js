@@ -1,13 +1,13 @@
 import { css } from 'styled-components';
 
-const SIZES = {
+export const BREAKPOINTS = {
   mobile: 640,
 };
 
-const media = Object.keys(SIZES)
+export const MEDIA_QUERIES = Object.keys(BREAKPOINTS)
   .reduce((acc, label) => {
     acc[label] = (...args) => css`
-      @media (max-width: ${SIZES[label] / 16}em) {
+      @media (max-width: ${BREAKPOINTS[label] / 16}em) {
         ${css(...args)}
       }
     `;
@@ -15,7 +15,7 @@ const media = Object.keys(SIZES)
     return acc;
   }, {});
 
-const Z_INDEXES = {
+export const Z_INDEXES = {
   header: 4001,
   dropdown: 4002,
   loader: 5001,
@@ -24,7 +24,21 @@ const Z_INDEXES = {
   rotate: 7001,
 };
 
-export default {
+export const SPACING_SCALE = [
+  '0',
+  '0.125em',
+  '0.25em',
+  '0.33em',
+  '0.66em',
+  '1em', // 5
+  '2em',
+  '4em',
+  '8em',
+  '16em',
+  '32em',
+];
+
+export const CONSTANT_VALUES = {
   emptySpaceWidth: '0.33em',
   headerHeight: '50px',
   blockWidth: '315px', // TODO: 19.5em
@@ -32,6 +46,12 @@ export default {
   blockAndGutter: '335px', // (blockWidth + blockGutter)
   containerOffset: '100px', // TODO: Something based on real values
   legacyUnit: '20px',
-  media,
+};
+
+export default {
+  ...CONSTANT_VALUES,
+  media: MEDIA_QUERIES,
   z: Z_INDEXES,
+  breakpoints: BREAKPOINTS,
+  space: SPACING_SCALE,
 };

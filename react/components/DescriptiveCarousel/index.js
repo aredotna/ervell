@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Carousel from 'react/components/Carousel/index';
-import Type from 'react/styles/Type';
+import Carousel from 'react/components/Carousel';
 
-const mobileBreakpoint = 1024;
+const MOBILE_BREAKPOINT = 1024;
 
 const Slide = styled.div`
   text-align: center;
   transition: opacity .5s ease-in-out;
   opacity: ${props => (props.className.includes('slick-center') ? 1 : 0.3)};
   cursor: grab;
-  @media (max-width: ${mobileBreakpoint}px) {
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
     width: 90%;
   }
 `;
@@ -26,12 +25,12 @@ const Inner = styled.div`
 `;
 
 const Copy = styled.p`
-  font-size: ${Type.base};
+  font-size: ${x => x.theme.fontSizesIndexed.base};
   width: 70%;
   line-height: 1.5;
   text-align: left;
 
-  @media (max-width: ${mobileBreakpoint}px) {
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
     width: 90%;
   }
 `;
@@ -47,7 +46,7 @@ const Image = styled.img`
   padding-bottom: 1rem;
   user-drag: none;
 
-  @media (max-width: ${mobileBreakpoint}px) {
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
     max-height: 220px;
   }
 `;
@@ -83,7 +82,7 @@ class DescriptiveCarousel extends Component {
       autoplay: true,
       autoplaySpeed: 9000,
       responsive: [{
-        breakpoint: mobileBreakpoint,
+        breakpoint: MOBILE_BREAKPOINT,
         settings: {
           centerPadding: '0',
           dots: true,
@@ -91,6 +90,7 @@ class DescriptiveCarousel extends Component {
         },
       }],
     };
+
     return (
       <Carousel {...settings}>
         {slides.map(slide => (

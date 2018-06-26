@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
+import constants from 'react/styles/constants';
 
 import profileBadgeFragment from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge/fragments/profileBadge';
 
@@ -11,7 +11,7 @@ import ArenaMark from 'react/components/UI/ArenaMark/index.svg';
 const Container = styled.a`
   position: relative;
   display: block;
-  margin: 0 0 0 ${Styles.Constants.emptySpaceWidth};
+  margin: 0 0 0 ${constants.emptySpaceWidth};
 `;
 
 const Mark = styled.div`
@@ -27,7 +27,7 @@ const Mark = styled.div`
     left: 0;
     width: 75%;
     height: 100%;
-    fill: ${x => Styles.Colors.state[x.type]};
+    fill: ${x => x.theme.colors.state[x.type]};
   }
 `;
 
@@ -44,7 +44,7 @@ const Label = styled.div`
   font-family: 'Arial Narrow', 'Arial', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
-  color: ${x => Styles.Colors.state[x.type]};
+  color: ${x => x.theme.colors.state[x.type]};
   font-size: 0.5em;
 
   opacity: 0;

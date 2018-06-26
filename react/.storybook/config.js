@@ -6,12 +6,16 @@ import typeDefs from 'react/apollo/schema.graphql';
 
 import mocks from 'react/.storybook/mocks';
 
+import { wrapWithThemeProvider } from 'react/styles/theme';
+
 addDecorator(
   apolloStorybookDecorator({
     typeDefs,
     mocks
   })
 );
+
+addDecorator(wrapWithThemeProvider);
 
 setOptions({
   name: 'Are.na',

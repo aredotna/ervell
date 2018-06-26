@@ -15,8 +15,6 @@ import ExportChannel from 'react/components/ManageChannel/components/ExportChann
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
 
-import styles from 'react/styles';
-
 const Container = styled.div`
   width: 100%;
   margin: 0 auto 2em auto;
@@ -24,7 +22,7 @@ const Container = styled.div`
 
 const Caption = styled.div`
   margin-top: 1em;
-  font-size: ${styles.Type.size.xs};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
   text-align: center;
 `;
 

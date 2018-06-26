@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 const Container = styled.div`
   position: relative;
   overflow: hidden;
@@ -20,7 +18,7 @@ const Button = styled.a`
   bottom: 0;
   left: 0;
   height: 3rem;
-  background: linear-gradient(${Styles.Colors.utility.transparent} 0%, white 75%);
+  background: linear-gradient(${x => x.theme.colors.utility.transparent} 0%, white 75%);
   opacity: 0;
 
   &[data-enabled="true"] {
@@ -28,7 +26,7 @@ const Button = styled.a`
   }
 
   &:hover {
-    background: linear-gradient(${Styles.Colors.utility.transparent} 25%, white 90%);
+    background: linear-gradient(${x => x.theme.colors.utility.transparent} 25%, white 90%);
   }
 `;
 

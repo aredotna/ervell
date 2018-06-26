@@ -1,13 +1,15 @@
-import Colors from 'react/styles/Colors';
-import Type from 'react/styles/Type';
-import Constants from 'react/styles/Constants';
-import Mixins from 'react/styles/Mixins';
-import Functions from 'react/styles/Functions';
+import colors from 'react/styles/colors';
+import text from 'react/styles/text';
+import constants from 'react/styles/constants';
+import mixins from 'react/styles/mixins';
+import functions from 'react/styles/functions';
 
-export default {
-  Colors,
-  Type,
-  Constants,
-  Mixins,
-  Functions,
+const styles = {
+  colors,
+  text,
+  constants,
+  mixins,
+  functions,
 };
+
+export default styles;

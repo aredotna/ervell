@@ -11,7 +11,7 @@ import initiateChannelTransferMutation from 'react/components/ManageChannel/comp
 import { track, en } from 'lib/analytics.coffee';
 
 const Button = styled(GenericButton).attrs({
-  size: 'xs',
+  f: 1,
 })`
   align-self: center;
 `;

@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import GenericButton from 'react/components/UI/GenericButton';
+
+const Button = styled(GenericButton).attrs({
+  f: 1,
+})`
+  align-self: center;
+`;
 
 export default class CollaboratorAddButton extends Component {
   static propTypes = {
@@ -27,17 +36,13 @@ export default class CollaboratorAddButton extends Component {
     const { mode } = this.state;
 
     return (
-      <button
-        type="button"
-        className="Button Button--size-xs"
-        onClick={this.addCollaborator}
-      >
+      <Button onClick={this.addCollaborator}>
         {{
           resting: 'Add',
           adding: 'Adding...',
           error: 'Error',
         }[mode]}
-      </button>
+      </Button>
     );
   }
 }

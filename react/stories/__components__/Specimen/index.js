@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { space, fontSize } from 'styled-system';
 
-const Container = styled.div`
-  margin: 0.5em 0;
+import { neutralMarginsY } from 'react/styles/mixins';
 
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+const Container = styled.div.attrs({
+  my: ({ my = 5 }) => my,
+})`
+  ${space}
+  ${fontSize}
+  ${neutralMarginsY}
 `;
 
-const Specimen = ({ children }) => (
-  <Container>
+const Specimen = ({ children, ...rest }) => (
+  <Container {...rest}>
     {children}
   </Container>
 );

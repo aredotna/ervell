@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 import Avatar from 'react/components/UI/Avatar';
 
 import userAvatarFragment from 'react/components/UserAvatar/fragments/userAvatar';
 
 const Initials = styled.div`
   font-size: ${x => x.size / 3}px;
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
   text-transform: uppercase;
 `;
 
@@ -48,8 +46,8 @@ export default class UserAvatar extends Component {
     const { user, size, ...rest } = this.props;
 
     return (
-      <Avatar href={user.href} size={size} {...rest}>
-        <Initials size={size}>
+      <Avatar href={user.href} f={size} {...rest}>
+        <Initials f={size}>
           {user.initials}
         </Initials>
 

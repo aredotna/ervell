@@ -1,32 +1,43 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { COLOR_KEYS } from 'react/styles/Colors';
+import theme from 'react/styles/theme';
 
 import Specimen from 'react/stories/__components__/Specimen';
+import States from 'react/stories/__components__/States';
 
 import GenericButton from 'react/components/UI/GenericButton';
 
 storiesOf('Button', module)
   .add('GenericButton', () => (
-    <div>
+    <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
       <GenericButton>Press</GenericButton>
-      {' '}
-      <GenericButton disabled>Press (disabled)</GenericButton>
-      {' '}
-      <GenericButton active>Press (active)</GenericButton>
-    </div>
+    </States>
   ))
   .add('GenericButton - colors', () => (
     <div>
-      {COLOR_KEYS.map(color => (
-        <Specimen>
+      {theme.meta.colorNames.map(color => (
+        <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
           <GenericButton color={color}>{color}</GenericButton>
-          {' '}
-          <GenericButton color={color} disabled>{color}</GenericButton>
-          {' '}
-          <GenericButton color={color} active>{color}</GenericButton>
-        </Specimen>
+        </States>
       ))}
+    </div>
+  ))
+  .add('GenericButton - sizes', () => (
+    <div>
+      {theme.fontSizes.map((size, i) => (
+        <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+          <GenericButton f={size}>{`f={${i}}`}</GenericButton>
+        </States>
+      ))}
+    </div>
+  ))
+  .add('GenericButton - minWidth', () => (
+    <div>
+      <GenericButton minWidth="7em">Yes</GenericButton>
+      {' '}
+      <GenericButton minWidth="7em">No</GenericButton>
+      {' '}
+      <GenericButton minWidth="7em">Maybe</GenericButton>
     </div>
   ));

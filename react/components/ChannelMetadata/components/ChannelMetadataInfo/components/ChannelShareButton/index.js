@@ -105,7 +105,7 @@ class ChannelShareButton extends Component {
         {mode === 'active' && channel.share.url &&
           <div>
             <GenericInput
-              size="xs"
+              f={1}
               value={channel.share.url}
               readOnly
             />

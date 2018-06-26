@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
+import { calculateLineHeight } from 'react/styles/functions';
 
 import profileMetadataInfoFragment from 'react/components/ProfileMetadata/components/ProfileMetadataInfo/fragments/profileMetadataInfo';
 
@@ -12,7 +12,7 @@ import Expandable from 'react/components/UI/Expandable';
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const N_LINES = 5;
-const FIVE_LINES = `${styles.Type.functions.calculateLineHeight('xs', 'tall') * N_LINES}rem`;
+const FIVE_LINES = `${calculateLineHeight('xs', 'tall') * N_LINES}rem`;
 
 const Buttons = styled.div`
   margin: 1em 0;

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Styles from 'react/styles';
+import { calculateLineHeight } from 'react/styles/functions';
+
 import Expandable from 'react/components/UI/Expandable';
 
 const N_LINES = 5;
-const FIVE_LINES = `${Styles.Type.functions.calculateLineHeight('xs', 'tall') * N_LINES}rem`;
+const FIVE_LINES = `${calculateLineHeight('xs', 'tall') * N_LINES}rem`;
 
 const Context = React.createContext({
   expanded: false,

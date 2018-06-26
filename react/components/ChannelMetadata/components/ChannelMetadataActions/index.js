@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
-
 import Modal from 'react/components/UI/Modal';
 import Icon from 'react/components/UI/Icons';
 import Lock from 'react/components/UI/Icons/Lock/index.svg';
@@ -19,10 +17,10 @@ const Buttons = styled(ButtonGroup)`
   display: flex;
 `;
 
-const Button = styled(GenericButton).attrs({ size: 'xs' })`
+const Button = styled(GenericButton).attrs({ f: 1 })`
 `;
 
-const ChannelFollowButton = styled(FollowButton).attrs({ size: 'xs' })`
+const ChannelFollowButton = styled(FollowButton).attrs({ f: 1 })`
   ${buttonMixin}
 `;
 
@@ -33,7 +31,7 @@ const LockIcon = props => (
 );
 
 const PrivateChannelLockIcon = styled(LockIcon).attrs({
-  color: styles.Colors.gray.bold,
+  color: ({ theme }) => theme.colors.gray.bold,
 })`
   margin-right: 0.33em;
 `;
