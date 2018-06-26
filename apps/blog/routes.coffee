@@ -1,18 +1,13 @@
 $ = require 'cheerio'
 request = require 'superagent'
-{ take } = require 'underscore'
 { BLOG_URL } = require('sharify').data
+
+truncate = require '../../lib/truncate.coffee'
 
 Posts = require '../../collections/posts.coffee'
 
-truncate = (text, length = 50) ->
-  return unless text
-  tokens = text.split ' '
-  truncated = take(tokens, length).join(' ')
-  truncated = truncated + "..." if tokens.length > length
-  truncated 
-
 @index = (req, res, next) ->
+  console.log('truncate', truncate)
   posts = new Posts
   posts.fetch
     error: next
