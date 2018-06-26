@@ -1,0 +1,17 @@
+a.BlogPosts__post( href="/blog#{post.get('url')}" )
+  .BlogPosts__post-image(
+    style= "background-image: url(#{post.get('image')})"
+    alt= post.get('title')
+  )
+
+  span.Type.Type--size-sm: strong= post.get('category')
+  h4.Type.Type--size-h4
+    = post.get('title')
+
+  .BlogPosts__excerpt.Type--size-sm
+    | #{truncate(post.snippet(), 30)}
+  
+  p.Type.Type--size-sm
+    = post.get('date')
+    br
+    = post.get('author')
