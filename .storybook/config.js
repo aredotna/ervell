@@ -4,7 +4,7 @@ import apolloStorybookDecorator from 'apollo-storybook-react';
 
 import typeDefs from 'react/apollo/schema.graphql';
 
-import mocks from 'react/.storybook/mocks';
+import mocks from '.storybook/mocks';
 
 import { wrapWithThemeProvider } from 'react/styles/theme';
 
@@ -24,7 +24,7 @@ setOptions({
   sidebarAnimations: false,
 });
 
-const req = require.context('../stories', true, /\.stories\.js$/)
+const req = require.context('../react/stories', true, /\.stories\.js$/)
 const loadStories = () => req.keys().forEach((filename) => req(filename))
 
 configure(loadStories, module);
