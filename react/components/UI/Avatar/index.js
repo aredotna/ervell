@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 const Avatar = styled.a`
   display: flex;
   flex-direction: column;
@@ -10,7 +8,7 @@ const Avatar = styled.a`
   position: relative;
   width: ${x => x.size}px;
   height: ${x => x.size}px;
-  background-color: ${Styles.Colors.gray.semiLight};
+  background-color: ${x => x.theme.colors.gray.semiLight};
 `;
 
 Avatar.defaultProps = {

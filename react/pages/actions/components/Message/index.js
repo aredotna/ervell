@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import { mixin as typography } from 'react/components/UI/Type';
+import Text from 'react/components/UI/Text';
 
-export default styled.div.attrs({
-  size: 'lg',
+export default styled(Text).attrs({
+  fontSize: 6,
+  lineHeight: 1,
+  align: 'center',
+  m: 5,
 })`
-  ${typography}
-  text-align: center;
-
   > a {
     font-weight: bold;
   }

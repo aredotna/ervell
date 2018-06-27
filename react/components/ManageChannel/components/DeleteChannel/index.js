@@ -3,20 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 
-import Styles from 'react/styles';
-
 import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
 import GenericButton from 'react/components/UI/GenericButton';
 
 import deleteChannelMutation from 'react/components/ManageChannel/components/DeleteChannel/mutations/deleteChannel';
 
 const Alert = styled.div`
-  color: ${Styles.Colors.state.alert};
+  color: ${x => x.theme.colors.state.alert};
 `;
 
 const Message = styled.div`
   padding: ${optionLinkPadding};
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
   text-align: left;
 `;
 
@@ -27,7 +25,7 @@ const Options = styled.div`
 
 const Option = styled(GenericButton).attrs({
   minWidth: '6em',
-  size: 'xs',
+  f: 1,
   color: 'state.alert',
 })`
 `;
@@ -77,7 +75,7 @@ class DeleteChannel extends Component {
 
     return (
       <div>
-        <OptionLink size="xs" onClick={this.pendDeleteChannel}>
+        <OptionLink f={1} onClick={this.pendDeleteChannel}>
           Delete channel
         </OptionLink>
 

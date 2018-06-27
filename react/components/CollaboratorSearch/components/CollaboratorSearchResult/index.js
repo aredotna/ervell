@@ -5,8 +5,6 @@ import styled from 'styled-components';
 
 import collaboratorSearchResultFragment from 'react/components/CollaboratorSearch/components/CollaboratorSearchResult/fragments/collaboratorSearchResult';
 
-import Styles from 'react/styles';
-
 import Count from 'react/components/UI/Count';
 import UserAvatar from 'react/components/UserAvatar';
 import CollaboratorAddButton from 'react/components/CollaboratorSearch/components/CollaboratorAddButton';
@@ -26,11 +24,11 @@ const Name = styled.a`
 `;
 
 const Email = styled.div`
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
 const Amount = styled.div`
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
 export default class CollaboratorSearchResult extends Component {

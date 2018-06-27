@@ -5,17 +5,16 @@ import styled from 'styled-components';
 
 import currentUserService from 'react/util/currentUserService';
 
-import Styles from 'react/styles';
-
 import Count from 'react/components/UI/Count';
 import MemberAvatar from 'react/components/MemberAvatar';
+import GenericButton from 'react/components/UI/GenericButton';
 
 import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
 
 const Container = styled.div`
   display: flex;
   padding: 0.5em;
-  border-top: 1px solid ${Styles.Colors.gray.light};
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
 `;
 
 const Representation = styled.div`
@@ -29,8 +28,8 @@ const Information = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding-left: 1em;
-  font-size: ${Styles.Type.size.xs};
-  line-height: ${Styles.Type.lineHeight.base};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
+  line-height: ${x => x.theme.lineHeightsIndexed.base};
 `;
 
 const Name = styled.a`
@@ -39,14 +38,16 @@ const Name = styled.a`
 `;
 
 const Warning = styled.div`
-  color: ${Styles.Colors.state.alert};
+  color: ${x => x.theme.colors.state.alert};
 `;
 
 const Amount = styled.div`
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
-const Button = styled.button`
+const Button = styled(GenericButton).attrs({
+  f: 1,
+})`
   align-self: flex-start;
 `;
 
@@ -139,19 +140,15 @@ export default class ManagedMembers extends Component {
         </Representation>
 
         {isOwner &&
-          <Button
-            className="Button Button--size-xs"
-            disabled
-          >
+          <Button disabled>
             Owner
           </Button>
         }
 
         {!isOwner && isRemovable &&
           <Button
-            className={`Button Button--size-xs ${mode === 'clicked' && 'Color--state-alert'}`}
             onClick={this.remove}
-            type="button"
+            color={mode === 'clicked' && 'state.alert'}
           >
             {{
               resting: 'Remove',

@@ -21,10 +21,10 @@ storiesOf('ButtonGroup', module)
   ))
   .add('default - small buttons', () => (
     <ButtonGroup>
-      <GenericButton size="xs">Option 1</GenericButton>
-      <GenericButton size="xs">Option 2</GenericButton>
-      <GenericButton size="xs">Option 3</GenericButton>
-      <GenericButton size="xs">Option 4</GenericButton>
+      <GenericButton f={1}>Option 1</GenericButton>
+      <GenericButton f={1}>Option 2</GenericButton>
+      <GenericButton f={1}>Option 3</GenericButton>
+      <GenericButton f={1}>Option 4</GenericButton>
     </ButtonGroup>
   ))
   .add('default - colors', () => (
@@ -45,9 +45,9 @@ storiesOf('ButtonGroup', module)
   ))
   .add('stretch - small buttons', () => (
     <ButtonGroup stretch>
-      <GenericButton size="xs">Option 1</GenericButton>
-      <GenericButton size="xs">Option 2</GenericButton>
-      <GenericButton size="xs">Option 3</GenericButton>
-      <GenericButton size="xs">Option 4</GenericButton>
+      <GenericButton f={1}>Option 1</GenericButton>
+      <GenericButton f={1}>Option 2</GenericButton>
+      <GenericButton f={1}>Option 3</GenericButton>
+      <GenericButton f={1}>Option 4</GenericButton>
     </ButtonGroup>
   ));

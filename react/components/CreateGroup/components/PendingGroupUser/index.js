@@ -6,10 +6,9 @@ import styled from 'styled-components';
 
 import currentUserService from 'react/util/currentUserService';
 
-import Styles from 'react/styles';
-
 import Avatar from 'react/components/UI/Avatar';
 import UserAvatar from 'react/components/UserAvatar';
+import GenericButton from 'react/components/UI/GenericButton';
 
 import pendingGroupUserQuery from 'react/components/CreateGroup/components/PendingGroupUser/queries/pendingGroupUser';
 import pendingGroupUserFragment from 'react/components/CreateGroup/components/PendingGroupUser/fragments/pendingGroupUser';
@@ -17,7 +16,7 @@ import pendingGroupUserFragment from 'react/components/CreateGroup/components/Pe
 const Container = styled.div`
   display: flex;
   padding: 0.5em;
-  border-top: 1px solid ${Styles.Colors.gray.light};
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
 `;
 
 const Representation = styled.div`
@@ -31,12 +30,18 @@ const Information = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding-left: 1em;
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
 `;
 
 const Name = styled.a`
   display: block;
   font-weight: bold;
+`;
+
+const Button = styled(GenericButton).attrs({
+  f: 1,
+})`
+  align-self: center;
 `;
 
 class PendingGroupUser extends Component {
@@ -87,14 +92,12 @@ class PendingGroupUser extends Component {
           </Information>
         </Representation>
 
-        <button
-          className="Button Button--size-xs"
+        <Button
           onClick={this.remove}
-          type="button"
           disabled={isOwner}
         >
           {isOwner ? 'Owner' : 'Remove'}
-        </button>
+        </Button>
       </Container>
     );
   }

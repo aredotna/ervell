@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { fontSize } from 'styled-system';
 
-import styles from 'react/styles';
+import { preset } from 'react/styles/functions';
+import { antialiased } from 'react/styles/mixins';
 
 export const inputVerticalPadding = '0.75em';
 export const inputHorizontalPadding = '1em';
@@ -10,10 +12,9 @@ export const inputPadding = `${inputVerticalPadding} ${inputHorizontalPadding}`;
 export const inputBorderRadius = '0.125em';
 
 const focusMixin = css`
-  background-color: ${styles.Colors.gray.light};
-  color: ${styles.Colors.gray.bold};
+  background-color: ${x => x.theme.colors.gray.light};
+  color: ${x => x.theme.colors.gray.bold};
 `;
-
 
 export const mixin = css`
   all: initial;
@@ -23,12 +24,11 @@ export const mixin = css`
   appearance: none;
   padding: ${inputPadding};
   border-radius: ${inputBorderRadius};
-  color: ${styles.Colors.gray.semiBold};
-  background-color: ${styles.Colors.gray.hint};
-  font-size: ${x => styles.Type.size[x.size || 'base']};
-  font-family: ${styles.Type.font.sans};
-
-  ${styles.Type.mixins.antialiased}
+  color: ${x => x.theme.colors.gray.semiBold};
+  background-color: ${x => x.theme.colors.gray.hint};
+  font-family: ${x => x.theme.fonts.sans};
+  ${preset(fontSize, { f: 5 })}
+  ${antialiased}
 
   ${x => x.focus && focusMixin}
   &:focus {
@@ -61,7 +61,7 @@ const SelectWrapper = styled.div`
     top: 50%;
     right: 1em;
     transform: translate(0.25em, -50%);
-    border-top: 0.5em solid ${styles.Colors.gray.semiBold};
+    border-top: 0.5em solid ${x => x.theme.colors.gray.semiBold};
     border-right: 0.25em solid transparent;
     border-left: 0.25em solid transparent;
     pointer-events: none;

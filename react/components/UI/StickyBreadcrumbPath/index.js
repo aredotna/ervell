@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Waypoint from 'react-waypoint';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
+import constants from 'react/styles/constants';
 
 import is from 'react/util/is';
 
@@ -21,17 +21,17 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
   top: 0;
   left: 0;
   right: 0;
-  height: ${styles.Constants.headerHeight};
-  z-index: ${styles.Constants.z.header};
+  height: ${constants.headerHeight};
+  z-index: ${constants.z.header};
   pointer-events: none;
 
   > div {
     pointer-events: auto;
     height: 100%;
-    font-size: ${styles.Type.size.base};
+    font-size: ${x => x.theme.fontSizesIndexed.base};
   }
 
-  ${styles.Constants.media.mobile`
+  ${constants.media.mobile`
     display: none;
   `}
 `;

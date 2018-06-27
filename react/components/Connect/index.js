@@ -12,11 +12,9 @@ import removeConnectionMutation from 'react/components/Connect/mutations/removeC
 import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
 import { inputPadding } from 'react/components/UI/GenericInput';
 
-import Styles from 'react/styles';
-
 const Container = styled.div`
   position: relative;
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
 `;
 
 const Fieldset = styled.div`
@@ -32,7 +30,7 @@ const Close = styled.a.attrs({
   padding: ${inputPadding};
   text-align: center;
   font-weight: bold;
-  font-size: ${Styles.Type.size.xs};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
   line-height: 1;
   border: 2px solid transparent;
 
@@ -41,7 +39,7 @@ const Close = styled.a.attrs({
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: ${Styles.Type.size.lg};
+    font-size: ${x => x.theme.fontSizesIndexed.lg};
   }
 `;
 
@@ -116,7 +114,7 @@ class Connect extends Component {
     return (
       <Container>
         {mode === 'resting' &&
-          <GenericButton onClick={this.openConnect} size="xs">
+          <GenericButton onClick={this.openConnect} f={1}>
             <ConnectPadding>Connect &rarr;</ConnectPadding>
           </GenericButton>
         }

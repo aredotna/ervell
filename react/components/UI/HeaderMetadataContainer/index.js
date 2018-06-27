@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
+import constants from 'react/styles/constants';
+import { multiply } from 'react/styles/functions';
 
 const MARGIN_BOTTOM = '2em';
 
 const Container = styled.div`
   position: relative;
-  margin: ${styles.Constants.containerOffset} auto 0 auto;
+  margin: ${constants.containerOffset} auto 0 auto;
   ${x => x.hasChildren && `
     margin-bottom: ${MARGIN_BOTTOM};
   `}
@@ -17,9 +18,9 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   width: 100%;
-  padding-right: ${styles.Functions.multiply(styles.Constants.blockGutter, 2)}; // TODO: Remove
+  padding-right: ${multiply(constants.blockGutter, 2)}; // TODO: Remove
 
-  ${styles.Constants.media.mobile`
+  ${constants.media.mobile`
     display: block;
   `}
 `;
@@ -30,10 +31,10 @@ const Breadcrumb = styled.div`
 `;
 
 const Actions = styled.div`
-  ${styles.Constants.media.mobile`
+  ${constants.media.mobile`
     margin-bottom: ${MARGIN_BOTTOM};
-    margin-right: ${styles.Constants.blockGutter}; // TODO: Remove
-    margin-left: ${styles.Constants.blockGutter}; // TODO: Remove
+    margin-right: ${constants.blockGutter}; // TODO: Remove
+    margin-left: ${constants.blockGutter}; // TODO: Remove
   `}
 `;
 

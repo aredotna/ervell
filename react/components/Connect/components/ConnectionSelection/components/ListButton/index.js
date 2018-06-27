@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import styles from 'react/styles';
-
 import { inputPadding } from 'react/components/UI/GenericInput';
 
 export default styled.a.attrs({
@@ -14,8 +12,8 @@ export default styled.a.attrs({
   padding: ${inputPadding};
   text-align: center;
   font-weight: normal !important;
-  border: 1px solid ${styles.Colors.gray.regular};
-  background-color: ${styles.Colors.gray.hint};
+  border: 1px solid ${x => x.theme.colors.gray.regular};
+  background-color: ${x => x.theme.colors.gray.hint};
   line-height: 1;
 
   ${x => x.disabled && `
@@ -28,7 +26,7 @@ export default styled.a.attrs({
   ${x => !x.disabled && `
     &:hover {
       z-index: 1;
-      border: 1px solid ${styles.Colors.gray.semiBold};
+      border: 1px solid ${x => x.theme.colors.gray.semiBold};
     }
   `}
 `;

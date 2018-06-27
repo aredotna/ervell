@@ -4,9 +4,9 @@ import { ServerStyleSheet } from 'styled-components';
 
 import { wrapWithApolloProvider } from 'react/apollo';
 
-export default client => (component, props = {}) => {
+export default client => (Component, props = {}) => {
   const sheet = new ServerStyleSheet();
-  const WrappedComponent = wrapWithApolloProvider(client)(component, props);
+  const WrappedComponent = wrapWithApolloProvider(client)(Component, props);
 
   return getDataFromTree(WrappedComponent)
     .then(() => {

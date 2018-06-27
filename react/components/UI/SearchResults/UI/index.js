@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import styles from 'react/styles';
-
 import UserAvatar from 'react/components/UserAvatar';
 
 export const Container = styled.div`
@@ -9,10 +7,10 @@ export const Container = styled.div`
   align-items: center;
   min-height: 3.5rem;
   padding: 0.5em;
-  border: 1px solid ${styles.Colors.gray.regular};
+  border: 1px solid ${x => x.theme.colors.gray.regular};
   border-top: 0;
-  background-color: ${styles.Colors.gray.hint};
-  font-size: ${styles.Type.size.xs};
+  background-color: ${x => x.theme.colors.gray.hint};
+  font-size: ${x => x.theme.fontSizesIndexed.xs};
 `;
 
 export const Information = styled.div`
@@ -30,11 +28,11 @@ export const Name = styled.a`
 `;
 
 export const Email = styled.div`
-  color: ${styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
 export const Amount = styled.div`
-  color: ${styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
 export const Avatar = styled(UserAvatar)`

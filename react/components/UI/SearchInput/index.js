@@ -5,8 +5,6 @@ import { isEmpty } from 'underscore';
 
 import GenericInput from 'react/components/UI/GenericInput';
 
-import Styles from 'react/styles';
-
 const Container = styled.div`
   position: relative;
   pointer-events: none;
@@ -25,13 +23,15 @@ const Icon = styled.div`
   pointer-events: all;
   width: 2.5em;
   text-align: center;
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 
+  // TODO: Replace with SVG
   &:after {
     font-family: 'Iconic';
     content: '\\e1cf'; // magnifying-glass glyph
   }
 
+  // TODO: Replace with SVG
   &[data-mode='active'] {
     &:after {
       content: '\\e233'; // x- glyph
@@ -41,10 +41,10 @@ const Icon = styled.div`
 
 const Input = styled(GenericInput)`
   padding-left: 2.5em;
-  border: 1px solid ${Styles.Colors.gray.regular};
+  border: 1px solid ${x => x.theme.colors.gray.regular};
 
   &:focus {
-    border: 1px solid ${Styles.Colors.gray.regular};
+    border: 1px solid ${x => x.theme.colors.gray.regular};
   }
 `;
 

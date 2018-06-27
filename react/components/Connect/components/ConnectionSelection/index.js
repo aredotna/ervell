@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { debounce, isEmpty } from 'underscore';
 
-import Styles from 'react/styles';
+import { outlineBorder } from 'react/styles/mixins';
 
 import GenericInput, { inputPadding } from 'react/components/UI/GenericInput';
 import RecentChannels from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels';
@@ -15,7 +15,7 @@ const Container = styled.div`
     position: relative;
 
     &:after {
-      ${Styles.Mixins.outlineBorder()}
+      ${outlineBorder()}
     }
   }
 `;
@@ -26,13 +26,13 @@ const Bumper = styled.div`
 `;
 
 const SearchInput = styled(GenericInput).attrs({
-  size: 'xs',
+  f: 1,
   placeholder: 'Type channel name',
   autoFocus: true,
 })`
   &,
   &:focus {
-    border: 1px solid ${Styles.Colors.gray.regular} !important;
+    border: 1px solid ${x => x.theme.colors.gray.regular} !important;
   }
 `;
 
@@ -40,7 +40,7 @@ const OutlinedRecentChannels = styled(RecentChannels)`
   position: relative;
 
   &:after {
-    ${Styles.Mixins.outlineBorder()}
+    ${outlineBorder()}
   }
 `;
 

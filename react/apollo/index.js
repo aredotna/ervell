@@ -12,6 +12,8 @@ import { withClientState } from 'apollo-link-state';
 
 import mount from 'react/util/mount';
 
+import { Themed } from 'react/styles/theme';
+
 import introspectionQueryResultData from 'react/apollo/fragmentTypes.json';
 
 const isClientSide = typeof window !== 'undefined';
@@ -99,10 +101,13 @@ if (isClientSide) {
   initClientSideApolloClient();
 }
 
+// TODO: Rename to boot or something...?
 export const wrapWithApolloProvider = (client = isClientSide && window.__APOLLO_CLIENT__) =>
   (Component, props = {}) => (
     <ApolloProvider client={client}>
-      <Component {...props} />
+      <Themed>
+        <Component {...props} />
+      </Themed>
     </ApolloProvider>
   );
 

@@ -8,7 +8,6 @@ import selectableChannelFragment from 'react/components/Connect/components/Conne
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
 import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
-import Styles from 'react/styles';
 import { inputPadding } from 'react/components/UI/GenericInput';
 
 const Container = styled.div.attrs({
@@ -20,15 +19,15 @@ const Container = styled.div.attrs({
   line-height: 1;
   user-select: none;
   cursor: pointer;
-  color: ${Styles.Colors.gray.semiBold};
-  border: 1px solid ${Styles.Colors.gray.regular};
-  background-color: ${Styles.Colors.gray.hint};
+  color: ${x => x.theme.colors.gray.semiBold};
+  border: 1px solid ${x => x.theme.colors.gray.regular};
+  background-color: ${x => x.theme.colors.gray.hint};
   white-space: nowrap;
   overflow: hidden;
 
   &:hover {
     z-index: 1;
-    border: 1px solid ${Styles.Colors.gray.semiBold};
+    border: 1px solid ${x => x.theme.colors.gray.semiBold};
   }
 
   &:before {
@@ -38,7 +37,7 @@ const Container = styled.div.attrs({
     right: 0;
     bottom: 0;
     width: 1em;
-    background: linear-gradient(to left, ${Styles.Colors.gray.hint}, ${Styles.Colors.utility.transparent});
+    background: linear-gradient(to left, ${x => x.theme.colors.gray.hint}, ${x => x.theme.colors.utility.transparent});
     z-index: 1;
   }
 
@@ -46,7 +45,7 @@ const Container = styled.div.attrs({
   &[data-selected="true"] {
     &:before {
       width: 3em;
-      background linear-gradient(to left, ${Styles.Colors.gray.hint} 60%, ${Styles.Colors.utility.transparent})
+      background linear-gradient(to left, ${x => x.theme.colors.gray.hint} 60%, ${x => x.theme.colors.utility.transparent})
     }
 
     &:after {
@@ -82,7 +81,7 @@ const Separator = styled.div`
   margin: 0 0.75em;
   vertical-align: baseline;
   transform: rotate(30deg);
-  background-color: ${Styles.Colors.gray.medium};
+  background-color: ${x => x.theme.colors.gray.medium};
 `;
 
 export default class SelectableChannel extends Component {

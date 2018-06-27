@@ -13,14 +13,14 @@ const Buttons = styled(ButtonGroup)`
   display: flex;
 `;
 
-const Button = styled(GenericButtonLink).attrs({ size: 'xs' })`
+const Button = styled(GenericButtonLink).attrs({ f: 1 })`
 `;
 
-const UserFollowButton = styled(FollowButton).attrs({ size: 'xs' })`
+const UserFollowButton = styled(FollowButton).attrs({ f: 1 })`
   ${buttonMixin}
 `;
 
-const UserMessageButton = styled(MessageButton).attrs({ size: 'xs' })`
+const UserMessageButton = styled(MessageButton).attrs({ f: 1 })`
   ${buttonMixin}
 `;
 

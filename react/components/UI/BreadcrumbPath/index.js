@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
+import constants from 'react/styles/constants';
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   margin: 0 0 2em 0;
-  font-size: ${styles.Type.size.h3};
-  line-height: ${styles.Type.lineHeight.compact};
-  font-family: ${styles.Type.font.sans};
+  font-size: ${x => x.theme.fontSizesIndexed.h3};
+  line-height: ${x => x.theme.lineHeightsIndexed.compact};
+  font-family: ${x => x.theme.fonts.sans};
 
-  ${styles.Constants.media.mobile`
-    font-size: ${styles.Type.size.h4};
+  ${constants.media.mobile`
+    font-size: ${x => x.theme.fontSizesIndexed.h4};
     margin: 0 0 1em 0;
-    margin-right: ${styles.Constants.blockGutter}; // TODO: Remove
-    margin-left: ${styles.Constants.blockGutter}; // TODO: Remove
+    margin-right: ${constants.blockGutter}; // TODO: Remove
+    margin-left: ${constants.blockGutter}; // TODO: Remove
   `}
 `;
 
@@ -26,7 +26,7 @@ const Crumb = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: ${styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 
   a {
     text-decoration: none;
@@ -40,7 +40,7 @@ const Crumb = styled.div`
   }
 
   &:last-child {
-    color: ${styles.Colors.gray.semiBold};
+    color: ${x => x.theme.colors.gray.semiBold};
 
     // Hides trailing slash
     &:after {
