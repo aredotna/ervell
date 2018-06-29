@@ -28,22 +28,21 @@ Posts = require "../../collections/posts.coffee"
   .done()
 
 @userRSS = (req, res, next) ->
-  author = new User
-    channel_slug: req.params.username
-
+  author = new User(id: req.params.username)
   blocks = new UserBlocks null,
     user_slug: req.params.username
     per: 25
 
-  Q.allSettled([
+  Promise.all([
     author.fetch()
     blocks.fetch()
-  ]).then ->
-    res.render 'user',
-      author: author
-      blocks: blocks.models
-  .catch next
-  .done()
+  ])
+    .then ->
+      res.render 'user',
+        author: author
+        blocks: blocks.models
+
+    .catch next
 
 @exploreRSS = (req, res, next) ->
   blocks = new ExploreBlocks null,
