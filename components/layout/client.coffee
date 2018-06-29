@@ -175,8 +175,6 @@ showPremiumMessage = ->
     current_user.get('private_connections_count') < 10 or
     current_user.get('is_exceeding_private_connections_limit')
 
-  console.log 'shouldReturn', shouldReturn
-
   return if shouldReturn
 
   model = new Backbone.Model
