@@ -20,6 +20,8 @@
   HOMEPAGE_EXPLORE_USER_IDS
   X_APP_TOKEN
   GRAPHQL_ENDPOINT
+  AIRBRAKE_PROJECT_ID
+  AIRBRAKE_API_KEY
 } = require '../config'
 
 express = require 'express'
@@ -37,6 +39,8 @@ favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
 { createReloadable } = require '@artsy/express-reloadable'
 glob = require 'glob'
+AirbrakeClient = require 'airbrake-js'
+makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
 
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
@@ -69,6 +73,11 @@ sharify.data = {
 }
 
 CurrentUser = require '../models/current_user'
+
+airbrake = new AirbrakeClient({
+  projectId: AIRBRAKE_PROJECT_ID,
+  projectKey: AIRBRAKE_API_KEY,
+})
 
 module.exports = (app) ->
   console.log "Setting up... NODE_ENV=#{NODE_ENV}"
@@ -140,6 +149,8 @@ module.exports = (app) ->
   app.use require('./middleware/error_status')
 
   # Drop down to error handling middleware if nothing else catches it
+  app.use(makeErrorHandler(airbrake))
+
   if NODE_ENV is 'development'
     app.use (err, req, res, next) =>
       res.status(err.status or 500)

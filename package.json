@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@artsy/express-reloadable": "^1.4.0",
+    "airbrake-js": "^1.4.0",
     "apollo-client-preset": "^1.0.8",
     "apollo-link": "^1.2.2",
     "apollo-link-context": "^1.0.3",

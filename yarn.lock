@@ -495,6 +495,10 @@ airbnb-js-shims@^1.4.1:
     string.prototype.padstart "^3.0.0"
     symbol.prototype.description "^1.0.0"
 
+airbrake-js@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/airbrake-js/-/airbrake-js-1.4.0.tgz#362ef578a029f4a1ae19acc18879776a5c6bb555"
+
 ajv-keywords@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-2.1.1.tgz#617997fc5f60576894c435f940d819e135b80762"
