@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 import { inputPadding } from 'react/components/UI/GenericInput';
 
 const Indicator = styled.div`
@@ -11,9 +9,9 @@ const Indicator = styled.div`
   padding: ${inputPadding};
   line-height: 1;
   user-select: none;
-  color: ${Styles.Colors.gray.semiBold};
-  border: 1px solid ${Styles.Colors.gray.regular};
-  background-color: ${Styles.Colors.gray.hint};
+  color: ${x => x.theme.colors.gray.semiBold};
+  border: 1px solid ${x => x.theme.colors.gray.regular};
+  background-color: ${x => x.theme.colors.gray.hint};
 `;
 
 export default props => (

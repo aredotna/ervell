@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Styles from 'react/styles';
-
 import Button from 'react/components/ManageGroup/components/Button';
 
 const Container = styled.div`
@@ -15,9 +13,9 @@ const Container = styled.div`
   text-align: center;
   margin: 0 auto 2em auto;
   padding: 2em 1em;
-  font-size: ${Styles.Type.size.sm};
-  line-height: ${Styles.Type.lineHeight.tall};
-  color: ${Styles.Colors.state.alert};
+  font-size: ${x => x.theme.fontSizesIndexed.sm};
+  line-height: ${x => x.theme.lineHeightsIndexed.tall};
+  color: ${x => x.theme.colors.state.alert};
 `;
 
 const Bold = styled.span`

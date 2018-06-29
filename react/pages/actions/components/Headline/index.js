@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import { mixin as typography } from 'react/components/UI/Type';
+import Text from 'react/components/UI/Text';
 
-export default styled.h2.attrs({
-  size: 'h2',
+export default styled(Text).attrs({
+  fontSize: 8,
+  lineHeight: 1,
+  align: 'center',
 })`
-  ${typography}
-  text-align: center;
 `;

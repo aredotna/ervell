@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 const Button = styled.a`
   position: absolute;
   top: 0;
   right: 0;
   padding: 1em;
-  font-size: ${Styles.Type.size.base};
+  font-size: ${x => x.theme.fontSizesIndexed.base};
   font-weight: bold;
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
 const Cancel = ({ onClick, ...rest }) => (

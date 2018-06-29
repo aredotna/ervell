@@ -43,15 +43,15 @@ class ExportChannel extends Component {
     return (
       <div>
         <ButtonGroup stretch>
-          <GenericButton size="xs" onClick={this.queueExportPDF}>
+          <GenericButton f={1} onClick={this.queueExportPDF}>
             PDF
           </GenericButton>
 
-          <GenericButton size="xs" onClick={this.queueExportZIP}>
+          <GenericButton f={1} onClick={this.queueExportZIP}>
             ZIP
           </GenericButton>
 
-          <GenericButton size="xs" onClick={this.queueExportHTML}>
+          <GenericButton f={1} onClick={this.queueExportHTML}>
             HTML
           </GenericButton>
         </ButtonGroup>

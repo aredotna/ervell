@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 const Container = styled.form`
   position: relative;
   display: flex;
@@ -35,16 +33,16 @@ const Section = styled.div`
 
 const Title = styled.h3`
   margin: 0 auto 1em auto;
-  font-size: ${Styles.Type.size.lg};
+  font-size: ${x => x.theme.fontSizesIndexed.lg};
   font-weight: bold;
   text-align: center;
-  color: ${Styles.Colors.gray.medium};
+  color: ${x => x.theme.colors.gray.medium};
 `;
 
 const Label = styled.h4`
   margin: 0.75em 0;
   font-weight: normal;
-  font-size: ${Styles.Type.size.sm};
+  font-size: ${x => x.theme.fontSizesIndexed.sm};
 `;
 
 

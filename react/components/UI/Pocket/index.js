@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Styles from 'react/styles';
-
 const Container = styled.div`
   margin-bottom: 1em;
 `;
@@ -11,18 +9,18 @@ const Container = styled.div`
 const Title = styled.h4`
   margin: 0 0 0.5em 0;
   padding: 0 0 0.5em 0;
-  font-size: ${Styles.Type.size.sx};
-  line-height: ${Styles.Type.lineHeight.tall};
-  color: ${Styles.Colors.gray.medium};
-  border-bottom: 1px solid ${Styles.Colors.gray.light};
+  font-size: ${x => x.theme.fontSizesIndexed.sx};
+  line-height: ${x => x.theme.lineHeightsIndexed.tall};
+  color: ${x => x.theme.colors.gray.medium};
+  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
   font-weight: normal;
 `;
 
 const Content = styled.div`
   margin: 0.5em 0;
-  color: ${Styles.Colors.gray.semiBold};
-  font-size: ${Styles.Type.size.sx};
-  line-height: ${Styles.Type.lineHeight.tall};
+  color: ${x => x.theme.colors.gray.semiBold};
+  font-size: ${x => x.theme.fontSizesIndexed.sx};
+  line-height: ${x => x.theme.lineHeightsIndexed.tall};
 
   p {
     margin: 0.5em auto;

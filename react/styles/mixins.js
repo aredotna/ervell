@@ -1,8 +1,8 @@
 import { css } from 'styled-components';
 
-import Colors from 'react/styles/Colors';
+import theme from 'react/styles/theme';
 
-const outlineBorder = (size = '5px', color = Colors.gray.light, radius = '0.25em') =>
+export const outlineBorder = (size = '5px', color = theme.colors.gray.light, radius = '0.25em') =>
   css`
     display: block;
     content: '';
@@ -16,20 +16,31 @@ const outlineBorder = (size = '5px', color = Colors.gray.light, radius = '0.25em
     border-radius: ${radius};
   `;
 
-const hyphenate = css`
+export const hyphenate = css`
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
 `;
 
-const antialiased = css`
+export const antialiased = css`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+`;
+
+export const neutralMarginsY = css`
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 export default {
   outlineBorder,
   hyphenate,
   antialiased,
+  neutralMarginsY,
 };

@@ -1,5 +1,3 @@
-import get from 'react/util/get';
-
 const COLORS = {
   channel: {
     closed: '#4b3d67',
@@ -27,7 +25,7 @@ const COLORS = {
   },
 };
 
-export const COLOR_KEYS = Object
+export const COLOR_NAMES = Object
   .keys(COLORS)
   .reduce(
     (memo, namespace) =>
@@ -35,8 +33,5 @@ export const COLOR_KEYS = Object
         `${namespace}.${color}`)),
     [],
   );
-
-export const selectColor = ({ color }) =>
-  get(COLORS, color || 'gray.base');
 
 export default COLORS;

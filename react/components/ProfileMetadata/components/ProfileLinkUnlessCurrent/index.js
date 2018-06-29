@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Cookies from 'cookies-js';
 
-import Styles from 'react/styles';
-
 import LinkUnlessCurrent from 'react/components/UI/LinkUnlessCurrent';
 
 const Link = styled(LinkUnlessCurrent)`
   display: block;
-  color: ${Styles.Colors.gray.regular};
+  color: ${x => x.theme.colors.gray.regular};
 
   &:not([href]) {
-    color: ${Styles.Colors.gray.semiBold};
+    color: ${x => x.theme.colors.gray.semiBold};
     cursor: default;
   }
 `;

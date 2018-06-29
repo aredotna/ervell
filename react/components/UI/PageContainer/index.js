@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
+import constants from 'react/styles/constants';
+import { add, multiply } from 'react/styles/functions';
 
-const { blockGutter, blockAndGutter, containerOffset } = styles.Constants;
-const { add, multiply } = styles.Functions;
+const { blockGutter, blockAndGutter, containerOffset } = constants;
 
 const Container = styled.div`
   position: relative;

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
-
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
@@ -15,10 +13,10 @@ const Option = styled.a`
   display: block;
 
   &:last-child:not(first-child) {
-    color: ${styles.Colors.gray.regular};
+    color: ${x => x.theme.colors.gray.regular};
 
     &:hover {
-      color: ${styles.Colors.gray.semiBold};
+      color: ${x => x.theme.colors.gray.semiBold};
     }
   }
 `;

@@ -37,7 +37,7 @@ export default class CopyToClipboard extends Component {
     setTimeout(() => {
       this.setState({
         currentLabel: label,
-      })
+      });
     }, 2000);
 
     return onClick();

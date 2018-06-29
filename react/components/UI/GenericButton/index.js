@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
+import { themeGet, fontSize } from 'styled-system';
 
-import styles from 'react/styles';
-
-import get from 'react/util/get';
+import { preset } from 'react/styles/functions';
+import { antialiased } from 'react/styles/mixins';
 
 export const buttonBorderWidth = '1px';
 export const buttonVerticalPadding = '0.75em';
@@ -11,64 +11,66 @@ export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding
 export const buttonBorderRadius = '0.25em';
 
 const activeMixin = css`
-  border: ${buttonBorderWidth} solid ${styles.Colors.gray.bold};
-  color: ${styles.Colors.gray.bold};
+  border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.bold};
+  color: ${x => x.theme.colors.gray.bold};
 `;
+
+const hoverMixin = css`
+  border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.medium};
+  color: ${x => x.theme.colors.gray.bold};
+`;
+
+const disabledMixin = css`
+  pointer-events: none;
+  opacity: 0.5;
+`;
+
+const buttonColor = ({ color, theme }) => {
+  if (color) {
+    const value = themeGet(`colors.${color}`, 'colors.gray.bold')({ theme });
+
+    return `
+      color: ${value};
+      border-color: ${value};
+    `;
+  }
+
+  return '';
+};
 
 export const mixin = css`
   all: initial;
   display: inline-block;
   padding: ${buttonPadding};
-  font-weight: bold;
-  border: ${buttonBorderWidth} solid ${styles.Colors.gray.regular};
+  border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.regular};
   border-radius: ${buttonBorderRadius};
-  font-size: ${x => styles.Type.size[x.size || 'base']};
-  font-family: ${styles.Type.font.sans};
+  font-family: ${x => x.theme.fonts.sans};
+  font-weight: bold;
   line-height: 1;
   user-select: none;
-  color: ${styles.Colors.gray.bold};
   cursor: pointer;
   text-align: center;
+  ${preset(fontSize, { f: 5 })}
+  ${buttonColor}
+  ${antialiased}
 
-  ${x => x.minWidth && `
-    min-width: ${x.minWidth};
-  `}
+  ${x => x.minWidth && `min-width: ${x.minWidth};`}
 
-  ${({ color }) => {
-    if (color) {
-      const value = get(styles.Colors, color);
-
-      return `
-        color: ${value};
-        border-color: ${value};
-      `;
-    }
-
-    return '';
-  }}
-
-  ${styles.Type.mixins.antialiased}
-
-  &:hover {
-    border: ${buttonBorderWidth} solid ${styles.Colors.gray.medium};
-    color: ${styles.Colors.gray.bold};
-  }
+  ${x => x.hover && hoverMixin}
+  &:hover { ${hoverMixin} }
 
   ${x => x.active && activeMixin}
   &:active { ${activeMixin} }
 
-  ${x => x.disabled && `
-    pointer-events: none;
-    opacity: 0.5;
-    `}
-  `;
+  ${x => x.disabled && disabledMixin}
+`;
 
 export const GenericButtonLink = styled.a`
   ${mixin}
-  `;
+`;
 
 const GenericButton = styled.a`
   ${mixin}
-  `;
+`;
 
 export default GenericButton;

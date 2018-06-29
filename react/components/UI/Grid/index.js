@@ -2,9 +2,10 @@ import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import styles from 'react/styles';
+import constants from 'react/styles/constants';
+import { multiply } from 'react/styles/functions';
 
-const { blockGutter, blockWidth } = styles.Constants;
+const { blockGutter, blockWidth } = constants;
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const Container = styled.div`
   margin-left: -${blockGutter};
   margin-right: -${blockGutter};
 
-  ${styles.Constants.media.mobile`
+  ${constants.media.mobile`
     margin-left: 0;
     margin-right: 0;
   `}
@@ -23,7 +24,7 @@ const Container = styled.div`
 
 const GridItem = styled.div`
   position: relative;
-  margin: 0 ${blockGutter} ${styles.Functions.multiply(blockGutter, 2)} ${blockGutter};
+  margin: 0 ${blockGutter} ${multiply(blockGutter, 2)} ${blockGutter};
   width: ${blockWidth};
 
   ${x => !x.variableHeight && `
