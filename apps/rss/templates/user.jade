@@ -1,9 +1,9 @@
 doctype xml
 rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
   channel
-    title Are.na / #{user.get('username')}
-    link #{sd.APP_URL}#{author.href()}
-    atom:link(href="#{sd.APP_URL}#{author.href()}/feed/rss", rel='self', type='application/rss+xml')
+    title Are.na / #{author.get('username')}
+    link #{author.href()}
+    atom:link(href="#{author.href()}/feed/rss", rel='self', type='application/rss+xml')
     if author.has('metadata')
       description #{author.get('metadata').description}
     language en-US
