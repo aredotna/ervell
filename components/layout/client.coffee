@@ -30,7 +30,7 @@ module.exports = ->
   setupAjaxHeaders()
   setupAnalytics()
   initNightMode()
-  showInviteMessage()
+  showPremiumMessage()
   showLimitMessage()
   initConfirmableMessage()
   initLoggedOutCTA()
@@ -160,16 +160,28 @@ setupAnalytics = ->
       'Visited logged out'
 
 # TODO: Extract
-showInviteMessage = ->
+showPremiumMessage = ->
+  { current_user } = mediator.shared
+
   # Don't show this message if the current user is not logged in
-  # or if they have a pending confirmation
-  return if !sd.CURRENT_USER or sd.CURRENT_USER?.is_pending_confirmation
+  # or if they have a pending confirmation.
+  # or if they are premium
+  # or if they have less than 10 private connections
+  # or if we are already showing them a message for exceeding the limit
+  
+  shouldReturn = !current_user.id or
+    current_user.get('is_premium') or
+    current_user.get('is_pending_confirmation') or
+    current_user.get('private_connections_count') < 10 or
+    current_user.get('is_exceeding_private_connections_limit')
+
+  return if shouldReturn
 
   model = new Backbone.Model
-    id: 'invite_friend'
-    title: 'Send an invitation'
+    id: 'premium_upgrade'
+    title: 'Upgrade to Premium'
     body: """
-      Are.na gets better when you <a href='/tools/send-invitation'>invite your friends</a>.
+      Organize all your projects in privacy. <a href='/pricing'>Read more about Are.na Premium.</a>.
     """
 
   messageView = new MessageView model: model
