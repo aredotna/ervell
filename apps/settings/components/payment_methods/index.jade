@@ -4,11 +4,16 @@ form
     //- Rendered client-side
 
   .Fieldset
-    label.Label
-      | Card info
+    if customer.related().sources.length > 0
+      label.Label
+        | Your cards
+    else
+      label.Label
+        | Card info
 
     if customer.related().sources.length > 0
       include ./sources
+      include ./add
     else
       .Input.js-card-element
         input.Input.Input--fill( style='display: none' )
