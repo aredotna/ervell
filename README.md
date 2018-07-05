@@ -6,14 +6,13 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
 
 * * *
 
-### Local installation
+### Getting Started (Local)
 
-```bash
-  git clone git@github.com:arenahq/ervell.git
-  cd ervell
-  npm install
-  gem install foreman
-```
+* Fork this repo
+* Install [Foreman](https://github.com/ddollar/foreman) or [Forego](https://github.com/ddollar/forego)
+* Obtain a set of .env files (.env.dev, .env.staging, .env.prod) from [@dzucconi](https://github.com/dzucconi) or [@broskoski](https://github.com/broskoski)
+* Install [Yarn](http://brewformulas.org/Yarn)
+* Install dependencies: `yarn install`
 
 ### Running the server
 
@@ -22,12 +21,19 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
   # => Listening on port 5000
 ```
 
+You can point at different instances using different .env files (local/staging/prod).
+
 -----
 
-## Deploy staging
+## Deploying (Production)
 
-```
-make deploy-staging branch=branch
-```
+URL: [www.are.na](https://www.are.na)
 
-(This doesn't work.)
+* Create a new pull request from the `master` branch against the `deploy` branch. Merges into `deploy` are automatically deployed to our production instance
+
+## Deploying (Staging)
+
+URL: [staging.are.na](https://staging.are.na)
+
+* Merges into `master` are automatically deployed to our staging instance.
+* You can deploy your current local branch to staging if need be by exporting out the appropriate S3 keys and running `yarn run deploy-staging`
