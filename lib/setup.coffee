@@ -146,7 +146,7 @@ module.exports = (app) ->
     app.use require '../apps'
 
   # Convert the GraphQL error messages into some kind of matching status code
-  app.use require('./middleware/error_status')
+  app.use require('./middleware/errorStatus.js').default
 
   # Drop down to error handling middleware if nothing else catches it
   app.use(makeErrorHandler(airbrake))
