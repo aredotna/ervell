@@ -8,8 +8,12 @@ module.exports = ($el) ->
   $submit = $el.find '.js-submit'
   $errors = $el.find '.js-errors'
 
+  submissionTimeout = null;
+
   $form.on 'submit', (e) ->
     e.preventDefault()
+
+    submissionTimeout && clearTimeout(submissionTimeout);
 
     serializer = new Serializer $form
 
@@ -31,7 +35,7 @@ module.exports = ($el) ->
         .prop 'disabled', false
         .text 'Sent!'
 
-      setTimeout (-> $submit.text label), 2500
+      submissionTimeout = setTimeout (-> $submit.text label), 2500
 
       track.submit 'Invitation sent from user'
 
@@ -47,9 +51,26 @@ module.exports = ($el) ->
         .prop 'disabled', false
         .text 'Error'
 
-      setTimeout ->
+      submissionTimeout = setTimeout ->
         $submit.text label
         $errors.empty()
       , 5000
 
       track.error 'Invitation not sent, try again.'
+
+    .catch ->
+      $errors
+        .show()
+        .html """
+          Something went wrong, please contact <a href='mailto:info@are.na'>info@are.na</a> if the problem persists.
+        """
+
+      $submit
+        .prop 'disabled', false
+        .text label
+
+      submissionTimeout = setTimeout ->
+        $errors.empty()
+      , 15000
+
+      track.error 'Invitation not sent: server error. Try again.'
