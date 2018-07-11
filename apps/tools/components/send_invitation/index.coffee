@@ -41,7 +41,7 @@ module.exports = ($el) ->
   $form.on 'submit', (e) ->
     e.preventDefault()
 
-    submissionTimeout && clearTimeout(submissionTimeout);
+    clearTimeout(submissionTimeout)
 
     serializer = new Serializer $form
 
