@@ -8,7 +8,35 @@ module.exports = ($el) ->
   $submit = $el.find '.js-submit'
   $errors = $el.find '.js-errors'
 
-  submissionTimeout = null;
+  submissionTimeout = null
+  label = $submit.text()
+
+  onSuccess = () ->
+    $form.trigger 'reset'
+
+    $submit
+      .prop 'disabled', false
+      .text 'Sent!'
+
+    submissionTimeout = setTimeout (-> $submit.text label), 2500
+
+    track.submit 'Invitation sent from user'
+
+  onFailure = (message) ->
+    $errors
+      .show()
+      .html message
+
+    $submit
+      .prop 'disabled', false
+      .text 'Error'
+
+    submissionTimeout = setTimeout ->
+      $submit.text label
+      $errors.empty()
+    , 5000
+
+    track.error 'Invitation not sent, try again.'
 
   $form.on 'submit', (e) ->
     e.preventDefault()
@@ -16,8 +44,6 @@ module.exports = ($el) ->
     submissionTimeout && clearTimeout(submissionTimeout);
 
     serializer = new Serializer $form
-
-    label = $submit.text()
 
     $submit
       .prop 'disabled', true
@@ -28,49 +54,10 @@ module.exports = ($el) ->
       type: 'POST'
       data: serializer.data()
 
-    .then ->
-      $form.trigger 'reset'
-
-      $submit
-        .prop 'disabled', false
-        .text 'Sent!'
-
-      submissionTimeout = setTimeout (-> $submit.text label), 2500
-
-      track.submit 'Invitation sent from user'
+    .then onSuccess
 
     .catch ({ responseJSON: { message, description }}) ->
-      $errors
-        .show()
-        .html """
-          #{message}<br>
-          #{description}
-        """
-
-      $submit
-        .prop 'disabled', false
-        .text 'Error'
-
-      submissionTimeout = setTimeout ->
-        $submit.text label
-        $errors.empty()
-      , 5000
-
-      track.error 'Invitation not sent, try again.'
+      onFailure("#{message}<br/>#{description}")
 
     .catch ->
-      $errors
-        .show()
-        .html """
-          Something went wrong, please contact <a href='mailto:info@are.na'>info@are.na</a> if the problem persists.
-        """
-
-      $submit
-        .prop 'disabled', false
-        .text label
-
-      submissionTimeout = setTimeout ->
-        $errors.empty()
-      , 15000
-
-      track.error 'Invitation not sent: server error. Try again.'
+      onFailure("Something went wrong, please contact <a href='mailto:info@are.na'>info@are.na</a> if the problem persists.")
