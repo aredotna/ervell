@@ -9,23 +9,14 @@ block scripts
 block container
   include ../../../components/logged_out_nav/templates/header
 
-  
   include cta
-  
-  hr.Base
 
-  .Categories
-    include categories
-
-  hr.Base
-  
-  .Examples-list
+  .Examples
     include examples
-  
-  .Page.Page--examples
-    .Page--examples__button-load-more.Utility--align-center
-      a.Button.Button--size-lg.Button--border-heavy.js-load-more-examples( href='#' data-current-page=1 data-total-pages=totalPages )
-        | See more examples
+
+    //- .Utility--align-center
+    //-   a.Button.Button--size-lg.Button--border-heavy.js-load-more-examples( href='#' data-current-page=1 data-total-pages=totalPages )
+    //-     | See more examples
 
 block footer
   include ../../../components/logged_out_nav/templates/footer

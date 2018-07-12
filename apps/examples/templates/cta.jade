@@ -1,7 +1,10 @@
-.Page.Page--examples
-  .Page--examples__cta
-    h2.Type.Type--size-h2.Type--lh-tall Try following a few channels
-    h4.Type.Type--size-h4.Type--lh-tall
-      | Following channels is the best way to get the hang of Are.na.
-      br
-      | Click <b>Follow</b> on any channel below to add it to your feed.
+.ExamplesHeader
+  .ExamplesHeader__copy
+    h2.Type.Type--size-h2.Type--lh-tall: a(href="/examples") Try following a few channels
+.ExamplesCategories
+  .ExamplesCategories__inner
+    if categories
+      for category, index in categories
+        .Category(data-active= (example && category.id == example.id))
+          a(href="/examples/#{category.id}")
+            strong= category.title
