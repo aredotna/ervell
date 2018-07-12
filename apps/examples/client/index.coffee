@@ -9,7 +9,6 @@ module.exports = ->
   # 
   # Load more channels (single example category)
   # 
-
   $(document).on 'click', '.js-load-more', (e) ->
     e.preventDefault()    
     id = $(this).data('id')
@@ -18,10 +17,20 @@ module.exports = ->
       $(this).closest('.js-example').html singleExampleTemplate
         example: example
 
+      setupFollowButtons()
+
+  # 
+  # Handle example channel click
+  # 
+  $(document).on 'click', '.js-channel', (e) ->
+    e.preventDefault()
+    e.stopImmediatePropagation()
+    url = $(this).data('href')
+    window.open url
+
   # 
   # Follow buttons
   # 
-
   setupFollowButtons = ->
     $('.js-channel-group').each ->
       props = { id: $(this).data('id'), type: 'CHANNEL' }
@@ -44,7 +53,7 @@ module.exports = ->
       html = examplesTemplate examples: examples
       $('.Examples-list').append html
 
-      setupFollowButtons()
+      defer => setupFollowButtons()
 
       if currentPage >= totalPages
         $('.js-load-more-examples').hide()
