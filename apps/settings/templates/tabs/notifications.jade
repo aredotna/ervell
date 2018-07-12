@@ -51,5 +51,20 @@ block content
                   selected= !user.get('receive_newsletter') ? 'selected' : null
                 ) No
 
+          .Fieldset
+            label.Label
+              | Receive our periodic tips emails?
+
+            .Select.Select--fill
+              select(name='receive_tips_emails')
+                option(
+                  value='true'
+                  selected= user.get('receive_tips_emails') ? 'selected' : null
+                ) Yes
+                option(
+                  value='false'
+                  selected= !user.get('receive_tips_emails') ? 'selected' : null
+                ) No
+
           button.Button.Button--divider
             | Save
