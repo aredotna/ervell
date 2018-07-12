@@ -45,6 +45,8 @@ module.exports = ($el) ->
 
     serializer = new Serializer $form
 
+    $errors.empty()
+
     $submit
       .prop 'disabled', true
       .text 'Sending...'
