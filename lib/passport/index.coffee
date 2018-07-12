@@ -23,6 +23,7 @@ CONFIG =
     'avatar_image'
     'registered'
     'receive_email'
+    'receive_tips_emails'
     'receive_newsletter'
     'post_address'
     'show_tour'
