@@ -19,7 +19,7 @@ block content
 
           .Fieldset
             label.Label
-              | Email notification type
+              | Notification email type:
 
             .Select.Select--fill
               select(name='receive_email')
@@ -38,7 +38,7 @@ block content
 
           .Fieldset
             label.Label
-              | Subscribe to newsletter?
+              | Subscribe to our newsletter with monthly updates on new features and Are.na news:
 
             .Select.Select--fill
               select(name='receive_newsletter')
@@ -49,6 +49,21 @@ block content
                 option(
                   value='false'
                   selected= !user.get('receive_newsletter') ? 'selected' : null
+                ) No
+
+          .Fieldset
+            label.Label
+              | Receive our periodic emails with tips on how to use Are.na:
+
+            .Select.Select--fill
+              select(name='receive_tips_emails')
+                option(
+                  value='true'
+                  selected= user.get('receive_tips_emails') ? 'selected' : null
+                ) Yes
+                option(
+                  value='false'
+                  selected= !user.get('receive_tips_emails') ? 'selected' : null
                 ) No
 
           button.Button.Button--divider
