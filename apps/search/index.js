@@ -16,10 +16,6 @@ const renderSearch = (req, res, next) => {
   const blocks = new SearchBlocks();
   const search = res.locals.sd.SEARCH;
 
-  if (req.params.block_id) {
-    res.locals.sd.CLIENT_PATH = 'block/' + req.params.block_id;
-  }
-
   if (req.query.subject) {
     extend(blocks.options, { subject: req.query.subject });
     res.locals.sd.SUBJECT = req.query.subject;
@@ -71,6 +67,5 @@ app.get('/search/:query', ...middlewareStack, renderSearch);
 app.get('/search/:query/channels', ...middlewareStack, renderSearchChannels);
 app.get('/search/:query/blocks', ...middlewareStack, renderSearchBlocks);
 app.get('/search/:query/users', ...middlewareStack, renderSearchUsers);
-app.get('/search/:query/block/:block_id', ...middlewareStack, renderSearch);
 
 module.exports = app;
