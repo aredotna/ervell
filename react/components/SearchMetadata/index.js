@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import WithStaticRouter from 'react/hocs/WithStaticRouter';
 import Grid from 'react/components/UI/Grid';
-import HeaderMetadataContainer from 'react/components/UI/HeaderMetadataContainer';
+import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 
-import SearchMetadataModeView from 'react/components/SearchMetadata/components/SearchMetadataModeView';
+import SearchMetadataBreadcrumb from './components/SearchMetadataBreadcrumb';
+import SearchMetadataModeView from './components/SearchMetadataModeView';
 
 const SearchMetadata = props => {
   const { search } = props;
 
   return (
-    <HeaderMetadataContainer>
+    <HeaderMetadataContainer breadcrumb={<SearchMetadataBreadcrumb search={search}/>}>
       <Route
         path="/search"
         render={() => (

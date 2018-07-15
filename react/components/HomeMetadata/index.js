@@ -7,7 +7,7 @@ import { MODES, SORTS } from 'react/components/Home/config';
 import WithStaticRouter from 'react/hocs/WithStaticRouter';
 
 import Grid from 'react/components/UI/Grid';
-import HeaderMetadataContainer from 'react/components/UI/HeaderMetadataContainer';
+import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 import HomeBreadcrumb from 'react/components/HomeMetadata/components/HomeBreadcrumb';
 import HomeMetadataView from 'react/components/HomeMetadata/components/HomeMetadataView';
 import HomeMetadataSort from 'react/components/HomeMetadata/components/HomeMetadataSort';

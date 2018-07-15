@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Pocket from 'react/components/UI/Pocket';
-import HomeMetadataLinkUnlessCurrent from 'react/components/HomeMetadata/components/HomeMetadataLinkUnlessCurrent';
+import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
 
 const SearchMetadataModeView = props => {
   const { search } = props;
@@ -11,33 +11,33 @@ const SearchMetadataModeView = props => {
 
   return (
     <Pocket title="View">
-      <HomeMetadataLinkUnlessCurrent
+      <HeaderMetadataLinkUnlessCurrent
         href={`/search/${search}`}
         predicate={isCurrent}
       >
         All
-      </HomeMetadataLinkUnlessCurrent>
+      </HeaderMetadataLinkUnlessCurrent>
 
-      <HomeMetadataLinkUnlessCurrent
+      <HeaderMetadataLinkUnlessCurrent
         href={`/search/${search}/channels`}
         predicate={isCurrent}
       >
         Channels
-      </HomeMetadataLinkUnlessCurrent>
+      </HeaderMetadataLinkUnlessCurrent>
 
-      <HomeMetadataLinkUnlessCurrent
+      <HeaderMetadataLinkUnlessCurrent
         href={`/search/${search}/blocks`}
         predicate={isCurrent}
       >
         Blocks
-      </HomeMetadataLinkUnlessCurrent>
+      </HeaderMetadataLinkUnlessCurrent>
 
-      <HomeMetadataLinkUnlessCurrent
+      <HeaderMetadataLinkUnlessCurrent
         href={`/search/${search}/users`}
         predicate={isCurrent}
       >
         Users
-      </HomeMetadataLinkUnlessCurrent>
+      </HeaderMetadataLinkUnlessCurrent>
     </Pocket>
   );
 };

@@ -7,7 +7,7 @@ import { SORTS, MODES, SORTABLE_MODES } from 'react/components/Profile/config';
 import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/profileMetadata';
 
 import Grid from 'react/components/UI/Grid';
-import HeaderMetadataContainer from 'react/components/UI/HeaderMetadataContainer';
+import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 import ProfileBreadcrumb from 'react/components/ProfileMetadata/components/ProfileBreadcrumb';
 import ProfileMetadataActions from 'react/components/ProfileMetadata/components/ProfileMetadataActions';
 import ProfileMetadataInfo from 'react/components/ProfileMetadata/components/ProfileMetadataInfo';
