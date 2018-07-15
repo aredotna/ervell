@@ -1,5 +1,4 @@
 import SearchComponent from 'react/components/Search';
-import HomeComponent from 'react/components/Home';
 
 export default (req, res, next) => {
   const { SEARCH } = res.locals.sd;

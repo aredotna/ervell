@@ -27,7 +27,7 @@ const renderSearch = (req, res, next) => {
 
   res.locals.sd.CURRENT_ACTION = 'search';
 
-  blocks.fetch({
+  return blocks.fetch({
     data: {
       q: search,
       auth_token: req.user && req.user.get('authentication_token')
@@ -40,8 +40,6 @@ const renderSearch = (req, res, next) => {
       next(err);
     }
   });
-
-  res.render('index');
 };
 
 const renderSearchChannels = (req, res, next) => {
