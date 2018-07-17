@@ -5,7 +5,7 @@ import channelMetadataFragment from 'react/components/ChannelMetadata/fragments/
 
 import Grid from 'react/components/UI/Grid';
 import Pocket from 'react/components/UI/Pocket';
-import HeaderMetadataContainer from 'react/components/UI/HeaderMetadataContainer';
+import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 import ChannelBreadcrumb from 'react/components/ChannelMetadata/components/ChannelBreadcrumb';
 import ChannelMetadataCollaborators from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators';
 import ChannelMetadataInfo from 'react/components/ChannelMetadata/components/ChannelMetadataInfo';
