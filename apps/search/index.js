@@ -1,11 +1,10 @@
 import express from 'express';
 import SearchBlocks from '../../collections/search_blocks';
-import { data as sd } from 'sharify';
 import { extend } from 'underscore';
 import apolloMiddleware from 'react/apollo/middleware';
-import setModeMiddleware from './middleware/setMode';
-import setSearchMiddleware from './middleware/setSearch';
-import setHeaderMiddleware from './middleware/setHeader';
+import setModeMiddleware from 'apps/search/middleware/setMode';
+import setSearchMiddleware from 'apps/search/middleware/setSearch';
+import setHeaderMiddleware from 'apps/search/middleware/setHeader';
 
 const app = express();
 

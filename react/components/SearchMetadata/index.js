@@ -5,8 +5,8 @@ import WithStaticRouter from 'react/hocs/WithStaticRouter';
 import Grid from 'react/components/UI/Grid';
 import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 
-import SearchMetadataBreadcrumb from './components/SearchMetadataBreadcrumb';
-import SearchMetadataModeView from './components/SearchMetadataModeView';
+import SearchMetadataBreadcrumb from 'react/components/SearchMetadata/components/SearchMetadataBreadcrumb';
+import SearchMetadataModeView from 'react/components/SearchMetadata/components/SearchMetadataModeView';
 
 const SearchMetadata = props => {
   const { search } = props;
