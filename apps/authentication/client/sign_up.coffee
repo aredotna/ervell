@@ -1,3 +1,4 @@
+{ REDIRECT_TO } = require('sharify').data
 Promise = require 'bluebird-q'
 Serializer = require '../../../components/form/serializer.coffee'
 LoggedOutUser = require '../../../models/logged_out_user.coffee'
@@ -39,7 +40,7 @@ module.exports = ->
         Promise user.login()
 
       .then ->
-        location.href = '/welcome'
+        location.href = REDIRECT_TO
 
       .catch (err) ->
         $errors.show().text """
