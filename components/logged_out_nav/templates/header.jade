@@ -18,7 +18,7 @@ header.LoggedOutHeader.js-logged-out-header
       a( href='/blog' data-id="blog" ) Blog
       
       if user
-        a.js-log-out( href='/me/sign_out' ) Log out
+        a.js-log-out( href='/me/sign_out' data-id="log-out") Log out
       else
-        a( href='/sign_up' ) Sign up
-        a( href='/log_in' ) Log in
+        a( href='/sign_up' data-id="sign-up") Sign up
+        a( href='/log_in' data-id="log-in") Log in

@@ -74,5 +74,5 @@ html:not([data-path='/'])
         display none
 
       &__menu
-        > a:not(:nth-last-child(-n+2))
+        > a:not([data-id="log-in"]):not([data-id="log-out"]):not([data-id="sign-up"])
           display none
