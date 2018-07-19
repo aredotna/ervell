@@ -28,7 +28,9 @@ class FollowButton extends Component {
       id, type, data: { followable }, isLoggedIn,
     } = this.props;
 
-    if (!isLoggedIn) { window.location = '/sign_up'; }
+    if (!isLoggedIn) {
+      window.location = `/sign_up?redirect-to=${window.location.pathname}`;
+    }
 
     const action = followable.is_followed ? 'unfollow' : 'follow';
     const mutation = this.props[action];
