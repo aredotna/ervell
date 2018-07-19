@@ -15,9 +15,9 @@
 # module.exports = {}
 
 module.exports = 
-  button_color:
-    key: 'button_color'
-    outcomes:
-      default: 50
-      blue: 50
-    dimension: 'dimension7'
+  explore_link:
+    key: 'explore_link'
+    outcomes: 
+      explore: 50
+      examples: 50
+    dimension: 'dimension8'
