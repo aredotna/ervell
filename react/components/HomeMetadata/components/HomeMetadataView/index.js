@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { SORTS } from 'react/components/Profile/config';
 
 import Pocket from 'react/components/UI/Pocket';
-import HomeMetadataLinkUnlessCurrent from 'react/components/HomeMetadata/components/HomeMetadataLinkUnlessCurrent';
+import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
 
 export default class HomeMetadataView extends Component {
   static propTypes = {
@@ -19,26 +19,26 @@ export default class HomeMetadataView extends Component {
 
     return (
       <Pocket title="View">
-        <HomeMetadataLinkUnlessCurrent
+        <HeaderMetadataLinkUnlessCurrent
           href={`/explore?sort=${sort}`}
           predicate={this.isCurrent}
         >
           All
-        </HomeMetadataLinkUnlessCurrent>
+        </HeaderMetadataLinkUnlessCurrent>
 
-        <HomeMetadataLinkUnlessCurrent
+        <HeaderMetadataLinkUnlessCurrent
           href={`/explore/channels?sort=${sort}`}
           predicate={this.isCurrent}
         >
           Channels
-        </HomeMetadataLinkUnlessCurrent>
+        </HeaderMetadataLinkUnlessCurrent>
 
-        <HomeMetadataLinkUnlessCurrent
+        <HeaderMetadataLinkUnlessCurrent
           href={`/explore/blocks?sort=${sort}`}
           predicate={this.isCurrent}
         >
           Blocks
-        </HomeMetadataLinkUnlessCurrent>
+        </HeaderMetadataLinkUnlessCurrent>
       </Pocket>
     );
   }

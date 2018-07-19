@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import { graphql, compose } from 'react-apollo';
 
+import WithLoginStatus from 'react/hocs/WithLoginStatus';
+
 import followingQuery from 'react/components/FollowButton/queries/following';
 import followableFragment from 'react/components/FollowButton/fragments/followable';
 import followMutation from 'react/components/FollowButton/mutations/follow';
@@ -18,12 +20,17 @@ class FollowButton extends Component {
     }).isRequired,
     follow: PropTypes.func.isRequired,
     unfollow: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   toggleFollow = async () => {
     const {
-      id, type, data: { followable },
+      id, type, data: { followable }, isLoggedIn,
     } = this.props;
+
+    if (!isLoggedIn) {
+      window.location = `/sign_up?redirect-to=${window.location.pathname}`;
+    }
 
     const action = followable.is_followed ? 'unfollow' : 'follow';
     const mutation = this.props[action];
@@ -66,8 +73,8 @@ class FollowButton extends Component {
   }
 }
 
-export default compose(
+export default WithLoginStatus(compose(
   graphql(followingQuery),
   graphql(followMutation, { name: 'follow' }),
   graphql(unfollowMutation, { name: 'unfollow' }),
-)(FollowButton);
+)(FollowButton));

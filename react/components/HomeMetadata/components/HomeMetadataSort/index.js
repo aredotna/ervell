@@ -6,7 +6,7 @@ import { SORTS } from 'react/components/Home/config';
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
 import Pocket from 'react/components/UI/Pocket';
-import HomeMetadataLinkUnlessCurrent from 'react/components/HomeMetadata/components/HomeMetadataLinkUnlessCurrent';
+import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
 
 class HomeMetadataSort extends Component {
   static propTypes = {
@@ -27,19 +27,19 @@ class HomeMetadataSort extends Component {
 
     return (
       <Pocket title="Sort">
-        <HomeMetadataLinkUnlessCurrent
+        <HeaderMetadataLinkUnlessCurrent
           href={`${pathname}?sort=updated_at`}
           predicate={this.isCurrentUpdatedAt}
         >
           Recently updated
-        </HomeMetadataLinkUnlessCurrent>
+        </HeaderMetadataLinkUnlessCurrent>
 
-        <HomeMetadataLinkUnlessCurrent
+        <HeaderMetadataLinkUnlessCurrent
           href={`${pathname}?sort=random`}
           predicate={this.isCurrentRandom}
         >
           Random
-        </HomeMetadataLinkUnlessCurrent>
+        </HeaderMetadataLinkUnlessCurrent>
       </Pocket>
     );
   }

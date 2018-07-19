@@ -1,12 +1,18 @@
 extends ../../../components/layout/index
 
+block meta
+  != searchComponent.styles
+
 block body
-  include ./path
+  .Constrain.js-search-component
+    != searchComponent.html
+
   if blocks
     .search-contents
       - title = "results for '" + search + "'"
       include ../../../components/blocks/container/templates/index
 
 block scripts
-  script( src=asset('/assets/search.js') )
-
+  script( src= asset('/assets/search.js') )
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(searchComponent.state).replace(/</g, '\\u003c')};
