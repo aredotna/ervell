@@ -12,7 +12,8 @@ export const inputPadding = `${inputVerticalPadding} ${inputHorizontalPadding}`;
 export const inputBorderRadius = '0.125em';
 
 const focusMixin = css`
-  background-color: ${x => x.theme.colors.gray.light};
+  border: 2px solid ${x => x.theme.colors.gray.bold};
+  background-color: ${x => x.theme.colors.gray.hint};
   color: ${x => x.theme.colors.gray.bold};
 `;
 
@@ -25,7 +26,8 @@ export const mixin = css`
   padding: ${inputPadding};
   border-radius: ${inputBorderRadius};
   color: ${x => x.theme.colors.gray.semiBold};
-  background-color: ${x => x.theme.colors.gray.hint};
+  background-color: white;
+  border: 2px solid ${x => x.theme.colors.gray.medium};
   font-family: ${x => x.theme.fonts.sans};
   ${preset(fontSize, { f: 5 })}
   ${antialiased}
