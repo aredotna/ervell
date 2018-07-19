@@ -5,6 +5,8 @@ cache = require '../../lib/cache'
 
 @sign_up = (req, res) ->
   return res.redirect '/' if req.user?
+
+  res.locals.sd.REDIRECT_TO = req.query['redirect-to'] or '/welcome'
   res.render 'sign_up'
 
 @log_in = (req, res) ->
