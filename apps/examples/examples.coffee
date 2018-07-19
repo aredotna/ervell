@@ -7,8 +7,8 @@ module.exports = [
     channel_ids: [37968, 28613, 7469, 158542, 46371]
   },
   {
-    id: 'collections'
-    title: 'Collections'
+    id: 'collectibles'
+    title: 'Collectibles'
     description: 'Specific finds from internet treasure hunts'
     # channel_ids: ["fruit-crate-labels", "outdoor-gear-logos", "punk-hardcore-flyers", "star-trek-insignias"]
     channel_ids: [129438, 68168, 65103, 5079]
@@ -38,8 +38,8 @@ module.exports = [
     id: 'architecture'
     title: 'Architecture'
     description: 'Images of buildings, drawings, exhibitions, and ideas'
-    # channel_ids: ["brickwork", "exhibiting-architecture-exhibition-models", "models-1477666515", "feminism-in-architecture"]
-    channel_ids: [37872, 69097, 57174, 76869]
+    # channel_ids: [ "exhibiting-architecture-exhibition-models", "models-1477666515", "feminism-in-architecture"]
+    channel_ids: [69097, 57174, 76869]
   },
   {
     id: 'sports'
@@ -54,12 +54,10 @@ module.exports = [
     description: 'Intersections in design, art, politics, publishing, and more'
     # channel_ids: [
     #   "feminism-and-design",
-    #   "queer-feminist-publishing",
     #   "the-women-of",
-    #   "radical-femininity",
-    #   "females-feminism"
+    #   "cyberfeminism",
     # ]
-    channel_ids: [129609, 34790, 62810, 27502, 30712]
+    channel_ids: [34790, 30712, 23457]
   },
   {
     id: 'learning'
@@ -72,8 +70,11 @@ module.exports = [
     id: 'library'
     title: 'Libraries'
     description: 'Archives of important texts, compiled by thoughtful members'
-    # ["artist-run-reading-spaces", "podcast-recomendations", "commonplace"]
-    channel_ids: [54676, 175024, 49024, 68396]
+    # ['aaaaarg-library',
+    # 'artist-run-reading-spaces',
+    # 'podcast-recomendations',
+    # 'commonplace']
+    channel_ids: [177131, 68396, 24134, 115542]
   },
   {
     id: 'technology'
