@@ -9,10 +9,9 @@ import { antialiased } from 'react/styles/mixins';
 export const inputVerticalPadding = '0.75em';
 export const inputHorizontalPadding = '1em';
 export const inputPadding = `${inputVerticalPadding} ${inputHorizontalPadding}`;
-export const inputBorderRadius = '0.125em';
 
 const focusMixin = css`
-  border: 2px solid ${x => x.theme.colors.gray.bold};
+  border: 1px solid ${x => x.theme.colors.gray.bold};
   background-color: ${x => x.theme.colors.gray.hint};
   color: ${x => x.theme.colors.gray.bold};
 `;
@@ -24,10 +23,9 @@ export const mixin = css`
   width: 100%;
   appearance: none;
   padding: ${inputPadding};
-  border-radius: ${inputBorderRadius};
   color: ${x => x.theme.colors.gray.semiBold};
   background-color: white;
-  border: 2px solid ${x => x.theme.colors.gray.medium};
+  border: 1px solid ${x => x.theme.colors.gray.medium};
   font-family: ${x => x.theme.fonts.sans};
   ${preset(fontSize, { f: 5 })}
   ${antialiased}
