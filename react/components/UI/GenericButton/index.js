@@ -4,7 +4,7 @@ import { themeGet, fontSize } from 'styled-system';
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
-export const buttonBorderWidth = '1px';
+export const buttonBorderWidth = '2px';
 export const buttonVerticalPadding = '0.75em';
 export const buttonHorizontalPadding = '1.25em';
 export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding}`;
