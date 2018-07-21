@@ -9,7 +9,7 @@ import GenericButton from 'react/components/UI/GenericButton';
 import { preset } from 'react/styles/functions';
 import Text from 'react/components/UI/Text';
 
-const Container = styled.div`
+const Container = styled.form`
   max-width: 25em;
   margin: 0 auto;
 `;
@@ -18,8 +18,8 @@ const AuthInput = styled(Input)`
   margin: 1.5em 0;
 `;
 
-const Button = styled(GenericButton).attrs({ f: 2 })`
-  margin: 2em auto 0;
+const Button = styled(GenericButton).attrs({ f: 2, type: 'submit' })`
+  margin: 0 auto;
   padding-left: 2em;
   padding-right: 2em;
   color: ${x => x.theme.colors.gray.base};
@@ -74,20 +74,33 @@ const Headline = styled(Text).attrs({ f: 6 })`
   font-weight: bold;
 `;
 
+const Message = styled.div`
+  display: flex;
+  padding-bottom: 2em;
+  align-items: center;
+  justify-content: center;
+  font-family: ${x => x.theme.fonts.sans};
+  ${preset(fontSize, { f: 1 })}
+  color: ${x => (x.isError ? x.theme.colors.state.alert : 'inherit')};
+`;
+
 
 class AuthFormContainer extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    onDone: PropTypes.func.isRequired,
   }
 
   static Input = AuthInput;
   static Button = ButtonArea;
   static ButtonCTA = ButtonCTA;
   static Headline = Headline;
+  static Message = Message;
 
   render() {
+    const { onDone } = this.props;
     return (
-      <Container>
+      <Container onSubmit={onDone}>
         <Mark>
           <ArenaMark />
         </Mark>
