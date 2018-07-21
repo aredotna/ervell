@@ -69,7 +69,7 @@ export const GenericButtonLink = styled.a`
   ${mixin}
 `;
 
-const GenericButton = styled.a`
+const GenericButton = styled.button`
   ${mixin}
 `;
 
