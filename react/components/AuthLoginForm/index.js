@@ -12,11 +12,11 @@ class AuthLoginForm extends Component {
 
   render() {
     return (
-      <AuthFormContainer >
+      <AuthFormContainer onDone={this.handleSubmit}>
         <AuthFormContainer.Input placeholder="Email" tabIndex={0} />
         <AuthFormContainer.Input placeholder="Password" type="password" />
         <AuthFormContainer.Button>Log in</AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA>Not a member? <a href="/join">Join</a></AuthFormContainer.ButtonCTA>
+        <AuthFormContainer.ButtonCTA>Not a member? <a href="/sign_up">Join</a></AuthFormContainer.ButtonCTA>
       </AuthFormContainer>
     );
   }

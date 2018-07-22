@@ -7,7 +7,7 @@ class AuthJoinForm extends Component {
 
   render() {
     return (
-      <AuthFormContainer>
+      <AuthFormContainer onDone={() => {}}>
         <AuthFormContainer.Headline>
           Are.na is a platform for thinking together.
         </AuthFormContainer.Headline>
