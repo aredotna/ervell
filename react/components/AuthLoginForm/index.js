@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { fontSize } from 'styled-system';
+import { Link } from 'react-router-dom';
 
 import { preset } from 'react/styles/functions';
 
@@ -35,10 +36,10 @@ class AuthLoginForm extends Component {
         <AuthFormContainer.Input placeholder="Email" tabIndex={0} />
         <PasswordInputContainer>
           <AuthFormContainer.Input placeholder="Password" type="password" />
-          <a href="/forgot">Forgot?</a>
+          <Link to="/forgot">Forgot?</Link>
         </PasswordInputContainer>
         <AuthFormContainer.Button>Log in</AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA>Not a member? <a href="/sign_up">Join</a></AuthFormContainer.ButtonCTA>
+        <AuthFormContainer.ButtonCTA>Not a member? <Link to="/sign_up">Join</Link></AuthFormContainer.ButtonCTA>
       </AuthFormContainer>
     );
   }

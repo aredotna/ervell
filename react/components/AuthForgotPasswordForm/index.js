@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { isEmail } from 'validator';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import AuthFormContainer from 'react/components/AuthFormContainer';
 import requestPasswordReset from 'react/components/AuthForgotPasswordForm/queries/index';
@@ -69,7 +70,7 @@ class AuthForgotPasswordForm extends Component {
         >
           Reset password
         </AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA><a href="/log_in">Back</a></AuthFormContainer.ButtonCTA>
+        <AuthFormContainer.ButtonCTA><Link to="/log_in">Back</Link></AuthFormContainer.ButtonCTA>
       </AuthFormContainer>
     );
   }
