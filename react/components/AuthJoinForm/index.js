@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import AuthFormContainer from 'react/components/AuthFormContainer';
 
@@ -17,7 +18,7 @@ class AuthJoinForm extends Component {
         <AuthFormContainer.Input placeholder="Password" type="password" />
         <AuthFormContainer.Input placeholder="Confirm password" type="password" />
         <AuthFormContainer.Button>Join</AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA>Already a member? <a href="/log_in">Log in</a></AuthFormContainer.ButtonCTA>
+        <AuthFormContainer.ButtonCTA>Already a member? <Link to="/log_in">Log in</Link></AuthFormContainer.ButtonCTA>
       </AuthFormContainer>
     );
   }
