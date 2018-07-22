@@ -1,3 +1,3 @@
-import initialize from 'apps/authentication/client';
+import { mount } from 'apps/authentication/client';
 
-$(initialize);
+$(mount);

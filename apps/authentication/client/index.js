@@ -3,12 +3,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { mountWithApolloProvider } from 'react/apollo';
 
-import WithStaticRouter from 'react/hocs/WithStaticRouter';
+import withStaticRouter from 'react/hocs/WithStaticRouter';
+import withBrowserRouter from 'react/hocs/WithBrowserRouter';
 
 import AuthLoginPage from 'react/pages/authentication/AuthLoginPage';
-import AuthJoinForm from 'react/components/AuthJoinForm';
+import AuthJoinPage from 'react/pages/authentication/AuthJoinPage';
+import AuthForgotPasswordPage from 'react/pages/authentication/AuthForgotPasswordPage';
 
-const Routes = WithStaticRouter(() => (
+const Routes = () => (
   <Switch>
     <Route
       path="/log_in"
@@ -16,17 +18,24 @@ const Routes = WithStaticRouter(() => (
     />
     <Route
       path="/sign_up"
-      render={() => <AuthJoinForm />}
+      render={() => <AuthJoinPage />}
+    />
+    <Route
+      path="/forgot"
+      render={() => <AuthForgotPasswordPage />}
     />
   </Switch>
-));
+);
+
+const StaticRoutes = withStaticRouter(Routes);
+const ClientRoutes = withBrowserRouter(Routes);
 
 const { data: { APOLLO } } = sharify;
 
 const mount = () => {
   const mountPoint = document.getElementById('apolloMount');
 
-  mountWithApolloProvider(Routes, APOLLO, mountPoint);
+  mountWithApolloProvider(ClientRoutes, APOLLO, mountPoint);
 };
 
-module.exports = { Routes, mount };
+module.exports = { StaticRoutes, mount };
