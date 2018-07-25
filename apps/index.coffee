@@ -10,6 +10,7 @@ app
   .use require '../apps/home'
   .use require '../apps/blog'
   .use require '../apps/authentication'
+  .use require '../apps/confirmation'
   .use require '../apps/getting_started'
   .use require '../apps/tools'
   .use require '../apps/util'
