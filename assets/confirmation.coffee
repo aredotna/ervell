@@ -1,1 +1,1 @@
-$ require('../apps/authentication/client/index.coffee')
+$ require('../apps/confirmation/client/index.coffee')
