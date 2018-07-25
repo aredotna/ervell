@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fontSize } from 'styled-system';
 
 import ArenaMark from 'react/components/UI/ArenaMark/index.svg';
-import { Input } from 'react/components/UI/GenericInput';
+import { InputWithError } from 'react/components/UI/GenericInput';
 import GenericButton from 'react/components/UI/GenericButton';
 import { preset } from 'react/styles/functions';
 import Text from 'react/components/UI/Text';
@@ -14,9 +14,9 @@ const Container = styled.form`
   margin: 0 auto;
 `;
 
-const AuthInput = styled(Input).attrs({
+const AuthInput = styled(InputWithError).attrs({
   px: 5,
-  my: 25,
+  my: 3,
 })``;
 
 const Button = styled(GenericButton).attrs({

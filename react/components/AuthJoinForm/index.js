@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Checkbox, Label } from 'react/components/UI/GenericInput';
 import AuthFormContainer from 'react/components/AuthFormContainer';
 import registrationMutation from 'react/components/AuthJoinForm/mutations/index';
+import formatErrorObject from 'react/util/formatErrorObject';
 
 const { REDIRECT_TO } = require('sharify').data;
 
@@ -24,7 +25,8 @@ class AuthJoinForm extends Component {
     password_confirmation: '',
     accept_terms: false,
     receive_newsletter: false,
-    error: '',
+    errors: {},
+    errorMessage: '',
     buttonCopy: 'Join',
   }
 
@@ -104,7 +106,7 @@ class AuthJoinForm extends Component {
         this.setState({
           mode: 'submit',
           buttonCopy: 'Join',
-          error: err.message.replace('GraphQL error:', ''),
+          errors: formatErrorObject(err),
         });
       });
   }
@@ -119,9 +121,12 @@ class AuthJoinForm extends Component {
       password_confirmation,
       accept_terms,
       receive_newsletter,
-      error,
+      errors,
+      errorMessage,
       buttonCopy,
     } = this.state;
+
+    console.log('errors rendering', errors);
 
     return (
       <AuthFormContainer onDone={this.handleSubmit}>
@@ -133,28 +138,33 @@ class AuthJoinForm extends Component {
           tabIndex={0}
           onChange={this.handleEmail}
           value={email}
+          error={errors.email}
         />
         <AuthFormContainer.Input
           placeholder="First name"
           onChange={this.handleFirstName}
           value={first_name}
+          error={errors.first_name}
         />
         <AuthFormContainer.Input
           placeholder="Last name"
           onChange={this.handleLastName}
           value={last_name}
+          error={errors.last_name}
         />
         <AuthFormContainer.Input
           placeholder="Password"
           type="password"
           onChange={this.handlePassword}
           value={password}
+          error={errors.password}
         />
         <AuthFormContainer.Input
           placeholder="Confirm password"
           type="password"
           onChange={this.handlePasswordConfirm}
           value={password_confirmation}
+          error={errors.password_confirmation}
         />
         <Label>
           <Checkbox
@@ -172,8 +182,8 @@ class AuthJoinForm extends Component {
           />
           Receive our monthly newsletter?
         </Label>
-        <AuthFormContainer.Message isError={error.length > 0}>
-          {error}
+        <AuthFormContainer.Message isError={errorMessage.length > 0}>
+          {errorMessage}
         </AuthFormContainer.Message>
         <AuthFormContainer.Button
           disabled={mode !== 'submit'}
