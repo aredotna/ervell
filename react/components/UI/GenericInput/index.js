@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { fontSize } from 'styled-system';
+import { fontSize, space } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
-
-export const inputVerticalPadding = '0.75em';
-export const inputHorizontalPadding = '1em';
-export const inputPadding = `${inputVerticalPadding} ${inputHorizontalPadding}`;
 
 const focusMixin = css`
   border: 1px solid ${x => x.theme.colors.gray.bold};
@@ -22,12 +18,12 @@ export const mixin = css`
   display: block;
   width: 100%;
   appearance: none;
-  padding: ${inputPadding};
   color: ${x => x.theme.colors.gray.semiBold};
   background-color: white;
   border: 1px solid ${x => x.theme.colors.gray.medium};
   font-family: ${x => x.theme.fonts.sans};
   ${preset(fontSize, { f: 5 })}
+  ${preset(space, { px: 5, py: 4 })}
   ${antialiased}
 
   ${x => x.focus && focusMixin}
@@ -47,6 +43,22 @@ export const Input = styled.input`
 
 export const Textarea = styled.textarea`
   ${mixin}
+`;
+
+export const Label = styled.label`
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  font-family: ${x => x.theme.fonts.sans};
+  color: ${x => x.theme.colors.gray.base};
+  ${preset(fontSize, { f: 2 })}
+  ${antialiased}
+  margin: 0.5em 0;
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+  }
 `;
 
 const SelectWrapper = styled.div`
@@ -84,5 +96,16 @@ export const Select = ({ children, ...rest }) => (
 Select.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+  box-sizing: border-box;
+  margin-right: 0.5em;
+  appearance: checkbox;
+
+  ${x => x.disabled && `
+    pointer-events: none;
+    opacity: 0.5;
+  `}
+`;
 
 export default Input;
