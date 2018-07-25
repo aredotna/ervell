@@ -1,13 +1,10 @@
 import styled, { css } from 'styled-components';
-import { themeGet, fontSize } from 'styled-system';
+import { themeGet, fontSize, space } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
 export const buttonBorderWidth = '2px';
-export const buttonVerticalPadding = '0.75em';
-export const buttonHorizontalPadding = '1.25em';
-export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding}`;
 export const buttonBorderRadius = '0.25em';
 
 const activeMixin = css`
@@ -27,7 +24,7 @@ const disabledMixin = css`
 
 const buttonColor = ({ color, theme }) => {
   if (color) {
-    const value = themeGet(`colors.${color}`, 'colors.gray.bold')({ theme });
+    const value = themeGet(`colors.${color}`, 'colors.gray.base')({ theme });
 
     return `
       color: ${value};
@@ -41,7 +38,6 @@ const buttonColor = ({ color, theme }) => {
 export const mixin = css`
   all: initial;
   display: inline-block;
-  padding: ${buttonPadding};
   border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.regular};
   border-radius: ${buttonBorderRadius};
   font-family: ${x => x.theme.fonts.sans};
@@ -51,6 +47,7 @@ export const mixin = css`
   cursor: pointer;
   text-align: center;
   ${preset(fontSize, { f: 5 })}
+  ${preset(space, { px: 5, py: 4 })}
   ${buttonColor}
   ${antialiased}
 

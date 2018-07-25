@@ -14,16 +14,14 @@ const Container = styled.form`
   margin: 0 auto;
 `;
 
-const AuthInput = styled(Input)`
-  margin: 1.5em 0;
-`;
+const AuthInput = styled(Input).attrs({
+  px: 5,
+  my: 25,
+})``;
 
-const Button = styled(GenericButton).attrs({ f: 2, type: 'submit' })`
-  margin: 0 auto;
-  padding-left: 2em;
-  padding-right: 2em;
-  color: ${x => x.theme.colors.gray.base};
-`;
+const Button = styled(GenericButton).attrs({
+  f: 3, type: 'submit', px: 7, mt: 20,
+})``;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -40,9 +38,8 @@ const ButtonCTA = styled.div`
   margin-top: 1em;
   text-align: center;
   font-family: ${x => x.theme.fonts.sans};
-  font-weight: bold;
   color: ${x => x.theme.colors.gray.base};
-  ${preset(fontSize, { f: 1 })}
+  font-size: ${x => x.theme.fontSizes[1]};
 
   a {
     text-decoration: underline;
@@ -68,17 +65,17 @@ const Mark = styled.div`
   }
 `;
 
-const Headline = styled(Text).attrs({ f: 6 })`
+const Headline = styled(Text).attrs({ f: 7 })`
   margin: 2em 0;
   text-align: center;
-  font-weight: bold;
 `;
 
 const Message = styled.div`
   display: flex;
-  padding-bottom: 2em;
   align-items: center;
   justify-content: center;
+  margin: 2em 0 1em;
+  font-weight: bold;
   font-family: ${x => x.theme.fonts.sans};
   ${preset(fontSize, { f: 1 })}
   color: ${x => (x.isError ? x.theme.colors.state.alert : 'inherit')};
