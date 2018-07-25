@@ -6,7 +6,7 @@ import theme from 'react/styles/theme';
 import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
-import GenericInput from 'react/components/UI/GenericInput';
+import GenericInput, { InputWithError } from 'react/components/UI/GenericInput';
 
 storiesOf('Input', module)
   .add('GenericInput', () => (
@@ -22,4 +22,7 @@ storiesOf('Input', module)
         </Specimen>
       ))}
     </div>
+  ))
+  .add('GenericInput - with Errors', () => (
+    <InputWithError placeholder="An input" error="This can't be blank" />
   ));

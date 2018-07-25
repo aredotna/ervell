@@ -39,7 +39,37 @@ export const mixin = css`
 
 export const Input = styled.input`
   ${mixin}
+
+  ${x => x.error && `
+    border: 1px solid ${x.theme.colors.state.alert};
+  `}
 `;
+
+const InputError = styled.div`
+  color: ${x => x.theme.colors.state.alert};
+  font-family: ${x => x.theme.fonts.sans};
+  font-weight: bold;
+  ${preset(fontSize, { f: 1 })}
+  ${preset(space, { py: 2 })}
+  ${antialiased}
+`;
+
+export const InputWithError = ({ error, ...rest }) => (
+  <div>
+    <Input {...rest} error={error} />
+    <InputError>
+      {error}
+    </InputError>
+  </div>
+);
+
+InputWithError.propTypes = {
+  error: PropTypes.string,
+};
+
+InputWithError.defaultProps = {
+  error: null,
+};
 
 export const Textarea = styled.textarea`
   ${mixin}
@@ -53,7 +83,7 @@ export const Label = styled.label`
   color: ${x => x.theme.colors.gray.base};
   ${preset(fontSize, { f: 2 })}
   ${antialiased}
-  margin: 0.5em 0;
+  ${preset(space, { py: 2 })}
 
   a {
     text-decoration: underline;
