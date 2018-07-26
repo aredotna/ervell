@@ -30,7 +30,7 @@ module.exports = ->
   setupAjaxHeaders()
   setupAnalytics()
   initNightMode()
-  showPremiumMessage()
+  showNewsletterMessage()
   showLimitMessage()
   initConfirmableMessage()
   initLoggedOutCTA()
@@ -160,28 +160,27 @@ setupAnalytics = ->
       'Visited logged out'
 
 # TODO: Extract
-showPremiumMessage = ->
+showNewsletterMessage = ->
   { current_user } = mediator.shared
 
   # Don't show this message if the current user is not logged in
   # or if they have a pending confirmation.
   # or if they are premium
-  # or if they have less than 10 private connections
+  # or if they are already signed up for the newsletter
   # or if we are already showing them a message for exceeding the limit
   
   shouldReturn = !current_user.id or
-    current_user.get('is_premium') or
     current_user.get('is_pending_confirmation') or
-    current_user.get('private_connections_count') < 10 or
+    current_user.get('receive_newsletter') or
     current_user.get('is_exceeding_private_connections_limit')
 
   return if shouldReturn
 
   model = new Backbone.Model
-    id: 'premium_upgrade'
-    title: 'Upgrade to Premium'
+    id: 'newsletter_signup'
+    title: 'Sign up for our newsletter'
     body: """
-      Organize all your projects in privacy. <a href='/pricing'>Read more about Are.na Premium.</a>.
+      Once a month we send email updates about the product, blog posts and events. To sign up for our newsletter update your settings <a href="/settings/notifications">here</a>.
     """
 
   messageView = new MessageView model: model
