@@ -153,6 +153,7 @@
     "rewire": "https://registry.npmjs.org/rewire/-/rewire-2.5.2.tgz",
     "should": "*",
     "sinon": "*",
+    "storybook-react-router": "^1.0.1",
     "webpack": "^3.11.0",
     "webpack-dev-middleware": "^2.0.4",
     "webpack-notifier": "^1.5.1"
