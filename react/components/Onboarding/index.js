@@ -1,9 +1,9 @@
-import React from "react";
-import TransitionGroup from "react-transition-group/TransitionGroup";
-import AnimatedPage from "react/components/Onboarding/components/AnimatedPage";
-import Welcome from "react/components/Onboarding/components/Welcome";
-import AboutChannels from "react/components/Onboarding/components/Channels/components/AboutChannels";
-import CreateChannel from "react/components/Onboarding/components/Channels/components/CreateChannel";
+import React from 'react';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import AnimatedPage from 'react/components/Onboarding/components/AnimatedPage';
+import Welcome from 'react/components/Onboarding/components/Welcome';
+import AboutChannels from 'react/components/Onboarding/components/Channels/components/AboutChannels';
+import CreateChannel from 'react/components/Onboarding/components/Channels/components/CreateChannel';
 
 class Onboarding extends React.Component {
   constructor(props) {

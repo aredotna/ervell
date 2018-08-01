@@ -12,7 +12,7 @@ const AboutChannels = props => {
         Channels are collections of content built around an idea.
       </Text>
       <Text f={9} my={4}>
-        Channels can be public of private. Let's keep this one private for now.
+        Channels can be public of private. Let’s keep this one private for now.
       </Text>
       <CTAButton onClick={goForward}>
         Got it
