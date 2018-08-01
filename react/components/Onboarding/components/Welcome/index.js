@@ -12,7 +12,7 @@ const Welcome = props => {
         Welcome to Are.na!
       </Text>
       <Text f={9} my={4}>
-        Let's make your first channel.
+        Let’s make your first channel.
       </Text>
       <CTAButton onClick={goForward}>
         Next

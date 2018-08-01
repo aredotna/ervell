@@ -1,6 +1,6 @@
-import React from "react";
-import { VelocityComponent } from "velocity-react";
-import styled from "styled-components";
+import React from 'react';
+import { VelocityComponent } from 'velocity-react';
+import styled from 'styled-components';
 
 const ANIMATION_PERIOD = 500;
 
