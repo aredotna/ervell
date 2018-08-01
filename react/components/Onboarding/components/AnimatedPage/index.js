@@ -1,5 +1,4 @@
 import React from 'react';
-import { VelocityComponent } from 'velocity-react';
 import styled from 'styled-components';
 
 const ANIMATION_PERIOD = 500;
@@ -10,11 +9,12 @@ const AnimatedPageWrapper = styled.div`
   display: flex;
   justify-content: center;
   left: 0;
-  opacity: 0; // Hack to prevent flash before styles/js load for SS rendering.
+  opacity: ${({ opacity }) => opacity};
   position: fixed;
   right: 0;
   text-align: center;
   top: 0;
+  transition: opacity ${({ duration }) => duration}ms ease-in-out;
   width: 100%;
 `;
 
@@ -55,16 +55,12 @@ class AnimatedPage extends React.Component {
 
   render() {
     return (
-      <VelocityComponent
-        animation={
-          { opacity: this.state.show ? 1 : 0 }
-        }
+      <AnimatedPageWrapper
+        opacity={this.state.show ? 1 : 0}
         duration={ANIMATION_PERIOD}
       >
-        <AnimatedPageWrapper style={{ opacity: 0 }}>
-          {this.props.children}
-        </AnimatedPageWrapper>
-      </VelocityComponent>
+        {this.props.children}
+      </AnimatedPageWrapper>
     );
   }
 };

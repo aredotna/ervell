@@ -123,7 +123,6 @@
     "underscore.deep": "^0.5.1",
     "underscore.string": "*",
     "validator": "*",
-    "velocity-react": "^1.4.1",
     "waypoints": "^4.0.1",
     "webpack-hot-middleware": "^2.21.0",
     "withinviewport": "^1.0.0",
