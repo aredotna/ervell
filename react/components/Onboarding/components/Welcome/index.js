@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Text from 'react/components/UI/Text';
+import CTAText from 'react/components/Onboarding/components/UI/CTAText';
 import CTAButton from 'react/components/Onboarding/components/UI/CTAButton';
 
 const Welcome = props => {
@@ -8,12 +8,12 @@ const Welcome = props => {
 
   return (
     <div>
-      <Text f={9} my={4}>
+      <CTAText>
         Welcome to Are.na!
-      </Text>
-      <Text f={9} my={4}>
+      </CTAText>
+      <CTAText>
         Let’s make your first channel.
-      </Text>
+      </CTAText>
       <CTAButton onClick={goForward}>
         Next
       </CTAButton>

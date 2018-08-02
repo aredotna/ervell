@@ -1,13 +1,17 @@
 import { space } from 'styled-system';
 import { preset } from 'react/styles/functions';
 import styled from 'styled-components';
-import GenericInput from 'react/components/UI/GenericInput';
+import { mixin } from 'react/components/UI/GenericInput';
+import AutosizeInput from 'react-input-autosize';
 
-const ChannelNameInput = styled(GenericInput).attrs({
-  f: 9
+const ChannelNameInput = styled(AutosizeInput).attrs({
+  f: 8
 })`
-  ${space}
-  ${preset(space, { mt: 5 })}
+  input {
+    ${mixin}
+    ${space}
+    ${preset(space, { mt: 5 })}
+  }
 `;
 
 export default ChannelNameInput;
