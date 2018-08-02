@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
+import CenteringBox from 'react/components/UI/CenteringBox';
 import AuthLoginForm from 'react/components/AuthLoginForm';
-import PageContainer from 'react/components/UI/PageContainer';
 
 export default class AuthLoginPage extends Component {
   render() {
     return (
-      <PageContainer>
+      <CenteringBox p={7}>
         <AuthLoginForm />
-      </PageContainer>
+      </CenteringBox>
     );
   }
 }

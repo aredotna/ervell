@@ -4,10 +4,15 @@ import { Link } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import axios from 'axios';
 
-import { Checkbox, Label } from 'react/components/UI/GenericInput';
-import AuthFormContainer from 'react/components/AuthFormContainer';
-import registrationMutation from 'react/components/AuthJoinForm/mutations/index';
-import formatErrorObject from 'react/util/formatErrorObject';
+import mapErrors from 'react/util/mapErrors';
+
+import Button from 'react/components/UI/GenericButton';
+import Box from 'react/components/UI/Box';
+import Text from 'react/components/UI/Text';
+import AuthForm from 'react/components/AuthForm';
+import { Checkbox, Label, Input, ErrorMessage } from 'react/components/UI/Inputs';
+
+import registerMutation from 'react/components/AuthJoinForm/mutations/register';
 
 const { REDIRECT_TO } = require('sharify').data;
 
@@ -17,7 +22,7 @@ class AuthJoinForm extends Component {
   }
 
   state = {
-    mode: 'empty',
+    mode: 'resting',
     email: '',
     first_name: '',
     last_name: '',
@@ -25,25 +30,22 @@ class AuthJoinForm extends Component {
     password_confirmation: '',
     accept_terms: false,
     receive_newsletter: false,
-    errors: {},
-    errorMessage: '',
-    buttonCopy: 'Join',
+    attributeErrors: {},
+    errorMessage: null,
   }
 
-  handleInput = fieldName => ({ target: { value: fieldValue } }) => {
-    this.setState({
+  handleInput = fieldName => ({ target: { value: fieldValue } }) =>
+    this.setState(prevState => ({
       [fieldName]: fieldValue,
-    });
-  }
+      mode: 'active',
+      attributeErrors: {
+        ...prevState.attributeErrors,
+        [fieldName]: null, // Clear specific error once typing begins
+      },
+    }));
 
-  handleCheckbox = fieldName => ({ target: { checked } }) => {
-    const mergedValues = { ...this.state, [fieldName]: checked };
-    const { accept_terms } = mergedValues;
-    this.setState({
-      mode: accept_terms ? 'submit' : 'resting',
-      [fieldName]: checked,
-    });
-  }
+  handleCheckbox = fieldName => ({ target: { checked } }) =>
+    this.setState({ [fieldName]: checked })
 
   handleEmail = this.handleInput('email')
   handleFirstName = this.handleInput('first_name')
@@ -56,12 +58,9 @@ class AuthJoinForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const {
-      register,
-    } = this.props;
+    const { register } = this.props;
 
     const {
-      mode,
       email,
       first_name,
       last_name,
@@ -71,12 +70,7 @@ class AuthJoinForm extends Component {
       receive_newsletter,
     } = this.state;
 
-    if (mode !== 'submit') return false;
-
-    this.setState({
-      mode: 'submitting',
-      buttonCopy: 'Registering...',
-    });
+    this.setState({ mode: 'registering' });
 
     return register({
       variables: {
@@ -89,24 +83,18 @@ class AuthJoinForm extends Component {
         receive_newsletter,
       },
     })
-      .then(() =>
-        this.setState({
-          mode: 'submitted',
-          buttonCopy: 'Logging in...',
-        }))
-      .then(() => axios.post('/me/sign_in', { email, password }).then(() =>
-        this.setState({
-          mode: 'submitted',
-          buttonCopy: 'Redirecting...',
-        })))
       .then(() => {
-        setTimeout(() => { window.location = REDIRECT_TO; }, 200);
+        this.setState({ mode: 'logging_in' });
+        return axios.post('/me/sign_in', { email, password });
+      })
+      .then(() => {
+        window.location = REDIRECT_TO;
+        this.setState({ mode: 'redirecting' });
       })
       .catch((err) => {
         this.setState({
-          mode: 'submit',
-          buttonCopy: 'Join',
-          errors: formatErrorObject(err),
+          mode: 'error',
+          ...mapErrors(err),
         });
       });
   }
@@ -121,79 +109,121 @@ class AuthJoinForm extends Component {
       password_confirmation,
       accept_terms,
       receive_newsletter,
-      errors,
+      attributeErrors,
       errorMessage,
-      buttonCopy,
     } = this.state;
 
-    console.log('errors rendering', errors);
-
     return (
-      <AuthFormContainer onDone={this.handleSubmit}>
-        <AuthFormContainer.Headline>
+      <AuthForm onSubmit={this.handleSubmit}>
+        <Text f={7} mb={6}>
           Are.na is a platform for thinking together.
-        </AuthFormContainer.Headline>
-        <AuthFormContainer.Input
+        </Text>
+
+        <Input
+          mb={6}
+          type="email"
           placeholder="Email"
           tabIndex={0}
           onChange={this.handleEmail}
           value={email}
-          error={errors.email}
+          errorMessage={attributeErrors.email}
+          required
         />
-        <AuthFormContainer.Input
+
+        <Input
+          mb={6}
           placeholder="First name"
           onChange={this.handleFirstName}
           value={first_name}
-          error={errors.first_name}
+          errorMessage={attributeErrors.first_name}
+          required
         />
-        <AuthFormContainer.Input
+
+        <Input
+          mb={6}
           placeholder="Last name"
           onChange={this.handleLastName}
           value={last_name}
-          error={errors.last_name}
+          errorMessage={attributeErrors.last_name}
+          required
         />
-        <AuthFormContainer.Input
+
+        <Input
+          mb={6}
           placeholder="Password"
           type="password"
           onChange={this.handlePassword}
           value={password}
-          error={errors.password}
+          errorMessage={attributeErrors.password}
+          required
         />
-        <AuthFormContainer.Input
+
+        <Input
+          mb={6}
           placeholder="Confirm password"
           type="password"
           onChange={this.handlePasswordConfirm}
           value={password_confirmation}
-          error={errors.password_confirmation}
+          errorMessage={attributeErrors.password_confirmation}
+          required
         />
-        <Label>
-          <Checkbox
-            type="checkbox"
-            checked={accept_terms}
-            onChange={this.handleAcceptTerms}
-          />
-          Accept Are.na <a href="/terms" target="_blank">Terms</a> and <a href="/privacy" target="_blank">Privacy</a> conditions
-        </Label>
-        <Label>
-          <Checkbox
-            type="checkbox"
-            checked={receive_newsletter}
-            onChange={this.handleNewsletter}
-          />
-          Receive our monthly newsletter?
-        </Label>
-        <AuthFormContainer.Message isError={errorMessage.length > 0}>
-          {errorMessage}
-        </AuthFormContainer.Message>
-        <AuthFormContainer.Button
-          disabled={mode !== 'submit'}
-        >
-          {buttonCopy}
-        </AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA>Already a member? <Link to="/log_in">Log in</Link></AuthFormContainer.ButtonCTA>
-      </AuthFormContainer>
+
+        <Box my={5}>
+          <Label>
+            <Checkbox
+              type="checkbox"
+              checked={accept_terms}
+              onChange={this.handleAcceptTerms}
+            />
+
+            Accept Are.na
+            {' '}
+            <a href="/terms" target="_blank">Terms</a>
+            {' and '}
+            <a href="/privacy" target="_blank">Privacy</a>
+            {' '}
+            conditions
+          </Label>
+
+          <Label>
+            <Checkbox
+              type="checkbox"
+              checked={receive_newsletter}
+              onChange={this.handleNewsletter}
+            />
+            Receive our monthly newsletter?
+          </Label>
+        </Box>
+
+        {mode === 'error' &&
+          <ErrorMessage my={5} align="center">
+            {errorMessage}
+          </ErrorMessage>
+        }
+
+        <AuthForm.Submit>
+          <Button disabled={!accept_terms}>
+            {{
+              resting: 'Join',
+              active: 'Join',
+              registering: 'Registering...',
+              logging_in: 'Logging in...',
+              redirecting: 'Redirecting...',
+              error: 'Error',
+            }[mode]}
+          </Button>
+
+          <AuthForm.Subtext>
+            Already a member?
+            {' '}
+            <Link to="/log_in">Log in</Link>
+          </AuthForm.Subtext>
+        </AuthForm.Submit>
+      </AuthForm>
     );
   }
 }
 
-export default graphql(registrationMutation, { name: 'register' })(AuthJoinForm);
+export default graphql(registerMutation, {
+  name: 'register',
+})(AuthJoinForm);

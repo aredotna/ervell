@@ -1,51 +1,44 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { fontSize } from 'styled-system';
 import { Link } from 'react-router-dom';
-import { isEmail } from 'validator';
-import { pick } from 'underscore';
 import axios from 'axios';
 
-import { preset } from 'react/styles/functions';
-import AuthFormContainer from 'react/components/AuthFormContainer';
+import AuthForm from 'react/components/AuthForm';
+import Button from 'react/components/UI/GenericButton';
+import { mixin as textMixin } from 'react/components/UI/Text';
+import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 
 const { REDIRECT_TO } = require('sharify').data;
 
-const PasswordInputContainer = styled.div`
+const InputWithLink = styled.div.attrs({
+  fontSize: 1,
+})`
   position: relative;
+  ${textMixin}
 
   a {
     position: absolute;
+    ${textMixin}
     top: 50%;
-    transform: translateY(-50%);
     right: 1em;
-    color: ${x => x.theme.colors.gray.base};
-    font-family: ${x => x.theme.fonts.sans};
-    text-decoration: none;
-    ${preset(fontSize, { f: 1 })}
+    transform: translateY(-50%);
   }
 `;
 
-class AuthLoginForm extends Component {
-  static propTypes = {}
-
+export default class AuthLoginForm extends Component {
   state = {
-    mode: 'empty',
+    mode: 'resting',
     email: '',
     password: '',
-    error: '',
-    buttonCopy: 'Log in',
+    errorMessage: null,
   }
 
-  handleInput = fieldName => ({ target: { value: fieldValue } }) => {
-    const mergedValues = Object.assign({}, this.state, { [fieldName]: fieldValue });
-    const canSubmit = isEmail(mergedValues.email) && mergedValues.password.length > 6;
-
+  handleInput = name => ({ target: { value } }) =>
     this.setState({
-      mode: canSubmit ? 'submit' : 'resting',
-      [fieldName]: fieldValue,
+      mode: 'active',
+      errorMessage: null,
+      [name]: value,
     });
-  }
 
   handleEmail = this.handleInput('email')
   handlePassword = this.handleInput('password')
@@ -53,62 +46,83 @@ class AuthLoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const authentication = pick(this.state, 'email', 'password');
-    const component = this;
+    const { email, password } = this.state;
 
-    this.setState({ buttonCopy: 'Logging in...', mode: 'submitting' });
+    this.setState({ mode: 'submitting' });
 
-    axios.post('/me/sign_in', authentication).then(() => {
-      component.setState({
-        mode: 'submitted',
-        buttonCopy: 'Redirecting...',
+    return axios
+      .post('/me/sign_in', { email, password })
+
+      .then(() => {
+        this.setState({ mode: 'redirecting' });
+        window.location = REDIRECT_TO;
+      })
+
+      .catch(({ response: { data: { description } } }) => {
+        this.setState({
+          mode: 'error',
+          errorMessage: description,
+        });
       });
-    }).then(() => {
-      setTimeout(() => { window.location = REDIRECT_TO; }, 200);
-    }).catch((err) => {
-      component.setState({
-        mode: 'resting',
-        error: err,
-      });
-    });
   }
 
   render() {
     const {
-      mode, email, password, error, buttonCopy,
+      mode, email, password, errorMessage,
     } = this.state;
 
     return (
-      <AuthFormContainer onDone={this.handleSubmit}>
-        <AuthFormContainer.Input
+      <AuthForm onSubmit={this.handleSubmit}>
+        <Input
+          mb={6}
           placeholder="Email"
+          type="email"
           tabIndex={0}
           onChange={this.handleEmail}
           value={email}
+          hasError={mode === 'error'}
+          required
         />
-        <PasswordInputContainer>
-          <AuthFormContainer.Input
+
+        <InputWithLink>
+          <Input
             placeholder="Password"
             type="password"
             onChange={this.handlePassword}
             value={password}
+            hasError={mode === 'error'}
+            required
           />
+
           <Link to="/forgot">Forgot?</Link>
-        </PasswordInputContainer>
-        <AuthFormContainer.Message isError={error.length > 0}>
-          {error}
-        </AuthFormContainer.Message>
-        <AuthFormContainer.Button
-          disabled={mode !== 'submit'}
-        >
-          {buttonCopy}
-        </AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA>
-          Not a member? <Link to="/sign_up">Join</Link>
-        </AuthFormContainer.ButtonCTA>
-      </AuthFormContainer>
+        </InputWithLink>
+
+        {mode === 'error' &&
+          <ErrorMessage my={5} align="center">
+            {errorMessage}
+          </ErrorMessage>
+        }
+
+        <AuthForm.Submit>
+          <Button type="submit">
+            {{
+              resting: 'Log in',
+              active: 'Log in',
+              submitting: 'Logging in...',
+              redirecting: 'Redirecting...',
+              error: 'Error',
+            }[mode]}
+          </Button>
+
+          <AuthForm.Subtext>
+            Not a member?
+            {' '}
+            <Link to="/sign_up">
+              Join
+            </Link>
+          </AuthForm.Subtext>
+        </AuthForm.Submit>
+      </AuthForm>
     );
   }
 }
-
-export default AuthLoginForm;

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { isEmail } from 'validator';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import AuthFormContainer from 'react/components/AuthFormContainer';
-import requestPasswordReset from 'react/components/AuthForgotPasswordForm/queries/index';
+import mapErrors from 'react/util/mapErrors';
+
+import Button from 'react/components/UI/GenericButton';
+import Text from 'react/components/UI/Text';
+import AuthForm from 'react/components/AuthForm';
+import { Input, ErrorMessage } from 'react/components/UI/Inputs';
+
+import requestPasswordResetMutation from 'react/components/AuthForgotPasswordForm/mutations/requestPasswordReset';
 
 class AuthForgotPasswordForm extends Component {
   static propTypes = {
@@ -13,67 +18,90 @@ class AuthForgotPasswordForm extends Component {
   }
 
   state = {
-    mode: 'empty',
+    mode: 'resting',
     email: '',
-    error: '',
-    message: '',
+    attributeErrors: {},
+    errorMessage: null,
   }
 
-  handleInput = ({ target: { value: fieldValue } }) => {
-    const canSubmit = fieldValue.length > 0 && isEmail(fieldValue);
+  handleInput = ({ target: { value: email } }) =>
     this.setState({
-      mode: canSubmit ? 'resting' : 'empty',
-      email: fieldValue,
+      mode: 'active',
+      email,
     });
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.mode !== 'resting') return false;
 
-    this.setState({
-      mode: 'submitting',
-    });
+    const { email } = this.state;
+
+    this.setState({ mode: 'resetting' });
 
     return this.props.requestPasswordReset({
-      variables: { email: this.state.email },
+      variables: { email },
     })
-      .then(() => {
-        this.setState({
-          mode: 'submitted',
-          message: 'Please check your email for a link to reset your password.',
-        });
-      })
+      .then(() =>
+        this.setState({ mode: 'success' }))
       .catch((err) => {
-        this.setState({ error: err });
+        this.setState({
+          mode: 'error',
+          ...mapErrors(err),
+        });
       });
   }
 
   render() {
     const {
-      email, mode, error, message,
+      email,
+      mode,
+      attributeErrors,
+      errorMessage,
     } = this.state;
 
     return (
-      <AuthFormContainer onDone={this.handleSubmit}>
-        <AuthFormContainer.Input
+      <AuthForm onSubmit={this.handleSubmit}>
+        <Input
+          type="email"
           placeholder="Email"
           tabIndex={0}
           value={email}
           onChange={this.handleInput}
+          errorMessage={attributeErrors.email}
+          required
         />
-        <AuthFormContainer.Message isError={error.length > 0}>
-          {error || message}
-        </AuthFormContainer.Message>
-        <AuthFormContainer.Button
-          disabled={mode !== 'resting'}
-        >
-          Reset password
-        </AuthFormContainer.Button>
-        <AuthFormContainer.ButtonCTA><Link to="/log_in">Back</Link></AuthFormContainer.ButtonCTA>
-      </AuthFormContainer>
+
+        {mode === 'error' &&
+          <ErrorMessage my={5} align="center">
+            {errorMessage}
+          </ErrorMessage>
+        }
+
+        {mode === 'success' &&
+          <Text f={1} my={5} align="center">
+            Please check your email for a link to reset your password.
+          </Text>
+        }
+
+        <AuthForm.Submit>
+          <Button type="submit" disabled={mode === 'success'}>
+            {{
+              resting: 'Reset password',
+              active: 'Reset password',
+              success: 'Sent',
+              resetting: 'Resetting...',
+              error: 'Error',
+            }[mode]}
+          </Button>
+
+          <AuthForm.Subtext>
+            <Link to="/log_in">Back</Link>
+          </AuthForm.Subtext>
+        </AuthForm.Submit>
+      </AuthForm>
     );
   }
 }
 
-export default graphql(requestPasswordReset, { name: 'requestPasswordReset' })(AuthForgotPasswordForm);
+export default graphql(requestPasswordResetMutation, {
+  name: 'requestPasswordReset',
+})(AuthForgotPasswordForm);
