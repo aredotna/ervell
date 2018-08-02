@@ -6,23 +6,27 @@ import theme from 'react/styles/theme';
 import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
-import GenericInput, { InputWithError } from 'react/components/UI/GenericInput';
+import { Input } from 'react/components/UI/Inputs';
 
 storiesOf('Input', module)
-  .add('GenericInput', () => (
-    <States states={[{}, { disabled: true }, { focus: true }]}>
-      <GenericInput placeholder="An input" />
+  .add('Input', () => (
+    <States states={[{}, { disabled: true }, { focus: true }, { value: 'With value', focus: true }]}>
+      <Input placeholder="An input" />
     </States>
   ))
-  .add('GenericInput - sizes', () => (
+  .add('Input - sizes', () => (
     <div>
       {theme.fontSizes.map((size, i) => (
         <Specimen>
-          <GenericInput f={i} placeholder={`An input @ ${size}: f={${i}}`} />
+          <Input f={i} placeholder={`An input @ ${size}: f={${i}}`} />
         </Specimen>
       ))}
     </div>
   ))
-  .add('GenericInput - with Errors', () => (
-    <InputWithError placeholder="An input" error="This can't be blank" />
+  .add('Input - with Errors', () => (
+    <Input
+      placeholder="An input"
+      defaultValue="Erroneous input"
+      errorMessage="This can't be blank"
+    />
   ));

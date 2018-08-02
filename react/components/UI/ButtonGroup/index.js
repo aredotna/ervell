@@ -1,9 +1,12 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { buttonBorderWidth, buttonBorderRadius } from 'react/components/UI/GenericButton';
+import provideChildrentWithProps from 'react/util/provideChildrenWithProps';
 
-const ButtonGroup = styled.div`
+import { buttonBorderWidth, BUTTON_BORDER_RADIUS } from 'react/components/UI/GenericButton';
+
+const ButtonGroupContainer = styled.div`
   ${x => x.stretch && `
     display: flex;
 
@@ -44,12 +47,19 @@ const ButtonGroup = styled.div`
     }
 
     &:first-child:last-child {
-      border-radius: ${buttonBorderRadius};
+      border-radius: ${BUTTON_BORDER_RADIUS};
     }
   }
 `;
 
+const ButtonGroup = ({ children, ...rest }) => (
+  <ButtonGroupContainer {...rest}>
+    {provideChildrentWithProps(children, rest)}
+  </ButtonGroupContainer>
+);
+
 ButtonGroup.propTypes = {
+  children: PropTypes.node.isRequired,
   stretch: PropTypes.bool,
 };
 

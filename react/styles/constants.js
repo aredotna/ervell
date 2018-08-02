@@ -30,11 +30,14 @@ export const SPACING_SCALE = [
   '0.25em',
   '0.33em',
   '0.66em',
-  '1em', // 5
+  '0.75em',
+  '1em', // 6
   '2em',
+  '3em',
   '4em',
   '8em',
   '16em',
+  '24em',
   '32em',
 ];
 
