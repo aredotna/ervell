@@ -7,7 +7,7 @@ const withBrowserRouter = (WrappedComponent) => {
       const { ...rest } = this.props;
 
       return (
-        <BrowserRouter >
+        <BrowserRouter>
           <WrappedComponent {...rest} />
         </BrowserRouter>
       );
