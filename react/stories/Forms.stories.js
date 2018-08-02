@@ -1,17 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import AuthLoginForm from 'react/components/AuthLoginForm';
-import AuthJoinForm from 'react/components/AuthJoinForm';
-import AuthForgotPasswordForm from 'react/components/AuthForgotPasswordForm';
+import LoginForm from 'react/components/LoginForm';
+import RegistrationForm from 'react/components/RegistrationForm';
+import ResetPasswordForm from 'react/components/ResetPasswordForm';
 
 storiesOf('Forms', module)
   .add('Login form', () => (
-    <AuthLoginForm />
+    <LoginForm />
   ))
   .add('Signup form', () => (
-    <AuthJoinForm />
+    <RegistrationForm />
   ))
   .add('Forgot password form', () => (
-    <AuthForgotPasswordForm />
+    <ResetPasswordForm />
   ));

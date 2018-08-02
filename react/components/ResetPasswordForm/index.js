@@ -10,9 +10,9 @@ import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
 import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 
-import requestPasswordResetMutation from 'react/components/AuthForgotPasswordForm/mutations/requestPasswordReset';
+import requestPasswordResetMutation from 'react/components/ResetPasswordForm/mutations/requestPasswordReset';
 
-class AuthForgotPasswordForm extends Component {
+class ResetPasswordForm extends Component {
   static propTypes = {
     requestPasswordReset: PropTypes.func.isRequired,
   }
@@ -104,4 +104,4 @@ class AuthForgotPasswordForm extends Component {
 
 export default graphql(requestPasswordResetMutation, {
   name: 'requestPasswordReset',
-})(AuthForgotPasswordForm);
+})(ResetPasswordForm);

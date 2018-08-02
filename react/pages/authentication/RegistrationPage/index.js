@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import CenteringBox from 'react/components/UI/CenteringBox';
-import AuthJoinForm from 'react/components/AuthJoinForm';
+import RegistrationForm from 'react/components/RegistrationForm';
 
-export default class AuthJoinPage extends Component {
+export default class RegistrationPage extends Component {
   render() {
     return (
       <CenteringBox p={7}>
-        <AuthJoinForm />
+        <RegistrationForm />
       </CenteringBox>
     );
   }

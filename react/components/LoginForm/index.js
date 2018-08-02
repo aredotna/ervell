@@ -25,7 +25,7 @@ const InputWithLink = styled.div.attrs({
   }
 `;
 
-export default class AuthLoginForm extends Component {
+export default class LoginForm extends Component {
   state = {
     mode: 'resting',
     email: '',

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import CenteringBox from 'react/components/UI/CenteringBox';
-import ResetPasswordForm from 'react/components/ResetPasswordForm';
+import LoginForm from 'react/components/LoginForm';
 
-export default class ResetPasswordPage extends Component {
+export default class LoginPage extends Component {
   render() {
     return (
       <CenteringBox p={7}>
-        <ResetPasswordForm />
+        <LoginForm />
       </CenteringBox>
     );
   }

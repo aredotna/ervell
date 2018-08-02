@@ -6,23 +6,23 @@ import { mountWithApolloProvider } from 'react/apollo';
 import withStaticRouter from 'react/hocs/WithStaticRouter';
 import withBrowserRouter from 'react/hocs/WithBrowserRouter';
 
-import AuthLoginPage from 'react/pages/authentication/AuthLoginPage';
-import AuthJoinPage from 'react/pages/authentication/AuthJoinPage';
-import AuthForgotPasswordPage from 'react/pages/authentication/AuthForgotPasswordPage';
+import LoginPage from 'react/pages/authentication/LoginPage';
+import RegistrationPage from 'react/pages/authentication/RegistrationPage';
+import ResetPasswordPage from 'react/pages/authentication/ResetPasswordPage';
 
 const Routes = () => (
   <Switch>
     <Route
       path="/log_in"
-      render={() => <AuthLoginPage />}
+      render={() => <LoginPage />}
     />
     <Route
       path="/sign_up"
-      render={() => <AuthJoinPage />}
+      render={() => <RegistrationPage />}
     />
     <Route
       path="/forgot"
-      render={() => <AuthForgotPasswordPage />}
+      render={() => <ResetPasswordPage />}
     />
   </Switch>
 );

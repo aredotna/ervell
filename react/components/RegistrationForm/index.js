@@ -12,11 +12,11 @@ import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
 import { Checkbox, Label, Input, ErrorMessage } from 'react/components/UI/Inputs';
 
-import registerMutation from 'react/components/AuthJoinForm/mutations/register';
+import registerMutation from 'react/components/RegistrationForm/mutations/register';
 
 const { REDIRECT_TO } = require('sharify').data;
 
-class AuthJoinForm extends Component {
+class RegistrationForm extends Component {
   static propTypes = {
     register: PropTypes.func.isRequired,
   }
@@ -226,4 +226,4 @@ class AuthJoinForm extends Component {
 
 export default graphql(registerMutation, {
   name: 'register',
-})(AuthJoinForm);
+})(RegistrationForm);
