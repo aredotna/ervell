@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Text from 'react/components/UI/Text';
+import CTAText from 'react/components/Onboarding/components/UI/CTAText';
 import CTAButton from 'react/components/Onboarding/components/UI/CTAButton';
 
 const AboutChannels = props => {
@@ -8,12 +8,12 @@ const AboutChannels = props => {
 
   return (
     <div>
-      <Text f={9} my={4}>
+      <CTAText>
         Channels are collections of content built around an idea.
-      </Text>
-      <Text f={9} my={4}>
+      </CTAText>
+      <CTAText>
         Channels can be public of private. Let’s keep this one private for now.
-      </Text>
+      </CTAText>
       <CTAButton onClick={goForward}>
         Got it
       </CTAButton>
