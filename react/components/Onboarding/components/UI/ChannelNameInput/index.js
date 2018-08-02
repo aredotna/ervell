@@ -10,7 +10,7 @@ const ChannelNameInput = styled(AutosizeInput).attrs({
   input {
     ${mixin}
     ${space}
-    ${preset(space, { mt: 5 })}
+    ${preset(space, { mt: 3 })}
   }
 `;
 
