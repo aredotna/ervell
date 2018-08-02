@@ -3,8 +3,8 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import Modal from 'react/components/UI/Modal';
-import Icon from 'react/components/UI/Icons';
-import Lock from 'react/components/UI/Icons/Lock/index.svg';
+import Icon from 'react/components/UI/Icon';
+import Lock from 'react/components/UI/Icon/Lock/index.svg';
 import ManageChannel from 'react/components/ManageChannel';
 import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';

@@ -5,7 +5,7 @@ import { debounce, isEmpty } from 'underscore';
 
 import { outlineBorder } from 'react/styles/mixins';
 
-import GenericInput, { inputPadding } from 'react/components/UI/GenericInput';
+import { Input, inputPadding } from 'react/components/UI/Inputs';
 import RecentChannels from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels';
 import SearchedChannels from 'react/components/Connect/components/ConnectionSelection/components/SearchedChannels';
 import CreatePrivateChannelButton from 'react/components/Connect/components/ConnectionSelection/components/CreatePrivateChannelButton';
@@ -22,10 +22,10 @@ const Container = styled.div`
 
 const Bumper = styled.div`
   text-align: center;
-  padding: ${inputPadding};
+  padding: ${inputPadding}; // TODO
 `;
 
-const SearchInput = styled(GenericInput).attrs({
+const SearchInput = styled(Input).attrs({
   f: 1,
   placeholder: 'Type channel name',
   autoFocus: true,

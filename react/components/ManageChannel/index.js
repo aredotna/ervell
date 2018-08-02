@@ -10,7 +10,7 @@ import manageChannelQuery from 'react/components/ManageChannel/queries/manageCha
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { Input, Textarea, Select } from 'react/components/UI/GenericInput';
+import { Input, Textarea, Select } from 'react/components/UI/Inputs';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';

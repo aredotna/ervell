@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { inputPadding } from 'react/components/UI/GenericInput';
+import { inputPadding } from 'react/components/UI/Inputs';
 
 export default styled.a.attrs({
   role: 'button',
@@ -9,7 +9,7 @@ export default styled.a.attrs({
   position: relative;
   display: block;
   margin-top: -1px;
-  padding: ${inputPadding};
+  padding: ${inputPadding}; // TODO
   text-align: center;
   font-weight: normal !important;
   border: 1px solid ${x => x.theme.colors.gray.regular};
