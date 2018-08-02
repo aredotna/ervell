@@ -14,7 +14,7 @@ const AnimatedPageWrapper = styled.div`
   right: 0;
   text-align: center;
   top: 0;
-  transition: opacity ${({ duration }) => duration}ms ease-in-out;
+  transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
   width: 100%;
 `;
 
@@ -57,7 +57,6 @@ class AnimatedPage extends React.Component {
     return (
       <AnimatedPageWrapper
         opacity={this.state.show ? 1 : 0}
-        duration={ANIMATION_PERIOD}
       >
         {this.props.children}
       </AnimatedPageWrapper>
