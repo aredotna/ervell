@@ -4,7 +4,8 @@ import apolloMiddleware from 'react/apollo/middleware';
 import logoutMiddleware from 'apps/authentication/middleware/logout';
 import redirectToMiddleware from 'lib/middleware/redirect_to.coffee';
 
-import { StaticRoutes } from 'apps/authentication/client'; // TODO: Fix this
+import Routes from 'apps/authentication/Routes';
+import withStaticRouter from 'react/hocs/WithStaticRouter';
 
 const app = express();
 
@@ -12,12 +13,12 @@ app
   .set('views', `${__dirname}/templates`)
   .set('view engine', 'jade')
 
-  .get(/^\/(sign_up|log_in|forgot)/, apolloMiddleware, (req, res) => {
+  .get(/^\/(sign_up|log_in|forgot|register\/\w+)/, apolloMiddleware, (req, res) => {
     if (req.user && req.user.id) return res.redirect('/');
 
     res.locals.sd.REDIRECT_TO = req.query['redirect-to'] || '/';
 
-    return req.apollo.render(StaticRoutes)
+    return req.apollo.render(withStaticRouter(Routes))
       .then(apollo => res.render('index', { apollo }));
   })
   .get('/me/sign_out', logoutMiddleware, redirectToMiddleware)
