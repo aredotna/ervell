@@ -8,6 +8,6 @@ block container
     != apollo.html
 
 block scripts
-  script( src= asset('/assets/auth.js') )
   script.
     window.__APOLLO_STATE__ = !{JSON.stringify(apollo.state).replace(/</g, '\\u003c')};
+  script( src= asset('/assets/auth.js') )
