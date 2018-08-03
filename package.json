@@ -8,6 +8,7 @@
     "predeploy": "sh scripts/predeploy.sh",
     "mocha": "sh scripts/mocha.sh",
     "test": "sh scripts/test.sh",
+    "jest": "jest",
     "start-dev": "foreman start -f Procfile.dev",
     "deploy-staging": "APP_NAME=ervell-staging S3_BUCKET=ervell-staging yarn deploy"
   },
@@ -130,6 +131,7 @@
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html5": "*",
+    "jest": "^23.4.1",
     "mocha": "*",
     "progress-bar-webpack-plugin": "^1.10.0",
     "rewire": "https://registry.npmjs.org/rewire/-/rewire-2.5.2.tgz",
@@ -141,5 +143,8 @@
   },
   "optionalDependencies": {
     "fsevents": "*"
+  },
+  "jest": {
+    "testURL": "http://localhost"
   }
 }
