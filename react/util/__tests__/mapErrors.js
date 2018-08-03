@@ -67,4 +67,14 @@ describe('mapErrors', () => {
         });
     });
   });
+
+  describe('a response with no errors (network error)', () => {
+    it('returns the message', () => {
+      expect(mapErrors({ graphQLErrors: [], message: 'Network error: Failed to fetch' }))
+        .toEqual({
+          errorMessage: 'Network error: Failed to fetch',
+          attributeErrors: {},
+        });
+    });
+  });
 });
