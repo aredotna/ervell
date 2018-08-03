@@ -7,7 +7,7 @@ import { antialiased } from 'react/styles/mixins';
 export const BUTTON_DEFAULT_FONT_SIZE = 3;
 export const BUTTON_VARIANTS = { LARGE: 'LARGE', SMALL: 'SMALL' };
 export const BUTTON_LARGE_PADDING = { px: 8, py: 5 };
-export const BUTTON_SMALL_PADDING = { px: 5, py: 4 };
+export const BUTTON_SMALL_PADDING = { px: 6, py: 5 };
 export const BUTTON_SMALL_BORDER_WIDTH = '1px';
 export const BUTTON_LARGE_BORDER_WIDTH = '2px';
 export const BUTTON_BORDER_RADIUS = '0.25em';

@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
+import Button from 'react/components/UI/GenericButton';
 import Icon, { ICON_NAMES } from 'react/components/UI/Icon';
 
 storiesOf('Icons', module)
@@ -26,4 +27,11 @@ storiesOf('Icons', module)
     >
       <Icon />
     </States>
+  ))
+  .add('Button with icon', () => (
+    <Specimen>
+      <Button>
+        <Icon name="Lock" /> Locked button
+      </Button>
+    </Specimen>
   ));

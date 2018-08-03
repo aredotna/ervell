@@ -47,7 +47,7 @@ class MuteChannelButton extends Component {
     } = this.props;
 
     return (
-      <GenericButton f={1} onClick={this.toggleMute} {...rest}>
+      <GenericButton onClick={this.toggleMute} {...rest}>
         {{
           true: 'Unmute',
           false: 'Mute',

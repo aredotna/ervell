@@ -24,9 +24,22 @@ storiesOf('Input', module)
     </div>
   ))
   .add('Input - with Errors', () => (
-    <Input
-      placeholder="An input"
-      defaultValue="Erroneous input"
-      errorMessage="This can't be blank"
-    />
+    <div>
+      <Input
+        placeholder="An input"
+        defaultValue="Erroneous input"
+        errorMessage="This can't be blank"
+      />
+      <Input
+        placeholder="Another"
+        defaultValue="Wrong. But, has a margin `mb={8}`"
+        errorMessage="Just wrong"
+        mb={8}
+      />
+      <Input
+        placeholder="Another"
+        defaultValue="Wrong"
+        errorMessage="Just wrong"
+      />
+    </div>
   ));
