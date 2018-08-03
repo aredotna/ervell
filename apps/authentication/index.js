@@ -13,13 +13,14 @@ app
   .set('views', `${__dirname}/templates`)
   .set('view engine', 'jade')
 
-  .get(/^\/(sign_up|log_in|forgot|register\/\w+)/, apolloMiddleware, (req, res) => {
+  .get(/^\/(sign_up|log_in|forgot|register\/\w+)/, apolloMiddleware, (req, res, next) => {
     if (req.user && req.user.id) return res.redirect('/');
 
     res.locals.sd.REDIRECT_TO = req.query['redirect-to'] || '/';
 
     return req.apollo.render(withStaticRouter(Routes))
-      .then(apollo => res.render('index', { apollo }));
+      .then(apollo => res.render('index', { apollo }))
+      .catch(next);
   })
   .get('/me/sign_out', logoutMiddleware, redirectToMiddleware)
   .get('/me/refresh', (req, res, next) => {

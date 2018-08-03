@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import axios from 'axios';
 
 import mapErrors from 'react/util/mapErrors';
+import compactObject from 'react/util/compactObject';
 
 import Button from 'react/components/UI/GenericButton';
 import Box from 'react/components/UI/Box';
@@ -13,25 +14,38 @@ import AuthForm from 'react/components/AuthForm';
 import { Checkbox, Label, Input, ErrorMessage } from 'react/components/UI/Inputs';
 
 import registerMutation from 'react/components/RegistrationForm/mutations/register';
+import acceptInvitationMutation from 'react/components/RegistrationForm/mutations/acceptInvitation';
 
 const { REDIRECT_TO } = require('sharify').data;
 
 class RegistrationForm extends Component {
   static propTypes = {
     register: PropTypes.func.isRequired,
+    acceptInvitation: PropTypes.func.isRequired,
+    email: PropTypes.string,
+    raw_invitation_token: PropTypes.string,
   }
 
-  state = {
-    mode: 'resting',
-    email: '',
-    first_name: '',
-    last_name: '',
-    password: '',
-    password_confirmation: '',
-    accept_terms: false,
-    receive_newsletter: false,
-    attributeErrors: {},
-    errorMessage: null,
+  static defaultProps = {
+    email: null,
+    raw_invitation_token: null,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: 'resting',
+      email: props.email || '',
+      first_name: '',
+      last_name: '',
+      password: '',
+      password_confirmation: '',
+      accept_terms: false,
+      receive_newsletter: false,
+      attributeErrors: {},
+      errorMessage: null,
+    };
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
@@ -58,7 +72,14 @@ class RegistrationForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { register } = this.props;
+    const {
+      register,
+      acceptInvitation,
+      raw_invitation_token,
+    } = this.props;
+
+    const mutation = raw_invitation_token ?
+      acceptInvitation : register;
 
     const {
       email,
@@ -72,17 +93,18 @@ class RegistrationForm extends Component {
 
     this.setState({ mode: 'registering' });
 
-    return register({
-      variables: {
-        email,
-        first_name,
-        last_name,
-        password,
-        accept_terms,
-        password_confirmation,
-        receive_newsletter,
-      },
-    })
+    const variables = compactObject({
+      email,
+      first_name,
+      last_name,
+      password,
+      accept_terms,
+      password_confirmation,
+      receive_newsletter,
+      invitation_token: raw_invitation_token,
+    });
+
+    return mutation({ variables })
       .then(() => {
         this.setState({ mode: 'logging_in' });
         return axios.post('/me/sign_in', { email, password });
@@ -127,6 +149,7 @@ class RegistrationForm extends Component {
           onChange={this.handleEmail}
           value={email}
           errorMessage={attributeErrors.email}
+          readOnly={!!this.props.email}
           required
         />
 
@@ -224,6 +247,7 @@ class RegistrationForm extends Component {
   }
 }
 
-export default graphql(registerMutation, {
-  name: 'register',
-})(RegistrationForm);
+export default compose(
+  graphql(registerMutation, { name: 'register' }),
+  graphql(acceptInvitationMutation, { name: 'acceptInvitation' }),
+)(RegistrationForm);

@@ -7,5 +7,6 @@ export default styled(Box).attrs({
   width: '100%',
   minHeight: '100vh',
   alignItems: 'center',
+  justifyContent: 'center',
 })`
 `;

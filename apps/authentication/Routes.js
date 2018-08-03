@@ -26,11 +26,11 @@ export default () => (
     />
 
     <Route
-      path="/register/:token"
+      path="/register/:invitation_token"
       render={parseRoute(({ params, query }) => (
         <AcceptInvitationPage
-          {...params}
-          {...query}
+          invitation_token={params.invitation_token}
+          raw_invitation_token={query.invite_token}
         />
       ))}
     />
