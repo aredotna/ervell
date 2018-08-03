@@ -10,8 +10,9 @@ describe('mapErrors', () => {
     };
 
     it('pulls out the errorMessage', () => {
-      mapErrors({ graphQLErrors: RESPONSE.errors })
-        .should.eql({
+      expect(mapErrors({ graphQLErrors: RESPONSE.errors }))
+        .toEqual({
+          attributeErrors: {},
           errorMessage: 'An account with this email already exists. Login to continue.',
         });
     });
@@ -28,12 +29,13 @@ describe('mapErrors', () => {
     };
 
     it('maps the error messages into their respective attributes', () => {
-      mapErrors({ graphQLErrors: RESPONSE.errors })
-        .should.eql({
+      expect(mapErrors({ graphQLErrors: RESPONSE.errors }))
+        .toEqual({
           attributeErrors: {
             password: 'is too short (minimum is 6 characters)',
             password_confirmation: "doesn't match Password",
           },
+          errorMessage: null,
         });
     });
   });
@@ -55,8 +57,8 @@ describe('mapErrors', () => {
     };
 
     it('maps the error messages into their respective attributes and returns a correctly formatted errorMessage', () => {
-      mapErrors({ graphQLErrors: RESPONSE.errors })
-        .should.eql({
+      expect(mapErrors({ graphQLErrors: RESPONSE.errors }))
+        .toEqual({
           errorMessage: 'Some other error. Lots of errors here. An account with this email already exists. Login to continue.',
           attributeErrors: {
             password: 'is too short (minimum is 6 characters)',
