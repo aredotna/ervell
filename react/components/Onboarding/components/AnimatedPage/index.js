@@ -10,6 +10,7 @@ const AnimatedPageWrapper = styled.div`
   justify-content: center;
   left: 0;
   opacity: ${({ opacity }) => opacity};
+  padding: 1em;
   position: fixed;
   right: 0;
   text-align: center;

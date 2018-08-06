@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AnimatedPage from 'react/components/Onboarding/components/AnimatedPage';
 import Welcome from 'react/components/Onboarding/components/Welcome';
 import AboutChannels from 'react/components/Onboarding/components/Channels/components/AboutChannels';
 import CreateChannel from 'react/components/Onboarding/components/Channels/components/CreateChannel';
+
+const OnboardingWrapper = styled.div`
+  padding: 1em;
+`;
 
 class Onboarding extends React.Component {
   constructor(props) {
@@ -35,11 +40,13 @@ class Onboarding extends React.Component {
 
   render() {
     return (
-      <TransitionGroup>
-        <AnimatedPage key={`onboarding-page-${this.state.step}`}>
-          { this.componentForStep() }
-        </AnimatedPage>
-      </TransitionGroup>
+      <OnboardingWrapper>
+        <TransitionGroup>
+          <AnimatedPage key={`onboarding-page-${this.state.step}`}>
+            { this.componentForStep() }
+          </AnimatedPage>
+        </TransitionGroup>
+      </OnboardingWrapper>
     );
   }
 }
