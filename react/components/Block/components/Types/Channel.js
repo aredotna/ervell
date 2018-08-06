@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { smartTruncate } from 'react/util/string';
+import { truncate } from 'react/util/string';
 
 const ChannelWrapper = styled.div`
   align-items: center;
@@ -45,7 +45,7 @@ const Stats = styled.div`
 const Channel = props => {
   const {length, title, updatedAtAgo, username, visibility} = props;
 
-  const formattedTitle = smartTruncate(title, 50) || '\u00A0';
+  const formattedTitle = truncate(title, 50) || '\u00A0';
 
   return (
     <ChannelWrapper visibility={visibility}>
