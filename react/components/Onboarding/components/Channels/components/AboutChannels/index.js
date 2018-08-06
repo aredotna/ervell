@@ -25,6 +25,4 @@ AboutChannels.propTypes = {
   goForward: PropTypes.func.isRequired
 };
 
-AboutChannels.defaultProps = {};
-
 export default AboutChannels;

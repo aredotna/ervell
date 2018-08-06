@@ -26,6 +26,4 @@ Welcome.propTypes = {
   goForward: PropTypes.func.isRequired
 };
 
-Welcome.defaultProps = {};
-
 export default Welcome;
