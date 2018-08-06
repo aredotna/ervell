@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
@@ -6,42 +7,55 @@ import { Link } from 'react-router-dom';
 import mapErrors from 'react/util/mapErrors';
 
 import Button from 'react/components/UI/GenericButton';
-import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
 import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 
-import requestPasswordResetMutation from 'react/components/ResetPasswordForm/mutations/requestPasswordReset';
+import resetPasswordMutation from 'react/components/ResetPasswordForm/mutations/resetPassword';
+
+const { REDIRECT_TO } = require('sharify').data;
 
 class ResetPasswordForm extends Component {
   static propTypes = {
-    requestPasswordReset: PropTypes.func.isRequired,
+    resetPassword: PropTypes.func.isRequired,
+    reset_password_token: PropTypes.string.isRequired,
   }
 
   state = {
     mode: 'resting',
-    email: '',
+    password: '',
+    password_confirmation: '',
     attributeErrors: {},
     errorMessage: null,
   }
 
-  handleInput = ({ target: { value: email } }) =>
+  handleInput = attr => ({ target: { value } }) =>
     this.setState({
       mode: 'active',
-      email,
+      [attr]: value,
     });
+
+  handlePassword = this.handleInput('password')
+  handlePasswordConfirmation = this.handleInput('password_confirmation')
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { email } = this.state;
+    const { password, password_confirmation } = this.state;
+    const { resetPassword, reset_password_token } = this.props;
 
     this.setState({ mode: 'resetting' });
 
-    return this.props.requestPasswordReset({
-      variables: { email },
+    return resetPassword({
+      variables: { token: reset_password_token, password, password_confirmation },
     })
-      .then(() =>
-        this.setState({ mode: 'success' }))
+      .then(({ data: { reset_password: { me: { email } } } }) => {
+        this.setState({ mode: 'logging_in' });
+        return axios.post('/me/sign_in', { email, password });
+      })
+      .then(() => {
+        this.setState({ mode: 'redirecting' });
+        window.location = REDIRECT_TO;
+      })
       .catch((err) => {
         this.setState({
           mode: 'error',
@@ -52,7 +66,8 @@ class ResetPasswordForm extends Component {
 
   render() {
     const {
-      email,
+      password,
+      password_confirmation,
       mode,
       attributeErrors,
       errorMessage,
@@ -61,12 +76,23 @@ class ResetPasswordForm extends Component {
     return (
       <AuthForm onSubmit={this.handleSubmit}>
         <Input
-          type="email"
-          placeholder="Email"
+          mb={6}
+          type="password"
+          placeholder="New password"
           tabIndex={0}
-          value={email}
-          onChange={this.handleInput}
-          errorMessage={attributeErrors.email}
+          value={password}
+          onChange={this.handlePassword}
+          errorMessage={attributeErrors.password}
+          autoFocus
+          required
+        />
+
+        <Input
+          type="password"
+          placeholder="Confirm new password"
+          value={password_confirmation}
+          onChange={this.handlePasswordConfirmation}
+          errorMessage={attributeErrors.password_confirmation}
           required
         />
 
@@ -76,19 +102,14 @@ class ResetPasswordForm extends Component {
           </ErrorMessage>
         }
 
-        {mode === 'success' &&
-          <Text f={1} my={5} align="center">
-            Please check your email for a link to reset your password.
-          </Text>
-        }
-
         <AuthForm.Submit>
           <Button type="submit" disabled={mode === 'success'}>
             {{
               resting: 'Reset password',
               active: 'Reset password',
-              success: 'Sent',
               resetting: 'Resetting...',
+              logging_in: 'Logging in...',
+              redirecting: 'Redirecting...',
               error: 'Error',
             }[mode]}
           </Button>
@@ -102,6 +123,6 @@ class ResetPasswordForm extends Component {
   }
 }
 
-export default graphql(requestPasswordResetMutation, {
-  name: 'requestPasswordReset',
+export default graphql(resetPasswordMutation, {
+  name: 'resetPassword',
 })(ResetPasswordForm);

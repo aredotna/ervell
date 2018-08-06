@@ -5,6 +5,7 @@ import parseRoute from 'react/util/parseRoute';
 
 import LoginPage from 'react/pages/authentication/LoginPage';
 import RegistrationPage from 'react/pages/authentication/RegistrationPage';
+import ResetPasswordPage from 'react/pages/authentication/ResetPasswordPage';
 import ForgotPasswordPage from 'react/pages/authentication/ForgotPasswordPage';
 import AcceptInvitationPage from 'react/pages/authentication/AcceptInvitationPage';
 
@@ -23,6 +24,15 @@ export default () => (
     <Route
       path="/forgot"
       render={() => <ForgotPasswordPage />}
+    />
+
+    <Route
+      path="/reset/:reset_password_token"
+      render={parseRoute(({ params }) => (
+        <ResetPasswordPage
+          reset_password_token={params.reset_password_token}
+        />
+      ))}
     />
 
     <Route

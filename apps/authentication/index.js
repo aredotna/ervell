@@ -13,7 +13,7 @@ app
   .set('views', `${__dirname}/templates`)
   .set('view engine', 'jade')
 
-  .get(/^\/(sign_up|log_in|forgot|register\/\w+)/, apolloMiddleware, (req, res, next) => {
+  .get(/^\/(sign_up|log_in|forgot|register\/\w+|reset\/\w+)/, apolloMiddleware, (req, res, next) => {
     if (req.user && req.user.id) return res.redirect('/');
 
     res.locals.sd.REDIRECT_TO = req.query['redirect-to'] || '/';
