@@ -1,23 +1,11 @@
-export const smartTruncate = (text, limit = 200) => {
+export let truncate = (text, limit = 200) => {
   if (!text) { return; }
 
-  let size = 0;
-  let textArray = [];
-  let tokens = text.split(' ');
+  let truncated = text.substr(0, limit);
 
-  for (let i = 0; i < tokens.length; i++) {
-    let token = tokens[i];
-
-    size += token.length + 1;
-
-    if (size > limit) { break; }
-
-    textArray.push(token);
-  }
-
-  return textArray.join(' ') + (text.length > limit ? '…' : '');
+  return truncated + (text.length > limit ? '…' : '');
 }
 
 export default {
-  smartTruncate
+  truncate
 };
