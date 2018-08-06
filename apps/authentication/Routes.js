@@ -5,7 +5,7 @@ import parseRoute from 'react/util/parseRoute';
 
 import LoginPage from 'react/pages/authentication/LoginPage';
 import RegistrationPage from 'react/pages/authentication/RegistrationPage';
-import ResetPasswordPage from 'react/pages/authentication/ResetPasswordPage';
+import ForgotPasswordPage from 'react/pages/authentication/ForgotPasswordPage';
 import AcceptInvitationPage from 'react/pages/authentication/AcceptInvitationPage';
 
 export default () => (
@@ -22,7 +22,7 @@ export default () => (
 
     <Route
       path="/forgot"
-      render={() => <ResetPasswordPage />}
+      render={() => <ForgotPasswordPage />}
     />
 
     <Route
