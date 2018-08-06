@@ -7,6 +7,7 @@ import { preset } from 'react/styles/functions';
 import currentUserService from 'react/util/currentUserService';
 import AnimatedCTAText from 'react/components/Onboarding/components/Channels/components/CreateChannel/components/AnimatedCTAText';
 import ChannelNameInput from 'react/components/Onboarding/components/UI/ChannelNameInput';
+import CTAText from 'react/components/Onboarding/components/UI/CTAText';
 import CTAButton from 'react/components/Onboarding/components/UI/CTAButton';
 import Types from 'react/components/Block/utils/Types';
 import Block from 'react/components/Block';
