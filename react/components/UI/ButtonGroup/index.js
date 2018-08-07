@@ -52,8 +52,8 @@ const ButtonGroupContainer = styled.div`
   }
 `;
 
-const ButtonGroup = ({ children, ...rest }) => (
-  <ButtonGroupContainer {...rest}>
+const ButtonGroup = ({ children, stretch, ...rest }) => (
+  <ButtonGroupContainer stretch={stretch} {...rest}>
     {provideChildrentWithProps(children, rest)}
   </ButtonGroupContainer>
 );
