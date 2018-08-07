@@ -39,15 +39,6 @@ const Icon = styled.div`
   }
 `;
 
-const SearchField = styled(Input)`
-  padding-left: 2.5em;
-  border: 1px solid ${x => x.theme.colors.gray.regular};
-
-  &:focus {
-    border: 1px solid ${x => x.theme.colors.gray.regular};
-  }
-`;
-
 export default class SearchInput extends Component {
   static propTypes = {
     query: PropTypes.string,
@@ -101,7 +92,9 @@ export default class SearchInput extends Component {
       <Container>
         <Icon onClick={this.handleReset} data-mode={mode} />
 
-        <SearchField
+        <Input
+          px="2.5em"
+          borderColor="gray.regular"
           {...this.props}
           innerRef={(input) => { this.input = input; }}
           onChange={this.handleChange}
