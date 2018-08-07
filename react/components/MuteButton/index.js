@@ -11,7 +11,7 @@ import unmuteMutation from 'react/components/MuteButton/mutations/unmute';
 class MuteButton extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    type: PropTypes.oneOf(['CONNECTABLE', 'CHANNEL']).isRequired,
+    type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       mutable: propType(mutableFragment),
