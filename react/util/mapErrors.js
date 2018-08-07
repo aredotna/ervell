@@ -13,7 +13,7 @@ module.exports = (err = {}) => {
   return err.graphQLErrors.reduce((memo, gqlErr = {}) => {
     // If an attribute is present,
     // return the message keyed by that attribute
-    if (gqlErr.extensions.attribute) {
+    if (gqlErr.extensions && gqlErr.extensions.attribute) {
       return {
         ...memo,
         attributeErrors: {
