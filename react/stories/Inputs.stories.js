@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import theme from 'react/styles/theme';
@@ -8,16 +8,38 @@ import States from 'react/stories/__components__/States';
 
 import { Input } from 'react/components/UI/Inputs';
 
+class FocusableInput extends Component {
+  handleClick = () => {
+    this.input.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <a
+          role="button"
+          tabIndex={0}
+          onClick={this.handleClick}
+        >
+          Click me to focus input
+        </a>
+
+        <Input innerRef={(input) => { this.input = input; }} />
+      </div>
+    );
+  }
+}
+
 storiesOf('Input', module)
   .add('Input', () => (
-    <States states={[{}, { disabled: true }, { focus: true }, { value: 'With value', focus: true }]}>
+    <States states={[{}, { disabled: true }, { focus: true }, { defaultValue: 'With value', focus: true }]}>
       <Input placeholder="An input" />
     </States>
   ))
   .add('Input - sizes', () => (
     <div>
       {theme.fontSizes.map((size, i) => (
-        <Specimen>
+        <Specimen key={size}>
           <Input f={i} placeholder={`An input @ ${size}: f={${i}}`} />
         </Specimen>
       ))}
@@ -42,4 +64,9 @@ storiesOf('Input', module)
         errorMessage="Just wrong"
       />
     </div>
+  ))
+  .add('Input - with ref', () => (
+    <Specimen>
+      <FocusableInput />
+    </Specimen>
   ));

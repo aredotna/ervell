@@ -37,7 +37,7 @@ export default class States extends Component {
           <Example key={JSON.stringify(stateProps)}>
             {provideChildrentWithProps(children, stateProps)}
 
-            <Text font="mono" fontSize={1} p={5} color="gray.semiBold">
+            <Text font="mono" fontSize={1} p={5} color="gray.semiBold" textAlign="center">
               {JSON.stringify(stateProps)}
             </Text>
           </Example>
