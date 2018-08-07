@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import AuthForm from 'react/components/AuthForm';
-import Button from 'react/components/UI/GenericButton';
+import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import { mixin as textMixin } from 'react/components/UI/Text';
 import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 

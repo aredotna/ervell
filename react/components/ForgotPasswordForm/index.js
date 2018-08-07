@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import mapErrors from 'react/util/mapErrors';
 
-import Button from 'react/components/UI/GenericButton';
+import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
 import { Input, ErrorMessage } from 'react/components/UI/Inputs';

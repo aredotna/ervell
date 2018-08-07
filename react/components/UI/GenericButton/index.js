@@ -88,8 +88,8 @@ export const GenericButtonLink = styled.a`
   ${mixin}
 `;
 
-const GenericButton = styled.button`
+export const GenericButton = styled.button`
   ${mixin}
 `;
 
-export default GenericButton;
+export default GenericButtonLink;
