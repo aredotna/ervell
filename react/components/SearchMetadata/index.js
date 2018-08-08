@@ -8,16 +8,16 @@ import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMe
 import SearchMetadataBreadcrumb from 'react/components/SearchMetadata/components/SearchMetadataBreadcrumb';
 import SearchMetadataModeView from 'react/components/SearchMetadata/components/SearchMetadataModeView';
 
-const SearchMetadata = props => {
+const SearchMetadata = (props) => {
   const { search } = props;
 
   return (
-    <HeaderMetadataContainer breadcrumb={<SearchMetadataBreadcrumb search={search}/>}>
+    <HeaderMetadataContainer breadcrumb={<SearchMetadataBreadcrumb search={search} />}>
       <Route
         path="/search"
         render={() => (
           <Grid>
-            <SearchMetadataModeView search={search}/>
+            <SearchMetadataModeView search={search} />
           </Grid>
         )}
       />
@@ -26,11 +26,11 @@ const SearchMetadata = props => {
 };
 
 SearchMetadata.propTypes = {
-  search: PropTypes.string
+  search: PropTypes.string,
 };
 
 SearchMetadata.defaultProps = {
-  search: null
+  search: null,
 };
 
 export default WithStaticRouter(SearchMetadata);

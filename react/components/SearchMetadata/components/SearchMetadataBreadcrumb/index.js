@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 
-const SearchMetadataBreadcrumb = props => {
+const SearchMetadataBreadcrumb = (props) => {
   const { search } = props;
 
   return (
@@ -13,14 +13,14 @@ const SearchMetadataBreadcrumb = props => {
       </StickyBreadcrumbPath.Crumb>
     </StickyBreadcrumbPath>
   );
-}
+};
 
 SearchMetadataBreadcrumb.propTypes = {
-  search: PropTypes.string
+  search: PropTypes.string,
 };
 
 SearchMetadataBreadcrumb.defaultProps = {
-  search: ""
+  search: '',
 };
 
 

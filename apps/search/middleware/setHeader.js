@@ -4,7 +4,7 @@ export default (req, res, next) => {
   const { SEARCH } = res.locals.sd;
 
   return req.apollo.render(SearchComponent, {
-    search: SEARCH
+    search: SEARCH,
   })
     .then((searchComponent) => {
       res.locals.searchComponent = searchComponent;

@@ -22,8 +22,8 @@ app.post('/graphql', (req, res, next) => {
     method: 'post',
     url: GRAPHQL_ENDPOINT,
     data: req.body,
-    headers: headers,
+    headers,
   })
     .then(({ data }) => res.json(data))
-    .catch(next)
+    .catch(next);
 });
