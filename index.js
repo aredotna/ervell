@@ -25,6 +25,7 @@ const startWorker = (id) => {
 
     return app.listen(PORT, () => {
       console.log(`Listening on port ${PORT}`);
+      // eslint-disable-next-line
       return typeof process.send === 'function' ? process.send('listening') : void 0;
     });
   });

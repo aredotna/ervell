@@ -1,3 +1,3 @@
 import initialize from 'apps/actions/client';
 
-$(initialize);
+document.addEventListener('DOMContentLoaded', initialize);

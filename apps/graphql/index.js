@@ -3,7 +3,7 @@ import express from 'express';
 
 import { NODE_ENV, GRAPHQL_ENDPOINT, X_APP_TOKEN } from 'config.coffee';
 
-const app = module.exports = express();
+const app = express();
 
 app.post('/graphql', (req, res, next) => {
   if (NODE_ENV !== 'development' && req.hostname.replace('www.', '') !== 'are.na') {
@@ -11,14 +11,14 @@ app.post('/graphql', (req, res, next) => {
     return next(err);
   }
 
-  const X_AUTH_TOKEN = req.user && req.user.get('authentication_token') || '';
+  const X_AUTH_TOKEN = (req.user && req.user.get('authentication_token')) || '';
 
   const headers = {
     'X-AUTH-TOKEN': req.headers['x-auth-token'] || X_AUTH_TOKEN,
     'X-APP-TOKEN': req.headers['x-app-token'] || X_APP_TOKEN,
   };
 
-  axios({
+  return axios({
     method: 'post',
     url: GRAPHQL_ENDPOINT,
     data: req.body,
@@ -27,3 +27,5 @@ app.post('/graphql', (req, res, next) => {
     .then(({ data }) => res.json(data))
     .catch(next);
 });
+
+module.exports = app;

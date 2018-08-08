@@ -1,6 +1,8 @@
 import express from 'express';
-import SearchBlocks from '../../collections/search_blocks';
 import { extend } from 'underscore';
+
+import SearchBlocks from 'collections/search_blocks.coffee';
+
 import apolloMiddleware from 'react/apollo/middleware';
 import setModeMiddleware from 'apps/search/middleware/setMode';
 import setSearchMiddleware from 'apps/search/middleware/setSearch';
@@ -27,11 +29,11 @@ const renderSearch = (req, res, next) => {
       q: search,
       auth_token: req.user && req.user.get('authentication_token'),
     },
-    success: (blocks, response, options) => {
+    success: () => {
       res.locals.sd.BLOCKS = blocks.toJSON();
       res.render('index', { blocks: blocks.models, search });
     },
-    error: (m, err) => {
+    error: (_model, err) => {
       next(err);
     },
   });
