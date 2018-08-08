@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { themeGet, space } from 'styled-system';
 
-import { preset } from 'react/styles/functions';
-
-import Lock from 'react/components/UI/Icons/Lock/index.svg';
-import ArenaMark from 'react/components/UI/Icons/ArenaMark/index.svg';
+import Lock from 'react/components/UI/Icons/Lock.svg';
+import ArenaMark from 'react/components/UI/Icons/ArenaMark.svg';
+import X from 'react/components/UI/Icons/X.svg';
+import MagnifyingGlass from 'react/components/UI/Icons/MagnifyingGlass.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
   Lock: <Lock />,
+  X: <X />,
+  MagnifyingGlass: <MagnifyingGlass />,
 };
 
 export const ICON_NAMES = Object.keys(COMPONENTS);
@@ -21,7 +23,7 @@ const Container = styled.div`
   width: ${x => x.theme.space[x.size || 6]};
   height: ${x => x.theme.space[x.size || 6]};
   vertical-align: bottom;
-  ${preset(space, { mr: 3 })}
+  ${space}
 
   > svg {
     position: absolute;
@@ -37,7 +39,7 @@ const Container = styled.div`
 
 export default class Icons extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.oneOf(ICON_NAMES).isRequired,
   }
 
   render() {

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Text from 'react/components/UI/Text';
 import Icons from 'react/components/UI/Icons';
+import CloseButton from 'react/components/AuthForm/components/CloseButton';
 
 const Form = styled.form`
   width: ${x => x.theme.space[12]};
@@ -39,6 +40,8 @@ export default class AuthForm extends Component {
 
     return (
       <Form onSubmit={onSubmit}>
+        <CloseButton />
+
         <Icons name="ArenaMark" size={7} mb={9} />
 
         {this.props.children}

@@ -44,7 +44,7 @@ export default class ChannelMetadataActions extends Component {
         {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
             {channel.visibility === 'private' &&
-              <Icons name="Lock" />
+              <Icons mr={3} name="Lock" />
             } Edit channel
           </Button>
         }
