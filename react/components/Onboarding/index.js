@@ -51,9 +51,7 @@ class Onboarding extends React.Component {
   render() {
     const { data: { loading, me } } = this.props;
 
-    if (loading) {
-      return null;
-    }
+    if (loading) return null;
 
     const { slug } = me;
 

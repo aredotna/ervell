@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { space } from 'styled-system';
 import { preset } from 'react/styles/functions';
 import { compose, graphql } from 'react-apollo';
+import { setChannelOnboardingCookie } from 'react/components/Onboarding/util/channelOnboardingCookieManager';
 import userInfoQuery from 'react/components/Onboarding/components/Channels/components/CreateChannel/queries/userInfo';
 import createChannelMutation from 'react/components/Onboarding/components/Channels/components/CreateChannel/mutations/createChannel';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
@@ -11,7 +12,7 @@ import AnimatedCTAText from 'react/components/Onboarding/components/Channels/com
 import ChannelTitleInput from 'react/components/Onboarding/components/UI/ChannelTitleInput';
 import CTAText from 'react/components/Onboarding/components/UI/CTAText';
 import CTAButton from 'react/components/Onboarding/components/UI/CTAButton';
-import Types from 'react/components/Block/utils/Types';
+import Types from 'react/components/Block/util/Types';
 import Block from 'react/components/Block';
 
 const ANIMATION_PERIOD = 500;
@@ -111,7 +112,9 @@ class CreateChannel extends React.Component {
       const { channelTitle: title } = this.state;
 
       return createChannel({ variables: { title } })
-        .then(({ data: { create_channel: { channel: { href } } } }) => {
+        .then(({ data: { create_channel: { channel: { href, id } } } }) => {
+          setChannelOnboardingCookie(id);
+
           window.location = href;
         })
         .catch((err) => {
@@ -143,9 +146,7 @@ class CreateChannel extends React.Component {
   render() {
     const { data: { loading, me } } = this.props;
 
-    if (loading) {
-      return null;
-    }
+    if (loading) return null;
 
     const { name } = me;
     const hasText = this.state.channelTitle;
