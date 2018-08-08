@@ -16,6 +16,8 @@ import { Checkbox, Label, Input, ErrorMessage } from 'react/components/UI/Inputs
 import registerMutation from 'react/components/RegistrationForm/mutations/register';
 import acceptInvitationMutation from 'react/components/RegistrationForm/mutations/acceptInvitation';
 
+import { track, en } from 'lib/analytics.coffee';
+
 const { REDIRECT_TO } = require('sharify').data;
 
 class RegistrationForm extends Component {
@@ -110,8 +112,11 @@ class RegistrationForm extends Component {
         return axios.post('/me/sign_in', { email, password });
       })
       .then(() => {
-        window.location = REDIRECT_TO;
         this.setState({ mode: 'redirecting' });
+        window.location = REDIRECT_TO;
+
+        track.submit(en.REGISTER);
+        if (raw_invitation_token) track.submit(en.ACCEPTED_INVITATION);
       })
       .catch((err) => {
         this.setState({

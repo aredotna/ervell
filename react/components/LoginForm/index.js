@@ -8,6 +8,8 @@ import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import { mixin as textMixin } from 'react/components/UI/Text';
 import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 
+import { track, en } from 'lib/analytics.coffee';
+
 const { REDIRECT_TO } = require('sharify').data;
 
 const InputWithLink = styled.div.attrs({
@@ -56,6 +58,7 @@ export default class LoginForm extends Component {
       .then(() => {
         this.setState({ mode: 'redirecting' });
         window.location = REDIRECT_TO;
+        track.submit(en.LOGIN);
       })
 
       .catch(({ response: { data: { description } } }) => {

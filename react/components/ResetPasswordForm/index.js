@@ -12,6 +12,8 @@ import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 
 import resetPasswordMutation from 'react/components/ResetPasswordForm/mutations/resetPassword';
 
+import { track, en } from 'lib/analytics.coffee';
+
 const { REDIRECT_TO } = require('sharify').data;
 
 class ResetPasswordForm extends Component {
@@ -55,6 +57,7 @@ class ResetPasswordForm extends Component {
       .then(() => {
         this.setState({ mode: 'redirecting' });
         window.location = REDIRECT_TO;
+        track.submit(en.RESET_PASSWORD);
       })
       .catch((err) => {
         this.setState({

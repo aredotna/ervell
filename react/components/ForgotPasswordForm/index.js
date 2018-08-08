@@ -12,6 +12,8 @@ import { Input, ErrorMessage } from 'react/components/UI/Inputs';
 
 import requestPasswordResetMutation from 'react/components/ForgotPasswordForm/mutations/requestPasswordReset';
 
+import { track, en } from 'lib/analytics.coffee';
+
 class ForgotPasswordForm extends Component {
   static propTypes = {
     requestPasswordReset: PropTypes.func.isRequired,
@@ -40,8 +42,10 @@ class ForgotPasswordForm extends Component {
     return this.props.requestPasswordReset({
       variables: { email },
     })
-      .then(() =>
-        this.setState({ mode: 'success' }))
+      .then(() => {
+        this.setState({ mode: 'success' });
+        track.submit(en.FORGOT_PASSWORD);
+      })
       .catch((err) => {
         this.setState({
           mode: 'error',
