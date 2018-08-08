@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { mixin, inputHorizontalPadding } from 'react/components/UI/GenericInput';
 import AutosizeInput from 'react-input-autosize';
 
-const ChannelNameInput = styled(AutosizeInput).attrs({
+const ChannelTitleInput = styled(AutosizeInput).attrs({
   f: 8
 })`
   max-width: 100%;
@@ -23,4 +23,4 @@ const ChannelNameInput = styled(AutosizeInput).attrs({
   }
 `;
 
-export default ChannelNameInput;
+export default ChannelTitleInput;

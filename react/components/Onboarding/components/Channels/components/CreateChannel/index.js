@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { space } from 'styled-system';
 import { preset } from 'react/styles/functions';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import userInfoQuery from 'react/components/Onboarding/components/Channels/components/CreateChannel/queries/userInfo';
+import createChannelMutation from 'react/components/Onboarding/components/Channels/components/CreateChannel/mutations/createChannel';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AnimatedCTAText from 'react/components/Onboarding/components/Channels/components/CreateChannel/components/AnimatedCTAText';
-import ChannelNameInput from 'react/components/Onboarding/components/UI/ChannelNameInput';
+import ChannelTitleInput from 'react/components/Onboarding/components/UI/ChannelTitleInput';
 import CTAText from 'react/components/Onboarding/components/UI/CTAText';
 import CTAButton from 'react/components/Onboarding/components/UI/CTAButton';
 import Types from 'react/components/Block/utils/Types';
@@ -42,6 +43,12 @@ const FadingCTAButton = styled(CTAButton)`
     pointer-events: all;
     transition-delay: ${ ANIMATION_DELAY }ms;
   `};
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+    pointer-events: none!important;
+  `};
 `;
 
 const FadingBlockWrapper = styled.div`
@@ -65,44 +72,63 @@ class CreateChannel extends React.Component {
     super(props);
 
     this.state = {
-      channelName: "",
-      channelNameStep: 0
+      channelTitle: "",
+      channelTitleStep: 0,
+      saving: false
     };
   }
 
-  handleChannelNameChange = e => {
+  handleChannelTitleChange = e => {
     const name = e.target.value;
 
     this.setState({
-      channelName: name
+      channelTitle: name
     });
 
-    if (name.length > 0 && this.state.channelNameStep == 0) {
+    if (name.length > 0 && this.state.channelTitleStep == 0) {
       // Mimic delay of other elements using CSS transition delay.
-      this.channelNameStepChangeTimeout = setTimeout(() => {
+      this.channelTitleStepChangeTimeout = setTimeout(() => {
         this.setState({
-          channelNameStep: 1
+          channelTitleStep: 1
         });
       }, ANIMATION_DELAY);
     } else {
-      clearTimeout(this.channelNameStepChangeTimeout);
+      clearTimeout(this.channelTitleStepChangeTimeout);
 
-      if (name.length === 0 && this.state.channelNameStep == 1) {
+      if (name.length === 0 && this.state.channelTitleStep == 1) {
         this.setState({
-          channelNameStep: 0
+          channelTitleStep: 0
         })
       }
     }
   };
 
-  ctaTextForChannelNameStep = () => {
-    const hasText = this.state.channelName;
+  handleSubmit = (e) => {
+    e.preventDefault();
 
-    switch (this.state.channelNameStep) {
+    this.setState({ saving: true }, () => {
+      const { createChannel } = this.props;
+      const { channelTitle: title } = this.state;
+
+      return createChannel({ variables: { title } })
+        .then(({ data: { create_channel: { channel: { id, href, title } } } }) => {
+          window.location = href;
+        })
+        .catch((err) => {
+          console.error(err);
+          this.setState({ saving: false });
+        });
+    });
+  };
+
+  ctaTextForChannelTitleStep = () => {
+    const hasText = this.state.channelTitle;
+
+    switch (this.state.channelTitleStep) {
       case 0:
         return (
           <FadingCTAText hasText={hasText}>
-            First, type a channel name...
+            First, type a channel name…
           </FadingCTAText>
         );
       case 1:
@@ -116,47 +142,51 @@ class CreateChannel extends React.Component {
 
   render() {
     const { data: { loading, me } } = this.props;
-    const hasText = this.state.channelName;
 
     if (loading) {
       return null;
     }
+
+    const { name } = me;
+    const hasText = this.state.channelTitle;
 
     return (
       <CreateChannelWrapper>
         <TransitionGroup style={{display: "block", position: "relative"}}>
           <AnimatedCTAText
             key={
-              `onboarding-create-channel-cta-step-${this.state.channelNameStep}`
+              `onboarding-create-channel-cta-step-${this.state.channelTitleStep}`
             }
-            positionAbsoluteDuringTransition={this.state.channelNameStep == 1}
+            positionAbsoluteDuringTransition={this.state.channelTitleStep == 1}
           >
-            {this.ctaTextForChannelNameStep()}
+            {this.ctaTextForChannelTitleStep()}
           </AnimatedCTAText>
         </TransitionGroup>
         <div>
-          <ChannelNameInput
+          <ChannelTitleInput
             autoFocus={true}
-            value={this.state.channelName}
-            onChange={this.handleChannelNameChange}/>
+            disabled={this.state.saving}
+            onChange={this.handleChannelTitleChange}
+            value={this.state.channelTitle}/>
         </div>
         <FadingBlockWrapper hasText={hasText}>
           <Block
             type={Types.CHANNEL}
             blockData={{
               length: 0,
-              title: this.state.channelName,
+              title: this.state.channelTitle,
               updatedAtAgo: "0 minutes ago",
-              username: me.name,
+              username: name,
               visibility: "private"
             }}
           />
         </FadingBlockWrapper>
         <FadingCTAButton
+          disabled={this.state.saving}
           hasText={hasText}
-          onClick={()=>{console.log("forward!")}}
+          onClick={this.handleSubmit}
         >
-          Create Channel
+          { this.state.saving ? 'Saving…' : 'Create Channel' }
         </FadingCTAButton>
       </CreateChannelWrapper>
     );
@@ -164,11 +194,15 @@ class CreateChannel extends React.Component {
 };
 
 CreateChannel.propTypes = {
+  createChannel: PropTypes.func.isRequired,
   data: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
-  }).isRequired
+  }).isRequired,
 };
 
 CreateChannel.defaultProps = {};
 
-export default graphql(userInfoQuery)(CreateChannel);
+export default compose(
+  graphql(userInfoQuery),
+  graphql(createChannelMutation, { name: 'createChannel' }),
+)(CreateChannel);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 import userInfoQuery from 'react/components/Onboarding/queries/userInfo';
@@ -54,9 +55,11 @@ class Onboarding extends React.Component {
       return null;
     }
 
+    const { slug } = me;
+
     return (
       <OnboardingWrapper>
-        <SkipOnboardingLink href={`/${me.slug}`}>Skip</SkipOnboardingLink>
+        <SkipOnboardingLink href={`/${slug}`}>Skip</SkipOnboardingLink>
         <TransitionGroup>
           <AnimatedPage key={`onboarding-page-${this.state.step}`}>
             { this.componentForStep() }
@@ -66,5 +69,11 @@ class Onboarding extends React.Component {
     );
   }
 }
+
+Onboarding.propTypes = {
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 export default graphql(userInfoQuery)(Onboarding);

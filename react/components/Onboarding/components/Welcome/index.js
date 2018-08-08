@@ -21,7 +21,6 @@ const Welcome = props => {
   );
 };
 
-
 Welcome.propTypes = {
   goForward: PropTypes.func.isRequired
 };
