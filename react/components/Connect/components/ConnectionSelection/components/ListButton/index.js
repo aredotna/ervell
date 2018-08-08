@@ -26,7 +26,7 @@ export default styled.a.attrs({
   ${x => !x.disabled && `
     &:hover {
       z-index: 1;
-      border: 1px solid ${x => x.theme.colors.gray.semiBold};
+      border: 1px solid ${x.theme.colors.gray.semiBold};
     }
   `}
 `;

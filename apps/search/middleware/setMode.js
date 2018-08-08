@@ -1,3 +1,4 @@
+// TODO: Make legible
 export default (req, res, next) => {
   const { path } = req;
   const modeRegex = /\/(channels|blocks|users)$/;
@@ -6,6 +7,7 @@ export default (req, res, next) => {
   let mode = 'all';
 
   if (modeMatch) {
+    // eslint-disable-next-line
     mode = modeMatch[1];
   }
 

@@ -5,7 +5,7 @@ import { Query } from 'react-apollo';
 import passwordResettableUserQuery from 'react/pages/authentication/ResetPasswordPage/queries/passwordResettableUser';
 
 import Text from 'react/components/UI/Text';
-import Icon from 'react/components/UI/Icon';
+import Icons from 'react/components/UI/Icons';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import ResetPasswordForm from 'react/components/ResetPasswordForm';
 
@@ -25,7 +25,7 @@ export default class ResetPasswordPage extends Component {
           if (error) {
             return (
               <CenteringBox p={7} flexDirection="column">
-                <Icon name="ArenaMark" size={7} mb={9} />
+                <Icons name="ArenaMark" size={7} mb={9} />
 
                 <Text f={5} mb={6}>
                   We’re unable to reset your password.

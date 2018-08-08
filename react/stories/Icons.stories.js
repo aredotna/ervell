@@ -5,14 +5,14 @@ import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
 import Button from 'react/components/UI/GenericButton';
-import Icon, { ICON_NAMES } from 'react/components/UI/Icon';
+import Icons, { ICON_NAMES } from 'react/components/UI/Icon';
 
 storiesOf('Icons', module)
   .add('Names', () => (
     <div>
       {ICON_NAMES.map(name => (
         <Specimen key={name}>
-          {name}: <Icon name={name} />
+          {name}: <Icons name={name} />
         </Specimen>
       ))}
     </div>
@@ -25,13 +25,13 @@ storiesOf('Icons', module)
         { name: 'ArenaMark', size: 9, color: 'gray.base' },
       ]}
     >
-      <Icon />
+      <Icons />
     </States>
   ))
   .add('Button with icon', () => (
     <Specimen>
       <Button>
-        <Icon name="Lock" /> Locked button
+        <Icons name="Lock" /> Locked button
       </Button>
     </Specimen>
   ));
