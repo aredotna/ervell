@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { graphql } from 'react-apollo';
+import userInfoQuery from 'react/components/Onboarding/queries/userInfo';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AnimatedPage from 'react/components/Onboarding/components/AnimatedPage';
 import Welcome from 'react/components/Onboarding/components/Welcome';
@@ -7,7 +9,14 @@ import AboutChannels from 'react/components/Onboarding/components/Channels/compo
 import CreateChannel from 'react/components/Onboarding/components/Channels/components/CreateChannel';
 
 const OnboardingWrapper = styled.div`
-  padding: 1em;
+  position: relative;
+`;
+
+const SkipOnboardingLink = styled.a`
+  position: absolute;
+  right: 2em;
+  top: 2em;
+  z-index: 3;
 `;
 
 class Onboarding extends React.Component {
@@ -39,8 +48,15 @@ class Onboarding extends React.Component {
   };
 
   render() {
+    const { data: { loading, me } } = this.props;
+
+    if (loading) {
+      return null;
+    }
+
     return (
       <OnboardingWrapper>
+        <SkipOnboardingLink href={`/${me.slug}`}>Skip</SkipOnboardingLink>
         <TransitionGroup>
           <AnimatedPage key={`onboarding-page-${this.state.step}`}>
             { this.componentForStep() }
@@ -51,4 +67,4 @@ class Onboarding extends React.Component {
   }
 }
 
-export default Onboarding;
+export default graphql(userInfoQuery)(Onboarding);
