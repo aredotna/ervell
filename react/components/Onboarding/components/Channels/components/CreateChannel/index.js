@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
 import { space } from 'styled-system';
 import { preset } from 'react/styles/functions';
-import currentUserService from 'react/util/currentUserService';
+import { graphql } from 'react-apollo';
+import userInfoQuery from 'react/components/Onboarding/components/Channels/components/CreateChannel/queries/userInfo';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 import AnimatedCTAText from 'react/components/Onboarding/components/Channels/components/CreateChannel/components/AnimatedCTAText';
 import ChannelNameInput from 'react/components/Onboarding/components/UI/ChannelNameInput';
 import CTAText from 'react/components/Onboarding/components/UI/CTAText';
@@ -114,8 +115,12 @@ class CreateChannel extends React.Component {
   };
 
   render() {
+    const { data: { loading, me } } = this.props;
     const hasText = this.state.channelName;
-    const username = currentUserService().username;
+
+    if (loading) {
+      return null;
+    }
 
     return (
       <CreateChannelWrapper>
@@ -126,7 +131,7 @@ class CreateChannel extends React.Component {
             }
             positionAbsoluteDuringTransition={this.state.channelNameStep == 1}
           >
-            { this.ctaTextForChannelNameStep() }
+            {this.ctaTextForChannelNameStep()}
           </AnimatedCTAText>
         </TransitionGroup>
         <div>
@@ -135,20 +140,20 @@ class CreateChannel extends React.Component {
             value={this.state.channelName}
             onChange={this.handleChannelNameChange}/>
         </div>
-        <FadingBlockWrapper hasText={ hasText }>
+        <FadingBlockWrapper hasText={hasText}>
           <Block
             type={Types.CHANNEL}
             blockData={{
               length: 0,
               title: this.state.channelName,
               updatedAtAgo: "0 minutes ago",
-              username: username,
+              username: me.name,
               visibility: "private"
             }}
           />
         </FadingBlockWrapper>
         <FadingCTAButton
-          hasText={ hasText }
+          hasText={hasText}
           onClick={()=>{console.log("forward!")}}
         >
           Create Channel
@@ -158,8 +163,12 @@ class CreateChannel extends React.Component {
   }
 };
 
-CreateChannel.propTypes = {};
+CreateChannel.propTypes = {
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+  }).isRequired
+};
 
 CreateChannel.defaultProps = {};
 
-export default CreateChannel;
+export default graphql(userInfoQuery)(CreateChannel);
