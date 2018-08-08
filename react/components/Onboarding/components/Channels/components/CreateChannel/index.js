@@ -111,7 +111,7 @@ class CreateChannel extends React.Component {
       const { channelTitle: title } = this.state;
 
       return createChannel({ variables: { title } })
-        .then(({ data: { create_channel: { channel: { id, href, title } } } }) => {
+        .then(({ data: { create_channel: { channel: { href } } } }) => {
           window.location = href;
         })
         .catch((err) => {
