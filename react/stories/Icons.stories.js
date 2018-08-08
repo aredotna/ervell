@@ -5,7 +5,7 @@ import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
 import Button from 'react/components/UI/GenericButton';
-import Icons, { ICON_NAMES } from 'react/components/UI/Icon';
+import Icons, { ICON_NAMES } from 'react/components/UI/Icons';
 
 storiesOf('Icons', module)
   .add('Names', () => (

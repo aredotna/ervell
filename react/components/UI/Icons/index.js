@@ -5,8 +5,8 @@ import { themeGet, space } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 
-import Lock from 'react/components/UI/Icon/Lock/index.svg';
-import ArenaMark from 'react/components/UI/Icon/ArenaMark/index.svg';
+import Lock from 'react/components/UI/Icons/Lock/index.svg';
+import ArenaMark from 'react/components/UI/Icons/ArenaMark/index.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
