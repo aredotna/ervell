@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Types from 'react/components/Block/utils/Types';
-import {Channel} from 'react/components/Block/components/Types';
+import Types from 'react/components/Block/util/Types';
+import { Channel } from 'react/components/Block/components/Types';
 
 const BlockWrapper = styled.div`
   background: #fff;

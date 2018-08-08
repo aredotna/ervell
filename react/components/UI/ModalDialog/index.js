@@ -12,6 +12,14 @@ const Dialog = styled.div`
   background-color: ${colors.gray.semiLight};
   border-radius: .25em;
   padding: 5px;
+
+  ${({fitContent}) =>
+    fitContent && `
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+  `};
 `;
 
 const Content = styled.div`
@@ -32,6 +40,11 @@ const Component = ({ children, ...rest }) => (
 
 Component.propTypes = {
   children: PropTypes.node.isRequired,
+  fitContent: PropTypes.bool
+};
+
+Component.defaultProps = {
+  fitContent: false
 };
 
 export default Component;
