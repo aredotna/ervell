@@ -31,7 +31,7 @@ storiesOf('Icons', module)
   .add('Button with icon', () => (
     <Specimen>
       <Button>
-        <Icons name="Lock" /> Locked button
+        <Icons mr={3} name="Lock" /> Locked button
       </Button>
     </Specimen>
   ));
