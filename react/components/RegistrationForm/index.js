@@ -7,7 +7,7 @@ import axios from 'axios';
 import mapErrors from 'react/util/mapErrors';
 import compactObject from 'react/util/compactObject';
 
-import Button from 'react/components/UI/GenericButton';
+import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
@@ -230,7 +230,7 @@ class RegistrationForm extends Component {
         }
 
         <AuthForm.Submit>
-          <Button disabled={!accept_terms}>
+          <Button type="submit" disabled={!accept_terms}>
             {{
               resting: 'Join',
               active: 'Join',
