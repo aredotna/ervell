@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 
 import inviteeQuery from 'react/pages/authentication/AcceptInvitationPage/queries/invitee';
 
-import Icon from 'react/components/UI/Icon';
+import Icons from 'react/components/UI/Icons';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import Text from 'react/components/UI/Text';
 import RegistrationForm from 'react/components/RegistrationForm';
@@ -32,7 +32,7 @@ export default class AcceptInvitationPage extends Component {
           if (error) {
             return (
               <CenteringBox p={7} flexDirection="column">
-                <Icon name="ArenaMark" size={7} mb={9} />
+                <Icons name="ArenaMark" size={7} mb={9} />
 
                 <Text f={5} mb={6}>
                   We cannot find that invitation code.

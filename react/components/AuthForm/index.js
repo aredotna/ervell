@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Text from 'react/components/UI/Text';
-import Icon from 'react/components/UI/Icon';
+import Icons from 'react/components/UI/Icons';
 
 const Form = styled.form`
   width: ${x => x.theme.space[12]};
@@ -39,7 +39,7 @@ export default class AuthForm extends Component {
 
     return (
       <Form onSubmit={onSubmit}>
-        <Icon name="ArenaMark" size={7} mb={9} />
+        <Icons name="ArenaMark" size={7} mb={9} />
 
         {this.props.children}
       </Form>

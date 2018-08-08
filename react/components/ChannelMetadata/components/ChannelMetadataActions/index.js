@@ -3,7 +3,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import Modal from 'react/components/UI/Modal';
-import Icon from 'react/components/UI/Icon';
+import Icons from 'react/components/UI/Icons';
 import ManageChannel from 'react/components/ManageChannel';
 import Button, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
@@ -44,7 +44,7 @@ export default class ChannelMetadataActions extends Component {
         {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
             {channel.visibility === 'private' &&
-              <Icon name="Lock" />
+              <Icons name="Lock" />
             } Edit channel
           </Button>
         }
