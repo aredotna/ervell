@@ -19,7 +19,11 @@ export const calculateLineHeight = (fontSizeName, lineHeightName) => {
   return fontSizeValue * lineHeightValue;
 };
 
-export const preset = (fn, presetProps = {}) => props => fn({ ...presetProps, ...props });
+export const preset = (fn, presetProps = {}) =>
+  props => fn({ ...presetProps, ...props });
+
+export const defaultTo = (v, dV) =>
+  ((v == null || v !== v) ? dV : v); // eslint-disable-line no-self-compare
 
 export default {
   parse,

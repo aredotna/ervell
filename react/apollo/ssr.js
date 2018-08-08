@@ -8,16 +8,19 @@ export default client => (Component, props = {}) => {
   const sheet = new ServerStyleSheet();
   const WrappedComponent = wrapWithApolloProvider(client)(Component, props);
 
-  return getDataFromTree(WrappedComponent)
-    .then(() => {
-      const html = renderToString(sheet.collectStyles(WrappedComponent));
-      const styles = sheet.getStyleTags();
-      const state = client.extract();
+  const resolve = () => {
+    const html = renderToString(sheet.collectStyles(WrappedComponent));
+    const styles = sheet.getStyleTags();
+    const state = client.extract();
 
-      return {
-        html,
-        state,
-        styles,
-      };
-    });
+    return {
+      html,
+      state,
+      styles,
+    };
+  };
+
+  return getDataFromTree(WrappedComponent)
+    .then(resolve)
+    .catch(resolve);
 };

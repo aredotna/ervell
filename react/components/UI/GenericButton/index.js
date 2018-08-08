@@ -1,14 +1,45 @@
 import styled, { css } from 'styled-components';
-import { themeGet, fontSize } from 'styled-system';
+import { themeGet, fontSize, space, alignSelf } from 'styled-system';
 
-import { preset } from 'react/styles/functions';
+import { defaultTo, preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
-export const buttonBorderWidth = '1px';
-export const buttonVerticalPadding = '0.75em';
-export const buttonHorizontalPadding = '1.25em';
-export const buttonPadding = `${buttonVerticalPadding} ${buttonHorizontalPadding}`;
-export const buttonBorderRadius = '0.25em';
+export const BUTTON_DEFAULT_FONT_SIZE = 3;
+export const BUTTON_VARIANTS = { LARGE: 'LARGE', SMALL: 'SMALL' };
+export const BUTTON_LARGE_PADDING = { px: 8, py: 5 };
+export const BUTTON_SMALL_PADDING = { px: 6, py: 5 };
+export const BUTTON_SMALL_BORDER_WIDTH = '1px';
+export const BUTTON_LARGE_BORDER_WIDTH = '2px';
+export const BUTTON_BORDER_RADIUS = '0.25em';
+
+export const buttonSize = x => (
+  defaultTo(x.f, x.fontSize) < BUTTON_DEFAULT_FONT_SIZE
+    ? BUTTON_VARIANTS.SMALL
+    : BUTTON_VARIANTS.LARGE
+);
+
+export const buttonColor = ({ color, theme }) => {
+  if (color) {
+    const value = themeGet(`colors.${color}`, 'colors.gray.base')({ theme });
+
+    return `
+      color: ${value};
+      border-color: ${value};
+    `;
+  }
+
+  return '';
+};
+
+export const buttonPadding = x => preset(space, {
+  LARGE: BUTTON_LARGE_PADDING,
+  SMALL: BUTTON_SMALL_PADDING,
+}[buttonSize(x)]);
+
+export const buttonBorderWidth = x => ({
+  LARGE: BUTTON_LARGE_BORDER_WIDTH,
+  SMALL: BUTTON_SMALL_BORDER_WIDTH,
+}[buttonSize(x)]);
 
 const activeMixin = css`
   border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.bold};
@@ -25,32 +56,20 @@ const disabledMixin = css`
   opacity: 0.5;
 `;
 
-const buttonColor = ({ color, theme }) => {
-  if (color) {
-    const value = themeGet(`colors.${color}`, 'colors.gray.bold')({ theme });
-
-    return `
-      color: ${value};
-      border-color: ${value};
-    `;
-  }
-
-  return '';
-};
-
 export const mixin = css`
   all: initial;
   display: inline-block;
-  padding: ${buttonPadding};
+  ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
   border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.regular};
-  border-radius: ${buttonBorderRadius};
+  border-radius: ${BUTTON_BORDER_RADIUS};
   font-family: ${x => x.theme.fonts.sans};
   font-weight: bold;
   line-height: 1;
   user-select: none;
   cursor: pointer;
   text-align: center;
-  ${preset(fontSize, { f: 5 })}
+  ${alignSelf}
+  ${buttonPadding}
   ${buttonColor}
   ${antialiased}
 
@@ -69,8 +88,8 @@ export const GenericButtonLink = styled.a`
   ${mixin}
 `;
 
-const GenericButton = styled.a`
+export const GenericButton = styled.button`
   ${mixin}
 `;
 
-export default GenericButton;
+export default GenericButtonLink;

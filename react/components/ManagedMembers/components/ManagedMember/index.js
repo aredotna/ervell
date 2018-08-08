@@ -148,7 +148,7 @@ export default class ManagedMembers extends Component {
         {!isOwner && isRemovable &&
           <Button
             onClick={this.remove}
-            color={mode === 'clicked' && 'state.alert'}
+            color={mode === 'clicked' ? 'state.alert' : undefined}
           >
             {{
               resting: 'Remove',

@@ -6,7 +6,7 @@ import constants from 'react/styles/constants';
 
 import profileBadgeFragment from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge/fragments/profileBadge';
 
-import ArenaMark from 'react/components/UI/ArenaMark/index.svg';
+import ArenaMark from 'react/components/UI/Icon/ArenaMark/index.svg';
 
 const Container = styled.a`
   position: relative;

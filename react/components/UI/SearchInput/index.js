@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isEmpty } from 'underscore';
 
-import GenericInput from 'react/components/UI/GenericInput';
+import { Input } from 'react/components/UI/Inputs';
 
 const Container = styled.div`
   position: relative;
@@ -36,15 +36,6 @@ const Icon = styled.div`
     &:after {
       content: '\\e233'; // x- glyph
     }
-  }
-`;
-
-const Input = styled(GenericInput)`
-  padding-left: 2.5em;
-  border: 1px solid ${x => x.theme.colors.gray.regular};
-
-  &:focus {
-    border: 1px solid ${x => x.theme.colors.gray.regular};
   }
 `;
 
@@ -102,6 +93,8 @@ export default class SearchInput extends Component {
         <Icon onClick={this.handleReset} data-mode={mode} />
 
         <Input
+          px="2.5em"
+          borderColor="gray.regular"
           {...this.props}
           innerRef={(input) => { this.input = input; }}
           onChange={this.handleChange}

@@ -90,3 +90,9 @@ module.exports.en =
 
   PREMIUM_CHARGE_INITIATED: 'User clicked to submit charge for premium'
   PREMIUM_PAID: 'User paid for pro account'
+
+  LOGIN: 'User logged in'
+  REGISTER: 'User successfully registered'
+  ACCEPTED_INVITATION: 'User successfully accepted invitation'
+  FORGOT_PASSWORD: 'User forgot password'
+  RESET_PASSWORD: 'User successfully reset password'

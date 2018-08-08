@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { isNull } from 'underscore';
 import { graphql } from 'react-apollo';
 
-import GenericInput from 'react/components/UI/GenericInput';
+import { Input } from 'react/components/UI/Inputs';
 import CopyToClipboard from 'react/components/UI/CopyToClipboard';
 
 import shareChannelMutation from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton/mutations/shareChannel';
@@ -104,7 +104,7 @@ class ChannelShareButton extends Component {
 
         {mode === 'active' && channel.share.url &&
           <div>
-            <GenericInput
+            <Input
               f={1}
               value={channel.share.url}
               readOnly
