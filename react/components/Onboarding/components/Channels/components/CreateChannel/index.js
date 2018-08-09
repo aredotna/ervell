@@ -57,7 +57,7 @@ const FadingBlockWrapper = styled.div`
   pointer-events: none;
   transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
   ${space}
-  ${preset(space, { mt: 6 })}
+  ${preset(space, { my: 4 })}
 
   ${({ hasText }) =>
     hasText &&
