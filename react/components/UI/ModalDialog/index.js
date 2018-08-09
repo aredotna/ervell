@@ -13,7 +13,7 @@ const Dialog = styled.div`
   border-radius: .25em;
   padding: 5px;
 
-  ${({fitContent}) =>
+  ${({ fitContent }) =>
     fitContent && `
     height: auto;
     width: auto;
@@ -40,11 +40,11 @@ const Component = ({ children, ...rest }) => (
 
 Component.propTypes = {
   children: PropTypes.node.isRequired,
-  fitContent: PropTypes.bool
+  fitContent: PropTypes.bool,
 };
 
 Component.defaultProps = {
-  fitContent: false
+  fitContent: false,
 };
 
 export default Component;

@@ -1,3 +1,3 @@
 export {
-  default as Channel
-} from "./Channel";
+  default as Channel,
+} from './Channel';

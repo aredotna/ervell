@@ -6,7 +6,7 @@ import { getChannelOnboardingCookie, expireChannelOnboardingCookie } from 'react
 import Modal from 'react/components/UI/Modal';
 import IntroduceChannel from 'react/components/Onboarding/components/Channels/components/IntroduceChannel';
 
-const channelOnboardingChecker = WrappedChannelComponent => {
+const channelOnboardingChecker = (WrappedChannelComponent) => {
   class ChannelOnboardingChecker extends React.Component {
     componentDidMount() {
       const { data: { channel: { id } } } = this.props;
@@ -20,9 +20,9 @@ const channelOnboardingChecker = WrappedChannelComponent => {
     }
 
     render() {
-      return <WrappedChannelComponent {...this.props}/>;
+      return <WrappedChannelComponent {...this.props} />;
     }
-  };
+  }
 
   ChannelOnboardingChecker.propTypes = {
     data: PropTypes.shape({
@@ -31,6 +31,6 @@ const channelOnboardingChecker = WrappedChannelComponent => {
   };
 
   return ChannelOnboardingChecker;
-}
+};
 
 export default channelOnboardingChecker;

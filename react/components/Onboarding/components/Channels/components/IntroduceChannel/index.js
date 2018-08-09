@@ -25,7 +25,7 @@ const Section = styled.div`
 `;
 
 const IntroductionText = styled(Text).attrs({
-  f: 8
+  f: 8,
 })`
   text-align: center;
 `;
@@ -38,7 +38,7 @@ class IntroduceChannel extends React.Component {
     this.imageSrc = '/images/onboarding/addblock.gif';
 
     this.state = {
-      imageLoading: true
+      imageLoading: true,
     };
   }
 
@@ -57,7 +57,7 @@ class IntroduceChannel extends React.Component {
   };
 
   render() {
-    if (this.state.imageLoading) return <div/>;
+    if (this.state.imageLoading) return <div />;
 
     return (
       <IntroduceChannelWrapper>
@@ -71,7 +71,7 @@ class IntroduceChannel extends React.Component {
             </IntroductionText>
           </Section>
           <Section>
-            <img src={this.imageSrc} draggable="false"/>
+            <img src={this.imageSrc} draggable="false" />
           </Section>
           <Section>
             <IntroductionText>
@@ -88,6 +88,6 @@ class IntroduceChannel extends React.Component {
       </IntroduceChannelWrapper>
     );
   }
-};
+}
 
 export default IntroduceChannel;

@@ -23,7 +23,7 @@ const CreateChannelWrapper = styled.div`
 `;
 
 const FadingCTAText = styled(CTAText)`
-  transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
+  transition: opacity ${ANIMATION_PERIOD}ms ease-in-out;
 
   ${({ hasText }) =>
     hasText &&
@@ -35,14 +35,14 @@ const FadingCTAText = styled(CTAText)`
 const FadingCTAButton = styled(CTAButton)`
   opacity: 0;
   pointer-events: none;
-  transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
+  transition: opacity ${ANIMATION_PERIOD}ms ease-in-out;
 
   ${({ hasText }) =>
     hasText &&
     `
     opacity: 1;
     pointer-events: all;
-    transition-delay: ${ ANIMATION_DELAY }ms;
+    transition-delay: ${ANIMATION_DELAY}ms;
   `};
 
   ${({ disabled }) =>
@@ -55,7 +55,7 @@ const FadingCTAButton = styled(CTAButton)`
 const FadingBlockWrapper = styled.div`
   opacity: 0;
   pointer-events: none;
-  transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
+  transition: opacity ${ANIMATION_PERIOD}ms ease-in-out;
   ${space}
   ${preset(space, { my: 4 })}
 
@@ -64,7 +64,7 @@ const FadingBlockWrapper = styled.div`
     `
     opacity: 1;
     pointer-events: all;
-    transition-delay: ${ ANIMATION_DELAY }ms;
+    transition-delay: ${ANIMATION_DELAY}ms;
   `};
 `;
 
@@ -73,24 +73,24 @@ class CreateChannel extends React.Component {
     super(props);
 
     this.state = {
-      channelTitle: "",
+      channelTitle: '',
       channelTitleStep: 0,
-      saving: false
+      saving: false,
     };
   }
 
-  handleChannelTitleChange = e => {
+  handleChannelTitleChange = (e) => {
     const name = e.target.value;
 
     this.setState({
-      channelTitle: name
+      channelTitle: name,
     });
 
     if (name.length > 0 && this.state.channelTitleStep == 0) {
       // Mimic delay of other elements using CSS transition delay.
       this.channelTitleStepChangeTimeout = setTimeout(() => {
         this.setState({
-          channelTitleStep: 1
+          channelTitleStep: 1,
         });
       }, ANIMATION_DELAY);
     } else {
@@ -98,8 +98,8 @@ class CreateChannel extends React.Component {
 
       if (name.length === 0 && this.state.channelTitleStep == 1) {
         this.setState({
-          channelTitleStep: 0
-        })
+          channelTitleStep: 0,
+        });
       }
     }
   };
@@ -136,7 +136,7 @@ class CreateChannel extends React.Component {
         );
       case 1:
         return (
-          <FadingCTAText hasText={true}>
+          <FadingCTAText hasText>
             Click “Create Channel”
           </FadingCTAText>
         );
@@ -153,7 +153,7 @@ class CreateChannel extends React.Component {
 
     return (
       <CreateChannelWrapper>
-        <TransitionGroup style={{display: "block", position: "relative"}}>
+        <TransitionGroup style={{ display: 'block', position: 'relative' }}>
           <AnimatedCTAText
             key={
               `onboarding-create-channel-cta-step-${this.state.channelTitleStep}`
@@ -165,10 +165,11 @@ class CreateChannel extends React.Component {
         </TransitionGroup>
         <div>
           <ChannelTitleInput
-            autoFocus={true}
+            autoFocus
             disabled={this.state.saving}
             onChange={this.handleChannelTitleChange}
-            value={this.state.channelTitle}/>
+            value={this.state.channelTitle}
+          />
         </div>
         <FadingBlockWrapper hasText={hasText}>
           <Block
@@ -176,9 +177,9 @@ class CreateChannel extends React.Component {
             blockData={{
               length: 0,
               title: this.state.channelTitle,
-              updatedAtAgo: "0 minutes ago",
+              updatedAtAgo: '0 minutes ago',
               username: name,
-              visibility: "private"
+              visibility: 'private',
             }}
           />
         </FadingBlockWrapper>
@@ -192,7 +193,7 @@ class CreateChannel extends React.Component {
       </CreateChannelWrapper>
     );
   }
-};
+}
 
 CreateChannel.propTypes = {
   createChannel: PropTypes.func.isRequired,

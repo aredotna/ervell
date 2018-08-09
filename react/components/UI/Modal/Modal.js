@@ -21,13 +21,15 @@ export default class Modal extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     fitContent: PropTypes.bool,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
   }
 
   ModalDialog = ModalDialog
 
   render() {
-    const { children, fitContent, onClose, ...rest } = this.props;
+    const {
+      children, fitContent, onClose, ...rest
+    } = this.props;
 
     return (
       <ModalBackdrop {...rest} onClick={onClose}>

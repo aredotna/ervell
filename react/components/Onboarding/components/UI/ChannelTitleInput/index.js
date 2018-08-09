@@ -5,7 +5,7 @@ import { mixin, inputHorizontalPadding } from 'react/components/UI/Inputs';
 import AutosizeInput from 'react-input-autosize';
 
 const ChannelTitleInput = styled(AutosizeInput).attrs({
-  f: 8
+  f: 8,
 })`
   max-width: 100%;
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CTAText from 'react/components/Onboarding/components/UI/CTAText';
 import CTAButton from 'react/components/Onboarding/components/UI/CTAButton';
 
-const Welcome = props => {
+const Welcome = (props) => {
   const { goForward } = props;
 
   return (
@@ -22,7 +22,7 @@ const Welcome = props => {
 };
 
 Welcome.propTypes = {
-  goForward: PropTypes.func.isRequired
+  goForward: PropTypes.func.isRequired,
 };
 
 export default Welcome;

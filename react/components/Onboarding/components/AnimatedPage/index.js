@@ -15,7 +15,7 @@ const AnimatedPageWrapper = styled.div`
   right: 0;
   text-align: center;
   top: 0;
-  transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
+  transition: opacity ${ANIMATION_PERIOD}ms ease-in-out;
   width: 100%;
 `;
 
@@ -24,7 +24,7 @@ class AnimatedPage extends React.Component {
     super(props);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 
@@ -50,7 +50,7 @@ class AnimatedPage extends React.Component {
 
   animateOut(callback) {
     this.setState({ show: false }, () => {
-      setTimeout(callback, ANIMATION_PERIOD)
+      setTimeout(callback, ANIMATION_PERIOD);
     });
   }
 
@@ -63,6 +63,6 @@ class AnimatedPage extends React.Component {
       </AnimatedPageWrapper>
     );
   }
-};
+}
 
 export default AnimatedPage;

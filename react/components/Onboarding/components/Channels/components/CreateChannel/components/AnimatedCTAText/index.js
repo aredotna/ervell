@@ -14,9 +14,9 @@ const ANIMATION_PERIOD = 250;
 // elements on the page.
 const AnimatedPageWrapper = styled.div`
   opacity: ${({ opacity }) => opacity};
-  transition: opacity ${ ANIMATION_PERIOD }ms ease-in-out;
+  transition: opacity ${ANIMATION_PERIOD}ms ease-in-out;
 
-  ${({positionAbsoluteDuringTransition}) =>
+  ${({ positionAbsoluteDuringTransition }) =>
     positionAbsoluteDuringTransition &&
     `
     &:not(:only-child) {
@@ -33,7 +33,7 @@ class AnimatedCTAText extends React.Component {
     super(props);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 
@@ -57,7 +57,7 @@ class AnimatedCTAText extends React.Component {
 
   animateOut(callback) {
     this.setState({ show: false }, () => {
-      setTimeout(callback, ANIMATION_PERIOD)
+      setTimeout(callback, ANIMATION_PERIOD);
     });
   }
 
@@ -71,14 +71,14 @@ class AnimatedCTAText extends React.Component {
       </AnimatedPageWrapper>
     );
   }
-};
+}
 
 AnimatedCTAText.propTypes = {
-  positionAbsoluteDuringTransition: PropTypes.bool.isRequired
+  positionAbsoluteDuringTransition: PropTypes.bool.isRequired,
 };
 
 AnimatedCTAText.defaultProps = {
-  positionAbsoluteDuringTransition: false
+  positionAbsoluteDuringTransition: false,
 };
 
 export default AnimatedCTAText;

@@ -17,7 +17,7 @@ const renderOnboarding = (req, res, next) => {
 const middlewareStack = [
   ensureLoggedInMiddleware,
   apolloMiddleware,
-  setOnboardingComponentMiddleware
+  setOnboardingComponentMiddleware,
 ];
 
 app.get('/welcome', ...middlewareStack, renderOnboarding);

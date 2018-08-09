@@ -19,10 +19,10 @@ const BlockPadding = styled.div`
   padding-top: 100%;
 `;
 
-const Block = props => {
+const Block = (props) => {
   const {
     blockData,
-    type
+    type,
   } = props;
 
   const blockContent = () => {
@@ -44,7 +44,7 @@ const Block = props => {
 
   return (
     <BlockWrapper>
-      <BlockPadding/>
+      <BlockPadding />
       {blockContent()}
     </BlockWrapper>
   );
@@ -52,7 +52,7 @@ const Block = props => {
 
 Block.propTypes = {
   blockData: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 };
 
 export default Block;
