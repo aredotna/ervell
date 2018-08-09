@@ -122,6 +122,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     label = ($target = $(e.currentTarget)).text()
 
+    track.click en.PREMIUM_CHARGE_INITIATED,
+      label: 'Plan type'
+      value: @model.get('plan_id')
+
     $target
       .prop 'disabled', true
       .text 'Subscribing'
@@ -142,13 +146,13 @@ module.exports = class PaymentMethodsView extends Backbone.View
         Promise($.get('/me/refresh'))
 
       .then =>
-        location.reload()
-
-        $target.text 'Thank you!'
-
         track.submit en.PREMIUM_PAID,
           label: 'Plan type'
           value: @model.get('plan_id')
+
+        location.reload()
+
+        $target.text 'Thank you!'
 
       .catch ({ responseJSON: { message, description }}) =>
         $target
@@ -159,10 +163,6 @@ module.exports = class PaymentMethodsView extends Backbone.View
           @els.errors
             .show()
             .text description
-
-    track.click en.PREMIUM_CHARGE_INITIATED,
-      label: 'Plan type'
-      value: @model.get('plan_id')
 
   reenablePremium: (e) ->
     e.preventDefault()
