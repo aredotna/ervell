@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import GenericButton from 'react/components/UI/GenericButton';
 
 const CTAButton = styled(GenericButton).attrs({
-  f: 6,
+  f: 5,
 })`
   ${space}
   ${preset(space, { mt: 6 })}

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Text from 'react/components/UI/Text';
 
@@ -25,7 +26,7 @@ const Section = styled.div`
 `;
 
 const IntroductionText = styled(Text).attrs({
-  f: 8,
+  f: 7,
 })`
   text-align: center;
 `;
@@ -71,11 +72,12 @@ class IntroduceChannel extends React.Component {
             </IntroductionText>
           </Section>
           <Section>
-            <img src={this.imageSrc} draggable="false" />
+            <img src={this.imageSrc} draggable="false" alt="" />
           </Section>
           <Section>
             <IntroductionText>
-              Use the <b>add block</b> to drop files from your desktop, save links and videos from the web, or add text.
+              Use the <b>add block</b> to drop files from your desktop,
+              save links and videos from the web, or add text.
             </IntroductionText>
           </Section>
         </BodyWrapper>
@@ -89,5 +91,9 @@ class IntroduceChannel extends React.Component {
     );
   }
 }
+
+IntroduceChannel.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 export default IntroduceChannel;

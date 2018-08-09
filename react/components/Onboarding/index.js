@@ -43,6 +43,8 @@ class Onboarding extends React.Component {
         return <AboutChannels goForward={this.goForward} />;
       case 3:
         return <CreateChannel />;
+      default:
+        return null;
     }
   };
 

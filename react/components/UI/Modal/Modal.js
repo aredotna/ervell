@@ -22,7 +22,11 @@ export default class Modal extends Component {
     children: PropTypes.node.isRequired,
     fitContent: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
-  }
+  };
+
+  static defaultProps = {
+    fitContent: false,
+  };
 
   ModalDialog = ModalDialog
 

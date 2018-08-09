@@ -74,7 +74,8 @@ class AnimatedCTAText extends React.Component {
 }
 
 AnimatedCTAText.propTypes = {
-  positionAbsoluteDuringTransition: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  positionAbsoluteDuringTransition: PropTypes.bool,
 };
 
 AnimatedCTAText.defaultProps = {

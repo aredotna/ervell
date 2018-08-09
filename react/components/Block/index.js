@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Types from 'react/components/Block/util/Types';
-import { Channel } from 'react/components/Block/components/Types';
+import Channel from 'react/components/Block/components/Types/Channel';
 
 const BlockWrapper = styled.div`
   background: #fff;
@@ -33,6 +33,9 @@ const Block = (props) => {
         BlockTypeKlass = Channel;
         break;
       // TODO: Fill in the rest...
+      default:
+        console.error(`Invalid Block Type ${type} for Block Component.`);
+        return null;
     }
 
     return (
@@ -51,7 +54,7 @@ const Block = (props) => {
 };
 
 Block.propTypes = {
-  blockData: PropTypes.object.isRequired,
+  blockData: PropTypes.shape({}).isRequired,
   type: PropTypes.string.isRequired,
 };
 

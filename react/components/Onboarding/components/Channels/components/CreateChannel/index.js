@@ -86,7 +86,7 @@ class CreateChannel extends React.Component {
       channelTitle: name,
     });
 
-    if (name.length > 0 && this.state.channelTitleStep == 0) {
+    if (name.length > 0 && this.state.channelTitleStep === 0) {
       // Mimic delay of other elements using CSS transition delay.
       this.channelTitleStepChangeTimeout = setTimeout(() => {
         this.setState({
@@ -96,7 +96,7 @@ class CreateChannel extends React.Component {
     } else {
       clearTimeout(this.channelTitleStepChangeTimeout);
 
-      if (name.length === 0 && this.state.channelTitleStep == 1) {
+      if (name.length === 0 && this.state.channelTitleStep === 1) {
         this.setState({
           channelTitleStep: 0,
         });
@@ -140,6 +140,8 @@ class CreateChannel extends React.Component {
             Click “Create Channel”
           </FadingCTAText>
         );
+      default:
+        return null;
     }
   };
 
@@ -158,7 +160,7 @@ class CreateChannel extends React.Component {
             key={
               `onboarding-create-channel-cta-step-${this.state.channelTitleStep}`
             }
-            positionAbsoluteDuringTransition={this.state.channelTitleStep == 1}
+            positionAbsoluteDuringTransition={this.state.channelTitleStep === 1}
           >
             {this.ctaTextForChannelTitleStep()}
           </AnimatedCTAText>

@@ -17,4 +17,4 @@ export const Label = _Label;
 export const mixin = _mixin;
 export const inputVerticalPadding = x => `${x.theme.space[4]}`;
 export const inputHorizontalPadding = x => `${x.theme.space[5]}`;
-export const inputPadding = x => `${inputVerticalPadding} ${inputHorizontalPadding}`;
+export const inputPadding = `${inputVerticalPadding} ${inputHorizontalPadding}`;

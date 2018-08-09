@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ANIMATION_PERIOD = 500;
@@ -64,5 +65,9 @@ class AnimatedPage extends React.Component {
     );
   }
 }
+
+AnimatedPage.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default AnimatedPage;

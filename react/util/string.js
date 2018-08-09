@@ -1,5 +1,5 @@
 export const truncate = (text, limit = 200) => {
-  if (!text) { return; }
+  if (!text) { return text; }
 
   const truncated = text.substr(0, limit);
 
