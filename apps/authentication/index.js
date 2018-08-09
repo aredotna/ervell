@@ -3,6 +3,7 @@ import apolloMiddleware from 'react/apollo/middleware';
 
 import logoutMiddleware from 'apps/authentication/middleware/logout';
 import redirectToMiddleware from 'lib/middleware/redirect_to.coffee';
+import setRedirectToMiddleware from 'lib/middleware/setRedirectTo';
 
 import Routes from 'apps/authentication/Routes';
 import withStaticRouter from 'react/hocs/WithStaticRouter';
@@ -13,10 +14,8 @@ app
   .set('views', `${__dirname}/templates`)
   .set('view engine', 'jade')
 
-  .get(/^\/(sign_up|log_in|forgot|register\/\w+|reset\/\w+)/, apolloMiddleware, (req, res, next) => {
+  .get(/^\/(sign_up|log_in|forgot|register\/\w+|reset\/\w+)/, setRedirectToMiddleware, apolloMiddleware, (req, res, next) => {
     if (req.user && req.user.id) return res.redirect('/');
-
-    res.locals.sd.REDIRECT_TO = req.query['redirect-to'] || '/';
 
     return req.apollo.render(withStaticRouter(Routes))
       .then(apollo => res.render('index', { apollo }))
