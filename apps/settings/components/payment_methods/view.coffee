@@ -2,7 +2,7 @@ Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { extend, invoke } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
-{ track, en } = require '../../../../lib/analytics.coffee'
+{ track, en, trackWithPromise } = require '../../../../lib/analytics.coffee'
 styles = require './lib/styles.coffee'
 CouponCodeView = require '../coupon_code/view.coffee'
 template = -> require('./index.jade') arguments...
@@ -130,6 +130,10 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .prop 'disabled', true
       .text 'Subscribing'
 
+    track.click en.PREMIUM_CHARGE_INITIATED,
+      label: 'Plan type'
+      value: @model.get('plan_id')
+
     @getToken(@card)
       .then (token) =>
         attrs =
@@ -145,11 +149,11 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .then =>
         Promise($.get('/me/refresh'))
 
-      .then =>
-        track.submit en.PREMIUM_PAID,
+      .then => 
+        trackWithPromise.submit en.PREMIUM_PAID,
           label: 'Plan type'
           value: @model.get('plan_id')
-
+      .then =>
         location.reload()
 
         $target.text 'Thank you!'
