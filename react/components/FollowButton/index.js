@@ -57,7 +57,11 @@ class FollowButton extends Component {
     if (loading) return <span>Follow</span>;
 
     const {
-      id, type, follow: _follow, unfollow: _unfollow,
+      id,
+      type,
+      follow: _follow,
+      unfollow: _unfollow,
+      isLoggedIn: _isLoggedIn,
       data: { followable },
       ...rest
     } = this.props;

@@ -21,3 +21,10 @@ module.exports =
       explore: 50
       examples: 50
     dimension: 'dimension8'
+
+  premium_message:
+    key: 'premium_message'
+    outcomes: 
+      utility: 50
+      lifestyle: 50
+    dimension: 'dimension9'

@@ -3,49 +3,23 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isEmpty } from 'underscore';
 
-import GenericInput from 'react/components/UI/GenericInput';
+import Icons from 'react/components/UI/Icons';
+import { Input } from 'react/components/UI/Inputs';
 
 const Container = styled.div`
   position: relative;
-  pointer-events: none;
-  overflow: hidden;
 `;
 
 const Icon = styled.div`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
-  transform: translateY(-50%);
-  padding: 1em 0;
-  margin-top: 0.125em;
-  cursor: pointer;
-  pointer-events: all;
+  bottom: 0;
   width: 2.5em;
-  text-align: center;
-  color: ${x => x.theme.colors.gray.medium};
-
-  // TODO: Replace with SVG
-  &:after {
-    font-family: 'Iconic';
-    content: '\\e1cf'; // magnifying-glass glyph
-  }
-
-  // TODO: Replace with SVG
-  &[data-mode='active'] {
-    &:after {
-      content: '\\e233'; // x- glyph
-    }
-  }
-`;
-
-const Input = styled(GenericInput)`
-  padding-left: 2.5em;
-  border: 1px solid ${x => x.theme.colors.gray.regular};
-
-  &:focus {
-    border: 1px solid ${x => x.theme.colors.gray.regular};
-  }
+  cursor: pointer;
 `;
 
 export default class SearchInput extends Component {
@@ -99,9 +73,19 @@ export default class SearchInput extends Component {
 
     return (
       <Container>
-        <Icon onClick={this.handleReset} data-mode={mode} />
+        <Icon onClick={this.handleReset}>
+          <Icons
+            color="gray.medium"
+            name={{
+              resting: 'MagnifyingGlass',
+              active: 'X',
+            }[mode]}
+          />
+        </Icon>
 
         <Input
+          px="2.5em"
+          borderColor="gray.regular"
           {...this.props}
           innerRef={(input) => { this.input = input; }}
           onChange={this.handleChange}

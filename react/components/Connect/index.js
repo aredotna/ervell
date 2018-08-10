@@ -10,7 +10,7 @@ import createConnectionMutation from 'react/components/Connect/mutations/createC
 import removeConnectionMutation from 'react/components/Connect/mutations/removeConnection';
 
 import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
-import { inputPadding } from 'react/components/UI/GenericInput';
+import { inputPadding } from 'react/components/UI/Inputs';
 
 const Container = styled.div`
   position: relative;
@@ -27,7 +27,7 @@ const Close = styled.a.attrs({
   position: absolute;
   top: 0;
   right: 100%;
-  padding: ${inputPadding};
+  padding: ${inputPadding}; // TODO
   text-align: center;
   font-weight: bold;
   font-size: ${x => x.theme.fontSizesIndexed.xs};

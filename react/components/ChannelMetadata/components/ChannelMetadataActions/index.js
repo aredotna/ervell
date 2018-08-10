@@ -3,38 +3,19 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import Modal from 'react/components/UI/Modal';
-import Icon from 'react/components/UI/Icons';
-import Lock from 'react/components/UI/Icons/Lock/index.svg';
+import Icons from 'react/components/UI/Icons';
 import ManageChannel from 'react/components/ManageChannel';
-import GenericButton, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
+import Button, { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 import FollowButton from 'react/components/FollowButton';
 import MuteChannelButton from 'react/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton';
 
 import channelMetadataActionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/fragments/channelMetadataActions';
 
-const Buttons = styled(ButtonGroup)`
-  display: flex;
-`;
-
-const Button = styled(GenericButton).attrs({ f: 1 })`
-`;
-
-const ChannelFollowButton = styled(FollowButton).attrs({ f: 1 })`
+const ChannelFollowButton = styled(FollowButton)`
   ${buttonMixin}
 `;
 
-const LockIcon = props => (
-  <Icon {...props}>
-    <Lock />
-  </Icon>
-);
-
-const PrivateChannelLockIcon = styled(LockIcon).attrs({
-  color: ({ theme }) => theme.colors.gray.bold,
-})`
-  margin-right: 0.33em;
-`;
 
 export default class ChannelMetadataActions extends Component {
   static propTypes = {
@@ -51,7 +32,7 @@ export default class ChannelMetadataActions extends Component {
     const { channel, channel: { id, can } } = this.props;
 
     return (
-      <Buttons>
+      <ButtonGroup f={1}>
         {can.follow &&
           <ChannelFollowButton id={id} type="CHANNEL" />
         }
@@ -63,11 +44,11 @@ export default class ChannelMetadataActions extends Component {
         {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
             {channel.visibility === 'private' &&
-              <PrivateChannelLockIcon />
+              <Icons mr={3} name="Lock" />
             } Edit channel
           </Button>
         }
-      </Buttons>
+      </ButtonGroup>
     );
   }
 }

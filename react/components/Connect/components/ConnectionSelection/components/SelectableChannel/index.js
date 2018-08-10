@@ -8,7 +8,7 @@ import selectableChannelFragment from 'react/components/Connect/components/Conne
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
 import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
-import { inputPadding } from 'react/components/UI/GenericInput';
+import { inputPadding } from 'react/components/UI/Inputs';
 
 const Container = styled.div.attrs({
   role: 'button',
@@ -71,7 +71,7 @@ const HoverableInner = styled(TickerTapeHover).attrs({
   speed: 1,
   offsetBuffer: 32,
 })`
-  padding: ${inputPadding};
+  padding: ${inputPadding}; // TODO
 `;
 
 const Separator = styled.div`

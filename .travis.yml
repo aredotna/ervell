@@ -2,7 +2,8 @@ language: node_js
 node_js:
 - '8'
 script:
-- make test
+- yarn jest
+- yarn lint
 before_deploy:
 - if [ $TRAVIS_BRANCH = 'master' ]; then APP_NAME=ervell-staging S3_BUCKET=ervell-staging
   yarn predeploy; fi

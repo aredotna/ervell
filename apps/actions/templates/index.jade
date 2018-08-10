@@ -8,6 +8,6 @@ block body
     != apollo.html
 
 block scripts
-  script( src= asset('/assets/actions.js') )
   script.
     window.__APOLLO_STATE__ = !{JSON.stringify(apollo.state).replace(/</g, '\\u003c')};
+  script( src= asset('/assets/actions.js') )

@@ -154,11 +154,13 @@ module.exports = (app) ->
   if NODE_ENV is 'development'
     app.use (err, req, res, next) =>
       res.status(err.status or 500)
-      res.json({
-        message: err.message,
-        status: err.status,
-        stack: err.stack,
-      })
+      res.send("""
+        <h1>#{err.status or 500}</h1>
+        <h2>Message</h2>
+        <pre>#{err.message}</pre>
+        <h3>Stacktrace</h3>
+        <pre>#{err.stack}</pre>
+      """)
   else
     # TODO: Kill this/replace with something that's not a Node module
     artsyError.handlers app,

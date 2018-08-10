@@ -24,13 +24,12 @@ const __FONT_SIZE_SCALE__ = [
   'xs', // 1
   'sx', // 2
   'sm', // 3
-  'sm', // 4
-  'md', // 5 (base)
-  'lg', // 6
-  'h4', // 7
-  'h3', // 8
-  'h2', // 9
-  'h1', // 10
+  'md', // 4 (base)
+  'lg', // 5
+  'h4', // 6
+  'h3', // 7
+  'h2', // 8
+  'h1', // 9
 ];
 
 export const FONT_SIZE_NAMES = __FONT_SIZE_SCALE__;

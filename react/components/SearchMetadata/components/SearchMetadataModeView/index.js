@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+
 import Pocket from 'react/components/UI/Pocket';
 import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
 
-const SearchMetadataModeView = props => {
-  const { search } = props;
-
+const SearchMetadataModeView = ({ search }) => {
   const isCurrent = ({ targetHref, currentRoute }) =>
     currentRoute.pathname === targetHref.split('?')[0];
 
@@ -43,11 +42,11 @@ const SearchMetadataModeView = props => {
 };
 
 SearchMetadataModeView.propTypes = {
-  search: PropTypes.string
+  search: PropTypes.string,
 };
 
 SearchMetadataModeView.defaultProps = {
-  search: ""
+  search: '',
 };
 
 export default SearchMetadataModeView;

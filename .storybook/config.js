@@ -1,6 +1,7 @@
 import { addDecorator, configure } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import apolloStorybookDecorator from 'apollo-storybook-react';
+import StoryRouter from 'storybook-react-router';
 
 import typeDefs from 'react/apollo/schema.graphql';
 
@@ -16,6 +17,8 @@ addDecorator(
 );
 
 addDecorator(wrapWithThemeProvider);
+
+addDecorator(StoryRouter());
 
 setOptions({
   name: 'Are.na',
