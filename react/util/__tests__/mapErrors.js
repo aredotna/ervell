@@ -1,6 +1,39 @@
 import mapErrors from 'react/util/mapErrors';
 
 describe('mapErrors', () => {
+  describe('handles errors with no graphQL errors', () => {
+    const ERROR = new Error('This is an error.');
+
+    it('handles the error properly', () => {
+      expect(mapErrors(ERROR))
+        .toEqual({
+          attributeErrors: {},
+          errorMessage: 'This is an error.',
+        });
+    });
+  });
+
+  describe('a response with multiple attribute errors', () => {
+    const RESPONSE = {
+      data: { registration: null },
+      errors: [{
+        message: "doesn't match Password", locations: [{ line: 2, column: 3 }], path: ['registration'], extensions: { code: 'UNPROCESSABLE_ENTITY', attribute: 'password_confirmation' },
+      }, {
+        message: 'is too short (minimum is 6 characters)', locations: [{ line: 2, column: 3 }], path: ['registration'], extensions: { code: 'UNPROCESSABLE_ENTITY', attribute: 'password' },
+      }],
+    };
+
+    it('maps the error messages into their respective attributes', () => {
+      expect(mapErrors({ graphQLErrors: RESPONSE.errors }))
+        .toEqual({
+          attributeErrors: {
+            password: 'is too short (minimum is 6 characters)',
+            password_confirmation: "doesn't match Password",
+          },
+          errorMessage: null,
+        });
+    });
+  });
   describe('a response with no attribute errors and a single overall error', () => {
     const RESPONSE = {
       data: { registration: null },
