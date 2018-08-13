@@ -67,6 +67,7 @@
     "express-subdomain": "^1.0.4",
     "fastclick": "^1.0.6",
     "feed": "^0.2.6",
+    "file-loader": "^1.1.11",
     "forever": "*",
     "global": "^4.3.2",
     "graphql": "^0.13.2",

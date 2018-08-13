@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Text from 'react/components/UI/Text';
+import addBlockImagePath from 'Images/onboarding/addblock.gif';
 
 const IntroduceChannelWrapper = styled.div`
   display: flex;
@@ -31,12 +32,11 @@ const IntroductionText = styled(Text).attrs({
   text-align: center;
 `;
 
-
 class IntroduceChannel extends React.Component {
   constructor(props) {
     super(props);
 
-    this.imageSrc = '/images/onboarding/addblock.gif';
+    this.imageSrc = addBlockImagePath;
 
     this.state = {
       imageLoading: true,

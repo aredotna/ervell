@@ -28,6 +28,10 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(gif|svg|jpg|png)$/,
+        loader: "file-loader",
+      },
+      {
         test: /\.coffee$/,
         exclude: /node_modules/,
         loader: 'coffee-loader',
@@ -103,6 +107,7 @@ const config = {
   resolve: {
     alias: {
       'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+      'Images': path.join(__dirname, "public", "images"),
     },
     extensions: ['.js', '.jsx', '.json', '.jade', '.coffee'],
     modules: [
