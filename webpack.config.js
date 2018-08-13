@@ -29,7 +29,7 @@ const config = {
     rules: [
       {
         test: /\.(gif|svg|jpg|png)$/,
-        loader: "file-loader",
+        loader: 'file-loader',
       },
       {
         test: /\.coffee$/,
@@ -107,7 +107,7 @@ const config = {
   resolve: {
     alias: {
       'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
-      'Images': path.join(__dirname, "public", "images"),
+      Images: path.join(__dirname, 'public', 'images'),
     },
     extensions: ['.js', '.jsx', '.json', '.jade', '.coffee'],
     modules: [
