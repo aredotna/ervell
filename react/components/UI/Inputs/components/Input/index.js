@@ -55,9 +55,8 @@ export default class Input extends Component {
     return (
       <Box {...boxProps}>
         <TextInput
-          onChange={this.handleChange}
-          hasError={mode === 'error'}
           {...inputProps}
+          hasError={mode === 'error'}
         />
 
         {mode === 'error' &&
