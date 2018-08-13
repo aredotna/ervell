@@ -2,7 +2,7 @@ Promise = require 'bluebird-q'
 Backbone = require 'backbone'
 { extend, invoke } = require 'underscore'
 { STRIPE_PUBLISHABLE_KEY } = require('sharify').data
-{ track, en } = require '../../../../lib/analytics.coffee'
+{ track, en, trackWithPromise } = require '../../../../lib/analytics.coffee'
 styles = require './lib/styles.coffee'
 CouponCodeView = require '../coupon_code/view.coffee'
 template = -> require('./index.jade') arguments...
@@ -122,9 +122,17 @@ module.exports = class PaymentMethodsView extends Backbone.View
 
     label = ($target = $(e.currentTarget)).text()
 
+    track.click en.PREMIUM_CHARGE_INITIATED,
+      label: 'Plan type'
+      value: @model.get('plan_id')
+
     $target
       .prop 'disabled', true
       .text 'Subscribing'
+
+    track.click en.PREMIUM_CHARGE_INITIATED,
+      label: 'Plan type'
+      value: @model.get('plan_id')
 
     @getToken(@card)
       .then (token) =>
@@ -141,14 +149,14 @@ module.exports = class PaymentMethodsView extends Backbone.View
       .then =>
         Promise($.get('/me/refresh'))
 
+      .then => 
+        trackWithPromise.submit en.PREMIUM_PAID,
+          label: 'Plan type'
+          value: @model.get('plan_id')
       .then =>
         location.reload()
 
         $target.text 'Thank you!'
-
-        track.submit en.PREMIUM_PAID,
-          label: 'Plan type'
-          value: @model.get('plan_id')
 
       .catch ({ responseJSON: { message, description }}) =>
         $target
@@ -159,10 +167,6 @@ module.exports = class PaymentMethodsView extends Backbone.View
           @els.errors
             .show()
             .text description
-
-    track.click en.PREMIUM_CHARGE_INITIATED,
-      label: 'Plan type'
-      value: @model.get('plan_id')
 
   reenablePremium: (e) ->
     e.preventDefault()

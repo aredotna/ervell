@@ -1,4 +1,4 @@
-{ extend, reduce } = require 'underscore'
+{ extend, reduce, map, wrap } = require 'underscore'
 { capitalize } = require 'underscore.string'
 { NODE_ENV, CURRENT_USER, GOOGLE_ANALYTICS_ID, DO_NOT_TRACK } = require('sharify').data
 
@@ -40,6 +40,22 @@ module.exports.modelNameAndIdToLabel = (modelName, id) ->
 
   "#{capitalize modelName}:#{id}"
 
+# 
+# Just the GA call.
+# 
+module.exports.fireGa = fireGa = (kind, description, options = {}) ->
+  if NODE_ENV is 'development'
+    console.info "analytics.#{kind}: #{description}", options
+  else
+    ga? 'send',
+      hitType: 'event'
+      eventCategory: options.category or 'UI Interactions'
+      eventAction: description
+      eventLabel: options.label
+      eventValue: options.value
+      nonInteraction: if options.category in ['Funnel Progressions', 'Impressions', 'Timing'] then 1 else 0
+
+
 categories =
   impression: 'Impressions'
   hover: 'UI Interactions'
@@ -55,18 +71,20 @@ categories =
 module.exports.track = track =
   reduce Object.keys(categories), (memo, kind) ->
     memo[kind] = (description, options = {}) ->
-      if NODE_ENV is 'development'
-        console.info "analytics.#{kind}: #{description}", options
+      fireGa(kind, description, options)
+    memo
+  , {}
 
-      else
-        ga? 'send',
-          hitType: 'event'
-          eventCategory: options.category or 'UI Interactions'
-          eventAction: description
-          eventLabel: options.label
-          eventValue: options.value
-          nonInteraction: if options.category in ['Funnel Progressions', 'Impressions', 'Timing'] then 1 else 0
-
+# 
+# Obviously there is no way of knowing if this is going to return, 
+# so we resolve after a reasonable amount of time.
+# 
+module.exports.trackWithPromise = 
+  reduce Object.keys(categories), (memo, kind) ->
+    memo[kind] = (description, options = {}) ->
+      new Promise (resolve, reject) ->
+        fireGa(kind, description, options)
+        setTimeout((-> resolve()), 300)
     memo
   , {}
 

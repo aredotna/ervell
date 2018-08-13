@@ -1,6 +1,18 @@
 import mapErrors from 'react/util/mapErrors';
 
 describe('mapErrors', () => {
+  describe('handles errors with no graphQL errors', () => {
+    const ERROR = new Error('This is an error.');
+
+    it('handles the error properly', () => {
+      expect(mapErrors(ERROR))
+        .toEqual({
+          attributeErrors: {},
+          errorMessage: 'This is an error.',
+        });
+    });
+  });
+
   describe('a response with no attribute errors and a single overall error', () => {
     const RESPONSE = {
       data: { registration: null },

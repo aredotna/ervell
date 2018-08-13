@@ -21,8 +21,10 @@ _ = require 'underscore'
     res.locals.sd.CURRENT_ACTION = 'block'
     canIndexConnections = _.all block.get('connections'), (c) -> c.user?.can_index
     canIndexUser = block.get('user')?.can_index
+    title = block.get('title')
 
     res.render 'index',
+      title: title
       block: block
       comments: comments
       md: markdown

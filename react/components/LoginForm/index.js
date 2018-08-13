@@ -61,7 +61,13 @@ export default class LoginForm extends Component {
         track.submit(en.LOGIN);
       })
 
-      .catch(({ response: { data: { description } } }) => {
+      .catch(({ response: { status, data: { description } } }) => {
+        // Account is unconfirmed and the confirmation period is expired
+        if (status === 401) {
+          window.location = `/confirm/expired?email=${email}`;
+          return;
+        }
+
         this.setState({
           mode: 'error',
           errorMessage: description,
