@@ -6,7 +6,7 @@ const MEMO = {
 };
 
 module.exports = (err = {}) => {
-  if (err.graphQLErrors.length === 0) {
+  if (!err.graphQLErrors || err.graphQLErrors.length === 0) {
     return { ...MEMO, errorMessage: err.message };
   }
 
