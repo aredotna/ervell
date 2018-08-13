@@ -6,7 +6,7 @@ import theme from 'react/styles/theme';
 import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
-import { Input } from 'react/components/UI/Inputs';
+import { Input, Textarea } from 'react/components/UI/Inputs';
 
 class FocusableInput extends Component {
   handleClick = () => {
@@ -62,6 +62,16 @@ storiesOf('Input', module)
         placeholder="Another"
         defaultValue="Wrong"
         errorMessage="Just wrong"
+      />
+      <Textarea
+        my={4}
+        defaultValue="Some text in a textarea. hasError but no error message..."
+        hasError
+      />
+      <Textarea
+        my={4}
+        defaultValue="Some text in a textarea with an errorMessage (TODO)"
+        errorMessage="I dont really support this yet."
       />
     </div>
   ))
