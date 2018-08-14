@@ -9,18 +9,14 @@ import FollowButton from 'react/components/FollowButton';
 import MessageButton from 'react/components/MessageButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 
-const Buttons = styled(ButtonGroup)`
-  display: flex;
+const Button = styled(GenericButtonLink)`
 `;
 
-const Button = styled(GenericButtonLink).attrs({ f: 1 })`
-`;
-
-const UserFollowButton = styled(FollowButton).attrs({ f: 1 })`
+const UserFollowButton = styled(FollowButton)`
   ${buttonMixin}
 `;
 
-const UserMessageButton = styled(MessageButton).attrs({ f: 1 })`
+const UserMessageButton = styled(MessageButton)`
   ${buttonMixin}
 `;
 
@@ -35,10 +31,10 @@ export default class ProfileMetadataActions extends Component {
     // Others
     if (user.can.follow) {
       return (
-        <Buttons>
+        <ButtonGroup f={1}>
           <UserMessageButton id={user.id} type="USER" />
           <UserFollowButton id={user.id} type="USER" />
-        </Buttons>
+        </ButtonGroup>
       );
     }
 

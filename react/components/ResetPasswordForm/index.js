@@ -24,6 +24,7 @@ class ResetPasswordForm extends Component {
 
   state = {
     mode: 'resting',
+    email: '',
     password: '',
     password_confirmation: '',
     attributeErrors: {},
@@ -51,15 +52,25 @@ class ResetPasswordForm extends Component {
       variables: { token: reset_password_token, password, password_confirmation },
     })
       .then(({ data: { reset_password: { me: { email } } } }) => {
-        this.setState({ mode: 'logging_in' });
+        this.setState({ mode: 'logging_in', email });
         return axios.post('/me/sign_in', { email, password });
       })
+
       .then(() => {
         this.setState({ mode: 'redirecting' });
         window.location = REDIRECT_TO;
         track.submit(en.RESET_PASSWORD);
       })
+
       .catch((err) => {
+        const { response: { status } } = err;
+
+        // Account is unconfirmed and the confirmation period is expired
+        if (status === 401) {
+          window.location = `/confirm/expired?email=${this.state.email}`;
+          return;
+        }
+
         this.setState({
           mode: 'error',
           ...mapErrors(err),
