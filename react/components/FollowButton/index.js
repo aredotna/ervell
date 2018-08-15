@@ -66,12 +66,14 @@ class FollowButton extends Component {
       ...rest
     } = this.props;
 
+    const is_followed = !!(followable && followable.is_followed);
+
     return (
       <span onClick={this.toggleFollow} role="button" tabIndex={0} {...rest}>
         {{
           true: 'Unfollow',
           false: 'Follow',
-        }[followable.is_followed]}
+        }[is_followed]}
       </span>
     );
   }
