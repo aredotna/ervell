@@ -11,6 +11,8 @@ export default {
   User: () => {
     return {
       name: `${name.firstName()} ${name.lastName()}`,
+      initials: "IOU",
+      avatar: "https://dummyimage.com/100x100/000/fff&text=**"
     }
   }
 };
