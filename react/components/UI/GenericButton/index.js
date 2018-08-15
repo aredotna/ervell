@@ -92,4 +92,28 @@ export const GenericButton = styled.button`
   ${mixin}
 `;
 
+export const DividerButton = styled.button.attrs({ f: 4 })`
+  all: initial;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
+  font-weight: bold;
+  font-family: ${x => x.theme.fonts.sans};
+  border-top: 1px solid ${x => x.theme.colors.gray.regular};
+  color: ${x => x.theme.colors.gray.regular};
+  padding: ${x => x.theme.space[5]} 0;
+
+  &:hover {
+    border-top-color: ${x => x.theme.colors.gray.bold};
+    color: ${x => x.theme.colors.gray.bold};
+  }
+
+  &:active {
+    border-top-color: ${x => x.theme.colors.gray.active};
+    color: ${x => x.theme.colors.gray.active};
+  }
+`;
+
 export default GenericButtonLink;
