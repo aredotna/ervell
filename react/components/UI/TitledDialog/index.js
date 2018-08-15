@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { DividerButton } from 'react/components/UI/GenericButton';
+
 const Container = styled.form`
   position: relative;
   display: flex;
@@ -33,6 +35,7 @@ const Section = styled.div`
 
 const Title = styled.h3`
   margin: 0 auto 1em auto;
+  font-family: ${x => x.theme.fonts.sans};
   font-size: ${x => x.theme.fontSizesIndexed.lg};
   font-weight: bold;
   text-align: center;
@@ -76,12 +79,9 @@ export default class TitledDialog extends Component {
           {children}
         </Body>
 
-        <button
-          className="Button Button--divider"
-          type="submit"
-        >
+        <DividerButton type="submit">
           {label}
-        </button>
+        </DividerButton>
       </Container>
     );
   }
