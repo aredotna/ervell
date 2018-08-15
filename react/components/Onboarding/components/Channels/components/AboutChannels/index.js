@@ -12,7 +12,7 @@ const AboutChannels = (props) => {
         Channels are collections of content built around an idea.
       </CTAText>
       <CTAText>
-        Channels can be public of private. Let’s keep this one private for now.
+        You can add images, links, PDFs, videos, text, and more.
       </CTAText>
       <CTAButton onClick={goForward}>
         Got it

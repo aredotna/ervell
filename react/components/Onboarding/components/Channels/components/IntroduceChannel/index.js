@@ -67,17 +67,13 @@ class IntroduceChannel extends React.Component {
             <IntroductionText>
               Congrats!
             </IntroductionText>
-            <IntroductionText>
-              You can now add to your channel.
-            </IntroductionText>
           </Section>
           <Section>
             <img src={this.imageSrc} draggable="false" alt="" />
           </Section>
           <Section>
             <IntroductionText>
-              Use the <b>add block</b> to drop files from your desktop,
-              save links and videos from the web, or add text.
+              Get started by adding files, links, or text to your channel.
             </IntroductionText>
           </Section>
         </BodyWrapper>
