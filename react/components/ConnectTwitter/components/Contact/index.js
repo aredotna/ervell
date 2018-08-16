@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import UserAvatar from 'react/components/UserAvatar';
 import Text from 'react/components/UI/Text';
@@ -10,7 +10,6 @@ import contactAvatarFragment from 'react/components/ConnectTwitter/components/Co
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -31,15 +30,30 @@ const Username = styled(Text)`
   align-self: center;
 `;
 
-const ContactFollow = styled(FollowButton)`
+const followMixin = css`
   font-family: ${x => x.theme.fonts.sans};
   justify-self: flex-end;
   font-weight: bold;
-  color: ${x => x.theme.colors.gray.light};
+  color: ${x => x.theme.colors.gray.medium};
   cursor: pointer;
 
   &:hover {
-    color: ${x => x.theme.colors.gray.medium};
+    color: ${x => x.theme.colors.gray.bold};
+  }
+`;
+
+const FollowText = styled.span`
+  ${followMixin}
+  color: ${x => x.theme.colors.gray.semiBold};
+  &:after {
+    content: 'Follow';
+  }
+`;
+
+const UnfollowText = styled.span`
+  ${followMixin}
+  &:after {
+    content: 'Unfollow';
   }
 `;
 
@@ -57,7 +71,12 @@ export default class Contact extends Component {
           <UserAvatar user={user} mr={5} />
           <Username>{user.name}</Username>
         </Identifier>
-        <ContactFollow id={user.id} type="USER" />
+        <FollowButton
+          id={user.id}
+          type="USER"
+          followNode={<FollowText />}
+          unfollowNode={<UnfollowText />}
+        />
       </Container>
     );
   }

@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
+import { graphql } from 'react-apollo';
+import { map } from 'underscore';
 import PropTypes from 'prop-types';
 
+import connectTwitterQuery from 'react/components/ConnectTwitter/queries/index';
+import connectTwitterFragment from 'react/components/ConnectTwitter/fragments/index';
 import TitledDialog from 'react/components/UI/TitledDialog';
+import Contact from 'react/components/ConnectTwitter/components/Contact/index';
 
-export default class ConnectTwitter extends Component {
+class ConnectTwitter extends Component {
   static propTypes = {
-    onClose: PropTypes.func.isRequired,
+    data: PropTypes.shape({
+      me: propType(connectTwitterFragment),
+    }).isRequired,
+    onClose: PropTypes.func,
+  }
+
+  static defaultProps = {
+    onClose: () => false,
   }
 
   state = {
@@ -15,6 +27,13 @@ export default class ConnectTwitter extends Component {
 
   render() {
     const { mode } = this.state;
+    const { onClose, data } = this.props;
+
+    const Inner = (
+      data.loading || !data.me.authenticated_service ?
+        '' :
+        (map(data.me.authenticated_service.contacts, user => <Contact user={user} />))
+    );
 
     return (
       <TitledDialog
@@ -22,10 +41,12 @@ export default class ConnectTwitter extends Component {
         label={{
           resting: 'Done',
         }[mode]}
-        onDone={this.handleSubmit}
+        onDone={onClose}
       >
-        <h1>hI!</h1>
+        {Inner}
       </TitledDialog>
     );
   }
 }
+
+export default graphql(connectTwitterQuery)(ConnectTwitter);

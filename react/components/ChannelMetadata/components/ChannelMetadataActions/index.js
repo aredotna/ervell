@@ -16,7 +16,6 @@ const ChannelFollowButton = styled(FollowButton)`
   ${buttonMixin}
 `;
 
-
 export default class ChannelMetadataActions extends Component {
   static propTypes = {
     channel: propType(channelMetadataActionsFragment).isRequired,

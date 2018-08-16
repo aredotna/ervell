@@ -4,7 +4,9 @@ import ConnectTwitterFragment from 'react/components/ConnectTwitter/fragments/in
 
 export default gql`
   query ConnectTwitterQuery($per: Int, $page: Int) {
-    ...ConnectTwitter
+    me {
+      ...ConnectTwitter
+    }
   }
   ${ConnectTwitterFragment}
 `;
