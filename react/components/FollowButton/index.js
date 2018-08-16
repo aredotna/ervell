@@ -59,9 +59,9 @@ class FollowButton extends Component {
   }
 
   render() {
-    const { data: { loading } } = this.props;
+    const { data: { loading }, followNode, unfollowNode } = this.props;
 
-    if (loading) return <span>Follow</span>;
+    if (loading) return <span>{followNode}</span>;
 
     const {
       id,
@@ -70,8 +70,6 @@ class FollowButton extends Component {
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
       data: { followable },
-      followNode,
-      unfollowNode,
       ...rest
     } = this.props;
 
@@ -80,8 +78,8 @@ class FollowButton extends Component {
     return (
       <span onClick={this.toggleFollow} role="button" tabIndex={0} {...rest}>
         {{
-          true: followNode,
-          false: unfollowNode,
+          false: followNode,
+          true: unfollowNode,
         }[isFollowed]}
       </span>
     );
