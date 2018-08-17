@@ -1,5 +1,4 @@
 import express from 'express';
-
 import ExploreBlocks from 'collections/explore_blocks.coffee';
 
 import apolloMiddleware from 'react/apollo/middleware';
@@ -8,9 +7,10 @@ import homePathMiddleware from 'apps/feed/middleware/homePath';
 import setTipsMiddleware from 'apps/feed/middleware/setTips';
 import setSortMiddleware from 'apps/feed/middleware/setSort';
 import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
-
 import HomeComponent from 'react/components/Home';
 import EmptyConnectTwitterPage from 'react/pages/feed/EmptyConnectTwitter';
+
+import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService';
 
 const app = express();
 
@@ -87,6 +87,17 @@ const renderExplore = (req, res, next) => {
     .catch(next);
 };
 
+const findFriendsCallback = (req, res, next) => {
+  req.apollo.client.mutate({
+    mutation: createAuthenticatedService,
+    variables: req.query,
+  })
+    .then(() => { res.redirect('/'); })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 const middlewareStack = [
   apolloMiddleware,
   setHeaderMiddleware,
@@ -103,5 +114,6 @@ app.get('/notifications', ensureLoggedInMiddleware, ...middlewareStack, renderNo
 app.get('/explore', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
 app.get('/explore/channels', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
 app.get('/explore/blocks', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
+app.get('/feed/find-friends/callback', apolloMiddleware, ensureLoggedInMiddleware, findFriendsCallback);
 
 module.exports = app;
