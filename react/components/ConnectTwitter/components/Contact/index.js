@@ -15,6 +15,7 @@ const Container = styled.div`
   align-items: center;
   padding: 3px 0;
   border-bottom: 1px solid ${x => x.theme.colors.gray.light};
+  flex-shrink: 0;
 `;
 
 const Identifier = styled.div`
