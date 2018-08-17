@@ -7,8 +7,12 @@ block body
   .Constrain.js-home-component
     != homeComponent.html
 
-  .feed-container
-    //- Rendered client-side
+  if showEmpty
+    .Constrain.js-empty-feed
+      != emptyFeedComponent.html
+  else
+    .feed-container
+      //- Rendered client-side
 
 block scripts
   script( src= asset('/assets/feed.js') )
