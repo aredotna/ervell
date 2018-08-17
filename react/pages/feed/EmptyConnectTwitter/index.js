@@ -81,9 +81,9 @@ class EmptyConnectTwitterPage extends Component {
     // we need to do the auth dance with Twitter first
     //
     if (error && error.graphQLErrors && error.graphQLErrors[0].extensions.code === 'NOT_FOUND') {
-      const { data: { API_URL } } = sharify;
+      const { data: { API_URL, APP_URL } } = sharify;
 
-      window.location.href = `${API_URL.replace('/v2', '')}/auth/twitter`;
+      window.location.href = `${API_URL.replace('/v2', '')}/auth/twitter?origin=${APP_URL}/feed/find-friends`;
 
       return false;
     }
