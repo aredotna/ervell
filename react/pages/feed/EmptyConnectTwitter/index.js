@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Mutation } from 'react-apollo';
+import { Mutation, graphql } from 'react-apollo';
+import axios from 'axios';
+import { propType } from 'graphql-anywhere';
+import PropTypes from 'prop-types';
+import sharify from 'sharify';
 
 import Modal from 'react/components/UI/Modal';
 import Text from 'react/components/UI/Text';
@@ -8,6 +12,9 @@ import PageContainer from 'react/components/UI/PageContainer';
 import ConnectTwitter from 'react/components/ConnectTwitter/index';
 import { GenericButton } from 'react/components/UI/GenericButton';
 import updateFlagMutation from 'react/pages/feed/EmptyConnectTwitter/mutations/index';
+
+import EmptyFeedConnectTwitterQuery from 'react/pages/feed/EmptyConnectTwitter/queries/index';
+import EmptyFeedCheckFragment from 'react/pages/feed/EmptyConnectTwitter/fragments/index';
 
 const ActionContainer = styled.div`
   text-align: center;
@@ -44,7 +51,9 @@ const CancelLink = () => (
               name: 'HAS_SEEN_FEED_CONNECT_TWITTER',
               value: true,
             },
-          }).then(() => { window.location.reload(true); });
+          })
+          .then(() => { axios.get('/me/refresh'); })
+          .then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
         }}
       >
         my feed
@@ -58,9 +67,27 @@ const openModal = () => {
   modal.open();
 };
 
-export default class EmptyConnectTwitterPage extends Component {
-  cancelConnect = () => {
+class EmptyConnectTwitterPage extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      me: propType(EmptyFeedCheckFragment),
+    }).isRequired,
+  }
 
+  handleConnectClick = () => {
+    const { data: { error } } = this.props;
+    //
+    // If an authentication is not found,
+    // we need to do the auth dance with Twitter first
+    //
+    if (error && error.graphQLErrors && error.graphQLErrors[0].extensions.code === 'NOT_FOUND') {
+      const { data: { API_URL } } = sharify;
+
+      window.location.href = `${API_URL.replace('/v2', '')}/auth/twitter`;
+
+      return false;
+    }
+    return openModal();
   }
 
   render() {
@@ -71,7 +98,7 @@ export default class EmptyConnectTwitterPage extends Component {
           Do you want to search your Twitter contacts to find friends on Are.na?
         </Headline>
         <ActionContainer>
-          <GenericButton onClick={openModal}>
+          <GenericButton onClick={this.handleConnectClick}>
             Connect to Twitter
           </GenericButton>
           <SmallText>
@@ -82,3 +109,5 @@ export default class EmptyConnectTwitterPage extends Component {
     );
   }
 }
+
+export default graphql(EmptyFeedConnectTwitterQuery)(EmptyConnectTwitterPage);

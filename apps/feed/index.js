@@ -10,6 +10,7 @@ import setSortMiddleware from 'apps/feed/middleware/setSort';
 import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
 
 import HomeComponent from 'react/components/Home';
+import EmptyConnectTwitterPage from 'react/pages/feed/EmptyConnectTwitter';
 
 const app = express();
 
@@ -53,7 +54,22 @@ const renderFeed = (req, res, next) => {
   res.locals.sd.CURRENT_PATH = '/';
   res.locals.sd.FEED_TYPE = 'primary';
 
-  return res.render('feed');
+  return req.apollo.render(EmptyConnectTwitterPage)
+    .then((emptyFeedComponent) => {
+      res.locals.emptyFeedComponent = emptyFeedComponent;
+
+      //
+      // Show the empty component if the person isn't following anyone
+      // and they haven't cancelled out of the notice
+      //
+      res.locals.showEmpty = (
+        req.user.get('following_count') <= 1 &&
+        !req.user.get('flags').has_seen_feed_connect_twitter
+      );
+
+      return res.render('feed');
+    })
+    .catch(next);
 };
 
 const renderNotifications = (_req, res) => {
