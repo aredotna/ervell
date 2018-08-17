@@ -62,16 +62,20 @@ const CancelLink = () => (
   </Mutation>
 );
 
-const openModal = () => {
-  const modal = new Modal(ConnectTwitter);
-  modal.open();
-};
-
 class EmptyConnectTwitterPage extends Component {
   static propTypes = {
     data: PropTypes.shape({
       me: propType(EmptyFeedCheckFragment),
     }).isRequired,
+  }
+
+  onClose = () => {
+    axios.get('/me/refresh').then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
+  }
+
+  openModal = () => {
+    const modal = new Modal(ConnectTwitter, { onClose: this.onClose });
+    modal.open();
   }
 
   handleConnectClick = () => {
@@ -87,7 +91,7 @@ class EmptyConnectTwitterPage extends Component {
 
       return false;
     }
-    return openModal();
+    return this.openModal();
   }
 
   render() {
