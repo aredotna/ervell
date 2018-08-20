@@ -67,6 +67,11 @@ class EmptyConnectTwitterPage extends Component {
     data: PropTypes.shape({
       me: propType(EmptyFeedCheckFragment),
     }).isRequired,
+    showModal: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    showModal: false,
   }
 
   onClose = (e) => {
@@ -96,6 +101,12 @@ class EmptyConnectTwitterPage extends Component {
   }
 
   render() {
+    const { showModal } = this.props;
+
+    if (showModal) {
+      this.openModal();
+    }
+
     return (
       <PageContainer>
         <Headline>
