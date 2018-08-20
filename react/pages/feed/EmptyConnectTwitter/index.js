@@ -69,12 +69,13 @@ class EmptyConnectTwitterPage extends Component {
     }).isRequired,
   }
 
-  onClose = () => {
+  onClose = (e) => {
+    e.preventDefault();
     axios.get('/me/refresh').then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
   }
 
   openModal = () => {
-    const modal = new Modal(ConnectTwitter, { onClose: this.onClose });
+    const modal = new Modal(ConnectTwitter, { onClose: this.onClose, onDone: this.onClose });
     modal.open();
   }
 

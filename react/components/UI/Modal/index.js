@@ -24,7 +24,7 @@ export default class Modal {
     });
 
     mount(
-      <this.ModalComponent onClose={this.close}>
+      <this.ModalComponent onClose={this.props.onClose}>
         {this.Provided}
       </this.ModalComponent>,
       this.el,
