@@ -2,6 +2,7 @@ const COLORS = {
   channel: {
     closed: '#4b3d67',
     public: '#17ac10',
+    open: '#17ac10', // alias `public`
     private: '#b60202',
   },
   state: {
