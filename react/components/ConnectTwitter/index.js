@@ -3,10 +3,19 @@ import { Query } from 'react-apollo';
 import { map } from 'underscore';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
+import styled from 'styled-components';
 
 import connectTwitterQuery from 'react/components/ConnectTwitter/queries/index';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import Contact from 'react/components/ConnectTwitter/components/Contact/index';
+import Text from '../UI/Text';
+
+const EmptyMessage = styled(Text).attrs({ py: 8 })`
+  text-align: center;
+  a {
+    text-decoration: underline;
+  }
+`;
 
 const updateQuery = (previousResult, { fetchMoreResult }) => {
   if (!fetchMoreResult) {
@@ -30,11 +39,11 @@ const updateQuery = (previousResult, { fetchMoreResult }) => {
 
 class ConnectTwitter extends Component {
   static propTypes = {
-    onClose: PropTypes.func,
+    onDone: PropTypes.func,
   }
 
   static defaultProps = {
-    onClose: () => false,
+    onDone: () => false,
   }
 
   state = {
@@ -57,7 +66,7 @@ class ConnectTwitter extends Component {
 
   render() {
     const { mode, page, hasMore } = this.state;
-    const { onClose } = this.props;
+    const { onDone } = this.props;
 
     return (
       <TitledDialog
@@ -65,7 +74,7 @@ class ConnectTwitter extends Component {
         label={{
           resting: 'Done',
         }[mode]}
-        onDone={onClose}
+        onDone={onDone}
       >
         <Query
           query={connectTwitterQuery}
@@ -80,6 +89,15 @@ class ConnectTwitter extends Component {
             if (error) return `Error! ${error.message}`;
 
             const { me: { authenticated_service: { contacts } } } = data;
+
+            if (contacts.length === 0) {
+              return (
+                <EmptyMessage>
+                  No contacts found. <br />
+                  Check out our <a href="/examples">examples page</a> to find channels to follow.
+                </EmptyMessage>
+              );
+            }
 
             return (
               <InfiniteScroll
