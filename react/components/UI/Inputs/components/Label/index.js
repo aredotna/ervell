@@ -1,17 +1,27 @@
 import styled from 'styled-components';
+import { display, width, space, fontSize, fontFamily, lineHeight, textColor, textAlign, alignSelf } from 'styled-system';
 
-import { mixin as textMixin } from 'react/components/UI/Text';
+import { preset } from 'react/styles/functions';
+import { antialiased } from 'react/styles/mixins';
 
-export default styled.label.attrs({
-  fontSize: 2,
-  my: 2,
-})`
+export default styled.label`
   all: initial;
-  ${textMixin}
   display: block;
   cursor: default;
 
+  ${display}
+  ${width}
+  ${preset(space, { my: 2 })}
+  ${preset(fontFamily, { font: 'sans' })}
+  ${preset(fontSize, { f: 2 })}
+  ${preset(lineHeight, { lineHeight: 1 })}
+  ${preset(textColor, { color: 'gray.base' })}
+  ${textAlign}
+  ${alignSelf}
+  ${antialiased}
+
   a {
     text-decoration: underline;
+    ${preset(textColor, { color: 'gray.base' })}
   }
 `;

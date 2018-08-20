@@ -1,4 +1,5 @@
 import _Input from 'react/components/UI/Inputs/components/Input';
+import _LabelledInput from 'react/components/UI/Inputs/components/LabelledInput';
 import _Textarea from 'react/components/UI/Inputs/components/Textarea';
 import _Select from 'react/components/UI/Inputs/components/Select';
 import _Checkbox from 'react/components/UI/Inputs/components/Checkbox';
@@ -8,6 +9,7 @@ import _Label from 'react/components/UI/Inputs/components/Label';
 import _mixin from 'react/components/UI/Inputs/mixin';
 
 export const Input = _Input;
+export const LabelledInput = _LabelledInput;
 export const Textarea = _Textarea;
 export const Select = _Select;
 export const Checkbox = _Checkbox;
