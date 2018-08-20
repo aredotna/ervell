@@ -92,7 +92,7 @@ const findFriendsCallback = (req, res, next) => {
     mutation: createAuthenticatedService,
     variables: req.query,
   })
-    .then(() => { res.redirect('/'); })
+    .then(() => { res.redirect('/?showModal=true'); })
     .catch((err) => {
       next(err);
     });
