@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
-import { graphql } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { map } from 'underscore';
 import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import connectTwitterQuery from 'react/components/ConnectTwitter/queries/index';
-import connectTwitterFragment from 'react/components/ConnectTwitter/fragments/index';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import Contact from 'react/components/ConnectTwitter/components/Contact/index';
 
 class ConnectTwitter extends Component {
   static propTypes = {
-    data: PropTypes.shape({
-      me: propType(connectTwitterFragment),
-    }).isRequired,
     onClose: PropTypes.func,
   }
 
@@ -27,13 +23,7 @@ class ConnectTwitter extends Component {
 
   render() {
     const { mode } = this.state;
-    const { onClose, data } = this.props;
-
-    const Inner = (
-      data.loading || !data.me.authenticated_service ?
-        '' :
-        (map(data.me.authenticated_service.contacts, user => <Contact user={user} />))
-    );
+    const { onClose } = this.props;
 
     return (
       <TitledDialog
@@ -43,10 +33,52 @@ class ConnectTwitter extends Component {
         }[mode]}
         onDone={onClose}
       >
-        {Inner}
+        <Query
+          query={connectTwitterQuery}
+          variables={{
+            page: 1,
+            per: 25,
+          }}
+        >
+          {({
+            loading, error, data, fetchMore,
+          }) => {
+            if (loading) return 'Loading...';
+            if (error) return `Error! ${error.message}`;
+
+            const { me: { authenticated_service: { contacts } } } = data;
+
+            return (
+              <InfiniteScroll
+                pageStart={1}
+                loadMore={() => {
+                  fetchMore({
+                    variables: {
+                      page: 2,
+                    },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prev;
+                      return Object.assign({}, prev, {
+                        me: [
+                          ...prev.me.authenticated_service.contacts,
+                          ...fetchMoreResult.me.authenticated_service.contacts,
+                        ],
+                      });
+                    },
+                  });
+                }}
+                hasMore
+                loader={<div className="loader" key={0}>Loading ...</div>}
+                useWindow
+              >
+                {map(contacts, user => <Contact user={user} key={user.id} />)}
+              </InfiniteScroll>
+            );
+          }}
+        </Query>
       </TitledDialog>
     );
   }
 }
 
-export default graphql(connectTwitterQuery)(ConnectTwitter);
+export default ConnectTwitter;
