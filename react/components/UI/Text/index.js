@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
-import { display, space, textColor, fontFamily, fontSize, lineHeight, textAlign } from 'styled-system';
+import { display, space, textColor, fontFamily, fontSize, lineHeight, textAlign, width } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 import { antialiased, neutralMarginsY } from 'react/styles/mixins';
 
 export const mixin = css`
   ${display}
+  ${width}
   ${space}
   ${preset(fontFamily, { font: 'sans' })}
   ${preset(fontSize, { f: 4 })}
