@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Mutation, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import axios from 'axios';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
