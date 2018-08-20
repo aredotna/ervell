@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Mutation, graphql } from 'react-apollo';
+import { Mutation, graphql, compose } from 'react-apollo';
 import axios from 'axios';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
@@ -40,47 +40,36 @@ const Link = styled(SmallText)`
   display: inline-block;
 `;
 
-const CancelLink = () => (
-  <Mutation mutation={updateFlagMutation}>
-    {updateFlag => (
-      <Link
-        onClick={(e) => {
-          e.preventDefault();
-          updateFlag({
-            variables: {
-              name: 'HAS_SEEN_FEED_CONNECT_TWITTER',
-              value: true,
-            },
-          })
-          .then(() => { axios.get('/me/refresh'); })
-          .then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
-        }}
-      >
-        my feed
-      </Link>
-    )}
-  </Mutation>
-);
-
 class EmptyConnectTwitterPage extends Component {
   static propTypes = {
     data: PropTypes.shape({
       me: propType(EmptyFeedCheckFragment),
     }).isRequired,
     showModal: PropTypes.bool,
+    updateFlag: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     showModal: false,
   }
 
-  onClose = (e) => {
+  updateFlagAndRefresh = (e) => {
     e.preventDefault();
-    axios.get('/me/refresh').then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
+
+    const { updateFlag } = this.props;
+
+    updateFlag({
+      variables: {
+        name: 'HAS_SEEN_FEED_CONNECT_TWITTER',
+        value: true,
+      },
+    })
+      .then(() => { axios.get('/me/refresh'); })
+      .then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
   }
 
   openModal = () => {
-    const modal = new Modal(ConnectTwitter, { onClose: this.onClose, onDone: this.onClose });
+    const modal = new Modal(ConnectTwitter, { onDone: this.updateFlagAndRefresh });
     modal.open();
   }
 
@@ -118,7 +107,7 @@ class EmptyConnectTwitterPage extends Component {
             Connect to Twitter
           </GenericButton>
           <SmallText>
-            No, just take me to <CancelLink />.
+            No, just take me to <Link onClick={this.updateFlagAndRefresh}>my feed</Link>.
           </SmallText>
         </ActionContainer>
       </PageContainer>
@@ -126,4 +115,7 @@ class EmptyConnectTwitterPage extends Component {
   }
 }
 
-export default graphql(EmptyFeedConnectTwitterQuery)(EmptyConnectTwitterPage);
+export default compose(
+  graphql(EmptyFeedConnectTwitterQuery),
+  graphql(updateFlagMutation, { name: 'updateFlag' }),
+)(EmptyConnectTwitterPage);
