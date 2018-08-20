@@ -8,6 +8,26 @@ import connectTwitterQuery from 'react/components/ConnectTwitter/queries/index';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import Contact from 'react/components/ConnectTwitter/components/Contact/index';
 
+const updateQuery = (previousResult, { fetchMoreResult }) => {
+  if (!fetchMoreResult) {
+    return previousResult;
+  }
+
+  return {
+    ...previousResult,
+    me: {
+      ...previousResult.me,
+      authenticated_service: {
+        ...previousResult.me.authenticated_service,
+        contacts: [
+          ...previousResult.me.authenticated_service.contacts,
+          ...fetchMoreResult.me.authenticated_service.contacts,
+        ],
+      },
+    },
+  };
+};
+
 class ConnectTwitter extends Component {
   static propTypes = {
     onClose: PropTypes.func,
@@ -19,10 +39,24 @@ class ConnectTwitter extends Component {
 
   state = {
     mode: 'resting',
+    page: 1,
+    hasMore: true,
+  }
+
+  afterFetchMore = (fetchMoreResult) => {
+    const { data, errors } = fetchMoreResult;
+    const hasMore = (
+      !errors &&
+      data.me.authenticated_service.contacts.length > 0
+    );
+    this.setState({
+      page: this.state.page + 1,
+      hasMore,
+    });
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode, page, hasMore } = this.state;
     const { onClose } = this.props;
 
     return (
@@ -36,8 +70,7 @@ class ConnectTwitter extends Component {
         <Query
           query={connectTwitterQuery}
           variables={{
-            page: 1,
-            per: 25,
+            per: 30,
           }}
         >
           {({
@@ -54,22 +87,13 @@ class ConnectTwitter extends Component {
                 loadMore={() => {
                   fetchMore({
                     variables: {
-                      page: 2,
+                      page: (page + 1),
                     },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      if (!fetchMoreResult) return prev;
-                      return Object.assign({}, prev, {
-                        me: [
-                          ...prev.me.authenticated_service.contacts,
-                          ...fetchMoreResult.me.authenticated_service.contacts,
-                        ],
-                      });
-                    },
-                  });
+                    updateQuery,
+                  }).then(this.afterFetchMore);
                 }}
-                hasMore
-                loader={<div className="loader" key={0}>Loading ...</div>}
-                useWindow
+                hasMore={hasMore}
+                useWindow={false}
               >
                 {map(contacts, user => <Contact user={user} key={user.id} />)}
               </InfiniteScroll>
