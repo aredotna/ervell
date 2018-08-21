@@ -8,6 +8,8 @@ import channelMetadataFragment from 'react/components/ChannelMetadata/fragments/
 
 import ChannelMetadata from 'react/components/ChannelMetadata';
 
+import channelOnboardingChecker from 'react/components/Onboarding/util/channelOnboardingChecker';
+
 class Channel extends Component {
   static propTypes = {
     data: PropTypes.shape({
@@ -31,4 +33,4 @@ class Channel extends Component {
   }
 }
 
-export default graphql(channelQuery)(Channel);
+export default graphql(channelQuery)(channelOnboardingChecker(Channel));

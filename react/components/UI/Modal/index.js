@@ -9,9 +9,10 @@ import ModalComponent from 'react/components/UI/Modal/Modal';
 export default class Modal {
   ModalComponent = ModalComponent
 
-  constructor(Component, props = {}) {
+  constructor(Component, props = {}, modalProps = {}) {
     this.Component = Component;
     this.props = props;
+    this.modalProps = modalProps;
     this.el = document.createElement('div');
   }
 
@@ -24,7 +25,7 @@ export default class Modal {
     });
 
     mount(
-      <this.ModalComponent onClose={this.close}>
+      <this.ModalComponent onClose={this.close} fitContent={this.modalProps.fitContent}>
         {this.Provided}
       </this.ModalComponent>,
       this.el,

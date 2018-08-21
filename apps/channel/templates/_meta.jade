@@ -1,4 +1,4 @@
-link(rel="canonical" href="#{channel.href()}")
+link(rel="canonical" href="#{sd.APP_URL}#{channel.href()}")
 link(
   rel='alternate'
   type='application/rss+xml'
@@ -23,3 +23,4 @@ meta(property="og:url" content="https://www.are.na/#{author.get('slug')}/#{chann
 - description = (channel.has('metadata') && channel.get('metadata').description && channel.get('metadata').description.replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
 meta(name="twitter:description", content=description)
 meta(property="og:description" content=description)
+meta(name="Description" content=description)
