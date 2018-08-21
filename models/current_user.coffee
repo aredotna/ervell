@@ -21,8 +21,9 @@ module.exports = class CurrentUser extends User
 
   sync: (method, model, options = {}) ->
     if method is 'read'
-      options.data ?= {}
-      options.data.auth_token = @get('access_token')
+      currentUser = @
+      options.beforeSend = (xhr) ->
+        xhr.setRequestHeader 'X-AUTH-TOKEN' , currentUser.get('access_token')
     super
 
   parse: (response) ->
