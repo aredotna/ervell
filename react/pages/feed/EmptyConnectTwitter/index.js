@@ -64,8 +64,8 @@ class EmptyConnectTwitterPage extends Component {
         value: true,
       },
     })
-      .then(() => { axios.get('/me/refresh'); })
-      .then(() => { setTimeout(() => { window.location = '/feed'; }, 400); });
+      .then(() => axios.get('/me/refresh'))
+      .then(() => { window.location.reload(true); });
   }
 
   openModal = () => {
