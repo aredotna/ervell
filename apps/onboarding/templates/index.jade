@@ -1,8 +1,14 @@
 extends ../../../components/layout/layouts/blank
 
+block meta
+  != onboardingComponent.styles
+
 block container
-  .Onboarding.js-onboarding
-    //- Rendered client-side
+  .Onboarding.js-onboarding-component
+    != onboardingComponent.html
 
 block scripts
   script( src= asset('/assets/onboarding.js') )
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(onboardingComponent.state).replace(/</g, '\\u003c')};
+
