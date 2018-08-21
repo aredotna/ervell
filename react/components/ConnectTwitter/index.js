@@ -12,6 +12,7 @@ import Text from '../UI/Text';
 
 const Message = styled(Text).attrs({ py: 8 })`
   text-align: center;
+  font-weight: bold;
   a {
     text-decoration: underline;
   }
