@@ -3,9 +3,13 @@
   { customer, policy } = user.related()
   policy.authenticate(user.get('access_token'))
   customer.authenticate(user.get('access_token'))
+  
+  headers = {
+    'X-AUTH-TOKEN': user.get('access_token'),
+  }
 
   Promise.all [
-    user.fetch()
+    user.fetch({ headers })
     policy.fetch()
     customer.fetch()
       .catch -> #
