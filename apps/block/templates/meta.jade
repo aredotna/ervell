@@ -1,3 +1,4 @@
+link( rel='canonical' href="#{sd.APP_URL}/block/#{block.id}" )
 meta( name='twitter:title', content="Are.na / #{block.get('title')}" )
 meta( name='twitter:url', content="https://www.are.na/block/#{block.id}" )
 meta( property='og:title' content="Are.na / #{block.get('title')}" )
@@ -11,6 +12,7 @@ if block.has('image')
 - description = (block.has('description') && block.get('description').replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
 meta(name="twitter:description", content=description)
 meta(property="og:description" content=description)
+meta(name="description" content=description)
 
 unless canIndex
   meta(name="robots" content="none")
