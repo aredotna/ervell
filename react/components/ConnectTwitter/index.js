@@ -10,7 +10,7 @@ import TitledDialog from 'react/components/UI/TitledDialog';
 import Contact from 'react/components/ConnectTwitter/components/Contact/index';
 import Text from '../UI/Text';
 
-const EmptyMessage = styled(Text).attrs({ py: 8 })`
+const Message = styled(Text).attrs({ py: 8 })`
   text-align: center;
   a {
     text-decoration: underline;
@@ -85,17 +85,17 @@ class ConnectTwitter extends Component {
           {({
             loading, error, data, fetchMore,
           }) => {
-            if (loading) return 'Loading...';
-            if (error) return `Error! ${error.message}`;
+            if (loading) return '';
+            if (error) return (<Message>Oops, an error occurred: <br />{error.message}</Message>);
 
             const { me: { authenticated_service: { contacts } } } = data;
 
             if (contacts.length === 0) {
               return (
-                <EmptyMessage>
+                <Message>
                   No contacts found. <br />
                   Check out our <a href="/examples">examples page</a> to find channels to follow.
-                </EmptyMessage>
+                </Message>
               );
             }
 
