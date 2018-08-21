@@ -8,7 +8,7 @@ const borderlessMixin = css`
   ${x => x.borderless && `
     background-color: transparent;
     border-color: transparent;
-    padding-left: 0;
+    padding: 0;
   `}
 `;
 
