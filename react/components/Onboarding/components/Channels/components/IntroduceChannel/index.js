@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Text from 'react/components/UI/Text';
-import addBlockImagePath from 'Images/onboarding/addblock.gif';
+
+const addBlockImagePath = 'https://d2w9rnfcy7mm78.cloudfront.net/2582718/original_fe96a805b0771ca9e44a235c7f9ea3cd.gif';
 
 const IntroduceChannelWrapper = styled.div`
   display: flex;
