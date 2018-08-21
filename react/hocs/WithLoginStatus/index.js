@@ -9,13 +9,22 @@ const withLoginStatus = (WrappedComponent) => {
     static propTypes = {
       data: PropTypes.shape({
         loginStatus: PropTypes.shape({
-          isLoggedIn: PropTypes.bool.isRequired,
-        }).isRequired,
-      }).isRequired,
+          isLoggedIn: PropTypes.bool,
+        }),
+      }),
+    }
+
+    static defaultProps = {
+      data: {
+        loginStatus: {
+          isLoggedIn: false,
+        },
+      },
     }
 
     render() {
-      const { data: { loginStatus: { isLoggedIn } }, ...rest } = this.props;
+      const { data: { loginStatus }, ...rest } = this.props;
+      const isLoggedIn = loginStatus && loginStatus.isLoggedIn;
 
       return (
         <WrappedComponent isLoggedIn={isLoggedIn} {...rest} />

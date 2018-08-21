@@ -87,7 +87,7 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute, isLoggedIn
 export const initClientSideApolloClient = () => {
   const { data: { CURRENT_USER, CURRENT_URL } } = sharify;
 
-  const currentRoute = { ...url.parse(CURRENT_URL) };
+  const currentRoute = { ...url.parse(CURRENT_URL || window.location.href) };
   const isLoggedIn = !!(CURRENT_USER && CURRENT_USER.id);
 
   return initApolloClient({
