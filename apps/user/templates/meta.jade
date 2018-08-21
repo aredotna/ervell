@@ -1,6 +1,6 @@
 - description = (author.has('metadata') && author.get('metadata').description && author.get('metadata').description.replace(/(?:\r\n|\r|\n)/g, ' ')) || "Are.na is a social platform for creative and collaborative research."
 
-link( rel='canonical' href="https://www.are.na/#{author.get('slug')}" )
+link( rel='canonical' href="#{sd.APP_URL}#{author.get('slug')}" )
 link(
   rel='alternate'
   type='application/rss+xml'
@@ -18,3 +18,4 @@ meta( name='twitter:description', content= description )
 meta( property='og:title' content="Are.na / #{author.get('username')}" )
 meta( property='og:url' content="https://www.are.na/#{author.get('slug')}" )
 meta( property='og:description' content= description )
+meta( name="description" content= description )

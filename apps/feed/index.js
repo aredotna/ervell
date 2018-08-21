@@ -1,5 +1,4 @@
 import express from 'express';
-
 import ExploreBlocks from 'collections/explore_blocks.coffee';
 
 import apolloMiddleware from 'react/apollo/middleware';
@@ -8,8 +7,10 @@ import homePathMiddleware from 'apps/feed/middleware/homePath';
 import setTipsMiddleware from 'apps/feed/middleware/setTips';
 import setSortMiddleware from 'apps/feed/middleware/setSort';
 import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
-
 import HomeComponent from 'react/components/Home';
+import EmptyConnectTwitterPage from 'react/pages/feed/EmptyConnectTwitter';
+
+import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService';
 
 const app = express();
 
@@ -53,7 +54,22 @@ const renderFeed = (req, res, next) => {
   res.locals.sd.CURRENT_PATH = '/';
   res.locals.sd.FEED_TYPE = 'primary';
 
-  return res.render('feed');
+  return req.apollo.render(EmptyConnectTwitterPage)
+    .then((emptyFeedComponent) => {
+      res.locals.emptyFeedComponent = emptyFeedComponent;
+
+      //
+      // Show the empty component if the person isn't following anyone
+      // and they haven't cancelled out of the notice
+      //
+      res.locals.showEmpty = (
+        req.user.get('following_count') <= 1 &&
+        !req.user.get('flags').has_seen_feed_connect_twitter
+      );
+
+      return res.render('feed');
+    })
+    .catch(next);
 };
 
 const renderNotifications = (_req, res) => {
@@ -69,6 +85,17 @@ const renderExplore = (req, res, next) => {
   return setAndFetchBlocks(req, res)
     .then(() => res.render('explore'))
     .catch(next);
+};
+
+const findFriendsCallback = (req, res, next) => {
+  req.apollo.client.mutate({
+    mutation: createAuthenticatedService,
+    variables: req.query,
+  })
+    .then(() => { res.redirect('/?showModal=true'); })
+    .catch((err) => {
+      next(err);
+    });
 };
 
 const middlewareStack = [
@@ -87,5 +114,6 @@ app.get('/notifications', ensureLoggedInMiddleware, ...middlewareStack, renderNo
 app.get('/explore', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
 app.get('/explore/channels', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
 app.get('/explore/blocks', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
+app.get('/feed/find-friends/callback', apolloMiddleware, ensureLoggedInMiddleware, findFriendsCallback);
 
 module.exports = app;

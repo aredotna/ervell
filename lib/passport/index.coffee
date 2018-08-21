@@ -39,6 +39,7 @@ CONFIG =
     'is_confirmed'
     'is_pending_reconfirmation'
     'is_pending_confirmation'
+    'flags'
   ]
 
 app = express()

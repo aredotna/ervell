@@ -27,7 +27,11 @@ app
 
     if (!user) return next();
 
-    return user.fetch()
+    const headers = {
+      'X-AUTH-TOKEN': user.get('access_token'),
+    };
+
+    return user.fetch({ headers })
       .then((response) => {
         req.login(user, (err) => {
           if (err) return next(err);

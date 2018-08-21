@@ -10,8 +10,9 @@ div(
 
   a(
     href="#{block.getHref()}"
-    data-client="#{block.get('base_class')}"
+    data-client="#{block.get('class')}"
     class="grid__block__link needsclick"
+    aria-label="#{block.get('title')}"
     target=target
   )
     .grid__block__inner.halign--flex(class="grid__block__inner--#{ block.getVisibility() }")
