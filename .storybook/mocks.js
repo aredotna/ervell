@@ -11,7 +11,7 @@ export default {
   },
   Authentication: () => {
     return  {
-      contacts: () => new MockList([10, 25]),
+      contacts: () => new MockList(0),
     }
   },
   User: () => {
