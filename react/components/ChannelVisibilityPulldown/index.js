@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import Pulldown from 'react/components/UI/Pulldown';
 import ChannelVisibilityPulldownOption from 'react/components/ChannelVisibilityPulldown/components/ChannelVisibilityPulldownOption';
 
-const ChannelVisibilityPulldown = ({ value }) => (
+const ChannelVisibilityPulldown = ({ value, onChange }) => (
   <Pulldown
     value={value}
+    onChange={onChange}
     options={{
       open: <ChannelVisibilityPulldownOption
         label="Open"
@@ -31,7 +32,8 @@ const ChannelVisibilityPulldown = ({ value }) => (
 );
 
 ChannelVisibilityPulldown.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOf(['open', 'closed', 'private']).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ChannelVisibilityPulldown;

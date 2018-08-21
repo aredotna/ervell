@@ -4,7 +4,21 @@ import { Input, Textarea, Label, Checkbox, LabelledInput } from 'react/component
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 
 export default class NewChannelForm extends Component {
+  state = {
+    title: '',
+    description: '',
+    visibility: 'open',
+    visit_channel: false,
+  }
+
+  handleVisibility = visibility =>
+    this.setState({ visibility });
+
   render() {
+    const {
+      title, description, visibility, visit_channel,
+    } = this.state;
+
     return (
       <div>
         <LabelledInput my={6}>
@@ -14,7 +28,7 @@ export default class NewChannelForm extends Component {
 
           <Input
             f={7}
-            color="channel.public"
+            color={`channel.${visibility}`}
             placeholder="Type channel name"
             borderless
           />
@@ -27,14 +41,13 @@ export default class NewChannelForm extends Component {
 
           <Textarea
             placeholder="Describe your channel here"
-            width={['100%', '75%']}
             rows={4}
           />
         </LabelledInput>
 
         <LabelledInput my={6}>
           <Label>Privacy</Label>
-          <ChannelVisibilityPulldown value="open" />
+          <ChannelVisibilityPulldown value="open" onChange={this.handleVisibility} />
         </LabelledInput>
 
         <LabelledInput my={6}>

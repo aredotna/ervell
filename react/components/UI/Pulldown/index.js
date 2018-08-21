@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { space, alignSelf } from 'styled-system';
+import { space, alignSelf, width } from 'styled-system';
 import OutsideClickHandler from 'react-outside-click-handler';
+
+import { preset } from 'react/styles/functions';
 
 import PulldownOption from 'react/components/UI/Pulldown/components/PulldownOption';
 
@@ -14,9 +16,27 @@ const Container = styled.div`
   overflow: hidden;
   ${space}
   ${alignSelf}
+  ${preset(width, { width: '88%' })}
 
   ${x => x.mode === 'expanded' && `
     overflow: visible;
+  `}
+
+  ${x => x.mode === 'resting' && `
+    // Down-pointing caret
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 1em;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+      border-top: 0.66em solid ${x.theme.colors.gray.semiBold};
+      border-right: 0.33em solid transparent;
+      border-left: 0.33em solid transparent;
+    }
   `}
 `;
 
@@ -33,9 +53,15 @@ const PulldownOptions = styled.div`
 
 export default class Pulldown extends Component {
   static propTypes = {
-    // TODO: Value propTypes
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string, PropTypes.number, PropTypes.bool,
+    ]).isRequired,
+    onChange: PropTypes.func,
     options: PropTypes.objectOf(PropTypes.node).isRequired,
+  }
+
+  static defaultProps = {
+    onChange: () => {},
   }
 
   constructor(props) {
@@ -55,11 +81,16 @@ export default class Pulldown extends Component {
   rest = () =>
     this.setState({ mode: 'resting' });
 
-  selectValue = value => () =>
+  selectValue = value => () => {
+    const { onChange } = this.props;
+
     this.setState({
       mode: 'resting',
       value,
     });
+
+    return onChange(value);
+  }
 
   sortedKeys = () => {
     const { value: selected } = this.state;

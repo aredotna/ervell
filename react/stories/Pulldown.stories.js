@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import Specimen from 'react/stories/__components__/Specimen';
 import Pulldown from 'react/components/UI/Pulldown';
@@ -13,6 +14,7 @@ storiesOf('Pulldown', module)
     <Specimen>
       <Pulldown
         value="open"
+        onChange={action('onChange')}
         options={{
           open: 'Open',
           closed: 'Closed',
@@ -25,6 +27,7 @@ storiesOf('Pulldown', module)
     <Specimen>
       <Pulldown
         value="open"
+        onChange={action('onChange')}
         options={{
           open: <ExampleLabel>Open</ExampleLabel>,
           closed: <ExampleLabel>Closed</ExampleLabel>,

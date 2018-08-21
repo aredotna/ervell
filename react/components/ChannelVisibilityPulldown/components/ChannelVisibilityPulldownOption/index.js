@@ -23,11 +23,15 @@ const ChannelVisibilityPulldownOption = ({
 );
 
 ChannelVisibilityPulldownOption.propTypes = {
-  mode: PropTypes.string.isRequired,
+  mode: PropTypes.string,
   visibility: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   explanation: PropTypes.string.isRequired,
+};
+
+ChannelVisibilityPulldownOption.defaultProps = {
+  mode: 'resting',
 };
 
 export default ChannelVisibilityPulldownOption;
