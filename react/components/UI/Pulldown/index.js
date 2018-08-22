@@ -20,6 +20,7 @@ const Container = styled.div`
 
   ${x => x.mode === 'expanded' && `
     overflow: visible;
+    z-index: 1;
   `}
 
   ${x => x.mode === 'resting' && `
@@ -36,15 +37,12 @@ const Container = styled.div`
       border-top: 0.66em solid ${x.theme.colors.gray.semiBold};
       border-right: 0.33em solid transparent;
       border-left: 0.33em solid transparent;
+      pointer-events: none;
     }
   `}
 `;
 
 const PulldownOptions = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
   border-radius: 0.125em;
   background-color: white;
   box-shadow: 0 0 0 1px ${x => x.theme.colors.gray.medium};
@@ -110,12 +108,14 @@ export default class Pulldown extends Component {
     return (
       <OutsideClickHandler onOutsideClick={this.rest}>
         <Container mode={mode}>
-          <PulldownOption
-            mode="resting"
-            onClick={this.expand}
-          >
-            {options[selected]}
-          </PulldownOption>
+          {mode === 'resting' &&
+            <PulldownOption
+              mode="resting"
+              onClick={this.expand}
+            >
+              {options[selected]}
+            </PulldownOption>
+          }
 
           {mode === 'expanded' &&
             <PulldownOptions>
