@@ -16,7 +16,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "engines": {
-    "node": "8.x.x",
+    "node": ">=8.x.x",
     "yarn": "1.x.x"
   },
   "dependencies": {
