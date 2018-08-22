@@ -20,25 +20,19 @@ const ModalBackdrop = styled.div`
 export default class Modal extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    fitContent: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    fitContent: false,
   };
 
   ModalDialog = ModalDialog
 
   render() {
     const {
-      children, fitContent, onClose, ...rest
+      children, onClose, ...rest
     } = this.props;
 
     return (
       <ModalBackdrop {...rest} onClick={onClose}>
         <this.ModalDialog
-          fitContent={fitContent}
           onClick={e => e.stopPropagation()}
           role="dialog"
         >

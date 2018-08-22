@@ -6,20 +6,11 @@ import colors from 'react/styles/colors';
 
 const Dialog = styled.div`
   width: 90%;
-  height: 90%;
   max-width: 40em;
-  max-height: 60em;
+  max-height: 90%;
   background-color: ${colors.gray.semiLight};
   border-radius: .25em;
   padding: 5px;
-
-  ${({ fitContent }) =>
-    fitContent && `
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-  `};
 `;
 
 const Content = styled.div`
@@ -40,11 +31,6 @@ const Component = ({ children, ...rest }) => (
 
 Component.propTypes = {
   children: PropTypes.node.isRequired,
-  fitContent: PropTypes.bool,
-};
-
-Component.defaultProps = {
-  fitContent: false,
 };
 
 export default Component;
