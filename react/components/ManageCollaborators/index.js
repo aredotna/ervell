@@ -7,6 +7,7 @@ import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queri
 import manageCollaboratorsFragment from 'react/components/ManageCollaborators/fragments/manageCollaborators';
 import removeChannelMemberMutation from 'react/components/ManageCollaborators/mutations/removeChannelMember';
 
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import ManagedMembers from 'react/components/ManagedMembers';
 import ManageableCollaboratorSearch from 'react/components/ManageCollaborators/components/ManageableCollaboratorSearch';
@@ -48,7 +49,7 @@ class ManageCollaborators extends Component {
       channel_id, onClose, openCreateGroup, data: { loading },
     } = this.props;
 
-    if (loading) return <div />;
+    if (loading) return <LoadingIndicator />;
 
     const {
       data: {

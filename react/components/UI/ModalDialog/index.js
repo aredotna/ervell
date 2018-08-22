@@ -16,6 +16,7 @@ const Dialog = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 10em;
   height: 100%;
   background-color: white;
   border: 1px solid ${colors.gray.regular};

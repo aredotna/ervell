@@ -9,6 +9,7 @@ import manageChannelFragment from 'react/components/ManageChannel/fragments/mana
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Select } from 'react/components/UI/Inputs';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
@@ -104,7 +105,7 @@ class ManageChannel extends Component {
       mode, title, description, visibility,
     } = this.state;
 
-    if (loading) return <div />;
+    if (loading) return <LoadingIndicator />;
 
     const { data: { channel } } = this.props;
 

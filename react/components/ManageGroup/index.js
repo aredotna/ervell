@@ -14,6 +14,7 @@ import removeGroupUserMutation from 'react/components/ManageGroup/mutations/remo
 import inviteGroupUserMutation from 'react/components/ManageGroup/mutations/inviteGroupUser';
 import deleteGroupMutation from 'react/components/ManageGroup/mutations/deleteGroup';
 
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import ManagedMembers from 'react/components/ManagedMembers';
@@ -234,7 +235,7 @@ class ManageGroup extends Component {
   render() {
     const { data: { loading } } = this.props;
 
-    if (loading) return <div />;
+    if (loading) return <LoadingIndicator />;
 
     const { mode } = this.state;
     const { data: { group } } = this.props;
