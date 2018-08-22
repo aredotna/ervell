@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { DividerButton } from 'react/components/UI/GenericButton';
+import { DividerButton } from 'react/components/UI/Buttons';
 
 const Container = styled.form`
   position: relative;
