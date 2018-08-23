@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Text from 'react/components/UI/Text';
 import { DividerButton } from 'react/components/UI/Buttons';
 
 const Container = styled.form`
+  box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,41 +15,13 @@ const Container = styled.form`
 `;
 
 const Body = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
-
-const Section = styled.div`
-  width: 100%;
-  margin: 2em auto;
-
-  & + &, // Margins don't collapse in flex context
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const Title = styled.h3`
-  margin: 0 auto 1em auto;
-  font-family: ${x => x.theme.fonts.sans};
-  font-size: ${x => x.theme.fontSizesIndexed.lg};
-  font-weight: bold;
-  text-align: center;
-  color: ${x => x.theme.colors.gray.medium};
-`;
-
-const Label = styled.h4`
-  margin: 0.75em 0;
-  font-weight: normal;
-  font-size: ${x => x.theme.fontSizesIndexed.sm};
-`;
-
 
 export default class TitledDialog extends Component {
   static propTypes = {
@@ -61,9 +35,6 @@ export default class TitledDialog extends Component {
     label: 'Done',
   }
 
-  static Section = Section
-  static Label = Label
-
   render() {
     const {
       title, children, onDone, label, ...rest
@@ -71,9 +42,9 @@ export default class TitledDialog extends Component {
 
     return (
       <Container onSubmit={onDone} {...rest}>
-        <Title>
+        <Text f={4} mb={6} fontWeight="bold" textAlign="center" color="gray.medium">
           {title}
-        </Title>
+        </Text>
 
         <Body>
           {children}
