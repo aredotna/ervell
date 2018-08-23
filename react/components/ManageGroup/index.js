@@ -21,7 +21,12 @@ import ManagedMembers from 'react/components/ManagedMembers';
 import Button from 'react/components/ManageGroup/components/Button';
 import DeleteButton from 'react/components/ManageGroup/components/DeleteButton';
 import DeleteConfirmation from 'react/components/ManageGroup/components/DeleteConfirmation';
+import { LabelledInput, Label, Input } from 'react/components/UI/Inputs';
 
+// TODO: These forms should not know about apollo/data. Due to the
+// coupling there's a bug where repeated instantiations leave the forms empty
+// because it's populating the data from cache. Would be simple to fix by using
+// an extracted form.
 class ManageGroup extends Component {
   static propTypes = {
     id: PropTypes.number.isRequired,
@@ -182,37 +187,36 @@ class ManageGroup extends Component {
               </DeleteButton>
             }
 
-            <TitledDialog.Section>
-              <TitledDialog.Label>
-                Group name
-              </TitledDialog.Label>
+            <LabelledInput>
+              <Label>
+                Name
+              </Label>
 
-              <input
+              <Input
                 name="name"
-                className="Input"
                 placeholder="enter group name"
                 onChange={this.handleName}
                 value={name}
                 disabled={!group.can.manage}
               />
-            </TitledDialog.Section>
+            </LabelledInput>
 
-            <TitledDialog.Section>
-              <TitledDialog.Label>
+            <LabelledInput>
+              <Label>
                 Invite
-              </TitledDialog.Label>
+              </Label>
 
               <CollaboratorSearch
                 types={['USER']}
                 onAdd={this.handleAddUser}
                 onInvite={this.handleInviteUser}
               />
-            </TitledDialog.Section>
+            </LabelledInput>
 
-            <TitledDialog.Section>
-              <TitledDialog.Label>
-                {memberships.length + 1} Collaborator{(memberships.length + 1) === 1 ? '' : 's'}
-              </TitledDialog.Label>
+            <LabelledInput>
+              <Label>
+                Members
+              </Label>
 
               <ManagedMembers
                 owner={owner}
@@ -226,7 +230,7 @@ class ManageGroup extends Component {
                   creator can re-add you.
                 `}
               />
-            </TitledDialog.Section>
+            </LabelledInput>
           </div>
         );
     }

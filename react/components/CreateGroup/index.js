@@ -10,6 +10,7 @@ import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
 import CancelButton from 'react/components/CreateGroup/components/CancelButton';
 import HelpTip from 'react/components/CreateGroup/components/HelpTip';
+import { LabelledInput, Label, Input } from 'react/components/UI/Inputs';
 
 import createGroupMutation from 'react/components/CreateGroup/mutations/createGroup';
 import addChannelMemberMutation from 'react/components/CreateGroup/mutations/addChannelMember';
@@ -135,24 +136,23 @@ class CreateGroup extends Component {
           <CancelButton onClick={onClose} />
         }
 
-        <TitledDialog.Section>
-          <TitledDialog.Label>
-            Group name
-          </TitledDialog.Label>
+        <LabelledInput>
+          <Label>
+            Name
+          </Label>
 
-          <input
+          <Input
             name="name"
-            className="Input"
             placeholder="enter group name"
             onChange={this.handleName}
             value={name}
           />
-        </TitledDialog.Section>
+        </LabelledInput>
 
-        <TitledDialog.Section>
-          <TitledDialog.Label>
+        <LabelledInput>
+          <Label>
             Invite
-          </TitledDialog.Label>
+          </Label>
 
           <CollaboratorSearch
             types={['USER']}
@@ -160,19 +160,19 @@ class CreateGroup extends Component {
             onInvite={this.handleInviteUser}
             channel_id={channel_id}
           />
-        </TitledDialog.Section>
+        </LabelledInput>
 
         {user_ids.length > 0 &&
-          <TitledDialog.Section>
-            <TitledDialog.Label>
-              {user_ids.length} Collaborator{user_ids.length === 1 ? '' : 's'}
-            </TitledDialog.Label>
+          <LabelledInput>
+            <Label>
+              Members
+            </Label>
 
             <PendingGroupUsers
               user_ids={user_ids}
               onRemove={this.removeUserId}
             />
-          </TitledDialog.Section>
+          </LabelledInput>
         }
 
         <HelpTip />

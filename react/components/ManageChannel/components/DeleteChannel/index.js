@@ -14,7 +14,7 @@ const Alert = styled.div`
 
 const Message = styled.div`
   padding: ${optionLinkPadding};
-  font-size: ${x => x.theme.fontSizesIndexed.xs};
+  font-size: ${x => x.theme.fontSizesIndexed.s};
   text-align: left;
 `;
 
