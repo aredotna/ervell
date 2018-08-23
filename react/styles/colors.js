@@ -22,6 +22,7 @@ const COLORS = {
     hint: '#f7f7f7',
   },
   utility: {
+    translucent: 'rgba(255, 255, 255, 0.9)',
     transparent: 'rgba(255, 255, 255, 0.001)',
   },
 };
