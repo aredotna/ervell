@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
@@ -67,7 +68,8 @@ class ResetPasswordForm extends Component {
 
         // Account is unconfirmed and the confirmation period is expired
         if (status === 401) {
-          window.location = `/confirm/expired?email=${this.state.email}`;
+          const { email } = this.state;
+          window.location = `/confirm/expired?${qs.stringify({ email })}`;
           return;
         }
 
