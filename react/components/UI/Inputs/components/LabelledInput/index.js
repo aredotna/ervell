@@ -7,15 +7,23 @@ import constants from 'react/styles/constants';
 import { preset } from 'react/styles/functions';
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  ${space}
-  ${preset(alignItems, { alignItems: 'center' })}
+  display: flex;
+  ${preset(space, { my: 7 })}
+  ${preset(alignItems, { alignItems: 'flex-start' })}
 
   > label:first-child {
+    margin: 0;
+    flex-basis: 15%;
     font-weight: bold;
     text-align: right;
-    padding-right: ${x => x.theme.space[7]}
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: ${x => x.theme.space[7]};
+    overflow: hidden;
+  }
+
+  > *:last-child {
+    flex: 1;
   }
 
   ${constants.media.mobile`
