@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
+import TitledDialog from 'react/components/UI/TitledDialog';
+import Text from 'react/components/UI/Text';
 import { Input, Textarea, Label, Checkbox, LabelledInput } from 'react/components/UI/Inputs';
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 
+
 export default class NewChannelForm extends Component {
   state = {
+    mode: 'resting',
     title: '',
     description: '',
     visibility: 'open',
@@ -16,12 +20,22 @@ export default class NewChannelForm extends Component {
 
   render() {
     const {
+      mode,
       title, description, visibility, visit_channel,
     } = this.state;
 
     return (
-      <div>
-        <LabelledInput my={6}>
+      <TitledDialog
+        title="New channel"
+        label={{
+          resting: 'Create',
+          submit: 'Create',
+          submitting: 'Creating...',
+          error: 'Error',
+        }[mode]}
+        onDone={this.handleSubmit}
+      >
+        <LabelledInput mt={6} mb={7}>
           <Label>
             Name
           </Label>
@@ -31,6 +45,8 @@ export default class NewChannelForm extends Component {
             color={`channel.${visibility}`}
             placeholder="Type channel name"
             borderless
+            autoFocus
+            required
           />
         </LabelledInput>
 
@@ -45,19 +61,19 @@ export default class NewChannelForm extends Component {
           />
         </LabelledInput>
 
-        <LabelledInput my={6}>
+        <LabelledInput my={6} alignItems="start">
           <Label>Privacy</Label>
           <ChannelVisibilityPulldown value="open" onChange={this.handleVisibility} />
         </LabelledInput>
 
-        <LabelledInput my={6}>
+        <LabelledInput mt={6} mb={8}>
           <div />
           <Label>
             <Checkbox />
             Visit channel
           </Label>
         </LabelledInput>
-      </div>
+      </TitledDialog>
     );
   }
 }
