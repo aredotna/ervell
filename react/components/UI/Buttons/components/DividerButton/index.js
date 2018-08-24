@@ -4,8 +4,6 @@ import { fontSize, space, borderColor, color } from 'styled-system';
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
-import { BUTTON_DEFAULT_FONT_SIZE } from 'react/components/UI/GenericButton';
-
 export const activeMixin = css`
   border-color: ${x => x.theme.colors.gray.bold};
   color: ${x => x.theme.colors.gray.bold};

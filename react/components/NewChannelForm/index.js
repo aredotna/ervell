@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import TitledDialog from 'react/components/UI/TitledDialog';
-import Text from 'react/components/UI/Text';
 import { Input, Textarea, Label, Checkbox, LabelledInput } from 'react/components/UI/Inputs';
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 
@@ -9,10 +8,10 @@ import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldow
 export default class NewChannelForm extends Component {
   state = {
     mode: 'resting',
-    title: '',
-    description: '',
+    // title: '',
+    // description: '',
     visibility: 'open',
-    visit_channel: false,
+    // visit_channel: false,
   }
 
   handleVisibility = visibility =>
@@ -21,7 +20,7 @@ export default class NewChannelForm extends Component {
   render() {
     const {
       mode,
-      title, description, visibility, visit_channel,
+      visibility,
     } = this.state;
 
     return (
