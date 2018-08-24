@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import qs from 'qs';
 
 import AuthForm from 'react/components/AuthForm';
 import { GenericButton as Button } from 'react/components/UI/GenericButton';
@@ -64,7 +65,7 @@ export default class LoginForm extends Component {
       .catch(({ response: { status, data: { description } } }) => {
         // Account is unconfirmed and the confirmation period is expired
         if (status === 401) {
-          window.location = `/confirm/expired?email=${email}`;
+          window.location = `/confirm/expired?${qs.stringify({ email: this.state.email })}`;
           return;
         }
 

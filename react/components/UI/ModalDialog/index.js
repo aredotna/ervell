@@ -1,36 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { width, height, maxHeight, maxWidth } from 'styled-system';
 
-import colors from 'react/styles/colors';
+import { preset } from 'react/styles/functions';
 
 const Dialog = styled.div`
-  width: 90%;
-  height: 90%;
-  max-width: 40em;
-  max-height: 60em;
-  background-color: ${colors.gray.semiLight};
-  border-radius: .25em;
+  display: flex;
+  box-sizing: border-box;
   padding: 5px;
-
-  ${({ fitContent }) =>
-    fitContent && `
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-  `};
+  overflow: hidden;
+  border-radius: 0.25em;
+  background-color: ${x => x.theme.colors.gray.semiLight};
+  ${preset(width, { width: '90%' })}
+  ${preset(height, { height: '90%' })}
+  ${preset(maxWidth, { maxWidth: '40em' })}
+  ${preset(maxHeight, { maxHeight: '60em' })}
 `;
 
 const Content = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   background-color: white;
-  border: 1px solid ${colors.gray.regular};
+  border: 1px solid ${x => x.theme.colors.gray.regular};
 `;
 
-const Component = ({ children, ...rest }) => (
+const ModalDialog = ({ children, ...rest }) => (
   <Dialog {...rest}>
     <Content>
       {children}
@@ -38,13 +37,8 @@ const Component = ({ children, ...rest }) => (
   </Dialog>
 );
 
-Component.propTypes = {
+ModalDialog.propTypes = {
   children: PropTypes.node.isRequired,
-  fitContent: PropTypes.bool,
 };
 
-Component.defaultProps = {
-  fitContent: false,
-};
-
-export default Component;
+export default ModalDialog;

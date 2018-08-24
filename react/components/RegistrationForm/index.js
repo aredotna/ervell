@@ -113,7 +113,11 @@ class RegistrationForm extends Component {
       })
       .then(() => {
         this.setState({ mode: 'redirecting' });
-        window.location = REDIRECT_TO;
+
+        // If the redirect location is somehow the root, lets skip that
+        // and go to welcome. Anything else is fair game.
+        const redirectLocation = REDIRECT_TO === '/' ? '/welcome' : REDIRECT_TO;
+        window.location = redirectLocation;
 
         track.submit(en.REGISTER);
         if (raw_invitation_token) track.submit(en.ACCEPTED_INVITATION);

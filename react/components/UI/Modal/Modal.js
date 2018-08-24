@@ -13,37 +13,31 @@ const ModalBackdrop = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: ${x => x.theme.colors.utility.translucent};
   z-index: 6001;
 `;
 
 export default class Modal extends Component {
   static propTypes = {
+    Dialog: PropTypes.func,
     children: PropTypes.node.isRequired,
-    fitContent: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    fitContent: false,
-  };
-
-  ModalDialog = ModalDialog
+    Dialog: ModalDialog,
+  }
 
   render() {
     const {
-      children, fitContent, onClose, ...rest
+      Dialog, children, onClose, ...rest
     } = this.props;
 
     return (
       <ModalBackdrop {...rest} onClick={onClose}>
-        <this.ModalDialog
-          fitContent={fitContent}
-          onClick={e => e.stopPropagation()}
-          role="dialog"
-        >
+        <Dialog role="dialog" onClick={e => e.stopPropagation()}>
           {children}
-        </this.ModalDialog>
+        </Dialog>
       </ModalBackdrop>
     );
   }

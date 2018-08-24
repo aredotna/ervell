@@ -17,44 +17,43 @@
           time( datetime= block.get('updated_at'), title= block.get('updated_at') )
             | Last updated #{block.updatedAtAgo()}
 
-    if (user && user.id === block.get('user').id) || block.get('description') || block.has('source') || block.has('image') || block.get('visibility') !== 'private'
-      section.BlockSidebar__section
-        header.BlockSidebar__header
-          | Info
+    section.BlockSidebar__section
+      header.BlockSidebar__header
+        | Info
 
-        //- Conditional here prevents content shifting when logged out
-        if (user && user.id === block.get('user').id) || block.get('description')
-          .BlockSidebar__description( id="attribute-description_#{block.id}" )
-            //- Non-breaking space here prevents content shifting when logged in
-            != block.get('description') || '&nbsp;'
+      //- Conditional here prevents content shifting when logged out
+      if (user && user.id === block.get('user').id) || block.get('description')
+        .BlockSidebar__description( id="attribute-description_#{block.id}" )
+          //- Non-breaking space here prevents content shifting when logged in
+          != block.get('description') || '&nbsp;'
 
-        .BlockSidebar__actions
-          if block.get('visibility') !== 'private'
-            .BlockSidebar__share.BlockShare.js-block-share
-              include ../components/share/index
+      .BlockSidebar__actions
+        if block.get('visibility') !== 'private'
+          .BlockSidebar__share.BlockShare.js-block-share
+            include ../components/share/index
 
-          if (block.has('source') || block.has('image')) || (block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link')
-            .BlockSidebar__provenance
-              if block.has('source') || block.has('image')
-                a( href= block.getSourceUrl() target='_blank', rel='nofollow'  )
-                  span= block.sourceTitle()
+        if (block.has('source') || block.has('image')) || (block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link')
+          .BlockSidebar__provenance
+            if block.has('source') || block.has('image')
+              a( href= block.getSourceUrl() target='_blank', rel='nofollow'  )
+                span= block.sourceTitle()
 
-              if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
-                a(
-                  href="https://www.google.com/searchbyimage?image_url=#{block.getImageSize('original')}"
-                  target='_blank'
-                  rel='nofollow'
-                ) Find original
-          
-          if block.get('class') == 'Text'
-            a(
-              href="https://www.google.com/#safe=off&q=\"#{block.get('content')}\""
-              target='_blank'
-              rel='nofollow'
-            ) Find original
-          
-          .BlockSidebar__mute.js-block-mute
-            | Mute
+            if block.has('image') && block.get('class') !== 'Media' && block.get('class') !== 'Link'
+              a(
+                href="https://www.google.com/searchbyimage?image_url=#{block.getImageSize('original')}"
+                target='_blank'
+                rel='nofollow'
+              ) Find original
+        
+        if block.get('class') == 'Text'
+          a(
+            href="https://www.google.com/#safe=off&q=\"#{block.get('content')}\""
+            target='_blank'
+            rel='nofollow'
+          ) Find original
+        
+        .BlockSidebar__mute.js-block-mute
+          | Mute
 
     unless sd.SHARE
       section.BlockSidebar__section
