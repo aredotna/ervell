@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import provideChildrentWithProps from 'react/util/provideChildrenWithProps';
+import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 
 import { buttonBorderWidth, BUTTON_BORDER_RADIUS } from 'react/components/UI/GenericButton';
 
@@ -54,7 +54,7 @@ const ButtonGroupContainer = styled.div`
 
 const ButtonGroup = ({ children, stretch, ...rest }) => (
   <ButtonGroupContainer stretch={stretch} {...rest}>
-    {provideChildrentWithProps(children, rest)}
+    {provideChildrenWithProps(children, rest)}
   </ButtonGroupContainer>
 );
 

@@ -41,17 +41,17 @@ export const buttonBorderWidth = x => ({
   SMALL: BUTTON_SMALL_BORDER_WIDTH,
 }[buttonSize(x)]);
 
-const activeMixin = css`
+export const activeMixin = css`
   border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.bold};
   color: ${x => x.theme.colors.gray.bold};
 `;
 
-const hoverMixin = css`
+export const hoverMixin = css`
   border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.medium};
   color: ${x => x.theme.colors.gray.bold};
 `;
 
-const disabledMixin = css`
+export const disabledMixin = css`
   pointer-events: none;
   opacity: 0.5;
 `;
@@ -90,30 +90,6 @@ export const GenericButtonLink = styled.a`
 
 export const GenericButton = styled.button`
   ${mixin}
-`;
-
-export const DividerButton = styled.button.attrs({ f: 4 })`
-  all: initial;
-  text-align: center;
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
-  font-weight: bold;
-  font-family: ${x => x.theme.fonts.sans};
-  border-top: 1px solid ${x => x.theme.colors.gray.regular};
-  color: ${x => x.theme.colors.gray.regular};
-  padding: ${x => x.theme.space[5]} 0;
-
-  &:hover {
-    border-top-color: ${x => x.theme.colors.gray.bold};
-    color: ${x => x.theme.colors.gray.bold};
-  }
-
-  &:active {
-    border-top-color: ${x => x.theme.colors.gray.active};
-    color: ${x => x.theme.colors.gray.active};
-  }
 `;
 
 export default GenericButtonLink;

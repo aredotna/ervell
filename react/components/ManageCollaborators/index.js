@@ -7,10 +7,12 @@ import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queri
 import manageCollaboratorsFragment from 'react/components/ManageCollaborators/fragments/manageCollaborators';
 import removeChannelMemberMutation from 'react/components/ManageCollaborators/mutations/removeChannelMember';
 
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import ManagedMembers from 'react/components/ManagedMembers';
 import ManageableCollaboratorSearch from 'react/components/ManageCollaborators/components/ManageableCollaboratorSearch';
 import GroupCallToAction from 'react/components/ManageCollaborators/components/GroupCallToAction';
+import { LabelledInput, Label } from 'react/components/UI/Inputs';
 
 class ManageCollaborators extends Component {
   static propTypes = {
@@ -48,7 +50,7 @@ class ManageCollaborators extends Component {
       channel_id, onClose, openCreateGroup, data: { loading },
     } = this.props;
 
-    if (loading) return <div />;
+    if (loading) return <LoadingIndicator />;
 
     const {
       data: {
@@ -64,19 +66,19 @@ class ManageCollaborators extends Component {
         title="Edit collaborators"
         onDone={onClose}
       >
-        <TitledDialog.Section>
-          <TitledDialog.Label>
+        <LabelledInput>
+          <Label>
             Invite
-          </TitledDialog.Label>
+          </Label>
 
           <ManageableCollaboratorSearch channel_id={channel_id} />
-        </TitledDialog.Section>
+        </LabelledInput>
 
         {counts.collaborators > 0 &&
-          <TitledDialog.Section>
-            <TitledDialog.Label>
-              {counts.collaborators} Collaborator{counts.collaborators === 1 ? '' : 's'}
-            </TitledDialog.Label>
+          <LabelledInput>
+            <Label>
+              Collaborators
+            </Label>
 
             <ManagedMembers
               memberships={memberships}
@@ -84,7 +86,7 @@ class ManageCollaborators extends Component {
               confirmationWarning="Are you sure?"
               confirmationSelfWarning="You will lose access to this channel."
             />
-          </TitledDialog.Section>
+          </LabelledInput>
         }
 
         {openCreateGroup && counts.collaborators < 2 &&

@@ -19,17 +19,18 @@ export default class Modal {
   open = () => {
     document.body.appendChild(this.el);
 
-    this.Provided = wrapWithApolloProvider(initClientSideApolloClient())(this.Component, {
-      onClose: this.close,
-      ...this.props,
-    });
+    const boot = wrapWithApolloProvider(initClientSideApolloClient());
+    const props = { onClose: this.close, ...this.props };
 
-    mount(
-      <this.ModalComponent onClose={this.close} fitContent={this.modalProps.fitContent}>
-        {this.Provided}
-      </this.ModalComponent>,
-      this.el,
+    const ModalApp = innerProps => (
+      <this.ModalComponent onClose={this.close} {...this.modalProps}>
+        <this.Component {...innerProps} />
+      </this.ModalComponent>
     );
+
+    const App = boot(ModalApp, props);
+
+    mount(App, this.el);
   }
 
   close = () => {

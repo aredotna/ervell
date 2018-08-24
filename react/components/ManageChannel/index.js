@@ -9,8 +9,9 @@ import manageChannelFragment from 'react/components/ManageChannel/fragments/mana
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { Input, Textarea, Select } from 'react/components/UI/Inputs';
+import { LabelledInput, Label, Input, Textarea, Select } from 'react/components/UI/Inputs';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
@@ -104,7 +105,7 @@ class ManageChannel extends Component {
       mode, title, description, visibility,
     } = this.state;
 
-    if (loading) return <div />;
+    if (loading) return <LoadingIndicator />;
 
     const { data: { channel } } = this.props;
 
@@ -121,22 +122,20 @@ class ManageChannel extends Component {
         onDone={this.handleSubmit}
       >
         <Container>
-          <TitledDialog.Section>
-            <TitledDialog.Label>
-              Name
-            </TitledDialog.Label>
+          <LabelledInput>
+            <Label>Name</Label>
 
             <Input
               name="title"
               value={title}
               onChange={this.handleTitle}
             />
-          </TitledDialog.Section>
+          </LabelledInput>
 
-          <TitledDialog.Section>
-            <TitledDialog.Label>
+          <LabelledInput>
+            <Label>
               Description
-            </TitledDialog.Label>
+            </Label>
 
             <Textarea
               name="description"
@@ -145,60 +144,62 @@ class ManageChannel extends Component {
               placeholder="describe your channel here"
               rows="3"
             />
-          </TitledDialog.Section>
+          </LabelledInput>
 
-          <TitledDialog.Section>
-            <TitledDialog.Label>
+          <LabelledInput>
+            <Label>
               Privacy
-            </TitledDialog.Label>
+            </Label>
 
-            <Select
-              name="visibility"
-              value={visibility.toUpperCase()}
-              onChange={this.handleVisbility}
-            >
-              <option value="PUBLIC">Open</option>
-              <option value="CLOSED">Closed</option>
-              <option value="PRIVATE">Private</option>
-            </Select>
+            <div>
+              <Select
+                name="visibility"
+                value={visibility.toUpperCase()}
+                onChange={this.handleVisbility}
+              >
+                <option value="PUBLIC">Open</option>
+                <option value="CLOSED">Closed</option>
+                <option value="PRIVATE">Private</option>
+              </Select>
 
-            <Caption>
-              {{
-                PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
-                CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
-                PRIVATE: 'Only you and your collaborators can view and add to the channel.',
-              }[visibility.toUpperCase()]}
-            </Caption>
-          </TitledDialog.Section>
+              <Caption>
+                {{
+                  PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
+                  CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
+                  PRIVATE: 'Only you and your collaborators can view and add to the channel.',
+                }[visibility.toUpperCase()]}
+              </Caption>
+            </div>
+          </LabelledInput>
 
           {channel.can.export &&
-            <TitledDialog.Section>
-              <TitledDialog.Label>
+            <LabelledInput>
+              <Label>
                 Export
-              </TitledDialog.Label>
+              </Label>
 
               <ExportChannel id={channel.id} />
-            </TitledDialog.Section>
+            </LabelledInput>
           }
 
           {channel.can.transfer &&
-            <TitledDialog.Section>
-              <TitledDialog.Label>
-                Transfer ownership
-              </TitledDialog.Label>
+            <LabelledInput>
+              <Label>
+                Transfer
+              </Label>
 
               <TransferChannel channel={channel} />
-            </TitledDialog.Section>
+            </LabelledInput>
           }
 
           {channel.can.destroy &&
-            <TitledDialog.Section>
-              <TitledDialog.Label>
+            <LabelledInput>
+              <Label>
                 Delete
-              </TitledDialog.Label>
+              </Label>
 
               <DeleteChannel id={channel.id} />
-            </TitledDialog.Section>
+            </LabelledInput>
           }
         </Container>
       </TitledDialog>
