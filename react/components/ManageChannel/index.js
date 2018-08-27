@@ -5,13 +5,15 @@ import { propType } from 'graphql-anywhere';
 import { some } from 'underscore';
 import styled from 'styled-components';
 
+import mapErrors from 'react/util/mapErrors';
+
 import manageChannelFragment from 'react/components/ManageChannel/fragments/manageChannel';
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { LabelledInput, Label, Input, Textarea, Select } from 'react/components/UI/Inputs';
+import { LabelledInput, Label, Input, Textarea, Select, ErrorMessage } from 'react/components/UI/Inputs';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
@@ -30,10 +32,23 @@ const Caption = styled.div`
 class ManageChannel extends Component {
   static propTypes = {
     data: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
       channel: propType(manageChannelFragment),
     }).isRequired,
     updateChannel: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    const { data: { loading } } = nextProps;
+    if (loading) return null;
+
+    const { data: { channel: { title, description, visibility } } } = nextProps;
+    return {
+      title,
+      description,
+      visibility: visibility.toUpperCase(),
+    };
   }
 
   state = {
@@ -41,15 +56,9 @@ class ManageChannel extends Component {
     title: '',
     description: '',
     visibility: '',
-  }
-
-  componentWillReceiveProps({ data: { channel: { title, description, visibility } } }) {
-    this.setState({
-      title,
-      description,
-      visibility: visibility.toUpperCase(),
-    });
-  }
+    attributeErrors: {},
+    errorMessage: '',
+  };
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
     const { data: { channel: originalChannel } } = this.props;
@@ -93,16 +102,22 @@ class ManageChannel extends Component {
         window.location = href;
       })
       .catch((err) => {
-        console.error(err);
-        // TODO: Better error handling
-        this.setState({ mode: 'error' });
+        this.setState({
+          mode: 'error',
+          ...mapErrors(err),
+        });
       });
   }
 
   render() {
     const { data: { loading } } = this.props;
     const {
-      mode, title, description, visibility,
+      mode,
+      title,
+      description,
+      visibility,
+      attributeErrors,
+      errorMessage,
     } = this.state;
 
     if (loading) return <LoadingIndicator />;
@@ -129,6 +144,7 @@ class ManageChannel extends Component {
               name="title"
               value={title}
               onChange={this.handleTitle}
+              errorMessage={attributeErrors.title}
             />
           </LabelledInput>
 
@@ -143,6 +159,7 @@ class ManageChannel extends Component {
               onChange={this.handleDescription}
               placeholder="describe your channel here"
               rows="3"
+              errorMessage={attributeErrors.description}
             />
           </LabelledInput>
 
@@ -200,6 +217,12 @@ class ManageChannel extends Component {
 
               <DeleteChannel id={channel.id} />
             </LabelledInput>
+          }
+
+          {mode === 'error' &&
+            <ErrorMessage my={5} align="center">
+              {errorMessage}
+            </ErrorMessage>
           }
         </Container>
       </TitledDialog>
