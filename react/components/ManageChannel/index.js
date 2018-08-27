@@ -13,7 +13,8 @@ import updateChannelMutation from 'react/components/ManageChannel/mutations/upda
 
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { LabelledInput, Label, Input, Textarea, Select, ErrorMessage } from 'react/components/UI/Inputs';
+import { LabelledInput, Label, Input, Textarea, ErrorMessage } from 'react/components/UI/Inputs';
+import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
@@ -21,12 +22,6 @@ import TransferChannel from 'react/components/ManageChannel/components/TransferC
 const Container = styled.div`
   width: 100%;
   margin: 0 auto 2em auto;
-`;
-
-const Caption = styled.div`
-  margin-top: 1em;
-  font-size: ${x => x.theme.fontSizesIndexed.xs};
-  text-align: center;
 `;
 
 class ManageChannel extends Component {
@@ -74,7 +69,8 @@ class ManageChannel extends Component {
 
   handleTitle = this.handleInput('title')
   handleDescription = this.handleInput('description')
-  handleVisbility = this.handleInput('visibility')
+  handleVisbility = value =>
+    this.handleInput('visibility')({ target: { value } });
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -168,25 +164,11 @@ class ManageChannel extends Component {
               Privacy
             </Label>
 
-            <div>
-              <Select
-                name="visibility"
-                value={visibility.toUpperCase()}
-                onChange={this.handleVisbility}
-              >
-                <option value="PUBLIC">Open</option>
-                <option value="CLOSED">Closed</option>
-                <option value="PRIVATE">Private</option>
-              </Select>
-
-              <Caption>
-                {{
-                  PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
-                  CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
-                  PRIVATE: 'Only you and your collaborators can view and add to the channel.',
-                }[visibility.toUpperCase()]}
-              </Caption>
-            </div>
+            <ChannelVisibilityPulldown
+              name="visibility"
+              value={visibility.toUpperCase()}
+              onChange={this.handleVisbility}
+            />
           </LabelledInput>
 
           {channel.can.export &&
