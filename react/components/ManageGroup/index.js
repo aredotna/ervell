@@ -43,13 +43,17 @@ class ManageGroup extends Component {
     }).isRequired,
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    const { data: { loading } } = nextProps;
+    if (loading) return null;
+
+    const { data: { group: { name } } } = nextProps;
+    return { name };
+  }
+
   state = {
     mode: 'resting',
     name: '',
-  }
-
-  componentWillReceiveProps({ data: { group: { name } } }) {
-    this.setState({ name });
   }
 
   handleName = ({ target: { value: name } }) => {
