@@ -13,8 +13,8 @@ import updateChannelMutation from 'react/components/ManageChannel/mutations/upda
 
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { LabelledInput, Label, Input, Textarea, ErrorMessage } from 'react/components/UI/Inputs';
-import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
+import Text from 'react/components/UI/Text';
+import { LabelledInput, Label, Input, Textarea, Select, ErrorMessage } from 'react/components/UI/Inputs';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
@@ -69,8 +69,7 @@ class ManageChannel extends Component {
 
   handleTitle = this.handleInput('title')
   handleDescription = this.handleInput('description')
-  handleVisbility = value =>
-    this.handleInput('visibility')({ target: { value } });
+  handleVisbility = this.handleInput('visibility')
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -164,11 +163,25 @@ class ManageChannel extends Component {
               Privacy
             </Label>
 
-            <ChannelVisibilityPulldown
-              name="visibility"
-              value={visibility.toUpperCase()}
-              onChange={this.handleVisbility}
-            />
+            <div>
+              <Select
+                name="visibility"
+                value={visibility.toUpperCase()}
+                onChange={this.handleVisbility}
+              >
+                <option value="PUBLIC">Open</option>
+                <option value="CLOSED">Closed</option>
+                <option value="PRIVATE">Private</option>
+              </Select>
+
+              <Text mt={6} f={1} textAlign="center">
+                {{
+                  PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
+                  CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
+                  PRIVATE: 'Only you and your collaborators can view and add to the channel.',
+                }[visibility.toUpperCase()]}
+              </Text>
+            </div>
           </LabelledInput>
 
           {channel.can.export &&
@@ -193,7 +206,7 @@ class ManageChannel extends Component {
 
           {channel.can.destroy &&
             <LabelledInput>
-              <Label>
+              <Label pt={0}>
                 Delete
               </Label>
 
