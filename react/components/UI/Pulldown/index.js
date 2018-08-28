@@ -106,8 +106,8 @@ export default class Pulldown extends Component {
     const { options } = this.props;
 
     return (
-      <OutsideClickHandler onOutsideClick={this.rest}>
-        <Container mode={mode}>
+      <Container mode={mode}>
+        <OutsideClickHandler onOutsideClick={this.rest}>
           {mode === 'resting' &&
             <PulldownOption
               mode="resting"
@@ -130,8 +130,8 @@ export default class Pulldown extends Component {
               ))}
             </PulldownOptions>
           }
-        </Container>
-      </OutsideClickHandler>
+        </OutsideClickHandler>
+      </Container>
     );
   }
 }
