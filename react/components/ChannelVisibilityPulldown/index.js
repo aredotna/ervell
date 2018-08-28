@@ -32,8 +32,12 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
 );
 
 ChannelVisibilityPulldown.propTypes = {
-  value: PropTypes.oneOf(['OPEN', 'CLOSED', 'PRIVATE']).isRequired,
+  value: PropTypes.oneOf(['PUBLIC', 'CLOSED', 'PRIVATE']),
   onChange: PropTypes.func.isRequired,
+};
+
+ChannelVisibilityPulldown.defaultProps = {
+  value: 'PUBLIC',
 };
 
 export default ChannelVisibilityPulldown;
