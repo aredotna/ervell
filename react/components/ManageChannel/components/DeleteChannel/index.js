@@ -1,34 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 
-import OptionLink, { optionLinkPadding } from 'react/components/UI/OptionLink';
+import Box from 'react/components/UI/Box';
+import Text from 'react/components/UI/Text';
 import GenericButton from 'react/components/UI/GenericButton';
 
 import deleteChannelMutation from 'react/components/ManageChannel/components/DeleteChannel/mutations/deleteChannel';
-
-const Alert = styled.div`
-  color: ${x => x.theme.colors.state.alert};
-`;
-
-const Message = styled.div`
-  padding: ${optionLinkPadding};
-  font-size: ${x => x.theme.fontSizesIndexed.s};
-  text-align: left;
-`;
-
-const Options = styled.div`
-  margin: 0.5em 0;
-  padding: ${optionLinkPadding};
-`;
-
-const Option = styled(GenericButton).attrs({
-  minWidth: '6em',
-  f: 1,
-  color: 'state.alert',
-})`
-`;
 
 class DeleteChannel extends Component {
   static propTypes = {
@@ -75,44 +53,56 @@ class DeleteChannel extends Component {
 
     return (
       <div>
-        <OptionLink f={1} onClick={this.pendDeleteChannel}>
-          Delete channel
-        </OptionLink>
+        <Text f={2} fontWeight="bold" color="state.alert">
+          <a role="button" tabIndex={0} onClick={this.pendDeleteChannel}>
+            Delete channel
+          </a>
+        </Text>
 
-        {mode === 'error' &&
-          <Alert>
-            <Message>
-              An error has occurred. Try again.
-            </Message>
-          </Alert>
-        }
+        {mode !== 'resting' &&
+          <Box my={3}>
+            {mode === 'error' &&
+              <Text mb={6} f={2} color="state.alert">
+                An error has occurred. Try again.
+              </Text>
+            }
 
-        {mode === 'deleting' &&
-          <Alert>
-            <Message>
-              Deleting...
-            </Message>
-          </Alert>
-        }
+            {mode === 'deleting' &&
+              <Text mb={6} f={2} color="state.alert">
+                Deleting...
+              </Text>
+            }
 
-        {mode === 'pending' &&
-          <Alert>
-            <Message>
-              Are you sure? This action cannot be undone.
-            </Message>
+            {mode === 'pending' &&
+              <div>
+                <Text mb={6} f={2} color="state.alert">
+                  Are you sure? This action cannot be undone.
+                </Text>
 
-            <Options>
-              <Option onClick={this.deleteChannel}>
-                Delete
-              </Option>
+                <div>
+                  <GenericButton
+                    f={2}
+                    minWidth="6em"
+                    color="state.alert"
+                    onClick={this.deleteChannel}
+                  >
+                    Delete
+                  </GenericButton>
 
-              {' '}
+                  {' '}
 
-              <Option onClick={this.cancelDeleteChannel}>
-                Cancel
-              </Option>
-            </Options>
-          </Alert>
+                  <GenericButton
+                    f={2}
+                    minWidth="6em"
+                    color="state.alert"
+                    onClick={this.cancelDeleteChannel}
+                  >
+                    Cancel
+                  </GenericButton>
+                </div>
+              </div>
+            }
+          </Box>
         }
       </div>
     );
