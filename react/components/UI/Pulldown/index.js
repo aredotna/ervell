@@ -6,12 +6,16 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 import { preset } from 'react/styles/functions';
 
+import PulldownValue from 'react/components/UI/Pulldown/components/PulldownValue';
 import PulldownOption from 'react/components/UI/Pulldown/components/PulldownOption';
 
 const Container = styled.div`
   position: relative;
   background-color: white;
-  border: 1px solid ${x => x.theme.colors.gray.regular};
+  border: 1px solid ${x => ({
+    resting: x.theme.colors.gray.regular,
+    expanded: x.theme.colors.gray.medium,
+  }[x.mode])};
   border-radius: 0.25em;
   overflow: hidden;
   ${space}
@@ -22,31 +26,18 @@ const Container = styled.div`
     overflow: visible;
     z-index: 1;
   `}
-
-  ${x => x.mode === 'resting' && `
-    // Down-pointing caret
-    &:after {
-      display: block;
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: 1em;
-      width: 0;
-      height: 0;
-      transform: translateY(-50%);
-      border-top: 0.66em solid ${x.theme.colors.gray.semiBold};
-      border-right: 0.33em solid transparent;
-      border-left: 0.33em solid transparent;
-      pointer-events: none;
-    }
-  `}
 `;
 
 const PulldownOptions = styled.div`
   border-radius: 0.125em;
   background-color: white;
-  box-shadow: 0 0 0 1px ${x => x.theme.colors.gray.medium};
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
   overflow: hidden;
+
+  ${x => x.mode === 'expanded' && `
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  `}
 `;
 
 export default class Pulldown extends Component {
@@ -79,26 +70,15 @@ export default class Pulldown extends Component {
   rest = () =>
     this.setState({ mode: 'resting' });
 
-  selectValue = value => () => {
-    const { onChange } = this.props;
-
-    this.setState({
-      mode: 'resting',
-      value,
-    });
-
-    return onChange(value);
+  toggle = () => {
+    this.setState(prevState => ({
+      mode: prevState.mode === 'resting' ? 'expanded' : 'resting',
+    }));
   }
 
-  sortedKeys = () => {
-    const { value: selected } = this.state;
-    const { options } = this.props;
-
-    const keys = Object.keys(options);
-
-    keys.splice(keys.indexOf(selected), 1);
-
-    return [selected, ...keys];
+  selectValue = value => () => {
+    this.setState({ mode: 'resting', value });
+    return this.props.onChange(value);
   }
 
   render() {
@@ -108,21 +88,17 @@ export default class Pulldown extends Component {
     return (
       <Container mode={mode}>
         <OutsideClickHandler onOutsideClick={this.rest}>
-          {mode === 'resting' &&
-            <PulldownOption
-              mode="resting"
-              onClick={this.expand}
-            >
-              {options[selected]}
-            </PulldownOption>
-          }
+          <PulldownValue mode={mode} onClick={this.toggle} selected>
+            {options[selected]}
+          </PulldownValue>
 
           {mode === 'expanded' &&
-            <PulldownOptions>
-              {this.sortedKeys().map(key => (
+            <PulldownOptions mode={mode}>
+              {Object.keys(options).map(key => (
                 <PulldownOption
                   key={key}
-                  mode="expanded"
+                  mode={mode}
+                  selected={key === selected}
                   onClick={this.selectValue(key)}
                 >
                   {options[key]}

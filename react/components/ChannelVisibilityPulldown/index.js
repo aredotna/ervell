@@ -24,7 +24,7 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
       PRIVATE: <ChannelVisibilityPulldownOption
         label="Private"
         visibility="private"
-        description="only collaborators can view"
+        description="only collaborators can view / add"
         explanation="Only you and your collaborators can view and add to the channel."
       />,
     }}
