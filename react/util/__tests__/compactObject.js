@@ -8,11 +8,13 @@ describe('compactObject', () => {
       c: null,
       d: 1,
       e: 0,
+      f: '',
     })).toEqual({
       a: 'foo',
       b: false,
       d: 1,
       e: 0,
+      f: '',
     });
   });
 });
