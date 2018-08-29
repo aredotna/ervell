@@ -20,6 +20,7 @@ export const mixin = css`
 
   a {
     color: inherit;
+    text-decoration: none;
 
     ${x => x.underlineLinks && `
       text-decoration: underline;

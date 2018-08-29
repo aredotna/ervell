@@ -5,6 +5,7 @@ import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
 import Button from 'react/components/UI/GenericButton';
+import ButtonGroup from 'react/components/UI/ButtonGroup';
 import Icons, { ICON_NAMES } from 'react/components/UI/Icons';
 
 storiesOf('Icons', module)
@@ -29,9 +30,29 @@ storiesOf('Icons', module)
     </States>
   ))
   .add('Button with icon', () => (
-    <Specimen>
-      <Button>
-        <Icons mr={3} name="Lock" /> Locked button
-      </Button>
-    </Specimen>
+    <div>
+      <Specimen>
+        <Button>
+          <Icons mr={3} name="Lock" /> Locked button
+        </Button>
+      </Specimen>
+
+      <Specimen>
+        <Button f={2}>
+          <Icons mr={3} name="Lock" /> Small locked button
+        </Button>
+      </Specimen>
+
+      <Specimen>
+        <ButtonGroup f={1}>
+          <Button>
+            Something
+          </Button>
+
+          <Button>
+            <Icons mr={3} name="Lock" /> Smaller locked button
+          </Button>
+        </ButtonGroup>
+      </Specimen>
+    </div>
   ));

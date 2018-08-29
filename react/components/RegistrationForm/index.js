@@ -11,7 +11,7 @@ import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
-import { Checkbox, Label, Input, ErrorMessage } from 'react/components/UI/Inputs';
+import { LabelledCheckbox, Input, ErrorMessage } from 'react/components/UI/Inputs';
 
 import registerMutation from 'react/components/RegistrationForm/mutations/register';
 import acceptInvitationMutation from 'react/components/RegistrationForm/mutations/acceptInvitation';
@@ -201,13 +201,10 @@ class RegistrationForm extends Component {
         />
 
         <Box my={5}>
-          <Label>
-            <Checkbox
-              type="checkbox"
-              checked={accept_terms}
-              onChange={this.handleAcceptTerms}
-            />
-
+          <LabelledCheckbox
+            checked={accept_terms}
+            onChange={this.handleAcceptTerms}
+          >
             Accept Are.na
             {' '}
             <a href="/terms" target="_blank">Terms</a>
@@ -215,16 +212,14 @@ class RegistrationForm extends Component {
             <a href="/privacy" target="_blank">Privacy</a>
             {' '}
             conditions
-          </Label>
+          </LabelledCheckbox>
 
-          <Label>
-            <Checkbox
-              type="checkbox"
-              checked={receive_newsletter}
-              onChange={this.handleNewsletter}
-            />
+          <LabelledCheckbox
+            checked={receive_newsletter}
+            onChange={this.handleNewsletter}
+          >
             Receive our monthly newsletter?
-          </Label>
+          </LabelledCheckbox>
         </Box>
 
         {mode === 'error' &&

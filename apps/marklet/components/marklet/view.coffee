@@ -1,7 +1,7 @@
 { invoke, extend } = require 'underscore'
 Promise = require 'bluebird-q'
 Backbone = require 'backbone'
-{ isURL } = require 'validator'
+{ isURL, isDataURI } = require 'validator'
 { API_URL, QUERY } = require('sharify').data
 mediator = require '../../../../lib/mediator.coffee'
 ConnectView = require '../../../../components/connect/client/view.coffee'
@@ -111,7 +111,7 @@ module.exports = class MarkletView extends Backbone.View
     val = @dom.input.val()?.trim() or @model.get('content')
 
     data = channel_ids: @connections.pluck 'slug'
-    data[if isURL(val) then 'source' else 'content'] = val
+    data[if (isURL(val) or isDataURI(val)) then 'source' else 'content'] = val
     data = extend {}, data, QUERY
 
     Promise $.ajax

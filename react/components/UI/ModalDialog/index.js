@@ -5,6 +5,8 @@ import { width, height, maxHeight, maxWidth } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 
+import constants from 'react/styles/constants';
+
 const Dialog = styled.div`
   display: flex;
   box-sizing: border-box;
@@ -16,6 +18,15 @@ const Dialog = styled.div`
   ${preset(height, { height: '90%' })}
   ${preset(maxWidth, { maxWidth: '40em' })}
   ${preset(maxHeight, { maxHeight: '60em' })}
+
+  ${constants.media.mobile`
+    width: 95%;
+    height: 95%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    padding: 0;
+  `}
 `;
 
 const Content = styled.div`

@@ -9,19 +9,19 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
     value={value}
     onChange={onChange}
     options={{
-      open: <ChannelVisibilityPulldownOption
+      PUBLIC: <ChannelVisibilityPulldownOption
         label="Open"
-        visibility="open"
+        visibility="public"
         description="anyone can add"
         explanation="Everyone can view the channel and anyone logged-in can add to it."
       />,
-      closed: <ChannelVisibilityPulldownOption
+      CLOSED: <ChannelVisibilityPulldownOption
         label="Closed"
         visibility="closed"
         description="only collaborators can add"
         explanation="Everyone can view the channel but only you and your collaborators can add to it."
       />,
-      private: <ChannelVisibilityPulldownOption
+      PRIVATE: <ChannelVisibilityPulldownOption
         label="Private"
         visibility="private"
         description="only collaborators can view"
@@ -32,7 +32,7 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
 );
 
 ChannelVisibilityPulldown.propTypes = {
-  value: PropTypes.oneOf(['open', 'closed', 'private']).isRequired,
+  value: PropTypes.oneOf(['OPEN', 'CLOSED', 'PRIVATE']).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

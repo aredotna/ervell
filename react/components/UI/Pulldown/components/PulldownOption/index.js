@@ -12,6 +12,7 @@ const Option = styled.div`
   outline: none;
   background-color: white;
   cursor: pointer;
+  user-select: none;
   font-family: ${x => x.theme.fonts.sans};
   ${preset(width, { width: '100%' })}
   ${preset(color, { color: 'black' })}

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
+import mapErrors from 'react/util/mapErrors';
+
 import exportChannelMutation from 'react/components/ManageChannel/components/ExportChannel/mutations/exportChannel';
 
-import Status from 'react/components/UI/Status';
+import Text from 'react/components/UI/Text';
 import GenericButton from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 
@@ -16,6 +18,7 @@ class ExportChannel extends Component {
 
   state = {
     mode: 'resting',
+    errorMessage: '',
     format: null,
   }
 
@@ -28,8 +31,7 @@ class ExportChannel extends Component {
       await exportChannel({ variables: { id, format } });
       this.setState({ mode: 'queued' });
     } catch (err) {
-      console.error(err);
-      this.setState({ mode: 'error' });
+      this.setState({ mode: 'error', ...mapErrors(err) });
     }
   }
 
@@ -38,11 +40,11 @@ class ExportChannel extends Component {
   queueExportHTML = this.queueExport('HTML')
 
   render() {
-    const { mode, format } = this.state;
+    const { mode, errorMessage, format } = this.state;
 
     return (
       <div>
-        <ButtonGroup stretch f={1}>
+        <ButtonGroup stretch f={2}>
           <GenericButton onClick={this.queueExportPDF}>
             PDF
           </GenericButton>
@@ -57,13 +59,13 @@ class ExportChannel extends Component {
         </ButtonGroup>
 
         {mode !== 'resting' &&
-          <Status>
+          <Text my={6} f={2} color="state.alert">
             {{
-              error: 'An error has occurred',
+              error: errorMessage,
               queueing: 'Processing...',
               queued: `Your .${format.toLowerCase()} will be ready for download momentarily and will be emailed to the address associated with your account`,
             }[mode]}
-          </Status>
+          </Text>
         }
       </div>
     );
