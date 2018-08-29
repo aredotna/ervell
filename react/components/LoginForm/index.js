@@ -16,6 +16,12 @@ import { track, en } from 'lib/analytics.coffee';
 
 const { REDIRECT_TO } = require('sharify').data;
 
+// We need to handle the states between server rendered react
+// and client-rendered react. Firefox was firing the onChange event
+// (for auto-filled inputs)
+// before the client was initialized. More info here:
+// https://github.com/facebook/react/issues/2585
+//
 const Input = styled(SafeInput)`
   ${mixin}
 `;
