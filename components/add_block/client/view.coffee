@@ -1,5 +1,5 @@
 Backbone = require 'backbone'
-{ isURL } = require 'validator'
+{ isURL, isDataURI } = require 'validator'
 { isTouch } = require '../../util/device.coffee'
 mediator = require '../../../lib/mediator.coffee'
 template = -> require('../index.jade') arguments...
@@ -76,7 +76,7 @@ module.exports = class AddBlockView extends Backbone.View
     @dom.button.text 'Adding'
     @dom.button.attr 'disabled', true
 
-    attrs = if isURL val
+    attrs = if (isURL(val) or isDataURI(val))
       source: val
     else
       content: val
