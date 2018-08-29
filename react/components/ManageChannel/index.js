@@ -6,6 +6,7 @@ import { some } from 'underscore';
 import styled from 'styled-components';
 
 import mapErrors from 'react/util/mapErrors';
+import compactObject from 'react/util/compactObject';
 
 import manageChannelFragment from 'react/components/ManageChannel/fragments/manageChannel';
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
@@ -34,23 +35,11 @@ class ManageChannel extends Component {
     onClose: PropTypes.func.isRequired,
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    const { data: { loading } } = nextProps;
-    if (loading) return null;
-
-    const { data: { channel: { title, description, visibility } } } = nextProps;
-    return {
-      title,
-      description,
-      visibility: visibility.toUpperCase(),
-    };
-  }
-
   state = {
     mode: 'resting',
-    title: '',
-    description: '',
-    visibility: '',
+    title: null,
+    description: null,
+    visibility: null,
     attributeErrors: {},
     errorMessage: '',
   };
@@ -86,11 +75,11 @@ class ManageChannel extends Component {
 
     this.setState({ mode: 'submitting' });
 
-    return updateChannel({
-      variables: {
-        id, title, description, visibility,
-      },
-    })
+    const variables = compactObject({
+      id, title, description, visibility,
+    });
+
+    return updateChannel({ variables })
       .then(({ data: { update_channel: { channel: { href } } } }) => {
         onClose();
         // Slug may have changed so redirect
@@ -108,8 +97,6 @@ class ManageChannel extends Component {
     const { data: { loading } } = this.props;
     const {
       mode,
-      title,
-      description,
       visibility,
       attributeErrors,
       errorMessage,
@@ -137,9 +124,10 @@ class ManageChannel extends Component {
 
             <Input
               name="title"
-              value={title}
+              defaultValue={channel.title}
               onChange={this.handleTitle}
               errorMessage={attributeErrors.title}
+              required
             />
           </LabelledInput>
 
@@ -150,7 +138,7 @@ class ManageChannel extends Component {
 
             <Textarea
               name="description"
-              value={description || ''}
+              defaultValue={channel.description}
               onChange={this.handleDescription}
               placeholder="describe your channel here"
               rows="3"
@@ -166,7 +154,7 @@ class ManageChannel extends Component {
             <div>
               <Select
                 name="visibility"
-                value={visibility.toUpperCase()}
+                defaultValue={channel.visibility.toUpperCase()}
                 onChange={this.handleVisbility}
               >
                 <option value="PUBLIC">Open</option>
@@ -179,7 +167,7 @@ class ManageChannel extends Component {
                   PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
                   CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
                   PRIVATE: 'Only you and your collaborators can view and add to the channel.',
-                }[visibility.toUpperCase()]}
+                }[(visibility || channel.visibility).toUpperCase()]}
               </Text>
             </div>
           </LabelledInput>

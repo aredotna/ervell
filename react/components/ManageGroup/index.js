@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import { compose, graphql } from 'react-apollo';
 
+import compactObject from 'react/util/compactObject';
+
 import manageGroupFragment from 'react/components/ManageGroup/fragments/manageGroup';
 import manageGroupQuery from 'react/components/ManageGroup/queries/manageGroup';
 import collaboratorsListQuery from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/queries/collaboratorsList';
@@ -43,17 +45,9 @@ class ManageGroup extends Component {
     }).isRequired,
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    const { data: { loading } } = nextProps;
-    if (loading) return null;
-
-    const { data: { group: { name } } } = nextProps;
-    return { name };
-  }
-
   state = {
     mode: 'resting',
-    name: '',
+    name: null,
   }
 
   handleName = ({ target: { value: name } }) => {
@@ -101,12 +95,7 @@ class ManageGroup extends Component {
       default:
         this.setState({ mode: 'submitting' });
 
-        return updateGroup({
-          variables: {
-            id,
-            name,
-          },
-        })
+        return updateGroup({ variables: compactObject({ id, name }) })
           .then(onClose)
           .catch((err) => {
             console.error(err);
@@ -167,7 +156,7 @@ class ManageGroup extends Component {
     this.setState({ mode: 'resting' });
 
   renderDialog() {
-    const { mode, name } = this.state;
+    const { mode } = this.state;
     const { data: { group, group: { owner, memberships } } } = this.props;
 
     switch (mode) {
@@ -200,7 +189,7 @@ class ManageGroup extends Component {
                 name="name"
                 placeholder="enter group name"
                 onChange={this.handleName}
-                value={name}
+                defaultValue={group.name}
                 disabled={!group.can.manage}
               />
             </LabelledInput>
@@ -228,8 +217,8 @@ class ManageGroup extends Component {
                 onRemove={this.handleRemoveUser}
                 confirmationWarning="Are you sure?"
                 confirmationSelfWarning={`
-                  Removing yourself from ${name} means you will
-                  lose access to all channels ${name} is collaborating on.
+                  Removing yourself from ${group.name} means you will
+                  lose access to all channels ${group.name} is collaborating on.
                   There is no way to undo this action, and only the group’s
                   creator can re-add you.
                 `}
