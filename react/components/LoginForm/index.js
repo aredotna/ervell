@@ -7,11 +7,18 @@ import qs from 'qs';
 import AuthForm from 'react/components/AuthForm';
 import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import { mixin as textMixin } from 'react/components/UI/Text';
-import { Input, ErrorMessage } from 'react/components/UI/Inputs';
+import { ErrorMessage } from 'react/components/UI/Inputs';
+
+import { Input as SafeInput } from 'react-safe-universal-inputs';
+import mixin from 'react/components/UI/Inputs/mixin';
 
 import { track, en } from 'lib/analytics.coffee';
 
 const { REDIRECT_TO } = require('sharify').data;
+
+const Input = styled(SafeInput)`
+  ${mixin}
+`;
 
 const InputWithLink = styled.div.attrs({
   fontSize: 1,
@@ -34,6 +41,14 @@ export default class LoginForm extends Component {
     email: '',
     password: '',
     errorMessage: null,
+  }
+
+  handleEarlyInput = (inputNode) => {
+    const { name, value } = inputNode;
+
+    this.setState({
+      [name]: value,
+    });
   }
 
   handleInput = name => ({ target: { value } }) =>
@@ -87,8 +102,10 @@ export default class LoginForm extends Component {
           mb={6}
           placeholder="Email"
           type="email"
+          name="email"
           tabIndex={0}
           onChange={this.handleEmail}
+          onEarlyInput={this.handleEarlyInput}
           value={email}
           hasError={mode === 'error'}
           required
@@ -98,9 +115,11 @@ export default class LoginForm extends Component {
           <Input
             placeholder="Password"
             type="password"
+            name="password"
             onChange={this.handlePassword}
             value={password}
             hasError={mode === 'error'}
+            onEarlyInput={this.handleEarlyInput}
             required
           />
 
