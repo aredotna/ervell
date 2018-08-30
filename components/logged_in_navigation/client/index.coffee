@@ -1,13 +1,12 @@
 { each } = require 'underscore'
-initChannelCreate = require '../components/channel_create/index.coffee'
 initNotifications = require '../components/notifications/index.coffee'
 initViewMode = require '../components/view_mode/index.coffee'
 initYou = require '../components/you/index.coffee'
 initDropdowns = require '../../dropdown/client/index.coffee'
+{ default: initNewChannel } = require('../components/channel_create/index.js')
 
 module.exports = ($el) ->
   views =
-    channel: initChannelCreate $el.find('.js-channel-create')
     notifications: initNotifications $el.find('.js-notifications')
     view_mode: initViewMode $el.find('.js-view-mode')
     you: initYou $el.find('.js-you')
@@ -22,3 +21,5 @@ module.exports = ($el) ->
 
       $('body').one 'click', ->
         view.$el.removeClass hoverClass
+
+  initNewChannel($el.find('.js-new-channel')[0])

@@ -1,7 +1,10 @@
+Promise = require 'bluebird-q'
 Backbone = require 'backbone'
+
 Dismisser = require '../has_seen/dismisser.coffee'
 analytics = require '../../lib/analytics.coffee'
-Promise = require 'bluebird-q'
+
+{ openNewChannelModal } = require('../logged_in_navigation/components/channel_create/index.js')
 
 module.exports = class TipView extends Backbone.View
   events:
@@ -21,13 +24,7 @@ module.exports = class TipView extends Backbone.View
 
     switch @model.get 'trigger'
       when 'new:channel'
-        # Opens the new channel dialog
-        $dropdown = $('.js-triggerable-channel-create')
-        $dropdown.addClass hoverClass = 'DropdownHover--hover'
-
-        # Closes it when the body is clicked
-        $('body').one 'click', (e) ->
-          $dropdown.removeClass hoverClass
+        openNewChannelModal()
 
     @maybeDisable()
       .finally =>
@@ -56,7 +53,7 @@ module.exports = class TipView extends Backbone.View
 
   remove: ->
     @dismisser.dismiss()
-    
+
     analytics.track.click 'Block tip closed', id: @model.id
 
     super
