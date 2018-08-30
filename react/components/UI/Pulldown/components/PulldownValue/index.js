@@ -7,6 +7,8 @@ import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 import Option from 'react/components/UI/Pulldown/components/Option';
 
 const Value = styled(Option)`
+  border-radius: 0.25em;
+
   &:hover {
     background-color: inherit;
   }
@@ -28,6 +30,8 @@ const Value = styled(Option)`
   }
 
   ${x => x.mode === 'expanded' && `
+    color: ${x.theme.colors.gray.medium};
+
     // Upward-facing Caret
     &:after {
       border-top: 0;

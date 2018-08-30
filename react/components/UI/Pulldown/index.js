@@ -12,27 +12,33 @@ import PulldownOption from 'react/components/UI/Pulldown/components/PulldownOpti
 const Container = styled.div`
   position: relative;
   background-color: white;
+  border-radius: 0.25em;
   border: 1px solid ${x => ({
     resting: x.theme.colors.gray.regular,
     expanded: x.theme.colors.gray.medium,
   }[x.mode])};
-  border-radius: 0.25em;
-  overflow: hidden;
   ${space}
   ${alignSelf}
   ${preset(width, { width: '88%' })}
 
   ${x => x.mode === 'expanded' && `
-    overflow: visible;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     z-index: 1;
   `}
 `;
 
 const PulldownOptions = styled.div`
-  border-radius: 0.125em;
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  border-radius: 0.25em;
   background-color: white;
-  border-top: 1px solid ${x => x.theme.colors.gray.light};
-  overflow: hidden;
+  z-index: 2;
+
+  border: 1px solid ${x => x.theme.colors.gray.medium};
+  border-top-color: ${x => x.theme.colors.gray.regular};
 
   ${x => x.mode === 'expanded' && `
     border-top-left-radius: 0;

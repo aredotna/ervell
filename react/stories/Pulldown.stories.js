@@ -22,6 +22,10 @@ storiesOf('Pulldown', module)
           private: 'Private',
         }}
       />
+
+      <div>
+        Some content beneath the pulldown
+      </div>
     </Specimen>
   ))
   .add('with child components', () => (

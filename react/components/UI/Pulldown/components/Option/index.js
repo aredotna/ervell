@@ -17,14 +17,9 @@ export default styled.div`
   ${preset(space, { px: 5, py: 4 })}
   ${fontSize}
 
-  &:first-child {
-    border-top-left-radius: 0.125em;
-    border-top-right-radius: 0.125em;
-  }
-
   &:last-child {
-    border-bottom-left-radius: 0.125em;
-    border-bottom-right-radius: 0.125em;
+    border-bottom-left-radius: 0.25em;
+    border-bottom-right-radius: 0.25em;
   }
 
   ${x => x.mode === 'expanded' && `
