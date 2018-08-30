@@ -20,11 +20,11 @@ const Container = styled.div`
   ${space}
   ${alignSelf}
   ${preset(width, { width: '88%' })}
+  z-index: 1;
 
   ${x => x.mode === 'expanded' && `
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    z-index: 1;
   `}
 `;
 
@@ -35,8 +35,6 @@ const PulldownOptions = styled.div`
   right: -1px;
   border-radius: 0.25em;
   background-color: white;
-  z-index: 2;
-
   border: 1px solid ${x => x.theme.colors.gray.medium};
   border-top-color: ${x => x.theme.colors.gray.regular};
 
@@ -94,7 +92,7 @@ export default class Pulldown extends Component {
     return (
       <Container mode={mode}>
         <OutsideClickHandler onOutsideClick={this.rest}>
-          <PulldownValue mode={mode} onClick={this.toggle} selected>
+          <PulldownValue mode={mode} onMouseDown={this.toggle} selected>
             {options[selected]}
           </PulldownValue>
 
