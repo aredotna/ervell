@@ -90,11 +90,16 @@ export default class NewChannelForm extends Component {
         </LabelledInput>
 
         <LabelledInput my={6} alignItems="start">
-          <Label>Privacy</Label>
-          <ChannelVisibilityPulldown
-            value="open"
-            onChange={this.handleVisibility}
-          />
+          <Label>
+            Privacy
+          </Label>
+
+          <div>
+            <ChannelVisibilityPulldown
+              value="PUBLIC"
+              onChange={this.handleVisibility}
+            />
+          </div>
         </LabelledInput>
 
         <LabelledInput mt={6} mb={8}>
