@@ -44,7 +44,7 @@ export default class Expandable extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.mode !== nextProps.mode) {
+    if (prevState.mode !== nextProps.mode && nextProps.mode !== 'resting') {
       return { mode: nextProps.mode };
     }
 
