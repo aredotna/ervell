@@ -18,7 +18,7 @@ storiesOf('Button', module)
   .add('GenericButton - colors', () => (
     <Specimen>
       {theme.meta.colorNames.map(color => (
-        <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+        <States key={color} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
           <GenericButton color={color}>{color}</GenericButton>
         </States>
       ))}
@@ -27,7 +27,7 @@ storiesOf('Button', module)
   .add('GenericButton - sizes', () => (
     <Specimen>
       {theme.fontSizes.map((size, i) => (
-        <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+        <States key={size} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
           <GenericButton f={i}>{`f={${i}}`}</GenericButton>
         </States>
       ))}
@@ -50,7 +50,7 @@ storiesOf('Button', module)
   .add('DividerButton - colors', () => (
     <Specimen>
       {theme.meta.colorNames.map(color => (
-        <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+        <States key={color} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
           <DividerButton color={color}>{color}</DividerButton>
         </States>
       ))}
@@ -59,7 +59,7 @@ storiesOf('Button', module)
   .add('DividerButton - sizes', () => (
     <Specimen>
       {theme.fontSizes.map((size, i) => (
-        <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+        <States key={size} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
           <DividerButton f={i}>{`f={${i}}`}</DividerButton>
         </States>
       ))}

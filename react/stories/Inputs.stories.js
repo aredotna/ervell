@@ -45,7 +45,7 @@ storiesOf('Input', module)
       ))}
     </div>
   ))
-  .add('Input - with Errors', () => (
+  .add('Input - with errors', () => (
     <div>
       <Input
         placeholder="An input"
@@ -79,4 +79,30 @@ storiesOf('Input', module)
     <Specimen>
       <FocusableInput />
     </Specimen>
+  ))
+  .add('Input - colors', () => (
+    <Specimen>
+      {theme.meta.colorNames.map(color => (
+        <States key={color} states={[{}, { disabled: true }, { hover: true }, { active: true }, { value: 'value' }]}>
+          <Input color={color} placeholder={color} />
+        </States>
+      ))}
+    </Specimen>
+  ))
+  .add('Input - borderless', () => (
+    <Specimen>
+      <States states={[{}, { disabled: true }, { hover: true }, { active: true }, { value: 'value' }]}>
+        <Input placeholder="Borderless input" borderless />
+      </States>
+    </Specimen>
+  ))
+  .add('Input - borderless, colors', () => (
+    <Specimen>
+      {theme.meta.colorNames.map(color => (
+        <States key={color} states={[{}, { disabled: true }, { hover: true }, { active: true }, { value: 'value' }]}>
+          <Input color={color} placeholder={color} borderless />
+        </States>
+      ))}
+    </Specimen>
   ));
+

@@ -31,6 +31,10 @@ const Crumb = styled.div`
   a {
     text-decoration: none;
     color: inherit;
+
+    &:hover {
+      color: black;
+    }
   }
 
   &:after {
