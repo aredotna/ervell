@@ -10,7 +10,7 @@ import constants from 'react/styles/constants';
 const Dialog = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 5px;
+  padding: 5px; // Fake border
   overflow: hidden;
   border-radius: 0.25em;
   background-color: ${x => x.theme.colors.gray.semiLight};

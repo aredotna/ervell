@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Specimen from 'react/stories/__components__/Specimen';
 import Pulldown from 'react/components/UI/Pulldown';
+import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 
 const ExampleLabel = props => (
   <span>{JSON.stringify(props)}</span>
@@ -21,6 +22,10 @@ storiesOf('Pulldown', module)
           private: 'Private',
         }}
       />
+
+      <div>
+        Some content beneath the pulldown
+      </div>
     </Specimen>
   ))
   .add('with child components', () => (
@@ -33,6 +38,14 @@ storiesOf('Pulldown', module)
           closed: <ExampleLabel>Closed</ExampleLabel>,
           private: <ExampleLabel>Private</ExampleLabel>,
         }}
+      />
+    </Specimen>
+  ))
+  .add('ChannelVisibilityPulldown', () => (
+    <Specimen>
+      <ChannelVisibilityPulldown
+        value="PUBLIC"
+        onChange={action('onChange')}
       />
     </Specimen>
   ));

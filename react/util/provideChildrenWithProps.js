@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default (children, props) => {
+  if (!children) throw new Error('children is undefined');
+
   // If we have a bare string just return it.
   // Nothing can be provided to it.
   if (typeof children === 'string') {

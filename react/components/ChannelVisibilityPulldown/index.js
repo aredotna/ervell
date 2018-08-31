@@ -24,7 +24,7 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
       PRIVATE: <ChannelVisibilityPulldownOption
         label="Private"
         visibility="private"
-        description="only collaborators can view"
+        description="only collaborators can view / add"
         explanation="Only you and your collaborators can view and add to the channel."
       />,
     }}
@@ -32,8 +32,12 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
 );
 
 ChannelVisibilityPulldown.propTypes = {
-  value: PropTypes.oneOf(['OPEN', 'CLOSED', 'PRIVATE']).isRequired,
+  value: PropTypes.oneOf(['PUBLIC', 'CLOSED', 'PRIVATE']),
   onChange: PropTypes.func.isRequired,
+};
+
+ChannelVisibilityPulldown.defaultProps = {
+  value: 'PUBLIC',
 };
 
 export default ChannelVisibilityPulldown;

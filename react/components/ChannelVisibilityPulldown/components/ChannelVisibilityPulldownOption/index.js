@@ -1,29 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Text from 'react/components/UI/Text';
 
+const Container = styled.div`
+  position: relative;
+`;
+
+const Check = styled(Text)`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+`;
+
 const ChannelVisibilityPulldownOption = ({
-  mode, visibility, label, description, explanation,
+  mode, purpose, selected, visibility, label, description, explanation,
 }) => (
-  <div>
-    {mode === 'resting' &&
-      <Text color={`channel.${visibility}`}>
+  <Container>
+    {purpose === 'value' &&
+      <Text color={mode === 'resting' ? `channel.${visibility}` : 'gray.medium'}>
         {label} - {description}
       </Text>
     }
 
-    {mode === 'expanded' &&
+    {purpose === 'option' &&
       <div>
-        <Text color={`channel.${visibility}`} mb={2}>{label}</Text>
-        <Text color="gray.medium" f={3}>{explanation}</Text>
+        <Text color={`channel.${visibility}`} mb={2}>
+          {label}
+        </Text>
+
+        <Text color="gray.medium" f={3} pr={8}>
+          {explanation}
+        </Text>
+
+        {selected &&
+          <Check f={6} color={`channel.${visibility}`}>✓</Check>
+        }
       </div>
     }
-  </div>
+  </Container>
 );
 
 ChannelVisibilityPulldownOption.propTypes = {
   mode: PropTypes.string,
+  purpose: PropTypes.string,
+  selected: PropTypes.bool,
   visibility: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
@@ -32,6 +55,8 @@ ChannelVisibilityPulldownOption.propTypes = {
 
 ChannelVisibilityPulldownOption.defaultProps = {
   mode: 'resting',
+  purpose: 'value',
+  selected: false,
 };
 
 export default ChannelVisibilityPulldownOption;

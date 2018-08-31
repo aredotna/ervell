@@ -25,10 +25,6 @@ import DeleteButton from 'react/components/ManageGroup/components/DeleteButton';
 import DeleteConfirmation from 'react/components/ManageGroup/components/DeleteConfirmation';
 import { LabelledInput, Label, Input } from 'react/components/UI/Inputs';
 
-// TODO: These forms should not know about apollo/data. Due to the
-// coupling there's a bug where repeated instantiations leave the forms empty
-// because it's populating the data from cache. Would be simple to fix by using
-// an extracted form.
 class ManageGroup extends Component {
   static propTypes = {
     id: PropTypes.number.isRequired,

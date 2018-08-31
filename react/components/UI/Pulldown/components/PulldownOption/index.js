@@ -1,35 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { fontSize, width, color, space } from 'styled-system';
-
-import { preset } from 'react/styles/functions';
 
 import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 
-const Option = styled.div`
-  box-sizing: border-box;
-  outline: none;
-  background-color: white;
-  cursor: pointer;
-  user-select: none;
-  font-family: ${x => x.theme.fonts.sans};
-  ${preset(width, { width: '100%' })}
-  ${preset(color, { color: 'black' })}
-  ${preset(fontSize, { f: 4 })}
-  ${preset(space, { px: 5, py: 4 })}
-  ${fontSize}
-
-  ${x => x.mode === 'expanded' && `
-    &:hover {
-      background-color: ${x.theme.colors.gray.light};
-    }
-  `}
-`;
+import Option from 'react/components/UI/Pulldown/components/Option';
 
 const PulldownOption = ({ children, ...rest }) => (
   <Option role="button" tabIndex={0} {...rest}>
-    {provideChildrenWithProps(children, rest)}
+    {provideChildrenWithProps(children, { purpose: 'option', ...rest })}
   </Option>
 );
 
