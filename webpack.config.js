@@ -1,18 +1,20 @@
 const path = require('path');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const helpers = require('./webpack.helpers.js');
 
-const { NODE_ENV, PORT } = process.env;
+const { NODE_ENV, PORT, ANALYZE_BUNDLE } = process.env;
 const isDevelopment = NODE_ENV === 'development';
 const isStaging = NODE_ENV === 'staging';
 const isProduction = NODE_ENV === 'production';
 const isDeploy = isStaging || isProduction;
 
 const config = {
-  devtool: 'cheap-module-source-map',
+  mode: NODE_ENV,
+  // devtool: 'cheap-module-source-map',
   entry: {
     webpack: [
       'webpack-hot-middleware/client?reload=true',
@@ -71,12 +73,18 @@ const config = {
           },
         ],
       },
-      {
-        test: /\.json$/,
-        exclude: /node_modules/,
-        loader: 'json-loader',
-      },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        common: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin({
@@ -91,17 +99,14 @@ const config = {
         NODE_ENV: JSON.stringify(NODE_ENV),
       },
     }),
-    new webpack.NoEmitOnErrorsPlugin(),
+    // Ignore moment locales
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       jade: 'jade/runtime.js',
       waypoints: 'jquery-waypoints/waypoints.js',
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      minChunks: 10, // lower number for larger "common.js" bundle size
     }),
   ],
   resolve: {
@@ -120,17 +125,16 @@ const config = {
   },
 };
 
+if (ANALYZE_BUNDLE) {
+  config.plugins.push(new BundleAnalyzerPlugin());
+}
+
 if (isDevelopment) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   // Staging
 } else if (isDeploy) {
-  config.devtool = '#source-map';
-
-  // Prod
-  if (isProduction) {
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true }));
-  }
+  // config.devtool = '#source-map';
 }
 
 module.exports = config;
