@@ -78,9 +78,9 @@ const config = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        common: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
+        default: {
+          minChunks: 5,
+          name: 'common',
           chunks: 'all',
         },
       },
