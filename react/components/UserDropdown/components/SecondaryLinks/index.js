@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Link from 'react/components/UserDropdown/components/Link';
@@ -9,7 +10,7 @@ const SmallLink = styled(Link).attrs({
 })`
 `;
 
-export default () => (
+const SecondaryLinks = ({ isPremium }) => (
   <div>
     <SmallLink href="/settings">
       Settings
@@ -27,12 +28,20 @@ export default () => (
       About
     </SmallLink>
 
-    <SmallLink color="state.premium" href="/premium">
-      Premium features
-    </SmallLink>
+    {!isPremium &&
+      <SmallLink color="state.premium" href="/premium">
+        Premium features
+      </SmallLink>
+    }
 
     <SmallLink href="/sign_out">
       Log Out
     </SmallLink>
   </div>
 );
+
+SecondaryLinks.propTypes = {
+  isPremium: PropTypes.bool.isRequired,
+};
+
+export default SecondaryLinks;
