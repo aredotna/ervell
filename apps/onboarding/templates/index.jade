@@ -4,10 +4,11 @@ block meta
   != onboardingComponent.styles
 
 block container
-  #apolloMount.Onboarding
+  .Onboarding.js-onboarding-component
     != onboardingComponent.html
 
 block scripts
+  script( src= asset('/assets/onboarding.js') )
   script.
     window.__APOLLO_STATE__ = !{JSON.stringify(onboardingComponent.state).replace(/</g, '\\u003c')};
-  script( src= asset('/assets/onboarding.js') )
+

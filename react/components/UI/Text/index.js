@@ -5,7 +5,6 @@ import { preset } from 'react/styles/functions';
 import { antialiased, neutralMarginsY } from 'react/styles/mixins';
 
 export const mixin = css`
-  box-sizing: border-box;
   ${display}
   ${width}
   ${space}
