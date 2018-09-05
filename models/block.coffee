@@ -1,10 +1,17 @@
+#
+# Model for a single block
+#
+
 Base = require "./base.coffee"
 sd = require("sharify").data
 _ = require 'underscore'
 _s = require 'underscore.string'
 moment = require 'moment'
+parseDomain = require 'parse-domain'
+striptags = require 'striptags'
 
 module.exports = class Block extends Base
+
   url: -> "#{sd.API_URL}/blocks/#{@id}"
 
   sync: (method, model, options) ->
@@ -45,7 +52,7 @@ module.exports = class Block extends Base
       title = @get('description')
     else
       title = @get('generated_title')
-
+    
     _.unescape title
 
   getStrippedHTML: ->

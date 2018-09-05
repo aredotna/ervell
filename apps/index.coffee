@@ -3,105 +3,34 @@ express = require 'express'
 
 app = module.exports = express()
 
-# Normal routing
-console.time('actions')
-app.use(require('../apps/actions'))
-console.timeEnd('actions')
+app
+  # Normal routing
+  .use require '../apps/actions'
+  .use require '../apps/feed'
+  .use require '../apps/home'
+  .use require '../apps/blog'
+  .use require '../apps/authentication'
+  .use require '../apps/confirmation'
+  .use require '../apps/getting_started'
+  .use require '../apps/tools'
+  .use require '../apps/util'
+  .use require '../apps/about'
+  .use require '../apps/search'
+  .use require '../apps/manage'
+  .use require '../apps/share'
+  .use require '../apps/marklet'
+  .use require '../apps/import'
+  .use require '../apps/settings'
+  .use require '../apps/onboarding'
+  .use require '../apps/ui'
+  .use require '../apps/graphql'
+  .use require '../apps/examples'
 
-console.time('feed')
-app.use(require('../apps/feed'))
-console.timeEnd('feed')
-
-console.time('home')
-app.use(require('../apps/home'))
-console.timeEnd('home')
-
-console.time('blog')
-app.use(require('../apps/blog'))
-console.timeEnd('blog')
-
-console.time('authentication')
-app.use(require('../apps/authentication'))
-console.timeEnd('authentication')
-
-console.time('confirmation')
-app.use(require('../apps/confirmation'))
-console.timeEnd('confirmation')
-
-console.time('getting_started')
-app.use(require('../apps/getting_started'))
-console.timeEnd('getting_started')
-
-console.time('tools')
-app.use(require('../apps/tools'))
-console.timeEnd('tools')
-
-console.time('util')
-app.use(require('../apps/util'))
-console.timeEnd('util')
-
-console.time('about')
-app.use(require('../apps/about'))
-console.timeEnd('about')
-
-console.time('search')
-app.use(require('../apps/search'))
-console.timeEnd('search')
-
-console.time('manage')
-app.use(require('../apps/manage'))
-console.timeEnd('manage')
-
-console.time('share')
-app.use(require('../apps/share'))
-console.timeEnd('share')
-
-console.time('marklet')
-app.use(require('../apps/marklet'))
-console.timeEnd('marklet')
-
-console.time('import')
-app.use(require('../apps/import'))
-console.timeEnd('import')
-
-console.time('settings')
-app.use(require('../apps/settings'))
-console.timeEnd('settings')
-
-console.time('onboarding')
-app.use(require('../apps/onboarding'))
-console.timeEnd('onboarding')
-
-console.time('ui')
-app.use(require('../apps/ui'))
-console.timeEnd('ui')
-
-console.time('graphql')
-app.use(require('../apps/graphql'))
-console.timeEnd('graphql')
-
-console.time('examples')
-app.use(require('../apps/examples'))
-console.timeEnd('examples')
-
-
-# Dynamic routing (in order)
-console.time('user')
-app.use(require('../apps/user'))
-console.timeEnd('user')
-
-console.time('block')
-app.use(require('../apps/block'))
-console.timeEnd('block')
-
-console.time('channel')
-app.use(require('../apps/channel'))
-console.timeEnd('channel')
-
-console.time('rss')
-app.use(require('../apps/rss'))
-console.timeEnd('rss')
-
+  # Dynamic routing (in order)
+  .use require '../apps/user'
+  .use require '../apps/block'
+  .use require '../apps/channel'
+  .use require '../apps/rss'
 
 # Ennvironment specific
 switch NODE_ENV
