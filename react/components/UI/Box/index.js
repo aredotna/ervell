@@ -8,7 +8,10 @@ import {
   minHeight,
   justifyContent,
   flexDirection,
-  border,
+  borders,
+  borderColor,
+  borderRadius,
+  bgColor,
 } from 'styled-system';
 
 export default styled.div`
@@ -21,5 +24,8 @@ export default styled.div`
   ${alignItems}
   ${justifyContent}
   ${flexDirection}
-  ${border}
+  ${borders}
+  ${borderColor}
+  ${borderRadius}
+  ${bgColor}
 `;
