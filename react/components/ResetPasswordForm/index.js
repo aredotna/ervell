@@ -64,10 +64,8 @@ class ResetPasswordForm extends Component {
       })
 
       .catch((err) => {
-        const { response: { status } } = err;
-
-        // Account is unconfirmed and the confirmation period is expired
-        if (status === 401) {
+        if (err.response && err.response.status === 401) {
+          // Account is unconfirmed and the confirmation period is expired
           const { email } = this.state;
           window.location = `/confirm/expired?${qs.stringify({ email })}`;
           return;
