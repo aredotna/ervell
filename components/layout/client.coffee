@@ -111,11 +111,6 @@ setupViews = ->
 
   new HeaderInfoView
 
-  if $('.path__inner')[0] and !$('body').hasClass('is-mobile')
-    new Waypoint.Sticky
-      element: $('.path__inner')
-      offset: 3
-
   if mediator.shared.current_user.id
     initLoggedInNavigation $('.js-logged-in-navigation')
 
@@ -168,11 +163,11 @@ showPremiumMessage = ->
   # or if they are premium
   # or if we are already showing them a message for exceeding the limit
   # or if they have less than 5 private connections
-  
+
   shouldReturn = !current_user.id or
     current_user.get('is_pending_confirmation') or
     current_user.get('is_premium') or
-    current_user.get('is_exceeding_private_connections_limit') or 
+    current_user.get('is_exceeding_private_connections_limit') or
     current_user.get('private_connections_count') < 5
 
   return if shouldReturn
