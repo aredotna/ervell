@@ -135,7 +135,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/addon-options": "^3.4.8",
-    "@storybook/react": "^3.4.6",
+    "@storybook/react": "^4.0.0-alpha.20",
     "@storybook/storybook-deployer": "^2.3.0",
     "@types/express": "^4.11.1",
     "@types/prop-types": "^15.5.2",
