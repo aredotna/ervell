@@ -30,7 +30,6 @@ module.exports = ->
   setupAjaxHeaders()
   setupAnalytics()
   initNightMode()
-  showPremiumMessage()
   showLimitMessage()
   initConfirmableMessage()
   initLoggedOutCTA()
@@ -153,43 +152,6 @@ setupAnalytics = ->
       'Visited logged in'
     else
       'Visited logged out'
-
-# TODO: Extract
-showPremiumMessage = ->
-  { current_user } = mediator.shared
-
-  # Don't show this message if the current user is not logged in
-  # or if they have a pending confirmation.
-  # or if they are premium
-  # or if we are already showing them a message for exceeding the limit
-  # or if they have less than 5 private connections
-
-  shouldReturn = !current_user.id or
-    current_user.get('is_pending_confirmation') or
-    current_user.get('is_premium') or
-    current_user.get('is_exceeding_private_connections_limit') or
-    current_user.get('private_connections_count') < 5
-
-  return if shouldReturn
-
-  messages =
-    utility: """
-      Are.na Premium gives you unlimited space for private content. Get 3 months free when you <a href="/pricing">upgrade</a> today with the coupon code <strong>summer</strong>.
-    """
-    lifestyle: """
-      We're having a summer sale to celebrate 3 years of Are.na Premium, our first step towards a self-sustaining, ad-free community. Get 3 months free when you <a href="/pricing">upgrade</a> with the coupon code <strong>summer</strong>.
-    """
-
-  model = new Backbone.Model
-    id: 'premium_offer'
-    title: '3 months free Premium'
-    body: messages[sd.PREMIUM_MESSAGE]
-
-  messageView = new MessageView model: model
-
-  if messageView.isRenderable()
-    $('body').append messageView.render().$el
-
 
 showLimitMessage = ->
   return unless sd.CURRENT_USER?
