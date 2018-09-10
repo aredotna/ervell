@@ -13,7 +13,7 @@ import SecondaryLinks from 'react/components/UserDropdown/components/SecondaryLi
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 const Section = styled(Box).attrs({
-  py: 3,
+  py: 4,
   borderBottom: '1px solid',
   borderColor: 'gray.semiLight',
 })`
@@ -29,7 +29,7 @@ export default class UserDropdown extends Component {
         {({ loading, error, data }) => {
           if (loading) {
             return (
-              <BorderedBox width="22em">
+              <BorderedBox width="20em">
                 <LoadingIndicator p={6} />
               </BorderedBox>
             );
@@ -37,7 +37,7 @@ export default class UserDropdown extends Component {
 
           if (error) {
             return (
-              <BorderedBox width="22em">
+              <BorderedBox width="20em">
                 <Text color="state.alert" f={2} p={6}>
                   {error.message}
                 </Text>
@@ -48,7 +48,7 @@ export default class UserDropdown extends Component {
           const { me } = data;
 
           return (
-            <BorderedBox width="22em">
+            <BorderedBox width="20em">
               <Section>
                 <Link href={me.href}>
                   {me.name}
