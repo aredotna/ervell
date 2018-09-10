@@ -1,63 +1,6 @@
-.DropdownHover__trigger
-  .Avatar( data-initials= user.initials() )
-    img(
-      src= user.get('avatar_image').thumb
-      alt= user.initials()
-      onerror='this.style.display="none"'
-    )
-
-.Dropdown.js-dropdown
-  .DropdownSection.DropdownSection--expandable.js-expandable( data-key='you', data-state='active' )
-    a.DropdownItem.DropdownItem--primary( href="/#{user.get('slug')}" )
-      = user.get('username')
-
-    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}" )
-      span Profile
-
-    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/channels" )
-      span Channels
-
-    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/blocks" )
-      span Blocks
-
-    a.DropdownItem.DropdownItem--secondary( href="/#{user.get('slug')}/index" )
-      span Index
-
-    a.DropdownItem.DropdownItem--secondary( href='/tools' )
-      span Tools
-
-    a.DropdownItem.DropdownItem--secondary( href='/settings' )
-      span Settings
-
-    a.DropdownItem.DropdownItem--secondary.js-log-out( href='/me/sign_out' )
-      span Log Out
-
-  a.DropdownItem( href='/feed' )
-    | Feed
-
-  a.DropdownItem( href='/explore' )
-    | Explore
-
-  .DropdownSection.DropdownSection--expandable.js-expandable( data-key='about' )
-    a.DropdownItem.DropdownItem--primary( href='/about' )
-      span About
-
-    a.DropdownItem.DropdownItem--secondary( href='/about' )
-      span About
-
-    a.DropdownItem.DropdownItem--secondary( href='/blog' )
-      span Blog
-
-    a.DropdownItem.DropdownItem--secondary( href='http://store.are.na/' )
-      span Store
-
-    a.DropdownItem.DropdownItem--secondary( href='/about#faqs' )
-      span Help / FAQs
-
-    a.DropdownItem.DropdownItem--secondary( href='/about#contact' )
-      span Contact
-
-  unless user.isPremium()
-    .DropdownSection
-      a.DropdownItem.DropdownItem--primary.Color--state-premium( href='/pricing' )
-        span Upgrade to Premium
+.Avatar( data-initials= user.initials() )
+  img(
+    src= user.get('avatar_image').thumb
+    alt= user.initials()
+    onerror='this.style.display="none"'
+  )
