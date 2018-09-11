@@ -14,12 +14,6 @@ export default () => {
     mediator.trigger('lightbox:close');
   });
 
-  Mousetrap.bind('l', () => {
-    if (!mediator.shared.current_user.isPremium()) return;
-    mediator.shared.state.set({ view_mode: 'list' });
-    window.location.reload();
-  });
-
   Mousetrap.bind('g', () => {
     if (!mediator.shared.current_user.isPremium()) return;
     mediator.shared.state.set({ view_mode: 'grid' });
