@@ -1,13 +1,13 @@
 - var count = unread_count || feed && feed.getNumberUnread() || 0
 
-.DropdownHover__trigger
-  span.Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
+.NotificationsBadge.js-notifications-badge
+  .Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
     = count
 
-.Dropdown.js-dropdown
-  a.DropdownItem( href='/notifications' )
+.NotificationsDropdown.js-notifications-dropdown( data-active= !!is_visible )
+  a( href='/notifications' )
     | Notifications
-    span.DropdownItem__count
+    span
       = count
 
   .Notifications

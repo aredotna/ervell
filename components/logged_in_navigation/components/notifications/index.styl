@@ -1,3 +1,20 @@
+.NotificationsBadge
+  font-size font-size-sm
+  font-weight bold
+  cursor pointer
+
+.NotificationsDropdown
+  display none
+  position absolute
+  width block_width
+  background-color white
+  outline 1px solid red
+  top 100%
+  right 1em
+
+  &[data-active]
+    display block
+
 .Notifications
   max-height block_width
   overflow-y auto

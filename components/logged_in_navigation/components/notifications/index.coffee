@@ -7,14 +7,19 @@ NotificationsView = require './view.coffee'
 module.exports = ($el) ->
   { notifications } = mediator.shared
 
-  state = new Backbone.Model(unread_count: 0, is_fetching: false)
+  state = new Backbone.Model({
+    unread_count: 0,
+    is_fetching: false,
+    is_booted: false,
+    is_visible: false,
+  })
 
   Promise($.ajax({
-    type: 'GET'
-    url: "#{API_URL}/notifications/unread_count"
+    type: 'GET',
+    url: "#{API_URL}/notifications/unread_count",
     headers: {
       'X-AUTH-TOKEN': CURRENT_USER.authentication_token
-    }
+    },
   })).then ({ unread_count }) =>
     state.set('unread_count', unread_count)
 
