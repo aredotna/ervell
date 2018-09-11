@@ -6,6 +6,7 @@ import {
   height,
   alignItems,
   minHeight,
+  maxHeight,
   justifyContent,
   flexDirection,
   borders,
@@ -20,6 +21,7 @@ export default styled.div`
   ${width}
   ${height}
   ${minHeight}
+  ${maxHeight}
   ${space}
   ${alignItems}
   ${justifyContent}
