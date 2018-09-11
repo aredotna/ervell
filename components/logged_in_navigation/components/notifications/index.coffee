@@ -1,18 +1,10 @@
 Promise = require 'bluebird-q'
-Backbonbe = require 'backbone'
+Backbone = require 'backbone'
 { API_URL, CURRENT_USER } = require('sharify').data
-mediator = require '../../../../lib/mediator.coffee'
-NotificationsView = require './view.coffee'
+NotificationsBadgeView = require './view.coffee'
 
 module.exports = ($el) ->
-  { notifications } = mediator.shared
-
-  state = new Backbone.Model({
-    unread_count: 0,
-    is_fetching: false,
-    is_booted: false,
-    is_visible: false,
-  })
+  state = new Backbone.Model({ unread_count: 0 })
 
   Promise($.ajax({
     type: 'GET',
@@ -23,10 +15,9 @@ module.exports = ($el) ->
   })).then ({ unread_count }) =>
     state.set('unread_count', unread_count)
 
-  view = new NotificationsView
+  view = new NotificationsBadgeView
     el: $el
     state: state
-    collection: notifications
 
   view.render()
   view

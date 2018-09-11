@@ -3,27 +3,3 @@
 .NotificationsBadge.js-notifications-badge
   .Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
     = count
-
-.NotificationsDropdown.js-notifications-dropdown( data-active= !!is_visible )
-  a( href='/notifications' )
-    | Notifications
-    span
-      = count
-
-  .Notifications
-    if feed
-      if feed.length
-        for group in feed.models
-          include ./templates/notification
-      else if is_fetching
-        .Notification
-          | Fetching notifications&hellip;
-      else
-        .Notification
-          | No notifications yet
-    else
-      .Notification
-        | Loading
-
-  a.Button.Button--divider( href='/notifications' )
-    | View all notifications
