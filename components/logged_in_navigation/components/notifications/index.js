@@ -1,4 +1,9 @@
+import axios from 'axios';
 import React from 'react';
+import Backbone from 'backbone';
+import sharify from 'sharify';
+
+import NotificationsBadgeView from 'components/logged_in_navigation/components/notifications/view.coffee';
 
 import { mountWithApolloProvider } from 'react/apollo';
 import unmount from 'react/util/unmount';
@@ -6,13 +11,15 @@ import unmount from 'react/util/unmount';
 import Overlay from 'react/components/UI/Overlay';
 import NotificationsDropdown from 'react/components/NotificationsDropdown';
 
+const { API_URL, CURRENT_USER } = sharify.data;
+
 const STATE = {
   isOpened: false,
 };
 
-const OverlaidNotificationsDropdown = ({ targetEl, close }) => (
+const OverlaidNotificationsDropdown = ({ targetEl, onClose, onCompleted }) => (
   <Overlay
-    onClose={close}
+    onClose={onClose}
     targetEl={() => targetEl}
     alignToY="bottom"
     alignToX="right"
@@ -21,18 +28,44 @@ const OverlaidNotificationsDropdown = ({ targetEl, close }) => (
     offsetY={0}
     offsetX={10}
   >
-    <NotificationsDropdown />
+    <NotificationsDropdown onCompleted={onCompleted} />
   </Overlay>
 );
 
 export default (targetEl) => {
   if (!targetEl) return;
 
-  const el = document.createElement('div');
+  // Setup legacy view for badge
+  const badgeState = new Backbone.Model({ unread_count: 0 });
+
+  axios({
+    method: 'GET',
+    url: `${API_URL}/notifications/unread_count`,
+    headers: { 'X-AUTH-TOKEN': CURRENT_USER.authentication_token },
+  }).then(({ data: { unread_count } }) => {
+    badgeState.set('unread_count', unread_count);
+
+    const badgeView = new NotificationsBadgeView({ el: targetEl, state: badgeState });
+    badgeView.render();
+  });
+
+  const markAsRead = () => {
+    badgeState.set('unread_count', 0);
+
+    return axios({
+      method: 'POST',
+      url: `${API_URL}/notifications/clear`,
+      headers: { 'X-AUTH-TOKEN': CURRENT_USER.authentication_token },
+    });
+  };
+
+  // Setup click/rendering for NotificaionsDropdown
+  const notificationsEl = document.createElement('div');
 
   const close = () => {
-    unmount(el);
-    el.parentNode && el.parentNode.removeChild(el);
+    unmount(notificationsEl);
+
+    notificationsEl.parentNode && notificationsEl.parentNode.removeChild(notificationsEl);
 
     setTimeout(() => STATE.isOpened = false, 0);
   };
@@ -42,7 +75,11 @@ export default (targetEl) => {
 
     if (STATE.isOpened) return;
 
-    mountWithApolloProvider(OverlaidNotificationsDropdown, { targetEl, close }, el);
+    mountWithApolloProvider(OverlaidNotificationsDropdown, {
+      targetEl,
+      onClose: close,
+      onCompleted: markAsRead,
+    }, notificationsEl);
 
     STATE.isOpened = true;
   });

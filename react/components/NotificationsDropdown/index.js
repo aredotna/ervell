@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 
@@ -28,9 +29,19 @@ const Body = styled(Box)`
 `;
 
 export default class NotificationsDropdown extends Component {
+  static propTypes = {
+    onCompleted: PropTypes.func,
+  }
+
+  static defaultProps = {
+    onCompleted: () => {},
+  }
+
   render() {
+    const { onCompleted } = this.props;
+
     return (
-      <Query query={notificationsDropdownQuery} variables={{ limit: 20 }}>
+      <Query query={notificationsDropdownQuery} variables={{ limit: 20 }} onCompleted={onCompleted}>
         {({ loading, error, data }) => {
           if (loading) {
             return (
