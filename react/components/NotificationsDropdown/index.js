@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import notificationsDropdownQuery from 'react/components/NotificationsDropdown/queries/notificationsDropdown';
 
+import { mixin as dividerButtonMixin } from 'react/components/UI/Buttons/components/DividerButton';
+
 import BorderedBox from 'react/components/UI/BorderedBox';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
@@ -26,6 +28,10 @@ const Body = styled(Box)`
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+`;
+
+const Button = styled.a`
+  ${dividerButtonMixin}
 `;
 
 export default class NotificationsDropdown extends Component {
@@ -76,13 +82,9 @@ export default class NotificationsDropdown extends Component {
                   ))}
                 </Body>
 
-                <Box borderTop="1px solid" borderColor="gray.regular" p={6}>
-                  <Text textAlign="center" fontWeight="bold">
-                    <a href="/notifications">
-                      View all notifications
-                    </a>
-                  </Text>
-                </Box>
+                <Button pt={6} href="/notifications">
+                  View all notifications
+                </Button>
               </Container>
             </BorderedBox>
           );

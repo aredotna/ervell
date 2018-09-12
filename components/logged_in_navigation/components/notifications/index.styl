@@ -2,3 +2,8 @@
   font-size font-size-sm
   font-weight bold
   cursor pointer
+
+  // For some reason this prevents a 1px vertical shift
+  // of the badge while an XHR runs, only in Safari.
+  > .Badge
+    outline 1px solid transparent
