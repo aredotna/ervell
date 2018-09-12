@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -10,38 +10,47 @@ const SmallLink = styled(Link).attrs({
 })`
 `;
 
-const SecondaryLinks = ({ isPremium }) => (
-  <div>
-    <SmallLink href="/settings">
-      Settings
-    </SmallLink>
+export default class SecondaryLinks extends Component {
+  static propTypes = {
+    isPremium: PropTypes.bool.isRequired,
+  }
 
-    <SmallLink href="/tools">
-      More tools
-    </SmallLink>
+  signOut = () => {
+    window.localStorage.clear();
+    window.location.href = '/me/sign_out';
+  }
 
-    <SmallLink href="/faqs">
-      Help / FAQs
-    </SmallLink>
+  render() {
+    const { isPremium } = this.props;
 
-    <SmallLink href="/about">
-      About
-    </SmallLink>
+    return (
+      <div>
+        <SmallLink href="/settings">
+          Settings
+        </SmallLink>
 
-    {!isPremium &&
-      <SmallLink color="state.premium" href="/premium">
-        Premium features
-      </SmallLink>
-    }
+        <SmallLink href="/tools">
+          More tools
+        </SmallLink>
 
-    <SmallLink href="/sign_out">
-      Log Out
-    </SmallLink>
-  </div>
-);
+        <SmallLink href="/faqs">
+          Help / FAQs
+        </SmallLink>
 
-SecondaryLinks.propTypes = {
-  isPremium: PropTypes.bool.isRequired,
-};
+        <SmallLink href="/about">
+          About
+        </SmallLink>
 
-export default SecondaryLinks;
+        {!isPremium &&
+          <SmallLink color="state.premium" href="/premium">
+            Premium features
+          </SmallLink>
+        }
+
+        <SmallLink onClick={this.signOut}>
+          Log Out
+        </SmallLink>
+      </div>
+    );
+  }
+}
