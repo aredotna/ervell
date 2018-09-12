@@ -99,7 +99,7 @@
     "qs": "6.5.1",
     "query-params": "*",
     "react": "^16.4.2",
-    "react-apollo": "^2.1.6",
+    "react-apollo": "^2.1.11",
     "react-dom": "^16.4.2",
     "react-infinite-scroller": "^1.2.0",
     "react-input-autosize": "^2.2.1",

@@ -19,7 +19,7 @@ const Anchor = styled.a.attrs({
 `;
 
 const Link = ({ children, ...rest }) => (
-  <Anchor py={5} px="1rem" fontWeight="bold" {...rest}>
+  <Anchor py={4} px="1rem" fontWeight="bold" {...rest}>
     {children}
   </Anchor>
 );

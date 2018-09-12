@@ -21,6 +21,7 @@ const THEME = {
   breakpoints: Object.values(constants.breakpoints),
   meta: META,
   space: SPACING_SCALE,
+  z: constants.z,
 };
 
 export const wrapWithThemeProvider = (Component, props = {}) => (

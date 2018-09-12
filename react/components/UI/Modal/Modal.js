@@ -14,7 +14,7 @@ const ModalBackdrop = styled.div`
   bottom: 0;
   left: 0;
   background-color: ${x => x.theme.colors.utility.translucent};
-  z-index: 6001;
+  z-index: ${x => x.theme.z.modal};
 `;
 
 export default class Modal extends Component {
