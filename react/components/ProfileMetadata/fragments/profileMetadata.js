@@ -6,7 +6,7 @@ import profileMetadataInfoFragment from 'react/components/ProfileMetadata/compon
 import profileMetadataViewFragment from 'react/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView';
 
 export default gql`
-  fragment ProfileMetadata on User {
+  fragment ProfileMetadata on Identifiable {
     ...ProfileBreadcrumb
     ...ProfileMetadataActions
     ...ProfileMetadataInfo
