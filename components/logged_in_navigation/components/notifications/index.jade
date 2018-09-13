@@ -1,29 +1,5 @@
 - var count = unread_count || feed && feed.getNumberUnread() || 0
 
-.DropdownHover__trigger
-  span.Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
+.NotificationsBadge.js-notifications-badge
+  .Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
     = count
-
-.Dropdown.js-dropdown
-  a.DropdownItem( href='/notifications' )
-    | Notifications
-    span.DropdownItem__count
-      = count
-
-  .Notifications
-    if feed
-      if feed.length
-        for group in feed.models
-          include ./templates/notification
-      else if is_fetching
-        .Notification
-          | Fetching notifications&hellip;
-      else
-        .Notification
-          | No notifications yet
-    else
-      .Notification
-        | Loading
-
-  a.Button.Button--divider( href='/notifications' )
-    | View all notifications

@@ -6,9 +6,13 @@ import {
   height,
   alignItems,
   minHeight,
+  maxHeight,
   justifyContent,
   flexDirection,
-  border,
+  borders,
+  borderColor,
+  borderRadius,
+  bgColor,
 } from 'styled-system';
 
 export default styled.div`
@@ -17,9 +21,13 @@ export default styled.div`
   ${width}
   ${height}
   ${minHeight}
+  ${maxHeight}
   ${space}
   ${alignItems}
   ${justifyContent}
   ${flexDirection}
-  ${border}
+  ${borders}
+  ${borderColor}
+  ${borderRadius}
+  ${bgColor}
 `;

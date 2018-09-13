@@ -19,7 +19,7 @@ export const disabledMixin = css`
   opacity: 0.5;
 `;
 
-const DividerButton = styled.button`
+export const mixin = css`
   all: initial;
   display: block;
   box-sizing: border-box;
@@ -42,6 +42,10 @@ const DividerButton = styled.button`
   &:active { ${activeMixin} }
 
   ${x => x.disabled && disabledMixin}
+`;
+
+const DividerButton = styled.button`
+  ${mixin}
 `;
 
 export default DividerButton;
