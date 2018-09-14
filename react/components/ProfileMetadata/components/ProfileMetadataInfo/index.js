@@ -7,6 +7,7 @@ import { calculateLineHeight } from 'react/styles/functions';
 
 import profileMetadataInfoFragment from 'react/components/ProfileMetadata/components/ProfileMetadataInfo/fragments/profileMetadataInfo';
 
+import Box from 'react/components/UI/Box';
 import Pocket from 'react/components/UI/Pocket';
 import Expandable from 'react/components/UI/Expandable';
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
@@ -14,17 +15,10 @@ import WithLoginStatus from 'react/hocs/WithLoginStatus';
 const N_LINES = 5;
 const FIVE_LINES = `${calculateLineHeight('xs', 'tall') * N_LINES}rem`;
 
-const Buttons = styled.div`
-  margin: 1em 0;
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
+const Buttons = styled(Box).attrs({
+  my: 6,
+  neutralMarginsY: true,
+})`
   a {
     display: block;
   }
@@ -40,7 +34,12 @@ class ProfileMetadataInfo extends Component {
     const { identifiable, isLoggedIn } = this.props;
 
     return (
-      <Pocket title="Info">
+      <Pocket
+        title={{
+          User: 'Info',
+          Group: 'Group Info',
+        }[identifiable.__typename]}
+      >
         <Expandable height={FIVE_LINES}>
           <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
@@ -60,6 +59,16 @@ class ProfileMetadataInfo extends Component {
               </a>
             }
           </Buttons>
+        }
+
+        {identifiable.__typename === 'Group' &&
+          <Box my={6} neutralMarginsY>
+            {'Admin — '}
+
+            <a href={identifiable.user.href}>
+              {identifiable.user.name}
+            </a>
+          </Box>
         }
       </Pocket>
     );
