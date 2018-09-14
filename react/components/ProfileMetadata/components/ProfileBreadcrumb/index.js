@@ -10,24 +10,24 @@ import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
 class ProfileBreadcrumb extends Component {
   static propTypes = {
-    user: propType(profileBreadcrumbFragment).isRequired,
+    identifiable: propType(profileBreadcrumbFragment).isRequired,
     currentRoute: PropTypes.shape({
       href: PropTypes.string.isRequired,
     }).isRequired,
   }
 
   render() {
-    const { user, currentRoute: { pathname } } = this.props;
+    const { identifiable, currentRoute: { pathname } } = this.props;
 
     return (
       <StickyBreadcrumbPath>
         <StickyBreadcrumbPath.Crumb>
-          <a href={user.href}>
-            {user.name}
+          <a href={identifiable.href}>
+            {identifiable.name}
           </a>
 
           {!/follow(ers|ing)$/.test(pathname) &&
-            <ProfileBadge user={user} />
+            <ProfileBadge user={identifiable} />
           }
         </StickyBreadcrumbPath.Crumb>
 

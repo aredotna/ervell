@@ -32,30 +32,30 @@ const Buttons = styled.div`
 
 class ProfileMetadataInfo extends Component {
   static propTypes = {
-    user: propType(profileMetadataInfoFragment).isRequired,
+    identifiable: propType(profileMetadataInfoFragment).isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
   }
 
   render() {
-    const { user, isLoggedIn } = this.props;
+    const { identifiable, isLoggedIn } = this.props;
 
     return (
       <Pocket title="Info">
         <Expandable height={FIVE_LINES}>
-          <div dangerouslySetInnerHTML={{ __html: user.about || '—' }} />
+          <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
 
-        {isLoggedIn && (user.counts.followers > 0 || user.counts.following > 1) &&
+        {isLoggedIn && (identifiable.counts.followers > 0 || identifiable.counts.following > 1) &&
           <Buttons>
-            {user.counts.followers > 0 &&
-              <a href={`${user.href}/followers`}>
+            {identifiable.counts.followers > 0 &&
+              <a href={`${identifiable.href}/followers`}>
                 Followers
               </a>
             }
 
             {/* Subtract 1 to ignore the default Are.na follow */}
-            {(user.counts.following - 1) > 0 &&
-              <a href={`${user.href}/following`}>
+            {(identifiable.counts.following - 1) > 0 &&
+              <a href={`${identifiable.href}/following`}>
                 Following
               </a>
             }
