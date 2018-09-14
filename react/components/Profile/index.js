@@ -29,7 +29,7 @@ class Profile extends Component {
 
     return (
       <div>
-        <ProfileMetadata user={user} mode={mode} sort={sort} />
+        <ProfileMetadata identifiable={user} mode={mode} sort={sort} />
       </div>
     );
   }

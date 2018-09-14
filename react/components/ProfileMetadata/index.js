@@ -11,6 +11,7 @@ import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMe
 import ProfileBreadcrumb from 'react/components/ProfileMetadata/components/ProfileBreadcrumb';
 import ProfileMetadataActions from 'react/components/ProfileMetadata/components/ProfileMetadataActions';
 import ProfileMetadataInfo from 'react/components/ProfileMetadata/components/ProfileMetadataInfo';
+import ProfileGroupUserList from 'react/components/ProfileMetadata/components/ProfileGroupUserList';
 import ProfileMetadataView from 'react/components/ProfileMetadata/components/ProfileMetadataView';
 import ProfileMetadataSort from 'react/components/ProfileMetadata/components/ProfileMetadataSort';
 
@@ -35,6 +36,10 @@ export default class ProfileMetadata extends Component {
       >
         <Grid>
           <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
+
+          {identifiable.__typename === 'Group' &&
+            <ProfileGroupUserList identifiable={identifiable} />
+          }
 
           <ProfileMetadataView identifiable={identifiable} mode={mode} sort={sort} />
 

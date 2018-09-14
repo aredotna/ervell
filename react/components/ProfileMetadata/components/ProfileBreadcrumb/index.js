@@ -26,7 +26,7 @@ class ProfileBreadcrumb extends Component {
             {identifiable.name}
           </a>
 
-          {!/follow(ers|ing)$/.test(pathname) &&
+          {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'User') &&
             <ProfileBadge user={identifiable} />
           }
         </StickyBreadcrumbPath.Crumb>
