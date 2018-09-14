@@ -15,6 +15,8 @@ import {
   bgColor,
 } from 'styled-system';
 
+import { neutralMargins } from 'react/styles/mixins';
+
 export const mixin = css`
   box-sizing: border-box;
   ${display}
@@ -30,6 +32,7 @@ export const mixin = css`
   ${borderColor}
   ${borderRadius}
   ${bgColor}
+  ${neutralMargins}
 `;
 
 export default styled.div`
