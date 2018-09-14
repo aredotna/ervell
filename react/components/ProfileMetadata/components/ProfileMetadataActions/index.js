@@ -22,26 +22,27 @@ const UserMessageButton = styled(MessageButton)`
 
 export default class ProfileMetadataActions extends Component {
   static propTypes = {
-    user: propType(profileMetadataActionsFragment).isRequired,
+    identifiable: propType(profileMetadataActionsFragment).isRequired,
   }
 
   render() {
-    const { user } = this.props;
+    const { identifiable } = this.props;
 
     // Others
-    if (user.can.follow) {
+    if (identifiable.can.follow) {
       return (
         <ButtonGroup f={1}>
-          <UserMessageButton id={user.id} type="USER" />
-          <UserFollowButton id={user.id} type="USER" />
+          <UserMessageButton id={identifiable.id} type={identifiable.__typename.toUpperCase()} />
+
+          <UserFollowButton id={identifiable.id} type={identifiable.__typename.toUpperCase()} />
         </ButtonGroup>
       );
     }
 
     // You
-    if (user.can.manage) {
+    if (identifiable.can.manage) {
       return (
-        <Button href="/settings">
+        <Button f={1} href="/settings">
           Settings
         </Button>
       );

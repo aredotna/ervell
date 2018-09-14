@@ -16,30 +16,30 @@ import ProfileMetadataSort from 'react/components/ProfileMetadata/components/Pro
 
 export default class ProfileMetadata extends Component {
   static propTypes = {
-    user: propType(profileMetadataFragment).isRequired,
+    identifiable: propType(profileMetadataFragment).isRequired,
     mode: PropTypes.oneOf(MODES).isRequired,
     sort: PropTypes.oneOf(SORTS).isRequired,
   }
 
   render() {
-    const { user, mode, sort } = this.props;
+    const { identifiable, mode, sort } = this.props;
 
     return (
       <HeaderMetadataContainer
         breadcrumb={
-          <ProfileBreadcrumb user={user} />
+          <ProfileBreadcrumb identifiable={identifiable} />
         }
         actions={
-          <ProfileMetadataActions user={user} />
+          <ProfileMetadataActions identifiable={identifiable} />
         }
       >
         <Grid>
-          <ProfileMetadataInfo user={user} mode={mode} />
+          <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
 
-          <ProfileMetadataView user={user} mode={mode} sort={sort} />
+          <ProfileMetadataView identifiable={identifiable} mode={mode} sort={sort} />
 
           {SORTABLE_MODES.includes(mode) &&
-            <ProfileMetadataSort user={user} sort={sort} />
+            <ProfileMetadataSort identifiable={identifiable} sort={sort} />
           }
         </Grid>
       </HeaderMetadataContainer>
