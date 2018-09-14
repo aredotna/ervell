@@ -50,7 +50,7 @@ export default class UserDropdown extends Component {
           return (
             <BorderedBox width="20em">
               <Section>
-                <Link href={me.href}>
+                <Link py={3} href={me.href}>
                   {me.name}
 
                   <Label>Profile</Label>
@@ -58,12 +58,12 @@ export default class UserDropdown extends Component {
               </Section>
 
               <Section>
-                <Link href="/feed">
-                Feed
+                <Link pt={3} pb={4} href="/feed">
+                  Feed
                 </Link>
 
-                <Link href="/explore">
-                Explore
+                <Link pt={4} pb={3} href="/explore">
+                  Explore
                 </Link>
               </Section>
 

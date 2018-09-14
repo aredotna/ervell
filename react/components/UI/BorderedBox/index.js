@@ -18,16 +18,16 @@ const Inner = styled(Box)`
   height: 100%;
 `;
 
-const SPACE_PADDING_PROPS_KEYS = ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py'];
+const INNER_PROPS_KEYS = ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py', 'justifyContent', 'alignItems'];
 
 const BorderedBox = ({
   children, ...rest
 }) => {
   // Allow the innerbox to have configurable padding
-  const innerProps = compactObject(pick(rest, ...SPACE_PADDING_PROPS_KEYS));
+  const innerProps = compactObject(pick(rest, ...INNER_PROPS_KEYS));
 
   // While the input can still have configurable margins
-  const outerProps = omit(rest, ...SPACE_PADDING_PROPS_KEYS);
+  const outerProps = omit(rest, ...INNER_PROPS_KEYS);
 
   return (
     <Box bg="gray.semiLight" p="5px" borderRadius="0.25em" {...outerProps}>
@@ -40,13 +40,13 @@ const BorderedBox = ({
 
 BorderedBox.propTypes = {
   children: PropTypes.node.isRequired,
-  ...SPACE_PADDING_PROPS_KEYS.reduce((memo, key) => (
+  ...INNER_PROPS_KEYS.reduce((memo, key) => (
     { ...memo, [key]: PropTypes.number }
   ), {}),
 };
 
 BorderedBox.defaultProps = {
-  ...SPACE_PADDING_PROPS_KEYS.reduce((memo, key) => (
+  ...INNER_PROPS_KEYS.reduce((memo, key) => (
     { ...memo, [key]: null }
   ), {}),
 };
