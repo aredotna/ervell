@@ -103,7 +103,11 @@ export default class LoginForm extends Component {
     } = this.state;
 
     return (
-      <AuthForm onSubmit={this.handleSubmit}>
+      <AuthForm
+        onSubmit={this.handleSubmit}
+        action="/me/sign_in"
+        method="post"
+      >
         <Input
           mb={6}
           placeholder="Email"
