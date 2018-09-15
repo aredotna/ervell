@@ -36,10 +36,10 @@ export default class AuthForm extends Component {
   static Subtext = Subtext
 
   render() {
-    const { onSubmit } = this.props;
+    const { onSubmit, ...rest } = this.props;
 
     return (
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} {...rest}>
         <CloseButton />
 
         <Icons name="ArenaMark" size={7} mb={9} />
