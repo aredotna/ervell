@@ -12,6 +12,7 @@ import manageChannelFragment from 'react/components/ManageChannel/fragments/mana
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
+import Box from 'react/components/UI/Box';
 import Accordion from 'react/components/UI/Accordion';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
@@ -164,37 +165,25 @@ class ManageChannel extends Component {
 
           {channel.can.export &&
             <Accordion label="Export" mode="closed">
-              <LabelledInput>
-                <Label>
-                  Export
-                </Label>
-
+              <Box m={7}>
                 <ExportChannel id={channel.id} />
-              </LabelledInput>
+              </Box>
             </Accordion>
           }
 
           {channel.can.transfer &&
             <Accordion label="Transfer ownership" mode="closed">
-              <LabelledInput>
-                <Label>
-                  Transfer
-                </Label>
-
+              <Box m={7}>
                 <TransferChannel channel={channel} />
-              </LabelledInput>
+              </Box>
             </Accordion>
           }
 
           {channel.can.destroy &&
             <Accordion label="Delete channel" mode="closed">
-              <LabelledInput>
-                <Label pt={0}>
-                  Delete
-                </Label>
-
+              <Box m={7}>
                 <DeleteChannel id={channel.id} />
-              </LabelledInput>
+              </Box>
             </Accordion>
           }
 
