@@ -15,6 +15,7 @@ export default gql`
     ... on Group {
       name
       href
+      visibility
     }
   }
 
