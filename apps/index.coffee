@@ -85,6 +85,10 @@ app.use(require('../apps/examples'))
 console.timeEnd('examples')
 
 # Dynamic routing (in order)
+console.time('profile')
+app.use(require('../apps/profile'))
+console.timeEnd('profile')
+
 console.time('user')
 app.use(require('../apps/user'))
 console.timeEnd('user')
