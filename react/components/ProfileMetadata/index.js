@@ -37,7 +37,7 @@ export default class ProfileMetadata extends Component {
         <Grid>
           <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
 
-          {identifiable.__typename === 'Group' &&
+          {identifiable.__typename === 'Group' && identifiable.users.length > 0 &&
             <ProfileGroupUserList identifiable={identifiable} />
           }
 
