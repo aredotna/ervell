@@ -3,6 +3,7 @@ qs = require 'qs'
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
 { default: HomeComponent } = require '../../../react/components/Home/index.js'
 { default: EmptyConnectTwitterPage } = require '../../../react/pages/feed/EmptyConnectTwitter/index.js'
+{ default: NoFollowingMessage } = require '../../../react/pages/feed/NoFollowingMessage/index.js'
 
 # Legacy requires
 { FEED_TYPE, SORT, MODE } = require('sharify').data
@@ -21,6 +22,9 @@ module.exports = ->
   if ($emptyComponent = $('.js-empty-feed')).length
     showModal = qs.parse(location.search.replace('?', ''))?.showModal
     return mountWithApolloProvider(EmptyConnectTwitterPage, { showModal }, $emptyComponent)
+
+  if ($noFollowingComponent = $('.js-no-following')).length
+    mountWithApolloProvider(NoFollowingMessage, { }, $noFollowingComponent)
 
   # Legacy setup
   switch FEED_TYPE
