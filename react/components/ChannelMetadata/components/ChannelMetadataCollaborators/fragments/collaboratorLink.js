@@ -11,6 +11,7 @@ export default gql`
     ... on Group {
       id
       name
+      description(format: MARKDOWN)
       user {
         id
         name

@@ -37,7 +37,7 @@ export default class CollaboratorsListItemGroup extends Component {
     const { mode } = this.state;
     const {
       group: {
-        name, can, user, users,
+        name, description, can, user, users,
       },
     } = this.props;
 
@@ -45,7 +45,7 @@ export default class CollaboratorsListItemGroup extends Component {
 
     return (
       <strong>
-        <Link onClick={this.handleClick} length={name.length}>
+        <Link onClick={this.handleClick} length={name.length} title={description}>
           {name}
 
           {mode === 'resting' &&

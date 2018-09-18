@@ -6,6 +6,7 @@ export default gql`
   fragment ManageGroup on Group {
     id
     name
+    description(format: MARKDOWN)
     owner: user {
       ...ManagedMember
     }
