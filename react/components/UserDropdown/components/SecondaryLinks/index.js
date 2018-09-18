@@ -37,6 +37,10 @@ export default class SecondaryLinks extends Component {
           Help / FAQs
         </SmallLink>
 
+        <SmallLink href="/tools/send-invitation">
+          Send an invite
+        </SmallLink>
+
         <SmallLink href="/about">
           About
         </SmallLink>
