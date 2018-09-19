@@ -46,7 +46,7 @@ export default class SecondaryLinks extends Component {
         </SmallLink>
 
         {!isPremium &&
-          <SmallLink color="state.premium" href="/premium">
+          <SmallLink color="state.premium" href="/pricing">
             Premium features
           </SmallLink>
         }
