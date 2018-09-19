@@ -11,8 +11,10 @@ block body
     .Constrain.js-empty-feed
       != emptyFeedComponent.html
   else
-    .Contstrain.js-no-following
-      != noFollowingMessage.html
+    if noFollowingMessage
+      .Contstrain.js-no-following
+        != noFollowingMessage.html
+
     .feed-container
       //- Rendered client-side
 
