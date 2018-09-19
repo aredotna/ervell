@@ -12,6 +12,8 @@ import manageChannelFragment from 'react/components/ManageChannel/fragments/mana
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
+import Box from 'react/components/UI/Box';
+import Accordion from 'react/components/UI/Accordion';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { LabelledInput, Label, Input, Textarea, ErrorMessage } from 'react/components/UI/Inputs';
@@ -119,74 +121,70 @@ class ManageChannel extends Component {
         onDone={this.handleSubmit}
       >
         <Container>
-          <LabelledInput>
-            <Label>Name</Label>
+          <Accordion label="Edit name, description, and privacy">
+            <LabelledInput>
+              <Label>Name</Label>
 
-            <Input
-              name="title"
-              defaultValue={channel.title}
-              onChange={this.handleTitle}
-              errorMessage={attributeErrors.title}
-              required
-            />
-          </LabelledInput>
-
-          <LabelledInput>
-            <Label>
-              Description
-            </Label>
-
-            <Textarea
-              name="description"
-              defaultValue={channel.description}
-              onChange={this.handleDescription}
-              placeholder="describe your channel here"
-              rows="3"
-              errorMessage={attributeErrors.description}
-            />
-          </LabelledInput>
-
-          <LabelledInput>
-            <Label>
-              Privacy
-            </Label>
-
-            <div>
-              <ChannelVisibilityPulldown
-                value={channel.visibility.toUpperCase()}
-                onChange={this.handleVisibility}
+              <Input
+                name="title"
+                defaultValue={channel.title}
+                onChange={this.handleTitle}
+                errorMessage={attributeErrors.title}
+                required
               />
-            </div>
-          </LabelledInput>
+            </LabelledInput>
 
-          {channel.can.export &&
             <LabelledInput>
               <Label>
-                Export
+                Description
               </Label>
 
-              <ExportChannel id={channel.id} />
+              <Textarea
+                name="description"
+                defaultValue={channel.description}
+                onChange={this.handleDescription}
+                placeholder="describe your channel here"
+                rows="3"
+                errorMessage={attributeErrors.description}
+              />
             </LabelledInput>
+
+            <LabelledInput>
+              <Label>
+                Privacy
+              </Label>
+
+              <div>
+                <ChannelVisibilityPulldown
+                  value={channel.visibility.toUpperCase()}
+                  onChange={this.handleVisibility}
+                />
+              </div>
+            </LabelledInput>
+          </Accordion>
+
+          {channel.can.export &&
+            <Accordion label="Export" mode="closed">
+              <Box m={7}>
+                <ExportChannel id={channel.id} />
+              </Box>
+            </Accordion>
           }
 
           {channel.can.transfer &&
-            <LabelledInput>
-              <Label>
-                Transfer
-              </Label>
-
-              <TransferChannel channel={channel} />
-            </LabelledInput>
+            <Accordion label="Transfer ownership" mode="closed">
+              <Box m={7}>
+                <TransferChannel channel={channel} />
+              </Box>
+            </Accordion>
           }
 
           {channel.can.destroy &&
-            <LabelledInput>
-              <Label pt={0}>
-                Delete
-              </Label>
-
-              <DeleteChannel id={channel.id} />
-            </LabelledInput>
+            <Accordion label="Delete channel" mode="closed">
+              <Box m={7}>
+                <DeleteChannel id={channel.id} />
+              </Box>
+            </Accordion>
           }
 
           {mode === 'error' &&

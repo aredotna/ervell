@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import { compose, graphql } from 'react-apollo';
+import { some } from 'underscore';
 
+import mapErrors from 'react/util/mapErrors';
 import compactObject from 'react/util/compactObject';
 
 import manageGroupFragment from 'react/components/ManageGroup/fragments/manageGroup';
 import manageGroupQuery from 'react/components/ManageGroup/queries/manageGroup';
-import collaboratorsListQuery from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/queries/collaboratorsList';
 import manageCollaboratorsQuery from 'react/components/ManageCollaborators/queries/manageCollaborators';
 
 import updateGroupMutation from 'react/components/ManageGroup/mutations/updateGroup';
 import addGroupUserMutation from 'react/components/ManageGroup/mutations/addGroupUser';
 import removeGroupUserMutation from 'react/components/ManageGroup/mutations/removeGroupUser';
 import inviteGroupUserMutation from 'react/components/ManageGroup/mutations/inviteGroupUser';
-import deleteGroupMutation from 'react/components/ManageGroup/mutations/deleteGroup';
 
+import Box from 'react/components/UI/Box';
+import Accordion from 'react/components/UI/Accordion';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import ManagedMembers from 'react/components/ManagedMembers';
-import Button from 'react/components/ManageGroup/components/Button';
-import DeleteButton from 'react/components/ManageGroup/components/DeleteButton';
-import DeleteConfirmation from 'react/components/ManageGroup/components/DeleteConfirmation';
-import { LabelledInput, Label, Input } from 'react/components/UI/Inputs';
+import DeleteGroup from 'react/components/ManageGroup/components/DeleteGroup';
+import { LabelledInput, Label, Input, Textarea, ErrorMessage } from 'react/components/UI/Inputs';
 
 class ManageGroup extends Component {
   static propTypes = {
@@ -34,7 +34,6 @@ class ManageGroup extends Component {
     addGroupUser: PropTypes.func.isRequired,
     removeGroupUser: PropTypes.func.isRequired,
     inviteGroupUser: PropTypes.func.isRequired,
-    deleteGroup: PropTypes.func.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       group: propType(manageGroupFragment),
@@ -44,59 +43,48 @@ class ManageGroup extends Component {
   state = {
     mode: 'resting',
     name: null,
+    description: null,
+    attributeErrors: {},
+    errorMessage: '',
+
   }
 
-  handleName = ({ target: { value: name } }) => {
-    const { data: { group: { name: originalName } } } = this.props;
-    const isEdited = name !== originalName;
+  handleInput = fieldName => ({ target: { value: fieldValue } }) => {
+    const { data: { group: originalGroup } } = this.props;
+
+    const isEdited = some(originalGroup, (originalValue, key) =>
+      fieldName === key && originalValue !== fieldValue);
 
     this.setState({
-      name,
       mode: isEdited ? 'submit' : 'resting',
+      [fieldName]: fieldValue,
     });
   }
+
+  handleName = this.handleInput('name')
+  handleDescription = this.handleInput('description')
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const {
-      onClose, updateGroup, deleteGroup, id, channel_id,
-    } = this.props;
+    const { id, updateGroup, onClose } = this.props;
+    const { mode, name, description } = this.state;
 
-    const { mode, name } = this.state;
+    const variables = compactObject({ id, name, description });
 
     switch (mode) {
       case 'resting':
         return onClose();
-      case 'delete':
-        this.setState({ mode: 'deleting' });
-
-        return deleteGroup({
-          variables: { id },
-          refetchQueries: [
-            {
-              query: collaboratorsListQuery,
-              variables: {
-                channel_id,
-              },
-            },
-          ],
-        })
-          .then(onClose)
-          .catch((err) => {
-            console.error(err);
-            // TODO: Better error handling
-            this.setState({ mode: 'error' });
-          });
       default:
         this.setState({ mode: 'submitting' });
 
-        return updateGroup({ variables: compactObject({ id, name }) })
+        return updateGroup({ variables })
           .then(onClose)
           .catch((err) => {
-            console.error(err);
-            // TODO: Better error handling
-            this.setState({ mode: 'error' });
+            this.setState({
+              mode: 'error',
+              ...mapErrors(err),
+            });
           });
     }
   }
@@ -105,10 +93,7 @@ class ManageGroup extends Component {
     const { addGroupUser, id, channel_id } = this.props;
 
     return addGroupUser({
-      variables: {
-        id,
-        user_id,
-      },
+      variables: { id, user_id },
       refetchQueries: [
         {
           query: manageCollaboratorsQuery,
@@ -145,93 +130,17 @@ class ManageGroup extends Component {
   handleCancel = () =>
     this.props.onClose();
 
-  handleDeleteClick = () =>
-    this.setState({ mode: 'delete' });
-
-  handleDeleteCancel = () =>
-    this.setState({ mode: 'resting' });
-
-  renderDialog() {
-    const { mode } = this.state;
-    const { data: { group, group: { owner, memberships } } } = this.props;
-
-    switch (mode) {
-      case 'delete':
-      case 'deleting':
-        return (
-          <DeleteConfirmation name={group.name} onCancel={this.handleDeleteCancel} />
-        );
-      default:
-        return (
-          <div>
-            {mode !== 'resting' &&
-              <Button onClick={this.handleCancel}>
-                Cancel
-              </Button>
-            }
-
-            {mode === 'resting' &&
-              <DeleteButton onClick={this.handleDeleteClick}>
-                Delete
-              </DeleteButton>
-            }
-
-            <LabelledInput>
-              <Label>
-                Name
-              </Label>
-
-              <Input
-                name="name"
-                placeholder="enter group name"
-                onChange={this.handleName}
-                defaultValue={group.name}
-                disabled={!group.can.manage}
-              />
-            </LabelledInput>
-
-            <LabelledInput>
-              <Label>
-                Invite
-              </Label>
-
-              <CollaboratorSearch
-                types={['USER']}
-                onAdd={this.handleAddUser}
-                onInvite={this.handleInviteUser}
-              />
-            </LabelledInput>
-
-            <LabelledInput>
-              <Label>
-                Members
-              </Label>
-
-              <ManagedMembers
-                owner={owner}
-                memberships={memberships}
-                onRemove={this.handleRemoveUser}
-                confirmationWarning="Are you sure?"
-                confirmationSelfWarning={`
-                  Removing yourself from ${group.name} means you will
-                  lose access to all channels ${group.name} is collaborating on.
-                  There is no way to undo this action, and only the group’s
-                  creator can re-add you.
-                `}
-              />
-            </LabelledInput>
-          </div>
-        );
-    }
-  }
-
   render() {
     const { data: { loading } } = this.props;
 
     if (loading) return <LoadingIndicator />;
 
-    const { mode } = this.state;
-    const { data: { group } } = this.props;
+    const {
+      mode,
+      attributeErrors,
+      errorMessage,
+    } = this.state;
+    const { data: { group, group: { owner, memberships } } } = this.props;
 
     return (
       <TitledDialog
@@ -241,12 +150,85 @@ class ManageGroup extends Component {
           submit: 'Save',
           submitting: 'Saving...',
           error: 'Error',
-          delete: 'Delete',
-          deleting: 'Deleting...',
         }[mode]}
         onDone={this.handleSubmit}
       >
-        {this.renderDialog()}
+        <Accordion label="Edit name and description">
+          <LabelledInput>
+            <Label>
+                Name
+            </Label>
+
+            <Input
+              name="name"
+              placeholder="enter group name"
+              onChange={this.handleName}
+              defaultValue={group.name}
+              disabled={!group.can.manage}
+              errorMessage={attributeErrors.title}
+            />
+          </LabelledInput>
+
+          <LabelledInput>
+            <Label>
+              Description
+            </Label>
+
+            <Textarea
+              name="description"
+              defaultValue={group.description}
+              onChange={this.handleDescription}
+              placeholder="describe your group here"
+              rows="3"
+              errorMessage={attributeErrors.description}
+            />
+          </LabelledInput>
+        </Accordion>
+
+        <Accordion label="Add/edit members" mode="closed">
+          <LabelledInput>
+            <Label>
+                Invite
+            </Label>
+
+            <CollaboratorSearch
+              types={['USER']}
+              onAdd={this.handleAddUser}
+              onInvite={this.handleInviteUser}
+            />
+          </LabelledInput>
+
+          <LabelledInput>
+            <Label>
+              Members
+            </Label>
+
+            <ManagedMembers
+              owner={owner}
+              memberships={memberships}
+              onRemove={this.handleRemoveUser}
+              confirmationWarning="Are you sure?"
+              confirmationSelfWarning={`
+                Removing yourself from ${group.name} means you will
+                lose access to all channels ${group.name} is collaborating on.
+                There is no way to undo this action, and only the group’s
+                creator can re-add you.
+              `}
+            />
+          </LabelledInput>
+        </Accordion>
+
+        <Accordion label="Delete group" mode="closed">
+          <Box m={7}>
+            <DeleteGroup group={group} />
+          </Box>
+        </Accordion>
+
+        {mode === 'error' &&
+          <ErrorMessage my={5} align="center">
+            {errorMessage}
+          </ErrorMessage>
+        }
       </TitledDialog>
     );
   }
@@ -258,5 +240,4 @@ export default compose(
   graphql(addGroupUserMutation, { name: 'addGroupUser' }),
   graphql(removeGroupUserMutation, { name: 'removeGroupUser' }),
   graphql(inviteGroupUserMutation, { name: 'inviteGroupUser' }),
-  graphql(deleteGroupMutation, { name: 'deleteGroup' }),
 )(ManageGroup);

@@ -9,6 +9,7 @@ import setSortMiddleware from 'apps/feed/middleware/setSort';
 import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
 import HomeComponent from 'react/components/Home';
 import EmptyConnectTwitterPage from 'react/pages/feed/EmptyConnectTwitter';
+import NoFollowingMessage from 'react/pages/feed/NoFollowingMessage';
 
 import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService';
 
@@ -54,9 +55,13 @@ const renderFeed = (req, res, next) => {
   res.locals.sd.CURRENT_PATH = '/';
   res.locals.sd.FEED_TYPE = 'primary';
 
-  return req.apollo.render(EmptyConnectTwitterPage)
-    .then((emptyFeedComponent) => {
+  return Promise.all([
+    req.apollo.render(EmptyConnectTwitterPage),
+    req.apollo.render(NoFollowingMessage),
+  ])
+    .then(([emptyFeedComponent, noFollowingMessage]) => {
       res.locals.emptyFeedComponent = emptyFeedComponent;
+      res.locals.noFollowingMessage = noFollowingMessage;
 
       //
       // Show the empty component if the person isn't following anyone
