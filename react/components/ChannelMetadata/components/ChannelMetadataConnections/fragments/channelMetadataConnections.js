@@ -9,7 +9,7 @@ export default gql`
       connect
     }
 
-    connections {
+    connected_to_channels {
       id: slug
       label: title
       href

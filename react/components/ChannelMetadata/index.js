@@ -42,8 +42,8 @@ export default class ChannelMetadata extends Component {
               </Pocket>
             }
 
-            {(channel.can.connect || channel.connections.length > 0) &&
-              <Pocket title="Connected to">
+            {(channel.can.connect || channel.connected_to_channels.length > 0) &&
+              <Pocket title="This channel appears in">
                 <ChannelMetadataConnections channel={channel} />
               </Pocket>
             }
