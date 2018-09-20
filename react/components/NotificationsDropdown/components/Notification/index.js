@@ -55,12 +55,18 @@ export default class Notification extends Component {
           <NotificationObjectLink {...user} />
 
           {item.__typename === 'Comment' &&
-            <Label>
-              {' '}
-              <a href={target.href}>
-                {item.body}
-              </a>
-            </Label>
+            <span>
+              <Label>
+                {' says '}
+                “<a
+                  href={target.href}
+                  dangerouslySetInnerHTML={{ __html: item.body }}
+                />”
+                {' on '}
+              </Label>
+
+              <NotificationObjectLink {...target} />
+            </span>
           }
 
           {item.__typename !== 'Comment' &&
