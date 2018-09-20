@@ -5,7 +5,6 @@ export default gql`
     ... on User {
       href
     }
-
     ... on Group {
       href
     }
