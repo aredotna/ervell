@@ -2,11 +2,15 @@ import gql from 'graphql-tag';
 
 export default gql`
   fragment ProfileMetadataActions on Identifiable {
+    __typename
+
     ... on User {
       id: slug
+      name
       can {
         follow
         manage
+        message
       }
     }
 
