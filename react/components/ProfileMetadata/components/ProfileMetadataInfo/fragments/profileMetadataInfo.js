@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 export default gql`
   fragment ProfileMetadataInfo on Identifiable {
     __typename
-
     ... on User {
       href
       about: bio(format: HTML)
@@ -12,7 +11,6 @@ export default gql`
         following
       }
     }
-
     ... on Group {
       href
       about: description(format: HTML)
