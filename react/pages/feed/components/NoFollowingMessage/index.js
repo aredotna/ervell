@@ -7,8 +7,9 @@ import PropTypes from 'prop-types';
 import Text from 'react/components/UI/Text';
 import PageContainer from 'react/components/UI/PageContainer';
 import { GenericButtonLink } from 'react/components/UI/GenericButton';
-import FollowerCountCheckQuery from 'react/pages/feed/NoFollowingMessage/queries/followerCount';
-import FollowerCountCheckFragment from 'react/pages/feed/NoFollowingMessage/fragments/followerCount';
+
+import FollowerCountCheckQuery from 'react/pages/feed/components/NoFollowingMessage/queries/followerCount';
+import FollowerCountCheckFragment from 'react/pages/feed/components/NoFollowingMessage/fragments/followerCount';
 
 const ActionContainer = styled.div`
   text-align: center;
@@ -45,6 +46,7 @@ class NoFollowingMessage extends Component {
         <Headline>
           Discover how other people are using Are.na
         </Headline>
+
         <ActionContainer>
           <GenericButtonLink href="/examples">
             See examples

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import EmptyFeedCheckFragment from 'react/pages/feed/EmptyConnectTwitter/fragments/index';
+import EmptyFeedCheckFragment from 'react/pages/feed/components/EmptyConnectTwitter/fragments/index';
 
 export default gql`
   query EmptyFeedConnectTwitterQuery {

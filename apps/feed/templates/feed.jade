@@ -2,6 +2,8 @@ extends ../../../components/layout/index--infinite
 
 block meta
   != homeComponent.styles
+  if noFollowingMessage
+    != noFollowingMessage.styles
 
 block body
   .Constrain.js-home-component

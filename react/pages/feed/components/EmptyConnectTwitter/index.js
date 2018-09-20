@@ -11,10 +11,10 @@ import Text from 'react/components/UI/Text';
 import PageContainer from 'react/components/UI/PageContainer';
 import ConnectTwitter from 'react/components/ConnectTwitter/index';
 import { GenericButton } from 'react/components/UI/GenericButton';
-import updateFlagMutation from 'react/pages/feed/EmptyConnectTwitter/mutations/index';
+import updateFlagMutation from 'react/pages/feed/components/EmptyConnectTwitter/mutations/index';
 
-import EmptyFeedConnectTwitterQuery from 'react/pages/feed/EmptyConnectTwitter/queries/index';
-import EmptyFeedCheckFragment from 'react/pages/feed/EmptyConnectTwitter/fragments/index';
+import EmptyFeedConnectTwitterQuery from 'react/pages/feed/components/EmptyConnectTwitter/queries/index';
+import EmptyFeedCheckFragment from 'react/pages/feed/components/EmptyConnectTwitter/fragments/index';
 
 const ActionContainer = styled.div`
   text-align: center;
