@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import constants from 'react/styles/constants';
 
 import is from 'react/util/is';
+import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 
 import BreadcrumbPath from 'react/components/UI/BreadcrumbPath';
 
@@ -37,6 +38,7 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
 `;
 
 export default class StickyBreadcrumbPath extends Component {
+  static Container = Container
   static Crumb = BreadcrumbPath.Crumb
 
   static propTypes = {
@@ -79,13 +81,13 @@ export default class StickyBreadcrumbPath extends Component {
           <BreadcrumbPath>
             <div ref={(el) => { this.targetEl = el; }} />
 
-            {children}
+            {provideChildrenWithProps(children, { mode })}
           </BreadcrumbPath>
         </Waypoint>
 
         {mode === 'stuck' &&
           <StuckBreadcrumbPath>
-            {stuckChildren || children}
+            {provideChildrenWithProps(stuckChildren || children, { mode })}
           </StuckBreadcrumbPath>
         }
       </Container>

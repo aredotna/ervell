@@ -23,6 +23,18 @@ export const hyphenate = css`
   hyphens: auto;
 `;
 
+export const breakWord = css`
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+`;
+
+export const breakAll = css`
+  ${hyphenate}
+  ${breakWord}
+`;
+
 export const antialiased = css`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
