@@ -9,6 +9,11 @@ export default (children, props) => {
     return children;
   }
 
+  // If we have a function, render it
+  if (typeof children === 'function') {
+    return children(props);
+  }
+
   const xs = React.isValidElement(children)
     ? children
     // Some children might be `false` due to conditional rendering.
