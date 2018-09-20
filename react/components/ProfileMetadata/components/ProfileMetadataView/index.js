@@ -11,7 +11,7 @@ import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/component
 
 export default class ProfileMetadataView extends Component {
   static propTypes = {
-    user: propType(profileMetadataViewFragment).isRequired,
+    identifiable: propType(profileMetadataViewFragment).isRequired,
     sort: PropTypes.oneOf(SORTS).isRequired,
   }
 
@@ -19,7 +19,7 @@ export default class ProfileMetadataView extends Component {
     currentRoute.pathname === targetHref.split('?')[0];
 
   render() {
-    const { user: { href }, sort } = this.props;
+    const { identifiable: { href }, sort } = this.props;
 
     return (
       <Pocket title="View">

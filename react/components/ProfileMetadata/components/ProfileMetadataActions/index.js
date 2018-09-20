@@ -9,10 +9,13 @@ import FollowButton from 'react/components/FollowButton';
 import MessageButton from 'react/components/MessageButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 
+import Modal from 'react/components/UI/Modal';
+import ManageGroup from 'react/components/ManageGroup';
+
 const Button = styled(GenericButtonLink)`
 `;
 
-const UserFollowButton = styled(FollowButton)`
+const IdentifiableFollowButton = styled(FollowButton)`
   ${buttonMixin}
 `;
 
@@ -22,31 +25,56 @@ const UserMessageButton = styled(MessageButton)`
 
 export default class ProfileMetadataActions extends Component {
   static propTypes = {
-    user: propType(profileMetadataActionsFragment).isRequired,
+    identifiable: propType(profileMetadataActionsFragment).isRequired,
+  }
+
+  openManageGroupModal = (e) => {
+    e.preventDefault();
+
+    const { identifiable: { id } } = this.props;
+
+    new Modal(ManageGroup, { id }).open();
   }
 
   render() {
-    const { user } = this.props;
+    const { identifiable } = this.props;
 
-    // Others
-    if (user.can.follow) {
-      return (
-        <ButtonGroup f={1}>
-          <UserMessageButton id={user.id} type="USER" />
-          <UserFollowButton id={user.id} type="USER" />
-        </ButtonGroup>
-      );
-    }
+    return (
+      <ButtonGroup f={1}>
+        {identifiable.__typename === 'User' && identifiable.can.follow &&
+          <UserMessageButton
+            id={identifiable.id}
+            type={identifiable.__typename.toUpperCase()}
+            title={`Clicking this creates a collaborative channel between you and ${identifiable.name}`}
+          />
+        }
 
-    // You
-    if (user.can.manage) {
-      return (
-        <Button href="/settings">
-          Settings
-        </Button>
-      );
-    }
+        {identifiable.__typename === 'User' && identifiable.can.message &&
+          <IdentifiableFollowButton
+            id={identifiable.id}
+            type={identifiable.__typename.toUpperCase()}
+          />
+        }
 
-    return <div />;
+        {identifiable.__typename === 'User' && identifiable.can.manage &&
+          <Button href="/settings">
+            Settings
+          </Button>
+        }
+
+        {identifiable.__typename === 'Group' && identifiable.can.manage &&
+          <Button onClick={this.openManageGroupModal}>
+            Settings
+          </Button>
+        }
+
+        {identifiable.__typename === 'Group' && identifiable.can.follow &&
+          <IdentifiableFollowButton
+            id={identifiable.id}
+            type={identifiable.__typename.toUpperCase()}
+          />
+        }
+      </ButtonGroup>
+    );
   }
 }

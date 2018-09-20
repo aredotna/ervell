@@ -11,35 +11,40 @@ import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMe
 import ProfileBreadcrumb from 'react/components/ProfileMetadata/components/ProfileBreadcrumb';
 import ProfileMetadataActions from 'react/components/ProfileMetadata/components/ProfileMetadataActions';
 import ProfileMetadataInfo from 'react/components/ProfileMetadata/components/ProfileMetadataInfo';
+import ProfileGroupUserList from 'react/components/ProfileMetadata/components/ProfileGroupUserList';
 import ProfileMetadataView from 'react/components/ProfileMetadata/components/ProfileMetadataView';
 import ProfileMetadataSort from 'react/components/ProfileMetadata/components/ProfileMetadataSort';
 
 export default class ProfileMetadata extends Component {
   static propTypes = {
-    user: propType(profileMetadataFragment).isRequired,
+    identifiable: propType(profileMetadataFragment).isRequired,
     mode: PropTypes.oneOf(MODES).isRequired,
     sort: PropTypes.oneOf(SORTS).isRequired,
   }
 
   render() {
-    const { user, mode, sort } = this.props;
+    const { identifiable, mode, sort } = this.props;
 
     return (
       <HeaderMetadataContainer
         breadcrumb={
-          <ProfileBreadcrumb user={user} />
+          <ProfileBreadcrumb identifiable={identifiable} />
         }
         actions={
-          <ProfileMetadataActions user={user} />
+          <ProfileMetadataActions identifiable={identifiable} />
         }
       >
         <Grid>
-          <ProfileMetadataInfo user={user} mode={mode} />
+          <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
 
-          <ProfileMetadataView user={user} mode={mode} sort={sort} />
+          {identifiable.__typename === 'Group' && identifiable.users.length > 0 &&
+            <ProfileGroupUserList identifiable={identifiable} />
+          }
+
+          <ProfileMetadataView identifiable={identifiable} mode={mode} sort={sort} />
 
           {SORTABLE_MODES.includes(mode) &&
-            <ProfileMetadataSort user={user} sort={sort} />
+            <ProfileMetadataSort identifiable={identifiable} sort={sort} />
           }
         </Grid>
       </HeaderMetadataContainer>

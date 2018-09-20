@@ -52,6 +52,7 @@ export const LINE_HEIGHT_SCALE = __LINE_HEIGHT_SCALE__.map(name => LINE_HEIGHTS[
 
 export const FONT_FAMILIES = {
   sans: "'Arial', 'Helvetica Neue', 'Helvetica', sans-serif",
+  narrow: "'Arial Narrow', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif",
   serif: "'Times New Roman', serif",
   mono: "Menlo, Monaco, 'Bitstream Vera Sans Mono', Consolas, Courier, monospace",
 };

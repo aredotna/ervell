@@ -13,7 +13,7 @@ import unfollowMutation from 'react/components/FollowButton/mutations/unfollow';
 class FollowButton extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    type: PropTypes.oneOf(['USER', 'CHANNEL']).isRequired,
+    type: PropTypes.oneOf(['USER', 'GROUP', 'CHANNEL']).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       followable: propType(followableFragment),
@@ -21,8 +21,8 @@ class FollowButton extends Component {
     follow: PropTypes.func.isRequired,
     unfollow: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
-    followNode: PropTypes.node,
-    unfollowNode: PropTypes.node,
+    followNode: PropTypes.node, // TODO: Fix these by handling children correctly
+    unfollowNode: PropTypes.node, // TODO: Fix these by handling children correctly
   }
 
   static defaultProps = {
@@ -69,6 +69,8 @@ class FollowButton extends Component {
       follow: _follow,
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
+      followNode: _followNode,
+      unfollowNode: _unfollowNode,
       data: { followable },
       ...rest
     } = this.props;

@@ -41,13 +41,18 @@ export const antialiased = css`
 `;
 
 export const neutralMarginsY = css`
-  &:first-child {
-    margin-top: 0;
-  }
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+`;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+export const neutralMarginsX = css`
+  &:first-child { margin-left: 0; }
+  &:last-child { margin-right: 0; }
+`;
+
+export const neutralMargins = css`
+  ${x => x.neutralMarginsY && neutralMarginsY}
+  ${x => x.neutralMarginsX && neutralMarginsX}
 `;
 
 export default {
