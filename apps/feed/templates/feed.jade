@@ -2,6 +2,10 @@ extends ../../../components/layout/index--infinite
 
 block meta
   != homeComponent.styles
+
+  //- Not present on /notifications
+  if emptyConnectTwitter
+    != emptyConnectTwitter.styles
   if noFollowingMessage
     != noFollowingMessage.styles
 
@@ -9,14 +13,17 @@ block body
   .Constrain.js-home-component
     != homeComponent.html
 
+  //- Not present on /notifications
   if showEmpty
     .Constrain.js-empty-feed
-      != emptyFeedComponent.html
+      != emptyConnectTwitter.html
   else
+    //- Not present on /notifications
     if noFollowingMessage
       .Contstrain.js-no-following
         != noFollowingMessage.html
 
+    //- Default
     .feed-container
       //- Rendered client-side
 

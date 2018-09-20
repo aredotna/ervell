@@ -8,8 +8,8 @@ import setTipsMiddleware from 'apps/feed/middleware/setTips';
 import setSortMiddleware from 'apps/feed/middleware/setSort';
 import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
 import HomeComponent from 'react/components/Home';
-import EmptyConnectTwitterPage from 'react/pages/feed/EmptyConnectTwitter';
-import NoFollowingMessage from 'react/pages/feed/NoFollowingMessage';
+import EmptyConnectTwitter from 'react/pages/feed/components/EmptyConnectTwitter';
+import NoFollowingMessage from 'react/pages/feed/components/NoFollowingMessage';
 
 import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService';
 
@@ -56,17 +56,15 @@ const renderFeed = (req, res, next) => {
   res.locals.sd.FEED_TYPE = 'primary';
 
   return Promise.all([
-    req.apollo.render(EmptyConnectTwitterPage),
+    req.apollo.render(EmptyConnectTwitter),
     req.apollo.render(NoFollowingMessage),
   ])
-    .then(([emptyFeedComponent, noFollowingMessage]) => {
-      res.locals.emptyFeedComponent = emptyFeedComponent;
+    .then(([emptyConnectTwitter, noFollowingMessage]) => {
+      res.locals.emptyConnectTwitter = emptyConnectTwitter;
       res.locals.noFollowingMessage = noFollowingMessage;
 
-      //
       // Show the empty component if the person isn't following anyone
       // and they haven't cancelled out of the notice
-      //
       res.locals.showEmpty = (
         req.user.get('following_count') <= 1 &&
         !req.user.get('flags').has_seen_feed_connect_twitter
