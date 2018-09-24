@@ -27,6 +27,10 @@ export const mixin = css`
       text-decoration: underline;
     `}
   }
+
+  > p {
+    ${neutralMarginsY}
+  }
 `;
 
 export default styled.div`
