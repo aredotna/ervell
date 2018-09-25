@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import selectableChannelFragment from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel/fragments/selectableChannel';
+import selectableChannelFragment from 'react/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
 
-import SelectableChannel from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel';
-import ListButton from 'react/components/Connect/components/ConnectionSelection/components/ListButton';
+import SelectableChannel from 'react/components/ConnectionSelectionList/components/SelectableChannel';
+import ListButton from 'react/components/ConnectionSelectionList/components/ListButton';
 
 const Container = styled.div`
 `;

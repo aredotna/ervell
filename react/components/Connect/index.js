@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, graphql } from 'react-apollo';
 import styled from 'styled-components';
 
 import GenericButton from 'react/components/UI/GenericButton';
-import ConnectionSelection from 'react/components/Connect/components/ConnectionSelection';
+import ConnectionSelection from 'react/components/ConnectionSelection';
 
-import createConnectionMutation from 'react/components/Connect/mutations/createConnection';
-import removeConnectionMutation from 'react/components/Connect/mutations/removeConnection';
-
-import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
 import { inputPadding } from 'react/components/UI/Inputs';
 
 const Container = styled.div`
@@ -50,7 +45,7 @@ const ConnectPadding = styled.span`
   padding: 1px 0;
 `;
 
-class Connect extends Component {
+export default class Connect extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
@@ -70,52 +65,17 @@ class Connect extends Component {
     this.setState({ mode: 'resting' });
   }
 
-  handleConnectionSelection = (isSelected, channelId) => {
-    const {
-      id,
-      type,
-      createConnection,
-      removeConnection,
-    } = this.props;
-
-    // TODO: Possibly pass refetchQueries in as a param
-    const refetchQueries = [
-      {
-        query: channelMetadataQuery,
-        variables: { id },
-      },
-    ];
-
-    if (isSelected) {
-      return createConnection({
-        refetchQueries,
-        variables: {
-          channel_ids: [channelId],
-          connectable_id: id,
-          connectable_type: type,
-        },
-      });
-    }
-
-    return removeConnection({
-      refetchQueries,
-      variables: {
-        channel_id: channelId,
-        connectable_id: id,
-        connectable_type: type,
-      },
-    });
-  }
-
   render() {
     const { mode } = this.state;
-    const { id, type } = this.props;
+    const { id, type, ...rest } = this.props;
 
     return (
-      <Container>
+      <Container {...rest}>
         {mode === 'resting' &&
           <GenericButton onClick={this.openConnect} f={1}>
-            <ConnectPadding>Connect &rarr;</ConnectPadding>
+            <ConnectPadding>
+              Connect &rarr;
+            </ConnectPadding>
           </GenericButton>
         }
 
@@ -126,19 +86,10 @@ class Connect extends Component {
               <span>&times;</span>
             </Close>
 
-            <ConnectionSelection
-              id={id}
-              type={type}
-              onConnectionSelection={this.handleConnectionSelection}
-            />
+            <ConnectionSelection id={id} type={type} />
           </Fieldset>
         }
       </Container>
     );
   }
 }
-
-export default compose(
-  graphql(createConnectionMutation, { name: 'createConnection' }),
-  graphql(removeConnectionMutation, { name: 'removeConnection' }),
-)(Connect);

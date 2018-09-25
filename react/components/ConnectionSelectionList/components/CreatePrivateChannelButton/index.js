@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
-import createPrivateChannelMutation from 'react/components/Connect/components/ConnectionSelection/components/CreatePrivateChannelButton/mutations/createPrivateChannel';
+import createPrivateChannelMutation from 'react/components/ConnectionSelectionList/components/CreatePrivateChannelButton/mutations/createPrivateChannel';
 
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
-import ListButton from 'react/components/Connect/components/ConnectionSelection/components/ListButton';
+import ListButton from 'react/components/ConnectionSelectionList/components/ListButton';
 
 class CreatePrivateChannelButton extends Component {
   static propTypes = {

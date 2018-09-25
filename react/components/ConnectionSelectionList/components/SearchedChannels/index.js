@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
-import ChannelsList from 'react/components/Connect/components/ConnectionSelection/components/ChannelsList';
+import ChannelsList from 'react/components/ConnectionSelectionList/components/ChannelsList';
 
-import searchedChannelsQuery from 'react/components/Connect/components/ConnectionSelection/components/SearchedChannels/queries/searchedChannels';
+import searchedChannelsQuery from 'react/components/ConnectionSelectionList/components/SearchedChannels/queries/searchedChannels';
 
 class SearchedChannels extends Component {
   static propTypes = {

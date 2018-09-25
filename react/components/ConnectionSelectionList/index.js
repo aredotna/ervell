@@ -6,9 +6,9 @@ import { debounce, isEmpty } from 'underscore';
 import { outlineBorder } from 'react/styles/mixins';
 
 import { Input, inputPadding } from 'react/components/UI/Inputs';
-import RecentChannels from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels';
-import SearchedChannels from 'react/components/Connect/components/ConnectionSelection/components/SearchedChannels';
-import CreatePrivateChannelButton from 'react/components/Connect/components/ConnectionSelection/components/CreatePrivateChannelButton';
+import RecentChannels from 'react/components/ConnectionSelectionList/components/RecentChannels';
+import SearchedChannels from 'react/components/ConnectionSelectionList/components/SearchedChannels';
+import CreatePrivateChannelButton from 'react/components/ConnectionSelectionList/components/CreatePrivateChannelButton';
 
 const Container = styled.div`
   &[data-mode="active"] {
@@ -44,7 +44,7 @@ const OutlinedRecentChannels = styled(RecentChannels)`
   }
 `;
 
-export default class ConnectionSelection extends Component {
+export default class ConnectionSelectionList extends Component {
   static propTypes = {
     onConnectionSelection: PropTypes.func,
   }

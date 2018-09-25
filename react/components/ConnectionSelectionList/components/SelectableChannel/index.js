@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import selectableChannelFragment from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel/fragments/selectableChannel';
+import selectableChannelFragment from 'react/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
 
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
 import TickerTapeHover from 'react/components/UI/TickerTapeHover';

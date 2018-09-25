@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
-import ChannelsList from 'react/components/Connect/components/ConnectionSelection/components/ChannelsList';
-import LoadingIndicator from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels/components/LoadingIndicator';
+import ChannelsList from 'react/components/ConnectionSelectionList/components/ChannelsList';
+import LoadingIndicator from 'react/components/ConnectionSelectionList/components/RecentChannels/components/LoadingIndicator';
 
-import recentChannelsQuery from 'react/components/Connect/components/ConnectionSelection/components/RecentChannels/queries/recentChannels';
+import recentChannelsQuery from 'react/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels';
 
 class RecentChannels extends Component {
   static propTypes = {

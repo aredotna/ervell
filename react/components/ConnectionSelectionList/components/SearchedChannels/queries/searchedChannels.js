@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import selectableChannelFragment from 'react/components/Connect/components/ConnectionSelection/components/SelectableChannel/fragments/selectableChannel';
+import selectableChannelFragment from 'react/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
 
 export default gql`
   query RecentChannelsQuery($query: String!) {
