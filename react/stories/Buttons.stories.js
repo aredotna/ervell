@@ -7,7 +7,7 @@ import Specimen from 'react/stories/__components__/Specimen';
 import States from 'react/stories/__components__/States';
 
 import GenericButton from 'react/components/UI/GenericButton';
-import { DividerButton } from 'react/components/UI/Buttons';
+import { DividerButton, FilledButton } from 'react/components/UI/Buttons';
 
 storiesOf('Button', module)
   .add('GenericButton', () => (
@@ -61,6 +61,20 @@ storiesOf('Button', module)
       {theme.fontSizes.map((size, i) => (
         <States key={size} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
           <DividerButton f={i}>{`f={${i}}`}</DividerButton>
+        </States>
+      ))}
+    </Specimen>
+  ))
+  .add('FilledButton', () => (
+    <States bg="gray.regular" states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+      <FilledButton>Button</FilledButton>
+    </States>
+  ))
+  .add('FilledButton - sizes', () => (
+    <Specimen>
+      {theme.fontSizes.map((size, i) => (
+        <States bg="gray.regular" key={size} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+          <FilledButton f={i}>{`f={${i}}`}</FilledButton>
         </States>
       ))}
     </Specimen>
