@@ -23,7 +23,7 @@ export default class ChannelBreadcrumb extends Component {
     return (
       <StickyBreadcrumbPath>
         {({ mode }) => [
-          <StickyBreadcrumbPath.Crumb>
+          <StickyBreadcrumbPath.Crumb key="head">
             <a href={channel.owner.href}>
               {channel.owner.name}
 
@@ -36,7 +36,7 @@ export default class ChannelBreadcrumb extends Component {
             </a>
           </StickyBreadcrumbPath.Crumb>,
 
-          <StickyBreadcrumbPath.Crumb>
+          <StickyBreadcrumbPath.Crumb key="tail">
             <ColoredChannelLink
               href={channel.href}
               visibility={channel.visibility}
