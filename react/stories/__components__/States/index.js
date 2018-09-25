@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { space } from 'styled-system';
+import { space, bgColor } from 'styled-system';
 
 import provideChildrentWithProps from 'react/util/provideChildrenWithProps';
 
@@ -12,14 +12,16 @@ const Container = styled.div`
 `;
 
 const Example = styled.div.attrs({
-  p: 3,
+  p: 4,
   m: 3,
 })`
   ${space}
+  ${bgColor}
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 0.25em;
 `;
 
 export default class States extends Component {
@@ -29,15 +31,15 @@ export default class States extends Component {
   }
 
   render() {
-    const { states, children } = this.props;
+    const { states, children, bg } = this.props;
 
     return (
       <Container>
         {states.map(stateProps => (
-          <Example key={JSON.stringify(stateProps)}>
+          <Example key={JSON.stringify(stateProps)} bg={bg}>
             {provideChildrentWithProps(children, stateProps)}
 
-            <Text font="mono" fontSize={1} p={5} color="gray.semiBold" textAlign="center">
+            <Text font="mono" fontSize={1} px={5} pt={5} color="gray.semiBold" textAlign="center">
               {JSON.stringify(stateProps)}
             </Text>
           </Example>
