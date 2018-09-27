@@ -33,9 +33,9 @@ export default class ChannelMetadataConnections extends Component {
 
     return (
       <div>
-        {channel.connections.length > 0 &&
+        {channel.connected_to_channels.length > 0 &&
           <ChannelMetadataExpandable>
-            <ConnectionsList links={channel.connections} />
+            <ConnectionsList links={channel.connected_to_channels} />
           </ChannelMetadataExpandable>
         }
 

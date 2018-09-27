@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import channelBreadcrumbFragment from 'react/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb';
 
+import { truncate } from 'react/components/UI/Truncate';
 import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 
@@ -21,28 +22,32 @@ export default class ChannelBreadcrumb extends Component {
 
     return (
       <StickyBreadcrumbPath>
-        <StickyBreadcrumbPath.Crumb>
-          <a href={channel.owner.href}>
-            {channel.owner.name}
+        {({ mode }) => [
+          <StickyBreadcrumbPath.Crumb>
+            <a href={channel.owner.href}>
+              {channel.owner.name}
 
-            {channel.counts.collaborators > 0 &&
-              <CollaboratorCount>
-                {' '}
-                (+{channel.counts.collaborators})
-              </CollaboratorCount>
-            }
-          </a>
-        </StickyBreadcrumbPath.Crumb>
+              {channel.counts.collaborators > 0 &&
+                <CollaboratorCount>
+                  {' '}
+                  (+{channel.counts.collaborators})
+                </CollaboratorCount>
+              }
+            </a>
+          </StickyBreadcrumbPath.Crumb>,
 
-        <StickyBreadcrumbPath.Crumb>
-          <ColoredChannelLink
-            title={channel.title}
-            href={channel.href}
-            visibility={channel.visibility}
-          >
-            {channel.title}
-          </ColoredChannelLink>
-        </StickyBreadcrumbPath.Crumb>
+          <StickyBreadcrumbPath.Crumb>
+            <ColoredChannelLink
+              href={channel.href}
+              visibility={channel.visibility}
+            >
+              {{
+                resting: channel.title,
+                stuck: truncate(channel.title, 25),
+              }[mode]}
+            </ColoredChannelLink>
+          </StickyBreadcrumbPath.Crumb>,
+        ]}
       </StickyBreadcrumbPath>
     );
   }

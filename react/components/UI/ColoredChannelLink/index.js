@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import colors from 'react/styles/colors';
 
 const ColoredChannelLink = ({
-  href, title, visibility, ...rest
+  href, children, visibility, ...rest
 }) => (
   <a href={href} style={{ color: colors.channel[visibility] }} {...rest}>
-    {title}
+    {children}
   </a>
 );
 
 ColoredChannelLink.propTypes = {
   href: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   visibility: PropTypes.string.isRequired,
 };
 

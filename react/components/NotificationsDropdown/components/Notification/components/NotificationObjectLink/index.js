@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Text from 'react/components/UI/Text';
+import Truncate from 'react/components/UI/Truncate';
 
 const NotificationObjectLink = ({
   __typename, label, href, visibility, ...rest
@@ -14,7 +15,9 @@ const NotificationObjectLink = ({
     {...rest}
   >
     <a href={href}>
-      {label}
+      <Truncate length={40}>
+        {label}
+      </Truncate>
     </a>
   </Text>
 );
