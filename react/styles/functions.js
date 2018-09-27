@@ -25,6 +25,15 @@ export const preset = (fn, presetProps = {}) =>
 export const defaultTo = (v, dV) =>
   ((v == null || v !== v) ? dV : v); // eslint-disable-line no-self-compare
 
+export const hexToRgba = (hex, opacity = 1.0) => {
+  const __hex__ = hex.replace('#', '');
+  const r = parseInt(__hex__.substring(0, 2), 16);
+  const g = parseInt(__hex__.substring(2, 4), 16);
+  const b = parseInt(__hex__.substring(4, 6), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
+
 export default {
   parse,
   value,
