@@ -3,26 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { debounce, isEmpty } from 'underscore';
 
-import { outlineBorder } from 'react/styles/mixins';
+import { __outlineBorder__ } from 'react/styles/mixins';
 
-import { Input, inputPadding } from 'react/components/UI/Inputs';
+import { Input } from 'react/components/UI/Inputs';
+import Text from 'react/components/UI/Text';
 import RecentChannels from 'react/components/ConnectionSelectionList/components/RecentChannels';
 import SearchedChannels from 'react/components/ConnectionSelectionList/components/SearchedChannels';
 import CreatePrivateChannelButton from 'react/components/ConnectionSelectionList/components/CreatePrivateChannelButton';
 
 const Container = styled.div`
-  &[data-mode="active"] {
-    position: relative;
+  position: relative;
 
+  ${x => x.mode === 'active' && x.outline && `
     &:after {
-      ${outlineBorder()}
+      ${__outlineBorder__()}
     }
-  }
-`;
-
-const Bumper = styled.div`
-  text-align: center;
-  padding: ${inputPadding}; // TODO
+  `}
 `;
 
 const SearchInput = styled(Input).attrs({
@@ -39,17 +35,21 @@ const SearchInput = styled(Input).attrs({
 const OutlinedRecentChannels = styled(RecentChannels)`
   position: relative;
 
-  &:after {
-    ${outlineBorder()}
-  }
+  ${x => x.outline && `
+    &:after {
+      ${__outlineBorder__()}
+    }
+  `}
 `;
 
 export default class ConnectionSelectionList extends Component {
   static propTypes = {
+    outline: PropTypes.bool,
     onConnectionSelection: PropTypes.func,
   }
 
   static defaultProps = {
+    outline: true,
     onConnectionSelection: () => {},
   }
 
@@ -71,17 +71,20 @@ export default class ConnectionSelectionList extends Component {
 
   render() {
     const { query, debouncedQuery, mode } = this.state;
-    const { onConnectionSelection } = this.props;
+    const { outline, onConnectionSelection } = this.props;
 
     return (
-      <Container data-mode={mode}>
+      <Container mode={mode} outline={outline}>
         <SearchInput onChange={this.handleChange} />
 
         {mode === 'resting' &&
           <div>
-            <Bumper>Recent channels</Bumper>
+            <Text f={1} py={4} px={5} textAlign="center" color="gray.medium">
+              Recent channels
+            </Text>
 
             <OutlinedRecentChannels
+              outline={outline}
               onConnectionSelection={onConnectionSelection}
             />
           </div>

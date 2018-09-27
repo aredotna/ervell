@@ -9,12 +9,17 @@ import removeConnectionMutation from 'react/components/Connect/mutations/removeC
 
 import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
 
-class Connect extends Component {
+class ConnectionSelection extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
     createConnection: PropTypes.func.isRequired,
     removeConnection: PropTypes.func.isRequired,
+    outline: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    outline: true,
   }
 
   handleConnectionSelection = (isSelected, channelId) => {
@@ -26,7 +31,7 @@ class Connect extends Component {
     } = this.props;
 
     const refetchQueries = [
-      {
+      type === 'CHANNEL' && {
         query: channelMetadataQuery,
         variables: { id },
       },
@@ -70,4 +75,4 @@ class Connect extends Component {
 export default compose(
   graphql(createConnectionMutation, { name: 'createConnection' }),
   graphql(removeConnectionMutation, { name: 'removeConnection' }),
-)(Connect);
+)(ConnectionSelection);

@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { inputPadding } from 'react/components/UI/Inputs';
+import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 
-const Indicator = styled.div`
+const Indicator = styled.div.attrs({
+  f: 1,
+})`
+  ${baseTextMixin}
   position: relative;
   margin-top: -1px;
   padding: ${inputPadding}; // TODO

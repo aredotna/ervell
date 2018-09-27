@@ -9,11 +9,14 @@ import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
 import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
 import { inputPadding } from 'react/components/UI/Inputs';
+import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 
 const Container = styled.div.attrs({
   role: 'button',
   tabIndex: 0,
+  f: 1,
 })`
+  ${baseTextMixin}
   position: relative;
   margin-top: -1px;
   line-height: 1;

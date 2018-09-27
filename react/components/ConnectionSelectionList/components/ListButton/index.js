@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 import { inputPadding } from 'react/components/UI/Inputs';
+import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 
-export default styled.a.attrs({
+export default styled.div.attrs({
   role: 'button',
   tabIndex: 0,
+  f: 1,
 })`
+  ${baseTextMixin}
   position: relative;
   display: block;
   margin-top: -1px;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
+import recentChannelsQuery from 'react/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels';
+
 import createPrivateChannelMutation from 'react/components/ConnectionSelectionList/components/CreatePrivateChannelButton/mutations/createPrivateChannel';
 
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
@@ -27,6 +29,12 @@ class CreatePrivateChannelButton extends Component {
 
     this.setState({ mode: 'creating' });
 
+    const refetchQueries = [
+      {
+        query: recentChannelsQuery,
+      },
+    ];
+
     try {
       const {
         data: {
@@ -37,6 +45,7 @@ class CreatePrivateChannelButton extends Component {
           },
         },
       } = await createPrivateChannel({
+        refetchQueries,
         variables: { title },
       });
 
