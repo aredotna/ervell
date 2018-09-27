@@ -31,12 +31,12 @@ export default class States extends Component {
   }
 
   render() {
-    const { states, children, bg } = this.props;
+    const { states, children, ...rest } = this.props;
 
     return (
       <Container>
         {states.map(stateProps => (
-          <Example key={JSON.stringify(stateProps)} bg={bg}>
+          <Example key={JSON.stringify(stateProps)} {...rest}>
             {provideChildrentWithProps(children, stateProps)}
 
             <Text font="mono" fontSize={1} px={5} pt={5} color="gray.semiBold" textAlign="center">

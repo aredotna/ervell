@@ -31,7 +31,7 @@ const Container = styled.div`
       }
     `;
   }}
-  `;
+`;
 
 export default class Channel extends Connectable {
   render() {

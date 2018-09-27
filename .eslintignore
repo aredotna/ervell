@@ -1,3 +1,4 @@
 components/*
 lib/*
 apps/marklet/public/loader.js
+public/*

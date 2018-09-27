@@ -1,6 +1,7 @@
 import uuidv4 from 'uuid/v4';
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import PropTypes from 'prop-types';
 
 import { Query } from 'react-apollo';
 
@@ -21,6 +22,10 @@ const BlokkWithData = ({ id }) => (
     }}
   </Query>
 );
+
+BlokkWithData.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
 
 storiesOf('Blokk', module)
   .add('default', () => (
