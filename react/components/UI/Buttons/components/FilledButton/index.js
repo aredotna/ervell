@@ -27,7 +27,11 @@ const mixin = css`
   &:active { ${activeMixin} }
 `;
 
-const FilledButton = styled.button`
+export const FilledButton = styled.button`
+  ${mixin}
+`;
+
+export const FilledButtonLink = styled.a`
   ${mixin}
 `;
 
