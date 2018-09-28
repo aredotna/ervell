@@ -52,6 +52,7 @@
     "body-parser": "*",
     "bucket-assets": "aredotna/bucket-assets.git#d253febf7c658673c036afc85d034572011135e4",
     "cheerio": "^0.22.0",
+    "chroma-js": "^1.4.0",
     "coffee-loader": "^0.9.0",
     "coffee-register": "^0.1.3",
     "coffeescript": "1.11.1",
