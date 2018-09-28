@@ -70,6 +70,15 @@ storiesOf('Button', module)
       <FilledButton>Button</FilledButton>
     </States>
   ))
+  .add('FilledButton - colors', () => (
+    <Specimen>
+      {theme.meta.colorNames.map(color => (
+        <States key={color} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+          <FilledButton color={color}>{color}</FilledButton>
+        </States>
+      ))}
+    </Specimen>
+  ))
   .add('FilledButton - sizes', () => (
     <Specimen>
       {theme.fontSizes.map((size, i) => (

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { hexToRgba } from 'react/styles/functions';
+import chroma from 'chroma-js';
 
 import Count from 'react/components/UI/Count';
 import Text from 'react/components/UI/Text';
@@ -23,7 +22,7 @@ const Container = styled.div`
     return `
       &, & * {
         color: ${color};
-        border-color: ${mode === 'hover' ? `border-color: ${color};` : hexToRgba(color, 0.5)};
+        border-color: ${mode === 'hover' ? `border-color: ${color};` : chroma.blend(color, '#bbb', 'screen')};
 
         &:hover {
           border-color: ${color};
@@ -31,7 +30,7 @@ const Container = styled.div`
       }
     `;
   }}
-`;
+  `;
 
 export default class Channel extends Connectable {
   render() {

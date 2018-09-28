@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 import { themeGet, fontSize, space } from 'styled-system';
+import chroma from 'chroma-js';
 
-import { preset, hexToRgba } from 'react/styles/functions';
+import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
 export const activeMixin = css`
@@ -24,7 +25,7 @@ export const buttonColor = (props) => {
 
   return `
     color: ${value};
-    border-color: ${hexToRgba(value, 0.25)};
+    border-color: ${chroma.blend(value, '#bbb', 'screen')};
   `;
 };
 

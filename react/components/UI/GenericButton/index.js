@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 import { themeGet, fontSize, space, alignSelf } from 'styled-system';
+import chroma from 'chroma-js';
 
-import { defaultTo, preset, hexToRgba } from 'react/styles/functions';
+import { defaultTo, preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
 export const BUTTON_DEFAULT_FONT_SIZE = 3;
@@ -23,7 +24,7 @@ export const buttonColor = (props) => {
 
   return `
     color: ${value};
-    border-color: ${hexToRgba(value, 0.25)};
+    border-color: ${chroma.blend(value, '#bbb', 'screen')};
   `;
 };
 
