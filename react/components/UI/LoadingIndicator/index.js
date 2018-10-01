@@ -13,12 +13,14 @@ const Container = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
+  user-select: none;
   ${space}
 `;
 
 export default class LoadingIndicator extends Component {
   static propTypes = {
     frames: PropTypes.arrayOf(PropTypes.string),
+    interval: PropTypes.number,
   }
 
   static defaultProps = {
@@ -27,6 +29,7 @@ export default class LoadingIndicator extends Component {
       '··',
       '···',
     ],
+    interval: 200,
   }
 
   state = {
@@ -36,7 +39,7 @@ export default class LoadingIndicator extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.setState(({ cursor }) => ({ cursor: cursor + 1 }));
-    }, 200);
+    }, this.props.interval);
   }
 
   componentWillUnmount() {
