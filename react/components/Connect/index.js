@@ -49,8 +49,6 @@ export default class Connect extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
-    createConnection: PropTypes.func.isRequired,
-    removeConnection: PropTypes.func.isRequired,
   }
 
   state = {
