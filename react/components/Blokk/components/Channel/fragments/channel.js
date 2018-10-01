@@ -8,7 +8,7 @@ export default gql`
     visibility
     updated_at(relative: true)
     counts {
-      blocks
+      contents
     }
     owner {
       ... on Group {

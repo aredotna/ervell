@@ -32,7 +32,7 @@ export default class Channel extends Connectable {
         <Text my={4} f={2} textAlign="center">
           by {channel.owner.name}
           <br />
-          <Count label="block" amount={channel.counts.blocks} />
+          <Count label="block" amount={channel.counts.contents} />
           {' • '}
           {channel.updated_at}
         </Text>
