@@ -4,8 +4,8 @@ import { compose, graphql } from 'react-apollo';
 
 import ConnectionSelectionList from 'react/components/ConnectionSelectionList';
 
-import createConnectionMutation from 'react/components/Connect/mutations/createConnection';
-import removeConnectionMutation from 'react/components/Connect/mutations/removeConnection';
+import createConnectionMutation from 'react/components/ConnectionSelection/mutations/createConnection';
+import removeConnectionMutation from 'react/components/ConnectionSelection/mutations/removeConnection';
 
 import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
 
