@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { blend } from 'chroma-js';
 
 import theme from 'react/styles/theme';
 
@@ -52,9 +53,28 @@ export const neutralMarginsY = css`
   }
 `;
 
+export const channelVisibilityForegroundColor = css`
+  ${(props) => {
+    const color = theme.colors.channel[props.visibility];
+
+    return `
+      &, & * {
+        color: ${color};
+        border-color: ${props.mode === 'hover' ? `border-color: ${color};` : blend(color, '#bbb', 'screen')};
+
+        &:hover {
+          border-color: ${color};
+        }
+      }
+    `;
+  }
+}
+  `;
+
 export default {
   outlineBorder,
   hyphenate,
   antialiased,
   neutralMarginsY,
+  channelVisibilityForegroundColor,
 };
