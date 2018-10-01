@@ -1,20 +1,23 @@
 import { css } from 'styled-components';
+import { blend } from 'chroma-js';
 
 import theme from 'react/styles/theme';
 
+export const __outlineBorder__ = (size = '5px', color = theme.colors.gray.light, radius = '0.25em') => `
+  display: block;
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: -${size};
+  right: -${size};
+  bottom: -${size};
+  left: -${size};
+  border: ${size} solid ${color};
+  border-radius: ${radius};
+`;
+
 export const outlineBorder = (size = '5px', color = theme.colors.gray.light, radius = '0.25em') =>
-  css`
-    display: block;
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    top: -${size};
-    right: -${size};
-    bottom: -${size};
-    left: -${size};
-    border: ${size} solid ${color};
-    border-radius: ${radius};
-  `;
+  __outlineBorder__(size, color, radius);
 
 export const hyphenate = css`
   overflow-wrap: break-word;
@@ -50,9 +53,28 @@ export const neutralMarginsY = css`
   }
 `;
 
+export const channelVisibilityForegroundColor = css`
+  ${(props) => {
+    const color = theme.colors.channel[props.visibility];
+
+    return `
+      &, & * {
+        color: ${color};
+        border-color: ${props.mode === 'hover' ? `border-color: ${color};` : blend(color, '#bbb', 'screen')};
+
+        &:hover {
+          border-color: ${color};
+        }
+      }
+    `;
+  }
+}
+  `;
+
 export default {
   outlineBorder,
   hyphenate,
   antialiased,
   neutralMarginsY,
+  channelVisibilityForegroundColor,
 };

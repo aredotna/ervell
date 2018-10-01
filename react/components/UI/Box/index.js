@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   display,
   space,
@@ -15,7 +15,7 @@ import {
   bgColor,
 } from 'styled-system';
 
-export default styled.div`
+export const mixin = css`
   box-sizing: border-box;
   ${display}
   ${width}
@@ -30,4 +30,8 @@ export default styled.div`
   ${borderColor}
   ${borderRadius}
   ${bgColor}
+`;
+
+export default styled.div`
+  ${mixin}
 `;

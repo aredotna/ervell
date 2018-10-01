@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { themeGet, fontSize, space, alignSelf } from 'styled-system';
+import chroma from 'chroma-js';
 
 import { defaultTo, preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
@@ -18,17 +19,13 @@ export const buttonSize = x => (
     : BUTTON_VARIANTS.LARGE
 );
 
-export const buttonColor = ({ color, theme }) => {
-  if (color) {
-    const value = themeGet(`colors.${color}`, 'colors.gray.base')({ theme });
+export const buttonColor = (props) => {
+  const value = themeGet(`colors.${props.color}`, props.theme.colors.gray.base)(props);
 
-    return `
-      color: ${value};
-      border-color: ${value};
-    `;
-  }
-
-  return '';
+  return `
+    color: ${value};
+    border-color: ${chroma.blend(value, '#bbb', 'screen')};
+  `;
 };
 
 export const buttonPadding = x => preset(space, {
@@ -60,7 +57,7 @@ export const mixin = css`
   all: initial;
   display: inline-block;
   ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
-  border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.regular};
+  border: ${buttonBorderWidth} solid;
   border-radius: ${BUTTON_BORDER_RADIUS};
   font-family: ${x => x.theme.fonts.sans};
   font-weight: bold;

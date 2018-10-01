@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { fontSize, space, borderColor, color } from 'styled-system';
+import { themeGet, fontSize, space } from 'styled-system';
+import chroma from 'chroma-js';
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
@@ -19,6 +20,15 @@ export const disabledMixin = css`
   opacity: 0.5;
 `;
 
+export const buttonColor = (props) => {
+  const value = themeGet(`colors.${props.color}`, props.theme.colors.gray.base)(props);
+
+  return `
+    color: ${value};
+    border-color: ${chroma.blend(value, '#bbb', 'screen')};
+  `;
+};
+
 export const mixin = css`
   all: initial;
   display: block;
@@ -31,8 +41,7 @@ export const mixin = css`
   cursor: pointer;
   ${preset(space, { pt: 5, pb: 6, px: 5 })}
   ${preset(fontSize, { f: 4 })}
-  ${preset(color, { color: 'gray.base' })}
-  ${preset(borderColor, { borderColor: 'gray.regular' })}
+  ${buttonColor}
   ${antialiased}
 
   ${x => x.hover && hoverMixin}
@@ -44,7 +53,11 @@ export const mixin = css`
   ${x => x.disabled && disabledMixin}
 `;
 
-const DividerButton = styled.button`
+export const DividerButton = styled.button`
+  ${mixin}
+`;
+
+export const DividerButtonLink = styled.a`
   ${mixin}
 `;
 
