@@ -12,12 +12,20 @@ class RecentChannels extends Component {
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
     }).isRequired,
+    isOutlined: PropTypes.bool,
     onConnectionSelection: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    isOutlined: true,
   }
 
   render() {
     const {
-      onConnectionSelection, data: { loading }, ...rest
+      onConnectionSelection,
+      isOutlined: _isOutlined,
+      data: { loading },
+      ...rest
     } = this.props;
 
     if (loading) return <LoadingIndicator {...rest} />;
