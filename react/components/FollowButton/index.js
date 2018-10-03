@@ -60,30 +60,26 @@ class FollowButton extends Component {
 
   render() {
     const {
-      data: { loading }, followNode, unfollowNode, ...loadingRest
-    } = this.props;
-
-    if (loading) {
-      return (
-        <span {...loadingRest}>
-          {followNode}
-        </span>
-      );
-    }
-
-    const {
       id,
       type,
       follow: _follow,
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
-      followNode: _followNode,
-      unfollowNode: _unfollowNode,
-      data: { followable },
+      followNode,
+      unfollowNode,
+      data,
       ...rest
     } = this.props;
 
-    const isFollowed = !!(followable && followable.is_followed);
+    if (data.loading) {
+      return (
+        <span {...rest}>
+          {followNode}
+        </span>
+      );
+    }
+
+    const isFollowed = !!(data.followable && data.followable.is_followed);
 
     return (
       <span onClick={this.toggleFollow} role="button" tabIndex={0} {...rest}>
