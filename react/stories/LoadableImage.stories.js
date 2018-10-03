@@ -14,4 +14,13 @@ storiesOf('LoadableImage', module)
         onError={action('onError')}
       />
     </Specimen>
+  ))
+  .add('error', () => (
+    <Specimen>
+      <LoadableImage
+        src="http://example.com/wrong.jpg"
+        onLoad={action('onLoad')}
+        onError={action('onError')}
+      />
+    </Specimen>
   ));
