@@ -8,8 +8,11 @@ import ProfilePage from 'react/pages/profile/ProfilePage';
 export default () => (
   <Switch>
     <Route
-      path="/profile/:id"
-      render={parseRoute(({ params }) => <ProfilePage id={params.id} />)}
+      path="/:id/:view?"
+      render={parseRoute(({ params }) => {
+        const view = params.view || 'all';
+        return <ProfilePage id={params.id} view={view} />;
+      })}
     />
   </Switch>
 );
