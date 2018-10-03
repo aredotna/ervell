@@ -42,7 +42,7 @@ export default class OverlayConnect extends Component {
     return (
       <Container>
         <Box flex="1">
-          <ConnectionSelection id={id} type={type} outline={false} />
+          <ConnectionSelection id={id} type={type} isOutlined={false} />
         </Box>
 
         <DividerButton f={3} onClick={onClose}>

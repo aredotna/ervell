@@ -14,7 +14,7 @@ import CreatePrivateChannelButton from 'react/components/ConnectionSelectionList
 const Container = styled.div`
   position: relative;
 
-  ${x => x.mode === 'active' && x.outline && `
+  ${x => x.mode === 'active' && x.isOutlined && `
     &:after {
       ${__outlineBorder__()}
     }
@@ -35,7 +35,7 @@ const SearchInput = styled(Input).attrs({
 const OutlinedRecentChannels = styled(RecentChannels)`
   position: relative;
 
-  ${x => x.outline && `
+  ${x => x.isOutlined && `
     &:after {
       ${__outlineBorder__()}
     }
@@ -44,12 +44,12 @@ const OutlinedRecentChannels = styled(RecentChannels)`
 
 export default class ConnectionSelectionList extends Component {
   static propTypes = {
-    outline: PropTypes.bool,
+    isOutlined: PropTypes.bool,
     onConnectionSelection: PropTypes.func,
   }
 
   static defaultProps = {
-    outline: true,
+    isOutlined: true,
     onConnectionSelection: () => {},
   }
 
@@ -71,10 +71,10 @@ export default class ConnectionSelectionList extends Component {
 
   render() {
     const { query, debouncedQuery, mode } = this.state;
-    const { outline, onConnectionSelection } = this.props;
+    const { isOutlined, onConnectionSelection } = this.props;
 
     return (
-      <Container mode={mode} outline={outline}>
+      <Container mode={mode} isOutlined={isOutlined}>
         <SearchInput onChange={this.handleChange} />
 
         {mode === 'resting' &&
@@ -84,7 +84,7 @@ export default class ConnectionSelectionList extends Component {
             </Text>
 
             <OutlinedRecentChannels
-              outline={outline}
+              isOutlined={isOutlined}
               onConnectionSelection={onConnectionSelection}
             />
           </div>
