@@ -32,6 +32,14 @@ export const mixin = css`
     `}
   }
 
+  > h1,
+  > h2,
+  > h3,
+  > h4 {
+    font-size: 1rem;
+    ${neutralMarginsY}
+  }
+
   > p {
     ${neutralMarginsY}
   }
