@@ -12,7 +12,7 @@ import connectableBlokkOverlayFragment from 'react/components/Blokk/components/B
 import modelBlokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/modelBlokkOverlay';
 
 export default gql`
-  fragment Item on DeedKkind {
+  fragment Object on DeedKkind {
     __typename
     ... Channel
     ... Text

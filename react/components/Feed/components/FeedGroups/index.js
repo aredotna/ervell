@@ -8,7 +8,7 @@ import feedGroupFragment from 'react/components/Feed/components/FeedGroups/fragm
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import FeedGroupSentence from 'react/components/Feed/components/FeedGroupSentence';
-import FeedGroupItems from 'react/components/Feed/components/FeedGroupItems';
+import FeedGroupObjects from 'react/components/Feed/components/FeedGroupObjects';
 
 const Container = styled(Box)`
   position: relative;
@@ -27,6 +27,14 @@ const Body = styled(Box)`
   text-align: center;
 `;
 
+const FeedGroup = styled.div`
+  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
+  margin-bottom: ${x => x.theme.space[7]};
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
 const FeedGroups = ({ groups }) => (
   <Container>
     {groups.length === 0 &&
@@ -38,13 +46,13 @@ const FeedGroups = ({ groups }) => (
     {groups.length > 0 &&
       <Body p={6}>
         {groups.map(group => (
-          <div>
+          <FeedGroup>
             <FeedGroupSentence
               key={group.id}
               group={group}
             />
-            <FeedGroupItems items={group.items} />
-          </div>
+            <FeedGroupObjects objects={group.objects} />
+          </FeedGroup>
         ))}
       </Body>
     }

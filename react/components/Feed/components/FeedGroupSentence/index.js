@@ -11,7 +11,7 @@ import feedGroupSentenceFragment from 'react/components/Feed/components/FeedGrou
 const RelativeTime = styled(Text).attrs({
   f: 1,
   color: 'gray.medium',
-  mt: 2,
+  my: 6,
 })`
   text-transform: uppercase;
 `;

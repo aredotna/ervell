@@ -1,14 +1,14 @@
 import gql from 'graphql-tag';
 
 import feedGroupSentenceFragment from 'react/components/Feed/components/FeedGroupSentence/fragments/sentence';
-import feedGroupItemsFragment from 'react/components/Feed/components/FeedGroupItems/fragments/items';
+import feedGroupObjectsFragment from 'react/components/Feed/components/FeedGroupObjects/fragments/objects';
 
 export default gql`
   fragment FeedGroup on DeedGroup {
     __typename
     ...FeedGroupSentence
-    ...FeedGroupItems
+    ...FeedGroupObjects
   }
   ${feedGroupSentenceFragment}
-  ${feedGroupItemsFragment}
+  ${feedGroupObjectsFragment}
 `;
