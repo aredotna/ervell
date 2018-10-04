@@ -13,6 +13,7 @@ const connectable = () => ({
 
 const Mocks = {
   Channel: () => ({
+    id: random.number({ min: 200, max: 800 }),
     title: random.words(),
     visibility: sample(['closed', 'private', 'public'])
   }),
@@ -22,6 +23,7 @@ const Mocks = {
   }),
 
   User: () => ({
+    id: random.number({ min: 200, max: 800 }),
     name: `${name.firstName()} ${name.lastName()}`,
     initials: "IOU",
     avatar: "https://dummyimage.com/100x100/000/fff&text=**",
@@ -59,6 +61,13 @@ const Mocks = {
     ...connectable(),
     content: Array(random.number(20)).fill(undefined)
       .map(() => `<p>${lorem.paragraph()}</p>`).join(''),
+  }),
+
+  DeedGroup: () => ({
+    key: random.uuid(),
+    created_at: `${random.number({ min: 1, max: 10 })} hours ago`,
+    action: random.arrayElement(["connected","followed","created","commented on", "connected"]),
+    connector: random.arrayElement(["on", "to"]),
   }),
 };
 
