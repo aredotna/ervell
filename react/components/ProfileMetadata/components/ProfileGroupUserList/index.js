@@ -5,6 +5,7 @@ import profileGroupUserListFragment from 'react/components/ProfileMetadata/compo
 
 import Pocket from 'react/components/UI/Pocket';
 import LinksList from 'react/components/LinksList';
+import { Expandable } from 'react/components/UI/ExpandableSet';
 
 export default class ProfileGroupUserList extends Component {
   static propTypes = {
@@ -16,7 +17,9 @@ export default class ProfileGroupUserList extends Component {
 
     return (
       <Pocket title="Members">
-        <LinksList links={users} />
+        <Expandable>
+          <LinksList links={users} />
+        </Expandable>
       </Pocket>
     );
   }

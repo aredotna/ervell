@@ -89,10 +89,6 @@ console.time('profile')
 app.use(require('../apps/profile'))
 console.timeEnd('profile')
 
-console.time('user')
-app.use(require('../apps/user'))
-console.timeEnd('user')
-
 console.time('block')
 app.use(require('../apps/block'))
 console.timeEnd('block')
