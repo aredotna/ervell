@@ -4,8 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Specimen from 'react/stories/__components__/Specimen';
 import Text from 'react/components/UI/Text';
 import Expandable from 'react/components/UI/Expandable';
-// TODO: Generalize this component
-import ChannelMetadataExpandable, { ChannelMetadataExpandableContext } from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
+import { Expandable as ExpandableSet, ExpandableContext } from 'react/components/UI/ExpandableSet';
 
 const overflowingText = `
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -36,24 +35,24 @@ storiesOf('Expandable', module)
       </Expandable>
     </Specimen>
   ))
-  .add('ChannelMetadataExpandable', () => (
+  .add('ExpandableSet', () => (
     <Specimen>
-      <ChannelMetadataExpandableContext>
-        <ChannelMetadataExpandable>
+      <ExpandableContext>
+        <ExpandableSet>
           <Text>{overflowingText}</Text>
-        </ChannelMetadataExpandable>
+        </ExpandableSet>
 
-        <ChannelMetadataExpandable>
+        <ExpandableSet>
           <Text>Not overflowing</Text>
-        </ChannelMetadataExpandable>
+        </ExpandableSet>
 
-        <ChannelMetadataExpandable>
+        <ExpandableSet>
           <Text>{overflowingText}</Text>
-        </ChannelMetadataExpandable>
+        </ExpandableSet>
 
-        <ChannelMetadataExpandable>
+        <ExpandableSet>
           <Text>{overflowingText}</Text>
-        </ChannelMetadataExpandable>
-      </ChannelMetadataExpandableContext>
+        </ExpandableSet>
+      </ExpandableContext>
     </Specimen>
   ));
