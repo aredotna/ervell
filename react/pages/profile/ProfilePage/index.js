@@ -25,16 +25,22 @@ export default class ProfilePage extends Component {
 
           const { identity: { identifiable } } = data;
 
+          // TODO: Clean this up. This currently just falls back to a different view
+          // when the current one isn't supported for Groups.
+          const typedView = identifiable.__typename === 'Group'
+            ? { all: 'channels', blocks: 'channels' }[view] || view
+            : view;
+
           return (
             <div>
-              <ProfileMetadata identifiable={identifiable} mode={view} sort="updated_at" />
+              <ProfileMetadata identifiable={identifiable} mode={typedView} sort="updated_at" />
 
               {{
                 all: <ProfileContents id={id} />,
                 blocks: <ProfileContents id={id} type="BLOCK" />,
                 channels: <ProfileChannels id={id} />,
                 index: <div>Index</div>,
-              }[view]}
+              }[typedView]}
             </div>
           );
         }}

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from 'cookies-js';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
+const Link = styled(NavLink)`
+  display: block;
+`;
 
 export default class ProfileLinkUnlessCurrent extends Component {
   static propTypes = {
@@ -13,7 +17,11 @@ export default class ProfileLinkUnlessCurrent extends Component {
   setCookie = () => {
     const { name, value } = this.props;
 
-    Cookies.set(name, value);
+    try {
+      Cookies.set(name, value);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   render() {
@@ -22,7 +30,7 @@ export default class ProfileLinkUnlessCurrent extends Component {
     } = this.props;
 
     return (
-      <HeaderMetadataLinkUnlessCurrent {...rest} onClick={this.setCookie} />
+      <Link {...rest} onClick={this.setCookie} />
     );
   }
 }

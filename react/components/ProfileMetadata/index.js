@@ -7,6 +7,7 @@ import { SORTS, MODES, SORTABLE_MODES } from 'react/components/Profile/config';
 import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/profileMetadata';
 
 import Grid from 'react/components/UI/Grid';
+import { ExpandableContext } from 'react/components/UI/ExpandableSet';
 import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 import ProfileBreadcrumb from 'react/components/ProfileMetadata/components/ProfileBreadcrumb';
 import ProfileMetadataActions from 'react/components/ProfileMetadata/components/ProfileMetadataActions';
@@ -34,19 +35,21 @@ export default class ProfileMetadata extends Component {
           <ProfileMetadataActions identifiable={identifiable} />
         }
       >
-        <Grid>
-          <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
+        <ExpandableContext>
+          <Grid variableHeight>
+            <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
 
-          {identifiable.__typename === 'Group' && identifiable.users.length > 0 &&
-            <ProfileGroupUserList identifiable={identifiable} />
-          }
+            {identifiable.__typename === 'Group' && identifiable.users.length > 0 &&
+              <ProfileGroupUserList identifiable={identifiable} />
+            }
 
-          <ProfileMetadataView identifiable={identifiable} mode={mode} sort={sort} />
+            <ProfileMetadataView identifiable={identifiable} mode={mode} sort={sort} />
 
-          {SORTABLE_MODES.includes(mode) &&
-            <ProfileMetadataSort identifiable={identifiable} sort={sort} />
-          }
-        </Grid>
+            {identifiable.__typename !== 'Group' && SORTABLE_MODES.includes(mode) &&
+              <ProfileMetadataSort identifiable={identifiable} sort={sort} />
+            }
+          </Grid>
+        </ExpandableContext>
       </HeaderMetadataContainer>
     );
   }

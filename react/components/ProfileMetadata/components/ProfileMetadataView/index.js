@@ -15,46 +15,50 @@ export default class ProfileMetadataView extends Component {
     sort: PropTypes.oneOf(SORTS).isRequired,
   }
 
-  isCurrent = ({ targetHref, currentRoute }) =>
-    currentRoute.pathname === targetHref.split('?')[0];
+  isCurrent = () =>
+    false
 
   render() {
-    const { identifiable: { href }, sort } = this.props;
+    const { identifiable: { __typename, href }, sort } = this.props;
 
     return (
       <Pocket title="View">
-        <ProfileLinkUnlessCurrent
-          name="filter"
-          value="all"
-          href={`${href}?sort=${sort}`}
-          predicate={this.isCurrent}
-        >
-          All
-        </ProfileLinkUnlessCurrent>
+        {__typename === 'User' &&
+          <ProfileLinkUnlessCurrent
+            name="filter"
+            value="all"
+            to={`${href}?sort=${sort}`}
+            isActive={this.isCurrent}
+          >
+            All
+          </ProfileLinkUnlessCurrent>
+        }
 
         <ProfileLinkUnlessCurrent
           name="filter"
           value="channels"
-          href={`${href}/channels?sort=${sort}`}
-          predicate={this.isCurrent}
+          to={`${href}/channels?sort=${sort}`}
+          isActive={this.isCurrent}
         >
           Channels
         </ProfileLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent
-          name="filter"
-          value="blocks"
-          href={`${href}/blocks?sort=${sort}`}
-          predicate={this.isCurrent}
-        >
-          Blocks
-        </ProfileLinkUnlessCurrent>
+        {__typename === 'User' &&
+          <ProfileLinkUnlessCurrent
+            name="filter"
+            value="blocks"
+            to={`${href}/blocks?sort=${sort}`}
+            isActive={this.isCurrent}
+          >
+            Blocks
+          </ProfileLinkUnlessCurrent>
+        }
 
         <ProfileLinkUnlessCurrent
           name="filter"
           value="index"
-          href={`${href}/index`}
-          predicate={this.isCurrent}
+          to={`${href}/index`}
+          isActive={this.isCurrent}
         >
           Index
         </ProfileLinkUnlessCurrent>
