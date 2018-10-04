@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
-import feedObjectFragment from 'react/components/Feed/components/FeedItem/fragments/object';
+import feedObjectFragment from 'react/components/Feed/components/FeedGroupSentence/fragments/object';
 
 export default gql`
-  fragment FeedSentence on Deed {
+  fragment FeedGroupSentence on DeedGroup {
     __typename
     id: key
     key
@@ -14,11 +14,11 @@ export default gql`
       label: name
       href
     }
-    verb
-    object {
+    action
+    item {
       ...FeedObject
     }
-    object_phrase(truncate: 60)
+    item_phrase(truncate: 60)
     connector
     target {
       ...FeedObject

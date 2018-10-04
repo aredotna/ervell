@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import feedSentenceFragment from 'react/components/Feed/components/FeedSentence/fragments/sentence';
+import feedGroupFragment from 'react/components/Feed/components/FeedGroups/fragments/group';
 
 export default gql`
   query FeedQuery($offset: Int, $limit: Int) {
@@ -9,10 +9,10 @@ export default gql`
       __typename
       feed(offset: $offset, limit: $limit) {
         groups {
-          ...FeedSentence
+          ...FeedGroup
         }
       }
     }
   }
-  ${feedSentenceFragment}
+  ${feedGroupFragment}
 `;
