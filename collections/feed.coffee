@@ -54,6 +54,7 @@ module.exports = class Feed extends Base
     params.encode parameters
 
   parse: (data)->
+    console.log('data', data)
     @exhaustedRetry++ unless data.items.length
     @exhausted = true if @exhaustedRetry > @exhaustedLimit
 
