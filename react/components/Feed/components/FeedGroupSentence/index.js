@@ -17,7 +17,7 @@ const RelativeTime = styled(Text).attrs({
 `;
 
 const Label = styled(Text).attrs({
-  f: 5,
+  f: 6,
   display: 'inline',
 })`
 `;
@@ -45,11 +45,12 @@ export default class FeedGroupSentence extends Component {
         connector,
         target,
         created_at,
+        item_phrase,
       },
     } = this.props;
 
     return (
-      <Container my={3} pr={6}>
+      <Container my={3} pr={6} class="flex-container">
         <div>
           <FeedObjectLink {...user} />
 
@@ -74,7 +75,7 @@ export default class FeedGroupSentence extends Component {
                 {` ${action} `}
               </Label>
 
-              <FeedObjectLink {...item} />
+              <FeedObjectLink item_phrase={item_phrase} {...item} />
 
               {connector &&
                 <Label>
