@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
+import styled from 'styled-components';
 
 import feedQuery from 'react/components/Feed/queries/feedQuery';
 
 import Text from 'react/components/UI/Text';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import FeedGroups from 'react/components/Feed/components/FeedGroups/index';
+import CenteringBox from 'react/components/UI/CenteringBox';
+
+const LoadingContainer = styled(CenteringBox)`
+  margin-top: -250px; // Hack for now
+`;
 
 export default class Feed extends Component {
   static propTypes = {
@@ -25,7 +31,9 @@ export default class Feed extends Component {
         {({ loading, error, data }) => {
           if (loading) {
             return (
-              <LoadingIndicator p={6} />
+              <LoadingContainer>
+                <LoadingIndicator p={6} frames={['🌏', '🌍', '🌎']} />
+              </LoadingContainer>
             );
           }
 
