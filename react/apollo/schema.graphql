@@ -593,7 +593,7 @@ type DeedGroup {
 }
 
 # Deed item, target, or parent
-union DeedKind = Channel | Comment | Connectable | Group | Null | User
+union DeedKind = Channel | Comment | Connectable | Null | User
 
 # Deed item, target, or parent
 union DeedKkind = Attachment | Channel | Comment | Embed | Group | Image | Link | Text | User
@@ -920,7 +920,7 @@ type Invitee implements Model & UserInterface {
   badge: String
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   created_at(format: String, relative: Boolean): String
   email: String
   first_name: String
@@ -931,7 +931,7 @@ type Invitee implements Model & UserInterface {
   initials: String
   is_investor: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -992,7 +992,7 @@ type Me implements Model & UserInterface {
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
   connection_search(direction: Directions = DESC, per: Int = 5, q: String = null): [Channel]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   counts: MeCounts
   created_at(format: String, relative: Boolean): String
   customer: Customer
@@ -1012,7 +1012,7 @@ type Me implements Model & UserInterface {
   is_pending_confirmation: Boolean
   is_pending_reconfirmation: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   notifications(end: String = "-inf", limit: Int = 50, offset: Int = 0, start: String = "+inf"): Feed
@@ -1223,7 +1223,7 @@ type Query {
   # Locates the user through their reset password token
   password_resettable_user(reset_password_token: String!): User
   password_token(token: ID!): User
-  search(direction: Directions = DESC, object_id: String = null, object_type: ObjectType = null, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 276, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
+  search(direction: Directions = DESC, object_id: String = null, object_type: ObjectType = null, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 278, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
   searches: Searches
 
   # Is this endpoint operational?
@@ -1613,7 +1613,7 @@ type User implements Followable & Model & UserInterface {
   badge: String
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   counts: UserCounts
   created_at(format: String, relative: Boolean): String
   first_name: String
@@ -1625,7 +1625,7 @@ type User implements Followable & Model & UserInterface {
   is_followed: Boolean
   is_investor: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -1652,7 +1652,7 @@ interface UserInterface {
   badge: String
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   first_name: String
   groups(page: Int = 1, per: Int = 1): [Group]
   hidden_email: String
@@ -1660,7 +1660,7 @@ interface UserInterface {
   initials: String
   is_investor: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 276, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 278, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
