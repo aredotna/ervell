@@ -7,7 +7,12 @@ export default gql`
     visibility
     title
     owner {
-      name
+      ... on Group {
+        name
+      }
+      ... on User {
+        name
+      }
     }
     counts {
       contents

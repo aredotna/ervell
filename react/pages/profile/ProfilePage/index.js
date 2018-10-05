@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ProfileContents from 'react/components/ProfileContents';
 import ProfileChannels from 'react/components/ProfileChannels';
+import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -39,7 +40,7 @@ export default class ProfilePage extends Component {
                 all: <ProfileContents id={id} />,
                 blocks: <ProfileContents id={id} type="BLOCK" />,
                 channels: <ProfileChannels id={id} />,
-                index: <div>Index</div>,
+                index: <ProfileChannelIndex id={id} />,
               }[typedView]}
             </div>
           );
