@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { themeGet, fontSize, space, alignSelf } from 'styled-system';
+import { themeGet, fontSize, space, alignSelf, display } from 'styled-system';
 import chroma from 'chroma-js';
 
 import { defaultTo, preset } from 'react/styles/functions';
@@ -55,7 +55,7 @@ export const disabledMixin = css`
 
 export const mixin = css`
   all: initial;
-  display: inline-block;
+  ${preset(display, { display: 'inline-block' })}
   ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
   border: ${buttonBorderWidth} solid;
   border-radius: ${BUTTON_BORDER_RADIUS};

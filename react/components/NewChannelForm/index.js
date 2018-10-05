@@ -10,6 +10,7 @@ import Text from 'react/components/UI/Text';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Label, LabelledCheckbox, LabelledInput } from 'react/components/UI/Inputs';
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
+import NewChannelGroups from 'react/components/NewChannelForm/components/NewChannelGroups';
 
 class NewChannelForm extends Component {
   static propTypes = {
@@ -22,6 +23,7 @@ class NewChannelForm extends Component {
     title: '',
     description: '',
     visibility: 'CLOSED',
+    group_id: null,
     visit_channel: true,
     errorMessage: null,
     attributeErrors: {},
@@ -47,15 +49,22 @@ class NewChannelForm extends Component {
   handleVisibility = visibility =>
     this.setState({ visibility });
 
+  handleAuthor = (group_id) => {
+    if (group_id === 0) return;
+    this.setState({ group_id });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
     const { createChannel, onClose } = this.props;
     const {
-      title, description, visibility, visit_channel,
+      title, description, visibility, group_id, visit_channel,
     } = this.state;
 
-    const variables = { title, description, visibility };
+    const variables = {
+      title, description, visibility, group_id,
+    };
 
     this.setState({ mode: 'creating' });
 
@@ -145,6 +154,16 @@ class NewChannelForm extends Component {
                 onChange={this.handleVisibility}
               />
             </div>
+          </LabelledInput>
+
+          <LabelledInput my={6} alignItems="start">
+            <Label>
+              Author
+            </Label>
+
+            <NewChannelGroups
+              onChange={this.handleAuthor}
+            />
           </LabelledInput>
 
           <LabelledInput mt={6} mb={8}>

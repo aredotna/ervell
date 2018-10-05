@@ -75,7 +75,14 @@ class ManageGroup extends Component {
     this.setState({ mode: 'submitting' });
 
     return updateGroup({ variables })
-      .then(onClose)
+      .then((res) => {
+        const { data: { update_group: { group: { href } } } } = res;
+
+        // Slug may have changed so redirect
+        window.location = href;
+
+        return onClose(res);
+      })
       .catch((err) => {
         this.setState({
           mode: 'error',
