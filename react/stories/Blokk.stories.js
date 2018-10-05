@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
 import blokkQuery from 'react/components/Blokk/queries/blokk';
+import userQuery from 'react/components/Blokk/components/User/queries/user';
 
 import Specimen from 'react/stories/__components__/Specimen';
 
@@ -23,7 +24,22 @@ const BlokkWithData = ({ id }) => (
   </Query>
 );
 
+const UserBlokkWithData = ({ id }) => (
+  <Query query={userQuery} variables={{ id }}>
+    {({ loading, error, data }) => {
+      if (loading || error) return <div />;
+      if (error) { console.error(error); }
+      const { user } = data;
+      return <Blokk blokk={user} />;
+    }}
+  </Query>
+);
+
 BlokkWithData.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
+
+UserBlokkWithData.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
@@ -34,6 +50,12 @@ storiesOf('Blokk', module)
         {Array(10).fill(undefined).map((_, i) => (
           <BlokkWithData key={uuidv4()} id={i} />
         ))}
+      </Grid>
+    </Specimen>
+  )).add('user', () => (
+    <Specimen>
+      <Grid>
+        <UserBlokkWithData id={420} />
       </Grid>
     </Specimen>
   ));

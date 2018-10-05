@@ -4,9 +4,11 @@ import { Query } from 'react-apollo';
 import styled from 'styled-components';
 
 import feedQuery from 'react/components/Feed/queries/feedQuery';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import Text from 'react/components/UI/Text';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
+import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import FeedGroups from 'react/components/Feed/components/FeedGroups/index';
 import CenteringBox from 'react/components/UI/CenteringBox';
 
@@ -23,16 +25,25 @@ export default class Feed extends Component {
     onCompleted: () => {},
   }
 
+  state = {
+    offset: 0,
+    limit: 20,
+    hasMore: true,
+  }
+
   render() {
     const { onCompleted } = this.props;
+    const { limit, hasMore, offset } = this.state;
 
     return (
-      <Query query={feedQuery} variables={{ limit: 20 }} onCompleted={onCompleted}>
-        {({ loading, error, data }) => {
+      <Query query={feedQuery} variables={{ limit }} onCompleted={onCompleted}>
+        {({
+          loading, error, data, fetchMore,
+        }) => {
           if (loading) {
             return (
               <LoadingContainer>
-                <LoadingIndicator p={6} frames={['🌏', '🌍', '🌎']} />
+                <LoadingIndicator p={6} />
               </LoadingContainer>
             );
           }
@@ -48,7 +59,45 @@ export default class Feed extends Component {
           const { me: { feed: { groups } } } = data;
 
           return (
-            <FeedGroups groups={groups} />
+            <InfiniteScroll
+              pageStart={1}
+              threshhold={500}
+              loader={<BlocksLoadingIndicator key="loading" />}
+              hasMore={hasMore}
+              loadMore={() => {
+                fetchMore({
+                  variables: { limit, offset: (offset + limit) },
+                  updateQuery: (prevResult, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) return prevResult;
+
+                    const mergedResults = {
+                      ...prevResult,
+                      me: {
+                        ...prevResult.me,
+                        feed: {
+                          ...prevResult.me.feed,
+                          groups: [
+                            ...prevResult.me.feed.groups,
+                            ...fetchMoreResult.me.feed.groups,
+                          ],
+                        },
+                      },
+                    };
+
+                    console.log('mergedResults', mergedResults);
+
+                    return mergedResults;
+                  },
+                }).then((res) => {
+                  this.setState({
+                    offset: (offset + limit),
+                    hasMore: !res.errors && res.data.me.feed.groups.length > 0,
+                  });
+                });
+              }}
+            >
+              <FeedGroups groups={groups} />
+            </InfiniteScroll>
           );
         }}
       </Query>

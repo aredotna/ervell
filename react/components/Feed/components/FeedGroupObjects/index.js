@@ -21,8 +21,6 @@ export default class FeedGroupObjects extends Component {
   render() {
     const { objects } = this.props;
 
-    console.log('objects', objects);
-
     return (
       <ObjectGrid>
         {objects.map(object => (

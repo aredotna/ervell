@@ -10,6 +10,7 @@ import Embed from 'react/components/Blokk/components/Embed';
 import Image from 'react/components/Blokk/components/Image';
 import Link from 'react/components/Blokk/components/Link';
 import Text from 'react/components/Blokk/components/Text';
+import User from 'react/components/Blokk/components/User';
 import Metadata from 'react/components/Blokk/components/Metadata';
 import BlokkOverlay from 'react/components/Blokk/components/BlokkOverlay';
 import ChannelOverlay from 'react/components/Blokk/components/ChannelOverlay';
@@ -76,16 +77,17 @@ export default class Blokk extends Component {
             Image: <Image key="image" image={blokk} mode={mode} />,
             Link: <Link key="link" link={blokk} mode={mode} />,
             Text: <Text key="text" text={blokk} mode={mode} />,
+            User: <User key="user" user={blokk} mode={mode} />,
           }[blokk.__typename],
 
-          blokk.__typename !== 'Channel' &&
+          blokk.__typename !== 'Channel' && blokk.__typename !== 'User' &&
             <BlokkMetadata
               key="metadata"
               mode={mode}
               blokk={blokk}
             />,
 
-          blokk.__typename !== 'Channel' && mode !== 'resting' &&
+          blokk.__typename !== 'Channel' && blokk.__typename !== 'User' && mode !== 'resting' &&
             <BlokkOverlay
               key="overlay"
               blokk={blokk}

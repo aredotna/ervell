@@ -28,18 +28,15 @@ const Body = styled(Box)`
 `;
 
 const FeedGroup = styled.div`
-  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
-  margin-bottom: ${x => x.theme.space[7]};
-  &:last-child {
-    border-bottom: none;
-  }
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
+  padding: ${x => x.theme.space[7]} 0;
 `;
 
 const FeedGroups = ({ groups }) => (
   <Container>
     {groups.length === 0 &&
-      <Text textAlign="center" f={3}>
-        No notifications yet.
+      <Text textAlign="center" f={6}>
+        Nothing in your feed yet...
       </Text>
     }
 

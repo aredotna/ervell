@@ -46,7 +46,7 @@ export default class UserAvatar extends Component {
     const { user, size, ...rest } = this.props;
 
     return (
-      <Avatar href={user.href} f={size} {...rest}>
+      <Avatar href={user.href} f={size} size={size} {...rest}>
         <Initials f={size}>
           {user.initials}
         </Initials>
