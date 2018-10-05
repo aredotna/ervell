@@ -7,7 +7,7 @@ export default gql`
     identity(id: $id) {
       identifiable {
         __typename
-        ...ProfileMetadata
+        ... ProfileMetadata
       }
     }
   }

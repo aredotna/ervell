@@ -7,16 +7,23 @@ import withStaticRouter from 'react/hocs/WithStaticRouter';
 
 const app = express();
 
-app
-  .set('views', __dirname)
-  .set('view engine', 'jade')
-
-  .get('/profile/:id', apolloMiddleware, (req, res, next) => {
+const resolve = [
+  apolloMiddleware, (req, res, next) => {
     req.apollo.render(withStaticRouter(Routes))
       .then((apollo) => {
         res.render('index', { apollo });
       })
       .catch(next);
-  });
+  },
+];
+
+app
+  .set('views', __dirname)
+  .set('view engine', 'jade')
+
+  .get('/:id/', ...resolve)
+  .get('/:id/blocks', ...resolve)
+  .get('/:id/channels', ...resolve)
+  .get('/:id/index', ...resolve);
 
 module.exports = app;

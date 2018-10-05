@@ -49,6 +49,7 @@ export default class Text extends Connectable {
         {/* Try truncating markdown source then rendering it as a possible solution */}
         <Typography
           font="serif"
+          lineHeight={2}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </Container>

@@ -3,17 +3,12 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import { calculateLineHeight } from 'react/styles/functions';
-
 import profileMetadataInfoFragment from 'react/components/ProfileMetadata/components/ProfileMetadataInfo/fragments/profileMetadataInfo';
 
 import Box from 'react/components/UI/Box';
 import Pocket from 'react/components/UI/Pocket';
-import Expandable from 'react/components/UI/Expandable';
+import { Expandable } from 'react/components/UI/ExpandableSet';
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
-
-const N_LINES = 5;
-const FIVE_LINES = `${calculateLineHeight('xs', 'tall') * N_LINES}rem`;
 
 const Buttons = styled(Box).attrs({
   my: 6,
@@ -40,7 +35,7 @@ class ProfileMetadataInfo extends Component {
           Group: 'Group Info',
         }[identifiable.__typename]}
       >
-        <Expandable height={FIVE_LINES}>
+        <Expandable>
           <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
 
