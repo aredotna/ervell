@@ -7,6 +7,7 @@ export default gql`
   fragment ManageGroup on Group {
     id: slug
     name
+    href
     description(format: MARKDOWN)
     can {
       manage

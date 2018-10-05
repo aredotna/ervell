@@ -27,6 +27,11 @@ const Mocks = {
     avatar: "https://dummyimage.com/100x100/000/fff&text=**",
   }),
 
+  Group: () => ({
+    name: "My Group",
+    initials: "IOU",
+  }),
+
   Connection: () => ({
     created_at: `${random.number({ min: 1, max: 10 })} hours ago`,
   }),

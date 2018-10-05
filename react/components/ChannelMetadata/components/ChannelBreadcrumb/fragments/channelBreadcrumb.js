@@ -7,11 +7,18 @@ export default gql`
     title
     href
     visibility
-    owner: user {
+    owner {
       __typename
-      id
-      name
-      href
+      ... on User {
+        id
+        name
+        href
+      }
+      ... on Group {
+        id
+        name
+        href
+      }
     }
     counts {
       collaborators

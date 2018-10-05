@@ -19,15 +19,16 @@ import inviteUserMutation from 'react/components/CreateGroup/mutations/inviteUse
 
 class CreateGroup extends Component {
   static propTypes = {
-    channel_id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onClose: PropTypes.func.isRequired,
     createGroup: PropTypes.func.isRequired,
     addChannelMember: PropTypes.func.isRequired,
     addGroupUsers: PropTypes.func.isRequired,
     inviteUser: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    channel_id: null,
   }
 
   state = {
@@ -61,7 +62,7 @@ class CreateGroup extends Component {
     // Create the group
     return createGroup({ variables: { name } })
       // Add users to the Group
-      .then(({ data: { create_group: { group: { id } } } }) => {
+      .then(({ data: { create_group: { group: { id, href } } } }) => {
         if (user_ids.length === 0) return Promise.resolve();
 
         return addGroupUsers({
@@ -70,18 +71,30 @@ class CreateGroup extends Component {
             user_ids,
           },
         })
-          // Pass along the group id
-          .then(() => id);
+          .then(() => {
+            // If there's no channel context then redirect to the new group
+            if (!channel_id) {
+              window.location = href;
+              return Promise.resolve();
+            }
+
+            // Pass along the group id
+            return id;
+          });
       })
-      // Add the group to the channel
-      .then(member_id =>
-        addChannelMember({
+
+      // Add the group to the channel if a `channel_id` is present
+      .then((member_id) => {
+        if (!channel_id) return Promise.resolve();
+
+        return addChannelMember({
           variables: {
             channel_id,
             member_id,
             member_type: 'GROUP',
           },
-        }))
+        });
+      })
 
       // Close it out
       .then(onClose)
