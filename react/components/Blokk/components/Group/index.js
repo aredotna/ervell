@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Text from 'react/components/UI/Text';
 import Connectable from 'react/components/Blokk/components/Connectable';
-import UserAvatar from 'react/components/UserAvatar';
+import GroupAvatar from 'react/components/GroupAvatar';
 
 const Inner = styled.div`
   position: relative;
@@ -22,7 +22,7 @@ const Inner = styled.div`
   }
 `;
 
-const Username = styled(Text)`
+const Groupname = styled(Text)`
   font-weight: bold;
 `;
 
@@ -30,16 +30,16 @@ const Spacer = styled.div`
   height: 25%;
 `;
 
-export default class User extends Connectable {
+export default class Group extends Connectable {
   render() {
-    const { user } = this.props;
+    const { group } = this.props;
 
     return (
       <Inner>
-        <Username pt={6} mx={3} my={6} f={6} textAlign="center">
-          {user.name}
-        </Username>
-        <UserAvatar user={user} size={120} />
+        <Groupname pt={6} mx={3} my={6} f={6} textAlign="center">
+          {group.name}
+        </Groupname>
+        <GroupAvatar user={group} size={120} />
         <Spacer />
       </Inner>
     );

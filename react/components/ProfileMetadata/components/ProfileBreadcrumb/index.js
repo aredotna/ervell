@@ -6,6 +6,7 @@ import profileBreadcrumbFragment from 'react/components/ProfileMetadata/componen
 
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import ProfileBadge from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge';
+import GroupBadge from 'react/components/UI/GroupBadge';
 import Badge from 'react/components/UI/Badge';
 
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
@@ -29,12 +30,7 @@ class ProfileBreadcrumb extends Component {
           </a>
 
           {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'Group') &&
-            <Badge
-              ml={6}
-              icon={identifiable.visibility === 'private' ? 'Lock' : undefined}
-            >
-              Group
-            </Badge>
+            <GroupBadge group={identifiable} />
           }
 
           {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'User') &&

@@ -18,7 +18,7 @@ export default gql`
     item {
       ...FeedObject
     }
-    item_phrase(truncate: 60)
+    item_phrase(truncate: 100)
     connector
     target {
       ...FeedObject
