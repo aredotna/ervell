@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Text from 'react/components/UI/Text';
 import Connectable from 'react/components/Blokk/components/Connectable';
 import GroupAvatar from 'react/components/GroupAvatar';
+import GroupBadge from 'react/components/UI/GroupBadge';
 
 const Inner = styled.div`
   position: relative;
@@ -23,7 +24,10 @@ const Inner = styled.div`
 `;
 
 const Groupname = styled(Text)`
+  display: flex;
   font-weight: bold;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Spacer = styled.div`
@@ -38,8 +42,9 @@ export default class Group extends Connectable {
       <Inner>
         <Groupname pt={6} mx={3} my={6} f={6} textAlign="center">
           {group.name}
+          <GroupBadge group={group} />
         </Groupname>
-        <GroupAvatar user={group} size={120} />
+        <GroupAvatar group={group} size={120} />
         <Spacer />
       </Inner>
     );

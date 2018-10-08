@@ -7,6 +7,7 @@ import { Query } from 'react-apollo';
 
 import blokkQuery from 'react/components/Blokk/queries/blokk';
 import userQuery from 'react/components/Blokk/components/User/queries/user';
+import groupQuery from 'react/components/Blokk/components/Group/queries/group';
 
 import Specimen from 'react/stories/__components__/Specimen';
 
@@ -35,11 +36,27 @@ const UserBlokkWithData = ({ id }) => (
   </Query>
 );
 
+const GroupBlokkWithData = ({ id }) => (
+  <Query query={groupQuery} variables={{ id }}>
+    {({ loading, error, data }) => {
+      console.log('loading', loading, 'error', error);
+      if (loading || error) return <div />;
+      if (error) { console.error(error); }
+      const { group } = data;
+      return <Blokk blokk={group} />;
+    }}
+  </Query>
+);
+
 BlokkWithData.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 UserBlokkWithData.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
+
+GroupBlokkWithData.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
@@ -56,6 +73,12 @@ storiesOf('Blokk', module)
     <Specimen>
       <Grid>
         <UserBlokkWithData id={420} />
+      </Grid>
+    </Specimen>
+  )).add('group', () => (
+    <Specimen>
+      <Grid>
+        <GroupBlokkWithData id={420} />
       </Grid>
     </Specimen>
   ));

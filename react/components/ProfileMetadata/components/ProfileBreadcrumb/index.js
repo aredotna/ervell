@@ -7,7 +7,6 @@ import profileBreadcrumbFragment from 'react/components/ProfileMetadata/componen
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import ProfileBadge from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge';
 import GroupBadge from 'react/components/UI/GroupBadge';
-import Badge from 'react/components/UI/Badge';
 
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 

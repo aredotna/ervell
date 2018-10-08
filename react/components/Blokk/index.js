@@ -62,6 +62,8 @@ export default class Blokk extends Component {
     const { mode } = this.state;
     const { blokk } = this.props;
 
+    const nonBlock = blokk.__typename === 'Channel' || blokk.__typename === 'User' || blokk.__typename === 'Group';
+
     return (
       <Container
         href={mode !== 'overlay' ? blokk.href : undefined}
@@ -79,16 +81,17 @@ export default class Blokk extends Component {
             Link: <Link key="link" link={blokk} mode={mode} />,
             Text: <Text key="text" text={blokk} mode={mode} />,
             User: <User key="user" user={blokk} mode={mode} />,
+            Group: <Group key="group" group={blokk} mode={mode} />,
           }[blokk.__typename],
 
-          blokk.__typename !== 'Channel' && blokk.__typename !== 'User' &&
+          !nonBlock &&
             <BlokkMetadata
               key="metadata"
               mode={mode}
               blokk={blokk}
             />,
 
-          blokk.__typename !== 'Channel' && blokk.__typename !== 'User' && mode !== 'resting' &&
+          !nonBlock && mode !== 'resting' &&
             <BlokkOverlay
               key="overlay"
               blokk={blokk}
