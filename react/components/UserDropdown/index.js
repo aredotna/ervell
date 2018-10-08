@@ -10,7 +10,7 @@ import Text from 'react/components/UI/Text';
 import Link from 'react/components/UserDropdown/components/Link';
 import Label from 'react/components/UserDropdown/components/Label';
 import SecondaryLinks from 'react/components/UserDropdown/components/SecondaryLinks';
-import MyGroups from 'react/components/UserDropdown/components/MyGroups';
+import MyGroups from 'react/components/UserDropdown/components/MyGroups/index';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 const Section = styled(Box).attrs({

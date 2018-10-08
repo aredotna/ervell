@@ -15,7 +15,9 @@ const Mocks = {
   Channel: () => ({
     id: random.number({ min: 200, max: 800 }),
     title: random.words(),
-    visibility: sample(['closed', 'private', 'public'])
+    visibility: sample(['closed', 'private', 'public']),
+    created_at: `${random.number({ min: 1, max: 10 })} hours ago`,
+    updated_at: `${random.number({ min: 1, max: 10 })} hours ago`
   }),
 
   Authentication: () => ({
@@ -30,7 +32,7 @@ const Mocks = {
   }),
 
   Group: () => ({
-    name: `${commerce.productAdjective} ${company.catchPhraseNoun}`,
+    name: `${commerce.productAdjective()} ${company.catchPhraseNoun()}`,
     initials: 'IOU'
   }),
 

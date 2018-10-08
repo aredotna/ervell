@@ -5,7 +5,7 @@ import { Query } from 'react-apollo';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ProfileContents from 'react/components/ProfileContents';
 import ProfileChannels from 'react/components/ProfileChannels';
-import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
+import ProfileChannelIndex from 'react/components/ProfileChannelIndex/index';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 

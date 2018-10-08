@@ -11,6 +11,7 @@ import Image from 'react/components/Blokk/components/Image';
 import Link from 'react/components/Blokk/components/Link';
 import Text from 'react/components/Blokk/components/Text';
 import User from 'react/components/Blokk/components/User';
+import Group from 'react/components/Blokk/components/Group';
 import Metadata from 'react/components/Blokk/components/Metadata';
 import BlokkOverlay from 'react/components/Blokk/components/BlokkOverlay';
 import ChannelOverlay from 'react/components/Blokk/components/ChannelOverlay';
