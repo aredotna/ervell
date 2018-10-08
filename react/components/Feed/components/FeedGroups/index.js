@@ -32,12 +32,19 @@ const FeedGroup = styled.div`
   padding: ${x => x.theme.space[7]} 0;
 `;
 
+const EmptyContainer = styled(Body)`
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
+  padding: ${x => x.theme.space[8]} 0;
+`;
+
 const FeedGroups = ({ groups }) => (
   <Container>
     {groups.length === 0 &&
-      <Text textAlign="center" f={6}>
-        Nothing in your feed yet...
-      </Text>
+      <EmptyContainer p={6}>
+        <Text textAlign="center" f={6}>
+          Nothing in your feed yet...
+        </Text>
+      </EmptyContainer>
     }
 
     {groups.length > 0 &&

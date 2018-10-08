@@ -84,8 +84,6 @@ export default class Feed extends Component {
                       },
                     };
 
-                    console.log('mergedResults', mergedResults);
-
                     return mergedResults;
                   },
                 }).then((res) => {
