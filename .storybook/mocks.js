@@ -31,6 +31,7 @@ const Mocks = {
 
   Group: () => ({
     name: `${commerce.productAdjective} ${company.catchPhraseNoun}`,
+    initials: 'IOU'
   }),
 
   Connection: () => ({
