@@ -40,7 +40,7 @@ export default class Notification extends Component {
     const {
       notification: {
         is_read,
-        user,
+        owner,
         action,
         item,
         connector,
@@ -52,7 +52,7 @@ export default class Notification extends Component {
     return (
       <Container my={3} pr={6} isUnread={!is_read}>
         <div>
-          <NotificationObjectLink {...user} />
+          <NotificationObjectLink {...owner} />
 
           {item.__typename === 'Comment' &&
             <span>
