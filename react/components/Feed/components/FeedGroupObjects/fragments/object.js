@@ -7,6 +7,7 @@ import linkFragment from 'react/components/Blokk/components/Link/fragments/link'
 import embedFragment from 'react/components/Blokk/components/Embed/fragments/embed';
 import attachmentFragment from 'react/components/Blokk/components/Attachment/fragments/attachment';
 import userFragment from 'react/components/Blokk/components/User/fragments/user';
+import groupFragment from 'react/components/Blokk/components/Group/fragments/group';
 import modelMetadataFragment from 'react/components/Blokk/components/Metadata/fragments/modelMetadata';
 import connectableMetadataFragment from 'react/components/Blokk/components/Metadata/fragments/connectableMetadata';
 import connectableBlokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/connectableBlokkOverlay';
@@ -22,6 +23,7 @@ export default gql`
     ... Embed
     ... Attachment
     ... User
+    ... Group
     ... ConnectableMetadata
     ... ModelMetadata
     ... ConnectableBlokkOverlay
@@ -38,4 +40,5 @@ export default gql`
   ${connectableBlokkOverlayFragment}
   ${modelBlokkOverlayFragment}
   ${userFragment}
+  ${groupFragment}
 `;
