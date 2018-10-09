@@ -14,6 +14,19 @@ export default gql`
       label: name
       href
     }
+    owner {
+      __typename
+      ... on User {
+        id
+        label: name
+        href
+      }
+      ... on Group {
+        id
+        label: name
+        href
+      }
+    }
     action
     item {
       ...FeedObject

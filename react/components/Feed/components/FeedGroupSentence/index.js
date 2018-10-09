@@ -39,7 +39,7 @@ export default class FeedGroupSentence extends Component {
   render() {
     const {
       group: {
-        user,
+        owner,
         action,
         item,
         connector,
@@ -52,7 +52,7 @@ export default class FeedGroupSentence extends Component {
     return (
       <Container my={3} pr={6} class="flex-container">
         <div>
-          <FeedObjectLink {...user} />
+          <FeedObjectLink {...owner} />
 
           {action === 'commented on' &&
             <span>
