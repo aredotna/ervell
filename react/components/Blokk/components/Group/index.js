@@ -27,10 +27,9 @@ const Inner = styled.div`
 `;
 
 const Groupname = styled(Text)`
-  display: flex;
+  display: inline;
+  vertical-align: middle;
   font-weight: bold;
-  align-items: center;
-  justify-content: center;
   margin-bottom: ${x => x.theme.space[1]};
 `;
 
@@ -38,6 +37,11 @@ const GroupFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
   width: ${x => x.theme.space[10]};
   padding: ${x => x.theme.space[6]};
+`;
+
+const Badge = styled(GroupBadge)`
+  vertical-align: middle;
+  margin-left: 0;
 `;
 
 export default class Group extends Connectable {
@@ -48,7 +52,7 @@ export default class Group extends Connectable {
       <Inner>
         <Groupname pt={6} mx={3} my={6} f={6} textAlign="center">
           {group.name}
-          <GroupBadge group={group} />
+          <Badge group={group} />
         </Groupname>
         <GroupAvatar group={group} size={120} />
         <GroupFollowButton
