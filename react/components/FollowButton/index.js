@@ -21,8 +21,8 @@ class FollowButton extends Component {
     follow: PropTypes.func.isRequired,
     unfollow: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
-    followNode: PropTypes.node,
-    unfollowNode: PropTypes.node,
+    followNode: PropTypes.node, // TODO: Fix these by handling children correctly
+    unfollowNode: PropTypes.node, // TODO: Fix these by handling children correctly
   }
 
   static defaultProps = {
@@ -59,9 +59,17 @@ class FollowButton extends Component {
   }
 
   render() {
-    const { data: { loading }, followNode, unfollowNode } = this.props;
+    const {
+      data: { loading }, followNode, unfollowNode, ...loadingRest
+    } = this.props;
 
-    if (loading) return <span>{followNode}</span>;
+    if (loading) {
+      return (
+        <span {...loadingRest}>
+          {followNode}
+        </span>
+      );
+    }
 
     const {
       id,
@@ -69,6 +77,8 @@ class FollowButton extends Component {
       follow: _follow,
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
+      followNode: _followNode,
+      unfollowNode: _unfollowNode,
       data: { followable },
       ...rest
     } = this.props;

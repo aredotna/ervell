@@ -23,11 +23,7 @@ const { data: { GRAPHQL_ENDPOINT } } = sharify;
 const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData: {
-    __schema: {
-      types: introspectionQueryResultData,
-    },
-  },
+  introspectionQueryResultData,
 });
 
 export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute, isLoggedIn } = {}) => {

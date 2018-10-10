@@ -11,8 +11,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  // TODO: Once old blocks are migrated, we can remove negative
-  // margins and use "justify-content: space-between;"
   margin-left: -${blockGutter};
   margin-right: -${blockGutter};
 
@@ -30,13 +28,6 @@ const GridItem = styled.div`
   ${x => !x.variableHeight && `
     height: ${blockWidth};
   `}
-`;
-
-const GridItemFiller = GridItem.extend`
-  height: 0;
-  opacity: 0;
-  margin-top: 0;
-  margin-bottom: 0;
 `;
 
 export default class Grid extends Component {
@@ -59,17 +50,6 @@ export default class Grid extends Component {
             {child}
           </GridItem>
         ))}
-
-        {/* HACK: Forces left-alignment */}
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
-        <GridItemFiller />
       </Container>
     );
   }

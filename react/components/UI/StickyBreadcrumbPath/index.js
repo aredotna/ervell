@@ -42,7 +42,7 @@ export default class StickyBreadcrumbPath extends Component {
   static Crumb = BreadcrumbPath.Crumb
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     stuckChildren: PropTypes.node,
   }
 

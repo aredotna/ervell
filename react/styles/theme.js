@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 
-import constants, { SPACING_SCALE } from 'react/styles/constants';
+import constants, { SPACING_SCALE, CONSTANT_VALUES } from 'react/styles/constants';
 import colors, { COLOR_NAMES as colorNames } from 'react/styles/colors';
 import text, { FONT_SIZE_NAMES as fontSizeNames } from 'react/styles/text';
 
@@ -22,6 +22,7 @@ const THEME = {
   meta: META,
   space: SPACING_SCALE,
   z: constants.z,
+  constantValues: CONSTANT_VALUES,
 };
 
 export const wrapWithThemeProvider = (Component, props = {}) => (

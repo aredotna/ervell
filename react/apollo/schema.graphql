@@ -83,14 +83,32 @@ type AddGroupUsersPayload {
 }
 
 # An attachment block
-type Attachment implements Block & Model {
+type Attachment implements Block & ConnectableInterface & Model {
+  can: BlockCan
+  channels: [Channel]
+  comments(direction: Directions = ASC): [Comment]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  description(format: Format, no_links: Boolean = false): String
   file_extension: String
   file_url: String
+  href: String
   id: Int
   image_url(size: ImageVersion = DISPLAY): String
+  is_muted: Boolean
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
+  source: ConnectableSource
+  state: String
+  title(truncate: Int): String
+  to_s(truncate: Int): String
   updated_at(format: String, relative: Boolean): String
+  user: User
+  visibility: String
 }
 
 # Providers for external authentication
@@ -123,7 +141,14 @@ enum BaseConnectableTypeEnum {
 
 # Fields common to all Block types
 interface Block {
+  can: BlockCan
   counts: BlockCounts
+}
+
+# The actions that the CurrentUser can perform on the Block
+type BlockCan {
+  manage: Boolean
+  read: Boolean
 }
 
 type BlockCounts {
@@ -147,11 +172,17 @@ type CancelChannelTransferPayload {
 }
 
 # A single channel
-type Channel implements Followable & Model & Mutable {
+type Channel implements ConnectableInterface & Followable & Model & Mutable {
   blocks(direction: Directions = ASC, page: Int = 1, per: Int = 25, sort_by: Sorts = POSITION, type: ConnectableTypeEnum = null, user_id: ID = null): [Connectable]
   can: ChannelCan
+  channels: [Channel]
   collaborators: [User] @deprecated(reason: "This only returns Users. Use `members` field instead")
-  connections: [Channel] @deprecated(reason: "This field name is going to be repurposed and moved to the root QueryType")
+  comments(direction: Directions = ASC): [Comment]
+  connected_to_channels: [Channel]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
   counts: ChannelCounts
   created_at(format: String, relative: Boolean): String
   description(format: Format, no_links: Boolean = false): String
@@ -163,17 +194,22 @@ type Channel implements Followable & Model & Mutable {
   is_open: Boolean @deprecated(reason: "Use `visibility`")
   is_pending_transfer: Boolean
   is_published: Boolean @deprecated(reason: "Use `visibility`")
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
   members: [Member]
   memberships: [ChannelMembership]
+  owner: ChannelOwner
   share: ChannelShare
   share_id: String
   slug: String
+  source: ConnectableSource
   state: String
   title(truncate: Int): String
+  to_s(truncate: Int): String
   transfer_request: ChannelTransferRequest
   type: String
   updated_at(format: String, relative: Boolean): String
-  user: User
+  user: User @deprecated(reason: "Use `owner`")
   visibility: String
 }
 
@@ -196,7 +232,7 @@ type ChannelCounts {
   blocks: Int
   channels: Int
   collaborators: Int
-  connections: Int
+  connected_to_channels: Int
   contents: Int
   followers: Int
 }
@@ -220,6 +256,13 @@ type ChannelMembershipCan {
   manage: Boolean
 }
 
+union ChannelOwner = Group | User
+
+enum ChannelOwnerTypeEnum {
+  GROUP
+  USER
+}
+
 # Properties needed to share channels externally
 type ChannelShare {
   facebook_url: String
@@ -232,10 +275,13 @@ type ChannelTransferRequest implements Model {
   channel: Channel
   created_at(format: String, relative: Boolean): String
   id: Int
-  is_user_to_member: Boolean
+  is_recipient_member: Boolean
+  is_user_to_member: Boolean @deprecated(reason: "User => Owner: use `is_recipient_member` field")
+  recipient: ChannelOwner
+  sender: ChannelOwner
   updated_at(format: String, relative: Boolean): String
-  user_from: User
-  user_to: User
+  user_from: User @deprecated(reason: "User => Owner: use `sender` field")
+  user_to: User @deprecated(reason: "User => Owner: use recipient field")
 }
 
 # Privacy states for a channel
@@ -273,8 +319,7 @@ type Comment implements Model {
 union Commentable = Attachment | Embed | Image | Link | Text
 
 # A block or a channel
-type Connectable implements Model & Mutable {
-  can: ConnectableCan
+type Connectable implements ConnectableInterface & Model & Mutable {
   channels: [Channel]
   comments(direction: Directions = ASC): [Comment]
 
@@ -286,7 +331,7 @@ type Connectable implements Model & Mutable {
   href: String
   id: Int
   is_muted: Boolean
-  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible, will need to be killed in favor of a UnionType")
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
   klass: String
   source: ConnectableSource
   state: String
@@ -297,10 +342,25 @@ type Connectable implements Model & Mutable {
   visibility: String
 }
 
-# The actions that the CurrentUser can perform on the Connectable
-type ConnectableCan {
-  manage: Boolean
-  read: Boolean
+# Fields common to models that can be connected
+interface ConnectableInterface {
+  channels: [Channel]
+  comments(direction: Directions = ASC): [Comment]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
+  description(format: Format, no_links: Boolean = false): String
+  href: String
+  is_muted: Boolean
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
+  source: ConnectableSource
+  state: String
+  title(truncate: Int): String
+  to_s(truncate: Int): String
+  user: User
+  visibility: String
 }
 
 # Connectable attributes specific to its class
@@ -587,14 +647,32 @@ enum Directions {
 }
 
 # An embed block
-type Embed implements Block & Model {
+type Embed implements Block & ConnectableInterface & Model {
+  can: BlockCan
+  channels: [Channel]
+  comments(direction: Directions = ASC): [Comment]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  description(format: Format, no_links: Boolean = false): String
   embed_html: String
+  href: String
   id: Int
   image_url(size: ImageVersion = DISPLAY): String
+  is_muted: Boolean
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
+  source: ConnectableSource
   source_url: String
+  state: String
+  title(truncate: Int): String
+  to_s(truncate: Int): String
   updated_at(format: String, relative: Boolean): String
+  user: User
+  visibility: String
 }
 
 # Autogenerated input type of ExportChannel
@@ -664,9 +742,11 @@ enum Format {
 # A Group of Users
 type Group implements Model {
   can: GroupCan
+  channels(page: Int = 1, per: Int = 1): [Channel]
   counts: GroupCounts
   created_at(format: String, relative: Boolean): String
   description(format: Format, no_links: Boolean = false): String
+  href: String
   id: Int
   initials: String
   manageable_user_ids: [Int]
@@ -676,12 +756,14 @@ type Group implements Model {
   updated_at(format: String, relative: Boolean): String
   user: User
   users: [User]
+  visibility: String
 }
 
 # The actions that the CurrentUser can perform on the Group
 type GroupCan {
   add_to: Boolean
   destroy: Boolean
+  follow: Boolean
   manage: Boolean
 
   # This returns true when the current user can manage at least one membership
@@ -690,6 +772,7 @@ type GroupCan {
 }
 
 type GroupCounts {
+  followers: Int
   users: Int
 }
 
@@ -717,12 +800,30 @@ type Identity {
 }
 
 # An image block
-type Image implements Block & Model {
+type Image implements Block & ConnectableInterface & Model {
+  can: BlockCan
+  channels: [Channel]
+  comments(direction: Directions = ASC): [Comment]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  description(format: Format, no_links: Boolean = false): String
+  href: String
   id: Int
   image_url(size: ImageVersion = DISPLAY): String
+  is_muted: Boolean
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
+  source: ConnectableSource
+  state: String
+  title(truncate: Int): String
+  to_s(truncate: Int): String
   updated_at(format: String, relative: Boolean): String
+  user: User
+  visibility: String
 }
 
 # Image sizes
@@ -739,7 +840,9 @@ input InitiateChannelTransferInput {
   # A unique identifier for the client performing the mutation.
   clientMutationId: String
   id: ID!
-  user_id: ID!
+  owner_id: ID
+  owner_type: ChannelOwnerTypeEnum
+  user_id: ID
 }
 
 # Autogenerated return type of InitiateChannelTransfer
@@ -802,7 +905,7 @@ type Invitee implements Model & UserInterface {
   badge: String
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 228, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 264, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   created_at(format: String, relative: Boolean): String
   email: String
   first_name: String
@@ -818,14 +921,34 @@ type Invitee implements Model & UserInterface {
   updated_at(format: String, relative: Boolean): String
 }
 
+union Konnectable = Attachment | Channel | Embed | Image | Link | Text
+
 # A link block
-type Link implements Block & Model {
+type Link implements Block & ConnectableInterface & Model {
+  can: BlockCan
+  channels: [Channel]
+  comments(direction: Directions = ASC): [Comment]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  description(format: Format, no_links: Boolean = false): String
+  href: String
   id: Int
   image_url(size: ImageVersion = DISPLAY): String
+  is_muted: Boolean
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
+  source: ConnectableSource
   source_url: String
+  state: String
+  title(truncate: Int): String
+  to_s(truncate: Int): String
   updated_at(format: String, relative: Boolean): String
+  user: User
+  visibility: String
 }
 
 # Autogenerated input type of Login
@@ -852,7 +975,7 @@ type Me implements Model & UserInterface {
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
   connection_search(direction: Directions = DESC, per: Int = 5, q: String = null): [Channel]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 228, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 264, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   counts: MeCounts
   created_at(format: String, relative: Boolean): String
   customer: Customer
@@ -1032,6 +1155,7 @@ enum ObjectType {
 
 # A block which has not yet found its calling
 type PendingBlock implements Block & Model {
+  can: BlockCan
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
   id: Int
@@ -1052,7 +1176,8 @@ type Policy {
 
 # The query root for this schema
 type Query {
-  block(id: ID!): Connectable
+  block(id: ID!): Connectable @deprecated(reason: "Use `blokk` until this can be replaced with it")
+  blokk(id: ID!): Konnectable
 
   # A single channel
   channel(id: ID!): Channel
@@ -1078,7 +1203,7 @@ type Query {
   # Locates the user through their reset password token
   password_resettable_user(reset_password_token: String!): User
   password_token(token: ID!): User
-  search(direction: Directions = DESC, object_id: String = null, object_type: ObjectType = null, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 228, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
+  search(direction: Directions = DESC, object_id: String = null, object_type: ObjectType = null, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 264, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
   searches: Searches
 
   # Is this endpoint operational?
@@ -1233,7 +1358,7 @@ type ResetPasswordPayload {
 }
 
 # Possible types for search results
-union SearchResult = Channel | Connectable | Null | User
+union SearchResult = Channel | Connectable | User
 
 # Ways to sort blocks
 enum SearchSorts {
@@ -1285,12 +1410,30 @@ enum Sorts {
 }
 
 # A text block
-type Text implements Block & Model {
+type Text implements Block & ConnectableInterface & Model {
+  can: BlockCan
+  channels: [Channel]
+  comments(direction: Directions = ASC): [Comment]
+
+  # Returns the outer channel if we are inside of one
+  connection: Connection
+  connections: [Connection]
   content(format: Format, no_links: Boolean = false): String
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  description(format: Format, no_links: Boolean = false): String
+  href: String
   id: Int
+  is_muted: Boolean
+  kind: ConnectableKind @deprecated(reason: "Avoid using if at all possible")
+  klass: String
+  source: ConnectableSource
+  state: String
+  title(truncate: Int): String
+  to_s(truncate: Int): String
   updated_at(format: String, relative: Boolean): String
+  user: User
+  visibility: String
 }
 
 # Autogenerated input type of Unfollow
@@ -1434,7 +1577,7 @@ type User implements Followable & Model & UserInterface {
   badge: String
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 228, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 264, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   counts: UserCounts
   created_at(format: String, relative: Boolean): String
   first_name: String
@@ -1455,6 +1598,7 @@ type User implements Followable & Model & UserInterface {
 type UserCan {
   follow: Boolean
   manage: Boolean
+  message: Boolean
 }
 
 type UserCounts {
@@ -1470,7 +1614,7 @@ interface UserInterface {
   badge: String
   bio(format: Format, no_links: Boolean = false): String
   can: UserCan
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 228, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 264, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   first_name: String
   hidden_email: String
   href: String
