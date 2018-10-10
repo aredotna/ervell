@@ -32,7 +32,7 @@ class Onboarding extends React.Component {
   }
 
   onSkipClick = () => {
-    const { data: { loading, me } } = this.props;
+    const { data: { me } } = this.props;
     const { slug } = me;
 
     track.submit(en.SKIPPED_ONBOARDING);
@@ -59,7 +59,7 @@ class Onboarding extends React.Component {
   };
 
   render() {
-    const { data: { loading, me } } = this.props;
+    const { data: { loading } } = this.props;
 
     if (loading) return null;
 
