@@ -29,6 +29,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
+  showDispatchMessage()
   initNightMode()
   showLimitMessage()
   initConfirmableMessage()
@@ -152,6 +153,33 @@ setupAnalytics = ->
       'Visited logged in'
     else
       'Visited logged out'
+
+
+showDispatchMessage = ->
+  { current_user } = mediator.shared
+
+  # Don't show this message if the current user is not logged in
+  # or if they have a pending confirmation.
+  # or if they are premium
+  # or if we are already showing them a message for exceeding the limit
+  
+  shouldReturn = !current_user.id or
+    current_user.get('is_pending_confirmation') or
+    current_user.get('is_premium') or
+    current_user.get('is_exceeding_private_connections_limit')
+
+  return if shouldReturn
+
+  model = new Backbone.Model
+    id: 'arena_dispatch'
+    title: '📬'
+    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://confirmsubscription.com/h/d/63777718A8377397'>Subscribe here</>."  
+
+  messageView = new MessageView model: model
+
+  if messageView.isRenderable()
+    $('body').append messageView.render().$el
+
 
 showLimitMessage = ->
   return unless sd.CURRENT_USER?
