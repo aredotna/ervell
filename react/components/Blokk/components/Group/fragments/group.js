@@ -8,6 +8,7 @@ export default gql`
     id
     name
     href
+    visibility
     ...GroupAvatar
   }
   ${avatarFragment}
