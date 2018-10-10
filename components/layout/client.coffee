@@ -162,8 +162,7 @@ showDispatchMessage = ->
   # or if they have a pending confirmation.
   # or if they are premium
   # or if we are already showing them a message for exceeding the limit
-  # or if they have less than 5 private connections
-
+  
   shouldReturn = !current_user.id or
     current_user.get('is_pending_confirmation') or
     current_user.get('is_premium') or
@@ -171,13 +170,15 @@ showDispatchMessage = ->
 
   return if shouldReturn
 
-  messages =
-    utility: """
-      Are.na Premium gives you unlimited space for private content. Get 3 months free when you <a href="/pricing">upgrade</a> today with the coupon code <strong>summer</strong>.
-    """
-    lifestyle: """
-      We're having a summer sale to celebrate 3 years of Are.na Premium, our first step towards a self-sustaining, ad-free community. Get 3 months free when you <a href="/pricing">upgrade</a> with the coupon code <strong>summer</strong>.
-    """
+  model = new Backbone.Model
+    id: 'arena_dispatch'
+    title: '📬'
+    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://confirmsubscription.com/h/d/63777718A8377397'>Subscribe here</>."  
+
+  messageView = new MessageView model: model
+
+  if messageView.isRenderable()
+    $('body').append messageView.render().$el
 
 
 showLimitMessage = ->
