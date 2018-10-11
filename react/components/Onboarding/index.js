@@ -9,6 +9,8 @@ import Welcome from 'react/components/Onboarding/components/Welcome';
 import AboutChannels from 'react/components/Onboarding/components/Channels/components/AboutChannels';
 import CreateChannel from 'react/components/Onboarding/components/Channels/components/CreateChannel';
 
+import { track, en } from 'lib/analytics.coffee';
+
 const OnboardingWrapper = styled.div`
   position: relative;
 `;
@@ -27,6 +29,14 @@ class Onboarding extends React.Component {
     this.state = {
       step: 1,
     };
+  }
+
+  onSkipClick = () => {
+    const { data: { me } } = this.props;
+    const { slug } = me;
+
+    track.submit(en.SKIPPED_ONBOARDING);
+    window.location = `/${slug}`;
   }
 
   goForward = () => {
@@ -49,15 +59,13 @@ class Onboarding extends React.Component {
   };
 
   render() {
-    const { data: { loading, me } } = this.props;
+    const { data: { loading } } = this.props;
 
     if (loading) return null;
 
-    const { slug } = me;
-
     return (
       <OnboardingWrapper>
-        <SkipOnboardingLink href={`/${slug}`}>Skip</SkipOnboardingLink>
+        <SkipOnboardingLink onClick={this.onSkipClick}>Skip</SkipOnboardingLink>
         <TransitionGroup>
           <AnimatedPage key={`onboarding-page-${this.state.step}`}>
             { this.componentForStep() }

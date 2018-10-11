@@ -111,6 +111,7 @@ module.exports.en =
 
   LOGIN: 'User logged in'
   REGISTER: 'User successfully registered'
+  SKIPPED_ONBOARDING: 'User skipped onboarding'
   ACCEPTED_INVITATION: 'User successfully accepted invitation'
   FORGOT_PASSWORD: 'User forgot password'
   RESET_PASSWORD: 'User successfully reset password'
