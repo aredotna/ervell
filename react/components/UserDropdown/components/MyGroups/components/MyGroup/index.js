@@ -23,18 +23,18 @@ export default class MyGroup extends Component {
     const { group } = this.props;
 
     return (
-      <Container href={group.href} py={4} px="1rem" display="flex" justifyContent="space-between" alignItems="center">
-        <Text f={3} pr={7} fontWeight="bold">
+      <Container href={group.href} py="0.375rem" px="1rem" display="flex" alignItems="center">
+        <Box display="flex" alignItems="center">
+          <MemberAvatar member={group} size={20} isLinked={false} circle />
+        </Box>
+
+        <Text f={2} px={5} fontWeight="bold">
           {group.name}
         </Text>
 
-        <Box display="flex" alignItems="center">
-          {group.visibility === 'private' &&
-            <Icons name="Lock" color="gray.regular" size={5} mr={3} />
-          }
-
-          <MemberAvatar member={group} size={24} isLinked={false} circle />
-        </Box>
+        {group.visibility === 'private' &&
+          <Icons name="Lock" color="gray.semiBold" size={4} />
+        }
       </Container>
     );
   }
