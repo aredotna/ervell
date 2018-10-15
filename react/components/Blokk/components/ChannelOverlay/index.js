@@ -69,13 +69,13 @@ class ChannelOverlay extends Component {
 
   render() {
     const { mode } = this.state;
-    const { channel: { id, visibility } } = this.props;
+    const { channel: { id, visibility, can } } = this.props;
 
     return (
       <Container mode={mode}>
         {mode === 'resting' &&
           [
-            <ChannelFollowButton
+            can.follow && <ChannelFollowButton
               key="follow"
               f={4}
               mr={2}

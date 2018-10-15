@@ -4,5 +4,8 @@ export default gql`
   fragment ChannelOverlay on Channel {
     id
     visibility
+    can {
+      follow
+    }
   }
 `;
