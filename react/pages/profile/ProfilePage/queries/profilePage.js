@@ -5,6 +5,7 @@ import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/
 export default gql`
   query ProfilePage($id: ID!) {
     identity(id: $id) {
+      __typename
       identifiable {
         __typename
         ... ProfileMetadata
