@@ -28,8 +28,8 @@ export const SPACING_SCALE = [
   '0',
   '0.125em',
   '0.25em',
-  '0.33em',
-  '0.66em',
+  '0.34375em',
+  '0.65625em',
   '0.75em',
   '1em', // 6
   '2em',
