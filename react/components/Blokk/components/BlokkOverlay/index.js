@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import WithLoginStatus from 'react/hocs/WithLoginStatus';
+
 import { FilledButton } from 'react/components/UI/Buttons';
 import OverlayConnect from 'react/components/Blokk/components/OverlayConnect';
 
@@ -28,11 +30,12 @@ const OverlayButton = styled(FilledButton).attrs({
   justify-content: center;
 `;
 
-export default class BlokkOverlay extends Component {
+class BlokkOverlay extends Component {
   static propTypes = {
     blokk: PropTypes.shape({ /* TODO */ }).isRequired,
     onOverlay: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   state = {
@@ -41,18 +44,30 @@ export default class BlokkOverlay extends Component {
 
   openSource = (e) => {
     e.preventDefault();
+
     const { blokk: { source: { url: href } } } = this.props;
+
     Object.assign(document.createElement('a'), { target: '_blank', href }).click();
   }
 
   openConnect = (e) => {
     e.preventDefault();
+
+    const { isLoggedIn, onOverlay } = this.props;
+
+    if (!isLoggedIn) {
+      window.location = `/sign_up?redirect-to=${window.location.pathname}`;
+      return null;
+    }
+
     this.setState({ mode: 'overlay' });
-    this.props.onOverlay();
+
+    return onOverlay();
   }
 
   closeConnect = (e) => {
     e.preventDefault();
+
     this.setState({ mode: 'resting' });
     this.props.onClose();
   }
@@ -86,3 +101,5 @@ export default class BlokkOverlay extends Component {
     );
   }
 }
+
+export default WithLoginStatus(BlokkOverlay);

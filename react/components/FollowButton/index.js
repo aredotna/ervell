@@ -30,13 +30,16 @@ class FollowButton extends Component {
     unfollowNode: 'Unfollow',
   }
 
-  toggleFollow = async () => {
+  toggleFollow = async (e) => {
+    e.preventDefault();
+
     const {
       id, type, data: { followable }, isLoggedIn,
     } = this.props;
 
     if (!isLoggedIn) {
       window.location = `/sign_up?redirect-to=${window.location.pathname}`;
+      return null;
     }
 
     const action = followable.is_followed ? 'unfollow' : 'follow';

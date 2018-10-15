@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import channelOverlayFragment from 'react/components/Blokk/components/ChannelOverlay/fragments/channelOverlay';
 
+import WithLoginStatus from 'react/hocs/WithLoginStatus';
+
 import Box from 'react/components/UI/Box';
 import DividerButton, { mixin as dividerButtonMixin } from 'react/components/UI/Buttons/components/DividerButton';
 import FollowButton from 'react/components/FollowButton';
@@ -32,11 +34,12 @@ const ChannelFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
 `;
 
-export default class ChannelOverlay extends Component {
+class ChannelOverlay extends Component {
   static propTypes = {
     channel: propType(channelOverlayFragment).isRequired,
     onOverlay: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   state = {
@@ -45,8 +48,17 @@ export default class ChannelOverlay extends Component {
 
   openConnect = (e) => {
     e.preventDefault();
+
+    const { isLoggedIn, onOverlay } = this.props;
+
+    if (!isLoggedIn) {
+      window.location = `/sign_up?redirect-to=${window.location.pathname}`;
+      return null;
+    }
+
     this.setState({ mode: 'overlay' });
-    this.props.onOverlay();
+
+    return onOverlay();
   }
 
   closeConnect = (e) => {
@@ -95,3 +107,5 @@ export default class ChannelOverlay extends Component {
     );
   }
 }
+
+export default WithLoginStatus(ChannelOverlay);
