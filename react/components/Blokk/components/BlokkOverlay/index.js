@@ -17,6 +17,17 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
+const OverlayButton = styled(FilledButton).attrs({
+  f: 4,
+  mx: 4,
+  px: 0,
+  py: 6,
+})`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+`;
+
 export default class BlokkOverlay extends Component {
   static propTypes = {
     blokk: PropTypes.shape({ /* TODO */ }).isRequired,
@@ -53,15 +64,15 @@ export default class BlokkOverlay extends Component {
     return (
       <Container>
         {mode === 'resting' && source && source.url &&
-          <FilledButton px={7} py={6} f={4} onClick={this.openSource}>
+          <OverlayButton onClick={this.openSource}>
             Source
-          </FilledButton>
+          </OverlayButton>
         }
 
         {mode === 'resting' &&
-          <FilledButton px={7} py={6} f={4} onClick={this.openConnect}>
+          <OverlayButton onClick={this.openConnect}>
             Connect &rarr;
-          </FilledButton>
+          </OverlayButton>
         }
 
         {mode === 'overlay' &&
