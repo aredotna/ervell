@@ -24,10 +24,11 @@ class RecentChannels extends Component {
     const {
       onConnectionSelection,
       isOutlined: _isOutlined,
-      data: { loading },
+      data: { loading, error },
       ...rest
     } = this.props;
 
+    if (error) return <div />;
     if (loading) return <LoadingIndicator {...rest} />;
 
     const { data: { me: { recent_channels: channels } } } = this.props;
