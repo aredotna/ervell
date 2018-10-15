@@ -10,7 +10,6 @@ import modelMetadataFragment from 'react/components/Blokk/components/Metadata/fr
 import connectableMetadataFragment from 'react/components/Blokk/components/Metadata/fragments/connectableMetadata';
 import connectableBlokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/connectableBlokkOverlay';
 import modelBlokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/modelBlokkOverlay';
-import channelOverlayFragment from 'react/components/Blokk/components/ChannelOverlay/fragments/channelOverlay';
 
 export default gql`
   fragment Blokk on Konnectable {
@@ -25,7 +24,6 @@ export default gql`
     ... ModelMetadata
     ... ConnectableBlokkOverlay
     ... ModelBlokkOverlay
-    ... ChannelOverlay
   }
   ${channelFragment}
   ${textFragment}
@@ -37,5 +35,4 @@ export default gql`
   ${connectableMetadataFragment}
   ${connectableBlokkOverlayFragment}
   ${modelBlokkOverlayFragment}
-  ${channelOverlayFragment}
 `;

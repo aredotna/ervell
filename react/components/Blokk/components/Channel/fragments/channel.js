@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import channelOverlayFragment from 'react/components/Blokk/components/ChannelOverlay/fragments/channelOverlay';
+
 export default gql`
   fragment Channel on Channel {
     id
@@ -18,5 +20,7 @@ export default gql`
         name
       }
     }
+    ... ChannelOverlay
   }
+  ${channelOverlayFragment}
 `;
