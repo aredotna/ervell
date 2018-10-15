@@ -17,6 +17,7 @@ export default client => (Component, props = {}) => {
       html,
       state,
       styles,
+      client,
     };
   };
 
