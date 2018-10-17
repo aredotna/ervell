@@ -19,6 +19,12 @@ export const __outlineBorder__ = (size = '5px', color = theme.colors.gray.light,
 export const outlineBorder = (size = '5px', color = theme.colors.gray.light, radius = '0.25em') =>
   __outlineBorder__(size, color, radius);
 
+export const overflowEllipsis = css`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
 export const hyphenate = css`
   overflow-wrap: break-word;
   word-wrap: break-word;
