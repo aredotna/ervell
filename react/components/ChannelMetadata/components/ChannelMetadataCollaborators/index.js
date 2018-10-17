@@ -71,7 +71,7 @@ export default class CollaboratorsListContainer extends Component {
             </Link>
 
             <Link onClick={this.openCreateGroup} role="button" tabIndex={0}>
-              Create group
+              New group
             </Link>
           </Actions>
         }

@@ -136,7 +136,7 @@ class CreateGroup extends Component {
 
     return (
       <TitledDialog
-        title="Create group"
+        title="New group"
         label={{
           resting: 'Done',
           submit: 'Save',
