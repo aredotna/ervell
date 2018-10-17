@@ -10,9 +10,10 @@ import Blokk from 'react/components/Blokk';
 import ChannelRow from 'react/components/ProfileChannels/components/ChannelRow';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 
-export default class ProfileChannelsWithData extends Component {
+export default class ProfileChannels extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
 
   state = {
@@ -23,10 +24,10 @@ export default class ProfileChannelsWithData extends Component {
 
   render() {
     const { page, per, hasMore } = this.state;
-    const { id } = this.props;
+    const { id, sort } = this.props;
 
     return (
-      <Query query={profileChannelsQuery} variables={{ id, per }}>
+      <Query query={profileChannelsQuery} variables={{ id, per, sort }}>
         {({
           loading, error, data, fetchMore,
         }) => {

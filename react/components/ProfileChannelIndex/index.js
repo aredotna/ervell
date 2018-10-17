@@ -15,6 +15,7 @@ import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 const Columns = styled.div`
   column-count: 2;
   column-gap: ${x => x.theme.space[9]};
+  margin-bottom: ${x => x.theme.space[9]};
 
   ${constants.media.small`
     column-count: 1;
@@ -30,18 +31,19 @@ const Group = styled(Box).attrs({
 export default class ProfileChannelIndex extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    type: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
 
   render() {
-    const { id } = this.props;
+    const { id, type } = this.props;
 
     return (
-      <Query query={profileChannelIndexQuery} variables={{ id }}>
+      <Query query={profileChannelIndexQuery} variables={{ id, type }}>
         {({ data, loading, error }) => {
           if (loading) return <BlocksLoadingIndicator />;
           if (error) return error.message;
 
-          const { user: { channels_index } } = data;
+          const { identity: { identifiable: { channels_index } } } = data;
 
           return (
             <Columns>

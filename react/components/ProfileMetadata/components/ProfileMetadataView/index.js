@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
 
-import { SORTS } from 'react/components/Profile/config';
-
 import profileMetadataViewFragment from 'react/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView';
 
 import Pocket from 'react/components/UI/Pocket';
@@ -12,7 +10,7 @@ import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/component
 export default class ProfileMetadataView extends Component {
   static propTypes = {
     identifiable: propType(profileMetadataViewFragment).isRequired,
-    sort: PropTypes.oneOf(SORTS).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
 
   isCurrent = () =>

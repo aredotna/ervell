@@ -9,9 +9,18 @@ export default () => (
   <Switch>
     <Route
       path="/:id/:view?"
-      render={parseRoute(({ params }) => {
-        const view = params.view || 'all';
-        return <ProfilePage id={params.id} view={view} />;
+      render={parseRoute(({ params, query }) => {
+        const { view = 'all' } = params;
+        const { sort = 'UPDATED_AT', filter = 'OWN' } = query;
+
+        return (
+          <ProfilePage
+            id={params.id}
+            view={view}
+            sort={sort}
+            filter={filter}
+          />
+        );
       })}
     />
   </Switch>

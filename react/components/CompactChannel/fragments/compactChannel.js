@@ -4,6 +4,7 @@ export default gql`
   fragment CompactChannel on Channel {
     __typename
     id: slug
+    href
     visibility
     title
     owner {

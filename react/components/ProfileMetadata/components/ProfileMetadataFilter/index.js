@@ -1,46 +1,50 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { propType } from 'graphql-anywhere';
+
+import profileMetadataFilterFragment from 'react/components/ProfileMetadata/components/ProfileMetadataFilter/fragments/profileMetadataFilter';
 
 import Pocket from 'react/components/UI/Pocket';
 import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
 
-class ProfileMetadataSort extends Component {
+class ProfileMetadataFilter extends Component {
   static propTypes = {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
+    identifiable: propType(profileMetadataFilterFragment).isRequired,
   }
 
   render() {
-    const { location: { pathname } } = this.props;
+    const { identifiable, location: { pathname } } = this.props;
 
     return (
-      <Pocket title="Sort">
+      <Pocket title="Owned by">
         <ProfileLinkUnlessCurrent
-          name="sort"
-          value="UPDATED_AT"
+          name="filter"
+          value="OWN"
           to={{
             pathname,
-            search: '?sort=UPDATED_AT',
+            search: '?filter=OWN',
           }}
         >
-          Recently updated
+          {identifiable.name}
         </ProfileLinkUnlessCurrent>
 
         <ProfileLinkUnlessCurrent
-          name="sort"
-          value="RANDOM"
+          name="filter"
+          value="COLLABORATION"
           to={{
             pathname,
-            search: '?sort=RANDOM',
+            search: '?filter=COLLABORATION',
           }}
         >
-          Random
+          Other
         </ProfileLinkUnlessCurrent>
       </Pocket>
     );
   }
 }
 
-export default withRouter(ProfileMetadataSort);
+export default withRouter(ProfileMetadataFilter);

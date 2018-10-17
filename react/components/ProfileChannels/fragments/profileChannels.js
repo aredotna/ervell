@@ -18,7 +18,7 @@ export default gql`
     ... on User {
       __typename
       id: slug
-      channels: kontents(type: CHANNEL, page: $page, per: $per) {
+      channels: kontents(type: CHANNEL, page: $page, per: $per, sort_by: $sort) {
         ... Channel
 
         ... on Channel {

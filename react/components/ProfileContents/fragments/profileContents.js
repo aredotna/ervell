@@ -7,7 +7,7 @@ export default gql`
     ... on User {
       __typename
       id: slug
-      contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: UPDATED_AT) {
+      contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: $sort) {
         ... Blokk
       }
     }

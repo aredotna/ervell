@@ -13,10 +13,14 @@ export default class ProfilePage extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
 
   render() {
-    const { id, view } = this.props;
+    const {
+      id, view, sort, filter,
+    } = this.props;
 
     return (
       <Query query={profilePageQuery} variables={{ id }}>
@@ -34,13 +38,13 @@ export default class ProfilePage extends Component {
 
           return (
             <div>
-              <ProfileMetadata identifiable={identifiable} mode={typedView} sort="updated_at" />
+              <ProfileMetadata identifiable={identifiable} mode={typedView} sort={sort} />
 
               {{
-                all: <ProfileContents id={id} />,
-                blocks: <ProfileContents id={id} type="BLOCK" />,
-                channels: <ProfileChannels id={id} />,
-                index: <ProfileChannelIndex id={id} />,
+                all: <ProfileContents id={id} sort={sort} />,
+                blocks: <ProfileContents id={id} type="BLOCK" sort={sort} />,
+                channels: <ProfileChannels id={id} sort={sort} />,
+                index: <ProfileChannelIndex id={id} type={filter} />,
               }[typedView]}
             </div>
           );

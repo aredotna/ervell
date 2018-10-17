@@ -12,6 +12,7 @@ export default class ProfileContents extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.string,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
 
   static defaultProps = {
@@ -26,10 +27,15 @@ export default class ProfileContents extends Component {
 
   render() {
     const { page, per, hasMore } = this.state;
-    const { id, type } = this.props;
+    const { id, type, sort } = this.props;
 
     return (
-      <Query query={profileContentsQuery} variables={{ id, type, per }}>
+      <Query
+        query={profileContentsQuery}
+        variables={{
+          id, type, per, sort,
+        }}
+      >
         {({
           loading, error, data, fetchMore,
         }) => {
