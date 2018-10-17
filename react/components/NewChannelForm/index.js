@@ -131,6 +131,16 @@ class NewChannelForm extends Component {
 
           <LabelledInput my={6} alignItems="start">
             <Label>
+              Author
+            </Label>
+
+            <NewChannelGroups
+              onChange={this.handleAuthor}
+            />
+          </LabelledInput>
+
+          <LabelledInput my={6} alignItems="start">
+            <Label>
               Description
             </Label>
 
@@ -154,16 +164,6 @@ class NewChannelForm extends Component {
                 onChange={this.handleVisibility}
               />
             </div>
-          </LabelledInput>
-
-          <LabelledInput my={6} alignItems="start">
-            <Label>
-              Author
-            </Label>
-
-            <NewChannelGroups
-              onChange={this.handleAuthor}
-            />
           </LabelledInput>
 
           <LabelledInput mt={6} mb={8}>

@@ -14,12 +14,15 @@ const mixin = css`
   ${x => x.circle && 'border-radius: 50%;'}
   text-decoration: none;
   ${space}
+  overflow: hidden;
 `;
 
 const e = React.createElement;
 
-const Avatar = styled(({ tag, children, ...props }) =>
-  e(tag, props, children))`
+const Avatar = styled(({
+  tag, children, circle, ...rest
+}) =>
+  e(tag, rest, children))`
     ${mixin}
   `;
 

@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import newChannelGroupsQuery from 'react/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups';
 
 import Pulldown from 'react/components/UI/Pulldown';
+import AuthorOption from 'react/components/NewChannelForm/components/NewChannelGroups/components/AuthorOption';
 
 export default class NewChannelGroups extends Component {
   static propTypes = {
@@ -19,7 +20,14 @@ export default class NewChannelGroups extends Component {
         {({ data, errors, loading }) => {
           if (loading || errors) {
             return (
-              <Pulldown value={0} options={{ 0: 'You' }} />
+              <div>
+                <Pulldown
+                  value={0}
+                  options={{
+                    0: <AuthorOption member={{ name: 'Me', __typename: 'me' }} />,
+                  }}
+                />
+              </div>
             );
           }
 
@@ -31,9 +39,9 @@ export default class NewChannelGroups extends Component {
                 value={0}
                 onChange={onChange}
                 options={{
-                  0: `${me.name} (you)`,
+                  0: <AuthorOption member={me} />,
                   ...groups.reduce((memo, group) => ({
-                    ...memo, [group.id]: `${group.name} (group)`,
+                    ...memo, [group.id]: <AuthorOption member={group} />,
                   }), {}),
                 }}
               />
