@@ -33,6 +33,9 @@ const resolve = [
   apolloMiddleware, (req, res, next) => {
     req.apollo.render(withStaticRouter(Routes))
       .then((apollo) => {
+        // TODO: Consider properly handing errors in the SSR function
+        if (apollo.error) throw apollo.error;
+
         // TODO: Should just be a component once we move to a full page component
         // (Off of the Jade layout)
         const title = extractTitle(apollo.client, req.params.id);

@@ -8,7 +8,7 @@ export default client => (Component, props = {}) => {
   const sheet = new ServerStyleSheet();
   const WrappedComponent = wrapWithApolloProvider(client)(Component, props);
 
-  const resolve = () => {
+  const resolve = (error) => {
     const html = renderToString(sheet.collectStyles(WrappedComponent));
     const styles = sheet.getStyleTags();
     const state = client.extract();
@@ -18,6 +18,7 @@ export default client => (Component, props = {}) => {
       state,
       styles,
       client,
+      error,
     };
   };
 
