@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 
 export const BREAKPOINTS = {
   mobile: 640,
+  small: 1024,
 };
 
 export const MEDIA_QUERIES = Object.keys(BREAKPOINTS)
