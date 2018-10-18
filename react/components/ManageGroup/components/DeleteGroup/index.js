@@ -79,10 +79,10 @@ class DeleteGroup extends Component {
             {mode === 'pending' &&
               <div>
                 <Text mb={6} f={2} color="state.alert">
-                  Are you sure? This action cannot be undone.
-                  Deleting <strong>{name}</strong> will mean your
-                  group will lose access to any channels it is a collaborator on.
-                  Are you sure you want to delete <strong>{name}</strong>?
+                  All channels owned by <strong>{name}</strong> will be permanently deleted
+                  and your group will lose access to any channels it is a collaborator on.
+                  {' '}<strong>This action cannot be undone.</strong>{' '}
+                  Are you sure you want to delete the group?
                 </Text>
 
                 <div>
@@ -92,7 +92,7 @@ class DeleteGroup extends Component {
                     color="state.alert"
                     onClick={this.deleteGroup}
                   >
-                    Delete
+                    Yes, delete group and all associated channels
                   </GenericButton>
 
                   {' '}

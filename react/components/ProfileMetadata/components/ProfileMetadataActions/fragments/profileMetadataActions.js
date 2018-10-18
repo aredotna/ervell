@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 export default gql`
   fragment ProfileMetadataActions on Identifiable {
     __typename
-
     ... on User {
       id: slug
       name
@@ -13,7 +12,6 @@ export default gql`
         message
       }
     }
-
     ... on Group {
       id: slug
       can {

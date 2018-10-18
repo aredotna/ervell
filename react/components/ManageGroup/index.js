@@ -42,7 +42,6 @@ class ManageGroup extends Component {
     description: null,
     attributeErrors: {},
     errorMessage: '',
-
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
@@ -104,7 +103,7 @@ class ManageGroup extends Component {
 
     return (
       <TitledDialog
-        title={group.name}
+        title={`Edit ${group.name}`}
         label={{
           resting: 'Done',
           submit: 'Save',
@@ -121,7 +120,7 @@ class ManageGroup extends Component {
         >
           <LabelledInput>
             <Label>
-                Name
+              Name
             </Label>
 
             <Input
@@ -131,6 +130,7 @@ class ManageGroup extends Component {
               defaultValue={group.name}
               disabled={!group.can.manage}
               errorMessage={attributeErrors.title}
+              required
             />
           </LabelledInput>
 

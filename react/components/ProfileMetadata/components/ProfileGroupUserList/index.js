@@ -13,12 +13,12 @@ export default class ProfileGroupUserList extends Component {
   }
 
   render() {
-    const { identifiable: { users } } = this.props;
+    const { identifiable: { user, users } } = this.props;
 
     return (
       <Pocket title="Members">
         <Expandable>
-          <LinksList links={users} />
+          <LinksList links={[user, ...users]} />
         </Expandable>
       </Pocket>
     );

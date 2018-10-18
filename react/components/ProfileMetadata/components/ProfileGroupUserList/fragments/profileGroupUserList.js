@@ -4,6 +4,11 @@ export default gql`
   fragment ProfileGroupUserList on Identifiable {
     ... on Group {
       id: slug
+      user {
+        id
+        label: name
+        href
+      }
       users {
         id
         label: name

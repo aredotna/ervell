@@ -12,9 +12,10 @@ import addGroupUserMutation from 'react/components/ManageGroup/components/Manage
 import removeGroupUserMutation from 'react/components/ManageGroup/components/ManageUsers/mutations/removeGroupUser';
 import inviteGroupUserMutation from 'react/components/ManageGroup/components/ManageUsers/mutations/inviteGroupUser';
 
+import Box from 'react/components/UI/Box';
+import { LabelledInput, Label } from 'react/components/UI/Inputs';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import ManagedMembers from 'react/components/ManagedMembers';
-import { LabelledInput, Label } from 'react/components/UI/Inputs';
 
 import profileGroupUserListFragment from 'react/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList';
 
@@ -101,30 +102,28 @@ class ManageUsers extends Component {
               Invite
           </Label>
 
-          <CollaboratorSearch
-            types={['USER']}
-            onAdd={this.handleAddUser}
-            onInvite={this.handleInviteUser}
-          />
-        </LabelledInput>
+          <div>
+            <CollaboratorSearch
+              types={['USER']}
+              onAdd={this.handleAddUser}
+              onInvite={this.handleInviteUser}
+            />
 
-        <LabelledInput>
-          <Label>
-            Members
-          </Label>
-
-          <ManagedMembers
-            owner={owner}
-            memberships={memberships}
-            onRemove={this.handleRemoveUser}
-            confirmationWarning="Are you sure?"
-            confirmationSelfWarning={`
-              Removing yourself from ${name} means you will
-              lose access to all channels ${name} is collaborating on.
-              There is no way to undo this action, and only the group’s
-              creator can re-add you.
-            `}
-          />
+            <Box my={6}>
+              <ManagedMembers
+                owner={owner}
+                memberships={memberships}
+                onRemove={this.handleRemoveUser}
+                confirmationWarning="Are you sure?"
+                confirmationSelfWarning={`
+                  Removing yourself from ${name} means you will
+                  lose access to all channels ${name} is collaborating on.
+                  There is no way to undo this action, and only the group’s
+                  creator can re-add you.
+                `}
+              />
+            </Box>
+          </div>
         </LabelledInput>
       </div>
     );
