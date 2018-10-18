@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { space, justifyContent, alignItems } from 'styled-system';
+
 import { pick, omit } from 'underscore';
 
 import compactObject from 'react/util/compactObject';
@@ -40,9 +42,9 @@ const BorderedBox = ({
 
 BorderedBox.propTypes = {
   children: PropTypes.node.isRequired,
-  ...INNER_PROPS_KEYS.reduce((memo, key) => (
-    { ...memo, [key]: PropTypes.number }
-  ), {}),
+  ...space.propTypes,
+  ...alignItems.propTypes,
+  ...justifyContent.propTypes,
 };
 
 BorderedBox.defaultProps = {
