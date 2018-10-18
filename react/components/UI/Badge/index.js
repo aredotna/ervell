@@ -17,7 +17,6 @@ const Outline = styled.div`
   border-radius: 0.33em;
   line-height: 1;
   user-select: none;
-  cursor: default;
   ${preset(space, { py: 2, px: 3 })}
   ${preset(fontFamily, { font: 'narrow' })}
   ${preset(fontSize, { f: 1 })}

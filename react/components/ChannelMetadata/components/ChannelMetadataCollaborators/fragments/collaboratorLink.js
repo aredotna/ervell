@@ -11,21 +11,8 @@ export default gql`
     ... on Group {
       id
       name
+      href
       description(format: MARKDOWN)
-      user {
-        id
-        name
-        href
-      }
-      users {
-        id
-        name
-        href
-      }
-      can {
-        manage
-        manage_users
-      }
     }
   }
 `;
