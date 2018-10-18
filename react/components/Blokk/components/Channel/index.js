@@ -3,8 +3,9 @@ import styled from 'styled-components';
 
 import { channelVisibilityForegroundColor } from 'react/styles/mixins';
 
-import Count from 'react/components/UI/Count';
 import Text from 'react/components/UI/Text';
+import Count from 'react/components/UI/Count';
+import Truncate from 'react/components/UI/Truncate';
 import Connectable from 'react/components/Blokk/components/Connectable';
 
 const Container = styled.div`
@@ -26,7 +27,9 @@ export default class Channel extends Connectable {
     return (
       <Container visibility={channel.visibility} {...rest}>
         <Text pt={6} mx={4} f={6} textAlign="center">
-          {channel.title}
+          <Truncate length={90} title={channel.title}>
+            {channel.title}
+          </Truncate>
         </Text>
 
         <Text my={4} f={2} textAlign="center">
