@@ -25,6 +25,8 @@ const COLORS = {
     translucent: 'rgba(255, 255, 255, 0.9)',
     transparent: 'rgba(255, 255, 255, 0.001)',
   },
+  white: 'white',
+  black: 'black',
 };
 
 export const COLOR_NAMES = Object
