@@ -14,7 +14,7 @@ import OverlayConnect from 'react/components/Blokk/components/OverlayConnect';
 
 const Container = styled(Box).attrs({
   px: 5,
-  pb: 3,
+  pb: 0,
 })`
   box-sizing: border-box;
   position: absolute;
@@ -87,7 +87,7 @@ class ChannelOverlay extends Component {
             <DividerButton
               key="connect"
               f={4}
-              ml={2}
+              ml={can.follow && 2}
               color={`channel.${visibility}`}
               onClick={this.openConnect}
             >

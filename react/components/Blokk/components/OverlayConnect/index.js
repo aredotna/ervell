@@ -8,8 +8,13 @@ import Box from 'react/components/UI/Box';
 import { DividerButton } from 'react/components/UI/Buttons';
 import ConnectionSelection from 'react/components/ConnectionSelection';
 
-const Container = styled.div`
-  box-sizing: border-box;
+const Container = styled(Box).attrs({
+  pt: 4,
+  px: 4,
+  pb: 0,
+  border: '1px solid',
+  borderColor: 'gray.regular',
+})`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,8 +26,6 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   background-color: white;
-  padding: ${x => x.theme.space[4]};
-  border: 1px solid ${x => x.theme.colors.gray.regular};
 
   &:after {
     margin: -1px;
@@ -45,7 +48,7 @@ export default class OverlayConnect extends Component {
           <ConnectionSelection id={id} type={type} isOutlined={false} />
         </Box>
 
-        <DividerButton f={3} onClick={onClose}>
+        <DividerButton f={4} mb="-1px" onClick={onClose}>
           Close
         </DividerButton>
       </Container>
