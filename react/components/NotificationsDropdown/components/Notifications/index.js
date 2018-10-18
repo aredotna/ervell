@@ -52,9 +52,11 @@ const Notifications = ({ notifications }) => (
           ))}
         </Body>
 
-        <Button pt={6} href="/notifications">
-          View all notifications
-        </Button>
+        <Box px={6}>
+          <Button pt={6} href="/notifications">
+            View all notifications
+          </Button>
+        </Box>
       </Container>
     }
   </BorderedBox>
