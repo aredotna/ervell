@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { propType } from 'graphql-anywhere';
+
+import blokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/blokkOverlay';
 
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
@@ -32,7 +35,7 @@ const OverlayButton = styled(FilledButton).attrs({
 
 class BlokkOverlay extends Component {
   static propTypes = {
-    blokk: PropTypes.shape({ /* TODO */ }).isRequired,
+    blokk: propType(blokkOverlayFragment).isRequired,
     onOverlay: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,

@@ -8,12 +8,19 @@ import embedFragment from 'react/components/Blokk/components/Embed/fragments/emb
 import attachmentFragment from 'react/components/Blokk/components/Attachment/fragments/attachment';
 import modelMetadataFragment from 'react/components/Blokk/components/Metadata/fragments/modelMetadata';
 import connectableMetadataFragment from 'react/components/Blokk/components/Metadata/fragments/connectableMetadata';
-import connectableBlokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/connectableBlokkOverlay';
-import modelBlokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/modelBlokkOverlay';
+import blokkOverlayFragment from 'react/components/Blokk/components/BlokkOverlay/fragments/blokkOverlay';
 
 export default gql`
   fragment Blokk on Konnectable {
     __typename
+    ... on ConnectableInterface {
+      href
+    }
+    ... on Block {
+      counts {
+        comments
+      }
+    }
     ... Channel
     ... Text
     ... Image
@@ -22,8 +29,7 @@ export default gql`
     ... Attachment
     ... ConnectableMetadata
     ... ModelMetadata
-    ... ConnectableBlokkOverlay
-    ... ModelBlokkOverlay
+    ... BlokkOverlay
   }
   ${channelFragment}
   ${textFragment}
@@ -33,6 +39,5 @@ export default gql`
   ${attachmentFragment}
   ${modelMetadataFragment}
   ${connectableMetadataFragment}
-  ${connectableBlokkOverlayFragment}
-  ${modelBlokkOverlayFragment}
+  ${blokkOverlayFragment}
 `;

@@ -4,6 +4,10 @@ import { propType } from 'graphql-anywhere';
 
 import blokkFragment from 'react/components/Blokk/fragments/blokk';
 
+import constants from 'react/styles/constants';
+
+import Typography from 'react/components/UI/Text';
+
 import Attachment from 'react/components/Blokk/components/Attachment';
 import Channel from 'react/components/Blokk/components/Channel';
 import Embed from 'react/components/Blokk/components/Embed';
@@ -29,6 +33,21 @@ const Container = styled.a`
   width: ${x => x.theme.constantValues.blockWidth};
   height: ${x => x.theme.constantValues.blockWidth};
   margin-bottom: ${x => x.theme.space[8]};
+`;
+
+const Comments = styled(Typography).attrs({
+  mr: 6,
+  mb: 6,
+  px: 5,
+  py: 3,
+  f: 2,
+})`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: ${x => x.theme.colors.utility.translucent};
+  z-index: 1;
+  border-radius: ${constants.radii.subtle};
 `;
 
 export default class Blokk extends Component {
@@ -68,6 +87,12 @@ export default class Blokk extends Component {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
       >
+        {blokk.counts.comments > 0 && mode !== 'overlay' &&
+          <Comments>
+            {blokk.counts.comments}
+          </Comments>
+        }
+
         {[
           {
             Attachment: <Attachment key="attachment" attachment={blokk} mode={mode} />,
