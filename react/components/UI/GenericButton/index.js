@@ -4,6 +4,7 @@ import chroma from 'chroma-js';
 
 import { defaultTo, preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
+import constants from 'react/styles/constants';
 
 export const BUTTON_DEFAULT_FONT_SIZE = 3;
 export const BUTTON_VARIANTS = { LARGE: 'LARGE', SMALL: 'SMALL' };
@@ -11,7 +12,7 @@ export const BUTTON_LARGE_PADDING = { px: 8, py: 5 };
 export const BUTTON_SMALL_PADDING = { px: 6, py: 5 };
 export const BUTTON_SMALL_BORDER_WIDTH = '1px';
 export const BUTTON_LARGE_BORDER_WIDTH = '2px';
-export const BUTTON_BORDER_RADIUS = '0.25em';
+export const BUTTON_BORDER_RADIUS = constants.radii.button;
 
 export const buttonSize = x => (
   defaultTo(x.f, x.fontSize) < BUTTON_DEFAULT_FONT_SIZE

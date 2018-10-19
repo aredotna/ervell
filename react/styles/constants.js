@@ -52,10 +52,16 @@ export const CONSTANT_VALUES = {
   legacyUnit: '20px',
 };
 
+export const RADII = {
+  button: '0.25em',
+  subtle: '0.125em',
+};
+
 export default {
   ...CONSTANT_VALUES,
   media: MEDIA_QUERIES,
   z: Z_INDEXES,
   breakpoints: BREAKPOINTS,
   space: SPACING_SCALE,
+  radii: RADII,
 };
