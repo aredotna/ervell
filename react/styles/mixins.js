@@ -82,10 +82,15 @@ export const channelVisibilityForegroundColor = css`
 }
   `;
 
+export const fractional = css`
+  -webkit-transform: scale(0.99); // Hack to force fractional pixels in Chrome
+`;
+
 export default {
   outlineBorder,
   hyphenate,
   antialiased,
   neutralMarginsY,
   channelVisibilityForegroundColor,
+  fractional,
 };
