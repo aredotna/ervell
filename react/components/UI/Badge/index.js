@@ -14,9 +14,11 @@ const Outline = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   border: 1px solid;
-  border-radius: 0.33em;
+  border-radius: 0.33em; // extract
   line-height: 1;
   user-select: none;
+  vertical-align: middle;
+  -webkit-transform: scale(0.99); // Hack to force fractional pixels in Chrome
   ${preset(space, { py: 2, px: 3 })}
   ${preset(fontFamily, { font: 'narrow' })}
   ${preset(fontSize, { f: 1 })}

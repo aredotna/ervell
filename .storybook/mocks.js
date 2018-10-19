@@ -1,4 +1,4 @@
-import { random, name, lorem } from 'faker';
+import { random, name, lorem, commerce, company } from 'faker';
 import { sample } from 'lodash';
 import { MockList } from 'graphql-tools';
 
@@ -22,14 +22,15 @@ const Mocks = {
   }),
 
   User: () => ({
+    id: random.number({ min: 200, max: 800 }),
     name: `${name.firstName()} ${name.lastName()}`,
     initials: "IOU",
     avatar: "https://dummyimage.com/100x100/000/fff&text=**",
   }),
 
   Group: () => ({
-    name: "My Group",
-    initials: "IOU",
+    name: `${commerce.productAdjective()} ${company.catchPhraseNoun()}`,
+    initials: 'IOU'
   }),
 
   Connection: () => ({

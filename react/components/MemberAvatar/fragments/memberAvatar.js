@@ -7,8 +7,8 @@ export default gql`
       initials
       avatar(size: LARGE)
     }
-
     ... on Group {
+      href
       initials
     }
   }
