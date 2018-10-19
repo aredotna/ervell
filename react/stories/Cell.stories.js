@@ -11,6 +11,8 @@ import Specimen from 'react/stories/__components__/Specimen';
 import Grid from 'react/components/UI/Grid';
 import Cell from 'react/components/Cell';
 
+import BLOKK_QUERY from 'react/components/Cell/components/Konnectable/queries/blokk';
+
 const IDENTIFIABLE_QUERY = gql`
   query {
     identity(id: 666) {
@@ -21,8 +23,26 @@ const IDENTIFIABLE_QUERY = gql`
   }
   ${identifiableCellFragment}
 `;
-
 storiesOf('Cell', module)
+  .add('konnectables', () => (
+    <Specimen>
+      <Grid>
+        {Array(10).fill(undefined).map((_, id) => (
+          <Query key={uuidv4()} query={BLOKK_QUERY} variables={{ id }}>
+            {({ data, loading, error }) => {
+              if (loading || error) return '';
+
+              const { blokk } = data;
+
+              return (
+                <Cell.Konnectable konnectable={blokk} />
+              );
+            }}
+          </Query>
+        ))}
+      </Grid>
+    </Specimen>
+  ))
   .add('indentifiables', () => (
     <Specimen>
       <Grid>

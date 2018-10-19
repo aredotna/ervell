@@ -8,15 +8,13 @@ import identifiableCellFragment from 'react/components/Cell/components/Identifia
 
 import Text from 'react/components/UI/Text';
 import Badge from 'react/components/UI/Badge';
+import Truncate from 'react/components/UI/Truncate';
 import MemberAvatar from 'react/components/MemberAvatar';
 import { mixin as dividerButtonMixin } from 'react/components/UI/Buttons/components/DividerButton';
 import FollowButton from 'react/components/FollowButton';
 
-const AVATAR_SIZE = 140;
-
 const IdentifiableFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
-  width: ${AVATAR_SIZE}px;
 `;
 
 const Container = styled.a`
@@ -75,7 +73,9 @@ export default class Indentifiable extends Component {
         __typename={identifiable.__typename}
       >
         <Text f={5} pt={7} fontWeight="bold" textAlign="center">
-          {identifiable.name}
+          <Truncate length={40}>
+            {identifiable.name}
+          </Truncate>
 
           {identifiable.__typename === 'Group' &&
             <Badge f={0} ml={4} icon={{ private: 'Lock' }[identifiable.visibility]}>
@@ -85,7 +85,7 @@ export default class Indentifiable extends Component {
         </Text>
 
         <MemberAvatar
-          size={AVATAR_SIZE}
+          size={140}
           member={identifiable}
           circle={identifiable.__typename === 'Group'}
         />

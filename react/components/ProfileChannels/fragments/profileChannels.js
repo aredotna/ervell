@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-import blokkFragment from 'react/components/Blokk/fragments/blokk';
-import blokkChannelFragment from 'react/components/Blokk/components/Channel/fragments/channel';
+import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
+import blokkChannelFragment from 'react/components/Cell/components/Konnectable/components/Channel/fragments/channel';
 
 export default gql`
   fragment ProfileChannels on Identifiable {
@@ -11,7 +11,7 @@ export default gql`
       channels(page: $page, per: $per) {
         ... Channel
         blokks(per: 5) {
-          ... Blokk
+          ... KonnectableCell
         }
       }
     }
@@ -23,12 +23,12 @@ export default gql`
 
         ... on Channel {
           blokks(per: 5, sort_by: POSITION, direction: DESC) {
-            ... Blokk
+            ... KonnectableCell
           }
         }
       }
     }
   }
-  ${blokkFragment}
+  ${konnectableCellFragment}
   ${blokkChannelFragment}
 `;

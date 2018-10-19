@@ -29,10 +29,7 @@ class ProfileBreadcrumb extends Component {
           </a>
 
           {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'Group') &&
-            <Badge
-              ml={6}
-              icon={identifiable.visibility === 'private' ? 'Lock' : undefined}
-            >
+            <Badge f={0} ml={4} icon={{ private: 'Lock' }[identifiable.visibility]}>
               Group
             </Badge>
           }

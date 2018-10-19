@@ -6,7 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import profileChannelsQuery from 'react/components/ProfileChannels/queries/profileChannels';
 
 import Grid from 'react/components/UI/Grid';
-import Blokk from 'react/components/Blokk';
+import Cell from 'react/components/Cell';
 import ChannelRow from 'react/components/ProfileChannels/components/ChannelRow';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 
@@ -74,10 +74,10 @@ export default class ProfileChannels extends Component {
               {channels.map(channel => (
                 <ChannelRow key={channel.id}>
                   <Grid>
-                    <Blokk blokk={channel} />
+                    <Cell.Konnectable konnectable={channel} />
 
                     {channel.blokks.map(blokk =>
-                      <Blokk key={`${blokk.__typename}_${blokk.id}`} blokk={blokk} />)}
+                      <Cell.Konnectable key={`${blokk.__typename}_${blokk.id}`} konnectable={blokk} />)}
                   </Grid>
                 </ChannelRow>
               ))}

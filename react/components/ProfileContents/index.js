@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import Grid from 'react/components/UI/Grid';
-import Blokk from 'react/components/Blokk';
+import Cell from 'react/components/Cell';
 
 import profileContentsQuery from 'react/components/ProfileContents/queries/profileContents';
 
@@ -80,7 +80,7 @@ export default class ProfileContents extends Component {
                 }}
               >
                 {contents.map(blokk =>
-                  <Blokk key={`${blokk.__typename}_${blokk.id}`} blokk={blokk} />)}
+                  <Cell.Konnectable key={`${blokk.__typename}_${blokk.id}`} konnectable={blokk} />)}
               </Grid>
             </div>
           );
