@@ -31,7 +31,7 @@ const InfiniteContainer = styled(InfiniteScroll)`
 
 const GridItem = styled.div`
   position: relative;
-  margin: 0 ${blockGutter} ${multiply(blockGutter, 2)} ${blockGutter};
+  margin: 0 ${blockGutter} ${multiply(blockGutter, 4)} ${blockGutter};
   width: ${blockWidth};
 
   ${x => !x.variableHeight && `

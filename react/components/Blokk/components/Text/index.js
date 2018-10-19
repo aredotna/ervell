@@ -40,15 +40,16 @@ const Container = styled(Box).attrs({
 
 export default class Text extends Connectable {
   render() {
-    const { text: { content }, ...rest } = this.props;
+    const { text: { content }, mode, ...rest } = this.props;
 
     return (
-      <Container length={content.length} {...rest}>
+      <Container length={content.length} mode={mode} {...rest}>
         {/* We should truncate content to prevent an excess of data being needlessly returned */}
         {/* Try truncating markdown source then rendering it as a possible solution */}
         <Typography
           font="serif"
           lineHeight={2}
+          color={{ hover: 'black', resting: 'gray.base' }[mode]}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </Container>

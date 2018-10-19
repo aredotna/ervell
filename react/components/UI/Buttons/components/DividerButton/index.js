@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { themeGet, fontSize, space } from 'styled-system';
-import chroma from 'chroma-js';
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
@@ -21,11 +20,13 @@ export const disabledMixin = css`
 `;
 
 export const buttonColor = (props) => {
-  const value = themeGet(`colors.${props.color}`, props.theme.colors.gray.base)(props);
+  const defaultColor = props.theme.colors.gray.base;
+  const defaultBorderColor = props.theme.colors.gray.regular;
+  const color = themeGet(`colors.${props.color}`, defaultColor)(props);
 
   return `
-    color: ${value};
-    border-color: ${chroma.blend(value, '#bbb', 'screen')};
+    color: ${color};
+    border-color: ${color === defaultColor ? defaultBorderColor : color};
   `;
 };
 

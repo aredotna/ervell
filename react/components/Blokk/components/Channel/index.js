@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { channelVisibilityForegroundColor } from 'react/styles/mixins';
 
+import constants from 'react/styles/constants';
+
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import Truncate from 'react/components/UI/Truncate';
@@ -17,6 +19,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   border: 2px solid;
+  border-radius: ${constants.radii.subtle};
   ${channelVisibilityForegroundColor}
 `;
 

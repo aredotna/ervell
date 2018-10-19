@@ -51,7 +51,9 @@ storiesOf('Button', module)
     <Specimen>
       {theme.meta.colorNames.map(color => (
         <States key={color} states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
-          <DividerButton color={color}>{color}</DividerButton>
+          <DividerButton color={color}>
+            {color}
+          </DividerButton>
         </States>
       ))}
     </Specimen>

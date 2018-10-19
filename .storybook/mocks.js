@@ -64,6 +64,7 @@ const Mocks = {
     ...connectable(),
     content: Array(random.number(20)).fill(undefined)
       .map(() => `<p>${lorem.paragraph()}</p>`).join(''),
+    source: null,
   }),
 
   Deed: () => ({

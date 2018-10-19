@@ -24,12 +24,11 @@ const Container = styled.div`
 
 const OverlayButton = styled(FilledButton).attrs({
   f: 4,
-  mx: 4,
   px: 0,
   py: 6,
 })`
   display: flex;
-  flex: 1;
+  flex: 0.46;
   justify-content: center;
 `;
 
@@ -79,16 +78,18 @@ class BlokkOverlay extends Component {
     const { mode } = this.state;
     const { blokk: { id, source } } = this.props;
 
+    const sourceUrl = source && source.url;
+
     return (
       <Container>
-        {mode === 'resting' && source && source.url &&
-          <OverlayButton onClick={this.openSource}>
+        {mode === 'resting' && sourceUrl &&
+          <OverlayButton ml={4} mr={2} onClick={this.openSource}>
             Source
           </OverlayButton>
         }
 
         {mode === 'resting' &&
-          <OverlayButton onClick={this.openConnect}>
+          <OverlayButton ml={sourceUrl && 2} mr={sourceUrl && 4} onClick={this.openConnect}>
             Connect &rarr;
           </OverlayButton>
         }
