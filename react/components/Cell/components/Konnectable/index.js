@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
 
-import konnectableFragment from 'react/components/Cell/components/Konnectable/fragments/konnectable';
+import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 import constants from 'react/styles/constants';
 
@@ -52,7 +52,7 @@ const Comments = styled(Typography).attrs({
 
 export default class Konnectable extends Component {
   static propTypes = {
-    konnectable: propType(konnectableFragment).isRequired,
+    konnectable: propType(konnectableCellFragment).isRequired,
   }
 
   state = {

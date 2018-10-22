@@ -13,10 +13,14 @@ export default gql`
       contents
     }
     owner {
+      __typename
       ... on Group {
+        id: slug
         name
+        visibility
       }
       ... on User {
+        id: slug
         name
       }
     }

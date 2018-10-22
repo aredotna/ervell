@@ -11,6 +11,7 @@ import constants from 'react/styles/constants';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import Truncate from 'react/components/UI/Truncate';
+import Badge from 'react/components/UI/Badge';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -43,9 +44,19 @@ export default class Channel extends Component {
 
         <Text my={4} f={2} textAlign="center">
           by {channel.owner.name}
+
+          {channel.owner.__typename === 'Group' &&
+            <Badge f={0} ml={4} color="gray.medium" icon={{ private: 'Lock' }[channel.owner.visibility]}>
+              Group
+            </Badge>
+          }
+
           <br />
+
           <Count label="block" amount={channel.counts.contents} />
+
           {' • '}
+
           {channel.updated_at}
         </Text>
       </Container>

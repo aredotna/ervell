@@ -10,7 +10,7 @@ import metadataFragment from 'react/components/Cell/components/Konnectable/compo
 import blokkOverlayFragment from 'react/components/Cell/components/Konnectable/components/BlokkOverlay/fragments/blokkOverlay';
 
 export default gql`
-  fragment Konnectable on Konnectable {
+  fragment KonnectableCell on Konnectable {
     __typename
     ... on ConnectableInterface {
       href
