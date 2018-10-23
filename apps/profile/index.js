@@ -53,6 +53,8 @@ app
   .get('/:id/', ...resolve)
   .get('/:id/blocks', ...resolve)
   .get('/:id/channels', ...resolve)
-  .get('/:id/index', ...resolve);
+  .get('/:id/index', ...resolve)
+  .get('/:id/followers', ...resolve)
+  .get('/:id/following', ...resolve);
 
 module.exports = app;

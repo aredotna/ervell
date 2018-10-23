@@ -8,6 +8,8 @@ import profileMetadataInfoFragment from 'react/components/ProfileMetadata/compon
 import Box from 'react/components/UI/Box';
 import Pocket from 'react/components/UI/Pocket';
 import { Expandable } from 'react/components/UI/ExpandableSet';
+import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
+
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const Buttons = styled(Box).attrs({
@@ -42,16 +44,16 @@ class ProfileMetadataInfo extends Component {
         {isLoggedIn && (identifiable.counts.followers > 0 || identifiable.counts.following > 1) &&
           <Buttons>
             {identifiable.counts.followers > 0 &&
-              <a href={`${identifiable.href}/followers`}>
+              <ProfileLinkUnlessCurrent to={`${identifiable.href}/followers`}>
                 Followers
-              </a>
+              </ProfileLinkUnlessCurrent>
             }
 
             {/* Subtract 1 to ignore the default Are.na follow */}
             {(identifiable.counts.following - 1) > 0 &&
-              <a href={`${identifiable.href}/following`}>
+              <ProfileLinkUnlessCurrent to={`${identifiable.href}/following`}>
                 Following
-              </a>
+              </ProfileLinkUnlessCurrent>
             }
           </Buttons>
         }
@@ -60,9 +62,9 @@ class ProfileMetadataInfo extends Component {
           <Box my={6} neutralMarginsY>
             {'Admin — '}
 
-            <a href={identifiable.user.href}>
+            <ProfileLinkUnlessCurrent to={identifiable.user.href}>
               {identifiable.user.name}
-            </a>
+            </ProfileLinkUnlessCurrent>
           </Box>
         }
       </Pocket>

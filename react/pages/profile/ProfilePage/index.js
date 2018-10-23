@@ -6,13 +6,14 @@ import ProfileMetadata from 'react/components/ProfileMetadata';
 import ProfileContents from 'react/components/ProfileContents';
 import ProfileChannels from 'react/components/ProfileChannels';
 import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
+import ProfileFollows from 'react/components/ProfileFollows';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
 export default class ProfilePage extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index']).isRequired,
+    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'followers', 'following']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
@@ -45,6 +46,8 @@ export default class ProfilePage extends Component {
                 blocks: <ProfileContents id={id} type="BLOCK" sort={sort} />,
                 channels: <ProfileChannels id={id} sort={sort} />,
                 index: <ProfileChannelIndex id={id} type={filter} />,
+                followers: <ProfileFollows id={id} type="followers" />,
+                following: <ProfileFollows id={id} type="following" />,
               }[typedView]}
             </div>
           );

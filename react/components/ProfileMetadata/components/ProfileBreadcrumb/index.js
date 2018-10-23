@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
+import { withRouter } from 'react-router-dom';
 
 import profileBreadcrumbFragment from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/fragments/profileBreadcrumb';
 
@@ -8,18 +9,16 @@ import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import ProfileBadge from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge';
 import Badge from 'react/components/UI/Badge';
 
-import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
-
 class ProfileBreadcrumb extends Component {
   static propTypes = {
     identifiable: propType(profileBreadcrumbFragment).isRequired,
-    currentRoute: PropTypes.shape({
-      href: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
     }).isRequired,
   }
 
   render() {
-    const { identifiable, currentRoute: { pathname } } = this.props;
+    const { identifiable, location: { pathname } } = this.props;
 
     return (
       <StickyBreadcrumbPath>
@@ -55,4 +54,4 @@ class ProfileBreadcrumb extends Component {
   }
 }
 
-export default WithCurrentRoute(ProfileBreadcrumb);
+export default withRouter(ProfileBreadcrumb);

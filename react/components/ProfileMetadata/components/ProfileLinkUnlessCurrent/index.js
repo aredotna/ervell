@@ -10,12 +10,19 @@ const Link = styled(NavLink)`
 
 export default class ProfileLinkUnlessCurrent extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    value: PropTypes.string,
+  }
+
+  static defaultProps = {
+    name: null,
+    value: null,
   }
 
   setCookie = () => {
     const { name, value } = this.props;
+
+    if (!name || !value) return;
 
     try {
       Cookies.set(name, value);

@@ -28,7 +28,7 @@ const Container = styled.a`
   width: ${x => x.theme.constantValues.blockWidth};
   height: ${x => x.theme.constantValues.blockWidth};
   padding: ${x => `0 ${x.theme.space[4]}`};
-  margin: ${x => x.theme.space[8]};
+  margin-bottom: ${x => x.theme.space[8]};
   border: 2px solid ${x => x.theme.colors.gray.regular};
   border-radius: ${constants.radii.subtle};
 
