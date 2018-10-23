@@ -14,7 +14,11 @@ class ProfileMetadataFilter extends Component {
       pathname: PropTypes.string.isRequired,
     }).isRequired,
     identifiable: propType(profileMetadataFilterFragment).isRequired,
+    filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
+
+  isFilterActive = filter => () =>
+    this.props.filter === filter;
 
   render() {
     const { identifiable, location: { pathname } } = this.props;
@@ -28,6 +32,7 @@ class ProfileMetadataFilter extends Component {
             pathname,
             search: '?filter=OWN',
           }}
+          isActive={this.isFilterActive('OWN')}
         >
           {identifiable.name}
         </ProfileLinkUnlessCurrent>
@@ -39,6 +44,7 @@ class ProfileMetadataFilter extends Component {
             pathname,
             search: '?filter=COLLABORATION',
           }}
+          isActive={this.isFilterActive('COLLABORATION')}
         >
           Other
         </ProfileLinkUnlessCurrent>

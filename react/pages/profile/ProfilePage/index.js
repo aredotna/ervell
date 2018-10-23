@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
+import CenteringBox from 'react/components/UI/CenteringBox';
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ProfileContents from 'react/components/ProfileContents';
 import ProfileChannels from 'react/components/ProfileChannels';
@@ -26,7 +28,14 @@ export default class ProfilePage extends Component {
     return (
       <Query query={profilePageQuery} variables={{ id }}>
         {({ loading, data, error }) => {
-          if (loading) return <div />;
+          if (loading) {
+            return (
+              <CenteringBox>
+                <LoadingIndicator f={9} />
+              </CenteringBox>
+            );
+          }
+
           if (error) return error.message;
 
           const { identity: { identifiable } } = data;
@@ -39,7 +48,12 @@ export default class ProfilePage extends Component {
 
           return (
             <div>
-              <ProfileMetadata identifiable={identifiable} mode={typedView} sort={sort} />
+              <ProfileMetadata
+                identifiable={identifiable}
+                mode={typedView}
+                sort={sort}
+                filter={filter}
+              />
 
               {{
                 all: <ProfileContents id={id} sort={sort} />,

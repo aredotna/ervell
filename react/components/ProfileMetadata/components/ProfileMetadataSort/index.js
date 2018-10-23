@@ -10,7 +10,11 @@ class ProfileMetadataSort extends Component {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
+
+  isSortActive = sort => () =>
+    this.props.sort === sort;
 
   render() {
     const { location: { pathname } } = this.props;
@@ -24,6 +28,7 @@ class ProfileMetadataSort extends Component {
             pathname,
             search: '?sort=UPDATED_AT',
           }}
+          isActive={this.isSortActive('UPDATED_AT')}
         >
           Recently updated
         </ProfileLinkUnlessCurrent>
@@ -35,6 +40,7 @@ class ProfileMetadataSort extends Component {
             pathname,
             search: '?sort=RANDOM',
           }}
+          isActive={this.isSortActive('RANDOM')}
         >
           Random
         </ProfileLinkUnlessCurrent>

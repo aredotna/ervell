@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
 
-import { MODES } from 'react/components/Profile/config';
 
 import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/profileMetadata';
 
@@ -21,12 +20,15 @@ export default class ProfileMetadata extends Component {
   static propTypes = {
     identifiable: propType(profileMetadataFragment).isRequired,
     // TODO: Rename to `view`
-    mode: PropTypes.oneOf(MODES).isRequired,
+    mode: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'following', 'followers']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
 
   render() {
-    const { identifiable, mode, sort } = this.props;
+    const {
+      identifiable, mode, sort, filter,
+    } = this.props;
 
     return (
       <HeaderMetadataContainer
@@ -52,7 +54,7 @@ export default class ProfileMetadata extends Component {
             }
 
             {mode === 'index' &&
-              <ProfileMetadataFilter identifiable={identifiable} />
+              <ProfileMetadataFilter identifiable={identifiable} filter={filter} />
             }
           </Grid>
         </ExpandableContext>

@@ -6,6 +6,12 @@ import { NavLink } from 'react-router-dom';
 
 const Link = styled(NavLink)`
   display: block;
+  color: ${x => x.theme.colors.gray.regular};
+
+  ${({ isActive, theme }) => isActive && isActive() && `
+    color: ${theme.colors.gray.semiBold};
+    cursor: default;
+  `}
 `;
 
 export default class ProfileLinkUnlessCurrent extends Component {
@@ -37,7 +43,7 @@ export default class ProfileLinkUnlessCurrent extends Component {
     } = this.props;
 
     return (
-      <Link {...rest} onClick={this.setCookie} />
+      <Link {...rest} onClick={this.setCookie} activeClass="active" />
     );
   }
 }

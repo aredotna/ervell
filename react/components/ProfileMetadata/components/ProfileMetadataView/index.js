@@ -11,10 +11,11 @@ export default class ProfileMetadataView extends Component {
   static propTypes = {
     identifiable: propType(profileMetadataViewFragment).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    mode: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'following', 'followers']).isRequired,
   }
 
-  isCurrent = () =>
-    false
+  isModeActive = mode => () =>
+    this.props.mode === mode;
 
   render() {
     const { identifiable: { __typename, href }, sort } = this.props;
@@ -26,7 +27,7 @@ export default class ProfileMetadataView extends Component {
             name="filter"
             value="all"
             to={`${href}?sort=${sort}`}
-            isActive={this.isCurrent}
+            isActive={this.isModeActive('all')}
           >
             All
           </ProfileLinkUnlessCurrent>
@@ -36,7 +37,7 @@ export default class ProfileMetadataView extends Component {
           name="filter"
           value="channels"
           to={`${href}/channels?sort=${sort}`}
-          isActive={this.isCurrent}
+          isActive={this.isModeActive('channels')}
         >
           Channels
         </ProfileLinkUnlessCurrent>
@@ -46,7 +47,7 @@ export default class ProfileMetadataView extends Component {
             name="filter"
             value="blocks"
             to={`${href}/blocks?sort=${sort}`}
-            isActive={this.isCurrent}
+            isActive={this.isModeActive('blocks')}
           >
             Blocks
           </ProfileLinkUnlessCurrent>
@@ -56,7 +57,7 @@ export default class ProfileMetadataView extends Component {
           name="filter"
           value="index"
           to={`${href}/index`}
-          isActive={this.isCurrent}
+          isActive={this.isModeActive('index')}
         >
           Index
         </ProfileLinkUnlessCurrent>
