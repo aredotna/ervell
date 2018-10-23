@@ -14,7 +14,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   user-select: none;
-
   ${space}
   ${preset(width, { width: '100%' })}
   ${preset(height, { height: '100%' })}
@@ -24,6 +23,8 @@ export default class LoadingIndicator extends Component {
   static propTypes = {
     frames: PropTypes.arrayOf(PropTypes.string),
     interval: PropTypes.number,
+    f: PropTypes.number,
+    color: PropTypes.string,
   }
 
   static defaultProps = {
@@ -33,6 +34,8 @@ export default class LoadingIndicator extends Component {
       '···',
     ],
     interval: 175,
+    f: 7,
+    color: 'gray.base',
   }
 
   state = {
@@ -51,11 +54,13 @@ export default class LoadingIndicator extends Component {
 
   render() {
     const { cursor } = this.state;
-    const { frames, ...rest } = this.props;
+    const {
+      frames, f, color, ...rest
+    } = this.props;
 
     return (
       <Container {...rest}>
-        <Text f={7} color="gray.base">
+        <Text f={f} color={color}>
           {frames[cursor % frames.length]}
         </Text>
       </Container>
