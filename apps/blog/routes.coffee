@@ -1,8 +1,7 @@
 $ = require 'cheerio'
 request = require 'superagent'
-{ BLOG_URL } = require('sharify').data
 
-truncate = require '../../lib/truncate.coffee'
+# truncate = require '../../lib/truncate.coffee'
 
 Posts = require '../../collections/posts.coffee'
 
@@ -10,26 +9,27 @@ Posts = require '../../collections/posts.coffee'
   posts = new Posts
   posts.fetch
     error: next
-    success: ->
-      res.locals.POSTS = posts
-      res.render 'index',
-        posts: posts.models
-        truncate: truncate
+    success: (a, b) ->
+      console.log(a, b)
+      # res.locals.POSTS = posts
+      # res.render 'index',
+      #   posts: posts.models
+      #   truncate: truncate
 
-@show = (req, res, next) ->
-  url = req.path.replace '/blog', ''
-  return next() if url is "/feed/rss"
+# @show = (req, res, next) ->
+#   url = req.path.replace '/blog', ''
+#   return next() if url is "/feed/rss"
 
-  request("#{BLOG_URL}#{url}")
-    .end (err, response) ->
-      $html = $(response?.text)
+#   request("#{BLOG_URL}#{url}")
+#     .end (err, response) ->
+#       $html = $(response?.text)
 
-      title = if $html.find('title').html() is 'Blog'
-        'Blog'
-      else
-        "Blog – #{$html.find('title').html()}"
+#       title = if $html.find('title').html() is 'Blog'
+#         'Blog'
+#       else
+#         "Blog – #{$html.find('title').html()}"
 
-      res.render 'show',
-        title: title
-        html: $html.find('.page-content').html()
-        image: $html.find('img').attr('src')
+#       res.render 'show',
+#         title: title
+#         html: $html.find('.page-content').html()
+#         image: $html.find('img').attr('src')
