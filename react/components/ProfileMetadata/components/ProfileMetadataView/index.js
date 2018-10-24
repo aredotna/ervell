@@ -24,7 +24,7 @@ export default class ProfileMetadataView extends Component {
       <Pocket title="View">
         {__typename === 'User' &&
           <ProfileLinkUnlessCurrent
-            name="filter"
+            name="mode"
             value="all"
             to={`${href}?sort=${sort}`}
             isActive={this.isModeActive('all')}
@@ -34,7 +34,7 @@ export default class ProfileMetadataView extends Component {
         }
 
         <ProfileLinkUnlessCurrent
-          name="filter"
+          name="mode"
           value="channels"
           to={`${href}/channels?sort=${sort}`}
           isActive={this.isModeActive('channels')}
@@ -44,7 +44,7 @@ export default class ProfileMetadataView extends Component {
 
         {__typename === 'User' &&
           <ProfileLinkUnlessCurrent
-            name="filter"
+            name="mode"
             value="blocks"
             to={`${href}/blocks?sort=${sort}`}
             isActive={this.isModeActive('blocks')}
@@ -54,7 +54,7 @@ export default class ProfileMetadataView extends Component {
         }
 
         <ProfileLinkUnlessCurrent
-          name="filter"
+          name="mode"
           value="index"
           to={`${href}/index`}
           isActive={this.isModeActive('index')}
