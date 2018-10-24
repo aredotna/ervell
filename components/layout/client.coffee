@@ -173,7 +173,7 @@ showDispatchMessage = ->
   model = new Backbone.Model
     id: 'arena_dispatch'
     title: '📬'
-    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://confirmsubscription.com/h/d/63777718A8377397'>Subscribe here</>."  
+    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://mailchi.mp/are.na/dispatch'>Subscribe here</>."  
 
   messageView = new MessageView model: model
 
