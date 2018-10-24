@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { wrapWithApolloProvider, initClientSideApolloClient } from 'react/apollo';
+import { wrapWithProviders, initClientSideApolloClient } from 'react/apollo';
 import mount from 'react/util/mount';
 import unmount from 'react/util/unmount';
 
@@ -19,7 +19,7 @@ export default class Modal {
   open = () => {
     document.body.appendChild(this.el);
 
-    const boot = wrapWithApolloProvider(initClientSideApolloClient());
+    const boot = wrapWithProviders(initClientSideApolloClient());
     const props = { onClose: this.close, ...this.props };
 
     const ModalApp = innerProps => (

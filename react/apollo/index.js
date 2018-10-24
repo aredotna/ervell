@@ -97,21 +97,21 @@ if (isClientSide) {
   initClientSideApolloClient();
 }
 
-// TODO: Rename to boot or something...?
-export const wrapWithApolloProvider = (client = isClientSide && window.__APOLLO_CLIENT__) =>
-  (Component, props = {}) => (
-    <ApolloProvider client={client}>
-      <Themed>
-        <Component {...props} />
-      </Themed>
-    </ApolloProvider>
-  );
+export const wrapWithProviders =
+  (client = isClientSide && window.__APOLLO_CLIENT__) =>
+    (Component, props = {}) => (
+      <ApolloProvider client={client}>
+        <Themed>
+          <Component {...props} />
+        </Themed>
+      </ApolloProvider>
+    );
 
 export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
   if (!mountNode) return null;
 
   const client = initClientSideApolloClient();
-  const WrappedComponent = wrapWithApolloProvider(client)(Component, props);
+  const WrappedComponent = wrapWithProviders(client)(Component, props);
 
   return mount(WrappedComponent, mountNode);
 };
