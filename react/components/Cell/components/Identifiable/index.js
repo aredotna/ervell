@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { space } from 'styled-system';
 import { propType } from 'graphql-anywhere';
 
 import constants from 'react/styles/constants';
 
 import identifiableCellFragment from 'react/components/Cell/components/Identifiable/fragments/identifiableCell';
 
+import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Badge from 'react/components/UI/Badge';
 import Truncate from 'react/components/UI/Truncate';
@@ -17,7 +19,19 @@ const IdentifiableFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
 `;
 
-const Container = styled.a`
+const Wrap = styled(Box).attrs({
+})`
+  display: flex;
+  flex: 0.33;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+`;
+
+const Container = styled.a.attrs({
+  px: 4,
+  mb: 8,
+})`
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -27,10 +41,9 @@ const Container = styled.a`
   text-decoration: none;
   width: ${x => x.theme.constantValues.blockWidth};
   height: ${x => x.theme.constantValues.blockWidth};
-  padding: ${x => `0 ${x.theme.space[4]}`};
-  margin-bottom: ${x => x.theme.space[8]};
   border: 2px solid ${x => x.theme.colors.gray.regular};
   border-radius: ${constants.radii.subtle};
+  ${space}
 
   &:hover {
     border-color: black;
@@ -72,17 +85,19 @@ export default class Indentifiable extends Component {
         mode={mode}
         __typename={identifiable.__typename}
       >
-        <Text f={5} pt={7} fontWeight="bold" textAlign="center">
-          <Truncate length={40}>
-            {identifiable.name}
-          </Truncate>
+        <Wrap>
+          <Text f={5} fontWeight="bold" textAlign="center">
+            <Truncate length={40}>
+              {identifiable.name}
+            </Truncate>
 
-          {identifiable.__typename === 'Group' &&
-            <Badge f={0} ml={4} icon={{ private: 'Lock' }[identifiable.visibility]}>
-              Group
-            </Badge>
-          }
-        </Text>
+            {identifiable.__typename === 'Group' &&
+              <Badge f={0} ml={4} icon={{ private: 'Lock' }[identifiable.visibility]}>
+                Group
+              </Badge>
+            }
+          </Text>
+        </Wrap>
 
         <MemberAvatar
           size={140}
@@ -90,12 +105,13 @@ export default class Indentifiable extends Component {
           circle={identifiable.__typename === 'Group'}
         />
 
-        <IdentifiableFollowButton
-          f={4}
-          mr={2}
-          id={identifiable.id}
-          type={identifiable.__typename.toUpperCase()}
-        />
+        <Wrap>
+          <IdentifiableFollowButton
+            f={4}
+            id={identifiable.id}
+            type={identifiable.__typename.toUpperCase()}
+          />
+        </Wrap>
       </Container>
     );
   }
