@@ -5,12 +5,12 @@ Promise = require 'bluebird-q'
 graphQL = require '../../lib/graphql'
 cached = require '../../lib/cached'
 ExploreBlocks = require '../../collections/explore_blocks'
-Posts = require '../../collections/posts.coffee'
+# Posts = require '../../collections/posts.coffee'
 truncate = require '../../lib/truncate.coffee'
 
 @index = (_req, res, next) ->
-  posts = new Posts
-  posts.url = "#{BLOG_URL}/featured.json"
+  # posts = new Posts
+  # posts.url = "#{BLOG_URL}/featured.json"
 
   userIds = (HOMEPAGE_EXPLORE_USER_IDS or '').split(',').map (x) -> parseInt(x, 10)
   exploreBlocks = new ExploreBlocks
@@ -18,11 +18,14 @@ truncate = require '../../lib/truncate.coffee'
 
   Promise.all [
     (cached 'homepage:explore-blocks', 3600, -> exploreBlocks.fetch())
-    posts.fetch()
+    # posts.fetch()
   ]
 
   .spread (exploreBlocksResponse) ->
-    locals = { truncate: truncate, posts: posts.models }
+    locals = {
+    truncate: truncate,
+    # posts: posts.models
+  }
 
     if exploreBlocksResponse?
       # Re-initialize the collection with the possibly cached response to parse it
