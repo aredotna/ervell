@@ -95,13 +95,13 @@ export default class Konnectable extends Component {
 
         {[
           {
-            Attachment: <Attachment key="attachment" attachment={konnectable} mode={mode} />,
-            Channel: <Channel key="channel" channel={konnectable} mode={mode} />,
-            Embed: <Embed key="embed" embed={konnectable} mode={mode} />,
-            Image: <Image key="image" image={konnectable} mode={mode} />,
-            Link: <Link key="link" link={konnectable} mode={mode} />,
-            Text: <Text key="text" text={konnectable} mode={mode} />,
-          }[konnectable.__typename],
+            Attachment: () => <Attachment key="attachment" attachment={konnectable} mode={mode} />,
+            Channel: () => <Channel key="channel" channel={konnectable} mode={mode} />,
+            Embed: () => <Embed key="embed" embed={konnectable} mode={mode} />,
+            Image: () => <Image key="image" image={konnectable} mode={mode} />,
+            Link: () => <Link key="link" link={konnectable} mode={mode} />,
+            Text: () => <Text key="text" text={konnectable} mode={mode} />,
+          }[konnectable.__typename](),
 
           konnectable.__typename !== 'Channel' &&
             <BlokkMetadata
