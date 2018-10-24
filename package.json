@@ -57,6 +57,7 @@
     "coffee-register": "^0.1.3",
     "coffeescript": "1.11.1",
     "connect-multiparty": "^2.0.0",
+    "contentful": "^7.0.5",
     "cookie-parser": "*",
     "cookie-session": "*",
     "cookies": "^0.5.0",
