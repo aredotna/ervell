@@ -41,7 +41,7 @@ blocker = require 'express-spam-referral-blocker'
 glob = require 'glob'
 AirbrakeClient = require 'airbrake-js'
 makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
-
+_ = require 'underscore'
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
 viewMode = require './middleware/view_mode'
@@ -135,9 +135,16 @@ module.exports = (app) ->
 
   console.log 'Mounting apps...'
 
+  console.log 'Watching for changes...'
+
   if NODE_ENV is 'development'
     mountAndReload = createReloadable(app, require)
-    modules = glob.sync('./react/**/*.js').map (name) => path.resolve(name)
+    modules = _.flatten([
+      glob.sync('./react/**/*.js'),
+      glob.sync('./models/**/*.coffee'),
+      glob.sync('./collections/**/*.coffee'),
+      glob.sync('./components/**/*.coffee')
+    ]).map (name) => path.resolve(name)
 
     app.use mountAndReload path.join(__dirname, '..', 'apps'), {
       watchModules: modules

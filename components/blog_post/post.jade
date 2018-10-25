@@ -1,17 +1,16 @@
-a.BlogPosts__post( href="/blog#{post.get('url')}" )
-  .BlogPosts__post-image(
-    style= "background-image: url(#{post.get('image')})"
-    alt= post.get('title')
+include ./partials/category_title
+
+a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
+  img.BlogPosts__post-image(
+    srcset=helpers.srcset(post.fields.image, [250, 500, 750])
+    sizes="250px"
+    alt=post.fields.title
   )
 
-  span.Type.Type--size-sm: strong= post.get('category')
-  h4.Type.Type--size-h4
-    = post.get('title')
+  +category-title
 
-  .BlogPosts__excerpt.Type--size-sm
-    | #{truncate(post.snippet(), 30)}
-  
-  p.Type.Type--size-sm
-    = post.get('date')
-    br
-    = post.get('author')
+  .BlogPosts__excerpt
+    | #{truncate(post.fields.description, 30)}
+
+  include ./partials/date_author
+

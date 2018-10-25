@@ -1,4 +1,5 @@
 extends ../../../components/layout/layouts/blank
+include ../../../components/blog_post/partials/category_title
 
 block title
   |  / !{title}
@@ -14,13 +15,21 @@ block container
 
   .Page.Page--narrow
     .BlogPost
-      != html
+      header.post-header
+        .post-category-title
+          +category-title(true)
+
+        include ../../../components/blog_post/partials/date_author
+      article.BlogPost__body
+        != helpers.formatRichTextWithImages(post.fields.body)
+
+
 
   hr.Base
   .Page.Page--narrow
     h2.Type.Type--size-h2.Utility--align-center
       | Are.na Blog
-    
+
     p.Type.Type--lh-tall.AboutParagraph
       | Learn about how people use Are.na to do work and pursue personal projects through case studies, interviews, and highlights.
     br

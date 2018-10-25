@@ -1,35 +1,27 @@
-$ = require 'cheerio'
 request = require 'superagent'
-
-# truncate = require '../../lib/truncate.coffee'
-
-Posts = require '../../collections/posts.coffee'
+truncate = require '../../lib/truncate.coffee'
+helpers = require '../../components/contentful/helpers.coffee'
+{ formatDate } = require '../../components/blog_post/helpers.coffee'
+posts = require '../../collections/posts.coffee'
 
 @index = (req, res, next) ->
-  posts = new Posts
-  posts.fetch
-    error: next
-    success: (a, b) ->
-      console.log(a, b)
-      # res.locals.POSTS = posts
-      # res.render 'index',
-      #   posts: posts.models
-      #   truncate: truncate
+  posts.fetchAll()
+    .then (response) ->
+      res.render 'index',
+        posts: response.items
+        truncate: truncate
+        formatDate: formatDate
+        helpers: helpers
+    .error next
 
-# @show = (req, res, next) ->
-#   url = req.path.replace '/blog', ''
-#   return next() if url is "/feed/rss"
+@show = (req, res, next) ->
 
-#   request("#{BLOG_URL}#{url}")
-#     .end (err, response) ->
-#       $html = $(response?.text)
+  slug = req.path.replace '/blog/', ''
+  return next() if slug is "feed/rss"
 
-#       title = if $html.find('title').html() is 'Blog'
-#         'Blog'
-#       else
-#         "Blog – #{$html.find('title').html()}"
-
-#       res.render 'show',
-#         title: title
-#         html: $html.find('.page-content').html()
-#         image: $html.find('img').attr('src')
+  posts.fetchWithSlug(slug)
+    .then (response) ->
+      res.render 'show',
+        post: response.items[0]
+        formatDate: formatDate
+        helpers: helpers

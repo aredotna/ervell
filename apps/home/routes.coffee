@@ -22,10 +22,7 @@ truncate = require '../../lib/truncate.coffee'
   ]
 
   .spread (exploreBlocksResponse) ->
-    locals = {
-    truncate: truncate,
-    # posts: posts.models
-  }
+    locals = { truncate: truncate, posts: [] }
 
     if exploreBlocksResponse?
       # Re-initialize the collection with the possibly cached response to parse it

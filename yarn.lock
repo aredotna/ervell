@@ -655,6 +655,16 @@
     follow-redirects "^1.2.5"
     is-buffer "^1.1.5"
 
+"@contentful/rich-text-html-renderer@^2.9.1":
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-html-renderer/-/rich-text-html-renderer-2.9.1.tgz#4ec8794e6520f129f09f63ebd5b34c1feed1861a"
+  dependencies:
+    "@contentful/rich-text-types" "^5.0.0"
+
+"@contentful/rich-text-types@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-5.0.0.tgz#d2d02d9b7c10115bcc960cee3e1c381eb9d16b84"
+
 "@danielkalen/source-map-support@^0.4.16":
   version "0.4.16"
   resolved "https://registry.yarnpkg.com/@danielkalen/source-map-support/-/source-map-support-0.4.16.tgz#9b19b25acb9a2a89c724d96e5a7837415c04c894"
