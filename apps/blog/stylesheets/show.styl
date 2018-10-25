@@ -3,33 +3,17 @@
   // Not going to bother with correcting *that*
   // So for now, force things to look correct
 
-  .post
-    //
+  .post-header
+    collapsed-margins(2em)
 
-    > .post-header
-      collapsed-margins(2em)
+  .post-category-title
+    margin-bottom: 1.5em
 
-      > .post-category-title
-        // No top margin because of hidden image
-        margin 0 0 1.5em 0
-
-        > h1:first-child
-          font-size font-size-xs
-          text-transform uppercase
-          font-weight bold
-          margin-bottom 0.75em
-
-        > h1
-          margin 0
-          text-align left
-          font-size font-size-h3
-          font-weight bold
-
-      > .post-author
-      > .post-meta
-        text-align left
-        font-size font-size-base
-        line-height line-height-base
+  .post-category
+    font-size font-size-xs
+    text-transform uppercase
+    font-weight bold
+    margin-bottom 0.75em
 
     > .post-content
       margin-bottom 8em
@@ -57,7 +41,7 @@
         font-size font-size-base
         line-height line-height-tall
 
-      small 
+      small
         font-size font-size-xs
 
       sup
@@ -71,7 +55,7 @@
         vertical-align bottom
         margin 2em auto
 
-      img 
+      img
         max-width 100%
 
       .arena-iframe
@@ -108,5 +92,5 @@
           collapsed-margins(2em)
         figcaption
           line-height line-height-tall
-        small 
+        small
           font-size font-size-xs
