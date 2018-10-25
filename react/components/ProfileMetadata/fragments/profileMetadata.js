@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 
+import profileAvatarFragment from 'react/components/ProfileMetadata/components/ProfileAvatar/fragments/profileAvatar';
 import profileBreadcrumbFragment from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/fragments/profileBreadcrumb';
 import profileMetadataActionsFragment from 'react/components/ProfileMetadata/components/ProfileMetadataActions/fragments/profileMetadataActions';
 import profileMetadataInfoFragment from 'react/components/ProfileMetadata/components/ProfileMetadataInfo/fragments/profileMetadataInfo';
@@ -9,6 +10,7 @@ import profileMetadataFilterFragment from 'react/components/ProfileMetadata/comp
 
 export default gql`
   fragment ProfileMetadata on Identifiable {
+    ... ProfileAvatar
     ... ProfileBreadcrumb
     ... ProfileMetadataActions
     ... ProfileMetadataInfo
@@ -17,6 +19,7 @@ export default gql`
     ... ProfileMetadataFilter
   }
 
+  ${profileAvatarFragment}
   ${profileBreadcrumbFragment}
   ${profileMetadataActionsFragment}
   ${profileMetadataInfoFragment}

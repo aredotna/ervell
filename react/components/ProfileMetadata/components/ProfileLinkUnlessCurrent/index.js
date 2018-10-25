@@ -43,7 +43,7 @@ export default class ProfileLinkUnlessCurrent extends Component {
     } = this.props;
 
     return (
-      <Link {...rest} onClick={this.setCookie} activeClass="active" />
+      <Link {...rest} onClick={this.setCookie} />
     );
   }
 }

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import {
   display,
+  position,
   space,
   width,
   height,
@@ -20,6 +21,7 @@ import { neutralMargins } from 'react/styles/mixins';
 export const mixin = css`
   box-sizing: border-box;
   ${display}
+  ${position}
   ${width}
   ${height}
   ${minHeight}

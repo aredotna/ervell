@@ -13,8 +13,13 @@ const mixin = css`
   background-color: ${x => x.theme.colors.gray.semiLight};
   ${x => x.circle && 'border-radius: 50%;'}
   text-decoration: none;
-  ${space}
   overflow: hidden;
+  ${space}
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const e = React.createElement;
