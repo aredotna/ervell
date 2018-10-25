@@ -22,8 +22,8 @@ export default class CollaboratorsListItemGroup extends Component {
           title={group.description}
         >
           {group.name}
-
-          <Badge f={0} ml={4} color="gray.medium" icon={{ private: 'Lock' }[group.visibility]}>
+          &nbsp;
+          <Badge f={0}color="gray.medium" icon={{ private: 'Lock' }[group.visibility]}>
             Group
           </Badge>
         </Link>
