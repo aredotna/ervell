@@ -10,6 +10,7 @@ storiesOf('SearchInput', module)
     <Specimen>
       <SearchInput
         onQueryChange={action('onQueryChange')}
+        onDebouncedQueryChange={action('onDebouncedQueryChange')}
         placeholder="search"
       />
     </Specimen>

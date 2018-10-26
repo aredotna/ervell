@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isEmpty } from 'underscore';
+import { isEmpty, debounce } from 'underscore';
 
+import Box from 'react/components/UI/Box';
 import Icons from 'react/components/UI/Icons';
 import { Input } from 'react/components/UI/Inputs';
-
-const Container = styled.div`
-  position: relative;
-`;
 
 const Icon = styled.div`
   display: flex;
@@ -25,15 +22,24 @@ const Icon = styled.div`
 export default class SearchInput extends Component {
   static propTypes = {
     query: PropTypes.string,
-    onQueryChange: PropTypes.func.isRequired,
+    onQueryChange: PropTypes.func,
+    onDebouncedQueryChange: PropTypes.func,
+    debounceWait: PropTypes.number,
   }
 
   static defaultProps = {
     query: '',
+    onQueryChange: () => {},
+    onDebouncedQueryChange: () => {},
+    debounceWait: 250,
   }
 
   constructor(props) {
     super(props);
+
+    const { debounceWait, onDebouncedQueryChange } = props;
+
+    this.handleDebouncedQueryChange = debounce(onDebouncedQueryChange, debounceWait);
 
     this.state = {
       mode: 'resting',
@@ -49,6 +55,7 @@ export default class SearchInput extends Component {
 
   resetState = () => {
     this.setState({ query: '', mode: 'resting' });
+    this.input.value = '';
     this.input.focus();
   }
 
@@ -61,18 +68,27 @@ export default class SearchInput extends Component {
 
     this.setState(currentState);
     this.props.onQueryChange(query);
+    this.handleDebouncedQueryChange(query);
   }
 
   handleReset = () => {
     this.resetState();
     this.props.onQueryChange('');
+    this.props.onDebouncedQueryChange('');
   }
 
   render() {
+    const {
+      query: _query,
+      onQueryChange: _onQueryChange,
+      onDebouncedQueryChange: _onDebouncedQueryChange,
+      debounceWait: _debounceWait,
+      ...rest
+    } = this.props;
     const { mode, query } = this.state;
 
     return (
-      <Container>
+      <Box position="relative" {...rest}>
         <Icon onClick={this.handleReset}>
           <Icons
             color="gray.medium"
@@ -89,9 +105,9 @@ export default class SearchInput extends Component {
           {...this.props}
           innerRef={(input) => { this.input = input; }}
           onChange={this.handleChange}
-          value={query}
+          defaultValue={query}
         />
-      </Container>
+      </Box>
     );
   }
 }
