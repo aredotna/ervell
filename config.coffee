@@ -35,9 +35,6 @@ module.exports =
   AIRBRAKE_API_KEY: null
   CONTENTFUL_SPACE_ID: null
   CONTENTFUL_ACCESS_TOKEN: null
-  CONTENTFUL_BLOG_POST_TYPE_ID: null
-  CONTENTFUL_POSTS_LIST_TYPE_ID: null
-  CONTENTFUL_FEATURED_POSTS_ENTRY_ID: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports

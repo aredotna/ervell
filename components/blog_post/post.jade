@@ -10,7 +10,7 @@ a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
   +category-title
 
   .BlogPosts__excerpt
-    != documentToHtmlString(post.fields.previewText)
+    = post.fields.previewText
 
   include ./partials/date_author
 
