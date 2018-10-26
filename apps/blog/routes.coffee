@@ -8,6 +8,7 @@ posts = require '../../collections/posts.coffee'
   posts.fetchAll()
     .then (response) ->
       res.render 'index',
+        title: 'Blog'
         posts: response.items
         formatDate: formatDate
         srcset: contentfulFormatter.srcset
@@ -26,6 +27,8 @@ posts = require '../../collections/posts.coffee'
       post = response.items[0]
       body = contentfulFormatter.formatRichTextWithImages(post.fields.body, { srcsetSizes: [670, 670 * 2, 670 * 3], sizes: "(min-width: 670px) 670px, 100vw" })
       res.render 'show',
+        title: post.fields.title
+        image: post.fields.image.fields.file.url + '?w=600'
         post: post
         formatDate: formatDate
         body: body
