@@ -9,6 +9,7 @@ import ProfileContents from 'react/components/ProfileContents';
 import ProfileChannels from 'react/components/ProfileChannels';
 import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
 import ProfileFollows from 'react/components/ProfileFollows';
+import EmptyMessageOrComponent from 'react/pages/profile/ProfilePage/components/EmptyMessageOrComponent';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -40,8 +41,8 @@ export default class ProfilePage extends Component {
 
           const { identity: { identifiable } } = data;
 
-          // TODO: Clean this up. This currently just falls back to a different view
-          // when the current one isn't supported for Groups.
+          // Falls back to a supported view when the current
+          // one isn't supported for Groups (all, blocks).
           const typedView = identifiable.__typename === 'Group'
             ? { all: 'channels', blocks: 'channels' }[view] || view
             : view;
@@ -56,13 +57,35 @@ export default class ProfilePage extends Component {
               />
 
               {{
-                all: <ProfileContents id={id} sort={sort} />,
-                blocks: <ProfileContents id={id} type="BLOCK" sort={sort} />,
-                channels: <ProfileChannels id={id} sort={sort} />,
-                index: <ProfileChannelIndex id={id} type={filter} />,
-                followers: <ProfileFollows id={id} type="followers" />,
-                following: <ProfileFollows id={id} type="following" />,
-              }[typedView]}
+                all: () => (
+                  <EmptyMessageOrComponent
+                    count={identifiable.counts.channels + identifiable.counts.blocks}
+                  >
+                    <ProfileContents id={id} sort={sort} />
+                  </EmptyMessageOrComponent>
+                ),
+                blocks: () => (
+                  <EmptyMessageOrComponent count={identifiable.counts.blocks}>
+                    <ProfileContents id={id} type="BLOCK" sort={sort} />
+                  </EmptyMessageOrComponent>
+                ),
+                channels: () => (
+                  <EmptyMessageOrComponent count={identifiable.counts.channels}>
+                    <ProfileChannels id={id} sort={sort} />
+                  </EmptyMessageOrComponent>
+                ),
+                index: () => (
+                  <EmptyMessageOrComponent count={identifiable.counts.channels}>
+                    <ProfileChannelIndex id={id} type={filter} />
+                  </EmptyMessageOrComponent>
+                ),
+                followers: () => (
+                  <ProfileFollows id={id} type="followers" />
+                ),
+                following: () => (
+                  <ProfileFollows id={id} type="following" />
+                ),
+              }[typedView]()}
             </div>
           );
         }}

@@ -9,6 +9,17 @@ export default gql`
       identifiable {
         __typename
         ... ProfileMetadata
+        ... on User {
+          counts {
+            channels
+            blocks
+          }
+        }
+        ... on Group {
+          counts {
+            channels
+          }
+        }
       }
     }
   }
