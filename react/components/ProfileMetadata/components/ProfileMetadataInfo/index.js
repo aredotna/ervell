@@ -9,7 +9,6 @@ import profileMetadataInfoFragment from 'react/components/ProfileMetadata/compon
 import Box from 'react/components/UI/Box';
 import Pocket from 'react/components/UI/Pocket';
 import { Expandable } from 'react/components/UI/ExpandableSet';
-import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
 
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
