@@ -1,7 +1,7 @@
 request = require 'superagent'
-truncate = require '../../lib/truncate.coffee'
-helpers = require '../../components/contentful/helpers.coffee'
+contentfulFormatter = require '../../components/contentful/helpers.coffee'
 { formatDate } = require '../../components/blog_post/helpers.coffee'
+{ documentToHtmlString } = require '@contentful/rich-text-html-renderer'
 posts = require '../../collections/posts.coffee'
 
 @index = (req, res, next) ->
@@ -9,9 +9,9 @@ posts = require '../../collections/posts.coffee'
     .then (response) ->
       res.render 'index',
         posts: response.items
-        truncate: truncate
         formatDate: formatDate
-        helpers: helpers
+        srcset: contentfulFormatter.srcset
+        documentToHtmlString: documentToHtmlString
     .error next
 
 @show = (req, res, next) ->
@@ -21,7 +21,13 @@ posts = require '../../collections/posts.coffee'
 
   posts.fetchWithSlug(slug)
     .then (response) ->
+      if response.items.length < 1
+        return next();
+      post = response.items[0]
+      body = contentfulFormatter.formatRichTextWithImages(post.fields.body, { srcsetSizes: [670, 670 * 2, 670 * 3], sizes: "(min-width: 670px) 670px, 100vw" })
       res.render 'show',
-        post: response.items[0]
+        post: post
         formatDate: formatDate
-        helpers: helpers
+        body: body
+        bio: documentToHtmlString(post.fields.author.fields.bio)
+    .error next

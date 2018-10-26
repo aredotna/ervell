@@ -1,96 +1,107 @@
 .BlogPost
-  // Classes come through with Jekyll generated HTML
-  // Not going to bother with correcting *that*
-  // So for now, force things to look correct
-
-  .post-header
+  margin-bottom 8em
+  line-height line-height-tall
+  header.post-header
     collapsed-margins(2em)
 
-  .post-category-title
-    margin-bottom: 1.5em
+    .post-category-title
+      margin-bottom: 1.5em
 
-  .post-category
-    font-size font-size-xs
-    text-transform uppercase
-    font-weight bold
-    margin-bottom 0.75em
+  p, blockquote
+    collapsed-margins(2em)
 
-    > .post-content
-      margin-bottom 8em
+  a
+    text-decoration underline
+
+  article
+    font-size font-size-base
+    a
       position relative
+      span
+        display none
+        color colors-gray-text
+        border button-border-width solid colors-gray-hover
+        padding .5em 1em
+        position absolute
+        white-space nowrap
+        background-color white
+        left calc(100% + .25em)
+        top -.75em
+        z-index 1
+        font-size font-size-sm
+        &:hover
+          color colors-gray-hover
+        &:before {
+          // Expand hover area and avoid gap between inline link text and tooltip so hover is maintained
+          position absolute
+          left -.25em
+          right -.25em
+          top -.25em
+          bottom -.25em
+          content ''
+        }
 
-      a
-        text-decoration underline
-
-      ol, li
-        font-size font-size-base
-        line-height line-height-tall
-
-      ol
-        ol()
-
-      ul
-        ul()
-
-      blockquote
-        collapsed-margins(2em)
-        line-height line-height-tall
-
-      p
-        collapsed-margins(2em)
-        font-size font-size-base
-        line-height line-height-tall
-
-      small
-        font-size font-size-xs
-
-      sup
-        vertical-align super
-        font-size font-size-xs
-
-      img
-      iframe
+    a:hover
+      span
         display block
-        max-width 80%
-        vertical-align bottom
-        margin 2em auto
 
+    sup
+      vertical-align super
+      font-size font-size-xs
+
+    img
+    iframe
+      display block
+      vertical-align bottom
+
+    iframe
+      max-width 80%
+      margin 2em auto
+
+    img
+      max-width 100%
+
+    .arena-iframe
+      border 1px solid colors-gray-border
+      box-shadow 4px 4px 4px colors-gray-background
+      height 2150px !important
+      margin 4em auto
+      padding 1px
+
+      +mobile()
+        margin 4em 0
+        min-width 100%
+      +below(400px)
+        height 2000px !important
+      +below(380px)
+        height 1950px !important
+      +below(340px)
+        height 1700px !important
+
+    h1, h2, h3, h4, h5, h6
+      collapsed-margins(.5em)
+    h1
+      h1(1.75em)
+    h2
+      h2(1.5em)
+    h3
+      h3(1.3em)
+    h4
+      h4(1.1em)
+    h5
+      h5()
+    h6
+      h6()
+
+    figure
+      collapsed-margins(4em)
       img
-        max-width 100%
-
-      .arena-iframe
-        border 1px solid colors-gray-border
-        box-shadow 4px 4px 4px colors-gray-background
-        height 2150px !important
-        margin 4em auto
-        padding 1px
-
-        +mobile()
-          margin 4em 0
-          min-width 100%
-        +below(400px)
-          height 2000px !important
-        +below(380px)
-          height 1950px !important
-        +below(340px)
-          height 1700px !important
-
-      h2
         collapsed-margins(2em)
+      figcaption
+        font-size font-size-xs
 
-      hr
-        collapsed-margins(3em)
-        height 2px
-        background-color colors-gray-border
-        border none
-
-      figure
-        collapsed-margins(4em)
-        h5
-          collapsed-margins(1em)
-        img, iframe, video
-          collapsed-margins(2em)
-        figcaption
-          line-height line-height-tall
-        small
-          font-size font-size-xs
+  hr
+    collapsed-margins(3em)
+    height 2px
+    background-color colors-gray-border
+    border none

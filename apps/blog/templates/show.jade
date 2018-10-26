@@ -2,7 +2,10 @@ extends ../../../components/layout/layouts/blank
 include ../../../components/blog_post/partials/category_title
 
 block title
-  |  / !{title}
+  |  / !{post.fields.title}
+
+block image
+  | abcdefg
 
 block scripts
   script( src= asset('/assets/blog.js') )
@@ -20,10 +23,12 @@ block container
           +category-title(true)
 
         include ../../../components/blog_post/partials/date_author
-      article.BlogPost__body
-        != helpers.formatRichTextWithImages(post.fields.body)
-
-
+      article.post-content
+        != body
+      if bio && bio.length > 0
+        hr
+        .post-author-bio
+          != bio
 
   hr.Base
   .Page.Page--narrow
