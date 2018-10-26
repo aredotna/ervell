@@ -86,7 +86,7 @@ export default class Alert extends Component {
 
     return (
       <Container bg="state.editable" border="1px solid" borderColor="gray.light" py={5} px={6} {...rest}>
-        <Text f={2} color={color} pr={isCloseable && 8}>
+        <Text f={2} color={color} pr={isCloseable && 8} underlineLinks>
           {children}
         </Text>
 

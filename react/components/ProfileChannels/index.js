@@ -8,7 +8,7 @@ import constants from 'react/styles/constants';
 import profileChannelsQuery from 'react/components/ProfileChannels/queries/profileChannels';
 
 import Grid from 'react/components/UI/Grid';
-import Alert from 'react/components/UI/Alert';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import SearchInput from 'react/components/UI/SearchInput';
 import Cell from 'react/components/Cell';
 import ChannelRow from 'react/components/ProfileChannels/components/ChannelRow';
@@ -51,9 +51,9 @@ export default class ProfileChannels extends Component {
         }) => {
           if (error) {
             return (
-              <Alert mb={6} bg="state.alert" color="white">
+              <ErrorAlert>
                 {error.message}
-              </Alert>
+              </ErrorAlert>
             );
           }
 
