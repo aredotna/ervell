@@ -60,6 +60,13 @@ const Mocks = {
     content: Array(random.number(20)).fill(undefined)
       .map(() => `<p>${lorem.paragraph()}</p>`).join(''),
   }),
+
+  Deed: () => ({
+    key: random.uuid(),
+    created_at: `${random.number({ min: 1, max: 10 })} hours ago`,
+    action: random.arrayElement(["connected","followed","created","commented on", "connected"]),
+    connector: random.arrayElement(["on", "to"]),
+  }),
 };
 
 export default Mocks;
