@@ -7,7 +7,8 @@ export default gql`
     ... on User {
       __typename
       id: slug
-      contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: $sort) {
+      name
+      contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: $sort, q: $q) {
         ... KonnectableCell
       }
     }
