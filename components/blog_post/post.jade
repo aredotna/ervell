@@ -2,7 +2,7 @@ include ./partials/category_title
 
 a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
   img.BlogPosts__post-image(
-    srcset=helpers.srcset(post.fields.image, [250, 500, 750])
+    srcset=srcset(post.fields.image, [250, 500, 750])
     sizes="250px"
     alt=post.fields.title
   )
@@ -10,7 +10,7 @@ a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
   +category-title
 
   .BlogPosts__excerpt
-    | #{truncate(post.fields.description, 30)}
+    != documentToHtmlString(post.fields.previewText)
 
   include ./partials/date_author
 

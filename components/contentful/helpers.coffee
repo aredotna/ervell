@@ -1,4 +1,4 @@
-{ BLOCKS } = require '@contentful/rich-text-types'
+{ BLOCKS, INLINES } = require '@contentful/rich-text-types'
 { documentToHtmlString } = require '@contentful/rich-text-html-renderer'
 
 module.exports =
@@ -8,38 +8,37 @@ module.exports =
         return "#{asset.fields.file.url}?w=#{size} #{size}w"
       .join ', '
 
-  imgEl: (asset, { sizes, elClass, srcsetSizes } = { sizes: "100vw", elClass: '', srcsetSizes })->
+  figure: (asset, { sizes = "100vw", elClass = "", srcsetSizes } = { sizes, elClass, srcsetSizes })->
     return """
-      <img
-        sizes='#{sizes}'
-        srcset='#{this.srcset asset, srcsetSizes}'
-        alt='#{asset.fields.title || ''}'
-        class='#{elClass}'
-      />
+      <figure>
+        <img
+          sizes='#{sizes}'
+          srcset='#{@srcset asset, srcsetSizes}'
+          alt='#{asset.fields.title || ''}'
+          class='#{elClass}'
+        />
+        <figcaption>#{asset.fields.description}</figcaption>
+      </figure>
     """
 
   assetEl: (asset, options) ->
     # required: asset
     # optional: sizes, elClass, srcsetSizes
-
     if asset.fields.file.contentType.match('image.*')
-      return @imgEl(asset, options)
+      return @figure(asset, options)
     else
       return ''
 
     # Rendering of other media types can be supported
 
-  captionEl: (asset) ->
-    # required: asset
-    # optional: sizes, elClass, srcsetSizes
-    return "<p>#{asset.fields.description}</p>"
-
   formatRichTextWithImages: (raw, imageOptions) ->
     # optional: imageOptions: sizes, srcsetSizes, elClass
-
+    footnotes = [];
     renderOptions = renderNode : {}
+
     renderOptions.renderNode[BLOCKS.EMBEDDED_ASSET] = (node, next) =>
       asset = node.data.target
-      return @assetEl(asset, imageOptions) + @captionEl(asset)
+      return @assetEl(asset, imageOptions)
 
-    return documentToHtmlString raw, renderOptions
+    formatted = documentToHtmlString raw, renderOptions
+    return formatted
