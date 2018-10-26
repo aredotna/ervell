@@ -14,11 +14,18 @@ export default gql`
           ... KonnectableCell
         }
       }
+      counts {
+        channels
+      }
     }
     ... on User {
       __typename
       id: slug
-      channels: kontents(type: CHANNEL, page: $page, per: $per, sort_by: $sort) {
+      name
+      counts {
+        channels
+      }
+      channels: kontents(type: CHANNEL, page: $page, per: $per, sort_by: $sort, q: $q) {
         ... Channel
 
         ... on Channel {
