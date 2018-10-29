@@ -59,23 +59,33 @@ export default class ProfilePage extends Component {
               {{
                 all: () => (
                   <EmptyMessageOrComponent
+                    identifiable={identifiable}
                     count={identifiable.counts.channels + identifiable.counts.blocks}
                   >
                     <ProfileContents id={id} sort={sort} />
                   </EmptyMessageOrComponent>
                 ),
                 blocks: () => (
-                  <EmptyMessageOrComponent count={identifiable.counts.blocks}>
+                  <EmptyMessageOrComponent
+                    identifiable={identifiable}
+                    count={identifiable.counts.blocks}
+                  >
                     <ProfileContents id={id} type="BLOCK" sort={sort} />
                   </EmptyMessageOrComponent>
                 ),
                 channels: () => (
-                  <EmptyMessageOrComponent count={identifiable.counts.channels}>
+                  <EmptyMessageOrComponent
+                    identifiable={identifiable}
+                    count={identifiable.counts.channels}
+                  >
                     <ProfileChannels id={id} sort={sort} />
                   </EmptyMessageOrComponent>
                 ),
                 index: () => (
-                  <EmptyMessageOrComponent count={identifiable.counts.channels}>
+                  <EmptyMessageOrComponent
+                    identifiable={identifiable}
+                    count={identifiable.counts.channels}
+                  >
                     <ProfileChannelIndex id={id} type={filter} />
                   </EmptyMessageOrComponent>
                 ),

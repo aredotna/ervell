@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import ProfileEmptyMessage from 'react/components/ProfileEmptyMessage';
 
-const EmptyMessageOrComponent = ({ count, children }) => {
+const EmptyMessageOrComponent = ({ count, children, ...rest }) => {
   if (count === 0) {
-    return <ProfileEmptyMessage />;
+    return <ProfileEmptyMessage {...rest} />;
   }
 
   return children;
