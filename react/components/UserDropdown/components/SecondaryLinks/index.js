@@ -33,7 +33,7 @@ export default class SecondaryLinks extends Component {
           More tools
         </SmallLink>
 
-        <SmallLink href="/faqs">
+        <SmallLink href="http://help.are.na">
           Help / FAQs
         </SmallLink>
 
