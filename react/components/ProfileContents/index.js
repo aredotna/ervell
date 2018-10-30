@@ -35,9 +35,35 @@ export default class ProfileContents extends Component {
     this.setState({ q, page: 1, hasMore: true });
   }
 
+  loadMore = fetchMore => () => {
+    const { page, per } = this.state;
+
+    fetchMore({
+      variables: { page: page + 1, per },
+      updateQuery: (prevResult, { fetchMoreResult }) => ({
+        ...prevResult,
+        identity: {
+          ...prevResult.identity,
+          identifiable: {
+            ...prevResult.identity.identifiable,
+            contents: [
+              ...prevResult.identity.identifiable.contents,
+              ...fetchMoreResult.identity.identifiable.contents,
+            ],
+          },
+        },
+      }),
+    }).then((res) => {
+      this.setState({
+        page: page + 1,
+        hasMore: !res.errors && res.data.identity.identifiable.contents.length > 0,
+      });
+    });
+  }
+
   render() {
     const {
-      page, per, hasMore, q,
+      per, hasMore, q,
     } = this.state;
     const { id, type, sort } = this.props;
 
@@ -85,35 +111,10 @@ export default class ProfileContents extends Component {
                 <Grid
                   pageStart={1}
                   threshold={500}
+                  initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={hasMore}
-                  loadMore={() => {
-                    fetchMore({
-                      variables: { page: page + 1, per },
-                      updateQuery: (prevResult, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prevResult;
-
-                        return {
-                          ...prevResult,
-                          identity: {
-                            ...prevResult.identity,
-                            identifiable: {
-                              ...prevResult.identity.identifiable,
-                              contents: [
-                                ...prevResult.identity.identifiable.contents,
-                                ...fetchMoreResult.identity.identifiable.contents,
-                              ],
-                            },
-                          },
-                        };
-                      },
-                    }).then((res) => {
-                      this.setState({
-                        page: page + 1,
-                        hasMore: !res.errors && res.data.identity.identifiable.contents.length > 0,
-                      });
-                    });
-                  }}
+                  loadMore={this.loadMore(fetchMore)}
                 >
                   {contents.map(blokk => (
                     <Cell.Konnectable

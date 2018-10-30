@@ -21,8 +21,39 @@ export default class ProfileFollows extends Component {
     hasMore: true,
   }
 
+  loadMore = fetchMore => () => {
+    const { page, per } = this.state;
+    const { type } = this.props;
+
+    fetchMore({
+      variables: { page: page + 1, per },
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult;
+
+        return {
+          ...prevResult,
+          identity: {
+            ...prevResult.identity,
+            identifiable: {
+              ...prevResult.identity.identifiable,
+              [type]: [
+                ...prevResult.identity.identifiable[type],
+                ...fetchMoreResult.identity.identifiable[type],
+              ],
+            },
+          },
+        };
+      },
+    }).then((res) => {
+      this.setState({
+        page: page + 1,
+        hasMore: !res.errors && res.data.identity.identifiable[type].length > 0,
+      });
+    });
+  }
+
   render() {
-    const { page, per, hasMore } = this.state;
+    const { per, hasMore } = this.state;
     const { id, type } = this.props;
 
     return (
@@ -45,35 +76,10 @@ export default class ProfileFollows extends Component {
             <Grid
               pageStart={1}
               threshold={500}
+              initialLoad={false}
               loader={<BlocksLoadingIndicator key="loading" />}
               hasMore={hasMore}
-              loadMore={() => {
-                fetchMore({
-                  variables: { page: page + 1, per },
-                  updateQuery: (prevResult, { fetchMoreResult }) => {
-                    if (!fetchMoreResult) return prevResult;
-
-                    return {
-                      ...prevResult,
-                      identity: {
-                        ...prevResult.identity,
-                        identifiable: {
-                          ...prevResult.identity.identifiable,
-                          [type]: [
-                            ...prevResult.identity.identifiable[type],
-                            ...fetchMoreResult.identity.identifiable[type],
-                          ],
-                        },
-                      },
-                    };
-                  },
-                }).then((res) => {
-                  this.setState({
-                    page: page + 1,
-                    hasMore: !res.errors && res.data.identity.identifiable[type].length > 0,
-                  });
-                });
-              }}
+              loadMore={this.loadMore(fetchMore)}
             >
               {collection.map(cell => ({
                   Channel: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,

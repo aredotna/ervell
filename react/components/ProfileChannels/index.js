@@ -32,10 +32,34 @@ export default class ProfileChannels extends Component {
     this.setState({ q, page: 1, hasMore: true });
   }
 
+  loadMore = fetchMore => () => {
+    const { page, per } = this.state;
+
+    fetchMore({
+      variables: { page: page + 1, per },
+      updateQuery: (prevResult, { fetchMoreResult }) => ({
+        ...prevResult,
+        identity: {
+          ...prevResult.identity,
+          identifiable: {
+            ...prevResult.identity.identifiable,
+            channels: [
+              ...prevResult.identity.identifiable.channels,
+              ...fetchMoreResult.identity.identifiable.channels,
+            ],
+          },
+        },
+      }),
+    }).then((res) => {
+      this.setState({
+        page: page + 1,
+        hasMore: !res.errors && res.data.identity.identifiable.channels.length > 0,
+      });
+    });
+  }
+
   render() {
-    const {
-      page, per, hasMore, q,
-    } = this.state;
+    const { per, hasMore, q } = this.state;
     const { id, sort } = this.props;
 
     return (
@@ -84,35 +108,10 @@ export default class ProfileChannels extends Component {
                 <InfiniteScroll
                   pageStart={1}
                   threshold={500}
+                  initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={hasMore}
-                  loadMore={() => {
-                    fetchMore({
-                      variables: { page: page + 1, per },
-                      updateQuery: (prevResult, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prevResult;
-
-                        return {
-                          ...prevResult,
-                          identity: {
-                            ...prevResult.identity,
-                            identifiable: {
-                              ...prevResult.identity.identifiable,
-                              channels: [
-                                ...prevResult.identity.identifiable.channels,
-                                ...fetchMoreResult.identity.identifiable.channels,
-                              ],
-                            },
-                          },
-                        };
-                      },
-                    }).then((res) => {
-                      this.setState({
-                        page: page + 1,
-                        hasMore: !res.errors && res.data.identity.identifiable.channels.length > 0,
-                      });
-                    });
-                  }}
+                  loadMore={this.loadMore(fetchMore)}
                 >
                   {channels.map(channel => (
                     <ChannelRow key={channel.id}>
