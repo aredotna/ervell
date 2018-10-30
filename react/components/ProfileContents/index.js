@@ -115,8 +115,13 @@ export default class ProfileContents extends Component {
                     });
                   }}
                 >
-                  {contents.map(blokk =>
-                    <Cell.Konnectable key={`${blokk.__typename}_${blokk.id}`} konnectable={blokk} />)}
+                  {contents.map(blokk => (
+                    <Cell.Konnectable
+                      key={`${blokk.__typename}_${blokk.id}`}
+                      konnectable={blokk}
+                      context={contents}
+                    />
+                  ))}
                 </Grid>
               }
             </div>

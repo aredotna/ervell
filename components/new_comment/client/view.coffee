@@ -1,7 +1,6 @@
 xss = require 'xss'
 { pick, invoke } = require 'underscore'
 Backbone = require 'backbone'
-Backbone.$ = $
 Comment = require '../../../models/comment.coffee'
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'

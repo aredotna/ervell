@@ -1,11 +1,10 @@
 _ = require 'underscore'
 Backbone = require 'backbone'
-Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
 mediator = require '../../../lib/mediator.coffee'
 SearchBlocks = require '../../../collections/search_blocks.coffee'
-getCaretCoordinates = require '../../../lib/vendor/textarea-caret-position'
+getCaretCoordinates = -> require '../../../lib/vendor/textarea-caret-position'
 
 template = -> require('../templates/mention_quicksearch.jade') arguments...
 
@@ -121,7 +120,7 @@ module.exports = class MentionQuicksearchView extends Backbone.View
 
       if afterStart && beforeEnd
         inputPosition = @$input.position()
-        tokenPosition = getCaretCoordinates(@$input[0], start)
+        tokenPosition = getCaretCoordinates()(@$input[0], start)
         tokenData =
           text: token,
           start: start,

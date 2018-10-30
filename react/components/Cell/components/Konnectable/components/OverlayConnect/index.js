@@ -39,11 +39,15 @@ export default class OverlayConnect extends Component {
     type: PropTypes.oneOf(['CHANNEL', 'BLOCK']).isRequired,
     onClose: PropTypes.func.isRequired,
   }
+
+  stopPropagation = e =>
+    e.stopPropagation();
+
   render() {
     const { id, type, onClose } = this.props;
 
     return (
-      <Container>
+      <Container onClick={this.stopPropagation}>
         <Box flex="1">
           <ConnectionSelection id={id} type={type} isOutlined={false} />
         </Box>

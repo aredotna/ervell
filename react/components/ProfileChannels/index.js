@@ -119,8 +119,13 @@ export default class ProfileChannels extends Component {
                       <Grid>
                         <Cell.Konnectable konnectable={channel} />
 
-                        {channel.blokks.map(blokk =>
-                          <Cell.Konnectable key={`${blokk.__typename}_${blokk.id}`} konnectable={blokk} />)}
+                        {channel.blokks.map(blokk => (
+                          <Cell.Konnectable
+                            key={`${blokk.__typename}_${blokk.id}`}
+                            konnectable={blokk}
+                            context={channel.blokks}
+                          />
+                        ))}
                       </Grid>
                     </ChannelRow>
                   ))}

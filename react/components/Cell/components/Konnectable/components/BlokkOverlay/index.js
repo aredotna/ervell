@@ -46,6 +46,7 @@ class BlokkOverlay extends Component {
 
   openSource = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const { konnectable: { source: { url: href } } } = this.props;
 
@@ -54,6 +55,7 @@ class BlokkOverlay extends Component {
 
   openConnect = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const { isLoggedIn, onOverlay } = this.props;
 
@@ -69,6 +71,7 @@ class BlokkOverlay extends Component {
 
   closeConnect = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     this.setState({ mode: 'resting' });
     this.props.onClose();

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
+
+import openLegacyBlockLightbox from 'react/util/openLegacyBlockLightbox';
 
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
@@ -53,6 +56,14 @@ const Comments = styled(Typography).attrs({
 export default class Konnectable extends Component {
   static propTypes = {
     konnectable: propType(konnectableCellFragment).isRequired,
+    context: PropTypes.arrayOf(PropTypes.shape({
+      __typename: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+    })),
+  }
+
+  static defaultProps = {
+    context: [],
   }
 
   state = {
@@ -75,6 +86,19 @@ export default class Konnectable extends Component {
   onOverlayClose = () =>
     this.setState({ mode: 'hover' });
 
+  openBlock = (e) => {
+    const { konnectable: { __typename, id }, context } = this.props;
+
+    if (e.metaKey || e.ctrlKey || __typename === 'Channel') return null;
+
+    e.preventDefault();
+
+    return openLegacyBlockLightbox({
+      id,
+      context: context.filter(k => k.__typename !== 'Channel'),
+    });
+  }
+
   render() {
     const { mode } = this.state;
     const { konnectable } = this.props;
@@ -86,6 +110,7 @@ export default class Konnectable extends Component {
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
+        onClick={this.openBlock}
       >
         {konnectable.counts.comments > 0 && mode !== 'overlay' &&
           <Comments>
