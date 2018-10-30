@@ -21,6 +21,7 @@ export default gql`
       id
       label: name
       href
+      is_me
     }
 
     ... on Comment {
