@@ -135,9 +135,8 @@ module.exports = (app) ->
 
   console.log 'Mounting apps...'
 
-  console.log 'Watching for changes...'
-
   if NODE_ENV is 'development'
+    console.log 'Watching for changes...'
     mountAndReload = createReloadable(app, require)
     modules = _.flatten([
       glob.sync('./react/**/*.js'),
