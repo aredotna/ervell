@@ -9,3 +9,4 @@ public/assets/*
 node_modules
 dump.rdb
 manifest.json
+yarn-error.log
