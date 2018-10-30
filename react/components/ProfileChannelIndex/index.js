@@ -11,6 +11,7 @@ import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import CompactChannel from 'react/components/CompactChannel';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
+import ProfileEmptyMessage from 'react/components/ProfileEmptyMessage';
 
 const Columns = styled.div`
   column-count: 2;
@@ -43,7 +44,11 @@ export default class ProfileChannelIndex extends Component {
           if (loading) return <BlocksLoadingIndicator />;
           if (error) return error.message;
 
-          const { identity: { identifiable: { channels_index } } } = data;
+          const { identity: { identifiable, identifiable: { channels_index } } } = data;
+
+          if (channels_index.length === 0) {
+            return <ProfileEmptyMessage identifiable={identifiable} />;
+          }
 
           return (
             <Columns>

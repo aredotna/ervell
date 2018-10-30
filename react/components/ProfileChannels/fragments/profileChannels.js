@@ -2,9 +2,11 @@ import gql from 'graphql-tag';
 
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 import blokkChannelFragment from 'react/components/Cell/components/Konnectable/components/Channel/fragments/channel';
+import profileEmptyMessageFragment from 'react/components/ProfileEmptyMessage/fragments/profileEmptyMessage';
 
 export default gql`
   fragment ProfileChannels on Identifiable {
+    ... ProfileEmptyMessage
     ... on Group {
       __typename
       id: slug
@@ -38,4 +40,5 @@ export default gql`
   }
   ${konnectableCellFragment}
   ${blokkChannelFragment}
+  ${profileEmptyMessageFragment}
 `;

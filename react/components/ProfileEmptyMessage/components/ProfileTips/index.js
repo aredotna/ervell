@@ -17,7 +17,7 @@ export default class ProfileTips extends Component {
 
           return (
             <div>
-              <Text f={6} mt={8} mb={6} color="gray.medium" lineHeight={2} textAlign="center">
+              <Text f={6} mt={8} mb={6} color="gray.medium" lineHeight={2} neutralMarginsY={false}>
                 Welcome to Are.na, this is your profile.{' '}
                 All of your channels and content will show up here.
               </Text>
