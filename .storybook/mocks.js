@@ -13,6 +13,8 @@ const connectable = () => ({
 
 const Mocks = {
   Channel: () => ({
+    id: random.number({ min: 1, max: 999999 }),
+    slug: `slug-${random.number({ min: 1, max: 999999 })}`,
     title: random.words(),
     visibility: sample(['closed', 'private', 'public'])
   }),
@@ -22,7 +24,7 @@ const Mocks = {
   }),
 
   User: () => ({
-    id: random.number({ min: 200, max: 800 }),
+    id: random.number({ min: 1, max: 999999 }),
     name: `${name.firstName()} ${name.lastName()}`,
     initials: "IOU",
     avatar: "https://dummyimage.com/100x100/000/fff&text=**",
