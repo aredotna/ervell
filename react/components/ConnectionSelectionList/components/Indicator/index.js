@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { inputPadding } from 'react/components/UI/Inputs';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 
-const Indicator = styled.div.attrs({
+const Container = styled.div.attrs({
   f: 1,
 })`
   ${baseTextMixin}
@@ -18,10 +19,20 @@ const Indicator = styled.div.attrs({
   background-color: ${x => x.theme.colors.gray.hint};
 `;
 
-export default props => (
-  <div {...props}>
-    <Indicator>
-      Loading...
-    </Indicator>
+const Indicator = ({ label, ...rest }) => (
+  <div {...rest}>
+    <Container>
+      {label}
+    </Container>
   </div>
 );
+
+Indicator.propTypes = {
+  label: PropTypes.string,
+};
+
+Indicator.defaultProps = {
+  label: 'Loading...',
+};
+
+export default Indicator;

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
+import Indicator from 'react/components/ConnectionSelectionList/components/Indicator';
 import ChannelsList from 'react/components/ConnectionSelectionList/components/ChannelsList';
-import LoadingIndicator from 'react/components/ConnectionSelectionList/components/RecentChannels/components/LoadingIndicator';
 
 import recentChannelsQuery from 'react/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels';
 
@@ -28,8 +28,8 @@ class RecentChannels extends Component {
       ...rest
     } = this.props;
 
-    if (error) return <div />;
-    if (loading) return <LoadingIndicator {...rest} />;
+    if (error) return <Indicator label="Error" {...rest} />;
+    if (loading) return <Indicator label="Loading..." {...rest} />;
 
     const { data: { me: { recent_channels: channels } } } = this.props;
 

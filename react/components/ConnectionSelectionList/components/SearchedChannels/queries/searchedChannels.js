@@ -8,7 +8,7 @@ export default gql`
       __typename
       id
       searched_channels: connection_search(q: $query, per: 5) {
-        ...SelectableChannel
+        ... SelectableChannel
       }
     }
   }

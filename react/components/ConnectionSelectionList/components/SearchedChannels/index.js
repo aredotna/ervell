@@ -1,40 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
-
-import ChannelsList from 'react/components/ConnectionSelectionList/components/ChannelsList';
+import { Query } from 'react-apollo';
 
 import searchedChannelsQuery from 'react/components/ConnectionSelectionList/components/SearchedChannels/queries/searchedChannels';
 
-class SearchedChannels extends Component {
+import Indicator from 'react/components/ConnectionSelectionList/components/Indicator';
+import ChannelsList from 'react/components/ConnectionSelectionList/components/ChannelsList';
+
+export default class SearchedChannels extends Component {
   static propTypes = {
-    data: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-    }).isRequired,
+    query: PropTypes.string.isRequired,
     onConnectionSelection: PropTypes.func.isRequired,
   }
 
   render() {
-    const { data: { loading, me } } = this.props;
-
-    if (loading && !me) return <div />;
-
-    const {
-      onConnectionSelection,
-      data: {
-        me: {
-          searched_channels: channels,
-        },
-      },
-    } = this.props;
+    const { query, onConnectionSelection } = this.props;
 
     return (
-      <ChannelsList
-        channels={channels}
-        onConnectionSelection={onConnectionSelection}
-      />
+      <Query query={searchedChannelsQuery} variables={{ query }} >
+        {({ data, error, loading }) => {
+          if (error) return <Indicator label="Error" />;
+          if (loading) return <Indicator label="Searching..." />;
+
+          const { me: { searched_channels } } = data;
+
+          return (
+            <ChannelsList
+              channels={searched_channels}
+              onConnectionSelection={onConnectionSelection}
+            />
+          );
+        }}
+      </Query>
     );
   }
 }
-
-export default graphql(searchedChannelsQuery)(SearchedChannels);
