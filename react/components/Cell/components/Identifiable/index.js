@@ -87,7 +87,7 @@ export default class Indentifiable extends Component {
       >
         <Wrap>
           <Text f={5} fontWeight="bold" textAlign="center">
-            <Truncate length={40}>
+            <Truncate length={27}>
               {identifiable.name}
             </Truncate>
 
@@ -103,14 +103,17 @@ export default class Indentifiable extends Component {
           size={140}
           member={identifiable}
           circle={identifiable.__typename === 'Group'}
+          isLinked={false}
         />
 
         <Wrap>
-          <IdentifiableFollowButton
-            f={4}
-            id={identifiable.id}
-            type={identifiable.__typename.toUpperCase()}
-          />
+          {mode !== 'resting' &&
+            <IdentifiableFollowButton
+              f={4}
+              id={identifiable.id}
+              type={identifiable.__typename.toUpperCase()}
+            />
+          }
         </Wrap>
       </Container>
     );
