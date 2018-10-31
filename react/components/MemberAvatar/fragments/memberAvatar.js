@@ -5,12 +5,12 @@ export default gql`
     ... on User {
       href
       initials
-      avatar(size: MEDIUM)
+      avatar(size: LARGE)
     }
     ... on Group {
       href
       initials
-      avatar(size: MEDIUM)
+      avatar(size: LARGE)
     }
   }
 `;

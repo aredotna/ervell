@@ -5,7 +5,7 @@ export default gql`
     ... on Group {
       __typename
       id: slug
-      avatar(size: SMALL)
+      avatar(size: LARGE)
       can {
         update
       }

@@ -6,7 +6,7 @@ export default gql`
       group {
         __typename
         id: slug
-        avatar(size: SMALL)
+        avatar(size: LARGE)
       }
     }
   }
