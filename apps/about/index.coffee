@@ -23,3 +23,5 @@ app.get '/community-guidelines', (_req, res) ->
   res.render 'community'
 app.get '/thankyou', (_req, res) ->
   res.render 'thankyou'
+app.get '/getting-started-with-groups', (_req, res) ->
+  res.render 'groups'

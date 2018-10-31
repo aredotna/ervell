@@ -1,0 +1,118 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  | &nbsp;/ Getting started with Groups
+
+block meta
+  meta(name="twitter:title", content="Are.na / Groups")
+  meta(name="twitter:url", content="https://www.are.na/getting-started-with-groups")
+  meta(property="og:title" content="Are.na / Groups")
+  meta(property="og:url" content="https://www.are.na/getting-started-with-groups")
+  meta(name="twitter:image", content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+  meta(property="og:image" content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small
+      h2.Type.Type--size-h2.Utility--align-center
+        | Getting started with Groups
+
+      h4.Type.Type--size-h4.Utility--align-center.AboutParagraph
+        | A group is a shared account that many people can use to collaborate on Are.na. Here’s how it works.
+  
+  .GradientContainer
+    .Page.Page--narrow
+      section.AboutSection
+        h4.Type.Type--size-h4.Utility--align-center
+          | Groups have their own profiles and channels
+
+        p.Type.Type--lh-tall
+          | Every group has a profile page where you can see all your shared content in one place. To keep things clear, you can now author channels as the group or transfer existing ones over.
+        
+        .PageNarrowBreakout
+          br
+          img(src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png?1519764799")
+        
+        .Instructions
+          div To add group members:
+          ol
+            li 1. Click <strong>+ New group</strong> in the main dropdown menu. 
+            li 2. Name your group, choose a privacy setting, and add members.
+            li 3. Add an avatar for style points.
+          br
+          div To create a group channel:
+          ol
+            li 1. Once you’ve made your group, click on <strong>+ New channel</strong>. 
+            li 2. Under <strong>channel author</strong>, select the preferred group.
+            li 3. Create your channel.
+
+      section.AboutSection.AboutSection--small
+        h4.Type.Type--size-h4.Utility--align-center
+          | Groups make it easy to collaborate with multiple people.
+
+        p.Type.Type--lh-tall
+          | If you often collaborate with the same people, creating a group lets you add everyone to new channels in one click.
+        
+        .PageNarrowBreakout
+          br
+          img(src="https://d2w9rnfcy7mm78.cloudfront.net/1819616/original_082481d53bf6c73bd0010f53041e5341.png?1519764802")
+
+        .Instructions
+          div To create a group:
+          ol
+            li 1. Go to your group and click the <strong>settings</strong> button on the right.
+            li 2. Under <strong>manage members</strong>, search for members to invite or enter an email address.
+            li 3. Add an avatar for style points.
+          br
+          div To collaborate with a group: 
+          div Click <strong>add collaborators</strong> at the top of any channel and enter the name of the group.
+
+      section.AboutSection
+        h4.Type.Type--size-h4.Utility--align-center
+          | Group admins can upgrade members to Premium
+
+        p.Type.Type--lh-tall
+          | Groups billing and content management simple for professional teams. Just upgrade as you go using the group settings.
+        
+        .PageNarrowBreakout
+          br
+          img(src="https://d2w9rnfcy7mm78.cloudfront.net/1819610/original_857a7813659fc3f41e4c54043c98ca5a.png?1519764797")
+
+        .Instructions
+          div To upgrade members: 
+          ol
+            li 1. Click on the group name in the main menu.
+            li 2. Under <strong>Manage members</strong>, click <strong>Upgrade members</strong>
+            li 3. Select members and enter your card information
+  
+  hr.Base
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small
+      h4.Type.Type--size-h4.Utility--align-center
+        | Get 25% off Premium when you upgrade group members
+
+      .AboutSection__buttons
+        a.Button.Button--size-md.Button--border-heavy( href='https://github.com/aredotna' )
+          | Join Now
+
+  hr.Base
+  .Page.Page--narrow
+    section.AboutSection.AboutSection--small
+      h4.Type.Type--size-h4.Utility--align-center
+        | Are.na Groups are perfect for teams
+
+      
+      p.Type.Type--lh-tall
+        | Creating a group profile is a perfect way to manage public and private content as a creative business. Make your work public while keeping research and sketches private. Help team members keep their personal channels separate from work. Build new ideas together.
+
+      .AboutSection__buttons
+        a.Button.Button--size-md.Button--border-heavy( href='https://github.com/aredotna' )
+          | Learn More
