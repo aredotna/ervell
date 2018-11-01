@@ -3,13 +3,12 @@
 
 module.exports =
   srcset: (asset, srcsetSizes = [320, 640, 768, 1024, 1366, 1600, 1920, 2048]) ->
-    return srcsetSizes
-      .map (size) ->
-        return "#{asset.fields.file.url}?w=#{size} #{size}w"
-      .join ', '
+    return if asset.fields then srcsetSizes.map( (size) ->
+      return "#{asset.fields.file.url}?w=#{size} #{size}w"
+    ).join(', ') else ''
 
   figure: (asset, { sizes = "100vw", elClass = "", srcsetSizes } = { sizes, elClass, srcsetSizes })->
-    return """
+    return if asset.fields then """
       <figure>
         <img
           sizes='#{sizes}'
@@ -19,12 +18,12 @@ module.exports =
         />
         <figcaption>#{asset.fields.description}</figcaption>
       </figure>
-    """
+    """ else ""
 
   assetEl: (asset, options) ->
     # required: asset
     # optional: sizes, elClass, srcsetSizes
-    if asset.fields.file.contentType.match('image.*')
+    if asset.fields and fasset.fields.file.contentType.match('image.*')
       return @figure(asset, options)
     else
       return ''
@@ -33,7 +32,7 @@ module.exports =
 
   formatRichTextWithImages: (raw, imageOptions) ->
     # optional: imageOptions: sizes, srcsetSizes, elClass
-    footnotes = [];
+    footnotes = []
     renderOptions = renderNode : {}
 
     renderOptions.renderNode[BLOCKS.EMBEDDED_ASSET] = (node, next) =>
