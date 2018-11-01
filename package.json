@@ -25,7 +25,7 @@
     "apollo-client-preset": "^1.0.8",
     "apollo-link": "^1.2.2",
     "apollo-link-context": "^1.0.3",
-    "apollo-link-state": "^0.4.1",
+    "apollo-link-state": "^0.4.2",
     "artsy-error-handler": "git://github.com/artsy/artsy-error-handler.git",
     "axios": "^0.16.2",
     "axis": "*",

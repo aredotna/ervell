@@ -29,6 +29,11 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      },
+      {
         test: /\.(gif|svg|jpg|png)$/,
         loader: 'file-loader',
       },
@@ -122,7 +127,7 @@ const config = {
       'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
       Images: path.join(__dirname, 'public', 'images'),
     },
-    extensions: ['.js', '.jsx', '.json', '.jade', '.coffee'],
+    extensions: ['.js', '.jsx', '.json', '.jade', '.coffee', '.mjs'],
     modules: [
       'node_modules',
     ],
