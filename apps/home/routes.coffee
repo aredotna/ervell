@@ -21,7 +21,6 @@ posts = require '../../collections/posts.coffee'
     posts.fetchFeatured()
   ]
   .spread (exploreBlocksResponse, posts) ->
-
     locals =
       posts: posts
       formatDate: formatDate
