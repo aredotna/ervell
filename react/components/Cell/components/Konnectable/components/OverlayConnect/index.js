@@ -6,6 +6,7 @@ import { outlineBorder } from 'react/styles/mixins';
 
 import Box from 'react/components/UI/Box';
 import { DividerButton } from 'react/components/UI/Buttons';
+import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ConnectionSelection from 'react/components/ConnectionSelection';
 
 const Container = styled(Box).attrs({
@@ -49,7 +50,9 @@ export default class OverlayConnect extends Component {
     return (
       <Container onClick={this.stopPropagation}>
         <Box flex="1">
-          <ConnectionSelection id={id} type={type} isOutlined={false} />
+          <ErrorBoundary isReloadable={false}>
+            <ConnectionSelection id={id} type={type} isOutlined={false} />
+          </ErrorBoundary>
         </Box>
 
         <DividerButton f={4} mb="-1px" onClick={onClose}>
