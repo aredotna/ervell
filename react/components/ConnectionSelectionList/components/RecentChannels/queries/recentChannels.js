@@ -6,7 +6,7 @@ export default gql`
   query RecentChannelsQuery {
     me {
       __typename
-      id: slug
+      id
       recent_channels: recent_connections(per: 5) {
         ...SelectableChannel
       }

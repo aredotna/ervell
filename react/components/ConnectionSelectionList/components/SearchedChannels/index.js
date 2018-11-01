@@ -17,7 +17,7 @@ export default class SearchedChannels extends Component {
     const { query, onConnectionSelection } = this.props;
 
     return (
-      <Query query={searchedChannelsQuery} variables={{ query }} >
+      <Query query={searchedChannelsQuery} variables={{ query }}>
         {({ data, error, loading }) => {
           if (error) return <Indicator label="Error" />;
           if (loading) return <Indicator label="Searching..." />;
