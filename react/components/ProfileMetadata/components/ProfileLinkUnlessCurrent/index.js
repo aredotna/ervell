@@ -31,7 +31,7 @@ export default class ProfileLinkUnlessCurrent extends Component {
     if (!name || !value) return;
 
     try {
-      Cookies.set(`Profile__${name}`, value);
+      Cookies.set(`Profile--${name}`, value);
     } catch (err) {
       console.error(err);
     }
