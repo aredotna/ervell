@@ -51,6 +51,7 @@ app
   .set('view engine', 'jade')
 
   .get('/:id/', ...resolve)
+  .get('/:id/all', ...resolve)
   .get('/:id/blocks', ...resolve)
   .get('/:id/channels', ...resolve)
   .get('/:id/index', ...resolve)

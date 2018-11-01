@@ -51,7 +51,7 @@ export default class ProfilePage extends Component {
             <div>
               <ProfileMetadata
                 identifiable={identifiable}
-                mode={typedView}
+                view={typedView}
                 sort={sort}
                 filter={filter}
               />

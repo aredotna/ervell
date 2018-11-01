@@ -1,5 +1,8 @@
 import React from 'react';
+import { Query } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
+
+import profileUiStateQuery from 'apps/profile/queries/profileUiState';
 
 import parseRoute from 'react/util/parseRoute';
 
@@ -9,19 +12,28 @@ export default () => (
   <Switch>
     <Route
       path="/:id/:view?"
-      render={parseRoute(({ params, query }) => {
-        const { view = 'all' } = params;
-        const { sort = 'UPDATED_AT', filter = 'OWN' } = query;
+      render={parseRoute(({ params, query }) => (
+        <Query query={profileUiStateQuery}>
+          {({ data, error }) => {
+            if (error) return error.message;
 
-        return (
-          <ProfilePage
-            id={params.id}
-            view={view}
-            sort={sort}
-            filter={filter}
-          />
-        );
-      })}
+            const { cookies } = data;
+
+            const view = params.view || cookies.view || 'all';
+            const sort = query.sort || cookies.sort || 'UPDATED_AT';
+            const filter = query.filter || cookies.filter || 'OWN';
+
+            return (
+              <ProfilePage
+                id={params.id}
+                view={view}
+                sort={sort}
+                filter={filter}
+              />
+            );
+          }}
+        </Query>
+      ))}
     />
   </Switch>
 );

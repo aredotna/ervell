@@ -20,14 +20,14 @@ import ProfileMetadataFilter from 'react/components/ProfileMetadata/components/P
 export default class ProfileMetadata extends Component {
   static propTypes = {
     identifiable: propType(profileMetadataFragment).isRequired,
-    mode: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'following', 'followers']).isRequired,
+    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'following', 'followers']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
 
   render() {
     const {
-      identifiable, mode, sort, filter,
+      identifiable, view, sort, filter,
     } = this.props;
 
     return (
@@ -38,19 +38,19 @@ export default class ProfileMetadata extends Component {
       >
         <ExpandableContext>
           <Grid variableHeight>
-            <ProfileMetadataInfo identifiable={identifiable} mode={mode} />
+            <ProfileMetadataInfo identifiable={identifiable} view={view} />
 
             {identifiable.__typename === 'Group' && identifiable.users.length > 0 &&
               <ProfileGroupUserList identifiable={identifiable} />
             }
 
-            <ProfileMetadataView identifiable={identifiable} mode={mode} sort={sort} />
+            <ProfileMetadataView identifiable={identifiable} view={view} sort={sort} />
 
-            {identifiable.__typename !== 'Group' && ['all', 'channels', 'blocks'].includes(mode) &&
+            {identifiable.__typename !== 'Group' && ['all', 'channels', 'blocks'].includes(view) &&
               <ProfileMetadataSort sort={sort} />
             }
 
-            {mode === 'index' &&
+            {view === 'index' &&
               <ProfileMetadataFilter identifiable={identifiable} filter={filter} />
             }
           </Grid>
