@@ -13,7 +13,7 @@ posts = require '../../collections/posts.coffee'
         formatDate: formatDate
         srcset: contentfulFormatter.srcset
         documentToHtmlString: documentToHtmlString
-    .error next
+    .catch next
 
 @show = (req, res, next) ->
 
@@ -22,14 +22,18 @@ posts = require '../../collections/posts.coffee'
 
   posts.fetchWithSlug(slug)
     .then (post) ->
-      unless post
-        return next();
-      body = contentfulFormatter.formatRichTextWithImages(post.fields.body, { srcsetSizes: [670, 670 * 2, 670 * 3], sizes: "(min-width: 670px) 670px, 100vw" })
+      unless post and post.fields
+        return next()
+      body = contentfulFormatter.formatRichTextWithImages(post.fields.body, {
+        srcsetSizes: [670, 670 * 2, 670 * 3],
+        sizes: "(min-width: 670px) 670px, 100vw"
+      })
+      bio = if (authorFields = post.fields.author.fields) then documentToHtmlString(authorFields.bio) else ''
       res.render 'show',
         title: post.fields.title
         image: post.fields.image.fields.file.url + '?w=600'
         post: post
         formatDate: formatDate
         body: body
-        bio: documentToHtmlString(post.fields.author.fields.bio)
-    .error next
+        bio: bio
+    .catch next

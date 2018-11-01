@@ -3,27 +3,32 @@
 
 module.exports =
   srcset: (asset, srcsetSizes = [320, 640, 768, 1024, 1366, 1600, 1920, 2048]) ->
-    return if asset.fields then srcsetSizes.map( (size) ->
+    unless asset.fields then return ''
+    return  srcsetSizes.map (size) ->
       return "#{asset.fields.file.url}?w=#{size} #{size}w"
-    ).join(', ') else ''
+    .join ', '
 
-  figure: (asset, { sizes = "100vw", elClass = "", srcsetSizes } = { sizes, elClass, srcsetSizes })->
-    return if asset.fields then """
+  figure: (asset, { sizes = "100vw", elClass = "", srcsetSizes } = { sizes, elClass, srcsetSizes }) ->
+    unless asset.fields then return ''
+    figcaption = if (description = asset.fields.description) then "<figcaption>#{description}</figcaption>" else ''
+    srcset = @srcset asset, srcsetSizes
+    title = asset.fields.title || ''
+    figure = """
       <figure>
         <img
           sizes='#{sizes}'
-          srcset='#{@srcset asset, srcsetSizes}'
-          alt='#{asset.fields.title || ''}'
+          srcset='#{srcset}'
+          alt='#{title}'
           class='#{elClass}'
-        />
-        <figcaption>#{asset.fields.description}</figcaption>
+        /> #{figcaption}
       </figure>
-    """ else ""
+    """
+    return figure
 
   assetEl: (asset, options) ->
     # required: asset
     # optional: sizes, elClass, srcsetSizes
-    if asset.fields and fasset.fields.file.contentType.match('image.*')
+    if asset.fields and asset.fields.file.contentType.match('image.*')
       return @figure(asset, options)
     else
       return ''
