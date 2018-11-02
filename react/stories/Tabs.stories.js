@@ -24,24 +24,6 @@ storiesOf('Tabs', module)
         <Text p={2}>{lorem.paragraphs()}</Text>
       </div>
     </Tabs>
-  )).add('with colored background', () => (
-    <Tabs activeBackgroundColor="#eee">
-      <div label="Section A">
-        <Text p={2}>{lorem.paragraphs()}</Text>
-      </div>
-
-      <div label="Section B">
-        <Text p={2}>{lorem.paragraphs()}</Text>
-      </div>
-
-      <div label="Section C">
-        <Text p={2}>{lorem.paragraphs()}</Text>
-      </div>
-
-      <div label="Section D">
-        <Text p={2}>{lorem.paragraphs()}</Text>
-      </div>
-    </Tabs>
   )).add('with inital active tab set', () => (
     <Tabs activeTab="Section D">
       <div label="Section A">

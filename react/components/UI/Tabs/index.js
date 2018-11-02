@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { fontSize, space } from 'styled-system';
-
-import { preset } from 'react/styles/functions';
+import styled from 'styled-components';
+import Tab from 'react/components/UI/Tabs/components/Tab';
 
 const Container = styled.div`
   display: flex;
@@ -21,42 +19,16 @@ const TabList = styled.div`
 
 const TabContent = styled.div`
   display: flex;
-  background-color: ${x => x.activeBackgroundColor};
-`;
-
-export const activeMixin = css`
-  border-top: 2px solid ${x => x.theme.colors.gray.bold};
-  border-left: 1px solid ${x => x.theme.colors.gray.regular};
-  border-right: 1px solid ${x => x.theme.colors.gray.regular};
-  border-bottom: 1px solid ${x => x.activeBackgroundColor};
-  color: ${x => x.theme.colors.gray.bold};
-  background-color: ${x => x.activeBackgroundColor};
-`;
-
-const Label = styled.div`
-  text-align: center;
-  border: 1px solid transparent;
-  border-top: 2px solid transparent;
-  cursor: pointer;
-  font-family: ${x => x.theme.fonts.sans};
-  font-weight: bold;
-  margin-bottom: -2px;
-
-  ${preset(space, { pt: 5, pb: 6, px: 9 })};
-  ${preset(fontSize, { f: 2 })};
-
-  ${x => x.active && activeMixin};
+  background-color: ${x => x.theme.colors.gray.light};
 `;
 
 export default class Tabs extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    activeBackgroundColor: PropTypes.string,
     activeTab: PropTypes.string,
   }
 
   static defaultProps = {
-    activeBackgroundColor: '#fff',
     activeTab: null,
   }
 
@@ -75,28 +47,23 @@ export default class Tabs extends Component {
   }
 
   render() {
-    const { props: { children, activeBackgroundColor }, state: { activeTab } } = this;
+    const { children } = this.props;
+    const { activeTab } = this.state;
+    const labels = children.map(child => (child.props.label));
 
     return (
       <Container>
         <TabList>
-          {children.map((child) => {
-            const { label } = child.props;
-            const active = activeTab === label;
-
-            return (
-              <Label
-                activeBackgroundColor={activeBackgroundColor}
-                active={active}
-                key={label}
-                onClick={() => this.onTabClick(label)}
-              >
-                {label}
-              </Label>
-            );
-          })}
+          {labels.map(label => (
+            <Tab
+              active={activeTab === label}
+              key={label}
+              onTabClick={this.onTabClick}
+              label={label}
+            />
+          ))}
         </TabList>
-        <TabContent activeBackgroundColor={activeBackgroundColor}>
+        <TabContent>
           {children.map((child) => {
             if (child.props.label !== activeTab) return undefined;
             return child;
