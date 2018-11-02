@@ -29,7 +29,7 @@ const Label = styled.div.attrs({ fontSize: 3 })`
   ${x => x.active && activeMixin};
 `;
 
-export default class TabList extends Component {
+export default class Tab extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
     onTabClick: PropTypes.func.isRequired,
