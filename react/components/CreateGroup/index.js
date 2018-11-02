@@ -7,7 +7,6 @@ import mapErrors from 'react/util/mapErrors';
 import currentUserService from 'react/util/currentUserService';
 
 import Box from 'react/components/UI/Box';
-import Alert from 'react/components/UI/Alert';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
@@ -160,11 +159,6 @@ class CreateGroup extends Component {
         onDone={this.handleSubmit}
       >
         <div>
-          <Alert mb={6}>
-            A group is a shared account that many people can use to collaborate on Are.na.
-            You can also create a secret group to separate channels from your personal profile.
-          </Alert>
-
           {mode === 'error' &&
             <Alert mb={6} bg="state.alert" color="white">
               {errorMessage}
