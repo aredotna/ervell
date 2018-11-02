@@ -11,9 +11,21 @@ export default gql`
     ... on Group {
       id: slug
       name
-      href
       description(format: MARKDOWN)
-      visibility
+      user {
+        id: slug
+        name
+        href
+      }
+      users {
+        id: slug
+        name
+        href
+      }
+      can {
+        manage
+        manage_users
+      }
     }
   }
 `;
