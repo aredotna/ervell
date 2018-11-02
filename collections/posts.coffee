@@ -33,3 +33,9 @@ module.exports =
     .then (response) ->
       return response.fields.posts
 
+  fetchImages: (ids = []) ->
+    return client.getAssets
+      "sys.id[in]": ids.join(',')
+    .then (response) ->
+      return response.items
+
