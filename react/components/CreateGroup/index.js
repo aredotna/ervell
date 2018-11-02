@@ -8,6 +8,7 @@ import currentUserService from 'react/util/currentUserService';
 
 import Box from 'react/components/UI/Box';
 import TitledDialog from 'react/components/UI/TitledDialog';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
 import HelpTip from 'react/components/CreateGroup/components/HelpTip';
@@ -160,9 +161,9 @@ class CreateGroup extends Component {
       >
         <div>
           {mode === 'error' &&
-            <Alert mb={6} bg="state.alert" color="white">
+            <ErrorAlert>
               {errorMessage}
-            </Alert>
+            </ErrorAlert>
           }
 
           <LabelledInput>
