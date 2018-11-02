@@ -27,7 +27,7 @@ export default class ProfileChannels extends Component {
     q: null,
   }
 
-  updateQuery = (query) => {
+  resetQuery = (query) => {
     const q = query === '' ? null : query;
     this.setState({ q, page: 1, hasMore: true });
   }
@@ -50,10 +50,13 @@ export default class ProfileChannels extends Component {
           },
         },
       }),
-    }).then((res) => {
+    }).then(({ errors, data }) => {
+      const { identity: { identifiable: { channels: { length } } } } = data;
+      const hasMore = !errors && length > 0 && length >= per;
+
       this.setState({
         page: page + 1,
-        hasMore: !res.errors && res.data.identity.identifiable.channels.length > 0,
+        hasMore,
       });
     });
   }
@@ -68,7 +71,6 @@ export default class ProfileChannels extends Component {
         variables={{
           id, per, sort, q,
         }}
-        onCompleted={this.updateHasMore}
       >
         {({
           loading, error, data, fetchMore,
@@ -92,7 +94,7 @@ export default class ProfileChannels extends Component {
               {__typename === 'User' &&
                 <SearchInput
                   query={q}
-                  onDebouncedQueryChange={this.updateQuery}
+                  onDebouncedQueryChange={this.resetQuery}
                   placeholder={`Filter ${name}’s channels`}
                   mb={6}
                   mr={constants.blockGutter}
@@ -104,13 +106,13 @@ export default class ProfileChannels extends Component {
                 <BlocksLoadingIndicator />
               }
 
-              {!loading &&
+              {!loading && channels.length > 0 &&
                 <InfiniteScroll
                   pageStart={1}
                   threshold={500}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
-                  hasMore={hasMore}
+                  hasMore={channels.length >= per && hasMore}
                   loadMore={this.loadMore(fetchMore)}
                 >
                   {channels.map(channel => (

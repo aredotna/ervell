@@ -30,7 +30,7 @@ export default class ProfileContents extends Component {
     q: null,
   }
 
-  updateQuery = (query) => {
+  resetQuery = (query) => {
     const q = query === '' ? null : query;
     this.setState({ q, page: 1, hasMore: true });
   }
@@ -53,10 +53,13 @@ export default class ProfileContents extends Component {
           },
         },
       }),
-    }).then((res) => {
+    }).then(({ errors, data }) => {
+      const { identity: { identifiable: { contents: { length } } } } = data;
+      const hasMore = !errors && length > 0 && length >= per;
+
       this.setState({
         page: page + 1,
-        hasMore: !res.errors && res.data.identity.identifiable.contents.length > 0,
+        hasMore,
       });
     });
   }
@@ -73,7 +76,6 @@ export default class ProfileContents extends Component {
         variables={{
           id, type, per, sort, q,
         }}
-        onCompleted={this.updateHasMore}
       >
         {({
           loading, error, data, fetchMore,
@@ -96,7 +98,7 @@ export default class ProfileContents extends Component {
             <div>
               <SearchInput
                 query={q}
-                onDebouncedQueryChange={this.updateQuery}
+                onDebouncedQueryChange={this.resetQuery}
                 placeholder={`Filter ${name}’s ${{ BLOCK: 'blocks' }[type] || 'blocks and channels'}`}
                 mb={6}
                 mr={constants.blockGutter}
@@ -107,13 +109,13 @@ export default class ProfileContents extends Component {
                 <BlocksLoadingIndicator />
               }
 
-              {!loading &&
+              {!loading && contents.length > 0 &&
                 <Grid
                   pageStart={1}
                   threshold={500}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
-                  hasMore={hasMore}
+                  hasMore={contents.length >= per && hasMore}
                   loadMore={this.loadMore(fetchMore)}
                 >
                   {contents.map(blokk => (
