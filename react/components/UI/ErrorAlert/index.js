@@ -10,9 +10,11 @@ const ErrorAlert = ({ children, isReloadable, ...rest }) => (
       {children}
 
       {isReloadable &&
-        <a onClick={() => window.location.reload()} role="button" tabIndex={0}>
-          Reload
-        </a>
+        <Box ml={4}>
+          <a onClick={() => window.location.reload()} role="button" tabIndex={0}>
+            Reload
+          </a>
+        </Box>
       }
     </Box>
   </Alert>
