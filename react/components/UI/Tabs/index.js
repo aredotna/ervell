@@ -50,6 +50,7 @@ export default class Tabs extends Component {
     const { children } = this.props;
     const { activeTab } = this.state;
     const labels = children.map(child => (child.props.label));
+    const content = children.find(child => child.props.label === activeTab);
 
     return (
       <Container>
@@ -64,10 +65,7 @@ export default class Tabs extends Component {
           ))}
         </TabList>
         <TabContent>
-          {children.map((child) => {
-            if (child.props.label !== activeTab) return undefined;
-            return child;
-          })}
+          {content}
         </TabContent>
       </Container>
     );
