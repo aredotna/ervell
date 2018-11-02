@@ -9,6 +9,7 @@ import removeChannelMemberMutation from 'react/components/ManageCollaborators/mu
 
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import ManagedMembers from 'react/components/ManagedMembers';
 import ManageableCollaboratorSearch from 'react/components/ManageCollaborators/components/ManageableCollaboratorSearch';
 import GroupCallToAction from 'react/components/ManageCollaborators/components/GroupCallToAction';
@@ -47,10 +48,20 @@ class ManageCollaborators extends Component {
 
   render() {
     const {
-      channel_id, onClose, openCreateGroup, data: { loading },
+      channel_id,
+      onClose,
+      openCreateGroup,
+      data: { loading, error },
     } = this.props;
 
     if (loading) return <LoadingIndicator />;
+    if (error) {
+      return (
+        <ErrorAlert m={6}>
+          {error.message}
+        </ErrorAlert>
+      );
+    }
 
     const {
       data: {
