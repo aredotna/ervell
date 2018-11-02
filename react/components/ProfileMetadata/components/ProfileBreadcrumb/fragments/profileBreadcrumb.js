@@ -5,19 +5,15 @@ import profileBadgeFragment from 'react/components/ProfileMetadata/components/Pr
 export default gql`
   fragment ProfileBreadcrumb on Identifiable {
     __typename
-
     ... on User {
       name
       href
       ...ProfileBadge
     }
-
     ... on Group {
       name
-      href
       visibility
     }
   }
-
   ${profileBadgeFragment}
 `;
