@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import PropTypes from 'prop-types';
 
-import setMeFlagsMutation from 'react/components/ProfileEmptyMessage/components/ProfileTips/mutations/setMeFlags';
+import setMeFlagsMutation from 'react/components/ProfileTips/mutations/setMeFlags';
 
 import Text from 'react/components/UI/Text';
 import Alert from 'react/components/UI/Alert';

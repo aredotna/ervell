@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import profileTipsFragment from 'react/components/ProfileEmptyMessage/components/ProfileTips/fragments/profileTips';
+import profileTipsFragment from 'react/components/ProfileTips/fragments/profileTips';
 
 export default gql`
   mutation setMeFlags($flags: [MeFlagInput]!) {

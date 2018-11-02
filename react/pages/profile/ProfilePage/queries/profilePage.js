@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 import profileMetadataFragment from 'react/components/ProfileMetadata/fragments/profileMetadata';
-import profileEmptyMessageFragment from 'react/components/ProfileEmptyMessage/fragments/profileEmptyMessage';
+import emptyOrTipsFragment from 'react/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips';
 
 export default gql`
   query ProfilePage($id: ID!) {
@@ -9,8 +9,8 @@ export default gql`
       __typename
       identifiable {
         __typename
-        ... ProfileMetadata
-        ... ProfileEmptyMessage
+        ...ProfileMetadata
+        ...EmptyOrTips
         ... on User {
           counts {
             channels
@@ -26,5 +26,5 @@ export default gql`
     }
   }
   ${profileMetadataFragment}
-  ${profileEmptyMessageFragment}
+  ${emptyOrTipsFragment}
 `;

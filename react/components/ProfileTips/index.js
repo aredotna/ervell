@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 
-import profileTipsQuery from 'react/components/ProfileEmptyMessage/components/ProfileTips/queries/profileTips';
+import constants from 'react/styles/constants';
 
+import profileTipsQuery from 'react/components/ProfileTips/queries/profileTips';
+
+import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
-import ProfileTip from 'react/components/ProfileEmptyMessage/components/ProfileTip';
+import ProfileTip from 'react/components/ProfileTips/components/ProfileTip';
 
 export default class ProfileTips extends Component {
   render() {
@@ -16,11 +19,13 @@ export default class ProfileTips extends Component {
           const { me } = data;
 
           return (
-            <div>
-              <Text f={6} mt={8} mb={6} color="gray.medium" lineHeight={2} neutralMarginsY={false}>
-                Welcome to Are.na, this is your profile.{' '}
-                All of your channels and content will show up here.
-              </Text>
+            <Box mt={8} mr={constants.doubleBlockGutter}>
+              {me.counts.channels + me.counts.blocks === 0 &&
+                <Text f={6} mb={6} color="gray.medium" lineHeight={2}>
+                  Welcome to Are.na, this is your profile.{' '}
+                  All of your channels and content will show up here.
+                </Text>
+              }
 
               {!me.has_seen_classic_channels &&
                 <ProfileTip name="has_seen_classic_channels">
@@ -45,7 +50,7 @@ export default class ProfileTips extends Component {
                   </strong>
                 </ProfileTip>
               }
-            </div>
+            </Box>
           );
         }}
       </Query>

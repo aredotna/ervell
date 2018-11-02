@@ -47,6 +47,7 @@ export const CONSTANT_VALUES = {
   headerHeight: '50px',
   blockWidth: '315px', // TODO: 19.5em
   blockGutter: '10px', // (legacyUnit / 2) TODO: 1em
+  doubleBlockGutter: '20px', // TODO
   blockAndGutter: '335px', // (blockWidth + blockGutter)
   containerOffset: '100px', // TODO: Something based on real values
   legacyUnit: '20px',
