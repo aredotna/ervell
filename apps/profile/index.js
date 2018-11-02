@@ -8,8 +8,8 @@ import withStaticRouter from 'react/hocs/WithStaticRouter';
 
 const app = express();
 
-const extractTitle = (client, id) => {
-  const { identifiable: { title } } = client.readFragment({
+const extractIdentifiable = (client, id) => {
+  const { identifiable } = client.readFragment({
     id: `$ROOT_QUERY.identity({"id":"${id}"})`,
     fragment: gql`
       fragment ProfileTitle on Identity {
@@ -26,7 +26,7 @@ const extractTitle = (client, id) => {
     `,
   });
 
-  return title;
+  return identifiable;
 };
 
 const resolve = [
@@ -36,11 +36,15 @@ const resolve = [
         // TODO: Consider properly handing errors in the SSR function
         if (apollo.error) throw apollo.error;
 
-        // TODO: Should just be a component once we move to a full page component
-        // (Off of the Jade layout)
-        const title = extractTitle(apollo.client, req.params.id);
+        const identifiable = extractIdentifiable(apollo.client, req.params.id);
 
-        res.render('index', { apollo, title });
+        if (identifiable.__typename === 'Group') {
+          const error = new Error('Not Found');
+          error.status = 404;
+          throw error;
+        }
+
+        res.render('index', { apollo, title: identifiable.title });
       })
       .catch(next);
   },
