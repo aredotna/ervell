@@ -101,7 +101,12 @@ export default class ProfileContents extends Component {
                 onDebouncedQueryChange={this.resetQuery}
                 placeholder={`Filter ${name}’s ${{ BLOCK: 'blocks' }[type] || 'blocks and channels'}`}
                 mb={6}
-                mr={constants.blockGutter}
+                mr={[
+                  constants.blockGutter,
+                  constants.doubleBlockGutter,
+                  constants.doubleBlockGutter,
+                ]}
+                ml={[constants.blockGutter, 0, 0]}
                 borderColor="transparent"
               />
 

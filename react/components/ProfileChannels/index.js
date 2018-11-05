@@ -97,7 +97,12 @@ export default class ProfileChannels extends Component {
                   onDebouncedQueryChange={this.resetQuery}
                   placeholder={`Filter ${name}’s channels`}
                   mb={6}
-                  mr={constants.blockGutter}
+                  mr={[
+                    constants.blockGutter,
+                    constants.doubleBlockGutter,
+                    constants.doubleBlockGutter,
+                  ]}
+                  ml={[constants.blockGutter, 0, 0]}
                   borderColor="transparent"
                 />
               }
