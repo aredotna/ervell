@@ -5,7 +5,7 @@ export default gql`
     ... on User {
       __typename
       id: slug
-      created_at
+      created_at(format: "%Y-%m-%dT%H:%M:%S.%L%z")
       is_me
       counts {
         blocks
