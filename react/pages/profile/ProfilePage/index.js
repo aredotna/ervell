@@ -10,6 +10,8 @@ import ProfileChannels from 'react/components/ProfileChannels';
 import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
 import ProfileFollows from 'react/components/ProfileFollows';
 import EmptyMessageOrComponent from 'react/pages/profile/ProfilePage/components/EmptyMessageOrComponent';
+import ErrorBoundary from 'react/components/UI/ErrorBoundary';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -27,79 +29,87 @@ export default class ProfilePage extends Component {
     } = this.props;
 
     return (
-      <Query query={profilePageQuery} variables={{ id }}>
-        {({ loading, data, error }) => {
-          if (loading) {
+      <ErrorBoundary>
+        <Query query={profilePageQuery} variables={{ id }}>
+          {({ loading, data, error }) => {
+            if (error) {
+              return (
+                <ErrorAlert>
+                  {error.message}
+                </ErrorAlert>
+              );
+            }
+
+            if (loading) {
+              return (
+                <CenteringBox>
+                  <LoadingIndicator f={9} />
+                </CenteringBox>
+              );
+            }
+
+            const { identity: { identifiable } } = data;
+
+            // Falls back to a supported view when the current
+            // one isn't supported for Groups (all, blocks).
+            const typedView = identifiable.__typename === 'Group'
+              ? { all: 'channels', blocks: 'channels' }[view] || view
+              : view;
+
             return (
-              <CenteringBox>
-                <LoadingIndicator f={9} />
-              </CenteringBox>
+              <div>
+                <ProfileMetadata
+                  identifiable={identifiable}
+                  view={typedView}
+                  sort={sort}
+                  filter={filter}
+                />
+
+                {{
+                  all: () => (
+                    <EmptyMessageOrComponent
+                      identifiable={identifiable}
+                      count={identifiable.counts.channels + identifiable.counts.blocks}
+                    >
+                      <ProfileContents id={id} sort={sort} />
+                    </EmptyMessageOrComponent>
+                  ),
+                  blocks: () => (
+                    <EmptyMessageOrComponent
+                      identifiable={identifiable}
+                      count={identifiable.counts.blocks}
+                    >
+                      <ProfileContents id={id} type="BLOCK" sort={sort} />
+                    </EmptyMessageOrComponent>
+                  ),
+                  channels: () => (
+                    <EmptyMessageOrComponent
+                      identifiable={identifiable}
+                      count={identifiable.counts.channels}
+                    >
+                      <ProfileChannels id={id} sort={sort} />
+                    </EmptyMessageOrComponent>
+                  ),
+                  index: () => (
+                    <EmptyMessageOrComponent
+                      identifiable={identifiable}
+                      count={identifiable.counts.channels}
+                    >
+                      <ProfileChannelIndex id={id} type={filter} />
+                    </EmptyMessageOrComponent>
+                  ),
+                  followers: () => (
+                    <ProfileFollows id={id} type="followers" />
+                  ),
+                  following: () => (
+                    <ProfileFollows id={id} type="following" />
+                  ),
+                }[typedView]()}
+              </div>
             );
-          }
-
-          if (error) return error.message;
-
-          const { identity: { identifiable } } = data;
-
-          // Falls back to a supported view when the current
-          // one isn't supported for Groups (all, blocks).
-          const typedView = identifiable.__typename === 'Group'
-            ? { all: 'channels', blocks: 'channels' }[view] || view
-            : view;
-
-          return (
-            <div>
-              <ProfileMetadata
-                identifiable={identifiable}
-                view={typedView}
-                sort={sort}
-                filter={filter}
-              />
-
-              {{
-                all: () => (
-                  <EmptyMessageOrComponent
-                    identifiable={identifiable}
-                    count={identifiable.counts.channels + identifiable.counts.blocks}
-                  >
-                    <ProfileContents id={id} sort={sort} />
-                  </EmptyMessageOrComponent>
-                ),
-                blocks: () => (
-                  <EmptyMessageOrComponent
-                    identifiable={identifiable}
-                    count={identifiable.counts.blocks}
-                  >
-                    <ProfileContents id={id} type="BLOCK" sort={sort} />
-                  </EmptyMessageOrComponent>
-                ),
-                channels: () => (
-                  <EmptyMessageOrComponent
-                    identifiable={identifiable}
-                    count={identifiable.counts.channels}
-                  >
-                    <ProfileChannels id={id} sort={sort} />
-                  </EmptyMessageOrComponent>
-                ),
-                index: () => (
-                  <EmptyMessageOrComponent
-                    identifiable={identifiable}
-                    count={identifiable.counts.channels}
-                  >
-                    <ProfileChannelIndex id={id} type={filter} />
-                  </EmptyMessageOrComponent>
-                ),
-                followers: () => (
-                  <ProfileFollows id={id} type="followers" />
-                ),
-                following: () => (
-                  <ProfileFollows id={id} type="following" />
-                ),
-              }[typedView]()}
-            </div>
-          );
-        }}
-      </Query>
+          }}
+        </Query>
+      </ErrorBoundary>
     );
   }
 }
