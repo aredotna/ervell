@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { isEmpty, debounce } from 'underscore';
+import { isEmpty, debounce, pick, omit } from 'underscore';
+
+import compactObject from 'react/util/compactObject';
 
 import Box from 'react/components/UI/Box';
 import Icons from 'react/components/UI/Icons';
 import { Input } from 'react/components/UI/Inputs';
+
+const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'];
 
 const Icon = styled.div`
   display: flex;
@@ -85,10 +89,14 @@ export default class SearchInput extends Component {
       debounceWait: _debounceWait,
       ...rest
     } = this.props;
+
     const { mode, query } = this.state;
 
+    const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS));
+    const innerProps = omit(rest, ...OUTER_PROPS_KEYS);
+
     return (
-      <Box position="relative" {...rest}>
+      <Box position="relative" {...outerProps}>
         <Icon onClick={this.handleReset}>
           <Icons
             color="gray.medium"
@@ -102,7 +110,7 @@ export default class SearchInput extends Component {
         <Input
           px="2.5em"
           borderColor="gray.regular"
-          {...this.props}
+          {...innerProps}
           innerRef={(input) => { this.input = input; }}
           onChange={this.handleChange}
           defaultValue={query}

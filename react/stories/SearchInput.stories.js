@@ -14,4 +14,14 @@ storiesOf('SearchInput', module)
         placeholder="search"
       />
     </Specimen>
+  ))
+  .add('borderless', () => (
+    <Specimen>
+      <SearchInput
+        onQueryChange={action('onQueryChange')}
+        onDebouncedQueryChange={action('onDebouncedQueryChange')}
+        placeholder="search"
+        borderColor="transparent"
+      />
+    </Specimen>
   ));
