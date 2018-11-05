@@ -10,9 +10,9 @@ export const activeMixin = css`
   border-top: 2px solid ${x => x.theme.colors.gray.bold};
   border-left: 1px solid ${x => x.theme.colors.gray.regular};
   border-right: 1px solid ${x => x.theme.colors.gray.regular};
-  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
+  border-bottom: 1px solid ${x => x.theme.colors.gray.extraLight};
   color: ${x => x.theme.colors.gray.bold};
-  background-color: ${x => x.theme.colors.gray.light};
+  background-color: ${x => x.theme.colors.gray.extraLight};
 `;
 
 const Label = styled.div.attrs({ fontSize: 3 })`

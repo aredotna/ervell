@@ -19,6 +19,7 @@ const COLORS = {
     regular: '#ccc',
     semiLight: '#e8e8e8',
     light: '#eee',
+    extraLight: 'rgb(250, 250, 250)',
     hint: '#f7f7f7',
   },
   utility: {

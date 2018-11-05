@@ -19,7 +19,7 @@ const TabList = styled.div`
 
 const TabContent = styled.div`
   display: flex;
-  background-color: ${x => x.theme.colors.gray.light};
+  background: linear-gradient(${x => x.theme.colors.gray.extraLight}, white);
 `;
 
 export default class Tabs extends Component {
