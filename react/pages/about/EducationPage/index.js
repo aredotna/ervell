@@ -7,6 +7,7 @@ import Tabs from 'react/components/UI/Tabs';
 
 import { Headline, Subheadline, Description } from 'react/pages/about/components/Text';
 import CenterBox from 'react/pages/about/components/CenterBox';
+
 import ForEducatorsTab from 'react/pages/about/EducationPage/components/ForEducatorsTab';
 import ForStudentsTab from 'react/pages/about/EducationPage/components/ForStudentsTab';
 import UniversityLogoCta from 'react/pages/about/EducationPage/components/UniversityLogoCta';
@@ -39,15 +40,9 @@ export default class EducationPage extends Component {
           </Subheadline>
         </CenterBox>
         <Tabs>
-          {/*
-            Educators section
-          */}
           <TabContent label="For Educators">
             <ForEducatorsTab />
           </TabContent>
-          {/*
-            Students section
-          */}
           <TabContent label="For Students">
             <ForStudentsTab />
           </TabContent>

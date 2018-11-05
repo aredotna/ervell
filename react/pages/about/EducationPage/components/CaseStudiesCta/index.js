@@ -6,6 +6,8 @@ import Box, { mixin } from 'react/components/UI/Box';
 import { GenericButtonLink as Button } from 'react/components/UI/GenericButton';
 import { Headline, Subheadline, Description } from 'react/pages/about/components/Text';
 
+const MOBILE_BREAKPOINT = 1024;
+
 const CTA = styled(Box).attrs({
   py: 9,
   px: 3,
@@ -17,14 +19,23 @@ const CaseStudies = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const CaseStudy = styled.a.attrs({
-  w: 250,
   mx: 6,
 })`
   ${mixin}
+  max-width: 250px;
   text-decoration: none;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
+    width: 90%;
+    margin-bottom: 3em;
+  }
 `;
 
 const Thumb = styled.img`

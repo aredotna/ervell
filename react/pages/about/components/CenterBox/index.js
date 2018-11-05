@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import Box from 'react/components/UI/Box';
 
 export default styled(Box).attrs({
-  w: 470,
-  mw: 470,
   mx: 'auto',
 })`
+  max-width: 470px;
+  width: 100%;
   text-align: center;
 `;

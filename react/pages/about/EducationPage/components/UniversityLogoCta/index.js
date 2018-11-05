@@ -25,7 +25,7 @@ const Logo = styled.div.attrs({
   style: props => ({
     width: 171,
     height: 143,
-    background: `url(${props.src}) center/80% no-repeat`,
+    background: `url(${props.src}) center/70% no-repeat`,
   }),
 })``;
 
