@@ -31,7 +31,7 @@ const InfiniteContainer = styled(InfiniteScroll)`
 
 const GridItem = styled.div`
   position: relative;
-  margin: 0 ${blockGutter} ${multiply(blockGutter, 4)} ${blockGutter};
+  margin: ${props => `0 ${blockGutter} ${multiply(blockGutter, props.gutterSpacing)} ${blockGutter}`};
   width: ${blockWidth};
 
   ${x => !x.variableHeight && `
@@ -43,17 +43,23 @@ export default class Grid extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     variableHeight: PropTypes.bool,
+    gutterSpacing: PropTypes.number,
     loadMore: PropTypes.func,
   }
 
   static defaultProps = {
     variableHeight: false,
+    gutterSpacing: 4,
     loadMore: null,
   }
 
   render() {
     const {
-      children, variableHeight, loadMore, ...rest
+      children,
+      variableHeight,
+      loadMore,
+      gutterSpacing,
+      ...rest
     } = this.props;
 
     const Tag = loadMore ? InfiniteContainer : Container;
@@ -61,7 +67,7 @@ export default class Grid extends Component {
     return (
       <Tag loadMore={loadMore} {...rest}>
         {Children.map(children, child => (child &&
-          <GridItem variableHeight>
+          <GridItem gutterSpacing={gutterSpacing} variableHeight>
             {child}
           </GridItem>
         ))}

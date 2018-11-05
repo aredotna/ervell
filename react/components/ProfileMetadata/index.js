@@ -37,7 +37,7 @@ export default class ProfileMetadata extends Component {
         actions={<ProfileMetadataActions identifiable={identifiable} />}
       >
         <ExpandableContext>
-          <Grid variableHeight>
+          <Grid gutterSpacing={2} variableHeight>
             <ProfileMetadataInfo identifiable={identifiable} view={view} />
 
             {identifiable.__typename === 'Group' && identifiable.users.length > 0 &&

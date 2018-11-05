@@ -31,7 +31,7 @@ export default class ChannelMetadata extends Component {
         }
       >
         <ExpandableContext>
-          <Grid variableHeight>
+          <Grid gutterSpacing={2} variableHeight>
             <Pocket title="Info">
               <ChannelMetadataInfo channel={channel} />
             </Pocket>
