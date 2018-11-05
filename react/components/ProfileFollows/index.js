@@ -62,6 +62,7 @@ export default class ProfileFollows extends Component {
           following: profileFollowingQuery,
           followers: profileFollowersQuery,
         }[type]}
+        key={type}
         variables={{ id, per }}
       >
         {({
