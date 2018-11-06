@@ -3,7 +3,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import LinksList from 'react/components/LinksList';
-import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
+import { Expandable } from 'react/components/UI/ExpandableSet';
 
 import channelMetadataConnectionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataConnections/fragments/channelMetadataConnections';
 
@@ -34,9 +34,9 @@ export default class ChannelMetadataConnections extends Component {
     return (
       <div>
         {channel.connected_to_channels.length > 0 &&
-          <ChannelMetadataExpandable>
+          <Expandable>
             <ConnectionsList links={channel.connected_to_channels} />
-          </ChannelMetadataExpandable>
+          </Expandable>
         }
 
         {channel.can.connect &&

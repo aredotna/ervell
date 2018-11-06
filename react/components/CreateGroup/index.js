@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { without } from 'underscore';
 
+import mapErrors from 'react/util/mapErrors';
 import currentUserService from 'react/util/currentUserService';
 
+import Box from 'react/components/UI/Box';
 import TitledDialog from 'react/components/UI/TitledDialog';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
-import CancelButton from 'react/components/CreateGroup/components/CancelButton';
 import HelpTip from 'react/components/CreateGroup/components/HelpTip';
-import { LabelledInput, Label, Input } from 'react/components/UI/Inputs';
+import { LabelledInput, Label, Input, Textarea } from 'react/components/UI/Inputs';
 
 import createGroupMutation from 'react/components/CreateGroup/mutations/createGroup';
 import addChannelMemberMutation from 'react/components/CreateGroup/mutations/addChannelMember';
@@ -19,10 +21,7 @@ import inviteUserMutation from 'react/components/CreateGroup/mutations/inviteUse
 
 class CreateGroup extends Component {
   static propTypes = {
-    channel_id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onClose: PropTypes.func.isRequired,
     createGroup: PropTypes.func.isRequired,
     addChannelMember: PropTypes.func.isRequired,
@@ -30,20 +29,30 @@ class CreateGroup extends Component {
     inviteUser: PropTypes.func.isRequired,
   }
 
+  static defaultProps = {
+    channel_id: null,
+  }
+
   state = {
     mode: 'resting',
     name: '',
+    description: '',
     user_ids: [currentUserService().id],
+    errorMessage: null,
+    attributeErrors: {},
   }
 
-  handleName = ({ target: { value: name } }) => {
-    const isEdited = name !== '';
+  handleInput = fieldName => ({ target: { value: fieldValue } }) =>
+    this.setState(prevState => ({
+      [fieldName]: fieldValue,
+      attributeErrors: {
+        ...prevState.attributeErrors,
+        [fieldName]: null, // Clear specific error once typing begins
+      },
+    }));
 
-    this.setState({
-      name,
-      mode: isEdited ? 'submit' : 'resting',
-    });
-  }
+  handleName = this.handleInput('name')
+  handleDescription = this.handleInput('description')
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -52,16 +61,14 @@ class CreateGroup extends Component {
       channel_id, onClose, createGroup, addChannelMember, addGroupUsers,
     } = this.props;
 
-    const { mode, name, user_ids } = this.state;
-
-    if (mode === 'resting') return onClose();
+    const { name, description, user_ids } = this.state;
 
     this.setState({ mode: 'submitting' });
 
     // Create the group
-    return createGroup({ variables: { name } })
+    return createGroup({ variables: { name, description } })
       // Add users to the Group
-      .then(({ data: { create_group: { group: { id } } } }) => {
+      .then(({ data: { create_group: { group: { id, href } } } }) => {
         if (user_ids.length === 0) return Promise.resolve();
 
         return addGroupUsers({
@@ -70,25 +77,38 @@ class CreateGroup extends Component {
             user_ids,
           },
         })
-          // Pass along the group id
-          .then(() => id);
+          .then(() => {
+            // If there's no channel context then redirect to the new group
+            if (!channel_id) {
+              window.location = href;
+              return Promise.resolve();
+            }
+
+            // Pass along the group id
+            return id;
+          });
       })
-      // Add the group to the channel
-      .then(member_id =>
-        addChannelMember({
+
+      // Add the group to the channel if a `channel_id` is present
+      .then((member_id) => {
+        if (!channel_id) return Promise.resolve();
+
+        return addChannelMember({
           variables: {
             channel_id,
             member_id,
             member_type: 'GROUP',
           },
-        }))
+        });
+      })
 
       // Close it out
       .then(onClose)
       .catch((err) => {
-        console.error(err);
-        // TODO: Better error handling
-        this.setState({ mode: 'error' });
+        this.setState({
+          mode: 'error',
+          ...mapErrors(err),
+        });
       });
   }
 
@@ -118,64 +138,89 @@ class CreateGroup extends Component {
     }));
 
   render() {
-    const { mode, name, user_ids } = this.state;
-    const { channel_id, onClose } = this.props;
+    const {
+      mode,
+      name,
+      description,
+      user_ids,
+      errorMessage,
+      attributeErrors,
+    } = this.state;
+
+    const { channel_id } = this.props;
 
     return (
       <TitledDialog
-        title="Create group"
+        title="New group"
         label={{
-          resting: 'Done',
-          submit: 'Save',
+          resting: 'Create Group',
           submitting: 'Saving...',
           error: 'Error',
         }[mode]}
         onDone={this.handleSubmit}
       >
-        {mode !== 'resting' &&
-          <CancelButton onClick={onClose} />
-        }
+        <div>
+          {mode === 'error' &&
+            <ErrorAlert>
+              {errorMessage}
+            </ErrorAlert>
+          }
 
-        <LabelledInput>
-          <Label>
-            Name
-          </Label>
-
-          <Input
-            name="name"
-            placeholder="enter group name"
-            onChange={this.handleName}
-            value={name}
-          />
-        </LabelledInput>
-
-        <LabelledInput>
-          <Label>
-            Invite
-          </Label>
-
-          <CollaboratorSearch
-            types={['USER']}
-            onAdd={this.handleAddUser}
-            onInvite={this.handleInviteUser}
-            channel_id={channel_id}
-          />
-        </LabelledInput>
-
-        {user_ids.length > 0 &&
           <LabelledInput>
             <Label>
-              Members
+              Name
             </Label>
 
-            <PendingGroupUsers
-              user_ids={user_ids}
-              onRemove={this.removeUserId}
+            <Input
+              name="name"
+              placeholder="enter group name"
+              onChange={this.handleName}
+              autoFocus
+              required
+              value={name}
             />
           </LabelledInput>
-        }
 
-        <HelpTip />
+          <LabelledInput my={6} alignItems="start">
+            <Label>
+              Description
+            </Label>
+
+            <Textarea
+              placeholder="Describe your channel here"
+              rows={4}
+              value={description}
+              onChange={this.handleDescription}
+              errorMessage={attributeErrors.description}
+            />
+          </LabelledInput>
+
+          <LabelledInput>
+            <Label>
+              Invite
+            </Label>
+
+            <div>
+              <CollaboratorSearch
+                types={['USER']}
+                onAdd={this.handleAddUser}
+                onInvite={this.handleInviteUser}
+                channel_id={channel_id}
+              />
+
+              {user_ids.length > 0 &&
+                <Box my={6}>
+                  <PendingGroupUsers
+                    user_ids={user_ids}
+                    onRemove={this.removeUserId}
+                  />
+                </Box>
+              }
+            </div>
+          </LabelledInput>
+
+          <HelpTip />
+        </div>
       </TitledDialog>
     );
   }

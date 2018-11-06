@@ -13,7 +13,7 @@ import unfollowMutation from 'react/components/FollowButton/mutations/unfollow';
 class FollowButton extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    type: PropTypes.oneOf(['USER', 'CHANNEL']).isRequired,
+    type: PropTypes.oneOf(['USER', 'GROUP', 'CHANNEL']).isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       followable: propType(followableFragment),
@@ -30,13 +30,16 @@ class FollowButton extends Component {
     unfollowNode: 'Unfollow',
   }
 
-  toggleFollow = async () => {
+  toggleFollow = async (e) => {
+    e.preventDefault();
+
     const {
       id, type, data: { followable }, isLoggedIn,
     } = this.props;
 
     if (!isLoggedIn) {
       window.location = `/sign_up?redirect-to=${window.location.pathname}`;
+      return null;
     }
 
     const action = followable.is_followed ? 'unfollow' : 'follow';
@@ -60,30 +63,26 @@ class FollowButton extends Component {
 
   render() {
     const {
-      data: { loading }, followNode, unfollowNode, ...loadingRest
-    } = this.props;
-
-    if (loading) {
-      return (
-        <span {...loadingRest}>
-          {followNode}
-        </span>
-      );
-    }
-
-    const {
       id,
       type,
       follow: _follow,
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
-      followNode: _followNode,
-      unfollowNode: _unfollowNode,
-      data: { followable },
+      followNode,
+      unfollowNode,
+      data,
       ...rest
     } = this.props;
 
-    const isFollowed = !!(followable && followable.is_followed);
+    if (data.loading) {
+      return (
+        <span {...rest}>
+          {followNode}
+        </span>
+      );
+    }
+
+    const isFollowed = !!(data.followable && data.followable.is_followed);
 
     return (
       <span onClick={this.toggleFollow} role="button" tabIndex={0} {...rest}>

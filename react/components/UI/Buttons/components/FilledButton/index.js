@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import { themeGet } from 'styled-system';
 import chroma from 'chroma-js';
 
+import constants from 'react/styles/constants';
+
 import { mixin as buttonMixin } from 'react/components/UI/GenericButton';
 
 const CONTRAST_RATIO = 4.5;
@@ -33,6 +35,7 @@ export const hoverMixin = css`
 const mixin = css`
   ${buttonMixin}
   border: none;
+  border-radius: ${constants.radii.subtle};
 
   ${x => x.hover && hoverMixin}
   &:hover { ${hoverMixin} }

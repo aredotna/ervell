@@ -1,5 +1,4 @@
 import 'isomorphic-fetch';
-import url from 'url';
 import sharify from 'sharify';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -16,6 +15,8 @@ import { Themed } from 'react/styles/theme';
 
 import introspectionQueryResultData from 'react/apollo/fragmentTypes.json';
 
+import clientData from 'react/apollo/localState/clientData';
+
 const isClientSide = typeof window !== 'undefined';
 
 const { data: { GRAPHQL_ENDPOINT } } = sharify;
@@ -26,7 +27,12 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 });
 
-export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute, isLoggedIn } = {}) => {
+export const initApolloClient = ({
+  token: X_AUTH_TOKEN,
+  currentRoute,
+  isLoggedIn,
+  cookies,
+} = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__;
   }
@@ -49,6 +55,14 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute, isLoggedIn
       loginStatus: {
         __typename: 'LoginStatus',
         isLoggedIn,
+      },
+      cookies: {
+        __typename: 'Cookies',
+      },
+    },
+    resolvers: {
+      Cookies: {
+        get: (_obj, args) => cookies[args.name] || null,
       },
     },
   });
@@ -80,38 +94,28 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, currentRoute, isLoggedIn
   return client;
 };
 
-export const initClientSideApolloClient = () => {
-  const { data: { CURRENT_USER, CURRENT_URL } } = sharify;
-
-  const currentRoute = { ...url.parse(CURRENT_URL || window.location.href) };
-  const isLoggedIn = !!(CURRENT_USER && CURRENT_USER.id);
-
-  return initApolloClient({
-    token: CURRENT_USER && CURRENT_USER.authentication_token,
-    currentRoute,
-    isLoggedIn,
-  });
-};
+export const initClientSideApolloClient = () =>
+  initApolloClient(clientData());
 
 if (isClientSide) {
   initClientSideApolloClient();
 }
 
-// TODO: Rename to boot or something...?
-export const wrapWithApolloProvider = (client = isClientSide && window.__APOLLO_CLIENT__) =>
-  (Component, props = {}) => (
-    <ApolloProvider client={client}>
-      <Themed>
-        <Component {...props} />
-      </Themed>
-    </ApolloProvider>
-  );
+export const wrapWithProviders =
+  (client = isClientSide && window.__APOLLO_CLIENT__) =>
+    (Component, props = {}) => (
+      <ApolloProvider client={client}>
+        <Themed>
+          <Component {...props} />
+        </Themed>
+      </ApolloProvider>
+    );
 
 export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
   if (!mountNode) return null;
 
   const client = initClientSideApolloClient();
-  const WrappedComponent = wrapWithApolloProvider(client)(Component, props);
+  const WrappedComponent = wrapWithProviders(client)(Component, props);
 
   return mount(WrappedComponent, mountNode);
 };

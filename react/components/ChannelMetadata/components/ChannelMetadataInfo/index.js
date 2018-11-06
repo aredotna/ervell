@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Count from 'react/components/UI/Count';
 import ChannelShareButton from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton';
-import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
+import { Expandable } from 'react/components/UI/ExpandableSet';
 
 import channelMetadataInfoFragment from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/fragments/channelMetadataInfo';
 
@@ -34,9 +34,9 @@ export default class ChannelMetadataInfo extends Component {
 
     return (
       <div>
-        <ChannelMetadataExpandable>
+        <Expandable>
           <div dangerouslySetInnerHTML={{ __html: channel.info || '—' }} />
-        </ChannelMetadataExpandable>
+        </Expandable>
 
         <Buttons>
           {channel.visibility !== 'private' && channel.counts.followers > 0 &&

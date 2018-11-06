@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { space, textColor, borderColor, fontFamily, fontSize } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
-import { antialiased } from 'react/styles/mixins';
+import { antialiased, fractional } from 'react/styles/mixins';
 
 import Icons, { ICON_NAMES } from 'react/components/UI/Icons';
 
@@ -14,16 +14,17 @@ const Outline = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   border: 1px solid;
-  border-radius: 0.33em;
+  border-radius: 0.33em; // extract
   line-height: 1;
   user-select: none;
-  cursor: default;
+  vertical-align: ${x => x.verticalAlign || 'middle'};
   ${preset(space, { py: 2, px: 3 })}
   ${preset(fontFamily, { font: 'narrow' })}
   ${preset(fontSize, { f: 1 })}
   ${preset(textColor, { color: 'gray.base' })}
   ${preset(borderColor, { borderColor: 'inherit' })}
   ${antialiased}
+  ${fractional}
 `;
 
 const Inner = styled.div`

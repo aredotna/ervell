@@ -25,15 +25,17 @@ const COLORS = {
     translucent: 'rgba(255, 255, 255, 0.9)',
     transparent: 'rgba(255, 255, 255, 0.001)',
   },
+  white: 'white',
+  black: 'black',
 };
 
-export const COLOR_NAMES = Object
-  .keys(COLORS)
-  .reduce(
-    (memo, namespace) =>
-      memo.concat(Object.keys(COLORS[namespace]).map(color =>
-        `${namespace}.${color}`)),
-    [],
-  );
+const { white: _white, black: _black, ...colorObjs } = COLORS;
+
+export const COLOR_NAMES = Object.keys(colorObjs).reduce(
+  (memo, namespace) =>
+    memo.concat(Object.keys(COLORS[namespace]).map(color =>
+      `${namespace}.${color}`)),
+  [],
+);
 
 export default COLORS;

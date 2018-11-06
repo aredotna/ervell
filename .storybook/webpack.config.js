@@ -1,6 +1,7 @@
 module.exports = config => {
   config.resolve.extensions = [
     '.mjs',
+    '.jade',
     ...config.resolve.extensions,
   ];
 
@@ -19,6 +20,15 @@ module.exports = config => {
       test: /\.coffee$/,
       exclude: /node_modules/,
       loader: 'coffee-loader',
+    },
+    {
+      test: /\.(jade|pug)$/,
+      exclude: /node_modules/,
+      loader: 'pug-loader',
+      options: {
+        doctype: 'html',
+        root: __dirname,
+      },
     },
     ...config.module.rules,
   ];

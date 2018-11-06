@@ -19,6 +19,12 @@ export const __outlineBorder__ = (size = '5px', color = theme.colors.gray.light,
 export const outlineBorder = (size = '5px', color = theme.colors.gray.light, radius = '0.25em') =>
   __outlineBorder__(size, color, radius);
 
+export const overflowEllipsis = css`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
 export const hyphenate = css`
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -44,13 +50,18 @@ export const antialiased = css`
 `;
 
 export const neutralMarginsY = css`
-  &:first-child {
-    margin-top: 0;
-  }
+  &:first-child { margin-top: 0; }
+  &:last-child { margin-bottom: 0; }
+`;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+export const neutralMarginsX = css`
+  &:first-child { margin-left: 0; }
+  &:last-child { margin-right: 0; }
+`;
+
+export const neutralMargins = css`
+  ${x => x.neutralMarginsY && neutralMarginsY}
+  ${x => x.neutralMarginsX && neutralMarginsX}
 `;
 
 export const channelVisibilityForegroundColor = css`
@@ -71,10 +82,15 @@ export const channelVisibilityForegroundColor = css`
 }
   `;
 
+export const fractional = css`
+  -webkit-transform: scale(0.99); // Hack to force fractional pixels in Chrome
+`;
+
 export default {
   outlineBorder,
   hyphenate,
   antialiased,
   neutralMarginsY,
   channelVisibilityForegroundColor,
+  fractional,
 };

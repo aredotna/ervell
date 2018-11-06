@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
+import Indicator from 'react/components/ConnectionSelectionList/components/Indicator';
 import ChannelsList from 'react/components/ConnectionSelectionList/components/ChannelsList';
-import LoadingIndicator from 'react/components/ConnectionSelectionList/components/RecentChannels/components/LoadingIndicator';
 
 import recentChannelsQuery from 'react/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels';
 
@@ -12,15 +12,24 @@ class RecentChannels extends Component {
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
     }).isRequired,
+    isOutlined: PropTypes.bool,
     onConnectionSelection: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    isOutlined: true,
   }
 
   render() {
     const {
-      onConnectionSelection, data: { loading }, ...rest
+      onConnectionSelection,
+      isOutlined: _isOutlined,
+      data: { loading, error },
+      ...rest
     } = this.props;
 
-    if (loading) return <LoadingIndicator {...rest} />;
+    if (error) return <Indicator label="Error" {...rest} />;
+    if (loading) return <Indicator label="Loading..." {...rest} />;
 
     const { data: { me: { recent_channels: channels } } } = this.props;
 

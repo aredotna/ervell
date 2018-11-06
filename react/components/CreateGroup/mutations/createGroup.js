@@ -5,6 +5,7 @@ export default gql`
     create_group(input: { name: $name }) {
       group {
         id
+        href
       }
     }
   }

@@ -1,33 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
+import { withRouter } from 'react-router-dom';
 
 import profileBreadcrumbFragment from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/fragments/profileBreadcrumb';
 
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import ProfileBadge from 'react/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge';
-import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
+import Badge from 'react/components/UI/Badge';
 
 class ProfileBreadcrumb extends Component {
   static propTypes = {
-    user: propType(profileBreadcrumbFragment).isRequired,
-    currentRoute: PropTypes.shape({
-      href: PropTypes.string.isRequired,
+    identifiable: propType(profileBreadcrumbFragment).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
     }).isRequired,
   }
 
   render() {
-    const { user, currentRoute: { pathname } } = this.props;
+    const { identifiable, location: { pathname } } = this.props;
 
     return (
       <StickyBreadcrumbPath>
         <StickyBreadcrumbPath.Crumb>
-          <a href={user.href}>
-            {user.name}
+          <a href={identifiable.href}>
+            {identifiable.name}
           </a>
 
-          {!/follow(ers|ing)$/.test(pathname) &&
-            <ProfileBadge user={user} />
+          {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'Group') &&
+            <Badge f={0} ml={4} color="gray.medium" icon={{ private: 'Lock' }[identifiable.visibility]}>
+              Group
+            </Badge>
+          }
+
+          {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'User') &&
+            <ProfileBadge user={identifiable} />
           }
         </StickyBreadcrumbPath.Crumb>
 
@@ -47,4 +54,4 @@ class ProfileBreadcrumb extends Component {
   }
 }
 
-export default WithCurrentRoute(ProfileBreadcrumb);
+export default withRouter(ProfileBreadcrumb);

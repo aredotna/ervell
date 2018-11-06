@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
-import { themeGet, fontSize, space, alignSelf } from 'styled-system';
+import { themeGet, fontSize, space, alignSelf, display } from 'styled-system';
 import chroma from 'chroma-js';
 
 import { defaultTo, preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
+import constants from 'react/styles/constants';
 
 export const BUTTON_DEFAULT_FONT_SIZE = 3;
 export const BUTTON_VARIANTS = { LARGE: 'LARGE', SMALL: 'SMALL' };
@@ -11,7 +12,7 @@ export const BUTTON_LARGE_PADDING = { px: 8, py: 5 };
 export const BUTTON_SMALL_PADDING = { px: 6, py: 5 };
 export const BUTTON_SMALL_BORDER_WIDTH = '1px';
 export const BUTTON_LARGE_BORDER_WIDTH = '2px';
-export const BUTTON_BORDER_RADIUS = '0.25em';
+export const BUTTON_BORDER_RADIUS = constants.radii.button;
 
 export const buttonSize = x => (
   defaultTo(x.f, x.fontSize) < BUTTON_DEFAULT_FONT_SIZE
@@ -55,7 +56,7 @@ export const disabledMixin = css`
 
 export const mixin = css`
   all: initial;
-  display: inline-block;
+  ${preset(display, { display: 'inline-block' })}
   ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
   border: ${buttonBorderWidth} solid;
   border-radius: ${BUTTON_BORDER_RADIUS};

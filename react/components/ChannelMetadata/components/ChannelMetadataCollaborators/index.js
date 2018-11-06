@@ -6,7 +6,7 @@ import Modal from 'react/components/UI/Modal';
 import CreateGroup from 'react/components/CreateGroup';
 import ManageCollaborators from 'react/components/ManageCollaborators';
 import CollaboratorsList from 'react/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsList';
-import ChannelMetadataExpandable from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
+import { Expandable } from 'react/components/UI/ExpandableSet';
 
 const Actions = styled.div`
   div + & {
@@ -56,12 +56,12 @@ export default class CollaboratorsListContainer extends Component {
     return (
       <div>
         {collaborators.length > 0 &&
-          <ChannelMetadataExpandable>
+          <Expandable>
             <StyledCollaboratorsList
               collaborators={collaborators}
               channel_id={channel_id}
             />
-          </ChannelMetadataExpandable>
+          </Expandable>
         }
 
         {can.manage_collaborators &&
@@ -71,7 +71,7 @@ export default class CollaboratorsListContainer extends Component {
             </Link>
 
             <Link onClick={this.openCreateGroup} role="button" tabIndex={0}>
-              Create group
+              New group
             </Link>
           </Actions>
         }

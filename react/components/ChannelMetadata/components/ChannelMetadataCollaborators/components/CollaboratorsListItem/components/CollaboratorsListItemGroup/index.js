@@ -18,7 +18,9 @@ export default class CollaboratorsListItemGroup extends Component {
     mode: 'resting',
   }
 
-  handleClick = () => {
+  handleClick = (e) => {
+    e.preventDefault();
+
     const { channel_id, group: { id, can } } = this.props;
 
     if (can.manage || can.manage_users) {
@@ -32,7 +34,6 @@ export default class CollaboratorsListItemGroup extends Component {
     }));
   }
 
-
   render() {
     const { mode } = this.state;
     const {
@@ -40,14 +41,12 @@ export default class CollaboratorsListItemGroup extends Component {
         name, description, can, user, users,
       },
     } = this.props;
-
     const allUsers = [user, ...users];
 
     return (
       <strong>
         <Link onClick={this.handleClick} length={name.length} title={description}>
           {name}
-
           {mode === 'resting' &&
             <span>
               {' '}(

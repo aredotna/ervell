@@ -13,8 +13,12 @@ const Container = styled.div`
 
 export default class ChannelsList extends Component {
   static propTypes = {
-    channels: PropTypes.arrayOf(propType(selectableChannelFragment)).isRequired,
+    channels: PropTypes.arrayOf(propType(selectableChannelFragment)),
     onConnectionSelection: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    channels: [],
   }
 
   render() {

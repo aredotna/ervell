@@ -1,13 +1,14 @@
 import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import constants from 'react/styles/constants';
 import { multiply } from 'react/styles/functions';
 
 const { blockGutter, blockWidth } = constants;
 
-const Container = styled.div`
+const containerMixin = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -20,9 +21,17 @@ const Container = styled.div`
   `}
 `;
 
+const Container = styled.div`
+  ${containerMixin}
+`;
+
+const InfiniteContainer = styled(InfiniteScroll)`
+  ${containerMixin}
+`;
+
 const GridItem = styled.div`
   position: relative;
-  margin: 0 ${blockGutter} ${multiply(blockGutter, 2)} ${blockGutter};
+  margin: ${props => `0 ${blockGutter} ${multiply(blockGutter, props.gutterSpacing)} ${blockGutter}`};
   width: ${blockWidth};
 
   ${x => !x.variableHeight && `
@@ -34,23 +43,35 @@ export default class Grid extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     variableHeight: PropTypes.bool,
+    gutterSpacing: PropTypes.number,
+    loadMore: PropTypes.func,
   }
 
   static defaultProps = {
     variableHeight: false,
+    gutterSpacing: 4,
+    loadMore: null,
   }
 
   render() {
-    const { children, variableHeight, ...rest } = this.props;
+    const {
+      children,
+      variableHeight,
+      loadMore,
+      gutterSpacing,
+      ...rest
+    } = this.props;
+
+    const Tag = loadMore ? InfiniteContainer : Container;
 
     return (
-      <Container {...rest}>
+      <Tag loadMore={loadMore} {...rest}>
         {Children.map(children, child => (child &&
-          <GridItem variableHeight>
+          <GridItem gutterSpacing={gutterSpacing} variableHeight>
             {child}
           </GridItem>
         ))}
-      </Container>
+      </Tag>
     );
   }
 }
