@@ -9,7 +9,7 @@ import { Headline, Subheadline, Description } from 'react/pages/about/components
 const MOBILE_BREAKPOINT = 1024;
 
 const CTA = styled(Box).attrs({
-  py: 9,
+  py: 10,
   px: 3,
   borderBottom: '1px solid',
   borderColor: themeGet('colors.gray.regular'),
@@ -63,7 +63,7 @@ export default class CaseStudiesCta extends Component {
   render() {
     return (
       <CTA>
-        <Headline pb={6}>
+        <Headline pb={7}>
           How are teachers and students using Are.na?
         </Headline>
         <CaseStudies>
@@ -100,7 +100,7 @@ export default class CaseStudiesCta extends Component {
           </CaseStudy>
         </CaseStudies>
         <CenterBox>
-          <Button f={4} mt={8} href="https://www.are.na/arena-commons/teaching-on-are-na">
+          <Button f={5} mt={8} py={6} href="https://www.are.na/arena-commons/teaching-on-are-na">
             See More Examples
           </Button>
           <Description>

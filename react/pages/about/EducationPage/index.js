@@ -56,7 +56,7 @@ export default class EducationPage extends Component {
               Are.na Premium gives you unlimited privacy for personal projects.
               Use coupon code <strong>education</strong> to upgrade for half the price.
             </Description>
-            <Button f={4} mt={6} href="/sign_up">
+            <Button f={5} mt={6} py={6} href="/sign_up">
               Join Now
             </Button>
           </CenterBox>
@@ -68,8 +68,9 @@ export default class EducationPage extends Component {
             <Subheadline>
               Questions? Contact Us.
             </Subheadline>
-            <Description>
-              We’re people making tools for people. If you’d like to ask a question or just chat, send us an email at <a href="mailto:everyone@are.na">everyone@are.na</a>. You can also <a href="https://confirmsubscription.com/h/d/728B9103B7704F3A">subscribe to our newsletter</a> for monthly updates.
+            <Description align="left">
+              We’re people making tools for people. If you’d like to ask a question or just chat, send us an email at <a href="mailto:everyone@are.na">everyone@are.na</a>.<br />
+              You can also <a href="https://confirmsubscription.com/h/d/728B9103B7704F3A">subscribe to our newsletter</a> for monthly updates.
             </Description>
           </CenterBox>
         </CTA>
