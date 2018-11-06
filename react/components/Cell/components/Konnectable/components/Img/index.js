@@ -19,19 +19,21 @@ const Container = styled(Box).attrs({
     max-height: 100%;
   }
 
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: ${x => x.theme.colors.gray.light};
-    z-index: -1;
-  }
+  ${props => !props.done && `
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      background-color: ${props.theme.colors.gray.light};
+      z-index: -1;
+    }
+  `}
 `;
 
 class Img extends Component {
@@ -44,12 +46,21 @@ class Img extends Component {
     alt: null,
   }
 
+  state = {
+    done: false,
+  }
+
+  setDone = () => {
+    this.setState({ done: true });
+  }
+
   render() {
+    const { done } = this.state;
     const { src, alt } = this.props;
 
     return (
-      <Container>
-        <LoadableImage src={src} alt={alt} />
+      <Container done={done}>
+        <LoadableImage src={src} alt={alt} onLoad={this.setDone} />
       </Container>
     );
   }
