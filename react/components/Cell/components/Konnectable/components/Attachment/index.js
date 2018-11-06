@@ -37,7 +37,7 @@ export default class Attachment extends Component {
 
     if (attachment.src) {
       return (
-        <Generic src={attachment.src} alt={attachment.title} {...rest} />
+        <Generic src={attachment.src} title={attachment.title} {...rest} />
       );
     }
 

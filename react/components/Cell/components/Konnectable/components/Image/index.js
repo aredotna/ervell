@@ -15,7 +15,7 @@ export default class Image extends Component {
     const { image, ...rest } = this.props;
 
     return (
-      <Generic src={image.src} alt={image.title} {...rest} />
+      <Generic src={image.src} title={image.title} {...rest} />
     );
   }
 }

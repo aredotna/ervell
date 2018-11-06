@@ -14,7 +14,7 @@ export default class Link extends Component {
     const { link, ...rest } = this.props;
 
     return (
-      <Generic src={link.src} alt={link.title} {...rest} />
+      <Generic src={link.src} title={link.title} {...rest} />
     );
   }
 }

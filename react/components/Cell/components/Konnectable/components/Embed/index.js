@@ -14,7 +14,7 @@ export default class Embed extends Component {
     const { embed, ...rest } = this.props;
 
     return (
-      <Generic src={embed.src} alt={embed.title} {...rest} />
+      <Generic src={embed.src} title={embed.title} {...rest} />
     );
   }
 }
