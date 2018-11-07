@@ -25,7 +25,7 @@ export default class ProfileContents extends Component {
 
   state = {
     page: 1,
-    per: 20,
+    per: 12,
     hasMore: true,
     q: null,
   }
@@ -117,7 +117,7 @@ export default class ProfileContents extends Component {
               {!loading && contents.length > 0 &&
                 <Grid
                   pageStart={1}
-                  threshold={500}
+                  threshold={800}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={contents.length >= per && hasMore}

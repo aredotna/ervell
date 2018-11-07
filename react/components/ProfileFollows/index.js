@@ -18,7 +18,7 @@ export default class ProfileFollows extends Component {
 
   state = {
     page: 1,
-    per: 20,
+    per: 12,
     hasMore: true,
   }
 
@@ -87,7 +87,7 @@ export default class ProfileFollows extends Component {
               {!loading && collection.length > 0 &&
                 <Grid
                   pageStart={1}
-                  threshold={500}
+                  threshold={800}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={collection.length >= per && hasMore}

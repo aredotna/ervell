@@ -114,7 +114,7 @@ export default class ProfileChannels extends Component {
               {!loading && channels.length > 0 &&
                 <InfiniteScroll
                   pageStart={1}
-                  threshold={500}
+                  threshold={800}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={channels.length >= per && hasMore}
