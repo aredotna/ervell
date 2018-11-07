@@ -55,7 +55,9 @@ class NewChannelForm extends Component {
       title, description, visibility, visit_channel,
     } = this.state;
 
-    const variables = { title, description, visibility };
+    const variables = {
+      title, description, visibility,
+    };
 
     this.setState({ mode: 'creating' });
 

@@ -1,3 +1,4 @@
+Promise = require 'bluebird-q'
 _ = require 'underscore'
 sd = require('sharify').data
 Backbone = require 'backbone'
@@ -105,14 +106,23 @@ module.exports = class LegacyBlockView extends Backbone.View
 
     @model = mediator.shared.blocks[direction](@model)
 
-    mediator.trigger 'slide:to:block', @model.id
+    # If we've explictly stated that this block is not loaded yet,
+    # load it then unset the flag.
+    promise = if @model.get('unloaded')
+      Promise(@model.fetch())
+        .then => @model.set('unloaded', false)
+    else
+      Promise.resolve(true)
 
-    _.invoke @subViews, 'remove'
+    promise.then =>
+      mediator.trigger 'slide:to:block', @model.id
 
-    @initModel()
-    @render()
-    @xHR?.abort() if @xHR?.readyState > 0 && @xHR?.readyState < 4
-    @xHR = @model.fetch()
+      _.invoke @subViews, 'remove'
+
+      @initModel()
+      @render()
+      @xHR?.abort() if @xHR?.readyState > 0 && @xHR?.readyState < 4
+      @xHR = @model.fetch()
 
   addConnections: (connection) ->
     connections = @model.connections()

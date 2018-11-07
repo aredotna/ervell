@@ -1,46 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { SORTS } from 'react/components/Profile/config';
-
-import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
+import { withRouter } from 'react-router-dom';
 
 import Pocket from 'react/components/UI/Pocket';
 import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
 
 class ProfileMetadataSort extends Component {
   static propTypes = {
-    currentRoute: PropTypes.shape({
+    location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
-    sort: PropTypes.oneOf(SORTS).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
 
-  isCurrentUpdatedAt = () =>
-    this.props.sort === 'updated_at';
-
-  isCurrentRandom = () =>
-    this.props.sort === 'random';
+  isSortActive = sort => () =>
+    this.props.sort === sort;
 
   render() {
-    const { currentRoute: { pathname } } = this.props;
+    const { location: { pathname } } = this.props;
 
     return (
       <Pocket title="Sort">
         <ProfileLinkUnlessCurrent
           name="sort"
-          value="updated_at"
-          href={`${pathname}?sort=updated_at`}
-          predicate={this.isCurrentUpdatedAt}
+          value="UPDATED_AT"
+          to={{
+            pathname,
+            search: '?sort=UPDATED_AT',
+          }}
+          isActive={this.isSortActive('UPDATED_AT')}
         >
           Recently updated
         </ProfileLinkUnlessCurrent>
 
         <ProfileLinkUnlessCurrent
           name="sort"
-          value="random"
-          href={`${pathname}?sort=random`}
-          predicate={this.isCurrentRandom}
+          value="RANDOM"
+          to={{
+            pathname,
+            search: '?sort=RANDOM',
+          }}
+          isActive={this.isSortActive('RANDOM')}
         >
           Random
         </ProfileLinkUnlessCurrent>
@@ -49,4 +49,4 @@ class ProfileMetadataSort extends Component {
   }
 }
 
-export default WithCurrentRoute(ProfileMetadataSort);
+export default withRouter(ProfileMetadataSort);

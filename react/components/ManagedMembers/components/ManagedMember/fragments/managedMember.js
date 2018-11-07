@@ -6,13 +6,13 @@ export default gql`
   fragment ManagedMember on Member {
     __typename
     ... on User {
-      id
+      id: slug
       name
       href
       ...MemberAvatar
     }
     ... on Group {
-      id
+      id: slug
       name
       ...MemberAvatar
       counts {

@@ -1,10 +1,14 @@
 import styled from 'styled-components';
+import { themeGet, space } from 'styled-system';
+
+import { preset } from 'react/styles/functions';
 
 export default styled.hr`
-  margin: 1em auto;
+  ${preset(space, { my: 6 })}
   height: 1px;
   border: none;
-  background-color: ${x => `
-    ${!x.invisible && (x.color || x.theme.colors.gray.regular)}
-  `};
+  background-color: ${(props) => {
+    if (props.invisible) return 'transparent';
+    return themeGet(`colors.${props.color}`, props.theme.colors.gray.regular)(props);
+  }}
 `;

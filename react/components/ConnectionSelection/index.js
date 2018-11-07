@@ -15,11 +15,11 @@ class ConnectionSelection extends Component {
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
     createConnection: PropTypes.func.isRequired,
     removeConnection: PropTypes.func.isRequired,
-    outline: PropTypes.bool,
+    isOutlined: PropTypes.bool,
   }
 
   static defaultProps = {
-    outline: true,
+    isOutlined: true,
   }
 
   handleConnectionSelection = (isSelected, channelId) => {
@@ -31,10 +31,10 @@ class ConnectionSelection extends Component {
     } = this.props;
 
     const refetchQueries = [
-      type === 'CHANNEL' && {
+      ...(type === 'CHANNEL' && {
         query: channelMetadataQuery,
         variables: { id },
-      },
+      }),
     ];
 
     if (isSelected) {

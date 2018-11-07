@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 
 export const BREAKPOINTS = {
   mobile: 640,
+  small: 1024,
 };
 
 export const MEDIA_QUERIES = Object.keys(BREAKPOINTS)
@@ -28,8 +29,8 @@ export const SPACING_SCALE = [
   '0',
   '0.125em',
   '0.25em',
-  '0.33em',
-  '0.66em',
+  '0.34375em',
+  '0.65625em',
   '0.75em',
   '1em', // 6
   '2em',
@@ -46,9 +47,15 @@ export const CONSTANT_VALUES = {
   headerHeight: '50px',
   blockWidth: '315px', // TODO: 19.5em
   blockGutter: '10px', // (legacyUnit / 2) TODO: 1em
+  doubleBlockGutter: '20px', // TODO
   blockAndGutter: '335px', // (blockWidth + blockGutter)
   containerOffset: '100px', // TODO: Something based on real values
   legacyUnit: '20px',
+};
+
+export const RADII = {
+  button: '0.25em',
+  subtle: '0.125em',
 };
 
 export default {
@@ -57,4 +64,5 @@ export default {
   z: Z_INDEXES,
   breakpoints: BREAKPOINTS,
   space: SPACING_SCALE,
+  radii: RADII,
 };

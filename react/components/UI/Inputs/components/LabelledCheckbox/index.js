@@ -18,7 +18,7 @@ const LabelledCheckbox = ({ children, ...rest }) => (
 );
 
 LabelledCheckbox.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default LabelledCheckbox;

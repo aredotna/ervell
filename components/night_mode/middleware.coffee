@@ -1,8 +1,6 @@
-Cookies = require "cookies"
-key = 'is-inverted'
+KEY = 'is-inverted'
 
 module.exports = (req, res, next) ->
-  cookies = new Cookies req, res
-  isInverted = cookies.get key
+  isInverted = req.cookies[KEY]
   res.locals.sd.IS_INVERTED = true if isInverted is '1'
   next()

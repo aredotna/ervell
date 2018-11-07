@@ -21,7 +21,7 @@ export const mixin = css`
   ${fontWeight}
   ${fontStyle}
   ${textAlign}
-  ${neutralMarginsY}
+  ${props => props.neutralMarginsY && neutralMarginsY}
 
   a {
     color: inherit;
@@ -32,11 +32,25 @@ export const mixin = css`
     `}
   }
 
+  > h1,
+  > h2,
+  > h3,
+  > h4 {
+    font-size: 1rem;
+    ${neutralMarginsY}
+  }
+
   > p {
     ${neutralMarginsY}
   }
 `;
 
-export default styled.div`
+const Text = styled.div`
   ${mixin}
 `;
+
+Text.defaultProps = {
+  neutralMarginsY: true,
+};
+
+export default Text;

@@ -33,7 +33,7 @@ class HomeMetadata extends Component {
         <Route
           path="/explore"
           render={() => (
-            <Grid>
+            <Grid gutterSpacing={2} variableHeight>
               <HomeMetadataView mode={mode} sort={sort} />
               <HomeMetadataSort mode={mode} sort={sort} />
             </Grid>

@@ -2,7 +2,6 @@ _ = require 'underscore'
 _s = require 'underscore.string'
 sd = require('sharify').data
 Backbone = require 'backbone'
-Backbone.$ = $
 mediator = require '../../../lib/mediator.coffee'
 analytics = require '../../../lib/analytics.coffee'
 markdown = require '../../../lib/markdown.coffee'

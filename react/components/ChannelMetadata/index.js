@@ -11,7 +11,7 @@ import ChannelMetadataCollaborators from 'react/components/ChannelMetadata/compo
 import ChannelMetadataInfo from 'react/components/ChannelMetadata/components/ChannelMetadataInfo';
 import ChannelMetadataConnections from 'react/components/ChannelMetadata/components/ChannelMetadataConnections';
 import ChannelMetadataActions from 'react/components/ChannelMetadata/components/ChannelMetadataActions';
-import { ChannelMetadataExpandableContext } from 'react/components/ChannelMetadata/components/ChannelMetadataExpandable';
+import { ExpandableContext } from 'react/components/UI/ExpandableSet';
 
 export default class ChannelMetadata extends Component {
   static propTypes = {
@@ -30,8 +30,8 @@ export default class ChannelMetadata extends Component {
           <ChannelMetadataActions channel={channel} />
         }
       >
-        <ChannelMetadataExpandableContext>
-          <Grid variableHeight>
+        <ExpandableContext>
+          <Grid gutterSpacing={2} variableHeight>
             <Pocket title="Info">
               <ChannelMetadataInfo channel={channel} />
             </Pocket>
@@ -48,7 +48,7 @@ export default class ChannelMetadata extends Component {
               </Pocket>
             }
           </Grid>
-        </ChannelMetadataExpandableContext>
+        </ExpandableContext>
       </HeaderMetadataContainer>
     );
   }

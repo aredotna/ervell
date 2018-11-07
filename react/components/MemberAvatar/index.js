@@ -8,9 +8,11 @@ import Avatar from 'react/components/UI/Avatar';
 import memberAvatarFragment from 'react/components/MemberAvatar/fragments/memberAvatar';
 
 const Initials = styled.div`
-  font-size: ${x => x.size / 3}px;
+  font-family: ${x => x.theme.fonts.sans};
+  font-size: ${x => x.size / 3}px !important;
   color: ${x => x.theme.colors.gray.medium};
   text-transform: uppercase;
+  text-decoration: none;
 `;
 
 const Image = styled.img`
@@ -24,13 +26,15 @@ const Image = styled.img`
 `;
 
 export default class MemberAvatar extends Component {
-  static defaultProps = {
-    size: 40,
-  }
-
   static propTypes = {
     member: propType(memberAvatarFragment).isRequired,
     size: PropTypes.number,
+    isLinked: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    size: 40,
+    isLinked: true,
   }
 
   state = {
@@ -43,11 +47,13 @@ export default class MemberAvatar extends Component {
 
   render() {
     const { hideImage } = this.state;
-    const { member, size } = this.props;
+    const {
+      member, size, isLinked, ...rest
+    } = this.props;
 
     return (
-      <Avatar href={member.href} f={size}>
-        <Initials f={size}>
+      <Avatar tag={isLinked ? 'a' : 'span'} href={member.href} size={size} {...rest}>
+        <Initials size={size}>
           {member.initials}
         </Initials>
 

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { SORTS } from 'react/components/Profile/config';
-
 import Pocket from 'react/components/UI/Pocket';
 import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
 
 export default class HomeMetadataView extends Component {
   static propTypes = {
-    sort: PropTypes.oneOf(SORTS).isRequired,
+    sort: PropTypes.oneOf(['updated_at', 'random']).isRequired,
   }
 
   isCurrent = ({ targetHref, currentRoute }) =>

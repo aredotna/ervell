@@ -148,9 +148,6 @@ module.exports = (app) ->
   # Convert the GraphQL error messages into some kind of matching status code
   app.use require('./middleware/errorStatus.js').default
 
-  # Drop down to error handling middleware if nothing else catches it
-  app.use(makeErrorHandler(airbrake))
-
   if NODE_ENV is 'development'
     app.use (err, req, res, next) =>
       res.status(err.status or 500)
@@ -162,6 +159,9 @@ module.exports = (app) ->
         <pre>#{err.stack}</pre>
       """)
   else
+    # Drop down to error handling middleware if nothing else catches it
+    app.use(makeErrorHandler(airbrake))
+
     # TODO: Kill this/replace with something that's not a Node module
     artsyError.handlers app,
       template: path.resolve(__dirname, '../components/layout/templates/error.jade')

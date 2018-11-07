@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
 
-import { SORTS } from 'react/components/Profile/config';
-
 import profileMetadataViewFragment from 'react/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView';
 
 import Pocket from 'react/components/UI/Pocket';
@@ -11,50 +9,55 @@ import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/component
 
 export default class ProfileMetadataView extends Component {
   static propTypes = {
-    user: propType(profileMetadataViewFragment).isRequired,
-    sort: PropTypes.oneOf(SORTS).isRequired,
+    identifiable: propType(profileMetadataViewFragment).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'following', 'followers']).isRequired,
   }
 
-  isCurrent = ({ targetHref, currentRoute }) =>
-    currentRoute.pathname === targetHref.split('?')[0];
+  isViewActive = view => () =>
+    this.props.view === view;
 
   render() {
-    const { user: { href }, sort } = this.props;
+    const { identifiable: { __typename, href }, sort } = this.props;
 
     return (
       <Pocket title="View">
-        <ProfileLinkUnlessCurrent
-          name="filter"
-          value="all"
-          href={`${href}?sort=${sort}`}
-          predicate={this.isCurrent}
-        >
-          All
-        </ProfileLinkUnlessCurrent>
+        {__typename === 'User' &&
+          <ProfileLinkUnlessCurrent
+            name="view"
+            value="all"
+            to={`${href}/all?sort=${sort}`}
+            isActive={this.isViewActive('all')}
+          >
+            All
+          </ProfileLinkUnlessCurrent>
+        }
 
         <ProfileLinkUnlessCurrent
-          name="filter"
+          name="view"
           value="channels"
-          href={`${href}/channels?sort=${sort}`}
-          predicate={this.isCurrent}
+          to={`${href}/channels?sort=${sort}`}
+          isActive={this.isViewActive('channels')}
         >
           Channels
         </ProfileLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent
-          name="filter"
-          value="blocks"
-          href={`${href}/blocks?sort=${sort}`}
-          predicate={this.isCurrent}
-        >
-          Blocks
-        </ProfileLinkUnlessCurrent>
+        {__typename === 'User' &&
+          <ProfileLinkUnlessCurrent
+            name="view"
+            value="blocks"
+            to={`${href}/blocks?sort=${sort}`}
+            isActive={this.isViewActive('blocks')}
+          >
+            Blocks
+          </ProfileLinkUnlessCurrent>
+        }
 
         <ProfileLinkUnlessCurrent
-          name="filter"
+          name="view"
           value="index"
-          href={`${href}/index`}
-          predicate={this.isCurrent}
+          to={`${href}/index`}
+          isActive={this.isViewActive('index')}
         >
           Index
         </ProfileLinkUnlessCurrent>

@@ -1,4 +1,4 @@
-import { random, name, lorem } from 'faker';
+import { random, name, lorem, commerce, company } from 'faker';
 import { sample } from 'lodash';
 import { MockList } from 'graphql-tools';
 
@@ -13,6 +13,8 @@ const connectable = () => ({
 
 const Mocks = {
   Channel: () => ({
+    id: random.number({ min: 1, max: 999999 }),
+    slug: `slug-${random.number({ min: 1, max: 999999 })}`,
     title: random.words(),
     visibility: sample(['closed', 'private', 'public'])
   }),
@@ -22,9 +24,15 @@ const Mocks = {
   }),
 
   User: () => ({
+    id: random.number({ min: 1, max: 999999 }),
     name: `${name.firstName()} ${name.lastName()}`,
     initials: "IOU",
     avatar: "https://dummyimage.com/100x100/000/fff&text=**",
+  }),
+
+  Group: () => ({
+    name: `${commerce.productAdjective()} ${company.catchPhraseNoun()}`,
+    initials: 'IOU'
   }),
 
   Connection: () => ({
@@ -59,6 +67,7 @@ const Mocks = {
     ...connectable(),
     content: Array(random.number(20)).fill(undefined)
       .map(() => `<p>${lorem.paragraph()}</p>`).join(''),
+    source: null,
   }),
 
   Deed: () => ({

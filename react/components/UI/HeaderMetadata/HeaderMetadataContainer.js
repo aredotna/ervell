@@ -46,11 +46,15 @@ export default class HeaderMetadataContainer extends Component {
     breadcrumb: PropTypes.node.isRequired,
     actions: PropTypes.node,
     children: PropTypes.node,
+    pre: PropTypes.node,
+    post: PropTypes.node,
   }
 
   static defaultProps = {
     actions: null,
     children: null,
+    pre: null,
+    post: null,
   }
 
   render() {
@@ -58,11 +62,15 @@ export default class HeaderMetadataContainer extends Component {
       breadcrumb,
       actions,
       children,
+      pre,
+      post,
       ...rest
     } = this.props;
 
     return (
       <Container hasChildren={!!children} {...rest}>
+        {pre}
+
         <Header>
           <Breadcrumb>
             {breadcrumb}
@@ -80,6 +88,8 @@ export default class HeaderMetadataContainer extends Component {
             {children}
           </Metadata>
         }
+
+        {post}
       </Container>
     );
   }

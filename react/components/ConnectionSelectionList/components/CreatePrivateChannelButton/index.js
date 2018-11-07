@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
-import recentChannelsQuery from 'react/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels';
-
 import createPrivateChannelMutation from 'react/components/ConnectionSelectionList/components/CreatePrivateChannelButton/mutations/createPrivateChannel';
 
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
@@ -16,11 +14,19 @@ class CreatePrivateChannelButton extends Component {
     onConnectionCreation: PropTypes.func.isRequired,
   }
 
-  state = {
-    mode: 'resting',
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.mode === 'done' && prevState.createdTitle !== null && nextProps.title !== prevState.createdTitle) {
+      return { mode: 'resting', createdTitle: null };
+    }
+    return null;
   }
 
-  createPrivateChannel = async () => {
+  state = {
+    mode: 'resting',
+    createdTitle: null,
+  }
+
+  createPrivateChannel = () => {
     const {
       title,
       createPrivateChannel,
@@ -29,40 +35,22 @@ class CreatePrivateChannelButton extends Component {
 
     this.setState({ mode: 'creating' });
 
-    const refetchQueries = [
-      {
-        query: recentChannelsQuery,
-      },
-    ];
-
-    try {
-      const {
-        data: {
-          create_channel: {
-            channel: {
-              id: newChannelId,
-            },
-          },
-        },
-      } = await createPrivateChannel({
-        refetchQueries,
-        variables: { title },
+    createPrivateChannel({ variables: { title } })
+      .then(({ data: { create_channel: { channel: newChannel } } }) => {
+        this.setState({ mode: 'connecting' });
+        return onConnectionCreation(true, newChannel.id);
+      })
+      .then(() => {
+        this.setState({ mode: 'done', createdTitle: title });
+      })
+      .catch((err) => {
+        console.error(err);
+        this.setState({ mode: 'error' });
       });
-
-      this.setState({ mode: 'resting' });
-
-      return onConnectionCreation(true, newChannelId);
-    } catch (err) {
-      console.error(err);
-
-      this.setState({ mode: 'error' });
-
-      return null;
-    }
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode, createdTitle } = this.state;
     const { title } = this.props;
 
     return (
@@ -71,6 +59,8 @@ class CreatePrivateChannelButton extends Component {
           {{
             resting: `+ New private channel “${title}”`,
             creating: `Creating ${title}...`,
+            connecting: `Connecting ${title}...`,
+            done: `Created and connected to ${createdTitle} ✔`,
             error: 'An error occurred',
           }[mode]}
         </ColoredChannelSpan>

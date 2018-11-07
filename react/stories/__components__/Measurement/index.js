@@ -11,7 +11,7 @@ const Container = styled.div`
 const Label = styled.div`
   font-size: ${x => x.theme.fontSizes[1]};
   line-height: 1;
-  font-family: ${x => x.theme.fonts.sans};
+  font-family: ${x => x.theme.fonts.mono};
   color: ${x => x.theme.colors.gray.base};
   margin-left: ${x => x.theme.space[5]}
 `;
@@ -34,7 +34,10 @@ export default class Measurement extends Component {
     return (
       <Container>
         <Ruler height={value} />
-        <Label>{name} = {value}</Label>
+
+        <Label>
+          {name} = {value} = {parseFloat(value) * 16}px (@1rem = 16px)
+        </Label>
       </Container>
     );
   }

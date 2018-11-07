@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { space } from 'styled-system';
+import { space, width, height } from 'styled-system';
+
+import { preset } from 'react/styles/functions';
 
 import Text from 'react/components/UI/Text';
 
@@ -9,16 +11,20 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex: 1;
-  width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: center;
+  user-select: none;
   ${space}
+  ${preset(width, { width: '100%' })}
+  ${preset(height, { height: '100%' })}
 `;
 
 export default class LoadingIndicator extends Component {
   static propTypes = {
     frames: PropTypes.arrayOf(PropTypes.string),
+    interval: PropTypes.number,
+    f: PropTypes.number,
+    color: PropTypes.string,
   }
 
   static defaultProps = {
@@ -27,6 +33,9 @@ export default class LoadingIndicator extends Component {
       '··',
       '···',
     ],
+    interval: 175,
+    f: 7,
+    color: 'gray.base',
   }
 
   state = {
@@ -36,7 +45,7 @@ export default class LoadingIndicator extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.setState(({ cursor }) => ({ cursor: cursor + 1 }));
-    }, 200);
+    }, this.props.interval);
   }
 
   componentWillUnmount() {
@@ -45,11 +54,13 @@ export default class LoadingIndicator extends Component {
 
   render() {
     const { cursor } = this.state;
-    const { frames, ...rest } = this.props;
+    const {
+      frames, f, color, ...rest
+    } = this.props;
 
     return (
       <Container {...rest}>
-        <Text f={7} color="gray.base">
+        <Text f={f} color={color}>
           {frames[cursor % frames.length]}
         </Text>
       </Container>
