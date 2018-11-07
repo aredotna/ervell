@@ -7,6 +7,8 @@ export default gql`
     title
     visibility
     user {
+      __typename
+      id
       name
     }
   }

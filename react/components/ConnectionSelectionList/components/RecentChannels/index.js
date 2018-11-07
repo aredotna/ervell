@@ -28,8 +28,14 @@ class RecentChannels extends Component {
       ...rest
     } = this.props;
 
-    if (error) return <Indicator label="Error" {...rest} />;
-    if (loading) return <Indicator label="Loading..." {...rest} />;
+    if (error) {
+      console.error(error);
+      return <Indicator label="Error" {...rest} />;
+    }
+
+    if (loading) {
+      return <Indicator label="Loading..." {...rest} />;
+    }
 
     const { data: { me: { recent_channels: channels } } } = this.props;
 
