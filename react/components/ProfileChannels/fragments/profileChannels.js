@@ -7,7 +7,7 @@ export default gql`
   fragment ProfileChannels on Identifiable {
     ... on Group {
       __typename
-      id: slug
+      id
       channels(page: $page, per: $per) {
         ... Channel
         blokks(per: 5) {
@@ -20,7 +20,7 @@ export default gql`
     }
     ... on User {
       __typename
-      id: slug
+      id
       name
       counts {
         channels

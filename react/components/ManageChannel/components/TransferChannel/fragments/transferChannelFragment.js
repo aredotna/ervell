@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export default gql`
   fragment TransferChannel on Channel {
-    id: slug
+    id
     can {
       transfer
     }

@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export default gql`
   fragment ChannelShareButton on Channel {
     __typename
-    id: slug
+    id
     visibility
     share {
       url

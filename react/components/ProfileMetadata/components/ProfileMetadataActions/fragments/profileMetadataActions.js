@@ -4,7 +4,7 @@ export default gql`
   fragment ProfileMetadataActions on Identifiable {
     __typename
     ... on User {
-      id: slug
+      id
       name
       can {
         follow
@@ -13,7 +13,7 @@ export default gql`
       }
     }
     ... on Group {
-      id: slug
+      id
       can {
         follow
         manage

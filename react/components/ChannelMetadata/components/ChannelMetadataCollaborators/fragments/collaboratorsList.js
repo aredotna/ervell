@@ -5,7 +5,7 @@ import collaboratorLinkFragment from 'react/components/ChannelMetadata/component
 export default gql`
   fragment CollaboratorsList on Channel {
     __typename
-    id: slug
+    id
     can {
       manage_collaborators
     }

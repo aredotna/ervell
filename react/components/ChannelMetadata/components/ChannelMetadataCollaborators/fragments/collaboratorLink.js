@@ -4,21 +4,21 @@ export default gql`
   fragment CollaboratorLink on Member {
     __typename
     ... on User {
-      id: slug
+      id
       name
       href
     }
     ... on Group {
-      id: slug
+      id
       name
       description(format: MARKDOWN)
       user {
-        id: slug
+        id
         name
         href
       }
       users {
-        id: slug
+        id
         name
         href
       }

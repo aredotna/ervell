@@ -6,12 +6,12 @@ export default gql`
   fragment IdentifiableCell on Identifiable {
     __typename
     ... on User {
-      id: slug
+      id
       name
       href
     }
     ... on Group {
-      id: slug
+      id
       name
       href
       visibility

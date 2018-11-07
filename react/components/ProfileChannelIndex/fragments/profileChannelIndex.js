@@ -6,7 +6,7 @@ export default gql`
   fragment ProfileChannelIndex on Identifiable {
     ... on User {
       __typename
-      id: slug
+      id
       channels_index(type: $type) {
         key
         channels {
@@ -16,7 +16,7 @@ export default gql`
     }
     ... on Group {
       __typename
-      id: slug
+      id
       channels_index(type: $type) {
         key
         channels {

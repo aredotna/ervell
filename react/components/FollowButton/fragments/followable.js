@@ -11,7 +11,7 @@ export default gql`
       }
     }
     ... on Channel {
-      id: slug
+      id
       is_followed
       counts {
         followers
