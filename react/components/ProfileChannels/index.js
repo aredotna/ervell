@@ -28,8 +28,12 @@ export default class ProfileChannels extends Component {
   }
 
   shouldComponentUpdate(_nextProps, nextState) {
-    // Only needs to re-render the parent when the query changes
-    return this.state.q !== nextState.q;
+    return (
+      // Only needs to re-render the parent when the query changes
+      (this.state.q !== nextState.q) ||
+      // Or we reach the end
+      (this.state.hasMore !== nextState.hasMore)
+    );
   }
 
   resetQuery = (query) => {
