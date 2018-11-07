@@ -77,7 +77,7 @@ class FollowButton extends Component {
     if (data.loading) {
       return (
         <span {...rest}>
-          {followNode}
+          —
         </span>
       );
     }
