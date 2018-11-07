@@ -31,6 +31,8 @@ export default class ProfileChannels extends Component {
     return (
       // Only needs to re-render the parent when the query changes
       (this.state.q !== nextState.q) ||
+      // Or we reset to the beginning
+      (nextState.page === 1) ||
       // Or we reach the end
       (this.state.hasMore !== nextState.hasMore)
     );

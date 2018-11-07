@@ -34,10 +34,12 @@ export default class ProfileContents extends Component {
     return (
       // Only needs to re-render the parent when the query changes
       (this.state.q !== nextState.q) ||
-      // Or the type changes
-      (this.props.type !== nextProps.type) ||
+      // Or we reset to the beginning
+      (nextState.page === 1) ||
       // Or we reach the end
-      (this.state.hasMore !== nextState.hasMore)
+      (this.state.hasMore !== nextState.hasMore) ||
+      // Or the type changes
+      (this.props.type !== nextProps.type)
     );
   }
 
