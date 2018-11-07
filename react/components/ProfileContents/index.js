@@ -30,6 +30,15 @@ export default class ProfileContents extends Component {
     q: null,
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      // Only needs to re-render the parent when the query changes
+      (this.state.q !== nextState.q) ||
+      // Or the type changes
+      (this.props.type !== nextProps.type)
+    );
+  }
+
   resetQuery = (query) => {
     const q = query === '' ? null : query;
     this.setState({ q, page: 1, hasMore: true });
