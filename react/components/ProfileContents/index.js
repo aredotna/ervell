@@ -35,7 +35,9 @@ export default class ProfileContents extends Component {
       // Only needs to re-render the parent when the query changes
       (this.state.q !== nextState.q) ||
       // Or the type changes
-      (this.props.type !== nextProps.type)
+      (this.props.type !== nextProps.type) ||
+      // Or we reach the end
+      (this.state.hasMore !== nextState.hasMore)
     );
   }
 
