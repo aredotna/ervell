@@ -6,7 +6,7 @@ import konnectableCellFragment from 'react/components/Cell/components/Konnectabl
 export default gql`
   fragment ProfileFollowers on User {
     __typename
-    id: slug
+    id
     followers(page: $page, per: $per) {
       ... IdentifiableCell
       ... KonnectableCell

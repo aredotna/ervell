@@ -13,10 +13,11 @@ import manageChannelQuery from 'react/components/ManageChannel/queries/manageCha
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
 import Box from 'react/components/UI/Box';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Accordion from 'react/components/UI/Accordion';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
-import { LabelledInput, Label, Input, Textarea, ErrorMessage } from 'react/components/UI/Inputs';
+import { LabelledInput, Label, Input, Textarea } from 'react/components/UI/Inputs';
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
@@ -121,6 +122,12 @@ class ManageChannel extends Component {
         onDone={this.handleSubmit}
       >
         <Container>
+          {mode === 'error' &&
+            <ErrorAlert isReloadable={false}>
+              {errorMessage}
+            </ErrorAlert>
+          }
+
           <Accordion label="Edit name, description, and privacy">
             <LabelledInput>
               <Label>Name</Label>
@@ -185,12 +192,6 @@ class ManageChannel extends Component {
                 <DeleteChannel id={channel.id} />
               </Box>
             </Accordion>
-          }
-
-          {mode === 'error' &&
-            <ErrorMessage my={5} align="center">
-              {errorMessage}
-            </ErrorMessage>
           }
         </Container>
       </TitledDialog>

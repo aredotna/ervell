@@ -4,7 +4,7 @@ export default gql`
   fragment ProfileAvatar on Identifiable {
     ... on Group {
       __typename
-      id: slug
+      id
       avatar(size: LARGE)
       can {
         update

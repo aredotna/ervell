@@ -5,7 +5,7 @@ import manageUsersFragment from 'react/components/ManageGroup/components/ManageU
 
 export default gql`
   fragment ManageGroup on Group {
-    id: slug
+    id
     name
     href
     description(format: MARKDOWN)

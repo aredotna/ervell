@@ -187,7 +187,7 @@ class CreateGroup extends Component {
             </Label>
 
             <Textarea
-              placeholder="Describe your channel here"
+              placeholder="Describe your group here"
               rows={4}
               value={description}
               onChange={this.handleDescription}
