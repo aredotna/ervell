@@ -138,9 +138,9 @@ class ProfileViews extends Component {
       case 'index':
         return <Index id={id} filter={filter} identifiable={identifiable} />;
       case 'followers':
-        return <Following id={id} fetchPolicy={fetchPolicy} />;
-      case 'following':
         return <Followers id={id} fetchPolicy={fetchPolicy} />;
+      case 'following':
+        return <Following id={id} fetchPolicy={fetchPolicy} />;
       default:
         return null;
     }
