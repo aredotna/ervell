@@ -15,12 +15,12 @@ export default gql`
     owner {
       __typename
       ... on Group {
-        id: slug
+        id
         name
         visibility
       }
       ... on User {
-        id: slug
+        id
         name
       }
     }

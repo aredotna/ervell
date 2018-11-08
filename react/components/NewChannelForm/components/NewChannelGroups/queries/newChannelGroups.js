@@ -12,7 +12,7 @@ export default gql`
       ... UserAvatar
       groups(page: 1, per: 25) {
         __typename
-        id: slug
+        id
         name
         ... MemberAvatar
       }

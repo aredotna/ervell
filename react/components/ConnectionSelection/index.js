@@ -31,10 +31,10 @@ class ConnectionSelection extends Component {
     } = this.props;
 
     const refetchQueries = [
-      ...(type === 'CHANNEL' && {
+      ...(type === 'CHANNEL' && [{
         query: channelMetadataQuery,
         variables: { id },
-      }),
+      }]),
     ];
 
     if (isSelected) {

@@ -5,7 +5,7 @@ export default gql`
     update_group(input: { id: $id, avatar_url: $avatar_url }) {
       group {
         __typename
-        id: slug
+        id
         avatar(size: LARGE)
       }
     }

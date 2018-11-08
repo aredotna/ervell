@@ -6,7 +6,7 @@ import collaboratorsListFragment from 'react/components/ChannelMetadata/componen
 export default gql`
   fragment ManageCollaborators on Channel {
     __typename
-    id: slug
+    id
     counts {
       collaborators
     }

@@ -4,11 +4,11 @@ export default gql`
   fragment ProfileMetadataFilter on Identifiable {
     __typename
     ... on User {
-      id: slug
+      id
       name
     }
     ... on Group {
-      id: slug
+      id
       name
     }
   }

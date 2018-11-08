@@ -4,7 +4,7 @@ import managedMemberFragment from 'react/components/ManagedMembers/components/Ma
 
 export default gql`
   fragment ManageUsers on Group {
-    id: slug
+    id
     name
     owner: user {
       ...ManagedMember

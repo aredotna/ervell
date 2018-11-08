@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export default gql`
   fragment ChannelBreadcrumb on Channel {
     __typename
-    id: slug
+    id
     title
     href
     visibility

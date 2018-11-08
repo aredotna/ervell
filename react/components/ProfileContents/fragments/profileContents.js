@@ -6,7 +6,7 @@ export default gql`
   fragment ProfileContents on Identifiable {
     ... on User {
       __typename
-      id: slug
+      id
       name
       contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: $sort, q: $q) {
         ... KonnectableCell

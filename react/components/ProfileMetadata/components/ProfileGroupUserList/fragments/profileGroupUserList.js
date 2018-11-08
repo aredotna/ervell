@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export default gql`
   fragment ProfileGroupUserList on Identifiable {
     ... on Group {
-      id: slug
+      id
       user {
         id
         label: name

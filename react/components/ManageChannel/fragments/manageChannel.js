@@ -4,7 +4,7 @@ import transferChannelFragment from 'react/components/ManageChannel/components/T
 
 export default gql`
   fragment ManageChannel on Channel {
-    id: slug
+    id
     href
     title
     description(format: MARKDOWN)

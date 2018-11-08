@@ -5,7 +5,7 @@ import muteChannelButtonFragment from 'react/components/ChannelMetadata/componen
 export default gql`
   fragment ChannelMetadataActions on Channel {
     __typename
-    id: slug
+    id
     can {
       follow
       update

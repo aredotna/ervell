@@ -17,6 +17,7 @@ export default class ProfileContents extends Component {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
   }
 
   static defaultProps = {
@@ -25,9 +26,22 @@ export default class ProfileContents extends Component {
 
   state = {
     page: 1,
-    per: 20,
+    per: 12,
     hasMore: true,
     q: null,
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      // Only needs to re-render the parent when the query changes
+      (this.state.q !== nextState.q) ||
+      // Or we reset to the beginning
+      (nextState.page === 1) ||
+      // Or we reach the end
+      (this.state.hasMore !== nextState.hasMore) ||
+      // Or the type changes
+      (this.props.type !== nextProps.type)
+    );
   }
 
   resetQuery = (query) => {
@@ -65,10 +79,10 @@ export default class ProfileContents extends Component {
   }
 
   render() {
+    const { per, hasMore, q } = this.state;
     const {
-      per, hasMore, q,
-    } = this.state;
-    const { id, type, sort } = this.props;
+      id, type, sort, fetchPolicy,
+    } = this.props;
 
     return (
       <Query
@@ -76,6 +90,7 @@ export default class ProfileContents extends Component {
         variables={{
           id, type, per, sort, q,
         }}
+        fetchPolicy={fetchPolicy}
       >
         {({
           loading, error, data, fetchMore,
@@ -117,7 +132,7 @@ export default class ProfileContents extends Component {
               {!loading && contents.length > 0 &&
                 <Grid
                   pageStart={1}
-                  threshold={500}
+                  threshold={800}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={contents.length >= per && hasMore}

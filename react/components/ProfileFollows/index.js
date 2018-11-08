@@ -14,11 +14,12 @@ export default class ProfileFollows extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['followers', 'following']).isRequired,
+    fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
   }
 
   state = {
     page: 1,
-    per: 20,
+    per: 12,
     hasMore: true,
   }
 
@@ -54,7 +55,7 @@ export default class ProfileFollows extends Component {
 
   render() {
     const { per, hasMore } = this.state;
-    const { id, type } = this.props;
+    const { id, type, fetchPolicy } = this.props;
 
     return (
       <Query
@@ -64,6 +65,7 @@ export default class ProfileFollows extends Component {
         }[type]}
         key={type}
         variables={{ id, per }}
+        fetchPolicy={fetchPolicy}
       >
         {({
           loading, error, data, fetchMore,
@@ -87,7 +89,7 @@ export default class ProfileFollows extends Component {
               {!loading && collection.length > 0 &&
                 <Grid
                   pageStart={1}
-                  threshold={500}
+                  threshold={800}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
                   hasMore={collection.length >= per && hasMore}
