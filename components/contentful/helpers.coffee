@@ -24,28 +24,21 @@ module.exports =
     """
 
   figCaption: (image) ->
-    return unless image.fields and image.fields.description
+    return '' unless image.fields?.description
     return "<figcaption>#{image.fields.description}</figcaption>"
 
-  formatRichTextWithImagePlaceholders: (raw, imageOptions) ->
+  formatRichTextWithImages: (raw, imageOptions) ->
     # optional: imageOptions: sizes, srcsetSizes, elClass
-    imageIds = []
     renderOptions = renderNode : {}
 
     renderOptions.renderNode[BLOCKS.EMBEDDED_ASSET] = (node, next) =>
-      id = node.data.target.sys.id
-      imageIds.push id
-      return "<figure class='contentful-asset' data-asset-id=#{id}></figure>"
-    body = documentToHtmlString raw, renderOptions
-    return { body, imageIds }
-
-  replaceImagePlaceholders: (body, images, imageOptions) ->
-    $ = cheerio.load(body)
-    $('figure.contentful-asset').each (i, el) =>
-      image = images.find (image) =>
-        return image.sys.id == $(el).attr('data-asset-id')
-      $(el).append(@image(image, imageOptions))
-      $(el).append(@figCaption(image))
-    return $.html()
+      image = node.data.target
+      return """
+        <figure class='contentful-asset' data-asset-id=#{image.sys.id}>
+          #{@image(image, imageOptions)}
+          #{@figCaption(image)}
+        </figure>
+      """
+    return documentToHtmlString raw, renderOptions
 
 
