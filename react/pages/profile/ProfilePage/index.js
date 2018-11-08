@@ -4,7 +4,6 @@ import { Query } from 'react-apollo';
 
 import CenteringBox from 'react/components/UI/CenteringBox';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
-import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
@@ -24,8 +23,6 @@ export default class ProfilePage extends Component {
     const {
       id, view, sort, filter,
     } = this.props;
-
-    const isClientSide = typeof window !== 'undefined';
 
     return (
       <ErrorBoundary>
@@ -64,17 +61,13 @@ export default class ProfilePage extends Component {
                   identifiable={identifiable}
                 />
 
-                {isClientSide
-                  ? (
-                    <ProfileViews
-                      view={typedView}
-                      id={id}
-                      sort={sort}
-                      filter={filter}
-                      identifiable={identifiable}
-                    />
-                  ) : <BlocksLoadingIndicator />
-                }
+                <ProfileViews
+                  view={typedView}
+                  id={id}
+                  sort={sort}
+                  filter={filter}
+                  identifiable={identifiable}
+                />
               </div>
             );
           }}

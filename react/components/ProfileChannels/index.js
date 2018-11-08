@@ -18,6 +18,7 @@ export default class ProfileChannels extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
   }
 
   state = {
@@ -74,7 +75,7 @@ export default class ProfileChannels extends Component {
 
   render() {
     const { per, hasMore, q } = this.state;
-    const { id, sort } = this.props;
+    const { id, sort, fetchPolicy } = this.props;
 
     return (
       <Query
@@ -82,7 +83,7 @@ export default class ProfileChannels extends Component {
         variables={{
           id, per, sort, q,
         }}
-        fetchPolicy="network-only"
+        fetchPolicy={fetchPolicy}
       >
         {({
           loading, error, data, fetchMore,
