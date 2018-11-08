@@ -1,5 +1,5 @@
 p.post-meta
-  = formatDate(post.sys.createdAt)
+  = formatDate( post.fields.displayDate || post.sys.createdAt )
   if post.fields.author.fields
     br
     = post.fields.author.fields.name
