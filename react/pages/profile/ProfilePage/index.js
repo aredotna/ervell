@@ -4,14 +4,11 @@ import { Query } from 'react-apollo';
 
 import CenteringBox from 'react/components/UI/CenteringBox';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
+import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
-import ProfileContents from 'react/components/ProfileContents';
-import ProfileChannels from 'react/components/ProfileChannels';
-import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
-import ProfileFollows from 'react/components/ProfileFollows';
-import EmptyMessageOrComponent from 'react/pages/profile/ProfilePage/components/EmptyMessageOrComponent';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
+import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -27,6 +24,8 @@ export default class ProfilePage extends Component {
     const {
       id, view, sort, filter,
     } = this.props;
+
+    const isClientSide = typeof window !== 'undefined';
 
     return (
       <ErrorBoundary>
@@ -59,52 +58,23 @@ export default class ProfilePage extends Component {
             return (
               <div>
                 <ProfileMetadata
-                  identifiable={identifiable}
                   view={typedView}
                   sort={sort}
                   filter={filter}
+                  identifiable={identifiable}
                 />
 
-                {{
-                  all: () => (
-                    <EmptyMessageOrComponent
+                {isClientSide
+                  ? (
+                    <ProfileViews
+                      view={typedView}
+                      id={id}
+                      sort={sort}
+                      filter={filter}
                       identifiable={identifiable}
-                      count={identifiable.counts.channels + identifiable.counts.blocks}
-                    >
-                      <ProfileContents id={id} sort={sort} />
-                    </EmptyMessageOrComponent>
-                  ),
-                  blocks: () => (
-                    <EmptyMessageOrComponent
-                      identifiable={identifiable}
-                      count={identifiable.counts.blocks}
-                    >
-                      <ProfileContents id={id} type="BLOCK" sort={sort} />
-                    </EmptyMessageOrComponent>
-                  ),
-                  channels: () => (
-                    <EmptyMessageOrComponent
-                      identifiable={identifiable}
-                      count={identifiable.counts.channels}
-                    >
-                      <ProfileChannels id={id} sort={sort} />
-                    </EmptyMessageOrComponent>
-                  ),
-                  index: () => (
-                    <EmptyMessageOrComponent
-                      identifiable={identifiable}
-                      count={identifiable.counts.channels}
-                    >
-                      <ProfileChannelIndex id={id} type={filter} />
-                    </EmptyMessageOrComponent>
-                  ),
-                  followers: () => (
-                    <ProfileFollows id={id} type="followers" />
-                  ),
-                  following: () => (
-                    <ProfileFollows id={id} type="following" />
-                  ),
-                }[typedView]()}
+                    />
+                  ) : <BlocksLoadingIndicator />
+                }
               </div>
             );
           }}
