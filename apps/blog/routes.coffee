@@ -16,10 +16,7 @@ posts = require '../../collections/posts.coffee'
     .catch next
 
 @show = (req, res, next) ->
-  slug = req.params.slug.match(/([a-z0-9]+(?:-[a-z0-9]+)*)(?=(\.html)?$)/)[0]
-  return next() if slug is "feed/rss"
-
-  posts.fetchWithSlug(slug).then (post) ->
+  posts.fetchWithSlug(req.params.slug).then (post) ->
     return next() unless post and post.fields
     coverImageUrl = post.fields.image.fields.file.url + '?w=600'
     bio = if (bio = post.fields.author.fields?.bio) then documentToHtmlString(bio) else ''
@@ -36,3 +33,6 @@ posts = require '../../collections/posts.coffee'
       bio: bio
 
   .catch next
+
+@redirectOldUrls = (req, res, next) ->
+  return res.redirect(301, "/blog/#{req.params.slug}")

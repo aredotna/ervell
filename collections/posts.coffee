@@ -17,6 +17,7 @@ module.exports =
   fetchAll: ->
     client.getEntries
       content_type: CONTENTFUL_BLOG_POST_TYPE_ID
+      order: "-fields.displayDate"
     .then (response) ->
       return response.items
 
