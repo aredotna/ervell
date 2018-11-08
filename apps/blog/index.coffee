@@ -8,4 +8,5 @@ app.set 'view engine', 'jade'
 
 app.get '/blog', routes.index
 app.get '/blog/', routes.index
-app.get '/blog/*', routes.show
+app.get '/blog/:slug', routes.show
+app.get '/blog/**/:slug', routes.show

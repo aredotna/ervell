@@ -16,7 +16,7 @@ posts = require '../../collections/posts.coffee'
     .catch next
 
 @show = (req, res, next) ->
-  slug = req.path.replace '/blog/', ''
+  slug = req.params.slug.match(/([a-z0-9]+(?:-[a-z0-9]+)*)(?=(\.html)?$)/)[0]
   return next() if slug is "feed/rss"
 
   posts.fetchWithSlug(slug).then (post) ->
