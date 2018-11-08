@@ -19,24 +19,20 @@ posts = require '../../collections/posts.coffee'
   slug = req.path.replace '/blog/', ''
   return next() if slug is "feed/rss"
 
-  posts.fetchWithSlug(slug)
-  .then( (post) ->
+  posts.fetchWithSlug(slug).then (post) ->
     return next() unless post and post.fields
-
     coverImageUrl = post.fields.image.fields.file.url + '?w=600'
-    bio = if (authorFields = post.fields.author.fields) then documentToHtmlString(authorFields.bio) else ''
-    { body, imageIds } = contentfulFormatter.formatRichTextWithImagePlaceholders(post.fields.body)
-    return posts.fetchImages(imageIds).then( (images) ->
-      body = contentfulFormatter.replaceImagePlaceholders(body, images, {
-        srcsetSizes: [670, 670 * 2, 670 * 3],
-        sizes: "(min-width: 670px) 670px, 100vw"
-      })
-      res.render 'show',
-        title: post.fields.title
-        image: coverImageUrl
-        post: post
-        formatDate: formatDate
-        body: body
-        bio: bio
-    )
-  ).catch next
+    bio = if (bio = post.fields.author.fields?.bio) then documentToHtmlString(bio) else ''
+    body = contentfulFormatter.formatRichTextWithImages post.fields.body, {
+      srcsetSizes: [670, 670 * 2, 670 * 3],
+      sizes: "(min-width: 670px) 670px, 100vw"
+    }
+    res.render 'show',
+      title: post.fields.title
+      image: coverImageUrl
+      post: post
+      formatDate: formatDate
+      body: body
+      bio: bio
+
+  .catch next
