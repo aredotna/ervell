@@ -6,7 +6,7 @@ User = require "../../models/user"
 ChannelBlocks = require "../../collections/channel_blocks"
 UserBlocks = require "../../collections/user_blocks"
 ExploreBlocks = require "../../collections/explore_blocks"
-Posts = require "../../collections/posts.coffee"
+posts = require "../../collections/posts.coffee"
 
 @channelRSS = (req, res, next) ->
   channel = new Channel
@@ -58,10 +58,8 @@ Posts = require "../../collections/posts.coffee"
   .done()
 
 @blogRSS = (req, res, next) ->
-  posts = new Posts
-  posts.fetch()
-  .then ->
+  posts.fetchAll().then (posts) ->
     res.render 'blog',
-      posts: posts.models
+      posts: posts
   .catch next
   .done()
