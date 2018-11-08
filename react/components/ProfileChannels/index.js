@@ -82,6 +82,7 @@ export default class ProfileChannels extends Component {
         variables={{
           id, per, sort, q,
         }}
+        fetchPolicy="network-only"
       >
         {({
           loading, error, data, fetchMore,

@@ -89,6 +89,7 @@ export default class ProfileContents extends Component {
         variables={{
           id, type, per, sort, q,
         }}
+        fetchPolicy="network-only"
       >
         {({
           loading, error, data, fetchMore,
