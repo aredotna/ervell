@@ -27,6 +27,7 @@ const COLORS = {
   },
   white: 'white',
   black: 'black',
+  middleGray: '#929292',
 };
 
 const { white: _white, black: _black, ...colorObjs } = COLORS;
