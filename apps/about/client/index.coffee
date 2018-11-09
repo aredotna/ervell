@@ -2,6 +2,7 @@ loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 slides = require './experiments.coffee'
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
 { default: EducationPage } = require '../../../react/pages/about/EducationPage/index.js'
+{ default: GroupsPage } = require '../../../react/pages/about/GroupsPage/index.js'
 { default: DescriptiveCarousel } = require '../../../react/components/DescriptiveCarousel/index.js'
 { CURRENT_PATH } = require('sharify').data
 
@@ -11,6 +12,9 @@ module.exports = ->
   
   if CURRENT_PATH is '/education'
     mountWithApolloProvider EducationPage, { }, $('#apolloMount')
+
+  if CURRENT_PATH is '/getting-started-with-groups'
+    mountWithApolloProvider GroupsPage, { }, $('#apolloMount')
 
 
   $html = $('html, body')

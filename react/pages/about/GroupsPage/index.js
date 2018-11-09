@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  padding-bottom: 6em;
+  padding-bottom: 0;
   border-top: 1px solid ${x => x.theme.colors.gray.regular};
   background: linear-gradient(${x => x.theme.colors.gray.extraLight}, white);
 `;
@@ -55,8 +55,10 @@ export default class GroupsPage extends Component {
                 Groups have their own profiles and channels
               </Subheadline>
               <Description align="left" my={7}>
-                Every group has a profile page where you can see all your shared content in one place.
-                To keep things clear, you can now author channels as the group or transfer existing ones over.
+                Every group has a profile page where you can see all
+                your shared content in one place.
+                To keep things clear, you can now author channels as
+                the group or transfer existing ones over.
               </Description>
               <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png?1519764799" />
               <Instructions>

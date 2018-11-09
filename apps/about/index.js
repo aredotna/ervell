@@ -3,6 +3,7 @@ import express from 'express';
 import apolloMiddleware from 'react/apollo/middleware';
 
 import EducationPage from 'react/pages/about/EducationPage';
+import GroupsPage from 'react/pages/about/GroupsPage';
 
 const app = express();
 
@@ -22,7 +23,8 @@ app
   .get('/experiments', (req, res) => res.render('experiments'))
   .get('/community-guidelines', (req, res) => res.render('community-guidelines'))
   .get('/thankyou', (req, res) => res.render('thankyou'))
-  .get('/getting-started-with-groups', (req, res) => res.render('groups'))
+  .get('/getting-started-with-groups', ...middlewareStack, (req, res) => req.apollo.render(GroupsPage)
+    .then(apollo => res.render('groups', { apollo })))
   .get('/education', ...middlewareStack, (req, res) => req.apollo.render(EducationPage)
     .then(apollo => res.render('education', { apollo })));
 
