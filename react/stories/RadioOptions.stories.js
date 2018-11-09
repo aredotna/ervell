@@ -15,11 +15,7 @@ storiesOf('RadioOptions', module)
           {({ selected }) => (
             <div>
               <Text f={4} mb={3} selected={selected}>
-                <strong>Basic</strong>
-              </Text>
-
-              <Text f={1} color="gray.medium">
-                Basic members are limited to 100 private blocks.
+                <strong>Basic {selected && '✔'}</strong>
               </Text>
             </div>
           )}
@@ -29,12 +25,7 @@ storiesOf('RadioOptions', module)
           {({ selected }) => (
             <div>
               <Text f={4} mb={3} selected={selected}>
-                <strong>Yearly Premium</strong>
-              </Text>
-
-              <Text f={1} color="gray.medium">
-                Upload unlimited private blocks, hide from search engines,{' '}
-                and get early access to new products and features.
+                <strong>Yearly Premium {selected && '✔'}</strong>
               </Text>
             </div>
           )}
@@ -44,12 +35,7 @@ storiesOf('RadioOptions', module)
           {({ selected }) => (
             <div>
               <Text f={4} mb={3} selected={selected}>
-                <strong>Monthly Premium</strong>
-              </Text>
-
-              <Text f={1} color="gray.medium">
-                Selected members can upload unlimited blocks,{' '}
-                hide from search engines, and gain access to new features.
+                <strong>Monthly Premium {selected && '✔'}</strong>
               </Text>
             </div>
           )}

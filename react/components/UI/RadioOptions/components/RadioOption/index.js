@@ -33,13 +33,17 @@ const Radio = styled(Box).attrs({
   `}
 `;
 
+const Label = styled(Box)`
+  flex: 1;
+`;
+
 const POSSIBLE_VALUE_TYPES = [PropTypes.string, PropTypes.number, PropTypes.bool];
 
 export default class RadioOption extends Component {
   static POSSIBLE_VALUE_TYPES = POSSIBLE_VALUE_TYPES
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.func.isRequired,
     onClick: PropTypes.func,
     value: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES).isRequired,
     selectedValue: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES),
@@ -74,9 +78,9 @@ export default class RadioOption extends Component {
       <Container selected={selected} onClick={this.handleClick} role="button" tabIndex={0}>
         <Radio selected={selected} />
 
-        <div>
+        <Label>
           {provideChildrenWithProps(children, { selected })}
-        </div>
+        </Label>
       </Container>
     );
   }
