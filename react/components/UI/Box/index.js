@@ -14,6 +14,7 @@ import {
   borderColor,
   borderRadius,
   bgColor,
+  textAlign,
 } from 'styled-system';
 
 import { neutralMargins } from 'react/styles/mixins';
@@ -34,6 +35,7 @@ export const mixin = css`
   ${borderColor}
   ${borderRadius}
   ${bgColor}
+  ${textAlign}
   ${neutralMargins}
 `;
 
