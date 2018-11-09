@@ -4,31 +4,39 @@ import { fontSize, space, borderColor, color, width } from 'styled-system';
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 
-const borderlessMixin = css`
-  ${x => x.borderless && `
+export const borderlessMixin = css`
+  ${props => props.borderless && `
     background-color: transparent;
     border-color: transparent;
     padding: 0;
   `}
 `;
 
-const focusMixin = css`
-  border: 1px solid ${x => x.theme.colors.gray.bold};
-  background-color: ${x => x.theme.colors.gray.hint};
+export const errorMixin = css`
+  ${props => props.hasError && `
+    &, &:focus {
+      border-color: ${props.theme.colors.state.alert};
+    }
+  `}
+`;
+
+export const focusMixin = css`
+  border: 1px solid ${props => props.theme.colors.gray.bold};
+  background-color: ${props => props.theme.colors.gray.hint};
   color: black;
   ${borderColor}
   ${color}
   ${borderlessMixin}
 `;
 
-export default css`
+export const defaultMixin = css`
   all: initial;
   appearance: none;
   box-sizing: border-box;
   display: block;
   background-color: white;
-  border: 1px solid ${x => x.theme.colors.gray.medium};
-  font-family: ${x => x.theme.fonts.sans};
+  border: 1px solid ${props => props.theme.colors.gray.medium};
+  font-family: ${props => props.theme.fonts.sans};
   ${preset(width, { width: '100%' })}
   ${preset(color, { color: 'black' })}
   ${preset(fontSize, { f: 4 })}
@@ -41,21 +49,18 @@ export default css`
     opacity: 0.5;
   }
 
-  ${x => x.focus && focusMixin}
+  ${props => props.focus && focusMixin}
   &:focus {
     ${focusMixin}
   }
 
-  ${x => x.disabled && `
+  ${props => props.disabled && `
     pointer-events: none;
     opacity: 0.5;
   `}
 
-  ${x => x.hasError && `
-    &, &:focus {
-      border-color: ${x.theme.colors.state.alert};
-    }
-  `}
-
+  ${errorMixin}
   ${borderlessMixin}
 `;
+
+export default defaultMixin;
