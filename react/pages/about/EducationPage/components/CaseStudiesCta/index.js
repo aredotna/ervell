@@ -67,7 +67,7 @@ export default class CaseStudiesCta extends Component {
           How are teachers and students using Are.na?
         </Headline>
         <CaseStudies>
-          <CaseStudy href="https://www.are.na/risd-experimental-publishing-studio-2018">
+          <CaseStudy href="https://www.are.na/lucy-siyao-liu/orthographies">
             <Thumb src="https://d2w9rnfcy7mm78.cloudfront.net/2988720/original_37979b237534ae7e6b18823f289e25df.png?1541428472" />
             <Title>
               Orthographies at MIT
@@ -88,7 +88,7 @@ export default class CaseStudiesCta extends Component {
               readings on publishing and technology with graphic design students at RISD.
             </Copy>
           </CaseStudy>
-          <CaseStudy href="https://www.are.na/risd-experimental-publishing-studio-2018">
+          <CaseStudy href="https://www.are.na/edouard-urcades/core-studio-interaction-spring-2018">
             <Thumb src="https://d2w9rnfcy7mm78.cloudfront.net/2988719/original_f438cb5c09c9c541cb687f112cb591d0.png?1541428465" />
             <Title>
               Parsons Core Interaction Studio
