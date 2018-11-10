@@ -23,7 +23,7 @@ export default class ForEducators extends Component {
             Share readings, media, and assignments in a click with students or colleagues.
           </Description>
         </CenterBox>
-        <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png?1519764799" />
+        <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017939/original_38f901b4a39979dc6b6958397640bfd1.png?1541873532" />
 
         <CenterBox mt={10} mb={7}>
           <Subheadline>
@@ -34,7 +34,7 @@ export default class ForEducators extends Component {
             synthesize concepts together by saving to shared collections.
           </Description>
         </CenterBox>
-        <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819616/original_082481d53bf6c73bd0010f53041e5341.png?1519764802" />
+        <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017942/original_6b4fcbef6cc6fcc461fb8b9c5466fdc7.png?1541873535" />
 
         <CenterBox mt={10} mb={7}>
           <Subheadline>
@@ -45,7 +45,7 @@ export default class ForEducators extends Component {
             Explore new contexts and save anything you find.
           </Description>
         </CenterBox>
-        <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png?1519764799" />
+        <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017937/original_f0f9212098c0b5cfe1738b446823b0a3.png?1541873526" />
       </div>
     );
   }

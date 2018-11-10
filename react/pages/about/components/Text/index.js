@@ -23,6 +23,7 @@ const Description = styled(Text).attrs({
   lineHeight: 2,
   align: 'center',
   my: 6,
+  px: 5,
 })`
   > a {
     font-weight: bold;
