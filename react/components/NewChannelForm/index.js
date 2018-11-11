@@ -91,6 +91,10 @@ class NewChannelForm extends Component {
       attributeErrors,
     } = this.state;
 
+    // If the state of the form is not resting or error,
+    // disable the button.
+    const isDisabled = !(mode === 'resting' || mode === 'error');
+
     return (
       <TitledDialog
         title="New channel"
@@ -102,6 +106,7 @@ class NewChannelForm extends Component {
           error: 'Error',
         }[mode]}
         onDone={this.handleSubmit}
+        disabled={isDisabled}
       >
         <div>
           <LabelledInput mt={6} mb={7}>

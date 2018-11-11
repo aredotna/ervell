@@ -28,16 +28,18 @@ export default class TitledDialog extends Component {
     title: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     onDone: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
     label: PropTypes.string,
   }
 
   static defaultProps = {
     label: 'Done',
+    disabled: false,
   }
 
   render() {
     const {
-      title, children, onDone, label, ...rest
+      title, children, onDone, label, disabled, ...rest
     } = this.props;
 
     return (
@@ -50,7 +52,7 @@ export default class TitledDialog extends Component {
           {children}
         </Body>
 
-        <DividerButton type="submit">
+        <DividerButton type="submit" disabled={disabled}>
           {label}
         </DividerButton>
       </Container>
