@@ -76,6 +76,11 @@ const Mocks = {
     action: random.arrayElement(["connected","followed","created","commented on", "connected"]),
     connector: random.arrayElement(["on", "to"]),
   }),
+
+  Coupon: () => ({
+    code: 'freeyear',
+    description: '45 (USD) off once',
+  }),
 };
 
 export default Mocks;
