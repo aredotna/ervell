@@ -12,8 +12,8 @@ const Copy = styled(Text).attrs({
 
 const Button = styled(GenericButtonLink).attrs({
   mx: 3,
-  px: [1, 3, 8],
-  mb: [4, 0, 0],
+  px: [8],
+  my: [4, 0, 0],
 })``;
 
 const Container = styled.div`
@@ -26,4 +26,11 @@ const Container = styled.div`
   `}
 `;
 
-export { Copy, Button, Container };
+const ButtonContainer = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+export { Copy, Button, Container, ButtonContainer };

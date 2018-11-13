@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Z_INDEXES } from 'react/styles/constants';
 
 import userFragment from 'react/components/LoggedOutCTA/fragments/user';
 
@@ -21,6 +22,7 @@ const Container = styled(Box).attrs({
   border-top: 3px solid ${x => x.theme.colors.gray.semiLight};
   text-align: center;
   background: white;
+  z-index: ${Z_INDEXES.lightbox}
 `;
 
 class LoggedOutCTA extends Component {
