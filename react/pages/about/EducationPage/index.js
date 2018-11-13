@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { GenericButton as Button } from 'react/components/UI/GenericButton';
+import { GenericButtonLink as Button } from 'react/components/UI/GenericButton';
 import Box from 'react/components/UI/Box';
 import Tabs from 'react/components/UI/Tabs';
 
@@ -28,6 +28,15 @@ const CTA = styled(Box)`
 `;
 
 export default class EducationPage extends Component {
+  premiumRef = React.createRef()
+
+  scrollToPremium = () => {
+    window.scrollTo({
+      top: this.premiumRef.current.offsetTop - 100,
+      behavior: 'smooth',
+    });
+  }
+
   render() {
     return (
       <Container>
@@ -38,6 +47,9 @@ export default class EducationPage extends Component {
           <Subheadline>
             Are.na helps students and educators share knowledge by making connections together.
           </Subheadline>
+          <Button f={2} mt={6} onClick={this.scrollToPremium} color="state.premium">
+            Get 50% off Are.na Premium
+          </Button>
         </CenterBox>
         <Tabs>
           <TabContent label="For Educators">
@@ -47,20 +59,22 @@ export default class EducationPage extends Component {
             <ForStudentsTab />
           </TabContent>
         </Tabs>
-        <CTA>
-          <CenterBox my={10}>
-            <Subheadline>
-              Get 50% off Are.na Premium
-            </Subheadline>
-            <Description>
-              Are.na Premium gives you unlimited privacy for personal projects.
-              Use coupon code <strong>education</strong> to upgrade for half the price.
-            </Description>
-            <Button f={5} mt={6} py={6} href="/sign_up">
-              Join Now
-            </Button>
-          </CenterBox>
-        </CTA>
+        <div ref={this.premiumRef}>
+          <CTA >
+            <CenterBox my={10}>
+              <Subheadline>
+                Get 50% off Are.na Premium
+              </Subheadline>
+              <Description>
+                Are.na Premium gives you unlimited privacy for personal projects.
+                Use coupon code <strong>education</strong> to upgrade for half the price.
+              </Description>
+              <Button f={5} mt={6} py={6} href="/sign_up">
+                Join Now
+              </Button>
+            </CenterBox>
+          </CTA>
+        </div>
         <UniversityLogoCta />
         <CaseStudiesCta />
         <CTA>
