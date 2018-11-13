@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { propType } from 'graphql-anywhere';
+import userFragment from 'react/components/LoggedOutCTA/fragments/user';
 
 import { Copy, Button, Container } from 'react/components/LoggedOutCTA/components/UI';
 
 
 export default class LoggedOutProfileContent extends Component {
   static propTypes = {
-    user: PropTypes.node.isRequired,
+    user: propType(userFragment).isRequired,
   }
 
   render() {
