@@ -21,6 +21,10 @@ const Container = styled.div`
   align-content: center;
   justify-content: center;
   
+  ${constants.media.small`
+    flex-direction: column;
+  `}
+  
   ${constants.media.mobile`
     flex-direction: column;
   `}
