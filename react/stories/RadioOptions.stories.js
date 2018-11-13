@@ -13,32 +13,43 @@ storiesOf('RadioOptions', module)
       <RadioOptions value="basic" onSelect={action('onSelect')}>
         <RadioOptions.Option value="basic">
           {({ selected }) => (
-            <div>
-              <Text f={4} mb={3} selected={selected}>
-                <strong>Basic {selected && '✔'}</strong>
-              </Text>
-            </div>
+            <Text f={4} mb={3} selected={selected}>
+              <strong>Basic {JSON.stringify({ selected })}</strong>
+            </Text>
           )}
         </RadioOptions.Option>
 
         <RadioOptions.Option value="yearly">
           {({ selected }) => (
-            <div>
-              <Text f={4} mb={3} selected={selected}>
-                <strong>Yearly Premium {selected && '✔'}</strong>
-              </Text>
-            </div>
+            <Text f={4} mb={3} selected={selected}>
+              <strong>Yearly Premium {JSON.stringify({ selected })}</strong>
+            </Text>
           )}
         </RadioOptions.Option>
 
         <RadioOptions.Option value="monthly">
           {({ selected }) => (
-            <div>
-              <Text f={4} mb={3} selected={selected}>
-                <strong>Monthly Premium {selected && '✔'}</strong>
-              </Text>
-            </div>
+            <Text f={4} mb={3} selected={selected}>
+              <strong>Monthly Premium {JSON.stringify({ selected })}</strong>
+            </Text>
           )}
+        </RadioOptions.Option>
+      </RadioOptions>
+    </Specimen>
+  ))
+  .add('sizing', () => (
+    <Specimen>
+      <RadioOptions value="basic" onSelect={action('onSelect')} size="1em">
+        <RadioOptions.Option value="one">
+          {() => 'One'}
+        </RadioOptions.Option>
+
+        <RadioOptions.Option value="two">
+          {() => 'Two'}
+        </RadioOptions.Option>
+
+        <RadioOptions.Option value="three">
+          {() => 'Three'}
         </RadioOptions.Option>
       </RadioOptions>
     </Specimen>

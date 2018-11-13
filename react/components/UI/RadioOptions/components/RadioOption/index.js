@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { divide } from 'react/styles/functions';
+
 import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 
 import Box from 'react/components/UI/Box';
@@ -11,7 +13,9 @@ const Container = styled(Box).attrs({
 })`
   display: flex;
   flex-direction: row;
+  align-items: center;
   cursor: pointer;
+  user-select: none;
 
   ${props => props.selected && `
     background-color: ${props.theme.colors.state.editable};
@@ -21,11 +25,11 @@ const Container = styled(Box).attrs({
 const Radio = styled(Box).attrs({
   mr: 6,
 })`
-  border: 0.34375em solid white;
+  border: ${props => divide(props.size, 4)} solid white;
   box-shadow: 0 0 0 1px ${props => props.theme.colors.gray.base};
   border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
+  width: ${props => props.size};
+  height: ${props => props.size};
 
   ${props => props.selected && `
     border-color: ${props.theme.colors.state.editable};
@@ -47,11 +51,13 @@ export default class RadioOption extends Component {
     onClick: PropTypes.func,
     value: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES).isRequired,
     selectedValue: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES),
+    size: PropTypes.number,
   }
 
   static defaultProps = {
     onClick: () => {},
     selectedValue: null,
+    size: '1.5em',
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -72,11 +78,11 @@ export default class RadioOption extends Component {
 
   render() {
     const { selected } = this.state;
-    const { children } = this.props;
+    const { children, size } = this.props;
 
     return (
       <Container selected={selected} onClick={this.handleClick} role="button" tabIndex={0}>
-        <Radio selected={selected} />
+        <Radio selected={selected} size={size} />
 
         <Label>
           {provideChildrenWithProps(children, { selected })}
