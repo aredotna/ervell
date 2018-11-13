@@ -29,7 +29,7 @@ const CaseStudy = styled.a.attrs({
   mx: 6,
 })`
   ${mixin}
-  max-width: 250px;
+  max-width: 225px;
   text-decoration: none;
 
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
@@ -43,12 +43,14 @@ const Thumb = styled.img`
 `;
 
 const Title = styled(Subheadline).attrs({
+  fontSize: 5,
   align: 'left',
   mx: 0,
 })``;
 
 const Copy = styled(Description).attrs({
   align: 'left',
+  px: 0,
 })``;
 
 const CenterBox = styled(Box).attrs({
