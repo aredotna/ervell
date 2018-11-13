@@ -31,7 +31,7 @@ export default class EducationPage extends Component {
   premiumRef = React.createRef()
 
   scrollToPremium = () => {
-    window.scrollTo({
+    window.scroll({
       top: this.premiumRef.current.offsetTop - 100,
       behavior: 'smooth',
     });
@@ -40,7 +40,7 @@ export default class EducationPage extends Component {
   render() {
     return (
       <Container>
-        <CenterBox mb={9}>
+        <CenterBox mb={8}>
           <Headline>
             Grow ideas organically
           </Headline>

@@ -15,7 +15,7 @@ export default class ForEducators extends Component {
   render() {
     return (
       <div>
-        <CenterBox mt={10} mb={7}>
+        <CenterBox mt={9} mb={6}>
           <Subheadline>
             Create lightweight class resources
           </Subheadline>
@@ -25,7 +25,7 @@ export default class ForEducators extends Component {
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017939/original_38f901b4a39979dc6b6958397640bfd1.png?1541873532" />
 
-        <CenterBox mt={10} mb={7}>
+        <CenterBox mt={9} mb={6}>
           <Subheadline>
             Invite students to contribute
           </Subheadline>
@@ -36,7 +36,7 @@ export default class ForEducators extends Component {
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017942/original_6b4fcbef6cc6fcc461fb8b9c5466fdc7.png?1541873535" />
 
-        <CenterBox mt={10} mb={7}>
+        <CenterBox mt={9} mb={6}>
           <Subheadline>
             Connect ideas from across Are.na
           </Subheadline>

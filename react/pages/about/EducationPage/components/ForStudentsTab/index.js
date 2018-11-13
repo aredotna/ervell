@@ -15,7 +15,7 @@ export default class ForStudents extends Component {
   render() {
     return (
       <div>
-        <CenterBox mt={10} mb={7}>
+        <CenterBox mt={9} mb={6}>
           <Subheadline>
             Give your research a home
           </Subheadline>
@@ -25,7 +25,7 @@ export default class ForStudents extends Component {
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017938/original_a5b3f6e3200005d201afef2fdb8f0f11.png?1541873529" />
 
-        <CenterBox mt={10} mb={7}>
+        <CenterBox mt={9} mb={6}>
           <Subheadline>
             Collaborate visually
           </Subheadline>
@@ -35,7 +35,7 @@ export default class ForStudents extends Component {
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017941/original_f85acc4b4c2b381f74344b856041240f.png?1541873535" />
 
-        <CenterBox mt={10} mb={7}>
+        <CenterBox mt={9} mb={6}>
           <Subheadline>
             Find new ideas on Are.na
           </Subheadline>
