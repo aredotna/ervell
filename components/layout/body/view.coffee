@@ -17,7 +17,6 @@ module.exports = class BodyView extends Backbone.View
     'tap a[data-disabled]': 'disable'
     'tap a[data-client]:not([data-disabled])': 'dataClientNavigate'
     'tap span[data-client]:not([data-disabled])': 'dataClientNavigate'
-    'tap #scroll-top': 'scrollToTop'
 
   initialize: (options) ->
     @listenTo mediator, 'load:start', @startLoading
@@ -92,9 +91,3 @@ module.exports = class BodyView extends Backbone.View
     $('body').offset().height
     $('body').css display: 'block'
     $(window).scrollTop top
-
-  scrollToTop: (e) ->
-    e.preventDefault()
-    e.stopPropagation()
-
-    $("html, body").animate { scrollTop: 0 }, 300
