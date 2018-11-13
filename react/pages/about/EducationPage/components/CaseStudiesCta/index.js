@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { themeGet } from 'styled-system';
 
+import constants from 'react/styles/constants';
+
 import Box, { mixin } from 'react/components/UI/Box';
 import { GenericButtonLink as Button } from 'react/components/UI/GenericButton';
 import { Headline, Subheadline, Description } from 'react/pages/about/components/Text';
-
-const MOBILE_BREAKPOINT = 1024;
 
 const CTA = styled(Box).attrs({
   py: 10,
@@ -19,23 +19,20 @@ const CaseStudies = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  @media (max-width: ${MOBILE_BREAKPOINT}px) {
+  ${constants.media.small`
     flex-direction: column;
     align-items: center;
-  }
+  `}
 `;
 
 const CaseStudy = styled.a.attrs({
   mx: 6,
+  width: ['90%', 'auto', 'auto'],
+  mb: ['3em', '3em', 0],
 })`
   ${mixin}
   max-width: 225px;
   text-decoration: none;
-
-  @media (max-width: ${MOBILE_BREAKPOINT}px) {
-    width: 90%;
-    margin-bottom: 3em;
-  }
 `;
 
 const Thumb = styled.img`
