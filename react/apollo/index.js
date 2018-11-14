@@ -19,9 +19,10 @@ import clientData from 'react/apollo/localState/clientData';
 
 const isClientSide = typeof window !== 'undefined';
 
-const { data: { GRAPHQL_ENDPOINT } } = sharify;
+const { data: { APP_URL, GRAPHQL_ENDPOINT } } = sharify;
 
-const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
+const clientHttpLink = createHttpLink({ uri: `${APP_URL}/graphql` });
+const serverHttpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -74,6 +75,8 @@ export const initApolloClient = ({
       'X-APP-TOKEN': X_APP_TOKEN,
     },
   }));
+
+  const httpLink = isClientSide ? clientHttpLink : serverHttpLink;
 
   const link = ApolloLink.from([
     authLink,
