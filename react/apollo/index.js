@@ -19,9 +19,9 @@ import clientData from 'react/apollo/localState/clientData';
 
 const isClientSide = typeof window !== 'undefined';
 
-const { data: { GRAPHQL_ENDPOINT } } = sharify;
+const { data: { APP_URL } } = sharify;
 
-const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
+const httpLink = createHttpLink({ uri: `${APP_URL}/graphql` });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
