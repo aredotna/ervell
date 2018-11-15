@@ -26,6 +26,7 @@ export default class ProfileChannels extends Component {
     per: 3,
     hasMore: true,
     q: null,
+    seed: Date.now(),
   }
 
   shouldComponentUpdate(_nextProps, nextState) {
@@ -74,14 +75,16 @@ export default class ProfileChannels extends Component {
   }
 
   render() {
-    const { per, hasMore, q } = this.state;
+    const {
+      per, hasMore, q, seed,
+    } = this.state;
     const { id, sort, fetchPolicy } = this.props;
 
     return (
       <Query
         query={profileChannelsQuery}
         variables={{
-          id, per, sort, q,
+          id, per, sort, q, seed,
         }}
         fetchPolicy={fetchPolicy}
       >

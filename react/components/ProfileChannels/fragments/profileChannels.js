@@ -25,7 +25,7 @@ export default gql`
       counts {
         channels
       }
-      channels: kontents(type: CHANNEL, page: $page, per: $per, sort_by: $sort, q: $q) {
+      channels: kontents(type: CHANNEL, page: $page, per: $per, sort_by: $sort, q: $q, seed: $seed) {
         ... Channel
 
         ... on Channel {

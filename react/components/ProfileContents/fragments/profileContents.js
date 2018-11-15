@@ -8,7 +8,7 @@ export default gql`
       __typename
       id
       name
-      contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: $sort, q: $q) {
+      contents: kontents(type: $type, per: $per, page: $page, direction: DESC, sort_by: $sort, q: $q, seed: $seed) {
         ... KonnectableCell
       }
     }

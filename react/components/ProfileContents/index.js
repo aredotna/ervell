@@ -29,6 +29,7 @@ export default class ProfileContents extends Component {
     per: 12,
     hasMore: true,
     q: null,
+    seed: Date.now(),
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -79,7 +80,9 @@ export default class ProfileContents extends Component {
   }
 
   render() {
-    const { per, hasMore, q } = this.state;
+    const {
+      per, hasMore, q, seed,
+    } = this.state;
     const {
       id, type, sort, fetchPolicy,
     } = this.props;
@@ -88,7 +91,7 @@ export default class ProfileContents extends Component {
       <Query
         query={profileContentsQuery}
         variables={{
-          id, type, per, sort, q,
+          id, type, per, sort, q, seed,
         }}
         fetchPolicy={fetchPolicy}
       >
