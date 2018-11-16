@@ -29,7 +29,6 @@ export default class ProfileContents extends Component {
     per: 12,
     hasMore: true,
     q: null,
-    seed: Date.now(),
   }
 
   shouldComponentUpdate(nextProps, nextState) {

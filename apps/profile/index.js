@@ -29,7 +29,8 @@ const extractIdentifiable = (client, id) => {
 
 const resolve = [
   apolloMiddleware, (req, res, next) => {
-    req.apollo.render(withStaticRouter(Routes))
+    const { seed } = res.locals;
+    req.apollo.render(withStaticRouter(Routes, { seed }))
       .then((apollo) => {
         if (apollo.error) throw apollo.error;
 

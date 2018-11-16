@@ -18,6 +18,7 @@ export default class ProfileChannels extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    seed: PropTypes.number.isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
   }
 
@@ -26,7 +27,6 @@ export default class ProfileChannels extends Component {
     per: 3,
     hasMore: true,
     q: null,
-    seed: Date.now(),
   }
 
   shouldComponentUpdate(_nextProps, nextState) {
@@ -76,9 +76,11 @@ export default class ProfileChannels extends Component {
 
   render() {
     const {
-      per, hasMore, q, seed,
+      per, hasMore, q,
     } = this.state;
-    const { id, sort, fetchPolicy } = this.props;
+    const {
+      id, sort, fetchPolicy, seed,
+    } = this.props;
 
     return (
       <Query

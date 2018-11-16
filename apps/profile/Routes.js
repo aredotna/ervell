@@ -8,7 +8,7 @@ import parseRoute from 'react/util/parseRoute';
 
 import ProfilePage from 'react/pages/profile/ProfilePage';
 
-export default () => (
+export default props => (
   <Switch>
     <Route
       path="/:id/:view?"
@@ -18,6 +18,7 @@ export default () => (
             if (error) return error.message;
 
             const { cookies } = data;
+            const { seed } = props;
 
             const view = params.view || cookies.view || 'all';
             const sort = query.sort || cookies.sort || 'UPDATED_AT';
@@ -29,6 +30,7 @@ export default () => (
                 view={view}
                 sort={sort}
                 filter={filter}
+                seed={seed}
               />
             );
           }}
