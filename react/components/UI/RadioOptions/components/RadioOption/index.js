@@ -51,7 +51,7 @@ export default class RadioOption extends Component {
     onClick: PropTypes.func,
     value: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES).isRequired,
     selectedValue: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES),
-    size: PropTypes.number,
+    size: PropTypes.string,
   }
 
   static defaultProps = {
@@ -78,10 +78,17 @@ export default class RadioOption extends Component {
 
   render() {
     const { selected } = this.state;
-    const { children, size } = this.props;
+    const {
+      children,
+      size,
+      value: _value,
+      selectedValue: _selectedValue,
+      onClick: _onClick,
+      ...rest
+    } = this.props;
 
     return (
-      <Container selected={selected} onClick={this.handleClick} role="button" tabIndex={0}>
+      <Container selected={selected} onClick={this.handleClick} role="button" tabIndex={0} {...rest}>
         <Radio selected={selected} size={size} />
 
         <Label>
