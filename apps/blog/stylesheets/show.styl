@@ -17,28 +17,55 @@
     font-size font-size-base
     a
       position relative
+
+      &.right span
+        right: -16px;
+        left: unset
+        transform none;
+        &::before
+          right: 10px;
+          left: unset;
+          transform: translate3d(0, -50%, 0) rotate(45deg);
+
+      &.left span
+        left: -16px;
+        transform none;
+        &::before
+          left: 10px;
+          transform: translate3d(0, -50%, 0) rotate(45deg);
+
       span
         display none
         color colors-gray-text
         border button-border-width solid colors-gray-hover
         padding .5em 1em
         position absolute
-        white-space nowrap
         background-color white
-        left calc(100% + .25em)
-        top -.75em
+        left 50%
+        transform translateX(-50%)
+        max-width 75vw
+        top calc(100% + 20px)
         z-index 1
-        font-size font-size-sm
-        &:hover
-          color colors-gray-hover
-        &:before {
+        &::after {
           // Expand hover area and avoid gap between inline link text and tooltip so hover is maintained
           position absolute
-          left -.25em
-          right -.25em
-          top -.25em
-          bottom -.25em
+          left -1em
+          right -1em
+          top -1em
+          bottom -1em
           content ''
+        }
+        &::before {
+          content ''
+          border-left button-border-width solid colors-gray-hover
+          border-top button-border-width solid colors-gray-hover
+          position absolute
+          transform translate3d(-50%, -50%, 0) rotate(45deg)
+          top -1px
+          left 50%
+          width 16px
+          height 16px
+          background white
         }
 
     a:hover
