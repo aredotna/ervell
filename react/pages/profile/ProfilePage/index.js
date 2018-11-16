@@ -8,6 +8,7 @@ import ProfileMetadata from 'react/components/ProfileMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
+import LoggedOutCTA from 'react/components/LoggedOutCTA';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -68,6 +69,8 @@ export default class ProfilePage extends Component {
                   filter={filter}
                   identifiable={identifiable}
                 />
+
+                <LoggedOutCTA subject={identifiable} />
               </div>
             );
           }}
