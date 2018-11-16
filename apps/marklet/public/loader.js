@@ -50,6 +50,9 @@
   function createTarget(){
     markletDiv = document.createElement("div");
     markletDiv.id = "arena_div";
+    message = document.createElement("h1")
+    message.innerHTML = ('Drag and drop text or images you want to save.');
+    markletDiv.appendChild(message);
     document.body.appendChild(markletDiv);
   }
 
@@ -60,9 +63,9 @@
       "#arena_frame,#arena_div{width:"+markletWidth+"px !important;height:"+markletHeightContracted+"px !important;position:fixed;top:20px;right:20px;border:5px solid #e7e7e5;border-radius:0.25em;overflow-x:hidden;overflow-y:auto;max-height:calc(100% - 50px);}" +
       "#arena_frame.is-expanded{height:"+markletHeightExpanded+"px !important}" +
       "#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}" +
-      "#arena_frame:hover{background:rgba(255,255,255,0.9);}" +
-      "#arena_div{z-index:9999999999;display:none;}";
-
+      "#arena_frame:hover{background:rgba(255,255,255,0.99);}" +
+      "#arena_div{z-index:9999999999;background:rgba(255,255,255,0.91); opacity: 0; display: flex; align-items: center; justify-content: center;}" +
+      "#arena_div h1{font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #9d9d9d; font-weight: normal; padding: 40px; -webkit-font-smoothing: antialiased; text-align: center; display: inline-block; font-size: 1.5em}";
     if (markletStyle.styleSheet) {
       markletStyle.styleSheet.cssText = markletCSS;
     } else {
@@ -125,11 +128,15 @@
       e.dataTransfer.setData("text/html", parentHTML.outerHTML);
     }
 
-    markletDiv.style.display = "block";
+    markletDiv.style.display = "flex";
+    markletDiv.style.opacity = 1;
+    markletFrame.style.display = "none";
   };
 
   function stopDrag(e) {
     markletDiv.style.display = "none";
+    markletDiv.style.opacity = 0;
+    markletFrame.style.display = "block";
   };
 
   function dragOver(e) {
