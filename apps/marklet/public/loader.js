@@ -64,7 +64,7 @@
       "#arena_frame.is-expanded{height:"+markletHeightExpanded+"px !important}" +
       "#arena_frame{z-index:9999999998;background:rgba(255,255,255,0.75);}" +
       "#arena_frame:hover{background:rgba(255,255,255,0.99);}" +
-      "#arena_div{z-index:9999999999;background:rgba(255,255,255,0.91); opacity: 0; display: flex; align-items: center; justify-content: center;}" +
+      "#arena_div{z-index:9999999999;background:rgba(255,255,255,0.91); opacity: 0; display: none; align-items: center; justify-content: center;}" +
       "#arena_div h1{font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color: #9d9d9d; font-weight: normal; padding: 40px; -webkit-font-smoothing: antialiased; text-align: center; display: inline-block; font-size: 1.5em}";
     if (markletStyle.styleSheet) {
       markletStyle.styleSheet.cssText = markletCSS;
