@@ -20,6 +20,7 @@ export default class ProfileChannels extends Component {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     seed: PropTypes.number.isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+    seed: PropTypes.number.isRequired,
   }
 
   state = {

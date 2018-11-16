@@ -1,7 +1,9 @@
+import React from 'react';
 import express from 'express';
 import gql from 'graphql-tag';
 
 import apolloMiddleware from 'react/apollo/middleware';
+import setSeedMiddleware from 'lib/middleware/setSeed';
 
 import Routes from 'apps/profile/Routes';
 import withStaticRouter from 'react/hocs/WithStaticRouter';
@@ -9,6 +11,8 @@ import withStaticRouter from 'react/hocs/WithStaticRouter';
 import profileMetaTagsFragment from 'react/pages/profile/ProfilePage/components/ProfileMetaTags/fragments/profileMetaTags';
 
 const app = express();
+
+const middlewareStack = [apolloMiddleware, setSeedMiddleware];
 
 const extractIdentifiable = (client, id) => {
   const { identifiable } = client.readFragment({
@@ -28,7 +32,7 @@ const extractIdentifiable = (client, id) => {
 };
 
 const resolve = [
-  apolloMiddleware, (req, res, next) => {
+  ...middlewareStack, (req, res, next) => {
     const { seed } = res.locals;
     req.apollo.render(withStaticRouter(Routes, { seed }))
       .then((apollo) => {
@@ -60,6 +64,8 @@ const resolve = [
   },
 ];
 
+const SimpleComponent = () => (<div> <h1>H!</h1> {console.log('hi') }</div>);
+
 app
   .set('views', __dirname)
   .set('view engine', 'jade')
@@ -70,6 +76,11 @@ app
   .get('/:id/channels', ...resolve)
   .get('/:id/index', ...resolve)
   .get('/:id/followers', ...resolve)
+  .get('/:id/testing', apolloMiddleware, (req, res, next) => {
+    req.apollo.render(SimpleComponent).then((apollo) => {
+      res.send(apollo.html);
+    });
+  })
   .get('/:id/following', ...resolve);
 
 module.exports = app;

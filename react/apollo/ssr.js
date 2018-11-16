@@ -8,6 +8,8 @@ export default (client, options = {}) => (Component, props = {}) => {
   const sheet = new ServerStyleSheet();
   const WrappedComponent = wrapWithProviders(client, options)(Component, props);
 
+  console.log('called ssr');
+
   const resolve = (error) => {
     const html = renderToString(sheet.collectStyles(WrappedComponent));
     const styles = sheet.getStyleTags();

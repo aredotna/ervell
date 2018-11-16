@@ -17,6 +17,8 @@ export default props => (
           {({ data, error }) => {
             if (error) return error.message;
 
+            console.log('in the router');
+
             const { cookies } = data;
             const { seed } = props;
 

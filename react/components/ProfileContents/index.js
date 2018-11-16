@@ -18,6 +18,7 @@ export default class ProfileContents extends Component {
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+    seed: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
@@ -80,10 +81,10 @@ export default class ProfileContents extends Component {
 
   render() {
     const {
-      per, hasMore, q, seed,
+      per, hasMore, q,
     } = this.state;
     const {
-      id, type, sort, fetchPolicy,
+      id, type, sort, fetchPolicy, seed,
     } = this.props;
 
     return (

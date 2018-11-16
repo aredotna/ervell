@@ -26,8 +26,6 @@ export default class ProfilePage extends Component {
       id, view, sort, filter, seed,
     } = this.props;
 
-    console.log('seed', seed);
-
     return (
       <ErrorBoundary>
         <Query query={profilePageQuery} variables={{ id }}>
@@ -71,6 +69,7 @@ export default class ProfilePage extends Component {
                   sort={sort}
                   filter={filter}
                   identifiable={identifiable}
+                  seed={seed}
                 />
 
                 <LoggedOutCTA subject={identifiable} />

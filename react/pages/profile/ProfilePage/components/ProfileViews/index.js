@@ -12,13 +12,13 @@ import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
 import ProfileFollows from 'react/components/ProfileFollows';
 
 const All = ({
-  id, sort, identifiable, fetchPolicy,
+  id, sort, identifiable, fetchPolicy, seed,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.channels + identifiable.counts.blocks}
   >
-    <ProfileContents id={id} sort={sort} fetchPolicy={fetchPolicy} />
+    <ProfileContents id={id} sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
   </EmptyMessageOrComponent>
 );
 
@@ -27,16 +27,17 @@ All.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  seed: PropTypes.number.isRequired,
 };
 
 const Blocks = ({
-  id, sort, identifiable, fetchPolicy,
+  id, sort, identifiable, fetchPolicy, seed,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.blocks}
   >
-    <ProfileContents id={id} type="BLOCK" sort={sort} fetchPolicy={fetchPolicy} />
+    <ProfileContents id={id} type="BLOCK" sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
   </EmptyMessageOrComponent>
 );
 
@@ -45,16 +46,17 @@ Blocks.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  seed: PropTypes.number.isRequired,
 };
 
 const Channels = ({
-  id, sort, identifiable, fetchPolicy,
+  id, sort, identifiable, fetchPolicy, seed,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.channels}
   >
-    <ProfileChannels id={id} sort={sort} fetchPolicy={fetchPolicy} />
+    <ProfileChannels id={id} sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
   </EmptyMessageOrComponent>
 );
 
@@ -63,6 +65,7 @@ Channels.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  seed: PropTypes.number.isRequired,
 };
 
 const Index = ({ id, filter, identifiable }) => (
@@ -112,6 +115,7 @@ class ProfileViews extends Component {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     identifiable: propType(profilePageIdentifiableFragment).isRequired,
+    seed: PropTypes.number.isRequired,
   }
 
   state = {
@@ -123,18 +127,20 @@ class ProfileViews extends Component {
   render() {
     const { fetchPolicy } = this.state;
     const {
-      view, id, sort, filter, identifiable,
+      view, id, sort, filter, identifiable, seed,
     } = this.props;
+
+    console.log('profileViews seed', seed);
 
     switch (view) {
       case 'all':
-        return <All id={id} sort={sort} identifiable={identifiable} fetchPolicy={fetchPolicy} />;
+        return <All id={id} sort={sort} identifiable={identifiable} fetchPolicy={fetchPolicy} seed={seed} />;
       case 'channels':
         return (
-          <Channels id={id} sort={sort} identifiable={identifiable} fetchPolicy={fetchPolicy} />
+          <Channels id={id} sort={sort} identifiable={identifiable} fetchPolicy={fetchPolicy} seed={seed} />
         );
       case 'blocks':
-        return <Blocks id={id} sort={sort} identifiable={identifiable} fetchPolicy={fetchPolicy} />;
+        return <Blocks id={id} sort={sort} identifiable={identifiable} fetchPolicy={fetchPolicy} seed={seed} />;
       case 'index':
         return <Index id={id} filter={filter} identifiable={identifiable} />;
       case 'followers':
