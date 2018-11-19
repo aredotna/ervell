@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router';
 
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
 
-const withStaticRouter = (WrappedComponent, extraProps = {}) => {
+const withStaticRouter = (WrappedComponent) => {
   class WithStaticRouter extends Component {
     static propTypes = {
       currentRoute: PropTypes.shape({
@@ -18,7 +18,7 @@ const withStaticRouter = (WrappedComponent, extraProps = {}) => {
 
       return (
         <StaticRouter location={href} context={context}>
-          <WrappedComponent {...rest} {...extraProps} />
+          <WrappedComponent {...rest} />
         </StaticRouter>
       );
     }
