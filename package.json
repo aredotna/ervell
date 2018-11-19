@@ -159,7 +159,7 @@
     "jest": "^23.4.2",
     "mocha": "*",
     "progress-bar-webpack-plugin": "^1.11.0",
-    "rewire": "https://registry.npmjs.org/rewire/-/rewire-2.5.2.tgz",
+    "rewire": "^4.0.0",
     "should": "*",
     "sinon": "*",
     "storybook-react-router": "^1.0.1",

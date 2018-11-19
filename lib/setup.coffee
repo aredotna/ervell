@@ -44,6 +44,7 @@ makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
 
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
+ensureWWW = require './middleware/ensureWWW'
 viewMode = require './middleware/view_mode'
 checkSession = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
@@ -130,6 +131,7 @@ module.exports = (app) ->
     .use localsMiddleware
     .use splitTestMiddleware
     .use ensureSSL
+    .use ensureWWW
     .use isInverted
     .use viewMode
 
