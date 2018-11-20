@@ -20,7 +20,7 @@ export default class ForEducators extends Component {
             Create lightweight class resources
           </Subheadline>
           <Description>
-            Share readings, media, and assignments in a click with students or colleagues.
+            Share readings, media, and assignments in a click.
           </Description>
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017939/original_38f901b4a39979dc6b6958397640bfd1.png?1541873532" />
@@ -30,8 +30,7 @@ export default class ForEducators extends Component {
             Invite students to contribute
           </Subheadline>
           <Description>
-            Class members can connect ideas and
-            synthesize concepts together by saving to shared collections.
+            Create collections where your class can connect ideas together.
           </Description>
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017942/original_6b4fcbef6cc6fcc461fb8b9c5466fdc7.png?1541873535" />
@@ -41,8 +40,7 @@ export default class ForEducators extends Component {
             Connect ideas from across Are.na
           </Subheadline>
           <Description>
-            Are.na is a universe of public knowledge.
-            Explore new contexts and save anything you find.
+            Find ideas and resources from thousands of other creative thinkers.
           </Description>
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017937/original_f0f9212098c0b5cfe1738b446823b0a3.png?1541873526" />
