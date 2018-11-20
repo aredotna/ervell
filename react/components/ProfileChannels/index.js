@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -14,7 +14,7 @@ import Cell from 'react/components/Cell';
 import ChannelRow from 'react/components/ProfileChannels/components/ChannelRow';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 
-export default class ProfileChannels extends Component {
+export default class ProfileChannels extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
@@ -26,17 +26,6 @@ export default class ProfileChannels extends Component {
     per: 3,
     hasMore: true,
     q: null,
-  }
-
-  shouldComponentUpdate(_nextProps, nextState) {
-    return (
-      // Only needs to re-render the parent when the query changes
-      (this.state.q !== nextState.q) ||
-      // Or we reset to the beginning
-      (nextState.page === 1) ||
-      // Or we reach the end
-      (this.state.hasMore !== nextState.hasMore)
-    );
   }
 
   resetQuery = (query) => {

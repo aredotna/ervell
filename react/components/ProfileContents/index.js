@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
@@ -12,7 +12,7 @@ import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import Grid from 'react/components/UI/Grid';
 import Cell from 'react/components/Cell';
 
-export default class ProfileContents extends Component {
+export default class ProfileContents extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.string,
@@ -29,19 +29,6 @@ export default class ProfileContents extends Component {
     per: 12,
     hasMore: true,
     q: null,
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      // Only needs to re-render the parent when the query changes
-      (this.state.q !== nextState.q) ||
-      // Or we reset to the beginning
-      (nextState.page === 1) ||
-      // Or we reach the end
-      (this.state.hasMore !== nextState.hasMore) ||
-      // Or the type changes
-      (this.props.type !== nextProps.type)
-    );
   }
 
   resetQuery = (query) => {
