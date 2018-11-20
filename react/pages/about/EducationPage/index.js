@@ -52,11 +52,11 @@ export default class EducationPage extends Component {
           </Button>
         </CenterBox>
         <Tabs>
-          <TabContent label="For Educators">
-            <ForEducatorsTab />
-          </TabContent>
           <TabContent label="For Students">
             <ForStudentsTab />
+          </TabContent>
+          <TabContent label="For Educators">
+            <ForEducatorsTab />
           </TabContent>
         </Tabs>
         <div ref={this.premiumRef}>

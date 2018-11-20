@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
@@ -10,7 +10,7 @@ import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import profileFollowingQuery from 'react/components/ProfileFollows/queries/profileFollowing';
 import profileFollowersQuery from 'react/components/ProfileFollows/queries/profileFollowers';
 
-export default class ProfileFollows extends Component {
+export default class ProfileFollows extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['followers', 'following']).isRequired,

@@ -20,7 +20,7 @@ export default class ForStudents extends Component {
             Give your research a home
           </Subheadline>
           <Description>
-            Save documents, images, videos on any topic to clear, visual collections.
+            Organize documents, images, links and more into visual collections.
           </Description>
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017938/original_a5b3f6e3200005d201afef2fdb8f0f11.png?1541873529" />
@@ -40,8 +40,7 @@ export default class ForStudents extends Component {
             Find new ideas on Are.na
           </Subheadline>
           <Description>
-            Like a wiki, Are.na is a universe of public
-            knowledge. Save anything you see to your personal collections.
+            Find ideas and inspiration from thousands of other creative thinkers.
           </Description>
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017943/original_c852f944421a96c8ff1753cc843f78b1.png?1541873535" />
