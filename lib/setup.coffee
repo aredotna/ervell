@@ -22,6 +22,7 @@
   GRAPHQL_ENDPOINT
   AIRBRAKE_PROJECT_ID
   AIRBRAKE_API_KEY
+  CLIENT_GRAPHQL_ENDPOINT
 } = require '../config'
 
 express = require 'express'
@@ -69,6 +70,7 @@ sharify.data = {
   HOMEPAGE_EXPLORE_USER_IDS
   X_APP_TOKEN
   GRAPHQL_ENDPOINT
+  CLIENT_GRAPHQL_ENDPOINT
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
