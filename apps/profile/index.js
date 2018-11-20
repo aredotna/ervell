@@ -1,9 +1,8 @@
-import React from 'react';
 import express from 'express';
 import gql from 'graphql-tag';
 
 import apolloMiddleware from 'react/apollo/middleware';
-import setSeedMiddleware from 'lib/middleware/setSeed';
+import setSeedMiddleware from 'apps/profile/middleware/setSeed';
 
 import Routes from 'apps/profile/Routes';
 import withStaticRouter from 'react/hocs/WithStaticRouter';
@@ -33,8 +32,7 @@ const extractIdentifiable = (client, id) => {
 
 const resolve = [
   ...middlewareStack, (req, res, next) => {
-    const { seed } = res.locals;
-    req.apollo.render(withStaticRouter(Routes, { seed }))
+    req.apollo.render(withStaticRouter(Routes))
       .then((apollo) => {
         if (apollo.error) throw apollo.error;
 
@@ -64,8 +62,6 @@ const resolve = [
   },
 ];
 
-const SimpleComponent = () => (<div> <h1>H!</h1> {console.log('hi') }</div>);
-
 app
   .set('views', __dirname)
   .set('view engine', 'jade')
@@ -76,11 +72,6 @@ app
   .get('/:id/channels', ...resolve)
   .get('/:id/index', ...resolve)
   .get('/:id/followers', ...resolve)
-  .get('/:id/testing', apolloMiddleware, (req, res, next) => {
-    req.apollo.render(SimpleComponent).then((apollo) => {
-      res.send(apollo.html);
-    });
-  })
   .get('/:id/following', ...resolve);
 
 module.exports = app;
