@@ -18,6 +18,7 @@ export default class ProfileContents extends PureComponent {
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+    seed: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
@@ -68,14 +69,14 @@ export default class ProfileContents extends PureComponent {
   render() {
     const { per, hasMore, q } = this.state;
     const {
-      id, type, sort, fetchPolicy,
+      id, type, sort, fetchPolicy, seed,
     } = this.props;
 
     return (
       <Query
         query={profileContentsQuery}
         variables={{
-          id, type, per, sort, q,
+          id, type, per, sort, q, seed,
         }}
         fetchPolicy={fetchPolicy}
       >
