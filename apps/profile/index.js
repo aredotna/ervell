@@ -2,6 +2,7 @@ import express from 'express';
 import gql from 'graphql-tag';
 
 import apolloMiddleware from 'react/apollo/middleware';
+import setSeedMiddleware from 'apps/profile/middleware/setSeed';
 
 import Routes from 'apps/profile/Routes';
 import withStaticRouter from 'react/hocs/WithStaticRouter';
@@ -9,6 +10,11 @@ import withStaticRouter from 'react/hocs/WithStaticRouter';
 import profileMetaTagsFragment from 'react/pages/profile/ProfilePage/components/ProfileMetaTags/fragments/profileMetaTags';
 
 const app = express();
+
+const middlewareStack = [
+  setSeedMiddleware,
+  apolloMiddleware,
+];
 
 const extractIdentifiable = (client, id) => {
   const { identifiable } = client.readFragment({
@@ -28,7 +34,7 @@ const extractIdentifiable = (client, id) => {
 };
 
 const resolve = [
-  apolloMiddleware, (req, res, next) => {
+  ...middlewareStack, (req, res, next) => {
     req.apollo.render(withStaticRouter(Routes))
       .then((apollo) => {
         if (apollo.error) throw apollo.error;
