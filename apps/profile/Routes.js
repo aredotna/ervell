@@ -22,6 +22,7 @@ export default () => (
             const view = params.view || cookies.view || 'all';
             const sort = query.sort || cookies.sort || 'UPDATED_AT';
             const filter = query.filter || cookies.filter || 'OWN';
+            const seed = parseInt(query.seed, 0) || 0;
 
             return (
               <ProfilePage
@@ -29,6 +30,7 @@ export default () => (
                 view={view}
                 sort={sort}
                 filter={filter}
+                seed={seed}
               />
             );
           }}
