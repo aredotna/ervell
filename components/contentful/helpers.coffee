@@ -1,4 +1,4 @@
-{ BLOCKS, INLINES } = require '@contentful/rich-text-types'
+{ BLOCKS } = require '@contentful/rich-text-types'
 { documentToHtmlString } = require '@contentful/rich-text-html-renderer'
 cheerio = require 'cheerio'
 
@@ -39,6 +39,14 @@ module.exports =
           #{@figCaption(image)}
         </figure>
       """
+    return documentToHtmlString raw, renderOptions
+
+  formatRichTextFootnotes: (raw) ->
+    n = 0
+    renderOptions = renderNode : {}
+    renderOptions.renderNode[BLOCKS.LIST_ITEM] = (node, next) ->
+      n++
+      return "<li id=#{n}>" + next(node.content) + "</li>"
     return documentToHtmlString raw, renderOptions
 
 

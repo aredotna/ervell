@@ -18,19 +18,21 @@ posts = require '../../collections/posts.coffee'
 @show = (req, res, next) ->
   posts.fetchWithSlug(req.params.slug).then (post) ->
     return next() unless post and post.fields
-    coverImageUrl = post.fields.image.fields.file.url + '?w=600'
     bio = if (bio = post.fields.author.fields?.bio) then documentToHtmlString(bio) else ''
     body = contentfulFormatter.formatRichTextWithImages post.fields.body, {
       srcsetSizes: [670, 670 * 2, 670 * 3],
       sizes: "(min-width: 670px) 670px, 100vw"
     }
+    if post.fields.footnotes
+      footnotes = contentfulFormatter.formatRichTextFootnotes post.fields.footnotes
+
     res.render 'show',
       title: post.fields.title
-      image: coverImageUrl
       post: post
       formatDate: formatDate
       body: body
-      bio: bio
+      bio: bio,
+      footnotes: footnotes
 
   .catch next
 
