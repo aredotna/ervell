@@ -14,121 +14,78 @@
     text-decoration underline
 
   article
-    font-size font-size-base
-    a
-      position relative
+    hr
+      background-color colors-gray-border
+      border none
 
-      &.right span
-        right: -16px;
-        left: unset
-        transform none;
-        &::before
-          right: 10px;
-          left: unset;
-          transform: translate3d(0, -50%, 0) rotate(45deg);
-
-      &.left span
-        left: -16px;
-        transform none;
-        &::before
-          left: 10px;
-          transform: translate3d(0, -50%, 0) rotate(45deg);
-
-      span
-        display none
-        color colors-gray-text
-        border button-border-width solid colors-gray-hover
-        padding .5em 1em
-        position absolute
-        background-color white
-        left 50%
-        transform translateX(-50%)
-        max-width 75vw
-        top calc(100% + 20px)
-        z-index 1
-        &::after {
-          // Expand hover area and avoid gap between inline link text and tooltip so hover is maintained
-          position absolute
-          left -1em
-          right -1em
-          top -1em
-          bottom -1em
-          content ''
-        }
-        &::before {
-          content ''
-          border-left button-border-width solid colors-gray-hover
-          border-top button-border-width solid colors-gray-hover
-          position absolute
-          transform translate3d(-50%, -50%, 0) rotate(45deg)
-          top -1px
-          left 50%
-          width 16px
-          height 16px
-          background white
-        }
-
-    a:hover
-      span
-        display block
-
-    sup
-      vertical-align super
-      font-size font-size-xs
-
-    img
-    iframe
-      display block
-      vertical-align bottom
-
-    iframe
-      max-width 80%
-      margin 2em auto
-
-    img
-      max-width 100%
-
-    .arena-iframe
-      border 1px solid colors-gray-border
-      box-shadow 4px 4px 4px colors-gray-background
-      height 2150px !important
-      margin 4em auto
-      padding 1px
-
-      +mobile()
-        margin 4em 0
-        min-width 100%
-      +below(400px)
-        height 2000px !important
-      +below(380px)
-        height 1950px !important
-      +below(340px)
-        height 1700px !important
-
-    h1, h2, h3, h4, h5, h6
-      collapsed-margins(.5em)
-    h1
-      h1(1.75em)
-    h2
-      h2(1.5em)
-    h3
-      h3(1.3em)
-    h4
-      h4(1.1em)
-    h5
-      h5()
-    h6
-      h6()
-
-    figure
-      collapsed-margins(4em)
+    .post-content
+      font-size font-size-base
+      a[href*="#"]
+        vertical-align super
+        font-size .8em
+        text-decoration none
       img
-        collapsed-margins(2em)
-      figcaption
-        font-size font-size-xs
+      iframe
+        display block
+        vertical-align bottom
 
-  hr
-    collapsed-margins(3em)
+      iframe
+        max-width 80%
+        margin 2em auto
+
+      img
+        max-width 100%
+
+      .arena-iframe
+        border 1px solid colors-gray-border
+        box-shadow 4px 4px 4px colors-gray-background
+        height 2150px !important
+        margin 4em auto
+        padding 1px
+
+        +mobile()
+          margin 4em 0
+          min-width 100%
+        +below(400px)
+          height 2000px !important
+        +below(380px)
+          height 1950px !important
+        +below(340px)
+          height 1700px !important
+
+      h1, h2, h3, h4, h5, h6
+        collapsed-margins(.5em)
+      h1
+        h1(1.75em)
+      h2
+        h2(1.5em)
+      h3
+        h3(1.3em)
+      h4
+        h4(1.1em)
+      h5
+        h5()
+      h6
+        h6()
+
+      figure
+        collapsed-margins(4em)
+        img
+          collapsed-margins(2em)
+        figcaption
+          font-size font-size-xs
+
+    .post-footnotes
+      font-size .9em
+      ol
+        padding-inline-start 20px
+        list-style-type decimal
+      hr
+        margin 2em 0
+        height 1px
+
+
+  .post-author-bio hr
+    margin 3em 0
     height 2px
-    background-color colors-gray-border
-    border none
+

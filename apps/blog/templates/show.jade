@@ -20,11 +20,16 @@ block container
           +category-title(true)
 
         include ../../../components/blog_post/partials/date_author
-      article.post-content
-        != body
+      article
+        .post-content
+          != body
+        if footnotes && footnotes.length > 0
+          #footnotes.post-footnotes
+            hr
+            != footnotes
       if bio && bio.length > 0
-        hr
         .post-author-bio
+          hr
           != bio
 
   hr.Base
