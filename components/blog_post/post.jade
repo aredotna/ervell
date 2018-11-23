@@ -2,7 +2,7 @@ if post.fields
   include ./partials/category_title
 
   a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
-    if post.fields.image.fields
+    if post.fields.image && post.fields.image.fields
       img.BlogPosts__post-image(
         srcset=srcset(post.fields.image, [250, 500, 750])
         sizes="250px"
