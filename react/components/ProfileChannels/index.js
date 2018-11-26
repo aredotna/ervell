@@ -19,6 +19,7 @@ export default class ProfileChannels extends PureComponent {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+    seed: PropTypes.number.isRequired,
   }
 
   state = {
@@ -64,13 +65,17 @@ export default class ProfileChannels extends PureComponent {
 
   render() {
     const { per, hasMore, q } = this.state;
-    const { id, sort, fetchPolicy } = this.props;
+    const {
+      id, sort, fetchPolicy, seed,
+    } = this.props;
+
+    console.log('seed', seed);
 
     return (
       <Query
         query={profileChannelsQuery}
         variables={{
-          id, per, sort, q,
+          id, per, sort, q, seed,
         }}
         fetchPolicy={fetchPolicy}
       >
