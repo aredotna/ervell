@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 import channelFragment from 'react/components/Cell/components/Konnectable/components/Channel/fragments/channel';
 import textFragment from 'react/components/Cell/components/Konnectable/components/Text/fragments/text';
+import pendingBlockFragment from 'react/components/Cell/components/Konnectable/components/PendingBlock/fragments/pendingBlock';
 import imageFragment from 'react/components/Cell/components/Konnectable/components/Image/fragments/image';
 import linkFragment from 'react/components/Cell/components/Konnectable/components/Link/fragments/link';
 import embedFragment from 'react/components/Cell/components/Konnectable/components/Embed/fragments/embed';
@@ -26,6 +27,7 @@ export default gql`
     ... Link
     ... Embed
     ... Attachment
+    ... PendingBlock
     ... KonnectableMetadata
     ... BlokkOverlay
   }
@@ -37,4 +39,5 @@ export default gql`
   ${attachmentFragment}
   ${metadataFragment}
   ${blokkOverlayFragment}
+  ${pendingBlockFragment}
 `;

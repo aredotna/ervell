@@ -17,6 +17,7 @@ import Embed from 'react/components/Cell/components/Konnectable/components/Embed
 import Image from 'react/components/Cell/components/Konnectable/components/Image';
 import Link from 'react/components/Cell/components/Konnectable/components/Link';
 import Text from 'react/components/Cell/components/Konnectable/components/Text';
+import PendingBlock from 'react/components/Cell/components/Konnectable/components/PendingBlock';
 import Metadata from 'react/components/Cell/components/Konnectable/components/Metadata';
 import BlokkOverlay from 'react/components/Cell/components/Konnectable/components/BlokkOverlay';
 import ChannelOverlay from 'react/components/Cell/components/Konnectable/components/ChannelOverlay';
@@ -126,6 +127,7 @@ export default class Konnectable extends Component {
             Image: () => <Image key="image" image={konnectable} mode={mode} />,
             Link: () => <Link key="link" link={konnectable} mode={mode} />,
             Text: () => <Text key="text" text={konnectable} mode={mode} />,
+            PendingBlock: () => <PendingBlock key="text" mode={mode} block={konnectable} />,
           }[konnectable.__typename](),
 
           konnectable.__typename !== 'Channel' &&
