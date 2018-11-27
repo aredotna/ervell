@@ -736,6 +736,7 @@
 "@contentful/axios@^0.18.0":
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/@contentful/axios/-/axios-0.18.0.tgz#576e0e6047411a66971e82d40688a8c795e62f27"
+  integrity sha512-4r4Ww1IJlmRolKgovLTTmdS6CsdvXYVxgXRFwWSh1x36T/0Wg9kTwdaVaApZXcv1DfYyw9RSNdxIGSwTP2/Lag==
   dependencies:
     follow-redirects "^1.2.5"
     is-buffer "^1.1.5"
@@ -743,12 +744,14 @@
 "@contentful/rich-text-html-renderer@^2.9.1":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@contentful/rich-text-html-renderer/-/rich-text-html-renderer-2.9.1.tgz#4ec8794e6520f129f09f63ebd5b34c1feed1861a"
+  integrity sha512-Wyq3h6upb6C1vIORKUYeLybmXc6NhmRNsmolgW/IbvQ8xe/27GbGU9BXGHnqbfY6xcG82TYY0/7DhwpGwtQwtw==
   dependencies:
     "@contentful/rich-text-types" "^5.0.0"
 
 "@contentful/rich-text-types@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-5.0.0.tgz#d2d02d9b7c10115bcc960cee3e1c381eb9d16b84"
+  integrity sha512-NPmsk0xCC/OoZUIpZqByFEYCktIcyUakKrzDlSA9YLklCdgahEr6qbSghIsQ/wVclnQhwVq28psJ0agHXdLCSQ==
 
 "@danielkalen/source-map-support@^0.4.16":
   version "0.4.16"
@@ -4315,12 +4318,14 @@ content-type@~1.0.4:
 contentful-resolve-response@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/contentful-resolve-response/-/contentful-resolve-response-1.1.4.tgz#9eb656876eecb2cd00444f0adf26bd91a5ec1992"
+  integrity sha512-oFq6n6zjbiwD9/7mBa8YHPwvPM0B0D4uOgg1n/rVzpQPhCrzeIixNj6fbJAbDiJt05rZqxiY3K1Db7pPRhRaZw==
   dependencies:
     lodash "^4.17.4"
 
 contentful-sdk-core@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/contentful-sdk-core/-/contentful-sdk-core-6.0.2.tgz#3156a0115b37b216da7336af3686b587c14ef5bf"
+  integrity sha512-6oHYWWZD5xBuofVgsa4vdJnxEeAKvXEJSxuF+foUSmbSblIwT8dT5aZosJV78ibf/IZylvDP2tPLFA9wNB1jzQ==
   dependencies:
     lodash "^4.17.10"
     qs "^6.5.2"
@@ -4328,6 +4333,7 @@ contentful-sdk-core@^6.0.2:
 contentful@^7.0.5:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/contentful/-/contentful-7.0.5.tgz#b41d65b2ca79c559ab2551ab8fac6a3e78c2b931"
+  integrity sha512-eSJREGS8laOTnFwOnOzBK3lSrh9ZSI3NXtD26BQYKqNFw8L4rrOuwstUuW55VQrbjJ0YmNI97ERSf8ABIsNj7A==
   dependencies:
     "@contentful/axios" "^0.18.0"
     contentful-resolve-response "^1.1.4"
@@ -5491,14 +5497,6 @@ eslint-restricted-globals@^0.1.1:
   resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.1.1.tgz#35f0d5cbc64c2e3ed62e93b4b1a7af05ba7ed4d7"
   integrity sha1-NfDVy8ZMLj7WLpO0saevBbp+1Nc=
 
-eslint-scope@3.7.1:
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
-  integrity sha1-PWPD7f2gLgbgGkUq2IyqzHzctug=
-  dependencies:
-    esrecurse "^4.1.0"
-    estraverse "^4.1.1"
-
 eslint-scope@^3.7.1:
   version "3.7.3"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.3.tgz#bb507200d3d17f60247636160b4826284b108535"
@@ -5524,50 +5522,6 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
   integrity sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
-
-eslint@^4.19.1:
-  version "4.19.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
-  integrity sha512-bT3/1x1EbZB7phzYu7vCr1v3ONuzDtX8WjuM9c0iYxe+cq+pwcKEoQjl7zd3RpC6YOLgnSy3cTN58M2jcoPDIQ==
-  dependencies:
-    ajv "^5.3.0"
-    babel-code-frame "^6.22.0"
-    chalk "^2.1.0"
-    concat-stream "^1.6.0"
-    cross-spawn "^5.1.0"
-    debug "^3.1.0"
-    doctrine "^2.1.0"
-    eslint-scope "^3.7.1"
-    eslint-visitor-keys "^1.0.0"
-    espree "^3.5.4"
-    esquery "^1.0.0"
-    esutils "^2.0.2"
-    file-entry-cache "^2.0.0"
-    functional-red-black-tree "^1.0.1"
-    glob "^7.1.2"
-    globals "^11.0.1"
-    ignore "^3.3.3"
-    imurmurhash "^0.1.4"
-    inquirer "^3.0.6"
-    is-resolvable "^1.0.0"
-    js-yaml "^3.9.1"
-    json-stable-stringify-without-jsonify "^1.0.1"
-    levn "^0.3.0"
-    lodash "^4.17.4"
-    minimatch "^3.0.2"
-    mkdirp "^0.5.1"
-    natural-compare "^1.4.0"
-    optionator "^0.8.2"
-    path-is-inside "^1.0.2"
-    pluralize "^7.0.0"
-    progress "^2.0.0"
-    regexpp "^1.0.1"
-    require-uncached "^1.0.3"
-    semver "^5.3.0"
-    strip-ansi "^4.0.0"
-    strip-json-comments "~2.0.1"
-    table "4.0.2"
-    text-table "~0.2.0"
 
 eslint@^5.6.0:
   version "5.6.0"
@@ -6300,6 +6254,7 @@ follow-redirects@^1.2.3:
 follow-redirects@^1.2.5:
   version "1.5.9"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.9.tgz#c9ed9d748b814a39535716e531b9196a845d89c6"
+  integrity sha512-Bh65EZI/RU8nx0wbYF9shkFZlqLP+6WT/5FnA3cE/djNSuKNHJEinGGZgu/cQEkeeb2GdFOgenAmn8qaqYke2w==
   dependencies:
     debug "=3.1.0"
 
@@ -11106,11 +11061,6 @@ react-inspector@^2.2.2, react-inspector@^2.3.0:
   dependencies:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
-
-react-is@^16.3.1:
-  version "16.4.2"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
-  integrity sha512-rI3cGFj/obHbBz156PvErrS5xc6f1eWyTwyV4mo0vF2lGgXgS+mm7EKD5buLJq6jNgIagQescGSVG2YzgXt8Yg==
 
 react-is@^16.3.2:
   version "16.6.0"

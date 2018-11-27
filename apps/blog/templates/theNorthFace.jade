@@ -1,0 +1,47 @@
+extends ../../../components/layout/layouts/blank
+include ../../../components/blog_post/partials/category_title
+
+block title
+  |  / #{title}
+
+block scripts
+  script( src= asset('/assets/blog.js') )
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .FullScreenCover
+    .FullScreenCover__backdrop
+      iframe(
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/5hPqjvoUx_8?modestbranding=1&autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1&mute=1"
+        frameborder="0"
+      )
+    .FullScreenCover__overlay
+      .FullScreenCover__title
+        h1.Type.Type--size-h1 The North Face
+
+  .Page.Page--narrow
+    .BlogPost
+      article.post-content
+        != body
+      if bio && bio.length > 0
+        hr
+        .post-author-bio
+          != bio
+
+  hr.Base
+  .Page.Page--narrow
+    h2.Type.Type--size-h2.Utility--align-center
+      | Are.na Blog
+
+    p.Type.Type--lh-tall.AboutParagraph
+      | Learn about how people use Are.na to do work and pursue personal projects through case studies, interviews, and highlights.
+    br
+    .Utility--align-center
+      a.Button.Button--size-lg( href='/blog' )
+        | See more

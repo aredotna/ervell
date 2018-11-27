@@ -1,3 +1,4 @@
+
 .BlogPost
   margin-bottom 8em
   line-height line-height-tall
@@ -88,4 +89,53 @@
   .post-author-bio hr
     margin 3em 0
     height 2px
+    background-color colors-gray-border
+    border none
 
+.FullScreenCover
+  background #00F
+  width 100vw
+  height 80vh
+  position relative
+
+  &__backdrop
+    background #000
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+
+    iframe
+      width 100%
+      height 100%
+
+  &__overlay
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    display flex
+    align-items flex-end
+    justify-content center
+    box-shadow: inset 0px 0px 200px rgba(0,0,255,1)
+    
+  &__title
+    h1
+      font-family 'Impact'
+      text-transform uppercase
+      font-size 10rem
+      line-height 1
+      text-shadow #00f 1px 0 100px
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #00f;
+    h4
+      position absolute
+      left 0
+      bottom 40%
+      width 100%
+    h1, h4
+      text-align center
+      color white !important
+      margin 0
