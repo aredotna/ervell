@@ -29,6 +29,7 @@ posts = require '../../collections/posts.coffee'
     res.render 'show',
       title: post.fields.title
       post: post
+      image: contentfulFormatter.metaImage(post.fields.image)
       formatDate: formatDate
       body: body
       bio: bio,
@@ -46,6 +47,7 @@ posts = require '../../collections/posts.coffee'
     }
     res.render 'theNorthFace',
       title: post.fields.title
+      image: contentfulFormatter.metaImage(post.fields.image)
       post: post
       formatDate: formatDate
       body: body
