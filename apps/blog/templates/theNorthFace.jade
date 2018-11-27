@@ -15,12 +15,11 @@ block container
 
   .FullScreenCover
     .FullScreenCover__backdrop
-      iframe(
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/5hPqjvoUx_8?autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1&mute=1"
-        frameborder="0"
-      )
+      .FullScreenCover__inner
+        iframe(
+          src="https://player.vimeo.com/video/303072776?loop=1&autoplay=1&muted=1&background=1"
+          frameborder="0"
+        )
     .FullScreenCover__overlay
       .FullScreenCover__title
         h5.Type.Type--size-h5 CASE STUDY
@@ -32,7 +31,7 @@ block container
 
   .Page.Page--narrow
     .BlogPost
-      article.post-content
+      article.post-content.dropcap
         != body
       if bio && bio.length > 0
         hr

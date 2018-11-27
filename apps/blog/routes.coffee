@@ -39,7 +39,6 @@ posts = require '../../collections/posts.coffee'
 @theNorthFace = (req, res, next) ->
   posts.fetchWithSlug('the-north-face').then (post) ->
     return next() unless post and post.fields
-    coverImageUrl = post.fields.image.fields.file.url + '?w=600'
     bio = if (bio = post.fields.author.fields?.bio) then documentToHtmlString(bio) else ''
     body = contentfulFormatter.formatRichTextWithImages post.fields.body, {
       srcsetSizes: [670, 670 * 2, 670 * 3],
@@ -47,7 +46,6 @@ posts = require '../../collections/posts.coffee'
     }
     res.render 'theNorthFace',
       title: post.fields.title
-      image: coverImageUrl
       post: post
       formatDate: formatDate
       body: body
