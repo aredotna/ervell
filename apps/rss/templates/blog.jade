@@ -7,14 +7,14 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
     language en-US
     description Posts from the Are.na blog
     if posts.length
-      lastBuildDate= new Date(posts[0].get('date')).toUTCString()
+      lastBuildDate= posts[0].fields.displayDate
     each post in posts
       item
-        title= post.get('title')
-        link #{sd.APP_URL}/blog#{post.get('url')}
-        pubDate= new Date(post.get('date')).toUTCString()
-        guid(isPermaLink='false') #{sd.APP_URL}/blog#{post.get('url')}
+        title= post.fields.title
+        link #{sd.APP_URL}/blog/#{post.fields.slug}
+        pubDate= post.fields.displayDate
+        guid(isPermaLink='false') #{sd.APP_URL}/blog/#{post.fields.slug}
         description
           | <![CDATA[
-          = post.get('excerpt')
+          = post.fields.previewText
           | ]]>

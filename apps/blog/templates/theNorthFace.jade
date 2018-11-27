@@ -13,23 +13,29 @@ block footer
 block container
   include ../../../components/logged_out_nav/templates/header
 
+  .FullScreenCover
+    .FullScreenCover__backdrop
+      .FullScreenCover__inner
+        iframe(
+          src="https://player.vimeo.com/video/303072776?loop=1&autoplay=1&muted=1&background=1"
+          frameborder="0"
+        )
+    .FullScreenCover__overlay
+      .FullScreenCover__title
+        h5.Type.Type--size-h5 CASE STUDY
+        h1.Type.Type--size-h1 The North Face
+        h4.Type.Type--size-h4
+          | Cory Arcangel
+          br
+          | November 27, 2018
+
   .Page.Page--narrow
     .BlogPost
-      header.post-header
-        .post-category-title
-          +category-title(true)
-
-        include ../../../components/blog_post/partials/date_author
-      article
-        .post-content
-          != body
-        if footnotes && footnotes.length > 0
-          #footnotes.post-footnotes
-            hr
-            != footnotes
+      article.post-content.dropcap
+        != body
       if bio && bio.length > 0
+        hr
         .post-author-bio
-          hr
           != bio
 
   hr.Base

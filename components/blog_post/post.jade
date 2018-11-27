@@ -1,17 +1,18 @@
-a.BlogPosts__post( href="/blog#{post.get('url')}" )
-  .BlogPosts__post-image(
-    style= "background-image: url(#{post.get('image')})"
-    alt= post.get('title')
-  )
+if post.fields
+  include ./partials/category_title
 
-  span.Type.Type--size-sm: strong= post.get('category')
-  h4.Type.Type--size-h4
-    = post.get('title')
+  a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
+    if post.fields.image && post.fields.image.fields
+      img.BlogPosts__post-image(
+        srcset=srcset(post.fields.image, [250, 500, 750])
+        sizes="250px"
+        alt=post.fields.title
+      )
 
-  .BlogPosts__excerpt.Type--size-sm
-    | #{truncate(post.snippet(), 30)}
-  
-  p.Type.Type--size-sm
-    = post.get('date')
-    br
-    = post.get('author')
+    +category-title
+
+    .BlogPosts__excerpt
+      = post.fields.previewText
+
+    include ./partials/date_author
+
