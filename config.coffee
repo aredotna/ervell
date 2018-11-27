@@ -34,6 +34,8 @@ module.exports =
   ADMIN_SLUGS: 'chris-sherron,charles-broskoski,damon-zucconi,daniel-pianetti,christopher-barley,meg-miller,christina-badal,leo-shaw'
   AIRBRAKE_PROJECT_ID: null
   AIRBRAKE_API_KEY: null
+  CONTENTFUL_SPACE_ID: null
+  CONTENTFUL_ACCESS_TOKEN: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports

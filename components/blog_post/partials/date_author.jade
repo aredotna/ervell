@@ -1,0 +1,7 @@
+p.post-meta
+  if post.fields.displayDate
+    = formatDate( post.fields.displayDate )
+  if post.fields.displayDate && post.fields.author.fields
+    br
+  if post.fields.author.fields
+    = post.fields.author.fields.name

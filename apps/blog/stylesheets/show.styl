@@ -1,112 +1,162 @@
+
 .BlogPost
-  // Classes come through with Jekyll generated HTML
-  // Not going to bother with correcting *that*
-  // So for now, force things to look correct
+  margin-bottom 8em
+  line-height line-height-tall
+  header.post-header
+    collapsed-margins(2em)
 
-  .post
-    //
+    .post-category-title
+      margin-bottom: 1.5em
 
-    > .post-header
-      collapsed-margins(2em)
+  p, blockquote
+    collapsed-margins(2em)
 
-      > .post-category-title
-        // No top margin because of hidden image
-        margin 0 0 1.5em 0
+  a
+    text-decoration underline
+  
+  hr
+    background-color colors-gray-border
+    border none
+    height 2px
+    margin 3em 0
 
-        > h1:first-child
-          font-size font-size-xs
-          text-transform uppercase
-          font-weight bold
-          margin-bottom 0.75em
+  article
+    font-size font-size-base
+    
+    a[href*="#"]
+      vertical-align super
+      font-size .8em
+      text-decoration none
 
-        > h1
-          margin 0
-          text-align left
-          font-size font-size-h3
-          font-weight bold
+    &.dropcap::first-letter
+      font-size 75px
+      line-height 60px
+      padding-top 4px
+      padding-right 8px
+      padding-left 3px
+      float left
+      font-weight bold 
 
-      > .post-author
-      > .post-meta
-        text-align left
-        font-size font-size-base
-        line-height line-height-base
+    iframe
+      max-width 80%
+      margin 2em auto
+      display block
 
-    > .post-content
-      margin-bottom 8em
-      position relative
+    img
+      max-width 100%
 
-      a
-        text-decoration underline
+    .arena-iframe
+      border 1px solid colors-gray-border
+      box-shadow 4px 4px 4px colors-gray-background
+      height 2150px !important
+      margin 4em auto
+      padding 1px
 
-      ol, li
-        font-size font-size-base
-        line-height line-height-tall
+      +mobile()
+        margin 4em 0
+        min-width 100%
+      +below(400px)
+        height 2000px !important
+      +below(380px)
+        height 1950px !important
+      +below(340px)
+        height 1700px !important
 
-      ol
-        ol()
+    h1, h2, h3, h4, h5, h6
+      collapsed-margins(.5em)
+    h1
+      h1(1.75em)
+    h2
+      h2(1.5em)
+    h3
+      h3(1.3em)
+    h4
+      h4(1.1em)
+    h5
+      h5()
+    h6
+      h6()
 
-      ul
-        ul()
-
-      blockquote
-        collapsed-margins(2em)
-        line-height line-height-tall
-
-      p
-        collapsed-margins(2em)
-        font-size font-size-base
-        line-height line-height-tall
-
-      small 
-        font-size font-size-xs
-
-      sup
-        vertical-align super
-        font-size font-size-xs
-
+    figure
+      collapsed-margins(4em)
+      
       img
-      iframe
-        display block
-        max-width 80%
-        vertical-align bottom
-        margin 2em auto
-
-      img 
-        max-width 100%
-
-      .arena-iframe
-        border 1px solid colors-gray-border
-        box-shadow 4px 4px 4px colors-gray-background
-        height 2150px !important
-        margin 4em auto
-        padding 1px
-
-        +mobile()
-          margin 4em 0
-          min-width 100%
-        +below(400px)
-          height 2000px !important
-        +below(380px)
-          height 1950px !important
-        +below(340px)
-          height 1700px !important
-
-      h2
         collapsed-margins(2em)
+        display block
+      figcaption
+        font-size font-size-xs
 
+    .post-footnotes
+      font-size .9em
+      ol
+        padding-inline-start 20px
+        list-style-type decimal
       hr
-        collapsed-margins(3em)
-        height 2px
-        background-color colors-gray-border
-        border none
+        margin 2em 0
+        height 1px
 
-      figure
-        collapsed-margins(4em)
-        h5
-          collapsed-margins(1em)
-        img, iframe, video
-          collapsed-margins(2em)
-        figcaption
-          line-height line-height-tall
-        small 
-          font-size font-size-xs
+  .post-author-bio hr
+    margin 3em 0
+    height 2px
+    background-color colors-gray-border
+    border none
+
+.FullScreenCover
+  background #00F
+  width 100vw
+  height 65vh
+  position relative
+
+  &__backdrop
+    background #000
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+  
+  &__inner
+    position relative
+    width 100%
+    height 100%
+    overflow hidden
+
+    iframe
+      width 100vw
+      height 56.25vh
+      min-height 100vh
+      min-width 177.77vw
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+
+  &__overlay
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+    display flex
+    align-items center
+    justify-content center
+    box-shadow inset 0px 0px 200px rgba(0,0,255,1)
+    
+  &__title
+    h1, h4, h5
+      text-align center
+      color white !important
+      margin 0
+    h1
+      font-weight bold
+      line-height 1
+      text-shadow #00f 1px 0 50px
+      margin 1em 0
+    h4
+      font-size 1rem
+      width 100%
+      text-shadow #00f 1px 0 50px
+    h5 
+      font-size .75rem
+      font-weight bold
+      text-transform uppercase

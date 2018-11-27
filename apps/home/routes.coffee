@@ -5,12 +5,12 @@ Promise = require 'bluebird-q'
 graphQL = require '../../lib/graphql'
 cached = require '../../lib/cached'
 ExploreBlocks = require '../../collections/explore_blocks'
-Posts = require '../../collections/posts.coffee'
-truncate = require '../../lib/truncate.coffee'
+contentfulFormatter = require '../../components/contentful/helpers.coffee'
+{ formatDate } = require '../../components/blog_post/helpers.coffee'
+{ documentToHtmlString } = require '@contentful/rich-text-html-renderer'
+posts = require '../../collections/posts.coffee'
 
 @index = (_req, res, next) ->
-  posts = new Posts
-  posts.url = "#{BLOG_URL}/featured.json"
 
   userIds = (HOMEPAGE_EXPLORE_USER_IDS or '').split(',').map (x) -> parseInt(x, 10)
   exploreBlocks = new ExploreBlocks
@@ -18,19 +18,21 @@ truncate = require '../../lib/truncate.coffee'
 
   Promise.all [
     (cached 'homepage:explore-blocks', 3600, -> exploreBlocks.fetch())
-    posts.fetch()
+    posts.fetchFeatured()
   ]
-
-  .spread (exploreBlocksResponse) ->
-    locals = { truncate: truncate, posts: posts.models }
+  .spread (exploreBlocksResponse, posts) ->
+    locals =
+      posts: posts
+      formatDate: formatDate
+      srcset: contentfulFormatter.srcset
+      documentToHtmlString: documentToHtmlString
+      splash: res.locals.sd.HOMEPAGE_SPLASH
 
     if exploreBlocksResponse?
       # Re-initialize the collection with the possibly cached response to parse it
       exploreBlocks = new ExploreBlocks exploreBlocksResponse, parse: true
       res.locals.sd.EXPLORE_BLOCKS = exploreBlocks.toJSON()
       extend locals, explore_blocks: exploreBlocks.models
-
-    extend locals, splash: res.locals.sd.HOMEPAGE_SPLASH
 
     res.render 'index', locals
 
