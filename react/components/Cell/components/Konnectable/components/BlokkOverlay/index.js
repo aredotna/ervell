@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
@@ -32,7 +32,7 @@ const OverlayButton = styled(FilledButton).attrs({
   justify-content: center;
 `;
 
-class BlokkOverlay extends Component {
+class BlokkOverlay extends PureComponent {
   static propTypes = {
     konnectable: propType(blokkOverlayFragment).isRequired,
     onOverlay: PropTypes.func.isRequired,

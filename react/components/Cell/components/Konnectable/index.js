@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
@@ -54,7 +54,7 @@ const Comments = styled(Typography).attrs({
   border-radius: ${constants.radii.subtle};
 `;
 
-export default class Konnectable extends Component {
+export default class Konnectable extends PureComponent {
   static propTypes = {
     konnectable: propType(konnectableCellFragment).isRequired,
     context: PropTypes.arrayOf(PropTypes.shape({

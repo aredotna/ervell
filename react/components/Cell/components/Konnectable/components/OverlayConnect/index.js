@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -34,7 +34,7 @@ const Container = styled(Box).attrs({
   }
 `;
 
-export default class OverlayConnect extends Component {
+export default class OverlayConnect extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['CHANNEL', 'BLOCK']).isRequired,

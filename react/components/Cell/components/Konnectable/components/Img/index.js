@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -20,7 +20,7 @@ const Container = styled(Box).attrs({
   }
 `;
 
-class Img extends Component {
+class Img extends PureComponent {
   static propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
 
 import linkFragment from 'react/components/Cell/components/Konnectable/components/Link/fragments/link';
 
 import Generic from 'react/components/Cell/components/Konnectable/components/Generic';
 
-export default class Link extends Component {
+export default class Link extends PureComponent {
   static propTypes = {
     link: propType(linkFragment).isRequired,
   }

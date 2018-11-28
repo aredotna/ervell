@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
@@ -10,7 +10,7 @@ import Truncate from 'react/components/UI/Truncate';
 import MetadataFileExtension from 'react/components/Cell/components/Konnectable/components/Metadata/components/MetadataFileExtension';
 import MetadataPlay from 'react/components/Cell/components/Konnectable/components/Metadata/components/MetadataPlay';
 
-export default class Metadata extends Component {
+export default class Metadata extends PureComponent {
   static propTypes = {
     konnectable: propType(metadataFragment).isRequired,
     mode: PropTypes.oneOf(['resting', 'hover', 'overlay']),
