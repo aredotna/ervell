@@ -43,6 +43,20 @@ export const mixin = css`
   > p {
     ${neutralMarginsY}
   }
+
+  del {
+    text-decoration: strikethrough;
+  }
+
+  strong,
+  b {
+    font-weight: bold;
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
 `;
 
 const Text = styled.div`
