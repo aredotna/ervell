@@ -34,6 +34,14 @@ storiesOf('RadioOptions', module)
             </Text>
           )}
         </RadioOptions.Option>
+
+        <RadioOptions.Option value="lifetime" disabled>
+          {({ selected }) => (
+            <Text f={4} mb={3} selected={selected}>
+              <strong>Lifetime Premium (disabled) {JSON.stringify({ selected })}</strong>
+            </Text>
+          )}
+        </RadioOptions.Option>
       </RadioOptions>
     </Specimen>
   ))

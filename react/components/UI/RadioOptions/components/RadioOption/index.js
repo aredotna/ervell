@@ -20,6 +20,11 @@ const Container = styled(Box).attrs({
   ${props => props.selected && `
     background-color: ${props.theme.colors.state.editable};
   `}
+
+  ${props => props.disabled && `
+    pointer-events: none;
+    opacity: 0.5;
+  `}
 `;
 
 const Radio = styled(Box).attrs({
@@ -52,12 +57,14 @@ export default class RadioOption extends Component {
     value: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES).isRequired,
     selectedValue: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES),
     size: PropTypes.string,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
     onClick: () => {},
     selectedValue: null,
     size: '1.5em',
+    disabled: false,
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -81,6 +88,7 @@ export default class RadioOption extends Component {
     const {
       children,
       size,
+      disabled,
       value: _value,
       selectedValue: _selectedValue,
       onClick: _onClick,
@@ -88,7 +96,14 @@ export default class RadioOption extends Component {
     } = this.props;
 
     return (
-      <Container selected={selected} onClick={this.handleClick} role="button" tabIndex={0} {...rest}>
+      <Container
+        selected={selected}
+        onClick={this.handleClick}
+        role="button"
+        tabIndex={0}
+        disabled={disabled}
+        {...rest}
+      >
         <Radio selected={selected} size={size} />
 
         <Label>
