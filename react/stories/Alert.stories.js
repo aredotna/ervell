@@ -22,8 +22,12 @@ storiesOf('Alert', module)
         Something went wrong! Try again.
       </Alert>
 
-      <Alert bg="black" color="white" isCloseable={false}>
+      <Alert mb={6} bg="black" color="white" isCloseable={false}>
         Just wanted to say hey.
+      </Alert>
+
+      <Alert bg="state.premium" color="white" isCloseable={false}>
+        Subscribed! You’re all set!
       </Alert>
     </Specimen>
   ));
