@@ -8,10 +8,5 @@ block content
     | Plan &amp; Billing
 
   .tab-content__frame
-    .Narrow
-      section.Section.js-your-plan
-        include ../../components/your_plan/index        
-
-      if user.get('is_premium') && !customer.get('is_canceled') && !customer.get('is_lifetime')
-        section.Section.js-cancel-plan
-          include ../../components/cancel_plan/index
+    .js-billing-component
+      //- Rendered client-side
