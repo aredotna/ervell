@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import OutsideClickHandler from 'react-outside-click-handler';
 import styled from 'styled-components';
-import { position, top, right, bottom, left } from 'styled-system';
+import { position, top, right, bottom, left, width } from 'styled-system';
+import { debounce } from 'underscore';
 
 import { preset } from 'react/styles/functions';
 
@@ -25,10 +26,11 @@ const Wrapper = styled.div`
   ${right}
   ${bottom}
   ${left}
+  ${width}
   pointer-events: all;
 `;
 
-export default class Overlay extends Component {
+export default class Overlay extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -39,6 +41,7 @@ export default class Overlay extends Component {
     alignToX: PropTypes.oneOf(['left', 'right']),
     offsetX: PropTypes.number,
     offsetY: PropTypes.number,
+    fullWidth: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -48,6 +51,7 @@ export default class Overlay extends Component {
     alignToX: 'left',
     offsetX: 0,
     offsetY: 0,
+    fullWidth: false,
   }
 
   constructor(props) {
@@ -66,19 +70,27 @@ export default class Overlay extends Component {
   componentDidMount() {
     document.body.appendChild(this.el);
 
-    this.alignToEl(this.props.targetEl());
+    this.positionOverlay = () => this.alignToEl(this.props.targetEl());
+    this.debouncedPositionOverlay = debounce(this.positionOverlay, 250);
+
+    window.addEventListener('resize', this.debouncedPositionOverlay);
+    document.body.addEventListener('mousewheel', this.debouncedPositionOverlay);
+
+    this.positionOverlay();
   }
 
   componentWillUnmount() {
     this.el.parentNode.removeChild(this.el);
+    window.removeEventListener('resize', this.debouncedPositionOverlay);
+    document.body.removeEventListener('mousewheel', this.debouncedPositionOverlay);
   }
 
   alignToEl = (el) => {
     const {
-      anchorY, anchorX, alignToY, alignToX, offsetY, offsetX,
+      anchorY, anchorX, alignToY, alignToX, offsetY, offsetX, fullWidth,
     } = this.props;
 
-    const { [alignToY]: y, [alignToX]: x } = el.getBoundingClientRect();
+    const { [alignToY]: y, [alignToX]: x, width: elWidth } = el.getBoundingClientRect();
 
     const positions = {
       top: y,
@@ -91,6 +103,10 @@ export default class Overlay extends Component {
       [anchorY]: positions[anchorY] + offsetY,
       [anchorX]: positions[anchorX] + offsetX,
     };
+
+    if (fullWidth) {
+      theState.width = elWidth;
+    }
 
     this.setState(theState);
   }
