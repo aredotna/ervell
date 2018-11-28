@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { divide } from 'react/styles/functions';
+
 import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 
 import Box from 'react/components/UI/Box';
@@ -11,26 +13,37 @@ const Container = styled(Box).attrs({
 })`
   display: flex;
   flex-direction: row;
+  align-items: center;
   cursor: pointer;
+  user-select: none;
 
   ${props => props.selected && `
     background-color: ${props.theme.colors.state.editable};
+  `}
+
+  ${props => props.disabled && `
+    pointer-events: none;
+    opacity: 0.5;
   `}
 `;
 
 const Radio = styled(Box).attrs({
   mr: 6,
 })`
-  border: 0.34375em solid white;
+  border: ${props => divide(props.size, 4)} solid white;
   box-shadow: 0 0 0 1px ${props => props.theme.colors.gray.base};
   border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
+  width: ${props => props.size};
+  height: ${props => props.size};
 
   ${props => props.selected && `
     border-color: ${props.theme.colors.state.editable};
     background-color: ${props.theme.colors.gray.base};
   `}
+`;
+
+const Label = styled(Box)`
+  flex: 1;
 `;
 
 const POSSIBLE_VALUE_TYPES = [PropTypes.string, PropTypes.number, PropTypes.bool];
@@ -39,15 +52,19 @@ export default class RadioOption extends Component {
   static POSSIBLE_VALUE_TYPES = POSSIBLE_VALUE_TYPES
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.func.isRequired,
     onClick: PropTypes.func,
     value: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES).isRequired,
     selectedValue: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES),
+    size: PropTypes.string,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
     onClick: () => {},
     selectedValue: null,
+    size: '1.5em',
+    disabled: false,
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -68,15 +85,30 @@ export default class RadioOption extends Component {
 
   render() {
     const { selected } = this.state;
-    const { children } = this.props;
+    const {
+      children,
+      size,
+      disabled,
+      value: _value,
+      selectedValue: _selectedValue,
+      onClick: _onClick,
+      ...rest
+    } = this.props;
 
     return (
-      <Container selected={selected} onClick={this.handleClick} role="button" tabIndex={0}>
-        <Radio selected={selected} />
+      <Container
+        selected={selected}
+        onClick={this.handleClick}
+        role="button"
+        tabIndex={0}
+        disabled={disabled}
+        {...rest}
+      >
+        <Radio selected={selected} size={size} />
 
-        <div>
+        <Label>
           {provideChildrenWithProps(children, { selected })}
-        </div>
+        </Label>
       </Container>
     );
   }

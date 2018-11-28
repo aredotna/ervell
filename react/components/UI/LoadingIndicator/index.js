@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { space, width, height } from 'styled-system';
 
-import { preset } from 'react/styles/functions';
-
+import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 
-const Container = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
+const Container = styled(Box).attrs({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
   user-select: none;
-  ${space}
-  ${preset(width, { width: '100%' })}
-  ${preset(height, { height: '100%' })}
 `;
 
 export default class LoadingIndicator extends Component {

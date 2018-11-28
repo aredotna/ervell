@@ -9,6 +9,7 @@ const COLORS = {
     premium: '#00c5ff',
     alert: 'rgb(255, 94, 0)',
     editable: '#fdffdb',
+    neutral: '#fdffdb', // alias editable
     investor: 'rgb(183, 158, 110)',
   },
   gray: {
@@ -23,10 +24,12 @@ const COLORS = {
   },
   utility: {
     translucent: 'rgba(255, 255, 255, 0.9)',
+    semiTranslucent: 'rgba(255, 255, 255, 0.5)',
     transparent: 'rgba(255, 255, 255, 0.001)',
   },
   white: 'white',
   black: 'black',
+  middleGray: '#929292',
 };
 
 const { white: _white, black: _black, ...colorObjs } = COLORS;

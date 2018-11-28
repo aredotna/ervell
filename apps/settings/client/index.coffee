@@ -5,4 +5,4 @@ billing = require './tabs/billing.coffee'
 module.exports = ->
   general $('.js-general')
   notifications $('.js-notifications')
-  billing $('.js-billing')
+  billing $('.js-billing-component')
