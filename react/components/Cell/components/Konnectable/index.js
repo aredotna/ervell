@@ -112,6 +112,7 @@ export default class Konnectable extends PureComponent {
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         onClick={this.openBlock}
+        data-id={konnectable.id}
       >
         {konnectable.counts.comments > 0 && mode !== 'overlay' &&
           <Comments>
