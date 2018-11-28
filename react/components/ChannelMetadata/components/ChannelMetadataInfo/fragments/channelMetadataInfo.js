@@ -10,5 +10,9 @@ export default gql`
     counts {
       followers
     }
+    user {
+      href
+      name
+    }
   }
 `;
