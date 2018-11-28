@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { space, alignSelf, width } from 'styled-system';
-import OutsideClickHandler from 'react-outside-click-handler';
 
-import { preset } from 'react/styles/functions';
-
+import Box from 'react/components/UI/Box';
+import Overlay from 'react/components/UI/Overlay';
 import PulldownValue from 'react/components/UI/Pulldown/components/PulldownValue';
 import PulldownOption from 'react/components/UI/Pulldown/components/PulldownOption';
 
-const Container = styled.div`
+const Container = styled(Box).attrs({
+  width: '88%',
+})`
   position: relative;
   background-color: white;
   border-radius: 0.25em;
@@ -17,9 +17,6 @@ const Container = styled.div`
     resting: x.theme.colors.gray.regular,
     expanded: x.theme.colors.gray.medium,
   }[x.mode])};
-  ${space}
-  ${alignSelf}
-  ${preset(width, { width: '88%' })}
   z-index: 1;
 
   ${x => x.mode === 'expanded' && `
@@ -29,14 +26,11 @@ const Container = styled.div`
 `;
 
 const PulldownOptions = styled.div`
-  position: absolute;
-  top: 100%;
-  left: -1px;
-  right: -1px;
   border-radius: 0.25em;
-  background-color: white;
   border: 1px solid ${x => x.theme.colors.gray.medium};
   border-top-color: ${x => x.theme.colors.gray.regular};
+  margin-left: -1px;
+  margin-right: -1px;
 
   ${x => x.mode === 'expanded' && `
     border-top-left-radius: 0;
@@ -87,16 +81,21 @@ export default class Pulldown extends Component {
 
   render() {
     const { value: selected, mode } = this.state;
-    const { options } = this.props;
+    const { options, ...rest } = this.props;
 
     return (
-      <Container mode={mode}>
-        <OutsideClickHandler onOutsideClick={this.rest}>
-          <PulldownValue mode={mode} onMouseDown={this.toggle} selected>
-            {options[selected]}
-          </PulldownValue>
+      <Container mode={mode} {...rest}>
+        <PulldownValue
+          mode={mode}
+          onMouseDown={this.toggle}
+          selected
+          innerRef={(el) => { this.target = el; }}
+        >
+          {options[selected]}
+        </PulldownValue>
 
-          {mode === 'expanded' &&
+        {mode === 'expanded' &&
+          <Overlay targetEl={() => this.target} fullWidth onClose={this.rest}>
             <PulldownOptions mode={mode}>
               {Object.keys(options).map(key => (
                 <PulldownOption
@@ -109,8 +108,8 @@ export default class Pulldown extends Component {
                 </PulldownOption>
               ))}
             </PulldownOptions>
-          }
-        </OutsideClickHandler>
+          </Overlay>
+        }
       </Container>
     );
   }
