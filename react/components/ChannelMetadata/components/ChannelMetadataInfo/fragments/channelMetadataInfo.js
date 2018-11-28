@@ -11,6 +11,8 @@ export default gql`
       followers
     }
     user {
+      __typename
+      id
       href
       name
     }
