@@ -26,11 +26,15 @@ const Container = styled(Box).attrs({
 `;
 
 const PulldownOptions = styled.div`
+  box-sizing: border-box;
   border-radius: 0.25em;
   border: 1px solid ${x => x.theme.colors.gray.medium};
   border-top-color: ${x => x.theme.colors.gray.regular};
   margin-left: -1px;
   margin-right: -1px;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 
   ${x => x.mode === 'expanded' && `
     border-top-left-radius: 0;

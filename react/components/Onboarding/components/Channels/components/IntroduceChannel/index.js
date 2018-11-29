@@ -20,6 +20,7 @@ const BodyWrapper = styled.div`
   flex: 1;
   flex-direction: column;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 2em;
 `;
 
