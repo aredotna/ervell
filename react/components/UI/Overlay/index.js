@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import OutsideClickHandler from 'react-outside-click-handler';
 import styled from 'styled-components';
-import { position, top, right, bottom, left, width } from 'styled-system';
+import { position, top, right, bottom, left, width, height } from 'styled-system';
 import { debounce } from 'underscore';
 
 import { preset } from 'react/styles/functions';
@@ -21,12 +21,14 @@ const Background = styled.div`
 `;
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
   ${preset(position, { position: 'absolute' })}
   ${top}
   ${right}
   ${bottom}
   ${left}
   ${width}
+  ${height}
   pointer-events: all;
 `;
 
@@ -65,6 +67,8 @@ export default class Overlay extends PureComponent {
     right: null,
     bottom: null,
     left: null,
+    width: null,
+    height: null,
   }
 
   componentDidMount() {
@@ -99,16 +103,25 @@ export default class Overlay extends PureComponent {
       right: window.innerWidth - x,
     };
 
-    const theState = {
+    const positionState = {
       [anchorY]: positions[anchorY] + offsetY,
       [anchorX]: positions[anchorX] + offsetX,
     };
 
     if (fullWidth) {
-      theState.width = elWidth;
+      positionState.width = elWidth;
     }
 
-    this.setState(theState);
+    this.setState(positionState, () => {
+      const { bottom: bottomEdge, top: topEdge } = this.wrapper.getBoundingClientRect();
+
+      const overflowState = {
+        top: anchorY === 'bottom' && topEdge <= 0 ? 0 : positionState.top,
+        bottom: anchorY === 'top' && bottomEdge >= window.innerHeight ? 0 : positionState.bottom,
+      };
+
+      this.setState(overflowState);
+    });
   }
 
   render() {
@@ -117,11 +130,15 @@ export default class Overlay extends PureComponent {
     return ReactDOM.createPortal(
       (
         <Background>
-          <Wrapper {...compactObject(this.state)} {...rest}>
-            <OutsideClickHandler onOutsideClick={onClose}>
+          <OutsideClickHandler onOutsideClick={onClose}>
+            <Wrapper
+              {...compactObject(this.state)}
+              {...rest}
+              innerRef={(el) => { this.wrapper = el; }}
+            >
               {children}
-            </OutsideClickHandler>
-          </Wrapper>
+            </Wrapper>
+          </OutsideClickHandler>
         </Background>
       ), this.el,
     );
