@@ -75,7 +75,7 @@ export default class Overlay extends PureComponent {
     document.body.appendChild(this.el);
 
     this.positionOverlay = () => this.alignToEl(this.props.targetEl());
-    this.debouncedPositionOverlay = debounce(this.positionOverlay, 250);
+    this.debouncedPositionOverlay = debounce(this.positionOverlay, 100);
 
     window.addEventListener('resize', this.debouncedPositionOverlay);
     document.body.addEventListener('mousewheel', this.debouncedPositionOverlay);
@@ -112,15 +112,28 @@ export default class Overlay extends PureComponent {
       positionState.width = elWidth;
     }
 
+    // Moves into position
     this.setState(positionState, () => {
-      const { bottom: bottomEdge, top: topEdge } = this.wrapper.getBoundingClientRect();
+      // Then handle overflowing calculations
+      const {
+        bottom: bottomEdge,
+        top: topEdge,
+        height: wrapperHeight,
+      } = this.wrapper.getBoundingClientRect();
 
-      const overflowState = {
-        top: anchorY === 'bottom' && topEdge <= 0 ? 0 : positionState.top,
-        bottom: anchorY === 'top' && bottomEdge >= window.innerHeight ? 0 : positionState.bottom,
-      };
+      const isOverflowingViewportTop = anchorY === 'bottom' && topEdge <= 0;
+      const isOverflowingViewportBottom = anchorY === 'top' && bottomEdge >= window.innerHeight;
 
-      this.setState(overflowState);
+      if (isOverflowingViewportTop) {
+        return this.setState({ height: wrapperHeight + topEdge, topEdge });
+      }
+
+      if (isOverflowingViewportBottom) {
+        const bottomDifference = window.innerHeight - bottomEdge;
+        return this.setState({ height: wrapperHeight + bottomDifference });
+      }
+
+      return null;
     });
   }
 
