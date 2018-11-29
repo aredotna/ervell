@@ -5,7 +5,7 @@ cheerio = require 'cheerio'
 module.exports =
   metaImage: (image) ->
     return '' unless image.fields
-    return "#{image.fields.file.url}?w=1024"
+    return "https:#{image.fields.file.url}?w=1024"
 
   srcset: (image, srcsetSizes = [320, 640, 768, 1024, 1366, 1600, 1920, 2048]) ->
     return '' unless image.fields
