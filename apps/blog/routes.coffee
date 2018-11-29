@@ -34,6 +34,7 @@ posts = require '../../collections/posts.coffee'
       body: body
       bio: bio,
       footnotes: footnotes
+      description: post.fields.previewText
 
   .catch next
 
@@ -52,6 +53,7 @@ posts = require '../../collections/posts.coffee'
       formatDate: formatDate
       body: body
       bio: bio
+      description: post.fields.previewText
 
   .catch next
 
