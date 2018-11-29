@@ -12,6 +12,18 @@ import Label from 'react/components/UserDropdown/components/Label';
 import SecondaryLinks from 'react/components/UserDropdown/components/SecondaryLinks';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
+const Container = styled(BorderedBox).attrs({
+  width: '20em',
+})`
+  height: 100%;
+`;
+
+const Inner = styled(Box)`
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+`;
+
 const Section = styled(Box).attrs({
   py: 4,
   borderBottom: '1px solid',
@@ -29,48 +41,50 @@ export default class UserDropdown extends Component {
         {({ loading, error, data }) => {
           if (loading) {
             return (
-              <BorderedBox width="20em">
+              <Container>
                 <LoadingIndicator p={6} />
-              </BorderedBox>
+              </Container>
             );
           }
 
           if (error) {
             return (
-              <BorderedBox width="20em">
+              <Container>
                 <Text color="state.alert" f={2} p={6}>
                   {error.message}
                 </Text>
-              </BorderedBox>
+              </Container>
             );
           }
 
           const { me } = data;
 
           return (
-            <BorderedBox width="20em">
-              <Section>
-                <Link py={3} href={me.href}>
-                  {me.name}
+            <Container>
+              <Inner>
+                <Section>
+                  <Link py={3} href={me.href}>
+                    {me.name}
 
-                  <Label>Profile</Label>
-                </Link>
-              </Section>
+                    <Label>Profile</Label>
+                  </Link>
+                </Section>
 
-              <Section>
-                <Link pt={3} pb={4} href="/feed">
-                  Feed
-                </Link>
+                <Section>
+                  <Link pt={3} pb={4} href="/feed">
+                    Feed
+                  </Link>
 
-                <Link pt={4} pb={3} href="/explore">
-                  Explore
-                </Link>
-              </Section>
+                  <Link pt={4} pb={3} href="/explore">
+                    Explore
+                  </Link>
+                </Section>
 
-              <Section>
-                <SecondaryLinks isPremium={me.is_premium} />
-              </Section>
-            </BorderedBox>
+                <Section>
+                  <SecondaryLinks isPremium={me.is_premium} />
+                </Section>
+              </Inner>
+            </Container>
           );
         }}
       </Query>

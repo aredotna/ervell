@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -34,7 +34,7 @@ const ChannelFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
 `;
 
-class ChannelOverlay extends Component {
+class ChannelOverlay extends PureComponent {
   static propTypes = {
     channel: propType(channelOverlayFragment).isRequired,
     onOverlay: PropTypes.func.isRequired,

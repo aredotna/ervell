@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
 
@@ -26,7 +26,7 @@ const Container = styled.div`
   ${channelVisibilityForegroundColor}
 `;
 
-export default class Channel extends Component {
+export default class Channel extends PureComponent {
   static propTypes = {
     channel: propType(channelFragment).isRequired,
   }
