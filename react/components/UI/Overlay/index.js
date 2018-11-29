@@ -81,12 +81,19 @@ export default class Overlay extends PureComponent {
     document.body.addEventListener('mousewheel', this.debouncedPositionOverlay);
 
     this.positionOverlay();
+
+    // Re-position the overlay if anything in the subtree changes
+    this.observer = new MutationObserver(this.positionOverlay);
+    this.observer.observe(this.wrapper, { childList: true, subtree: true });
   }
 
   componentWillUnmount() {
     this.el.parentNode.removeChild(this.el);
+
     window.removeEventListener('resize', this.debouncedPositionOverlay);
     document.body.removeEventListener('mousewheel', this.debouncedPositionOverlay);
+
+    this.observer.disconnect();
   }
 
   alignToEl = (el) => {
