@@ -17,6 +17,7 @@ export default gql`
           __typename
           subtotal
           total
+          next_payment_attempt_at(format: "%D")
         }
       }
     }
