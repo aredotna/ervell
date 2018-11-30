@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
   CardNumberElement,
@@ -12,7 +12,7 @@ const CardNumber = StripeInput(CardNumberElement);
 const CardExpiry = StripeInput(CardExpiryElement);
 const CardCVC = StripeInput(CardCVCElement);
 
-export default class NewCreditCardForm extends Component {
+export default class NewCreditCardForm extends PureComponent {
   static propTypes = {
     onReady: PropTypes.func,
   }

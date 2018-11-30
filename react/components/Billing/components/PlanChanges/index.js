@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
@@ -8,7 +8,7 @@ import Text from 'react/components/UI/Text';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
-export default class PlanChanges extends Component {
+export default class PlanChanges extends PureComponent {
   static propTypes = {
     plan_id: PropTypes.oneOf(['monthly', 'yearly']).isRequired,
     coupon_code: PropTypes.string,
