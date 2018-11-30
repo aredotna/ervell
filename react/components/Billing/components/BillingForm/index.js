@@ -10,6 +10,7 @@ import subscribeToPremiumMutation from 'react/components/Billing/components/Bill
 import cancelPremiumSubscriptionMutation from 'react/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription';
 import addCreditCardMutation from 'react/components/Billing/components/BillingForm/mutations/addCreditCard';
 import changeDefaultCreditCardMutation from 'react/components/Billing/components/BillingForm/mutations/changeDefaultCreditCard';
+import applyCouponToSubscriptionMutation from 'react/components/Billing/components/BillingForm/mutations/applyCouponToSubscription';
 
 import billingFormFragment from 'react/components/Billing/components/BillingForm/fragments/billingForm';
 
@@ -32,6 +33,7 @@ const OPERATIONS = {
   CHANGE_DEFAULT_CREDIT_CARD: 'CHANGE_DEFAULT_CREDIT_CARD',
   CHANGE_PLAN_ID: 'CHANGE_PLAN_ID',
   CANCEL_PREMIUM_SUBSCRIPTION: 'CANCEL_PREMIUM_SUBSCRIPTION',
+  APPLY_COUPON_CODE: 'APPLY_COUPON_CODE',
 };
 
 class BillingForm extends PureComponent {
@@ -43,6 +45,7 @@ class BillingForm extends PureComponent {
     cancelPremiumSubscription: PropTypes.func.isRequired,
     addCreditCard: PropTypes.func.isRequired,
     changeDefaultCreditCard: PropTypes.func.isRequired,
+    applyCouponToSubscription: PropTypes.func.isRequired,
     me: propType(billingFormFragment).isRequired,
   }
 
@@ -59,8 +62,14 @@ class BillingForm extends PureComponent {
   doWeNeedTo = operationName =>
     this.state.operations.includes(OPERATIONS[operationName])
 
-  addOperation = (previousOperations = [], operationName) =>
-    [...new Set([...previousOperations, OPERATIONS[operationName]])];
+  addOperation = (currentOperations = [], operationName) =>
+    [...new Set([...currentOperations, OPERATIONS[operationName]])];
+
+  removeOperation = (currentOperations, operationName) => {
+    const set = new Set(currentOperations);
+    set.delete(OPERATIONS[operationName]);
+    return [...set];
+  }
 
   addCreditCard = () => {
     const { stripe, addCreditCard } = this.props;
@@ -88,6 +97,15 @@ class BillingForm extends PureComponent {
     });
   }
 
+  applyCouponToSubscription = () => {
+    const { applyCouponToSubscription } = this.props;
+    const { coupon_code } = this.state;
+
+    return applyCouponToSubscription({
+      variables: { coupon_code },
+    });
+  }
+
   subscribeToPremium = () => {
     const { plan_id, coupon_code } = this.state;
     const { subscribeToPremium, me: { customer } } = this.props;
@@ -109,7 +127,16 @@ class BillingForm extends PureComponent {
   }
 
   handlePlan = (plan_id) => {
-    this.setState(prevState => ({
+    const { me: { customer } } = this.props;
+
+    if (plan_id === customer.plan.id) {
+      return this.setState(prevState => ({
+        plan_id,
+        operations: this.removeOperation(prevState.operations, 'CHANGE_PLAN_ID'),
+      }));
+    }
+
+    return this.setState(prevState => ({
       plan_id,
       operations: this.addOperation(prevState.operations, 'CHANGE_PLAN_ID'),
     }));
@@ -128,10 +155,12 @@ class BillingForm extends PureComponent {
     }));
   }
 
-  // TODO: Should you be able to simply
-  // apply the coupon code at any given time?
-  handleCouponCode = coupon_code =>
-    this.setState({ coupon_code })
+  handleCouponCode = (coupon_code) => {
+    this.setState(prevState => ({
+      coupon_code,
+      operations: this.addOperation(prevState.operations, 'APPLY_COUPON_CODE'),
+    }));
+  }
 
   handleReenable = (e) => {
     const { me: { customer } } = this.props;
@@ -175,9 +204,10 @@ class BillingForm extends PureComponent {
     // Add a card if one doesn't yet exist
     const waitForCardCreation = this.doWeNeedTo('ADD_NEW_CREDIT_CARD') ? this.addCreditCard() : Promise.resolve();
     const waitForDefaultChange = this.doWeNeedTo('CHANGE_DEFAULT_CREDIT_CARD') ? this.changeDefaultCreditCard() : Promise.resolve();
+    const waitForCouponCode = this.doWeNeedTo('APPLY_COUPON_CODE') ? this.applyCouponToSubscription() : Promise.resolve();
 
     // These things have to happen first to update the state of the customer
-    return Promise.all([waitForCardCreation, waitForDefaultChange])
+    return Promise.all([waitForCardCreation, waitForDefaultChange, waitForCouponCode])
       .then(() => {
         // Now we can change the plan id if we need to
         if (this.doWeNeedTo('CHANGE_PLAN_ID')) {
@@ -234,7 +264,7 @@ class BillingForm extends PureComponent {
 
         {mode === 'card_changed' &&
           <Alert mb={6} bg="state.neutral" isCloseable={false}>
-            Card details updated! You’re all set!
+            Billing details updated! You’re all set!
           </Alert>
         }
 
@@ -341,4 +371,5 @@ export default injectStripe(compose(
   graphql(cancelPremiumSubscriptionMutation, { name: 'cancelPremiumSubscription' }),
   graphql(addCreditCardMutation, { name: 'addCreditCard' }),
   graphql(changeDefaultCreditCardMutation, { name: 'changeDefaultCreditCard' }),
+  graphql(applyCouponToSubscriptionMutation, { name: 'applyCouponToSubscription' }),
 )(BillingForm));

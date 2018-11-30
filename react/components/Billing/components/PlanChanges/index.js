@@ -41,7 +41,7 @@ export default class PlanChanges extends PureComponent {
           return (
             <Text f={2}>
               {upcoming_invoice.total >= 0
-                ? `You will be charged $${(upcoming_invoice.total / 100).toFixed(2)}`
+                ? `You will be charged $${(upcoming_invoice.total / 100).toFixed(2)} on ${upcoming_invoice.next_payment_attempt_at}`
                 : `Your account will be credited $${Math.abs(upcoming_invoice.total / 100).toFixed(2)}`
               }
             </Text>
