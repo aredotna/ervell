@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
@@ -37,7 +37,7 @@ const OptionDescription = styled(Text).attrs({
   justify-content: space-between;
 `;
 
-export default class PlanSelection extends Component {
+export default class PlanSelection extends PureComponent {
   static propTypes = {
     me: propType(planSelectionFragment).isRequired,
     onSelect: PropTypes.func,
