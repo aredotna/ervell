@@ -110,7 +110,7 @@ export default class MyCreditCard extends Component {
               </Text>
             }
 
-            {credit_cards.length > 1 &&
+            {credit_cards && credit_cards.length > 1 &&
               <Text f={1} underlineLinks>
                 <a onClick={this.setMode('manage')} role="button" tabIndex={0}>
                   Manage cards

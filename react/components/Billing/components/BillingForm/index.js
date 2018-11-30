@@ -271,7 +271,7 @@ class BillingForm extends PureComponent {
 
                 <MyCreditCard
                   key={
-                    customer.credit_cards.length +
+                    customer.credit_cards && customer.credit_cards.length +
                       customer.default_credit_card && customer.default_credit_card.id
                   }
                   customer={customer}
