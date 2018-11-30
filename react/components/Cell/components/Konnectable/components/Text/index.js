@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
@@ -41,7 +41,7 @@ const Container = styled(Box).attrs({
   `}
 `;
 
-export default class Text extends Component {
+export default class Text extends PureComponent {
   static propTypes = {
     text: propType(textFragment).isRequired,
     mode: PropTypes.oneOf(['resting', 'hover', 'overlay']),

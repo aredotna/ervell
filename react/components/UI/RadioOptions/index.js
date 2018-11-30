@@ -9,14 +9,16 @@ export default class RadioOptions extends Component {
   static Option = RadioOption;
 
   static propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     onSelect: PropTypes.func,
     value: PropTypes.oneOfType(RadioOption.POSSIBLE_VALUE_TYPES),
+    size: PropTypes.string,
   }
 
   static defaultProps = {
     onSelect: () => {},
     value: null,
+    size: '1.5em',
   }
 
   state = {

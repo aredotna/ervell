@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { space } from 'styled-system';
 import { propType } from 'graphql-anywhere';
@@ -54,7 +54,7 @@ const Container = styled.a.attrs({
   `}
 `;
 
-export default class Indentifiable extends Component {
+export default class Indentifiable extends PureComponent {
   static propTypes = {
     identifiable: propType(identifiableCellFragment).isRequired,
   }

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
 
 import embedFragment from 'react/components/Cell/components/Konnectable/components/Embed/fragments/embed';
 
 import Generic from 'react/components/Cell/components/Konnectable/components/Generic';
 
-export default class Embed extends Component {
+export default class Embed extends PureComponent {
   static propTypes = {
     embed: propType(embedFragment).isRequired,
   }

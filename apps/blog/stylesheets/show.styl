@@ -9,6 +9,7 @@
       margin-bottom: 1.5em
 
   p, blockquote
+    antialiased()
     collapsed-margins(2em)
 
   a
@@ -22,6 +23,9 @@
 
   article
     font-size font-size-base
+    
+    +below(500px)
+      font-size font-size-lg
     
     a[href*="#"]
       vertical-align super
@@ -51,16 +55,13 @@
       height 2150px !important
       margin 4em auto
       padding 1px
+      display block
 
       +mobile()
         margin 4em 0
-        min-width 100%
+        min-width 95%
       +below(400px)
-        height 2000px !important
-      +below(380px)
-        height 1950px !important
-      +below(340px)
-        height 1700px !important
+        height 500px !important
 
     h1, h2, h3, h4, h5, h6
       collapsed-margins(.5em)

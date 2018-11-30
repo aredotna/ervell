@@ -76,6 +76,19 @@ const Mocks = {
     action: random.arrayElement(["connected","followed","created","commented on", "connected"]),
     connector: random.arrayElement(["on", "to"]),
   }),
+
+  Coupon: () => ({
+    code: 'freeyear',
+    description: '45 (USD) off once',
+  }),
+
+  CreditCard: () => ({
+    id: random.uuid(),
+    brand: 'Visa',
+    last4: '4444',
+    exp_year: '2019',
+    exp_month: '11',
+  }),
 };
 
 export default Mocks;

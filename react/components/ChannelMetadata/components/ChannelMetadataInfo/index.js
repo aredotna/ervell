@@ -3,6 +3,7 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
 import Count from 'react/components/UI/Count';
+import Link from 'react/components/UI/LinkUnlessCurrent';
 import ChannelShareButton from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton';
 import { Expandable } from 'react/components/UI/ExpandableSet';
 
@@ -24,6 +25,10 @@ const Buttons = styled.div`
   }
 `;
 
+const OwnerLink = styled.div`
+  margin: 1em 0;
+`;
+
 export default class ChannelMetadataInfo extends Component {
   static propTypes = {
     channel: propType(channelMetadataInfoFragment).isRequired,
@@ -37,6 +42,12 @@ export default class ChannelMetadataInfo extends Component {
         <Expandable>
           <div dangerouslySetInnerHTML={{ __html: channel.info || '—' }} />
         </Expandable>
+
+        {channel.owner.__typename === 'Group' &&
+          <OwnerLink>
+            Started by <Link href={channel.user.href}>{channel.user.name}</Link>
+          </OwnerLink>
+        }
 
         <Buttons>
           {channel.visibility !== 'private' && channel.counts.followers > 0 &&

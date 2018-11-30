@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
 
@@ -27,7 +27,7 @@ const Ext = styled(Text).attrs({
   text-transform: uppercase;
 `;
 
-export default class Attachment extends Component {
+export default class Attachment extends PureComponent {
   static propTypes = {
     attachment: propType(attachmentFragment).isRequired,
   }

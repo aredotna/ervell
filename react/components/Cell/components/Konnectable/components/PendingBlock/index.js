@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -21,7 +21,7 @@ const Container = styled.div`
   &:hover { ${hoverMixin} }
 `;
 
-export default class PendingBlock extends Component {
+export default class PendingBlock extends PureComponent {
   static propTypes = {
     mode: PropTypes.oneOf(['resting', 'hover', 'overlay']),
   }

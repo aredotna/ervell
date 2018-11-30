@@ -41,6 +41,13 @@ storiesOf('Pulldown', module)
       />
     </Specimen>
   ))
+  .add('stacking pulldowns', () => (
+    <Specimen>
+      <Pulldown mb={6} value="a" onChange={action('onChange')} options={{ a: 'a', b: 'b', c: 'c' }} />
+      <Pulldown mb={6} value="b" onChange={action('onChange')} options={{ a: 'a', b: 'b', c: 'c' }} />
+      <Pulldown mb={6} value="c" onChange={action('onChange')} options={{ a: 'a', b: 'b', c: 'c' }} />
+    </Specimen>
+  ))
   .add('ChannelVisibilityPulldown', () => (
     <Specimen>
       <ChannelVisibilityPulldown

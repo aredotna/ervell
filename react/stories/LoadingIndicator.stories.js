@@ -33,4 +33,13 @@ storiesOf('LoadingIndicator', module)
     <Specimen>
       <BlocksLoadingIndicator />
     </Specimen>
+  ))
+  .add('alignment', () => (
+    <Specimen>
+      <LoadingIndicator
+        frames={['$', '$$', '$$$']}
+        justifyContent="start"
+        border="1px solid"
+      />
+    </Specimen>
   ));
