@@ -22,6 +22,7 @@ const Container = styled(Box).attrs({
   overflow: hidden;
   // border: 1px solid transparent;
   border: 1px solid ${x => x.theme.colors.gray.light};
+  text-align: left;
 
   ${x => x.mode === 'hover' && hoverMixin}
   &:hover { ${hoverMixin} }
