@@ -1001,7 +1001,7 @@ type Invitee implements Model & UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   created_at(format: String, relative: Boolean): String
   email: String
   first_name: String
@@ -1015,7 +1015,7 @@ type Invitee implements Model & UserInterface {
   is_investor: Boolean
   is_me: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -1089,7 +1089,7 @@ type Me implements Model & UserInterface {
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
   connection_search(direction: Directions = DESC, per: Int = 5, q: String = null): [Channel]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   counts: MeCounts
   created_at(format: String, relative: Boolean): String
   customer: Customer
@@ -1113,7 +1113,7 @@ type Me implements Model & UserInterface {
   is_pending_confirmation: Boolean
   is_pending_reconfirmation: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   notifications(end: String = "-inf", limit: Int = 50, offset: Int = 0, start: String = "+inf"): Feed
@@ -1364,7 +1364,7 @@ type Query {
   # Locates the user through their reset password token
   password_resettable_user(reset_password_token: String!): User
   password_token(token: ID!): User
-  search(direction: Directions = DESC, object_id: String = null, object_type: ObjectType = null, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 332, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
+  search(direction: Directions = DESC, object_id: String = null, object_type: ObjectType = null, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 336, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
   searches: Searches
 
   # Is this endpoint operational?
@@ -1533,7 +1533,7 @@ type ResetPasswordPayload {
 }
 
 # Possible types for search results
-union SearchResult = Channel | Connectable | User
+union SearchResult = Channel | Connectable | Group | User
 
 # Ways to sort blocks
 enum SearchSorts {
@@ -1554,6 +1554,7 @@ enum SearchType {
 
 type Searches {
   collaborators(limit: Int = 10, query: String!, types: [SearchesCollaboratorsType] = [USER, GROUP]): [Member]
+  quick(limit: Int = 10, query: String!): [SearchResult]
 }
 
 enum SearchesCollaboratorsType {
@@ -1809,7 +1810,7 @@ type User implements Followable & Model & UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   counts: UserCounts
   created_at(format: String, relative: Boolean): String
   first_name: String
@@ -1825,7 +1826,7 @@ type User implements Followable & Model & UserInterface {
   is_investor: Boolean
   is_me: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -1866,7 +1867,7 @@ interface UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Connectable]
   first_name: String
   following(page: Int = 1, per: Int = 1): [FollowableType]
   groups(page: Int = 1, per: Int = 1): [Group]
@@ -1877,7 +1878,7 @@ interface UserInterface {
   is_investor: Boolean
   is_me: Boolean
   is_premium: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 332, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 336, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
