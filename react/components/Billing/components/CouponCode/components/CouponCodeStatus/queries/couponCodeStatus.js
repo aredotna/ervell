@@ -6,6 +6,7 @@ export default gql`
       __typename
       id
       description
+      is_valid
     }
   }
 `;
