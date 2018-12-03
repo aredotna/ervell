@@ -7,7 +7,6 @@ import notificationSentenceFragment from 'react/components/NotificationsDropdown
 
 import { mixin as dividerButtonMixin } from 'react/components/UI/Buttons/components/DividerButton';
 
-import BorderedBox from 'react/components/UI/BorderedBox';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Notification from 'react/components/NotificationsDropdown/components/Notification';
@@ -16,7 +15,7 @@ const Container = styled(Box)`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  max-height: 30em;
 `;
 
 const Body = styled(Box)`
@@ -32,35 +31,37 @@ const Button = styled.a`
   ${dividerButtonMixin}
 `;
 
-const Notifications = ({ notifications }) => (
-  <BorderedBox width="20em" height="30em" justifyContent="center">
-    {notifications.length === 0 &&
-      <Text textAlign="center" f={3}>
-        No notifications yet.
-      </Text>
-    }
-
-    {notifications.length > 0 &&
+const Notifications = ({ notifications }) => {
+  if (notifications.length === 0) {
+    return (
       <Container>
-        <Body p={6}>
-          {/* TODO: For some dumb reason notifications are reversed. Fix this in the API */}
-          {notifications.slice().reverse().map(notification => (
-            <Notification
-              key={notification.id}
-              notification={notification}
-            />
-          ))}
-        </Body>
-
-        <Box px={6}>
-          <Button pt={6} href="/notifications">
-            View all notifications
-          </Button>
-        </Box>
+        <Text textAlign="center" f={3}>
+          No notifications yet.
+        </Text>
       </Container>
-    }
-  </BorderedBox>
-);
+    );
+  }
+
+  return (
+    <Container>
+      <Body p={6}>
+        {/* TODO: For some dumb reason notifications are reversed. Fix this in the API */}
+        {notifications.slice().reverse().map(notification => (
+          <Notification
+            key={notification.id}
+            notification={notification}
+          />
+        ))}
+      </Body>
+
+      <Box px={6}>
+        <Button pt={6} href="/notifications">
+          View all notifications
+        </Button>
+      </Box>
+    </Container>
+  );
+};
 
 Notifications.propTypes = {
   notifications: PropTypes.arrayOf(propType(notificationSentenceFragment)).isRequired,
