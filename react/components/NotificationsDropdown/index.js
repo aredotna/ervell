@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
+import styled from 'styled-components';
 
 import notificationsDropdownQuery from 'react/components/NotificationsDropdown/queries/notificationsDropdown';
 
@@ -8,6 +9,12 @@ import BorderedBox from 'react/components/UI/BorderedBox';
 import Text from 'react/components/UI/Text';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import Notifications from 'react/components/NotificationsDropdown/components/Notifications';
+
+const Container = styled(BorderedBox).attrs({
+  width: '20em',
+})`
+  height: 100%;
+`;
 
 export default class NotificationsDropdown extends Component {
   static propTypes = {
@@ -26,26 +33,28 @@ export default class NotificationsDropdown extends Component {
         {({ loading, error, data }) => {
           if (loading) {
             return (
-              <BorderedBox width="20em">
+              <Container>
                 <LoadingIndicator p={6} />
-              </BorderedBox>
+              </Container>
             );
           }
 
           if (error) {
             return (
-              <BorderedBox width="20em">
+              <Container>
                 <Text color="state.alert" f={2} p={6}>
                   {error.message}
                 </Text>
-              </BorderedBox>
+              </Container>
             );
           }
 
           const { me: { feed: { notifications } } } = data;
 
           return (
-            <Notifications notifications={notifications} />
+            <Container>
+              <Notifications notifications={notifications} />
+            </Container>
           );
         }}
       </Query>

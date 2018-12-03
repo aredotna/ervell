@@ -21,7 +21,7 @@ export default class CouponCodeStatus extends Component {
     const { code } = this.props;
 
     if (loading || code === null || code === '') return NBSP;
-    if (error) return `‘${code}’ is not a valid coupon`;
+    if (error || (data && !data.coupon.is_valid)) return `‘${code}’ is not a valid coupon`;
     if (data) return data.coupon.description;
 
     return NBSP;

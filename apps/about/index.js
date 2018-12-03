@@ -21,7 +21,7 @@ app
   .get('/faqs', (req, res) => res.render('faqs'))
   .get('/pricing', (req, res) => res.render('pricing'))
   .get('/experiments', (req, res) => res.render('experiments'))
-  .get('/community-guidelines', (req, res) => res.render('community-guidelines'))
+  .get('/community-guidelines', (req, res) => res.render('community'))
   .get('/thankyou', (req, res) => res.render('thankyou'))
   .get('/getting-started-with-groups', ...middlewareStack, (req, res) => req.apollo.render(GroupsPage)
     .then(apollo => res.render('groups', { apollo })))

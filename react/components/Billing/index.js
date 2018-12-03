@@ -1,5 +1,5 @@
 import sharify from 'sharify';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Query } from 'react-apollo';
 import {
   StripeProvider,
@@ -14,7 +14,7 @@ import BillingForm from 'react/components/Billing/components/BillingForm';
 
 const { data: { STRIPE_PUBLISHABLE_KEY } } = sharify;
 
-export default class Billing extends Component {
+export default class Billing extends PureComponent {
   render() {
     return (
       <Query query={billingQuery}>

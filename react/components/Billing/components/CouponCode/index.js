@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'underscore';
 
 import { Input } from 'react/components/UI/Inputs';
 import CouponCodeStatus from 'react/components/Billing/components/CouponCode/components/CouponCodeStatus';
 
-export default class CouponCode extends Component {
+export default class CouponCode extends PureComponent {
   static propTypes = {
     code: PropTypes.string,
     onValidCoupon: PropTypes.func,

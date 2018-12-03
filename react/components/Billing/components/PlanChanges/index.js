@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
@@ -8,7 +8,7 @@ import Text from 'react/components/UI/Text';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
-export default class PlanChanges extends Component {
+export default class PlanChanges extends PureComponent {
   static propTypes = {
     plan_id: PropTypes.oneOf(['monthly', 'yearly']).isRequired,
     coupon_code: PropTypes.string,
@@ -41,7 +41,7 @@ export default class PlanChanges extends Component {
           return (
             <Text f={2}>
               {upcoming_invoice.total >= 0
-                ? `You will be charged $${(upcoming_invoice.total / 100).toFixed(2)}`
+                ? `You will be charged $${(upcoming_invoice.total / 100).toFixed(2)} on ${upcoming_invoice.next_payment_attempt_at}`
                 : `Your account will be credited $${Math.abs(upcoming_invoice.total / 100).toFixed(2)}`
               }
             </Text>

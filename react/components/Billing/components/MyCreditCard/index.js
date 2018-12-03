@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
@@ -9,7 +9,7 @@ import Box from 'react/components/UI/Box';
 import NewCreditCardForm from 'react/components/Billing/components/NewCreditCardForm';
 import ManageMyCreditCards from 'react/components/Billing/components/MyCreditCard/components/ManageMyCreditCards';
 
-export default class MyCreditCard extends Component {
+export default class MyCreditCard extends PureComponent {
   static propTypes = {
     customer: propType(myCreditCardFragment).isRequired,
     onNewCreditCardReady: PropTypes.func,
@@ -110,7 +110,7 @@ export default class MyCreditCard extends Component {
               </Text>
             }
 
-            {credit_cards.length > 1 &&
+            {credit_cards && credit_cards.length > 1 &&
               <Text f={1} underlineLinks>
                 <a onClick={this.setMode('manage')} role="button" tabIndex={0}>
                   Manage cards
