@@ -22,6 +22,10 @@ const Label = styled(Text).attrs({
 })`
 `;
 
+const Sentence = styled.div`
+  word-wrap: break-word;
+`;
+
 const Container = styled(Box).attrs({
   my: 3,
 })`
@@ -46,30 +50,28 @@ export default class FeedGroupSentence extends PureComponent {
         target,
         created_at,
         item_phrase,
+        objects,
       },
     } = this.props;
 
     return (
       <Container my={3} pr={6} class="flex-container">
-        <div>
+        <Sentence>
           <FeedObjectLink {...owner} />
 
-          {action === 'commented on' &&
+          {action === 'commented' &&
             <span>
               <Label>
                 {' says '}
                 “<a
-                  href={target.href}
+                  href={objects[0].href}
                   dangerouslySetInnerHTML={{ __html: item.body }}
                 />”
-                {' on '}
               </Label>
-
-              <FeedObjectLink {...target} />
             </span>
           }
 
-          {action !== 'commented on' &&
+          {action !== 'commented' &&
             <span>
               <Label>
                 {` ${action} `}
@@ -88,7 +90,7 @@ export default class FeedGroupSentence extends PureComponent {
               }
             </span>
           }
-        </div>
+        </Sentence>
 
         <RelativeTime>
           {created_at}
