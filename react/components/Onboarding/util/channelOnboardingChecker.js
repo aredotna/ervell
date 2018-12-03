@@ -22,7 +22,8 @@ const Dialog = styled(ModalDialog).attrs({
 const channelOnboardingChecker = (WrappedChannelComponent) => {
   class ChannelOnboardingChecker extends React.Component {
     componentDidMount() {
-      const { data: { channel: { id } } } = this.props;
+      const { data: { channel } } = this.props;
+      const id = channel && channel.id;
 
       if (getChannelOnboardingCookie(id)) {
         const modal = new Modal(IntroduceChannel, {}, { Dialog });
