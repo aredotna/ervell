@@ -4,6 +4,9 @@ import myGroupFragment from 'react/components/UserDropdown/components/MyGroups/c
 
 export default gql`
   fragment MyGroups on Me {
+    __typename
+    id
+    is_my_groups_dropdown_visible: flag(name: "is_my_groups_dropdown_visible")
     groups(page: 1, per: 25) {
       ... MyGroup
     }

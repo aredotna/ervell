@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
+import { graphql } from 'react-apollo';
 
 import myGroupsFragment from 'react/components/UserDropdown/components/MyGroups/fragments/myGroups';
+
+import toggleMyGroupsDropdownVisibilityMutation from 'react/components/UserDropdown/components/MyGroups/mutations/toggleMyGroupsDropdownVisibility';
 
 import Text from 'react/components/UI/Text';
 import GenericButton from 'react/components/UI/GenericButton';
@@ -13,6 +17,7 @@ import CreateGroup from 'react/components/CreateGroup';
 
 const Header = styled(Link)`
   position: relative;
+  user-select: none;
 
   // Left-facing Caret
   &:before,
@@ -37,11 +42,11 @@ const Header = styled(Link)`
     margin-right: -1px;
   }
 
-  ${x => x.mode === 'open' && `
+  ${props => props.is_my_groups_dropdown_visible && `
     // Down-facing Caret
     &:before,
     &:after {
-      border-top: 0.5em solid ${x.theme.colors.gray.base};
+      border-top: 0.5em solid ${props.theme.colors.gray.base};
       border-right: 0.5em solid transparent;
       border-bottom: 0;
       border-left: 0.5em solid transparent;
@@ -55,21 +60,35 @@ const Header = styled(Link)`
   `}
 `;
 
-export default class MyGroups extends Component {
+class MyGroups extends Component {
   static propTypes = {
     me: propType(myGroupsFragment).isRequired,
-  }
-
-  state = {
-    mode: 'open',
+    toggleMyGroupsDropdownVisibility: PropTypes.func.isRequired,
   }
 
   toggle = (e) => {
     e.preventDefault();
 
-    this.setState(({ mode: prevMode }) => ({
-      mode: prevMode === 'open' ? 'collapsed' : 'open',
-    }));
+    const { toggleMyGroupsDropdownVisibility, me } = this.props;
+    const value = !me.is_my_groups_dropdown_visible;
+
+    return toggleMyGroupsDropdownVisibility({
+      variables: {
+        flags: [{
+          name: 'is_my_groups_dropdown_visible', value,
+        }],
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        set_me_flags: {
+          __typename: 'SetMeFlagsPayload',
+          me: {
+            ...me,
+            is_my_groups_dropdown_visible: value,
+          },
+        },
+      },
+    });
   }
 
   openCreateGroup = (e) => {
@@ -80,16 +99,15 @@ export default class MyGroups extends Component {
   }
 
   render() {
-    const { mode } = this.state;
-    const { me: { groups } } = this.props;
+    const { me: { groups, is_my_groups_dropdown_visible } } = this.props;
 
     return (
       <div>
-        <Header onClick={this.toggle} mode={mode}>
+        <Header onClick={this.toggle} is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}>
           Groups
         </Header>
 
-        {mode === 'open' &&
+        {is_my_groups_dropdown_visible &&
           <div>
             {groups.length === 0 &&
               <Text f={1} my="1rem" px="1rem">
@@ -110,3 +128,7 @@ export default class MyGroups extends Component {
     );
   }
 }
+
+export default graphql(toggleMyGroupsDropdownVisibilityMutation, {
+  name: 'toggleMyGroupsDropdownVisibility',
+})(MyGroups);
