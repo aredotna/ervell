@@ -1,20 +1,12 @@
 import gql from 'graphql-tag';
 
+import avatarUploaderFragment from 'react/components/ProfileMetadata/components/ProfileAvatar/components/AvatarUploader/fragments/avatarUploader';
+
 export default gql`
- query UploadPolicy {
+  query UploadPolicy {
     me {
-      __typename
-      id
-      policy {
-        AWSAccessKeyId
-        acl
-        bucket
-        expires
-        key
-        policy
-        signature
-        success_action_status
-      }
+      ...AvatarUploader
     }
   }
+  ${avatarUploaderFragment}
 `;
