@@ -15,9 +15,12 @@ import updateChannelMutation from 'react/components/ManageChannel/mutations/upda
 import Box from 'react/components/UI/Box';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Accordion from 'react/components/UI/Accordion';
+import Text from 'react/components/UI/Text';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
+import RadioOptions from 'react/components/UI/RadioOptions';
 import { LabelledInput, Label, Input, Textarea } from 'react/components/UI/Inputs';
+
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
@@ -44,6 +47,7 @@ class ManageChannel extends Component {
     description: null,
     visibility: null,
     attributeErrors: {},
+    content_flag: null,
     errorMessage: '',
   };
 
@@ -64,6 +68,10 @@ class ManageChannel extends Component {
   handleVisibility = visibility =>
     this.handleInput('visibility')({ target: { value: visibility } });
 
+  handleNSFW = flag =>
+    this.handleInput('content_flag')({ target: { value: flag } });
+
+
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -72,7 +80,7 @@ class ManageChannel extends Component {
     } = this.props;
 
     const {
-      mode, title, description, visibility,
+      mode, title, description, visibility, content_flag,
     } = this.state;
 
     if (mode === 'resting') return onClose();
@@ -80,7 +88,7 @@ class ManageChannel extends Component {
     this.setState({ mode: 'submitting' });
 
     const variables = compactObject({
-      id, title, description, visibility,
+      id, title, description, visibility, content_flag,
     });
 
     return updateChannel({ variables })
@@ -96,6 +104,8 @@ class ManageChannel extends Component {
         });
       });
   }
+
+  handle
 
   render() {
     const { data: { loading } } = this.props;
@@ -167,6 +177,32 @@ class ManageChannel extends Component {
                   onChange={this.handleVisibility}
                 />
               </div>
+            </LabelledInput>
+          </Accordion>
+
+          <Accordion label="Content settings" mode="closed">
+            <LabelledInput>
+              <Label>
+                NSFW?
+              </Label>
+
+              <RadioOptions value={channel.content_flag.toUpperCase()} onSelect={this.handleNSFW} size="1em">
+                <RadioOptions.Option value="SAFE">
+                  {() => (
+                    <Text f={3} mb={3}>
+                      <strong>No</strong>
+                    </Text>
+                  )}
+                </RadioOptions.Option>
+
+                <RadioOptions.Option value="NSFW">
+                  {() => (
+                    <Text f={3} mb={3}>
+                      <strong>Yes</strong>
+                    </Text>
+                  )}
+                </RadioOptions.Option>
+              </RadioOptions>
             </LabelledInput>
           </Accordion>
 

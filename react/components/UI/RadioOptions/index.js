@@ -38,6 +38,8 @@ export default class RadioOptions extends Component {
       children, onSelect: _onSelect, value: _value, ...rest
     } = this.props;
 
+    console.log('this.props', this.props);
+
     return (
       <div {...rest}>
         {provideChildrenWithProps(children, {
