@@ -158,7 +158,7 @@ class BillingForm extends PureComponent {
   handleCouponCode = (coupon_code) => {
     this.setState(prevState => ({
       coupon_code,
-      operations: this.addOperation(prevState.operations, 'APPLY_COUPON_CODE'),
+      operations: this[coupon_code === '' ? 'removeOperation' : 'addOperation'](prevState.operations, 'APPLY_COUPON_CODE'),
     }));
   }
 
@@ -204,7 +204,12 @@ class BillingForm extends PureComponent {
     // Add a card if one doesn't yet exist
     const waitForCardCreation = this.doWeNeedTo('ADD_NEW_CREDIT_CARD') ? this.addCreditCard() : Promise.resolve();
     const waitForDefaultChange = this.doWeNeedTo('CHANGE_DEFAULT_CREDIT_CARD') ? this.changeDefaultCreditCard() : Promise.resolve();
-    const waitForCouponCode = this.doWeNeedTo('APPLY_COUPON_CODE') ? this.applyCouponToSubscription() : Promise.resolve();
+    const waitForCouponCode = (
+      this.doWeNeedTo('APPLY_COUPON_CODE') &&
+      // APPLY_COUPON_CODE is inclusive with swtiching plans so ignore this
+      // if we are also going to change the plan up
+      !this.doWeNeedTo('CHANGE_PLAN_ID')
+    ) ? this.applyCouponToSubscription() : Promise.resolve();
 
     // These things have to happen first to update the state of the customer
     return Promise.all([waitForCardCreation, waitForDefaultChange, waitForCouponCode])
@@ -317,6 +322,7 @@ class BillingForm extends PureComponent {
                   </Label>
 
                   <CouponCode
+                    key={coupon_code}
                     onDebouncedCode={this.handleCouponCode}
                     code={coupon_code}
                   />
