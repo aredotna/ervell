@@ -140,6 +140,10 @@ export default class Overlay extends PureComponent {
         return this.setState({ height: wrapperHeight + bottomDifference });
       }
 
+      if (this.state.height) {
+        return this.setState({ height: null });
+      }
+
       return null;
     });
   }
