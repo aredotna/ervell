@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { without } from 'underscore';
+import { propType } from 'graphql-anywhere';
 
 import mapErrors from 'react/util/mapErrors';
 import currentUserService from 'react/util/currentUserService';
 
 import Box from 'react/components/UI/Box';
+import Alert from 'react/components/UI/Alert';
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
@@ -14,19 +17,28 @@ import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGr
 import HelpTip from 'react/components/CreateGroup/components/HelpTip';
 import { LabelledInput, Label, Input, Textarea } from 'react/components/UI/Inputs';
 
+import createGroupQuery from 'react/components/CreateGroup/queries/createGroup';
+
+import createGroupFragment from 'react/components/CreateGroup/fragments/createGroup';
+
 import createGroupMutation from 'react/components/CreateGroup/mutations/createGroup';
 import addChannelMemberMutation from 'react/components/CreateGroup/mutations/addChannelMember';
 import addGroupUsersMutation from 'react/components/CreateGroup/mutations/addGroupUsers';
 import inviteUserMutation from 'react/components/CreateGroup/mutations/inviteUser';
+import setHasSeenNewGroupExplanationMutation from 'react/components/CreateGroup/mutations/setHasSeenNewGroupExplanation';
 
 class CreateGroup extends Component {
   static propTypes = {
+    data: PropTypes.shape({
+      me: propType(createGroupFragment),
+    }).isRequired,
     channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onClose: PropTypes.func.isRequired,
     createGroup: PropTypes.func.isRequired,
     addChannelMember: PropTypes.func.isRequired,
     addGroupUsers: PropTypes.func.isRequired,
     inviteUser: PropTypes.func.isRequired,
+    setHasSeenNewGroupExplanation: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -147,7 +159,11 @@ class CreateGroup extends Component {
       attributeErrors,
     } = this.state;
 
-    const { channel_id } = this.props;
+    const { data: { loading }, channel_id, setHasSeenNewGroupExplanation } = this.props;
+
+    if (loading) return <LoadingIndicator />;
+
+    const { data: { me } } = this.props;
 
     return (
       <TitledDialog
@@ -160,6 +176,13 @@ class CreateGroup extends Component {
         onDone={this.handleSubmit}
       >
         <div>
+          {!me.has_seen_new_group_explanation &&
+            <Alert mb={6} onClose={setHasSeenNewGroupExplanation}>
+              A group is a shared account that many people can use to collaborate on Are.na.
+              You can also create a secret group to separate channels from your personal profile.
+            </Alert>
+          }
+
           {mode === 'error' &&
             <ErrorAlert>
               {errorMessage}
@@ -227,8 +250,10 @@ class CreateGroup extends Component {
 }
 
 export default compose(
+  graphql(createGroupQuery),
   graphql(createGroupMutation, { name: 'createGroup' }),
   graphql(addChannelMemberMutation, { name: 'addChannelMember' }),
   graphql(addGroupUsersMutation, { name: 'addGroupUsers' }),
   graphql(inviteUserMutation, { name: 'inviteUser' }),
+  graphql(setHasSeenNewGroupExplanationMutation, { name: 'setHasSeenNewGroupExplanation' }),
 )(CreateGroup);
