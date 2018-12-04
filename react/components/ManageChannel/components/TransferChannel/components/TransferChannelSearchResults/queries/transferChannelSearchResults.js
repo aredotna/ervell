@@ -6,7 +6,7 @@ import groupSearchResultFragment from 'react/components/UI/SearchResults/Group/f
 export default gql`
   query TransferChannelSearchResultsQuery($query: String!) {
     results: searches {
-      members: collaborators(query: $query, limit: 4, types: [USER, GROUP]) {
+      members: collaborators(query: $query, limit: 4, types: [USER]) {
         ... on User {
           ...UserSearchResult
         }
