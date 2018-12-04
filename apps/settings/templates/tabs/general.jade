@@ -76,6 +76,22 @@ block content
           .Fieldset.js-home-path-field
             include ../../components/home_path_field/index
 
+          .Fieldset
+            label.Label
+              | Show NSFW content?
+
+            .Select.Select--fill
+              select(name='show_nsfw')
+                option(
+                  value='true'
+                  selected= user.get('show_nsfw') ? 'selected' : null
+                ) Yes
+
+                option(
+                  value='false'
+                  selected= !user.get('show_nsfw') ? 'selected' : null
+                ) No
+
           if user.isPremium()
             .Fieldset
               label.Label
