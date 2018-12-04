@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 
@@ -16,10 +16,11 @@ const Button = styled(GenericButton).attrs({
   align-self: center;
 `;
 
-class InitiateChannelTransferButton extends Component {
+class InitiateChannelTransferButton extends PureComponent {
   static propTypes = {
-    channel_id: PropTypes.string.isRequired,
-    user_id: PropTypes.number.isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    owner_id: PropTypes.number.isRequired,
+    owner_type: PropTypes.string.isRequired,
     initiateChannelTransfer: PropTypes.func.isRequired,
   }
 
@@ -30,21 +31,25 @@ class InitiateChannelTransferButton extends Component {
   handleClick = () => {
     const {
       channel_id,
-      user_id,
+      owner_id,
+      owner_type,
       initiateChannelTransfer,
     } = this.props;
 
     this.setState({ mode: 'giving' });
 
     return initiateChannelTransfer({
-      variables: { channel_id, user_id },
+      variables: {
+        channel_id,
+        owner_id,
+        owner_type: owner_type.toUpperCase(),
+      },
     })
       .then(() =>
-        track.submit(en.STARTED_CHANNEL_TRANSFER, { channel_id, user_id }))
+        track.submit(en.STARTED_CHANNEL_TRANSFER, { channel_id, owner_id, owner_type }))
 
       .catch((err) => {
         console.error(err);
-
         this.setState({ mode: 'error' });
       });
   }
