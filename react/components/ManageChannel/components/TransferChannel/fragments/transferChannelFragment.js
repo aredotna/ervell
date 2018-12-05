@@ -8,11 +8,18 @@ export default gql`
     }
     is_pending_transfer
     transfer_request {
-      user_to {
-        id
-        name
+      recipient {
+        __typename
+        ... on User {
+          id
+          name
+        }
+        ... on Group {
+          id
+          name
+        }
       }
-      is_user_to_member
+      is_recipient_member
     }
     visibility
   }

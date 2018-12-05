@@ -9,7 +9,7 @@ import Box from 'react/components/UI/Box';
 import Icons from 'react/components/UI/Icons';
 import { Input } from 'react/components/UI/Inputs';
 
-const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'];
+const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'innerRef'];
 
 const Icon = styled.div`
   display: flex;
@@ -26,6 +26,8 @@ const Icon = styled.div`
 export default class SearchInput extends Component {
   static propTypes = {
     query: PropTypes.string,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
     onQueryChange: PropTypes.func,
     onDebouncedQueryChange: PropTypes.func,
     debounceWait: PropTypes.number,
@@ -33,6 +35,8 @@ export default class SearchInput extends Component {
 
   static defaultProps = {
     query: '',
+    onFocus: () => {},
+    onBlur: () => {},
     onQueryChange: () => {},
     onDebouncedQueryChange: () => {},
     debounceWait: 250,
@@ -84,6 +88,8 @@ export default class SearchInput extends Component {
   render() {
     const {
       query: _query,
+      onFocus,
+      onBlur,
       onQueryChange: _onQueryChange,
       onDebouncedQueryChange: _onDebouncedQueryChange,
       debounceWait: _debounceWait,
@@ -112,6 +118,8 @@ export default class SearchInput extends Component {
           borderColor="gray.regular"
           {...innerProps}
           innerRef={(input) => { this.input = input; }}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={this.handleChange}
           defaultValue={query}
         />
