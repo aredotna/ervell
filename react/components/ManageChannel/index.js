@@ -105,8 +105,6 @@ class ManageChannel extends Component {
       });
   }
 
-  handle
-
   render() {
     const { data: { loading } } = this.props;
     const {
