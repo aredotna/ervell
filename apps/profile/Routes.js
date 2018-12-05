@@ -8,6 +8,14 @@ import parseRoute from 'react/util/parseRoute';
 
 import ProfilePage from 'react/pages/profile/ProfilePage';
 
+const VALID_SORTS = ['UPDATED_AT', 'RANDOM'];
+const VALID_FILTERS = ['OWN', 'COLLABORATION'];
+
+const setValid = (value, validValues, defaultValue) => {
+  if (validValues.includes(value)) return value;
+  return defaultValue;
+};
+
 export default () => (
   <Switch>
     <Route
@@ -20,8 +28,8 @@ export default () => (
             const { cookies } = data;
 
             const view = params.view || cookies.view || 'all';
-            const sort = query.sort || cookies.sort || 'UPDATED_AT';
-            const filter = query.filter || cookies.filter || 'OWN';
+            const sort = setValid((query.sort || cookies.sort), VALID_SORTS, 'UPDATED_AT');
+            const filter = setValid((query.filter || cookies.filter), VALID_FILTERS, 'OWN');
             const seed = parseInt(query.seed, 0) || 0;
 
             return (
