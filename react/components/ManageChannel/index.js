@@ -180,12 +180,12 @@ class ManageChannel extends Component {
             </LabelledInput>
           </Accordion>
 
-          <Accordion label="Content settings" mode="closed">
-            <LabelledInput>
-              <Label>
-                NSFW?
-              </Label>
-
+          <Accordion label="NSFW?" mode="closed">
+            <Box m={7}>
+              <Text f={2} mb={7}>
+                Channels marked NSFW will be hidden from explore and profile
+                views for users who have &quot;Show NSFW content&quot; set to false
+              </Text>
               <RadioOptions value={channel.content_flag.toUpperCase()} onSelect={this.handleNSFW} size="1em">
                 <RadioOptions.Option value="SAFE">
                   {() => (
@@ -203,7 +203,7 @@ class ManageChannel extends Component {
                   )}
                 </RadioOptions.Option>
               </RadioOptions>
-            </LabelledInput>
+            </Box>
           </Accordion>
 
           {channel.can.export &&
