@@ -181,8 +181,9 @@ class ManageChannel extends Component {
           <Accordion label="NSFW?" mode="closed">
             <Box m={7}>
               <Text f={2} mb={7}>
-                Channels marked NSFW will be hidden from explore and profile
-                views for users who have &quot;Show NSFW content&quot; set to false
+                Not Safe For Work (NSFW) channels are hidden from Explore
+                and are only visible on your profile to people who have the
+                &quot;Show NSFW Content&quot; setting turned on.
               </Text>
               <RadioOptions value={channel.content_flag.toUpperCase()} onSelect={this.handleNSFW} size="1em">
                 <RadioOptions.Option value="SAFE">
