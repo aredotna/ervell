@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
 
@@ -45,7 +45,7 @@ const Label = styled(Text).attrs({
   `}
 `;
 
-export default class CompactChannel extends Component {
+export default class CompactChannel extends PureComponent {
   static propTypes = {
     channel: propType(compactChannelFragment).isRequired,
   }
