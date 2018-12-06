@@ -9,6 +9,7 @@ export default gql`
     title
     description(format: MARKDOWN)
     visibility
+    content_flag
     can {
       destroy
       export

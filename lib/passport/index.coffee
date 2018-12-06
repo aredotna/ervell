@@ -40,6 +40,7 @@ CONFIG =
     'is_pending_reconfirmation'
     'is_pending_confirmation'
     'flags'
+    'show_nsfw'
   ]
 
 app = express()
