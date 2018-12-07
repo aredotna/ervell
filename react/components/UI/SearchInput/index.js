@@ -19,7 +19,7 @@ const Icon = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 2.5em;
+  width: 3em;
   cursor: pointer;
 `;
 
@@ -152,11 +152,12 @@ export default class SearchInput extends Component {
           <Icons
             color="gray.medium"
             name={iconStates[mode]}
+            size={6}
           />
         </Icon>
 
         <Input
-          px="2.5em"
+          px="3em"
           borderColor="gray.regular"
           {...innerProps}
           innerRef={(input) => { this.input = input; }}

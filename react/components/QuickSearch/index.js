@@ -3,7 +3,6 @@ import { debounce } from 'underscore';
 
 import QuickSearchField from './components/QuickSearchField';
 import QuickSearchResults from './components/QuickSearchResults';
-import SearchInput from 'react/components/UI/SearchInput';
 
 export default class QuickSearch extends Component {
   state = {
@@ -29,18 +28,15 @@ export default class QuickSearch extends Component {
 
     return (
       <div>
-        <SearchInput
-          onQueryChange={this.updateQuery}
-          onDebouncedQueryChange={this.debouceQuery}
-          placeholder="Search Are.na"
-          borderColor="transparent"
+        <QuickSearchField
+          query={query}
+          onChange={this.updateQuery}
         />
-
-        {/* {query !== '' &&
+        {query !== '' &&
           <QuickSearchResults
             query={debouncedQuery}
           />
-        } */}
+        }
       </div>
     );
   }
