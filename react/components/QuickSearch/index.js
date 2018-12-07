@@ -29,15 +29,14 @@ export default class QuickSearch extends Component {
     return (
       <div>
         <QuickSearchField
-          onChange={this.updateQuery}
           query={query}
+          onChange={this.updateQuery}
         />
-
-        {/* {query !== '' &&
+        {query !== '' &&
           <QuickSearchResults
             query={debouncedQuery}
           />
-        } */}
+        }
       </div>
     );
   }

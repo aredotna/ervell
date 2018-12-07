@@ -19,7 +19,7 @@ const Icon = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 2.5em;
+  width: 3em;
   cursor: pointer;
 `;
 
@@ -31,6 +31,11 @@ export default class SearchInput extends Component {
     onQueryChange: PropTypes.func,
     onDebouncedQueryChange: PropTypes.func,
     debounceWait: PropTypes.number,
+    iconStates: PropTypes.shape({
+      resting: PropTypes.string,
+      active: PropTypes.string,
+      hover: PropTypes.string,
+    }),
   }
 
   static defaultProps = {
@@ -40,6 +45,12 @@ export default class SearchInput extends Component {
     onQueryChange: () => {},
     onDebouncedQueryChange: () => {},
     debounceWait: 250,
+    iconStates: {
+      resting: 'MagnifyingGlass',
+      hover: 'MagnifyingGlass',
+      focus: 'X',
+      active: 'X',
+    },
   }
 
   constructor(props) {
@@ -65,6 +76,32 @@ export default class SearchInput extends Component {
     this.setState({ query: '', mode: 'resting' });
     this.input.value = '';
     this.input.focus();
+  }
+
+  handleMouseOver = () => {
+    const { mode } = this.state;
+    if (mode === 'active' || mode === 'focus') { return; }
+
+    this.setState({ mode: 'hover' });
+  }
+
+  handleMouseOut = () => {
+    const { mode } = this.state;
+    if (mode === 'active' || mode === 'focus') { return; }
+
+    this.setState({ mode: 'resting' });
+  }
+
+  handleFocus = () => {
+    const { mode } = this.state;
+    if (mode === 'active') { return; }
+    this.setState({ mode: 'focus' });
+  }
+
+  handleBlur = () => {
+    const { mode } = this.state;
+    if (mode === 'active') { return; }
+    this.setState({ mode: 'resting' });
   }
 
   handleChange = ({ target: { value: query } }) => {
@@ -93,6 +130,7 @@ export default class SearchInput extends Component {
       onQueryChange: _onQueryChange,
       onDebouncedQueryChange: _onDebouncedQueryChange,
       debounceWait: _debounceWait,
+      iconStates,
       ...rest
     } = this.props;
 
@@ -102,19 +140,24 @@ export default class SearchInput extends Component {
     const innerProps = omit(rest, ...OUTER_PROPS_KEYS);
 
     return (
-      <Box position="relative" {...outerProps}>
+      <Box
+        position="relative"
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        {...outerProps}
+      >
         <Icon onClick={this.handleReset}>
           <Icons
             color="gray.medium"
-            name={{
-              resting: 'MagnifyingGlass',
-              active: 'X',
-            }[mode]}
+            name={iconStates[mode]}
+            size={6}
           />
         </Icon>
 
         <Input
-          px="2.5em"
+          px="3em"
           borderColor="gray.regular"
           {...innerProps}
           innerRef={(input) => { this.input = input; }}
@@ -122,6 +165,8 @@ export default class SearchInput extends Component {
           onBlur={onBlur}
           onChange={this.handleChange}
           defaultValue={query}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
       </Box>
     );
