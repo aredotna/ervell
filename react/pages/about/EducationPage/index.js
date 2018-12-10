@@ -67,7 +67,7 @@ export default class EducationPage extends Component {
               </Subheadline>
               <Description>
                 Are.na Premium gives you unlimited privacy for personal projects.
-                Use coupon code <strong>education</strong> to upgrade for half the price.
+                Use coupon code <strong>learning</strong> to upgrade for half the price.
               </Description>
               <Button f={5} mt={6} py={6} href="/sign_up">
                 Join Now
