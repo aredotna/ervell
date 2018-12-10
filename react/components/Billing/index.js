@@ -11,7 +11,9 @@ import billingQuery from 'react/components/Billing/queries/billing';
 import Box from 'react/components/UI/Box';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
+import HorizontalRule from 'react/components/UI/HorizontalRule';
 import BillingForm from 'react/components/Billing/components/BillingForm';
+import MyGroups from 'react/components/Billing/components/MyGroups';
 
 const { data: { STRIPE_PUBLISHABLE_KEY } } = sharify;
 
@@ -42,6 +44,10 @@ export default class Billing extends PureComponent {
                     <BillingForm me={me} />
                   </Elements>
                 </StripeProvider>
+
+                <HorizontalRule />
+
+                <MyGroups me={me} />
               </div>
             );
           }}
