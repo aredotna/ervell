@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
-import { some } from 'underscore';
+import { some, unescape } from 'underscore';
 import styled from 'styled-components';
 
 import mapErrors from 'react/util/mapErrors';
@@ -142,7 +142,7 @@ class ManageChannel extends Component {
 
               <Input
                 name="title"
-                defaultValue={channel.title}
+                defaultValue={unescape(channel.title)}
                 onChange={this.handleTitle}
                 errorMessage={attributeErrors.title}
                 required

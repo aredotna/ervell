@@ -56,9 +56,10 @@ export default class CompactChannel extends PureComponent {
     return (
       <Container href={channel.href} visibility={channel.visibility} {...rest}>
         <Primary>
-          <Label f={4}>
-            {channel.title}
-          </Label>
+          <Label
+            f={4}
+            dangerouslySetInnerHTML={{ __html: channel.title }}
+          />
 
           <Label f={1} ml={6} secondary>
             <Count label="block" amount={channel.counts.contents} />
