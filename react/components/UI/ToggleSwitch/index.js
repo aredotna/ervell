@@ -7,8 +7,8 @@ import Box from 'react/components/UI/Box';
 
 const Switch = styled(Box)`
   position: relative;
-  width: 2em;
-  height: 2em;
+  width: ${props => props.size};
+  height: ${props => props.size};
   cursor: pointer;
 
   &:before,
@@ -26,7 +26,7 @@ const Switch = styled(Box)`
     right: 0;
     left: 0;
     background-color: ${props => props.theme.colors.gray.regular};
-    border-radius: 0.125em;
+    border-radius: 0.25em;
   }
 
   &:after {
@@ -34,7 +34,6 @@ const Switch = styled(Box)`
     width: 50%;
     border-radius: 50%;
     left: 0;
-    margin-left: -5%;
     background-color: ${props => themeGet(`colors.${props.inactiveColor}`)(props)};
   }
 
@@ -43,14 +42,20 @@ const Switch = styled(Box)`
       left: unset;
       margin-left: unset;
       right: 0;
-      margin-right: -5%;
       background-color: ${themeGet(`colors.${props.activeColor}`)(props)};
     }
+  `}
+
+  ${props => props.disabled && `
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
   `}
 `;
 
 export default class ToggleSwitch extends PureComponent {
   static propTypes = {
+    size: PropTypes.string,
     value: PropTypes.bool,
     inactiveColor: PropTypes.string,
     activeColor: PropTypes.string,
@@ -58,6 +63,7 @@ export default class ToggleSwitch extends PureComponent {
   }
 
   static defaultProps = {
+    size: '2em',
     value: false,
     inactiveColor: 'gray.medium',
     activeColor: 'gray.bold',
