@@ -9,13 +9,11 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   flex: 1;
-  background: blue;
+  border: 1px solid black;
 `;
 
 const Search = styled(QuickSearch)`
   flex: 1;
-  background: red;
-  border: 3px solid red;
 `;
 
 export default class TopBar extends Component {

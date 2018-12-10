@@ -23,7 +23,7 @@ const Container = styled.div`
     content: '';
     display: block;
     position: absolute;
-    background-color: ${props => props.theme.colors.gray.medium};
+    background-color: ${props => props.theme.colors.gray.base};
     width: 10px;
     height: 2px;
     top: 50%;
