@@ -42,7 +42,7 @@ export default class ChannelBreadcrumb extends Component {
               visibility={channel.visibility}
             >
               {{
-                resting: channel.title,
+                resting: (<span dangerouslySetInnerHTML={{ __html: channel.title }} />),
                 stuck: truncate(channel.title, 25),
               }[mode]}
             </ColoredChannelLink>
