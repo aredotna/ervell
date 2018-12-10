@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { debounce } from 'underscore';
+import styled from 'styled-components';
 
 import QuickSearchField from './components/QuickSearchField';
 import QuickSearchResults from './components/QuickSearchResults';
+
+const Container = styled.div`
+  flex: 1;
+`;
 
 export default class QuickSearch extends Component {
   state = {
@@ -27,7 +32,7 @@ export default class QuickSearch extends Component {
     const { query, debouncedQuery } = this.state;
 
     return (
-      <div>
+      <Container>
         <QuickSearchField
           query={query}
           onChange={this.updateQuery}
@@ -37,7 +42,7 @@ export default class QuickSearch extends Component {
             query={debouncedQuery}
           />
         }
-      </div>
+      </Container>
     );
   }
 }
