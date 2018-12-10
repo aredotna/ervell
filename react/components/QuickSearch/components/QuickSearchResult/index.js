@@ -6,6 +6,7 @@ import quickSearchResultFragment from 'react/components/QuickSearch/components/Q
 
 import Badge from 'react/components/UI/Badge';
 import SearchResult from 'react/components/QuickSearch/components/SearchResult';
+import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
 
 const Information = styled.div`
   display: flex;
@@ -17,6 +18,19 @@ const Information = styled.div`
 
 const Name = styled.a`
   display: block;
+  text-decoration: none;
+`;
+
+const ChannelName = styled(Name)`
+  &:after {
+    content: '/';
+    margin: 0 0.33em;
+    font-weight: normal;
+  }
+`;
+
+const ChannelLink = styled(ColoredChannelLink)`
+  text-decoration: none;
 `;
 
 export default class QuickSearchResult extends Component {
@@ -33,9 +47,13 @@ export default class QuickSearchResult extends Component {
       case 'Channel':
         return (
           <Information>
-            <Name>{result.user.name}</Name>
-            <div>/</div>
-            <Name>{result.title}</Name>
+            <ChannelName>{result.user.name}</ChannelName>
+            <ChannelLink
+              href={result.href}
+              visibility={result.visibility}
+            >
+              {result.title}
+            </ChannelLink>
           </Information>
         );
       case 'User':
