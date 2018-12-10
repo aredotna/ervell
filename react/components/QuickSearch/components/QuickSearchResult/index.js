@@ -14,6 +14,7 @@ const Information = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   padding-left: 2.5em;
+  width: 100%;
 `;
 
 const Name = styled.a`

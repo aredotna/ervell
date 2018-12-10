@@ -10,7 +10,7 @@ export default class QuickSearchField extends Component {
   }
 
   render() {
-    const { query, onChange } = this.props;
+    const { query, onChange, ...rest } = this.props;
 
     return (
       <SearchInput
@@ -24,6 +24,7 @@ export default class QuickSearchField extends Component {
           focus: 'X',
           active: 'X',
         }}
+        {...rest}
       />
     );
   }
