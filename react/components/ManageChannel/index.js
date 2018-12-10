@@ -117,8 +117,6 @@ class ManageChannel extends Component {
 
     const { data: { channel } } = this.props;
 
-    console.log('channel', unescape(channel.title));
-
     return (
       <TitledDialog
         title="Edit channel"
