@@ -10,7 +10,6 @@ import constants from 'react/styles/constants';
 
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
-import Truncate from 'react/components/UI/Truncate';
 import Badge from 'react/components/UI/Badge';
 
 const Container = styled.div`
@@ -36,11 +35,13 @@ export default class Channel extends PureComponent {
 
     return (
       <Container visibility={channel.visibility} {...rest}>
-        <Text pt={6} mx={4} f={6} textAlign="center">
-          <Truncate length={90} title={channel.title}>
-            {channel.title}
-          </Truncate>
-        </Text>
+        <Text
+          pt={6}
+          mx={4}
+          f={6}
+          textAlign="center"
+          dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }}
+        />
 
         <Text my={4} f={2} textAlign="center">
           by {channel.owner.name}
