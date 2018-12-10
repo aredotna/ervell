@@ -14,7 +14,6 @@ import applyCouponToSubscriptionMutation from 'react/components/Billing/componen
 
 import billingFormFragment from 'react/components/Billing/components/BillingForm/fragments/billingForm';
 
-import Box from 'react/components/UI/Box';
 import Alert from 'react/components/UI/Alert';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
@@ -254,7 +253,7 @@ class BillingForm extends PureComponent {
     const fromPlanToPlan = `${customer.plan.id}:${plan_id}`;
 
     return (
-      <Box width={['100%', '75%', '50%']} mx="auto" mt={6} mb={8} position="relative">
+      <div>
         {mode === 'processing' &&
           <StatusOverlay>
             <LoadingIndicator />
@@ -367,7 +366,7 @@ class BillingForm extends PureComponent {
             </LabelledInput>
           }
         </form>
-      </Box>
+      </div>
     );
   }
 }

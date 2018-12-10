@@ -8,6 +8,7 @@ import {
 
 import billingQuery from 'react/components/Billing/queries/billing';
 
+import Box from 'react/components/UI/Box';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BillingForm from 'react/components/Billing/components/BillingForm';
@@ -17,31 +18,35 @@ const { data: { STRIPE_PUBLISHABLE_KEY } } = sharify;
 export default class Billing extends PureComponent {
   render() {
     return (
-      <Query query={billingQuery}>
-        {({ loading, error, data }) => {
-          if (loading) {
-            return <LoadingIndicator my={9} />;
-          }
+      <Box width={['100%', '75%', '50%']} mx="auto" mt={6} mb={8} position="relative">
+        <Query query={billingQuery}>
+          {({ loading, error, data }) => {
+            if (loading) {
+              return <LoadingIndicator my={9} />;
+            }
 
-          if (error) {
+            if (error) {
+              return (
+                <ErrorAlert>
+                  {error.message}
+                </ErrorAlert>
+              );
+            }
+
+            const { me } = data;
+
             return (
-              <ErrorAlert>
-                {error.message}
-              </ErrorAlert>
+              <div>
+                <StripeProvider apiKey={STRIPE_PUBLISHABLE_KEY}>
+                  <Elements>
+                    <BillingForm me={me} />
+                  </Elements>
+                </StripeProvider>
+              </div>
             );
-          }
-
-          const { me } = data;
-
-          return (
-            <StripeProvider apiKey={STRIPE_PUBLISHABLE_KEY}>
-              <Elements>
-                <BillingForm me={me} />
-              </Elements>
-            </StripeProvider>
-          );
-        }}
-      </Query>
+          }}
+        </Query>
+      </Box>
     );
   }
 }
