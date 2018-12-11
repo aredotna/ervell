@@ -22,6 +22,7 @@ export default class TopBar extends Component {
       <Container>
         <Search />
         <NewChannelButton />
+
       </Container>
     );
   }

@@ -37,7 +37,6 @@ const Container = styled.div`
   }
 `;
 
-
 export default class NewChannelButton extends Component {
   render() {
     return (
