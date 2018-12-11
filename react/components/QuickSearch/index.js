@@ -49,7 +49,7 @@ export default class QuickSearch extends PureComponent {
           query={query}
           onChange={this.updateQuery}
           onFocus={this.focus}
-          innerRef={(el) => { console.log('eld', el); this.searchInput = el; }}
+          innerRef={(el) => { this.searchInput = el; }}
         />
         {query !== '' && mode === 'active' &&
           <Overlay targetEl={() => this.searchInput} fullWidth onClose={this.blur}>
