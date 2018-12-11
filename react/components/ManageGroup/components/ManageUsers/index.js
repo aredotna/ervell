@@ -13,7 +13,6 @@ import removeGroupUserMutation from 'react/components/ManageGroup/components/Man
 import inviteGroupUserMutation from 'react/components/ManageGroup/components/ManageUsers/mutations/inviteGroupUser';
 
 import Box from 'react/components/UI/Box';
-import { LabelledInput, Label } from 'react/components/UI/Inputs';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import ManagedMembers from 'react/components/ManagedMembers';
 
