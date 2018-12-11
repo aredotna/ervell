@@ -15,6 +15,11 @@ const Status = styled(SearchResult)`
   padding: 1.75em 1em;
 `;
 
+const SeeAllResult = styled(SearchResult)`
+  padding-left: 3em;
+  background-color: ${x => x.theme.colors.gray.extraLight};
+`;
+
 class QuickSearchResults extends Component {
   static propTypes = {
     data: PropTypes.shape({
@@ -54,6 +59,7 @@ class QuickSearchResults extends Component {
             result={result}
           />
         ))}
+        <SeeAllResult>See all results</SeeAllResult>
       </div>
     );
   }
