@@ -15,6 +15,7 @@ import {
   borderRadius,
   bgColor,
   textAlign,
+  flex,
 } from 'styled-system';
 
 import { neutralMargins } from 'react/styles/mixins';
@@ -28,6 +29,7 @@ export const mixin = css`
   ${minHeight}
   ${maxHeight}
   ${space}
+  ${flex}
   ${alignItems}
   ${justifyContent}
   ${flexDirection}
