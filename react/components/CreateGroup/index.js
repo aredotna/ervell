@@ -179,7 +179,8 @@ class CreateGroup extends Component {
           {!me.has_seen_new_group_explanation &&
             <Alert mb={6} onClose={setHasSeenNewGroupExplanation}>
               A group is a shared account that many people can use to collaborate on Are.na.
-              You can also create a secret group to separate channels from your personal profile.
+              You can also create a group to transfer and separate
+              channels from your personal profile.
             </Alert>
           }
 
