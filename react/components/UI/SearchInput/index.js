@@ -92,8 +92,9 @@ export default class SearchInput extends Component {
     this.setState({ mode: 'resting' });
   }
 
-  handleFocus = () => {
+  handleFocus = (e) => {
     const { mode } = this.state;
+    this.props.onFocus(e);
     if (mode === 'active') { return; }
     this.setState({ mode: 'focus' });
   }
