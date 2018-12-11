@@ -166,8 +166,6 @@ export default class SearchInput extends Component {
           onBlur={onBlur}
           onChange={this.handleChange}
           defaultValue={query}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
         />
       </Box>
     );
