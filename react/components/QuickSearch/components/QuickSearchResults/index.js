@@ -38,8 +38,6 @@ class QuickSearchResults extends Component {
 
     const { data: { results: { quick: searchResults } } } = this.props;
 
-    console.log('searchResults', searchResults);
-
     if (searchResults.length === 0) {
       return (
         <Status>
