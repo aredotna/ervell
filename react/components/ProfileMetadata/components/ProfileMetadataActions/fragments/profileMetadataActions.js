@@ -17,6 +17,7 @@ export default gql`
       can {
         follow
         manage
+        manage_users
       }
     }
   }
