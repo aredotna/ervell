@@ -34,6 +34,12 @@ class ProfileMetadataInfo extends Component {
   render() {
     const { identifiable, isLoggedIn } = this.props;
 
+    const showButtons = (isLoggedIn && (
+      identifiable.counts.followers > 0 ||
+      identifiable.counts.following > 1 ||
+      identifiable.counts.groups > 0)
+    );
+
     return (
       <Pocket
         title={{
@@ -45,7 +51,7 @@ class ProfileMetadataInfo extends Component {
           <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
 
-        {isLoggedIn && (identifiable.counts.followers > 0 || identifiable.counts.following > 1 || identifiable.counts.groups > 0) &&
+        {showButtons &&
           <Buttons>
             {identifiable.counts.followers > 0 &&
               <BlockLink to={`${identifiable.href}/followers`}>
