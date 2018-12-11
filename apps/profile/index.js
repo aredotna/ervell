@@ -74,6 +74,7 @@ app
   .get('/:id/blocks', ...resolve)
   .get('/:id/channels', ...resolve)
   .get('/:id/index', ...resolve)
+  .get('/:id/groups', ...resolve)
   .get('/:id/followers', ...resolve)
   .get('/:id/following', ...resolve);
 
