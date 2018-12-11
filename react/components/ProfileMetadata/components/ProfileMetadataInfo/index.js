@@ -13,7 +13,7 @@ import { Expandable } from 'react/components/UI/ExpandableSet';
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const BlockLink = styled(Link)`
-  display: block;
+  display: inline-block;
 `;
 
 const Buttons = styled(Box).attrs({
@@ -51,6 +51,16 @@ class ProfileMetadataInfo extends Component {
           <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
 
+        {identifiable.__typename === 'Group' &&
+          <Box my={6} neutralMarginsY>
+            {'Admin — '}
+
+            <BlockLink to={identifiable.user.href}>
+              {identifiable.user.name}
+            </BlockLink>
+          </Box>
+        }
+
         {showButtons &&
           <Buttons>
             {identifiable.counts.followers > 0 &&
@@ -73,16 +83,6 @@ class ProfileMetadataInfo extends Component {
               <span />
             }
           </Buttons>
-        }
-
-        {identifiable.__typename === 'Group' &&
-          <Box my={6} neutralMarginsY>
-            {'Admin — '}
-
-            <BlockLink to={identifiable.user.href}>
-              {identifiable.user.name}
-            </BlockLink>
-          </Box>
         }
       </Pocket>
     );
