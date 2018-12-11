@@ -321,7 +321,7 @@ class BillingForm extends PureComponent {
                   </Label>
 
                   <CouponCode
-                    key={coupon_code}
+                    key={`coupon_${mode}`}
                     onDebouncedCode={this.handleCouponCode}
                     code={coupon_code}
                   />
