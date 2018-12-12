@@ -14,6 +14,7 @@ export default gql`
         __typename
         id
         name
+        visibility
         ... MemberAvatar
       }
     }
