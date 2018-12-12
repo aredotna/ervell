@@ -11,3 +11,8 @@ header#layout-header
       a( href='/sign_up' rel="nofollow" ) Join
       |&nbsp;or&nbsp;
       a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" rel="nofollow" ) Log in
+  
+  if isGroupPage
+    .GroupTopBarShadow
+      .GroupTopBarShadow__left
+      .GroupTopBarShadow__right
