@@ -27,6 +27,7 @@ const Container = styled.div.attrs({
   background-color: ${x => x.theme.colors.gray.hint};
   white-space: nowrap;
   overflow: hidden;
+  text-align: left;
 
   &:hover {
     z-index: 1;
