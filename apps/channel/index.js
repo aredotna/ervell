@@ -20,10 +20,15 @@ const show = (req, res, next) => {
     req.apollo.client.query({ query: channelCanQuery, variables: { id } }),
     channelModel.fetch({ data: { auth_token: token } }),
   ])
-    .then(([channelComponent, { data: { channel: { can } } }]) => {
+    .then(([channelComponent, { data: { channel: { can, owner } } }]) => {
       if (channelModel.get('class') === 'User') {
         return res.redirect(301, `/${channelModel.get('slug')}`);
       }
+
+      // Temp: For determining whether or not to show shadowed top bar.
+      const isGroupPage = owner.__typename === 'Group';
+      res.locals.isGroupPage = isGroupPage;
+      res.locals.sd.IS_GROUP_PAGE = isGroupPage;
 
       res.locals.sd.CURRENT_ACTION = 'channel';
       res.locals.sd.CHANNEL = channelModel.toJSON();
