@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query channel_can($id: ID!) {
+  query legacyChannelData($id: ID!) {
     channel(id: $id) {
       id
       owner {

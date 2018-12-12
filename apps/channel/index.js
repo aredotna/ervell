@@ -2,7 +2,7 @@ import express from 'express';
 
 import apolloMiddleware from 'react/apollo/middleware';
 
-import channelCanQuery from 'apps/channel/queries/channelCan';
+import legacyChannelDataQuery from 'apps/channel/queries/legacyChannelData';
 
 import ChannelComponent from 'react/components/Channel';
 
@@ -17,7 +17,7 @@ const show = (req, res, next) => {
 
   Promise.all([
     req.apollo.render(ChannelComponent, { id }),
-    req.apollo.client.query({ query: channelCanQuery, variables: { id } }),
+    req.apollo.client.query({ query: legacyChannelDataQuery, variables: { id } }),
     channelModel.fetch({ data: { auth_token: token } }),
   ])
     .then(([channelComponent, { data: { channel: { can, owner } } }]) => {
