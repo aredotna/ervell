@@ -57,7 +57,7 @@ export default class Notification extends Component {
           {item.__typename === 'Comment' &&
             <span>
               <Label>
-                {' says '}
+                {' said '}
                 “<a
                   href={target.href}
                   dangerouslySetInnerHTML={{ __html: item.body }}

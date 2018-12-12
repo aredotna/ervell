@@ -62,7 +62,7 @@ export default class FeedGroupSentence extends PureComponent {
           {action === 'commented' &&
             <span>
               <Label>
-                {' says '}
+                {' said '}
                 “<a
                   href={objects[0].href}
                   dangerouslySetInnerHTML={{ __html: item.body }}
