@@ -35,9 +35,11 @@ const Notifications = ({ notifications }) => {
   if (notifications.length === 0) {
     return (
       <Container>
-        <Text textAlign="center" f={3}>
-          No notifications yet.
-        </Text>
+        <Body p={6}>
+          <Text textAlign="center" f={3}>
+            No notifications yet.
+          </Text>
+        </Body>
       </Container>
     );
   }
