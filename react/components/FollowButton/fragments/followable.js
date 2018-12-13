@@ -17,5 +17,13 @@ export default gql`
         followers
       }
     }
+
+    ... on Group {
+      id
+      is_followed
+      counts {
+        followers
+      }
+    }
   }
 `;
