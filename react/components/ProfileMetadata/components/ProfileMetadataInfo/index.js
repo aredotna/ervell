@@ -53,7 +53,7 @@ class ProfileMetadataInfo extends Component {
 
         {identifiable.__typename === 'Group' &&
           <Box my={6} neutralMarginsY>
-            {'Admin — '}
+            {'Group started by '}
 
             <BlockLink to={identifiable.user.href}>
               {identifiable.user.name}
