@@ -8,7 +8,7 @@
   height topbar_h
   line-height topbar_h
   width 100%
-  background-color white
+  background-color #fff
   padding 0
   display flex
   justify-content space-between
@@ -16,7 +16,7 @@
   z-index header_z
 
   &.is-group-page
-    box-shadow inset 0px 0px 25px 1px #000
+    background #fbfbfb
 
   &.is-active, .has-results
     z-index header_z + 3
@@ -35,16 +35,16 @@
   z-index header_z + 2
   pointer-events none
   position fixed
-  top 30px
+  top 37px
   left 0
-  height 20px
+  height 13px
   width 100%
-  background linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.05) 100%)
-  
+  background linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.02) 100%)
+
   +below(600px)
     position absolute
 
-  divet_size = 9px
+  divet_size = 11px
 
   &__left, &__right
     background rgba(0,0,0,0.05)
@@ -53,7 +53,9 @@
     position fixed
     top topbar_h
     mask url('/images/corner.svg')
+    mask-size 100%
     -webkit-mask url('/images/corner.svg')
+    -webkit-mask-size 100%
     z-index -1
 
     +below(600px)
