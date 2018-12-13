@@ -120,7 +120,7 @@ class MyGroups extends Component {
             ))}
 
             <GenericButton display="block" f={1} my={5} mx="1rem" onClick={this.openCreateGroup}>
-              + New group
+              Create group
             </GenericButton>
           </div>
         }
