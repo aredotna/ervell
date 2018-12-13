@@ -12,10 +12,6 @@ import channelMetadataInfoFragment from 'react/components/ChannelMetadata/compon
 const Buttons = styled.div`
   margin: 0 0 1em;
 
-  &:first-child {
-    margin-top: 0;
-  }
-
   &:last-child {
     margin-bottom: 0;
   }
