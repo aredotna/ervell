@@ -16,6 +16,8 @@ const BlockLink = styled(Link)`
   display: inline-block;
 `;
 
+const InfoLine = styled(Box).attrs({ pr: 4 })``;
+
 const Buttons = styled(Box).attrs({
   my: 6,
   neutralMarginsY: true,
@@ -48,7 +50,7 @@ class ProfileMetadataInfo extends Component {
         }[identifiable.__typename]}
       >
         <Expandable>
-          <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
+          <InfoLine dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
 
         {identifiable.__typename === 'Group' &&
