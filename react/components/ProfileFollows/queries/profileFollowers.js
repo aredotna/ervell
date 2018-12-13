@@ -1,14 +1,22 @@
 import gql from 'graphql-tag';
 
-import profileFollowersFragment from 'react/components/ProfileFollows/fragments/profileFollowers';
+import userProfileFollowersFragment from 'react/components/ProfileFollows/fragments/userProfileFollowers';
+import groupProfileFollowersFragment from 'react/components/ProfileFollows/fragments/groupProfileFollowers';
+
 
 export default gql`
   query ProfileFollowers($id: ID!, $page: Int, $per: Int) {
     identity(id: $id) {
       identifiable {
-        ... ProfileFollowers
+        ...on User {
+          ...UserProfileFollowers
+        }
+        ...on Group {
+          ...GroupProfileFollowers
+        }
       }
     }
   }
-  ${profileFollowersFragment}
+  ${userProfileFollowersFragment}
+  ${groupProfileFollowersFragment}
 `;
