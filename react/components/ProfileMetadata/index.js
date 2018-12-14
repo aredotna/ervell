@@ -44,7 +44,9 @@ export default class ProfileMetadata extends Component {
               <ProfileGroupUserList identifiable={identifiable} />
             }
 
-            <ProfileMetadataView identifiable={identifiable} view={view} sort={sort} />
+            {!['followers', 'following', 'groups'].includes(view) &&
+              <ProfileMetadataView identifiable={identifiable} view={view} sort={sort} />
+            }
 
             {identifiable.__typename !== 'Group' && ['all', 'channels', 'blocks'].includes(view) &&
               <ProfileMetadataSort sort={sort} />

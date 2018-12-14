@@ -14,23 +14,61 @@ const Container = styled.a`
   text-decoration: none;
 `;
 
+const Avatar = styled(MemberAvatar)`
+  opacity: 0.65;
+  ${x => x.mode === 'hover' && 'opacity: 0.7;'};
+`;
+
+const GroupName = styled(Text).attrs({
+  f: 2,
+  px: 5,
+  fontWeight: 'bold',
+})`
+  ${x => x.mode === 'hover' && `
+    color: ${x.theme.colors.gray.bold};
+  `}
+`;
+
 export default class MyGroup extends Component {
   static propTypes = {
     group: propType(myGroupFragment).isRequired,
   }
 
+  state = {
+    mode: 'resting',
+  }
+
+  onMouseOver = () => {
+    this.setState({ mode: 'hover' });
+  }
+
+  onMouseOut = () => {
+    this.setState({ mode: 'resting' });
+  }
+
   render() {
     const { group } = this.props;
+    const { mode } = this.state;
 
     return (
-      <Container href={group.href} py="0.375rem" px="1rem" display="flex" alignItems="center">
+      <Container
+        href={group.href}
+        py="0.5rem"
+        px="1rem"
+        display="flex"
+        alignItems="center"
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+        onFocus={this.onMouseOver}
+        onBlur={this.onMouseOut}
+      >
         <Box display="flex" alignItems="center">
-          <MemberAvatar member={group} size={20} isLinked={false} circle />
+          <Avatar member={group} size={20} isLinked={false} circle mode={mode} />
         </Box>
 
-        <Text f={2} px={5} fontWeight="bold">
+        <GroupName mode={mode}>
           {group.name}
-        </Text>
+        </GroupName>
 
         {group.visibility === 'private' &&
           <Icons name="Lock" color="gray.semiBold" size={4} />

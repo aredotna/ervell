@@ -5,7 +5,7 @@ export default gql`
     ... on Group {
       __typename
       id
-      avatar(size: LARGE)
+      avatar(size: UNCROPPED)
       can {
         update
       }

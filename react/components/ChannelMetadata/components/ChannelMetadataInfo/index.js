@@ -10,11 +10,7 @@ import { Expandable } from 'react/components/UI/ExpandableSet';
 import channelMetadataInfoFragment from 'react/components/ChannelMetadata/components/ChannelMetadataInfo/fragments/channelMetadataInfo';
 
 const Buttons = styled.div`
-  margin: 1em 0;
-
-  &:first-child {
-    margin-top: 0;
-  }
+  margin: 0 0 1em;
 
   &:last-child {
     margin-bottom: 0;
@@ -26,7 +22,7 @@ const Buttons = styled.div`
 `;
 
 const OwnerLink = styled.div`
-  margin: 1em 0;
+  margin: 1em 0 0;
 `;
 
 export default class ChannelMetadataInfo extends Component {

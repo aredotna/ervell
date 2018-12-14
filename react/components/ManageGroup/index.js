@@ -154,7 +154,9 @@ class ManageGroup extends Component {
 
         {group.can.manage_users &&
           <Accordion label="Add/edit members" mode="closed">
-            <ManageUsers channel_id={channel_id} group={group} />
+            <Box m={7}>
+              <ManageUsers channel_id={channel_id} group={group} />
+            </Box>
           </Accordion>
         }
 

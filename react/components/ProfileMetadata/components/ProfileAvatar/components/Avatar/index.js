@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Box from 'react/components/UI/Box';
 import AvatarBox from 'react/components/UI/Avatar';
+
+const AvatarContainer = styled(AvatarBox)`
+  width: auto;
+  height: auto;
+  max-width: 140px;
+  max-height: 140px;
+`;
 
 export default class Avatar extends Component {
   static propTypes = {
@@ -18,12 +26,12 @@ export default class Avatar extends Component {
     const { avatar, children } = this.props;
 
     return (
-      <Box mt={-6} mb={6}>
-        <AvatarBox size={140} mx="auto" tag="span">
+      <Box>
+        <AvatarContainer size={140} mx="auto" tag="span">
           {children}
 
           <img src={avatar} alt="avatar" />
-        </AvatarBox>
+        </AvatarContainer>
       </Box>
     );
   }

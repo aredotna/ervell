@@ -4,11 +4,10 @@ import identifiableCellFragment from 'react/components/Cell/components/Identifia
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 export default gql`
-  fragment ProfileFollowing on User {
+  fragment GroupProfileFollowers on Group {
     __typename
     id
-    following(page: $page, per: $per) {
-      __typename
+    followers(page: $page, per: $per) {
       ... IdentifiableCell
       ... KonnectableCell
     }
