@@ -20,6 +20,8 @@ class ProfileBreadcrumb extends Component {
   render() {
     const { identifiable, location: { pathname } } = this.props;
 
+    const showBadge = (!/follow(ers|ing)$/.test(pathname) && !/groups$/.test(pathname));
+
     return (
       <StickyBreadcrumbPath>
         <StickyBreadcrumbPath.Crumb>
@@ -27,13 +29,13 @@ class ProfileBreadcrumb extends Component {
             {identifiable.name}
           </a>
 
-          {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'Group') &&
+          {(showBadge && identifiable.__typename === 'Group') &&
             <Badge f={0} ml={4} color="gray.medium" icon={{ private: 'Lock' }[identifiable.visibility]}>
-              Group
+              Groups
             </Badge>
           }
 
-          {(!/follow(ers|ing)$/.test(pathname) && identifiable.__typename === 'User') &&
+          {(showBadge && identifiable.__typename === 'User') &&
             <ProfileBadge user={identifiable} />
           }
         </StickyBreadcrumbPath.Crumb>
@@ -47,6 +49,12 @@ class ProfileBreadcrumb extends Component {
         {/followers$/.test(pathname) &&
           <StickyBreadcrumbPath.Crumb>
             Followers
+          </StickyBreadcrumbPath.Crumb>
+        }
+
+        {/groups$/.test(pathname) &&
+          <StickyBreadcrumbPath.Crumb>
+            Groups
           </StickyBreadcrumbPath.Crumb>
         }
       </StickyBreadcrumbPath>

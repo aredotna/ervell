@@ -62,7 +62,7 @@ export default class ProfileMetadataActions extends Component {
           </Button>
         }
 
-        {identifiable.__typename === 'Group' && identifiable.can.manage &&
+        {identifiable.__typename === 'Group' && (identifiable.can.manage || identifiable.can.manage_users) &&
           <Button onClick={this.openManageGroupModal}>
             Edit group
           </Button>

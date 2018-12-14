@@ -10,6 +10,7 @@ import ProfileContents from 'react/components/ProfileContents';
 import ProfileChannels from 'react/components/ProfileChannels';
 import ProfileChannelIndex from 'react/components/ProfileChannelIndex';
 import ProfileFollows from 'react/components/ProfileFollows';
+import ProfileGroups from 'react/components/ProfileGroups';
 
 const All = ({
   id, sort, identifiable, fetchPolicy, seed,
@@ -101,6 +102,15 @@ Following.propTypes = {
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 };
 
+const Groups = ({ id, fetchPolicy }) => (
+  <ProfileGroups id={id} fetchPolicy={fetchPolicy} />
+);
+
+Groups.propTypes = {
+  id: PropTypes.string.isRequired,
+  fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+};
+
 class ProfileViews extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     // Once the view changes switch into "network-only" mode
@@ -167,6 +177,8 @@ class ProfileViews extends Component {
         return <Followers id={id} fetchPolicy={fetchPolicy} />;
       case 'following':
         return <Following id={id} fetchPolicy={fetchPolicy} />;
+      case 'groups':
+        return <Groups id={id} fetchPolicy={fetchPolicy} />;
       default:
         return null;
     }

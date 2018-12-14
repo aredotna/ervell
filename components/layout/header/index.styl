@@ -8,15 +8,18 @@
   height topbar_h
   line-height topbar_h
   width 100%
-  background-color white
+  background-color #fff
   padding 0
   display flex
   justify-content space-between
   align-items center
   z-index header_z
 
+  &.is-group-page
+    background #fbfbfb
+
   &.is-active, .has-results
-    z-index header_z + 2
+    z-index header_z + 3
 
     .header--icon
       display none
@@ -27,6 +30,43 @@
 .btn-signup, .btn-login
   font-weight bold
   cursor pointer
+
+.GroupTopBarShadow
+  z-index header_z + 2
+  pointer-events none
+  position fixed
+  top 37px
+  left 0
+  height 13px
+  width 100%
+  background linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.02) 100%)
+
+  +below(600px)
+    position absolute
+
+  divet_size = 11px
+
+  &__left, &__right
+    background rgba(0,0,0,0.05)
+    width divet_size
+    height divet_size
+    position fixed
+    top topbar_h
+    mask url('/images/corner.svg')
+    mask-size 100%
+    -webkit-mask url('/images/corner.svg')
+    -webkit-mask-size 100%
+    z-index -1
+
+    +below(600px)
+      display none
+
+  &__left
+    left 0
+  
+  &__right
+    right 0
+    transform scaleX(-1)
 
 body.no-header #layout-header
   display none
@@ -104,7 +144,7 @@ input#layout-header__search__input
   outline 0
   font-weight normal
   padding 0 container_pad 0 topbar_h
-  background-color white
+  background-color transparent
 
   &:focus
     background-color backgroundgray

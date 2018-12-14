@@ -77,6 +77,7 @@ class ManageGroup extends Component {
       .then((res) => {
         const { data: { update_group: { group: { href } } } } = res;
 
+        // TODO: This needs to not happen / be configurable
         // Slug may have changed so redirect
         window.location = href;
 

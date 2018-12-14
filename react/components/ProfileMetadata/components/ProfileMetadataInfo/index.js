@@ -13,7 +13,7 @@ import { Expandable } from 'react/components/UI/ExpandableSet';
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const BlockLink = styled(Link)`
-  display: block;
+  display: inline-block;
 `;
 
 const Buttons = styled(Box).attrs({
@@ -34,6 +34,12 @@ class ProfileMetadataInfo extends Component {
   render() {
     const { identifiable, isLoggedIn } = this.props;
 
+    const showButtons = (isLoggedIn && (
+      identifiable.counts.followers > 0 ||
+      identifiable.counts.following > 1 ||
+      identifiable.counts.groups > 0)
+    );
+
     return (
       <Pocket
         title={{
@@ -45,7 +51,17 @@ class ProfileMetadataInfo extends Component {
           <div dangerouslySetInnerHTML={{ __html: identifiable.about || '—' }} />
         </Expandable>
 
-        {isLoggedIn && (identifiable.counts.followers > 0 || identifiable.counts.following > 1) &&
+        {identifiable.__typename === 'Group' &&
+          <Box my={6} neutralMarginsY>
+            {'Admin — '}
+
+            <BlockLink to={identifiable.user.href}>
+              {identifiable.user.name}
+            </BlockLink>
+          </Box>
+        }
+
+        {showButtons &&
           <Buttons>
             {identifiable.counts.followers > 0 &&
               <BlockLink to={`${identifiable.href}/followers`}>
@@ -59,17 +75,14 @@ class ProfileMetadataInfo extends Component {
                 Following
               </BlockLink>
             }
+
+            {identifiable.counts.groups > 0 &&
+              // <BlockLink to={`${identifiable.href}/groups`}>
+              //   Groups
+              // </BlockLink>
+              <span />
+            }
           </Buttons>
-        }
-
-        {identifiable.__typename === 'Group' &&
-          <Box my={6} neutralMarginsY>
-            {'Admin — '}
-
-            <BlockLink to={identifiable.user.href}>
-              {identifiable.user.name}
-            </BlockLink>
-          </Box>
         }
       </Pocket>
     );

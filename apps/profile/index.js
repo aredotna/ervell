@@ -49,6 +49,11 @@ const resolve = [
 
         const view = req.path.split('/').pop();
 
+        // Temp: For determining whether or not to show shadowed top bar.
+        const isGroupPage = identifiable.__typename === 'Group';
+        res.locals.isGroupPage = isGroupPage;
+        res.locals.sd.IS_GROUP_PAGE = isGroupPage;
+
         res.render('index', {
           apollo,
           // meta.jade
@@ -74,6 +79,7 @@ app
   .get('/:id/blocks', ...resolve)
   .get('/:id/channels', ...resolve)
   .get('/:id/index', ...resolve)
+  .get('/:id/groups', ...resolve)
   .get('/:id/followers', ...resolve)
   .get('/:id/following', ...resolve);
 

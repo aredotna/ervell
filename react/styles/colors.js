@@ -32,7 +32,9 @@ const COLORS = {
   middleGray: '#929292',
 };
 
-const { white: _white, black: _black, ...colorObjs } = COLORS;
+const {
+  white: _white, black: _black, middleGray: _middleGray, ...colorObjs
+} = COLORS;
 
 export const COLOR_NAMES = Object.keys(colorObjs).reduce(
   (memo, namespace) =>

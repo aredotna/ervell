@@ -29,8 +29,8 @@ module.exports = ->
   # Legacy setup
   switch FEED_TYPE
     when 'primary'
-      initializeFeed($('.feed-container'))
+      initializeFeed($('.js-feed'))
     when 'notifications'
-      initializeNotifications($('.feed-container'))
+      initializeNotifications($('.js-feed'))
     when 'explore'
       initializeExplore($('.explore-contents'))

@@ -1,4 +1,6 @@
 import theme from 'react/styles/theme';
+import { themeGet } from 'styled-system';
+import chroma from 'chroma-js';
 
 const NUMBER = /(\d+(\.\d+)?)/;
 
@@ -25,6 +27,11 @@ export const preset = (fn, presetProps = {}) =>
 export const defaultTo = (v, dV) =>
   ((v == null || v !== v) ? dV : v); // eslint-disable-line no-self-compare
 
+export const lighten = (name, amount = 0.5) => {
+  const color = themeGet(`colors.${name}`)({ theme });
+  return chroma(color).alpha(amount);
+};
+
 export default {
   parse,
   value,
@@ -36,4 +43,5 @@ export default {
   divide,
   calculateLineHeight,
   preset,
+  lighten,
 };

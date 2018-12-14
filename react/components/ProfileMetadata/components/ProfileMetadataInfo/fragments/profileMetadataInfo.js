@@ -9,6 +9,7 @@ export default gql`
       counts {
         followers
         following
+        groups
       }
     }
     ... on Group {
