@@ -47,7 +47,7 @@ export default class Channel extends PureComponent {
           by {channel.owner.name}
 
           {channel.owner.__typename === 'Group' &&
-            <Badge f={0} ml={4} color="gray.medium" icon={{ private: 'Lock' }[channel.owner.visibility]}>
+            <Badge f={0} ml={4} color={`channel.${channel.visibility.toLowerCase()}`} icon={{ private: 'Lock' }[channel.owner.visibility]}>
               Group
             </Badge>
           }
