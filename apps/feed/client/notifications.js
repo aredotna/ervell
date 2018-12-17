@@ -1,16 +1,13 @@
-import { defer } from 'underscore';
-
-import Notifications from 'collections/notifications.coffee';
-import FeedView from 'apps/feed/client/feed_view.coffee';
+import { mountWithApolloProvider } from 'react/apollo';
+import Feed from 'react/components/Feed';
+import clearNotificationsMutation from 'apps/feed/mutations/clearNotifications';
 
 export default ($el) => {
-  const notificationsFeed = new Notifications();
+  mountWithApolloProvider(Feed, { type: 'Notification' }, $el);
 
-  notificationsFeed.on('sync', () =>
-    defer(() => notificationsFeed.markRead()));
+  const apollo = window.__APOLLO_CLIENT__;
 
-  return new FeedView({
-    el: $el,
-    collection: notificationsFeed,
+  apollo.mutate({
+    mutation: clearNotificationsMutation,
   });
 };
