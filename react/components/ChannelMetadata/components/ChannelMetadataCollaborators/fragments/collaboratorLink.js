@@ -11,6 +11,7 @@ export default gql`
     ... on Group {
       id
       name
+      href
       description(format: MARKDOWN)
       user {
         id
@@ -26,6 +27,7 @@ export default gql`
         manage
         manage_users
       }
+      visibility
     }
   }
 `;

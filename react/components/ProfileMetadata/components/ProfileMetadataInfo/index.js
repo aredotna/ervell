@@ -79,10 +79,9 @@ class ProfileMetadataInfo extends Component {
             }
 
             {identifiable.counts.groups > 0 &&
-              // <BlockLink to={`${identifiable.href}/groups`}>
-              //   Groups
-              // </BlockLink>
-              <span />
+              <BlockLink to={`${identifiable.href}/groups`}>
+                Groups
+              </BlockLink>
             }
           </Buttons>
         }

@@ -25,6 +25,7 @@ class NewChannelForm extends Component {
     title: '',
     description: '',
     visibility: 'CLOSED',
+    group_id: null,
     visit_channel: true,
     errorMessage: null,
     attributeErrors: {},
@@ -50,16 +51,21 @@ class NewChannelForm extends Component {
   handleVisibility = visibility =>
     this.setState({ visibility });
 
+  handleAuthor = (group_id) => {
+    if (group_id === 0) return;
+    this.setState({ group_id });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
     const { createChannel, onClose } = this.props;
     const {
-      title, description, visibility, visit_channel,
+      title, description, visibility, group_id, visit_channel,
     } = this.state;
 
     const variables = {
-      title, description, visibility,
+      title, description, visibility, group_id,
     };
 
     this.setState({ mode: 'creating' });
