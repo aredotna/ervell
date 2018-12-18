@@ -60,6 +60,23 @@ const Header = styled(Link)`
   `}
 `;
 
+const BetaBadge = styled(Text).attrs({
+  f: 0,
+})`
+  color: ${x => x.theme.colors.gray.regular} !important;
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 0.5em;
+  &:before {
+    content: '•';
+    margin-right: 0.5em;
+  }
+`;
+
+const LearnMoreLink = styled.a`
+  font-weight: bold;
+`;
+
 class MyGroups extends Component {
   static propTypes = {
     me: propType(myGroupsFragment).isRequired,
@@ -105,13 +122,16 @@ class MyGroups extends Component {
       <div>
         <Header onClick={this.toggle} is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}>
           Groups
+          <BetaBadge>BETA</BetaBadge>
         </Header>
 
         {is_my_groups_dropdown_visible &&
           <div>
             {groups.length === 0 &&
-              <Text f={1} my="1rem" px="1rem">
-                Groups are a new way to collaborate on Are.na
+              <Text f={1} my="1rem" px="1rem" lineHeight={2}>
+                Groups are a new way to collaborate on Are.na.
+                <br />
+                <LearnMoreLink href="/getting-started-with-groups">Learn more</LearnMoreLink>
               </Text>
             }
 
