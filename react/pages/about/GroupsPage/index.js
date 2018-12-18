@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { GenericButton as Button } from 'react/components/UI/GenericButton';
+import { GenericButtonLink as Button } from 'react/components/UI/GenericButton';
 import Box from 'react/components/UI/Box';
 
 import { Headline, Subheadline, Description } from 'react/pages/about/components/Text';
@@ -44,8 +44,7 @@ export default class GroupsPage extends Component {
             Getting started with Groups
           </Headline>
           <Subheadline>
-            A group is a shared account that many people can use to collaborate on Are.na.
-            Here’s how it works.
+            Make shared accounts to collaborate with other people.
           </Subheadline>
         </CenterBox>
         <Content>
@@ -57,8 +56,6 @@ export default class GroupsPage extends Component {
               <Description align="left" my={7}>
                 Every group has a profile page where you can see all
                 your shared content in one place.
-                To keep things clear, you can now author channels as
-                the group or transfer existing ones over.
               </Description>
               <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png?1519764799" />
               <Instructions>
@@ -79,11 +76,11 @@ export default class GroupsPage extends Component {
             </CenterBox>
             <CenterBox mt={9} mb={10} >
               <Subheadline>
-                Groups make it easy to collaborate with multiple people.
+                Groups let you collaborate with a click.
               </Subheadline>
               <Description align="left" my={7}>
-                If you often collaborate with the same people,
-                creating a group lets you add everyone to new channels in one click.
+                Quickly add your whole team to new channels.
+                Keep work and personal content separate.
               </Description>
               <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819616/original_082481d53bf6c73bd0010f53041e5341.png?1519764802" />
               <Instructions>
@@ -110,8 +107,7 @@ export default class GroupsPage extends Component {
                 Group admins can upgrade members to Premium
               </Subheadline>
               <Description align="left" my={7}>
-                Groups billing and content management simple for
-                professional teams. Just upgrade as you go using the group settings.
+                Billing is simple for professional teams. Invite members and upgrade as you go.
               </Description>
               <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819616/original_082481d53bf6c73bd0010f53041e5341.png?1519764802" />
               <Instructions>
@@ -135,7 +131,7 @@ export default class GroupsPage extends Component {
               <Subheadline>
                 Get 25% off Premium when you upgrade group members
               </Subheadline>
-              <Button f={5} mt={6} py={6} href="/sign_up">
+              <Button f={5} mt={6} py={6} href="/pricing">
                 Join Now
               </Button>
             </CenterBox>
@@ -143,17 +139,14 @@ export default class GroupsPage extends Component {
           <CTA>
             <CenterBox my={10}>
               <Subheadline>
-                Are.na Groups are perfect for teams
+                More Features
               </Subheadline>
-              <Description align="left">
-                Creating a group profile is a perfect way to manage
-                public and private content as a creative business.
-                Make your work public while keeping research and
-                sketches private. Help team members keep their
-                personal channels separate from work. Build new ideas together.
+              <Description>
+                Learn more about group features, privacy
+                settings, and transferring existing channels.
               </Description>
-              <Button f={5} mt={6} py={6} href="/sign_up">
-                Learn More
+              <Button f={5} mt={6} py={6} href="http://help.are.na/knowledge_base/topics/whats-new-in-groups">
+                Groups FAQs
               </Button>
             </CenterBox>
           </CTA>
