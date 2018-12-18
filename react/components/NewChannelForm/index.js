@@ -5,7 +5,7 @@ import { graphql, Query } from 'react-apollo';
 import mapErrors from 'react/util/mapErrors';
 
 import createChannelMutation from 'react/components/NewChannelForm/mutations/createChannel';
-import groupsCountQuery from 'react/components/NewChannelForm/queries/groupsCount';
+import newChannelGroupsQuery from 'react/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups';
 
 import Text from 'react/components/UI/Text';
 import TitledDialog from 'react/components/UI/TitledDialog';
@@ -99,7 +99,7 @@ class NewChannelForm extends Component {
     const isDisabled = !(mode === 'resting' || mode === 'error');
 
     return (
-      <Query query={groupsCountQuery}>
+      <Query query={newChannelGroupsQuery}>
         {({ data, error, loading }) => {
           if (loading) {
             return (
@@ -131,7 +131,7 @@ class NewChannelForm extends Component {
             );
           }
 
-          const { me: { counts } } = data;
+          const { me: { groups } } = data;
 
           return (
             <TitledDialog
@@ -165,7 +165,7 @@ class NewChannelForm extends Component {
                   />
                 </LabelledInput>
 
-                {counts.groups > 0 &&
+                {groups.length > 0 &&
                   <LabelledInput my={6} alignItems="start">
                     <Label>
                       Author
