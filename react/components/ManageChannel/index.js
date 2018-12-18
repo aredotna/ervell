@@ -9,6 +9,7 @@ import mapErrors from 'react/util/mapErrors';
 import compactObject from 'react/util/compactObject';
 
 import manageChannelFragment from 'react/components/ManageChannel/fragments/manageChannel';
+import groupsCountFragment from 'react/components/ManageChannel/fragments/groupsCount';
 import manageChannelQuery from 'react/components/ManageChannel/queries/manageChannel';
 import updateChannelMutation from 'react/components/ManageChannel/mutations/updateChannel';
 
@@ -24,6 +25,7 @@ import { LabelledInput, Label, Input, Textarea } from 'react/components/UI/Input
 import ExportChannel from 'react/components/ManageChannel/components/ExportChannel';
 import DeleteChannel from 'react/components/ManageChannel/components/DeleteChannel';
 import TransferChannel from 'react/components/ManageChannel/components/TransferChannel';
+import AssignAuthor from 'react/components/ManageChannel/components/AssignAuthor';
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 
 const Container = styled.div`
@@ -36,6 +38,7 @@ class ManageChannel extends Component {
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       channel: propType(manageChannelFragment),
+      me: propType(groupsCountFragment),
     }).isRequired,
     updateChannel: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -46,6 +49,7 @@ class ManageChannel extends Component {
     title: null,
     description: null,
     visibility: null,
+    owner: null,
     attributeErrors: {},
     content_flag: null,
     errorMessage: '',
@@ -71,6 +75,24 @@ class ManageChannel extends Component {
   handleNSFW = flag =>
     this.handleInput('content_flag')({ target: { value: flag } });
 
+  handleAuthor = (newOwner) => {
+    const [type, id] = newOwner.split(':');
+    const { data: { channel: { owner } } } = this.props;
+    const newOwerIsCurrentOwner = (
+      type.toLowerCase() === owner.__typename.toLowerCase() &&
+      id === owner.id
+    );
+
+    if (newOwerIsCurrentOwner) return;
+
+    this.setState({
+      mode: 'submit',
+      owner: {
+        type,
+        id: parseInt(id, 10),
+      },
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -80,7 +102,7 @@ class ManageChannel extends Component {
     } = this.props;
 
     const {
-      mode, title, description, visibility, content_flag,
+      mode, title, description, visibility, content_flag, owner,
     } = this.state;
 
     if (mode === 'resting') return onClose();
@@ -88,8 +110,9 @@ class ManageChannel extends Component {
     this.setState({ mode: 'submitting' });
 
     const variables = compactObject({
-      id, title, description, visibility, content_flag,
+      id, title, description, visibility, content_flag, owner,
     });
+
 
     return updateChannel({ variables })
       .then(({ data: { update_channel: { channel: { href } } } }) => {
@@ -115,7 +138,8 @@ class ManageChannel extends Component {
 
     if (loading) return <LoadingIndicator />;
 
-    const { data: { channel } } = this.props;
+    const { data: { channel, me: { counts } } } = this.props;
+    const owner = `${channel.owner.__typename.toUpperCase()}:${channel.owner.id}`;
 
     return (
       <TitledDialog
@@ -136,47 +160,61 @@ class ManageChannel extends Component {
             </ErrorAlert>
           }
 
-          <Accordion label="Edit name, description, and privacy">
-            <LabelledInput>
-              <Label>Name</Label>
+          <LabelledInput mt={6} mb={7}>
+            <Label>Name</Label>
+            <Input
+              f={7}
+              color={`channel.${channel.visibility.toLowerCase()}`}
+              placeholder="Type channel name"
+              borderless
+              autoFocus
+              required
+              value={unescape(channel.title)}
+              onChange={this.handleTitle}
+              errorMessage={attributeErrors.title}
+            />
+          </LabelledInput>
 
-              <Input
-                name="title"
-                defaultValue={unescape(channel.title)}
-                onChange={this.handleTitle}
-                errorMessage={attributeErrors.title}
-                required
-              />
-            </LabelledInput>
-
-            <LabelledInput>
+          {counts.groups > 0 &&
+            <LabelledInput my={6} alignItems="start">
               <Label>
-                Description
+                Author
               </Label>
 
-              <Textarea
-                name="description"
-                defaultValue={channel.description}
-                onChange={this.handleDescription}
-                placeholder="describe your channel here"
-                rows="3"
-                errorMessage={attributeErrors.description}
+              <AssignAuthor
+                onChange={this.handleAuthor}
+                selected={owner}
               />
             </LabelledInput>
+          }
 
-            <LabelledInput>
-              <Label>
-                Privacy
-              </Label>
+          <LabelledInput my={6}>
+            <Label>
+              Description
+            </Label>
 
-              <div>
-                <ChannelVisibilityPulldown
-                  value={channel.visibility.toUpperCase()}
-                  onChange={this.handleVisibility}
-                />
-              </div>
-            </LabelledInput>
-          </Accordion>
+            <Textarea
+              name="description"
+              defaultValue={channel.description}
+              onChange={this.handleDescription}
+              placeholder="describe your channel here"
+              rows={4}
+              errorMessage={attributeErrors.description}
+            />
+          </LabelledInput>
+
+          <LabelledInput mt={6} mb={8}>
+            <Label>
+              Privacy
+            </Label>
+
+            <div>
+              <ChannelVisibilityPulldown
+                value={channel.visibility.toUpperCase()}
+                onChange={this.handleVisibility}
+              />
+            </div>
+          </LabelledInput>
 
           <Accordion label="NSFW?" mode="closed">
             <Box m={7}>
