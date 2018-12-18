@@ -123,7 +123,7 @@ export default class ManagedMembers extends Component {
 
             {member.__typename === 'Group' && mode !== 'clicked' &&
               <Amount>
-                Group (<Count amount={member.counts.users + 1} label="user" />)
+                Group created by {member.user.name}
               </Amount>
             }
 
