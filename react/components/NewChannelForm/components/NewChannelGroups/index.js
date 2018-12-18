@@ -5,7 +5,7 @@ import { Query } from 'react-apollo';
 import newChannelGroupsQuery from 'react/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups';
 
 import Pulldown from 'react/components/UI/Pulldown';
-import AuthorOption from 'react/components/NewChannelForm/components/NewChannelGroups/components/AuthorOption';
+import AuthorOption from 'react/components/AuthorOption';
 
 export default class NewChannelGroups extends Component {
   static propTypes = {
