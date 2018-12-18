@@ -71,7 +71,7 @@ export default class UserDropdown extends Component {
                   </Link>
                 </Section>
 
-                {!me.is_confirmed &&
+                {me.is_confirmed &&
                   <Section>
                     <MyGroups me={me} />
                   </Section>
