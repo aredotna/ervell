@@ -19,28 +19,30 @@ const Header = styled(Link)`
   position: relative;
   user-select: none;
 
-  // Left-facing Caret
-  &:before,
-  &:after {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 1em;
-    width: 0;
-    height: 0;
-    transform: translateY(-50%);
-    border-top: 0.5em solid transparent;
-    border-right: 0.5em solid ${x => x.theme.colors.gray.base};
-    border-bottom: 0.5em solid transparent;
-    border-left: 0.5em solid transparent;
-    pointer-events: none;
-  }
+  ${props => props.hasGroups && `
+    // Left-facing Caret
+    &:before,
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 1em;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+      border-top: 0.5em solid transparent;
+      border-right: 0.5em solid ${props.theme.colors.gray.base};
+      border-bottom: 0.5em solid transparent;
+      border-left: 0.5em solid transparent;
+      pointer-events: none;
+    }
 
-  &:after {
-    border-right-color: white;
-    margin-right: -1px;
-  }
+    &:after {
+      border-right-color: white;
+      margin-right: -1px;
+    }
+  `}
 
   ${props => props.is_my_groups_dropdown_visible && `
     // Down-facing Caret
@@ -117,10 +119,17 @@ class MyGroups extends Component {
 
   render() {
     const { me: { groups, is_my_groups_dropdown_visible } } = this.props;
+    const hasGroups = groups.length > 0;
+
+    console.log('hasGroups', hasGroups);
 
     return (
       <div>
-        <Header onClick={this.toggle} is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}>
+        <Header
+          onClick={this.toggle}
+          hasGroups={hasGroups}
+          is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}
+        >
           Groups
           <BetaBadge>BETA</BetaBadge>
         </Header>
