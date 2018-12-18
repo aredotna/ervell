@@ -148,7 +148,7 @@ class MyGroups extends Component {
               <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
             ))}
 
-            <GenericButton display="block" f={1} my={5} mx="1rem" onClick={this.openCreateGroup}>
+            <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
               Create group
             </GenericButton>
           </div>
