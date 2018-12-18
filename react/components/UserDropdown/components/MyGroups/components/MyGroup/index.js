@@ -25,7 +25,7 @@ const GroupName = styled(Text).attrs({
   fontWeight: 'bold',
 })`
   ${x => x.mode === 'hover' && `
-    color: ${x.theme.colors.gray.bold};
+    color: ${x.theme.colors.gray.black};
   `}
 `;
 
