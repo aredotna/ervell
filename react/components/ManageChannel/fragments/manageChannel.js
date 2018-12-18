@@ -14,6 +14,15 @@ export default gql`
       destroy
       export
     }
+    owner {
+      __typename
+      ... on User {
+        id
+      }
+      ... on Group {
+        id
+      }
+    }
     ...TransferChannel
   }
   ${transferChannelFragment}

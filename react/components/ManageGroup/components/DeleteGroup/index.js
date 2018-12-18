@@ -52,6 +52,7 @@ class DeleteGroup extends Component {
 
   render() {
     const { mode } = this.state;
+    const { group: { name } } = this.props;
 
     return (
       <div>
@@ -78,7 +79,8 @@ class DeleteGroup extends Component {
             {mode === 'pending' &&
               <div>
                 <Text mb={6} f={2} color="state.alert">
-                  Your group will lose access to any channels it is a collaborator on.
+                  All channels owned by <strong>{name}</strong> will be permanently deleted
+                  and your group will lose access to any channels it is a collaborator on.
                   {' '}<strong>This action cannot be undone.</strong>{' '}
                   Are you sure you want to delete the group?
                 </Text>
@@ -90,7 +92,7 @@ class DeleteGroup extends Component {
                     color="state.alert"
                     onClick={this.deleteGroup}
                   >
-                    Yes, delete group
+                    Yes, delete group and all associated channels
                   </GenericButton>
 
                   {' '}

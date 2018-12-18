@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import { graphql, Query } from 'react-apollo';
 
 import mapErrors from 'react/util/mapErrors';
 
 import createChannelMutation from 'react/components/NewChannelForm/mutations/createChannel';
+import newChannelQuery from 'react/components/NewChannelForm/queries/newChannelQuery';
 
 import Text from 'react/components/UI/Text';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Label, LabelledCheckbox, LabelledInput } from 'react/components/UI/Inputs';
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
+import NewChannelGroups from 'react/components/NewChannelForm/components/NewChannelGroups';
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 class NewChannelForm extends Component {
   static propTypes = {
@@ -22,6 +25,7 @@ class NewChannelForm extends Component {
     title: '',
     description: '',
     visibility: 'CLOSED',
+    group_id: null,
     visit_channel: true,
     errorMessage: null,
     attributeErrors: {},
@@ -47,16 +51,21 @@ class NewChannelForm extends Component {
   handleVisibility = visibility =>
     this.setState({ visibility });
 
+  handleAuthor = (group_id) => {
+    if (group_id === 0) return;
+    this.setState({ group_id });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
     const { createChannel, onClose } = this.props;
     const {
-      title, description, visibility, visit_channel,
+      title, description, visibility, group_id, visit_channel,
     } = this.state;
 
     const variables = {
-      title, description, visibility,
+      title, description, visibility, group_id,
     };
 
     this.setState({ mode: 'creating' });
@@ -96,81 +105,131 @@ class NewChannelForm extends Component {
     const isDisabled = !(mode === 'resting' || mode === 'error');
 
     return (
-      <TitledDialog
-        title="New channel"
-        label={{
-          resting: 'Create channel',
-          creating: 'Creating...',
-          redirecting: 'Redirecting...',
-          success: 'Created',
-          error: 'Error',
-        }[mode]}
-        onDone={this.handleSubmit}
-        disabled={isDisabled}
-      >
-        <div>
-          <LabelledInput mt={6} mb={7}>
-            <Label>
-              Name
-            </Label>
-
-            <Input
-              f={7}
-              color={`channel.${visibility.toLowerCase()}`}
-              placeholder="Type channel name"
-              borderless
-              autoFocus
-              required
-              value={title}
-              onChange={this.handleTitle}
-              errorMessage={attributeErrors.title}
-            />
-          </LabelledInput>
-
-          <LabelledInput my={6} alignItems="start">
-            <Label>
-              Description
-            </Label>
-
-            <Textarea
-              placeholder="Describe your channel here"
-              rows={4}
-              value={description}
-              onChange={this.handleDescription}
-              errorMessage={attributeErrors.description}
-            />
-          </LabelledInput>
-
-          <LabelledInput my={6} alignItems="start">
-            <Label>
-              Privacy
-            </Label>
-
-            <div>
-              <ChannelVisibilityPulldown
-                value={visibility.toUpperCase()}
-                onChange={this.handleVisibility}
-              />
-            </div>
-          </LabelledInput>
-
-          <LabelledInput mt={6} mb={8}>
-            <Label />
-            <LabelledCheckbox
-              onChange={this.handleVisitChannel}
-              checked={visit_channel}
-            >
-              Visit channel
-            </LabelledCheckbox>
-          </LabelledInput>
-
-          {mode === 'error' &&
-            <Text mb={6} f={2} color="state.alert" textAlign="center">
-              {errorMessage}
-            </Text>
+      <Query query={newChannelQuery}>
+        {({ data, error, loading }) => {
+          if (loading) {
+            return (
+              <TitledDialog
+                title="New channel"
+                label={{
+                  resting: 'Create channel',
+                }[mode]}
+                onDone={this.handleSubmit}
+              >
+                <LoadingIndicator p={6} />
+              </TitledDialog>
+            );
           }
-        </div>
-      </TitledDialog>
+
+          if (error) {
+            return (
+              <TitledDialog
+                title="New channel"
+                label={{
+                  resting: 'Create channel',
+                }[mode]}
+                onDone={this.handleSubmit}
+              >
+                <Text color="state.alert" f={2} p={6}>
+                  {error.message}
+                </Text>
+              </TitledDialog>
+            );
+          }
+
+          const { me: { groups } } = data;
+
+          return (
+            <TitledDialog
+              title="New channel"
+              label={{
+                resting: 'Create channel',
+                creating: 'Creating...',
+                redirecting: 'Redirecting...',
+                success: 'Created',
+                error: 'Error',
+              }[mode]}
+              onDone={this.handleSubmit}
+              disabled={isDisabled}
+            >
+              <div>
+                <LabelledInput mt={6} mb={7}>
+                  <Label>
+                    Name
+                  </Label>
+
+                  <Input
+                    f={7}
+                    color={`channel.${visibility.toLowerCase()}`}
+                    placeholder="Type channel name"
+                    borderless
+                    autoFocus
+                    required
+                    value={title}
+                    onChange={this.handleTitle}
+                    errorMessage={attributeErrors.title}
+                  />
+                </LabelledInput>
+
+                {groups.length > 0 &&
+                  <LabelledInput my={6} alignItems="start">
+                    <Label>
+                      Author
+                    </Label>
+
+                    <NewChannelGroups
+                      onChange={this.handleAuthor}
+                    />
+                  </LabelledInput>
+                }
+
+                <LabelledInput my={6} alignItems="start">
+                  <Label>
+                    Description
+                  </Label>
+
+                  <Textarea
+                    placeholder="Describe your channel here"
+                    rows={4}
+                    value={description}
+                    onChange={this.handleDescription}
+                    errorMessage={attributeErrors.description}
+                  />
+                </LabelledInput>
+
+                <LabelledInput my={6} alignItems="start">
+                  <Label>
+                    Privacy
+                  </Label>
+
+                  <div>
+                    <ChannelVisibilityPulldown
+                      value={visibility.toUpperCase()}
+                      onChange={this.handleVisibility}
+                    />
+                  </div>
+                </LabelledInput>
+
+                <LabelledInput mt={6} mb={8}>
+                  <Label />
+                  <LabelledCheckbox
+                    onChange={this.handleVisitChannel}
+                    checked={visit_channel}
+                  >
+                    Visit channel
+                  </LabelledCheckbox>
+                </LabelledInput>
+
+                {mode === 'error' &&
+                  <Text mb={6} f={2} color="state.alert" textAlign="center">
+                    {errorMessage}
+                  </Text>
+                }
+              </div>
+            </TitledDialog>
+          );
+        }}
+      </Query>
     );
   }
 }
