@@ -70,6 +70,12 @@ export default class UserDropdown extends Component {
                   </Link>
                 </Section>
 
+                {!me.is_confirmed &&
+                  <Section>
+                    <MyGroups me={me} />
+                  </Section>
+                }
+
                 <Section>
                   <Link pt={3} pb={4} href="/feed">
                     Feed
