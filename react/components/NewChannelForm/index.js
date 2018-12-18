@@ -5,7 +5,7 @@ import { graphql, Query } from 'react-apollo';
 import mapErrors from 'react/util/mapErrors';
 
 import createChannelMutation from 'react/components/NewChannelForm/mutations/createChannel';
-import newChannelGroupsQuery from 'react/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups';
+import newChannelQuery from 'react/components/NewChannelForm/queries/newChannelQuery';
 
 import Text from 'react/components/UI/Text';
 import TitledDialog from 'react/components/UI/TitledDialog';
@@ -105,7 +105,7 @@ class NewChannelForm extends Component {
     const isDisabled = !(mode === 'resting' || mode === 'error');
 
     return (
-      <Query query={newChannelGroupsQuery}>
+      <Query query={newChannelQuery}>
         {({ data, error, loading }) => {
           if (loading) {
             return (
