@@ -55,7 +55,7 @@ export default class CollaboratorSearchResult extends Component {
 
           {result.__typename === 'Group' &&
             <Amount>
-              Group (<Count amount={result.counts.users + 1} label="user" />)
+              Group created by {result.user.name}
             </Amount>
           }
         </Information>
