@@ -13,7 +13,6 @@ const COLORS = {
     investor: 'rgb(183, 158, 110)',
   },
   gray: {
-    black: '#000',
     bold: '#333',
     base: '#585858', // Matches `textgray`
     semiBold: '#6d6d6d',
