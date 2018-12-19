@@ -19,28 +19,30 @@ const Header = styled(Link)`
   position: relative;
   user-select: none;
 
-  // Left-facing Caret
-  &:before,
-  &:after {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 1em;
-    width: 0;
-    height: 0;
-    transform: translateY(-50%);
-    border-top: 0.5em solid transparent;
-    border-right: 0.5em solid ${x => x.theme.colors.gray.base};
-    border-bottom: 0.5em solid transparent;
-    border-left: 0.5em solid transparent;
-    pointer-events: none;
-  }
+  ${props => props.hasGroups && `
+    // Left-facing Caret
+    &:before,
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 1em;
+      width: 0;
+      height: 0;
+      transform: translateY(-50%);
+      border-top: 0.5em solid transparent;
+      border-right: 0.5em solid ${props.theme.colors.gray.base};
+      border-bottom: 0.5em solid transparent;
+      border-left: 0.5em solid transparent;
+      pointer-events: none;
+    }
 
-  &:after {
-    border-right-color: white;
-    margin-right: -1px;
-  }
+    &:after {
+      border-right-color: white;
+      margin-right: -1px;
+    }
+  `}
 
   ${props => props.is_my_groups_dropdown_visible && `
     // Down-facing Caret
@@ -58,6 +60,23 @@ const Header = styled(Link)`
       margin-right: 0;
     }
   `}
+`;
+
+const BetaBadge = styled(Text).attrs({
+  f: 0,
+})`
+  color: ${x => x.theme.colors.gray.regular} !important;
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 0.5em;
+  &:before {
+    content: '•';
+    margin-right: 0.5em;
+  }
+`;
+
+const LearnMoreLink = styled.a`
+  font-weight: bold;
 `;
 
 class MyGroups extends Component {
@@ -100,18 +119,26 @@ class MyGroups extends Component {
 
   render() {
     const { me: { groups, is_my_groups_dropdown_visible } } = this.props;
+    const hasGroups = groups.length > 0;
 
     return (
       <div>
-        <Header onClick={this.toggle} is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}>
+        <Header
+          onClick={this.toggle}
+          hasGroups={hasGroups}
+          is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}
+        >
           Groups
+          <BetaBadge>BETA</BetaBadge>
         </Header>
 
         {is_my_groups_dropdown_visible &&
           <div>
             {groups.length === 0 &&
-              <Text f={1} my="1rem" px="1rem">
-                Groups are a new way to collaborate on Are.na
+              <Text f={1} my="1rem" px="1rem" lineHeight={2}>
+                Groups are a new way to collaborate on Are.na.
+                <br />
+                <LearnMoreLink href="/getting-started-with-groups">Learn more</LearnMoreLink>
               </Text>
             }
 
@@ -119,7 +146,7 @@ class MyGroups extends Component {
               <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
             ))}
 
-            <GenericButton display="block" f={1} my={5} mx="1rem" onClick={this.openCreateGroup}>
+            <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
               Create group
             </GenericButton>
           </div>
