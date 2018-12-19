@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import currentUserService from 'react/util/currentUserService';
 
-import Count from 'react/components/UI/Count';
 import MemberAvatar from 'react/components/MemberAvatar';
 import GenericButton from 'react/components/UI/GenericButton';
 
