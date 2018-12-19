@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
-import newChannelGroupsQuery from 'react/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups';
+import assignAuthorQuery from 'react/components/ManageChannel/components/AssignAuthor/queries/assignAuthorQuery';
 
 import Pulldown from 'react/components/UI/Pulldown';
 import AuthorOption from 'react/components/AuthorOption';
 
-export default class NewChannelGroups extends Component {
+export default class AssignAuthor extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
+    selected: PropTypes.string.isRequired,
   }
 
   render() {
-    const { onChange } = this.props;
+    const { onChange, selected } = this.props;
 
     return (
-      <Query query={newChannelGroupsQuery}>
+      <Query query={assignAuthorQuery}>
         {({ data, errors, loading }) => {
           if (loading || errors) {
             return (
               <div>
                 <Pulldown
-                  value={0}
+                  value={selected}
                   options={{
-                    0: <AuthorOption member={{ name: 'Me', __typename: 'me' }} />,
+                    [selected]: <AuthorOption member={{ name: 'Me', __typename: 'USER' }} />,
                   }}
                 />
               </div>
@@ -36,12 +37,12 @@ export default class NewChannelGroups extends Component {
           return (
             <div>
               <Pulldown
-                value={0}
+                value={selected}
                 onChange={onChange}
                 options={{
-                  0: <AuthorOption member={me} />,
+                  [`USER:${me.id}`]: <AuthorOption member={me} />,
                   ...groups.reduce((memo, group) => ({
-                    ...memo, [group.id]: <AuthorOption member={group} />,
+                    ...memo, [`GROUP:${group.id}`]: <AuthorOption member={group} />,
                   }), {}),
                 }}
               />

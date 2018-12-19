@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import myGroupsFragment from 'react/components/UserDropdown/components/MyGroups/fragments/myGroups';
+
 export default gql`
   query UserDropdown {
     me {
@@ -11,4 +13,5 @@ export default gql`
       ... MyGroups
     }
   }
+  ${myGroupsFragment}
 `;
