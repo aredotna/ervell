@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import currentUserService from 'react/util/currentUserService';
 
-import Count from 'react/components/UI/Count';
 import MemberAvatar from 'react/components/MemberAvatar';
 import GenericButton from 'react/components/UI/GenericButton';
 
@@ -123,7 +122,7 @@ export default class ManagedMembers extends Component {
 
             {member.__typename === 'Group' && mode !== 'clicked' &&
               <Amount>
-                Group (<Count amount={member.counts.users + 1} label="user" />)
+                Group created by {member.user.name}
               </Amount>
             }
 
