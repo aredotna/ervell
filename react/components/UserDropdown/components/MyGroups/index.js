@@ -121,8 +121,6 @@ class MyGroups extends Component {
     const { me: { groups, is_my_groups_dropdown_visible } } = this.props;
     const hasGroups = groups.length > 0;
 
-    console.log('hasGroups', hasGroups);
-
     return (
       <div>
         <Header
