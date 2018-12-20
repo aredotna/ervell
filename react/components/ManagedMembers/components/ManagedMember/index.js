@@ -122,7 +122,7 @@ export default class ManagedMembers extends Component {
 
             {member.__typename === 'Group' && mode !== 'clicked' &&
               <Amount>
-                Group created by {member.user.name}
+                Group started by {member.user.name}
               </Amount>
             }
 

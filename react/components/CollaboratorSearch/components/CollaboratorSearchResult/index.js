@@ -54,7 +54,7 @@ export default class CollaboratorSearchResult extends Component {
 
           {result.__typename === 'Group' &&
             <Amount>
-              Group created by {result.user.name}
+              Group started by {result.user.name}
             </Amount>
           }
         </Information>
