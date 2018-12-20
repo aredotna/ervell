@@ -27,20 +27,16 @@ class NewChannelForm extends Component {
     group_id: 0,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      mode: 'resting',
-      title: '',
-      description: '',
-      visibility: 'CLOSED',
-      group_id: props.group_id,
-      authorType: props.authorType,
-      visit_channel: true,
-      errorMessage: null,
-      attributeErrors: {},
-    };
+  state = {
+    mode: 'resting',
+    title: '',
+    description: '',
+    visibility: 'CLOSED',
+    group_id: this.props.group_id,
+    authorType: this.props.authorType,
+    visit_channel: true,
+    errorMessage: null,
+    attributeErrors: {},
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
