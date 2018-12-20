@@ -69,8 +69,6 @@ export default class ProfileChannels extends PureComponent {
       id, sort, fetchPolicy, seed,
     } = this.props;
 
-    console.log('seed', seed);
-
     return (
       <Query
         query={profileChannelsQuery}
@@ -94,25 +92,24 @@ export default class ProfileChannels extends PureComponent {
             return <BlocksLoadingIndicator />;
           }
 
-          const { identity: { identifiable: { __typename, name, channels } } } = data;
+          const { identity: { identifiable: { name, channels } } } = data;
 
           return (
             <div>
-              {__typename === 'User' &&
-                <SearchInput
-                  query={q}
-                  onDebouncedQueryChange={this.resetQuery}
-                  placeholder={`Filter ${name}’s channels`}
-                  mb={6}
-                  mr={[
-                    constants.blockGutter,
-                    constants.doubleBlockGutter,
-                    constants.doubleBlockGutter,
-                  ]}
-                  ml={[constants.blockGutter, 0, 0]}
-                  borderColor="transparent"
-                />
-              }
+              <SearchInput
+                query={q}
+                onDebouncedQueryChange={this.resetQuery}
+                placeholder={`Filter ${name}’s channels`}
+                mb={6}
+                mr={[
+                  constants.blockGutter,
+                  constants.doubleBlockGutter,
+                  constants.doubleBlockGutter,
+                ]}
+                ml={[constants.blockGutter, 0, 0]}
+                borderColor="transparent"
+              />
+
 
               {loading &&
                 <BlocksLoadingIndicator />
