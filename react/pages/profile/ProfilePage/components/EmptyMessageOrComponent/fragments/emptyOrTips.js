@@ -12,5 +12,11 @@ export default gql`
         channels
       }
     }
+
+    ... on Group {
+      __typename
+      id
+      is_current_user_a_member
+    }
   }
 `;

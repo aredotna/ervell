@@ -18,18 +18,29 @@ class NewChannelForm extends Component {
   static propTypes = {
     createChannel: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    authorType: PropTypes.oneOf(['USER', 'GROUP']),
+    group_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }
 
-  state = {
-    mode: 'resting',
-    title: '',
-    description: '',
-    visibility: 'CLOSED',
-    group_id: null,
+  static defaultProps = {
     authorType: 'USER',
-    visit_channel: true,
-    errorMessage: null,
-    attributeErrors: {},
+    group_id: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: 'resting',
+      title: '',
+      description: '',
+      visibility: 'CLOSED',
+      group_id: props.group_id,
+      authorType: props.authorType,
+      visit_channel: true,
+      errorMessage: null,
+      attributeErrors: {},
+    };
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
@@ -103,6 +114,7 @@ class NewChannelForm extends Component {
       errorMessage,
       attributeErrors,
       authorType,
+      group_id,
     } = this.state;
 
     // If the state of the form is not resting or error,
@@ -184,6 +196,7 @@ class NewChannelForm extends Component {
 
                     <NewChannelGroups
                       onChange={this.handleAuthor}
+                      value={group_id}
                     />
                   </LabelledInput>
                 }
