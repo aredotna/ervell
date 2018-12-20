@@ -26,6 +26,7 @@ class NewChannelForm extends Component {
     description: '',
     visibility: 'CLOSED',
     group_id: null,
+    authorType: 'USER',
     visit_channel: true,
     errorMessage: null,
     attributeErrors: {},
@@ -52,8 +53,11 @@ class NewChannelForm extends Component {
     this.setState({ visibility });
 
   handleAuthor = (group_id) => {
-    if (group_id === 0) return;
-    this.setState({ group_id });
+    if (group_id === 0) {
+      this.setState({ authorType: 'USER' });
+      return;
+    }
+    this.setState({ group_id, authorType: 'GROUP' });
   }
 
   handleSubmit = (e) => {
@@ -98,6 +102,7 @@ class NewChannelForm extends Component {
       visit_channel,
       errorMessage,
       attributeErrors,
+      authorType,
     } = this.state;
 
     // If the state of the form is not resting or error,
@@ -206,6 +211,7 @@ class NewChannelForm extends Component {
                     <ChannelVisibilityPulldown
                       value={visibility.toUpperCase()}
                       onChange={this.handleVisibility}
+                      type={authorType}
                     />
                   </div>
                 </LabelledInput>
