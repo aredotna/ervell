@@ -50,6 +50,7 @@ class ManageChannel extends Component {
     description: null,
     visibility: null,
     owner: null,
+    authorType: 'USER',
     attributeErrors: {},
     content_flag: null,
     errorMessage: '',
@@ -86,6 +87,7 @@ class ManageChannel extends Component {
     if (newOwerIsCurrentOwner) return;
 
     this.setState({
+      authorType: type,
       mode: 'submit',
       owner: {
         type,
@@ -134,6 +136,7 @@ class ManageChannel extends Component {
       mode,
       attributeErrors,
       errorMessage,
+      authorType,
     } = this.state;
 
     if (loading) return <LoadingIndicator />;
@@ -212,6 +215,7 @@ class ManageChannel extends Component {
               <ChannelVisibilityPulldown
                 value={channel.visibility.toUpperCase()}
                 onChange={this.handleVisibility}
+                type={authorType}
               />
             </div>
           </LabelledInput>
