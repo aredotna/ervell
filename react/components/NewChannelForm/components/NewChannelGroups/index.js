@@ -10,10 +10,15 @@ import AuthorOption from 'react/components/AuthorOption';
 export default class NewChannelGroups extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }
+
+  static defaultProps = {
+    value: 0,
   }
 
   render() {
-    const { onChange } = this.props;
+    const { onChange, value } = this.props;
 
     return (
       <Query query={newChannelGroupsQuery}>
@@ -22,7 +27,7 @@ export default class NewChannelGroups extends Component {
             return (
               <div>
                 <Pulldown
-                  value={0}
+                  value={value}
                   options={{
                     0: <AuthorOption member={{ name: 'Me', __typename: 'me' }} />,
                   }}
@@ -36,7 +41,7 @@ export default class NewChannelGroups extends Component {
           return (
             <div>
               <Pulldown
-                value={0}
+                value={value}
                 onChange={onChange}
                 options={{
                   0: <AuthorOption member={me} />,
