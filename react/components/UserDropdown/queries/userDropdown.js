@@ -9,6 +9,7 @@ export default gql`
       name
       href
       is_premium
+      is_confirmed
       ... MyGroups
     }
   }
