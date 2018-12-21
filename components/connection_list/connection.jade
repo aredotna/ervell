@@ -6,4 +6,9 @@ span
 
   .Connection__author
     span by&nbsp;
-    span= channel.get('user').username
+    if channel.has('group')
+      span
+        = channel.get('group').name
+        include ../group_badge/index
+    else
+      span= channel.get('user').username
