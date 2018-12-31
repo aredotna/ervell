@@ -192,7 +192,7 @@ class NewChannelForm extends Component {
 
                     <NewChannelGroups
                       onChange={this.handleAuthor}
-                      value={group_id}
+                      value={group_id || 0}
                     />
                   </LabelledInput>
                 }
