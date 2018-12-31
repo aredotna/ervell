@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import selectableChannelFragment from 'react/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
 
+import Badge from 'react/components/UI/Badge';
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
 import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
@@ -114,7 +115,11 @@ export default class SelectableChannel extends Component {
 
   render() {
     const { isSelected } = this.state;
-    const { channel: { title, visibility, user: { name } } } = this.props;
+    const {
+      channel: {
+        title, visibility, owner: { name },
+      },
+    } = this.props;
 
     return (
       <Container onClick={this.toggleSelection} data-selected={isSelected}>
