@@ -15,6 +15,13 @@ class NewChannelForm extends Component {
   static propTypes = {
     createChannel: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
+    authorType: PropTypes.oneOf(['USER', 'GROUP']),
+    group_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }
+
+  static defaultProps = {
+    authorType: 'USER',
+    group_id: null,
   }
 
   state = {
