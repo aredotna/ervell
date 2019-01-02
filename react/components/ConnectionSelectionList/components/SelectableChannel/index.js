@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import selectableChannelFragment from 'react/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
 
-import Badge from 'react/components/UI/Badge';
 import ColoredChannelSpan from 'react/components/UI/ColoredChannelSpan';
 import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
