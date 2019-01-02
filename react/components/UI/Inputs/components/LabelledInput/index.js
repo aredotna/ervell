@@ -12,6 +12,7 @@ const Container = styled.div`
   display: flex;
   ${preset(space, { my: 7 })}
   ${preset(alignItems, { alignItems: 'flex-start' })}
+  ${space}
 
   > label:first-child {
     margin: 0;

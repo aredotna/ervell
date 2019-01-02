@@ -55,4 +55,13 @@ storiesOf('Pulldown', module)
         onChange={action('onChange')}
       />
     </Specimen>
+  ))
+  .add('ChannelVisibilityPulldown (groups)', () => (
+    <Specimen>
+      <ChannelVisibilityPulldown
+        value="PUBLIC"
+        onChange={action('onChange')}
+        type="GROUP"
+      />
+    </Specimen>
   ));

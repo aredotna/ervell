@@ -4,7 +4,21 @@ import PropTypes from 'prop-types';
 import Pulldown from 'react/components/UI/Pulldown';
 import ChannelVisibilityPulldownOption from 'react/components/ChannelVisibilityPulldown/components/ChannelVisibilityPulldownOption';
 
-const ChannelVisibilityPulldown = ({ value, onChange }) => (
+const explanations = {
+  USER: {
+    PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
+    CLOSED: 'Everyone can view the channel but only you and your collaborators can add to it.',
+    PRIVATE: 'Only you and your collaborators can view and add to the channel.',
+  },
+  GROUP: {
+    PUBLIC: 'Everyone can view the channel and anyone logged-in can add to it.',
+    CLOSED: 'Everyone can view the channel but only your group can add to it.',
+    PRIVATE: 'Only you and your group can view and add to the channel. Groups with only private channels are kept secret.',
+  },
+};
+
+
+const ChannelVisibilityPulldown = ({ value, onChange, type }) => (
   <Pulldown
     value={value}
     onChange={onChange}
@@ -13,19 +27,19 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
         label="Open"
         visibility="public"
         description="anyone can add"
-        explanation="Everyone can view the channel and anyone logged-in can add to it."
+        explanation={explanations[type].PUBLIC}
       />,
       CLOSED: <ChannelVisibilityPulldownOption
         label="Closed"
         visibility="closed"
         description="only collaborators can add"
-        explanation="Everyone can view the channel but only you and your collaborators can add to it."
+        explanation={explanations[type].CLOSED}
       />,
       PRIVATE: <ChannelVisibilityPulldownOption
         label="Private"
         visibility="private"
         description="only collaborators can view / add"
-        explanation="Only you and your collaborators can view and add to the channel."
+        explanation={explanations[type].PRIVATE}
       />,
     }}
   />
@@ -34,10 +48,12 @@ const ChannelVisibilityPulldown = ({ value, onChange }) => (
 ChannelVisibilityPulldown.propTypes = {
   value: PropTypes.oneOf(['PUBLIC', 'CLOSED', 'PRIVATE']),
   onChange: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['USER', 'GROUP']),
 };
 
 ChannelVisibilityPulldown.defaultProps = {
   value: 'PUBLIC',
+  type: 'USER',
 };
 
 export default ChannelVisibilityPulldown;
