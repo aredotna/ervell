@@ -7,6 +7,7 @@ export default gql`
     ... on User {
       __typename
       id
+      is_me
       channels_index(type: $type) {
         key
         channels {
@@ -17,6 +18,7 @@ export default gql`
     ... on Group {
       __typename
       id
+      is_current_user_a_member
       channels_index(type: $type) {
         key
         channels {
