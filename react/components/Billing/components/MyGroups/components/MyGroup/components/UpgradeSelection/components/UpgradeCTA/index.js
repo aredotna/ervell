@@ -5,7 +5,7 @@ import { propType } from 'graphql-anywhere';
 import upgradeCTAFragment from 'react/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/components/UpgradeCTA/fragments/upgradeCTA';
 import userSelectorFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
 
-import { PLAN_AMOUNTS } from 'react/components/Billing/config';
+import { PLAN_AMOUNTS, TERMS } from 'react/components/Billing/config';
 
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
@@ -16,7 +16,7 @@ import UserSelection from 'react/components/Billing/components/MyGroups/componen
 export default class UpgradeCTA extends PureComponent {
   static propTypes = {
     group: propType(upgradeCTAFragment).isRequired,
-    term: PropTypes.oneOf(['month', 'year']).isRequired,
+    term: PropTypes.oneOf(Object.keys(TERMS)).isRequired,
     upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment)).isRequired,
     onAddUser: PropTypes.func.isRequired,
     onRemoveUser: PropTypes.func.isRequired,
@@ -53,6 +53,14 @@ export default class UpgradeCTA extends PureComponent {
         <Text f={4} color="state.premium" mb={3}>
           <Count amount={upgradeableUsers.length} label="member" />{' '}
           selected = ${((PLAN_AMOUNTS[term] * upgradeableUsers.length) / 100).toFixed(2)} / {term}
+
+          {group.subscription && group.subscription.plan.term !== TERMS[term] &&
+            <span>
+              {' ('}
+              <Count amount={group.subscription.users.length} label="existing member" />{' '}
+              change from {group.subscription.plan.term})
+            </span>
+          }
         </Text>
 
         <Text f={1} color="state.premium" fontWeight="bold" underlineLinks={false}>

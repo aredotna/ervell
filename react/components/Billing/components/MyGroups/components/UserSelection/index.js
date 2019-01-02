@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
-import userSelectionFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/fragments/userSelection';
+import userSelectionFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection';
 import userSelectorFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
 
 import { PLAN_AMOUNTS } from 'react/components/Billing/config';
@@ -33,15 +33,13 @@ export default class UserSelection extends PureComponent {
       onDone,
     } = this.props;
 
-    const allUsers = [group.user, ...group.users];
-
     return (
       <TitledDialog
         title={`Upgrade members of ${group.name}`}
         onDone={onDone}
       >
         <Box>
-          {allUsers.map(user => (
+          {group.users.map(user => (
             <UserSelector
               key={user.id}
               user={user}

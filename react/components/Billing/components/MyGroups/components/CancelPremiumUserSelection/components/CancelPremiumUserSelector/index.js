@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
-import userSelectorFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
+import cancelPremiumUserSelector from 'react/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/components/CancelPremiumUserSelector/fragments/cancelPremiumUserSelector';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
@@ -25,10 +25,10 @@ const Container = styled(Box).attrs({
   }
 `;
 
-export default class UserSelector extends PureComponent {
+export default class CancelPremiumUserSelector extends PureComponent {
   static propTypes = {
-    user: propType(userSelectorFragment).isRequired,
-    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment)).isRequired,
+    user: propType(cancelPremiumUserSelector).isRequired,
+    cancellableUsers: PropTypes.arrayOf(propType(cancelPremiumUserSelector)).isRequired,
     onSelect: PropTypes.func,
     onDeselect: PropTypes.func,
   }
@@ -39,8 +39,8 @@ export default class UserSelector extends PureComponent {
   }
 
   state = {
-    isSelected: this.props.upgradeableUsers.some(upgradeableUser =>
-      upgradeableUser.id === this.props.user.id),
+    isSelected: this.props.cancellableUsers.some(cancellableUser =>
+      cancellableUser.id === this.props.user.id),
   }
 
   handleToggle = (isSelected) => {
@@ -69,23 +69,24 @@ export default class UserSelector extends PureComponent {
           </Text>
         </Box>
 
-        {user.is_premium && !user.is_canceled
+        {!user.is_premium
           ? (
             <Text f={1} color="gray.medium" fontWeight="bold">
-              Already Premium
+              Not Premium
             </Text>
           )
           : (
             <Box display="flex" alignItems="center">
-              <Text mr={5} f={1} color={isSelected ? 'state.premium' : 'gray.medium'} fontWeight="bold">
-                Upgrade
+              <Text mr={5} f={1} color={isSelected ? 'state.alert' : 'gray.medium'} fontWeight="bold">
+                {user.is_canceled ? 'Canceled' : 'Cancel'}
               </Text>
 
               <ToggleSwitch
-                activeColor="state.premium"
+                activeColor="state.alert"
                 inactiveColor="gray.semiBold"
                 onToggle={this.handleToggle}
                 value={isSelected}
+                disabled={user.is_canceled || !user.can.cancel_premium}
               />
             </Box>
           )

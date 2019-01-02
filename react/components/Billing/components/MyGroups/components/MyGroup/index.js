@@ -1,26 +1,55 @@
 import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
 
+import mapErrors from 'react/util/mapErrors';
+
+import myGroupCheckoutFragment from 'react/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/fragments/myGroupCheckout';
+import groupFragment from 'react/components/Billing/components/MyGroups/components/MyGroup/fragments/myGroup';
+
 import Box from 'react/components/UI/Box';
-import Pre from 'react/components/UI/Pre';
+import Alert from 'react/components/UI/Alert';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import PremiumAlert from 'react/components/Billing/components/MyGroups/components/PremiumAlert';
 import MyGroupHeader from 'react/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader';
 import UpgradeSelection from 'react/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection';
-
-import groupFragment from 'react/components/Billing/components/MyGroups/components/MyGroup/fragments/myGroup';
+import MyGroupCheckout from 'react/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout';
 
 export default class MyGroup extends PureComponent {
   static propTypes = {
+    me: propType(myGroupCheckoutFragment).isRequired,
     group: propType(groupFragment).isRequired,
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const upgradeableUsers = [...nextProps.group.users].filter(user => user.is_upgradeable);
+    const upgradeableUsersKey = upgradeableUsers.map(({ id }) => id).join(':');
+
+    // Reset the upgradeable users if any of their upgradeable status changes
+    if (prevState.upgradeableUsersKey !== upgradeableUsersKey) {
+      return { upgradeableUsers, upgradeableUsersKey };
+    }
+
+    return null;
+  }
+
   state = {
+    mode: 'resting',
+    errorMessage: null,
     selectedPlan: 'basic',
-    // Starts out with all the users that aren't premium
-    upgradeableUsers: [
-      this.props.group.user,
-      ...this.props.group.users,
-    ].filter(user => !user.is_premium),
+    // eslint-disable-next-line react/no-unused-state
+    upgradeableUsersKey: null,
+    upgradeableUsers: [],
+  }
+
+  setMode = mode => () => {
+    this.setState({ mode });
+  }
+
+  handleErrors = (err) => {
+    this.setState({
+      mode: 'error',
+      ...mapErrors(err),
+    });
   }
 
   selectPlan = (selectedPlan) => {
@@ -45,37 +74,59 @@ export default class MyGroup extends PureComponent {
   }
 
   render() {
-    const { upgradeableUsers, selectedPlan } = this.state;
-    const { group, ...rest } = this.props;
+    const {
+      mode,
+      errorMessage,
+      upgradeableUsers,
+      selectedPlan,
+    } = this.state;
+    const { me, group, ...rest } = this.props;
 
     return (
       <Box {...rest}>
         <MyGroupHeader group={group} mb={7} />
 
-        {group.is_premium
+        {mode === 'subscribed' &&
+          <Alert my={6} bg="state.premium" color="white" isCloseable={false}>
+            Subscribed! You’re all set!
+          </Alert>
+        }
+
+        {mode === 'error' &&
+          <ErrorAlert my={6} isReloadable={false}>
+            {errorMessage}
+          </ErrorAlert>
+        }
+
+        {group.is_upgradeable
           ? (
+            <div>
+              <UpgradeSelection
+                key={selectedPlan}
+                group={group}
+                selectedPlan={selectedPlan}
+                upgradeableUsers={upgradeableUsers}
+                onSelect={this.selectPlan}
+                onAddUser={this.addUser}
+                onRemoveUser={this.removeUser}
+              />
+
+              <MyGroupCheckout
+                me={me}
+                group={group}
+                selectedPlan={selectedPlan}
+                upgradeableUsers={upgradeableUsers}
+                onSubscribed={this.setMode('subscribed')}
+                onError={this.handleErrors}
+              />
+            </div>
+          )
+          : (
             <PremiumAlert>
               Everyone in your group has Premium ;-)
             </PremiumAlert>
           )
-          : (
-            <UpgradeSelection
-              key={selectedPlan}
-              group={group}
-              selectedPlan={selectedPlan}
-              upgradeableUsers={upgradeableUsers}
-              onSelect={this.selectPlan}
-              onAddUser={this.addUser}
-              onRemoveUser={this.removeUser}
-            />
-          )
         }
-
-        <Box mt={8} p={6} bg="gray.hint" style={{ overflowX: 'auto' }}>
-          <Pre f={1}>
-            {JSON.stringify(this.state, null, 2)}
-          </Pre>
-        </Box>
       </Box>
     );
   }

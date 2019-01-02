@@ -1,10 +1,5 @@
-import sharify from 'sharify';
 import React, { PureComponent } from 'react';
 import { Query } from 'react-apollo';
-import {
-  StripeProvider,
-  Elements,
-} from 'react-stripe-elements';
 
 import billingQuery from 'react/components/Billing/queries/billing';
 
@@ -12,10 +7,10 @@ import Box from 'react/components/UI/Box';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import HorizontalRule from 'react/components/UI/HorizontalRule';
+import StripeContext from 'react/components/StripeContext';
+import MyHeader from 'react/components/Billing/components/MyHeader';
 import BillingForm from 'react/components/Billing/components/BillingForm';
 import MyGroups from 'react/components/Billing/components/MyGroups';
-
-const { data: { STRIPE_PUBLISHABLE_KEY } } = sharify;
 
 export default class Billing extends PureComponent {
   render() {
@@ -39,13 +34,13 @@ export default class Billing extends PureComponent {
 
             return (
               <div>
-                <StripeProvider apiKey={STRIPE_PUBLISHABLE_KEY}>
-                  <Elements>
-                    <BillingForm me={me} />
-                  </Elements>
-                </StripeProvider>
+                <MyHeader me={me} mb={7} />
 
-                <HorizontalRule />
+                <StripeContext>
+                  <BillingForm me={me} />
+                </StripeContext>
+
+                <HorizontalRule my={10} height="2px" color="gray.light" />
 
                 <MyGroups me={me} />
               </div>
