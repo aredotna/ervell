@@ -5,7 +5,7 @@ import Alert from 'react/components/UI/Alert';
 import Box from 'react/components/UI/Box';
 
 const ErrorAlert = ({ children, isReloadable, ...rest }) => (
-  <Alert mb={6} bg="state.alert" color="white" isCloseable={false} {...rest}>
+  <Alert mb={6} bg="state.alert" color="white" border="none" isCloseable={false} {...rest}>
     <Box display="flex" justifyContent="space-between">
       {children}
 
