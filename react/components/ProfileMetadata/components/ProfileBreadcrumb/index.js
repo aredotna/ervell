@@ -31,7 +31,7 @@ class ProfileBreadcrumb extends Component {
 
           {(showBadge && identifiable.__typename === 'Group') &&
             <Badge f={0} ml={4} color="gray.medium" icon={{ private: 'Lock' }[identifiable.visibility]}>
-              Groups
+              Group
             </Badge>
           }
 

@@ -19,10 +19,12 @@ const LoadingContainer = styled(CenteringBox)`
 export default class Feed extends PureComponent {
   static propTypes = {
     onCompleted: PropTypes.func,
+    type: PropTypes.string,
   }
 
   static defaultProps = {
     onCompleted: () => {},
+    type: 'User',
   }
 
   state = {
@@ -32,11 +34,11 @@ export default class Feed extends PureComponent {
   }
 
   render() {
-    const { onCompleted } = this.props;
+    const { onCompleted, type } = this.props;
     const { limit, hasMore, offset } = this.state;
 
     return (
-      <Query query={feedQuery} variables={{ limit }} onCompleted={onCompleted}>
+      <Query query={feedQuery} variables={{ limit, type }} onCompleted={onCompleted}>
         {({
           loading, error, data, fetchMore,
         }) => {

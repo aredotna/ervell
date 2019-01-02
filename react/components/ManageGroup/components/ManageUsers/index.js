@@ -95,30 +95,28 @@ class ManageUsers extends Component {
     const { group: { name, owner, memberships } } = this.props;
 
     return (
-      <Box my={6}>
-        <div>
-          <CollaboratorSearch
-            types={['USER']}
-            onAdd={this.handleAddUser}
-            onInvite={this.handleInviteUser}
-          />
+      <div>
+        <CollaboratorSearch
+          types={['USER']}
+          onAdd={this.handleAddUser}
+          onInvite={this.handleInviteUser}
+        />
 
-          <Box my={6}>
-            <ManagedMembers
-              owner={owner}
-              memberships={memberships}
-              onRemove={this.handleRemoveUser}
-              confirmationWarning="Are you sure?"
-              confirmationSelfWarning={`
-                Removing yourself from ${name} means you will
-                lose access to all channels ${name} is collaborating on.
-                There is no way to undo this action, and only the group’s
-                creator can re-add you.
-              `}
-            />
-          </Box>
-        </div>
-      </Box>
+        <Box my={6}>
+          <ManagedMembers
+            owner={owner}
+            memberships={memberships}
+            onRemove={this.handleRemoveUser}
+            confirmationWarning="Are you sure?"
+            confirmationSelfWarning={`
+              Removing yourself from ${name} means you will
+              lose access to all channels ${name} is collaborating on.
+              There is no way to undo this action, and only the group’s
+              creator can re-add you.
+            `}
+          />
+        </Box>
+      </div>
     );
   }
 }

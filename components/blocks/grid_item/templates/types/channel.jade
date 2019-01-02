@@ -6,7 +6,12 @@ block content
       h2=block.smartTruncate(block.get('title'), 50)
       .grid__block__channel__stats
         ul.grid__block__channel__stats__list
-          li by #{block.get('user').username}
+          if block.has('group')
+            li
+              | by #{block.get('group').name}
+              include ../../../../group_badge/index
+          else
+            li by #{block.get('user').username}
           li #{block.get('length')} blocks &bull; #{block.updatedAtAgo()}
 
 block overlay
