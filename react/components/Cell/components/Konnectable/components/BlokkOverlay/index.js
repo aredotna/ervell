@@ -79,9 +79,9 @@ class BlokkOverlay extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const { konnectable: { id, source } } = this.props;
+    const { konnectable: { id, source, __typename } } = this.props;
 
-    const sourceUrl = source && source.url;
+    const sourceUrl = (source && __typename !== 'Image' && source.url);
 
     return (
       <Container>
