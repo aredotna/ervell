@@ -28,5 +28,10 @@ export default gql`
       id
       body(truncate: 100)
     }
+
+    ... on Group {
+      id
+      label: name
+    }
   }
 `;

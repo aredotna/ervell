@@ -6,10 +6,16 @@ export default gql`
     id
     title
     visibility
-    user {
+    owner {
       __typename
-      id
-      name
+      ... on Group {
+        id
+        name
+      }
+      ... on User {
+        id
+        name
+      }
     }
   }
 `;

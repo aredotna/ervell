@@ -114,7 +114,11 @@ export default class SelectableChannel extends Component {
 
   render() {
     const { isSelected } = this.state;
-    const { channel: { title, visibility, user: { name } } } = this.props;
+    const {
+      channel: {
+        title, visibility, owner: { name },
+      },
+    } = this.props;
 
     return (
       <Container onClick={this.toggleSelection} data-selected={isSelected}>
