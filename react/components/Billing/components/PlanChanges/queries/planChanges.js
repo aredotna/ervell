@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query PlanChanges($plan_id: String, $coupon_code: String) {
+  query PlanChanges($plan_id: SupportedPlanEnum, $coupon_code: String) {
     me {
       __typename
       id
