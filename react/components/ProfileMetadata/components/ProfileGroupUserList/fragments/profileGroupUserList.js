@@ -14,6 +14,10 @@ export default gql`
         label: name
         href
       }
+
+      can {
+        manage_users
+      }
     }
   }
 `;
