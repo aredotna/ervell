@@ -25,6 +25,8 @@ class ManageGroup extends Component {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onClose: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func,
+    onError: PropTypes.func,
     updateGroup: PropTypes.func.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
@@ -34,6 +36,8 @@ class ManageGroup extends Component {
 
   static defaultProps = {
     channel_id: null,
+    onSuccess: () => {},
+    onError: () => {},
   }
 
   state = {
@@ -62,7 +66,13 @@ class ManageGroup extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { id, updateGroup, onClose } = this.props;
+    const {
+      id,
+      updateGroup,
+      onClose,
+      onSuccess,
+      onError,
+    } = this.props;
     const { mode, name, description } = this.state;
 
     const variables = compactObject({ id, name, description });
@@ -75,15 +85,11 @@ class ManageGroup extends Component {
 
     return updateGroup({ variables })
       .then((res) => {
-        const { data: { update_group: { group: { href } } } } = res;
-
-        // TODO: This needs to not happen / be configurable
-        // Slug may have changed so redirect
-        window.location = href;
-
-        return onClose(res);
+        onSuccess(res);
+        return onClose();
       })
       .catch((err) => {
+        onError(err);
         this.setState({
           mode: 'error',
           ...mapErrors(err),

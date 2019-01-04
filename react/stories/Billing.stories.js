@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import Specimen from 'react/stories/__components__/Specimen';
 
-import userSelectionFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/fragments/userSelection';
+import userSelectionFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection';
 
 import Billing from 'react/components/Billing';
 import PrivateBlocksMeter from 'react/components/PrivateBlocksMeter';

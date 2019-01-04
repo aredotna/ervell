@@ -69,16 +69,20 @@ export default class UserSelector extends PureComponent {
           </Text>
         </Box>
 
-        {user.is_premium
+        {user.is_premium && !user.is_canceled
           ? (
-            <Text f={1} color="gray.medium" fontWeight="bold">
-              Already Premium
+            <Text
+              f={1}
+              color={{ true: 'state.premium', false: 'gray.medium' }[user.can.cancel_premium]}
+              fontWeight="bold"
+            >
+              Already Premium {!user.can.cancel_premium && '(Managed separately)'}
             </Text>
           )
           : (
             <Box display="flex" alignItems="center">
               <Text mr={5} f={1} color={isSelected ? 'state.premium' : 'gray.medium'} fontWeight="bold">
-                Upgrade
+                {isSelected ? 'Upgrade' : 'Don’t upgrade'}
               </Text>
 
               <ToggleSwitch

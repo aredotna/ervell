@@ -50,6 +50,9 @@ export default class PlanSelection extends PureComponent {
   render() {
     const { onSelect, me, me: { customer } } = this.props;
 
+    // TODO: Extract into actual can field
+    const canManagePlan = customer.is_canceled || customer.is_lifetime || customer.is_beneficiary;
+
     return (
       <RadioOptions value={customer.plan.id} onSelect={onSelect}>
         {({ selectedValue, ...rest }) => (
@@ -57,7 +60,7 @@ export default class PlanSelection extends PureComponent {
             <RadioOptions.Option
               selectedValue={selectedValue}
               value="basic"
-              disabled={customer.is_canceled || customer.is_lifetime}
+              disabled={canManagePlan}
               {...rest}
             >
               {({ selected }) => (
@@ -83,7 +86,7 @@ export default class PlanSelection extends PureComponent {
             <RadioOptions.Option
               selectedValue={selectedValue}
               value="yearly"
-              disabled={customer.is_canceled || customer.is_lifetime}
+              disabled={canManagePlan}
               {...rest}
             >
               {({ selected }) => (
@@ -110,7 +113,7 @@ export default class PlanSelection extends PureComponent {
             <RadioOptions.Option
               selectedValue={selectedValue}
               value="monthly"
-              disabled={customer.is_canceled || customer.is_lifetime}
+              disabled={canManagePlan}
               {...rest}
             >
               {({ selected }) => (
@@ -134,7 +137,7 @@ export default class PlanSelection extends PureComponent {
               <RadioOptions.Option
                 selectedValue={selectedValue}
                 value="lifetime"
-                disabled={customer.is_canceled || customer.is_lifetime}
+                disabled
                 {...rest}
               >
                 {({ selected }) => (

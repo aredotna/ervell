@@ -29,7 +29,7 @@ export default class TitledDialog extends Component {
     children: PropTypes.node.isRequired,
     onDone: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    label: PropTypes.string,
+    label: PropTypes.node,
   }
 
   static defaultProps = {

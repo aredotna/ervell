@@ -6,14 +6,16 @@ import { compose, graphql } from 'react-apollo';
 
 import mapErrors from 'react/util/mapErrors';
 
+import billingQuery from 'react/components/Billing/queries/billing';
+
 import subscribeToPremiumMutation from 'react/components/Billing/components/BillingForm/mutations/subscribeToPremium';
 import cancelPremiumSubscriptionMutation from 'react/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription';
-import addCreditCardMutation from 'react/components/Billing/components/BillingForm/mutations/addCreditCard';
-import changeDefaultCreditCardMutation from 'react/components/Billing/components/BillingForm/mutations/changeDefaultCreditCard';
 import applyCouponToSubscriptionMutation from 'react/components/Billing/components/BillingForm/mutations/applyCouponToSubscription';
 
 import billingFormFragment from 'react/components/Billing/components/BillingForm/fragments/billingForm';
 
+import Box from 'react/components/UI/Box';
+import Text from 'react/components/UI/Text';
 import Alert from 'react/components/UI/Alert';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
@@ -21,15 +23,13 @@ import GenericButton from 'react/components/UI/GenericButton';
 import { LabelledInput, Label } from 'react/components/UI/Inputs';
 import PlanSelection from 'react/components/Billing/components/PlanSelection';
 import CouponCode from 'react/components/Billing/components/CouponCode';
-import MyCreditCard from 'react/components/Billing/components/MyCreditCard';
+import CreditCard from 'react/components/Billing/components/CreditCard';
 import PlanChanges from 'react/components/Billing/components/PlanChanges';
 import CancellationNotice from 'react/components/Billing/components/CancellationNotice';
 import CancelPremium from 'react/components/Billing/components/CancelPremium';
 import StatusOverlay from 'react/components/Billing/components/StatusOverlay';
 
 const OPERATIONS = {
-  ADD_NEW_CREDIT_CARD: 'ADD_NEW_CREDIT_CARD',
-  CHANGE_DEFAULT_CREDIT_CARD: 'CHANGE_DEFAULT_CREDIT_CARD',
   CHANGE_PLAN_ID: 'CHANGE_PLAN_ID',
   CANCEL_PREMIUM_SUBSCRIPTION: 'CANCEL_PREMIUM_SUBSCRIPTION',
   APPLY_COUPON_CODE: 'APPLY_COUPON_CODE',
@@ -37,13 +37,9 @@ const OPERATIONS = {
 
 class BillingForm extends PureComponent {
   static propTypes = {
-    stripe: PropTypes.shape({
-      createToken: PropTypes.func.isRequired,
-    }).isRequired,
     subscribeToPremium: PropTypes.func.isRequired,
     cancelPremiumSubscription: PropTypes.func.isRequired,
-    addCreditCard: PropTypes.func.isRequired,
-    changeDefaultCreditCard: PropTypes.func.isRequired,
+
     applyCouponToSubscription: PropTypes.func.isRequired,
     me: propType(billingFormFragment).isRequired,
   }
@@ -54,7 +50,6 @@ class BillingForm extends PureComponent {
     operations: [],
 
     plan_id: this.props.me.customer.plan.id,
-    default_credit_card_id: null,
     coupon_code: '',
   }
 
@@ -70,32 +65,6 @@ class BillingForm extends PureComponent {
     return [...set];
   }
 
-  addCreditCard = () => {
-    const { stripe, addCreditCard } = this.props;
-
-    return stripe.createToken({ type: 'card' })
-      .then(({ error, token }) => {
-        if (error) {
-          return Promise.reject(error);
-        }
-
-        return addCreditCard({
-          variables: {
-            token: token.id,
-          },
-        });
-      });
-  }
-
-  changeDefaultCreditCard = () => {
-    const { changeDefaultCreditCard } = this.props;
-    const { default_credit_card_id } = this.state;
-
-    return changeDefaultCreditCard({
-      variables: { default_credit_card_id },
-    });
-  }
-
   applyCouponToSubscription = () => {
     const { applyCouponToSubscription } = this.props;
     const { coupon_code } = this.state;
@@ -109,12 +78,18 @@ class BillingForm extends PureComponent {
     const { plan_id, coupon_code } = this.state;
     const { subscribeToPremium, me: { customer } } = this.props;
 
+    if (!customer.default_credit_card) {
+      return Promise.reject(new Error('Please add a credit card to continue'));
+    }
+
     return subscribeToPremium({
       variables: {
         coupon_code,
         plan_id: plan_id.toUpperCase(),
         token: customer.default_credit_card.id,
       },
+      refetchQueries: [{ query: billingQuery }],
+      awaitRefetchQueries: true,
     });
   }
 
@@ -141,19 +116,6 @@ class BillingForm extends PureComponent {
     }));
   }
 
-  handleNewCard = () => {
-    this.setState(prevState => ({
-      operations: this.addOperation(prevState.operations, 'ADD_NEW_CREDIT_CARD'),
-    }));
-  }
-
-  handleChangeDefaultCreditCard = (defaultCreditCardId) => {
-    this.setState(prevState => ({
-      default_credit_card_id: defaultCreditCardId,
-      operations: this.addOperation(prevState.operations, 'CHANGE_DEFAULT_CREDIT_CARD'),
-    }));
-  }
-
   handleCouponCode = (coupon_code) => {
     this.setState(prevState => ({
       coupon_code,
@@ -164,12 +126,17 @@ class BillingForm extends PureComponent {
   handleReenable = (e) => {
     const { me: { customer } } = this.props;
 
-    this.setState(prevState => ({
+    if (customer.is_beneficiary) {
+      return this.setState({
+        mode: 'error',
+        errorMessage: 'Contact your group administrator',
+      });
+    }
+
+    return this.setState(prevState => ({
       plan_id: customer.plan.id,
       operations: this.addOperation(prevState.operations, 'CHANGE_PLAN_ID'),
-    }), () => {
-      this.handleSubmit(e);
-    });
+    }), () => this.handleSubmit(e));
   }
 
   handleCancelPremium = (e) => {
@@ -200,9 +167,6 @@ class BillingForm extends PureComponent {
     }
 
     // Otherwise we are subscribing.
-    // Add a card if one doesn't yet exist
-    const waitForCardCreation = this.doWeNeedTo('ADD_NEW_CREDIT_CARD') ? this.addCreditCard() : Promise.resolve();
-    const waitForDefaultChange = this.doWeNeedTo('CHANGE_DEFAULT_CREDIT_CARD') ? this.changeDefaultCreditCard() : Promise.resolve();
     const waitForCouponCode = (
       this.doWeNeedTo('APPLY_COUPON_CODE') &&
       // APPLY_COUPON_CODE is inclusive with swtiching plans so ignore this
@@ -210,8 +174,7 @@ class BillingForm extends PureComponent {
       !this.doWeNeedTo('CHANGE_PLAN_ID')
     ) ? this.applyCouponToSubscription() : Promise.resolve();
 
-    // These things have to happen first to update the state of the customer
-    return Promise.all([waitForCardCreation, waitForDefaultChange, waitForCouponCode])
+    return waitForCouponCode
       .then(() => {
         // Now we can change the plan id if we need to
         if (this.doWeNeedTo('CHANGE_PLAN_ID')) {
@@ -253,10 +216,10 @@ class BillingForm extends PureComponent {
     const fromPlanToPlan = `${customer.plan.id}:${plan_id}`;
 
     return (
-      <div>
+      <Box>
         {mode === 'processing' &&
           <StatusOverlay>
-            <LoadingIndicator />
+            <LoadingIndicator f={9} />
           </StatusOverlay>
         }
 
@@ -293,7 +256,32 @@ class BillingForm extends PureComponent {
             onSelect={this.handlePlan}
           />
 
-          {plan_id !== 'basic' && !customer.is_lifetime &&
+          {customer.is_beneficiary &&
+            <LabelledInput>
+              <Label>
+                Billed to
+              </Label>
+
+              <div>
+                <Box bg="gray.hint" p={6} mb={6} borderRadius="0.25em">
+                  <Text>
+                    {customer.patron.name} ({customer.patron.hidden_email})
+                  </Text>
+                </Box>
+
+                <Text f={1} mx={6}>
+                  {customer.patron.name} is upgrading you to {customer.plan.term} Premium
+                  <br />
+                  {customer.is_canceled
+                    ? `Subscription ends on ${customer.current_period_end_at}`
+                    : `Automatically renews on ${customer.current_period_end_at}`
+                  }
+                </Text>
+              </div>
+            </LabelledInput>
+          }
+
+          {plan_id !== 'basic' && !customer.is_lifetime && !customer.is_beneficiary &&
             <div>
               <LabelledInput>
                 <Label>
@@ -303,15 +291,7 @@ class BillingForm extends PureComponent {
                   }
                 </Label>
 
-                <MyCreditCard
-                  key={
-                    customer.credit_cards && customer.credit_cards.length +
-                      customer.default_credit_card && customer.default_credit_card.id
-                  }
-                  customer={customer}
-                  onNewCreditCardReady={this.handleNewCard}
-                  onChangeDefaultCreditCard={this.handleChangeDefaultCreditCard}
-                />
+                <CreditCard customer={customer} />
               </LabelledInput>
 
               {!customer.is_canceled &&
@@ -333,7 +313,7 @@ class BillingForm extends PureComponent {
                   <Label />
 
                   <PlanChanges
-                    customer={customer}
+                    entity={customer}
                     plan_id={plan_id}
                     coupon_code={coupon_code}
                   />
@@ -342,12 +322,18 @@ class BillingForm extends PureComponent {
             </div>
           }
 
-          {(!customer.is_canceled && !customer.is_lifetime && fromPlanToPlan !== 'basic:basic') &&
+          {(!customer.is_canceled && !customer.is_lifetime && !customer.is_beneficiary && fromPlanToPlan !== 'basic:basic') &&
             <LabelledInput>
               <Label />
 
               <div>
-                <GenericButton onClick={this.handleSubmit} disabled={operations.length === 0}>
+                <GenericButton
+                  onClick={this.handleSubmit}
+                  disabled={(
+                    (!customer.default_credit_card) ||
+                    (operations.length === 0)
+                  )}
+                >
 
                   {{
                     'basic:monthly': 'Activate',
@@ -366,7 +352,7 @@ class BillingForm extends PureComponent {
             </LabelledInput>
           }
         </form>
-      </div>
+      </Box>
     );
   }
 }
@@ -374,7 +360,5 @@ class BillingForm extends PureComponent {
 export default injectStripe(compose(
   graphql(subscribeToPremiumMutation, { name: 'subscribeToPremium' }),
   graphql(cancelPremiumSubscriptionMutation, { name: 'cancelPremiumSubscription' }),
-  graphql(addCreditCardMutation, { name: 'addCreditCard' }),
-  graphql(changeDefaultCreditCardMutation, { name: 'changeDefaultCreditCard' }),
   graphql(applyCouponToSubscriptionMutation, { name: 'applyCouponToSubscription' }),
 )(BillingForm));
