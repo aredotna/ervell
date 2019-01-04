@@ -22,7 +22,7 @@ export default class PlanChanges extends PureComponent {
     const { plan_id, coupon_code } = this.props;
 
     return (
-      <Query query={planChangesQuery} variables={{ plan_id, coupon_code }} fetchPolicy="network-only">
+      <Query query={planChangesQuery} variables={{ plan_id: plan_id.toUpperCase(), coupon_code }} fetchPolicy="network-only">
         {({ loading, error, data }) => {
           if (loading) {
             return <LoadingIndicator f={2} frames={['$', '$$', '$$$']} justifyContent="start" />;
