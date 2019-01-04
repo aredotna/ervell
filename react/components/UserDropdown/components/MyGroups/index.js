@@ -20,7 +20,6 @@ const Header = styled(Link)`
   user-select: none;
 
   // Left-facing Caret
-  &:before,
   &:after {
     display: block;
     content: '';
@@ -30,32 +29,19 @@ const Header = styled(Link)`
     width: 0;
     height: 0;
     transform: translateY(-50%);
-    border-top: 0.5em solid transparent;
-    border-right: 0.5em solid ${x => x.theme.colors.gray.base};
-    border-bottom: 0.5em solid transparent;
-    border-left: 0.5em solid transparent;
+    border-top: 0.25em solid transparent;
+    border-left: 0.25em solid transparent;
+    border-bottom: 0.25em solid transparent;
+    border-right: 0.5em solid ${props => props.theme.colors.gray.regular};
     pointer-events: none;
   }
 
-  &:after {
-    border-right-color: white;
-    margin-right: -1px;
-  }
-
-  ${props => props.is_my_groups_dropdown_visible && `
-    // Down-facing Caret
-    &:before,
+  ${props => !props.is_my_groups_dropdown_hidden && `
     &:after {
-      border-top: 0.5em solid ${props.theme.colors.gray.base};
-      border-right: 0.5em solid transparent;
+      border-top: 0.5em solid ${props.theme.colors.gray.regular};
+      border-right: 0.25em solid transparent;
       border-bottom: 0;
-      border-left: 0.5em solid transparent;
-    }
-
-    &:after {
-      border-top-color: white;
-      margin-top: -1px;
-      margin-right: 0;
+      border-left: 0.25em solid transparent;
     }
   `}
 `;
@@ -70,12 +56,12 @@ class MyGroups extends Component {
     e.preventDefault();
 
     const { toggleMyGroupsDropdownVisibility, me } = this.props;
-    const value = !me.is_my_groups_dropdown_visible;
+    const value = !me.is_my_groups_dropdown_hidden;
 
     return toggleMyGroupsDropdownVisibility({
       variables: {
         flags: [{
-          name: 'is_my_groups_dropdown_visible', value,
+          name: 'is_my_groups_dropdown_hidden', value,
         }],
       },
       optimisticResponse: {
@@ -84,7 +70,7 @@ class MyGroups extends Component {
           __typename: 'SetMeFlagsPayload',
           me: {
             ...me,
-            is_my_groups_dropdown_visible: value,
+            is_my_groups_dropdown_hidden: value,
           },
         },
       },
@@ -99,15 +85,20 @@ class MyGroups extends Component {
   }
 
   render() {
-    const { me: { groups, is_my_groups_dropdown_visible } } = this.props;
+    const { me: { groups, is_my_groups_dropdown_hidden } } = this.props;
+    const hasGroups = groups.length > 0;
 
     return (
       <div>
-        <Header onClick={this.toggle} is_my_groups_dropdown_visible={is_my_groups_dropdown_visible}>
+        <Header
+          onClick={this.toggle}
+          hasGroups={hasGroups}
+          is_my_groups_dropdown_hidden={is_my_groups_dropdown_hidden}
+        >
           Groups
         </Header>
 
-        {is_my_groups_dropdown_visible &&
+        {!is_my_groups_dropdown_hidden &&
           <div>
             {groups.length === 0 &&
               <Text f={1} my="1rem" px="1rem">
