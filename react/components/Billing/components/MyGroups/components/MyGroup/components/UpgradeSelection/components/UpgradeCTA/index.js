@@ -48,11 +48,15 @@ export default class UpgradeCTA extends PureComponent {
 
     const { mode } = this.state;
 
+    const amount = upgradeableUsers.length +
+      ((group.subscription && group.subscription.users.length) || 0);
+
     return (
       <PremiumAlert {...rest}>
         <Text f={4} color="state.premium" mb={3}>
-          <Count amount={upgradeableUsers.length} label="member" />{' '}
-          selected = ${((PLAN_AMOUNTS[term] * upgradeableUsers.length) / 100).toFixed(2)} / {term}
+          {amount} out of{' '}
+          <Count amount={group.users.length} label="member" />{' '}
+          selected = ${((PLAN_AMOUNTS[term] * amount) / 100).toFixed(2)} / {term}
 
           {group.subscription && group.subscription.plan.term !== TERMS[term] &&
             <span>
@@ -65,7 +69,7 @@ export default class UpgradeCTA extends PureComponent {
 
         <Text f={1} color="state.premium" fontWeight="bold" underlineLinks={false}>
           <a href="#" role="button" tabIndex={0} onClick={this.openUserSelection}>
-            Change upgraded members
+            Change selected members
           </a>
         </Text>
 

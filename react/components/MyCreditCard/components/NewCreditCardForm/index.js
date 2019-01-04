@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -13,23 +12,20 @@ const CardExpiry = StripeInput(CardExpiryElement);
 const CardCVC = StripeInput(CardCVCElement);
 
 export default class NewCreditCardForm extends PureComponent {
-  static propTypes = {
-    onReady: PropTypes.func,
-  }
-
-  static defaultProps = {
-    onReady: () => {},
-  }
+  focusInput = () =>
+    (this.cardNumber &&
+      this.cardNumber._element &&
+        this.cardNumber._element.focus());
 
   render() {
-    const { onReady, ...rest } = this.props;
-
     return (
-      <div {...rest}>
+      <div {...this.props}>
         <CardNumber
           mb={4}
-          onReady={onReady}
-          innerRef={el => el && el._element && el._element.focus()}
+          onReady={this.focusInput}
+          innerRef={(el) => {
+            this.cardNumber = el;
+          }}
         />
 
         <CardExpiry mb={4} />

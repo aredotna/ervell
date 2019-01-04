@@ -11,6 +11,7 @@ import TitledDialog from 'react/components/UI/TitledDialog';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
+import GroupOwner from 'react/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner';
 import UserSelector from 'react/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector';
 
 export default class UserSelection extends PureComponent {
@@ -33,12 +34,17 @@ export default class UserSelection extends PureComponent {
       onDone,
     } = this.props;
 
+    const amount = upgradeableUsers.length +
+      ((group.subscription && group.subscription.users.length) || 0);
+
     return (
       <TitledDialog
         title={`Upgrade members of ${group.name}`}
         onDone={onDone}
       >
         <Box>
+          <GroupOwner user={group.owner} />
+
           {group.users.map(user => (
             <UserSelector
               key={user.id}
@@ -60,9 +66,9 @@ export default class UserSelection extends PureComponent {
           textAlign="center"
         >
           <Text color="state.premium">
-            <Count amount={upgradeableUsers.length} label="member" />
+            <Count amount={amount} label="member" />
             {' '}
-            selected = ${((PLAN_AMOUNTS[term] * upgradeableUsers.length) / 100).toFixed(2)} / {term}
+            selected = ${((PLAN_AMOUNTS[term] * amount) / 100).toFixed(2)} / {term}
           </Text>
         </Box>
       </TitledDialog>

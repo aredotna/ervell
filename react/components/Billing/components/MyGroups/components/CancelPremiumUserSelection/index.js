@@ -21,6 +21,7 @@ class CancelPremiumUserSelection extends PureComponent {
   static propTypes = {
     group: propType(cancelPremiumUserSelectionFragment).isRequired,
     onClose: PropTypes.func.isRequired,
+    onCanceled: PropTypes.func.isRequired,
     cancelPremiumSubscriptions: PropTypes.func.isRequired,
   }
 
@@ -52,7 +53,7 @@ class CancelPremiumUserSelection extends PureComponent {
   cancelPremium = (e) => {
     e.preventDefault();
 
-    const { onClose, cancelPremiumSubscriptions } = this.props;
+    const { onClose, onCanceled, cancelPremiumSubscriptions } = this.props;
     const { cancellableUsers } = this.state;
 
     if (cancellableUsers.length === 0) return onClose();
@@ -66,7 +67,10 @@ class CancelPremiumUserSelection extends PureComponent {
       refetchQueries: [{ query: billingQuery }],
       awaitRefetchQueries: true,
     })
-      .then(() => onClose())
+      .then(() => {
+        onCanceled();
+        onClose();
+      })
       .catch((err) => {
         this.setState({
           mode: 'error',

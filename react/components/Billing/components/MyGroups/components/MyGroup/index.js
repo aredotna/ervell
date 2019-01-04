@@ -20,29 +20,19 @@ export default class MyGroup extends PureComponent {
     group: propType(groupFragment).isRequired,
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const upgradeableUsers = [...nextProps.group.users].filter(user => user.is_upgradeable);
-    const upgradeableUsersKey = upgradeableUsers.map(({ id }) => id).join(':');
-
-    // Reset the upgradeable users if any of their upgradeable status changes
-    if (prevState.upgradeableUsersKey !== upgradeableUsersKey) {
-      return { upgradeableUsers, upgradeableUsersKey };
-    }
-
-    return null;
-  }
-
   state = {
     mode: 'resting',
     errorMessage: null,
-    selectedPlan: 'basic',
-    // eslint-disable-next-line react/no-unused-state
-    upgradeableUsersKey: null,
-    upgradeableUsers: [],
+    selectedPlan: this.props.group.subscription
+      ? this.props.group.subscription.plan.id
+      : 'basic',
+    upgradeableUsers: this.props.group.subscription
+      ? []
+      : [...this.props.group.users].filter(user => user.is_upgradeable),
   }
 
-  setMode = mode => () => {
-    this.setState({ mode });
+  onAlertClose = () => {
+    this.setState({ mode: 'resting' });
   }
 
   handleErrors = (err) => {
@@ -50,6 +40,32 @@ export default class MyGroup extends PureComponent {
       mode: 'error',
       ...mapErrors(err),
     });
+  }
+
+  handleSubscribed = () => {
+    this.setState({
+      mode: 'subscribed',
+      upgradeableUsers: [],
+    });
+
+    setTimeout(() => {
+      this.setState({ mode: 'resting' });
+    }, 5000);
+  }
+
+  handleCanceled = () => {
+    this.setState(prevState => ({
+      mode: 'canceled',
+      selectedPlan: !this.props.group.subscription
+        // If the whole subscription winds up cancelling
+        // reset the plan to `basic`
+        ? 'basic'
+        : prevState.selectedPlan,
+    }));
+
+    setTimeout(() => {
+      this.setState({ mode: 'resting' });
+    }, 5000);
   }
 
   selectPlan = (selectedPlan) => {
@@ -84,11 +100,21 @@ export default class MyGroup extends PureComponent {
 
     return (
       <Box {...rest}>
-        <MyGroupHeader group={group} mb={7} />
+        <MyGroupHeader
+          mb={7}
+          group={group}
+          onCanceled={this.handleCanceled}
+        />
 
         {mode === 'subscribed' &&
-          <Alert my={6} bg="state.premium" color="white" isCloseable={false}>
+          <Alert my={6} bg="state.premium" color="white" onClose={this.onAlertClose}>
             Subscribed! You’re all set!
+          </Alert>
+        }
+
+        {mode === 'canceled' &&
+          <Alert my={6} bg="state.alert" color="white" border="none" onClose={this.onAlertClose}>
+            Premium subscription(s) canceled.
           </Alert>
         }
 
@@ -116,7 +142,7 @@ export default class MyGroup extends PureComponent {
                 group={group}
                 selectedPlan={selectedPlan}
                 upgradeableUsers={upgradeableUsers}
-                onSubscribed={this.setMode('subscribed')}
+                onSubscribed={this.handleSubscribed}
                 onError={this.handleErrors}
               />
             </div>

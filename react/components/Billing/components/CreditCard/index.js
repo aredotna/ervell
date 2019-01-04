@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import GenericButton from 'react/components/UI/GenericButton';
 import Modal from 'react/components/UI/Modal/Portal';
 import MyCreditCard from 'react/components/MyCreditCard';
 import DefaultCreditCard from 'react/components/MyCreditCard/components/DefaultCreditCard';
@@ -10,7 +11,9 @@ import DefaultCreditCard from 'react/components/MyCreditCard/components/DefaultC
 export default class CreditCard extends PureComponent {
   static propTypes = {
     customer: PropTypes.shape({
-      default_credit_card: PropTypes.string,
+      default_credit_card: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+      }),
     }).isRequired,
   }
 
@@ -48,11 +51,9 @@ export default class CreditCard extends PureComponent {
             </div>
           )
           : (
-            <Text pt={5} f={2} fontWeight="bold">
-              <a onClick={this.openModal('new')} role="button" tabIndex={0}>
-                + Add credit card
-              </a>
-            </Text>
+            <GenericButton pt={5} f={2} onClick={this.openModal('new')}>
+              + Add credit card
+            </GenericButton>
           )
         }
 

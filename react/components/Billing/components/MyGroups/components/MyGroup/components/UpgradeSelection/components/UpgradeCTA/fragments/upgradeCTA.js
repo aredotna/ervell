@@ -12,9 +12,10 @@ export default gql`
         id
         term
       }
-      users {
+      users(status: ACTIVE) {
         __typename
         id
+        name
       }
     }
     users {

@@ -51,6 +51,13 @@ export default class CancelPremiumUserSelector extends PureComponent {
     return isSelected ? onSelect(user) : onDeselect(user);
   }
 
+  cancellationLabel = ({ isCanceled, isCancellable, isSelected }) => {
+    if (isCanceled) return 'Canceled';
+    if (isSelected) return 'Cancel';
+    if (!isCancellable) return 'Managed separately';
+    return 'Don’t cancel';
+  }
+
   render() {
     const { user } = this.props;
     const { isSelected } = this.state;
@@ -78,16 +85,22 @@ export default class CancelPremiumUserSelector extends PureComponent {
           : (
             <Box display="flex" alignItems="center">
               <Text mr={5} f={1} color={isSelected ? 'state.alert' : 'gray.medium'} fontWeight="bold">
-                {user.is_canceled ? 'Canceled' : 'Cancel'}
+                {this.cancellationLabel({
+                  isSelected,
+                  isCanceled: user.is_canceled,
+                  isCancellable: user.can.cancel_premium,
+                })}
               </Text>
 
-              <ToggleSwitch
-                activeColor="state.alert"
-                inactiveColor="gray.semiBold"
-                onToggle={this.handleToggle}
-                value={isSelected}
-                disabled={user.is_canceled || !user.can.cancel_premium}
-              />
+              {user.can.cancel_premium &&
+                <ToggleSwitch
+                  activeColor="state.alert"
+                  inactiveColor="gray.semiBold"
+                  onToggle={this.handleToggle}
+                  value={isSelected}
+                  disabled={user.is_canceled}
+                />
+              }
             </Box>
           )
         }

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 import { ApolloConsumer } from 'react-apollo';
@@ -25,6 +26,7 @@ const Header = styled(Box)`
 export default class MyGroupHeader extends PureComponent {
   static propTypes = {
     group: propType(myGroupHeaderFragment).isRequired,
+    onCanceled: PropTypes.func.isRequired,
   }
 
   state = {
@@ -48,7 +50,7 @@ export default class MyGroupHeader extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const { group, ...rest } = this.props;
+    const { group, onCanceled, ...rest } = this.props;
 
     return (
       <Header {...rest}>
@@ -66,7 +68,7 @@ export default class MyGroupHeader extends PureComponent {
 
             {group.users.some(({ can: { cancel_premium } }) => cancel_premium) &&
               <GenericButton onClick={this.openCancelModal} color="state.alert">
-                Cancel Premium
+                Cancel upgraded members
               </GenericButton>
             }
           </ButtonGroup>
@@ -98,7 +100,11 @@ export default class MyGroupHeader extends PureComponent {
 
         {mode === 'cancel' &&
           <Modal onClose={this.closeModal}>
-            <CancelPremiumUserSelection group={group} onClose={this.closeModal} />
+            <CancelPremiumUserSelection
+              group={group}
+              onClose={this.closeModal}
+              onCanceled={onCanceled}
+            />
           </Modal>
         }
       </Header>

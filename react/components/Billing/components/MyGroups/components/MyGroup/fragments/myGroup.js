@@ -10,6 +10,14 @@ export default gql`
     id
     is_premium
     is_upgradeable
+    subscription {
+      __typename
+      id
+      plan {
+        __typename
+        id
+      }
+    }
     ...MyGroupHeader
     ...UpgradeSelection
     ...UserSelection
