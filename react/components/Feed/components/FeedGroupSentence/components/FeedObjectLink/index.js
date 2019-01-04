@@ -7,13 +7,19 @@ import Text from 'react/components/UI/Text';
 const Link = styled.a``;
 const Span = styled.span``;
 
+const Word = styled(Text)`
+  &:hover {
+    color: ${x => x.theme.colors.gray.bold}
+  }
+`;
+
 const FeedObjectLink = ({
   __typename, label, item_phrase, href, visibility, ...rest
 }) => {
   const Tag = href ? Link : Span;
   const fontWeight = href ? 'bold' : 'normal';
   return (
-    <Text
+    <Word
       display="inline"
       f={6}
       fontWeight={fontWeight}
@@ -24,7 +30,7 @@ const FeedObjectLink = ({
         href={href}
         dangerouslySetInnerHTML={{ __html: item_phrase || label }}
       />
-    </Text>
+    </Word>
   );
 };
 

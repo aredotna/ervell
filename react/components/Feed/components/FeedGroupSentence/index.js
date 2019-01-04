@@ -24,16 +24,12 @@ const Label = styled(Text).attrs({
 
 const Sentence = styled.div`
   word-wrap: break-word;
+  margin-bottom: ${x => x.theme.space[2]};
+  max-width: ${x => x.theme.space[14]};
+  margin: 0 auto;
 `;
 
-const Container = styled(Box).attrs({
-  my: 3,
-})`
-  ${x => x.isUnread && `
-    border-left: 2px solid ${x.theme.colors.state.alert};
-    padding-left: ${x.theme.space[4]};
-  `}
-`;
+const Container = styled(Box)``;
 
 export default class FeedGroupSentence extends PureComponent {
   static propTypes = {

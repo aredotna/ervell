@@ -12,7 +12,7 @@ import Identifiable from 'react/components/Cell/components/Identifiable';
 
 const ObjectGrid = styled(Grid)`
   justify-content: center;
-  margin-top: ${x => x.theme.space[6]};
+  margin-top: ${x => x.theme.space[7]};
 `;
 
 export default class FeedGroupObjects extends PureComponent {
