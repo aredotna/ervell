@@ -17,6 +17,9 @@ const Columns = styled.div`
   column-count: 2;
   column-gap: ${x => x.theme.space[9]};
   margin-bottom: ${x => x.theme.space[9]};
+  
+  // add padding to the right so columns line up with grid
+  padding-right: ${constants.doubleBlockGutter};
 
   ${constants.media.small`
     column-count: 1;
