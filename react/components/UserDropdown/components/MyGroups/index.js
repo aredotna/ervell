@@ -59,6 +59,10 @@ const BetaBadge = styled(Text).attrs({
   }
 `;
 
+const Container = styled.div`
+  margin-left: ${x => x.theme.space[3]};
+`;
+
 const LearnMoreLink = styled.a`
   font-weight: bold;
 `;
@@ -125,11 +129,13 @@ class MyGroups extends Component {
                 <LearnMoreLink href="/getting-started-with-groups">Learn more</LearnMoreLink>
               </Text>
             }
-
-            {groups.map(group => (
-              <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
-            ))}
-
+            {groups.length > 0 &&
+              <Container>
+                {groups.map(group => (
+                  <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
+                ))}
+              </Container>
+            }
             <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
               Create group
             </GenericButton>
