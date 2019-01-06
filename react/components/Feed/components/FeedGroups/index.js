@@ -29,7 +29,7 @@ const Body = styled(Box)`
 
 const FeedGroup = styled.div`
   border-top: 1px solid ${x => x.theme.colors.gray.light};
-  padding: ${x => x.theme.space[7]} 0;
+  padding: ${x => x.theme.space[8]} 0 ${x => x.theme.space[7]};
 `;
 
 const EmptyContainer = styled(Body)`

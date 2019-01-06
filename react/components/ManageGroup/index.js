@@ -32,12 +32,14 @@ class ManageGroup extends Component {
       loading: PropTypes.bool.isRequired,
       group: propType(manageGroupFragment),
     }).isRequired,
+    initialSection: PropTypes.oneOf(['name', 'members', 'delete']),
   }
 
   static defaultProps = {
     channel_id: null,
     onSuccess: () => {},
     onError: () => {},
+    initialSection: 'name',
   }
 
   state = {
@@ -101,7 +103,7 @@ class ManageGroup extends Component {
     this.props.onClose();
 
   render() {
-    const { data: { loading } } = this.props;
+    const { data: { loading }, initialSection } = this.props;
 
     if (loading) return <LoadingIndicator />;
 
@@ -120,10 +122,12 @@ class ManageGroup extends Component {
         onDone={this.handleSubmit}
       >
         <Accordion
+          key="name"
           label={{
             true: 'Edit name and description',
             false: 'Name and description',
           }[group.can.manage]}
+          mode={initialSection === 'name' ? 'open' : 'closed'}
         >
           <LabelledInput>
             <Label>
@@ -159,7 +163,11 @@ class ManageGroup extends Component {
         </Accordion>
 
         {group.can.manage_users &&
-          <Accordion label="Add/edit members" mode="closed">
+          <Accordion
+            label="Add/edit members"
+            key="members"
+            mode={initialSection === 'members' ? 'open' : 'closed'}
+          >
             <Box m={7}>
               <ManageUsers channel_id={channel_id} group={group} />
             </Box>
@@ -167,7 +175,11 @@ class ManageGroup extends Component {
         }
 
         {group.can.manage &&
-          <Accordion label="Delete group" mode="closed">
+          <Accordion
+            label="Delete group"
+            key="delete"
+            mode={initialSection === 'delete' ? 'open' : 'closed'}
+          >
             <Box m={7}>
               <DeleteGroup group={group} />
             </Box>

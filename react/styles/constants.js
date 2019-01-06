@@ -40,6 +40,7 @@ export const SPACING_SCALE = [
   '16em',
   '24em',
   '32em',
+  '64em',
 ];
 
 export const CONSTANT_VALUES = {
