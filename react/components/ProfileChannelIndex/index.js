@@ -17,6 +17,9 @@ const Columns = styled.div`
   column-count: 2;
   column-gap: ${x => x.theme.space[9]};
   margin-bottom: ${x => x.theme.space[9]};
+  
+  // add padding to the right so columns line up with grid
+  padding-right: ${constants.doubleBlockGutter};
 
   ${constants.media.small`
     column-count: 1;
@@ -45,9 +48,10 @@ export default class ProfileChannelIndex extends Component {
           if (error) return error.message;
 
           const { identity: { identifiable, identifiable: { channels_index } } } = data;
+          const isMine = identifiable.is_me || identifiable.is_current_user_a_member;
 
           if (channels_index.length === 0) {
-            return <ProfileEmptyMessage identifiable={identifiable} />;
+            return <ProfileEmptyMessage identifiable={identifiable} isMine={isMine} />;
           }
 
           return (

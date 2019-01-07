@@ -46,6 +46,27 @@ const Header = styled(Link)`
   `}
 `;
 
+const BetaBadge = styled(Text).attrs({
+  f: 0,
+})`
+  color: ${x => x.theme.colors.gray.regular} !important;
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 0.5em;
+  &:before {
+    content: '•';
+    margin-right: 0.5em;
+  }
+`;
+
+const Container = styled.div`
+  margin-left: ${x => x.theme.space[3]};
+`;
+
+const LearnMoreLink = styled.a`
+  font-weight: bold;
+`;
+
 class MyGroups extends Component {
   static propTypes = {
     me: propType(myGroupsFragment).isRequired,
@@ -96,21 +117,26 @@ class MyGroups extends Component {
           is_my_groups_dropdown_hidden={is_my_groups_dropdown_hidden}
         >
           Groups
+          <BetaBadge>BETA</BetaBadge>
         </Header>
 
         {!is_my_groups_dropdown_hidden &&
           <div>
             {groups.length === 0 &&
-              <Text f={1} my="1rem" px="1rem">
-                Groups are a new way to collaborate on Are.na
+              <Text f={1} my="1rem" px="1rem" lineHeight={2}>
+                Groups are a new way to collaborate on Are.na.
+                <br />
+                <LearnMoreLink href="/getting-started-with-groups">Learn more</LearnMoreLink>
               </Text>
             }
-
-            {groups.map(group => (
-              <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
-            ))}
-
-            <GenericButton display="block" f={1} my={5} mx="1rem" onClick={this.openCreateGroup}>
+            {groups.length > 0 &&
+              <Container>
+                {groups.map(group => (
+                  <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
+                ))}
+              </Container>
+            }
+            <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
               Create group
             </GenericButton>
           </div>

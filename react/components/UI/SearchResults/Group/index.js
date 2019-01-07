@@ -4,7 +4,7 @@ import { propType } from 'graphql-anywhere';
 
 import groupSearchResultFragment from 'react/components/UI/SearchResults/Group/fragments/groupSearchResult';
 
-import Count from 'react/components/UI/Count';
+import MemberAvatar from 'react/components/MemberAvatar';
 import { Container, Information, Name, Amount } from 'react/components/UI/SearchResults/UI';
 
 export default class GroupSearchResult extends Component {
@@ -22,11 +22,16 @@ export default class GroupSearchResult extends Component {
 
     return (
       <Container>
+        <MemberAvatar
+          member={group}
+          isLinked={false}
+          size={40}
+        />
         <Information>
           <Name>{group.name}</Name>
 
           <Amount>
-            Group (<Count amount={group.counts.users + 1} label="user" />)
+            Group started by {group.user.name}
           </Amount>
         </Information>
 

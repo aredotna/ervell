@@ -10,6 +10,7 @@ import Text from 'react/components/UI/Text';
 import Link from 'react/components/UserDropdown/components/Link';
 import Label from 'react/components/UserDropdown/components/Label';
 import SecondaryLinks from 'react/components/UserDropdown/components/SecondaryLinks';
+import MyGroups from 'react/components/UserDropdown/components/MyGroups';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 const Container = styled(BorderedBox).attrs({
@@ -69,6 +70,12 @@ export default class UserDropdown extends Component {
                     <Label>Profile</Label>
                   </Link>
                 </Section>
+
+                {me.is_confirmed &&
+                  <Section>
+                    <MyGroups me={me} />
+                  </Section>
+                }
 
                 <Section>
                   <Link pt={3} pb={4} href="/feed">

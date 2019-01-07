@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
 
+import StripeContext from 'react/components/StripeContext';
 import MyGroup from 'react/components/Billing/components/MyGroups/components/MyGroup';
 
 import myGroupsFragment from 'react/components/Billing/components/MyGroups/fragments/myGroups';
@@ -11,12 +12,18 @@ export default class MyGroups extends PureComponent {
   }
 
   render() {
-    const { me: { groups } } = this.props;
+    const { me, me: { groups } } = this.props;
 
     return (
       <div>
         {groups.map(group => (
-          <MyGroup key={group.id} group={group} mb={10} />
+          <StripeContext key={`${group.__typename}_${group.id}`}>
+            <MyGroup
+              me={me}
+              group={group}
+              mb={10}
+            />
+          </StripeContext>
         ))}
       </div>
     );

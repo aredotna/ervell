@@ -1,0 +1,13 @@
+- isGroup = result.has('group') && result.get('group').id
+- identifiable = isGroup ? result.get('group') : result.get('user')
+- identifiableName = isGroup ? identifiable.name : identifiable.username
+
+li.search__results__result: a(href="/#{identifiable.slug}/#{result.get('slug')}")
+  ul.breadcrumb
+    li
+      if isGroup
+        = identifiableName
+        include ../../../group_badge/index
+      else
+        = identifiableName
+    li(class="search__results__result--privacy-#{result.getVisibility()}"): = result.get('title')

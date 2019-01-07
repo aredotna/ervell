@@ -1,15 +1,21 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
+import { ApolloConsumer } from 'react-apollo';
+
+import billingQuery from 'react/components/Billing/queries/billing';
 
 import myGroupHeaderFragment from 'react/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader/fragments/myGroupHeader';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import ButtonGroup from 'react/components/UI/ButtonGroup';
 import GenericButton from 'react/components/UI/GenericButton';
 import MemberAvatar from 'react/components/MemberAvatar';
-import Modal from 'react/components/UI/Modal';
+import Modal from 'react/components/UI/Modal/Portal';
 import ManageGroup from 'react/components/ManageGroup';
+import CancelPremiumUserSelection from 'react/components/Billing/components/MyGroups/components/CancelPremiumUserSelection';
 
 const Header = styled(Box)`
   display: flex;
@@ -20,19 +26,31 @@ const Header = styled(Box)`
 export default class MyGroupHeader extends PureComponent {
   static propTypes = {
     group: propType(myGroupHeaderFragment).isRequired,
+    onCanceled: PropTypes.func.isRequired,
   }
 
-  openGroupModal = (e) => {
+  state = {
+    mode: 'resting',
+  }
+
+  openEditModal = (e) => {
     e.preventDefault();
+    this.setState({ mode: 'edit' });
+  }
 
-    const { group: { id } } = this.props;
+  openCancelModal = (e) => {
+    e.preventDefault();
+    this.setState({ mode: 'cancel' });
+  }
 
-    const modal = new Modal(ManageGroup, { id });
-    return modal.open();
+  closeModal = (e) => {
+    if (e) e.preventDefault();
+    this.setState({ mode: 'resting' });
   }
 
   render() {
-    const { group, ...rest } = this.props;
+    const { mode } = this.state;
+    const { group, onCanceled, ...rest } = this.props;
 
     return (
       <Header {...rest}>
@@ -43,9 +61,17 @@ export default class MyGroupHeader extends PureComponent {
             </strong>
           </Text>
 
-          <GenericButton f={1} onClick={this.openGroupModal}>
-            Edit group
-          </GenericButton>
+          <ButtonGroup f={1}>
+            <GenericButton onClick={this.openEditModal}>
+              Edit group
+            </GenericButton>
+
+            {group.users.some(({ can: { cancel_premium } }) => cancel_premium) &&
+              <GenericButton onClick={this.openCancelModal} color="state.alert">
+                Cancel upgraded members
+              </GenericButton>
+            }
+          </ButtonGroup>
         </div>
 
         <MemberAvatar
@@ -54,6 +80,33 @@ export default class MyGroupHeader extends PureComponent {
           isLinked={false}
           circle
         />
+
+        {mode === 'edit' &&
+          <Modal onClose={this.closeModal}>
+            <ApolloConsumer>
+              {client => (
+                <ManageGroup
+                  id={group.id}
+                  onClose={() => {
+                    // Assume that the member list has changed
+                    client.query({ query: billingQuery, fetchPolicy: 'network-only' });
+                    this.closeModal();
+                  }}
+                />
+              )}
+            </ApolloConsumer>
+          </Modal>
+        }
+
+        {mode === 'cancel' &&
+          <Modal onClose={this.closeModal}>
+            <CancelPremiumUserSelection
+              group={group}
+              onClose={this.closeModal}
+              onCanceled={onCanceled}
+            />
+          </Modal>
+        }
       </Header>
     );
   }

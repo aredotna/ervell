@@ -4,10 +4,19 @@ export default gql`
   fragment UpgradeCTA on Group {
     __typename
     id
-    user {
+    subscription {
       __typename
       id
-      is_premium
+      plan {
+        __typename
+        id
+        term
+      }
+      users(status: ACTIVE) {
+        __typename
+        id
+        name
+      }
     }
     users {
       __typename

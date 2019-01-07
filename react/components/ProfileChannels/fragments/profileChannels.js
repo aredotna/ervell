@@ -8,7 +8,8 @@ export default gql`
     ... on Group {
       __typename
       id
-      channels(page: $page, per: $per) {
+      name
+      channels(page: $page, per: $per, q: $q) {
         ... Channel
         blokks(per: 5) {
           ... KonnectableCell

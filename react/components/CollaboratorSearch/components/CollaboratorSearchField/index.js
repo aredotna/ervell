@@ -16,7 +16,7 @@ export default class CollaboratorSearch extends Component {
       <SearchInput
         query={query}
         onQueryChange={onChange}
-        placeholder="search users or enter an email address"
+        placeholder="Search users, groups, or enter an email address"
       />
     );
   }

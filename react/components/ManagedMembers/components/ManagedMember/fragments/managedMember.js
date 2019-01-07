@@ -15,8 +15,10 @@ export default gql`
       id
       name
       ...MemberAvatar
-      counts {
-        users
+      user {
+        __typename
+        id
+        name
       }
     }
   }
