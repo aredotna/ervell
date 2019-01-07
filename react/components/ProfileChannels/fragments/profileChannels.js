@@ -11,7 +11,7 @@ export default gql`
       name
       channels(page: $page, per: $per, q: $q) {
         ... Channel
-        blokks(per: 5) {
+        blokks(per: 5, direction: DESC) {
           ... KonnectableCell
         }
       }
