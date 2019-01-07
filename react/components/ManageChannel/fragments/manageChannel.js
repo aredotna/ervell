@@ -14,6 +14,9 @@ export default gql`
       destroy
       export
     }
+    user {
+      id
+    }
     owner {
       __typename
       ... on User {
