@@ -28,12 +28,7 @@ class CancelPremiumUserSelection extends PureComponent {
   state = {
     mode: 'resting',
     errorMessage: null,
-    // Anyone who is premium and cancellable
-    cancellableUsers: [...this.props.group.users].filter(user => (
-      user.is_premium &&
-        !user.is_canceled &&
-        user.can.cancel_premium
-    )),
+    cancellableUsers: [],
   }
 
   addUser = (user) => {
