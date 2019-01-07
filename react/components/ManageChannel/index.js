@@ -62,6 +62,8 @@ class ManageChannel extends Component {
     const isEdited = some(originalChannel, (originalValue, key) =>
       fieldName === key && originalValue !== fieldValue);
 
+    console.log('handleInput', fieldValue);
+
     this.setState({
       mode: isEdited ? 'submit' : 'resting',
       [fieldName]: fieldValue,
@@ -172,9 +174,8 @@ class ManageChannel extends Component {
               borderless
               autoFocus
               required
-              value={unescape(channel.title)}
+              defaultValue={unescape(channel.title)}
               onChange={this.handleTitle}
-              errorMessage={attributeErrors.title}
             />
           </LabelledInput>
 
