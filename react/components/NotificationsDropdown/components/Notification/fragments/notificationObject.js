@@ -32,6 +32,7 @@ export default gql`
     ... on Group {
       id
       label: name
+      href
     }
   }
 `;
