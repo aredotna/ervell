@@ -31,7 +31,13 @@ export default class ProfileEmptyMessage extends Component {
 
   openNewChannelModal = () => {
     const { identifiable } = this.props;
-    const newChannelProps = identifiable.__typename === 'Group' && { group_id: identifiable.id, authorType: 'GROUP' };
+
+    const newChannelProps = identifiable.__typename === 'Group' && {
+      group_id: identifiable.id,
+      authorType: 'GROUP',
+      visibility: 'PRIVATE',
+    };
+
     const modal = new Modal(NewChannelForm, newChannelProps);
     modal.open();
   }

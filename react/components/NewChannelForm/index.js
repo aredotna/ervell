@@ -19,19 +19,21 @@ class NewChannelForm extends Component {
     createChannel: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     authorType: PropTypes.oneOf(['USER', 'GROUP']),
+    visibility: PropTypes.oneOf(['CLOSED', 'OPEN', 'PRIVATE']),
     group_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }
 
   static defaultProps = {
     authorType: 'USER',
     group_id: null,
+    visibility: 'CLOSED',
   }
 
   state = {
     mode: 'resting',
     title: '',
     description: '',
-    visibility: 'CLOSED',
+    visibility: this.props.visibility,
     group_id: this.props.group_id,
     authorType: this.props.authorType,
     visit_channel: true,
