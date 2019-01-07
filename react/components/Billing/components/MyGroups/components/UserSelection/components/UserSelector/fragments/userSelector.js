@@ -9,6 +9,11 @@ export default gql`
     name
     hidden_email
     is_premium
+    is_canceled
+    is_upgradeable
+    can {
+      cancel_premium
+    }
     ...UserAvatar
   }
   ${userAvatarFragment}

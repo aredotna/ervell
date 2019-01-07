@@ -9,6 +9,7 @@ export default gql`
       id
       is_canceled
       is_lifetime
+      is_beneficiary
       plan {
         __typename
         id

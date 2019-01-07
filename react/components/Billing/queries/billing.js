@@ -1,14 +1,14 @@
 import gql from 'graphql-tag';
 
-import billingFormFragment from 'react/components/Billing/components/BillingForm/fragments/billingForm';
+import billingFragment from 'react/components/Billing/fragments/billing';
 
 export default gql`
   query Billing {
     me {
       __typename
       id
-      ...BillingForm
+      ...Billing
     }
   }
-  ${billingFormFragment}
+  ${billingFragment}
 `;

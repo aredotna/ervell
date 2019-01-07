@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
-import userSelectionFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/fragments/userSelection';
+import userSelectionFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection';
 import userSelectorFragment from 'react/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
 
 import { PLAN_AMOUNTS } from 'react/components/Billing/config';
@@ -11,6 +11,7 @@ import TitledDialog from 'react/components/UI/TitledDialog';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
+import GroupOwner from 'react/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner';
 import UserSelector from 'react/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector';
 
 export default class UserSelection extends PureComponent {
@@ -33,7 +34,8 @@ export default class UserSelection extends PureComponent {
       onDone,
     } = this.props;
 
-    const allUsers = [group.user, ...group.users];
+    const amount = upgradeableUsers.length +
+      ((group.subscription && group.subscription.users.length) || 0);
 
     return (
       <TitledDialog
@@ -41,7 +43,9 @@ export default class UserSelection extends PureComponent {
         onDone={onDone}
       >
         <Box>
-          {allUsers.map(user => (
+          <GroupOwner user={group.owner} />
+
+          {group.users.map(user => (
             <UserSelector
               key={user.id}
               user={user}
@@ -62,9 +66,9 @@ export default class UserSelection extends PureComponent {
           textAlign="center"
         >
           <Text color="state.premium">
-            <Count amount={upgradeableUsers.length} label="member" />
+            <Count amount={amount} label="member" />
             {' '}
-            selected = ${((PLAN_AMOUNTS[term] * upgradeableUsers.length) / 100).toFixed(2)} / {term}
+            selected = ${((PLAN_AMOUNTS[term] * amount) / 100).toFixed(2)} / {term}
           </Text>
         </Box>
       </TitledDialog>

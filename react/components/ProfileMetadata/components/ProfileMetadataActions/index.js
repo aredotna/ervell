@@ -33,7 +33,14 @@ export default class ProfileMetadataActions extends Component {
 
     const { identifiable: { id } } = this.props;
 
-    new Modal(ManageGroup, { id }).open();
+    new Modal(ManageGroup, {
+      id,
+      onSuccess: (res) => {
+        const { data: { update_group: { group: { href } } } } = res;
+        // Slug may have changed so redirect
+        window.location = href;
+      },
+    }).open();
   }
 
   render() {

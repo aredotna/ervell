@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import collaboratorSearchResultFragment from 'react/components/CollaboratorSearch/components/CollaboratorSearchResult/fragments/collaboratorSearchResult';
 
-import Count from 'react/components/UI/Count';
 import UserAvatar from 'react/components/UserAvatar';
 import CollaboratorAddButton from 'react/components/CollaboratorSearch/components/CollaboratorAddButton';
 import SearchResult from 'react/components/CollaboratorSearch/components/SearchResult';
@@ -55,7 +54,7 @@ export default class CollaboratorSearchResult extends Component {
 
           {result.__typename === 'Group' &&
             <Amount>
-              Group (<Count amount={result.counts.users + 1} label="user" />)
+              Group started by {result.user.name}
             </Amount>
           }
         </Information>

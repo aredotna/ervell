@@ -22,6 +22,14 @@ storiesOf('Alert', module)
         Something went wrong! Try again.
       </Alert>
 
+      <Alert mb={6} bg="white" color="state.alert" borderColor="state.alert" onClose={action('onClose')}>
+        This is just a warning.
+      </Alert>
+
+      <Alert mb={6} bg="state.alert" color="white" onClose={action('onClose')}>
+        Something went wrong! Try again.
+      </Alert>
+
       <Alert mb={6} bg="black" color="white" isCloseable={false}>
         Just wanted to say hey.
       </Alert>

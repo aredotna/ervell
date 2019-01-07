@@ -20,7 +20,8 @@ export default class Modal {
     document.body.appendChild(this.el);
 
     const boot = wrapWithProviders(initClientSideApolloClient());
-    const props = { onClose: this.close, ...this.props };
+    const { onClose: _onClose, ...rest } = this.props;
+    const props = { onClose: this.close, ...rest };
 
     const ModalApp = innerProps => (
       <this.ModalComponent onClose={this.close} {...this.modalProps}>
@@ -33,7 +34,11 @@ export default class Modal {
     mount(App, this.el);
   }
 
-  close = () => {
+  close = (...args) => {
+    if (this.props.onClose) {
+      this.props.onClose(...args);
+    }
+
     unmount(this.el);
     this.el.parentNode.removeChild(this.el);
   }

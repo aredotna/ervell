@@ -57,7 +57,7 @@ export default class GroupsPage extends Component {
                 Every group has a profile page where you can see all
                 your shared content in one place.
               </Description>
-              <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819612/original_7ab7904e928af857a716d08770179fd3.png?1519764799" />
+              <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3341731/large_f373ae2d20fa284496fadd43ec4a85ca.jpg?1546818129" />
               <Instructions>
                 <div>To add group members:</div>
                 <ol>
@@ -82,7 +82,7 @@ export default class GroupsPage extends Component {
                 Quickly add your whole team to new channels.
                 Keep work and personal content separate.
               </Description>
-              <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819616/original_082481d53bf6c73bd0010f53041e5341.png?1519764802" />
+              <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3341732/large_78c08110b0391a1d69d17cdd546293cd.jpg?1546818134" />
               <Instructions>
                 <div>To add group members:</div>
                 <ol>
@@ -109,7 +109,7 @@ export default class GroupsPage extends Component {
               <Description align="left" my={7}>
                 Billing is simple for professional teams. Invite members and upgrade as you go.
               </Description>
-              <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/1819616/original_082481d53bf6c73bd0010f53041e5341.png?1519764802" />
+              <WideScreenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3341733/large_aa6fa4648b9a1663d47eb416c9c3ae9f.jpg?1546818148" />
               <Instructions>
                 <div>To upgrade members:</div>
                 <ol>
@@ -145,7 +145,7 @@ export default class GroupsPage extends Component {
                 Learn more about group features, privacy
                 settings, and transferring existing channels.
               </Description>
-              <Button f={5} mt={6} py={6} href="http://help.are.na/knowledge_base/topics/whats-new-in-groups">
+              <Button f={5} mt={6} py={6} href="http://help.are.na/knowledge_base/categories/feature-updates-1">
                 Groups FAQs
               </Button>
             </CenterBox>
