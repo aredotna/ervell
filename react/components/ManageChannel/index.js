@@ -141,8 +141,11 @@ class ManageChannel extends Component {
 
     if (loading) return <LoadingIndicator />;
 
-    const { data: { channel, me: { counts } } } = this.props;
+    const { data: { channel, me, me: { counts } } } = this.props;
     const owner = `${channel.owner.__typename.toUpperCase()}:${channel.owner.id}`;
+
+    // Only the original author can change the owner;
+    const showAuthor = counts.groups > 0 && me.id === channel.user.id;
 
     return (
       <TitledDialog
@@ -172,13 +175,12 @@ class ManageChannel extends Component {
               borderless
               autoFocus
               required
-              value={unescape(channel.title)}
+              defaultValue={unescape(channel.title)}
               onChange={this.handleTitle}
-              errorMessage={attributeErrors.title}
             />
           </LabelledInput>
 
-          {counts.groups > 0 &&
+          {showAuthor &&
             <LabelledInput my={6} alignItems="start">
               <Label>
                 Author
