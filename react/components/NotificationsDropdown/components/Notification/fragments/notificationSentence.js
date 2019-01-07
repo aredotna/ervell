@@ -7,11 +7,18 @@ export default gql`
     __typename
     id
     is_read
-    user {
+    owner {
       __typename
-      id
-      label: name
-      href
+      ... on User {
+        id
+        label: name
+        href
+      }
+      ... on Group {
+        id
+        label: name
+        href
+      }
     }
     action
     item {
