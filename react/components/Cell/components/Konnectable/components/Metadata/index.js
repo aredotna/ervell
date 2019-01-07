@@ -34,7 +34,7 @@ export default class Metadata extends PureComponent {
     } = this.props;
 
     return (
-      <Box my={5} px={5}>
+      <Box pt={2} mt={6} mb={4} px={5}>
         <Text f={1} fontWeight="bold" textAlign="center" color="gray.medium">
           {mode === 'resting' &&
             <div>

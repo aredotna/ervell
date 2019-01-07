@@ -14,7 +14,6 @@ import TitledDialog from 'react/components/UI/TitledDialog';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import CollaboratorSearch from 'react/components/CollaboratorSearch';
 import PendingGroupUsers from 'react/components/CreateGroup/components/PendingGroupUsers';
-import HelpTip from 'react/components/CreateGroup/components/HelpTip';
 import { LabelledInput, Label, Input, Textarea } from 'react/components/UI/Inputs';
 
 import createGroupQuery from 'react/components/CreateGroup/queries/createGroup';
@@ -181,6 +180,10 @@ class CreateGroup extends Component {
               A group is a shared account that many people can use to collaborate on Are.na.
               You can also create a group to transfer and separate
               channels from your personal profile.
+              <br /><br />
+              Once your group is created, you can
+              add that group as a collaborator on any channel
+              you have access to.
             </Alert>
           }
 
@@ -242,8 +245,6 @@ class CreateGroup extends Component {
               }
             </div>
           </LabelledInput>
-
-          <HelpTip />
         </div>
       </TitledDialog>
     );
