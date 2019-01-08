@@ -26,7 +26,7 @@ export default class ProfileChannels extends PureComponent {
     page: 1,
     per: 3,
     hasMore: true,
-    q: null,
+    q: '',
   }
 
   resetQuery = (query) => {
