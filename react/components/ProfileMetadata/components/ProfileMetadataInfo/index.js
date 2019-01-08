@@ -16,6 +16,10 @@ const BlockLink = styled(Link)`
   display: inline-block;
 `;
 
+const NormalBlockLink = styled.a`
+  display: inline-block;
+`;
+
 const InfoLine = styled(Box).attrs({ pr: 4 })``;
 
 const Buttons = styled(Box).attrs({
@@ -57,9 +61,9 @@ class ProfileMetadataInfo extends Component {
           <Box my={6} neutralMarginsY>
             {'Group started by '}
 
-            <BlockLink to={identifiable.user.href}>
+            <NormalBlockLink href={identifiable.user.href}>
               {identifiable.user.name}
-            </BlockLink>
+            </NormalBlockLink>
           </Box>
         }
 
