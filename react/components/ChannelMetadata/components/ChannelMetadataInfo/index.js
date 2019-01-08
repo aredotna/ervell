@@ -21,8 +21,8 @@ const Buttons = styled.div`
   }
 `;
 
-const OwnerLink = styled.div`
-  margin: 1em 0 0;
+const Section = styled.div`
+  margin-bottom: 1em;
 `;
 
 export default class ChannelMetadataInfo extends Component {
@@ -36,13 +36,13 @@ export default class ChannelMetadataInfo extends Component {
     return (
       <div>
         <Expandable>
-          <div dangerouslySetInnerHTML={{ __html: channel.info || '—' }} />
+          <Section dangerouslySetInnerHTML={{ __html: channel.info || '—' }} />
         </Expandable>
 
         {channel.owner.__typename === 'Group' &&
-          <OwnerLink>
+          <Section>
             Started by <Link href={channel.user.href}>{channel.user.name}</Link>
-          </OwnerLink>
+          </Section>
         }
 
         <Buttons>
