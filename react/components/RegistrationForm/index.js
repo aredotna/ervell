@@ -109,7 +109,14 @@ class RegistrationForm extends Component {
     return mutation({ variables })
       .then(() => {
         this.setState({ mode: 'logging_in' });
-        return axios.post('/me/sign_in', { email, password });
+
+        return axios
+          .post('/me/sign_in', { email, password }, {
+            headers: {
+              // Sets `req.xhr` in Express
+              'X-Requested-With': 'XMLHttpRequest',
+            },
+          });
       })
       .then(() => {
         this.setState({ mode: 'redirecting' });

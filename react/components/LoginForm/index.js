@@ -75,7 +75,12 @@ export default class LoginForm extends Component {
     this.setState({ mode: 'submitting' });
 
     return axios
-      .post('/me/sign_in', { email, password })
+      .post('/me/sign_in', { email, password }, {
+        headers: {
+          // Sets `req.xhr` in Express
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+      })
 
       .then(() => {
         this.setState({ mode: 'redirecting' });

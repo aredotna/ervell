@@ -60,16 +60,17 @@ respond = (req, res, next) ->
     user: req.user.toJSON()
 
 error = (err, req, res, next) ->
-  console.error(err.stack)
+  if req.xhr and err.response?
+    # Propagate the error response to the client
+    res
+      .status err.response.status
+      .send err.response.data
+
+    return
 
   # Pass on to next error handler
   # if this is not an XHR request
-  next(err) unless req.xhr
-
-  # Propagate the error response to the client
-  res
-    .status err.response.status
-    .send err.response.data
+  next(err)
 
 addLocals = (req, res, next) ->
   if req.user
