@@ -38,7 +38,7 @@ class ProfileMetadataSort extends Component {
           value="RANDOM"
           to={{
             pathname,
-            search: `?sort=RANDOM&seed=${Date.now()}`,
+            search: `?sort=RANDOM&seed=${Math.floor(Math.random() * 1000) + 1}`,
           }}
           isActive={this.isSortActive('RANDOM')}
         >
