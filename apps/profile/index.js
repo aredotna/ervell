@@ -37,8 +37,6 @@ const resolve = [
   ...middlewareStack, (req, res, next) => {
     req.apollo.render(withStaticRouter(Routes))
       .then((apollo) => {
-        if (apollo.error) throw apollo.error;
-
         const identifiable = extractIdentifiable(apollo.client, req.params.id);
         const view = req.path.split('/').pop();
 
