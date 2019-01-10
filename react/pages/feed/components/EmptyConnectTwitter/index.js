@@ -6,15 +6,20 @@ import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
 import sharify from 'sharify';
 
-import Modal from 'react/components/UI/Modal';
+import Modal from 'react/components/UI/Modal/Portal';
 import Text from 'react/components/UI/Text';
 import PageContainer from 'react/components/UI/PageContainer';
-import ConnectTwitter from 'react/components/ConnectTwitter/index';
 import { GenericButton } from 'react/components/UI/GenericButton';
-import updateFlagMutation from 'react/pages/feed/components/EmptyConnectTwitter/mutations/index';
+import ConnectTwitter from 'react/components/ConnectTwitter';
 
-import EmptyFeedConnectTwitterQuery from 'react/pages/feed/components/EmptyConnectTwitter/queries/index';
-import EmptyFeedCheckFragment from 'react/pages/feed/components/EmptyConnectTwitter/fragments/index';
+import hasSeenTwitterConnectMutation from 'react/pages/feed/components/EmptyConnectTwitter/mutations/hasSeenTwitterConnect';
+
+import EmptyFeedConnectTwitterQuery from 'react/pages/feed/components/EmptyConnectTwitter/queries/emptyFeedConnectTwitter';
+
+import emptyFeedConnectTwitterFragment from 'react/pages/feed/components/EmptyConnectTwitter/fragments/emptyFeedConnectTwitter';
+
+const { data: { API_URL, APP_URL } } = sharify;
+const TWITTER_AUTHENTICATION_URL = `${API_URL.replace('/v2', '')}/auth/twitter?origin=${APP_URL}/feed/find-friends`;
 
 const ActionContainer = styled.div`
   text-align: center;
@@ -40,74 +45,74 @@ const Link = styled(SmallText)`
   display: inline-block;
 `;
 
-class EmptyConnectTwitterPage extends Component {
+class EmptyConnectTwitter extends Component {
   static propTypes = {
     data: PropTypes.shape({
-      me: propType(EmptyFeedCheckFragment),
+      me: propType(emptyFeedConnectTwitterFragment),
     }).isRequired,
-    showModal: PropTypes.bool,
-    updateFlag: PropTypes.func.isRequired,
+    hasSeenTwitterConnect: PropTypes.func.isRequired,
   }
 
-  static defaultProps = {
-    showModal: false,
+  state = {
+    mode: 'resting',
   }
 
-  updateFlagAndRefresh = (e) => {
+  componentDidMount() {
+    if (window.location.href.indexOf('showModal=true') > -1) {
+      this.setState({ mode: 'modal' });
+    }
+  }
+
+  hasSeenTwitterConnectAndRefresh = (e) => {
     e.preventDefault();
 
-    const { updateFlag } = this.props;
+    const { hasSeenTwitterConnect } = this.props;
 
-    updateFlag({
-      variables: {
-        name: 'HAS_SEEN_FEED_CONNECT_TWITTER',
-        value: true,
-      },
-    })
+    hasSeenTwitterConnect()
       .then(() => axios.get('/me/refresh'))
       .then(() => { window.location.reload(true); });
   }
 
-  openModal = () => {
-    const modal = new Modal(ConnectTwitter, { onDone: this.updateFlagAndRefresh });
-    modal.open();
+  closeModal = () => {
+    this.setState({ mode: 'resting' });
   }
 
-  handleConnectClick = () => {
-    const { data: { error } } = this.props;
-    //
-    // If an authentication is not found,
-    // we need to do the auth dance with Twitter first
-    //
-    if (error && error.graphQLErrors && error.graphQLErrors[0].extensions.code === 'NOT_FOUND') {
-      const { data: { API_URL, APP_URL } } = sharify;
+  handleConnectClick = (e) => {
+    e.preventDefault();
 
-      window.location.href = `${API_URL.replace('/v2', '')}/auth/twitter?origin=${APP_URL}/feed/find-friends`;
+    const { data: { me: { twitter_authentication } } } = this.props;
 
-      return false;
+    if (!twitter_authentication) {
+      window.location.href = TWITTER_AUTHENTICATION_URL;
+      return null;
     }
-    return this.openModal();
+
+    return this.setState({ mode: 'modal' });
   }
 
   render() {
-    const { showModal } = this.props;
-
-    if (showModal) {
-      this.openModal();
-    }
+    const { mode } = this.state;
 
     return (
       <PageContainer>
+        {mode === 'modal' &&
+          <Modal onClose={this.closeModal}>
+            <ConnectTwitter onDone={this.hasSeenTwitterConnectAndRefresh} />
+          </Modal>
+        }
+
         <Headline>
           You aren&apos;t following anyone yet.<br />
           Do you want to search your Twitter contacts to find friends on Are.na?
         </Headline>
+
         <ActionContainer>
           <GenericButton onClick={this.handleConnectClick}>
             Connect to Twitter
           </GenericButton>
+
           <SmallText>
-            No, just take me to <Link onClick={this.updateFlagAndRefresh}>my feed</Link>.
+            No, just take me to <Link onClick={this.hasSeenTwitterConnectAndRefresh}>my feed</Link>.
           </SmallText>
         </ActionContainer>
       </PageContainer>
@@ -117,5 +122,5 @@ class EmptyConnectTwitterPage extends Component {
 
 export default compose(
   graphql(EmptyFeedConnectTwitterQuery),
-  graphql(updateFlagMutation, { name: 'updateFlag' }),
-)(EmptyConnectTwitterPage);
+  graphql(hasSeenTwitterConnectMutation, { name: 'hasSeenTwitterConnect' }),
+)(EmptyConnectTwitter);

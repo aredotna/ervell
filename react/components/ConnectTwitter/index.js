@@ -5,10 +5,13 @@ import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import styled from 'styled-components';
 
-import connectTwitterQuery from 'react/components/ConnectTwitter/queries/index';
+import connectTwitterQuery from 'react/components/ConnectTwitter/queries/connectTwitter';
+
+import Text from 'react/components/UI/Text';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
+import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import TitledDialog from 'react/components/UI/TitledDialog';
-import Contact from 'react/components/ConnectTwitter/components/Contact/index';
-import Text from '../UI/Text';
+import Contact from 'react/components/ConnectTwitter/components/Contact';
 
 const Message = styled(Text).attrs({ py: 8 })`
   text-align: center;
@@ -79,15 +82,18 @@ class ConnectTwitter extends Component {
       >
         <Query
           query={connectTwitterQuery}
-          variables={{
-            per: 30,
-          }}
+          variables={{ per: 30 }}
         >
           {({
             loading, error, data, fetchMore,
           }) => {
-            if (loading) return '';
-            if (error) return (<Message>Oops, an error occurred: <br />{error.message}</Message>);
+            if (loading) {
+              return <LoadingIndicator />;
+            }
+
+            if (error) {
+              return <ErrorAlert>{error.message}</ErrorAlert>;
+            }
 
             const { me: { authenticated_service: { contacts } } } = data;
 

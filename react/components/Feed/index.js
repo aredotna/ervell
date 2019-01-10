@@ -4,9 +4,8 @@ import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import feed from 'react/components/Feed/queries/feed';
+import feedQuery from 'react/components/Feed/queries/feed';
 
-import Text from 'react/components/UI/Text';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
@@ -39,7 +38,7 @@ export default class Feed extends PureComponent {
     const { limit, hasMore, offset } = this.state;
 
     return (
-      <Query query={feed} variables={{ limit, type }} onCompleted={onCompleted}>
+      <Query query={feedQuery} variables={{ limit, type }} onCompleted={onCompleted}>
         {({
           loading, error, data, fetchMore,
         }) => {
