@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import contactFragment from 'react/components/ConnectTwitter/components/Contact/fragments/index';
+import contactFragment from 'react/components/ConnectTwitter/components/Contact/fragments/contact';
 
 export default gql`
   fragment ConnectTwitter on Me {

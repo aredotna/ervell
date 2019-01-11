@@ -1,3 +1,4 @@
+# TODO: Write JavaScript
 # React requires
 qs = require 'qs'
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
@@ -20,8 +21,7 @@ module.exports = ->
     }, $homeComponent)
 
   if ($emptyComponent = $('.js-empty-feed')).length
-    showModal = qs.parse(location.search.replace('?', ''))?.showModal
-    return mountWithApolloProvider(EmptyConnectTwitter, { showModal }, $emptyComponent)
+    return mountWithApolloProvider(EmptyConnectTwitter, null, $emptyComponent)
 
   if ($noFollowingComponent = $('.js-no-following')).length
     mountWithApolloProvider(NoFollowingMessage, { }, $noFollowingComponent)
