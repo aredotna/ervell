@@ -1,6 +1,8 @@
 import express from 'express';
 import ExploreBlocks from 'collections/explore_blocks.coffee';
 
+import getFirstStatusCode from 'react/util/getFirstStatusCode';
+
 import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
@@ -73,7 +75,7 @@ const renderFeed = (req, res, next) => {
       return res.render('feed');
     })
     .catch((err) => {
-      const STATUS_CODE = err.graphQLErrors[0].extensions.code;
+      const STATUS_CODE = getFirstStatusCode(err);
 
       if (STATUS_CODE === 'UNAUTHORIZED') {
         // This typically happens if the serialized user is "bad"
