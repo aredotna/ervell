@@ -8,9 +8,10 @@ global.Promise = require('bluebird');
 const throng = require('throng');
 const express = require('express');
 
-const { PORT } = require('./config.coffee');
+const CONFIG = require('./config.coffee');
 
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
+const PORT = process.env.PORT || CONFIG.PORT;
 
 const setup = require('./lib/setup.coffee');
 const cache = require('./lib/cache.coffee');
