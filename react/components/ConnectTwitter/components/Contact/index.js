@@ -6,7 +6,7 @@ import UserAvatar from 'react/components/UserAvatar';
 import Text from 'react/components/UI/Text';
 import FollowButton from 'react/components/FollowButton';
 
-import contactAvatarFragment from 'react/components/ConnectTwitter/components/Contact/fragments/index';
+import contactAvatarFragment from 'react/components/ConnectTwitter/components/Contact/fragments/contact';
 
 const Container = styled.div`
   display: flex;

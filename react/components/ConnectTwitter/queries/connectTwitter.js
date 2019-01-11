@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 
-import ConnectTwitterFragment from 'react/components/ConnectTwitter/fragments/index';
+import connectTwitterFragment from 'react/components/ConnectTwitter/fragments/connectTwitter';
 
 export default gql`
   query ConnectTwitterQuery($per: Int, $page: Int) {
     me {
+      __typename
       ...ConnectTwitter
     }
   }
-  ${ConnectTwitterFragment}
+  ${connectTwitterFragment}
 `;

@@ -90,16 +90,13 @@ const renderExplore = (req, res, next) => {
     .catch(next);
 };
 
-const findFriendsCallback = (req, res, next) => {
+const findFriendsCallback = (req, res, next) =>
   req.apollo.client.mutate({
     mutation: createAuthenticatedService,
     variables: req.query,
   })
-    .then(() => { res.redirect('/?showModal=true'); })
-    .catch((err) => {
-      next(err);
-    });
-};
+    .then(() => res.redirect('/?showModal=true'))
+    .catch(next);
 
 const middlewareStack = [
   apolloMiddleware,

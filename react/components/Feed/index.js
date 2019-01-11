@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
-
-import feedQuery from 'react/components/Feed/queries/feedQuery';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import Text from 'react/components/UI/Text';
+import feedQuery from 'react/components/Feed/queries/feed';
+
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import FeedGroups from 'react/components/Feed/components/FeedGroups/index';
@@ -52,9 +52,9 @@ export default class Feed extends PureComponent {
 
           if (error) {
             return (
-              <Text color="state.alert" f={2} p={6}>
+              <ErrorAlert m={6}>
                 {error.message}
-              </Text>
+              </ErrorAlert>
             );
           }
 

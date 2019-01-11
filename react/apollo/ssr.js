@@ -8,7 +8,7 @@ export default (client, options = {}) => (Component, props = {}) => {
   const sheet = new ServerStyleSheet();
   const WrappedComponent = wrapWithProviders(client, options)(Component, props);
 
-  const resolve = (error) => {
+  const resolve = () => {
     const html = renderToString(sheet.collectStyles(WrappedComponent));
     const styles = sheet.getStyleTags();
     const state = client.extract();
@@ -18,11 +18,9 @@ export default (client, options = {}) => (Component, props = {}) => {
       state,
       styles,
       client,
-      error,
     };
   };
 
   return getDataFromTree(WrappedComponent)
-    .then(resolve)
-    .catch(resolve);
+    .then(resolve);
 };
