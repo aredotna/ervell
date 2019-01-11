@@ -23,6 +23,7 @@
   AIRBRAKE_PROJECT_ID
   AIRBRAKE_API_KEY
   CLIENT_GRAPHQL_ENDPOINT
+  BACKBONE_SUPER_SYNC_TIMEOUT
 } = require '../config'
 
 express = require 'express'
@@ -79,6 +80,7 @@ module.exports = (app) ->
   console.log "Setting up... NODE_ENV=#{NODE_ENV}"
 
   Backbone.sync = require 'backbone-super-sync'
+  Backbone.sync.timeout = parseInt(BACKBONE_SUPER_SYNC_TIMEOUT, 10)
   Backbone.sync.cacheClient = cache.client
 
   console.log 'Mounting middleware...'
