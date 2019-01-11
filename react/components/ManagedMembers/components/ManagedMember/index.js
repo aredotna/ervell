@@ -7,6 +7,7 @@ import currentUserService from 'react/util/currentUserService';
 
 import MemberAvatar from 'react/components/MemberAvatar';
 import GenericButton from 'react/components/UI/GenericButton';
+import Badge from 'react/components/UI/Badge';
 
 import managedMemberFragment from 'react/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
 
@@ -118,6 +119,11 @@ export default class ManagedMembers extends Component {
           <Information>
             <Name href={member.href}>
               {member.name}
+              {member.__typename === 'Group' &&
+                <Badge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[member.visibility]}>
+                  Group
+                </Badge>
+              }
             </Name>
 
             {member.__typename === 'Group' && mode !== 'clicked' &&

@@ -8,6 +8,7 @@ import collaboratorSearchResultFragment from 'react/components/CollaboratorSearc
 import UserAvatar from 'react/components/UserAvatar';
 import CollaboratorAddButton from 'react/components/CollaboratorSearch/components/CollaboratorAddButton';
 import SearchResult from 'react/components/CollaboratorSearch/components/SearchResult';
+import Badge from 'react/components/UI/Badge';
 
 const Information = styled.div`
   display: flex;
@@ -46,7 +47,14 @@ export default class CollaboratorSearchResult extends Component {
         }
 
         <Information>
-          <Name href={result.href}>{result.name}</Name>
+          <Name href={result.href}>
+            {result.name}
+            {result.__typename === 'Group' &&
+              <Badge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[result.visibility]}>
+                Group
+              </Badge>
+            }
+          </Name>
 
           {result.hidden_email &&
             <Email>{result.hidden_email}</Email>

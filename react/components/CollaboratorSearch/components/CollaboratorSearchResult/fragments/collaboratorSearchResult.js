@@ -16,6 +16,7 @@ export default gql`
       id
       name
       ...MemberAvatar
+      visibility
       user {
         __typename
         id
