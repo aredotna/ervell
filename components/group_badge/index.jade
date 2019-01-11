@@ -1,3 +1,5 @@
 .GroupBadge
   .GroupBadge__inner
     span GROUP
+    - if(group && group.visibility === 1)
+      span(class="iconic iconic-sm" data-glyph="lock-locked" title="lock locked" aria-hidden="true")

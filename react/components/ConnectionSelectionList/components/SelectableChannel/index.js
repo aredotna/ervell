@@ -10,6 +10,7 @@ import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 
 import { inputPadding } from 'react/components/UI/Inputs';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
+import Badge from 'react/components/UI/Badge';
 
 const Container = styled.div.attrs({
   role: 'button',
@@ -116,7 +117,7 @@ export default class SelectableChannel extends Component {
     const { isSelected } = this.state;
     const {
       channel: {
-        title, visibility, owner: { name },
+        title, visibility, owner, owner: { name },
       },
     } = this.props;
 
@@ -124,6 +125,11 @@ export default class SelectableChannel extends Component {
       <Container onClick={this.toggleSelection} data-selected={isSelected}>
         <HoverableInner>
           {name}
+          {owner.__typename === 'Group' &&
+            <Badge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[owner.visibility]}>
+              Group
+            </Badge>
+          }
           <Separator />
 
           <ColoredChannelSpan visibility={visibility}>

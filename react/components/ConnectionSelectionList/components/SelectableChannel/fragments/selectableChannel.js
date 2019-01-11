@@ -11,6 +11,7 @@ export default gql`
       ... on Group {
         id
         name
+        visibility
       }
       ... on User {
         id

@@ -8,6 +8,9 @@ span(
 )
   span.Connect__item-label.js-label
     = name
+    if isGroup
+      - group = identifiable
+      include ../../../group_badge/index
     span.Separator
     span( class="Color--channel-#{channel.status}" )
       = channel.title

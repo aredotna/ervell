@@ -19,7 +19,7 @@ import EmptyFeedConnectTwitterQuery from 'react/pages/feed/components/EmptyConne
 import emptyFeedConnectTwitterFragment from 'react/pages/feed/components/EmptyConnectTwitter/fragments/emptyFeedConnectTwitter';
 
 const { data: { API_URL, APP_URL } } = sharify;
-const TWITTER_AUTHENTICATION_URL = `${API_URL.replace('/v2', '')}/auth/twitter?origin=${APP_URL}/feed/find-friends`;
+const TWITTER_AUTHENTICATION_URL = `${(API_URL && API_URL.replace('/v2', ''))}/auth/twitter?origin=${APP_URL}/feed/find-friends`;
 
 const ActionContainer = styled.div`
   text-align: center;
