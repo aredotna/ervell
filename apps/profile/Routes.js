@@ -30,7 +30,7 @@ export default () => (
             const view = params.view || cookies.view || 'all';
             const sort = setValid((query.sort || cookies.sort), VALID_SORTS, 'UPDATED_AT');
             const filter = setValid((query.filter || cookies.filter), VALID_FILTERS, 'OWN');
-            const seed = parseInt(query.seed, 0) || 0;
+            const seed = parseInt(query.seed, 10) || 0;
 
             return (
               <ProfilePage

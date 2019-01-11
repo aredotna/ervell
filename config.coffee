@@ -36,6 +36,7 @@ module.exports =
   AIRBRAKE_API_KEY: null
   CONTENTFUL_SPACE_ID: null
   CONTENTFUL_ACCESS_TOKEN: null
+  BACKBONE_SUPER_SYNC_TIMEOUT: 25000
 
 # Override any values with env variables if they exist
 for key, val of module.exports
