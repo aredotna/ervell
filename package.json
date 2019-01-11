@@ -22,7 +22,6 @@
   "dependencies": {
     "@artsy/express-reloadable": "^1.4.0",
     "@contentful/rich-text-html-renderer": "^2.9.1",
-    "airbrake-js": "^1.4.0",
     "apollo-boost": "^0.1.22",
     "apollo-link": "^1.2.2",
     "apollo-link-context": "^1.0.3",

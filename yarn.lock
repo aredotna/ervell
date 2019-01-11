@@ -1592,11 +1592,6 @@ airbnb-prop-types@^2.10.0:
     prop-types "^15.6.1"
     prop-types-exact "^1.1.2"
 
-airbrake-js@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/airbrake-js/-/airbrake-js-1.4.0.tgz#362ef578a029f4a1ae19acc18879776a5c6bb555"
-  integrity sha1-Ni71eKAp9KGuGazBiHl3alxrtVU=
-
 ajv-errors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ajv-errors/-/ajv-errors-1.0.0.tgz#ecf021fa108fd17dfb5e6b383f2dd233e31ffc59"
