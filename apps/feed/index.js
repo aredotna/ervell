@@ -72,7 +72,19 @@ const renderFeed = (req, res, next) => {
 
       return res.render('feed');
     })
-    .catch(next);
+    .catch((err) => {
+      const STATUS_CODE = err.graphQLErrors[0].extensions.code;
+
+      if (STATUS_CODE === 'UNAUTHORIZED') {
+        // This typically happens if the serialized user is "bad"
+        // or not actually logged in. If so: logout, then redirect somewhere.
+        // Falling through by using `next()` doesn't seem to actually purge the session.
+        req.logout();
+        return res.redirect('/log_in');
+      }
+
+      return next(err);
+    });
 };
 
 const renderNotifications = (_req, res) => {
