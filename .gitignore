@@ -10,3 +10,4 @@ node_modules
 dump.rdb
 manifest.json
 yarn-error.log
+newrelic_agent.log

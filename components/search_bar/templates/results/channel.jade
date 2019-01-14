@@ -7,6 +7,7 @@ li.search__results__result: a(href="/#{identifiable.slug}/#{result.get('slug')}"
     li
       if isGroup
         = identifiableName
+        - group = identifiable
         include ../../../group_badge/index
       else
         = identifiableName

@@ -50,7 +50,7 @@ class BlokkOverlay extends PureComponent {
 
     const { konnectable: { source: { url: href } } } = this.props;
 
-    Object.assign(document.createElement('a'), { target: '_blank', href }).click();
+    window.open(href, '_blank').focus();
   }
 
   openConnect = (e) => {
