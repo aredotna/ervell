@@ -37,7 +37,7 @@ const EmptyContainer = styled(Body)`
   padding: ${x => x.theme.space[8]} 0;
 `;
 
-const FeedGroups = ({ groups }) => (
+const FeedGroups = ({ groups, context }) => (
   <Container>
     {groups.length === 0 &&
       <EmptyContainer p={6}>
@@ -55,7 +55,7 @@ const FeedGroups = ({ groups }) => (
               key={group.id}
               group={group}
             />
-            <FeedGroupObjects objects={group.objects} />
+            <FeedGroupObjects objects={group.objects} context={context} />
           </FeedGroup>
         ))}
       </Body>
@@ -65,6 +65,14 @@ const FeedGroups = ({ groups }) => (
 
 FeedGroups.propTypes = {
   groups: PropTypes.arrayOf(propType(feedGroupFragment)).isRequired,
+  context: PropTypes.arrayOf(PropTypes.shape({
+    __typename: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  })),
+};
+
+FeedGroups.defaultProps = {
+  context: [],
 };
 
 export default FeedGroups;

@@ -12,7 +12,9 @@ export default ({ id, context }) => {
   const lightBoxView = new LightBoxBlockView({ model: blockModel });
   const modal = modalize(lightBoxView);
 
-  mediator.shared.blocks = new Blocks(context.map(k => ({
+  const blocks = context.filter(k => k.__typename !== 'Channel' && k.__typename !== 'Group' && k.__typename !== 'User');
+
+  mediator.shared.blocks = new Blocks(blocks.map(k => ({
     id: k.id,
     class: k.__typename,
     base_class: 'Block',
