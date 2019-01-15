@@ -41,7 +41,7 @@ module.exports = class BodyView extends Backbone.View
     isLightBox = $('body').hasClass 'is-scrolling-disabled'
     $el = $("[data-id=#{id}]")
     return unless $el.length
-    elOffset = if isLightBox then $el.position().top else $el.offset().top
+    elOffset = if $el.is('a') then $el.parent().position().top else $el.position().top
     elHeight = $el.height()
     windowHeight = $(window).height()
 

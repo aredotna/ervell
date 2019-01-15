@@ -18,10 +18,18 @@ const ObjectGrid = styled(Grid)`
 export default class FeedGroupObjects extends PureComponent {
   static propTypes = {
     objects: PropTypes.arrayOf(propType(feedGroupObjectFragment)).isRequired,
+    context: PropTypes.arrayOf(PropTypes.shape({
+      __typename: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+    })),
+  }
+
+  static defaultProps = {
+    context: [],
   }
 
   render() {
-    const { objects } = this.props;
+    const { objects, context } = this.props;
 
     return (
       <ObjectGrid>
@@ -33,7 +41,11 @@ export default class FeedGroupObjects extends PureComponent {
           }
 
           return (
-            <Konnectable konnectable={object} key={object.id} />
+            <Konnectable
+              konnectable={object}
+              key={object.id}
+              context={context}
+            />
           );
         })}
       </ObjectGrid>

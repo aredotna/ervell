@@ -5,7 +5,7 @@ import { GRAPHQL_ENDPOINT, X_APP_TOKEN } from 'config.coffee';
 
 const app = express();
 
-app.post('/graphql', (req, res, next) => {
+app.post('/graphql', (req, res) => {
   const X_AUTH_TOKEN = (req.user && req.user.get('authentication_token')) || '';
 
   const headers = {
@@ -20,7 +20,11 @@ app.post('/graphql', (req, res, next) => {
     headers,
   })
     .then(({ data }) => res.json(data))
-    .catch(next);
+    .catch(err => res.json({
+      code: err.status || 500,
+      message: err.message,
+      stack: err.stack,
+    }));
 });
 
 module.exports = app;
