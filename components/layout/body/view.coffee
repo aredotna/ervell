@@ -45,8 +45,6 @@ module.exports = class BodyView extends Backbone.View
     elHeight = $el.height()
     windowHeight = $(window).height()
 
-    console.log('elOffset', elOffset, "$el.offset().top", $el.offset().top, "$el.parent().position().top", $el.parent().position().top, '$el.position().top', $el.position().top)
-
     if elHeight < windowHeight
       offset = elOffset - ((windowHeight / 2) - (elHeight / 2))
     else
