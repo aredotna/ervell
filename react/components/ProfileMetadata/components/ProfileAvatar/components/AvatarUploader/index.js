@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
-import { graphql, withApollo } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import axios from 'axios';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import uploadPolicyQuery from 'react/components/ProfileMetadata/components/Profi
 
 import updateGroupAvatarMutation from 'react/components/ProfileMetadata/components/ProfileAvatar/mutations/updateGroupAvatar';
 
+import avatarUploaderFragment from 'react/components/ProfileMetadata/components/ProfileAvatar/components/AvatarUploader/fragments/avatarUploader';
 import profileAvatarFragment from 'react/components/ProfileMetadata/components/ProfileAvatar/fragments/profileAvatar';
 
 import Box from 'react/components/UI/Box';
@@ -40,8 +41,8 @@ const Replace = styled(Box)`
 
 class AvatarUploader extends PureComponent {
   static propTypes = {
-    client: PropTypes.shape({
-      query: PropTypes.func.isRequired,
+    data: PropTypes.shape({
+      me: propType(avatarUploaderFragment).isRequired,
     }).isRequired,
     identifiable: propType(profileAvatarFragment).isRequired,
     updateGroupAvatar: PropTypes.func.isRequired,
@@ -63,24 +64,13 @@ class AvatarUploader extends PureComponent {
     }
   }
 
-  onAddFile = async (e) => {
-    e.persist();
-
+  onAddFile = (e) => {
     const {
-      client,
+      data: { me: { policy } },
       identifiable: { id },
       updateGroupAvatar,
       startPolling,
     } = this.props;
-
-    if (e.target.files.length === 0) {
-      this.setState({ mode: 'resting' });
-      return;
-    }
-
-    this.setState({ mode: 'checking' });
-
-    const { data: { me: { policy } } } = await client.query({ query: uploadPolicyQuery });
 
     const file = e.target.files[0];
     const formData = new FormData();
@@ -145,7 +135,6 @@ class AvatarUploader extends PureComponent {
           <GenericButton f={1} onClick={this.triggerAddFile}>
             {{
               resting: 'Upload group logo',
-              checking: '...',
               uploading: `Uploading ${progress}%`,
               done: 'Processing...',
               error: 'Error',
@@ -159,7 +148,6 @@ class AvatarUploader extends PureComponent {
               <FilledButton f={0} bg="white" onClick={this.triggerAddFile}>
                 {{
                   resting: 'Replace group logo',
-                  checking: '...',
                   uploading: `Uploading ${progress}%`,
                   done: 'Processing...',
                   error: 'Error',
@@ -173,6 +161,7 @@ class AvatarUploader extends PureComponent {
   }
 }
 
-export default graphql(updateGroupAvatarMutation, {
-  name: 'updateGroupAvatar',
-})(withApollo(AvatarUploader));
+export default compose(
+  graphql(uploadPolicyQuery),
+  graphql(updateGroupAvatarMutation, { name: 'updateGroupAvatar' }),
+)(AvatarUploader);
