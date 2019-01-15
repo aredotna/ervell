@@ -96,7 +96,7 @@ export default class Konnectable extends PureComponent {
 
     return openLegacyBlockLightbox({
       id,
-      context: context.filter(k => k.__typename !== 'Channel'),
+      context,
     });
   }
 

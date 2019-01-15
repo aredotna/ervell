@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
-import { map, flatten, filter } from 'underscore';
+import { map, flatten } from 'underscore';
 
 import feedQuery from 'react/components/Feed/queries/feed';
 
@@ -39,8 +39,7 @@ export default class Feed extends PureComponent {
     if (!data) return [];
 
     const { me: { feed: { groups } } } = data;
-    const objects = flatten(map(groups, group => group.objects));
-    return filter(objects, object => (object.__typename !== 'Channel' && object.__typename !== 'Group' && object.__typename !== 'User'));
+    return flatten(map(groups, group => group.objects));
   }
 
   render() {
