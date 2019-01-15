@@ -41,6 +41,8 @@ favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
 { createReloadable } = require '@artsy/express-reloadable'
 glob = require 'glob'
+AirbrakeClient = require 'airbrake-js'
+makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
 _ = require 'underscore'
 localsMiddleware = require './middleware/locals'
 ensureSSL = require './middleware/ensure_ssl'
@@ -75,6 +77,11 @@ sharify.data = {
 }
 
 CurrentUser = require '../models/current_user'
+
+airbrake = new AirbrakeClient({
+  projectId: AIRBRAKE_PROJECT_ID,
+  projectKey: AIRBRAKE_API_KEY,
+})
 
 module.exports = (app) ->
   console.log "Setting up... NODE_ENV=#{NODE_ENV}"
@@ -152,6 +159,8 @@ module.exports = (app) ->
 
   # Convert the GraphQL error messages into some kind of matching status code
   app.use require('./middleware/errorStatus.js').default
+
+  app.use(makeErrorHandler(airbrake))
 
   if NODE_ENV is 'development'
     app.use (err, req, res, next) =>
