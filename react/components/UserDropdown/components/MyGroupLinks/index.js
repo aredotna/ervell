@@ -4,14 +4,14 @@ import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 
-import myGroupsFragment from 'react/components/UserDropdown/components/MyGroups/fragments/myGroups';
+import myGroupLinksFragment from 'react/components/UserDropdown/components/MyGroupLinks/fragments/myGroupLinks';
 
-import toggleMyGroupsDropdownVisibilityMutation from 'react/components/UserDropdown/components/MyGroups/mutations/toggleMyGroupsDropdownVisibility';
+import toggleMyGroupsDropdownVisibilityMutation from 'react/components/UserDropdown/components/MyGroupLinks/mutations/toggleMyGroupsDropdownVisibility';
 
 import Text from 'react/components/UI/Text';
 import GenericButton from 'react/components/UI/GenericButton';
 import Link from 'react/components/UserDropdown/components/Link';
-import MyGroup from 'react/components/UserDropdown/components/MyGroups/components/MyGroup';
+import MyGroupLink from 'react/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink';
 import Modal from 'react/components/UI/Modal';
 import CreateGroup from 'react/components/CreateGroup';
 
@@ -67,9 +67,9 @@ const LearnMoreLink = styled.a`
   font-weight: bold;
 `;
 
-class MyGroups extends Component {
+class MyGroupLinks extends Component {
   static propTypes = {
-    me: propType(myGroupsFragment).isRequired,
+    me: propType(myGroupLinksFragment).isRequired,
     toggleMyGroupsDropdownVisibility: PropTypes.func.isRequired,
   }
 
@@ -132,7 +132,7 @@ class MyGroups extends Component {
             {groups.length > 0 &&
               <Container>
                 {groups.map(group => (
-                  <MyGroup key={`${group.__typename}_${group.id}`} group={group} />
+                  <MyGroupLink key={`${group.__typename}_${group.id}`} group={group} />
                 ))}
               </Container>
             }
@@ -148,4 +148,4 @@ class MyGroups extends Component {
 
 export default graphql(toggleMyGroupsDropdownVisibilityMutation, {
   name: 'toggleMyGroupsDropdownVisibility',
-})(MyGroups);
+})(MyGroupLinks);

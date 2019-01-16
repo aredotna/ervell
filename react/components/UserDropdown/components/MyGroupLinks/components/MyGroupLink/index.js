@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
-import myGroupFragment from 'react/components/UserDropdown/components/MyGroups/components/MyGroup/fragments/myGroup';
+import myGroupLinkFragment from 'react/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink';
 
 import Box, { mixin as boxMixin } from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
@@ -29,9 +29,9 @@ const GroupName = styled(Text).attrs({
   `}
 `;
 
-export default class MyGroup extends Component {
+export default class MyGroupLink extends Component {
   static propTypes = {
-    group: propType(myGroupFragment).isRequired,
+    group: propType(myGroupLinkFragment).isRequired,
   }
 
   state = {
