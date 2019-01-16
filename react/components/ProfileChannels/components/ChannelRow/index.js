@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
 
-import WithBlocksGridCount from 'react/hocs/WithBlocksGridCount';
 import constants from 'react/styles/constants';
 import Box from 'react/components/UI/Box';
 import HorizontalRule from 'react/components/UI/HorizontalRule';
@@ -51,20 +50,22 @@ const CountLine = styled(Text).attrs({
 })``;
 
 const ChannelRow = ({
-  children, channel, blocksGridCount, ...rest
+  children, channel, ...rest
 }) => (
   <Row {...rest}>
     {children}
     <Line>
       <HR />
-      <CountLine>
-        <a href={channel.href}>
-          +<Count
-            label="more block"
-            amount={((channel.counts.contents - blocksGridCount) + 1)}
-          />
-        </a>
-      </CountLine>
+      {channel.counts.contents > 3 &&
+        <CountLine>
+          <a href={channel.href}>
+            +<Count
+              label="more block"
+              amount={Math.floor(channel.counts.contents - 3)}
+            />
+          </a>
+        </CountLine>
+      }
     </Line>
   </Row>
 );
@@ -75,4 +76,4 @@ ChannelRow.propTypes = {
   blocksGridCount: PropTypes.number.isRequired,
 };
 
-export default WithBlocksGridCount(ChannelRow);
+export default ChannelRow;
