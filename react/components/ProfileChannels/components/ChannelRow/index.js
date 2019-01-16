@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { propType } from 'graphql-anywhere';
 
+import WithBlocksGridCount from 'react/hocs/WithBlocksGridCount';
+import constants from 'react/styles/constants';
 import Box from 'react/components/UI/Box';
 import HorizontalRule from 'react/components/UI/HorizontalRule';
 
 import channelFragment from 'react/components/Cell/components/Konnectable/components/Channel/fragments/channel';
 import Text from 'react/components/UI/Text';
+import Count from 'react/components/UI/Count';
+
 
 const Row = styled(Box).attrs({
   mb: 9,
@@ -32,6 +36,7 @@ const Line = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-right: ${constants.doubleBlockGutter}
 `;
 
 const HR = styled(HorizontalRule).attrs({ my: 0, color: 'gray.light' })`
@@ -39,22 +44,27 @@ const HR = styled(HorizontalRule).attrs({ my: 0, color: 'gray.light' })`
   margin-right: ${x => x.theme.space[5]};
 `;
 
-const Count = styled(Text).attrs({
+const CountLine = styled(Text).attrs({
   f: 1,
   underlineLinks: true,
   color: 'gray.medium',
 })``;
 
-const ChannelRow = ({ children, channel, ...rest }) => (
+const ChannelRow = ({
+  children, channel, blocksGridCount, ...rest
+}) => (
   <Row {...rest}>
     {children}
     <Line>
       <HR />
-      <Count underlineLinks>
+      <CountLine>
         <a href={channel.href}>
-          +{channel.counts.contents} more blocks
+          +<Count
+            label="more block"
+            amount={((channel.counts.contents - blocksGridCount) + 1)}
+          />
         </a>
-      </Count>
+      </CountLine>
     </Line>
   </Row>
 );
@@ -62,6 +72,7 @@ const ChannelRow = ({ children, channel, ...rest }) => (
 ChannelRow.propTypes = {
   channel: propType(channelFragment).isRequired,
   children: PropTypes.node.isRequired,
+  blocksGridCount: PropTypes.number.isRequired,
 };
 
-export default ChannelRow;
+export default WithBlocksGridCount(ChannelRow);
