@@ -16,7 +16,7 @@ posts = require "../../collections/posts.coffee"
     channel_slug: req.params.channel_slug
     per: 25
 
-  Q.allSettled([
+  Promise.all([
     channel.fetch(cache: true)
     blocks.fetch(cache: true)
   ]).then ->
@@ -50,9 +50,7 @@ posts = require "../../collections/posts.coffee"
     filter: 'channel'
     per: 25
 
-  Q.allSettled([
-    blocks.fetch(cache: true)
-  ]).then ->
+  blocks.fetch(cache: true).then ->
     res.set 'Content-Type', 'application/rss+xml'
     res.render 'explore',
       blocks: blocks.models
