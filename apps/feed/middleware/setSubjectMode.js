@@ -2,7 +2,7 @@ export default (req, res, next) => {
   const { path } = req;
 
   let subject;
-  let mode = 'all';
+  let mode = 'channels';
 
   if (path.match(/\/channels$/)) {
     subject = 'channels';

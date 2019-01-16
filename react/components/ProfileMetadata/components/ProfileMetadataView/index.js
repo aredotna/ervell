@@ -22,17 +22,6 @@ export default class ProfileMetadataView extends Component {
 
     return (
       <Pocket title="View">
-        {__typename === 'User' &&
-          <ProfileLinkUnlessCurrent
-            name="view"
-            value="all"
-            to={`${href}/all?sort=${sort}`}
-            isActive={this.isViewActive('all')}
-          >
-            All
-          </ProfileLinkUnlessCurrent>
-        }
-
         <ProfileLinkUnlessCurrent
           name="view"
           value="channels"
@@ -61,6 +50,17 @@ export default class ProfileMetadataView extends Component {
         >
           Index
         </ProfileLinkUnlessCurrent>
+
+        {__typename === 'User' &&
+          <ProfileLinkUnlessCurrent
+            name="view"
+            value="all"
+            to={`${href}/all?sort=${sort}`}
+            isActive={this.isViewActive('all')}
+          >
+            All
+          </ProfileLinkUnlessCurrent>
+        }
       </Pocket>
     );
   }

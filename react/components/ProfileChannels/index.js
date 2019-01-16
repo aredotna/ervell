@@ -125,7 +125,7 @@ export default class ProfileChannels extends PureComponent {
                   loadMore={this.loadMore(fetchMore)}
                 >
                   {channels.map(channel => (
-                    <ChannelRow key={channel.id}>
+                    <ChannelRow key={channel.id} channel={channel}>
                       <Grid>
                         <Cell.Konnectable konnectable={channel} />
 
