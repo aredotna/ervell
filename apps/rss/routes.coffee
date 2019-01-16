@@ -16,9 +16,9 @@ posts = require "../../collections/posts.coffee"
     channel_slug: req.params.channel_slug
     per: 25
 
-  Q.allSettled([
-    channel.fetch()
-    blocks.fetch()
+  Promise.all([
+    channel.fetch(cache: true)
+    blocks.fetch(cache: true)
   ]).then ->
     res.set 'Content-Type', 'application/rss+xml'
     res.render 'channel',
@@ -34,10 +34,11 @@ posts = require "../../collections/posts.coffee"
     per: 25
 
   Promise.all([
-    author.fetch()
-    blocks.fetch()
+    author.fetch(cache: true)
+    blocks.fetch(cache: true)
   ])
     .then ->
+      res.set 'Content-Type', 'application/rss+xml'
       res.render 'user',
         author: author
         blocks: blocks.models
@@ -49,9 +50,8 @@ posts = require "../../collections/posts.coffee"
     filter: 'channel'
     per: 25
 
-  Q.allSettled([
-    blocks.fetch()
-  ]).then ->
+  blocks.fetch(cache: true).then ->
+    res.set 'Content-Type', 'application/rss+xml'
     res.render 'explore',
       blocks: blocks.models
   .catch next
@@ -59,6 +59,7 @@ posts = require "../../collections/posts.coffee"
 
 @blogRSS = (req, res, next) ->
   posts.fetchAll().then (posts) ->
+    res.set 'Content-Type', 'application/rss+xml'
     res.render 'blog',
       posts: posts
   .catch next
