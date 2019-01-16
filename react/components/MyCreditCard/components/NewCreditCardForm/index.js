@@ -23,7 +23,7 @@ export default class NewCreditCardForm extends PureComponent {
         <CardNumber
           mb={4}
           onReady={this.focusInput}
-          innerRef={(el) => {
+          ref={(el) => {
             this.cardNumber = el;
           }}
         />

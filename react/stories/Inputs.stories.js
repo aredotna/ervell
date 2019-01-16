@@ -24,7 +24,7 @@ class FocusableInput extends Component {
           Click me to focus input
         </a>
 
-        <Input innerRef={(input) => { this.input = input; }} />
+        <Input ref={(input) => { this.input = input; }} />
       </div>
     );
   }

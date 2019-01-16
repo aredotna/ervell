@@ -158,7 +158,7 @@ export default class Overlay extends PureComponent {
             <Wrapper
               {...compactObject(this.state)}
               {...rest}
-              innerRef={(el) => { this.wrapper = el; }}
+              ref={(el) => { this.wrapper = el; }}
             >
               {children}
             </Wrapper>

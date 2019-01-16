@@ -93,7 +93,7 @@ export default class Pulldown extends Component {
           mode={mode}
           onMouseDown={this.toggle}
           selected
-          innerRef={(el) => { this.target = el; }}
+          ref={(el) => { this.target = el; }}
         >
           {options[selected]}
         </PulldownValue>

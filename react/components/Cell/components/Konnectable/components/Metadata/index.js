@@ -31,10 +31,11 @@ export default class Metadata extends PureComponent {
         updated_at,
         file_extension,
       },
+      ...rest
     } = this.props;
 
     return (
-      <Box pt={2} mt={6} mb={4} px={5}>
+      <Box pt={2} mt={6} mb={4} px={5} {...rest}>
         <Text f={1} fontWeight="bold" textAlign="center" color="gray.medium">
           {mode === 'resting' &&
             <div>

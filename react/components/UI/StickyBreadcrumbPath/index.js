@@ -50,12 +50,18 @@ export default class StickyBreadcrumbPath extends Component {
     stuckChildren: null,
   }
 
+  constructor(props) {
+    super(props);
+
+    this.targetEl = React.createRef();
+  }
+
   state = {
     mode: 'resting',
   }
 
   componentDidMount() {
-    if (!is.elVisible(this.targetEl)) {
+    if (!is.elVisible(this.targetEl.current)) {
       this.handleLeave();
     }
   }
@@ -78,11 +84,11 @@ export default class StickyBreadcrumbPath extends Component {
           onEnter={this.handleEnter}
           onLeave={this.handleLeave}
         >
-          <BreadcrumbPath>
-            <div ref={(el) => { this.targetEl = el; }} />
-
-            {provideChildrenWithProps(children, { mode })}
-          </BreadcrumbPath>
+          <div ref={this.targetEl}>
+            <BreadcrumbPath>
+              {provideChildrenWithProps(children, { mode })}
+            </BreadcrumbPath>
+          </div>
         </Waypoint>
 
         {mode === 'stuck' &&

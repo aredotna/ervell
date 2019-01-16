@@ -23,10 +23,6 @@ import BlokkOverlay from 'react/components/Cell/components/Konnectable/component
 import ChannelOverlay from 'react/components/Cell/components/Konnectable/components/ChannelOverlay';
 
 const BlokkMetadata = styled(Metadata)`
-  position: absolute;
-  top: 100%;
-  right: 0;
-  left: 0;
 `;
 
 const Container = styled.a`
