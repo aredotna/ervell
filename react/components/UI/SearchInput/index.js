@@ -9,7 +9,7 @@ import Box from 'react/components/UI/Box';
 import Icons from 'react/components/UI/Icons';
 import { Input } from 'react/components/UI/Inputs';
 
-const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'innerRef'];
+const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'ref'];
 
 const Icon = styled.div`
   display: flex;
@@ -117,7 +117,7 @@ export default class SearchInput extends Component {
           px="2.5em"
           borderColor="gray.regular"
           {...innerProps}
-          innerRef={(input) => { this.input = input; }}
+          ref={(input) => { this.input = input; }}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={this.handleChange}

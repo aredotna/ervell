@@ -10,7 +10,7 @@ import Text from 'react/components/UI/Text';
 import Link from 'react/components/UserDropdown/components/Link';
 import Label from 'react/components/UserDropdown/components/Label';
 import SecondaryLinks from 'react/components/UserDropdown/components/SecondaryLinks';
-import MyGroups from 'react/components/UserDropdown/components/MyGroups';
+import MyGroupLinks from 'react/components/UserDropdown/components/MyGroupLinks';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 const Container = styled(BorderedBox).attrs({
@@ -73,7 +73,7 @@ export default class UserDropdown extends Component {
 
                 {me.is_confirmed &&
                   <Section>
-                    <MyGroups me={me} />
+                    <MyGroupLinks me={me} />
                   </Section>
                 }
 

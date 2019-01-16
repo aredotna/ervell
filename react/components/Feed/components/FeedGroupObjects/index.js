@@ -37,13 +37,18 @@ export default class FeedGroupObjects extends PureComponent {
           const isIdentifiable = object.__typename === 'User' || object.__typename === 'Group';
 
           if (isIdentifiable) {
-            return <Identifiable identifiable={object} />;
+            return (
+              <Identifiable
+                key={`${object.__typename}__${object.id}`}
+                identifiable={object}
+              />
+            );
           }
 
           return (
             <Konnectable
+              key={`${object.__typename}__${object.id}`}
               konnectable={object}
-              key={object.id}
               context={context}
             />
           );

@@ -51,7 +51,7 @@ export default class FeedGroupSentence extends PureComponent {
     } = this.props;
 
     return (
-      <Container my={3} pr={6} class="flex-container">
+      <Container my={3} pr={6}>
         <Sentence>
           <FeedObjectLink {...owner} />
 
@@ -70,10 +70,8 @@ export default class FeedGroupSentence extends PureComponent {
           {action !== 'commented' &&
             <span>
               <Label>
-                {` ${action} `}
+                {` ${action} ${item_phrase} `}
               </Label>
-
-              <FeedObjectLink item_phrase={item_phrase} {...item} />
 
               {connector &&
                 <Label>

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import myGroupsFragment from 'react/components/UserDropdown/components/MyGroups/fragments/myGroups';
+import myGroupLinksFragment from 'react/components/UserDropdown/components/MyGroupLinks/fragments/myGroupLinks';
 
 export default gql`
   query UserDropdown {
@@ -10,8 +10,8 @@ export default gql`
       href
       is_premium
       is_confirmed
-      ... MyGroups
+      ...MyGroupLinks
     }
   }
-  ${myGroupsFragment}
+  ${myGroupLinksFragment}
 `;

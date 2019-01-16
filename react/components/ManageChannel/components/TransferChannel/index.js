@@ -72,7 +72,7 @@ export default class TransferChannel extends PureComponent {
           onFocus={this.focus}
           onQueryChange={this.updateQuery}
           placeholder="search user to transfer channel to"
-          innerRef={(el) => { this.searchInput = el; }}
+          ref={(el) => { this.searchInput = el; }}
         />
 
         {query !== '' && mode === 'active' &&
