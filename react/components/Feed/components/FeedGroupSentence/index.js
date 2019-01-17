@@ -70,8 +70,13 @@ export default class FeedGroupSentence extends PureComponent {
           {action !== 'commented' &&
             <span>
               <Label>
-                {` ${action} ${item_phrase} `}
+                {` ${action} `}
               </Label>
+
+
+              {item &&
+                <FeedObjectLink {...item} label={item_phrase} />
+              }
 
               {connector &&
                 <Label>
