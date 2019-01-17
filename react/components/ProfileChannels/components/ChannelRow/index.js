@@ -58,8 +58,10 @@ const ChannelRow = ({
 }) => (
   <Row {...rest}>
     {children}
+
     <Line>
       <HR />
+
       {channel.counts.contents > 3 &&
         <CountLine>
           <a href={channel.href}>
@@ -77,7 +79,6 @@ const ChannelRow = ({
 ChannelRow.propTypes = {
   channel: propType(channelFragment).isRequired,
   children: PropTypes.node.isRequired,
-  blocksGridCount: PropTypes.number.isRequired,
 };
 
 export default ChannelRow;
