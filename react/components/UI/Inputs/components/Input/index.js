@@ -14,7 +14,7 @@ const SPACE_MARGIN_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'];
 
 // TODO: Needs to be configured to accept a tag
 // so that other input types can have errors
-export default class Input extends Component {
+class Input extends Component {
   static propTypes = {
     errorMessage: PropTypes.string,
     hasError: PropTypes.bool,
@@ -44,7 +44,7 @@ export default class Input extends Component {
 
   render() {
     const { mode } = this.state;
-    const { errorMessage } = this.props;
+    const { errorMessage, forwardRef } = this.props;
 
     // Allow the outerbox to have configurable margins
     const boxProps = compactObject(pick(this.props, ...SPACE_MARGIN_PROPS_KEYS));
@@ -56,6 +56,7 @@ export default class Input extends Component {
       <Box {...boxProps}>
         <TextInput
           {...inputProps}
+          ref={forwardRef}
           hasError={mode === 'error'}
         />
 
@@ -68,3 +69,6 @@ export default class Input extends Component {
     );
   }
 }
+
+export default React.forwardRef((props, ref) => (
+  <Input forwardRef={ref} {...props} />));

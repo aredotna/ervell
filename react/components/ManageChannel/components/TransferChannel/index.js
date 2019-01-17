@@ -15,6 +15,12 @@ export default class TransferChannel extends PureComponent {
     channel: propType(transferChannelFragment).isRequired,
   }
 
+  constructor(props) {
+    super(props);
+
+    this.searchInput = React.createRef();
+  }
+
   state = {
     query: '',
     debouncedQuery: '',
@@ -72,11 +78,15 @@ export default class TransferChannel extends PureComponent {
           onFocus={this.focus}
           onQueryChange={this.updateQuery}
           placeholder="search user to transfer channel to"
-          ref={(el) => { this.searchInput = el; }}
+          ref={this.searchInput}
         />
 
         {query !== '' && mode === 'active' &&
-          <Overlay targetEl={() => this.searchInput} fullWidth onClose={this.blur}>
+          <Overlay
+            targetEl={() => this.searchInput.current}
+            fullWidth
+            onClose={this.blur}
+          >
             <TransferChannelSearchResults
               channel_id={channel.id}
               query={debouncedQuery}

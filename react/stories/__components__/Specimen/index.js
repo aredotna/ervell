@@ -5,9 +5,9 @@ import { space, fontSize } from 'styled-system';
 
 import { neutralMarginsY } from 'react/styles/mixins';
 
-const Container = styled.div.attrs({
-  my: ({ my = 5 }) => my,
-})`
+const Container = styled.div.attrs(({ my = 5 }) => ({
+  my,
+}))`
   ${space}
   ${fontSize}
   ${neutralMarginsY}

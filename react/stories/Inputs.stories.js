@@ -9,8 +9,14 @@ import States from 'react/stories/__components__/States';
 import { Input, Textarea } from 'react/components/UI/Inputs';
 
 class FocusableInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.input = React.createRef();
+  }
+
   handleClick = () => {
-    this.input.focus();
+    this.input.current.focus();
   }
 
   render() {
@@ -24,7 +30,7 @@ class FocusableInput extends Component {
           Click me to focus input
         </a>
 
-        <Input ref={(input) => { this.input = input; }} />
+        <Input ref={this.input} />
       </div>
     );
   }

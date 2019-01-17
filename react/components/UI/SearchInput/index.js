@@ -9,7 +9,7 @@ import Box from 'react/components/UI/Box';
 import Icons from 'react/components/UI/Icons';
 import { Input } from 'react/components/UI/Inputs';
 
-const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'ref'];
+const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'];
 
 const Icon = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ const Icon = styled.div`
   cursor: pointer;
 `;
 
-export default class SearchInput extends Component {
+class SearchInput extends Component {
   static propTypes = {
     query: PropTypes.string,
     onFocus: PropTypes.func,
@@ -31,6 +31,10 @@ export default class SearchInput extends Component {
     onQueryChange: PropTypes.func,
     onDebouncedQueryChange: PropTypes.func,
     debounceWait: PropTypes.number,
+    forwardRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.any }),
+    ]),
   }
 
   static defaultProps = {
@@ -40,6 +44,7 @@ export default class SearchInput extends Component {
     onQueryChange: () => {},
     onDebouncedQueryChange: () => {},
     debounceWait: 250,
+    forwardRef: null,
   }
 
   constructor(props) {
@@ -93,6 +98,7 @@ export default class SearchInput extends Component {
       onQueryChange: _onQueryChange,
       onDebouncedQueryChange: _onDebouncedQueryChange,
       debounceWait: _debounceWait,
+      forwardRef,
       ...rest
     } = this.props;
 
@@ -102,7 +108,7 @@ export default class SearchInput extends Component {
     const innerProps = omit(rest, ...OUTER_PROPS_KEYS);
 
     return (
-      <Box position="relative" {...outerProps}>
+      <Box position="relative" ref={forwardRef} {...outerProps}>
         <Icon onClick={this.handleReset}>
           <Icons
             color="gray.medium"
@@ -127,3 +133,6 @@ export default class SearchInput extends Component {
     );
   }
 }
+
+export default React.forwardRef((props, ref) => (
+  <SearchInput forwardRef={ref} {...props} />));
