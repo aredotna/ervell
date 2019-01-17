@@ -34,6 +34,7 @@
     &[data-visibility=\'{visibility}\']
       color lookup('colors-channel-' + visibility)
       border-color rgba(@color, colors-border-alpha)
+      fill lookup('colors-channel-' + visibility)
       &:hover
         border-color @color
 
