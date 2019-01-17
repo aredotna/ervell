@@ -47,7 +47,11 @@ const CountLine = styled(Text).attrs({
   f: 1,
   underlineLinks: true,
   color: 'gray.medium',
-})``;
+})`
+  a:hover {
+    color: ${x => x.theme.colors.gray.bold};
+  }
+`;
 
 const ChannelRow = ({
   children, channel, ...rest
