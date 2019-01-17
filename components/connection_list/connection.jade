@@ -8,7 +8,8 @@ span
     span by&nbsp;
     if channel.has('group')
       span
-        = channel.get('group').name
+        - group = channel.get('group')
+        = group.name
         include ../group_badge/index
     else
       span= channel.get('user').username
