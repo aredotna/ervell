@@ -89,6 +89,10 @@ const Separator = styled.div`
   background-color: ${x => x.theme.colors.gray.medium};
 `;
 
+const GroupBadge = styled(Badge)`
+  transform: scale(0.8);
+`;
+
 export default class SelectableChannel extends Component {
   static propTypes = {
     channel: propType(selectableChannelFragment).isRequired,
@@ -125,11 +129,13 @@ export default class SelectableChannel extends Component {
       <Container onClick={this.toggleSelection} data-selected={isSelected}>
         <HoverableInner>
           {name}
+
           {owner.__typename === 'Group' &&
-            <Badge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[owner.visibility]}>
+            <GroupBadge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[owner.visibility]}>
               Group
-            </Badge>
+            </GroupBadge>
           }
+
           <Separator />
 
           <ColoredChannelSpan visibility={visibility}>

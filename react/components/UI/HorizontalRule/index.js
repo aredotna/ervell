@@ -10,5 +10,5 @@ export default styled.hr`
   background-color: ${(props) => {
     if (props.invisible) return 'transparent';
     return themeGet(`colors.${props.color}`, props.theme.colors.gray.regular)(props);
-  }}
+  }};
 `;

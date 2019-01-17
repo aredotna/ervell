@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'qs';
+import { Input as SafeInput } from 'react-safe-universal-inputs';
 
 import AuthForm from 'react/components/AuthForm';
 import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import { mixin as textMixin } from 'react/components/UI/Text';
 import { ErrorMessage } from 'react/components/UI/Inputs';
 
-import { Input as SafeInput } from 'react-safe-universal-inputs';
 import mixin from 'react/components/UI/Inputs/mixin';
 
 import { track, en } from 'lib/analytics.coffee';
@@ -18,11 +18,23 @@ const { REDIRECT_TO } = require('sharify').data;
 
 // We need to handle the states between server rendered react
 // and client-rendered react. Firefox was firing the onChange event
-// (for auto-filled inputs)
-// before the client was initialized. More info here:
-// https://github.com/facebook/react/issues/2585
+// (for auto-filled inputs) before the client was initialized.
 //
-const Input = styled(SafeInput)`
+// (Should not be used on anything but this login form.)
+//
+// More info here:
+// https://github.com/facebook/react/issues/2585
+// https://github.com/facebook/react/issues/4293
+
+// Prevent hasError from being passed along into `SafeInput`
+// which is giving us annoying warnings.
+//
+// eslint-disable-next-line
+const WrappedSafeInput = ({ hasError: _hasError, ...rest }) => (
+  <SafeInput {...rest} />
+);
+
+const Input = styled(WrappedSafeInput)`
   ${mixin}
 `;
 

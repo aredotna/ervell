@@ -44,18 +44,24 @@ const HR = styled(HorizontalRule).attrs({ my: 0, color: 'gray.light' })`
 `;
 
 const CountLine = styled(Text).attrs({
-  f: 1,
+  f: 2,
   underlineLinks: true,
   color: 'gray.medium',
-})``;
+})`
+  a:hover {
+    color: ${x => x.theme.colors.gray.bold};
+  }
+`;
 
 const ChannelRow = ({
   children, channel, ...rest
 }) => (
   <Row {...rest}>
     {children}
+
     <Line>
       <HR />
+
       {channel.counts.contents > 3 &&
         <CountLine>
           <a href={channel.href}>
@@ -73,7 +79,6 @@ const ChannelRow = ({
 ChannelRow.propTypes = {
   channel: propType(channelFragment).isRequired,
   children: PropTypes.node.isRequired,
-  blocksGridCount: PropTypes.number.isRequired,
 };
 
 export default ChannelRow;

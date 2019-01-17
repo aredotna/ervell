@@ -70,7 +70,7 @@ export const channelVisibilityForegroundColor = css`
 
     return `
       &, & * {
-        color: ${color};
+        color: ${color} !important;
         border-color: ${props.mode === 'hover' ? `border-color: ${color};` : blend(color, '#bbb', 'screen')};
 
         &:hover {
