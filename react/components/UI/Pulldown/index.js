@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -42,7 +42,7 @@ const PulldownOptions = styled.div`
   `}
 `;
 
-export default class Pulldown extends Component {
+export default class Pulldown extends PureComponent {
   static propTypes = {
     value: PropTypes.oneOfType([
       PropTypes.string, PropTypes.number, PropTypes.bool,
@@ -59,6 +59,8 @@ export default class Pulldown extends Component {
     super(props);
 
     const { value } = this.props;
+
+    this.target = React.createRef();
 
     this.state = {
       mode: 'resting',
@@ -93,13 +95,13 @@ export default class Pulldown extends Component {
           mode={mode}
           onMouseDown={this.toggle}
           selected
-          ref={(el) => { this.target = el; }}
+          ref={this.target}
         >
           {options[selected]}
         </PulldownValue>
 
         {mode === 'expanded' &&
-          <Overlay targetEl={() => this.target} fullWidth onClose={this.rest}>
+          <Overlay targetEl={() => this.target.current} fullWidth onClose={this.rest}>
             <PulldownOptions mode={mode}>
               {Object.keys(options).map(key => (
                 <PulldownOption
