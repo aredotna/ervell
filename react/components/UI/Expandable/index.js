@@ -83,14 +83,18 @@ export default class Expandable extends Component {
   render() {
     const { mode, force, isEnabled } = this.state;
     const {
-      children, height, mode: _initialMode, ...rest
+      children,
+      height,
+      mode: _initialMode,
+      onExpand: _onExpand,
+      ...rest
     } = this.props;
 
     return (
       <Container
         height={height}
         mode={mode}
-        innerRef={(el) => { this.container = el; }}
+        ref={(el) => { this.container = el; }}
         {...rest}
       >
         <div ref={(el) => { this.contents = el; }}>

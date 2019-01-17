@@ -14,10 +14,11 @@ const Word = styled(Text)`
 `;
 
 const FeedObjectLink = ({
-  __typename, label, item_phrase, href, visibility, ...rest
+  __typename, label, href, visibility, ...rest
 }) => {
   const Tag = href ? Link : Span;
   const fontWeight = href ? 'bold' : 'normal';
+
   return (
     <Word
       display="inline"
@@ -28,7 +29,7 @@ const FeedObjectLink = ({
     >
       <Tag
         href={href}
-        dangerouslySetInnerHTML={{ __html: item_phrase || label }}
+        dangerouslySetInnerHTML={{ __html: label }}
       />
     </Word>
   );
@@ -39,14 +40,10 @@ FeedObjectLink.propTypes = {
   label: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
   visibility: PropTypes.string,
-  item_phrase: PropTypes.string,
-  body: PropTypes.string,
 };
 
 FeedObjectLink.defaultProps = {
   visibility: null,
-  body: null,
-  item_phrase: '',
 };
 
 export default FeedObjectLink;

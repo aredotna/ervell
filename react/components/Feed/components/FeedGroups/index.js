@@ -50,12 +50,19 @@ const FeedGroups = ({ groups, context }) => (
     {groups.length > 0 &&
       <Body p={6}>
         {groups.map(group => (
-          <FeedGroup key={group.id}>
-            <FeedGroupSentence
-              key={group.id}
-              group={group}
-            />
-            <FeedGroupObjects objects={group.objects} context={context} />
+          <FeedGroup key={`FeedGroup__${group.id}`}>
+            {[
+              <FeedGroupSentence
+                key={`FeedGroupSentence__${group.id}`}
+                group={group}
+              />,
+
+              <FeedGroupObjects
+                key={`FeedGroupObjects__${group.id}`}
+                objects={group.objects}
+                context={context}
+              />,
+            ]}
           </FeedGroup>
         ))}
       </Body>

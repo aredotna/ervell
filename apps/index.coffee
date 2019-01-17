@@ -72,10 +72,6 @@ console.time('onboarding')
 app.use(require('../apps/onboarding'))
 console.timeEnd('onboarding')
 
-console.time('ui')
-app.use(require('../apps/ui'))
-console.timeEnd('ui')
-
 console.time('graphql')
 app.use(require('../apps/graphql'))
 console.timeEnd('graphql')
