@@ -44,7 +44,7 @@ const HR = styled(HorizontalRule).attrs({ my: 0, color: 'gray.light' })`
 `;
 
 const CountLine = styled(Text).attrs({
-  f: 1,
+  f: 2,
   underlineLinks: true,
   color: 'gray.medium',
 })`
