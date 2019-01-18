@@ -69,7 +69,7 @@
     "copy-to-clipboard": "^3.0.8",
     "cross-fetch": "^3.0.0",
     "diacritics": "*",
-    "express": "^4.15.4",
+    "express": "^4.16.4",
     "express-spam-referral-blocker": "^1.2.1",
     "express-subdomain": "^1.0.4",
     "fastclick": "^1.0.6",
