@@ -7148,6 +7148,14 @@ he@1.1.1:
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
   integrity sha1-k0EP0hsAlzUVH4howvJx80J+I/0=
 
+heroku-client@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/heroku-client/-/heroku-client-3.0.7.tgz#abf4fe47cf88814ba1e16a1409999b92a5f6f99d"
+  integrity sha512-wL8d3ufIWGzL8B2U7oPzN+SdcMt6LPqA/x4nb9pDG45IXpr8KO+N4dvX4Vycgn0WrJVDfQnQ1juctJsUwuoeww==
+  dependencies:
+    is-retry-allowed "^1.0.0"
+    tunnel-agent "^0.6.0"
+
 history@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"
