@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const Heroku = require('heroku-client');
+
+const heroku = new Heroku({ token: process.env.HEROKU_PLATFORM_API_TOKEN });
+
+const APP_NAME = process.env.HEROKU_APP_NAME || 'ervell-staging';
+const BASE_APP_PATH = `/apps/${APP_NAME}`;
+
+console.log(`Checking dynos on ${APP_NAME}`);
+
+heroku.get(`${BASE_APP_PATH}/dynos`)
+  .then((dynos) => {
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    const dyno = dynos[currentHour % dynos.length];
+    console.log(`Restarting ${dyno.id}`);
+
+    // https://devcenter.heroku.com/articles/platform-api-reference#dyno-restart
+    // DELETE /apps/{app_id_or_name}/dynos/{dyno_id_or_name}
+    return heroku.delete(`${BASE_APP_PATH}/dynos/${dyno.id}`);
+  })
+  .then(() => console.log('Done.'))
+  .catch(err => console.error(err));
