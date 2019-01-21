@@ -55,7 +55,7 @@ const Channels = ({
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
-    count={identifiable.counts.channels - 1}
+    count={identifiable.counts.channels}
   >
     <ProfileChannels id={id} sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
   </EmptyMessageOrComponent>

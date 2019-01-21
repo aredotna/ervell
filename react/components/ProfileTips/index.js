@@ -6,7 +6,6 @@ import constants from 'react/styles/constants';
 import profileTipsQuery from 'react/components/ProfileTips/queries/profileTips';
 
 import Box from 'react/components/UI/Box';
-import Text from 'react/components/UI/Text';
 import ProfileTip from 'react/components/ProfileTips/components/ProfileTip';
 
 export default class ProfileTips extends Component {
