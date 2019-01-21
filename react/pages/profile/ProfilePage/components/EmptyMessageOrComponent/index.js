@@ -14,28 +14,19 @@ const EmptyMessageOrComponent = ({
   identifiable,
   ...rest
 }) => {
-  const contentCount = identifiable.counts.blocks + identifiable.counts.channels;
   const createdAtDaysAgo = moment().diff(moment(identifiable.created_at), 'days');
-
   const isMyProfile = identifiable.is_me || identifiable.is_current_user_a_member;
   const isRecentAccount = createdAtDaysAgo <= 7;
-  const isSectionEmpty = sectionCount === 0;
-  const isProfileTotallyEmpty = contentCount === 0;
+  const isSectionEmpty = sectionCount <= 0;
   const isGroupProfile = identifiable.__typename === 'Group';
 
   const components = [];
 
-  if (
-    (isMyProfile && isRecentAccount && !isProfileTotallyEmpty && !isGroupProfile) ||
-    (isMyProfile && isProfileTotallyEmpty && !isGroupProfile)
-  ) {
-    components.push(<ProfileTips key="profileTips" />);
+  if (isMyProfile && isRecentAccount && !isGroupProfile) {
+    components.push(<ProfileTips key="profileTips" isEmpty={isSectionEmpty} />);
   }
 
-  if (
-    (isSectionEmpty && (isMyProfile && !isProfileTotallyEmpty)) ||
-    (!isMyProfile && isSectionEmpty)
-  ) {
+  if (isSectionEmpty) {
     const profileEmptyMessage = (
       <ProfileEmptyMessage
         key="profileEmptyMessage"

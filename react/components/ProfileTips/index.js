@@ -6,7 +6,6 @@ import constants from 'react/styles/constants';
 import profileTipsQuery from 'react/components/ProfileTips/queries/profileTips';
 
 import Box from 'react/components/UI/Box';
-import Text from 'react/components/UI/Text';
 import ProfileTip from 'react/components/ProfileTips/components/ProfileTip';
 
 export default class ProfileTips extends Component {
@@ -20,13 +19,6 @@ export default class ProfileTips extends Component {
 
           return (
             <Box mt={8} mr={constants.doubleBlockGutter}>
-              {me.counts.channels + me.counts.blocks === 0 &&
-                <Text f={6} mb={6} color="gray.medium" lineHeight={2}>
-                  Welcome to Are.na, this is your profile.{' '}
-                  All of your channels and content will show up here.
-                </Text>
-              }
-
               {!me.has_seen_classic_channels &&
                 <ProfileTip name="has_seen_classic_channels">
                   Infographics, cyberfeminism, and unschooling and more:{' '}

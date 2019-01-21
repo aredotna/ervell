@@ -43,24 +43,43 @@ export default class ProfileEmptyMessage extends Component {
   }
 
   render() {
-    const { isMine } = this.props;
+    const { isMine, identifiable } = this.props;
+    const isGroup = identifiable.__typename === 'Group';
 
     return (
       <Copy f={6} my={8} color="gray.medium" lineHeight={2}>
-        There&#39;s no {!isMine && 'public'} content here yet.<br />
 
-        {!isMine &&
+        {/* Profile is the current user's */}
+        {isMine && !isGroup &&
           <div>
-            Try{' '}
-            <a href="/explore">explore</a>
-            {' '}to see what other people are up to.
+            This is your profile.<br />
+            All of your channels and content will show up here.
           </div>
         }
 
+        {/* Profile is the current user's group */}
+        {isMine && isGroup &&
+          <div>
+            This is your group&#39;s profile.<br />
+            All of your group&#39;s channels will show up here.
+          </div>
+        }
+
+        {/* Profile is either the current user's or the current user's group */}
         {isMine &&
           <div>
             Try{' '}
             <a href="#" onClick={this.openNewChannelModal}>creating a channel</a>.
+          </div>
+        }
+
+        {/* Profile is not associated with the current user */}
+        {!isMine &&
+          <div>
+            There&#39;s no public content here yet.<br />
+            Try{' '}
+            <a href="/explore">explore</a>
+            {' '}to see what other people are up to.
           </div>
         }
       </Copy>
