@@ -20,13 +20,6 @@ export default class ProfileTips extends Component {
 
           return (
             <Box mt={8} mr={constants.doubleBlockGutter}>
-              {me.counts.channels + me.counts.blocks === 0 &&
-                <Text f={6} mb={6} color="gray.medium" lineHeight={2}>
-                  Welcome to Are.na, this is your profile.{' '}
-                  All of your channels and content will show up here.
-                </Text>
-              }
-
               {!me.has_seen_classic_channels &&
                 <ProfileTip name="has_seen_classic_channels">
                   Infographics, cyberfeminism, and unschooling and more:{' '}
