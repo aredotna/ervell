@@ -35,7 +35,6 @@ session = require 'cookie-session'
 path = require 'path'
 logger = require 'morgan'
 multipart = require 'connect-multiparty'
-artsyError = require 'artsy-error-handler'
 bucketAssets = require 'bucket-assets'
 favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
@@ -129,7 +128,6 @@ module.exports = (app) ->
       domain: COOKIE_DOMAIN
       key: SESSION_COOKIE_KEY
       maxAge: SESSION_COOKIE_MAX_AGE
-    .use artsyError.helpers
     .use arenaPassport({ CurrentUser })
     .use checkSession
     .use localsMiddleware
@@ -159,22 +157,7 @@ module.exports = (app) ->
 
   # Convert the GraphQL error messages into some kind of matching status code
   app.use require('./middleware/errorStatus.js').default
-
   app.use(makeErrorHandler(airbrake))
-
-  if NODE_ENV is 'development'
-    app.use (err, req, res, next) =>
-      res.status(err.status or 500)
-      res.send("""
-        <h1>#{err.status or 500}</h1>
-        <h2>Message</h2>
-        <pre>#{err.message}</pre>
-        <h3>Stacktrace</h3>
-        <pre>#{err.stack}</pre>
-      """)
-  else
-    # TODO: Kill this/replace with something that's not a Node module
-    artsyError.handlers app,
-      template: path.resolve(__dirname, '../components/layout/templates/error.jade')
+  app.use(require('../apps/errors').default)
 
   console.log 'Completed set up.'
