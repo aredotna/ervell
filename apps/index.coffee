@@ -12,6 +12,11 @@ console.time('feed')
 app.use(require('../apps/feed'))
 console.timeEnd('feed')
 
+
+console.time('explore')
+app.use(require('../apps/explore'))
+console.timeEnd('explore')
+
 console.time('home')
 app.use(require('../apps/home'))
 console.timeEnd('home')

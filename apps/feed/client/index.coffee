@@ -10,7 +10,6 @@ qs = require 'qs'
 { FEED_TYPE, SORT, MODE } = require('sharify').data
 { default: initializeNotifications } = require './notifications.js'
 { default: initializeFeed } = require './feed.js'
-{ default: initializeExplore } = require './explore.js'
 
 module.exports = ->
   # Sets up React component for header
@@ -32,5 +31,3 @@ module.exports = ->
       initializeFeed($('.js-feed'))
     when 'notifications'
       initializeNotifications($('.js-feed'))
-    when 'explore'
-      initializeExplore($('.explore-contents'))

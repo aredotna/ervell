@@ -1,5 +1,4 @@
 import express from 'express';
-import ExploreBlocks from 'collections/explore_blocks.coffee';
 
 import getFirstStatusCode from 'react/util/getFirstStatusCode';
 
@@ -7,8 +6,6 @@ import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
 import setTipsMiddleware from 'apps/feed/middleware/setTips';
-import setSortMiddleware from 'apps/feed/middleware/setSort';
-import setSubjectModeMiddleware from 'apps/feed/middleware/setSubjectMode';
 import HomeComponent from 'react/components/Home';
 import EmptyConnectTwitter from 'react/pages/feed/components/EmptyConnectTwitter';
 import NoFollowingMessage from 'react/pages/feed/components/NoFollowingMessage';
@@ -19,22 +16,6 @@ const app = express();
 
 app.set('views', `${__dirname}/templates`);
 app.set('view engine', 'jade');
-
-const setAndFetchBlocks = (_req, res) => {
-  const { SEED, SORT, SUBJECT } = res.locals.sd;
-
-  const blocks = new ExploreBlocks([], {
-    filter: SUBJECT,
-    sort: SORT,
-    seed: SEED,
-  });
-
-  return blocks.fetch()
-    .then(() => {
-      res.locals.sd.BLOCKS = blocks.toJSON();
-      res.locals.blocks = blocks.models;
-    });
-};
 
 const setHeaderMiddleware = (req, res, next) => {
   const { SORT, MODE } = res.locals.sd;
@@ -95,15 +76,6 @@ const renderNotifications = (_req, res) => {
   res.render('feed');
 };
 
-const renderExplore = (req, res, next) => {
-  res.locals.sd.FEED_TYPE = 'explore';
-  res.locals.sd.CURRENT_ACTION = 'explore';
-
-  return setAndFetchBlocks(req, res)
-    .then(() => res.render('explore'))
-    .catch(next);
-};
-
 const findFriendsCallback = (req, res, next) =>
   req.apollo.client.mutate({
     mutation: createAuthenticatedService,
@@ -117,17 +89,10 @@ const middlewareStack = [
   setHeaderMiddleware,
 ];
 
-const exploreMiddlewareStack = [
-  setSortMiddleware,
-  setSubjectModeMiddleware,
-];
 
 app.get('/', homePathMiddleware, setTipsMiddleware, ...middlewareStack, renderFeed);
 app.get('/feed', ensureLoggedInMiddleware, setTipsMiddleware, ...middlewareStack, renderFeed);
 app.get('/notifications', ensureLoggedInMiddleware, ...middlewareStack, renderNotifications);
-app.get('/explore', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
-app.get('/explore/channels', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
-app.get('/explore/blocks', ...exploreMiddlewareStack, ...middlewareStack, renderExplore);
 app.get('/feed/find-friends/callback', apolloMiddleware, ensureLoggedInMiddleware, findFriendsCallback);
 
 module.exports = app;
