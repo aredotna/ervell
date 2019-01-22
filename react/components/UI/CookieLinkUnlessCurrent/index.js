@@ -6,10 +6,14 @@ import { NavLink } from 'react-router-dom';
 
 const Link = styled(NavLink)`
   display: block;
-  color: ${x => x.theme.colors.gray.regular};
+  color: ${props => props.theme.colors.gray.regular} !important;
+
+  &:hover {
+    color: black !important;
+  }
 
   ${({ isActive, theme }) => isActive && isActive() && `
-    color: ${theme.colors.gray.semiBold};
+    color: ${theme.colors.gray.semiBold} !important;
     cursor: default;
   `}
 `;

@@ -2,29 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  margin-bottom: 1em;
+import Box from 'react/components/UI/Box';
+import Text from 'react/components/UI/Text';
+
+const Title = styled(Text).attrs({
+  mb: '0.5em',
+  pb: '0.5em',
+  f: 2,
+  lineHeight: 2,
+  color: 'gray.medium',
+})`
+  border-bottom: 1px solid ${props => props.theme.colors.gray.light};
 `;
 
-const Title = styled.h4`
-  margin: 0 0 0.5em 0;
-  padding: 0 0 0.5em 0;
-  font-size: ${x => x.theme.fontSizesIndexed.sx};
-  line-height: ${x => x.theme.lineHeightsIndexed.tall};
-  color: ${x => x.theme.colors.gray.medium};
-  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
-  font-weight: normal;
-`;
-
-const Content = styled.div`
-  margin: 0.5em 0;
-  color: ${x => x.theme.colors.gray.semiBold};
-  font-size: ${x => x.theme.fontSizesIndexed.sx};
-  line-height: ${x => x.theme.lineHeightsIndexed.tall};
-
+const Content = styled(Text).attrs({
+  my: '0.5em',
+  color: 'gray.semiBold',
+  f: 2,
+  lineHeight: 2,
+})`
   p {
-    margin: 0.5em auto;
-    padding-right: 1em;
+    margin: ${props => props.theme.space[3]} auto;
+    padding-right: ${props => props.theme.space[6]};
 
     &:first-child {
       margin-top: 0;
@@ -37,6 +36,10 @@ const Content = styled.div`
 
   a {
     font-weight: bold;
+
+    &:hover {
+      color: black;
+    }
   }
 `;
 
@@ -50,7 +53,7 @@ export default class Pocket extends Component {
     const { title, children } = this.props;
 
     return (
-      <Container>
+      <Box mb={6}>
         <Title>
           {title}
         </Title>
@@ -58,7 +61,7 @@ export default class Pocket extends Component {
         <Content>
           {children}
         </Content>
-      </Container>
+      </Box>
     );
   }
 }
