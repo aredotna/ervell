@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet-async';
 
-const Layout = ({
+const Page = ({
   bundleName,
   helmet,
   content,
@@ -17,6 +17,8 @@ const Layout = ({
   <html lang="en-US">
     <head>
       {helmet.title.toComponent()}
+      {helmet.meta.toComponent()}
+      {helmet.link.toComponent()}
 
       {styles}
     </head>
@@ -48,7 +50,7 @@ const Layout = ({
   </html>
 );
 
-Layout.propTypes = {
+Page.propTypes = {
   bundleName: PropTypes.string.isRequired,
   asset: PropTypes.func.isRequired,
 
@@ -62,7 +64,7 @@ Layout.propTypes = {
   sharify: PropTypes.object.isRequired,
 };
 
-Layout.defaultProps = {
+Page.defaultProps = {
 };
 
-export default Layout;
+export default Page;

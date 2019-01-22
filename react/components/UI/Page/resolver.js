@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import Layout from 'react/components/UI/Layout';
+import Page from 'react/components/UI/Page';
 
 export default ({
   bundleName,
@@ -9,7 +9,7 @@ export default ({
   res,
 }) => {
   const html = (
-    <Layout
+    <Page
       bundleName={bundleName}
       asset={res.locals.asset}
       sharify={res.locals.sharify.data}

@@ -16,13 +16,13 @@ export const renderInlineComponent = ({ client, Component, props = {} }) => {
     }));
 };
 
-// What's different if we're rendering a full layout?
+// What's different if we're rendering a full page?
 // - Uses `getStyleElement` to get a React component instead of static style markup.
 // - Passes in `helmetContext`; returns a `helmet` prop.
 //
 // TODO: We should be able to do away with inline rendering entirely once Jade
 // is no longer needed.
-export const renderLayoutComponent = ({ client, Component, props = {} }) => {
+export const renderPageComponent = ({ client, Component, props = {} }) => {
   const sheet = new ServerStyleSheet();
   const helmetContext = {};
   const WrappedComponent = wrapWithProviders(client, helmetContext)(Component, props);
@@ -39,8 +39,8 @@ export const renderLayoutComponent = ({ client, Component, props = {} }) => {
 
 export default client =>
   (Component, props = {}, options = {}) => {
-    if (options.mode === 'layout') {
-      return renderLayoutComponent({ client, Component, props });
+    if (options.mode === 'page') {
+      return renderPageComponent({ client, Component, props });
     }
 
     return renderInlineComponent({ client, Component, props });

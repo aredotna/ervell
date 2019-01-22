@@ -1,7 +1,7 @@
 import express from 'express';
 
 import apolloMiddleware from 'react/apollo/middleware';
-import layoutResolver from 'react/components/UI/Layout/resolver';
+import pageResolver from 'react/components/UI/Page/resolver';
 
 import logoutMiddleware from 'apps/authentication/middleware/logout';
 import redirectToMiddleware from 'lib/middleware/redirect_to.coffee';
@@ -42,9 +42,9 @@ const render = (req, res, next) => {
     return res.redirect('/');
   }
 
-  return req.apollo.render(withStaticRouter(Routes), null, { mode: 'layout' })
+  return req.apollo.render(withStaticRouter(Routes), null, { mode: 'page' })
     .then((apolloRes) => {
-      layoutResolver({
+      pageResolver({
         bundleName: 'authentication',
         apolloRes,
         res,
