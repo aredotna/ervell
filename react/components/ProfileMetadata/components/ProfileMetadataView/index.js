@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import profileMetadataViewFragment from 'react/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView';
 
 import Pocket from 'react/components/UI/Pocket';
-import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
+import CookieLinkUnlessCurrent from 'react/components/UI/CookieLinkUnlessCurrent';
 
 export default class ProfileMetadataView extends Component {
   static propTypes = {
@@ -22,44 +22,48 @@ export default class ProfileMetadataView extends Component {
 
     return (
       <Pocket title="View">
-        <ProfileLinkUnlessCurrent
+        <CookieLinkUnlessCurrent
           name="view"
           value="channels"
+          prefix="Profile"
           to={`${href}/channels?sort=${sort}`}
           isActive={this.isViewActive('channels')}
         >
           Channels
-        </ProfileLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
 
         {__typename === 'User' &&
-          <ProfileLinkUnlessCurrent
+          <CookieLinkUnlessCurrent
             name="view"
+            prefix="Profile"
             value="blocks"
             to={`${href}/blocks?sort=${sort}`}
             isActive={this.isViewActive('blocks')}
           >
             Blocks
-          </ProfileLinkUnlessCurrent>
+          </CookieLinkUnlessCurrent>
         }
 
-        <ProfileLinkUnlessCurrent
+        <CookieLinkUnlessCurrent
           name="view"
           value="index"
+          prefix="Profile"
           to={`${href}/index`}
           isActive={this.isViewActive('index')}
         >
           Index
-        </ProfileLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
 
         {__typename === 'User' &&
-          <ProfileLinkUnlessCurrent
+          <CookieLinkUnlessCurrent
             name="view"
             value="all"
+            prefix="Profile"
             to={`${href}/all?sort=${sort}`}
             isActive={this.isViewActive('all')}
           >
             All
-          </ProfileLinkUnlessCurrent>
+          </CookieLinkUnlessCurrent>
         }
       </Pocket>
     );
