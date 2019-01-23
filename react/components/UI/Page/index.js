@@ -5,6 +5,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet-async';
 
+const GOOGLE_ANALYTICS_TRACKING_TAG = `
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+`;
+
 const Page = ({
   bundleName,
   helmet,
@@ -12,7 +19,7 @@ const Page = ({
   state,
   styles,
   asset,
-  sharify,
+  sharifyData,
 }) => (
   <html lang="en-US">
     <head>
@@ -29,12 +36,9 @@ const Page = ({
       <script src={asset('/assets/vendor.js')} />
       <script src={asset('/assets/common.js')} />
 
-      {/* TODO: Various global set up, if any (analytics, etc)? */}
-      {/* <script src={asset('/assets/layout.js')} /> */}
-
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.__sharifyData=${JSON.stringify(sharify).replace(/</g, '\\u003c')};`,
+          __html: `window.__sharifyData=${JSON.stringify(sharifyData).replace(/</g, '\\u003c')};`,
         }}
       />
 
@@ -46,6 +50,10 @@ const Page = ({
 
       <script src={asset(`/assets/${bundleName}.js`)} />
       <script src={asset('/assets/runtime.js')} />
+
+      {!sharifyData.DO_NOT_TRACK &&
+        <script dangerouslySetInnerHTML={{ __html: GOOGLE_ANALYTICS_TRACKING_TAG }} />
+      }
     </body>
   </html>
 );
@@ -60,11 +68,9 @@ Page.propTypes = {
 
   // eslint-disable-next-line react/forbid-prop-types
   state: PropTypes.object.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  sharify: PropTypes.object.isRequired,
-};
 
-Page.defaultProps = {
+  // eslint-disable-next-line react/forbid-prop-types
+  sharifyData: PropTypes.object.isRequired,
 };
 
 export default Page;

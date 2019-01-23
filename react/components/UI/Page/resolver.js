@@ -12,7 +12,7 @@ export default ({
     <Page
       bundleName={bundleName}
       asset={res.locals.asset}
-      sharify={res.locals.sharify.data}
+      sharifyData={res.locals.sharify.data}
       content={apolloRes.html}
       helmet={apolloRes.helmet}
       styles={apolloRes.styles}
