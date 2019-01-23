@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Head from 'react/components/UI/Head';
+import Title from 'react/components/UI/Head/components/Title';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import ForgotPasswordForm from 'react/components/ForgotPasswordForm';
 
@@ -8,9 +8,9 @@ export default class ForgotPasswordPage extends Component {
   render() {
     return (
       <CenteringBox p={7}>
-        <Head>
-          <title>Reset Your Password</title>
-        </Head>
+        <Title>
+          Reset Your Password
+        </Title>
 
         <ForgotPasswordForm />
       </CenteringBox>

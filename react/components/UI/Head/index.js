@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet-async';
 
 const Head = ({ children, ...rest }) => (
-  <Helmet defaultTitle="Are.na" titleTemplate="Are.na / %s" {...rest}>
+  <Helmet defaultTitle="Are.na" {...rest}>
     {children}
   </Helmet>
 );

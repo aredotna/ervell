@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 
 import inviteeQuery from 'react/pages/authentication/AcceptInvitationPage/queries/invitee';
 
-import Head from 'react/components/UI/Head';
+import Title from 'react/components/UI/Head/components/Title';
 import Icons from 'react/components/UI/Icons';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
@@ -44,9 +44,9 @@ export default class AcceptInvitationPage extends Component {
           if (error) {
             return (
               <CenteringBox p={7} flexDirection="column">
-                <Head>
-                  <title>Sorry</title>
-                </Head>
+                <Title>
+                  Sorry
+                </Title>
 
                 <Icons name="ArenaMark" size={7} mb={9} />
 
@@ -65,9 +65,9 @@ export default class AcceptInvitationPage extends Component {
 
           return (
             <CenteringBox p={7}>
-              <Head>
-                <title>Complete Your Registration</title>
-              </Head>
+              <Title>
+                Complete Your Registration
+              </Title>
 
               <RegistrationForm
                 email={data.invitee.email}

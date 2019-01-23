@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 
 import passwordResettableUserQuery from 'react/pages/authentication/ResetPasswordPage/queries/passwordResettableUser';
 
-import Head from 'react/components/UI/Head';
+import Title from 'react/components/UI/Head/components/Title';
 import Text from 'react/components/UI/Text';
 import Icons from 'react/components/UI/Icons';
 import CenteringBox from 'react/components/UI/CenteringBox';
@@ -33,9 +33,9 @@ export default class ResetPasswordPage extends Component {
           if (error) {
             return (
               <CenteringBox p={7} flexDirection="column">
-                <Head>
-                  <title>Sorry</title>
-                </Head>
+                <Title>
+                  Sorry
+                </Title>
 
                 <Icons name="ArenaMark" size={7} mb={9} />
 
@@ -54,9 +54,9 @@ export default class ResetPasswordPage extends Component {
 
           return (
             <CenteringBox p={7}>
-              <Head>
-                <title>Reset your password</title>
-              </Head>
+              <Title>
+                Reset your password
+              </Title>
 
               <ResetPasswordForm
                 reset_password_token={reset_password_token}

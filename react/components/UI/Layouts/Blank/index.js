@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 import sharify from 'sharify';
 
 import Head from 'react/components/UI/Head';
+import Description from 'react/components/UI/Head/components/Description';
 
 const { data: { IMAGE_PATH } } = sharify;
 
@@ -27,8 +28,6 @@ export default class Blank extends PureComponent {
         <BodyStyle />
 
         <Head>
-          <meta property="description" content="Are.na is a social platform for creative and collaborative research." />
-
           <meta name="google-site-verification" content="yEDzyeh9dYsQoRw7VJA6X5aVthUCYVTNK6nOUQU1eEE" />
           <meta name="google-site-verification" content="YlzaBIQnBQhN5JFfKeoinJXrTlfdmdtFZ6s8Ez_O8vc" />
 
@@ -44,10 +43,12 @@ export default class Blank extends PureComponent {
           <meta name="apple-itunes-app" content="app-id=1299153149" />
           <link rel="mask-icon" href={`${IMAGE_PATH}arena-mark.svg" color="black`} />
 
-          <meta name="twitter:description" content="Are.na is a social platform for creative and collaborative research." />
           <meta name="twitter:site" content="@aredotna" />
-          <meta property="og:description" content="Are.na is a social platform for creative and collaborative research." />
         </Head>
+
+        <Description>
+          Are.na is a social platform for creative and collaborative research.
+        </Description>
 
         {children}
       </Fragment>
