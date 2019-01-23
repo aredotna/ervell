@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
 
-import CenteringBox from 'react/components/UI/CenteringBox';
-import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ExploreMetadata from 'react/components/ExploreMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
-import ErrorAlert from 'react/components/UI/ErrorAlert';
-// import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
+import ExploreViews from 'react/pages/explore/ExplorePage/components/ExploreViews';
 import LoggedOutCTA from 'react/components/LoggedOutCTA';
-
-import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
+import LoggedOutExploreContent from 'react/components/LoggedOutCTA/components/LoggedOutExploreContent';
 
 export default class ProfilePage extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
     view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     seed: PropTypes.number.isRequired,
@@ -22,7 +16,7 @@ export default class ProfilePage extends Component {
 
   render() {
     const {
-      id, view, sort, seed,
+      view, sort, seed,
     } = this.props;
 
     return (
@@ -33,13 +27,15 @@ export default class ProfilePage extends Component {
             sort={sort}
           />
 
-          {/* <ExploreViews
-            view={typedView}
+          <ExploreViews
+            view={view}
             sort={sort}
             seed={seed}
-          /> */}
+          />
 
-          <LoggedOutCTA />
+          <LoggedOutCTA>
+            <LoggedOutExploreContent />
+          </LoggedOutCTA>
         </div>
       </ErrorBoundary>
     );

@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { MODES, SORTS } from 'react/components/Home/config';
-
 import Grid from 'react/components/UI/Grid';
 import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 import HomeBreadcrumb from 'react/components/HomeMetadata/components/HomeBreadcrumb';
 import HomeMetadataView from 'react/components/HomeMetadata/components/HomeMetadataView';
-import HomeMetadataSort from 'react/components/HomeMetadata/components/HomeMetadataSort';
+import ExploreMetadataSort from 'react/components/ExploreMetadata/components/ExploreMetadataSort';
 
 class ExploreMetadata extends Component {
   static propTypes = {
-    mode: PropTypes.oneOf(MODES),
-    sort: PropTypes.oneOf(SORTS),
-  }
-
-  static defaultProps = {
-    mode: null,
-    sort: null,
+    view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
 
   render() {
-    const { mode, sort } = this.props;
+    const { view, sort } = this.props;
 
     return (
       <HeaderMetadataContainer
         breadcrumb={<HomeBreadcrumb />}
       >
         <Grid>
-          <HomeMetadataView mode={mode} sort={sort} />
-          <HomeMetadataSort mode={mode} sort={sort} />
+          <HomeMetadataView view={view} sort={sort} />
+          <ExploreMetadataSort view={view} sort={sort} />
         </Grid>
       </HeaderMetadataContainer>
     );
