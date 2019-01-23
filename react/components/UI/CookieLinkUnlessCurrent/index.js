@@ -14,24 +14,26 @@ const Link = styled(NavLink)`
   `}
 `;
 
-export default class ProfileLinkUnlessCurrent extends Component {
+export default class CookieLinkUnlessCurrent extends Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
+    prefix: PropTypes.string,
   }
 
   static defaultProps = {
     name: null,
     value: null,
+    prefix: '',
   }
 
   setCookie = () => {
-    const { name, value } = this.props;
+    const { name, value, prefix } = this.props;
 
     if (!name || !value) return;
 
     try {
-      Cookies.set(`Profile--${name}`, value);
+      Cookies.set(`${prefix}--${name}`, value);
     } catch (err) {
       console.error(err);
     }

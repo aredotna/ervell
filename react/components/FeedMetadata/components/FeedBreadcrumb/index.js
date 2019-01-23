@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
 import WithCurrentRoute from 'react/hocs/WithCurrentRoute';
-import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 const Options = styled.div`
 `;
@@ -28,39 +27,21 @@ const FeedOptions = (
   </Options>
 );
 
-const ExploreOptions = ({ isLoggedIn }) => (
-  <Options>
-    <div>Explore</div>
-
-    {isLoggedIn &&
-      <Option href="/feed">Feed</Option>
-    }
-  </Options>
-);
-
-ExploreOptions.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-};
-
-class HomeBreadcrumb extends Component {
+class FeedBreadcrumb extends Component {
   static propTypes = {
     currentRoute: PropTypes.shape({
       href: PropTypes.string.isRequired,
     }).isRequired,
-    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   render() {
-    const { currentRoute: { pathname }, isLoggedIn } = this.props;
+    const { currentRoute: { pathname } } = this.props;
 
     const stuckChildren = (
       <StickyBreadcrumbPath.Crumb>
         {{
           '/': 'Feed',
           '/feed': 'Feed',
-          '/explore': 'Explore',
-          '/explore/channels': 'Explore',
-          '/explore/blocks': 'Explore',
           '/notifications': 'Notifications',
         }[pathname]}
       </StickyBreadcrumbPath.Crumb>
@@ -72,9 +53,6 @@ class HomeBreadcrumb extends Component {
           {{
             '/': FeedOptions,
             '/feed': FeedOptions,
-            '/explore': ExploreOptions({ isLoggedIn }),
-            '/explore/channels': ExploreOptions({ isLoggedIn }),
-            '/explore/blocks': ExploreOptions({ isLoggedIn }),
             '/notifications': 'Notifications',
           }[pathname]}
         </StickyBreadcrumbPath.Crumb>
@@ -83,4 +61,4 @@ class HomeBreadcrumb extends Component {
   }
 }
 
-export default WithLoginStatus(WithCurrentRoute(HomeBreadcrumb));
+export default WithCurrentRoute(FeedBreadcrumb);
