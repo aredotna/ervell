@@ -22,7 +22,7 @@ export default class ExploreMetadataView extends Component {
     return (
       <Pocket title="View">
         <CookieLinkUnlessCurrent
-          to={`/explore?sort=${sort}`}
+          to={`/explore/all?sort=${sort}`}
           isActive={this.isViewActive('all')}
           prefix="Explore"
           name="view"

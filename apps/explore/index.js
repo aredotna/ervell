@@ -33,6 +33,7 @@ const resolve = [
 ];
 
 app.get('/explore', ...middlewareStack, ...resolve);
+app.get('/explore/all', ...middlewareStack, ...resolve);
 app.get('/explore/channels', ...middlewareStack, ...resolve);
 app.get('/explore/blocks', ...middlewareStack, ...resolve);
 
