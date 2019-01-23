@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 import WithStaticRouter from 'react/hocs/WithStaticRouter';
 
 import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
-import HomeBreadcrumb from 'react/components/HomeMetadata/components/HomeBreadcrumb';
+import FeedBreadcrumb from 'react/components/FeedMetadata/components/FeedBreadcrumb';
 
-class HomeMetadata extends Component {
+class FeedMetadata extends Component {
   render() {
     return (
       <HeaderMetadataContainer
-        breadcrumb={<HomeBreadcrumb />}
+        breadcrumb={<FeedBreadcrumb />}
       />
     );
   }
 }
 
-export default WithStaticRouter(HomeMetadata);
+export default WithStaticRouter(FeedMetadata);

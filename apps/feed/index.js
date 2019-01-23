@@ -6,7 +6,7 @@ import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
 import setTipsMiddleware from 'apps/feed/middleware/setTips';
-import HomeComponent from 'react/components/Home';
+import FeedMetadata from 'react/components/FeedMetadata';
 import EmptyConnectTwitter from 'react/pages/feed/components/EmptyConnectTwitter';
 import NoFollowingMessage from 'react/pages/feed/components/NoFollowingMessage';
 
@@ -17,19 +17,12 @@ const app = express();
 app.set('views', `${__dirname}/templates`);
 app.set('view engine', 'jade');
 
-const setHeaderMiddleware = (req, res, next) => {
-  const { SORT, MODE } = res.locals.sd;
-
-  return req.apollo.render(HomeComponent, {
-    sort: SORT,
-    mode: MODE,
+const setFeedHeader = (req, res, next) => req.apollo.render(FeedMetadata)
+  .then((feedMetadata) => {
+    res.locals.feedMetadata = feedMetadata;
+    next();
   })
-    .then((homeComponent) => {
-      res.locals.homeComponent = homeComponent;
-      next();
-    })
-    .catch(next);
-};
+  .catch(next);
 
 const renderFeed = (req, res, next) => {
   if (!req.user) return next();
@@ -86,7 +79,7 @@ const findFriendsCallback = (req, res, next) =>
 
 const middlewareStack = [
   apolloMiddleware,
-  setHeaderMiddleware,
+  setFeedHeader,
 ];
 
 

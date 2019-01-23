@@ -27,7 +27,7 @@ const FeedOptions = (
   </Options>
 );
 
-class HomeBreadcrumb extends Component {
+class FeedBreadcrumb extends Component {
   static propTypes = {
     currentRoute: PropTypes.shape({
       href: PropTypes.string.isRequired,
@@ -61,4 +61,4 @@ class HomeBreadcrumb extends Component {
   }
 }
 
-export default WithCurrentRoute(HomeBreadcrumb);
+export default WithCurrentRoute(FeedBreadcrumb);
