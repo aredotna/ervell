@@ -65,8 +65,6 @@ class ExploreViews extends Component {
       view, sort, seed,
     } = this.props;
 
-    console.log('view', view);
-
     switch (view) {
       case 'all':
         return (

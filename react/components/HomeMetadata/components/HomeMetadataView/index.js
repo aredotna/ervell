@@ -19,8 +19,6 @@ export default class HomeMetadataView extends Component {
   render() {
     const { sort } = this.props;
 
-    console.log('sort', sort);
-
     return (
       <Pocket title="View">
         <CookieLinkUnlessCurrent
