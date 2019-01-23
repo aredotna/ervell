@@ -3,7 +3,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet-async';
 
 const GOOGLE_ANALYTICS_TRACKING_TAG = `
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -75,11 +74,19 @@ const Page = ({
   </html>
 );
 
+const helmetToComponentPropTypes = PropTypes.shape({
+  toComponent: PropTypes.func.isRequired,
+});
+
 Page.propTypes = {
   bundleName: PropTypes.string.isRequired,
   asset: PropTypes.func.isRequired,
 
-  helmet: PropTypes.shape(Helmet.propTypes).isRequired,
+  helmet: PropTypes.shape({
+    title: helmetToComponentPropTypes,
+    meta: helmetToComponentPropTypes,
+    link: helmetToComponentPropTypes,
+  }).isRequired,
   styles: PropTypes.string.isRequired,
   content: PropTypes.node.isRequired,
 
