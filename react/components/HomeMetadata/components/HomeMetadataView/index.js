@@ -2,41 +2,56 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Pocket from 'react/components/UI/Pocket';
-import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
+import CookieLinkUnlessCurrent from 'react/components/UI/CookieLinkUnlessCurrent';
 
 export default class HomeMetadataView extends Component {
   static propTypes = {
     sort: PropTypes.oneOf(['updated_at', 'random']).isRequired,
+    view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
   }
 
-  isCurrent = ({ targetHref, currentRoute }) =>
-    currentRoute.pathname === targetHref.split('?')[0];
+  isCurrent = ({ to, currentRoute }) =>
+    currentRoute.pathname === to.split('?')[0];
+
+  isViewActive = view => () =>
+    this.props.view === view;
 
   render() {
     const { sort } = this.props;
 
+    console.log('sort', sort);
+
     return (
       <Pocket title="View">
-        <HeaderMetadataLinkUnlessCurrent
-          href={`/explore?sort=${sort}`}
-          predicate={this.isCurrent}
+        <CookieLinkUnlessCurrent
+          to={`/explore?sort=${sort}`}
+          isActive={this.isViewActive('all')}
+          prefix="Explore"
+          name="view"
+          value="all"
         >
           All
-        </HeaderMetadataLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
 
-        <HeaderMetadataLinkUnlessCurrent
-          href={`/explore/channels?sort=${sort}`}
-          predicate={this.isCurrent}
+        <CookieLinkUnlessCurrent
+          to={`/explore/channels?sort=${sort}`}
+          isActive={this.isViewActive('channels')}
+          prefix="Explore"
+          name="view"
+          value="channels"
         >
           Channels
-        </HeaderMetadataLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
 
-        <HeaderMetadataLinkUnlessCurrent
-          href={`/explore/blocks?sort=${sort}`}
-          predicate={this.isCurrent}
+        <CookieLinkUnlessCurrent
+          to={`/explore/blocks?sort=${sort}`}
+          isActive={this.isViewActive('blocks')}
+          prefix="Explore"
+          name="view"
+          value="blocks"
         >
           Blocks
-        </HeaderMetadataLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
       </Pocket>
     );
   }
