@@ -1,100 +1,112 @@
 // NOTE: Do not use any components here,
 // as they won't be wrapped in the required providers.
+//
+// This component also does NOT render on the client-side.
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const GOOGLE_ANALYTICS_TRACKING_TAG = `
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-`;
+export default class Page extends PureComponent {
+  static propTypes = {
+    bundleName: PropTypes.string.isRequired,
+    asset: PropTypes.func.isRequired,
 
-const Page = ({
-  bundleName,
-  helmet,
-  content,
-  state,
-  styles,
-  asset,
-  sharifyData,
-}) => (
-  <html lang="en-US">
-    <head>
-      {helmet.title.toComponent()}
-      {helmet.meta.toComponent()}
-      {helmet.link.toComponent()}
+    helmet: PropTypes.shape({
+      title: PropTypes.shape({
+        toComponent: PropTypes.func.isRequired,
+      }),
+      meta: PropTypes.shape({
+        toComponent: PropTypes.func.isRequired,
+      }),
+      link: PropTypes.shape({
+        toComponent: PropTypes.func.isRequired,
+      }),
+    }).isRequired,
+    styles: PropTypes.string.isRequired,
+    content: PropTypes.node.isRequired,
 
-      <meta name="google-site-verification" content="yEDzyeh9dYsQoRw7VJA6X5aVthUCYVTNK6nOUQU1eEE" />
-      <meta name="google-site-verification" content="YlzaBIQnBQhN5JFfKeoinJXrTlfdmdtFZ6s8Ez_O8vc" />
+    // eslint-disable-next-line react/forbid-prop-types
+    state: PropTypes.object.isRequired,
 
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    // eslint-disable-next-line react/forbid-prop-types
+    sharifyData: PropTypes.object.isRequired,
+  }
 
-      <link rel="apple-touch-icon" href={`${sharifyData.IMAGE_PATH}touch-icon-iphone.png`} />
-      <link rel="apple-touch-icon" sizes="76x76" href={`${sharifyData.IMAGE_PATH}touch-icon-ipad.png`} />
-      <link rel="apple-touch-icon" sizes="120x120" href={`${sharifyData.IMAGE_PATH}touch-icon-iphone-retina.png`} />
-      <link rel="apple-touch-icon" sizes="152x152" href={`${sharifyData.IMAGE_PATH}touch-icon-ipad-retina.png`} />
+  render() {
+    const {
+      bundleName,
+      helmet,
+      content,
+      state,
+      styles,
+      asset,
+      sharifyData,
+    } = this.props;
 
-      <meta name="apple-itunes-app" content="app-id=1299153149" />
-      <link rel="mask-icon" href={`${sharifyData.IMAGE_PATH}arena-mark.svg" color="black`} />
+    return (
+      <html lang="en-US">
+        <head>
+          {helmet.title.toComponent()}
+          {helmet.meta.toComponent()}
+          {helmet.link.toComponent()}
 
-      <meta name="twitter:site" content="@aredotna" />
+          <meta name="google-site-verification" content="yEDzyeh9dYsQoRw7VJA6X5aVthUCYVTNK6nOUQU1eEE" />
+          <meta name="google-site-verification" content="YlzaBIQnBQhN5JFfKeoinJXrTlfdmdtFZ6s8Ez_O8vc" />
 
-      {styles}
-    </head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-    <body>
-      <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
+          <link rel="apple-touch-icon" href={`${sharifyData.IMAGE_PATH}touch-icon-iphone.png`} />
+          <link rel="apple-touch-icon" sizes="76x76" href={`${sharifyData.IMAGE_PATH}touch-icon-ipad.png`} />
+          <link rel="apple-touch-icon" sizes="120x120" href={`${sharifyData.IMAGE_PATH}touch-icon-iphone-retina.png`} />
+          <link rel="apple-touch-icon" sizes="152x152" href={`${sharifyData.IMAGE_PATH}touch-icon-ipad-retina.png`} />
 
-      <script src={asset('/assets/vendor.js')} />
-      <script src={asset('/assets/common.js')} />
+          <meta name="apple-itunes-app" content="app-id=1299153149" />
+          <link rel="mask-icon" href={`${sharifyData.IMAGE_PATH}arena-mark.svg`} color="black" />
 
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.__sharifyData=${JSON.stringify(sharifyData).replace(/</g, '\\u003c')};`,
-        }}
-      />
+          <meta name="twitter:site" content="@aredotna" />
 
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
-        }}
-      />
+          {styles}
+        </head>
 
-      <script src={asset(`/assets/${bundleName}.js`)} />
-      <script src={asset('/assets/runtime.js')} />
+        <body>
+          <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
 
-      {!sharifyData.DO_NOT_TRACK &&
-        <script dangerouslySetInnerHTML={{ __html: GOOGLE_ANALYTICS_TRACKING_TAG }} />
-      }
-    </body>
-  </html>
-);
+          <script src={asset('/assets/vendor.js')} />
+          <script src={asset('/assets/common.js')} />
 
-const helmetToComponentPropTypes = PropTypes.shape({
-  toComponent: PropTypes.func.isRequired,
-});
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.__sharifyData=${JSON.stringify(sharifyData).replace(/</g, '\\u003c')};`,
+            }}
+          />
 
-Page.propTypes = {
-  bundleName: PropTypes.string.isRequired,
-  asset: PropTypes.func.isRequired,
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
+            }}
+          />
 
-  helmet: PropTypes.shape({
-    title: helmetToComponentPropTypes,
-    meta: helmetToComponentPropTypes,
-    link: helmetToComponentPropTypes,
-  }).isRequired,
-  styles: PropTypes.string.isRequired,
-  content: PropTypes.node.isRequired,
+          <script src={asset(`/assets/${bundleName}.js`)} />
+          <script src={asset('/assets/runtime.js')} />
 
-  // eslint-disable-next-line react/forbid-prop-types
-  state: PropTypes.object.isRequired,
+          {!sharifyData.DO_NOT_TRACK &&
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  // eslint-disable-next-line react/forbid-prop-types
-  sharifyData: PropTypes.object.isRequired,
-};
-
-export default Page;
+                  ga('create', '${sharifyData.GOOGLE_ANALYTICS_ID}', 'auto');
+                `,
+              }}
+            />
+          }
+        </body>
+      </html>
+    );
+  }
+}
