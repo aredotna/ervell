@@ -1201,11 +1201,6 @@
     react-lifecycles-compat "^3.0.4"
     react-modal "^3.5.1"
 
-"@types/async@2.0.50":
-  version "2.0.50"
-  resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.50.tgz#117540e026d64e1846093abbd5adc7e27fda7bcb"
-  integrity sha512-VMhZMMQgV1zsR+lX/0IBfAk+8Eb7dPVMWiQGFAt3qjo5x7Ml6b77jUo0e1C3ToD+XRDXqtrfw+6AB0uUsPEr3Q==
-
 "@types/body-parser@*":
   version "1.16.8"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.16.8.tgz#687ec34140624a3bec2b1a8ea9268478ae8f3be3"
@@ -1773,7 +1768,15 @@ apollo-cache-inmemory@^1.4.1:
     apollo-utilities "^1.1.1"
     optimism "^0.6.9"
 
-apollo-cache@1.1.24, apollo-cache@^1.1.24:
+apollo-cache@1.1.25:
+  version "1.1.25"
+  resolved "https://registry.yarnpkg.com/apollo-cache/-/apollo-cache-1.1.25.tgz#87a15a2a19993bb07234ccee6839b59d6fb49ac5"
+  integrity sha512-9HhI/tVEHAeGaJJvi1Vpf6PzXUCA0PqNbigi2G3uOc180JjxbcaBvEbKXMEDb/UyTXkFWzI4PiPDuDQFqmIMSA==
+  dependencies:
+    apollo-utilities "^1.1.2"
+    tslib "^1.9.3"
+
+apollo-cache@^1.1.24:
   version "1.1.24"
   resolved "https://registry.yarnpkg.com/apollo-cache/-/apollo-cache-1.1.24.tgz#2b833864458e97ae1da72901e0c25aa3cf83b233"
   integrity sha512-+X2JuSisS0+NiMGDR1X/SigHZdet1MMWBqQS7Sf0YEnhE+uKj+dznHMYmWx3s1RoPNNKGn/FAhmUJ/GSq2yMtg==
@@ -1781,19 +1784,18 @@ apollo-cache@1.1.24, apollo-cache@^1.1.24:
     apollo-utilities "^1.1.1"
 
 apollo-client@^2.4.10:
-  version "2.4.10"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-2.4.10.tgz#de9e78fb4589b7e95920e487f8f3319a55b1cfed"
-  integrity sha512-zHT6kd7O9LdKZTLnxT/vHZ1b/TeG67zqvqxxdEKRqNgo+v25HqVZJ4KKJMa0Hp5fEJf6ugBBaCbsGapverZQNw==
+  version "2.4.12"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-2.4.12.tgz#9fa15f502d04f8cc788a9fbb825163b437681504"
+  integrity sha512-E5ClFSB9btJLYibLKwLDSCg+w9tI+25eZgXOM+DClawu7of4d/xhuV/xvpuZpsMP3qwrp0QPacBnfG4tUJs3/w==
   dependencies:
     "@types/zen-observable" "^0.8.0"
-    apollo-cache "1.1.24"
+    apollo-cache "1.1.25"
     apollo-link "^1.0.0"
     apollo-link-dedup "^1.0.0"
-    apollo-utilities "1.1.1"
+    apollo-utilities "1.1.2"
     symbol-observable "^1.0.2"
+    tslib "^1.9.3"
     zen-observable "^0.8.0"
-  optionalDependencies:
-    "@types/async" "2.0.50"
 
 apollo-link-context@^1.0.12:
   version "1.0.12"
@@ -1861,12 +1863,13 @@ apollo-storybook-react@^0.1.4:
   dependencies:
     apollo-storybook-core "^0.3.4"
 
-apollo-utilities@1.1.1, apollo-utilities@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.1.1.tgz#7175a07384d8e1f273ec1cf049a0d77c723b9ce3"
-  integrity sha512-C/q1Xot74SrJjkxNc6hr7VDCNTUoGGJYt/ZKyefIwBp4MoxWVp3Ii4cOuI1vYk0TNT0lWM4bNnE5vFfSJ3ocnQ==
+apollo-utilities@1.1.2, apollo-utilities@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.1.2.tgz#aa5eca9d1f1eb721c381a22e0dde03559d856db3"
+  integrity sha512-EjDx8vToK+zkWIxc76ZQY/irRX52puNg04xf/w8R0kVTDAgHuVfnFVC01O5vE25kFnIaa5em0pFI0p9b6YMkhQ==
   dependencies:
     fast-json-stable-stringify "^2.0.0"
+    tslib "^1.9.3"
 
 apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
   version "1.0.13"
@@ -1882,6 +1885,13 @@ apollo-utilities@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.6.tgz#7bfd7a702b5225c9a4591fe28c5899d9b5f08889"
   integrity sha512-3EUdGs19ZU5hN0zPF0h27blkd4aFqFxF0Qkec8o7iPFzxFeEf0UJGPg/b1St417K7Rta6/EDq2cYBQEzvOVq1g==
+
+apollo-utilities@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.1.1.tgz#7175a07384d8e1f273ec1cf049a0d77c723b9ce3"
+  integrity sha512-C/q1Xot74SrJjkxNc6hr7VDCNTUoGGJYt/ZKyefIwBp4MoxWVp3Ii4cOuI1vYk0TNT0lWM4bNnE5vFfSJ3ocnQ==
+  dependencies:
+    fast-json-stable-stringify "^2.0.0"
 
 app-root-dir@^1.0.2:
   version "1.0.2"
@@ -7334,7 +7344,7 @@ into-stream@^3.1.0:
     from2 "^2.1.1"
     p-is-promise "^1.1.0"
 
-invariant@^2.2.1:
+invariant@^2.2.1, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -10905,6 +10915,11 @@ react-error-overlay@5.0.0-next.3e165448:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.0.0-next.3e165448.tgz#2cbd10780c1fa9c7e35d6e443773e18948b7ee49"
   integrity sha512-YEDoDZkZWU1+8F1ZvczRYjrMiIQKHqeEwrBcNFIcMWnFMkYT6r7gIH8oBX/mwQlvsCv7kUwbeuN68xal2b7mQw==
 
+react-fast-compare@^2.0.2:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
+  integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
+
 react-fuzzy@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/react-fuzzy/-/react-fuzzy-0.5.2.tgz#fc13bf6f0b785e5fefe908724efebec4935eaefe"
@@ -10914,6 +10929,16 @@ react-fuzzy@^0.5.2:
     classnames "^2.2.5"
     fuse.js "^3.0.1"
     prop-types "^15.5.9"
+
+react-helmet-async@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-helmet-async/-/react-helmet-async-0.2.0.tgz#d20d8725c1dcdcc95d54e281a1040af47c3abffa"
+  integrity sha512-xo8oN+SUt0YkgQscKPTqhZZIOn5ni18FMv/H3KuBDt5+yAXTGktPEf3HU2EyufbHAF0TQ8qI+JrA3ILnjVfqNA==
+  dependencies:
+    invariant "^2.2.4"
+    prop-types "^15.6.1"
+    react-fast-compare "^2.0.2"
+    shallowequal "^1.0.2"
 
 react-html-attributes@^1.4.2:
   version "1.4.2"
@@ -11997,7 +12022,7 @@ shallowequal@^0.2.2:
   dependencies:
     lodash.keys "^3.1.2"
 
-shallowequal@^1.1.0:
+shallowequal@^1.0.2, shallowequal@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
@@ -13025,7 +13050,7 @@ tryer@^1.0.0:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
-tslib@^1.9.0:
+tslib@^1.9.0, tslib@^1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
