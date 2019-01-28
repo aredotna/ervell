@@ -1,7 +1,7 @@
 extends ../../../components/layout/index--infinite
 
 block meta
-  != homeComponent.styles
+  != feedMetadata.styles
 
   //- Not present on /notifications
   if emptyConnectTwitter
@@ -10,8 +10,8 @@ block meta
     != noFollowingMessage.styles
 
 block body
-  .Constrain.js-home-component
-    != homeComponent.html
+  .Constrain.js-feed-header
+    != feedMetadata.html
 
   //- Not present on /notifications
   if showEmpty
@@ -30,4 +30,4 @@ block body
 block scripts
   script( src= asset('/assets/feed.js') )
   script.
-    window.__APOLLO_STATE__ = !{JSON.stringify(homeComponent.state).replace(/</g, '\\u003c')};
+    window.__APOLLO_STATE__ = !{JSON.stringify(feedMetadata.state).replace(/</g, '\\u003c')};

@@ -4,10 +4,14 @@ import LinkUnlessCurrent from 'react/components/UI/LinkUnlessCurrent';
 
 export default styled(LinkUnlessCurrent)`
   display: block;
-  color: ${x => x.theme.colors.gray.regular};
+  color: ${props => props.theme.colors.gray.regular};
+
+  &:hover {
+    color: black;
+  }
 
   &:not([href]) {
-    color: ${x => x.theme.colors.gray.semiBold};
+    color: ${props => props.theme.colors.gray.semiBold};
     cursor: default;
   }
 `;

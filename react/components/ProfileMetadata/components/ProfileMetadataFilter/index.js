@@ -6,7 +6,7 @@ import { propType } from 'graphql-anywhere';
 import profileMetadataFilterFragment from 'react/components/ProfileMetadata/components/ProfileMetadataFilter/fragments/profileMetadataFilter';
 
 import Pocket from 'react/components/UI/Pocket';
-import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
+import CookieLinkUnlessCurrent from 'react/components/UI/CookieLinkUnlessCurrent';
 
 class ProfileMetadataFilter extends Component {
   static propTypes = {
@@ -25,9 +25,10 @@ class ProfileMetadataFilter extends Component {
 
     return (
       <Pocket title="Owned by">
-        <ProfileLinkUnlessCurrent
+        <CookieLinkUnlessCurrent
           name="filter"
           value="OWN"
+          prefix="Profile"
           to={{
             pathname,
             search: '?filter=OWN',
@@ -35,11 +36,12 @@ class ProfileMetadataFilter extends Component {
           isActive={this.isFilterActive('OWN')}
         >
           {identifiable.name}
-        </ProfileLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent
+        <CookieLinkUnlessCurrent
           name="filter"
           value="COLLABORATION"
+          prefix="Profile"
           to={{
             pathname,
             search: '?filter=COLLABORATION',
@@ -47,7 +49,7 @@ class ProfileMetadataFilter extends Component {
           isActive={this.isFilterActive('COLLABORATION')}
         >
           Other
-        </ProfileLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
       </Pocket>
     );
   }

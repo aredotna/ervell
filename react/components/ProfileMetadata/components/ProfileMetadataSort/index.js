@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import Pocket from 'react/components/UI/Pocket';
-import ProfileLinkUnlessCurrent from 'react/components/ProfileMetadata/components/ProfileLinkUnlessCurrent';
+import CookieLinkUnlessCurrent from 'react/components/UI/CookieLinkUnlessCurrent';
 
 class ProfileMetadataSort extends Component {
   static propTypes = {
@@ -21,8 +21,9 @@ class ProfileMetadataSort extends Component {
 
     return (
       <Pocket title="Sort">
-        <ProfileLinkUnlessCurrent
+        <CookieLinkUnlessCurrent
           name="sort"
+          prefix="Profile"
           value="UPDATED_AT"
           to={{
             pathname,
@@ -31,10 +32,11 @@ class ProfileMetadataSort extends Component {
           isActive={this.isSortActive('UPDATED_AT')}
         >
           Recently updated
-        </ProfileLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
 
-        <ProfileLinkUnlessCurrent
+        <CookieLinkUnlessCurrent
           name="sort"
+          prefix="Profile"
           value="RANDOM"
           to={{
             pathname,
@@ -43,7 +45,7 @@ class ProfileMetadataSort extends Component {
           isActive={this.isSortActive('RANDOM')}
         >
           Random
-        </ProfileLinkUnlessCurrent>
+        </CookieLinkUnlessCurrent>
       </Pocket>
     );
   }

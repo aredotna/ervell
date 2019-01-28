@@ -8,6 +8,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { withClientState } from 'apollo-link-state';
+import { HelmetProvider } from 'react-helmet-async';
 
 import mount from 'react/util/mount';
 
@@ -105,13 +106,15 @@ if (isClientSide) {
 }
 
 export const wrapWithProviders =
-  (client = isClientSide && window.__APOLLO_CLIENT__) =>
+  (client = isClientSide && window.__APOLLO_CLIENT__, helmetContext = {}) =>
     (Component, props = {}) => (
-      <ApolloProvider client={client}>
-        <Themed>
-          <Component {...props} />
-        </Themed>
-      </ApolloProvider>
+      <HelmetProvider context={helmetContext}>
+        <ApolloProvider client={client}>
+          <Themed>
+            <Component {...props} />
+          </Themed>
+        </ApolloProvider>
+      </HelmetProvider>
     );
 
 export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
