@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
+import { remove as removeDiacritics } from 'diacritics';
 
 import parseRoute from 'react/util/parseRoute';
 
@@ -19,10 +20,11 @@ export default () => (
             const { cookies } = data;
 
             const view = params.view || cookies.view || 'all';
+            const term = removeDiacritics(params.term);
 
             return (
               <SearchPage
-                term={params.term}
+                term={term}
                 view={view}
               />
             );
