@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 export default class Overlay extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
     targetEl: PropTypes.func.isRequired,
     anchorY: PropTypes.oneOf(['top', 'bottom']),
     anchorX: PropTypes.oneOf(['left', 'right']),
@@ -47,6 +47,7 @@ export default class Overlay extends PureComponent {
   }
 
   static defaultProps = {
+    onClose: () => {},
     anchorY: 'top',
     anchorX: 'left',
     alignToY: 'bottom',
