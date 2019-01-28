@@ -98,15 +98,15 @@ export default class SearchContents extends PureComponent {
                   loadMore={this.loadMore(fetchMore)}
                 >
                   {contents.map(cell => ({
-                    Image: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
-                    Attachment: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
-                    Text: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
-                    Link: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
-                    Embed: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
-                    Channel: <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
-                    User: <Cell.Identifiable key={`${cell.__typename}_${cell.id}`} identifiable={cell} />,
-                    Group: <Cell.Identifiable key={`${cell.__typename}_${cell.id}`} identifiable={cell} />,
-                  }[cell.__typename]))}
+                    Image: () => <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
+                    Attachment: () => <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
+                    Text: () => <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
+                    Link: () => <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
+                    Embed: () => <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
+                    Channel: () => <Cell.Konnectable key={`${cell.__typename}_${cell.id}`} konnectable={cell} />,
+                    User: () => <Cell.Identifiable key={`${cell.__typename}_${cell.id}`} identifiable={cell} />,
+                    Group: () => <Cell.Identifiable key={`${cell.__typename}_${cell.id}`} identifiable={cell} />,
+                  }[cell.__typename]()))}
                 </Grid>
               }
             </div>
