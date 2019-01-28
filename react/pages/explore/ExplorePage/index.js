@@ -7,7 +7,7 @@ import ExploreViews from 'react/pages/explore/ExplorePage/components/ExploreView
 import LoggedOutCTA from 'react/components/LoggedOutCTA';
 import LoggedOutExploreContent from 'react/components/LoggedOutCTA/components/LoggedOutExploreContent';
 
-export default class ProfilePage extends Component {
+export default class ExplorePage extends Component {
   static propTypes = {
     view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
