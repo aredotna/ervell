@@ -16,17 +16,23 @@ All.propTypes = {
   term: PropTypes.string.isRequired,
 };
 
-const Blocks = ({ fetchPolicy, term }) => (
+const Blocks = ({ fetchPolicy, term, block_filter }) => (
   <SearchContents
     type="BLOCK"
     fetchPolicy={fetchPolicy}
+    block_filter={block_filter}
     q={term}
   />
 );
 
 Blocks.propTypes = {
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
   term: PropTypes.string.isRequired,
+};
+
+Blocks.defaultProps = {
+  block_filter: null,
 };
 
 const Channels = ({ fetchPolicy, term }) => (
@@ -53,6 +59,11 @@ class SearchViews extends Component {
 
   static propTypes = {
     term: PropTypes.string.isRequired,
+    block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
+  }
+
+  static defaultProps = {
+    block_filter: null,
   }
 
   state = {
@@ -63,7 +74,7 @@ class SearchViews extends Component {
 
   render() {
     const { fetchPolicy } = this.state;
-    const { view, term } = this.props;
+    const { view, term, block_filter } = this.props;
 
     switch (view) {
       case 'all':
@@ -76,7 +87,11 @@ class SearchViews extends Component {
         );
       case 'blocks':
         return (
-          <Blocks fetchPolicy={fetchPolicy} term={term} />
+          <Blocks
+            fetchPolicy={fetchPolicy}
+            term={term}
+            block_filter={block_filter}
+          />
         );
       case 'users':
         return (

@@ -10,11 +10,16 @@ export default class SearchPage extends Component {
   static propTypes = {
     view: PropTypes.oneOf(['all', 'channels', 'blocks', 'groups', 'users']).isRequired,
     term: PropTypes.string.isRequired,
+    block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
+  }
+
+  static defaultProps = {
+    block_filter: null,
   }
 
   render() {
     const {
-      view, term,
+      view, term, block_filter,
     } = this.props;
 
     return (
@@ -23,11 +28,13 @@ export default class SearchPage extends Component {
           <SearchMetadata
             term={term}
             view={view}
+            block_filter={block_filter}
           />
 
           <SearchViews
             term={term}
             view={view}
+            block_filter={block_filter}
           />
         </div>
       </ErrorBoundary>
