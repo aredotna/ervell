@@ -10,9 +10,6 @@ export default class ExploreMetadataView extends Component {
     view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
   }
 
-  isCurrent = ({ to, currentRoute }) =>
-    currentRoute.pathname === to.split('?')[0];
-
   isViewActive = view => () =>
     this.props.view === view;
 

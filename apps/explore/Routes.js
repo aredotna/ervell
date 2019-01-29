@@ -31,7 +31,6 @@ export default () => (
 
             return (
               <ExplorePage
-                id={params.id}
                 view={view}
                 sort={sort}
                 seed={seed}
