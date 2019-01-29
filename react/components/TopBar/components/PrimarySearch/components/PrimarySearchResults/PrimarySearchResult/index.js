@@ -39,6 +39,10 @@ const Container = styled.a`
   &:hover {
     background-color: ${props => props.theme.colors.gray.hint};
   }
+
+  ${props => props.selected && `
+    background-color: ${props.theme.colors.state.neutral};
+  `}
 `;
 
 Container.defaultProps = {
@@ -53,11 +57,13 @@ export default class PrimarySearchResult extends PureComponent {
   static propTypes = {
     result: propType(primarySearchResultFragment),
     children: PropTypes.node,
+    selected: PropTypes.bool,
   }
 
   static defaultProps = {
     result: null,
     children: null,
+    selected: false,
   }
 
   preventBlur = (e) => {

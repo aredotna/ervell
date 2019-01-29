@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
+import mod from 'react/util/mod';
+
 import primarySearchResultsQuery from 'react/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/queries/primarySearchResults';
 
 import Text from 'react/components/UI/Text';
@@ -10,20 +12,34 @@ import PrimarySearchResult from 'react/components/TopBar/components/PrimarySearc
 export default class PrimarySearchResults extends PureComponent {
   static propTypes = {
     query: PropTypes.string.isRequired,
+    cursor: PropTypes.number,
+    onSelection: PropTypes.func,
   }
 
-  state = {
-    selectedIdx: 0,
+  static defaultProps = {
+    cursor: null,
+    onSelection: () => {},
+  }
+
+  selectResult = (result) => {
+    const { query, onSelection } = this.props;
+
+    if (result) return onSelection(result.href);
+
+    return onSelection(`/search/${encodeURIComponent(query)}`);
   }
 
   render() {
-    const { selectedIdx } = this.state;
-    const { query } = this.props;
+    const { query, cursor } = this.props;
 
     return (
       <Query query={primarySearchResultsQuery} variables={{ query }}>
         {({ data, loading, error }) => {
-          if (loading) {
+          const { searches } = data;
+
+          if (loading && !searches) {
+            this.selectResult();
+
             return (
               <PrimarySearchResult>
                 <Text fontWeight="bold">
@@ -34,6 +50,8 @@ export default class PrimarySearchResults extends PureComponent {
           }
 
           if (error) {
+            this.selectResult();
+
             return (
               <PrimarySearchResult>
                 <Text fontWeight="bold" color="state.alert">
@@ -43,7 +61,10 @@ export default class PrimarySearchResults extends PureComponent {
             );
           }
 
-          const { searches: { results } } = data;
+          const { results } = searches;
+          const selected = cursor && mod(cursor, results.length + 1);
+
+          this.selectResult(results[selected]);
 
           return (
             <React.Fragment>
@@ -51,13 +72,14 @@ export default class PrimarySearchResults extends PureComponent {
                 <PrimarySearchResult
                   key={`result_${result.__typename}_${result.id}`}
                   result={result}
-                  bg={selectedIdx === idx ? 'white' : undefined}
+                  selected={selected === idx}
                 />
               ))}
 
               {results.length > 0 &&
                 <PrimarySearchResult
                   href={`/search/${encodeURIComponent(query)}`}
+                  selected={selected === results.length}
                   bg="gray.semiLight"
                 >
                   <Text fontWeight="bold">

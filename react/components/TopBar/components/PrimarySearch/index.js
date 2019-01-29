@@ -19,12 +19,17 @@ export default class PrimarySearch extends PureComponent {
   }
 
   state = {
-    mode: 'focus',
-    query: 'xxx',
+    mode: 'resting',
+    query: '',
+    cursor: null,
+    href: null,
   }
 
+  handleSelection = href =>
+    this.setState({ href });
+
   handleQuery = (query) => {
-    this.setState({ query });
+    this.setState({ query, cursor: null });
   }
 
   handleBlur = () => {
@@ -39,8 +44,44 @@ export default class PrimarySearch extends PureComponent {
   handleFocus = () =>
     this.setState({ mode: 'focus' });
 
+  handleKeyDown = ({ key }) => {
+    const { cursor, href, query } = this.state;
+
+    switch (key) {
+      case 'Escape':
+        this.setState({ query: '' });
+        break;
+      case 'Enter':
+        if (query === '') return;
+        window.location.href = href;
+        break;
+      case 'ArrowDown':
+        this.setState({
+          cursor: (cursor === null ? -1 : cursor) + 1,
+        });
+        break;
+      case 'ArrowUp':
+        this.setState({
+          cursor: (cursor === null ? 0 : cursor) - 1,
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleMouseEnter = () => {
+    if (this.state.mode !== 'resting') return;
+    this.setState({ mode: 'hover' });
+  }
+
+  handleMouseLeave = () => {
+    if (this.state.mode !== 'hover') return;
+    this.setState({ mode: 'resting' });
+  }
+
   render() {
-    const { mode, query } = this.state;
+    const { mode, query, cursor } = this.state;
 
     return (
       <Container
@@ -58,6 +99,9 @@ export default class PrimarySearch extends PureComponent {
           ref={this.searchInputRef}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
+          onKeyDown={this.handleKeyDown}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
         />
 
         {query && mode === 'focus' &&
@@ -65,7 +109,11 @@ export default class PrimarySearch extends PureComponent {
             targetEl={() => this.searchInputRef.current}
             fullWidth
           >
-            <PrimarySearchResults query={query} />
+            <PrimarySearchResults
+              query={query}
+              cursor={cursor}
+              onSelection={this.handleSelection}
+            />
           </Overlay>
         }
       </Container>
