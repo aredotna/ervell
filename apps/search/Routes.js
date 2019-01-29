@@ -28,7 +28,9 @@ export default () => (
 
             const view = params.view || cookies.view || 'all';
             const term = removeDiacritics(params.term);
-            const block_filter = setValid((query.block_filter || cookies.block_filter), VALID_FILTERS, null);
+
+            const filter = (query.block_filter || cookies.block_filter);
+            const block_filter = setValid(filter, VALID_FILTERS, null);
 
             return (
               <SearchPage
