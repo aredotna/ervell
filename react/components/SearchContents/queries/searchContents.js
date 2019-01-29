@@ -4,8 +4,8 @@ import identifiableCellFragment from 'react/components/Cell/components/Identifia
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 export default gql`
-  query SearchContents($type: [SsearchType], $page: Int, $per: Int, $q: String!) {
-    contents: ssearch(q: $q, per: $per, page: $page, type: $type) {
+  query SearchContents($type: [SsearchType], $page: Int, $per: Int, $q: String!, $block_filter: BlockFilterEnum) {
+    contents: ssearch(q: $q, per: $per, page: $page, type: $type, block_filter: $block_filter) {
       ...KonnectableCell
       ... IdentifiableCell
     }

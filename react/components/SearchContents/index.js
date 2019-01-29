@@ -15,10 +15,12 @@ export default class SearchContents extends PureComponent {
     type: PropTypes.string,
     q: PropTypes.string.isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+    block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
   }
 
   static defaultProps = {
     type: null,
+    block_filter: null,
   }
 
   state = {
@@ -51,13 +53,18 @@ export default class SearchContents extends PureComponent {
 
   render() {
     const { per, hasMore } = this.state;
-    const { type, fetchPolicy, q } = this.props;
+    const {
+      type,
+      fetchPolicy,
+      q,
+      block_filter,
+    } = this.props;
 
     return (
       <Query
         query={searchContentsQuery}
         variables={{
-          type, per, q,
+          type, per, q, block_filter,
         }}
         fetchPolicy={fetchPolicy}
       >
