@@ -162,11 +162,13 @@ showDispatchMessage = ->
   # or if they have a pending confirmation.
   # or if they are premium
   # or if we are already showing them a message for exceeding the limit
-  
+  # or if they just joined less than five minutes ago
+
   shouldReturn = !current_user.id or
     current_user.get('is_pending_confirmation') or
     current_user.get('is_premium') or
-    current_user.get('is_exceeding_private_connections_limit')
+    current_user.get('is_exceeding_private_connections_limit') or
+    moment().isAfter(moment(current_user.get('created_at')).add(5, 'minutes'))
 
   return if shouldReturn
 
