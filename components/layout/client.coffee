@@ -3,6 +3,7 @@ Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
 _ = require 'underscore'
+moment =  require 'moment'
 BodyView = require './body/view.coffee'
 MessageView = require '../message/view.coffee'
 HeaderInfoView = require './header/client.coffee'
