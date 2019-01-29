@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import Grid from 'react/components/UI/Grid';
@@ -7,7 +7,7 @@ import ExploreBreadcrumb from 'react/components/ExploreMetadata/components/Explo
 import ExploreMetadataView from 'react/components/ExploreMetadata/components/ExploreMetadataView';
 import ExploreMetadataSort from 'react/components/ExploreMetadata/components/ExploreMetadataSort';
 
-class ExploreMetadata extends Component {
+class ExploreMetadata extends PureComponent {
   static propTypes = {
     view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,

@@ -1,33 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
-
-import WithStaticRouter from 'react/hocs/WithStaticRouter';
 
 import Grid from 'react/components/UI/Grid';
 import HeaderMetadataContainer from 'react/components/UI/HeaderMetadata/HeaderMetadataContainer';
 import SearchMetadataBreadcrumb from 'react/components/SearchMetadata/components/SearchMetadataBreadcrumb';
 import SearchMetadataModeView from 'react/components/SearchMetadata/components/SearchMetadataModeView';
+import SearchMetadataBlockFilter from 'react/components/SearchMetadata/components/SearchMetadataBlockFilter';
 
-const SearchMetadata = ({ search }) => (
-  <HeaderMetadataContainer breadcrumb={<SearchMetadataBreadcrumb search={search} />}>
-    <Route
-      path="/search"
-      render={() => (
-        <Grid>
-          <SearchMetadataModeView search={search} />
-        </Grid>
-        )}
-    />
+const SearchMetadata = ({ term, view, block_filter }) => (
+  <HeaderMetadataContainer
+    breadcrumb={<SearchMetadataBreadcrumb term={term} />}
+  >
+    <Grid>
+      <SearchMetadataModeView search={term} view={view} block_filter={block_filter} />
+
+      {view === 'blocks' &&
+        <SearchMetadataBlockFilter block_filter={block_filter} />
+      }
+    </Grid>
   </HeaderMetadataContainer>
 );
 
 SearchMetadata.propTypes = {
-  search: PropTypes.string,
+  term: PropTypes.string,
+  view: PropTypes.oneOf(['all', 'channels', 'blocks', 'users', 'groups']).isRequired,
+  block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
 };
 
 SearchMetadata.defaultProps = {
-  search: null,
+  term: null,
+  block_filter: null,
 };
 
-export default WithStaticRouter(SearchMetadata);
+export default SearchMetadata;

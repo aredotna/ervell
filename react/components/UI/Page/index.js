@@ -89,7 +89,6 @@ export default class Page extends PureComponent {
           />
 
           <script src={asset(`/assets/${bundleName}.js`)} />
-          <script src={asset('/assets/runtime.js')} />
 
           {!sharifyData.DO_NOT_TRACK &&
             <script
@@ -105,6 +104,8 @@ export default class Page extends PureComponent {
               }}
             />
           }
+
+          <script src={asset('/assets/runtime.js')} />
         </body>
       </html>
     );

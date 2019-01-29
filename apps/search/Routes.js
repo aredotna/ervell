@@ -1,13 +1,14 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
+import { remove as removeDiacritics } from 'diacritics';
 
 import parseRoute from 'react/util/parseRoute';
 
-import exploreUiStateQuery from 'apps/explore/queries/exploreUiState';
-import ExplorePage from 'react/pages/explore/ExplorePage';
+import searchUiStateQuery from 'apps/search/queries/searchUiState';
+import SearchPage from 'react/pages/search/SearchPage';
 
-const VALID_SORTS = ['UPDATED_AT', 'RANDOM'];
+const VALID_FILTERS = ['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK'];
 
 const setValid = (value, validValues, defaultValue) => {
   if (validValues.includes(value)) return value;
@@ -17,23 +18,25 @@ const setValid = (value, validValues, defaultValue) => {
 export default () => (
   <Switch>
     <Route
-      path="/explore/:view?"
+      path="/search/:term/:view?"
       render={parseRoute(({ params, query }) => (
-        <Query query={exploreUiStateQuery}>
+        <Query query={searchUiStateQuery}>
           {({ data, error }) => {
             if (error) return error.message;
 
             const { cookies } = data;
 
             const view = params.view || cookies.view || 'all';
-            const sort = setValid((query.sort || cookies.sort), VALID_SORTS, 'UPDATED_AT');
-            const seed = parseInt(query.seed, 10) || 0;
+            const term = removeDiacritics(params.term);
+
+            const filter = (query.block_filter || cookies.block_filter);
+            const block_filter = setValid(filter, VALID_FILTERS, null);
 
             return (
-              <ExplorePage
+              <SearchPage
+                term={term}
                 view={view}
-                sort={sort}
-                seed={seed}
+                block_filter={block_filter}
               />
             );
           }}

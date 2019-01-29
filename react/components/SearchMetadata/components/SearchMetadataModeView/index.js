@@ -1,52 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Pocket from 'react/components/UI/Pocket';
-import HeaderMetadataLinkUnlessCurrent from 'react/components/UI/HeaderMetadata/HeaderMetadataLinkUnlessCurrent';
+import CookieLinkUnlessCurrent from 'react/components/UI/CookieLinkUnlessCurrent';
 
-const SearchMetadataModeView = ({ search }) => {
-  const isCurrent = ({ targetHref, currentRoute }) =>
-    currentRoute.pathname === targetHref.split('?')[0];
+export default class SearchMetadataView extends Component {
+  static propTypes = {
+    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'users', 'groups']).isRequired,
+    search: PropTypes.string.isRequired,
+  }
 
-  return (
-    <Pocket title="View">
-      <HeaderMetadataLinkUnlessCurrent
-        href={`/search/${search}`}
-        predicate={isCurrent}
-      >
-        All
-      </HeaderMetadataLinkUnlessCurrent>
+  isViewActive = view => () =>
+    this.props.view === view;
 
-      <HeaderMetadataLinkUnlessCurrent
-        href={`/search/${search}/channels`}
-        predicate={isCurrent}
-      >
-        Channels
-      </HeaderMetadataLinkUnlessCurrent>
+  render() {
+    const { search } = this.props;
 
-      <HeaderMetadataLinkUnlessCurrent
-        href={`/search/${search}/blocks`}
-        predicate={isCurrent}
-      >
-        Blocks
-      </HeaderMetadataLinkUnlessCurrent>
+    return (
+      <Pocket title="View">
+        <CookieLinkUnlessCurrent
+          to={`/search/${search}/all`}
+          isActive={this.isViewActive('all')}
+          prefix="Search"
+          name="view"
+          value="all"
+        >
+          All
+        </CookieLinkUnlessCurrent>
 
-      <HeaderMetadataLinkUnlessCurrent
-        href={`/search/${search}/users`}
-        predicate={isCurrent}
-      >
-        Users
-      </HeaderMetadataLinkUnlessCurrent>
-    </Pocket>
-  );
-};
+        <CookieLinkUnlessCurrent
+          to={`/search/${search}/channels`}
+          isActive={this.isViewActive('channels')}
+          prefix="Search"
+          name="view"
+          value="channels"
+        >
+          Channels
+        </CookieLinkUnlessCurrent>
 
-SearchMetadataModeView.propTypes = {
-  search: PropTypes.string,
-};
+        <CookieLinkUnlessCurrent
+          to={`/search/${search}/blocks`}
+          isActive={this.isViewActive('blocks')}
+          prefix="Search"
+          name="view"
+          value="blocks"
+        >
+          Blocks
+        </CookieLinkUnlessCurrent>
 
-SearchMetadataModeView.defaultProps = {
-  search: '',
-};
+        <CookieLinkUnlessCurrent
+          to={`/search/${search}/users`}
+          isActive={this.isViewActive('users')}
+          prefix="Search"
+          name="view"
+          value="users"
+        >
+          Users
+        </CookieLinkUnlessCurrent>
 
-export default SearchMetadataModeView;
+        <CookieLinkUnlessCurrent
+          to={`/search/${search}/groups`}
+          isActive={this.isViewActive('groups')}
+          prefix="Search"
+          name="view"
+          value="groups"
+        >
+          Groups
+        </CookieLinkUnlessCurrent>
+      </Pocket>
+    );
+  }
+}

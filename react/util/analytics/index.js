@@ -1,5 +1,3 @@
-/* global ga */
-
 import sharify from 'sharify';
 import Cookies from 'cookies-js';
 
@@ -7,22 +5,34 @@ import CATEGORIES from 'react/util/analytics/categories';
 
 const { data: { NODE_ENV } } = sharify;
 
+// Wraps the global `ga` exposed by analytics.js
+const ga = (...args) => {
+  const { data: { DO_NOT_TRACK } } = sharify;
+
+  if (DO_NOT_TRACK) return null;
+
+  if (!window.ga) {
+    console.warn('`ga` is undefined', [...args]);
+    return null;
+  }
+
+  if (NODE_ENV === 'development') {
+    console.info('analytics', [...args]);
+    return null;
+  }
+
+  return window.ga(...args);
+};
+
 export default {
   // Simply calls `ga#send` while observing 'Do Not Track' settings.
   track(params = {}) {
-    if (NODE_ENV === 'development') {
-      console.info('analytics', params);
-      return null;
-    }
-
     // TODO: Consider renaming `SAVE` to something more obvious,
     // or just set `DO_NOT_TRACK` explicitly.
-    const { data: { SAVE, DO_NOT_TRACK } } = sharify;
+    const { data: { SAVE } } = sharify;
 
-    if (SAVE || DO_NOT_TRACK) {
-      // Silently ignores any tracking when
-      // - Inside of bookmarklet/extension context
-      // - Do Not Track headers are set
+    if (SAVE) {
+      // Silently ignores any tracking when inside of bookmarklet/extension context.
       return null;
     }
 

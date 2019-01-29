@@ -1,18 +1,16 @@
 extends ../../../components/layout/index
 
+block title
+  = ` / Search`
+
 block meta
-  != searchComponent.styles
+  != apollo.styles
 
 block body
-  .Constrain.js-search-component
-    != searchComponent.html
-
-  if blocks
-    .search-contents
-      - title = "results for '" + search + "'"
-      include ../../../components/blocks/container/templates/index
+  #apolloMount.Constrain
+    != apollo.html
 
 block scripts
-  script( src= asset('/assets/search.js') )
   script.
-    window.__APOLLO_STATE__ = !{JSON.stringify(searchComponent.state).replace(/</g, '\\u003c')};
+    window.__APOLLO_STATE__ = !{JSON.stringify(apollo.state).replace(/</g, '\\u003c')};
+  script( src= asset('/assets/search.js') )
