@@ -4,12 +4,12 @@ import konnectableCellFragment from 'react/components/Cell/components/Konnectabl
 import blokkChannelFragment from 'react/components/Cell/components/Konnectable/components/Channel/fragments/channel';
 
 export default gql`
-  fragment ProfileChannels on Identifiable {
+  fragment ProfileChannelSearch on Identifiable {
     ... on Group {
       __typename
       id
       name
-      channels(page: $page, per: $per) {
+      channels(page: $page, per: $per, q: $q) {
         ... Channel
         blokks(per: 5, direction: DESC) {
           ... KonnectableCell
@@ -26,11 +26,13 @@ export default gql`
       counts {
         channels
       }
-      channels(page: $page, per: $per) {
+      channels: kontents(type: CHANNEL, page: $page, per: $per, sort_by: $sort, q: $q, seed: $seed) {
         ... Channel
 
-        blokks(per: 5, sort_by: POSITION, direction: DESC) {
-          ... KonnectableCell
+        ... on Channel {
+          blokks(per: 5, sort_by: POSITION, direction: DESC) {
+            ... KonnectableCell
+          }
         }
       }
     }
