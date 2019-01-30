@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import constants from 'react/styles/constants';
 
 import profileChannelsQuery from 'react/components/ProfileChannels/queries/profileChannels';
+import profileChannelSearchQuery from 'react/components/ProfileChannels/queries/profileChannelSearch';
 
 import Grid from 'react/components/UI/Grid';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
@@ -69,12 +70,17 @@ export default class ProfileChannels extends PureComponent {
       id, sort, fetchPolicy, seed,
     } = this.props;
 
+    const isSearch = sort === 'RANDOM' || q;
+
+    const query = isSearch ? profileChannelSearchQuery : profileChannelsQuery;
+    const variables = isSearch ? {
+      id, per, sort, q, seed,
+    } : { id, per };
+
     return (
       <Query
-        query={profileChannelsQuery}
-        variables={{
-          id, per, sort, q, seed,
-        }}
+        query={query}
+        variables={variables}
         fetchPolicy={fetchPolicy}
       >
         {({
@@ -117,6 +123,7 @@ export default class ProfileChannels extends PureComponent {
               {!loading && channels.length > 0 &&
                 <InfiniteScroll
                   pageStart={1}
+                  key={query}
                   threshold={800}
                   initialLoad={false}
                   loader={<BlocksLoadingIndicator key="loading" />}
