@@ -26,7 +26,7 @@ export default class ProfileChannels extends PureComponent {
     page: 1,
     per: 3,
     hasMore: true,
-    q: '',
+    q: null,
   }
 
   resetQuery = (query) => {
@@ -109,7 +109,6 @@ export default class ProfileChannels extends PureComponent {
                 ml={[constants.blockGutter, 0, 0]}
                 borderColor="transparent"
               />
-
 
               {loading &&
                 <BlocksLoadingIndicator />
