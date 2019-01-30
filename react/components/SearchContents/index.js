@@ -67,6 +67,7 @@ export default class SearchContents extends PureComponent {
           type, per, q, block_filter,
         }}
         fetchPolicy={fetchPolicy}
+        ssr={false}
       >
         {({
           loading, error, data, fetchMore,
