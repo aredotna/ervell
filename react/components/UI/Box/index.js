@@ -6,6 +6,7 @@ import {
   width,
   height,
   alignItems,
+  alignSelf,
   minHeight,
   maxHeight,
   justifyContent,
@@ -31,6 +32,7 @@ export const mixin = css`
   ${space}
   ${flex}
   ${alignItems}
+  ${alignSelf}
   ${justifyContent}
   ${flexDirection}
   ${borders}
