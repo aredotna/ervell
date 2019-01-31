@@ -128,6 +128,10 @@ class SearchInput extends Component {
           onBlur={onBlur}
           onChange={this.handleChange}
           defaultValue={query}
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
       </Box>
     );
