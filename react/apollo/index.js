@@ -34,6 +34,7 @@ export const initApolloClient = ({
   currentRoute,
   isLoggedIn,
   cookies,
+  serializedMe,
 } = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__;
@@ -60,6 +61,10 @@ export const initApolloClient = ({
       },
       cookies: {
         __typename: 'Cookies',
+      },
+      serializedMe: {
+        __typename: 'SerializedMe',
+        ...serializedMe,
       },
     },
     resolvers: {

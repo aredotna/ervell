@@ -1,5 +1,7 @@
 import url from 'url';
 
+import serializedMe from 'react/apollo/localState/serializedMe';
+
 export default (req) => {
   const { url: currentUrl, user, cookies } = req;
 
@@ -12,5 +14,6 @@ export default (req) => {
     currentRoute,
     isLoggedIn,
     cookies,
+    serializedMe: serializedMe(user && user.attributes),
   };
 };

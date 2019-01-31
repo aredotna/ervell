@@ -5,6 +5,8 @@ import sharify from 'sharify';
 // `cookie` is a tiny dependency on `universal-cookie`
 import cookie from 'cookie';
 
+import serializedMe from 'react/apollo/localState/serializedMe';
+
 export default () => {
   const { data: { CURRENT_USER, CURRENT_URL } } = sharify;
 
@@ -18,5 +20,6 @@ export default () => {
     currentRoute,
     isLoggedIn,
     cookies,
+    serializedMe: serializedMe(CURRENT_USER),
   };
 };
