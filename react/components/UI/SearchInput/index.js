@@ -11,6 +11,10 @@ import { Input } from 'react/components/UI/Inputs';
 
 const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'flex'];
 
+const Container = styled(Box)`
+  position: relative;
+`;
+
 const Icon = styled.div`
   display: flex;
   align-items: center;
@@ -37,6 +41,7 @@ class SearchInput extends PureComponent {
     ]),
     iconMap: PropTypes.shape({
       resting: PropTypes.string,
+      focus: PropTypes.string,
       hover: PropTypes.string,
       active: PropTypes.string,
     }),
@@ -53,6 +58,7 @@ class SearchInput extends PureComponent {
     iconMap: {
       resting: 'MagnifyingGlass',
       hover: 'MagnifyingGlass',
+      focus: 'MagnifyingGlass',
       active: 'X',
     },
   }
@@ -77,16 +83,40 @@ class SearchInput extends PureComponent {
   }
 
   resetState = () => {
-    this.setState({ query: '', mode: 'resting' });
+    this.setState({ query: '', mode: 'focus' });
     this.input.value = '';
     this.input.focus();
+  }
+
+  handleMouseEnter = () => {
+    if (this.state.mode === 'focus') return;
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'hover' });
+  }
+
+  handleMouseLeave = () => {
+    if (this.state.mode === 'focus') return;
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'resting' });
+  }
+
+  handleFocus = () => {
+    this.props.onFocus();
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'focus' });
+  }
+
+  handleBlur = () => {
+    this.props.onBlur();
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'resting' });
   }
 
   handleChange = ({ target: { value: query } }) => {
     const currentState = { query, mode: 'active' };
 
     if (isEmpty(query)) {
-      currentState.mode = 'resting';
+      currentState.mode = 'focus';
     }
 
     this.setState(currentState);
@@ -119,9 +149,10 @@ class SearchInput extends PureComponent {
     const innerProps = omit(rest, ...OUTER_PROPS_KEYS);
 
     return (
-      <Box
-        position="relative"
+      <Container
         ref={forwardRef}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         {...outerProps}
       >
         <Icon onClick={this.handleReset}>
@@ -134,12 +165,13 @@ class SearchInput extends PureComponent {
         </Icon>
 
         <Input
+          width="100%"
           px="2.5em"
           borderColor="gray.regular"
           {...innerProps}
           ref={(input) => { this.input = input; }}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           defaultValue={query}
           autoCorrect="off"
@@ -147,7 +179,7 @@ class SearchInput extends PureComponent {
           autoCapitalize="off"
           spellCheck="false"
         />
-      </Box>
+      </Container>
     );
   }
 }
