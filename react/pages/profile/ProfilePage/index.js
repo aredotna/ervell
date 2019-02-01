@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
+import TopBarLayout from 'react/components/UI/Layouts/TopBarLayout';
+import Constrain from 'react/components/UI/Constrain';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
@@ -55,28 +57,32 @@ export default class ProfilePage extends Component {
               ? { all: 'channels', blocks: 'channels' }[view] || view
               : view;
 
+            const scheme = identifiable.__typename === 'Group' ? 'GROUP' : 'DEFAULT';
+
             return (
-              <div>
-                <ProfileMetadata
-                  view={typedView}
-                  sort={sort}
-                  filter={filter}
-                  identifiable={identifiable}
-                />
+              <TopBarLayout scheme={scheme}>
+                <Constrain>
+                  <ProfileMetadata
+                    view={typedView}
+                    sort={sort}
+                    filter={filter}
+                    identifiable={identifiable}
+                  />
 
-                <ProfileViews
-                  view={typedView}
-                  id={id}
-                  sort={sort}
-                  filter={filter}
-                  identifiable={identifiable}
-                  seed={seed}
-                />
+                  <ProfileViews
+                    view={typedView}
+                    id={id}
+                    sort={sort}
+                    filter={filter}
+                    identifiable={identifiable}
+                    seed={seed}
+                  />
 
-                <LoggedOutCTA>
-                  <LoggedOutProfileContent user={identifiable} />
-                </LoggedOutCTA>
-              </div>
+                  <LoggedOutCTA>
+                    <LoggedOutProfileContent user={identifiable} />
+                  </LoggedOutCTA>
+                </Constrain>
+              </TopBarLayout>
             );
           }}
         </Query>
