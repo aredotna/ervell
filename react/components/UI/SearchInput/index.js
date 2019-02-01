@@ -155,14 +155,16 @@ class SearchInput extends PureComponent {
         onMouseLeave={this.handleMouseLeave}
         {...outerProps}
       >
-        <Icon onClick={this.handleReset}>
-          <Icons
-            width="1.5em"
-            height="0.88em"
-            color="gray.medium"
-            name={iconMap[mode]}
-          />
-        </Icon>
+        {iconMap[mode] &&
+          <Icon onClick={this.handleReset}>
+            <Icons
+              width="1.5em"
+              height="0.88em"
+              color="gray.medium"
+              name={iconMap[mode]}
+            />
+          </Icon>
+        }
 
         <Input
           width="100%"
