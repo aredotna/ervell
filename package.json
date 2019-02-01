@@ -30,7 +30,7 @@
     "apollo-link-context": "^1.0.12",
     "apollo-link-http": "^1.5.9",
     "apollo-link-state": "^0.4.2",
-    "axios": "^0.16.2",
+    "axios": "^0.18.0",
     "axis": "*",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
