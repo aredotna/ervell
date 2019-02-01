@@ -50,9 +50,18 @@ export default class NotificationCount extends PureComponent {
       method: 'GET',
       url: `${API_URL}/notifications/unread_count`,
       headers: { 'X-AUTH-TOKEN': authentication_token },
-    }).then(({ data: { unread_count } }) => {
-      this.setState({ count: unread_count });
-    });
+    })
+      .then(({ data: { unread_count } }) => {
+        this.setState({ count: unread_count });
+      })
+      .catch((err) => {
+        // Ignore network errors, etc.
+        if (err.response && err.response.status === 401) {
+          // Unauthorized: Log out the user
+          axios({ method: 'GET', url: '/me/sign_out' })
+            .then(() => window.location.reload());
+        }
+      });
   }
 
   containerRef = React.createRef();
