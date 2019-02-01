@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
+import Title from 'react/components/UI/Head/components/Title';
 import TopBarLayout from 'react/components/UI/Layouts/TopBarLayout';
 import Constrain from 'react/components/UI/Constrain';
 import CenteringBox from 'react/components/UI/CenteringBox';
@@ -36,6 +37,8 @@ export default class ProfilePage extends Component {
             if (error) {
               return (
                 <ErrorAlert>
+                  <Title>Error</Title>
+
                   {error.message}
                 </ErrorAlert>
               );
@@ -44,6 +47,8 @@ export default class ProfilePage extends Component {
             if (loading) {
               return (
                 <CenteringBox>
+                  <Title>Loading...</Title>
+
                   <LoadingIndicator f={9} />
                 </CenteringBox>
               );
@@ -61,6 +66,8 @@ export default class ProfilePage extends Component {
 
             return (
               <TopBarLayout scheme={scheme}>
+                <Title>{identifiable.name}</Title>
+
                 <Constrain>
                   <ProfileMetadata
                     view={typedView}
