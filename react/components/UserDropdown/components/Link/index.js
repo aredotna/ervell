@@ -11,6 +11,7 @@ const Anchor = styled.a.attrs({
 })`
   ${mixin}
   text-decoration: none;
+  cursor: pointer;
 
   &:hover,
   &:hover > * {
