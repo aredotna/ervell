@@ -79,6 +79,7 @@ export default class ProfileContents extends PureComponent {
           id, type, per, sort, q, seed,
         }}
         fetchPolicy={fetchPolicy}
+        ssr={false}
       >
         {({
           loading, error, data, fetchMore,

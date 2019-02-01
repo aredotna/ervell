@@ -82,6 +82,7 @@ export default class ProfileChannels extends PureComponent {
         query={query}
         variables={variables}
         fetchPolicy={fetchPolicy}
+        ssr={false}
       >
         {({
           loading, error, data, fetchMore,

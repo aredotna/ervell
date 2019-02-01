@@ -17,8 +17,8 @@ const Columns = styled.div`
   column-count: 2;
   column-gap: ${x => x.theme.space[9]};
   margin-bottom: ${x => x.theme.space[9]};
-  
-  // add padding to the right so columns line up with grid
+
+  // Adds padding to the right so columns line up with grid
   padding-right: ${constants.doubleBlockGutter};
 
   ${constants.media.small`
@@ -42,7 +42,7 @@ export default class ProfileChannelIndex extends Component {
     const { id, type } = this.props;
 
     return (
-      <Query query={profileChannelIndexQuery} variables={{ id, type }}>
+      <Query query={profileChannelIndexQuery} variables={{ id, type }} ssr={false}>
         {({ data, loading, error }) => {
           if (loading) return <BlocksLoadingIndicator />;
           if (error) return error.message;
