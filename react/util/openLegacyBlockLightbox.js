@@ -1,10 +1,18 @@
+import $ from 'jquery';
+
 import mediator from 'lib/mediator.coffee';
 import modalize from 'components/modalize/index.coffee';
 import Block from 'models/block.coffee';
 import Blocks from 'collections/blocks.coffee';
 import LightBoxBlockView from 'apps/block/client/view.coffee';
 
+import initLegacyMediator from 'react/util/initLegacyMediator';
+
 export default ({ id, context }) => {
+  // Needed for lightbox on pages without `layout/client.coffee`
+  window.$ = $;
+  initLegacyMediator();
+
   const currentHref = window.location.href;
   const currentTitle = document.title;
 
