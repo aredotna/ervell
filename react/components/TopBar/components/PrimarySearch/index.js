@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Box from 'react/components/UI/Box';
@@ -9,13 +10,17 @@ import PrimarySearchResults from 'react/components/TopBar/components/PrimarySear
 
 const Container = styled(Box)`
   position: relative;
+  display: flex;
+  align-items: stretch;
 `;
 
 export default class PrimarySearch extends PureComponent {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    scheme: PropTypes.oneOf(['DEFAULT', 'GROUP']),
+  }
 
-    this.searchInputRef = React.createRef();
+  static defaultProps = {
+    scheme: 'DEFAULT',
   }
 
   state = {
@@ -24,6 +29,8 @@ export default class PrimarySearch extends PureComponent {
     cursor: null,
     href: null,
   }
+
+  searchInputRef = React.createRef();
 
   handleSelection = href =>
     this.setState({ href });
@@ -81,18 +88,21 @@ export default class PrimarySearch extends PureComponent {
   }
 
   render() {
+    const { scheme, ...rest } = this.props;
     const { mode, query, cursor } = this.state;
 
     return (
-      <Container
-        {...this.props}
-      >
+      <Container {...rest}>
         {mode === 'resting' &&
           <HomeLink />
         }
 
         <SearchInput
+          tabIndex={1}
+          flex="1"
+          py={6}
           placeholder="Search Are.na"
+          bg={scheme === 'GROUP' && 'transparent'}
           borderColor="transparent"
           query={query}
           onDebouncedQueryChange={this.handleQuery}
@@ -102,6 +112,12 @@ export default class PrimarySearch extends PureComponent {
           onKeyDown={this.handleKeyDown}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
+          iconMap={{
+            resting: null,
+            focus: 'MagnifyingGlass',
+            hover: 'MagnifyingGlass',
+            active: 'X',
+          }}
         />
 
         {query && mode === 'focus' &&

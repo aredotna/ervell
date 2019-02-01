@@ -7,7 +7,6 @@ const Container = styled.a`
   box-sizing: border-box;
   display: block;
   position: absolute;
-  background-color: white;
   z-index: 1;
   height: 100%;
   width: 2.5em;

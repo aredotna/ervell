@@ -8,6 +8,8 @@ import UserAvatar from 'react/components/UserAvatar';
 import UserDropdown from 'react/components/UserDropdown';
 
 const Container = styled(Box)`
+  display: flex;
+  align-items: center;
   cursor: pointer;
 
   &:hover {
@@ -50,7 +52,7 @@ export default class MyRepresentation extends PureComponent {
     return (
       <React.Fragment>
         <Container {...this.props} onClick={this.handleClick} ref={this.containerRef}>
-          <UserAvatar size={35} user={{ ...me, href: null }} />
+          <UserAvatar size={30} user={{ ...me, href: null }} />
         </Container>
 
         {mode === 'open' &&

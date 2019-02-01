@@ -10,6 +10,8 @@ import Overlay from 'react/components/UI/Overlay';
 import NotificationsDropdown from 'react/components/NotificationsDropdown';
 
 const Container = styled(Box)`
+  display: flex;
+  align-items: center;
   user-select: none;
   cursor: pointer;
 
