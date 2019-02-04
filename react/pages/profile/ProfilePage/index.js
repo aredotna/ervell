@@ -10,9 +10,10 @@ import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
-import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
 import LoggedOutCTA from 'react/components/LoggedOutCTA';
 import LoggedOutProfileContent from 'react/components/LoggedOutCTA/components/LoggedOutProfileContent';
+import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
+import ProfileMetaTags from 'react/pages/profile/ProfilePage/components/ProfileMetaTags';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -66,7 +67,10 @@ export default class ProfilePage extends Component {
 
             return (
               <TopBarLayout scheme={scheme}>
-                <Title>{identifiable.name}</Title>
+                <ProfileMetaTags
+                  view={typedView}
+                  identifiable={identifiable}
+                />
 
                 <Constrain>
                   <ProfileMetadata
