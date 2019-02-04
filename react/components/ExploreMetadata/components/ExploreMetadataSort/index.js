@@ -43,6 +43,7 @@ class ExploreMetadataSort extends Component {
             pathname,
             search: `?sort=RANDOM&seed=${Math.floor(Math.random() * 1000) + 1}`,
           }}
+          rel="nofollow"
         >
           Random
         </CookieLinkUnlessCurrent>
