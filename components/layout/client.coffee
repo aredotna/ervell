@@ -19,7 +19,7 @@ initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 GlobalBlockRouter = require './global_block_router.coffee'
 Blacklist = require('../../lib/blacklist.js').default
-initGlobalKeyboardShortcuts = require('./global_keyboard_shortcuts.js').default
+initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts.js')
 
 { mountWithApolloProvider } = require '../../react/apollo/index.js'
 { default: TopBar } = require '../../react/components/TopBar/index.js'
@@ -36,7 +36,7 @@ module.exports = ->
   initConfirmableMessage()
   initLoggedOutCTA()
   initGlobalBlockRouting()
-  initGlobalKeyboardShortcuts()
+  initLightboxKeyboardShortcuts.bind()
 
 initGlobalBlockRouting = ->
   # TODO: Extract and init block router only
