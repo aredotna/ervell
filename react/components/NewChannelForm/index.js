@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Query } from 'react-apollo';
+import styled from 'styled-components';
 
 import mapErrors from 'react/util/mapErrors';
 
@@ -13,6 +14,18 @@ import { Input, Textarea, Label, LabelledCheckbox, LabelledInput } from 'react/c
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 import NewChannelGroups from 'react/components/NewChannelForm/components/NewChannelGroups';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
+
+import MagicHat from 'react/components/NewChannelForm/components/MagicHat';
+
+import { random } from 'faker';
+
+const NewChannelField = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const RandomIcon = styled.div`
+`;
 
 class NewChannelForm extends Component {
   static propTypes = {
@@ -39,6 +52,25 @@ class NewChannelForm extends Component {
     visit_channel: true,
     errorMessage: null,
     attributeErrors: {},
+    hatPressed: false,
+  }
+
+  generateRandomTitle = () => {
+    this.setState({
+      title: random.words(),
+    });
+  }
+
+  handleHatPress = () => {
+    this.setState({
+      hatPressed: true,
+    });
+  }
+
+  handleHatRelease = () => {
+    this.setState({
+      hatPressed: false,
+    });
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
@@ -113,6 +145,7 @@ class NewChannelForm extends Component {
       attributeErrors,
       authorType,
       group_id,
+      hatPressed,
     } = this.state;
 
     // If the state of the form is not resting or error,
@@ -173,17 +206,26 @@ class NewChannelForm extends Component {
                     Name
                   </Label>
 
-                  <Input
-                    f={7}
-                    color={`channel.${visibility.toLowerCase()}`}
-                    placeholder="Type channel name"
-                    borderless
-                    autoFocus
-                    required
-                    value={title}
-                    onChange={this.handleTitle}
-                    errorMessage={attributeErrors.title}
-                  />
+                  <NewChannelField>
+                    <Input
+                      f={7}
+                      color={`channel.${visibility.toLowerCase()}`}
+                      placeholder="Type channel name"
+                      borderless
+                      autoFocus
+                      required
+                      value={title}
+                      onChange={this.handleTitle}
+                      errorMessage={attributeErrors.title}
+                      flex={1}
+                    />
+                    <MagicHat
+                      onClick={this.generateRandomTitle}
+                      pressed={hatPressed}
+                      onMouseDown={this.handleHatPress}
+                      onMouseUp={this.handleHatRelease}
+                    />
+                  </NewChannelField>
                 </LabelledInput>
 
                 {groups.length > 0 &&
