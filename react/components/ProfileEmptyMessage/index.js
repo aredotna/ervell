@@ -61,7 +61,7 @@ export default class ProfileEmptyMessage extends Component {
         {isMine && isGroup &&
           <div>
             This is your group&#39;s profile.<br />
-            All of your group&#39;s channels will show up here.
+            Note: Your group will stay secret until you create a publicly visible channel.
           </div>
         }
 
