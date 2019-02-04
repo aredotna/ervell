@@ -17,6 +17,7 @@ const Container = styled.div.attrs({
   color: ${x => x.theme.colors.gray.semiBold};
   border: 1px solid ${x => x.theme.colors.gray.regular};
   background-color: ${x => x.theme.colors.gray.hint};
+  text-align: left;
 `;
 
 const Indicator = ({ label, ...rest }) => (
