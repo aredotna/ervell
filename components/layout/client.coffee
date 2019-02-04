@@ -2,13 +2,10 @@ Backbone = require 'backbone'
 Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
-_ = require 'underscore'
 moment =  require 'moment'
 BodyView = require './body/view.coffee'
 MessageView = require '../message/view.coffee'
-HeaderInfoView = require './header/client.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
-initLoggedInNavigation = require '../logged_in_navigation/client/index.coffee'
 mediator = require '../../lib/mediator.coffee'
 UIState = require "../../models/ui_state.coffee"
 Notifications = require "../../collections/notifications.coffee"
@@ -23,6 +20,9 @@ initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 GlobalBlockRouter = require './global_block_router.coffee'
 Blacklist = require('../../lib/blacklist.js').default
 initGlobalKeyboardShortcuts = require('./global_keyboard_shortcuts.js').default
+
+{ mountWithApolloProvider } = require '../../react/apollo/index.js'
+{ default: TopBar } = require '../../react/components/TopBar/index.js'
 
 module.exports = ->
   setDeviceClasses()
@@ -83,18 +83,6 @@ setupPusherAndCurrentUser = ->
     recent_connections: recentConnections
     notifications: notifications
 
-  if currentUser.id
-    currentUser.fetch
-      # '/me/refresh' hits the account endpoint
-      # and re-logs in the resulting user
-      url: '/me/refresh'
-      error: (_model, xhr) ->
-        # Ignore internal server errors
-        return if xhr.status is 500
-
-        $.get '/me/sign_out', ->
-          location.reload()
-
   # TODO: Extract; split this function out
   if Pusher?
     mediator.shared.pusher = new Pusher sd.PUSHER_KEY, {
@@ -105,15 +93,9 @@ setupPusherAndCurrentUser = ->
 
 # TODO: Extract
 setupViews = ->
-  # TODO: Fix all of these selectors
   new BodyView el: $('body')
 
-  new SearchBarView el: $('.layout-header__search')
-
-  new HeaderInfoView
-
-  if mediator.shared.current_user.id
-    initLoggedInNavigation $('.js-logged-in-navigation')
+  mountWithApolloProvider(TopBar, {}, $('.js-topbar'))
 
 # TODO: Extract
 setupAjaxHeaders = ->
@@ -176,7 +158,7 @@ showDispatchMessage = ->
   model = new Backbone.Model
     id: 'arena_dispatch'
     title: '📬'
-    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://mailchi.mp/are.na/dispatch'>Subscribe here</>."  
+    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://mailchi.mp/are.na/dispatch'>Subscribe here</>."
 
   messageView = new MessageView model: model
 

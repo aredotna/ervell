@@ -67,7 +67,7 @@ class TopBar extends PureComponent {
               <MyRepresentation px={5} me={me} />
             </React.Fragment>
           )
-          : <AuthenticationLinks px={5} />
+          : <AuthenticationLinks px={6} />
         }
       </Container>
     );

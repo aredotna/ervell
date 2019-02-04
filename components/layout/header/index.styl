@@ -1,6 +1,13 @@
 @require '../variables'
 @require '../../dropdown/stylesheets'
 
+.js-topbar
+  position fixed
+  top 0
+  right 0
+  left 0
+  z-index header_z
+
 #layout-header
   position fixed
   top 0
@@ -63,7 +70,7 @@
 
   &__left
     left 0
-  
+
   &__right
     right 0
     transform scaleX(-1)
