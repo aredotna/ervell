@@ -103,7 +103,7 @@ export default class PrimarySearch extends PureComponent {
           py={6}
           placeholder="Search Are.na"
           bg={scheme === 'GROUP' && 'transparent'}
-          borderColor="transparent"
+          border={0}
           query={query}
           onDebouncedQueryChange={this.handleQuery}
           ref={this.searchInputRef}

@@ -17,6 +17,7 @@ const Container = styled(Box)`
   flex-direction: row;
   align-items: stretch;
   justify-content: center;
+  background-color: white;
 
   ${props => props.scheme === 'GROUP' && `
     background-color: ${props.theme.colors.gray.hint};
@@ -61,12 +62,12 @@ class TopBar extends PureComponent {
         {me
           ? (
             <React.Fragment>
-              <NewChannelButton py={4} pl={6} />
-              <NotificationCount py={3} px={6} me={me} />
-              <MyRepresentation pr={6} me={me} />
+              <NewChannelButton px={5} />
+              <NotificationCount px={5} me={me} />
+              <MyRepresentation px={5} me={me} />
             </React.Fragment>
           )
-          : <AuthenticationLinks px={6} />
+          : <AuthenticationLinks px={5} />
         }
       </Container>
     );

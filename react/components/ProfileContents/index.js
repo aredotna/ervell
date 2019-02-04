@@ -111,7 +111,7 @@ export default class ProfileContents extends PureComponent {
                   constants.doubleBlockGutter,
                 ]}
                 ml={[constants.blockGutter, 0, 0]}
-                borderColor="transparent"
+                border={0}
               />
 
               {loading &&

@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { fontSize, space, borderColor, color, width } from 'styled-system';
+import { fontSize, space, borderColor, borders, color, width } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
@@ -21,10 +21,10 @@ export const errorMixin = css`
 `;
 
 export const focusMixin = css`
-  border: 1px solid ${props => props.theme.colors.gray.bold};
   background-color: ${props => props.theme.colors.gray.hint};
   color: black;
-  ${borderColor}
+  ${preset(borders, { border: '1px solid' })}
+  ${preset(borderColor, { borderColor: 'gray.bold' })}
   ${color}
   ${borderlessMixin}
 `;
@@ -35,13 +35,13 @@ export const defaultMixin = css`
   box-sizing: border-box;
   display: block;
   background-color: white;
-  border: 1px solid ${props => props.theme.colors.gray.medium};
   font-family: ${props => props.theme.fonts.sans};
   ${preset(width, { width: '100%' })}
   ${preset(color, { color: 'black' })}
   ${preset(fontSize, { f: 4 })}
   ${preset(space, { px: 5, py: 4 })}
-  ${borderColor}
+  ${preset(borders, { border: '1px solid' })}
+  ${preset(borderColor, { borderColor: 'gray.medium' })}
   ${antialiased}
 
   ::placeholder {

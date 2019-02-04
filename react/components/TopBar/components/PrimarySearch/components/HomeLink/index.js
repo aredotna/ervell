@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { ICON_OFFSET } from 'react/components/UI/SearchInput';
 import Icons from 'react/components/UI/Icons';
 
 const Container = styled.a`
@@ -9,7 +10,7 @@ const Container = styled.a`
   position: absolute;
   z-index: 1;
   height: 100%;
-  width: 2.5em;
+  width: ${ICON_OFFSET};
   display: flex;
   align-items: center;
   justify-content: center;

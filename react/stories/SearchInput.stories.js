@@ -21,7 +21,7 @@ storiesOf('SearchInput', module)
         onQueryChange={action('onQueryChange')}
         onDebouncedQueryChange={action('onDebouncedQueryChange')}
         placeholder="search"
-        borderColor="transparent"
+        border={0}
       />
     </Specimen>
   ));

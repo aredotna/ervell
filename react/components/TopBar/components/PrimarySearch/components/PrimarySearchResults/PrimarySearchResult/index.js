@@ -7,12 +7,15 @@ import primarySearchResultFragment from 'react/components/TopBar/components/Prim
 
 import Text from 'react/components/UI/Text';
 import GroupBadge from 'react/components/UI/GroupBadge';
+import { ICON_OFFSET } from 'react/components/UI/SearchInput';
 
 import { overflowEllipsis } from 'react/styles/mixins';
 import { mixin as boxMixin } from 'react/components/UI/Box';
 
 const Label = styled(Text)`
   font-weight: bold;
+  // Push out to accomodate "overflowing" badge border
+  padding-right: 1px;
   ${overflowEllipsis}
 `;
 
@@ -46,8 +49,8 @@ const Container = styled.a`
 `;
 
 Container.defaultProps = {
-  px: '2.5em', // Matches `<SearchInput />`
-  py: 4, // Matches `<SearchInput />`
+  px: ICON_OFFSET,
+  py: 6,
   bg: 'gray.light',
   borderTop: '1px solid',
   borderColor: 'gray.semiLight',
@@ -87,8 +90,6 @@ export default class PrimarySearchResult extends PureComponent {
               {result.owner.__typename === 'Group' &&
                 <GroupBadge
                   f={0}
-                  // Push out 1px to accomodate "overflowing" badge border
-                  mr="1px"
                   visibility={result.owner.visibility}
                 />
               }
@@ -99,7 +100,10 @@ export default class PrimarySearchResult extends PureComponent {
             {result.label}
 
             {result.__typename === 'Group' &&
-              <GroupBadge f={0} visibility={result.visibility} />
+              <GroupBadge
+                f={0}
+                visibility={result.visibility}
+              />
             }
           </Label>
         </Container>

@@ -11,6 +11,8 @@ import { Input } from 'react/components/UI/Inputs';
 
 const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'flex'];
 
+export const ICON_OFFSET = '3.125em';
+
 const Container = styled(Box)`
   position: relative;
 `;
@@ -23,7 +25,7 @@ const Icon = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 2.5em;
+  width: ${ICON_OFFSET};
   cursor: pointer;
 `;
 
@@ -168,7 +170,7 @@ class SearchInput extends PureComponent {
 
         <Input
           width="100%"
-          px="2.5em"
+          px={ICON_OFFSET}
           borderColor="gray.regular"
           {...innerProps}
           ref={(input) => { this.input = input; }}

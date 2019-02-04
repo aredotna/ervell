@@ -5,7 +5,7 @@ import axios from 'axios';
 import sharify from 'sharify';
 
 import Box from 'react/components/UI/Box';
-import Text from 'react/components/UI/Text';
+import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 import Overlay from 'react/components/UI/Overlay';
 import NotificationsDropdown from 'react/components/NotificationsDropdown';
 
@@ -22,10 +22,15 @@ const Container = styled(Box)`
 
 const Badge = styled(Box).attrs({
   bg: 'gray.regular',
-  px: 3,
-  py: 1,
+  f: 3,
+  px: '0.4em',
+  py: '0.2em',
+  color: 'white',
 })`
-  border-radius: 0.25em;
+  ${baseTextMixin}
+  line-height: 1;
+  border-radius: ${props => props.theme.radii.subtle};
+  font-weight: bold;
 
   ${props => props.amount > 0 && `
     background-color: ${props.theme.colors.state.alert};
@@ -102,9 +107,7 @@ export default class NotificationCount extends PureComponent {
       <React.Fragment>
         <Container {...this.props} ref={this.containerRef} onClick={this.handleClick} role="button" tabIndex={0}>
           <Badge amount={count}>
-            <Text f={2} color="white" fontWeight="bold">
-              {count}
-            </Text>
+            {count}
           </Badge>
         </Container>
 
