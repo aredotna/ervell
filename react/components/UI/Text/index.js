@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { display, space, textColor, fontFamily, fontWeight, fontStyle, fontSize, lineHeight, textAlign, width } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
-import { antialiased, neutralMarginsY } from 'react/styles/mixins';
+import { antialiased, neutralMarginsY, hyphenate, breakWord } from 'react/styles/mixins';
 
 export const baseMixin = css`
   ${preset(fontFamily, { font: 'sans' })}
@@ -22,6 +22,8 @@ export const mixin = css`
   ${fontStyle}
   ${textAlign}
   ${props => props.neutralMarginsY && neutralMarginsY}
+  ${props => props.hyphenate && hyphenate}
+  ${props => props.breakWord && breakWord}
 
   a {
     color: inherit;

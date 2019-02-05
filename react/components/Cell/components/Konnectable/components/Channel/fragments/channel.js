@@ -6,7 +6,7 @@ export default gql`
   fragment Channel on Channel {
     id
     href
-    truncatedTitle: title(truncate: 90)
+    truncatedTitle: title(truncate: 85)
     visibility
     updated_at(relative: true)
     counts {
