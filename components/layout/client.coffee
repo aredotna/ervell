@@ -95,7 +95,8 @@ setupPusherAndCurrentUser = ->
 setupViews = ->
   new BodyView el: $('body')
 
-  mountWithApolloProvider(TopBar, {}, $('.js-topbar'))
+  scheme = if sd.IS_GROUP_PAGE then 'GROUP' else 'DEFAULT'
+  mountWithApolloProvider(TopBar, { scheme: scheme }, $('.js-topbar'))
 
 # TODO: Extract
 setupAjaxHeaders = ->
