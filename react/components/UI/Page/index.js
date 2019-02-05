@@ -22,7 +22,7 @@ export default class Page extends PureComponent {
         toComponent: PropTypes.func.isRequired,
       }),
     }).isRequired,
-    styles: PropTypes.string.isRequired,
+    styles: PropTypes.arrayOf(PropTypes.node).isRequired,
     content: PropTypes.node.isRequired,
 
     // eslint-disable-next-line react/forbid-prop-types
