@@ -12323,6 +12323,11 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.0.tgz#7a7cd28470cc6d3a1cfe6d66886f6bc430d3ac87"
   integrity sha512-2+EPwgbnmOIl8HjGBXXMd9NAu02vLjOO1nWw4kmeRDFyHn+M/ETfHxQUK0oXg8ctgVnl9t3rosNVsZ1jG61nDA==
 
+spider-detector@^1.0.19:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/spider-detector/-/spider-detector-1.0.19.tgz#dedfc0a4b99ebf6d2a9cc01a1bf2fd89a01780be"
+  integrity sha512-C38Yju1AjQv4jZdnO9X+vpjIbpI8dtk229cX4yrdHhdG4JA3yaOXbY0wigfS4dKXCluFHTN9FiomtwKtJjSPuA==
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
