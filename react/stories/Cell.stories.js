@@ -90,4 +90,31 @@ storiesOf('Cell', module)
         </Query>
       </Grid>
     </Specimen>
+  ))
+  .add('indentifiable edge cases', () => (
+    <Specimen>
+      <Grid>
+        <Query query={gql`{ group(id: 1) { ...IdentifiableCell } } ${identifiableCellFragment}`}>
+          {({ data, loading, error }) => {
+            if (loading || error) return '';
+            return (
+              <React.Fragment>
+                <Cell.Identifiable
+                  identifiable={{
+                    ...data.group,
+                    name: 'The Society For Societal Collapse',
+                  }}
+                />
+                <Cell.Identifiable
+                  identifiable={{
+                    ...data.group,
+                    name: 'MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM',
+                  }}
+                />
+              </React.Fragment>
+            );
+          }}
+        </Query>
+      </Grid>
+    </Specimen>
   ));

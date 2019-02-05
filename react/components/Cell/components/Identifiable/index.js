@@ -86,8 +86,8 @@ export default class Indentifiable extends PureComponent {
         __typename={identifiable.__typename}
       >
         <Wrap>
-          <Text f={5} fontWeight="bold" textAlign="center">
-            <Truncate length={27}>
+          <Text f={5} fontWeight="bold" textAlign="center" breakWord>
+            <Truncate length={20}>
               {identifiable.name}
             </Truncate>
 
