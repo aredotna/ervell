@@ -82,6 +82,16 @@ airbrake = new AirbrakeClient({
   projectKey: AIRBRAKE_API_KEY,
 })
 
+airbrake.addFilter (notice) ->
+  return null if (
+    # Ignores 404s
+    (notice.errors[0].message is 'Not found') or
+    # Ignores 401s
+    (notice.errors[0].message is 'Access denied')
+  )
+
+  notice
+
 module.exports = (app) ->
   console.log "Setting up... NODE_ENV=#{NODE_ENV}"
 
