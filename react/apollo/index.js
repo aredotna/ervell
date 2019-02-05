@@ -35,6 +35,7 @@ export const initApolloClient = ({
   isLoggedIn,
   cookies,
   serializedMe,
+  sharifyData,
 } = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__;
@@ -66,10 +67,19 @@ export const initApolloClient = ({
         __typename: 'SerializedMe',
         ...serializedMe,
       },
+      sharify: {
+        __typename: 'Sharify',
+      },
     },
     resolvers: {
       Cookies: {
         get: (_obj, args) => cookies[args.name] || null,
+      },
+      Sharify: {
+        get: (_obj, args) => {
+          const value = sharifyData[args.name];
+          return value === undefined ? null : value;
+        },
       },
     },
   });
