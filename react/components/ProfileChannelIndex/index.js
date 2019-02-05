@@ -13,6 +13,8 @@ import CompactChannel from 'react/components/CompactChannel';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import ProfileEmptyMessage from 'react/components/ProfileEmptyMessage';
 
+import WithIsSpiderRequesting from 'react/hocs/WithIsSpiderRequesting';
+
 const Columns = styled.div`
   column-count: 2;
   column-gap: ${x => x.theme.space[9]};
@@ -32,17 +34,22 @@ const Group = styled(Box).attrs({
   break-inside: avoid;
 `;
 
-export default class ProfileChannelIndex extends Component {
+class ProfileChannelIndex extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
+    isSpiderRequesting: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isSpiderRequesting: false,
   }
 
   render() {
-    const { id, type } = this.props;
+    const { id, type, isSpiderRequesting } = this.props;
 
     return (
-      <Query query={profileChannelIndexQuery} variables={{ id, type }} ssr={false}>
+      <Query query={profileChannelIndexQuery} variables={{ id, type }} ssr={isSpiderRequesting}>
         {({ data, loading, error }) => {
           if (loading) return <BlocksLoadingIndicator />;
           if (error) return error.message;
@@ -74,3 +81,5 @@ export default class ProfileChannelIndex extends Component {
     );
   }
 }
+
+export default WithIsSpiderRequesting(ProfileChannelIndex);
