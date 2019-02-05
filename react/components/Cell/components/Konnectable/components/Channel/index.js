@@ -39,6 +39,7 @@ export default class Channel extends PureComponent {
           pt={6}
           mx={4}
           f={6}
+          breakWord
           textAlign="center"
           dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }}
         />
