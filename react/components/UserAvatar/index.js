@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
+import { textColor, fontFamily } from 'styled-system';
 
 import Avatar from 'react/components/UI/Avatar';
+
+import { preset } from 'react/styles/functions';
+import { antialiased } from 'react/styles/mixins';
 
 import userAvatarFragment from 'react/components/UserAvatar/fragments/userAvatar';
 
@@ -11,6 +15,9 @@ const Initials = styled.div`
   font-size: ${x => x.size / 3}px;
   color: ${x => x.theme.colors.gray.medium};
   text-transform: uppercase;
+  ${preset(fontFamily, { font: 'sans' })}
+  ${preset(textColor, { color: 'gray.base' })}
+  ${antialiased}
 `;
 
 const Image = styled.img`
@@ -46,12 +53,12 @@ export default class UserAvatar extends Component {
     const { user, size, ...rest } = this.props;
 
     return (
-      <Avatar href={user.href} f={size} {...rest}>
+      <Avatar href={user.href} f={size} size={size} {...rest}>
         <Initials f={size}>
           {user.initials}
         </Initials>
 
-        {!hideImage &&
+        {user.avatar && !hideImage &&
           <Image
             src={user.avatar}
             alt={user.initials}

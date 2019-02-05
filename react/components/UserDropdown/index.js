@@ -12,6 +12,7 @@ import Label from 'react/components/UserDropdown/components/Label';
 import SecondaryLinks from 'react/components/UserDropdown/components/SecondaryLinks';
 import MyGroupLinks from 'react/components/UserDropdown/components/MyGroupLinks';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
+import SignOutLink from 'react/components/UserDropdown/components/SecondaryLinks/components/SignOutLink';
 
 const Container = styled(BorderedBox).attrs({
   width: '20em',
@@ -51,9 +52,17 @@ export default class UserDropdown extends Component {
           if (error) {
             return (
               <Container>
-                <Text color="state.alert" f={2} p={6}>
-                  {error.message}
-                </Text>
+                <Inner>
+                  <Section>
+                    <Text color="state.alert" f={2} p={6}>
+                      {error.message}
+                    </Text>
+                  </Section>
+
+                  <Section>
+                    <SignOutLink />
+                  </Section>
+                </Inner>
               </Container>
             );
           }

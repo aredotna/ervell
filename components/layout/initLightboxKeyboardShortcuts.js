@@ -1,7 +1,7 @@
 import Mousetrap from 'mousetrap';
 import mediator from '../../lib/mediator.coffee'
 
-export default () => {
+export const bind = () => {
   Mousetrap.bind('right', () => {
     mediator.trigger('lightbox:slide:next');
   });
@@ -13,10 +13,8 @@ export default () => {
   Mousetrap.bind('esc', () => {
     mediator.trigger('lightbox:close');
   });
+};
 
-  Mousetrap.bind('g', () => {
-    if (!mediator.shared.current_user.isPremium()) return;
-    mediator.shared.state.set({ view_mode: 'grid' });
-    window.location.reload();
-  });
+export const unbind = () => {
+  Mousetrap.unbind(['right', 'left', 'esc']);
 };

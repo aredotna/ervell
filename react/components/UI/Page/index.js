@@ -22,7 +22,7 @@ export default class Page extends PureComponent {
         toComponent: PropTypes.func.isRequired,
       }),
     }).isRequired,
-    styles: PropTypes.string.isRequired,
+    styles: PropTypes.arrayOf(PropTypes.node).isRequired,
     content: PropTypes.node.isRequired,
 
     // eslint-disable-next-line react/forbid-prop-types
@@ -66,6 +66,9 @@ export default class Page extends PureComponent {
           <link rel="mask-icon" href={`${sharifyData.IMAGE_PATH}arena-mark.svg`} color="black" />
 
           <meta name="twitter:site" content="@aredotna" />
+
+          {/* Temporarily include legacy styles */}
+          <link type="text/css" rel="stylesheet" href={asset('/assets/all.css')} />
 
           {styles}
         </head>

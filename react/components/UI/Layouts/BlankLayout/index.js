@@ -17,7 +17,7 @@ const BodyStyle = createGlobalStyle`
   }
 `;
 
-class Blank extends PureComponent {
+class BlankLayout extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     history: PropTypes.shape({
@@ -52,4 +52,4 @@ class Blank extends PureComponent {
   }
 }
 
-export default withRouter(Blank);
+export default withRouter(BlankLayout);

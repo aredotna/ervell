@@ -26,6 +26,7 @@
   BACKBONE_SUPER_SYNC_TIMEOUT
 } = require '../config'
 
+_ = require 'underscore'
 express = require 'express'
 Backbone = require 'backbone'
 sharify = require 'sharify'
@@ -42,14 +43,16 @@ blocker = require 'express-spam-referral-blocker'
 glob = require 'glob'
 AirbrakeClient = require 'airbrake-js'
 makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
-_ = require 'underscore'
+
 localsMiddleware = require './middleware/locals'
-ensureSSL = require './middleware/ensure_ssl'
-{default: ensureWWW } = require './middleware/ensureWWW'
-viewMode = require './middleware/view_mode'
-checkSession = require './middleware/check_session'
+ensureSSLMiddleware = require './middleware/ensure_ssl'
+viewModeMiddleware = require './middleware/view_mode'
+checkSessionMiddleware = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
 splitTestMiddleware = require '../components/split_test/middleware'
+{ default: ensureWWWMiddleware } = require './middleware/ensureWWW'
+{ default: isSpiderMiddleware } = require './middleware/isSpider'
+
 cache = require './cache'
 arenaPassport = require './passport'
 
@@ -139,13 +142,14 @@ module.exports = (app) ->
       key: SESSION_COOKIE_KEY
       maxAge: SESSION_COOKIE_MAX_AGE
     .use arenaPassport({ CurrentUser })
-    .use checkSession
+    .use checkSessionMiddleware
     .use localsMiddleware
     .use splitTestMiddleware
-    .use ensureSSL
-    .use ensureWWW
+    .use ensureSSLMiddleware
+    .use ensureWWWMiddleware
     .use isInverted
-    .use viewMode
+    .use viewModeMiddleware
+    .use isSpiderMiddleware
 
   console.log 'Mounting apps...'
 

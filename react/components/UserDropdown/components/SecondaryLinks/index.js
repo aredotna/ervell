@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-import Link from 'react/components/UserDropdown/components/Link';
-
-const SmallLink = styled(Link).attrs({
-  f: 2,
-  fontWeight: 'normal',
-})`
-`;
+import SmallLink from 'react/components/UserDropdown/components/SecondaryLinks/components/SmallLink';
+import SignOutLink from 'react/components/UserDropdown/components/SecondaryLinks/components/SignOutLink';
 
 export default class SecondaryLinks extends Component {
   static propTypes = {
-    isPremium: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool,
   }
 
-  signOut = () => {
-    window.localStorage.clear();
-    window.location.href = '/me/sign_out';
+  static defaultProps = {
+    isPremium: false,
   }
 
   render() {
@@ -51,9 +44,7 @@ export default class SecondaryLinks extends Component {
           </SmallLink>
         }
 
-        <SmallLink onClick={this.signOut}>
-          Log Out
-        </SmallLink>
+        <SignOutLink />
       </div>
     );
   }

@@ -15,12 +15,19 @@ import Cell from 'react/components/Cell';
 import ChannelRow from 'react/components/ProfileChannels/components/ChannelRow';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 
-export default class ProfileChannels extends PureComponent {
+import WithIsSpiderRequesting from 'react/hocs/WithIsSpiderRequesting';
+
+class ProfileChannels extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     seed: PropTypes.number.isRequired,
+    isSpiderRequesting: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isSpiderRequesting: false,
   }
 
   state = {
@@ -67,7 +74,7 @@ export default class ProfileChannels extends PureComponent {
   render() {
     const { per, hasMore, q } = this.state;
     const {
-      id, sort, fetchPolicy, seed,
+      id, sort, fetchPolicy, seed, isSpiderRequesting,
     } = this.props;
 
     const isSearch = sort === 'RANDOM' || q;
@@ -82,6 +89,7 @@ export default class ProfileChannels extends PureComponent {
         query={query}
         variables={variables}
         fetchPolicy={fetchPolicy}
+        ssr={isSpiderRequesting}
       >
         {({
           loading, error, data, fetchMore,
@@ -113,7 +121,7 @@ export default class ProfileChannels extends PureComponent {
                   constants.doubleBlockGutter,
                 ]}
                 ml={[constants.blockGutter, 0, 0]}
-                borderColor="transparent"
+                border={0}
               />
 
               {loading &&
@@ -154,3 +162,5 @@ export default class ProfileChannels extends PureComponent {
     );
   }
 }
+
+export default WithIsSpiderRequesting(ProfileChannels);

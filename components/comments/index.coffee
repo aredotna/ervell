@@ -13,10 +13,10 @@ module.exports = (block, $el) ->
 
   view.on 'render', =>
     newCommentView = new NewCommentView
-      el: $('.js-new-comment')
+      el: $el.find('.js-new-comment')
       comments: @comments
       block_id: block.id
 
     newCommentView.postRender()
-  
+
   return view

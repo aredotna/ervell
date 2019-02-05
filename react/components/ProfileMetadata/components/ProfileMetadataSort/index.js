@@ -43,6 +43,7 @@ class ProfileMetadataSort extends Component {
             search: `?sort=RANDOM&seed=${Math.floor(Math.random() * 1000) + 1}`,
           }}
           isActive={this.isSortActive('RANDOM')}
+          rel="nofollow"
         >
           Random
         </CookieLinkUnlessCurrent>
