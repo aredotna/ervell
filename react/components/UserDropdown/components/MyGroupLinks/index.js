@@ -8,6 +8,8 @@ import myGroupLinksFragment from 'react/components/UserDropdown/components/MyGro
 
 import toggleMyGroupsDropdownVisibilityMutation from 'react/components/UserDropdown/components/MyGroupLinks/mutations/toggleMyGroupsDropdownVisibility';
 
+import { overflowScrolling } from 'react/styles/mixins';
+
 import Text from 'react/components/UI/Text';
 import GenericButton from 'react/components/UI/GenericButton';
 import Link from 'react/components/UserDropdown/components/Link';
@@ -49,10 +51,11 @@ const Header = styled(Link)`
 const BetaBadge = styled(Text).attrs({
   f: 0,
 })`
-  color: ${x => x.theme.colors.gray.regular} !important;
   display: inline-block;
+  color: ${props => props.theme.colors.gray.regular} !important;
   font-weight: normal;
   margin-left: 0.5em;
+
   &:before {
     content: '•';
     margin-right: 0.5em;
@@ -60,7 +63,10 @@ const BetaBadge = styled(Text).attrs({
 `;
 
 const Container = styled.div`
-  margin-left: ${x => x.theme.space[3]};
+  margin-left: ${props => props.theme.space[3]};
+  min-height: ${props => props.theme.space[10]};
+  max-height: 20vmin;
+  ${overflowScrolling}
 `;
 
 const LearnMoreLink = styled.a`
@@ -110,18 +116,21 @@ class MyGroupLinks extends Component {
     const hasGroups = groups.length > 0;
 
     return (
-      <div>
+      <React.Fragment>
         <Header
           onClick={this.toggle}
           hasGroups={hasGroups}
           is_my_groups_dropdown_hidden={is_my_groups_dropdown_hidden}
         >
           Groups
-          <BetaBadge>BETA</BetaBadge>
+
+          <BetaBadge>
+            BETA
+          </BetaBadge>
         </Header>
 
         {!is_my_groups_dropdown_hidden &&
-          <div>
+          <React.Fragment>
             {groups.length === 0 &&
               <Text f={1} my="1rem" px="1rem" lineHeight={2}>
                 Groups are a new way to collaborate on Are.na.
@@ -129,6 +138,7 @@ class MyGroupLinks extends Component {
                 <LearnMoreLink href="/getting-started-with-groups">Learn more</LearnMoreLink>
               </Text>
             }
+
             {groups.length > 0 &&
               <Container>
                 {groups.map(group => (
@@ -136,12 +146,13 @@ class MyGroupLinks extends Component {
                 ))}
               </Container>
             }
+
             <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
               Create group
             </GenericButton>
-          </div>
+          </React.Fragment>
         }
-      </div>
+      </React.Fragment>
     );
   }
 }
