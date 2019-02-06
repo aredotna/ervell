@@ -43,6 +43,7 @@ export default class Overlay extends PureComponent {
     alignToX: PropTypes.oneOf(['left', 'right']),
     offsetX: PropTypes.number,
     offsetY: PropTypes.number,
+    marginY: PropTypes.number,
     fullWidth: PropTypes.bool,
   }
 
@@ -54,6 +55,7 @@ export default class Overlay extends PureComponent {
     alignToX: 'left',
     offsetX: 0,
     offsetY: 0,
+    marginY: 10,
     fullWidth: false,
   }
 
@@ -99,7 +101,7 @@ export default class Overlay extends PureComponent {
 
   alignToEl = (el) => {
     const {
-      anchorY, anchorX, alignToY, alignToX, offsetY, offsetX, fullWidth,
+      anchorY, anchorX, alignToY, alignToX, offsetY, offsetX, fullWidth, marginY,
     } = this.props;
 
     const { [alignToY]: y, [alignToX]: x, width: elWidth } = el.getBoundingClientRect();
@@ -129,15 +131,18 @@ export default class Overlay extends PureComponent {
         height: wrapperHeight,
       } = this.wrapper.getBoundingClientRect();
 
-      const isOverflowingViewportTop = anchorY === 'bottom' && topEdge <= 0;
-      const isOverflowingViewportBottom = anchorY === 'top' && bottomEdge >= window.innerHeight;
+      const computedTopEdge = topEdge - marginY;
+      const computedBottomEdge = bottomEdge + marginY;
+
+      const isOverflowingViewportTop = anchorY === 'bottom' && computedTopEdge <= 0;
+      const isOverflowingViewportBottom = anchorY === 'top' && computedBottomEdge >= window.innerHeight;
 
       if (isOverflowingViewportTop) {
-        return this.setState({ height: wrapperHeight + topEdge, topEdge });
+        return this.setState({ height: wrapperHeight + computedTopEdge });
       }
 
       if (isOverflowingViewportBottom) {
-        const bottomDifference = window.innerHeight - bottomEdge;
+        const bottomDifference = window.innerHeight - computedBottomEdge;
         return this.setState({ height: wrapperHeight + bottomDifference });
       }
 
