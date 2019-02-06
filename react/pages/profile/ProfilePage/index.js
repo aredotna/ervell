@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
+import Title from 'react/components/UI/Head/components/Title';
+import TopBarLayout from 'react/components/UI/Layouts/TopBarLayout';
+import Constrain from 'react/components/UI/Constrain';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
-import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
 import LoggedOutCTA from 'react/components/LoggedOutCTA';
 import LoggedOutProfileContent from 'react/components/LoggedOutCTA/components/LoggedOutProfileContent';
+import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
+import ProfileMetaTags from 'react/pages/profile/ProfilePage/components/ProfileMetaTags';
 
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
@@ -34,6 +38,8 @@ export default class ProfilePage extends Component {
             if (error) {
               return (
                 <ErrorAlert>
+                  <Title>Error</Title>
+
                   {error.message}
                 </ErrorAlert>
               );
@@ -42,6 +48,8 @@ export default class ProfilePage extends Component {
             if (loading) {
               return (
                 <CenteringBox>
+                  <Title>Loading...</Title>
+
                   <LoadingIndicator f={9} />
                 </CenteringBox>
               );
@@ -55,28 +63,37 @@ export default class ProfilePage extends Component {
               ? { all: 'channels', blocks: 'channels' }[view] || view
               : view;
 
+            const scheme = identifiable.__typename === 'Group' ? 'GROUP' : 'DEFAULT';
+
             return (
-              <div>
-                <ProfileMetadata
+              <TopBarLayout scheme={scheme}>
+                <ProfileMetaTags
                   view={typedView}
-                  sort={sort}
-                  filter={filter}
                   identifiable={identifiable}
                 />
 
-                <ProfileViews
-                  view={typedView}
-                  id={id}
-                  sort={sort}
-                  filter={filter}
-                  identifiable={identifiable}
-                  seed={seed}
-                />
+                <Constrain>
+                  <ProfileMetadata
+                    view={typedView}
+                    sort={sort}
+                    filter={filter}
+                    identifiable={identifiable}
+                  />
 
-                <LoggedOutCTA>
-                  <LoggedOutProfileContent user={identifiable} />
-                </LoggedOutCTA>
-              </div>
+                  <ProfileViews
+                    view={typedView}
+                    id={id}
+                    sort={sort}
+                    filter={filter}
+                    identifiable={identifiable}
+                    seed={seed}
+                  />
+
+                  <LoggedOutCTA>
+                    <LoggedOutProfileContent user={identifiable} />
+                  </LoggedOutCTA>
+                </Constrain>
+              </TopBarLayout>
             );
           }}
         </Query>

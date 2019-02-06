@@ -17,11 +17,19 @@ export const COMPONENTS = {
 
 export const ICON_NAMES = Object.keys(COMPONENTS);
 
+const DEFAULT_ICON_SIZE = 6; // 1em
+
+const size = key => props => (
+  props.theme.space[props[key] || props.size || DEFAULT_ICON_SIZE] ||
+  props[key] ||
+  props.size
+);
+
 const Container = styled.div`
   display: inline-block;
   position: relative;
-  width: ${x => x.theme.space[x.size || 6]};
-  height: ${x => x.theme.space[x.size || 6]};
+  width: ${size('width')};
+  height: ${size('height')};
   vertical-align: bottom;
   ${space}
 

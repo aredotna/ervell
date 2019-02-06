@@ -1,6 +1,7 @@
 import express from 'express';
 
 import apolloMiddleware from 'react/apollo/middleware';
+
 import pageResolver from 'react/components/UI/Page/resolver';
 
 import logoutMiddleware from 'apps/authentication/middleware/logout';

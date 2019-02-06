@@ -6,23 +6,27 @@ import constants from 'react/styles/constants';
 
 import profileContentsQuery from 'react/components/ProfileContents/queries/profileContents';
 
+import WithIsSpiderRequesting from 'react/hocs/WithIsSpiderRequesting';
+
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import SearchInput from 'react/components/UI/SearchInput';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
 import Grid from 'react/components/UI/Grid';
 import Cell from 'react/components/Cell';
 
-export default class ProfileContents extends PureComponent {
+class ProfileContents extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     seed: PropTypes.number.isRequired,
+    isSpiderRequesting: PropTypes.bool,
   }
 
   static defaultProps = {
     type: null,
+    isSpiderRequesting: false,
   }
 
   state = {
@@ -69,7 +73,7 @@ export default class ProfileContents extends PureComponent {
   render() {
     const { per, hasMore, q } = this.state;
     const {
-      id, type, sort, fetchPolicy, seed,
+      id, type, sort, fetchPolicy, seed, isSpiderRequesting,
     } = this.props;
 
     return (
@@ -79,6 +83,7 @@ export default class ProfileContents extends PureComponent {
           id, type, per, sort, q, seed,
         }}
         fetchPolicy={fetchPolicy}
+        ssr={isSpiderRequesting}
       >
         {({
           loading, error, data, fetchMore,
@@ -110,7 +115,7 @@ export default class ProfileContents extends PureComponent {
                   constants.doubleBlockGutter,
                 ]}
                 ml={[constants.blockGutter, 0, 0]}
-                borderColor="transparent"
+                border={0}
               />
 
               {loading &&
@@ -142,3 +147,5 @@ export default class ProfileContents extends PureComponent {
     );
   }
 }
+
+export default WithIsSpiderRequesting(ProfileContents);

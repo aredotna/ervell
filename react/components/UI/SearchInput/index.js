@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { isEmpty, debounce, pick, omit } from 'underscore';
@@ -9,7 +9,13 @@ import Box from 'react/components/UI/Box';
 import Icons from 'react/components/UI/Icons';
 import { Input } from 'react/components/UI/Inputs';
 
-const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'];
+const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'flex'];
+
+export const ICON_OFFSET = '3.125em';
+
+const Container = styled(Box)`
+  position: relative;
+`;
 
 const Icon = styled.div`
   display: flex;
@@ -19,11 +25,11 @@ const Icon = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  width: 2.5em;
+  width: ${ICON_OFFSET};
   cursor: pointer;
 `;
 
-class SearchInput extends Component {
+class SearchInput extends PureComponent {
   static propTypes = {
     query: PropTypes.string,
     onFocus: PropTypes.func,
@@ -35,6 +41,12 @@ class SearchInput extends Component {
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any }),
     ]),
+    iconMap: PropTypes.shape({
+      resting: PropTypes.string,
+      focus: PropTypes.string,
+      hover: PropTypes.string,
+      active: PropTypes.string,
+    }),
   }
 
   static defaultProps = {
@@ -45,6 +57,12 @@ class SearchInput extends Component {
     onDebouncedQueryChange: () => {},
     debounceWait: 250,
     forwardRef: null,
+    iconMap: {
+      resting: 'MagnifyingGlass',
+      hover: 'MagnifyingGlass',
+      focus: 'MagnifyingGlass',
+      active: 'X',
+    },
   }
 
   constructor(props) {
@@ -55,7 +73,7 @@ class SearchInput extends Component {
     this.handleDebouncedQueryChange = debounce(onDebouncedQueryChange, debounceWait);
 
     this.state = {
-      mode: 'resting',
+      mode: props.query && props.query !== '' ? 'active' : 'resting',
       query: props.query,
     };
   }
@@ -67,16 +85,40 @@ class SearchInput extends Component {
   }
 
   resetState = () => {
-    this.setState({ query: '', mode: 'resting' });
+    this.setState({ query: '', mode: 'focus' });
     this.input.value = '';
     this.input.focus();
+  }
+
+  handleMouseEnter = () => {
+    if (this.state.mode === 'focus') return;
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'hover' });
+  }
+
+  handleMouseLeave = () => {
+    if (this.state.mode === 'focus') return;
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'resting' });
+  }
+
+  handleFocus = () => {
+    this.props.onFocus();
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'focus' });
+  }
+
+  handleBlur = () => {
+    this.props.onBlur();
+    if (this.state.mode === 'active') return;
+    this.setState({ mode: 'resting' });
   }
 
   handleChange = ({ target: { value: query } }) => {
     const currentState = { query, mode: 'active' };
 
     if (isEmpty(query)) {
-      currentState.mode = 'resting';
+      currentState.mode = 'focus';
     }
 
     this.setState(currentState);
@@ -99,6 +141,7 @@ class SearchInput extends Component {
       onDebouncedQueryChange: _onDebouncedQueryChange,
       debounceWait: _debounceWait,
       forwardRef,
+      iconMap,
       ...rest
     } = this.props;
 
@@ -108,28 +151,39 @@ class SearchInput extends Component {
     const innerProps = omit(rest, ...OUTER_PROPS_KEYS);
 
     return (
-      <Box position="relative" ref={forwardRef} {...outerProps}>
-        <Icon onClick={this.handleReset}>
-          <Icons
-            color="gray.medium"
-            name={{
-              resting: 'MagnifyingGlass',
-              active: 'X',
-            }[mode]}
-          />
-        </Icon>
+      <Container
+        ref={forwardRef}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        {...outerProps}
+      >
+        {iconMap[mode] &&
+          <Icon onClick={this.handleReset}>
+            <Icons
+              width="1.5em"
+              height="0.88em"
+              color="gray.medium"
+              name={iconMap[mode]}
+            />
+          </Icon>
+        }
 
         <Input
-          px="2.5em"
+          width="100%"
+          px={ICON_OFFSET}
           borderColor="gray.regular"
           {...innerProps}
           ref={(input) => { this.input = input; }}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
           onChange={this.handleChange}
           defaultValue={query}
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
-      </Box>
+      </Container>
     );
   }
 }

@@ -78,12 +78,16 @@ export const channelVisibilityForegroundColor = css`
         }
       }
     `;
-  }
-}
-  `;
+  }}
+`;
 
 export const fractional = css`
   -webkit-transform: scale(0.99); // Hack to force fractional pixels in Chrome
+`;
+
+export const overflowScrolling = css`
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 
 export default {
@@ -93,4 +97,5 @@ export default {
   neutralMarginsY,
   channelVisibilityForegroundColor,
   fractional,
+  overflowScrolling,
 };

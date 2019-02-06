@@ -5,6 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import identifiableCellFragment from 'react/components/Cell/components/Identifiable/fragments/identifiableCell';
+import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 import Specimen from 'react/stories/__components__/Specimen';
 
@@ -23,6 +24,7 @@ const IDENTIFIABLE_QUERY = gql`
   }
   ${identifiableCellFragment}
 `;
+
 storiesOf('Cell', module)
   .add('konnectables', () => (
     <Specimen>
@@ -59,6 +61,60 @@ storiesOf('Cell', module)
             }}
           </Query>
         ))}
+      </Grid>
+    </Specimen>
+  ))
+  .add('konnectable edge cases', () => (
+    <Specimen>
+      <Grid>
+        <Query query={gql`{ channel(id: 1) { ...KonnectableCell } } ${konnectableCellFragment}`}>
+          {({ data, loading, error }) => {
+            if (loading || error) return '';
+            return (
+              <React.Fragment>
+                <Cell.Konnectable
+                  konnectable={{
+                    ...data.channel,
+                    truncatedTitle: 'things i found google image searching a religious manuscript generated from L Ron...',
+                  }}
+                />
+                <Cell.Konnectable
+                  konnectable={{
+                    ...data.channel,
+                    truncatedTitle: 'MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM',
+                  }}
+                />
+              </React.Fragment>
+            );
+          }}
+        </Query>
+      </Grid>
+    </Specimen>
+  ))
+  .add('indentifiable edge cases', () => (
+    <Specimen>
+      <Grid>
+        <Query query={gql`{ group(id: 1) { ...IdentifiableCell } } ${identifiableCellFragment}`}>
+          {({ data, loading, error }) => {
+            if (loading || error) return '';
+            return (
+              <React.Fragment>
+                <Cell.Identifiable
+                  identifiable={{
+                    ...data.group,
+                    name: 'The Society For Societal Collapse',
+                  }}
+                />
+                <Cell.Identifiable
+                  identifiable={{
+                    ...data.group,
+                    name: 'MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM',
+                  }}
+                />
+              </React.Fragment>
+            );
+          }}
+        </Query>
       </Grid>
     </Specimen>
   ));

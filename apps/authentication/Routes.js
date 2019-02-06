@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import parseRoute from 'react/util/parseRoute';
 
-import Blank from 'react/components/UI/Layouts/Blank';
+import BlankLayout from 'react/components/UI/Layouts/BlankLayout';
 import LoginPage from 'react/pages/authentication/LoginPage';
 import RegistrationPage from 'react/pages/authentication/RegistrationPage';
 import ResetPasswordPage from 'react/pages/authentication/ResetPasswordPage';
@@ -11,7 +11,7 @@ import ForgotPasswordPage from 'react/pages/authentication/ForgotPasswordPage';
 import AcceptInvitationPage from 'react/pages/authentication/AcceptInvitationPage';
 
 export default () => (
-  <Blank>
+  <BlankLayout>
     <Switch>
       <Route
         path="/log_in"
@@ -47,5 +47,5 @@ export default () => (
         ))}
       />
     </Switch>
-  </Blank>
+  </BlankLayout>
 );

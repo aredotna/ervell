@@ -32,7 +32,8 @@ const Mocks = {
 
   Group: () => ({
     name: `${commerce.productAdjective()} ${company.catchPhraseNoun()}`,
-    initials: 'IOU'
+    initials: 'IOU',
+    visibility: sample(['private', 'public'])
   }),
 
   Connection: () => ({

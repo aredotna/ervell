@@ -14,6 +14,7 @@ const mixin = css`
   ${x => x.circle && 'border-radius: 50%;'}
   text-decoration: none;
   overflow: hidden;
+  user-select: none;
   ${space}
 
   img {

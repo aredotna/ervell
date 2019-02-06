@@ -26,9 +26,9 @@ export default class LoadingIndicator extends Component {
 
   static defaultProps = {
     frames: [
+      '···',
       '·',
       '··',
-      '···',
     ],
     interval: 175,
     f: 7,

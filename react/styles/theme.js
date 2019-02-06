@@ -23,6 +23,7 @@ const THEME = {
   space: SPACING_SCALE,
   z: constants.z,
   constantValues: CONSTANT_VALUES,
+  radii: constants.radii,
 };
 
 export const wrapWithThemeProvider = (Component, props = {}) => (

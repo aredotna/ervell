@@ -1,7 +1,10 @@
 import url from 'url';
 
-export default (req) => {
+import serializedMe from 'react/apollo/localState/serializedMe';
+
+export default (req, res) => {
   const { url: currentUrl, user, cookies } = req;
+  const { locals: { sd: sharifyData } } = res;
 
   const token = user && user.get('authentication_token');
   const currentRoute = { ...url.parse(currentUrl) };
@@ -12,5 +15,7 @@ export default (req) => {
     currentRoute,
     isLoggedIn,
     cookies,
+    serializedMe: serializedMe(user && user.attributes),
+    sharifyData,
   };
 };
