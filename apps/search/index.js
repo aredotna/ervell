@@ -33,11 +33,11 @@ const resolve = [
   },
 ];
 
-app.get('/search/:term', ...middlewareStack, ...resolve);
-app.get('/search/:term/all', ...middlewareStack, ...resolve);
-app.get('/search/:term/channels', ...middlewareStack, ...resolve);
-app.get('/search/:term/blocks', ...middlewareStack, ...resolve);
-app.get('/search/:term/users', ...middlewareStack, ...resolve);
-app.get('/search/:term/groups', ...middlewareStack, ...resolve);
+app.get('/search/:term', ...resolve);
+app.get('/search/:term/all', ...resolve);
+app.get('/search/:term/channels', ...resolve);
+app.get('/search/:term/blocks', ...resolve);
+app.get('/search/:term/users', ...resolve);
+app.get('/search/:term/groups', ...resolve);
 
 module.exports = app;
