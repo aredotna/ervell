@@ -32,9 +32,9 @@ const resolve = [
   },
 ];
 
-app.get('/explore', ...middlewareStack, ...resolve);
-app.get('/explore/all', ...middlewareStack, ...resolve);
-app.get('/explore/channels', ...middlewareStack, ...resolve);
-app.get('/explore/blocks', ...middlewareStack, ...resolve);
+app.get('/explore', ...resolve);
+app.get('/explore/all', ...resolve);
+app.get('/explore/channels', ...resolve);
+app.get('/explore/blocks', ...resolve);
 
 module.exports = app;
