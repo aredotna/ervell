@@ -15,6 +15,10 @@ import ManageGroup from 'react/components/ManageGroup';
 const Button = styled(GenericButtonLink)`
 `;
 
+const PremiumButton = styled(Button)`
+  color: ${x => x.theme.colors.state.premium};
+`;
+
 const IdentifiableFollowButton = styled(FollowButton)`
   ${buttonMixin}
 `;
@@ -73,6 +77,12 @@ export default class ProfileMetadataActions extends Component {
           <Button onClick={this.openManageGroupModal}>
             Edit group
           </Button>
+        }
+
+        {identifiable.__typename === 'Group' && (identifiable.can.manage && identifiable.is_upgradeable) &&
+          <PremiumButton href="/settings/group_billing">
+            Upgrade
+          </PremiumButton>
         }
 
         {identifiable.__typename === 'Group' && identifiable.can.follow &&

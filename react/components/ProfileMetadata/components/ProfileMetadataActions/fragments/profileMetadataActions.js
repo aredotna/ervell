@@ -14,6 +14,7 @@ export default gql`
     }
     ... on Group {
       id
+      is_upgradeable
       can {
         follow
         manage
