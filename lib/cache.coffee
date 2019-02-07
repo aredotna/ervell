@@ -3,16 +3,32 @@ _ = require 'underscore'
 redis = require 'redis'
 @client = null
 
+retry_strategy = (options) ->
+  console.log('Retrying with', options)
+
+  if options.error and options.error.code == 'ECONNREFUSED'
+    # End reconnecting on a specific error and flush all commands with
+    # a individual error
+    return new Error('The server refused the connection')
+
+  if options.total_retry_time > 1000 * 60 * 60
+    # End reconnecting after a specific timeout and flush all commands
+    # with a individual error
+    return new Error('Retry time exhausted')
+
+  if options.attempt > 10
+    # End reconnecting with built in error
+    return undefined
+
+  # Reconnect after
+  Math.min options.attempt * 100, 3000
+
 # Setup redis client
-@setup = (callback = ->) ->
-  return callback() if NODE_ENV is "test" or not REDIS_URL
-  red = require("url").parse(REDIS_URL)
-  @client = redis.createClient(red.port, red.hostname)
-  @client.on 'error', _.once (err) =>
-    @client = null
-    callback()
-  @client.on 'ready', _.once callback
-  @client.auth(red.auth.split(":")[1]) if @client and red.auth
+@connect = () ->
+  @client = redis.createClient(REDIS_URL, { retry_strategy: retry_strategy })
+  @client.on 'error', (err) ->
+    # Log + ignore the error; start up without Redis
+    console.error(err)
 
 # Convenience for setting a value in the cache with an expiry.
 #
