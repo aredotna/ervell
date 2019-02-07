@@ -34,7 +34,9 @@ const resolve = (req, res, next) => {
     user.fetch({ headers }),
     policy.fetch(),
     req.apollo.client.query({ query: hasGroupsQuery }),
-  ]).then(([_x, _y, { data: { me: { groups } } }]) => {
+  ]).then((results) => {
+    const { data: { me: { groups } } } = results[2];
+
     res.locals.sd.USER = user.toJSON();
     res.locals.sd.POLICY = policy.toJSON();
     res.locals.hasGroups = groups.length > 0;
