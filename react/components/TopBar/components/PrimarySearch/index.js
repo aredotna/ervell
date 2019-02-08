@@ -8,10 +8,17 @@ import Overlay from 'react/components/UI/Overlay';
 import SearchInput from 'react/components/UI/SearchInput';
 import PrimarySearchResults from 'react/components/TopBar/components/PrimarySearch/components/PrimarySearchResults';
 
+import { overflowScrolling } from 'react/styles/mixins';
+
 const Container = styled(Box)`
   position: relative;
   display: flex;
   align-items: stretch;
+`;
+
+const Results = styled(Box)`
+  height: 100%;
+  ${overflowScrolling}
 `;
 
 export default class PrimarySearch extends PureComponent {
@@ -125,11 +132,13 @@ export default class PrimarySearch extends PureComponent {
             targetEl={() => this.searchInputRef.current}
             fullWidth
           >
-            <PrimarySearchResults
-              query={query}
-              cursor={cursor}
-              onSelection={this.handleSelection}
-            />
+            <Results>
+              <PrimarySearchResults
+                query={query}
+                cursor={cursor}
+                onSelection={this.handleSelection}
+              />
+            </Results>
           </Overlay>
         }
       </Container>
