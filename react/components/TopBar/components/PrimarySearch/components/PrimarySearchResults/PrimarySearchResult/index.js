@@ -111,7 +111,7 @@ export default class PrimarySearchResult extends PureComponent {
     }
 
     return (
-      <Container {...rest}>
+      <Container onMouseDown={this.preventBlur} {...rest}>
         {children}
       </Container>
     );
