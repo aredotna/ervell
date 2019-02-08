@@ -45,6 +45,7 @@ export const SPACING_SCALE = [
 
 export const CONSTANT_VALUES = {
   emptySpaceWidth: '0.33em',
+  doubleEmptySpaceWidth: '0.66em',
   headerHeight: '50px',
   blockWidth: '315px', // TODO: 19.5em
   blockGutter: '10px', // (legacyUnit / 2) TODO: 1em

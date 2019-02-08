@@ -28,7 +28,7 @@ const Container = styled.a`
   > * {
     &:after {
       content: '/';
-      margin: 0 ${props => props.theme.space[4]};
+      margin: 0 ${props => props.theme.constantValues.emptySpaceWidth};
       font-family: ${props => props.theme.fonts.mono};
       opacity: 0.5;
     }
@@ -111,7 +111,7 @@ export default class PrimarySearchResult extends PureComponent {
     }
 
     return (
-      <Container {...rest}>
+      <Container onMouseDown={this.preventBlur} {...rest}>
         {children}
       </Container>
     );
