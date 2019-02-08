@@ -22,14 +22,13 @@ const app = express();
 const startWorker = (id) => {
   console.log(`Started worker ${id}`);
 
-  cache.setup(() => {
-    setup(app);
+  cache.connect();
+  setup(app);
 
-    return app.listen(PORT, () => {
-      console.log(`Listening on port ${PORT}`);
-      // eslint-disable-next-line
-      return typeof process.send === 'function' ? process.send('listening') : void 0;
-    });
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+    // eslint-disable-next-line
+    return typeof process.send === 'function' ? process.send('listening') : void 0;
   });
 
   process.on('SIGTERM', () => {

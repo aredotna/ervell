@@ -1,20 +1,18 @@
 import React, { PureComponent } from 'react';
 import { Query } from 'react-apollo';
 
-import billingQuery from 'react/components/Billing/queries/billing';
+import groupBillingQuery from 'react/components/Billing/queries/groupBilling';
 
 import Box from 'react/components/UI/Box';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
-import StripeContext from 'react/components/StripeContext';
-import MyHeader from 'react/components/Billing/components/MyHeader';
-import BillingForm from 'react/components/Billing/components/BillingForm';
+import MyGroups from 'react/components/Billing/components/MyGroups';
 
-export default class Billing extends PureComponent {
+export default class GroupBilling extends PureComponent {
   render() {
     return (
       <Box width={['100%', '75%', '50%']} mx="auto" mt={6} mb={8} position="relative">
-        <Query query={billingQuery}>
+        <Query query={groupBillingQuery}>
           {({ loading, error, data }) => {
             if (loading) {
               return <LoadingIndicator my={9} />;
@@ -32,11 +30,7 @@ export default class Billing extends PureComponent {
 
             return (
               <div>
-                <MyHeader me={me} mb={7} />
-
-                <StripeContext>
-                  <BillingForm me={me} />
-                </StripeContext>
+                <MyGroups me={me} />
               </div>
             );
           }}
