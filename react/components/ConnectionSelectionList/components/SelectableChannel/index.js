@@ -23,16 +23,16 @@ const Container = styled.div.attrs({
   line-height: 1;
   user-select: none;
   cursor: pointer;
-  color: ${x => x.theme.colors.gray.semiBold};
-  border: 1px solid ${x => x.theme.colors.gray.regular};
-  background-color: ${x => x.theme.colors.gray.hint};
+  color: ${props => props.theme.colors.gray.semiBold};
+  border: 1px solid ${props => props.theme.colors.gray.regular};
+  background-color: ${props => props.theme.colors.gray.hint};
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
 
   &:hover {
     z-index: 1;
-    border: 1px solid ${x => x.theme.colors.gray.semiBold};
+    border: 1px solid ${props => props.theme.colors.gray.semiBold};
   }
 
   &:before {
@@ -42,7 +42,7 @@ const Container = styled.div.attrs({
     right: 0;
     bottom: 0;
     width: 1em;
-    background: linear-gradient(to left, ${x => x.theme.colors.gray.hint}, ${x => x.theme.colors.utility.transparent});
+    background: linear-gradient(to left, ${props => props.theme.colors.gray.hint}, ${props => props.theme.colors.utility.transparent});
     z-index: 1;
   }
 
@@ -50,7 +50,7 @@ const Container = styled.div.attrs({
   &[data-selected="true"] {
     &:before {
       width: 3em;
-      background linear-gradient(to left, ${x => x.theme.colors.gray.hint} 60%, ${x => x.theme.colors.utility.transparent})
+      background linear-gradient(to left, ${props => props.theme.colors.gray.hint} 60%, ${props => props.theme.colors.utility.transparent})
     }
 
     &:after {
@@ -83,10 +83,10 @@ const Separator = styled.div`
   display: inline-block;
   width: 1px;
   height: 0.75em;
-  margin: 0 0.75em;
+  margin: 0 ${props => props.theme.constantValues.doubleEmptySpaceWidth};
   vertical-align: baseline;
   transform: rotate(30deg);
-  background-color: ${x => x.theme.colors.gray.medium};
+  background-color: ${props => props.theme.colors.gray.medium};
 `;
 
 const GroupBadge = styled(Badge)`
