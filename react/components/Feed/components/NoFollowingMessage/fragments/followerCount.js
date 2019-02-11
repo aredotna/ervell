@@ -6,5 +6,9 @@ export default gql`
     counts {
       following
     }
+    twitter_authentication: authenticated_service(provider: TWITTER) {
+      __typename
+      id
+    }
   }
 `;

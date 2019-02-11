@@ -7,8 +7,7 @@ import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
 import setTipsMiddleware from 'apps/feed/middleware/setTips';
 import FeedMetadata from 'react/components/FeedMetadata';
-import EmptyConnectTwitter from 'react/pages/feed/components/EmptyConnectTwitter';
-import NoFollowingMessage from 'react/pages/feed/components/NoFollowingMessage';
+import NoFollowingMessage from 'react/components/Feed/components/NoFollowingMessage';
 
 import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService';
 
@@ -32,11 +31,9 @@ const renderFeed = (req, res, next) => {
   res.locals.sd.FEED_TYPE = 'primary';
 
   return Promise.all([
-    req.apollo.render(EmptyConnectTwitter),
     req.apollo.render(NoFollowingMessage),
   ])
-    .then(([emptyConnectTwitter, noFollowingMessage]) => {
-      res.locals.emptyConnectTwitter = emptyConnectTwitter;
+    .then(([noFollowingMessage]) => {
       res.locals.noFollowingMessage = noFollowingMessage;
 
       // Show the empty component if the person isn't following anyone
