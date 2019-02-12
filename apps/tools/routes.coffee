@@ -1,3 +1,4 @@
+useragent = require('useragent')
 Authentication = require '../../models/authentication'
 bookmarklet = require '../../lib/bookmarklet'
 
@@ -15,6 +16,7 @@ bookmarklet = require '../../lib/bookmarklet'
     tab: tab
     auth: auth
     bookmarklet: bookmarklet
+    isChrome: useragent.is(req.headers['user-agent']).chrome
 
 @findFriends = (req, res, next) ->
   tab = res.locals.sd.TAB = 'find-friends'
