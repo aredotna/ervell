@@ -13,19 +13,13 @@ block body
   .Constrain.js-feed-header
     != feedMetadata.html
 
-  //- Not present on /notifications
-  if showEmpty
-    .Constrain.js-empty-feed
-      != emptyConnectTwitter.html
-  else
-    //- Not present on /notifications
-    if noFollowingMessage
-      .Contstrain.js-no-following
-        != noFollowingMessage.html
+  if noFollowingMessage
+    .Contstrain.js-no-following
+      != noFollowingMessage.html
 
-    //- Default
-    .feed-container.js-feed
-      //- Rendered client-side
+  //- Default
+  .feed-container.js-feed
+    //- Rendered client-side
 
 block scripts
   script( src= asset('/assets/feed.js') )
