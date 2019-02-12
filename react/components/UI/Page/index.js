@@ -44,7 +44,7 @@ export default class Page extends PureComponent {
     } = this.props;
 
     return (
-      <html lang="en-US">
+      <html lang="en-US" className={sharifyData.IS_INVERTED ? 'is-inverted' : ''}>
         <head>
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
