@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { graphql, compose } from 'react-apollo';
-import axios from 'axios';
+import { graphql } from 'react-apollo';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
 import sharify from 'sharify';
@@ -9,14 +8,11 @@ import sharify from 'sharify';
 import Modal from 'react/components/UI/Modal/Portal';
 import Text from 'react/components/UI/Text';
 import PageContainer from 'react/components/UI/PageContainer';
-import { GenericButton } from 'react/components/UI/GenericButton';
+import { GenericButtonLink } from 'react/components/UI/GenericButton';
 import ConnectTwitter from 'react/components/ConnectTwitter';
 
-import hasSeenTwitterConnectMutation from 'react/pages/feed/components/EmptyConnectTwitter/mutations/hasSeenTwitterConnect';
-
-import EmptyFeedConnectTwitterQuery from 'react/pages/feed/components/EmptyConnectTwitter/queries/emptyFeedConnectTwitter';
-
-import emptyFeedConnectTwitterFragment from 'react/pages/feed/components/EmptyConnectTwitter/fragments/emptyFeedConnectTwitter';
+import FollowerCountCheckQuery from 'react/components/Feed/components/NoFollowingMessage/queries/followerCount';
+import FollowerCountCheckFragment from 'react/components/Feed/components/NoFollowingMessage/fragments/followerCount';
 
 const { data: { API_URL, APP_URL } } = sharify;
 const TWITTER_AUTHENTICATION_URL = `${(API_URL && API_URL.replace('/v2', ''))}/auth/twitter?origin=${APP_URL}/feed/find-friends`;
@@ -24,6 +20,10 @@ const TWITTER_AUTHENTICATION_URL = `${(API_URL && API_URL.replace('/v2', ''))}/a
 const ActionContainer = styled.div`
   text-align: center;
   padding: ${x => x.theme.space[7]} 0;
+`;
+
+const Container = styled(PageContainer)`
+  margin: 0 auto ${x => x.theme.space[8]};
 `;
 
 const Headline = styled(Text).attrs({
@@ -36,7 +36,7 @@ const Headline = styled(Text).attrs({
 const SmallText = styled(Text).attrs({
   fontSize: 3,
   lineHeight: 1,
-  mt: 4,
+  mt: 6,
 })``;
 
 const Link = styled(SmallText)`
@@ -45,12 +45,11 @@ const Link = styled(SmallText)`
   display: inline-block;
 `;
 
-class EmptyConnectTwitter extends Component {
+class NoFollowingMessage extends Component {
   static propTypes = {
     data: PropTypes.shape({
-      me: propType(emptyFeedConnectTwitterFragment),
+      me: propType(FollowerCountCheckFragment),
     }).isRequired,
-    hasSeenTwitterConnect: PropTypes.func.isRequired,
   }
 
   state = {
@@ -59,25 +58,16 @@ class EmptyConnectTwitter extends Component {
 
   componentDidMount() {
     if (window.location.href.indexOf('showModal=true') > -1) {
+      console.log('state');
       this.setState({ mode: 'modal' });
     }
-  }
-
-  hasSeenTwitterConnectAndRefresh = (e) => {
-    e.preventDefault();
-
-    const { hasSeenTwitterConnect } = this.props;
-
-    hasSeenTwitterConnect()
-      .then(() => axios.get('/me/refresh'))
-      .then(() => { window.location.reload(true); });
   }
 
   closeModal = () => {
     this.setState({ mode: 'resting' });
   }
 
-  handleConnectClick = (e) => {
+  handleTwitterConnectClick = (e) => {
     e.preventDefault();
 
     const { data: { me: { twitter_authentication } } } = this.props;
@@ -91,36 +81,40 @@ class EmptyConnectTwitter extends Component {
   }
 
   render() {
+    const { data, data: { error, loading } } = this.props;
+
+    if (error || loading || (data.me.counts.following > 1)) {
+      return (<div />);
+    }
+
     const { mode } = this.state;
 
     return (
-      <PageContainer>
+      <Container>
         {mode === 'modal' &&
           <Modal onClose={this.closeModal}>
-            <ConnectTwitter onDone={this.hasSeenTwitterConnectAndRefresh} />
+            <ConnectTwitter />
           </Modal>
         }
-
         <Headline>
-          You aren&apos;t following anyone yet.<br />
-          Do you want to search your Twitter contacts to find friends on Are.na?
+          Discover how other people are using Are.na
         </Headline>
 
         <ActionContainer>
-          <GenericButton onClick={this.handleConnectClick}>
-            Connect to Twitter
-          </GenericButton>
+          <GenericButtonLink f={5} href="/examples">
+            See examples
+          </GenericButtonLink>
 
           <SmallText>
-            No, just take me to <Link onClick={this.hasSeenTwitterConnectAndRefresh}>my feed</Link>.
+            or&nbsp;
+            <Link onClick={this.handleTwitterConnectClick}>
+              connect your Twitter account to find people to follow
+            </Link>.
           </SmallText>
         </ActionContainer>
-      </PageContainer>
+      </Container>
     );
   }
 }
 
-export default compose(
-  graphql(EmptyFeedConnectTwitterQuery),
-  graphql(hasSeenTwitterConnectMutation, { name: 'hasSeenTwitterConnect' }),
-)(EmptyConnectTwitter);
+export default graphql(FollowerCountCheckQuery)(NoFollowingMessage);

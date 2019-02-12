@@ -126,6 +126,7 @@
     "throng": "^4.0.0",
     "underscore": "*",
     "underscore.string": "*",
+    "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",
     "webpack-hot-middleware": "^2.21.0",
