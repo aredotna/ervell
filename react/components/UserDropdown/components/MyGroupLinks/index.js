@@ -64,7 +64,6 @@ const BetaBadge = styled(Text).attrs({
 
 const Container = styled.div`
   margin-left: ${props => props.theme.space[3]};
-  min-height: ${props => props.theme.space[10]};
   max-height: 30vmin;
   ${overflowScrolling}
 `;
