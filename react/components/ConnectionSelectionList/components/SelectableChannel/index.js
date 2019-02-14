@@ -138,9 +138,10 @@ export default class SelectableChannel extends Component {
 
           <Separator />
 
-          <ColoredChannelSpan visibility={visibility}>
-            {title}
-          </ColoredChannelSpan>
+          <ColoredChannelSpan
+            visibility={visibility}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
         </HoverableInner>
       </Container>
     );
