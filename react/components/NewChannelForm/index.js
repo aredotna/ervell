@@ -62,8 +62,8 @@ class NewChannelForm extends Component {
     this.setState({ visibility });
 
   handleAuthor = (group_id) => {
-    if (group_id === 0) {
-      this.setState({ authorType: 'USER' });
+    if (group_id === '0') {
+      this.setState({ authorType: 'USER', group_id: null });
       return;
     }
     this.setState({ group_id, authorType: 'GROUP' });
