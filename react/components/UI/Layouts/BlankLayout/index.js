@@ -3,19 +3,14 @@
 
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { createGlobalStyle } from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
+import LegacyDarkTheme from 'react/components/UI/Layouts/BlankLayout/components/LegacyDarkTheme';
+import BaseStyles from 'react/components/UI/Layouts/BlankLayout/components/BaseStyles';
 import Description from 'react/components/UI/Head/components/Description';
 
 import analytics from 'react/util/analytics';
-
-const BodyStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-  }
-`;
+import globalKeyboardShortcuts from 'react/util/globalKeyboardShortcuts';
 
 class BlankLayout extends PureComponent {
   static propTypes = {
@@ -27,12 +22,14 @@ class BlankLayout extends PureComponent {
 
   componentDidMount() {
     analytics.initializePage();
+    globalKeyboardShortcuts.bind();
     this.unlisten = this.props.history.listen(() =>
       analytics.trackPageView());
   }
 
   componentWillUnmount() {
     this.unlisten();
+    globalKeyboardShortcuts.unbind();
   }
 
   render() {
@@ -40,11 +37,12 @@ class BlankLayout extends PureComponent {
 
     return (
       <Fragment>
+        <LegacyDarkTheme />
+        <BaseStyles />
+
         <Description>
           Are.na is a social platform for creative and collaborative research.
         </Description>
-
-        <BodyStyle />
 
         {children}
       </Fragment>

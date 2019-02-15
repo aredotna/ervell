@@ -97,7 +97,7 @@ export default class PrimarySearchResult extends PureComponent {
           }
 
           <Label color={result.visibility ? `channel.${result.visibility}` : 'gray.base'}>
-            {result.label}
+            {unescape(result.label)}
 
             {result.__typename === 'Group' &&
               <GroupBadge

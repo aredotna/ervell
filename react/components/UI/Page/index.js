@@ -44,7 +44,7 @@ export default class Page extends PureComponent {
     } = this.props;
 
     return (
-      <html lang="en-US">
+      <html lang="en-US" data-theme={sharifyData.THEME}>
         <head>
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
