@@ -7,10 +7,12 @@ import emptyProfileFragment from 'react/components/ProfileEmptyMessage/fragments
 
 import Text from 'react/components/UI/Text';
 import Modal from 'react/components/UI/Modal';
+import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import NewChannelForm from 'react/components/NewChannelForm';
 
 
 const Copy = styled(Text)`
+  text-align: center;
   a {
     font-weight: bold;
   }
@@ -47,13 +49,15 @@ export default class ProfileEmptyMessage extends Component {
     const isGroup = identifiable.__typename === 'Group';
 
     return (
-      <Copy f={6} my={8} color="gray.medium" lineHeight={2}>
+      <Copy f={[6, 6, 8]} my={6} color="gray.medium" lineHeight={[2, 2, 2]}>
 
         {/* Profile is the current user's */}
         {isMine && !isGroup &&
           <div>
-            This is your profile.<br />
-            All of your channels and content will show up here.
+            You profile doesn&#39;t have any content yet.<br />
+            <Button f={[3, 3, 5]} mt={6} onClick={this.openNewChannelModal} color="gray.bold">
+              Create a channel
+            </Button>
           </div>
         }
 
@@ -61,25 +65,18 @@ export default class ProfileEmptyMessage extends Component {
         {isMine && isGroup &&
           <div>
             This is your group&#39;s profile.<br />
-            Note: Your group will stay secret until you create a publicly visible channel.
-          </div>
-        }
-
-        {/* Profile is either the current user's or the current user's group */}
-        {isMine &&
-          <div>
-            Try{' '}
-            <a href="#" onClick={this.openNewChannelModal}>creating a channel</a>.
+            Your group will stay secret until you create a publicly visible channel.<br />
+            <Button f={[3, 3, 5]} mt={6} onClick={this.openNewChannelModal} color="gray.bold">
+              Create a group channel
+            </Button>
           </div>
         }
 
         {/* Profile is not associated with the current user */}
         {!isMine &&
           <div>
-            There&#39;s no public content here yet.<br />
-            Try{' '}
-            <a href="/explore">explore</a>
-            {' '}to see what other people are up to.
+            {identifiable.name} doesn&#39;t have any public content yet.<br />
+            Follow them to get an update in your feed when they add something.
           </div>
         }
       </Copy>
