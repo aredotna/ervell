@@ -6,12 +6,10 @@ import styled from 'styled-components';
 import emptyProfileFragment from 'react/components/ProfileEmptyMessage/fragments/indentifiable';
 
 import Text from 'react/components/UI/Text';
-
+import Box from 'react/components/UI/Box';
 import Modal from 'react/components/UI/Modal';
 import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import NewChannelForm from 'react/components/NewChannelForm';
-import Box from '../UI/Box';
-
 
 const Copy = styled(Text)`
   text-align: center;
