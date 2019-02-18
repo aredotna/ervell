@@ -1,12 +1,10 @@
 import React from 'react';
 import { propType } from 'graphql-anywhere';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import emptyOrTipsFragment from 'react/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips';
 
 import ProfileEmptyMessage from 'react/components/ProfileEmptyMessage';
-import ProfileTips from 'react/components/ProfileTips';
 
 const EmptyMessageOrComponent = ({
   count: sectionCount,
@@ -14,17 +12,10 @@ const EmptyMessageOrComponent = ({
   identifiable,
   ...rest
 }) => {
-  const createdAtDaysAgo = moment().diff(moment(identifiable.created_at), 'days');
   const isMyProfile = identifiable.is_me || identifiable.is_current_user_a_member;
-  const isRecentAccount = createdAtDaysAgo <= 7;
   const isSectionEmpty = sectionCount <= 0;
-  const isGroupProfile = identifiable.__typename === 'Group';
 
   const components = [];
-
-  if (isMyProfile && isRecentAccount && !isGroupProfile) {
-    components.push(<ProfileTips key="profileTips" isEmpty={isSectionEmpty} />);
-  }
 
   if (isSectionEmpty) {
     const profileEmptyMessage = (

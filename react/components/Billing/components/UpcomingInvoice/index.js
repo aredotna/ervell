@@ -37,7 +37,9 @@ export default class UpcomingInvoice extends PureComponent {
               )
             }
 
-            {' '}on {upcoming_invoice.next_payment_attempt_at}
+            {upcoming_invoice.next_payment_attempt_at &&
+              ` on ${upcoming_invoice.next_payment_attempt_at}`
+            }
           </div>
         </Text>
       </Box>

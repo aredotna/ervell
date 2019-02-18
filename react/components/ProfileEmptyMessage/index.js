@@ -6,11 +6,13 @@ import styled from 'styled-components';
 import emptyProfileFragment from 'react/components/ProfileEmptyMessage/fragments/indentifiable';
 
 import Text from 'react/components/UI/Text';
+import Box from 'react/components/UI/Box';
 import Modal from 'react/components/UI/Modal';
+import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import NewChannelForm from 'react/components/NewChannelForm';
 
-
 const Copy = styled(Text)`
+  text-align: center;
   a {
     font-weight: bold;
   }
@@ -47,39 +49,36 @@ export default class ProfileEmptyMessage extends Component {
     const isGroup = identifiable.__typename === 'Group';
 
     return (
-      <Copy f={6} my={8} color="gray.medium" lineHeight={2}>
+      <Copy f={[6, 6, 8]} mt={7} mb={6} color="gray.medium" lineHeight={[2, 2, 2]}>
 
         {/* Profile is the current user's */}
         {isMine && !isGroup &&
           <div>
-            This is your profile.<br />
-            All of your channels and content will show up here.
+            <Box>You profile doesn&#39;t have any content yet.</Box>
+            <Button f={[3, 3, 5]} mt={6} onClick={this.openNewChannelModal} color="gray.bold">
+              Create a channel
+            </Button>
           </div>
         }
 
         {/* Profile is the current user's group */}
         {isMine && isGroup &&
           <div>
-            This is your group&#39;s profile.<br />
-            Note: Your group will stay secret until you create a publicly visible channel.
-          </div>
-        }
-
-        {/* Profile is either the current user's or the current user's group */}
-        {isMine &&
-          <div>
-            Try{' '}
-            <a href="#" onClick={this.openNewChannelModal}>creating a channel</a>.
+            <Box>This is your group&#39;s profile.</Box>
+            <Box mt={5}>
+              Your group will stay secret until you create a publicly visible channel.
+            </Box>
+            <Button f={[3, 3, 5]} mt={7} onClick={this.openNewChannelModal} color="gray.bold">
+              Create a group channel
+            </Button>
           </div>
         }
 
         {/* Profile is not associated with the current user */}
         {!isMine &&
           <div>
-            There&#39;s no public content here yet.<br />
-            Try{' '}
-            <a href="/explore">explore</a>
-            {' '}to see what other people are up to.
+            <Box>{identifiable.name} doesn&#39;t have any public content yet.</Box>
+            <Box mt={5}>Follow them to get an update in your feed when they add something.</Box>
           </div>
         }
       </Copy>
