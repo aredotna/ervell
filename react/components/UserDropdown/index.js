@@ -68,7 +68,8 @@ export default class UserDropdown extends Component {
           }
 
           const { me } = data;
-          const differenceInDays = Math.ceil((new Date() - new Date(me.created_at)) / 1000 / 60 / 60 / 24);
+          const dateDifference = new Date() - new Date(me.created_at);
+          const differenceInDays = Math.ceil(dateDifference / 1000 / 60 / 60 / 24);
           const hasRecentlyJoined = differenceInDays < 7;
 
           return (
