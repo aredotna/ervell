@@ -15,8 +15,9 @@ block body
       .js-billing
         include ./tabs/billing
 
-      .js-group-billing
-        include ./tabs/group_billing
+      if hasGroups
+        .js-group-billing
+          include ./tabs/group_billing
 
 block scripts
   script( src='https://js.stripe.com/v3/' )

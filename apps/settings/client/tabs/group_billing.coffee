@@ -3,4 +3,6 @@
 
 module.exports = ($el) ->
   return unless $el.length
-  mountWithApolloProvider(GroupBilling, {}, $el)
+  setTimeout () =>
+    mountWithApolloProvider(GroupBilling, {}, $el)
+  , 1000
