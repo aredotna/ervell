@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
-import moment from 'moment';
 
 import userDropdownQuery from 'react/components/UserDropdown/queries/userDropdown';
 
@@ -69,8 +68,8 @@ export default class UserDropdown extends Component {
           }
 
           const { me } = data;
-
-          const recentlyJoined = moment().diff(moment(me.created_at), 'days') < 7;
+          const differenceInDays = Math.ceil((new Date() - new Date(me.created_at)) / 1000 / 60 / 60 / 24);
+          const hasRecentlyJoined = differenceInDays < 7;
 
           return (
             <Container>
@@ -100,7 +99,7 @@ export default class UserDropdown extends Component {
                 </Section>
 
                 <Section>
-                  <SecondaryLinks isPremium={me.is_premium} recentlyJoined={recentlyJoined} />
+                  <SecondaryLinks isPremium={me.is_premium} hasRecentlyJoined={hasRecentlyJoined} />
                 </Section>
               </Inner>
             </Container>

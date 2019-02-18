@@ -7,20 +7,20 @@ import SignOutLink from 'react/components/UserDropdown/components/SecondaryLinks
 export default class SecondaryLinks extends Component {
   static propTypes = {
     isPremium: PropTypes.bool,
-    recentlyJoined: PropTypes.bool,
+    hasRecentlyJoined: PropTypes.bool,
   }
 
   static defaultProps = {
     isPremium: false,
-    recentlyJoined: false,
+    hasRecentlyJoined: false,
   }
 
   render() {
-    const { isPremium, recentlyJoined } = this.props;
+    const { isPremium, hasRecentlyJoined } = this.props;
 
     return (
       <div>
-        {recentlyJoined &&
+        {hasRecentlyJoined &&
           <SmallLink href="https://vimeo.com/318041294" target="_blank" fontWeight="bold">
             <span role="img" aria-label="graduation cap">🎓</span> Video tutorial  <span role="img" aria-label="graduation cap">🎓</span>
           </SmallLink>

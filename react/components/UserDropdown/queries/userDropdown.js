@@ -10,7 +10,7 @@ export default gql`
       href
       is_premium
       is_confirmed
-      created_at(format: "%Y-%m-%dT%H:%M:%S.%L%z")
+      created_at(format: "%B %d, %Y")
       ...MyGroupLinks
     }
   }
