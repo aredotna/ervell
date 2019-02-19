@@ -62,6 +62,13 @@
         > span
           visibility visible
 
+
++below(logged-out-nav-breakpoint)
+  .LoggedOutHeader
+    &__menu
+      > a:not([data-id="log-in"]):not([data-id="log-out"]):not([data-id="sign-up"])
+        display none
+
 // Since the hamburger nav is not present on the index,
 // it's not necessary to toggle out the logo
 html:not([data-path='/'])
@@ -73,6 +80,4 @@ html:not([data-path='/'])
       &__logo
         display none
 
-      &__menu
-        > a:not([data-id="log-in"]):not([data-id="log-out"]):not([data-id="sign-up"])
-          display none
+
