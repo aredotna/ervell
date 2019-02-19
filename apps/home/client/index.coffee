@@ -17,13 +17,13 @@ module.exports = ->
 
   $el = $('.js-home')
 
-  iframe = document.querySelector('iframe');
-  player = new Player(iframe);
+  video = $('.js-desktop-video iframe');
+  player = new Player(video);
 
   $el.find '.js-to-fold'
     .on 'click', (e) ->
       $('.HomeHero__image > img').css({ opacity: 0 })
-      $('.HomeHero__image__play').css({ opacity: 0 })
-      $('.HomeHero__image__video').show()
+      $('.js-desktop-video-play').css({ opacity: 0 })
+      $('.js-desktop-video').show()
       
       player.play()
