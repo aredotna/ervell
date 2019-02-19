@@ -17,9 +17,13 @@ import {
   bgColor,
   textAlign,
   flex,
+  style,
 } from 'styled-system';
 
 import { neutralMargins } from 'react/styles/mixins';
+
+const flexGrow = style({ prop: 'flexGrow' });
+const flexShrink = style({ prop: 'flexShrink' });
 
 export const mixin = css`
   box-sizing: border-box;
@@ -31,6 +35,8 @@ export const mixin = css`
   ${maxHeight}
   ${space}
   ${flex}
+  ${flexGrow}
+  ${flexShrink}
   ${alignItems}
   ${alignSelf}
   ${justifyContent}
