@@ -23,6 +23,7 @@
   "dependencies": {
     "@artsy/express-reloadable": "^1.4.0",
     "@contentful/rich-text-html-renderer": "^2.9.1",
+    "@vimeo/player": "^2.7.0",
     "airbrake-js": "^1.6.3",
     "apollo-cache-inmemory": "^1.4.1",
     "apollo-client": "^2.4.10",

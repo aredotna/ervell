@@ -28,7 +28,7 @@ const Copy = styled.p`
   font-size: ${x => x.theme.fontSizesIndexed.base};
   width: 70%;
   line-height: 1.5;
-  text-align: left;
+  text-align: center;
 
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
     width: 90%;
