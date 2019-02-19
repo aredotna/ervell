@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { themeGet, space } from 'styled-system';
+import { themeGet } from 'styled-system';
+
+import Box from 'react/components/UI/Box';
 
 import Lock from 'react/components/UI/Icons/Lock.svg';
 import ArenaMark from 'react/components/UI/Icons/ArenaMark.svg';
 import X from 'react/components/UI/Icons/X.svg';
 import MagnifyingGlass from 'react/components/UI/Icons/MagnifyingGlass.svg';
+import Clipboard from 'react/components/UI/Icons/Clipboard.svg';
+import Exclaim from 'react/components/UI/Icons/Exclaim.svg';
+import Info from 'react/components/UI/Icons/Info.svg';
+import Question from 'react/components/UI/Icons/Question.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
   Lock: <Lock />,
   X: <X />,
   MagnifyingGlass: <MagnifyingGlass />,
+  Clipboard: <Clipboard />,
+  Exclaim: <Exclaim />,
+  Info: <Info />,
+  Question: <Question />,
 };
 
 export const ICON_NAMES = Object.keys(COMPONENTS);
@@ -25,13 +35,12 @@ const size = key => props => (
   props.size
 );
 
-const Container = styled.div`
+const Container = styled(Box)`
   display: inline-block;
   position: relative;
   width: ${size('width')};
   height: ${size('height')};
   vertical-align: bottom;
-  ${space}
 
   > svg {
     position: absolute;
