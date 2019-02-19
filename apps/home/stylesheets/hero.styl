@@ -24,6 +24,9 @@ mobile_breakpoint = 1024px
     align-items center
     align-self center
 
+    > h2.Type
+      margin-left 0
+
   &__cta
     width 100%
     margin-top 2em
@@ -33,6 +36,41 @@ mobile_breakpoint = 1024px
   &__image
     width 60%
     align-self center
+    position relative
+
+    &__play
+      background-image url(https://d2w9rnfcy7mm78.cloudfront.net/3679937/original_f9833365898aeaf17fdbb411930c6a84.png?1550587971)
+      background-size contain
+      background-position center center
+      background-repeat no-repeat
+      width 100%
+      height 100%
+      position absolute
+      top 0
+      left 0
+      opacity .7
+
+      &:hover 
+        opacity 1
+
+    &__video
+      display none
+      position absolute
+      width 100%
+      height 100%
+      top 2em
+      left 0
+      > span
+        border 1px solid colors-gray-border-bold
+        display block
+        ratio-box(960 / 540)
+        > iframe
+          position absolute
+          top 0
+          left 0
+          width 100%
+          height 100%
+
     
   &__connect
     position absolute
