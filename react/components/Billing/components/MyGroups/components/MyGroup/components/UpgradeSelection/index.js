@@ -94,7 +94,7 @@ export default class UpgradeSelection extends PureComponent {
               {({ selected }) => (
                 <Option>
                   <OptionLabel selected={selected}>
-                    <strong>Upgrade users to yearly Premium</strong>
+                    <strong>Upgrade users to annual Premium</strong>
                     <strong>$3.75 / user / month</strong>
                   </OptionLabel>
 
