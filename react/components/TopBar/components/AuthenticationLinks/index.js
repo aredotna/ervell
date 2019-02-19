@@ -14,7 +14,7 @@ export default props => (
     <Text f={4}>
       <strong>
         <a href="/sign_up">
-          Join
+          Sign up
         </a>
       </strong>
 
