@@ -10,10 +10,7 @@ mobile_breakpoint = 1024px
     display flex
     flex-direction row
     width 100%
-    margin 3em 0
-    &:hover .HomeQuotes__copy
-      color colors-gray-text
-      opacity 0.8
+    margin 2em 0 4em
 
   &__icon
     width 100px
@@ -31,6 +28,8 @@ mobile_breakpoint = 1024px
     max-width 475px
     > span
       background-color colors-state-highlighted
+    > a
+      text-decoration underline
 
 +below(mobile_breakpoint)
   .HomeQuotes
