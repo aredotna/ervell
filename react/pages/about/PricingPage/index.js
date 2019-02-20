@@ -9,13 +9,11 @@ import { Headline, Subheadline, Description } from 'react/pages/about/components
 import CenterBox from 'react/pages/about/components/CenterBox';
 import PricingTable from 'react/pages/about/PricingPage/components/PricingTable';
 
-const Container = styled.div`
-  margin-top: 4em;
-`;
+const Container = styled(Box).attrs({
+  mt: 9,
+})``;
 
 const GradientContent = styled.div`
-  width: 100%;
-  padding-bottom: 0;
   background: linear-gradient(${x => x.theme.colors.gray.hint}, white);
   border-top: 1px solid ${x => x.theme.colors.gray.regular};
 `;

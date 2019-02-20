@@ -20,11 +20,14 @@ const Table = styled(Box).attrs({ mb: 7 })`
   `}
 `;
 
-const Cell = styled.div`
+const Cell = styled(Box).attrs({
+  py: [8, 6, 6],
+  px: [7, 6, 6],
+  width: [1, 1 / 3, 1 / 2],
+})`
   display: flex;
   flex-direction: column;
-  width: 20em;
-  padding: 1em;
+  max-width: 20em;
   border-right: 2px solid ${x => x.theme.colors.gray.light};
   
   &:last-child {
@@ -32,9 +35,7 @@ const Cell = styled.div`
   }
 
   ${constants.media.mobile`
-    width: 100%;
     border-right: none;
-    padding: 3em 2em;
     border-bottom: 2px solid ${x => x.theme.colors.gray.light};
   `}
 `;
@@ -104,9 +105,9 @@ class PricingTable extends PureComponent {
   render() {
     const { isLoggedIn } = this.props;
 
-    const signUpLink = isLoggedIn ? '/sign_up' : '/';
+    const signUpLink = isLoggedIn ? '/' : '/sign_up';
     const upgradeLink = isLoggedIn ? '/settings/billing' : '/sign_up?redirect_to=/settings/billing';
-    const groupLink = isLoggedIn ? '/settings/billing' : '/sign_up?redirect_to=/settings/billing';
+    const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up';
 
     return (
       <Table>
