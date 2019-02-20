@@ -68,6 +68,9 @@ export default class UserDropdown extends Component {
           }
 
           const { me } = data;
+          const dateDifference = new Date() - new Date(me.created_at);
+          const differenceInDays = Math.ceil(dateDifference / 1000 / 60 / 60 / 24);
+          const hasRecentlyJoined = differenceInDays < 7;
 
           return (
             <Container>
@@ -97,7 +100,7 @@ export default class UserDropdown extends Component {
                 </Section>
 
                 <Section>
-                  <SecondaryLinks isPremium={me.is_premium} />
+                  <SecondaryLinks isPremium={me.is_premium} hasRecentlyJoined={hasRecentlyJoined} />
                 </Section>
               </Inner>
             </Container>

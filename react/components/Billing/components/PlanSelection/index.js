@@ -92,18 +92,18 @@ export default class PlanSelection extends PureComponent {
               {({ selected }) => (
                 <Option>
                   <OptionLabel selected={selected}>
-                    <strong>Yearly Premium</strong>
+                    <strong>Annual Premium</strong>
                     <strong>$3.75 / month</strong>
                   </OptionLabel>
 
                   <OptionDescription>
                     <Box width="75%">
-                      Selected members can upload unlimited blocks,{' '}
+                      Premium members can upload unlimited blocks,{' '}
                       hide from search engines, and gain access to new features.
                     </Box>
 
                     <Box textAlign="right">
-                      $45 billed yearly
+                      $45 billed annually
                     </Box>
                   </OptionDescription>
                 </Option>
@@ -125,7 +125,7 @@ export default class PlanSelection extends PureComponent {
 
                   <OptionDescription>
                     <Box width="75%">
-                      Selected members can upload unlimited blocks,{' '}
+                      Premium members can upload unlimited blocks,{' '}
                       hide from search engines, and gain access to new features.
                     </Box>
                   </OptionDescription>
@@ -148,7 +148,7 @@ export default class PlanSelection extends PureComponent {
 
                     <OptionDescription>
                       <Box width="75%">
-                        Selected members can upload unlimited blocks,{' '}
+                        Premium members can upload unlimited blocks,{' '}
                         hide from search engines, and gain access to new features.
                       </Box>
                     </OptionDescription>

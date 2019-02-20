@@ -1,3 +1,4 @@
+loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 { mountWithApolloProvider } = require '../../../react/apollo/index.js'
 { default: FollowButton } = require '../../../react/components/FollowButton'
 
@@ -5,6 +6,9 @@ singleExampleTemplate = -> require('../templates/example.jade') arguments...
 examplesTemplate = -> require('../templates/examples.jade') arguments...
 
 module.exports = ->
+
+
+  loggedOutNav()
 
   # 
   # Load more channels (single example category)

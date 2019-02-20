@@ -1,5 +1,7 @@
 { DEMO_BLOCKS } = require('sharify').data
 imagesLoaded = require 'imagesloaded'
+{ default: Player } = require '@vimeo/player';
+
 slides = require './slides.coffee'
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 blockTemplate = ->
@@ -13,18 +15,15 @@ module.exports = ->
 
   mountWithApolloProvider DescriptiveCarousel, { slides }, $('.js-home-carousel')
 
-  $html = $('html, body')
   $el = $('.js-home')
-  $sections = $el.find('.js-section')
+
+  video = $('.js-desktop-video iframe');
+  player = new Player(video);
 
   $el.find '.js-to-fold'
     .on 'click', (e) ->
-      e.preventDefault()
-
-      $target = $(this)
-        .closest '.js-section'
-        .next '.js-section'
-
-      yPos = $target.position().top
-
-      $html.animate scrollTop: yPos, 'fast'
+      $('.HomeHero__image > img').css({ opacity: 0 })
+      $('.js-desktop-video-play').css({ opacity: 0 })
+      $('.js-desktop-video').show()
+      
+      player.play()

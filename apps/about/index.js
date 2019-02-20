@@ -4,6 +4,7 @@ import apolloMiddleware from 'react/apollo/middleware';
 
 import EducationPage from 'react/pages/about/EducationPage';
 import GroupsPage from 'react/pages/about/GroupsPage';
+import PricingPage from 'react/pages/about/PricingPage';
 
 const app = express();
 
@@ -19,10 +20,11 @@ app
   .get('/terms', (req, res) => res.render('terms'))
   .get('/privacy', (req, res) => res.render('privacy'))
   .get('/faqs', (req, res) => res.render('faqs'))
-  .get('/pricing', (req, res) => res.render('pricing'))
   .get('/experiments', (req, res) => res.render('experiments'))
   .get('/community-guidelines', (req, res) => res.render('community'))
   .get('/thankyou', (req, res) => res.render('thankyou'))
+  .get('/pricing', ...middlewareStack, (req, res) => req.apollo.render(PricingPage)
+    .then(apollo => res.render('pricing', { apollo })))
   .get('/getting-started-with-groups', ...middlewareStack, (req, res) => req.apollo.render(GroupsPage)
     .then(apollo => res.render('groups', { apollo })))
   .get('/education', ...middlewareStack, (req, res) => req.apollo.render(EducationPage)

@@ -14,10 +14,4 @@
 # this should export empty Object
 # module.exports = {}
 
-module.exports = 
-  explore_link:
-    key: 'explore_link'
-    outcomes: 
-      explore: 50
-      examples: 50
-    dimension: 'dimension8'
+module.exports =  {} 
