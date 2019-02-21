@@ -12,7 +12,11 @@ const Description = ({ children: description }) => (
 );
 
 Description.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.string,
+};
+
+Description.defaultProps = {
+  children: 'Are.na is a social platform for creative and collaborative research.',
 };
 
 export default Description;
