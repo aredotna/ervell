@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import ExploreViews from 'react/pages/explore/ExplorePage/components/ExploreViews';
+
 import ExploreMetadata from 'react/components/ExploreMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
-import ExploreViews from 'react/pages/explore/ExplorePage/components/ExploreViews';
-import LoggedOutCTA from 'react/components/LoggedOutCTA';
-import LoggedOutExploreContent from 'react/components/LoggedOutCTA/components/LoggedOutExploreContent';
+import BottomBanner from 'react/components/BottomBanner';
 
 export default class ExplorePage extends Component {
   static propTypes = {
@@ -15,28 +15,22 @@ export default class ExplorePage extends Component {
   }
 
   render() {
-    const {
-      view, sort, seed,
-    } = this.props;
+    const { view, sort, seed } = this.props;
 
     return (
       <ErrorBoundary>
-        <div>
-          <ExploreMetadata
-            view={view}
-            sort={sort}
-          />
+        <ExploreMetadata
+          view={view}
+          sort={sort}
+        />
 
-          <ExploreViews
-            view={view}
-            sort={sort}
-            seed={seed}
-          />
+        <ExploreViews
+          view={view}
+          sort={sort}
+          seed={seed}
+        />
 
-          <LoggedOutCTA>
-            <LoggedOutExploreContent />
-          </LoggedOutCTA>
-        </div>
+        <BottomBanner banner="LOGGED_OUT_EXPLORE" />
       </ErrorBoundary>
     );
   }
