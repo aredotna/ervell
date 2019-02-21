@@ -22,7 +22,7 @@ Blacklist = require('../../lib/blacklist.js').default
 initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts.js')
 
 { mountWithApolloProvider } = require '../../react/apollo/index.js'
-{ default: TopBar } = require '../../react/components/TopBar/index.js'
+{ default: GlobalNavElements } = require '../../react/components/GlobalNavElements/index.js'
 
 module.exports = ->
   setDeviceClasses()
@@ -97,7 +97,7 @@ setupViews = ->
 
   if ($topBar = $('.js-topbar')).length
     scheme = if sd.IS_GROUP_PAGE then 'GROUP' else 'DEFAULT'
-    mountWithApolloProvider(TopBar, { scheme: scheme }, $topBar)
+    mountWithApolloProvider(GlobalNavElements, { scheme: scheme }, $topBar)
 
 # TODO: Extract
 setupAjaxHeaders = ->
