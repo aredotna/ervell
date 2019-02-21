@@ -1,5 +1,17 @@
 import styled, { css } from 'styled-components';
-import { display, space, textColor, fontFamily, fontWeight, fontStyle, fontSize, lineHeight, textAlign, width } from 'styled-system';
+import {
+  display,
+  space,
+  textColor,
+  fontFamily,
+  fontWeight,
+  fontStyle,
+  fontSize,
+  lineHeight,
+  textAlign,
+  width,
+  themeGet,
+} from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 import { antialiased, neutralMarginsY, hyphenate, breakWord } from 'react/styles/mixins';
@@ -29,8 +41,14 @@ export const mixin = css`
     color: inherit;
     text-decoration: none;
 
-    ${x => x.underlineLinks && `
+    ${props => props.underlineLinks && `
       text-decoration: underline;
+    `}
+
+    ${props => props.hoverLinks && `
+      &:hover {
+        color: ${themeGet(`colors.${props.hoverLinks.color}`, 'inherit')(props)};
+      }
     `}
   }
 
