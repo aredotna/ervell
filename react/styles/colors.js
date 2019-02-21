@@ -43,4 +43,16 @@ export const COLOR_NAMES = Object.keys(colorObjs).reduce(
   [],
 );
 
+// From table: https://www.viget.com/articles/equating-color-and-transparency/
+export const GRAY_ALPHA_VALUES = {
+  bold: 0.8,
+  base: 0.655, // Matches `textgray`
+  semiBold: 0.575,
+  medium: 0.4,
+  regular: 0.2,
+  semiLight: 0.09,
+  light: 0.065,
+  hint: 0.01,
+};
+
 export default COLORS;

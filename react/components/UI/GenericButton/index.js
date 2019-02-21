@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components';
 import { themeGet, fontSize, space, alignSelf, display } from 'styled-system';
 import chroma from 'chroma-js';
 
-import { defaultTo, preset } from 'react/styles/functions';
+import { defaultTo, preset, translucentGray } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
 import constants from 'react/styles/constants';
 
 export const BUTTON_DEFAULT_FONT_SIZE = 3;
 export const BUTTON_VARIANTS = { LARGE: 'LARGE', SMALL: 'SMALL' };
-export const BUTTON_LARGE_PADDING = { px: 8, py: 5 };
-export const BUTTON_SMALL_PADDING = { px: 6, py: 5 };
+export const BUTTON_LARGE_PADDING = { px: 8, py: 4 };
+export const BUTTON_SMALL_PADDING = { px: 6, py: 4 };
 export const BUTTON_SMALL_BORDER_WIDTH = '1px';
 export const BUTTON_LARGE_BORDER_WIDTH = '2px';
 export const BUTTON_BORDER_RADIUS = constants.radii.button;
@@ -40,13 +40,13 @@ export const buttonBorderWidth = x => ({
 }[buttonSize(x)]);
 
 export const activeMixin = css`
-  border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.bold};
-  color: ${x => x.theme.colors.gray.bold};
+  border: ${buttonBorderWidth} solid ${translucentGray('bold')};
+  color: ${translucentGray('bold')};
 `;
 
 export const hoverMixin = css`
-  border: ${buttonBorderWidth} solid ${x => x.theme.colors.gray.medium};
-  color: ${x => x.theme.colors.gray.bold};
+  border: ${buttonBorderWidth} solid ${translucentGray('medium')};
+  color: ${translucentGray('bold')};
 `;
 
 export const disabledMixin = css`
@@ -60,7 +60,7 @@ export const mixin = css`
   ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
   border: ${buttonBorderWidth} solid;
   border-radius: ${BUTTON_BORDER_RADIUS};
-  font-family: ${x => x.theme.fonts.sans};
+  font-family: ${props => props.theme.fonts.sans};
   font-weight: bold;
   line-height: 1;
   user-select: none;
@@ -71,19 +71,20 @@ export const mixin = css`
   ${buttonColor}
   ${antialiased}
 
-  ${x => x.minWidth && `min-width: ${x.minWidth};`}
+  ${props => props.minWidth && `min-width: ${props.minWidth};`}
 
-  ${x => x.hover && hoverMixin}
+  ${props => props.hover && hoverMixin}
   &:hover { ${hoverMixin} }
 
-  ${x => x.active && activeMixin}
+  ${props => props.active && activeMixin}
   &:active { ${activeMixin} }
 
-  ${x => x.disabled && disabledMixin}
+  ${props => props.disabled && disabledMixin}
 `;
 
 export const GenericButtonLink = styled.a`
   ${mixin}
+  text-decoration: none !important;
 `;
 
 export const GenericButton = styled.button`
