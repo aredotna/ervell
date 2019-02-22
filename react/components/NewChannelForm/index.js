@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Query } from 'react-apollo';
+
 import styled from 'styled-components';
 
 import mapErrors from 'react/util/mapErrors';
@@ -16,8 +17,6 @@ import NewChannelGroups from 'react/components/NewChannelForm/components/NewChan
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 import RandomChannelIcon from 'react/components/NewChannelForm/components/RandomChannelIcon';
-
-import { random } from 'faker';
 
 const NewChannelField = styled.div`
   display: flex;
@@ -52,11 +51,8 @@ class NewChannelForm extends Component {
     attributeErrors: {},
   }
 
-  generateRandomTitle = () => {
-    this.setState({
-      title: random.words(),
-    });
-  }
+  setTitle = title =>
+    this.setState({ title });
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
     this.setState(prevState => ({
@@ -203,9 +199,7 @@ class NewChannelForm extends Component {
                       errorMessage={attributeErrors.title}
                       flex={1}
                     />
-                    <RandomChannelIcon
-                      onClick={this.generateRandomTitle}
-                    />
+                    <RandomChannelIcon onQuery={this.setTitle} />
                   </NewChannelField>
                 </LabelledInput>
 
