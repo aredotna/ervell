@@ -8,6 +8,7 @@ export default gql`
       __typename
       id
       is_me
+      name
       channels_index(type: $type) {
         key
         channels {
@@ -19,6 +20,7 @@ export default gql`
       __typename
       id
       is_current_user_a_member
+      name
       channels_index(type: $type) {
         key
         channels {
