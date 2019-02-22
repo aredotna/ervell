@@ -15,16 +15,14 @@ import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldow
 import NewChannelGroups from 'react/components/NewChannelForm/components/NewChannelGroups';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
-import MagicHat from 'react/components/NewChannelForm/components/MagicHat';
+import RandomChannelIcon from 'react/components/NewChannelForm/components/MagicHat';
 
 import { random } from 'faker';
 
 const NewChannelField = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const RandomIcon = styled.div`
+  align-items: center;
 `;
 
 class NewChannelForm extends Component {
@@ -52,24 +50,11 @@ class NewChannelForm extends Component {
     visit_channel: true,
     errorMessage: null,
     attributeErrors: {},
-    hatPressed: false,
   }
 
   generateRandomTitle = () => {
     this.setState({
       title: random.words(),
-    });
-  }
-
-  handleHatPress = () => {
-    this.setState({
-      hatPressed: true,
-    });
-  }
-
-  handleHatRelease = () => {
-    this.setState({
-      hatPressed: false,
     });
   }
 
@@ -145,7 +130,6 @@ class NewChannelForm extends Component {
       attributeErrors,
       authorType,
       group_id,
-      hatPressed,
     } = this.state;
 
     // If the state of the form is not resting or error,
@@ -219,11 +203,8 @@ class NewChannelForm extends Component {
                       errorMessage={attributeErrors.title}
                       flex={1}
                     />
-                    <MagicHat
+                    <RandomChannelIcon
                       onClick={this.generateRandomTitle}
-                      pressed={hatPressed}
-                      onMouseDown={this.handleHatPress}
-                      onMouseUp={this.handleHatRelease}
                     />
                   </NewChannelField>
                 </LabelledInput>
