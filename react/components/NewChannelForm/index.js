@@ -15,7 +15,7 @@ import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldow
 import NewChannelGroups from 'react/components/NewChannelForm/components/NewChannelGroups';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
-import RandomChannelIcon from 'react/components/NewChannelForm/components/MagicHat';
+import RandomChannelIcon from 'react/components/NewChannelForm/components/RandomChannelIcon';
 
 import { random } from 'faker';
 
