@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Query } from 'react-apollo';
 
+import styled from 'styled-components';
+
 import mapErrors from 'react/util/mapErrors';
 
 import createChannelMutation from 'react/components/NewChannelForm/mutations/createChannel';
@@ -13,6 +15,14 @@ import { Input, Textarea, Label, LabelledCheckbox, LabelledInput } from 'react/c
 import ChannelVisibilityPulldown from 'react/components/ChannelVisibilityPulldown';
 import NewChannelGroups from 'react/components/NewChannelForm/components/NewChannelGroups';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
+
+import RandomChannelIcon from 'react/components/NewChannelForm/components/RandomChannelIcon';
+
+const NewChannelField = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 class NewChannelForm extends Component {
   static propTypes = {
@@ -40,6 +50,9 @@ class NewChannelForm extends Component {
     errorMessage: null,
     attributeErrors: {},
   }
+
+  setTitle = title =>
+    this.setState({ title });
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
     this.setState(prevState => ({
@@ -173,17 +186,21 @@ class NewChannelForm extends Component {
                     Name
                   </Label>
 
-                  <Input
-                    f={7}
-                    color={`channel.${visibility.toLowerCase()}`}
-                    placeholder="Type channel name"
-                    borderless
-                    autoFocus
-                    required
-                    value={title}
-                    onChange={this.handleTitle}
-                    errorMessage={attributeErrors.title}
-                  />
+                  <NewChannelField>
+                    <Input
+                      f={7}
+                      color={`channel.${visibility.toLowerCase()}`}
+                      placeholder="Type channel name"
+                      borderless
+                      autoFocus
+                      required
+                      value={title}
+                      onChange={this.handleTitle}
+                      errorMessage={attributeErrors.title}
+                      flex={1}
+                    />
+                    <RandomChannelIcon onQuery={this.setTitle} />
+                  </NewChannelField>
                 </LabelledInput>
 
                 {groups.length > 0 &&

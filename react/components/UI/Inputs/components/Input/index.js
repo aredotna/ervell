@@ -53,7 +53,7 @@ class Input extends Component {
     const inputProps = omit(this.props, ...SPACE_MARGIN_PROPS_KEYS);
 
     return (
-      <Box {...boxProps}>
+      <Box flex={1} {...boxProps}>
         <TextInput
           {...inputProps}
           ref={forwardRef}
