@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { themeGet } from 'styled-system';
@@ -48,7 +48,7 @@ const Close = styled.a`
   }
 `;
 
-export default class Alert extends Component {
+export default class Alert extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     onClose: PropTypes.func,

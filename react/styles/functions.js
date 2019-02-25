@@ -1,6 +1,8 @@
-import theme from 'react/styles/theme';
-import { themeGet } from 'styled-system';
 import chroma from 'chroma-js';
+import { themeGet } from 'styled-system';
+
+import theme from 'react/styles/theme';
+import { GRAY_ALPHA_VALUES } from 'react/styles/colors';
 
 const NUMBER = /(\d+(\.\d+)?)/;
 
@@ -27,10 +29,16 @@ export const preset = (fn, presetProps = {}) =>
 export const defaultTo = (v, dV) =>
   ((v == null || v !== v) ? dV : v); // eslint-disable-line no-self-compare
 
+export const getColor = name =>
+  themeGet(`colors.${name}`)({ theme });
+
 export const lighten = (name, amount = 0.5) => {
-  const color = themeGet(`colors.${name}`)({ theme });
+  const color = getColor(name);
   return chroma(color).alpha(amount);
 };
+
+export const translucentGray = key =>
+  `rgba(0, 0, 0, ${GRAY_ALPHA_VALUES[key]})`;
 
 export default {
   parse,

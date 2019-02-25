@@ -9,8 +9,6 @@ import NewChannelButton from 'react/components/TopBar/components/NewChannelButto
 import NotificationCount from 'react/components/TopBar/components/NotificationCount';
 import MyRepresentation from 'react/components/TopBar/components/MyRepresentation';
 
-import WithSerializedMe from 'react/hocs/WithSerializedMe';
-
 const Container = styled(Box)`
   position: relative;
   display: flex;
@@ -39,21 +37,21 @@ const Container = styled(Box)`
   `}
 `;
 
-class TopBar extends PureComponent {
+export default class TopBar extends PureComponent {
   static propTypes = {
     scheme: PropTypes.oneOf(['DEFAULT', 'GROUP']),
-    serializedMe: PropTypes.shape({
+    me: PropTypes.shape({
       id: PropTypes.number,
     }),
   }
 
   static defaultProps = {
     scheme: 'DEFAULT',
-    serializedMe: null,
+    me: null,
   }
 
   render() {
-    const { serializedMe: me, scheme, ...rest } = this.props;
+    const { me, scheme, ...rest } = this.props;
 
     return (
       <Container scheme={scheme} {...rest}>
@@ -63,8 +61,16 @@ class TopBar extends PureComponent {
           ? (
             <React.Fragment>
               <NewChannelButton px={5} />
-              <NotificationCount px={5} me={me} />
-              <MyRepresentation px={5} me={me} />
+
+              <NotificationCount
+                px={5}
+                count={me.counts && me.counts.notifications}
+              />
+
+              <MyRepresentation
+                px={5}
+                me={me}
+              />
             </React.Fragment>
           )
           : <AuthenticationLinks px={6} />
@@ -73,5 +79,3 @@ class TopBar extends PureComponent {
     );
   }
 }
-
-export default WithSerializedMe(TopBar);

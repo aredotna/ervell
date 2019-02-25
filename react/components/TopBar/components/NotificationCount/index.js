@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import axios from 'axios';
-import sharify from 'sharify';
+import { graphql } from 'react-apollo';
+
+import clearNotificationsMutation from 'react/components/TopBar/components/NotificationCount/mutations/clearNotifications';
 
 import Box from 'react/components/UI/Box';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
@@ -37,38 +38,18 @@ const Badge = styled(Box).attrs({
   `}
 `;
 
-export default class NotificationCount extends PureComponent {
+class NotificationCount extends PureComponent {
   static propTypes = {
-    me: PropTypes.shape({
-      authentication_token: PropTypes.string,
-    }).isRequired,
+    count: PropTypes.number,
+    clearNotifications: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    count: 0,
   }
 
   state = {
     mode: 'resting',
-    count: 0,
-  }
-
-  componentDidMount() {
-    const { me: { authentication_token } } = this.props;
-    const { data: { API_URL } } = sharify;
-
-    axios({
-      method: 'GET',
-      url: `${API_URL}/notifications/unread_count`,
-      headers: { 'X-AUTH-TOKEN': authentication_token },
-    })
-      .then(({ data: { unread_count } }) => {
-        this.setState({ count: unread_count });
-      })
-      .catch((err) => {
-        // Ignore network errors, etc.
-        if (err.response && err.response.status === 401) {
-          // Unauthorized: Log out the user
-          axios({ method: 'GET', url: '/me/sign_out' })
-            .then(() => window.location.reload());
-        }
-      });
   }
 
   containerRef = React.createRef();
@@ -88,20 +69,14 @@ export default class NotificationCount extends PureComponent {
   }
 
   markAsRead = () => {
-    this.setState({ count: 0 });
+    const { clearNotifications } = this.props;
 
-    const { me: { authentication_token } } = this.props;
-    const { data: { API_URL } } = sharify;
-
-    return axios({
-      method: 'POST',
-      url: `${API_URL}/notifications/clear`,
-      headers: { 'X-AUTH-TOKEN': authentication_token },
-    });
+    return clearNotifications();
   }
 
   render() {
-    const { mode, count } = this.state;
+    const { count } = this.props;
+    const { mode } = this.state;
 
     return (
       <React.Fragment>
@@ -129,3 +104,7 @@ export default class NotificationCount extends PureComponent {
     );
   }
 }
+
+export default graphql(clearNotificationsMutation, {
+  name: 'clearNotifications',
+})(NotificationCount);

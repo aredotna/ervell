@@ -33,13 +33,13 @@ storiesOf('Icons', module)
     <div>
       <Specimen>
         <Button>
-          <Icons mr={3} name="Lock" /> Locked button
+          <Icons mr={3} name="Lock" color="gray.base" /> Locked button
         </Button>
       </Specimen>
 
       <Specimen>
         <Button f={2}>
-          <Icons mr={3} name="Lock" /> Small locked button
+          <Icons mr={3} name="Lock" color="gray.base" /> Small locked button
         </Button>
       </Specimen>
 
@@ -50,7 +50,7 @@ storiesOf('Icons', module)
           </Button>
 
           <Button>
-            <Icons mr={3} name="Lock" /> Smaller locked button
+            <Icons mr={3} name="Lock" color="gray.base" /> Smaller locked button
           </Button>
         </ButtonGroup>
       </Specimen>
