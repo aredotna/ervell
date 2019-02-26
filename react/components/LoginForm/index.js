@@ -136,6 +136,7 @@ export default class LoginForm extends Component {
           value={email}
           hasError={mode === 'error'}
           required
+          autoFocus
         />
 
         <InputWithLink>
