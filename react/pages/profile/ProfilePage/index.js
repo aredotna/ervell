@@ -10,11 +10,10 @@ import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ProfileMetadata from 'react/components/ProfileMetadata';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
-import LoggedOutCTA from 'react/components/LoggedOutCTA';
-import LoggedOutProfileContent from 'react/components/LoggedOutCTA/components/LoggedOutProfileContent';
+import BottomBanner from 'react/components/BottomBanner';
+
 import ProfileViews from 'react/pages/profile/ProfilePage/components/ProfileViews';
 import ProfileMetaTags from 'react/pages/profile/ProfilePage/components/ProfileMetaTags';
-
 import profilePageQuery from 'react/pages/profile/ProfilePage/queries/profilePage';
 
 export default class ProfilePage extends Component {
@@ -89,9 +88,7 @@ export default class ProfilePage extends Component {
                     seed={seed}
                   />
 
-                  <LoggedOutCTA>
-                    <LoggedOutProfileContent user={identifiable} />
-                  </LoggedOutCTA>
+                  <BottomBanner banner="LOGGED_OUT_PROFILE" name={identifiable.name} />
                 </Constrain>
               </TopBarLayout>
             );

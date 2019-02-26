@@ -15,8 +15,14 @@ const withSerializedMe = (WrappedComponent) => {
           initials: PropTypes.string,
           avatar: PropTypes.string,
           authentication_token: PropTypes.string,
-        }).isRequired,
-      }).isRequired,
+        }),
+      }),
+    }
+
+    static defaultProps = {
+      data: {
+        serailizedMe: null,
+      },
     }
 
     render() {

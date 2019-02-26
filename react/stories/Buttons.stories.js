@@ -42,6 +42,17 @@ storiesOf('Button', module)
       <GenericButton minWidth="7em">Maybe</GenericButton>
     </Specimen>
   ))
+  .add('GenericButton - dark backgrounds', () => (
+    <Specimen>
+      <States bg="white" states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+        <GenericButton>Submit</GenericButton>
+      </States>
+
+      <States bg="state.premium" states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
+        <GenericButton color="white">Submit</GenericButton>
+      </States>
+    </Specimen>
+  ))
   .add('DividerButton', () => (
     <States states={[{}, { disabled: true }, { hover: true }, { active: true }]}>
       <DividerButton>Submit</DividerButton>

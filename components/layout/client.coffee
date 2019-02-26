@@ -4,7 +4,6 @@ sd = require('sharify').data
 Cookies = require 'cookies-js'
 moment =  require 'moment'
 BodyView = require './body/view.coffee'
-MessageView = require '../message/view.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 mediator = require '../../lib/mediator.coffee'
 UIState = require "../../models/ui_state.coffee"
@@ -14,7 +13,6 @@ CurrentUser = require '../../models/current_user.coffee'
 analytics = require '../../lib/analytics.coffee'
 setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
-initConfirmableMessage = require '../confirmable_message/index.coffee'
 initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 GlobalBlockRouter = require './global_block_router.coffee'
@@ -22,7 +20,7 @@ Blacklist = require('../../lib/blacklist.js').default
 initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts.js')
 
 { mountWithApolloProvider } = require '../../react/apollo/index.js'
-{ default: TopBar } = require '../../react/components/TopBar/index.js'
+{ default: GlobalNavElements } = require '../../react/components/GlobalNavElements/index.js'
 
 module.exports = ->
   setDeviceClasses()
@@ -30,10 +28,7 @@ module.exports = ->
   setupViews()
   setupAjaxHeaders()
   setupAnalytics()
-  showDispatchMessage()
   initNightMode()
-  showLimitMessage()
-  initConfirmableMessage()
   initLoggedOutCTA()
   initGlobalBlockRouting()
   initLightboxKeyboardShortcuts.bind()
@@ -97,7 +92,7 @@ setupViews = ->
 
   if ($topBar = $('.js-topbar')).length
     scheme = if sd.IS_GROUP_PAGE then 'GROUP' else 'DEFAULT'
-    mountWithApolloProvider(TopBar, { scheme: scheme }, $topBar)
+    mountWithApolloProvider(GlobalNavElements, { scheme: scheme }, $topBar)
 
 # TODO: Extract
 setupAjaxHeaders = ->
@@ -138,62 +133,3 @@ setupAnalytics = ->
       'Visited logged in'
     else
       'Visited logged out'
-
-
-showDispatchMessage = ->
-  { current_user } = mediator.shared
-
-  # Don't show this message if the current user is not logged in
-  # or if they have a pending confirmation.
-  # or if they are premium
-  # or if we are already showing them a message for exceeding the limit
-  # or if they just joined less than five minutes ago
-
-  shouldReturn = !current_user.id or
-    current_user.get('is_pending_confirmation') or
-    current_user.get('is_premium') or
-    current_user.get('is_exceeding_private_connections_limit') or
-    moment().isAfter(moment(current_user.get('created_at')).add(5, 'minutes'))
-
-  return if shouldReturn
-
-  model = new Backbone.Model
-    id: 'arena_dispatch'
-    title: '📬'
-    body: "<strong>Are.na Dispatch</strong> is a biweekly selection of channels and blog posts delivered to your inbox.<br><a href='https://mailchi.mp/are.na/dispatch'>Subscribe here</>."
-
-  messageView = new MessageView model: model
-
-  if messageView.isRenderable()
-    $('body').append messageView.render().$el
-
-
-showLimitMessage = ->
-  return unless sd.CURRENT_USER?
-
-  { current_user } = mediator.shared
-
-  rendered = false
-
-  exec = ->
-    return if rendered
-
-    return unless current_user.get('is_exceeding_private_connections_limit')
-
-    model = new Backbone.Model
-      id: 'exceeded_private_connections_count_limit'
-      title: 'Limit reached'
-      body: """
-        You’ve just surpassed the 100 private block limit for free accounts.
-        You won’t be able to add any more private blocks until you upgrade
-        to a <a href='/settings/billing'>premium account</a>.
-      """
-
-    messageView = new MessageView model: model
-
-    if messageView.isRenderable()
-      $('body').append messageView.render().$el
-      rendered = true
-
-  current_user.on 'sync', exec
-  exec()
