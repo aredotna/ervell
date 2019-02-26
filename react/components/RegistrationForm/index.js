@@ -167,7 +167,7 @@ class RegistrationForm extends Component {
           errorMessage={attributeErrors.email}
           readOnly={!!this.props.email}
           required
-          autofocus="true"
+          autoFocus
         />
 
         <Input
