@@ -19,7 +19,7 @@ export default class TopBarLayout extends PureComponent {
 
     return (
       <BlankLayout {...rest}>
-        <GlobalNavElements />
+        <GlobalNavElements scheme={scheme} />
 
         {children}
       </BlankLayout>
