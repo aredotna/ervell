@@ -10,13 +10,13 @@ import Box from 'react/components/UI/Box';
 const Lock = styled(Icon).attrs({
   name: 'Lock',
   color: 'gray.medium',
-  size: '9px',
+  size: '10px',
 })``;
 
 const Container = styled(Box)`
   border: 1px solid ${translucentGray('regular')};
   border-radius: ${constants.radii.button};
-  padding: ${x => x.theme.space[2]};
+  padding: 3px;
   line-height: 0;
 `;
 
