@@ -5,7 +5,6 @@ import getFirstStatusCode from 'react/util/getFirstStatusCode';
 import apolloMiddleware from 'react/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
-import setTipsMiddleware from 'apps/feed/middleware/setTips';
 import FeedMetadata from 'react/components/FeedMetadata';
 import NoFollowingMessage from 'react/components/Feed/components/NoFollowingMessage';
 
@@ -80,8 +79,8 @@ const middlewareStack = [
 ];
 
 
-app.get('/', homePathMiddleware, setTipsMiddleware, ...middlewareStack, renderFeed);
-app.get('/feed', ensureLoggedInMiddleware, setTipsMiddleware, ...middlewareStack, renderFeed);
+app.get('/', homePathMiddleware, ...middlewareStack, renderFeed);
+app.get('/feed', ensureLoggedInMiddleware, ...middlewareStack, renderFeed);
 app.get('/notifications', ensureLoggedInMiddleware, ...middlewareStack, renderNotifications);
 app.get('/feed/find-friends/callback', apolloMiddleware, ensureLoggedInMiddleware, findFriendsCallback);
 
