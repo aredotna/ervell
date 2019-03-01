@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { translucentGray } from 'react/styles/functions';
-import constants from 'react/styles/constants';
+// import constants from 'react/styles/constants';
 
 import Icon from 'react/components/UI/Icons';
 import Box from 'react/components/UI/Box';
@@ -15,7 +15,7 @@ const Lock = styled(Icon).attrs({
 
 const Container = styled(Box)`
   border: 1px solid ${translucentGray('regular')};
-  border-radius: ${constants.radii.button};
+  border-radius: 0.25rem;
   padding: 3px;
   line-height: 0;
 `;

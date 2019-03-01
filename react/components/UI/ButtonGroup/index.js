@@ -7,9 +7,9 @@ import provideChildrenWithProps from 'react/util/provideChildrenWithProps';
 import { buttonBorderWidth, BUTTON_BORDER_RADIUS } from 'react/components/UI/GenericButton';
 
 const ButtonGroupContainer = styled.div`
-  ${x => x.stretch && `
-    display: flex;
+  display: flex;
 
+  ${x => x.stretch && `
     > span,
     > div,
     > button,
