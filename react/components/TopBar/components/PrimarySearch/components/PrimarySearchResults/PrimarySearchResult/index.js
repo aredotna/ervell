@@ -8,6 +8,7 @@ import primarySearchResultFragment from 'react/components/TopBar/components/Prim
 import Text from 'react/components/UI/Text';
 import GroupBadge from 'react/components/UI/GroupBadge';
 import { ICON_OFFSET } from 'react/components/UI/SearchInput';
+import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
 
 import { overflowEllipsis } from 'react/styles/mixins';
 import { mixin as boxMixin } from 'react/components/UI/Box';
@@ -24,6 +25,21 @@ const Container = styled.a`
   display: flex;
   text-decoration: none;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.gray.hint};
+  }
+
+  ${props => props.selected && `
+    background-color: ${props.theme.colors.state.neutral};
+  `}
+`;
+
+const PathContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 
   > * {
     &:after {
@@ -38,18 +54,11 @@ const Container = styled.a`
       margin: 0;
     }
   }
-
-  &:hover {
-    background-color: ${props => props.theme.colors.gray.hint};
-  }
-
-  ${props => props.selected && `
-    background-color: ${props.theme.colors.state.neutral};
-  `}
 `;
 
 Container.defaultProps = {
-  px: ICON_OFFSET,
+  pl: ICON_OFFSET,
+  pr: 6,
   py: 6,
   bg: 'gray.light',
   borderTop: '1px solid',
@@ -83,29 +92,34 @@ export default class PrimarySearchResult extends PureComponent {
           onMouseDown={this.preventBlur}
           {...rest}
         >
-          {result.owner &&
-            <Label flex="1">
-              {result.owner.name}
+          <PathContainer>
+            {result.owner &&
+              <Label flex="1">
+                {result.owner.name}
 
-              {result.owner.__typename === 'Group' &&
+                {result.owner.__typename === 'Group' &&
+                  <GroupBadge
+                    f={0}
+                    visibility={result.owner.visibility}
+                  />
+                }
+              </Label>
+            }
+
+            <Label color={result.visibility ? `channel.${result.visibility}` : 'gray.base'}>
+              {unescape(result.label)}
+
+              {result.__typename === 'Group' &&
                 <GroupBadge
                   f={0}
-                  visibility={result.owner.visibility}
+                  visibility={result.visibility}
                 />
               }
             </Label>
+          </PathContainer>
+          {result.visibility === 'private' &&
+            <LockIconWithBorder />
           }
-
-          <Label color={result.visibility ? `channel.${result.visibility}` : 'gray.base'}>
-            {unescape(result.label)}
-
-            {result.__typename === 'Group' &&
-              <GroupBadge
-                f={0}
-                visibility={result.visibility}
-              />
-            }
-          </Label>
         </Container>
       );
     }
