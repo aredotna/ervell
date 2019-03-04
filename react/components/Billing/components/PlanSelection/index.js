@@ -72,7 +72,8 @@ export default class PlanSelection extends PureComponent {
 
                   <OptionDescription>
                     <span>
-                      Basic members are limited to 100 private blocks.
+                      Basic members are limited to{' '}
+                      {me.non_premium_private_connections_limit} private blocks.
                     </span>
                   </OptionDescription>
                 </Option>
