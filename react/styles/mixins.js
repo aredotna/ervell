@@ -66,7 +66,7 @@ export const neutralMargins = css`
 
 export const channelVisibilityForegroundColor = css`
   ${(props) => {
-    const color = theme.colors.channel[props.visibility];
+    const color = theme.colors.channel[props.visibility] || theme.colors.gray.base;
 
     return `
       &, & * {

@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import LinksList from 'react/components/LinksList';
 import { Expandable } from 'react/components/UI/ExpandableSet';
 
+import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
+
 import channelMetadataConnectionsFragment from 'react/components/ChannelMetadata/components/ChannelMetadataConnections/fragments/channelMetadataConnections';
 
 import Connect from 'react/components/Connect';
@@ -41,7 +43,14 @@ export default class ChannelMetadataConnections extends Component {
 
         {channel.can.connect &&
           <Actions>
-            <Connect id={channel.id} type="CHANNEL" />
+            <Connect
+              id={channel.id}
+              type="CHANNEL"
+              refetchQueries={[{
+                query: channelMetadataQuery,
+                variables: { id: channel.id },
+              }]}
+            />
           </Actions>
         }
       </div>

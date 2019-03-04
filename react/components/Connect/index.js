@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Box from 'react/components/UI/Box';
 import GenericButton from 'react/components/UI/GenericButton';
 import ConnectionSelection from 'react/components/ConnectionSelection';
 
 import { inputPadding } from 'react/components/UI/Inputs';
 
-const Container = styled.div`
+const Container = styled(Box)`
   position: relative;
-  font-size: ${x => x.theme.fontSizesIndexed.xs};
+  font-size: ${props => props.theme.fontSizesIndexed.xs};
 `;
 
 const Fieldset = styled.div`
@@ -25,7 +26,7 @@ const Close = styled.a.attrs({
   padding: ${inputPadding}; // TODO
   text-align: center;
   font-weight: bold;
-  font-size: ${x => x.theme.fontSizesIndexed.xs};
+  font-size: ${props => props.theme.fontSizesIndexed.xs};
   line-height: 1;
   border: 2px solid transparent;
 
@@ -34,7 +35,7 @@ const Close = styled.a.attrs({
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: ${x => x.theme.fontSizesIndexed.lg};
+    font-size: ${props => props.theme.fontSizesIndexed.lg};
   }
 `;
 
@@ -49,6 +50,16 @@ export default class Connect extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
+    f: PropTypes.number,
+    refetchQueries: PropTypes.arrayOf(PropTypes.shape({
+      query: PropTypes.object.isRequired,
+      variables: PropTypes.object,
+    })),
+  }
+
+  static defaultProps = {
+    f: 1,
+    refetchQueries: [],
   }
 
   state = {
@@ -65,12 +76,14 @@ export default class Connect extends Component {
 
   render() {
     const { mode } = this.state;
-    const { id, type, ...rest } = this.props;
+    const {
+      id, type, f, refetchQueries, ...rest
+    } = this.props;
 
     return (
       <Container {...rest}>
         {mode === 'resting' &&
-          <GenericButton onClick={this.openConnect} f={1}>
+          <GenericButton onClick={this.openConnect} f={f}>
             <ConnectPadding>
               Connect &rarr;
             </ConnectPadding>
@@ -84,7 +97,11 @@ export default class Connect extends Component {
               <span>&times;</span>
             </Close>
 
-            <ConnectionSelection id={id} type={type} />
+            <ConnectionSelection
+              id={id}
+              type={type}
+              refetchQueries={refetchQueries}
+            />
           </Fieldset>
         }
       </Container>

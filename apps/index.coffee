@@ -93,6 +93,10 @@ console.time('block')
 app.use(require('../apps/block'))
 console.timeEnd('block')
 
+console.time('lightbox')
+app.use(require('../apps/lightbox'))
+console.timeEnd('lightbox')
+
 console.time('channel')
 app.use(require('../apps/channel'))
 console.timeEnd('channel')
