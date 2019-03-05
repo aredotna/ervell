@@ -162,8 +162,7 @@ export default class PricingPage extends PureComponent {
             <Answer>
               Of course! The whole point of Are.na is to build channels
               together and learn from one another. You’ll still be limited
-              {/* TODO:PREMIUM_CONNECTIONS_LIMIT: Update this to be 50 */}
-              to 100 private blocks, but you can collaborate on as many public channels as you want.
+              to 50 private blocks, but you can collaborate on as many public channels as you want.
             </Answer>
 
             <Question>
