@@ -11,6 +11,7 @@ import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 import { inputPadding } from 'react/components/UI/Inputs';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 import Badge from 'react/components/UI/Badge';
+import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
 
 const Container = styled.div.attrs({
   role: 'button',
@@ -29,6 +30,8 @@ const Container = styled.div.attrs({
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
 
   &:hover {
     z-index: 1;
@@ -77,7 +80,11 @@ const HoverableInner = styled(TickerTapeHover).attrs({
   offsetBuffer: 32,
 })`
   padding: ${inputPadding}; // TODO
+  display: flex;
+  justify-content: space-between;
 `;
+
+const PathContainer = styled.div``;
 
 const Separator = styled.div`
   display: inline-block;
@@ -128,21 +135,24 @@ export default class SelectableChannel extends Component {
     return (
       <Container onClick={this.toggleSelection} data-selected={isSelected}>
         <HoverableInner>
-          {name}
+          <PathContainer>
+            {name}
 
-          {owner.__typename === 'Group' &&
-            <GroupBadge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[owner.visibility]}>
-              Group
-            </GroupBadge>
-          }
+            {owner.__typename === 'Group' &&
+              <GroupBadge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[owner.visibility]}>
+                Group
+              </GroupBadge>
+            }
 
-          <Separator />
+            <Separator />
 
-          <ColoredChannelSpan
-            visibility={visibility}
-            dangerouslySetInnerHTML={{ __html: title }}
-          />
+            <ColoredChannelSpan
+              visibility={visibility}
+              dangerouslySetInnerHTML={{ __html: title }}
+            />
+          </PathContainer>
         </HoverableInner>
+        <LockIconWithBorder />
       </Container>
     );
   }
