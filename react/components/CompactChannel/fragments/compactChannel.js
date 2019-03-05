@@ -12,6 +12,7 @@ export default gql`
         __typename
         id
         name
+        visibility
       }
       ... on User {
         __typename

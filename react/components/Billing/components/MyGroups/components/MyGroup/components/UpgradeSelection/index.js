@@ -79,6 +79,7 @@ export default class UpgradeSelection extends PureComponent {
 
                   <OptionDescription>
                     <span>
+                      {/* TODO:PREMIUM_CONNECTIONS_LIMIT: Update this to be 50 */}
                       Non-Premium members are limited to 100 private blocks.
                     </span>
                   </OptionDescription>

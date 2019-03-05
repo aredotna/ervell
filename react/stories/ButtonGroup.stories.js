@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import GenericButton from 'react/components/UI/GenericButton';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
+import Icons from 'react/components/UI/Icons';
 
 storiesOf('ButtonGroup', module)
   .add('default', () => (
@@ -25,6 +26,15 @@ storiesOf('ButtonGroup', module)
       <GenericButton>Option 2</GenericButton>
       <GenericButton>Option 3</GenericButton>
       <GenericButton>Option 4</GenericButton>
+    </ButtonGroup>
+  ))
+  .add('default - small buttons w/ icon', () => (
+    <ButtonGroup f={1}>
+      <GenericButton>Option 1</GenericButton>
+      <GenericButton>
+        <Icons mr={3} name="Lock" />
+        Private 1
+      </GenericButton>
     </ButtonGroup>
   ))
   .add('default - colors', () => (

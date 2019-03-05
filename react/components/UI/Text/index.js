@@ -77,6 +77,10 @@ export const mixin = css`
   i {
     font-style: italic;
   }
+
+  u {
+    text-decoration: underline;
+  }
 `;
 
 const Text = styled.div`

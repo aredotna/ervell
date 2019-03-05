@@ -1,5 +1,7 @@
 import { css } from 'styled-components';
 
+import { LINE_HEIGHTS } from 'react/styles/text';
+
 export const BREAKPOINTS = {
   mobile: 640,
   small: 1024,
@@ -53,6 +55,8 @@ export const CONSTANT_VALUES = {
   blockAndGutter: '335px', // (blockWidth + blockGutter)
   containerOffset: '100px', // TODO: Something based on real values
   legacyUnit: '20px',
+  // py: 1em (6) + 1rem input inner (16px/13px font-size + 1.125 line-height)
+  topBarHeight: `calc((1rem * ${LINE_HEIGHTS.input}) + 2em)`,
 };
 
 export const RADII = {

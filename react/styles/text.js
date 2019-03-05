@@ -40,6 +40,12 @@ export const LINE_HEIGHTS = {
   compact: 1.15,
   base: 1.33,
   tall: 1.5,
+
+  // Not a line-height on our scale but:
+  // 1.125 * 16 (1rem) = 18
+  // Which is as compact as the text input can get using line-height.
+  // This is annoying but lets us be explicit about height calculations.
+  input: 1.125,
 };
 
 export const __LINE_HEIGHT_SCALE__ = [
