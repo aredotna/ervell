@@ -118,8 +118,7 @@ class PricingTable extends PureComponent {
           <CTAButton color="black" href={signUpLink}>Sign up</CTAButton>
           <Features>
             <Feature>Unlimited public blocks*</Feature>
-            {/* TODO:PREMIUM_CONNECTIONS_LIMIT: Update this to be 50 */}
-            <Feature>Up to 100 private blocks</Feature>
+            <Feature>Up to 50 private blocks</Feature>
           </Features>
         </Cell>
         <Cell>
