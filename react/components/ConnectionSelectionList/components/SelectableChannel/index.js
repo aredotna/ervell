@@ -152,7 +152,12 @@ export default class SelectableChannel extends Component {
     } = this.props;
 
     return (
-      <Container onClick={this.toggleSelection} data-selected={isSelected} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+      <Container
+        onClick={this.toggleSelection}
+        data-selected={isSelected}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
         <HoverableInner>
           {name}
 
