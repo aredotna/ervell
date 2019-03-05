@@ -13,7 +13,7 @@ const Table = styled(Box).attrs({ mb: 7 })`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
   ${constants.media.mobile`
     align-items: center;
     flex-direction: column;
@@ -29,7 +29,7 @@ const Cell = styled(Box).attrs({
   flex-direction: column;
   max-width: 20em;
   border-right: 2px solid ${x => x.theme.colors.gray.light};
-  
+
   &:last-child {
     border-right-color: transparent;
   }
@@ -118,6 +118,7 @@ class PricingTable extends PureComponent {
           <CTAButton color="black" href={signUpLink}>Sign up</CTAButton>
           <Features>
             <Feature>Unlimited public blocks*</Feature>
+            {/* TODO:PREMIUM_CONNECTIONS_LIMIT: Update this to be 50 */}
             <Feature>Up to 100 private blocks</Feature>
           </Features>
         </Cell>
