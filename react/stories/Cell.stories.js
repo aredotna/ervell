@@ -9,8 +9,10 @@ import konnectableCellFragment from 'react/components/Cell/components/Konnectabl
 
 import Specimen from 'react/stories/__components__/Specimen';
 
+import Box from 'react/components/UI/Box';
 import Grid from 'react/components/UI/Grid';
 import Cell from 'react/components/Cell';
+import ChannelPreview from 'react/components/Cell/components/Konnectable/components/ChannelPreview';
 
 import BLOKK_QUERY from 'react/components/Cell/components/Konnectable/queries/blokk';
 
@@ -115,6 +117,15 @@ storiesOf('Cell', module)
             );
           }}
         </Query>
+      </Grid>
+    </Specimen>
+  ))
+  .add('channel previews', () => (
+    <Specimen>
+      <Grid>
+        <Box border="2px dashed" borderColor="red" width="315px" height="315px" position="relative" px={5}>
+          <ChannelPreview id="foobar" color="channel.open" />
+        </Box>
       </Grid>
     </Specimen>
   ));

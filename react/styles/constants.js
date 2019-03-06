@@ -54,6 +54,7 @@ export const CONSTANT_VALUES = {
   doubleBlockGutter: '20px', // TODO
   blockAndGutter: '335px', // (blockWidth + blockGutter)
   containerOffset: '100px', // TODO: Something based on real values
+  blockPreviewWidth: '200px',
   legacyUnit: '20px',
   // py: 1em (6) + 1rem input inner (16px/13px font-size + 1.125 line-height)
   topBarHeight: `calc((1rem * ${LINE_HEIGHTS.input}) + 2em)`,

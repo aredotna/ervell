@@ -141,7 +141,7 @@ class ProfileChannels extends PureComponent {
                   {channels.map(channel => (
                     <ChannelRow key={channel.id} channel={channel}>
                       <Grid>
-                        <Cell.Konnectable konnectable={channel} />
+                        <Cell.Konnectable konnectable={channel} isPreviewable={false} />
 
                         {channel.blokks.map(blokk => (
                           <Cell.Konnectable
