@@ -80,13 +80,15 @@ class ChannelOverlay extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const { channel: { id, visibility }, isPreviewable } = this.props;
+    const { channel: { id, visibility, counts }, isPreviewable } = this.props;
+
+    const allowPreview = isPreviewable && counts.contents > 0;
 
     return (
       <Container mode={mode}>
         {mode === 'resting' &&
           <React.Fragment>
-            {isPreviewable &&
+            {allowPreview &&
               <DividerButton
                 f={4}
                 mr={2}
@@ -99,7 +101,7 @@ class ChannelOverlay extends PureComponent {
 
             <DividerButton
               f={4}
-              ml={isPreviewable && 2}
+              ml={allowPreview && 2}
               color={`channel.${visibility}`}
               onClick={this.openConnect}
             >

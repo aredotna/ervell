@@ -10,6 +10,7 @@ export default gql`
     visibility
     updated_at(relative: true)
     counts {
+      __typename
       contents
     }
     owner {
