@@ -12,6 +12,10 @@ const Truncate = ({
 }) => {
   if (!children || children.length === 0) return <span />;
 
+  if (typeof children !== 'string') {
+    throw new Error('Truncate requires a a string');
+  }
+
   return (
     <span {...rest}>
       {truncate(children, length, suffix)}

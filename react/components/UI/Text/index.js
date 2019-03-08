@@ -36,6 +36,7 @@ export const mixin = css`
   ${props => props.neutralMarginsY && neutralMarginsY}
   ${props => props.hyphenate && hyphenate}
   ${props => props.breakWord && breakWord}
+  ${props => props.textTransform && `text-transform: ${props.textTransform};`}
 
   a {
     color: inherit;
@@ -76,6 +77,10 @@ export const mixin = css`
   em,
   i {
     font-style: italic;
+  }
+
+  u {
+    text-decoration: underline;
   }
 `;
 

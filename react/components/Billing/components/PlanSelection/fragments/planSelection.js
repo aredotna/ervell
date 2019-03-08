@@ -4,6 +4,7 @@ import privateBlocksMeterFragment from 'react/components/PrivateBlocksMeter/frag
 
 export default gql`
   fragment PlanSelection on Me {
+    non_premium_private_connections_limit
     customer {
       __typename
       id

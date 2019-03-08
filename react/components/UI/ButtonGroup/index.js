@@ -9,7 +9,7 @@ import { buttonBorderWidth, BUTTON_BORDER_RADIUS } from 'react/components/UI/Gen
 const ButtonGroupContainer = styled.div`
   display: flex;
 
-  ${x => x.stretch && `
+  ${props => props.stretch && `
     > span,
     > div,
     > button,
