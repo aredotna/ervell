@@ -14,7 +14,7 @@ const Lock = styled(Icon).attrs({
 })``;
 
 const Container = styled(Box)`
-  border: 1px solid ${translucentGray('regular')};
+  border: 1px solid ${translucentGray('regular')} !important;
   border-radius: 0.25rem;
   padding: 3px;
   line-height: 0;
