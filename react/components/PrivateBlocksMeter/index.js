@@ -33,7 +33,7 @@ const MeterProgress = styled(Box).attrs({
   top: 0;
   left: 0;
   bottom: 0;
-  width: ${props => `${props.amount}%`};
+  width: ${props => `${(props.amount / props.limit) * 100.0}%`};
 `;
 
 const Label = styled(Text)`
@@ -47,17 +47,25 @@ export default class PrivateBlocksMeter extends Component {
   }
 
   render() {
-    const { me: { counts }, ...rest } = this.props;
+    const {
+      me: {
+        non_premium_private_connections_limit,
+        counts,
+      },
+      ...rest
+    } = this.props;
 
-    const amount = Math.min(counts.private_connections, 100);
+    const amount = Math.min(counts.private_connections, non_premium_private_connections_limit);
 
     return (
       <Box {...rest}>
         <Meter>
-          <MeterProgress amount={amount} />
+          <MeterProgress amount={amount} limit={non_premium_private_connections_limit} />
 
           <Label>
-            <strong>{amount} out of 100</strong> free private blocks used
+            <strong>{amount} out of {non_premium_private_connections_limit}</strong>
+            {' '}
+            free private blocks used
           </Label>
         </Meter>
 

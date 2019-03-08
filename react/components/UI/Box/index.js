@@ -20,7 +20,7 @@ import {
   style,
 } from 'styled-system';
 
-import { neutralMargins } from 'react/styles/mixins';
+import { neutralMargins, overflowScrolling } from 'react/styles/mixins';
 
 const flexGrow = style({ prop: 'flexGrow' });
 const flexShrink = style({ prop: 'flexShrink' });
@@ -47,6 +47,7 @@ export const mixin = css`
   ${bgColor}
   ${textAlign}
   ${neutralMargins}
+  ${props => props.overflowScrolling && overflowScrolling}
 `;
 
 export default styled.div`

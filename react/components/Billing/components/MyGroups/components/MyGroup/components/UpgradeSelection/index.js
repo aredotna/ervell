@@ -79,7 +79,7 @@ export default class UpgradeSelection extends PureComponent {
 
                   <OptionDescription>
                     <span>
-                      Non-Premium members are limited to 100 private blocks.
+                      Non-Premium members are limited to 50 private blocks.
                     </span>
                   </OptionDescription>
                 </Option>

@@ -7,8 +7,6 @@ import ConnectionSelectionList from 'react/components/ConnectionSelectionList';
 import createConnectionMutation from 'react/components/ConnectionSelection/mutations/createConnection';
 import removeConnectionMutation from 'react/components/ConnectionSelection/mutations/removeConnection';
 
-import channelMetadataQuery from 'react/components/ChannelMetadata/queries/channelMetadata';
-
 class ConnectionSelection extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -16,10 +14,15 @@ class ConnectionSelection extends Component {
     createConnection: PropTypes.func.isRequired,
     removeConnection: PropTypes.func.isRequired,
     isOutlined: PropTypes.bool,
+    refetchQueries: PropTypes.arrayOf(PropTypes.shape({
+      query: PropTypes.object.isRequired,
+      variables: PropTypes.object,
+    })),
   }
 
   static defaultProps = {
     isOutlined: true,
+    refetchQueries: [],
   }
 
   handleConnectionSelection = (isSelected, channelId) => {
@@ -28,14 +31,8 @@ class ConnectionSelection extends Component {
       type,
       createConnection,
       removeConnection,
+      refetchQueries,
     } = this.props;
-
-    const refetchQueries = [
-      ...(type === 'CHANNEL' && [{
-        query: channelMetadataQuery,
-        variables: { id },
-      }]),
-    ];
 
     if (isSelected) {
       return createConnection({

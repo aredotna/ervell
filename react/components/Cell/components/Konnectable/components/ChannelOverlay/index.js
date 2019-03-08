@@ -8,9 +8,11 @@ import channelOverlayFragment from 'react/components/Cell/components/Konnectable
 import WithLoginStatus from 'react/hocs/WithLoginStatus';
 
 import Box from 'react/components/UI/Box';
-import DividerButton, { mixin as dividerButtonMixin } from 'react/components/UI/Buttons/components/DividerButton';
-import FollowButton from 'react/components/FollowButton';
+import DividerButton from 'react/components/UI/Buttons/components/DividerButton';
 import OverlayConnect from 'react/components/Cell/components/Konnectable/components/OverlayConnect';
+import ChannelPreview from 'react/components/Cell/components/Konnectable/components/ChannelPreview';
+
+const CHANNEL_BORDER_OFFSET = '2px';
 
 const Container = styled(Box).attrs({
   px: 5,
@@ -18,20 +20,16 @@ const Container = styled(Box).attrs({
 })`
   box-sizing: border-box;
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  right: ${CHANNEL_BORDER_OFFSET};
+  bottom: ${CHANNEL_BORDER_OFFSET};
+  left: ${CHANNEL_BORDER_OFFSET};
   display: flex;
   align-items: center;
   justify-content: space-around;
 
-  ${x => x.mode === 'overlay' && `
-    top: 0;
+  ${props => props.mode !== 'resting' && `
+    top: ${CHANNEL_BORDER_OFFSET};
   `}
-`;
-
-const ChannelFollowButton = styled(FollowButton)`
-  ${dividerButtonMixin}
 `;
 
 class ChannelOverlay extends PureComponent {
@@ -40,6 +38,11 @@ class ChannelOverlay extends PureComponent {
     onOverlay: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
+    isPreviewable: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isPreviewable: true,
   }
 
   state = {
@@ -57,50 +60,69 @@ class ChannelOverlay extends PureComponent {
     }
 
     this.setState({ mode: 'overlay' });
-
     return onOverlay();
   }
 
-  closeConnect = (e) => {
+  openPreview = (e) => {
     e.preventDefault();
+
+    const { onOverlay } = this.props;
+    this.setState({ mode: 'preview' });
+    return onOverlay();
+  }
+
+  close = (e) => {
+    e.preventDefault();
+
     this.setState({ mode: 'resting' });
     this.props.onClose();
   }
 
   render() {
     const { mode } = this.state;
-    const { channel: { id, visibility, can } } = this.props;
+    const { channel: { id, visibility, counts }, isPreviewable } = this.props;
+
+    const allowPreview = isPreviewable && counts.contents > 0;
 
     return (
       <Container mode={mode}>
         {mode === 'resting' &&
-          [
-            can.follow && <ChannelFollowButton
-              key="follow"
-              f={4}
-              mr={2}
-              color={`channel.${visibility}`}
-              id={id}
-              type="CHANNEL"
-            />,
+          <React.Fragment>
+            {allowPreview &&
+              <DividerButton
+                f={4}
+                mr={2}
+                color={`channel.${visibility}`}
+                onClick={this.openPreview}
+              >
+                Preview
+              </DividerButton>
+            }
 
             <DividerButton
-              key="connect"
               f={4}
-              ml={can.follow && 2}
+              ml={allowPreview && 2}
               color={`channel.${visibility}`}
               onClick={this.openConnect}
             >
               Connect &rarr;
-            </DividerButton>,
-          ]
+            </DividerButton>
+          </React.Fragment>
         }
 
         {mode === 'overlay' &&
           <OverlayConnect
             id={id}
             type="CHANNEL"
-            onClose={this.closeConnect}
+            onClose={this.close}
+          />
+        }
+
+        {mode === 'preview' &&
+          <ChannelPreview
+            id={id}
+            color={`channel.${visibility}`}
+            onClose={this.close}
           />
         }
       </Container>

@@ -3,6 +3,7 @@ import { fontSize, space, borderColor, borders, color, width } from 'styled-syst
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
+import { LINE_HEIGHTS } from 'react/styles/text';
 
 export const borderlessMixin = css`
   ${props => props.borderless && `
@@ -35,6 +36,7 @@ export const defaultMixin = css`
   box-sizing: border-box;
   display: block;
   background-color: white;
+  line-height: ${LINE_HEIGHTS.input};
   font-family: ${props => props.theme.fonts.sans};
   ${preset(width, { width: '100%' })}
   ${preset(color, { color: 'black' })}
