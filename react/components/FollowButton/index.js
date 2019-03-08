@@ -21,13 +21,12 @@ class FollowButton extends Component {
     follow: PropTypes.func.isRequired,
     unfollow: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
-    followNode: PropTypes.node, // TODO: Fix these by handling children correctly
-    unfollowNode: PropTypes.node, // TODO: Fix these by handling children correctly
+    children: PropTypes.func,
   }
 
   static defaultProps = {
-    followNode: 'Follow',
-    unfollowNode: 'Unfollow',
+    children: ({ isFollowed }) =>
+      ({ true: 'Unfollow', false: 'Follow' }[isFollowed]),
   }
 
   toggleFollow = async (e) => {
@@ -68,8 +67,7 @@ class FollowButton extends Component {
       follow: _follow,
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
-      followNode,
-      unfollowNode,
+      children,
       data,
       ...rest
     } = this.props;
@@ -86,10 +84,7 @@ class FollowButton extends Component {
 
     return (
       <span onClick={this.toggleFollow} role="button" tabIndex={0} {...rest}>
-        {{
-          false: followNode,
-          true: unfollowNode,
-        }[isFollowed]}
+        {children({ isFollowed })}
       </span>
     );
   }
