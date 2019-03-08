@@ -33,7 +33,22 @@ export default class ChannelMetadataActions extends Component {
     return (
       <ButtonGroup f={1}>
         {can.follow &&
-          <ChannelFollowButton id={id} type="CHANNEL" />
+          <ChannelFollowButton id={id} type="CHANNEL">
+            {({ isFollowed }) => ({
+              true: (
+                <React.Fragment>
+                  <Icons name="Unfollow" mr={3} color="gray.medium" />
+                  Unfollow
+                </React.Fragment>
+              ),
+              false: (
+                <React.Fragment>
+                  <Icons name="Follow" mr={3} color="gray.medium" />
+                  Follow
+                </React.Fragment>
+              ),
+            }[isFollowed])}
+          </ChannelFollowButton>
         }
 
         {can.mute &&
@@ -42,9 +57,8 @@ export default class ChannelMetadataActions extends Component {
 
         {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
-            {channel.visibility === 'private' &&
-              <Icons mr={3} name="Lock" />
-            } Edit channel
+            <Icons name="Pencil" mr={3} color="gray.medium" />
+            Edit channel
           </Button>
         }
       </ButtonGroup>
