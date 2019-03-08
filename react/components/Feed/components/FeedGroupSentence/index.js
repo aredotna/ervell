@@ -5,13 +5,13 @@ import styled from 'styled-components';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import FeedObjectLink from 'react/components/Feed/components/FeedGroupSentence/components/FeedObjectLink/index';
+import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
 
 import feedGroupSentenceFragment from 'react/components/Feed/components/FeedGroupSentence/fragments/sentence';
 
 const RelativeTime = styled(Text).attrs({
   f: 1,
   color: 'gray.medium',
-  my: 6,
 })`
   text-transform: uppercase;
 `;
@@ -27,6 +27,15 @@ const Sentence = styled.div`
   margin-bottom: ${x => x.theme.space[2]};
   max-width: ${x => x.theme.space[14]};
   margin: 0 auto;
+`;
+
+const Submetadata = styled(Box).attrs({
+  mt: 5,
+})`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const Container = styled(Box)``;
@@ -47,6 +56,7 @@ export default class FeedGroupSentence extends PureComponent {
         created_at,
         item_phrase,
         objects,
+        is_private,
       },
     } = this.props;
 
@@ -91,9 +101,14 @@ export default class FeedGroupSentence extends PureComponent {
           }
         </Sentence>
 
-        <RelativeTime>
-          {created_at}
-        </RelativeTime>
+        <Submetadata>
+          {is_private &&
+            <LockIconWithBorder mr={3} />
+          }
+          <RelativeTime>
+            {created_at}
+          </RelativeTime>
+        </Submetadata>
       </Container>
     );
   }

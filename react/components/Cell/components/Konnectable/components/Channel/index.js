@@ -11,6 +11,7 @@ import constants from 'react/styles/constants';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import Badge from 'react/components/UI/Badge';
+import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -36,13 +37,17 @@ export default class Channel extends PureComponent {
     return (
       <Container visibility={channel.visibility} {...rest}>
         <Text
-          pt={6}
-          mx={4}
           f={6}
+          mx={4}
+          pt={6}
           breakWord
           textAlign="center"
-          dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }}
-        />
+        >
+          <span style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }} />
+          {channel.visibility === 'private' &&
+            <LockIconWithBorder ml={3} mb="3px" display="inline-flex" />
+          }
+        </Text>
 
         <Text my={4} f={2} textAlign="center">
           by {channel.owner.name}
