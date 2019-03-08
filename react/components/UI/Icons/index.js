@@ -22,6 +22,10 @@ import Pencil from 'react/components/UI/Icons/Pencil.svg';
 import SpeechBubble from 'react/components/UI/Icons/SpeechBubble.svg';
 import Unfollow from 'react/components/UI/Icons/Unfollow.svg';
 import Unmute from 'react/components/UI/Icons/Unmute.svg';
+import Group from 'react/components/UI/Icons/Group.svg';
+import Logout from 'react/components/UI/Icons/Logout.svg';
+import Medallion from 'react/components/UI/Icons/Medallion.svg';
+import Tools from 'react/components/UI/Icons/Tools.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -41,6 +45,10 @@ export const COMPONENTS = {
   SpeechBubble: <SpeechBubble />,
   Unfollow: <Unfollow />,
   Unmute: <Unmute />,
+  Group: <Group />,
+  Logout: <Logout />,
+  Medallion: <Medallion />,
+  Tools: <Tools />,
 };
 
 export const ICON_NAMES = Object.keys(COMPONENTS);
