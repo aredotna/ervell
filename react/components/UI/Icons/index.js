@@ -13,6 +13,15 @@ import Clipboard from 'react/components/UI/Icons/Clipboard.svg';
 import Exclaim from 'react/components/UI/Icons/Exclaim.svg';
 import Info from 'react/components/UI/Icons/Info.svg';
 import Question from 'react/components/UI/Icons/Question.svg';
+import Cog from 'react/components/UI/Icons/Cog.svg';
+import CreditCard from 'react/components/UI/Icons/CreditCard.svg';
+import Follow from 'react/components/UI/Icons/Follow.svg';
+import Link from 'react/components/UI/Icons/Link.svg';
+import Mute from 'react/components/UI/Icons/Mute.svg';
+import Pencil from 'react/components/UI/Icons/Pencil.svg';
+import SpeechBubble from 'react/components/UI/Icons/SpeechBubble.svg';
+import Unfollow from 'react/components/UI/Icons/Unfollow.svg';
+import Unmute from 'react/components/UI/Icons/Unmute.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -23,6 +32,15 @@ export const COMPONENTS = {
   Exclaim: <Exclaim />,
   Info: <Info />,
   Question: <Question />,
+  Cog: <Cog />,
+  CreditCard: <CreditCard />,
+  Follow: <Follow />,
+  Link: <Link />,
+  Mute: <Mute />,
+  Pencil: <Pencil />,
+  SpeechBubble: <SpeechBubble />,
+  Unfollow: <Unfollow />,
+  Unmute: <Unmute />,
 };
 
 export const ICON_NAMES = Object.keys(COMPONENTS);
