@@ -6,4 +6,6 @@ export default styled(Link).attrs({
   f: 2,
   fontWeight: 'normal',
 })`
+  display: flex;
+  align-items: center;
 `;
