@@ -7,7 +7,7 @@ export default gql`
     channel(id: $id) {
       __typename
       id
-      blocks: blokks(per: $amount, type: BLOCK, sort_by: CREATED_AT, direction: DESC) {
+      blocks: blokks(per: $amount, sort_by: CREATED_AT, direction: DESC) {
         ...ChannelPreviewBlock
       }
     }

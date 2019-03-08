@@ -22,5 +22,20 @@ export default gql`
     ... on Embed {
       preview_image_url: image_url(size: SQUARE)
     }
+    ... on Channel {
+      preview_title: title(truncate: 25)
+      visibility
+      owner {
+        __typename
+        ... on User {
+          id
+          name
+        }
+        ... on Group {
+          id
+          name
+        }
+      }
+    }
   }
 `;
