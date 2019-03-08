@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { unescape } from 'underscore';
 
 import Text from 'react/components/UI/Text';
-import Truncate from 'react/components/UI/Truncate';
+import { truncate } from 'react/components/UI/Truncate';
 import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
 
 const NotificationObjectLink = ({
@@ -26,9 +25,7 @@ const NotificationObjectLink = ({
       {...rest}
     >
       <a href={href}>
-        <Truncate length={40}>
-          {unescape(label)}
-        </Truncate>
+        <span dangerouslySetInnerHTML={{ __html: truncate(label, 40) }} />
         {visibility === 'private' &&
           <LockIconWithBorder display="inline-flex" ml={2} />
         }
