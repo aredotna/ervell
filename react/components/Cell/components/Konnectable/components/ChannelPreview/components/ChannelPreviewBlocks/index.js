@@ -140,6 +140,31 @@ export default class ChannelPreviewBlocks extends PureComponent {
           }
         </React.Fragment>
       ),
+      Channel: () => (
+        <Box
+          width="100%"
+          height="100%"
+          textAlign="center"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection="column"
+          border="1px solid"
+          borderColor={`channel.${block.visibility}`}
+        >
+          <Text
+            pt={5}
+            mb={3}
+            f={5}
+            color={`channel.${block.visibility}`}
+            dangerouslySetInnerHTML={{ __html: block.preview_title }}
+          />
+
+          <Text f={1} color={`channel.${block.visibility}`}>
+            {block.owner.name}
+          </Text>
+        </Box>
+      ),
     }[block.__typename];
 
     return (
