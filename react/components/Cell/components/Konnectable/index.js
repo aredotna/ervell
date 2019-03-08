@@ -57,10 +57,12 @@ export default class Konnectable extends PureComponent {
       __typename: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
     })),
+    isPreviewable: PropTypes.bool,
   }
 
   static defaultProps = {
     context: [],
+    isPreviewable: true,
   }
 
   state = {
@@ -98,7 +100,7 @@ export default class Konnectable extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const { konnectable } = this.props;
+    const { konnectable, isPreviewable } = this.props;
 
     return (
       <Container
@@ -148,6 +150,7 @@ export default class Konnectable extends PureComponent {
               channel={konnectable}
               onOverlay={this.onOverlay}
               onClose={this.onOverlayClose}
+              isPreviewable={isPreviewable}
             />,
         ]}
       </Container>
