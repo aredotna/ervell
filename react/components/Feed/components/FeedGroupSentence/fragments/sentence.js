@@ -38,6 +38,7 @@ export default gql`
     }
     target_phrase
     created_at(relative: true)
+    is_private
   }
   ${feedObjectFragment}
 `;

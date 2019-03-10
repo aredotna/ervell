@@ -4,6 +4,7 @@ import { propType } from 'graphql-anywhere';
 import { graphql, compose } from 'react-apollo';
 
 import GenericButton from 'react/components/UI/GenericButton';
+import Icons from 'react/components/UI/Icons';
 
 import muteChannelButtonFragment from 'react/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton/fragments/muteChannelButton';
 import muteChannelMutation from 'react/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton/mutations/muteChannel';
@@ -46,12 +47,12 @@ class MuteChannelButton extends Component {
       ...rest
     } = this.props;
 
+    const actionName = { true: 'Unmute', false: 'Mute' }[is_muted];
+
     return (
       <GenericButton onClick={this.toggleMute} {...rest}>
-        {{
-          true: 'Unmute',
-          false: 'Mute',
-        }[is_muted]}
+        <Icons name={actionName} mr={3} color="gray.medium" />
+        {actionName}
       </GenericButton>
     );
   }

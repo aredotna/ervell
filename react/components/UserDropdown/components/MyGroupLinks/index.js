@@ -16,6 +16,7 @@ import Link from 'react/components/UserDropdown/components/Link';
 import MyGroupLink from 'react/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink';
 import Modal from 'react/components/UI/Modal';
 import CreateGroup from 'react/components/CreateGroup';
+import Icons from 'react/components/UI/Icons';
 
 const Header = styled(Link)`
   position: relative;
@@ -147,6 +148,7 @@ class MyGroupLinks extends Component {
             }
 
             <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
+              <Icons name="Group" color="gray.medium" mr={4} />
               Create group
             </GenericButton>
           </React.Fragment>

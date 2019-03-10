@@ -72,12 +72,13 @@ export default class Contact extends Component {
           <UserAvatar user={user} mr={5} />
           <Username>{user.name}</Username>
         </Identifier>
-        <FollowButton
-          id={user.id}
-          type="USER"
-          followNode={<FollowText />}
-          unfollowNode={<UnfollowText />}
-        />
+
+        <FollowButton id={user.id} type="USER">
+          {({ isFollowed }) => ({
+            true: <UnfollowText />,
+            false: <FollowText />,
+          }[isFollowed])}
+        </FollowButton>
       </Container>
     );
   }

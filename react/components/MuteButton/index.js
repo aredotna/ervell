@@ -18,6 +18,14 @@ class MuteButton extends Component {
     }).isRequired,
     mute: PropTypes.func.isRequired,
     unmute: PropTypes.func.isRequired,
+    children: PropTypes.func,
+  }
+
+  static defaultProps = {
+    children: ({ isMuted }) => ({
+      true: 'Unmute',
+      false: 'Mute',
+    }[isMuted]),
   }
 
   toggleMute = async () => {
@@ -52,15 +60,13 @@ class MuteButton extends Component {
     const {
       id, type, mute: _mute, unmute: _unmute,
       data: { mutable },
+      children,
       ...rest
     } = this.props;
 
     return (
       <span onClick={this.toggleMute} role="button" tabIndex={0} {...rest}>
-        {{
-          true: 'Unmute',
-          false: 'Mute',
-        }[mutable.is_muted]}
+        {children({ isMuted: mutable.is_muted })}
       </span>
     );
   }

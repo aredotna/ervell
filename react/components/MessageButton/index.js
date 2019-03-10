@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 
 import createUserMessageChannelMutation from 'react/components/MessageButton/mutations/createUserMessageChannel';
 
-class MessageButton extends Component {
+class MessageButton extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     createUserMessageChannel: PropTypes.func.isRequired,
+    children: PropTypes.func.isRequired,
   }
 
   state = {
@@ -19,17 +20,12 @@ class MessageButton extends Component {
 
     this.setState({ mode: 'working' });
 
-    return createUserMessageChannel({
-      variables: { id },
-    })
+    return createUserMessageChannel({ variables: { id } })
       .then(({ data: { create_user_message_channel: { channel: { href } } } }) => {
         this.setState({ mode: 'redirecting' });
-
         window.location.href = href;
       })
-      .catch(() => {
-        this.setState({ mode: 'error' });
-      });
+      .catch(() => this.setState({ mode: 'error' }));
   }
 
   render() {
@@ -37,17 +33,13 @@ class MessageButton extends Component {
     const {
       id: _id,
       createUserMessageChannel: _createUserMessageChannel,
+      children,
       ...rest
     } = this.props;
 
     return (
       <span onClick={this.handleClick} role="button" tabIndex={0} {...rest}>
-        {{
-          resting: 'Message',
-          working: 'Wait...',
-          redirecting: 'Redirecting...',
-          error: 'Error',
-        }[mode]}
+        {children({ mode })}
       </span>
     );
   }

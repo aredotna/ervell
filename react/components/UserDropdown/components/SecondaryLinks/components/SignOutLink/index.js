@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Icons from 'react/components/UI/Icons';
 import SmallLink from 'react/components/UserDropdown/components/SecondaryLinks/components/SmallLink';
 
 const signOut = () => {
@@ -9,6 +10,7 @@ const signOut = () => {
 
 export default () => (
   <SmallLink onClick={signOut}>
+    <Icons name="Logout" color="gray.medium" mr={4} />
     Log Out
   </SmallLink>
 );

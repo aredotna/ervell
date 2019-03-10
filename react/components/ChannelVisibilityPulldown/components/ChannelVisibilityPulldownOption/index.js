@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Text from 'react/components/UI/Text';
+import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
 
 const Container = styled.div`
   position: relative;
@@ -29,6 +30,9 @@ const ChannelVisibilityPulldownOption = ({
       <div>
         <Text color={`channel.${visibility}`} mb={2}>
           {label}
+          {visibility === 'private' &&
+            <LockIconWithBorder display="inline-flex" ml={2} />
+          }
         </Text>
 
         <Text color="gray.medium" f={3} pr={8}>

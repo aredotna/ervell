@@ -12,6 +12,8 @@ import { inputPadding } from 'react/components/UI/Inputs';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 import Badge from 'react/components/UI/Badge';
 
+import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+
 const Container = styled.div.attrs({
   role: 'button',
   tabIndex: 0,
@@ -79,6 +81,21 @@ const HoverableInner = styled(TickerTapeHover).attrs({
   padding: ${inputPadding}; // TODO
 `;
 
+const LockContainer = styled.div`
+  background: linear-gradient(to left, ${props => props.theme.colors.gray.hint} 90%, ${props => props.theme.colors.utility.transparent});
+  position: absolute;
+  top: 50%;
+  right: 0;
+  padding: 0 0.5em;
+  text-align: center;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  ${props => props.hidden && `
+    display: none;
+  `};
+`;
+
 const Separator = styled.div`
   display: inline-block;
   width: 1px;
@@ -105,6 +122,15 @@ export default class SelectableChannel extends Component {
 
   state = {
     isSelected: false,
+    isHovered: false,
+  }
+
+  handleMouseEnter = () => {
+    this.setState({ isHovered: true });
+  }
+
+  handleMouseLeave = () => {
+    this.setState({ isHovered: false });
   }
 
   toggleSelection = () => {
@@ -118,7 +144,7 @@ export default class SelectableChannel extends Component {
   }
 
   render() {
-    const { isSelected } = this.state;
+    const { isSelected, isHovered } = this.state;
     const {
       channel: {
         title, visibility, owner, owner: { name },
@@ -126,7 +152,12 @@ export default class SelectableChannel extends Component {
     } = this.props;
 
     return (
-      <Container onClick={this.toggleSelection} data-selected={isSelected}>
+      <Container
+        onClick={this.toggleSelection}
+        data-selected={isSelected}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
         <HoverableInner>
           {name}
 
@@ -143,6 +174,11 @@ export default class SelectableChannel extends Component {
             dangerouslySetInnerHTML={{ __html: title }}
           />
         </HoverableInner>
+        {visibility === 'private' &&
+          <LockContainer>
+            <LockIconWithBorder hidden={isHovered || isSelected} />
+          </LockContainer>
+        }
       </Container>
     );
   }
