@@ -90,7 +90,7 @@ export default class RoadmapPage extends PureComponent {
         <Box justifyContent="center" mt={7} mb={10} display="flex">
           <script src="https://app.giveforms.com/install-popup-button.js" type="text/javascript" defer />
           <link rel="stylesheet" href="https://app.giveforms.com/giveforms_embed.css" />
-          <ContributeButton className="giveforms-donation-button" href="https://arena.giveforms.com/are-na-supporter?amount=5">
+          <ContributeButton className="giveforms-donation-button" href="https://arena.giveforms.com/are-na-supporter">
             Contribute
           </ContributeButton>
         </Box>
