@@ -11,6 +11,7 @@ const COLORS = {
     editable: '#fdffdb',
     neutral: '#fdffdb', // alias editable
     investor: 'rgb(183, 158, 110)',
+    supporter: '#00a06d',
   },
   gray: {
     bold: '#333',
