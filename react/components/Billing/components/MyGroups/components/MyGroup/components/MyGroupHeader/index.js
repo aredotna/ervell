@@ -70,7 +70,7 @@ export default class MyGroupHeader extends PureComponent {
 
         <ButtonGroup f={1}>
           <GenericButton onClick={this.openEditModal}>
-            <Icons name="Pencil" mr={3} color="gray.medium" />
+            <Icons name="Pencil" size="1rem" mr={4} color="gray.medium" />
             Edit group
           </GenericButton>
 

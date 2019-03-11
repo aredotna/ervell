@@ -28,33 +28,33 @@ export default class SecondaryLinks extends Component {
         }
 
         <SmallLink href="/settings">
-          <Icons name="Cog" color="gray.medium" mr={4} />
+          <Icons name="Cog" size="1rem" color="gray.medium" mr={4} />
           Settings
         </SmallLink>
 
         <SmallLink href="/tools">
-          <Icons name="Tools" color="gray.medium" mr={4} />
+          <Icons name="Tools" size="1rem" color="gray.medium" mr={4} />
           More tools
         </SmallLink>
 
         <SmallLink href="http://help.are.na">
-          <Icons name="Question" color="gray.medium" mr={4} />
+          <Icons name="Question" size="1rem" color="gray.medium" mr={4} />
           Help / FAQs
         </SmallLink>
 
         <SmallLink href="/tools/send-invitation">
-          <Icons name="Follow" color="gray.medium" mr={4} />
+          <Icons name="Follow" size="1rem" color="gray.medium" mr={4} />
           Send an invite
         </SmallLink>
 
         <SmallLink href="/about">
-          <Icons name="Info" color="gray.medium" mr={4} />
+          <Icons name="Info" size="1rem" color="gray.medium" mr={4} />
           About
         </SmallLink>
 
         {!isPremium &&
           <SmallLink fontWeight="bold" color="state.premium" href="/settings/billing">
-            <Icons name="Medallion" color="state.premium" mr={4} />
+            <Icons name="Medallion" size="1rem" color="state.premium" mr={4} />
             Upgrade to Premium
           </SmallLink>
         }

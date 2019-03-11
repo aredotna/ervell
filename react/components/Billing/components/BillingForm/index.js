@@ -327,7 +327,7 @@ class BillingForm extends PureComponent {
                   (operations.length === 0)
                 )}
               >
-                <Icons name="CreditCard" mr={3} />
+                <Icons name="CreditCard" size="1rem" mr={4} />
 
                 {{
                   'basic:monthly': 'Activate',
