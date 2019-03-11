@@ -46,8 +46,6 @@ export default class RoadmapPage extends PureComponent {
   render() {
     const { roadmap } = this.props;
 
-    console.log('roadmap', roadmap);
-
     return (
       <Container pb={10}>
         <Headline color="gray.bold">
