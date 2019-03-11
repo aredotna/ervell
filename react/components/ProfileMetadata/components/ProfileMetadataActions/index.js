@@ -62,8 +62,8 @@ export default class ProfileMetadataActions extends Component {
               <React.Fragment>
                 {{
                   resting: 'Start private channel',
-                  working: 'Wait...',
-                  redirecting: 'Redirecting...',
+                  working: 'Creating...',
+                  redirecting: 'Creating...',
                   error: 'Error',
                 }[mode]}
               </React.Fragment>
@@ -79,13 +79,13 @@ export default class ProfileMetadataActions extends Component {
             {({ isFollowed }) => ({
               true: (
                 <React.Fragment>
-                  <Icons name="Unfollow" mr={3} color="gray.medium" />
+                  <Icons name="Unfollow" size="1rem" mr={4} color="gray.medium" />
                   Unfollow
                 </React.Fragment>
               ),
               false: (
                 <React.Fragment>
-                  <Icons name="Follow" mr={3} color="gray.medium" />
+                  <Icons name="Follow" size="1rem" mr={4} color="gray.medium" />
                   Follow
                 </React.Fragment>
               ),
@@ -95,21 +95,21 @@ export default class ProfileMetadataActions extends Component {
 
         {identifiable.__typename === 'User' && identifiable.can.manage &&
           <Button href="/settings">
-            <Icons name="Cog" mr={3} color="gray.medium" />
+            <Icons name="Cog" size="1rem" mr={4} color="gray.medium" />
             Settings
           </Button>
         }
 
         {identifiable.__typename === 'Group' && (identifiable.can.manage || identifiable.can.manage_users) &&
           <Button onClick={this.openManageGroupModal}>
-            <Icons name="Pencil" mr={3} color="gray.medium" />
+            <Icons name="Pencil" size="1rem" mr={4} color="gray.medium" />
             Edit group
           </Button>
         }
 
         {identifiable.__typename === 'Group' && (identifiable.can.manage && identifiable.is_upgradeable) &&
           <PremiumButton href="/settings/group_billing">
-            <Icons name="Medallion" mr={3} color="state.premium" />
+            <Icons name="Medallion" size="1rem" mr={4} color="state.premium" />
             Upgrade
           </PremiumButton>
         }
