@@ -12,6 +12,7 @@ import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import ButtonGroup from 'react/components/UI/ButtonGroup';
 import GenericButton from 'react/components/UI/GenericButton';
+import Icons from 'react/components/UI/Icons';
 import MemberAvatar from 'react/components/MemberAvatar';
 import Modal from 'react/components/UI/Modal/Portal';
 import ManageGroup from 'react/components/ManageGroup';
@@ -54,32 +55,32 @@ export default class MyGroupHeader extends PureComponent {
 
     return (
       <Header {...rest}>
-        <div>
-          <Text f={6} mb={4}>
-            <strong>
-              {group.name}
-            </strong>
+        <Box display="flex">
+          <MemberAvatar
+            member={group}
+            size={80}
+            isLinked={false}
+            circle
+          />
+
+          <Text f={6} ml={6} mb={4} fontWeight="bold">
+            {group.name}
           </Text>
+        </Box>
 
-          <ButtonGroup f={1}>
-            <GenericButton onClick={this.openEditModal}>
-              Edit group
+        <ButtonGroup f={1}>
+          <GenericButton onClick={this.openEditModal}>
+            <Icons name="Pencil" mr={3} color="gray.medium" />
+            Edit group
+          </GenericButton>
+
+          {group.users.some(({ can: { cancel_premium } }) => cancel_premium) &&
+            <GenericButton onClick={this.openCancelModal} color="state.alert">
+              Cancel upgraded members
             </GenericButton>
+          }
+        </ButtonGroup>
 
-            {group.users.some(({ can: { cancel_premium } }) => cancel_premium) &&
-              <GenericButton onClick={this.openCancelModal} color="state.alert">
-                Cancel upgraded members
-              </GenericButton>
-            }
-          </ButtonGroup>
-        </div>
-
-        <MemberAvatar
-          member={group}
-          size={80}
-          isLinked={false}
-          circle
-        />
 
         {mode === 'edit' &&
           <Modal onClose={this.closeModal}>
