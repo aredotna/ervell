@@ -62,8 +62,8 @@ export default class ProfileMetadataActions extends Component {
               <React.Fragment>
                 {{
                   resting: 'Start private channel',
-                  working: 'Wait...',
-                  redirecting: 'Redirecting...',
+                  working: 'Creating...',
+                  redirecting: 'Creating...',
                   error: 'Error',
                 }[mode]}
               </React.Fragment>
