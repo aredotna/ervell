@@ -78,11 +78,13 @@ export default class RoadmapPage extends PureComponent {
         </Paragraph>
 
         <Headline color="gray.bold">
-          Become a supporter
+          Become a monthly supporter
         </Headline>
 
         <Paragraph>
           Chip in a little extra to help Are.na develop new features and reach sustainability.
+          Monthly supporters will receive regular emails from the team,
+          plus a unique piece of Are.na merch.
         </Paragraph>
 
         <Box justifyContent="center" mt={7} mb={10} display="flex">
