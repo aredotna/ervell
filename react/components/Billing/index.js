@@ -13,7 +13,7 @@ import BillingForm from 'react/components/Billing/components/BillingForm';
 export default class Billing extends PureComponent {
   render() {
     return (
-      <Box width={['100%', '75%', '50%']} mx="auto" mt={6} mb={8} position="relative">
+      <Box width={['100%', '75%', '75%']} mx="auto" mt={6} mb={8} position="relative">
         <Query query={billingQuery}>
           {({ loading, error, data }) => {
             if (loading) {
@@ -31,13 +31,13 @@ export default class Billing extends PureComponent {
             const { me } = data;
 
             return (
-              <div>
+              <React.Fragment>
                 <MyHeader me={me} mb={7} />
 
                 <StripeContext>
                   <BillingForm me={me} />
                 </StripeContext>
-              </div>
+              </React.Fragment>
             );
           }}
         </Query>

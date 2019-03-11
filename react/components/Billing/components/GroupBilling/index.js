@@ -29,9 +29,7 @@ export default class GroupBilling extends PureComponent {
             const { me } = data;
 
             return (
-              <div>
-                <MyGroups me={me} />
-              </div>
+              <MyGroups me={me} />
             );
           }}
         </Query>

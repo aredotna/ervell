@@ -12,7 +12,7 @@ export default class UpcomingInvoice extends PureComponent {
   }
 
   render() {
-    const { customer: { upcoming_invoice } } = this.props;
+    const { customer: { upcoming_invoice }, ...rest } = this.props;
 
     if (
       // You don't have an invoice coming up
@@ -22,9 +22,9 @@ export default class UpcomingInvoice extends PureComponent {
     ) return null;
 
     return (
-      <Box>
-        <Text f={1}>
-          <div>
+      <Box {...rest}>
+        <Text f={2}>
+          <React.Fragment>
             Next payment due:{' '}
 
             {upcoming_invoice.subtotal === upcoming_invoice.total
@@ -40,7 +40,7 @@ export default class UpcomingInvoice extends PureComponent {
             {upcoming_invoice.next_payment_attempt_at &&
               ` on ${upcoming_invoice.next_payment_attempt_at}`
             }
-          </div>
+          </React.Fragment>
         </Text>
       </Box>
     );

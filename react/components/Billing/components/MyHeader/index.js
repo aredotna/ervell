@@ -12,7 +12,6 @@ import UpcomingInvoice from 'react/components/Billing/components/UpcomingInvoice
 const Header = styled(Box)`
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
 `;
 
 export default class MyHeader extends PureComponent {
@@ -25,22 +24,20 @@ export default class MyHeader extends PureComponent {
 
     return (
       <Header {...rest}>
-        <div>
-          <Text f={6} mb={4}>
-            <strong>
-              {me.name}
-            </strong>
-          </Text>
-
-          <UpcomingInvoice customer={me.customer} />
-        </div>
-
         <MemberAvatar
           member={me}
           size={80}
           isLinked={false}
           circle
         />
+
+        <Box ml={6}>
+          <Text f={6} mb={2} fontWeight="bold">
+            {me.name}
+          </Text>
+
+          <UpcomingInvoice customer={me.customer} />
+        </Box>
       </Header>
     );
   }
