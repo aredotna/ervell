@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Box from 'react/components/UI/Box';
 import constants from 'react/styles/constants';
 
-
 export const TableSection = styled(Box).attrs({
   mt: 8,
   mb: 10,
@@ -33,12 +32,16 @@ export const Column = styled(Box).attrs({})`
   border: 1px solid ${x => x.theme.colors.gray.light};
   width: 15em;
   margin-right: -1px;
+  color: ${x => x.theme.colors.gray.bold};
+`;
+
+export const LightColumn = styled(Column)`
+  color: ${x => x.theme.colors.gray.regular};
 `;
 
 export const Cell = styled(Box).attrs({
   p: 6,
 })`
-  color: ${x => x.theme.colors.gray.bold};
   line-height: ${x => x.theme.lineHeightsIndexed.base};
 
   ul {
@@ -48,6 +51,10 @@ export const Cell = styled(Box).attrs({
 
   li {
     padding: ${x => x.theme.space[3]} 0;
+  }
+
+  h1 {
+    margin: 0;
   }
 `;
 

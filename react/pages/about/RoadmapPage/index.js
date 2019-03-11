@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 import Box from 'react/components/UI/Box';
+import Text from 'react/components/UI/Text';
 
 import { Headline, Subheadline, Description } from 'react/pages/about/components/Text';
 import { GenericButtonLink as Button } from 'react/components/UI/GenericButton';
-import { Table, TableSection, Column, ColumnHeader, Cell } from 'react/pages/about/RoadmapPage/components/Table';
+import { Table, TableSection, Column, LightColumn, ColumnHeader, Cell } from 'react/pages/about/RoadmapPage/components/Table';
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -45,6 +46,10 @@ export default class RoadmapPage extends PureComponent {
 
   render() {
     const { roadmap } = this.props;
+    const dateOptions = {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+    };
+    const lastUpdated = new Date(roadmap.sys.updatedAt).toLocaleDateString('en-US', dateOptions);
 
     return (
       <Container pb={10}>
@@ -89,7 +94,8 @@ export default class RoadmapPage extends PureComponent {
         </Box>
 
         <TableSection>
-          <Subheadline pb={4} color="gray.bold">Product</Subheadline>
+          <Subheadline pb={1} mb={0} color="gray.bold">Product</Subheadline>
+          <Text f={3} pb={8}>Last updated: {lastUpdated}</Text>
           <Table>
             <Column>
               <ColumnHeader>
@@ -121,7 +127,7 @@ export default class RoadmapPage extends PureComponent {
                 }}
               />
             </Column>
-            <Column>
+            <LightColumn>
               <ColumnHeader>
                 Completed
               </ColumnHeader>
@@ -130,12 +136,13 @@ export default class RoadmapPage extends PureComponent {
                   __html: documentToHtmlString(roadmap.fields.productCompleted),
                 }}
               />
-            </Column>
+            </LightColumn>
           </Table>
         </TableSection>
 
         <TableSection>
-          <Subheadline pb={4} color="gray.bold">Business</Subheadline>
+          <Subheadline pb={1} mb={0} color="gray.bold">Business</Subheadline>
+          <Text f={3} pb={8}>Last updated: {lastUpdated}</Text>
           <Table>
             <Column>
               <ColumnHeader>
@@ -181,7 +188,8 @@ export default class RoadmapPage extends PureComponent {
         </TableSection>
 
         <TableSection>
-          <Subheadline pb={4} color="gray.bold">Current Stats</Subheadline>
+          <Subheadline pb={1} mb={0} color="gray.bold">Current Stats</Subheadline>
+          <Text f={3} pb={8}>Last updated: {lastUpdated}</Text>
           <Table>
             <Column>
               <ColumnHeader>
