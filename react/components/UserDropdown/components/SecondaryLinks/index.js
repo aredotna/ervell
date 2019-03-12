@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import SmallLink from 'react/components/UserDropdown/components/SecondaryLinks/components/SmallLink';
 import SignOutLink from 'react/components/UserDropdown/components/SecondaryLinks/components/SignOutLink';
 import Icons from 'react/components/UI/Icons';
 
-export default class SecondaryLinks extends Component {
+export default class SecondaryLinks extends PureComponent {
   static propTypes = {
     isPremium: PropTypes.bool,
     hasRecentlyJoined: PropTypes.bool,
@@ -20,10 +20,11 @@ export default class SecondaryLinks extends Component {
     const { isPremium, hasRecentlyJoined } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         {hasRecentlyJoined &&
           <SmallLink href="https://vimeo.com/318041294" target="_blank" fontWeight="bold">
-            <span role="img" aria-label="graduation cap">🎓</span> Video tutorial <span role="img" aria-label="graduation cap">🎓</span>
+            <Icons name="Cap" size="1rem" color="gray.medium" mr={4} />
+            Video tutorial
           </SmallLink>
         }
 
@@ -60,7 +61,7 @@ export default class SecondaryLinks extends Component {
         }
 
         <SignOutLink />
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -26,6 +26,7 @@ import Group from 'react/components/UI/Icons/Group.svg';
 import Logout from 'react/components/UI/Icons/Logout.svg';
 import Medallion from 'react/components/UI/Icons/Medallion.svg';
 import Tools from 'react/components/UI/Icons/Tools.svg';
+import Cap from 'react/components/UI/Icons/Cap.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -49,6 +50,7 @@ export const COMPONENTS = {
   Logout: <Logout />,
   Medallion: <Medallion />,
   Tools: <Tools />,
+  Cap: <Cap />,
 };
 
 export const ICON_NAMES = Object.keys(COMPONENTS);
