@@ -31,7 +31,7 @@ const ChannelVisibilityPulldownOption = ({
         <Text color={`channel.${visibility}`} mb={2}>
           {label}
           {visibility === 'private' &&
-            <LockIconWithBorder display="inline-flex" ml={2} />
+            <LockIconWithBorder ml={3} />
           }
         </Text>
 

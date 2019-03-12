@@ -19,12 +19,7 @@ const Avatar = styled(MemberAvatar)`
   ${x => x.mode === 'hover' && 'opacity: 0.7;'};
 `;
 
-const GroupName = styled(Text).attrs({
-  f: 2,
-  pl: 5,
-  pr: 3,
-  fontWeight: 'bold',
-})`
+const GroupName = styled(Text)`
   ${x => x.mode === 'hover' && `
     color: ${x.theme.colors.black};
   `}
@@ -67,12 +62,12 @@ export default class MyGroupLink extends Component {
           <Avatar member={group} size={20} isLinked={false} circle mode={mode} />
         </Box>
 
-        <GroupName mode={mode}>
+        <GroupName mode={mode} f={2} pl={5} fontWeight="bold">
           {group.name}
         </GroupName>
 
         {group.visibility === 'private' &&
-          <LockIconWithBorder />
+          <LockIconWithBorder ml={3} />
         }
       </Container>
     );

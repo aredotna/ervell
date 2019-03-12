@@ -77,7 +77,8 @@ storiesOf('Cell', module)
                 <Cell.Konnectable
                   konnectable={{
                     ...data.channel,
-                    truncatedTitle: 'things i found google image searching a religious manuscript generated from L Ron...',
+                    visibility: 'private',
+                    truncatedTitle: 'Some title here',
                   }}
                 />
                 <Cell.Konnectable

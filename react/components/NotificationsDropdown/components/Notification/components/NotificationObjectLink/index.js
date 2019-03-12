@@ -26,8 +26,11 @@ const NotificationObjectLink = ({
     >
       <a href={href}>
         <span dangerouslySetInnerHTML={{ __html: truncate(label, 40) }} />
+
         {visibility === 'private' &&
-          <LockIconWithBorder display="inline-flex" ml={2} />
+          <React.Fragment>
+            <LockIconWithBorder ml={3} />
+          </React.Fragment>
         }
       </a>
     </Text>

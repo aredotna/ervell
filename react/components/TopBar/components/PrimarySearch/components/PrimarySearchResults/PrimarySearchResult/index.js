@@ -109,6 +109,10 @@ export default class PrimarySearchResult extends PureComponent {
             <Label color={result.visibility ? `channel.${result.visibility}` : 'gray.base'}>
               {unescape(result.label)}
 
+              {result.visibility === 'private' &&
+                <LockIconWithBorder ml={3} />
+              }
+
               {result.__typename === 'Group' &&
                 <GroupBadge
                   f={0}
@@ -117,9 +121,6 @@ export default class PrimarySearchResult extends PureComponent {
               }
             </Label>
           </PathContainer>
-          {result.visibility === 'private' &&
-            <LockIconWithBorder />
-          }
         </Container>
       );
     }

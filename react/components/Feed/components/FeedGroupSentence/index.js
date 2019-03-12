@@ -102,12 +102,13 @@ export default class FeedGroupSentence extends PureComponent {
         </Sentence>
 
         <Submetadata>
-          {is_private &&
-            <LockIconWithBorder mr={3} />
-          }
           <RelativeTime>
             {created_at}
           </RelativeTime>
+
+          {is_private &&
+            <LockIconWithBorder ml={3} />
+          }
         </Submetadata>
       </Container>
     );
