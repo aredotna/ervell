@@ -7,7 +7,7 @@ import channelBreadcrumbFragment from 'react/components/ChannelMetadata/componen
 import { truncate } from 'react/components/UI/Truncate';
 import ColoredChannelLink from 'react/components/UI/ColoredChannelLink';
 import StickyBreadcrumbPath from 'react/components/UI/StickyBreadcrumbPath';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const CollaboratorCount = styled.span`
   font-weight: normal;
@@ -48,7 +48,7 @@ export default class ChannelBreadcrumb extends Component {
               }[mode]}
             </ColoredChannelLink>
             {channel.visibility === 'private' &&
-              <LockIconWithBorder ml={3} />
+              <BorderedLock ml={3} />
             }
           </StickyBreadcrumbPath.Crumb>,
         ]}

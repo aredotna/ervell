@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Text from 'react/components/UI/Text';
 import { truncate } from 'react/components/UI/Truncate';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const NotificationObjectLink = ({
   __typename, label, href, visibility, is_me, ...rest
@@ -26,8 +26,11 @@ const NotificationObjectLink = ({
     >
       <a href={href}>
         <span dangerouslySetInnerHTML={{ __html: truncate(label, 40) }} />
+
         {visibility === 'private' &&
-          <LockIconWithBorder display="inline-flex" ml={2} />
+          <React.Fragment>
+            <BorderedLock ml={3} />
+          </React.Fragment>
         }
       </a>
     </Text>

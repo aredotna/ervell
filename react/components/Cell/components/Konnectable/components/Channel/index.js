@@ -11,7 +11,7 @@ import constants from 'react/styles/constants';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import Badge from 'react/components/UI/Badge';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -23,7 +23,10 @@ const Container = styled.div`
   height: 100%;
   border: 2px solid;
   border-radius: ${constants.radii.subtle};
-  ${channelVisibilityForegroundColor}
+
+  &, ${Text} {
+    ${channelVisibilityForegroundColor}
+  }
 `;
 
 export default class Channel extends PureComponent {
@@ -43,9 +46,10 @@ export default class Channel extends PureComponent {
           breakWord
           textAlign="center"
         >
-          <span style={{ verticalAlign: 'middle' }} dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }} />
+          <span dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }} />
+
           {channel.visibility === 'private' &&
-            <LockIconWithBorder ml={3} mb="3px" display="inline-flex" />
+            <BorderedLock ml={3} position="relative" top="-0.125rem" />
           }
         </Text>
 
@@ -53,7 +57,12 @@ export default class Channel extends PureComponent {
           by {channel.owner.name}
 
           {channel.owner.__typename === 'Group' &&
-            <Badge f={0} ml={4} color={`channel.${channel.visibility.toLowerCase()}`} icon={{ private: 'Lock' }[channel.owner.visibility]}>
+            <Badge
+              f={0}
+              ml={4}
+              color={`channel.${channel.visibility.toLowerCase()}`}
+              icon={{ private: 'Lock' }[channel.owner.visibility]}
+            >
               Group
             </Badge>
           }

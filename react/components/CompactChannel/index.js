@@ -13,20 +13,7 @@ import { mixin as boxMixin } from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import GroupBadge from 'react/components/UI/GroupBadge';
-
-const Container = styled.a.attrs({
-  px: 6,
-  py: 6,
-  border: '2px solid',
-})`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  ${boxMixin}
-  ${channelVisibilityForegroundColor}
-  text-decoration: none;
-  break-inside: avoid;
-`;
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const Primary = styled.div`
   ${overflowEllipsis}
@@ -45,6 +32,24 @@ const Label = styled(Text).attrs({
       display: none;
     `}
   `}
+`;
+
+const Container = styled.a.attrs({
+  px: 6,
+  py: 6,
+  border: '2px solid',
+})`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  break-inside: avoid;
+  ${boxMixin}
+  ${channelVisibilityForegroundColor}
+
+  ${Label} {
+    ${channelVisibilityForegroundColor}
+  }
 `;
 
 export const EmptyCompactChannel = ({ children, ...props }) => (
@@ -78,6 +83,10 @@ export default class CompactChannel extends PureComponent {
             f={4}
             dangerouslySetInnerHTML={{ __html: channel.title }}
           />
+
+          {channel.visibility === 'private' &&
+            <BorderedLock mr={3} />
+          }
 
           <Label f={1} ml={6} secondary>
             <Count label="block" amount={channel.counts.contents} />
