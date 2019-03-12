@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import FeedObjectLink from 'react/components/Feed/components/FeedGroupSentence/components/FeedObjectLink/index';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 import feedGroupSentenceFragment from 'react/components/Feed/components/FeedGroupSentence/fragments/sentence';
 
@@ -107,7 +107,7 @@ export default class FeedGroupSentence extends PureComponent {
           </RelativeTime>
 
           {is_private &&
-            <LockIconWithBorder ml={3} />
+            <BorderedLock ml={3} />
           }
         </Submetadata>
       </Container>

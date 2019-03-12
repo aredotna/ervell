@@ -11,7 +11,7 @@ import constants from 'react/styles/constants';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import Badge from 'react/components/UI/Badge';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -49,7 +49,7 @@ export default class Channel extends PureComponent {
           <span dangerouslySetInnerHTML={{ __html: channel.truncatedTitle }} />
 
           {channel.visibility === 'private' &&
-            <LockIconWithBorder ml={3} position="relative" top="-0.125rem" />
+            <BorderedLock ml={3} position="relative" top="-0.125rem" />
           }
         </Text>
 

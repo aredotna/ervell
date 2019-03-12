@@ -22,10 +22,10 @@ const Container = styled(Box).attrs({
   line-height: 0;
 `;
 
-const LockIconWithBorder = ({ ...rest }) => (
+const BorderedLock = ({ ...rest }) => (
   <Container {...rest} >
     <Lock />
   </Container>
 );
 
-export default LockIconWithBorder;
+export default BorderedLock;

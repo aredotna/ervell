@@ -7,7 +7,7 @@ import myGroupLinkFragment from 'react/components/UserDropdown/components/MyGrou
 import Box, { mixin as boxMixin } from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import MemberAvatar from 'react/components/MemberAvatar';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const Container = styled.a`
   ${boxMixin}
@@ -67,7 +67,7 @@ export default class MyGroupLink extends Component {
         </GroupName>
 
         {group.visibility === 'private' &&
-          <LockIconWithBorder ml={3} />
+          <BorderedLock ml={3} />
         }
       </Container>
     );

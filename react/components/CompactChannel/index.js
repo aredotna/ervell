@@ -13,7 +13,7 @@ import { mixin as boxMixin } from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Count from 'react/components/UI/Count';
 import GroupBadge from 'react/components/UI/GroupBadge';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const Primary = styled.div`
   ${overflowEllipsis}
@@ -85,7 +85,7 @@ export default class CompactChannel extends PureComponent {
           />
 
           {channel.visibility === 'private' &&
-            <LockIconWithBorder mr={3} />
+            <BorderedLock mr={3} />
           }
 
           <Label f={1} ml={6} secondary>

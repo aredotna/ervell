@@ -12,7 +12,7 @@ import { inputPadding } from 'react/components/UI/Inputs';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 import Badge from 'react/components/UI/Badge';
 
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const Container = styled.div.attrs({
   role: 'button',
@@ -176,7 +176,7 @@ export default class SelectableChannel extends Component {
         </HoverableInner>
         {visibility === 'private' &&
           <LockContainer>
-            <LockIconWithBorder hidden={isHovered || isSelected} />
+            <BorderedLock hidden={isHovered || isSelected} />
           </LockContainer>
         }
       </Container>

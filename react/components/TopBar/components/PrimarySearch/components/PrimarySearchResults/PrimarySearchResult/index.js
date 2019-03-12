@@ -8,7 +8,7 @@ import primarySearchResultFragment from 'react/components/TopBar/components/Prim
 import Text from 'react/components/UI/Text';
 import GroupBadge from 'react/components/UI/GroupBadge';
 import { ICON_OFFSET } from 'react/components/UI/SearchInput';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 import { overflowEllipsis } from 'react/styles/mixins';
 import { mixin as boxMixin } from 'react/components/UI/Box';
@@ -110,7 +110,7 @@ export default class PrimarySearchResult extends PureComponent {
               {unescape(result.label)}
 
               {result.visibility === 'private' &&
-                <LockIconWithBorder ml={3} />
+                <BorderedLock ml={3} />
               }
 
               {result.__typename === 'Group' &&

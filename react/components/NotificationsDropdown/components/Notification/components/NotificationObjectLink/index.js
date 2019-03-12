@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Text from 'react/components/UI/Text';
 import { truncate } from 'react/components/UI/Truncate';
-import LockIconWithBorder from 'react/components/UI/LockIconWithBorder';
+import BorderedLock from 'react/components/UI/BorderedLock';
 
 const NotificationObjectLink = ({
   __typename, label, href, visibility, is_me, ...rest
@@ -29,7 +29,7 @@ const NotificationObjectLink = ({
 
         {visibility === 'private' &&
           <React.Fragment>
-            <LockIconWithBorder ml={3} />
+            <BorderedLock ml={3} />
           </React.Fragment>
         }
       </a>
