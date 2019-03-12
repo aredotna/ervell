@@ -69,13 +69,11 @@ export const channelVisibilityForegroundColor = css`
     const color = theme.colors.channel[props.visibility] || theme.colors.gray.base;
 
     return `
-      &, & * {
-        color: ${color} !important;
-        border-color: ${props.mode === 'hover' ? `border-color: ${color};` : blend(color, '#bbb', 'screen')};
+      color: ${color};
+      border-color: ${props.mode === 'hover' ? `border-color: ${color};` : blend(color, '#bbb', 'screen')};
 
-        &:hover {
-          border-color: ${color};
-        }
+      &:hover {
+        border-color: ${color};
       }
     `;
   }}

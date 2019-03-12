@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { translucentGray } from 'react/styles/functions';
-
 import Icon from 'react/components/UI/Icons';
 import Box from 'react/components/UI/Box';
 
@@ -10,21 +8,24 @@ import Box from 'react/components/UI/Box';
 const Lock = styled(Icon).attrs({
   name: 'Lock',
   color: 'gray.medium',
-  size: '10px',
+  size: '0.625rem',
 })`
 `;
 
-const Container = styled(Box)`
-  border: 1px solid ${translucentGray('regular')} !important;
+const Container = styled(Box).attrs({
+  border: '1px solid',
+  borderColor: 'gray.regular',
+})`
+  display: inline-flex;
   border-radius: 0.25rem;
-  padding: 3px;
+  padding: 0.1875rem;
   line-height: 0;
 `;
 
-const LockWithBorder = ({ ...rest }) => (
+const BorderedLock = ({ ...rest }) => (
   <Container {...rest} >
     <Lock />
   </Container>
 );
 
-export default LockWithBorder;
+export default BorderedLock;

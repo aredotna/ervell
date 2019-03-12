@@ -14,18 +14,14 @@ export default class MyGroups extends PureComponent {
   render() {
     const { me, me: { groups } } = this.props;
 
-    return (
-      <div>
-        {groups.map(group => (
-          <StripeContext key={`${group.__typename}_${group.id}`}>
-            <MyGroup
-              me={me}
-              group={group}
-              mb={10}
-            />
-          </StripeContext>
-        ))}
-      </div>
-    );
+    return groups.map(group => (
+      <StripeContext key={`${group.__typename}_${group.id}`}>
+        <MyGroup
+          me={me}
+          group={group}
+          mb={10}
+        />
+      </StripeContext>
+    ));
   }
 }

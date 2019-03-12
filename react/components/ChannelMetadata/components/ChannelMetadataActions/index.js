@@ -37,13 +37,13 @@ export default class ChannelMetadataActions extends Component {
             {({ isFollowed }) => ({
               true: (
                 <React.Fragment>
-                  <Icons name="Unfollow" mr={3} color="gray.medium" />
+                  <Icons name="Unfollow" size="1rem" mr={4} color="gray.medium" />
                   Unfollow
                 </React.Fragment>
               ),
               false: (
                 <React.Fragment>
-                  <Icons name="Follow" mr={3} color="gray.medium" />
+                  <Icons name="Follow" size="1rem" mr={4} color="gray.medium" />
                   Follow
                 </React.Fragment>
               ),
@@ -57,7 +57,7 @@ export default class ChannelMetadataActions extends Component {
 
         {(can.update || can.destroy) &&
           <Button onClick={this.openEditChannel}>
-            <Icons name="Pencil" mr={3} color="gray.medium" />
+            <Icons name="Pencil" size="1rem" mr={4} color="gray.medium" />
             Edit channel
           </Button>
         }

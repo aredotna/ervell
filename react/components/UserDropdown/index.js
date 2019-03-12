@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
 
@@ -36,7 +36,7 @@ const Section = styled(Box).attrs({
   }
 `;
 
-export default class UserDropdown extends Component {
+export default class UserDropdown extends PureComponent {
   render() {
     return (
       <Query query={userDropdownQuery}>

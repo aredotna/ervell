@@ -20,7 +20,7 @@ import Alert from 'react/components/UI/Alert';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import GenericButton from 'react/components/UI/GenericButton';
-import { LabelledInput, Label } from 'react/components/UI/Inputs';
+import Icons from 'react/components/UI/Icons';
 import PlanSelection from 'react/components/Billing/components/PlanSelection';
 import CouponCode from 'react/components/Billing/components/CouponCode';
 import CreditCard from 'react/components/Billing/components/CreditCard';
@@ -242,114 +242,105 @@ class BillingForm extends PureComponent {
         }
 
         <form onSubmit={this.handleSubmit}>
-          {customer.is_canceled &&
-            <CancellationNotice
-              my={6}
-              customer={customer}
-              onReenable={this.handleReenable}
-            />
-          }
+          <Box display="flex" flexDirection={['column', 'column', 'row']}>
+            <Box flex="1" borderBottom="1px solid" borderColor="gray.semiLight" pb={6} mr={[0, 0, 6]}>
+              <Box borderBottom="1px solid" borderColor="gray.semiLight" pb={6} mb={6}>
+                <Text f={4} fontWeight="bold">
+                  Plan type
+                </Text>
+              </Box>
 
-          <PlanSelection
-            key={customer.plan.id + customer.is_canceled}
-            me={me}
-            onSelect={this.handlePlan}
-          />
+              {customer.is_canceled &&
+                <CancellationNotice
+                  my={6}
+                  customer={customer}
+                  onReenable={this.handleReenable}
+                />
+              }
 
-          {customer.is_beneficiary &&
-            <LabelledInput>
-              <Label>
-                Billed to
-              </Label>
+              <PlanSelection
+                key={customer.plan.id + customer.is_canceled}
+                me={me}
+                onSelect={this.handlePlan}
+              />
 
-              <div>
-                <Box bg="gray.hint" p={6} mb={6} borderRadius="0.25em">
-                  <Text>
-                    {customer.patron.name} ({customer.patron.hidden_email})
+              {customer.is_beneficiary &&
+                <React.Fragment>
+                  <Box bg="gray.hint" p={6} mb={6} borderRadius="0.25em">
+                    <Text>
+                      {customer.patron.name} ({customer.patron.hidden_email})
+                    </Text>
+                  </Box>
+
+                  <Text f={1} mx={6}>
+                    {customer.patron.name} is upgrading you to {customer.plan.term} Premium
+                    <br />
+                    {customer.is_canceled
+                      ? `Subscription ends on ${customer.current_period_end_at}`
+                      : `Automatically renews on ${customer.current_period_end_at}`
+                    }
+                  </Text>
+                </React.Fragment>
+              }
+            </Box>
+
+            {plan_id !== 'basic' && !customer.is_lifetime && !customer.is_beneficiary &&
+              <Box flex="1" ml={[0, 0, 6]}>
+                <Box borderBottom="1px solid" borderColor="gray.semiLight" pb={6} mb={6} mt={[8, 8, 0]}>
+                  <Text f={4} fontWeight="bold">
+                    Billing
                   </Text>
                 </Box>
 
-                <Text f={1} mx={6}>
-                  {customer.patron.name} is upgrading you to {customer.plan.term} Premium
-                  <br />
-                  {customer.is_canceled
-                    ? `Subscription ends on ${customer.current_period_end_at}`
-                    : `Automatically renews on ${customer.current_period_end_at}`
-                  }
-                </Text>
-              </div>
-            </LabelledInput>
-          }
+                <CreditCard mb={8} customer={customer} />
 
-          {plan_id !== 'basic' && !customer.is_lifetime && !customer.is_beneficiary &&
-            <div>
-              <LabelledInput>
-                <Label>
-                  {customer.is_canceled
-                    ? 'Current card'
-                    : 'Billed to'
-                  }
-                </Label>
-
-                <CreditCard customer={customer} />
-              </LabelledInput>
-
-              {!customer.is_canceled &&
-                <LabelledInput>
-                  <Label>
-                    Coupon
-                  </Label>
-
+                {!customer.is_canceled &&
                   <CouponCode
+                    mb={6}
                     key={`coupon_${mode}`}
                     onDebouncedCode={this.handleCouponCode}
                     code={coupon_code}
                   />
-                </LabelledInput>
-              }
+                }
 
-              {((coupon_code !== '') || isPlanChanged) &&
-                <LabelledInput>
-                  <Label />
-
+                {((coupon_code !== '') || isPlanChanged) &&
                   <PlanChanges
                     entity={customer}
                     plan_id={plan_id}
                     coupon_code={coupon_code}
                   />
-                </LabelledInput>
-              }
-            </div>
-          }
+                }
+              </Box>
+            }
+          </Box>
 
           {(!customer.is_canceled && !customer.is_lifetime && !customer.is_beneficiary && fromPlanToPlan !== 'basic:basic') &&
-            <LabelledInput>
-              <Label />
+            <Box width="100%" textAlign="center" mt={8}>
+              <GenericButton
+                display="block"
+                f={4}
+                onClick={this.handleSubmit}
+                disabled={(
+                  (!customer.default_credit_card) ||
+                  (operations.length === 0)
+                )}
+              >
+                <Icons name="CreditCard" size="1rem" mr={4} />
 
-              <div>
-                <GenericButton
-                  onClick={this.handleSubmit}
-                  disabled={(
-                    (!customer.default_credit_card) ||
-                    (operations.length === 0)
-                  )}
-                >
+                {{
+                  'basic:monthly': 'Activate',
+                  'basic:yearly': 'Activate',
+                  'monthly:yearly': 'Save changes',
+                  'yearly:monthly': 'Save changes',
+                  'monthly:basic': 'Cancel Premium',
+                  'yearly:basic': 'Cancel Premium',
+                }[fromPlanToPlan] || 'Save changes'}
+              </GenericButton>
 
-                  {{
-                    'basic:monthly': 'Activate',
-                    'basic:yearly': 'Activate',
-                    'monthly:yearly': 'Save changes',
-                    'yearly:monthly': 'Save changes',
-                    'monthly:basic': 'Cancel Premium',
-                    'yearly:basic': 'Cancel Premium',
-                  }[fromPlanToPlan] || 'Save changes'}
-                </GenericButton>
-
-                {plan_id !== 'basic' && customer.plan.id !== 'basic' &&
-                  <CancelPremium my={6} onCancel={this.handleCancelPremium} />
-                }
-              </div>
-            </LabelledInput>
+              {plan_id !== 'basic' && customer.plan.id !== 'basic' &&
+                <CancelPremium my={6} onCancel={this.handleCancelPremium} />
+              }
+            </Box>
           }
         </form>
       </Box>

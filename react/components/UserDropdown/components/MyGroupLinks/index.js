@@ -147,8 +147,8 @@ class MyGroupLinks extends Component {
               </Container>
             }
 
-            <GenericButton display="block" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
-              <Icons name="Group" color="gray.medium" mr={4} />
+            <GenericButton display="flex" alignItems="center" justifyContent="center" f={1} mt={5} mb={6} mx="1rem" onClick={this.openCreateGroup}>
+              <Icons name="Group" size="1rem" color="gray.medium" mr={4} />
               Create group
             </GenericButton>
           </React.Fragment>

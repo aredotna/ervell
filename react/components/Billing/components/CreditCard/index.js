@@ -40,15 +40,15 @@ export default class CreditCard extends PureComponent {
       <Box {...rest}>
         {customer.default_credit_card
           ? (
-            <div>
+            <React.Fragment>
               <DefaultCreditCard default_credit_card={customer.default_credit_card} />
 
               <Text pt={5} f={2} fontWeight="bold">
                 <a onClick={this.openModal('manage')} role="button" tabIndex={0}>
-                  Manage payment information
+                  Update payment method
                 </a>
               </Text>
-            </div>
+            </React.Fragment>
           )
           : (
             <GenericButton pt={5} f={2} onClick={this.openModal('new')}>

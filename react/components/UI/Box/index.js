@@ -18,6 +18,10 @@ import {
   textAlign,
   flex,
   style,
+  top,
+  right,
+  bottom,
+  left,
 } from 'styled-system';
 
 import { neutralMargins, overflowScrolling } from 'react/styles/mixins';
@@ -47,6 +51,10 @@ export const mixin = css`
   ${bgColor}
   ${textAlign}
   ${neutralMargins}
+  ${top}
+  ${right}
+  ${bottom}
+  ${left}
   ${props => props.overflowScrolling && overflowScrolling}
 `;
 
