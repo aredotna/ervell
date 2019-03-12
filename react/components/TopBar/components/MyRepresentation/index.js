@@ -63,7 +63,9 @@ export default class MyRepresentation extends PureComponent {
             alignToX="right"
             anchorY="top"
             anchorX="right"
+            offsetY={0}
             offsetX={10}
+            marginY={10}
           >
             <UserDropdown />
           </Overlay>
