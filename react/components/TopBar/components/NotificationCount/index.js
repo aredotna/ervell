@@ -94,8 +94,9 @@ class NotificationCount extends PureComponent {
             alignToX="right"
             anchorY="top"
             anchorX="right"
-            offsetY={10}
+            offsetY={0}
             offsetX={10}
+            marginY={10}
           >
             <NotificationsDropdown onCompleted={this.markAsRead} />
           </Overlay>
