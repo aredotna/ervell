@@ -11,6 +11,8 @@ import {
   textAlign,
   width,
   themeGet,
+  alignItems,
+  justifyContent,
 } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
@@ -33,10 +35,13 @@ export const mixin = css`
   ${fontWeight}
   ${fontStyle}
   ${textAlign}
+  ${alignItems}
+  ${justifyContent}
   ${props => props.neutralMarginsY && neutralMarginsY}
   ${props => props.hyphenate && hyphenate}
   ${props => props.breakWord && breakWord}
   ${props => props.textTransform && `text-transform: ${props.textTransform};`}
+  ${props => props.verticalAlign && `vertical-align: ${props.verticalAlign};`}
 
   a {
     color: inherit;
