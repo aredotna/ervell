@@ -1,44 +1,33 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
 
-import blockLightboxCommentsQuery from 'react/components/BlockLightbox/components/BlockLightboxComments/queries/blockLightboxComments';
+import blockLightboxCommentsFragment from 'react/components/BlockLightbox/components/BlockLightboxComments/fragments/blockLightboxComments';
 
 import Box from 'react/components/UI/Box';
-import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlockLightboxComment from 'react/components/BlockLightbox/components/BlockLightboxComment';
 import BlockLightboxAddComment from 'react/components/BlockLightbox/components/BlockLightboxAddComment';
 
 export default class BlockLightboxComments extends PureComponent {
   static propTypes = {
-    id: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    block: propType(blockLightboxCommentsFragment).isRequired,
   }
 
   render() {
-    const { id, ...rest } = this.props;
+    const { block, loading, ...rest } = this.props;
 
     return (
       <Box {...rest}>
-        <Query query={blockLightboxCommentsQuery} variables={{ id }}>
-          {({ loading, error, data }) => {
-            if (loading) {
-              return (
-                <LoadingIndicator f={4} />
-              );
-            }
+        {!loading && block.comments.map(comment => (
+          <BlockLightboxComment
+            mb={6}
+            key={comment.id}
+            comment={comment}
+          />))
+        }
 
-            if (error) {
-              return error.message;
-            }
-
-            const { block: { comments } } = data;
-
-            return comments.map(comment =>
-              <BlockLightboxComment mb={6} key={comment.id} comment={comment} />);
-          }}
-        </Query>
-
-        <BlockLightboxAddComment id={id} />
+        <BlockLightboxAddComment id={block.id} />
       </Box>
     );
   }

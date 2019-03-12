@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
+import { Query } from 'react-apollo';
 
+import blockLightboxFoldQuery from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/queries/blockLightboxFold';
 import blockLightboxMetadataPaneFragment from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/fragments/blockLightboxMetadataPane';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
 import BlockLightboxConnections from 'react/components/BlockLightbox/components/BlockLightboxConnections';
@@ -21,8 +24,9 @@ export default class BlockLightboxMetadataPane extends PureComponent {
     return (
       <Box
         flex="1"
-        py={4}
         px={7}
+        pt={4}
+        pb={8}
         height="100%"
         overflowScrolling
       >
@@ -77,17 +81,41 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           <BlockLightboxActions block={block} />
         </Text>
 
-        <Header mt={8}>
-          Connections
-        </Header>
+        <Query query={blockLightboxFoldQuery} variables={{ id: block.id }} ssr={false}>
+          {({ loading, error, data }) => {
+            if (error) {
+              return (
+                <ErrorAlert>
+                  {error.message}
+                </ErrorAlert>
+              );
+            }
 
-        <BlockLightboxConnections id={block.id} mt={4} />
+            return (
+              <React.Fragment>
+                <Header mt={8}>
+                  Connections
+                </Header>
 
-        <Header mt={8}>
-          Comments
-        </Header>
+                <BlockLightboxConnections
+                  block={{ ...block, ...data.block }}
+                  loading={loading}
+                  mt={4}
+                />
 
-        <BlockLightboxComments id={block.id} mt={4} />
+                <Header mt={8}>
+                  Comments
+                </Header>
+
+                <BlockLightboxComments
+                  block={{ ...block, ...data.block }}
+                  loading={loading}
+                  mt={4}
+                />
+              </React.Fragment>
+            );
+          }}
+        </Query>
       </Box>
     );
   }
