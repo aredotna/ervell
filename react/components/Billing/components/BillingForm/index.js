@@ -284,36 +284,34 @@ class BillingForm extends PureComponent {
               }
             </Box>
 
-            <Box flex="1" ml={[0, 0, 6]}>
-              {plan_id !== 'basic' && !customer.is_lifetime && !customer.is_beneficiary &&
-                <React.Fragment>
-                  <Box borderBottom="1px solid" borderColor="gray.semiLight" pb={6} mb={6} mt={[8, 8, 0]}>
-                    <Text f={4} fontWeight="bold">
-                      Billing
-                    </Text>
-                  </Box>
+            {plan_id !== 'basic' && !customer.is_lifetime && !customer.is_beneficiary &&
+              <Box flex="1" ml={[0, 0, 6]}>
+                <Box borderBottom="1px solid" borderColor="gray.semiLight" pb={6} mb={6} mt={[8, 8, 0]}>
+                  <Text f={4} fontWeight="bold">
+                    Billing
+                  </Text>
+                </Box>
 
-                  <CreditCard mb={8} customer={customer} />
+                <CreditCard mb={8} customer={customer} />
 
-                  {!customer.is_canceled &&
-                    <CouponCode
-                      mb={6}
-                      key={`coupon_${mode}`}
-                      onDebouncedCode={this.handleCouponCode}
-                      code={coupon_code}
-                    />
-                  }
+                {!customer.is_canceled &&
+                  <CouponCode
+                    mb={6}
+                    key={`coupon_${mode}`}
+                    onDebouncedCode={this.handleCouponCode}
+                    code={coupon_code}
+                  />
+                }
 
-                  {((coupon_code !== '') || isPlanChanged) &&
-                    <PlanChanges
-                      entity={customer}
-                      plan_id={plan_id}
-                      coupon_code={coupon_code}
-                    />
-                  }
-                </React.Fragment>
-              }
-            </Box>
+                {((coupon_code !== '') || isPlanChanged) &&
+                  <PlanChanges
+                    entity={customer}
+                    plan_id={plan_id}
+                    coupon_code={coupon_code}
+                  />
+                }
+              </Box>
+            }
           </Box>
 
           {(!customer.is_canceled && !customer.is_lifetime && !customer.is_beneficiary && fromPlanToPlan !== 'basic:basic') &&
