@@ -11,8 +11,22 @@ import TickerTapeHover from 'react/components/UI/TickerTapeHover';
 import { inputPadding } from 'react/components/UI/Inputs';
 import { baseMixin as baseTextMixin } from 'react/components/UI/Text';
 import Badge from 'react/components/UI/Badge';
-
+import Box from 'react/components/UI/Box';
 import BorderedLock from 'react/components/UI/BorderedLock';
+
+const Lock = styled(Box).attrs({
+  pr: 3,
+  pl: 6,
+})`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: linear-gradient(to left,
+    ${props => props.theme.colors.gray.hint} 90%,
+    ${props => props.theme.colors.utility.transparent});
+  z-index: 1;
+`;
 
 const Container = styled.div.attrs({
   role: 'button',
@@ -35,6 +49,10 @@ const Container = styled.div.attrs({
   &:hover {
     z-index: 1;
     border: 1px solid ${props => props.theme.colors.gray.semiBold};
+
+    ${Lock} {
+      display: none;
+    }
   }
 
   &:before {
@@ -81,21 +99,6 @@ const HoverableInner = styled(TickerTapeHover).attrs({
   padding: ${inputPadding}; // TODO
 `;
 
-const LockContainer = styled.div`
-  background: linear-gradient(to left, ${props => props.theme.colors.gray.hint} 90%, ${props => props.theme.colors.utility.transparent});
-  position: absolute;
-  top: 50%;
-  right: 0;
-  padding: 0 0.5em;
-  text-align: center;
-  transform: translateY(-50%);
-  z-index: 1;
-
-  ${props => props.hidden && `
-    display: none;
-  `};
-`;
-
 const Separator = styled.div`
   display: inline-block;
   width: 1px;
@@ -122,15 +125,6 @@ export default class SelectableChannel extends Component {
 
   state = {
     isSelected: false,
-    isHovered: false,
-  }
-
-  handleMouseEnter = () => {
-    this.setState({ isHovered: true });
-  }
-
-  handleMouseLeave = () => {
-    this.setState({ isHovered: false });
   }
 
   toggleSelection = () => {
@@ -144,7 +138,7 @@ export default class SelectableChannel extends Component {
   }
 
   render() {
-    const { isSelected, isHovered } = this.state;
+    const { isSelected } = this.state;
     const {
       channel: {
         title, visibility, owner, owner: { name },
@@ -174,10 +168,11 @@ export default class SelectableChannel extends Component {
             dangerouslySetInnerHTML={{ __html: title }}
           />
         </HoverableInner>
+
         {visibility === 'private' &&
-          <LockContainer>
-            <BorderedLock hidden={isHovered || isSelected} />
-          </LockContainer>
+          <Lock>
+            <BorderedLock />
+          </Lock>
         }
       </Container>
     );
