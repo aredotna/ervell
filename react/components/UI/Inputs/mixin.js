@@ -49,6 +49,7 @@ export const defaultMixin = css`
   ::placeholder {
     ${preset(color, { color: 'black' })}
     opacity: 0.5;
+    font-family: inherit;
   }
 
   ${props => props.focus && focusMixin}
