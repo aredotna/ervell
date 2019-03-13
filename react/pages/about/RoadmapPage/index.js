@@ -143,7 +143,7 @@ export default class RoadmapPage extends PureComponent {
         </TableSection>
 
         <TableSection>
-          <Subheadline pb={1} mb={0} color="gray.bold">Business</Subheadline>
+          <Subheadline pb={1} mb={0} color="gray.bold">Company Vision</Subheadline>
           <Text f={3} pb={8}>Last updated: {lastUpdated}</Text>
           <Table>
             <Column>
