@@ -7,18 +7,37 @@ import blockLightboxMetadataPaneFragment from 'react/components/BlockLightbox/co
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import Link from 'react/components/UI/Link';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
 import BlockLightboxConnections from 'react/components/BlockLightbox/components/BlockLightboxConnections';
 import BlockLightboxComments from 'react/components/BlockLightbox/components/BlockLightboxComments';
+import Modal from 'react/components/UI/Modal/Portal';
+import ManageBlock from 'react/components/ManageBlock';
+import Icons from 'react/components/UI/Icons';
 
 export default class BlockLightboxMetadataPane extends PureComponent {
   static propTypes = {
     block: propType(blockLightboxMetadataPaneFragment).isRequired,
   }
 
+  state = {
+    mode: 'resting',
+  }
+
+  openManage = (e) => {
+    e.preventDefault();
+    this.setState({ mode: 'manage' });
+  }
+
+  closeModal = (e) => {
+    if (e) e.preventDefault();
+    this.setState({ mode: 'resting' });
+  }
+
   render() {
+    const { mode } = this.state;
     const { block } = this.props;
 
     return (
@@ -35,8 +54,22 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           f={5}
           fontWeight="bold"
           hyphenate
-          dangerouslySetInnerHTML={{ __html: block.title }}
-        />
+          verticalAlign="middle"
+        >
+          <span dangerouslySetInnerHTML={{ __html: block.title }} />
+
+          {block.can.manage &&
+            <Link onClick={this.openManage} title="Edit" display="inline-flex" p={3}>
+              <Icons name="Pencil" size={4} color="gray.base" />
+            </Link>
+          }
+        </Text>
+
+        {mode === 'manage' &&
+          <Modal onClose={this.closeModal}>
+            <ManageBlock block={block} onDone={this.closeModal} />
+          </Modal>
+        }
 
         <Text f={1} lineHeight={2} color="gray.medium">
           <time

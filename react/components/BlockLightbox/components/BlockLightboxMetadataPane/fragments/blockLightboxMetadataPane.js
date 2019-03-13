@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 import blockLightboxActionsFragment from 'react/components/BlockLightbox/components/BlockLightboxActions/fragments/blockLightboxActions';
+import manageBlockFragment from 'react/components/ManageBlock/fragments/manageBlock';
 
 export default gql`
   fragment BlockLightboxMetadataPane on Konnectable {
@@ -20,7 +21,14 @@ export default gql`
         href
       }
     }
+    ... on Block {
+      can {
+        manage
+      }
+    }
     ...BlockLightboxActions
+    ...ManageBlock
   }
   ${blockLightboxActionsFragment}
+  ${manageBlockFragment}
 `;
