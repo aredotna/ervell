@@ -24,6 +24,7 @@
   AIRBRAKE_API_KEY
   CLIENT_GRAPHQL_ENDPOINT
   BACKBONE_SUPER_SYNC_TIMEOUT
+  RECAPTCHA_SITE_KEY
 } = require '../config'
 
 _ = require 'underscore'
@@ -74,6 +75,7 @@ sharify.data = {
   X_APP_TOKEN
   GRAPHQL_ENDPOINT
   CLIENT_GRAPHQL_ENDPOINT
+  RECAPTCHA_SITE_KEY
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }

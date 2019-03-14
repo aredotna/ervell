@@ -26,11 +26,13 @@ class RegistrationForm extends Component {
     acceptInvitation: PropTypes.func.isRequired,
     email: PropTypes.string,
     raw_invitation_token: PropTypes.string,
+    validation_token: PropTypes.string,
   }
 
   static defaultProps = {
     email: null,
     raw_invitation_token: null,
+    validation_token: null,
   }
 
   constructor(props) {
@@ -78,6 +80,7 @@ class RegistrationForm extends Component {
       register,
       acceptInvitation,
       raw_invitation_token,
+      validation_token,
     } = this.props;
 
     const mutation = raw_invitation_token ?
@@ -104,6 +107,7 @@ class RegistrationForm extends Component {
       password_confirmation,
       receive_newsletter,
       invitation_token: raw_invitation_token,
+      validation_token,
     });
 
     return mutation({ variables })
