@@ -97,7 +97,10 @@ export default class CompactChannel extends PureComponent {
           by {channel.owner.name}
 
           {channel.owner.__typename === 'Group' &&
-            <GroupBadge visibility={channel.owner.visibility} />
+            <GroupBadge
+              visibility={channel.owner.visibility}
+              color={`channel.${channel.visibility}`}
+            />
           }
         </Label>
       </Container>
