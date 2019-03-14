@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import Badge from 'react/components/UI/Badge';
 
-const GroupBadge = ({ visibility, ...rest }) => (
+const GroupBadge = ({ visibility, color, ...rest }) => (
   <Badge
     f={0}
     ml={4}
-    color="gray.medium"
-    borderColor="gray.medium"
+    color={color}
+    borderColor={color}
     icon={{ private: 'Lock' }[visibility]}
     {...rest}
   >
@@ -18,6 +18,11 @@ const GroupBadge = ({ visibility, ...rest }) => (
 
 GroupBadge.propTypes = {
   visibility: PropTypes.oneOf(['public', 'private']).isRequired,
+  color: PropTypes.string,
+};
+
+GroupBadge.defaultProps = {
+  color: 'gray.medium',
 };
 
 export default GroupBadge;

@@ -37,6 +37,8 @@ module.exports =
   CONTENTFUL_SPACE_ID: null
   CONTENTFUL_ACCESS_TOKEN: null
   BACKBONE_SUPER_SYNC_TIMEOUT: 25000
+  RECAPTCHA_SITE_KEY: null
+  RECAPTCHA_SECRET_KEY: null
 
 # Override any values with env variables if they exist
 for key, val of module.exports

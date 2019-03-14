@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { fontSize, space, borderColor, borders, color, width } from 'styled-system';
+import { fontSize, fontFamily, space, borderColor, borders, color, width } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 import { antialiased } from 'react/styles/mixins';
@@ -37,7 +37,7 @@ export const defaultMixin = css`
   display: block;
   background-color: white;
   line-height: ${LINE_HEIGHTS.input};
-  font-family: ${props => props.theme.fonts.sans};
+  ${preset(fontFamily, { font: 'sans' })}
   ${preset(width, { width: '100%' })}
   ${preset(color, { color: 'black' })}
   ${preset(fontSize, { f: 4 })}
@@ -49,6 +49,7 @@ export const defaultMixin = css`
   ::placeholder {
     ${preset(color, { color: 'black' })}
     opacity: 0.5;
+    font-family: inherit;
   }
 
   ${props => props.focus && focusMixin}
