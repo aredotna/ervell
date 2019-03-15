@@ -110,7 +110,7 @@ module.exports = class MarkletView extends Backbone.View
   save: ->
     val = @dom.input.val()?.trim() or @model.get('content')
 
-    data = channel_ids: @connections.pluck 'slug'
+    data = channel_ids: @connections.pluck 'id'
     data[if (isURL(val) or isDataURI(val)) then 'source' else 'content'] = val
     data = extend {}, data, QUERY
 
