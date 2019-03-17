@@ -10,20 +10,20 @@ const { data: { RECAPTCHA_SITE_KEY } } = sharify;
 
 export default class RegistrationPage extends Component {
   state = {
-    token: null,
+    validation_token: null,
   }
 
   componentDidMount() {
     window.onRecaptchaLoad = () => {
       window.grecaptcha.ready(() => {
         window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'homepage' })
-          .then(token => this.setState({ token }));
+          .then(validation_token => this.setState({ validation_token }));
       });
     };
   }
 
   render() {
-    const { token } = this.state;
+    const { validation_token } = this.state;
 
     return (
       <CenteringBox p={7}>
@@ -37,7 +37,7 @@ export default class RegistrationPage extends Component {
           Join
         </Title>
 
-        <RegistrationForm validation_token={token} />
+        <RegistrationForm validation_token={validation_token} />
       </CenteringBox>
     );
   }

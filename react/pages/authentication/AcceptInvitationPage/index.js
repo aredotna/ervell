@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
+import sharify from 'sharify';
 
 import inviteeQuery from 'react/pages/authentication/AcceptInvitationPage/queries/invitee';
 
+import Head from 'react/components/UI/Head';
 import Title from 'react/components/UI/Head/components/Title';
 import Icons from 'react/components/UI/Icons';
 import CenteringBox from 'react/components/UI/CenteringBox';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import Text from 'react/components/UI/Text';
 import RegistrationForm from 'react/components/RegistrationForm';
+
+const { data: { RECAPTCHA_SITE_KEY } } = sharify;
 
 export default class AcceptInvitationPage extends Component {
   static propTypes = {
@@ -27,7 +31,21 @@ export default class AcceptInvitationPage extends Component {
     raw_invitation_token: null,
   }
 
+  state = {
+    validation_token: null,
+  }
+
+  componentDidMount() {
+    window.onRecaptchaLoad = () => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'homepage' })
+          .then(validation_token => this.setState({ validation_token }));
+      });
+    };
+  }
+
   render() {
+    const { validation_token } = this.state;
     const { invitation_token, raw_invitation_token } = this.props;
 
     return (
@@ -65,6 +83,12 @@ export default class AcceptInvitationPage extends Component {
 
           return (
             <CenteringBox p={7}>
+              <Head>
+                <script
+                  src={`https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=${RECAPTCHA_SITE_KEY}`}
+                />
+              </Head>
+
               <Title>
                 Complete Your Registration
               </Title>
@@ -72,6 +96,7 @@ export default class AcceptInvitationPage extends Component {
               <RegistrationForm
                 email={data.invitee.email}
                 raw_invitation_token={raw_invitation_token}
+                validation_token={validation_token}
               />
             </CenteringBox>
           );
