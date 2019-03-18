@@ -10,7 +10,7 @@ import feedQuery from 'react/components/Feed/queries/feed';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
-import FeedGroups from 'react/components/Feed/components/FeedGroups/index';
+import FeedGroups from 'react/components/Feed/components/FeedGroups';
 import CenteringBox from 'react/components/UI/CenteringBox';
 
 const LoadingContainer = styled(CenteringBox)`
