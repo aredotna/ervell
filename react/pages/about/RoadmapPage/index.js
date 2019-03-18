@@ -9,6 +9,7 @@ import Text from 'react/components/UI/Text';
 import { Headline, Subheadline, Description } from 'react/pages/about/components/Text';
 import { GenericButtonLink as Button } from 'react/components/UI/GenericButton';
 import { Table, TableSection, Column, LightColumn, ColumnHeader, Cell } from 'react/pages/about/RoadmapPage/components/Table';
+import constants from 'react/styles/constants';
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -19,8 +20,26 @@ const Paragraph = styled(Description).attrs({
   my: 7,
   align: 'left',
 })`
-  max-width: 470px;
+  max-width: 670px;
   width: 100%;
+`;
+
+const SmallParagraph = styled(Paragraph)`
+  max-width: 460px;
+  width: 100%;
+  height: 7em;
+`;
+
+const SupportOptions = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+
+  ${constants.media.small`
+    align-items: center;
+    flex-direction: column;
+  `}
 `;
 
 const ContributeButton = styled(Button).attrs({
@@ -38,6 +57,23 @@ const ContributeButton = styled(Button).attrs({
     color: ${x => x.theme.colors.state.supporter};
   }
 `;
+
+const PremiumButton = styled(Button).attrs({
+  f: 5,
+  flex: 1,
+  alignSelf: 'center',
+})`
+  background-color: ${x => x.theme.colors.state.premium};
+  border-color: ${x => x.theme.colors.state.premium};
+  color: white;
+
+  &:hover {
+    border-color: ${x => x.theme.colors.state.premium};
+    background-color: white;
+    color: ${x => x.theme.colors.state.premium};
+  }
+`;
+
 
 export default class RoadmapPage extends PureComponent {
   static propTypes = {
@@ -78,22 +114,65 @@ export default class RoadmapPage extends PureComponent {
         </Paragraph>
 
         <Headline color="gray.bold">
-          Become a monthly supporter
+          Road to self-sustainability
         </Headline>
 
-        <Paragraph>
-          Chip in a little extra to help Are.na develop new features and reach sustainability.
-          Monthly supporters will receive regular emails from the team,
-          plus a unique piece of Are.na merch.
+        <Paragraph pb={6}>
+          Are.na’s mission is to build a member-supported community. Since we&apos;re
+          accountable to our members instead of
+          advertisers, our incentive is always to build a tool that fosters learning and
+          genuine collaboration. This also means that Are.na’s future relies entirely on
+          community contributions. Here’s how you can help:
         </Paragraph>
 
-        <Box justifyContent="center" mt={7} mb={10} display="flex">
-          <script src="https://app.giveforms.com/install-popup-button.js" type="text/javascript" defer />
-          <link rel="stylesheet" href="https://app.giveforms.com/giveforms_embed.css" />
-          <ContributeButton className="giveforms-donation-button" href="https://arena.giveforms.com/are-na-supporter">
-            Contribute
-          </ContributeButton>
-        </Box>
+        <SupportOptions>
+          <div>
+            <Subheadline color="gray.bold">
+              Premium
+            </Subheadline>
+
+            <SmallParagraph>
+              Premium members get unlimited private content, additional privacy settings,
+              an invitation to our members’ Slack and more features soon. More about Premium:
+            </SmallParagraph>
+
+            <Box justifyContent="center" alignItems="center" mt={7} mb={10} display="flex" flexDirection="column">
+              <PremiumButton href="/pricing">
+                Go Premium
+              </PremiumButton>
+              <Text f={2} textAlign="center" mt={4}>
+                Premium members currently contribute&nbsp;<br />
+                <strong>{roadmap.fields.statsPremiumRevenue}</strong>&nbsp;
+                in monthly recurring revenue.
+              </Text>
+            </Box>
+          </div>
+          <div>
+            <Subheadline color="gray.bold">
+              Monthly Patron
+            </Subheadline>
+
+            <SmallParagraph>
+              If you’re already Premium and want to chip in a little extra, or if you simply
+              want to help Are.na make faster progress, you can make a monthly contribution.
+              You’ll receive regular emails from the team, plus a unique piece of Are.na merch.
+            </SmallParagraph>
+
+            <Box justifyContent="center" alignItems="center" mt={7} mb={10} display="flex" flexDirection="column">
+              <script src="https://app.giveforms.com/install-popup-button.js" type="text/javascript" defer />
+              <link rel="stylesheet" href="https://app.giveforms.com/giveforms_embed.css" />
+              <ContributeButton className="giveforms-donation-button" href="https://arena.giveforms.com/are-na-supporter">
+                Become a Patron
+              </ContributeButton>
+              <Text f={2} textAlign="center" mt={4}>
+                Patrons currently contribute&nbsp;<br />
+                <strong>{roadmap.fields.statsPatronRevenue}</strong>&nbsp;
+                in monthly recurring revenue.
+              </Text>
+            </Box>
+
+          </div>
+        </SupportOptions>
 
         <TableSection>
           <Subheadline pb={1} mb={0} color="gray.bold">Product</Subheadline>
@@ -195,7 +274,7 @@ export default class RoadmapPage extends PureComponent {
           <Table>
             <Column>
               <ColumnHeader>
-                Monthly recurring revenue
+                Total monthly recurring revenue
               </ColumnHeader>
               <Cell
                 dangerouslySetInnerHTML={{
