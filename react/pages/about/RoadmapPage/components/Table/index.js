@@ -12,6 +12,11 @@ export const TableSection = styled(Box).attrs({
   justify-content: center;
   align-items: center;
 
+  ${constants.media.small`
+    align-items: center;
+    flex-direction: column;
+  `}
+
   ${constants.media.mobile`
     align-items: center;
     flex-direction: column;
@@ -22,6 +27,11 @@ export const Table = styled(Box)`
   display: flex;
   flex-direction: row;
 
+  ${constants.media.small`
+    align-items: center;
+    flex-direction: column;
+  `}
+
   ${constants.media.mobile`
     align-items: center;
     flex-direction: column;
@@ -30,9 +40,10 @@ export const Table = styled(Box)`
 
 export const Column = styled(Box).attrs({})`
   border: 1px solid ${x => x.theme.colors.gray.light};
-  width: 15em;
+  width: 18em;
   margin-right: -1px;
   color: ${x => x.theme.colors.gray.bold};
+
 `;
 
 export const LightColumn = styled(Column)`
