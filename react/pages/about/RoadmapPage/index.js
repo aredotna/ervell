@@ -274,7 +274,7 @@ export default class RoadmapPage extends PureComponent {
           <Table>
             <Column>
               <ColumnHeader>
-                Total monthly recurring revenue
+                Monthly recurring revenue
               </ColumnHeader>
               <Cell
                 dangerouslySetInnerHTML={{
