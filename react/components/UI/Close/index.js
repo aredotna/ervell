@@ -1,16 +1,47 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { themeGet, space, alignSelf } from 'styled-system';
+import {
+  themeGet,
+  display,
+  top,
+  right,
+  bottom,
+  left,
+  position,
+  space,
+  bgColor,
+  alignSelf,
+} from 'styled-system';
 
-const Close = styled.a`
-  position: relative;
-  box-sizing: border-box;
-  display: block;
-  width: ${props => props.theme.space[props.size]};
-  height: ${props => props.theme.space[props.size]};
-  padding: ${props => props.theme.space[props.size]};
+import { preset } from 'react/styles/functions';
+
+const Container = styled.a`
   cursor: pointer;
+  ${preset(display, { display: 'block' })}
+  ${position}
   ${alignSelf}
   ${space}
+  ${top}
+  ${right}
+  ${bottom}
+  ${left}
+  ${bgColor}
+
+  &:hover > span {
+    &:after,
+    &:before {
+      background-color: black;
+    }
+  }
+`;
+
+const Glyph = styled.span`
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: ${props => props.theme.space[props.size] || props.size};
+  height: ${props => props.theme.space[props.size] || props.size};
 
   &:before,
   &:after {
@@ -31,14 +62,24 @@ const Close = styled.a`
   &:after {
     transform: translate(-50%, -50%) rotate(135deg);
   }
-
-  &:hover:before,
-  &:hover:after {
-    background-color: black;
-  }
 `;
 
+const Close = ({
+  size, color, thickness, ...rest
+}) => (
+  <Container {...rest}>
+    <Glyph size={size} color={color} thickness={thickness} />
+  </Container>
+);
+
+Close.propTypes = {
+  color: PropTypes.string,
+  thickness: PropTypes.string,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
 Close.defaultProps = {
+  color: 'gray.semiBold',
   thickness: '1px',
   size: 6,
 };

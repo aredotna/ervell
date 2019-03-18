@@ -19,12 +19,6 @@ const Container = styled(Box).attrs({
   justify-content: center;
 `;
 
-const CloseButton = styled(Close).attrs({
-  size: 6,
-  thickness: '4px',
-})`
-`;
-
 const Wrapper = styled(Box).attrs({
   display: 'flex',
   flexDirection: ['column', 'column', 'row'],
@@ -117,9 +111,11 @@ class Banner extends PureComponent {
         </Box>
 
         {isCloseable &&
-          <CloseButton
-            alignSelf="flex-start"
+          <Close
+            size={7}
+            thickness="4px"
             color={color}
+            alignSelf="flex-start"
             onClick={this.handleClose}
           />
         }
