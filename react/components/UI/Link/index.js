@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { display, space } from 'styled-system';
 
 const Link = styled.a`
+  box-sizing: border-box;
   ${display}
   ${space}
 `;

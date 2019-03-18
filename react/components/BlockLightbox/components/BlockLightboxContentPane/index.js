@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
 import blockLightboxContentPaneFragment from 'react/components/BlockLightbox/components/BlockLightboxContentPane/fragments/blockLightboxContentPane';
@@ -12,6 +13,7 @@ import BlockLightboxAttachment from 'react/components/BlockLightbox/components/B
 import BlockLightboxEmbed from 'react/components/BlockLightbox/components/BlockLightboxEmbed';
 
 const Container = styled(Box)`
+  position: relative;
   flex: 3;
   display: flex;
   align-items: center;
@@ -21,10 +23,15 @@ const Container = styled(Box)`
 export default class BlockLightboxContentPane extends PureComponent {
   static propTypes = {
     block: propType(blockLightboxContentPaneFragment).isRequired,
+    children: PropTypes.node,
+  }
+
+  static defaultProps = {
+    children: null,
   }
 
   render() {
-    const { block } = this.props;
+    const { block, children, ...rest } = this.props;
 
     const Content = {
       Text: () => <BlockLightboxText block={block} />,
@@ -35,8 +42,10 @@ export default class BlockLightboxContentPane extends PureComponent {
     }[block.__typename];
 
     return (
-      <Container>
+      <Container {...rest}>
         <Content />
+
+        {children}
       </Container>
     );
   }
