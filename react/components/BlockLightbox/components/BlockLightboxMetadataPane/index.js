@@ -38,7 +38,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const { block } = this.props;
+    const { block, ...rest } = this.props;
 
     return (
       <Box
@@ -47,7 +47,9 @@ export default class BlockLightboxMetadataPane extends PureComponent {
         pt={4}
         pb={8}
         height="100%"
+        bg="white"
         overflowScrolling
+        {...rest}
       >
         <Text
           mb={5}

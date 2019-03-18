@@ -30,6 +30,9 @@ const Image = styled(Box)`
   }
 `;
 
+const Container = styled(Box)`
+  overflow: hidden;
+`;
 
 export default class BlockLightboxLink extends PureComponent {
   static propTypes = {
@@ -41,9 +44,9 @@ export default class BlockLightboxLink extends PureComponent {
 
     return (
       <Box p={6} width="100%" height="100%">
-        <Box display="flex" flexDirection="column" height="100%" width="100%" border="1px solid" borderColor="gray.light" borderRadius="0.25em">
+        <Container display="flex" flexDirection="column" height="100%" width="100%" border="1px solid" borderColor="gray.light" borderRadius="0.25em">
           <a href={block.source_url} target="_blank">
-            <Box px={6} py={4} mb={4} display="flex" borderBottom="1px solid" borderColor="gray.light">
+            <Box px={6} py={4} display="flex" borderBottom="1px solid" borderColor="gray.light" bg="white">
               <Icons name="Link" size="1rem" color="gray.base" mr={5} />
 
               <Text f={2} font="mono" color="gray.semiBold">
@@ -57,7 +60,7 @@ export default class BlockLightboxLink extends PureComponent {
               <Image width="100%" height="100%" backgroundImage={block.image_url} />
             </a>
           </Screenshot>
-        </Box>
+        </Container>
       </Box>
     );
   }
