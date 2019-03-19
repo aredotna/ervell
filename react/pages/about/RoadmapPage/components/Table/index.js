@@ -40,7 +40,7 @@ export const Table = styled(Box)`
 
 export const Column = styled(Box).attrs({})`
   border: 1px solid ${x => x.theme.colors.gray.light};
-  width: 18em;
+  width: 15em;
   margin-right: -1px;
   color: ${x => x.theme.colors.gray.bold};
 
