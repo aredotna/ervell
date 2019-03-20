@@ -72,16 +72,18 @@ export default class ModalBlockLightbox extends PureComponent {
 
             return (
               <BlockLightbox block={block} context="MODAL">
-                <ModalBlockLightboxNavigation
-                  id={id}
-                  ids={ids}
-                  position="absolute"
-                  top="50%"
-                  left="50%"
-                  bg="white"
-                  zIndex="1"
-                  onChange={this.updateId}
-                />
+                {ids.length > 1 &&
+                  <ModalBlockLightboxNavigation
+                    id={id}
+                    ids={ids}
+                    position="absolute"
+                    top="50%"
+                    left="50%"
+                    bg="white"
+                    zIndex="1"
+                    onChange={this.updateId}
+                  />
+                }
               </BlockLightbox>
             );
           }}
