@@ -39,9 +39,15 @@ class BillingForm extends PureComponent {
   static propTypes = {
     subscribeToPremium: PropTypes.func.isRequired,
     cancelPremiumSubscription: PropTypes.func.isRequired,
-
     applyCouponToSubscription: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func,
     me: propType(billingFormFragment).isRequired,
+    plan_id: PropTypes.string,
+  }
+
+  static defaultProps = {
+    plan_id: null,
+    onSuccess: () => null,
   }
 
   state = {
@@ -49,8 +55,14 @@ class BillingForm extends PureComponent {
     errorMessage: null,
     operations: [],
 
-    plan_id: this.props.me.customer.plan.id,
+    plan_id: this.props.plan_id || this.props.me.customer.plan.id,
     coupon_code: '',
+  }
+
+  componentDidMount() {
+    if (this.props.plan_id) {
+      this.handlePlan(this.props.plan_id);
+    }
   }
 
   doWeNeedTo = operationName =>
@@ -151,7 +163,7 @@ class BillingForm extends PureComponent {
     e.preventDefault();
 
     const { plan_id } = this.state;
-    const { cancelPremiumSubscription } = this.props;
+    const { cancelPremiumSubscription, onSuccess } = this.props;
 
     this.setState({ mode: 'processing' });
 
@@ -183,6 +195,11 @@ class BillingForm extends PureComponent {
         return null;
       })
       .then(() => {
+        // Most of the time, this will mean nothing.
+        // But when we are embedding the billing page elsewhere,
+        // we can trigger a redirect using this prop.
+        onSuccess();
+
         const resolution = this.doWeNeedTo('CHANGE_PLAN_ID') ? 'subscribed' : 'card_changed';
         return this.resolveWithMode(resolution);
       })
@@ -262,6 +279,7 @@ class BillingForm extends PureComponent {
                 key={customer.plan.id + customer.is_canceled}
                 me={me}
                 onSelect={this.handlePlan}
+                plan_id={plan_id}
               />
 
               {customer.is_beneficiary &&
@@ -322,7 +340,7 @@ class BillingForm extends PureComponent {
                 onClick={this.handleSubmit}
                 disabled={(
                   (!customer.default_credit_card) ||
-                  (operations.length === 0)
+                  (operations.length === 0 && !this.props.plan_id)
                 )}
               >
                 <Icons name="CreditCard" size="1rem" mr={4} />
