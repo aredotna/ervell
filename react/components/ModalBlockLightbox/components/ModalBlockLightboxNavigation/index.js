@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withApollo } from 'react-apollo';
+import Mousetrap from 'mousetrap';
 
 import Link from 'react/components/UI/Link';
 import Icons from 'react/components/UI/Icons';
+
+import modalBlockLightboxQuery from 'react/components/ModalBlockLightbox/queries/modalBlockLightbox';
 
 const navigate = xs => ({
   next: cursor =>
@@ -41,8 +45,11 @@ const Next = styled(Prev)`
   transform: rotate(360deg);
 `;
 
-export default class ModalBlockLightboxNavigation extends PureComponent {
+class ModalBlockLightboxNavigation extends PureComponent {
   static propTypes = {
+    client: PropTypes.shape({
+      query: PropTypes.func.isRequired,
+    }).isRequired,
     id: PropTypes.number.isRequired,
     ids: PropTypes.arrayOf(PropTypes.number).isRequired,
     onChange: PropTypes.func.isRequired,
@@ -58,13 +65,33 @@ export default class ModalBlockLightboxNavigation extends PureComponent {
     this.__prev__ = prev;
   }
 
+  componentDidMount() {
+    this.preload('next');
+
+    Mousetrap.bind('right', this.next);
+    Mousetrap.bind('left', this.prev);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.preload('next');
+    }
+  }
+
+  componentWillUnmount() {
+    Mousetrap.unbind('right', 'left');
+  }
+
+  cursor = () => {
+    const { id, ids } = this.props;
+    return ids.indexOf(id);
+  }
+
   next = (e) => {
     e.preventDefault();
 
-    const { id, ids, onChange } = this.props;
-
-    const cursor = ids.indexOf(id);
-    const nextId = this.__next__(cursor);
+    const { onChange } = this.props;
+    const nextId = this.__next__(this.cursor());
 
     return onChange(nextId);
   }
@@ -72,12 +99,22 @@ export default class ModalBlockLightboxNavigation extends PureComponent {
   prev = (e) => {
     e.preventDefault();
 
-    const { id, ids, onChange } = this.props;
-
-    const cursor = ids.indexOf(id);
-    const prevId = this.__prev__(cursor);
+    const { onChange } = this.props;
+    const prevId = this.__prev__(this.cursor());
 
     return onChange(prevId);
+  }
+
+
+  preload = (direction) => {
+    const { client } = this.props;
+
+    const prospectiveId = this[`__${direction}__`](this.cursor());
+
+    client.query({
+      query: modalBlockLightboxQuery,
+      variables: { id: prospectiveId },
+    });
   }
 
   render() {
@@ -85,7 +122,7 @@ export default class ModalBlockLightboxNavigation extends PureComponent {
 
     return (
       <React.Fragment>
-        <Prev onClick={this.prev} {...rest}>
+        <Prev onClick={this.prev} onMouseOver={() => this.preload('prev')} {...rest}>
           <Icons name="RightCaret" size="1.5rem" color="gray.base" />
         </Prev>
 
@@ -96,3 +133,5 @@ export default class ModalBlockLightboxNavigation extends PureComponent {
     );
   }
 }
+
+export default withApollo(ModalBlockLightboxNavigation);
