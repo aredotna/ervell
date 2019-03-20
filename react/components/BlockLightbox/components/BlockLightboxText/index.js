@@ -23,17 +23,17 @@ export default class BlockLightboxText extends PureComponent {
         <Box
           height="100%"
           width="100%"
-          pt={6}
-          px={10}
-          pb={10}
+          p={10}
           overflowScrolling
         >
-          <Text
-            font="serif"
-            f={5}
-            lineHeight={2}
-            dangerouslySetInnerHTML={{ __html: block.content }}
-          />
+          <Box bg="white" border="1px solid" borderColor="gray.light" px={7} py={6}>
+            <Text
+              font="serif"
+              f={5}
+              lineHeight={2}
+              dangerouslySetInnerHTML={{ __html: block.content }}
+            />
+          </Box>
         </Box>
       </Container>
     );

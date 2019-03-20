@@ -43,8 +43,8 @@ export default class BlockLightboxLink extends PureComponent {
     const { block } = this.props;
 
     return (
-      <Box p={6} width="100%" height="100%">
-        <Container display="flex" flexDirection="column" height="100%" width="100%" border="1px solid" borderColor="gray.light" borderRadius="0.25em">
+      <Box p={6} width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
+        <Container display="flex" flexDirection="column" height="95%" width="95%" border="1px solid" borderColor="gray.light" borderRadius="0.25em">
           <a href={block.source_url} target="_blank">
             <Box px={6} py={4} display="flex" borderBottom="1px solid" borderColor="gray.light" bg="white">
               <Icons name="Link" size="1rem" color="gray.base" mr={5} />
