@@ -67,6 +67,7 @@ class RegistrationForm extends Component {
       receive_newsletter: false,
       attributeErrors: {},
       errorMessage: null,
+      selected: this.props.selected,
     };
   }
 
