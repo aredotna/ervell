@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
+import Mousetrap from 'mousetrap';
 
 import modalBlockLightboxQuery from 'react/components/ModalBlockLightbox/queries/modalBlockLightbox';
 
@@ -24,6 +25,14 @@ export default class ModalBlockLightbox extends PureComponent {
 
   state = {
     id: this.props.id,
+  }
+
+  componentDidMount() {
+    Mousetrap.bind('esc', this.props.onClose);
+  }
+
+  componentWillUnmount() {
+    Mousetrap.unbind('esc');
   }
 
   updateId = id =>
