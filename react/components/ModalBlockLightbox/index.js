@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import Mousetrap from 'mousetrap';
+import { isEmpty } from 'underscore';
 
 import modalBlockLightboxQuery from 'react/components/ModalBlockLightbox/queries/modalBlockLightbox';
 
@@ -25,18 +26,44 @@ export default class ModalBlockLightbox extends PureComponent {
 
   state = {
     id: this.props.id,
+    initial: {},
   }
 
   componentDidMount() {
     Mousetrap.bind('esc', this.props.onClose);
+    this.updateUrl();
   }
 
   componentWillUnmount() {
     Mousetrap.unbind('esc');
+    this.restoreUrl();
   }
 
-  updateId = id =>
-    this.setState({ id });
+  // TODO: Replace all of this with router once we migrate channels
+  restoreUrl = () => {
+    const { initial } = this.state;
+    window.history.replaceState(null, initial.title, initial.href);
+  }
+
+  updateUrl = () => {
+    const { initial, id } = this.state;
+
+    if (isEmpty(initial)) {
+      // Capture initial state
+      this.setState({
+        initial: {
+          href: window.location.href,
+          title: document.title,
+        },
+      });
+    }
+
+    window.history.replaceState(null, null, `/block/${id}`);
+  }
+
+  updateId = (id) => {
+    this.setState({ id }, () => this.updateUrl());
+  }
 
   render() {
     const { id } = this.state;
