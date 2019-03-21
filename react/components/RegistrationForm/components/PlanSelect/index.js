@@ -46,8 +46,8 @@ export const Plan = styled.div`
     &:after {
       position: absolute;
       content: '✔';
-      bottom: 0.25em;
-      right: 0.25em;
+      bottom: ${props.theme.space[4]};
+      right: ${props.theme.space[5]};
     }
   `}
 `;
