@@ -22,7 +22,7 @@ export default class BlockLightboxImage extends PureComponent {
     const { block } = this.props;
 
     return (
-      <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
+      <Box width="95%" height="95%" display="flex" alignItems="center" justifyContent="center">
         <Image
           src={block.image_url}
           alt={block.title}

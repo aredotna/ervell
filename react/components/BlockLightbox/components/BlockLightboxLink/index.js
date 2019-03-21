@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
@@ -36,17 +37,25 @@ const Container = styled(Box)`
 
 export default class BlockLightboxLink extends PureComponent {
   static propTypes = {
+    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxLinkFragment).isRequired,
   }
 
   render() {
-    const { block } = this.props;
+    const { block, layout } = this.props;
 
     return (
       <Box p={6} width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
-        <Container display="flex" flexDirection="column" height="95%" width="95%" border="1px solid" borderColor="gray.light" borderRadius="0.25em">
+        <Container display="flex" flexDirection="column" height="95%" width="95%" border="1px solid" borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]} borderRadius="0.25em">
           <a href={block.source_url} target="_blank">
-            <Box px={6} py={4} display="flex" borderBottom="1px solid" borderColor="gray.light" bg="white">
+            <Box
+              px={6}
+              py={4}
+              display="flex"
+              borderBottom="1px solid"
+              borderColor={{ DEFAULT: 'gray.light', light: 'gray.semiBold' }[layout]}
+              bg={{ DEFAULT: 'white', FULLSCREEN: 'black' }[layout]}
+            >
               <Icons name="Link" size="1rem" color="gray.base" mr={5} />
 
               <Text f={2} font="mono" color="gray.semiBold">

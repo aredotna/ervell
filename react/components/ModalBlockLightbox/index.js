@@ -7,6 +7,7 @@ import { isEmpty } from 'underscore';
 import modalBlockLightboxQuery from 'react/components/ModalBlockLightbox/queries/modalBlockLightbox';
 
 import Box from 'react/components/UI/Box';
+import Link from 'react/components/UI/Link';
 import Close from 'react/components/UI/Close';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
@@ -27,6 +28,7 @@ export default class ModalBlockLightbox extends PureComponent {
   state = {
     id: this.props.id,
     initial: {},
+    layout: 'DEFAULT',
   }
 
   componentDidMount() {
@@ -65,22 +67,21 @@ export default class ModalBlockLightbox extends PureComponent {
     this.setState({ id }, () => this.updateUrl());
   }
 
+  toggleLayout = () => {
+    this.setState(prevState => ({
+      layout: {
+        DEFAULT: 'FULLSCREEN',
+        FULLSCREEN: 'DEFAULT',
+      }[prevState.layout],
+    }));
+  }
+
   render() {
-    const { id } = this.state;
+    const { id, layout } = this.state;
     const { ids, onClose } = this.props;
 
     return (
       <Box position="relative" width="100%" height="100%">
-        <Close
-          position="absolute"
-          size={7}
-          p={5}
-          thickness="4px"
-          top="0"
-          right="0"
-          onClick={onClose}
-        />
-
         <Query query={modalBlockLightboxQuery} variables={{ id }}>
           {({ data, loading, error }) => {
             if (loading) {
@@ -98,7 +99,7 @@ export default class ModalBlockLightbox extends PureComponent {
             const { block } = data;
 
             return (
-              <BlockLightbox block={block} context="MODAL">
+              <BlockLightbox block={block} context="MODAL" layout={layout}>
                 {ids.length > 1 &&
                   <ModalBlockLightboxNavigation
                     id={id}
@@ -115,6 +116,22 @@ export default class ModalBlockLightbox extends PureComponent {
             );
           }}
         </Query>
+
+        <Box position="absolute" top="0" left="0" p={5}>
+          <Link onClick={this.toggleLayout}>
+            &bull;
+          </Link>
+        </Box>
+
+        <Close
+          position="absolute"
+          size={7}
+          p={5}
+          thickness="4px"
+          top="0"
+          right="0"
+          onClick={onClose}
+        />
       </Box>
     );
   }

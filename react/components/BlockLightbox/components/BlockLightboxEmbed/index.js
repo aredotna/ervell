@@ -8,8 +8,8 @@ import Box from 'react/components/UI/Box';
 
 const Container = styled(Box)`
   background-color: black;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
 
   iframe {
     width: 100%;

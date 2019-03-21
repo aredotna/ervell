@@ -18,10 +18,15 @@ const Container = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${props => props.layout === 'FULLSCREEN' && `
+    background-color: ${props.theme.colors.gray.bold};
+  `}
 `;
 
 export default class BlockLightboxContentPane extends PureComponent {
   static propTypes = {
+    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxContentPaneFragment).isRequired,
     children: PropTypes.node,
   }
@@ -31,19 +36,24 @@ export default class BlockLightboxContentPane extends PureComponent {
   }
 
   render() {
-    const { block, children, ...rest } = this.props;
+    const {
+      block,
+      layout,
+      children,
+      ...rest
+    } = this.props;
 
     const Content = {
-      Text: () => <BlockLightboxText block={block} />,
-      Image: () => <BlockLightboxImage block={block} />,
-      Link: () => <BlockLightboxLink block={block} />,
-      Attachment: () => <BlockLightboxAttachment block={block} />,
-      Embed: () => <BlockLightboxEmbed block={block} />,
+      Text: props => <BlockLightboxText {...props} />,
+      Image: props => <BlockLightboxImage {...props} />,
+      Link: props => <BlockLightboxLink {...props} />,
+      Attachment: props => <BlockLightboxAttachment {...props} />,
+      Embed: props => <BlockLightboxEmbed {...props} />,
     }[block.__typename];
 
     return (
-      <Container {...rest}>
-        <Content />
+      <Container layout={layout} {...rest}>
+        <Content block={block} layout={layout} />
 
         {children}
       </Container>

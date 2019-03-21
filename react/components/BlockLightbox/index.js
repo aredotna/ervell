@@ -22,29 +22,37 @@ export default class BlockLightbox extends PureComponent {
   static propTypes = {
     block: propType(blockLightboxFragment).isRequired,
     context: PropTypes.oneOf(['MODAL', 'PAGE']),
+    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']),
     children: PropTypes.node,
   }
 
   static defaultProps = {
+    layout: 'DEFAULT',
     context: 'PAGE',
     children: null,
   }
 
   render() {
     const {
-      block, context, children, ...rest
+      block,
+      layout,
+      context,
+      children,
+      ...rest
     } = this.props;
 
     return (
       <Container {...rest}>
-        <BlockLightboxContentPane block={block}>
+        <BlockLightboxContentPane block={block} layout={layout}>
           {children}
         </BlockLightboxContentPane>
 
-        <BlockLightboxMetadataPane
-          block={block}
-          pt={context === 'MODAL' ? constants.topBarHeight : undefined}
-        />
+        {layout === 'DEFAULT' &&
+          <BlockLightboxMetadataPane
+            block={block}
+            pt={context === 'MODAL' ? constants.topBarHeight : undefined}
+          />
+        }
       </Container>
     );
   }

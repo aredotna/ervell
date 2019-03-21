@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import styled from 'styled-components';
 
@@ -20,18 +21,19 @@ const Player = styled.audio`
 
 export default class BlockLightboxAttachment extends PureComponent {
   static propTypes = {
+    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxAttachmentFragment).isRequired,
   }
 
   render() {
-    const { block } = this.props;
+    const { block, layout } = this.props;
 
     return (
       <Box
         display="flex"
         width="100%"
         height="100%"
-        bg="gray.hint"
+        bg={{ DEFAULT: 'gray.hint', FULLSCREEN: 'gray.bold' }[layout]}
         alignItems="center"
         justifyContent="center"
         textAlign="center"
@@ -58,17 +60,19 @@ export default class BlockLightboxAttachment extends PureComponent {
               </Box>
             }
 
-            <Badge mb={3} f={5}>
-              {block.file_extension}
-            </Badge>
-
-            <Text f={5} fontWeight="bold" lineHeight={2}>
+            <Text f={5} fontWeight="bold" lineHeight={2} color={{ DEFAULT: 'gray.base', FULLSCREEN: 'white' }[layout]}>
               Download {block.title}
             </Text>
 
-            <Text f={5} fontWeight="bold" lineHeight={2} color="gray.medium">
-              {block.file_size}
-            </Text>
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <Badge mr={4} f={3} color="gray.medium">
+                {block.file_extension}
+              </Badge>
+
+              <Text f={5} fontWeight="bold" lineHeight={2} color="gray.medium">
+                {block.file_size}
+              </Text>
+            </Box>
           </Box>
         </Link>
       </Box>
