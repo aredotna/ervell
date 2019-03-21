@@ -138,15 +138,19 @@ export default class BlockLightboxMetadataPane extends PureComponent {
                   mt={4}
                 />
 
-                <Header mt={8}>
-                  Comments
-                </Header>
+                {block.can.comment &&
+                  <React.Fragment>
+                    <Header mt={8}>
+                      Comments
+                    </Header>
 
-                <BlockLightboxComments
-                  block={{ ...block, ...data.block }}
-                  loading={loading}
-                  mt={4}
-                />
+                    <BlockLightboxComments
+                      block={{ ...block, ...data.block }}
+                      loading={loading}
+                      mt={4}
+                    />
+                  </React.Fragment>
+                }
               </React.Fragment>
             );
           }}

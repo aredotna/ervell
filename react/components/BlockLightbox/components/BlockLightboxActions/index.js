@@ -37,7 +37,9 @@ const BlockLightboxActions = ({ block }) => (
       </a>
     }
 
-    <MuteButton id={block.id} type="BLOCK" />
+    {block.can.mute &&
+      <MuteButton id={block.id} type="BLOCK" />
+    }
   </Container>
 );
 

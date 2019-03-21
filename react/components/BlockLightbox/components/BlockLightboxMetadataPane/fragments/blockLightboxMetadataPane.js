@@ -24,6 +24,7 @@ export default gql`
     ... on Block {
       can {
         manage
+        comment
       }
     }
     ...BlockLightboxActions
