@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { compose, graphql } from 'react-apollo';
 import axios from 'axios';
+import styled from 'styled-components';
 
 import mapErrors from 'react/util/mapErrors';
 import compactObject from 'react/util/compactObject';
@@ -11,6 +12,9 @@ import { GenericButton as Button } from 'react/components/UI/GenericButton';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import AuthForm from 'react/components/AuthForm';
+
+import PlanSelector from 'react/components/RegistrationForm/components/PlanSelect';
+
 import { LabelledCheckbox, Input, ErrorMessage } from 'react/components/UI/Inputs';
 
 import registerMutation from 'react/components/RegistrationForm/mutations/register';
@@ -20,6 +24,18 @@ import { track, en } from 'lib/analytics.coffee';
 
 const { REDIRECT_TO } = require('sharify').data;
 
+const RegisterButton = styled(Button)`
+  ${props => props.isPremium && `
+    border-color: ${props.theme.colors.state.premium};
+    color: ${props.theme.colors.state.premium};
+
+    &:hover {
+      border-color: ${props.theme.colors.state.premium};
+      color: ${props.theme.colors.state.premium};
+    }
+  `}
+`;
+
 class RegistrationForm extends Component {
   static propTypes = {
     register: PropTypes.func.isRequired,
@@ -27,12 +43,18 @@ class RegistrationForm extends Component {
     email: PropTypes.string,
     raw_invitation_token: PropTypes.string,
     validation_token: PropTypes.string,
+    selected: PropTypes.oneOf(['basic', 'premium']),
+    redirectTo: PropTypes.string,
   }
 
   static defaultProps = {
     email: null,
     raw_invitation_token: null,
     validation_token: null,
+    selected: 'basic',
+    // If the redirect location is somehow the root, lets skip that
+    // and go to welcome. Anything else is fair game.
+    redirectTo: (REDIRECT_TO === '/' ? '/welcome' : REDIRECT_TO),
   }
 
   constructor(props) {
@@ -49,7 +71,15 @@ class RegistrationForm extends Component {
       receive_newsletter: false,
       attributeErrors: {},
       errorMessage: null,
+      selected: this.props.selected,
+      redirectTo: this.props.redirectTo,
     };
+  }
+
+  onPlanSelect = (selected) => {
+    const mode = selected === 'premium' ? selected : 'resting';
+    const redirectTo = selected === 'premium' ? '/welcome/billing' : this.props.redirectTo;
+    this.setState({ selected, mode, redirectTo });
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
@@ -94,6 +124,7 @@ class RegistrationForm extends Component {
       password_confirmation,
       accept_terms,
       receive_newsletter,
+      redirectTo,
     } = this.state;
 
     this.setState({ mode: 'registering' });
@@ -124,11 +155,7 @@ class RegistrationForm extends Component {
       })
       .then(() => {
         this.setState({ mode: 'redirecting' });
-
-        // If the redirect location is somehow the root, lets skip that
-        // and go to welcome. Anything else is fair game.
-        const redirectLocation = REDIRECT_TO === '/' ? '/welcome' : REDIRECT_TO;
-        window.location = redirectLocation;
+        window.location = redirectTo;
 
         track.submit(en.REGISTER);
         if (raw_invitation_token) track.submit(en.ACCEPTED_INVITATION);
@@ -153,11 +180,12 @@ class RegistrationForm extends Component {
       receive_newsletter,
       attributeErrors,
       errorMessage,
+      selected,
     } = this.state;
 
     return (
       <AuthForm onSubmit={this.handleSubmit}>
-        <Text f={7} mb={6}>
+        <Text f={6} mb={6}>
           Are.na is a platform for thinking together.
         </Text>
 
@@ -212,6 +240,8 @@ class RegistrationForm extends Component {
           required
         />
 
+        <PlanSelector onPlanSelect={this.onPlanSelect} />
+
         <Box my={5}>
           <LabelledCheckbox
             checked={accept_terms}
@@ -241,16 +271,17 @@ class RegistrationForm extends Component {
         }
 
         <AuthForm.Submit>
-          <Button type="submit" disabled={!accept_terms}>
+          <RegisterButton type="submit" disabled={!accept_terms} isPremium={selected === 'premium'}>
             {{
               resting: 'Join',
+              premium: 'Join with Premium',
               active: 'Join',
               registering: 'Registering...',
               logging_in: 'Logging in...',
               redirecting: 'Redirecting...',
               error: 'Error',
             }[mode]}
-          </Button>
+          </RegisterButton>
 
           <AuthForm.Subtext>
             Already a member?
