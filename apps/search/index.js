@@ -1,16 +1,13 @@
 import express from 'express';
 
-import Routes from 'apps/search/Routes';
-
 import apolloMiddleware from 'react/apollo/middleware';
 
+import pageResolver from 'react/components/UI/Page/resolver';
 import withStaticRouter from 'react/hocs/WithStaticRouter';
 
+import Routes from 'apps/search/Routes';
+
 const app = express();
-
-app.set('views', `${__dirname}/templates`);
-app.set('view engine', 'jade');
-
 
 const middlewareStack = [
   apolloMiddleware,
@@ -18,13 +15,12 @@ const middlewareStack = [
 
 const resolve = [
   ...middlewareStack, (req, res, next) => {
-    req.apollo.render(withStaticRouter(Routes))
-      .then((apollo) => {
-        const view = req.path.split('/').pop();
-
-        res.render('index', {
-          apollo,
-          view,
+    req.apollo.render(withStaticRouter(Routes), null, { mode: 'page' })
+      .then((apolloRes) => {
+        pageResolver({
+          bundleName: 'search',
+          apolloRes,
+          res,
         });
       })
       .catch((err) => {
