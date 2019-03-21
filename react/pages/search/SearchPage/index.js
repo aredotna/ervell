@@ -29,8 +29,9 @@ export default class SearchPage extends Component {
 
     return (
       <ErrorBoundary>
+        <Title>Search</Title>
+
         <TopBarLayout>
-          <Title>Search</Title>
           <Head>
             <meta name="robots" content="none" />
           </Head>
