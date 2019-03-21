@@ -7,6 +7,7 @@ import Constrain from 'react/components/UI/Constrain';
 import SearchMetadata from 'react/components/SearchMetadata';
 import SearchViews from 'react/pages/search/SearchPage/components/SearchViews';
 import Title from 'react/components/UI/Head/components/Title';
+import Head from 'react/components/UI/Head';
 
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 
@@ -30,6 +31,10 @@ export default class SearchPage extends Component {
       <ErrorBoundary>
         <TopBarLayout>
           <Title>Search</Title>
+          <Head>
+            <meta name="robots" content="none" />
+          </Head>
+
           <Constrain>
             <SearchMetadata
               term={term}
