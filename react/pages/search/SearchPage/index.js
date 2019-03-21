@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import TopBarLayout from 'react/components/UI/Layouts/TopBarLayout';
+import Constrain from 'react/components/UI/Constrain';
+
 import SearchMetadata from 'react/components/SearchMetadata';
 import SearchViews from 'react/pages/search/SearchPage/components/SearchViews';
+import Title from 'react/components/UI/Head/components/Title';
 
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
 
@@ -24,19 +28,22 @@ export default class SearchPage extends Component {
 
     return (
       <ErrorBoundary>
-        <div>
-          <SearchMetadata
-            term={term}
-            view={view}
-            block_filter={block_filter}
-          />
+        <TopBarLayout>
+          <Title>Search</Title>
+          <Constrain>
+            <SearchMetadata
+              term={term}
+              view={view}
+              block_filter={block_filter}
+            />
 
-          <SearchViews
-            term={term}
-            view={view}
-            block_filter={block_filter}
-          />
-        </div>
+            <SearchViews
+              term={term}
+              view={view}
+              block_filter={block_filter}
+            />
+          </Constrain>
+        </TopBarLayout>
       </ErrorBoundary>
     );
   }
