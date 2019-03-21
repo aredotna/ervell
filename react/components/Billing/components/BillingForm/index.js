@@ -54,8 +54,7 @@ class BillingForm extends PureComponent {
     mode: 'resting',
     errorMessage: null,
     operations: [],
-
-    plan_id: this.props.plan_id || this.props.me.customer.plan.id,
+    plan_id: this.props.me.customer.plan.id,
     coupon_code: '',
   }
 
@@ -276,7 +275,7 @@ class BillingForm extends PureComponent {
               }
 
               <PlanSelection
-                key={customer.plan.id + customer.is_canceled}
+                key={plan_id + customer.is_canceled}
                 me={me}
                 onSelect={this.handlePlan}
                 plan_id={plan_id}
@@ -340,7 +339,7 @@ class BillingForm extends PureComponent {
                 onClick={this.handleSubmit}
                 disabled={(
                   (!customer.default_credit_card) ||
-                  (operations.length === 0 && !this.props.plan_id)
+                  (operations.length === 0)
                 )}
               >
                 <Icons name="CreditCard" size="1rem" mr={4} />
