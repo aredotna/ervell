@@ -13,9 +13,9 @@ import BlockLightboxMetadataPane from 'react/components/BlockLightbox/components
 
 const Container = styled(Box).attrs({
   flexDirection: ['column', 'row', 'row'],
+  height: ['unset', '100%', '100%'],
+  display: ['block', 'flex', 'flex'],
 })`
-  display: flex;
-  height: 100%;
 `;
 
 export default class BlockLightbox extends PureComponent {

@@ -28,6 +28,8 @@ import Medallion from 'react/components/UI/Icons/Medallion.svg';
 import Tools from 'react/components/UI/Icons/Tools.svg';
 import Cap from 'react/components/UI/Icons/Cap.svg';
 import RightCaret from 'react/components/UI/Icons/RightCaret.svg';
+import EnterFullscreen from 'react/components/UI/Icons/EnterFullscreen.svg';
+import ExitFullscreen from 'react/components/UI/Icons/ExitFullscreen.svg';
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -53,6 +55,8 @@ export const COMPONENTS = {
   Tools: <Tools />,
   Cap: <Cap />,
   RightCaret: <RightCaret />,
+  EnterFullscreen: <EnterFullscreen />,
+  ExitFullscreen: <ExitFullscreen />,
 };
 
 export const ICON_NAMES = Object.keys(COMPONENTS);

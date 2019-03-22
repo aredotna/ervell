@@ -12,6 +12,7 @@ import {
   space,
   bgColor,
   alignSelf,
+  zIndex,
 } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
@@ -27,6 +28,8 @@ const Container = styled.a`
   ${bottom}
   ${left}
   ${bgColor}
+  ${zIndex}
+  ${props => props.transform && `transform: ${props.transform};`}
 
   &:hover > span {
     &:after,

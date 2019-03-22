@@ -17,21 +17,28 @@ const navigate = xs => ({
 });
 
 const Prev = styled(Link).attrs({
-  px: 6,
+  px: 7,
   py: 6,
 })`
   position: absolute;
   display: block;
-  top: 50%;
+  top: 0;
+  bottom: 0;
   left: 0;
-  transform: translateY(-50%);
   user-select: none;
-  background-color: ${props => props.theme.colors.utility.semiTranslucent};
   z-index: 1;
-  transform: rotate(180deg);
+  opacity: 0.1;
+
+  > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scale(-1) translate(-50%, -50%);
+    transform-origin: 0 0;
+  }
 
   &:hover {
-    background-color: white;
+    opacity: 1;
 
     svg {
       fill: black;
@@ -42,7 +49,10 @@ const Prev = styled(Link).attrs({
 const Next = styled(Prev)`
   left: unset;
   right: 0;
-  transform: rotate(360deg);
+
+  > div {
+    transform: translate(-50%, -50%);
+  }
 `;
 
 class ModalBlockLightboxNavigation extends PureComponent {
@@ -104,7 +114,6 @@ class ModalBlockLightboxNavigation extends PureComponent {
 
     return onChange(prevId);
   }
-
 
   preload = (direction) => {
     const { client } = this.props;

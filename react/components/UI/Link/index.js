@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { display, space } from 'styled-system';
+
+import { mixin as boxMixin } from 'react/components/UI/Box';
 
 const Link = styled.a`
-  box-sizing: border-box;
-  ${display}
-  ${space}
+  ${boxMixin}
+  ${props => props.userSelect && `user-select: ${props.userSelect};`}
 `;
 
 Link.defaultProps = {

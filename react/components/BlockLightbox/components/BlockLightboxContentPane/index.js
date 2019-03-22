@@ -12,7 +12,12 @@ import BlockLightboxLink from 'react/components/BlockLightbox/components/BlockLi
 import BlockLightboxAttachment from 'react/components/BlockLightbox/components/BlockLightboxAttachment';
 import BlockLightboxEmbed from 'react/components/BlockLightbox/components/BlockLightboxEmbed';
 
-const Container = styled(Box)`
+const Container = styled(Box).attrs({
+  height: ['75vh', 'auto', 'auto'],
+  minHeight: ['75vh', 'auto', 'auto'],
+  maxHeight: ['auto', 'auto', 'auto'],
+  mb: [8, 0, 0],
+})`
   position: relative;
   flex: 3;
   display: flex;

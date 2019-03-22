@@ -64,12 +64,12 @@ export default class BlockLightboxAttachment extends PureComponent {
               Download {block.title}
             </Text>
 
-            <Box display="flex" alignItems="center" justifyContent="center">
+            <Box my={3} display="flex" alignItems="center" justifyContent="center">
               <Badge mr={4} f={3} color="gray.medium">
                 {block.file_extension}
               </Badge>
 
-              <Text f={5} fontWeight="bold" lineHeight={2} color="gray.medium">
+              <Text f={4} fontWeight="bold" color="gray.medium">
                 {block.file_size}
               </Text>
             </Box>

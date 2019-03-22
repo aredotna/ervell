@@ -46,7 +46,15 @@ export default class BlockLightboxLink extends PureComponent {
 
     return (
       <Box p={6} width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
-        <Container display="flex" flexDirection="column" height="95%" width="95%" border="1px solid" borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]} borderRadius="0.25em">
+        <Container
+          display="flex"
+          flexDirection="column"
+          height="95%"
+          width="90%"
+          border="1px solid"
+          borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]}
+          borderRadius="0.25em"
+        >
           <a href={block.source_url} target="_blank">
             <Box
               px={6}
@@ -58,7 +66,7 @@ export default class BlockLightboxLink extends PureComponent {
             >
               <Icons name="Link" size="1rem" color="gray.base" mr={5} />
 
-              <Text f={2} font="mono" color="gray.semiBold">
+              <Text f={2} font="mono" color="gray.semiBold" overflowEllipsis>
                 <u>{block.source_url}</u>
               </Text>
             </Box>

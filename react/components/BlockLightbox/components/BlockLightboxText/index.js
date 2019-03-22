@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 
 import blockLightboxTextFragment from 'react/components/BlockLightbox/components/BlockLightboxText/fragments/blockLightboxText';
-
-const Container = styled(Box)`
-`;
 
 export default class BlockLightboxText extends PureComponent {
   static propTypes = {
@@ -21,7 +17,7 @@ export default class BlockLightboxText extends PureComponent {
     const { block, layout } = this.props;
 
     return (
-      <Container height="100%" width="100%">
+      <Box height="100%" width="100%">
         <Box
           height="100%"
           width="100%"
@@ -30,11 +26,14 @@ export default class BlockLightboxText extends PureComponent {
         >
           <Box
             minHeight="100%"
+            width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
             bg={{ DEFAULT: 'white', FULLSCREEN: 'gray.bold' }[layout]}
             border="1px solid"
             borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]}
             px={7}
             py={6}
+            mx="auto"
+            overflow="hidden"
           >
             <Text
               font="serif"
@@ -45,7 +44,7 @@ export default class BlockLightboxText extends PureComponent {
             />
           </Box>
         </Box>
-      </Container>
+      </Box>
     );
   }
 }

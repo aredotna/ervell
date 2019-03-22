@@ -3,16 +3,36 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import Mousetrap from 'mousetrap';
 import { isEmpty } from 'underscore';
+import styled from 'styled-components';
 
 import modalBlockLightboxQuery from 'react/components/ModalBlockLightbox/queries/modalBlockLightbox';
 
 import Box from 'react/components/UI/Box';
 import Link from 'react/components/UI/Link';
+import Icons from 'react/components/UI/Icons';
 import Close from 'react/components/UI/Close';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlockLightbox from 'react/components/BlockLightbox';
 import ModalBlockLightboxNavigation from 'react/components/ModalBlockLightbox/components/ModalBlockLightboxNavigation';
+
+const Actions = styled(Box)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+`;
+
+const Fullscreen = styled(Link)`
+  user-select: none;
+
+  &:hover svg {
+    fill: black;
+  }
+`;
 
 export default class ModalBlockLightbox extends PureComponent {
   static propTypes = {
@@ -60,7 +80,8 @@ export default class ModalBlockLightbox extends PureComponent {
       });
     }
 
-    window.history.replaceState(null, null, `/block/${id}`);
+    // TODO: Update to /block once before production
+    window.history.replaceState(null, null, `/lightbox/${id}`);
   }
 
   updateId = (id) => {
@@ -104,11 +125,6 @@ export default class ModalBlockLightbox extends PureComponent {
                   <ModalBlockLightboxNavigation
                     id={id}
                     ids={ids}
-                    position="absolute"
-                    top="50%"
-                    left="50%"
-                    bg="white"
-                    zIndex="1"
                     onChange={this.updateId}
                   />
                 }
@@ -117,21 +133,27 @@ export default class ModalBlockLightbox extends PureComponent {
           }}
         </Query>
 
-        <Box position="absolute" top="0" left="0" p={5}>
-          <Link onClick={this.toggleLayout}>
-            &bull;
-          </Link>
-        </Box>
+        <Actions>
+          <Fullscreen
+            px={2}
+            py={6}
+            onClick={this.toggleLayout}
+          >
+            <Icons
+              size="1.5em"
+              name={{ DEFAULT: 'EnterFullscreen', FULLSCREEN: 'ExitFullscreen' }[layout]}
+              color="gray.semiBold"
+            />
+          </Fullscreen>
 
-        <Close
-          position="absolute"
-          size={7}
-          p={5}
-          thickness="4px"
-          top="0"
-          right="0"
-          onClick={onClose}
-        />
+          <Close
+            size={8}
+            py={5}
+            px={4}
+            thickness="2px"
+            onClick={onClose}
+          />
+        </Actions>
       </Box>
     );
   }

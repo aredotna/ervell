@@ -7,7 +7,6 @@ import blockLightboxMetadataPaneFragment from 'react/components/BlockLightbox/co
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
-import Link from 'react/components/UI/Link';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
@@ -98,6 +97,8 @@ export default class BlockLightboxMetadataPane extends PureComponent {
             lineHeight={2}
             dangerouslySetInnerHTML={{ __html: block.description }}
             breakWord
+            boldLinks
+            hoverLinks={{ color: 'black' }}
           />
         }
 

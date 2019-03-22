@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import blockLightboxImageFragment from 'react/components/BlockLightbox/components/BlockLightboxImage/fragments/blockLightboxImage';
 
-import Box from 'react/components/UI/Box';
+import Link from 'react/components/UI/Link';
 
 const Image = styled.img`
   display: block;
@@ -22,13 +22,21 @@ export default class BlockLightboxImage extends PureComponent {
     const { block } = this.props;
 
     return (
-      <Box width="95%" height="95%" display="flex" alignItems="center" justifyContent="center">
+      <Link
+        width="90%"
+        height="95%"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        href={block.original_image_url}
+        target="_blank"
+      >
         <Image
           src={block.image_url}
           alt={block.title}
           title={block.title}
         />
-      </Box>
+      </Link>
     );
   }
 }
