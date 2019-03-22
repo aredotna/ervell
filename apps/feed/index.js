@@ -1,5 +1,7 @@
 import express from 'express';
 
+import getFirstStatusCode from 'react/util/getFirstStatusCode';
+
 import apolloMiddleware from 'react/apollo/middleware';
 import setSeedMiddleware from 'apps/profile/middleware/setSeed';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
@@ -24,7 +26,17 @@ const renderFeed = (req, res, next) => {
       });
     })
     .catch((err) => {
-      next(err);
+      const STATUS_CODE = getFirstStatusCode(err);
+
+      if (STATUS_CODE === 'UNAUTHORIZED') {
+        // This typically happens if the serialized user is "bad"
+        // or not actually logged in. If so: logout, then redirect somewhere.
+        // Falling through by using `next()` doesn't seem to actually purge the session.
+        req.logout();
+        return res.redirect('/log_in');
+      }
+
+      return next(err);
     });
 };
 
