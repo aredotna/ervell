@@ -42,7 +42,6 @@ class FeedBreadcrumb extends Component {
         {{
           '/': 'Feed',
           '/feed': 'Feed',
-          '/newfeed': 'Feed',
           '/notifications': 'Notifications',
         }[pathname]}
       </StickyBreadcrumbPath.Crumb>
@@ -54,7 +53,6 @@ class FeedBreadcrumb extends Component {
           {{
             '/': FeedOptions,
             '/feed': FeedOptions,
-            '/newfeed': FeedOptions,
             '/notifications': 'Notifications',
           }[pathname]}
         </StickyBreadcrumbPath.Crumb>
