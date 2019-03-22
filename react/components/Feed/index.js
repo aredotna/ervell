@@ -7,7 +7,6 @@ import { map, flatten } from 'underscore';
 
 import feedQuery from 'react/components/Feed/queries/feed';
 
-import updateMediatorBlocks from 'react/util/updateMediatorBlocks';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlocksLoadingIndicator from 'react/components/UI/BlocksLoadingIndicator';
@@ -47,7 +46,7 @@ export default class Feed extends PureComponent {
     const { limit, hasMore, offset } = this.state;
 
     return (
-      <Query query={feedQuery} variables={{ limit, type }} onCompleted={onCompleted}>
+      <Query query={feedQuery} variables={{ limit, type }} onCompleted={onCompleted} ssr={false}>
         {({
           loading, error, data, fetchMore,
         }) => {
@@ -94,7 +93,6 @@ export default class Feed extends PureComponent {
                         },
                       },
                     };
-                    updateMediatorBlocks({ blocks: this.getContext(mergedResults) });
 
                     return mergedResults;
                   },
