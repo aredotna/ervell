@@ -41,6 +41,11 @@ export default class PlanSelection extends PureComponent {
   static propTypes = {
     me: propType(planSelectionFragment).isRequired,
     onSelect: PropTypes.func,
+    plan_id: PropTypes.string,
+  }
+
+  static defaultProps = {
+    plan_id: null,
   }
 
   static defaultProps = {
@@ -48,13 +53,16 @@ export default class PlanSelection extends PureComponent {
   }
 
   render() {
-    const { onSelect, me, me: { customer } } = this.props;
+    const {
+      onSelect, plan_id, me, me: { customer },
+    } = this.props;
+    const planId = plan_id || customer.plan.id;
 
     // TODO: Extract into actual can field
     const canManagePlan = customer.is_canceled || customer.is_lifetime || customer.is_beneficiary;
 
     return (
-      <RadioOptions value={customer.plan.id} onSelect={onSelect}>
+      <RadioOptions value={planId} onSelect={onSelect}>
         {({ selectedValue, ...rest }) => (
           <div>
             <RadioOptions.Option

@@ -58,7 +58,6 @@ class NoFollowingMessage extends Component {
 
   componentDidMount() {
     if (window.location.href.indexOf('showModal=true') > -1) {
-      console.log('state');
       this.setState({ mode: 'modal' });
     }
   }
@@ -83,7 +82,7 @@ class NoFollowingMessage extends Component {
   render() {
     const { data, data: { error, loading } } = this.props;
 
-    if (error || loading || (data.me.counts.following > 1)) {
+    if (error || loading || (data.me.counts.following > 0)) {
       return (<div />);
     }
 
@@ -101,7 +100,7 @@ class NoFollowingMessage extends Component {
         </Headline>
 
         <ActionContainer>
-          <GenericButtonLink f={5} href="/examples">
+          <GenericButtonLink f={5} href="/examples" mb={4}>
             See examples
           </GenericButtonLink>
 

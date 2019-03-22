@@ -42,7 +42,7 @@ export default class AuthForm extends Component {
       <Form onSubmit={onSubmit} {...rest}>
         <CloseButton />
 
-        <Icons name="ArenaMark" size={7} mb={9} />
+        <Icons name="ArenaMark" size={7} mb={8} />
 
         {this.props.children}
       </Form>

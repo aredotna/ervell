@@ -4,8 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 
 import parseRoute from 'react/util/parseRoute';
 
-import exploreUiStateQuery from 'apps/explore/queries/exploreUiState';
+import exploreUiStateQuery from 'apps/feed/queries/exploreUiState';
 import ExplorePage from 'react/pages/explore/ExplorePage';
+
+import FeedPage from 'react/pages/feed/FeedPage';
+import NotificationPage from 'react/pages/feed/NotificationPage';
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM'];
 
@@ -19,14 +22,14 @@ export default () => (
     <Route
       path="/explore/:view?"
       render={parseRoute(({ params, query }) => (
-        <Query query={exploreUiStateQuery}>
+        <Query query={exploreUiStateQuery} fetchPolicy="network-only">
           {({ data, error }) => {
             if (error) return error.message;
 
             const { cookies } = data;
 
-            const view = params.view || cookies.view || 'all';
-            const sort = setValid((query.sort || cookies.sort), VALID_SORTS, 'UPDATED_AT');
+            const view = params.view || (cookies && cookies.view) || 'all';
+            const sort = setValid((query.sort || (cookies && cookies.sort)), VALID_SORTS, 'UPDATED_AT');
             const seed = parseInt(query.seed, 10) || 0;
 
             return (
@@ -40,5 +43,9 @@ export default () => (
         </Query>
       ))}
     />
+    <Route path="/feed" component={FeedPage} />
+    <Route path="/notifications" component={NotificationPage} />
+
+    <Route path="/" component={FeedPage} />
   </Switch>
 );

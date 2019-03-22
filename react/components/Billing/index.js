@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 
 import billingQuery from 'react/components/Billing/queries/billing';
@@ -11,7 +12,18 @@ import MyHeader from 'react/components/Billing/components/MyHeader';
 import BillingForm from 'react/components/Billing/components/BillingForm';
 
 export default class Billing extends PureComponent {
+  static propTypes = {
+    plan_id: PropTypes.string,
+    onSuccess: PropTypes.func,
+  }
+
+  static defaultProps = {
+    plan_id: null,
+    onSuccess: () => null,
+  }
   render() {
+    const { plan_id, onSuccess } = this.props;
+
     return (
       <Box width={['100%', '75%', '75%']} mx="auto" mt={6} mb={8} position="relative">
         <Query query={billingQuery}>
@@ -35,7 +47,11 @@ export default class Billing extends PureComponent {
                 <MyHeader me={me} mb={7} />
 
                 <StripeContext>
-                  <BillingForm me={me} />
+                  <BillingForm
+                    me={me}
+                    plan_id={plan_id}
+                    onSuccess={onSuccess}
+                  />
                 </StripeContext>
               </React.Fragment>
             );
