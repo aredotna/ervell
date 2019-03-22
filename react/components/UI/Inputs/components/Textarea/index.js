@@ -5,7 +5,14 @@ import { preset } from 'react/styles/functions';
 
 import mixin from 'react/components/UI/Inputs/mixin';
 
-export default styled.textarea`
+const Textarea = styled.textarea`
   ${mixin}
   ${preset(lineHeight, { lineHeight: 1 })}
+  resize: ${props => props.resize};
 `;
+
+Textarea.defaultProps = {
+  resize: 'vertical',
+};
+
+export default Textarea;
