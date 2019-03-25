@@ -22,6 +22,7 @@ import {
   right,
   bottom,
   left,
+  zIndex,
 } from 'styled-system';
 
 import { neutralMargins, overflowScrolling } from 'react/styles/mixins';
@@ -55,6 +56,7 @@ export const mixin = css`
   ${right}
   ${bottom}
   ${left}
+  ${zIndex}
   ${props => props.overflowScrolling && overflowScrolling}
 `;
 

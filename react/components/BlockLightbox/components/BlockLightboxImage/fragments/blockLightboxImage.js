@@ -7,6 +7,7 @@ export default gql`
       title
       thumb_url: image_url(size: THUMB)
       image_url(size: LARGE)
+      original_image_url: image_url(size: ORIGINAL)
     }
   }
 `;

@@ -17,6 +17,11 @@ export default gql`
         url
       }
     }
+    ... on Block {
+      can {
+        mute
+      }
+    }
     ...BlockLightboxShare
   }
   ${blockLightboxShareFragment}

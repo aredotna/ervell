@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
 import blockLightboxContentPaneFragment from 'react/components/BlockLightbox/components/BlockLightboxContentPane/fragments/blockLightboxContentPane';
@@ -11,32 +12,55 @@ import BlockLightboxLink from 'react/components/BlockLightbox/components/BlockLi
 import BlockLightboxAttachment from 'react/components/BlockLightbox/components/BlockLightboxAttachment';
 import BlockLightboxEmbed from 'react/components/BlockLightbox/components/BlockLightboxEmbed';
 
-const Container = styled(Box)`
+const Container = styled(Box).attrs({
+  height: ['75vh', 'auto', 'auto'],
+  minHeight: ['75vh', 'auto', 'auto'],
+  maxHeight: ['auto', 'auto', 'auto'],
+  mb: [8, 0, 0],
+})`
+  position: relative;
   flex: 3;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${props => props.layout === 'FULLSCREEN' && `
+    background-color: ${props.theme.colors.gray.bold};
+  `}
 `;
 
 export default class BlockLightboxContentPane extends PureComponent {
   static propTypes = {
+    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxContentPaneFragment).isRequired,
+    children: PropTypes.node,
+  }
+
+  static defaultProps = {
+    children: null,
   }
 
   render() {
-    const { block } = this.props;
+    const {
+      block,
+      layout,
+      children,
+      ...rest
+    } = this.props;
 
     const Content = {
-      Text: () => <BlockLightboxText block={block} />,
-      Image: () => <BlockLightboxImage block={block} />,
-      Link: () => <BlockLightboxLink block={block} />,
-      Attachment: () => <BlockLightboxAttachment block={block} />,
-      Embed: () => <BlockLightboxEmbed block={block} />,
+      Text: props => <BlockLightboxText {...props} />,
+      Image: props => <BlockLightboxImage {...props} />,
+      Link: props => <BlockLightboxLink {...props} />,
+      Attachment: props => <BlockLightboxAttachment {...props} />,
+      Embed: props => <BlockLightboxEmbed {...props} />,
     }[block.__typename];
 
     return (
-      <Container>
-        <Content />
+      <Container layout={layout} {...rest}>
+        <Content block={block} layout={layout} />
+
+        {children}
       </Container>
     );
   }

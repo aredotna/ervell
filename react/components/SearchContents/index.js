@@ -12,7 +12,7 @@ import Cell from 'react/components/Cell';
 
 export default class SearchContents extends PureComponent {
   static propTypes = {
-    type: PropTypes.string,
+    type: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     q: PropTypes.string.isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
