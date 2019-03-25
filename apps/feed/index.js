@@ -4,6 +4,7 @@ import getFirstStatusCode from 'react/util/getFirstStatusCode';
 
 import apolloMiddleware from 'react/apollo/middleware';
 import setSeedMiddleware from 'apps/profile/middleware/setSeed';
+import homePathMiddleware from 'apps/feed/middleware/homePath';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 
 import pageResolver from 'react/components/UI/Page/resolver';
@@ -63,7 +64,7 @@ const findFriendsCallback = (req, res, next) =>
     .catch(next);
 
 // Feed
-app.get('/', apolloMiddleware, renderFeed);
+app.get('/', homePathMiddleware, apolloMiddleware, renderFeed);
 app.get('/feed', ensureLoggedInMiddleware, apolloMiddleware, renderFeed);
 app.get('/notifications', ensureLoggedInMiddleware, apolloMiddleware, renderFeed);
 
