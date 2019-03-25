@@ -16,7 +16,7 @@ import {
 } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
-import { antialiased, neutralMarginsY, hyphenate, breakWord } from 'react/styles/mixins';
+import { antialiased, neutralMarginsY, hyphenate, breakWord, overflowEllipsis } from 'react/styles/mixins';
 
 export const baseMixin = css`
   ${preset(fontFamily, { font: 'sans' })}
@@ -40,6 +40,7 @@ export const mixin = css`
   ${props => props.neutralMarginsY && neutralMarginsY}
   ${props => props.hyphenate && hyphenate}
   ${props => props.breakWord && breakWord}
+  ${props => props.overflowEllipsis && overflowEllipsis}
   ${props => props.textTransform && `text-transform: ${props.textTransform};`}
   ${props => props.verticalAlign && `vertical-align: ${props.verticalAlign};`}
 
@@ -49,6 +50,10 @@ export const mixin = css`
 
     ${props => props.underlineLinks && `
       text-decoration: underline;
+    `}
+
+    ${props => props.boldLinks && `
+      font-weight: bold;
     `}
 
     ${props => props.hoverLinks && `

@@ -16,6 +16,7 @@ module.exports = {
     "jsx-a11y/no-autofocus": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "jsx-a11y/tabindex-no-positive": 0,
+    "jsx-a11y/mouse-events-have-key-events": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": 0,
     "react/no-danger": 0,

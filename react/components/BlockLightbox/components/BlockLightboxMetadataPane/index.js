@@ -7,7 +7,6 @@ import blockLightboxMetadataPaneFragment from 'react/components/BlockLightbox/co
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
-import Link from 'react/components/UI/Link';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
@@ -16,6 +15,7 @@ import BlockLightboxComments from 'react/components/BlockLightbox/components/Blo
 import Modal from 'react/components/UI/Modal/Portal';
 import ManageBlock from 'react/components/ManageBlock';
 import Icons from 'react/components/UI/Icons';
+import GenericButton from 'react/components/UI/GenericButton';
 
 export default class BlockLightboxMetadataPane extends PureComponent {
   static propTypes = {
@@ -38,7 +38,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const { block } = this.props;
+    const { block, ...rest } = this.props;
 
     return (
       <Box
@@ -47,7 +47,9 @@ export default class BlockLightboxMetadataPane extends PureComponent {
         pt={4}
         pb={8}
         height="100%"
+        bg="white"
         overflowScrolling
+        {...rest}
       >
         <Text
           mb={5}
@@ -57,19 +59,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           verticalAlign="middle"
         >
           <span dangerouslySetInnerHTML={{ __html: block.title }} />
-
-          {block.can.manage &&
-            <Link onClick={this.openManage} title="Edit" display="inline-flex" p={3}>
-              <Icons name="Pencil" size={4} color="gray.base" />
-            </Link>
-          }
         </Text>
-
-        {mode === 'manage' &&
-          <Modal onClose={this.closeModal}>
-            <ManageBlock block={block} onDone={this.closeModal} />
-          </Modal>
-        }
 
         <Text f={1} lineHeight={2} color="gray.medium">
           <time
@@ -107,12 +97,27 @@ export default class BlockLightboxMetadataPane extends PureComponent {
             lineHeight={2}
             dangerouslySetInnerHTML={{ __html: block.description }}
             breakWord
+            boldLinks
+            hoverLinks={{ color: 'black' }}
           />
         }
 
         <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
           <BlockLightboxActions block={block} />
         </Text>
+
+        {block.can.manage &&
+          <GenericButton mt={7} onClick={this.openManage} title="Edit" display="flex" f={2}>
+            <Icons name="Pencil" size="1rem" color="gray.base" mr={4} />
+            Edit block
+          </GenericButton>
+        }
+
+        {mode === 'manage' &&
+          <Modal onClose={this.closeModal}>
+            <ManageBlock block={block} onDone={this.closeModal} />
+          </Modal>
+        }
 
         <Query query={blockLightboxFoldQuery} variables={{ id: block.id }} ssr={false}>
           {({ loading, error, data }) => {
@@ -136,15 +141,19 @@ export default class BlockLightboxMetadataPane extends PureComponent {
                   mt={4}
                 />
 
-                <Header mt={8}>
-                  Comments
-                </Header>
+                {block.can.comment &&
+                  <React.Fragment>
+                    <Header mt={8}>
+                      Comments
+                    </Header>
 
-                <BlockLightboxComments
-                  block={{ ...block, ...data.block }}
-                  loading={loading}
-                  mt={4}
-                />
+                    <BlockLightboxComments
+                      block={{ ...block, ...data.block }}
+                      loading={loading}
+                      mt={4}
+                    />
+                  </React.Fragment>
+                }
               </React.Fragment>
             );
           }}

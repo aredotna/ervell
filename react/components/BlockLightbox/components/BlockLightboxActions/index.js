@@ -16,6 +16,10 @@ const Container = styled(Box)`
   }
 `;
 
+const Mute = styled(MuteButton)`
+  cursor: pointer;
+`;
+
 const BlockLightboxActions = ({ block }) => (
   <Container>
     <BlockLightboxShare block={block} />
@@ -37,7 +41,9 @@ const BlockLightboxActions = ({ block }) => (
       </a>
     }
 
-    <MuteButton id={block.id} type="BLOCK" />
+    {block.can.mute &&
+      <Mute id={block.id} type="BLOCK" />
+    }
   </Container>
 );
 

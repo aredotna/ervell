@@ -14,7 +14,7 @@ storiesOf('Close', module)
         states={[
           { size: 6 },
           {
-            size: 6,
+            size: 7,
             color: 'white',
             thickness: '4px',
           },
@@ -22,6 +22,11 @@ storiesOf('Close', module)
             size: 8,
             color: 'gray.base',
             thickness: '5px',
+          },
+          {
+            size: '2rem',
+            p: 3,
+            bg: 'white',
           },
         ]}
       >
