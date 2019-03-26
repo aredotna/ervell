@@ -10,6 +10,7 @@ import Text from 'react/components/UI/Text';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import CompactChannel, { EmptyCompactChannel } from 'react/components/CompactChannel';
 import Connect from 'react/components/Connect';
+import BlockLightboxChannelsAlsoIn from 'react/components/BlockLightbox/components/BlockLightboxChannelsAlsoIn';
 
 export default class BlockLightboxConnections extends PureComponent {
   static propTypes = {
@@ -21,6 +22,7 @@ export default class BlockLightboxConnections extends PureComponent {
 
   render() {
     const {
+      block,
       block: {
         id,
         private_channels,
@@ -41,11 +43,19 @@ export default class BlockLightboxConnections extends PureComponent {
     return (
       <Box {...rest}>
         {private_channels && private_channels.map(channel => (
-          <CompactChannel key={channel.id} channel={channel} mt={3} />
+          <CompactChannel
+            key={`CompactChannelPrivate_${channel.id}`}
+            channel={channel}
+            mt={3}
+          />
         ))}
 
         {public_channels && public_channels.map(channel => (
-          <CompactChannel key={channel.id} channel={channel} mt={3} />
+          <CompactChannel
+            key={`CompactChannelPublic_${channel.id}`}
+            channel={channel}
+            mt={3}
+          />
         ))}
 
         {(loading || loadingMore) &&
@@ -67,6 +77,25 @@ export default class BlockLightboxConnections extends PureComponent {
               <Text f={4}>&nbsp;</Text>
             </Box>
           </EmptyCompactChannel>
+        }
+
+        {(counts && counts.channels_with_same_source > 0) &&
+          <React.Fragment>
+            <Text mt={7} f={1} color="gray.medium" textAlign="center" textTransform="uppercase">
+              Blocks with{' '}
+
+              <span title={source.url}>
+                this URL
+              </span>
+
+              {' '}also appear in
+            </Text>
+
+            <BlockLightboxChannelsAlsoIn
+              block={block}
+              loading={loading}
+            />
+          </React.Fragment>
         }
 
         <Connect
