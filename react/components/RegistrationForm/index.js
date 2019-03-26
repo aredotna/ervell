@@ -240,7 +240,7 @@ class RegistrationForm extends Component {
           required
         />
 
-        <PlanSelector onPlanSelect={this.onPlanSelect} />
+        <PlanSelector selected={selected} onPlanSelect={this.onPlanSelect} />
 
         <Box my={5}>
           <LabelledCheckbox

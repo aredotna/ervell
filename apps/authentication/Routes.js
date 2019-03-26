@@ -19,8 +19,10 @@ export default () => (
       />
 
       <Route
-        path="/sign_up"
-        render={() => <RegistrationPage />}
+        path="/sign_up/:plan?"
+        render={parseRoute(({ params }) => (
+          <RegistrationPage selected={params.plan} />
+        ))}
       />
 
       <Route
