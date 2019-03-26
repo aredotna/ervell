@@ -12,7 +12,7 @@ export default gql`
       counts {
         channels_with_same_source
       }
-      channels_with_same_source {
+      channels_with_same_source(per: 5) {
         ...CompactChannel
       }
     }
