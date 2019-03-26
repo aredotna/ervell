@@ -4,7 +4,7 @@ import blockLightboxConnectionsFragment from 'react/components/BlockLightbox/com
 import blockLightboxCommentsFragment from 'react/components/BlockLightbox/components/BlockLightboxComments/fragments/blockLightboxComments';
 
 export default gql`
-  query BlockLightboxFold($id: ID!) {
+  query BlockLightboxFold($id: ID!, $page: Int, $per: Int) {
     block: blokk(id: $id) {
       __typename
       ... on Model {

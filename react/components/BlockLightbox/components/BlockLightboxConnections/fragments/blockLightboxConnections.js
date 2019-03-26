@@ -10,14 +10,23 @@ export default gql`
     }
     ... on Block {
       counts {
-        channels
+        public_channels
+        private_channels: private_accessible_channels
       }
     }
     ... on ConnectableInterface {
-      channels {
+      public_channels(page: $page, per: $per) {
         __typename
         id
         ...CompactChannel
+      }
+      private_channels: private_accessible_channels(page: $page, per: $per) {
+        __typename
+        id
+        ...CompactChannel
+      }
+      source {
+        url
       }
     }
   }
