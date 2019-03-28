@@ -1,14 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lineHeight } from 'styled-system';
 
 import { preset } from 'react/styles/functions';
 
-import mixin from 'react/components/UI/Inputs/mixin';
+import inputMixin from 'react/components/UI/Inputs/mixin';
+
+export const mixin = css`
+  ${inputMixin}
+  ${preset(lineHeight, { lineHeight: 1 })}
+  resize: ${props => props.resize};
+`;
 
 const Textarea = styled.textarea`
   ${mixin}
-  ${preset(lineHeight, { lineHeight: 1 })}
-  resize: ${props => props.resize};
 `;
 
 Textarea.defaultProps = {
