@@ -9,15 +9,10 @@ import States from 'react/stories/__components__/States';
 import { Input, Textarea } from 'react/components/UI/Inputs';
 
 class FocusableInput extends Component {
-  constructor(props) {
-    super(props);
+  inputRef = React.createRef();
 
-    this.input = React.createRef();
-  }
-
-  handleClick = () => {
-    this.input.current.focus();
-  }
+  handleClick = () =>
+    this.inputRef.current.focus();
 
   render() {
     return (
@@ -30,7 +25,31 @@ class FocusableInput extends Component {
           Click me to focus input
         </a>
 
-        <Input ref={this.input} />
+        <Input ref={this.inputRef} />
+      </div>
+    );
+  }
+}
+
+// eslint-disable-next-line react/no-multi-comp
+class FocusableTextarea extends Component {
+  textareaRef = React.createRef();
+
+  handleClick = () =>
+    this.textareaRef.current.focus();
+
+  render() {
+    return (
+      <div>
+        <a
+          role="button"
+          tabIndex={0}
+          onClick={this.handleClick}
+        >
+          Click me to focus textarea
+        </a>
+
+        <Textarea ref={this.textareaRef} />
       </div>
     );
   }
@@ -84,6 +103,11 @@ storiesOf('Input', module)
   .add('Input - with ref', () => (
     <Specimen>
       <FocusableInput />
+    </Specimen>
+  ))
+  .add('Textarea - with ref', () => (
+    <Specimen>
+      <FocusableTextarea />
     </Specimen>
   ))
   .add('Input - colors', () => (

@@ -12,5 +12,8 @@ export default gql`
       name
       href
     }
+    can {
+      destroy
+    }
   }
 `;

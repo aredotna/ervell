@@ -1,21 +1,17 @@
 import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
-import { Query } from 'react-apollo';
 
-import blockLightboxFoldQuery from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/queries/blockLightboxFold';
 import blockLightboxMetadataPaneFragment from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/fragments/blockLightboxMetadataPane';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
-import ErrorAlert from 'react/components/UI/ErrorAlert';
-import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
-import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
-import BlockLightboxConnections from 'react/components/BlockLightbox/components/BlockLightboxConnections';
-import BlockLightboxComments from 'react/components/BlockLightbox/components/BlockLightboxComments';
 import Modal from 'react/components/UI/Modal/Portal';
-import ManageBlock from 'react/components/ManageBlock';
 import Icons from 'react/components/UI/Icons';
 import GenericButton from 'react/components/UI/GenericButton';
+import ManageBlock from 'react/components/ManageBlock';
+import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
+import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
+import BlockLightboxMetadataFold from 'react/components/BlockLightbox/components/BlockLightboxMetadataFold';
 
 export default class BlockLightboxMetadataPane extends PureComponent {
   static propTypes = {
@@ -119,45 +115,10 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           </Modal>
         }
 
-        <Query query={blockLightboxFoldQuery} variables={{ id: block.id }} ssr={false}>
-          {({ loading, error, data }) => {
-            if (error) {
-              return (
-                <ErrorAlert>
-                  {error.message}
-                </ErrorAlert>
-              );
-            }
-
-            return (
-              <React.Fragment>
-                <Header mt={8}>
-                  Connections
-                </Header>
-
-                <BlockLightboxConnections
-                  block={{ ...block, ...data.block }}
-                  loading={loading}
-                  mt={4}
-                />
-
-                {block.can.comment &&
-                  <React.Fragment>
-                    <Header mt={8}>
-                      Comments
-                    </Header>
-
-                    <BlockLightboxComments
-                      block={{ ...block, ...data.block }}
-                      loading={loading}
-                      mt={4}
-                    />
-                  </React.Fragment>
-                }
-              </React.Fragment>
-            );
-          }}
-        </Query>
+        <BlockLightboxMetadataFold
+          key={`BlockLightboxMetadataFold_${block.id}`}
+          block={block}
+        />
       </Box>
     );
   }

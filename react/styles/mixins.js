@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import { blend } from 'chroma-js';
+import { themeGet } from 'styled-system';
 
 import theme from 'react/styles/theme';
 
@@ -66,7 +67,8 @@ export const neutralMargins = css`
 
 export const channelVisibilityForegroundColor = css`
   ${(props) => {
-    const color = theme.colors.channel[props.visibility] || theme.colors.gray.base;
+    const color = theme.colors.channel[props.visibility] ||
+      themeGet(`colors.${props.color}`, props.theme.colors.gray.base)(props);
 
     return `
       color: ${color};
