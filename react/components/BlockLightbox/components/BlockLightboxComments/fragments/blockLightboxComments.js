@@ -9,6 +9,9 @@ export default gql`
       id
     }
     ... on Block {
+      counts {
+        comments
+      }
       comments {
         ...BlockLightboxComment
       }
