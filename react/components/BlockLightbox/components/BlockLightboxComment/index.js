@@ -45,6 +45,7 @@ export default class BlockLightboxComment extends PureComponent {
           <Text
             f={3}
             lineHeight={2}
+            boldLinks
             dangerouslySetInnerHTML={{ __html: comment.body }}
           />
         </Box>
