@@ -10,8 +10,10 @@ User = require '../../../../models/user.coffee'
 analytics = require '../../../../lib/analytics.coffee'
 Cookies = require 'cookies-js'
 EditableAttributeView = require '../../../editable_attribute/client/editable_attribute_view.coffee'
-
 blockTemplate = -> require('../templates/block.jade') arguments...
+
+{ mountWithApolloProvider } = require '../../../../react/apollo/index.js'
+{ default: ModalBlockLightboxWithChannelContext } = require '../../../../react/components/ModalBlockLightboxWithChannelContext/index.js'
 
 module.exports = class BlockView extends Backbone.View
   autoRender: true
@@ -19,6 +21,7 @@ module.exports = class BlockView extends Backbone.View
   containerMethod: 'append'
 
   events:
+    'click': 'openLightbox'
     'click .js-overlay-source': 'openLink'
     'click .js-overlay-connect': 'loadConnectView'
     'click .grid__block__delete-block': 'confirmDestroy'
@@ -26,7 +29,7 @@ module.exports = class BlockView extends Backbone.View
     'mouseover': 'onMouseOver'
     'mouseout': 'onMouseOut'
 
-  initialize: (options)->
+  initialize: (options) ->
     { @container, @autoRender, @containerMethod, @channel } = options
 
     @current_user = mediator.shared.current_user
@@ -45,6 +48,15 @@ module.exports = class BlockView extends Backbone.View
     mediator.on "model:#{@model.id}:updated", @update, @
     mediator.on "connection:#{@model.id}:complete", @removeActiveClass, @
     mediator.on "body:click", @removeActiveClass, @
+
+  openLightbox: ->
+    $el = $('<div />')
+    @$el.append($el)
+
+    mountWithApolloProvider(ModalBlockLightboxWithChannelContext, {
+      id: @model.id,
+      channel_id: @channel.id
+    }, $el)
 
   show: ->
     @$el.show()
