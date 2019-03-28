@@ -106,6 +106,7 @@
     "react-image-onload": "^1.0.1",
     "react-infinite-scroller": "^1.2.0",
     "react-input-autosize": "^2.2.1",
+    "react-input-trigger": "^1.1.2",
     "react-outside-click-handler": "^1.2.2",
     "react-router-dom": "^4.2.2",
     "react-safe-universal-inputs": "^3.0.1",
