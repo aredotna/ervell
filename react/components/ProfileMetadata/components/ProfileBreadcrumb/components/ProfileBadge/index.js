@@ -64,15 +64,22 @@ export default class ProfileBadge extends Component {
   }
 
   render() {
-    const { user: { badge } } = this.props;
+    const { user: { badge, custom_badge } } = this.props;
 
     if (!badge) return <span />;
 
     return (
       <Container href={HREFS[badge]} target="_blank">
-        <Mark type={badge}>
-          <ArenaMark />
-        </Mark>
+
+        {custom_badge &&
+          <img src={custom_badge} width="18" height="18" alt={badge} />
+        }
+
+        {!custom_badge &&
+          <Mark type={badge}>
+            <ArenaMark />
+          </Mark>
+        }
 
         <Label type={badge}>
           <span>{badge}</span>

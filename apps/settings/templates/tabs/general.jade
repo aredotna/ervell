@@ -10,8 +10,12 @@ block content
   .tab-content__frame
     .Narrow
       section.Section
-        .avatar-uploader.js-avatar-uploader
-          include ../../components/avatar_uploader/index.jade
+        .Images
+          .avatar-uploader.js-avatar-uploader
+            include ../../components/avatar_uploader/index.jade
+
+          .custom-badge-uploader.js-custom-badge-uploader
+            //- rendered client side
 
         form(
           data-action= user.url()
