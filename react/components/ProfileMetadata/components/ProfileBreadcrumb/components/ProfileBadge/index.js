@@ -14,6 +14,11 @@ const Container = styled.a`
   margin: 0 0 0 ${constants.emptySpaceWidth};
 `;
 
+const CustomBadge = styled.img`
+  width: 1.125rem;
+  height: 1.125rem;
+`;
+
 const Mark = styled.div`
   position: relative;
   width: 1em;
@@ -73,7 +78,7 @@ export default class ProfileBadge extends Component {
       <Container href={HREFS[badge]} target="_blank">
 
         {custom_badge &&
-          <img src={custom_badge} width="18" height="18" alt={badge} />
+          <CustomBadge src={custom_badge} alt={badge} />
         }
 
         {!custom_badge &&
