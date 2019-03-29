@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 
+import mapErrors from 'react/util/mapErrors';
+
 import createCommentMutation from 'react/components/BlockLightbox/components/BlockLightboxAddComment/mutations/createComment';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import { FilledButton } from 'react/components/UI/Buttons';
-import { Textarea } from 'react/components/UI/Inputs';
+import MentionTextarea from 'react/components/UI/MentionTextarea';
 
 const Tip = styled(Box)`
   position: absolute;
@@ -27,6 +30,8 @@ class BlockLightboxAddComment extends PureComponent {
   state = {
     mode: 'resting',
     comment: '',
+    inputKey: new Date().getTime(),
+    errorMessage: null,
   }
 
   handleChange = ({ target: { value: comment } }) => {
@@ -46,6 +51,13 @@ class BlockLightboxAddComment extends PureComponent {
     // Allows <shift+enter> to pass through
   }
 
+  handleErrors = (err) => {
+    this.setState({
+      mode: 'error',
+      ...mapErrors(err),
+    });
+  }
+
   handleSubmit = () => {
     const { createComment, id: block_id } = this.props;
     const { comment: body, mode } = this.state;
@@ -56,31 +68,40 @@ class BlockLightboxAddComment extends PureComponent {
 
     createComment({ variables: { body, block_id } })
       .then(() => {
-        this.setState({ mode: 'done', comment: '' });
+        this.setState({
+          mode: 'done',
+          comment: '',
+          inputKey: new Date().getTime(),
+        });
+
         setTimeout(() =>
           this.setState(prevState => ({
             mode: prevState.comment === '' ? 'resting' : 'active',
           })), 2500);
       })
-      .catch(() => {
-        // TODO: Map errors (force a return here)
-      });
+      .catch(this.handleErrors);
   }
 
   render() {
-    const { mode, comment } = this.state;
+    const { mode, inputKey, errorMessage } = this.state;
     const { ...rest } = this.props;
 
     return (
       <Box {...rest}>
         <Box position="relative">
-          <Textarea
+          {mode === 'error' &&
+            <ErrorAlert mb={6} isReloadable={false}>
+              {errorMessage}
+            </ErrorAlert>
+          }
+
+          <MentionTextarea
+            key={inputKey}
             f={3}
-            value={comment}
             bg="gray.hint"
             border={0}
-            placeholder="Add new comment"
             rows={4}
+            placeholder="Add new comment"
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
           />

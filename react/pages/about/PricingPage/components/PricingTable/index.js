@@ -106,7 +106,7 @@ class PricingTable extends PureComponent {
     const { isLoggedIn } = this.props;
 
     const signUpLink = isLoggedIn ? '/' : '/sign_up';
-    const upgradeLink = isLoggedIn ? '/settings/billing' : '/sign_up?redirect_to=/settings/billing';
+    const upgradeLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium';
     const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up';
 
     return (

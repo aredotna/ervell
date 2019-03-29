@@ -68,10 +68,12 @@ export const mixin = css`
   > h3,
   > h4 {
     font-size: 1rem;
+    margin: ${props => props.theme.space[4]} 0;
     ${neutralMarginsY}
   }
 
   > p {
+    margin: ${props => props.theme.space[4]} 0;
     ${neutralMarginsY}
   }
 

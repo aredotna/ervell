@@ -8,7 +8,7 @@ export default gql`
     ... on Model {
       id
     }
-    ... on ConnectableInterface {
+    ... on Block {
       comments {
         ...BlockLightboxComment
       }
