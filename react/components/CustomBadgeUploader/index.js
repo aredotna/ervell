@@ -30,6 +30,10 @@ export default class CustomBadgeUploader extends PureComponent {
 
           const { me } = data;
 
+          if (!me.can.set_custom_badge) {
+            return (<span />);
+          }
+
           return (
             <Uploader
               me={me}
