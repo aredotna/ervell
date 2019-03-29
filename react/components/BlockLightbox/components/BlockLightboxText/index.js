@@ -43,6 +43,12 @@ export default class BlockLightboxText extends PureComponent {
               dangerouslySetInnerHTML={{ __html: block.content }}
             />
           </Box>
+
+          {layout === 'FULLSCREEN' && block.title &&
+            <Text mt={6} f={5} lineHeight={2} color="gray.hint" fontWeight="bold" textAlign="center">
+              {block.title}
+            </Text>
+          }
         </Box>
       </Box>
     );

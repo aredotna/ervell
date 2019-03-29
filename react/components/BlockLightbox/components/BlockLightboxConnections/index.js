@@ -70,7 +70,7 @@ export default class BlockLightboxConnections extends PureComponent {
               {/* HACK: f={4} non-breaking spaces allow us to match the height perfectly */}
               <Text f={4}>&nbsp;</Text>
 
-              <Text f={1} color="gray.base" textAlign="center" textTransform="uppercase">
+              <Text f={1} color="gray.semiBold" textAlign="center" textTransform="uppercase">
                 Load more
               </Text>
 

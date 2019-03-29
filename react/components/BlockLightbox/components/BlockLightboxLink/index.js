@@ -66,7 +66,7 @@ export default class BlockLightboxLink extends PureComponent {
             >
               <Icons name="Link" size="1rem" color="gray.base" mr={5} flexShrink={0} />
 
-              <Text f={2} font="mono" color="gray.semiBold">
+              <Text f={2} font="mono" color="gray.semiBold" breakWord>
                 <u>
                   {block.source_url}
                 </u>

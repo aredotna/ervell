@@ -14,7 +14,6 @@ import BlockLightboxEmbed from 'react/components/BlockLightbox/components/BlockL
 import BlockLightboxPending from 'react/components/BlockLightbox/components/BlockLightboxPending';
 
 const Container = styled(Box).attrs({
-  height: ['75vh', 'auto', 'auto'],
   minHeight: ['75vh', 'auto', 'auto'],
   maxHeight: ['auto', 'auto', 'auto'],
   mb: [8, 0, 0],
@@ -59,7 +58,11 @@ export default class BlockLightboxContentPane extends PureComponent {
     }[block.__typename];
 
     return (
-      <Container layout={layout} {...rest}>
+      <Container
+        height={[{ DEFAULT: '75vh', FULLSCREEN: '100vh' }[layout], 'auto', 'auto']}
+        layout={layout}
+        {...rest}
+      >
         <Content block={block} layout={layout} />
 
         {children}
