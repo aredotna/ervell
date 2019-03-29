@@ -5,6 +5,7 @@ export default gql`
     __typename
     id
     custom_badge(size: LARGE)
+    badge
     can {
       set_custom_badge
     }

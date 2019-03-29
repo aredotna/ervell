@@ -13,6 +13,7 @@ import updateCustomBadgeMutation from 'react/components/CustomBadgeUploader/muta
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import ErrorBoundary from 'react/components/UI/ErrorBoundary';
+import ArenaMark from 'react/components/UI/Icons/ArenaMark.svg';
 
 const Container = styled(Box).attrs({
   ml: 10,
@@ -25,6 +26,15 @@ const Link = styled(Text).attrs({
   align: 'center',
 })`
   cursor: pointer;
+`;
+
+const Mark = styled.div`
+  position: relative;
+
+  > svg {
+    width: 1.5em;
+    fill: ${x => x.theme.colors.state[x.type]};
+  }
 `;
 
 const BadgeContainer = styled.div`
@@ -136,7 +146,9 @@ class CustomBadgeUploader extends PureComponent {
   render() {
     const { mode, progress } = this.state;
 
-    const { custom_badge } = this.props.me;
+    const { custom_badge, badge } = this.props.me;
+
+    console.log('badge', badge);
 
     return (
       <ErrorBoundary>
@@ -148,11 +160,16 @@ class CustomBadgeUploader extends PureComponent {
             style={{ display: 'none' }}
             onChange={this.onAddFile}
           />
-          {custom_badge &&
-            <BadgeContainer>
+          <BadgeContainer>
+            {custom_badge &&
               <img src={custom_badge} alt="custom badge" />
-            </BadgeContainer>
-          }
+            }
+            {!custom_badge &&
+              <Mark type={badge}>
+                <ArenaMark />
+              </Mark>
+            }
+          </BadgeContainer>
           <Link onClick={this.triggerAddFile}>
             <strong>
               {{
