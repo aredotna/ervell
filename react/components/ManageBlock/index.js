@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import { graphql } from 'react-apollo';
 
+import mapErrors from 'react/util/mapErrors';
 import compactObject from 'react/util/compactObject';
 
 import manageBlockFragment from 'react/components/ManageBlock/fragments/manageBlock';
 import updateBlockMutation from 'react/components/ManageBlock/mutations/updateBlock';
 
 import Box from 'react/components/UI/Box';
+import ErrorAlert from 'react/components/UI/ErrorAlert';
 import TitledDialog from 'react/components/UI/TitledDialog';
 import { Input, Textarea, Label, LabelledInput } from 'react/components/UI/Inputs';
 
@@ -24,6 +26,14 @@ class ManageBlock extends PureComponent {
     title: null,
     description: null,
     content: null,
+    errorMessage: null,
+  }
+
+  handleErrors = (err) => {
+    this.setState({
+      mode: 'error',
+      ...mapErrors(err),
+    });
   }
 
   updateBlock = (e) => {
@@ -43,10 +53,7 @@ class ManageBlock extends PureComponent {
 
     return updateBlock({ variables })
       .then(() => onDone())
-      .catch((err) => {
-        console.error(err);
-        this.setState({ mode: 'error' });
-      });
+      .catch(this.handleErrors);
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
@@ -58,7 +65,7 @@ class ManageBlock extends PureComponent {
   handleContent = this.handleInput('content')
 
   render() {
-    const { mode } = this.state;
+    const { mode, errorMessage } = this.state;
     const { block } = this.props;
 
     return (
@@ -73,6 +80,12 @@ class ManageBlock extends PureComponent {
         }[mode]}
       >
         <Box>
+          {mode === 'error' &&
+            <ErrorAlert my={6} isReloadable={false}>
+              {errorMessage}
+            </ErrorAlert>
+          }
+
           <LabelledInput>
             <Label>Title</Label>
 
@@ -90,6 +103,7 @@ class ManageBlock extends PureComponent {
               placeholder="Describe your block here"
               defaultValue={block.editable_description}
               onChange={this.handleDescription}
+              rows={block.__typename !== 'Text' ? 16 : 4}
               f={2}
             />
           </LabelledInput>

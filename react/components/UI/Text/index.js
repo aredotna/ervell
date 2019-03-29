@@ -10,6 +10,8 @@ import {
   lineHeight,
   textAlign,
   width,
+  minWidth,
+  maxWidth,
   themeGet,
   alignItems,
   justifyContent,
@@ -31,6 +33,8 @@ export const mixin = css`
   ${baseMixin}
   ${display}
   ${width}
+  ${minWidth}
+  ${maxWidth}
   ${space}
   ${fontWeight}
   ${fontStyle}

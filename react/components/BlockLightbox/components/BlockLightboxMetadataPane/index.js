@@ -38,7 +38,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
 
     return (
       <Box
-        flex="1"
+        flex={1}
         px={7}
         pt={4}
         pb={8}

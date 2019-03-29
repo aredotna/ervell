@@ -76,28 +76,36 @@ export default class BlockLightboxMetadataFold extends PureComponent {
             );
           }
 
+          const fullBlock = { ...block, ...data.block };
+
           return (
             <React.Fragment>
               <Header mt={8}>
+                {fullBlock.counts &&
+                  `${fullBlock.counts.private_channels + fullBlock.counts.public_channels} `
+                }
                 Connections
               </Header>
 
               <BlockLightboxConnections
-                block={{ ...block, ...data.block }}
+                block={fullBlock}
                 loading={loading}
                 onLoadMore={this.loadMore(fetchMore)}
                 loadingMore={loadingMore}
                 mt={4}
               />
 
-              {block.can.comment &&
+              {fullBlock.can.comment &&
                 <React.Fragment>
                   <Header mt={8}>
+                    {fullBlock.counts &&
+                      `${fullBlock.counts.comments} `
+                    }
                     Comments
                   </Header>
 
                   <BlockLightboxComments
-                    block={{ ...block, ...data.block }}
+                    block={fullBlock}
                     loading={loading}
                     mt={4}
                   />
