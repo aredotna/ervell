@@ -14,6 +14,11 @@ const Container = styled.a`
   margin: 0 0 0 ${constants.emptySpaceWidth};
 `;
 
+const CustomBadge = styled.img`
+  width: 1.125rem;
+  height: 1.125rem;
+`;
+
 const Mark = styled.div`
   position: relative;
   width: 1em;
@@ -54,8 +59,9 @@ const Label = styled.div`
 `;
 
 const HREFS = {
-  premium: 'https://www.are.na/tools/premium',
+  premium: 'https://www.are.na/pricing',
   investor: 'https://www.are.na/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html',
+  supporter: 'https://www.are.na/roadmap',
 };
 
 export default class ProfileBadge extends Component {
@@ -64,15 +70,22 @@ export default class ProfileBadge extends Component {
   }
 
   render() {
-    const { user: { badge } } = this.props;
+    const { user: { badge, custom_badge } } = this.props;
 
     if (!badge) return <span />;
 
     return (
       <Container href={HREFS[badge]} target="_blank">
-        <Mark type={badge}>
-          <ArenaMark />
-        </Mark>
+
+        {custom_badge &&
+          <CustomBadge src={custom_badge} alt={badge} />
+        }
+
+        {!custom_badge &&
+          <Mark type={badge}>
+            <ArenaMark />
+          </Mark>
+        }
 
         <Label type={badge}>
           <span>{badge}</span>
