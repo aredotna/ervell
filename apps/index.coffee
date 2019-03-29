@@ -85,9 +85,9 @@ console.time('profile')
 app.use(require('../apps/profile'))
 console.timeEnd('profile')
 
-console.time('lightbox')
-app.use(require('../apps/lightbox'))
-console.timeEnd('lightbox')
+console.time('block')
+app.use(require('../apps/block'))
+console.timeEnd('block')
 
 console.time('channel')
 app.use(require('../apps/channel'))

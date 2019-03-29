@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 
-import openLegacyBlockLightbox from 'react/util/openLegacyBlockLightbox';
+import openBlockLightbox from 'react/util/openBlockLightbox';
 
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
@@ -92,7 +92,7 @@ export default class Konnectable extends PureComponent {
 
     e.preventDefault();
 
-    return openLegacyBlockLightbox({
+    return openBlockLightbox({
       id,
       context,
     });

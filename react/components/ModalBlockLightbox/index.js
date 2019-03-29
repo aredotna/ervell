@@ -91,8 +91,7 @@ export default class ModalBlockLightbox extends PureComponent {
       });
     }
 
-    // TODO: Update to /block once before production
-    window.history.replaceState(null, null, `/lightbox/${id}`);
+    window.history.replaceState(null, null, `/block/${id}`);
   }
 
   updateId = (id) => {

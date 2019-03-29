@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 
-import lightboxPageQuery from 'react/pages/lightbox/queries/lightboxPage';
+import blockPageQuery from 'react/pages/block/queries/blockPage';
 
 import constants from 'react/styles/constants';
 
@@ -19,7 +19,7 @@ const Container = styled(Box)`
   padding-top: ${constants.topBarHeight};
 `;
 
-export default class LightboxPage extends PureComponent {
+export default class BlockPage extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
   }
@@ -30,7 +30,7 @@ export default class LightboxPage extends PureComponent {
     return (
       <TopBarLayout>
         <Container>
-          <Query query={lightboxPageQuery} variables={{ id }}>
+          <Query query={blockPageQuery} variables={{ id }}>
             {({ data, loading, error }) => {
               if (loading) {
                 return <LoadingIndicator />;
