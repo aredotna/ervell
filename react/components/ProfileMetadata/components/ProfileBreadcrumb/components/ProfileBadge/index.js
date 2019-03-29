@@ -54,8 +54,9 @@ const Label = styled.div`
 `;
 
 const HREFS = {
-  premium: 'https://www.are.na/tools/premium',
+  premium: 'https://www.are.na/pricing',
   investor: 'https://www.are.na/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html',
+  supporter: 'https://www.are.na/roadmap',
 };
 
 export default class ProfileBadge extends Component {
