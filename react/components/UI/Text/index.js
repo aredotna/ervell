@@ -71,12 +71,17 @@ export const mixin = css`
   > h2,
   > h3,
   > h4 {
-    font-size: 1rem;
-    margin: ${props => props.theme.space[4]} 0;
     ${neutralMarginsY}
   }
 
-  > p {
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > p,
+  > ol,
+  > ul {
     margin: ${props => props.theme.space[4]} 0;
     ${neutralMarginsY}
   }
@@ -97,6 +102,12 @@ export const mixin = css`
 
   u {
     text-decoration: underline;
+  }
+
+  ol,
+  ul {
+    list-style: disc;
+    margin-left: ${props => props.theme.space[5]};
   }
 `;
 
