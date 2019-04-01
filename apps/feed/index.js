@@ -3,7 +3,6 @@ import express from 'express';
 import getFirstStatusCode from 'react/util/getFirstStatusCode';
 
 import apolloMiddleware from 'react/apollo/middleware';
-import setSeedMiddleware from 'apps/profile/middleware/setSeed';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 
@@ -69,10 +68,10 @@ app.get('/feed', ensureLoggedInMiddleware, apolloMiddleware, renderFeed);
 app.get('/notifications', ensureLoggedInMiddleware, apolloMiddleware, renderFeed);
 
 // Explore
-app.get('/explore', apolloMiddleware, setSeedMiddleware, renderExplore);
-app.get('/explore/all', apolloMiddleware, setSeedMiddleware, renderExplore);
-app.get('/explore/channels', apolloMiddleware, setSeedMiddleware, renderExplore);
-app.get('/explore/blocks', apolloMiddleware, setSeedMiddleware, renderExplore);
+app.get('/explore', apolloMiddleware, renderExplore);
+app.get('/explore/all', apolloMiddleware, renderExplore);
+app.get('/explore/channels', apolloMiddleware, renderExplore);
+app.get('/explore/blocks', apolloMiddleware, renderExplore);
 
 // Find friends
 app.get('/feed/find-friends/callback', apolloMiddleware, ensureLoggedInMiddleware, findFriendsCallback);
