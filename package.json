@@ -52,6 +52,7 @@
     "bluebird-q": "^2.1.1",
     "blueimp-file-upload": "git://github.com/arenahq/jQuery-File-Upload.git",
     "body-parser": "*",
+    "body-scroll-lock": "^2.6.1",
     "bucket-assets": "aredotna/bucket-assets.git#d253febf7c658673c036afc85d034572011135e4",
     "cheerio": "^0.22.0",
     "chroma-js": "^1.4.0",

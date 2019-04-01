@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import ModalComponent from 'react/components/UI/Modal/Modal';
 
@@ -16,10 +17,12 @@ export default class Modal extends PureComponent {
 
   componentDidMount() {
     document.body.appendChild(this.el);
+    disableBodyScroll(this.el);
   }
 
   componentWillUnmount() {
     this.el.parentNode.removeChild(this.el);
+    clearAllBodyScrollLocks();
   }
 
   ModalComponent = ModalComponent
