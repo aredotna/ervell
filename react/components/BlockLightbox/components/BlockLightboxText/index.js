@@ -41,6 +41,8 @@ export default class BlockLightboxText extends PureComponent {
               lineHeight={2}
               color={{ DEFAULT: 'gray.base', FULLSCREEN: 'white' }[layout]}
               dangerouslySetInnerHTML={{ __html: block.content }}
+              boldLinks
+              hoverLinks={{ color: 'black' }}
             />
           </Box>
 
