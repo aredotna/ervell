@@ -1,18 +1,13 @@
 import express from 'express';
 
 import apolloMiddleware from 'react/apollo/middleware';
-import setSeedMiddleware from 'apps/profile/middleware/setSeed';
-
 import pageResolver from 'react/components/UI/Page/resolver';
-
 import Routes from 'apps/profile/Routes';
-
 import withStaticRouter from 'react/hocs/WithStaticRouter';
 
 const app = express();
 
 const middlewareStack = [
-  setSeedMiddleware,
   apolloMiddleware,
 ];
 
