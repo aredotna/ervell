@@ -87,7 +87,7 @@ export default class BlockLightboxMetadataFold extends PureComponent {
                     <Count
                       amount={fullBlock.counts.private_channels
                         + fullBlock.counts.public_channels}
-                      label="Connections"
+                      label="Connection"
                     />
                   )
                   : 'Connections'
