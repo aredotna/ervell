@@ -1,4 +1,5 @@
 import React from 'react';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import { wrapWithProviders, initClientSideApolloClient } from 'react/apollo';
 import mount from 'react/util/mount';
@@ -32,6 +33,7 @@ export default class Modal {
     const App = boot(ModalApp, props);
 
     mount(App, this.el);
+    disableBodyScroll(this.el);
   }
 
   close = (...args) => {
@@ -41,5 +43,6 @@ export default class Modal {
 
     unmount(this.el);
     this.el.parentNode.removeChild(this.el);
+    clearAllBodyScrollLocks();
   }
 }

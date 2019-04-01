@@ -41,7 +41,7 @@ class ExploreMetadataSort extends Component {
           prefix="Explore"
           to={{
             pathname,
-            search: `?sort=RANDOM&seed=${Math.floor(Math.random() * 1000) + 1}`,
+            search: '?sort=RANDOM',
           }}
           rel="nofollow"
         >

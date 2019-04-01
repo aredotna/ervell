@@ -27,6 +27,7 @@ export default class BlockLightboxText extends PureComponent {
           <Box
             minHeight="100%"
             width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
+            maxWidth="55em"
             bg={{ DEFAULT: 'white', FULLSCREEN: 'gray.bold' }[layout]}
             border="1px solid"
             borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]}
@@ -37,10 +38,12 @@ export default class BlockLightboxText extends PureComponent {
           >
             <Text
               font="serif"
-              f={5}
+              f={[4, 4, 5]}
               lineHeight={2}
               color={{ DEFAULT: 'gray.base', FULLSCREEN: 'white' }[layout]}
               dangerouslySetInnerHTML={{ __html: block.content }}
+              boldLinks
+              hoverLinks={{ color: 'black' }}
             />
           </Box>
 
