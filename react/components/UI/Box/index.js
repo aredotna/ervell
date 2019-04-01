@@ -9,6 +9,8 @@ import {
   alignSelf,
   minHeight,
   maxHeight,
+  minWidth,
+  maxWidth,
   justifyContent,
   flexDirection,
   borders,
@@ -38,6 +40,8 @@ export const mixin = css`
   ${height}
   ${minHeight}
   ${maxHeight}
+  ${minWidth}
+  ${maxWidth}
   ${space}
   ${flex}
   ${flexGrow}
