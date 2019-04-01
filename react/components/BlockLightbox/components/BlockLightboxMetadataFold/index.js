@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 
 import blockLightboxFoldQuery from 'react/components/BlockLightbox/components/BlockLightboxMetadataFold/queries/blockLightboxFold';
 
+import Count from 'react/components/UI/Count';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxConnections from 'react/components/BlockLightbox/components/BlockLightboxConnections';
@@ -81,10 +82,16 @@ export default class BlockLightboxMetadataFold extends PureComponent {
           return (
             <React.Fragment>
               <Header mt={8}>
-                {fullBlock.counts &&
-                  `${fullBlock.counts.private_channels + fullBlock.counts.public_channels} `
+                {fullBlock.counts
+                  ? (
+                    <Count
+                      amount={fullBlock.counts.private_channels
+                        + fullBlock.counts.public_channels}
+                      label="Connection"
+                    />
+                  )
+                  : 'Connections'
                 }
-                Connections
               </Header>
 
               <BlockLightboxConnections
@@ -98,10 +105,10 @@ export default class BlockLightboxMetadataFold extends PureComponent {
               {fullBlock.can.comment &&
                 <React.Fragment>
                   <Header mt={8}>
-                    {fullBlock.counts &&
-                      `${fullBlock.counts.comments} `
+                    {fullBlock.counts
+                      ? <Count amount={fullBlock.counts.comments} label="Comment" />
+                      : 'Comment'
                     }
-                    Comments
                   </Header>
 
                   <BlockLightboxComments
