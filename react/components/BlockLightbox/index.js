@@ -8,6 +8,7 @@ import constants from 'react/styles/constants';
 import blockLightboxFragment from 'react/components/BlockLightbox/fragments/blockLightbox';
 
 import Box from 'react/components/UI/Box';
+import Title from 'react/components/UI/Head/components/Title';
 import BlockLightboxContentPane from 'react/components/BlockLightbox/components/BlockLightboxContentPane';
 import BlockLightboxMetadataPane from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane';
 
@@ -43,6 +44,12 @@ export default class BlockLightbox extends PureComponent {
 
     return (
       <Container {...rest}>
+        {block.title &&
+          <Title>
+            {block.title}
+          </Title>
+        }
+
         <BlockLightboxContentPane block={block} layout={layout}>
           {children}
         </BlockLightboxContentPane>

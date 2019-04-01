@@ -7,12 +7,12 @@ import blockPageQuery from 'react/pages/block/queries/blockPage';
 
 import constants from 'react/styles/constants';
 
+import Box from 'react/components/UI/Box';
 import TopBarLayout from 'react/components/UI/Layouts/TopBarLayout';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import BlockLightbox from 'react/components/BlockLightbox';
-
-import Box from 'react/components/UI/Box';
+import BlockPageMetaTags from 'react/pages/block/components/BlockPageMetaTags';
 
 const Container = styled(Box)`
   height: 100vh;
@@ -47,7 +47,11 @@ export default class BlockPage extends PureComponent {
               const { block } = data;
 
               return (
-                <BlockLightbox block={block} />
+                <React.Fragment>
+                  <BlockPageMetaTags block={block} />
+
+                  <BlockLightbox block={block} />
+                </React.Fragment>
               );
             }}
           </Query>
