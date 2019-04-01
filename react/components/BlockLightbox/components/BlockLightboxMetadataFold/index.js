@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 
 import blockLightboxFoldQuery from 'react/components/BlockLightbox/components/BlockLightboxMetadataFold/queries/blockLightboxFold';
 
+import Count from 'react/components/UI/Count';
 import ErrorAlert from 'react/components/UI/ErrorAlert';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxConnections from 'react/components/BlockLightbox/components/BlockLightboxConnections';
@@ -76,28 +77,42 @@ export default class BlockLightboxMetadataFold extends PureComponent {
             );
           }
 
+          const fullBlock = { ...block, ...data.block };
+
           return (
             <React.Fragment>
               <Header mt={8}>
-                Connections
+                {fullBlock.counts
+                  ? (
+                    <Count
+                      amount={fullBlock.counts.private_channels
+                        + fullBlock.counts.public_channels}
+                      label="Connection"
+                    />
+                  )
+                  : 'Connections'
+                }
               </Header>
 
               <BlockLightboxConnections
-                block={{ ...block, ...data.block }}
+                block={fullBlock}
                 loading={loading}
                 onLoadMore={this.loadMore(fetchMore)}
                 loadingMore={loadingMore}
                 mt={4}
               />
 
-              {block.can.comment &&
+              {fullBlock.can.comment &&
                 <React.Fragment>
                   <Header mt={8}>
-                    Comments
+                    {fullBlock.counts
+                      ? <Count amount={fullBlock.counts.comments} label="Comment" />
+                      : 'Comment'
+                    }
                   </Header>
 
                   <BlockLightboxComments
-                    block={{ ...block, ...data.block }}
+                    block={fullBlock}
                     loading={loading}
                     mt={4}
                   />

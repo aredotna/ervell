@@ -10,6 +10,14 @@ export default gql`
       ... on Model {
         id
       }
+      ... on Block {
+        counts {
+          __typename
+          public_channels
+          private_channels: private_accessible_channels
+          comments
+        }
+      }
       ...BlockLightboxConnections
       ...BlockLightboxComments
     }

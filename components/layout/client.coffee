@@ -15,8 +15,6 @@ setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
-GlobalBlockRouter = require './global_block_router.coffee'
-Blacklist = require('../../lib/blacklist.js').default
 initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts.js')
 
 { mountWithApolloProvider } = require '../../react/apollo/index.js'
@@ -30,29 +28,7 @@ module.exports = ->
   setupAnalytics()
   initNightMode()
   initLoggedOutCTA()
-  initGlobalBlockRouting()
   initLightboxKeyboardShortcuts.bind()
-
-initGlobalBlockRouting = ->
-  # TODO: Extract and init block router only
-  # where we actually need it.
-  # Since migrating to Webpack, histories can conflict.
-  # Simply starting one history isn't working as it should,
-  # due to split packages (I believe).
-  blacklist = Blacklist [
-    /^\/sign_up$/
-    /^\/log_in$/
-    /^\/forgot$/
-    /^\/reset(\/(\w|-)+)?$/
-    /^\/confirm(\/(\w|-)+)?$/
-    /^\/register(\/(\w|-)+)?$/
-    /^\/welcome((\/|\?)(.)+)?$/
-  ]
-
-  return if blacklist.isCurrentRouteBlacklisted()
-
-  new GlobalBlockRouter
-  Backbone.history.start pushState: true
 
 # TODO: Extract
 # TODO: Fix inconsistent class names

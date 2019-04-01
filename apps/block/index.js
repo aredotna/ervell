@@ -2,7 +2,7 @@ import express from 'express';
 
 import apolloMiddleware from 'react/apollo/middleware';
 
-import Routes from 'apps/lightbox/Routes';
+import Routes from 'apps/block/Routes';
 
 import pageResolver from 'react/components/UI/Page/resolver';
 
@@ -19,7 +19,7 @@ const resolve = [
     req.apollo.render(withStaticRouter(Routes), null, { mode: 'page' })
       .then((apolloRes) => {
         pageResolver({
-          bundleName: 'lightbox',
+          bundleName: 'block',
           apolloRes,
           res,
         });
@@ -29,6 +29,6 @@ const resolve = [
 ];
 
 app
-  .get('/lightbox/:id', ...resolve);
+  .get('/block/:id', ...resolve);
 
 module.exports = app;

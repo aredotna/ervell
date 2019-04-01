@@ -9,6 +9,9 @@ export default gql`
     ... on Model {
       id
     }
+    ... on ConnectableInterface {
+      title
+    }
     ...BlockLightboxContentPane
     ...BlockLightboxMetadataPane
   }

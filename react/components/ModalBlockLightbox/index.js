@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import Mousetrap from 'mousetrap';
-import { isEmpty } from 'underscore';
+import { isEmpty, debounce } from 'underscore';
 import styled from 'styled-components';
+
+import { BREAKPOINTS } from 'react/styles/constants';
 
 import modalBlockLightboxQuery from 'react/components/ModalBlockLightbox/queries/modalBlockLightbox';
 
@@ -16,21 +18,17 @@ import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 import BlockLightbox from 'react/components/BlockLightbox';
 import ModalBlockLightboxNavigation from 'react/components/ModalBlockLightbox/components/ModalBlockLightboxNavigation';
 
-const Actions = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-`;
-
-const Fullscreen = styled(Link)`
+const Fullscreen = styled(Link).attrs({
+  border: '1px solid',
+})`
+  border-radius: ${props => props.theme.radii.subtle};
   user-select: none;
 
-  &:hover svg {
-    fill: black;
+  &:hover {
+    border-color: black;
+    svg {
+      fill: black;
+    }
   }
 `;
 
@@ -54,11 +52,24 @@ export default class ModalBlockLightbox extends PureComponent {
   componentDidMount() {
     Mousetrap.bind('esc', this.props.onClose);
     this.updateUrl();
+
+    this.debouncedCheckMobileBreakpoint = debounce(this.checkMobileBreakpoint, 250);
+    window.addEventListener('resize', this.debouncedCheckMobileBreakpoint);
   }
 
   componentWillUnmount() {
     Mousetrap.unbind('esc');
     this.restoreUrl();
+
+    window.removeEventListener('resize', this.debouncedCheckMobileBreakpoint);
+  }
+
+  checkMobileBreakpoint = () => {
+    const { layout } = this.state;
+
+    if (layout === 'FULLSCREEN' && window.innerWidth <= BREAKPOINTS.mobile) {
+      this.setState({ layout: 'DEFAULT' });
+    }
   }
 
   // TODO: Replace all of this with router once we migrate channels
@@ -80,8 +91,7 @@ export default class ModalBlockLightbox extends PureComponent {
       });
     }
 
-    // TODO: Update to /block once before production
-    window.history.replaceState(null, null, `/lightbox/${id}`);
+    window.history.replaceState(null, null, `/block/${id}`);
   }
 
   updateId = (id) => {
@@ -133,27 +143,46 @@ export default class ModalBlockLightbox extends PureComponent {
           }}
         </Query>
 
-        <Actions>
+        <Box
+          // Hides fullscreen button on mobile
+          display={['none', 'block', 'block']}
+          position="absolute"
+          bottom={0}
+          right={0}
+          zIndex={1}
+          p={7}
+        >
           <Fullscreen
-            px={2}
-            py={6}
+            p={4}
             onClick={this.toggleLayout}
+            bg={{ DEFAULT: 'white' }[layout]}
+            borderColor={{
+              DEFAULT: 'gray.semiLight',
+              FULLSCREEN: 'gray.semiBold',
+            }[layout]}
           >
             <Icons
-              size="1.5em"
-              name={{ DEFAULT: 'EnterFullscreen', FULLSCREEN: 'ExitFullscreen' }[layout]}
+              size="1rem"
+              name={{
+                DEFAULT: 'EnterFullscreen',
+                FULLSCREEN: 'ExitFullscreen',
+              }[layout]}
               color="gray.semiBold"
             />
           </Fullscreen>
+        </Box>
 
-          <Close
-            size={8}
-            py={5}
-            px={4}
-            thickness="2px"
-            onClick={onClose}
-          />
-        </Actions>
+        <Close
+          size={8}
+          py={5}
+          px={4}
+          thickness="2px"
+          onClick={onClose}
+          position="absolute"
+          top={0}
+          right={0}
+          zIndex={1}
+        />
       </Box>
     );
   }

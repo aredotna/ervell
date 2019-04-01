@@ -60,7 +60,7 @@ export default class BlockLightboxAttachment extends PureComponent {
               </Box>
             }
 
-            <Text f={5} fontWeight="bold" lineHeight={2} color={{ DEFAULT: 'gray.base', FULLSCREEN: 'white' }[layout]}>
+            <Text f={5} fontWeight="bold" lineHeight={2} color={{ DEFAULT: 'gray.base', FULLSCREEN: 'gray.hint' }[layout]}>
               Download {block.title}
             </Text>
 
