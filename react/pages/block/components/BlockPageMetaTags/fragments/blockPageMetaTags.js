@@ -11,6 +11,9 @@ export default gql`
       meta_description: description(format: MARKDOWN)
       canonical: href(absolute: true)
     }
+    ... on Block {
+      is_nsfw
+    }
     ... on Image {
       meta_image: image_url(size: DISPLAY)
     }
