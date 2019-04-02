@@ -27,7 +27,7 @@ const BlockLightboxActions = ({ block }) => (
     {block.source &&
       <a
         href={block.source.url}
-        rel="nofollow"
+        rel="nofollow noopener"
         target="_blank"
         dangerouslySetInnerHTML={{
           __html: (block.source.title ? `Source: ${truncate(block.source.title, 40)}` : 'Source'),
@@ -36,7 +36,7 @@ const BlockLightboxActions = ({ block }) => (
     }
 
     {block.find_original_url &&
-      <a href={block.find_original_url} rel="nofollow" target="_blank">
+      <a href={block.find_original_url} rel="nofollow noopener" target="_blank">
         Find original
       </a>
     }
