@@ -84,7 +84,7 @@ export default class FeedGroupSentence extends PureComponent {
               </Label>
 
 
-              {item &&
+              {item_phrase &&
                 <FeedObjectLink {...item} label={item_phrase} />
               }
 
