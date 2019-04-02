@@ -22,7 +22,7 @@ const BlockPageMetaTags = ({ block }) => (
       </Description>
     }
 
-    {block.meta_image &&
+    {block.meta_image && !block.is_nsfw &&
       <Image>
         {block.meta_image}
       </Image>
