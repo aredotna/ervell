@@ -24,6 +24,7 @@ export default gql`
     item {
       ...NotificationObject
     }
+    item_title
     connector
     target {
       ...NotificationObject

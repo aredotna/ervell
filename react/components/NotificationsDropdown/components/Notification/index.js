@@ -46,6 +46,7 @@ export default class Notification extends Component {
         connector,
         target,
         created_at,
+        item_title,
       },
     } = this.props;
 
@@ -75,7 +76,7 @@ export default class Notification extends Component {
                 {` ${action} `}
               </Label>
 
-              <NotificationObjectLink {...item} />
+              <NotificationObjectLink {...item} label={item_title} />
 
               {connector &&
                 <Label>

@@ -55,7 +55,7 @@ export default class BlockLightboxLink extends PureComponent {
           borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]}
           borderRadius="0.25em"
         >
-          <a href={block.source_url} target="_blank">
+          <a href={block.source_url} rel="noopener nofollow" target="_blank">
             <Box
               px={6}
               py={4}
@@ -75,7 +75,7 @@ export default class BlockLightboxLink extends PureComponent {
           </a>
 
           <Screenshot bg="middleGray" flex="1" width="100%" position="relative">
-            <a href={block.source_url} target="_blank">
+            <a href={block.source_url} rel="noopener nofollow" target="_blank">
               <Image width="100%" height="100%" backgroundImage={block.image_url} />
             </a>
           </Screenshot>

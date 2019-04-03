@@ -60,7 +60,7 @@ export default class BlockLightboxAttachment extends PureComponent {
           display="block"
           p={6}
           href={block.file_url}
-          rel="nofollow"
+          rel="nofollow noopener"
           target="_blank"
           download
         >

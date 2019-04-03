@@ -34,6 +34,7 @@ export default class BlockLightboxImage extends PureComponent {
         justifyContent="center"
         href={block.original_image_url}
         target="_blank"
+        rel="nofollow noopener"
         p={6}
       >
         <Image
