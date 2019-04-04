@@ -30,13 +30,11 @@ export default () => (
 
             const view = params.view || (cookies && cookies.view) || 'all';
             const sort = setValid((query.sort || (cookies && cookies.sort)), VALID_SORTS, 'UPDATED_AT');
-            const seed = Math.floor(Math.random() * 1000) + 1;
 
             return (
               <ExplorePage
                 view={view}
                 sort={sort}
-                seed={seed}
               />
             );
           }}
