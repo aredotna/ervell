@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
-import { graphql, compose } from 'react-apollo';
+import { graphql, compose, Query } from 'react-apollo';
 
 import muteQuery from 'react/components/MuteButton/queries/muted';
-import mutableFragment from 'react/components/MuteButton/fragments/mutable';
 import muteMutation from 'react/components/MuteButton/mutations/mute';
 import unmuteMutation from 'react/components/MuteButton/mutations/unmute';
 
@@ -12,10 +10,6 @@ class MuteButton extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
-    data: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-      mutable: propType(mutableFragment),
-    }).isRequired,
     mute: PropTypes.func.isRequired,
     unmute: PropTypes.func.isRequired,
     children: PropTypes.func,
@@ -28,10 +22,8 @@ class MuteButton extends Component {
     }[isMuted]),
   }
 
-  toggleMute = async () => {
-    const {
-      id, type, data: { mutable },
-    } = this.props;
+  toggleMute = mutable => async () => {
+    const { id, type } = this.props;
 
     const action = mutable.is_muted ? 'unmute' : 'mute';
     const mutation = this.props[action];
@@ -53,27 +45,40 @@ class MuteButton extends Component {
   }
 
   render() {
-    const { data: { loading } } = this.props;
-
-    if (loading) return <span>Mute</span>;
-
     const {
-      id, type, mute: _mute, unmute: _unmute,
-      data: { mutable },
+      id,
+      type,
       children,
+      mute: _mute,
+      unmute: _unmute,
       ...rest
     } = this.props;
 
     return (
-      <span onClick={this.toggleMute} role="button" tabIndex={0} {...rest}>
-        {children({ isMuted: mutable.is_muted })}
-      </span>
+      <Query query={muteQuery} variables={{ id, type }} ssr={false}>
+        {({ loading, error, data }) => {
+          if (loading || error) {
+            return (
+              <span {...rest}>
+                Mute
+              </span>
+            );
+          }
+
+          const { mutable } = data;
+
+          return (
+            <span onClick={this.toggleMute(mutable)} role="button" tabIndex={0} {...rest}>
+              {children({ isMuted: mutable.is_muted })}
+            </span>
+          );
+        }}
+      </Query>
     );
   }
 }
 
 export default compose(
-  graphql(muteQuery),
   graphql(muteMutation, { name: 'mute' }),
   graphql(unmuteMutation, { name: 'unmute' }),
 )(MuteButton);
