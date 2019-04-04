@@ -32,14 +32,16 @@ export default class ModalBlockLightboxWithChannelContext extends PureComponent 
       <Modal onClose={this.close} Dialog={ModalFullscreenDialog}>
         <Query query={channelContextQuery} variables={{ id: channel_id }}>
           {({ data, loading, error }) => {
-            if (error) {
-              console.error(error);
-              return null;
-            }
-
             if (loading) return <LoadingIndicator />;
 
-            const ids = data.channel.skeleton.map(k => k.id);
+            let ids = [];
+
+            if (error) {
+              // Log the error but attempt to open the lightbox anyway
+              console.error(error);
+            }
+
+            ids = data && data.channel.skeleton.map(k => k.id);
 
             return (
               <ModalBlockLightbox
