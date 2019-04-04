@@ -14,7 +14,6 @@ export default class ExploreContents extends PureComponent {
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-    seed: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
@@ -58,8 +57,10 @@ export default class ExploreContents extends PureComponent {
   render() {
     const { per, hasMore, q } = this.state;
     const {
-      type, sort, fetchPolicy, seed,
+      type, sort, fetchPolicy,
     } = this.props;
+
+    const seed = Math.floor(Math.random() * 1000) + 1;
 
     return (
       <Query

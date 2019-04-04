@@ -4,39 +4,36 @@ import PropTypes from 'prop-types';
 import ExploreContents from 'react/components/ExploreContents';
 
 const All = ({
-  sort, fetchPolicy, seed,
+  sort, fetchPolicy,
 }) => (
-  <ExploreContents type="ALL" sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
+  <ExploreContents type="ALL" sort={sort} fetchPolicy={fetchPolicy} />
 );
 
 All.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  seed: PropTypes.number.isRequired,
 };
 
 const Blocks = ({
-  sort, fetchPolicy, seed,
+  sort, fetchPolicy,
 }) => (
-  <ExploreContents type="CONNECTABLE" sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
+  <ExploreContents type="CONNECTABLE" sort={sort} fetchPolicy={fetchPolicy} />
 );
 
 Blocks.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  seed: PropTypes.number.isRequired,
 };
 
 const Channels = ({
-  sort, fetchPolicy, seed,
+  sort, fetchPolicy,
 }) => (
-  <ExploreContents type="CHANNEL" sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
+  <ExploreContents type="CHANNEL" sort={sort} fetchPolicy={fetchPolicy} />
 );
 
 Channels.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  seed: PropTypes.number.isRequired,
 };
 
 class ExploreViews extends Component {
@@ -50,7 +47,6 @@ class ExploreViews extends Component {
 
   static propTypes = {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-    seed: PropTypes.number.isRequired,
   }
 
   state = {
@@ -62,7 +58,7 @@ class ExploreViews extends Component {
   render() {
     const { fetchPolicy } = this.state;
     const {
-      view, sort, seed,
+      view, sort,
     } = this.props;
 
     switch (view) {
@@ -71,7 +67,6 @@ class ExploreViews extends Component {
           <All
             sort={sort}
             fetchPolicy={fetchPolicy}
-            seed={seed}
           />
         );
       case 'channels':
@@ -79,7 +74,6 @@ class ExploreViews extends Component {
           <Channels
             sort={sort}
             fetchPolicy={fetchPolicy}
-            seed={seed}
           />
         );
       case 'blocks':
@@ -87,7 +81,6 @@ class ExploreViews extends Component {
           <Blocks
             sort={sort}
             fetchPolicy={fetchPolicy}
-            seed={seed}
           />
         );
       default:
