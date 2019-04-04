@@ -17,4 +17,4 @@ module.exports.init = ->
       $el: $('.js-channel-contents')
       collection: blocks
       mode: 'skeleton'
-
+      channel: channel
