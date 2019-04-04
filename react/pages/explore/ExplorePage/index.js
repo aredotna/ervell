@@ -15,11 +15,10 @@ export default class ExplorePage extends Component {
   static propTypes = {
     view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-    seed: PropTypes.number.isRequired,
   }
 
   render() {
-    const { view, sort, seed } = this.props;
+    const { view, sort } = this.props;
 
     return (
       <ErrorBoundary>
@@ -35,7 +34,6 @@ export default class ExplorePage extends Component {
             <ExploreViews
               view={view}
               sort={sort}
-              seed={seed}
             />
 
             <BottomBanner banner="LOGGED_OUT_EXPLORE" />

@@ -22,12 +22,11 @@ export default class ProfilePage extends Component {
     view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'followers', 'following']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
-    seed: PropTypes.number.isRequired,
   }
 
   render() {
     const {
-      id, view, sort, filter, seed,
+      id, view, sort, filter,
     } = this.props;
 
     return (
@@ -85,7 +84,6 @@ export default class ProfilePage extends Component {
                     sort={sort}
                     filter={filter}
                     identifiable={identifiable}
-                    seed={seed}
                   />
 
                   <BottomBanner banner="LOGGED_OUT_PROFILE" name={identifiable.name} />

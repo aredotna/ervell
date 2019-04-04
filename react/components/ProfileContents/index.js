@@ -20,13 +20,14 @@ class ProfileContents extends PureComponent {
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-    seed: PropTypes.number.isRequired,
+    seed: PropTypes.number,
     isSpiderRequesting: PropTypes.bool,
   }
 
   static defaultProps = {
     type: null,
     isSpiderRequesting: false,
+    seed: Math.floor(Math.random() * 1000) + 1,
   }
 
   state = {

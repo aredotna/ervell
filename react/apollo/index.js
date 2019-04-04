@@ -47,7 +47,12 @@ export const initApolloClient = ({
     cache.restore(window.__APOLLO_STATE__);
   }
 
-  const { data: { X_APP_TOKEN } } = sharify;
+  const {
+    data: {
+      X_APP_TOKEN,
+      X_SHARE_TOKEN,
+    },
+  } = sharify;
 
   const stateLink = withClientState({
     cache,
@@ -87,8 +92,9 @@ export const initApolloClient = ({
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
-      'X-AUTH-TOKEN': X_AUTH_TOKEN,
-      'X-APP-TOKEN': X_APP_TOKEN,
+      ...(X_AUTH_TOKEN && { 'X-AUTH-TOKEN': X_AUTH_TOKEN }),
+      ...(X_APP_TOKEN && { 'X-APP-TOKEN': X_APP_TOKEN }),
+      ...(X_SHARE_TOKEN && { 'X-SHARE-TOKEN': X_SHARE_TOKEN }),
     },
   }));
 

@@ -9,10 +9,10 @@ module.exports =
   NODE_ENV: "development"
   PORT: 4000
   APP_URL: "http://localhost:4000"
-  API_BASE: "http://api.are.na"
-  GRAPHQL_ENDPOINT: "http://api.are.na/graphql"
-  CLIENT_GRAPHQL_ENDPOINT: "http://api.are.na/graphql"
-  API_URL: "http://api.are.na/v2"
+  API_BASE: "https://api.are.na"
+  GRAPHQL_ENDPOINT: "https://api.are.na/graphql"
+  CLIENT_GRAPHQL_ENDPOINT: "https://api.are.na/graphql"
+  API_URL: "https://api.are.na/v2"
   PUSHER_KEY: '19beda1f7e2ca403abab'
   S3_KEY: null
   S3_SECRET: null

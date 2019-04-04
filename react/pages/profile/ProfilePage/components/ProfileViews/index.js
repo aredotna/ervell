@@ -13,13 +13,13 @@ import ProfileFollows from 'react/components/ProfileFollows';
 import ProfileGroups from 'react/components/ProfileGroups';
 
 const All = ({
-  id, sort, identifiable, fetchPolicy, seed,
+  id, sort, identifiable, fetchPolicy,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.channels + identifiable.counts.blocks}
   >
-    <ProfileContents id={id} sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
+    <ProfileContents id={id} sort={sort} fetchPolicy={fetchPolicy} />
   </EmptyMessageOrComponent>
 );
 
@@ -28,17 +28,16 @@ All.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  seed: PropTypes.number.isRequired,
 };
 
 const Blocks = ({
-  id, sort, identifiable, fetchPolicy, seed,
+  id, sort, identifiable, fetchPolicy,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.blocks}
   >
-    <ProfileContents id={id} type="BLOCK" sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
+    <ProfileContents id={id} type="BLOCK" sort={sort} fetchPolicy={fetchPolicy} />
   </EmptyMessageOrComponent>
 );
 
@@ -47,17 +46,16 @@ Blocks.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  seed: PropTypes.number.isRequired,
 };
 
 const Channels = ({
-  id, sort, identifiable, fetchPolicy, seed,
+  id, sort, identifiable, fetchPolicy,
 }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.channels}
   >
-    <ProfileChannels id={id} sort={sort} fetchPolicy={fetchPolicy} seed={seed} />
+    <ProfileChannels id={id} sort={sort} fetchPolicy={fetchPolicy} />
   </EmptyMessageOrComponent>
 );
 
@@ -66,7 +64,6 @@ Channels.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-  seed: PropTypes.number.isRequired,
 };
 
 const Index = ({ id, filter, identifiable }) => (
@@ -125,7 +122,6 @@ class ProfileViews extends Component {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     identifiable: propType(profilePageIdentifiableFragment).isRequired,
-    seed: PropTypes.number.isRequired,
   }
 
   state = {
@@ -137,7 +133,7 @@ class ProfileViews extends Component {
   render() {
     const { fetchPolicy } = this.state;
     const {
-      view, id, sort, filter, identifiable, seed,
+      view, id, sort, filter, identifiable,
     } = this.props;
 
     switch (view) {
@@ -148,7 +144,6 @@ class ProfileViews extends Component {
             sort={sort}
             identifiable={identifiable}
             fetchPolicy={fetchPolicy}
-            seed={seed}
           />
         );
       case 'channels':
@@ -158,7 +153,6 @@ class ProfileViews extends Component {
             sort={sort}
             identifiable={identifiable}
             fetchPolicy={fetchPolicy}
-            seed={seed}
           />
         );
       case 'blocks':
@@ -168,7 +162,6 @@ class ProfileViews extends Component {
             sort={sort}
             identifiable={identifiable}
             fetchPolicy={fetchPolicy}
-            seed={seed}
           />
         );
       case 'index':

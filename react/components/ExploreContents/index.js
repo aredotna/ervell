@@ -14,11 +14,12 @@ export default class ExploreContents extends PureComponent {
     type: PropTypes.string,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-    seed: PropTypes.number.isRequired,
+    seed: PropTypes.number,
   }
 
   static defaultProps = {
     type: null,
+    seed: Math.floor(Math.random() * 1000) + 1,
   }
 
   state = {

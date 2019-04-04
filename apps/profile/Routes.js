@@ -30,7 +30,6 @@ export default () => (
             const view = params.view || cookies.view || 'channels';
             const sort = setValid((query.sort || cookies.sort), VALID_SORTS, 'UPDATED_AT');
             const filter = setValid((query.filter || cookies.filter), VALID_FILTERS, 'OWN');
-            const seed = Math.floor(Math.random() * 1000) + 1;
 
             return (
               <ProfilePage
@@ -38,7 +37,6 @@ export default () => (
                 view={view}
                 sort={sort}
                 filter={filter}
-                seed={seed}
               />
             );
           }}

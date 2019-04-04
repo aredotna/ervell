@@ -22,12 +22,13 @@ class ProfileChannels extends PureComponent {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
-    seed: PropTypes.number.isRequired,
     isSpiderRequesting: PropTypes.bool,
+    seed: PropTypes.number,
   }
 
   static defaultProps = {
     isSpiderRequesting: false,
+    seed: Math.floor(Math.random() * 1000) + 1,
   }
 
   state = {
@@ -74,14 +75,14 @@ class ProfileChannels extends PureComponent {
   render() {
     const { per, hasMore, q } = this.state;
     const {
-      id, sort, fetchPolicy, seed, isSpiderRequesting,
+      id, sort, fetchPolicy, isSpiderRequesting, seed,
     } = this.props;
 
     const isSearch = sort === 'RANDOM' || q;
 
     const query = isSearch ? profileChannelSearchQuery : profileChannelsQuery;
     const variables = isSearch ? {
-      id, per, sort, q, seed,
+      id, per, sort, seed, q,
     } : { id, per };
 
     return (
