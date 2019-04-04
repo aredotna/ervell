@@ -125,7 +125,6 @@ class ProfileViews extends Component {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     identifiable: propType(profilePageIdentifiableFragment).isRequired,
-    seed: PropTypes.number.isRequired,
   }
 
   state = {
@@ -137,8 +136,10 @@ class ProfileViews extends Component {
   render() {
     const { fetchPolicy } = this.state;
     const {
-      view, id, sort, filter, identifiable, seed,
+      view, id, sort, filter, identifiable,
     } = this.props;
+
+    const seed = Math.floor(Math.random() * 1000) + 1;
 
     switch (view) {
       case 'all':
