@@ -92,7 +92,9 @@ airbrake.addFilter (notice) ->
     # Ignores 404s
     (notice.errors[0].message is 'Not found') or
     # Ignores 401s
-    (notice.errors[0].message is 'Access denied')
+    (notice.errors[0].message is 'Access denied') or
+    # Ignores 400s
+    (notice.errors[0].message is 'Bad request')
   )
 
   notice
