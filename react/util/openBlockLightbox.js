@@ -12,6 +12,9 @@ export default ({ id, context }) => {
       .map(k => k.id)),
   ];
 
-  new Modal(ModalBlockLightbox, { id, ids }, { Dialog: ModalFullscreenDialog })
+  const currentTitle = document.title;
+  const onClose = () => { document.title = currentTitle; };
+
+  new Modal(ModalBlockLightbox, { id, ids, onClose }, { Dialog: ModalFullscreenDialog })
     .open();
 };
