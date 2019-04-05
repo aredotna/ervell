@@ -92,13 +92,9 @@ export default class Konnectable extends PureComponent {
 
     e.preventDefault();
 
-    const currentTitle = document.title;
-    const onClose = () => { document.title = currentTitle; };
-
     return openBlockLightbox({
       id,
       context,
-      onClose,
     });
   }
 
