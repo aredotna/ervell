@@ -41,8 +41,6 @@ export const initApolloClient = ({
     return window.__APOLLO_CLIENT__;
   }
 
-  console.log('hi', GRAPHQL_ENDPOINT);
-
   const cache = new InMemoryCache({ fragmentMatcher });
 
   if (isClientSide && window.__APOLLO_STATE__) {

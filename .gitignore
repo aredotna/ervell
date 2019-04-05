@@ -12,3 +12,4 @@ manifest.json
 yarn-error.log
 newrelic_agent.log
 extension/dist
+extension/src/config.js
