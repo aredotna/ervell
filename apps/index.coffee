@@ -89,6 +89,10 @@ console.time('block')
 app.use(require('../apps/block'))
 console.timeEnd('block')
 
+console.time('new_channel')
+app.use(require('../apps/new_channel'))
+console.timeEnd('new_channel')
+
 console.time('channel')
 app.use(require('../apps/channel'))
 console.timeEnd('channel')
