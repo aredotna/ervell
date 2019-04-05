@@ -58,13 +58,11 @@ export default class Konnectable extends PureComponent {
       id: PropTypes.number.isRequired,
     })),
     isPreviewable: PropTypes.bool,
-    documentTitle: PropTypes.string,
   }
 
   static defaultProps = {
     context: [],
     isPreviewable: true,
-    documentTitle: document.title,
   }
 
   state = {
@@ -94,7 +92,8 @@ export default class Konnectable extends PureComponent {
 
     e.preventDefault();
 
-    const onClose = () => { document.title = this.props.documentTitle; };
+    const currentTitle = document.title;
+    const onClose = () => { document.title = currentTitle; };
 
     return openBlockLightbox({
       id,
