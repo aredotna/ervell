@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import constants from 'react/styles/constants';
 import { multiply } from 'react/styles/functions';
 
-const MARGIN_BOTTOM = '2em';
+import Box from 'react/components/UI/Box';
 
-const Container = styled.div`
-  position: relative;
-  margin: ${constants.containerOffset} auto 0 auto;
-  ${x => x.hasChildren && `
-    margin-bottom: ${MARGIN_BOTTOM};
-  `}
-`;
+const MARGIN_BOTTOM = '2em';
 
 const Header = styled.div`
   display: flex;
@@ -41,7 +35,7 @@ const Actions = styled.div`
 const Metadata = styled.div`
 `;
 
-export default class HeaderMetadataContainer extends Component {
+export default class HeaderMetadataContainer extends PureComponent {
   static propTypes = {
     breadcrumb: PropTypes.node.isRequired,
     actions: PropTypes.node,
@@ -68,7 +62,12 @@ export default class HeaderMetadataContainer extends Component {
     } = this.props;
 
     return (
-      <Container hasChildren={!!children} {...rest}>
+      <Box
+        mt={constants.containerOffset}
+        mb={children ? 7 : null}
+        mx="auto"
+        {...rest}
+      >
         {pre}
 
         <Header>
@@ -90,7 +89,7 @@ export default class HeaderMetadataContainer extends Component {
         }
 
         {post}
-      </Container>
+      </Box>
     );
   }
 }
