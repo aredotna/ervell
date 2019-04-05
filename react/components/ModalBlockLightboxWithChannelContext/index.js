@@ -13,14 +13,21 @@ export default class ModalBlockLightboxWithChannelContext extends PureComponent 
   static propTypes = {
     id: PropTypes.number.isRequired,
     channel_id: PropTypes.number.isRequired,
+    documentTitle: PropTypes.string,
+  }
+
+  static defaultProps = {
+    documentTitle: document.title,
   }
 
   state = {
     mode: 'open',
   }
 
-  close = () =>
+  close = () => {
     this.setState({ mode: 'closed' });
+    document.title = this.props.documentTitle;
+  }
 
   render() {
     const { id, channel_id } = this.props;
