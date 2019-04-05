@@ -53,7 +53,7 @@ authenticate = (req, res, next) ->
   )(req, res, next)
 
 respond = (req, res, next) ->
-  next() unless req.xhr
+  return next() unless req.xhr
 
   res.send
     code: 200
