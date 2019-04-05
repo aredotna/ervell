@@ -25,14 +25,12 @@ export default class BlockLightbox extends PureComponent {
     context: PropTypes.oneOf(['MODAL', 'PAGE']),
     layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']),
     children: PropTypes.node,
-    onClose: PropTypes.func,
   }
 
   static defaultProps = {
     layout: 'DEFAULT',
     context: 'PAGE',
     children: null,
-    onClose: () => null,
   }
 
   render() {
@@ -41,7 +39,6 @@ export default class BlockLightbox extends PureComponent {
       layout,
       context,
       children,
-      onClose,
       ...rest
     } = this.props;
 
@@ -60,7 +57,6 @@ export default class BlockLightbox extends PureComponent {
         {layout === 'DEFAULT' &&
           <BlockLightboxMetadataPane
             block={block}
-            onClose={onClose}
             pt={context === 'MODAL' ? constants.topBarHeight : undefined}
           />
         }
