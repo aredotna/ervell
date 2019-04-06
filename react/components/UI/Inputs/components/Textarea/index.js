@@ -9,6 +9,7 @@ export const mixin = css`
   ${inputMixin}
   ${preset(lineHeight, { lineHeight: 1 })}
   resize: ${props => props.resize};
+  white-space: pre-wrap;
 `;
 
 const Textarea = styled.textarea`
