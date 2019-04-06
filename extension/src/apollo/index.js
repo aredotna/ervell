@@ -13,11 +13,11 @@ import { Themed } from 'react/styles/theme';
 
 import introspectionQueryResultData from 'react/apollo/fragmentTypes.json';
 
-import extensionData from 'react/apollo/localState/extensionData';
+import extensionData from 'extension/src/apollo/extensionData';
 
-import { GRAPHQL_ENDPOINT, X_APP_TOKEN } from 'extension/src/config';
+import config from 'extension/src/config';
 
-const httpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
+const httpLink = createHttpLink({ uri: config.GRAPHQL_ENDPOINT });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -43,7 +43,7 @@ export const initApolloClient = ({
     headers: {
       ...headers,
       'X-AUTH-TOKEN': X_AUTH_TOKEN,
-      'X-APP-TOKEN': X_APP_TOKEN,
+      'X-APP-TOKEN': config.X_APP_TOKEN,
     },
   }));
 

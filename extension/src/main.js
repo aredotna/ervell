@@ -1,9 +1,9 @@
-import { mountWithApolloProvider } from 'react/apollo';
-import Menu from 'extension/src/components/Menu';
+import { mountWithApolloProvider } from 'extension/src/apollo';
+import Pane from 'extension/src/components/Pane';
 
 const initialize = () => {
   const mountPoint = document.getElementById('ArenaExtension');
-  mountWithApolloProvider(Menu, {}, mountPoint);
+  mountWithApolloProvider(Pane, {}, mountPoint);
 };
 
 document.addEventListener('DOMContentLoaded', initialize);
