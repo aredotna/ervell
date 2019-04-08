@@ -5,14 +5,12 @@ import styled from 'styled-components';
 import constants from 'react/styles/constants';
 import { multiply } from 'react/styles/functions';
 
+import Box from 'react/components/UI/Box';
+
 const MARGIN_BOTTOM = '2em';
 
-const Container = styled.div`
+const Container = styled(Box)`
   position: relative;
-  margin: ${constants.containerOffset} auto 0 auto;
-  ${x => x.hasChildren && `
-    margin-bottom: ${MARGIN_BOTTOM};
-  `}
 `;
 
 const Header = styled.div`
@@ -62,7 +60,12 @@ export default class HeaderMetadataContainer extends Component {
     } = this.props;
 
     return (
-      <Container hasChildren={!!children} {...rest}>
+      <Container
+        mt={constants.containerOffset}
+        mb={children ? 7 : null}
+        mx="auto"
+        {...rest}
+      >
         <Header>
           <Breadcrumb>
             {breadcrumb}

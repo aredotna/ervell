@@ -11,7 +11,13 @@ const BREAKPOINTS = new Array(8).fill(undefined).map((_, i) => {
   return `@media (min-width: ${minWidth}) { max-width: ${maxWidth}; }`;
 }).join('');
 
-export default styled(Box)`
-  margin: 0 auto;
+const Constrain = styled(Box)`
   ${BREAKPOINTS}
 `;
+
+Constrain.defaultProps = {
+  my: 0,
+  mx: 'auto',
+};
+
+export default Constrain;
