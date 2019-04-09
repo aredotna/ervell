@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 export default gql`
-  query ChannelContents($id: ID!, $per: Int!, $page: Int!) {
+  query ChannelContentsPage($id: ID!, $per: Int!, $page: Int!) {
     channel(id: $id) {
       __typename
       id

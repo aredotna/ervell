@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import LoadingIndicator from 'react/components/UI/LoadingIndicator';
 
 const hoverMixin = css`
-  border: 1px solid ${x => x.theme.colors.gray.semiLight};
+  border: 1px solid ${props => props.theme.colors.gray.semiLight};
 `;
 
 const Container = styled.div`
   box-sizing: border-box;
   height: 100%;
   width: 100%;
-  border: 1px solid transparent;
+  border: 1px solid ${props => props.theme.colors.gray.hint};
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
