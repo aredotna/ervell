@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Box from 'react/components/UI/Box';
-import Konnectable from 'react/components/Cell/components/Konnectable';
 
 const Container = styled(Box).attrs({
   mb: 8,
+  p: 6,
+  border: '1px solid',
+  borderColor: 'gray.light',
 })`
   display: flex;
   align-items: center;
@@ -16,30 +18,39 @@ const Container = styled(Box).attrs({
     width: ${props.theme.constantValues.blockWidth};
     height: ${props.theme.constantValues.blockWidth};
 
-    ${props.mode === 'loading' && `
-      &:after {
-        display: block;
-        content: '●';
-        color: ${props.theme.colors.gray.medium};
-      }
-    `}
+    ${(
+    {
+      loading: `
+        &:after {
+          display: block;
+          content: '●';
+          color: ${props.theme.colors.gray.semiLight};
+        }
+      `,
+      error: `
+        border-color: ${props.theme.colors.state.alert};
+        &:after {
+          display: block;
+          content: '×';
+          color: ${props.theme.colors.state.alert};
+        }
+      `,
+    }[props.mode])}
   `}
 `;
 
 const Skeletal = ({ mode, ...rest }) => ({
-  active: () => <Konnectable {...rest} />,
-  loading: () => (
-    <Container mode={mode} {...rest} />
-  ),
-  pending: () => <Container {...rest} />,
+  pending: () => <Container mode={mode} {...rest} />,
+  loading: () => <Container mode={mode} {...rest} />,
+  error: () => <Container mode={mode} {...rest} />,
 }[mode]());
 
 Skeletal.propTypes = {
-  isActive: PropTypes.bool,
+  mode: PropTypes.oneOf(['pending', 'loading', 'error']),
 };
 
 Skeletal.defaultProps = {
-  isActive: false,
+  mode: 'pending',
 };
 
 export default Skeletal;
