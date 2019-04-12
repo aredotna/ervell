@@ -5,5 +5,8 @@ export default gql`
     __typename
     id
     content(format: HTML)
+    can {
+      manage
+    }
   }
 `;
