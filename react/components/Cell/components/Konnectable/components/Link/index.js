@@ -14,7 +14,12 @@ export default class Link extends PureComponent {
     const { link, ...rest } = this.props;
 
     return (
-      <Generic src={link.src} title={link.title} {...rest} />
+      <Generic
+        src={link.src}
+        title={link.title}
+        borderColor="gray.hint"
+        {...rest}
+      />
     );
   }
 }

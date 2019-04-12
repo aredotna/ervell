@@ -9,7 +9,7 @@ import Box from 'react/components/UI/Box';
 import Typography from 'react/components/UI/Text';
 
 const hoverMixin = css`
-  border: 1px solid ${x => x.theme.colors.gray.semiLight};
+  border: 1px solid ${props => props.theme.colors.gray.semiLight};
 `;
 
 const Container = styled(Box).attrs({
@@ -20,15 +20,14 @@ const Container = styled(Box).attrs({
   width: 100%;
   height: 100%;
   overflow: hidden;
-  // border: 1px solid transparent;
-  border: 1px solid ${x => x.theme.colors.gray.light};
+  border: 1px solid ${props => props.theme.colors.gray.light};
   text-align: left;
 
-  ${x => x.mode === 'hover' && hoverMixin}
+  ${props => props.mode === 'hover' && hoverMixin}
   &:hover { ${hoverMixin} }
 
   // If text is long: overflow with a small gradient fade out
-  ${x => x.length > 500 && `
+  ${props => props.length > 500 && `
     &:after {
       content: '';
       display: block;
@@ -37,7 +36,7 @@ const Container = styled(Box).attrs({
       bottom: 0;
       left: 0;
       height: 3em;
-      background: linear-gradient(${x.theme.colors.utility.transparent} 0%, white 100%);
+      background: linear-gradient(${props.theme.colors.utility.transparent} 0%, white 100%);
     }
   `}
 `;
