@@ -19,7 +19,7 @@ const ModalBackdrop = styled.div`
 
 export default class Modal extends Component {
   static propTypes = {
-    Dialog: PropTypes.func,
+    Dialog: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     children: PropTypes.node.isRequired,
     onClose: PropTypes.func.isRequired,
   };
