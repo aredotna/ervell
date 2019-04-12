@@ -7,8 +7,8 @@ const config = {
   watch: true,
   devtool: 'inline-source-map',
   entry: {
-    'content-script': './extension/src/content-script.js',
     background: './extension/src/background.js',
+    injectiframe: './extension/src/injectiframe.js',
     main: './extension/src/main.js',
   },
   plugins: [
@@ -16,13 +16,16 @@ const config = {
       port: 9090,
       reloadPage: true,
       entries: {
-        contentScript: 'content-script',
+        contentScript: 'injectiframe',
         background: 'background',
+        main: 'main',
       },
     }),
     new CopyWebpackPlugin([
-      { from: './extension/src/popup.html' },
+      { from: './extension/src/iframe.html' },
       { from: './extension/manifest.json' },
+      { from: './extension/img/' },
+      { from: './extension/src/iframe.css' },
     ]),
   ],
   output: {
