@@ -1,24 +1,18 @@
 import React, { PureComponent } from 'react';
 import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
 
 import blockLightboxMetadataPaneFragment from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/fragments/blockLightboxMetadataPane';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Modal from 'react/components/UI/Modal/Portal';
-import ModalDialog from 'react/components/UI/ModalDialog';
 import Icons from 'react/components/UI/Icons';
 import GenericButton from 'react/components/UI/GenericButton';
 import ManageBlock from 'react/components/ManageBlock';
 import Header from 'react/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
 import BlockLightboxActions from 'react/components/BlockLightbox/components/BlockLightboxActions';
 import BlockLightboxMetadataFold from 'react/components/BlockLightbox/components/BlockLightboxMetadataFold';
-
-const Dialog = styled(ModalDialog).attrs({
-  maxWidth: '55em',
-})`
-`;
+import BlockLightboxModalDialog from 'react/components/BlockLightbox/components/BlockLightboxModalDialog';
 
 export default class BlockLightboxMetadataPane extends PureComponent {
   static propTypes = {
@@ -143,7 +137,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
         }
 
         {mode === 'manage' &&
-          <Modal onClose={this.closeModal} Dialog={Dialog}>
+          <Modal onClose={this.closeModal} Dialog={BlockLightboxModalDialog}>
             <ManageBlock
               block={block}
               onDone={this.closeModal}
