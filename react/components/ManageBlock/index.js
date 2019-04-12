@@ -19,6 +19,11 @@ class ManageBlock extends PureComponent {
     block: propType(manageBlockFragment).isRequired,
     updateBlock: PropTypes.func.isRequired,
     onDone: PropTypes.func.isRequired,
+    autoFocus: PropTypes.oneOf(['title', 'description', 'body']),
+  }
+
+  static defaultProps = {
+    autoFocus: 'title',
   }
 
   state = {
@@ -28,6 +33,24 @@ class ManageBlock extends PureComponent {
     content: null,
     errorMessage: null,
   }
+
+  componentDidMount() {
+    const { autoFocus } = this.props;
+
+    setTimeout(() => {
+      const element = {
+        title: this.titleRef,
+        description: this.descriptionRef,
+        body: this.bodyRef,
+      }[autoFocus];
+
+      element.current.focus();
+    }, 0);
+  }
+
+  titleRef = React.createRef()
+  descriptionRef = React.createRef()
+  bodyRef = React.createRef()
 
   handleErrors = (err) => {
     this.setState({
@@ -93,6 +116,7 @@ class ManageBlock extends PureComponent {
               placeholder="Title your block here"
               defaultValue={block.editable_title}
               onChange={this.handleTitle}
+              ref={this.titleRef}
             />
           </LabelledInput>
 
@@ -103,8 +127,9 @@ class ManageBlock extends PureComponent {
               placeholder="Describe your block here"
               defaultValue={block.editable_description}
               onChange={this.handleDescription}
-              rows={block.__typename !== 'Text' ? 16 : 4}
-              f={2}
+              rows={block.__typename !== 'Text' ? 12 : 4}
+              f={3}
+              ref={this.descriptionRef}
             />
           </LabelledInput>
 
@@ -116,11 +141,12 @@ class ManageBlock extends PureComponent {
                 required
                 placeholder="Required"
                 defaultValue={block.editable_content}
-                rows={16}
+                rows={12}
                 onChange={this.handleContent}
                 font="mono"
                 f={3}
                 lineHeight={2}
+                ref={this.bodyRef}
               />
             </LabelledInput>
           }
