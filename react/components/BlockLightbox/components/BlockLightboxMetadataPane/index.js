@@ -27,6 +27,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
 
   state = {
     mode: 'resting',
+    autoFocus: null,
   }
 
   openManage = (e) => {
@@ -34,13 +35,18 @@ export default class BlockLightboxMetadataPane extends PureComponent {
     this.setState({ mode: 'manage' });
   }
 
+  openManageFor = autoFocus => (e) => {
+    e.preventDefault();
+    this.setState({ mode: 'manage', autoFocus });
+  }
+
   closeModal = (e) => {
     if (e) e.preventDefault();
-    this.setState({ mode: 'resting' });
+    this.setState({ mode: 'resting', autoFocus: null });
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode, autoFocus } = this.state;
     const { block, ...rest } = this.props;
 
     return (
@@ -60,8 +66,16 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           fontWeight="bold"
           hyphenate
           verticalAlign="middle"
+          onClick={block.can.manage ? this.openManageFor('title') : undefined}
         >
-          <span dangerouslySetInnerHTML={{ __html: block.title }} />
+          {block.can.manage && !block.title &&
+            <Text color="gray.medium">Add a title</Text>
+          }
+
+          {!block.can.manage && !block.title
+            ? <Text color="gray.medium">—</Text>
+            : <span dangerouslySetInnerHTML={{ __html: block.title }} />
+          }
         </Text>
 
         <Text f={1} lineHeight={2} color="gray.medium">
@@ -102,7 +116,19 @@ export default class BlockLightboxMetadataPane extends PureComponent {
             breakWord
             boldLinks
             hoverLinks={{ color: 'black' }}
+            onClick={block.can.manage ? this.openManageFor('description') : undefined}
           />
+        }
+
+        {block.can.manage && !block.description &&
+          <Text
+            f={3}
+            lineHeight={2}
+            color="gray.medium"
+            onClick={block.can.manage ? this.openManageFor('description') : undefined}
+          >
+            Add a description
+          </Text>
         }
 
         <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
@@ -118,7 +144,11 @@ export default class BlockLightboxMetadataPane extends PureComponent {
 
         {mode === 'manage' &&
           <Modal onClose={this.closeModal} Dialog={Dialog}>
-            <ManageBlock block={block} onDone={this.closeModal} />
+            <ManageBlock
+              block={block}
+              onDone={this.closeModal}
+              autoFocus={autoFocus || undefined}
+            />
           </Modal>
         }
 
