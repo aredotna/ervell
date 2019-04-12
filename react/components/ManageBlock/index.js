@@ -19,6 +19,13 @@ class ManageBlock extends PureComponent {
     block: propType(manageBlockFragment).isRequired,
     updateBlock: PropTypes.func.isRequired,
     onDone: PropTypes.func.isRequired,
+    onChangePending: PropTypes.func,
+    autoFocus: PropTypes.oneOf(['title', 'description', 'body']),
+  }
+
+  static defaultProps = {
+    onChangePending: () => {},
+    autoFocus: 'title',
   }
 
   state = {
@@ -28,6 +35,24 @@ class ManageBlock extends PureComponent {
     content: null,
     errorMessage: null,
   }
+
+  componentDidMount() {
+    const { autoFocus } = this.props;
+
+    setTimeout(() => {
+      const element = {
+        title: this.titleRef,
+        description: this.descriptionRef,
+        body: this.bodyRef,
+      }[autoFocus];
+
+      element.current.focus();
+    }, 0);
+  }
+
+  titleRef = React.createRef()
+  descriptionRef = React.createRef()
+  bodyRef = React.createRef()
 
   handleErrors = (err) => {
     this.setState({
@@ -39,7 +64,9 @@ class ManageBlock extends PureComponent {
   updateBlock = (e) => {
     e.preventDefault();
 
-    const { block, updateBlock, onDone } = this.props;
+    const {
+      block, updateBlock, onDone, onChangePending,
+    } = this.props;
     const { title, description, content } = this.state;
 
     const variables = compactObject({
@@ -52,11 +79,18 @@ class ManageBlock extends PureComponent {
     this.setState({ mode: 'updating' });
 
     return updateBlock({ variables })
-      .then(() => onDone())
+      .then(() => {
+        onChangePending(false);
+        return onDone();
+      })
       .catch(this.handleErrors);
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
+    const { onChangePending } = this.props;
+
+    onChangePending(true);
+
     this.setState({ [fieldName]: fieldValue });
   }
 
@@ -93,6 +127,7 @@ class ManageBlock extends PureComponent {
               placeholder="Title your block here"
               defaultValue={block.editable_title}
               onChange={this.handleTitle}
+              ref={this.titleRef}
             />
           </LabelledInput>
 
@@ -103,8 +138,9 @@ class ManageBlock extends PureComponent {
               placeholder="Describe your block here"
               defaultValue={block.editable_description}
               onChange={this.handleDescription}
-              rows={block.__typename !== 'Text' ? 16 : 4}
-              f={2}
+              rows={block.__typename !== 'Text' ? 12 : 4}
+              f={3}
+              ref={this.descriptionRef}
             />
           </LabelledInput>
 
@@ -116,11 +152,12 @@ class ManageBlock extends PureComponent {
                 required
                 placeholder="Required"
                 defaultValue={block.editable_content}
-                rows={16}
+                rows={12}
                 onChange={this.handleContent}
                 font="mono"
                 f={3}
                 lineHeight={2}
+                ref={this.bodyRef}
               />
             </LabelledInput>
           }
