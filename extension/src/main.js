@@ -1,9 +1,11 @@
 import { mountWithApolloProvider } from 'extension/src/apollo';
-import Pane from 'extension/src/components/Pane';
+
+import withBrowserRouter from 'react/hocs/WithBrowserRouter';
+import Routes from 'extension/src/Routes';
 
 const initialize = () => {
   const mountPoint = document.getElementById('ArenaExtension');
-  mountWithApolloProvider(Pane, {}, mountPoint);
+  mountWithApolloProvider(withBrowserRouter(Routes), { }, mountPoint);
 };
 
 document.addEventListener('DOMContentLoaded', initialize);
