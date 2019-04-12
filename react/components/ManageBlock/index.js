@@ -19,10 +19,12 @@ class ManageBlock extends PureComponent {
     block: propType(manageBlockFragment).isRequired,
     updateBlock: PropTypes.func.isRequired,
     onDone: PropTypes.func.isRequired,
+    onChangePending: PropTypes.func,
     autoFocus: PropTypes.oneOf(['title', 'description', 'body']),
   }
 
   static defaultProps = {
+    onChangePending: () => {},
     autoFocus: 'title',
   }
 
@@ -62,7 +64,9 @@ class ManageBlock extends PureComponent {
   updateBlock = (e) => {
     e.preventDefault();
 
-    const { block, updateBlock, onDone } = this.props;
+    const {
+      block, updateBlock, onDone, onChangePending,
+    } = this.props;
     const { title, description, content } = this.state;
 
     const variables = compactObject({
@@ -75,11 +79,18 @@ class ManageBlock extends PureComponent {
     this.setState({ mode: 'updating' });
 
     return updateBlock({ variables })
-      .then(() => onDone())
+      .then(() => {
+        onChangePending(false);
+        return onDone();
+      })
       .catch(this.handleErrors);
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
+    const { onChangePending } = this.props;
+
+    onChangePending(true);
+
     this.setState({ [fieldName]: fieldValue });
   }
 
