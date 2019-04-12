@@ -34,32 +34,42 @@ export default class ChannelContents extends PureComponent {
 
   render() {
     const { newBlocks } = this.state;
-    const { channel, chunkSize, ...rest } = this.props;
+    const {
+      channel: {
+        id, skeleton, can,
+      },
+      chunkSize,
+      ...rest
+    } = this.props;
 
-    const chunked = chunk(channel.skeleton, chunkSize);
+    const chunked = chunk(skeleton, chunkSize);
 
     return (
       <Grid wrapChildren={false} {...rest}>
-        <GridItem>
-          <AddBlock
-            channel_id={channel.id}
-            onAddBlock={this.handleAddBlock}
-          />
-        </GridItem>
+        {can.add_to &&
+          <React.Fragment>
+            <GridItem>
+              <AddBlock
+                channel_id={id}
+                onAddBlock={this.handleAddBlock}
+              />
+            </GridItem>
 
-        {newBlocks.length > 0 &&
-          <ChannelContentsSet
-            id={channel.id}
-            skeleton={newBlocks}
-          />
+            {newBlocks.length > 0 &&
+              <ChannelContentsSet
+                id={id}
+                skeleton={newBlocks}
+              />
+            }
+          </React.Fragment>
         }
 
         {chunked.map((pageSkeleton, idx) => (
           <ChannelContentsPage
             key={`Page:${idx + 1}`}
-            id={channel.id}
+            id={id}
             skeleton={pageSkeleton}
-            context={channel.skeleton}
+            context={skeleton}
           />
         ))}
       </Grid>
