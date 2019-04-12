@@ -133,6 +133,7 @@
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",
+    "webextension-polyfill": "^0.4.0",
     "webpack-hot-middleware": "^2.21.0",
     "withinviewport": "^1.0.0",
     "xss": "^0.3.4"
