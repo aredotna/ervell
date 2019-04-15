@@ -4,9 +4,10 @@ import styled, { css } from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import constants from 'react/styles/constants';
-import { multiply } from 'react/styles/functions';
 
-const { blockGutter, blockWidth } = constants;
+import GridItem from 'react/components/UI/Grid/components/GridItem';
+
+const { blockGutter } = constants;
 
 const containerMixin = css`
   display: flex;
@@ -29,28 +30,20 @@ const InfiniteContainer = styled(InfiniteScroll)`
   ${containerMixin}
 `;
 
-const GridItem = styled.div`
-  position: relative;
-  margin: ${props => `0 ${blockGutter} ${multiply(blockGutter, props.gutterSpacing)} ${blockGutter}`};
-  width: ${blockWidth};
-
-  ${x => !x.variableHeight && `
-    height: ${blockWidth};
-  `}
-`;
-
 export default class Grid extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     variableHeight: PropTypes.bool,
     gutterSpacing: PropTypes.number,
     loadMore: PropTypes.func,
+    wrapChildren: PropTypes.bool,
   }
 
   static defaultProps = {
     variableHeight: false,
     gutterSpacing: 4,
     loadMore: null,
+    wrapChildren: true,
   }
 
   render() {
@@ -59,6 +52,7 @@ export default class Grid extends Component {
       variableHeight,
       loadMore,
       gutterSpacing,
+      wrapChildren,
       ...rest
     } = this.props;
 
@@ -66,11 +60,11 @@ export default class Grid extends Component {
 
     return (
       <Tag loadMore={loadMore} {...rest}>
-        {Children.map(children, child => (child &&
-          <GridItem gutterSpacing={gutterSpacing} variableHeight>
+        {wrapChildren ? Children.map(children, child => (child &&
+          <GridItem gutterSpacing={gutterSpacing}>
             {child}
           </GridItem>
-        ))}
+        )) : children}
       </Tag>
     );
   }

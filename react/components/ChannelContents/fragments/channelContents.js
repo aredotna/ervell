@@ -1,12 +1,15 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  fragment BlockLightboxText on Text {
+  fragment ChannelContents on Channel {
     __typename
     id
-    content(format: HTML)
+    skeleton {
+      id
+      type
+    }
     can {
-      manage
+      add_to
     }
   }
 `;

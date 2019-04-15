@@ -19,7 +19,7 @@ export default class ChannelMetadata extends Component {
   }
 
   render() {
-    const { channel } = this.props;
+    const { channel, ...rest } = this.props;
 
     return (
       <HeaderMetadataContainer
@@ -29,6 +29,7 @@ export default class ChannelMetadata extends Component {
         actions={
           <ChannelMetadataActions channel={channel} />
         }
+        {...rest}
       >
         <ExpandableContext>
           <Grid gutterSpacing={2} variableHeight>

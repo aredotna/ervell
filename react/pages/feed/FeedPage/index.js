@@ -14,7 +14,6 @@ export default class FeedPage extends Component {
   render() {
     return (
       <ErrorBoundary>
-
         <Head>
           <title>Are.na</title>
         </Head>

@@ -2,19 +2,18 @@ import React, { PureComponent } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
+import Box from 'react/components/UI/Box';
 import Img from 'react/components/Cell/components/Konnectable/components/Img';
 
 const hoverMixin = css`
-  border: 1px solid ${x => x.theme.colors.gray.semiLight};
+  border: 1px solid ${props => props.theme.colors.gray.semiLight};
 `;
 
-const Container = styled.div`
-  box-sizing: border-box;
+const Container = styled(Box)`
   height: 100%;
   width: 100%;
-  border: 1px solid transparent;
 
-  ${x => x.mode === 'hover' && hoverMixin}
+  ${props => props.mode === 'hover' && hoverMixin}
   &:hover { ${hoverMixin} }
 `;
 
@@ -31,10 +30,17 @@ export default class Generic extends PureComponent {
   }
 
   render() {
-    const { src, title, mode } = this.props;
+    const {
+      src, title, mode, ...rest
+    } = this.props;
 
     return (
-      <Container mode={mode}>
+      <Container
+        mode={mode}
+        border="1px solid"
+        borderColor="transparent"
+        {...rest}
+      >
         <Img src={src} alt={title} />
       </Container>
     );

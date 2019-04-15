@@ -8,6 +8,7 @@ import identifiableCellFragment from 'react/components/Cell/components/Identifia
 import konnectableCellFragment from 'react/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 import Specimen from 'react/stories/__components__/Specimen';
+import States from 'react/stories/__components__/States';
 
 import Box from 'react/components/UI/Box';
 import Grid from 'react/components/UI/Grid';
@@ -129,4 +130,9 @@ storiesOf('Cell', module)
         </Box>
       </Grid>
     </Specimen>
+  ))
+  .add('Skeletal', () => (
+    <States states={[{ mode: 'pending' }, { mode: 'loading' }, { mode: 'error' }]}>
+      <Cell.Skeletal />
+    </States>
   ));
