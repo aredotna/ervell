@@ -1,19 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Waypoint from 'react-waypoint';
-import { Query } from 'react-apollo';
 
-import channelContentsPageQuery from 'react/components/ChannelContents/components/ChannelContentsPage/queries/channelContentsPage';
-
-import Cell from 'react/components/Cell';
-import GridItem from 'react/components/UI/Grid/components/GridItem';
+import ChannelContentsSet from 'react/components/ChannelContents/components/ChannelContentsSet';
 import ChannelContentsPageSkeleton from 'react/components/ChannelContents/components/ChannelContentsPageSkeleton';
 
 export default class ChannelContentsPage extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    page: PropTypes.number.isRequired,
-    per: PropTypes.number.isRequired,
     skeleton: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       type: PropTypes.string.isRequired,
@@ -37,64 +31,39 @@ export default class ChannelContentsPage extends PureComponent {
 
   render() {
     const { mode } = this.state;
-    const {
-      id,
-      page,
-      per,
-      skeleton,
-    } = this.props;
+    const { id, skeleton, context } = this.props;
 
     return (
       <React.Fragment>
         {mode === 'resting' &&
-          <Waypoint onEnter={this.handleEnter} />
+          <Waypoint
+            onEnter={this.handleEnter}
+            fireOnRapidScroll={false}
+            topOffset="-100%"
+            bottomOffset="-100%"
+          />
         }
 
-        {mode !== 'active' &&
+        {mode === 'active' ? (
+          <ChannelContentsSet
+            id={id}
+            skeleton={skeleton}
+            context={context}
+          />
+        ) : (
           <ChannelContentsPageSkeleton
             skeleton={skeleton}
             mode="pending"
           />
-        }
-
-        {mode === 'active' &&
-          <Query query={channelContentsPageQuery} variables={{ id, page, per }}>
-            {({ data, loading, error }) => {
-              if (loading) {
-                return (
-                  <ChannelContentsPageSkeleton
-                    skeleton={skeleton}
-                    mode="loading"
-                  />
-                );
-              }
-
-              if (error) {
-                return (
-                  <ChannelContentsPageSkeleton
-                    skeleton={skeleton}
-                    mode="error"
-                  />
-                );
-              }
-
-              const { context } = this.props;
-              const { channel: { contents } } = data;
-
-              return contents.map(connectable => (
-                <GridItem key={`${connectable.__typename}:${connectable.id}`}>
-                  <Cell.Konnectable
-                    konnectable={connectable}
-                    context={context}
-                  />
-                </GridItem>
-              ));
-            }}
-          </Query>
-        }
+        )}
 
         {mode === 'resting' &&
-          <Waypoint onEnter={this.handleEnter} />
+          <Waypoint
+            onEnter={this.handleEnter}
+            fireOnRapidScroll={false}
+            topOffset="-100%"
+            bottomOffset="-100%"
+          />
         }
       </React.Fragment>
     );

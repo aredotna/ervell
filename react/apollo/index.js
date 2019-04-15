@@ -4,7 +4,7 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
-import { createHttpLink } from 'apollo-link-http';
+import { BatchHttpLink } from 'apollo-link-batch-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { withClientState } from 'apollo-link-state';
@@ -22,8 +22,8 @@ const isClientSide = typeof window !== 'undefined';
 
 const { data: { GRAPHQL_ENDPOINT, CLIENT_GRAPHQL_ENDPOINT } } = sharify;
 
-const clientHttpLink = createHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT });
-const serverHttpLink = createHttpLink({ uri: GRAPHQL_ENDPOINT });
+const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT });
+const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,

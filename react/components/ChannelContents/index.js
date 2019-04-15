@@ -7,32 +7,69 @@ import chunk from 'react/util/chunk';
 import channelContentsFragment from 'react/components/ChannelContents/fragments/channelContents';
 
 import Grid from 'react/components/UI/Grid';
+import GridItem from 'react/components/UI/Grid/components/GridItem';
+import AddBlock from 'react/components/AddBlock';
 import ChannelContentsPage from 'react/components/ChannelContents/components/ChannelContentsPage';
+import ChannelContentsSet from 'react/components/ChannelContents/components/ChannelContentsSet';
 
 export default class ChannelContents extends PureComponent {
   static propTypes = {
-    per: PropTypes.number,
+    chunkSize: PropTypes.number,
     channel: propType(channelContentsFragment).isRequired,
   }
 
   static defaultProps = {
-    per: 8,
+    chunkSize: 10,
+  }
+
+  state = {
+    newBlocks: [],
+  }
+
+  handleAddBlock = ({ id }) => {
+    this.setState(prevState => ({
+      newBlocks: [{ id, type: 'BLOCK' }, ...prevState.newBlocks],
+    }));
   }
 
   render() {
-    const { channel, per, ...rest } = this.props;
-    const paged = chunk(channel.skeleton, per);
+    const { newBlocks } = this.state;
+    const {
+      channel: {
+        id, skeleton, can,
+      },
+      chunkSize,
+      ...rest
+    } = this.props;
+
+    const chunked = chunk(skeleton, chunkSize);
 
     return (
       <Grid wrapChildren={false} {...rest}>
-        {paged.map((pageSkeleton, idx) => (
+        {can.add_to &&
+          <React.Fragment>
+            <GridItem>
+              <AddBlock
+                channel_id={id}
+                onAddBlock={this.handleAddBlock}
+              />
+            </GridItem>
+
+            {newBlocks.length > 0 &&
+              <ChannelContentsSet
+                id={id}
+                skeleton={newBlocks}
+              />
+            }
+          </React.Fragment>
+        }
+
+        {chunked.map((pageSkeleton, idx) => (
           <ChannelContentsPage
             key={`Page:${idx + 1}`}
-            id={channel.id}
-            page={idx + 1}
-            per={per}
+            id={id}
             skeleton={pageSkeleton}
-            context={channel.skeleton}
+            context={skeleton}
           />
         ))}
       </Grid>

@@ -8,5 +8,8 @@ export default gql`
       id
       type
     }
+    can {
+      add_to
+    }
   }
 `;
