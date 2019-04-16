@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import Link from 'react/components/UI/Link';
 import { FilledButton } from 'react/components/UI/Buttons';
 import { Textarea } from 'react/components/UI/Inputs';
+import DropZoneUploader from 'react/components/UI/DropZoneUploader';
 
 import createBlockMutation from 'react/components/AddBlock/mutations/createBlock';
 
@@ -14,6 +16,13 @@ const Button = styled(FilledButton)`
   &:hover {
     background-color: transparent;
   }
+`;
+
+const Choose = styled(Link)`
+  position: relative;
+  border-bottom: 1px solid;
+  z-index: 1;
+  cursor: pointer;
 `;
 
 const Container = styled(Box).attrs({
@@ -53,16 +62,13 @@ const Input = styled(Textarea).attrs({
   &:focus {
     border: 0;
     background-color: ${props => props.theme.colors.gray.light};
+    z-index: 2;
   }
 `;
 
 const Message = styled(Box)`
   ${Text}:last-child {
     display: none;
-  }
-
-  a {
-    border-bottom: 1px solid;
   }
 `;
 
@@ -104,6 +110,7 @@ class AddBlock extends PureComponent {
     mode: 'resting',
     value: '',
     inputKey: new Date().getTime(),
+    uploaderKey: new Date().getTime(),
   }
 
   handleChange = ({ target: { value } }) => {
@@ -130,10 +137,7 @@ class AddBlock extends PureComponent {
     this.setState({ mode: 'submitting' });
 
     return createBlock({
-      variables: {
-        channel_id,
-        value,
-      },
+      variables: { channel_id, value },
     })
       .then(({ data: { create_block: { block } } }) => {
         this.setState({
@@ -149,53 +153,80 @@ class AddBlock extends PureComponent {
       });
   }
 
+  handleUpload = ({ url: value }) => {
+    const { createBlock, onAddBlock, channel_id } = this.props;
+
+    return createBlock({
+      variables: { channel_id, value },
+    })
+      .then(({ data: { create_block: { block } } }) => onAddBlock(block))
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  finishUpload = () =>
+    this.setState({ uploaderKey: new Date().getTime() });
+
   render() {
-    const { mode, inputKey } = this.state;
+    const { mode, inputKey, uploaderKey } = this.state;
 
     return (
-      <Container pt={6} px={6}>
-        <Content>
-          <Message p={6}>
-            <Text f={9} color="gray.medium">
-              +
-            </Text>
+      <DropZoneUploader
+        onUpload={this.handleUpload}
+        onComplete={this.finishUpload}
+        key={uploaderKey}
+      >
+        {({ openUploadDialog }) => (
+          <Container pt={6} px={6}>
+            <Content>
+              <Message p={6}>
+                <Text f={9} color="gray.medium">
+                  +
+                </Text>
 
-            <Text f={5} color="gray.medium">
-              Drop or <a href="#TODO">choose</a> files, paste a URL{' '}
-              (image, video, or link) or type text here
-            </Text>
-          </Message>
+                <Text f={5} color="gray.medium">
+                  Drop or{' '}
+                  <Choose onClick={openUploadDialog}>
+                    choose
+                  </Choose>{' '}
+                  files, paste a URL{' '}
+                  (image, video, or link) or type text here
+                </Text>
+              </Message>
 
-          <Input
-            key={inputKey}
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-          />
+              <Input
+                key={inputKey}
+                onChange={this.handleChange}
+                onKeyDown={this.handleKeyDown}
+              />
 
-          {mode === 'active' &&
-            <Tip pb={4}>
-              <Text f={0} color="gray.medium">
-                shift + enter for line break
-              </Text>
-            </Tip>
-          }
-        </Content>
+              {mode === 'active' &&
+                <Tip pb={4}>
+                  <Text f={0} color="gray.medium">
+                    shift + enter for line break
+                  </Text>
+                </Tip>
+              }
+            </Content>
 
-        <Button
-          py={6}
-          f={4}
-          color="utility.transparent"
-          onClick={this.handleSubmit}
-          disabled={mode === 'resting'}
-        >
-          {{
-            resting: 'Add block →',
-            active: 'Add block →',
-            submitting: 'Adding...',
-            error: 'Error',
-          }[mode]}
-        </Button>
-      </Container>
+            <Button
+              py={6}
+              f={4}
+              color="utility.transparent"
+              onClick={this.handleSubmit}
+              disabled={mode === 'resting'}
+            >
+              {{
+                resting: 'Add block →',
+                active: 'Add block →',
+                submitting: 'Adding...',
+                error: 'Error',
+              }[mode]}
+            </Button>
+          </Container>
+        )}
+      </DropZoneUploader>
     );
   }
 }
