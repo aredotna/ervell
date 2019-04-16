@@ -1,4 +1,6 @@
 import browser from 'webextension-polyfill';
+import { stringify } from 'qs';
+
 import Messenger from 'extension/src/lib/Messenger';
 import DataExtractor from 'extension/src/lib/DataExtractor';
 
@@ -6,20 +8,23 @@ class Pane {
   constructor(msg) {
     this.msg = msg;
 
+    // All the things that will hold this component
     this.frame = this.createIframe();
     this.dragTarget = this.createDragTarget();
     this.style = this.addIframeStyle();
 
-    this.setupListeners();
-    this.setupReceiver();
+    // Listen to drag and drop events on the browser window
+    this.setupEventListeners();
 
+    // So we can communicate with the iframe
+    this.setupReceiver();
     this.messenger = new Messenger(this.frame.contentWindow);
   }
 
   createIframe = () => {
     const iframe = document.createElement('iframe');
 
-    iframe.src = browser.extension.getURL('iframe.html');
+    iframe.src = this.getURL();
     iframe.id = 'arenaExtension_frame';
     iframe.name = iframe.id;
 
@@ -33,7 +38,7 @@ class Pane {
     targetDiv.id = 'arenaExtension_div';
 
     const message = document.createElement('h1');
-    message.innerHTML = ('Drag and drop text and/or images here.');
+    message.innerHTML = ('Drag here to add to Are.na');
 
     targetDiv.appendChild(message);
     document.body.appendChild(targetDiv);
@@ -51,6 +56,15 @@ class Pane {
 
     document.body.appendChild(link);
     return link;
+  }
+
+  getURL = () => {
+    const baseURL = browser.extension.getURL('/index.html');
+
+    const data = new DataExtractor().extractSelection(this.msg);
+    const params = stringify(data, { arrayFormat: 'brackets', encode: false });
+
+    return `${baseURL}?${params};`;
   }
 
   onStartDrag = (e) => {
@@ -122,7 +136,7 @@ class Pane {
     return false;
   }
 
-  setupListeners = () => {
+  setupEventListeners = () => {
     document.addEventListener('dragstart', this.onStartDrag, true);
     document.addEventListener('dragend', this.onStopDrag, true);
 
@@ -138,20 +152,48 @@ class Pane {
 
   receiveMessage = (msg) => {
     switch (msg.data.action) {
+      case 'getInitialBlock':
+        this.sendInitialData();
+        break;
       case 'close':
         this.closePane();
         break;
-      // case 'expand':
-      //   el = document.getElementById('arena_frame');
-      //   addClass(el, 'is-expanded');
-      //   break;
-      // case 'contract':
-      //   el = document.getElementById('arena_frame');
-      //   removeClass(el, 'is-expanded');
-      //   break;
+      case 'expand':
+        this.expandPane();
+        break;
+      case 'contract':
+        this.contractPane();
+        break;
       default:
         break;
     }
+  }
+
+  sendInitialData = () => {
+    const data = new DataExtractor().extractSelection(this.msg);
+
+    if (data.type) {
+      this.messenger.send({
+        action: 'drop',
+        value: data,
+      });
+    }
+  }
+
+  expandPane = () => {
+    const element = document.getElementById('arenaExtension_frame');
+    element.classList.add('is-expanded');
+
+    const target = document.getElementById('arenaExtension_div');
+    target.classList.add('is-expanded');
+  }
+
+  contractPane = () => {
+    const element = document.getElementById('arenaExtension_frame');
+    element.classList.remove('is-expanded');
+
+    const target = document.getElementById('arenaExtension_div');
+    target.classList.remove('is-expanded');
   }
 
   closePane = () => {

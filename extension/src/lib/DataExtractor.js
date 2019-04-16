@@ -1,7 +1,9 @@
+import uuidv4 from 'uuid/v4';
+
 class DataExtractor {
   constructor(event) {
     this.event = event;
-    this.data = {};
+    this.data = { id: uuidv4() };
 
     this.setSourceData();
   }
@@ -18,13 +20,11 @@ class DataExtractor {
     }
 
     // If we have html, try to find an image within
-    if (tempData['text/html']) {
-      const image = this.extractImageFromHTML(tempData);
-
+    if (tempData['text/html'] && this.extractImageFromHTML(tempData)) {
       this.data = {
         ...this.data,
         type: 'Image',
-        value: image,
+        value: this.image,
       };
     } else {
       // otherwise we are dealing with text
@@ -38,12 +38,28 @@ class DataExtractor {
     return this.data;
   }
 
+  extractSelection = (msg) => {
+    if (msg.options.selectionText) {
+      this.data = {
+        ...this.data,
+        type: 'Text',
+        value: msg.options.selectionText,
+      };
+    } else if (msg.options.srcURL) {
+      this.data = {
+        ...this.data,
+        type: 'Image',
+        value: msg.options.srcURL,
+      };
+    }
+
+    return this.data;
+  }
+
   extractImageFromHTML = (data) => {
     const html = new DOMParser().parseFromString(data['text/html'], 'text/html').body.firstChild;
-
-    console.log('html', html);
-
-    // find image within html;
+    this.image = html.querySelector('img') && html.querySelector('img').src;
+    return this.image;
   }
 
   setSourceData = () => {
