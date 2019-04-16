@@ -22,7 +22,7 @@ const config = {
       },
     }),
     new CopyWebpackPlugin([
-      { from: './extension/src/iframe.html' },
+      { from: './extension/src/index.html' },
       { from: './extension/manifest.json' },
       { from: './extension/img/' },
       { from: './extension/src/iframe.css' },
