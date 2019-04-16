@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-import formatFileSize from 'react/util/formatFileSize';
+import filesize from 'filesize';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
@@ -22,7 +21,7 @@ const File = styled(Box)`
 `;
 
 const Progress = styled(Box).attrs({
-  bg: 'gray.light',
+  bg: 'gray.semiLight',
 })`
   position: absolute;
   top: 0;
@@ -34,13 +33,13 @@ const Progress = styled(Box).attrs({
 const FileUploaderProgressList = ({ files, ...rest }) => (
   <Container {...rest}>
     {files.map(({ file, progress }) => (
-      <File mb={3} py={5} px={6}>
+      <File mb={3} py={5} px={6} key={file.path}>
         <Progress progress={progress} />
 
         <Box position="relative">
-          <Text textAlign="center" key={file.path}>
+          <Text textAlign="center" f={2}>
             <strong>{file.path}</strong>{' '}
-            ({formatFileSize(file.size)}){' '}
+            ({filesize(file.size)}){' '}
             {progress}%
           </Text>
         </Box>

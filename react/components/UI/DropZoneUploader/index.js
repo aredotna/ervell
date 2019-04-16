@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import Link from 'react/components/UI/Link';
 import FileUploader from 'react/components/UI/FileUploader';
 import FileUploaderProgressList from 'react/components/UI/FileUploaderProgressList';
 
@@ -18,19 +19,19 @@ const DropZone = styled(Box)`
   z-index: 2;
 `;
 
-const Message = styled(Box).attrs({
+const Backdrop = styled(Box).attrs({
   bg: 'utility.translucent',
 })`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 3;
-  pointer-events: none;
 `;
 
 const DropZoneUploader = ({
@@ -43,6 +44,11 @@ const DropZoneUploader = ({
   const handleDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 0) setMode('active');
   }, []);
+
+  const handleErrors = (err) => {
+    console.error(err);
+    setMode('error');
+  };
 
   const {
     getRootProps,
@@ -70,29 +76,35 @@ const DropZoneUploader = ({
       <DropZone {...getRootProps()} mode={mode}>
         <input {...getInputProps()} />
 
-        {isDragActive &&
-          <Message>
-            {isDragActive &&
-              <Text f={9} color="gray.base" textAlign="center">
-                Drop files to add
-              </Text>
-            }
-          </Message>
-        }
+        <Backdrop>
+          {isDragActive &&
+            <Text f={9} color="gray.base" textAlign="center">
+              Drop files to add
+            </Text>
+          }
 
-        {acceptedFiles.length > 0 &&
-          <Message>
+          {mode === 'error' &&
+            <Text mb={6} f={8} color="state.alert" textAlign="center" underlineLinks>
+              There was a problem uploading your files.{' '}
+              <Link onClick={onComplete}>
+                Close
+              </Link>
+            </Text>
+          }
+
+          {acceptedFiles.length > 0 && mode !== 'error' &&
             <FileUploader
               files={acceptedFiles}
               onUpload={onUpload}
               onComplete={onComplete}
+              onError={handleErrors}
             >
               {({ files }) => (
                 <FileUploaderProgressList p={6} files={files} />
               )}
             </FileUploader>
-          </Message>
-        }
+          }
+        </Backdrop>
       </DropZone>
 
       {children({ isDragActive, openUploadDialog })}
