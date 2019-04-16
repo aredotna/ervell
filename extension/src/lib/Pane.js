@@ -5,7 +5,26 @@ import Messenger from 'extension/src/lib/Messenger';
 import DataExtractor from 'extension/src/lib/DataExtractor';
 
 class Pane {
-  constructor(msg) {
+  open = (msg) => {
+    this.isOpen = true;
+
+    if (this.frame) {
+      return this.showIframe();
+    }
+
+    return this.initialize(msg);
+  }
+
+  add = (msg) => {
+    if (this.frame) {
+      this.showIframe();
+      return this.sendData(msg);
+    }
+    return this.initialize(msg);
+  }
+
+
+  initialize(msg) {
     this.msg = msg;
 
     // All the things that will hold this component
@@ -21,6 +40,11 @@ class Pane {
     this.messenger = new Messenger(this.frame.contentWindow);
   }
 
+  close = () => {
+    this.isOpen = false;
+    this.hideIframe();
+  }
+
   createIframe = () => {
     const iframe = document.createElement('iframe');
 
@@ -31,6 +55,14 @@ class Pane {
     document.body.appendChild(iframe);
 
     return iframe;
+  }
+
+  showIframe = () => {
+    this.frame.style.display = 'block';
+  }
+
+  hideIframe = () => {
+    this.frame.style.display = 'none';
   }
 
   createDragTarget = () => {
@@ -89,16 +121,16 @@ class Pane {
     this.dragTarget.style.opacity = 1;
 
     // Hide the underlying iframe
-    this.frame.style.display = 'none';
+    this.hideIframe();
   }
 
   onStopDrag = () => {
-    // Show the drop target
+    // Hide the drop target
     this.dragTarget.style.display = 'none';
     this.dragTarget.style.opacity = 0;
 
-    // Hide the underlying iframe
-    this.frame.style.display = 'block';
+    // Show the underlying iframe
+    this.showIframe();
   }
 
   onDragOver = (e) => {
@@ -143,7 +175,17 @@ class Pane {
     this.dragTarget.addEventListener('dragover', this.onDragOver, true);
     this.dragTarget.addEventListener('dragenter', this.onDragEnter, false);
     this.dragTarget.addEventListener('dragleave', this.onDragLeave, false);
-    this.dragTarget.addEventListener('drop', this.onDrop, false);
+    this.dragTarget.addEventListener('dragleave', this.onDragLeave, false);
+  }
+
+  removeEventListeners = () => {
+    document.removeEventListener('dragstart', this.onStartDrag, true);
+    document.removeEventListener('dragstart', this.onStartDrag, true);
+
+    this.dragTarget.removeEventListener('dragover', this.onDragOver, true);
+    this.dragTarget.removeEventListener('dragover', this.onDragOver, true);
+    this.dragTarget.removeEventListener('dragleave', this.onDragLeave, false);
+    this.dragTarget.removeEventListener('dragleave', this.onDragLeave, false);
   }
 
   setupReceiver = () => {
@@ -156,7 +198,7 @@ class Pane {
         this.sendInitialData();
         break;
       case 'close':
-        this.closePane();
+        this.destroyPane();
         break;
       case 'expand':
         this.expandPane();
@@ -170,7 +212,11 @@ class Pane {
   }
 
   sendInitialData = () => {
-    const data = new DataExtractor().extractSelection(this.msg);
+    this.sendData(this.msg);
+  }
+
+  sendData = (msg) => {
+    const data = new DataExtractor().extractSelection(msg);
 
     if (data.type) {
       this.messenger.send({
@@ -196,10 +242,17 @@ class Pane {
     target.classList.remove('is-expanded');
   }
 
-  closePane = () => {
+  destroyPane = () => {
+    this.isOpen = false;
+    this.removeEventListeners();
+
     if (this.frame) document.body.removeChild(this.frame);
     if (this.dragTarget) document.body.removeChild(this.dragTarget);
     if (this.style) document.body.removeChild(this.style);
+
+    this.frame = null;
+    this.dragTarget = null;
+    this.style = null;
   }
 }
 

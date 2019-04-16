@@ -1,10 +1,20 @@
 import browser from 'webextension-polyfill';
 import Pane from 'extension/src/lib/Pane';
 
+const pane = new Pane();
+
 browser.runtime.onMessage.addListener((msg) => {
-  if (msg.text && (msg.text === 'open:dialog')) {
-    const pane = new Pane(msg);
-    return pane;
+  switch (msg.text) {
+    case 'toggle':
+      if (pane.isOpen) {
+        return pane.close();
+      }
+      return pane.open(msg);
+    case 'add':
+      return pane.add(msg);
+    default:
+      break;
   }
+
   return null;
 });

@@ -5,7 +5,7 @@ browser.contextMenus.create({
   contexts: ['page', 'selection', 'link', 'editable', 'image', 'video', 'audio'],
   onclick(options, tab) {
     browser.tabs.sendMessage(tab.id, {
-      text: 'open:dialog',
+      text: 'add',
       options,
       title: tab.title,
       url: tab.url,
@@ -16,7 +16,7 @@ browser.contextMenus.create({
 
 browser.browserAction.onClicked.addListener((tab) => {
   browser.tabs.sendMessage(tab.id, {
-    text: 'open:dialog',
+    text: 'toggle',
     options: { srcUrl: tab.url },
     title: tab.title,
     url: tab.url,
