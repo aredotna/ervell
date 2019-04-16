@@ -45,11 +45,11 @@ class DataExtractor {
         type: 'Text',
         value: msg.options.selectionText,
       };
-    } else if (msg.options.srcURL) {
+    } else if (msg.options.srcUrl) {
       this.data = {
         ...this.data,
         type: 'Image',
-        value: msg.options.srcURL,
+        value: msg.options.srcUrl,
       };
     }
 

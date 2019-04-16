@@ -94,6 +94,7 @@ class Pane {
     const baseURL = browser.extension.getURL('/index.html');
 
     const data = new DataExtractor().extractSelection(this.msg);
+    console.log('data', data);
     const params = stringify(data, { arrayFormat: 'brackets', encode: false });
 
     return `${baseURL}?${params};`;
