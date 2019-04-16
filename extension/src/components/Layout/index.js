@@ -26,6 +26,7 @@ const Top = styled(Box)`
   top: ${x => x.theme.space[5]};
   left: ${x => x.theme.space[5]};
   right: ${x => x.theme.space[5]};
+  z-index: 100;
 `;
 
 const Close = styled(Text).attrs({
@@ -51,6 +52,7 @@ const Logo = styled(Icons).attrs({
   size: 7,
 })``;
 
+// eslint-disable-next-line react/no-multi-comp
 class Layout extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -59,17 +61,6 @@ class Layout extends Component {
   constructor(props) {
     super(props);
     this.messenger = new Messenger(window.top);
-
-    window.addEventListener('message', this.receiveMessage);
-  }
-
-  state = {
-    blocks: [],
-  }
-
-  receiveMessage = (message) => {
-    const { action, value } = message.data;
-    console.log('action', action, 'value', value, 'message', message, this.state.blocks);
   }
 
   closeWindow = () => {
