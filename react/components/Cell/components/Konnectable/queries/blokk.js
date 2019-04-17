@@ -5,7 +5,7 @@ import konnectableCellFragment from 'react/components/Cell/components/Konnectabl
 export default gql`
   query Blokk($id: ID!) {
     blokk(id: $id) {
-      ... KonnectableCell
+      ...KonnectableCell
     }
   }
   ${konnectableCellFragment}

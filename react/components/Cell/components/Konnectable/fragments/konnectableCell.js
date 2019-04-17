@@ -13,6 +13,9 @@ import blokkOverlayFragment from 'react/components/Cell/components/Konnectable/c
 export default gql`
   fragment KonnectableCell on Konnectable {
     __typename
+    ... on Model {
+      id
+    }
     ... on ConnectableInterface {
       href
     }
