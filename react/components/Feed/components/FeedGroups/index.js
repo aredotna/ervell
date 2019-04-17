@@ -48,7 +48,7 @@ const FeedGroups = ({ groups, context }) => (
     }
 
     {groups.length > 0 &&
-      <Body p={6}>
+      <Body my={6}>
         {groups.map(group => (
           <FeedGroup key={`FeedGroup__${group.id}`}>
             {[
