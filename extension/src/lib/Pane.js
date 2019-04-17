@@ -94,7 +94,6 @@ class Pane {
     const baseURL = browser.extension.getURL('/index.html');
 
     const data = new DataExtractor().extractSelection(this.msg);
-    console.log('data', data);
     const params = stringify(data, { arrayFormat: 'brackets', encode: false });
 
     return `${baseURL}?${params};`;
@@ -176,17 +175,17 @@ class Pane {
     this.dragTarget.addEventListener('dragover', this.onDragOver, true);
     this.dragTarget.addEventListener('dragenter', this.onDragEnter, false);
     this.dragTarget.addEventListener('dragleave', this.onDragLeave, false);
-    this.dragTarget.addEventListener('dragleave', this.onDragLeave, false);
+    this.dragTarget.addEventListener('drop', this.onDrop, false);
   }
 
   removeEventListeners = () => {
     document.removeEventListener('dragstart', this.onStartDrag, true);
-    document.removeEventListener('dragstart', this.onStartDrag, true);
+    document.removeEventListener('dragend', this.onStopDrag, true);
 
     this.dragTarget.removeEventListener('dragover', this.onDragOver, true);
-    this.dragTarget.removeEventListener('dragover', this.onDragOver, true);
+    this.dragTarget.removeEventListener('dragenter', this.onDragEnter, false);
     this.dragTarget.removeEventListener('dragleave', this.onDragLeave, false);
-    this.dragTarget.removeEventListener('dragleave', this.onDragLeave, false);
+    this.dragTarget.removeEventListener('drop', this.onDrop, false);
   }
 
   setupReceiver = () => {

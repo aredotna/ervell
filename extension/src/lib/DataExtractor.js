@@ -26,6 +26,13 @@ class DataExtractor {
         type: 'Image',
         value: this.image,
       };
+    } else if (tempData['text/url-list']) {
+      // we have a link probably
+      this.data = {
+        ...this.data,
+        type: 'Link',
+        value: tempData['text/url-list'],
+      };
     } else {
       // otherwise we are dealing with text
       this.data = {
@@ -45,7 +52,7 @@ class DataExtractor {
         type: 'Text',
         value: msg.options.selectionText,
       };
-    } else if (msg.options.srcUrl) {
+    } else if (msg.options.mediaType === 'image') {
       this.data = {
         ...this.data,
         type: 'Image',

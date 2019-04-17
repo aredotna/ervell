@@ -13,7 +13,7 @@ const Container = styled(Box)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   border: 1px solid ${x => x.theme.colors.gray.regular};
 `;
 

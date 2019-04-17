@@ -16,6 +16,7 @@ const Container = styled(Box)`
   justify-content: flex-start;
   flex: 1;
   position: relative;
+  width: 100%;
 `;
 
 const Top = styled(Box).attrs({ my: 10 })`
@@ -26,6 +27,16 @@ const Top = styled(Box).attrs({ my: 10 })`
 
 const DropZone = styled(Box).attrs({ p: 7 })`
   border: 2px dashed ${x => x.theme.colors.gray.semiLight};
+`;
+
+const BlocksContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  flex-wrap: wrap;
+  width: 100%;
 `;
 
 class Blocks extends Component {
@@ -51,9 +62,11 @@ class Blocks extends Component {
               </DropZone>
             </Top>
 
-            {blocks.map(block => (
-              <Block block={block} key={block.id} />
-            ))}
+            <BlocksContainer>
+              {blocks.map(block => (
+                <Block block={block} key={block.id} />
+              ))}
+            </BlocksContainer>
           </Container>
         )}
       </ExtensionContext.Consumer>
