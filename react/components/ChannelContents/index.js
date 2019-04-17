@@ -10,7 +10,7 @@ import Grid from 'react/components/UI/Grid';
 import GridItem from 'react/components/UI/Grid/components/GridItem';
 import AddBlock from 'react/components/AddBlock';
 import ChannelContentsPage from 'react/components/ChannelContents/components/ChannelContentsPage';
-import ChannelContentsSet from 'react/components/ChannelContents/components/ChannelContentsSet';
+import ChannelContentsAppended from 'react/components/ChannelContents/components/ChannelContentsAppended';
 
 export default class ChannelContents extends PureComponent {
   static propTypes = {
@@ -23,21 +23,19 @@ export default class ChannelContents extends PureComponent {
   }
 
   state = {
-    newBlocks: [],
+    pendingSkeleton: [],
   }
 
   handleAddBlock = ({ id }) => {
     this.setState(prevState => ({
-      newBlocks: [{ id, type: 'BLOCK' }, ...prevState.newBlocks],
+      pendingSkeleton: [{ id, type: 'BLOCK' }, ...prevState.pendingSkeleton],
     }));
   }
 
   render() {
-    const { newBlocks } = this.state;
+    const { pendingSkeleton } = this.state;
     const {
-      channel: {
-        id, skeleton, can,
-      },
+      channel: { id, skeleton, can },
       chunkSize,
       ...rest
     } = this.props;
@@ -54,15 +52,13 @@ export default class ChannelContents extends PureComponent {
                 onAddBlock={this.handleAddBlock}
               />
             </GridItem>
-
-            {newBlocks.length > 0 &&
-              <ChannelContentsSet
-                id={id}
-                skeleton={newBlocks}
-              />
-            }
           </React.Fragment>
         }
+
+        <ChannelContentsAppended
+          id={id}
+          pendingSkeleton={pendingSkeleton}
+        />
 
         {chunked.map((pageSkeleton, idx) => (
           <ChannelContentsPage

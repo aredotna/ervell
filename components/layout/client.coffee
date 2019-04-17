@@ -3,6 +3,8 @@ Backbone.$ = $
 sd = require('sharify').data
 Cookies = require 'cookies-js'
 moment =  require 'moment'
+Pusher = require 'pusher-js'
+
 BodyView = require './body/view.coffee'
 SearchBarView = require '../search_bar/client/view.coffee'
 mediator = require '../../lib/mediator.coffee'
@@ -54,13 +56,11 @@ setupPusherAndCurrentUser = ->
     recent_connections: recentConnections
     notifications: notifications
 
-  # TODO: Extract; split this function out
-  if Pusher?
-    mediator.shared.pusher = new Pusher sd.PUSHER_KEY, {
-      wsHost: 'ws.pusherapp.com'
-      httpHost: 'sockjs.pusher.com'
-      encrypted: true
-    }
+  mediator.shared.pusher = new Pusher sd.PUSHER_KEY, {
+    wsHost: 'ws.pusherapp.com'
+    httpHost: 'sockjs.pusher.com'
+    encrypted: true
+  }
 
 # TODO: Extract
 setupViews = ->

@@ -8,7 +8,7 @@ import Cell from 'react/components/Cell';
 import GridItem from 'react/components/UI/Grid/components/GridItem';
 import ChannelContentsPageSkeleton from 'react/components/ChannelContents/components/ChannelContentsPageSkeleton';
 
-export default class ChannelContentsPage extends PureComponent {
+export default class ChannelContentsSet extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     skeleton: PropTypes.arrayOf(PropTypes.shape({
