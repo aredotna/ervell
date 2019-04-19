@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { propType } from 'graphql-anywhere';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import selectedChannelFragment from 'extension/src/components/Blocks/components/SelectedChannel/fragments/selectedChannel';
 import selectedChannelQuery from 'extension/src/components/Blocks/components/SelectedChannel/queries/selectedChannel';
@@ -11,7 +12,7 @@ import Icons from 'react/components/UI/Icons';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 
-import withExtensionContext from 'extension/src/components/Extension/withExtension';
+// import withExtensionContext from 'extension/src/components/Extension/withExtension';
 
 const ChannelContainer = styled(Box).attrs({
   p: 6,
@@ -25,14 +26,22 @@ const ChannelContainer = styled(Box).attrs({
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 class SelectedChannel extends PureComponent {
   static propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    history: PropTypes.object.isRequired,
     data: PropTypes.shape({
       loading: PropTypes.bool.isRequired,
       recent_channels: PropTypes.arrayOf(propType(selectedChannelFragment)),
     }).isRequired,
+  }
+
+  selectChannel = () => {
+    const { history } = this.props;
+    history.push('/channels');
   }
 
   render() {
@@ -41,7 +50,7 @@ class SelectedChannel extends PureComponent {
     return (
       <React.Fragment>
         <Text f={2}>Connect to:</Text>
-        <ChannelContainer>
+        <ChannelContainer onClick={this.selectChannel}>
           {data.loading &&
             <Text f={4} fontWeight="bold">
               ...
@@ -59,4 +68,4 @@ class SelectedChannel extends PureComponent {
   }
 }
 
-export default withExtensionContext(graphql(selectedChannelQuery)(SelectedChannel));
+export default withRouter(graphql(selectedChannelQuery)(SelectedChannel));

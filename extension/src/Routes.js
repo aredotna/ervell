@@ -11,6 +11,7 @@ import Login from 'extension/src/components/Login';
 import MainMenu from 'extension/src/components/MainMenu';
 import Blocks from 'extension/src/components/Blocks';
 import EditBlock from 'extension/src/components/EditBlock';
+import ChannelSelection from 'extension/src/components/ChannelSelection';
 
 const Routes = ({ isLoggedIn }) => (
   <Extension>
@@ -31,6 +32,10 @@ const Routes = ({ isLoggedIn }) => (
           <Route
             path="/edit/:id"
             component={EditBlock}
+          />
+          <Route
+            path="/channels"
+            component={ChannelSelection}
           />
           <Route
             exact

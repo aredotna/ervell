@@ -59,9 +59,6 @@ const LinkContainer = styled(Box).attrs({
   display: flex;
   position: relative;
   overflow: hidden;
-  color: ${x => x.theme.colors.state.link};
-  text-decoration: underline;
-  font-weight: bold;
 `;
 
 const Overlay = styled(Box)`
@@ -142,8 +139,8 @@ class Block extends PureComponent {
         }
         {block.type === 'Link' &&
           <LinkContainer>
-            <Text f={2} color="state.link" align="center">
-              <Truncate suffix="..." length={50}>
+            <Text f={2} align="center" font="mono" color="gray.semiBold">
+              <Truncate suffix="..." length={40}>
                 {block.value}
               </Truncate>
             </Text>
