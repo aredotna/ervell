@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo';
 import styled from 'styled-components';
 
 import loginMutation from 'extension/src/components/Login/mutations/loginMutation';
+import Layout from 'extension/src/components/Layout';
 
 import mapErrors from 'react/util/mapErrors';
 import { Input, ErrorMessage } from 'react/components/UI/Inputs';
@@ -77,48 +78,50 @@ class Login extends Component {
     } = this.state;
 
     return (
-      <CenterStretchBox>
-        <LoginForm onSubmit={this.handleSubmit}>
-          <Input
-            mb={6}
-            type="email"
-            placeholder="Email"
-            tabIndex={0}
-            onChange={this.handleEmail}
-            value={email}
-            errorMessage={attributeErrors.email}
-            required
-            autoFocus
-          />
+      <Layout>
+        <CenterStretchBox>
+          <LoginForm onSubmit={this.handleSubmit}>
+            <Input
+              mb={6}
+              type="email"
+              placeholder="Email"
+              tabIndex={0}
+              onChange={this.handleEmail}
+              value={email}
+              errorMessage={attributeErrors.email}
+              required
+              autoFocus
+            />
 
-          <Input
-            mb={6}
-            placeholder="Password"
-            type="password"
-            onChange={this.handlePassword}
-            value={password}
-            errorMessage={attributeErrors.password}
-            required
-          />
+            <Input
+              mb={6}
+              placeholder="Password"
+              type="password"
+              onChange={this.handlePassword}
+              value={password}
+              errorMessage={attributeErrors.password}
+              required
+            />
 
-          {mode === 'error' &&
-            <ErrorMessage my={5} align="center">
-              {errorMessage}
-            </ErrorMessage>
-          }
+            {mode === 'error' &&
+              <ErrorMessage my={5} align="center">
+                {errorMessage}
+              </ErrorMessage>
+            }
 
-          <Button type="submit">
-            {{
-              resting: 'Log in',
-              active: 'Log in',
-              submitting: 'Logging in...',
-              redirecting: 'Redirecting...',
-              error: 'Error',
-            }[mode]}
-          </Button>
+            <Button type="submit">
+              {{
+                resting: 'Log in',
+                active: 'Log in',
+                submitting: 'Logging in...',
+                redirecting: 'Redirecting...',
+                error: 'Error',
+              }[mode]}
+            </Button>
 
-        </LoginForm>
-      </CenterStretchBox>
+          </LoginForm>
+        </CenterStretchBox>
+      </Layout>
     );
   }
 }
