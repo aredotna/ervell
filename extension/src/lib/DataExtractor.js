@@ -19,6 +19,8 @@ class DataExtractor {
       }
     }
 
+    console.log(tempData);
+
     // If we have html, try to find an image within
     if (tempData['text/html'] && this.extractImageFromHTML(tempData)) {
       this.data = {
@@ -26,12 +28,12 @@ class DataExtractor {
         type: 'Image',
         value: this.image,
       };
-    } else if (tempData['text/url-list']) {
+    } else if (tempData['text/uri-list']) {
       // we have a link probably
       this.data = {
         ...this.data,
         type: 'Link',
-        value: tempData['text/url-list'],
+        value: tempData['text/uri-list'],
       };
     } else {
       // otherwise we are dealing with text
