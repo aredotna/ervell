@@ -1,13 +1,17 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import Truncate from 'react/components/UI/Truncate';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
+import { FilledButton } from 'react/components/UI/Buttons';
 
 const Container = styled(Box)`
   display: flex;
+  position: relative;
 
   ${props => props.isText && `
     flex: 0 0 100%;
@@ -15,18 +19,18 @@ const Container = styled(Box)`
 `;
 
 const TextContainer = styled(Box).attrs({
-  my: 3,
+  my: 5,
 })`
   min-width: 100%;
   text-align: left;
   display: flex;
   position: relative;
-  height: 3.75rem;
+  max-height: 4.5rem;
   overflow-y: hidden;
   
   &:after {
     content: '';
-    background: linear-gradient(${x => x.theme.colors.utility.transparent} 0%, white 75%);
+    background: linear-gradient(${x => x.theme.colors.utility.transparent} 0%, white 95%);
     display: block;
     position: absolute;
     top: 0;
@@ -37,7 +41,7 @@ const TextContainer = styled(Box).attrs({
 `;
 
 const ImageContainer = styled(Box).attrs({
-  m: 5,
+  m: 4,
 })`
   background-size: contain;
   background-repeat: no-repeat;
@@ -47,9 +51,78 @@ const ImageContainer = styled(Box).attrs({
   background-image: url(${props => props.src});
 `;
 
+const LinkContainer = styled(Box).attrs({
+  my: 3,
+})`
+  min-width: 100%;
+  text-align: center;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  color: ${x => x.theme.colors.state.link};
+  text-decoration: underline;
+  font-weight: bold;
+`;
+
+const Overlay = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  > * {
+    display: none;
+  }
+
+  &:hover > * {
+    display: block;
+  }
+`;
+
+const RemoveButton = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: ${x => x.theme.colors.gray.regular};
+  border-radius: 1em;
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${x => x.theme.colors.gray.medium};
+  }
+
+  &:after {
+    content: '𝖷';
+    color: ${x => x.theme.colors.white};
+    line-height: 1em;
+    vertical-align: text-top;
+    text-align: center;
+  }
+`;
+
 class Block extends PureComponent {
   static propTypes = {
-    block: PropTypes.node.isRequired,
+    block: PropTypes.object.isRequired,
+    removeBlock: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+  }
+
+  onRemove = () => {
+    const { block, removeBlock } = this.props;
+    removeBlock(block.id);
+  }
+
+  onEdit = () => {
+    const { history, block } = this.props;
+    history.push(`/edit/${block.id}`);
   }
 
   render() {
@@ -58,7 +131,7 @@ class Block extends PureComponent {
 
     return (
       <Container isText={isText}>
-        {isText &&
+        {block.type === 'Text' &&
           <TextContainer>
             <Text font="serif">
               <Truncate suffix="..." length={220}>
@@ -67,12 +140,29 @@ class Block extends PureComponent {
             </Text>
           </TextContainer>
         }
+        {block.type === 'Link' &&
+          <LinkContainer>
+            <Text f={2} color="state.link" align="center">
+              <Truncate suffix="..." length={50}>
+                {block.value}
+              </Truncate>
+            </Text>
+          </LinkContainer>
+        }
         {block.type === 'Image' &&
           <ImageContainer src={block.value} />
         }
+        <Overlay>
+          {block.type !== 'Link' &&
+            <FilledButton f={0} bg="white" onClick={this.onEdit}>
+              Edit
+            </FilledButton>
+          }
+          <RemoveButton onClick={this.onRemove} />
+        </Overlay>
       </Container>
     );
   }
 }
 
-export default Block;
+export default withRouter(Block);
