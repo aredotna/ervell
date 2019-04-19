@@ -19,8 +19,6 @@ class DataExtractor {
       }
     }
 
-    console.log(tempData);
-
     // If we have html, try to find an image within
     if (tempData['text/html'] && this.extractImageFromHTML(tempData)) {
       this.data = {
