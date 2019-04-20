@@ -8,18 +8,41 @@
     "deploy-storybook": "storybook-to-ghpages",
     "deploy": "sh scripts/deploy.sh",
     "jest": "jest",
-    "lint": "eslint --ext .js ./src",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
     "mocha": "sh scripts/mocha.sh",
     "predeploy": "sh scripts/predeploy.sh",
     "restart-dyno": "node bin/restart",
     "start-dev": "foreman start -f Procfile.dev",
     "start": "foreman start -f Procfile -e .env.dev.prod",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "test": "sh scripts/test.sh"
+    "test": "sh scripts/test.sh",
+    "type-check": "yarn tsc"
   },
   "engines": {
     "node": ">=8.x.x",
     "yarn": "1.x.x"
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run type-check"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint",
+      "git add"
+    ]
   },
   "dependencies": {
     "@artsy/express-reloadable": "^1.4.0",
@@ -173,8 +196,11 @@
     "fork-ts-checker-webpack-plugin": "^1.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "graphql-tools": "^3.0.2",
+    "husky": ">=1",
     "jest": "^23.4.2",
+    "lint-staged": ">=8",
     "mocha": "*",
+    "prettier": "^1.17.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "rewire": "^4.0.0",
     "should": "*",
