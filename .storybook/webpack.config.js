@@ -1,11 +1,10 @@
-module.exports = config => {
-  config.resolve.extensions = [
+module.exports = ({ config }) => {
+  config.resolve.extensions.push(
     '.mjs',
     '.jade',
-    ...config.resolve.extensions,
-  ];
+  )
 
-  config.module.rules = [
+  config.module.rules.push(
     {
       test: /\.mjs$/,
       include: /node_modules/,
@@ -13,25 +12,24 @@ module.exports = config => {
     },
     {
       test: /\.(graphql|gql)$/,
-      exclude: /node_modules/,
+      include: /src/,
       loader: 'graphql-tag/loader',
     },
     {
       test: /\.coffee$/,
-      exclude: /node_modules/,
+      include: /src/,
       loader: 'coffee-loader',
     },
     {
       test: /\.(jade|pug)$/,
-      exclude: /node_modules/,
+      include: /src/,
       loader: 'pug-loader',
       options: {
         doctype: 'html',
         root: __dirname,
       },
     },
-    ...config.module.rules,
-  ];
+  );
 
   return config;
  };
