@@ -44,6 +44,7 @@ blocker = require 'express-spam-referral-blocker'
 glob = require 'glob'
 AirbrakeClient = require 'airbrake-js'
 makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
+stylus = require 'stylus'
 
 localsMiddleware = require './middleware/locals'
 ensureSSLMiddleware = require './middleware/ensure_ssl'
@@ -122,7 +123,7 @@ module.exports = (app) ->
       app
         .use(require('./webpack-dev-server'))
 
-        .use (stylus = require 'stylus').middleware
+        .use (stylus).middleware
           src: path.resolve(__dirname, '../')
           dest: path.resolve(__dirname, '../../public')
           compile: (str, path) ->
