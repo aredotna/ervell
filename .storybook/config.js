@@ -5,7 +5,7 @@ import StoryRouter from 'storybook-react-router';
 
 import typeDefs from 'react/apollo/schema.graphql';
 
-import mocks from '.storybook/mocks';
+import mocks from './mocks';
 
 import { wrapWithThemeProvider } from 'react/styles/theme';
 
@@ -27,7 +27,7 @@ setOptions({
   sidebarAnimations: false,
 });
 
-const req = require.context('../react/stories', true, /\.stories\.js$/)
+const req = require.context('../src/react/stories', true, /\.stories\.js$/)
 const loadStories = () => req.keys().forEach((filename) => req(filename))
 
 configure(loadStories, module);
