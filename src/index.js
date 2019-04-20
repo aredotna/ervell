@@ -1,7 +1,7 @@
 require('newrelic');
 require('coffee-register');
 require('@babel/register')({
-  extensions: ['.js', '.jsx'],
+  extensions: ['.js', '.jsx', '.ts', '.tsx'],
 });
 
 global.Promise = require('bluebird');

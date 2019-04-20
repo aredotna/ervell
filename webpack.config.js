@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
@@ -91,8 +93,6 @@ const config = {
         messages: [`[Ervell] Listening on http://localhost:${PORT} \n`],
       },
     }),
-    new ProgressBarPlugin(),
-    new WebpackNotifierPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(NODE_ENV),
@@ -129,7 +129,21 @@ if (ANALYZE_BUNDLE) {
 }
 
 if (isDevelopment) {
-  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      formatter: 'codeframe',
+      formatterOptions: 'highlightCode',
+      checkSyntacticErrors: true,
+      watch: ['./src'],
+    }),
+    new ForkTsCheckerNotifierWebpackPlugin({
+      excludeWarnings: true,
+      skipFirstNotification: true,
+    }),
+    new ProgressBarPlugin(),
+    new WebpackNotifierPlugin(),
+  );
 
   // Staging/Production
 } else if (isDeploy) {
