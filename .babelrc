@@ -1,23 +1,41 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions"]
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions"
+          ]
+        },
+        "useBuiltIns": "usage"
       }
-    }],
-    "react",
-    "stage-3"
+    ],
+    "@babel/preset-react"
   ],
   "plugins": [
-    "transform-runtime",
-    ["module-resolver", {
-      "extensions": [".js", ".jsx"],
-      "root": ["./src"]
-    }],
-    "transform-class-properties",
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ],
+        "root": [
+          "./src"
+        ]
+      }
+    ],
+    "@babel/plugin-proposal-class-properties",
     "inline-react-svg",
-    ["babel-plugin-styled-components", {
-      "displayName": true
-    }]
+    [
+      "babel-plugin-styled-components",
+      {
+        "displayName": true
+      }
+    ],
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-proposal-json-strings"
   ]
 }

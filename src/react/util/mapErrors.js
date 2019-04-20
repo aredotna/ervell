@@ -5,7 +5,7 @@ const MEMO = {
   attributeErrors: {},
 };
 
-module.exports = (err = {}) => {
+export default (err = {}) => {
   if (!err.graphQLErrors || err.graphQLErrors.length === 0) {
     return { ...MEMO, errorMessage: err.message };
   }

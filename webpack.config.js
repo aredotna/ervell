@@ -39,12 +39,12 @@ const config = {
       },
       {
         test: /\.coffee$/,
-        exclude: /node_modules/,
+        include: /src/,
         loader: 'coffee-loader',
       },
       {
         test: /\.(jade|pug)$/,
-        exclude: /node_modules/,
+        include: /src/,
         loader: 'pug-loader',
         options: {
           doctype: 'html',
@@ -53,26 +53,12 @@ const config = {
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        include: /src/,
         use: [
           {
             loader: 'babel-loader',
             query: {
               cacheDirectory: true,
-              env: {
-                development: {
-                  presets: ['react-hmre'],
-                  plugins: [
-                    ['react-transform', {
-                      transforms: [{
-                        transform: 'react-transform-hmr',
-                        imports: ['react'],
-                        locals: ['module'],
-                      }],
-                    }],
-                  ],
-                },
-              },
             },
           },
         ],

@@ -26,7 +26,7 @@ const Routes = WithStaticRouter(props => (
 
 const { data: { APOLLO, STATUS_CODE } } = sharify;
 
-module.exports = () => {
+export default () => {
   const mountPoint = document.getElementById('apolloMount');
 
   const Component = {

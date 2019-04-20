@@ -9,9 +9,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
   quiet: true,
   publicPath: config.output.publicPath,
   serverSideRender: true,
-  stats: {
-    colors: true,
-  },
+  stats: "errors-only",
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));

@@ -1,6 +1,6 @@
 require('newrelic');
 require('coffee-register');
-require('babel-register')({
+require('@babel/register')({
   extensions: ['.js', '.jsx'],
 });
 
