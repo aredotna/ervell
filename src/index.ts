@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 require('coffee-register');
 require('@babel/register')({
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -19,7 +19,7 @@ const cache = require('./lib/cache.coffee');
 
 const app = express();
 
-const startWorker = (id) => {
+const startWorker = id => {
   console.log(`Started worker ${id}`);
 
   cache.connect();
@@ -28,7 +28,9 @@ const startWorker = (id) => {
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
     // eslint-disable-next-line
-    return typeof process.send === 'function' ? process.send('listening') : void 0;
+    return typeof process.send === 'function'
+      ? process.send('listening')
+      : void 0;
   });
 
   process.on('SIGTERM', () => {
@@ -37,9 +39,12 @@ const startWorker = (id) => {
   });
 };
 
-throng({
-  workers: WORKERS,
-  lifetime: Infinity,
-}, startWorker);
+throng(
+  {
+    workers: WORKERS,
+    lifetime: Infinity,
+  },
+  startWorker
+);
 
 module.exports = app;

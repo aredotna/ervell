@@ -19,11 +19,8 @@ const BlockPadding = styled.div`
   padding-top: 100%;
 `;
 
-const Block = (props) => {
-  const {
-    blockData,
-    type,
-  } = props;
+const Block = props => {
+  const { blockData, type } = props;
 
   const blockContent = () => {
     let BlockTypeKlass;
@@ -38,11 +35,7 @@ const Block = (props) => {
         return null;
     }
 
-    return (
-      <BlockTypeKlass
-        {...blockData}
-      />
-    );
+    return <BlockTypeKlass {...blockData} />;
   };
 
   return (

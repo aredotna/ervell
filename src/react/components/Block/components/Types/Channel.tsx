@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { truncate } from 'react/util/string';
 
@@ -26,13 +26,13 @@ const ChannelWrapper = styled.div`
       }
     `;
   }}
-  `;
+`;
 
 const Title = styled.h2`
   font-weight: normal;
   padding: 15px 12px 0 12px;
   word-break: break-word;
-  `;
+`;
 
 const Stats = styled.div`
   font-weight: normal;
@@ -40,26 +40,20 @@ const Stats = styled.div`
   font-size: ${x => x.theme.fontSizesIndexed.xs};
   height: 25px;
   margin: 5px 0 0 0;
-  `;
+`;
 
-const Channel = (props) => {
-  const {
-    length, title, updatedAtAgo, username, visibility,
-  } = props;
+const Channel = props => {
+  const { length, title, updatedAtAgo, username, visibility } = props;
 
   const formattedTitle = truncate(title, 50) || '\u00A0';
 
   return (
     <ChannelWrapper visibility={visibility}>
       <div>
-        <Title>
-          {formattedTitle}
-        </Title>
+        <Title>{formattedTitle}</Title>
         <Stats>
           <ul>
-            <li>
-            by {username}
-            </li>
+            <li>by {username}</li>
             <li>
               {length} blocks &bull; {updatedAtAgo}
             </li>
@@ -70,12 +64,12 @@ const Channel = (props) => {
   );
 };
 
-Channel.propTypes = {
-  length: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  updatedAtAgo: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  visibility: PropTypes.string.isRequired,
-};
+// Channel.propTypes = {
+//   length: PropTypes.number.isRequired,
+//   title: PropTypes.string.isRequired,
+//   updatedAtAgo: PropTypes.string.isRequired,
+//   username: PropTypes.string.isRequired,
+//   visibility: PropTypes.string.isRequired,
+// };
 
 export default Channel;

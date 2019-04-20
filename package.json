@@ -37,10 +37,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,json,md}": [
       "prettier --write",
-      "git add"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "yarn lint",
+      "eslint --fix",
       "git add"
     ]
   },
@@ -180,16 +177,20 @@
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^15.5.7",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
     "apollo-storybook-react": "^0.2.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.4.2",
     "benv": "*",
-    "eslint": "^5.6.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "faker": "^4.1.0",
     "fork-ts-checker-notifier-webpack-plugin": "^1.0.0",
