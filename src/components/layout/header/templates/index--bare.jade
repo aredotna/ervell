@@ -1,0 +1,13 @@
+header#layout-header
+  .logo.dropdown--menu
+    .header--icon
+      a(href=homeHref).logo-icon
+        include ../../../../../public/images/arena-mark.svg
+
+  unless user && user.has('username')
+    .layout-header__register
+      span.layout-header__login
+        span(data-client="auth" href="/log_in" rel="nofollow").btn-login Log in &nbsp;
+      span.layout-header__or or &nbsp;
+      span
+        span(data-client="auth" href="/sign_up" rel="nofollow").btn-signup Join
