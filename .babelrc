@@ -12,7 +12,7 @@
     "transform-runtime",
     ["module-resolver", {
       "extensions": [".js", ".jsx"],
-      "root": ["./"]
+      "root": ["./src"]
     }],
     "transform-class-properties",
     "inline-react-svg",

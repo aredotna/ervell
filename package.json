@@ -4,17 +4,17 @@
   "private": true,
   "scripts": {
     "assets": "sh scripts/assets.sh",
-    "deploy": "sh scripts/deploy.sh",
-    "predeploy": "sh scripts/predeploy.sh",
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "deploy-storybook": "storybook-to-ghpages",
-    "mocha": "sh scripts/mocha.sh",
-    "test": "sh scripts/test.sh",
+    "deploy": "sh scripts/deploy.sh",
     "jest": "jest",
-    "start-dev": "foreman start -f Procfile.dev",
     "lint": "eslint --ext .js .",
+    "mocha": "sh scripts/mocha.sh",
+    "predeploy": "sh scripts/predeploy.sh",
+    "restart-dyno": "node bin/restart",
+    "start-dev": "foreman start -f Procfile.dev",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "restart-dyno": "node bin/restart"
+    "test": "sh scripts/test.sh"
   },
   "engines": {
     "node": ">=8.x.x",
