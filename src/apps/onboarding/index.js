@@ -1,7 +1,7 @@
 import express from 'express';
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
-import OnboardingComponent from 'react/components/Onboarding';
+import OnboardingComponent from 'v2/components/Onboarding';
 
 const app = express();
 

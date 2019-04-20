@@ -17,9 +17,7 @@ const isDeploy = isStaging || isProduction;
 const config = {
   mode: NODE_ENV,
   entry: {
-    webpack: [
-      'webpack-hot-middleware/client?reload=true',
-    ],
+    webpack: ['webpack-hot-middleware/client?reload=true'],
     ...helpers.getEntrypoints(),
   },
   output: {
@@ -113,10 +111,17 @@ const config = {
       'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
       Images: path.join(__dirname, 'public', 'images'),
     },
-    extensions: ['.js', '.jsx', '.json', '.jade', '.coffee', '.mjs'],
-    modules: [
-      'node_modules',
+    extensions: [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx',
+      '.json',
+      '.jade',
+      '.coffee',
+      '.mjs',
     ],
+    modules: ['node_modules'],
     symlinks: false,
   },
   externals: {
@@ -142,7 +147,7 @@ if (isDevelopment) {
       skipFirstNotification: true,
     }),
     new ProgressBarPlugin(),
-    new WebpackNotifierPlugin(),
+    new WebpackNotifierPlugin()
   );
 
   // Staging/Production

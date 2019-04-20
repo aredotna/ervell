@@ -3,10 +3,10 @@ import { Query } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
 import { remove as removeDiacritics } from 'diacritics';
 
-import parseRoute from 'react/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute';
 
 import searchUiStateQuery from 'apps/search/queries/searchUiState';
-import SearchPage from 'react/pages/search/SearchPage';
+import SearchPage from 'v2/pages/search/SearchPage';
 
 const VALID_FILTERS = ['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK'];
 

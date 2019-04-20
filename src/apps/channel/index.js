@@ -1,10 +1,10 @@
 import express from 'express';
 
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 
 import legacyChannelDataQuery from 'apps/channel/queries/legacyChannelData';
 
-import ChannelComponent from 'react/components/Channel';
+import ChannelComponent from 'v2/components/Channel';
 
 import ChannelModel from 'models/channel.coffee';
 

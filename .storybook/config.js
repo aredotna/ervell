@@ -3,11 +3,11 @@ import { setOptions } from '@storybook/addon-options';
 import apolloStorybookDecorator from 'apollo-storybook-react';
 import StoryRouter from 'storybook-react-router';
 
-import typeDefs from 'react/apollo/schema.graphql';
+import typeDefs from 'v2/apollo/schema.graphql';
 
 import mocks from './mocks';
 
-import { wrapWithThemeProvider } from 'react/styles/theme';
+import { wrapWithThemeProvider } from 'v2/styles/theme';
 
 addDecorator(
   apolloStorybookDecorator({

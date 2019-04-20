@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import parseRoute from 'react/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute';
 
-import BlockPage from 'react/pages/block';
+import BlockPage from 'v2/pages/block';
 
 export default () => (
   <Switch>

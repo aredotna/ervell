@@ -5,11 +5,11 @@ import sharify from 'sharify';
 
 import NotificationsBadgeView from 'components/logged_in_navigation/components/notifications/view.coffee';
 
-import { mountWithApolloProvider } from 'react/apollo';
-import unmount from 'react/util/unmount';
+import { mountWithApolloProvider } from 'v2/apollo';
+import unmount from 'v2/util/unmount';
 
-import Overlay from 'react/components/UI/Overlay';
-import NotificationsDropdown from 'react/components/NotificationsDropdown';
+import Overlay from 'v2/components/UI/Overlay';
+import NotificationsDropdown from 'v2/components/NotificationsDropdown';
 
 const { API_URL, CURRENT_USER } = sharify.data;
 

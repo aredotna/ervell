@@ -1,5 +1,5 @@
-import Modal from 'react/components/UI/Modal';
-import NewChannelForm from 'react/components/NewChannelForm';
+import Modal from 'v2/components/UI/Modal';
+import NewChannelForm from 'v2/components/NewChannelForm';
 
 export const openNewChannelModal = () => {
   const modal = new Modal(NewChannelForm);

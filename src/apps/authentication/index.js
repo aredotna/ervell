@@ -1,8 +1,8 @@
 import express from 'express';
 
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 
-import pageResolver from 'react/components/UI/Page/resolver';
+import pageResolver from 'v2/components/UI/Page/resolver';
 
 import logoutMiddleware from 'apps/authentication/middleware/logout';
 import redirectToMiddleware from 'lib/middleware/redirect_to.coffee';
@@ -10,7 +10,7 @@ import setRedirectToMiddleware from 'lib/middleware/setRedirectTo';
 
 import Routes from 'apps/authentication/Routes';
 
-import withStaticRouter from 'react/hocs/WithStaticRouter';
+import withStaticRouter from 'v2/hocs/WithStaticRouter';
 
 const app = express();
 

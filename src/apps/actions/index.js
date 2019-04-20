@@ -1,12 +1,12 @@
 import express from 'express';
 
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 
-import TransferChannelConfirmedPage from 'react/pages/actions/TransferChannelConfirmedPage';
-import TransferChannelRejectedPage from 'react/pages/actions/TransferChannelRejectedPage';
-import TransferChannelNotFoundPage from 'react/pages/actions/TransferChannelNotFoundPage';
-import TransferChannelAccessDeniedPage from 'react/pages/actions/TransferChannelAccessDeniedPage';
+import TransferChannelConfirmedPage from 'v2/pages/actions/TransferChannelConfirmedPage';
+import TransferChannelRejectedPage from 'v2/pages/actions/TransferChannelRejectedPage';
+import TransferChannelNotFoundPage from 'v2/pages/actions/TransferChannelNotFoundPage';
+import TransferChannelAccessDeniedPage from 'v2/pages/actions/TransferChannelAccessDeniedPage';
 
 import acceptChannelTransferMutation from 'apps/actions/mutations/acceptChannelTransfer';
 import rejectChannelTransferMutation from 'apps/actions/mutations/rejectChannelTransfer';

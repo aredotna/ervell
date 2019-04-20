@@ -1,9 +1,9 @@
 import express from 'express';
 
-import apolloMiddleware from 'react/apollo/middleware';
-import pageResolver from 'react/components/UI/Page/resolver';
+import apolloMiddleware from 'v2/apollo/middleware';
+import pageResolver from 'v2/components/UI/Page/resolver';
 import Routes from 'apps/profile/Routes';
-import withStaticRouter from 'react/hocs/WithStaticRouter';
+import withStaticRouter from 'v2/hocs/WithStaticRouter';
 
 const app = express();
 

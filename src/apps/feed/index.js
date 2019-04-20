@@ -1,14 +1,14 @@
 import express from 'express';
 
-import getFirstStatusCode from 'react/util/getFirstStatusCode';
+import getFirstStatusCode from 'v2/util/getFirstStatusCode';
 
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 import homePathMiddleware from 'apps/feed/middleware/homePath';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 
-import pageResolver from 'react/components/UI/Page/resolver';
+import pageResolver from 'v2/components/UI/Page/resolver';
 import Routes from 'apps/feed/Routes';
-import withStaticRouter from 'react/hocs/WithStaticRouter';
+import withStaticRouter from 'v2/hocs/WithStaticRouter';
 
 import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService';
 
