@@ -17,10 +17,10 @@ setupSplitTests = require '../split_test/setup.coffee'
 initNightMode = require '../night_mode/index.coffee'
 initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
-initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts.js')
+initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts')
 
-{ mountWithApolloProvider } = require '../../v2/apollo/index.js'
-{ default: GlobalNavElements } = require '../../v2/components/GlobalNavElements/index.js'
+{ mountWithApolloProvider } = require '../../v2/apollo/index'
+{ default: GlobalNavElements } = require '../../v2/components/GlobalNavElements/index'
 
 module.exports = ->
   setDeviceClasses()

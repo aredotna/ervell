@@ -1,4 +1,4 @@
-{ mountWithApolloProvider } = require '../../../../v2/apollo/index.js'
+{ mountWithApolloProvider } = require '../../../../v2/apollo/index'
 { default: GroupBilling } = require '../../../../v2/components/Billing/components/GroupBilling/index.js'
 
 module.exports = ($el) ->
