@@ -1,6 +1,6 @@
-import { mountWithApolloProvider } from 'react/apollo';
+import { mountWithApolloProvider } from 'v2/apollo';
 
-import withBrowserRouter from 'react/hocs/WithBrowserRouter';
+import withBrowserRouter from 'v2/hocs/WithBrowserRouter';
 
 import Routes from 'apps/block/Routes';
 

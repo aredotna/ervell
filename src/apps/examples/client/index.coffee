@@ -1,6 +1,6 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
-{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
-{ default: FollowButton } = require '../../../react/components/FollowButton'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
+{ default: FollowButton } = require '../../../v2/components/FollowButton'
 
 singleExampleTemplate = -> require('../templates/example.jade') arguments...
 examplesTemplate = -> require('../templates/examples.jade') arguments...
@@ -10,42 +10,42 @@ module.exports = ->
 
   loggedOutNav()
 
-  # 
+  #
   # Load more channels (single example category)
-  # 
+  #
   $(document).on 'click', '.js-load-more', (e) ->
-    e.preventDefault()    
+    e.preventDefault()
     id = $(this).data('id')
-    
+
     $.get "/api/examples/#{id}", (example) =>
       $(this).closest('.js-example').html singleExampleTemplate
         example: example
 
       setupFollowButtons()
 
-  # 
+  #
   # Handle example channel click
-  # 
+  #
   $(document).on 'click', '.js-channel', (e) ->
     e.preventDefault()
     e.stopImmediatePropagation()
     url = $(this).data('href')
     window.open url
 
-  # 
+  #
   # Follow buttons
-  # 
+  #
   setupFollowButtons = ->
     $('.js-channel-group').each ->
       props = { id: $(this).data('id'), type: 'CHANNEL' }
       mountNode = $(this).find('.js-example-channel-follow')
       mountWithApolloProvider(FollowButton, props, mountNode)
-  
+
   setupFollowButtons()
 
   #
   # Examples pagination
-  # 
+  #
 
   $('.js-load-more-examples').on 'click', (e) ->
     e.preventDefault()

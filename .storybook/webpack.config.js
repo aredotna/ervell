@@ -1,8 +1,21 @@
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 module.exports = ({ config }) => {
-  config.resolve.extensions.push(
-    '.mjs',
-    '.jade',
-  )
+  config.resolve.extensions.push('.ts', '.tsx', '.mjs', '.jade');
+
+  config.plugins.push(
+    new ForkTsCheckerWebpackPlugin({
+      formatter: 'codeframe',
+      formatterOptions: 'highlightCode',
+      checkSyntacticErrors: true,
+      watch: ['./src'],
+    }),
+    new ForkTsCheckerNotifierWebpackPlugin({
+      excludeWarnings: true,
+      skipFirstNotification: true,
+    })
+  );
 
   config.module.rules.push(
     {
@@ -29,7 +42,15 @@ module.exports = ({ config }) => {
         root: __dirname,
       },
     },
+    {
+      test: /\.(ts|tsx)$/,
+      include: /src/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: [['react-app', { flow: false, typescript: true }]],
+      },
+    }
   );
 
   return config;
- };
+};

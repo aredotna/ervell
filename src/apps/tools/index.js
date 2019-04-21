@@ -1,7 +1,7 @@
 import express from 'express';
 import useragent from 'useragent';
 
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee';
 
 import bookmarklet from 'lib/bookmarklet.coffee';

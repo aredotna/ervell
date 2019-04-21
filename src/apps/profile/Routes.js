@@ -4,9 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 
 import profileUiStateQuery from 'apps/profile/queries/profileUiState';
 
-import parseRoute from 'react/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute';
 
-import ProfilePage from 'react/pages/profile/ProfilePage';
+import ProfilePage from 'v2/pages/profile/ProfilePage';
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM'];
 const VALID_FILTERS = ['OWN', 'COLLABORATION'];

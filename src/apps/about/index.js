@@ -1,12 +1,12 @@
 import express from 'express';
 
-import apolloMiddleware from 'react/apollo/middleware';
+import apolloMiddleware from 'v2/apollo/middleware';
 import client from 'lib/contentful';
 
-import EducationPage from 'react/pages/about/EducationPage';
-import GroupsPage from 'react/pages/about/GroupsPage';
-import PricingPage from 'react/pages/about/PricingPage';
-import RoadmapPage from 'react/pages/about/RoadmapPage';
+import EducationPage from 'v2/pages/about/EducationPage';
+import GroupsPage from 'v2/pages/about/GroupsPage';
+import PricingPage from 'v2/pages/about/PricingPage';
+import RoadmapPage from 'v2/pages/about/RoadmapPage';
 
 const app = express();
 

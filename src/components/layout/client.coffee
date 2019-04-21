@@ -19,8 +19,8 @@ initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 { isTouch, isMobile } = require '../util/device.coffee'
 initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts.js')
 
-{ mountWithApolloProvider } = require '../../react/apollo/index.js'
-{ default: GlobalNavElements } = require '../../react/components/GlobalNavElements/index.js'
+{ mountWithApolloProvider } = require '../../v2/apollo/index.js'
+{ default: GlobalNavElements } = require '../../v2/components/GlobalNavElements/index.js'
 
 module.exports = ->
   setDeviceClasses()

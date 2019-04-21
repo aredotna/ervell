@@ -2,13 +2,13 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { Switch, Route } from 'react-router-dom';
 
-import parseRoute from 'react/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute';
 
 import exploreUiStateQuery from 'apps/feed/queries/exploreUiState';
-import ExplorePage from 'react/pages/explore/ExplorePage';
+import ExplorePage from 'v2/pages/explore/ExplorePage';
 
-import FeedPage from 'react/pages/feed/FeedPage';
-import NotificationPage from 'react/pages/feed/NotificationPage';
+import FeedPage from 'v2/pages/feed/FeedPage';
+import NotificationPage from 'v2/pages/feed/NotificationPage';
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM'];
 

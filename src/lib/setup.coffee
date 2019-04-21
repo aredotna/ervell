@@ -162,7 +162,7 @@ module.exports = (app) ->
     console.log 'Watching for changes...'
     mountAndReload = createReloadable(app, require)
     modules = _.flatten([
-      glob.sync('./react/**/*.js'),
+      glob.sync('./v2/**/*.{js,jsx,ts,tsx}'),
       glob.sync('./models/**/*.coffee'),
       glob.sync('./collections/**/*.coffee'),
       glob.sync('./components/**/*.coffee')

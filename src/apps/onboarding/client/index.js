@@ -1,6 +1,6 @@
-import { mountWithApolloProvider } from 'react/apollo';
-import OnboardingComponent from 'react/components/Onboarding';
-import BillingPage from 'react/pages/welcome/BillingPage';
+import { mountWithApolloProvider } from 'v2/apollo';
+import OnboardingComponent from 'v2/components/Onboarding';
+import BillingPage from 'v2/pages/welcome/BillingPage';
 
 export default () => {
   const onboardingMountPoint = document.getElementById('onboardingMount');

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import parseRoute from 'react/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute';
 
-import ChannelPage from 'react/pages/channel';
+import ChannelPage from 'v2/pages/channel';
 
 export default () => (
   <Switch>

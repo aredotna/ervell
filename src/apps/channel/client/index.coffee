@@ -1,7 +1,7 @@
 # React requires
 { CHANNEL } = require('sharify').data
-{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
-{ default: ChannelComponent } = require '../../../react/components/Channel/index.js'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
+{ default: ChannelComponent } = require '../../../v2/components/Channel/index.js'
 
 # Legacy requires
 { CHANNEL, BLOCKS, API_URL } = require('sharify').data

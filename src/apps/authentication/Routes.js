@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import parseRoute from 'react/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute';
 
-import BlankLayout from 'react/components/UI/Layouts/BlankLayout';
-import LoginPage from 'react/pages/authentication/LoginPage';
-import RegistrationPage from 'react/pages/authentication/RegistrationPage';
-import ResetPasswordPage from 'react/pages/authentication/ResetPasswordPage';
-import ForgotPasswordPage from 'react/pages/authentication/ForgotPasswordPage';
-import AcceptInvitationPage from 'react/pages/authentication/AcceptInvitationPage';
+import BlankLayout from 'v2/components/UI/Layouts/BlankLayout';
+import LoginPage from 'v2/pages/authentication/LoginPage';
+import RegistrationPage from 'v2/pages/authentication/RegistrationPage';
+import ResetPasswordPage from 'v2/pages/authentication/ResetPasswordPage';
+import ForgotPasswordPage from 'v2/pages/authentication/ForgotPasswordPage';
+import AcceptInvitationPage from 'v2/pages/authentication/AcceptInvitationPage';
 
 export default () => (
   <BlankLayout>

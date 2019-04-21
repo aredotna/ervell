@@ -5,8 +5,8 @@ formCard = require '../../components/form_card/index.coffee'
 avatarUploader = require '../../components/avatar_uploader/index.coffee'
 homePathField = require '../../components/home_path_field/index.coffee'
 
-{ mountWithApolloProvider } = require '../../../../react/apollo/index.js'
-{ default: CustomBadgeUploader } = require '../../../../react/components/CustomBadgeUploader/index.js'
+{ mountWithApolloProvider } = require '../../../../v2/apollo/index.js'
+{ default: CustomBadgeUploader } = require '../../../../v2/components/CustomBadgeUploader/index.js'
 
 module.exports = ($el) ->
   return unless $el.length

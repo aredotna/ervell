@@ -7,8 +7,8 @@ loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 blockTemplate = ->
   require('../../../components/block_v2/templates/block.jade') arguments...
 
-{ mountWithApolloProvider } = require '../../../react/apollo/index.js'
-{ default: DescriptiveCarousel } = require '../../../react/components/DescriptiveCarousel/index.js'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
+{ default: DescriptiveCarousel } = require '../../../v2/components/DescriptiveCarousel/index.js'
 
 module.exports = ->
   loggedOutNav()
@@ -25,5 +25,5 @@ module.exports = ->
       $('.HomeHero__image > img').css({ opacity: 0 })
       $('.js-desktop-video-play').css({ opacity: 0 })
       $('.js-desktop-video').show()
-      
+
       player.play()

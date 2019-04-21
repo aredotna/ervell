@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
@@ -14,10 +16,9 @@ const isDeploy = isStaging || isProduction;
 
 const config = {
   mode: NODE_ENV,
+  context: __dirname,
   entry: {
-    webpack: [
-      'webpack-hot-middleware/client?reload=true',
-    ],
+    webpack: ['webpack-hot-middleware/client?reload=true'],
     ...helpers.getEntrypoints(),
   },
   output: {
@@ -52,7 +53,7 @@ const config = {
         },
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         include: /src/,
         use: [
           {
@@ -91,8 +92,6 @@ const config = {
         messages: [`[Ervell] Listening on http://localhost:${PORT} \n`],
       },
     }),
-    new ProgressBarPlugin(),
-    new WebpackNotifierPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(NODE_ENV),
@@ -113,10 +112,17 @@ const config = {
       'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
       Images: path.join(__dirname, 'public', 'images'),
     },
-    extensions: ['.js', '.jsx', '.json', '.jade', '.coffee', '.mjs'],
-    modules: [
-      'node_modules',
+    extensions: [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx',
+      '.json',
+      '.jade',
+      '.coffee',
+      '.mjs',
     ],
+    modules: ['node_modules'],
     symlinks: false,
   },
   externals: {
@@ -129,7 +135,21 @@ if (ANALYZE_BUNDLE) {
 }
 
 if (isDevelopment) {
-  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      formatter: 'codeframe',
+      formatterOptions: 'highlightCode',
+      checkSyntacticErrors: true,
+      watch: ['./src'],
+    }),
+    new ForkTsCheckerNotifierWebpackPlugin({
+      excludeWarnings: true,
+      skipFirstNotification: true,
+    }),
+    new ProgressBarPlugin(),
+    new WebpackNotifierPlugin()
+  );
 
   // Staging/Production
 } else if (isDeploy) {

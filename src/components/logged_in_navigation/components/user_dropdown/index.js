@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { mountWithApolloProvider } from 'react/apollo';
-import unmount from 'react/util/unmount';
+import { mountWithApolloProvider } from 'v2/apollo';
+import unmount from 'v2/util/unmount';
 
-import Overlay from 'react/components/UI/Overlay';
-import UserDropdown from 'react/components/UserDropdown';
+import Overlay from 'v2/components/UI/Overlay';
+import UserDropdown from 'v2/components/UserDropdown';
 
 const STATE = {
   isOpened: false,

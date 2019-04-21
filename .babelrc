@@ -11,7 +11,8 @@
         "useBuiltIns": "usage"
       }
     ],
-    "@babel/preset-react"
+    "@babel/preset-react",
+    "@babel/preset-typescript"
   ],
   "plugins": [
     [
@@ -19,7 +20,9 @@
       {
         "extensions": [
           ".js",
-          ".jsx"
+          ".jsx",
+          ".ts",
+          ".tsx"
         ],
         "root": [
           "./src"
