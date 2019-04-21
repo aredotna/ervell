@@ -18,6 +18,7 @@ storiesOf('Text', module).add('paragraphs', () => (
           { f, lineHeight: 1 },
           { f, lineHeight: 2 },
         ]}
+        key={f}
       >
         <Text>{SAMPLE_PARAGRAPH}</Text>
       </States>

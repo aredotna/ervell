@@ -16,16 +16,16 @@ const Container = styled(Box)`
 export default class BlockLightboxShare extends PureComponent {
   static propTypes = {
     block: propType(blockLightboxShareFragment).isRequired,
-  }
+  };
 
   state = {
     mode: 'resting',
-  }
+  };
 
-  handleClick = (e) => {
+  handleClick = e => {
     e.preventDefault();
     this.setState({ mode: 'active' });
-  }
+  };
 
   render() {
     const { mode } = this.state;
@@ -36,19 +36,27 @@ export default class BlockLightboxShare extends PureComponent {
 
     return (
       <React.Fragment>
-        {mode === 'resting' ?
+        {mode === 'resting' ? (
           <a href="#" onClick={this.handleClick}>
             Share
           </a>
-        : (
+        ) : (
           <Container mb={6}>
             <CopyToClipboard label="Copy link" value={url} />
 
-            <a href={`https://twitter.com/intent/tweet?original_referer=${url}&text=${text}&url=${url}&via=aredotna`} target="_blank">
+            <a
+              href={`https://twitter.com/intent/tweet?original_referer=${url}&text=${text}&url=${url}&via=aredotna`}
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+            >
               Twitter
             </a>
 
-            <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`} target="_blank">
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+            >
               Facebook
             </a>
           </Container>

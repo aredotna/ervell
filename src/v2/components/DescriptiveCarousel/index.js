@@ -8,7 +8,7 @@ const MOBILE_BREAKPOINT = 1024;
 
 const Slide = styled.div`
   text-align: center;
-  transition: opacity .5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
   opacity: ${props => (props.className.includes('slick-center') ? 1 : 0.3)};
   cursor: grab;
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
@@ -54,17 +54,19 @@ const Image = styled.img`
 class DescriptiveCarousel extends Component {
   static defaultProps = {
     slides: [],
-  }
+  };
 
   static propTypes = {
-    slides: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      headline: PropTypes.any.isRequired,
-      copy: PropTypes.string,
-      image: PropTypes.string.isRequired,
-      link: PropTypes.string,
-    })),
-  }
+    slides: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        headline: PropTypes.any.isRequired,
+        copy: PropTypes.string,
+        image: PropTypes.string.isRequired,
+        link: PropTypes.string,
+      })
+    ),
+  };
   render() {
     const { slides } = this.props;
 
@@ -81,14 +83,16 @@ class DescriptiveCarousel extends Component {
       focusOnSelect: true,
       autoplay: true,
       autoplaySpeed: 9000,
-      responsive: [{
-        breakpoint: MOBILE_BREAKPOINT,
-        settings: {
-          centerPadding: '0',
-          dots: true,
-          appendDots: dots => <ul>{dots}</ul>,
+      responsive: [
+        {
+          breakpoint: MOBILE_BREAKPOINT,
+          settings: {
+            centerPadding: '0',
+            dots: true,
+            appendDots: dots => <ul>{dots}</ul>,
+          },
         },
-      }],
+      ],
     };
 
     return (
@@ -98,15 +102,11 @@ class DescriptiveCarousel extends Component {
             <Inner>
               <Image alt={slide.headline} src={slide.image} />
               {slide.link ? (
-                <a href={slide.link} target="_blank">
-                  <Headline>
-                    {slide.headline}
-                  </Headline>
+                <a href={slide.link} target="_blank" rel="noopener noreferrer">
+                  <Headline>{slide.headline}</Headline>
                 </a>
               ) : (
-                <Headline>
-                  {slide.headline}
-                </Headline>
+                <Headline>{slide.headline}</Headline>
               )}
               <Copy dangerouslySetInnerHTML={{ __html: slide.copy }} />
             </Inner>

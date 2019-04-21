@@ -34,8 +34,8 @@ storiesOf('TitledDialog', module)
         >
           {Array(100)
             .fill('Overflow')
-            .map(filler => (
-              <div>{filler}</div>
+            .map((filler, key) => (
+              <div key={key}>{filler}</div>
             ))}
         </TitledDialog>
       </Box>

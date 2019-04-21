@@ -10,13 +10,13 @@ class BlockLightboxCommentDeleteButton extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     deleteComment: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     mode: 'resting',
-  }
+  };
 
-  deleteComment = (e) => {
+  deleteComment = e => {
     e.preventDefault();
 
     const { id, deleteComment } = this.props;
@@ -25,28 +25,26 @@ class BlockLightboxCommentDeleteButton extends PureComponent {
 
     return deleteComment({
       variables: { id },
-    }).catch((err) => {
+    }).catch(err => {
       console.error(err);
       this.setState({ mode: 'error' });
     });
-  }
+  };
 
   render() {
     const { mode } = this.state;
-    const {
-      id: _id,
-      deleteComment: _deleteComment,
-      ...rest
-    } = this.props;
+    const { id: _id, deleteComment: _deleteComment, ...rest } = this.props;
 
     return (
       <Text {...rest}>
         <a onClick={this.deleteComment} role="button" tabIndex={0}>
-          {{
-            resting: 'Delete',
-            deleting: 'Deleting...',
-            error: 'Error',
-          }[mode]}
+          {
+            {
+              resting: 'Delete',
+              deleting: 'Deleting...',
+              error: 'Error',
+            }[mode]
+          }
         </a>
       </Text>
     );

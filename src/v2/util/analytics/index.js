@@ -21,6 +21,7 @@ const ga = (...args) => {
   }
 
   if (NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.info('analytics', [...args]);
     return null;
   }

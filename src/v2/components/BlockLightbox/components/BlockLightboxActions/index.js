@@ -24,26 +24,30 @@ const BlockLightboxActions = ({ block }) => (
   <Container>
     <BlockLightboxShare block={block} />
 
-    {block.source &&
+    {block.source && (
       <a
         href={block.source.url}
-        rel="nofollow noopener"
+        rel="nofollow noopener noreferrer"
         target="_blank"
         dangerouslySetInnerHTML={{
-          __html: (block.source.title ? `Source: ${truncate(block.source.title, 40)}` : 'Source'),
+          __html: block.source.title
+            ? `Source: ${truncate(block.source.title, 40)}`
+            : 'Source',
         }}
       />
-    }
+    )}
 
-    {block.find_original_url &&
-      <a href={block.find_original_url} rel="nofollow noopener" target="_blank">
+    {block.find_original_url && (
+      <a
+        href={block.find_original_url}
+        rel="nofollow noopener noreferrer"
+        target="_blank"
+      >
         Find original
       </a>
-    }
+    )}
 
-    {block.can.mute &&
-      <Mute id={block.id} type="BLOCK" />
-    }
+    {block.can.mute && <Mute id={block.id} type="BLOCK" />}
   </Container>
 );
 

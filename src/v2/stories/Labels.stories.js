@@ -18,8 +18,8 @@ storiesOf('Label', module)
   ))
   .add('Label - colors', () => (
     <div>
-      {theme.meta.colorNames.map(color => (
-        <Specimen>
+      {theme.meta.colorNames.map((color, key) => (
+        <Specimen key={key}>
           <Label color={color}>
             {color} <a href="#">with link</a>
           </Label>

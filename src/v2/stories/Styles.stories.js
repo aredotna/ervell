@@ -14,15 +14,15 @@ storiesOf('Styles', module)
   .add('Theme', () => <Pre>{JSON.stringify(theme, null, 2)}</Pre>)
   .add('Colors', () => (
     <div>
-      {theme.meta.colorNames.map(color => (
-        <ColorSwatch color={color} />
+      {theme.meta.colorNames.map((color, key) => (
+        <ColorSwatch color={color} key={key} />
       ))}
     </div>
   ))
   .add('Fonts', () => (
     <div>
-      {Object.keys(theme.fonts).map(font => (
-        <Text font={font} fontSize={5} lineHeight={1}>
+      {Object.keys(theme.fonts).map((font, key) => (
+        <Text font={font} fontSize={5} lineHeight={1} key={key}>
           {font} = {theme.fonts[font]}
         </Text>
       ))}
@@ -31,7 +31,7 @@ storiesOf('Styles', module)
   .add('Space', () => (
     <div>
       {theme.space.map((unit, i) => (
-        <Specimen>
+        <Specimen key={i}>
           <Measurement name={i} value={unit} />
         </Specimen>
       ))}

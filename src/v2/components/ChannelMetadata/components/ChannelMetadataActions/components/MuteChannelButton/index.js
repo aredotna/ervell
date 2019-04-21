@@ -15,7 +15,7 @@ class MuteChannelButton extends Component {
     channel: propType(muteChannelButtonFragment).isRequired,
     mute_channel: PropTypes.func.isRequired,
     unmute_channel: PropTypes.func.isRequired,
-  }
+  };
 
   toggleMute = async () => {
     const { channel } = this.props;
@@ -37,12 +37,12 @@ class MuteChannelButton extends Component {
     };
 
     return mutation(options);
-  }
-
+  };
 
   render() {
     const {
-      mute_channel: _muteChannel, unmute_channel: _unmuteChannel,
+      mute_channel: _muteChannel,
+      unmute_channel: _unmuteChannel,
       channel: { is_muted },
       ...rest
     } = this.props;
@@ -60,5 +60,5 @@ class MuteChannelButton extends Component {
 
 export default compose(
   graphql(muteChannelMutation, { name: 'mute_channel' }),
-  graphql(unmuteChannelMutation, { name: 'unmute_channel' }),
+  graphql(unmuteChannelMutation, { name: 'unmute_channel' })
 )(MuteChannelButton);
