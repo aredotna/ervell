@@ -1,8 +1,12 @@
 require('dotenv').config()
 
-// Configuration for the vscode-apollo extension.
+// Configuration for the vscode-apollo extension and other Apollo tooling.
 module.exports = {
   client: {
+    // clientSchemaDirectives: ['client'],
+    // clientOnlyDirectives: ['client'],
+    // clientSchema: 'src/v2/apollo/schema.graphql',
+
     service: {
       name: 'are.na',
       url: 'https://api.are.na/graphql',
@@ -18,7 +22,7 @@ module.exports = {
       'src/v2/apollo/schema.graphql',
       'src/v2/apollo/schema.json',
     ],
-    includes: ['src/**/*.{ts,tsx}'],
+    includes: ['src/**'],
     tagName: 'gql',
   },
 }

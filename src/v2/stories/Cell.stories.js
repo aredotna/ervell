@@ -74,7 +74,7 @@ storiesOf('Cell', module)
       <Grid>
         <Query
           query={gql`
-            {
+            query CellStoriesQuery {
               channel(id: 1) {
                 ...KonnectableCell
               }
@@ -112,7 +112,7 @@ storiesOf('Cell', module)
       <Grid>
         <Query
           query={gql`
-            {
+            query CellStoriesEdgeCaseQuery {
               group(id: 1) {
                 ...IdentifiableCell
               }

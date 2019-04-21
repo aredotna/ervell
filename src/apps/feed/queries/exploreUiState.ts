@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   query ExploreUiState {
@@ -7,4 +7,4 @@ export default gql`
       sort: get(name: "Explore--sort")
     }
   }
-`;
+`

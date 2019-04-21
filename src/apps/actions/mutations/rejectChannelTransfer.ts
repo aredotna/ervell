@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
-  mutation rejectChannelTransferMutation($token: String!){
+  mutation rejectChannelTransferMutation($token: String!) {
     reject_channel_transfer(input: { token: $token }) {
       channel {
         id
@@ -10,4 +10,4 @@ export default gql`
       }
     }
   }
-`;
+`
