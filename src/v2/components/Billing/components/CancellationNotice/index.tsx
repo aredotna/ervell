@@ -9,6 +9,7 @@ import { SpaceProps } from 'styled-system'
 
 interface CancellationNoticeProps extends SpaceProps {
   onReenable: any // FIXME: Type
+  customer: any // FIXME: Type
 }
 
 export default class CancellationNotice extends PureComponent<

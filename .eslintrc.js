@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   env: {
     es6: true,
@@ -6,7 +8,7 @@ module.exports = {
     jest: true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'graphql'],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -43,6 +45,14 @@ module.exports = {
       },
     ],
 
+    // 'graphql/template-strings': [
+    //   'error',
+    //   {
+    //     schemaJsonFilepath: path.resolve(__dirname, './src/v2/apollo/schema.json'),
+    //     tagName: 'gql',
+    //   },
+    // ],
+
     'react/display-name': 0,
     'react/jsx-filename-extension': [
       1,
@@ -74,4 +84,4 @@ module.exports = {
     ],
     'no-underscore-dangle': 0,
   },
-};
+}
