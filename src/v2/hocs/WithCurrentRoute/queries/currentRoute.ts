@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query {
+  query CurrentRouteQuery {
     currentRoute @client {
       protocol
       slashes
