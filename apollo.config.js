@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 // Configuration for the vscode-apollo extension.
 module.exports = {
@@ -18,6 +18,7 @@ module.exports = {
       'src/v2/apollo/schema.graphql',
       'src/v2/apollo/schema.json',
     ],
+    includes: ['src/**/*.{ts,tsx}'],
     tagName: 'gql',
   },
-};
+}

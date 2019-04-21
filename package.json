@@ -7,7 +7,7 @@
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "deploy-storybook": "storybook-to-ghpages",
     "deploy": "sh scripts/deploy.sh",
-    "generate-types": "babel-node scripts/generateTypes.js",
+    "generate-types": "apollo codegen:generate --target typescript --outputFlat src/v2/apollo/types",
     "jest": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
     "mocha": "sh scripts/mocha.sh",
@@ -25,7 +25,7 @@
   },
   "prettier": {
     "bracketSpacing": true,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
   },
