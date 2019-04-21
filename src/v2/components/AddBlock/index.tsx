@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
-import PropTypes from 'prop-types';
 
 import Box from 'v2/components/UI/Box';
 import Text from 'v2/components/UI/Text';
@@ -95,30 +94,30 @@ const Content = styled(Box)`
   }
 `;
 
-class AddBlock extends PureComponent {
-  static propTypes = {
-    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    createBlock: PropTypes.func.isRequired,
-    onAddBlock: PropTypes.func,
-  }
+interface AddBlockProps {
+  channel_id: string | number;
+  createBlock: (props: any) => Promise<any>;
+  onAddBlock: (props: any) => void;
+}
 
+class AddBlock extends PureComponent<AddBlockProps> {
   static defaultProps = {
-    onAddBlock: () => {},
-  }
+    onAddBlock: _props => {},
+  };
 
   state = {
     mode: 'resting',
     value: '',
     inputKey: new Date().getTime(),
     uploaderKey: new Date().getTime(),
-  }
+  };
 
   handleChange = ({ target: { value } }) => {
     const mode = value === '' ? 'resting' : 'active';
     this.setState({ value, mode });
-  }
+  };
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     const { key, shiftKey } = e;
 
     if (key === 'Enter' && !shiftKey) {
@@ -128,7 +127,7 @@ class AddBlock extends PureComponent {
     }
 
     // Allows <shift+enter> to pass through
-  }
+  };
 
   handleSubmit = () => {
     const { createBlock, onAddBlock, channel_id } = this.props;
@@ -147,11 +146,11 @@ class AddBlock extends PureComponent {
 
         return onAddBlock(block);
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         this.setState({ mode: 'error' });
       });
-  }
+  };
 
   handleUpload = ({ url: value }) => {
     const { createBlock, onAddBlock, channel_id } = this.props;
@@ -160,13 +159,12 @@ class AddBlock extends PureComponent {
       variables: { channel_id, value },
     })
       .then(({ data: { create_block: { block } } }) => onAddBlock(block))
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
-  }
+  };
 
-  finishUpload = () =>
-    this.setState({ uploaderKey: new Date().getTime() });
+  finishUpload = () => this.setState({ uploaderKey: new Date().getTime() });
 
   render() {
     const { mode, inputKey, uploaderKey } = this.state;
@@ -186,12 +184,8 @@ class AddBlock extends PureComponent {
                 </Text>
 
                 <Text f={5} color="gray.medium">
-                  Drop or{' '}
-                  <Choose onClick={openUploadDialog}>
-                    choose
-                  </Choose>{' '}
-                  files, paste a URL{' '}
-                  (image, video, or link) or type text here
+                  Drop or <Choose onClick={openUploadDialog}>choose</Choose>{' '}
+                  files, paste a URL (image, video, or link) or type text here
                 </Text>
               </Message>
 
@@ -201,13 +195,13 @@ class AddBlock extends PureComponent {
                 onKeyDown={this.handleKeyDown}
               />
 
-              {mode === 'active' &&
+              {mode === 'active' && (
                 <Tip pb={4}>
                   <Text f={0} color="gray.medium">
                     shift + enter for line break
                   </Text>
                 </Tip>
-              }
+              )}
             </Content>
 
             <Button
@@ -217,12 +211,14 @@ class AddBlock extends PureComponent {
               onClick={this.handleSubmit}
               disabled={mode === 'resting'}
             >
-              {{
-                resting: 'Add block →',
-                active: 'Add block →',
-                submitting: 'Adding...',
-                error: 'Error',
-              }[mode]}
+              {
+                {
+                  resting: 'Add block →',
+                  active: 'Add block →',
+                  submitting: 'Adding...',
+                  error: 'Error',
+                }[mode]
+              }
             </Button>
           </Container>
         )}
@@ -231,6 +227,6 @@ class AddBlock extends PureComponent {
   }
 }
 
-export default graphql(createBlockMutation, {
+export default graphql<AddBlockProps>(createBlockMutation, {
   name: 'createBlock',
 })(AddBlock);

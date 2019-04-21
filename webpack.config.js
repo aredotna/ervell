@@ -16,6 +16,7 @@ const isDeploy = isStaging || isProduction;
 
 const config = {
   mode: NODE_ENV,
+  context: __dirname,
   entry: {
     webpack: ['webpack-hot-middleware/client?reload=true'],
     ...helpers.getEntrypoints(),
@@ -52,7 +53,7 @@ const config = {
         },
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         include: /src/,
         use: [
           {

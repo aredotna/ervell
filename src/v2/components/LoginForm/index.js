@@ -59,15 +59,15 @@ export default class LoginForm extends Component {
     email: '',
     password: '',
     errorMessage: null,
-  }
+  };
 
-  handleEarlyInput = (inputNode) => {
+  handleEarlyInput = inputNode => {
     const { name, value } = inputNode;
 
     this.setState({
       [name]: value,
     });
-  }
+  };
 
   handleInput = name => ({ target: { value } }) =>
     this.setState({
@@ -76,10 +76,10 @@ export default class LoginForm extends Component {
       [name]: value,
     });
 
-  handleEmail = this.handleInput('email')
-  handlePassword = this.handleInput('password')
+  handleEmail = this.handleInput('email');
+  handlePassword = this.handleInput('password');
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
     const { email, password } = this.state;
@@ -87,12 +87,16 @@ export default class LoginForm extends Component {
     this.setState({ mode: 'submitting' });
 
     return axios
-      .post('/me/sign_in', { email, password }, {
-        headers: {
-          // Sets `req.xhr` in Express
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-      })
+      .post(
+        '/me/sign_in',
+        { email, password },
+        {
+          headers: {
+            // Sets `req.xhr` in Express
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        }
+      )
 
       .then(() => {
         this.setState({ mode: 'redirecting' });
@@ -103,7 +107,9 @@ export default class LoginForm extends Component {
       .catch(({ response: { status, data: { description } } }) => {
         // Account is unconfirmed and the confirmation period is expired
         if (status === 401) {
-          window.location = `/confirm/expired?${qs.stringify({ email: this.state.email })}`;
+          window.location = `/confirm/expired?${qs.stringify({
+            email: this.state.email,
+          })}`;
           return;
         }
 
@@ -112,19 +118,13 @@ export default class LoginForm extends Component {
           errorMessage: description,
         });
       });
-  }
+  };
 
   render() {
-    const {
-      mode, email, password, errorMessage,
-    } = this.state;
+    const { mode, email, password, errorMessage } = this.state;
 
     return (
-      <AuthForm
-        onSubmit={this.handleSubmit}
-        action="/me/sign_in"
-        method="post"
-      >
+      <AuthForm onSubmit={this.handleSubmit} action="/me/sign_in" method="post">
         <Input
           mb={6}
           placeholder="Email"
@@ -154,29 +154,27 @@ export default class LoginForm extends Component {
           <Link to="/forgot">Forgot?</Link>
         </InputWithLink>
 
-        {mode === 'error' &&
+        {mode === 'error' && (
           <ErrorMessage my={5} align="center">
             {errorMessage}
           </ErrorMessage>
-        }
+        )}
 
         <AuthForm.Submit>
           <Button type="submit">
-            {{
-              resting: 'Log in',
-              active: 'Log in',
-              submitting: 'Logging in...',
-              redirecting: 'Redirecting...',
-              error: 'Error',
-            }[mode]}
+            {
+              {
+                resting: 'Log in',
+                active: 'Log in',
+                submitting: 'Logging in...',
+                redirecting: 'Redirecting...',
+                error: 'Error',
+              }[mode]
+            }
           </Button>
 
           <AuthForm.Subtext>
-            Not a member?
-            {' '}
-            <Link to="/sign_up">
-              Join
-            </Link>
+            Not a member? <Link to="/sign_up">Join</Link>
           </AuthForm.Subtext>
         </AuthForm.Submit>
       </AuthForm>

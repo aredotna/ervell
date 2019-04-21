@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // require('newrelic');
 require('coffee-register');
 require('@babel/register')({

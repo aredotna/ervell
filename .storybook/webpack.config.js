@@ -41,6 +41,14 @@ module.exports = ({ config }) => {
         doctype: 'html',
         root: __dirname,
       },
+    },
+    {
+      test: /\.(ts|tsx)$/,
+      include: /src/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: [['react-app', { flow: false, typescript: true }]],
+      },
     }
   );
 

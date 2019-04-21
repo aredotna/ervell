@@ -12,7 +12,7 @@ import { wrapWithThemeProvider } from 'v2/styles/theme';
 addDecorator(
   apolloStorybookDecorator({
     typeDefs,
-    mocks
+    mocks,
   })
 );
 
@@ -27,7 +27,7 @@ setOptions({
   sidebarAnimations: false,
 });
 
-const req = require.context('../src/react/stories', true, /\.stories\.js$/)
-const loadStories = () => req.keys().forEach((filename) => req(filename))
+const req = require.context('../src/v2/stories', true, /\.stories\.(ts|tsx|js|jsx)$/); // prettier-ignore
+const loadStories = () => req.keys().forEach(filename => req(filename));
 
 configure(loadStories, module);
