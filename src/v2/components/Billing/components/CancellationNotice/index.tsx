@@ -1,24 +1,18 @@
 import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
-
-import cancellationNoticeFragment from 'v2/components/Billing/components/CancellationNotice/fragments/cancellationNotice';
 
 import Alert from 'v2/components/UI/Alert';
 import Box from 'v2/components/UI/Box';
 import { SpaceProps } from 'styled-system';
+import { CancellationNotice as CancellationNoticeType } from '__generated__/CancellationNotice';
 
 interface CancellationNoticeProps extends SpaceProps {
-  onReenable: any; // FIXME: Type
-  customer: any; // FIXME: Type
+  customer: CancellationNoticeType;
+  onReenable: any;
 }
 
 export default class CancellationNotice extends PureComponent<
   CancellationNoticeProps
 > {
-  static propTypes = {
-    customer: propType(cancellationNoticeFragment).isRequired,
-  };
-
   render() {
     const {
       onReenable,

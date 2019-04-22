@@ -5,6 +5,7 @@
     "public/": false
   },
   "search.exclude": {
+    "**/__generated__": false,
     "**/node_modules": true,
     "**/public": true
   },
@@ -12,8 +13,7 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-    {
+  "eslint.validate": [{
       "language": "javascript",
       "autoFix": true
     },
