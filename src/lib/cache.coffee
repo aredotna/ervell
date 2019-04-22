@@ -25,6 +25,8 @@ retry_strategy = (options) ->
 
 # Setup redis client
 @connect = () ->
+  return unless REDIS_URL?
+
   @client = redis.createClient(REDIS_URL, { retry_strategy: retry_strategy })
   @client.on 'error', (err) ->
     # Log + ignore the error; start up without Redis
