@@ -62,7 +62,7 @@
     "@vimeo/player": "^2.7.0",
     "airbrake-js": "^1.6.3",
     "apollo-cache-inmemory": "^1.4.1",
-    "apollo-client": "^2.4.10",
+    "apollo-client": "^2.5.1",
     "apollo-link": "^1.2.6",
     "apollo-link-batch-http": "^1.2.11",
     "apollo-link-context": "^1.0.12",

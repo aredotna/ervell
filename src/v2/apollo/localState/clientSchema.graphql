@@ -1,0 +1,47 @@
+extend type Query {
+  currentRoute: ClientCurrentRoute
+  loginStatus: ClientLoginStatus
+  cookies: ClientCookies
+  serializedMe: ClientSerializedMe
+  sharify: ClientSharify
+}
+
+type ClientCurrentRoute {
+  __typename: String
+  protocol: String
+  slashes: String
+  auth: String
+  host: String
+  port: String
+  hostname: String
+  hash: String
+  search: String
+  query: String
+  pathname: String
+  path: String
+  href: String
+}
+
+type ClientLoginStatus {
+  __typename: String
+  isLoggedIn: Boolean
+}
+
+type ClientCookies {
+  __typename: String
+  get(name: String): String
+}
+
+type ClientSerializedMe {
+  __typename: String
+  id: String
+  initials: String
+  name: String
+  avatar: String
+  authentication_token: String
+}
+
+type ClientSharify {
+  __typename: String
+  get(name: String): String
+}

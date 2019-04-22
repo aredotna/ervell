@@ -1,6 +1,7 @@
 import 'isomorphic-fetch';
 import sharify from 'sharify';
 import React from 'react';
+import gql from 'graphql-tag';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
@@ -91,6 +92,36 @@ export const initApolloClient = ({
     },
   });
 
+  const clientTypeDefs = gql`
+    extend type Query {
+      currentRoute: ClientCurrentRoute
+      loginStatus: ClientLoginStatus
+      cookies: ClientCookies
+      serializedMe: ClientSerialiedMe
+      sharify: ClientSharify
+    }
+
+    extend type CurrentRoute {
+      __typename: String
+    }
+
+    extend type ClientLoginStatus {
+      __typename: String
+    }
+
+    extend type ClientCookies {
+      __typename: String
+    }
+
+    extend type ClientSerializedMe {
+      __typename: String
+    }
+
+    extend type ClientSharify {
+      __typename: String
+    }
+  `;
+
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
@@ -106,6 +137,7 @@ export const initApolloClient = ({
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
+    typeDefs: clientTypeDefs,
     link,
     cache,
   });

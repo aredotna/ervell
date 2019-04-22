@@ -9,7 +9,7 @@ export default gql`
     id
     followers(page: $page, per: $per) {
       ...IdentifiableCell
-      ...KonnectableCell
+      # ...KonnectableCell
     }
   }
   ${identifiableCellFragment}
