@@ -1,0 +1,36 @@
+- function loggedOutMenuState(id) {
+-   return sd.CURRENT_PATH.indexOf(id) !== -1 ? 'active' : 'inactive';
+- }
+
+nav.LoggedOutMenu.js-logged-out-menu
+  a.LoggedOutMenu__toggle.js-toggle: span
+    //-
+
+  .LoggedOutMenu__options.js-options
+    a( href='/' )
+      | Home
+
+    a(
+      href='/about'
+      data-state= loggedOutMenuState('about')
+    ) About
+
+    a(
+      href='/pricing'
+      data-state= loggedOutMenuState('pricing')
+    ) Plans and Pricing
+
+    a(
+      href='/blog'
+      data-state= loggedOutMenuState('blog')
+    ) Blog
+
+    a(
+      href='http://store.are.na/'
+      data-state= loggedOutMenuState('store')
+    ) Store
+
+    a(
+      href='http://help.are.na/help_center'
+      data-state= loggedOutMenuState('faqs')
+    ) Help / FAQs

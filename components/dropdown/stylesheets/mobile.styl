@@ -1,0 +1,46 @@
+.DropdownTapSurface
+  position absolute
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color rgba(black, 0.25)
+  z-index dropdown_z
+
++mobile()
+  .Dropdown
+    position fixed
+    top topbar_h !important
+    right 0 !important
+    left 0 !important
+    margin-top 0 !important
+    width 100%
+    height 'calc(100vh - %s)' % topbar_h
+    overflow-y auto
+    border-right none
+    border-left none
+
+    // Hide persistence hit area
+    &:before
+    // Hide outline-border
+    &:after
+      display none !important
+
+    // Display when clicked
+    &[data-active]
+      display block !important
+      z-index dropdown_z
+
+  .DropdownHover
+    // Hide pointer
+    &:hover
+      &:after
+        display none
+
+  // On touch devices, specifically
+  .Body--touch
+    .DropdownHover:hover
+      // Disables hover display, we manually
+      // trigger on clicks when touch
+      > .Dropdown
+        display none

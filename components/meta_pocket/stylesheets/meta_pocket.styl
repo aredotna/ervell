@@ -1,0 +1,143 @@
+.metadata--container
+  padding 0
+  height auto
+  font-size s_caption + 1
+  position relative
+  padding-bottom 30px
+
+  a
+    font-weight bold
+    color lightgray
+
+    &:hover
+      color hovergray
+
+.metadata--container__settings__done
+  text-align center
+  display none
+  height 40px
+
+.settings-is-active
+  .metadata--container__settings__done
+    display block
+    a
+      display block
+      vertical-align middle
+      line-height 40px
+    a:hover
+      color textgray
+
+  div#metadata__column-manage
+    display none
+
+#metadata--actions.is-editable .follow_button
+  display none
+
+.metadata__column
+  display inline-block
+  vertical-align top
+  margin 0 1.5em 3em 0
+  width 225px
+  height auto
+  min-height 80px
+  overflow-x visible
+  overflow-y hidden
+  line-height line-height-tall
+  color textgray
+
+  &:hover
+    color hovergray
+
+  &.is-settings
+    display none
+
+  &.is-expanded
+    max-height none
+
+  .channel__privacy--setting
+    text-align left
+
+  &.metadata__column--right
+    padding-top 18px
+    float right
+    text-align right
+    position relative
+
+.settings-is-active .metadata__column--right
+  display none
+
+.settings-is-active .metadata__column.is-settings
+  display inline-block
+
+.metadata__content__section
+  padding-bottom s_margin
+
+.metadata__title
+  width 100%
+  color lightgray
+  border-bottom 1px solid secondbackgroundgray
+  padding 0 0 4px 0
+
+.metadata__text, .metadata__content
+  width 100%
+  font-weight normal
+  color lightgray
+  padding 4px 0 0 0
+
+.metadata--selector__option
+  color lightgray
+  font-weight bold
+  hover-color hovergray
+
+  &:hover
+    color hovergray
+
+  &.is-active
+    color hovergray
+
+    &:hover
+      cursor default
+
+privacy-color('.is-active.metadata--selector__option--', color)
+
+.metadata__expand
+  display none
+  position absolute
+  bottom 0
+  width inherit
+  height 40px
+  font-weight bold
+  background-color rgba(255,255,255,0.9)
+  cursor pointer
+  text-align center
+  line-height 42px
+  font-size s_caption + 1
+
+  &:after
+    content 'See all'
+
+  &:hover
+    color hovergray
+
+  &.metadata__expand--text:after
+    content 'Hide'
+
+@media (max-width:500px)
+  .metadata--container
+    padding-bottom 0
+
+  .metadata__column
+    width 100%
+    margin unit 0
+    padding-bottom 0
+    min-height 50px
+
+  .metadata__content
+    .connect-container
+      margin-left 1px
+      padding 0
+
+      .new-connection
+        .button--inblock--mini
+          line-height 15px
+          margin: 0 0 0 -16px

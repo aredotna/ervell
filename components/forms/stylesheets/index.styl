@@ -1,0 +1,151 @@
+input-default-placeholder()
+  color lightgray
+  font-family font_sans
+
+input-focus-placeholder()
+  color textgray
+
+input
+input[type='text']
+input[type='number']
+input[type='search']
+textarea
+  appearance none
+  margin 0 0 0 0
+  color textgray
+  background-color backgroundgray
+  border none
+  font-size s_form
+  font-family font_sans
+  antialiased()
+  placeholder(input-default-placeholder)
+
+  &:focus
+    outline none
+    border none
+    background-color secondbackgroundgray
+    placeholder(input-focus-placeholder)
+
+  &.input--wide
+    width 100%
+    padding (unit / 1.5)
+
+  &.input--relative
+    position relative
+    float none
+    margin unit 0 0 0
+
+fieldset
+  margin 0.6em 0
+
+label
+  label()
+  margin-right s_caption
+  font-size s_caption
+
+textarea
+  resize none
+  outline none
+  padding 1em
+  font-size 1em
+  font-family font_sans
+  font-weight 100
+  line-height 1.6
+  color textgray
+
+button
+.button
+  border 0
+  outline none
+  background-color transparent
+  cursor pointer
+  font-size 1.5em
+  font-weight bold
+  font-family font_sans
+  color textgray
+  margin unit 0 0 0
+  antialiased()
+
+  &:active
+    background-color transparent
+    border-bottom 0
+
+  &--border
+    border-top 1px solid textgray
+
+    &:hover
+      background-color transparent
+      border-top 1px solid hovergray
+      color hovergray
+
+  &--wide
+    width 100%
+    height 45px
+
+  &--relative
+    position relative
+    float left
+    margin (unit * 2) 0 0 0
+
+  &--add
+    font-size 15px
+
+.button--base
+  width 93%
+  height 60px
+  line-height 49px
+  font-size 15px
+  font-weight bold
+  color textgray
+  padding 0
+  border-top 1px solid bordergray
+
+  &:hover
+    border-top 1px solid textgray
+    color hovergray
+    cursor pointer
+
+bordered-select-caret-width = 8px
+bordered-select-border-width = 2px
+.bordered-select // label
+  margin-top unit
+  position relative
+  display inline-block
+  // Hides the default caret button in FF
+  &:before
+    display block
+    position absolute
+    content ''
+    top bordered-select-border-width
+    right @top
+    bottom @top
+    width (bordered-select-caret-width * 3)
+    background-color white
+    border-top 10px solid white // faux margins
+    border-bottom @border-top
+    border-left 1px solid bordergray
+    pointer-events none
+  &:after
+    caret(bordergray)
+    position absolute
+    top 50%
+    right (bordered-select-caret-width + (bordered-select-border-width / 2))
+    margin-top -(bordered-select-border-width * 2)
+  > select
+    appearance none
+    outline none
+    display inline-block
+    width 200px
+    margin 0
+    padding 0
+    padding 8px 10px 7px
+    border 2px solid bordergray
+    border-radius 0
+    box-shadow none
+    background-color white
+
+  &.bordered-select--wide
+    width 100%
+
+    > select
+      width 100%

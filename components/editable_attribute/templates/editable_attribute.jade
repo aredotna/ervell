@@ -1,0 +1,18 @@
+.attr-backdrop.save
+
+div(id="#{attribute}_display_#{id}" class="attr-value")
+  if /\S/.test(value)
+    if kind == 'markdown'
+      != value_html
+    else
+      = value
+  else if canEdit
+    .placeholder Add #{attribute}
+  else
+    .placeholder —
+
+form.attr-editor
+  if kind == 'markdown'
+    textarea(class="markdown editor" autofocus="autofocus" placeholder="Add #{attribute}")= value
+  else
+    input(class="plaintext editor full" value=value ? value : '' autofocus="autofocus" type="text")

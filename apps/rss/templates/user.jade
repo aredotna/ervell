@@ -1,0 +1,24 @@
+doctype xml
+rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
+  channel
+    title Are.na / #{author.get('username')}
+    link #{author.href()}
+    atom:link(href="#{author.href()}/feed/rss", rel='self', type='application/rss+xml')
+    if author.has('metadata')
+      description #{author.get('metadata').description}
+    language en-US
+    if blocks.length
+      lastBuildDate= new Date(author.get('updated_at')).toUTCString()
+    each block in blocks
+      item
+        if block.get('class') == 'Link'
+          title= block.getSourceUrl()
+        else
+          title= block.get('title')
+        link #{sd.APP_URL}/block/#{block.id}
+        pubDate= new Date(block.get('updated_at')).toUTCString()
+        guid(isPermaLink='false') #{sd.APP_URL}/block/#{block.id}
+        description
+          | <![CDATA[
+          include block
+          | ]]>

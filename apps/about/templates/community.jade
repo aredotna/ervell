@@ -1,0 +1,98 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  / Community Guidelines
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--narrow
+    h2.Type.Type--size-h2.Utility--align-center Community Guidelines
+  
+    p.Type.Type--lg.Type--lh-tall
+      | Are.na is an open-ended platform adaptable to different needs and styles of use. There’s no single correct way to use Are.na, nor to be a part of its community. These guidelines are intended to protect Are.na members from harmful behavior without undue restrictions on the types of content and behavior allowed on the platform.
+
+    p.Type.Type--lg.Type--lh-tall
+      | A number of members have put together channels sharing Are.na <strong><a href="https://www.are.na/alex-singh/how-do-you-use-are-na">use cases</a></strong>, <strong><a href="https://www.are.na/zach-rose/are-na-meetups">meetups</a></strong>, <strong><a href="">collections</a></strong>, and discussions of <strong><a href="https://www.are.na/sam-hart/meta-are-na">all things Are.na</a></strong>. We also provide an official channel for <strong><a href="https://www.are.na/are-na/feedback-and-feature-requests">Feedback and Feature Requests</a></strong>. See our <strong><a href="https://www.are.na/terms">Terms of Use</a></strong> for more detailed legal clarification of content and use violations.
+
+    p.Type.Type--lg.Type--lh-tall
+      | Please contact <strong><a href="mailto:help@are.na">help@are.na</a></strong> to communicate rule-breaking behavior to the team.
+    
+    p.Type.Type--lg.Type--lh-tall
+      | Last updated: December 2018
+      br
+      | Members are welcome to suggest policy changes.
+
+  hr.Base
+
+  .Page.Page--narrow
+    h4.Type.Type--size-h4.Type--lh-tall: strong Unacceptable content
+  
+    p.Type.Type--lg.Type--lh-tall
+      ul.Type.Type--ul
+        li Illegal content, per U.S. law
+        li Defamation
+        li Copyright infringement
+        li Violent or sexually suggestive content involving minors
+        li Gore and violent mutilation of any kind
+        li Spam or advertising (includes bulk uploading, using Are.na for the sole purpose of promoting a business, soliciting transactions of any kind, posting links and domain names primarily for SEO impact, and posting links to phishing or malware sites)
+    
+    h4.Type.Type--size-h4.Type--lh-tall: strong Unacceptable behavior
+  
+    p.Type.Type--lg.Type--lh-tall
+      ul.Type.Type--ul
+        li
+          strong Harassment
+          br
+          | Includes emotional abuse, coercion, sustained and/or graphic sexual advances, or threats of any kind
+        li 
+          strong Hate speech and discrimination
+          br
+          | Includes speech, slurs, imagery, or symbolism intended to promote violence, hatred, or discrimination based on race, sexuality, gender identity, religion, ethnic or national origin, age, disability, or any other characteristic. Content collected for research or archival purposes that may violate the above guidelines should be accompanied by a verbal disclaimer.
+        li 
+          strong Incitement
+          br
+          | Includes threats of harm, any celebration or promotion of violence, incitement or participation in bullying, brigading, or mobbing on or outside Are.na.
+        li 
+          strong Impersonating another person or user 
+        li 
+          strong Promoting any form of self-harm
+        li 
+          strong Posting anyone’s personal information or private content without consent
+    
+    h4.Type.Type--size-h4.Type--lh-tall: strong NSFW (Not Safe For Work) Content
+    
+    p.Type.Type--lg.Type--lh-tall
+      | We trust our members' common sense, and don't ban graphic or adult content. Channels that contain sexually explicit content or violence should be <a href="http://help.are.na/knowledge_base/topics/are-there-nsfw-filters-on-are-dot-na?from_search=true">marked as NSFW</a>. Keep in mind that many people use Are.na at work and mark as NSFW anything you think would be inappropriate in a public and professional setting. 
+      br
+      br
+      | Do not post involuntary pornography, depictions of sexual violence, or sexual content involving or depicting minors. These forms of content violate the rules above and will be removed by Are.na staff.
+      br
+      br
+      | Channels marked NSFW will be hidden from Explore, and will not be visible in search or on your profile page by anyone who has chosen to hide NSFW content on Are.na. When we see NSFW content in public channels, we will either ask the owner to mark the channel NSFW or do so ourselves.
+    
+    h4.Type.Type--size-h4.Type--lh-tall: strong Moderation and enforcement
+
+    p.Type.Type--lg.Type--lh-tall
+      | Depending on the situation, and whether a user has previously violated our terms or guidelines, the Are.na team may:
+
+      ul.Type.Type--ul
+        li Ask you to remove content or mark a channel as NSFW
+        li Mark channels as NSFW ourselves
+        li Remove offending content from Are.na
+        li Temporarily or permanently suspend your account 
+    
+    p.Type.Type--lg.Type--lh-tall
+      | If you believe your channel has been unfairly marked as NSFW, your account has been unfairly suspended, or your content erroneously removed, you may contact help@are.na to appeal.
+    
+    h4.Type.Type--size-h4.Type--lh-tall: strong Copyright Infringements
+
+    p.Type.Type--lg.Type--lh-tall
+      | A proper DMCA notice must be filed for any moderating actions to take place. In the case that a complaint is filed, the content in question will be assessed and, if found to violate DMCA protections, removed. Users who are found to have uploaded violating content will be provided with information surrounding the complaint, and will have the opportunity to file a DMCA counter-notice of their own.
+
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer

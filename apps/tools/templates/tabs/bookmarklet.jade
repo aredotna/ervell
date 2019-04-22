@@ -1,0 +1,15 @@
+extends ../../../../components/path/templates/tab_content
+
+block vars
+  - slug = "bookmarklet"
+
+block content
+  .tab-content__title
+    | Add to Are.na
+
+  .tab-content__frame
+    .Narrow
+      if isChrome
+        include _chrome_extension
+      else
+        include _bookmarklet

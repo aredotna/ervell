@@ -1,0 +1,20 @@
+.import
+  &__status
+    &__inner
+      &__select
+        display inline-block
+        input
+          padding (unit / 2)
+        &__inner
+          &__results
+            position absolute
+            bottom 80px
+            background white
+          
+.search-results
+  border 1px solid bordergray
+  &__result, &__result--new
+    padding (unit / 2)
+    cursor pointer
+  &__result.is-active, &__result:hover, &__result--new.is-active, &__result--new:hover
+    background secondbackgroundgray 

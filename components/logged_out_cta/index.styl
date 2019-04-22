@@ -1,0 +1,34 @@
+.LoggedOutCTA
+  position fixed
+  bottom 0
+  left 0
+  right 0
+  width 100%
+  padding 1em
+
+  display flex
+  flex-direction row
+  justify-content center
+  align-items center
+  text-align center
+  z-index header_z
+  border-top 3px solid colors-gray-border
+  background-color white
+  color colors-gray-text
+  font-size font-size-base
+  line-height line-height-base
+  transform translateZ(0)
+
+  &__buttons
+    margin 0 0.5em
+    > span
+    > .Button
+      margin 0 0.5em
+
++mobile()
+  .LoggedOutCTA
+    flex-direction column
+    &__buttons
+      margin 0.5em 0
+      > .Button
+        margin 0 0.5em

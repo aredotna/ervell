@@ -1,0 +1,83 @@
+.LoggedOutHeader
+  position -webkit-sticky
+  position -moz-sticky
+  position -ms-sticky
+  position -o-sticky
+  position sticky
+  transform translateZ(0)
+  display flex
+  flex-direction row
+  justify-content space-between
+  top 0
+  right 0
+  left 0
+  padding 1em
+  font-size font-size-base
+  line-height 1
+  z-index 1000
+  background white
+
+  &__logo
+    display flex
+    justify-content center
+    > strong, > span
+      display inline-block
+      position relative
+      width @font-size * 2
+      height @font-size
+      margin-right 0.25em
+      vertical-align middle
+
+      > svg
+        position absolute
+        top 0
+        left -1
+        width 100%
+        height 100%
+        fill colors-gray-text
+
+    &:hover
+      > span > svg
+        fill colors-gray-hover
+
+  &__menu
+    > a
+      display inline-block
+      font-weight bold
+      margin 0 1em
+      &:last-child
+        margin-right .5em
+    +below(logged-out-nav-breakpoint)
+      a[data-id="blog"]
+        display none
+    
+
+  // States
+  &--active
+    .LoggedOutHeader
+      &__cta
+        // "Join"
+        > a:first-child
+        // "or"
+        > span
+          visibility visible
+
+
++below(logged-out-nav-breakpoint)
+  .LoggedOutHeader
+    &__menu
+      > a:not([data-id="log-in"]):not([data-id="log-out"]):not([data-id="sign-up"])
+        display none
+
+// Since the hamburger nav is not present on the index,
+// it's not necessary to toggle out the logo
+html:not([data-path='/'])
+  +below(logged-out-nav-breakpoint)
+    .LoggedOutHeader
+      background-color white
+      padding 1em
+
+      &__logo
+        display none
+
+

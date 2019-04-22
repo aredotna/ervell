@@ -1,0 +1,100 @@
+.ExamplesHeader
+  padding 4em 0 0
+  &__copy
+    max-width 650px
+    margin 0 auto
+    > .Type
+      text-align center
+
+.ExamplesCategories
+  position -webkit-sticky
+  position -moz-sticky
+  position -ms-sticky
+  position -o-sticky
+  position sticky
+  background white
+  transform translateZ(0)
+  z-index 999
+  top 0
+  right 0
+  left 0
+  padding 4em 0 3em
+  border-bottom 1px solid colors-gray-border-bold
+
+  &__inner
+    max-width 650px
+    margin 0 auto
+    text-align center
+
+    > .Category
+      display inline-block
+      padding .25em
+      margin .25em
+      border 1px solid colors-gray-border-bold
+      border-radius .25em
+      box-shadow inset 0 0 .25em colors-gray-lighter
+      
+      &[data-active]
+        font-weight bold
+        background colors-gray-lighter
+        color colors-gray-hover
+
+.Examples
+  margin-bottom 4em
+  
+  &__header
+    margin-bottom 1em
+    padding 5em 0
+    background colors-gray-background
+
+  &__button
+    margin 3em 0 0
+  
+  &__button-load-more
+    margin 0em 0 3em
+
+.ExampleChannels
+  margin-bottom 4em
+
+  .ChannelBlockGroup
+    margin-bottom 4em
+    cursor pointer
+
+  .ChannelBlockGroup__header 
+    margin 4em .5em 2em
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    text-align center
+
+  .ChannelBlockGroup__follow
+    > span 
+      display inline-block
+      border 2px solid colors-gray-border
+      border-radius .25em
+      padding 0.75em 1.25em
+      font-size font-size-sm
+      font-weight bold
+      cursor pointer
+      margin 2em 0 0
+      &:hover
+        border-color colors-gray-border-bold
+        color colors-gray-hover
+
+
+  .ChannelBlockGroup__title > h4.Type
+    font-weight bold
+    text-align center
+  
+  .ChannelBlockGroup__inner:hover
+    opacity 1
+  
+  .ChannelBlockGroup__inner .Block__inner:hover .Block__inner__overlay
+    display none
+
+  .ChannelBlockGroup:last-child > .ChannelBlockGroup__divider
+    display none
+
+  .ChannelBlockGroup__inner > .Block
+    pointer-events none

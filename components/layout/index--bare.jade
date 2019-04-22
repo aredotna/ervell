@@ -1,0 +1,26 @@
+- extraClasses = ''
+
+doctype html
+html(lang="en-US" class= sd.IS_INVERTED ? 'is-inverted' : '' )
+  head
+    include modules/title
+    include modules/styles
+    include modules/meta
+
+    block vars
+
+  body.body--bare( class= extraClasses )
+    include header/templates/index--bare
+
+    .Container.js-container
+      .Container__content
+        block body
+
+      //- Intentionally missing footer
+
+    //- TODO: Refactor to append/remove
+    #l-loader-container
+      include loader/templates/index
+
+    include modules/analytics
+    include modules/scripts

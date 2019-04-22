@@ -1,0 +1,36 @@
+@require '../../variables'
+
+@keyframes dash
+  to
+    stroke-dashoffset 0
+
+#l-loader-container
+  display none
+
+body.is-loading #l-loader-container
+  display block
+  position fixed
+  z-index loader_z
+  pointer-events none
+
+#l-infinite-loader-container
+  opacity 0
+  width 100%
+  height 200px
+  pointer-events none
+  position absolute
+  bottom 0
+  left 0
+  &.is-loading
+    opacity 1
+
+.loader
+  background-color transparent
+  margin 0 auto
+  svg rect
+    fill rgba(255,255,255,0)
+    stroke hovergray
+    stroke-dasharray 80
+    stroke-dashoffset 500
+    -webkit-animation dash 1.5s steps(16, end) infinite
+    animation dash 1.5s steps(16, end) infinite

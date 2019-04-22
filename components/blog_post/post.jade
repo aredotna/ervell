@@ -1,0 +1,18 @@
+if post.fields
+  include ./partials/category_title
+
+  a.BlogPosts__post.Type--size-sm( href="/blog/#{post.fields.slug}" )
+    if post.fields.image && post.fields.image.fields
+      img.BlogPosts__post-image(
+        srcset=srcset(post.fields.image, [250, 500, 750])
+        sizes="250px"
+        alt=post.fields.title
+      )
+
+    +category-title
+
+    .BlogPosts__excerpt
+      = post.fields.previewText
+
+    include ./partials/date_author
+

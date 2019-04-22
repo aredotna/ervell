@@ -1,0 +1,19 @@
+extends ../../../../components/path/templates/tab_content
+
+block vars
+  - slug = 'send-invitation'
+
+block content
+  .tab-content__title
+    | Invite a collaborator
+
+  .tab-content__frame
+    .Narrow
+      p.Type.Type--lh-tall
+        | Invite as many friends and collaborators to Are.na as you&rsquo;d like.
+        | Once the person you invited creates an account, you will automatically be following one another.
+      p.Type.Type--lh-tall
+        | <strong>Invite 3 friends</strong> to join Are.na and get <strong>15% off <a href="/pricing">Premium</a></strong> when they sign up.
+
+      .SendInvitation.js-send-invitation
+        include ../../components/send_invitation/index

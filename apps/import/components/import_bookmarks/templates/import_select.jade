@@ -1,0 +1,14 @@
+.import__status__inner__select__inner
+  if selectingChannel
+    .import__status__inner__select__inner__results
+      //- rendered on the client
+    input(type="text" class="import__status__inner__select__inner__search")
+  else
+    if selectedChannel && (selectedChannel.id || selectedChannel.get('is_new') == true)
+      if selectedChannel.get('is_new') == true
+        | a new channel called&nbsp;
+      span(class="import__status__inner__channel privacy--#{selectedChannel.get('status')}") #{selectedChannel.get('title')}
+      a.btn.import__status__inner__connect Connect &#10142;
+    else
+      a.btn.import__status__inner__select-channel (select channel)
+      

@@ -1,0 +1,11 @@
+.LoggedOutCTA
+  span.Type.Type--size-lg
+    = call
+
+  .LoggedOutCTA__buttons
+    a.Button.Button--size-sm.js-sign_up( class=button_class href='/sign_up?ref=logged_out_cta' )
+      | Sign up
+
+    unless action === 'explore'
+      a.Button.Button--size-sm( href='/explore?ref=logged_out_cta' )
+        | Explore

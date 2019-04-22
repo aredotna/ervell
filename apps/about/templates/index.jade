@@ -1,0 +1,148 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  / About
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .About.Page.Page--narrow
+    section.AboutSection
+      h2.Type.Type--size-h2.Utility--align-center
+        | Tools for Thinking, Together
+      
+      .AboutVideo
+        span
+          iframe(
+            src='https://player.vimeo.com/video/227975322?autoplay=0&autopause=0'
+            frameborder='0'
+            allowfullscreen
+          )
+      br
+      p.Type.Type--lh-tall.AboutParagraph
+        | Are.na is a visual organization tool designed to help you think and create. It lets you build simple collections of content by adding links and files of any kind. Connect ideas with other people by collaborating privately or building public collections for everyone.
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | With no ads, likes, or recommendations, Are.na is a more mindful space where you can work through any project over time. It's a place to structure your ideas and build new forms of knowledge together.
+
+    section.AboutSection
+      h2.Type.Type--size-h2.Utility--align-center
+        | A more mindful community
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | The web today is dominated by platforms which make money by manipulating our attention and harvesting our personal information to sell ads. We believe it takes a different value proposition to build a better online social space.
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | Are.na’s mission is to build a member-supported community for shared knowledge and lifelong learning. Since we're accountable to our Premium members instead of advertisers, our incentive is always to build a tool that fosters focus and genuine collaboration.
+
+      unless user && user.isPremium()
+        .AboutSection__buttons
+          a.Button.Button--size-lg( href='/pricing' )
+            | Join Premium
+
+    section.AboutSection.AboutSection--small
+      h2.Type.Type--size-h2.Utility--align-center
+        | Built by artists, designers, and 
+        br
+        |creative entrepreneurs
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | We created Are.na because we wanted a way to build on each other's ideas in real time. There are other platforms for sharing and "liking." We're interested in making connections that expand our ways of thinking about the world. When you make collections on Are.na, you're adding to a publicly accessible library where many forms of knowledge can thrive.
+
+      unless user
+        .AboutSection__buttons
+          a.Button.Button--size-lg( href='/sign_up' )
+            | Join Are.na
+
+  hr.Base
+
+  .About.Page
+    section.AboutSection.AboutSection--small
+      h2.Type.Type--size-h2.Utility--align-center
+        | Our Team
+
+      p.Type.Type--lh-tall.Utility--align-center
+        h4.Type.Type--size-h4.Utility--align-center
+          strong
+            a( href='/charles-broskoski' )
+              | Charles Broskoski
+          |, Co-founder and CEO
+          br
+          strong
+            a( href='/daniel-pianetti' )
+              | Daniel Pianetti
+          |, Co-founder and Product Lead
+          br
+          strong
+            a( href='/chris-sherron' )
+              | Chris Sherron
+          |, Co-founder and Design Lead
+          br
+          strong
+            a( href='/damon-zucconi' )
+              | Damon Zucconi
+          |, Co-founder and CTO
+          br
+          strong
+            a( href='/christopher-barley' )
+              | Chris Barley
+          |, Co-founder and Marketing Lead
+          br
+          strong
+            a( href='/leo-shaw' )
+              | Leo Shaw
+          |, Communications & Special Projects
+          br
+          strong
+            a( href='/meg-miller' )
+              | Meg Miller
+          |, Blog Editor
+
+  hr.Base
+  About.Page.Page--narrow
+    section.AboutSection.js-section( id='faqs' )
+      h2.Type.Type--size-h2.Utility--align-center
+        | FAQs
+
+      p.Type.Type--lh-tall
+        strong What should I use Are.na for?
+
+      p.Type.Type--lh-tall
+        | There is no right or wrong way to use Are.na. It's an open-ended space where you can organize your thoughts, projects, or research with anyone else.
+
+      p.Type.Type--lh-tall
+        | Some people organize their open browser tabs, some make mood boards, some start creative projects with collaborators, and others simply collect their thoughts.
+      
+      p.Type.Type--lh-tall
+        | Try playing around for a while. Adding content, connecting channels, and following other members are the best ways to get a feel for Are.na.
+
+      p.Type.Type--lh-tall
+        strong How is Are.na different from other tools?
+
+      p.Type.Type--lh-tall
+        | Are.na takes a uniquely cooperative approach to building and sharing knowledge.
+
+      p.Type.Type--lh-tall
+        | Unlike social media, Are.na is free of ads, likes, and recommended content.
+
+      p.Type.Type--lh-tall
+        | Unlike Slack, Are.na isn't distracting.
+
+      p.Type.Type--lh-tall
+        | Unlike most productivity tools, Are.na doesn't force you into a structure or measure your worth by checking boxes.
+      
+      p.Type.Type--lh-tall
+        | Instead, Are.na helps you develop ideas organically through associative thinking.
+
+      p.Type.Type--lh-tall
+        | Simple collections link together into expansive networks, creating a shared archive of many kinds of knowledge. It's all free for you to use for your own purposes.
+
+      .AboutSection__buttons
+        a.Button.Button--size-lg.js-more-faqs( href='http://help.are.na/help_center' )
+          | More FAQs

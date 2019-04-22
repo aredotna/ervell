@@ -1,0 +1,182 @@
+@require '../../layout/variables'
+
+.path--header
+  margin 100px auto 0 auto
+
+.path__inner
+  padding-bottom 3em
+
+.path
+  position relative
+  color lightgray
+  text-align left
+  font-weight normal
+
+  clearfix()
+
+.path__below a
+  color lightgrayplus
+
+  &:hover
+    color textgray
+
+.path__headline
+  @extend h1
+  font-weight normal
+  margin 0
+  position relative
+  float left
+  width auto
+  line-height 1em
+
+  li a, li span
+    font-weight bold
+
+.path.stuck
+  position fixed
+  z-index header_z
+  transform translate3d(0, 0, 1px)
+  -webkit-transform translate3d(0, 0, 1px)
+  -moz-transform translate3d(0, 0, 1px)
+  -o-transform translate3d(0, 0, 1px)
+  transform translate3d(0, 0, 1px)
+  top 1px
+  left 0px
+  height 38px
+  margin 0
+  text-align center
+  width 100%
+  pointer-events none
+
+  &.is-hidden, &.is-hidden.path__headline
+    opacity 0
+    pointer-events none
+
+  .path__headline
+    display inline-block
+    font-size 1em
+    line-height 3.1em
+    float none
+    pointer-events all
+
+  .path__breadcrumb
+    min-width initial
+
+  .edit-channel, .edit-profile, .channel-settings, .path__below
+    display none
+
+.is-dragging .path.stuck
+  visibility hidden
+
+.no-header .path.stuck
+  background #fff
+  top 0
+
+.path__breadcrumb
+  min-width 115px
+  breadcrumb: '/' 8px lightgray
+
+  li:after
+    font-weight normal
+
+  .path__channel
+    font-weight normal
+    color textgray
+
+    .attribute-group
+      display block
+
+    input
+      &:focus
+        width 600px
+        line-height 1em
+
+  li:last-child
+    color textgray
+
+  li.path__error-code
+    color alert
+
+
+privacy-color('.path__breadcrumb li.path__channel.privacy-', color)
+
+.active
+  font-weight normal
+  color hovergray
+
+.separator
+  margin 0 0.25em
+  font-weight 400
+
+.channel-settings
+  position relative
+  float right
+  clear right
+  width auto
+  height 20px
+  color lightgray
+  font-size s_caption + 1
+  line-height 20px
+  font-weight bold
+  margin 14px 0 0 0
+  display none
+
+  &.is-editable
+    display inline
+
+.show-info
+  display none
+
+.root__toggle
+  position relative
+  display inline-block
+  height 24px
+  margin 4px 0 0 0
+
+  .root__toggle__item
+    color lightgray
+    font-size s_caption + 1
+    line-height 1.3em
+
+    &.active
+      color hovergray
+      font-weight bold
+
+@media (max-width:(block_width_mar * 3) + 30)
+  .path
+    .path__headline
+      margin-bottom 15px
+
+  .metadata__column:not(.metadata__column--mobile)
+    display none
+
+  .channel-settings
+    float left
+    clear left
+    margin 4px 0 0 0
+
+  .show-info
+    display block
+
+@media (max-width:500px)
+  .path--header
+    margin 80px auto 0 auto
+    padding 0
+
+  .path__breadcrumb li
+    text-align left
+
+  .path__headline
+    line-height 1.2em
+
+  .path.stuck
+    display none
+
+  .root__toggle
+    margin -3px 0 0 0
+
+  .path__inner
+    padding 0
+
+@require './tabs'
+

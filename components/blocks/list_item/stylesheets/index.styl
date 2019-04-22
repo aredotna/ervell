@@ -1,0 +1,221 @@
+editPadding = 4px
+largeListBp = 1359px
+mediumListBp = 1050px
+smallListBp = 400px
+
+.block-collection--list
+  width 100%
+  &__header, .block-item
+    display flex
+    font-size s_small
+    display -webkit-box
+    display flex
+    flex-direction row
+    justify-content left
+    align-items center
+    position relative
+    background-color white
+  &__header
+    color lightgray
+    border-bottom 1px solid bordergray
+  &__column
+    width 200px
+    padding (unit / 2)
+    vertical-align middle
+    font-size s_small
+    &--thumb
+      text-align center
+      min-width 80px
+      max-width 80px
+      flex 1
+      padding (unit / 2) 0
+      +below(smallListBp)
+        min-width 80px
+    &--title
+      min-width 520px
+      flex 5
+      .can-edit
+        padding editPadding 0
+        background-color lighthighlight
+      .attribute-title
+        width 100%
+        display inline-block
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+      +below(largeListBp)
+        min-width 320px
+      +below(smallListBp)
+        min-width 100px
+    &--source
+      min-width 20px
+      flex 1
+      cursor pointer
+      +below(mediumListBp)
+        display none
+    &__source:hover
+      color hovergray
+    &--action
+      min-width 220px
+      flex 1
+      text-align right
+      padding-right unit * 2
+      +below(mediumListBp)
+        display none
+    &__connect, &__follow
+      display inline-block
+      font-weight bold
+      @extend .inline-link
+      margin 0 (unit / 2)
+      +below(smallListBp)
+        min-width 80px
+    &--date
+      min-width 100px
+      flex 1
+      +below(smallListBp)
+        display none
+    &--comment
+      min-width 200px
+      +below(mediumListBp)
+        display none
+      .comment-count
+        border 2px solid bordergray
+        font-family "Courier"
+        display inline-block
+        padding (unit / 2)
+        overflow-x hidden
+        text-overflow ellipsis
+        white-space nowrap
+        max-width 100%
+    &__comment-count:after
+      content attr(data-count)
+      position absolute
+      top 0px
+      left 0px
+      font-size 9px
+      width 100%
+      text-align center
+      color white
+    &__user
+      width 80px
+      .user__avatar
+        margin 0 auto
+        background backgroundgray
+      .user__avatar--thumb .user__avatar__image
+        top 0
+    &__user-icon
+      color lightgray
+    .iconic
+      color lightgray
+    .iconic:hover
+      color hovergray
+      & > g:last-child > path
+        fill hovergray
+    img
+      max-width unit * 2
+      max-height unit * 2
+      margin 0 auto
+    a
+      font-weight bold
+    &[data-attr="icon"]
+      text-align center
+    &__small
+      font-size s_caption
+      padding-top 10px
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+    &__channel-icon
+      width 10px
+      height 10px
+      background-color black
+      border-radius 10px
+      margin 0 auto
+      &.privacy--closed
+        background-color closed
+      &.privacy--public
+        background-color public
+      &.privacy--private
+        background-color private
+    &--edit
+      max-width 100px
+      padding-right unit * 2
+      text-align right
+      flex 1
+      position relative
+      +below(mediumListBp)
+        display none
+      .tooltip
+        left calc(-50% - 2px)
+        top 35px
+        padding unit
+        line-height 2
+        text-align center
+      .iconic
+        padding 0 5px
+      .edit-button
+        display none
+      .delete-button
+        display none
+      .check-button
+        display none
+  &__row
+    border-bottom 1px solid bordergray
+    cursor pointer
+    height (unit * 3)
+    color textgray
+    &.can-edit:not(.is-being-edited):hover, &.can-manage:not(.is-being-edited):hover
+      .edit-button
+        display inline-block
+    &.is-being-edited
+      .edit-button
+        display none
+      .delete-button
+        display inline-block
+      .check-button
+        display inline-block
+    &--private
+      color private
+    &--closed
+      color closed
+    &--public
+      color public
+    &--placeholder
+      border-bottom 1px dotted bordergray
+    &--loading
+      background-size 80px 80px
+      background-image linear-gradient(
+        45deg,
+        rgba(bordergray, 0.5)   25%,
+        transparent             25%,
+        transparent             50%,
+        rgba(bordergray, 0.5)   50%,
+        rgba(bordergray, 0.5)   75%,
+        transparent             75%,
+        transparent
+      )
+      -webkit-animation loading 0.5s linear infinite
+      animation loading 0.5s linear infinite
+    &:hover, &.is-being-edited
+      .block-collection--list__column--thumb
+        padding 0
+        img
+          max-width 80px
+          max-height 59px
+          vertical-align middle
+      .block-collection--list__column--title
+        font-size s_middle
+        .attribute-title
+          padding editPadding 0
+          display block
+          overflow-x hidden
+          text-overflow ellipsis
+          white-space nowrap
+        .block-collection--list__column__small
+          display none
+
+@keyframes loading
+  from
+    background-position 0 0
+  to
+    background-position 160px 80px

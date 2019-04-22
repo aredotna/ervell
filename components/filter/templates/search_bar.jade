@@ -1,0 +1,10 @@
+.form__field.channel-filter.js-channel-filter(
+  class="channel-filter--#{view_mode}"
+)
+  input.input--wide.js-channel-filter-input(
+    name='filter-arena' type='text' placeholder="Filter #{title}" aria-label="Filter #{title}"
+  )
+  .channel-filter__status
+    .channel-filter__status__close.js-clear-input &times;
+    .channel-filter__status__icon
+      include ../../../public/images/iconic/magnifying-glass.svg

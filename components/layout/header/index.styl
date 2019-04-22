@@ -1,0 +1,335 @@
+@require '../variables'
+@require '../../dropdown/stylesheets'
+
+.js-topbar
+  position fixed
+  top 0
+  right 0
+  left 0
+  z-index header_z
+
+#layout-header
+  position fixed
+  top 0
+  left 0
+  height topbar_h
+  line-height topbar_h
+  width 100%
+  background-color #fff
+  padding 0
+  display flex
+  justify-content space-between
+  align-items center
+  z-index header_z
+
+  &.is-group-page
+    background #fbfbfb
+
+  &.is-active, .has-results
+    z-index header_z + 3
+
+    .header--icon
+      display none
+
+  +below(600px)
+    position absolute
+
+.btn-signup, .btn-login
+  font-weight bold
+  cursor pointer
+
+.GroupTopBarShadow
+  z-index header_z + 2
+  pointer-events none
+  position fixed
+  top 37px
+  left 0
+  height 13px
+  width 100%
+  background linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.02) 100%)
+
+  +below(600px)
+    position absolute
+
+  divet_size = 11px
+
+  &__left, &__right
+    background rgba(0,0,0,0.05)
+    width divet_size
+    height divet_size
+    position fixed
+    top topbar_h
+    mask url('/images/corner.svg')
+    mask-size 100%
+    -webkit-mask url('/images/corner.svg')
+    -webkit-mask-size 100%
+    z-index -1
+
+    +below(600px)
+      display none
+
+  &__left
+    left 0
+
+  &__right
+    right 0
+    transform scaleX(-1)
+
+body.no-header #layout-header
+  display none
+
+.layout-header__search
+  flex-grow 3
+  position relative
+
+  &:hover
+    .logo-icon
+      opacity 0
+
+    .glass-icon
+      opacity 1
+
+.header--icon
+  position absolute
+  left 0
+  top 0
+  width 40px
+  height topbar_h
+
+  &:hover
+    .glass-icon
+      opacity 0
+
+    .logo-icon
+      opacity 1
+
+  .glass-icon
+    opacity 0
+    position absolute
+    height topbar_h
+
+    svg
+      width 46px
+      height topbar_h
+      line-height 2em
+      padding 16px 16px 16px 16px
+      outline none
+
+      .iconic-magnifying-glass-lg
+        display none
+
+      .iconic-magnifying-glass-md
+        display none
+
+      .iconic-magnifying-glass-sm
+        display inline
+
+      & *
+        stroke lightgray
+        fill lightgray
+
+  .logo-icon
+    position absolute
+    cursor pointer
+    height topbar_h
+
+    svg
+      width 46px
+      height topbar_h
+      fill textgray
+      padding 10px 8px 10px 12px
+
+    &:hover
+      svg
+        fill hovergray
+
+input#layout-header__search__input
+  width 100%
+  height 50px
+  font-size 1em
+  border none
+  outline 0
+  font-weight normal
+  padding 0 container_pad 0 topbar_h
+  background-color transparent
+
+  &:focus
+    background-color backgroundgray
+
+.layout-header__search__results
+  position absolute
+  left 0
+  top topbar_h
+  width 100%
+  display none
+  background secondbackgroundgray
+
+.layout-header__search.is-active
+  .layout-header__search__results
+    display block
+  .header--icon
+    display none
+
+.search__results__list
+  list-style-type none
+
+.search__results__result
+  padding 4px 0 4px 50px
+  font-size 1em
+  font-weight bold
+  border-top 1px solid bordergray
+  cursor pointer
+
+  .GroupBadge
+    margin-left 0.5em
+    vertical-align middle
+
+  +mobile()
+    padding 0
+    padding-left 50px
+    line-height 40px
+
+  &:hover, &.is-active
+    background-color backgroundgray
+
+    li
+      color hovergray
+
+.search__results__see-all
+  background-color bordergray
+
+privacy-color('.search__results__result--privacy-', color)
+
+.layout-header__search__close
+  position absolute
+  left 16px
+  font-size 31px
+  top 1px
+  display none
+  pointer-events all
+  color lightgray
+
+  &:hover
+    color textgray
+
+.is-active .layout-header__search__close, .has-results .layout-header__search__close
+  display block
+
+.layout-header__register
+  padding 0 container_pad 0 container_pad
+  a
+    font-weight bold
+
+.right
+  text-align right
+  margin 0
+
+.dropdown--menu .user__avatar--thumb
+  width 30px
+  opacity 0.95
+
+  &:hover
+    opacity 1
+
+  .user__avatar__initials
+    width 30px
+    overflow hidden
+    font-size s_caption
+
+  .user__avatar__image
+    top 10px
+    opacity 50%
+
+.user-avatar
+  height topbar_h
+
+.new-channel-dropdown
+  display inline-block
+
+  .dropdown--menu__padder:after
+    content ""
+
+.new-channel-btn
+  height topbar_h
+  font-size 13px
+  color textgray
+  border 0px solid bordergray
+  text-align center
+  margin 0 0 0 15px
+  font-weight bold
+
+  &.iconic:before
+    vertical-align middle !important
+    padding-right .5em
+    font-size 11px !important
+    top 0px !important
+
+.dropdown--is_active .new-channel-btn, .new-channel-btn:hover
+  border 0px solid lightgray
+  color hovergray
+  cursor pointer
+
+.new-channel-btn--caption
+  display inline-block
+  vertical-align top
+  margin -1px 0 0 6px
+
+.body--bare .header--icon
+  position static
+
+@media (max-width: 500px)
+  .header--icon:hover
+    .glass-icon
+      opacity 1
+    .logo-icon
+      opacity 0
+
+  .logo-icon.dropdown--menu__padder
+    height topbar_h
+    padding 0 15px 0 15px
+
+  .body--bare .logo-icon
+    padding 0px
+
+  .layout-header__search__results
+    position fixed
+    overflow scroll
+    width 100%
+
+  .layout-header__register
+    width 185px
+    text-align right
+
+  .new-channel-btn
+    font-size 0
+
+  .new-channel-btn--caption
+    display none
+
+  .dropdown
+    border 0
+    border-bottom 1px solid lightgrayplus
+
+  .dropdown__inner
+    border 0
+
+  .dropdown.dropdown--size
+    width 100%
+    height 100%
+    padding 0
+    .dropdown__inner
+      border-bottom 1px solid bordergray
+
+  .dropdown__section
+    font-size 1.5em
+    padding 14px 15px 8px 15px
+
+  .dropdown__link--tools
+    .dropdown__text--small
+      display none
+
+  .new-channel-dropdown__container
+    width 100%
+    height auto
+    margin 0
+    padding 0

@@ -1,0 +1,21 @@
+doctype html
+html( data-path= sd.CURRENT_PATH, data-logged-in=(user && true) lang="en-US")
+  head
+    block head
+
+    include ../modules/title
+    include ../modules/meta
+    include ../modules/styles
+
+  body
+    block precontainer
+    .Container.js-container
+      .Container__content
+        block container
+
+      block footer
+
+    block body
+
+    include ../modules/analytics
+    include ../modules/scripts

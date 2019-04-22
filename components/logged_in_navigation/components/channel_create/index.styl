@@ -1,0 +1,32 @@
+.NewChannel
+  > span
+    position relative
+    margin-left 1.25em
+    font-size font-size-sm
+    font-weight bold
+    cursor pointer
+
+    // Plus sign
+    &:before
+    &:after
+      content ''
+      display block
+      position absolute
+      background-color colors-gray-text
+      width 10px
+      height 2px
+      top 50%
+      left 0
+      margin-left -(@margin-left)
+      transform translateY(-50%)
+
+    &:after
+      transform translateY(-50%) rotate(90deg)
+
+    +mobile()
+      // Centers plus-sign
+      margin-left 1.66em
+
+      // Hide 'New channel' text label
+      > span
+        display none

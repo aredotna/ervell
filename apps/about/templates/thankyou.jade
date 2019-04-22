@@ -1,0 +1,21 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  |  / Thank you for subscribing
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+
+  .Page.Page--narrow
+    section.AboutSection
+      h2.Type.Type--size-h2.Utility--align-center Thank you for subscribing
+
+      p.Type.Type--lh-tall.AboutParagraph
+        | You'll receive our monthly newsletter with company updates, new blog entries, events and features.
+      p.Type.Type--lh-tall.AboutParagraph
+        | You can use the coupon <strong class="Coupon">newsletter</strong> to get 10% off your next cycle of Premium subscription.
+block footer
+  include ../../../components/logged_out_nav/templates/footer

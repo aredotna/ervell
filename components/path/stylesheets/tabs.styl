@@ -1,0 +1,32 @@
+.tab--container
+  border-bottom 1px solid bordergray
+
+ul.tab--container__nav
+  display flex
+  text-align center
+
+ul li.tab--container__nav__item
+  flex 1
+  display inline-block
+  color lightgray
+  margin-bottom -1px
+
+  &.is-active
+    color textgray
+    border-bottom 1px solid hovergray
+
+.tab-content
+  display none
+  padding s_margin
+  
+  &.is-active
+    display block
+
+@media (max-width:800px)
+  .tab-content
+    padding s_margin
+  .tab--container
+    border-bottom none
+  li.tab--container__nav__item
+    float none
+    width 100%

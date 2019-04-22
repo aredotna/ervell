@@ -1,0 +1,5 @@
+- var count = unread_count || feed && feed.getNumberUnread() || 0
+
+.NotificationsBadge.js-notifications-badge
+  .Badge( class=(count > 0 ? 'Badge--alert' : undefined) )
+    = count

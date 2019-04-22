@@ -1,0 +1,68 @@
+.AboutSection
+  margin-bottom 8em
+
+  &--small
+    margin-bottom 4em
+
+  &--narrow
+    max-width 30em
+    margin 0 auto
+
+  &__buttons
+    text-align center
+
+    > .Button
+      margin 1em
+
+  .Coupon
+    color colors-state-premium
+
+  img
+    max-width 100%
+
+.AboutFeynman
+  margin 2em 0
+
+  > svg
+    display block
+    margin 0 auto
+    max-width 60%
+    fill colors-gray-text
+
+.AppImg
+  display block
+  width 95%
+  margin 0 auto
+
+.EduImg
+  display block
+  margin 0 auto 2em
+  width 100%
+
+.AboutParagraph
+  max-width 28em
+  margin 1.5em 0
+
+.AboutVideo
+  width 100%
+  position relative
+  > span
+    border 1px solid colors-gray-border-bold
+    display block
+    ratio-box(960 / 540)
+    > iframe
+      position absolute
+      top 0
+      left 0
+      width 100%
+      height 100%
+
+.AboutCarousel
+  margin-bottom 2em
+
+img.FaqImage
+  margin 2em auto
+  max-width layout-narrow-width
+
+@require '../components/posts/index'
+@require '../components/store_posts/index'

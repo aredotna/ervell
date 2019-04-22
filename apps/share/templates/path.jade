@@ -1,0 +1,7 @@
+extends ../../../components/path/templates/path
+
+block path
+  li.path__username
+    a(href="/" + author.get('slug'))=author.get('username')
+  li.path__channel.channel(class="privacy-#{channel.get('status')}")
+      a(href="/" + author.get('slug') + '/' + channel.get('slug'))= channel.get('title')

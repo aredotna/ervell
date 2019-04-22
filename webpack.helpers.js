@@ -35,7 +35,7 @@ function findAssets(basePath) {
       };
 
       // Load oldschool global module dependencies
-      asset[fileName].unshift('./src/lib/global_modules');
+      asset[fileName].unshift('./lib/global_modules');
 
       if (isDevelopment) {
         asset[fileName].unshift('webpack-hot-middleware/client?reload=true');
@@ -50,7 +50,7 @@ function findAssets(basePath) {
 
 function getEntrypoints() {
   return {
-    ...findAssets('./src/assets'),
+    ...findAssets('assets'),
   };
 }
 

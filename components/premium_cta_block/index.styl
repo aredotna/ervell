@@ -1,0 +1,20 @@
+@require '../add_block/index'
+
+.PremiumCTABlock
+  @extends .AddBlock
+
+  &__message
+    @extends .AddBlock__hover
+
+    &:before
+      display none
+
+    &:hover
+      background-color transparent
+
+    > span
+      display block
+      background-color transparent
+
+  &__button:after
+    content ''

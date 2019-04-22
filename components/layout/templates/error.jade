@@ -1,0 +1,28 @@
+extends ../../../components/layout/index
+
+block body
+  include ./error_path
+
+  .Page
+    case code
+      when 404
+        h2.Type.Type--size-h4
+          | Page not found.
+
+      when 401
+        h2.Type.Type--size-h4
+          | You do not have permission to access this.
+
+        unless user
+          h2.Type.Type--size-h4
+            | Maybe you need to
+            = ' '
+            a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" ) log in
+            | ?
+
+      default
+        h2.Type.Type--size-h4
+          | Something went wrong, please contact #[a( href="mailto:info@are.na" ) info@are.na] if the problem persists.
+
+        if detail
+          pre.Type= detail

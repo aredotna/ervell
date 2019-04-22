@@ -6,6 +6,6 @@ rm -rf public/assets
 mkdir public/assets
 NODE_ENV=production webpack
 stylus \
-  $(find src/assets -name '*.styl') \
+  $(find assets -name '*.styl') \
   --compress \
   -o public/assets

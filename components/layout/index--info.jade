@@ -1,0 +1,24 @@
+- displayTitle = title ? ('Are.na / ' + title) : 'Are.na'
+- extraClasses = ''
+
+doctype html
+html(lang="en-US")
+  head
+    title!= displayTitle
+
+    include modules/styles
+    include modules/meta
+
+    block vars
+
+  body.body--info( class= extraClasses )
+    include header/templates/index--info
+
+    .Container.js-container
+      .Container__content
+        block body
+
+      include footer/templates/index--info
+
+    include modules/analytics
+    include modules/scripts

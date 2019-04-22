@@ -1,0 +1,8 @@
+.Color
+  kolors = channel-public channel-closed channel-private state-premium state-alert gray-light
+
+  for kolor in kolors
+    &--{kolor}
+      &, input
+        color lookup('colors-' + kolor)
+        border-color rgba(@color, colors-border-alpha)

@@ -1,0 +1,30 @@
+extends ../../../components/layout/layouts/blank
+
+block title
+  | &nbsp;/ Getting started with Groups
+
+block meta
+  != apollo.styles
+  meta(name="twitter:title", content="Are.na / Groups")
+  meta(name="twitter:url", content="https://www.are.na/getting-started-with-groups")
+  meta(property="og:title" content="Are.na / Groups")
+  meta(property="og:url" content="https://www.are.na/getting-started-with-groups")
+  meta(name="twitter:image", content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+  meta(property="og:image" content="https://d2w9rnfcy7mm78.cloudfront.net/682916/large_93b802ed0346465b103fec4990e8035b.jpg")
+
+block scripts
+  script( src= asset('/assets/about.js') )
+
+block footer
+  include ../../../components/logged_out_nav/templates/footer
+
+block container
+  include ../../../components/logged_out_nav/templates/header
+  
+  #apolloMount
+    != apollo.html
+
+block scripts
+  script.
+    window.__APOLLO_STATE__ = !{JSON.stringify(apollo.state).replace(/</g, '\\u003c')};
+  script( src= asset('/assets/about.js') )

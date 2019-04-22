@@ -1,0 +1,18 @@
+.js-topbar: header#layout-header(class=(isGroupPage ? 'is-group-page' : ''))
+  .layout-header__search
+    include ../../../search_bar/templates/index
+
+  if user && user.has('username')
+    include ../../../logged_in_navigation/index
+
+  else
+    .layout-header__register
+      //- TODO: Margins
+      a( href='/sign_up' rel="nofollow" ) Join
+      |&nbsp;or&nbsp;
+      a( href="/log_in?redirect-to=#{encodeURIComponent(sd.CURRENT_PATH)}" rel="nofollow" ) Log in
+
+  if isGroupPage
+    .GroupTopBarShadow
+      .GroupTopBarShadow__left
+      .GroupTopBarShadow__right

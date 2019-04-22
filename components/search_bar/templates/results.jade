@@ -1,0 +1,12 @@
+ul.search__results__list
+  for result in results
+    case result.get('class')
+      when 'User'
+        include results/user
+      when 'Channel'
+        include results/channel
+      when 'Group'
+        include results/group
+  
+  li.search__results__result.search__results__see-all: a(href="/search/#{query}")
+    | See all results

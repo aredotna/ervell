@@ -1,0 +1,10 @@
+.HomeExplore
+  a.HomeExplore__overlay( href='/explore' )
+    h2.Type.Type--size-h2 See what Are.na users are up to right now
+    .Button.Button--size-lg.Button--border-heavy( class=button_class href='/explore' )
+      | Explore
+
+  .HomeExplore__blocks
+    - disableFilter = true
+    - blocks = explore_blocks
+    include ../../../../components/blocks/container/templates/index

@@ -1,0 +1,33 @@
+body.no-messages .Message
+  display none
+
+.Message
+  position fixed
+  bottom 1em
+  right 1em
+  width block_width
+  padding 1em 1.25em
+  background-color colors-gray-background
+  border 1px solid colors-gray-border
+  font-size font-size-xs
+  line-height line-height-tall
+  z-index header_z
+
+  &__close
+    position absolute
+    top 0
+    right 0
+    padding 0.5em 0.75em
+    line-height 1
+    color colors-gray-light
+    font-size font-size-lg
+    text-align center
+
+  &__title
+    font-weight bold
+
+  &__body
+    margin-top 0.5em
+
+    > a
+      text-decoration underline
