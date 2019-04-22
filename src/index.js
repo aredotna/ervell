@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-require('dotenv').config();
 
-// require('newrelic');
+require('dotenv').config();
+require('regenerator-runtime/runtime');
+require('newrelic');
 require('coffee-register');
 require('@babel/register')({
   extensions: ['.js', '.jsx', '.ts', '.tsx'],

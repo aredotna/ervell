@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import _ from 'underscore';
 import $ from 'jquery';
 import imagesLoaded from 'imagesloaded';
