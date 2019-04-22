@@ -7,7 +7,6 @@ extend type Query {
 }
 
 type ClientCurrentRoute {
-  __typename: String
   protocol: String
   slashes: String
   auth: String
@@ -23,17 +22,14 @@ type ClientCurrentRoute {
 }
 
 type ClientLoginStatus {
-  __typename: String
   isLoggedIn: Boolean
 }
 
 type ClientCookies {
-  __typename: String
   get(name: String): String
 }
 
 type ClientSerializedMe {
-  __typename: String
   id: String
   initials: String
   name: String
@@ -42,6 +38,5 @@ type ClientSerializedMe {
 }
 
 type ClientSharify {
-  __typename: String
   get(name: String): String
 }

@@ -8,7 +8,7 @@ module.exports = {
     jest: true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'graphql'],
+  plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -44,14 +44,6 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
-
-    // 'graphql/template-strings': [
-    //   'error',
-    //   {
-    //     schemaJsonFilepath: path.resolve(__dirname, './src/v2/apollo/schema.json'),
-    //     tagName: 'gql',
-    //   },
-    // ],
 
     'react/display-name': 0,
     'react/jsx-filename-extension': [

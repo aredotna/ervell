@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -688,7 +688,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -775,6 +775,66 @@
             "type": {
               "kind": "OBJECT",
               "name": "User",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "currentRoute",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ClientCurrentRoute",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "loginStatus",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ClientLoginStatus",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "cookies",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ClientCookies",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "serializedMe",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ClientSerializedMe",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sharify",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ClientSharify",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3189,7 +3249,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -3622,7 +3682,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -3949,7 +4009,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -4276,7 +4336,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -11944,7 +12004,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -12328,7 +12388,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -12744,7 +12804,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -13324,7 +13384,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "110"
+                "defaultValue": "111"
               },
               {
                 "name": "q",
@@ -15735,6 +15795,323 @@
             "ofType": null
           }
         ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ClientCurrentRoute",
+        "description": null,
+        "fields": [
+          {
+            "name": "protocol",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "slashes",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "auth",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "host",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "port",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hostname",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hash",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "search",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "query",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pathname",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "path",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "href",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ClientLoginStatus",
+        "description": null,
+        "fields": [
+          {
+            "name": "isLoggedIn",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ClientCookies",
+        "description": null,
+        "fields": [
+          {
+            "name": "get",
+            "description": null,
+            "args": [
+              {
+                "name": "name",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ClientSerializedMe",
+        "description": null,
+        "fields": [
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "initials",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "avatar",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "authentication_token",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ClientSharify",
+        "description": null,
+        "fields": [
+          {
+            "name": "get",
+            "description": null,
+            "args": [
+              {
+                "name": "name",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
       },
       {
         "kind": "OBJECT",
@@ -23461,7 +23838,11 @@
       {
         "name": "skip",
         "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
-        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+        "locations": [
+          "FIELD",
+          "FRAGMENT_SPREAD",
+          "INLINE_FRAGMENT"
+        ],
         "args": [
           {
             "name": "if",
@@ -23482,7 +23863,11 @@
       {
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
-        "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+        "locations": [
+          "FIELD",
+          "FRAGMENT_SPREAD",
+          "INLINE_FRAGMENT"
+        ],
         "args": [
           {
             "name": "if",
@@ -23503,7 +23888,10 @@
       {
         "name": "deprecated",
         "description": "Marks an element of a GraphQL schema as no longer supported.",
-        "locations": ["FIELD_DEFINITION", "ENUM_VALUE"],
+        "locations": [
+          "FIELD_DEFINITION",
+          "ENUM_VALUE"
+        ],
         "args": [
           {
             "name": "reason",
