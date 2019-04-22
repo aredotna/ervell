@@ -146,6 +146,7 @@
     "react-transition-group": "^1.2.0",
     "react-waypoint": "^8.1.0",
     "redis": "*",
+    "regenerator-runtime": "^0.13.2",
     "rupture": "*",
     "serve-favicon": "^2.3.0",
     "sharify": "*",
