@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import manageMyCreditCardsFragment from 'v2/components/MyCreditCard/components/ManageMyCreditCards/fragments/manageMyCreditCards'
-import defaultCreditCardFragment from 'v2/components/MyCreditCard/components/DefaultCreditCard/fragments/defaultCreditCard'
+import manageMyCreditCardsFragment from 'v2/components/MyCreditCard/components/ManageMyCreditCards/fragments/manageMyCreditCards';
+import defaultCreditCardFragment from 'v2/components/MyCreditCard/components/DefaultCreditCard/fragments/defaultCreditCard';
 
 export default gql`
   fragment MyCreditCard on Customer {
@@ -18,4 +18,4 @@ export default gql`
   }
   ${manageMyCreditCardsFragment}
   ${defaultCreditCardFragment}
-`
+`;

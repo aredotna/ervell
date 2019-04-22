@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment BlockLightboxImage on Konnectable {
@@ -10,4 +10,4 @@ export default gql`
       original_image_url: image_url(size: ORIGINAL)
     }
   }
-`
+`;

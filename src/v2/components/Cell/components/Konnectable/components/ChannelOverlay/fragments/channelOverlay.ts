@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment ChannelOverlay on Channel {
@@ -9,4 +9,4 @@ export default gql`
       contents
     }
   }
-`
+`;

@@ -1,18 +1,18 @@
-import uuidv4 from 'uuid/v4'
-import React from 'react'
-import { storiesOf } from '@storybook/react'
+import uuidv4 from 'uuid/v4';
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import Specimen from 'v2/stories/__components__/Specimen'
+import Specimen from 'v2/stories/__components__/Specimen';
 
-import Grid from 'v2/components/UI/Grid'
-import Cell from 'v2/components/Cell'
-import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow'
+import Grid from 'v2/components/UI/Grid';
+import Cell from 'v2/components/Cell';
+import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow';
 
-import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel'
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
+import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel';
+import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 const CHANNEL_QUERY = gql`
   query ChannelRowStoryQuery {
@@ -25,14 +25,14 @@ const CHANNEL_QUERY = gql`
   }
   ${konnectableCellFragment}
   ${blokkChannelFragment}
-`
+`;
 storiesOf('ChannelRow', module).add('default', () => (
   <Specimen>
     <Query key={uuidv4()} query={CHANNEL_QUERY}>
       {({ data, loading, error }) => {
-        if (loading || error) return 'LOADING'
+        if (loading || error) return 'LOADING';
 
-        const { channel } = data
+        const { channel } = data;
 
         return (
           <ChannelRow key={channel.id} channel={channel}>
@@ -48,8 +48,8 @@ storiesOf('ChannelRow', module).add('default', () => (
               ))}
             </Grid>
           </ChannelRow>
-        )
+        );
       }}
     </Query>
   </Specimen>
-))
+));

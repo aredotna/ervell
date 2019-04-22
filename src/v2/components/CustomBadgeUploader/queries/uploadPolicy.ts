@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import uploaderFragment from 'v2/components/CustomBadgeUploader/fragments/uploader'
+import uploaderFragment from 'v2/components/CustomBadgeUploader/fragments/uploader';
 
 export default gql`
   query UploadPolicy {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${uploaderFragment}
-`
+`;

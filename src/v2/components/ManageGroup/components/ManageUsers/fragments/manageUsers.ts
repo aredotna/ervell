@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember'
+import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
 
 export default gql`
   fragment ManageUsers on Group {
@@ -20,4 +20,4 @@ export default gql`
     }
   }
   ${managedMemberFragment}
-`
+`;

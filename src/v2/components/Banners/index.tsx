@@ -1,41 +1,41 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { graphql } from 'react-apollo';
 
-import WithLoginStatus from 'v2/hocs/WithLoginStatus'
+import WithLoginStatus from 'v2/hocs/WithLoginStatus';
 
-import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
-import Banner from 'v2/components/UI/Banner'
-import Truncate from 'v2/components/UI/Truncate'
+import Box from 'v2/components/UI/Box';
+import Text from 'v2/components/UI/Text';
+import Banner from 'v2/components/UI/Banner';
+import Truncate from 'v2/components/UI/Truncate';
 import {
   GenericButton,
   GenericButtonLink,
-} from 'v2/components/UI/GenericButton'
+} from 'v2/components/UI/GenericButton';
 
-import resendConfirmationEmailMutation from 'v2/components/Banners/mutations/resendConfirmationEmail'
+import resendConfirmationEmailMutation from 'v2/components/Banners/mutations/resendConfirmationEmail';
 
 const Button = styled(GenericButton).attrs({
   f: 3,
   ml: 6,
   mt: [6, 6, 0],
-})``
+})``;
 
 const ButtonLink = styled(GenericButtonLink).attrs({
   f: 3,
   ml: 6,
   mt: [6, 6, 0],
-})``
+})``;
 
 interface ConfirmBlockProps {
-  resendConfirmationEmail: any
+  resendConfirmationEmail: any;
 }
 
 const __Confirm__: React.FC<ConfirmBlockProps> = ({
   resendConfirmationEmail,
   ...rest
 }) => {
-  const [mode, setMode] = useState('resting')
+  const [mode, setMode] = useState('resting');
 
   return (
     <Banner
@@ -53,10 +53,10 @@ const __Confirm__: React.FC<ConfirmBlockProps> = ({
       <Button
         disabled={mode === 'sent'}
         onClick={() => {
-          setMode('sending')
+          setMode('sending');
           resendConfirmationEmail()
             .then(() => setMode('sent'))
-            .catch(() => setMode('error'))
+            .catch(() => setMode('error'));
         }}
       >
         {
@@ -69,15 +69,15 @@ const __Confirm__: React.FC<ConfirmBlockProps> = ({
         }
       </Button>
     </Banner>
-  )
-}
+  );
+};
 
 export const Confirm = graphql<ConfirmBlockProps>(
   resendConfirmationEmailMutation,
   {
     name: 'resendConfirmationEmail',
   }
-)(__Confirm__)
+)(__Confirm__);
 
 export const Bookmarklet = props => (
   <Banner bg="state.neutral" color="gray.base" iconName="Question" {...props}>
@@ -85,7 +85,7 @@ export const Bookmarklet = props => (
 
     <ButtonLink href="/tools/bookmarklet">Install</ButtonLink>
   </Banner>
-)
+);
 
 export const Invite = props => (
   <Banner bg="state.neutral" color="gray.base" iconName="Info" {...props}>
@@ -93,7 +93,7 @@ export const Invite = props => (
 
     <ButtonLink href="/tools/send-invitation">Send invite</ButtonLink>
   </Banner>
-)
+);
 
 export const ProposePremium = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
@@ -108,7 +108,7 @@ export const ProposePremium = props => (
       Learn more
     </ButtonLink>
   </Banner>
-)
+);
 
 export const StronglyProposePremium = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
@@ -116,10 +116,10 @@ export const StronglyProposePremium = props => (
     <a href="/settings/billing">upgrade to Premium</a>
     &nbsp;to keep working privately.
   </Banner>
-)
+);
 
 interface LoggedOutExploreBlockProps {
-  isLoggedIn: boolean
+  isLoggedIn: boolean;
 }
 
 const __LoggedOutExplore__: React.FC<LoggedOutExploreBlockProps> = ({
@@ -140,9 +140,9 @@ const __LoggedOutExplore__: React.FC<LoggedOutExploreBlockProps> = ({
 
       <ButtonLink href="/sign_up">Sign up</ButtonLink>
     </Banner>
-  ) : null
+  ) : null;
 
-export const LoggedOutExplore = WithLoginStatus(__LoggedOutExplore__)
+export const LoggedOutExplore = WithLoginStatus(__LoggedOutExplore__);
 
 const __LoggedOutProfile__: React.FC<LoggedOutProfileProps> = ({
   isLoggedIn,
@@ -166,14 +166,14 @@ const __LoggedOutProfile__: React.FC<LoggedOutProfileProps> = ({
 
       <ButtonLink href="/explore">Explore</ButtonLink>
     </Banner>
-  ) : null
+  ) : null;
 
 interface LoggedOutProfileProps {
-  isLoggedIn: boolean
-  name: string
+  isLoggedIn: boolean;
+  name: string;
 }
 
-export const LoggedOutProfile = WithLoginStatus(__LoggedOutProfile__)
+export const LoggedOutProfile = WithLoginStatus(__LoggedOutProfile__);
 
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
@@ -183,4 +183,4 @@ export default {
   INVITE: Invite,
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
-}
+};

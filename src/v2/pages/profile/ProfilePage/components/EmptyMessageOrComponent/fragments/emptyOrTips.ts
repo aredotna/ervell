@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment EmptyOrTips on Identifiable {
@@ -14,4 +14,4 @@ export default gql`
       is_current_user_a_member
     }
   }
-`
+`;

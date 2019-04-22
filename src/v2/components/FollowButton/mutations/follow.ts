@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import followableFragment from 'v2/components/FollowButton/fragments/followable'
+import followableFragment from 'v2/components/FollowButton/fragments/followable';
 
 export default gql`
   mutation FollowMutation($id: ID!, $type: FollowableTypeEnum!) {
@@ -13,4 +13,4 @@ export default gql`
     }
   }
   ${followableFragment}
-`
+`;

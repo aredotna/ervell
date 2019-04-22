@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import compactChannelFragment from 'v2/components/CompactChannel/fragments/compactChannel'
+import compactChannelFragment from 'v2/components/CompactChannel/fragments/compactChannel';
 
 export default gql`
   fragment ProfileChannelIndex on Identifiable {
@@ -30,4 +30,4 @@ export default gql`
     }
   }
   ${compactChannelFragment}
-`
+`;

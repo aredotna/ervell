@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment BlockLightboxLink on Konnectable {
@@ -16,4 +16,4 @@ export default gql`
       }
     }
   }
-`
+`;

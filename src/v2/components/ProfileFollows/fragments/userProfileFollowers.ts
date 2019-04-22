@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell'
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
+import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell';
+import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 export default gql`
   fragment UserProfileFollowers on User {
@@ -14,4 +14,4 @@ export default gql`
   }
   ${identifiableCellFragment}
   ${konnectableCellFragment}
-`
+`;

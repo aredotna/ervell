@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment Mutable on MutableType {
@@ -12,4 +12,4 @@ export default gql`
       is_muted
     }
   }
-`
+`;

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment CreateGroup on Me {
@@ -6,4 +6,4 @@ export default gql`
     id
     has_seen_new_group_explanation: flag(name: "has_seen_new_group_explanation")
   }
-`
+`;

@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import myCreditCardFragment from 'v2/components/MyCreditCard/fragments/myCreditCard'
-import cancellationNoticeFragment from 'v2/components/Billing/components/CancellationNotice/fragments/cancellationNotice'
+import myCreditCardFragment from 'v2/components/MyCreditCard/fragments/myCreditCard';
+import cancellationNoticeFragment from 'v2/components/Billing/components/CancellationNotice/fragments/cancellationNotice';
 
 export default gql`
   fragment BillingFormCustomer on Customer {
@@ -34,4 +34,4 @@ export default gql`
   }
   ${myCreditCardFragment}
   ${cancellationNoticeFragment}
-`
+`;

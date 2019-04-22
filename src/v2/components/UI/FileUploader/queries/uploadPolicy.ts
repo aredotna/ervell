@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import uploadPolicyFragment from 'v2/components/UI/FileUploader/fragments/uploadPolicy'
+import uploadPolicyFragment from 'v2/components/UI/FileUploader/fragments/uploadPolicy';
 
 export default gql`
   query UploadPolicy {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${uploadPolicyFragment}
-`
+`;

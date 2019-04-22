@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import myCreditCardFragment from 'v2/components/MyCreditCard/fragments/myCreditCard'
+import myCreditCardFragment from 'v2/components/MyCreditCard/fragments/myCreditCard';
 
 export default gql`
   mutation ChangeDefaultCreditCard($default_credit_card_id: String!) {
@@ -15,4 +15,4 @@ export default gql`
     }
   }
   ${myCreditCardFragment}
-`
+`;

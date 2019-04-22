@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar'
+import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar';
 
 export default gql`
   fragment UserSelector on User {
@@ -17,4 +17,4 @@ export default gql`
     ...UserAvatar
   }
   ${userAvatarFragment}
-`
+`;

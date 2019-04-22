@@ -1,11 +1,11 @@
-import { renderToStringWithData } from 'react-apollo'
-import { ServerStyleSheet } from 'styled-components'
+import { renderToStringWithData } from 'react-apollo';
+import { ServerStyleSheet } from 'styled-components';
 
-import { wrapWithProviders } from 'v2/apollo'
+import { wrapWithProviders } from 'v2/apollo';
 
 export const renderInlineComponent = ({ client, Component, props = {} }) => {
-  const sheet = new ServerStyleSheet()
-  const WrappedComponent = wrapWithProviders(client)(Component, props)
+  const sheet = new ServerStyleSheet();
+  const WrappedComponent = wrapWithProviders(client)(Component, props);
 
   return renderToStringWithData(sheet.collectStyles(WrappedComponent)).then(
     html => ({
@@ -14,8 +14,8 @@ export const renderInlineComponent = ({ client, Component, props = {} }) => {
       state: client.extract(),
       styles: sheet.getStyleTags(),
     })
-  )
-}
+  );
+};
 
 // What's different if we're rendering a full page?
 // - Uses `getStyleElement` to get a React component instead of static style markup.
@@ -24,12 +24,12 @@ export const renderInlineComponent = ({ client, Component, props = {} }) => {
 // TODO: We should be able to do away with inline rendering entirely once Jade
 // is no longer needed.
 export const renderPageComponent = ({ client, Component, props = {} }) => {
-  const sheet = new ServerStyleSheet()
-  const helmetContext: any = {}
+  const sheet = new ServerStyleSheet();
+  const helmetContext: any = {};
   const WrappedComponent = wrapWithProviders(client, helmetContext)(
     Component,
     props
-  )
+  );
 
   return renderToStringWithData(sheet.collectStyles(WrappedComponent)).then(
     html => ({
@@ -39,13 +39,13 @@ export const renderPageComponent = ({ client, Component, props = {} }) => {
       styles: sheet.getStyleElement(),
       helmet: helmetContext.helmet,
     })
-  )
-}
+  );
+};
 
 export default client => (Component, props = {}, options: any = {}) => {
   if (options.mode === 'page') {
-    return renderPageComponent({ client, Component, props })
+    return renderPageComponent({ client, Component, props });
   }
 
-  return renderInlineComponent({ client, Component, props })
-}
+  return renderInlineComponent({ client, Component, props });
+};

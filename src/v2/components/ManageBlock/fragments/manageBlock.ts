@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment ManageBlock on Konnectable {
@@ -14,4 +14,4 @@ export default gql`
       editable_content: content(format: MARKDOWN)
     }
   }
-`
+`;

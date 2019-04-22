@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment DefaultCreditCard on CreditCard {
@@ -9,4 +9,4 @@ export default gql`
     exp_year
     exp_month
   }
-`
+`;

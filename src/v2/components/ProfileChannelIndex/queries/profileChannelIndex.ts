@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import profileChannelIndexFragment from 'v2/components/ProfileChannelIndex/fragments/profileChannelIndex'
+import profileChannelIndexFragment from 'v2/components/ProfileChannelIndex/fragments/profileChannelIndex';
 
 export default gql`
   query ProfileChannelIndex($id: ID!, $type: IndexedChannelsTypes) {
@@ -12,4 +12,4 @@ export default gql`
     }
   }
   ${profileChannelIndexFragment}
-`
+`;

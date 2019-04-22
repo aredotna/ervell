@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import manageCollaboratorsFragment from 'v2/components/ManageCollaborators/fragments/manageCollaborators'
+import manageCollaboratorsFragment from 'v2/components/ManageCollaborators/fragments/manageCollaborators';
 
 export default gql`
   mutation addChannelMemberMutation(
@@ -20,4 +20,4 @@ export default gql`
     }
   }
   ${manageCollaboratorsFragment}
-`
+`;

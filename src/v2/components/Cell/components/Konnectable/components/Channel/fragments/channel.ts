@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import channelOverlayFragment from 'v2/components/Cell/components/Konnectable/components/ChannelOverlay/fragments/channelOverlay'
+import channelOverlayFragment from 'v2/components/Cell/components/Konnectable/components/ChannelOverlay/fragments/channelOverlay';
 
 export default gql`
   fragment Channel on Channel {
@@ -28,4 +28,4 @@ export default gql`
     ...ChannelOverlay
   }
   ${channelOverlayFragment}
-`
+`;

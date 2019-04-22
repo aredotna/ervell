@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import muteChannelButtonFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton/fragments/muteChannelButton'
+import muteChannelButtonFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataActions/components/MuteChannelButton/fragments/muteChannelButton';
 
 export default gql`
   fragment ChannelMetadataActions on Channel {
@@ -15,4 +15,4 @@ export default gql`
     ...MuteChannelButton
   }
   ${muteChannelButtonFragment}
-`
+`;

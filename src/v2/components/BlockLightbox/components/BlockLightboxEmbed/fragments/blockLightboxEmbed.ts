@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment BlockLightboxEmbed on Konnectable {
@@ -10,4 +10,4 @@ export default gql`
       embed_height
     }
   }
-`
+`;

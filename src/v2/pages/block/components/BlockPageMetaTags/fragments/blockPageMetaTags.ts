@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment BlockPageMetaTags on Konnectable {
@@ -27,4 +27,4 @@ export default gql`
       meta_image: image_url(size: DISPLAY)
     }
   }
-`
+`;

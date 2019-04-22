@@ -1,65 +1,65 @@
-import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
-import { injectStripe } from 'react-stripe-elements'
-import { compose, graphql } from 'react-apollo'
+import React, { PureComponent } from 'react';
+import { propType } from 'graphql-anywhere';
+import { injectStripe } from 'react-stripe-elements';
+import { compose, graphql } from 'react-apollo';
 
-import mapErrors from 'v2/util/mapErrors'
+import mapErrors from 'v2/util/mapErrors';
 
-import billingQuery from 'v2/components/Billing/queries/billing'
+import billingQuery from 'v2/components/Billing/queries/billing';
 
-import subscribeToPremiumMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremium'
-import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription'
-import applyCouponToSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/applyCouponToSubscription'
+import subscribeToPremiumMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremium';
+import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription';
+import applyCouponToSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/applyCouponToSubscription';
 
-import billingFormFragment from 'v2/components/Billing/components/BillingForm/fragments/billingForm'
+import billingFormFragment from 'v2/components/Billing/components/BillingForm/fragments/billingForm';
 
-import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
-import Alert from 'v2/components/UI/Alert'
-import ErrorAlert from 'v2/components/UI/ErrorAlert'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
-import GenericButton from 'v2/components/UI/GenericButton'
-import Icons from 'v2/components/UI/Icons'
-import PlanSelection from 'v2/components/Billing/components/PlanSelection'
-import CouponCode from 'v2/components/Billing/components/CouponCode'
-import CreditCard from 'v2/components/Billing/components/CreditCard'
-import PlanChanges from 'v2/components/Billing/components/PlanChanges'
-import CancellationNotice from 'v2/components/Billing/components/CancellationNotice'
-import CancelPremium from 'v2/components/Billing/components/CancelPremium'
-import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
+import Box from 'v2/components/UI/Box';
+import Text from 'v2/components/UI/Text';
+import Alert from 'v2/components/UI/Alert';
+import ErrorAlert from 'v2/components/UI/ErrorAlert';
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
+import GenericButton from 'v2/components/UI/GenericButton';
+import Icons from 'v2/components/UI/Icons';
+import PlanSelection from 'v2/components/Billing/components/PlanSelection';
+import CouponCode from 'v2/components/Billing/components/CouponCode';
+import CreditCard from 'v2/components/Billing/components/CreditCard';
+import PlanChanges from 'v2/components/Billing/components/PlanChanges';
+import CancellationNotice from 'v2/components/Billing/components/CancellationNotice';
+import CancelPremium from 'v2/components/Billing/components/CancelPremium';
+import StatusOverlay from 'v2/components/Billing/components/StatusOverlay';
 
 const OPERATIONS = {
   CHANGE_PLAN_ID: 'CHANGE_PLAN_ID',
   CANCEL_PREMIUM_SUBSCRIPTION: 'CANCEL_PREMIUM_SUBSCRIPTION',
   APPLY_COUPON_CODE: 'APPLY_COUPON_CODE',
-}
+};
 
 interface BillingFormProps {
-  applyCouponToSubscription: any
-  cancelPremiumSubscription: any
-  me: any
-  onSuccess?: any
-  plan_id?: string
-  subscribeToPremium: any // FIXME: Type
+  applyCouponToSubscription: any;
+  cancelPremiumSubscription: any;
+  me: any;
+  onSuccess?: any;
+  plan_id?: string;
+  subscribeToPremium: any; // FIXME: Type
 }
 
 interface BillingFormState {
-  mode: string
-  errorMessage: string
-  operations: any[]
-  plan_id: string
-  coupon_code: string
+  mode: string;
+  errorMessage: string;
+  operations: any[];
+  plan_id: string;
+  coupon_code: string;
 }
 
 class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
   static propTypes = {
     me: propType(billingFormFragment).isRequired, // TODO: Figure out how to move this to TS
-  }
+  };
 
   static defaultProps = {
     plan_id: null,
     onSuccess: () => null,
-  }
+  };
 
   state = {
     mode: 'resting',
@@ -67,45 +67,45 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
     operations: [],
     plan_id: this.props.me.customer.plan.id,
     coupon_code: '',
-  }
+  };
 
   componentDidMount() {
     if (this.props.plan_id) {
-      this.handlePlan(this.props.plan_id)
+      this.handlePlan(this.props.plan_id);
     }
   }
 
   doWeNeedTo = operationName =>
-    this.state.operations.includes(OPERATIONS[operationName])
+    this.state.operations.includes(OPERATIONS[operationName]);
 
   addOperation = (currentOperations = [], operationName) => [
     ...new Set([...currentOperations, OPERATIONS[operationName]]),
-  ]
+  ];
 
   removeOperation = (currentOperations, operationName) => {
-    const set = new Set(currentOperations)
-    set.delete(OPERATIONS[operationName])
-    return [...set]
-  }
+    const set = new Set(currentOperations);
+    set.delete(OPERATIONS[operationName]);
+    return [...set];
+  };
 
   applyCouponToSubscription = () => {
-    const { applyCouponToSubscription } = this.props
-    const { coupon_code } = this.state
+    const { applyCouponToSubscription } = this.props;
+    const { coupon_code } = this.state;
 
     return applyCouponToSubscription({
       variables: { coupon_code },
-    })
-  }
+    });
+  };
 
   subscribeToPremium = () => {
-    const { plan_id, coupon_code } = this.state
+    const { plan_id, coupon_code } = this.state;
     const {
       subscribeToPremium,
       me: { customer },
-    } = this.props
+    } = this.props;
 
     if (!customer.default_credit_card) {
-      return Promise.reject(new Error('Please add a credit card to continue'))
+      return Promise.reject(new Error('Please add a credit card to continue'));
     }
 
     return subscribeToPremium({
@@ -116,20 +116,20 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       },
       refetchQueries: [{ query: billingQuery }],
       awaitRefetchQueries: true,
-    })
-  }
+    });
+  };
 
   handleErrors = err => {
     this.setState({
       mode: 'error',
       ...mapErrors(err),
-    })
-  }
+    });
+  };
 
   handlePlan = plan_id => {
     const {
       me: { customer },
-    } = this.props
+    } = this.props;
 
     if (plan_id === customer.plan.id) {
       return this.setState(prevState => ({
@@ -138,14 +138,14 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
           prevState.operations,
           'CHANGE_PLAN_ID'
         ),
-      }))
+      }));
     }
 
     return this.setState(prevState => ({
       plan_id,
       operations: this.addOperation(prevState.operations, 'CHANGE_PLAN_ID'),
-    }))
-  }
+    }));
+  };
 
   handleCouponCode = coupon_code => {
     this.setState(prevState => ({
@@ -154,19 +154,19 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
         prevState.operations,
         'APPLY_COUPON_CODE'
       ),
-    }))
-  }
+    }));
+  };
 
   handleReenable = e => {
     const {
       me: { customer },
-    } = this.props
+    } = this.props;
 
     if (customer.is_beneficiary) {
       return this.setState({
         mode: 'error',
         errorMessage: 'Contact your group administrator',
-      })
+      });
     }
 
     return this.setState(
@@ -175,8 +175,8 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
         operations: this.addOperation(prevState.operations, 'CHANGE_PLAN_ID'),
       }),
       () => this.handleSubmit(e)
-    )
-  }
+    );
+  };
 
   handleCancelPremium = e => {
     this.setState(
@@ -187,18 +187,18 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
         ),
       }),
       () => {
-        this.handleSubmit(e)
+        this.handleSubmit(e);
       }
-    )
-  }
+    );
+  };
 
   handleSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { plan_id } = this.state
-    const { cancelPremiumSubscription, onSuccess } = this.props
+    const { plan_id } = this.state;
+    const { cancelPremiumSubscription, onSuccess } = this.props;
 
-    this.setState({ mode: 'processing' })
+    this.setState({ mode: 'processing' });
 
     if (
       this.doWeNeedTo('CANCEL_PREMIUM_SUBSCRIPTION') ||
@@ -208,7 +208,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
     ) {
       return cancelPremiumSubscription()
         .then(() => this.resolveWithMode('canceled'))
-        .catch(this.handleErrors)
+        .catch(this.handleErrors);
     }
 
     // Otherwise we are subscribing.
@@ -218,29 +218,29 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       // if we are also going to change the plan up
       !this.doWeNeedTo('CHANGE_PLAN_ID')
         ? this.applyCouponToSubscription()
-        : Promise.resolve()
+        : Promise.resolve();
 
     return waitForCouponCode
       .then(() => {
         // Now we can change the plan id if we need to
         if (this.doWeNeedTo('CHANGE_PLAN_ID')) {
-          return this.subscribeToPremium()
+          return this.subscribeToPremium();
         }
-        return null
+        return null;
       })
       .then(() => {
         // Most of the time, this will mean nothing.
         // But when we are embedding the billing page elsewhere,
         // we can trigger a redirect using this prop.
-        onSuccess()
+        onSuccess();
 
         const resolution = this.doWeNeedTo('CHANGE_PLAN_ID')
           ? 'subscribed'
-          : 'card_changed'
-        return this.resolveWithMode(resolution)
+          : 'card_changed';
+        return this.resolveWithMode(resolution);
       })
-      .catch(this.handleErrors)
-  }
+      .catch(this.handleErrors);
+  };
 
   resolveWithMode = mode => {
     this.setState({
@@ -249,20 +249,20 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       coupon_code: '',
       errorMessage: null,
       operations: [],
-    })
+    });
 
-    setTimeout(() => this.setState({ mode: 'resting' }), 10000)
-  }
+    setTimeout(() => this.setState({ mode: 'resting' }), 10000);
+  };
 
   render() {
-    const { mode, errorMessage, plan_id, coupon_code, operations } = this.state
+    const { mode, errorMessage, plan_id, coupon_code, operations } = this.state;
     const {
       me,
       me: { customer },
-    } = this.props
+    } = this.props;
 
-    const isPlanChanged = plan_id !== customer.plan.id
-    const fromPlanToPlan = `${customer.plan.id}:${plan_id}`
+    const isPlanChanged = plan_id !== customer.plan.id;
+    const fromPlanToPlan = `${customer.plan.id}:${plan_id}`;
 
     return (
       <Box>
@@ -417,7 +417,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
             )}
         </form>
       </Box>
-    )
+    );
   }
 }
 
@@ -431,4 +431,4 @@ export default injectStripe(
       name: 'applyCouponToSubscription',
     })
   )(BillingForm)
-)
+);

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment UpgradeCTA on Group {
@@ -24,4 +24,4 @@ export default gql`
       is_premium
     }
   }
-`
+`;

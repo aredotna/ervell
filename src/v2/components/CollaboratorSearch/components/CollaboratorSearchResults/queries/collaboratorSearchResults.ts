@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import collaboratorSearchResultsFragment from 'v2/components/CollaboratorSearch/components/CollaboratorSearchResults/fragments/collaboratorSearchResults'
+import collaboratorSearchResultsFragment from 'v2/components/CollaboratorSearch/components/CollaboratorSearchResults/fragments/collaboratorSearchResults';
 
 export default gql`
   query CollaboratorSearchQuery(
@@ -12,4 +12,4 @@ export default gql`
     }
   }
   ${collaboratorSearchResultsFragment}
-`
+`;

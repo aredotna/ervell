@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import myGroupCheckoutFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/fragments/myGroupCheckout'
+import myGroupCheckoutFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/fragments/myGroupCheckout';
 
 export default gql`
   mutation SubscribeToPremiumForUsers(
@@ -27,4 +27,4 @@ export default gql`
     }
   }
   ${myGroupCheckoutFragment}
-`
+`;

@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import billingFragment from 'v2/components/Billing/fragments/billing'
+import billingFragment from 'v2/components/Billing/fragments/billing';
 
 export default gql`
   query Billing {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${billingFragment}
-`
+`;

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment ChannelShareButton on Channel {
@@ -11,4 +11,4 @@ export default gql`
       facebook_url
     }
   }
-`
+`;

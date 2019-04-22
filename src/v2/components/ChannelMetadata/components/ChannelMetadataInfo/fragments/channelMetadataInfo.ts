@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment ChannelMetadataInfo on Channel {
@@ -17,4 +17,4 @@ export default gql`
       name
     }
   }
-`
+`;

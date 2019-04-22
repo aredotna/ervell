@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import newChannelGroupsFragment from 'v2/components/NewChannelForm/components/NewChannelGroups/fragments/newChannelGroups'
+import newChannelGroupsFragment from 'v2/components/NewChannelForm/components/NewChannelGroups/fragments/newChannelGroups';
 
 export default gql`
   query NewChannelQuery {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${newChannelGroupsFragment}
-`
+`;

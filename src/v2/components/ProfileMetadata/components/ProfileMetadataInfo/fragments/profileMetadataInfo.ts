@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment ProfileMetadataInfo on Identifiable {
@@ -24,4 +24,4 @@ export default gql`
       }
     }
   }
-`
+`;

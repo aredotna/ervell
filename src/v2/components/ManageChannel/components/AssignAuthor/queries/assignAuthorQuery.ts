@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import avatarFragment from 'v2/components/UserAvatar/fragments/userAvatar'
-import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar'
+import avatarFragment from 'v2/components/UserAvatar/fragments/userAvatar';
+import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar';
 
 export default gql`
   query AssignAuthorQuery {
@@ -21,4 +21,4 @@ export default gql`
   }
   ${memberAvatarFragment}
   ${avatarFragment}
-`
+`;

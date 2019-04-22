@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   env: {
@@ -84,4 +84,4 @@ module.exports = {
     ],
     'no-underscore-dangle': 0,
   },
-}
+};

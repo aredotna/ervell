@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import manageChannelFragment from 'v2/components/ManageChannel/fragments/manageChannel'
+import manageChannelFragment from 'v2/components/ManageChannel/fragments/manageChannel';
 
 export default gql`
   mutation updateChannelMutation(
@@ -27,4 +27,4 @@ export default gql`
     }
   }
   ${manageChannelFragment}
-`
+`;

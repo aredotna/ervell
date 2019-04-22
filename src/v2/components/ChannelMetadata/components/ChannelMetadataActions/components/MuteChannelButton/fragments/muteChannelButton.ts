@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment MuteChannelButton on Channel {
@@ -6,4 +6,4 @@ export default gql`
     id
     is_muted
   }
-`
+`;

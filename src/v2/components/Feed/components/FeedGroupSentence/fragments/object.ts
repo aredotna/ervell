@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment FeedObject on DeedKind {
@@ -34,4 +34,4 @@ export default gql`
       href
     }
   }
-`
+`;

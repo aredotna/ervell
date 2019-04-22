@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import connectTwitterFragment from 'v2/components/ConnectTwitter/fragments/connectTwitter'
+import connectTwitterFragment from 'v2/components/ConnectTwitter/fragments/connectTwitter';
 
 export default gql`
   query ConnectTwitterQuery($per: Int, $page: Int) {
@@ -10,4 +10,4 @@ export default gql`
     }
   }
   ${connectTwitterFragment}
-`
+`;

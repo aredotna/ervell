@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import blockLightboxShareFragment from 'v2/components/BlockLightbox/components/BlockLightboxShare/fragments/blockLightboxShare'
+import blockLightboxShareFragment from 'v2/components/BlockLightbox/components/BlockLightboxShare/fragments/blockLightboxShare';
 
 export default gql`
   fragment BlockLightboxActions on Konnectable {
@@ -25,4 +25,4 @@ export default gql`
     ...BlockLightboxShare
   }
   ${blockLightboxShareFragment}
-`
+`;

@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { compose, graphql } from 'react-apollo'
-import { propType } from 'graphql-anywhere'
-import gql from 'graphql-tag'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { compose, graphql } from 'react-apollo';
+import { propType } from 'graphql-anywhere';
+import gql from 'graphql-tag';
 
-import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers'
+import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers';
 
-import manageCollaboratorsQuery from 'v2/components/ManageCollaborators/queries/manageCollaborators'
+import manageCollaboratorsQuery from 'v2/components/ManageCollaborators/queries/manageCollaborators';
 
-import addGroupUserMutation from 'v2/components/ManageGroup/components/ManageUsers/mutations/addGroupUser'
-import removeGroupUserMutation from 'v2/components/ManageGroup/components/ManageUsers/mutations/removeGroupUser'
-import inviteGroupUserMutation from 'v2/components/ManageGroup/components/ManageUsers/mutations/inviteGroupUser'
+import addGroupUserMutation from 'v2/components/ManageGroup/components/ManageUsers/mutations/addGroupUser';
+import removeGroupUserMutation from 'v2/components/ManageGroup/components/ManageUsers/mutations/removeGroupUser';
+import inviteGroupUserMutation from 'v2/components/ManageGroup/components/ManageUsers/mutations/inviteGroupUser';
 
-import Box from 'v2/components/UI/Box'
-import CollaboratorSearch from 'v2/components/CollaboratorSearch'
-import ManagedMembers from 'v2/components/ManagedMembers'
+import Box from 'v2/components/UI/Box';
+import CollaboratorSearch from 'v2/components/CollaboratorSearch';
+import ManagedMembers from 'v2/components/ManagedMembers';
 
-import profileGroupUserListFragment from 'v2/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList'
+import profileGroupUserListFragment from 'v2/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList';
 
 class ManageUsers extends Component {
   static propTypes = {
@@ -25,14 +25,14 @@ class ManageUsers extends Component {
     addGroupUser: PropTypes.func.isRequired,
     removeGroupUser: PropTypes.func.isRequired,
     inviteGroupUser: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     channel_id: null,
-  }
+  };
 
   getRefetchQueries = () => {
-    const { group, channel_id } = this.props
+    const { group, channel_id } = this.props;
 
     if (channel_id) {
       return [
@@ -40,7 +40,7 @@ class ManageUsers extends Component {
           query: manageCollaboratorsQuery,
           variables: { channel_id },
         },
-      ]
+      ];
     }
 
     return [
@@ -56,49 +56,49 @@ class ManageUsers extends Component {
         ${profileGroupUserListFragment}
       `,
       },
-    ]
-  }
+    ];
+  };
 
   handleAddUser = ({ member_id: user_id }) => {
-    const { addGroupUser, group } = this.props
+    const { addGroupUser, group } = this.props;
 
-    const variables = { id: group.id, user_id }
-    const refetchQueries = this.getRefetchQueries()
+    const variables = { id: group.id, user_id };
+    const refetchQueries = this.getRefetchQueries();
 
     return addGroupUser({
       variables,
       refetchQueries,
-    })
-  }
+    });
+  };
 
   handleRemoveUser = ({ member_id: user_id }) => {
-    const { removeGroupUser, group } = this.props
+    const { removeGroupUser, group } = this.props;
 
-    const variables = { id: group.id, user_id }
-    const refetchQueries = this.getRefetchQueries()
+    const variables = { id: group.id, user_id };
+    const refetchQueries = this.getRefetchQueries();
 
     return removeGroupUser({
       variables,
       refetchQueries,
-    })
-  }
+    });
+  };
 
   handleInviteUser = ({ email }) => {
-    const { inviteGroupUser, group } = this.props
+    const { inviteGroupUser, group } = this.props;
 
-    const variables = { id: group.id, email }
-    const refetchQueries = this.getRefetchQueries()
+    const variables = { id: group.id, email };
+    const refetchQueries = this.getRefetchQueries();
 
     return inviteGroupUser({
       variables,
       refetchQueries,
-    })
-  }
+    });
+  };
 
   render() {
     const {
       group: { name, owner, memberships },
-    } = this.props
+    } = this.props;
 
     return (
       <div>
@@ -123,7 +123,7 @@ class ManageUsers extends Component {
           />
         </Box>
       </div>
-    )
+    );
   }
 }
 
@@ -131,4 +131,4 @@ export default compose(
   graphql(addGroupUserMutation, { name: 'addGroupUser' }),
   graphql(removeGroupUserMutation, { name: 'removeGroupUser' }),
   graphql(inviteGroupUserMutation, { name: 'inviteGroupUser' })
-)(ManageUsers)
+)(ManageUsers);

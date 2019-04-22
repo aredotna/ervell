@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel'
+import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
 
 export default gql`
   query RecentChannelsQuery {
@@ -13,4 +13,4 @@ export default gql`
     }
   }
   ${selectableChannelFragment}
-`
+`;

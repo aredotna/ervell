@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   query SerializeMeQuery {
@@ -11,4 +11,4 @@ export default gql`
       authentication_token
     }
   }
-`
+`;

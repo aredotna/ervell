@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment UpcomingInvoice on Customer {
@@ -9,4 +9,4 @@ export default gql`
       next_payment_attempt_at(format: "%D")
     }
   }
-`
+`;

@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
-import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel'
+import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell';
+import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel';
 
 export default gql`
   fragment ProfileChannelSearch on Identifiable {
@@ -46,4 +46,4 @@ export default gql`
   }
   ${konnectableCellFragment}
   ${blokkChannelFragment}
-`
+`;

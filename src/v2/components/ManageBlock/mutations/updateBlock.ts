@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox'
+import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox';
 
 export default gql`
   mutation updateBlockMutation(
@@ -23,4 +23,4 @@ export default gql`
     }
   }
   ${blockLightboxFragment}
-`
+`;

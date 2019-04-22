@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   fragment AvatarUploader on Me {
@@ -16,4 +16,4 @@ export default gql`
       success_action_status
     }
   }
-`
+`;

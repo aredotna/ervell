@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import profileContentsFragment from 'v2/components/ProfileContents/fragments/profileContents'
+import profileContentsFragment from 'v2/components/ProfileContents/fragments/profileContents';
 
 export default gql`
   query ProfileContents(
@@ -20,4 +20,4 @@ export default gql`
     }
   }
   ${profileContentsFragment}
-`
+`;

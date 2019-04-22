@@ -1,38 +1,38 @@
-import 'isomorphic-fetch'
-import sharify from 'sharify'
-import React from 'react'
-import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-import { setContext } from 'apollo-link-context'
+import 'isomorphic-fetch';
+import sharify from 'sharify';
+import React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
+import { BatchHttpLink } from 'apollo-link-batch-http';
+import { setContext } from 'apollo-link-context';
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
-import { withClientState } from 'apollo-link-state'
-import { HelmetProvider } from 'react-helmet-async'
+} from 'apollo-cache-inmemory';
+import { withClientState } from 'apollo-link-state';
+import { HelmetProvider } from 'react-helmet-async';
 
-import mount from 'v2/util/mount'
+import mount from 'v2/util/mount';
 
-import { Themed } from 'v2/styles/theme'
+import { Themed } from 'v2/styles/theme';
 
-import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
+import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json';
 
-import clientData from 'v2/apollo/localState/clientData'
+import clientData from 'v2/apollo/localState/clientData';
 
-const isClientSide = typeof window !== 'undefined'
+const isClientSide = typeof window !== 'undefined';
 
 const {
   data: { GRAPHQL_ENDPOINT, CLIENT_GRAPHQL_ENDPOINT },
-} = sharify
+} = sharify;
 
-const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT })
-const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT })
+const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT });
+const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT });
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
-})
+});
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN,
@@ -43,18 +43,18 @@ export const initApolloClient = ({
   sharifyData,
 }: any = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
-    return window.__APOLLO_CLIENT__
+    return window.__APOLLO_CLIENT__;
   }
 
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = new InMemoryCache({ fragmentMatcher });
 
   if (isClientSide && window.__APOLLO_STATE__) {
-    cache.restore(window.__APOLLO_STATE__)
+    cache.restore(window.__APOLLO_STATE__);
   }
 
   const {
     data: { X_APP_TOKEN, X_SHARE_TOKEN },
-  } = sharify
+  } = sharify;
 
   const stateLink = withClientState({
     cache,
@@ -84,12 +84,12 @@ export const initApolloClient = ({
       },
       Sharify: {
         get: (_obj, args) => {
-          const value = sharifyData[args.name]
-          return value === undefined ? null : value
+          const value = sharifyData[args.name];
+          return value === undefined ? null : value;
         },
       },
     },
-  })
+  });
 
   const authLink = setContext((_, { headers }) => ({
     headers: {
@@ -98,29 +98,29 @@ export const initApolloClient = ({
       ...(X_APP_TOKEN && { 'X-APP-TOKEN': X_APP_TOKEN }),
       ...(X_SHARE_TOKEN && { 'X-SHARE-TOKEN': X_SHARE_TOKEN }),
     },
-  }))
+  }));
 
-  const httpLink = isClientSide ? clientHttpLink : serverHttpLink
+  const httpLink = isClientSide ? clientHttpLink : serverHttpLink;
 
-  const link = ApolloLink.from([authLink, stateLink, httpLink])
+  const link = ApolloLink.from([authLink, stateLink, httpLink]);
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
     link,
     cache,
-  })
+  });
 
   if (isClientSide) {
-    window.__APOLLO_CLIENT__ = client
+    window.__APOLLO_CLIENT__ = client;
   }
 
-  return client
-}
+  return client;
+};
 
-export const initClientSideApolloClient = () => initApolloClient(clientData())
+export const initClientSideApolloClient = () => initApolloClient(clientData());
 
 if (isClientSide) {
-  initClientSideApolloClient()
+  initClientSideApolloClient();
 }
 
 export const wrapWithProviders = (
@@ -134,13 +134,13 @@ export const wrapWithProviders = (
       </Themed>
     </ApolloProvider>
   </HelmetProvider>
-)
+);
 
 export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
-  if (!mountNode) return null
+  if (!mountNode) return null;
 
-  const client = initClientSideApolloClient()
-  const WrappedComponent = wrapWithProviders(client)(Component, props)
+  const client = initClientSideApolloClient();
+  const WrappedComponent = wrapWithProviders(client)(Component, props);
 
-  return mount(WrappedComponent, mountNode)
-}
+  return mount(WrappedComponent, mountNode);
+};

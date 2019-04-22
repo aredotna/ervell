@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
   query SearchUiState {
@@ -8,4 +8,4 @@ export default gql`
       block_filter: get(name: "Search--block_filter")
     }
   }
-`
+`;

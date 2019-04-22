@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 // Configuration for the vscode-apollo extension and other Apollo tooling.
 module.exports = {
@@ -25,4 +25,4 @@ module.exports = {
     includes: ['src/**'],
     tagName: 'gql',
   },
-}
+};

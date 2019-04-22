@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar'
-import upcomingInvoiceFragment from 'v2/components/Billing/components/UpcomingInvoice/fragments/upcomingInvoice'
+import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar';
+import upcomingInvoiceFragment from 'v2/components/Billing/components/UpcomingInvoice/fragments/upcomingInvoice';
 
 export default gql`
   fragment MyHeader on Me {
@@ -15,4 +15,4 @@ export default gql`
   }
   ${userAvatarFragment}
   ${upcomingInvoiceFragment}
-`
+`;

@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import React, { PureComponent } from 'react';
+import { propType } from 'graphql-anywhere';
 
-import cancellationNoticeFragment from 'v2/components/Billing/components/CancellationNotice/fragments/cancellationNotice'
+import cancellationNoticeFragment from 'v2/components/Billing/components/CancellationNotice/fragments/cancellationNotice';
 
-import Alert from 'v2/components/UI/Alert'
-import Box from 'v2/components/UI/Box'
-import { SpaceProps } from 'styled-system'
+import Alert from 'v2/components/UI/Alert';
+import Box from 'v2/components/UI/Box';
+import { SpaceProps } from 'styled-system';
 
 interface CancellationNoticeProps extends SpaceProps {
-  onReenable: any // FIXME: Type
-  customer: any // FIXME: Type
+  onReenable: any; // FIXME: Type
+  customer: any; // FIXME: Type
 }
 
 export default class CancellationNotice extends PureComponent<
@@ -17,14 +17,14 @@ export default class CancellationNotice extends PureComponent<
 > {
   static propTypes = {
     customer: propType(cancellationNoticeFragment).isRequired,
-  }
+  };
 
   render() {
     const {
       onReenable,
       customer: { current_period_end_at },
       ...rest
-    } = this.props
+    } = this.props;
 
     return (
       <Alert isCloseable={false} {...rest}>
@@ -37,6 +37,6 @@ export default class CancellationNotice extends PureComponent<
           </Box>
         </Box>
       </Alert>
-    )
+    );
   }
 }
