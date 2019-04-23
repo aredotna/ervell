@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { graphql } from 'react-apollo';
+import { omit } from 'underscore';
 
 import Layout from 'extension/src/components/Layout';
 import Messenger from 'extension/src/lib/Messenger';
-import { ExtensionContext } from 'extension/src/components/Extension';
+import withExtensionContext from 'extension/src/components/Extension/withExtension';
 
 import Text from 'react/components/UI/Text';
 import Box from 'react/components/UI/Box';
@@ -12,6 +15,8 @@ import Count from 'react/components/UI/Count';
 
 import Block from 'extension/src/components/Blocks/components/Block';
 import SelectedChannel from 'extension/src/components/Blocks/components/SelectedChannel';
+
+import createBlockMutation from 'extension/src/components/Blocks/mutations/createBlock';
 
 const Container = styled(Box)`
   display: flex;
@@ -54,6 +59,12 @@ const Bottom = styled(Box)`
 `;
 
 class Blocks extends Component {
+  static propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    context: PropTypes.object.isRequired,
+    createBlock: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.messenger = new Messenger(window.top);
@@ -65,38 +76,52 @@ class Blocks extends Component {
     });
   }
 
+  saveAndClose = () => {
+    const { createBlock, context: { blocks, selectedChannel } } = this.props;
+
+    Promise.all(blocks.map((block) => {
+      const values = { ...omit(block, 'id', 'type'), channel_id: selectedChannel.id };
+
+      return createBlock({
+        variables: values,
+      });
+    })).then(() => {
+      this.messenger.send({
+        action: 'close',
+      });
+    });
+  }
+
   render() {
+    const { blocks, removeBlock } = this.props.context;
+
     return (
       <Layout>
-        <ExtensionContext.Consumer>
-          {({ blocks, removeBlock }) => (
-            <Container>
-              <Top>
-                <DropZone>
-                  <Text f={5}>Drop here to add to Are.na</Text>
-                </DropZone>
-                <BlocksContainer>
-                  {blocks.map(block => (
-                    <Block block={block} key={block.id} removeBlock={removeBlock} />
-                  ))}
-                </BlocksContainer>
-              </Top>
+        <Container>
+          <Top>
+            <DropZone>
+              <Text f={5}>Drop here to add to Are.na</Text>
+            </DropZone>
+            <BlocksContainer>
+              {blocks.map(block => (
+                <Block block={block} key={block.id} removeBlock={removeBlock} />
+              ))}
+            </BlocksContainer>
+          </Top>
 
-              <Bottom>
-                <SelectedChannel />
+          <Bottom>
+            <SelectedChannel />
 
-                {blocks.length > 0 &&
-                  <Button f={4} my={4}>
-                    Connect&nbsp;<Count label="block" amount={blocks.length} />&nbsp;→
-                  </Button>
-                }
-              </Bottom>
-            </Container>
-          )}
-        </ExtensionContext.Consumer>
+            {blocks.length > 0 &&
+              <Button f={4} my={4} onClick={this.saveAndClose}>
+                Connect&nbsp;<Count label="block" amount={blocks.length} />&nbsp;→
+              </Button>
+            }
+          </Bottom>
+        </Container>
       </Layout>
     );
   }
 }
 
-export default Blocks;
+export default withExtensionContext(graphql(createBlockMutation, { name: 'createBlock' })(Blocks));

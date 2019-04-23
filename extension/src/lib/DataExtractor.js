@@ -72,8 +72,8 @@ class DataExtractor {
   setSourceData = () => {
     this.data = {
       ...this.data,
-      originalSourceUrl: window.location.href,
-      originalSourceTitle: document.title,
+      original_source_url: window.location.href,
+      original_source_title: document.title,
     };
   }
 }
