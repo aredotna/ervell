@@ -22,7 +22,7 @@ module.exports = {
       name: 'are.na',
       url: 'https://api.are.na/graphql',
       headers: {
-        'X-APP-TOKEN': process.env.GRAPHQL_XAPP_TOKEN,
+        'X-APP-TOKEN': process.env.X_APP_TOKEN,
       },
     },
     includes: ['src/**/*.ts', 'src/v2/apollo/localState/clientSchema.graphql'],
