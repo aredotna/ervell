@@ -59,7 +59,7 @@ const config = {
           {
             loader: 'babel-loader',
             query: {
-              cacheDirectory: true,
+              cacheDirectory: '.cache',
             },
           },
         ],
