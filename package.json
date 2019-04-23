@@ -14,7 +14,9 @@
     "mocha": "sh scripts/mocha.sh",
     "predeploy": "sh scripts/predeploy.sh",
     "restart-dyno": "node bin/restart",
-    "start-dev": "node src/index.js",
+    "start": "node --max_old_space_size=4096 -r dotenv/config src/index.js",
+    "start-dev": "yarn start dotenv_config_path=./.env.staging",
+    "start-prod": "yarn start dotenv_config_path=./.env.production",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "sync-schema": "yarn run apollo schema:download src/v2/apollo/schema.json",
     "test": "sh scripts/test.sh",
@@ -26,7 +28,7 @@
   },
   "prettier": {
     "bracketSpacing": true,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
   },

@@ -1,4 +1,19 @@
-require('dotenv').config();
+const fs = require('fs')
+
+const getEnv = () => {
+  switch (true) {
+    case fs.existsSync('.env'):
+      return '.env'
+    case fs.existsSync('.env.staging'):
+      return '.env.staging'
+    case fs.existsSync('.env.production'):
+      return '.env.production'
+  }
+}
+
+require('dotenv').config({
+  path: getEnv(),
+})
 
 // Configuration for the vscode-apollo extension and other Apollo tooling.
 module.exports = {
@@ -13,4 +28,4 @@ module.exports = {
     includes: ['src/**/*.ts', 'src/v2/apollo/localState/clientSchema.graphql'],
     tagName: 'gql',
   },
-};
+}

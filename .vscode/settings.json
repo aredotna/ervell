@@ -1,5 +1,6 @@
 {
   "files.exclude": {
+    ".cache/": true,
     ".git/": true,
     "node_modules/": false,
     "public/": false
