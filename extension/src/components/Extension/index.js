@@ -12,6 +12,7 @@ export const ExtensionContext = React.createContext({
   removeBlock: () => {},
   editBlock: () => {},
   getBlock: () => {},
+  selectChannel: () => {},
 });
 
 class Extension extends Component {
@@ -92,16 +93,23 @@ class Extension extends Component {
     }
   }
 
+  selectChannel = (channel) => {
+    console.log('selectChannel', channel);
+    this.setState({
+      selectedChannel: channel,
+    });
+  }
+
   render() {
     const { blocks, selectedChannel } = this.state;
     const { children } = this.props;
     const {
-      addBlock, removeBlock, editBlock, getBlock,
+      addBlock, removeBlock, editBlock, getBlock, selectChannel,
     } = this;
 
     return (
       <ExtensionContext.Provider value={{
-        blocks, selectedChannel, addBlock, removeBlock, editBlock, getBlock,
+        blocks, selectedChannel, addBlock, removeBlock, editBlock, getBlock, selectChannel,
       }}
       >
         {children}

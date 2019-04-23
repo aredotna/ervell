@@ -3,11 +3,11 @@ import gql from 'graphql-tag';
 import selectedChannelFragment from 'extension/src/components/SelectableChannel/fragments/selectableChannel';
 
 export default gql`
-  query RecentChannelsQuery {
+  query AllChannelsQuery($page: Int) {
     me {
       __typename
       id
-      recent_channels: recent_connections(per: 10) {
+      all_channels: channels(per: 100, page: $page, sort_by: TITLE, direction: ASC) {
         ...SelectableChannel
       }
     }

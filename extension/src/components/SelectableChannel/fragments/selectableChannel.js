@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  fragment SelectedChannel on Channel {
+  fragment SelectableChannel on Channel {
     __typename
     id
-    title(truncate: 50)
+    title(truncate: 35)
     visibility
     owner {
       __typename

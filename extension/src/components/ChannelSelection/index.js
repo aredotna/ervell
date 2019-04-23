@@ -1,21 +1,59 @@
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
+import { debounce } from 'underscore';
 
 import Layout from 'extension/src/components/Layout';
-// import withExtensionContext from 'extension/src/components/Extension/withExtension';
 import Box from 'react/components/UI/Box';
 import Search from 'extension/src/components/ChannelSelection/components/Search';
 import RecentChannels from 'extension/src/components/ChannelSelection/components/RecentChannels';
 import AllChannels from 'extension/src/components/ChannelSelection/components/AllChannels';
+import SearchResults from 'extension/src/components/ChannelSelection/components/SearchResults';
+
+const Container = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  width: 100%;
+`;
 
 class ChannelSelection extends PureComponent {
+  state = {
+    query: '',
+    debouncedQuery: '',
+  }
+
+  updateQuery = (query) => {
+    this.setState({ query });
+    this.debouceQuery(query);
+  }
+
+  debouceQuery = debounce((debouncedQuery) => {
+    this.setState({ debouncedQuery });
+  }, 250)
+
   render() {
+    const { query, debouncedQuery } = this.state;
+
     return (
-      <Layout>
-        <Box mt={9} width="100%">
-          <Search />
-          <RecentChannels />
-          <AllChannels />
-        </Box>
+      <Layout showBack showClose={false}>
+        <Container mt={9}>
+          <Search onChange={this.updateQuery} />
+
+          {query.length > 0 &&
+            <SearchResults
+              query={query}
+              debouncedQuery={debouncedQuery}
+            />
+          }
+
+          {query.length === 0 &&
+            <React.Fragment>
+              <RecentChannels />
+              <AllChannels />
+            </React.Fragment>
+          }
+        </Container>
       </Layout>
     );
   }
