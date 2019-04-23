@@ -8,7 +8,7 @@ import Link from 'v2/components/UI/Link';
 import Text from 'v2/components/UI/Text';
 import Badge from 'v2/components/UI/Badge';
 
-import blockLightboxAttachmentFragment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment/fragments/blockLightboxAttachment.js';
+import blockLightboxAttachmentFragment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment/fragments/blockLightboxAttachment';
 
 const Player = styled.audio`
   &::-webkit-media-controls-panel {
@@ -28,7 +28,7 @@ export default class BlockLightboxAttachment extends PureComponent {
   static propTypes = {
     layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxAttachmentFragment).isRequired,
-  }
+  };
 
   render() {
     const { block, layout } = this.props;
@@ -44,17 +44,22 @@ export default class BlockLightboxAttachment extends PureComponent {
         flexDirection="column"
         bg={{ DEFAULT: 'gray.hint', FULLSCREEN: 'gray.bold' }[layout]}
       >
-        {block.file_content_type === 'application/pdf' &&
+        {block.file_content_type === 'application/pdf' && (
           <Box flex="1" width="100%">
-            <iframe src={block.file_url} width="100%" height="100%" title={block.title} />
+            <iframe
+              src={block.file_url}
+              width="100%"
+              height="100%"
+              title={block.title}
+            />
           </Box>
-        }
+        )}
 
-        {block.file_content_type === 'image/svg+xml' &&
+        {block.file_content_type === 'image/svg+xml' && (
           <Box display="flex" flex="1">
             <SvgPreview src={block.file_url} alt={block.title} />
           </Box>
-        }
+        )}
 
         <Link
           display="block"
@@ -64,19 +69,29 @@ export default class BlockLightboxAttachment extends PureComponent {
           target="_blank"
           download
         >
-          {block.file_content_type === 'audio/mpeg' &&
+          {block.file_content_type === 'audio/mpeg' && (
             <Box my={3}>
               <Player controls>
                 <source src={block.file_url} type="audio/mpeg" />
               </Player>
             </Box>
-          }
+          )}
 
-          <Text f={5} fontWeight="bold" lineHeight={2} color={{ DEFAULT: 'gray.base', FULLSCREEN: 'gray.hint' }[layout]}>
+          <Text
+            f={5}
+            fontWeight="bold"
+            lineHeight={2}
+            color={{ DEFAULT: 'gray.base', FULLSCREEN: 'gray.hint' }[layout]}
+          >
             Download {block.title}
           </Text>
 
-          <Box my={3} display="flex" alignItems="center" justifyContent="center">
+          <Box
+            my={3}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
             <Badge mr={4} f={3} color="gray.medium">
               {block.file_extension}
             </Badge>

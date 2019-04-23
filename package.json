@@ -7,13 +7,18 @@
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "deploy-storybook": "storybook-to-ghpages",
     "deploy": "sh scripts/deploy.sh",
+    "generate-types": "apollo codegen:generate --target typescript --outputFlat src/__generated__",
+    "generate-types:watch": "yarn generate-types --watch",
     "jest": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
     "mocha": "sh scripts/mocha.sh",
     "predeploy": "sh scripts/predeploy.sh",
     "restart-dyno": "node bin/restart",
-    "start-dev": "node src/index.js",
+    "start": "node --max_old_space_size=4096 -r dotenv/config src/index.js",
+    "start-dev": "yarn start dotenv_config_path=./.env.staging",
+    "start-prod": "yarn start dotenv_config_path=./.env.production",
     "storybook": "start-storybook -p 9001 -c .storybook",
+    "sync-schema": "yarn run apollo schema:download src/v2/apollo/schema.json",
     "test": "sh scripts/test.sh",
     "type-check": "yarn tsc"
   },
@@ -23,7 +28,7 @@
   },
   "prettier": {
     "bracketSpacing": true,
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
   },
@@ -39,6 +44,9 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "resolutions": {
+    "graphql": "^14.1.1"
   },
   "dependencies": {
     "@artsy/express-reloadable": "^1.4.0",
@@ -163,11 +171,11 @@
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",
-    "webpack-hot-middleware": "^2.21.0",
     "withinviewport": "^1.0.0",
     "xss": "^0.3.4"
   },
   "devDependencies": {
+    "@babel/node": "^7.2.2",
     "@storybook/addon-actions": "^5.0.10",
     "@storybook/addon-options": "^5.0.10",
     "@storybook/cli": "^5.0.10",
@@ -175,11 +183,15 @@
     "@storybook/storybook-deployer": "^2.8.1",
     "@storybook/theming": "^5.0.10",
     "@types/express": "^4.11.1",
+    "@types/graphql": "^14.2.0",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
+    "@types/styled-system": "^4.1.0",
+    "@types/webpack-env": "^1.13.9",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "apollo": "^2.8.3",
     "apollo-storybook-react": "^0.2.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
@@ -209,10 +221,11 @@
     "sinon": "*",
     "storybook-react-router": "^1.0.5",
     "typescript": "3.3.3",
-    "webpack": "^4.17.2",
+    "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-command": "^0.4.1",
-    "webpack-dev-middleware": "^3.2.0",
+    "webpack-dev-middleware": "^3.6.2",
+    "webpack-hot-middleware": "^2.24.3",
     "webpack-notifier": "^1.5.1"
   },
   "optionalDependencies": {

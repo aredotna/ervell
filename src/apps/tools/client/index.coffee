@@ -1,8 +1,8 @@
 { TAB } = require('sharify').data
 sendInvitation = require '../components/send_invitation/index.coffee'
 
-{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
-{ default: FindFriends } = require '../../../v2/components/FindFriends/index.js'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index'
+{ default: FindFriends } = require '../../../v2/components/FindFriends/index'
 
 module.exports = ->
   switch TAB

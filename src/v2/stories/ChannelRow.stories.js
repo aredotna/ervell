@@ -15,7 +15,7 @@ import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/comp
 import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell';
 
 const CHANNEL_QUERY = gql`
-  query {
+  query ChannelRowStoryQuery {
     channel(id: 666) {
       ...Channel
       blokks(per: 5, sort_by: POSITION, direction: DESC) {

@@ -1,5 +1,5 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
-{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index'
 { default: FollowButton } = require '../../../v2/components/FollowButton'
 
 singleExampleTemplate = -> require('../templates/example.jade') arguments...

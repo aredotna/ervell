@@ -48,7 +48,7 @@ module.exports = class InfiniteView extends Backbone.View
 
       _.delay =>
         @loading = false
-        IconicJS().inject 'img.iconic'
+        window.IconicJS().inject 'img.iconic'
       , 500
 
   startLoader: ->

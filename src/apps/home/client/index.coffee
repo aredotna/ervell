@@ -7,7 +7,7 @@ loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 blockTemplate = ->
   require('../../../components/block_v2/templates/block.jade') arguments...
 
-{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index'
 { default: DescriptiveCarousel } = require '../../../v2/components/DescriptiveCarousel/index.js'
 
 module.exports = ->

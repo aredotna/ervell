@@ -25,25 +25,28 @@ class ManageUsers extends Component {
     addGroupUser: PropTypes.func.isRequired,
     removeGroupUser: PropTypes.func.isRequired,
     inviteGroupUser: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     channel_id: null,
-  }
+  };
 
   getRefetchQueries = () => {
     const { group, channel_id } = this.props;
 
     if (channel_id) {
-      return [{
-        query: manageCollaboratorsQuery,
-        variables: { channel_id },
-      }];
+      return [
+        {
+          query: manageCollaboratorsQuery,
+          variables: { channel_id },
+        },
+      ];
     }
 
-    return [{
-      query: gql`
-        {
+    return [
+      {
+        query: gql`
+        query ManageUsersQuery {
           identity(id: "${group.id}") {
             identifiable {
               ...ProfileGroupUserList
@@ -52,8 +55,9 @@ class ManageUsers extends Component {
         }
         ${profileGroupUserListFragment}
       `,
-    }];
-  }
+      },
+    ];
+  };
 
   handleAddUser = ({ member_id: user_id }) => {
     const { addGroupUser, group } = this.props;
@@ -65,7 +69,7 @@ class ManageUsers extends Component {
       variables,
       refetchQueries,
     });
-  }
+  };
 
   handleRemoveUser = ({ member_id: user_id }) => {
     const { removeGroupUser, group } = this.props;
@@ -77,7 +81,7 @@ class ManageUsers extends Component {
       variables,
       refetchQueries,
     });
-  }
+  };
 
   handleInviteUser = ({ email }) => {
     const { inviteGroupUser, group } = this.props;
@@ -89,10 +93,12 @@ class ManageUsers extends Component {
       variables,
       refetchQueries,
     });
-  }
+  };
 
   render() {
-    const { group: { name, owner, memberships } } = this.props;
+    const {
+      group: { name, owner, memberships },
+    } = this.props;
 
     return (
       <div>
@@ -124,5 +130,5 @@ class ManageUsers extends Component {
 export default compose(
   graphql(addGroupUserMutation, { name: 'addGroupUser' }),
   graphql(removeGroupUserMutation, { name: 'removeGroupUser' }),
-  graphql(inviteGroupUserMutation, { name: 'inviteGroupUser' }),
+  graphql(inviteGroupUserMutation, { name: 'inviteGroupUser' })
 )(ManageUsers);

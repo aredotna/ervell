@@ -26,7 +26,7 @@ storiesOf('Billing', module)
     <Specimen>
       <Query
         query={gql`
-          {
+          query BillingStoriesQuery {
             group(id: 1) {
               __typename
               id

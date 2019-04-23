@@ -1,6 +1,6 @@
 loggedOutNav = require '../../../components/logged_out_nav/client/index.coffee'
 slides = require './experiments.coffee'
-{ mountWithApolloProvider } = require '../../../v2/apollo/index.js'
+{ mountWithApolloProvider } = require '../../../v2/apollo/index'
 { default: EducationPage } = require '../../../v2/pages/about/EducationPage/index.js'
 { default: GroupsPage } = require '../../../v2/pages/about/GroupsPage/index.js'
 { default: DescriptiveCarousel } = require '../../../v2/components/DescriptiveCarousel/index.js'

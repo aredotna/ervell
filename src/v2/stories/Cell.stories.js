@@ -18,7 +18,7 @@ import ChannelPreview from 'v2/components/Cell/components/Konnectable/components
 import BLOKK_QUERY from 'v2/components/Cell/components/Konnectable/queries/blokk';
 
 const IDENTIFIABLE_QUERY = gql`
-  query {
+  query IdentifiableStoryQuery {
     identity(id: 666) {
       identifiable {
         ...IdentifiableCell
@@ -74,7 +74,7 @@ storiesOf('Cell', module)
       <Grid>
         <Query
           query={gql`
-            {
+            query CellStoriesQuery {
               channel(id: 1) {
                 ...KonnectableCell
               }
@@ -112,7 +112,7 @@ storiesOf('Cell', module)
       <Grid>
         <Query
           query={gql`
-            {
+            query CellStoriesEdgeCaseQuery {
               group(id: 1) {
                 ...IdentifiableCell
               }

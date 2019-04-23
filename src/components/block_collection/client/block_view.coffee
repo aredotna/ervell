@@ -88,7 +88,7 @@ module.exports = class BlockView extends Backbone.View
     @$el = $("##{model.id}")
     @model = model
 
-    IconicJS().inject 'img.iconic'
+    window.IconicJS().inject 'img.iconic'
 
     @renderFollowButton()
     @delegateEvents()

@@ -1,0 +1,171 @@
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+//==============================================================
+// START Enums and Input Objects
+//==============================================================
+
+export enum BannerEnum {
+  BOOKMARKLET = "BOOKMARKLET",
+  CONFIRM = "CONFIRM",
+  INVITE = "INVITE",
+  PROPOSE_PREMIUM = "PROPOSE_PREMIUM",
+  STRONGLY_PROPOSE_PREMIUM = "STRONGLY_PROPOSE_PREMIUM",
+}
+
+/**
+ * Possible connectables for a new connection
+ */
+export enum BaseConnectableTypeEnum {
+  BLOCK = "BLOCK",
+  CHANNEL = "CHANNEL",
+}
+
+/**
+ * Block types
+ */
+export enum BlockFilterEnum {
+  ALL = "ALL",
+  ATTACHMENT = "ATTACHMENT",
+  EMBED = "EMBED",
+  IMAGE = "IMAGE",
+  LINK = "LINK",
+  TEXT = "TEXT",
+}
+
+export enum ChannelOwnerTypeEnum {
+  GROUP = "GROUP",
+  USER = "USER",
+}
+
+/**
+ * Privacy states for a channel
+ */
+export enum ChannelVisibility {
+  CLOSED = "CLOSED",
+  PRIVATE = "PRIVATE",
+  PUBLIC = "PUBLIC",
+}
+
+/**
+ * Connectable types
+ */
+export enum ConnectableTypeEnum {
+  ATTACHMENT = "ATTACHMENT",
+  BLOCK = "BLOCK",
+  CHANNEL = "CHANNEL",
+  EMBED = "EMBED",
+  IMAGE = "IMAGE",
+  LINK = "LINK",
+  TEXT = "TEXT",
+}
+
+/**
+ * Available content flag states for channels
+ */
+export enum ContentFlag {
+  NSFW = "NSFW",
+  SAFE = "SAFE",
+}
+
+export enum ExportFormats {
+  HTML = "HTML",
+  PDF = "PDF",
+  ZIP = "ZIP",
+}
+
+/**
+ * Types of followable objects
+ */
+export enum FollowableTypeEnum {
+  CHANNEL = "CHANNEL",
+  GROUP = "GROUP",
+  USER = "USER",
+}
+
+export enum IndexedChannelsTypes {
+  COLLABORATION = "COLLABORATION",
+  OWN = "OWN",
+}
+
+/**
+ * Member types
+ */
+export enum MemberTypes {
+  GROUP = "GROUP",
+  USER = "USER",
+}
+
+/**
+ * Objects that can be muted
+ */
+export enum MutableTypeEnum {
+  BLOCK = "BLOCK",
+  CHANNEL = "CHANNEL",
+}
+
+/**
+ * Ways to sort blocks
+ */
+export enum SearchSorts {
+  ALPHA = "ALPHA",
+  CREATED_AT = "CREATED_AT",
+  DEFAULT = "DEFAULT",
+  FOLLOWER_COUNT = "FOLLOWER_COUNT",
+  LENGTH = "LENGTH",
+  RANDOM = "RANDOM",
+  UPDATED_AT = "UPDATED_AT",
+}
+
+/**
+ * Ways to filter search by type
+ */
+export enum SearchType {
+  ALL = "ALL",
+  CHANNEL = "CHANNEL",
+  CONNECTABLE = "CONNECTABLE",
+  USER = "USER",
+}
+
+export enum SearchesCollaboratorsType {
+  GROUP = "GROUP",
+  USER = "USER",
+}
+
+/**
+ * Ways to filter search by type
+ */
+export enum SsearchType {
+  BLOCK = "BLOCK",
+  CHANNEL = "CHANNEL",
+  GROUP = "GROUP",
+  USER = "USER",
+}
+
+/**
+ * Subscription plans that are purchaseable by users
+ */
+export enum SupportedPlanEnum {
+  MONTHLY = "MONTHLY",
+  YEARLY = "YEARLY",
+}
+
+export interface ChannelMemberInput {
+  id: string;
+  type?: MemberTypes | null;
+}
+
+export interface ConnectableInput {
+  id: string;
+  type: BaseConnectableTypeEnum;
+}
+
+export interface MeFlagInput {
+  name: string;
+  value: boolean;
+}
+
+//==============================================================
+// END Enums and Input Objects
+//==============================================================

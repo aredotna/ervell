@@ -12,7 +12,7 @@ Cookies = require 'cookies-js'
 EditableAttributeView = require '../../../editable_attribute/client/editable_attribute_view.coffee'
 blockTemplate = -> require('../templates/block.jade') arguments...
 
-{ mountWithApolloProvider } = require '../../../../v2/apollo/index.js'
+{ mountWithApolloProvider } = require '../../../../v2/apollo/index'
 { default: ModalBlockLightboxWithChannelContext } = require '../../../../v2/components/ModalBlockLightboxWithChannelContext/index.js'
 
 module.exports = class BlockView extends Backbone.View
@@ -121,7 +121,7 @@ module.exports = class BlockView extends Backbone.View
     @$el = $("##{model.id}")
     @model = model
 
-    IconicJS().inject 'img.iconic'
+    window.IconicJS().inject 'img.iconic'
 
     @renderFollowButton()
     @delegateEvents()

@@ -12,17 +12,17 @@ const Icon = styled.span.attrs({
   cursor: pointer;
   font-size: 8px;
   &:after {
-    content: '⚪️'
+    content: '⚪️';
   }
   &:hover:after {
-    content: '⚫️'
+    content: '⚫️';
   }
 `;
 
 export default class RandomChannelIcon extends PureComponent {
   static propTypes = {
     onQuery: PropTypes.func.isRequired,
-  }
+  };
 
   render() {
     return (
@@ -31,7 +31,11 @@ export default class RandomChannelIcon extends PureComponent {
           <Icon
             onClick={async () => {
               const { data } = await client.query({
-                query: gql`{ random_title }`,
+                query: gql`
+                  query RandomChannelIconQuery {
+                    random_title
+                  }
+                `,
                 fetchPolicy: 'network-only',
               });
               this.props.onQuery(data.random_title);

@@ -1,10 +1,12 @@
 {
   "files.exclude": {
+    ".cache/": true,
     ".git/": true,
     "node_modules/": false,
     "public/": false
   },
   "search.exclude": {
+    "**/__generated__": false,
     "**/node_modules": true,
     "**/public": true
   },
@@ -12,8 +14,7 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-    {
+  "eslint.validate": [{
       "language": "javascript",
       "autoFix": true
     },
@@ -31,5 +32,6 @@
     }
   ],
   "tslint.enable": false,
-  "typescript.tsdk": "./node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "debug.node.autoAttach": "on"
 }
