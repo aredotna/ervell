@@ -169,7 +169,6 @@
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",
-    "webpack-hot-middleware": "^2.21.0",
     "withinviewport": "^1.0.0",
     "xss": "^0.3.4"
   },
@@ -187,6 +186,7 @@
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/styled-system": "^4.1.0",
+    "@types/webpack-env": "^1.13.9",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "apollo": "^2.8.3",
@@ -219,10 +219,11 @@
     "sinon": "*",
     "storybook-react-router": "^1.0.5",
     "typescript": "3.3.3",
-    "webpack": "^4.17.2",
+    "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-command": "^0.4.1",
-    "webpack-dev-middleware": "^3.2.0",
+    "webpack-dev-middleware": "^3.6.2",
+    "webpack-hot-middleware": "^2.24.3",
     "webpack-notifier": "^1.5.1"
   },
   "optionalDependencies": {
