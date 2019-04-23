@@ -1,17 +1,21 @@
-const express = require('express');
-const webpack = require('webpack');
-const config = require('../../webpack.config.js');
+// @ts-check
 
-const app = express();
-const compiler = webpack(config);
+const express = require('express')
+const webpack = require('webpack')
+const webpackConfig = require('../../webpack/webpack.config')
 
-app.use(require('webpack-dev-middleware')(compiler, {
-  quiet: true,
-  publicPath: config.output.publicPath,
-  serverSideRender: true,
-  stats: "errors-only",
-}));
+const app = express()
+const compiler = webpack(webpackConfig)
 
-app.use(require('webpack-hot-middleware')(compiler));
+app.use(
+  require('webpack-dev-middleware')(compiler, {
+    quiet: true,
+    publicPath: webpackConfig.output.publicPath,
+    serverSideRender: true,
+    stats: 'errors-only',
+  })
+)
 
-module.exports = app;
+app.use(require('webpack-hot-middleware')(compiler))
+
+module.exports = app
