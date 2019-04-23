@@ -1,11 +1,15 @@
 /* eslint-disable no-console */
 
+require('source-map-support').install()
 require('regenerator-runtime/runtime')
 require('newrelic')
-require('coffee-register')
-require('@babel/register')({
-  extensions: ['.js', '.jsx', '.ts', '.tsx'],
-})
+
+if (process.env.NODE_ENV === 'development') {
+  require('coffee-register')
+  require('@babel/register')({
+    extensions: ['.ts', '.js', '.tsx', '.jsx'],
+  })
+}
 
 global.Promise = require('bluebird')
 

@@ -5,6 +5,7 @@
   "scripts": {
     "assets": "sh scripts/assets.sh",
     "build": "yarn webpack --config ./webpack/webpack.config.js",
+    "build:server": "BUILD_SERVER=true NODE_ENV=production yarn build",
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "deploy-storybook": "storybook-to-ghpages",
     "deploy": "sh scripts/deploy.sh",
@@ -15,7 +16,8 @@
     "mocha": "sh scripts/mocha.sh",
     "predeploy": "sh scripts/predeploy.sh",
     "restart-dyno": "node bin/restart",
-    "start": "node --max_old_space_size=4096 -r dotenv/config src/index.js",
+    "start": "node -r dotenv/config src/index.js",
+    "start:prod": "node -r dotenv/config server.dist.js",
     "start-dev": "yarn start dotenv_config_path=./.env.staging",
     "start-prod": "yarn start dotenv_config_path=./.env.production",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -176,6 +178,7 @@
   },
   "devDependencies": {
     "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
     "@storybook/addon-actions": "^5.0.10",
     "@storybook/addon-options": "^5.0.10",
     "@storybook/cli": "^5.0.10",
@@ -219,6 +222,7 @@
     "rewire": "^4.0.0",
     "should": "*",
     "sinon": "*",
+    "source-map-support": "^0.5.12",
     "storybook-react-router": "^1.0.5",
     "typescript": "3.3.3",
     "webpack": "^4.30.0",
@@ -227,6 +231,7 @@
     "webpack-dev-middleware": "^3.6.2",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2",
     "webpack-notifier": "^1.5.1"
   },
   "optionalDependencies": {
