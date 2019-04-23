@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
@@ -29,6 +30,25 @@ const Top = styled(Box)`
   z-index: 100;
 `;
 
+const Back = styled(Text).attrs({
+  f: 3,
+  color: 'gray.regular',
+})`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: ${props => props.theme.colors.gray.bold};
+  }
+
+  &:after {
+    content: 'back';
+  }
+`;
+
 const Close = styled(Text).attrs({
   f: 3,
   color: 'gray.regular',
@@ -52,15 +72,27 @@ const Logo = styled(Icons).attrs({
   size: 7,
 })``;
 
-// eslint-disable-next-line react/no-multi-comp
 class Layout extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    history: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
+    showBack: PropTypes.bool,
+    showClose: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    showBack: false,
+    showClose: true,
   }
 
   constructor(props) {
     super(props);
     this.messenger = new Messenger(window.top);
+  }
+
+  goBack = () => {
+    this.props.history.goBack();
   }
 
   closeWindow = () => {
@@ -70,13 +102,18 @@ class Layout extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, showBack, showClose } = this.props;
 
     return (
       <Container p={5}>
         <Top>
+          {showBack &&
+            <Back onClick={this.goBack} />
+          }
           <Logo />
-          <Close onClick={this.closeWindow} />
+          {showClose &&
+            <Close onClick={this.closeWindow} />
+          }
         </Top>
         {children}
       </Container>
@@ -84,5 +121,5 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default withRouter(Layout);
 
