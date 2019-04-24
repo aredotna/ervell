@@ -1,11 +1,15 @@
 // @ts-check
+/* eslint-disable no-console */
 
 const merge = require('webpack-merge')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
-const baseConfig = require('./envs/baseConfig')
-const developmentConfig = require('./envs/developmentConfig')
-const productionConfig = require('./envs/productionConfig')
+const {
+  baseConfig,
+  developmentConfig,
+  productionConfig,
+  serverConfig,
+} = require('./envs')
 
 const { NODE_ENV = 'development' } = process.env
 const isDevelopment = NODE_ENV === 'development'
@@ -14,15 +18,16 @@ const BUILD_SERVER = process.env.BUILD_SERVER === 'true'
 const ANALYZE_BUNDLE = process.env.ANALYZE_BUNDLE === 'true'
 
 const getConfig = () => {
-  console.log(`\n[Ervell] NODE_ENV=${NODE_ENV} \n`) // eslint-disable-line
+  console.log(`\n[Ervell] NODE_ENV=${NODE_ENV} \n`)
 
   switch (true) {
+    case BUILD_SERVER:
+      console.log('[Ervell] Building server-side code...')
+      return serverConfig
     case isDevelopment:
       return merge.smart(baseConfig, developmentConfig)
     case isProduction:
       return merge.smart(baseConfig, productionConfig)
-    case BUILD_SERVER:
-      return true
   }
 }
 
