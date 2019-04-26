@@ -154,7 +154,10 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
                       e.stopPropagation()
                     }}
                   >
-                    <Cell.Konnectable konnectable={connectable} />
+                    <Cell.Konnectable
+                      konnectable={connectable}
+                      context={connectables}
+                    />
                   </SortableGridItem>
                 )
               }
