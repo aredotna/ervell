@@ -4,10 +4,16 @@ import { graphql, withApollo } from 'react-apollo'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
 import chunk from 'v2/util/chunk'
-import { key } from 'v2/components/ChannelContents/lib/key'
-import { KonnectableCellCollection } from 'v2/components/ChannelContents/lib/collection'
 import { reorder } from 'v2/components/ChannelContents/lib/reorder'
 import { loadSkeleton } from 'v2/components/ChannelContents/lib/loadSkeleton'
+import {
+  KonnectableCellCollection,
+  key as konnectableCellCollectionKey,
+} from 'v2/components/ChannelContents/lib/KonnectableCellCollection'
+import {
+  ActiveQueries,
+  key as activeQueriesKey,
+} from 'v2/components/ChannelContents/lib/ActiveQueries'
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
@@ -39,6 +45,7 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
   ...rest
 }) => {
   const { id, skeleton, can } = channel
+  const [activeQueries, setActiveQueries] = useState<ActiveQueries>({})
   const [connectables, setConnectables] = useState(skeleton)
   const [collection, setCollection] = useState<KonnectableCellCollection>({})
 
@@ -76,7 +83,19 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
     }).catch(console.error.bind(console))
   }
 
-  const handleOnEnter = pageSkeleton => () => {
+  const handleOnEnter = pageSkeleton => (): void => {
+    const queryKey = JSON.stringify(pageSkeleton)
+
+    if (activeQueries[queryKey]) {
+      // Already loading
+      return
+    }
+
+    setActiveQueries(prevActiveQuerys => ({
+      ...prevActiveQuerys,
+      [queryKey]: true,
+    }))
+
     loadSkeleton({
       client,
       channelId: id,
@@ -105,51 +124,62 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
         </React.Fragment>
       )}
 
-      {chunked.map((pageSkeleton, pageIndex) => (
-        <React.Fragment key={JSON.stringify(pageSkeleton)}>
-          <Waypoint
-            onEnter={handleOnEnter(pageSkeleton)}
-            fireOnRapidScroll={false}
-            topOffset="-100%"
-            bottomOffset="-100%"
-          />
+      {chunked.map((pageSkeleton, pageIndex) => {
+        const pageKey = activeQueriesKey(pageSkeleton)
 
-          {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
-            const _key = key(connectableSkeleton)
-            const connectable = collection[_key]
-            if (connectable) {
+        return (
+          <React.Fragment key={pageKey}>
+            {!activeQueries[pageKey] && (
+              <Waypoint
+                onEnter={handleOnEnter(pageSkeleton)}
+                fireOnRapidScroll={false}
+                topOffset="-100%"
+                bottomOffset="-100%"
+              />
+            )}
+
+            {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
+              const connectableKey = konnectableCellCollectionKey(
+                connectableSkeleton
+              )
+              const connectable = collection[connectableKey]
+
+              if (connectable) {
+                return (
+                  <SortableGridItem
+                    key={connectableKey}
+                    index={connectableIndex + pageIndex * chunkSize}
+                    onDrag={e => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }}
+                  >
+                    <Cell.Konnectable konnectable={connectable} />
+                  </SortableGridItem>
+                )
+              }
+
               return (
                 <SortableGridItem
-                  key={_key}
+                  key={connectableKey}
                   index={connectableIndex + pageIndex * chunkSize}
-                  onDrag={e => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                  }}
                 >
-                  <Cell.Konnectable konnectable={connectable} />
+                  <Cell.Skeletal mode="loading" />
                 </SortableGridItem>
               )
-            }
+            })}
 
-            return (
-              <SortableGridItem
-                key={_key}
-                index={connectableIndex + pageIndex * chunkSize}
-              >
-                <Cell.Skeletal mode="loading" />
-              </SortableGridItem>
-            )
-          })}
-
-          <Waypoint
-            onEnter={handleOnEnter(pageSkeleton)}
-            fireOnRapidScroll={false}
-            topOffset="-100%"
-            bottomOffset="-100%"
-          />
-        </React.Fragment>
-      ))}
+            {!activeQueries[pageKey] && (
+              <Waypoint
+                onEnter={handleOnEnter(pageSkeleton)}
+                fireOnRapidScroll={false}
+                topOffset="-100%"
+                bottomOffset="-100%"
+              />
+            )}
+          </React.Fragment>
+        )
+      })}
     </SortableGrid>
   )
 }

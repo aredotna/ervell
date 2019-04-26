@@ -1,3 +1,9 @@
+import { KonnectableCell } from '__generated__/KonnectableCell'
+
+export interface KonnectableCellCollection {
+  [key: string]: KonnectableCell
+}
+
 export const key = ({
   id,
   type,
