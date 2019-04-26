@@ -85,8 +85,6 @@ const baseConfig = {
     alias: {
       'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
       Images: path.join(rootDir, 'public', 'images'),
-      'styled-components': require.resolve('styled-components'),
-      react: require.resolve('react'),
     },
     extensions: [
       '.js',
@@ -103,6 +101,26 @@ const baseConfig = {
   },
   externals: {
     request: 'request',
+  },
+  optimization: {
+    runtimeChunk: {
+      name: 'runtime',
+    },
+    splitChunks: {
+      cacheGroups: {
+        runtimeChunk: 'single',
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]/,
+        },
+        default: {
+          name: 'common',
+          chunks: 'all',
+          minChunks: 2,
+        },
+      },
+    },
   },
 }
 
