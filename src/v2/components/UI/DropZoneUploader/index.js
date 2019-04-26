@@ -34,7 +34,7 @@ const Backdrop = styled(Box).attrs({
   z-index: 3;
 `
 
-const DropZoneUploader = ({ children, onUpload, onComplete }) => {
+const DropZoneUploader = ({ children, onUpload, onComplete, accept }) => {
   const [mode, setMode] = useState('resting')
 
   const handleDrop = useCallback(acceptedFiles => {
@@ -53,22 +53,35 @@ const DropZoneUploader = ({ children, onUpload, onComplete }) => {
     open: openUploadDialog,
     acceptedFiles,
   } = useDropzone({
-    onDrop: handleDrop,
+    onDropAccepted: handleDrop,
+    onDropRejected: () => setMode('resting'),
     onDragLeave: () => setMode('resting'),
     noClick: true,
     noKeyboard: true,
+    accept,
   })
 
   // Use `dragenter` event on `window` to trigger the actual drop-zone,
   // instead of the Component's element.
   const showDropZone = () => setMode('active')
+  const handleFalseDrops = e => {
+    if (!e.dataTransfer.types.includes('Files')) {
+      // If you accidently drag some link on the page around, cancel
+      setMode('resting')
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('dragenter', showDropZone)
-    return () => window.removeEventListener('dragenter', showDropZone)
+    window.addEventListener('drop', handleFalseDrops)
+    return () => {
+      window.removeEventListener('dragenter', showDropZone)
+      window.removeEventListener('drop', handleFalseDrops)
+    }
   })
 
   return (
-    <React.Fragment>
+    <>
       <DropZone {...getRootProps()} mode={mode}>
         <input {...getInputProps()} />
 
@@ -106,7 +119,7 @@ const DropZoneUploader = ({ children, onUpload, onComplete }) => {
       </DropZone>
 
       {children({ isDragActive, openUploadDialog })}
-    </React.Fragment>
+    </>
   )
 }
 

@@ -97,6 +97,14 @@ export enum MemberTypes {
   USER = "USER",
 }
 
+export enum Movements {
+  INSERT_AT = "INSERT_AT",
+  MOVE_DOWN = "MOVE_DOWN",
+  MOVE_TO_BOTTOM = "MOVE_TO_BOTTOM",
+  MOVE_TO_TOP = "MOVE_TO_TOP",
+  MOVE_UP = "MOVE_UP",
+}
+
 /**
  * Objects that can be muted
  */

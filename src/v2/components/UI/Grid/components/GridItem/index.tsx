@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 import constants from 'v2/styles/constants'
 import { multiply } from 'v2/styles/functions'
@@ -20,19 +19,24 @@ const Container = styled.div`
   `}
 `
 
-const GridItem = ({ children, gutterSpacing, ...rest }) => (
-  <Container gutterSpacing={gutterSpacing} variableHeight {...rest}>
+const GridItem = ({
+  children,
+  gutterSpacing = 4,
+  onDrag = () => {},
+  ...rest
+}: {
+  children: ReactNode
+  gutterSpacing?: number
+  onDrag?: Function
+}) => (
+  <Container
+    gutterSpacing={gutterSpacing}
+    onDrag={onDrag}
+    variableHeight
+    {...rest}
+  >
     {children}
   </Container>
 )
-
-GridItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  gutterSpacing: PropTypes.number,
-}
-
-GridItem.defaultProps = {
-  gutterSpacing: 4,
-}
 
 export default GridItem
