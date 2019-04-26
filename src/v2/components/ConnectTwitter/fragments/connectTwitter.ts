@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import contactFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact';
+import contactFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact'
 
 export default gql`
   fragment ConnectTwitter on Me {
@@ -15,4 +15,4 @@ export default gql`
     }
   }
   ${contactFragment}
-`;
+`

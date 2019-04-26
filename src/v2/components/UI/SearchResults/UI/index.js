@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import UserAvatar from 'v2/components/UserAvatar';
+import UserAvatar from 'v2/components/UserAvatar'
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.div`
   border-top: 0;
   background-color: ${x => x.theme.colors.gray.hint};
   font-size: ${x => x.theme.fontSizesIndexed.xs};
-`;
+`
 
 export const Information = styled.div`
   display: flex;
@@ -20,21 +20,21 @@ export const Information = styled.div`
   justify-content: space-around;
   align-self: stretch;
   padding-left: 1em;
-`;
+`
 
 export const Name = styled.a`
   display: block;
   font-weight: bold;
-`;
+`
 
 export const Email = styled.div`
   color: ${x => x.theme.colors.gray.medium};
-`;
+`
 
 export const Amount = styled.div`
   color: ${x => x.theme.colors.gray.medium};
-`;
+`
 
 export const Avatar = styled(UserAvatar)`
   align-self: center;
-`;
+`

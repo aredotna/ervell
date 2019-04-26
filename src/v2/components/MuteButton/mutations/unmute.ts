@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import mutableFragment from 'v2/components/MuteButton/fragments/mutable';
+import mutableFragment from 'v2/components/MuteButton/fragments/mutable'
 
 export default gql`
   mutation UnmuteMutation($id: ID!, $type: MutableTypeEnum!) {
@@ -13,4 +13,4 @@ export default gql`
     }
   }
   ${mutableFragment}
-`;
+`

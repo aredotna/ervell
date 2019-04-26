@@ -9,138 +9,205 @@
  *
  * Released under the MIT license.
  */
-'use strict';
+'use strict'
+;(function($) {
+  var dragging,
+    draggingHeight,
+    placeholders = $()
+  $.fn.sortable = function(options) {
+    var method = String(options)
 
-(function ($) {
-  var dragging, draggingHeight, placeholders = $();
-  $.fn.sortable = function (options) {
-    var method = String(options);
+    options = $.extend(
+      {
+        connectWith: false,
+        placeholder: null,
+        dragImage: null,
+      },
+      options
+    )
 
-    options = $.extend({
-      connectWith: false,
-      placeholder: null,
-      dragImage: null
-    }, options);
-
-    return this.each(function () {
+    return this.each(function() {
       if (method === 'reload') {
-        $(this).children(options.items).off('dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s');
+        $(this)
+          .children(options.items)
+          .off(
+            'dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s'
+          )
       }
       if (/^enable|disable|destroy$/.test(method)) {
-        var citems = $(this).children($(this).data('items')).attr('draggable', method === 'enable');
+        var citems = $(this)
+          .children($(this).data('items'))
+          .attr('draggable', method === 'enable')
         if (method === 'destroy') {
-          $(this).off('sortupdate');
-          $(this).removeData('opts');
-          citems.add(this).removeData('connectWith items')
-            .off('dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s').off('sortupdate');
+          $(this).off('sortupdate')
+          $(this).removeData('opts')
+          citems
+            .add(this)
+            .removeData('connectWith items')
+            .off(
+              'dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s'
+            )
+            .off('sortupdate')
         }
-        return;
+        return
       }
 
-      var soptions = $(this).data('opts');
+      var soptions = $(this).data('opts')
 
       if (typeof soptions === 'undefined') {
-        $(this).data('opts', options);
-      }
-      else {
-        options = soptions;
+        $(this).data('opts', options)
+      } else {
+        options = soptions
       }
 
-      var isHandle, index, items = $(this).children(options.items);
-      var startParent, newParent;
-      var placeholder = ( options.placeholder === null ) ? $('<' + (/^ul|ol$/i.test(this.tagName) ? 'li' : 'div') + ' class="sortable-placeholder">') : $(options.placeholder).addClass('sortable-placeholder');
+      var isHandle,
+        index,
+        items = $(this).children(options.items)
+      var startParent, newParent
+      var placeholder =
+        options.placeholder === null
+          ? $(
+              '<' +
+                (/^ul|ol$/i.test(this.tagName) ? 'li' : 'div') +
+                ' class="sortable-placeholder">'
+            )
+          : $(options.placeholder).addClass('sortable-placeholder')
 
-      items.find(options.handle).mousedown(function () {
-        isHandle = true;
-      }).mouseup(function () {
-          isHandle = false;
-        });
-      $(this).data('items', options.items);
-      placeholders = placeholders.add(placeholder);
+      items
+        .find(options.handle)
+        .mousedown(function() {
+          isHandle = true
+        })
+        .mouseup(function() {
+          isHandle = false
+        })
+      $(this).data('items', options.items)
+      placeholders = placeholders.add(placeholder)
       if (options.connectWith) {
-        $(options.connectWith).add(this).data('connectWith', options.connectWith);
+        $(options.connectWith)
+          .add(this)
+          .data('connectWith', options.connectWith)
       }
 
-      items.attr('role', 'option');
-      items.attr('aria-grabbed', 'false');
+      items.attr('role', 'option')
+      items.attr('aria-grabbed', 'false')
 
-      items.attr('draggable', 'true').on('dragstart.h5s',function (e) {
-        e.stopImmediatePropagation();
-        if (options.handle && !isHandle) {
-          return false;
-        }
-        isHandle = false;
-        var dt = e.originalEvent.dataTransfer;
-        dt.effectAllowed = 'move';
-        dt.setData('text', '');
-
-        if (options.dragImage && dt.setDragImage) {
-          dt.setDragImage(options.dragImage, 0, 0);
-        }
-
-        index = (dragging = $(this)).addClass('sortable-dragging').attr('aria-grabbed', 'true').index();
-        draggingHeight = dragging.outerHeight();
-        startParent = $(this).parent();
-      }).on('dragend.h5s',function () {
-          if (!dragging) {
-            return;
-          }
-          dragging.removeClass('sortable-dragging').attr('aria-grabbed', 'false').show();
-          placeholders.detach();
-          newParent = $(this).parent();
-          if (index !== dragging.index() || startParent.get(0) !== newParent.get(0)) {
-            dragging.parent().triggerHandler('sortupdate', {item: dragging, oldindex: index, startparent: startParent, endparent: newParent});
-          }
-          dragging = null;
-          draggingHeight = null;
-        }).not('a[href], img').on('selectstart.h5s',function () {
+      items
+        .attr('draggable', 'true')
+        .on('dragstart.h5s', function(e) {
+          e.stopImmediatePropagation()
           if (options.handle && !isHandle) {
-            return true;
+            return false
+          }
+          isHandle = false
+          var dt = e.originalEvent.dataTransfer
+          dt.effectAllowed = 'move'
+          dt.setData('text', '')
+
+          if (options.dragImage && dt.setDragImage) {
+            dt.setDragImage(options.dragImage, 0, 0)
+          }
+
+          index = (dragging = $(this))
+            .addClass('sortable-dragging')
+            .attr('aria-grabbed', 'true')
+            .index()
+          draggingHeight = dragging.outerHeight()
+          startParent = $(this).parent()
+        })
+        .on('dragend.h5s', function() {
+          if (!dragging) {
+            return
+          }
+          dragging
+            .removeClass('sortable-dragging')
+            .attr('aria-grabbed', 'false')
+            .show()
+          placeholders.detach()
+          newParent = $(this).parent()
+          if (
+            index !== dragging.index() ||
+            startParent.get(0) !== newParent.get(0)
+          ) {
+            dragging.parent().triggerHandler('sortupdate', {
+              item: dragging,
+              oldindex: index,
+              startparent: startParent,
+              endparent: newParent,
+            })
+          }
+          dragging = null
+          draggingHeight = null
+        })
+        .not('a[href], img')
+        .on('selectstart.h5s', function() {
+          if (options.handle && !isHandle) {
+            return true
           }
 
           if (this.dragDrop) {
-            this.dragDrop();
+            this.dragDrop()
           }
-          return false;
-        }).end().add([this, placeholder]).on('dragover.h5s dragenter.h5s drop.h5s', function (e) {
-          if (!items.is(dragging) && options.connectWith !== $(dragging).parent().data('connectWith')) {
-            return true;
+          return false
+        })
+        .end()
+        .add([this, placeholder])
+        .on('dragover.h5s dragenter.h5s drop.h5s', function(e) {
+          if (
+            !items.is(dragging) &&
+            options.connectWith !==
+              $(dragging)
+                .parent()
+                .data('connectWith')
+          ) {
+            return true
           }
           if (e.type === 'drop') {
-            e.stopPropagation();
-            placeholders.filter(':visible').after(dragging);
-            dragging.trigger('dragend.h5s');
-            return false;
+            e.stopPropagation()
+            placeholders.filter(':visible').after(dragging)
+            dragging.trigger('dragend.h5s')
+            return false
           }
-          e.preventDefault();
-          e.originalEvent.dataTransfer.dropEffect = 'move';
+          e.preventDefault()
+          e.originalEvent.dataTransfer.dropEffect = 'move'
           if (items.is(this)) {
-            var thisHeight = $(this).outerHeight();
+            var thisHeight = $(this).outerHeight()
             if (options.forcePlaceholderSize) {
-              placeholder.height(draggingHeight);
+              placeholder.height(draggingHeight)
             }
 
             // Check if $(this) is bigger than the draggable. If it is, we have to define a dead zone to prevent flickering
             if (thisHeight > draggingHeight) {
               // Dead zone?
-              var deadZone = thisHeight - draggingHeight, offsetTop = $(this).offset().top;
-              if (placeholder.index() < $(this).index() && e.originalEvent.pageY < offsetTop + deadZone) {
-                return false;
-              }
-              else if (placeholder.index() > $(this).index() && e.originalEvent.pageY > offsetTop + thisHeight - deadZone) {
-                return false;
+              var deadZone = thisHeight - draggingHeight,
+                offsetTop = $(this).offset().top
+              if (
+                placeholder.index() < $(this).index() &&
+                e.originalEvent.pageY < offsetTop + deadZone
+              ) {
+                return false
+              } else if (
+                placeholder.index() > $(this).index() &&
+                e.originalEvent.pageY > offsetTop + thisHeight - deadZone
+              ) {
+                return false
               }
             }
 
-            dragging.hide();
-            $(this)[placeholder.index() < $(this).index() ? 'after' : 'before'](placeholder);
-            placeholders.not(placeholder).detach();
-          } else if (!placeholders.is(this) && !$(this).children(options.items).length) {
-            placeholders.detach();
-            $(this).append(placeholder);
+            dragging.hide()
+            $(this)[placeholder.index() < $(this).index() ? 'after' : 'before'](
+              placeholder
+            )
+            placeholders.not(placeholder).detach()
+          } else if (
+            !placeholders.is(this) &&
+            !$(this).children(options.items).length
+          ) {
+            placeholders.detach()
+            $(this).append(placeholder)
           }
-          return false;
-        });
-    });
-  };
-})(jQuery);
+          return false
+        })
+    })
+  }
+})(jQuery)

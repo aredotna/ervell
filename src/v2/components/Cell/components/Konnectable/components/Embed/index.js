@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
 
-import embedFragment from 'v2/components/Cell/components/Konnectable/components/Embed/fragments/embed';
+import embedFragment from 'v2/components/Cell/components/Konnectable/components/Embed/fragments/embed'
 
-import Generic from 'v2/components/Cell/components/Konnectable/components/Generic';
+import Generic from 'v2/components/Cell/components/Konnectable/components/Generic'
 
 export default class Embed extends PureComponent {
   static propTypes = {
@@ -11,10 +11,8 @@ export default class Embed extends PureComponent {
   }
 
   render() {
-    const { embed, ...rest } = this.props;
+    const { embed, ...rest } = this.props
 
-    return (
-      <Generic src={embed.src} title={embed.title} {...rest} />
-    );
+    return <Generic src={embed.src} title={embed.title} {...rest} />
   }
 }

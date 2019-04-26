@@ -1,30 +1,30 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import constants from 'v2/styles/constants'
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 import {
   Headline,
   Subheadline,
   Description,
-} from 'v2/pages/about/components/Text';
-import CenterBox from 'v2/pages/about/components/CenterBox';
-import PricingTable from 'v2/pages/about/PricingPage/components/PricingTable';
+} from 'v2/pages/about/components/Text'
+import CenterBox from 'v2/pages/about/components/CenterBox'
+import PricingTable from 'v2/pages/about/PricingPage/components/PricingTable'
 
 const Container = styled(Box).attrs({
   mt: 9,
-})``;
+})``
 
 const GradientContent = styled.div`
   background: linear-gradient(${x => x.theme.colors.gray.hint}, white);
   border-top: 1px solid ${x => x.theme.colors.gray.regular};
-`;
+`
 
 const CTA = styled(Box)`
   border-bottom: 1px solid ${x => x.theme.colors.gray.light};
-`;
+`
 
 const Feature = styled(Text).attrs({
   f: 5,
@@ -36,7 +36,7 @@ const Feature = styled(Text).attrs({
   &:before {
     content: '• ';
   }
-`;
+`
 
 const LogoContainer = styled(Box)`
   max-width: auto;
@@ -45,23 +45,23 @@ const LogoContainer = styled(Box)`
   ${constants.media.mobile`
     display: none;
   `}
-`;
+`
 
 const Logos = styled.img`
   width: 80%;
   margin: 3em auto 0;
   display: block;
-`;
+`
 
 const Question = styled(Subheadline).attrs({
   color: 'gray.bold',
   mb: 6,
-})``;
+})``
 
 const Answer = styled(Description).attrs({
   textAlign: 'left',
   pb: 8,
-})``;
+})``
 
 export default class PricingPage extends PureComponent {
   render() {
@@ -189,6 +189,6 @@ export default class PricingPage extends PureComponent {
           </CenterBox>
         </GradientContent>
       </Container>
-    );
+    )
   }
 }

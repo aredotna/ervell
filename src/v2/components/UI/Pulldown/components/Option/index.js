@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { fontSize, width, color, space } from 'styled-system';
+import styled from 'styled-components'
+import { fontSize, width, color, space } from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 
 export default styled.div`
   position: relative;
@@ -29,4 +29,4 @@ export default styled.div`
       background-color: ${x.theme.colors.gray.light};
     }
   `}
-`;
+`

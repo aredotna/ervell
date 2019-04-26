@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import planSelectionFragment from 'v2/components/Billing/components/PlanSelection/fragments/planSelection';
+import planSelectionFragment from 'v2/components/Billing/components/PlanSelection/fragments/planSelection'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import RadioOptions from 'v2/components/UI/RadioOptions';
-import PrivateBlocksMeter from 'v2/components/PrivateBlocksMeter';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import RadioOptions from 'v2/components/UI/RadioOptions'
+import PrivateBlocksMeter from 'v2/components/PrivateBlocksMeter'
 
 const OptionLabel = styled(Text).attrs({
   f: 4,
@@ -18,16 +18,18 @@ const OptionLabel = styled(Text).attrs({
   display: flex;
   justify-content: space-between;
 
-  ${props => props.selected && `
+  ${props =>
+    props.selected &&
+    `
     color: ${props.theme.colors.gray.bold};
   `}
-`;
+`
 
 const Option = styled(Box)`
   &:hover ${OptionLabel} {
     color: black;
   }
-`;
+`
 
 const OptionDescription = styled(Text).attrs({
   f: 2,
@@ -35,7 +37,7 @@ const OptionDescription = styled(Text).attrs({
 })`
   display: flex;
   justify-content: space-between;
-`;
+`
 
 export default class PlanSelection extends PureComponent {
   static propTypes = {
@@ -54,12 +56,16 @@ export default class PlanSelection extends PureComponent {
 
   render() {
     const {
-      onSelect, plan_id, me, me: { customer },
-    } = this.props;
-    const planId = plan_id || customer.plan.id;
+      onSelect,
+      plan_id,
+      me,
+      me: { customer },
+    } = this.props
+    const planId = plan_id || customer.plan.id
 
     // TODO: Extract into actual can field
-    const canManagePlan = customer.is_canceled || customer.is_lifetime || customer.is_beneficiary;
+    const canManagePlan =
+      customer.is_canceled || customer.is_lifetime || customer.is_beneficiary
 
     return (
       <RadioOptions value={planId} onSelect={onSelect}>
@@ -88,9 +94,9 @@ export default class PlanSelection extends PureComponent {
               )}
             </RadioOptions.Option>
 
-            {selectedValue === 'basic' &&
+            {selectedValue === 'basic' && (
               <PrivateBlocksMeter me={me} my={6} ml={8} />
-            }
+            )}
 
             <RadioOptions.Option
               selectedValue={selectedValue}
@@ -107,13 +113,11 @@ export default class PlanSelection extends PureComponent {
 
                   <OptionDescription>
                     <Box width="75%">
-                      Premium members can upload unlimited blocks,{' '}
-                      hide from search engines, and gain access to new features.
+                      Premium members can upload unlimited blocks, hide from
+                      search engines, and gain access to new features.
                     </Box>
 
-                    <Box textAlign="right">
-                      $45 billed annually
-                    </Box>
+                    <Box textAlign="right">$45 billed annually</Box>
                   </OptionDescription>
                 </Option>
               )}
@@ -134,15 +138,15 @@ export default class PlanSelection extends PureComponent {
 
                   <OptionDescription>
                     <Box width="75%">
-                      Premium members can upload unlimited blocks,{' '}
-                      hide from search engines, and gain access to new features.
+                      Premium members can upload unlimited blocks, hide from
+                      search engines, and gain access to new features.
                     </Box>
                   </OptionDescription>
                 </Option>
               )}
             </RadioOptions.Option>
 
-            {customer.is_lifetime &&
+            {customer.is_lifetime && (
               <RadioOptions.Option
                 selectedValue={selectedValue}
                 value="lifetime"
@@ -157,17 +161,17 @@ export default class PlanSelection extends PureComponent {
 
                     <OptionDescription>
                       <Box width="75%">
-                        Premium members can upload unlimited blocks,{' '}
-                        hide from search engines, and gain access to new features.
+                        Premium members can upload unlimited blocks, hide from
+                        search engines, and gain access to new features.
                       </Box>
                     </OptionDescription>
                   </Option>
                 )}
               </RadioOptions.Option>
-            }
+            )}
           </div>
         )}
       </RadioOptions>
-    );
+    )
   }
 }

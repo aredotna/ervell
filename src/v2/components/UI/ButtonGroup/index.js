@@ -1,15 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import provideChildrenWithProps from 'v2/util/provideChildrenWithProps';
+import provideChildrenWithProps from 'v2/util/provideChildrenWithProps'
 
-import { buttonBorderWidth, BUTTON_BORDER_RADIUS } from 'v2/components/UI/GenericButton';
+import {
+  buttonBorderWidth,
+  BUTTON_BORDER_RADIUS,
+} from 'v2/components/UI/GenericButton'
 
 const ButtonGroupContainer = styled.div`
   display: flex;
 
-  ${props => props.stretch && `
+  ${props =>
+    props.stretch &&
+    `
     > span,
     > div,
     > button,
@@ -50,21 +55,21 @@ const ButtonGroupContainer = styled.div`
       border-radius: ${BUTTON_BORDER_RADIUS};
     }
   }
-`;
+`
 
 const ButtonGroup = ({ children, stretch, ...rest }) => (
   <ButtonGroupContainer stretch={stretch} {...rest}>
     {provideChildrenWithProps(children, rest)}
   </ButtonGroupContainer>
-);
+)
 
 ButtonGroup.propTypes = {
   children: PropTypes.node.isRequired,
   stretch: PropTypes.bool,
-};
+}
 
 ButtonGroup.defaultProps = {
   stretch: false,
-};
+}
 
-export default ButtonGroup;
+export default ButtonGroup

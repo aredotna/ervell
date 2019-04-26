@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import myHeaderFragment from 'v2/components/Billing/components/MyHeader/fragments/myHeader';
+import myHeaderFragment from 'v2/components/Billing/components/MyHeader/fragments/myHeader'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import MemberAvatar from 'v2/components/MemberAvatar';
-import UpcomingInvoice from 'v2/components/Billing/components/UpcomingInvoice';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import MemberAvatar from 'v2/components/MemberAvatar'
+import UpcomingInvoice from 'v2/components/Billing/components/UpcomingInvoice'
 
 const Header = styled(Box)`
   display: flex;
   align-items: flex-start;
-`;
+`
 
 export default class MyHeader extends PureComponent {
   static propTypes = {
@@ -20,16 +20,11 @@ export default class MyHeader extends PureComponent {
   }
 
   render() {
-    const { me, ...rest } = this.props;
+    const { me, ...rest } = this.props
 
     return (
       <Header {...rest}>
-        <MemberAvatar
-          member={me}
-          size={80}
-          isLinked={false}
-          circle
-        />
+        <MemberAvatar member={me} size={80} isLinked={false} circle />
 
         <Box ml={6}>
           <Text f={6} mb={2} fontWeight="bold">
@@ -39,6 +34,6 @@ export default class MyHeader extends PureComponent {
           <UpcomingInvoice customer={me.customer} />
         </Box>
       </Header>
-    );
+    )
   }
 }

@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import emptyProfileFragment from 'v2/components/ProfileEmptyMessage/fragments/indentifiable';
+import emptyProfileFragment from 'v2/components/ProfileEmptyMessage/fragments/indentifiable'
 
-import Text from 'v2/components/UI/Text';
-import Box from 'v2/components/UI/Box';
-import Modal from 'v2/components/UI/Modal';
-import { GenericButton as Button } from 'v2/components/UI/GenericButton';
-import NewChannelForm from 'v2/components/NewChannelForm';
+import Text from 'v2/components/UI/Text'
+import Box from 'v2/components/UI/Box'
+import Modal from 'v2/components/UI/Modal'
+import { GenericButton as Button } from 'v2/components/UI/GenericButton'
+import NewChannelForm from 'v2/components/NewChannelForm'
 
 const Copy = styled(Text)`
   text-align: center;
   a {
     font-weight: bold;
   }
-  a:hover{
+  a:hover {
     color: ${x => x.theme.colors.gray.base};
   }
-`;
+`
 
 export default class ProfileEmptyMessage extends Component {
   static propTypes = {
@@ -32,56 +32,76 @@ export default class ProfileEmptyMessage extends Component {
   }
 
   openNewChannelModal = () => {
-    const { identifiable } = this.props;
+    const { identifiable } = this.props
 
     const newChannelProps = identifiable.__typename === 'Group' && {
       group_id: identifiable.id,
       authorType: 'GROUP',
       visibility: 'PRIVATE',
-    };
+    }
 
-    const modal = new Modal(NewChannelForm, newChannelProps);
-    modal.open();
+    const modal = new Modal(NewChannelForm, newChannelProps)
+    modal.open()
   }
 
   render() {
-    const { isMine, identifiable } = this.props;
-    const isGroup = identifiable.__typename === 'Group';
+    const { isMine, identifiable } = this.props
+    const isGroup = identifiable.__typename === 'Group'
 
     return (
-      <Copy f={[6, 6, 8]} mt={7} mb={6} color="gray.medium" lineHeight={[2, 2, 2]}>
-
+      <Copy
+        f={[6, 6, 8]}
+        mt={7}
+        mb={6}
+        color="gray.medium"
+        lineHeight={[2, 2, 2]}
+      >
         {/* Profile is the current user's */}
-        {isMine && !isGroup &&
+        {isMine && !isGroup && (
           <div>
             <Box>You profile doesn&#39;t have any content yet.</Box>
-            <Button f={[3, 3, 5]} mt={6} onClick={this.openNewChannelModal} color="gray.bold">
+            <Button
+              f={[3, 3, 5]}
+              mt={6}
+              onClick={this.openNewChannelModal}
+              color="gray.bold"
+            >
               Create a channel
             </Button>
           </div>
-        }
+        )}
 
         {/* Profile is the current user's group */}
-        {isMine && isGroup &&
+        {isMine && isGroup && (
           <div>
             <Box>This is your group&#39;s profile.</Box>
             <Box mt={5}>
-              Your group will stay secret until you create a publicly visible channel.
+              Your group will stay secret until you create a publicly visible
+              channel.
             </Box>
-            <Button f={[3, 3, 5]} mt={7} onClick={this.openNewChannelModal} color="gray.bold">
+            <Button
+              f={[3, 3, 5]}
+              mt={7}
+              onClick={this.openNewChannelModal}
+              color="gray.bold"
+            >
               Create a group channel
             </Button>
           </div>
-        }
+        )}
 
         {/* Profile is not associated with the current user */}
-        {!isMine &&
+        {!isMine && (
           <div>
-            <Box>{identifiable.name} doesn&#39;t have any public content yet.</Box>
-            <Box mt={5}>Follow them to get an update in your feed when they add something.</Box>
+            <Box>
+              {identifiable.name} doesn&#39;t have any public content yet.
+            </Box>
+            <Box mt={5}>
+              Follow them to get an update in your feed when they add something.
+            </Box>
           </div>
-        }
+        )}
       </Copy>
-    );
+    )
   }
 }

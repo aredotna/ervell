@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import { buttonBorderWidth, BUTTON_BORDER_RADIUS } from 'v2/components/UI/GenericButton';
-import ButtonGroup from 'v2/components/UI/ButtonGroup';
+import {
+  buttonBorderWidth,
+  BUTTON_BORDER_RADIUS,
+} from 'v2/components/UI/GenericButton'
+import ButtonGroup from 'v2/components/UI/ButtonGroup'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 export const PlanSelect = styled(ButtonGroup)`
   flex: 1;
-`;
+`
 
 export const Plan = styled.div`
   border-radius: ${BUTTON_BORDER_RADIUS};
@@ -25,7 +28,9 @@ export const Plan = styled.div`
     color: ${props => props.theme.colors.gray.medium};
   }
 
-  ${props => !props.selected && `
+  ${props =>
+    !props.selected &&
+    `
     &:hover {
       border-color: ${props.theme.colors.gray.semiBold};
 
@@ -35,7 +40,9 @@ export const Plan = styled.div`
     }
   `}
 
-  ${props => props.selected && `
+  ${props =>
+    props.selected &&
+    `
     border-color: ${props.theme.colors.gray.bold};
     z-index: 1;
 
@@ -50,10 +57,12 @@ export const Plan = styled.div`
       right: ${props.theme.space[5]};
     }
   `}
-`;
+`
 
 export const PremiumPlan = styled(Plan)`
-  ${props => props.selected && `
+  ${props =>
+    props.selected &&
+    `
     border-color: ${props.theme.colors.state.premium};
     > div {
       color: ${props.theme.colors.state.premium};
@@ -64,7 +73,9 @@ export const PremiumPlan = styled(Plan)`
     }
   `}
 
-  ${props => !props.selected && `
+  ${props =>
+    !props.selected &&
+    `
     &:hover {
       border-color: ${props.theme.colors.state.premium};
 
@@ -73,8 +84,7 @@ export const PremiumPlan = styled(Plan)`
       }
     }
   `}
-
-`;
+`
 
 export default class PlanSelector extends Component {
   static propTypes = {
@@ -91,42 +101,43 @@ export default class PlanSelector extends Component {
     selected: this.props.selected,
   }
 
-  onPlanSelect = (selected) => {
-    this.setState({ selected });
-    this.props.onPlanSelect(selected);
+  onPlanSelect = selected => {
+    this.setState({ selected })
+    this.props.onPlanSelect(selected)
   }
 
   render() {
-    const { selected } = this.state;
+    const { selected } = this.state
 
     return (
       <Box display="flex" justifyContent="center" my={7}>
         <PlanSelect>
-          <Plan selected={selected === 'basic'} onClick={() => this.onPlanSelect('basic')}>
+          <Plan
+            selected={selected === 'basic'}
+            onClick={() => this.onPlanSelect('basic')}
+          >
             <Text f={5} pb={2}>
               <strong>Basic</strong>
             </Text>
-            <Text f={2}>
-              Limited to 50 private blocks
-            </Text>
+            <Text f={2}>Limited to 50 private blocks</Text>
             <Text f={1}>
               <strong>Free</strong>
             </Text>
-
           </Plan>
-          <PremiumPlan selected={selected === 'premium'} onClick={() => this.onPlanSelect('premium')}>
+          <PremiumPlan
+            selected={selected === 'premium'}
+            onClick={() => this.onPlanSelect('premium')}
+          >
             <Text f={5} pb={2}>
               <strong>Premium</strong>
             </Text>
-            <Text f={1}>
-              Unlimited private blocks + more
-            </Text>
+            <Text f={1}>Unlimited private blocks + more</Text>
             <Text f={1}>
               <strong>$5/month or $45/year</strong>
             </Text>
           </PremiumPlan>
         </PlanSelect>
       </Box>
-    );
+    )
   }
 }

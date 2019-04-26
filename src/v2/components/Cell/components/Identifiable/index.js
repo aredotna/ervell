@@ -1,32 +1,31 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { space } from 'styled-system';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { space } from 'styled-system'
+import { propType } from 'graphql-anywhere'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell';
+import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Badge from 'v2/components/UI/Badge';
-import Truncate from 'v2/components/UI/Truncate';
-import MemberAvatar from 'v2/components/MemberAvatar';
-import { mixin as dividerButtonMixin } from 'v2/components/UI/Buttons/components/DividerButton';
-import FollowButton from 'v2/components/FollowButton';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Badge from 'v2/components/UI/Badge'
+import Truncate from 'v2/components/UI/Truncate'
+import MemberAvatar from 'v2/components/MemberAvatar'
+import { mixin as dividerButtonMixin } from 'v2/components/UI/Buttons/components/DividerButton'
+import FollowButton from 'v2/components/FollowButton'
 
 const IdentifiableFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
-`;
+`
 
-const Wrap = styled(Box).attrs({
-})`
+const Wrap = styled(Box).attrs({})`
   display: flex;
   flex: 0.33;
   width: 100%;
   justify-content: center;
   align-items: flex-end;
-`;
+`
 
 const Container = styled.a.attrs({
   px: 4,
@@ -49,10 +48,12 @@ const Container = styled.a.attrs({
     border-color: black;
   }
 
-  ${x => x.__typename === 'Group' && `
+  ${x =>
+    x.__typename === 'Group' &&
+    `
     background-color: ${x.theme.colors.gray.hint};
   `}
-`;
+`
 
 export default class Indentifiable extends PureComponent {
   static propTypes = {
@@ -64,16 +65,16 @@ export default class Indentifiable extends PureComponent {
   }
 
   onMouseEnter = () => {
-    this.setState({ mode: 'hover' });
+    this.setState({ mode: 'hover' })
   }
 
   onMouseLeave = () => {
-    this.setState({ mode: 'resting' });
+    this.setState({ mode: 'resting' })
   }
 
   render() {
-    const { mode } = this.state;
-    const { identifiable } = this.props;
+    const { mode } = this.state
+    const { identifiable } = this.props
 
     return (
       <Container
@@ -87,15 +88,17 @@ export default class Indentifiable extends PureComponent {
       >
         <Wrap>
           <Text f={5} fontWeight="bold" textAlign="center" breakWord>
-            <Truncate length={20}>
-              {identifiable.name}
-            </Truncate>
+            <Truncate length={20}>{identifiable.name}</Truncate>
 
-            {identifiable.__typename === 'Group' &&
-              <Badge f={0} ml={4} icon={{ private: 'Lock' }[identifiable.visibility]}>
+            {identifiable.__typename === 'Group' && (
+              <Badge
+                f={0}
+                ml={4}
+                icon={{ private: 'Lock' }[identifiable.visibility]}
+              >
                 Group
               </Badge>
-            }
+            )}
           </Text>
         </Wrap>
 
@@ -107,15 +110,15 @@ export default class Indentifiable extends PureComponent {
         />
 
         <Wrap>
-          {mode !== 'resting' &&
+          {mode !== 'resting' && (
             <IdentifiableFollowButton
               f={4}
               id={identifiable.id}
               type={identifiable.__typename.toUpperCase()}
             />
-          }
+          )}
         </Wrap>
       </Container>
-    );
+    )
   }
 }

@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult';
-import groupSearchResultFragment from 'v2/components/UI/SearchResults/Group/fragments/groupSearchResult';
+import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult'
+import groupSearchResultFragment from 'v2/components/UI/SearchResults/Group/fragments/groupSearchResult'
 
 export default gql`
   query TransferChannelSearchResultsQuery($query: String!) {
@@ -18,4 +18,4 @@ export default gql`
   }
   ${userSearchResultFragment}
   ${groupSearchResultFragment}
-`;
+`

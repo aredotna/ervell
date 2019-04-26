@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import styled, { css } from 'styled-components'
+import PropTypes from 'prop-types'
 
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 
 const hoverMixin = css`
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
-`;
+`
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -18,8 +18,10 @@ const Container = styled.div`
   align-items: flex-end;
 
   ${x => x.mode === 'hover' && hoverMixin}
-  &:hover { ${hoverMixin} }
-`;
+  &:hover {
+    ${hoverMixin}
+  }
+`
 
 export default class PendingBlock extends PureComponent {
   static propTypes = {
@@ -31,12 +33,12 @@ export default class PendingBlock extends PureComponent {
   }
 
   render() {
-    const { mode } = this.props;
+    const { mode } = this.props
 
     return (
       <Container mode={mode}>
         <LoadingIndicator />
       </Container>
-    );
+    )
   }
 }

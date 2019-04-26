@@ -1,1 +1,1 @@
-export default (n, m) => ((n % m) + m) % m;
+export default (n, m) => ((n % m) + m) % m

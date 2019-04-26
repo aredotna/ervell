@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import myGroupLinkFragment from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink';
+import myGroupLinkFragment from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink'
 
-import Box, { mixin as boxMixin } from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import MemberAvatar from 'v2/components/MemberAvatar';
-import BorderedLock from 'v2/components/UI/BorderedLock';
+import Box, { mixin as boxMixin } from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import MemberAvatar from 'v2/components/MemberAvatar'
+import BorderedLock from 'v2/components/UI/BorderedLock'
 
 const Container = styled.a`
   ${boxMixin}
   text-decoration: none;
-`;
+`
 
 const Avatar = styled(MemberAvatar)`
   opacity: 0.65;
   ${x => x.mode === 'hover' && 'opacity: 0.7;'};
-`;
+`
 
 const GroupName = styled(Text)`
   ${x =>
@@ -25,28 +25,28 @@ const GroupName = styled(Text)`
     `
     color: ${x.theme.colors.black};
   `}
-`;
+`
 
 export default class MyGroupLink extends Component {
   static propTypes = {
     group: propType(myGroupLinkFragment).isRequired,
-  };
+  }
 
   state = {
     mode: 'resting',
-  };
+  }
 
   onMouseOver = () => {
-    this.setState({ mode: 'hover' });
-  };
+    this.setState({ mode: 'hover' })
+  }
 
   onMouseOut = () => {
-    this.setState({ mode: 'resting' });
-  };
+    this.setState({ mode: 'resting' })
+  }
 
   render() {
-    const { group } = this.props;
-    const { mode } = this.state;
+    const { group } = this.props
+    const { mode } = this.state
 
     return (
       <Container
@@ -76,6 +76,6 @@ export default class MyGroupLink extends Component {
 
         {group.visibility === 'private' && <BorderedLock ml={3} />}
       </Container>
-    );
+    )
   }
 }

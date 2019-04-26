@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Modal from 'v2/components/UI/Modal/Portal';
-import ManageBlock from 'v2/components/ManageBlock';
-import BlockLightboxModalDialog from 'v2/components/BlockLightbox/components/BlockLightboxModalDialog';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Modal from 'v2/components/UI/Modal/Portal'
+import ManageBlock from 'v2/components/ManageBlock'
+import BlockLightboxModalDialog from 'v2/components/BlockLightbox/components/BlockLightboxModalDialog'
 
-import blockLightboxTextFragment from 'v2/components/BlockLightbox/components/BlockLightboxText/fragments/blockLightboxText';
+import blockLightboxTextFragment from 'v2/components/BlockLightbox/components/BlockLightboxText/fragments/blockLightboxText'
 
 export default class BlockLightboxText extends PureComponent {
   static propTypes = {
@@ -20,19 +20,17 @@ export default class BlockLightboxText extends PureComponent {
     mode: 'resting',
   }
 
-  openModal = () =>
-    this.setState({ mode: 'editing' });
+  openModal = () => this.setState({ mode: 'editing' })
 
-  closeModal = () =>
-    this.setState({ mode: 'resting' });
+  closeModal = () => this.setState({ mode: 'resting' })
 
   render() {
-    const { mode } = this.state;
-    const { block, layout } = this.props;
+    const { mode } = this.state
+    const { block, layout } = this.props
 
     return (
       <React.Fragment>
-        {mode === 'editing' &&
+        {mode === 'editing' && (
           <Modal onClose={this.closeModal} Dialog={BlockLightboxModalDialog}>
             <ManageBlock
               block={block}
@@ -41,22 +39,19 @@ export default class BlockLightboxText extends PureComponent {
               autoFocus="body"
             />
           </Modal>
-        }
+        )}
 
         <Box height="100%" width="100%">
-          <Box
-            height="100%"
-            width="100%"
-            p={9}
-            overflowScrolling
-          >
+          <Box height="100%" width="100%" p={9} overflowScrolling>
             <Box
               minHeight="100%"
               width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
               maxWidth="55em"
               bg={{ DEFAULT: 'white', FULLSCREEN: 'gray.bold' }[layout]}
               border="1px solid"
-              borderColor={{ DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]}
+              borderColor={
+                { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]
+              }
               px={7}
               py={6}
               mx="auto"
@@ -74,14 +69,21 @@ export default class BlockLightboxText extends PureComponent {
               />
             </Box>
 
-            {layout === 'FULLSCREEN' && block.title &&
-              <Text mt={6} f={5} lineHeight={2} color="gray.hint" fontWeight="bold" textAlign="center">
+            {layout === 'FULLSCREEN' && block.title && (
+              <Text
+                mt={6}
+                f={5}
+                lineHeight={2}
+                color="gray.hint"
+                fontWeight="bold"
+                textAlign="center"
+              >
                 {block.title}
               </Text>
-            }
+            )}
           </Box>
         </Box>
       </React.Fragment>
-    );
+    )
   }
 }

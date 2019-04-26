@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import collaboratorSearchResultFragment from 'v2/components/CollaboratorSearch/components/CollaboratorSearchResult/fragments/collaboratorSearchResult';
+import collaboratorSearchResultFragment from 'v2/components/CollaboratorSearch/components/CollaboratorSearchResult/fragments/collaboratorSearchResult'
 
 export default gql`
   fragment CollaboratorSearchResults on Searches {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${collaboratorSearchResultFragment}
-`;
+`

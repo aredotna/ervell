@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import blockLightboxCommentsFragment from 'v2/components/BlockLightbox/components/BlockLightboxComments/fragments/blockLightboxComments';
+import blockLightboxCommentsFragment from 'v2/components/BlockLightbox/components/BlockLightboxComments/fragments/blockLightboxComments'
 
 export default gql`
   mutation deleteCommentMutation($id: ID!) {
@@ -15,4 +15,4 @@ export default gql`
     }
   }
   ${blockLightboxCommentsFragment}
-`;
+`

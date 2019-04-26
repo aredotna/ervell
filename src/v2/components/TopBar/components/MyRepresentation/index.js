@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import Overlay from 'v2/components/UI/Overlay';
-import UserAvatar from 'v2/components/UserAvatar';
-import UserDropdown from 'v2/components/UserDropdown';
+import Box from 'v2/components/UI/Box'
+import Overlay from 'v2/components/UI/Overlay'
+import UserAvatar from 'v2/components/UserAvatar'
+import UserDropdown from 'v2/components/UserDropdown'
 
 const Container = styled(Box)`
   display: flex;
@@ -15,7 +15,7 @@ const Container = styled(Box)`
   &:hover {
     opacity: 0.5;
   }
-`;
+`
 
 export default class MyRepresentation extends PureComponent {
   static propTypes = {
@@ -29,33 +29,37 @@ export default class MyRepresentation extends PureComponent {
     mode: 'resting',
   }
 
-  containerRef = React.createRef();
+  containerRef = React.createRef()
 
   handleClick = () => {
-    if (this.state.mode === 'closing') return;
-    this.setState({ mode: 'open' });
+    if (this.state.mode === 'closing') return
+    this.setState({ mode: 'open' })
   }
 
   handleClose = () => {
-    this.setState({ mode: 'closing' });
+    this.setState({ mode: 'closing' })
 
     // TODO: Fix this hack?
     setTimeout(() => {
-      this.setState({ mode: 'resting' });
-    }, 100);
+      this.setState({ mode: 'resting' })
+    }, 100)
   }
 
   render() {
-    const { mode } = this.state;
-    const { me } = this.props;
+    const { mode } = this.state
+    const { me } = this.props
 
     return (
       <React.Fragment>
-        <Container {...this.props} onClick={this.handleClick} ref={this.containerRef}>
+        <Container
+          {...this.props}
+          onClick={this.handleClick}
+          ref={this.containerRef}
+        >
           <UserAvatar size={30} user={{ ...me, href: null }} />
         </Container>
 
-        {mode === 'open' &&
+        {mode === 'open' && (
           <Overlay
             onClose={this.handleClose}
             targetEl={() => this.containerRef.current}
@@ -69,8 +73,8 @@ export default class MyRepresentation extends PureComponent {
           >
             <UserDropdown />
           </Overlay>
-        }
+        )}
       </React.Fragment>
-    );
+    )
   }
 }

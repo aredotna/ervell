@@ -1,12 +1,12 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import States from 'v2/stories/__components__/States';
+import Specimen from 'v2/stories/__components__/Specimen'
+import States from 'v2/stories/__components__/States'
 
-import Button from 'v2/components/UI/GenericButton';
-import ButtonGroup from 'v2/components/UI/ButtonGroup';
-import Icons, { ICON_NAMES } from 'v2/components/UI/Icons';
+import Button from 'v2/components/UI/GenericButton'
+import ButtonGroup from 'v2/components/UI/ButtonGroup'
+import Icons, { ICON_NAMES } from 'v2/components/UI/Icons'
 
 storiesOf('Icons', module)
   .add('Names', () => (
@@ -53,4 +53,4 @@ storiesOf('Icons', module)
         </ButtonGroup>
       </Specimen>
     </div>
-  ));
+  ))

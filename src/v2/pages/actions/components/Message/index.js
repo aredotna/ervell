@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
 export default styled(Text).attrs({
   fontSize: 6,
@@ -11,4 +11,4 @@ export default styled(Text).attrs({
   > a {
     font-weight: bold;
   }
-`;
+`

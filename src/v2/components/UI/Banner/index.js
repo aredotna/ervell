@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { graphql } from 'react-apollo'
 
-import dismissBannerMutation from 'v2/components/UI/Banner/mutations/dimissBanner';
+import dismissBannerMutation from 'v2/components/UI/Banner/mutations/dimissBanner'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Close from 'v2/components/UI/Close';
-import Icons from 'v2/components/UI/Icons';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Close from 'v2/components/UI/Close'
+import Icons from 'v2/components/UI/Icons'
 
 const Container = styled(Box).attrs({
   p: 6,
@@ -17,15 +17,14 @@ const Container = styled(Box).attrs({
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 const Wrapper = styled(Box).attrs({
   display: 'flex',
   flexDirection: ['column', 'column', 'row'],
   alignItems: 'center',
   justifyContent: 'center',
-})`
-`;
+})``
 
 class Banner extends PureComponent {
   static propTypes = {
@@ -50,20 +49,20 @@ class Banner extends PureComponent {
     mode: 'resting',
   }
 
-  handleClose = (e) => {
-    e.preventDefault();
+  handleClose = e => {
+    e.preventDefault()
 
-    const { onClose, dismissBanner, banner } = this.props;
+    const { onClose, dismissBanner, banner } = this.props
 
     if (banner) {
       dismissBanner({
         variables: { banner },
-      });
+      })
     }
 
-    if (onClose) onClose();
+    if (onClose) onClose()
 
-    this.setState({ mode: 'closed' });
+    this.setState({ mode: 'closed' })
   }
 
   render() {
@@ -74,9 +73,9 @@ class Banner extends PureComponent {
       iconName,
       isCloseable,
       ...rest
-    } = this.props;
+    } = this.props
 
-    if (this.state.mode === 'closed') return null;
+    if (this.state.mode === 'closed') return null
 
     return (
       <Container {...rest}>
@@ -86,14 +85,9 @@ class Banner extends PureComponent {
           alignItems="center"
           justifyContent="center"
         >
-          {iconName &&
-            <Icons
-              flexShrink={0}
-              name={iconName}
-              color={color}
-              mr={5}
-            />
-          }
+          {iconName && (
+            <Icons flexShrink={0} name={iconName} color={color} mr={5} />
+          )}
 
           <Box flex={[1, 1, 'unset']}>
             <Text
@@ -103,14 +97,12 @@ class Banner extends PureComponent {
               underlineLinks
               hoverLinks={{ color: 'black' }}
             >
-              <Wrapper>
-                {children}
-              </Wrapper>
+              <Wrapper>{children}</Wrapper>
             </Text>
           </Box>
         </Box>
 
-        {isCloseable &&
+        {isCloseable && (
           <Close
             size={7}
             thickness="4px"
@@ -118,12 +110,12 @@ class Banner extends PureComponent {
             alignSelf="flex-start"
             onClick={this.handleClose}
           />
-        }
+        )}
       </Container>
-    );
+    )
   }
 }
 
 export default graphql(dismissBannerMutation, {
   name: 'dismissBanner',
-})(Banner);
+})(Banner)

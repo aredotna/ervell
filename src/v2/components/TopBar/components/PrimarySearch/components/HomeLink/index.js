@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import { ICON_OFFSET } from 'v2/components/UI/SearchInput';
-import Icons from 'v2/components/UI/Icons';
+import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
+import Icons from 'v2/components/UI/Icons'
 
 const Container = styled.a`
   box-sizing: border-box;
@@ -24,13 +24,10 @@ const Container = styled.a`
       fill: black;
     }
   }
-`;
+`
 
 export default props => (
   <Container href="/" {...props}>
-    <Icons
-      name="ArenaMark"
-      width="100%"
-    />
+    <Icons name="ArenaMark" width="100%" />
   </Container>
-);
+)

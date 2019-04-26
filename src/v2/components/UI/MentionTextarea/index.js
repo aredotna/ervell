@@ -1,24 +1,24 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import InputTrigger from 'react-input-trigger';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import InputTrigger from 'react-input-trigger'
+import { Query } from 'react-apollo'
 
-import userSuggestionsQuery from 'v2/components/UI/MentionTextarea/queries/userSuggestions';
+import userSuggestionsQuery from 'v2/components/UI/MentionTextarea/queries/userSuggestions'
 
-import Box from 'v2/components/UI/Box';
-import { Textarea } from 'v2/components/UI/Inputs';
-import MentionTextareaSuggestions from 'v2/components/UI/MentionTextarea/components/MentionTextareaSuggestions';
+import Box from 'v2/components/UI/Box'
+import { Textarea } from 'v2/components/UI/Inputs'
+import MentionTextareaSuggestions from 'v2/components/UI/MentionTextarea/components/MentionTextareaSuggestions'
 
 export default class MentionTextarea extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
     onKeyDown: PropTypes.func,
-  };
+  }
 
   static defaultProps = {
     onChange: () => {},
     onKeyDown: () => {},
-  };
+  }
 
   state = {
     mode: 'resting',
@@ -27,9 +27,9 @@ export default class MentionTextarea extends PureComponent {
     selectionStart: null,
     query: '',
     value: '',
-  };
+  }
 
-  textareaRef = React.createRef();
+  textareaRef = React.createRef()
 
   toggleSuggestions = ({
     hookType,
@@ -40,13 +40,13 @@ export default class MentionTextarea extends PureComponent {
         mode: 'suggesting',
         position: { top: top + height, left },
         selectionStart,
-      });
+      })
     }
 
     if (hookType === 'cancel') {
-      this.resetMention();
+      this.resetMention()
     }
-  };
+  }
 
   resetMention = () => {
     this.setState({
@@ -54,65 +54,65 @@ export default class MentionTextarea extends PureComponent {
       position: {},
       query: '',
       selectionStart: null,
-    });
-  };
+    })
+  }
 
   cancelMention = () => {
-    this.resetMention();
-    this.endHandler();
-  };
+    this.resetMention()
+    this.endHandler()
+  }
 
   handleInput = ({ text: query }) => {
-    this.setState({ query: query.trim() });
-  };
+    this.setState({ query: query.trim() })
+  }
 
   handleSuggestionNav = e => {
-    const { key } = e;
-    const { cursor, mode } = this.state;
+    const { key } = e
+    const { cursor, mode } = this.state
 
-    if (mode === 'resting') return;
+    if (mode === 'resting') return
 
     switch (key) {
       case 'Escape':
-        this.cancelMention();
-        break;
+        this.cancelMention()
+        break
       case 'Tab':
       case 'Enter': {
-        e.preventDefault();
+        e.preventDefault()
 
-        this.executeSelection();
-        break;
+        this.executeSelection()
+        break
       }
       case 'ArrowDown':
-        e.preventDefault();
+        e.preventDefault()
 
         this.setState({
           cursor: cursor + 1,
-        });
-        break;
+        })
+        break
       case 'ArrowUp':
-        e.preventDefault();
+        e.preventDefault()
 
         this.setState({
           cursor: cursor - 1,
-        });
-        break;
+        })
+        break
       default:
-        break;
+        break
     }
-  };
+  }
 
   handleSelection = selectedId => {
-    this.setState({ selectedId });
-  };
+    this.setState({ selectedId })
+  }
 
   executeSelection = () => {
-    const { onChange } = this.props;
-    const { selectionStart, selectedId, value } = this.state;
+    const { onChange } = this.props
+    const { selectionStart, selectedId, value } = this.state
 
-    const head = value.slice(0, selectionStart);
-    const tail = value.slice(selectionStart + selectedId.length, value.length);
-    const newValue = `${head}${selectedId}${tail}`;
+    const head = value.slice(0, selectionStart)
+    const tail = value.slice(selectionStart + selectedId.length, value.length)
+    const newValue = `${head}${selectedId}${tail}`
 
     this.setState({
       mode: 'resting',
@@ -120,48 +120,48 @@ export default class MentionTextarea extends PureComponent {
       query: '',
       selectionStart: null,
       value: newValue,
-    });
+    })
 
-    this.endHandler();
+    this.endHandler()
 
     // TODO: Ensure focus
     // this.textareaRef.current.focus();
 
     // Ensures parent component receives the change
-    onChange({ target: { value: newValue } });
-  };
+    onChange({ target: { value: newValue } })
+  }
 
   handleChange = e => {
-    const { onChange } = this.props;
+    const { onChange } = this.props
 
     const {
       target: { value },
-    } = e;
+    } = e
 
-    this.setState({ value });
+    this.setState({ value })
 
-    return onChange(e);
-  };
+    return onChange(e)
+  }
 
   handleKeydown = e => {
-    const { mode } = this.state;
-    const { onKeyDown } = this.props;
+    const { mode } = this.state
+    const { onKeyDown } = this.props
 
     if (mode === 'suggesting') {
-      return null;
+      return null
     }
 
-    return onKeyDown(e);
-  };
+    return onKeyDown(e)
+  }
 
   updateCursor = cursor => {
-    this.setState({ cursor });
-  };
+    this.setState({ cursor })
+  }
 
   render() {
-    const { mode, position, query, cursor, value } = this.state;
+    const { mode, position, query, cursor, value } = this.state
 
-    const { onChange: _onChange, onKeyDown: _onKeyDown, ...rest } = this.props;
+    const { onChange: _onChange, onKeyDown: _onKeyDown, ...rest } = this.props
 
     return (
       <Box position="relative" onKeyDown={this.handleSuggestionNav}>
@@ -174,7 +174,7 @@ export default class MentionTextarea extends PureComponent {
           onStart={this.toggleSuggestions}
           onCancel={this.toggleSuggestions}
           endTrigger={endHandler => {
-            this.endHandler = endHandler;
+            this.endHandler = endHandler
           }}
         >
           <Textarea
@@ -191,13 +191,13 @@ export default class MentionTextarea extends PureComponent {
           <Query query={userSuggestionsQuery} variables={{ query }}>
             {({ loading, error, data }) => {
               if (loading || error) {
-                this.updateCursor(0);
-                return null;
+                this.updateCursor(0)
+                return null
               }
 
               const {
                 suggestions: { users: suggestions },
-              } = data;
+              } = data
 
               return (
                 <MentionTextareaSuggestions
@@ -209,11 +209,11 @@ export default class MentionTextarea extends PureComponent {
                   onUpdateCursor={this.updateCursor}
                   {...position}
                 />
-              );
+              )
             }}
           </Query>
         )}
       </Box>
-    );
+    )
   }
 }

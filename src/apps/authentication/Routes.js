@@ -1,22 +1,19 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import parseRoute from 'v2/util/parseRoute';
+import parseRoute from 'v2/util/parseRoute'
 
-import BlankLayout from 'v2/components/UI/Layouts/BlankLayout';
-import LoginPage from 'v2/pages/authentication/LoginPage';
-import RegistrationPage from 'v2/pages/authentication/RegistrationPage';
-import ResetPasswordPage from 'v2/pages/authentication/ResetPasswordPage';
-import ForgotPasswordPage from 'v2/pages/authentication/ForgotPasswordPage';
-import AcceptInvitationPage from 'v2/pages/authentication/AcceptInvitationPage';
+import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
+import LoginPage from 'v2/pages/authentication/LoginPage'
+import RegistrationPage from 'v2/pages/authentication/RegistrationPage'
+import ResetPasswordPage from 'v2/pages/authentication/ResetPasswordPage'
+import ForgotPasswordPage from 'v2/pages/authentication/ForgotPasswordPage'
+import AcceptInvitationPage from 'v2/pages/authentication/AcceptInvitationPage'
 
 export default () => (
   <BlankLayout>
     <Switch>
-      <Route
-        path="/log_in"
-        render={() => <LoginPage />}
-      />
+      <Route path="/log_in" render={() => <LoginPage />} />
 
       <Route
         path="/sign_up/:plan?"
@@ -25,10 +22,7 @@ export default () => (
         ))}
       />
 
-      <Route
-        path="/forgot"
-        render={() => <ForgotPasswordPage />}
-      />
+      <Route path="/forgot" render={() => <ForgotPasswordPage />} />
 
       <Route
         path="/reset/:reset_password_token"
@@ -50,4 +44,4 @@ export default () => (
       />
     </Switch>
   </BlankLayout>
-);
+)

@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import billingFormFragment from 'v2/components/Billing/components/BillingForm/fragments/billingForm';
+import billingFormFragment from 'v2/components/Billing/components/BillingForm/fragments/billingForm'
 
 export default gql`
   mutation ApplyCouponToSubscription($coupon_code: String!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${billingFormFragment}
-`;
+`

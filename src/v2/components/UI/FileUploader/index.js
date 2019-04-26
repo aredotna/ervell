@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { withApollo } from 'react-apollo';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react'
+import { withApollo } from 'react-apollo'
+import PropTypes from 'prop-types'
 
-import uploadPolicyQuery from 'v2/components/UI/FileUploader/queries/uploadPolicy';
+import uploadPolicyQuery from 'v2/components/UI/FileUploader/queries/uploadPolicy'
 
-import uploadFile from 'v2/components/UI/FileUploader/lib/uploadFile';
+import uploadFile from 'v2/components/UI/FileUploader/lib/uploadFile'
 
 const FileUploader = ({
   client,
@@ -15,16 +15,16 @@ const FileUploader = ({
   onError,
 }) => {
   const decoratedFiles = files.map(file => {
-    const [fileProgress, setFileProgress] = useState(0);
-    const [fileUrl, setFileUrl] = useState(null);
+    const [fileProgress, setFileProgress] = useState(0)
+    const [fileUrl, setFileUrl] = useState(null)
     return {
       file,
       progress: fileProgress,
       setFileProgress,
       url: fileUrl,
       setFileUrl,
-    };
-  });
+    }
+  })
 
   useEffect(() => {
     client
@@ -44,11 +44,11 @@ const FileUploader = ({
         )
       )
       .then(filesWithUrls => onComplete({ filesWithUrls }))
-      .catch(onError);
-  }, []);
+      .catch(onError)
+  }, [])
 
-  return children({ files: decoratedFiles });
-};
+  return children({ files: decoratedFiles })
+}
 
 FileUploader.propTypes = {
   children: PropTypes.func.isRequired,
@@ -64,12 +64,12 @@ FileUploader.propTypes = {
   onUpload: PropTypes.func,
   onComplete: PropTypes.func,
   onError: PropTypes.func,
-};
+}
 
 FileUploader.defaultProps = {
   onComplete: () => {},
   onUpload: () => {},
   onError: () => {},
-};
+}
 
-export default withApollo(FileUploader);
+export default withApollo(FileUploader)

@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 
-import Alert from 'v2/components/UI/Alert';
-import Box from 'v2/components/UI/Box';
-import { SpaceProps } from 'styled-system';
-import { CancellationNotice as CancellationNoticeType } from '__generated__/CancellationNotice';
+import Alert from 'v2/components/UI/Alert'
+import Box from 'v2/components/UI/Box'
+import { SpaceProps } from 'styled-system'
+import { CancellationNotice as CancellationNoticeType } from '__generated__/CancellationNotice'
 
 interface CancellationNoticeProps extends SpaceProps {
-  customer: CancellationNoticeType;
-  onReenable: any;
+  customer: CancellationNoticeType
+  onReenable: any
 }
 
 export default class CancellationNotice extends PureComponent<
@@ -18,7 +18,7 @@ export default class CancellationNotice extends PureComponent<
       onReenable,
       customer: { current_period_end_at },
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <Alert isCloseable={false} {...rest}>
@@ -31,6 +31,6 @@ export default class CancellationNotice extends PureComponent<
           </Box>
         </Box>
       </Alert>
-    );
+    )
   }
 }

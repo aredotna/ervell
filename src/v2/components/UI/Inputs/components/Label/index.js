@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import {
   display,
   width,
@@ -10,10 +10,10 @@ import {
   textColor,
   textAlign,
   alignSelf,
-} from 'styled-system';
+} from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
-import { antialiased } from 'v2/styles/mixins';
+import { preset } from 'v2/styles/functions'
+import { antialiased } from 'v2/styles/mixins'
 
 export default styled.label`
   all: initial;
@@ -36,4 +36,4 @@ export default styled.label`
     text-decoration: underline;
     ${preset(textColor, { color: 'gray.base' })}
   }
-`;
+`

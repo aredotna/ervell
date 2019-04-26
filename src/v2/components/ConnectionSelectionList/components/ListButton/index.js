@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { inputPadding } from 'v2/components/UI/Inputs';
-import { baseMixin as baseTextMixin } from 'v2/components/UI/Text';
+import { inputPadding } from 'v2/components/UI/Inputs'
+import { baseMixin as baseTextMixin } from 'v2/components/UI/Text'
 
 export default styled.div.attrs({
   role: 'button',
@@ -19,17 +19,21 @@ export default styled.div.attrs({
   background-color: ${x => x.theme.colors.gray.hint};
   line-height: 1;
 
-  ${x => x.disabled && `
+  ${x =>
+    x.disabled &&
+    `
     &:hover {
       color: inherit;
       cursor: auto;
     }
   `}
 
-  ${x => !x.disabled && `
+  ${x =>
+    !x.disabled &&
+    `
     &:hover {
       z-index: 1;
       border: 1px solid ${x.theme.colors.gray.semiBold};
     }
   `}
-`;
+`

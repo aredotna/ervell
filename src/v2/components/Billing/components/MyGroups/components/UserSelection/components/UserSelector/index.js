@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import userSelectorFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
+import userSelectorFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import UserAvatar from 'v2/components/UserAvatar';
-import ToggleSwitch from 'v2/components/UI/ToggleSwitch';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import UserAvatar from 'v2/components/UserAvatar'
+import ToggleSwitch from 'v2/components/UI/ToggleSwitch'
 
 const Container = styled(Box).attrs({
   py: 3,
@@ -23,12 +23,13 @@ const Container = styled(Box).attrs({
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
-`;
+`
 
 export default class UserSelector extends PureComponent {
   static propTypes = {
     user: propType(userSelectorFragment).isRequired,
-    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment)).isRequired,
+    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment))
+      .isRequired,
     onSelect: PropTypes.func,
     onDeselect: PropTypes.func,
   }
@@ -39,21 +40,22 @@ export default class UserSelector extends PureComponent {
   }
 
   state = {
-    isSelected: this.props.upgradeableUsers.some(upgradeableUser =>
-      upgradeableUser.id === this.props.user.id),
+    isSelected: this.props.upgradeableUsers.some(
+      upgradeableUser => upgradeableUser.id === this.props.user.id
+    ),
   }
 
-  handleToggle = (isSelected) => {
-    const { onSelect, onDeselect, user } = this.props;
+  handleToggle = isSelected => {
+    const { onSelect, onDeselect, user } = this.props
 
-    this.setState({ isSelected });
+    this.setState({ isSelected })
 
-    return isSelected ? onSelect(user) : onDeselect(user);
+    return isSelected ? onSelect(user) : onDeselect(user)
   }
 
   render() {
-    const { user } = this.props;
-    const { isSelected } = this.state;
+    const { user } = this.props
+    const { isSelected } = this.state
 
     return (
       <Container>
@@ -69,32 +71,38 @@ export default class UserSelector extends PureComponent {
           </Text>
         </Box>
 
-        {user.is_premium && !user.is_canceled
-          ? (
+        {user.is_premium && !user.is_canceled ? (
+          <Text
+            f={1}
+            color={
+              { true: 'state.premium', false: 'gray.medium' }[
+                user.can.cancel_premium
+              ]
+            }
+            fontWeight="bold"
+          >
+            Already Premium {!user.can.cancel_premium && '(Managed separately)'}
+          </Text>
+        ) : (
+          <Box display="flex" alignItems="center">
             <Text
+              mr={5}
               f={1}
-              color={{ true: 'state.premium', false: 'gray.medium' }[user.can.cancel_premium]}
+              color={isSelected ? 'state.premium' : 'gray.medium'}
               fontWeight="bold"
             >
-              Already Premium {!user.can.cancel_premium && '(Managed separately)'}
+              {isSelected ? 'Upgrade' : 'Don’t upgrade'}
             </Text>
-          )
-          : (
-            <Box display="flex" alignItems="center">
-              <Text mr={5} f={1} color={isSelected ? 'state.premium' : 'gray.medium'} fontWeight="bold">
-                {isSelected ? 'Upgrade' : 'Don’t upgrade'}
-              </Text>
 
-              <ToggleSwitch
-                activeColor="state.premium"
-                inactiveColor="gray.semiBold"
-                onToggle={this.handleToggle}
-                value={isSelected}
-              />
-            </Box>
-          )
-        }
+            <ToggleSwitch
+              activeColor="state.premium"
+              inactiveColor="gray.semiBold"
+              onToggle={this.handleToggle}
+              value={isSelected}
+            />
+          </Box>
+        )}
       </Container>
-    );
+    )
   }
 }

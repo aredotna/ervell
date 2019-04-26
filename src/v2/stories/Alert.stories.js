@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Alert from 'v2/components/UI/Alert';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Alert from 'v2/components/UI/Alert'
 
 storiesOf('Alert', module).add('default', () => (
   <Specimen>
@@ -45,4 +45,4 @@ storiesOf('Alert', module).add('default', () => (
       Subscribed! You’re all set!
     </Alert>
   </Specimen>
-));
+))

@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import blockLightboxCommentFragment from 'v2/components/BlockLightbox/components/BlockLightboxComment/fragments/blockLightboxComment';
+import blockLightboxCommentFragment from 'v2/components/BlockLightbox/components/BlockLightboxComment/fragments/blockLightboxComment'
 
 export default gql`
   fragment BlockLightboxComments on Konnectable {
@@ -18,4 +18,4 @@ export default gql`
     }
   }
   ${blockLightboxCommentFragment}
-`;
+`

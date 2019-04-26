@@ -1,7 +1,7 @@
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import React from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
 
-import Page from 'v2/components/UI/Page';
+import Page from 'v2/components/UI/Page'
 
 export default ({ bundleName, apolloRes, res }) => {
   const html = (
@@ -14,9 +14,9 @@ export default ({ bundleName, apolloRes, res }) => {
       styles={apolloRes.styles}
       state={apolloRes.state}
     />
-  );
+  )
 
-  res.status(200);
-  res.send(`<!doctype html>\n${renderToStaticMarkup(html)}`);
-  res.end();
-};
+  res.status(200)
+  res.send(`<!doctype html>\n${renderToStaticMarkup(html)}`)
+  res.end()
+}

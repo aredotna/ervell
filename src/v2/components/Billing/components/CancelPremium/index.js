@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import GenericButton from 'v2/components/UI/GenericButton';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import GenericButton from 'v2/components/UI/GenericButton'
 
 export default class CancelPremium extends PureComponent {
   static propTypes = {
@@ -14,53 +14,51 @@ export default class CancelPremium extends PureComponent {
     mode: 'resting',
   }
 
-  activateConfirmation = (e) => {
-    e.preventDefault();
-    this.setState({ mode: 'active' });
+  activateConfirmation = e => {
+    e.preventDefault()
+    this.setState({ mode: 'active' })
   }
 
-  cancelCancellation = (e) => {
-    e.preventDefault();
-    this.setState({ mode: 'resting' });
+  cancelCancellation = e => {
+    e.preventDefault()
+    this.setState({ mode: 'resting' })
   }
 
   render() {
-    const { mode } = this.state;
-    const { onCancel } = this.props;
+    const { mode } = this.state
+    const { onCancel } = this.props
 
     return (
       <Box {...this.props}>
-        {mode === 'resting' &&
+        {mode === 'resting' && (
           <Text f={2} underlineLinks>
             <a onClick={this.activateConfirmation} role="button" tabIndex={0}>
               Cancel premium
             </a>
           </Text>
-        }
+        )}
 
-        {mode !== 'resting' &&
+        {mode !== 'resting' && (
           <div>
             <Text f={2} mb={4} color="state.alert">
               Are you sure?
             </Text>
-
             <GenericButton
               f={2}
               color="state.alert"
               onClick={onCancel}
               disabled={mode === 'cancelling'}
             >
-              {{
-                active: 'Yes, cancel Premium',
-                cancelling: 'Cancelling...',
-                error: 'Error',
-                refreshing: 'Wait',
-              }[mode]}
-            </GenericButton>
-
-            {' '}
-
-            {mode !== 'cancelling' &&
+              {
+                {
+                  active: 'Yes, cancel Premium',
+                  cancelling: 'Cancelling...',
+                  error: 'Error',
+                  refreshing: 'Wait',
+                }[mode]
+              }
+            </GenericButton>{' '}
+            {mode !== 'cancelling' && (
               <GenericButton
                 f={2}
                 color="state.alert"
@@ -68,10 +66,10 @@ export default class CancelPremium extends PureComponent {
               >
                 No
               </GenericButton>
-            }
+            )}
           </div>
-        }
+        )}
       </Box>
-    );
+    )
   }
 }

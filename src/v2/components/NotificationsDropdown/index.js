@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import styled from 'styled-components'
 
-import notificationsDropdownQuery from 'v2/components/NotificationsDropdown/queries/notificationsDropdown';
+import notificationsDropdownQuery from 'v2/components/NotificationsDropdown/queries/notificationsDropdown'
 
-import BorderedBox from 'v2/components/UI/BorderedBox';
-import Text from 'v2/components/UI/Text';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import Notifications from 'v2/components/NotificationsDropdown/components/Notifications';
+import BorderedBox from 'v2/components/UI/BorderedBox'
+import Text from 'v2/components/UI/Text'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import Notifications from 'v2/components/NotificationsDropdown/components/Notifications'
 
 const Container = styled(BorderedBox).attrs({
   width: '20em',
 })`
   height: 100%;
-`;
+`
 
 export default class NotificationsDropdown extends Component {
   static propTypes = {
@@ -26,17 +26,21 @@ export default class NotificationsDropdown extends Component {
   }
 
   render() {
-    const { onCompleted } = this.props;
+    const { onCompleted } = this.props
 
     return (
-      <Query query={notificationsDropdownQuery} variables={{ limit: 20 }} onCompleted={onCompleted}>
+      <Query
+        query={notificationsDropdownQuery}
+        variables={{ limit: 20 }}
+        onCompleted={onCompleted}
+      >
         {({ loading, error, data }) => {
           if (loading) {
             return (
               <Container>
                 <LoadingIndicator p={6} />
               </Container>
-            );
+            )
           }
 
           if (error) {
@@ -46,18 +50,22 @@ export default class NotificationsDropdown extends Component {
                   {error.message}
                 </Text>
               </Container>
-            );
+            )
           }
 
-          const { me: { feed: { notifications } } } = data;
+          const {
+            me: {
+              feed: { notifications },
+            },
+          } = data
 
           return (
             <Container>
               <Notifications notifications={notifications} />
             </Container>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

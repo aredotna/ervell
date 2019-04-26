@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
-import { debounce } from 'underscore';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
+import { debounce } from 'underscore'
 
-import transferChannelFragment from 'v2/components/ManageChannel/components/TransferChannel/fragments/transferChannelFragment';
+import transferChannelFragment from 'v2/components/ManageChannel/components/TransferChannel/fragments/transferChannelFragment'
 
-import Status from 'v2/components/UI/Status';
-import SearchInput from 'v2/components/UI/SearchInput';
-import Overlay from 'v2/components/UI/Overlay';
-import TransferChannelSearchResults from 'v2/components/ManageChannel/components/TransferChannel/components/TransferChannelSearchResults';
-import CancelTransferButton from 'v2/components/ManageChannel/components/TransferChannel/components/CancelTransferButton';
+import Status from 'v2/components/UI/Status'
+import SearchInput from 'v2/components/UI/SearchInput'
+import Overlay from 'v2/components/UI/Overlay'
+import TransferChannelSearchResults from 'v2/components/ManageChannel/components/TransferChannel/components/TransferChannelSearchResults'
+import CancelTransferButton from 'v2/components/ManageChannel/components/TransferChannel/components/CancelTransferButton'
 
 export default class TransferChannel extends PureComponent {
   static propTypes = {
@@ -16,9 +16,9 @@ export default class TransferChannel extends PureComponent {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.searchInput = React.createRef();
+    this.searchInput = React.createRef()
   }
 
   state = {
@@ -27,48 +27,49 @@ export default class TransferChannel extends PureComponent {
     mode: 'resting',
   }
 
-  updateQuery = (query) => {
-    this.setState({ query, mode: 'active' });
-    this.debouceQuery(query);
+  updateQuery = query => {
+    this.setState({ query, mode: 'active' })
+    this.debouceQuery(query)
   }
 
-  focus = (e) => {
-    e.preventDefault();
-    this.setState({ mode: 'active' });
+  focus = e => {
+    e.preventDefault()
+    this.setState({ mode: 'active' })
   }
 
-  blur = (e) => {
-    e.preventDefault();
-    this.setState({ mode: 'resting' });
+  blur = e => {
+    e.preventDefault()
+    this.setState({ mode: 'resting' })
   }
 
-  debouceQuery = debounce((debouncedQuery) => {
-    this.setState({ debouncedQuery });
+  debouceQuery = debounce(debouncedQuery => {
+    this.setState({ debouncedQuery })
   }, 250)
 
   render() {
-    const { channel } = this.props;
-    const { query, debouncedQuery, mode } = this.state;
+    const { channel } = this.props
+    const { query, debouncedQuery, mode } = this.state
 
     if (channel.is_pending_transfer) {
       return (
         <div>
-          {channel.visibility === 'private' && !channel.transfer_request.is_recipient_member &&
-            <Status>
-              Note: {channel.transfer_request.recipient.name} does not have access to this channel.
-              Consider temporarily adding them as a collaborator
-              so they can view the channel before they accept the transfer
-            </Status>
-          }
+          {channel.visibility === 'private' &&
+            !channel.transfer_request.is_recipient_member && (
+              <Status>
+                Note: {channel.transfer_request.recipient.name} does not have
+                access to this channel. Consider temporarily adding them as a
+                collaborator so they can view the channel before they accept the
+                transfer
+              </Status>
+            )}
 
           <Status>
-            {channel.transfer_request.recipient.name} needs to confirm the transfer.
-            After they confirm you will no longer own this channel.
-
+            {channel.transfer_request.recipient.name} needs to confirm the
+            transfer. After they confirm you will no longer own this channel.
             <CancelTransferButton channel_id={channel.id} />
           </Status>
         </div>
-      );
+      )
     }
 
     return (
@@ -81,7 +82,7 @@ export default class TransferChannel extends PureComponent {
           ref={this.searchInput}
         />
 
-        {query !== '' && mode === 'active' &&
+        {query !== '' && mode === 'active' && (
           <Overlay
             targetEl={() => this.searchInput.current}
             fullWidth
@@ -92,8 +93,8 @@ export default class TransferChannel extends PureComponent {
               query={debouncedQuery}
             />
           </Overlay>
-        }
+        )}
       </div>
-    );
+    )
   }
 }

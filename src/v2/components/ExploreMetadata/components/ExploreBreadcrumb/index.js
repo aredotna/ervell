@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath';
-import WithLoginStatus from 'v2/hocs/WithLoginStatus';
+import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
+import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
-const Options = styled.div`
-`;
+const Options = styled.div``
 
 const Option = styled.a`
   display: block;
@@ -18,7 +17,7 @@ const Option = styled.a`
       color: ${x => x.theme.colors.gray.semiBold};
     }
   }
-`;
+`
 
 class ExploreBreadcrumb extends Component {
   static propTypes = {
@@ -26,13 +25,11 @@ class ExploreBreadcrumb extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn } = this.props
 
     const stuckChildren = (
-      <StickyBreadcrumbPath.Crumb>
-        Explore
-      </StickyBreadcrumbPath.Crumb>
-    );
+      <StickyBreadcrumbPath.Crumb>Explore</StickyBreadcrumbPath.Crumb>
+    )
 
     return (
       <StickyBreadcrumbPath stuckChildren={stuckChildren}>
@@ -40,14 +37,12 @@ class ExploreBreadcrumb extends Component {
           <Options>
             <div>Explore</div>
 
-            {isLoggedIn &&
-              <Option href="/feed">Feed</Option>
-            }
+            {isLoggedIn && <Option href="/feed">Feed</Option>}
           </Options>
         </StickyBreadcrumbPath.Crumb>
       </StickyBreadcrumbPath>
-    );
+    )
   }
 }
 
-export default WithLoginStatus(ExploreBreadcrumb);
+export default WithLoginStatus(ExploreBreadcrumb)

@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import OutsideClickHandler from 'react-outside-click-handler';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+import OutsideClickHandler from 'react-outside-click-handler'
+import styled from 'styled-components'
 import {
   position,
   top,
@@ -11,12 +11,12 @@ import {
   left,
   width,
   height,
-} from 'styled-system';
-import { debounce } from 'underscore';
+} from 'styled-system'
+import { debounce } from 'underscore'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 
-import compactObject from 'v2/util/compactObject';
+import compactObject from 'v2/util/compactObject'
 
 const Background = styled.div`
   position: fixed;
@@ -26,7 +26,7 @@ const Background = styled.div`
   left: 0;
   z-index: ${x => x.theme.z.modal};
   pointer-events: none;
-`;
+`
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   ${width}
   ${height}
   pointer-events: all;
-`;
+`
 
 export default class Overlay extends PureComponent {
   static propTypes = {
@@ -53,7 +53,7 @@ export default class Overlay extends PureComponent {
     offsetY: PropTypes.number,
     marginY: PropTypes.number,
     fullWidth: PropTypes.bool,
-  };
+  }
 
   static defaultProps = {
     onClose: () => {},
@@ -65,12 +65,12 @@ export default class Overlay extends PureComponent {
     offsetY: 0,
     marginY: 10,
     fullWidth: false,
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.el = document.createElement('div');
+    this.el = document.createElement('div')
   }
 
   state = {
@@ -80,34 +80,34 @@ export default class Overlay extends PureComponent {
     left: null,
     width: null,
     height: null,
-  };
+  }
 
   componentDidMount() {
-    document.body.appendChild(this.el);
+    document.body.appendChild(this.el)
 
-    this.positionOverlay = () => this.alignToEl(this.props.targetEl());
-    this.debouncedPositionOverlay = debounce(this.positionOverlay, 100);
+    this.positionOverlay = () => this.alignToEl(this.props.targetEl())
+    this.debouncedPositionOverlay = debounce(this.positionOverlay, 100)
 
-    window.addEventListener('resize', this.debouncedPositionOverlay);
-    document.body.addEventListener('mousewheel', this.debouncedPositionOverlay);
+    window.addEventListener('resize', this.debouncedPositionOverlay)
+    document.body.addEventListener('mousewheel', this.debouncedPositionOverlay)
 
-    this.positionOverlay();
+    this.positionOverlay()
 
     // Re-position the overlay if anything in the subtree changes
-    this.observer = new MutationObserver(this.positionOverlay);
-    this.observer.observe(this.wrapper, { childList: true, subtree: true });
+    this.observer = new MutationObserver(this.positionOverlay)
+    this.observer.observe(this.wrapper, { childList: true, subtree: true })
   }
 
   componentWillUnmount() {
-    this.el.parentNode.removeChild(this.el);
+    this.el.parentNode.removeChild(this.el)
 
-    window.removeEventListener('resize', this.debouncedPositionOverlay);
+    window.removeEventListener('resize', this.debouncedPositionOverlay)
     document.body.removeEventListener(
       'mousewheel',
       this.debouncedPositionOverlay
-    );
+    )
 
-    this.observer.disconnect();
+    this.observer.disconnect()
   }
 
   alignToEl = el => {
@@ -120,28 +120,28 @@ export default class Overlay extends PureComponent {
       offsetX,
       fullWidth,
       marginY,
-    } = this.props;
+    } = this.props
 
     const {
       [alignToY]: y,
       [alignToX]: x,
       width: elWidth,
-    } = el.getBoundingClientRect();
+    } = el.getBoundingClientRect()
 
     const positions = {
       top: y,
       bottom: window.innerHeight - y,
       left: x,
       right: window.innerWidth - x,
-    };
+    }
 
     const positionState = {
       [anchorY]: positions[anchorY] + offsetY,
       [anchorX]: positions[anchorX] + offsetX,
-    };
+    }
 
     if (fullWidth) {
-      positionState.width = elWidth;
+      positionState.width = elWidth
     }
 
     // Moves into position
@@ -151,35 +151,35 @@ export default class Overlay extends PureComponent {
         bottom: bottomEdge,
         top: topEdge,
         height: wrapperHeight,
-      } = this.wrapper.getBoundingClientRect();
+      } = this.wrapper.getBoundingClientRect()
 
-      const computedTopEdge = topEdge - marginY;
-      const computedBottomEdge = bottomEdge + marginY;
+      const computedTopEdge = topEdge - marginY
+      const computedBottomEdge = bottomEdge + marginY
 
       const isOverflowingViewportTop =
-        anchorY === 'bottom' && computedTopEdge <= 0;
+        anchorY === 'bottom' && computedTopEdge <= 0
       const isOverflowingViewportBottom =
-        anchorY === 'top' && computedBottomEdge >= window.innerHeight;
+        anchorY === 'top' && computedBottomEdge >= window.innerHeight
 
       if (isOverflowingViewportTop) {
-        return this.setState({ height: wrapperHeight + computedTopEdge });
+        return this.setState({ height: wrapperHeight + computedTopEdge })
       }
 
       if (isOverflowingViewportBottom) {
-        const bottomDifference = window.innerHeight - computedBottomEdge;
-        return this.setState({ height: wrapperHeight + bottomDifference });
+        const bottomDifference = window.innerHeight - computedBottomEdge
+        return this.setState({ height: wrapperHeight + bottomDifference })
       }
 
       if (this.state.height) {
-        return this.setState({ height: null });
+        return this.setState({ height: null })
       }
 
-      return null;
-    });
-  };
+      return null
+    })
+  }
 
   render() {
-    const { children, onClose, ...rest } = this.props;
+    const { children, onClose, ...rest } = this.props
 
     return ReactDOM.createPortal(
       <Background>
@@ -188,7 +188,7 @@ export default class Overlay extends PureComponent {
             {...compactObject(this.state)}
             {...rest}
             ref={el => {
-              this.wrapper = el;
+              this.wrapper = el
             }}
           >
             {children}
@@ -196,6 +196,6 @@ export default class Overlay extends PureComponent {
         </OutsideClickHandler>
       </Background>,
       this.el
-    );
+    )
   }
 }

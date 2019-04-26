@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import { space } from 'styled-system';
+import React from 'react'
+import styled from 'styled-components'
+import { space } from 'styled-system'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 
-import { fractional } from 'v2/styles/mixins';
+import { fractional } from 'v2/styles/mixins'
 
 const Container = styled.span`
   position: relative;
@@ -35,12 +35,8 @@ const Container = styled.span`
     border-left: 0.5em solid ${x => x.theme.colors.gray.medium};
     pointer-events: none;
   }
-`;
+`
 
-const MetadataPlay = (...props) => (
-  <Container {...props}>
-    &nbsp;
-  </Container>
-);
+const MetadataPlay = (...props) => <Container {...props}>&nbsp;</Container>
 
-export default MetadataPlay;
+export default MetadataPlay

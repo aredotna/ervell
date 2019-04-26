@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import blockLightboxLinkFragment from 'v2/components/BlockLightbox/components/BlockLightboxLink/fragments/blockLightboxLink';
+import blockLightboxLinkFragment from 'v2/components/BlockLightbox/components/BlockLightboxLink/fragments/blockLightboxLink'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Icons from 'v2/components/UI/Icons';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Icons from 'v2/components/UI/Icons'
 
-const Screenshot = styled(Box)``;
+const Screenshot = styled(Box)``
 
 const Image = styled(Box)`
   position: relative;
@@ -30,20 +30,20 @@ const Image = styled(Box)`
       rgba(0, 0, 0, 0.125) 100%
     );
   }
-`;
+`
 
 const Container = styled(Box)`
   overflow: hidden;
-`;
+`
 
 export default class BlockLightboxLink extends PureComponent {
   static propTypes = {
     layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxLinkFragment).isRequired,
-  };
+  }
 
   render() {
-    const { block, layout } = this.props;
+    const { block, layout } = this.props
 
     return (
       <Box
@@ -109,6 +109,6 @@ export default class BlockLightboxLink extends PureComponent {
           </Screenshot>
         </Container>
       </Box>
-    );
+    )
   }
 }

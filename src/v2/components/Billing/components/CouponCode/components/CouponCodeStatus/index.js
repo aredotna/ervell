@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
-import couponCodeStatusQuery from 'v2/components/Billing/components/CouponCode/components/CouponCodeStatus/queries/couponCodeStatus';
+import couponCodeStatusQuery from 'v2/components/Billing/components/CouponCode/components/CouponCodeStatus/queries/couponCodeStatus'
 
-const NBSP = '\xa0';
+const NBSP = '\xa0'
 
 export default class CouponCodeStatus extends Component {
   static propTypes = {
@@ -18,17 +18,18 @@ export default class CouponCodeStatus extends Component {
   }
 
   renderCouponStatus = ({ loading, error, data }) => {
-    const { code } = this.props;
+    const { code } = this.props
 
-    if (loading || code === null || code === '') return NBSP;
-    if (error || (data && !data.coupon.is_valid)) return `‘${code}’ is not a valid coupon`;
-    if (data) return data.coupon.description;
+    if (loading || code === null || code === '') return NBSP
+    if (error || (data && !data.coupon.is_valid))
+      return `‘${code}’ is not a valid coupon`
+    if (data) return data.coupon.description
 
-    return NBSP;
+    return NBSP
   }
 
   render() {
-    const { code } = this.props;
+    const { code } = this.props
 
     return (
       <Query
@@ -37,16 +38,16 @@ export default class CouponCodeStatus extends Component {
         skip={code === null || code === ''}
         fetchPolicy="network-only"
       >
-        {(response) => {
-          const message = this.renderCouponStatus(response);
+        {response => {
+          const message = this.renderCouponStatus(response)
 
           return (
             <Text f={1} mt={6}>
               {message}
             </Text>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

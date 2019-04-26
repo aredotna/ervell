@@ -31,14 +31,14 @@ const COLORS = {
   white: 'white',
   black: 'black',
   middleGray: '#929292',
-};
+}
 
 const {
   white: _white,
   black: _black,
   middleGray: _middleGray,
   ...colorObjs
-} = COLORS;
+} = COLORS
 
 export const COLOR_NAMES = Object.keys(colorObjs).reduce(
   (memo, namespace) =>
@@ -46,7 +46,7 @@ export const COLOR_NAMES = Object.keys(colorObjs).reduce(
       Object.keys(COLORS[namespace]).map(color => `${namespace}.${color}`)
     ),
   []
-);
+)
 
 // From table: https://www.viget.com/articles/equating-color-and-transparency/
 export const GRAY_ALPHA_VALUES = {
@@ -58,6 +58,6 @@ export const GRAY_ALPHA_VALUES = {
   semiLight: 0.09,
   light: 0.065,
   hint: 0.01,
-};
+}
 
-export default COLORS;
+export default COLORS

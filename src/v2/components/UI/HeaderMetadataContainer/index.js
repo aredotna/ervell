@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
-import { multiply } from 'v2/styles/functions';
+import constants from 'v2/styles/constants'
+import { multiply } from 'v2/styles/functions'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
-const MARGIN_BOTTOM = '2em';
+const MARGIN_BOTTOM = '2em'
 
 const Container = styled(Box)`
   position: relative;
-`;
+`
 
 const Header = styled.div`
   display: flex;
@@ -21,12 +21,12 @@ const Header = styled.div`
   ${constants.media.mobile`
     display: block;
   `}
-`;
+`
 
 const Breadcrumb = styled.div`
   flex: 1;
   padding-right: 1em;
-`;
+`
 
 const Actions = styled.div`
   ${constants.media.mobile`
@@ -34,24 +34,24 @@ const Actions = styled.div`
     margin-right: ${constants.blockGutter}; // TODO: Remove
     margin-left: ${constants.blockGutter}; // TODO: Remove
   `}
-`;
+`
 
-const Metadata = styled.div``;
+const Metadata = styled.div``
 
 export default class HeaderMetadataContainer extends Component {
   static propTypes = {
     breadcrumb: PropTypes.node.isRequired,
     actions: PropTypes.node,
     children: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
     actions: null,
     children: null,
-  };
+  }
 
   render() {
-    const { breadcrumb, actions, children, ...rest } = this.props;
+    const { breadcrumb, actions, children, ...rest } = this.props
 
     return (
       <Container
@@ -68,6 +68,6 @@ export default class HeaderMetadataContainer extends Component {
 
         {children && <Metadata>{children}</Metadata>}
       </Container>
-    );
+    )
   }
 }

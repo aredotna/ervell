@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { lorem } from 'faker';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { lorem } from 'faker'
 
-import Tabs from 'v2/components/UI/Tabs';
-import Text from 'v2/components/UI/Text';
+import Tabs from 'v2/components/UI/Tabs'
+import Text from 'v2/components/UI/Text'
 
 storiesOf('Tabs', module)
   .add('default', () => (
@@ -43,4 +43,4 @@ storiesOf('Tabs', module)
         <Text p={2}>{lorem.paragraphs()}</Text>
       </div>
     </Tabs>
-  ));
+  ))

@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import Pocket from 'v2/components/UI/Pocket';
-import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent';
+import Pocket from 'v2/components/UI/Pocket'
+import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 export default class SearchMetadataView extends Component {
   static propTypes = {
-    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'users', 'groups']).isRequired,
+    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'users', 'groups'])
+      .isRequired,
     search: PropTypes.string.isRequired,
   }
 
-  isViewActive = view => () =>
-    this.props.view === view;
+  isViewActive = view => () => this.props.view === view
 
   render() {
-    const { search } = this.props;
+    const { search } = this.props
 
     return (
       <Pocket title="View">
@@ -68,6 +68,6 @@ export default class SearchMetadataView extends Component {
           Groups
         </CookieLinkUnlessCurrent>
       </Pocket>
-    );
+    )
   }
 }

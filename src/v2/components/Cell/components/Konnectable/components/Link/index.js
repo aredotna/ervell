@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
 
-import linkFragment from 'v2/components/Cell/components/Konnectable/components/Link/fragments/link';
+import linkFragment from 'v2/components/Cell/components/Konnectable/components/Link/fragments/link'
 
-import Generic from 'v2/components/Cell/components/Konnectable/components/Generic';
+import Generic from 'v2/components/Cell/components/Konnectable/components/Generic'
 
 export default class Link extends PureComponent {
   static propTypes = {
@@ -11,7 +11,7 @@ export default class Link extends PureComponent {
   }
 
   render() {
-    const { link, ...rest } = this.props;
+    const { link, ...rest } = this.props
 
     return (
       <Generic
@@ -20,6 +20,6 @@ export default class Link extends PureComponent {
         borderColor="gray.hint"
         {...rest}
       />
-    );
+    )
   }
 }

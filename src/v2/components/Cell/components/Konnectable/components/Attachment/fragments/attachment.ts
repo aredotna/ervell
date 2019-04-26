@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment Attachment on Attachment {
@@ -8,4 +8,4 @@ export default gql`
     src: image_url(size: DISPLAY)
     file_extension
   }
-`;
+`

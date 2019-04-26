@@ -1,24 +1,24 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import primarySearchResultFragment from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult/fragments/primarySearchResult';
+import primarySearchResultFragment from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult/fragments/primarySearchResult'
 
-import Text from 'v2/components/UI/Text';
-import GroupBadge from 'v2/components/UI/GroupBadge';
-import { ICON_OFFSET } from 'v2/components/UI/SearchInput';
-import BorderedLock from 'v2/components/UI/BorderedLock';
+import Text from 'v2/components/UI/Text'
+import GroupBadge from 'v2/components/UI/GroupBadge'
+import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
+import BorderedLock from 'v2/components/UI/BorderedLock'
 
-import { overflowEllipsis } from 'v2/styles/mixins';
-import { mixin as boxMixin } from 'v2/components/UI/Box';
+import { overflowEllipsis } from 'v2/styles/mixins'
+import { mixin as boxMixin } from 'v2/components/UI/Box'
 
 const Label = styled(Text)`
   font-weight: bold;
   // Push out to accomodate "overflowing" badge border
   padding-right: 1px;
   ${overflowEllipsis}
-`;
+`
 
 const Container = styled.a`
   ${boxMixin}
@@ -32,10 +32,12 @@ const Container = styled.a`
     background-color: ${props => props.theme.colors.gray.hint};
   }
 
-  ${props => props.selected && `
+  ${props =>
+    props.selected &&
+    `
     background-color: ${props.theme.colors.state.neutral};
   `}
-`;
+`
 
 const PathContainer = styled.div`
   display: flex;
@@ -54,7 +56,7 @@ const PathContainer = styled.div`
       margin: 0;
     }
   }
-`;
+`
 
 Container.defaultProps = {
   pl: ICON_OFFSET,
@@ -63,7 +65,7 @@ Container.defaultProps = {
   bg: 'gray.light',
   borderTop: '1px solid',
   borderColor: 'gray.semiLight',
-};
+}
 
 export default class PrimarySearchResult extends PureComponent {
   static propTypes = {
@@ -78,57 +80,49 @@ export default class PrimarySearchResult extends PureComponent {
     selected: false,
   }
 
-  preventBlur = (e) => {
-    e.preventDefault();
+  preventBlur = e => {
+    e.preventDefault()
   }
 
   render() {
-    const { result, children, ...rest } = this.props;
+    const { result, children, ...rest } = this.props
 
     if (result) {
       return (
-        <Container
-          href={result.href}
-          onMouseDown={this.preventBlur}
-          {...rest}
-        >
+        <Container href={result.href} onMouseDown={this.preventBlur} {...rest}>
           <PathContainer>
-            {result.owner &&
+            {result.owner && (
               <Label flex="1">
                 {result.owner.name}
 
-                {result.owner.__typename === 'Group' &&
-                  <GroupBadge
-                    f={0}
-                    visibility={result.owner.visibility}
-                  />
-                }
+                {result.owner.__typename === 'Group' && (
+                  <GroupBadge f={0} visibility={result.owner.visibility} />
+                )}
               </Label>
-            }
+            )}
 
-            <Label color={result.visibility ? `channel.${result.visibility}` : 'gray.base'}>
+            <Label
+              color={
+                result.visibility ? `channel.${result.visibility}` : 'gray.base'
+              }
+            >
               {unescape(result.label)}
 
-              {result.visibility === 'private' &&
-                <BorderedLock ml={3} />
-              }
+              {result.visibility === 'private' && <BorderedLock ml={3} />}
 
-              {result.__typename === 'Group' &&
-                <GroupBadge
-                  f={0}
-                  visibility={result.visibility}
-                />
-              }
+              {result.__typename === 'Group' && (
+                <GroupBadge f={0} visibility={result.visibility} />
+              )}
             </Label>
           </PathContainer>
         </Container>
-      );
+      )
     }
 
     return (
       <Container onMouseDown={this.preventBlur} {...rest}>
         {children}
       </Container>
-    );
+    )
   }
 }

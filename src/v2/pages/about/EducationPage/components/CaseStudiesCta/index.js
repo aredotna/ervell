@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { themeGet } from 'styled-system';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import Box, { mixin } from 'v2/components/UI/Box';
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton';
+import Box, { mixin } from 'v2/components/UI/Box'
+import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 import {
   Headline,
   Subheadline,
   Description,
-} from 'v2/pages/about/components/Text';
+} from 'v2/pages/about/components/Text'
 
 const CTA = styled(Box).attrs({
   py: 10,
   px: 3,
   borderBottom: '1px solid',
   borderColor: themeGet('colors.gray.regular'),
-})``;
+})``
 
 const CaseStudies = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const CaseStudies = styled.div`
     flex-direction: column;
     align-items: center;
   `}
-`;
+`
 
 const CaseStudy = styled.a.attrs({
   mx: 6,
@@ -37,22 +37,22 @@ const CaseStudy = styled.a.attrs({
   ${mixin}
   max-width: 225px;
   text-decoration: none;
-`;
+`
 
 const Thumb = styled.img`
   max-width: 100%;
-`;
+`
 
 const Title = styled(Subheadline).attrs({
   fontSize: 5,
   align: 'left',
   mx: 0,
-})``;
+})``
 
 const Copy = styled(Description).attrs({
   align: 'left',
   px: 0,
-})``;
+})``
 
 const CenterBox = styled(Box).attrs({
   display: 'flex',
@@ -60,7 +60,7 @@ const CenterBox = styled(Box).attrs({
   justifyContent: 'center',
   flexDirection: 'column',
   my: 7,
-})``;
+})``
 
 export default class CaseStudiesCta extends Component {
   render() {
@@ -112,6 +112,6 @@ export default class CaseStudiesCta extends Component {
           </Description>
         </CenterBox>
       </CTA>
-    );
+    )
   }
 }

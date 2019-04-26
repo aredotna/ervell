@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import { propType } from 'graphql-anywhere'
 
-import Link from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/Link';
+import Link from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/Link'
 
-import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink';
+import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink'
 
 export default class CollaboratorsListItemUser extends Component {
   static propTypes = {
@@ -11,7 +11,9 @@ export default class CollaboratorsListItemUser extends Component {
   }
 
   render() {
-    const { user: { href, name } } = this.props;
+    const {
+      user: { href, name },
+    } = this.props
 
     return (
       <strong>
@@ -19,6 +21,6 @@ export default class CollaboratorsListItemUser extends Component {
           {name}
         </Link>
       </strong>
-    );
+    )
   }
 }

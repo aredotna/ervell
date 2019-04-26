@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { Component } from 'react'
+import { storiesOf } from '@storybook/react'
 
-import theme from 'v2/styles/theme';
+import theme from 'v2/styles/theme'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import States from 'v2/stories/__components__/States';
+import Specimen from 'v2/stories/__components__/Specimen'
+import States from 'v2/stories/__components__/States'
 
-import { Input, Textarea } from 'v2/components/UI/Inputs';
+import { Input, Textarea } from 'v2/components/UI/Inputs'
 
 class FocusableInput extends Component {
-  inputRef = React.createRef();
+  inputRef = React.createRef()
 
-  handleClick = () => this.inputRef.current.focus();
+  handleClick = () => this.inputRef.current.focus()
 
   render() {
     return (
@@ -22,15 +22,15 @@ class FocusableInput extends Component {
 
         <Input ref={this.inputRef} />
       </div>
-    );
+    )
   }
 }
 
 // eslint-disable-next-line react/no-multi-comp
 class FocusableTextarea extends Component {
-  textareaRef = React.createRef();
+  textareaRef = React.createRef()
 
-  handleClick = () => this.textareaRef.current.focus();
+  handleClick = () => this.textareaRef.current.focus()
 
   render() {
     return (
@@ -41,7 +41,7 @@ class FocusableTextarea extends Component {
 
         <Textarea ref={this.textareaRef} />
       </div>
-    );
+    )
   }
 }
 
@@ -157,4 +157,4 @@ storiesOf('Input', module)
         </States>
       ))}
     </Specimen>
-  ));
+  ))

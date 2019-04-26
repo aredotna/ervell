@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment MemberAvatar on Member {
@@ -13,4 +13,4 @@ export default gql`
       avatar(size: LARGE)
     }
   }
-`;
+`

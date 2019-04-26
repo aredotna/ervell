@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import { mixin } from 'v2/components/UI/Text';
+import { mixin } from 'v2/components/UI/Text'
 
 const Anchor = styled.a.attrs({
   display: 'block',
@@ -17,16 +17,16 @@ const Anchor = styled.a.attrs({
   &:hover > * {
     color: black;
   }
-`;
+`
 
 const Link = ({ children, ...rest }) => (
   <Anchor py={4} px="1rem" fontWeight="bold" {...rest}>
     {children}
   </Anchor>
-);
+)
 
 Link.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default Link;
+export default Link

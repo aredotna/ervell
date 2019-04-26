@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
-import { multiply } from 'v2/styles/functions';
+import constants from 'v2/styles/constants'
+import { multiply } from 'v2/styles/functions'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
-const MARGIN_BOTTOM = '2em';
+const MARGIN_BOTTOM = '2em'
 
 const Header = styled.div`
   display: flex;
@@ -17,12 +17,12 @@ const Header = styled.div`
   ${constants.media.mobile`
     display: block;
   `}
-`;
+`
 
 const Breadcrumb = styled.div`
   flex: 1;
   padding-right: 1em;
-`;
+`
 
 const Actions = styled.div`
   ${constants.media.mobile`
@@ -30,9 +30,9 @@ const Actions = styled.div`
     margin-right: ${constants.blockGutter}; // TODO: Remove
     margin-left: ${constants.blockGutter}; // TODO: Remove
   `}
-`;
+`
 
-const Metadata = styled.div``;
+const Metadata = styled.div``
 
 export default class HeaderMetadataContainer extends PureComponent {
   static propTypes = {
@@ -41,17 +41,17 @@ export default class HeaderMetadataContainer extends PureComponent {
     children: PropTypes.node,
     pre: PropTypes.node,
     post: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
     actions: null,
     children: null,
     pre: null,
     post: null,
-  };
+  }
 
   render() {
-    const { breadcrumb, actions, children, pre, post, ...rest } = this.props;
+    const { breadcrumb, actions, children, pre, post, ...rest } = this.props
 
     return (
       <Box
@@ -72,6 +72,6 @@ export default class HeaderMetadataContainer extends PureComponent {
 
         {post}
       </Box>
-    );
+    )
   }
 }

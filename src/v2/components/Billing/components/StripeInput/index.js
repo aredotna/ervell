@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import theme from 'v2/styles/theme';
+import theme from 'v2/styles/theme'
 
-import * as inputMixins from 'v2/components/UI/Inputs/mixin';
+import * as inputMixins from 'v2/components/UI/Inputs/mixin'
 
 export default Component => styled(Component).attrs({
   style: {
@@ -20,4 +20,4 @@ export default Component => styled(Component).attrs({
   &.StripeElement--focus {
     ${inputMixins.focusMixin}
   }
-`;
+`

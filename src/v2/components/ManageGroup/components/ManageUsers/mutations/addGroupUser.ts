@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import manageGroupFragment from 'v2/components/ManageGroup/fragments/manageGroup';
+import manageGroupFragment from 'v2/components/ManageGroup/fragments/manageGroup'
 
 export default gql`
   mutation addGroupUser($id: ID!, $user_id: ID!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${manageGroupFragment}
-`;
+`

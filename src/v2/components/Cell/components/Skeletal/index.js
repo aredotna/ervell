@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 const Container = styled(Box).attrs({
   mb: 8,
@@ -18,16 +18,16 @@ const Container = styled(Box).attrs({
     width: ${props.theme.constantValues.blockWidth};
     height: ${props.theme.constantValues.blockWidth};
 
-    ${(
-    {
-      loading: `
+    ${
+      {
+        loading: `
         &:after {
           display: block;
           content: '●';
           color: ${props.theme.colors.gray.semiLight};
         }
       `,
-      error: `
+        error: `
         border-color: ${props.theme.colors.state.alert};
         &:after {
           display: block;
@@ -35,22 +35,24 @@ const Container = styled(Box).attrs({
           color: ${props.theme.colors.state.alert};
         }
       `,
-    }[props.mode])}
+      }[props.mode]
+    }
   `}
-`;
+`
 
-const Skeletal = ({ mode, ...rest }) => ({
-  pending: () => <Container mode={mode} {...rest} />,
-  loading: () => <Container mode={mode} {...rest} />,
-  error: () => <Container mode={mode} {...rest} />,
-}[mode]());
+const Skeletal = ({ mode, ...rest }) =>
+  ({
+    pending: () => <Container mode={mode} {...rest} />,
+    loading: () => <Container mode={mode} {...rest} />,
+    error: () => <Container mode={mode} {...rest} />,
+  }[mode]())
 
 Skeletal.propTypes = {
   mode: PropTypes.oneOf(['pending', 'loading', 'error']),
-};
+}
 
 Skeletal.defaultProps = {
   mode: 'pending',
-};
+}
 
-export default Skeletal;
+export default Skeletal

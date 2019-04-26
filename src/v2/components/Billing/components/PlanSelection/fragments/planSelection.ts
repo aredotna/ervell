@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import privateBlocksMeterFragment from 'v2/components/PrivateBlocksMeter/fragments/privateBlocksMeter';
+import privateBlocksMeterFragment from 'v2/components/PrivateBlocksMeter/fragments/privateBlocksMeter'
 
 export default gql`
   fragment PlanSelection on Me {
@@ -19,4 +19,4 @@ export default gql`
     ...PrivateBlocksMeter
   }
   ${privateBlocksMeterFragment}
-`;
+`

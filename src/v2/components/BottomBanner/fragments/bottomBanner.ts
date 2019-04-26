@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment BottomBanner on Me {
@@ -6,4 +6,4 @@ export default gql`
     id
     banner
   }
-`;
+`

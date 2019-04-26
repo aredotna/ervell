@@ -1,20 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { withApollo } from 'react-apollo';
-import Mousetrap from 'mousetrap';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { withApollo } from 'react-apollo'
+import Mousetrap from 'mousetrap'
 
-import Link from 'v2/components/UI/Link';
-import Icons from 'v2/components/UI/Icons';
+import Link from 'v2/components/UI/Link'
+import Icons from 'v2/components/UI/Icons'
 
-import modalBlockLightboxQuery from 'v2/components/ModalBlockLightbox/queries/modalBlockLightbox';
+import modalBlockLightboxQuery from 'v2/components/ModalBlockLightbox/queries/modalBlockLightbox'
 
 const navigate = xs => ({
-  next: cursor =>
-    xs[cursor >= xs.length - 1 ? 0 : cursor + 1],
-  prev: cursor =>
-    xs[cursor <= 0 ? xs.length - 1 : cursor - 1],
-});
+  next: cursor => xs[cursor >= xs.length - 1 ? 0 : cursor + 1],
+  prev: cursor => xs[cursor <= 0 ? xs.length - 1 : cursor - 1],
+})
 
 const Prev = styled(Link).attrs({
   px: 7,
@@ -44,7 +42,7 @@ const Prev = styled(Link).attrs({
       fill: black;
     }
   }
-`;
+`
 
 const Next = styled(Prev)`
   left: unset;
@@ -53,7 +51,7 @@ const Next = styled(Prev)`
   > div {
     transform: translate(-50%, -50%);
   }
-`;
+`
 
 class ModalBlockLightboxNavigation extends PureComponent {
   static propTypes = {
@@ -66,72 +64,76 @@ class ModalBlockLightboxNavigation extends PureComponent {
   }
 
   constructor(props) {
-    const { ids } = props;
-    const { next, prev } = navigate(ids);
+    const { ids } = props
+    const { next, prev } = navigate(ids)
 
-    super(props);
+    super(props)
 
-    this.__next__ = next;
-    this.__prev__ = prev;
+    this.__next__ = next
+    this.__prev__ = prev
   }
 
   componentDidMount() {
-    this.preload('next');
+    this.preload('next')
 
-    Mousetrap.bind('right', this.next);
-    Mousetrap.bind('left', this.prev);
+    Mousetrap.bind('right', this.next)
+    Mousetrap.bind('left', this.prev)
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
-      this.preload('next');
+      this.preload('next')
     }
   }
 
   componentWillUnmount() {
-    Mousetrap.unbind('right', 'left');
+    Mousetrap.unbind('right', 'left')
   }
 
   cursor = () => {
-    const { id, ids } = this.props;
-    return ids.indexOf(id);
+    const { id, ids } = this.props
+    return ids.indexOf(id)
   }
 
-  next = (e) => {
-    e.preventDefault();
+  next = e => {
+    e.preventDefault()
 
-    const { onChange } = this.props;
-    const nextId = this.__next__(this.cursor());
+    const { onChange } = this.props
+    const nextId = this.__next__(this.cursor())
 
-    return onChange(nextId);
+    return onChange(nextId)
   }
 
-  prev = (e) => {
-    e.preventDefault();
+  prev = e => {
+    e.preventDefault()
 
-    const { onChange } = this.props;
-    const prevId = this.__prev__(this.cursor());
+    const { onChange } = this.props
+    const prevId = this.__prev__(this.cursor())
 
-    return onChange(prevId);
+    return onChange(prevId)
   }
 
-  preload = (direction) => {
-    const { client } = this.props;
+  preload = direction => {
+    const { client } = this.props
 
-    const prospectiveId = this[`__${direction}__`](this.cursor());
+    const prospectiveId = this[`__${direction}__`](this.cursor())
 
     client.query({
       query: modalBlockLightboxQuery,
       variables: { id: prospectiveId },
-    });
+    })
   }
 
   render() {
-    const { id, ids, ...rest } = this.props;
+    const { id, ids, ...rest } = this.props
 
     return (
       <React.Fragment>
-        <Prev onClick={this.prev} onMouseOver={() => this.preload('prev')} {...rest}>
+        <Prev
+          onClick={this.prev}
+          onMouseOver={() => this.preload('prev')}
+          {...rest}
+        >
           <Icons name="RightCaret" size="1.5rem" color="gray.base" />
         </Prev>
 
@@ -139,8 +141,8 @@ class ModalBlockLightboxNavigation extends PureComponent {
           <Icons name="RightCaret" size="1.5rem" color="gray.base" />
         </Next>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default withApollo(ModalBlockLightboxNavigation);
+export default withApollo(ModalBlockLightboxNavigation)

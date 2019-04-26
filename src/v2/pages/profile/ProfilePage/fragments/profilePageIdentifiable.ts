@@ -1,8 +1,8 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import profileMetadataFragment from 'v2/components/ProfileMetadata/fragments/profileMetadata';
-import emptyOrTipsFragment from 'v2/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips';
-import profileMetaTagsFragment from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags/fragments/profileMetaTags';
+import profileMetadataFragment from 'v2/components/ProfileMetadata/fragments/profileMetadata'
+import emptyOrTipsFragment from 'v2/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips'
+import profileMetaTagsFragment from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags/fragments/profileMetaTags'
 
 export default gql`
   fragment ProfilePageIdentifiable on Identifiable {
@@ -25,4 +25,4 @@ export default gql`
   ${profileMetadataFragment}
   ${emptyOrTipsFragment}
   ${profileMetaTagsFragment}
-`;
+`

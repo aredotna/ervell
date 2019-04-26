@@ -1,39 +1,39 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
-import deleteCommentMutation from 'v2/components/BlockLightbox/components/BlockLightboxCommentDeleteButton/mutations/deleteComment';
+import deleteCommentMutation from 'v2/components/BlockLightbox/components/BlockLightboxCommentDeleteButton/mutations/deleteComment'
 
 class BlockLightboxCommentDeleteButton extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     deleteComment: PropTypes.func.isRequired,
-  };
+  }
 
   state = {
     mode: 'resting',
-  };
+  }
 
   deleteComment = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { id, deleteComment } = this.props;
+    const { id, deleteComment } = this.props
 
-    this.setState({ mode: 'deleting' });
+    this.setState({ mode: 'deleting' })
 
     return deleteComment({
       variables: { id },
     }).catch(err => {
-      console.error(err);
-      this.setState({ mode: 'error' });
-    });
-  };
+      console.error(err)
+      this.setState({ mode: 'error' })
+    })
+  }
 
   render() {
-    const { mode } = this.state;
-    const { id: _id, deleteComment: _deleteComment, ...rest } = this.props;
+    const { mode } = this.state
+    const { id: _id, deleteComment: _deleteComment, ...rest } = this.props
 
     return (
       <Text {...rest}>
@@ -47,10 +47,10 @@ class BlockLightboxCommentDeleteButton extends PureComponent {
           }
         </a>
       </Text>
-    );
+    )
   }
 }
 
 export default graphql(deleteCommentMutation, {
   name: 'deleteComment',
-})(BlockLightboxCommentDeleteButton);
+})(BlockLightboxCommentDeleteButton)

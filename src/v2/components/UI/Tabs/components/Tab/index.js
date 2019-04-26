@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { baseMixin } from 'v2/components/UI/Text';
-import { space } from 'styled-system';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
+import { baseMixin } from 'v2/components/UI/Text'
+import { space } from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 
 export const activeMixin = css`
   border-top: 2px solid ${x => x.theme.colors.gray.bold};
@@ -13,7 +13,7 @@ export const activeMixin = css`
   border-bottom: 1px solid ${x => x.theme.colors.gray.hint};
   color: ${x => x.theme.colors.gray.bold};
   background-color: ${x => x.theme.colors.gray.hint};
-`;
+`
 
 const Label = styled.div.attrs({ fontSize: 3 })`
   text-align: center;
@@ -27,31 +27,31 @@ const Label = styled.div.attrs({ fontSize: 3 })`
   ${baseMixin};
 
   ${x => x.active && activeMixin};
-`;
+`
 
 export default class Tab extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
     onTabClick: PropTypes.func.isRequired,
     active: PropTypes.bool,
-  };
+  }
 
   static defaultProps = {
     active: false,
-  };
+  }
 
   onTabClick = () => {
-    const { onTabClick, label } = this.props;
-    onTabClick(label);
-  };
+    const { onTabClick, label } = this.props
+    onTabClick(label)
+  }
 
   render() {
-    const { label, active } = this.props;
+    const { label, active } = this.props
 
     return (
       <Label active={active} onClick={this.onTabClick}>
         {label}
       </Label>
-    );
+    )
   }
 }

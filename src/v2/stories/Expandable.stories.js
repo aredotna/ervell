@@ -1,13 +1,13 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Text from 'v2/components/UI/Text';
-import Expandable from 'v2/components/UI/Expandable';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Text from 'v2/components/UI/Text'
+import Expandable from 'v2/components/UI/Expandable'
 import {
   Expandable as ExpandableSet,
   ExpandableContext,
-} from 'v2/components/UI/ExpandableSet';
+} from 'v2/components/UI/ExpandableSet'
 
 const overflowingText = `
   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -28,7 +28,7 @@ const overflowingText = `
   Vivamus arcu justo, gravida sed risus ac, elementum interdum lectus.
   Ut at tempor ex.
   Sed ac felis elit.
-`;
+`
 
 storiesOf('Expandable', module)
   .add('default', () => (
@@ -58,4 +58,4 @@ storiesOf('Expandable', module)
         </ExpandableSet>
       </ExpandableContext>
     </Specimen>
-  ));
+  ))

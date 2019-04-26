@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   query CustomerPlanChanges($plan_id: SupportedPlanEnum, $coupon_code: String) {
@@ -20,4 +20,4 @@ export default gql`
       }
     }
   }
-`;
+`

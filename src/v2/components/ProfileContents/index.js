@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import profileContentsQuery from 'v2/components/ProfileContents/queries/profileContents';
+import profileContentsQuery from 'v2/components/ProfileContents/queries/profileContents'
 
-import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting';
+import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import SearchInput from 'v2/components/UI/SearchInput';
-import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator';
-import Grid from 'v2/components/UI/Grid';
-import Cell from 'v2/components/Cell';
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import SearchInput from 'v2/components/UI/SearchInput'
+import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
+import Grid from 'v2/components/UI/Grid'
+import Cell from 'v2/components/Cell'
 
 class ProfileContents extends PureComponent {
   static propTypes = {
@@ -37,13 +37,13 @@ class ProfileContents extends PureComponent {
     q: null,
   }
 
-  resetQuery = (query) => {
-    const q = query === '' ? null : query;
-    this.setState({ q, page: 1, hasMore: true });
+  resetQuery = query => {
+    const q = query === '' ? null : query
+    this.setState({ q, page: 1, hasMore: true })
   }
 
   loadMore = fetchMore => () => {
-    const { page, per } = this.state;
+    const { page, per } = this.state
 
     fetchMore({
       variables: { page: page + 1, per },
@@ -61,54 +61,62 @@ class ProfileContents extends PureComponent {
         },
       }),
     }).then(({ errors, data }) => {
-      const { identity: { identifiable: { contents: { length } } } } = data;
-      const hasMore = !errors && length > 0 && length >= per;
+      const {
+        identity: {
+          identifiable: {
+            contents: { length },
+          },
+        },
+      } = data
+      const hasMore = !errors && length > 0 && length >= per
 
       this.setState({
         page: page + 1,
         hasMore,
-      });
-    });
+      })
+    })
   }
 
   render() {
-    const { per, hasMore, q } = this.state;
-    const {
-      id, type, sort, fetchPolicy, seed, isSpiderRequesting,
-    } = this.props;
+    const { per, hasMore, q } = this.state
+    const { id, type, sort, fetchPolicy, seed, isSpiderRequesting } = this.props
 
     return (
       <Query
         query={profileContentsQuery}
         variables={{
-          id, type, per, sort, q, seed,
+          id,
+          type,
+          per,
+          sort,
+          q,
+          seed,
         }}
         fetchPolicy={fetchPolicy}
         ssr={isSpiderRequesting}
       >
-        {({
-          loading, error, data, fetchMore,
-        }) => {
+        {({ loading, error, data, fetchMore }) => {
           if (error) {
-            return (
-              <ErrorAlert>
-                {error.message}
-              </ErrorAlert>
-            );
+            return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
           if (!data.identity) {
-            return <BlocksLoadingIndicator />;
+            return <BlocksLoadingIndicator />
           }
 
-          const { identity: { identifiable: { name, contents } } } = data;
+          const {
+            identity: {
+              identifiable: { name, contents },
+            },
+          } = data
 
           return (
             <div>
               <SearchInput
                 query={q}
                 onDebouncedQueryChange={this.resetQuery}
-                placeholder={`Filter ${name}’s ${{ BLOCK: 'blocks' }[type] || 'blocks and channels'}`}
+                placeholder={`Filter ${name}’s ${{ BLOCK: 'blocks' }[type] ||
+                  'blocks and channels'}`}
                 mb={6}
                 mr={[
                   constants.blockGutter,
@@ -119,11 +127,9 @@ class ProfileContents extends PureComponent {
                 border={0}
               />
 
-              {loading &&
-                <BlocksLoadingIndicator />
-              }
+              {loading && <BlocksLoadingIndicator />}
 
-              {!loading && contents.length > 0 &&
+              {!loading && contents.length > 0 && (
                 <Grid
                   pageStart={1}
                   threshold={800}
@@ -140,13 +146,13 @@ class ProfileContents extends PureComponent {
                     />
                   ))}
                 </Grid>
-              }
+              )}
             </div>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }
 
-export default WithIsSpiderRequesting(ProfileContents);
+export default WithIsSpiderRequesting(ProfileContents)

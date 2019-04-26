@@ -1,13 +1,13 @@
-import React, { Component, Children } from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import InfiniteScroll from 'react-infinite-scroller';
+import React, { Component, Children } from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
+import InfiniteScroll from 'react-infinite-scroller'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import GridItem from 'v2/components/UI/Grid/components/GridItem';
+import GridItem from 'v2/components/UI/Grid/components/GridItem'
 
-const { blockGutter } = constants;
+const { blockGutter } = constants
 
 const containerMixin = css`
   display: flex;
@@ -20,15 +20,15 @@ const containerMixin = css`
     margin-left: 0;
     margin-right: 0;
   `}
-`;
+`
 
 const Container = styled.div`
   ${containerMixin}
-`;
+`
 
 const InfiniteContainer = styled(InfiniteScroll)`
   ${containerMixin}
-`;
+`
 
 export default class Grid extends Component {
   static propTypes = {
@@ -37,14 +37,14 @@ export default class Grid extends Component {
     gutterSpacing: PropTypes.number,
     loadMore: PropTypes.func,
     wrapChildren: PropTypes.bool,
-  };
+  }
 
   static defaultProps = {
     variableHeight: false,
     gutterSpacing: 4,
     loadMore: null,
     wrapChildren: true,
-  };
+  }
 
   render() {
     const {
@@ -54,9 +54,9 @@ export default class Grid extends Component {
       gutterSpacing,
       wrapChildren,
       ...rest
-    } = this.props;
+    } = this.props
 
-    const Tag = loadMore ? InfiniteContainer : Container;
+    const Tag = loadMore ? InfiniteContainer : Container
 
     return (
       <Tag loadMore={loadMore} {...rest}>
@@ -70,6 +70,6 @@ export default class Grid extends Component {
             )
           : children}
       </Tag>
-    );
+    )
   }
 }

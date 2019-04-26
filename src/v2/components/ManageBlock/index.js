@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import { graphql } from 'react-apollo'
 
-import mapErrors from 'v2/util/mapErrors';
-import compactObject from 'v2/util/compactObject';
+import mapErrors from 'v2/util/mapErrors'
+import compactObject from 'v2/util/compactObject'
 
-import manageBlockFragment from 'v2/components/ManageBlock/fragments/manageBlock';
-import updateBlockMutation from 'v2/components/ManageBlock/mutations/updateBlock';
+import manageBlockFragment from 'v2/components/ManageBlock/fragments/manageBlock'
+import updateBlockMutation from 'v2/components/ManageBlock/mutations/updateBlock'
 
-import Box from 'v2/components/UI/Box';
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import TitledDialog from 'v2/components/UI/TitledDialog';
-import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs';
+import Box from 'v2/components/UI/Box'
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import TitledDialog from 'v2/components/UI/TitledDialog'
+import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs'
 
 class ManageBlock extends PureComponent {
   static propTypes = {
@@ -37,61 +37,59 @@ class ManageBlock extends PureComponent {
   }
 
   componentDidMount() {
-    const { autoFocus } = this.props;
+    const { autoFocus } = this.props
 
     setTimeout(() => {
       const element = {
         title: this.titleRef,
         description: this.descriptionRef,
         body: this.bodyRef,
-      }[autoFocus];
+      }[autoFocus]
 
-      element.current.focus();
-    }, 0);
+      element.current.focus()
+    }, 0)
   }
 
   titleRef = React.createRef()
   descriptionRef = React.createRef()
   bodyRef = React.createRef()
 
-  handleErrors = (err) => {
+  handleErrors = err => {
     this.setState({
       mode: 'error',
       ...mapErrors(err),
-    });
+    })
   }
 
-  updateBlock = (e) => {
-    e.preventDefault();
+  updateBlock = e => {
+    e.preventDefault()
 
-    const {
-      block, updateBlock, onDone, onChangePending,
-    } = this.props;
-    const { title, description, content } = this.state;
+    const { block, updateBlock, onDone, onChangePending } = this.props
+    const { title, description, content } = this.state
 
     const variables = compactObject({
       id: block.id,
       title,
       description,
       content,
-    });
+    })
 
-    this.setState({ mode: 'updating' });
+    this.setState({ mode: 'updating' })
 
     return updateBlock({ variables })
       .then(() => {
-        onChangePending(false);
-        return onDone();
+        onChangePending(false)
+        return onDone()
       })
-      .catch(this.handleErrors);
+      .catch(this.handleErrors)
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
-    const { onChangePending } = this.props;
+    const { onChangePending } = this.props
 
-    onChangePending(true);
+    onChangePending(true)
 
-    this.setState({ [fieldName]: fieldValue });
+    this.setState({ [fieldName]: fieldValue })
   }
 
   handleTitle = this.handleInput('title')
@@ -99,26 +97,28 @@ class ManageBlock extends PureComponent {
   handleContent = this.handleInput('content')
 
   render() {
-    const { mode, errorMessage } = this.state;
-    const { block } = this.props;
+    const { mode, errorMessage } = this.state
+    const { block } = this.props
 
     return (
       <TitledDialog
         title="Update block"
         onDone={this.updateBlock}
         disabled={mode === 'updating'}
-        label={{
-          resting: 'Save',
-          updating: 'Updating...',
-          error: 'Error',
-        }[mode]}
+        label={
+          {
+            resting: 'Save',
+            updating: 'Updating...',
+            error: 'Error',
+          }[mode]
+        }
       >
         <Box>
-          {mode === 'error' &&
+          {mode === 'error' && (
             <ErrorAlert my={6} isReloadable={false}>
               {errorMessage}
             </ErrorAlert>
-          }
+          )}
 
           <LabelledInput>
             <Label>Title</Label>
@@ -144,7 +144,7 @@ class ManageBlock extends PureComponent {
             />
           </LabelledInput>
 
-          {block.__typename === 'Text' &&
+          {block.__typename === 'Text' && (
             <LabelledInput>
               <Label>Text</Label>
 
@@ -160,13 +160,13 @@ class ManageBlock extends PureComponent {
                 ref={this.bodyRef}
               />
             </LabelledInput>
-          }
+          )}
         </Box>
       </TitledDialog>
-    );
+    )
   }
 }
 
 export default graphql(updateBlockMutation, {
   name: 'updateBlock',
-})(ManageBlock);
+})(ManageBlock)

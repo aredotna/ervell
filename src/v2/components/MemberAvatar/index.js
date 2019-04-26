@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import Avatar from 'v2/components/UI/Avatar';
+import Avatar from 'v2/components/UI/Avatar'
 
-import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar';
+import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar'
 
 const Initials = styled.div`
   font-family: ${x => x.theme.fonts.sans};
@@ -13,7 +13,7 @@ const Initials = styled.div`
   color: ${x => x.theme.colors.gray.medium};
   text-transform: uppercase;
   text-decoration: none;
-`;
+`
 
 const Image = styled.img`
   position: absolute;
@@ -23,7 +23,7 @@ const Image = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-`;
+`
 
 export default class MemberAvatar extends Component {
   static propTypes = {
@@ -42,29 +42,30 @@ export default class MemberAvatar extends Component {
   }
 
   hideImage = () => {
-    this.setState({ hideImage: true });
+    this.setState({ hideImage: true })
   }
 
   render() {
-    const { hideImage } = this.state;
-    const {
-      member, size, isLinked, ...rest
-    } = this.props;
+    const { hideImage } = this.state
+    const { member, size, isLinked, ...rest } = this.props
 
     return (
-      <Avatar tag={isLinked ? 'a' : 'span'} href={member.href} size={size} {...rest}>
-        <Initials size={size}>
-          {member.initials}
-        </Initials>
+      <Avatar
+        tag={isLinked ? 'a' : 'span'}
+        href={member.href}
+        size={size}
+        {...rest}
+      >
+        <Initials size={size}>{member.initials}</Initials>
 
-        {member.avatar && !hideImage &&
+        {member.avatar && !hideImage && (
           <Image
             src={member.avatar}
             alt={member.initials}
             onError={this.hideImage}
           />
-        }
+        )}
       </Avatar>
-    );
+    )
   }
 }

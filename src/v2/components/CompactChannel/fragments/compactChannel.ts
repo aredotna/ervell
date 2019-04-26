@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment CompactChannel on Channel {
@@ -24,4 +24,4 @@ export default gql`
       contents
     }
   }
-`;
+`

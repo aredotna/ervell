@@ -1,3 +1,3 @@
-import initialize from 'apps/actions/client';
+import initialize from 'apps/actions/client'
 
-document.addEventListener('DOMContentLoaded', initialize);
+document.addEventListener('DOMContentLoaded', initialize)

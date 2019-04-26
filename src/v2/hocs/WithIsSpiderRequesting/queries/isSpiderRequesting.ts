@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   query IsSpiderRequestingQuery {
@@ -6,4 +6,4 @@ export default gql`
       isSpiderRequesting: get(name: "IS_SPIDER")
     }
   }
-`;
+`

@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import profilePageIdentifiableFragment from 'v2/pages/profile/ProfilePage/fragments/profilePageIdentifiable';
+import profilePageIdentifiableFragment from 'v2/pages/profile/ProfilePage/fragments/profilePageIdentifiable'
 
 export default gql`
   query ProfilePage($id: ID!) {
@@ -12,4 +12,4 @@ export default gql`
     }
   }
   ${profilePageIdentifiableFragment}
-`;
+`

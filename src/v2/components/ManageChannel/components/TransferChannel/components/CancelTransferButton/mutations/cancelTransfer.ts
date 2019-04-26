@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import transferChannelFragment from 'v2/components/ManageChannel/components/TransferChannel/fragments/transferChannelFragment';
+import transferChannelFragment from 'v2/components/ManageChannel/components/TransferChannel/fragments/transferChannelFragment'
 
 export default gql`
   mutation cancelChannelTransferMutation($channel_id: ID!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${transferChannelFragment}
-`;
+`

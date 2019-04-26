@@ -1,28 +1,28 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { graphql } from 'react-apollo'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Link from 'v2/components/UI/Link';
-import { FilledButton } from 'v2/components/UI/Buttons';
-import { Textarea } from 'v2/components/UI/Inputs';
-import DropZoneUploader from 'v2/components/UI/DropZoneUploader';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Link from 'v2/components/UI/Link'
+import { FilledButton } from 'v2/components/UI/Buttons'
+import { Textarea } from 'v2/components/UI/Inputs'
+import DropZoneUploader from 'v2/components/UI/DropZoneUploader'
 
-import createBlockMutation from 'v2/components/AddBlock/mutations/createBlock';
+import createBlockMutation from 'v2/components/AddBlock/mutations/createBlock'
 
 const Button = styled(FilledButton)`
   &:hover {
     background-color: transparent;
   }
-`;
+`
 
 const Choose = styled(Link)`
   position: relative;
   border-bottom: 1px solid;
   z-index: 1;
   cursor: pointer;
-`;
+`
 
 const Container = styled(Box).attrs({
   bg: 'gray.hint',
@@ -34,7 +34,7 @@ const Container = styled(Box).attrs({
     width: ${props.theme.constantValues.blockWidth};
     height: ${props.theme.constantValues.blockWidth};
   `}
-`;
+`
 
 const Tip = styled(Box)`
   position: absolute;
@@ -43,7 +43,7 @@ const Tip = styled(Box)`
   left: 0;
   text-align: center;
   user-select: none;
-`;
+`
 
 const Input = styled(Textarea).attrs({
   resize: 'none',
@@ -63,13 +63,13 @@ const Input = styled(Textarea).attrs({
     background-color: ${props => props.theme.colors.gray.light};
     z-index: 2;
   }
-`;
+`
 
 const Message = styled(Box)`
   ${Text}:last-child {
     display: none;
   }
-`;
+`
 
 const Content = styled(Box)`
   position: relative;
@@ -92,48 +92,48 @@ const Content = styled(Box)`
       }
     }
   }
-`;
+`
 
 interface AddBlockProps {
-  channel_id: string | number;
-  createBlock: (props: any) => Promise<any>;
-  onAddBlock: (props: any) => void;
+  channel_id: string | number
+  createBlock: (props: any) => Promise<any>
+  onAddBlock: (props: any) => void
 }
 
 class AddBlock extends PureComponent<AddBlockProps> {
   static defaultProps = {
     onAddBlock: _props => {},
-  };
+  }
 
   state = {
     mode: 'resting',
     value: '',
     inputKey: new Date().getTime(),
     uploaderKey: new Date().getTime(),
-  };
+  }
 
   handleChange = ({ target: { value } }) => {
-    const mode = value === '' ? 'resting' : 'active';
-    this.setState({ value, mode });
-  };
+    const mode = value === '' ? 'resting' : 'active'
+    this.setState({ value, mode })
+  }
 
   handleKeyDown = e => {
-    const { key, shiftKey } = e;
+    const { key, shiftKey } = e
 
     if (key === 'Enter' && !shiftKey) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.handleSubmit();
+      e.preventDefault()
+      e.stopPropagation()
+      this.handleSubmit()
     }
 
     // Allows <shift+enter> to pass through
-  };
+  }
 
   handleSubmit = () => {
-    const { createBlock, onAddBlock, channel_id } = this.props;
-    const { value } = this.state;
+    const { createBlock, onAddBlock, channel_id } = this.props
+    const { value } = this.state
 
-    this.setState({ mode: 'submitting' });
+    this.setState({ mode: 'submitting' })
 
     return createBlock({
       variables: { channel_id, value },
@@ -142,32 +142,32 @@ class AddBlock extends PureComponent<AddBlockProps> {
         this.setState({
           mode: 'resting',
           inputKey: new Date().getTime(),
-        });
+        })
 
-        return onAddBlock(block);
+        return onAddBlock(block)
       })
       .catch(err => {
-        console.error(err);
-        this.setState({ mode: 'error' });
-      });
-  };
+        console.error(err)
+        this.setState({ mode: 'error' })
+      })
+  }
 
   handleUpload = ({ url: value }) => {
-    const { createBlock, onAddBlock, channel_id } = this.props;
+    const { createBlock, onAddBlock, channel_id } = this.props
 
     return createBlock({
       variables: { channel_id, value },
     })
       .then(({ data: { create_block: { block } } }) => onAddBlock(block))
       .catch(err => {
-        console.error(err);
-      });
-  };
+        console.error(err)
+      })
+  }
 
-  finishUpload = () => this.setState({ uploaderKey: new Date().getTime() });
+  finishUpload = () => this.setState({ uploaderKey: new Date().getTime() })
 
   render() {
-    const { mode, inputKey, uploaderKey } = this.state;
+    const { mode, inputKey, uploaderKey } = this.state
 
     return (
       <DropZoneUploader
@@ -223,10 +223,10 @@ class AddBlock extends PureComponent<AddBlockProps> {
           </Container>
         )}
       </DropZoneUploader>
-    );
+    )
   }
 }
 
 export default graphql<AddBlockProps>(createBlockMutation, {
   name: 'createBlock',
-})(AddBlock);
+})(AddBlock)

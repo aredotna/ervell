@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import passwordResettableUserQuery from 'v2/pages/authentication/ResetPasswordPage/queries/passwordResettableUser';
+import passwordResettableUserQuery from 'v2/pages/authentication/ResetPasswordPage/queries/passwordResettableUser'
 
-import Title from 'v2/components/UI/Head/components/Title';
-import Text from 'v2/components/UI/Text';
-import Icons from 'v2/components/UI/Icons';
-import CenteringBox from 'v2/components/UI/CenteringBox';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import ResetPasswordForm from 'v2/components/ResetPasswordForm';
+import Title from 'v2/components/UI/Head/components/Title'
+import Text from 'v2/components/UI/Text'
+import Icons from 'v2/components/UI/Icons'
+import CenteringBox from 'v2/components/UI/CenteringBox'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import ResetPasswordForm from 'v2/components/ResetPasswordForm'
 
 export default class ResetPasswordPage extends Component {
   static propTypes = {
     reset_password_token: PropTypes.string.isRequired,
-  };
+  }
 
   render() {
-    const { reset_password_token } = this.props;
+    const { reset_password_token } = this.props
 
     return (
       <Query
@@ -31,7 +31,7 @@ export default class ResetPasswordPage extends Component {
               <CenteringBox>
                 <LoadingIndicator />
               </CenteringBox>
-            );
+            )
           }
 
           if (error) {
@@ -50,7 +50,7 @@ export default class ResetPasswordPage extends Component {
                   <a href="mailto:help@are.na">help@are.na</a>
                 </Text>
               </CenteringBox>
-            );
+            )
           }
 
           return (
@@ -59,9 +59,9 @@ export default class ResetPasswordPage extends Component {
 
               <ResetPasswordForm reset_password_token={reset_password_token} />
             </CenteringBox>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

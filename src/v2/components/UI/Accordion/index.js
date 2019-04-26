@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
 const Container = styled.div`
-  ${x => x.mode === 'closed' && `
+  ${x =>
+    x.mode === 'closed' &&
+    `
     border-bottom: 1px solid ${x.theme.colors.gray.regular};
 
     &:last-child {
       border-bottom: 0;
     }
   `}
-`;
+`
 
 const Header = styled.div`
   position: relative;
@@ -38,7 +40,9 @@ const Header = styled.div`
     pointer-events: none;
   }
 
-  ${x => x.mode === 'open' && `
+  ${x =>
+    x.mode === 'open' &&
+    `
     // Down-facing Caret
     &:after {
       border-top: 0.5em solid ${x.theme.colors.gray.semiBold};
@@ -47,10 +51,9 @@ const Header = styled.div`
       border-left: 0.25em solid transparent;
     }
   `}
-`;
+`
 
-const Section = styled.div`
-`;
+const Section = styled.div``
 
 export default class Accordion extends Component {
   static propTypes = {
@@ -64,37 +67,38 @@ export default class Accordion extends Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    const { mode } = this.props;
+    const { mode } = this.props
 
-    this.state = { mode };
+    this.state = { mode }
   }
 
   toggleMode = () => {
     this.setState(({ mode: prevMode }) => ({
       mode: prevMode === 'open' ? 'closed' : 'open',
-    }));
+    }))
   }
 
   render() {
-    const { mode } = this.state;
-    const { label, children, ...rest } = this.props;
+    const { mode } = this.state
+    const { label, children, ...rest } = this.props
 
     return (
       <Container {...rest} mode={mode}>
-        <Header mode={mode} onClick={this.toggleMode} role="button" tabIndex={0}>
+        <Header
+          mode={mode}
+          onClick={this.toggleMode}
+          role="button"
+          tabIndex={0}
+        >
           <Text f={1} fontWeight="bold">
             {label}
           </Text>
         </Header>
 
-        {mode === 'open' &&
-          <Section>
-            {children}
-          </Section>
-        }
+        {mode === 'open' && <Section>{children}</Section>}
       </Container>
-    );
+    )
   }
 }

@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import profileMetaTagsFragment from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags/fragments/profileMetaTags';
+import profileMetaTagsFragment from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags/fragments/profileMetaTags'
 
-import Head from 'v2/components/UI/Head';
-import Title from 'v2/components/UI/Head/components/Title';
-import Description from 'v2/components/UI/Head/components/Description';
-import Canonical from 'v2/components/UI/Head/components/Canonical';
+import Head from 'v2/components/UI/Head'
+import Title from 'v2/components/UI/Head/components/Title'
+import Description from 'v2/components/UI/Head/components/Description'
+import Canonical from 'v2/components/UI/Head/components/Canonical'
 
 const ProfileMetaTags = ({ identifiable, view }) => (
   <React.Fragment>
@@ -29,7 +29,7 @@ const ProfileMetaTags = ({ identifiable, view }) => (
       />
     </Head>
   </React.Fragment>
-);
+)
 
 ProfileMetaTags.propTypes = {
   identifiable: propType(profileMetaTagsFragment).isRequired,
@@ -41,6 +41,6 @@ ProfileMetaTags.propTypes = {
     'following',
     'followers',
   ]).isRequired,
-};
+}
 
-export default ProfileMetaTags;
+export default ProfileMetaTags

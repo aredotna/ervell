@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CTAText from 'v2/components/Onboarding/components/UI/CTAText';
-import CTAButton from 'v2/components/Onboarding/components/UI/CTAButton';
+import React from 'react'
+import PropTypes from 'prop-types'
+import CTAText from 'v2/components/Onboarding/components/UI/CTAText'
+import CTAButton from 'v2/components/Onboarding/components/UI/CTAButton'
 
-const AboutChannels = (props) => {
-  const { goForward } = props;
+const AboutChannels = props => {
+  const { goForward } = props
 
   return (
     <div>
@@ -14,15 +14,13 @@ const AboutChannels = (props) => {
       <CTAText>
         You can add images, links, PDFs, videos, text, and more.
       </CTAText>
-      <CTAButton onClick={goForward}>
-        Got it
-      </CTAButton>
+      <CTAButton onClick={goForward}>Got it</CTAButton>
     </div>
-  );
-};
+  )
+}
 
 AboutChannels.propTypes = {
   goForward: PropTypes.func.isRequired,
-};
+}
 
-export default AboutChannels;
+export default AboutChannels

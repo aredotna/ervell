@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { propType } from 'graphql-anywhere'
 
-import groupOwnerFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner/fragments/groupOwner';
+import groupOwnerFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner/fragments/groupOwner'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import UserAvatar from 'v2/components/UserAvatar';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import UserAvatar from 'v2/components/UserAvatar'
 
 const Container = styled(Box).attrs({
   py: 3,
@@ -21,7 +21,7 @@ const Container = styled(Box).attrs({
     border-bottom-width: 1px;
     border-bottom-style: solid;
   }
-`;
+`
 
 export default class GroupOwner extends PureComponent {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class GroupOwner extends PureComponent {
   }
 
   render() {
-    const { user } = this.props;
+    const { user } = this.props
 
     return (
       <Container>
@@ -48,10 +48,9 @@ export default class GroupOwner extends PureComponent {
         <Text f={1} color="gray.medium" fontWeight="bold">
           {user.is_premium
             ? 'Already Premium'
-            : 'Not upgraded (Manage using individual billing above)'
-          }
+            : 'Not upgraded (Manage using individual billing above)'}
         </Text>
       </Container>
-    );
+    )
   }
 }

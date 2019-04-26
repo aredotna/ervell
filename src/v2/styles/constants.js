@@ -1,21 +1,21 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
-import { LINE_HEIGHTS } from 'v2/styles/text';
+import { LINE_HEIGHTS } from 'v2/styles/text'
 
 export const BREAKPOINTS = {
   mobile: 640,
   small: 1024,
-};
+}
 
 export const MEDIA_QUERIES = Object.keys(BREAKPOINTS).reduce((acc, label) => {
   acc[label] = (...args) => css`
     @media (max-width: ${BREAKPOINTS[label] / 16}em) {
       ${css(...args)}
     }
-  `;
+  `
 
-  return acc;
-}, {});
+  return acc
+}, {})
 
 export const Z_INDEXES = {
   header: 4001,
@@ -24,7 +24,7 @@ export const Z_INDEXES = {
   modal: 6001,
   lightbox: 6001,
   rotate: 7001,
-};
+}
 
 export const SPACING_SCALE = [
   '0',
@@ -42,7 +42,7 @@ export const SPACING_SCALE = [
   '24em',
   '32em',
   '64em',
-];
+]
 
 export const CONSTANT_VALUES = {
   emptySpaceWidth: '0.33em',
@@ -57,12 +57,12 @@ export const CONSTANT_VALUES = {
   legacyUnit: '20px',
   // py: 1em (6) + 1rem input inner (16px/13px font-size + 1.125 line-height)
   topBarHeight: `calc((1rem * ${LINE_HEIGHTS.input}) + 2em)`,
-};
+}
 
 export const RADII = {
   button: '0.25em',
   subtle: '0.125em',
-};
+}
 
 export default {
   ...CONSTANT_VALUES,
@@ -71,4 +71,4 @@ export default {
   breakpoints: BREAKPOINTS,
   space: SPACING_SCALE,
   radii: RADII,
-};
+}

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
-import styled, { css } from 'styled-components';
+import React, { Component } from 'react'
+import { propType } from 'graphql-anywhere'
+import styled, { css } from 'styled-components'
 
-import UserAvatar from 'v2/components/UserAvatar';
-import Text from 'v2/components/UI/Text';
-import FollowButton from 'v2/components/FollowButton';
+import UserAvatar from 'v2/components/UserAvatar'
+import Text from 'v2/components/UI/Text'
+import FollowButton from 'v2/components/FollowButton'
 
-import contactAvatarFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact';
+import contactAvatarFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact'
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const Container = styled.div`
   padding: 3px 0;
   border-bottom: 1px solid ${x => x.theme.colors.gray.light};
   flex-shrink: 0;
-`;
+`
 
 const Identifier = styled.div`
   display: flex;
@@ -24,12 +24,12 @@ const Identifier = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-`;
+`
 
 const Username = styled(Text)`
   display: flex;
   align-self: center;
-`;
+`
 
 const followMixin = css`
   font-family: ${x => x.theme.fonts.sans};
@@ -41,7 +41,7 @@ const followMixin = css`
   &:hover {
     color: ${x => x.theme.colors.gray.bold};
   }
-`;
+`
 
 const FollowText = styled.span`
   ${followMixin}
@@ -49,14 +49,14 @@ const FollowText = styled.span`
   &:after {
     content: 'Follow';
   }
-`;
+`
 
 const UnfollowText = styled.span`
   ${followMixin}
   &:after {
     content: 'Unfollow';
   }
-`;
+`
 
 export default class Contact extends Component {
   static propTypes = {
@@ -64,7 +64,7 @@ export default class Contact extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user } = this.props
 
     return (
       <Container>
@@ -74,12 +74,14 @@ export default class Contact extends Component {
         </Identifier>
 
         <FollowButton id={user.id} type="USER">
-          {({ isFollowed }) => ({
-            true: <UnfollowText />,
-            false: <FollowText />,
-          }[isFollowed])}
+          {({ isFollowed }) =>
+            ({
+              true: <UnfollowText />,
+              false: <FollowText />,
+            }[isFollowed])
+          }
         </FollowButton>
       </Container>
-    );
+    )
   }
 }

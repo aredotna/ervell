@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text';
-import { DividerButton } from 'v2/components/UI/Buttons';
+import Text from 'v2/components/UI/Text'
+import { DividerButton } from 'v2/components/UI/Buttons'
 
 const Container = styled.form`
   box-sizing: border-box;
@@ -12,7 +12,7 @@ const Container = styled.form`
   flex-direction: column;
   height: 100%;
   padding: 2em 1em 0 1em;
-`;
+`
 
 const Body = styled.div`
   box-sizing: border-box;
@@ -21,7 +21,7 @@ const Body = styled.div`
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-`;
+`
 
 export default class TitledDialog extends Component {
   static propTypes = {
@@ -30,15 +30,15 @@ export default class TitledDialog extends Component {
     onDone: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     label: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
     label: 'Done',
     disabled: false,
-  };
+  }
 
   render() {
-    const { title, children, onDone, label, disabled, ...rest } = this.props;
+    const { title, children, onDone, label, disabled, ...rest } = this.props
 
     return (
       <Container onSubmit={onDone} {...rest}>
@@ -58,6 +58,6 @@ export default class TitledDialog extends Component {
           {label}
         </DividerButton>
       </Container>
-    );
+    )
   }
 }

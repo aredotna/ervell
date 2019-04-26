@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { storiesOf } from '@storybook/react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { storiesOf } from '@storybook/react'
+import styled from 'styled-components'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Overlay from 'v2/components/UI/Overlay';
-import Pre from 'v2/components/UI/Pre';
-import UserDropdown from 'v2/components/UserDropdown';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Overlay from 'v2/components/UI/Overlay'
+import Pre from 'v2/components/UI/Pre'
+import UserDropdown from 'v2/components/UserDropdown'
 
 const RelativeWrapper = styled.div`
   position: relative;
@@ -15,7 +15,7 @@ const RelativeWrapper = styled.div`
   text-align: ${x => x.align};
   padding: 1em;
   margin: 1em;
-`;
+`
 
 class OverlaidUserDropdown extends Component {
   static propTypes = {
@@ -24,26 +24,26 @@ class OverlaidUserDropdown extends Component {
     anchorY: PropTypes.oneOf(['top', 'bottom']),
     alignToX: PropTypes.oneOf(['left', 'right']),
     alignToY: PropTypes.oneOf(['top', 'bottom']),
-  };
+  }
 
   static defaultProps = {
     anchorY: 'top',
     anchorX: 'left',
     alignToY: 'bottom',
     alignToX: 'left',
-  };
+  }
 
   state = {
     open: false,
-  };
+  }
 
-  open = () => this.setState({ open: true });
+  open = () => this.setState({ open: true })
 
-  close = () => this.setState({ open: false });
+  close = () => this.setState({ open: false })
 
   render() {
-    const { align, anchorX, anchorY, alignToX, alignToY } = this.props;
-    const { open } = this.state;
+    const { align, anchorX, anchorY, alignToX, alignToY } = this.props
+    const { open } = this.state
 
     return (
       <RelativeWrapper align={align}>
@@ -59,7 +59,7 @@ class OverlaidUserDropdown extends Component {
           <div>
             <button
               ref={el => {
-                this.target = el;
+                this.target = el
               }}
               onClick={this.close}
             >
@@ -81,7 +81,7 @@ class OverlaidUserDropdown extends Component {
           </div>
         )}
       </RelativeWrapper>
-    );
+    )
   }
 }
 
@@ -101,4 +101,4 @@ storiesOf('Overlay', module).add('configurations', () => (
       alignToY="top"
     />
   </Specimen>
-));
+))

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const Container = styled.div`
   position: relative;
@@ -11,7 +11,7 @@ const Container = styled.div`
     `
     max-height: ${x.height};
   `}
-`;
+`
 
 const Button = styled.a`
   display: block;
@@ -36,7 +36,7 @@ const Button = styled.a`
       white 90%
     );
   }
-`;
+`
 
 export default class Expandable extends Component {
   static propTypes = {
@@ -44,72 +44,72 @@ export default class Expandable extends Component {
     height: PropTypes.string.isRequired,
     onExpand: PropTypes.func,
     mode: PropTypes.string,
-  };
+  }
 
   static defaultProps = {
     onExpand: () => {},
     mode: 'resting',
-  };
+  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.mode !== nextProps.mode && nextProps.mode !== 'resting') {
-      return { mode: nextProps.mode };
+      return { mode: nextProps.mode }
     }
 
-    return null;
+    return null
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       mode: props.mode,
       force: false,
       isEnabled: false,
-    };
+    }
   }
 
   componentDidMount() {
     if (!this.isOverFlowing()) {
-      this.setState({ mode: 'expanded', force: true });
+      this.setState({ mode: 'expanded', force: true })
     }
 
     this.setState({
       isEnabled: typeof window !== 'undefined',
-    });
+    })
   }
 
   isOverFlowing() {
-    return this.contents.clientHeight > this.container.clientHeight;
+    return this.contents.clientHeight > this.container.clientHeight
   }
 
   expandContents = () => {
-    this.setState({ mode: 'expanded' });
-    this.props.onExpand();
-  };
+    this.setState({ mode: 'expanded' })
+    this.props.onExpand()
+  }
 
   render() {
-    const { mode, force, isEnabled } = this.state;
+    const { mode, force, isEnabled } = this.state
     const {
       children,
       height,
       mode: _initialMode,
       onExpand: _onExpand,
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <Container
         height={height}
         mode={mode}
         ref={el => {
-          this.container = el;
+          this.container = el
         }}
         {...rest}
       >
         <div
           ref={el => {
-            this.contents = el;
+            this.contents = el
           }}
         >
           {children}
@@ -119,6 +119,6 @@ export default class Expandable extends Component {
           <Button data-enabled={isEnabled} onClick={this.expandContents} />
         )}
       </Container>
-    );
+    )
   }
 }
