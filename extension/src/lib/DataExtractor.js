@@ -27,9 +27,9 @@ class DataExtractor {
         value: this.image,
       };
     } else if (tempData['text/uri-list']) {
-      // we have a link probably
+      // we have a link, don't copy the original source
       this.data = {
-        ...this.data,
+        id: this.data.id,
         type: 'Link',
         value: tempData['text/uri-list'],
       };

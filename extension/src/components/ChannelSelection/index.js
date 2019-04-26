@@ -38,7 +38,7 @@ class ChannelSelection extends PureComponent {
     return (
       <Layout showBack showClose={false}>
         <Container mt={9}>
-          <Search onChange={this.updateQuery} />
+          <Search query={query} onChange={this.updateQuery} />
 
           {query.length > 0 &&
             <SearchResults

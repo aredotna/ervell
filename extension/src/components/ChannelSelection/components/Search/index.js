@@ -6,13 +6,15 @@ import SearchInput from 'react/components/UI/SearchInput';
 class Search extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
+    query: PropTypes.string.isRequired,
   }
 
   render() {
-    const { onChange } = this.props;
+    const { onChange, query } = this.props;
 
     return (
       <SearchInput
+        query={query}
         onQueryChange={onChange}
         placeholder="Filter channels"
       />

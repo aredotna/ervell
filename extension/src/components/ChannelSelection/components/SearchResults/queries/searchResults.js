@@ -7,7 +7,7 @@ export default gql`
     me {
       __typename
       id
-      searched_channels: connection_search(q: $query, per: 20) {
+      searched_channels: connection_search(q: $query, per: 20, include_open_channels: false) {
         ... SelectableChannel
       }
     }

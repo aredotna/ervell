@@ -70,11 +70,17 @@ class Blocks extends Component {
     this.messenger = new Messenger(window.top);
   }
 
-  componentDidMount() {
-    this.messenger.send({
-      action: 'expand',
-    });
+  componentDidUpdate() {
+    const { context: { blocks } } = this.props;
+
+    if (blocks.length > 0) {
+      this.messenger.send({
+        action: 'expand',
+      });
+    }
   }
+
+  componentDidUpdate
 
   saveAndClose = () => {
     const { createBlock, context: { blocks, selectedChannel } } = this.props;

@@ -5,6 +5,8 @@ import { reject, find, findIndex } from 'underscore';
 
 import Messenger from 'extension/src/lib/Messenger';
 
+const TOTAL_BLOCK_LIMIT = 10;
+
 export const ExtensionContext = React.createContext({
   blocks: [],
   selectedChannel: null,
@@ -61,10 +63,14 @@ class Extension extends Component {
   }
 
   addBlock = (block) => {
+    // if we are over the limit, don't add any more blocks
+    if (this.state.blocks.length >= TOTAL_BLOCK_LIMIT) { return false; }
+
     this.setState({ blocks: [...this.state.blocks, block] });
 
     // Route to blocks overview page
     if (this.state.blocks.length > 0) { this.props.history.push('/blocks'); }
+    return true;
   }
 
   receiveMessage = (message) => {

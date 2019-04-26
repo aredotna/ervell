@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withApollo } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 import selectedChannelQuery from 'extension/src/components/Blocks/components/SelectedChannel/queries/selectedChannel';
 
 import Layout from 'extension/src/components/Layout';
 import CenterStretchBox from 'extension/src/components/UI/CenterStretchBox';
 import Text from 'react/components/UI/Text';
-import { GenericButtonLink as ButtonLink } from 'react/components/UI/GenericButton';
+import { mixin, GenericButton as Button } from 'react/components/UI/GenericButton';
 
-const Button = styled(ButtonLink).attrs({
+import Messenger from 'extension/src/lib/Messenger';
+
+const LinkButton = styled(Link).attrs({
   f: 5,
   mt: 4,
-})``;
+})`
+  ${mixin}
+`;
 
 const LogOutLink = styled(Text).attrs({
   f: 3,
@@ -43,9 +48,21 @@ class MainMenu extends Component {
     }).isRequired,
   }
 
+  constructor(props) {
+    super(props);
+
+    this.messenger = new Messenger(window.top);
+  }
+
   componentDidMount() {
     this.props.client.query({
       query: selectedChannelQuery,
+    });
+  }
+
+  onAddLink = () => {
+    this.messenger.send({
+      action: 'getCurrentPage',
     });
   }
 
@@ -58,9 +75,9 @@ class MainMenu extends Component {
     return (
       <Layout>
         <CenterStretchBox>
-          <Button>Add as link</Button>
-          <Button>Drag image(s)</Button>
-          <Button>Save text(s)</Button>
+          <Button f={5} mt={4} onClick={this.onAddLink}>Add as link</Button>
+          <LinkButton to="/blocks">Drag image(s)</LinkButton>
+          <LinkButton to="/blocks">Save text(s)</LinkButton>
           <LogOutLink onClick={this.onLogOut} />
         </CenterStretchBox>
       </Layout>
