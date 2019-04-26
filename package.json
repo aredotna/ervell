@@ -26,7 +26,7 @@
     "type-check": "yarn tsc"
   },
   "engines": {
-    "node": ">=8.x.x",
+    "node": "10.x.x",
     "yarn": "1.x.x"
   },
   "prettier": {
