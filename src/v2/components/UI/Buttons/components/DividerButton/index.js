@@ -1,34 +1,34 @@
-import styled, { css } from 'styled-components';
-import { themeGet, fontSize, space } from 'styled-system';
+import styled, { css } from 'styled-components'
+import { themeGet, fontSize, space } from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
-import { antialiased } from 'v2/styles/mixins';
+import { preset } from 'v2/styles/functions'
+import { antialiased } from 'v2/styles/mixins'
 
 export const activeMixin = css`
   border-color: ${x => x.theme.colors.gray.bold};
   color: ${x => x.theme.colors.gray.bold};
-`;
+`
 
 export const hoverMixin = css`
   border-color: ${x => x.theme.colors.gray.medium};
   color: ${x => x.theme.colors.gray.bold};
-`;
+`
 
 export const disabledMixin = css`
   pointer-events: none;
   opacity: 0.5;
-`;
+`
 
-export const buttonColor = (props) => {
-  const defaultColor = props.theme.colors.gray.base;
-  const defaultBorderColor = props.theme.colors.gray.regular;
-  const color = themeGet(`colors.${props.color}`, defaultColor)(props);
+export const buttonColor = props => {
+  const defaultColor = props.theme.colors.gray.base
+  const defaultBorderColor = props.theme.colors.gray.regular
+  const color = themeGet(`colors.${props.color}`, defaultColor)(props)
 
   return `
     color: ${color};
     border-color: ${color === defaultColor ? defaultBorderColor : color};
-  `;
-};
+  `
+}
 
 export const mixin = css`
   all: initial;
@@ -52,14 +52,14 @@ export const mixin = css`
   &:active { ${activeMixin} }
 
   ${x => x.disabled && disabledMixin}
-`;
+`
 
 export const DividerButton = styled.button`
   ${mixin}
-`;
+`
 
 export const DividerButtonLink = styled.a`
   ${mixin}
-`;
+`
 
-export default DividerButton;
+export default DividerButton

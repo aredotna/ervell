@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import manageMyCreditCardsFragment from 'v2/components/MyCreditCard/components/ManageMyCreditCards/fragments/manageMyCreditCards';
+import manageMyCreditCardsFragment from 'v2/components/MyCreditCard/components/ManageMyCreditCards/fragments/manageMyCreditCards'
 
-import Text from 'v2/components/UI/Text';
-import Box from 'v2/components/UI/Box';
-import RadioOptions from 'v2/components/UI/RadioOptions';
-import RemoveCard from 'v2/components/MyCreditCard/components/ManageMyCreditCards/components/RemoveCard';
+import Text from 'v2/components/UI/Text'
+import Box from 'v2/components/UI/Box'
+import RadioOptions from 'v2/components/UI/RadioOptions'
+import RemoveCard from 'v2/components/MyCreditCard/components/ManageMyCreditCards/components/RemoveCard'
 
 export default class ManageMyCreditCards extends Component {
   static propTypes = {
@@ -19,12 +19,16 @@ export default class ManageMyCreditCards extends Component {
     const {
       onChangeDefaultCreditCard,
       customer: { default_credit_card, credit_cards },
-    } = this.props;
+    } = this.props
 
-    if (!default_credit_card) return null;
+    if (!default_credit_card) return null
 
     return (
-      <RadioOptions value={default_credit_card.id} onSelect={onChangeDefaultCreditCard} size="1em">
+      <RadioOptions
+        value={default_credit_card.id}
+        onSelect={onChangeDefaultCreditCard}
+        size="1em"
+      >
         {credit_cards.map((credit_card, i) => (
           <RadioOptions.Option
             key={credit_card.id}
@@ -34,7 +38,11 @@ export default class ManageMyCreditCards extends Component {
             borderColor="gray.light"
           >
             {() => (
-              <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Text>
                   {credit_card.brand.toUpperCase()} **{credit_card.last4}
                   {' — '}
@@ -42,13 +50,16 @@ export default class ManageMyCreditCards extends Component {
                 </Text>
 
                 <Text f={1} color="state.alert" fontWeight="bold">
-                  <RemoveCard id={credit_card.id} onRemove={this.navigateIfNone} />
+                  <RemoveCard
+                    id={credit_card.id}
+                    onRemove={this.navigateIfNone}
+                  />
                 </Text>
               </Box>
             )}
           </RadioOptions.Option>
         ))}
       </RadioOptions>
-    );
+    )
   }
 }

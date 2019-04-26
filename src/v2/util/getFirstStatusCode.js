@@ -1,13 +1,13 @@
 module.exports = (err = {}, idx = 0) => {
   if (!err.graphQLErrors || err.graphQLErrors.length === 0) {
-    return null;
+    return null
   }
 
-  const firstError = err.graphQLErrors[idx];
+  const firstError = err.graphQLErrors[idx]
 
   if (!firstError.extensions) {
-    return null;
+    return null
   }
 
-  return firstError.extensions.code;
-};
+  return firstError.extensions.code
+}

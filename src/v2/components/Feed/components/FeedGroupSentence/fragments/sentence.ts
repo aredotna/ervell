@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import feedObjectFragment from 'v2/components/Feed/components/FeedGroupSentence/fragments/object';
+import feedObjectFragment from 'v2/components/Feed/components/FeedGroupSentence/fragments/object'
 
 export default gql`
   fragment FeedGroupSentence on DeedGroup {
@@ -41,4 +41,4 @@ export default gql`
     is_private
   }
   ${feedObjectFragment}
-`;
+`

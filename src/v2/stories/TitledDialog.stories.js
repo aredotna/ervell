@@ -1,10 +1,10 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Box from 'v2/components/UI/Box';
-import TitledDialog from 'v2/components/UI/TitledDialog';
-import Specimen from 'v2/stories/__components__/Specimen';
+import Box from 'v2/components/UI/Box'
+import TitledDialog from 'v2/components/UI/TitledDialog'
+import Specimen from 'v2/stories/__components__/Specimen'
 
 storiesOf('TitledDialog', module)
   .add('TitledDialog', () => (
@@ -13,8 +13,8 @@ storiesOf('TitledDialog', module)
         <TitledDialog
           title="Example form"
           onDone={e => {
-            e.preventDefault();
-            action('onDone')(e);
+            e.preventDefault()
+            action('onDone')(e)
           }}
         >
           Some content
@@ -28,8 +28,8 @@ storiesOf('TitledDialog', module)
         <TitledDialog
           title="Example form"
           onDone={e => {
-            e.preventDefault();
-            action('onDone')(e);
+            e.preventDefault()
+            action('onDone')(e)
           }}
         >
           {Array(100)
@@ -40,4 +40,4 @@ storiesOf('TitledDialog', module)
         </TitledDialog>
       </Box>
     </Specimen>
-  ));
+  ))

@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { space, bgColor } from 'styled-system';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { space, bgColor } from 'styled-system'
 
-import provideChildrentWithProps from 'v2/util/provideChildrenWithProps';
+import provideChildrentWithProps from 'v2/util/provideChildrenWithProps'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
 const Container = styled.div`
   display: flex;
-`;
+`
 
 const Example = styled.div.attrs({
   p: 4,
@@ -22,16 +22,16 @@ const Example = styled.div.attrs({
   flex-direction: column;
   align-items: center;
   border-radius: 0.25em;
-`;
+`
 
 export default class States extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     states: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  };
+  }
 
   render() {
-    const { states, children, ...rest } = this.props;
+    const { states, children, ...rest } = this.props
 
     return (
       <Container>
@@ -52,6 +52,6 @@ export default class States extends Component {
           </Example>
         ))}
       </Container>
-    );
+    )
   }
 }

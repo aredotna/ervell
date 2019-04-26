@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import SmallLink from 'v2/components/UserDropdown/components/SecondaryLinks/components/SmallLink';
-import SignOutLink from 'v2/components/UserDropdown/components/SecondaryLinks/components/SignOutLink';
-import Icons from 'v2/components/UI/Icons';
+import SmallLink from 'v2/components/UserDropdown/components/SecondaryLinks/components/SmallLink'
+import SignOutLink from 'v2/components/UserDropdown/components/SecondaryLinks/components/SignOutLink'
+import Icons from 'v2/components/UI/Icons'
 
 export default class SecondaryLinks extends PureComponent {
   static propTypes = {
     isPremium: PropTypes.bool,
     hasRecentlyJoined: PropTypes.bool,
-  };
+  }
 
   static defaultProps = {
     isPremium: false,
     hasRecentlyJoined: false,
-  };
+  }
 
   render() {
-    const { isPremium, hasRecentlyJoined } = this.props;
+    const { isPremium, hasRecentlyJoined } = this.props
 
     return (
       <React.Fragment>
@@ -70,6 +70,6 @@ export default class SecondaryLinks extends PureComponent {
 
         <SignOutLink />
       </React.Fragment>
-    );
+    )
   }
 }

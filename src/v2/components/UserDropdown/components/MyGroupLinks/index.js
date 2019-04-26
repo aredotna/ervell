@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
-import { graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
+import { graphql } from 'react-apollo'
 
-import myGroupLinksFragment from 'v2/components/UserDropdown/components/MyGroupLinks/fragments/myGroupLinks';
+import myGroupLinksFragment from 'v2/components/UserDropdown/components/MyGroupLinks/fragments/myGroupLinks'
 
-import toggleMyGroupsDropdownVisibilityMutation from 'v2/components/UserDropdown/components/MyGroupLinks/mutations/toggleMyGroupsDropdownVisibility';
+import toggleMyGroupsDropdownVisibilityMutation from 'v2/components/UserDropdown/components/MyGroupLinks/mutations/toggleMyGroupsDropdownVisibility'
 
-import { overflowScrolling } from 'v2/styles/mixins';
+import { overflowScrolling } from 'v2/styles/mixins'
 
-import Text from 'v2/components/UI/Text';
-import GenericButton from 'v2/components/UI/GenericButton';
-import Link from 'v2/components/UserDropdown/components/Link';
-import MyGroupLink from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink';
-import Modal from 'v2/components/UI/Modal';
-import CreateGroup from 'v2/components/CreateGroup';
-import Icons from 'v2/components/UI/Icons';
+import Text from 'v2/components/UI/Text'
+import GenericButton from 'v2/components/UI/GenericButton'
+import Link from 'v2/components/UserDropdown/components/Link'
+import MyGroupLink from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink'
+import Modal from 'v2/components/UI/Modal'
+import CreateGroup from 'v2/components/CreateGroup'
+import Icons from 'v2/components/UI/Icons'
 
 const Header = styled(Link)`
   position: relative;
@@ -49,7 +49,7 @@ const Header = styled(Link)`
       border-left: 0.25em solid transparent;
     }
   `}
-`;
+`
 
 const BetaBadge = styled(Text).attrs({
   f: 0,
@@ -63,29 +63,29 @@ const BetaBadge = styled(Text).attrs({
     content: '•';
     margin-right: 0.5em;
   }
-`;
+`
 
 const Container = styled.div`
   margin-left: ${props => props.theme.space[3]};
   max-height: 30vmin;
   ${overflowScrolling}
-`;
+`
 
 const LearnMoreLink = styled.a`
   font-weight: bold;
-`;
+`
 
 class MyGroupLinks extends Component {
   static propTypes = {
     me: propType(myGroupLinksFragment).isRequired,
     toggleMyGroupsDropdownVisibility: PropTypes.func.isRequired,
-  };
+  }
 
   toggle = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { toggleMyGroupsDropdownVisibility, me } = this.props;
-    const value = !me.is_my_groups_dropdown_hidden;
+    const { toggleMyGroupsDropdownVisibility, me } = this.props
+    const value = !me.is_my_groups_dropdown_hidden
 
     return toggleMyGroupsDropdownVisibility({
       variables: {
@@ -106,21 +106,21 @@ class MyGroupLinks extends Component {
           },
         },
       },
-    });
-  };
+    })
+  }
 
   openCreateGroup = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const modal = new Modal(CreateGroup);
-    modal.open();
-  };
+    const modal = new Modal(CreateGroup)
+    modal.open()
+  }
 
   render() {
     const {
       me: { groups, is_my_groups_dropdown_hidden },
-    } = this.props;
-    const hasGroups = groups.length > 0;
+    } = this.props
+    const hasGroups = groups.length > 0
 
     return (
       <React.Fragment>
@@ -172,10 +172,10 @@ class MyGroupLinks extends Component {
           </React.Fragment>
         )}
       </React.Fragment>
-    );
+    )
   }
 }
 
 export default graphql(toggleMyGroupsDropdownVisibilityMutation, {
   name: 'toggleMyGroupsDropdownVisibility',
-})(MyGroupLinks);
+})(MyGroupLinks)

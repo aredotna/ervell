@@ -1,21 +1,21 @@
-import uuidv4 from 'uuid/v4';
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import uuidv4 from 'uuid/v4'
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell';
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell';
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell'
+import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import States from 'v2/stories/__components__/States';
+import Specimen from 'v2/stories/__components__/Specimen'
+import States from 'v2/stories/__components__/States'
 
-import Box from 'v2/components/UI/Box';
-import Grid from 'v2/components/UI/Grid';
-import Cell from 'v2/components/Cell';
-import ChannelPreview from 'v2/components/Cell/components/Konnectable/components/ChannelPreview';
+import Box from 'v2/components/UI/Box'
+import Grid from 'v2/components/UI/Grid'
+import Cell from 'v2/components/Cell'
+import ChannelPreview from 'v2/components/Cell/components/Konnectable/components/ChannelPreview'
 
-import BLOKK_QUERY from 'v2/components/Cell/components/Konnectable/queries/blokk';
+import BLOKK_QUERY from 'v2/components/Cell/components/Konnectable/queries/blokk'
 
 const IDENTIFIABLE_QUERY = gql`
   query IdentifiableStoryQuery {
@@ -26,7 +26,7 @@ const IDENTIFIABLE_QUERY = gql`
     }
   }
   ${identifiableCellFragment}
-`;
+`
 
 storiesOf('Cell', module)
   .add('konnectables', () => (
@@ -37,11 +37,11 @@ storiesOf('Cell', module)
           .map((_, id) => (
             <Query key={uuidv4()} query={BLOKK_QUERY} variables={{ id }}>
               {({ data, loading, error }) => {
-                if (loading || error) return '';
+                if (loading || error) return ''
 
-                const { blokk } = data;
+                const { blokk } = data
 
-                return <Cell.Konnectable konnectable={blokk} />;
+                return <Cell.Konnectable konnectable={blokk} />
               }}
             </Query>
           ))}
@@ -56,13 +56,13 @@ storiesOf('Cell', module)
           .map(() => (
             <Query key={uuidv4()} query={IDENTIFIABLE_QUERY}>
               {({ data, loading, error }) => {
-                if (loading || error) return '';
+                if (loading || error) return ''
 
                 const {
                   identity: { identifiable },
-                } = data;
+                } = data
 
-                return <Cell.Identifiable identifiable={identifiable} />;
+                return <Cell.Identifiable identifiable={identifiable} />
               }}
             </Query>
           ))}
@@ -83,7 +83,7 @@ storiesOf('Cell', module)
           `}
         >
           {({ data, loading, error }) => {
-            if (loading || error) return '';
+            if (loading || error) return ''
             return (
               <React.Fragment>
                 <Cell.Konnectable
@@ -101,7 +101,7 @@ storiesOf('Cell', module)
                   }}
                 />
               </React.Fragment>
-            );
+            )
           }}
         </Query>
       </Grid>
@@ -121,7 +121,7 @@ storiesOf('Cell', module)
           `}
         >
           {({ data, loading, error }) => {
-            if (loading || error) return '';
+            if (loading || error) return ''
             return (
               <React.Fragment>
                 <Cell.Identifiable
@@ -137,7 +137,7 @@ storiesOf('Cell', module)
                   }}
                 />
               </React.Fragment>
-            );
+            )
           }}
         </Query>
       </Grid>
@@ -165,4 +165,4 @@ storiesOf('Cell', module)
     >
       <Cell.Skeletal />
     </States>
-  ));
+  ))

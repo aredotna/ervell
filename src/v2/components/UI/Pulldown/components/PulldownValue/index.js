@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import provideChildrenWithProps from 'v2/util/provideChildrenWithProps';
+import provideChildrenWithProps from 'v2/util/provideChildrenWithProps'
 
-import Option from 'v2/components/UI/Pulldown/components/Option';
+import Option from 'v2/components/UI/Pulldown/components/Option'
 
 const Value = styled(Option)`
   border-radius: 0.25em;
@@ -40,7 +40,7 @@ const Value = styled(Option)`
       border-bottom: 0.66em solid ${x.theme.colors.gray.semiBold};
     }
   `}
-`;
+`
 
 class PulldownValue extends PureComponent {
   static propTypes = {
@@ -49,19 +49,19 @@ class PulldownValue extends PureComponent {
       PropTypes.func,
       PropTypes.shape({ current: PropTypes.any }),
     ]).isRequired,
-  };
+  }
 
   render() {
-    const { children, forwardRef, ...rest } = this.props;
+    const { children, forwardRef, ...rest } = this.props
 
     return (
       <Value ref={forwardRef} role="button" tabIndex={0} {...rest}>
         {provideChildrenWithProps(children, { purpose: 'value', ...rest })}
       </Value>
-    );
+    )
   }
 }
 
 export default React.forwardRef((props, ref) => (
   <PulldownValue forwardRef={ref} {...props} />
-));
+))

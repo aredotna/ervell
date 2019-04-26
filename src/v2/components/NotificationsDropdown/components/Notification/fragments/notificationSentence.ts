@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import notificationObjectFragment from 'v2/components/NotificationsDropdown/components/Notification/fragments/notificationObject';
+import notificationObjectFragment from 'v2/components/NotificationsDropdown/components/Notification/fragments/notificationObject'
 
 export default gql`
   fragment NotificationSentence on Deed {
@@ -32,4 +32,4 @@ export default gql`
     created_at(relative: true)
   }
   ${notificationObjectFragment}
-`;
+`

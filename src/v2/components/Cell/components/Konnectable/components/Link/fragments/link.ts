@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment Link on Link {
@@ -6,4 +6,4 @@ export default gql`
     src: image_url(size: DISPLAY)
     external_url: source_url
   }
-`;
+`

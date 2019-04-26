@@ -1,6 +1,6 @@
-import Modal from 'v2/components/UI/Modal';
-import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog';
-import ModalBlockLightbox from 'v2/components/ModalBlockLightbox';
+import Modal from 'v2/components/UI/Modal'
+import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
+import ModalBlockLightbox from 'v2/components/ModalBlockLightbox'
 
 export default ({ id, context }) => {
   // Filter out Channels, Groups, Users and duplicates; return just IDs
@@ -15,16 +15,16 @@ export default ({ id, context }) => {
         )
         .map(k => k.id)
     ),
-  ];
+  ]
 
-  const currentTitle = document.title;
+  const currentTitle = document.title
   const onClose = () => {
-    document.title = currentTitle;
-  };
+    document.title = currentTitle
+  }
 
   new Modal(
     ModalBlockLightbox,
     { id, ids, onClose },
     { Dialog: ModalFullscreenDialog }
-  ).open();
-};
+  ).open()
+}

@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import mod from 'v2/util/mod';
+import mod from 'v2/util/mod'
 
-import primarySearchResultsQuery from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/queries/primarySearchResults';
+import primarySearchResultsQuery from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/queries/primarySearchResults'
 
-import Text from 'v2/components/UI/Text';
-import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult';
+import Text from 'v2/components/UI/Text'
+import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult'
 
 export default class PrimarySearchResults extends PureComponent {
   static propTypes = {
@@ -21,36 +21,34 @@ export default class PrimarySearchResults extends PureComponent {
     onSelection: () => {},
   }
 
-  selectResult = (result) => {
-    const { query, onSelection } = this.props;
+  selectResult = result => {
+    const { query, onSelection } = this.props
 
-    if (result) return onSelection(result.href);
+    if (result) return onSelection(result.href)
 
-    return onSelection(`/search/${encodeURIComponent(query)}`);
+    return onSelection(`/search/${encodeURIComponent(query)}`)
   }
 
   render() {
-    const { query, cursor } = this.props;
+    const { query, cursor } = this.props
 
     return (
       <Query query={primarySearchResultsQuery} variables={{ query }}>
         {({ data, loading, error }) => {
-          const { searches } = data;
+          const { searches } = data
 
           if (loading && !searches) {
-            this.selectResult();
+            this.selectResult()
 
             return (
               <PrimarySearchResult>
-                <Text fontWeight="bold">
-                  Searching...
-                </Text>
+                <Text fontWeight="bold">Searching...</Text>
               </PrimarySearchResult>
-            );
+            )
           }
 
           if (error) {
-            this.selectResult();
+            this.selectResult()
 
             return (
               <PrimarySearchResult>
@@ -58,13 +56,13 @@ export default class PrimarySearchResults extends PureComponent {
                   {error.message}
                 </Text>
               </PrimarySearchResult>
-            );
+            )
           }
 
-          const { results } = searches;
-          const selected = cursor && mod(cursor, results.length + 1);
+          const { results } = searches
+          const selected = cursor && mod(cursor, results.length + 1)
 
-          this.selectResult(results[selected]);
+          this.selectResult(results[selected])
 
           return (
             <React.Fragment>
@@ -76,21 +74,19 @@ export default class PrimarySearchResults extends PureComponent {
                 />
               ))}
 
-              {results.length > 0 &&
+              {results.length > 0 && (
                 <PrimarySearchResult
                   href={`/search/${encodeURIComponent(query)}`}
                   selected={selected === results.length}
                   bg="gray.semiLight"
                 >
-                  <Text fontWeight="bold">
-                    See all results for ‘{query}’
-                  </Text>
+                  <Text fontWeight="bold">See all results for ‘{query}’</Text>
                 </PrimarySearchResult>
-              }
+              )}
             </React.Fragment>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

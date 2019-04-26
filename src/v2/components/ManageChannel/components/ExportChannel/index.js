@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
-import mapErrors from 'v2/util/mapErrors';
+import mapErrors from 'v2/util/mapErrors'
 
-import exportChannelMutation from 'v2/components/ManageChannel/components/ExportChannel/mutations/exportChannel';
+import exportChannelMutation from 'v2/components/ManageChannel/components/ExportChannel/mutations/exportChannel'
 
-import Text from 'v2/components/UI/Text';
-import GenericButton from 'v2/components/UI/GenericButton';
-import ButtonGroup from 'v2/components/UI/ButtonGroup';
+import Text from 'v2/components/UI/Text'
+import GenericButton from 'v2/components/UI/GenericButton'
+import ButtonGroup from 'v2/components/UI/ButtonGroup'
 
 class ExportChannel extends Component {
   static propTypes = {
@@ -23,15 +23,15 @@ class ExportChannel extends Component {
   }
 
   queueExport = format => async () => {
-    const { id, exportChannel } = this.props;
+    const { id, exportChannel } = this.props
 
-    this.setState({ mode: 'queueing', format });
+    this.setState({ mode: 'queueing', format })
 
     try {
-      await exportChannel({ variables: { id, format } });
-      this.setState({ mode: 'queued' });
+      await exportChannel({ variables: { id, format } })
+      this.setState({ mode: 'queued' })
     } catch (err) {
-      this.setState({ mode: 'error', ...mapErrors(err) });
+      this.setState({ mode: 'error', ...mapErrors(err) })
     }
   }
 
@@ -40,38 +40,34 @@ class ExportChannel extends Component {
   queueExportHTML = this.queueExport('HTML')
 
   render() {
-    const { mode, errorMessage, format } = this.state;
+    const { mode, errorMessage, format } = this.state
 
     return (
       <div>
         <ButtonGroup stretch f={2}>
-          <GenericButton onClick={this.queueExportPDF}>
-            PDF
-          </GenericButton>
+          <GenericButton onClick={this.queueExportPDF}>PDF</GenericButton>
 
-          <GenericButton onClick={this.queueExportZIP}>
-            ZIP
-          </GenericButton>
+          <GenericButton onClick={this.queueExportZIP}>ZIP</GenericButton>
 
-          <GenericButton onClick={this.queueExportHTML}>
-            HTML
-          </GenericButton>
+          <GenericButton onClick={this.queueExportHTML}>HTML</GenericButton>
         </ButtonGroup>
 
-        {mode !== 'resting' &&
+        {mode !== 'resting' && (
           <Text my={6} f={2} color="state.alert">
-            {{
-              error: errorMessage,
-              queueing: 'Processing...',
-              queued: `Your .${format.toLowerCase()} will be ready for download momentarily and will be emailed to the address associated with your account`,
-            }[mode]}
+            {
+              {
+                error: errorMessage,
+                queueing: 'Processing...',
+                queued: `Your .${format.toLowerCase()} will be ready for download momentarily and will be emailed to the address associated with your account`,
+              }[mode]
+            }
           </Text>
-        }
+        )}
       </div>
-    );
+    )
   }
 }
 
 export default graphql(exportChannelMutation, {
   name: 'exportChannel',
-})(ExportChannel);
+})(ExportChannel)

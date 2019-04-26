@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import Result from 'v2/components/UI/SearchResults/SearchResult';
+import Result from 'v2/components/UI/SearchResults/SearchResult'
 
-import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult';
-import groupSearchResultFragment from 'v2/components/UI/SearchResults/Group/fragments/groupSearchResult';
+import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult'
+import groupSearchResultFragment from 'v2/components/UI/SearchResults/Group/fragments/groupSearchResult'
 
 export default class SearchResults extends Component {
   static propTypes = {
@@ -15,10 +15,10 @@ export default class SearchResults extends Component {
         propType(groupSearchResultFragment),
       ])
     ).isRequired,
-  };
+  }
 
   render() {
-    const { results } = this.props;
+    const { results } = this.props
 
     return (
       <div>
@@ -26,6 +26,6 @@ export default class SearchResults extends Component {
           <Result key={`${result.__typename}-${result.id}`} result={result} />
         ))}
       </div>
-    );
+    )
   }
 }

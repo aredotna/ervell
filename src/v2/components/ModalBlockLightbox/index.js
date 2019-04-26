@@ -1,22 +1,22 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import Mousetrap from 'mousetrap';
-import { isEmpty, debounce } from 'underscore';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import Mousetrap from 'mousetrap'
+import { isEmpty, debounce } from 'underscore'
+import styled from 'styled-components'
 
-import { BREAKPOINTS } from 'v2/styles/constants';
+import { BREAKPOINTS } from 'v2/styles/constants'
 
-import modalBlockLightboxQuery from 'v2/components/ModalBlockLightbox/queries/modalBlockLightbox';
+import modalBlockLightboxQuery from 'v2/components/ModalBlockLightbox/queries/modalBlockLightbox'
 
-import Box from 'v2/components/UI/Box';
-import Link from 'v2/components/UI/Link';
-import Icons from 'v2/components/UI/Icons';
-import Close from 'v2/components/UI/Close';
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import BlockLightbox from 'v2/components/BlockLightbox';
-import ModalBlockLightboxNavigation from 'v2/components/ModalBlockLightbox/components/ModalBlockLightboxNavigation';
+import Box from 'v2/components/UI/Box'
+import Link from 'v2/components/UI/Link'
+import Icons from 'v2/components/UI/Icons'
+import Close from 'v2/components/UI/Close'
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import BlockLightbox from 'v2/components/BlockLightbox'
+import ModalBlockLightboxNavigation from 'v2/components/ModalBlockLightbox/components/ModalBlockLightboxNavigation'
 
 const Fullscreen = styled(Link).attrs({
   border: '1px solid',
@@ -30,7 +30,7 @@ const Fullscreen = styled(Link).attrs({
       fill: black;
     }
   }
-`;
+`
 
 export default class ModalBlockLightbox extends PureComponent {
   static propTypes = {
@@ -50,36 +50,39 @@ export default class ModalBlockLightbox extends PureComponent {
   }
 
   componentDidMount() {
-    Mousetrap.bind('esc', this.props.onClose);
-    this.updateUrl();
+    Mousetrap.bind('esc', this.props.onClose)
+    this.updateUrl()
 
-    this.debouncedCheckMobileBreakpoint = debounce(this.checkMobileBreakpoint, 250);
-    window.addEventListener('resize', this.debouncedCheckMobileBreakpoint);
+    this.debouncedCheckMobileBreakpoint = debounce(
+      this.checkMobileBreakpoint,
+      250
+    )
+    window.addEventListener('resize', this.debouncedCheckMobileBreakpoint)
   }
 
   componentWillUnmount() {
-    Mousetrap.unbind('esc');
-    this.restoreUrl();
+    Mousetrap.unbind('esc')
+    this.restoreUrl()
 
-    window.removeEventListener('resize', this.debouncedCheckMobileBreakpoint);
+    window.removeEventListener('resize', this.debouncedCheckMobileBreakpoint)
   }
 
   checkMobileBreakpoint = () => {
-    const { layout } = this.state;
+    const { layout } = this.state
 
     if (layout === 'FULLSCREEN' && window.innerWidth <= BREAKPOINTS.mobile) {
-      this.setState({ layout: 'DEFAULT' });
+      this.setState({ layout: 'DEFAULT' })
     }
   }
 
   // TODO: Replace all of this with router once we migrate channels
   restoreUrl = () => {
-    const { initial } = this.state;
-    window.history.replaceState(null, initial.title, initial.href);
+    const { initial } = this.state
+    window.history.replaceState(null, initial.title, initial.href)
   }
 
   updateUrl = () => {
-    const { initial, id } = this.state;
+    const { initial, id } = this.state
 
     if (isEmpty(initial)) {
       // Capture initial state
@@ -88,14 +91,14 @@ export default class ModalBlockLightbox extends PureComponent {
           href: window.location.href,
           title: document.title,
         },
-      });
+      })
     }
 
-    window.history.replaceState(null, null, `/block/${id}`);
+    window.history.replaceState(null, null, `/block/${id}`)
   }
 
-  updateId = (id) => {
-    this.setState({ id }, () => this.updateUrl());
+  updateId = id => {
+    this.setState({ id }, () => this.updateUrl())
   }
 
   toggleLayout = () => {
@@ -104,42 +107,38 @@ export default class ModalBlockLightbox extends PureComponent {
         DEFAULT: 'FULLSCREEN',
         FULLSCREEN: 'DEFAULT',
       }[prevState.layout],
-    }));
+    }))
   }
 
   render() {
-    const { id, layout } = this.state;
-    const { ids, onClose } = this.props;
+    const { id, layout } = this.state
+    const { ids, onClose } = this.props
 
     return (
       <Box position="relative" width="100%" height="100%">
         <Query query={modalBlockLightboxQuery} variables={{ id }}>
           {({ data, loading, error }) => {
             if (loading) {
-              return <LoadingIndicator />;
+              return <LoadingIndicator />
             }
 
             if (error) {
-              return (
-                <ErrorAlert>
-                  {error.message}
-                </ErrorAlert>
-              );
+              return <ErrorAlert>{error.message}</ErrorAlert>
             }
 
-            const { block } = data;
+            const { block } = data
 
             return (
               <BlockLightbox block={block} context="MODAL" layout={layout}>
-                {ids.length > 1 &&
+                {ids.length > 1 && (
                   <ModalBlockLightboxNavigation
                     id={id}
                     ids={ids}
                     onChange={this.updateId}
                   />
-                }
+                )}
               </BlockLightbox>
-            );
+            )
           }}
         </Query>
 
@@ -156,17 +155,21 @@ export default class ModalBlockLightbox extends PureComponent {
             p={4}
             onClick={this.toggleLayout}
             bg={{ DEFAULT: 'white' }[layout]}
-            borderColor={{
-              DEFAULT: 'gray.semiLight',
-              FULLSCREEN: 'gray.semiBold',
-            }[layout]}
+            borderColor={
+              {
+                DEFAULT: 'gray.semiLight',
+                FULLSCREEN: 'gray.semiBold',
+              }[layout]
+            }
           >
             <Icons
               size="1rem"
-              name={{
-                DEFAULT: 'EnterFullscreen',
-                FULLSCREEN: 'ExitFullscreen',
-              }[layout]}
+              name={
+                {
+                  DEFAULT: 'EnterFullscreen',
+                  FULLSCREEN: 'ExitFullscreen',
+                }[layout]
+              }
               color="gray.semiBold"
             />
           </Fullscreen>
@@ -184,6 +187,6 @@ export default class ModalBlockLightbox extends PureComponent {
           zIndex={1}
         />
       </Box>
-    );
+    )
   }
 }

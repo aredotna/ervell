@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.input.attrs({
   type: 'checkbox',
@@ -14,4 +14,4 @@ export default styled.input.attrs({
     pointer-events: none;
     opacity: 0.5;
   `}
-`;
+`

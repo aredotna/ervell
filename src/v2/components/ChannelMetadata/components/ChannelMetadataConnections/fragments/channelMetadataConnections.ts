@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment ChannelMetadataConnections on Channel {
@@ -15,4 +15,4 @@ export default gql`
       href
     }
   }
-`;
+`

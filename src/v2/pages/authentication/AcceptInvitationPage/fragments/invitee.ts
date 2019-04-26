@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment Invitee on Invitee {
@@ -6,4 +6,4 @@ export default gql`
     id
     email
   }
-`;
+`

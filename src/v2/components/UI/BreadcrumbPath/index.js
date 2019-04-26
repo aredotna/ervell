@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Container = styled.div`
     margin-right: ${constants.blockGutter}; // TODO: Remove
     margin-left: ${constants.blockGutter}; // TODO: Remove
   `}
-`;
+`
 
 const Crumb = styled.div`
   display: flex;
@@ -51,28 +51,26 @@ const Crumb = styled.div`
       display: none;
     }
   }
-`;
+`
 
 export default class BreadcrumbPath extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
   }
 
-  static Crumb = Crumb;
+  static Crumb = Crumb
 
   render() {
-    const { children, ...rest } = this.props;
+    const { children, ...rest } = this.props
 
     return (
       <Container {...rest}>
         <Crumb>
-          <a href="/">
-            Are.na
-          </a>
+          <a href="/">Are.na</a>
         </Crumb>
 
         {children}
       </Container>
-    );
+    )
   }
 }

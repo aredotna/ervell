@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar';
+import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar'
 
 export default gql`
   fragment MyGroupLink on Group {
@@ -12,4 +12,4 @@ export default gql`
     ...MemberAvatar
   }
   ${memberAvatarFragment}
-`;
+`

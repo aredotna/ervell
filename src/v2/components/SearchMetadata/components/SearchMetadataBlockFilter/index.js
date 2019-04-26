@@ -1,27 +1,34 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
-import Pocket from 'v2/components/UI/Pocket';
-import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent';
+import Pocket from 'v2/components/UI/Pocket'
+import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 class SearchMetadataFilter extends Component {
   static propTypes = {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
-    block_filter: PropTypes.oneOf(['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']),
+    block_filter: PropTypes.oneOf([
+      'IMAGE',
+      'EMBED',
+      'TEXT',
+      'ATTACHMENT',
+      'LINK',
+    ]),
   }
 
   static defaultProps = {
     block_filter: null,
   }
 
-  isFilterActive = filter => () =>
-    this.props.block_filter === filter;
+  isFilterActive = filter => () => this.props.block_filter === filter
 
   render() {
-    const { location: { pathname } } = this.props;
+    const {
+      location: { pathname },
+    } = this.props
 
     return (
       <Pocket title="Filter">
@@ -103,8 +110,8 @@ class SearchMetadataFilter extends Component {
           Embed
         </CookieLinkUnlessCurrent>
       </Pocket>
-    );
+    )
   }
 }
 
-export default withRouter(SearchMetadataFilter);
+export default withRouter(SearchMetadataFilter)

@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import bottomBannerFragment from 'v2/components/BottomBanner/fragments/bottomBanner';
-import notificationCountFragment from 'v2/components/TopBar/components/NotificationCount/fragments/notificationCount';
+import bottomBannerFragment from 'v2/components/BottomBanner/fragments/bottomBanner'
+import notificationCountFragment from 'v2/components/TopBar/components/NotificationCount/fragments/notificationCount'
 
 export default gql`
   query GlobalNavElements {
@@ -14,4 +14,4 @@ export default gql`
   }
   ${bottomBannerFragment}
   ${notificationCountFragment}
-`;
+`

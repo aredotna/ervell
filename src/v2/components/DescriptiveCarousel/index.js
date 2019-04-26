@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Carousel from 'v2/components/Carousel';
+import Carousel from 'v2/components/Carousel'
 
-const MOBILE_BREAKPOINT = 1024;
+const MOBILE_BREAKPOINT = 1024
 
 const Slide = styled.div`
   text-align: center;
@@ -14,7 +14,7 @@ const Slide = styled.div`
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
     width: 90%;
   }
-`;
+`
 
 const Inner = styled.div`
   padding: 2rem 2rem 1rem;
@@ -22,7 +22,7 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
+`
 
 const Copy = styled.p`
   font-size: ${x => x.theme.fontSizesIndexed.base};
@@ -33,12 +33,12 @@ const Copy = styled.p`
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
     width: 90%;
   }
-`;
+`
 
 const Headline = styled.h2`
   font-weight: normal;
   margin-bottom: 1rem;
-`;
+`
 
 const Image = styled.img`
   max-height: 400px;
@@ -49,12 +49,12 @@ const Image = styled.img`
   @media (max-width: ${MOBILE_BREAKPOINT}px) {
     max-height: 220px;
   }
-`;
+`
 
 class DescriptiveCarousel extends Component {
   static defaultProps = {
     slides: [],
-  };
+  }
 
   static propTypes = {
     slides: PropTypes.arrayOf(
@@ -66,9 +66,9 @@ class DescriptiveCarousel extends Component {
         link: PropTypes.string,
       })
     ),
-  };
+  }
   render() {
-    const { slides } = this.props;
+    const { slides } = this.props
 
     const settings = {
       dots: false,
@@ -93,7 +93,7 @@ class DescriptiveCarousel extends Component {
           },
         },
       ],
-    };
+    }
 
     return (
       <Carousel {...settings}>
@@ -113,8 +113,8 @@ class DescriptiveCarousel extends Component {
           </Slide>
         ))}
       </Carousel>
-    );
+    )
   }
 }
 
-export default DescriptiveCarousel;
+export default DescriptiveCarousel

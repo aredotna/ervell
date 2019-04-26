@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import blockLightboxContentPaneFragment from 'v2/components/BlockLightbox/components/BlockLightboxContentPane/fragments/blockLightboxContentPane';
+import blockLightboxContentPaneFragment from 'v2/components/BlockLightbox/components/BlockLightboxContentPane/fragments/blockLightboxContentPane'
 
-import Box from 'v2/components/UI/Box';
-import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage';
-import BlockLightboxText from 'v2/components/BlockLightbox/components/BlockLightboxText';
-import BlockLightboxLink from 'v2/components/BlockLightbox/components/BlockLightboxLink';
-import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment';
-import BlockLightboxEmbed from 'v2/components/BlockLightbox/components/BlockLightboxEmbed';
-import BlockLightboxPending from 'v2/components/BlockLightbox/components/BlockLightboxPending';
+import Box from 'v2/components/UI/Box'
+import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage'
+import BlockLightboxText from 'v2/components/BlockLightbox/components/BlockLightboxText'
+import BlockLightboxLink from 'v2/components/BlockLightbox/components/BlockLightboxLink'
+import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment'
+import BlockLightboxEmbed from 'v2/components/BlockLightbox/components/BlockLightboxEmbed'
+import BlockLightboxPending from 'v2/components/BlockLightbox/components/BlockLightboxPending'
 
 const Container = styled(Box).attrs({
   minHeight: ['75vh', 'auto', 'auto'],
@@ -24,10 +24,12 @@ const Container = styled(Box).attrs({
   align-items: center;
   justify-content: center;
 
-  ${props => props.layout === 'FULLSCREEN' && `
+  ${props =>
+    props.layout === 'FULLSCREEN' &&
+    `
     background-color: ${props.theme.colors.gray.bold};
   `}
-`;
+`
 
 export default class BlockLightboxContentPane extends PureComponent {
   static propTypes = {
@@ -41,12 +43,7 @@ export default class BlockLightboxContentPane extends PureComponent {
   }
 
   render() {
-    const {
-      block,
-      layout,
-      children,
-      ...rest
-    } = this.props;
+    const { block, layout, children, ...rest } = this.props
 
     const Content = {
       Text: props => <BlockLightboxText {...props} />,
@@ -55,11 +52,15 @@ export default class BlockLightboxContentPane extends PureComponent {
       Attachment: props => <BlockLightboxAttachment {...props} />,
       Embed: props => <BlockLightboxEmbed {...props} />,
       PendingBlock: props => <BlockLightboxPending {...props} />,
-    }[block.__typename];
+    }[block.__typename]
 
     return (
       <Container
-        height={[{ DEFAULT: '75vh', FULLSCREEN: '100vh' }[layout], 'auto', 'auto']}
+        height={[
+          { DEFAULT: '75vh', FULLSCREEN: '100vh' }[layout],
+          'auto',
+          'auto',
+        ]}
         layout={layout}
         {...rest}
       >
@@ -67,6 +68,6 @@ export default class BlockLightboxContentPane extends PureComponent {
 
         {children}
       </Container>
-    );
+    )
   }
 }

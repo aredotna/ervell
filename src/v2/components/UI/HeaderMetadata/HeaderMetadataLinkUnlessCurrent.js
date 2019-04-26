@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import LinkUnlessCurrent from 'v2/components/UI/LinkUnlessCurrent';
+import LinkUnlessCurrent from 'v2/components/UI/LinkUnlessCurrent'
 
 export default styled(LinkUnlessCurrent)`
   display: block;
@@ -14,4 +14,4 @@ export default styled(LinkUnlessCurrent)`
     color: ${props => props.theme.colors.gray.semiBold};
     cursor: default;
   }
-`;
+`

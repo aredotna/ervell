@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import profileChannelIndexQuery from 'v2/components/ProfileChannelIndex/queries/profileChannelIndex';
+import profileChannelIndexQuery from 'v2/components/ProfileChannelIndex/queries/profileChannelIndex'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import CompactChannel from 'v2/components/CompactChannel';
-import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator';
-import ProfileEmptyMessage from 'v2/components/ProfileEmptyMessage';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import CompactChannel from 'v2/components/CompactChannel'
+import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
+import ProfileEmptyMessage from 'v2/components/ProfileEmptyMessage'
 
-import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting';
+import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 
 const Columns = styled.div`
   column-count: 2;
@@ -26,13 +26,13 @@ const Columns = styled.div`
   ${constants.media.small`
     column-count: 1;
   `}
-`;
+`
 
 const Group = styled(Box).attrs({
   mb: 8,
 })`
   break-inside: avoid;
-`;
+`
 
 class ProfileChannelIndex extends Component {
   static propTypes = {
@@ -46,19 +46,34 @@ class ProfileChannelIndex extends Component {
   }
 
   render() {
-    const { id, type, isSpiderRequesting } = this.props;
+    const { id, type, isSpiderRequesting } = this.props
 
     return (
-      <Query query={profileChannelIndexQuery} variables={{ id, type }} ssr={isSpiderRequesting}>
+      <Query
+        query={profileChannelIndexQuery}
+        variables={{ id, type }}
+        ssr={isSpiderRequesting}
+      >
         {({ data, loading, error }) => {
-          if (loading) return <BlocksLoadingIndicator />;
-          if (error) return error.message;
+          if (loading) return <BlocksLoadingIndicator />
+          if (error) return error.message
 
-          const { identity: { identifiable, identifiable: { channels_index } } } = data;
-          const isMine = identifiable.is_me || identifiable.is_current_user_a_member;
+          const {
+            identity: {
+              identifiable,
+              identifiable: { channels_index },
+            },
+          } = data
+          const isMine =
+            identifiable.is_me || identifiable.is_current_user_a_member
 
           if (channels_index.length === 0) {
-            return <ProfileEmptyMessage identifiable={identifiable} isMine={isMine} />;
+            return (
+              <ProfileEmptyMessage
+                identifiable={identifiable}
+                isMine={isMine}
+              />
+            )
           }
 
           return (
@@ -75,11 +90,11 @@ class ProfileChannelIndex extends Component {
                 </Group>
               ))}
             </Columns>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }
 
-export default WithIsSpiderRequesting(ProfileChannelIndex);
+export default WithIsSpiderRequesting(ProfileChannelIndex)

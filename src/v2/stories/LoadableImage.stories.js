@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import LoadableImage from 'v2/components/UI/LoadableImage';
+import Specimen from 'v2/stories/__components__/Specimen'
+import LoadableImage from 'v2/components/UI/LoadableImage'
 
 storiesOf('LoadableImage', module)
   .add('default', () => (
@@ -23,4 +23,4 @@ storiesOf('LoadableImage', module)
         onError={action('onError')}
       />
     </Specimen>
-  ));
+  ))

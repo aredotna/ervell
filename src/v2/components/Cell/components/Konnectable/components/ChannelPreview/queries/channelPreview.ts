@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import channelPreviewBlockFragment from 'v2/components/Cell/components/Konnectable/components/ChannelPreview/components/ChannelPreviewBlocks/fragments/channelPreviewBlock';
+import channelPreviewBlockFragment from 'v2/components/Cell/components/Konnectable/components/ChannelPreview/components/ChannelPreviewBlocks/fragments/channelPreviewBlock'
 
 export default gql`
   query ChannelPreview($id: ID!, $amount: Int!) {
@@ -13,4 +13,4 @@ export default gql`
     }
   }
   ${channelPreviewBlockFragment}
-`;
+`

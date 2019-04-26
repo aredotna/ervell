@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import CollaboratorsListItem from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem';
+import CollaboratorsListItem from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem'
 
-import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink';
+import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink'
 
 export default class CollaboratorsList extends Component {
   static defaultProps = {
@@ -13,11 +13,12 @@ export default class CollaboratorsList extends Component {
 
   static propTypes = {
     collaborators: PropTypes.arrayOf(propType(collaboratorLinkFragment)),
-    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
   }
 
   render() {
-    const { collaborators, channel_id, ...rest } = this.props;
+    const { collaborators, channel_id, ...rest } = this.props
 
     return (
       <div {...rest}>
@@ -33,6 +34,6 @@ export default class CollaboratorsList extends Component {
           </span>
         ))}
       </div>
-    );
+    )
   }
 }

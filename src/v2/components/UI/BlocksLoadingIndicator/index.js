@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
-import { multiply } from 'v2/styles/functions';
+import constants from 'v2/styles/constants'
+import { multiply } from 'v2/styles/functions'
 
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 
-const { blockGutter, blockWidth } = constants;
+const { blockGutter, blockWidth } = constants
 
 export default styled(LoadingIndicator).attrs({
   width: '100%',
@@ -13,4 +13,4 @@ export default styled(LoadingIndicator).attrs({
   pb: multiply(blockGutter, 2),
 })`
   min-width: 100%;
-`;
+`

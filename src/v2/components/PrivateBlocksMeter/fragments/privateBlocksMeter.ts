@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment PrivateBlocksMeter on Me {
@@ -10,4 +10,4 @@ export default gql`
     }
     non_premium_private_connections_limit
   }
-`;
+`

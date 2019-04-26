@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment GroupsCount on Me {
@@ -8,4 +8,4 @@ export default gql`
       groups
     }
   }
-`;
+`

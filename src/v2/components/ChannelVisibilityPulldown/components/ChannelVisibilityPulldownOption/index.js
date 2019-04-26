@@ -1,51 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text';
-import BorderedLock from 'v2/components/UI/BorderedLock';
+import Text from 'v2/components/UI/Text'
+import BorderedLock from 'v2/components/UI/BorderedLock'
 
 const Container = styled.div`
   position: relative;
-`;
+`
 
 const Check = styled(Text)`
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-`;
+`
 
 const ChannelVisibilityPulldownOption = ({
-  mode, purpose, selected, visibility, label, description, explanation,
+  mode,
+  purpose,
+  selected,
+  visibility,
+  label,
+  description,
+  explanation,
 }) => (
   <Container>
-    {purpose === 'value' &&
-      <Text color={mode === 'resting' ? `channel.${visibility}` : 'gray.medium'}>
+    {purpose === 'value' && (
+      <Text
+        color={mode === 'resting' ? `channel.${visibility}` : 'gray.medium'}
+      >
         {label} - {description}
       </Text>
-    }
+    )}
 
-    {purpose === 'option' &&
+    {purpose === 'option' && (
       <div>
         <Text color={`channel.${visibility}`} mb={2}>
           {label}
-          {visibility === 'private' &&
-            <BorderedLock ml={3} />
-          }
+          {visibility === 'private' && <BorderedLock ml={3} />}
         </Text>
 
         <Text color="gray.medium" f={3} pr={8}>
           {explanation}
         </Text>
 
-        {selected &&
-          <Check f={6} color={`channel.${visibility}`}>✓</Check>
-        }
+        {selected && (
+          <Check f={6} color={`channel.${visibility}`}>
+            ✓
+          </Check>
+        )}
       </div>
-    }
+    )}
   </Container>
-);
+)
 
 ChannelVisibilityPulldownOption.propTypes = {
   mode: PropTypes.string,
@@ -55,12 +63,12 @@ ChannelVisibilityPulldownOption.propTypes = {
   label: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   explanation: PropTypes.string.isRequired,
-};
+}
 
 ChannelVisibilityPulldownOption.defaultProps = {
   mode: 'resting',
   purpose: 'value',
   selected: false,
-};
+}
 
-export default ChannelVisibilityPulldownOption;
+export default ChannelVisibilityPulldownOption

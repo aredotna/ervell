@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import { propType } from 'graphql-anywhere'
 
-import Badge from 'v2/components/UI/Badge';
-import Link from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/Link';
+import Badge from 'v2/components/UI/Badge'
+import Link from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsListItem/components/Link'
 
-import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink';
+import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink'
 
 export default class CollaboratorsListItemGroup extends Component {
   static propTypes = {
@@ -12,7 +12,7 @@ export default class CollaboratorsListItemGroup extends Component {
   }
 
   render() {
-    const { group } = this.props;
+    const { group } = this.props
 
     return (
       <strong>
@@ -23,11 +23,15 @@ export default class CollaboratorsListItemGroup extends Component {
         >
           {group.name}
           &nbsp;
-          <Badge f={0}color="gray.medium" icon={{ private: 'Lock' }[group.visibility]}>
+          <Badge
+            f={0}
+            color="gray.medium"
+            icon={{ private: 'Lock' }[group.visibility]}
+          >
             Group
           </Badge>
         </Link>
       </strong>
-    );
+    )
   }
 }

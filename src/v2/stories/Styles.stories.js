@@ -1,14 +1,14 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import theme from 'v2/styles/theme';
+import theme from 'v2/styles/theme'
 
-import ColorSwatch from 'v2/stories/__components__/ColorSwatch';
-import Measurement from 'v2/stories/__components__/Measurement';
+import ColorSwatch from 'v2/stories/__components__/ColorSwatch'
+import Measurement from 'v2/stories/__components__/Measurement'
 
-import Text from 'v2/components/UI/Text';
-import Pre from 'v2/components/UI/Pre';
-import Specimen from './__components__/Specimen';
+import Text from 'v2/components/UI/Text'
+import Pre from 'v2/components/UI/Pre'
+import Specimen from './__components__/Specimen'
 
 storiesOf('Styles', module)
   .add('Theme', () => <Pre>{JSON.stringify(theme, null, 2)}</Pre>)
@@ -36,4 +36,4 @@ storiesOf('Styles', module)
         </Specimen>
       ))}
     </div>
-  ));
+  ))

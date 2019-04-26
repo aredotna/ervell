@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Slider from 'react-slick';
+import styled from 'styled-components'
+import Slider from 'react-slick'
 
 const Carousel = styled(Slider)`
   position: relative;
@@ -116,6 +116,6 @@ const Carousel = styled(Slider)`
   .slick-dots li.slick-active {
     color: ${x => x.theme.colors.gray.semiBold};
   }
-`;
+`
 
-export default Carousel;
+export default Carousel

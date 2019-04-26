@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import deleteGroupFragment from 'v2/components/ManageGroup/components/DeleteGroup/fragments/deleteGroup';
-import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers';
+import deleteGroupFragment from 'v2/components/ManageGroup/components/DeleteGroup/fragments/deleteGroup'
+import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers'
 
 export default gql`
   fragment ManageGroup on Group {
@@ -18,4 +18,4 @@ export default gql`
   }
   ${deleteGroupFragment}
   ${manageUsersFragment}
-`;
+`

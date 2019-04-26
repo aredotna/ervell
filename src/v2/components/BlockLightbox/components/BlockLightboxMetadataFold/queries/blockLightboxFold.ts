@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import blockLightboxConnectionsFragment from 'v2/components/BlockLightbox/components/BlockLightboxConnections/fragments/blockLightboxConnections';
-import blockLightboxCommentsFragment from 'v2/components/BlockLightbox/components/BlockLightboxComments/fragments/blockLightboxComments';
+import blockLightboxConnectionsFragment from 'v2/components/BlockLightbox/components/BlockLightboxConnections/fragments/blockLightboxConnections'
+import blockLightboxCommentsFragment from 'v2/components/BlockLightbox/components/BlockLightboxComments/fragments/blockLightboxComments'
 
 export default gql`
   query BlockLightboxFold($id: ID!, $page: Int, $per: Int) {
@@ -24,4 +24,4 @@ export default gql`
   }
   ${blockLightboxConnectionsFragment}
   ${blockLightboxCommentsFragment}
-`;
+`

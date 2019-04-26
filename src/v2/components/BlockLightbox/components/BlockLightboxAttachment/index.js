@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import Link from 'v2/components/UI/Link';
-import Text from 'v2/components/UI/Text';
-import Badge from 'v2/components/UI/Badge';
+import Box from 'v2/components/UI/Box'
+import Link from 'v2/components/UI/Link'
+import Text from 'v2/components/UI/Text'
+import Badge from 'v2/components/UI/Badge'
 
-import blockLightboxAttachmentFragment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment/fragments/blockLightboxAttachment';
+import blockLightboxAttachmentFragment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment/fragments/blockLightboxAttachment'
 
 const Player = styled.audio`
   &::-webkit-media-controls-panel {
     background-color: ${props => props.theme.colors.gray.light};
   }
-`;
+`
 
 const SvgPreview = styled.img`
   display: block;
@@ -22,16 +22,16 @@ const SvgPreview = styled.img`
   max-height: 100%;
   object-fit: scale-down;
   margin: auto;
-`;
+`
 
 export default class BlockLightboxAttachment extends PureComponent {
   static propTypes = {
     layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
     block: propType(blockLightboxAttachmentFragment).isRequired,
-  };
+  }
 
   render() {
-    const { block, layout } = this.props;
+    const { block, layout } = this.props
 
     return (
       <Box
@@ -102,6 +102,6 @@ export default class BlockLightboxAttachment extends PureComponent {
           </Box>
         </Link>
       </Box>
-    );
+    )
   }
 }

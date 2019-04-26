@@ -1,45 +1,45 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton';
-import Box from 'v2/components/UI/Box';
-import Tabs from 'v2/components/UI/Tabs';
+import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+import Box from 'v2/components/UI/Box'
+import Tabs from 'v2/components/UI/Tabs'
 
 import {
   Headline,
   Subheadline,
   Description,
-} from 'v2/pages/about/components/Text';
-import CenterBox from 'v2/pages/about/components/CenterBox';
+} from 'v2/pages/about/components/Text'
+import CenterBox from 'v2/pages/about/components/CenterBox'
 
-import ForEducatorsTab from 'v2/pages/about/EducationPage/components/ForEducatorsTab';
-import ForStudentsTab from 'v2/pages/about/EducationPage/components/ForStudentsTab';
-import UniversityLogoCta from 'v2/pages/about/EducationPage/components/UniversityLogoCta';
-import CaseStudiesCta from 'v2/pages/about/EducationPage/components/CaseStudiesCta';
+import ForEducatorsTab from 'v2/pages/about/EducationPage/components/ForEducatorsTab'
+import ForStudentsTab from 'v2/pages/about/EducationPage/components/ForStudentsTab'
+import UniversityLogoCta from 'v2/pages/about/EducationPage/components/UniversityLogoCta'
+import CaseStudiesCta from 'v2/pages/about/EducationPage/components/CaseStudiesCta'
 
 const Container = styled.div`
   margin-top: 4em;
-`;
+`
 
 const TabContent = styled.div`
   width: 100%;
   padding-bottom: 6em;
   border-bottom: 1px solid ${x => x.theme.colors.gray.regular};
-`;
+`
 
 const CTA = styled(Box)`
   border-bottom: 1px solid ${x => x.theme.colors.gray.regular};
-`;
+`
 
 export default class EducationPage extends Component {
-  premiumRef = React.createRef();
+  premiumRef = React.createRef()
 
   scrollToPremium = () => {
     window.scroll({
       top: this.premiumRef.current.offsetTop - 100,
       behavior: 'smooth',
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -100,6 +100,6 @@ export default class EducationPage extends Component {
           </CenterBox>
         </CTA>
       </Container>
-    );
+    )
   }
 }

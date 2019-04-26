@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { isEmpty, debounce, pick, omit } from 'underscore';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { isEmpty, debounce, pick, omit } from 'underscore'
 
-import compactObject from 'v2/util/compactObject';
+import compactObject from 'v2/util/compactObject'
 
-import Box from 'v2/components/UI/Box';
-import Icons from 'v2/components/UI/Icons';
-import { Input } from 'v2/components/UI/Inputs';
+import Box from 'v2/components/UI/Box'
+import Icons from 'v2/components/UI/Icons'
+import { Input } from 'v2/components/UI/Inputs'
 
-const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'flex'];
+const OUTER_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'flex']
 
-export const ICON_OFFSET = '3.125em';
+export const ICON_OFFSET = '3.125em'
 
 const Container = styled(Box)`
   position: relative;
-`;
+`
 
 const Icon = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const Icon = styled.div`
   bottom: 0;
   width: ${ICON_OFFSET};
   cursor: pointer;
-`;
+`
 
 class SearchInput extends PureComponent {
   static propTypes = {
@@ -47,7 +47,7 @@ class SearchInput extends PureComponent {
       hover: PropTypes.string,
       active: PropTypes.string,
     }),
-  };
+  }
 
   static defaultProps = {
     query: '',
@@ -63,77 +63,77 @@ class SearchInput extends PureComponent {
       focus: 'MagnifyingGlass',
       active: 'X',
     },
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    const { debounceWait, onDebouncedQueryChange } = props;
+    const { debounceWait, onDebouncedQueryChange } = props
 
     this.handleDebouncedQueryChange = debounce(
       onDebouncedQueryChange,
       debounceWait
-    );
+    )
 
     this.state = {
       mode: props.query && props.query !== '' ? 'active' : 'resting',
       query: props.query,
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
-      this.resetState();
+      this.resetState()
     }
   }
 
   resetState = () => {
-    this.setState({ query: '', mode: 'focus' });
-    this.input.value = '';
-    this.input.focus();
-  };
+    this.setState({ query: '', mode: 'focus' })
+    this.input.value = ''
+    this.input.focus()
+  }
 
   handleMouseEnter = () => {
-    if (this.state.mode === 'focus') return;
-    if (this.state.mode === 'active') return;
-    this.setState({ mode: 'hover' });
-  };
+    if (this.state.mode === 'focus') return
+    if (this.state.mode === 'active') return
+    this.setState({ mode: 'hover' })
+  }
 
   handleMouseLeave = () => {
-    if (this.state.mode === 'focus') return;
-    if (this.state.mode === 'active') return;
-    this.setState({ mode: 'resting' });
-  };
+    if (this.state.mode === 'focus') return
+    if (this.state.mode === 'active') return
+    this.setState({ mode: 'resting' })
+  }
 
   handleFocus = () => {
-    this.props.onFocus();
-    if (this.state.mode === 'active') return;
-    this.setState({ mode: 'focus' });
-  };
+    this.props.onFocus()
+    if (this.state.mode === 'active') return
+    this.setState({ mode: 'focus' })
+  }
 
   handleBlur = () => {
-    this.props.onBlur();
-    if (this.state.mode === 'active') return;
-    this.setState({ mode: 'resting' });
-  };
+    this.props.onBlur()
+    if (this.state.mode === 'active') return
+    this.setState({ mode: 'resting' })
+  }
 
   handleChange = ({ target: { value: query } }) => {
-    const currentState = { query, mode: 'active' };
+    const currentState = { query, mode: 'active' }
 
     if (isEmpty(query)) {
-      currentState.mode = 'focus';
+      currentState.mode = 'focus'
     }
 
-    this.setState(currentState);
-    this.props.onQueryChange(query);
-    this.handleDebouncedQueryChange(query);
-  };
+    this.setState(currentState)
+    this.props.onQueryChange(query)
+    this.handleDebouncedQueryChange(query)
+  }
 
   handleReset = () => {
-    this.resetState();
-    this.props.onQueryChange('');
-    this.props.onDebouncedQueryChange('');
-  };
+    this.resetState()
+    this.props.onQueryChange('')
+    this.props.onDebouncedQueryChange('')
+  }
 
   render() {
     const {
@@ -146,12 +146,12 @@ class SearchInput extends PureComponent {
       forwardRef,
       iconMap,
       ...rest
-    } = this.props;
+    } = this.props
 
-    const { mode, query } = this.state;
+    const { mode, query } = this.state
 
-    const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS));
-    const innerProps = omit(rest, ...OUTER_PROPS_KEYS);
+    const outerProps = compactObject(pick(rest, ...OUTER_PROPS_KEYS))
+    const innerProps = omit(rest, ...OUTER_PROPS_KEYS)
 
     return (
       <Container
@@ -177,7 +177,7 @@ class SearchInput extends PureComponent {
           borderColor="gray.regular"
           {...innerProps}
           ref={input => {
-            this.input = input;
+            this.input = input
           }}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
@@ -189,10 +189,10 @@ class SearchInput extends PureComponent {
           spellCheck="false"
         />
       </Container>
-    );
+    )
   }
 }
 
 export default React.forwardRef((props, ref) => (
   <SearchInput forwardRef={ref} {...props} />
-));
+))

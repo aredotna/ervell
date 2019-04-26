@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import copy from 'copy-to-clipboard';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import copy from 'copy-to-clipboard'
 
 export default class CopyToClipboard extends Component {
   static propTypes = {
@@ -16,41 +16,38 @@ export default class CopyToClipboard extends Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       currentLabel: props.label,
-    };
+    }
   }
 
   copyToClipboard = () => {
-    const {
-      value, onClick, label, copiedLabel,
-    } = this.props;
+    const { value, onClick, label, copiedLabel } = this.props
 
-    copy(value);
+    copy(value)
 
     this.setState({
       currentLabel: copiedLabel,
-    });
+    })
 
     setTimeout(() => {
       this.setState({
         currentLabel: label,
-      });
-    }, 2000);
+      })
+    }, 2000)
 
-    return onClick();
+    return onClick()
   }
 
-
   render() {
-    const { currentLabel } = this.state;
+    const { currentLabel } = this.state
 
     return (
       <a role="button" tabIndex={0} onClick={this.copyToClipboard}>
         {currentLabel}
       </a>
-    );
+    )
   }
 }

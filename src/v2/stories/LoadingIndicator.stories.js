@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator';
+import Specimen from 'v2/stories/__components__/Specimen'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
 
 const HEXAGRAMS = [
   '䷀',
@@ -70,7 +70,7 @@ const HEXAGRAMS = [
   '䷽',
   '䷾',
   '䷿',
-];
+]
 
 storiesOf('LoadingIndicator', module)
   .add('default', () => (
@@ -121,4 +121,4 @@ storiesOf('LoadingIndicator', module)
         border="1px solid"
       />
     </Specimen>
-  ));
+  ))

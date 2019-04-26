@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import profileBadgeFragment from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge/fragments/profileBadge';
+import profileBadgeFragment from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge/fragments/profileBadge'
 
 export default gql`
   fragment ProfileBreadcrumb on Identifiable {
@@ -20,4 +20,4 @@ export default gql`
   }
 
   ${profileBadgeFragment}
-`;
+`

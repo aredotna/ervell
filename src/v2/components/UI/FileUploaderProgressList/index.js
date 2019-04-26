@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import filesize from 'filesize';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import filesize from 'filesize'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 const Container = styled(Box)`
   display: flex;
@@ -13,12 +13,12 @@ const Container = styled(Box)`
   flex-direction: column;
   width: 100%;
   user-select: none;
-`;
+`
 
 const File = styled(Box)`
   width: 100%;
   position: relative;
-`;
+`
 
 const Progress = styled(Box).attrs({
   bg: 'gray.semiLight',
@@ -28,7 +28,7 @@ const Progress = styled(Box).attrs({
   bottom: 0;
   left: 0;
   width: ${props => props.progress}%;
-`;
+`
 
 const FileUploaderProgressList = ({ files, ...rest }) => (
   <Container {...rest}>
@@ -44,7 +44,7 @@ const FileUploaderProgressList = ({ files, ...rest }) => (
       </File>
     ))}
   </Container>
-);
+)
 
 FileUploaderProgressList.propTypes = {
   files: PropTypes.arrayOf(
@@ -56,6 +56,6 @@ FileUploaderProgressList.propTypes = {
       progress: PropTypes.number.isRequired,
     })
   ).isRequired,
-};
+}
 
-export default FileUploaderProgressList;
+export default FileUploaderProgressList

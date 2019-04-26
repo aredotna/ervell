@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import WithCurrentRoute from 'v2/hocs/WithCurrentRoute';
+import WithCurrentRoute from 'v2/hocs/WithCurrentRoute'
 
 class LinkUnlessCurrent extends Component {
   static propTypes = {
@@ -11,11 +11,11 @@ class LinkUnlessCurrent extends Component {
     href: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     predicate: PropTypes.func,
-  };
+  }
 
   static defaultProps = {
     predicate: null,
-  };
+  }
 
   isCurrent = () => {
     const {
@@ -23,14 +23,14 @@ class LinkUnlessCurrent extends Component {
       href: targetHref,
       currentRoute,
       currentRoute: { href: currentHref },
-    } = this.props;
+    } = this.props
 
     if (predicate) {
-      return predicate({ targetHref, currentRoute });
+      return predicate({ targetHref, currentRoute })
     }
 
-    return targetHref === currentHref;
-  };
+    return targetHref === currentHref
+  }
 
   render() {
     const {
@@ -39,14 +39,14 @@ class LinkUnlessCurrent extends Component {
       predicate: _predicate,
       currentRoute: _currentRoute,
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <a {...!this.isCurrent() && { href }} {...rest}>
         {children}
       </a>
-    );
+    )
   }
 }
 
-export default WithCurrentRoute(LinkUnlessCurrent);
+export default WithCurrentRoute(LinkUnlessCurrent)

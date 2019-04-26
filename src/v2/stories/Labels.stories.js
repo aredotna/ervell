@@ -1,11 +1,11 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import theme from 'v2/styles/theme';
+import theme from 'v2/styles/theme'
 
-import Specimen from 'v2/stories/__components__/Specimen';
+import Specimen from 'v2/stories/__components__/Specimen'
 
-import { Label } from 'v2/components/UI/Inputs';
+import { Label } from 'v2/components/UI/Inputs'
 
 storiesOf('Label', module)
   .add('Label - default', () => (
@@ -26,4 +26,4 @@ storiesOf('Label', module)
         </Specimen>
       ))}
     </div>
-  ));
+  ))

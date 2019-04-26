@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { hyphenate } from 'v2/styles/mixins';
+import { hyphenate } from 'v2/styles/mixins'
 
 const Link = styled.a.attrs({
   role: 'button',
 })`
-  ${x => (x.length > 25 && hyphenate)}
-`;
+  ${x => x.length > 25 && hyphenate}
+`
 
-export default Link;
+export default Link

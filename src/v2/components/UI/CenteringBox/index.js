@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 export default styled(Box).attrs({
   display: 'flex',
@@ -8,5 +8,4 @@ export default styled(Box).attrs({
   minHeight: '100vh',
   alignItems: 'center',
   justifyContent: 'center',
-})`
-`;
+})``

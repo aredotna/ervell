@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import blockPageMetaTagsFragment from 'v2/pages/block/components/BlockPageMetaTags/fragments/blockPageMetaTags';
-import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox';
+import blockPageMetaTagsFragment from 'v2/pages/block/components/BlockPageMetaTags/fragments/blockPageMetaTags'
+import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox'
 
 export default gql`
   query BlockPage($id: ID!) {
@@ -16,4 +16,4 @@ export default gql`
   }
   ${blockLightboxFragment}
   ${blockPageMetaTagsFragment}
-`;
+`

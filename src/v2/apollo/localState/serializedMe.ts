@@ -2,17 +2,17 @@
 // We have to map the model directly to the fields we're expecting.
 
 export default user => {
-  if (!user) return null;
+  if (!user) return null
 
   const initials = user.username
     .split(' ')
     .slice(0, 4)
     .map(name => name[0])
-    .join('');
+    .join('')
 
-  const avatar = user.avatar_image && user.avatar_image.display;
+  const avatar = user.avatar_image && user.avatar_image.display
 
-  const name = `${user.first_name} ${user.last_name}`;
+  const name = `${user.first_name} ${user.last_name}`
 
   return {
     id: user.id,
@@ -20,5 +20,5 @@ export default user => {
     avatar,
     name,
     authentication_token: user.authentication_token,
-  };
-};
+  }
+}

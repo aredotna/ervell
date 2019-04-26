@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import assignAuthorQuery from 'v2/components/ManageChannel/components/AssignAuthor/queries/assignAuthorQuery';
+import assignAuthorQuery from 'v2/components/ManageChannel/components/AssignAuthor/queries/assignAuthorQuery'
 
-import Pulldown from 'v2/components/UI/Pulldown';
-import AuthorOption from 'v2/components/AuthorOption';
+import Pulldown from 'v2/components/UI/Pulldown'
+import AuthorOption from 'v2/components/AuthorOption'
 
 export default class AssignAuthor extends Component {
   static propTypes = {
@@ -14,7 +14,7 @@ export default class AssignAuthor extends Component {
   }
 
   render() {
-    const { onChange, selected } = this.props;
+    const { onChange, selected } = this.props
 
     return (
       <Query query={assignAuthorQuery}>
@@ -25,14 +25,21 @@ export default class AssignAuthor extends Component {
                 <Pulldown
                   value={selected}
                   options={{
-                    [selected]: <AuthorOption member={{ name: 'Me', __typename: 'USER' }} />,
+                    [selected]: (
+                      <AuthorOption
+                        member={{ name: 'Me', __typename: 'USER' }}
+                      />
+                    ),
                   }}
                 />
               </div>
-            );
+            )
           }
 
-          const { me, me: { groups } } = data;
+          const {
+            me,
+            me: { groups },
+          } = data
 
           return (
             <div>
@@ -41,15 +48,19 @@ export default class AssignAuthor extends Component {
                 onChange={onChange}
                 options={{
                   [`USER:${me.id}`]: <AuthorOption member={me} />,
-                  ...groups.reduce((memo, group) => ({
-                    ...memo, [`GROUP:${group.id}`]: <AuthorOption member={group} />,
-                  }), {}),
+                  ...groups.reduce(
+                    (memo, group) => ({
+                      ...memo,
+                      [`GROUP:${group.id}`]: <AuthorOption member={group} />,
+                    }),
+                    {}
+                  ),
                 }}
               />
             </div>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

@@ -1,12 +1,12 @@
-import React from 'react';
-import { propType } from 'graphql-anywhere';
+import React from 'react'
+import { propType } from 'graphql-anywhere'
 
-import blockPageMetaTagsFragment from 'v2/pages/block/components/BlockPageMetaTags/fragments/blockPageMetaTags';
+import blockPageMetaTagsFragment from 'v2/pages/block/components/BlockPageMetaTags/fragments/blockPageMetaTags'
 
-import Title from 'v2/components/UI/Head/components/Title';
-import Description from 'v2/components/UI/Head/components/Description';
-import Canonical from 'v2/components/UI/Head/components/Canonical';
-import Image from 'v2/components/UI/Head/components/Image';
+import Title from 'v2/components/UI/Head/components/Title'
+import Description from 'v2/components/UI/Head/components/Description'
+import Canonical from 'v2/components/UI/Head/components/Canonical'
+import Image from 'v2/components/UI/Head/components/Image'
 
 const BlockPageMetaTags = ({ block }) => (
   <React.Fragment>
@@ -20,10 +20,10 @@ const BlockPageMetaTags = ({ block }) => (
 
     <Canonical>{block.canonical}</Canonical>
   </React.Fragment>
-);
+)
 
 BlockPageMetaTags.propTypes = {
   block: propType(blockPageMetaTagsFragment).isRequired,
-};
+}
 
-export default BlockPageMetaTags;
+export default BlockPageMetaTags

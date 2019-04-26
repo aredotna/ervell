@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import newChannelGroupsQuery from 'v2/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups';
+import newChannelGroupsQuery from 'v2/components/NewChannelForm/components/NewChannelGroups/queries/newChannelGroups'
 
-import Pulldown from 'v2/components/UI/Pulldown';
-import AuthorOption from 'v2/components/AuthorOption';
+import Pulldown from 'v2/components/UI/Pulldown'
+import AuthorOption from 'v2/components/AuthorOption'
 
 export default class NewChannelGroups extends Component {
   static propTypes = {
@@ -18,7 +18,7 @@ export default class NewChannelGroups extends Component {
   }
 
   render() {
-    const { onChange, value } = this.props;
+    const { onChange, value } = this.props
 
     return (
       <Query query={newChannelGroupsQuery}>
@@ -29,14 +29,19 @@ export default class NewChannelGroups extends Component {
                 <Pulldown
                   value={value}
                   options={{
-                    0: <AuthorOption member={{ name: 'Me', __typename: 'me' }} />,
+                    0: (
+                      <AuthorOption member={{ name: 'Me', __typename: 'me' }} />
+                    ),
                   }}
                 />
               </div>
-            );
+            )
           }
 
-          const { me, me: { groups } } = data;
+          const {
+            me,
+            me: { groups },
+          } = data
 
           return (
             <div>
@@ -45,15 +50,19 @@ export default class NewChannelGroups extends Component {
                 onChange={onChange}
                 options={{
                   0: <AuthorOption member={me} />,
-                  ...groups.reduce((memo, group) => ({
-                    ...memo, [group.id]: <AuthorOption member={group} />,
-                  }), {}),
+                  ...groups.reduce(
+                    (memo, group) => ({
+                      ...memo,
+                      [group.id]: <AuthorOption member={group} />,
+                    }),
+                    {}
+                  ),
                 }}
               />
             </div>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

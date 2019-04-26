@@ -1,10 +1,10 @@
-import React from 'react';
-import { propType } from 'graphql-anywhere';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { propType } from 'graphql-anywhere'
+import PropTypes from 'prop-types'
 
-import emptyOrTipsFragment from 'v2/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips';
+import emptyOrTipsFragment from 'v2/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips'
 
-import ProfileEmptyMessage from 'v2/components/ProfileEmptyMessage';
+import ProfileEmptyMessage from 'v2/components/ProfileEmptyMessage'
 
 const EmptyMessageOrComponent = ({
   count: sectionCount,
@@ -13,10 +13,10 @@ const EmptyMessageOrComponent = ({
   ...rest
 }) => {
   const isMyProfile =
-    identifiable.is_me || identifiable.is_current_user_a_member;
-  const isSectionEmpty = sectionCount <= 0;
+    identifiable.is_me || identifiable.is_current_user_a_member
+  const isSectionEmpty = sectionCount <= 0
 
-  const components = [];
+  const components = []
 
   if (isSectionEmpty) {
     const profileEmptyMessage = (
@@ -26,21 +26,21 @@ const EmptyMessageOrComponent = ({
         identifiable={identifiable}
         {...rest}
       />
-    );
-    components.push(profileEmptyMessage);
+    )
+    components.push(profileEmptyMessage)
   }
 
   if (!isSectionEmpty) {
-    components.push(children);
+    components.push(children)
   }
 
-  return components;
-};
+  return components
+}
 
 EmptyMessageOrComponent.propTypes = {
   count: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
   identifiable: propType(emptyOrTipsFragment).isRequired,
-};
+}
 
-export default EmptyMessageOrComponent;
+export default EmptyMessageOrComponent

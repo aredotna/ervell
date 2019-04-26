@@ -43,4 +43,4 @@ export default {
     name: 'Other Events',
     interactive: true,
   },
-};
+}

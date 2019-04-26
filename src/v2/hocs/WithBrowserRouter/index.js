@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
 const withBrowserRouter = WrappedComponent => {
   class WithBrowserRouter extends Component {
     render() {
-      const { ...rest } = this.props;
+      const { ...rest } = this.props
 
       return (
         <BrowserRouter>
           <WrappedComponent {...rest} />
         </BrowserRouter>
-      );
+      )
     }
   }
 
-  return WithBrowserRouter;
-};
+  return WithBrowserRouter
+}
 
-export default withBrowserRouter;
+export default withBrowserRouter

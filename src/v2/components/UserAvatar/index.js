@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
-import { textColor, fontFamily } from 'styled-system';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
+import { textColor, fontFamily } from 'styled-system'
 
-import Avatar from 'v2/components/UI/Avatar';
+import Avatar from 'v2/components/UI/Avatar'
 
-import { preset } from 'v2/styles/functions';
-import { antialiased } from 'v2/styles/mixins';
+import { preset } from 'v2/styles/functions'
+import { antialiased } from 'v2/styles/mixins'
 
-import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar';
+import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar'
 
 const Initials = styled.div`
   font-size: ${x => x.size / 3}px;
@@ -18,7 +18,7 @@ const Initials = styled.div`
   ${preset(fontFamily, { font: 'sans' })}
   ${preset(textColor, { color: 'gray.base' })}
   ${antialiased}
-`;
+`
 
 const Image = styled.img`
   position: absolute;
@@ -28,29 +28,29 @@ const Image = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-`;
+`
 
 export default class UserAvatar extends Component {
   static defaultProps = {
     size: 40,
-  };
+  }
 
   static propTypes = {
     user: propType(userAvatarFragment).isRequired,
     size: PropTypes.number,
-  };
+  }
 
   state = {
     hideImage: false,
-  };
+  }
 
   hideImage = () => {
-    this.setState({ hideImage: true });
-  };
+    this.setState({ hideImage: true })
+  }
 
   render() {
-    const { hideImage } = this.state;
-    const { user, size, ...rest } = this.props;
+    const { hideImage } = this.state
+    const { user, size, ...rest } = this.props
 
     return (
       <Avatar href={user.href} f={size} size={size} {...rest}>
@@ -64,6 +64,6 @@ export default class UserAvatar extends Component {
           />
         )}
       </Avatar>
-    );
+    )
   }
 }

@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import { outlineBorder } from 'v2/styles/mixins';
+import { outlineBorder } from 'v2/styles/mixins'
 
-import Box from 'v2/components/UI/Box';
-import { DividerButton } from 'v2/components/UI/Buttons';
-import ErrorBoundary from 'v2/components/UI/ErrorBoundary';
-import ConnectionSelection from 'v2/components/ConnectionSelection';
+import Box from 'v2/components/UI/Box'
+import { DividerButton } from 'v2/components/UI/Buttons'
+import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
+import ConnectionSelection from 'v2/components/ConnectionSelection'
 
 const Container = styled(Box).attrs({
   pt: 4,
@@ -32,7 +32,7 @@ const Container = styled(Box).attrs({
     margin: -1px;
     ${outlineBorder()}
   }
-`;
+`
 
 export default class OverlayConnect extends PureComponent {
   static propTypes = {
@@ -41,11 +41,10 @@ export default class OverlayConnect extends PureComponent {
     onClose: PropTypes.func.isRequired,
   }
 
-  stopPropagation = e =>
-    e.stopPropagation();
+  stopPropagation = e => e.stopPropagation()
 
   render() {
-    const { id, type, onClose } = this.props;
+    const { id, type, onClose } = this.props
 
     return (
       <Container onClick={this.stopPropagation}>
@@ -59,6 +58,6 @@ export default class OverlayConnect extends PureComponent {
           Close
         </DividerButton>
       </Container>
-    );
+    )
   }
 }

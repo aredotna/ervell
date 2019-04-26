@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 import {
   Headline,
   Subheadline,
   Description,
-} from 'v2/pages/about/components/Text';
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton';
+} from 'v2/pages/about/components/Text'
+import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 import {
   Table,
   TableSection,
@@ -19,12 +19,12 @@ import {
   LightColumn,
   ColumnHeader,
   Cell,
-} from 'v2/pages/about/RoadmapPage/components/Table';
-import constants from 'v2/styles/constants';
+} from 'v2/pages/about/RoadmapPage/components/Table'
+import constants from 'v2/styles/constants'
 
 const Container = styled(Box).attrs({
   mt: 9,
-})``;
+})``
 
 const Paragraph = styled(Description).attrs({
   mx: 'auto',
@@ -33,13 +33,13 @@ const Paragraph = styled(Description).attrs({
 })`
   max-width: 670px;
   width: 100%;
-`;
+`
 
 const SmallParagraph = styled(Paragraph)`
   max-width: 460px;
   width: 100%;
   height: 7em;
-`;
+`
 
 const SupportOptions = styled(Box)`
   display: flex;
@@ -51,7 +51,7 @@ const SupportOptions = styled(Box)`
     align-items: center;
     flex-direction: column;
   `}
-`;
+`
 
 const ContributeButton = styled(Button).attrs({
   f: 5,
@@ -67,7 +67,7 @@ const ContributeButton = styled(Button).attrs({
     background-color: white;
     color: ${x => x.theme.colors.state.supporter};
   }
-`;
+`
 
 const PremiumButton = styled(Button).attrs({
   f: 5,
@@ -83,25 +83,25 @@ const PremiumButton = styled(Button).attrs({
     background-color: white;
     color: ${x => x.theme.colors.state.premium};
   }
-`;
+`
 
 export default class RoadmapPage extends PureComponent {
   static propTypes = {
     roadmap: PropTypes.shape.isRequired,
-  };
+  }
 
   render() {
-    const { roadmap } = this.props;
+    const { roadmap } = this.props
     const dateOptions = {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-    };
+    }
     const lastUpdated = new Date(roadmap.sys.updatedAt).toLocaleDateString(
       'en-US',
       dateOptions
-    );
+    )
 
     return (
       <Container pb={10}>
@@ -341,6 +341,6 @@ export default class RoadmapPage extends PureComponent {
           </Table>
         </TableSection>
       </Container>
-    );
+    )
   }
 }

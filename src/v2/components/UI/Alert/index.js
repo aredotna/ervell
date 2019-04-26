@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { themeGet } from 'styled-system';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 const Container = styled(Box)`
   position: relative;
   border-radius: 0.25em;
-`;
+`
 
 const Close = styled.a`
   box-sizing: border-box;
@@ -31,7 +31,10 @@ const Close = styled.a`
     height: 1px;
     top: 50%;
     left: 50%;
-    background-color: ${props => themeGet(`colors.${props.color}`, props.theme.colors.gray.semiBold)(props)};
+    background-color: ${props =>
+      themeGet(`colors.${props.color}`, props.theme.colors.gray.semiBold)(
+        props
+      )};
   }
 
   &:before {
@@ -46,7 +49,7 @@ const Close = styled.a`
   &:hover:after {
     background-color: black;
   }
-`;
+`
 
 export default class Alert extends PureComponent {
   static propTypes = {
@@ -66,34 +69,44 @@ export default class Alert extends PureComponent {
     mode: 'resting',
   }
 
-  close = (e) => {
-    e.preventDefault();
+  close = e => {
+    e.preventDefault()
 
-    const { onClose } = this.props;
+    const { onClose } = this.props
 
-    this.setState({ mode: 'closed' });
+    this.setState({ mode: 'closed' })
 
-    return onClose();
+    return onClose()
   }
 
   render() {
-    const {
-      children, color, isCloseable, ...rest
-    } = this.props;
-    const { mode } = this.state;
+    const { children, color, isCloseable, ...rest } = this.props
+    const { mode } = this.state
 
-    if (mode === 'closed') return '';
+    if (mode === 'closed') return ''
 
     return (
-      <Container bg="state.editable" border="1px solid" borderColor="gray.light" py={5} px={6} {...rest}>
+      <Container
+        bg="state.editable"
+        border="1px solid"
+        borderColor="gray.light"
+        py={5}
+        px={6}
+        {...rest}
+      >
         <Text f={2} color={color} pr={isCloseable && 8} underlineLinks>
           {children}
         </Text>
 
-        {isCloseable &&
-          <Close role="button" tabIndex={0} onClick={this.close} color={color} />
-        }
+        {isCloseable && (
+          <Close
+            role="button"
+            tabIndex={0}
+            onClick={this.close}
+            color={color}
+          />
+        )}
       </Container>
-    );
+    )
   }
 }

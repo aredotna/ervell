@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import { divide } from 'v2/styles/functions';
+import { divide } from 'v2/styles/functions'
 
-import provideChildrenWithProps from 'v2/util/provideChildrenWithProps';
+import provideChildrenWithProps from 'v2/util/provideChildrenWithProps'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 const Container = styled(Box).attrs({
   p: 4,
@@ -29,7 +29,7 @@ const Container = styled(Box).attrs({
     pointer-events: none;
     opacity: 0.5;
   `}
-`;
+`
 
 const Radio = styled(Box).attrs({
   mr: 6,
@@ -46,20 +46,20 @@ const Radio = styled(Box).attrs({
     border-color: ${props.theme.colors.state.editable};
     background-color: ${props.theme.colors.gray.base};
   `}
-`;
+`
 
 const Label = styled(Box)`
   flex: 1;
-`;
+`
 
 const POSSIBLE_VALUE_TYPES = [
   PropTypes.string,
   PropTypes.number,
   PropTypes.bool,
-];
+]
 
 export default class RadioOption extends Component {
-  static POSSIBLE_VALUE_TYPES = POSSIBLE_VALUE_TYPES;
+  static POSSIBLE_VALUE_TYPES = POSSIBLE_VALUE_TYPES
 
   static propTypes = {
     children: PropTypes.func.isRequired,
@@ -68,33 +68,33 @@ export default class RadioOption extends Component {
     selectedValue: PropTypes.oneOfType(POSSIBLE_VALUE_TYPES),
     size: PropTypes.string,
     disabled: PropTypes.bool,
-  };
+  }
 
   static defaultProps = {
     onClick: () => {},
     selectedValue: null,
     size: '1.5em',
     disabled: false,
-  };
+  }
 
   static getDerivedStateFromProps(nextProps) {
-    return { selected: nextProps.selectedValue === nextProps.value };
+    return { selected: nextProps.selectedValue === nextProps.value }
   }
 
   state = {
     selected: this.props.selectedValue === this.props.value,
-  };
+  }
 
   handleClick = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { onClick, value } = this.props;
+    const { onClick, value } = this.props
 
-    onClick(value);
-  };
+    onClick(value)
+  }
 
   render() {
-    const { selected } = this.state;
+    const { selected } = this.state
     const {
       children,
       size,
@@ -103,7 +103,7 @@ export default class RadioOption extends Component {
       selectedValue: _selectedValue,
       onClick: _onClick,
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <Container
@@ -118,6 +118,6 @@ export default class RadioOption extends Component {
 
         <Label>{provideChildrenWithProps(children, { selected })}</Label>
       </Container>
-    );
+    )
   }
 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import * as Banners from 'v2/components/Banners';
+import Specimen from 'v2/stories/__components__/Specimen'
+import * as Banners from 'v2/components/Banners'
 
 storiesOf('Banner', module).add('default', () => (
   <Specimen>
@@ -21,4 +21,4 @@ storiesOf('Banner', module).add('default', () => (
 
     <Banners.LoggedOutProfile mb={6} isCloseable={false} name="Foo Bar" />
   </Specimen>
-));
+))

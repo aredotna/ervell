@@ -3,8 +3,8 @@
 //
 // This component also does NOT render on the client-side.
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 export default class Page extends PureComponent {
   static propTypes = {
@@ -30,7 +30,7 @@ export default class Page extends PureComponent {
 
     // eslint-disable-next-line react/forbid-prop-types
     sharifyData: PropTypes.object.isRequired,
-  };
+  }
 
   render() {
     const {
@@ -41,7 +41,7 @@ export default class Page extends PureComponent {
       styles,
       asset,
       sharifyData,
-    } = this.props;
+    } = this.props
 
     return (
       <html lang="en-US" data-theme={sharifyData.THEME}>
@@ -148,6 +148,6 @@ export default class Page extends PureComponent {
           <script src={asset('/assets/runtime.js')} />
         </body>
       </html>
-    );
+    )
   }
 }

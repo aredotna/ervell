@@ -1,29 +1,29 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import blockLightboxEmbedFragment from 'v2/components/BlockLightbox/components/BlockLightboxEmbed/fragments/blockLightboxEmbed';
+import blockLightboxEmbedFragment from 'v2/components/BlockLightbox/components/BlockLightboxEmbed/fragments/blockLightboxEmbed'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 const Embed = styled(Box)`
   position: relative;
   height: 0;
   overflow: hidden;
 
-  ${(props) => {
-    const ratio = props.embedHeight / props.embedWidth;
+  ${props => {
+    const ratio = props.embedHeight / props.embedWidth
 
-    let size = 100;
+    let size = 100
 
-    if (ratio > 0.6) size = 75;
-    if (ratio > 1.0) size = 50;
+    if (ratio > 0.6) size = 75
+    if (ratio > 1.0) size = 50
 
     return `
       width: ${size}%;
       padding-bottom: ${ratio * size}%;
-    `;
+    `
   }}
 
   iframe {
@@ -34,7 +34,7 @@ const Embed = styled(Box)`
     height: 100%;
     vertical-align: bottom;
   }
-`;
+`
 
 export default class BlockLightboxEmbed extends PureComponent {
   static propTypes = {
@@ -43,7 +43,7 @@ export default class BlockLightboxEmbed extends PureComponent {
   }
 
   render() {
-    const { layout, block } = this.props;
+    const { layout, block } = this.props
 
     return (
       <Box
@@ -62,6 +62,6 @@ export default class BlockLightboxEmbed extends PureComponent {
           dangerouslySetInnerHTML={{ __html: block.embed_html }}
         />
       </Box>
-    );
+    )
   }
 }

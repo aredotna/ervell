@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 export default styled(Box).attrs({
   bg: 'utility.semiTranslucent',
@@ -14,4 +14,4 @@ export default styled(Box).attrs({
   align-items: center;
   justify-content: center;
   z-index: 1;
-`;
+`

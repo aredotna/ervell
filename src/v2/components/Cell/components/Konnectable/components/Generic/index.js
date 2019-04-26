@@ -1,21 +1,23 @@
-import React, { PureComponent } from 'react';
-import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import styled, { css } from 'styled-components'
+import PropTypes from 'prop-types'
 
-import Box from 'v2/components/UI/Box';
-import Img from 'v2/components/Cell/components/Konnectable/components/Img';
+import Box from 'v2/components/UI/Box'
+import Img from 'v2/components/Cell/components/Konnectable/components/Img'
 
 const hoverMixin = css`
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
-`;
+`
 
 const Container = styled(Box)`
   height: 100%;
   width: 100%;
 
   ${props => props.mode === 'hover' && hoverMixin}
-  &:hover { ${hoverMixin} }
-`;
+  &:hover {
+    ${hoverMixin}
+  }
+`
 
 export default class Generic extends PureComponent {
   static propTypes = {
@@ -30,9 +32,7 @@ export default class Generic extends PureComponent {
   }
 
   render() {
-    const {
-      src, title, mode, ...rest
-    } = this.props;
+    const { src, title, mode, ...rest } = this.props
 
     return (
       <Container
@@ -43,6 +43,6 @@ export default class Generic extends PureComponent {
       >
         <Img src={src} alt={title} />
       </Container>
-    );
+    )
   }
 }

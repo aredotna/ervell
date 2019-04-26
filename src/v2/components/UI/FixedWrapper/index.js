@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 const FixedWrapper = styled(Box)`
   position: fixed;
@@ -9,10 +9,10 @@ const FixedWrapper = styled(Box)`
   right: 0;
   left: 0;
   z-index: 1;
-`;
+`
 
 FixedWrapper.defaultProps = {
   bg: 'white',
-};
+}
 
-export default FixedWrapper;
+export default FixedWrapper

@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { ThemeProvider } from 'styled-components'
 
-import constants, { SPACING_SCALE, CONSTANT_VALUES } from 'v2/styles/constants';
-import colors, { COLOR_NAMES as colorNames } from 'v2/styles/colors';
-import text, { FONT_SIZE_NAMES as fontSizeNames } from 'v2/styles/text';
+import constants, { SPACING_SCALE, CONSTANT_VALUES } from 'v2/styles/constants'
+import colors, { COLOR_NAMES as colorNames } from 'v2/styles/colors'
+import text, { FONT_SIZE_NAMES as fontSizeNames } from 'v2/styles/text'
 
 const META = {
   colorNames,
   fontSizeNames,
-};
+}
 
 const THEME = {
   colors,
@@ -24,22 +24,22 @@ const THEME = {
   z: constants.z,
   constantValues: CONSTANT_VALUES,
   radii: constants.radii,
-};
+}
 
 export const wrapWithThemeProvider = (Component, props = {}) => (
   <ThemeProvider theme={THEME}>
     <Component {...props} />
   </ThemeProvider>
-);
+)
 
 export const Themed = ({ children, ...rest }) => (
   <ThemeProvider theme={THEME} {...rest}>
     {children}
   </ThemeProvider>
-);
+)
 
 Themed.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default THEME;
+export default THEME

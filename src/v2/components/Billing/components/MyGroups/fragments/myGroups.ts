@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import myGroupCheckoutFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/fragments/myGroupCheckout';
-import groupFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/fragments/myGroup';
+import myGroupCheckoutFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout/fragments/myGroupCheckout'
+import groupFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/fragments/myGroup'
 
 export default gql`
   fragment MyGroups on Me {
@@ -17,4 +17,4 @@ export default gql`
   }
   ${myGroupCheckoutFragment}
   ${groupFragment}
-`;
+`

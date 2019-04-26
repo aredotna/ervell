@@ -1,24 +1,33 @@
-import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { propType } from 'graphql-anywhere'
+import PropTypes from 'prop-types'
 
-import profileMetadataViewFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView';
+import profileMetadataViewFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView'
 
-import Pocket from 'v2/components/UI/Pocket';
-import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent';
+import Pocket from 'v2/components/UI/Pocket'
+import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 export default class ProfileMetadataView extends Component {
   static propTypes = {
     identifiable: propType(profileMetadataViewFragment).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-    view: PropTypes.oneOf(['all', 'channels', 'blocks', 'index', 'following', 'followers']).isRequired,
+    view: PropTypes.oneOf([
+      'all',
+      'channels',
+      'blocks',
+      'index',
+      'following',
+      'followers',
+    ]).isRequired,
   }
 
-  isViewActive = view => () =>
-    this.props.view === view;
+  isViewActive = view => () => this.props.view === view
 
   render() {
-    const { identifiable: { __typename, href }, sort } = this.props;
+    const {
+      identifiable: { __typename, href },
+      sort,
+    } = this.props
 
     return (
       <Pocket title="View">
@@ -32,7 +41,7 @@ export default class ProfileMetadataView extends Component {
           Channels
         </CookieLinkUnlessCurrent>
 
-        {__typename === 'User' &&
+        {__typename === 'User' && (
           <CookieLinkUnlessCurrent
             name="view"
             prefix="Profile"
@@ -42,7 +51,7 @@ export default class ProfileMetadataView extends Component {
           >
             Blocks
           </CookieLinkUnlessCurrent>
-        }
+        )}
 
         <CookieLinkUnlessCurrent
           name="view"
@@ -54,7 +63,7 @@ export default class ProfileMetadataView extends Component {
           Index
         </CookieLinkUnlessCurrent>
 
-        {__typename === 'User' &&
+        {__typename === 'User' && (
           <CookieLinkUnlessCurrent
             name="view"
             value="all"
@@ -64,8 +73,8 @@ export default class ProfileMetadataView extends Component {
           >
             All
           </CookieLinkUnlessCurrent>
-        }
+        )}
       </Pocket>
-    );
+    )
   }
 }

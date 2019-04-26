@@ -1,11 +1,11 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Specimen from 'v2/stories/__components__/Specimen';
+import Specimen from 'v2/stories/__components__/Specimen'
 
-import RadioOptions from 'v2/components/UI/RadioOptions';
-import Text from 'v2/components/UI/Text';
+import RadioOptions from 'v2/components/UI/RadioOptions'
+import Text from 'v2/components/UI/Text'
 
 storiesOf('RadioOptions', module)
   .add('default', () => (
@@ -57,4 +57,4 @@ storiesOf('RadioOptions', module)
         <RadioOptions.Option value="three">{() => 'Three'}</RadioOptions.Option>
       </RadioOptions>
     </Specimen>
-  ));
+  ))

@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import exploreContentsQuery from 'v2/components/ExploreContents/queries/exploreContents';
+import exploreContentsQuery from 'v2/components/ExploreContents/queries/exploreContents'
 
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator';
-import Grid from 'v2/components/UI/Grid';
-import Cell from 'v2/components/Cell';
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
+import Grid from 'v2/components/UI/Grid'
+import Cell from 'v2/components/Cell'
 
 export default class ExploreContents extends PureComponent {
   static propTypes = {
@@ -15,27 +15,27 @@ export default class ExploreContents extends PureComponent {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     seed: PropTypes.number,
-  };
+  }
 
   static defaultProps = {
     type: null,
     seed: Math.floor(Math.random() * 1000) + 1,
-  };
+  }
 
   state = {
     page: 1,
     per: 12,
     hasMore: true,
     q: null,
-  };
+  }
 
   resetQuery = query => {
-    const q = query === '' ? null : query;
-    this.setState({ q, page: 1, hasMore: true });
-  };
+    const q = query === '' ? null : query
+    this.setState({ q, page: 1, hasMore: true })
+  }
 
   loadMore = fetchMore => () => {
-    const { page, per } = this.state;
+    const { page, per } = this.state
 
     fetchMore({
       variables: { page: page + 1, per },
@@ -45,19 +45,19 @@ export default class ExploreContents extends PureComponent {
     }).then(({ errors, data }) => {
       const {
         contents: { length },
-      } = data;
-      const hasMore = !errors && length > 0 && length >= per;
+      } = data
+      const hasMore = !errors && length > 0 && length >= per
 
       this.setState({
         page: page + 1,
         hasMore,
-      });
-    });
-  };
+      })
+    })
+  }
 
   render() {
-    const { per, hasMore, q } = this.state;
-    const { type, sort, fetchPolicy, seed } = this.props;
+    const { per, hasMore, q } = this.state
+    const { type, sort, fetchPolicy, seed } = this.props
 
     return (
       <Query
@@ -74,14 +74,14 @@ export default class ExploreContents extends PureComponent {
       >
         {({ loading, error, data, fetchMore }) => {
           if (error) {
-            return <ErrorAlert>{error.message}</ErrorAlert>;
+            return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
           if (!data.contents) {
-            return <BlocksLoadingIndicator />;
+            return <BlocksLoadingIndicator />
           }
 
-          const { contents } = data;
+          const { contents } = data
 
           return (
             <div>
@@ -106,9 +106,9 @@ export default class ExploreContents extends PureComponent {
                 </Grid>
               )}
             </div>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

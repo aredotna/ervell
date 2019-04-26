@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import profileChannelSearchFragment from 'v2/components/ProfileChannels/fragments/profileChannelSearch';
+import profileChannelSearchFragment from 'v2/components/ProfileChannels/fragments/profileChannelSearch'
 
 export default gql`
   query ProfileChannels(
@@ -19,4 +19,4 @@ export default gql`
     }
   }
   ${profileChannelSearchFragment}
-`;
+`

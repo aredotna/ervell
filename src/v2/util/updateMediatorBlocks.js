@@ -1,5 +1,5 @@
-import mediator from 'lib/mediator.coffee';
-import Blocks from 'collections/blocks.coffee';
+import mediator from 'lib/mediator.coffee'
+import Blocks from 'collections/blocks.coffee'
 
 export default ({ blocks }) => {
   mediator.shared.blocks = new Blocks(
@@ -9,5 +9,5 @@ export default ({ blocks }) => {
       base_class: 'Block',
       unloaded: true,
     }))
-  );
-};
+  )
+}

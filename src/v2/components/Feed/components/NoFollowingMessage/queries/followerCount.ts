@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import FollowerCountCheck from 'v2/components/Feed/components/NoFollowingMessage/fragments/followerCount';
+import FollowerCountCheck from 'v2/components/Feed/components/NoFollowingMessage/fragments/followerCount'
 
 export default gql`
   query FollowerCountCheckQuery {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${FollowerCountCheck}
-`;
+`

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import cancelChannelTransferMutation from 'v2/components/ManageChannel/components/TransferChannel/components/CancelTransferButton/mutations/cancelTransfer';
+import cancelChannelTransferMutation from 'v2/components/ManageChannel/components/TransferChannel/components/CancelTransferButton/mutations/cancelTransfer'
 
 const Button = styled.a.attrs({
   role: 'button',
@@ -12,7 +12,7 @@ const Button = styled.a.attrs({
   display: block;
   margin-top: 0.5em;
   font-weight: bold;
-`;
+`
 
 class CancelTransferButton extends Component {
   static propTypes = {
@@ -25,35 +25,36 @@ class CancelTransferButton extends Component {
   }
 
   handleClick = () => {
-    const { channel_id, cancelChannelTransfer } = this.props;
+    const { channel_id, cancelChannelTransfer } = this.props
 
-    this.setState({ mode: 'cancelling' });
+    this.setState({ mode: 'cancelling' })
 
     return cancelChannelTransfer({
       variables: { channel_id },
-    })
-      .catch((err) => {
-        console.error(err);
+    }).catch(err => {
+      console.error(err)
 
-        this.setState({ mode: 'error' });
-      });
+      this.setState({ mode: 'error' })
+    })
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode } = this.state
 
     return (
       <Button onClick={this.handleClick}>
-        {{
-          resting: 'Cancel transfer',
-          cancelling: 'Cancelling...',
-          error: 'An error occurred.',
-        }[mode]}
+        {
+          {
+            resting: 'Cancel transfer',
+            cancelling: 'Cancelling...',
+            error: 'An error occurred.',
+          }[mode]
+        }
       </Button>
-    );
+    )
   }
 }
 
 export default graphql(cancelChannelTransferMutation, {
   name: 'cancelChannelTransfer',
-})(CancelTransferButton);
+})(CancelTransferButton)

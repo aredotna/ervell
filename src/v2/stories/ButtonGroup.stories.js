@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import GenericButton from 'v2/components/UI/GenericButton';
-import ButtonGroup from 'v2/components/UI/ButtonGroup';
-import Icons from 'v2/components/UI/Icons';
+import GenericButton from 'v2/components/UI/GenericButton'
+import ButtonGroup from 'v2/components/UI/ButtonGroup'
+import Icons from 'v2/components/UI/Icons'
 
 storiesOf('ButtonGroup', module)
   .add('default', () => (
@@ -60,4 +60,4 @@ storiesOf('ButtonGroup', module)
       <GenericButton>Option 3</GenericButton>
       <GenericButton>Option 4</GenericButton>
     </ButtonGroup>
-  ));
+  ))

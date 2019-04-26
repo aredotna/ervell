@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { truncate } from 'v2/util/string';
+import React from 'react'
+import styled from 'styled-components'
+import { truncate } from 'v2/util/string'
 
 const ChannelWrapper = styled.div`
   align-items: center;
@@ -15,7 +15,7 @@ const ChannelWrapper = styled.div`
   width: 100%;
 
   ${({ visibility, theme }) => {
-    const color = theme.colors.channel[visibility];
+    const color = theme.colors.channel[visibility]
 
     return `
       border-color: ${color};
@@ -23,15 +23,15 @@ const ChannelWrapper = styled.div`
       &:hover {
         border-color: ${color};
       }
-    `;
+    `
   }}
-`;
+`
 
 const Title = styled.h2`
   font-weight: normal;
   padding: 15px 12px 0 12px;
   word-break: break-word;
-`;
+`
 
 const Stats = styled.div`
   font-weight: normal;
@@ -39,20 +39,20 @@ const Stats = styled.div`
   font-size: ${x => x.theme.fontSizesIndexed.xs};
   height: 25px;
   margin: 5px 0 0 0;
-`;
+`
 
 interface ChannelProps {
-  length: number;
-  title: string;
-  updatedAtAgo: string;
-  username: string;
-  visibility: string;
+  length: number
+  title: string
+  updatedAtAgo: string
+  username: string
+  visibility: string
 }
 
 const Channel: React.FC<ChannelProps> = props => {
-  const { length, title, updatedAtAgo, username, visibility } = props;
+  const { length, title, updatedAtAgo, username, visibility } = props
 
-  const formattedTitle = truncate(title, 50) || '\u00A0';
+  const formattedTitle = truncate(title, 50) || '\u00A0'
 
   return (
     <ChannelWrapper visibility={visibility}>
@@ -68,7 +68,7 @@ const Channel: React.FC<ChannelProps> = props => {
         </Stats>
       </div>
     </ChannelWrapper>
-  );
-};
+  )
+}
 
-export default Channel;
+export default Channel

@@ -1,31 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { compose, graphql } from 'react-apollo';
-import axios from 'axios';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { compose, graphql } from 'react-apollo'
+import axios from 'axios'
+import styled from 'styled-components'
 
-import mapErrors from 'v2/util/mapErrors';
-import compactObject from 'v2/util/compactObject';
+import mapErrors from 'v2/util/mapErrors'
+import compactObject from 'v2/util/compactObject'
 
-import { GenericButton as Button } from 'v2/components/UI/GenericButton';
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import AuthForm from 'v2/components/AuthForm';
+import { GenericButton as Button } from 'v2/components/UI/GenericButton'
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import AuthForm from 'v2/components/AuthForm'
 
-import PlanSelector from 'v2/components/RegistrationForm/components/PlanSelect';
+import PlanSelector from 'v2/components/RegistrationForm/components/PlanSelect'
 
-import { LabelledCheckbox, Input, ErrorMessage } from 'v2/components/UI/Inputs';
+import { LabelledCheckbox, Input, ErrorMessage } from 'v2/components/UI/Inputs'
 
-import registerMutation from 'v2/components/RegistrationForm/mutations/register';
-import acceptInvitationMutation from 'v2/components/RegistrationForm/mutations/acceptInvitation';
+import registerMutation from 'v2/components/RegistrationForm/mutations/register'
+import acceptInvitationMutation from 'v2/components/RegistrationForm/mutations/acceptInvitation'
 
-import { track, en } from 'lib/analytics.coffee';
+import { track, en } from 'lib/analytics.coffee'
 
-const { REDIRECT_TO } = require('sharify').data;
+const { REDIRECT_TO } = require('sharify').data
 
 const RegisterButton = styled(Button)`
-  ${props => props.isPremium && `
+  ${props =>
+    props.isPremium &&
+    `
     border-color: ${props.theme.colors.state.premium};
     color: ${props.theme.colors.state.premium};
 
@@ -34,7 +36,7 @@ const RegisterButton = styled(Button)`
       color: ${props.theme.colors.state.premium};
     }
   `}
-`;
+`
 
 class RegistrationForm extends Component {
   static propTypes = {
@@ -54,11 +56,11 @@ class RegistrationForm extends Component {
     selected: 'basic',
     // If the redirect location is somehow the root, lets skip that
     // and go to welcome. Anything else is fair game.
-    redirectTo: (REDIRECT_TO === '/' ? '/welcome' : REDIRECT_TO),
+    redirectTo: REDIRECT_TO === '/' ? '/welcome' : REDIRECT_TO,
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       mode: 'resting',
@@ -73,13 +75,14 @@ class RegistrationForm extends Component {
       errorMessage: null,
       selected: this.props.selected,
       redirectTo: this.props.redirectTo,
-    };
+    }
   }
 
-  onPlanSelect = (selected) => {
-    const mode = selected === 'premium' ? selected : 'resting';
-    const redirectTo = selected === 'premium' ? '/welcome/billing' : this.props.redirectTo;
-    this.setState({ selected, mode, redirectTo });
+  onPlanSelect = selected => {
+    const mode = selected === 'premium' ? selected : 'resting'
+    const redirectTo =
+      selected === 'premium' ? '/welcome/billing' : this.props.redirectTo
+    this.setState({ selected, mode, redirectTo })
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
@@ -90,7 +93,7 @@ class RegistrationForm extends Component {
         ...prevState.attributeErrors,
         [fieldName]: null, // Clear specific error once typing begins
       },
-    }));
+    }))
 
   handleCheckbox = fieldName => ({ target: { checked } }) =>
     this.setState({ [fieldName]: checked })
@@ -103,18 +106,17 @@ class RegistrationForm extends Component {
   handleAcceptTerms = this.handleCheckbox('accept_terms')
   handleNewsletter = this.handleCheckbox('receive_newsletter')
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = e => {
+    e.preventDefault()
 
     const {
       register,
       acceptInvitation,
       raw_invitation_token,
       validation_token,
-    } = this.props;
+    } = this.props
 
-    const mutation = raw_invitation_token ?
-      acceptInvitation : register;
+    const mutation = raw_invitation_token ? acceptInvitation : register
 
     const {
       email,
@@ -125,9 +127,9 @@ class RegistrationForm extends Component {
       accept_terms,
       receive_newsletter,
       redirectTo,
-    } = this.state;
+    } = this.state
 
-    this.setState({ mode: 'registering' });
+    this.setState({ mode: 'registering' })
 
     const variables = compactObject({
       email,
@@ -139,33 +141,36 @@ class RegistrationForm extends Component {
       receive_newsletter,
       invitation_token: raw_invitation_token,
       validation_token,
-    });
+    })
 
     return mutation({ variables })
       .then(() => {
-        this.setState({ mode: 'logging_in' });
+        this.setState({ mode: 'logging_in' })
 
-        return axios
-          .post('/me/sign_in', { email, password }, {
+        return axios.post(
+          '/me/sign_in',
+          { email, password },
+          {
             headers: {
               // Sets `req.xhr` in Express
               'X-Requested-With': 'XMLHttpRequest',
             },
-          });
+          }
+        )
       })
       .then(() => {
-        this.setState({ mode: 'redirecting' });
-        window.location = redirectTo;
+        this.setState({ mode: 'redirecting' })
+        window.location = redirectTo
 
-        track.submit(en.REGISTER);
-        if (raw_invitation_token) track.submit(en.ACCEPTED_INVITATION);
+        track.submit(en.REGISTER)
+        if (raw_invitation_token) track.submit(en.ACCEPTED_INVITATION)
       })
-      .catch((err) => {
+      .catch(err => {
         this.setState({
           mode: 'error',
           ...mapErrors(err),
-        });
-      });
+        })
+      })
   }
 
   render() {
@@ -181,7 +186,7 @@ class RegistrationForm extends Component {
       attributeErrors,
       errorMessage,
       selected,
-    } = this.state;
+    } = this.state
 
     return (
       <AuthForm onSubmit={this.handleSubmit}>
@@ -247,12 +252,14 @@ class RegistrationForm extends Component {
             checked={accept_terms}
             onChange={this.handleAcceptTerms}
           >
-            Accept Are.na
-            {' '}
-            <a href="/terms" target="_blank">Terms</a>
+            Accept Are.na{' '}
+            <a href="/terms" target="_blank">
+              Terms
+            </a>
             {' and '}
-            <a href="/privacy" target="_blank">Privacy</a>
-            {' '}
+            <a href="/privacy" target="_blank">
+              Privacy
+            </a>{' '}
             conditions
           </LabelledCheckbox>
 
@@ -264,37 +271,41 @@ class RegistrationForm extends Component {
           </LabelledCheckbox>
         </Box>
 
-        {mode === 'error' &&
+        {mode === 'error' && (
           <ErrorMessage my={5} align="center">
             {errorMessage}
           </ErrorMessage>
-        }
+        )}
 
         <AuthForm.Submit>
-          <RegisterButton type="submit" disabled={!accept_terms} isPremium={selected === 'premium'}>
-            {{
-              resting: 'Join',
-              premium: 'Join with Premium',
-              active: 'Join',
-              registering: 'Registering...',
-              logging_in: 'Logging in...',
-              redirecting: 'Redirecting...',
-              error: 'Error',
-            }[mode]}
+          <RegisterButton
+            type="submit"
+            disabled={!accept_terms}
+            isPremium={selected === 'premium'}
+          >
+            {
+              {
+                resting: 'Join',
+                premium: 'Join with Premium',
+                active: 'Join',
+                registering: 'Registering...',
+                logging_in: 'Logging in...',
+                redirecting: 'Redirecting...',
+                error: 'Error',
+              }[mode]
+            }
           </RegisterButton>
 
           <AuthForm.Subtext>
-            Already a member?
-            {' '}
-            <Link to="/log_in">Log in</Link>
+            Already a member? <Link to="/log_in">Log in</Link>
           </AuthForm.Subtext>
         </AuthForm.Submit>
       </AuthForm>
-    );
+    )
   }
 }
 
 export default compose(
   graphql(registerMutation, { name: 'register' }),
-  graphql(acceptInvitationMutation, { name: 'acceptInvitation' }),
-)(RegistrationForm);
+  graphql(acceptInvitationMutation, { name: 'acceptInvitation' })
+)(RegistrationForm)

@@ -1,11 +1,11 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import contactFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+import contactFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact'
 
-import ConnectTwitter from 'v2/components/ConnectTwitter';
-import Contact from 'v2/components/ConnectTwitter/components/Contact/index';
+import ConnectTwitter from 'v2/components/ConnectTwitter'
+import Contact from 'v2/components/ConnectTwitter/components/Contact/index'
 
 storiesOf('ConnectTwitter', module)
   .add('Dialog', () => <ConnectTwitter />)
@@ -22,13 +22,13 @@ storiesOf('ConnectTwitter', module)
     >
       {({ loading, data, error }) => {
         if (loading) {
-          return <div>loading</div>;
+          return <div>loading</div>
         }
         if (error) {
-          return <div>ERROR: {error}</div>;
+          return <div>ERROR: {error}</div>
         }
 
-        return <Contact user={data.user} />;
+        return <Contact user={data.user} />
       }}
     </Query>
-  ));
+  ))

@@ -1,12 +1,12 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Pulldown from 'v2/components/UI/Pulldown';
-import ChannelVisibilityPulldown from 'v2/components/ChannelVisibilityPulldown';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Pulldown from 'v2/components/UI/Pulldown'
+import ChannelVisibilityPulldown from 'v2/components/ChannelVisibilityPulldown'
 
-const ExampleLabel = props => <span>{JSON.stringify(props)}</span>;
+const ExampleLabel = props => <span>{JSON.stringify(props)}</span>
 
 storiesOf('Pulldown', module)
   .add('default', () => (
@@ -72,4 +72,4 @@ storiesOf('Pulldown', module)
         type="GROUP"
       />
     </Specimen>
-  ));
+  ))

@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink';
+import collaboratorLinkFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorLink'
 
 export default gql`
   fragment CollaboratorsList on Channel {
@@ -14,4 +14,4 @@ export default gql`
     }
   }
   ${collaboratorLinkFragment}
-`;
+`

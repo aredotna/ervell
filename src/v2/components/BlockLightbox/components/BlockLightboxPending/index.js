@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import Box from 'v2/components/UI/Box';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
+import Box from 'v2/components/UI/Box'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 
 export default () => (
   <Box
@@ -14,4 +14,4 @@ export default () => (
   >
     <LoadingIndicator f={6} />
   </Box>
-);
+)

@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
 
-import blockLightboxFoldQuery from 'v2/components/BlockLightbox/components/BlockLightboxMetadataFold/queries/blockLightboxFold';
+import blockLightboxFoldQuery from 'v2/components/BlockLightbox/components/BlockLightboxMetadataFold/queries/blockLightboxFold'
 
-import Count from 'v2/components/UI/Count';
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import Header from 'v2/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header';
-import BlockLightboxConnections from 'v2/components/BlockLightbox/components/BlockLightboxConnections';
-import BlockLightboxComments from 'v2/components/BlockLightbox/components/BlockLightboxComments';
+import Count from 'v2/components/UI/Count'
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import Header from 'v2/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header'
+import BlockLightboxConnections from 'v2/components/BlockLightbox/components/BlockLightboxConnections'
+import BlockLightboxComments from 'v2/components/BlockLightbox/components/BlockLightboxComments'
 
 export default class BlockLightboxMetadataFold extends PureComponent {
   static propTypes = {
@@ -23,10 +23,10 @@ export default class BlockLightboxMetadataFold extends PureComponent {
     loadingMore: false,
   }
 
-  loadMore = fetchMore => (e) => {
-    e.preventDefault();
+  loadMore = fetchMore => e => {
+    e.preventDefault()
 
-    const { page, per } = this.state;
+    const { page, per } = this.state
 
     this.setState({ loadingMore: true }, () => {
       fetchMore({
@@ -46,19 +46,19 @@ export default class BlockLightboxMetadataFold extends PureComponent {
           },
         }),
       }).then(({ errors }) => {
-        if (errors) return;
+        if (errors) return
 
         this.setState({
           page: page + 1,
           loadingMore: false,
-        });
-      });
-    });
+        })
+      })
+    })
   }
 
   render() {
-    const { per, loadingMore } = this.state;
-    const { block } = this.props;
+    const { per, loadingMore } = this.state
+    const { block } = this.props
 
     return (
       <Query
@@ -66,32 +66,27 @@ export default class BlockLightboxMetadataFold extends PureComponent {
         variables={{ id: block.id, page: 1, per }}
         ssr={false}
       >
-        {({
-          loading, error, data, fetchMore,
-        }) => {
+        {({ loading, error, data, fetchMore }) => {
           if (error) {
-            return (
-              <ErrorAlert>
-                {error.message}
-              </ErrorAlert>
-            );
+            return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
-          const fullBlock = { ...block, ...data.block };
+          const fullBlock = { ...block, ...data.block }
 
           return (
             <React.Fragment>
               <Header mt={8}>
-                {fullBlock.counts
-                  ? (
-                    <Count
-                      amount={fullBlock.counts.private_channels
-                        + fullBlock.counts.public_channels}
-                      label="Connection"
-                    />
-                  )
-                  : 'Connections'
-                }
+                {fullBlock.counts ? (
+                  <Count
+                    amount={
+                      fullBlock.counts.private_channels +
+                      fullBlock.counts.public_channels
+                    }
+                    label="Connection"
+                  />
+                ) : (
+                  'Connections'
+                )}
               </Header>
 
               <BlockLightboxConnections
@@ -102,13 +97,17 @@ export default class BlockLightboxMetadataFold extends PureComponent {
                 mt={4}
               />
 
-              {fullBlock.can.comment &&
+              {fullBlock.can.comment && (
                 <React.Fragment>
                   <Header mt={8}>
-                    {fullBlock.counts
-                      ? <Count amount={fullBlock.counts.comments} label="Comment" />
-                      : 'Comment'
-                    }
+                    {fullBlock.counts ? (
+                      <Count
+                        amount={fullBlock.counts.comments}
+                        label="Comment"
+                      />
+                    ) : (
+                      'Comment'
+                    )}
                   </Header>
 
                   <BlockLightboxComments
@@ -117,11 +116,11 @@ export default class BlockLightboxMetadataFold extends PureComponent {
                     mt={4}
                   />
                 </React.Fragment>
-              }
+              )}
             </React.Fragment>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

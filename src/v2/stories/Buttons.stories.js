@@ -1,13 +1,13 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import theme from 'v2/styles/theme';
+import theme from 'v2/styles/theme'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import States from 'v2/stories/__components__/States';
+import Specimen from 'v2/stories/__components__/Specimen'
+import States from 'v2/stories/__components__/States'
 
-import GenericButton from 'v2/components/UI/GenericButton';
-import { DividerButton, FilledButton } from 'v2/components/UI/Buttons';
+import GenericButton from 'v2/components/UI/GenericButton'
+import { DividerButton, FilledButton } from 'v2/components/UI/Buttons'
 
 storiesOf('Button', module)
   .add('GenericButton', () => (
@@ -128,4 +128,4 @@ storiesOf('Button', module)
         </States>
       ))}
     </Specimen>
-  ));
+  ))

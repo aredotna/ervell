@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 import {
   display,
   space,
@@ -15,16 +15,16 @@ import {
   themeGet,
   alignItems,
   justifyContent,
-} from 'styled-system';
+} from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 import {
   antialiased,
   neutralMarginsY,
   hyphenate,
   breakWord,
   overflowEllipsis,
-} from 'v2/styles/mixins';
+} from 'v2/styles/mixins'
 
 export const baseMixin = css`
   ${preset(fontFamily, { font: 'sans' })}
@@ -32,7 +32,7 @@ export const baseMixin = css`
   ${preset(lineHeight, { lineHeight: 1 })}
   ${preset(textColor, { color: 'gray.base' })}
   ${antialiased}
-`;
+`
 
 export const mixin = css`
   box-sizing: border-box;
@@ -123,14 +123,14 @@ export const mixin = css`
     list-style: disc;
     margin-left: ${props => props.theme.space[5]};
   }
-`;
+`
 
 const Text = styled.div`
   ${mixin}
-`;
+`
 
 Text.defaultProps = {
   neutralMarginsY: true,
-};
+}
 
-export default Text;
+export default Text

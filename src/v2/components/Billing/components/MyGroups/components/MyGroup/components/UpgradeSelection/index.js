@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import upgradeSelectionFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/fragments/upgradeSelection';
-import userSelectorFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
+import upgradeSelectionFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/fragments/upgradeSelection'
+import userSelectorFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import RadioOptions from 'v2/components/UI/RadioOptions';
-import UpgradeCTA from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/components/UpgradeCTA';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import RadioOptions from 'v2/components/UI/RadioOptions'
+import UpgradeCTA from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/components/UpgradeCTA'
 
 const OptionLabel = styled(Text).attrs({
   f: 4,
@@ -19,16 +19,18 @@ const OptionLabel = styled(Text).attrs({
   display: flex;
   justify-content: space-between;
 
-  ${props => props.selected && `
+  ${props =>
+    props.selected &&
+    `
     color: ${props.theme.colors.gray.bold};
   `}
-`;
+`
 
 const Option = styled(Box)`
   &:hover ${OptionLabel} {
     color: black;
   }
-`;
+`
 
 const OptionDescription = styled(Text).attrs({
   f: 2,
@@ -40,12 +42,13 @@ const OptionDescription = styled(Text).attrs({
   > span:first-child {
     max-width: 75%;
   }
-`;
+`
 
 export default class UpgradeSelection extends PureComponent {
   static propTypes = {
     group: propType(upgradeSelectionFragment).isRequired,
-    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment)).isRequired,
+    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment))
+      .isRequired,
     onSelect: PropTypes.func.isRequired,
     onAddUser: PropTypes.func.isRequired,
     onRemoveUser: PropTypes.func.isRequired,
@@ -60,7 +63,7 @@ export default class UpgradeSelection extends PureComponent {
       onSelect,
       onAddUser,
       onRemoveUser,
-    } = this.props;
+    } = this.props
 
     return (
       <RadioOptions value={selectedPlan} onSelect={onSelect}>
@@ -100,20 +103,18 @@ export default class UpgradeSelection extends PureComponent {
 
                   <OptionDescription>
                     <span>
-                      Selected members can upload unlimited private blocks,{' '}
-                      hide from search engines, and get early access to{' '}
-                      new products and features.
+                      Selected members can upload unlimited private blocks, hide
+                      from search engines, and get early access to new products
+                      and features.
                     </span>
 
-                    <span>
-                      $45 billed yearly
-                    </span>
+                    <span>$45 billed yearly</span>
                   </OptionDescription>
                 </Option>
               )}
             </RadioOptions.Option>
 
-            {selectedValue === 'yearly' &&
+            {selectedValue === 'yearly' && (
               <UpgradeCTA
                 my={6}
                 term="year"
@@ -122,7 +123,7 @@ export default class UpgradeSelection extends PureComponent {
                 onAddUser={onAddUser}
                 onRemoveUser={onRemoveUser}
               />
-            }
+            )}
 
             <RadioOptions.Option
               selectedValue={selectedValue}
@@ -138,16 +139,16 @@ export default class UpgradeSelection extends PureComponent {
 
                   <OptionDescription>
                     <span>
-                      Selected members can upload unlimited private blocks,{' '}
-                      hide from search engines, and get early access to{' '}
-                      new products and features.
+                      Selected members can upload unlimited private blocks, hide
+                      from search engines, and get early access to new products
+                      and features.
                     </span>
                   </OptionDescription>
                 </Option>
               )}
             </RadioOptions.Option>
 
-            {selectedValue === 'monthly' &&
+            {selectedValue === 'monthly' && (
               <UpgradeCTA
                 my={6}
                 term="month"
@@ -156,10 +157,10 @@ export default class UpgradeSelection extends PureComponent {
                 onAddUser={onAddUser}
                 onRemoveUser={onRemoveUser}
               />
-            }
+            )}
           </div>
         )}
       </RadioOptions>
-    );
+    )
   }
 }

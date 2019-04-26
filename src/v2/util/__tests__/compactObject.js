@@ -1,4 +1,4 @@
-import compactObject, { isBlank } from 'v2/util/compactObject';
+import compactObject, { isBlank } from 'v2/util/compactObject'
 
 describe('compactObject', () => {
   it('removes null values from the object', () => {
@@ -19,8 +19,8 @@ describe('compactObject', () => {
       e: 0,
       f: '',
       g: undefined,
-    });
-  });
+    })
+  })
 
   it('accepts a function to tailor what it checks for', () => {
     expect(
@@ -42,6 +42,6 @@ describe('compactObject', () => {
       d: 1,
       e: 0,
       f: '',
-    });
-  });
-});
+    })
+  })
+})

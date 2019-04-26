@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Modal from 'v2/components/UI/Modal/Portal';
-import NewChannelForm from 'v2/components/NewChannelForm';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Modal from 'v2/components/UI/Modal/Portal'
+import NewChannelForm from 'v2/components/NewChannelForm'
 
 const Button = styled(Box)`
   display: flex;
@@ -17,7 +17,7 @@ const Button = styled(Box)`
   &:hover {
     opacity: 0.5;
   }
-`;
+`
 
 const PlusSign = styled(Box)`
   position: relative;
@@ -39,46 +39,47 @@ const PlusSign = styled(Box)`
     transform: translateY(-50%) rotate(90deg);
   }
 }
-`;
+`
 
 export default class NewChannelButton extends PureComponent {
   state = {
     mode: 'resting',
   }
 
-  openModal = (e) => {
-    e.preventDefault();
-    this.setState({ mode: 'modal' });
+  openModal = e => {
+    e.preventDefault()
+    this.setState({ mode: 'modal' })
   }
 
-  closeModal = (e) => {
-    if (e) e.preventDefault();
-    this.setState({ mode: 'resting' });
+  closeModal = e => {
+    if (e) e.preventDefault()
+    this.setState({ mode: 'resting' })
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode } = this.state
 
     return (
       <React.Fragment>
-        <Button onClick={this.openModal} role="button" tabIndex={0} {...this.props}>
-          <PlusSign
-            width="10px"
-            height="10px"
-            mr={[0, '0.5em']}
-          />
+        <Button
+          onClick={this.openModal}
+          role="button"
+          tabIndex={0}
+          {...this.props}
+        >
+          <PlusSign width="10px" height="10px" mr={[0, '0.5em']} />
 
           <Text f={3} fontWeight="bold" display={['none', 'block']}>
             New channel
           </Text>
         </Button>
 
-        {mode === 'modal' &&
+        {mode === 'modal' && (
           <Modal onClose={this.closeModal}>
             <NewChannelForm onClose={this.closeModal} />
           </Modal>
-        }
+        )}
       </React.Fragment>
-    );
+    )
   }
 }

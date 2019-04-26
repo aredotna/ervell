@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 const Container = styled(Box).attrs({
   display: 'flex',
@@ -18,7 +18,7 @@ const Container = styled(Box).attrs({
     max-width: 100%;
     max-height: 100%;
   }
-`;
+`
 
 class Img extends PureComponent {
   static propTypes = {
@@ -31,14 +31,14 @@ class Img extends PureComponent {
   }
 
   render() {
-    const { src, alt } = this.props;
+    const { src, alt } = this.props
 
     return (
       <Container>
         <img src={src} alt={alt} />
       </Container>
-    );
+    )
   }
 }
 
-export default Img;
+export default Img

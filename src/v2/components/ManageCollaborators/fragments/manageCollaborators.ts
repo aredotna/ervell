@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
-import collaboratorsListFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorsList';
+import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember'
+import collaboratorsListFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorsList'
 
 export default gql`
   fragment ManageCollaborators on Channel {
@@ -29,4 +29,4 @@ export default gql`
   }
   ${managedMemberFragment}
   ${collaboratorsListFragment}
-`;
+`

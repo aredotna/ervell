@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { graphql } from 'react-apollo'
 
-import clearNotificationsMutation from 'v2/components/TopBar/components/NotificationCount/mutations/clearNotifications';
+import clearNotificationsMutation from 'v2/components/TopBar/components/NotificationCount/mutations/clearNotifications'
 
-import Box from 'v2/components/UI/Box';
-import { baseMixin as baseTextMixin } from 'v2/components/UI/Text';
-import Overlay from 'v2/components/UI/Overlay';
-import NotificationsDropdown from 'v2/components/NotificationsDropdown';
+import Box from 'v2/components/UI/Box'
+import { baseMixin as baseTextMixin } from 'v2/components/UI/Text'
+import Overlay from 'v2/components/UI/Overlay'
+import NotificationsDropdown from 'v2/components/NotificationsDropdown'
 
 const Container = styled(Box)`
   display: flex;
@@ -19,7 +19,7 @@ const Container = styled(Box)`
   &:hover {
     opacity: 0.5;
   }
-`;
+`
 
 const Badge = styled(Box).attrs({
   bg: 'gray.regular',
@@ -33,10 +33,12 @@ const Badge = styled(Box).attrs({
   border-radius: ${props => props.theme.radii.subtle};
   font-weight: bold;
 
-  ${props => props.amount > 0 && `
+  ${props =>
+    props.amount > 0 &&
+    `
     background-color: ${props.theme.colors.state.alert};
   `}
-`;
+`
 
 class NotificationCount extends PureComponent {
   static propTypes = {
@@ -52,41 +54,45 @@ class NotificationCount extends PureComponent {
     mode: 'resting',
   }
 
-  containerRef = React.createRef();
+  containerRef = React.createRef()
 
   handleClick = () => {
-    if (this.state.mode === 'closing') return;
-    this.setState({ mode: 'open' });
+    if (this.state.mode === 'closing') return
+    this.setState({ mode: 'open' })
   }
 
   handleClose = () => {
-    this.setState({ mode: 'closing' });
+    this.setState({ mode: 'closing' })
 
     // TODO: Fix this hack?
     setTimeout(() => {
-      this.setState({ mode: 'resting' });
-    }, 100);
+      this.setState({ mode: 'resting' })
+    }, 100)
   }
 
   markAsRead = () => {
-    const { clearNotifications } = this.props;
+    const { clearNotifications } = this.props
 
-    return clearNotifications();
+    return clearNotifications()
   }
 
   render() {
-    const { count } = this.props;
-    const { mode } = this.state;
+    const { count } = this.props
+    const { mode } = this.state
 
     return (
       <React.Fragment>
-        <Container {...this.props} ref={this.containerRef} onClick={this.handleClick} role="button" tabIndex={0}>
-          <Badge amount={count}>
-            {count}
-          </Badge>
+        <Container
+          {...this.props}
+          ref={this.containerRef}
+          onClick={this.handleClick}
+          role="button"
+          tabIndex={0}
+        >
+          <Badge amount={count}>{count}</Badge>
         </Container>
 
-        {mode === 'open' &&
+        {mode === 'open' && (
           <Overlay
             onClose={this.handleClose}
             targetEl={() => this.containerRef.current}
@@ -100,12 +106,12 @@ class NotificationCount extends PureComponent {
           >
             <NotificationsDropdown onCompleted={this.markAsRead} />
           </Overlay>
-        }
+        )}
       </React.Fragment>
-    );
+    )
   }
 }
 
 export default graphql(clearNotificationsMutation, {
   name: 'clearNotifications',
-})(NotificationCount);
+})(NotificationCount)

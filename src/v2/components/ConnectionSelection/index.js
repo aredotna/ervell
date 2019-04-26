@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { compose, graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { compose, graphql } from 'react-apollo'
 
-import ConnectionSelectionList from 'v2/components/ConnectionSelectionList';
+import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
 
-import createConnectionMutation from 'v2/components/ConnectionSelection/mutations/createConnection';
-import removeConnectionMutation from 'v2/components/ConnectionSelection/mutations/removeConnection';
+import createConnectionMutation from 'v2/components/ConnectionSelection/mutations/createConnection'
+import removeConnectionMutation from 'v2/components/ConnectionSelection/mutations/removeConnection'
 
 class ConnectionSelection extends Component {
   static propTypes = {
@@ -14,10 +14,12 @@ class ConnectionSelection extends Component {
     createConnection: PropTypes.func.isRequired,
     removeConnection: PropTypes.func.isRequired,
     isOutlined: PropTypes.bool,
-    refetchQueries: PropTypes.arrayOf(PropTypes.shape({
-      query: PropTypes.object.isRequired,
-      variables: PropTypes.object,
-    })),
+    refetchQueries: PropTypes.arrayOf(
+      PropTypes.shape({
+        query: PropTypes.object.isRequired,
+        variables: PropTypes.object,
+      })
+    ),
   }
 
   static defaultProps = {
@@ -32,7 +34,7 @@ class ConnectionSelection extends Component {
       createConnection,
       removeConnection,
       refetchQueries,
-    } = this.props;
+    } = this.props
 
     if (isSelected) {
       return createConnection({
@@ -42,7 +44,7 @@ class ConnectionSelection extends Component {
           connectable_id: id,
           connectable_type: type,
         },
-      });
+      })
     }
 
     return removeConnection({
@@ -52,11 +54,11 @@ class ConnectionSelection extends Component {
         connectable_id: id,
         connectable_type: type,
       },
-    });
+    })
   }
 
   render() {
-    const { id, type, ...rest } = this.props;
+    const { id, type, ...rest } = this.props
 
     return (
       <ConnectionSelectionList
@@ -65,11 +67,11 @@ class ConnectionSelection extends Component {
         onConnectionSelection={this.handleConnectionSelection}
         {...rest}
       />
-    );
+    )
   }
 }
 
 export default compose(
   graphql(createConnectionMutation, { name: 'createConnection' }),
-  graphql(removeConnectionMutation, { name: 'removeConnection' }),
-)(ConnectionSelection);
+  graphql(removeConnectionMutation, { name: 'removeConnection' })
+)(ConnectionSelection)

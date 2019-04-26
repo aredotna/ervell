@@ -1,11 +1,11 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Box from 'v2/components/UI/Box';
-import StripeContext from 'v2/components/StripeContext';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Box from 'v2/components/UI/Box'
+import StripeContext from 'v2/components/StripeContext'
 
-import MyCreditCard from 'v2/components/MyCreditCard';
+import MyCreditCard from 'v2/components/MyCreditCard'
 
 storiesOf('MyCreditCard', module).add('MyCreditCard', () => (
   <Specimen>
@@ -15,4 +15,4 @@ storiesOf('MyCreditCard', module).add('MyCreditCard', () => (
       </StripeContext>
     </Box>
   </Specimen>
-));
+))

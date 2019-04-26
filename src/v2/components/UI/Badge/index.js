@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { space, textColor, borderColor, fontFamily, fontSize } from 'styled-system';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import {
+  space,
+  textColor,
+  borderColor,
+  fontFamily,
+  fontSize,
+} from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
-import { antialiased, fractional } from 'v2/styles/mixins';
+import { preset } from 'v2/styles/functions'
+import { antialiased, fractional } from 'v2/styles/mixins'
 
-import Icons, { ICON_NAMES } from 'v2/components/UI/Icons';
+import Icons, { ICON_NAMES } from 'v2/components/UI/Icons'
 
 const Outline = styled.div`
   box-sizing: border-box;
@@ -25,12 +31,12 @@ const Outline = styled.div`
   ${preset(borderColor, { borderColor: 'inherit' })}
   ${antialiased}
   ${fractional}
-`;
+`
 
 const Inner = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 export default class Badge extends Component {
   static propTypes = {
@@ -45,20 +51,16 @@ export default class Badge extends Component {
   }
 
   render() {
-    const {
-      children, icon, color, ...rest
-    } = this.props;
+    const { children, icon, color, ...rest } = this.props
 
     return (
       <Outline color={color} {...rest}>
         <Inner>
-          {icon &&
-            <Icons mr={2} name={icon} size={5} color={color} />
-          }
+          {icon && <Icons mr={2} name={icon} size={5} color={color} />}
 
           <span>{children}</span>
         </Inner>
       </Outline>
-    );
+    )
   }
 }

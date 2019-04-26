@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import metadataFragment from 'v2/components/Cell/components/Konnectable/components/Metadata/fragments/metadata';
+import metadataFragment from 'v2/components/Cell/components/Konnectable/components/Metadata/fragments/metadata'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Truncate from 'v2/components/UI/Truncate';
-import MetadataFileExtension from 'v2/components/Cell/components/Konnectable/components/Metadata/components/MetadataFileExtension';
-import MetadataPlay from 'v2/components/Cell/components/Konnectable/components/Metadata/components/MetadataPlay';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Truncate from 'v2/components/UI/Truncate'
+import MetadataFileExtension from 'v2/components/Cell/components/Konnectable/components/Metadata/components/MetadataFileExtension'
+import MetadataPlay from 'v2/components/Cell/components/Konnectable/components/Metadata/components/MetadataPlay'
 
 export default class Metadata extends PureComponent {
   static propTypes = {
@@ -32,50 +32,47 @@ export default class Metadata extends PureComponent {
         file_extension,
       },
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <Box pt={2} mt={6} mb={4} px={5} {...rest}>
         <Text f={1} fontWeight="bold" textAlign="center" color="gray.medium">
-          {mode === 'resting' &&
+          {mode === 'resting' && (
             <div>
-              <Truncate length={40}>
-                {title}
-              </Truncate>
+              <Truncate length={40}>{title}</Truncate>
 
-              {__typename === 'Attachment' &&
+              {__typename === 'Attachment' && (
                 <MetadataFileExtension ext={file_extension} />
-              }
+              )}
 
-              {__typename === 'Embed' &&
-                <MetadataPlay />
-              }
+              {__typename === 'Embed' && <MetadataPlay />}
             </div>
-          }
+          )}
 
-          {mode === 'hover' &&
+          {mode === 'hover' && (
             <div>
-              {connection &&
+              {connection && (
                 <div>
-                  {user.id === connection.user.id
-                    ? <div>Added by {user.name}</div>
-                    : <div>Connected by {connection.user.name}</div>
-                  }
+                  {user.id === connection.user.id ? (
+                    <div>Added by {user.name}</div>
+                  ) : (
+                    <div>Connected by {connection.user.name}</div>
+                  )}
                   {connection.created_at}
                 </div>
-              }
+              )}
 
-              {!connection &&
+              {!connection && (
                 <div>
                   Added by {user.name}
                   <br />
                   {updated_at}
                 </div>
-              }
+              )}
             </div>
-          }
+          )}
         </Text>
       </Box>
-    );
+    )
   }
 }
