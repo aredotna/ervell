@@ -94,15 +94,18 @@ const Content = styled(Box)`
   }
 `
 
-interface AddBlockProps {
+interface Props {
   channel_id: string | number
+  onAddBlock: (props: any) => any
+}
+
+interface AddBlockProps extends Props {
   createBlock: (props: any) => Promise<any>
-  onAddBlock: (props: any) => void
 }
 
 class AddBlock extends PureComponent<AddBlockProps> {
   static defaultProps = {
-    onAddBlock: _props => {},
+    onAddBlock: () => {},
   }
 
   state = {
@@ -171,6 +174,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
 
     return (
       <DropZoneUploader
+        accept="image/*" // TODO
         onUpload={this.handleUpload}
         onComplete={this.finishUpload}
         key={uploaderKey}
@@ -227,6 +231,6 @@ class AddBlock extends PureComponent<AddBlockProps> {
   }
 }
 
-export default graphql<AddBlockProps>(createBlockMutation, {
+export default graphql<Props>(createBlockMutation, {
   name: 'createBlock',
 })(AddBlock)

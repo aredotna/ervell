@@ -32,6 +32,7 @@ const Container = styled.a`
   width: ${x => x.theme.constantValues.blockWidth};
   height: ${x => x.theme.constantValues.blockWidth};
   margin-bottom: ${x => x.theme.space[8]};
+  background-color: white;
 `
 
 const Comments = styled(Typography).attrs({

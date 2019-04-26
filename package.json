@@ -152,6 +152,7 @@
     "react-router-dom": "^4.2.2",
     "react-safe-universal-inputs": "^3.0.1",
     "react-slick": "^0.19.0",
+    "react-sortable-hoc": "^1.9.1",
     "react-stripe-elements": "^2.0.1",
     "react-transition-group": "^1.2.0",
     "react-waypoint": "^8.1.0",
