@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import blockLightboxImageFragment from 'v2/components/BlockLightbox/components/BlockLightboxImage/fragments/blockLightboxImage';
+import blockLightboxImageFragment from 'v2/components/BlockLightbox/components/BlockLightboxImage/fragments/blockLightboxImage'
 
-import Text from 'v2/components/UI/Text';
-import Link from 'v2/components/UI/Link';
+import Text from 'v2/components/UI/Text'
+import Link from 'v2/components/UI/Link'
 
 const Image = styled.img`
   display: block;
   max-width: 100%;
   max-height: 100%;
   object-fit: scale-down;
-`;
+`
 
 export default class BlockLightboxImage extends PureComponent {
   static propTypes = {
@@ -22,7 +22,7 @@ export default class BlockLightboxImage extends PureComponent {
   }
 
   render() {
-    const { block, layout } = this.props;
+    const { block, layout } = this.props
 
     return (
       <Link
@@ -37,18 +37,21 @@ export default class BlockLightboxImage extends PureComponent {
         rel="nofollow noopener"
         p={6}
       >
-        <Image
-          src={block.image_url}
-          alt={block.title}
-          title={block.title}
-        />
+        <Image src={block.image_url} alt={block.title} title={block.title} />
 
-        {layout === 'FULLSCREEN' && block.title &&
-          <Text mt={6} f={5} lineHeight={2} color="gray.hint" fontWeight="bold" textAlign="center">
+        {layout === 'FULLSCREEN' && block.title && (
+          <Text
+            mt={6}
+            f={5}
+            lineHeight={2}
+            color="gray.hint"
+            fontWeight="bold"
+            textAlign="center"
+          >
             {block.title}
           </Text>
-        }
+        )}
       </Link>
-    );
+    )
   }
 }

@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-import constants from 'v2/styles/constants';
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton';
+import constants from 'v2/styles/constants'
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 
-import WithLoginStatus from 'v2/hocs/WithLoginStatus';
+import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
 const Table = styled(Box).attrs({ mb: 7 })`
   display: flex;
@@ -18,7 +18,7 @@ const Table = styled(Box).attrs({ mb: 7 })`
     align-items: center;
     flex-direction: column;
   `}
-`;
+`
 
 const Cell = styled(Box).attrs({
   py: [8, 6, 6],
@@ -38,30 +38,30 @@ const Cell = styled(Box).attrs({
     border-right: none;
     border-bottom: 2px solid ${x => x.theme.colors.gray.light};
   `}
-`;
+`
 
 const PlanTitle = styled(Text).attrs({
   f: 2,
   fontWeight: 'bold',
-})``;
+})``
 
 const PlanPrice = styled(Text).attrs({
   f: 7,
   fontWeight: 'bold',
   color: 'black',
   pt: 4,
-})``;
+})``
 
 const PlanSubPrice = styled(Text).attrs({
   f: 4,
   color: 'gray.base',
-})``;
+})``
 
 const CTAButton = styled(Button).attrs({
   f: 5,
   flex: 1,
   mt: 9,
-})``;
+})``
 
 const PremiumButton = styled(CTAButton)`
   background-color: ${x => x.theme.colors.state.premium};
@@ -73,7 +73,7 @@ const PremiumButton = styled(CTAButton)`
     background-color: white;
     color: ${x => x.theme.colors.state.premium};
   }
-`;
+`
 
 const GroupButton = styled(CTAButton)`
   background-color: ${x => x.theme.colors.gray.base};
@@ -85,29 +85,29 @@ const GroupButton = styled(CTAButton)`
     background-color: white;
     color: ${x => x.theme.colors.gray.base};
   }
-`;
+`
 
 const Features = styled(Box).attrs({
   mt: 7,
-})``;
+})``
 
 const Feature = styled(Text).attrs({
   f: 4,
   py: 3,
   color: 'black',
-})``;
+})``
 
 class PricingTable extends PureComponent {
   static propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
-  };
+  }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn } = this.props
 
-    const signUpLink = isLoggedIn ? '/' : '/sign_up';
-    const upgradeLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium';
-    const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up';
+    const signUpLink = isLoggedIn ? '/' : '/sign_up'
+    const upgradeLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium'
+    const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up'
 
     return (
       <Table>
@@ -149,8 +149,8 @@ class PricingTable extends PureComponent {
           </Features>
         </Cell>
       </Table>
-    );
+    )
   }
 }
 
-export default WithLoginStatus(PricingTable);
+export default WithLoginStatus(PricingTable)

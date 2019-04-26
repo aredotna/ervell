@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import profileGroupsFragment from 'v2/components/ProfileGroups/fragments/profileGroups';
+import profileGroupsFragment from 'v2/components/ProfileGroups/fragments/profileGroups'
 
 export default gql`
   query ProfileGroups($id: ID!, $page: Int, $per: Int) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${profileGroupsFragment}
-`;
+`

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { width, height, maxHeight, maxWidth } from 'styled-system';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { width, height, maxHeight, maxWidth } from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
 const Dialog = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const Dialog = styled.div`
     border-radius: 0;
     padding: 0;
   `}
-`;
+`
 
 const Content = styled.div`
   box-sizing: border-box;
@@ -38,16 +38,16 @@ const Content = styled.div`
   -webkit-overflow-scrolling: touch;
   background-color: white;
   border: 1px solid ${x => x.theme.colors.gray.regular};
-`;
+`
 
 const ModalDialog = ({ children, ...rest }) => (
   <Dialog {...rest}>
     <Content>{children}</Content>
   </Dialog>
-);
+)
 
 ModalDialog.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default ModalDialog;
+export default ModalDialog

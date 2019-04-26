@@ -1,6 +1,6 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { space } from 'styled-system';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { space } from 'styled-system'
 
 const mixin = css`
   display: flex;
@@ -21,21 +21,20 @@ const mixin = css`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
-const e = React.createElement;
+const e = React.createElement
 
-const Avatar = styled(({
-  tag, children, circle, ...rest
-}) =>
-  e(tag, rest, children))`
-    ${mixin}
-  `;
+const Avatar = styled(({ tag, children, circle, ...rest }) =>
+  e(tag, rest, children)
+)`
+  ${mixin}
+`
 
 Avatar.defaultProps = {
   tag: 'a',
   size: 40,
   circle: false,
-};
+}
 
-export default Avatar;
+export default Avatar

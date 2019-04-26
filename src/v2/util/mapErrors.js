@@ -1,13 +1,13 @@
-import { compact } from 'underscore';
+import { compact } from 'underscore'
 
 const MEMO = {
   errorMessage: null,
   attributeErrors: {},
-};
+}
 
 export default (err = {}) => {
   if (!err.graphQLErrors || err.graphQLErrors.length === 0) {
-    return { ...MEMO, errorMessage: err.message };
+    return { ...MEMO, errorMessage: err.message }
   }
 
   return err.graphQLErrors.reduce((memo, gqlErr = {}) => {
@@ -20,7 +20,7 @@ export default (err = {}) => {
           ...memo.attributeErrors,
           [gqlErr.extensions.attribute]: gqlErr.message,
         },
-      };
+      }
     }
 
     // Otherwise return a general errorMessage,
@@ -28,8 +28,8 @@ export default (err = {}) => {
     const errorMessage = compact([memo.errorMessage, gqlErr.message])
       // We probably have periods but we might not; add them and dedup
       .join('. ')
-      .replace('..', '.');
+      .replace('..', '.')
 
-    return { ...memo, errorMessage };
-  }, MEMO);
-};
+    return { ...memo, errorMessage }
+  }, MEMO)
+}

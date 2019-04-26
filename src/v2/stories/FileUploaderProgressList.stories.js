@@ -1,9 +1,9 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
+import Specimen from 'v2/stories/__components__/Specimen'
 
-import FileUploaderProgressList from 'v2/components/UI/FileUploaderProgressList';
+import FileUploaderProgressList from 'v2/components/UI/FileUploaderProgressList'
 
 const files = [
   {
@@ -15,10 +15,10 @@ const files = [
     file: { path: 'barbaz.png', size: 22959 },
     progress: 87,
   },
-];
+]
 
 storiesOf('FileUploaderProgressList', module).add('default', () => (
   <Specimen>
     <FileUploaderProgressList files={files} />
   </Specimen>
-));
+))

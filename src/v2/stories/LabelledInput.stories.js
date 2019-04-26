@@ -1,11 +1,11 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Box from 'v2/components/UI/Box';
-import ModalDialog from 'v2/components/UI/ModalDialog';
-import Text from 'v2/components/UI/Text';
-import { LabelledInput, Label, Input, Textarea } from 'v2/components/UI/Inputs';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Box from 'v2/components/UI/Box'
+import ModalDialog from 'v2/components/UI/ModalDialog'
+import Text from 'v2/components/UI/Text'
+import { LabelledInput, Label, Input, Textarea } from 'v2/components/UI/Inputs'
 
 storiesOf('LabelledInput', module)
   .add('LabelledInput', () => (
@@ -72,4 +72,4 @@ storiesOf('LabelledInput', module)
         </ModalDialog>
       </Box>
     </Specimen>
-  ));
+  ))

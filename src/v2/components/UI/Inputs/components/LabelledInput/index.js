@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { space, alignItems } from 'styled-system';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { space, alignItems } from 'styled-system'
 
-import constants from 'v2/styles/constants';
-import { preset } from 'v2/styles/functions';
+import constants from 'v2/styles/constants'
+import { preset } from 'v2/styles/functions'
 
-import provideChildrenWithProps from 'v2/util/provideChildrenWithProps';
+import provideChildrenWithProps from 'v2/util/provideChildrenWithProps'
 
 const Container = styled.div`
   display: flex;
@@ -37,24 +37,24 @@ const Container = styled.div`
       padding: 0 0 ${x => x.theme.space[3]} 0;
     }
   `}
-`;
+`
 
 export default class LabelledInput extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-  };
+  }
 
   render() {
-    const { children, ...rest } = this.props;
+    const { children, ...rest } = this.props
 
     const label = provideChildrenWithProps(children[0], {
       pt: 5,
       pr: 7,
       ...children[0].props,
-    });
+    })
 
-    const input = children[1];
+    const input = children[1]
 
-    return <Container {...rest}>{[label, input]}</Container>;
+    return <Container {...rest}>{[label, input]}</Container>
   }
 }

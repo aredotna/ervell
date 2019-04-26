@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
-import Pocket from 'v2/components/UI/Pocket';
-import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent';
+import Pocket from 'v2/components/UI/Pocket'
+import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 class ExploreMetadataSort extends Component {
   static propTypes = {
@@ -13,11 +13,12 @@ class ExploreMetadataSort extends Component {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   }
 
-  isSortActive = sort => () =>
-    this.props.sort === sort;
+  isSortActive = sort => () => this.props.sort === sort
 
   render() {
-    const { location: { pathname } } = this.props;
+    const {
+      location: { pathname },
+    } = this.props
 
     return (
       <Pocket title="Sort">
@@ -48,8 +49,8 @@ class ExploreMetadataSort extends Component {
           Random
         </CookieLinkUnlessCurrent>
       </Pocket>
-    );
+    )
   }
 }
 
-export default withRouter(ExploreMetadataSort);
+export default withRouter(ExploreMetadataSort)

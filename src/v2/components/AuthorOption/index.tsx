@@ -1,15 +1,15 @@
-import React from 'react';
-import Box from 'v2/components/UI/Box';
+import React from 'react'
+import Box from 'v2/components/UI/Box'
 
-import MemberAvatar from 'v2/components/MemberAvatar';
-import Badge from 'v2/components/UI/Badge';
+import MemberAvatar from 'v2/components/MemberAvatar'
+import Badge from 'v2/components/UI/Badge'
 
 interface Props {
   member: {
-    name: string;
-    __typename: string;
-    visibility: string;
-  };
+    name: string
+    __typename: string
+    visibility: string
+  }
 }
 
 const AuthorOption: React.FC<Props> = ({ member }) => (
@@ -30,6 +30,6 @@ const AuthorOption: React.FC<Props> = ({ member }) => (
       )}
     </span>
   </Box>
-);
+)
 
-export default AuthorOption;
+export default AuthorOption

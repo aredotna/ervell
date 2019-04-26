@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment ChannelPreviewBlock on Konnectable {
@@ -38,4 +38,4 @@ export default gql`
       }
     }
   }
-`;
+`

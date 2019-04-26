@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import collaboratorsListFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorsList';
+import collaboratorsListFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorsList'
 
 export default gql`
   query ChannelCollaboratorsQuery($channel_id: ID!) {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${collaboratorsListFragment}
-`;
+`

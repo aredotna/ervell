@@ -1,22 +1,22 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Query } from 'react-apollo'
 
-import channelPreviewQuery from 'v2/components/Cell/components/Konnectable/components/ChannelPreview/queries/channelPreview';
+import channelPreviewQuery from 'v2/components/Cell/components/Konnectable/components/ChannelPreview/queries/channelPreview'
 
-import Box from 'v2/components/UI/Box';
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import DividerButton from 'v2/components/UI/Buttons/components/DividerButton';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import ChannelPreviewBlocks from 'v2/components/Cell/components/Konnectable/components/ChannelPreview/components/ChannelPreviewBlocks';
+import Box from 'v2/components/UI/Box'
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import ChannelPreviewBlocks from 'v2/components/Cell/components/Konnectable/components/ChannelPreview/components/ChannelPreviewBlocks'
 
 const Container = styled(Box)`
   width: 100%;
-  height: 100%;;
+  height: 100%;
   display: flex;
   flex-direction: column;
-`;
+`
 
 const Preview = styled(Box)`
   display: flex;
@@ -28,7 +28,7 @@ const Preview = styled(Box)`
   &:hover {
     opacity: 0.5;
   }
-`;
+`
 
 export default class ChannelPreview extends PureComponent {
   static propTypes = {
@@ -44,13 +44,7 @@ export default class ChannelPreview extends PureComponent {
   }
 
   render() {
-    const {
-      id,
-      onClose,
-      amount,
-      color,
-      ...rest
-    } = this.props;
+    const { id, onClose, amount, color, ...rest } = this.props
 
     return (
       <Container {...rest}>
@@ -58,22 +52,25 @@ export default class ChannelPreview extends PureComponent {
           <Query query={channelPreviewQuery} variables={{ id, amount }}>
             {({ data, error, loading }) => {
               if (error) {
-                return <ErrorAlert>error.message</ErrorAlert>;
+                return <ErrorAlert>error.message</ErrorAlert>
               }
 
-              const Indicator = () =>
-                <LoadingIndicator mt={6} f={8} color={color} />;
+              const Indicator = () => (
+                <LoadingIndicator mt={6} f={8} color={color} />
+              )
 
-              if (loading) return <Indicator />;
+              if (loading) return <Indicator />
 
-              const { channel: { blocks } } = data;
+              const {
+                channel: { blocks },
+              } = data
 
               return (
                 <ChannelPreviewBlocks
                   blocks={blocks}
                   LoadingIndicator={Indicator}
                 />
-              );
+              )
             }}
           </Query>
         </Preview>
@@ -82,6 +79,6 @@ export default class ChannelPreview extends PureComponent {
           Stop Preview
         </DividerButton>
       </Container>
-    );
+    )
   }
 }

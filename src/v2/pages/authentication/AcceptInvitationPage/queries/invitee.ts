@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import inviteeFragment from 'v2/pages/authentication/AcceptInvitationPage/fragments/invitee';
+import inviteeFragment from 'v2/pages/authentication/AcceptInvitationPage/fragments/invitee'
 
 export default gql`
   query Invitee($invitation_token: String!) {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${inviteeFragment}
-`;
+`

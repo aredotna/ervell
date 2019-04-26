@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import cancelPremiumUserSelectorFragment from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/components/CancelPremiumUserSelector/fragments/cancelPremiumUserSelector';
+import cancelPremiumUserSelectorFragment from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/components/CancelPremiumUserSelector/fragments/cancelPremiumUserSelector'
 
 export default gql`
   mutation CancelPremiumSubscriptions($user_ids: [ID]!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${cancelPremiumUserSelectorFragment}
-`;
+`

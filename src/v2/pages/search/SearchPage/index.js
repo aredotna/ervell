@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout';
-import Constrain from 'v2/components/UI/Constrain';
+import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
+import Constrain from 'v2/components/UI/Constrain'
 
-import SearchMetadata from 'v2/components/SearchMetadata';
-import SearchViews from 'v2/pages/search/SearchPage/components/SearchViews';
-import Title from 'v2/components/UI/Head/components/Title';
-import Head from 'v2/components/UI/Head';
+import SearchMetadata from 'v2/components/SearchMetadata'
+import SearchViews from 'v2/pages/search/SearchPage/components/SearchViews'
+import Title from 'v2/components/UI/Head/components/Title'
+import Head from 'v2/components/UI/Head'
 
-import ErrorBoundary from 'v2/components/UI/ErrorBoundary';
+import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 
 export default class SearchPage extends Component {
   static propTypes = {
@@ -23,14 +23,14 @@ export default class SearchPage extends Component {
       'ATTACHMENT',
       'LINK',
     ]),
-  };
+  }
 
   static defaultProps = {
     block_filter: null,
-  };
+  }
 
   render() {
-    const { view, term, block_filter } = this.props;
+    const { view, term, block_filter } = this.props
 
     return (
       <ErrorBoundary>
@@ -52,6 +52,6 @@ export default class SearchPage extends Component {
           </Constrain>
         </TopBarLayout>
       </ErrorBoundary>
-    );
+    )
   }
 }

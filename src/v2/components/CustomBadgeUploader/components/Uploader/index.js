@@ -1,32 +1,32 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
-import { compose, graphql, withApollo } from 'react-apollo';
-import axios from 'axios';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
+import { compose, graphql, withApollo } from 'react-apollo'
+import axios from 'axios'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-import uploadPolicyQuery from 'v2/components/CustomBadgeUploader/queries/uploadPolicy';
-import customBadgeQuery from 'v2/components/CustomBadgeUploader/queries/customBadge';
+import uploadPolicyQuery from 'v2/components/CustomBadgeUploader/queries/uploadPolicy'
+import customBadgeQuery from 'v2/components/CustomBadgeUploader/queries/customBadge'
 
-import updateCustomBadgeMutation from 'v2/components/CustomBadgeUploader/mutations/updateCustomBadge';
+import updateCustomBadgeMutation from 'v2/components/CustomBadgeUploader/mutations/updateCustomBadge'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import ErrorBoundary from 'v2/components/UI/ErrorBoundary';
-import ArenaMark from 'v2/components/UI/Icons/ArenaMark.svg';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
+import ArenaMark from 'v2/components/UI/Icons/ArenaMark.svg'
 
 const Container = styled(Box).attrs({
   ml: 10,
 })`
   position: relative;
-`;
+`
 
 const Link = styled(Text).attrs({
   f: 4,
   align: 'center',
 })`
   cursor: pointer;
-`;
+`
 
 const Mark = styled.div`
   position: relative;
@@ -35,7 +35,7 @@ const Mark = styled.div`
     width: 1.5em;
     fill: ${x => x.theme.colors.state[x.type]};
   }
-`;
+`
 
 const BadgeContainer = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ const BadgeContainer = styled.div`
     width: 18px; // exact size of badge
     height: 18px; // exact size of badge
   }
-`;
+`
 
 class CustomBadgeUploader extends PureComponent {
   static propTypes = {
@@ -64,56 +64,56 @@ class CustomBadgeUploader extends PureComponent {
     startPolling: PropTypes.func.isRequired,
     stopPolling: PropTypes.func.isRequired,
     me: propType(customBadgeQuery).isRequired,
-  };
+  }
 
   state = {
     mode: 'resting',
     progress: 0,
-  };
+  }
 
   componentWillReceiveProps({ me: { custom_badge: nextCustomBadge } }) {
     const {
       me: { custom_badge: currentCustomBadge },
       stopPolling,
-    } = this.props;
+    } = this.props
 
     if (nextCustomBadge !== currentCustomBadge) {
-      stopPolling();
-      this.setState({ mode: 'resting' });
+      stopPolling()
+      this.setState({ mode: 'resting' })
     }
   }
 
   onAddFile = async e => {
-    e.persist();
+    e.persist()
 
-    const { client, updateCustomBadge, startPolling } = this.props;
+    const { client, updateCustomBadge, startPolling } = this.props
 
     if (e.target.files.length === 0) {
-      this.setState({ mode: 'resting' });
-      return;
+      this.setState({ mode: 'resting' })
+      return
     }
 
-    this.setState({ mode: 'checking' });
+    this.setState({ mode: 'checking' })
 
     const {
       data: {
         me: { id, policy },
       },
-    } = await client.query({ query: uploadPolicyQuery });
+    } = await client.query({ query: uploadPolicyQuery })
 
-    const file = e.target.files[0];
-    const formData = new FormData();
+    const file = e.target.files[0]
+    const formData = new FormData()
 
-    formData.append('Content-Type', file.type);
-    formData.append('key', policy.key);
-    formData.append('AWSAccessKeyId', policy.AWSAccessKeyId);
-    formData.append('acl', policy.acl);
-    formData.append('success_action_status', policy.success_action_status);
-    formData.append('policy', policy.policy);
-    formData.append('signature', policy.signature);
-    formData.append('file', file);
+    formData.append('Content-Type', file.type)
+    formData.append('key', policy.key)
+    formData.append('AWSAccessKeyId', policy.AWSAccessKeyId)
+    formData.append('acl', policy.acl)
+    formData.append('success_action_status', policy.success_action_status)
+    formData.append('policy', policy.policy)
+    formData.append('signature', policy.signature)
+    formData.append('file', file)
 
-    this.setState({ mode: 'uploading' });
+    this.setState({ mode: 'uploading' })
 
     axios
       .post(policy.bucket, formData, {
@@ -121,15 +121,15 @@ class CustomBadgeUploader extends PureComponent {
         onUploadProgress: progressEvent => {
           const progress = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
-          );
-          this.setState({ progress });
+          )
+          this.setState({ progress })
         },
       })
       .then(({ data }) => {
-        const parser = new DOMParser();
-        const parsed = parser.parseFromString(data, 'text/xml');
+        const parser = new DOMParser()
+        const parsed = parser.parseFromString(data, 'text/xml')
         return parsed.getElementsByTagName('Location')[0].childNodes[0]
-          .nodeValue;
+          .nodeValue
       })
       .then(temporaryUrl =>
         updateCustomBadge({
@@ -137,27 +137,27 @@ class CustomBadgeUploader extends PureComponent {
         })
       )
       .then(() => {
-        this.setState({ mode: 'done' });
-        startPolling(500);
+        this.setState({ mode: 'done' })
+        startPolling(500)
       })
       .catch(error => {
-        console.error(error);
-        this.setState({ mode: 'error' });
-      });
-  };
+        console.error(error)
+        this.setState({ mode: 'error' })
+      })
+  }
 
   triggerAddFile = e => {
-    e.preventDefault();
-    this.file.click();
-  };
+    e.preventDefault()
+    this.file.click()
+  }
 
   render() {
-    const { mode, progress } = this.state;
+    const { mode, progress } = this.state
 
-    const { custom_badge, badge } = this.props.me;
+    const { custom_badge, badge } = this.props.me
 
     // eslint-disable-next-line no-console
-    console.log('badge', badge);
+    console.log('badge', badge)
 
     return (
       <ErrorBoundary>
@@ -166,7 +166,7 @@ class CustomBadgeUploader extends PureComponent {
             type="file"
             accept=".jpg,.jpeg,.gif,.png"
             ref={ref => {
-              this.file = ref;
+              this.file = ref
             }}
             style={{ display: 'none' }}
             onChange={this.onAddFile}
@@ -194,10 +194,10 @@ class CustomBadgeUploader extends PureComponent {
           </Link>
         </Container>
       </ErrorBoundary>
-    );
+    )
   }
 }
 
 export default compose(
   graphql(updateCustomBadgeMutation, { name: 'updateCustomBadge' })
-)(withApollo(CustomBadgeUploader));
+)(withApollo(CustomBadgeUploader))

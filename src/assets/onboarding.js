@@ -1,3 +1,3 @@
-import initialize from 'apps/onboarding/client';
+import initialize from 'apps/onboarding/client'
 
-document.addEventListener('DOMContentLoaded', initialize);
+document.addEventListener('DOMContentLoaded', initialize)

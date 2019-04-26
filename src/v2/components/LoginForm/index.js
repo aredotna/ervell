@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import qs from 'qs';
-import { Input as SafeInput } from 'react-safe-universal-inputs';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import qs from 'qs'
+import { Input as SafeInput } from 'react-safe-universal-inputs'
 
-import AuthForm from 'v2/components/AuthForm';
-import { GenericButton as Button } from 'v2/components/UI/GenericButton';
-import { mixin as textMixin } from 'v2/components/UI/Text';
-import { ErrorMessage } from 'v2/components/UI/Inputs';
+import AuthForm from 'v2/components/AuthForm'
+import { GenericButton as Button } from 'v2/components/UI/GenericButton'
+import { mixin as textMixin } from 'v2/components/UI/Text'
+import { ErrorMessage } from 'v2/components/UI/Inputs'
 
-import mixin from 'v2/components/UI/Inputs/mixin';
+import mixin from 'v2/components/UI/Inputs/mixin'
 
-import { track, en } from 'lib/analytics.coffee';
+import { track, en } from 'lib/analytics.coffee'
 
-const { REDIRECT_TO } = require('sharify').data;
+const { REDIRECT_TO } = require('sharify').data
 
 // We need to handle the states between server rendered react
 // and client-rendered react. Firefox was firing the onChange event
@@ -32,11 +32,11 @@ const { REDIRECT_TO } = require('sharify').data;
 // eslint-disable-next-line
 const WrappedSafeInput = ({ hasError: _hasError, ...rest }) => (
   <SafeInput {...rest} />
-);
+)
 
 const Input = styled(WrappedSafeInput)`
   ${mixin}
-`;
+`
 
 const InputWithLink = styled.div.attrs({
   fontSize: 1,
@@ -51,7 +51,7 @@ const InputWithLink = styled.div.attrs({
     right: 1em;
     transform: translateY(-50%);
   }
-`;
+`
 
 export default class LoginForm extends Component {
   state = {
@@ -59,32 +59,32 @@ export default class LoginForm extends Component {
     email: '',
     password: '',
     errorMessage: null,
-  };
+  }
 
   handleEarlyInput = inputNode => {
-    const { name, value } = inputNode;
+    const { name, value } = inputNode
 
     this.setState({
       [name]: value,
-    });
-  };
+    })
+  }
 
   handleInput = name => ({ target: { value } }) =>
     this.setState({
       mode: 'active',
       errorMessage: null,
       [name]: value,
-    });
+    })
 
-  handleEmail = this.handleInput('email');
-  handlePassword = this.handleInput('password');
+  handleEmail = this.handleInput('email')
+  handlePassword = this.handleInput('password')
 
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { email, password } = this.state;
+    const { email, password } = this.state
 
-    this.setState({ mode: 'submitting' });
+    this.setState({ mode: 'submitting' })
 
     return axios
       .post(
@@ -99,9 +99,9 @@ export default class LoginForm extends Component {
       )
 
       .then(() => {
-        this.setState({ mode: 'redirecting' });
-        window.location = REDIRECT_TO;
-        track.submit(en.LOGIN);
+        this.setState({ mode: 'redirecting' })
+        window.location = REDIRECT_TO
+        track.submit(en.LOGIN)
       })
 
       .catch(({ response: { status, data: { description } } }) => {
@@ -109,19 +109,19 @@ export default class LoginForm extends Component {
         if (status === 401) {
           window.location = `/confirm/expired?${qs.stringify({
             email: this.state.email,
-          })}`;
-          return;
+          })}`
+          return
         }
 
         this.setState({
           mode: 'error',
           errorMessage: description,
-        });
-      });
-  };
+        })
+      })
+  }
 
   render() {
-    const { mode, email, password, errorMessage } = this.state;
+    const { mode, email, password, errorMessage } = this.state
 
     return (
       <AuthForm onSubmit={this.handleSubmit} action="/me/sign_in" method="post">
@@ -178,6 +178,6 @@ export default class LoginForm extends Component {
           </AuthForm.Subtext>
         </AuthForm.Submit>
       </AuthForm>
-    );
+    )
   }
 }

@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import profileBadgeFragment from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge/fragments/profileBadge';
+import profileBadgeFragment from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge/fragments/profileBadge'
 
-import ArenaMark from 'v2/components/UI/Icons/ArenaMark.svg';
+import ArenaMark from 'v2/components/UI/Icons/ArenaMark.svg'
 
 const Container = styled.a`
   position: relative;
   display: block;
   margin: 0 0 0 ${constants.emptySpaceWidth};
-`;
+`
 
 const CustomBadge = styled.img`
   width: 1.125rem;
   height: 1.125rem;
-`;
+`
 
 const Mark = styled.div`
   position: relative;
@@ -34,7 +34,7 @@ const Mark = styled.div`
     height: 100%;
     fill: ${x => x.theme.colors.state[x.type]};
   }
-`;
+`
 
 const Label = styled.div`
   display: flex;
@@ -56,13 +56,14 @@ const Label = styled.div`
   &:hover {
     opacity: 1;
   }
-`;
+`
 
 const HREFS = {
   premium: 'https://www.are.na/pricing',
-  investor: 'https://www.are.na/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html',
+  investor:
+    'https://www.are.na/blog/hello%20world/2018/03/21/announcing-crowdfunding-campaign.html',
   supporter: 'https://www.are.na/roadmap',
-};
+}
 
 export default class ProfileBadge extends Component {
   static propTypes = {
@@ -70,27 +71,26 @@ export default class ProfileBadge extends Component {
   }
 
   render() {
-    const { user: { badge, custom_badge } } = this.props;
+    const {
+      user: { badge, custom_badge },
+    } = this.props
 
-    if (!badge) return <span />;
+    if (!badge) return <span />
 
     return (
       <Container href={HREFS[badge]} target="_blank">
+        {custom_badge && <CustomBadge src={custom_badge} alt={badge} />}
 
-        {custom_badge &&
-          <CustomBadge src={custom_badge} alt={badge} />
-        }
-
-        {!custom_badge &&
+        {!custom_badge && (
           <Mark type={badge}>
             <ArenaMark />
           </Mark>
-        }
+        )}
 
         <Label type={badge}>
           <span>{badge}</span>
         </Label>
       </Container>
-    );
+    )
   }
 }

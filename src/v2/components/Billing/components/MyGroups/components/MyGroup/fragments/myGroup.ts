@@ -1,8 +1,8 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import myGroupHeaderFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader/fragments/myGroupHeader';
-import upgradeSelectionFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/fragments/upgradeSelection';
-import userSelectionFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection';
+import myGroupHeaderFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader/fragments/myGroupHeader'
+import upgradeSelectionFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/fragments/upgradeSelection'
+import userSelectionFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection'
 
 export default gql`
   fragment MyGroup on Group {
@@ -25,4 +25,4 @@ export default gql`
   ${myGroupHeaderFragment}
   ${upgradeSelectionFragment}
   ${userSelectionFragment}
-`;
+`

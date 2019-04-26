@@ -1,10 +1,10 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import States from 'v2/stories/__components__/States';
-import Specimen from 'v2/stories/__components__/Specimen';
+import States from 'v2/stories/__components__/States'
+import Specimen from 'v2/stories/__components__/Specimen'
 
-import Close from 'v2/components/UI/Close';
+import Close from 'v2/components/UI/Close'
 
 storiesOf('Close', module).add('default', () => (
   <Specimen>
@@ -32,4 +32,4 @@ storiesOf('Close', module).add('default', () => (
       <Close />
     </States>
   </Specimen>
-));
+))

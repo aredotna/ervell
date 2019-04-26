@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { propType } from 'graphql-anywhere'
 
-import blokkOverlayFragment from 'v2/components/Cell/components/Konnectable/components/BlokkOverlay/fragments/blokkOverlay';
+import blokkOverlayFragment from 'v2/components/Cell/components/Konnectable/components/BlokkOverlay/fragments/blokkOverlay'
 
-import WithLoginStatus from 'v2/hocs/WithLoginStatus';
+import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
-import { FilledButton } from 'v2/components/UI/Buttons';
-import OverlayConnect from 'v2/components/Cell/components/Konnectable/components/OverlayConnect';
+import { FilledButton } from 'v2/components/UI/Buttons'
+import OverlayConnect from 'v2/components/Cell/components/Konnectable/components/OverlayConnect'
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -20,7 +20,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-`;
+`
 
 const OverlayButton = styled(FilledButton).attrs({
   f: 4,
@@ -30,7 +30,7 @@ const OverlayButton = styled(FilledButton).attrs({
   display: flex;
   flex: 0.46;
   justify-content: center;
-`;
+`
 
 class BlokkOverlay extends PureComponent {
   static propTypes = {
@@ -44,72 +44,78 @@ class BlokkOverlay extends PureComponent {
     mode: 'resting',
   }
 
-  openSource = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  openSource = e => {
+    e.preventDefault()
+    e.stopPropagation()
 
-    const { konnectable: { source: { url: href } } } = this.props;
+    const {
+      konnectable: {
+        source: { url: href },
+      },
+    } = this.props
 
-    const newWindow = window.open(href, '_blank').focus();
+    const newWindow = window.open(href, '_blank').focus()
 
     // Prevent new window from gaining access to this window
-    newWindow.opener = null;
+    newWindow.opener = null
   }
 
-  openConnect = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  openConnect = e => {
+    e.preventDefault()
+    e.stopPropagation()
 
-    const { isLoggedIn, onOverlay } = this.props;
+    const { isLoggedIn, onOverlay } = this.props
 
     if (!isLoggedIn) {
-      window.location = `/sign_up?redirect-to=${window.location.pathname}`;
-      return null;
+      window.location = `/sign_up?redirect-to=${window.location.pathname}`
+      return null
     }
 
-    this.setState({ mode: 'overlay' });
+    this.setState({ mode: 'overlay' })
 
-    return onOverlay();
+    return onOverlay()
   }
 
-  closeConnect = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  closeConnect = e => {
+    e.preventDefault()
+    e.stopPropagation()
 
-    this.setState({ mode: 'resting' });
-    this.props.onClose();
+    this.setState({ mode: 'resting' })
+    this.props.onClose()
   }
 
   render() {
-    const { mode } = this.state;
-    const { konnectable: { id, source, __typename } } = this.props;
+    const { mode } = this.state
+    const {
+      konnectable: { id, source, __typename },
+    } = this.props
 
-    const sourceUrl = (source && __typename !== 'Image' && source.url);
+    const sourceUrl = source && __typename !== 'Image' && source.url
 
     return (
       <Container>
-        {mode === 'resting' && sourceUrl &&
+        {mode === 'resting' && sourceUrl && (
           <OverlayButton ml={4} mr={2} onClick={this.openSource}>
             Source
           </OverlayButton>
-        }
+        )}
 
-        {mode === 'resting' &&
-          <OverlayButton ml={sourceUrl && 2} mr={sourceUrl && 4} onClick={this.openConnect}>
+        {mode === 'resting' && (
+          <OverlayButton
+            ml={sourceUrl && 2}
+            mr={sourceUrl && 4}
+            onClick={this.openConnect}
+          >
             Connect &rarr;
           </OverlayButton>
-        }
+        )}
 
-        {mode === 'overlay' &&
-          <OverlayConnect
-            id={id}
-            type="BLOCK"
-            onClose={this.closeConnect}
-          />
-        }
+        {mode === 'overlay' && (
+          <OverlayConnect id={id} type="BLOCK" onClose={this.closeConnect} />
+        )}
       </Container>
-    );
+    )
   }
 }
 
-export default WithLoginStatus(BlokkOverlay);
+export default WithLoginStatus(BlokkOverlay)

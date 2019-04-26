@@ -1,24 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import { propType } from 'graphql-anywhere';
+import React from 'react'
+import styled from 'styled-components'
+import { propType } from 'graphql-anywhere'
 
-import { truncate } from 'v2/components/UI/Truncate';
+import { truncate } from 'v2/components/UI/Truncate'
 
-import blockLightboxActionsFragment from 'v2/components/BlockLightbox/components/BlockLightboxActions/fragments/blockLightboxActions';
+import blockLightboxActionsFragment from 'v2/components/BlockLightbox/components/BlockLightboxActions/fragments/blockLightboxActions'
 
-import Box from 'v2/components/UI/Box';
-import MuteButton from 'v2/components/MuteButton';
-import BlockLightboxShare from 'v2/components/BlockLightbox/components/BlockLightboxShare';
+import Box from 'v2/components/UI/Box'
+import MuteButton from 'v2/components/MuteButton'
+import BlockLightboxShare from 'v2/components/BlockLightbox/components/BlockLightboxShare'
 
 const Container = styled(Box)`
   > a {
     display: block;
   }
-`;
+`
 
 const Mute = styled(MuteButton)`
   cursor: pointer;
-`;
+`
 
 const BlockLightboxActions = ({ block }) => (
   <Container>
@@ -49,10 +49,10 @@ const BlockLightboxActions = ({ block }) => (
 
     {block.can.mute && <Mute id={block.id} type="BLOCK" />}
   </Container>
-);
+)
 
 BlockLightboxActions.propTypes = {
   block: propType(blockLightboxActionsFragment).isRequired,
-};
+}
 
-export default BlockLightboxActions;
+export default BlockLightboxActions

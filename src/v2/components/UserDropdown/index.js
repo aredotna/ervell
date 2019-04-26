@@ -1,30 +1,30 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { Query } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { Query } from 'react-apollo'
 
-import userDropdownQuery from 'v2/components/UserDropdown/queries/userDropdown';
+import userDropdownQuery from 'v2/components/UserDropdown/queries/userDropdown'
 
-import BorderedBox from 'v2/components/UI/BorderedBox';
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Link from 'v2/components/UserDropdown/components/Link';
-import Label from 'v2/components/UserDropdown/components/Label';
-import SecondaryLinks from 'v2/components/UserDropdown/components/SecondaryLinks';
-import MyGroupLinks from 'v2/components/UserDropdown/components/MyGroupLinks';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import SignOutLink from 'v2/components/UserDropdown/components/SecondaryLinks/components/SignOutLink';
+import BorderedBox from 'v2/components/UI/BorderedBox'
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Link from 'v2/components/UserDropdown/components/Link'
+import Label from 'v2/components/UserDropdown/components/Label'
+import SecondaryLinks from 'v2/components/UserDropdown/components/SecondaryLinks'
+import MyGroupLinks from 'v2/components/UserDropdown/components/MyGroupLinks'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import SignOutLink from 'v2/components/UserDropdown/components/SecondaryLinks/components/SignOutLink'
 
 const Container = styled(BorderedBox).attrs({
   width: '20em',
 })`
   height: 100%;
-`;
+`
 
 const Inner = styled(Box)`
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-`;
+`
 
 const Section = styled(Box).attrs({
   py: 4,
@@ -34,7 +34,7 @@ const Section = styled(Box).attrs({
   &:last-child {
     border-bottom: 0;
   }
-`;
+`
 
 export default class UserDropdown extends PureComponent {
   render() {
@@ -46,7 +46,7 @@ export default class UserDropdown extends PureComponent {
               <Container>
                 <LoadingIndicator p={6} />
               </Container>
-            );
+            )
           }
 
           if (error) {
@@ -64,15 +64,15 @@ export default class UserDropdown extends PureComponent {
                   </Section>
                 </Inner>
               </Container>
-            );
+            )
           }
 
-          const { me } = data;
-          const dateDifference = new Date() - new Date(me.created_at);
+          const { me } = data
+          const dateDifference = new Date() - new Date(me.created_at)
           const differenceInDays = Math.ceil(
             dateDifference / 1000 / 60 / 60 / 24
-          );
-          const hasRecentlyJoined = differenceInDays < 7;
+          )
+          const hasRecentlyJoined = differenceInDays < 7
 
           return (
             <Container>
@@ -109,9 +109,9 @@ export default class UserDropdown extends PureComponent {
                 </Section>
               </Inner>
             </Container>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

@@ -1,14 +1,14 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import theme from 'v2/styles/theme';
+import theme from 'v2/styles/theme'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import States from 'v2/stories/__components__/States';
+import Specimen from 'v2/stories/__components__/Specimen'
+import States from 'v2/stories/__components__/States'
 
-import Text from 'v2/components/UI/Text';
-import Box from 'v2/components/UI/Box';
-import Badge from 'v2/components/UI/Badge';
+import Text from 'v2/components/UI/Text'
+import Box from 'v2/components/UI/Box'
+import Badge from 'v2/components/UI/Badge'
 
 storiesOf('Badge', module)
   .add('default', () => (
@@ -76,4 +76,4 @@ storiesOf('Badge', module)
         </States>
       ))}
     </Specimen>
-  ));
+  ))

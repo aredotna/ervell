@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import { inputPadding } from 'v2/components/UI/Inputs';
-import { baseMixin as baseTextMixin } from 'v2/components/UI/Text';
+import { inputPadding } from 'v2/components/UI/Inputs'
+import { baseMixin as baseTextMixin } from 'v2/components/UI/Text'
 
 const Container = styled.div.attrs({
   f: 1,
@@ -18,22 +18,20 @@ const Container = styled.div.attrs({
   border: 1px solid ${x => x.theme.colors.gray.regular};
   background-color: ${x => x.theme.colors.gray.hint};
   text-align: left;
-`;
+`
 
 const Indicator = ({ label, ...rest }) => (
   <div {...rest}>
-    <Container>
-      {label}
-    </Container>
+    <Container>{label}</Container>
   </div>
-);
+)
 
 Indicator.propTypes = {
   label: PropTypes.string,
-};
+}
 
 Indicator.defaultProps = {
   label: 'Loading...',
-};
+}
 
-export default Indicator;
+export default Indicator

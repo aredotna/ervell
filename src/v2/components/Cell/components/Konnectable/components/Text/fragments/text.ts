@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment Text on Text {
@@ -7,4 +7,4 @@ export default gql`
     href
     content(format: HTML)
   }
-`;
+`

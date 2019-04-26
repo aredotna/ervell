@@ -4,7 +4,7 @@ Copyright © 2011-2015 Caleb Troughton
 Licensed under the MIT license.
 https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 */
-(function() {
+;(function() {
   'use strict'
 
   var keyCounter = 0
@@ -32,7 +32,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
     this.triggerPoint = null
     this.group = Waypoint.Group.findOrCreate({
       name: this.options.group,
-      axis: this.axis
+      axis: this.axis,
     })
     this.context = Waypoint.Context.findOrCreateByElement(this.options.context)
 
@@ -150,7 +150,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
     enabled: true,
     group: 'default',
     horizontal: false,
-    offset: 0
+    offset: 0,
   }
 
   Waypoint.offsetAliases = {
@@ -159,11 +159,11 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
     },
     'right-in-view': function() {
       return this.context.innerWidth() - this.adapter.outerWidth()
-    }
+    },
   }
 
   window.Waypoint = Waypoint
-}())
+})()
 ;(function() {
   'use strict'
 
@@ -186,11 +186,11 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
     this.didResize = false
     this.oldScroll = {
       x: this.adapter.scrollLeft(),
-      y: this.adapter.scrollTop()
+      y: this.adapter.scrollTop(),
     }
     this.waypoints = {
       vertical: {},
-      horizontal: {}
+      horizontal: {},
     }
 
     element.waypointContextKey = this.key
@@ -264,14 +264,14 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
         newScroll: this.adapter.scrollLeft(),
         oldScroll: this.oldScroll.x,
         forward: 'right',
-        backward: 'left'
+        backward: 'left',
       },
       vertical: {
         newScroll: this.adapter.scrollTop(),
         oldScroll: this.oldScroll.y,
         forward: 'down',
-        backward: 'up'
-      }
+        backward: 'up',
+      },
     }
 
     for (var axisKey in axes) {
@@ -298,7 +298,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 
     this.oldScroll = {
       x: axes.horizontal.newScroll,
-      y: axes.vertical.newScroll
+      y: axes.vertical.newScroll,
     }
   }
 
@@ -355,7 +355,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
         oldScroll: this.oldScroll.x,
         forward: 'right',
         backward: 'left',
-        offsetProp: 'left'
+        offsetProp: 'left',
       },
       vertical: {
         contextOffset: isWindow ? 0 : contextOffset.top,
@@ -364,8 +364,8 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
         oldScroll: this.oldScroll.y,
         forward: 'down',
         backward: 'up',
-        offsetProp: 'top'
-      }
+        offsetProp: 'top',
+      },
     }
 
     for (var axisKey in axes) {
@@ -385,11 +385,10 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 
         if (typeof adjustment === 'function') {
           adjustment = adjustment.apply(waypoint)
-        }
-        else if (typeof adjustment === 'string') {
+        } else if (typeof adjustment === 'string') {
           adjustment = parseFloat(adjustment)
-          if (waypoint.options.offset.indexOf('%') > - 1) {
-            adjustment = Math.ceil(axis.contextDimension * adjustment / 100)
+          if (waypoint.options.offset.indexOf('%') > -1) {
+            adjustment = Math.ceil((axis.contextDimension * adjustment) / 100)
           }
         }
 
@@ -403,12 +402,10 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
         if (!freshWaypoint && triggeredBackward) {
           waypoint.queueTrigger(axis.backward)
           triggeredGroups[waypoint.group.id] = waypoint.group
-        }
-        else if (!freshWaypoint && triggeredForward) {
+        } else if (!freshWaypoint && triggeredForward) {
           waypoint.queueTrigger(axis.forward)
           triggeredGroups[waypoint.group.id] = waypoint.group
-        }
-        else if (freshWaypoint && axis.oldScroll >= waypoint.triggerPoint) {
+        } else if (freshWaypoint && axis.oldScroll >= waypoint.triggerPoint) {
           waypoint.queueTrigger(axis.forward)
           triggeredGroups[waypoint.group.id] = waypoint.group
         }
@@ -448,14 +445,15 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   }
 
   Waypoint.requestAnimationFrame = function(callback) {
-    var requestFn = window.requestAnimationFrame ||
+    var requestFn =
+      window.requestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       requestAnimationFrameShim
     requestFn.call(window, callback)
   }
   Waypoint.Context = Context
-}())
+})()
 ;(function() {
   'use strict'
 
@@ -469,7 +467,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 
   var groups = {
     vertical: {},
-    horizontal: {}
+    horizontal: {},
   }
   var Waypoint = window.Waypoint
 
@@ -494,7 +492,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
       up: [],
       down: [],
       left: [],
-      right: []
+      right: [],
     }
   }
 
@@ -560,7 +558,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   }
 
   Waypoint.Group = Group
-}())
+})()
 ;(function() {
   'use strict'
 
@@ -571,37 +569,36 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
     this.$element = $(element)
   }
 
-  $.each([
-    'innerHeight',
-    'innerWidth',
-    'off',
-    'offset',
-    'on',
-    'outerHeight',
-    'outerWidth',
-    'scrollLeft',
-    'scrollTop'
-  ], function(i, method) {
-    JQueryAdapter.prototype[method] = function() {
-      var args = Array.prototype.slice.call(arguments)
-      return this.$element[method].apply(this.$element, args)
+  $.each(
+    [
+      'innerHeight',
+      'innerWidth',
+      'off',
+      'offset',
+      'on',
+      'outerHeight',
+      'outerWidth',
+      'scrollLeft',
+      'scrollTop',
+    ],
+    function(i, method) {
+      JQueryAdapter.prototype[method] = function() {
+        var args = Array.prototype.slice.call(arguments)
+        return this.$element[method].apply(this.$element, args)
+      }
     }
-  })
+  )
 
-  $.each([
-    'extend',
-    'inArray',
-    'isEmptyObject'
-  ], function(i, method) {
+  $.each(['extend', 'inArray', 'isEmptyObject'], function(i, method) {
     JQueryAdapter[method] = $[method]
   })
 
   Waypoint.adapters.push({
     name: 'jquery',
-    Adapter: JQueryAdapter
+    Adapter: JQueryAdapter,
   })
   Waypoint.Adapter = JQueryAdapter
-}())
+})()
 ;(function() {
   'use strict'
 
@@ -619,7 +616,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 
       this.each(function() {
         var options = framework.extend({}, overrides, {
-          element: this
+          element: this,
         })
         if (typeof options.context === 'string') {
           options.context = framework(this).closest(options.context)[0]
@@ -637,5 +634,4 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   if (window.Zepto) {
     window.Zepto.fn.waypoint = createExtension(window.Zepto)
   }
-}())
-;
+})()

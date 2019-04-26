@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import notificationSentenceFragment from 'v2/components/NotificationsDropdown/components/Notification/fragments/notificationSentence';
-import unreadNotificationsCountFragment from 'v2/components/NotificationsDropdown/fragments/unreadNotificationsCount';
+import notificationSentenceFragment from 'v2/components/NotificationsDropdown/components/Notification/fragments/notificationSentence'
+import unreadNotificationsCountFragment from 'v2/components/NotificationsDropdown/fragments/unreadNotificationsCount'
 
 export default gql`
   query NotificationsQuery($offset: Int, $limit: Int) {
@@ -19,4 +19,4 @@ export default gql`
   }
   ${notificationSentenceFragment}
   ${unreadNotificationsCountFragment}
-`;
+`

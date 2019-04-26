@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   query ProfileUiState {
@@ -8,4 +8,4 @@ export default gql`
       sort: get(name: "Profile--sort")
     }
   }
-`;
+`

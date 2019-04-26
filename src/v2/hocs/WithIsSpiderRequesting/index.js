@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
-import isSpiderRequestingQuery from 'v2/hocs/WithIsSpiderRequesting/queries/isSpiderRequesting';
+import isSpiderRequestingQuery from 'v2/hocs/WithIsSpiderRequesting/queries/isSpiderRequesting'
 
 const withIsSpiderRequesting = WrappedComponent => {
   class WithIsSpiderRequesting extends Component {
@@ -12,30 +12,30 @@ const withIsSpiderRequesting = WrappedComponent => {
           isSpiderRequesting: PropTypes.bool,
         }),
       }).isRequired,
-    };
+    }
 
     render() {
       const {
         data,
         data: { loading, error },
         ...rest
-      } = this.props;
+      } = this.props
 
       if (loading || error) {
-        return <WrappedComponent {...rest} />;
+        return <WrappedComponent {...rest} />
       }
 
       const {
         sharify: { isSpiderRequesting },
-      } = data;
+      } = data
 
       return (
         <WrappedComponent isSpiderRequesting={isSpiderRequesting} {...rest} />
-      );
+      )
     }
   }
 
-  return graphql(isSpiderRequestingQuery)(WithIsSpiderRequesting);
-};
+  return graphql(isSpiderRequestingQuery)(WithIsSpiderRequesting)
+}
 
-export default withIsSpiderRequesting;
+export default withIsSpiderRequesting

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Alert from 'v2/components/UI/Alert';
-import Box from 'v2/components/UI/Box';
+import Alert from 'v2/components/UI/Alert'
+import Box from 'v2/components/UI/Box'
 
 const ErrorAlert = ({ children, isReloadable, ...rest }) => (
   <Alert
@@ -29,15 +29,15 @@ const ErrorAlert = ({ children, isReloadable, ...rest }) => (
       )}
     </Box>
   </Alert>
-);
+)
 
 ErrorAlert.propTypes = {
   children: PropTypes.node.isRequired,
   isReloadable: PropTypes.bool,
-};
+}
 
 ErrorAlert.defaultProps = {
   isReloadable: true,
-};
+}
 
-export default ErrorAlert;
+export default ErrorAlert

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import mixin from 'v2/components/UI/Inputs/mixin';
+import mixin from 'v2/components/UI/Inputs/mixin'
 
 const SelectWrapper = styled.div`
   position: relative;
@@ -21,21 +21,21 @@ const SelectWrapper = styled.div`
     border-left: 0.25em solid transparent;
     pointer-events: none;
   }
-`;
+`
 
 const SelectTag = styled.select`
   ${mixin}
   padding-right: 1.5em;
-`;
+`
 
 const Select = ({ children, ...rest }) => (
   <SelectWrapper>
     <SelectTag {...rest}>{children}</SelectTag>
   </SelectWrapper>
-);
+)
 
 Select.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default Select;
+export default Select

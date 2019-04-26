@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
-import currentRouteQuery from 'v2/hocs/WithCurrentRoute/queries/currentRoute';
+import currentRouteQuery from 'v2/hocs/WithCurrentRoute/queries/currentRoute'
 
 const withCurrentRoute = WrappedComponent => {
   class WithCurrentRoute extends Component {
@@ -23,19 +23,19 @@ const withCurrentRoute = WrappedComponent => {
           href: PropTypes.string.isRequired,
         }).isRequired,
       }).isRequired,
-    };
+    }
 
     render() {
       const {
         data: { currentRoute },
         ...rest
-      } = this.props;
+      } = this.props
 
-      return <WrappedComponent currentRoute={currentRoute} {...rest} />;
+      return <WrappedComponent currentRoute={currentRoute} {...rest} />
     }
   }
 
-  return graphql(currentRouteQuery)(WithCurrentRoute);
-};
+  return graphql(currentRouteQuery)(WithCurrentRoute)
+}
 
-export default withCurrentRoute;
+export default withCurrentRoute

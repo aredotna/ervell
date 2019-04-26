@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
-import CenterBox from 'v2/pages/about/components/CenterBox';
-import { Subheadline, Description } from 'v2/pages/about/components/Text';
+import CenterBox from 'v2/pages/about/components/CenterBox'
+import { Subheadline, Description } from 'v2/pages/about/components/Text'
 
 const Screenshot = styled.img`
   max-width: 640px;
   width: 100%;
   margin: 0 auto;
   display: block;
-`;
+`
 
 export default class ForStudents extends Component {
   render() {
@@ -41,6 +41,6 @@ export default class ForStudents extends Component {
         </CenterBox>
         <Screenshot src="https://d2w9rnfcy7mm78.cloudfront.net/3017943/original_c852f944421a96c8ff1753cc843f78b1.png?1541873535" />
       </div>
-    );
+    )
   }
 }

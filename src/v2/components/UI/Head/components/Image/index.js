@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Head from 'v2/components/UI/Head';
+import Head from 'v2/components/UI/Head'
 
 const Image = ({ children: image_url }) => (
   <Head>
@@ -9,14 +9,14 @@ const Image = ({ children: image_url }) => (
     <meta name="twitter:image" content={image_url} />
     <meta property="og:image" content={image_url} />
   </Head>
-);
+)
 
 Image.propTypes = {
   children: PropTypes.string,
-};
+}
 
 Image.defaultProps = {
   children: null,
-};
+}
 
-export default Image;
+export default Image

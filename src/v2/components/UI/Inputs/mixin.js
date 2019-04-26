@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 import {
   fontSize,
   fontFamily,
@@ -7,11 +7,11 @@ import {
   borders,
   color,
   width,
-} from 'styled-system';
+} from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
-import { antialiased } from 'v2/styles/mixins';
-import { LINE_HEIGHTS } from 'v2/styles/text';
+import { preset } from 'v2/styles/functions'
+import { antialiased } from 'v2/styles/mixins'
+import { LINE_HEIGHTS } from 'v2/styles/text'
 
 export const borderlessMixin = css`
   ${props =>
@@ -21,7 +21,7 @@ export const borderlessMixin = css`
     border-color: transparent;
     padding: 0;
   `}
-`;
+`
 
 export const errorMixin = css`
   ${props =>
@@ -31,7 +31,7 @@ export const errorMixin = css`
       border-color: ${props.theme.colors.state.alert};
     }
   `}
-`;
+`
 
 export const focusMixin = css`
   background-color: ${props => props.theme.colors.gray.hint};
@@ -40,7 +40,7 @@ export const focusMixin = css`
   ${preset(borderColor, { borderColor: 'gray.bold' })}
   ${color}
   ${borderlessMixin}
-`;
+`
 
 export const defaultMixin = css`
   all: initial;
@@ -78,6 +78,6 @@ export const defaultMixin = css`
 
   ${errorMixin}
   ${borderlessMixin}
-`;
+`
 
-export default defaultMixin;
+export default defaultMixin

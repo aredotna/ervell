@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   mutation updateCustomBadge($custom_badge_url: String!) {
@@ -10,4 +10,4 @@ export default gql`
       }
     }
   }
-`;
+`

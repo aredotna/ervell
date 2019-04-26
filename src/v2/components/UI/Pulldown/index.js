@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import Overlay from 'v2/components/UI/Overlay';
-import PulldownValue from 'v2/components/UI/Pulldown/components/PulldownValue';
-import PulldownOption from 'v2/components/UI/Pulldown/components/PulldownOption';
+import Box from 'v2/components/UI/Box'
+import Overlay from 'v2/components/UI/Overlay'
+import PulldownValue from 'v2/components/UI/Pulldown/components/PulldownValue'
+import PulldownOption from 'v2/components/UI/Pulldown/components/PulldownOption'
 
 const Container = styled(Box).attrs({
   width: '88%',
@@ -27,7 +27,7 @@ const Container = styled(Box).attrs({
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   `}
-`;
+`
 
 const PulldownOptions = styled.div`
   box-sizing: border-box;
@@ -46,7 +46,7 @@ const PulldownOptions = styled.div`
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   `}
-`;
+`
 
 export default class Pulldown extends PureComponent {
   static propTypes = {
@@ -57,43 +57,43 @@ export default class Pulldown extends PureComponent {
     ]).isRequired,
     onChange: PropTypes.func,
     options: PropTypes.objectOf(PropTypes.node).isRequired,
-  };
+  }
 
   static defaultProps = {
     onChange: () => {},
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    const { value } = this.props;
+    const { value } = this.props
 
-    this.target = React.createRef();
+    this.target = React.createRef()
 
     this.state = {
       mode: 'resting',
       value,
-    };
+    }
   }
 
-  expand = () => this.setState({ mode: 'expanded' });
+  expand = () => this.setState({ mode: 'expanded' })
 
-  rest = () => this.setState({ mode: 'resting' });
+  rest = () => this.setState({ mode: 'resting' })
 
   toggle = () => {
     this.setState(prevState => ({
       mode: prevState.mode === 'resting' ? 'expanded' : 'resting',
-    }));
-  };
+    }))
+  }
 
   selectValue = value => () => {
-    this.setState({ mode: 'resting', value });
-    return this.props.onChange(value);
-  };
+    this.setState({ mode: 'resting', value })
+    return this.props.onChange(value)
+  }
 
   render() {
-    const { value: selected, mode } = this.state;
-    const { options, ...rest } = this.props;
+    const { value: selected, mode } = this.state
+    const { options, ...rest } = this.props
 
     return (
       <Container mode={mode} {...rest}>
@@ -127,6 +127,6 @@ export default class Pulldown extends PureComponent {
           </Overlay>
         )}
       </Container>
-    );
+    )
   }
 }

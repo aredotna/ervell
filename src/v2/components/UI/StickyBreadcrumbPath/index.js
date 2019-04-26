@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Waypoint from 'react-waypoint';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Waypoint from 'react-waypoint'
+import styled from 'styled-components'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import is from 'v2/util/is';
-import provideChildrenWithProps from 'v2/util/provideChildrenWithProps';
+import is from 'v2/util/is'
+import provideChildrenWithProps from 'v2/util/provideChildrenWithProps'
 
-import BreadcrumbPath from 'v2/components/UI/BreadcrumbPath';
+import BreadcrumbPath from 'v2/components/UI/BreadcrumbPath'
 
 const Container = styled.div`
   display: flex;
-`;
+`
 
 const StuckBreadcrumbPath = styled(BreadcrumbPath)`
   display: flex;
@@ -35,48 +35,48 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
   ${constants.media.mobile`
     display: none;
   `}
-`;
+`
 
 export default class StickyBreadcrumbPath extends Component {
-  static Container = Container;
-  static Crumb = BreadcrumbPath.Crumb;
+  static Container = Container
+  static Crumb = BreadcrumbPath.Crumb
 
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     stuckChildren: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
     stuckChildren: null,
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.targetEl = React.createRef();
+    this.targetEl = React.createRef()
   }
 
   state = {
     mode: 'resting',
-  };
+  }
 
   componentDidMount() {
     if (!is.elVisible(this.targetEl.current)) {
-      this.handleLeave();
+      this.handleLeave()
     }
   }
 
   handleEnter = () => {
-    this.setState({ mode: 'resting' });
-  };
+    this.setState({ mode: 'resting' })
+  }
 
   handleLeave = () => {
-    this.setState({ mode: 'stuck' });
-  };
+    this.setState({ mode: 'stuck' })
+  }
 
   render() {
-    const { mode } = this.state;
-    const { children, stuckChildren } = this.props;
+    const { mode } = this.state
+    const { children, stuckChildren } = this.props
 
     return (
       <Container>
@@ -94,6 +94,6 @@ export default class StickyBreadcrumbPath extends Component {
           </StuckBreadcrumbPath>
         )}
       </Container>
-    );
+    )
   }
 }

@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton';
-import Box from 'v2/components/UI/Box';
+import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+import Box from 'v2/components/UI/Box'
 
 import {
   Headline,
   Subheadline,
   Description,
-} from 'v2/pages/about/components/Text';
-import CenterBox from 'v2/pages/about/components/CenterBox';
-import WideScreenshot from 'v2/pages/about/components/WideScreenshot';
+} from 'v2/pages/about/components/Text'
+import CenterBox from 'v2/pages/about/components/CenterBox'
+import WideScreenshot from 'v2/pages/about/components/WideScreenshot'
 
 const Container = styled.div`
   margin-top: 4em;
-`;
+`
 
 const Content = styled.div`
   width: 100%;
   padding-bottom: 0;
   border-top: 1px solid ${x => x.theme.colors.gray.regular};
   background: linear-gradient(${x => x.theme.colors.gray.extraLight}, white);
-`;
+`
 
 const Instructions = styled(Description).attrs({ p: 7 })`
   border: 1px solid ${x => x.theme.colors.gray.regular};
@@ -33,11 +33,11 @@ const Instructions = styled(Description).attrs({ p: 7 })`
     padding: 0;
     list-style: none;
   }
-`;
+`
 
 const CTA = styled(Box)`
   border-bottom: 1px solid ${x => x.theme.colors.gray.regular};
-`;
+`
 
 export default class GroupsPage extends Component {
   render() {
@@ -168,6 +168,6 @@ export default class GroupsPage extends Component {
           </CTA>
         </Content>
       </Container>
-    );
+    )
   }
 }

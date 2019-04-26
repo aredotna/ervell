@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
-import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator';
-import ChannelsList from 'v2/components/ConnectionSelectionList/components/ChannelsList';
+import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
+import ChannelsList from 'v2/components/ConnectionSelectionList/components/ChannelsList'
 
-import recentChannelsQuery from 'v2/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels';
+import recentChannelsQuery from 'v2/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels'
 
 class RecentChannels extends Component {
   static propTypes = {
@@ -26,18 +26,22 @@ class RecentChannels extends Component {
       isOutlined: _isOutlined,
       data: { loading, error },
       ...rest
-    } = this.props;
+    } = this.props
 
     if (error) {
-      console.error(error);
-      return <Indicator label="Error" {...rest} />;
+      console.error(error)
+      return <Indicator label="Error" {...rest} />
     }
 
     if (loading) {
-      return <Indicator label="Loading..." {...rest} />;
+      return <Indicator label="Loading..." {...rest} />
     }
 
-    const { data: { me: { recent_channels: channels } } } = this.props;
+    const {
+      data: {
+        me: { recent_channels: channels },
+      },
+    } = this.props
 
     return (
       <ChannelsList
@@ -45,8 +49,8 @@ class RecentChannels extends Component {
         onConnectionSelection={onConnectionSelection}
         {...rest}
       />
-    );
+    )
   }
 }
 
-export default graphql(recentChannelsQuery)(RecentChannels);
+export default graphql(recentChannelsQuery)(RecentChannels)

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Title from 'v2/components/UI/Head/components/Title';
-import CenteringBox from 'v2/components/UI/CenteringBox';
-import LoginForm from 'v2/components/LoginForm';
+import Title from 'v2/components/UI/Head/components/Title'
+import CenteringBox from 'v2/components/UI/CenteringBox'
+import LoginForm from 'v2/components/LoginForm'
 
 export default class LoginPage extends Component {
   render() {
@@ -12,6 +12,6 @@ export default class LoginPage extends Component {
 
         <LoginForm />
       </CenteringBox>
-    );
+    )
   }
 }

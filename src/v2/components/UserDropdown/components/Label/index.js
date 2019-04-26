@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
 const Dot = styled.span`
   display: inline-block;
@@ -10,7 +10,7 @@ const Dot = styled.span`
   &:after {
     content: '•';
   }
-`;
+`
 
 const Label = ({ children, ...rest }) => (
   <Text
@@ -23,10 +23,10 @@ const Label = ({ children, ...rest }) => (
     <Dot />
     {children}
   </Text>
-);
+)
 
 Label.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default Label;
+export default Label

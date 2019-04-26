@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text';
+import Text from 'v2/components/UI/Text'
 
 export default styled(Text).attrs({
   color: 'state.alert',
@@ -8,4 +8,4 @@ export default styled(Text).attrs({
   my: 4,
 })`
   cursor: default;
-`;
+`

@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { debounce, isEmpty } from 'underscore';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { debounce, isEmpty } from 'underscore'
 
-import { __outlineBorder__ } from 'v2/styles/mixins';
+import { __outlineBorder__ } from 'v2/styles/mixins'
 
-import { Input } from 'v2/components/UI/Inputs';
-import Text from 'v2/components/UI/Text';
-import RecentChannels from 'v2/components/ConnectionSelectionList/components/RecentChannels';
-import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels';
-import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton';
+import { Input } from 'v2/components/UI/Inputs'
+import Text from 'v2/components/UI/Text'
+import RecentChannels from 'v2/components/ConnectionSelectionList/components/RecentChannels'
+import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
+import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
 
 const Container = styled.div`
   position: relative;
 
-  ${x => x.mode === 'active' && x.isOutlined && `
+  ${x =>
+    x.mode === 'active' &&
+    x.isOutlined &&
+    `
     &:after {
       ${__outlineBorder__()}
     }
   `}
-`;
+`
 
 const SearchInput = styled(Input).attrs({
   f: 1,
@@ -30,17 +33,19 @@ const SearchInput = styled(Input).attrs({
   &:focus {
     border: 1px solid ${x => x.theme.colors.gray.regular} !important;
   }
-`;
+`
 
 const OutlinedRecentChannels = styled(RecentChannels)`
   position: relative;
 
-  ${x => x.isOutlined && `
+  ${x =>
+    x.isOutlined &&
+    `
     &:after {
       ${__outlineBorder__()}
     }
   `}
-`;
+`
 
 export default class ConnectionSelectionList extends Component {
   static propTypes = {
@@ -60,24 +65,24 @@ export default class ConnectionSelectionList extends Component {
   }
 
   handleChange = ({ target: { value: query } }) => {
-    const mode = isEmpty(query) ? 'resting' : 'active';
-    this.setState({ mode, query });
-    this.debouceQuery(query);
+    const mode = isEmpty(query) ? 'resting' : 'active'
+    this.setState({ mode, query })
+    this.debouceQuery(query)
   }
 
-  debouceQuery = debounce((debouncedQuery) => {
-    this.setState({ debouncedQuery });
+  debouceQuery = debounce(debouncedQuery => {
+    this.setState({ debouncedQuery })
   }, 200)
 
   render() {
-    const { query, debouncedQuery, mode } = this.state;
-    const { isOutlined, onConnectionSelection } = this.props;
+    const { query, debouncedQuery, mode } = this.state
+    const { isOutlined, onConnectionSelection } = this.props
 
     return (
       <Container mode={mode} isOutlined={isOutlined}>
         <SearchInput onChange={this.handleChange} />
 
-        {mode === 'resting' &&
+        {mode === 'resting' && (
           <div>
             <Text f={1} py={4} px={5} textAlign="center" color="gray.medium">
               Recent channels
@@ -88,9 +93,9 @@ export default class ConnectionSelectionList extends Component {
               onConnectionSelection={onConnectionSelection}
             />
           </div>
-        }
+        )}
 
-        {mode === 'active' &&
+        {mode === 'active' && (
           <div>
             <CreatePrivateChannelButton
               title={query}
@@ -102,8 +107,8 @@ export default class ConnectionSelectionList extends Component {
               onConnectionSelection={onConnectionSelection}
             />
           </div>
-        }
+        )}
       </Container>
-    );
+    )
   }
 }

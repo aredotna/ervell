@@ -1,33 +1,32 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import FeedObjectLink from 'v2/components/Feed/components/FeedGroupSentence/components/FeedObjectLink/index';
-import BorderedLock from 'v2/components/UI/BorderedLock';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import FeedObjectLink from 'v2/components/Feed/components/FeedGroupSentence/components/FeedObjectLink/index'
+import BorderedLock from 'v2/components/UI/BorderedLock'
 
-import feedGroupSentenceFragment from 'v2/components/Feed/components/FeedGroupSentence/fragments/sentence';
+import feedGroupSentenceFragment from 'v2/components/Feed/components/FeedGroupSentence/fragments/sentence'
 
 const RelativeTime = styled(Text).attrs({
   f: 1,
   color: 'gray.medium',
 })`
   text-transform: uppercase;
-`;
+`
 
 const Label = styled(Text).attrs({
   f: 6,
   display: 'inline',
-})`
-`;
+})``
 
 const Sentence = styled.div`
   word-wrap: break-word;
   margin-bottom: ${x => x.theme.space[2]};
   max-width: ${x => x.theme.space[14]};
   margin: 0 auto;
-`;
+`
 
 const Submetadata = styled(Box).attrs({
   mt: 5,
@@ -36,9 +35,9 @@ const Submetadata = styled(Box).attrs({
   align-items: center;
   flex-direction: row;
   justify-content: center;
-`;
+`
 
-const Container = styled(Box)``;
+const Container = styled(Box)``
 
 export default class FeedGroupSentence extends PureComponent {
   static propTypes = {
@@ -58,59 +57,46 @@ export default class FeedGroupSentence extends PureComponent {
         objects,
         is_private,
       },
-    } = this.props;
+    } = this.props
 
     return (
       <Container my={3} pr={6}>
         <Sentence>
           <FeedObjectLink {...owner} />
 
-          {action === 'commented' &&
+          {action === 'commented' && (
             <span>
               <Label>
                 {' said '}
-                “<a
+                “
+                <a
                   href={objects[0].href}
                   dangerouslySetInnerHTML={{ __html: item.body }}
-                />”
+                />
+                ”
               </Label>
             </span>
-          }
+          )}
 
-          {action !== 'commented' &&
+          {action !== 'commented' && (
             <span>
-              <Label>
-                {` ${action} `}
-              </Label>
+              <Label>{` ${action} `}</Label>
 
+              {item_phrase && <FeedObjectLink {...item} label={item_phrase} />}
 
-              {item_phrase &&
-                <FeedObjectLink {...item} label={item_phrase} />
-              }
+              {connector && <Label>{` ${connector} `}</Label>}
 
-              {connector &&
-                <Label>
-                  {` ${connector} `}
-                </Label>
-              }
-
-              {target &&
-                <FeedObjectLink {...target} />
-              }
+              {target && <FeedObjectLink {...target} />}
             </span>
-          }
+          )}
         </Sentence>
 
         <Submetadata>
-          <RelativeTime>
-            {created_at}
-          </RelativeTime>
+          <RelativeTime>{created_at}</RelativeTime>
 
-          {is_private &&
-            <BorderedLock ml={3} />
-          }
+          {is_private && <BorderedLock ml={3} />}
         </Submetadata>
       </Container>
-    );
+    )
   }
 }

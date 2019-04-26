@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Text from 'v2/components/UI/Text';
-import Box from 'v2/components/UI/Box';
-import HorizontalRule from 'v2/components/UI/HorizontalRule';
-import Billing from 'v2/components/Billing';
+import Text from 'v2/components/UI/Text'
+import Box from 'v2/components/UI/Box'
+import HorizontalRule from 'v2/components/UI/HorizontalRule'
+import Billing from 'v2/components/Billing'
 
 export default class BillingPage extends Component {
   redirectToOnboarding = () => {
-    window.location = '/welcome';
-  };
+    window.location = '/welcome'
+  }
 
   render() {
     return (
@@ -30,6 +30,6 @@ export default class BillingPage extends Component {
 
         <Billing plan_id="yearly" onSuccess={this.redirectToOnboarding} />
       </Box>
-    );
+    )
   }
 }

@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import InfiniteScroll from 'react-infinite-scroller';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import InfiniteScroll from 'react-infinite-scroller'
 
-import constants from 'v2/styles/constants';
+import constants from 'v2/styles/constants'
 
-import profileChannelsQuery from 'v2/components/ProfileChannels/queries/profileChannels';
-import profileChannelSearchQuery from 'v2/components/ProfileChannels/queries/profileChannelSearch';
+import profileChannelsQuery from 'v2/components/ProfileChannels/queries/profileChannels'
+import profileChannelSearchQuery from 'v2/components/ProfileChannels/queries/profileChannelSearch'
 
-import Grid from 'v2/components/UI/Grid';
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import SearchInput from 'v2/components/UI/SearchInput';
-import Cell from 'v2/components/Cell';
-import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow';
-import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator';
+import Grid from 'v2/components/UI/Grid'
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import SearchInput from 'v2/components/UI/SearchInput'
+import Cell from 'v2/components/Cell'
+import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow'
+import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
 
-import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting';
+import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 
 class ProfileChannels extends PureComponent {
   static propTypes = {
@@ -38,13 +38,13 @@ class ProfileChannels extends PureComponent {
     q: null,
   }
 
-  resetQuery = (query) => {
-    const q = query === '' ? null : query;
-    this.setState({ q, page: 1, hasMore: true });
+  resetQuery = query => {
+    const q = query === '' ? null : query
+    this.setState({ q, page: 1, hasMore: true })
   }
 
   loadMore = fetchMore => () => {
-    const { page, per } = this.state;
+    const { page, per } = this.state
 
     fetchMore({
       variables: { page: page + 1, per },
@@ -62,28 +62,38 @@ class ProfileChannels extends PureComponent {
         },
       }),
     }).then(({ errors, data }) => {
-      const { identity: { identifiable: { channels: { length } } } } = data;
-      const hasMore = !errors && length > 0 && length >= per;
+      const {
+        identity: {
+          identifiable: {
+            channels: { length },
+          },
+        },
+      } = data
+      const hasMore = !errors && length > 0 && length >= per
 
       this.setState({
         page: page + 1,
         hasMore,
-      });
-    });
+      })
+    })
   }
 
   render() {
-    const { per, hasMore, q } = this.state;
-    const {
-      id, sort, fetchPolicy, isSpiderRequesting, seed,
-    } = this.props;
+    const { per, hasMore, q } = this.state
+    const { id, sort, fetchPolicy, isSpiderRequesting, seed } = this.props
 
-    const isSearch = sort === 'RANDOM' || q;
+    const isSearch = sort === 'RANDOM' || q
 
-    const query = isSearch ? profileChannelSearchQuery : profileChannelsQuery;
-    const variables = isSearch ? {
-      id, per, sort, seed, q,
-    } : { id, per };
+    const query = isSearch ? profileChannelSearchQuery : profileChannelsQuery
+    const variables = isSearch
+      ? {
+          id,
+          per,
+          sort,
+          seed,
+          q,
+        }
+      : { id, per }
 
     return (
       <Query
@@ -92,22 +102,20 @@ class ProfileChannels extends PureComponent {
         fetchPolicy={fetchPolicy}
         ssr={isSpiderRequesting}
       >
-        {({
-          loading, error, data, fetchMore,
-        }) => {
+        {({ loading, error, data, fetchMore }) => {
           if (error) {
-            return (
-              <ErrorAlert>
-                {error.message}
-              </ErrorAlert>
-            );
+            return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
           if (!data.identity) {
-            return <BlocksLoadingIndicator />;
+            return <BlocksLoadingIndicator />
           }
 
-          const { identity: { identifiable: { name, channels } } } = data;
+          const {
+            identity: {
+              identifiable: { name, channels },
+            },
+          } = data
 
           return (
             <div>
@@ -125,11 +133,9 @@ class ProfileChannels extends PureComponent {
                 border={0}
               />
 
-              {loading &&
-                <BlocksLoadingIndicator />
-              }
+              {loading && <BlocksLoadingIndicator />}
 
-              {!loading && channels.length > 0 &&
+              {!loading && channels.length > 0 && (
                 <InfiniteScroll
                   pageStart={1}
                   key={query}
@@ -142,7 +148,10 @@ class ProfileChannels extends PureComponent {
                   {channels.map(channel => (
                     <ChannelRow key={channel.id} channel={channel}>
                       <Grid>
-                        <Cell.Konnectable konnectable={channel} isPreviewable={false} />
+                        <Cell.Konnectable
+                          konnectable={channel}
+                          isPreviewable={false}
+                        />
 
                         {channel.blokks.map(blokk => (
                           <Cell.Konnectable
@@ -155,13 +164,13 @@ class ProfileChannels extends PureComponent {
                     </ChannelRow>
                   ))}
                 </InfiniteScroll>
-              }
+              )}
             </div>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }
 
-export default WithIsSpiderRequesting(ProfileChannels);
+export default WithIsSpiderRequesting(ProfileChannels)

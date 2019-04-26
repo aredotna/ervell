@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import compactChannelFragment from 'v2/components/CompactChannel/fragments/compactChannel';
-import blockLightboxChannelsAlsoInFragment from 'v2/components/BlockLightbox/components/BlockLightboxChannelsAlsoIn/fragments/blockLightboxChannelsAlsoIn';
+import compactChannelFragment from 'v2/components/CompactChannel/fragments/compactChannel'
+import blockLightboxChannelsAlsoInFragment from 'v2/components/BlockLightbox/components/BlockLightboxChannelsAlsoIn/fragments/blockLightboxChannelsAlsoIn'
 
 export default gql`
   fragment BlockLightboxConnections on Konnectable {
@@ -34,4 +34,4 @@ export default gql`
   }
   ${compactChannelFragment}
   ${blockLightboxChannelsAlsoInFragment}
-`;
+`

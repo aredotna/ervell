@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class CountdownRedirect extends Component {
   static propTypes = {
@@ -13,62 +13,64 @@ export default class CountdownRedirect extends Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       mode: 'countdown',
       remaining: props.length,
-    };
+    }
   }
 
   componentDidMount() {
-    this.start();
+    this.start()
   }
 
   componentWillUnmount() {
-    this.stop();
+    this.stop()
   }
 
   start() {
-    this.interval = setInterval(this.tick.bind(this), 1000);
+    this.interval = setInterval(this.tick.bind(this), 1000)
   }
 
   stop() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   }
 
   tick() {
-    const { href, debug } = this.props;
+    const { href, debug } = this.props
 
     if (this.isDone()) {
-      this.stop();
+      this.stop()
 
-      this.setState({ mode: 'redirecting' });
+      this.setState({ mode: 'redirecting' })
 
-      if (!debug) window.location.href = href;
+      if (!debug) window.location.href = href
 
-      return;
+      return
     }
 
     this.setState(prevState => ({
       remaining: prevState.remaining - 1,
-    }));
+    }))
   }
 
   isDone() {
-    return this.state.remaining <= 1;
+    return this.state.remaining <= 1
   }
 
   render() {
-    const { remaining, mode } = this.state;
+    const { remaining, mode } = this.state
 
     return (
       <div>
-        {{
-          countdown: `Redirecting in ${remaining}…`,
-          redirecting: 'Redirecting…',
-        }[mode]}
+        {
+          {
+            countdown: `Redirecting in ${remaining}…`,
+            redirecting: 'Redirecting…',
+          }[mode]
+        }
       </div>
-    );
+    )
   }
 }

@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import passwordResettableUserFragment from 'v2/pages/authentication/ResetPasswordPage/fragments/passwordResettableUser';
+import passwordResettableUserFragment from 'v2/pages/authentication/ResetPasswordPage/fragments/passwordResettableUser'
 
 export default gql`
   query PasswordResettableUser($reset_password_token: String!) {
@@ -9,4 +9,4 @@ export default gql`
     }
   }
   ${passwordResettableUserFragment}
-`;
+`

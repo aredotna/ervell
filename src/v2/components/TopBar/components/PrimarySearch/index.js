@@ -1,25 +1,25 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import HomeLink from 'v2/components/TopBar/components/PrimarySearch/components/HomeLink';
-import Overlay from 'v2/components/UI/Overlay';
-import SearchInput from 'v2/components/UI/SearchInput';
-import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults';
+import Box from 'v2/components/UI/Box'
+import HomeLink from 'v2/components/TopBar/components/PrimarySearch/components/HomeLink'
+import Overlay from 'v2/components/UI/Overlay'
+import SearchInput from 'v2/components/UI/SearchInput'
+import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults'
 
-import { overflowScrolling } from 'v2/styles/mixins';
+import { overflowScrolling } from 'v2/styles/mixins'
 
 const Container = styled(Box)`
   position: relative;
   display: flex;
   align-items: stretch;
-`;
+`
 
 const Results = styled(Box)`
   height: 100%;
   ${overflowScrolling}
-`;
+`
 
 export default class PrimarySearch extends PureComponent {
   static propTypes = {
@@ -37,72 +37,68 @@ export default class PrimarySearch extends PureComponent {
     href: null,
   }
 
-  searchInputRef = React.createRef();
+  searchInputRef = React.createRef()
 
-  handleSelection = href =>
-    this.setState({ href });
+  handleSelection = href => this.setState({ href })
 
-  handleQuery = (query) => {
-    this.setState({ query, cursor: null });
+  handleQuery = query => {
+    this.setState({ query, cursor: null })
   }
 
   handleBlur = () => {
     if (this.state.query) {
-      this.setState({ mode: 'blur' });
-      return;
+      this.setState({ mode: 'blur' })
+      return
     }
 
-    this.setState({ mode: 'resting' });
+    this.setState({ mode: 'resting' })
   }
 
-  handleFocus = () =>
-    this.setState({ mode: 'focus' });
+  handleFocus = () => this.setState({ mode: 'focus' })
 
   handleKeyDown = ({ key }) => {
-    const { cursor, href, query } = this.state;
+    const { cursor, href, query } = this.state
 
     switch (key) {
       case 'Escape':
-        this.setState({ query: '' });
-        break;
+        this.setState({ query: '' })
+        break
       case 'Enter':
-        if (query === '') return;
-        window.location.href = href;
-        break;
+        if (query === '') return
+        window.location.href = href
+        break
       case 'ArrowDown':
         this.setState({
           cursor: (cursor === null ? -1 : cursor) + 1,
-        });
-        break;
+        })
+        break
       case 'ArrowUp':
         this.setState({
           cursor: (cursor === null ? 0 : cursor) - 1,
-        });
-        break;
+        })
+        break
       default:
-        break;
+        break
     }
   }
 
   handleMouseEnter = () => {
-    if (this.state.mode !== 'resting') return;
-    this.setState({ mode: 'hover' });
+    if (this.state.mode !== 'resting') return
+    this.setState({ mode: 'hover' })
   }
 
   handleMouseLeave = () => {
-    if (this.state.mode !== 'hover') return;
-    this.setState({ mode: 'resting' });
+    if (this.state.mode !== 'hover') return
+    this.setState({ mode: 'resting' })
   }
 
   render() {
-    const { scheme, ...rest } = this.props;
-    const { mode, query, cursor } = this.state;
+    const { scheme, ...rest } = this.props
+    const { mode, query, cursor } = this.state
 
     return (
       <Container {...rest}>
-        {mode === 'resting' &&
-          <HomeLink />
-        }
+        {mode === 'resting' && <HomeLink />}
 
         <SearchInput
           tabIndex={1}
@@ -127,11 +123,8 @@ export default class PrimarySearch extends PureComponent {
           }}
         />
 
-        {query && mode === 'focus' &&
-          <Overlay
-            targetEl={() => this.searchInputRef.current}
-            fullWidth
-          >
+        {query && mode === 'focus' && (
+          <Overlay targetEl={() => this.searchInputRef.current} fullWidth>
             <Results>
               <PrimarySearchResults
                 query={query}
@@ -140,8 +133,8 @@ export default class PrimarySearch extends PureComponent {
               />
             </Results>
           </Overlay>
-        }
+        )}
       </Container>
-    );
+    )
   }
 }

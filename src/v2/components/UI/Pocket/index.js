@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 const Title = styled(Text).attrs({
   mb: '0.5em',
@@ -13,7 +13,7 @@ const Title = styled(Text).attrs({
   color: 'gray.medium',
 })`
   border-bottom: 1px solid ${props => props.theme.colors.gray.light};
-`;
+`
 
 const Content = styled(Text).attrs({
   my: '0.5em',
@@ -41,16 +41,16 @@ const Content = styled(Text).attrs({
       color: black;
     }
   }
-`;
+`
 
 export default class Pocket extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-  };
+  }
 
   render() {
-    const { title, children } = this.props;
+    const { title, children } = this.props
 
     return (
       <Box mb={6}>
@@ -58,6 +58,6 @@ export default class Pocket extends Component {
 
         <Content>{children}</Content>
       </Box>
-    );
+    )
   }
 }

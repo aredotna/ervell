@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
+import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel'
 
-import SelectableChannel from 'v2/components/ConnectionSelectionList/components/SelectableChannel';
-import ListButton from 'v2/components/ConnectionSelectionList/components/ListButton';
+import SelectableChannel from 'v2/components/ConnectionSelectionList/components/SelectableChannel'
+import ListButton from 'v2/components/ConnectionSelectionList/components/ListButton'
 
-const Container = styled.div`
-`;
+const Container = styled.div``
 
 export default class ChannelsList extends Component {
   static propTypes = {
@@ -22,15 +21,13 @@ export default class ChannelsList extends Component {
   }
 
   render() {
-    const { channels, onConnectionSelection, ...rest } = this.props;
+    const { channels, onConnectionSelection, ...rest } = this.props
 
     return (
       <Container {...rest}>
-        {channels.length === 0 &&
-          <ListButton disabled>
-            Nothing yet.
-          </ListButton>
-        }
+        {channels.length === 0 && (
+          <ListButton disabled>Nothing yet.</ListButton>
+        )}
 
         {channels.map(channel => (
           <SelectableChannel
@@ -40,6 +37,6 @@ export default class ChannelsList extends Component {
           />
         ))}
       </Container>
-    );
+    )
   }
 }

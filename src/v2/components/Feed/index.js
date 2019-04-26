@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
-import InfiniteScroll from 'react-infinite-scroller';
-import { map, flatten } from 'underscore';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import styled from 'styled-components'
+import InfiniteScroll from 'react-infinite-scroller'
+import { map, flatten } from 'underscore'
 
-import feedQuery from 'v2/components/Feed/queries/feed';
+import feedQuery from 'v2/components/Feed/queries/feed'
 
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator';
-import FeedGroups from 'v2/components/Feed/components/FeedGroups';
-import CenteringBox from 'v2/components/UI/CenteringBox';
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
+import FeedGroups from 'v2/components/Feed/components/FeedGroups'
+import CenteringBox from 'v2/components/UI/CenteringBox'
 
 const LoadingContainer = styled(CenteringBox)`
   margin-top: -250px; // Hack for now
-`;
+`
 
 export default class Feed extends PureComponent {
   static propTypes = {
@@ -34,39 +34,46 @@ export default class Feed extends PureComponent {
     hasMore: true,
   }
 
-  getContext = (data) => {
-    if (!data) return [];
+  getContext = data => {
+    if (!data) return []
 
-    const { me: { feed: { groups } } } = data;
-    return flatten(map(groups, group => group.objects));
+    const {
+      me: {
+        feed: { groups },
+      },
+    } = data
+    return flatten(map(groups, group => group.objects))
   }
 
   render() {
-    const { onCompleted, type } = this.props;
-    const { limit, hasMore, offset } = this.state;
+    const { onCompleted, type } = this.props
+    const { limit, hasMore, offset } = this.state
 
     return (
-      <Query query={feedQuery} variables={{ limit, type }} onCompleted={onCompleted} ssr={false}>
-        {({
-          loading, error, data, fetchMore,
-        }) => {
+      <Query
+        query={feedQuery}
+        variables={{ limit, type }}
+        onCompleted={onCompleted}
+        ssr={false}
+      >
+        {({ loading, error, data, fetchMore }) => {
           if (loading) {
             return (
               <LoadingContainer>
                 <LoadingIndicator p={6} />
               </LoadingContainer>
-            );
+            )
           }
 
           if (error) {
-            return (
-              <ErrorAlert m={6}>
-                {error.message}
-              </ErrorAlert>
-            );
+            return <ErrorAlert m={6}>{error.message}</ErrorAlert>
           }
 
-          const { me: { feed: { groups } } } = data;
+          const {
+            me: {
+              feed: { groups },
+            },
+          } = data
 
           return (
             <InfiniteScroll
@@ -76,9 +83,9 @@ export default class Feed extends PureComponent {
               hasMore={hasMore}
               loadMore={() => {
                 fetchMore({
-                  variables: { limit, offset: (offset + limit) },
+                  variables: { limit, offset: offset + limit },
                   updateQuery: (prevResult, { fetchMoreResult }) => {
-                    if (!fetchMoreResult) return prevResult;
+                    if (!fetchMoreResult) return prevResult
 
                     const mergedResults = {
                       ...prevResult,
@@ -92,26 +99,23 @@ export default class Feed extends PureComponent {
                           ],
                         },
                       },
-                    };
+                    }
 
-                    return mergedResults;
+                    return mergedResults
                   },
-                }).then((res) => {
+                }).then(res => {
                   this.setState({
-                    offset: (offset + limit),
+                    offset: offset + limit,
                     hasMore: !res.errors && res.data.me.feed.groups.length > 0,
-                  });
-                });
+                  })
+                })
               }}
             >
-              <FeedGroups
-                groups={groups}
-                context={this.getContext(data)}
-              />
+              <FeedGroups groups={groups} context={this.getContext(data)} />
             </InfiniteScroll>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

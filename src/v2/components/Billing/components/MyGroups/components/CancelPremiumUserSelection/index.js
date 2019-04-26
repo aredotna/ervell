@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import { graphql } from 'react-apollo';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import { graphql } from 'react-apollo'
 
-import mapErrors from 'v2/util/mapErrors';
+import mapErrors from 'v2/util/mapErrors'
 
-import billingQuery from 'v2/components/Billing/queries/billing';
+import billingQuery from 'v2/components/Billing/queries/billing'
 
-import cancelPremiumUserSelectionFragment from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/fragments/cancelPremiumUserSelection';
+import cancelPremiumUserSelectionFragment from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/fragments/cancelPremiumUserSelection'
 
-import cancelPremiumSubscriptionsMutation from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/mutations/cancelPremiumSubscriptions';
+import cancelPremiumSubscriptionsMutation from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/mutations/cancelPremiumSubscriptions'
 
-import TitledDialog from 'v2/components/UI/TitledDialog';
-import Box from 'v2/components/UI/Box';
-import Count from 'v2/components/UI/Count';
-import ErrorAlert from 'v2/components/UI/ErrorAlert';
-import CancelPremiumUserSelector from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/components/CancelPremiumUserSelector';
+import TitledDialog from 'v2/components/UI/TitledDialog'
+import Box from 'v2/components/UI/Box'
+import Count from 'v2/components/UI/Count'
+import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import CancelPremiumUserSelector from 'v2/components/Billing/components/MyGroups/components/CancelPremiumUserSelection/components/CancelPremiumUserSelector'
 
 class CancelPremiumUserSelection extends PureComponent {
   static propTypes = {
@@ -31,31 +31,32 @@ class CancelPremiumUserSelection extends PureComponent {
     cancellableUsers: [],
   }
 
-  addUser = (user) => {
-    const { cancellableUsers } = this.state;
+  addUser = user => {
+    const { cancellableUsers } = this.state
     return this.setState({
       cancellableUsers: [...cancellableUsers, user],
-    });
+    })
   }
 
-  removeUser = (user) => {
-    const { cancellableUsers } = this.state;
-    const nextCancellableUsers = cancellableUsers.filter(cancellableUser =>
-      cancellableUser.id !== user.id);
-    return this.setState({ cancellableUsers: nextCancellableUsers });
+  removeUser = user => {
+    const { cancellableUsers } = this.state
+    const nextCancellableUsers = cancellableUsers.filter(
+      cancellableUser => cancellableUser.id !== user.id
+    )
+    return this.setState({ cancellableUsers: nextCancellableUsers })
   }
 
-  cancelPremium = (e) => {
-    e.preventDefault();
+  cancelPremium = e => {
+    e.preventDefault()
 
-    const { onClose, onCanceled, cancelPremiumSubscriptions } = this.props;
-    const { cancellableUsers } = this.state;
+    const { onClose, onCanceled, cancelPremiumSubscriptions } = this.props
+    const { cancellableUsers } = this.state
 
-    if (cancellableUsers.length === 0) return onClose();
+    if (cancellableUsers.length === 0) return onClose()
 
-    this.setState({ mode: 'cancelling' });
+    this.setState({ mode: 'cancelling' })
 
-    const user_ids = cancellableUsers.map(({ id }) => id);
+    const user_ids = cancellableUsers.map(({ id }) => id)
 
     return cancelPremiumSubscriptions({
       variables: { user_ids },
@@ -63,37 +64,45 @@ class CancelPremiumUserSelection extends PureComponent {
       awaitRefetchQueries: true,
     })
       .then(() => {
-        onCanceled();
-        onClose();
+        onCanceled()
+        onClose()
       })
-      .catch((err) => {
+      .catch(err => {
         this.setState({
           mode: 'error',
           ...mapErrors(err),
-        });
-      });
+        })
+      })
   }
 
   render() {
-    const { cancellableUsers, mode, errorMessage } = this.state;
-    const { group } = this.props;
+    const { cancellableUsers, mode, errorMessage } = this.state
+    const { group } = this.props
 
     return (
       <TitledDialog
         title={`Cancel Premium for ${group.name}`}
         onDone={this.cancelPremium}
         disabled={mode === 'cancelling'}
-        label={{
-          resting_true: <span>Cancel <Count amount={cancellableUsers.length} label="Premium" /></span>,
-          resting_false: 'Done',
-          cancelling_true: <span>Canceling <Count amount={cancellableUsers.length} label="Premium" /></span>,
-        }[`${mode}_${cancellableUsers.length > 0}`]}
-      >
-        {mode === 'error' &&
-          <ErrorAlert>
-            {errorMessage}
-          </ErrorAlert>
+        label={
+          {
+            resting_true: (
+              <span>
+                Cancel{' '}
+                <Count amount={cancellableUsers.length} label="Premium" />
+              </span>
+            ),
+            resting_false: 'Done',
+            cancelling_true: (
+              <span>
+                Canceling{' '}
+                <Count amount={cancellableUsers.length} label="Premium" />
+              </span>
+            ),
+          }[`${mode}_${cancellableUsers.length > 0}`]
         }
+      >
+        {mode === 'error' && <ErrorAlert>{errorMessage}</ErrorAlert>}
 
         <Box>
           {group.users.map(user => (
@@ -107,10 +116,10 @@ class CancelPremiumUserSelection extends PureComponent {
           ))}
         </Box>
       </TitledDialog>
-    );
+    )
   }
 }
 
 export default graphql(cancelPremiumSubscriptionsMutation, {
   name: 'cancelPremiumSubscriptions',
-})(CancelPremiumUserSelection);
+})(CancelPremiumUserSelection)

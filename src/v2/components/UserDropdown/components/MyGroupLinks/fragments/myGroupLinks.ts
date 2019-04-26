@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import myGroupLinkFragment from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink';
+import myGroupLinkFragment from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink'
 
 export default gql`
   fragment MyGroupLinks on Me {
@@ -12,4 +12,4 @@ export default gql`
     }
   }
   ${myGroupLinkFragment}
-`;
+`

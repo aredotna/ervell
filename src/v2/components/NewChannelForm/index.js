@@ -1,28 +1,34 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql, Query } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { graphql, Query } from 'react-apollo'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import mapErrors from 'v2/util/mapErrors';
+import mapErrors from 'v2/util/mapErrors'
 
-import createChannelMutation from 'v2/components/NewChannelForm/mutations/createChannel';
-import newChannelQuery from 'v2/components/NewChannelForm/queries/newChannelQuery';
+import createChannelMutation from 'v2/components/NewChannelForm/mutations/createChannel'
+import newChannelQuery from 'v2/components/NewChannelForm/queries/newChannelQuery'
 
-import Text from 'v2/components/UI/Text';
-import TitledDialog from 'v2/components/UI/TitledDialog';
-import { Input, Textarea, Label, LabelledCheckbox, LabelledInput } from 'v2/components/UI/Inputs';
-import ChannelVisibilityPulldown from 'v2/components/ChannelVisibilityPulldown';
-import NewChannelGroups from 'v2/components/NewChannelForm/components/NewChannelGroups';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
+import Text from 'v2/components/UI/Text'
+import TitledDialog from 'v2/components/UI/TitledDialog'
+import {
+  Input,
+  Textarea,
+  Label,
+  LabelledCheckbox,
+  LabelledInput,
+} from 'v2/components/UI/Inputs'
+import ChannelVisibilityPulldown from 'v2/components/ChannelVisibilityPulldown'
+import NewChannelGroups from 'v2/components/NewChannelForm/components/NewChannelGroups'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 
-import RandomChannelIcon from 'v2/components/NewChannelForm/components/RandomChannelIcon';
+import RandomChannelIcon from 'v2/components/NewChannelForm/components/RandomChannelIcon'
 
 const NewChannelField = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`
 
 class NewChannelForm extends Component {
   static propTypes = {
@@ -51,8 +57,7 @@ class NewChannelForm extends Component {
     attributeErrors: {},
   }
 
-  setTitle = title =>
-    this.setState({ title });
+  setTitle = title => this.setState({ title })
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) =>
     this.setState(prevState => ({
@@ -61,58 +66,64 @@ class NewChannelForm extends Component {
         ...prevState.attributeErrors,
         [fieldName]: null, // Clear specific error once typing begins
       },
-    }));
+    }))
 
   handleCheckbox = fieldName => ({ target: { checked } }) =>
     this.setState({ [fieldName]: checked })
-      type='checkbox'
+  type = 'checkbox'
 
   handleVisitChannel = this.handleCheckbox('visit_channel')
   handleTitle = this.handleInput('title')
   handleDescription = this.handleInput('description')
 
-  handleVisibility = visibility =>
-    this.setState({ visibility });
+  handleVisibility = visibility => this.setState({ visibility })
 
-  handleAuthor = (group_id) => {
+  handleAuthor = group_id => {
     if (group_id === '0') {
-      this.setState({ authorType: 'USER', group_id: null });
-      return;
+      this.setState({ authorType: 'USER', group_id: null })
+      return
     }
-    this.setState({ group_id, authorType: 'GROUP' });
+    this.setState({ group_id, authorType: 'GROUP' })
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = e => {
+    e.preventDefault()
 
-    const { createChannel, onClose } = this.props;
+    const { createChannel, onClose } = this.props
     const {
-      title, description, visibility, group_id, visit_channel,
-    } = this.state;
+      title,
+      description,
+      visibility,
+      group_id,
+      visit_channel,
+    } = this.state
 
     const variables = {
-      title, description, visibility, group_id,
-    };
+      title,
+      description,
+      visibility,
+      group_id,
+    }
 
-    this.setState({ mode: 'creating' });
+    this.setState({ mode: 'creating' })
 
     return createChannel({ variables })
       .then(({ data: { create_channel: { channel } } }) => {
         if (visit_channel) {
-          window.location.href = channel.href;
-          this.setState({ mode: 'redirecting' });
-          return;
+          window.location.href = channel.href
+          this.setState({ mode: 'redirecting' })
+          return
         }
 
-        this.setState({ mode: 'success' });
-        setTimeout(() => onClose(), 500);
+        this.setState({ mode: 'success' })
+        setTimeout(() => onClose(), 500)
       })
-      .catch((err) => {
+      .catch(err => {
         this.setState({
           mode: 'error',
           ...mapErrors(err),
-        });
-      });
+        })
+      })
   }
 
   render() {
@@ -126,11 +137,11 @@ class NewChannelForm extends Component {
       attributeErrors,
       authorType,
       group_id,
-    } = this.state;
+    } = this.state
 
     // If the state of the form is not resting or error,
     // disable the button.
-    const isDisabled = !(mode === 'resting' || mode === 'error');
+    const isDisabled = !(mode === 'resting' || mode === 'error')
 
     return (
       <Query query={newChannelQuery}>
@@ -139,52 +150,58 @@ class NewChannelForm extends Component {
             return (
               <TitledDialog
                 title="New channel"
-                label={{
-                  resting: 'Create channel',
-                }[mode]}
+                label={
+                  {
+                    resting: 'Create channel',
+                  }[mode]
+                }
                 onDone={this.handleSubmit}
               >
                 <LoadingIndicator p={6} />
               </TitledDialog>
-            );
+            )
           }
 
           if (error) {
             return (
               <TitledDialog
                 title="New channel"
-                label={{
-                  resting: 'Create channel',
-                }[mode]}
+                label={
+                  {
+                    resting: 'Create channel',
+                  }[mode]
+                }
                 onDone={this.handleSubmit}
               >
                 <Text color="state.alert" f={2} p={6}>
                   {error.message}
                 </Text>
               </TitledDialog>
-            );
+            )
           }
 
-          const { me: { groups } } = data;
+          const {
+            me: { groups },
+          } = data
 
           return (
             <TitledDialog
               title="New channel"
-              label={{
-                resting: 'Create channel',
-                creating: 'Creating...',
-                redirecting: 'Redirecting...',
-                success: 'Created',
-                error: 'Error',
-              }[mode]}
+              label={
+                {
+                  resting: 'Create channel',
+                  creating: 'Creating...',
+                  redirecting: 'Redirecting...',
+                  success: 'Created',
+                  error: 'Error',
+                }[mode]
+              }
               onDone={this.handleSubmit}
               disabled={isDisabled}
             >
               <div>
                 <LabelledInput mt={6} mb={7}>
-                  <Label>
-                    Name
-                  </Label>
+                  <Label>Name</Label>
 
                   <NewChannelField>
                     <Input
@@ -203,23 +220,19 @@ class NewChannelForm extends Component {
                   </NewChannelField>
                 </LabelledInput>
 
-                {groups.length > 0 &&
+                {groups.length > 0 && (
                   <LabelledInput my={6} alignItems="start">
-                    <Label>
-                      Author
-                    </Label>
+                    <Label>Author</Label>
 
                     <NewChannelGroups
                       onChange={this.handleAuthor}
                       value={group_id || 0}
                     />
                   </LabelledInput>
-                }
+                )}
 
                 <LabelledInput my={6} alignItems="start">
-                  <Label>
-                    Description
-                  </Label>
+                  <Label>Description</Label>
 
                   <Textarea
                     placeholder="Describe your channel here"
@@ -231,9 +244,7 @@ class NewChannelForm extends Component {
                 </LabelledInput>
 
                 <LabelledInput my={6} alignItems="start">
-                  <Label>
-                    Privacy
-                  </Label>
+                  <Label>Privacy</Label>
 
                   <div>
                     <ChannelVisibilityPulldown
@@ -254,20 +265,20 @@ class NewChannelForm extends Component {
                   </LabelledCheckbox>
                 </LabelledInput>
 
-                {mode === 'error' &&
+                {mode === 'error' && (
                   <Text mb={6} f={2} color="state.alert" textAlign="center">
                     {errorMessage}
                   </Text>
-                }
+                )}
               </div>
             </TitledDialog>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }
 
 export default graphql(createChannelMutation, {
   name: 'createChannel',
-})(NewChannelForm);
+})(NewChannelForm)

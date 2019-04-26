@@ -1,24 +1,25 @@
-import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import { graphql } from 'react-apollo'
+import PropTypes from 'prop-types'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import GenericButton from 'v2/components/UI/GenericButton';
+import GenericButton from 'v2/components/UI/GenericButton'
 
-import initiateChannelTransferMutation from 'v2/components/ManageChannel/components/TransferChannel/components/TransferChannelSearchResults/components/InitiateChannelTransferButton/mutations/initiateChannelTransfer';
+import initiateChannelTransferMutation from 'v2/components/ManageChannel/components/TransferChannel/components/TransferChannelSearchResults/components/InitiateChannelTransferButton/mutations/initiateChannelTransfer'
 
-import { track, en } from 'lib/analytics.coffee';
+import { track, en } from 'lib/analytics.coffee'
 
 const Button = styled(GenericButton).attrs({
   f: 1,
 })`
   align-self: center;
-`;
+`
 
 class InitiateChannelTransferButton extends PureComponent {
   static propTypes = {
-    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    channel_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
     owner_id: PropTypes.number.isRequired,
     owner_type: PropTypes.string.isRequired,
     initiateChannelTransfer: PropTypes.func.isRequired,
@@ -34,9 +35,9 @@ class InitiateChannelTransferButton extends PureComponent {
       owner_id,
       owner_type,
       initiateChannelTransfer,
-    } = this.props;
+    } = this.props
 
-    this.setState({ mode: 'giving' });
+    this.setState({ mode: 'giving' })
 
     return initiateChannelTransfer({
       variables: {
@@ -46,29 +47,36 @@ class InitiateChannelTransferButton extends PureComponent {
       },
     })
       .then(() =>
-        track.submit(en.STARTED_CHANNEL_TRANSFER, { channel_id, owner_id, owner_type }))
+        track.submit(en.STARTED_CHANNEL_TRANSFER, {
+          channel_id,
+          owner_id,
+          owner_type,
+        })
+      )
 
-      .catch((err) => {
-        console.error(err);
-        this.setState({ mode: 'error' });
-      });
+      .catch(err => {
+        console.error(err)
+        this.setState({ mode: 'error' })
+      })
   }
 
   render() {
-    const { mode } = this.state;
+    const { mode } = this.state
 
     return (
       <Button onClick={this.handleClick}>
-        {{
-          resting: 'Give',
-          giving: 'Sending...',
-          error: 'An error occurred',
-        }[mode]}
+        {
+          {
+            resting: 'Give',
+            giving: 'Sending...',
+            error: 'An error occurred',
+          }[mode]
+        }
       </Button>
-    );
+    )
   }
 }
 
 export default graphql(initiateChannelTransferMutation, {
   name: 'initiateChannelTransfer',
-})(InitiateChannelTransferButton);
+})(InitiateChannelTransferButton)

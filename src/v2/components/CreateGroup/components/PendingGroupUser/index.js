@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import { graphql } from 'react-apollo';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import { graphql } from 'react-apollo'
+import styled from 'styled-components'
 
-import currentUserService from 'v2/util/currentUserService';
+import currentUserService from 'v2/util/currentUserService'
 
-import Avatar from 'v2/components/UI/Avatar';
-import UserAvatar from 'v2/components/UserAvatar';
-import GenericButton from 'v2/components/UI/GenericButton';
+import Avatar from 'v2/components/UI/Avatar'
+import UserAvatar from 'v2/components/UserAvatar'
+import GenericButton from 'v2/components/UI/GenericButton'
 
-import pendingGroupUserQuery from 'v2/components/CreateGroup/components/PendingGroupUser/queries/pendingGroupUser';
-import pendingGroupUserFragment from 'v2/components/CreateGroup/components/PendingGroupUser/fragments/pendingGroupUser';
+import pendingGroupUserQuery from 'v2/components/CreateGroup/components/PendingGroupUser/queries/pendingGroupUser'
+import pendingGroupUserFragment from 'v2/components/CreateGroup/components/PendingGroupUser/fragments/pendingGroupUser'
 
 const Container = styled.div`
   display: flex;
   padding: 0.5em;
   border-top: 1px solid ${x => x.theme.colors.gray.light};
-`;
+`
 
 const Representation = styled.div`
   display: flex;
   flex: 1;
-`;
+`
 
 const Information = styled.div`
   display: flex;
@@ -31,18 +31,18 @@ const Information = styled.div`
   justify-content: space-around;
   padding-left: 1em;
   font-size: ${x => x.theme.fontSizesIndexed.xs};
-`;
+`
 
 const Name = styled.a`
   display: block;
   font-weight: bold;
-`;
+`
 
 const Button = styled(GenericButton).attrs({
   f: 1,
 })`
   align-self: center;
-`;
+`
 
 class PendingGroupUser extends Component {
   static propTypes = {
@@ -54,12 +54,19 @@ class PendingGroupUser extends Component {
   }
 
   remove = () => {
-    const { data: { user: { id } }, onRemove } = this.props;
-    return onRemove(id);
+    const {
+      data: {
+        user: { id },
+      },
+      onRemove,
+    } = this.props
+    return onRemove(id)
   }
 
   render() {
-    const { data: { loading } } = this.props;
+    const {
+      data: { loading },
+    } = this.props
 
     if (loading) {
       return (
@@ -68,17 +75,17 @@ class PendingGroupUser extends Component {
             <Avatar />
 
             <Information>
-              <Name>
-                ...
-              </Name>
+              <Name>...</Name>
             </Information>
           </Representation>
         </Container>
-      );
+      )
     }
 
-    const { data: { user } } = this.props;
-    const isOwner = currentUserService().id === user.id;
+    const {
+      data: { user },
+    } = this.props
+    const isOwner = currentUserService().id === user.id
 
     return (
       <Container>
@@ -86,21 +93,16 @@ class PendingGroupUser extends Component {
           <UserAvatar user={user} />
 
           <Information>
-            <Name href={user.href}>
-              {user.name}
-            </Name>
+            <Name href={user.href}>{user.name}</Name>
           </Information>
         </Representation>
 
-        <Button
-          onClick={this.remove}
-          disabled={isOwner}
-        >
+        <Button onClick={this.remove} disabled={isOwner}>
           {isOwner ? 'Owner' : 'Remove'}
         </Button>
       </Container>
-    );
+    )
   }
 }
 
-export default graphql(pendingGroupUserQuery)(PendingGroupUser);
+export default graphql(pendingGroupUserQuery)(PendingGroupUser)

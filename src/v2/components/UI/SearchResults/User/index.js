@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult';
+import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult'
 
 import {
   Container,
@@ -10,20 +10,20 @@ import {
   Information,
   Name,
   Email,
-} from 'v2/components/UI/SearchResults/UI';
+} from 'v2/components/UI/SearchResults/UI'
 
 export default class UserSearchResult extends Component {
   static propTypes = {
     user: propType(userSearchResultFragment).isRequired,
     children: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
     children: null,
-  };
+  }
 
   render() {
-    const { user, children } = this.props;
+    const { user, children } = this.props
 
     return (
       <Container>
@@ -37,6 +37,6 @@ export default class UserSearchResult extends Component {
 
         {children && children}
       </Container>
-    );
+    )
   }
 }

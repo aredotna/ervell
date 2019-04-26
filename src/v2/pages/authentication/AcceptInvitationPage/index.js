@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import sharify from 'sharify';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import sharify from 'sharify'
 
-import inviteeQuery from 'v2/pages/authentication/AcceptInvitationPage/queries/invitee';
+import inviteeQuery from 'v2/pages/authentication/AcceptInvitationPage/queries/invitee'
 
-import Head from 'v2/components/UI/Head';
-import Title from 'v2/components/UI/Head/components/Title';
-import Icons from 'v2/components/UI/Icons';
-import CenteringBox from 'v2/components/UI/CenteringBox';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import Text from 'v2/components/UI/Text';
-import RegistrationForm from 'v2/components/RegistrationForm';
+import Head from 'v2/components/UI/Head'
+import Title from 'v2/components/UI/Head/components/Title'
+import Icons from 'v2/components/UI/Icons'
+import CenteringBox from 'v2/components/UI/CenteringBox'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import Text from 'v2/components/UI/Text'
+import RegistrationForm from 'v2/components/RegistrationForm'
 
 const {
   data: { RECAPTCHA_SITE_KEY },
-} = sharify;
+} = sharify
 
 export default class AcceptInvitationPage extends Component {
   static propTypes = {
@@ -27,29 +27,29 @@ export default class AcceptInvitationPage extends Component {
     // At the moment this is passed as `invite_token` in the
     // query string of the URL in the invitation email
     raw_invitation_token: PropTypes.string,
-  };
+  }
 
   static defaultProps = {
     raw_invitation_token: null,
-  };
+  }
 
   state = {
     validation_token: null,
-  };
+  }
 
   componentDidMount() {
     window.onRecaptchaLoad = () => {
       window.grecaptcha.ready(() => {
         window.grecaptcha
           .execute(RECAPTCHA_SITE_KEY, { action: 'homepage' })
-          .then(validation_token => this.setState({ validation_token }));
-      });
-    };
+          .then(validation_token => this.setState({ validation_token }))
+      })
+    }
   }
 
   render() {
-    const { validation_token } = this.state;
-    const { invitation_token, raw_invitation_token } = this.props;
+    const { validation_token } = this.state
+    const { invitation_token, raw_invitation_token } = this.props
 
     return (
       <Query query={inviteeQuery} variables={{ invitation_token }} ssr={false}>
@@ -59,7 +59,7 @@ export default class AcceptInvitationPage extends Component {
               <CenteringBox>
                 <LoadingIndicator />
               </CenteringBox>
-            );
+            )
           }
 
           if (error) {
@@ -78,7 +78,7 @@ export default class AcceptInvitationPage extends Component {
                   <a href="mailto:help@are.na">help@are.na</a>
                 </Text>
               </CenteringBox>
-            );
+            )
           }
 
           return (
@@ -97,9 +97,9 @@ export default class AcceptInvitationPage extends Component {
                 validation_token={validation_token}
               />
             </CenteringBox>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }

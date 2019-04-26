@@ -1,24 +1,25 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import userSelectionFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection';
-import userSelectorFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector';
+import userSelectionFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/fragments/userSelection'
+import userSelectorFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector/fragments/userSelector'
 
-import { PLAN_AMOUNTS } from 'v2/components/Billing/config';
+import { PLAN_AMOUNTS } from 'v2/components/Billing/config'
 
-import TitledDialog from 'v2/components/UI/TitledDialog';
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
-import Count from 'v2/components/UI/Count';
-import GroupOwner from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner';
-import UserSelector from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector';
+import TitledDialog from 'v2/components/UI/TitledDialog'
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Count from 'v2/components/UI/Count'
+import GroupOwner from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner'
+import UserSelector from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/UserSelector'
 
 export default class UserSelection extends PureComponent {
   static propTypes = {
     group: propType(userSelectionFragment).isRequired,
     term: PropTypes.oneOf(['month', 'year']).isRequired,
-    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment)).isRequired,
+    upgradeableUsers: PropTypes.arrayOf(propType(userSelectorFragment))
+      .isRequired,
     onAddUser: PropTypes.func.isRequired,
     onRemoveUser: PropTypes.func.isRequired,
     onDone: PropTypes.func.isRequired,
@@ -32,16 +33,14 @@ export default class UserSelection extends PureComponent {
       onAddUser,
       onRemoveUser,
       onDone,
-    } = this.props;
+    } = this.props
 
-    const amount = upgradeableUsers.length +
-      ((group.subscription && group.subscription.users.length) || 0);
+    const amount =
+      upgradeableUsers.length +
+      ((group.subscription && group.subscription.users.length) || 0)
 
     return (
-      <TitledDialog
-        title={`Upgrade members of ${group.name}`}
-        onDone={onDone}
-      >
+      <TitledDialog title={`Upgrade members of ${group.name}`} onDone={onDone}>
         <Box>
           <GroupOwner user={group.owner} />
 
@@ -66,12 +65,11 @@ export default class UserSelection extends PureComponent {
           textAlign="center"
         >
           <Text color="state.premium">
-            <Count amount={amount} label="member" />
-            {' '}
-            selected = ${((PLAN_AMOUNTS[term] * amount) / 100).toFixed(2)} / {term}
+            <Count amount={amount} label="member" /> selected = $
+            {((PLAN_AMOUNTS[term] * amount) / 100).toFixed(2)} / {term}
           </Text>
         </Box>
       </TitledDialog>
-    );
+    )
   }
 }

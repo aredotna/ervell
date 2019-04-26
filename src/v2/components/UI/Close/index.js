@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import {
   themeGet,
   display,
@@ -13,9 +13,9 @@ import {
   bgColor,
   alignSelf,
   zIndex,
-} from 'styled-system';
+} from 'styled-system'
 
-import { preset } from 'v2/styles/functions';
+import { preset } from 'v2/styles/functions'
 
 const Container = styled.a`
   cursor: pointer;
@@ -37,7 +37,7 @@ const Container = styled.a`
       background-color: black;
     }
   }
-`;
+`
 
 const Glyph = styled.span`
   position: relative;
@@ -55,7 +55,10 @@ const Glyph = styled.span`
     height: ${props => props.thickness};
     top: 50%;
     left: 50%;
-    background-color: ${props => themeGet(`colors.${props.color}`, props.theme.colors.gray.semiBold)(props)};
+    background-color: ${props =>
+      themeGet(`colors.${props.color}`, props.theme.colors.gray.semiBold)(
+        props
+      )};
   }
 
   &:before {
@@ -65,26 +68,24 @@ const Glyph = styled.span`
   &:after {
     transform: translate(-50%, -50%) rotate(135deg);
   }
-`;
+`
 
-const Close = ({
-  size, color, thickness, ...rest
-}) => (
+const Close = ({ size, color, thickness, ...rest }) => (
   <Container {...rest}>
     <Glyph size={size} color={color} thickness={thickness} />
   </Container>
-);
+)
 
 Close.propTypes = {
   color: PropTypes.string,
   thickness: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+}
 
 Close.defaultProps = {
   color: 'gray.semiBold',
   thickness: '1px',
   size: 6,
-};
+}
 
-export default Close;
+export default Close

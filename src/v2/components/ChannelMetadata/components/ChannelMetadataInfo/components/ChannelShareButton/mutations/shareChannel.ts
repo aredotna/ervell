@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import channelShareButtonFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton/fragments/channelShareButton';
+import channelShareButtonFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton/fragments/channelShareButton'
 
 export default gql`
   mutation shareChannelMutation($id: ID!, $enable: Boolean!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${channelShareButtonFragment}
-`;
+`

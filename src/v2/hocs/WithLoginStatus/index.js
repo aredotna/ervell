@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
-import isLoggedInQuery from 'v2/hocs/WithLoginStatus/queries/isLoggedIn';
+import isLoggedInQuery from 'v2/hocs/WithLoginStatus/queries/isLoggedIn'
 
 const withLoginStatus = WrappedComponent => {
   class WithLoginStatus extends Component {
@@ -12,7 +12,7 @@ const withLoginStatus = WrappedComponent => {
           isLoggedIn: PropTypes.bool,
         }),
       }),
-    };
+    }
 
     static defaultProps = {
       data: {
@@ -20,20 +20,20 @@ const withLoginStatus = WrappedComponent => {
           isLoggedIn: false,
         },
       },
-    };
+    }
 
     render() {
       const {
         data: { loginStatus },
         ...rest
-      } = this.props;
-      const isLoggedIn = loginStatus && loginStatus.isLoggedIn;
+      } = this.props
+      const isLoggedIn = loginStatus && loginStatus.isLoggedIn
 
-      return <WrappedComponent isLoggedIn={isLoggedIn} {...rest} />;
+      return <WrappedComponent isLoggedIn={isLoggedIn} {...rest} />
     }
   }
 
-  return graphql(isLoggedInQuery)(WithLoginStatus);
-};
+  return graphql(isLoggedInQuery)(WithLoginStatus)
+}
 
-export default withLoginStatus;
+export default withLoginStatus

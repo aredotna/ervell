@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import GenericButton from 'v2/components/UI/GenericButton';
-import ConnectionSelection from 'v2/components/ConnectionSelection';
+import Box from 'v2/components/UI/Box'
+import GenericButton from 'v2/components/UI/GenericButton'
+import ConnectionSelection from 'v2/components/ConnectionSelection'
 
-import { inputPadding } from 'v2/components/UI/Inputs';
+import { inputPadding } from 'v2/components/UI/Inputs'
 
 const Container = styled(Box)`
   position: relative;
   font-size: ${props => props.theme.fontSizesIndexed.xs};
-`;
+`
 
 const Fieldset = styled.div`
   position: relative;
-`;
+`
 
 const Close = styled.a.attrs({
   role: 'button',
@@ -37,24 +37,26 @@ const Close = styled.a.attrs({
     transform: translate(-50%, -50%);
     font-size: ${props => props.theme.fontSizesIndexed.lg};
   }
-`;
+`
 
 // HACK: Inputs get rendered 2px taller than buttons
 // given identical params. This allows us to match them up.
 const ConnectPadding = styled.span`
   display: inline-block;
   padding: 1px 0;
-`;
+`
 
 export default class Connect extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
     f: PropTypes.number,
-    refetchQueries: PropTypes.arrayOf(PropTypes.shape({
-      query: PropTypes.object.isRequired,
-      variables: PropTypes.object,
-    })),
+    refetchQueries: PropTypes.arrayOf(
+      PropTypes.shape({
+        query: PropTypes.object.isRequired,
+        variables: PropTypes.object,
+      })
+    ),
   }
 
   static defaultProps = {
@@ -67,30 +69,26 @@ export default class Connect extends Component {
   }
 
   openConnect = () => {
-    this.setState({ mode: 'active' });
+    this.setState({ mode: 'active' })
   }
 
   handleClose = () => {
-    this.setState({ mode: 'resting' });
+    this.setState({ mode: 'resting' })
   }
 
   render() {
-    const { mode } = this.state;
-    const {
-      id, type, f, refetchQueries, ...rest
-    } = this.props;
+    const { mode } = this.state
+    const { id, type, f, refetchQueries, ...rest } = this.props
 
     return (
       <Container {...rest}>
-        {mode === 'resting' &&
+        {mode === 'resting' && (
           <GenericButton onClick={this.openConnect} f={f}>
-            <ConnectPadding>
-              Connect &rarr;
-            </ConnectPadding>
+            <ConnectPadding>Connect &rarr;</ConnectPadding>
           </GenericButton>
-        }
+        )}
 
-        {mode === 'active' &&
+        {mode === 'active' && (
           <Fieldset>
             <Close onClick={this.handleClose}>
               &nbsp;
@@ -103,8 +101,8 @@ export default class Connect extends Component {
               refetchQueries={refetchQueries}
             />
           </Fieldset>
-        }
+        )}
       </Container>
-    );
+    )
   }
 }

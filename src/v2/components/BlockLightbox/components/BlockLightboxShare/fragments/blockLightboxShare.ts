@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment BlockLightboxShare on Konnectable {
@@ -7,4 +7,4 @@ export default gql`
       shareable_title: title(truncate: 40)
     }
   }
-`;
+`

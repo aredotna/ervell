@@ -1,7 +1,7 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import TopBar from 'v2/components/TopBar';
+import TopBar from 'v2/components/TopBar'
 
 storiesOf('TopBar', module)
   .add('logged in', () => (
@@ -10,4 +10,4 @@ storiesOf('TopBar', module)
   .add('logged in (group context)', () => (
     <TopBar scheme="GROUP" me={{ id: 1, initials: 'CB' }} />
   ))
-  .add('logged out', () => <TopBar border="1px dotted black" />);
+  .add('logged out', () => <TopBar border="1px dotted black" />)

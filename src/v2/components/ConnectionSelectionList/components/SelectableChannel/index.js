@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import styled from 'styled-components'
 
-import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel';
+import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel'
 
-import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan';
-import TickerTapeHover from 'v2/components/UI/TickerTapeHover';
+import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan'
+import TickerTapeHover from 'v2/components/UI/TickerTapeHover'
 
-import { inputPadding } from 'v2/components/UI/Inputs';
-import { baseMixin as baseTextMixin } from 'v2/components/UI/Text';
-import Badge from 'v2/components/UI/Badge';
-import Box from 'v2/components/UI/Box';
-import BorderedLock from 'v2/components/UI/BorderedLock';
+import { inputPadding } from 'v2/components/UI/Inputs'
+import { baseMixin as baseTextMixin } from 'v2/components/UI/Text'
+import Badge from 'v2/components/UI/Badge'
+import Box from 'v2/components/UI/Box'
+import BorderedLock from 'v2/components/UI/BorderedLock'
 
 const Lock = styled(Box).attrs({
   pr: 3,
@@ -22,11 +22,13 @@ const Lock = styled(Box).attrs({
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  background: linear-gradient(to left,
+  background: linear-gradient(
+    to left,
     ${props => props.theme.colors.gray.hint} 90%,
-    ${props => props.theme.colors.utility.transparent});
+    ${props => props.theme.colors.utility.transparent}
+  );
   z-index: 1;
-`;
+`
 
 const Container = styled.div.attrs({
   role: 'button',
@@ -62,7 +64,9 @@ const Container = styled.div.attrs({
     right: 0;
     bottom: 0;
     width: 1em;
-    background: linear-gradient(to left, ${props => props.theme.colors.gray.hint}, ${props => props.theme.colors.utility.transparent});
+    background: linear-gradient(to left, ${props =>
+      props.theme.colors.gray.hint}, ${props =>
+  props.theme.colors.utility.transparent});
     z-index: 1;
   }
 
@@ -70,7 +74,9 @@ const Container = styled.div.attrs({
   &[data-selected="true"] {
     &:before {
       width: 3em;
-      background linear-gradient(to left, ${props => props.theme.colors.gray.hint} 60%, ${props => props.theme.colors.utility.transparent})
+      background linear-gradient(to left, ${props =>
+        props.theme.colors.gray.hint} 60%, ${props =>
+  props.theme.colors.utility.transparent})
     }
 
     &:after {
@@ -90,14 +96,14 @@ const Container = styled.div.attrs({
       opacity: 0.5;
     }
   }
-`;
+`
 
 const HoverableInner = styled(TickerTapeHover).attrs({
   speed: 1,
   offsetBuffer: 32,
 })`
   padding: ${inputPadding}; // TODO
-`;
+`
 
 const Separator = styled.div`
   display: inline-block;
@@ -107,11 +113,11 @@ const Separator = styled.div`
   vertical-align: baseline;
   transform: rotate(30deg);
   background-color: ${props => props.theme.colors.gray.medium};
-`;
+`
 
 const GroupBadge = styled(Badge)`
   transform: scale(0.8);
-`;
+`
 
 export default class SelectableChannel extends Component {
   static propTypes = {
@@ -128,22 +134,25 @@ export default class SelectableChannel extends Component {
   }
 
   toggleSelection = () => {
-    const { onSelection, channel } = this.props;
+    const { onSelection, channel } = this.props
 
     this.setState(({ isSelected }) => {
-      onSelection(!isSelected, channel.id);
+      onSelection(!isSelected, channel.id)
 
-      return { isSelected: !isSelected };
-    });
+      return { isSelected: !isSelected }
+    })
   }
 
   render() {
-    const { isSelected } = this.state;
+    const { isSelected } = this.state
     const {
       channel: {
-        title, visibility, owner, owner: { name },
+        title,
+        visibility,
+        owner,
+        owner: { name },
       },
-    } = this.props;
+    } = this.props
 
     return (
       <Container
@@ -155,11 +164,16 @@ export default class SelectableChannel extends Component {
         <HoverableInner>
           {name}
 
-          {owner.__typename === 'Group' &&
-            <GroupBadge ml={2} f={0} color="gray.medium" icon={{ private: 'Lock' }[owner.visibility]}>
+          {owner.__typename === 'Group' && (
+            <GroupBadge
+              ml={2}
+              f={0}
+              color="gray.medium"
+              icon={{ private: 'Lock' }[owner.visibility]}
+            >
               Group
             </GroupBadge>
-          }
+          )}
 
           <Separator />
 
@@ -169,12 +183,12 @@ export default class SelectableChannel extends Component {
           />
         </HoverableInner>
 
-        {visibility === 'private' &&
+        {visibility === 'private' && (
           <Lock>
             <BorderedLock />
           </Lock>
-        }
+        )}
       </Container>
-    );
+    )
   }
 }

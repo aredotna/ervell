@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { themeGet } from 'styled-system';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
-import Box from 'v2/components/UI/Box';
+import Box from 'v2/components/UI/Box'
 
 const Switch = styled(Box)`
   position: relative;
@@ -56,7 +56,7 @@ const Switch = styled(Box)`
     pointer-events: none;
     cursor: default;
   `}
-`;
+`
 
 export default class ToggleSwitch extends PureComponent {
   static propTypes = {
@@ -65,7 +65,7 @@ export default class ToggleSwitch extends PureComponent {
     inactiveColor: PropTypes.string,
     activeColor: PropTypes.string,
     onToggle: PropTypes.func,
-  };
+  }
 
   static defaultProps = {
     size: '2em',
@@ -73,26 +73,26 @@ export default class ToggleSwitch extends PureComponent {
     inactiveColor: 'gray.medium',
     activeColor: 'gray.bold',
     onToggle: () => {},
-  };
+  }
 
   state = {
     value: this.props.value,
-  };
+  }
 
   toggle = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { value: prevValue } = this.state;
-    const { onToggle } = this.props;
+    const { value: prevValue } = this.state
+    const { onToggle } = this.props
 
-    const value = !prevValue;
+    const value = !prevValue
 
-    this.setState({ value }, () => onToggle(value));
-  };
+    this.setState({ value }, () => onToggle(value))
+  }
 
   render() {
-    const { value: _value, ...rest } = this.props;
-    const { value } = this.state;
+    const { value: _value, ...rest } = this.props
+    const { value } = this.state
 
     return (
       <Switch
@@ -102,6 +102,6 @@ export default class ToggleSwitch extends PureComponent {
         value={value}
         {...rest}
       />
-    );
+    )
   }
 }

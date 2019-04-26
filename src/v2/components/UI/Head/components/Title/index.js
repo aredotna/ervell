@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Head from 'v2/components/UI/Head';
+import Head from 'v2/components/UI/Head'
 
-export const TITLE_TEMPLATE = 'Are.na / %s';
+export const TITLE_TEMPLATE = 'Are.na / %s'
 
 const Title = ({ children }) => {
-  const title = TITLE_TEMPLATE.replace('%s', children);
+  const title = TITLE_TEMPLATE.replace('%s', children)
 
   return (
     <Head>
@@ -14,11 +14,11 @@ const Title = ({ children }) => {
       <meta name="twitter:title" content={title} />
       <meta property="og:title" content={title} />
     </Head>
-  );
-};
+  )
+}
 
 Title.propTypes = {
   children: PropTypes.string.isRequired,
-};
+}
 
-export default Title;
+export default Title

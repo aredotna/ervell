@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import ImageOnLoad from 'react-image-onload';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import ImageOnLoad from 'react-image-onload'
 
 const Img = styled(ImageOnLoad)`
   display: none;
@@ -10,12 +10,12 @@ const Img = styled(ImageOnLoad)`
     if (mode === 'done') {
       return `
         display: block;
-      `;
+      `
     }
 
-    return '';
+    return ''
   }}
-`;
+`
 
 export default class LoadableImage extends Component {
   static propTypes = {
@@ -24,31 +24,31 @@ export default class LoadableImage extends Component {
     title: PropTypes.string,
     onLoad: PropTypes.func,
     onError: PropTypes.func,
-  };
+  }
 
   static defaultProps = {
     alt: null,
     title: null,
     onLoad: () => {},
     onError: () => {},
-  };
+  }
 
   state = {
     mode: 'loading',
-  };
+  }
 
   handleLoad = () => {
-    this.setState({ mode: 'done' });
-    this.props.onLoad();
-  };
+    this.setState({ mode: 'done' })
+    this.props.onLoad()
+  }
 
   handleError = () => {
-    this.setState({ mode: 'error' });
-    this.props.onError();
-  };
+    this.setState({ mode: 'error' })
+    this.props.onError()
+  }
 
   render() {
-    const { mode } = this.state;
+    const { mode } = this.state
     const {
       src,
       alt,
@@ -56,7 +56,7 @@ export default class LoadableImage extends Component {
       onLoad: _onLoad,
       onError: _onError,
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <Img
@@ -68,6 +68,6 @@ export default class LoadableImage extends Component {
         onError={this.handleError}
         {...rest}
       />
-    );
+    )
   }
 }

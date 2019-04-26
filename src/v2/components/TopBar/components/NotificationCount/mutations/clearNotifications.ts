@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import notificationCountFragment from 'v2/components/TopBar/components/NotificationCount/fragments/notificationCount';
+import notificationCountFragment from 'v2/components/TopBar/components/NotificationCount/fragments/notificationCount'
 
 export default gql`
   mutation clearNotifications {
@@ -13,4 +13,4 @@ export default gql`
     }
   }
   ${notificationCountFragment}
-`;
+`

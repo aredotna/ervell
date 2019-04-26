@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 // TODO: Group canonical & is_indexable
 
@@ -20,4 +20,4 @@ export default gql`
       href
     }
   }
-`;
+`

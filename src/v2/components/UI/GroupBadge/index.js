@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Badge from 'v2/components/UI/Badge';
+import Badge from 'v2/components/UI/Badge'
 
 const GroupBadge = ({ visibility, color, ...rest }) => (
   <Badge
@@ -14,15 +14,15 @@ const GroupBadge = ({ visibility, color, ...rest }) => (
   >
     Group
   </Badge>
-);
+)
 
 GroupBadge.propTypes = {
   visibility: PropTypes.oneOf(['public', 'private']).isRequired,
   color: PropTypes.string,
-};
+}
 
 GroupBadge.defaultProps = {
   color: 'gray.medium',
-};
+}
 
-export default GroupBadge;
+export default GroupBadge

@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { PureComponent } from 'react'
+import styled, { css } from 'styled-components'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import textFragment from 'v2/components/Cell/components/Konnectable/components/Text/fragments/text';
+import textFragment from 'v2/components/Cell/components/Konnectable/components/Text/fragments/text'
 
-import Box from 'v2/components/UI/Box';
-import Typography from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Typography from 'v2/components/UI/Text'
 
 const hoverMixin = css`
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
-`;
+`
 
 const Container = styled(Box).attrs({
   pt: 4,
@@ -24,10 +24,14 @@ const Container = styled(Box).attrs({
   text-align: left;
 
   ${props => props.mode === 'hover' && hoverMixin}
-  &:hover { ${hoverMixin} }
+  &:hover {
+    ${hoverMixin}
+  }
 
   // If text is long: overflow with a small gradient fade out
-  ${props => props.length > 500 && `
+  ${props =>
+    props.length > 500 &&
+    `
     &:after {
       content: '';
       display: block;
@@ -36,10 +40,12 @@ const Container = styled(Box).attrs({
       bottom: 0;
       left: 0;
       height: 3em;
-      background: linear-gradient(${props.theme.colors.utility.transparent} 0%, white 100%);
+      background: linear-gradient(${
+        props.theme.colors.utility.transparent
+      } 0%, white 100%);
     }
   `}
-`;
+`
 
 export default class Text extends PureComponent {
   static propTypes = {
@@ -52,7 +58,11 @@ export default class Text extends PureComponent {
   }
 
   render() {
-    const { text: { content }, mode, ...rest } = this.props;
+    const {
+      text: { content },
+      mode,
+      ...rest
+    } = this.props
 
     return (
       <Container length={content.length} mode={mode} {...rest}>
@@ -65,6 +75,6 @@ export default class Text extends PureComponent {
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </Container>
-    );
+    )
   }
 }

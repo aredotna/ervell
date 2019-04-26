@@ -1,19 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 const Header = ({ children: title, ...rest }) => (
-  <Box mt={6} mb={3} pb={3} borderBottom="1px solid" borderColor="gray.light" {...rest}>
+  <Box
+    mt={6}
+    mb={3}
+    pb={3}
+    borderBottom="1px solid"
+    borderColor="gray.light"
+    {...rest}
+  >
     <Text f={3} color="gray.medium">
       {title}
     </Text>
   </Box>
-);
+)
 
 Header.propTypes = {
   children: PropTypes.node.isRequired,
-};
+}
 
-export default Header;
+export default Header

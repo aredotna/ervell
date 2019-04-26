@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.div`
   display: flex;
@@ -7,4 +7,4 @@ export default styled.div`
   border-top: 0;
   background-color: ${x => x.theme.colors.gray.hint};
   font-size: ${x => x.theme.fontSizesIndexed.xs};
-`;
+`

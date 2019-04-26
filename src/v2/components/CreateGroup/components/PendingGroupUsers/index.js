@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import PendingGroupUser from 'v2/components/CreateGroup/components/PendingGroupUser';
+import PendingGroupUser from 'v2/components/CreateGroup/components/PendingGroupUser'
 
 export default class PendingGroupUsers extends Component {
   static propTypes = {
@@ -10,18 +10,14 @@ export default class PendingGroupUsers extends Component {
   }
 
   render() {
-    const { user_ids, onRemove } = this.props;
+    const { user_ids, onRemove } = this.props
 
     return (
       <div>
         {user_ids.map(id => (
-          <PendingGroupUser
-            key={id}
-            id={id}
-            onRemove={onRemove}
-          />
+          <PendingGroupUser key={id} id={id} onRemove={onRemove} />
         ))}
       </div>
-    );
+    )
   }
 }

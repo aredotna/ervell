@@ -1,10 +1,10 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
+import Specimen from 'v2/stories/__components__/Specimen'
 
-import Accordion from 'v2/components/UI/Accordion';
-import Text from 'v2/components/UI/Text';
+import Accordion from 'v2/components/UI/Accordion'
+import Text from 'v2/components/UI/Text'
 
 const sampleCopy = `
   Accordions (from 19th-century German Akkordeon, from Akkord—"musical chord,
@@ -12,7 +12,7 @@ const sampleCopy = `
   bellows-driven free-reed aerophone type, colloquially referred to as a squeezebox.
   A person who plays the accordion is called an accordionist. The concertina and
   bandoneón are related; the harmonium and American reed organ are in the same family.
-`;
+`
 
 storiesOf('Accordion', module).add('default', () => (
   <Specimen>
@@ -32,4 +32,4 @@ storiesOf('Accordion', module).add('default', () => (
       <Text p={2}>{sampleCopy}</Text>
     </Accordion>
   </Specimen>
-));
+))

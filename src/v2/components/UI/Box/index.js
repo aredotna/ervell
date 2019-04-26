@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 import {
   display,
   position,
@@ -25,12 +25,12 @@ import {
   bottom,
   left,
   zIndex,
-} from 'styled-system';
+} from 'styled-system'
 
-import { neutralMargins, overflowScrolling } from 'v2/styles/mixins';
+import { neutralMargins, overflowScrolling } from 'v2/styles/mixins'
 
-const flexGrow = style({ prop: 'flexGrow' });
-const flexShrink = style({ prop: 'flexShrink' });
+const flexGrow = style({ prop: 'flexGrow' })
+const flexShrink = style({ prop: 'flexShrink' })
 
 export const mixin = css`
   box-sizing: border-box;
@@ -62,8 +62,8 @@ export const mixin = css`
   ${left}
   ${zIndex}
   ${props => props.overflowScrolling && overflowScrolling}
-`;
+`
 
 export default styled.div`
   ${mixin}
-`;
+`

@@ -1,10 +1,10 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
-import Specimen from 'v2/stories/__components__/Specimen';
+import Specimen from 'v2/stories/__components__/Specimen'
 
-import ToggleSwitch from 'v2/components/UI/ToggleSwitch';
+import ToggleSwitch from 'v2/components/UI/ToggleSwitch'
 
 storiesOf('ToggleSwitch', module)
   .add('default', () => (
@@ -38,4 +38,4 @@ storiesOf('ToggleSwitch', module)
         onToggle={action('onToggle')}
       />
     </Specimen>
-  ));
+  ))

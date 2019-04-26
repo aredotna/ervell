@@ -1,3 +1,3 @@
-import sharify from 'sharify';
+import sharify from 'sharify'
 
-export default () => sharify.data.CURRENT_USER;
+export default () => sharify.data.CURRENT_USER

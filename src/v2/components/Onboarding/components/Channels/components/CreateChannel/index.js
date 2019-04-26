@@ -1,26 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { space } from 'styled-system';
-import { preset } from 'v2/styles/functions';
-import { compose, graphql } from 'react-apollo';
-import { setChannelOnboardingCookie } from 'v2/components/Onboarding/util/channelOnboardingCookieManager';
-import userInfoQuery from 'v2/components/Onboarding/components/Channels/components/CreateChannel/queries/userInfo';
-import createChannelMutation from 'v2/components/Onboarding/components/Channels/components/CreateChannel/mutations/createChannel';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-import AnimatedCTAText from 'v2/components/Onboarding/components/Channels/components/CreateChannel/components/AnimatedCTAText';
-import ChannelTitleInput from 'v2/components/Onboarding/components/UI/ChannelTitleInput';
-import CTAText from 'v2/components/Onboarding/components/UI/CTAText';
-import CTAButton from 'v2/components/Onboarding/components/UI/CTAButton';
-import Types from 'v2/components/Block/util/Types';
-import Block from 'v2/components/Block';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { space } from 'styled-system'
+import { preset } from 'v2/styles/functions'
+import { compose, graphql } from 'react-apollo'
+import { setChannelOnboardingCookie } from 'v2/components/Onboarding/util/channelOnboardingCookieManager'
+import userInfoQuery from 'v2/components/Onboarding/components/Channels/components/CreateChannel/queries/userInfo'
+import createChannelMutation from 'v2/components/Onboarding/components/Channels/components/CreateChannel/mutations/createChannel'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import AnimatedCTAText from 'v2/components/Onboarding/components/Channels/components/CreateChannel/components/AnimatedCTAText'
+import ChannelTitleInput from 'v2/components/Onboarding/components/UI/ChannelTitleInput'
+import CTAText from 'v2/components/Onboarding/components/UI/CTAText'
+import CTAButton from 'v2/components/Onboarding/components/UI/CTAButton'
+import Types from 'v2/components/Block/util/Types'
+import Block from 'v2/components/Block'
 
-const ANIMATION_PERIOD = 500;
-const ANIMATION_DELAY = 1000;
+const ANIMATION_PERIOD = 500
+const ANIMATION_DELAY = 1000
 
 const CreateChannelWrapper = styled.div`
   width: 100%;
-`;
+`
 
 const FadingCTAText = styled(CTAText)`
   transition: opacity ${ANIMATION_PERIOD}ms ease-in-out;
@@ -30,7 +30,7 @@ const FadingCTAText = styled(CTAText)`
     `
     opacity: 0.33;
   `};
-`;
+`
 
 const FadingCTAButton = styled(CTAButton)`
   opacity: 0;
@@ -50,7 +50,7 @@ const FadingCTAButton = styled(CTAButton)`
     `
     pointer-events: none!important;
   `};
-`;
+`
 
 const FadingBlockWrapper = styled.div`
   opacity: 0;
@@ -66,66 +66,66 @@ const FadingBlockWrapper = styled.div`
     pointer-events: all;
     transition-delay: ${ANIMATION_DELAY}ms;
   `};
-`;
+`
 
 class CreateChannel extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       channelTitle: '',
       channelTitleStep: 0,
       saving: false,
-    };
+    }
   }
 
-  handleChannelTitleChange = (e) => {
-    const name = e.target.value;
+  handleChannelTitleChange = e => {
+    const name = e.target.value
 
     this.setState({
       channelTitle: name,
-    });
+    })
 
     if (name.length > 0 && this.state.channelTitleStep === 0) {
       // Mimic delay of other elements using CSS transition delay.
       this.channelTitleStepChangeTimeout = setTimeout(() => {
         this.setState({
           channelTitleStep: 1,
-        });
-      }, ANIMATION_DELAY);
+        })
+      }, ANIMATION_DELAY)
     } else {
-      clearTimeout(this.channelTitleStepChangeTimeout);
+      clearTimeout(this.channelTitleStepChangeTimeout)
 
       if (name.length === 0 && this.state.channelTitleStep === 1) {
         this.setState({
           channelTitleStep: 0,
-        });
+        })
       }
     }
-  };
+  }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = e => {
+    e.preventDefault()
 
     this.setState({ saving: true }, () => {
-      const { createChannel } = this.props;
-      const { channelTitle: title } = this.state;
+      const { createChannel } = this.props
+      const { channelTitle: title } = this.state
 
       return createChannel({ variables: { title } })
         .then(({ data: { create_channel: { channel: { href, id } } } }) => {
-          setChannelOnboardingCookie(id);
+          setChannelOnboardingCookie(id)
 
-          window.location = href;
+          window.location = href
         })
-        .catch((err) => {
-          console.error(err);
-          this.setState({ saving: false });
-        });
-    });
-  };
+        .catch(err => {
+          console.error(err)
+          this.setState({ saving: false })
+        })
+    })
+  }
 
   ctaTextForChannelTitleStep = () => {
-    const hasText = this.state.channelTitle;
+    const hasText = this.state.channelTitle
 
     switch (this.state.channelTitleStep) {
       case 0:
@@ -133,33 +133,31 @@ class CreateChannel extends React.Component {
           <FadingCTAText hasText={hasText}>
             First, type a channel name…
           </FadingCTAText>
-        );
+        )
       case 1:
-        return (
-          <FadingCTAText hasText>
-            Click “Create Channel”
-          </FadingCTAText>
-        );
+        return <FadingCTAText hasText>Click “Create Channel”</FadingCTAText>
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   render() {
-    const { data: { loading, me } } = this.props;
+    const {
+      data: { loading, me },
+    } = this.props
 
-    if (loading) return null;
+    if (loading) return null
 
-    const { name } = me;
-    const hasText = this.state.channelTitle;
+    const { name } = me
+    const hasText = this.state.channelTitle
 
     return (
       <CreateChannelWrapper>
         <TransitionGroup style={{ display: 'block', position: 'relative' }}>
           <AnimatedCTAText
-            key={
-              `onboarding-create-channel-cta-step-${this.state.channelTitleStep}`
-            }
+            key={`onboarding-create-channel-cta-step-${
+              this.state.channelTitleStep
+            }`}
             positionAbsoluteDuringTransition={this.state.channelTitleStep === 1}
           >
             {this.ctaTextForChannelTitleStep()}
@@ -190,10 +188,10 @@ class CreateChannel extends React.Component {
           hasText={hasText}
           onClick={this.handleSubmit}
         >
-          { this.state.saving ? 'Saving…' : 'Create Channel' }
+          {this.state.saving ? 'Saving…' : 'Create Channel'}
         </FadingCTAButton>
       </CreateChannelWrapper>
-    );
+    )
   }
 }
 
@@ -202,11 +200,11 @@ CreateChannel.propTypes = {
   data: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
   }).isRequired,
-};
+}
 
-CreateChannel.defaultProps = {};
+CreateChannel.defaultProps = {}
 
 export default compose(
   graphql(userInfoQuery),
-  graphql(createChannelMutation, { name: 'createChannel' }),
-)(CreateChannel);
+  graphql(createChannelMutation, { name: 'createChannel' })
+)(CreateChannel)

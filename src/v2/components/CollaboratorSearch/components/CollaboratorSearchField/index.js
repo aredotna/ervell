@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import SearchInput from 'v2/components/UI/SearchInput';
+import SearchInput from 'v2/components/UI/SearchInput'
 
 export default class CollaboratorSearch extends Component {
   static propTypes = {
@@ -10,7 +10,7 @@ export default class CollaboratorSearch extends Component {
   }
 
   render() {
-    const { query, onChange } = this.props;
+    const { query, onChange } = this.props
 
     return (
       <SearchInput
@@ -18,6 +18,6 @@ export default class CollaboratorSearch extends Component {
         onQueryChange={onChange}
         placeholder="Search users, groups, or enter an email address"
       />
-    );
+    )
   }
 }

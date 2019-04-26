@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
-import myGroupLinksFragment from 'v2/components/UserDropdown/components/MyGroupLinks/fragments/myGroupLinks';
+import myGroupLinksFragment from 'v2/components/UserDropdown/components/MyGroupLinks/fragments/myGroupLinks'
 
 export default gql`
   mutation ToggleMyGroupsDropdownVisibility($flags: [MeFlagInput]!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${myGroupLinksFragment}
-`;
+`

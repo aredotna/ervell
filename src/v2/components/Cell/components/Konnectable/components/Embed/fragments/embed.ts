@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   fragment Embed on Embed {
@@ -7,4 +7,4 @@ export default gql`
     href
     src: image_url(size: DISPLAY)
   }
-`;
+`

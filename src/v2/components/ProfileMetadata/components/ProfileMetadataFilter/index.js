@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { propType } from 'graphql-anywhere'
 
-import profileMetadataFilterFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter/fragments/profileMetadataFilter';
+import profileMetadataFilterFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter/fragments/profileMetadataFilter'
 
-import Pocket from 'v2/components/UI/Pocket';
-import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent';
+import Pocket from 'v2/components/UI/Pocket'
+import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
 class ProfileMetadataFilter extends Component {
   static propTypes = {
@@ -17,11 +17,13 @@ class ProfileMetadataFilter extends Component {
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
   }
 
-  isFilterActive = filter => () =>
-    this.props.filter === filter;
+  isFilterActive = filter => () => this.props.filter === filter
 
   render() {
-    const { identifiable, location: { pathname } } = this.props;
+    const {
+      identifiable,
+      location: { pathname },
+    } = this.props
 
     return (
       <Pocket title="Owned by">
@@ -51,8 +53,8 @@ class ProfileMetadataFilter extends Component {
           Other
         </CookieLinkUnlessCurrent>
       </Pocket>
-    );
+    )
   }
 }
 
-export default withRouter(ProfileMetadataFilter);
+export default withRouter(ProfileMetadataFilter)

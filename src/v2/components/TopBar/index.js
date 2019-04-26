@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box';
-import PrimarySearch from 'v2/components/TopBar/components/PrimarySearch';
-import AuthenticationLinks from 'v2/components/TopBar/components/AuthenticationLinks';
-import NewChannelButton from 'v2/components/TopBar/components/NewChannelButton';
-import NotificationCount from 'v2/components/TopBar/components/NotificationCount';
-import MyRepresentation from 'v2/components/TopBar/components/MyRepresentation';
+import Box from 'v2/components/UI/Box'
+import PrimarySearch from 'v2/components/TopBar/components/PrimarySearch'
+import AuthenticationLinks from 'v2/components/TopBar/components/AuthenticationLinks'
+import NewChannelButton from 'v2/components/TopBar/components/NewChannelButton'
+import NotificationCount from 'v2/components/TopBar/components/NotificationCount'
+import MyRepresentation from 'v2/components/TopBar/components/MyRepresentation'
 
 const Container = styled(Box)`
   position: relative;
@@ -17,7 +17,9 @@ const Container = styled(Box)`
   justify-content: center;
   background-color: white;
 
-  ${props => props.scheme === 'GROUP' && `
+  ${props =>
+    props.scheme === 'GROUP' &&
+    `
     background-color: ${props.theme.colors.gray.hint};
 
     &:after {
@@ -35,7 +37,7 @@ const Container = styled(Box)`
         rgba(0, 0, 0, 0.02) 100%);
     }
   `}
-`;
+`
 
 export default class TopBar extends PureComponent {
   static propTypes = {
@@ -51,31 +53,27 @@ export default class TopBar extends PureComponent {
   }
 
   render() {
-    const { me, scheme, ...rest } = this.props;
+    const { me, scheme, ...rest } = this.props
 
     return (
       <Container scheme={scheme} {...rest}>
         <PrimarySearch flex={1} scheme={scheme} />
 
-        {me
-          ? (
-            <React.Fragment>
-              <NewChannelButton px={5} />
+        {me ? (
+          <React.Fragment>
+            <NewChannelButton px={5} />
 
-              <NotificationCount
-                px={5}
-                count={me.counts && me.counts.notifications}
-              />
+            <NotificationCount
+              px={5}
+              count={me.counts && me.counts.notifications}
+            />
 
-              <MyRepresentation
-                px={5}
-                me={me}
-              />
-            </React.Fragment>
-          )
-          : <AuthenticationLinks px={6} />
-        }
+            <MyRepresentation px={5} me={me} />
+          </React.Fragment>
+        ) : (
+          <AuthenticationLinks px={6} />
+        )}
       </Container>
-    );
+    )
   }
 }

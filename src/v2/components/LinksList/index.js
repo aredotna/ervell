@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-const Container = styled.div`
-`;
+const Container = styled.div``
 
 const Link = styled.a`
   font-weight: bold;
   ${x => !x.href && 'cursor: default'}
-`;
+`
 
 export default class LinksList extends Component {
   static defaultProps = {
@@ -16,15 +15,17 @@ export default class LinksList extends Component {
   }
 
   static propTypes = {
-    links: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.any.isRequired,
-      href: PropTypes.string,
-      label: PropTypes.string.isRequired,
-    })),
+    links: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.any.isRequired,
+        href: PropTypes.string,
+        label: PropTypes.string.isRequired,
+      })
+    ),
   }
 
   render() {
-    const { links, ...rest } = this.props;
+    const { links, ...rest } = this.props
 
     return (
       <Container {...rest}>
@@ -41,6 +42,6 @@ export default class LinksList extends Component {
           </span>
         ))}
       </Container>
-    );
+    )
   }
 }

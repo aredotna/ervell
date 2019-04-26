@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import mod from 'v2/util/mod';
+import mod from 'v2/util/mod'
 
-import Box from 'v2/components/UI/Box';
-import Text from 'v2/components/UI/Text';
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 const Container = styled(Box).attrs({
   border: '1px solid',
@@ -14,7 +14,7 @@ const Container = styled(Box).attrs({
 })`
   position: absolute;
   z-index: 2;
-`;
+`
 
 const Suggestion = styled(Box).attrs({
   py: 4,
@@ -29,7 +29,7 @@ const Suggestion = styled(Box).attrs({
     text-decoration: underline;
     background-color: ${props.theme.colors.gray.light};
   `}
-`;
+`
 
 class MentionTextareaSuggestions extends PureComponent {
   static propTypes = {
@@ -43,45 +43,45 @@ class MentionTextareaSuggestions extends PureComponent {
     onSelected: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     onUpdateCursor: PropTypes.func.isRequired,
-  };
+  }
 
   static defaultProps = {
     suggestions: [],
     cursor: 0,
-  };
+  }
 
   handleClick = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { onClick } = this.props;
+    const { onClick } = this.props
 
-    this.selectSuggestion();
+    this.selectSuggestion()
 
-    onClick();
-  };
+    onClick()
+  }
 
   selectSuggestion = () => {
-    const { suggestions, onSelected, cursor } = this.props;
+    const { suggestions, onSelected, cursor } = this.props
 
     if (suggestions.length === 0) {
-      return null;
+      return null
     }
 
-    const selected = cursor && mod(cursor, suggestions.length + 1);
-    const selectedSuggestion = suggestions[selected];
+    const selected = cursor && mod(cursor, suggestions.length + 1)
+    const selectedSuggestion = suggestions[selected]
 
     if (selectedSuggestion) {
-      onSelected(suggestions[selected].id);
+      onSelected(suggestions[selected].id)
     }
 
-    return selectedSuggestion;
-  };
+    return selectedSuggestion
+  }
 
   handleMouseEnter = idx => () => {
-    const { onUpdateCursor } = this.props;
+    const { onUpdateCursor } = this.props
 
-    return onUpdateCursor(idx);
-  };
+    return onUpdateCursor(idx)
+  }
 
   render() {
     const {
@@ -91,9 +91,9 @@ class MentionTextareaSuggestions extends PureComponent {
       onClick: _onClick,
       onUpdateCursor: _onUpdateCursor,
       ...rest
-    } = this.props;
+    } = this.props
 
-    const selectedSuggestion = this.selectSuggestion();
+    const selectedSuggestion = this.selectSuggestion()
 
     return (
       <Container {...rest}>
@@ -110,8 +110,8 @@ class MentionTextareaSuggestions extends PureComponent {
           </Suggestion>
         ))}
       </Container>
-    );
+    )
   }
 }
 
-export default MentionTextareaSuggestions;
+export default MentionTextareaSuggestions

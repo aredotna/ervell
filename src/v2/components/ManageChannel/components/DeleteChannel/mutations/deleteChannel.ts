@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   mutation deleteChannelMutation($id: ID!) {
@@ -7,4 +7,4 @@ export default gql`
       status
     }
   }
-`;
+`

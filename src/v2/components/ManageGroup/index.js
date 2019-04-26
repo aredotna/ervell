@@ -1,24 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import { compose, graphql } from 'react-apollo';
-import { some } from 'underscore';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
+import { compose, graphql } from 'react-apollo'
+import { some } from 'underscore'
 
-import mapErrors from 'v2/util/mapErrors';
-import compactObject from 'v2/util/compactObject';
+import mapErrors from 'v2/util/mapErrors'
+import compactObject from 'v2/util/compactObject'
 
-import manageGroupFragment from 'v2/components/ManageGroup/fragments/manageGroup';
-import manageGroupQuery from 'v2/components/ManageGroup/queries/manageGroup';
+import manageGroupFragment from 'v2/components/ManageGroup/fragments/manageGroup'
+import manageGroupQuery from 'v2/components/ManageGroup/queries/manageGroup'
 
-import updateGroupMutation from 'v2/components/ManageGroup/mutations/updateGroup';
+import updateGroupMutation from 'v2/components/ManageGroup/mutations/updateGroup'
 
-import Box from 'v2/components/UI/Box';
-import Accordion from 'v2/components/UI/Accordion';
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator';
-import TitledDialog from 'v2/components/UI/TitledDialog';
-import DeleteGroup from 'v2/components/ManageGroup/components/DeleteGroup';
-import ManageUsers from 'v2/components/ManageGroup/components/ManageUsers';
-import { LabelledInput, Label, Input, Textarea, ErrorMessage } from 'v2/components/UI/Inputs';
+import Box from 'v2/components/UI/Box'
+import Accordion from 'v2/components/UI/Accordion'
+import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
+import TitledDialog from 'v2/components/UI/TitledDialog'
+import DeleteGroup from 'v2/components/ManageGroup/components/DeleteGroup'
+import ManageUsers from 'v2/components/ManageGroup/components/ManageUsers'
+import {
+  LabelledInput,
+  Label,
+  Input,
+  Textarea,
+  ErrorMessage,
+} from 'v2/components/UI/Inputs'
 
 class ManageGroup extends Component {
   static propTypes = {
@@ -51,88 +57,93 @@ class ManageGroup extends Component {
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
-    const { data: { group: originalGroup } } = this.props;
+    const {
+      data: { group: originalGroup },
+    } = this.props
 
-    const isEdited = some(originalGroup, (originalValue, key) =>
-      fieldName === key && originalValue !== fieldValue);
+    const isEdited = some(
+      originalGroup,
+      (originalValue, key) => fieldName === key && originalValue !== fieldValue
+    )
 
     this.setState({
       mode: isEdited ? 'submit' : 'resting',
       [fieldName]: fieldValue,
-    });
+    })
   }
 
   handleName = this.handleInput('name')
   handleDescription = this.handleInput('description')
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = e => {
+    e.preventDefault()
 
-    const {
-      id,
-      updateGroup,
-      onClose,
-      onSuccess,
-      onError,
-    } = this.props;
-    const { mode, name, description } = this.state;
+    const { id, updateGroup, onClose, onSuccess, onError } = this.props
+    const { mode, name, description } = this.state
 
-    const variables = compactObject({ id, name, description });
+    const variables = compactObject({ id, name, description })
 
     if (mode === 'resting') {
-      return onClose();
+      return onClose()
     }
 
-    this.setState({ mode: 'submitting' });
+    this.setState({ mode: 'submitting' })
 
     return updateGroup({ variables })
-      .then((res) => {
-        onSuccess(res);
-        return onClose();
+      .then(res => {
+        onSuccess(res)
+        return onClose()
       })
-      .catch((err) => {
-        onError(err);
+      .catch(err => {
+        onError(err)
         this.setState({
           mode: 'error',
           ...mapErrors(err),
-        });
-      });
+        })
+      })
   }
 
-  handleCancel = () =>
-    this.props.onClose();
+  handleCancel = () => this.props.onClose()
 
   render() {
-    const { data: { loading }, initialSection } = this.props;
+    const {
+      data: { loading },
+      initialSection,
+    } = this.props
 
-    if (loading) return <LoadingIndicator />;
+    if (loading) return <LoadingIndicator />
 
-    const { mode, attributeErrors, errorMessage } = this.state;
-    const { channel_id, data: { group } } = this.props;
+    const { mode, attributeErrors, errorMessage } = this.state
+    const {
+      channel_id,
+      data: { group },
+    } = this.props
 
     return (
       <TitledDialog
         title={`Edit ${group.name}`}
-        label={{
-          resting: 'Done',
-          submit: 'Save',
-          submitting: 'Saving...',
-          error: 'Error',
-        }[mode]}
+        label={
+          {
+            resting: 'Done',
+            submit: 'Save',
+            submitting: 'Saving...',
+            error: 'Error',
+          }[mode]
+        }
         onDone={this.handleSubmit}
       >
         <Accordion
           key="name"
-          label={{
-            true: 'Edit name and description',
-            false: 'Name and description',
-          }[group.can.manage]}
+          label={
+            {
+              true: 'Edit name and description',
+              false: 'Name and description',
+            }[group.can.manage]
+          }
           mode={initialSection === 'name' ? 'open' : 'closed'}
         >
           <LabelledInput>
-            <Label>
-              Name
-            </Label>
+            <Label>Name</Label>
 
             <Input
               name="name"
@@ -146,9 +157,7 @@ class ManageGroup extends Component {
           </LabelledInput>
 
           <LabelledInput>
-            <Label>
-              Description
-            </Label>
+            <Label>Description</Label>
 
             <Textarea
               name="description"
@@ -162,7 +171,7 @@ class ManageGroup extends Component {
           </LabelledInput>
         </Accordion>
 
-        {group.can.manage_users &&
+        {group.can.manage_users && (
           <Accordion
             label="Add/edit members"
             key="members"
@@ -172,9 +181,9 @@ class ManageGroup extends Component {
               <ManageUsers channel_id={channel_id} group={group} />
             </Box>
           </Accordion>
-        }
+        )}
 
-        {group.can.manage &&
+        {group.can.manage && (
           <Accordion
             label="Delete group"
             key="delete"
@@ -184,19 +193,19 @@ class ManageGroup extends Component {
               <DeleteGroup group={group} />
             </Box>
           </Accordion>
-        }
+        )}
 
-        {mode === 'error' &&
+        {mode === 'error' && (
           <ErrorMessage my={5} align="center">
             {errorMessage}
           </ErrorMessage>
-        }
+        )}
       </TitledDialog>
-    );
+    )
   }
 }
 
 export default compose(
   graphql(manageGroupQuery),
-  graphql(updateGroupMutation, { name: 'updateGroup' }),
-)(ManageGroup);
+  graphql(updateGroupMutation, { name: 'updateGroup' })
+)(ManageGroup)

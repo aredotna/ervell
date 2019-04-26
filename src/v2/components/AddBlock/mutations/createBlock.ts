@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export default gql`
   mutation createBlockMutation($channel_id: ID!, $value: String) {
@@ -11,4 +11,4 @@ export default gql`
       }
     }
   }
-`;
+`

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { themeGet } from 'styled-system';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
-import Box from 'v2/components/UI/Box';
-import { Subheadline } from 'v2/pages/about/components/Text';
+import Box from 'v2/components/UI/Box'
+import { Subheadline } from 'v2/pages/about/components/Text'
 
 const CTA = styled(Box).attrs({
   py: 9,
   px: 3,
   borderBottom: '1px solid',
   borderColor: themeGet('colors.gray.regular'),
-})``;
+})``
 
 const LogoContainer = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const LogoContainer = styled.div`
   padding: 2em 0;
   align-items: center;
   justify-content: center;
-`;
+`
 
 const Logo = styled.div.attrs({
   style: props => ({
@@ -27,7 +27,7 @@ const Logo = styled.div.attrs({
     height: 143,
     background: `url(${props.src}) center/70% no-repeat`,
   }),
-})``;
+})``
 
 export default class UniversityLogoCta extends Component {
   render() {
@@ -85,6 +85,6 @@ export default class UniversityLogoCta extends Component {
           />
         </LogoContainer>
       </CTA>
-    );
+    )
   }
 }

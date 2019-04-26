@@ -1,8 +1,8 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Specimen from 'v2/stories/__components__/Specimen';
-import Count from 'v2/components/UI/Count';
+import Specimen from 'v2/stories/__components__/Specimen'
+import Count from 'v2/components/UI/Count'
 
 storiesOf('Count', module).add('default', () => (
   <Specimen>
@@ -12,4 +12,4 @@ storiesOf('Count', module).add('default', () => (
     <br />
     <Count amount={99} label="widget" />
   </Specimen>
-));
+))

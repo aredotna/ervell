@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { propType } from 'graphql-anywhere'
 
-import ManagedMember from 'v2/components/ManagedMembers/components/ManagedMember';
-import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember';
+import ManagedMember from 'v2/components/ManagedMembers/components/ManagedMember'
+import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember'
 
 export default class ManagedMembers extends Component {
   static propTypes = {
     owner: propType(managedMemberFragment),
-    memberships: PropTypes.arrayOf(PropTypes.shape({
-      can: PropTypes.shape({
-        manage: PropTypes.bool.isRequired,
-      }).isRequired,
-      member: propType(managedMemberFragment).isRequired,
-    })).isRequired,
+    memberships: PropTypes.arrayOf(
+      PropTypes.shape({
+        can: PropTypes.shape({
+          manage: PropTypes.bool.isRequired,
+        }).isRequired,
+        member: propType(managedMemberFragment).isRequired,
+      })
+    ).isRequired,
     onRemove: PropTypes.func.isRequired,
     confirmationWarning: PropTypes.string,
     confirmationSelfWarning: PropTypes.string,
@@ -33,11 +35,11 @@ export default class ManagedMembers extends Component {
       confirmationWarning,
       confirmationSelfWarning,
       ...rest
-    } = this.props;
+    } = this.props
 
     return (
       <div {...rest}>
-        {owner &&
+        {owner && (
           <ManagedMember
             key={owner.id}
             member={owner}
@@ -47,7 +49,7 @@ export default class ManagedMembers extends Component {
             confirmationWarning={confirmationWarning}
             confirmationSelfWarning={confirmationSelfWarning}
           />
-        }
+        )}
 
         {memberships.map(({ can, member }) => (
           <ManagedMember
@@ -60,6 +62,6 @@ export default class ManagedMembers extends Component {
           />
         ))}
       </div>
-    );
+    )
   }
 }
