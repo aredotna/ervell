@@ -10,6 +10,7 @@ const rootDir = process.cwd()
 
 const baseConfig = {
   mode: NODE_ENV,
+  devtool: 'cheap-module-source-map',
   context: rootDir,
   entry: {
     webpack: ['webpack-hot-middleware/client?reload=true'],
@@ -18,8 +19,7 @@ const baseConfig = {
   output: {
     filename: '[name].js',
     path: path.resolve(rootDir, 'public/assets'),
-    publicPath: '/assets',
-    sourceMapFilename: '[file].map?[contenthash]',
+    publicPath: '/assets/',
   },
   module: {
     rules: [

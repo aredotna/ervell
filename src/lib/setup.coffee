@@ -37,7 +37,6 @@ session = require 'cookie-session'
 path = require 'path'
 logger = require 'morgan'
 multipart = require 'connect-multiparty'
-bucketAssets = require 'bucket-assets'
 favicon = require 'serve-favicon'
 blocker = require 'express-spam-referral-blocker'
 { createReloadable } = require '@artsy/express-reloadable'
@@ -52,8 +51,9 @@ viewModeMiddleware = require './middleware/view_mode'
 checkSessionMiddleware = require './middleware/check_session'
 isInverted = require '../components/night_mode/middleware'
 splitTestMiddleware = require '../components/split_test/middleware'
-{ default: ensureWWWMiddleware } = require './middleware/ensureWWW'
+{ default: assetMiddleware } = require "./middleware/asset"
 { default: isSpiderMiddleware } = require './middleware/isSpider'
+{ default: ensureWWWMiddleware } = require './middleware/ensureWWW'
 
 cache = require './cache'
 arenaPassport = require './passport'
@@ -133,7 +133,7 @@ module.exports = (app) ->
               .use(require('nib')())
 
   app
-    .use bucketAssets()
+    .use assetMiddleware()
     .use express.static(path.resolve __dirname, '../../public')
     .use favicon(path.resolve __dirname, '../../public/images/favicon.ico')
     .use logger('dev')

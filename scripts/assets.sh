@@ -2,8 +2,7 @@
 
 set -e -x
 
-rm -rf public/assets
-mkdir public/assets
+yarn clean
 NODE_ENV=production yarn build
 yarn build:server
 stylus \
