@@ -109,9 +109,16 @@ export default class BlockLightboxMetadataPane extends PureComponent {
             breakWord
             boldLinks
             hoverLinks={{ color: 'black' }}
-            onClick={
-              block.can.manage ? this.openManageFor('description') : undefined
-            }
+            onClick={event => {
+              // If clicking an A tag in the description don't open edit box and
+              // instead defer to outbound link.
+              if (event.target.nodeName === 'A') {
+                return
+              }
+              if (block.can.manage) {
+                return this.openManageFor('description')(event)
+              }
+            }}
           />
         )}
 
