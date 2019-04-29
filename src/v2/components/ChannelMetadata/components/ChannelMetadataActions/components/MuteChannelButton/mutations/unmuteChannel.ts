@@ -5,6 +5,8 @@ import muteChannelButtonFragment from 'v2/components/ChannelMetadata/components/
 export default gql`
   mutation unmuteChannelMutation($id: ID!) {
     __typename
+
+    # FIXME: Deprecated field
     unmute_channel(input: { id: $id }) {
       __typename
       channel {
