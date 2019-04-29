@@ -1,6 +1,4 @@
-Q = require 'bluebird-q'
-_ = require 'underscore'
-sd = require("sharify").data
+Promise = require 'bluebird'
 Channel = require "../../models/channel"
 User = require "../../models/user"
 ChannelBlocks = require "../../collections/channel_blocks"
@@ -25,7 +23,6 @@ posts = require "../../collections/posts.coffee"
       channel: channel
       blocks: blocks.models
   .catch next
-  .done()
 
 @userRSS = (req, res, next) ->
   author = new User(id: req.params.username)
@@ -50,17 +47,17 @@ posts = require "../../collections/posts.coffee"
     filter: 'channel'
     per: 25
 
-  blocks.fetch(cache: true).then ->
-    res.set 'Content-Type', 'application/rss+xml'
-    res.render 'explore',
-      blocks: blocks.models
-  .catch next
-  .done()
+  blocks.fetch(cache: true)
+    .then ->
+      res.set 'Content-Type', 'application/rss+xml'
+      res.render 'explore',
+        blocks: blocks.models
+    .catch next
 
 @blogRSS = (req, res, next) ->
-  posts.fetchAll().then (posts) ->
-    res.set 'Content-Type', 'application/rss+xml'
-    res.render 'blog',
-      posts: posts
-  .catch next
-  .done()
+  posts.fetchAll()
+    .then (posts) ->
+      res.set 'Content-Type', 'application/rss+xml'
+      res.render 'blog',
+        posts: posts
+    .catch next
