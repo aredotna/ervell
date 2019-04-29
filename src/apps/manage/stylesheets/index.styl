@@ -1,0 +1,128 @@
+vendor-prefixes ?= webkit moz official
+
+@require '../../../../node_modules/nib/lib/nib/index'
+
+.manage__block,
+.manage__block__collection__header
+  display flex
+  flex-direction row
+  justify-content space-between
+  overflow auto
+  padding 20px 0
+  border-top 1px solid colors-gray-border
+  font-size s_caption + 2
+  line-height 1.3
+
+  a
+    font-weight bold
+
+.manage__block:hover
+  background backgroundgray
+
+.manage__block__collection__header
+  font-weight bold
+  color lightgray
+
+.manage__block__collection__header, .manage__block__collection__contents
+  width 100%
+
+.manage__block__column
+  width 200px
+  padding 0 20px 0 0
+
+  &.manage__block__title
+    width 250px
+
+  &.manage__block__column--small
+    width 100px
+
+.manage__block__sort__link
+  cursor pointer
+
+.manage__block__sort__link
+  &.is-active
+    color hovergray
+  &:hover
+    cursor s-resize
+    color hovergray
+    &::after
+      color hovergray
+  &.is-asc
+    cursor s-resize
+  &.is-desc
+    cursor n-resize
+  &.is-asc::after
+    content "↑"
+    margin 0 0 0 3px
+    font-size 1.1em
+    color lightgray
+  &.is-desc::after
+    content "↓"
+    margin 0 0 0 3px
+    font-size 1.1em
+    color lightgray
+
+.channel__privacy--setting
+
+  a
+    font-weight normal
+
+  a.is-active
+    font-weight bold
+
+.form__field__manage-filter
+  height 50px
+  width 100%
+  position relative
+
+  input
+    width 100%
+    margin 0
+    padding-left 50px !important
+
+.form__field__manage-filter--icon
+  position absolute
+  left 11px
+  top 50%
+  transform translateY(-50%)
+  max-width 40px
+  max-height 50px
+
+  svg
+    height 30px
+    width 20px
+
+    .iconic-magnifying-glass-lg
+      display none
+
+    .iconic-magnifying-glass-md
+      display none
+
+    .iconic-magnifying-glass-sm
+      display inline
+
+    & *
+      stroke lightgray
+      fill lightgray
+
+@media (max-width:(block_width_mar * 3) + 20)
+  .manage__block__follower_count
+    display none
+
+  .manage__block,
+  .manage__block__collection__header
+    font-size s_caption
+
+@media (max-width:(block_width_mar * 2) + 20)
+  .manage__block__collaborator_count,
+  .manage__block__export
+    display none
+
+  .manage__block__block_count
+    width 120px
+
+@media (max-width:500px)
+  .manage__block,
+  .manage__block__collection__header
+    font-size s_caption - 1
+    padding 10px 0

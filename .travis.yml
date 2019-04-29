@@ -1,14 +1,15 @@
 language: node_js
 node_js:
-- '8'
+  - '10'
 script:
-- yarn jest
-- yarn lint
+  - yarn jest
+  - yarn lint
+  - yarn type-check
 before_deploy:
-- if [ $TRAVIS_BRANCH = 'master' ]; then APP_NAME=ervell-staging S3_BUCKET=ervell-staging
-  yarn predeploy; fi
-- if [ $TRAVIS_BRANCH = 'deploy' ]; then APP_NAME=ervell S3_BUCKET=ervell-production
-  yarn predeploy; fi
+  - if [ $TRAVIS_BRANCH = 'master' ]; then APP_NAME=ervell-staging S3_BUCKET=ervell-staging
+    yarn predeploy; fi
+  - if [ $TRAVIS_BRANCH = 'deploy' ]; then APP_NAME=ervell S3_BUCKET=ervell-production
+    yarn predeploy; fi
 deploy:
   provider: heroku
   skip_cleanup: true
@@ -19,9 +20,9 @@ deploy:
     deploy: ervell
 env:
   global:
-  - secure: WJGcHqZmm2PTFcuyT9HMcJYp2Oosb9VCyZxAQ56Y/PAChM6uhvWryJlTQdaOymXpbOHLXv0X3zE3tbmJhH7i1f2cgQpXV9fzgqx35zGxVcgGLWMSerEw77828/ZBVlhbhYX9o0gUel0Z3Rz4U5LOw4Uy4YgBQab3Q/W8Qf04vj4=
-  - secure: D6goSBaFU2y6Ql56WYj6RE1XW5dbKUoZXEHBcVMIoZSgG9ejd/N7G4nBoo6bOoXzVQhYLPI2fINmkJeZVeYfpWxE84cLX2zPPiRixE8/xJzf68MGcB4x6YobN+n2zoOxRe9N1n0CmHt7kwKzYuCpoXMcYraL5PIi+8nzSx9Ppjo=
-  - secure: gxR3XdjZPUFQ4OpHowZY7qcckZCkwYiDT9sHYLPcfxpGRu0VzV7ZMVfAt3yP/Ar1pnSI8BCc/slTwREu0ricV4AfVdOc8Bi+eWQBhAr4pAksN/dhJI7O5yxG75v1O49Qu4DXlYBix6xPvzCDodsWzfWdRTKcJNwgr54w0ocGWvw=
+    - secure: WJGcHqZmm2PTFcuyT9HMcJYp2Oosb9VCyZxAQ56Y/PAChM6uhvWryJlTQdaOymXpbOHLXv0X3zE3tbmJhH7i1f2cgQpXV9fzgqx35zGxVcgGLWMSerEw77828/ZBVlhbhYX9o0gUel0Z3Rz4U5LOw4Uy4YgBQab3Q/W8Qf04vj4=
+    - secure: D6goSBaFU2y6Ql56WYj6RE1XW5dbKUoZXEHBcVMIoZSgG9ejd/N7G4nBoo6bOoXzVQhYLPI2fINmkJeZVeYfpWxE84cLX2zPPiRixE8/xJzf68MGcB4x6YobN+n2zoOxRe9N1n0CmHt7kwKzYuCpoXMcYraL5PIi+8nzSx9Ppjo=
+    - secure: gxR3XdjZPUFQ4OpHowZY7qcckZCkwYiDT9sHYLPcfxpGRu0VzV7ZMVfAt3yP/Ar1pnSI8BCc/slTwREu0ricV4AfVdOc8Bi+eWQBhAr4pAksN/dhJI7O5yxG75v1O49Qu4DXlYBix6xPvzCDodsWzfWdRTKcJNwgr54w0ocGWvw=
 notifications:
   slack:
     secure: H3VQ6R1DXG6exptAbzUo93ia4JkkDWLmd7vQU60FM4pxyjhw9almd+K2GMR5QDMhqUP3Pb/m+pHOwhLWEVHTWhT5jqYW6IzwU0X0AHMK2q5pUtSCitL6I42YPpOGdd6kQzC5h/qpojoaTJgvFTIf4js8HeEYPImfzDV4AeDrQMs=
