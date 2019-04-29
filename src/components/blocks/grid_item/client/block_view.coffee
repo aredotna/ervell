@@ -3,7 +3,6 @@ Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../../lib/mediator.coffee'
 BlockCollectionConnectIntegrationView = require '../../../connect/integration/block_collection/view.coffee'
-IconicJS = require '../../../iconic/client/iconic.min.js'
 FollowButtonView = require '../../../follow_button/client/follow_button_view.coffee'
 User = require '../../../../models/user.coffee'
 { trackOutboundLink } = require '../../../../lib/analytics.coffee'
@@ -120,8 +119,6 @@ module.exports = class BlockView extends Backbone.View
     $("##{model.id}").replaceWith blockTemplate args
     @$el = $("##{model.id}")
     @model = model
-
-    window.IconicJS().inject 'img.iconic'
 
     @renderFollowButton()
     @delegateEvents()

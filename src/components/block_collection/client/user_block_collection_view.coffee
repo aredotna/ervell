@@ -3,7 +3,6 @@ _ = require 'underscore'
 Backbone.$ = $
 sd = require("sharify").data
 mediator = require '../../../lib/mediator.coffee'
-IconicJS = require '../../../components/iconic/client/iconic.min.js'
 Block = require '../../../models/block.coffee'
 BlockView = require './block_view.coffee'
 BlockCollectionView = require './block_collection_view.coffee'
