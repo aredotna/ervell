@@ -9,23 +9,21 @@ import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import { FilledButton } from 'react/components/UI/Buttons';
 
-const Container = styled(Box)`
+const Container = styled(Box).attrs({
+  m: 4,
+})`
   display: flex;
   position: relative;
-
-  ${props => props.isText && `
-    flex: 0 0 100%;
-  `}
+  width: 100px;
+  height: 100px;
+  border: 1px solid ${props => props.theme.colors.gray.semiLight};
 `;
 
-const TextContainer = styled(Box).attrs({
-  my: 5,
-})`
+const TextContainer = styled(Box).attrs({ p: 3 })`
   min-width: 100%;
   text-align: left;
   display: flex;
   position: relative;
-  max-height: 4.5rem;
   overflow-y: hidden;
   
   &:after {
@@ -40,15 +38,13 @@ const TextContainer = styled(Box).attrs({
   }
 `;
 
-const ImageContainer = styled(Box).attrs({
-  m: 4,
-})`
+const ImageContainer = styled(Box)`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  width: 100px;
-  height: 100px;
   background-image: url(${props => props.src});
+  width: 100%;
+  height: 100%;
 `;
 
 const LinkContainer = styled(Box).attrs({
@@ -130,7 +126,7 @@ class Block extends PureComponent {
       <Container isText={isText}>
         {block.type === 'Text' &&
           <TextContainer>
-            <Text font="serif">
+            <Text f={3} font="serif">
               <Truncate suffix="..." length={220}>
                 {block.value}
               </Truncate>

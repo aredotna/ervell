@@ -77,6 +77,10 @@ class Blocks extends Component {
     window.addEventListener('message', this.receiveMessage);
   }
 
+  state = {
+    mode: 'resting',
+  }
+
   componentDidMount() {
     const { context: { setPageUrl }, query } = this.props;
     if (query && query.original_source_url) { setPageUrl(query.original_source_url); }
@@ -114,11 +118,15 @@ class Blocks extends Component {
       createBlock,
     } = this.props;
 
+    this.setState({ mode: 'saving' });
+
     const values = { value: pageUrl, channel_id: selectedChannel.id };
 
     createBlock({
       variables: values,
     }).then(() => {
+      this.setState({ mode: 'closing' });
+
       this.messenger.send({
         action: 'close',
       });
@@ -128,6 +136,8 @@ class Blocks extends Component {
   saveAndClose = () => {
     const { createBlock, context: { blocks, selectedChannel } } = this.props;
 
+    this.setState({ mode: 'saving' });
+
     Promise.all(blocks.map((block) => {
       const values = { ...omit(block, 'id', 'type'), channel_id: selectedChannel.id };
 
@@ -135,6 +145,8 @@ class Blocks extends Component {
         variables: values,
       });
     })).then(() => {
+      this.setState({ mode: 'closing' });
+
       this.messenger.send({
         action: 'close',
       });
@@ -143,6 +155,7 @@ class Blocks extends Component {
 
   render() {
     const { blocks, removeBlock, selectedChannel } = this.props.context;
+    const { mode } = this.state;
 
     return (
       <Layout
@@ -158,7 +171,12 @@ class Blocks extends Component {
               <Box mt={3} align="center">
                 <Text f={3}>or</Text>
                 <Button f={4} my={2} onClick={this.savePageAsLink} disabled={!selectedChannel}>
-                  Save page as link
+                  {{
+                    resting: 'Save page as link',
+                    saving: 'Saving...',
+                    closing: 'Closing...',
+                    error: 'Error',
+                  }[mode]}
                 </Button>
                 <Text f={2} pl={4} color="gray.regular">⌘ + shift + s</Text>
               </Box>
@@ -175,7 +193,15 @@ class Blocks extends Component {
 
             {blocks.length > 0 &&
               <Button f={4} my={4} onClick={this.saveAndClose}>
-                Connect&nbsp;<Count label="block" amount={blocks.length} />&nbsp;→
+                {mode === 'resting' &&
+                  <span>Connect&nbsp;<Count label="block" amount={blocks.length} />&nbsp;→</span>
+                }
+
+                {mode !== 'resting' && {
+                  saving: 'Saving...',
+                  closing: 'Closing...',
+                  error: 'Error',
+                }[mode]}
               </Button>
             }
           </Bottom>
