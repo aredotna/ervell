@@ -61,13 +61,14 @@ class DataExtractor {
         type: 'Image',
         value: msg.options.srcUrl,
       };
-    } else {
-      this.data = {
-        ...this.data,
-        type: 'Link',
-        value: msg.url,
-      };
     }
+    // } else {
+    //   this.data = {
+    //     ...this.data,
+    //     type: 'Link',
+    //     value: msg.url,
+    //   };
+    // }
 
     return this.data;
   }
