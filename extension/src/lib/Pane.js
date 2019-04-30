@@ -16,6 +16,8 @@ class Pane {
   }
 
   add = (msg) => {
+    this.isOpen = true;
+
     if (this.frame) {
       this.showIframe();
       return this.sendData(msg);

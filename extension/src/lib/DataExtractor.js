@@ -46,6 +46,9 @@ class DataExtractor {
   }
 
   extractSelection = (msg) => {
+    // If we have some text, send that,
+    // otherwise find an image if we can.
+    // Failing all else, save the page.
     if (msg.options.selectionText) {
       this.data = {
         ...this.data,
@@ -57,6 +60,12 @@ class DataExtractor {
         ...this.data,
         type: 'Image',
         value: msg.options.srcUrl,
+      };
+    } else {
+      this.data = {
+        ...this.data,
+        type: 'Link',
+        value: msg.url,
       };
     }
 
