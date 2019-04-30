@@ -15,6 +15,10 @@ const Container = styled.a`
   cursor: pointer;
   align-items: center;
   justify-content: flex-start;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.gray.hint}
+  }
 `;
 
 class SelectableChannel extends PureComponent {

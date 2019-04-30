@@ -20,7 +20,7 @@ const ChannelContainer = styled(Box).attrs({
   border-top: 1px solid ${x => x.theme.colors.gray.light};
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
 `;
 
