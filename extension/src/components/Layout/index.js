@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Box from 'react/components/UI/Box';
 import Text from 'react/components/UI/Text';
 import Icons from 'react/components/UI/Icons';
+import Close from 'react/components/UI/Close';
 
 import Messenger from 'extension/src/lib/Messenger';
 
@@ -49,24 +50,6 @@ const Back = styled(Text).attrs({
   }
 `;
 
-const Close = styled(Text).attrs({
-  f: 3,
-  color: 'gray.regular',
-})`
-  position: absolute;
-  right: 0;
-  font-weight: bold;
-  cursor: pointer;
-
-  &:hover {
-    color: ${props => props.theme.colors.gray.bold};
-  }
-
-  &:after {
-    content: 'close';
-  }
-`;
-
 const Logo = styled(Icons).attrs({
   name: 'ArenaMark',
   size: 7,
@@ -91,14 +74,14 @@ class Layout extends Component {
     this.messenger = new Messenger(window.top);
   }
 
-  goBack = () => {
-    this.props.history.goBack();
-  }
-
-  closeWindow = () => {
+  onClose = () => {
     this.messenger.send({
       action: 'close',
     });
+  }
+
+  goBack = () => {
+    this.props.history.goBack();
   }
 
   render() {
@@ -112,7 +95,15 @@ class Layout extends Component {
           }
           <Logo />
           {showClose &&
-            <Close onClick={this.closeWindow} />
+            <Close
+              size={7}
+              thickness="2px"
+              onClick={this.onClose}
+              position="absolute"
+              top={0}
+              right={0}
+              zIndex={1}
+            />
           }
         </Top>
         {children}
