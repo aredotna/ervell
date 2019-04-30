@@ -6,7 +6,6 @@ import Layout from 'extension/src/components/Layout';
 import Box from 'react/components/UI/Box';
 import Search from 'extension/src/components/ChannelSelection/components/Search';
 import RecentChannels from 'extension/src/components/ChannelSelection/components/RecentChannels';
-import AllChannels from 'extension/src/components/ChannelSelection/components/AllChannels';
 import SearchResults from 'extension/src/components/ChannelSelection/components/SearchResults';
 
 const Container = styled(Box)`
@@ -50,7 +49,6 @@ class ChannelSelection extends PureComponent {
           {query.length === 0 &&
             <React.Fragment>
               <RecentChannels />
-              <AllChannels />
             </React.Fragment>
           }
         </Container>

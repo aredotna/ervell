@@ -17,6 +17,7 @@ class Search extends PureComponent {
         query={query}
         onQueryChange={onChange}
         placeholder="Filter channels"
+        autoFocus
       />
     );
   }

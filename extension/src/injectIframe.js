@@ -12,6 +12,11 @@ browser.runtime.onMessage.addListener((msg) => {
       return pane.open(msg);
     case 'add':
       return pane.add(msg);
+    case 'save-page':
+      if (pane.isOpen) {
+        return pane.saveCurrentPage();
+      }
+      return pane.open(msg);
     default:
       break;
   }

@@ -10,6 +10,8 @@ const TOTAL_BLOCK_LIMIT = 10;
 export const ExtensionContext = React.createContext({
   blocks: [],
   selectedChannel: null,
+  pageUrl: null,
+  setPageUrl: () => {},
   addBlock: () => {},
   removeBlock: () => {},
   editBlock: () => {},
@@ -33,6 +35,7 @@ class Extension extends Component {
   state = {
     blocks: [],
     selectedChannel: null,
+    pageUrl: null,
   }
 
   componentDidMount() {
@@ -43,6 +46,12 @@ class Extension extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('message');
+  }
+
+  setPageUrl = (pageUrl) => {
+    this.setState({
+      pageUrl,
+    });
   }
 
   getBlock = id => find(this.state.blocks, block => (block.id === id))
@@ -100,22 +109,29 @@ class Extension extends Component {
   }
 
   selectChannel = (channel) => {
-    console.log('selectChannel', channel);
     this.setState({
       selectedChannel: channel,
     });
   }
 
   render() {
-    const { blocks, selectedChannel } = this.state;
+    const { blocks, selectedChannel, pageUrl } = this.state;
     const { children } = this.props;
     const {
-      addBlock, removeBlock, editBlock, getBlock, selectChannel,
+      addBlock, removeBlock, editBlock, getBlock, selectChannel, setPageUrl,
     } = this;
 
     return (
       <ExtensionContext.Provider value={{
-        blocks, selectedChannel, addBlock, removeBlock, editBlock, getBlock, selectChannel,
+        blocks,
+        selectedChannel,
+        addBlock,
+        removeBlock,
+        editBlock,
+        getBlock,
+        selectChannel,
+        pageUrl,
+        setPageUrl,
       }}
       >
         {children}

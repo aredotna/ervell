@@ -38,6 +38,9 @@ class Pane {
     // So we can communicate with the iframe
     this.setupReceiver();
     this.messenger = new Messenger(this.frame.contentWindow);
+
+    // Focus iframe
+    this.frame.addEventListener('DOMContentLoaded', this.focusIframe);
   }
 
   close = () => {
@@ -55,6 +58,10 @@ class Pane {
     document.body.appendChild(iframe);
 
     return iframe;
+  }
+
+  focusIframe = () => {
+    this.frame.contentWindow.focus();
   }
 
   showIframe = () => {
@@ -228,8 +235,14 @@ class Pane {
     };
 
     this.messenger.send({
-      action: 'drop',
+      action: 'currentPage',
       value: data,
+    });
+  }
+
+  saveCurrentPage = () => {
+    this.messenger.send({
+      action: 'saveCurrentPage',
     });
   }
 

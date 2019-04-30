@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -36,11 +37,11 @@ const Top = styled(Box)`
   width: 100%;
 `;
 
-const DropZone = styled(Box).attrs({ p: 7, mt: 10, mb: 9 })`
+const DropZone = styled(Box).attrs({ p: 7, mt: 10 })`
   border: 2px dashed ${x => x.theme.colors.gray.semiLight};
 `;
 
-const BlocksContainer = styled(Box)`
+const BlocksContainer = styled(Box).attrs({ mt: 7 })`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -60,14 +61,25 @@ const Bottom = styled(Box)`
 
 class Blocks extends Component {
   static propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
     context: PropTypes.object.isRequired,
     createBlock: PropTypes.func.isRequired,
+    query: PropTypes.object,
+  }
+
+  static defaultProps = {
+    query: null,
   }
 
   constructor(props) {
     super(props);
     this.messenger = new Messenger(window.top);
+    this.layoutRef = React.createRef();
+    window.addEventListener('message', this.receiveMessage);
+  }
+
+  componentDidMount() {
+    const { context: { setPageUrl }, query } = this.props;
+    if (query && query.original_source_url) { setPageUrl(query.original_source_url); }
   }
 
   componentDidUpdate() {
@@ -80,7 +92,38 @@ class Blocks extends Component {
     }
   }
 
-  componentDidUpdate
+  componentWillUnmount() {
+    window.removeEventListener('message', this.receiveMessage);
+  }
+
+  receiveMessage = (message) => {
+    const { action } = message.data;
+
+    switch (action) {
+      case 'saveCurrentPage':
+        this.savePageAsLink();
+        break;
+      default:
+        break;
+    }
+  }
+
+  savePageAsLink = () => {
+    const {
+      context: { selectedChannel, pageUrl },
+      createBlock,
+    } = this.props;
+
+    const values = { value: pageUrl, channel_id: selectedChannel.id };
+
+    createBlock({
+      variables: values,
+    }).then(() => {
+      this.messenger.send({
+        action: 'close',
+      });
+    });
+  }
 
   saveAndClose = () => {
     const { createBlock, context: { blocks, selectedChannel } } = this.props;
@@ -99,15 +142,27 @@ class Blocks extends Component {
   }
 
   render() {
-    const { blocks, removeBlock } = this.props.context;
+    const { blocks, removeBlock, selectedChannel } = this.props.context;
 
     return (
-      <Layout>
+      <Layout
+        tabIndex={0}
+        onKeyDown={this.onKeyDown}
+      >
         <Container>
           <Top>
             <DropZone>
               <Text f={5}>Drop here to add to Are.na</Text>
             </DropZone>
+            {!blocks.length &&
+              <Box mt={3} align="center">
+                <Text f={3}>or</Text>
+                <Button f={4} my={2} onClick={this.savePageAsLink} disabled={!selectedChannel}>
+                  Save page as link
+                </Button>
+                <Text f={2} pl={4} color="gray.regular">⌘ + shift + s</Text>
+              </Box>
+            }
             <BlocksContainer>
               {blocks.map(block => (
                 <Block block={block} key={block.id} removeBlock={removeBlock} />
