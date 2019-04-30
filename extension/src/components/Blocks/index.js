@@ -45,7 +45,7 @@ const BlocksContainer = styled(Box).attrs({ mt: 7 })`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
   position: relative;
   flex-wrap: wrap;
   width: 100%;

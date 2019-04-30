@@ -49,11 +49,21 @@ const ImageContainer = styled(Box)`
 
 const LinkContainer = styled(Box).attrs({
   my: 3,
+  p: 3,
 })`
   min-width: 100%;
   text-align: center;
   display: flex;
   position: relative;
+  overflow: hidden;
+`;
+
+const LinkText = styled(Text).attrs({
+  f: 1,
+  align: 'left',
+  font: 'mono',
+  color: 'gray.semiBold',
+})`
   overflow: hidden;
 `;
 
@@ -126,7 +136,7 @@ class Block extends PureComponent {
       <Container isText={isText}>
         {block.type === 'Text' &&
           <TextContainer>
-            <Text f={3} font="serif">
+            <Text f={2} font="serif">
               <Truncate suffix="..." length={220}>
                 {block.value}
               </Truncate>
@@ -135,11 +145,11 @@ class Block extends PureComponent {
         }
         {block.type === 'Link' &&
           <LinkContainer>
-            <Text f={2} align="center" font="mono" color="gray.semiBold">
+            <LinkText>
               <Truncate suffix="..." length={40}>
                 {block.value}
               </Truncate>
-            </Text>
+            </LinkText>
           </LinkContainer>
         }
         {block.type === 'Image' &&
