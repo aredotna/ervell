@@ -165,7 +165,7 @@ class Blocks extends Component {
         <Container>
           <Top>
             <DropZone>
-              <Text f={5}>Drop here to add to Are.na</Text>
+              <Text f={5}>Drop text, links or images here.</Text>
             </DropZone>
             {!blocks.length &&
               <Box mt={3} align="center">
