@@ -8,7 +8,6 @@ import Extension from 'extension/src/components/Extension';
 import withLoginStatus from 'react/hocs/WithLoginStatus';
 
 import Login from 'extension/src/components/Login';
-import MainMenu from 'extension/src/components/MainMenu';
 import Blocks from 'extension/src/components/Blocks';
 import EditBlock from 'extension/src/components/EditBlock';
 import ChannelSelection from 'extension/src/components/ChannelSelection';
@@ -40,16 +39,7 @@ const Routes = ({ isLoggedIn }) => (
           <Route
             exact
             path="/index.html"
-            render={parseRoute(({ query }) => {
-              // if we have a type, go ahead and show the blocks component
-              if (query.type) {
-                return (<Blocks />);
-              }
-
-              return (
-                <MainMenu url={query.url} />
-              );
-            })}
+            render={parseRoute(({ query }) => (<Blocks query={query} />))}
           />
         </React.Fragment>
       }
