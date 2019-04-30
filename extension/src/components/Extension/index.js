@@ -38,12 +38,6 @@ class Extension extends Component {
     pageUrl: null,
   }
 
-  componentDidMount() {
-    this.messenger.send({
-      action: 'getInitialBlock',
-    });
-  }
-
   componentWillUnmount() {
     window.removeEventListener('message');
   }
