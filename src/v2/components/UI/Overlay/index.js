@@ -28,6 +28,16 @@ const Background = styled.div`
   pointer-events: none;
 `
 
+const TargetOverlay = styled.div`
+  position: fixed;
+  ${top}
+  ${right}
+  ${bottom}
+  ${left}
+  ${width}
+  ${height}
+`
+
 const Wrapper = styled.div`
   box-sizing: border-box;
   ${preset(position, { position: 'absolute' })}
@@ -53,6 +63,7 @@ export default class Overlay extends PureComponent {
     offsetY: PropTypes.number,
     marginY: PropTypes.number,
     fullWidth: PropTypes.bool,
+    disableTarget: PropTypes.bool, // Useful for toggling UI
   }
 
   static defaultProps = {
@@ -65,6 +76,7 @@ export default class Overlay extends PureComponent {
     offsetY: 0,
     marginY: 10,
     fullWidth: false,
+    disableTarget: false,
   }
 
   constructor(props) {
@@ -80,12 +92,22 @@ export default class Overlay extends PureComponent {
     left: null,
     width: null,
     height: null,
+    targetOverlay: null,
   }
 
   componentDidMount() {
+    const { targetEl, disableTarget } = this.props
+
     document.body.appendChild(this.el)
 
-    this.positionOverlay = () => this.alignToEl(this.props.targetEl())
+    this.positionOverlay = () => {
+      this.alignToEl(targetEl())
+
+      if (disableTarget) {
+        this.overlayTarget()
+      }
+    }
+
     this.debouncedPositionOverlay = debounce(this.positionOverlay, 100)
 
     window.addEventListener('resize', this.debouncedPositionOverlay)
@@ -108,6 +130,15 @@ export default class Overlay extends PureComponent {
     )
 
     this.observer.disconnect()
+  }
+
+  overlayTarget = () => {
+    const { targetEl } = this.props
+    const { top, left, width, height } = targetEl().getBoundingClientRect()
+
+    this.setState({
+      targetOverlay: { top, left, width, height },
+    })
   }
 
   alignToEl = el => {
@@ -179,18 +210,23 @@ export default class Overlay extends PureComponent {
   }
 
   render() {
-    const { children, onClose, ...rest } = this.props
+    const { targetOverlay, ...state } = this.state
+    const { children, onClose, disableTarget, ...rest } = this.props
 
     return ReactDOM.createPortal(
       <Background>
         <OutsideClickHandler onOutsideClick={onClose}>
           <Wrapper
-            {...compactObject(this.state)}
+            {...compactObject(state)}
             {...rest}
             ref={el => {
               this.wrapper = el
             }}
           >
+            {disableTarget && (
+              <TargetOverlay {...targetOverlay} onClick={onClose} />
+            )}
+
             {children}
           </Wrapper>
         </OutsideClickHandler>
