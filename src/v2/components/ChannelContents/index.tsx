@@ -60,6 +60,14 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
     ])
   }, [])
 
+  const handleRemoveBlock = useCallback(({ id, type }) => {
+    setConnectables(prevConnectables => {
+      return prevConnectables.filter(
+        connectable => connectable.id !== id && connectable.type !== type
+      )
+    })
+  }, [])
+
   const handleSortEnd = useCallback(
     ({ oldIndex, newIndex }) => {
       const connectable = connectables[oldIndex]
@@ -157,9 +165,10 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
                   key={connectableKey}
                   index={connectableIndex + pageIndex * chunkSize}
                   connectableSkeleton={connectableSkeleton}
+                  channel={channel}
                   connectable={connectable}
-                  channelCan={can}
                   context={connectables}
+                  onRemove={handleRemoveBlock}
                 />
               )
             })}

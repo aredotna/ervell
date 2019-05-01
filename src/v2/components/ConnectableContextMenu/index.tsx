@@ -1,36 +1,43 @@
 import React from 'react'
 
 import { ContextMenu } from 'v2/components/ContextMenu'
+import { ConnectableContextMenuRemoveConnection } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuRemoveConnection'
+import { ConnectableContextMenuMuteBlock } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuMuteBlock'
 
 interface Props {
-  channelCan: any
-  connectableCan: any
-  sourceUrl: any
-  findOriginalUrl: any
+  channel: any
+  connectable: any
+  onRemove: (props: any) => any
 }
 
 export const ConnectableContextMenu: React.FC<Props> = ({
-  channelCan,
-  connectableCan,
-  sourceUrl,
-  findOriginalUrl,
+  channel,
+  connectable,
+  onRemove,
   ...rest
 }) => {
+  const findOriginalUrl =
+    connectable.__typename === 'Image' && connectable.find_original_url
+  const sourceUrl = connectable.source && connectable.source.url
+
   const isDisplayable =
-    channelCan.remove_connections ||
+    channel.can.remove_connections ||
     sourceUrl ||
     findOriginalUrl ||
-    connectableCan.mute ||
-    channelCan.reorder_connections
+    connectable.can.mute ||
+    channel.can.reorder_connections
 
   if (!isDisplayable) return null
 
   return (
     <ContextMenu position="absolute" top={8} right={8} zIndex={1} {...rest}>
-      {channelCan.remove_connections && (
-        <ContextMenu.Option iconName="Garbage">
-          Remove connection
-        </ContextMenu.Option>
+      {channel.can.remove_connections && (
+        <ConnectableContextMenuRemoveConnection
+          channelId={channel.id}
+          connectableId={connectable.id}
+          connectableType={connectable.__typename}
+          onRemove={onRemove}
+        />
       )}
 
       {sourceUrl && (
@@ -45,14 +52,17 @@ export const ConnectableContextMenu: React.FC<Props> = ({
         </ContextMenu.Option>
       )}
 
-      {connectableCan.mute && (
-        <ContextMenu.Option iconName="Mute">Mute block</ContextMenu.Option>
+      {connectable.can.mute && (
+        <ConnectableContextMenuMuteBlock
+          connectableId={connectable.id}
+          connectableType={connectable.__typename}
+        />
       )}
 
-      <ContextMenu.Divider />
-
-      {channelCan.reorder_connections && (
+      {channel.can.reorder_connections && (
         <>
+          <ContextMenu.Divider />
+
           <ContextMenu.Option iconName="UpArrow">
             Move to top
           </ContextMenu.Option>

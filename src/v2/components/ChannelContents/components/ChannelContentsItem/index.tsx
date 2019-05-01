@@ -8,19 +8,21 @@ import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
 const SortableGridItem = SortableElement(GridItem)
 
 interface Props {
-  channelCan: any
+  channel: any
   connectable: any
   connectableSkeleton: any
   index: number
   context: any
+  onRemove: (props: any) => any
 }
 
 export const ChannelContentsItem: React.FC<Props> = ({
-  channelCan,
+  channel,
   connectable,
   connectableSkeleton,
   index,
   context,
+  onRemove,
   ...rest
 }) => {
   const [isHovering, setHover] = useState(false)
@@ -36,7 +38,7 @@ export const ChannelContentsItem: React.FC<Props> = ({
   if (connectable) {
     return (
       <SortableGridItem
-        disabled={!channelCan.reorder_connections}
+        disabled={!channel.can.reorder_connections}
         index={index}
         onMouseEnter={startHover}
         onMouseLeave={endHover}
@@ -47,13 +49,9 @@ export const ChannelContentsItem: React.FC<Props> = ({
 
         {isHovering && (
           <ConnectableContextMenu
-            channelCan={channelCan}
-            connectableCan={connectable.can}
-            findOriginalUrl={
-              connectable.__typename === 'Image' &&
-              connectable.find_original_url
-            }
-            sourceUrl={connectable.source && connectable.source.url}
+            channel={channel}
+            connectable={connectable}
+            onRemove={onRemove}
           />
         )}
       </SortableGridItem>
