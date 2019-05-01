@@ -15,10 +15,6 @@ interface Props {
   context: any
 }
 
-// TODO:
-// - Fix close
-// - Fix drag on open by disabling when it's open
-
 export const ChannelContentsItem: React.FC<Props> = ({
   channelCan,
   connectable,
