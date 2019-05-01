@@ -69,13 +69,14 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
   }, [])
 
   const handleSortEnd = useCallback(
-    ({ oldIndex, newIndex }) => {
+    ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
       const connectable = connectables[oldIndex]
+      const endIndex = newIndex === -1 ? connectables.length : newIndex
 
       const sorted = reorder({
         list: connectables,
         startIndex: oldIndex,
-        endIndex: newIndex,
+        endIndex,
       })
 
       setConnectables(sorted)
@@ -169,6 +170,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
                   connectable={connectable}
                   context={connectables}
                   onRemove={handleRemoveBlock}
+                  onChangePosition={handleSortEnd}
                 />
               )
             })}

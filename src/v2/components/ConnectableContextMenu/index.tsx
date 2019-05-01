@@ -3,17 +3,20 @@ import React from 'react'
 import { ContextMenu } from 'v2/components/ContextMenu'
 import { ConnectableContextMenuRemoveConnection } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuRemoveConnection'
 import { ConnectableContextMenuMuteBlock } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuMuteBlock'
+import { ConnectableContextMenuReorderConnections } from 'v2/components/ConnectableContextMenu/components/ConnectableContextMenuReorderConnections'
 
 interface Props {
   channel: any
   connectable: any
   onRemove: (props: any) => any
+  onChangePosition: (props: any) => any
 }
 
 export const ConnectableContextMenu: React.FC<Props> = ({
   channel,
   connectable,
   onRemove,
+  onChangePosition,
   ...rest
 }) => {
   const findOriginalUrl =
@@ -60,17 +63,9 @@ export const ConnectableContextMenu: React.FC<Props> = ({
       )}
 
       {channel.can.reorder_connections && (
-        <>
-          <ContextMenu.Divider />
-
-          <ContextMenu.Option iconName="UpArrow">
-            Move to top
-          </ContextMenu.Option>
-
-          <ContextMenu.Option iconName="DownArrow">
-            Move to bottom
-          </ContextMenu.Option>
-        </>
+        <ConnectableContextMenuReorderConnections
+          onChangePosition={onChangePosition}
+        />
       )}
     </ContextMenu>
   )

@@ -14,6 +14,7 @@ interface Props {
   index: number
   context: any
   onRemove: (props: any) => any
+  onChangePosition: (props: any) => any
 }
 
 export const ChannelContentsItem: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const ChannelContentsItem: React.FC<Props> = ({
   index,
   context,
   onRemove,
+  onChangePosition,
   ...rest
 }) => {
   const [isHovering, setHover] = useState(false)
@@ -52,6 +54,9 @@ export const ChannelContentsItem: React.FC<Props> = ({
             channel={channel}
             connectable={connectable}
             onRemove={onRemove}
+            onChangePosition={newIndex =>
+              onChangePosition({ oldIndex: index, newIndex })
+            }
           />
         )}
       </SortableGridItem>
