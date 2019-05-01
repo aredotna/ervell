@@ -59,7 +59,7 @@ class MuteButton extends Component {
       <Query query={muteQuery} variables={{ id, type }} ssr={false}>
         {({ loading, error, data }) => {
           if (loading || error) {
-            return <span {...rest}>Mute</span>
+            return children({ isMuted: false })
           }
 
           const { mutable } = data
