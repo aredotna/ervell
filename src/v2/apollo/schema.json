@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -688,7 +688,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -3156,6 +3156,26 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "sort_by",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "ChannelsSort",
+                  "ofType": null
+                },
+                "defaultValue": "ADDED_AT_AT"
+              },
+              {
+                "name": "direction",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Directions",
+                  "ofType": null
+                },
+                "defaultValue": "DESC"
               }
             ],
             "type": {
@@ -3249,7 +3269,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -3682,7 +3702,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -3916,6 +3936,26 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "sort_by",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "ChannelsSort",
+                  "ofType": null
+                },
+                "defaultValue": "ADDED_AT_AT"
+              },
+              {
+                "name": "direction",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Directions",
+                  "ofType": null
+                },
+                "defaultValue": "DESC"
               }
             ],
             "type": {
@@ -4009,7 +4049,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -4336,7 +4376,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -4560,6 +4600,52 @@
       },
       {
         "kind": "ENUM",
+        "name": "ChannelsSort",
+        "description": "Ways to sort channels",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ADDED_AT_AT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TITLE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Directions",
+        "description": "Directions to sort blocks",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
         "name": "IndexedChannelsTypes",
         "description": null,
         "fields": null,
@@ -4666,29 +4752,6 @@
           },
           {
             "name": "DEFAULT",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "Directions",
-        "description": "Directions to sort blocks",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -11911,6 +11974,26 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "sort_by",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "ChannelsSort",
+                  "ofType": null
+                },
+                "defaultValue": "ADDED_AT_AT"
+              },
+              {
+                "name": "direction",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Directions",
+                  "ofType": null
+                },
+                "defaultValue": "DESC"
               }
             ],
             "type": {
@@ -12004,7 +12087,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -12388,7 +12471,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -12664,6 +12747,26 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "sort_by",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "ChannelsSort",
+                  "ofType": null
+                },
+                "defaultValue": "ADDED_AT_AT"
+              },
+              {
+                "name": "direction",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "Directions",
+                  "ofType": null
+                },
+                "defaultValue": "DESC"
               }
             ],
             "type": {
@@ -12730,14 +12833,24 @@
                 "defaultValue": "5"
               },
               {
-                "name": "direction",
+                "name": "page",
                 "description": null,
                 "type": {
-                  "kind": "ENUM",
-                  "name": "Directions",
+                  "kind": "SCALAR",
+                  "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "DESC"
+                "defaultValue": "1"
+              },
+              {
+                "name": "include_open_channels",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": "true"
               }
             ],
             "type": {
@@ -12804,7 +12917,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -13384,7 +13497,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "111"
+                "defaultValue": "120"
               },
               {
                 "name": "q",
@@ -16950,6 +17063,33 @@
             "type": {
               "kind": "OBJECT",
               "name": "LoginPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "move_connectable_mutation",
+            "description": null,
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MoveConnectableInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MoveConnectablePayload",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20543,6 +20683,151 @@
             "type": {
               "kind": "OBJECT",
               "name": "Me",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "MoveConnectableInput",
+        "description": "Autogenerated input type of MoveConnectable",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "channel_id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connectable",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "ConnectableInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "action",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Movements",
+              "ofType": null
+            },
+            "defaultValue": "INSERT_AT"
+          },
+          {
+            "name": "insert_at",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "Movements",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "INSERT_AT",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MOVE_TO_TOP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MOVE_TO_BOTTOM",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MOVE_UP",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "MOVE_DOWN",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "MoveConnectablePayload",
+        "description": "Autogenerated return type of MoveConnectable",
+        "fields": [
+          {
+            "name": "channel",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Channel",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
