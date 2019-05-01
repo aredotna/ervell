@@ -209,6 +209,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "ezel-assets": "git://github.com/arenahq/ezel-assets.git",
     "faker": "^4.1.0",
     "fork-ts-checker-notifier-webpack-plugin": "^0.4.0",
