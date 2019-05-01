@@ -36,6 +36,11 @@ export interface ChannelContentsSet_channel_contents_Text_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsSet_channel_contents_Text_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_Text {
   __typename: "Text";
   id: number | null;
@@ -50,6 +55,7 @@ export interface ChannelContentsSet_channel_contents_Text {
   source: ChannelContentsSet_channel_contents_Text_source | null;
   counts: ChannelContentsSet_channel_contents_Text_counts | null;
   content: string | null;
+  can: ChannelContentsSet_channel_contents_Text_can | null;
 }
 
 export interface ChannelContentsSet_channel_contents_Image_user {
@@ -80,6 +86,11 @@ export interface ChannelContentsSet_channel_contents_Image_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsSet_channel_contents_Image_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_Image {
   __typename: "Image";
   id: number | null;
@@ -94,6 +105,8 @@ export interface ChannelContentsSet_channel_contents_Image {
   source: ChannelContentsSet_channel_contents_Image_source | null;
   counts: ChannelContentsSet_channel_contents_Image_counts | null;
   src: string | null;
+  can: ChannelContentsSet_channel_contents_Image_can | null;
+  find_original_url: string | null;
 }
 
 export interface ChannelContentsSet_channel_contents_Link_user {
@@ -124,6 +137,11 @@ export interface ChannelContentsSet_channel_contents_Link_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsSet_channel_contents_Link_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_Link {
   __typename: "Link";
   id: number | null;
@@ -139,6 +157,7 @@ export interface ChannelContentsSet_channel_contents_Link {
   counts: ChannelContentsSet_channel_contents_Link_counts | null;
   src: string | null;
   external_url: string | null;
+  can: ChannelContentsSet_channel_contents_Link_can | null;
 }
 
 export interface ChannelContentsSet_channel_contents_Embed_user {
@@ -169,6 +188,11 @@ export interface ChannelContentsSet_channel_contents_Embed_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsSet_channel_contents_Embed_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_Embed {
   __typename: "Embed";
   id: number | null;
@@ -183,6 +207,7 @@ export interface ChannelContentsSet_channel_contents_Embed {
   source: ChannelContentsSet_channel_contents_Embed_source | null;
   counts: ChannelContentsSet_channel_contents_Embed_counts | null;
   src: string | null;
+  can: ChannelContentsSet_channel_contents_Embed_can | null;
 }
 
 export interface ChannelContentsSet_channel_contents_Attachment_user {
@@ -213,6 +238,11 @@ export interface ChannelContentsSet_channel_contents_Attachment_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsSet_channel_contents_Attachment_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_Attachment {
   __typename: "Attachment";
   id: number | null;
@@ -228,6 +258,7 @@ export interface ChannelContentsSet_channel_contents_Attachment {
   counts: ChannelContentsSet_channel_contents_Attachment_counts | null;
   src: string | null;
   file_extension: string | null;
+  can: ChannelContentsSet_channel_contents_Attachment_can | null;
 }
 
 export interface ChannelContentsSet_channel_contents_PendingBlock_user {
@@ -258,6 +289,11 @@ export interface ChannelContentsSet_channel_contents_PendingBlock_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsSet_channel_contents_PendingBlock_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_PendingBlock {
   __typename: "PendingBlock";
   id: number | null;
@@ -271,6 +307,7 @@ export interface ChannelContentsSet_channel_contents_PendingBlock {
   connection: ChannelContentsSet_channel_contents_PendingBlock_connection | null;
   source: ChannelContentsSet_channel_contents_PendingBlock_source | null;
   counts: ChannelContentsSet_channel_contents_PendingBlock_counts | null;
+  can: ChannelContentsSet_channel_contents_PendingBlock_can | null;
 }
 
 export interface ChannelContentsSet_channel_contents_Channel_user {
@@ -316,6 +353,11 @@ export interface ChannelContentsSet_channel_contents_Channel_owner_User {
 
 export type ChannelContentsSet_channel_contents_Channel_owner = ChannelContentsSet_channel_contents_Channel_owner_Group | ChannelContentsSet_channel_contents_Channel_owner_User;
 
+export interface ChannelContentsSet_channel_contents_Channel_can {
+  __typename: "ChannelCan";
+  mute: boolean | null;
+}
+
 export interface ChannelContentsSet_channel_contents_Channel {
   __typename: "Channel";
   id: number | null;
@@ -332,6 +374,7 @@ export interface ChannelContentsSet_channel_contents_Channel {
   visibility: string | null;
   counts: ChannelContentsSet_channel_contents_Channel_counts | null;
   owner: ChannelContentsSet_channel_contents_Channel_owner | null;
+  can: ChannelContentsSet_channel_contents_Channel_can | null;
 }
 
 export type ChannelContentsSet_channel_contents = ChannelContentsSet_channel_contents_Text | ChannelContentsSet_channel_contents_Image | ChannelContentsSet_channel_contents_Link | ChannelContentsSet_channel_contents_Embed | ChannelContentsSet_channel_contents_Attachment | ChannelContentsSet_channel_contents_PendingBlock | ChannelContentsSet_channel_contents_Channel;

@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import Waypoint from 'react-waypoint'
 import { graphql, withApollo } from 'react-apollo'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { SortableContainer } from 'react-sortable-hoc'
 
 import chunk from 'v2/util/chunk'
 import { reorder } from 'v2/components/ChannelContents/lib/reorder'
@@ -22,10 +22,9 @@ import { ChannelContents as ChannelContentsInterface } from '__generated__/Chann
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
-import Cell from 'v2/components/Cell'
+import { ChannelContentsItem } from './components/ChannelContentsItem'
 
 const SortableGrid = SortableContainer(Grid)
-const SortableGridItem = SortableElement(GridItem)
 
 interface Props {
   chunkSize: number
@@ -37,7 +36,7 @@ interface ChannelContentsProps extends Props {
   moveConnectable: (props: any) => Promise<any>
 }
 
-const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
+const ChannelContents: React.FC<ChannelContentsProps> = ({
   chunkSize = 10,
   channel,
   client,
@@ -49,62 +48,71 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
   const [connectables, setConnectables] = useState(skeleton)
   const [collection, setCollection] = useState<KonnectableCellCollection>({})
 
-  const chunked = chunk(connectables, chunkSize)
+  const chunked = useMemo(() => chunk(connectables, chunkSize), [
+    connectables,
+    chunkSize,
+  ])
 
-  const handleAddBlock = ({ id }) => {
+  const handleAddBlock = useCallback(({ id }) => {
     setConnectables(prevConnectables => [
       { __typename: 'SkeletalConnectable', id, type: 'Block' },
       ...prevConnectables,
     ])
-  }
+  }, [])
 
-  const handleSortEnd = ({ oldIndex, newIndex }) => {
-    const connectable = connectables[oldIndex]
+  const handleSortEnd = useCallback(
+    ({ oldIndex, newIndex }) => {
+      const connectable = connectables[oldIndex]
 
-    const sorted = reorder({
-      list: connectables,
-      startIndex: oldIndex,
-      endIndex: newIndex,
-    })
+      const sorted = reorder({
+        list: connectables,
+        startIndex: oldIndex,
+        endIndex: newIndex,
+      })
 
-    setConnectables(sorted)
+      setConnectables(sorted)
 
-    const insertAt = connectables.length - newIndex
+      const insertAt = connectables.length - newIndex
 
-    moveConnectable({
-      variables: {
-        channel_id: id,
-        connectable: {
-          id: connectable.id,
-          type: connectable.type.toUpperCase(),
+      moveConnectable({
+        variables: {
+          channel_id: id,
+          connectable: {
+            id: connectable.id,
+            type: connectable.type.toUpperCase(),
+          },
+          insert_at: insertAt,
         },
-        insert_at: insertAt,
-      },
-    }).catch(console.error.bind(console))
-  }
+      }).catch(console.error.bind(console))
+    },
+    [connectables, id, moveConnectable]
+  )
 
-  const handleOnEnter = pageSkeleton => (): void => {
-    const queryKey = JSON.stringify(pageSkeleton)
+  const handleOnEnter = useCallback(
+    pageSkeleton => (): void => {
+      const queryKey = JSON.stringify(pageSkeleton)
 
-    if (activeQueries[queryKey]) {
-      // Already loading
-      return
-    }
+      if (activeQueries[queryKey]) {
+        // Already loading
+        return
+      }
 
-    setActiveQueries(prevActiveQuerys => ({
-      ...prevActiveQuerys,
-      [queryKey]: true,
-    }))
+      setActiveQueries(prevActiveQuerys => ({
+        ...prevActiveQuerys,
+        [queryKey]: true,
+      }))
 
-    loadSkeleton({
-      client,
-      channelId: id,
-      pageSkeleton,
-      collection,
-    }).then(contents => {
-      setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-    })
-  }
+      loadSkeleton({
+        client,
+        channelId: id,
+        pageSkeleton,
+        collection,
+      }).then(contents => {
+        setCollection(prevCollection => ({ ...prevCollection, ...contents }))
+      })
+    },
+    [activeQueries, client, collection, id]
+  )
 
   return (
     <SortableGrid
@@ -144,31 +152,15 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
               )
               const connectable = collection[connectableKey]
 
-              if (connectable) {
-                return (
-                  <SortableGridItem
-                    key={connectableKey}
-                    index={connectableIndex + pageIndex * chunkSize}
-                    onDrag={e => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                    }}
-                  >
-                    <Cell.Konnectable
-                      konnectable={connectable}
-                      context={connectables}
-                    />
-                  </SortableGridItem>
-                )
-              }
-
               return (
-                <SortableGridItem
+                <ChannelContentsItem
                   key={connectableKey}
                   index={connectableIndex + pageIndex * chunkSize}
-                >
-                  <Cell.Skeletal mode="loading" />
-                </SortableGridItem>
+                  connectableSkeleton={connectableSkeleton}
+                  connectable={connectable}
+                  channelCan={can}
+                  context={connectables}
+                />
               )
             })}
 

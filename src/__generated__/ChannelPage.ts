@@ -37,6 +37,8 @@ export interface ChannelPage_channel_can {
   manage_collaborators: boolean | null;
   connect: boolean | null;
   add_to: boolean | null;
+  reorder_connections: boolean | null;
+  remove_connections: boolean | null;
 }
 
 export interface ChannelPage_channel_user {
