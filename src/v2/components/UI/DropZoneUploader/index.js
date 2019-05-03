@@ -7,7 +7,6 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Link from 'v2/components/UI/Link'
 import FileUploader from 'v2/components/UI/FileUploader'
-import FileUploaderProgressList from 'v2/components/UI/FileUploaderProgressList'
 
 const DropZone = styled(Box)`
   ${props => `display: ${{ resting: 'none', active: 'block' }[props.mode]};`}
@@ -111,9 +110,7 @@ const DropZoneUploader = ({ children, onUpload, onComplete, accept }) => {
               onUpload={onUpload}
               onComplete={onComplete}
               onError={handleErrors}
-            >
-              {({ files }) => <FileUploaderProgressList p={6} files={files} />}
-            </FileUploader>
+            />
           )}
         </Backdrop>
       </DropZone>
