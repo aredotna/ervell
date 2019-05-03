@@ -117,6 +117,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
         pageSkeleton,
         collection,
       }).then(contents => {
+        if (!contents) return
         setCollection(prevCollection => ({ ...prevCollection, ...contents }))
       })
     },

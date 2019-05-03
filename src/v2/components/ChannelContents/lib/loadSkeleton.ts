@@ -13,8 +13,13 @@ export const loadSkeleton = ({
   channelId: string | number
   pageSkeleton: ChannelContents_skeleton[]
   collection: KonnectableCellCollection
-}): Promise<KonnectableCellCollection> => {
+}): Promise<KonnectableCellCollection | void> => {
   const unloadedSkeleton = pageSkeleton.filter(c => !collection[key(c)])
+
+  if (unloadedSkeleton.length === 0) {
+    return Promise.resolve()
+  }
+
   const variables = {
     id: channelId,
     connectables: unloadedSkeleton.map(c => ({
