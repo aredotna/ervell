@@ -23,15 +23,21 @@ const GridItem = ({
   children,
   gutterSpacing = 4,
   onDrag = () => {},
+  onMouseEnter = () => {},
+  onMouseLeave = () => {},
   ...rest
 }: {
   children: ReactNode
   gutterSpacing?: number
   onDrag?: Function
+  onMouseEnter?: Function
+  onMouseLeave?: Function
 }) => (
   <Container
     gutterSpacing={gutterSpacing}
     onDrag={onDrag}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
     variableHeight
     {...rest}
   >

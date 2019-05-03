@@ -30,6 +30,11 @@ import Cap from 'v2/components/UI/Icons/Cap.svg'
 import RightCaret from 'v2/components/UI/Icons/RightCaret.svg'
 import EnterFullscreen from 'v2/components/UI/Icons/EnterFullscreen.svg'
 import ExitFullscreen from 'v2/components/UI/Icons/ExitFullscreen.svg'
+import Ellipsis from 'v2/components/UI/Icons/Ellipsis.svg'
+import Garbage from 'v2/components/UI/Icons/Garbage.svg'
+import Globe from 'v2/components/UI/Icons/Globe.svg'
+import UpArrow from 'v2/components/UI/Icons/UpArrow.svg'
+import DownArrow from 'v2/components/UI/Icons/DownArrow.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -57,6 +62,11 @@ export const COMPONENTS = {
   RightCaret: <RightCaret />,
   EnterFullscreen: <EnterFullscreen />,
   ExitFullscreen: <ExitFullscreen />,
+  Ellipsis: <Ellipsis />,
+  Garbage: <Garbage />,
+  Globe: <Globe />,
+  UpArrow: <UpArrow />,
+  DownArrow: <DownArrow />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

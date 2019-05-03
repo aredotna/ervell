@@ -1,7 +1,7 @@
-import { KonnectableCell } from '__generated__/KonnectableCell'
+import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
 
 export interface KonnectableCellCollection {
-  [key: string]: KonnectableCell
+  [key: string]: ChannelContentsConnectable
 }
 
 export const key = ({

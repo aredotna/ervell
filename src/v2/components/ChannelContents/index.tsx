@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import Waypoint from 'react-waypoint'
 import { graphql, withApollo } from 'react-apollo'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { SortableContainer } from 'react-sortable-hoc'
 
 import chunk from 'v2/util/chunk'
 import { reorder } from 'v2/components/ChannelContents/lib/reorder'
@@ -22,10 +22,9 @@ import { ChannelContents as ChannelContentsInterface } from '__generated__/Chann
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
-import Cell from 'v2/components/Cell'
+import { ChannelContentsItem } from './components/ChannelContentsItem'
 
 const SortableGrid = SortableContainer(Grid)
-const SortableGridItem = SortableElement(GridItem)
 
 interface Props {
   chunkSize: number
@@ -37,7 +36,7 @@ interface ChannelContentsProps extends Props {
   moveConnectable: (props: any) => Promise<any>
 }
 
-const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
+const ChannelContents: React.FC<ChannelContentsProps> = ({
   chunkSize = 10,
   channel,
   client,
@@ -49,62 +48,92 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
   const [connectables, setConnectables] = useState(skeleton)
   const [collection, setCollection] = useState<KonnectableCellCollection>({})
 
-  const chunked = chunk(connectables, chunkSize)
+  const chunked = useMemo(() => chunk(connectables, chunkSize), [
+    connectables,
+    chunkSize,
+  ])
 
-  const handleAddBlock = ({ id }) => {
+  const handleAddBlock = useCallback(({ id }: { id: number }) => {
     setConnectables(prevConnectables => [
       { __typename: 'SkeletalConnectable', id, type: 'Block' },
       ...prevConnectables,
     ])
-  }
+  }, [])
 
-  const handleSortEnd = ({ oldIndex, newIndex }) => {
-    const connectable = connectables[oldIndex]
+  const handleRemoveBlock = useCallback(
+    ({ id, type }: { id: number; type: string }) => {
+      setConnectables(prevConnectables => {
+        return prevConnectables.filter(
+          connectable => connectable.id !== id && connectable.type !== type
+        )
+      })
+    },
+    []
+  )
 
-    const sorted = reorder({
-      list: connectables,
-      startIndex: oldIndex,
-      endIndex: newIndex,
-    })
+  const handleSortEnd = useCallback(
+    ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+      const connectable = connectables[oldIndex]
 
-    setConnectables(sorted)
+      let startIndex = oldIndex
+      let endIndex = newIndex
 
-    const insertAt = connectables.length - newIndex
+      if (newIndex === -1) {
+        // Moving to the "bottom"
+        startIndex = oldIndex
+        endIndex = connectables.length - 1
+      }
 
-    moveConnectable({
-      variables: {
-        channel_id: id,
-        connectable: {
-          id: connectable.id,
-          type: connectable.type.toUpperCase(),
+      const sorted = reorder({
+        list: connectables,
+        startIndex,
+        endIndex,
+      })
+
+      setConnectables(sorted)
+
+      const insertAt = connectables.length - endIndex
+
+      moveConnectable({
+        variables: {
+          channel_id: id,
+          connectable: {
+            id: connectable.id,
+            type: connectable.type.toUpperCase(),
+          },
+          insert_at: insertAt,
         },
-        insert_at: insertAt,
-      },
-    }).catch(console.error.bind(console))
-  }
+      }).catch(console.error.bind(console))
+    },
+    [connectables, id, moveConnectable]
+  )
 
-  const handleOnEnter = pageSkeleton => (): void => {
-    const queryKey = JSON.stringify(pageSkeleton)
+  const handleOnEnter = useCallback(
+    pageSkeleton => (): void => {
+      const queryKey = JSON.stringify(pageSkeleton)
 
-    if (activeQueries[queryKey]) {
-      // Already loading
-      return
-    }
+      if (activeQueries[queryKey]) {
+        // Already loading
+        return
+      }
 
-    setActiveQueries(prevActiveQuerys => ({
-      ...prevActiveQuerys,
-      [queryKey]: true,
-    }))
+      setActiveQueries(prevActiveQuerys => ({
+        ...prevActiveQuerys,
+        [queryKey]: true,
+      }))
 
-    loadSkeleton({
-      client,
-      channelId: id,
-      pageSkeleton,
-      collection,
-    }).then(contents => {
-      setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-    })
-  }
+      loadSkeleton({
+        client,
+        channelId: id,
+        pageSkeleton,
+        collection,
+      }).then(contents => {
+        if (!contents) return
+        setCollection(prevCollection => ({ ...prevCollection, ...contents }))
+      })
+    },
+    [activeQueries, client, collection, id]
+  )
 
   return (
     <SortableGrid
@@ -144,28 +173,17 @@ const ChannelContents: FunctionComponent<ChannelContentsProps> = ({
               )
               const connectable = collection[connectableKey]
 
-              if (connectable) {
-                return (
-                  <SortableGridItem
-                    key={connectableKey}
-                    index={connectableIndex + pageIndex * chunkSize}
-                    onDrag={e => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                    }}
-                  >
-                    <Cell.Konnectable konnectable={connectable} />
-                  </SortableGridItem>
-                )
-              }
-
               return (
-                <SortableGridItem
+                <ChannelContentsItem
                   key={connectableKey}
                   index={connectableIndex + pageIndex * chunkSize}
-                >
-                  <Cell.Skeletal mode="loading" />
-                </SortableGridItem>
+                  connectableSkeleton={connectableSkeleton}
+                  channel={channel}
+                  connectable={connectable}
+                  context={connectables}
+                  onRemove={handleRemoveBlock}
+                  onChangePosition={handleSortEnd}
+                />
               )
             })}
 

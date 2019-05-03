@@ -33,5 +33,6 @@
   ],
   "tslint.enable": false,
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "debug.node.autoAttach": "on"
+  "debug.node.autoAttach": "on",
+  "eslint.enable": true
 }

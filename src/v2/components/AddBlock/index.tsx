@@ -174,7 +174,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
 
     return (
       <DropZoneUploader
-        accept="image/*" // TODO
+        accept="image/*,audio/*,video/*,application/*" // TODO
         onUpload={this.handleUpload}
         onComplete={this.finishUpload}
         key={uploaderKey}
