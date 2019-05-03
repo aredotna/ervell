@@ -71,17 +71,25 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
   const handleSortEnd = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
       const connectable = connectables[oldIndex]
-      const endIndex = newIndex === -1 ? connectables.length : newIndex
+
+      let startIndex = oldIndex
+      let endIndex = newIndex
+
+      if (newIndex === -1) {
+        // Moving to the "bottom"
+        startIndex = oldIndex
+        endIndex = connectables.length - 1
+      }
 
       const sorted = reorder({
         list: connectables,
-        startIndex: oldIndex,
+        startIndex,
         endIndex,
       })
 
       setConnectables(sorted)
 
-      const insertAt = connectables.length - newIndex
+      const insertAt = connectables.length - endIndex
 
       moveConnectable({
         variables: {
