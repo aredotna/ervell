@@ -5,6 +5,7 @@ export default gql`
     __typename
     id
     title
+    truncatedTitle: title(truncate: 35)
     href
     visibility
     owner {

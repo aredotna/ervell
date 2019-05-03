@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 import channelBreadcrumbFragment from 'v2/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb'
 
-import { truncate } from 'v2/components/UI/Truncate'
 import ColoredChannelLink from 'v2/components/UI/ColoredChannelLink'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import BorderedLock from 'v2/components/UI/BorderedLock'
@@ -47,7 +46,13 @@ export default class ChannelBreadcrumb extends Component {
                   resting: (
                     <span dangerouslySetInnerHTML={{ __html: channel.title }} />
                   ),
-                  stuck: truncate(channel.title, 25),
+                  stuck: (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: channel.truncatedTitle,
+                      }}
+                    />
+                  ),
                 }[mode]
               }
             </ColoredChannelLink>
