@@ -53,20 +53,23 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
     chunkSize,
   ])
 
-  const handleAddBlock = useCallback(({ id }) => {
+  const handleAddBlock = useCallback(({ id }: { id: number }) => {
     setConnectables(prevConnectables => [
       { __typename: 'SkeletalConnectable', id, type: 'Block' },
       ...prevConnectables,
     ])
   }, [])
 
-  const handleRemoveBlock = useCallback(({ id, type }) => {
-    setConnectables(prevConnectables => {
-      return prevConnectables.filter(
-        connectable => connectable.id !== id && connectable.type !== type
-      )
-    })
-  }, [])
+  const handleRemoveBlock = useCallback(
+    ({ id, type }: { id: number; type: string }) => {
+      setConnectables(prevConnectables => {
+        return prevConnectables.filter(
+          connectable => connectable.id !== id && connectable.type !== type
+        )
+      })
+    },
+    []
+  )
 
   const handleSortEnd = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {

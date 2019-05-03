@@ -4,6 +4,8 @@ import { ContextMenu } from 'v2/components/ContextMenu'
 
 export const ConnectableContextMenuReorderConnections = ({
   onChangePosition,
+}: {
+  onChangePosition: (newIndex: number) => { newIndex: number; oldIndex: number }
 }) => {
   const moveToTop = useCallback(
     e => {

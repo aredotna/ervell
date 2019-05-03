@@ -13,8 +13,14 @@ interface Props {
   connectableSkeleton: any
   index: number
   context: any
-  onRemove: (props: any) => any
-  onChangePosition: (props: any) => any
+  onRemove: ({ id, type }: { id: number; type: string }) => any
+  onChangePosition: ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number
+    newIndex: number
+  }) => any
 }
 
 export const ChannelContentsItem: React.FC<Props> = ({

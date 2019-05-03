@@ -33,7 +33,7 @@ interface Props {
   children: React.ReactNode
   iconName?: string
   href?: string
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => any
+  onClick?: (e: React.MouseEvent) => any
 }
 
 export const ContextMenuOption: React.FC<Props> = ({

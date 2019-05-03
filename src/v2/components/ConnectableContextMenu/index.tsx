@@ -9,7 +9,7 @@ interface Props {
   channel: any
   connectable: any
   onRemove: (props: any) => any
-  onChangePosition: (props: any) => any
+  onChangePosition: (newIndex: number) => { newIndex: number; oldIndex: number }
 }
 
 export const ConnectableContextMenu: React.FC<Props> = ({
