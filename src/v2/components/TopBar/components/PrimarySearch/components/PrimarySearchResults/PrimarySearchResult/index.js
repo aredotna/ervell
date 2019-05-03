@@ -106,7 +106,11 @@ export default class PrimarySearchResult extends PureComponent {
                 result.visibility ? `channel.${result.visibility}` : 'gray.base'
               }
             >
-              {unescape(result.label)}
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: result.label,
+                }}
+              />
 
               {result.visibility === 'private' && <BorderedLock ml={3} />}
 
