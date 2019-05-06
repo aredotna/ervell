@@ -31,6 +31,7 @@ export interface ChannelBreadcrumb {
   __typename: "Channel";
   id: number | null;
   title: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
   owner: ChannelBreadcrumb_owner | null;
