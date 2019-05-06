@@ -1,7 +1,7 @@
-import { KonnectableCell } from '__generated__/KonnectableCell'
+import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
 
 export interface KonnectableCellCollection {
-  [key: string]: KonnectableCell
+  [key: string]: ChannelContentsConnectable
 }
 
 export const key = ({
@@ -10,9 +10,20 @@ export const key = ({
   __typename,
 }: {
   id: string | number
-  type: string
-  __typename: string
+  type?: string
+  __typename?: string
 }) =>
   __typename
     ? `${id}:${__typename === 'Channel' ? 'Channel' : 'Block'}`
     : `${id}:${type}`
+
+export const normalize = (
+  contents: ChannelContentsConnectable[]
+): KonnectableCellCollection =>
+  contents.reduce(
+    (memo, connectable) => ({
+      [key(connectable)]: connectable,
+      ...memo,
+    }),
+    {}
+  )

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
+import { channelContentsConnectableFragment } from 'v2/components/ChannelContents/fragments/channelContentsConnectable'
 
 export default gql`
   query ChannelContentsSet($id: ID!, $connectables: [ConnectableInput]!) {
@@ -8,9 +8,9 @@ export default gql`
       __typename
       id
       contents(connectables: $connectables) {
-        ...KonnectableCell
+        ...ChannelContentsConnectable
       }
     }
   }
-  ${konnectableCellFragment}
+  ${channelContentsConnectableFragment}
 `

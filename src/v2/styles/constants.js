@@ -61,6 +61,7 @@ export const CONSTANT_VALUES = {
 
 export const RADII = {
   button: '0.25em',
+  regular: '0.25em',
   subtle: '0.125em',
 }
 

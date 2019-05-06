@@ -1,16 +1,13 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
 
 import openBlockLightbox from 'v2/util/openBlockLightbox'
 
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
+import { KonnectableCell as KonnectableCellInterface } from '__generated__/KonnectableCell'
 
 import constants from 'v2/styles/constants'
 
 import Typography from 'v2/components/UI/Text'
-
 import Attachment from 'v2/components/Cell/components/Konnectable/components/Attachment'
 import Channel from 'v2/components/Cell/components/Konnectable/components/Channel'
 import Embed from 'v2/components/Cell/components/Konnectable/components/Embed'
@@ -50,18 +47,18 @@ const Comments = styled(Typography).attrs({
   border-radius: ${constants.radii.subtle};
 `
 
-export default class Konnectable extends PureComponent {
-  static propTypes = {
-    konnectable: propType(konnectableCellFragment).isRequired,
-    context: PropTypes.arrayOf(
-      PropTypes.shape({
-        __typename: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-      })
-    ),
-    isPreviewable: PropTypes.bool,
-  }
+interface ContextProps {
+  __typename: string
+  id: number
+}
 
+interface Props {
+  konnectable: KonnectableCellInterface
+  context: ContextProps[]
+  isPreviewable: boolean
+}
+
+export default class Konnectable extends PureComponent<Props> {
   static defaultProps = {
     context: [],
     isPreviewable: true,
@@ -115,9 +112,11 @@ export default class Konnectable extends PureComponent {
         onClick={this.openBlock}
         data-id={konnectable.id}
       >
-        {konnectable.counts.comments > 0 && mode !== 'overlay' && (
-          <Comments>{konnectable.counts.comments}</Comments>
-        )}
+        {konnectable.__typename !== 'Channel' &&
+          konnectable.counts.comments > 0 &&
+          mode !== 'overlay' && (
+            <Comments>{konnectable.counts.comments}</Comments>
+          )}
 
         {[
           {

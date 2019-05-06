@@ -104,6 +104,7 @@ export interface ChannelMetadata {
   __typename: "Channel";
   id: number | null;
   title: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
   owner: ChannelMetadata_owner | null;

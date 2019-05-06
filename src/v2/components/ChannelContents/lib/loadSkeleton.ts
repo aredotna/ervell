@@ -1,6 +1,10 @@
 import channelContentsSetQuery from 'v2/components/ChannelContents/queries/channelContentsSet'
 
-import { KonnectableCellCollection, key } from './KonnectableCellCollection'
+import {
+  KonnectableCellCollection,
+  key,
+  normalize,
+} from './KonnectableCellCollection'
 import { ChannelContents_skeleton } from '__generated__/ChannelContents'
 
 export const loadSkeleton = ({
@@ -13,8 +17,13 @@ export const loadSkeleton = ({
   channelId: string | number
   pageSkeleton: ChannelContents_skeleton[]
   collection: KonnectableCellCollection
-}): Promise<KonnectableCellCollection> => {
+}): Promise<KonnectableCellCollection | void> => {
   const unloadedSkeleton = pageSkeleton.filter(c => !collection[key(c)])
+
+  if (unloadedSkeleton.length === 0) {
+    return Promise.resolve()
+  }
+
   const variables = {
     id: channelId,
     connectables: unloadedSkeleton.map(c => ({
@@ -25,14 +34,5 @@ export const loadSkeleton = ({
 
   return client
     .query({ query: channelContentsSetQuery, variables })
-    .then(({ data }) => {
-      return data.channel.contents.reduce(
-        (memo, connectable) => ({
-          [key(connectable)]: connectable,
-          ...memo,
-        }),
-        {}
-      )
-    })
-    .catch(console.error.bind(console))
+    .then(({ data }) => normalize(data.channel.contents))
 }
