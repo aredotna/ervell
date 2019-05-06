@@ -15,8 +15,18 @@ export const GoalMeter: React.FC<GoalMeterProps> = ({
   goalMrr,
   goalDate,
 }) => {
+  const dateOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }
+  const formattedDate = new Date(goalDate).toLocaleDateString(
+    'en-US',
+    dateOptions
+  )
   return (
-    <React.Fragment>
+    <>
       <Meter
         bg="gray.light"
         borderColor="transparent"
@@ -35,23 +45,21 @@ export const GoalMeter: React.FC<GoalMeterProps> = ({
         px={2}
       >
         <Box>
-          <Text f={1}>
-            <strong>Today</strong>
-          </Text>
+          <Text f={1}>Today</Text>
           <Text f={1}>
             <strong>${currentMrr}</strong> Monthly recurring revenue
           </Text>
         </Box>
         <Box>
-          <Text f={1} align="right">
-            <strong>Goal by {new Date(goalDate).toDateString()}</strong>
+          <Text f={1} textAlign="right" fontWeight="bold">
+            Goal by {formattedDate}
           </Text>
-          <Text f={1} align="right">
+          <Text f={1} textAlign="right">
             <strong>${goalMrr}</strong> Monthly recurring revenue
           </Text>
         </Box>
       </Box>
-    </React.Fragment>
+    </>
   )
 }
 

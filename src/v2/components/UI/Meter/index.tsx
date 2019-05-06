@@ -47,13 +47,13 @@ interface MeterProps {
 export const Meter: React.FC<MeterProps> = ({
   startColor,
   endColor,
-  borderRadius,
   amount,
   limit,
-  bg,
-  borderColor,
-  p,
-  mb,
+  borderRadius = '0.5em',
+  bg = 'gray.light',
+  borderColor = 'gray.regular',
+  p = 4,
+  mb = 0,
   ...rest
 }) => {
   return (
@@ -74,14 +74,6 @@ export const Meter: React.FC<MeterProps> = ({
       />
     </Container>
   )
-}
-
-Meter.defaultProps = {
-  borderRadius: '0.5em',
-  bg: 'gray.light',
-  borderColor: 'gray.regular',
-  p: 4,
-  mb: 0,
 }
 
 export default Meter
