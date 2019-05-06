@@ -5,7 +5,6 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
-import Meter from 'v2/components/UI/Meter'
 
 import {
   Headline,
