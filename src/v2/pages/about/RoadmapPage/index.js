@@ -5,6 +5,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import Meter from 'v2/components/UI/Meter'
 
 import {
   Headline,
@@ -134,6 +135,47 @@ export default class RoadmapPage extends PureComponent {
           incentive is always to build a tool that fosters learning and genuine
           collaboration. This also means that Are.na’s future relies entirely on
           community contributions. Here’s how you can help:
+        </Paragraph>
+
+        <Paragraph pb={6}>
+          <Meter
+            bg="gray.light"
+            borderColor="transparent"
+            borderRadius="1.5em"
+            startColor="state.premium"
+            endColor="state.supporter"
+            amount={roadmap.fields.rawMrr}
+            limit={roadmap.fields.rawGoalMrr}
+            p={4}
+            mb={4}
+          />
+          <Box
+            justifyContent="space-between"
+            flexDirection="row"
+            display="flex"
+            px={2}
+          >
+            <Box>
+              <Text f={1}>
+                <strong>Today</strong>
+              </Text>
+              <Text f={1}>
+                <strong>${roadmap.fields.rawMrr}</strong> Monthly recurring
+                revenue
+              </Text>
+            </Box>
+            <Box>
+              <Text f={1} align="right">
+                <strong>
+                  Goal by {new Date(roadmap.fields.goalDate).toDateString()}
+                </strong>
+              </Text>
+              <Text f={1} align="right">
+                <strong>${roadmap.fields.rawGoalMrr}</strong> Monthly recurring
+                revenue
+              </Text>
+            </Box>
+          </Box>
         </Paragraph>
 
         <SupportOptions>
