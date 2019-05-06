@@ -9,6 +9,7 @@ import { loadSkeleton } from 'v2/components/ChannelContents/lib/loadSkeleton'
 import {
   KonnectableCellCollection,
   key as konnectableCellCollectionKey,
+  normalize as konnectableCellNormalize,
 } from 'v2/components/ChannelContents/lib/KonnectableCellCollection'
 import {
   ActiveQueries,
@@ -43,10 +44,13 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
   moveConnectable,
   ...rest
 }) => {
-  const { id, skeleton, can } = channel
+  const { id, skeleton, can, initial_contents } = channel
+
   const [activeQueries, setActiveQueries] = useState<ActiveQueries>({})
   const [connectables, setConnectables] = useState(skeleton)
-  const [collection, setCollection] = useState<KonnectableCellCollection>({})
+  const [collection, setCollection] = useState<KonnectableCellCollection>(
+    konnectableCellNormalize(initial_contents)
+  )
 
   const chunked = useMemo(() => chunk(connectables, chunkSize), [
     connectables,
@@ -127,10 +131,12 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
         channelId: id,
         pageSkeleton,
         collection,
-      }).then(contents => {
-        if (!contents) return
-        setCollection(prevCollection => ({ ...prevCollection, ...contents }))
       })
+        .then(contents => {
+          if (!contents) return
+          setCollection(prevCollection => ({ ...prevCollection, ...contents }))
+        })
+        .catch(console.error.bind(console))
     },
     [activeQueries, client, collection, id]
   )

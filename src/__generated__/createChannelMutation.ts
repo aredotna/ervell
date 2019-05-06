@@ -106,6 +106,7 @@ export interface createChannelMutation_create_channel_channel {
   __typename: "Channel";
   id: number | null;
   title: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
   owner: createChannelMutation_create_channel_channel_owner | null;
