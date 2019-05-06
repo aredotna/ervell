@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
+import { unescape } from 'underscore'
 
 import constants from 'v2/styles/constants'
 
@@ -37,7 +38,7 @@ export default class BlockLightbox extends PureComponent {
 
     return (
       <Container {...rest}>
-        {block.title && <Title>{block.title}</Title>}
+        {block.title && <Title>{unescape(block.title)}</Title>}
 
         <BlockLightboxContentPane block={block} layout={layout}>
           {children}
