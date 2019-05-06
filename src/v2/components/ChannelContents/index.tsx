@@ -28,13 +28,13 @@ import { ChannelContentsItem } from './components/ChannelContentsItem'
 const SortableGrid = SortableContainer(Grid)
 
 interface Props {
-  chunkSize: number
+  chunkSize?: number
   channel: ChannelContentsInterface
-  client: any
 }
 
 interface ChannelContentsProps extends Props {
   moveConnectable: (props: any) => Promise<any>
+  client: any
 }
 
 const ChannelContents: React.FC<ChannelContentsProps> = ({
