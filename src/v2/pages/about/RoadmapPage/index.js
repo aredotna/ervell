@@ -21,6 +21,7 @@ import {
   Cell,
 } from 'v2/pages/about/RoadmapPage/components/Table'
 import constants from 'v2/styles/constants'
+import GoalMeter from 'v2/pages/about/RoadmapPage/components/GoalMeter'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -134,6 +135,14 @@ export default class RoadmapPage extends PureComponent {
           incentive is always to build a tool that fosters learning and genuine
           collaboration. This also means that Are.na’s future relies entirely on
           community contributions. Here’s how you can help:
+        </Paragraph>
+
+        <Paragraph pb={6}>
+          <GoalMeter
+            currentMrr={roadmap.fields.rawMrr}
+            goalMrr={roadmap.fields.rawGoalMrr}
+            goalDate={roadmap.fields.goalDate}
+          />
         </Paragraph>
 
         <SupportOptions>
