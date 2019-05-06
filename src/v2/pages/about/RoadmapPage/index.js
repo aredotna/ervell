@@ -22,6 +22,7 @@ import {
   Cell,
 } from 'v2/pages/about/RoadmapPage/components/Table'
 import constants from 'v2/styles/constants'
+import GoalMeter from 'v2/pages/about/RoadmapPage/components/GoalMeter'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -138,44 +139,11 @@ export default class RoadmapPage extends PureComponent {
         </Paragraph>
 
         <Paragraph pb={6}>
-          <Meter
-            bg="gray.light"
-            borderColor="transparent"
-            borderRadius="1.5em"
-            startColor="state.premium"
-            endColor="state.supporter"
-            amount={roadmap.fields.rawMrr}
-            limit={roadmap.fields.rawGoalMrr}
-            p={4}
-            mb={4}
+          <GoalMeter
+            currentMrr={roadmap.fields.rawMrr}
+            goalMrr={roadmap.fields.rawGoalMrr}
+            goalDate={roadmap.fields.goalDate}
           />
-          <Box
-            justifyContent="space-between"
-            flexDirection="row"
-            display="flex"
-            px={2}
-          >
-            <Box>
-              <Text f={1}>
-                <strong>Today</strong>
-              </Text>
-              <Text f={1}>
-                <strong>${roadmap.fields.rawMrr}</strong> Monthly recurring
-                revenue
-              </Text>
-            </Box>
-            <Box>
-              <Text f={1} align="right">
-                <strong>
-                  Goal by {new Date(roadmap.fields.goalDate).toDateString()}
-                </strong>
-              </Text>
-              <Text f={1} align="right">
-                <strong>${roadmap.fields.rawGoalMrr}</strong> Monthly recurring
-                revenue
-              </Text>
-            </Box>
-          </Box>
         </Paragraph>
 
         <SupportOptions>

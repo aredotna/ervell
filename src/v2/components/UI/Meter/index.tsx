@@ -6,9 +6,9 @@ import Box from 'v2/components/UI/Box'
 
 const Container = styled(Box).attrs(({ p, borderColor, borderRadius }) => ({
   border: '1px solid',
-  borderColor: borderColor || 'gray.regular',
+  borderColor: borderColor,
   borderRadius: borderRadius,
-  p: p || 4,
+  p: p,
 }))`
   position: relative;
   display: flex;
@@ -38,6 +38,10 @@ interface MeterProps {
   amount: number
   limit: number
   borderRadius?: string
+  bg?: string
+  borderColor?: string
+  p?: number
+  mb?: number
 }
 
 export const Meter: React.FC<MeterProps> = ({
@@ -46,10 +50,21 @@ export const Meter: React.FC<MeterProps> = ({
   borderRadius,
   amount,
   limit,
+  bg,
+  borderColor,
+  p,
+  mb,
   ...rest
 }) => {
   return (
-    <Container borderRadius={borderRadius} {...rest}>
+    <Container
+      borderRadius={borderRadius}
+      bg={bg}
+      borderColor={borderColor}
+      p={p}
+      mb={mb}
+      {...rest}
+    >
       <MeterProgress
         startColor={startColor}
         endColor={endColor}
@@ -63,6 +78,10 @@ export const Meter: React.FC<MeterProps> = ({
 
 Meter.defaultProps = {
   borderRadius: '0.5em',
+  bg: 'gray.light',
+  borderColor: 'gray.regular',
+  p: 4,
+  mb: 0,
 }
 
 export default Meter
