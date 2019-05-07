@@ -1,4 +1,5 @@
 .DS_Store
+.cache
 .idea
 .env*
 Procfile.*
@@ -11,5 +12,11 @@ dump.rdb
 manifest.json
 yarn-error.log
 newrelic_agent.log
+
+# Compiled extension code
 extension/dist
 extension/src/config.js
+
+# Compiled server code
+server.dist.js
+server.dist.js.map

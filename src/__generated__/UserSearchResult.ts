@@ -1,0 +1,17 @@
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: UserSearchResult
+// ====================================================
+
+export interface UserSearchResult {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+  href: string | null;
+  hidden_email: string | null;
+  initials: string | null;
+  avatar: string | null;
+}

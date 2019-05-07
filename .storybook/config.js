@@ -1,33 +1,34 @@
-import { addDecorator, configure } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
-import apolloStorybookDecorator from 'apollo-storybook-react';
-import StoryRouter from 'storybook-react-router';
+import { addDecorator, configure } from '@storybook/react'
+import { setOptions } from '@storybook/addon-options'
+import apolloStorybookDecorator from 'apollo-storybook-react'
+import StoryRouter from 'storybook-react-router'
 
-import typeDefs from 'react/apollo/schema.graphql';
+import typeDefs from 'v2/apollo/schema.graphql'
 
-import mocks from '.storybook/mocks';
+import mocks from './mocks'
 
-import { wrapWithThemeProvider } from 'react/styles/theme';
+import { wrapWithThemeProvider } from 'v2/styles/theme'
 
 addDecorator(
   apolloStorybookDecorator({
     typeDefs,
-    mocks
+    mocks,
   })
-);
+)
 
-addDecorator(wrapWithThemeProvider);
+addDecorator(wrapWithThemeProvider)
 
-addDecorator(StoryRouter());
+addDecorator(StoryRouter())
 
 setOptions({
   name: 'Are.na',
   url: 'https://www.are.na',
-  sortStoriesByKind: true,
+  showAddonPanel: false,
   sidebarAnimations: false,
-});
+  sortStoriesByKind: true,
+})
 
-const req = require.context('../react/stories', true, /\.stories\.js$/)
-const loadStories = () => req.keys().forEach((filename) => req(filename))
+const req = require.context('../src/v2/stories', true, /\.stories\.(ts|tsx|js|jsx)$/); // prettier-ignore
+const loadStories = () => req.keys().forEach(filename => req(filename))
 
-configure(loadStories, module);
+configure(loadStories, module)

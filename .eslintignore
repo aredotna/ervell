@@ -1,4 +1,4 @@
-components/*
-lib/*
-apps/marklet/public/loader.js
+src/components/*
+src/lib/*
+src/apps/marklet/public/loader.js
 public/*
