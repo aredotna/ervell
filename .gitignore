@@ -14,8 +14,8 @@ yarn-error.log
 newrelic_agent.log
 
 # Compiled extension code
-extension/dist
-extension/src/config.js
+src/extension/dist
+src/extension/src/config.js
 
 # Compiled server code
 server.dist.js

@@ -10,7 +10,7 @@
     "deploy-staging": "sh scripts/deploy-staging.sh",
     "deploy-storybook": "storybook-to-ghpages",
     "deploy": "sh scripts/deploy.sh",
-    "extension": "NODE_ENV=development webpack --config extension/webpack.config.js --watch",
+    "extension": "NODE_ENV=development webpack --config src/extension/webpack.config.js --watch",
     "generate-types": "apollo codegen:generate --target typescript --outputFlat src/__generated__",
     "generate-types:watch": "yarn generate-types --watch",
     "jest": "jest",
