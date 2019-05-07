@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { pick, omit } from 'underscore'
 
@@ -14,7 +14,7 @@ const SPACE_MARGIN_PROPS_KEYS = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my']
 
 // TODO: Needs to be configured to accept a tag
 // so that other input types can have errors
-class Input extends Component {
+class Input extends PureComponent {
   static propTypes = {
     errorMessage: PropTypes.string,
     hasError: PropTypes.bool,
