@@ -52,7 +52,7 @@ export default class ChannelMetadataInfo extends Component {
             </a>
           )}
 
-          <ChannelShareButton channel={channel} />
+          {channel.can.share && <ChannelShareButton channel={channel} />}
         </Buttons>
       </div>
     )

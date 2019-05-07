@@ -11,6 +11,11 @@ export interface ChannelMetadataInfo_counts {
   followers: number | null;
 }
 
+export interface ChannelMetadataInfo_can {
+  __typename: "ChannelCan";
+  share: boolean | null;
+}
+
 export interface ChannelMetadataInfo_user {
   __typename: "User";
   id: number | null;
@@ -25,5 +30,6 @@ export interface ChannelMetadataInfo {
   visibility: string | null;
   info: string | null;
   counts: ChannelMetadataInfo_counts | null;
+  can: ChannelMetadataInfo_can | null;
   user: ChannelMetadataInfo_user | null;
 }

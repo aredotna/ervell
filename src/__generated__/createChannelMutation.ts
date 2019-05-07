@@ -36,6 +36,7 @@ export interface createChannelMutation_create_channel_channel_can {
   update: boolean | null;
   destroy: boolean | null;
   mute: boolean | null;
+  share: boolean | null;
   manage_collaborators: boolean | null;
   connect: boolean | null;
 }

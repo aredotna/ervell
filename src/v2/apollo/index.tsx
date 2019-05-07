@@ -52,9 +52,7 @@ export const initApolloClient = ({
     cache.restore(window.__APOLLO_STATE__)
   }
 
-  const {
-    data: { X_APP_TOKEN, X_SHARE_TOKEN },
-  } = sharify
+  const { X_APP_TOKEN, X_SHARE_TOKEN } = sharifyData
 
   const stateLink = withClientState({
     cache,

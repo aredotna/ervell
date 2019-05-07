@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -631,6 +631,33 @@
             "type": {
               "kind": "OBJECT",
               "name": "Searches",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "shared_channel",
+            "description": "An otherwise private channel that is accessible via the shared token",
+            "args": [
+              {
+                "name": "token",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Channel",
               "ofType": null
             },
             "isDeprecated": false,
@@ -688,7 +715,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -3316,7 +3343,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -3749,7 +3776,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -4096,7 +4123,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -4423,7 +4450,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -10899,6 +10926,18 @@
             "deprecationReason": null
           },
           {
+            "name": "share",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "transfer",
             "description": null,
             "args": [],
@@ -12134,7 +12173,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -12518,7 +12557,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -12964,7 +13003,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
@@ -13544,7 +13583,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "126"
+                "defaultValue": "127"
               },
               {
                 "name": "q",
