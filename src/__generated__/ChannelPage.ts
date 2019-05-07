@@ -34,6 +34,7 @@ export interface ChannelPage_channel_can {
   update: boolean | null;
   destroy: boolean | null;
   mute: boolean | null;
+  share: boolean | null;
   manage_collaborators: boolean | null;
   connect: boolean | null;
   add_to: boolean | null;
