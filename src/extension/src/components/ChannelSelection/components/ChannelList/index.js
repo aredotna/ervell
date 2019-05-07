@@ -6,8 +6,8 @@ import styled from 'styled-components'
 
 import selectableChannelFragment from 'extension/src/components/SelectableChannel/fragments/selectableChannel'
 
-import Box from 'src/v2/components/UI/Box'
-import Text from 'src/v2/components/UI/Text'
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 import SelectableChannel from 'extension/src/components/SelectableChannel'
 
 const ChannelContainer = styled(Box).attrs({

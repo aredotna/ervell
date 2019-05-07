@@ -1,18 +1,25 @@
 const { resolve } = require('path')
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const config = {
   mode: 'development',
   watch: true,
-
-  devtool: 'inline-source-map',
+  context: resolve(__dirname, '../../'),
+  devtool: 'cheap-module-source-map',
   entry: {
-    background: './extension/src/background.js',
-    injectiframe: './extension/src/injectiframe.js',
-    main: './extension/src/main.js',
+    background: './src/extension/src/background.js',
+    injectiframe: './src/extension/src/injectiframe.js',
+    main: './src/extension/src/main.js',
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      formatter: 'codeframe',
+      formatterOptions: 'highlightCode',
+      checkSyntacticErrors: true,
+      watch: ['./src'],
+    }),
     new ChromeExtensionReloader({
       port: 9090,
       reloadPage: true,
@@ -23,26 +30,30 @@ const config = {
       },
     }),
     new CopyWebpackPlugin([
-      { from: './extension/src/index.html' },
-      { from: './extension/manifest.json' },
-      { from: './extension/img/' },
-      { from: './extension/src/iframe.css' },
+      { from: './src/extension/src/index.html' },
+      { from: './src/extension/manifest.json' },
+      { from: './src/extension/img/' },
+      { from: './src/extension/src/iframe.css' },
     ]),
   ],
+
   output: {
     publicPath: '.',
     path: resolve(__dirname, 'dist/'),
     filename: '[name].js',
-    libraryTarget: 'umd',
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
+        include: /src/,
         exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
+            query: {
+              cacheDirectory: '.cache',
+            },
           },
         ],
       },
