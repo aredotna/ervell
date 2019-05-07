@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -688,7 +688,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -2410,6 +2410,53 @@
             "deprecationReason": null
           },
           {
+            "name": "filter",
+            "description": null,
+            "args": [
+              {
+                "name": "q",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": "null"
+              },
+              {
+                "name": "per",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "25"
+              },
+              {
+                "name": "page",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "1"
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "Konnectable",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "followers",
             "description": null,
             "args": [
@@ -3269,7 +3316,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -3702,7 +3749,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -4049,7 +4096,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -4376,7 +4423,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -12087,7 +12134,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -12471,7 +12518,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -12917,7 +12964,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",
@@ -13497,7 +13544,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "120"
+                "defaultValue": "126"
               },
               {
                 "name": "q",

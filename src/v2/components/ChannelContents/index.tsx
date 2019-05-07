@@ -25,16 +25,18 @@ import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 
-const SortableGrid = SortableContainer(Grid)
+const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
+  <Grid {...rest} />
+))
 
 interface Props {
-  chunkSize: number
+  chunkSize?: number
   channel: ChannelContentsInterface
-  client: any
 }
 
 interface ChannelContentsProps extends Props {
   moveConnectable: (props: any) => Promise<any>
+  client: any
 }
 
 const ChannelContents: React.FC<ChannelContentsProps> = ({

@@ -5,6 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 
 import constants from 'v2/styles/constants'
 
+import Box from 'v2/components/UI/Box'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 
 const { blockGutter } = constants
@@ -13,8 +14,6 @@ const containerMixin = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: -${blockGutter};
-  margin-right: -${blockGutter};
 
   ${constants.media.mobile`
     margin-left: 0;
@@ -22,7 +21,7 @@ const containerMixin = css`
   `}
 `
 
-const Container = styled.div`
+const Container = styled(Box)`
   ${containerMixin}
 `
 
@@ -59,7 +58,12 @@ export default class Grid extends Component {
     const Tag = loadMore ? InfiniteContainer : Container
 
     return (
-      <Tag loadMore={loadMore} {...rest}>
+      <Tag
+        loadMore={loadMore}
+        mr={`-${blockGutter}`}
+        ml={`-${blockGutter}`}
+        {...rest}
+      >
         {wrapChildren
           ? Children.map(
               children,

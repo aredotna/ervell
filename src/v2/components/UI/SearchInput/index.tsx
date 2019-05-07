@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { isEmpty, debounce, pick, omit } from 'underscore'
 
 import compactObject from 'v2/util/compactObject'
 
-import Box from 'v2/components/UI/Box'
+import Box, { BoxProps } from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
 import { Input } from 'v2/components/UI/Inputs'
 
@@ -29,26 +28,31 @@ const Icon = styled.div`
   cursor: pointer;
 `
 
-class SearchInput extends PureComponent {
-  static propTypes = {
-    query: PropTypes.string,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onQueryChange: PropTypes.func,
-    onDebouncedQueryChange: PropTypes.func,
-    debounceWait: PropTypes.number,
-    forwardRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.any }),
-    ]),
-    iconMap: PropTypes.shape({
-      resting: PropTypes.string,
-      focus: PropTypes.string,
-      hover: PropTypes.string,
-      active: PropTypes.string,
-    }),
-  }
+interface IconMap {
+  resting: string
+  focus: string
+  hover: string
+  active: string
+}
 
+interface Props extends BoxProps {
+  query?: string
+  onFocus?: () => any
+  onBlur?: () => any
+  onQueryChange?: (props: any) => any
+  onDebouncedQueryChange?: (props: any) => any
+  debounceWait?: number
+  forwardedRef?: any
+  iconMap?: IconMap
+  placeholder?: string
+}
+
+interface State {
+  mode: string
+  query: string
+}
+
+class SearchInput extends PureComponent<Props, State> {
   static defaultProps = {
     query: '',
     onFocus: () => {},
@@ -56,7 +60,7 @@ class SearchInput extends PureComponent {
     onQueryChange: () => {},
     onDebouncedQueryChange: () => {},
     debounceWait: 250,
-    forwardRef: null,
+    forwardedRef: null,
     iconMap: {
       resting: 'MagnifyingGlass',
       hover: 'MagnifyingGlass',
@@ -65,7 +69,10 @@ class SearchInput extends PureComponent {
     },
   }
 
-  constructor(props) {
+  handleDebouncedQueryChange: (props: any) => any
+  input: any
+
+  constructor(props: Props) {
     super(props)
 
     const { debounceWait, onDebouncedQueryChange } = props
@@ -143,7 +150,7 @@ class SearchInput extends PureComponent {
       onQueryChange: _onQueryChange,
       onDebouncedQueryChange: _onDebouncedQueryChange,
       debounceWait: _debounceWait,
-      forwardRef,
+      forwardedRef,
       iconMap,
       ...rest
     } = this.props
@@ -155,7 +162,7 @@ class SearchInput extends PureComponent {
 
     return (
       <Container
-        ref={forwardRef}
+        ref={forwardedRef}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         {...outerProps}
@@ -193,6 +200,7 @@ class SearchInput extends PureComponent {
   }
 }
 
-export default React.forwardRef((props, ref) => (
-  <SearchInput forwardRef={ref} {...props} />
+export default React.forwardRef((props: Props, ref) => (
+  // @ts-ignore
+  <SearchInput forwardedRef={ref} {...props} />
 ))
