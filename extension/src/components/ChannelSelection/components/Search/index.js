@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-import SearchInput from 'react/components/UI/SearchInput';
+import SearchInput from 'src/v2/components/UI/SearchInput'
 
 class Search extends PureComponent {
   static propTypes = {
@@ -10,7 +10,7 @@ class Search extends PureComponent {
   }
 
   render() {
-    const { onChange, query } = this.props;
+    const { onChange, query } = this.props
 
     return (
       <SearchInput
@@ -19,8 +19,8 @@ class Search extends PureComponent {
         placeholder="Filter channels"
         autoFocus
       />
-    );
+    )
   }
 }
 
-export default Search;
+export default Search

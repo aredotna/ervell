@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Box from 'react/components/UI/Box';
+import styled from 'styled-components'
+import Box from 'src/v2/components/UI/Box'
 
 const CenterStretchBox = styled(Box)`
   display: flex;
@@ -8,6 +8,6 @@ const CenterStretchBox = styled(Box)`
   justify-content: center;
   flex: 1;
   position: relative;
-`;
+`
 
-export default CenterStretchBox;
+export default CenterStretchBox

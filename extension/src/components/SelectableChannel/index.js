@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { propType } from 'graphql-anywhere';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { PureComponent } from 'react'
+import { propType } from 'graphql-anywhere'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import Text from 'react/components/UI/Text';
-import BorderedLock from 'react/components/UI/BorderedLock';
+import Text from 'src/v2/components/UI/Text'
+import BorderedLock from 'src/v2/components/UI/BorderedLock'
 
-import selectableChannelFragment from 'extension/src/components/SelectableChannel/fragments/selectableChannel';
-import withExtensionContext from 'extension/src/components/Extension/withExtension';
+import selectableChannelFragment from 'extension/src/components/SelectableChannel/fragments/selectableChannel'
+import withExtensionContext from 'extension/src/components/Extension/withExtension'
 
 const Container = styled.a`
   display: flex;
@@ -17,9 +17,9 @@ const Container = styled.a`
   justify-content: flex-start;
 
   &:hover {
-    background-color: ${props => props.theme.colors.gray.hint}
+    background-color: ${props => props.theme.colors.gray.hint};
   }
-`;
+`
 
 class SelectableChannel extends PureComponent {
   static propTypes = {
@@ -34,14 +34,16 @@ class SelectableChannel extends PureComponent {
   }
 
   onClick = () => {
-    const { context, onClick, channel } = this.props;
+    const { context, onClick, channel } = this.props
 
-    context.selectChannel(channel);
-    onClick();
+    context.selectChannel(channel)
+    onClick()
   }
 
   render() {
-    const { channel: { title, visibility } } = this.props;
+    const {
+      channel: { title, visibility },
+    } = this.props
 
     return (
       <Container onClick={this.onClick}>
@@ -54,12 +56,10 @@ class SelectableChannel extends PureComponent {
             __html: title,
           }}
         />
-        {visibility === 'private' &&
-          <BorderedLock />
-        }
+        {visibility === 'private' && <BorderedLock />}
       </Container>
-    );
+    )
   }
 }
 
-export default withExtensionContext(SelectableChannel);
+export default withExtensionContext(SelectableChannel)

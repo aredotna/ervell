@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { debounce } from 'underscore';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { debounce } from 'underscore'
 
-import Layout from 'extension/src/components/Layout';
-import Box from 'react/components/UI/Box';
-import Search from 'extension/src/components/ChannelSelection/components/Search';
-import RecentChannels from 'extension/src/components/ChannelSelection/components/RecentChannels';
-import SearchResults from 'extension/src/components/ChannelSelection/components/SearchResults';
+import Layout from 'extension/src/components/Layout'
+import Box from 'src/v2/components/UI/Box'
+import Search from 'extension/src/components/ChannelSelection/components/Search'
+import RecentChannels from 'extension/src/components/ChannelSelection/components/RecentChannels'
+import SearchResults from 'extension/src/components/ChannelSelection/components/SearchResults'
 
 const Container = styled(Box)`
   display: flex;
@@ -14,7 +14,7 @@ const Container = styled(Box)`
   flex: 1;
   position: relative;
   width: 100%;
-`;
+`
 
 class ChannelSelection extends PureComponent {
   state = {
@@ -22,39 +22,36 @@ class ChannelSelection extends PureComponent {
     debouncedQuery: '',
   }
 
-  updateQuery = (query) => {
-    this.setState({ query });
-    this.debouceQuery(query);
+  updateQuery = query => {
+    this.setState({ query })
+    this.debouceQuery(query)
   }
 
-  debouceQuery = debounce((debouncedQuery) => {
-    this.setState({ debouncedQuery });
+  debouceQuery = debounce(debouncedQuery => {
+    this.setState({ debouncedQuery })
   }, 250)
 
   render() {
-    const { query, debouncedQuery } = this.state;
+    const { query, debouncedQuery } = this.state
 
     return (
       <Layout showBack showClose={false}>
         <Container mt={9}>
           <Search query={query} onChange={this.updateQuery} />
 
-          {query.length > 0 &&
-            <SearchResults
-              query={query}
-              debouncedQuery={debouncedQuery}
-            />
-          }
+          {query.length > 0 && (
+            <SearchResults query={query} debouncedQuery={debouncedQuery} />
+          )}
 
-          {query.length === 0 &&
+          {query.length === 0 && (
             <React.Fragment>
               <RecentChannels />
             </React.Fragment>
-          }
+          )}
         </Container>
       </Layout>
-    );
+    )
   }
 }
 
-export default ChannelSelection;
+export default ChannelSelection

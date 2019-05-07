@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { withRouter } from 'react-router-dom'
 
-import Box from 'react/components/UI/Box';
-import Text from 'react/components/UI/Text';
-import Icons from 'react/components/UI/Icons';
-import Close from 'react/components/UI/Close';
+import Box from 'src/v2/components/UI/Box'
+import Text from 'src/v2/components/UI/Text'
+import Icons from 'src/v2/components/UI/Icons'
+import Close from 'src/v2/components/UI/Close'
 
-import Messenger from 'extension/src/lib/Messenger';
+import Messenger from 'extension/src/lib/Messenger'
 
 const Container = styled(Box)`
   display: flex;
@@ -17,7 +17,7 @@ const Container = styled(Box)`
   align-items: center;
   min-height: 100vh;
   border: 1px solid ${x => x.theme.colors.gray.regular};
-`;
+`
 
 const Top = styled(Box)`
   display: flex;
@@ -29,7 +29,7 @@ const Top = styled(Box)`
   left: ${x => x.theme.space[5]};
   right: ${x => x.theme.space[5]};
   z-index: 100;
-`;
+`
 
 const Back = styled(Text).attrs({
   f: 3,
@@ -48,12 +48,12 @@ const Back = styled(Text).attrs({
   &:after {
     content: 'back';
   }
-`;
+`
 
 const Logo = styled(Icons).attrs({
   name: 'ArenaMark',
   size: 7,
-})``;
+})``
 
 class Layout extends Component {
   static propTypes = {
@@ -70,31 +70,29 @@ class Layout extends Component {
   }
 
   constructor(props) {
-    super(props);
-    this.messenger = new Messenger(window.top);
+    super(props)
+    this.messenger = new Messenger(window.top)
   }
 
   onClose = () => {
     this.messenger.send({
       action: 'close',
-    });
+    })
   }
 
   goBack = () => {
-    this.props.history.goBack();
+    this.props.history.goBack()
   }
 
   render() {
-    const { children, showBack, showClose } = this.props;
+    const { children, showBack, showClose } = this.props
 
     return (
       <Container p={5}>
         <Top>
-          {showBack &&
-            <Back onClick={this.goBack} />
-          }
+          {showBack && <Back onClick={this.goBack} />}
           <Logo />
-          {showClose &&
+          {showClose && (
             <Close
               size={7}
               thickness="2px"
@@ -104,13 +102,12 @@ class Layout extends Component {
               right={0}
               zIndex={1}
             />
-          }
+          )}
         </Top>
         {children}
       </Container>
-    );
+    )
   }
 }
 
-export default withRouter(Layout);
-
+export default withRouter(Layout)
