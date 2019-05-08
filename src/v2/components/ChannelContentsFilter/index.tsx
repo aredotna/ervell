@@ -36,6 +36,8 @@ export const Divider = styled(Box).attrs({
 export const ChannelContentsFilter = ({ channel }) => {
   const [query, setQuery] = useState('')
 
+  if (channel.counts.contents === 0) return null
+
   return (
     <>
       <SearchInput
