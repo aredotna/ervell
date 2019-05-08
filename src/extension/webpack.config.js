@@ -42,6 +42,11 @@ const config = {
     path: resolve(__dirname, 'dist/'),
     filename: '[name].js',
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    modules: ['node_modules'],
+    symlinks: false,
+  },
   module: {
     rules: [
       {
