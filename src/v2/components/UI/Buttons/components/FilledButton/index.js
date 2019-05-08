@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import { themeGet } from 'styled-system'
 import chroma from 'chroma-js'
@@ -62,4 +63,5 @@ export const FilledButtonLink = styled.a`
   ${mixin}
 `
 
-export default FilledButton
+export default ({ href, ...rest }) =>
+  href ? <FilledButtonLink href={href} {...rest} /> : <FilledButton {...rest} />
