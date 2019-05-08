@@ -5,5 +5,8 @@ export const channelContentsFilterFragment = gql`
     __typename
     id
     title
+    counts {
+      contents
+    }
   }
 `

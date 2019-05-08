@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { addBlockFragment } from 'v2/components/AddBlock/fragments/addBlock'
 import { connectableContextMenuChannelFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 import { channelContentsConnectableFragment } from 'v2/components/ChannelContents/fragments/channelContentsConnectable'
 
@@ -15,7 +16,6 @@ export default gql`
       add_to
       reorder_connections: update
     }
-    ...ConnectableContextMenuChannel
     initial_contents: blokks(
       page: 1
       per: 10
@@ -25,7 +25,10 @@ export default gql`
       __typename
       ...ChannelContentsConnectable
     }
+    ...AddBlock
+    ...ConnectableContextMenuChannel
   }
+  ${addBlockFragment}
   ${connectableContextMenuChannelFragment}
   ${channelContentsConnectableFragment}
 `

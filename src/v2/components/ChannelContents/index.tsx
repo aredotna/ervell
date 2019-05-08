@@ -153,13 +153,19 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
       distance={1}
       {...rest}
     >
-      {can.add_to && (
-        <React.Fragment>
+      {can.add_to ||
+        (channel.visibility === 'private' && (
           <GridItem>
-            <AddBlock channel_id={id} onAddBlock={handleAddBlock} />
+            <AddBlock
+              channel_id={id}
+              onAddBlock={handleAddBlock}
+              isOverPrivateLimit={
+                // TODO: We need a `can` field for this
+                !can.add_to && channel.visibility === 'private'
+              }
+            />
           </GridItem>
-        </React.Fragment>
-      )}
+        ))}
 
       {chunked.map((pageSkeleton, pageIndex) => {
         const pageKey = activeQueriesKey(pageSkeleton)

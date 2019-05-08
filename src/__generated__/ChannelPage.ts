@@ -26,6 +26,7 @@ export interface ChannelPage_channel_counts {
   __typename: "ChannelCounts";
   collaborators: number | null;
   followers: number | null;
+  contents: number | null;
 }
 
 export interface ChannelPage_channel_can {

@@ -396,4 +396,5 @@ export interface ChannelContents {
   skeleton: (ChannelContents_skeleton | null)[] | null;
   can: ChannelContents_can | null;
   initial_contents: (ChannelContents_initial_contents | null)[] | null;
+  visibility: string | null;
 }
