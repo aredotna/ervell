@@ -6,7 +6,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const config = {
   mode: 'development',
   watch: true,
-  context: resolve(__dirname, '../../'),
+  context: process.cwd(),
   devtool: 'cheap-module-source-map',
   entry: {
     background: './src/extension/src/background.js',
@@ -36,14 +36,13 @@ const config = {
       { from: './src/extension/src/iframe.css' },
     ]),
   ],
-
   output: {
     publicPath: '.',
     path: resolve(__dirname, 'dist/'),
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
     modules: ['node_modules'],
     symlinks: false,
   },
@@ -61,6 +60,12 @@ const config = {
             },
           },
         ],
+      },
+      {
+        // Ensure .mjs files just pass through and are not transpiled
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
       },
     ],
   },

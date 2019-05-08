@@ -70,6 +70,9 @@ class Blocks extends Component {
     query: null,
   }
 
+  messenger = null
+  layoutRef = null
+
   constructor(props) {
     super(props)
     this.messenger = new Messenger(window.top)
@@ -167,6 +170,8 @@ class Blocks extends Component {
       })
     })
   }
+
+  onKeyDown = () => {}
 
   render() {
     const { blocks, removeBlock, selectedChannel } = this.props.context

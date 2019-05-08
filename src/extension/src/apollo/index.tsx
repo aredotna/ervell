@@ -27,7 +27,10 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
 
-export const initApolloClient = ({ token: X_AUTH_TOKEN, isLoggedIn } = {}) => {
+export const initApolloClient = ({
+  token: X_AUTH_TOKEN = '',
+  isLoggedIn = false,
+} = {}) => {
   const cache = new InMemoryCache({ fragmentMatcher })
 
   const stateLink = withClientState({
@@ -38,6 +41,7 @@ export const initApolloClient = ({ token: X_AUTH_TOKEN, isLoggedIn } = {}) => {
         isLoggedIn,
       },
     },
+    resolvers: {},
   })
 
   const authLink = setContext((_, { headers }) => ({
