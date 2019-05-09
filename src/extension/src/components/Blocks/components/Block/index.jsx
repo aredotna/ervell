@@ -9,14 +9,14 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { FilledButton } from 'v2/components/UI/Buttons'
 
-const Container = styled(Box).attrs({
-  m: 4,
-})`
+const Container = styled(Box)`
   display: flex;
-  position: relative;
-  width: 100px;
-  height: 100px;
+  position: absolute;
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `
 
 const TextContainer = styled(Box).attrs({ p: 3 })`

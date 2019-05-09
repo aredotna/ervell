@@ -1,14 +1,14 @@
 #arenaExtension_frame,
 #arenaExtension_div {
   overflow: hidden !important;
-  width: 385px !important;
-  height: 385px !important;
+  width: 355px !important;
+  height: 455px !important;
   position: fixed !important;
   top: 0px !important;
   right: 0px !important;
-  overflow-x:hidden;
-  overflow-y:auto;
-  max-height:calc(100% - 50px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: calc(100% - 50px);
   border: 5px solid #e7e7e5 !important;
   border-radius: 0.25em;
 }
@@ -20,7 +20,8 @@
   background: rgba(255, 255, 255, 1) !important;
 }
 
-#arenaExtension_frame.is-expanded, #arenaExtension_div.is-expanded {
+#arenaExtension_frame.is-expanded,
+#arenaExtension_div.is-expanded {
   height: 710px !important;
 }
 
@@ -29,20 +30,20 @@
   display: none;
   background: rgba(255, 255, 255, 1) !important;
   opacity: 0;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   margin: 12px 15px 0 0 !important;
   user-select: none;
 }
 
 #arenaExtension_div h1 {
-  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; 
-  color: #9d9d9d; 
-  font-weight: normal; 
-  padding: 1em 0.5em; 
-  -webkit-font-smoothing: antialiased; 
-  text-align: center; 
-  display: inline-block !important; 
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  color: #9d9d9d;
+  font-weight: normal;
+  padding: 1em 0.5em;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  display: inline-block !important;
   font-size: 1.25em;
   border: dashed 2px #ddd !important;
   margin: 0 auto;
