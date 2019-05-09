@@ -7,7 +7,7 @@ const {
 
 const isClientSide = typeof window !== 'undefined'
 
-export default () => {
+export const initPusherClient = () => {
   if (!isClientSide) return null
 
   return new Pusher(PUSHER_KEY, {
