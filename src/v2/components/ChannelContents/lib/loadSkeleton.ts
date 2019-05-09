@@ -1,24 +1,27 @@
+import { ApolloClient, OperationVariables } from 'apollo-client'
+
 import channelContentsSetQuery from 'v2/components/ChannelContents/queries/channelContentsSet'
 
-import {
-  KonnectableCellCollection,
-  key,
-  normalize,
-} from './KonnectableCellCollection'
 import { ChannelContents_skeleton } from '__generated__/ChannelContents'
+
+import * as ConnectableCellsCollection from 'v2/components/ChannelContents/lib/ConnectableCells'
 
 export const loadSkeleton = ({
   client,
   channelId,
   pageSkeleton,
   collection,
+  queryOptions,
 }: {
-  client: any
+  client: ApolloClient<any>
   channelId: string | number
   pageSkeleton: ChannelContents_skeleton[]
-  collection: KonnectableCellCollection
-}): Promise<KonnectableCellCollection | void> => {
-  const unloadedSkeleton = pageSkeleton.filter(c => !collection[key(c)])
+  collection: ConnectableCellsCollection.ConnectableCells
+  queryOptions?: OperationVariables
+}): Promise<ConnectableCellsCollection.ConnectableCells | void> => {
+  const unloadedSkeleton = pageSkeleton.filter(
+    c => !collection[ConnectableCellsCollection.key(c)]
+  )
 
   if (unloadedSkeleton.length === 0) {
     return Promise.resolve()
@@ -33,6 +36,8 @@ export const loadSkeleton = ({
   }
 
   return client
-    .query({ query: channelContentsSetQuery, variables })
-    .then(({ data }) => normalize(data.channel.contents))
+    .query({ query: channelContentsSetQuery, variables, ...queryOptions })
+    .then(({ data }) =>
+      ConnectableCellsCollection.normalize(data.channel.contents)
+    )
 }

@@ -1,15 +1,15 @@
-import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
+import { ChannelContentsConnectable as ChannelContentsConnectableData } from '__generated__/ChannelContentsConnectable'
 
-export interface KonnectableCellCollection {
-  [key: string]: ChannelContentsConnectable
+export interface ConnectableCells {
+  [key: string]: ChannelContentsConnectableData
 }
 
 export const key = ({ id, type }: { id: string | number; type: string }) =>
   `${id}:${type}`
 
 export const normalize = (
-  contents: ChannelContentsConnectable[]
-): KonnectableCellCollection =>
+  contents: ChannelContentsConnectableData[]
+): ConnectableCells =>
   contents.reduce(
     (memo, connectable) => ({
       [key({
