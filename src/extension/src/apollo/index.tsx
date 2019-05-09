@@ -19,9 +19,7 @@ import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
 
 import extensionData from 'extension/src/apollo/extensionData'
 
-import config from 'extension/src/config'
-
-const httpLink = new BatchHttpLink({ uri: config.GRAPHQL_ENDPOINT })
+const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -48,7 +46,7 @@ export const initApolloClient = ({
     headers: {
       ...headers,
       'X-AUTH-TOKEN': X_AUTH_TOKEN,
-      'X-APP-TOKEN': config.X_APP_TOKEN,
+      'X-APP-TOKEN': process.env.X_APP_TOKEN,
     },
   }))
 

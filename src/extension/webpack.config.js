@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+const Dotenv = require('dotenv-webpack')
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -14,6 +15,9 @@ const config = {
     main: './src/extension/src/main.js',
   },
   plugins: [
+    new Dotenv({
+      path: `./src/extension/.env`,
+    }),
     new ForkTsCheckerWebpackPlugin({
       formatter: 'codeframe',
       formatterOptions: 'highlightCode',
