@@ -27,6 +27,7 @@ export default gql`
     ... on Comment {
       id
       body(truncate: 100)
+      href
     }
 
     ... on Group {

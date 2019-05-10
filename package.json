@@ -182,6 +182,7 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
     "@babel/node": "^7.2.2",
     "@babel/plugin-transform-modules-commonjs": "^7.4.3",
     "@storybook/addon-actions": "^5.0.11",
@@ -193,6 +194,7 @@
     "@storybook/theming": "^5.0.10",
     "@types/express": "^4.11.1",
     "@types/graphql": "^14.2.0",
+    "@types/jest": "^24.0.12",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
@@ -208,6 +210,8 @@
     "benv": "*",
     "copy-webpack-plugin": "^5.0.2",
     "dotenv-webpack": "^1.7.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^4.1.0",
@@ -224,6 +228,8 @@
     "graphql-tools": "^3.0.2",
     "husky": ">=1",
     "jest": "^23.4.2",
+    "jest-environment-enzyme": "^7.0.2",
+    "jest-enzyme": "^7.0.2",
     "lint-staged": ">=8",
     "mocha": "*",
     "prettier": "^1.17.0",
@@ -248,8 +254,5 @@
   },
   "optionalDependencies": {
     "fsevents": "*"
-  },
-  "jest": {
-    "testURL": "http://localhost"
   }
 }

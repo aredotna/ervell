@@ -1,5 +1,4 @@
 import sinon from 'sinon'
-import rewire from 'rewire'
 import ensureWWW from '../ensureWWW'
 
 describe('ensureWWW', () => {
