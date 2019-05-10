@@ -240,7 +240,6 @@
     "sinon": "*",
     "source-map-support": "^0.5.12",
     "storybook-react-router": "^1.0.5",
-    "ts-jest": "^24.0.2",
     "typescript": "3.3.3",
     "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^2.13.1",
