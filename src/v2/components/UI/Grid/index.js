@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 
 import constants from 'v2/styles/constants'
 
-import Box from 'v2/components/UI/Box'
+import Box, { mixin as boxMixin } from 'v2/components/UI/Box'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 
 const { blockGutter } = constants
@@ -26,6 +26,7 @@ const Container = styled(Box)`
 `
 
 const InfiniteContainer = styled(InfiniteScroll)`
+  ${boxMixin}
   ${containerMixin}
 `
 
