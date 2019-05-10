@@ -1,11 +1,11 @@
-import { ChannelContents_skeleton as ChannelContents_skeletonInterface } from '__generated__/ChannelContents'
+import { ChannelContents_skeleton } from '__generated__/ChannelContents'
 
 export const reorder = ({
   list,
   startIndex,
   endIndex,
 }: {
-  list: ChannelContents_skeletonInterface[]
+  list: ChannelContents_skeleton[]
   startIndex: number
   endIndex: number
 }) => {

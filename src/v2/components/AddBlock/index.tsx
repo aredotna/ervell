@@ -3,25 +3,21 @@ import styled from 'styled-components'
 import { graphql } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
-import Link from 'v2/components/UI/Link'
 import { FilledButton } from 'v2/components/UI/Buttons'
-import { Textarea } from 'v2/components/UI/Inputs'
 import DropZoneUploader from 'v2/components/UI/DropZoneUploader'
+import { AddBlockInner } from 'v2/components/AddBlock/components/AddBlockInner'
+import { AddBlockPrivateCTAInner } from 'v2/components/AddBlock/components/AddBlockPrivateCTAInner'
 
 import createBlockMutation from 'v2/components/AddBlock/mutations/createBlock'
 
-const Button = styled(FilledButton)`
+const Button = styled(FilledButton).attrs({
+  py: 6,
+  f: 4,
+  color: 'utility.transparent',
+})`
   &:hover {
     background-color: transparent;
   }
-`
-
-const Choose = styled(Link)`
-  position: relative;
-  border-bottom: 1px solid;
-  z-index: 1;
-  cursor: pointer;
 `
 
 const Container = styled(Box).attrs({
@@ -36,67 +32,10 @@ const Container = styled(Box).attrs({
   `}
 `
 
-const Tip = styled(Box)`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  user-select: none;
-`
-
-const Input = styled(Textarea).attrs({
-  resize: 'none',
-})`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background-color: transparent;
-
-  &:focus {
-    border: 0;
-    background-color: ${props => props.theme.colors.gray.light};
-    z-index: 2;
-  }
-`
-
-const Message = styled(Box)`
-  ${Text}:last-child {
-    display: none;
-  }
-`
-
-const Content = styled(Box)`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex: 1;
-
-  &:hover {
-    background-color: ${props => props.theme.colors.gray.light};
-
-    ${Message} {
-      ${Text}:first-child {
-        display: none;
-      }
-
-      ${Text}:last-child {
-        display: block;
-      }
-    }
-  }
-`
-
 interface Props {
   channel_id: string | number
   onAddBlock: (props: any) => any
+  isOverPrivateLimit: boolean
 }
 
 interface AddBlockProps extends Props {
@@ -170,6 +109,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
   finishUpload = () => this.setState({ uploaderKey: new Date().getTime() })
 
   render() {
+    const { isOverPrivateLimit } = this.props
     const { mode, inputKey, uploaderKey } = this.state
 
     return (
@@ -181,49 +121,36 @@ class AddBlock extends PureComponent<AddBlockProps> {
       >
         {({ openUploadDialog }) => (
           <Container pt={6} px={6}>
-            <Content>
-              <Message p={6}>
-                <Text f={9} color="gray.medium">
-                  +
-                </Text>
+            {isOverPrivateLimit ? (
+              <>
+                <AddBlockPrivateCTAInner />
+                <Button href="/settings/billing">Register for Premium</Button>
+              </>
+            ) : (
+              <>
+                <AddBlockInner
+                  mode={mode}
+                  inputKey={inputKey}
+                  openUploadDialog={openUploadDialog}
+                  onChange={this.handleChange}
+                  onKeyDown={this.handleKeyDown}
+                />
 
-                <Text f={5} color="gray.medium">
-                  Drop or <Choose onClick={openUploadDialog}>choose</Choose>{' '}
-                  files, paste a URL (image, video, or link) or type text here
-                </Text>
-              </Message>
-
-              <Input
-                key={inputKey}
-                onChange={this.handleChange}
-                onKeyDown={this.handleKeyDown}
-              />
-
-              {mode === 'active' && (
-                <Tip pb={4}>
-                  <Text f={0} color="gray.medium">
-                    shift + enter for line break
-                  </Text>
-                </Tip>
-              )}
-            </Content>
-
-            <Button
-              py={6}
-              f={4}
-              color="utility.transparent"
-              onClick={this.handleSubmit}
-              disabled={mode === 'resting'}
-            >
-              {
-                {
-                  resting: 'Add block →',
-                  active: 'Add block →',
-                  submitting: 'Adding...',
-                  error: 'Error',
-                }[mode]
-              }
-            </Button>
+                <Button
+                  onClick={this.handleSubmit}
+                  disabled={mode === 'resting'}
+                >
+                  {
+                    {
+                      resting: 'Add block →',
+                      active: 'Add block →',
+                      submitting: 'Adding...',
+                      error: 'Error',
+                    }[mode]
+                  }
+                </Button>
+              </>
+            )}
           </Container>
         )}
       </DropZoneUploader>

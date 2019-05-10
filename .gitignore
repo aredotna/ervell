@@ -9,9 +9,13 @@ public/assets/*
 *.sublime-workspace
 node_modules
 dump.rdb
-manifest.json
+/manifest.json
 yarn-error.log
 newrelic_agent.log
+
+# Compiled extension code
+src/extension/dist
+src/extension/src/config.js
 
 # Compiled server code
 server.dist.js

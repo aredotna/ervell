@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
+import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
 import Box from 'v2/components/UI/Box'
 import GenericButton from 'v2/components/UI/GenericButton'
@@ -46,7 +48,7 @@ const ConnectPadding = styled.span`
   padding: 1px 0;
 `
 
-export default class Connect extends Component {
+class Connect extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
@@ -57,6 +59,7 @@ export default class Connect extends Component {
         variables: PropTypes.object,
       })
     ),
+    isLoggedIn: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
@@ -69,6 +72,13 @@ export default class Connect extends Component {
   }
 
   openConnect = () => {
+    const { isLoggedIn } = this.props
+
+    if (!isLoggedIn) {
+      window.location = `/sign_up?redirect-to=${window.location.pathname}`
+      return null
+    }
+
     this.setState({ mode: 'active' })
   }
 
@@ -106,3 +116,5 @@ export default class Connect extends Component {
     )
   }
 }
+
+export default WithLoginStatus(Connect)

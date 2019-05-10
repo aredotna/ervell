@@ -1,8 +1,8 @@
-const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 module.exports = ({ config }) => {
-  config.resolve.extensions.push('.ts', '.tsx', '.mjs', '.jade');
+  config.resolve.extensions.push('.ts', '.tsx', '.mjs', '.jade')
 
   config.plugins.push(
     new ForkTsCheckerWebpackPlugin({
@@ -15,7 +15,7 @@ module.exports = ({ config }) => {
       excludeWarnings: true,
       skipFirstNotification: true,
     })
-  );
+  )
 
   config.module.rules.push(
     {
@@ -50,7 +50,7 @@ module.exports = ({ config }) => {
         presets: [['react-app', { flow: false, typescript: true }]],
       },
     }
-  );
+  )
 
-  return config;
-};
+  return config
+}

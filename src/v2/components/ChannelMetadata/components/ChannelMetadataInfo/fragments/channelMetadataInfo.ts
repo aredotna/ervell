@@ -10,6 +10,9 @@ export default gql`
     counts {
       followers
     }
+    can {
+      share
+    }
     user {
       __typename
       id

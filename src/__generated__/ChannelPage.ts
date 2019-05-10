@@ -26,6 +26,7 @@ export interface ChannelPage_channel_counts {
   __typename: "ChannelCounts";
   collaborators: number | null;
   followers: number | null;
+  contents: number | null;
 }
 
 export interface ChannelPage_channel_can {
@@ -34,6 +35,7 @@ export interface ChannelPage_channel_can {
   update: boolean | null;
   destroy: boolean | null;
   mute: boolean | null;
+  share: boolean | null;
   manage_collaborators: boolean | null;
   connect: boolean | null;
   add_to: boolean | null;

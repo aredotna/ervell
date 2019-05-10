@@ -1,40 +1,43 @@
 import React, { useState, useMemo, useCallback } from 'react'
 import Waypoint from 'react-waypoint'
+import { ApolloClient } from 'apollo-client'
 import { graphql, withApollo } from 'react-apollo'
 import { SortableContainer } from 'react-sortable-hoc'
+import sharify from 'sharify'
 
-import chunk from 'v2/util/chunk'
+import { chunk } from 'v2/util/chunk'
 import { reorder } from 'v2/components/ChannelContents/lib/reorder'
 import { loadSkeleton } from 'v2/components/ChannelContents/lib/loadSkeleton'
-import {
-  KonnectableCellCollection,
-  key as konnectableCellCollectionKey,
-  normalize as konnectableCellNormalize,
-} from 'v2/components/ChannelContents/lib/KonnectableCellCollection'
-import {
-  ActiveQueries,
-  key as activeQueriesKey,
-} from 'v2/components/ChannelContents/lib/ActiveQueries'
+import * as ConnectableCellsCollection from 'v2/components/ChannelContents/lib/ConnectableCells'
+import * as ActiveQueriesCollection from 'v2/components/ChannelContents/lib/ActiveQueries'
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
-import { ChannelContents as ChannelContentsInterface } from '__generated__/ChannelContents'
+import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 
-const SortableGrid = SortableContainer(Grid)
+import { usePusher } from 'v2/hooks/usePusher'
+
+const {
+  data: { NODE_ENV },
+} = sharify
+
+const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
+  <Grid {...rest} />
+))
 
 interface Props {
-  chunkSize: number
-  channel: ChannelContentsInterface
-  client: any
+  chunkSize?: number
+  channel: ChannelContentsData
 }
 
 interface ChannelContentsProps extends Props {
   moveConnectable: (props: any) => Promise<any>
+  client: ApolloClient<any>
 }
 
 const ChannelContents: React.FC<ChannelContentsProps> = ({
@@ -44,25 +47,88 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
   moveConnectable,
   ...rest
 }) => {
-  const { id, skeleton, can, initial_contents } = channel
+  // Used to load/unload waypoints
+  const [activeQueries, setActiveQueries] = useState<
+    ActiveQueriesCollection.ActiveQueries
+  >({})
 
-  const [activeQueries, setActiveQueries] = useState<ActiveQueries>({})
-  const [connectables, setConnectables] = useState(skeleton)
-  const [collection, setCollection] = useState<KonnectableCellCollection>(
-    konnectableCellNormalize(initial_contents)
+  // Handles ordering of block grid items
+  const [connectables, setConnectables] = useState(channel.skeleton)
+
+  // Handles actual contents of block grid items
+  const [collection, setCollection] = useState(
+    ConnectableCellsCollection.normalize(channel.initial_contents)
   )
+
+  const addConnectable = useCallback(newConnectable => {
+    setConnectables(prevConnectables => {
+      if (
+        !prevConnectables.some(
+          c =>
+            c.id === newConnectable.id &&
+            c.type.toUpperCase() === newConnectable.type.toUpperCase()
+        )
+      ) {
+        return [
+          {
+            id: newConnectable.id,
+            type: { BLOCK: 'Block', CHANNEL: 'Channel' }[
+              newConnectable.type.toUpperCase()
+            ],
+            __typename: 'SkeletalConnectable',
+          },
+          ...prevConnectables,
+        ]
+      }
+
+      return prevConnectables
+    })
+  }, [])
+
+  const updateConnectable = useCallback(
+    connectable => {
+      loadSkeleton({
+        client,
+        channelId: channel.id,
+        pageSkeleton: [connectable],
+        collection,
+        queryOptions: {
+          fetchPolicy: 'network-only',
+        },
+      }).then(contents => {
+        if (!contents) return
+        setCollection(prevCollection => ({ ...prevCollection, ...contents }))
+      })
+    },
+    [channel.id, client, collection]
+  )
+
+  const parsePayload = useCallback(
+    ({ id, base_class }) => ({
+      id,
+      type: base_class.toUpperCase(),
+    }),
+    []
+  )
+
+  usePusher({
+    socketId: `channel-${NODE_ENV}-${channel.id}`,
+    onCreated: addConnectable,
+    onUpdated: updateConnectable,
+    parsePayload,
+  })
 
   const chunked = useMemo(() => chunk(connectables, chunkSize), [
     connectables,
     chunkSize,
   ])
 
-  const handleAddBlock = useCallback(({ id }: { id: number }) => {
-    setConnectables(prevConnectables => [
-      { __typename: 'SkeletalConnectable', id, type: 'Block' },
-      ...prevConnectables,
-    ])
-  }, [])
+  const handleAddBlock = useCallback(
+    ({ id }: { id: number }) => {
+      addConnectable({ id, type: 'Block' })
+    },
+    [addConnectable]
+  )
 
   const handleRemoveBlock = useCallback(
     ({ id, type }: { id: number; type: string }) => {
@@ -100,21 +166,21 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
 
       moveConnectable({
         variables: {
-          channel_id: id,
+          channel_id: channel.id,
           connectable: {
             id: connectable.id,
             type: connectable.type.toUpperCase(),
           },
           insert_at: insertAt,
         },
-      }).catch(console.error.bind(console))
+      })
     },
-    [connectables, id, moveConnectable]
+    [channel.id, connectables, moveConnectable]
   )
 
   const handleOnEnter = useCallback(
     pageSkeleton => (): void => {
-      const queryKey = JSON.stringify(pageSkeleton)
+      const queryKey = ActiveQueriesCollection.key(pageSkeleton)
 
       if (activeQueries[queryKey]) {
         // Already loading
@@ -128,17 +194,15 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
 
       loadSkeleton({
         client,
-        channelId: id,
+        channelId: channel.id,
         pageSkeleton,
         collection,
+      }).then(contents => {
+        if (!contents) return
+        setCollection(prevCollection => ({ ...prevCollection, ...contents }))
       })
-        .then(contents => {
-          if (!contents) return
-          setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-        })
-        .catch(console.error.bind(console))
     },
-    [activeQueries, client, collection, id]
+    [activeQueries, client, collection, channel.id]
   )
 
   return (
@@ -151,16 +215,21 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
       distance={1}
       {...rest}
     >
-      {can.add_to && (
-        <React.Fragment>
-          <GridItem>
-            <AddBlock channel_id={id} onAddBlock={handleAddBlock} />
-          </GridItem>
-        </React.Fragment>
+      {(channel.can.add_to || channel.visibility === 'private') && (
+        <GridItem>
+          <AddBlock
+            channel_id={channel.id}
+            onAddBlock={handleAddBlock}
+            isOverPrivateLimit={
+              // TODO: We need a `can` field for this
+              !channel.can.add_to && channel.visibility === 'private'
+            }
+          />
+        </GridItem>
       )}
 
-      {chunked.map((pageSkeleton, pageIndex) => {
-        const pageKey = activeQueriesKey(pageSkeleton)
+      {chunked.map((pageSkeleton, pageIndex: number) => {
+        const pageKey = ActiveQueriesCollection.key(pageSkeleton)
 
         return (
           <React.Fragment key={pageKey}>
@@ -174,7 +243,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
             )}
 
             {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
-              const connectableKey = konnectableCellCollectionKey(
+              const connectableKey = ConnectableCellsCollection.key(
                 connectableSkeleton
               )
               const connectable = collection[connectableKey]
