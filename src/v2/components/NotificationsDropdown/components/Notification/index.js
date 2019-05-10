@@ -59,16 +59,19 @@ export default class Notification extends Component {
           {item.__typename === 'Comment' && (
             <span>
               <Label>
-                {' said '}
+                {action === 'commented on'
+                  ? ' said '
+                  : ' mentioned you in a comment: '}
                 “
                 <a
-                  href={target.href}
+                  href={item.href}
                   dangerouslySetInnerHTML={{ __html: item.body }}
                 />
-                ”{' on '}
+                ”{action === 'commented on' && ' on '}
               </Label>
-
-              <NotificationObjectLink {...target} />
+              {action === 'commented on' && (
+                <NotificationObjectLink {...target} />
+              )}
             </span>
           )}
 
