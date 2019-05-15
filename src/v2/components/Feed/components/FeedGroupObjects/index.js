@@ -7,7 +7,7 @@ import feedGroupObjectFragment from 'v2/components/Feed/components/FeedGroupObje
 
 import Grid from 'v2/components/UI/Grid'
 
-import Konnectable from 'v2/components/Cell/components/Konnectable'
+import { Konnectable } from 'v2/components/Cell/components/Konnectable'
 import Identifiable from 'v2/components/Cell/components/Identifiable'
 
 const ObjectGrid = styled(Grid)`

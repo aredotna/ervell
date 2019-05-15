@@ -1,0 +1,54 @@
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { propType } from 'graphql-anywhere'
+
+import konnectableAttachmentFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableAttachment/fragments/konnectableAttachment'
+
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import KonnectableGeneric from 'v2/components/Cell/components/Konnectable/components/KonnectableGeneric'
+
+const Fill = styled(Box).attrs({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
+  width: 100%;
+  height: 100%;
+  background-color: ${x => x.theme.colors.gray.light};
+`
+
+const Ext = styled(Text).attrs({
+  font: 'narrow',
+  f: 9,
+  fontWeight: 'bold',
+  color: 'gray.medium',
+})`
+  text-transform: uppercase;
+`
+
+export default class Attachment extends PureComponent {
+  static propTypes = {
+    attachment: propType(konnectableAttachmentFragment).isRequired,
+  }
+
+  render() {
+    const { attachment, ...rest } = this.props
+
+    if (attachment.src) {
+      return (
+        <KonnectableGeneric
+          src={attachment.src}
+          title={attachment.title}
+          {...rest}
+        />
+      )
+    }
+
+    return (
+      <Fill {...rest}>
+        <Ext>{attachment.file_extension}</Ext>
+      </Fill>
+    )
+  }
+}

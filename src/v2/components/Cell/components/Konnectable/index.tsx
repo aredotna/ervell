@@ -1,38 +1,33 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import { height, width, space } from 'styled-system'
 
 import openBlockLightbox from 'v2/util/openBlockLightbox'
 
-import { KonnectableCell as KonnectableCellInterface } from '__generated__/KonnectableCell'
+import { KonnectableCell as KonnectableCellData } from '__generated__/KonnectableCell'
+import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 
+import { preset } from 'v2/styles/functions'
 import constants from 'v2/styles/constants'
 
-import Typography from 'v2/components/UI/Text'
-import Attachment from 'v2/components/Cell/components/Konnectable/components/Attachment'
-import Channel from 'v2/components/Cell/components/Konnectable/components/Channel'
-import Embed from 'v2/components/Cell/components/Konnectable/components/Embed'
-import Image from 'v2/components/Cell/components/Konnectable/components/Image'
-import Link from 'v2/components/Cell/components/Konnectable/components/Link'
-import Text from 'v2/components/Cell/components/Konnectable/components/Text'
-import PendingBlock from 'v2/components/Cell/components/Konnectable/components/PendingBlock'
-import Metadata from 'v2/components/Cell/components/Konnectable/components/Metadata'
-import BlokkOverlay from 'v2/components/Cell/components/Konnectable/components/BlokkOverlay'
-import ChannelOverlay from 'v2/components/Cell/components/Konnectable/components/ChannelOverlay'
-
-const BlokkMetadata = styled(Metadata)``
+import Text from 'v2/components/UI/Text'
+import { KonnectableDisplay } from 'v2/components/Cell/components/Konnectable/components/KonnectableDisplay'
+import KonnectableMetadata from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata'
+import KonnectableBlockOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay'
+import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay'
 
 const Container = styled.a`
   box-sizing: border-box;
   position: relative;
   display: block;
   text-decoration: none;
-  width: ${x => x.theme.constantValues.blockWidth};
-  height: ${x => x.theme.constantValues.blockWidth};
-  margin-bottom: ${x => x.theme.space[8]};
   background-color: white;
+  ${preset(width, { width: constants.blockWidth })}
+  ${preset(height, { height: constants.blockWidth })}
+  ${preset(space, { mb: 8 })}
 `
 
-const Comments = styled(Typography).attrs({
+const Comments = styled(Text).attrs({
   mr: 6,
   mb: 6,
   px: 5,
@@ -42,7 +37,7 @@ const Comments = styled(Typography).attrs({
   position: absolute;
   right: 0;
   bottom: 0;
-  background-color: ${x => x.theme.colors.utility.translucent};
+  background-color: ${props => props.theme.colors.utility.translucent};
   z-index: 1;
   border-radius: ${constants.radii.subtle};
 `
@@ -53,36 +48,40 @@ interface ContextProps {
 }
 
 interface Props {
-  konnectable: KonnectableCellInterface
+  konnectable: KonnectableCellData
   context: ContextProps[]
   isPreviewable: boolean
 }
 
-export default class Konnectable extends PureComponent<Props> {
+interface State {
+  mode: Mode
+}
+
+export class Konnectable extends PureComponent<Props> {
   static defaultProps = {
     context: [],
     isPreviewable: true,
   }
 
-  state = {
-    mode: 'resting',
+  state: Readonly<State> = {
+    mode: Mode.RESTING,
   }
 
   onMouseEnter = () => {
-    if (this.state.mode === 'overlay') return
-    this.setState({ mode: 'hover' })
+    if (this.state.mode === Mode.OVERLAY) return
+    this.setState({ mode: Mode.HOVER })
   }
 
   onMouseLeave = () => {
-    if (this.state.mode === 'overlay') return
-    this.setState({ mode: 'resting' })
+    if (this.state.mode === Mode.OVERLAY) return
+    this.setState({ mode: Mode.RESTING })
   }
 
-  onOverlay = () => this.setState({ mode: 'overlay' })
+  onOverlay = () => this.setState({ mode: Mode.OVERLAY })
 
-  onOverlayClose = () => this.setState({ mode: 'hover' })
+  onOverlayClose = () => this.setState({ mode: Mode.HOVER })
 
-  openBlock = e => {
+  openBlock = (e: React.MouseEvent<HTMLElement>) => {
     const {
       konnectable: { __typename, id },
       context,
@@ -104,7 +103,7 @@ export default class Konnectable extends PureComponent<Props> {
 
     return (
       <Container
-        href={mode !== 'overlay' ? konnectable.href : undefined}
+        href={mode !== Mode.OVERLAY ? konnectable.href : undefined}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}
@@ -115,58 +114,32 @@ export default class Konnectable extends PureComponent<Props> {
       >
         {konnectable.__typename !== 'Channel' &&
           konnectable.counts.comments > 0 &&
-          mode !== 'overlay' && (
+          mode !== Mode.OVERLAY && (
             <Comments>{konnectable.counts.comments}</Comments>
           )}
 
-        {[
-          {
-            Attachment: () => (
-              <Attachment
-                key="attachment"
-                attachment={konnectable}
-                mode={mode}
-              />
-            ),
-            Channel: () => (
-              <Channel key="channel" channel={konnectable} mode={mode} />
-            ),
-            Embed: () => <Embed key="embed" embed={konnectable} mode={mode} />,
-            Image: () => <Image key="image" image={konnectable} mode={mode} />,
-            Link: () => <Link key="link" link={konnectable} mode={mode} />,
-            Text: () => <Text key="text" text={konnectable} mode={mode} />,
-            PendingBlock: () => (
-              <PendingBlock key="text" mode={mode} block={konnectable} />
-            ),
-          }[konnectable.__typename](),
+        <KonnectableDisplay mode={mode} konnectable={konnectable} />
 
-          konnectable.__typename !== 'Channel' && (
-            <BlokkMetadata
-              key="metadata"
-              mode={mode}
-              konnectable={konnectable}
-            />
-          ),
+        {konnectable.__typename !== 'Channel' && (
+          <KonnectableMetadata mode={mode} konnectable={konnectable} />
+        )}
 
-          konnectable.__typename !== 'Channel' && mode !== 'resting' && (
-            <BlokkOverlay
-              key="overlay"
-              konnectable={konnectable}
-              onOverlay={this.onOverlay}
-              onClose={this.onOverlayClose}
-            />
-          ),
+        {konnectable.__typename !== 'Channel' && mode !== Mode.RESTING && (
+          <KonnectableBlockOverlay
+            konnectable={konnectable}
+            onOverlay={this.onOverlay}
+            onClose={this.onOverlayClose}
+          />
+        )}
 
-          konnectable.__typename === 'Channel' && mode !== 'resting' && (
-            <ChannelOverlay
-              key="overlay"
-              channel={konnectable}
-              onOverlay={this.onOverlay}
-              onClose={this.onOverlayClose}
-              isPreviewable={isPreviewable}
-            />
-          ),
-        ]}
+        {konnectable.__typename === 'Channel' && mode !== Mode.RESTING && (
+          <KonnectableChannelOverlay
+            channel={konnectable}
+            onOverlay={this.onOverlay}
+            onClose={this.onOverlayClose}
+            isPreviewable={isPreviewable}
+          />
+        )}
       </Container>
     )
   }

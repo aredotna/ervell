@@ -38,9 +38,9 @@ const Container = styled.a.attrs({
   align-items: center;
   justify-content: space-between;
   text-decoration: none;
-  width: ${x => x.theme.constantValues.blockWidth};
-  height: ${x => x.theme.constantValues.blockWidth};
-  border: 2px solid ${x => x.theme.colors.gray.regular};
+  width: ${props => props.theme.constantValues.blockWidth};
+  height: ${props => props.theme.constantValues.blockWidth};
+  border: 2px solid ${props => props.theme.colors.gray.regular};
   border-radius: ${constants.radii.subtle};
   ${space}
 

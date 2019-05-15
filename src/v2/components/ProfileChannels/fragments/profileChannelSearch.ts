@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
-import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel'
+import konnectableChannelFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannel/fragments/konnectableChannel'
 
 export default gql`
   fragment ProfileChannelSearch on Identifiable {
@@ -10,7 +10,7 @@ export default gql`
       id
       name
       channels(page: $page, per: $per, q: $q) {
-        ...Channel
+        ...KonnectableChannel
         blokks(per: 5, direction: DESC) {
           ...KonnectableCell
         }
@@ -34,8 +34,7 @@ export default gql`
         q: $q
         seed: $seed
       ) {
-        ...Channel
-
+        ...KonnectableChannel
         ... on Channel {
           blokks(per: 5, sort_by: POSITION, direction: DESC) {
             ...KonnectableCell
@@ -45,5 +44,5 @@ export default gql`
     }
   }
   ${konnectableCellFragment}
-  ${blokkChannelFragment}
+  ${konnectableChannelFragment}
 `

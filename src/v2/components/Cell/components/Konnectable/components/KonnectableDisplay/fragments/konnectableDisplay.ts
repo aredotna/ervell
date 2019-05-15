@@ -6,20 +6,12 @@ import konnectableImageFragment from 'v2/components/Cell/components/Konnectable/
 import konnectableLinkFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableLink/fragments/konnectableLink'
 import konnectableEmbedFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableEmbed/fragments/konnectableEmbed'
 import konnectableAttachmentFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableAttachment/fragments/konnectableAttachment'
-import konnectableMetadataFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata/fragments/konnectableMetadata'
-import konnectableBlockOverlayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay/fragments/konnectableBlockOverlay'
-import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell'
 
 export default gql`
-  fragment Object on DeedKkind {
+  fragment KonnectableDisplay on Konnectable {
     __typename
-    ... on ConnectableInterface {
-      href
-    }
-    ... on Block {
-      counts {
-        comments
-      }
+    ... on Model {
+      id
     }
     ...KonnectableChannel
     ...KonnectableText
@@ -28,8 +20,6 @@ export default gql`
     ...KonnectableEmbed
     ...KonnectableAttachment
     ...KonnectableMetadata
-    ...KonnectableBlockOverlay
-    ...IdentifiableCell
   }
   ${konnectableChannelFragment}
   ${konnectableTextFragment}
@@ -37,7 +27,4 @@ export default gql`
   ${konnectableLinkFragment}
   ${konnectableEmbedFragment}
   ${konnectableAttachmentFragment}
-  ${konnectableMetadataFragment}
-  ${konnectableBlockOverlayFragment}
-  ${identifiableCellFragment}
 `
