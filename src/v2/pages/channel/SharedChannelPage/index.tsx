@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 
 import { SharedChannelPage } from '__generated__/SharedChannelPage'
 
-import sharedChannelPageQuery from 'v2/pages/shared_channel/queries/sharedChannelPage'
+import sharedChannelPageQuery from 'v2/pages/channel/SharedChannelPage/queries/sharedChannelPage'
 
 import Constrain from 'v2/components/UI/Constrain'
 import { BlankTopBarLayout } from 'v2/components/UI/Layouts/BlankTopBarLayout'

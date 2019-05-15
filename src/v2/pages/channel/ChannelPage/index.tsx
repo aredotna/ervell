@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 
 import { ChannelPage as ChannelPageData } from '__generated__/ChannelPage'
 
-import channelPageQuery from 'v2/pages/channel/queries/channelPage'
+import channelPageQuery from 'v2/pages/channel/ChannelPage/queries/channelPage'
 
 import Constrain from 'v2/components/UI/Constrain'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
