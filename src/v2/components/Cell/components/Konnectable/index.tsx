@@ -111,6 +111,7 @@ export default class Konnectable extends PureComponent<Props> {
         onMouseLeave={this.onMouseLeave}
         onClick={this.openBlock}
         data-id={konnectable.id}
+        data-no-instant
       >
         {konnectable.__typename !== 'Channel' &&
           konnectable.counts.comments > 0 &&
