@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 
+import mod from 'v2/util/mod'
+
 import searchedChannelsQuery from 'v2/components/ConnectionSelectionList/components/SearchedChannels/queries/searchedChannels'
 
 import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
@@ -18,12 +20,14 @@ export default class SearchedChannels extends Component {
   render() {
     const { query, onConnectionSelection, cursor } = this.props
 
+    const highlighted = cursor && mod(cursor, 6)
+
     return (
       <div>
         <CreatePrivateChannelButton
           title={query}
           onConnectionCreation={onConnectionSelection}
-          cursor={cursor}
+          highlighted={highlighted === 0}
         />
         <Query query={searchedChannelsQuery} variables={{ query }}>
           {({ data, error, loading }) => {
@@ -37,6 +41,8 @@ export default class SearchedChannels extends Component {
             return (
               <ChannelsList
                 channels={searched_channels}
+                cursor={cursor}
+                cursorOffset={1}
                 onConnectionSelection={onConnectionSelection}
               />
             )

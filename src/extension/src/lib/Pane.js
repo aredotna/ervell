@@ -41,7 +41,13 @@ class Pane {
     this.messenger = new Messenger(this.frame.contentWindow)
 
     // Focus iframe
-    this.frame.addEventListener('DOMContentLoaded', this.focusIframe)
+    this.focusIframe()
+
+    this.frame.onload = () => {
+      // this.focusIframe()
+      if (this.frame.location.search != '?focusHack')
+        this.frame.location.search = '?focusHack'
+    }
   }
 
   close = () => {
@@ -62,11 +68,16 @@ class Pane {
   }
 
   focusIframe = () => {
-    this.frame.contentWindow.focus()
+    // var frame = this.frame
+    // this.frame.contentWindow.focus()
+    // setTimeout(() => {
+    //   frame.contentWindow.focus()
+    // }, 100)
   }
 
   showIframe = () => {
     this.frame.style.display = 'block'
+    this.focusIframe()
   }
 
   hideIframe = () => {

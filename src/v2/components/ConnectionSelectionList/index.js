@@ -72,8 +72,6 @@ export default class ConnectionSelectionList extends Component {
       //   this.setState({ query: '' })
       //   break
       case 'Enter':
-        if (query === '') return
-        window.location.href = href
         break
       case 'ArrowDown':
         this.setState({
@@ -101,7 +99,7 @@ export default class ConnectionSelectionList extends Component {
   }, 200)
 
   render() {
-    const { query, debouncedQuery, mode, cursor } = this.state
+    const { debouncedQuery, mode, cursor } = this.state
     const { isOutlined, onConnectionSelection } = this.props
 
     return (
@@ -109,12 +107,13 @@ export default class ConnectionSelectionList extends Component {
         <SearchInput
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
+          autoFocus
         />
 
         {mode === 'resting' && (
           <div>
             <Text f={1} py={4} px={5} textAlign="center" color="gray.medium">
-              Recent channels ({cursor})
+              Recent channels
             </Text>
 
             <OutlinedRecentChannels

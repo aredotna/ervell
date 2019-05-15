@@ -51,7 +51,7 @@ const Container = styled.div.attrs({
   ${props =>
     props.highlighted &&
     `
-    background-color: yellow;
+    background-color: ${props.theme.colors.state.highlighted};
   `}
 
   &:hover {

@@ -17,14 +17,23 @@ export default class ChannelsList extends Component {
     channels: PropTypes.arrayOf(propType(selectableChannelFragment)),
     onConnectionSelection: PropTypes.func.isRequired,
     cursor: PropTypes.number,
+    cursorOffset: PropTypes.number,
   }
 
   static defaultProps = {
     channels: [],
+    cursor: null,
+    cursorOffset: null,
   }
 
   render() {
-    const { channels, onConnectionSelection, cursor, ...rest } = this.props
+    const {
+      channels,
+      onConnectionSelection,
+      cursor,
+      cursorOffset,
+      ...rest
+    } = this.props
 
     const highlighted = cursor && mod(cursor, channels.length + 1)
 
@@ -39,7 +48,7 @@ export default class ChannelsList extends Component {
             key={channel.id}
             channel={channel}
             onSelection={onConnectionSelection}
-            highlighted={highlighted === idx}
+            highlighted={highlighted === idx + cursorOffset}
           />
         ))}
       </Container>

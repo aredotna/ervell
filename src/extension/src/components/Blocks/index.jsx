@@ -202,9 +202,9 @@ class Blocks extends Component {
     const { mode } = this.state
 
     return (
-      <Layout tabIndex={0} onKeyDown={this.onKeyDown}>
+      <Layout>
         <Container>
-          <Section mb={4}>
+          <Section mb={5}>
             {blocks.length === 0 && currentPage && (
               <BlocksContainer isEmpty>
                 <CurrentPage>
@@ -212,7 +212,7 @@ class Blocks extends Component {
                     Saving &quot;
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: truncate(currentPage.title, 20),
+                        __html: currentPage.title,
                       }}
                     />
                     &quot; as a link
