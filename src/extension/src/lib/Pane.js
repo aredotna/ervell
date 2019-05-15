@@ -230,6 +230,7 @@ class Pane {
       type: 'Link',
       value: window.location.href,
       url: window.location.href,
+      title: document.title,
     }
 
     this.messenger.send({

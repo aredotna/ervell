@@ -10,7 +10,8 @@ import Messenger from 'extension/src/lib/Messenger'
 import withExtensionContext from 'extension/src/components/Extension/withExtension'
 
 import Box from 'v2/components/UI/Box'
-// import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+import Text from 'v2/components/UI/Text'
+import { truncate } from 'v2/components/UI/Truncate'
 import Count from 'v2/components/UI/Count'
 
 import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
@@ -52,6 +53,19 @@ const BlocksContainer = styled(Box)`
   `}
 `
 
+const CurrentPage = styled(Box)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+`
+
 const Bottom = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -82,18 +96,6 @@ class Blocks extends Component {
 
   state = {
     mode: 'resting',
-  }
-
-  componentDidUpdate() {
-    const {
-      context: { blocks },
-    } = this.props
-
-    if (blocks.length > 0) {
-      this.messenger.send({
-        action: 'expand',
-      })
-    }
   }
 
   componentWillUnmount() {
@@ -191,18 +193,59 @@ class Blocks extends Component {
   onKeyDown = () => {}
 
   render() {
-    const { blocks, removeBlock, selectedChannels } = this.props.context
+    const {
+      blocks,
+      removeBlock,
+      selectedChannels,
+      currentPage,
+    } = this.props.context
     const { mode } = this.state
 
     return (
       <Layout tabIndex={0} onKeyDown={this.onKeyDown}>
         <Container>
           <Section mb={4}>
-            <BlocksContainer isEmpty={blocks.length === 0}>
-              {blocks.map(block => (
-                <Block block={block} key={block.id} removeBlock={removeBlock} />
-              ))}
-            </BlocksContainer>
+            {blocks.length === 0 && currentPage && (
+              <BlocksContainer isEmpty>
+                <CurrentPage>
+                  <Text f={4}>
+                    Saving &quot;
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: truncate(currentPage.title, 20),
+                      }}
+                    />
+                    &quot; as a link
+                  </Text>
+
+                  <Text
+                    f={2}
+                    my={4}
+                    font="mono"
+                    color="gray.semiBold"
+                    bg="gray.hint"
+                    breakWord
+                  >
+                    <u>{truncate(currentPage.url, 35)}</u>
+                  </Text>
+
+                  <Text f={2} mt={7}>
+                    (You can also drag text or images here)
+                  </Text>
+                </CurrentPage>
+              </BlocksContainer>
+            )}
+            {blocks.length > 0 && (
+              <BlocksContainer>
+                {blocks.map(block => (
+                  <Block
+                    block={block}
+                    key={block.id}
+                    removeBlock={removeBlock}
+                  />
+                ))}
+              </BlocksContainer>
+            )}
           </Section>
 
           <Section mb={4} flex={1}>
@@ -224,7 +267,7 @@ class Blocks extends Component {
               )}
 
               {mode === 'resting' && selectedChannels.length === 0 && (
-                <span>Close</span>
+                <span>Cancel</span>
               )}
 
               {mode !== 'resting' &&
