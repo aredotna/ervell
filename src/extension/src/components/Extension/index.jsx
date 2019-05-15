@@ -10,8 +10,7 @@ const TOTAL_BLOCK_LIMIT = 10
 export const ExtensionContext = React.createContext({
   blocks: [],
   selectedChannels: [],
-  pageUrl: null,
-  setPageUrl: () => {},
+  currentPage: null,
   addBlock: () => {},
   removeBlock: () => {},
   editBlock: () => {},
@@ -37,23 +36,17 @@ class Extension extends Component {
   state = {
     blocks: [],
     selectedChannels: [],
-    pageUrl: null,
+    currentPage: null,
   }
 
   componentDidMount() {
     this.messenger.send({
-      action: 'getInitialBlock',
+      action: 'getCurrentPage',
     })
   }
 
   componentWillUnmount() {
     window.removeEventListener('message')
-  }
-
-  setPageUrl = pageUrl => {
-    this.setState({
-      pageUrl,
-    })
   }
 
   getBlock = id => find(this.state.blocks, block => block.id === id)
@@ -97,6 +90,9 @@ class Extension extends Component {
       case 'drop':
         this.addBlock(value)
         break
+      case 'currentPage':
+        this.setState({ currentPage: value })
+        break
       default:
         break
     }
@@ -127,7 +123,7 @@ class Extension extends Component {
   }
 
   render() {
-    const { blocks, selectedChannels, pageUrl } = this.state
+    const { blocks, selectedChannels, currentPage } = this.state
     const { children } = this.props
     const {
       addBlock,
@@ -136,7 +132,6 @@ class Extension extends Component {
       getBlock,
       selectChannel,
       unselectChannel,
-      setPageUrl,
     } = this
 
     return (
@@ -150,8 +145,7 @@ class Extension extends Component {
           getBlock,
           selectChannel,
           unselectChannel,
-          pageUrl,
-          setPageUrl,
+          currentPage,
         }}
       >
         {children}

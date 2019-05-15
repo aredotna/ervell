@@ -84,16 +84,6 @@ class Blocks extends Component {
     mode: 'resting',
   }
 
-  componentDidMount() {
-    const {
-      context: { setPageUrl },
-      query,
-    } = this.props
-    if (query && query.original_source_url) {
-      setPageUrl(query.original_source_url)
-    }
-  }
-
   componentDidUpdate() {
     const {
       context: { blocks },
@@ -136,13 +126,13 @@ class Blocks extends Component {
 
   savePageAsLink = () => {
     const {
-      context: { selectedChannel, pageUrl },
+      context: { selectedChannels, currentPage },
       createBlock,
     } = this.props
 
     this.setState({ mode: 'saving' })
 
-    const values = { value: pageUrl, channel_id: selectedChannel.id }
+    const values = { value: currentPage.url, channel_ids: selectedChannels }
 
     createBlock({
       variables: values,
@@ -161,17 +151,24 @@ class Blocks extends Component {
       context: { blocks, selectedChannels },
     } = this.props
 
+    // If no channels are selected, go ahead and close
     if (selectedChannels.length === 0) {
       this.setState({ mode: 'closing' })
 
-      this.messenger.send({
+      return this.messenger.send({
         action: 'close',
       })
     }
 
+    // if there are no blocks, go ahead and save the current page.
+    if (blocks.length === 0) {
+      return this.savePageAsLink()
+    }
+
+    // Now if we're all good, start the saving process
     this.setState({ mode: 'saving' })
 
-    Promise.all(
+    return Promise.all(
       blocks.map(block => {
         const values = {
           ...omit(block, 'id', 'type'),

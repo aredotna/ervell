@@ -208,9 +208,6 @@ class Pane {
       case 'getCurrentPage':
         this.sendCurrentPage()
         break
-      case 'getInitialBlock':
-        this.sendInitialData()
-        break
       case 'close':
         this.destroyPane()
         break
@@ -225,10 +222,6 @@ class Pane {
     }
   }
 
-  sendInitialData = () => {
-    this.sendData(this.msg)
-  }
-
   sendCurrentPage = () => {
     let { data } = new DataExtractor()
 
@@ -236,6 +229,7 @@ class Pane {
       ...data,
       type: 'Link',
       value: window.location.href,
+      url: window.location.href,
     }
 
     this.messenger.send({
