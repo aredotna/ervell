@@ -89,31 +89,6 @@ const Overlay = styled(Box)`
   }
 `
 
-const RemoveButton = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: ${x => x.theme.colors.gray.regular};
-  border-radius: 1em;
-  width: 1em;
-  height: 1em;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${x => x.theme.colors.gray.medium};
-  }
-
-  &:after {
-    content: '𝖷';
-    color: ${x => x.theme.colors.white};
-    line-height: 1em;
-    vertical-align: text-top;
-    text-align: center;
-  }
-`
-
 class Block extends PureComponent {
   static propTypes = {
     block: PropTypes.object.isRequired,
@@ -158,11 +133,10 @@ class Block extends PureComponent {
         {block.type === 'Image' && <ImageContainer src={block.value} />}
         <Overlay>
           {block.type !== 'Link' && (
-            <FilledButton f={0} bg="white" onClick={this.onEdit}>
+            <FilledButton f={2} bg="white" onClick={this.onEdit}>
               Edit
             </FilledButton>
           )}
-          <RemoveButton onClick={this.onRemove} />
         </Overlay>
       </Container>
     )

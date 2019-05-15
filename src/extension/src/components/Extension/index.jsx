@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { reject, find, findIndex } from 'underscore'
+import { reject, find, findIndex, without } from 'underscore'
 
 import Messenger from 'extension/src/lib/Messenger'
 
@@ -9,7 +9,7 @@ const TOTAL_BLOCK_LIMIT = 10
 
 export const ExtensionContext = React.createContext({
   blocks: [],
-  selectedChannel: null,
+  selectedChannels: [],
   pageUrl: null,
   setPageUrl: () => {},
   addBlock: () => {},
@@ -17,6 +17,8 @@ export const ExtensionContext = React.createContext({
   editBlock: () => {},
   getBlock: () => {},
   selectChannel: () => {},
+  getChannel: () => {},
+  unselectChannel: () => {},
 })
 
 class Extension extends Component {
@@ -34,7 +36,7 @@ class Extension extends Component {
 
   state = {
     blocks: [],
-    selectedChannel: null,
+    selectedChannels: [],
     pageUrl: null,
   }
 
@@ -86,6 +88,8 @@ class Extension extends Component {
     return true
   }
 
+  getChannel = id => find(this.state.selectedChannels, id)
+
   receiveMessage = message => {
     const { action, value } = message.data
 
@@ -111,14 +115,19 @@ class Extension extends Component {
     }
   }
 
-  selectChannel = channel => {
+  selectChannel = channelId => {
     this.setState({
-      selectedChannel: channel,
+      selectedChannels: [...this.state.selectedChannels, channelId],
     })
   }
 
+  unselectChannel = channelId => {
+    const selectedChannels = without(this.state.selectedChannels, channelId)
+    this.setState({ selectedChannels })
+  }
+
   render() {
-    const { blocks, selectedChannel, pageUrl } = this.state
+    const { blocks, selectedChannels, pageUrl } = this.state
     const { children } = this.props
     const {
       addBlock,
@@ -126,6 +135,7 @@ class Extension extends Component {
       editBlock,
       getBlock,
       selectChannel,
+      unselectChannel,
       setPageUrl,
     } = this
 
@@ -133,12 +143,13 @@ class Extension extends Component {
       <ExtensionContext.Provider
         value={{
           blocks,
-          selectedChannel,
+          selectedChannels,
           addBlock,
           removeBlock,
           editBlock,
           getBlock,
           selectChannel,
+          unselectChannel,
           pageUrl,
           setPageUrl,
         }}

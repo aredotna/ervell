@@ -10,8 +10,10 @@ import Messenger from 'extension/src/lib/Messenger'
 import withExtensionContext from 'extension/src/components/Extension/withExtension'
 
 import Box from 'v2/components/UI/Box'
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+// import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 import Count from 'v2/components/UI/Count'
+
+import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 
 import Block from 'extension/src/components/Blocks/components/Block'
 import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
@@ -21,10 +23,11 @@ import createBlockMutation from 'extension/src/components/Blocks/mutations/creat
 const Container = styled(Box)`
   display: flex;
   flex-direction: column;
-  align-items: space-between;
+  align-items: center;
   flex: 1;
   position: relative;
   width: 100%;
+  justify-content: space-between;
 `
 
 const Section = styled(Box)`
@@ -35,12 +38,18 @@ const Section = styled(Box)`
   width: 100%;
 `
 
-const BlocksContainer = styled(Box).attrs({ mt: 7 })`
+const BlocksContainer = styled(Box)`
   display: flex;
   width: 100%;
   height: 0;
   padding-bottom: 100%;
   position: relative;
+
+  ${props =>
+    props.isEmpty &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
 `
 
 const Bottom = styled(Box)`
@@ -113,6 +122,18 @@ class Blocks extends Component {
     }
   }
 
+  handleConnectionSelect = (isSelected, channelId) => {
+    const {
+      context: { selectChannel, unselectChannel },
+    } = this.props
+
+    if (isSelected) {
+      selectChannel(channelId)
+    } else {
+      unselectChannel(channelId)
+    }
+  }
+
   savePageAsLink = () => {
     const {
       context: { selectedChannel, pageUrl },
@@ -137,7 +158,7 @@ class Blocks extends Component {
   saveAndClose = () => {
     const {
       createBlock,
-      context: { blocks, selectedChannel },
+      context: { blocks, selectedChannels },
     } = this.props
 
     this.setState({ mode: 'saving' })
@@ -146,7 +167,7 @@ class Blocks extends Component {
       blocks.map(block => {
         const values = {
           ...omit(block, 'id', 'type'),
-          channel_id: selectedChannel.id,
+          channel_ids: selectedChannels,
         }
 
         return createBlock({
@@ -165,43 +186,45 @@ class Blocks extends Component {
   onKeyDown = () => {}
 
   render() {
-    const { blocks, removeBlock } = this.props.context
+    const { blocks, removeBlock, selectedChannels } = this.props.context
     const { mode } = this.state
 
     return (
       <Layout tabIndex={0} onKeyDown={this.onKeyDown}>
         <Container>
-          <Section>
-            <BlocksContainer>
+          <Section mb={4}>
+            <BlocksContainer isEmpty={blocks.length === 0}>
               {blocks.map(block => (
                 <Block block={block} key={block.id} removeBlock={removeBlock} />
               ))}
             </BlocksContainer>
           </Section>
 
-          <Section>
-            <ConnectionSelectionList />
+          <Section mb={4} flex={1}>
+            <Box flex={1}>
+              <ConnectionSelectionList
+                onConnectionSelection={this.handleConnectionSelect}
+              />
+            </Box>
           </Section>
 
-          <Bottom px={4} my={6}>
-            {blocks.length > 0 && (
-              <Button f={4} my={4} onClick={this.saveAndClose}>
-                {mode === 'resting' && (
-                  <span>
-                    Connect&nbsp;
-                    <Count label="block" amount={blocks.length} />
-                    &nbsp;→
-                  </span>
-                )}
+          <Bottom>
+            <DividerButton f={4} my={4} onClick={this.saveAndClose}>
+              {mode === 'resting' && (
+                <span>
+                  Save to&nbsp;
+                  <Count label="channel" amount={selectedChannels.length} />
+                  &nbsp;→
+                </span>
+              )}
 
-                {mode !== 'resting' &&
-                  {
-                    saving: 'Saving...',
-                    closing: 'Closing...',
-                    error: 'Error',
-                  }[mode]}
-              </Button>
-            )}
+              {mode !== 'resting' &&
+                {
+                  saving: 'Saving...',
+                  closing: 'Closing...',
+                  error: 'Error',
+                }[mode]}
+            </DividerButton>
           </Bottom>
         </Container>
       </Layout>

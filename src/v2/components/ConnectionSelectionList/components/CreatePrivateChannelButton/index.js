@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
+import mod from 'v2/util/mod'
+
 import createPrivateChannelMutation from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton/mutations/createPrivateChannel'
 
 import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan'
@@ -12,6 +14,7 @@ class CreatePrivateChannelButton extends Component {
     title: PropTypes.string.isRequired,
     createPrivateChannel: PropTypes.func.isRequired,
     onConnectionCreation: PropTypes.func.isRequired,
+    cursor: PropTypes.number,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -51,10 +54,15 @@ class CreatePrivateChannelButton extends Component {
 
   render() {
     const { mode, createdTitle } = this.state
-    const { title } = this.props
+    const { title, cursor } = this.props
+
+    const highlighted = cursor && mod(cursor, 0)
 
     return (
-      <ListButton onClick={this.createPrivateChannel}>
+      <ListButton
+        onClick={this.createPrivateChannel}
+        highlighted={highlighted === 0}
+      >
         <ColoredChannelSpan visibility="private">
           {
             {

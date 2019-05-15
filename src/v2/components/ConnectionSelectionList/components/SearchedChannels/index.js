@@ -6,34 +6,43 @@ import searchedChannelsQuery from 'v2/components/ConnectionSelectionList/compone
 
 import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
 import ChannelsList from 'v2/components/ConnectionSelectionList/components/ChannelsList'
+import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
 
 export default class SearchedChannels extends Component {
   static propTypes = {
     query: PropTypes.string.isRequired,
     onConnectionSelection: PropTypes.func.isRequired,
+    cursor: PropTypes.number,
   }
 
   render() {
-    const { query, onConnectionSelection } = this.props
+    const { query, onConnectionSelection, cursor } = this.props
 
     return (
-      <Query query={searchedChannelsQuery} variables={{ query }}>
-        {({ data, error, loading }) => {
-          if (error) return <Indicator label="Error" />
-          if (loading) return <Indicator label="Searching..." />
+      <div>
+        <CreatePrivateChannelButton
+          title={query}
+          onConnectionCreation={onConnectionSelection}
+          cursor={cursor}
+        />
+        <Query query={searchedChannelsQuery} variables={{ query }}>
+          {({ data, error, loading }) => {
+            if (error) return <Indicator label="Error" />
+            if (loading) return <Indicator label="Searching..." />
 
-          const {
-            me: { searched_channels },
-          } = data
+            const {
+              me: { searched_channels },
+            } = data
 
-          return (
-            <ChannelsList
-              channels={searched_channels}
-              onConnectionSelection={onConnectionSelection}
-            />
-          )
-        }}
-      </Query>
+            return (
+              <ChannelsList
+                channels={searched_channels}
+                onConnectionSelection={onConnectionSelection}
+              />
+            )
+          }}
+        </Query>
+      </div>
     )
   }
 }

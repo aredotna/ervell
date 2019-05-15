@@ -1,8 +1,8 @@
 #arenaExtension_frame,
 #arenaExtension_div {
   overflow: hidden !important;
-  width: 355px !important;
-  height: 455px !important;
+  width: 335px !important;
+  height: 610px !important;
   position: fixed !important;
   top: 0px !important;
   right: 0px !important;
@@ -22,7 +22,7 @@
 
 #arenaExtension_frame.is-expanded,
 #arenaExtension_div.is-expanded {
-  height: 710px !important;
+  height: 610px !important;
 }
 
 #arenaExtension_div {

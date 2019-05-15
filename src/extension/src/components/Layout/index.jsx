@@ -65,7 +65,7 @@ class Layout extends Component {
     const { children, showBack } = this.props
 
     return (
-      <Container p={5}>
+      <Container p={5} pb={0}>
         <Top>{showBack && <Back onClick={this.goBack} />}</Top>
         {children}
       </Container>

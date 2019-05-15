@@ -9,7 +9,6 @@ import { Input } from 'v2/components/UI/Inputs'
 import Text from 'v2/components/UI/Text'
 import RecentChannels from 'v2/components/ConnectionSelectionList/components/RecentChannels'
 import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
-import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
 
 const Container = styled.div`
   position: relative;
@@ -62,6 +61,33 @@ export default class ConnectionSelectionList extends Component {
     query: '',
     debouncedQuery: '',
     mode: 'resting',
+    cursor: null,
+  }
+
+  handleKeyDown = ({ key }) => {
+    const { cursor } = this.state
+
+    switch (key) {
+      // case 'Escape':
+      //   this.setState({ query: '' })
+      //   break
+      case 'Enter':
+        if (query === '') return
+        window.location.href = href
+        break
+      case 'ArrowDown':
+        this.setState({
+          cursor: (cursor === null ? -1 : cursor) + 1,
+        })
+        break
+      case 'ArrowUp':
+        this.setState({
+          cursor: (cursor === null ? 0 : cursor) - 1,
+        })
+        break
+      default:
+        break
+    }
   }
 
   handleChange = ({ target: { value: query } }) => {
@@ -75,36 +101,36 @@ export default class ConnectionSelectionList extends Component {
   }, 200)
 
   render() {
-    const { query, debouncedQuery, mode } = this.state
+    const { query, debouncedQuery, mode, cursor } = this.state
     const { isOutlined, onConnectionSelection } = this.props
 
     return (
       <Container mode={mode} isOutlined={isOutlined}>
-        <SearchInput onChange={this.handleChange} />
+        <SearchInput
+          onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
+        />
 
         {mode === 'resting' && (
           <div>
             <Text f={1} py={4} px={5} textAlign="center" color="gray.medium">
-              Recent channels
+              Recent channels ({cursor})
             </Text>
 
             <OutlinedRecentChannels
               isOutlined={isOutlined}
               onConnectionSelection={onConnectionSelection}
+              cursor={cursor}
             />
           </div>
         )}
 
         {mode === 'active' && (
           <div>
-            <CreatePrivateChannelButton
-              title={query}
-              onConnectionCreation={onConnectionSelection}
-            />
-
             <SearchedChannels
               query={debouncedQuery}
               onConnectionSelection={onConnectionSelection}
+              cursor={cursor}
             />
           </div>
         )}
