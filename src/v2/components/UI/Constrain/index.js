@@ -8,7 +8,7 @@ import Box from 'v2/components/UI/Box'
 const BREAKPOINTS = new Array(8)
   .fill(undefined)
   .map((_, i) => {
-    const maxWidth = multiply(constants.blockAndGutter, i)
+    const maxWidth = multiply(constants.blockAndGutter, i + 1)
     const minWidth = add(constants.legacyUnit, maxWidth)
     return `@media (min-width: ${minWidth}) { max-width: ${maxWidth}; }`
   })

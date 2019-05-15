@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import styled from 'styled-components'
 
 import constants from 'v2/styles/constants'
+import { divide } from 'v2/styles/functions'
 
 import profileChannelIndexQuery from 'v2/components/ProfileChannelIndex/queries/profileChannelIndex'
 
@@ -25,6 +26,7 @@ const Columns = styled.div`
 
   ${constants.media.small`
     column-count: 1;
+    padding: 0 ${divide(constants.doubleBlockGutter, 2)};
   `}
 `
 
