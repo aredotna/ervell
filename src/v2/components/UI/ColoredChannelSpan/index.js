@@ -10,7 +10,7 @@ const ColoredChannelSpan = ({ children, visibility, ...rest }) => (
 )
 
 ColoredChannelSpan.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   visibility: PropTypes.string.isRequired,
 }
 

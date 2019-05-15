@@ -129,7 +129,7 @@ export default class SelectableChannel extends Component {
   static propTypes = {
     channel: propType(selectableChannelFragment).isRequired,
     onSelection: PropTypes.func,
-    highlighted: PropTypes.boolean,
+    highlighted: PropTypes.bool,
   }
 
   static defaultProps = {
