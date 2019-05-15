@@ -5,7 +5,7 @@ import constants from 'v2/styles/constants'
 
 import Box from 'v2/components/UI/Box'
 
-const BREAKPOINTS = new Array(8)
+const BREAKPOINTS = new Array(12)
   .fill(undefined)
   .map((_, i) => {
     const maxWidth = multiply(constants.blockAndGutter, i + 1)
