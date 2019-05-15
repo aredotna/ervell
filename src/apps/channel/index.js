@@ -1,4 +1,5 @@
 import express from 'express'
+import sharify from 'sharify'
 
 import apolloMiddleware from 'v2/apollo/middleware'
 
@@ -9,6 +10,19 @@ import ChannelComponent from 'v2/components/Channel'
 import ChannelModel from 'models/channel.coffee'
 
 const app = express()
+
+const {
+  data: { ADMIN_SLUGS: ADMIN_SLUGS_STRING },
+} = sharify
+const ADMIN_SLUGS = ADMIN_SLUGS_STRING.split(',')
+
+const newChannelMiddleware = (req, res, next) => {
+  if (req.user && ADMIN_SLUGS.includes(req.user.get('slug'))) {
+    return res.redirect(307, `/new_channel${req.path}`)
+  }
+
+  next()
+}
 
 const show = (req, res, next) => {
   const { id } = req.params
@@ -106,9 +120,13 @@ const followers = (req, res, next) => {
 app
   .set('views', `${__dirname}/templates`)
   .set('view engine', 'jade')
-  .get('/:username/:id', apolloMiddleware, show)
-  .get('/:username/:id/block/:block_id', show)
+  .get('/:username/:id', newChannelMiddleware, apolloMiddleware, show)
   .get('/:username/:id/embed', embed)
-  .get('/:username/:id/followers', apolloMiddleware, followers)
+  .get(
+    '/:username/:id/followers',
+    newChannelMiddleware,
+    apolloMiddleware,
+    followers
+  )
 
 module.exports = app
