@@ -161,6 +161,14 @@ class Blocks extends Component {
       context: { blocks, selectedChannels },
     } = this.props
 
+    if (selectedChannels.length === 0) {
+      this.setState({ mode: 'closing' })
+
+      this.messenger.send({
+        action: 'close',
+      })
+    }
+
     this.setState({ mode: 'saving' })
 
     Promise.all(
@@ -210,12 +218,16 @@ class Blocks extends Component {
 
           <Bottom>
             <DividerButton f={4} my={4} onClick={this.saveAndClose}>
-              {mode === 'resting' && (
+              {mode === 'resting' && selectedChannels.length > 0 && (
                 <span>
                   Save to&nbsp;
                   <Count label="channel" amount={selectedChannels.length} />
                   &nbsp;→
                 </span>
+              )}
+
+              {mode === 'resting' && selectedChannels.length === 0 && (
+                <span>Close</span>
               )}
 
               {mode !== 'resting' &&
