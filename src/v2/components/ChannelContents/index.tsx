@@ -219,14 +219,13 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
         distance={1}
         {...rest}
       >
-        {(channel.can.add_to || channel.visibility === 'private') && (
+        {(channel.can.add_to || channel.can.add_to_as_premium) && (
           <GridItem>
             <AddBlock
               channel_id={channel.id}
               onAddBlock={handleAddBlock}
-              isOverPrivateLimit={
-                // TODO: We need a `can` field for this
-                !channel.can.add_to && channel.visibility === 'private'
+              isElligbleForPremium={
+                !channel.can.add_to && channel.can.add_to_as_premium
               }
             />
           </GridItem>
