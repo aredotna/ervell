@@ -27,7 +27,11 @@ const isChannelContentsThumbnail = (
 export const ChannelContentsThumbnail: React.FC<Props> = ({
   initialContents,
 }) => {
-  const { meta_image } = initialContents.filter(isChannelContentsThumbnail)[0]
+  const thumbnails = initialContents.filter(isChannelContentsThumbnail)
+
+  if (thumbnails.length === 0) return null
+
+  const { meta_image } = thumbnails[0]
 
   return <Image>{meta_image}</Image>
 }
