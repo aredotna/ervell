@@ -44,9 +44,7 @@ class Pane {
     this.focusIframe()
 
     this.frame.onload = () => {
-      // this.focusIframe()
-      if (this.frame.location.search != '?focusHack')
-        this.frame.location.search = '?focusHack'
+      this.focusIframe()
     }
   }
 
