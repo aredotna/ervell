@@ -10,6 +10,7 @@ import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
 import { ChannelFollowers } from 'v2/components/ChannelFollowers'
+import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
 
 interface Props {
   id: string
@@ -40,6 +41,8 @@ export default ({ id }: Props) => {
 
             return (
               <>
+                <ChannelPageMetaTags channel={channel} subtitle="Followers" />
+
                 <ChannelMetadata channel={channel} />
 
                 <ChannelFollowers id={channel.id} />

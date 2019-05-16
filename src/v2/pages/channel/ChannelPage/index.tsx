@@ -12,6 +12,7 @@ import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
 import ChannelContents from 'v2/components/ChannelContents'
 import { ChannelContentsFilter } from 'v2/components/ChannelContentsFilter'
+import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
 
 interface Variables {
   id: string
@@ -38,6 +39,8 @@ export default ({ id }) => {
 
             return (
               <>
+                <ChannelPageMetaTags channel={channel} />
+
                 <ChannelMetadata channel={channel} />
 
                 <ChannelContentsFilter channel={channel} />
