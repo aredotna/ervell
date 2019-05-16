@@ -61,28 +61,6 @@ export default class ConnectionSelectionList extends Component {
     query: '',
     debouncedQuery: '',
     mode: 'resting',
-    cursor: null,
-  }
-
-  handleKeyDown = ({ key }) => {
-    const { cursor } = this.state
-
-    switch (key) {
-      case 'Enter':
-        break
-      case 'ArrowDown':
-        this.setState({
-          cursor: (cursor === null ? -1 : cursor) + 1,
-        })
-        break
-      case 'ArrowUp':
-        this.setState({
-          cursor: (cursor === null ? 0 : cursor) - 1,
-        })
-        break
-      default:
-        break
-    }
   }
 
   handleChange = ({ target: { value: query } }) => {
@@ -96,7 +74,7 @@ export default class ConnectionSelectionList extends Component {
   }, 200)
 
   render() {
-    const { debouncedQuery, mode, cursor } = this.state
+    const { debouncedQuery, mode } = this.state
     const { isOutlined, onConnectionSelection } = this.props
 
     return (
@@ -112,7 +90,6 @@ export default class ConnectionSelectionList extends Component {
             <OutlinedRecentChannels
               isOutlined={isOutlined}
               onConnectionSelection={onConnectionSelection}
-              cursor={cursor}
             />
           </div>
         )}
@@ -122,7 +99,6 @@ export default class ConnectionSelectionList extends Component {
             <SearchedChannels
               query={debouncedQuery}
               onConnectionSelection={onConnectionSelection}
-              cursor={cursor}
             />
           </div>
         )}

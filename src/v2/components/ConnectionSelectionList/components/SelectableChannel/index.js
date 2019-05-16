@@ -48,12 +48,6 @@ const Container = styled.div.attrs({
   overflow: hidden;
   text-align: left;
 
-  ${props =>
-    props.highlighted &&
-    `
-    background-color: ${props.theme.colors.state.highlighted};
-  `}
-
   &:hover {
     z-index: 1;
     border: 1px solid ${props => props.theme.colors.gray.semiBold};
@@ -129,7 +123,6 @@ export default class SelectableChannel extends Component {
   static propTypes = {
     channel: propType(selectableChannelFragment).isRequired,
     onSelection: PropTypes.func,
-    highlighted: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -153,7 +146,6 @@ export default class SelectableChannel extends Component {
   render() {
     const { isSelected } = this.state
     const {
-      highlighted,
       channel: {
         title,
         visibility,
@@ -168,7 +160,6 @@ export default class SelectableChannel extends Component {
         data-selected={isSelected}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
-        highlighted={highlighted}
       >
         <HoverableInner>
           {name}
