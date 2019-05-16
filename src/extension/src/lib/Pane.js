@@ -39,13 +39,6 @@ class Pane {
     // So we can communicate with the iframe
     this.setupReceiver()
     this.messenger = new Messenger(this.frame.contentWindow)
-
-    // Focus iframe
-    this.focusIframe()
-
-    this.frame.onload = () => {
-      this.focusIframe()
-    }
   }
 
   close = () => {
@@ -65,17 +58,8 @@ class Pane {
     return iframe
   }
 
-  focusIframe = () => {
-    // var frame = this.frame
-    // this.frame.contentWindow.focus()
-    // setTimeout(() => {
-    //   frame.contentWindow.focus()
-    // }, 100)
-  }
-
   showIframe = () => {
     this.frame.style.display = 'block'
-    this.focusIframe()
   }
 
   hideIframe = () => {
