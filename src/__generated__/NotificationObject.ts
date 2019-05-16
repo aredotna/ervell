@@ -37,6 +37,7 @@ export interface NotificationObject_Comment {
   __typename: "Comment";
   id: number | null;
   body: string | null;
+  href: string | null;
 }
 
 export interface NotificationObject_Group {

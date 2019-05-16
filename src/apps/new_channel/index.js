@@ -39,5 +39,6 @@ app
   )
   .get('/new_channel/:user_id/:channel_id', ...resolve)
   .get('/new_channel/:user_id/:channel_id/followers', ...resolve)
+  .get('/new_channel/:user_id/:channel_id/embed', ...resolve)
 
 module.exports = app

@@ -7,7 +7,7 @@ import constants from 'v2/styles/constants'
 import Box from 'v2/components/UI/Box'
 import HorizontalRule from 'v2/components/UI/HorizontalRule'
 
-import channelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel'
+import konnectableChannelFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannel/fragments/konnectableChannel'
 import Text from 'v2/components/UI/Text'
 import Count from 'v2/components/UI/Count'
 
@@ -75,7 +75,7 @@ const ChannelRow = ({ children, channel, ...rest }) => (
 )
 
 ChannelRow.propTypes = {
-  channel: propType(channelFragment).isRequired,
+  channel: propType(konnectableChannelFragment).isRequired,
   children: PropTypes.node.isRequired,
 }
 
