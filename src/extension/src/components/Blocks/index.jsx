@@ -150,7 +150,7 @@ class Blocks extends Component {
   saveAndClose = () => {
     const {
       createBlock,
-      context: { blocks, selectedChannels },
+      context: { block, selectedChannels },
     } = this.props
 
     // If no channels are selected, go ahead and close
@@ -162,26 +162,22 @@ class Blocks extends Component {
       })
     }
 
-    // if there are no blocks, go ahead and save the current page.
-    if (blocks.length === 0) {
+    // if there is no block, go ahead and save the current page.
+    if (!block) {
       return this.savePageAsLink()
     }
 
     // Now if we're all good, start the saving process
     this.setState({ mode: 'saving' })
 
-    return Promise.all(
-      blocks.map(block => {
-        const values = {
-          ...omit(block, 'id', 'type'),
-          channel_ids: selectedChannels,
-        }
+    const values = {
+      ...omit(block, 'id', 'type'),
+      channel_ids: selectedChannels,
+    }
 
-        return createBlock({
-          variables: values,
-        })
-      })
-    ).then(() => {
+    return createBlock({
+      variables: values,
+    }).then(() => {
       this.setState({ mode: 'closing' })
 
       this.messenger.send({
@@ -194,25 +190,18 @@ class Blocks extends Component {
 
   render() {
     const {
-      blocks,
+      block,
       removeBlock,
       selectedChannels,
       currentPage,
     } = this.props.context
     const { mode } = this.state
 
-    if (currentPage) {
-      console.log(
-        'truncate(currentPage.url, 35)',
-        truncate(currentPage.url, 35)
-      )
-    }
-
     return (
       <Layout>
         <Container>
           <Section mb={5}>
-            {blocks.length === 0 && currentPage && (
+            {!block && currentPage && (
               <BlocksContainer isEmpty>
                 <CurrentPage>
                   <Text f={4}>Save</Text>
@@ -244,15 +233,9 @@ class Blocks extends Component {
                 </CurrentPage>
               </BlocksContainer>
             )}
-            {blocks.length > 0 && (
+            {block && (
               <BlocksContainer>
-                {blocks.map(block => (
-                  <Block
-                    block={block}
-                    key={block.id}
-                    removeBlock={removeBlock}
-                  />
-                ))}
+                <Block block={block} key={block.id} removeBlock={removeBlock} />
               </BlocksContainer>
             )}
           </Section>

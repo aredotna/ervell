@@ -92,18 +92,12 @@ const Overlay = styled(Box)`
 class Block extends PureComponent {
   static propTypes = {
     block: PropTypes.object.isRequired,
-    removeBlock: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   }
 
-  onRemove = () => {
-    const { block, removeBlock } = this.props
-    removeBlock(block.id)
-  }
-
   onEdit = () => {
-    const { history, block } = this.props
-    history.push(`/edit/${block.id}`)
+    const { history } = this.props
+    history.push(`/edit`)
   }
 
   render() {

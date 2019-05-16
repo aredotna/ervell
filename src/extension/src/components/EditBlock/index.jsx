@@ -10,7 +10,7 @@ import Box from 'v2/components/UI/Box'
 import { Input, Textarea } from 'v2/components/UI/Inputs'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 
-const Container = styled(Box).attrs({ p: 6, pt: 9 })`
+const Container = styled(Box).attrs({ p: 6 })`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,40 +19,12 @@ const Container = styled(Box).attrs({ p: 6, pt: 9 })`
   border: 1px solid ${props => props.theme.colors.gray.regular};
 `
 
-const Top = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  position: absolute;
-  top: ${props => props.theme.space[5]};
-  left: ${props => props.theme.space[5]};
-  right: ${props => props.theme.space[5]};
-  z-index: 100;
-`
-
 const Bottom = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-end;
   width: 100%;
-`
-
-const Back = styled(Text).attrs({
-  f: 3,
-  color: 'gray.regular',
-})`
-  font-weight: bold;
-  cursor: pointer;
-
-  &:hover {
-    color: ${props => props.theme.colors.gray.bold};
-  }
-
-  &:after {
-    content: 'back';
-  }
 `
 
 const Image = styled(Box).attrs({
@@ -96,10 +68,14 @@ class EditBlock extends PureComponent {
   constructor(props) {
     super(props)
 
+    const {
+      context: { block },
+    } = props
+
     this.state = {
-      value: this.getCurrentBlock().value,
-      title: this.getCurrentBlock().title,
-      description: this.getCurrentBlock().description,
+      value: block.value,
+      title: block.title,
+      description: block.description,
     }
   }
 
@@ -115,18 +91,8 @@ class EditBlock extends PureComponent {
     } = this.props
     const { value, title, description } = this.state
 
-    editBlock(this.getCurrentBlock().id, { value, title, description })
+    editBlock({ value, title, description })
     this.onBack()
-  }
-
-  getCurrentBlock = () => {
-    const {
-      match,
-      context: { getBlock },
-    } = this.props
-    const { id } = match.params
-    const block = getBlock(id)
-    return block
   }
 
   handleInput = fieldName => ({ target: { value: fieldValue } }) => {
@@ -138,16 +104,14 @@ class EditBlock extends PureComponent {
   handleDescription = this.handleInput('description')
 
   render() {
-    const block = this.getCurrentBlock()
+    const {
+      context: { block },
+    } = this.props
     const { value, title, description } = this.state
 
     return (
       <form onSubmit={this.onSave}>
         <Container>
-          <Top>
-            <Back onClick={this.onBack} />
-          </Top>
-
           <Box
             justifyContent="center"
             alignItems="stretch"
