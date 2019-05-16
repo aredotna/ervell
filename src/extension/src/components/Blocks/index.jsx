@@ -201,6 +201,13 @@ class Blocks extends Component {
     } = this.props.context
     const { mode } = this.state
 
+    if (currentPage) {
+      console.log(
+        'truncate(currentPage.url, 35)',
+        truncate(currentPage.url, 35)
+      )
+    }
+
     return (
       <Layout>
         <Container>
@@ -208,25 +215,27 @@ class Blocks extends Component {
             {blocks.length === 0 && currentPage && (
               <BlocksContainer isEmpty>
                 <CurrentPage>
+                  <Text f={4}>Save</Text>
                   <Text f={4}>
-                    Saving &quot;
+                    &quot;
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: currentPage.title,
+                        __html: unescape(truncate(currentPage.title, 40)),
                       }}
                     />
-                    &quot; as a link
+                    &quot;
                   </Text>
 
+                  <Text f={4}>as a link</Text>
+
                   <Text
-                    f={2}
-                    my={4}
+                    f={1}
+                    my={7}
                     font="mono"
                     color="gray.semiBold"
-                    bg="gray.hint"
                     breakWord
                   >
-                    <u>{truncate(currentPage.url, 35)}</u>
+                    <u>{unescape(truncate(currentPage.url, 40))}</u>
                   </Text>
 
                   <Text f={2} mt={7}>

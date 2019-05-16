@@ -43,6 +43,10 @@ class Extension extends Component {
     this.messenger.send({
       action: 'getCurrentPage',
     })
+
+    this.messenger.send({
+      action: 'getInitialBlock',
+    })
   }
 
   componentWillUnmount() {

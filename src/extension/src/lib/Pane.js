@@ -219,6 +219,9 @@ class Pane {
       case 'getCurrentPage':
         this.sendCurrentPage()
         break
+      case 'getInitialBlock':
+        this.sendInitialData()
+        break
       case 'close':
         this.destroyPane()
         break
@@ -254,6 +257,10 @@ class Pane {
     this.messenger.send({
       action: 'saveCurrentPage',
     })
+  }
+
+  sendInitialData = () => {
+    this.sendData(this.msg)
   }
 
   sendData = msg => {

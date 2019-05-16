@@ -114,10 +114,8 @@ class Block extends PureComponent {
       <Container isText={isText}>
         {block.type === 'Text' && (
           <TextContainer>
-            <Text f={2} font="serif">
-              <Truncate suffix="..." length={220}>
-                {block.value}
-              </Truncate>
+            <Text f={3} font="serif">
+              {block.value}
             </Text>
           </TextContainer>
         )}

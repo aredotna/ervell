@@ -8,10 +8,7 @@ export const truncate = (
   text = '',
   length = DEFAULT_LENGTH,
   suffix = DEFAULT_SUFFIX
-) =>
-  decodeURIComponent(
-    text.substr(0, length - 1) + (text.length > length ? suffix : '')
-  )
+) => unescape(text.substr(0, length - 1) + (text.length > length ? suffix : ''))
 
 interface TruncateProps {
   children: any
