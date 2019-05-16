@@ -13,6 +13,7 @@ import Box from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
 import ChannelContents from 'v2/components/ChannelContents'
+import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
 
 export default ({ token }) => {
   return (
@@ -35,6 +36,8 @@ export default ({ token }) => {
 
             return (
               <>
+                <ChannelPageMetaTags channel={channel} />
+
                 <ChannelMetadata channel={channel} />
 
                 <ChannelContents channel={channel} />

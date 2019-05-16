@@ -209,6 +209,7 @@ export interface SharedChannelPage_channel_initial_contents_Image {
   src: string | null;
   can: SharedChannelPage_channel_initial_contents_Image_can | null;
   find_original_url: string | null;
+  meta_image: string | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Link_user {
@@ -260,6 +261,7 @@ export interface SharedChannelPage_channel_initial_contents_Link {
   src: string | null;
   external_url: string | null;
   can: SharedChannelPage_channel_initial_contents_Link_can | null;
+  meta_image: string | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Embed_user {
@@ -310,6 +312,7 @@ export interface SharedChannelPage_channel_initial_contents_Embed {
   counts: SharedChannelPage_channel_initial_contents_Embed_counts | null;
   src: string | null;
   can: SharedChannelPage_channel_initial_contents_Embed_can | null;
+  meta_image: string | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Attachment_user {
@@ -361,6 +364,7 @@ export interface SharedChannelPage_channel_initial_contents_Attachment {
   src: string | null;
   file_extension: string | null;
   can: SharedChannelPage_channel_initial_contents_Attachment_can | null;
+  meta_image: string | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_PendingBlock_user {
@@ -499,6 +503,10 @@ export interface SharedChannelPage_channel {
   share: SharedChannelPage_channel_share | null;
   skeleton: (SharedChannelPage_channel_skeleton | null)[] | null;
   initial_contents: (SharedChannelPage_channel_initial_contents | null)[] | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  canonical: string | null;
+  is_nsfw: boolean | null;
 }
 
 export interface SharedChannelPage {
