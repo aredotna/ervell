@@ -35,7 +35,7 @@ const Container = styled(Box).attrs({
 interface Props {
   channel_id: string | number
   onAddBlock: (props: any) => any
-  isOverPrivateLimit: boolean
+  isElligbleForPremium: boolean
 }
 
 interface AddBlockProps extends Props {
@@ -109,7 +109,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
   finishUpload = () => this.setState({ uploaderKey: new Date().getTime() })
 
   render() {
-    const { isOverPrivateLimit } = this.props
+    const { isElligbleForPremium } = this.props
     const { mode, inputKey, uploaderKey } = this.state
 
     return (
@@ -121,7 +121,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
       >
         {({ openUploadDialog }) => (
           <Container pt={6} px={6}>
-            {isOverPrivateLimit ? (
+            {isElligbleForPremium ? (
               <>
                 <AddBlockPrivateCTAInner />
                 <Button href="/settings/billing">Register for Premium</Button>

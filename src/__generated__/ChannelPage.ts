@@ -40,6 +40,7 @@ export interface ChannelPage_channel_can {
   connect: boolean | null;
   add_to: boolean | null;
   reorder_connections: boolean | null;
+  add_to_as_premium: boolean | null;
   remove_connections: boolean | null;
 }
 
