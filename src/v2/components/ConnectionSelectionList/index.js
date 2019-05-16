@@ -68,9 +68,6 @@ export default class ConnectionSelectionList extends Component {
     const { cursor } = this.state
 
     switch (key) {
-      // case 'Escape':
-      //   this.setState({ query: '' })
-      //   break
       case 'Enter':
         break
       case 'ArrowDown':
@@ -104,11 +101,7 @@ export default class ConnectionSelectionList extends Component {
 
     return (
       <Container mode={mode} isOutlined={isOutlined}>
-        <SearchInput
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-          autoFocus
-        />
+        <SearchInput onChange={this.handleChange} />
 
         {mode === 'resting' && (
           <div>
