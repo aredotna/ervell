@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 
-import Box from 'v2/components/UI/Box'
+import Box, { BoxProps } from 'v2/components/UI/Box'
 import { KonnectableImg } from 'v2/components/Cell/components/Konnectable/components/KonnectableImg'
 
 const hoverMixin = css`
@@ -20,30 +20,21 @@ const Container = styled(Box)`
   }
 `
 
-interface Props {
+interface Props extends BoxProps {
   src: string
   title?: string
-  mode: Mode
+  mode?: Mode
 }
 
-export default class KonnectableGeneric extends PureComponent<Props> {
-  static defaultProps = {
-    title: null,
-    mode: Mode.RESTING,
-  }
+export const KonnectableGeneric: React.FC<Props> = ({
+  src,
+  title = null,
+  mode = Mode.RESTING,
+  ...rest
+}) => (
+  <Container mode={mode} border="1px solid" borderColor="transparent" {...rest}>
+    <KonnectableImg src={src} alt={title} />
+  </Container>
+)
 
-  render() {
-    const { src, title, mode, ...rest } = this.props
-
-    return (
-      <Container
-        mode={mode}
-        border="1px solid"
-        borderColor="transparent"
-        {...rest}
-      >
-        <KonnectableImg src={src} alt={title} />
-      </Container>
-    )
-  }
-}
+export default KonnectableGeneric

@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
+
 import { KonnectableMetadata as KonnectableMetadataData } from '__generated__/KonnectableMetadata'
 
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
@@ -14,65 +15,51 @@ interface Props {
   mode: Mode
 }
 
-export default class KonnectableMetadata extends PureComponent<Props> {
-  static defaultProps = {
-    mode: Mode.RESTING,
-  }
+export const KonnectableMetadata: React.FC<Props> = ({
+  mode = Mode.RESTING,
+  konnectable,
+  ...rest
+}) => {
+  return (
+    <Box pt={2} mt={6} mb={4} px={5} {...rest}>
+      <Text f={1} fontWeight="bold" textAlign="center" color="gray.medium">
+        {mode === Mode.RESTING && (
+          <div>
+            <Truncate length={40}>{konnectable.title}</Truncate>
 
-  render() {
-    const {
-      mode,
-      konnectable: {
-        __typename,
-        title,
-        user,
-        connection,
-        updated_at,
-        // @ts-ignore
-        file_extension,
-      },
-      ...rest
-    } = this.props
+            {konnectable.__typename === 'Attachment' && (
+              <MetadataFileExtension ext={konnectable.file_extension} />
+            )}
 
-    return (
-      <Box pt={2} mt={6} mb={4} px={5} {...rest}>
-        <Text f={1} fontWeight="bold" textAlign="center" color="gray.medium">
-          {mode === Mode.RESTING && (
-            <div>
-              <Truncate length={40}>{title}</Truncate>
+            {konnectable.__typename === 'Embed' && <MetadataPlay />}
+          </div>
+        )}
 
-              {__typename === 'Attachment' && (
-                <MetadataFileExtension ext={file_extension} />
-              )}
+        {mode === Mode.HOVER && (
+          <div>
+            {konnectable.connection && (
+              <div>
+                {konnectable.user.id === konnectable.connection.user.id ? (
+                  <div>Added by {konnectable.user.name}</div>
+                ) : (
+                  <div>Connected by {konnectable.connection.user.name}</div>
+                )}
+                {konnectable.connection.created_at}
+              </div>
+            )}
 
-              {__typename === 'Embed' && <MetadataPlay />}
-            </div>
-          )}
-
-          {mode === Mode.HOVER && (
-            <div>
-              {connection && (
-                <div>
-                  {user.id === connection.user.id ? (
-                    <div>Added by {user.name}</div>
-                  ) : (
-                    <div>Connected by {connection.user.name}</div>
-                  )}
-                  {connection.created_at}
-                </div>
-              )}
-
-              {!connection && (
-                <div>
-                  Added by {user.name}
-                  <br />
-                  {updated_at}
-                </div>
-              )}
-            </div>
-          )}
-        </Text>
-      </Box>
-    )
-  }
+            {!konnectable.connection && (
+              <div>
+                Added by {konnectable.user.name}
+                <br />
+                {konnectable.updated_at}
+              </div>
+            )}
+          </div>
+        )}
+      </Text>
+    </Box>
+  )
 }
+
+export default KonnectableMetadata

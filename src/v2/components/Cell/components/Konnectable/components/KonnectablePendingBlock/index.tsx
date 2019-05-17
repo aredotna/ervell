@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
@@ -28,18 +28,12 @@ interface Props {
   mode: Mode
 }
 
-export default class KonnectablePendingBlock extends PureComponent<Props> {
-  static defaultProps = {
-    mode: Mode.RESTING,
-  }
+export const KonnectablePendingBlock: React.FC<Props> = ({
+  mode = Mode.RESTING,
+}) => (
+  <Container mode={mode}>
+    <LoadingIndicator />
+  </Container>
+)
 
-  render() {
-    const { mode } = this.props
-
-    return (
-      <Container mode={mode}>
-        <LoadingIndicator />
-      </Container>
-    )
-  }
-}
+export default KonnectablePendingBlock

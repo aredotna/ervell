@@ -1,16 +1,20 @@
 import gql from 'graphql-tag'
 
-import konnectableChannelPreviewBlockFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelPreviewBlocks/fragments/konnectableChannelPreviewBlock'
+import konnectableChannelPreviewConnectableFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableSimpleDisplay/fragments/konnectableChannelPreviewConnectable'
 
 export default gql`
   query KonnectableChannelPreview($id: ID!, $amount: Int!) {
     channel(id: $id) {
       __typename
       id
-      blocks: blokks(per: $amount, sort_by: CREATED_AT, direction: DESC) {
-        ...KonnectableChannelPreviewBlock
+      preview_connectables: blokks(
+        per: $amount
+        sort_by: CREATED_AT
+        direction: DESC
+      ) {
+        ...KonnectableChannelPreviewConnectable
       }
     }
   }
-  ${konnectableChannelPreviewBlockFragment}
+  ${konnectableChannelPreviewConnectableFragment}
 `

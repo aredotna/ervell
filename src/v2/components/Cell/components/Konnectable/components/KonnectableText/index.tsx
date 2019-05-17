@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Text as KonnectableTextData } from '__generated__/Text'
+import { KonnectableText as KonnectableTextData } from '__generated__/KonnectableText'
 
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 
@@ -52,29 +52,23 @@ interface Props {
   mode: Mode
 }
 
-export default class Text extends PureComponent<Props> {
-  static defaultProps = {
-    mode: Mode.RESTING,
-  }
-
-  render() {
-    const {
-      text: { content },
-      mode,
-      ...rest
-    } = this.props
-
-    return (
-      <Container length={content.length} mode={mode} {...rest}>
-        {/* We should truncate content to prevent an excess of data being needlessly returned */}
-        {/* Try truncating markdown source then rendering it as a possible solution */}
-        <Typography
-          font="serif"
-          lineHeight={2}
-          color={{ [Mode.HOVER]: 'black', [Mode.RESTING]: 'gray.base' }[mode]}
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
-      </Container>
-    )
-  }
+export const KonnectableText: React.FC<Props> = ({
+  text: { content },
+  mode = Mode.RESTING,
+  ...rest
+}) => {
+  return (
+    <Container length={content.length} mode={mode} {...rest}>
+      {/* We should truncate content to prevent an excess of data being needlessly returned */}
+      {/* Try truncating markdown source then rendering it as a possible solution */}
+      <Typography
+        font="serif"
+        lineHeight={2}
+        color={{ [Mode.HOVER]: 'black', [Mode.RESTING]: 'gray.base' }[mode]}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    </Container>
+  )
 }
+
+export default KonnectableText
