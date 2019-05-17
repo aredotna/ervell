@@ -19,6 +19,7 @@ import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
+import { ChannelContentsThumbnail } from './components/ChannelContentsThumbnail'
 
 import { usePusher } from 'v2/hooks/usePusher'
 
@@ -206,74 +207,77 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
   )
 
   return (
-    <SortableGrid
-      axis="xy"
-      useWindowAsScrollContainer
-      transitionDuration={0}
-      onSortEnd={handleSortEnd}
-      wrapChildren={false}
-      distance={1}
-      {...rest}
-    >
-      {(channel.can.add_to || channel.visibility === 'private') && (
-        <GridItem>
-          <AddBlock
-            channel_id={channel.id}
-            onAddBlock={handleAddBlock}
-            isOverPrivateLimit={
-              // TODO: We need a `can` field for this
-              !channel.can.add_to && channel.visibility === 'private'
-            }
-          />
-        </GridItem>
-      )}
+    <>
+      <ChannelContentsThumbnail initialContents={channel.initial_contents} />
 
-      {chunked.map((pageSkeleton, pageIndex: number) => {
-        const pageKey = ActiveQueriesCollection.key(pageSkeleton)
+      <SortableGrid
+        axis="xy"
+        useWindowAsScrollContainer
+        transitionDuration={0}
+        onSortEnd={handleSortEnd}
+        wrapChildren={false}
+        distance={1}
+        {...rest}
+      >
+        {(channel.can.add_to || channel.can.add_to_as_premium) && (
+          <GridItem>
+            <AddBlock
+              channel_id={channel.id}
+              onAddBlock={handleAddBlock}
+              isElligbleForPremium={
+                !channel.can.add_to && channel.can.add_to_as_premium
+              }
+            />
+          </GridItem>
+        )}
 
-        return (
-          <React.Fragment key={pageKey}>
-            {!activeQueries[pageKey] && (
-              <Waypoint
-                onEnter={handleOnEnter(pageSkeleton)}
-                fireOnRapidScroll={false}
-                topOffset="-100%"
-                bottomOffset="-100%"
-              />
-            )}
+        {chunked.map((pageSkeleton, pageIndex: number) => {
+          const pageKey = ActiveQueriesCollection.key(pageSkeleton)
 
-            {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
-              const connectableKey = ConnectableCellsCollection.key(
-                connectableSkeleton
-              )
-              const connectable = collection[connectableKey]
-
-              return (
-                <ChannelContentsItem
-                  key={connectableKey}
-                  index={connectableIndex + pageIndex * chunkSize}
-                  connectableSkeleton={connectableSkeleton}
-                  channel={channel}
-                  connectable={connectable}
-                  context={connectables}
-                  onRemove={handleRemoveBlock}
-                  onChangePosition={handleSortEnd}
+          return (
+            <React.Fragment key={pageKey}>
+              {!activeQueries[pageKey] && (
+                <Waypoint
+                  onEnter={handleOnEnter(pageSkeleton)}
+                  fireOnRapidScroll={false}
+                  topOffset="-100%"
+                  bottomOffset="-100%"
                 />
-              )
-            })}
+              )}
 
-            {!activeQueries[pageKey] && (
-              <Waypoint
-                onEnter={handleOnEnter(pageSkeleton)}
-                fireOnRapidScroll={false}
-                topOffset="-100%"
-                bottomOffset="-100%"
-              />
-            )}
-          </React.Fragment>
-        )
-      })}
-    </SortableGrid>
+              {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
+                const connectableKey = ConnectableCellsCollection.key(
+                  connectableSkeleton
+                )
+                const connectable = collection[connectableKey]
+
+                return (
+                  <ChannelContentsItem
+                    key={connectableKey}
+                    index={connectableIndex + pageIndex * chunkSize}
+                    connectableSkeleton={connectableSkeleton}
+                    channel={channel}
+                    connectable={connectable}
+                    context={connectables}
+                    onRemove={handleRemoveBlock}
+                    onChangePosition={handleSortEnd}
+                  />
+                )
+              })}
+
+              {!activeQueries[pageKey] && (
+                <Waypoint
+                  onEnter={handleOnEnter(pageSkeleton)}
+                  fireOnRapidScroll={false}
+                  topOffset="-100%"
+                  bottomOffset="-100%"
+                />
+              )}
+            </React.Fragment>
+          )
+        })}
+      </SortableGrid>
+    </>
   )
 }
 

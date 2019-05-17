@@ -191,10 +191,10 @@ export interface Object_Link {
   __typename: "Link";
   href: string | null;
   counts: Object_Link_counts | null;
+  title: string | null;
   src: string | null;
   external_url: string | null;
   updated_at: string | null;
-  title: string | null;
   user: Object_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one

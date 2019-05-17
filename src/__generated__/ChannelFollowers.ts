@@ -29,6 +29,6 @@ export interface ChannelFollowers {
 
 export interface ChannelFollowersVariables {
   id: string;
-  page: number;
+  page?: number | null;
   per?: number | null;
 }

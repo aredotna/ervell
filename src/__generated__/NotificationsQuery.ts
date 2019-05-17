@@ -53,6 +53,7 @@ export interface NotificationsQuery_me_feed_notifications_item_Comment {
   __typename: "Comment";
   id: number | null;
   body: string | null;
+  href: string | null;
 }
 
 export interface NotificationsQuery_me_feed_notifications_item_Group {
@@ -95,6 +96,7 @@ export interface NotificationsQuery_me_feed_notifications_target_Comment {
   __typename: "Comment";
   id: number | null;
   body: string | null;
+  href: string | null;
 }
 
 export interface NotificationsQuery_me_feed_notifications_target_Group {

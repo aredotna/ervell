@@ -117,6 +117,10 @@ export interface ChannelFollowersPage_channel {
   collaborators: (ChannelFollowersPage_channel_collaborators | null)[] | null;
   connected_to_channels: (ChannelFollowersPage_channel_connected_to_channels | null)[] | null;
   share: ChannelFollowersPage_channel_share | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  canonical: string | null;
+  is_nsfw: boolean | null;
 }
 
 export interface ChannelFollowersPage {

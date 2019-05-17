@@ -15,7 +15,7 @@ storiesOf('AddBlock', module).add('default', () => (
       </GridItem>
 
       <GridItem>
-        <AddBlock channel_id="foobar" isOverPrivateLimit />
+        <AddBlock channel_id="foobar" isElligbleForPremium />
       </GridItem>
     </Grid>
   </Specimen>

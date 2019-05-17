@@ -1,14 +1,14 @@
 import gql from 'graphql-tag'
 
-import channelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel'
-import textFragment from 'v2/components/Cell/components/Konnectable/components/Text/fragments/text'
-import imageFragment from 'v2/components/Cell/components/Konnectable/components/Image/fragments/image'
-import linkFragment from 'v2/components/Cell/components/Konnectable/components/Link/fragments/link'
-import embedFragment from 'v2/components/Cell/components/Konnectable/components/Embed/fragments/embed'
-import attachmentFragment from 'v2/components/Cell/components/Konnectable/components/Attachment/fragments/attachment'
+import konnectableChannelFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannel/fragments/konnectableChannel'
+import konnectableTextFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableText/fragments/konnectableText'
+import konnectableImageFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableImage/fragments/konnectableImage'
+import konnectableLinkFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableLink/fragments/konnectableLink'
+import konnectableEmbedFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableEmbed/fragments/konnectableEmbed'
+import konnectableAttachmentFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableAttachment/fragments/konnectableAttachment'
+import konnectableMetadataFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata/fragments/konnectableMetadata'
+import konnectableBlockOverlayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay/fragments/konnectableBlockOverlay'
 import identifiableCellFragment from 'v2/components/Cell/components/Identifiable/fragments/identifiableCell'
-import metadataFragment from 'v2/components/Cell/components/Konnectable/components/Metadata/fragments/metadata'
-import blokkOverlayFragment from 'v2/components/Cell/components/Konnectable/components/BlokkOverlay/fragments/blokkOverlay'
 
 export default gql`
   fragment Object on DeedKkind {
@@ -21,23 +21,23 @@ export default gql`
         comments
       }
     }
-    ...Channel
-    ...Text
-    ...Image
-    ...Link
-    ...Embed
-    ...Attachment
+    ...KonnectableChannel
+    ...KonnectableText
+    ...KonnectableImage
+    ...KonnectableLink
+    ...KonnectableEmbed
+    ...KonnectableAttachment
     ...KonnectableMetadata
-    ...BlokkOverlay
+    ...KonnectableBlockOverlay
     ...IdentifiableCell
   }
-  ${channelFragment}
-  ${textFragment}
-  ${imageFragment}
-  ${linkFragment}
-  ${embedFragment}
-  ${attachmentFragment}
-  ${metadataFragment}
-  ${blokkOverlayFragment}
+  ${konnectableChannelFragment}
+  ${konnectableTextFragment}
+  ${konnectableImageFragment}
+  ${konnectableLinkFragment}
+  ${konnectableEmbedFragment}
+  ${konnectableAttachmentFragment}
+  ${konnectableMetadataFragment}
+  ${konnectableBlockOverlayFragment}
   ${identifiableCellFragment}
 `

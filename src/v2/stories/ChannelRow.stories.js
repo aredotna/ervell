@@ -11,20 +11,20 @@ import Grid from 'v2/components/UI/Grid'
 import Cell from 'v2/components/Cell'
 import ChannelRow from 'v2/components/ProfileChannels/components/ChannelRow'
 
-import blokkChannelFragment from 'v2/components/Cell/components/Konnectable/components/Channel/fragments/channel'
+import konnectableChannelFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannel/fragments/konnectableChannel'
 import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
 
 const CHANNEL_QUERY = gql`
   query ChannelRowStoryQuery {
     channel(id: 666) {
-      ...Channel
+      ...KonnectableChannel
       blokks(per: 5, sort_by: POSITION, direction: DESC) {
         ...KonnectableCell
       }
     }
   }
   ${konnectableCellFragment}
-  ${blokkChannelFragment}
+  ${konnectableChannelFragment}
 `
 storiesOf('ChannelRow', module).add('default', () => (
   <Specimen>

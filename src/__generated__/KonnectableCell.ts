@@ -39,14 +39,14 @@ export interface KonnectableCell_Text {
   id: number | null;
   href: string | null;
   counts: KonnectableCell_Text_counts | null;
-  title: string | null;
-  content: string | null;
   updated_at: string | null;
+  title: string | null;
   user: KonnectableCell_Text_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Text_connection | null;
+  content: string | null;
   source: KonnectableCell_Text_source | null;
 }
 
@@ -83,14 +83,14 @@ export interface KonnectableCell_Image {
   id: number | null;
   href: string | null;
   counts: KonnectableCell_Image_counts | null;
-  title: string | null;
-  src: string | null;
   updated_at: string | null;
+  title: string | null;
   user: KonnectableCell_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Image_connection | null;
+  src: string | null;
   source: KonnectableCell_Image_source | null;
 }
 
@@ -127,8 +127,6 @@ export interface KonnectableCell_Link {
   id: number | null;
   href: string | null;
   counts: KonnectableCell_Link_counts | null;
-  src: string | null;
-  external_url: string | null;
   updated_at: string | null;
   title: string | null;
   user: KonnectableCell_Link_user | null;
@@ -136,6 +134,8 @@ export interface KonnectableCell_Link {
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Link_connection | null;
+  src: string | null;
+  external_url: string | null;
   source: KonnectableCell_Link_source | null;
 }
 
@@ -172,14 +172,14 @@ export interface KonnectableCell_Embed {
   id: number | null;
   href: string | null;
   counts: KonnectableCell_Embed_counts | null;
-  title: string | null;
-  src: string | null;
   updated_at: string | null;
+  title: string | null;
   user: KonnectableCell_Embed_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Embed_connection | null;
+  src: string | null;
   source: KonnectableCell_Embed_source | null;
 }
 
@@ -216,15 +216,15 @@ export interface KonnectableCell_Attachment {
   id: number | null;
   href: string | null;
   counts: KonnectableCell_Attachment_counts | null;
-  title: string | null;
-  src: string | null;
-  file_extension: string | null;
   updated_at: string | null;
+  title: string | null;
   user: KonnectableCell_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Attachment_connection | null;
+  src: string | null;
+  file_extension: string | null;
   source: KonnectableCell_Attachment_source | null;
 }
 
@@ -271,6 +271,24 @@ export interface KonnectableCell_PendingBlock {
   source: KonnectableCell_PendingBlock_source | null;
 }
 
+export interface KonnectableCell_Channel_user {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface KonnectableCell_Channel_connection_user {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface KonnectableCell_Channel_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: KonnectableCell_Channel_connection_user | null;
+}
+
 export interface KonnectableCell_Channel_counts {
   __typename: "ChannelCounts";
   contents: number | null;
@@ -291,24 +309,6 @@ export interface KonnectableCell_Channel_owner_User {
 
 export type KonnectableCell_Channel_owner = KonnectableCell_Channel_owner_Group | KonnectableCell_Channel_owner_User;
 
-export interface KonnectableCell_Channel_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface KonnectableCell_Channel_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface KonnectableCell_Channel_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: KonnectableCell_Channel_connection_user | null;
-}
-
 export interface KonnectableCell_Channel_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -318,17 +318,17 @@ export interface KonnectableCell_Channel {
   __typename: "Channel";
   id: number | null;
   href: string | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
   updated_at: string | null;
-  counts: KonnectableCell_Channel_counts | null;
-  owner: KonnectableCell_Channel_owner | null;
   title: string | null;
   user: KonnectableCell_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: KonnectableCell_Channel_connection | null;
+  truncatedTitle: string | null;
+  visibility: string | null;
+  counts: KonnectableCell_Channel_counts | null;
+  owner: KonnectableCell_Channel_owner | null;
   source: KonnectableCell_Channel_source | null;
 }
 
