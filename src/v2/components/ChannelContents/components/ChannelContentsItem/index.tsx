@@ -71,7 +71,7 @@ export const ChannelContentsItem: React.FC<Props> = ({
 
   return (
     <SortableGridItem index={index} {...rest}>
-      <Cell.Skeletal mode="loading" />
+      <Cell.Skeletal />
     </SortableGridItem>
   )
 }
