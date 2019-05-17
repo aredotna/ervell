@@ -17,21 +17,20 @@ interface Props {
 }
 
 export const KonnectableDisplay: React.FC<Props> = ({ konnectable, mode }) => {
-  return {
-    Attachment: () => (
-      <KonnectableAttachment attachment={konnectable} mode={mode} />
-    ),
-    Channel: () => (
-      // @ts-ignore
-      <KonnectableChannel channel={konnectable} mode={mode} />
-    ),
-    Embed: () => <KonnectableEmbed embed={konnectable} mode={mode} />,
-    Image: () => <KonnectableImage image={konnectable} mode={mode} />,
-    Link: () => <KonnectableLink link={konnectable} mode={mode} />,
-    Text: () => (
-      // @ts-ignore
-      <KonnectableText text={konnectable} mode={mode} />
-    ),
-    PendingBlock: () => <KonnectablePendingBlock mode={mode} />,
-  }[konnectable.__typename]()
+  switch (konnectable.__typename) {
+    case 'Channel':
+      return <KonnectableChannel channel={konnectable} />
+    case 'Attachment':
+      return <KonnectableAttachment attachment={konnectable} />
+    case 'Embed':
+      return <KonnectableEmbed embed={konnectable} />
+    case 'Image':
+      return <KonnectableImage image={konnectable} />
+    case 'Link':
+      return <KonnectableLink link={konnectable} />
+    case 'Text':
+      return <KonnectableText text={konnectable} mode={mode} />
+    case 'PendingBlock':
+      return <KonnectablePendingBlock mode={mode} />
+  }
 }

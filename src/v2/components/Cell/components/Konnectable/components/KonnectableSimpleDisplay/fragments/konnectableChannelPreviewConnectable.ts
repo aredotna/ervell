@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  fragment KonnectableChannelPreviewBlock on Konnectable {
+  fragment KonnectableChannelPreviewConnectable on Konnectable {
     __typename
     ... on Model {
       id

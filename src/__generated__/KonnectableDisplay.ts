@@ -177,10 +177,10 @@ export interface KonnectableDisplay_Link {
   __typename: "Link";
   id: number | null;
   href: string | null;
+  title: string | null;
   src: string | null;
   external_url: string | null;
   updated_at: string | null;
-  title: string | null;
   user: KonnectableDisplay_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
