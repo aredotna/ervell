@@ -204,31 +204,23 @@ class Blocks extends Component {
             {!block && currentPage && (
               <BlocksContainer isEmpty>
                 <CurrentPage>
-                  <Text f={4}>Save</Text>
-                  <Text f={4}>
+                  <Text f={4}>Saving as a link:</Text>
+                  <Text f={4} color="gray.medium" mt={4}>
                     &quot;
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: unescape(truncate(currentPage.title, 40)),
+                        __html: unescape(truncate(currentPage.title, 30)),
                       }}
                     />
                     &quot;
                   </Text>
 
-                  <Text f={4}>as a link</Text>
-
-                  <Text
-                    f={1}
-                    my={7}
-                    font="mono"
-                    color="gray.semiBold"
-                    breakWord
-                  >
-                    <u>{unescape(truncate(currentPage.url, 40))}</u>
+                  <Text f={2} font="mono" color="gray.medium" breakWord>
+                    (<u>{unescape(truncate(currentPage.url, 30))}</u>)
                   </Text>
 
-                  <Text f={2} mt={7}>
-                    (You can also drag text or images here)
+                  <Text f={4} mt={7}>
+                    You can also drag text or images here
                   </Text>
                 </CurrentPage>
               </BlocksContainer>
