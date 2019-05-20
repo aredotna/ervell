@@ -11,6 +11,7 @@
     "deploy-storybook": "storybook-to-ghpages",
     "deploy": "sh scripts/deploy.sh",
     "extension": "NODE_ENV=development webpack --config src/extension/webpack.config.js --watch",
+    "extension:production": "NODE_ENV=production webpack --config src/extension/webpack.config.js --watch",
     "generate-types": "apollo codegen:generate --target typescript --outputFlat src/__generated__",
     "generate-types:watch": "yarn generate-types --watch",
     "jest": "jest",
