@@ -5,10 +5,6 @@ import { withRouter } from 'react-router-dom'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
-import Icons from 'v2/components/UI/Icons'
-import Close from 'v2/components/UI/Close'
-
-import Messenger from 'extension/src/lib/Messenger'
 
 const Container = styled(Box)`
   display: flex;
@@ -49,35 +45,16 @@ const Back = styled(Text).attrs({
     content: 'back';
   }
 `
-
-const Logo = styled(Icons).attrs({
-  name: 'ArenaMark',
-  size: 7,
-})``
-
 class Layout extends Component {
   static propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     history: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
     showBack: PropTypes.bool,
-    showClose: PropTypes.bool,
   }
 
   static defaultProps = {
     showBack: false,
-    showClose: true,
-  }
-
-  constructor(props) {
-    super(props)
-    this.messenger = new Messenger(window.top)
-  }
-
-  onClose = () => {
-    this.messenger.send({
-      action: 'close',
-    })
   }
 
   goBack = () => {
@@ -85,25 +62,11 @@ class Layout extends Component {
   }
 
   render() {
-    const { children, showBack, showClose } = this.props
+    const { children, showBack } = this.props
 
     return (
-      <Container p={5}>
-        <Top>
-          {showBack && <Back onClick={this.goBack} />}
-          <Logo />
-          {showClose && (
-            <Close
-              size={7}
-              thickness="2px"
-              onClick={this.onClose}
-              position="absolute"
-              top={0}
-              right={0}
-              zIndex={1}
-            />
-          )}
-        </Top>
+      <Container p={5} pb={0}>
+        <Top>{showBack && <Back onClick={this.goBack} />}</Top>
         {children}
       </Container>
     )

@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { reject, find, findIndex } from 'underscore'
+import { find, without } from 'underscore'
 
 import Messenger from 'extension/src/lib/Messenger'
 
-const TOTAL_BLOCK_LIMIT = 10
-
 export const ExtensionContext = React.createContext({
-  blocks: [],
-  selectedChannel: null,
-  pageUrl: null,
-  setPageUrl: () => {},
+  block: null,
+  selectedChannels: [],
+  currentPage: null,
   addBlock: () => {},
   removeBlock: () => {},
   editBlock: () => {},
   getBlock: () => {},
   selectChannel: () => {},
+  getChannel: () => {},
+  unselectChannel: () => {},
 })
 
 class Extension extends Component {
@@ -33,12 +32,16 @@ class Extension extends Component {
   }
 
   state = {
-    blocks: [],
-    selectedChannel: null,
-    pageUrl: null,
+    block: null,
+    selectedChannels: [],
+    currentPage: null,
   }
 
   componentDidMount() {
+    this.messenger.send({
+      action: 'getCurrentPage',
+    })
+
     this.messenger.send({
       action: 'getInitialBlock',
     })
@@ -48,43 +51,19 @@ class Extension extends Component {
     window.removeEventListener('message')
   }
 
-  setPageUrl = pageUrl => {
-    this.setState({
-      pageUrl,
-    })
-  }
+  editBlock = values => {
+    const { block } = this.state
 
-  getBlock = id => find(this.state.blocks, block => block.id === id)
+    const updatedBlock = { ...block, ...values }
 
-  editBlock = (id, values) => {
-    const { blocks } = this.state
-    const index = findIndex(blocks, block => block.id === id)
-
-    const updatedBlock = { ...blocks[index], ...values }
-
-    const updatedBlocks = [
-      ...blocks.slice(0, index),
-      updatedBlock,
-      ...blocks.slice(index + 1),
-    ]
-
-    this.setState({ blocks: updatedBlocks })
+    this.setState({ block: updatedBlock })
   }
 
   addBlock = block => {
-    // if we are over the limit, don't add any more blocks
-    if (this.state.blocks.length >= TOTAL_BLOCK_LIMIT) {
-      return false
-    }
-
-    this.setState({ blocks: [...this.state.blocks, block] })
-
-    // Route to blocks overview page
-    if (this.state.blocks.length > 0) {
-      this.props.history.push('/blocks')
-    }
-    return true
+    this.setState({ block: block })
   }
+
+  getChannel = id => find(this.state.selectedChannels, id)
 
   receiveMessage = message => {
     const { action, value } = message.data
@@ -93,54 +72,40 @@ class Extension extends Component {
       case 'drop':
         this.addBlock(value)
         break
+      case 'currentPage':
+        this.setState({ currentPage: value })
+        break
       default:
         break
     }
   }
 
-  removeBlock = id => {
-    const blocks = reject(this.state.blocks, block => block.id === id)
-    this.setState({ blocks })
-
-    // Route to blocks overview page
-    if (blocks.length === 0) {
-      this.props.history.push('/index.html')
-      this.messenger.send({
-        action: 'contract',
-      })
-    }
-  }
-
-  selectChannel = channel => {
+  selectChannel = channelId => {
     this.setState({
-      selectedChannel: channel,
+      selectedChannels: [...this.state.selectedChannels, channelId],
     })
   }
 
+  unselectChannel = channelId => {
+    const selectedChannels = without(this.state.selectedChannels, channelId)
+    this.setState({ selectedChannels })
+  }
+
   render() {
-    const { blocks, selectedChannel, pageUrl } = this.state
+    const { block, selectedChannels, currentPage } = this.state
     const { children } = this.props
-    const {
-      addBlock,
-      removeBlock,
-      editBlock,
-      getBlock,
-      selectChannel,
-      setPageUrl,
-    } = this
+    const { addBlock, editBlock, selectChannel, unselectChannel } = this
 
     return (
       <ExtensionContext.Provider
         value={{
-          blocks,
-          selectedChannel,
+          block,
+          selectedChannels,
           addBlock,
-          removeBlock,
           editBlock,
-          getBlock,
           selectChannel,
-          pageUrl,
-          setPageUrl,
+          unselectChannel,
+          currentPage,
         }}
       >
         {children}

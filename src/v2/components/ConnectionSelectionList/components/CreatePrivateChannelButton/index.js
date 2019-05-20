@@ -12,6 +12,7 @@ class CreatePrivateChannelButton extends Component {
     title: PropTypes.string.isRequired,
     createPrivateChannel: PropTypes.func.isRequired,
     onConnectionCreation: PropTypes.func.isRequired,
+    highlighted: PropTypes.bool,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -51,10 +52,10 @@ class CreatePrivateChannelButton extends Component {
 
   render() {
     const { mode, createdTitle } = this.state
-    const { title } = this.props
+    const { title, highlighted } = this.props
 
     return (
-      <ListButton onClick={this.createPrivateChannel}>
+      <ListButton onClick={this.createPrivateChannel} highlighted={highlighted}>
         <ColoredChannelSpan visibility="private">
           {
             {

@@ -9,13 +9,15 @@ import Layout from 'extension/src/components/Layout'
 import Messenger from 'extension/src/lib/Messenger'
 import withExtensionContext from 'extension/src/components/Extension/withExtension'
 
-import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
+import Text from 'v2/components/UI/Text'
+import { truncate } from 'v2/components/UI/Truncate'
 import Count from 'v2/components/UI/Count'
 
+import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
+
 import Block from 'extension/src/components/Blocks/components/Block'
-import SelectedChannel from 'extension/src/components/Blocks/components/SelectedChannel'
+import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
 
 import createBlockMutation from 'extension/src/components/Blocks/mutations/createBlock'
 
@@ -23,39 +25,51 @@ const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   flex: 1;
   position: relative;
   width: 100%;
+  justify-content: space-between;
 `
 
-const Top = styled(Box)`
+const Section = styled(Box)`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-direction: column;
   width: 100%;
 `
 
-const DropZone = styled(Box).attrs({ p: 7, mt: 10 })`
-  border: 2px dashed ${x => x.theme.colors.gray.semiLight};
+const BlocksContainer = styled(Box)`
+  display: flex;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+
+  ${props =>
+    props.isEmpty &&
+    `
+    background-color: ${props.theme.colors.gray.hint};
+  `}
 `
 
-const BlocksContainer = styled(Box).attrs({ mt: 7 })`
+const CurrentPage = styled(Box)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   justify-content: center;
-  position: relative;
-  flex-wrap: wrap;
-  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
 `
 
 const Bottom = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: flex-end;
   width: 100%;
 `
 
@@ -84,28 +98,6 @@ class Blocks extends Component {
     mode: 'resting',
   }
 
-  componentDidMount() {
-    const {
-      context: { setPageUrl },
-      query,
-    } = this.props
-    if (query && query.original_source_url) {
-      setPageUrl(query.original_source_url)
-    }
-  }
-
-  componentDidUpdate() {
-    const {
-      context: { blocks },
-    } = this.props
-
-    if (blocks.length > 0) {
-      this.messenger.send({
-        action: 'expand',
-      })
-    }
-  }
-
   componentWillUnmount() {
     window.removeEventListener('message', this.receiveMessage)
   }
@@ -122,15 +114,27 @@ class Blocks extends Component {
     }
   }
 
+  handleConnectionSelect = (isSelected, channelId) => {
+    const {
+      context: { selectChannel, unselectChannel },
+    } = this.props
+
+    if (isSelected) {
+      selectChannel(channelId)
+    } else {
+      unselectChannel(channelId)
+    }
+  }
+
   savePageAsLink = () => {
     const {
-      context: { selectedChannel, pageUrl },
+      context: { selectedChannels, currentPage },
       createBlock,
     } = this.props
 
     this.setState({ mode: 'saving' })
 
-    const values = { value: pageUrl, channel_id: selectedChannel.id }
+    const values = { value: currentPage.url, channel_ids: selectedChannels }
 
     createBlock({
       variables: values,
@@ -146,23 +150,34 @@ class Blocks extends Component {
   saveAndClose = () => {
     const {
       createBlock,
-      context: { blocks, selectedChannel },
+      context: { block, selectedChannels },
     } = this.props
 
+    // If no channels are selected, go ahead and close
+    if (selectedChannels.length === 0) {
+      this.setState({ mode: 'closing' })
+
+      return this.messenger.send({
+        action: 'close',
+      })
+    }
+
+    // if there is no block, go ahead and save the current page.
+    if (!block) {
+      return this.savePageAsLink()
+    }
+
+    // Now if we're all good, start the saving process
     this.setState({ mode: 'saving' })
 
-    Promise.all(
-      blocks.map(block => {
-        const values = {
-          ...omit(block, 'id', 'type'),
-          channel_id: selectedChannel.id,
-        }
+    const values = {
+      ...omit(block, 'id', 'type'),
+      channel_ids: selectedChannels,
+    }
 
-        return createBlock({
-          variables: values,
-        })
-      })
-    ).then(() => {
+    return createBlock({
+      variables: values,
+    }).then(() => {
       this.setState({ mode: 'closing' })
 
       this.messenger.send({
@@ -174,67 +189,78 @@ class Blocks extends Component {
   onKeyDown = () => {}
 
   render() {
-    const { blocks, removeBlock, selectedChannel } = this.props.context
+    const {
+      block,
+      removeBlock,
+      selectedChannels,
+      currentPage,
+    } = this.props.context
     const { mode } = this.state
 
     return (
-      <Layout tabIndex={0} onKeyDown={this.onKeyDown}>
+      <Layout>
         <Container>
-          <Top>
-            <DropZone>
-              <Text f={5}>Drop text, links or images here.</Text>
-            </DropZone>
-            {!blocks.length && (
-              <Box mt={3} align="center">
-                <Text f={3}>or</Text>
-                <Button
-                  f={4}
-                  my={2}
-                  onClick={this.savePageAsLink}
-                  disabled={!selectedChannel}
-                >
-                  {
-                    {
-                      resting: 'Save page as link',
-                      saving: 'Saving...',
-                      closing: 'Closing...',
-                      error: 'Error',
-                    }[mode]
-                  }
-                </Button>
-                <Text f={2} pl={4} color="gray.regular">
-                  ⌘ + shift + s
-                </Text>
-              </Box>
+          <Section mb={5}>
+            {!block && currentPage && (
+              <BlocksContainer isEmpty>
+                <CurrentPage>
+                  <Text f={4}>Saving as a link:</Text>
+                  <Text f={4} color="gray.medium" mt={4}>
+                    &quot;
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: unescape(truncate(currentPage.title, 30)),
+                      }}
+                    />
+                    &quot;
+                  </Text>
+
+                  <Text f={2} font="mono" color="gray.medium" breakWord>
+                    (<u>{unescape(truncate(currentPage.url, 30))}</u>)
+                  </Text>
+
+                  <Text f={4} mt={7}>
+                    You can also drag text or images here
+                  </Text>
+                </CurrentPage>
+              </BlocksContainer>
             )}
-            <BlocksContainer>
-              {blocks.map(block => (
+            {block && (
+              <BlocksContainer>
                 <Block block={block} key={block.id} removeBlock={removeBlock} />
-              ))}
-            </BlocksContainer>
-          </Top>
+              </BlocksContainer>
+            )}
+          </Section>
+
+          <Section mb={4} flex={1}>
+            <Box flex={1}>
+              <ConnectionSelectionList
+                onConnectionSelection={this.handleConnectionSelect}
+              />
+            </Box>
+          </Section>
 
           <Bottom>
-            <SelectedChannel />
+            <DividerButton f={4} my={4} onClick={this.saveAndClose}>
+              {mode === 'resting' && selectedChannels.length > 0 && (
+                <span>
+                  Save to&nbsp;
+                  <Count label="channel" amount={selectedChannels.length} />
+                  &nbsp;→
+                </span>
+              )}
 
-            {blocks.length > 0 && (
-              <Button f={4} my={4} onClick={this.saveAndClose}>
-                {mode === 'resting' && (
-                  <span>
-                    Connect&nbsp;
-                    <Count label="block" amount={blocks.length} />
-                    &nbsp;→
-                  </span>
-                )}
+              {mode === 'resting' && selectedChannels.length === 0 && (
+                <span>Cancel</span>
+              )}
 
-                {mode !== 'resting' &&
-                  {
-                    saving: 'Saving...',
-                    closing: 'Closing...',
-                    error: 'Error',
-                  }[mode]}
-              </Button>
-            )}
+              {mode !== 'resting' &&
+                {
+                  saving: 'Saving...',
+                  closing: 'Closing...',
+                  error: 'Error',
+                }[mode]}
+            </DividerButton>
           </Bottom>
         </Container>
       </Layout>

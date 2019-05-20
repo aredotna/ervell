@@ -39,9 +39,6 @@ class Pane {
     // So we can communicate with the iframe
     this.setupReceiver()
     this.messenger = new Messenger(this.frame.contentWindow)
-
-    // Focus iframe
-    this.frame.addEventListener('DOMContentLoaded', this.focusIframe)
   }
 
   close = () => {
@@ -59,10 +56,6 @@ class Pane {
     document.body.appendChild(iframe)
 
     return iframe
-  }
-
-  focusIframe = () => {
-    this.frame.contentWindow.focus()
   }
 
   showIframe = () => {
@@ -225,10 +218,6 @@ class Pane {
     }
   }
 
-  sendInitialData = () => {
-    this.sendData(this.msg)
-  }
-
   sendCurrentPage = () => {
     let { data } = new DataExtractor()
 
@@ -236,6 +225,8 @@ class Pane {
       ...data,
       type: 'Link',
       value: window.location.href,
+      url: window.location.href,
+      title: document.title,
     }
 
     this.messenger.send({
@@ -248,6 +239,10 @@ class Pane {
     this.messenger.send({
       action: 'saveCurrentPage',
     })
+  }
+
+  sendInitialData = () => {
+    this.sendData(this.msg)
   }
 
   sendData = msg => {
