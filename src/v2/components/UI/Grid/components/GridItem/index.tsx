@@ -7,12 +7,12 @@ import { multiply } from 'v2/styles/functions'
 
 import Box, { BoxProps } from 'v2/components/UI/Box'
 
-const SIZE = constants.blockWidth
-const GUTTER = constants.blockGutter
+export const SIZE = constants.blockWidth
+export const GUTTER = constants.blockGutter
 
 export const gutterMargins = css`
-  ${props => `
-    margin: 0 ${GUTTER} ${multiply(GUTTER, props.gutterSpacing)} ${GUTTER};
+  ${({ gutterSpacing }: { gutterSpacing: number }) => `
+    margin: 0 ${GUTTER} ${multiply(GUTTER, gutterSpacing)} ${GUTTER};
   `}
 `
 
