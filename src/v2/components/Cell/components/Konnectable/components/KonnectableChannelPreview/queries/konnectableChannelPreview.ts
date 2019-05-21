@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import konnectableChannelPreviewConnectableFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableSimpleDisplay/fragments/konnectableChannelPreviewConnectable'
+import konnectableSimpleDisplayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableSimpleDisplay/fragments/konnectableSimpleDisplay'
 
 export default gql`
   query KonnectableChannelPreview($id: ID!, $amount: Int!) {
@@ -12,9 +12,9 @@ export default gql`
         sort_by: CREATED_AT
         direction: DESC
       ) {
-        ...KonnectableChannelPreviewConnectable
+        ...KonnectableSimpleDisplay
       }
     }
   }
-  ${konnectableChannelPreviewConnectableFragment}
+  ${konnectableSimpleDisplayFragment}
 `

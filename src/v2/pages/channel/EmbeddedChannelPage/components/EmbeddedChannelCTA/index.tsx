@@ -8,13 +8,9 @@ const Container = styled(Box).attrs({
   px: 6,
 })`
   display: flex;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  width: 100%;
   height: ${props => props.theme.constantValues.topBarHeight};
-  background-color: white;
-  z-index: 1;
+  flex-shrink: 0;
 `
 
 export const EmbeddedChannelCTA = ({ channel }) => {
