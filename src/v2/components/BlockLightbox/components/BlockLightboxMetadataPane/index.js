@@ -31,6 +31,12 @@ export default class BlockLightboxMetadataPane extends PureComponent {
 
   openManageFor = autoFocus => e => {
     e.preventDefault()
+    if (
+      window.getSelection().toString() ||
+      window.getSelection().toString() !== ''
+    ) {
+      return false
+    }
     this.setState({ mode: 'manage', autoFocus })
   }
 
