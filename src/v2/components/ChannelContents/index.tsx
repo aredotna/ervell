@@ -255,7 +255,6 @@ const ChannelContents: React.FC<ChannelContentsProps> = ({
                   <ChannelContentsItem
                     key={connectableKey}
                     index={connectableIndex + pageIndex * chunkSize}
-                    connectableSkeleton={connectableSkeleton}
                     channel={channel}
                     connectable={connectable}
                     context={connectables}

@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from 'react'
+import React, { memo, useState, useCallback } from 'react'
 import { SortableElement } from 'react-sortable-hoc'
+
+import { ChannelContentsConnectable as ChannelContentsConnectableData } from '__generated__/ChannelContentsConnectable'
 
 import Cell from 'v2/components/Cell'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -9,10 +11,9 @@ const SortableGridItem = SortableElement(GridItem)
 
 interface Props {
   channel: any
-  connectable: any
-  connectableSkeleton: any
+  connectable: ChannelContentsConnectableData
   index: number
-  context: any
+  context: any[]
   onRemove: ({ id, type }: { id: number; type: string }) => any
   onChangePosition: ({
     oldIndex,
@@ -23,55 +24,49 @@ interface Props {
   }) => any
 }
 
-export const ChannelContentsItem: React.FC<Props> = ({
-  channel,
-  connectable,
-  connectableSkeleton,
-  index,
-  context,
-  onRemove,
-  onChangePosition,
-  ...rest
-}) => {
-  const [isHovering, setHover] = useState(false)
+export const ChannelContentsItem: React.FC<Props> = memo(
+  ({ channel, connectable, index, context, onRemove, onChangePosition }) => {
+    const [isHovering, setHover] = useState(false)
 
-  const cancelDrag = useCallback(e => {
-    e.preventDefault()
-    e.stopPropagation()
-  }, [])
+    const cancelDrag = useCallback(e => {
+      e.preventDefault()
+      e.stopPropagation()
+    }, [])
 
-  const startHover = useCallback(() => setHover(true), [])
-  const endHover = useCallback(() => setHover(false), [])
+    const startHover = useCallback(() => setHover(true), [])
+    const endHover = useCallback(() => setHover(false), [])
+    const handleChangePosition = useCallback(
+      (newIndex: number) => onChangePosition({ oldIndex: index, newIndex }),
+      [index, onChangePosition]
+    )
 
-  if (connectable) {
+    if (connectable) {
+      return (
+        <SortableGridItem
+          disabled={!channel.can.reorder_connections}
+          index={index}
+          onMouseEnter={startHover}
+          onMouseLeave={endHover}
+          onDrag={cancelDrag}
+        >
+          <Cell.Konnectable konnectable={connectable} context={context} />
+
+          {isHovering && (
+            <ConnectableContextMenu
+              channel={channel}
+              connectable={connectable}
+              onRemove={onRemove}
+              onChangePosition={handleChangePosition}
+            />
+          )}
+        </SortableGridItem>
+      )
+    }
+
     return (
-      <SortableGridItem
-        disabled={!channel.can.reorder_connections}
-        index={index}
-        onMouseEnter={startHover}
-        onMouseLeave={endHover}
-        onDrag={cancelDrag}
-        {...rest}
-      >
-        <Cell.Konnectable konnectable={connectable} context={context} />
-
-        {isHovering && (
-          <ConnectableContextMenu
-            channel={channel}
-            connectable={connectable}
-            onRemove={onRemove}
-            onChangePosition={newIndex =>
-              onChangePosition({ oldIndex: index, newIndex })
-            }
-          />
-        )}
-      </SortableGridItem>
+      <GridItem>
+        <Cell.Skeletal />
+      </GridItem>
     )
   }
-
-  return (
-    <SortableGridItem index={index} {...rest}>
-      <Cell.Skeletal />
-    </SortableGridItem>
-  )
-}
+)
