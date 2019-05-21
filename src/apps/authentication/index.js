@@ -63,7 +63,7 @@ app
     apolloMiddleware,
     render
   )
-  .get('/me/sign_out', logoutMiddleware, redirectToMiddleware)
+  .post('/me/sign_out', logoutMiddleware, redirectToMiddleware)
   .get('/me/refresh', refresh)
 
 module.exports = app
