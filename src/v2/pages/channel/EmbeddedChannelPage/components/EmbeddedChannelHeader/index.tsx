@@ -16,13 +16,9 @@ const Container = styled(Box).attrs({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
+  width: 100%;
   height: ${props => props.theme.constantValues.topBarHeight};
-  background-color: white;
-  z-index: 1;
+  flex-shrink: 0;
 `
 
 const Metadata = styled(Box)`

@@ -1,14 +1,22 @@
 import gql from 'graphql-tag'
 
-import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
+import konnectableSimpleDisplayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableSimpleDisplay/fragments/konnectableSimpleDisplay'
 
 export const embeddedChannelContentsFragment = gql`
   fragment EmbeddedChannelContents on Channel {
     __typename
     id
-    contents: blokks(per: 8, page: 1) {
-      ...KonnectableCell
+    href(absolute: true)
+    counts {
+      contents
+    }
+    contents: blokks(per: $per, page: 1) {
+      ...KonnectableSimpleDisplay
+      ... on ConnectableInterface {
+        title
+        href(absolute: true)
+      }
     }
   }
-  ${konnectableCellFragment}
+  ${konnectableSimpleDisplayFragment}
 `
