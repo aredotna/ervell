@@ -20,7 +20,15 @@ export default class BlockLightboxText extends PureComponent {
     mode: 'resting',
   }
 
-  openModal = () => this.setState({ mode: 'editing' })
+  openModal = () => {
+    if (
+      window.getSelection().toString() ||
+      window.getSelection().toString() !== ''
+    ) {
+      return false
+    }
+    this.setState({ mode: 'editing' })
+  }
 
   closeModal = () => this.setState({ mode: 'resting' })
 
