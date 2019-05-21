@@ -1,31 +1,11 @@
 import React, { useState, useRef, useCallback } from 'react'
-import styled from 'styled-components'
 
-import Box from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
 import Overlay from 'v2/components/UI/Overlay'
+import { ContextToggle } from 'v2/components/UI/ContextToggle'
 import { ContextMenuOptions } from './components/ContextMenuOptions'
 import { ContextMenuOption } from './components/ContextMenuOption'
 import { ContextMenuDivider } from './components/ContextMenuDivider'
-
-const Toggle = styled(Box).attrs({
-  role: 'button',
-  tabIndex: 0,
-})`
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  cursor: pointer;
-  user-select: none;
-
-  &:hover svg {
-    fill: black;
-  }
-`
 
 export const ContextMenu = ({ children, ...rest }) => {
   const [mode, setMode] = useState('resting')
@@ -46,13 +26,13 @@ export const ContextMenu = ({ children, ...rest }) => {
 
   return (
     <>
-      <Toggle
+      <ContextToggle
         ref={targetEl}
         onClick={{ open: closeMenu, resting: openMenu }[mode]}
         {...rest}
       >
         <Icons name="Ellipsis" color="gray.medium" />
-      </Toggle>
+      </ContextToggle>
 
       {mode === 'open' && (
         <Overlay
