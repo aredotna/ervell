@@ -50,12 +50,17 @@ export const ChannelContentsItem: React.FC<Props> = memo(
           onMouseLeave={endHover}
           onDrag={cancelDrag}
         >
-          <Cell.Konnectable konnectable={connectable} context={context} />
+          <Cell.Konnectable
+            konnectable={connectable}
+            context={context}
+            onOverlay={endHover}
+            onOverlayClose={startHover}
+          />
 
           {isHovering && (
             <>
               {channel.can.reorder_connections && (
-                <DragHandle position="absolute" top={8} left={8} zIndex={1} />
+                <DragHandle position="absolute" top={8} left={8} zIndex={0} />
               )}
 
               <ConnectableContextMenu
