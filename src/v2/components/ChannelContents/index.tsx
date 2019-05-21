@@ -221,6 +221,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
           onSortEnd={handleSortEnd}
           wrapChildren={false}
           distance={1}
+          useDragHandle
           {...rest}
         >
           {(channel.can.add_to || channel.can.add_to_as_premium) && (

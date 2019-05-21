@@ -6,6 +6,7 @@ import { ChannelContentsConnectable as ChannelContentsConnectableData } from '__
 import Cell from 'v2/components/Cell'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
+import { DragHandle } from 'v2/components/UI/DragHandle'
 
 const SortableGridItem = SortableElement(GridItem)
 
@@ -52,12 +53,18 @@ export const ChannelContentsItem: React.FC<Props> = memo(
           <Cell.Konnectable konnectable={connectable} context={context} />
 
           {isHovering && (
-            <ConnectableContextMenu
-              channel={channel}
-              connectable={connectable}
-              onRemove={onRemove}
-              onChangePosition={handleChangePosition}
-            />
+            <>
+              {channel.can.reorder_connections && (
+                <DragHandle position="absolute" top={8} left={8} zIndex={1} />
+              )}
+
+              <ConnectableContextMenu
+                channel={channel}
+                connectable={connectable}
+                onRemove={onRemove}
+                onChangePosition={handleChangePosition}
+              />
+            </>
           )}
         </SortableGridItem>
       )
