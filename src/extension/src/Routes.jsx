@@ -10,7 +10,6 @@ import withLoginStatus from 'v2/hocs/WithLoginStatus'
 import Login from 'extension/src/components/Login'
 import Blocks from 'extension/src/components/Blocks'
 import EditBlock from 'extension/src/components/EditBlock'
-import ChannelSelection from 'extension/src/components/ChannelSelection'
 
 const Routes = ({ isLoggedIn }) => (
   <Extension>
@@ -20,8 +19,7 @@ const Routes = ({ isLoggedIn }) => (
       {isLoggedIn && (
         <React.Fragment>
           <Route path="/blocks" component={Blocks} />
-          <Route path="/edit/:id" component={EditBlock} />
-          <Route path="/channels" component={ChannelSelection} />
+          <Route path="/edit" component={EditBlock} />
           <Route
             exact
             path="/index.html"

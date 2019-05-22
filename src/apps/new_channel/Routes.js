@@ -26,8 +26,11 @@ export default () => (
 
     <Route
       path="/new_channel/:user_id/:id/embed"
-      render={parseRoute(({ params }) => (
-        <EmbeddedChannelPage id={params.id} />
+      render={parseRoute(({ params, query }) => (
+        <EmbeddedChannelPage
+          id={params.id}
+          per={parseInt(query.per, 10) || 8}
+        />
       ))}
     />
 

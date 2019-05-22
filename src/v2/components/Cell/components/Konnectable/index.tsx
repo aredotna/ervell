@@ -51,6 +51,8 @@ interface Props {
   konnectable: KonnectableCellData
   context: ContextProps[]
   isPreviewable: boolean
+  onOverlay?: () => any
+  onOverlayClose?: () => any
 }
 
 interface State {
@@ -77,9 +79,17 @@ export class Konnectable extends PureComponent<Props> {
     this.setState({ mode: Mode.RESTING })
   }
 
-  onOverlay = () => this.setState({ mode: Mode.OVERLAY })
+  onOverlay = () => {
+    this.setState({ mode: Mode.OVERLAY })
+    const { onOverlay } = this.props
+    onOverlay && onOverlay()
+  }
 
-  onOverlayClose = () => this.setState({ mode: Mode.HOVER })
+  onOverlayClose = () => {
+    this.setState({ mode: Mode.HOVER })
+    const { onOverlayClose } = this.props
+    onOverlayClose && onOverlayClose()
+  }
 
   openBlock = (e: React.MouseEvent<HTMLElement>) => {
     const {

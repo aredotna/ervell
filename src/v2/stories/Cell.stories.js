@@ -8,12 +8,11 @@ import identifiableCellFragment from 'v2/components/Cell/components/Identifiable
 import konnectableCellFragment from 'v2/components/Cell/components/Konnectable/fragments/konnectableCell'
 
 import Specimen from 'v2/stories/__components__/Specimen'
-import States from 'v2/stories/__components__/States'
 
 import Box from 'v2/components/UI/Box'
 import Grid from 'v2/components/UI/Grid'
 import Cell from 'v2/components/Cell'
-import ChannelPreview from 'v2/components/Cell/components/Konnectable/components/ChannelPreview'
+import KonnectableChannelPreview from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelPreview'
 
 import BLOKK_QUERY from 'v2/components/Cell/components/Konnectable/queries/blokk'
 
@@ -154,15 +153,13 @@ storiesOf('Cell', module)
           position="relative"
           px={5}
         >
-          <ChannelPreview id="foobar" color="channel.open" />
+          <KonnectableChannelPreview id="foobar" color="channel.open" />
         </Box>
       </Grid>
     </Specimen>
   ))
   .add('Skeletal', () => (
-    <States
-      states={[{ mode: 'pending' }, { mode: 'loading' }, { mode: 'error' }]}
-    >
+    <Specimen>
       <Cell.Skeletal />
-    </States>
+    </Specimen>
   ))

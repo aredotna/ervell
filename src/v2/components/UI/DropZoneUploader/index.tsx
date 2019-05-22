@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone'
+import { eventWithFiles as isEventWithFiles } from 'v2/util/is'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -33,17 +33,35 @@ const Backdrop = styled(Box).attrs({
   z-index: 3;
 `
 
-const DropZoneUploader = ({ children, onUpload, onComplete, accept }) => {
+interface Props {
+  children: ({
+    isDragActive,
+    openUploadDialog,
+  }: {
+    isDragActive: boolean
+    openUploadDialog: () => any
+  }) => React.ReactNode
+  onUpload: ({ url, file }: { url: string; file: File }) => any
+  onComplete: () => any
+  accept: string
+}
+
+const DropZoneUploader: React.FC<Props> = ({
+  children,
+  onUpload,
+  onComplete,
+  accept,
+}) => {
   const [mode, setMode] = useState('resting')
 
   const handleDrop = useCallback(acceptedFiles => {
     if (acceptedFiles.length > 0) setMode('active')
   }, [])
 
-  const handleErrors = err => {
+  const handleErrors = useCallback(err => {
     console.error(err)
     setMode('error')
-  }
+  }, [])
 
   const {
     getRootProps,
@@ -62,22 +80,16 @@ const DropZoneUploader = ({ children, onUpload, onComplete, accept }) => {
 
   // Use `dragenter` event on `window` to trigger the actual drop-zone,
   // instead of the Component's element.
-  const showDropZone = () => setMode('active')
-  const handleFalseDrops = e => {
-    if (!e.dataTransfer.types.includes('Files')) {
-      // If you accidently drag some link on the page around, cancel
-      setMode('resting')
-    }
-  }
+  const showDropZone = useCallback(e => {
+    if (isEventWithFiles(e)) setMode('active')
+  }, [])
 
   useEffect(() => {
     window.addEventListener('dragenter', showDropZone)
-    window.addEventListener('drop', handleFalseDrops)
     return () => {
       window.removeEventListener('dragenter', showDropZone)
-      window.removeEventListener('drop', handleFalseDrops)
     }
-  })
+  }, [showDropZone])
 
   return (
     <>
@@ -119,13 +131,5 @@ const DropZoneUploader = ({ children, onUpload, onComplete, accept }) => {
     </>
   )
 }
-
-DropZoneUploader.propTypes = {
-  children: PropTypes.func.isRequired,
-  onUpload: PropTypes.func.isRequired,
-  onComplete: PropTypes.func.isRequired,
-}
-
-DropZoneUploader.defaultProps = {}
 
 export default DropZoneUploader

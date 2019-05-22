@@ -9,7 +9,6 @@ import { Input } from 'v2/components/UI/Inputs'
 import Text from 'v2/components/UI/Text'
 import RecentChannels from 'v2/components/ConnectionSelectionList/components/RecentChannels'
 import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
-import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
 
 const Container = styled.div`
   position: relative;
@@ -75,7 +74,7 @@ export default class ConnectionSelectionList extends Component {
   }, 200)
 
   render() {
-    const { query, debouncedQuery, mode } = this.state
+    const { debouncedQuery, mode } = this.state
     const { isOutlined, onConnectionSelection } = this.props
 
     return (
@@ -97,11 +96,6 @@ export default class ConnectionSelectionList extends Component {
 
         {mode === 'active' && (
           <div>
-            <CreatePrivateChannelButton
-              title={query}
-              onConnectionCreation={onConnectionSelection}
-            />
-
             <SearchedChannels
               query={debouncedQuery}
               onConnectionSelection={onConnectionSelection}

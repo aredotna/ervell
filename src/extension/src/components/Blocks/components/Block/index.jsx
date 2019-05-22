@@ -9,14 +9,14 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { FilledButton } from 'v2/components/UI/Buttons'
 
-const Container = styled(Box).attrs({
-  m: 4,
-})`
+const Container = styled(Box)`
   display: flex;
-  position: relative;
-  width: 100px;
-  height: 100px;
+  position: absolute;
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `
 
 const TextContainer = styled(Box).attrs({ p: 3 })`
@@ -89,46 +89,15 @@ const Overlay = styled(Box)`
   }
 `
 
-const RemoveButton = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: ${x => x.theme.colors.gray.regular};
-  border-radius: 1em;
-  width: 1em;
-  height: 1em;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${x => x.theme.colors.gray.medium};
-  }
-
-  &:after {
-    content: '𝖷';
-    color: ${x => x.theme.colors.white};
-    line-height: 1em;
-    vertical-align: text-top;
-    text-align: center;
-  }
-`
-
 class Block extends PureComponent {
   static propTypes = {
     block: PropTypes.object.isRequired,
-    removeBlock: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   }
 
-  onRemove = () => {
-    const { block, removeBlock } = this.props
-    removeBlock(block.id)
-  }
-
   onEdit = () => {
-    const { history, block } = this.props
-    history.push(`/edit/${block.id}`)
+    const { history } = this.props
+    history.push(`/edit`)
   }
 
   render() {
@@ -139,10 +108,8 @@ class Block extends PureComponent {
       <Container isText={isText}>
         {block.type === 'Text' && (
           <TextContainer>
-            <Text f={2} font="serif">
-              <Truncate suffix="..." length={220}>
-                {block.value}
-              </Truncate>
+            <Text f={3} font="serif">
+              {block.value}
             </Text>
           </TextContainer>
         )}
@@ -158,11 +125,10 @@ class Block extends PureComponent {
         {block.type === 'Image' && <ImageContainer src={block.value} />}
         <Overlay>
           {block.type !== 'Link' && (
-            <FilledButton f={0} bg="white" onClick={this.onEdit}>
+            <FilledButton f={2} bg="white" onClick={this.onEdit}>
               Edit
             </FilledButton>
           )}
-          <RemoveButton onClick={this.onRemove} />
         </Overlay>
       </Container>
     )

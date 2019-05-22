@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export default gql`
   mutation createBlockMutation(
-    $channel_id: ID!
+    $channel_ids: [ID]!
     $value: String
     $original_source_url: String
     $original_source_title: String
@@ -11,7 +11,7 @@ export default gql`
   ) {
     create_block(
       input: {
-        channel_ids: [$channel_id]
+        channel_ids: $channel_ids
         value: $value
         original_source_url: $original_source_url
         original_source_title: $original_source_title

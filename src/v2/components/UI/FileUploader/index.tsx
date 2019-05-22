@@ -11,7 +11,7 @@ import { ProgressBar } from 'v2/components/UI/ProgressBar'
 
 interface Props {
   files: File[]
-  onUpload: (props: any) => any
+  onUpload: ({ url, file }: { url: string; file: File }) => any
   onComplete: () => any
   onError?: (err: Error) => any
 }

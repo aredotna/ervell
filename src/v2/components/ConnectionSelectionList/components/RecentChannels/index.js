@@ -14,6 +14,7 @@ class RecentChannels extends Component {
     }).isRequired,
     isOutlined: PropTypes.bool,
     onConnectionSelection: PropTypes.func.isRequired,
+    cursor: PropTypes.number,
   }
 
   static defaultProps = {

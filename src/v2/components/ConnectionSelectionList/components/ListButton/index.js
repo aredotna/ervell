@@ -19,6 +19,12 @@ export default styled.div.attrs({
   background-color: ${x => x.theme.colors.gray.hint};
   line-height: 1;
 
+  ${props =>
+    props.highlighted &&
+    `
+    background-color: ${props.theme.colors.state.highlighted};
+  `}
+
   ${x =>
     x.disabled &&
     `

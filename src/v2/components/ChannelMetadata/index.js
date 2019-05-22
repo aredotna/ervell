@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { propType } from 'graphql-anywhere'
 
 import channelMetadataFragment from 'v2/components/ChannelMetadata/fragments/channelMetadata'
@@ -13,7 +13,7 @@ import ChannelMetadataConnections from 'v2/components/ChannelMetadata/components
 import ChannelMetadataActions from 'v2/components/ChannelMetadata/components/ChannelMetadataActions'
 import { ExpandableContext } from 'v2/components/UI/ExpandableSet'
 
-export default class ChannelMetadata extends Component {
+export default class ChannelMetadata extends PureComponent {
   static propTypes = {
     channel: propType(channelMetadataFragment).isRequired,
   }
