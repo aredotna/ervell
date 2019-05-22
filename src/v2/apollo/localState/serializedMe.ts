@@ -20,5 +20,6 @@ export default user => {
     avatar,
     name,
     authentication_token: user.authentication_token,
+    is_premium: user.is_premium,
   }
 }
