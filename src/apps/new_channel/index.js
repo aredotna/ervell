@@ -30,15 +30,15 @@ const resolve = [
 
 app
   .get(
-    '/new_channel/share/:token',
+    '/share/:token',
     (req, res, next) => {
       res.locals.sd.X_SHARE_TOKEN = req.params.token
       next()
     },
     ...resolve
   )
-  .get('/new_channel/:user_id/:channel_id', ...resolve)
-  .get('/new_channel/:user_id/:channel_id/followers', ...resolve)
-  .get('/new_channel/:user_id/:channel_id/embed', ...resolve)
+  .get('/:user_id/:channel_id', ...resolve)
+  .get('/:user_id/:channel_id/followers', ...resolve)
+  .get('/:user_id/:channel_id/embed', ...resolve)
 
 module.exports = app
