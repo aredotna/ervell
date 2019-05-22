@@ -142,6 +142,7 @@ export interface SharedChannelPage_channel_initial_contents_Text_counts {
 export interface SharedChannelPage_channel_initial_contents_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Text {
@@ -192,6 +193,7 @@ export interface SharedChannelPage_channel_initial_contents_Image_counts {
 export interface SharedChannelPage_channel_initial_contents_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Image {
@@ -244,6 +246,7 @@ export interface SharedChannelPage_channel_initial_contents_Link_counts {
 export interface SharedChannelPage_channel_initial_contents_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Link {
@@ -296,6 +299,7 @@ export interface SharedChannelPage_channel_initial_contents_Embed_counts {
 export interface SharedChannelPage_channel_initial_contents_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Embed {
@@ -347,6 +351,7 @@ export interface SharedChannelPage_channel_initial_contents_Attachment_counts {
 export interface SharedChannelPage_channel_initial_contents_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Attachment {
@@ -399,6 +404,7 @@ export interface SharedChannelPage_channel_initial_contents_PendingBlock_counts 
 export interface SharedChannelPage_channel_initial_contents_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_PendingBlock {

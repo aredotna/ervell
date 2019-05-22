@@ -9,6 +9,7 @@
 export interface ConnectableContextMenuConnectable_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Text_source {
@@ -18,6 +19,7 @@ export interface ConnectableContextMenuConnectable_Text_source {
 
 export interface ConnectableContextMenuConnectable_Text {
   __typename: "Text";
+  id: number | null;
   can: ConnectableContextMenuConnectable_Text_can | null;
   source: ConnectableContextMenuConnectable_Text_source | null;
 }
@@ -25,6 +27,7 @@ export interface ConnectableContextMenuConnectable_Text {
 export interface ConnectableContextMenuConnectable_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Image_source {
@@ -34,6 +37,7 @@ export interface ConnectableContextMenuConnectable_Image_source {
 
 export interface ConnectableContextMenuConnectable_Image {
   __typename: "Image";
+  id: number | null;
   can: ConnectableContextMenuConnectable_Image_can | null;
   source: ConnectableContextMenuConnectable_Image_source | null;
   find_original_url: string | null;
@@ -42,6 +46,7 @@ export interface ConnectableContextMenuConnectable_Image {
 export interface ConnectableContextMenuConnectable_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Link_source {
@@ -51,6 +56,7 @@ export interface ConnectableContextMenuConnectable_Link_source {
 
 export interface ConnectableContextMenuConnectable_Link {
   __typename: "Link";
+  id: number | null;
   can: ConnectableContextMenuConnectable_Link_can | null;
   source: ConnectableContextMenuConnectable_Link_source | null;
 }
@@ -58,6 +64,7 @@ export interface ConnectableContextMenuConnectable_Link {
 export interface ConnectableContextMenuConnectable_Embed_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Embed_source {
@@ -67,6 +74,7 @@ export interface ConnectableContextMenuConnectable_Embed_source {
 
 export interface ConnectableContextMenuConnectable_Embed {
   __typename: "Embed";
+  id: number | null;
   can: ConnectableContextMenuConnectable_Embed_can | null;
   source: ConnectableContextMenuConnectable_Embed_source | null;
 }
@@ -74,6 +82,7 @@ export interface ConnectableContextMenuConnectable_Embed {
 export interface ConnectableContextMenuConnectable_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_Attachment_source {
@@ -83,6 +92,7 @@ export interface ConnectableContextMenuConnectable_Attachment_source {
 
 export interface ConnectableContextMenuConnectable_Attachment {
   __typename: "Attachment";
+  id: number | null;
   can: ConnectableContextMenuConnectable_Attachment_can | null;
   source: ConnectableContextMenuConnectable_Attachment_source | null;
 }
@@ -90,10 +100,12 @@ export interface ConnectableContextMenuConnectable_Attachment {
 export interface ConnectableContextMenuConnectable_PendingBlock_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  remove: boolean | null;
 }
 
 export interface ConnectableContextMenuConnectable_PendingBlock {
   __typename: "PendingBlock";
+  id: number | null;
   can: ConnectableContextMenuConnectable_PendingBlock_can | null;
 }
 
@@ -104,6 +116,7 @@ export interface ConnectableContextMenuConnectable_Channel_can {
 
 export interface ConnectableContextMenuConnectable_Channel {
   __typename: "Channel";
+  id: number | null;
   can: ConnectableContextMenuConnectable_Channel_can | null;
 }
 
