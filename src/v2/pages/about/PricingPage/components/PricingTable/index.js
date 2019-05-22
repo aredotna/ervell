@@ -7,7 +7,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 
-import WithLoginStatus from 'v2/hocs/WithLoginStatus'
+import WithSerializedMe from 'v2/hocs/WithSerializedMe'
 
 const Table = styled(Box).attrs({ mb: 7 })`
   display: flex;
@@ -99,14 +99,24 @@ const Feature = styled(Text).attrs({
 
 class PricingTable extends PureComponent {
   static propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired,
+    serializedMe: PropTypes.shape({
+      id: PropTypes.number,
+      is_premium: PropTypes.bool,
+    }),
   }
 
   render() {
-    const { isLoggedIn } = this.props
+    const { serializedMe } = this.props
+
+    const isLoggedIn = serializedMe && serializedMe.id !== null
+    const isPremium = isLoggedIn && serializedMe.is_premium
 
     const signUpLink = isLoggedIn ? '/' : '/sign_up'
-    const upgradeLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium'
+    const signUpCopy = isLoggedIn ? '👍 Thank you!' : 'Sign up'
+
+    const premiumButtonCopy = isPremium ? '👍 Thank you!' : 'Join w/ Premium'
+    const premiumLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium'
+
     const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up'
 
     return (
@@ -115,8 +125,8 @@ class PricingTable extends PureComponent {
           <PlanTitle>Are.na</PlanTitle>
           <PlanPrice>Free</PlanPrice>
           <PlanSubPrice>&nbsp;</PlanSubPrice>
-          <CTAButton color="black" href={signUpLink}>
-            Sign up
+          <CTAButton color="black" href={signUpLink} disabled={isLoggedIn}>
+            {signUpCopy}
           </CTAButton>
           <Features>
             <Feature>Unlimited public blocks*</Feature>
@@ -127,7 +137,9 @@ class PricingTable extends PureComponent {
           <PlanTitle color="state.premium">Are.na Premium</PlanTitle>
           <PlanPrice>$5 / month</PlanPrice>
           <PlanSubPrice>or $45 / year</PlanSubPrice>
-          <PremiumButton href={upgradeLink}>Join w/ Premium</PremiumButton>
+          <PremiumButton href={premiumLink} disabled={isPremium}>
+            {premiumButtonCopy}
+          </PremiumButton>
           <Features>
             <Feature>Unlimited public blocks*</Feature>
             <Feature fontWeight="bold">Unlimited private blocks</Feature>
@@ -153,4 +165,4 @@ class PricingTable extends PureComponent {
   }
 }
 
-export default WithLoginStatus(PricingTable)
+export default WithSerializedMe(PricingTable)

@@ -9,6 +9,7 @@ export default gql`
       initials
       avatar
       authentication_token
+      is_premium
     }
   }
 `
