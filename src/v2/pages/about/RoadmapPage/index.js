@@ -23,6 +23,8 @@ import {
 import constants from 'v2/styles/constants'
 import GoalMeter from 'v2/pages/about/RoadmapPage/components/GoalMeter'
 
+import WithSerializedMe from 'v2/hocs/WithSerializedMe'
+
 const Container = styled(Box).attrs({
   mt: 9,
 })``
@@ -86,13 +88,17 @@ const PremiumButton = styled(Button).attrs({
   }
 `
 
-export default class RoadmapPage extends PureComponent {
+class RoadmapPage extends PureComponent {
   static propTypes = {
     roadmap: PropTypes.shape.isRequired,
+    serializedMe: PropTypes.shape({
+      id: PropTypes.number,
+      is_premium: PropTypes.bool,
+    }),
   }
 
   render() {
-    const { roadmap } = this.props
+    const { roadmap, serializedMe } = this.props
     const dateOptions = {
       weekday: 'long',
       year: 'numeric',
@@ -103,6 +109,12 @@ export default class RoadmapPage extends PureComponent {
       'en-US',
       dateOptions
     )
+
+    const isLoggedIn = serializedMe && serializedMe.id !== null
+    const isPremium = isLoggedIn && serializedMe.is_premium
+
+    const premiumButtonCopy = isPremium ? '👍 Thank you!' : 'Go Premium'
+    const premiumLink = isLoggedIn ? '/settings/billing' : '/pricing'
 
     return (
       <Container pb={10}>
@@ -163,7 +175,9 @@ export default class RoadmapPage extends PureComponent {
               display="flex"
               flexDirection="column"
             >
-              <PremiumButton href="/pricing">Go Premium</PremiumButton>
+              <PremiumButton href={premiumLink} disabled={isPremium}>
+                {premiumButtonCopy}
+              </PremiumButton>
               <Text f={2} textAlign="center" mt={4}>
                 Premium members currently contribute&nbsp;
                 <br />
@@ -353,3 +367,5 @@ export default class RoadmapPage extends PureComponent {
     )
   }
 }
+
+export default WithSerializedMe(RoadmapPage)
