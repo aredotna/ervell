@@ -44,6 +44,11 @@ browser.commands.onCommand.addListener(command => {
   })
 })
 
-browser.commands.getAll().then(commands => {
-  console.log('commands', commands)
+browser.runtime.onInstalled.addListener(object => {
+  if (object.reason === 'install') {
+    browser.tabs.create({
+      url:
+        'http://help.are.na/knowledge_base/topics/how-do-i-use-the-browser-extension',
+    })
+  }
 })
