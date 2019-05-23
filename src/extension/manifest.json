@@ -3,23 +3,6 @@
   "name": "Are.na",
   "description": "Assemble and connect information.",
   "version": "0.3",
-  "commands": {
-    "save-page": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+0"
-      },
-      "description": "Save current page to selected channel"
-    },
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "windows": "Ctrl+Shift+F",
-        "mac": "Command+Shift+F",
-        "chromeos": "Ctrl+Shift+F",
-        "linux": "Ctrl+Shift+F"
-      }
-    }
-  },
   "browser_action": {
     "default_icon": "icon-128.png",
     "default_title": "Are.na"
@@ -40,21 +23,14 @@
     "identity"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persist": false
   },
-  "web_accessible_resources": [
-    "/",
-    "index.html",
-    "iframe.css"
-  ],
+  "web_accessible_resources": ["/", "index.html", "iframe.css"],
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "injectiframe.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["injectiframe.js"]
     }
   ]
 }
