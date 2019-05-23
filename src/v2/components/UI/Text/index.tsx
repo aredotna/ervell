@@ -1,20 +1,32 @@
 import styled, { css } from 'styled-components'
 import {
-  display,
-  space,
-  textColor,
-  fontFamily,
-  fontWeight,
-  fontStyle,
-  fontSize,
-  lineHeight,
-  textAlign,
-  width,
-  minWidth,
-  maxWidth,
-  themeGet,
   alignItems,
+  AlignItemsProps,
+  display,
+  DisplayProps,
+  fontFamily,
+  FontFamilyProps,
+  fontSize,
+  FontSizeProps,
+  fontStyle,
+  FontStyleProps,
+  fontWeight,
+  FontWeightProps,
   justifyContent,
+  JustifyContentProps,
+  lineHeight,
+  LineHeightProps,
+  maxWidth,
+  MaxWidthProps,
+  minWidth,
+  MinWidthProps,
+  space,
+  SpaceProps,
+  textAlign,
+  TextAlignProps,
+  textColor,
+  themeGet,
+  width,
 } from 'styled-system'
 
 import { preset } from 'v2/styles/functions'
@@ -27,29 +39,29 @@ import {
 } from 'v2/styles/mixins'
 
 export const baseMixin = css`
+  ${antialiased}
   ${preset(fontFamily, { font: 'sans' })}
   ${preset(fontSize, { f: 4 })}
   ${preset(lineHeight, { lineHeight: 1 })}
   ${preset(textColor, { color: 'gray.base' })}
-  ${antialiased}
 `
 
 export const mixin = css`
   box-sizing: border-box;
+  ${alignItems}
   ${baseMixin}
   ${display}
-  ${width}
-  ${minWidth}
-  ${maxWidth}
-  ${space}
-  ${fontWeight}
   ${fontStyle}
-  ${textAlign}
-  ${alignItems}
+  ${fontWeight}
   ${justifyContent}
-  ${props => props.neutralMarginsY && neutralMarginsY}
-  ${props => props.hyphenate && hyphenate}
+  ${maxWidth}
+  ${minWidth}
+  ${space}
+  ${textAlign}
+  ${width}
   ${props => props.breakWord && breakWord}
+  ${props => props.hyphenate && hyphenate}
+  ${props => props.neutralMarginsY && neutralMarginsY}
   ${props => props.overflowEllipsis && overflowEllipsis}
   ${props => props.textTransform && `text-transform: ${props.textTransform};`}
   ${props => props.verticalAlign && `vertical-align: ${props.verticalAlign};`}
@@ -125,7 +137,34 @@ export const mixin = css`
   }
 `
 
-const Text = styled.div`
+export interface TextProps
+  extends React.HTMLProps<HTMLDivElement>,
+    DisplayProps,
+    SpaceProps,
+    FontFamilyProps,
+    FontWeightProps,
+    FontStyleProps,
+    FontSizeProps,
+    LineHeightProps,
+    TextAlignProps,
+    MinWidthProps,
+    MaxWidthProps,
+    AlignItemsProps,
+    JustifyContentProps {
+  breakWord?: boolean
+  hyphenate?: boolean
+  neutralMarginsY?: boolean
+  overflowEllipsis?: boolean
+  textTransform?: any
+  verticalAlign?: any
+  underlineLinks?: boolean
+  boldLinks?: boolean
+  hoverLinks?: {
+    color: string
+  }
+}
+
+export const Text = styled.div<TextProps>`
   ${mixin}
 `
 

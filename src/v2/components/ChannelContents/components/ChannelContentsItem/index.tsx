@@ -29,11 +29,6 @@ export const ChannelContentsItem: React.FC<Props> = memo(
   ({ channel, connectable, index, context, onRemove, onChangePosition }) => {
     const [isHovering, setHover] = useState(false)
 
-    const cancelDrag = useCallback(e => {
-      e.preventDefault()
-      e.stopPropagation()
-    }, [])
-
     const startHover = useCallback(() => setHover(true), [])
     const endHover = useCallback(() => setHover(false), [])
     const handleChangePosition = useCallback(
@@ -48,29 +43,28 @@ export const ChannelContentsItem: React.FC<Props> = memo(
           index={index}
           onMouseEnter={startHover}
           onMouseLeave={endHover}
-          onDrag={cancelDrag}
         >
           <Cell.Konnectable
             konnectable={connectable}
             context={context}
             onOverlay={endHover}
             onOverlayClose={startHover}
-          />
+          >
+            {isHovering && (
+              <>
+                {channel.can.reorder_connections && (
+                  <DragHandle position="absolute" top={8} left={8} zIndex={1} />
+                )}
 
-          {isHovering && (
-            <>
-              {channel.can.reorder_connections && (
-                <DragHandle position="absolute" top={8} left={8} zIndex={0} />
-              )}
-
-              <ConnectableContextMenu
-                channel={channel}
-                connectable={connectable}
-                onRemove={onRemove}
-                onChangePosition={handleChangePosition}
-              />
-            </>
-          )}
+                <ConnectableContextMenu
+                  channel={channel}
+                  connectable={connectable}
+                  onRemove={onRemove}
+                  onChangePosition={handleChangePosition}
+                />
+              </>
+            )}
+          </Cell.Konnectable>
         </SortableGridItem>
       )
     }

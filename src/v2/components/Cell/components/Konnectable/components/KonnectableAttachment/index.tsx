@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 import { KonnectableAttachment as KonnectableAttachmentData } from '__generated__/KonnectableAttachment'
 
 import Box from 'v2/components/UI/Box'
@@ -28,14 +29,20 @@ const Ext = styled(Text).attrs({
 
 interface Props {
   attachment: KonnectableAttachmentData
+  mode: Mode
 }
 
-const KonnectableAttachment: React.FC<Props> = ({ attachment, ...rest }) => {
+const KonnectableAttachment: React.FC<Props> = ({
+  attachment,
+  mode,
+  ...rest
+}) => {
   if (attachment.src) {
     return (
       <KonnectableGeneric
         src={attachment.src}
         title={attachment.title}
+        mode={mode}
         {...rest}
       />
     )

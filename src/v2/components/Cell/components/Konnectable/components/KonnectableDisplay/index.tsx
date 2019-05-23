@@ -21,13 +21,13 @@ export const KonnectableDisplay: React.FC<Props> = ({ konnectable, mode }) => {
     case 'Channel':
       return <KonnectableChannel channel={konnectable} />
     case 'Attachment':
-      return <KonnectableAttachment attachment={konnectable} />
+      return <KonnectableAttachment attachment={konnectable} mode={mode} />
     case 'Embed':
-      return <KonnectableEmbed embed={konnectable} />
+      return <KonnectableEmbed embed={konnectable} mode={mode} />
     case 'Image':
-      return <KonnectableImage image={konnectable} />
+      return <KonnectableImage image={konnectable} mode={mode} />
     case 'Link':
-      return <KonnectableLink link={konnectable} />
+      return <KonnectableLink link={konnectable} mode={mode} />
     case 'Text':
       return <KonnectableText text={konnectable} mode={mode} />
     case 'PendingBlock':
