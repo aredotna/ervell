@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Query } from 'react-apollo'
 import styled from 'styled-components'
+import { unescape } from 'underscore'
 
 import constants from 'v2/styles/constants'
 
@@ -42,7 +43,7 @@ export const ChannelContentsFilter = ({ channel }) => {
     <>
       <SearchInput
         borderColor="transparent"
-        placeholder={`Filter ${channel.title}`}
+        placeholder={`Filter ${unescape(channel.title)}`}
         mr={constants.doubleBlockGutter}
         mb={6}
         query={query}
