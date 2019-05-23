@@ -3,7 +3,6 @@ import Waypoint from 'react-waypoint'
 import { ApolloClient } from 'apollo-client'
 import { graphql, withApollo } from 'react-apollo'
 import { SortableContainer } from 'react-sortable-hoc'
-import { first } from 'underscore'
 import sharify from 'sharify'
 
 import { chunk } from 'v2/util/chunk'
@@ -14,10 +13,7 @@ import * as ActiveQueriesCollection from 'v2/components/ChannelContents/lib/Acti
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
-import {
-  ChannelContents as ChannelContentsData,
-  ChannelContents_skeleton as ChannelContentsSkeletonData,
-} from '__generated__/ChannelContents'
+import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -30,8 +26,6 @@ import { usePusher } from 'v2/hooks/usePusher'
 const {
   data: { NODE_ENV },
 } = sharify
-
-const isClientSide = typeof window !== 'undefined'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -55,10 +49,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     >({})
 
     // Handles ordering of block grid items
-    const skeleton: ChannelContentsSkeletonData[] = isClientSide
-      ? channel.skeleton
-      : first(channel.skeleton, chunkSize)
-    const [connectables, setConnectables] = useState(skeleton)
+    const [connectables, setConnectables] = useState(channel.skeleton)
 
     // Handles actual contents of block grid items
     const [collection, setCollection] = useState(
