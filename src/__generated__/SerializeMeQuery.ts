@@ -13,6 +13,7 @@ export interface SerializeMeQuery_serializedMe {
   initials: string | null;
   avatar: string | null;
   authentication_token: string | null;
+  is_premium: boolean | null;
 }
 
 export interface SerializeMeQuery {

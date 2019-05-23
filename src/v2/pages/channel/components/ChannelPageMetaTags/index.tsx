@@ -5,6 +5,7 @@ import { ChannelPageMetaTags as ChannelPageMetaTagsData } from '__generated__/Ch
 import Title from 'v2/components/UI/Head/components/Title'
 import Description from 'v2/components/UI/Head/components/Description'
 import Canonical from 'v2/components/UI/Head/components/Canonical'
+import Image from 'v2/components/UI/Head/components/Image'
 
 interface Props {
   subtitle?: string
@@ -23,6 +24,8 @@ export const ChannelPageMetaTags: React.FC<Props> = ({ channel, subtitle }) => {
       )}
 
       <Canonical>{channel.canonical}</Canonical>
+
+      {channel.image_url && <Image>{channel.image_url}</Image>}
     </>
   )
 }

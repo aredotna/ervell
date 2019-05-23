@@ -8,7 +8,7 @@ import { channelContentsWithDataQuery } from './queries/channelContentsWithData'
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelContents from 'v2/components/ChannelContents'
-import { ChannelContentsPlaceholder } from '../ChannelContentsPlaceholder'
+import { ChannelContentsPlaceholder } from 'v2/components/ChannelContentsPlaceholder'
 
 interface Props {
   channel: {
