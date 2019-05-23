@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { addBlockFragment } from 'v2/components/AddBlock/fragments/addBlock'
 import { connectableContextMenuChannelFragment } from 'v2/components/ConnectableContextMenu/fragments/connectableContextMenu'
 import { channelContentsConnectableFragment } from 'v2/components/ChannelContents/fragments/channelContentsConnectable'
-import { channelContentsItemThumbnailFragment } from 'v2/components/ChannelContents/components/ChannelContentsThumbnail/fragments/channelContentsItemThumbnail'
 
 export default gql`
   fragment ChannelContents on Channel {
@@ -25,7 +24,6 @@ export default gql`
     ) {
       __typename
       ...ChannelContentsConnectable
-      ...ChannelContentsItemThumbnail
     }
     ...AddBlock
     ...ConnectableContextMenuChannel
@@ -33,5 +31,4 @@ export default gql`
   ${addBlockFragment}
   ${connectableContextMenuChannelFragment}
   ${channelContentsConnectableFragment}
-  ${channelContentsItemThumbnailFragment}
 `

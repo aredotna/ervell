@@ -121,7 +121,6 @@ export interface ChannelContents_initial_contents_Image {
   src: string | null;
   can: ChannelContents_initial_contents_Image_can | null;
   find_original_url: string | null;
-  meta_image: string | null;
 }
 
 export interface ChannelContents_initial_contents_Link_user {
@@ -174,7 +173,6 @@ export interface ChannelContents_initial_contents_Link {
   src: string | null;
   external_url: string | null;
   can: ChannelContents_initial_contents_Link_can | null;
-  meta_image: string | null;
 }
 
 export interface ChannelContents_initial_contents_Embed_user {
@@ -226,7 +224,6 @@ export interface ChannelContents_initial_contents_Embed {
   counts: ChannelContents_initial_contents_Embed_counts | null;
   src: string | null;
   can: ChannelContents_initial_contents_Embed_can | null;
-  meta_image: string | null;
 }
 
 export interface ChannelContents_initial_contents_Attachment_user {
@@ -279,7 +276,6 @@ export interface ChannelContents_initial_contents_Attachment {
   src: string | null;
   file_extension: string | null;
   can: ChannelContents_initial_contents_Attachment_can | null;
-  meta_image: string | null;
 }
 
 export interface ChannelContents_initial_contents_PendingBlock_user {
