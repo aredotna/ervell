@@ -22,6 +22,7 @@ const Container = styled.a`
   display: block;
   text-decoration: none;
   background-color: white;
+  user-select: none;
   ${preset(width, { width: constants.blockWidth })}
   ${preset(height, { height: constants.blockWidth })}
   ${preset(space, { mb: 8 })}
