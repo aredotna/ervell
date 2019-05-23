@@ -12,6 +12,8 @@ import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 
 import CenterStretchBox from 'extension/src/components/UI/CenterStretchBox'
 
+import Icons from 'v2/components/UI/Icons'
+
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -79,6 +81,8 @@ class Login extends Component {
       <Layout>
         <CenterStretchBox>
           <LoginForm onSubmit={this.handleSubmit}>
+            <Icons name="ArenaMark" size={8} mb={7} />
+
             <Input
               mb={6}
               type="email"
@@ -107,7 +111,7 @@ class Login extends Component {
               </ErrorMessage>
             )}
 
-            <Button type="submit">
+            <Button type="submit" mt={6}>
               {
                 {
                   resting: 'Log in',
