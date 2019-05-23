@@ -10,10 +10,10 @@ import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
-import ChannelContents from 'v2/components/ChannelContents'
 import { ChannelContentsFilter } from 'v2/components/ChannelContentsFilter'
 import { ChannelEmptyMessage } from 'v2/components/ChannelEmptyMessage'
 import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
+import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelContentsWithData'
 
 interface Variables {
   id: string
@@ -51,7 +51,7 @@ export default ({ id }) => {
                 !channel.can.add_to_as_premium ? (
                   <ChannelEmptyMessage my={8} channelOwner={channel.owner} />
                 ) : (
-                  <ChannelContents channel={channel} />
+                  <ChannelContentsWithData channel={channel} />
                 )}
               </>
             )

@@ -20,3 +20,7 @@ src/extension/src/config.js
 # Compiled server code
 server.dist.js
 server.dist.js.map
+
+# Temporary
+bench.rb
+bench.txt
