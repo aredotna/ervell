@@ -118,6 +118,24 @@ export const StronglyProposePremium = props => (
   </Banner>
 )
 
+//
+// TODO: DELETE THIS AFTER JUNE 4TH
+//
+export const MayConnectionLimit = props => (
+  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
+    <Box>
+      Starting June 4th, members without Premium will be limited to 500 total
+      connections
+    </Box>
+    <ButtonLink color="white" href="/blog/building-together" target="_blank">
+      Learn more
+    </ButtonLink>
+    <ButtonLink color="white" href="/settings/billing">
+      Upgrade
+    </ButtonLink>
+  </Banner>
+)
+
 interface LoggedOutExploreBlockProps {
   isLoggedIn: boolean
 }
@@ -180,6 +198,7 @@ export const LoggedOutChannel = LoggedOutProfile
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
+  MAY_CONNECTION_LIMIT: MayConnectionLimit,
   CONFIRM: Confirm,
   BOOKMARKLET: Bookmarklet,
   INVITE: Invite,
