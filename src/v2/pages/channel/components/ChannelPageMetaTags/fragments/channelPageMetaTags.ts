@@ -8,5 +8,6 @@ export const channelPageMetaTagsFragment = gql`
     meta_description: description(format: MARKDOWN)
     canonical: href(absolute: true)
     is_nsfw
+    image_url(size: DISPLAY)
   }
 `
