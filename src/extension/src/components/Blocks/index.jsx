@@ -10,8 +10,6 @@ import Messenger from 'extension/src/lib/Messenger'
 import withExtensionContext from 'extension/src/components/Extension/withExtension'
 
 import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
-import { truncate } from 'v2/components/UI/Truncate'
 import Count from 'v2/components/UI/Count'
 
 import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
@@ -20,6 +18,7 @@ import Block from 'extension/src/components/Blocks/components/Block'
 import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
 
 import createBlockMutation from 'extension/src/components/Blocks/mutations/createBlock'
+import CurrentPageInfo from 'extension/src/components/Blocks/components/CurrentPageInfo'
 
 const Container = styled(Box)`
   display: flex;
@@ -51,19 +50,6 @@ const BlocksContainer = styled(Box)`
     `
     background-color: ${props.theme.colors.gray.hint};
   `}
-`
-
-const CurrentPage = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
 `
 
 const Bottom = styled(Box)`
@@ -203,26 +189,7 @@ class Blocks extends Component {
           <Section mb={5}>
             {!block && currentPage && (
               <BlocksContainer isEmpty>
-                <CurrentPage>
-                  <Text f={4}>Saving as a link:</Text>
-                  <Text f={4} color="gray.medium" mt={4}>
-                    &quot;
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: unescape(truncate(currentPage.title, 30)),
-                      }}
-                    />
-                    &quot;
-                  </Text>
-
-                  <Text f={2} font="mono" color="gray.medium" breakWord>
-                    (<u>{unescape(truncate(currentPage.url, 30))}</u>)
-                  </Text>
-
-                  <Text f={4} mt={7}>
-                    You can also drag text or images here
-                  </Text>
-                </CurrentPage>
+                <CurrentPageInfo currentPage={currentPage} />
               </BlocksContainer>
             )}
             {block && (
@@ -241,7 +208,7 @@ class Blocks extends Component {
           </Section>
 
           <Bottom>
-            <DividerButton f={4} my={4} onClick={this.saveAndClose}>
+            <DividerButton f={4} mt={4} onClick={this.saveAndClose}>
               {mode === 'resting' && selectedChannels.length > 0 && (
                 <span>
                   Save to&nbsp;
