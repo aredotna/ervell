@@ -74,6 +74,8 @@ class Login extends Component {
       })
   }
 
+  openArena = () => window.open('https://www.are.na', '_blank')
+
   render() {
     const { email, password, mode, attributeErrors, errorMessage } = this.state
 
@@ -81,7 +83,7 @@ class Login extends Component {
       <Layout>
         <CenterStretchBox>
           <LoginForm onSubmit={this.handleSubmit}>
-            <Icons name="ArenaMark" size={8} mb={7} />
+            <Icons name="ArenaMark" size={8} mb={7} onClick={this.openArena} />
 
             <Input
               mb={6}
