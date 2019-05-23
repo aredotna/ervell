@@ -10,18 +10,35 @@ const Skeletal = styled(Box).attrs({
   p: 6,
   border: '1px solid',
   borderColor: 'gray.light',
+  borderRadius: '1px',
 })`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  overflow: hidden;
   width: ${constants.blockWidth};
   height: ${constants.blockWidth};
 
-  &:after {
+  &:after,
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     display: block;
-    content: '●';
-    color: ${colors.gray.semiLight};
+    content: '';
+    width: 150%;
+    height: 1px;
+    background-color: ${colors.gray.light};
+    transform-origin: 0 0;
+  }
+
+  &:after {
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+
+  &:before {
+    transform: rotate(-45deg) translate(-50%, -50%);
   }
 `
 
