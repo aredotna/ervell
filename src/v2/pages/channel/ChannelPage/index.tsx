@@ -14,6 +14,7 @@ import { ChannelContentsFilter } from 'v2/components/ChannelContentsFilter'
 import { ChannelEmptyMessage } from 'v2/components/ChannelEmptyMessage'
 import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
 import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelContentsWithData'
+import BottomBanner from 'v2/components/BottomBanner'
 
 interface Variables {
   id: string
@@ -53,6 +54,11 @@ export default ({ id }) => {
                 ) : (
                   <ChannelContentsWithData channel={channel} />
                 )}
+
+                <BottomBanner
+                  banner="LOGGED_OUT_CHANNEL"
+                  name={channel.title}
+                />
               </>
             )
           }}

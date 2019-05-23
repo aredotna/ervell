@@ -22,6 +22,7 @@ const Container = styled.a`
   display: block;
   text-decoration: none;
   background-color: white;
+  user-select: none;
   ${preset(width, { width: constants.blockWidth })}
   ${preset(height, { height: constants.blockWidth })}
   ${preset(space, { mb: 8 })}
@@ -53,6 +54,7 @@ interface Props {
   isPreviewable: boolean
   onOverlay?: () => any
   onOverlayClose?: () => any
+  children?: React.ReactNode
 }
 
 interface State {
@@ -109,7 +111,7 @@ export class Konnectable extends PureComponent<Props> {
 
   render() {
     const { mode } = this.state
-    const { konnectable, isPreviewable } = this.props
+    const { konnectable, isPreviewable, children } = this.props
 
     return (
       <Container
@@ -124,6 +126,8 @@ export class Konnectable extends PureComponent<Props> {
           konnectable.__typename === 'Channel' ? undefined : true
         }
       >
+        {children && children}
+
         {konnectable.__typename !== 'Channel' &&
           konnectable.counts.comments > 0 &&
           mode !== Mode.OVERLAY && (

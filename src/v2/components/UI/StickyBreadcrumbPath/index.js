@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Waypoint from 'react-waypoint'
 import styled from 'styled-components'
@@ -37,7 +37,7 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
   `}
 `
 
-export default class StickyBreadcrumbPath extends Component {
+export default class StickyBreadcrumbPath extends PureComponent {
   static Container = Container
   static Crumb = BreadcrumbPath.Crumb
 

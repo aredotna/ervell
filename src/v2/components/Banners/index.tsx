@@ -175,6 +175,8 @@ interface LoggedOutProfileProps {
 
 export const LoggedOutProfile = WithLoginStatus(__LoggedOutProfile__)
 
+export const LoggedOutChannel = LoggedOutProfile
+
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
@@ -183,4 +185,5 @@ export default {
   INVITE: Invite,
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
+  LOGGED_OUT_CHANNEL: LoggedOutChannel,
 }

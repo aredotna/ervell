@@ -23,7 +23,7 @@ const Container = styled(Box)`
 interface Props extends BoxProps {
   src: string
   title?: string
-  mode?: Mode
+  mode: Mode
 }
 
 export const KonnectableGeneric: React.FC<Props> = ({
