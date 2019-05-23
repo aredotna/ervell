@@ -11,7 +11,7 @@ interface Props {
   channelId: any
   connectableId: any
   connectableType: any
-  onRemove?: (props: any) => any
+  onRemove: ({ id, type }: { id: number; type: string }) => any
 }
 
 interface ConnectableContextMenuRemoveConnectionProps extends Props {

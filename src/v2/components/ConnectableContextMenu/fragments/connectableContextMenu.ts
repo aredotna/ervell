@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 export const connectableContextMenuChannelFragment = gql`
   fragment ConnectableContextMenuChannel on Channel {
+    __typename
+    id
     can {
       remove_connections: update
       reorder_connections: update
@@ -11,9 +13,14 @@ export const connectableContextMenuChannelFragment = gql`
 
 export const connectableContextMenuConnectableFragment = gql`
   fragment ConnectableContextMenuConnectable on Konnectable {
+    __typename
+    ... on Model {
+      id
+    }
     ... on Block {
       can {
         mute
+        remove: manage
       }
     }
     ... on Channel {
