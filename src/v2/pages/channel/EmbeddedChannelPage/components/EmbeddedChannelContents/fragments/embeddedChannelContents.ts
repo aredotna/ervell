@@ -10,7 +10,7 @@ export const embeddedChannelContentsFragment = gql`
     counts {
       contents
     }
-    contents: blokks(per: $per, page: 1) {
+    contents: blokks(per: $per, page: 1, sort_by: POSITION, direction: DESC) {
       ...KonnectableSimpleDisplay
       ... on ConnectableInterface {
         title

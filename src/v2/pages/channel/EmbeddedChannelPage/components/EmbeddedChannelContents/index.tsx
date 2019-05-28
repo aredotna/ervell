@@ -27,7 +27,7 @@ const Center = styled(Box).attrs({})`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   min-height: 100%;
 `
@@ -52,6 +52,12 @@ const Item = styled(Box).attrs({
 })`
   position: relative;
 `
+
+const Placeholder = styled(Box).attrs({
+  width: SIZE,
+  height: 0,
+  mx: 3,
+})``
 
 const Caption = styled(Text).attrs({
   f: 0,
@@ -120,6 +126,23 @@ export const EmbeddedChannelContents: React.FC<Props> = ({ channel }) => {
               </Link>
             )
           })}
+
+          {/*
+            Placeholders with 0 height allow us to justify contents, while
+            left-aligning the last row.
+           */}
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
         </Grid>
 
         <Box width="100%" textAlign="right" p={6}>
