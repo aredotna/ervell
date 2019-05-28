@@ -45,14 +45,14 @@
       max-width 80%
       margin 2em auto
       display block
+      height 800px !important
 
     img
       max-width 100%
 
     .arena-iframe
-      border 1px solid colors-gray-border
-      box-shadow 4px 4px 4px colors-gray-background
-      height 2150px !important
+      height 560px !important
+      max-width 100%
       margin 4em auto
       padding 1px
       display block
@@ -60,8 +60,7 @@
       +mobile()
         margin 4em 0
         min-width 95%
-      +below(400px)
-        height 500px !important
+        height 770px !important
 
     h1, h2, h3, h4, h5, h6
       collapsed-margins(.5em)
@@ -131,6 +130,8 @@
       top 50%
       left 50%
       transform translate(-50%, -50%)
+
+
 
   &__overlay
     position absolute
