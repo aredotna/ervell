@@ -6,7 +6,7 @@ import Box from 'v2/components/UI/Box'
 import { FilledButton } from 'v2/components/UI/Buttons'
 import DropZoneUploader from 'v2/components/UI/DropZoneUploader'
 import { AddBlockInner } from 'v2/components/AddBlock/components/AddBlockInner'
-import { AddBlockPrivateCTAInner } from 'v2/components/AddBlock/components/AddBlockPrivateCTAInner'
+import { AddBlockCTAInner } from 'v2/components/AddBlock/components/AddBlockCTAInner'
 
 import createBlockMutation from 'v2/components/AddBlock/mutations/createBlock'
 
@@ -123,7 +123,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
           <Container pt={6} px={6}>
             {isElligbleForPremium ? (
               <>
-                <AddBlockPrivateCTAInner />
+                <AddBlockCTAInner />
                 <Button href="/settings/billing">Register for Premium</Button>
               </>
             ) : (
