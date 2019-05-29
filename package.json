@@ -243,7 +243,7 @@
     "storybook-react-router": "^1.0.5",
     "typescript": "3.3.3",
     "webpack": "^4.30.0",
-    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-chrome-extension-reloader": "^1.3.0",
     "webpack-command": "^0.4.1",
     "webpack-dev-middleware": "^3.6.2",

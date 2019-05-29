@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import styled from 'styled-components'
+import browser from 'webextension-polyfill'
 
 import loginMutation from 'extension/src/components/Login/mutations/loginMutation'
 import Layout from 'extension/src/components/Layout'
@@ -60,10 +61,18 @@ class Login extends Component {
       })
       .then(({ data: { login: { me } } }) => {
         this.setState({ mode: 'redirecting' })
-        window.localStorage.setItem(
-          'authentication_token',
-          me.authentication_token
-        )
+
+        try {
+          window.localStorage.setItem(
+            'authentication_token',
+            me.authentication_token
+          )
+        } catch {
+          browser.storage.local.set({
+            authentication_token: me.authentication_token,
+          })
+        }
+
         window.location.reload()
       })
       .catch(err => {
