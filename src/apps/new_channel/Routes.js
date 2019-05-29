@@ -11,21 +11,21 @@ import EmbeddedChannelPage from 'v2/pages/channel/EmbeddedChannelPage'
 export default () => (
   <Switch>
     <Route
-      path="/new_channel/share/:token"
+      path="/share/:token"
       render={parseRoute(({ params }) => (
         <SharedChannelPage token={params.token} />
       ))}
     />
 
     <Route
-      path="/new_channel/:user_id/:id/followers"
+      path="/:user_id/:id/followers"
       render={parseRoute(({ params }) => (
         <ChannelFollowersPage id={params.id} />
       ))}
     />
 
     <Route
-      path="/new_channel/:user_id/:id/embed"
+      path="/:user_id/:id/embed"
       render={parseRoute(({ params, query }) => (
         <EmbeddedChannelPage
           id={params.id}
@@ -35,7 +35,7 @@ export default () => (
     />
 
     <Route
-      path="/new_channel/:user_id/:id"
+      path="/:user_id/:id"
       render={parseRoute(({ params }) => (
         <ChannelPage id={params.id} />
       ))}
