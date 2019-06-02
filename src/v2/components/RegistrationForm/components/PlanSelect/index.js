@@ -119,7 +119,7 @@ export default class PlanSelector extends Component {
             <Text f={5} pb={2}>
               <strong>Basic</strong>
             </Text>
-            <Text f={2}>Limited to 50 private blocks</Text>
+            <Text f={2}>Limited to 500 total blocks</Text>
             <Text f={1}>
               <strong>Free</strong>
             </Text>
@@ -131,7 +131,7 @@ export default class PlanSelector extends Component {
             <Text f={5} pb={2}>
               <strong>Premium</strong>
             </Text>
-            <Text f={1}>Unlimited private blocks + more</Text>
+            <Text f={1}>Unlimited public and private blocks + more</Text>
             <Text f={1}>
               <strong>$5/month or $45/year</strong>
             </Text>
