@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 
 const Container = styled(Box).attrs(({ p, borderColor, borderRadius }) => ({
   border: '1px solid',
@@ -17,9 +18,7 @@ const Container = styled(Box).attrs(({ p, borderColor, borderRadius }) => ({
   overflow: hidden;
 `
 
-const MeterProgress = styled(Box).attrs(({ borderRadius }) => ({
-  borderRadius: borderRadius,
-}))`
+const MeterProgress = styled(Box)`
   position: absolute;
   top: 0;
   left: 0;
@@ -30,6 +29,11 @@ const MeterProgress = styled(Box).attrs(({ borderRadius }) => ({
       `colors.${props.startColor}`
     )(props)}, ${themeGet(`colors.${props.endColor}`)(props)});
   `}
+`
+
+const Label = styled(Text)`
+  position: relative;
+  text-align: center;
 `
 
 interface MeterProps {
@@ -54,6 +58,7 @@ export const Meter: React.FC<MeterProps> = ({
   borderColor = 'gray.regular',
   p = 4,
   mb = 0,
+  children,
   ...rest
 }) => {
   return (
@@ -68,10 +73,10 @@ export const Meter: React.FC<MeterProps> = ({
       <MeterProgress
         startColor={startColor}
         endColor={endColor}
-        borderRadius={borderRadius}
         amount={amount}
         limit={limit}
       />
+      <Label>{children}</Label>
     </Container>
   )
 }

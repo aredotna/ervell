@@ -9,6 +9,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import RadioOptions from 'v2/components/UI/RadioOptions'
 import PrivateBlocksMeter from 'v2/components/PrivateBlocksMeter'
+import TotalBlocksMeter from 'v2/components/TotalBlocksMeter'
 
 const OptionLabel = styled(Text).attrs({
   f: 4,
@@ -37,6 +38,12 @@ const OptionDescription = styled(Text).attrs({
 })`
   display: flex;
   justify-content: space-between;
+`
+
+const Link = styled.a`
+  &:hover {
+    color: black;
+  }
 `
 
 export default class PlanSelection extends PureComponent {
@@ -87,7 +94,8 @@ export default class PlanSelection extends PureComponent {
                   <OptionDescription>
                     <span>
                       Basic members are limited to{' '}
-                      {me.non_premium_private_connections_limit} private blocks.
+                      {me.non_premium_private_connections_limit} private blocks{' '}
+                      and {me.non_premium_connections_limit} total blocks.
                     </span>
                   </OptionDescription>
                 </Option>
@@ -95,7 +103,22 @@ export default class PlanSelection extends PureComponent {
             </RadioOptions.Option>
 
             {selectedValue === 'basic' && (
-              <PrivateBlocksMeter me={me} my={6} ml={8} />
+              <Box ml={8} mb={6}>
+                <PrivateBlocksMeter me={me} my={6} />
+                <TotalBlocksMeter me={me} my={6} />
+
+                <Text mt={5} f={3} color="state.premium">
+                  Premium members can upload unlimited private blocks, hide from
+                  search engines, and get early access to new products and
+                  features.
+                </Text>
+
+                <Text mt={5} f={2} color="state.premium" fontWeight="bold">
+                  <Link href="/pricing" target="_blank">
+                    Learn more about Premium
+                  </Link>
+                </Text>
+              </Box>
             )}
 
             <RadioOptions.Option
