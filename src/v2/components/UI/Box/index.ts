@@ -109,6 +109,8 @@ export interface BoxProps
     LeftProps,
     ZIndexProps {}
 
-export default styled.div<BoxProps>`
+export const Box = styled.div<BoxProps>`
   ${mixin}
 `
+
+export default Box
