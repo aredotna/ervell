@@ -41,6 +41,7 @@ const OptionDescription = styled(Text).attrs({
 `
 
 const Link = styled.a`
+  display: block;
   &:hover {
     color: black;
   }
@@ -116,6 +117,9 @@ export default class PlanSelection extends PureComponent {
                 <Text mt={5} f={2} color="state.premium" fontWeight="bold">
                   <Link href="/pricing" target="_blank">
                     Learn more about Premium
+                  </Link>
+                  <Link href="/blog/building-together" target="_blank">
+                    Learn more about the new block limits
                   </Link>
                 </Text>
               </Box>

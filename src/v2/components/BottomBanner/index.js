@@ -9,6 +9,10 @@ const BottomBanner = ({ banner, ...rest }) => {
 
   const Banner = Banners[banner]
 
+  if (!Banner) {
+    return <div />
+  }
+
   return (
     <FixedWrapper bottom>
       <Banner banner={banner} {...rest} />

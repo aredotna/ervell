@@ -114,7 +114,16 @@ class PricingTable extends PureComponent {
     const signUpLink = isLoggedIn ? '/' : '/sign_up'
     const signUpCopy = isLoggedIn ? '👍 Thank you!' : 'Sign up'
 
-    const premiumButtonCopy = isPremium ? '👍 Thank you!' : 'Join w/ Premium'
+    const premiumButtonCopy = (() => {
+      if (isPremium) {
+        return '👍 Thank you!'
+      } else if (isLoggedIn) {
+        return 'Go Premium'
+      } else {
+        return 'Join w/ Premium'
+      }
+    })()
+
     const premiumLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium'
 
     const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up'
