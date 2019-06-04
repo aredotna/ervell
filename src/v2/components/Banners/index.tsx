@@ -110,28 +110,28 @@ export const ProposePremium = props => (
   </Banner>
 )
 
-export const StronglyProposePremium = props => (
-  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
-    You’ve run out of free private blocks. Please&nbsp;
-    <a href="/settings/billing">upgrade to Premium</a>
-    &nbsp;to keep working privately.
-  </Banner>
-)
-
-//
-// TODO: DELETE THIS AFTER JUNE 4TH
-//
-export const MayConnectionLimit = props => (
+export const JuneConnectionLimit = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
     <Box>
-      Starting June 4th, members without Premium will be limited to 500 total
-      connections
+      Heads up, members without Premium are now limited to 500 total connections
     </Box>
     <ButtonLink color="white" href="/blog/building-together" target="_blank">
       Learn more
     </ButtonLink>
     <ButtonLink color="white" href="/settings/billing">
       Upgrade
+    </ButtonLink>
+  </Banner>
+)
+
+export const StronglyProposePremium = props => (
+  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
+    You’ve run out of free blocks.
+    <ButtonLink color="white" href="/settings/billing">
+      Upgrade
+    </ButtonLink>
+    <ButtonLink color="white" href="/blog/building-together" target="_blank">
+      Learn more
     </ButtonLink>
   </Banner>
 )
@@ -198,7 +198,7 @@ export const LoggedOutChannel = LoggedOutProfile
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
-  MAY_CONNECTION_LIMIT: MayConnectionLimit,
+  JUNE_CONNECTION_LIMIT: JuneConnectionLimit,
   CONFIRM: Confirm,
   BOOKMARKLET: Bookmarklet,
   INVITE: Invite,

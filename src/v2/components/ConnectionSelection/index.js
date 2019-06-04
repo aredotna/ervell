@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { compose, graphql } from 'react-apollo'
+import styled from 'styled-components'
 
 import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
+import { ConnectCTA } from './components/ConnectCTA'
 
 import createConnectionMutation from 'v2/components/ConnectionSelection/mutations/createConnection'
 import removeConnectionMutation from 'v2/components/ConnectionSelection/mutations/removeConnection'
 
-class ConnectionSelection extends Component {
+const Container = styled.div`
+  position: relative;
+`
+
+class ConnectionSelection extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['BLOCK', 'CHANNEL']).isRequired,
@@ -61,12 +67,16 @@ class ConnectionSelection extends Component {
     const { id, type, ...rest } = this.props
 
     return (
-      <ConnectionSelectionList
-        id={id}
-        type={type}
-        onConnectionSelection={this.handleConnectionSelection}
-        {...rest}
-      />
+      <Container>
+        <ConnectCTA id={id} type={type} />
+
+        <ConnectionSelectionList
+          id={id}
+          type={type}
+          onConnectionSelection={this.handleConnectionSelection}
+          {...rest}
+        />
+      </Container>
     )
   }
 }

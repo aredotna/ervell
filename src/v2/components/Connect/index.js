@@ -99,18 +99,20 @@ class Connect extends PureComponent {
         )}
 
         {mode === 'active' && (
-          <Fieldset>
-            <Close onClick={this.handleClose}>
-              &nbsp;
-              <span>&times;</span>
-            </Close>
+          <>
+            <Fieldset>
+              <Close onClick={this.handleClose}>
+                &nbsp;
+                <span>&times;</span>
+              </Close>
 
-            <ConnectionSelection
-              id={id}
-              type={type}
-              refetchQueries={refetchQueries}
-            />
-          </Fieldset>
+              <ConnectionSelection
+                id={id}
+                type={type}
+                refetchQueries={refetchQueries}
+              />
+            </Fieldset>
+          </>
         )}
       </Container>
     )

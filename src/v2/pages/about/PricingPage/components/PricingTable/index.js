@@ -114,7 +114,16 @@ class PricingTable extends PureComponent {
     const signUpLink = isLoggedIn ? '/' : '/sign_up'
     const signUpCopy = isLoggedIn ? '👍 Thank you!' : 'Sign up'
 
-    const premiumButtonCopy = isPremium ? '👍 Thank you!' : 'Join w/ Premium'
+    const premiumButtonCopy = (() => {
+      if (isPremium) {
+        return '👍 Thank you!'
+      } else if (isLoggedIn) {
+        return 'Go Premium'
+      } else {
+        return 'Join w/ Premium'
+      }
+    })()
+
     const premiumLink = isLoggedIn ? '/settings/billing' : '/sign_up/premium'
 
     const groupLink = isLoggedIn ? '/getting-started-with-groups' : '/sign_up'
@@ -129,7 +138,7 @@ class PricingTable extends PureComponent {
             {signUpCopy}
           </CTAButton>
           <Features>
-            <Feature>Unlimited public blocks*</Feature>
+            <Feature>Up to 500 total blocks*</Feature>
             <Feature>Up to 50 private blocks</Feature>
           </Features>
         </Cell>
@@ -141,8 +150,9 @@ class PricingTable extends PureComponent {
             {premiumButtonCopy}
           </PremiumButton>
           <Features>
-            <Feature>Unlimited public blocks*</Feature>
-            <Feature fontWeight="bold">Unlimited private blocks</Feature>
+            <Feature fontWeight="bold">
+              Unlimited public and private blocks
+            </Feature>
             <Feature fontWeight="bold">Hide from search engines</Feature>
             <Feature fontWeight="bold">Priority support</Feature>
           </Features>

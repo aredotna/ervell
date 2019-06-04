@@ -23,6 +23,7 @@ const Body = styled(Box)`
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   text-align: center;
 `

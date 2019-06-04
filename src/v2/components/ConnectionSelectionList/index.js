@@ -82,7 +82,7 @@ export default class ConnectionSelectionList extends Component {
         <SearchInput onChange={this.handleChange} />
 
         {mode === 'resting' && (
-          <div>
+          <>
             <Text f={1} py={4} px={5} textAlign="center" color="gray.medium">
               Recent channels
             </Text>
@@ -91,16 +91,15 @@ export default class ConnectionSelectionList extends Component {
               isOutlined={isOutlined}
               onConnectionSelection={onConnectionSelection}
             />
-          </div>
+          </>
         )}
-
         {mode === 'active' && (
-          <div>
+          <>
             <SearchedChannels
               query={debouncedQuery}
               onConnectionSelection={onConnectionSelection}
             />
-          </div>
+          </>
         )}
       </Container>
     )
