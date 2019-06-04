@@ -129,7 +129,7 @@ class PricingTable extends PureComponent {
             {signUpCopy}
           </CTAButton>
           <Features>
-            <Feature>Unlimited public blocks*</Feature>
+            <Feature>Up to 500 total blocks*</Feature>
             <Feature>Up to 50 private blocks</Feature>
           </Features>
         </Cell>
@@ -141,8 +141,9 @@ class PricingTable extends PureComponent {
             {premiumButtonCopy}
           </PremiumButton>
           <Features>
-            <Feature>Unlimited public blocks*</Feature>
-            <Feature fontWeight="bold">Unlimited private blocks</Feature>
+            <Feature fontWeight="bold">
+              Unlimited public and private blocks
+            </Feature>
             <Feature fontWeight="bold">Hide from search engines</Feature>
             <Feature fontWeight="bold">Priority support</Feature>
           </Features>
