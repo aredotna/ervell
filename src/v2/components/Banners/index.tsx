@@ -110,11 +110,29 @@ export const ProposePremium = props => (
   </Banner>
 )
 
+export const JuneConnectionLimit = props => (
+  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
+    <Box>
+      Heads up, members without Premium are now limited to 500 total connections
+    </Box>
+    <ButtonLink color="white" href="/blog/building-together" target="_blank">
+      Learn more
+    </ButtonLink>
+    <ButtonLink color="white" href="/settings/billing">
+      Upgrade
+    </ButtonLink>
+  </Banner>
+)
+
 export const StronglyProposePremium = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
-    You’ve run out of free blocks. Please&nbsp;
-    <a href="/settings/billing">upgrade to Premium</a>
-    &nbsp;to keep connecting.
+    You’ve run out of free blocks.
+    <ButtonLink color="white" href="/settings/billing">
+      Upgrade
+    </ButtonLink>
+    <ButtonLink color="white" href="/blog/building-together" target="_blank">
+      Learn more
+    </ButtonLink>
   </Banner>
 )
 
@@ -180,6 +198,7 @@ export const LoggedOutChannel = LoggedOutProfile
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
+  JUNE_CONNECTION_LIMIT: JuneConnectionLimit,
   CONFIRM: Confirm,
   BOOKMARKLET: Bookmarklet,
   INVITE: Invite,
