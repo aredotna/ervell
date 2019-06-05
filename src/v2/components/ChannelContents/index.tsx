@@ -3,7 +3,6 @@ import Waypoint from 'react-waypoint'
 import { ApolloClient } from 'apollo-client'
 import { graphql, withApollo } from 'react-apollo'
 import { SortableContainer } from 'react-sortable-hoc'
-import sharify from 'sharify'
 
 import { chunk } from 'v2/util/chunk'
 import { reorder } from 'v2/components/ChannelContents/lib/reorder'
@@ -22,10 +21,6 @@ import { ChannelContentsItem } from './components/ChannelContentsItem'
 
 import { usePusher } from 'v2/hooks/usePusher'
 
-const {
-  data: { NODE_ENV },
-} = sharify
-
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
 ))
@@ -33,6 +28,7 @@ const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
 interface Props {
   chunkSize?: number
   channel: ChannelContentsData
+  pusherChannel?: any
 }
 
 interface ChannelContentsProps extends Props {
@@ -41,7 +37,14 @@ interface ChannelContentsProps extends Props {
 }
 
 const ChannelContents: React.FC<ChannelContentsProps> = memo(
-  ({ chunkSize = 10, channel, client, moveConnectable, ...rest }) => {
+  ({
+    chunkSize = 10,
+    channel,
+    client,
+    moveConnectable,
+    pusherChannel,
+    ...rest
+  }) => {
     // Used to load/unload waypoints
     const [activeQueries, setActiveQueries] = useState<
       ActiveQueriesCollection.ActiveQueries
@@ -106,12 +109,14 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       []
     )
 
-    usePusher({
-      socketId: `channel-${NODE_ENV}-${channel.id}`,
-      onCreated: addConnectable,
-      onUpdated: updateConnectable,
-      parsePayload,
-    })
+    if (pusherChannel) {
+      usePusher({
+        channel: pusherChannel,
+        onCreated: addConnectable,
+        onUpdated: updateConnectable,
+        parsePayload,
+      })
+    }
 
     const chunked = useMemo(() => chunk(connectables, chunkSize), [
       connectables,
