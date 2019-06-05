@@ -9,14 +9,21 @@ export function normalizePayloads(payloads) {
 }
 
 interface PusherHook {
-  socketId: string
+  channel: any
   onCreated?: (payload: any) => any
   onUpdated?: (payload: any) => any
   parsePayload?: (payload: any) => any
 }
 
+export const setupPusherChannel = socketId => {
+  const socket = initPusherClient()
+  const channel = socket.subscribe(socketId)
+
+  return channel
+}
+
 export const usePusher = ({
-  socketId,
+  channel,
   onCreated = () => {},
   onUpdated = () => {},
   parsePayload = () => {},
@@ -24,9 +31,6 @@ export const usePusher = ({
   const [payloads, setPayloads] = useState([])
 
   useEffect(() => {
-    const socket = initPusherClient()
-    const channel = socket.subscribe(socketId)
-
     channel.bind(
       'created',
       (payload): void => {
@@ -48,11 +52,7 @@ export const usePusher = ({
         onUpdated(parsed)
       }
     )
-
-    return () => {
-      socket.unsubscribe(socketId)
-    }
-  }, [onCreated, onUpdated, parsePayload, socketId])
+  }, [channel, onCreated, onUpdated, parsePayload])
 
   return payloads
 }
