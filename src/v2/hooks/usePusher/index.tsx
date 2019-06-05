@@ -17,7 +17,7 @@ interface PusherHook {
 
 export const setupPusherChannel = socketId => {
   const socket = initPusherClient()
-  const channel = socket.subscribe(socketId)
+  const channel = socket && socket.subscribe(socketId)
 
   return channel
 }
