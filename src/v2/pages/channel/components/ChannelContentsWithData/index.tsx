@@ -1,8 +1,10 @@
 import React from 'react'
 import { Query } from 'react-apollo'
+import sharify from 'sharify'
 
 import { ChannelContentsWithData as ChannelContentsWithDataData } from '__generated__/ChannelContentsWithData'
 
+import { setupPusherChannel } from 'v2/hooks/usePusher'
 import { channelContentsWithDataQuery } from './queries/channelContentsWithData'
 
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
@@ -19,6 +21,10 @@ interface Props {
 interface ExtendedProps extends Props {
   isSpiderRequesting: boolean
 }
+
+const {
+  data: { NODE_ENV },
+} = sharify
 
 export const ChannelContentsWithData: React.FC<Props> = WithIsSpiderRequesting<
   ExtendedProps
@@ -41,7 +47,16 @@ export const ChannelContentsWithData: React.FC<Props> = WithIsSpiderRequesting<
         const { channel: clientChannel } = data
         const channel = { ...serverChannel, ...clientChannel }
 
-        return <ChannelContents channel={channel} />
+        const pusherChannel = setupPusherChannel(
+          `channel-${NODE_ENV}-${channel.id}`
+        )
+
+        return (
+          <ChannelContents
+            channel={channel}
+            pusherChannel={!isSpiderRequesting && pusherChannel}
+          />
+        )
       }}
     </Query>
   )
