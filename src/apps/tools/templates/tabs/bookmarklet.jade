@@ -11,5 +11,7 @@ block content
     .Narrow
       if isChrome
         include _chrome_extension
+      else if isFirefox
+        include _firefox_extension
       else
         include _bookmarklet

@@ -34,6 +34,7 @@ const renderTools = (req, res) => {
     tab,
     bookmarklet,
     isChrome: useragent.is(req.headers['user-agent']).chrome,
+    isFirefox: useragent.is(req.headers['user-agent']).firefox,
   })
 }
 
