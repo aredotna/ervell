@@ -1,12 +1,13 @@
 import browser from 'webextension-polyfill'
 
-export default () => {
+export default async () => {
   let token
 
   try {
     token = window.localStorage.getItem('authentication_token')
   } catch {
-    token = browser.storage.local.get('authentication_token')
+    const value = await browser.storage.local.get('authentication_token')
+    token = value.authentication_token
   }
 
   const isLoggedIn = !!token
