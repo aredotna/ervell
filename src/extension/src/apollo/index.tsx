@@ -63,8 +63,10 @@ export const initApolloClient = ({
   return client
 }
 
-export const initClientSideApolloClient = () =>
-  initApolloClient(extensionData())
+export const initClientSideApolloClient = async () => {
+  const clientData = await extensionData()
+  initApolloClient(clientData)
+}
 
 export const wrapWithProviders = (client = window.__APOLLO_CLIENT__) => (
   Component,
@@ -77,10 +79,14 @@ export const wrapWithProviders = (client = window.__APOLLO_CLIENT__) => (
   </ApolloProvider>
 )
 
-export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
+export const mountWithApolloProvider = async (
+  Component,
+  props = {},
+  mountNode
+) => {
   if (!mountNode) return null
 
-  const client = initClientSideApolloClient()
+  const client = await initClientSideApolloClient()
   const WrappedComponent = wrapWithProviders(client)(Component, props)
 
   return mount(WrappedComponent, mountNode)
