@@ -14,6 +14,10 @@ const Button = styled(Box)`
   cursor: pointer;
   user-select: none;
 
+  &:focus {
+    outline: 0;
+  }
+
   &:hover {
     opacity: 0.5;
   }
