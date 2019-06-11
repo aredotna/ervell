@@ -16,6 +16,10 @@ const Container = styled(Box)`
   user-select: none;
   cursor: pointer;
 
+  &:focus {
+    outline: 0;
+  }
+
   &:hover {
     opacity: 0.5;
   }
