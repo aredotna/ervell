@@ -25,8 +25,9 @@ class Pane {
     return this.initialize(msg)
   }
 
-  initialize(msg) {
+  initialize(msg, mode = 'extension') {
     this.msg = msg
+    this.mode = mode
 
     // All the things that will hold this component
     this.frame = this.createIframe()
@@ -92,12 +93,17 @@ class Pane {
   }
 
   getURL = () => {
-    const baseURL = browser.extension.getURL('/index.html')
-
     const data = new DataExtractor().extractSelection(this.msg)
     const params = stringify(data, { arrayFormat: 'brackets', encode: false })
 
-    return `${baseURL}?${params};`
+    if (this.mode === 'extension') {
+      const baseURL = browser.extension.getURL('/index.html')
+      return `${baseURL}?${params};`
+    }
+
+    return `http://localhost:5000/save/${encodeURIComponent(
+      this.msg.url
+    )}?${params}`
   }
 
   onStartDrag = e => {

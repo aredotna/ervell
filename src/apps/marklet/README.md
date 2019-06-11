@@ -1,4 +1,4 @@
-1. Edit /etc/hosts and add an entry for are.na and a  marklet entry:
+1. Edit /etc/hosts and add an entry for are.na and a marklet entry:
 
 ```
 127.0.0.1 arena.dev
