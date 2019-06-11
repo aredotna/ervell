@@ -95,13 +95,6 @@ export default class Page extends PureComponent {
 
           <meta name="twitter:site" content="@aredotna" />
 
-          {/* Temporarily include legacy styles */}
-          <link
-            type="text/css"
-            rel="stylesheet"
-            href={asset('/assets/all.css')}
-          />
-
           {styles}
         </head>
 
