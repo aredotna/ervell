@@ -13,6 +13,8 @@ import PremiumAlert from 'v2/components/Billing/components/MyGroups/components/P
 import MyGroupHeader from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader'
 import UpgradeSelection from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection'
 import MyGroupCheckout from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupCheckout'
+import CreditCard from 'v2/components/Billing/components/CreditCard'
+import { LabelledInput, Label } from 'v2/components/UI/Inputs'
 
 export default class MyGroup extends PureComponent {
   static propTypes = {
@@ -149,7 +151,16 @@ export default class MyGroup extends PureComponent {
             />
           </div>
         ) : (
-          <PremiumAlert>Everyone in your group has Premium ;-)</PremiumAlert>
+          <>
+            <PremiumAlert>Everyone in your group has Premium ;-)</PremiumAlert>
+            {selectedPlan !== 'basic' && (
+              <LabelledInput>
+                <Label>Billed to</Label>
+
+                <CreditCard customer={me.customer} />
+              </LabelledInput>
+            )}
+          </>
         )}
       </Box>
     )
