@@ -52,10 +52,6 @@ console.time('manage')
 app.use(require('../apps/manage'))
 console.timeEnd('manage')
 
-console.time('share')
-app.use(require('../apps/share'))
-console.timeEnd('share')
-
 console.time('marklet')
 app.use(require('../apps/marklet'))
 console.timeEnd('marklet')
