@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill'
-import Pane from 'extension/src/lib/Pane'
+import ExtensionPane from 'extension/src/lib/ExtenionPane'
 
-const pane = new Pane()
+const pane = new ExtensionPane()
 
 browser.runtime.onMessage.addListener(msg => {
   switch (msg.text) {

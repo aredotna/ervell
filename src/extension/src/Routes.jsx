@@ -2,19 +2,18 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import ExtensionLogin from 'extension/src/components/ExtensionLogin'
+import Blocks from 'v2/components/Bookmarklet/Blocks'
+import EditBlock from 'v2/components/Bookmarklet/EditBlock'
+import Extension from 'v2/components/Bookmarklet/Extension'
+
 import parseRoute from 'v2/util/parseRoute'
-
-import Extension from 'extension/src/components/Extension'
 import withLoginStatus from 'v2/hocs/WithLoginStatus'
-
-import Login from 'extension/src/components/Login'
-import Blocks from 'extension/src/components/Blocks'
-import EditBlock from 'extension/src/components/EditBlock'
 
 const Routes = ({ isLoggedIn }) => (
   <Extension>
     <Switch>
-      {!isLoggedIn && <Route path="/" component={Login} />}
+      {!isLoggedIn && <Route path="/" component={ExtensionLogin} />}
 
       {isLoggedIn && (
         <React.Fragment>

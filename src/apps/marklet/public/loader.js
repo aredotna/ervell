@@ -1,4 +1,4 @@
-import Pane from 'extension/src/lib/Pane'
+import Pane from 'lib/Pane'
 
 const pane = new Pane()
 pane.open({})

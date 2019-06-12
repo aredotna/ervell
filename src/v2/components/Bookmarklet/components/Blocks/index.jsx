@@ -5,20 +5,20 @@ import styled from 'styled-components'
 import { graphql } from 'react-apollo'
 import { omit } from 'underscore'
 
-import Layout from 'extension/src/components/Layout'
-import Messenger from 'extension/src/lib/Messenger'
-import withExtensionContext from 'extension/src/components/Extension/withExtension'
+import Layout from 'v2/components/Bookmarklet/components/Layout'
+import PaneMessenger from 'lib/PaneMessenger'
+import withExtensionContext from 'v2/components/Bookmarklet/components/Extension/withExtension'
 
 import Box from 'v2/components/UI/Box'
 import Count from 'v2/components/UI/Count'
 
 import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 
-import Block from 'extension/src/components/Blocks/components/Block'
+import Block from 'v2/components/Bookmarklet/components/Blocks/components/Block'
 import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
 
-import createBlockMutation from 'extension/src/components/Blocks/mutations/createBlock'
-import CurrentPageInfo from 'extension/src/components/Blocks/components/CurrentPageInfo'
+import createBlockMutation from 'v2/components/Bookmarklet/components/Blocks/mutations/createBlock'
+import CurrentPageInfo from 'v2/components/Bookmarklet/components/Blocks/components/CurrentPageInfo'
 
 const Container = styled(Box)`
   display: flex;
@@ -75,7 +75,7 @@ class Blocks extends Component {
 
   constructor(props) {
     super(props)
-    this.messenger = new Messenger(window.top)
+    this.messenger = new PaneMessenger(window.top)
     this.layoutRef = React.createRef()
     window.addEventListener('message', this.receiveMessage)
   }

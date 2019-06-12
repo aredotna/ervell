@@ -1,7 +1,11 @@
 import uuidv4 from 'uuid/v4'
 
-class DataExtractor {
-  constructor(event) {
+class PaneDataExtractor {
+  public event
+  public data
+  public image
+
+  constructor(event?) {
     this.event = event
     this.data = { id: uuidv4() }
 
@@ -62,13 +66,6 @@ class DataExtractor {
         value: msg.options.srcUrl,
       }
     }
-    // } else {
-    //   this.data = {
-    //     ...this.data,
-    //     type: 'Link',
-    //     value: msg.url,
-    //   };
-    // }
 
     return this.data
   }
@@ -76,7 +73,9 @@ class DataExtractor {
   extractImageFromHTML = data => {
     const html = new DOMParser().parseFromString(data['text/html'], 'text/html')
       .body.firstChild
-    this.image = html.querySelector('img') && html.querySelector('img').src
+    this.image =
+      (<Element>html).querySelector('img') &&
+      (<Element>html).querySelector('img').src
     return this.image
   }
 
@@ -89,4 +88,4 @@ class DataExtractor {
   }
 }
 
-export default DataExtractor
+export default PaneDataExtractor

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { find, without } from 'underscore'
 
-import Messenger from 'extension/src/lib/Messenger'
+import PaneMessenger from 'lib/PaneMessenger'
 
 export const ExtensionContext = React.createContext({
   block: null,
@@ -28,7 +28,7 @@ class Extension extends Component {
   constructor(props) {
     super(props)
     window.addEventListener('message', this.receiveMessage)
-    this.messenger = new Messenger(window.top)
+    this.messenger = new PaneMessenger(window.top)
   }
 
   state = {

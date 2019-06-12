@@ -1,4 +1,6 @@
-class Messenger {
+class PaneMessenger {
+  public el
+
   constructor(el) {
     this.el = el
   }
@@ -10,4 +12,4 @@ class Messenger {
   }
 }
 
-export default Messenger
+export default PaneMessenger
