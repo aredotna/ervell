@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 
 import parseRoute from 'v2/util/parseRoute'
 
-import Extension from 'extension/src/components/Extension'
+import Extension from 'v2/components/Bookmarklet/components/Extension'
 import withLoginStatus from 'v2/hocs/WithLoginStatus'
 
-import BookmarkletLogin from 'v2/components/BookmarkletLogin'
-import Blocks from 'extension/src/components/Blocks'
-import EditBlock from 'extension/src/components/EditBlock'
+import BookmarkletLogin from 'v2/components/Bookmarklet/components/Login'
+import Blocks from 'v2/components/Bookmarklet/components/Blocks'
+import EditBlock from 'v2/components/Bookmarklet/components/EditBlock'
 
 const Routes = ({ isLoggedIn }) => {
   return (

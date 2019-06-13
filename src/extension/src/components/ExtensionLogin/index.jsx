@@ -4,14 +4,14 @@ import { graphql } from 'react-apollo'
 import styled from 'styled-components'
 import browser from 'webextension-polyfill'
 
-import loginMutation from 'extension/src/components/Login/mutations/loginMutation'
-import Layout from 'extension/src/components/Layout'
+import loginMutation from 'v2/components/Bookmarklet/components/Login/mutations/loginMutation'
+import Layout from 'v2/components/Bookmarklet/src/components/Layout'
 
 import mapErrors from 'v2/util/mapErrors'
 import { Input, ErrorMessage } from 'v2/components/UI/Inputs'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 
-import CenterStretchBox from 'extension/src/components/UI/CenterStretchBox'
+import CenterStretchBox from 'v2/components/Bookmarklet/components/UI/CenterStretchBox'
 
 import Icons from 'v2/components/UI/Icons'
 
