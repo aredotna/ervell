@@ -4,8 +4,8 @@ import { graphql } from 'react-apollo'
 import styled from 'styled-components'
 import browser from 'webextension-polyfill'
 
-import loginMutation from 'v2/components/Bookmarklet/components/Login/mutations/loginMutation'
-import Layout from 'v2/components/Bookmarklet/src/components/Layout'
+import loginMutation from 'extension/src/components/ExtensionLogin/mutations/loginMutation'
+import Layout from 'v2/components/Bookmarklet/components/Layout'
 
 import mapErrors from 'v2/util/mapErrors'
 import { Input, ErrorMessage } from 'v2/components/UI/Inputs'

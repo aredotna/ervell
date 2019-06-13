@@ -1,5 +1,5 @@
 import browser from 'webextension-polyfill'
-import ExtensionPane from 'extension/src/lib/ExtenionPane'
+import ExtensionPane from 'extension/src/lib/ExtensionPane'
 
 const pane = new ExtensionPane()
 
