@@ -27,6 +27,7 @@ const Subtext = styled(Text).attrs({
 interface AuthFormProps {
   children: React.ReactNode
   onSubmit: () => any
+  onClose?: () => any
 }
 
 export default class AuthForm extends Component<AuthFormProps> {
@@ -34,11 +35,11 @@ export default class AuthForm extends Component<AuthFormProps> {
   static Subtext = Subtext
 
   render() {
-    const { onSubmit, ...rest } = this.props
+    const { onSubmit, onClose, ...rest } = this.props
 
     return (
       <Form onSubmit={onSubmit} {...rest}>
-        <CloseButton />
+        <CloseButton onClose={onClose} />
 
         <Icons name="ArenaMark" size={7} mb={8} />
 

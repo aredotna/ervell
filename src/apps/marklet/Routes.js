@@ -7,16 +7,31 @@ import parseRoute from 'v2/util/parseRoute'
 import Extension from 'v2/components/Bookmarklet/components/Extension'
 import withLoginStatus from 'v2/hocs/WithLoginStatus'
 
-import BookmarkletLogin from 'v2/components/Bookmarklet/components/Login'
+import Layout from 'v2/components/Bookmarklet/components/Layout'
+import CenterStretchBox from 'v2/components/Bookmarklet/components/UI/CenterStretchBox'
+import Login from 'v2/components/LoginForm'
 import Blocks from 'v2/components/Bookmarklet/components/Blocks'
 import EditBlock from 'v2/components/Bookmarklet/components/EditBlock'
 
+import PaneMessenger from 'lib/PaneMessenger'
+
 const Routes = ({ isLoggedIn }) => {
+  const messenger = new PaneMessenger(window.top)
+
   return (
     <Extension>
       <Switch>
         {!isLoggedIn && (
-          <Route path="/save/:content" component={BookmarkletLogin} />
+          <Route
+            path="/save/:content"
+            render={() => (
+              <Layout>
+                <CenterStretchBox>
+                  <Login onClose={() => messenger.send({ action: 'close' })} />
+                </CenterStretchBox>
+              </Layout>
+            )}
+          />
         )}
 
         {isLoggedIn && (
