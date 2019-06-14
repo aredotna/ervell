@@ -9,6 +9,7 @@ const Form = styled.form`
   width: ${x => x.theme.space[12]};
   margin: 0 auto;
   text-align: center;
+  max-width: 100%;
 `
 
 const Submit = styled.div`

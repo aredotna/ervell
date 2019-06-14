@@ -15,7 +15,7 @@ const bookmarkletConfig = {
   node: {
     __dirname: true,
   },
-  entry: path.join(rootDir, 'src/assets/loader.js'),
+  entry: path.join(rootDir, 'src/apps/marklet/src/loader.js'),
   output: {
     filename: 'loader.js',
     path: path.join(rootDir, 'src/apps/marklet/public'),

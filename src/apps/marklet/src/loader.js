@@ -36,4 +36,5 @@ const pane = new BookmarkletPane()
 pane.open({
   url: window.location.href,
   title: window.document.title,
+  options: {},
 })
