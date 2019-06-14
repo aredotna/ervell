@@ -6,4 +6,5 @@
 ```
 
 2. Edit the bookmarklet tools tab (temporarily) and point it to your local installation at `http://marklet.arena.dev:5000/loader.js`
-3. Drag to your bookmarks bar and profit.
+3. Drag to your bookmarks bar.
+4. Run `yarn build:bookmarklet:dev` and profit.

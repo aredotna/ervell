@@ -6,9 +6,9 @@ const router = express.Router()
 app.set('views', `${__dirname}/templates`)
 app.set('view engine', 'jade')
 
-const loaderJS = (req, res) => {
+const sendAsset = asset => (req, res) => {
   const options = {
-    root: 'public/assets',
+    root: __dirname + '/public/',
     dotfiles: 'deny',
     headers: {
       'x-timestamp': Date.now(),
@@ -16,18 +16,19 @@ const loaderJS = (req, res) => {
     },
   }
 
-  return res.sendFile('loader.js', options, err => {
+  return res.sendFile(asset, options, err => {
     if (err) {
-      console.log(err)
+      console.log('Error sending bookmarklet:', err)
       res.status(err.status).end()
-    } else {
-      console.log('Sent:')
     }
   })
 }
 
 app.get('/save/:content', (req, res) => res.render('index'))
-app.get('/loader.js', loaderJS)
-router.get('/loader.js', loaderJS)
+
+app.get('/loader.js', sendAsset('loader.js'))
+router.get('/loader.js', sendAsset('loader.js'))
+app.get('/loader.js.map', sendAsset('loader.js.map'))
+router.get('/loader.js.map', sendAsset('loader.js.map'))
 
 module.exports = app

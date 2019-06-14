@@ -1,38 +1,39 @@
-// import { stringify } from 'qs'
+import { stringify } from 'qs'
 
-// import Pane from 'lib/Pane'
-// import PaneDataExtractor from 'lib/PaneDataExtractor'
-// import markletCSS from 'extension/src/iframe.css'
+import Pane from 'lib/Pane'
+import PaneDataExtractor from 'lib/PaneDataExtractor'
+import markletCSS from 'extension/src/iframe.css'
 
-// const SAVE_URL = 'http://localhost:5000/save'
+const { NODE_ENV } = process.env
 
-// class BookmarkletPane extends Pane {
-//   addIframeStyle = () => {
-//     const markletStyle = document.createElement('style')
-//     markletStyle.type = 'text/css'
+const SAVE_URL =
+  NODE_ENV === 'development'
+    ? 'http://localhost:5000/save'
+    : 'https://www.are.na/save'
 
-//     markletStyle.appendChild(document.createTextNode(markletCSS))
-//     document.body.appendChild(markletStyle)
+class BookmarkletPane extends Pane {
+  addIframeStyle = () => {
+    const markletStyle = document.createElement('style')
+    markletStyle.type = 'text/css'
 
-//     return markletStyle
-//   }
+    markletStyle.appendChild(document.createTextNode(markletCSS))
+    document.body.appendChild(markletStyle)
 
-//   getURL = () => {
-//     console.log('getUrl')
-//     const data = new PaneDataExtractor().extractSelection(this.msg)
-//     const params = stringify(data, { arrayFormat: 'brackets', encode: false })
+    return markletStyle
+  }
 
-//     return `${SAVE_URL}?${params};`
-//   }
-// }
+  getURL = () => {
+    const { data } = new PaneDataExtractor(this.msg)
+    const params = stringify(data, { arrayFormat: 'brackets', encode: false })
+    const url = encodeURIComponent(data.original_source_url)
 
-document.addEventListener('DOMContentLoaded', () => {
-  // const pane = new BookmarkletPane()
+    return `${SAVE_URL}/${url}?${params};`
+  }
+}
 
-  console.log('opening')
+const pane = new BookmarkletPane()
 
-  // pane.open({
-  //   url: window.location.href,
-  //   title: window.document.title,
-  // })
+pane.open({
+  url: window.location.href,
+  title: window.document.title,
 })

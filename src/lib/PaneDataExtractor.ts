@@ -1,5 +1,3 @@
-import uuidv4 from 'uuid/v4'
-
 class PaneDataExtractor {
   public event
   public data
@@ -7,7 +5,7 @@ class PaneDataExtractor {
 
   constructor(event?) {
     this.event = event
-    this.data = { id: uuidv4() }
+    this.data = { id: Math.floor(Math.random() * 1000000) + 1 }
 
     this.setSourceData()
   }
