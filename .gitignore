@@ -13,6 +13,10 @@ dump.rdb
 yarn-error.log
 newrelic_agent.log
 
+# Compiled bookmarklet code
+src/apps/marklet/public
+!src/apps/marklet/public/.gitkeep
+
 # Compiled extension code
 src/extension/dist
 src/extension/src/config.js

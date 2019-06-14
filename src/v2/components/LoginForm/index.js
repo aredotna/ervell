@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -54,6 +55,14 @@ const InputWithLink = styled.div.attrs({
 `
 
 export default class LoginForm extends Component {
+  static propTypes = {
+    onClose: PropTypes.func,
+  }
+
+  static defaultProps = {
+    onClose: null,
+  }
+
   state = {
     mode: 'resting',
     email: '',
@@ -122,9 +131,15 @@ export default class LoginForm extends Component {
 
   render() {
     const { mode, email, password, errorMessage } = this.state
+    const { onClose } = this.props
 
     return (
-      <AuthForm onSubmit={this.handleSubmit} action="/me/sign_in" method="post">
+      <AuthForm
+        onClose={onClose}
+        onSubmit={this.handleSubmit}
+        action="/me/sign_in"
+        method="post"
+      >
         <Input
           mb={6}
           placeholder="Email"

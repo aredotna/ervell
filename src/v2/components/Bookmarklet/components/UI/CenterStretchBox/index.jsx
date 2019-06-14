@@ -8,6 +8,7 @@ const CenterStretchBox = styled(Box)`
   justify-content: center;
   flex: 1;
   position: relative;
+  max-width: 100%;
 `
 
 export default CenterStretchBox

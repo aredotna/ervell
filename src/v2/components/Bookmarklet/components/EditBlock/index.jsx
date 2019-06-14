@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
-import withExtensionContext from 'extension/src/components/Extension/withExtension'
+import withExtensionContext from 'v2/components/Bookmarklet/components/Extension/withExtension'
 import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
 import { Input, Textarea } from 'v2/components/UI/Inputs'

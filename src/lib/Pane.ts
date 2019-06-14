@@ -1,10 +1,14 @@
-import browser from 'webextension-polyfill'
-import { stringify } from 'qs'
-
-import Messenger from 'extension/src/lib/Messenger'
-import DataExtractor from 'extension/src/lib/DataExtractor'
+import PaneMessenger from 'lib/PaneMessenger'
+import PaneDataExtractor from 'lib/PaneDataExtractor'
 
 class Pane {
+  public isOpen
+  public frame
+  public msg
+  public dragTarget
+  public style
+  public messenger
+
   open = msg => {
     this.isOpen = true
 
@@ -38,7 +42,7 @@ class Pane {
 
     // So we can communicate with the iframe
     this.setupReceiver()
-    this.messenger = new Messenger(this.frame.contentWindow)
+    this.messenger = new PaneMessenger(this.frame.contentWindow)
   }
 
   close = () => {
@@ -80,24 +84,17 @@ class Pane {
   }
 
   addIframeStyle = () => {
-    const url = browser.extension.getURL('iframe.css')
     const link = document.createElement('link')
 
     link.type = 'text/css'
     link.rel = 'stylesheet'
-    link.href = url
 
     document.body.appendChild(link)
     return link
   }
 
   getURL = () => {
-    const baseURL = browser.extension.getURL('/index.html')
-
-    const data = new DataExtractor().extractSelection(this.msg)
-    const params = stringify(data, { arrayFormat: 'brackets', encode: false })
-
-    return `${baseURL}?${params};`
+    return '/'
   }
 
   onStartDrag = e => {
@@ -117,7 +114,7 @@ class Pane {
       const targetImage = e.target.cloneNode(false)
 
       parentHTML.appendChild(targetImage)
-      e.dataTransfer.setData('text/html', parentHTML.outerHTML)
+      e.dataTransfer.setData('text/html', (<Element>parentHTML).outerHTML)
     }
 
     // Show the drop target
@@ -162,7 +159,7 @@ class Pane {
     e.stopPropagation()
     e.preventDefault()
 
-    const data = new DataExtractor(e).extract()
+    const data = new PaneDataExtractor(e).extract()
 
     this.messenger.send({
       action: 'drop',
@@ -219,7 +216,7 @@ class Pane {
   }
 
   sendCurrentPage = () => {
-    let { data } = new DataExtractor()
+    let { data } = new PaneDataExtractor()
 
     data = {
       ...data,
@@ -246,7 +243,7 @@ class Pane {
   }
 
   sendData = msg => {
-    const data = new DataExtractor().extractSelection(msg)
+    const data = new PaneDataExtractor().extractSelection(msg)
 
     if (data.type) {
       this.messenger.send({
