@@ -9,6 +9,7 @@ const Container = styled.a`
   top: 0;
   right: 0;
   padding: ${x => x.theme.space[6]};
+  cursor: pointer;
 `
 
 interface Props {
