@@ -21,7 +21,7 @@ const Routes = ({ isLoggedIn }) => {
 
         {isLoggedIn && (
           <React.Fragment>
-            <Route path="/save/:content/edit" component={EditBlock} />
+            <Route path="/edit" component={EditBlock} />
             <Route
               exact
               path="/save/:content"
