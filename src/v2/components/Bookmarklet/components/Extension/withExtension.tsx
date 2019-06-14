@@ -1,5 +1,5 @@
 import React from 'react'
-import { ExtensionContext } from 'extension/src/components/Extension'
+import { ExtensionContext } from 'v2/components/Bookmarklet/components/Extension'
 
 export default function withExtensionContext(Component) {
   return function WrapperComponent(props) {

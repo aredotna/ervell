@@ -12,7 +12,7 @@ import Description from 'v2/components/UI/Head/components/Description'
 import analytics from 'v2/util/analytics'
 import globalKeyboardShortcuts from 'v2/util/globalKeyboardShortcuts'
 
-class BlankLayout extends PureComponent {
+export class BlankLayout extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     history: PropTypes.shape({

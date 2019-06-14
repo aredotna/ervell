@@ -29,6 +29,10 @@ const baseConfig = {
         type: 'javascript/auto',
       },
       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(gif|svg|jpg|png)$/,
         loader: 'file-loader',
       },
