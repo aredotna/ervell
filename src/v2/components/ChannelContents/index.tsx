@@ -205,6 +205,9 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       [activeQueries, client, collection, channel.id]
     )
 
+    // For the lightbox, we need to filter connectables to only show blocks
+    const lightboxConnectables = connectables.filter(c => c.type === 'Block')
+
     return (
       <>
         <SortableGrid
@@ -255,7 +258,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
                       index={connectableIndex + pageIndex * chunkSize}
                       channel={channel}
                       connectable={connectable}
-                      context={connectables}
+                      context={lightboxConnectables}
                       onRemove={handleRemoveBlock}
                       onChangePosition={handleSortEnd}
                     />
