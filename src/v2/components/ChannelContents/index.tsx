@@ -205,7 +205,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       [activeQueries, client, collection, channel.id]
     )
 
-    // For the lightbox, we need to filter connectables to only show blocks
+    // For the lightbox, we need to filter out channels
     const lightboxConnectables = connectables.filter(c => c.type === 'Block')
 
     return (
