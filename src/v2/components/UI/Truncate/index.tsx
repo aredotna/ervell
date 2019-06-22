@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { unescape } from 'underscore'
 
 const DEFAULT_LENGTH = 50
 const DEFAULT_SUFFIX = '…'
@@ -8,7 +9,12 @@ export const truncate = (
   text = '',
   length = DEFAULT_LENGTH,
   suffix = DEFAULT_SUFFIX
-) => unescape(text.substr(0, length - 1) + (text.length > length ? suffix : ''))
+) => {
+  const truncatedString = unescape(
+    text.substr(0, length - 1) + (text.length > length ? suffix : '')
+  )
+  return truncatedString
+}
 
 interface TruncateProps {
   children: any

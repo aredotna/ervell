@@ -14,6 +14,7 @@ const mentionNotification = {
   owner: {
     __typename: 'User',
     label: 'John',
+    href: '/user/hey',
   },
   item: {
     __typename: 'Comment',
@@ -38,6 +39,7 @@ const commentNotification = {
   owner: {
     __typename: 'User',
     label: 'John',
+    href: '/user/hey',
   },
   item: {
     __typename: 'Comment',
