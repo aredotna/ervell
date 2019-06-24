@@ -52,6 +52,10 @@ export const usePusher = ({
         onUpdated(parsed)
       }
     )
+
+    return () => {
+      channel.unbind()
+    }
   }, [channel, onCreated, onUpdated, parsePayload])
 
   return payloads
