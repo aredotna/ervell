@@ -39,6 +39,10 @@ module.exports =
   BACKBONE_SUPER_SYNC_TIMEOUT: 25000
   RECAPTCHA_SITE_KEY: null
   RECAPTCHA_SECRET_KEY: null
+  RATE_LIMIT_LOGGED_IN_POINTS: 1
+  RATE_LIMIT_LOGGED_OUT_POINTS: 10
+  RATE_LIMIT_TOTAL_POINTS: 200
+  RATE_LIMIT_DURATION: 60
 
 # Override any values with env variables if they exist
 for key, val of module.exports
