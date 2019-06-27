@@ -1,4 +1,5 @@
 import { any } from 'underscore'
+import { IpDeniedError } from 'express-ipfilter'
 
 const contains = (message, targetStrings = []) =>
   any(
@@ -16,7 +17,11 @@ const prepareError = ({ status, message, err }) => {
   return error
 }
 
-export default (err, _req, _res, next) => {
+export default (err, _req, res, next) => {
+  if (err instanceof IpDeniedError) {
+    return res.status(403).end()
+  }
+
   if (err.graphQLErrors && err.graphQLErrors.length > 0) {
     const firstErr = err.graphQLErrors[0]
     const statusCode = firstErr.extensions && firstErr.extensions.code
