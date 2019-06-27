@@ -54,6 +54,7 @@ splitTestMiddleware = require '../components/split_test/middleware'
 { default: assetMiddleware } = require "./middleware/asset"
 { default: isSpiderMiddleware } = require './middleware/isSpider'
 { default: ensureWWWMiddleware } = require './middleware/ensureWWW'
+{ default: rateLimiterMiddleware } = require './middleware/rateLimit'
 
 cache = require './cache'
 arenaPassport = require './passport'
@@ -155,6 +156,7 @@ module.exports = (app) ->
     .use isInverted
     .use viewModeMiddleware
     .use isSpiderMiddleware
+    .use rateLimiterMiddleware
 
   console.log 'Mounting apps...'
 
