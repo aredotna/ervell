@@ -45,6 +45,7 @@ glob = require 'glob'
 AirbrakeClient = require 'airbrake-js'
 makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
 stylus = require 'stylus'
+{ IpFilter: ipfilter } = require "express-ipfilter"
 
 localsMiddleware = require './middleware/locals'
 ensureSSLMiddleware = require './middleware/ensure_ssl'
