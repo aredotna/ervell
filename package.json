@@ -112,6 +112,7 @@
     "diacritics": "*",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "express-ipfilter": "^1.0.1",
     "express-spam-referral-blocker": "^1.2.1",
     "express-subdomain": "^1.0.4",
     "file-loader": "^1.1.11",
