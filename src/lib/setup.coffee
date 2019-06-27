@@ -46,6 +46,7 @@ AirbrakeClient = require 'airbrake-js'
 makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
 stylus = require 'stylus'
 { IpFilter: ipfilter } = require "express-ipfilter"
+proxyaddr = require('proxy-addr')
 
 localsMiddleware = require './middleware/locals'
 ensureSSLMiddleware = require './middleware/ensure_ssl'
@@ -120,10 +121,16 @@ module.exports = (app) ->
   ]
 
   #  Denied IPs
+  console.log('IP_DENYLIST.split(",")', IP_DENYLIST.split(","))
   ipFilterMiddleware = ipfilter(IP_DENYLIST.split(","), {
     allowedHeaders: ["x-forwarded-for"],
     mode: "deny",
     log: true,
+    detectIp: (req) ->
+      console.log('req.connection.remoteAddress', req.connection.remoteAddress)
+      console.log("req.headers['x-forwarded-for']", req.headers['x-forwarded-for'])
+      ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+      return ip
   })
 
   app.use blocker.send404
