@@ -24,7 +24,8 @@
   AIRBRAKE_API_KEY
   CLIENT_GRAPHQL_ENDPOINT
   BACKBONE_SUPER_SYNC_TIMEOUT
-  RECAPTCHA_SITE_KEY
+  RECAPTCHA_SITE_KEY,
+  IP_DENYLIST
 } = require '../config'
 
 _ = require 'underscore'
@@ -44,6 +45,7 @@ glob = require 'glob'
 AirbrakeClient = require 'airbrake-js'
 makeErrorHandler = require 'airbrake-js/dist/instrumentation/express'
 stylus = require 'stylus'
+{ IpFilter: ipfilter } = require "express-ipfilter"
 
 localsMiddleware = require './middleware/locals'
 ensureSSLMiddleware = require './middleware/ensure_ssl'
@@ -116,6 +118,14 @@ module.exports = (app) ->
     'tkpassword.com'
     'lifehacĸer.com'
   ]
+
+  #  Denied IPs
+  app.use(
+    ipfilter(IP_DENYLIST.split(","), {
+      allowedHeaders: ["x-forwarded-for"],
+      mode: "deny",
+    })
+  )
 
   app.use blocker.send404
 
