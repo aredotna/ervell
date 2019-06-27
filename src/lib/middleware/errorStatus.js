@@ -17,7 +17,7 @@ const prepareError = ({ status, message, err }) => {
   return error
 }
 
-export default (err, _req, res, next) => {
+export default (err, req, res, next) => {
   if (err instanceof IpDeniedError) {
     console.log('IP Denied from user agent:', req.headers['user-agent'])
     return res.status(403).end()
