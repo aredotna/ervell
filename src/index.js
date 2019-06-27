@@ -3,6 +3,7 @@
 require('source-map-support').install()
 require('regenerator-runtime/runtime')
 require('newrelic')
+require('sqreen')
 
 if (process.env.NODE_ENV === 'development') {
   require('coffee-register')
