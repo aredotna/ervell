@@ -56,6 +56,7 @@ isInverted = require '../components/night_mode/middleware'
 splitTestMiddleware = require '../components/split_test/middleware'
 { default: assetMiddleware } = require "./middleware/asset"
 { default: isSpiderMiddleware } = require './middleware/isSpider'
+{ default: preventBotMiddleware } = require './middleware/preventBot'
 { default: ensureWWWMiddleware } = require './middleware/ensureWWW'
 { default: rateLimiterMiddleware } = require './middleware/rateLimit'
 
@@ -120,8 +121,9 @@ module.exports = (app) ->
     'lifehacĸer.com'
   ]
 
+  app.use preventBotMiddleware
+
   #  Denied IPs
-  console.log('IP_DENYLIST.split(",")', IP_DENYLIST.split(","))
   ipFilterMiddleware = ipfilter(IP_DENYLIST.split(","), {
     allowedHeaders: ["x-forwarded-for"],
     mode: "deny",
