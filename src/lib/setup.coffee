@@ -120,12 +120,11 @@ module.exports = (app) ->
   ]
 
   #  Denied IPs
-  app.use(
-    ipfilter(IP_DENYLIST.split(","), {
-      allowedHeaders: ["x-forwarded-for"],
-      mode: "deny",
-    })
-  )
+  ipFilterMiddleware = ipfilter(IP_DENYLIST.split(","), {
+    allowedHeaders: ["x-forwarded-for"],
+    mode: "deny",
+    log: true,
+  })
 
   app.use blocker.send404
 
@@ -145,6 +144,7 @@ module.exports = (app) ->
 
   app
     .use assetMiddleware()
+    .use ipFilterMiddleware
     .use express.static(path.resolve __dirname, '../../public')
     .use favicon(path.resolve __dirname, '../../public/images/favicon.ico')
     .use logger('dev')
