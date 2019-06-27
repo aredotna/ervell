@@ -17,7 +17,6 @@ const prepareError = ({ status, message, err }) => {
 }
 
 export default (err, _req, _res, next) => {
-  console.log('err from errStatus', err)
   if (err.graphQLErrors && err.graphQLErrors.length > 0) {
     const firstErr = err.graphQLErrors[0]
     const statusCode = firstErr.extensions && firstErr.extensions.code
