@@ -170,6 +170,7 @@
     "sharify": "*",
     "sortablejs": "^1.6.0",
     "spider-detector": "^1.0.19",
+    "sqreen": "^1.30.3",
     "striptags": "^2.2.1",
     "styled-components": "^4.1.3",
     "styled-system": "^2.3.2",
