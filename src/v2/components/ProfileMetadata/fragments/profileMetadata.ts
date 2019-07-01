@@ -7,6 +7,7 @@ import profileMetadataInfoFragment from 'v2/components/ProfileMetadata/component
 import profileGroupUserListFragment from 'v2/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList'
 import profileMetadataViewFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView'
 import profileMetadataFilterFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter/fragments/profileMetadataFilter'
+import profileMetadataFollowingTypeFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataFollowingType/fragments/profileMetadataFollowingType'
 
 export default gql`
   fragment ProfileMetadata on Identifiable {
@@ -17,6 +18,7 @@ export default gql`
     ...ProfileGroupUserList
     ...ProfileMetadataView
     ...ProfileMetadataFilter
+    ...ProfileMetadataFollowingType
   }
 
   ${profileAvatarFragment}
@@ -26,4 +28,5 @@ export default gql`
   ${profileGroupUserListFragment}
   ${profileMetadataViewFragment}
   ${profileMetadataFilterFragment}
+  ${profileMetadataFollowingTypeFragment}
 `

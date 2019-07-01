@@ -7,7 +7,7 @@ export default gql`
   fragment ProfileFollowing on User {
     __typename
     id
-    following(page: $page, per: $per) {
+    following(page: $page, per: $per, type: $type) {
       __typename
       ...IdentifiableCell
       ...KonnectableCell

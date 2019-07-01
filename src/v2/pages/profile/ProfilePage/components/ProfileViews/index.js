@@ -87,15 +87,22 @@ const Followers = ({ id, fetchPolicy }) => (
 Followers.propTypes = {
   id: PropTypes.string.isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
 }
 
-const Following = ({ id, fetchPolicy }) => (
-  <ProfileFollows id={id} type="following" fetchPolicy={fetchPolicy} />
+const Following = ({ id, followType, fetchPolicy }) => (
+  <ProfileFollows
+    id={id}
+    type="following"
+    followType={followType}
+    fetchPolicy={fetchPolicy}
+  />
 )
 
 Following.propTypes = {
   id: PropTypes.string.isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
 }
 
 const Groups = ({ id, fetchPolicy }) => (
@@ -120,6 +127,7 @@ class ProfileViews extends Component {
     id: PropTypes.string.isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
+    followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
     identifiable: propType(profilePageIdentifiableFragment).isRequired,
   }
 
@@ -131,7 +139,7 @@ class ProfileViews extends Component {
 
   render() {
     const { fetchPolicy } = this.state
-    const { view, id, sort, filter, identifiable } = this.props
+    const { view, id, sort, filter, identifiable, followType } = this.props
 
     switch (view) {
       case 'all':
@@ -166,7 +174,13 @@ class ProfileViews extends Component {
       case 'followers':
         return <Followers id={id} fetchPolicy={fetchPolicy} />
       case 'following':
-        return <Following id={id} fetchPolicy={fetchPolicy} />
+        return (
+          <Following
+            id={id}
+            followType={followType}
+            fetchPolicy={fetchPolicy}
+          />
+        )
       case 'groups':
         return <Groups id={id} fetchPolicy={fetchPolicy} />
       default:
