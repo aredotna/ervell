@@ -124,7 +124,7 @@ module.exports = (app) ->
   ipFilterMiddleware = ipfilter(IP_DENYLIST.split(","), {
     allowedHeaders: ["x-forwarded-for"],
     mode: "deny",
-    log: true,
+    log: false,
     detectIp: (req) ->
       ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
       return ip
