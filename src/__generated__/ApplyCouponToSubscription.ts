@@ -54,12 +54,14 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_counts {
   __typename: "MeCounts";
   private_connections: number | null;
+  connections: number | null;
 }
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me {
   __typename: "Me";
   id: number | null;
   non_premium_private_connections_limit: number | null;
+  non_premium_connections_limit: number | null;
   customer: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer | null;
   counts: ApplyCouponToSubscription_apply_coupon_to_subscription_me_counts | null;
 }

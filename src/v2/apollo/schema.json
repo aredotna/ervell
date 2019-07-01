@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -715,7 +715,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -3366,7 +3366,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -3541,6 +3541,16 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "type",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "FollowingTypeEnum",
+                  "ofType": null
+                },
+                "defaultValue": "ALL"
               }
             ],
             "type": {
@@ -3799,7 +3809,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -4146,7 +4156,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -4239,6 +4249,16 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "type",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "FollowingTypeEnum",
+                  "ofType": null
+                },
+                "defaultValue": "ALL"
               }
             ],
             "type": {
@@ -4473,7 +4493,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -4925,6 +4945,41 @@
           },
           {
             "name": "LARGE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "FollowingTypeEnum",
+        "description": "Ways to filter following",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "ALL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "USER",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CHANNEL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GROUP",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -10724,6 +10779,42 @@
             "deprecationReason": null
           },
           {
+            "name": "following_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_groups",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_users",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "groups",
             "description": null,
             "args": [],
@@ -10802,6 +10893,42 @@
           },
           {
             "name": "following",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_groups",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_users",
             "description": null,
             "args": [],
             "type": {
@@ -12243,7 +12370,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -12381,6 +12508,16 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "type",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "FollowingTypeEnum",
+                  "ofType": null
+                },
+                "defaultValue": "ALL"
               }
             ],
             "type": {
@@ -12627,7 +12764,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -13073,7 +13210,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -13337,6 +13474,16 @@
                   "ofType": null
                 },
                 "defaultValue": "1"
+              },
+              {
+                "name": "type",
+                "description": null,
+                "type": {
+                  "kind": "ENUM",
+                  "name": "FollowingTypeEnum",
+                  "ofType": null
+                },
+                "defaultValue": "ALL"
               }
             ],
             "type": {
@@ -13483,6 +13630,30 @@
           },
           {
             "name": "is_confirmed",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_exceeding_connections_limit",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_exceeding_either_connections_limit",
             "description": null,
             "args": [],
             "type": {
@@ -13653,7 +13824,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "149"
+                "defaultValue": "182"
               },
               {
                 "name": "q",
@@ -13707,6 +13878,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "non_premium_connections_limit",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -14136,7 +14319,7 @@
             "deprecationReason": null
           },
           {
-            "name": "MAY_CONNECTION_LIMIT",
+            "name": "JUNE_CONNECTION_LIMIT",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -14204,6 +14387,18 @@
             "deprecationReason": null
           },
           {
+            "name": "connections_limit",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "followers",
             "description": null,
             "args": [],
@@ -14217,6 +14412,42 @@
           },
           {
             "name": "following",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_groups",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "following_users",
             "description": null,
             "args": [],
             "type": {

@@ -68,6 +68,9 @@ export interface ProfilePage_identity_identifiable_User_counts {
   followers: number | null;
   following: number | null;
   groups: number | null;
+  following_channels: number | null;
+  following_users: number | null;
+  following_groups: number | null;
   channels: number | null;
   blocks: number | null;
 }
