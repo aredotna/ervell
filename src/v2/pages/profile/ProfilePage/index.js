@@ -29,10 +29,11 @@ export default class ProfilePage extends Component {
     ]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
+    followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
   }
 
   render() {
-    const { id, view, sort, filter } = this.props
+    const { id, view, sort, filter, followType } = this.props
 
     return (
       <ErrorBoundary>
@@ -82,6 +83,7 @@ export default class ProfilePage extends Component {
                     sort={sort}
                     filter={filter}
                     identifiable={identifiable}
+                    followType={followType}
                   />
 
                   <ProfileViews
@@ -90,6 +92,7 @@ export default class ProfilePage extends Component {
                     sort={sort}
                     filter={filter}
                     identifiable={identifiable}
+                    followType={followType}
                   />
 
                   <BottomBanner

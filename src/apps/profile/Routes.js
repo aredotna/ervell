@@ -10,6 +10,7 @@ import ProfilePage from 'v2/pages/profile/ProfilePage'
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM']
 const VALID_FILTERS = ['OWN', 'COLLABORATION']
+const VALID_FOLLOW_TYPES = ['CHANNEL', 'USER', 'GROUP']
 
 const setValid = (value, validValues, defaultValue) => {
   if (validValues.includes(value)) return value
@@ -39,12 +40,19 @@ export default () => (
               'OWN'
             )
 
+            const followType = setValid(
+              query.followType,
+              VALID_FOLLOW_TYPES,
+              'ALL'
+            )
+
             return (
               <ProfilePage
                 id={params.id}
                 view={view}
                 sort={sort}
                 filter={filter}
+                followType={followType}
               />
             )
           }}

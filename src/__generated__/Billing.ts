@@ -71,12 +71,14 @@ export interface Billing_customer {
 export interface Billing_counts {
   __typename: "MeCounts";
   private_connections: number | null;
+  connections: number | null;
 }
 
 export interface Billing {
   __typename: "Me";
   id: number | null;
   non_premium_private_connections_limit: number | null;
+  non_premium_connections_limit: number | null;
   customer: Billing_customer | null;
   counts: Billing_counts | null;
   name: string | null;

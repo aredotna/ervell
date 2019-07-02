@@ -64,6 +64,9 @@ export interface ProfileMetadata_User_counts {
   followers: number | null;
   following: number | null;
   groups: number | null;
+  following_channels: number | null;
+  following_users: number | null;
+  following_groups: number | null;
 }
 
 export interface ProfileMetadata_User {
