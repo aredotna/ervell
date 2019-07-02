@@ -95,6 +95,11 @@ export default class Page extends PureComponent {
 
           <meta name="twitter:site" content="@aredotna" />
 
+          <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self' *.are.na instant.page/1.2.2 arena-avatars.s3.amazonaws.com gravatar.com https://d2hp0ptr16qg89.cloudfront.net https://d2w9rnfcy7mm78.cloudfront.net https://www.google-analytics.com 'unsafe-inline'; frame-src *;"
+          />
+
           {styles}
         </head>
 
