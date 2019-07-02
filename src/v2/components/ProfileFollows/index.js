@@ -15,6 +15,11 @@ export default class ProfileFollows extends PureComponent {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(['followers', 'following']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+    followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']),
+  }
+
+  static defaultProps = {
+    followType: null,
   }
 
   state = {
@@ -61,7 +66,10 @@ export default class ProfileFollows extends PureComponent {
 
   render() {
     const { per, hasMore } = this.state
-    const { id, type, fetchPolicy } = this.props
+    const { id, type, fetchPolicy, followType } = this.props
+
+    const variables =
+      type === 'following' ? { type: followType, id, per } : { id, per }
 
     return (
       <Query
@@ -72,7 +80,7 @@ export default class ProfileFollows extends PureComponent {
           }[type]
         }
         key={type}
-        variables={{ id, per }}
+        variables={variables}
         fetchPolicy={fetchPolicy}
       >
         {({ loading, error, data, fetchMore }) => {

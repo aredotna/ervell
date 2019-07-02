@@ -10,7 +10,7 @@ export enum BannerEnum {
   BOOKMARKLET = "BOOKMARKLET",
   CONFIRM = "CONFIRM",
   INVITE = "INVITE",
-  MAY_CONNECTION_LIMIT = "MAY_CONNECTION_LIMIT",
+  JUNE_CONNECTION_LIMIT = "JUNE_CONNECTION_LIMIT",
   PROPOSE_PREMIUM = "PROPOSE_PREMIUM",
   STRONGLY_PROPOSE_PREMIUM = "STRONGLY_PROPOSE_PREMIUM",
 }
@@ -80,6 +80,16 @@ export enum ExportFormats {
  * Types of followable objects
  */
 export enum FollowableTypeEnum {
+  CHANNEL = "CHANNEL",
+  GROUP = "GROUP",
+  USER = "USER",
+}
+
+/**
+ * Ways to filter following
+ */
+export enum FollowingTypeEnum {
+  ALL = "ALL",
   CHANNEL = "CHANNEL",
   GROUP = "GROUP",
   USER = "USER",

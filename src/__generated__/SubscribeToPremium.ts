@@ -56,12 +56,14 @@ export interface SubscribeToPremium_subscribe_to_premium_me_customer {
 export interface SubscribeToPremium_subscribe_to_premium_me_counts {
   __typename: "MeCounts";
   private_connections: number | null;
+  connections: number | null;
 }
 
 export interface SubscribeToPremium_subscribe_to_premium_me {
   __typename: "Me";
   id: number | null;
   non_premium_private_connections_limit: number | null;
+  non_premium_connections_limit: number | null;
   customer: SubscribeToPremium_subscribe_to_premium_me_customer | null;
   counts: SubscribeToPremium_subscribe_to_premium_me_counts | null;
 }

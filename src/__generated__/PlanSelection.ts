@@ -23,11 +23,13 @@ export interface PlanSelection_customer {
 export interface PlanSelection_counts {
   __typename: "MeCounts";
   private_connections: number | null;
+  connections: number | null;
 }
 
 export interface PlanSelection {
   __typename: "Me";
   non_premium_private_connections_limit: number | null;
+  non_premium_connections_limit: number | null;
   customer: PlanSelection_customer | null;
   id: number | null;
   counts: PlanSelection_counts | null;

@@ -21,6 +21,10 @@ export interface createBlockMutation {
 }
 
 export interface createBlockMutationVariables {
-  channel_id: string;
+  channel_ids: (string | null)[];
   value?: string | null;
+  original_source_url?: string | null;
+  original_source_title?: string | null;
+  title?: string | null;
+  description?: string | null;
 }

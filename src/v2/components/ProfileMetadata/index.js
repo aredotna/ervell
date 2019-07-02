@@ -15,6 +15,7 @@ import ProfileGroupUserList from 'v2/components/ProfileMetadata/components/Profi
 import ProfileMetadataView from 'v2/components/ProfileMetadata/components/ProfileMetadataView'
 import ProfileMetadataSort from 'v2/components/ProfileMetadata/components/ProfileMetadataSort'
 import ProfileMetadataFilter from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter'
+import ProfileMetadataFollowingType from 'v2/components/ProfileMetadata/components/ProfileMetadataFollowingType'
 
 export default class ProfileMetadata extends Component {
   static propTypes = {
@@ -29,10 +30,11 @@ export default class ProfileMetadata extends Component {
     ]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
+    followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
   }
 
   render() {
-    const { identifiable, view, sort, filter } = this.props
+    const { identifiable, view, sort, filter, followType } = this.props
 
     return (
       <HeaderMetadataContainer
@@ -70,6 +72,13 @@ export default class ProfileMetadata extends Component {
               <ProfileMetadataFilter
                 identifiable={identifiable}
                 filter={filter}
+              />
+            )}
+
+            {view === 'following' && (
+              <ProfileMetadataFollowingType
+                identifiable={identifiable}
+                followType={followType}
               />
             )}
           </Grid>
