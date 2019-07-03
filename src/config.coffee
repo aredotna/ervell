@@ -44,6 +44,8 @@ module.exports =
   RATE_LIMIT_TOTAL_POINTS: 200
   RATE_LIMIT_DURATION: 60
   IP_DENYLIST: ''
+  USE_CSP: false
+  CSP_SRCS: ''
 
 # Override any values with env variables if they exist
 for key, val of module.exports
