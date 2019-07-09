@@ -5,7 +5,7 @@ import Head from 'v2/components/UI/Head'
 
 const Description = ({ children: description }) => (
   <Head>
-    <meta property="description" content={description} />
+    <meta name="description" content={description} />
     <meta name="twitter:description" content={description} />
     <meta property="og:description" content={description} />
   </Head>

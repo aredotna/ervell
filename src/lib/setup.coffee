@@ -25,7 +25,9 @@
   CLIENT_GRAPHQL_ENDPOINT
   BACKBONE_SUPER_SYNC_TIMEOUT
   RECAPTCHA_SITE_KEY,
-  IP_DENYLIST
+  IP_DENYLIST,
+  USE_CSP,
+  CSP_SRCS,
 } = require '../config'
 
 _ = require 'underscore'
@@ -81,6 +83,8 @@ sharify.data = {
   GRAPHQL_ENDPOINT
   CLIENT_GRAPHQL_ENDPOINT
   RECAPTCHA_SITE_KEY
+  USE_CSP
+  CSP_SRCS
   JS_EXT: if 'production' is NODE_ENV then '.min.js.cgz' else '.js'
   CSS_EXT: if 'production' is NODE_ENV then '.min.css.cgz' else '.css'
 }
