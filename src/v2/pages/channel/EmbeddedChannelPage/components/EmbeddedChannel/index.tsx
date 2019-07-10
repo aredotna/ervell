@@ -17,6 +17,7 @@ const Container = styled(Box).attrs({
   border: '2px solid',
   borderColor: 'gray.light',
   borderRadius: '0.5em',
+  bg: 'white',
 })`
   display: flex;
   flex-direction: column;
