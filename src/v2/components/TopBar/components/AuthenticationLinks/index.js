@@ -11,7 +11,7 @@ const Container = styled(Box)`
 
 export default props => (
   <Container {...props}>
-    <Text f={4}>
+    <Text f={3}>
       <strong>
         <a href="/sign_up">Sign up</a>
       </strong>
