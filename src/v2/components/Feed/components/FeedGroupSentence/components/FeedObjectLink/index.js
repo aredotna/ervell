@@ -20,7 +20,7 @@ const FeedObjectLink = ({ __typename, label, href, visibility, ...rest }) => {
   return (
     <Word
       display="inline"
-      f={6}
+      f={[5, 5, 6]}
       fontWeight={fontWeight}
       color={__typename === 'Channel' ? `channel.${visibility}` : 'gray.base'}
       {...rest}

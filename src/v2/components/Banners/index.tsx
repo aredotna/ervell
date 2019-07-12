@@ -16,15 +16,19 @@ import {
 import resendConfirmationEmailMutation from 'v2/components/Banners/mutations/resendConfirmationEmail'
 
 const Button = styled(GenericButton).attrs({
-  f: 3,
+  f: [1, 2, 3],
   ml: 6,
   mt: [6, 6, 0],
 })``
 
 const ButtonLink = styled(GenericButtonLink).attrs({
-  f: 3,
+  f: [1, 2, 3],
   ml: 6,
   mt: [6, 6, 0],
+})``
+
+const Buttons = styled(Box).attrs({
+  flexDirection: ['column', 'column', 'row'],
 })``
 
 interface ConfirmBlockProps {
@@ -152,7 +156,7 @@ const __LoggedOutExplore__: React.FC<LoggedOutExploreBlockProps> = ({
       isCloseable={false}
       {...rest}
     >
-      <Text f={5} fontWeight="normal">
+      <Text f={[4, 4, 5]} fontWeight="normal">
         Make channels, add content, connect ideas.
       </Text>
 
@@ -176,13 +180,13 @@ const __LoggedOutProfile__: React.FC<LoggedOutProfileProps> = ({
       isCloseable={false}
       {...rest}
     >
-      <Text f={5} fontWeight="normal">
+      <Text f={[4, 4, 5]} fontWeight="normal">
         Join Are.na to follow <Truncate length={40}>{name}</Truncate>
       </Text>
-
-      <ButtonLink href="/sign_up">Sign up</ButtonLink>
-
-      <ButtonLink href="/explore">Explore</ButtonLink>
+      <Buttons>
+        <ButtonLink href="/sign_up">Sign up</ButtonLink>
+        <ButtonLink href="/explore">Explore</ButtonLink>
+      </Buttons>
     </Banner>
   ) : null
 

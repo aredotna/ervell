@@ -10,14 +10,14 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 import feedGroupSentenceFragment from 'v2/components/Feed/components/FeedGroupSentence/fragments/sentence'
 
 const RelativeTime = styled(Text).attrs({
-  f: 1,
+  f: [1],
   color: 'gray.medium',
 })`
   text-transform: uppercase;
 `
 
 const Label = styled(Text).attrs({
-  f: 6,
+  f: [5, 5, 6],
   display: 'inline',
 })``
 
