@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
 
-import feedGroupObjectFragment from 'v2/components/Feed/components/FeedGroupObjects/fragments/object'
+import feedGroupObjectFragment from 'v2/components/FeedGroups/components/FeedGroupObjects/fragments/object'
 
 import Grid from 'v2/components/UI/Grid'
 

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
 
-import feedGroupFragment from 'v2/components/Feed/components/FeedGroups/fragments/group'
+import feedGroupFragment from 'v2/components/FeedGroups/fragments/group'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
-import FeedGroupSentence from 'v2/components/Feed/components/FeedGroupSentence'
-import FeedGroupObjects from 'v2/components/Feed/components/FeedGroupObjects'
+import FeedGroupSentence from 'v2/components/FeedGroups/components/FeedGroupSentence'
+import FeedGroupObjects from 'v2/components/FeedGroups/components/FeedGroupObjects'
 
 const Container = styled(Box)`
   position: relative;

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import feedGroupFragment from 'v2/components/Feed/components/FeedGroups/fragments/group'
+import feedGroupFragment from 'v2/components/FeedGroups/fragments/group'
 
 export default gql`
   query FeedQuery($offset: Int, $limit: Int, $type: String) {
