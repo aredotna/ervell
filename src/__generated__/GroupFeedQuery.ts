@@ -444,6 +444,8 @@ export interface GroupFeedQuery_group_feed {
 
 export interface GroupFeedQuery_group {
   __typename: "Group";
+  id: number | null;
+  name: string | null;
   feed: GroupFeedQuery_group_feed | null;
 }
 

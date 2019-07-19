@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Query } from 'react-apollo'
 import InfiniteScroll from 'react-infinite-scroller'
 import { map, flatten } from 'underscore'
+import styled from 'styled-components'
 
 import groupFeedQuery from 'v2/components/GroupProfileFeed/queries/groupFeed'
 
@@ -10,11 +11,26 @@ import {
   GroupFeedQueryVariables,
 } from '__generated__/GroupFeedQuery'
 
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
 import FeedGroups from 'v2/components/FeedGroups'
 import CenteringBox from 'v2/components/UI/CenteringBox'
+
+const EmptyContainer = styled(Box)`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
+  padding: ${x => x.theme.space[10]} 0;
+`
 
 interface Props {
   id: string
@@ -72,8 +88,19 @@ export default class GroupProfileFeed extends PureComponent<Props, State> {
           const {
             group: {
               feed: { groups },
+              name,
             },
           } = data
+
+          if (groups.length === 0) {
+            return (
+              <EmptyContainer p={6}>
+                <Text textAlign="center" f={5}>
+                  Nothing in the <strong>{name}</strong> feed yet...
+                </Text>
+              </EmptyContainer>
+            )
+          }
 
           return (
             <InfiniteScroll
