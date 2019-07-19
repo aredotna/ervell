@@ -1,34 +1,50 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
-import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroller'
 import { map, flatten } from 'underscore'
+import styled from 'styled-components'
 
-import feedQuery from 'v2/components/Feed/queries/feed'
+import groupFeedQuery from 'v2/components/GroupProfileFeed/queries/groupFeed'
 
+import {
+  GroupFeedQuery,
+  GroupFeedQueryVariables,
+} from '__generated__/GroupFeedQuery'
+
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
 import FeedGroups from 'v2/components/FeedGroups'
 import CenteringBox from 'v2/components/UI/CenteringBox'
 
-const LoadingContainer = styled(CenteringBox)`
-  margin-top: -250px; // Hack for now
+const EmptyContainer = styled(Box)`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  border-top: 1px solid ${x => x.theme.colors.gray.light};
+  padding: ${x => x.theme.space[10]} 0;
 `
 
-export default class Feed extends PureComponent {
-  static propTypes = {
-    onCompleted: PropTypes.func,
-    type: PropTypes.string,
-  }
+interface Props {
+  id: string
+  onCompleted?: () => void
+}
 
-  static defaultProps = {
-    onCompleted: () => {},
-    type: 'User',
-  }
+interface State {
+  offset: number
+  limit: number
+  hasMore: boolean
+}
 
-  state = {
+export default class GroupProfileFeed extends PureComponent<Props, State> {
+  public readonly state: State = {
     offset: 0,
     limit: 20,
     hasMore: true,
@@ -38,7 +54,7 @@ export default class Feed extends PureComponent {
     if (!data) return []
 
     const {
-      me: {
+      group: {
         feed: { groups },
       },
     } = data
@@ -46,22 +62,22 @@ export default class Feed extends PureComponent {
   }
 
   render() {
-    const { onCompleted, type } = this.props
+    const { onCompleted, id } = this.props
     const { limit, hasMore, offset } = this.state
 
     return (
-      <Query
-        query={feedQuery}
-        variables={{ limit, type }}
+      <Query<GroupFeedQuery, GroupFeedQueryVariables>
+        query={groupFeedQuery}
+        variables={{ id, limit }}
         onCompleted={onCompleted}
         ssr={false}
       >
-        {({ loading, error, data, fetchMore }) => {
+        {({ data, loading, error, fetchMore }) => {
           if (loading) {
             return (
-              <LoadingContainer>
+              <CenteringBox>
                 <LoadingIndicator p={6} />
-              </LoadingContainer>
+              </CenteringBox>
             )
           }
 
@@ -70,10 +86,21 @@ export default class Feed extends PureComponent {
           }
 
           const {
-            me: {
+            group: {
               feed: { groups },
+              name,
             },
           } = data
+
+          if (groups.length === 0) {
+            return (
+              <EmptyContainer p={6}>
+                <Text textAlign="center" f={5}>
+                  Nothing in the <strong>{name}</strong> feed yet...
+                </Text>
+              </EmptyContainer>
+            )
+          }
 
           return (
             <InfiniteScroll
@@ -89,13 +116,13 @@ export default class Feed extends PureComponent {
 
                     const mergedResults = {
                       ...prevResult,
-                      me: {
-                        ...prevResult.me,
+                      group: {
+                        ...prevResult.group,
                         feed: {
-                          ...prevResult.me.feed,
+                          ...prevResult.group.feed,
                           groups: [
-                            ...prevResult.me.feed.groups,
-                            ...fetchMoreResult.me.feed.groups,
+                            ...prevResult.group.feed.groups,
+                            ...fetchMoreResult.group.feed.groups,
                           ],
                         },
                       },
@@ -106,7 +133,8 @@ export default class Feed extends PureComponent {
                 }).then(res => {
                   this.setState({
                     offset: offset + limit,
-                    hasMore: !res.errors && res.data.me.feed.groups.length > 0,
+                    hasMore:
+                      !res.errors && res.data.group.feed.groups.length > 0,
                   })
                 })
               }}

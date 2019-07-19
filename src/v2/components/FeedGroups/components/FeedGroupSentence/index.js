@@ -4,10 +4,10 @@ import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
-import FeedObjectLink from 'v2/components/Feed/components/FeedGroupSentence/components/FeedObjectLink/index'
+import FeedObjectLink from 'v2/components/FeedGroups/components/FeedGroupSentence/components/FeedObjectLink/index'
 import BorderedLock from 'v2/components/UI/BorderedLock'
 
-import feedGroupSentenceFragment from 'v2/components/Feed/components/FeedGroupSentence/fragments/sentence'
+import feedGroupSentenceFragment from 'v2/components/FeedGroups/components/FeedGroupSentence/fragments/sentence'
 
 const RelativeTime = styled(Text).attrs({
   f: [1],

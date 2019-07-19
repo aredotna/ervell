@@ -40,6 +40,7 @@ ProfileMetaTags.propTypes = {
     'index',
     'following',
     'followers',
+    'feed',
   ]).isRequired,
 }
 

@@ -26,6 +26,7 @@ export default class ProfilePage extends Component {
       'index',
       'followers',
       'following',
+      'feed',
     ]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
