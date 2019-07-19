@@ -27,6 +27,7 @@ export default class ProfileMetadata extends Component {
       'index',
       'following',
       'followers',
+      'feed',
     ]).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,

@@ -31,14 +31,16 @@ const FeedObjectLink = ({ __typename, label, href, visibility, ...rest }) => {
 }
 
 FeedObjectLink.propTypes = {
-  __typename: PropTypes.string.isRequired,
+  __typename: PropTypes.string,
   label: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
+  href: PropTypes.string,
   visibility: PropTypes.string,
 }
 
 FeedObjectLink.defaultProps = {
   visibility: null,
+  href: null,
+  __typename: null,
 }
 
 export default FeedObjectLink
