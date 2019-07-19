@@ -116,7 +116,7 @@ export default class GroupProfileFeed extends PureComponent<Props, State> {
 
                     const mergedResults = {
                       ...prevResult,
-                      me: {
+                      group: {
                         ...prevResult.group,
                         feed: {
                           ...prevResult.group.feed,
