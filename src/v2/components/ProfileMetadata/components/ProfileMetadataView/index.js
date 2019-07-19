@@ -18,6 +18,7 @@ export default class ProfileMetadataView extends Component {
       'index',
       'following',
       'followers',
+      'feed',
     ]).isRequired,
   }
 
@@ -62,6 +63,18 @@ export default class ProfileMetadataView extends Component {
         >
           Index
         </CookieLinkUnlessCurrent>
+
+        {__typename === 'Group' && (
+          <CookieLinkUnlessCurrent
+            name="view"
+            prefix="GroupProfile"
+            value="feed"
+            to={`${href}/feed`}
+            isActive={this.isViewActive('feed')}
+          >
+            Feed
+          </CookieLinkUnlessCurrent>
+        )}
 
         {__typename === 'User' && (
           <CookieLinkUnlessCurrent

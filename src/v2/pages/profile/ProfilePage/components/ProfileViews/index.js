@@ -11,6 +11,7 @@ import ProfileChannels from 'v2/components/ProfileChannels'
 import ProfileChannelIndex from 'v2/components/ProfileChannelIndex'
 import ProfileFollows from 'v2/components/ProfileFollows'
 import ProfileGroups from 'v2/components/ProfileGroups'
+import GroupProfileFeed from 'v2/components/GroupProfileFeed/index'
 
 const All = ({ id, sort, identifiable, fetchPolicy }) => (
   <EmptyMessageOrComponent
@@ -114,6 +115,15 @@ Groups.propTypes = {
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
 
+const GroupFeed = ({ id, fetchPolicy }) => (
+  <GroupProfileFeed id={id} fetchPolicy={fetchPolicy} />
+)
+
+GroupFeed.propTypes = {
+  id: PropTypes.string.isRequired,
+  fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+}
+
 class ProfileViews extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     // Once the view changes switch into "network-only" mode
@@ -183,6 +193,8 @@ class ProfileViews extends Component {
         )
       case 'groups':
         return <Groups id={id} fetchPolicy={fetchPolicy} />
+      case 'feed':
+        return <GroupFeed id={id} fetchPolicy={fetchPolicy} />
       default:
         return null
     }

@@ -32,6 +32,7 @@ app
   .get('/:id/channels', ...resolve)
   .get('/:id/index', ...resolve)
   .get('/:id/groups', ...resolve)
+  .get('/:id/feed', ...resolve)
   .get('/:id/followers', ...resolve)
   .get('/:id/following', ...resolve)
 
