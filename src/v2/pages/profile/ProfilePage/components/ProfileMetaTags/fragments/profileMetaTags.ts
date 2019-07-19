@@ -17,6 +17,7 @@ export default gql`
       title: name
       name
       description: description(format: MARKDOWN)
+      canonical: href(absolute: true)
       href
     }
   }
