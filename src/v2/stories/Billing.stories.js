@@ -37,7 +37,6 @@ storiesOf('Billing', module)
         `}
       >
         {({ data, loading, error }) => {
-          console.log('data', data, error)
           if (loading || error) return ''
           return (
             <UserSelection
