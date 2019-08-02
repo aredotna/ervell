@@ -9,6 +9,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import UserAvatar from 'v2/components/UserAvatar'
 import ToggleSwitch from 'v2/components/UI/ToggleSwitch'
+import { Label } from 'v2/components/UI/Inputs'
 
 const Container = styled(Box).attrs({
   py: 3,
@@ -61,14 +62,16 @@ export default class UserSelector extends PureComponent {
       <Container>
         <UserAvatar user={user} />
 
-        <Box display="flex" flexDirection="column" flex={1} pl={6}>
-          <Text f={1} fontWeight="bold">
-            {user.name}
-          </Text>
+        <Box flex={1} pl={6} display="flex" flexDirection="row">
+          <Box display="flex" flexDirection="column">
+            <Text f={1} fontWeight="bold">
+              {user.name}
+            </Text>
 
-          <Text f={1} color="gray.medium">
-            {user.hidden_email}
-          </Text>
+            <Text f={1} color="gray.medium">
+              {user.hidden_email}
+            </Text>
+          </Box>
         </Box>
 
         {user.is_premium && !user.is_canceled ? (
@@ -85,21 +88,42 @@ export default class UserSelector extends PureComponent {
           </Text>
         ) : (
           <Box display="flex" alignItems="center">
-            <Text
-              mr={5}
-              f={1}
-              color={isSelected ? 'state.premium' : 'gray.medium'}
-              fontWeight="bold"
-            >
-              {isSelected ? 'Upgrade' : 'Don’t upgrade'}
-            </Text>
+            {user.is_approaching_either_connections_limit &&
+              !user.is_exceeding_either_connections_limit && (
+                <Label mr={6} color="state.alert">
+                  Almost out of blocks
+                </Label>
+              )}
 
-            <ToggleSwitch
-              activeColor="state.premium"
-              inactiveColor="gray.semiBold"
-              onToggle={this.handleToggle}
-              value={isSelected}
-            />
+            {user.is_exceeding_either_connections_limit && (
+              <Label mr={6} color="state.alert">
+                Out of blocks
+              </Label>
+            )}
+
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="flex-end"
+              minWidth="6em"
+            >
+              <Text
+                mr={5}
+                f={1}
+                color={isSelected ? 'state.premium' : 'gray.medium'}
+                fontWeight="bold"
+              >
+                {isSelected ? 'Upgrade' : 'Not yet'}
+              </Text>
+
+              <ToggleSwitch
+                activeColor="state.premium"
+                inactiveColor="gray.semiBold"
+                onToggle={this.handleToggle}
+                value={isSelected}
+              />
+            </Box>
           </Box>
         )}
       </Container>
