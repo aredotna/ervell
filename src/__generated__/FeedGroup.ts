@@ -59,6 +59,7 @@ export interface FeedGroup_item_Comment {
   __typename: "Comment";
   id: number | null;
   body: string | null;
+  href: string | null;
 }
 
 export interface FeedGroup_item_Group {
@@ -100,6 +101,7 @@ export interface FeedGroup_target_Comment {
   __typename: "Comment";
   id: number | null;
   body: string | null;
+  href: string | null;
 }
 
 export interface FeedGroup_target_Group {

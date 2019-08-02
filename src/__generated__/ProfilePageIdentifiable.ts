@@ -54,6 +54,7 @@ export interface ProfilePageIdentifiable_Group {
   is_current_user_a_member: boolean | null;
   title: string | null;
   description: string | null;
+  canonical: string | null;
 }
 
 export interface ProfilePageIdentifiable_User_can {
