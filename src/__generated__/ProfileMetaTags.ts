@@ -21,6 +21,7 @@ export interface ProfileMetaTags_Group {
   title: string | null;
   name: string | null;
   description: string | null;
+  canonical: string | null;
   href: string | null;
 }
 

@@ -60,6 +60,8 @@ export interface MyGroup_users {
   initials: string | null;
   avatar: string | null;
   is_upgradeable: boolean | null;
+  is_approaching_either_connections_limit: boolean | null;
+  is_exceeding_either_connections_limit: boolean | null;
 }
 
 export interface MyGroup_owner {
