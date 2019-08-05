@@ -36,6 +36,7 @@ export interface FeedObject_Comment {
   __typename: "Comment";
   id: number | null;
   body: string | null;
+  href: string | null;
 }
 
 export interface FeedObject_Group {

@@ -19,6 +19,8 @@ export interface UserSelector {
   is_premium: boolean | null;
   is_canceled: boolean | null;
   is_upgradeable: boolean | null;
+  is_approaching_either_connections_limit: boolean | null;
+  is_exceeding_either_connections_limit: boolean | null;
   can: UserSelector_can | null;
   href: string | null;
   initials: string | null;
