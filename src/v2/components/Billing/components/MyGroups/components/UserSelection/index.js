@@ -55,16 +55,8 @@ export default class UserSelection extends PureComponent {
           ))}
         </Box>
 
-        <Box
-          p={6}
-          my={7}
-          borderRadius="0.25em"
-          borderColor="state.premium"
-          border="1px
-          solid"
-          textAlign="center"
-        >
-          <Text color="state.premium">
+        <Box p={6} my={7} textAlign="center">
+          <Text color="state.premium" fontWeight="bold">
             <Count amount={amount} label="member" /> selected = $
             {((PLAN_AMOUNTS[term] * amount) / 100).toFixed(2)} / {term}
           </Text>

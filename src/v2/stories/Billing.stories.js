@@ -36,9 +36,16 @@ storiesOf('Billing', module)
           ${userSelectionFragment}
         `}
       >
-        {({ data: { group }, loading }) => {
-          if (loading) return ''
-          return <UserSelection group={group} />
+        {({ data, loading, error }) => {
+          if (loading || error) return ''
+          return (
+            <UserSelection
+              group={data.group}
+              upgradeableUsers={data.group.users.filter(
+                user => user.is_upgradeable
+              )}
+            />
+          )
         }}
       </Query>
     </Specimen>
