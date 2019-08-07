@@ -53,7 +53,7 @@ export const KonnectableChannelPreview: React.FC<Props> = ({
       >
         {({ data, error, loading }) => {
           if (error) {
-            return <ErrorAlert>error.message</ErrorAlert>
+            return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
           const Indicator = () => (

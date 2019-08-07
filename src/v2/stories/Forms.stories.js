@@ -5,9 +5,11 @@ import LoginForm from 'v2/components/LoginForm'
 import RegistrationForm from 'v2/components/RegistrationForm'
 import ResetPasswordForm from 'v2/components/ResetPasswordForm'
 import NewChannelForm from 'v2/components/NewChannelForm'
+import UserSettings from 'v2/components/UserSettings'
 
 storiesOf('Forms', module)
   .add('Login form', () => <LoginForm />)
   .add('Signup form', () => <RegistrationForm />)
   .add('Forgot password form', () => <ResetPasswordForm />)
   .add('New channel form', () => <NewChannelForm />)
+  .add('User settings form', () => <UserSettings />)
