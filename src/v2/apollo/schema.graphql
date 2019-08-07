@@ -1191,7 +1191,7 @@ type Invitee implements Model & UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   created_at(format: String, relative: Boolean): String
   custom_badge(size: CustomBadgeVersion): String
   email: String
@@ -1211,7 +1211,7 @@ type Invitee implements Model & UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -1292,7 +1292,7 @@ type Me implements Model & UserInterface {
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
   connection_search(include_open_channels: Boolean = true, page: Int = 1, per: Int = 5, q: String = null): [Channel]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   counts: MeCounts
   created_at(format: String, relative: Boolean): String
   custom_badge(size: CustomBadgeVersion): String
@@ -1323,7 +1323,7 @@ type Me implements Model & UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   non_premium_connections_limit: Int
@@ -1613,7 +1613,7 @@ type Query {
   channels(ids: [ID]!): [Channel]
   coupon(code: String!): Coupon
   explore(direction: Directions = DESC, page: Int = 1, per: Int = 1, sort_by: SearchSorts = null, type: SearchType): [SearchResult]
-  exxplore(direction: Directions = DESC, page: Int = 1, per: Int = 1, seed: Int = 214, sort_by: SearchSorts = null, type: SearchType): [Konnectable]
+  exxplore(direction: Directions = DESC, page: Int = 1, per: Int = 1, seed: Int = 219, sort_by: SearchSorts = null, type: SearchType): [Konnectable]
 
   # Interface for getting the follow status of users or channels
   followable(id: ID, type: FollowableTypeEnum): FollowableType
@@ -1633,12 +1633,12 @@ type Query {
   password_resettable_user(reset_password_token: String!): User
   password_token(token: ID!): User
   random_title: String
-  search(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 214, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
+  search(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 219, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
   searches: Searches
 
   # An otherwise private channel that is accessible via the shared token
   shared_channel(token: String!): Channel
-  ssearch(block_filter: BlockFilterEnum = null, direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 214, sort_by: SearchSorts = null, type: [SsearchType] = [USER, GROUP, CHANNEL, BLOCK]): [SsearchResult]
+  ssearch(block_filter: BlockFilterEnum = null, direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 219, sort_by: SearchSorts = null, type: [SsearchType] = [USER, GROUP, CHANNEL, BLOCK]): [SsearchResult]
 
   # Is this endpoint operational?
   status: String
@@ -2157,7 +2157,7 @@ type User implements Followable & Model & UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   counts: UserCounts
   created_at(format: String, relative: Boolean): String
   custom_badge(size: CustomBadgeVersion): String
@@ -2179,7 +2179,7 @@ type User implements Followable & Model & UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -2189,6 +2189,7 @@ type User implements Followable & Model & UserInterface {
 # The actions that the CurrentUser can perform on the User
 type UserCan {
   cancel_premium: Boolean
+  edit_profile_description: Boolean
   follow: Boolean
   manage: Boolean
   message: Boolean
@@ -2229,7 +2230,7 @@ interface UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   custom_badge(size: CustomBadgeVersion): String
   first_name: String
   following(page: Int = 1, per: Int = 1, type: FollowingTypeEnum = ALL): [FollowableType]
@@ -2246,7 +2247,7 @@ interface UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 214, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
