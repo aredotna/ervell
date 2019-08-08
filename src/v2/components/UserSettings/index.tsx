@@ -5,6 +5,7 @@ import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs'
 import Text from 'v2/components/UI/Text'
+import Pulldown from 'v2/components/UI/Pulldown'
 
 import { Query } from 'react-apollo'
 import userSettingsQuery from 'v2/components/UserSettings/queries/UserSettingsQuery'
@@ -35,7 +36,6 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
         <Input
           f={4}
           placeholder="Last name"
-          autoFocus
           required
           value={me.last_name}
           flex={1}
@@ -45,14 +45,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
       <LabelledInput mt={6} mb={5}>
         <Label>Email</Label>
 
-        <Input
-          f={4}
-          placeholder="Email"
-          autoFocus
-          required
-          value={me.email}
-          flex={1}
-        />
+        <Input f={4} placeholder="Email" required value={me.email} flex={1} />
       </LabelledInput>
 
       {me.unconfirmed_email && me.unconfirmed_email !== '' && (
@@ -64,7 +57,6 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
               placeholder="Unconfirmed email address"
               readOnly
               disabled
-              autoFocus
               value={me.unconfirmed_email}
               flex={1}
             />
@@ -101,6 +93,39 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
           />
         </LabelledInput>
       )}
+
+      <LabelledInput mt={6} mb={5}>
+        <Label>Show NSFW?</Label>
+
+        <Pulldown
+          value={me.settings.show_nsfw}
+          onChange={() => null}
+          options={{
+            true: <span>Yes</span>,
+            false: <span>No</span>,
+          }}
+        />
+      </LabelledInput>
+
+      <LabelledInput mt={0} mb={5}>
+        <Label />
+        <Text f={2} mb={7}>
+          Show content marked as NSFW on profiles, explore and feed
+        </Text>
+      </LabelledInput>
+
+      <LabelledInput mt={6} mb={5}>
+        <Label>Default landing page</Label>
+
+        <Pulldown
+          value={me.home_path}
+          onChange={() => null}
+          options={{
+            '/': <span>Feed</span>,
+            '/explore': <span>Explore</span>,
+          }}
+        />
+      </LabelledInput>
     </Box>
   )
 }
