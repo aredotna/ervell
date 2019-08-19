@@ -13,6 +13,8 @@ export default gql`
     $exclude_from_indexes: Boolean
     $bio: String
     $custom_badge_url: String
+    $password: String
+    $password_confirmation: String
   ) {
     update_account(
       input: {
@@ -27,6 +29,8 @@ export default gql`
         receive_newsletter: $receive_newsletter
         show_tour: $show_tour
         exclude_from_indexes: $exclude_from_indexes
+        password: $password
+        password_confirmation: $password_confirmation
       }
     ) {
       me {

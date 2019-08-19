@@ -2,14 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { Query, Mutation, MutationFn } from 'react-apollo'
 import { Form, Field } from 'react-final-form'
+import { FORM_ERROR } from 'final-form'
 
 import Box from 'v2/components/UI/Box'
+import Alert from 'v2/components/UI/Alert'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 import Text from 'v2/components/UI/Text'
 import Pulldown from 'v2/components/UI/Pulldown'
+
+import mapErrors from 'v2/util/mapErrors'
 
 import USER_SETTINGS_QUERY from 'v2/components/UserSettings/queries/userSettingsQuery'
 import UPDATE_ACCOUNT_MUTATION from 'v2/components/UserSettings/mutations/updateAccountMutation'
@@ -34,37 +38,71 @@ const Condition = ({ when, is, children }) => (
   </Field>
 )
 
+const InputContainer = styled(LabelledInput)``
+
 const TextInput = styled(Input).attrs({
   flex: 1,
   f: 4,
 })``
 
-const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
+const Bio = styled(Textarea)``
+
+const Select = styled(Pulldown)``
+
+const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
   const isCustom =
     me.home_path !== '/' &&
     me.home_path !== '/explore' &&
     me.home_path !== `/${me.slug}`
   const homePath = isCustom ? 'custom' : me.home_path
 
+  const handleSubmit = values => {
+    const variables = {
+      home_path: values.custom_home_path || values.home_path,
+      custom_home_path: undefined,
+      ...values,
+    }
+    return updateAccount({ variables })
+      .then(() => true)
+      .catch(err => {
+        const mappedErrors = mapErrors(err)
+        const errors = {
+          [FORM_ERROR]: mappedErrors.errorMessage,
+          ...mappedErrors.attributeErrors,
+        }
+        console.log('errors', errors)
+        return errors
+      })
+  }
+
   return (
     <Box>
       <Form
-        onSubmit={values => console.log('submitted', values)}
-        render={({ handleSubmit }) => {
+        onSubmit={handleSubmit}
+        render={({
+          handleSubmit,
+          pristine,
+          submitFailed,
+          submitSucceeded,
+          submitting,
+        }) => {
           return (
             <form onSubmit={handleSubmit}>
               <Field name="first_name" initialValue={me.first_name}>
                 {props => {
                   return (
-                    <LabelledInput mt={6} mb={5}>
+                    <InputContainer mt={6} mb={5}>
                       <Label>First name</Label>
 
                       <TextInput
                         {...props.input}
                         placeholder="First name"
+                        errorMessage={
+                          props.meta.error || props.meta.submitError
+                        }
                         autoFocus
                       />
-                    </LabelledInput>
+                    </InputContainer>
                   )
                 }}
               </Field>
@@ -72,11 +110,17 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
               <Field name="last_name" initialValue={me.last_name}>
                 {props => {
                   return (
-                    <LabelledInput mt={6} mb={5}>
+                    <InputContainer mt={6} mb={5}>
                       <Label>Last name</Label>
 
-                      <TextInput {...props.input} placeholder="Last name" />
-                    </LabelledInput>
+                      <TextInput
+                        {...props.input}
+                        placeholder="Last name"
+                        errorMessage={
+                          props.meta.error || props.meta.submitError
+                        }
+                      />
+                    </InputContainer>
                   )
                 }}
               </Field>
@@ -84,18 +128,24 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
               <Field name="email" initialValue={me.email}>
                 {props => {
                   return (
-                    <LabelledInput mt={6} mb={5}>
+                    <InputContainer mt={6} mb={5}>
                       <Label>Email</Label>
 
-                      <TextInput {...props.input} placeholder="Email" />
-                    </LabelledInput>
+                      <TextInput
+                        {...props.input}
+                        placeholder="Email"
+                        errorMessage={
+                          props.meta.error || props.meta.submitError
+                        }
+                      />
+                    </InputContainer>
                   )
                 }}
               </Field>
 
               {me.unconfirmed_email && me.unconfirmed_email !== '' && (
                 <>
-                  <LabelledInput mt={6} mb={5}>
+                  <InputContainer mt={6} mb={5}>
                     <Label />
                     <TextInput
                       placeholder="Unconfirmed email address"
@@ -103,24 +153,31 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                       disabled
                       value={me.unconfirmed_email}
                     />
-                  </LabelledInput>
-                  <LabelledInput mt={0} mb={5}>
+                  </InputContainer>
+                  <InputContainer mt={0} mb={5}>
                     <Label />
                     <Text f={2} mb={7}>
                       Please check your email to confirm your new email address
                     </Text>
-                  </LabelledInput>
+                  </InputContainer>
                 </>
               )}
 
               <Field name="password">
                 {props => {
                   return (
-                    <LabelledInput mt={6} mb={5}>
+                    <InputContainer mt={6} mb={5}>
                       <Label>Password</Label>
 
-                      <TextInput {...props.input} placeholder="Password" />
-                    </LabelledInput>
+                      <TextInput
+                        {...props.input}
+                        type="password"
+                        placeholder="Password"
+                        errorMessage={
+                          props.meta.error || props.meta.submitError
+                        }
+                      />
+                    </InputContainer>
                   )
                 }}
               </Field>
@@ -128,11 +185,18 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
               <Field name="password_confirmation">
                 {props => {
                   return (
-                    <LabelledInput mt={6} mb={5}>
+                    <InputContainer mt={6} mb={5}>
                       <Label />
 
-                      <Input {...props.input} placeholder="Confirm password" />
-                    </LabelledInput>
+                      <TextInput
+                        {...props.input}
+                        type="password"
+                        placeholder="Confirm password"
+                        errorMessage={
+                          props.meta.error || props.meta.submitError
+                        }
+                      />
+                    </InputContainer>
                   )
                 }}
               </Field>
@@ -141,11 +205,18 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                 <Field name="bio" initialValue={me.bio}>
                   {props => {
                     return (
-                      <LabelledInput mt={8} mb={5}>
+                      <InputContainer mt={6} mb={5}>
                         <Label>About</Label>
 
-                        <Textarea {...props.input} placeholder="Bio" rows={4} />
-                      </LabelledInput>
+                        <Bio
+                          {...props.input}
+                          placeholder="Bio"
+                          rows={4}
+                          errorMessage={
+                            props.meta.error || props.meta.submitError
+                          }
+                        />
+                      </InputContainer>
                     )
                   }}
                 </Field>
@@ -155,24 +226,24 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                 {props => {
                   return (
                     <>
-                      <LabelledInput mt={6} mb={5}>
+                      <InputContainer mt={6} mb={5}>
                         <Label>Show NSFW?</Label>
 
-                        <Pulldown
+                        <Select
                           {...props.input}
                           options={{
                             true: <span>Yes</span>,
                             false: <span>No</span>,
                           }}
                         />
-                      </LabelledInput>
-                      <LabelledInput mt={0} mb={5}>
+                      </InputContainer>
+                      <InputContainer mt={0} mb={5}>
                         <Label />
                         <Text f={2} mb={7}>
                           Show content marked as NSFW on profiles, explore and
                           feed
                         </Text>
-                      </LabelledInput>
+                      </InputContainer>
                     </>
                   )
                 }}
@@ -181,10 +252,10 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
               <Field name="home_path" initialValue={homePath}>
                 {props => {
                   return (
-                    <LabelledInput mt={6} mb={5}>
+                    <InputContainer mt={6} mb={5}>
                       <Label>Default landing page</Label>
 
-                      <Pulldown
+                      <Select
                         {...props.input}
                         options={{
                           '/': <span>Feed</span>,
@@ -193,7 +264,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                           custom: <span>Custom</span>,
                         }}
                       />
-                    </LabelledInput>
+                    </InputContainer>
                   )
                 }}
               </Field>
@@ -202,14 +273,14 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                 <Field name="custom_home_path" initialValue={me.home_path}>
                   {props => {
                     return (
-                      <LabelledInput mt={6} mb={5}>
+                      <InputContainer mt={6} mb={5}>
                         <Label />
 
                         <Input
                           {...props.input}
                           placeholder="i.e. /user-name/channel-url"
                         />
-                      </LabelledInput>
+                      </InputContainer>
                     )
                   }}
                 </Field>
@@ -224,7 +295,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                     {props => {
                       return (
                         <>
-                          <LabelledInput mt={6} mb={5}>
+                          <InputContainer mt={6} mb={5}>
                             <Label>Hide from search engines?</Label>
 
                             <Pulldown
@@ -234,23 +305,37 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
                                 false: <span>No</span>,
                               }}
                             />
-                          </LabelledInput>
-                          <LabelledInput mt={0} mb={5}>
+                          </InputContainer>
+                          <InputContainer mt={0} mb={5}>
                             <Label />
                             <Text f={2} mb={7}>
                               This will exclude your profile and channels from
                               being indexed by external search engines (e.g.
                               Google, Bing, etc.)
                             </Text>
-                          </LabelledInput>
+                          </InputContainer>
                         </>
                       )
                     }}
                   </Field>
                 </>
               )}
-              <Box align="center" mt={7}>
-                <Button type="submit">Submit</Button>
+              <Box align="center" mt={8} mx={8}>
+                {submitSucceeded && (
+                  <Alert bg="state.premium" color="white" mb={6}>
+                    Settings saved.
+                  </Alert>
+                )}
+
+                {submitFailed && (
+                  <Alert bg="state.alert" color="white" mb={6}>
+                    Error saving your settings
+                  </Alert>
+                )}
+
+                <Button f={4} type="submit" disabled={!!pristine}>
+                  {submitting ? 'Saving' : 'Save changes'}
+                </Button>
               </Box>
             </form>
           )

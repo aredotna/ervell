@@ -4,8 +4,6 @@ import { Query } from 'react-apollo'
 import customBadgeQuery from 'v2/components/CustomBadgeUploader/queries/customBadge'
 
 import Uploader from 'v2/components/CustomBadgeUploader/components/Uploader'
-import ErrorAlert from 'v2/components/UI/ErrorAlert'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 
 export default class CustomBadgeUploader extends PureComponent {
   render() {
@@ -13,11 +11,11 @@ export default class CustomBadgeUploader extends PureComponent {
       <Query query={customBadgeQuery} ssr={false}>
         {({ loading, error, data, startPolling, stopPolling }) => {
           if (loading) {
-            return <LoadingIndicator p={6} />
+            return <span />
           }
 
           if (error) {
-            return <ErrorAlert m={6}>{error.message}</ErrorAlert>
+            return <span />
           }
 
           const { me } = data

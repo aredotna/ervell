@@ -19,9 +19,9 @@ const Container = styled.div`
     flex-basis: 15%;
     font-weight: bold;
     text-align: right;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+    // overflow: hidden;
   }
 
   > *:last-child {

@@ -43,4 +43,6 @@ export interface UpdateAccountMutationVariables {
   exclude_from_indexes?: boolean | null;
   bio?: string | null;
   custom_badge_url?: string | null;
+  password?: string | null;
+  password_confirmation?: string | null;
 }
