@@ -58,10 +58,15 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
 
   const handleSubmit = values => {
     const variables = {
+      ...values,
       home_path: values.custom_home_path || values.home_path,
       custom_home_path: undefined,
-      ...values,
+      show_nsfw: values.show_nsfw === 'true',
+      exclude_from_indexes: values.exclude_from_indexes
+        ? values.exclude_from_indexes === 'true'
+        : undefined,
     }
+
     return updateAccount({ variables })
       .then(() => true)
       .catch(err => {
@@ -70,7 +75,6 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
           [FORM_ERROR]: mappedErrors.errorMessage,
           ...mappedErrors.attributeErrors,
         }
-        console.log('errors', errors)
         return errors
       })
   }
@@ -85,6 +89,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
           submitFailed,
           submitSucceeded,
           submitting,
+          submitError,
         }) => {
           return (
             <form onSubmit={handleSubmit}>
@@ -320,22 +325,23 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                   </Field>
                 </>
               )}
-              <Box align="center" mt={8} mx={8}>
+              <Box mt={8} pt={6} borderTop="1px solid" borderColor="gray.light">
                 {submitSucceeded && (
                   <Alert bg="state.premium" color="white" mb={6}>
                     Settings saved.
                   </Alert>
                 )}
 
-                {submitFailed && (
+                {submitFailed && submitError && (
                   <Alert bg="state.alert" color="white" mb={6}>
-                    Error saving your settings
+                    {submitError}
                   </Alert>
                 )}
-
-                <Button f={4} type="submit" disabled={!!pristine}>
-                  {submitting ? 'Saving' : 'Save changes'}
-                </Button>
+                <Box align="center">
+                  <Button f={4} type="submit" disabled={!!pristine}>
+                    {submitting ? 'Saving' : 'Save changes'}
+                  </Button>
+                </Box>
               </Box>
             </form>
           )
