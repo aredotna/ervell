@@ -8,6 +8,7 @@ export default gql`
       first_name
       last_name
       email
+      slug
       unconfirmed_email
       bio
       is_premium

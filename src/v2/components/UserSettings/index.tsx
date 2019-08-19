@@ -1,137 +1,267 @@
 import React from 'react'
+import styled from 'styled-components'
+import { Query, Mutation, MutationFn } from 'react-apollo'
+import { Form, Field } from 'react-final-form'
 
 import Box from 'v2/components/UI/Box'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs'
+import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 import Text from 'v2/components/UI/Text'
 import Pulldown from 'v2/components/UI/Pulldown'
 
-import { Query } from 'react-apollo'
-import userSettingsQuery from 'v2/components/UserSettings/queries/UserSettingsQuery'
+import USER_SETTINGS_QUERY from 'v2/components/UserSettings/queries/userSettingsQuery'
+import UPDATE_ACCOUNT_MUTATION from 'v2/components/UserSettings/mutations/updateAccountMutation'
+
 import { MySettings, MySettings_me as Me } from '__generated__/MySettings'
+import {
+  UpdateAccountMutation,
+  UpdateAccountMutationVariables,
+} from '__generated__/UpdateAccountMutation'
 
 interface UserSettingsProps {
   me: Me
+  updateAccount: MutationFn<
+    UpdateAccountMutation,
+    UpdateAccountMutationVariables
+  >
 }
 
+const Condition = ({ when, is, children }) => (
+  <Field name={when} subscription={{ value: true }}>
+    {({ input: { value } }) => (value === is ? children : null)}
+  </Field>
+)
+
+const TextInput = styled(Input).attrs({
+  flex: 1,
+  f: 4,
+})``
+
 const UserSettings: React.FC<UserSettingsProps> = ({ me }) => {
+  const isCustom =
+    me.home_path !== '/' &&
+    me.home_path !== '/explore' &&
+    me.home_path !== `/${me.slug}`
+  const homePath = isCustom ? 'custom' : me.home_path
+
   return (
     <Box>
-      <LabelledInput mt={6} mb={5}>
-        <Label>First name</Label>
+      <Form
+        onSubmit={values => console.log('submitted', values)}
+        render={({ handleSubmit }) => {
+          return (
+            <form onSubmit={handleSubmit}>
+              <Field name="first_name" initialValue={me.first_name}>
+                {props => {
+                  return (
+                    <LabelledInput mt={6} mb={5}>
+                      <Label>First name</Label>
 
-        <Input
-          f={4}
-          placeholder="First name"
-          autoFocus
-          required
-          value={me.first_name}
-          flex={1}
-        />
-      </LabelledInput>
-      <LabelledInput mt={6} mb={5}>
-        <Label>Last name</Label>
+                      <TextInput
+                        {...props.input}
+                        placeholder="First name"
+                        autoFocus
+                      />
+                    </LabelledInput>
+                  )
+                }}
+              </Field>
 
-        <Input
-          f={4}
-          placeholder="Last name"
-          required
-          value={me.last_name}
-          flex={1}
-        />
-      </LabelledInput>
+              <Field name="last_name" initialValue={me.last_name}>
+                {props => {
+                  return (
+                    <LabelledInput mt={6} mb={5}>
+                      <Label>Last name</Label>
 
-      <LabelledInput mt={6} mb={5}>
-        <Label>Email</Label>
+                      <TextInput {...props.input} placeholder="Last name" />
+                    </LabelledInput>
+                  )
+                }}
+              </Field>
 
-        <Input f={4} placeholder="Email" required value={me.email} flex={1} />
-      </LabelledInput>
+              <Field name="email" initialValue={me.email}>
+                {props => {
+                  return (
+                    <LabelledInput mt={6} mb={5}>
+                      <Label>Email</Label>
 
-      {me.unconfirmed_email && me.unconfirmed_email !== '' && (
-        <Box>
-          <LabelledInput mt={6} mb={5}>
-            <Label />
-            <Input
-              f={4}
-              placeholder="Unconfirmed email address"
-              readOnly
-              disabled
-              value={me.unconfirmed_email}
-              flex={1}
-            />
-          </LabelledInput>
-          <LabelledInput mt={0} mb={5}>
-            <Label />
-            <Text f={2} mb={7}>
-              Please check your email to confirm your new email address
-            </Text>
-          </LabelledInput>
-        </Box>
-      )}
+                      <TextInput {...props.input} placeholder="Email" />
+                    </LabelledInput>
+                  )
+                }}
+              </Field>
 
-      <LabelledInput mt={6} mb={5}>
-        <Label>Password</Label>
+              {me.unconfirmed_email && me.unconfirmed_email !== '' && (
+                <>
+                  <LabelledInput mt={6} mb={5}>
+                    <Label />
+                    <TextInput
+                      placeholder="Unconfirmed email address"
+                      readOnly
+                      disabled
+                      value={me.unconfirmed_email}
+                    />
+                  </LabelledInput>
+                  <LabelledInput mt={0} mb={5}>
+                    <Label />
+                    <Text f={2} mb={7}>
+                      Please check your email to confirm your new email address
+                    </Text>
+                  </LabelledInput>
+                </>
+              )}
 
-        <Input f={4} placeholder="Password" flex={1} />
-      </LabelledInput>
-      <LabelledInput mt={6} mb={5}>
-        <Label />
+              <Field name="password">
+                {props => {
+                  return (
+                    <LabelledInput mt={6} mb={5}>
+                      <Label>Password</Label>
 
-        <Input f={4} placeholder="Confirm password" flex={1} />
-      </LabelledInput>
+                      <TextInput {...props.input} placeholder="Password" />
+                    </LabelledInput>
+                  )
+                }}
+              </Field>
 
-      {me.can.edit_profile_description && (
-        <LabelledInput mt={8} mb={5}>
-          <Label>About</Label>
+              <Field name="password_confirmation">
+                {props => {
+                  return (
+                    <LabelledInput mt={6} mb={5}>
+                      <Label />
 
-          <Textarea
-            name="bio"
-            defaultValue={me.bio}
-            placeholder="Bio"
-            rows={4}
-          />
-        </LabelledInput>
-      )}
+                      <Input {...props.input} placeholder="Confirm password" />
+                    </LabelledInput>
+                  )
+                }}
+              </Field>
 
-      <LabelledInput mt={6} mb={5}>
-        <Label>Show NSFW?</Label>
+              {me.can.edit_profile_description && (
+                <Field name="bio" initialValue={me.bio}>
+                  {props => {
+                    return (
+                      <LabelledInput mt={8} mb={5}>
+                        <Label>About</Label>
 
-        <Pulldown
-          value={me.settings.show_nsfw}
-          onChange={() => null}
-          options={{
-            true: <span>Yes</span>,
-            false: <span>No</span>,
-          }}
-        />
-      </LabelledInput>
+                        <Textarea {...props.input} placeholder="Bio" rows={4} />
+                      </LabelledInput>
+                    )
+                  }}
+                </Field>
+              )}
 
-      <LabelledInput mt={0} mb={5}>
-        <Label />
-        <Text f={2} mb={7}>
-          Show content marked as NSFW on profiles, explore and feed
-        </Text>
-      </LabelledInput>
+              <Field name="show_nsfw" initialValue={me.settings.show_nsfw}>
+                {props => {
+                  return (
+                    <>
+                      <LabelledInput mt={6} mb={5}>
+                        <Label>Show NSFW?</Label>
 
-      <LabelledInput mt={6} mb={5}>
-        <Label>Default landing page</Label>
+                        <Pulldown
+                          {...props.input}
+                          options={{
+                            true: <span>Yes</span>,
+                            false: <span>No</span>,
+                          }}
+                        />
+                      </LabelledInput>
+                      <LabelledInput mt={0} mb={5}>
+                        <Label />
+                        <Text f={2} mb={7}>
+                          Show content marked as NSFW on profiles, explore and
+                          feed
+                        </Text>
+                      </LabelledInput>
+                    </>
+                  )
+                }}
+              </Field>
 
-        <Pulldown
-          value={me.home_path}
-          onChange={() => null}
-          options={{
-            '/': <span>Feed</span>,
-            '/explore': <span>Explore</span>,
-          }}
-        />
-      </LabelledInput>
+              <Field name="home_path" initialValue={homePath}>
+                {props => {
+                  return (
+                    <LabelledInput mt={6} mb={5}>
+                      <Label>Default landing page</Label>
+
+                      <Pulldown
+                        {...props.input}
+                        options={{
+                          '/': <span>Feed</span>,
+                          '/explore': <span>Explore</span>,
+                          [`/${me.slug}`]: <span>Profile</span>,
+                          custom: <span>Custom</span>,
+                        }}
+                      />
+                    </LabelledInput>
+                  )
+                }}
+              </Field>
+
+              <Condition when="home_path" is="custom">
+                <Field name="custom_home_path" initialValue={me.home_path}>
+                  {props => {
+                    return (
+                      <LabelledInput mt={6} mb={5}>
+                        <Label />
+
+                        <Input
+                          {...props.input}
+                          placeholder="i.e. /user-name/channel-url"
+                        />
+                      </LabelledInput>
+                    )
+                  }}
+                </Field>
+              </Condition>
+
+              {me.is_premium && (
+                <>
+                  <Field
+                    name="exclude_from_indexes"
+                    initialValue={me.settings.exclude_from_indexes}
+                  >
+                    {props => {
+                      return (
+                        <>
+                          <LabelledInput mt={6} mb={5}>
+                            <Label>Hide from search engines?</Label>
+
+                            <Pulldown
+                              {...props.input}
+                              options={{
+                                true: <span>Yes</span>,
+                                false: <span>No</span>,
+                              }}
+                            />
+                          </LabelledInput>
+                          <LabelledInput mt={0} mb={5}>
+                            <Label />
+                            <Text f={2} mb={7}>
+                              This will exclude your profile and channels from
+                              being indexed by external search engines (e.g.
+                              Google, Bing, etc.)
+                            </Text>
+                          </LabelledInput>
+                        </>
+                      )
+                    }}
+                  </Field>
+                </>
+              )}
+              <Box align="center" mt={7}>
+                <Button type="submit">Submit</Button>
+              </Box>
+            </form>
+          )
+        }}
+      />
     </Box>
   )
 }
 
 const UserSettingsContainer: React.FC = () => (
-  <Query<MySettings> query={userSettingsQuery}>
+  <Query<MySettings> query={USER_SETTINGS_QUERY}>
     {({ data, error, loading }) => {
       if (error) {
         return <ErrorAlert>{error.message}</ErrorAlert>
@@ -139,7 +269,21 @@ const UserSettingsContainer: React.FC = () => (
 
       if (loading) return <LoadingIndicator mt={6} f={8} />
 
-      return <UserSettings me={data.me} />
+      return (
+        <Mutation<UpdateAccountMutation, UpdateAccountMutationVariables>
+          mutation={UPDATE_ACCOUNT_MUTATION}
+        >
+          {updateAccountMutation => {
+            return (
+              <UserSettings
+                me={data.me}
+                updateAccount={updateAccountMutation}
+              />
+            )
+          }}
+        </Mutation>
+        //
+      )
     }}
   </Query>
 )

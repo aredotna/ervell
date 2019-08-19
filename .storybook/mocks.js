@@ -24,7 +24,7 @@ const user = () => ({
     .join(''),
   email: internet.email(),
   unconfirmed_email: sample([internet.email(), null]),
-  home_path: sample(['/', '/explore']),
+  home_path: sample(['/', '/explore', '/channel/name']),
 })
 
 const Mocks = {

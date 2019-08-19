@@ -26,6 +26,7 @@ export interface MySettings_me {
   first_name: string | null;
   last_name: string | null;
   email: string | null;
+  slug: string | null;
   unconfirmed_email: string | null;
   bio: string | null;
   is_premium: boolean | null;
