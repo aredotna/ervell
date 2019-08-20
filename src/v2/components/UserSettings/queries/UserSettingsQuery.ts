@@ -17,10 +17,7 @@ export default gql`
         edit_profile_description
       }
       settings {
-        receive_email
-        receive_tips_emails
         exclude_from_indexes
-        receive_newsletter
         show_nsfw
       }
     }
