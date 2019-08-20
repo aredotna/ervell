@@ -62,10 +62,6 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
       ...values,
       home_path: values.custom_home_path || values.home_path,
       custom_home_path: undefined,
-      show_nsfw: values.show_nsfw === 'true',
-      exclude_from_indexes: values.exclude_from_indexes
-        ? values.exclude_from_indexes === 'true'
-        : undefined,
     }
 
     return updateAccount({ variables })
