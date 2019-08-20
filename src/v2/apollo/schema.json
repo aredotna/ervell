@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -715,7 +715,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -3366,7 +3366,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -3833,7 +3833,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -4180,7 +4180,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -4541,7 +4541,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -4699,6 +4699,18 @@
         "fields": [
           {
             "name": "cancel_premium",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "edit_profile_description",
             "description": null,
             "args": [],
             "type": {
@@ -13238,7 +13250,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -13656,7 +13668,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -14102,7 +14114,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
@@ -14728,7 +14740,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "214"
+                "defaultValue": "219"
               },
               {
                 "name": "q",
