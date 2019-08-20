@@ -11,11 +11,11 @@ export default class CustomBadgeUploader extends PureComponent {
       <Query query={customBadgeQuery} ssr={false}>
         {({ loading, error, data, startPolling, stopPolling }) => {
           if (loading) {
-            return <span />
+            return null
           }
 
           if (error) {
-            return <span />
+            return null
           }
 
           const { me } = data
