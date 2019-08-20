@@ -15,7 +15,7 @@ import Pulldown from 'v2/components/UI/Pulldown'
 
 import mapErrors from 'v2/util/mapErrors'
 
-import USER_SETTINGS_QUERY from 'v2/components/UserSettings/queries/userSettingsQuery'
+import USER_SETTINGS_QUERY from 'v2/components/UserSettings/queries/UserSettingsQuery'
 import UPDATE_ACCOUNT_MUTATION from 'v2/components/UserSettings/mutations/updateAccountMutation'
 
 import { MySettings, MySettings_me as Me } from '__generated__/MySettings'
