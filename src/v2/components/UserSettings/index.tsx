@@ -9,7 +9,7 @@ import Alert from 'v2/components/UI/Alert'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs'
-import { GenericButton as Button } from 'v2/components/UI/GenericButton'
+import { DividerButton as Button } from 'v2/components/UI/Buttons'
 import Text from 'v2/components/UI/Text'
 import RadioOptions from 'v2/components/UI/RadioOptions'
 import Pulldown from 'v2/components/UI/Pulldown'
@@ -228,33 +228,6 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                 </Field>
               )}
 
-              <Field name="show_nsfw" initialValue={me.settings.show_nsfw}>
-                {props => {
-                  return (
-                    <>
-                      <InputContainer mt={6} mb={5}>
-                        <Label>Show NSFW?</Label>
-
-                        <Select
-                          {...props.input}
-                          options={{
-                            true: <span>Yes</span>,
-                            false: <span>No</span>,
-                          }}
-                        />
-                      </InputContainer>
-                      <InputContainer mt={0} mb={5}>
-                        <Label />
-                        <Text f={2} mb={7}>
-                          Show content marked as NSFW on profiles, explore and
-                          feed
-                        </Text>
-                      </InputContainer>
-                    </>
-                  )
-                }}
-              </Field>
-
               <Field name="home_path" initialValue={homePath}>
                 {props => {
                   return (
@@ -292,6 +265,46 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                 </Field>
               </Condition>
 
+              <Field name="show_nsfw" initialValue={me.settings.show_nsfw}>
+                {props => {
+                  return (
+                    <>
+                      <InputContainer mt={6} mb={5}>
+                        <Label>Show NSFW?</Label>
+
+                        <RadioOptions
+                          value={props.input.value}
+                          onSelect={props.input.onChange}
+                        >
+                          <RadioOptions.Option value={true}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Show NSFW content
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+
+                          <RadioOptions.Option value={false}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Hide NSFW content
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+                        </RadioOptions>
+                      </InputContainer>
+                      <InputContainer mt={0} mb={5}>
+                        <Label />
+                        <Text f={2} mb={7}>
+                          Show or hide content marked as Not Safe For Work on
+                          profiles, explore and feed
+                        </Text>
+                      </InputContainer>
+                    </>
+                  )
+                }}
+              </Field>
+
               {me.is_premium && (
                 <>
                   <Field
@@ -304,13 +317,28 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                           <InputContainer mt={6} mb={5}>
                             <Label>Hide from search engines?</Label>
 
-                            <Pulldown
-                              {...props.input}
-                              options={{
-                                true: <span>Yes</span>,
-                                false: <span>No</span>,
-                              }}
-                            />
+                            <RadioOptions
+                              value={props.input.value}
+                              onSelect={props.input.onChange}
+                            >
+                              <RadioOptions.Option value={true}>
+                                {({ selected }) => (
+                                  <Text f={4} mb={3} selected={selected}>
+                                    Do not allow external search engines to
+                                    index my content.
+                                  </Text>
+                                )}
+                              </RadioOptions.Option>
+
+                              <RadioOptions.Option value={false}>
+                                {({ selected }) => (
+                                  <Text f={4} mb={3} selected={selected}>
+                                    External search engines can index my
+                                    content.
+                                  </Text>
+                                )}
+                              </RadioOptions.Option>
+                            </RadioOptions>
                           </InputContainer>
                           <InputContainer mt={0} mb={5}>
                             <Label />
@@ -326,7 +354,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                   </Field>
                 </>
               )}
-              <Box mt={8} pt={6} borderTop="1px solid" borderColor="gray.light">
+              <Box mt={8} pt={6}>
                 {submitSucceeded && (
                   <Alert bg="state.premium" color="white" mb={6}>
                     Settings saved.
