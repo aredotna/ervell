@@ -3,7 +3,7 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { ChannelContentsConnectable as ChannelContentsConnectableData } from '__generated__/ChannelContentsConnectable'
 
-import { isMobile } from 'v2/util/isMobile'
+import { isTouchDevice } from 'v2/util/isTouchDevice'
 
 import Cell from 'v2/components/Cell'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -32,11 +32,11 @@ export const ChannelContentsItem: React.FC<Props> = memo(
     const [isHovering, setHover] = useState(false)
 
     const startHover = useCallback(() => {
-      if (isMobile()) return false
+      if (isTouchDevice()) return false
       setHover(true)
     }, [])
     const endHover = useCallback(() => {
-      if (isMobile()) return false
+      if (isTouchDevice()) return false
       setHover(false)
     }, [])
 
