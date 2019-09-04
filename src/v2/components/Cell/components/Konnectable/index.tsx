@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
 
 import openBlockLightbox from 'v2/util/openBlockLightbox'
-import { isTouchDevice } from 'v2/util/isTouchDevice'
+import { touch as isTouchDevice } from 'v2/util/is'
 
 import { KonnectableCell as KonnectableCellData } from '__generated__/KonnectableCell'
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'

@@ -3,7 +3,7 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { ChannelContentsConnectable as ChannelContentsConnectableData } from '__generated__/ChannelContentsConnectable'
 
-import { isTouchDevice } from 'v2/util/isTouchDevice'
+import { touch as isTouchDevice } from 'v2/util/is'
 
 import Cell from 'v2/components/Cell'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
