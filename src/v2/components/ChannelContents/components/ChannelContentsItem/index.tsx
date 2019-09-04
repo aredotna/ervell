@@ -3,6 +3,8 @@ import { SortableElement } from 'react-sortable-hoc'
 
 import { ChannelContentsConnectable as ChannelContentsConnectableData } from '__generated__/ChannelContentsConnectable'
 
+import { touch as isTouchDevice } from 'v2/util/is'
+
 import Cell from 'v2/components/Cell'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
@@ -29,8 +31,15 @@ export const ChannelContentsItem: React.FC<Props> = memo(
   ({ channel, connectable, index, context, onRemove, onChangePosition }) => {
     const [isHovering, setHover] = useState(false)
 
-    const startHover = useCallback(() => setHover(true), [])
-    const endHover = useCallback(() => setHover(false), [])
+    const startHover = useCallback(() => {
+      if (isTouchDevice()) return false
+      setHover(true)
+    }, [])
+    const endHover = useCallback(() => {
+      if (isTouchDevice()) return false
+      setHover(false)
+    }, [])
+
     const handleChangePosition = useCallback(
       (newIndex: number) => onChangePosition({ oldIndex: index, newIndex }),
       [index, onChangePosition]

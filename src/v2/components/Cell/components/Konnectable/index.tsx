@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
 
 import openBlockLightbox from 'v2/util/openBlockLightbox'
+import { touch as isTouchDevice } from 'v2/util/is'
 
 import { KonnectableCell as KonnectableCellData } from '__generated__/KonnectableCell'
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
@@ -72,12 +73,12 @@ export class Konnectable extends PureComponent<Props> {
   }
 
   onMouseEnter = () => {
-    if (this.state.mode === Mode.OVERLAY) return
+    if (this.state.mode === Mode.OVERLAY || isTouchDevice()) return
     this.setState({ mode: Mode.HOVER })
   }
 
   onMouseLeave = () => {
-    if (this.state.mode === Mode.OVERLAY) return
+    if (this.state.mode === Mode.OVERLAY || isTouchDevice()) return
     this.setState({ mode: Mode.RESTING })
   }
 
