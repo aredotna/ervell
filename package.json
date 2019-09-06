@@ -131,7 +131,7 @@
     "jquery.finger": "*",
     "jquery.ui.widget": "*",
     "json-loader": "^0.5.7",
-    "marked": "^0.3.8",
+    "marked": "^0.3.18",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "mousetrap": "^1.6.1",
