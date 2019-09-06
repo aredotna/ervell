@@ -6666,12 +6666,12 @@ date-now@^0.1.4:
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
-debug@*, debug@3.1.0, debug@=3.1.0, debug@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
-  integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
+debug@*, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
+  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   dependencies:
-    ms "2.0.0"
+    ms "^2.1.1"
 
 debug@2.2.0:
   version "2.2.0"
@@ -6687,17 +6687,17 @@ debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.
   dependencies:
     ms "2.0.0"
 
-debug@^3.2.5, debug@^3.2.6:
+debug@3.1.0, debug@=3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  integrity sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==
+  dependencies:
+    ms "2.0.0"
+
+debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
-  dependencies:
-    ms "^2.1.1"
-
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
   dependencies:
     ms "^2.1.1"
 
@@ -12590,14 +12590,14 @@ moo@^0.4.3:
   resolved "https://registry.yarnpkg.com/moo/-/moo-0.4.3.tgz#3f847a26f31cf625a956a87f2b10fbc013bfd10e"
   integrity sha512-gFD2xGCl8YFgGHsqJ9NKRVdwlioeW3mI1iqfLNYQOv0+6JRwG58Zk9DIGQgyIaffSYaO1xsKnMaYzzNr1KyIAw==
 
-morgan@^1.7.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.0.tgz#d01fa6c65859b76fcf31b3cb53a3821a311d8051"
-  integrity sha1-0B+mxlhZt2/PMbPLU6OCGjEdgFE=
+morgan@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
+  integrity sha512-HQStPIV4y3afTiCYVxirakhlCfGkI161c76kKFca7Fk1JusM//Qeo1ej2XaMniiNeaZklMVrh3vTtIzpzwbpmA==
   dependencies:
     basic-auth "~2.0.0"
     debug "2.6.9"
-    depd "~1.1.1"
+    depd "~1.1.2"
     on-finished "~2.3.0"
     on-headers "~1.0.1"
 
