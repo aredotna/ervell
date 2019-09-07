@@ -210,6 +210,7 @@ class NewChannelForm extends Component {
                       placeholder="Type channel name"
                       borderless
                       autoFocus
+                      outlineless
                       required
                       value={title}
                       onChange={this.handleTitle}
