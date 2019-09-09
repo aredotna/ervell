@@ -69,7 +69,6 @@ export const disabledMixin = css`
 `
 
 export const mixin = css`
-  all: initial;
   ${preset(display, { display: 'inline-flex' })}
   ${preset(alignItems, { alignItems: 'center' })}
   ${preset(justifyContent, { justifyContent: 'center' })}

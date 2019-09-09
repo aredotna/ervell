@@ -13,6 +13,14 @@ import { preset } from 'v2/styles/functions'
 import { antialiased } from 'v2/styles/mixins'
 import { LINE_HEIGHTS } from 'v2/styles/text'
 
+export const outlinelessMixin = css`
+  ${props =>
+    props.outlineless &&
+    `
+  outline: none;
+`}
+`
+
 export const borderlessMixin = css`
   ${props =>
     props.borderless &&
@@ -43,7 +51,6 @@ export const focusMixin = css`
 `
 
 export const defaultMixin = css`
-  all: initial;
   appearance: none;
   box-sizing: border-box;
   display: block;
@@ -78,6 +85,7 @@ export const defaultMixin = css`
 
   ${errorMixin}
   ${borderlessMixin}
+  ${outlinelessMixin}
 `
 
 export default defaultMixin

@@ -115,6 +115,7 @@ export default class PrimarySearch extends PureComponent {
           onKeyDown={this.handleKeyDown}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
+          outlineless
           iconMap={{
             resting: null,
             focus: 'MagnifyingGlass',
