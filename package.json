@@ -148,7 +148,7 @@
     "prop-types": "^15.6.0",
     "pug": "^2.0.0-rc.4",
     "pug-loader": "damassi/pug-loader#02921c5",
-    "pusher-js": "^4.4.0",
+    "pusher-js": "5.0.1",
     "qlimit": "^0.1.1",
     "qs": "6.5.1",
     "query-params": "*",
