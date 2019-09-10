@@ -87,7 +87,6 @@ const baseConfig = {
   ],
   resolve: {
     alias: {
-      'jquery.ui.widget': 'blueimp-file-upload/js/vendor/jquery.ui.widget.js',
       Images: path.join(rootDir, 'public', 'images'),
     },
     extensions: [
