@@ -9,7 +9,15 @@ import parseRoute from 'v2/util/parseRoute'
 import ProfilePage from 'v2/pages/profile/ProfilePage'
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM']
-const VALID_FILTERS = ['OWN', 'COLLABORATION']
+const VALID_INDEX_FILTERS = ['OWN', 'COLLABORATION']
+const VALID_BLOCK_FILTERS = [
+  'BLOCK',
+  'IMAGE',
+  'TEXT',
+  'EMBED',
+  'ATTACHMENT',
+  'LINK',
+]
 const VALID_FOLLOW_TYPES = ['CHANNEL', 'USER', 'GROUP']
 
 const setValid = (value, validValues, defaultValue) => {
@@ -34,10 +42,16 @@ export default () => (
               VALID_SORTS,
               'UPDATED_AT'
             )
-            const filter = setValid(
+            const indexFilter = setValid(
               query.filter || cookies.filter,
-              VALID_FILTERS,
+              VALID_INDEX_FILTERS,
               'OWN'
+            )
+
+            const blockFilter = setValid(
+              query.type || cookies.type,
+              VALID_BLOCK_FILTERS,
+              'BLOCK'
             )
 
             const followType = setValid(
@@ -51,7 +65,8 @@ export default () => (
                 id={params.id}
                 view={view}
                 sort={sort}
-                filter={filter}
+                filter={indexFilter}
+                type={blockFilter}
                 followType={followType}
               />
             )

@@ -29,16 +29,17 @@ All.propTypes = {
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
 
-const Blocks = ({ id, sort, identifiable, fetchPolicy }) => (
+const Blocks = ({ id, sort, identifiable, fetchPolicy, type }) => (
   <EmptyMessageOrComponent
     identifiable={identifiable}
     count={identifiable.counts.blocks}
   >
     <ProfileContents
       id={id}
-      type="BLOCK"
+      type={type}
       sort={sort}
       fetchPolicy={fetchPolicy}
+      blockType={type}
     />
   </EmptyMessageOrComponent>
 )
@@ -48,6 +49,14 @@ Blocks.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  type: PropTypes.oneOf([
+    'BLOCK',
+    'IMAGE',
+    'TEXT',
+    'EMBED',
+    'ATTACHMENT',
+    'LINK',
+  ]).isRequired,
 }
 
 const Channels = ({ id, sort, identifiable, fetchPolicy }) => (
@@ -139,6 +148,14 @@ class ProfileViews extends Component {
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
     identifiable: propType(profilePageIdentifiableFragment).isRequired,
+    type: PropTypes.oneOf([
+      'BLOCK',
+      'IMAGE',
+      'TEXT',
+      'EMBED',
+      'ATTACHMENT',
+      'LINK',
+    ]).isRequired,
   }
 
   state = {
@@ -149,7 +166,15 @@ class ProfileViews extends Component {
 
   render() {
     const { fetchPolicy } = this.state
-    const { view, id, sort, filter, identifiable, followType } = this.props
+    const {
+      view,
+      id,
+      sort,
+      filter,
+      identifiable,
+      followType,
+      type,
+    } = this.props
 
     switch (view) {
       case 'all':
@@ -177,6 +202,7 @@ class ProfileViews extends Component {
             sort={sort}
             identifiable={identifiable}
             fetchPolicy={fetchPolicy}
+            type={type}
           />
         )
       case 'index':
