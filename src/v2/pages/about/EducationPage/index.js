@@ -24,11 +24,11 @@ const Container = styled.div`
 const TabContent = styled.div`
   width: 100%;
   padding-bottom: 6em;
-  border-bottom: 1px solid ${x => x.theme.colors.gray.regular};
+  border-bottom: 1px solid ${x => x.theme.colors.gray.semiLight};
 `
 
 const CTA = styled(Box)`
-  border-bottom: 1px solid ${x => x.theme.colors.gray.regular};
+  border-bottom: 1px solid ${x => x.theme.colors.gray.semiLight};
 `
 
 export default class EducationPage extends Component {
