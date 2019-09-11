@@ -16,6 +16,7 @@ import ProfileMetadataView from 'v2/components/ProfileMetadata/components/Profil
 import ProfileMetadataSort from 'v2/components/ProfileMetadata/components/ProfileMetadataSort'
 import ProfileMetadataFilter from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter'
 import ProfileMetadataFollowingType from 'v2/components/ProfileMetadata/components/ProfileMetadataFollowingType'
+import ProfileMetadataBlockFilter from 'v2/components/ProfileMetadata/components/ProfileMetadataBlockFilter'
 
 export default class ProfileMetadata extends Component {
   static propTypes = {
@@ -32,10 +33,18 @@ export default class ProfileMetadata extends Component {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
+    type: PropTypes.oneOf([
+      'BLOCK',
+      'IMAGE',
+      'TEXT',
+      'EMBED',
+      'ATTACHMENT',
+      'LINK',
+    ]).isRequired,
   }
 
   render() {
-    const { identifiable, view, sort, filter, followType } = this.props
+    const { identifiable, view, sort, filter, followType, type } = this.props
 
     return (
       <HeaderMetadataContainer
@@ -63,6 +72,8 @@ export default class ProfileMetadata extends Component {
                 sort={sort}
               />
             )}
+
+            {view === 'blocks' && <ProfileMetadataBlockFilter type={type} />}
 
             {identifiable.__typename !== 'Group' &&
               ['all', 'channels', 'blocks'].includes(view) && (

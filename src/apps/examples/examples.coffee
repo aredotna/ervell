@@ -10,8 +10,8 @@ module.exports = [
     id: 'collectibles'
     title: 'Collectibles'
     description: 'Specific finds from internet treasure hunts'
-    # channel_ids: ["fruit-crate-labels", "outdoor-gear-logos", "punk-hardcore-flyers", "star-trek-insignias"]
-    channel_ids: [129438, 68168, 65103, 5079]
+    # channel_ids: ["fruit-crate-labels", "outdoor-gear-logos", "punk-hardcore-flyers"]
+    channel_ids: [129438, 68168, 65103]
   },
   {
     id: 'nature'
@@ -31,8 +31,8 @@ module.exports = [
     id: 'places'
     title: 'Place'
     description: 'Close observations of cities and landscapes'
-    # channel_ids: ["patterns-of-istanbul", "real-london", "urban-photography-in-japan", "los-angeles--2"]
-    channel_ids: [39363, 46554, 3699, 18269]
+    # channel_ids: ["patterns-of-istanbul", "real-london", "los-angeles--2"]
+    channel_ids: [39363, 46554, 18269]
   },
   {
     id: 'architecture'

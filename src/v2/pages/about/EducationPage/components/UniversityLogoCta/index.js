@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { themeGet } from 'styled-system'
 
 import Box from 'v2/components/UI/Box'
 import { Subheadline } from 'v2/pages/about/components/Text'
@@ -8,9 +7,9 @@ import { Subheadline } from 'v2/pages/about/components/Text'
 const CTA = styled(Box).attrs({
   py: 9,
   px: 3,
-  borderBottom: '1px solid',
-  borderColor: themeGet('colors.gray.regular'),
-})``
+})`
+  border-bottom: 1px solid ${props => props.theme.colors.gray.semiLight};
+`
 
 const LogoContainer = styled.div`
   display: flex;
@@ -21,13 +20,11 @@ const LogoContainer = styled.div`
   justify-content: center;
 `
 
-const Logo = styled.div.attrs({
-  style: props => ({
-    width: 171,
-    height: 143,
-    background: `url(${props.src}) center/70% no-repeat`,
-  }),
-})``
+const Logo = styled.div`
+  width: 171px;
+  height: 143px;
+  background: url(${props => props.src}) center/70% no-repeat;
+`
 
 export default class UniversityLogoCta extends Component {
   render() {

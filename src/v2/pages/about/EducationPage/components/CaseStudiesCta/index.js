@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { themeGet } from 'styled-system'
 
 import constants from 'v2/styles/constants'
 
@@ -15,9 +14,9 @@ import {
 const CTA = styled(Box).attrs({
   py: 10,
   px: 3,
-  borderBottom: '1px solid',
-  borderColor: themeGet('colors.gray.regular'),
-})``
+})`
+  border-bottom: 1px solid ${props => props.theme.colors.gray.semiLight};
+`
 
 const CaseStudies = styled.div`
   display: flex;
