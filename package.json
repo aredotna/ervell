@@ -10,7 +10,7 @@
     "build:bookmarklet:prod": "NODE_ENV=production webpack --config src/apps/marklet/webpack.config.js",
     "clean": "rm -f manifest.json && rm -rf public/assets && mkdir -p public/assets && echo '[Ervell] Cleaned build directory'",
     "deploy-staging": "sh scripts/deploy-staging.sh",
-    "deploy-storybook": "storybook-to-ghpages",
+    "deploy-storybook": "storybook-to-ghpages --remote upstream",
     "deploy": "sh scripts/deploy.sh",
     "extension": "NODE_ENV=development webpack --config src/extension/webpack.config.js --watch",
     "extension:production": "NODE_ENV=production webpack --config src/extension/webpack.config.js",
