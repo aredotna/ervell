@@ -13,10 +13,7 @@ export interface MySettings_me_can {
 
 export interface MySettings_me_settings {
   __typename: "MeSettings";
-  receive_email: string | null;
-  receive_tips_emails: boolean | null;
   exclude_from_indexes: boolean | null;
-  receive_newsletter: boolean | null;
   show_nsfw: boolean | null;
 }
 

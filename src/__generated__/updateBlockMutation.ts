@@ -54,6 +54,8 @@ export interface updateBlockMutation_update_block_block_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Image {
@@ -96,6 +98,8 @@ export interface updateBlockMutation_update_block_block_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Text {
@@ -139,6 +143,8 @@ export interface updateBlockMutation_update_block_block_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Link {
@@ -179,6 +185,8 @@ export interface updateBlockMutation_update_block_block_Attachment_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Attachment {
@@ -222,6 +230,8 @@ export interface updateBlockMutation_update_block_block_Embed_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Embed {
@@ -263,6 +273,8 @@ export interface updateBlockMutation_update_block_block_PendingBlock_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_PendingBlock {

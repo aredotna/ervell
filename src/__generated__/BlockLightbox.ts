@@ -54,6 +54,8 @@ export interface BlockLightbox_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightbox_Image {
@@ -83,6 +85,8 @@ export interface BlockLightbox_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightbox_Text_user {
@@ -139,6 +143,8 @@ export interface BlockLightbox_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightbox_Link {
@@ -179,6 +185,8 @@ export interface BlockLightbox_Attachment_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightbox_Attachment {
@@ -222,6 +230,8 @@ export interface BlockLightbox_Embed_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightbox_Embed {
@@ -263,6 +273,8 @@ export interface BlockLightbox_PendingBlock_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightbox_PendingBlock {

@@ -57,6 +57,8 @@ export interface BlockPage_block_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Text {
@@ -102,6 +104,8 @@ export interface BlockPage_block_PendingBlock_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_PendingBlock {
@@ -144,6 +148,8 @@ export interface BlockPage_block_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Image {
@@ -193,6 +199,8 @@ export interface BlockPage_block_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Link {
@@ -238,6 +246,8 @@ export interface BlockPage_block_Embed_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Embed {
@@ -284,6 +294,8 @@ export interface BlockPage_block_Attachment_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Attachment {

@@ -20,6 +20,8 @@ export default gql`
     ... on Block {
       can {
         mute
+        potentially_edit_thumbnail
+        edit_thumbnail
       }
     }
     ...BlockLightboxShare
