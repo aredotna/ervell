@@ -65,6 +65,7 @@
     "uglify-js": "^2.6.0"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.1",
     "@artsy/express-reloadable": "^1.4.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
