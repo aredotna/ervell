@@ -23,6 +23,13 @@ const Mute = styled(MuteButton)`
 
 const BlockLightboxActions = ({ block }) => (
   <Container>
+    {(block.can.potentially_edit_thumbnail || block.can.edit_thumbnail) && (
+      <>
+        <BlockLightboxChangeThumbnail block={block} />
+        <br />
+      </>
+    )}
+
     <BlockLightboxShare block={block} />
 
     {block.source && (
@@ -49,10 +56,6 @@ const BlockLightboxActions = ({ block }) => (
     )}
 
     {block.can.mute && <Mute id={block.id} type="BLOCK" />}
-
-    {(block.can.potentially_edit_thumbnail || block.can.edit_thumbnail) && (
-      <BlockLightboxChangeThumbnail block={block} />
-    )}
   </Container>
 )
 

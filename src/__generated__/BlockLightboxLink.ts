@@ -24,6 +24,7 @@ export interface BlockLightboxLink_Link {
   title: string | null;
   source_url: string | null;
   image_url: string | null;
+  image_updated_at: string | null;
   source: BlockLightboxLink_Link_source | null;
 }
 

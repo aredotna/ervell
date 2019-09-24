@@ -1,28 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { uploadFile, S3UploadPolicy } from 'v2/util/uploader'
 
-interface useFileUploadProps {
+interface UseFileUploadProps {
   policy: S3UploadPolicy
-  onUpload: () => void
+  onUpload: (url: string) => void
   file: File
 }
 
-const useFileUpload = ({ onUpload, file, policy }: useFileUploadProps) => {
-  const [fileProgress, setFileProgress] = useState(0)
+const useFileUpload = ({ onUpload, file, policy }: UseFileUploadProps) => {
   const [fileUrl, setFileUrl] = useState(null)
 
+  const onFileUpload = useCallback(() => {
+    onUpload(fileUrl)
+  }, [fileUrl, onUpload])
+
   useEffect(() => {
-    uploadFile({
-      policy,
-      file,
-      onFileProgress: setFileProgress,
-      onDone: setFileUrl,
-    }).then(onUpload)
-  }, [file, onUpload, policy])
+    if (file) {
+      uploadFile({
+        policy,
+        file,
+        onDone: setFileUrl,
+      }).then(onFileUpload)
+    }
+  }, [file, policy, onFileUpload])
 
   return {
-    fileProgress,
-    fileUrl,
+    url: fileUrl,
   }
 }
 
