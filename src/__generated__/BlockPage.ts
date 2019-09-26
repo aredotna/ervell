@@ -57,6 +57,8 @@ export interface BlockPage_block_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Text {
@@ -102,6 +104,8 @@ export interface BlockPage_block_PendingBlock_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_PendingBlock {
@@ -144,6 +148,8 @@ export interface BlockPage_block_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Image {
@@ -193,6 +199,8 @@ export interface BlockPage_block_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Link {
@@ -217,6 +225,7 @@ export interface BlockPage_block_Link {
   editable_description: string | null;
   source_url: string | null;
   image_url: string | null;
+  image_updated_at: string | null;
   can: BlockPage_block_Link_can | null;
 }
 
@@ -238,6 +247,8 @@ export interface BlockPage_block_Embed_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Embed {
@@ -284,6 +295,8 @@ export interface BlockPage_block_Attachment_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockPage_block_Attachment {
@@ -311,6 +324,7 @@ export interface BlockPage_block_Attachment {
   file_size: string | null;
   file_content_type: string | null;
   image_url: string | null;
+  image_updated_at: string | null;
   can: BlockPage_block_Attachment_can | null;
 }
 

@@ -9,6 +9,7 @@ import blockLightboxActionsFragment from 'v2/components/BlockLightbox/components
 import Box from 'v2/components/UI/Box'
 import MuteButton from 'v2/components/MuteButton'
 import BlockLightboxShare from 'v2/components/BlockLightbox/components/BlockLightboxShare'
+import BlockLightboxChangeThumbnail from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail'
 
 const Container = styled(Box)`
   > a {
@@ -22,6 +23,13 @@ const Mute = styled(MuteButton)`
 
 const BlockLightboxActions = ({ block }) => (
   <Container>
+    {(block.can.potentially_edit_thumbnail || block.can.edit_thumbnail) && (
+      <>
+        <BlockLightboxChangeThumbnail block={block} />
+        <br />
+      </>
+    )}
+
     <BlockLightboxShare block={block} />
 
     {block.source && (

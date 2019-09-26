@@ -3,14 +3,16 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: BlockLightboxContentPane
+// GraphQL query operation: BlockContent
 // ====================================================
 
-export interface BlockLightboxContentPane_Channel {
+export interface BlockContent_blokk_Channel {
   __typename: "Channel" | "PendingBlock";
+  id: number | null;
+  title: string | null;
 }
 
-export interface BlockLightboxContentPane_Image {
+export interface BlockContent_blokk_Image {
   __typename: "Image";
   id: number | null;
   title: string | null;
@@ -19,19 +21,20 @@ export interface BlockLightboxContentPane_Image {
   original_image_url: string | null;
 }
 
-export interface BlockLightboxContentPane_Text_can {
+export interface BlockContent_blokk_Text_can {
   __typename: "BlockCan";
   manage: boolean | null;
 }
 
-export interface BlockLightboxContentPane_Text {
+export interface BlockContent_blokk_Text {
   __typename: "Text";
   id: number | null;
+  title: string | null;
   content: string | null;
-  can: BlockLightboxContentPane_Text_can | null;
+  can: BlockContent_blokk_Text_can | null;
 }
 
-export interface BlockLightboxContentPane_Link_source {
+export interface BlockContent_blokk_Link_source {
   __typename: "ConnectableSource";
   title: string | null;
   url: string | null;
@@ -39,17 +42,17 @@ export interface BlockLightboxContentPane_Link_source {
   provider_url: string | null;
 }
 
-export interface BlockLightboxContentPane_Link {
+export interface BlockContent_blokk_Link {
   __typename: "Link";
   id: number | null;
   title: string | null;
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  source: BlockLightboxContentPane_Link_source | null;
+  source: BlockContent_blokk_Link_source | null;
 }
 
-export interface BlockLightboxContentPane_Attachment {
+export interface BlockContent_blokk_Attachment {
   __typename: "Attachment";
   id: number | null;
   title: string | null;
@@ -61,7 +64,7 @@ export interface BlockLightboxContentPane_Attachment {
   image_updated_at: string | null;
 }
 
-export interface BlockLightboxContentPane_Embed {
+export interface BlockContent_blokk_Embed {
   __typename: "Embed";
   id: number | null;
   title: string | null;
@@ -70,4 +73,12 @@ export interface BlockLightboxContentPane_Embed {
   embed_height: number | null;
 }
 
-export type BlockLightboxContentPane = BlockLightboxContentPane_Channel | BlockLightboxContentPane_Image | BlockLightboxContentPane_Text | BlockLightboxContentPane_Link | BlockLightboxContentPane_Attachment | BlockLightboxContentPane_Embed;
+export type BlockContent_blokk = BlockContent_blokk_Channel | BlockContent_blokk_Image | BlockContent_blokk_Text | BlockContent_blokk_Link | BlockContent_blokk_Attachment | BlockContent_blokk_Embed;
+
+export interface BlockContent {
+  blokk: BlockContent_blokk | null;
+}
+
+export interface BlockContentVariables {
+  block_id: string;
+}

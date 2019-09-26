@@ -28,6 +28,8 @@ export interface BlockLightboxActions_Image_source {
 export interface BlockLightboxActions_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxActions_Image {
@@ -48,6 +50,8 @@ export interface BlockLightboxActions_Text_source {
 export interface BlockLightboxActions_Text_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxActions_Text {
@@ -68,6 +72,8 @@ export interface BlockLightboxActions_Link_source {
 export interface BlockLightboxActions_Link_can {
   __typename: "BlockCan";
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxActions_Link {

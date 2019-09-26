@@ -48,6 +48,8 @@ export interface BlockLightboxMetadataPane_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxMetadataPane_Text_source {
@@ -88,6 +90,8 @@ export interface BlockLightboxMetadataPane_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxMetadataPane_Image_source {
@@ -127,6 +131,8 @@ export interface BlockLightboxMetadataPane_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxMetadataPane_Link_source {
