@@ -15,11 +15,13 @@ const transformImages = (
   for (let i = 0; i < data.items.length; i++) {
     if (acceptedFiles.includes(data.items[i].type) !== false) {
       let blob: BlobLikeFile = data.items[i].getAsFile()
-      let URL = window.URL
 
       if (blob) {
-        let src = URL.createObjectURL(blob)
-        callback(src)
+        const reader = new FileReader()
+        reader.onload = () => {
+          callback(reader.result)
+        }
+        reader.readAsDataURL(blob)
       }
     }
   }
@@ -36,10 +38,11 @@ const usePasteListener = ({
   }, [fileUrl, onPaste])
 
   useEffect(() => {
-    const el: Window = this.window
+    const el: Window = window
     const pasteHandler = (e: ClipboardEvent) => {
       transformImages(e.clipboardData, acceptedFiles, (url: string) => {
         setFileUrl(url)
+        onPaste(url)
       })
     }
 
@@ -48,7 +51,7 @@ const usePasteListener = ({
     return () => {
       el.removeEventListener('paste', pasteHandler)
     }
-  }, [onFilePaste, setFileUrl, acceptedFiles])
+  }, [onFilePaste, setFileUrl, acceptedFiles, fileUrl, onPaste])
 
   return {
     url: fileUrl,

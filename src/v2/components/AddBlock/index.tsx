@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo'
 import Box from 'v2/components/UI/Box'
 import { FilledButton } from 'v2/components/UI/Buttons'
 import DropZoneUploader from 'v2/components/UI/DropZoneUploader'
+import { AddBlockPasteUploader } from 'v2/components/AddBlock/components/AddBlockPasteUploader'
 import { AddBlockInner } from 'v2/components/AddBlock/components/AddBlockInner'
 import { AddBlockCTAInner } from 'v2/components/AddBlock/components/AddBlockCTAInner'
 
@@ -109,7 +110,12 @@ class AddBlock extends PureComponent<AddBlockProps> {
   finishUpload = () => this.setState({ uploaderKey: new Date().getTime() })
 
   render() {
-    const { isElligbleForPremium } = this.props
+    const {
+      isElligbleForPremium,
+      createBlock,
+      channel_id,
+      onAddBlock,
+    } = this.props
     const { mode, inputKey, uploaderKey } = this.state
 
     return (
@@ -135,7 +141,11 @@ class AddBlock extends PureComponent<AddBlockProps> {
                   onChange={this.handleChange}
                   onKeyDown={this.handleKeyDown}
                 />
-
+                <AddBlockPasteUploader
+                  createBlock={createBlock}
+                  channelId={channel_id}
+                  onAddBlock={onAddBlock}
+                />
                 <Button
                   onClick={this.handleSubmit}
                   disabled={mode === 'resting'}
