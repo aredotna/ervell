@@ -226,6 +226,7 @@ export interface BlockPage_block_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
+  image_updated_at_timestamp: string | null;
   can: BlockPage_block_Link_can | null;
 }
 
@@ -325,6 +326,7 @@ export interface BlockPage_block_Attachment {
   file_content_type: string | null;
   image_url: string | null;
   image_updated_at: string | null;
+  image_updated_at_timestamp: string | null;
   can: BlockPage_block_Attachment_can | null;
 }
 

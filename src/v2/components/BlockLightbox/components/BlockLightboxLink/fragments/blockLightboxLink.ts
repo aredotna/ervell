@@ -9,6 +9,7 @@ export default gql`
       source_url
       image_url(size: ORIGINAL)
       image_updated_at(format: "%m/%d/%y")
+      image_updated_at_timestamp: image_updated_at
       source {
         title
         url

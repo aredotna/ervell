@@ -154,6 +154,7 @@ export interface BlockLightbox_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
+  image_updated_at_timestamp: string | null;
   source: BlockLightbox_Link_source | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -200,6 +201,7 @@ export interface BlockLightbox_Attachment {
   file_content_type: string | null;
   image_url: string | null;
   image_updated_at: string | null;
+  image_updated_at_timestamp: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;

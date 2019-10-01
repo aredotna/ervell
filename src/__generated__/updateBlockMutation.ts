@@ -165,6 +165,7 @@ export interface updateBlockMutation_update_block_block_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
+  image_updated_at_timestamp: string | null;
   can: updateBlockMutation_update_block_block_Link_can | null;
 }
 
@@ -211,6 +212,7 @@ export interface updateBlockMutation_update_block_block_Attachment {
   file_content_type: string | null;
   image_url: string | null;
   image_updated_at: string | null;
+  image_updated_at_timestamp: string | null;
   can: updateBlockMutation_update_block_block_Attachment_can | null;
 }
 

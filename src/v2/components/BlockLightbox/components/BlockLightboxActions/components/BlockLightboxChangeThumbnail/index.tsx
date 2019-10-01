@@ -23,7 +23,6 @@ import BLOCK_IMAGE_URL_QUERY from 'v2/components/BlockLightbox/components/BlockL
 import UPDATE_BLOCK_THUMBNAIL_MUTATION from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/mutations/changeThumbnail'
 
 import useFileUpload from 'v2/hooks/useFileUpload'
-import Text from 'v2/components/UI/Text'
 
 const Link = styled.a`
   display: flex;
@@ -58,10 +57,6 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
   stopPolling,
   imageUrl,
 }) => {
-  const imageUpdatedAt =
-    (block.__typename === 'Link' || block.__typename === 'Attachment') &&
-    block.image_updated_at
-
   const [mode, setMode] = useState<Mode>('resting')
   const [file, setFile] = useState<File | null>(null)
   const inputRef = useRef<any>(null)
@@ -121,11 +116,6 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
       {/* Otherwise, let's do this */}
       {block.can.edit_thumbnail && (
         <>
-          {imageUpdatedAt && block.updated_at !== imageUpdatedAt && (
-            <Text color="gray.regular" fontSize={1}>
-              Cover image edited on {imageUpdatedAt}
-            </Text>
-          )}
           <input
             type="file"
             accept=".jpg,.jpeg,.gif,.png"
@@ -139,6 +129,7 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
             rel="nofollow noopener noreferrer"
             target="_blank"
             disabled={mode === 'checking' || mode === 'uploading'}
+            fontSize={1}
           >
             {
               {
