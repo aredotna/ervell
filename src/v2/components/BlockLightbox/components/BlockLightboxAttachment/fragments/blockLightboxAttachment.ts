@@ -12,6 +12,7 @@ export default gql`
       file_content_type
       image_url(size: DISPLAY)
       image_updated_at(format: "%m/%d/%y")
+      image_updated_at_timestamp: image_updated_at
     }
   }
 `
