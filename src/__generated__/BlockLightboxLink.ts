@@ -25,7 +25,7 @@ export interface BlockLightboxLink_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
   source: BlockLightboxLink_Link_source | null;
 }
 
