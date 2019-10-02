@@ -34,7 +34,11 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
 
   const imageUpdatedAtTimeStamp =
     (block.__typename === 'Link' || block.__typename === 'Attachment') &&
-    block.image_updated_at_timestamp
+    parseInt(block.image_updated_at_unix_time)
+
+  const showImageEditedDate =
+    imageUpdatedAtTimeStamp &&
+    imageUpdatedAtTimeStamp - parseInt(block.created_at_unix_time) > 60
 
   const imageUpdatedAt =
     (block.__typename === 'Link' || block.__typename === 'Attachment') &&
@@ -42,12 +46,11 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
 
   return (
     <Container>
-      {imageUpdatedAt &&
-        block.updated_at_timestamp !== imageUpdatedAtTimeStamp && (
-          <Text color="gray.regular" fontSize={1}>
-            Cover image edited on {imageUpdatedAt}
-          </Text>
-        )}
+      {showImageEditedDate && (
+        <Text color="gray.regular" fontSize={1}>
+          Cover image edited on {imageUpdatedAt}
+        </Text>
+      )}
 
       {(block.can.potentially_edit_thumbnail || block.can.edit_thumbnail) && (
         <>

@@ -49,7 +49,7 @@ export interface BlockContent_blokk_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
   source: BlockContent_blokk_Link_source | null;
 }
 
@@ -63,7 +63,7 @@ export interface BlockContent_blokk_Attachment {
   file_content_type: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
 }
 
 export interface BlockContent_blokk_Embed {

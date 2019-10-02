@@ -46,7 +46,7 @@ export interface BlockLightboxContentPane_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
   source: BlockLightboxContentPane_Link_source | null;
 }
 
@@ -60,7 +60,7 @@ export interface BlockLightboxContentPane_Attachment {
   file_content_type: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
 }
 
 export interface BlockLightboxContentPane_Embed {

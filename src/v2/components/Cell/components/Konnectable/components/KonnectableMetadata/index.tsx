@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { KonnectableMetadata as KonnectableMetadataData } from '__generated__/KonnectableMetadata'
 
@@ -9,11 +10,23 @@ import Text from 'v2/components/UI/Text'
 import Truncate from 'v2/components/UI/Truncate'
 import MetadataFileExtension from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata/components/MetadataFileExtension'
 import MetadataPlay from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata/components/MetadataPlay'
+import Icons from 'v2/components/UI/Icons'
 
 interface Props {
   konnectable: KonnectableMetadataData
   mode: Mode
 }
+
+const LinkIcon = styled(Icons).attrs({
+  name: 'Link',
+  size: 6,
+  color: 'gray.medium',
+  ml: 2,
+  mb: 1,
+})`
+  position: relative;
+  vertical-align: middle;
+`
 
 export const KonnectableMetadata: React.FC<Props> = ({
   mode = Mode.RESTING,
@@ -26,6 +39,8 @@ export const KonnectableMetadata: React.FC<Props> = ({
         {mode === Mode.RESTING && (
           <div>
             <Truncate length={40}>{konnectable.title}</Truncate>
+
+            {konnectable.__typename === 'Link' && <LinkIcon />}
 
             {konnectable.__typename === 'Attachment' && (
               <MetadataFileExtension ext={konnectable.file_extension} />

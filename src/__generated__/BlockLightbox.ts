@@ -23,6 +23,7 @@ export interface BlockLightbox_Channel {
   __typename: "Channel";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -65,6 +66,7 @@ export interface BlockLightbox_Image {
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -108,6 +110,7 @@ export interface BlockLightbox_Text {
   title: string | null;
   content: string | null;
   can: BlockLightbox_Text_can | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -154,8 +157,9 @@ export interface BlockLightbox_Link {
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
   source: BlockLightbox_Link_source | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -201,7 +205,8 @@ export interface BlockLightbox_Attachment {
   file_content_type: string | null;
   image_url: string | null;
   image_updated_at: string | null;
-  image_updated_at_timestamp: string | null;
+  image_updated_at_unix_time: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -245,6 +250,7 @@ export interface BlockLightbox_Embed {
   embed_html: string | null;
   embed_width: number | null;
   embed_height: number | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -285,6 +291,7 @@ export interface BlockLightbox_PendingBlock {
   __typename: "PendingBlock";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
