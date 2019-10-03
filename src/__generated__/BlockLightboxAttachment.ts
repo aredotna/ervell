@@ -19,6 +19,8 @@ export interface BlockLightboxAttachment_Attachment {
   file_size: string | null;
   file_content_type: string | null;
   image_url: string | null;
+  image_updated_at: string | null;
+  image_updated_at_unix_time: string | null;
 }
 
 export type BlockLightboxAttachment = BlockLightboxAttachment_Channel | BlockLightboxAttachment_Attachment;

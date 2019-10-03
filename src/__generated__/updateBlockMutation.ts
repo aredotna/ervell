@@ -23,6 +23,7 @@ export interface updateBlockMutation_update_block_block_Channel {
   __typename: "Channel";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -54,12 +55,15 @@ export interface updateBlockMutation_update_block_block_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Image {
   __typename: "Image";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -96,12 +100,15 @@ export interface updateBlockMutation_update_block_block_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Text {
   __typename: "Text";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -139,12 +146,15 @@ export interface updateBlockMutation_update_block_block_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Link {
   __typename: "Link";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -158,6 +168,8 @@ export interface updateBlockMutation_update_block_block_Link {
   editable_description: string | null;
   source_url: string | null;
   image_url: string | null;
+  image_updated_at: string | null;
+  image_updated_at_unix_time: string | null;
   can: updateBlockMutation_update_block_block_Link_can | null;
 }
 
@@ -179,12 +191,15 @@ export interface updateBlockMutation_update_block_block_Attachment_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Attachment {
   __typename: "Attachment";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -201,6 +216,8 @@ export interface updateBlockMutation_update_block_block_Attachment {
   file_size: string | null;
   file_content_type: string | null;
   image_url: string | null;
+  image_updated_at: string | null;
+  image_updated_at_unix_time: string | null;
   can: updateBlockMutation_update_block_block_Attachment_can | null;
 }
 
@@ -222,12 +239,15 @@ export interface updateBlockMutation_update_block_block_Embed_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_Embed {
   __typename: "Embed";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -263,12 +283,15 @@ export interface updateBlockMutation_update_block_block_PendingBlock_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface updateBlockMutation_update_block_block_PendingBlock {
   __typename: "PendingBlock";
   id: number | null;
   title: string | null;
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;

@@ -6,6 +6,7 @@ import manageBlockFragment from 'v2/components/ManageBlock/fragments/manageBlock
 export default gql`
   fragment BlockLightboxMetadataPane on Konnectable {
     ... on Model {
+      created_at_unix_time: created_at(format: "%s")
       created_at_timestamp: created_at
       created_at(relative: true)
       updated_at(relative: true)

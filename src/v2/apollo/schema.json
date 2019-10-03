@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -715,7 +715,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -3366,7 +3366,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -3833,7 +3833,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -4180,7 +4180,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -4541,7 +4541,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -7156,6 +7156,18 @@
             "deprecationReason": null
           },
           {
+            "name": "edit_thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "manage",
             "description": null,
             "args": [],
@@ -7180,9 +7192,48 @@
             "deprecationReason": null
           },
           {
+            "name": "potentially_edit_thumbnail",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "read",
             "description": null,
             "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "remove_connection",
+            "description": null,
+            "args": [
+              {
+                "name": "channel_id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
@@ -8419,6 +8470,39 @@
             "deprecationReason": null
           },
           {
+            "name": "image_updated_at",
+            "description": null,
+            "args": [
+              {
+                "name": "relative",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "format",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "image_url",
             "description": null,
             "args": [
@@ -9013,6 +9097,39 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "image_updated_at",
+            "description": null,
+            "args": [
+              {
+                "name": "relative",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "format",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9636,6 +9753,39 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "image_updated_at",
+            "description": null,
+            "args": [
+              {
+                "name": "relative",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "format",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -12003,6 +12153,33 @@
             "deprecationReason": null
           },
           {
+            "name": "remove_connection",
+            "description": null,
+            "args": [
+              {
+                "name": "channel_id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "share",
             "description": null,
             "args": [],
@@ -13250,7 +13427,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -13668,7 +13845,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -14114,7 +14291,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -14740,7 +14917,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "219"
+                "defaultValue": "262"
               },
               {
                 "name": "q",
@@ -18238,6 +18415,33 @@
             "type": {
               "kind": "OBJECT",
               "name": "UpdateBlockPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update_block_thumbnail",
+            "description": null,
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpdateBlockThumbnailInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UpdateBlockThumbnailPayload",
               "ofType": null
             },
             "isDeprecated": false,
@@ -23313,6 +23517,26 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "password_confirmation",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -23423,6 +23647,102 @@
         "kind": "OBJECT",
         "name": "UpdateBlockPayload",
         "description": "Autogenerated return type of UpdateBlock",
+        "fields": [
+          {
+            "name": "block",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Connectable",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "blokk",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "UNION",
+              "name": "Konnectable",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UpdateBlockThumbnailInput",
+        "description": "Autogenerated input type of UpdateBlockThumbnail",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "image_url",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UpdateBlockThumbnailPayload",
+        "description": "Autogenerated return type of UpdateBlockThumbnail",
         "fields": [
           {
             "name": "block",

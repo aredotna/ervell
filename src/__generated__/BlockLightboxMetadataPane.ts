@@ -21,6 +21,7 @@ export interface BlockLightboxMetadataPane_Channel_source {
 
 export interface BlockLightboxMetadataPane_Channel {
   __typename: "Channel";
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -48,6 +49,8 @@ export interface BlockLightboxMetadataPane_Text_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxMetadataPane_Text_source {
@@ -58,6 +61,7 @@ export interface BlockLightboxMetadataPane_Text_source {
 
 export interface BlockLightboxMetadataPane_Text {
   __typename: "Text";
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -88,6 +92,8 @@ export interface BlockLightboxMetadataPane_Image_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxMetadataPane_Image_source {
@@ -98,6 +104,7 @@ export interface BlockLightboxMetadataPane_Image_source {
 
 export interface BlockLightboxMetadataPane_Image {
   __typename: "Image";
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
@@ -127,6 +134,8 @@ export interface BlockLightboxMetadataPane_Link_can {
   manage: boolean | null;
   comment: boolean | null;
   mute: boolean | null;
+  potentially_edit_thumbnail: boolean | null;
+  edit_thumbnail: boolean | null;
 }
 
 export interface BlockLightboxMetadataPane_Link_source {
@@ -137,6 +146,7 @@ export interface BlockLightboxMetadataPane_Link_source {
 
 export interface BlockLightboxMetadataPane_Link {
   __typename: "Link" | "Embed" | "Attachment" | "PendingBlock";
+  created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;

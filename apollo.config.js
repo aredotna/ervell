@@ -5,7 +5,7 @@ module.exports = {
   client: {
     service: {
       name: 'are.na',
-      url: 'https://api.are.na/graphql',
+      url: process.env.GRAPHQL_ENDPOINT,
       headers: {
         'X-APP-TOKEN': process.env.X_APP_TOKEN,
       },
