@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -41,7 +41,6 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
   createBlock,
   channelId,
 }) => {
-  const [key, setKey] = useState(null)
   const [mode, setMode] = useState('resting')
   const [fileUrl, setFileUrl] = useState(null)
 
@@ -53,25 +52,27 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
   })
 
   const finishUpload = () => {
-    setKey(new Date().getTime())
-  }
-  const onUpload = ({ url: value }) => {
-    console.log('onUpload', value)
     setFileUrl(null)
-    setMode('resting')
-    return createBlock({ variables: { channel_id: channelId, value } })
-      .then(({ data: { create_block: { block } } }) => onAddBlock(block))
-      .catch(err => {
-        console.error(err)
-      })
   }
+
+  const onUpload = useCallback(
+    ({ url: value }) => {
+      setFileUrl(null)
+      setMode('resting')
+      return createBlock({ variables: { channel_id: channelId, value } })
+        .then(({ data: { create_block: { block } } }) => onAddBlock(block))
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    [setFileUrl, setMode, createBlock, channelId, onAddBlock]
+  )
 
   return (
     <DropZone mode={mode}>
       <Backdrop>
         {fileUrl && (
           <FileUploader
-            key={key}
             files={[fileUrl]}
             onUpload={onUpload}
             onComplete={finishUpload}
