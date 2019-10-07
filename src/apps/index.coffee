@@ -76,6 +76,10 @@ console.time('examples')
 app.use(require('../apps/examples'))
 console.timeEnd('examples')
 
+console.time('vanity_redirects')
+app.use(require('../apps/vanity_redirects'))
+console.timeEnd('vanity_redirects')
+
 # Dynamic routing (in order)
 console.time('profile')
 app.use(require('../apps/profile'))
