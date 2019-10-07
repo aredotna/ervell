@@ -44,16 +44,19 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
   const [mode, setMode] = useState('resting')
   const [fileUrl, setFileUrl] = useState(null)
 
-  usePasteListener({
-    onPaste: url => {
+  const onPaste = useCallback(
+    url => {
       setMode('active')
       setFileUrl(url)
     },
-  })
+    [setMode, setFileUrl]
+  )
 
-  const finishUpload = () => {
+  usePasteListener({ onPaste })
+
+  const finishUpload = useCallback(() => {
     setFileUrl(null)
-  }
+  }, [setFileUrl])
 
   const onUpload = useCallback(
     ({ url: value }) => {
