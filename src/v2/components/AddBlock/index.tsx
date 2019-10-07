@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import { Mutation, MutationFn } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
 import { FilledButton } from 'v2/components/UI/Buttons'
@@ -10,6 +10,10 @@ import { AddBlockInner } from 'v2/components/AddBlock/components/AddBlockInner'
 import { AddBlockCTAInner } from 'v2/components/AddBlock/components/AddBlockCTAInner'
 
 import createBlockMutation from 'v2/components/AddBlock/mutations/createBlock'
+import {
+  createAddBlockMutation as CreateBlock,
+  createAddBlockMutationVariables as CreateBlockVariables,
+} from '__generated__/createAddBlockMutation'
 
 const Button = styled(FilledButton).attrs({
   py: 6,
@@ -35,12 +39,12 @@ const Container = styled(Box).attrs({
 
 interface Props {
   channel_id: string | number
-  onAddBlock: (props: any) => any
+  onAddBlock: ({ id: number }) => void
   isElligbleForPremium: boolean
 }
 
 interface AddBlockProps extends Props {
-  createBlock: (props: any) => Promise<any>
+  createBlock: MutationFn<CreateBlock, CreateBlockVariables>
 }
 
 class AddBlock extends PureComponent<AddBlockProps> {
@@ -79,15 +83,19 @@ class AddBlock extends PureComponent<AddBlockProps> {
     this.setState({ mode: 'submitting' })
 
     return createBlock({
-      variables: { channel_id, value },
+      variables: { channel_id: channel_id.toString(), value },
     })
-      .then(({ data: { create_block: { block } } }) => {
-        this.setState({
-          mode: 'resting',
-          inputKey: new Date().getTime(),
-        })
+      .then(response => {
+        if (response && response.data) {
+          const { block } = response.data.create_block
 
-        return onAddBlock(block)
+          this.setState({
+            mode: 'resting',
+            inputKey: new Date().getTime(),
+          })
+
+          return onAddBlock(block)
+        }
       })
       .catch(err => {
         console.error(err)
@@ -99,9 +107,14 @@ class AddBlock extends PureComponent<AddBlockProps> {
     const { createBlock, onAddBlock, channel_id } = this.props
 
     return createBlock({
-      variables: { channel_id, value },
+      variables: { channel_id: channel_id.toString(), value },
     })
-      .then(({ data: { create_block: { block } } }) => onAddBlock(block))
+      .then(response => {
+        if (response && response.data) {
+          const { block } = response.data.create_block
+          onAddBlock(block)
+        }
+      })
       .catch(err => {
         console.error(err)
       })
@@ -112,9 +125,9 @@ class AddBlock extends PureComponent<AddBlockProps> {
   render() {
     const {
       isElligbleForPremium,
-      createBlock,
       channel_id,
       onAddBlock,
+      createBlock,
     } = this.props
     const { mode, inputKey, uploaderKey } = this.state
 
@@ -171,6 +184,25 @@ class AddBlock extends PureComponent<AddBlockProps> {
   }
 }
 
-export default graphql<Props>(createBlockMutation, {
-  name: 'createBlock',
-})(AddBlock)
+const AddBlockContainer: React.FC<Props> = ({
+  channel_id,
+  onAddBlock,
+  isElligbleForPremium,
+}) => {
+  return (
+    <Mutation<CreateBlock, CreateBlockVariables> mutation={createBlockMutation}>
+      {createBlock => {
+        return (
+          <AddBlock
+            createBlock={createBlock}
+            channel_id={channel_id}
+            onAddBlock={onAddBlock}
+            isElligbleForPremium={isElligbleForPremium}
+          />
+        )
+      }}
+    </Mutation>
+  )
+}
+
+export default AddBlockContainer

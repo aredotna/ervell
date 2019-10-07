@@ -1,9 +1,15 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
+import { MutationFn } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
 import usePasteListener from 'v2/hooks/usePasteListener'
 import FileUploader from 'v2/components/UI/FileUploader'
+
+import {
+  createAddBlockMutation as CreateBlock,
+  createAddBlockMutationVariables as CreateBlockVariables,
+} from '__generated__/createAddBlockMutation'
 
 const DropZone = styled(Box)`
   ${props => `display: ${{ resting: 'none', active: 'block' }[props.mode]};`}
@@ -31,9 +37,9 @@ const Backdrop = styled(Box).attrs({
 `
 
 interface AddBlockPasteUploader {
-  onAddBlock: (props: any) => any
+  onAddBlock: ({ id: number }) => void
   channelId: string | number
-  createBlock: (props: any) => Promise<any>
+  createBlock: MutationFn<CreateBlock, CreateBlockVariables>
 }
 
 const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
@@ -62,8 +68,15 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
     ({ url: value }) => {
       setFileUrl(null)
       setMode('resting')
-      return createBlock({ variables: { channel_id: channelId, value } })
-        .then(({ data: { create_block: { block } } }) => onAddBlock(block))
+      return createBlock({
+        variables: { channel_id: channelId.toString(), value },
+      })
+        .then(response => {
+          if (response && response.data) {
+            const { block } = response.data.create_block
+            onAddBlock(block)
+          }
+        })
         .catch(err => {
           console.error(err)
         })
