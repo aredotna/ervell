@@ -119,51 +119,54 @@ class AddBlock extends PureComponent<AddBlockProps> {
     const { mode, inputKey, uploaderKey } = this.state
 
     return (
-      <DropZoneUploader
-        accept="image/*,audio/*,video/*,application/*" // TODO
-        onUpload={this.handleUpload}
-        onComplete={this.finishUpload}
-        key={uploaderKey}
-      >
-        {({ openUploadDialog }) => (
-          <Container pt={6} px={6}>
-            {isElligbleForPremium ? (
-              <>
-                <AddBlockCTAInner />
-                <Button href="/settings/billing">Register for Premium</Button>
-              </>
-            ) : (
-              <>
-                <AddBlockInner
-                  mode={mode}
-                  inputKey={inputKey}
-                  openUploadDialog={openUploadDialog}
-                  onChange={this.handleChange}
-                  onKeyDown={this.handleKeyDown}
-                />
-                <AddBlockPasteUploader
-                  createBlock={createBlock}
-                  channelId={channel_id}
-                  onAddBlock={onAddBlock}
-                />
-                <Button
-                  onClick={this.handleSubmit}
-                  disabled={mode === 'resting'}
-                >
-                  {
+      <>
+        <AddBlockPasteUploader
+          createBlock={createBlock}
+          channelId={channel_id}
+          onAddBlock={onAddBlock}
+        />
+        <DropZoneUploader
+          accept="image/*,audio/*,video/*,application/*" // TODO
+          onUpload={this.handleUpload}
+          onComplete={this.finishUpload}
+          key={uploaderKey}
+        >
+          {({ openUploadDialog }) => (
+            <Container pt={6} px={6}>
+              {isElligbleForPremium ? (
+                <>
+                  <AddBlockCTAInner />
+                  <Button href="/settings/billing">Register for Premium</Button>
+                </>
+              ) : (
+                <>
+                  <AddBlockInner
+                    mode={mode}
+                    inputKey={inputKey}
+                    openUploadDialog={openUploadDialog}
+                    onChange={this.handleChange}
+                    onKeyDown={this.handleKeyDown}
+                  />
+
+                  <Button
+                    onClick={this.handleSubmit}
+                    disabled={mode === 'resting'}
+                  >
                     {
-                      resting: 'Add block →',
-                      active: 'Add block →',
-                      submitting: 'Adding...',
-                      error: 'Error',
-                    }[mode]
-                  }
-                </Button>
-              </>
-            )}
-          </Container>
-        )}
-      </DropZoneUploader>
+                      {
+                        resting: 'Add block →',
+                        active: 'Add block →',
+                        submitting: 'Adding...',
+                        error: 'Error',
+                      }[mode]
+                    }
+                  </Button>
+                </>
+              )}
+            </Container>
+          )}
+        </DropZoneUploader>
+      </>
     )
   }
 }

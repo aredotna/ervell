@@ -4,7 +4,7 @@ type BlobLikeFile = File | null
 
 interface UsePasteListenerProps {
   acceptedFiles?: string[]
-  onPaste: (url: string) => void
+  onPaste?: (url: string) => void
 }
 
 const transformImages = (
@@ -14,14 +14,10 @@ const transformImages = (
 ) => {
   for (let i = 0; i < data.items.length; i++) {
     if (acceptedFiles.includes(data.items[i].type) !== false) {
-      let blob: BlobLikeFile = data.items[i].getAsFile()
+      let file: BlobLikeFile = data.items[i].getAsFile()
 
-      if (blob) {
-        const reader = new FileReader()
-        reader.onload = () => {
-          callback(reader.result)
-        }
-        reader.readAsDataURL(blob)
+      if (file) {
+        callback(file)
       }
     }
   }
