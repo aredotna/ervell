@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { MutationFn } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+import Link from 'v2/components/UI/Link'
 import usePasteListener from 'v2/hooks/usePasteListener'
 import FileUploader from 'v2/components/UI/FileUploader'
 
@@ -50,6 +52,14 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
   const [mode, setMode] = useState('resting')
   const [fileUrl, setFileUrl] = useState(null)
 
+  const handleErrors = useCallback(
+    err => {
+      console.error(err)
+      setMode('error')
+    },
+    [setMode]
+  )
+
   const onPaste = useCallback(
     url => {
       setMode('active')
@@ -87,11 +97,25 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
   return (
     <DropZone mode={mode}>
       <Backdrop>
+        {mode === 'error' && (
+          <Text
+            mb={6}
+            f={8}
+            color="state.alert"
+            textAlign="center"
+            underlineLinks
+          >
+            There was a problem uploading your files.{' '}
+            <Link onClick={finishUpload}>Close</Link>
+          </Text>
+        )}
+
         {fileUrl && (
           <FileUploader
             files={[fileUrl]}
             onUpload={onUpload}
             onComplete={finishUpload}
+            onError={handleErrors}
           />
         )}
       </Backdrop>
