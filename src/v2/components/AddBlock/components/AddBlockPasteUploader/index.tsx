@@ -88,6 +88,7 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
           }
         })
         .catch(err => {
+          setMode('error')
           console.error(err)
         })
     },
