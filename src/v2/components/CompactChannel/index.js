@@ -49,6 +49,7 @@ const Container = styled.a.attrs({
   justify-content: space-between;
   text-decoration: none;
   break-inside: avoid;
+  overflow: hidden;
   ${boxMixin}
   ${channelVisibilityForegroundColor}
 
