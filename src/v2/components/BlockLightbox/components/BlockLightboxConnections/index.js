@@ -25,7 +25,14 @@ export default class BlockLightboxConnections extends PureComponent {
   render() {
     const {
       block,
-      block: { id, private_channels, public_channels, counts, source },
+      block: {
+        id,
+        current_user_channels,
+        private_channels,
+        public_channels,
+        counts,
+        source,
+      },
       loading,
       onLoadMore,
       loadingMore,
@@ -38,10 +45,56 @@ export default class BlockLightboxConnections extends PureComponent {
       : counts.private_channels + counts.public_channels
     const hasMore = length > total
 
+    const hasCurrentUserChannels =
+      current_user_channels && current_user_channels.length > 0
+    const currentUserChannelsIds =
+      current_user_channels && current_user_channels.map(c => c.id)
+    const filteredPrivateChannels =
+      private_channels &&
+      private_channels.filter(c => !currentUserChannelsIds.includes(c.id))
+    const filteredPublicChannels =
+      public_channels &&
+      public_channels.filter(c => !currentUserChannelsIds.includes(c.id))
+
     return (
       <Box {...rest}>
-        {private_channels &&
-          private_channels.map(channel => (
+        {hasCurrentUserChannels && (
+          <>
+            {hasCurrentUserChannels && current_user_channels.length !== total && (
+              <Text
+                mt={7}
+                f={1}
+                color="gray.medium"
+                textAlign="center"
+                textTransform="uppercase"
+              >
+                Your Connections
+              </Text>
+            )}
+            {current_user_channels.map(channel => (
+              <CompactChannel
+                key={`CompactChannelYours_${channel.id}`}
+                channel={channel}
+                mt={3}
+              />
+            ))}
+          </>
+        )}
+
+        {hasCurrentUserChannels && current_user_channels.length !== total && (
+          <Text
+            mt={7}
+            f={1}
+            color="gray.medium"
+            textAlign="center"
+            textTransform="uppercase"
+          >
+            All Connections
+          </Text>
+        )}
+
+        {filteredPrivateChannels &&
+          filteredPrivateChannels.map(channel => (
             <CompactChannel
               key={`CompactChannelPrivate_${channel.id}`}
               channel={channel}
@@ -49,8 +102,8 @@ export default class BlockLightboxConnections extends PureComponent {
             />
           ))}
 
-        {public_channels &&
-          public_channels.map(channel => (
+        {filteredPublicChannels &&
+          filteredPublicChannels.map(channel => (
             <CompactChannel
               key={`CompactChannelPublic_${channel.id}`}
               channel={channel}

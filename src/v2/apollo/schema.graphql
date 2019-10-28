@@ -124,6 +124,7 @@ type Attachment implements Block & ConnectableInterface & Model {
   connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   file_content_type: String
   file_extension: String
@@ -131,6 +132,7 @@ type Attachment implements Block & ConnectableInterface & Model {
   file_url: String
   href(absolute: Boolean = false): String
   id: Int
+  image_updated_at(format: String, relative: Boolean): String
   image_url(size: ImageVersion = DISPLAY): String
   is_muted: Boolean
   is_nsfw: Boolean
@@ -198,13 +200,17 @@ interface Block {
 type BlockCan {
   comment: Boolean
   connect: Boolean
+  edit_thumbnail: Boolean
   manage: Boolean
   mute: Boolean
+  potentially_edit_thumbnail: Boolean
   read: Boolean
+  remove_connection(channel_id: ID!): Boolean
 }
 
 type BlockCounts {
   channels: Int
+  channels_by_current_user: Int
   channels_with_same_source: Int
   comments: Int
   private_accessible_channels: Int
@@ -282,6 +288,7 @@ type Channel implements ConnectableInterface & Followable & Model & Mutable {
   contents(connectables: [ConnectableInput]): [Konnectable]
   counts: ChannelCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   filter(page: Int = 1, per: Int = 25, q: String = null): [Konnectable]
   followers(page: Int = 1, per: Int = 1): [User]
@@ -329,6 +336,7 @@ type ChannelCan {
   manage_collaborators: Boolean
   mute: Boolean
   read: Boolean
+  remove_connection(channel_id: ID!): Boolean
   share: Boolean
   transfer: Boolean
   update: Boolean
@@ -447,6 +455,7 @@ type Connectable implements ConnectableInterface & Model & Mutable {
   connection: Connection
   connections: [Connection]
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   href(absolute: Boolean = false): String
   id: Int
@@ -483,6 +492,7 @@ interface ConnectableInterface {
   # Returns the outer channel if we are inside of one
   connection: Connection
   connections: [Connection]
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   href(absolute: Boolean = false): String
   is_muted: Boolean
@@ -888,12 +898,14 @@ type Embed implements Block & ConnectableInterface & Model {
   connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   embed_height: Int
   embed_html: String
   embed_width: Int
   href(absolute: Boolean = false): String
   id: Int
+  image_updated_at(format: String, relative: Boolean): String
   image_url(size: ImageVersion = DISPLAY): String
   is_muted: Boolean
   is_nsfw: Boolean
@@ -1078,6 +1090,7 @@ type Image implements Block & ConnectableInterface & Model {
   connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   find_original_url: String
   href(absolute: Boolean = false): String
@@ -1191,7 +1204,7 @@ type Invitee implements Model & UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   created_at(format: String, relative: Boolean): String
   custom_badge(size: CustomBadgeVersion): String
   email: String
@@ -1211,7 +1224,7 @@ type Invitee implements Model & UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -1243,9 +1256,11 @@ type Link implements Block & ConnectableInterface & Model {
   connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   href(absolute: Boolean = false): String
   id: Int
+  image_updated_at(format: String, relative: Boolean): String
   image_url(size: ImageVersion = DISPLAY): String
   is_muted: Boolean
   is_nsfw: Boolean
@@ -1292,7 +1307,7 @@ type Me implements Model & UserInterface {
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
   connection_search(include_open_channels: Boolean = true, page: Int = 1, per: Int = 5, q: String = null): [Channel]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   counts: MeCounts
   created_at(format: String, relative: Boolean): String
   custom_badge(size: CustomBadgeVersion): String
@@ -1323,7 +1338,7 @@ type Me implements Model & UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   non_premium_connections_limit: Int
@@ -1493,6 +1508,7 @@ type Mutation {
   unmute_channel(input: UnmuteChannelInput!): UnmuteChannelPayload @deprecated(reason: "Use `unmute` instead")
   update_account(input: UpdateAccountInput!): UpdateAccountPayload
   update_block(input: UpdateBlockInput!): UpdateBlockPayload
+  update_block_thumbnail(input: UpdateBlockThumbnailInput!): UpdateBlockThumbnailPayload
   update_channel(input: UpdateChannelInput!): UpdateChannelPayload
   update_customer(input: UpdateCustomerInput!): UpdateCustomerPayload
   update_flag(input: UpdateFlagInput!): UpdateFlagPayload @deprecated(reason: "Use `set_me_flags` instead")
@@ -1546,6 +1562,7 @@ type PendingBlock implements Block & ConnectableInterface & Model {
   connections: [Connection]
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   href(absolute: Boolean = false): String
   id: Int
@@ -1613,7 +1630,7 @@ type Query {
   channels(ids: [ID]!): [Channel]
   coupon(code: String!): Coupon
   explore(direction: Directions = DESC, page: Int = 1, per: Int = 1, sort_by: SearchSorts = null, type: SearchType): [SearchResult]
-  exxplore(direction: Directions = DESC, page: Int = 1, per: Int = 1, seed: Int = 219, sort_by: SearchSorts = null, type: SearchType): [Konnectable]
+  exxplore(direction: Directions = DESC, page: Int = 1, per: Int = 1, seed: Int = 301, sort_by: SearchSorts = null, type: SearchType): [Konnectable]
 
   # Interface for getting the follow status of users or channels
   followable(id: ID, type: FollowableTypeEnum): FollowableType
@@ -1633,12 +1650,12 @@ type Query {
   password_resettable_user(reset_password_token: String!): User
   password_token(token: ID!): User
   random_title: String
-  search(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 219, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
+  search(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 301, sort_by: SearchSorts = null, type: SearchType = null): [SearchResult]
   searches: Searches
 
   # An otherwise private channel that is accessible via the shared token
   shared_channel(token: String!): Channel
-  ssearch(block_filter: BlockFilterEnum = null, direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 219, sort_by: SearchSorts = null, type: [SsearchType] = [USER, GROUP, CHANNEL, BLOCK]): [SsearchResult]
+  ssearch(block_filter: BlockFilterEnum = null, direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String! = null, seed: Int = 301, sort_by: SearchSorts = null, type: [SsearchType] = [USER, GROUP, CHANNEL, BLOCK]): [SsearchResult]
 
   # Is this endpoint operational?
   status: String
@@ -1971,6 +1988,7 @@ type Text implements Block & ConnectableInterface & Model {
   content(format: Format, no_links: Boolean = false): String
   counts: BlockCounts
   created_at(format: String, relative: Boolean): String
+  current_user_channels(direction: Directions = DESC, page: Int = 1, per: Int = 1): [Channel]
   description(format: Format, no_links: Boolean = false): String
   find_original_url: String
   href(absolute: Boolean = false): String
@@ -2048,6 +2066,8 @@ input UpdateAccountInput {
   first_name: String
   home_path: String
   last_name: String
+  password: String
+  password_confirmation: String
   receive_email: String
   receive_newsletter: Boolean
   show_nsfw: Boolean
@@ -2073,6 +2093,23 @@ input UpdateBlockInput {
 
 # Autogenerated return type of UpdateBlock
 type UpdateBlockPayload {
+  block: Connectable
+  blokk: Konnectable
+
+  # A unique identifier for the client performing the mutation.
+  clientMutationId: String
+}
+
+# Autogenerated input type of UpdateBlockThumbnail
+input UpdateBlockThumbnailInput {
+  # A unique identifier for the client performing the mutation.
+  clientMutationId: String
+  id: ID!
+  image_url: String!
+}
+
+# Autogenerated return type of UpdateBlockThumbnail
+type UpdateBlockThumbnailPayload {
   block: Connectable
   blokk: Konnectable
 
@@ -2157,7 +2194,7 @@ type User implements Followable & Model & UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   counts: UserCounts
   created_at(format: String, relative: Boolean): String
   custom_badge(size: CustomBadgeVersion): String
@@ -2179,7 +2216,7 @@ type User implements Followable & Model & UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
@@ -2230,7 +2267,7 @@ interface UserInterface {
 
   # Special channel field that eager loads all the owner and does not do pagination
   channels_index(type: IndexedChannelsTypes = OWN): [IndexedChannels]
-  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
+  contents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = DEFAULT, type: ConnectableTypeEnum = null): [Connectable]
   custom_badge(size: CustomBadgeVersion): String
   first_name: String
   following(page: Int = 1, per: Int = 1, type: FollowingTypeEnum = ALL): [FollowableType]
@@ -2247,7 +2284,7 @@ interface UserInterface {
   is_premium: Boolean
   is_supporter: Boolean
   is_upgradeable: Boolean
-  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 219, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
+  kontents(direction: Directions = DESC, page: Int = 1, per: Int = 1, q: String = null, seed: Int = 301, sort_by: SearchSorts = UPDATED_AT, type: ConnectableTypeEnum = null): [Konnectable]
   last_name: String
   name: String
   slug: String
