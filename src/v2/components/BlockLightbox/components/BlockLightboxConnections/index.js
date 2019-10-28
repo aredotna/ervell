@@ -42,7 +42,9 @@ export default class BlockLightboxConnections extends PureComponent {
     const total = loading ? 0 : private_channels.length + public_channels.length
     const length = loading
       ? 0
-      : counts.private_channels + counts.public_channels
+      : counts.private_channels +
+        counts.public_channels -
+        counts.current_user_channels
     const hasMore = length > total
 
     const hasCurrentUserChannels =
