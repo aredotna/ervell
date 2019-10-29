@@ -19,7 +19,7 @@ export default class BlockLightboxMetadataFold extends PureComponent {
 
   state = {
     page: 1,
-    per: 5,
+    per: 10,
     loadingMore: false,
   }
 

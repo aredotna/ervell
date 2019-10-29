@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -715,7 +715,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -1000,6 +1000,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1675,6 +1691,22 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Connection",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
                 "ofType": null
               }
             },
@@ -2399,6 +2431,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3366,7 +3414,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -3833,7 +3881,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -4180,7 +4228,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -4541,7 +4589,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -6614,6 +6662,22 @@
             "deprecationReason": null
           },
           {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [
@@ -7266,6 +7330,18 @@
             "deprecationReason": null
           },
           {
+            "name": "channels_by_current_user",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "channels_with_same_source",
             "description": null,
             "args": [],
@@ -7733,6 +7809,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -8402,6 +8494,22 @@
             "deprecationReason": null
           },
           {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [
@@ -8994,6 +9102,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9627,6 +9751,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -10271,6 +10411,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "current_user_channels",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Channel",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -13427,7 +13583,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -13845,7 +14001,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -14291,7 +14447,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
@@ -14917,7 +15073,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "262"
+                "defaultValue": "301"
               },
               {
                 "name": "q",
