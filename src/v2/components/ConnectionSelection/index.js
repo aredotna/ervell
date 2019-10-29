@@ -9,6 +9,8 @@ import { ConnectCTA } from './components/ConnectCTA'
 import createConnectionMutation from 'v2/components/ConnectionSelection/mutations/createConnection'
 import removeConnectionMutation from 'v2/components/ConnectionSelection/mutations/removeConnection'
 
+import recentConnectionsQuery from 'v2/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels'
+
 const Container = styled.div`
   position: relative;
 `
@@ -42,9 +44,15 @@ class ConnectionSelection extends PureComponent {
       refetchQueries,
     } = this.props
 
+    const refetchRecentConnections = {
+      query: recentConnectionsQuery,
+    }
+
+    const _refetchQueries = [...refetchQueries, refetchRecentConnections]
+
     if (isSelected) {
       return createConnection({
-        refetchQueries,
+        refetchQueries: _refetchQueries,
         variables: {
           channel_ids: [channelId],
           connectable_id: id,

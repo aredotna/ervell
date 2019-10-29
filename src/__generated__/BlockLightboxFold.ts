@@ -6,6 +6,36 @@
 // GraphQL query operation: BlockLightboxFold
 // ====================================================
 
+export interface BlockLightboxFold_block_Channel_current_user_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+  visibility: string | null;
+}
+
+export interface BlockLightboxFold_block_Channel_current_user_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export type BlockLightboxFold_block_Channel_current_user_channels_owner = BlockLightboxFold_block_Channel_current_user_channels_owner_Group | BlockLightboxFold_block_Channel_current_user_channels_owner_User;
+
+export interface BlockLightboxFold_block_Channel_current_user_channels_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+}
+
+export interface BlockLightboxFold_block_Channel_current_user_channels {
+  __typename: "Channel";
+  id: number | null;
+  href: string | null;
+  visibility: string | null;
+  title: string | null;
+  owner: BlockLightboxFold_block_Channel_current_user_channels_owner | null;
+  counts: BlockLightboxFold_block_Channel_current_user_channels_counts | null;
+}
+
 export interface BlockLightboxFold_block_Channel_public_channels_owner_Group {
   __typename: "Group";
   id: number | null;
@@ -74,6 +104,7 @@ export interface BlockLightboxFold_block_Channel_source {
 export interface BlockLightboxFold_block_Channel {
   __typename: "Channel";
   id: number | null;
+  current_user_channels: (BlockLightboxFold_block_Channel_current_user_channels | null)[] | null;
   public_channels: (BlockLightboxFold_block_Channel_public_channels | null)[] | null;
   private_channels: (BlockLightboxFold_block_Channel_private_channels | null)[] | null;
   source: BlockLightboxFold_block_Channel_source | null;
@@ -84,7 +115,38 @@ export interface BlockLightboxFold_block_Text_counts {
   public_channels: number | null;
   private_channels: number | null;
   comments: number | null;
+  current_user_channels: number | null;
   channels_with_same_source: number | null;
+}
+
+export interface BlockLightboxFold_block_Text_current_user_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+  visibility: string | null;
+}
+
+export interface BlockLightboxFold_block_Text_current_user_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export type BlockLightboxFold_block_Text_current_user_channels_owner = BlockLightboxFold_block_Text_current_user_channels_owner_Group | BlockLightboxFold_block_Text_current_user_channels_owner_User;
+
+export interface BlockLightboxFold_block_Text_current_user_channels_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+}
+
+export interface BlockLightboxFold_block_Text_current_user_channels {
+  __typename: "Channel";
+  id: number | null;
+  href: string | null;
+  visibility: string | null;
+  title: string | null;
+  owner: BlockLightboxFold_block_Text_current_user_channels_owner | null;
+  counts: BlockLightboxFold_block_Text_current_user_channels_counts | null;
 }
 
 export interface BlockLightboxFold_block_Text_public_channels_owner_Group {
@@ -207,6 +269,7 @@ export interface BlockLightboxFold_block_Text {
   __typename: "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
   id: number | null;
   counts: BlockLightboxFold_block_Text_counts | null;
+  current_user_channels: (BlockLightboxFold_block_Text_current_user_channels | null)[] | null;
   public_channels: (BlockLightboxFold_block_Text_public_channels | null)[] | null;
   private_channels: (BlockLightboxFold_block_Text_private_channels | null)[] | null;
   source: BlockLightboxFold_block_Text_source | null;
