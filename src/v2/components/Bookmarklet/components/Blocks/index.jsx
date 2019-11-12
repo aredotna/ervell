@@ -16,6 +16,7 @@ import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 
 import Block from 'v2/components/Bookmarklet/components/Blocks/components/Block'
 import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
+import { ConnectCTA } from 'v2/components/Bookmarklet/components/Blocks/components/ConnectCTA'
 
 import createBlockMutation from 'v2/components/Bookmarklet/components/Blocks/mutations/createBlock'
 import CurrentPageInfo from 'v2/components/Bookmarklet/components/Blocks/components/CurrentPageInfo'
@@ -57,6 +58,10 @@ const Bottom = styled(Box)`
   flex-direction: column;
   align-items: stretch;
   width: 100%;
+`
+
+const ConnectContainer = styled(Box)`
+  position: relative;
 `
 
 class Blocks extends Component {
@@ -200,11 +205,13 @@ class Blocks extends Component {
           </Section>
 
           <Section mb={4} flex={1}>
-            <Box flex={1}>
+            <ConnectContainer flex={1}>
+              <ConnectCTA />
+
               <ConnectionSelectionList
                 onConnectionSelection={this.handleConnectionSelect}
               />
-            </Box>
+            </ConnectContainer>
           </Section>
 
           <Bottom>
