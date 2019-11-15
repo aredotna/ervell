@@ -30,10 +30,13 @@ export default class PrimarySearchResults extends PureComponent {
   }
 
   render() {
-    const { query, cursor } = this.props
+    const { query, cursor, debouncedQuery } = this.props
 
     return (
-      <Query query={primarySearchResultsQuery} variables={{ query }}>
+      <Query
+        query={primarySearchResultsQuery}
+        variables={{ query: debouncedQuery }}
+      >
         {({ data, loading, error }) => {
           const { searches } = data
 
