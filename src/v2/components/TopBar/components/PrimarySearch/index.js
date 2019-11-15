@@ -32,6 +32,7 @@ export default class PrimarySearch extends PureComponent {
 
   state = {
     mode: 'resting',
+    debouncedQuery: '',
     query: '',
     cursor: null,
     href: null,
@@ -43,6 +44,10 @@ export default class PrimarySearch extends PureComponent {
 
   handleQuery = query => {
     this.setState({ query, cursor: null })
+  }
+
+  handleDebouncedQuery = debouncedQuery => {
+    this.setState({ debouncedQuery, cursor: null })
   }
 
   handleBlur = () => {
@@ -94,7 +99,7 @@ export default class PrimarySearch extends PureComponent {
 
   render() {
     const { scheme, ...rest } = this.props
-    const { mode, query, cursor } = this.state
+    const { mode, query, debouncedQuery, cursor } = this.state
 
     return (
       <Container {...rest}>
@@ -108,7 +113,8 @@ export default class PrimarySearch extends PureComponent {
           bg={scheme === 'GROUP' && 'transparent'}
           border={0}
           query={query}
-          onDebouncedQueryChange={this.handleQuery}
+          onQueryChange={this.handleQuery}
+          onDebouncedQueryChange={this.handleDebouncedQuery}
           ref={this.searchInputRef}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
@@ -129,6 +135,7 @@ export default class PrimarySearch extends PureComponent {
             <Results>
               <PrimarySearchResults
                 query={query}
+                debouncedQuery={debouncedQuery}
                 cursor={cursor}
                 onSelection={this.handleSelection}
               />
