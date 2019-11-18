@@ -4,7 +4,7 @@ export default (req, res, next) => {
   const path = req.user.get('home_path')
 
   if (path != null && path !== '/') {
-    res.redirect(302, path)
+    return res.redirect(302, path)
   }
 
   return next()
