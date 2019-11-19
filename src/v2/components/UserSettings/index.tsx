@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Query, Mutation, MutationFn } from 'react-apollo'
 import { Form, Field } from 'react-final-form'
 import { FORM_ERROR } from 'final-form'
+import axios from 'axios'
 
 import Box from 'v2/components/UI/Box'
 import Alert from 'v2/components/UI/Alert'
@@ -65,6 +66,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
     }
 
     return updateAccount({ variables })
+      .then(() => {
+        return axios.post('/settings/refresh')
+      })
       .then(() => true)
       .catch(err => {
         const mappedErrors = mapErrors(err)

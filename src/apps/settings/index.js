@@ -2,6 +2,7 @@ import express from 'express'
 
 import apolloMiddleware from 'v2/apollo/middleware'
 import ensureLoggedIn from 'lib/middleware/ensure_logged_in.coffee'
+import refreshCurrentUser from 'lib/middleware/refreshCurrentUser'
 import to from 'lib/to.coffee'
 
 import hasGroupsQuery from 'apps/settings/queries/hasGroupsQuery'
@@ -58,6 +59,14 @@ app.get(
   validateTab,
   ensureLoggedIn,
   resolve
+)
+app.post(
+  '/settings/refresh',
+  ensureLoggedIn,
+  refreshCurrentUser,
+  (_req, res) => {
+    res.sendStatus(200)
+  }
 )
 
 module.exports = app
