@@ -1,7 +1,6 @@
 { USER, CUSTOMER } = require('sharify').data
 Promise = require 'bluebird-q'
 User = require '../../../../models/user.coffee'
-formCard = require '../../components/form_card/index.coffee'
 
 { mountWithApolloProvider } = require '../../../../v2/apollo/index'
 { default: AvatarUploader } = require '../../../../v2/components/AvatarUploader/index.js'

@@ -1,5 +1,4 @@
 general = require './tabs/general.coffee'
-notifications = require './tabs/notifications.coffee'
 billing = require './tabs/billing.coffee'
 group_billing = require './tabs/group_billing.coffee'
 
