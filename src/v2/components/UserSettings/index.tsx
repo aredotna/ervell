@@ -309,7 +309,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                           checked={props.input.value}
                           onChange={props.input.onChange}
                         >
-                          Send me the montly Are.na newsletter
+                          Send me the monthly Are.na newsletter
                         </LargeLabelledCheckbox>
                       )
                     }}
