@@ -9,11 +9,18 @@ import Box from 'v2/components/UI/Box'
 import Alert from 'v2/components/UI/Alert'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
-import { Input, Textarea, Label, LabelledInput } from 'v2/components/UI/Inputs'
+import {
+  Input,
+  Textarea,
+  Label,
+  LabelledInput,
+  LargeLabelledCheckbox,
+} from 'v2/components/UI/Inputs'
 import { DividerButton as Button } from 'v2/components/UI/Buttons'
 import Text from 'v2/components/UI/Text'
 import RadioOptions from 'v2/components/UI/RadioOptions'
 import Pulldown from 'v2/components/UI/Pulldown'
+import HorizontalRule from 'v2/components/UI/HorizontalRule'
 
 import mapErrors from 'v2/util/mapErrors'
 
@@ -50,6 +57,16 @@ const TextInput = styled(Input).attrs({
 const Bio = styled(Textarea)``
 
 const Select = styled(Pulldown)``
+
+const ContextDivider = styled(HorizontalRule).attrs({
+  my: 2,
+  color: 'gray.semiLight',
+})``
+
+const CheckboxContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`
 
 const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
   const isCustom =
@@ -227,6 +244,115 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                   }}
                 </Field>
               )}
+
+              <ContextDivider />
+
+              <Field
+                name="receive_emails"
+                initialValue={me.settings.receive_email}
+              >
+                {props => {
+                  return (
+                    <>
+                      <InputContainer mt={6} mb={5}>
+                        <Label>Notification emails</Label>
+
+                        <RadioOptions
+                          value={props.input.value}
+                          onSelect={props.input.onChange}
+                        >
+                          <RadioOptions.Option value={'none'}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Never me send notification emails
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+
+                          <RadioOptions.Option value={'digest'}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Only send me a periodic notification digest
+                                email
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+
+                          <RadioOptions.Option value={'notifications'}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Send me an email for every notification
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+                        </RadioOptions>
+                      </InputContainer>
+                    </>
+                  )
+                }}
+              </Field>
+
+              <ContextDivider />
+
+              <InputContainer mt={6} mb={5}>
+                <Label>Other emails</Label>
+
+                <CheckboxContainer>
+                  <Field
+                    name="receive_newsletter"
+                    initialValue={me.settings.receive_newsletter}
+                  >
+                    {props => {
+                      return (
+                        <LargeLabelledCheckbox
+                          name={props.input.name}
+                          checked={props.input.value}
+                          onChange={props.input.onChange}
+                        >
+                          Send me the montly Are.na newsletter
+                        </LargeLabelledCheckbox>
+                      )
+                    }}
+                  </Field>
+
+                  <Field
+                    name="receive_tips_emails"
+                    initialValue={me.settings.receive_tips_emails}
+                  >
+                    {props => {
+                      return (
+                        <LargeLabelledCheckbox
+                          name={props.input.name}
+                          checked={props.input.value}
+                          onChange={props.input.onChange}
+                        >
+                          Send me periodic tips for how to use Are.na
+                        </LargeLabelledCheckbox>
+                      )
+                    }}
+                  </Field>
+
+                  <Field
+                    name="receive_group_premium_emails"
+                    initialValue={me.settings.receive_group_premium_emails}
+                  >
+                    {props => {
+                      return (
+                        <LargeLabelledCheckbox
+                          name={props.input.name}
+                          checked={props.input.value}
+                          onChange={props.input.onChange}
+                        >
+                          Send me alerts when members of my group hit their
+                          block limits
+                        </LargeLabelledCheckbox>
+                      )
+                    }}
+                  </Field>
+                </CheckboxContainer>
+              </InputContainer>
+
+              <ContextDivider />
 
               <Field name="home_path" initialValue={homePath}>
                 {props => {
