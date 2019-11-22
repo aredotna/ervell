@@ -285,7 +285,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               }
             ],
             "type": {
@@ -585,7 +585,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -715,7 +715,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -3414,7 +3414,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -3881,7 +3881,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -4228,7 +4228,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -4589,7 +4589,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -13583,7 +13583,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -14001,7 +14001,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -14447,7 +14447,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -15073,7 +15073,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "323"
+                "defaultValue": "326"
               },
               {
                 "name": "q",
@@ -23618,6 +23618,16 @@
           },
           {
             "name": "receive_newsletter",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "receive_tips_emails",
             "description": null,
             "type": {
               "kind": "SCALAR",
