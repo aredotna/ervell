@@ -15,6 +15,10 @@ export interface MySettings_me_settings {
   __typename: "MeSettings";
   exclude_from_indexes: boolean | null;
   show_nsfw: boolean | null;
+  receive_email: string | null;
+  receive_tips_emails: boolean | null;
+  receive_newsletter: boolean | null;
+  receive_group_premium_emails: boolean | null;
 }
 
 export interface MySettings_me {

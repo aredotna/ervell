@@ -19,6 +19,10 @@ export default gql`
       settings {
         exclude_from_indexes
         show_nsfw
+        receive_email
+        receive_tips_emails
+        receive_newsletter
+        receive_group_premium_emails
       }
     }
   }

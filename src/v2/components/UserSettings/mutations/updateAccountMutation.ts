@@ -9,6 +9,8 @@ export default gql`
     $home_path: String
     $receive_email: String
     $receive_newsletter: Boolean
+    $receive_tips_emails: Boolean
+    $receive_group_premium_emails: Boolean
     $show_tour: Boolean
     $exclude_from_indexes: Boolean
     $bio: String
@@ -27,6 +29,8 @@ export default gql`
         custom_badge_url: $custom_badge_url
         home_path: $home_path
         receive_newsletter: $receive_newsletter
+        receive_tips_emails: $receive_tips_emails
+        receive_group_premium_emails: $receive_group_premium_emails
         show_tour: $show_tour
         exclude_from_indexes: $exclude_from_indexes
         password: $password
