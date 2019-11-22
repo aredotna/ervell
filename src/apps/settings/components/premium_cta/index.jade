@@ -1,8 +1,0 @@
-unless user.get('is_premium')
-  p.Type: strong.Color--state-premium
-    | Premium Features
-
-  include ./features
-
-  button.Button.Button--divider.Color--state-premium.js-cta( data-plan='premium_1' )
-    | Upgrade to Premium

@@ -25,6 +25,9 @@ const user = () => ({
   email: internet.email(),
   unconfirmed_email: sample([internet.email(), null]),
   home_path: sample(['/', '/explore', '/channel/name']),
+  settings: {
+    receive_email: sample(['none', 'notifications', 'digest']),
+  },
 })
 
 const Mocks = {
