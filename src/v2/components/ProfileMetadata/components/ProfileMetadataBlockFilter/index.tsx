@@ -1,30 +1,21 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { stringify } from 'qs'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
-class ProfileMetadataBlockFilter extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    type: PropTypes.oneOf([
-      'BLOCK',
-      'IMAGE',
-      'TEXT',
-      'EMBED',
-      'ATTACHMENT',
-      'LINK',
-    ]).isRequired,
-  }
+import { ProfileMetadataProps } from 'v2/components/ProfileMetadata'
 
+class ProfileMetadataBlockFilter extends Component<
+  ProfileMetadataProps & RouteComponentProps
+> {
   isFilterActive = filter => () => this.props.type === filter
 
   render() {
     const {
       location: { pathname },
+      sort,
     } = this.props
 
     return (
@@ -35,7 +26,7 @@ class ProfileMetadataBlockFilter extends Component {
           prefix="Profile"
           to={{
             pathname,
-            search: '?type=BLOCK',
+            search: stringify({ sort, type: 'BLOCK' }),
           }}
           isActive={this.isFilterActive('BLOCK')}
         >
@@ -48,7 +39,7 @@ class ProfileMetadataBlockFilter extends Component {
           prefix="Search"
           to={{
             pathname,
-            search: '?type=LINK',
+            search: stringify({ sort, type: 'LINK' }),
           }}
           isActive={this.isFilterActive('LINK')}
         >
@@ -61,7 +52,7 @@ class ProfileMetadataBlockFilter extends Component {
           prefix="Search"
           to={{
             pathname,
-            search: '?type=ATTACHMENT',
+            search: stringify({ sort, type: 'ATTACHMENT' }),
           }}
           isActive={this.isFilterActive('ATTACHMENT')}
         >
@@ -74,7 +65,7 @@ class ProfileMetadataBlockFilter extends Component {
           prefix="Search"
           to={{
             pathname,
-            search: '?type=IMAGE',
+            search: stringify({ sort, type: 'IMAGE' }),
           }}
           isActive={this.isFilterActive('IMAGE')}
         >
@@ -87,7 +78,7 @@ class ProfileMetadataBlockFilter extends Component {
           prefix="Search"
           to={{
             pathname,
-            search: '?type=TEXT',
+            search: stringify({ sort, type: 'TEXT' }),
           }}
           isActive={this.isFilterActive('TEXT')}
         >
@@ -100,7 +91,7 @@ class ProfileMetadataBlockFilter extends Component {
           prefix="Search"
           to={{
             pathname,
-            search: '?type=EMBED',
+            search: stringify({ sort, type: 'EMBED' }),
           }}
           isActive={this.isFilterActive('EMBED')}
         >
