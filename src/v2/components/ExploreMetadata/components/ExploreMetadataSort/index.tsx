@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { stringify } from 'qs'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
+import { ExploreMetadataProps } from 'v2/components/ExploreMetadata'
 
-class ExploreMetadataSort extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-  }
-
+class ExploreMetadataSort extends Component<
+  ExploreMetadataProps & RouteComponentProps
+> {
   isSortActive = sort => () => this.props.sort === sort
 
   render() {
     const {
       location: { pathname },
+      block_filter,
     } = this.props
 
     return (
@@ -29,7 +26,7 @@ class ExploreMetadataSort extends Component {
           prefix="Explore"
           to={{
             pathname,
-            search: '?sort=UPDATED_AT',
+            search: stringify({ block_filter, sort: 'UPDATED_AT' }),
           }}
         >
           Recently updated
@@ -42,7 +39,7 @@ class ExploreMetadataSort extends Component {
           prefix="Explore"
           to={{
             pathname,
-            search: '?sort=RANDOM',
+            search: stringify({ block_filter, sort: 'RANDOM' }),
           }}
           rel="nofollow"
         >

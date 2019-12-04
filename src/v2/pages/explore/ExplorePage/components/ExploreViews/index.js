@@ -12,13 +12,25 @@ All.propTypes = {
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
 
-const Blocks = ({ sort, fetchPolicy }) => (
-  <ExploreContents type="CONNECTABLE" sort={sort} fetchPolicy={fetchPolicy} />
+const Blocks = ({ sort, fetchPolicy, block_filter }) => (
+  <ExploreContents
+    type="CONNECTABLE"
+    sort={sort}
+    fetchPolicy={fetchPolicy}
+    block_filter={block_filter}
+  />
 )
 
 Blocks.propTypes = {
   sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
+  block_filter: PropTypes.oneOf([
+    'IMAGE',
+    'EMBED',
+    'TEXT',
+    'ATTACHMENT',
+    'LINK',
+  ]),
 }
 
 const Channels = ({ sort, fetchPolicy }) => (
@@ -41,6 +53,17 @@ class ExploreViews extends Component {
 
   static propTypes = {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    block_filter: PropTypes.oneOf([
+      'IMAGE',
+      'EMBED',
+      'TEXT',
+      'ATTACHMENT',
+      'LINK',
+    ]),
+  }
+
+  static defaultProps = {
+    block_filter: null,
   }
 
   state = {
@@ -51,7 +74,7 @@ class ExploreViews extends Component {
 
   render() {
     const { fetchPolicy } = this.state
-    const { view, sort } = this.props
+    const { view, sort, block_filter } = this.props
 
     switch (view) {
       case 'all':
@@ -59,7 +82,13 @@ class ExploreViews extends Component {
       case 'channels':
         return <Channels sort={sort} fetchPolicy={fetchPolicy} />
       case 'blocks':
-        return <Blocks sort={sort} fetchPolicy={fetchPolicy} />
+        return (
+          <Blocks
+            sort={sort}
+            fetchPolicy={fetchPolicy}
+            block_filter={block_filter}
+          />
+        )
       default:
         return null
     }
