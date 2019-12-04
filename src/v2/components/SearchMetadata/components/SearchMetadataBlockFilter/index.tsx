@@ -1,28 +1,13 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
+import { SearchMetadataProps } from 'v2/components/SearchMetadata'
 
-class SearchMetadataFilter extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    block_filter: PropTypes.oneOf([
-      'IMAGE',
-      'EMBED',
-      'TEXT',
-      'ATTACHMENT',
-      'LINK',
-    ]),
-  }
-
-  static defaultProps = {
-    block_filter: null,
-  }
-
+class SearchMetadataFilter extends Component<
+  SearchMetadataProps & RouteComponentProps
+> {
   isFilterActive = filter => () => this.props.block_filter === filter
 
   render() {
