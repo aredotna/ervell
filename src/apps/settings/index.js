@@ -20,6 +20,7 @@ const resolve = [
       .then(apolloRes => {
         pageResolver({
           bundleName: 'settings',
+          includeStripe: true,
           apolloRes,
           res,
         })

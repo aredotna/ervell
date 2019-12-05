@@ -8,9 +8,16 @@ import SettingsPage from 'v2/pages/settings'
 export default () => (
   <Switch>
     <Route
-      path="/settings/:tab"
+      path="/settings/billing"
       render={parseRoute(({ params }) => (
-        <SettingsPage tab={params.tab} />
+        <SettingsPage tab="billing" />
+      ))}
+    />
+
+    <Route
+      path="/settings/group_billing"
+      render={parseRoute(({ params }) => (
+        <SettingsPage tab="group_billing" />
       ))}
     />
 
