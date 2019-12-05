@@ -67,6 +67,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.1",
     "@artsy/express-reloadable": "^1.4.0",
+    "@auth0/s3": "^1.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-json-strings": "^7.0.0",
@@ -248,7 +249,6 @@
     "prettier": "^1.17.0",
     "progress-bar-webpack-plugin": "^1.11.0",
     "rewire": "^4.0.0",
-    "s3": "^4.4.0",
     "should": "*",
     "sinon": "*",
     "source-map-support": "^0.5.12",

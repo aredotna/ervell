@@ -9,7 +9,7 @@ require('../src/lib/loadEnv')
 const glob = require('glob')
 const mime = require('mime')
 const path = require('path')
-const s3 = require('s3')
+const s3 = require('@auth0/s3')
 const { last } = require('lodash')
 
 const options = {
