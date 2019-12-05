@@ -9,14 +9,14 @@ export default () => (
   <Switch>
     <Route
       path="/settings/billing"
-      render={parseRoute(({ params }) => (
+      render={parseRoute(() => (
         <SettingsPage tab="billing" />
       ))}
     />
 
     <Route
       path="/settings/group_billing"
-      render={parseRoute(({ params }) => (
+      render={parseRoute(() => (
         <SettingsPage tab="group_billing" />
       ))}
     />
