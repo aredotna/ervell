@@ -18,7 +18,7 @@ export default class GroupBilling extends PureComponent {
         mb={8}
         position="relative"
       >
-        <Query query={groupBillingQuery}>
+        <Query query={groupBillingQuery} ssr={false}>
           {({ loading, error, data }) => {
             if (loading) {
               return <LoadingIndicator my={9} />
