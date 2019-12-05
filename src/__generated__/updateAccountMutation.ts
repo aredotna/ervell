@@ -39,6 +39,8 @@ export interface UpdateAccountMutationVariables {
   home_path?: string | null;
   receive_email?: string | null;
   receive_newsletter?: boolean | null;
+  receive_tips_emails?: boolean | null;
+  receive_group_premium_emails?: boolean | null;
   show_tour?: boolean | null;
   exclude_from_indexes?: boolean | null;
   bio?: string | null;
