@@ -30,8 +30,6 @@ export default class Page extends PureComponent {
 
     // eslint-disable-next-line react/forbid-prop-types
     sharifyData: PropTypes.object.isRequired,
-
-    includeStripe: PropTypes.bool,
   }
 
   render() {
@@ -43,7 +41,6 @@ export default class Page extends PureComponent {
       styles,
       asset,
       sharifyData,
-      includeStripe,
     } = this.props
 
     return (
@@ -157,7 +154,6 @@ export default class Page extends PureComponent {
             type="module"
             integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"
           />
-          {includeStripe && <script src="https://js.stripe.com/v3/" />}
         </body>
       </html>
     )

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 
 import Page from 'v2/components/UI/Page'
 
-export default ({ bundleName, apolloRes, res, includeStripe }) => {
+export default ({ bundleName, apolloRes, res }) => {
   const html = (
     <Page
       bundleName={bundleName}
@@ -13,7 +13,6 @@ export default ({ bundleName, apolloRes, res, includeStripe }) => {
       helmet={apolloRes.helmet}
       styles={apolloRes.styles}
       state={apolloRes.state}
-      includeStripe={includeStripe}
     />
   )
 

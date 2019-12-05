@@ -1,6 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import styled from 'styled-components'
+import Helmet from 'react-helmet-async'
 
 import Constrain from 'v2/components/UI/Constrain'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
@@ -56,53 +57,62 @@ const UserSettingsComponent: React.FC = () => {
 
 const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
   return (
-    <TopBarLayout>
-      <Constrain>
-        <Query<SettingsPageQueryType> query={SettingsQuery}>
-          {({ data, loading, error }) => {
-            if (error) {
-              return <ErrorAlert>{error.message}</ErrorAlert>
-            }
+    <>
+      <Helmet>
+        <script src="https://js.stripe.com/v3/" />
+      </Helmet>
+      <TopBarLayout>
+        <Constrain>
+          <Query<SettingsPageQueryType> query={SettingsQuery}>
+            {({ data, loading, error }) => {
+              if (error) {
+                return <ErrorAlert>{error.message}</ErrorAlert>
+              }
 
-            if (loading) return <LoadingIndicator mt={6} f={8} />
+              if (loading) return <LoadingIndicator mt={6} f={8} />
 
-            const tabs = [
-              { url: '/settings', label: 'General', active: tab === 'general' },
-              {
-                url: '/settings/billing',
-                label: 'Billing',
-                active: tab === 'billing',
-              },
-            ]
+              const tabs = [
+                {
+                  url: '/settings',
+                  label: 'General',
+                  active: tab === 'general',
+                },
+                {
+                  url: '/settings/billing',
+                  label: 'Billing',
+                  active: tab === 'billing',
+                },
+              ]
 
-            if (data.me.groups.length > 0) {
-              tabs.push({
-                url: '/settings/group_billing',
-                label: 'Group Billing',
-                active: tab === 'group_billing',
-              })
-            }
+              if (data.me.groups.length > 0) {
+                tabs.push({
+                  url: '/settings/group_billing',
+                  label: 'Group Billing',
+                  active: tab === 'group_billing',
+                })
+              }
 
-            const ContentComponent = {
-              general: UserSettingsComponent,
-              billing: Billing,
-              group_billing: GroupBilling,
-            }[tab]
+              const ContentComponent = {
+                general: UserSettingsComponent,
+                billing: Billing,
+                group_billing: GroupBilling,
+              }[tab]
 
-            return (
-              <>
-                <SettingsPath name={data.me.name} />
-                <Tabs tabs={tabs}>
-                  <TabContent>
-                    <ContentComponent />
-                  </TabContent>
-                </Tabs>
-              </>
-            )
-          }}
-        </Query>
-      </Constrain>
-    </TopBarLayout>
+              return (
+                <>
+                  <SettingsPath name={data.me.name} />
+                  <Tabs tabs={tabs}>
+                    <TabContent>
+                      <ContentComponent />
+                    </TabContent>
+                  </Tabs>
+                </>
+              )
+            }}
+          </Query>
+        </Constrain>
+      </TopBarLayout>
+    </>
   )
 }
 
