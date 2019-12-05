@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import Pocket from 'v2/components/UI/Pocket'
 import LinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
@@ -14,7 +14,9 @@ interface Props {
   followType: 'ALL' | 'CHANNEL' | 'GROUP' | 'USER'
 }
 
-class ProfileMetadataFollowingType extends Component<Props> {
+class ProfileMetadataFollowingType extends Component<
+  Props & RouteComponentProps
+> {
   isFilterActive = followType => () => this.props.followType === followType
 
   render() {
