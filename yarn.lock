@@ -1983,25 +1983,30 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@newrelic/koa@^1.0.0":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@newrelic/koa/-/koa-1.0.8.tgz#59bf54e86cef700427e32dbdc7c931a213146ac1"
-  integrity sha512-kY//FlLQkGdUIKEeGJlyY3dJRU63EG77YIa48ACMGZxQbWRd3WZMikyft33f8XScTq6WpCDo9xa0viNo8zeYkg==
+"@newrelic/aws-sdk@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/aws-sdk/-/aws-sdk-1.0.0.tgz#9e109ba5f1d2fc96ce0547c18ee67216a13a633c"
+  integrity sha512-7stfRvWPQrNdVlrYgJX9hNZ3HMzTGVa5rxJVz5SJuNSi7ngUFGAmImKIbzyGnx3EzSMUsFLemHNcDradfn992w==
+
+"@newrelic/koa@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/koa/-/koa-3.0.0.tgz#048f636c6c06ab4e823674a2ed3d67677a22ed50"
+  integrity sha512-SxfcMqSxiKa3pi7dRmVoCXnh/VLc196GmwyGU2Fr5+vMxS5jPVj2a15v1mn2DGu04XngfXDvyt9Xa6u1JVRDpQ==
   dependencies:
     methods "^1.1.2"
 
-"@newrelic/native-metrics@^3.0.0":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-3.1.2.tgz#eff858f178af5b9f8cbb676eb549d8bbc0ef7a6a"
-  integrity sha512-JjUmPrp2LEEkhVtelICme5p7sHHpfpu2Wjk5/L1D3Zvt01v4mCsrL2XaIMBmHgg3T2ZbqMiqWZCn2LtGZ6nklA==
+"@newrelic/native-metrics@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-5.0.0.tgz#d31344e4fabf82e7187552dce1b1335ad097c01d"
+  integrity sha512-6Smx/9MlsZTcbLe+Co39O9kJ3sYo/3xunNTOhTP+nPlLxQmQBPDT0/ULmEogTkhaEX5MuCx6L4cN+1QU4uZdDw==
   dependencies:
-    nan "^2.10.0"
+    nan "^2.14.0"
     semver "^5.5.1"
 
-"@newrelic/superagent@^1.0.0":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@newrelic/superagent/-/superagent-1.0.2.tgz#37f424d5390249792233ad1c2fccdb6952033236"
-  integrity sha512-B2fM48kfY+5L6pwk6Yt79yk1JzMWKu1wV73If2shAzMsujNqSA4P+mLKCnTthIuKlhE78OfB1MzSpRMeB7kgWw==
+"@newrelic/superagent@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/superagent/-/superagent-2.0.0.tgz#48279c1ff8a720006202a2ca76c38c6de1c5e650"
+  integrity sha512-FrQfMhbv/HFB60wAQixbSjMk8hT+vS5ms6XJ9J40b9z6YI6x4/wgOc13GbvXbztcfOKCTeGVVDbBCruuh9udRA==
   dependencies:
     methods "^1.1.2"
 
@@ -3226,7 +3231,7 @@ address@1.0.3, address@^1.0.1:
   resolved "https://registry.yarnpkg.com/address/-/address-1.0.3.tgz#b5f50631f8d6cec8bd20c963963afb55e06cbce9"
   integrity sha512-z55ocwKBRLryBs394Sm3ushTtBeg6VAeuku7utSoSnsJKvKcnXFIyC6vh27n3rXyxSgkJBBCAvyOn7gSUcTYjg==
 
-agent-base@4:
+agent-base@4, agent-base@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.3.0.tgz#8165f01c436009bccad0b1d122f05ed770efc6ee"
   integrity sha512-salcGninV0nPrwpGNn4VTXBb1SOuXQBiqbrNXoeizJsHrsL6ERFM2Ne3JUSBWRE6aeNJI2ROP/WEEIDUiDe3cg==
@@ -6102,6 +6107,16 @@ concat-stream@^1.6.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
+concat-stream@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-2.0.0.tgz#414cf5af790a48c60ab9be4527d56d5e41133cb1"
+  integrity sha512-MWufYdFw53ccGjCA+Ol7XJYpAlW6/prSMzuPOTRnJGcGzuhLn4Scrz7qf6o8bROZ514ltazcIFJZevcfbo0x7A==
+  dependencies:
+    buffer-from "^1.0.0"
+    inherits "^2.0.3"
+    readable-stream "^3.0.2"
+    typedarray "^0.0.6"
+
 config-chain@^1.1.12:
   version "1.1.12"
   resolved "https://registry.yarnpkg.com/config-chain/-/config-chain-1.1.12.tgz#0fde8d091200eb5e808caf25fe618c02f48e4efa"
@@ -7615,6 +7630,18 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2, escape-string-regexp@^1
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+escodegen@^1.11.1:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-1.12.0.tgz#f763daf840af172bb3a2b6dd7219c0e17f7ff541"
+  integrity sha512-TuA+EhsanGcme5T3R0L80u4t8CpbXQjegRmf7+FPTJrtCTErXFeelblRgHQa1FofEzqYYJmJ/OqjTwREp9qgmg==
+  dependencies:
+    esprima "^3.1.3"
+    estraverse "^4.2.0"
+    esutils "^2.0.2"
+    optionator "^0.8.1"
+  optionalDependencies:
+    source-map "~0.6.1"
+
 escodegen@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-1.9.0.tgz#9811a2f265dc1cd3894420ee3717064b632b8852"
@@ -7891,6 +7918,11 @@ esprima@^4.0.0, esprima@~4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
   integrity sha512-oftTcaMu/EGrEIu904mWteKIv8vMuOgGYo7EhVJJN00R/EED9DCua/xxHRdYnKtcECzVg7xOWhflvJMnqcFZjw==
+
+esprima@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
+  integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
 
 esquery@^1.0.0, esquery@^1.0.1:
   version "1.0.1"
@@ -9803,6 +9835,14 @@ https-proxy-agent@^2.2.1:
   integrity sha512-HPCTS1LW51bcyMYbxUIOO4HEOlQ1/1qRaFWcyxvwaqUS9TY88aoEuHUY33kuAh1YhVVaDQhLZsnPd+XNARWZlQ==
   dependencies:
     agent-base "^4.1.0"
+    debug "^3.1.0"
+
+https-proxy-agent@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-3.0.1.tgz#b8c286433e87602311b01c8ea34413d856a4af81"
+  integrity sha512-+ML2Rbh6DAuee7d07tYGEKOEi2voWPUGan+ExdPbPW6Z3svq+JCqr0v8WmKPOkz1vOVykPCBSuobe7G8GJUtVg==
+  dependencies:
+    agent-base "^4.3.0"
     debug "^3.1.0"
 
 husky@>=1:
@@ -12711,15 +12751,15 @@ mute-stream@0.0.7:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
 
-nan@^2.10.0:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
-  integrity sha512-JY7V6lRkStKcKTvHO5NVSQRv+RV+FIL5pvDoLiAtSL9pKlC5x9PKQcZDsq7m4FO4d57mkhC6Z+QhAh3Jdk5JFw==
-
 nan@^2.12.1:
   version "2.13.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.13.2.tgz#f51dc7ae66ba7d5d55e1e6d4d8092e802c9aefe7"
   integrity sha512-TghvYc72wlMGMVMluVo9WRJc0mB8KxxF/gZ4YYFy7V2ZQX9l7rgbPg7vjS9mt6U5HXODVFVI2bOduCzwOMv/lw==
+
+nan@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
+  integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
 
 nan@^2.3.0:
   version "2.11.0"
@@ -12806,22 +12846,25 @@ netrc-parser@^3.1.4:
     debug "^3.1.0"
     execa "^0.10.0"
 
-newrelic@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-5.0.0.tgz#ee5fec07765aa0b2e08b78598fa21eb53812ed9d"
-  integrity sha512-boGGqEhoCMdzUzfY9Rbw2aRp/GDVTjnepnYOizhhH9vhICCI0FmoYAku0qheAWlMf0+QcwjqGCFv93rSmEupaQ==
+newrelic@6.2:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-6.2.0.tgz#7350cb470721bc9f41b98eebe55b6c4cc682c01a"
+  integrity sha512-xzWuZJPIMaPVHITuyUhb6uX+dRjBbs4RsyG0ia7UesKVUORbwX2lyJ6XqiqSQhIw2HnhpAuIBjKmHuR2Rw40WA==
   dependencies:
-    "@newrelic/koa" "^1.0.0"
-    "@newrelic/superagent" "^1.0.0"
+    "@newrelic/aws-sdk" "^1.0.0"
+    "@newrelic/koa" "^3.0.0"
+    "@newrelic/superagent" "^2.0.0"
     "@tyriar/fibonacci-heap" "^2.0.7"
     async "^2.1.4"
-    concat-stream "^1.5.0"
-    https-proxy-agent "^2.2.1"
+    concat-stream "^2.0.0"
+    escodegen "^1.11.1"
+    esprima "^4.0.1"
+    https-proxy-agent "^3.0.0"
     json-stringify-safe "^5.0.0"
-    readable-stream "^2.1.4"
+    readable-stream "^3.1.1"
     semver "^5.3.0"
   optionalDependencies:
-    "@newrelic/native-metrics" "^3.0.0"
+    "@newrelic/native-metrics" "^5.0.0"
 
 next-tick@1:
   version "1.0.0"
@@ -15155,6 +15198,15 @@ readable-stream@^2.0.5, readable-stream@^2.2.2:
     safe-buffer "~5.1.1"
     string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
+
+readable-stream@^3.0.2:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.4.0.tgz#a51c26754658e0a3c21dbf59163bd45ba6f447fc"
+  integrity sha512-jItXPLmrSR8jmTRmRWJXCnGJsfy85mB3Wd/uINMXA65yrnFo0cPClFIUWzo2najVNSl+mx7/4W8ttlLWJe99pQ==
+  dependencies:
+    inherits "^2.0.3"
+    string_decoder "^1.1.1"
+    util-deprecate "^1.0.1"
 
 readable-stream@^3.1.1:
   version "3.3.0"
