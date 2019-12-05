@@ -507,7 +507,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
 }
 
 const UserSettingsContainer: React.FC = () => (
-  <Query<MySettings> query={USER_SETTINGS_QUERY}>
+  <Query<MySettings> query={USER_SETTINGS_QUERY} ssr={false}>
     {({ data, error, loading }) => {
       if (error) {
         return <ErrorAlert>{error.message}</ErrorAlert>
