@@ -57,7 +57,7 @@ export const ConnectCTA: React.FC = () => {
               You’ve reached your limit of free blocks
             </Text>
 
-            <Button href="/settings/billing" target="_blank">
+            <Button href="https://www.are.na/settings/billing" target="_blank">
               Register for Premium
             </Button>
           </Overlay>

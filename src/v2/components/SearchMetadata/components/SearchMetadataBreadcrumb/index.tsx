@@ -1,21 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 
-const SearchMetadataBreadcrumb = ({ term }) => (
+import { SearchMetadataProps } from 'v2/components/SearchMetadata'
+
+const SearchMetadataBreadcrumb: React.FC<SearchMetadataProps> = ({ term }) => (
   <StickyBreadcrumbPath>
     <StickyBreadcrumbPath.Crumb>
       <div>{`Search results for '${term}'`}</div>
     </StickyBreadcrumbPath.Crumb>
   </StickyBreadcrumbPath>
 )
-
-SearchMetadataBreadcrumb.propTypes = {
-  term: PropTypes.string,
-}
-
-SearchMetadataBreadcrumb.defaultProps = {
-  term: '',
-}
 
 export default SearchMetadataBreadcrumb

@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
+import { ExploreMetadataProps } from 'v2/components/ExploreMetadata'
 
-export default class ExploreMetadataView extends Component {
-  static propTypes = {
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-    view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
-  }
-
+export default class ExploreMetadataView extends Component<
+  ExploreMetadataProps
+> {
   isViewActive = view => () => this.props.view === view
 
   render() {

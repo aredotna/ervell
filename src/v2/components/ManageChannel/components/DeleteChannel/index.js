@@ -54,7 +54,12 @@ class DeleteChannel extends Component {
     return (
       <div>
         <Text f={2} fontWeight="bold" color="state.alert">
-          <a role="button" tabIndex={0} onClick={this.pendDeleteChannel}>
+          <a
+            role="button"
+            tabIndex={0}
+            onClick={this.pendDeleteChannel}
+            style={{ cursor: 'pointer' }}
+          >
             Delete channel
           </a>
         </Text>

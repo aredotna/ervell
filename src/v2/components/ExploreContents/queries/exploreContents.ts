@@ -9,6 +9,7 @@ export default gql`
     $per: Int
     $sort: SearchSorts
     $seed: Int
+    $block_filter: BlockFilterEnum
   ) {
     contents: exxplore(
       type: $type
@@ -16,6 +17,7 @@ export default gql`
       per: $per
       sort_by: $sort
       seed: $seed
+      block_filter: $block_filter
     ) {
       ...KonnectableCell
     }

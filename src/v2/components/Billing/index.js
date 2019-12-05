@@ -32,7 +32,7 @@ export default class Billing extends PureComponent {
         mb={8}
         position="relative"
       >
-        <Query query={billingQuery}>
+        <Query query={billingQuery} ssr={false}>
           {({ loading, error, data }) => {
             if (loading) {
               return <LoadingIndicator my={9} />

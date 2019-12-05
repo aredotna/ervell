@@ -15,9 +15,7 @@ import Text from 'v2/components/UI/Text'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import ArenaMark from 'v2/components/UI/Icons/ArenaMark.svg'
 
-const Container = styled(Box).attrs({
-  ml: 10,
-})`
+const Container = styled(Box)`
   position: relative;
 `
 

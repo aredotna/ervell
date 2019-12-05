@@ -14,9 +14,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 
-const Container = styled(Box).attrs({
-  ml: 10,
-})`
+const Container = styled(Box)`
   position: relative;
 `
 

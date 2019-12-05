@@ -15,11 +15,19 @@ export default class ExploreContents extends PureComponent {
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     seed: PropTypes.number,
+    block_filter: PropTypes.oneOf([
+      'IMAGE',
+      'EMBED',
+      'TEXT',
+      'ATTACHMENT',
+      'LINK',
+    ]),
   }
 
   static defaultProps = {
     type: null,
     seed: Math.floor(Math.random() * 1000) + 1,
+    block_filter: null,
   }
 
   state = {
@@ -57,7 +65,7 @@ export default class ExploreContents extends PureComponent {
 
   render() {
     const { per, hasMore, q } = this.state
-    const { type, sort, fetchPolicy, seed } = this.props
+    const { type, sort, fetchPolicy, seed, block_filter } = this.props
 
     return (
       <Query
@@ -68,6 +76,7 @@ export default class ExploreContents extends PureComponent {
           sort,
           q,
           seed,
+          block_filter,
         }}
         fetchPolicy={fetchPolicy}
         ssr={false}
