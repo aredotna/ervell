@@ -1,49 +1,46 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { stringify } from 'qs'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
+import { ExploreMetadataProps } from 'v2/components/ExploreMetadata'
 
-class ProfileMetadataSort extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-  }
-
+class ExploreMetadataSort extends Component<
+  ExploreMetadataProps & RouteComponentProps
+> {
   isSortActive = sort => () => this.props.sort === sort
 
   render() {
     const {
       location: { pathname },
+      block_filter,
     } = this.props
 
     return (
       <Pocket title="Sort">
         <CookieLinkUnlessCurrent
           name="sort"
-          prefix="Profile"
           value="UPDATED_AT"
+          isActive={this.isSortActive('UPDATED_AT')}
+          prefix="Explore"
           to={{
             pathname,
-            search: '?sort=UPDATED_AT',
+            search: stringify({ block_filter, sort: 'UPDATED_AT' }),
           }}
-          isActive={this.isSortActive('UPDATED_AT')}
         >
           Recently updated
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
           name="sort"
-          prefix="Profile"
           value="RANDOM"
+          isActive={this.isSortActive('RANDOM')}
+          prefix="Explore"
           to={{
             pathname,
-            search: '?sort=RANDOM',
+            search: stringify({ block_filter, sort: 'RANDOM' }),
           }}
-          isActive={this.isSortActive('RANDOM')}
           rel="nofollow"
         >
           Random
@@ -53,4 +50,4 @@ class ProfileMetadataSort extends Component {
   }
 }
 
-export default withRouter(ProfileMetadataSort)
+export default withRouter(ExploreMetadataSort)

@@ -15,10 +15,17 @@ export default class ExplorePage extends Component {
   static propTypes = {
     view: PropTypes.oneOf(['all', 'channels', 'blocks']).isRequired,
     sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    block_filter: PropTypes.oneOf([
+      'IMAGE',
+      'EMBED',
+      'TEXT',
+      'ATTACHMENT',
+      'LINK',
+    ]),
   }
 
   render() {
-    const { view, sort } = this.props
+    const { view, sort, block_filter } = this.props
 
     return (
       <ErrorBoundary>
@@ -26,9 +33,13 @@ export default class ExplorePage extends Component {
 
         <TopBarLayout>
           <Constrain>
-            <ExploreMetadata view={view} sort={sort} />
+            <ExploreMetadata
+              view={view}
+              sort={sort}
+              block_filter={block_filter}
+            />
 
-            <ExploreViews view={view} sort={sort} />
+            <ExploreViews view={view} sort={sort} block_filter={block_filter} />
 
             <BottomBanner banner="LOGGED_OUT_EXPLORE" />
           </Constrain>

@@ -11,6 +11,7 @@ import FeedPage from 'v2/pages/feed/FeedPage'
 import NotificationPage from 'v2/pages/feed/NotificationPage'
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM']
+const VALID_FILTERS = ['IMAGE', 'EMBED', 'TEXT', 'ATTACHMENT', 'LINK']
 
 const setValid = (value, validValues, defaultValue) => {
   if (validValues.includes(value)) return value
@@ -35,7 +36,17 @@ export default () => (
               'UPDATED_AT'
             )
 
-            return <ExplorePage view={view} sort={sort} />
+            const filter =
+              query.block_filter || (cookies && cookies.block_filter) || null
+            const block_filter = setValid(filter, VALID_FILTERS, null)
+
+            return (
+              <ExplorePage
+                view={view}
+                sort={sort}
+                block_filter={block_filter}
+              />
+            )
           }}
         </Query>
       ))}

@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import { propType } from 'graphql-anywhere'
-import PropTypes from 'prop-types'
-
-import profileMetadataFragment from 'v2/components/ProfileMetadata/fragments/profileMetadata'
 
 import Grid from 'v2/components/UI/Grid'
 import { ExpandableContext } from 'v2/components/UI/ExpandableSet'
@@ -17,32 +13,25 @@ import ProfileMetadataSort from 'v2/components/ProfileMetadata/components/Profil
 import ProfileMetadataFilter from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter'
 import ProfileMetadataFollowingType from 'v2/components/ProfileMetadata/components/ProfileMetadataFollowingType'
 import ProfileMetadataBlockFilter from 'v2/components/ProfileMetadata/components/ProfileMetadataBlockFilter'
+import { ProfileMetadata as ProfileMetadataType } from '__generated__/ProfileMetadata'
 
-export default class ProfileMetadata extends Component {
-  static propTypes = {
-    identifiable: propType(profileMetadataFragment).isRequired,
-    view: PropTypes.oneOf([
-      'all',
-      'channels',
-      'blocks',
-      'index',
-      'following',
-      'followers',
-      'feed',
-    ]).isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
-    filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
-    followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
-    type: PropTypes.oneOf([
-      'BLOCK',
-      'IMAGE',
-      'TEXT',
-      'EMBED',
-      'ATTACHMENT',
-      'LINK',
-    ]).isRequired,
-  }
+export interface ProfileMetadataProps {
+  identifiable: ProfileMetadataType
+  view:
+    | 'all'
+    | 'channels'
+    | 'blocks'
+    | 'index'
+    | 'following'
+    | 'followers'
+    | 'feed'
+  sort: 'UPDATED_AT' | 'RANDOM'
+  type?: 'BLOCK' | 'IMAGE' | 'EMBED' | 'TEXT' | 'ATTACHMENT' | 'LINK'
+  filter?: 'OWN' | 'COLLABORATION'
+  followType?: 'ALL' | 'CHANNEL' | 'GROUP' | 'USER'
+}
 
+export default class ProfileMetadata extends Component<ProfileMetadataProps> {
   render() {
     const { identifiable, view, sort, filter, followType, type } = this.props
 
@@ -73,11 +62,23 @@ export default class ProfileMetadata extends Component {
               />
             )}
 
-            {view === 'blocks' && <ProfileMetadataBlockFilter type={type} />}
+            {view === 'blocks' && (
+              <ProfileMetadataBlockFilter
+                type={type}
+                identifiable={identifiable}
+                view={view}
+                sort={sort}
+              />
+            )}
 
             {identifiable.__typename !== 'Group' &&
               ['all', 'channels', 'blocks'].includes(view) && (
-                <ProfileMetadataSort sort={sort} />
+                <ProfileMetadataSort
+                  type={type}
+                  identifiable={identifiable}
+                  view={view}
+                  sort={sort}
+                />
               )}
 
             {view === 'index' && (
@@ -87,7 +88,7 @@ export default class ProfileMetadata extends Component {
               />
             )}
 
-            {view === 'following' && (
+            {view === 'following' && identifiable.__typename === 'User' && (
               <ProfileMetadataFollowingType
                 identifiable={identifiable}
                 followType={followType}

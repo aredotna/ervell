@@ -1,26 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
+import { SearchMetadataProps } from 'v2/components/SearchMetadata'
 
-class ProfileMetadataBlockFilter extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    type: PropTypes.oneOf([
-      'BLOCK',
-      'IMAGE',
-      'TEXT',
-      'EMBED',
-      'ATTACHMENT',
-      'LINK',
-    ]).isRequired,
-  }
-
-  isFilterActive = filter => () => this.props.type === filter
+class SearchMetadataFilter extends Component<
+  SearchMetadataProps & RouteComponentProps
+> {
+  isFilterActive = filter => () => this.props.block_filter === filter
 
   render() {
     const {
@@ -28,27 +16,27 @@ class ProfileMetadataBlockFilter extends Component {
     } = this.props
 
     return (
-      <Pocket title="Type">
+      <Pocket title="Filter">
         <CookieLinkUnlessCurrent
-          name="type"
-          value="BLOCK"
-          prefix="Profile"
+          name="block_filter"
+          value="ALL"
+          prefix="Search"
           to={{
             pathname,
-            search: '?type=BLOCK',
+            search: '?block_filter=ALL',
           }}
-          isActive={this.isFilterActive('BLOCK')}
+          isActive={this.isFilterActive(null)}
         >
           All
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="type"
+          name="block_filter"
           value="LINK"
           prefix="Search"
           to={{
             pathname,
-            search: '?type=LINK',
+            search: '?block_filter=LINK',
           }}
           isActive={this.isFilterActive('LINK')}
         >
@@ -56,12 +44,12 @@ class ProfileMetadataBlockFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="type"
+          name="block_filter"
           value="ATTACHMENT"
           prefix="Search"
           to={{
             pathname,
-            search: '?type=ATTACHMENT',
+            search: '?block_filter=ATTACHMENT',
           }}
           isActive={this.isFilterActive('ATTACHMENT')}
         >
@@ -69,12 +57,12 @@ class ProfileMetadataBlockFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="type"
+          name="block_filter"
           value="IMAGE"
           prefix="Search"
           to={{
             pathname,
-            search: '?type=IMAGE',
+            search: '?block_filter=IMAGE',
           }}
           isActive={this.isFilterActive('IMAGE')}
         >
@@ -82,12 +70,12 @@ class ProfileMetadataBlockFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="type"
+          name="block_filter"
           value="TEXT"
           prefix="Search"
           to={{
             pathname,
-            search: '?type=TEXT',
+            search: '?block_filter=TEXT',
           }}
           isActive={this.isFilterActive('TEXT')}
         >
@@ -95,12 +83,12 @@ class ProfileMetadataBlockFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="type"
+          name="block_filter"
           value="EMBED"
           prefix="Search"
           to={{
             pathname,
-            search: '?type=EMBED',
+            search: '?block_filter=EMBED',
           }}
           isActive={this.isFilterActive('EMBED')}
         >
@@ -111,4 +99,4 @@ class ProfileMetadataBlockFilter extends Component {
   }
 }
 
-export default withRouter(ProfileMetadataBlockFilter)
+export default withRouter(SearchMetadataFilter)

@@ -1,57 +1,45 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { stringify } from 'qs'
 
 import Pocket from 'v2/components/UI/Pocket'
 import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 
-class SearchMetadataFilter extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    block_filter: PropTypes.oneOf([
-      'IMAGE',
-      'EMBED',
-      'TEXT',
-      'ATTACHMENT',
-      'LINK',
-    ]),
-  }
+import { ProfileMetadataProps } from 'v2/components/ProfileMetadata'
 
-  static defaultProps = {
-    block_filter: null,
-  }
-
-  isFilterActive = filter => () => this.props.block_filter === filter
+class ProfileMetadataBlockFilter extends Component<
+  ProfileMetadataProps & RouteComponentProps
+> {
+  isFilterActive = filter => () => this.props.type === filter
 
   render() {
     const {
       location: { pathname },
+      sort,
     } = this.props
 
     return (
-      <Pocket title="Filter">
+      <Pocket title="Type">
         <CookieLinkUnlessCurrent
-          name="block_filter"
-          value="ALL"
-          prefix="Search"
+          name="type"
+          value="BLOCK"
+          prefix="Profile"
           to={{
             pathname,
-            search: '?block_filter=ALL',
+            search: stringify({ sort, type: 'BLOCK' }),
           }}
-          isActive={this.isFilterActive(null)}
+          isActive={this.isFilterActive('BLOCK')}
         >
           All
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="block_filter"
+          name="type"
           value="LINK"
           prefix="Search"
           to={{
             pathname,
-            search: '?block_filter=LINK',
+            search: stringify({ sort, type: 'LINK' }),
           }}
           isActive={this.isFilterActive('LINK')}
         >
@@ -59,12 +47,12 @@ class SearchMetadataFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="block_filter"
+          name="type"
           value="ATTACHMENT"
           prefix="Search"
           to={{
             pathname,
-            search: '?block_filter=ATTACHMENT',
+            search: stringify({ sort, type: 'ATTACHMENT' }),
           }}
           isActive={this.isFilterActive('ATTACHMENT')}
         >
@@ -72,12 +60,12 @@ class SearchMetadataFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="block_filter"
+          name="type"
           value="IMAGE"
           prefix="Search"
           to={{
             pathname,
-            search: '?block_filter=IMAGE',
+            search: stringify({ sort, type: 'IMAGE' }),
           }}
           isActive={this.isFilterActive('IMAGE')}
         >
@@ -85,12 +73,12 @@ class SearchMetadataFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="block_filter"
+          name="type"
           value="TEXT"
           prefix="Search"
           to={{
             pathname,
-            search: '?block_filter=TEXT',
+            search: stringify({ sort, type: 'TEXT' }),
           }}
           isActive={this.isFilterActive('TEXT')}
         >
@@ -98,12 +86,12 @@ class SearchMetadataFilter extends Component {
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
-          name="block_filter"
+          name="type"
           value="EMBED"
           prefix="Search"
           to={{
             pathname,
-            search: '?block_filter=EMBED',
+            search: stringify({ sort, type: 'EMBED' }),
           }}
           isActive={this.isFilterActive('EMBED')}
         >
@@ -114,4 +102,4 @@ class SearchMetadataFilter extends Component {
   }
 }
 
-export default withRouter(SearchMetadataFilter)
+export default withRouter(ProfileMetadataBlockFilter)
