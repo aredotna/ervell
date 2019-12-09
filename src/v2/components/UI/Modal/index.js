@@ -1,5 +1,4 @@
 import React from 'react'
-import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 
 import { wrapWithProviders, initClientSideApolloClient } from 'v2/apollo'
 import mount from 'v2/util/mount'
@@ -31,9 +30,8 @@ export default class Modal {
     )
 
     const App = boot(ModalApp, props)
-
+    document.body.style.overflow = 'hidden'
     mount(App, this.el)
-    disableBodyScroll(this.el)
   }
 
   close = (...args) => {
@@ -43,6 +41,6 @@ export default class Modal {
 
     unmount(this.el)
     this.el.parentNode.removeChild(this.el)
-    clearAllBodyScrollLocks()
+    document.body.style.overflow = 'auto'
   }
 }
