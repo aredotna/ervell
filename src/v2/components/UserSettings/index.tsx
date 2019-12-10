@@ -84,7 +84,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
 
     return updateAccount({ variables })
       .then(() => {
-        return axios.post('/settings/refresh')
+        return axios.get('/me/refresh')
       })
       .then(() => true)
       .catch(err => {
