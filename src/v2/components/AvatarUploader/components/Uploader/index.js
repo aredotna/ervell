@@ -65,6 +65,7 @@ class AvatarUploader extends PureComponent {
 
     if (nextAvatar !== currentAvatar) {
       stopPolling()
+      axios.get('/me/refresh')
       this.setState({ mode: 'resting' })
     }
   }
