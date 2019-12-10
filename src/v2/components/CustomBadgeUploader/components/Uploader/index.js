@@ -77,6 +77,7 @@ class CustomBadgeUploader extends PureComponent {
 
     if (nextCustomBadge !== currentCustomBadge) {
       stopPolling()
+      axios.get('/me/refresh')
       this.setState({ mode: 'resting' })
     }
   }
