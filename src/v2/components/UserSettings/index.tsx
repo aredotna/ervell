@@ -248,7 +248,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
               <ContextDivider />
 
               <Field
-                name="receive_emails"
+                name="receive_email"
                 initialValue={me.settings.receive_email}
               >
                 {props => {
