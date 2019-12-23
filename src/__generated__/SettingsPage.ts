@@ -15,6 +15,7 @@ export interface SettingsPage_me {
   __typename: "Me";
   id: number | null;
   name: string | null;
+  is_premium: boolean | null;
   groups: (SettingsPage_me_groups | null)[] | null;
 }
 

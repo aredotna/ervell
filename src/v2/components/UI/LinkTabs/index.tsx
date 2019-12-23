@@ -48,7 +48,7 @@ export const activeMixin = css`
   `}
 `
 
-const Label = styled(Link).attrs({ fontSize: 3 })`
+export const Label = styled(Link).attrs({ fontSize: 3 })`
   display: block;
   text-align: center;
   border: 1px solid transparent;
@@ -75,13 +75,27 @@ interface TabItemProps {
   url: string
   label: string
   active?: boolean
+  LabelComponent?: any
 }
 
 interface TabsProps {
   tabs: TabItemProps[]
 }
 
-const Tab: React.FC<TabItemProps> = ({ url, label, active }) => {
+const Tab: React.FC<TabItemProps> = ({
+  url,
+  label,
+  active,
+  LabelComponent,
+}) => {
+  if (LabelComponent) {
+    return (
+      <LabelComponent active={active} to={url}>
+        {label}
+      </LabelComponent>
+    )
+  }
+
   return (
     <Label active={active} to={url}>
       {label}
@@ -93,8 +107,16 @@ const Tabs: React.FC<TabsProps> = ({ tabs, children }) => {
   return (
     <Container>
       <TabList>
-        {tabs.map(({ url, label, active }) => {
-          return <Tab key={url} active={active} url={url} label={label} />
+        {tabs.map(({ url, label, active, LabelComponent }) => {
+          return (
+            <Tab
+              key={url}
+              active={active}
+              url={url}
+              label={label}
+              LabelComponent={LabelComponent}
+            />
+          )
         })}
       </TabList>
 
