@@ -264,7 +264,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                           <RadioOptions.Option value={'none'}>
                             {({ selected }) => (
                               <Text f={4} mb={3} selected={selected}>
-                                Never me send notification emails
+                                Never send me notification emails
                               </Text>
                             )}
                           </RadioOptions.Option>

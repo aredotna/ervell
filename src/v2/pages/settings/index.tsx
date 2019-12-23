@@ -7,7 +7,7 @@ import Constrain from 'v2/components/UI/Constrain'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
-import Tabs from 'v2/components/UI/LinkTabs'
+import Tabs, { Label } from 'v2/components/UI/LinkTabs'
 import Box from 'v2/components/UI/Box'
 import AvatarUploader from 'v2/components/AvatarUploader'
 import CustomBadgeUploader from 'v2/components/CustomBadgeUploader'
@@ -20,6 +20,7 @@ import GroupBilling from 'v2/components/Billing/components/GroupBilling'
 import { SettingsPage as SettingsPageQueryType } from '__generated__/SettingsPage'
 
 import SettingsQuery from 'v2/pages/settings/queries/settingsPage'
+import Perks from 'v2/pages/settings/components/Perks'
 
 const TabContent = styled(Box).attrs({
   flex: 1,
@@ -39,8 +40,12 @@ const Avatars = styled(Box).attrs({
   alignItems: 'center',
 })``
 
+const PremiumLabel = styled(Label)`
+  color: ${x => x.theme.colors.state.premium};
+`
+
 interface SettingsPageProps {
-  tab: 'general' | 'billing' | 'group_billing'
+  tab: 'general' | 'billing' | 'group_billing' | 'perks'
 }
 
 const UserSettingsComponent: React.FC = () => {
@@ -76,11 +81,13 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                   url: '/settings',
                   label: 'General',
                   active: tab === 'general',
+                  LabelComponent: null,
                 },
                 {
                   url: '/settings/billing',
                   label: 'Billing',
                   active: tab === 'billing',
+                  LabelComponent: null,
                 },
               ]
 
@@ -89,6 +96,16 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                   url: '/settings/group_billing',
                   label: 'Group Billing',
                   active: tab === 'group_billing',
+                  LabelComponent: null,
+                })
+              }
+
+              if (data.me.is_premium) {
+                tabs.push({
+                  url: '/settings/perks',
+                  label: 'Perks',
+                  active: tab === 'perks',
+                  LabelComponent: PremiumLabel,
                 })
               }
 
@@ -96,6 +113,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                 general: UserSettingsComponent,
                 billing: Billing,
                 group_billing: GroupBilling,
+                perks: Perks,
               }[tab]
 
               return (
@@ -103,7 +121,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                   <SettingsPath name={data.me.name} />
                   <Tabs tabs={tabs}>
                     <TabContent>
-                      <ContentComponent />
+                      <ContentComponent isPremium={data.me.is_premium} />
                     </TabContent>
                   </Tabs>
                 </>
