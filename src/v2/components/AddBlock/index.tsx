@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { Mutation, MutationFn } from 'react-apollo'
+import { Mutation, MutationFunction as MutationFn } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
 import { FilledButton } from 'v2/components/UI/Buttons'

@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import { propType } from 'graphql-anywhere'
 import { injectStripe } from 'react-stripe-elements'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import compose from 'lodash.flowright'
 
 import mapErrors from 'v2/util/mapErrors'
 

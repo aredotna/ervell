@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { propType } from 'graphql-anywhere'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import compose from 'lodash.flowright'
 
 import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 

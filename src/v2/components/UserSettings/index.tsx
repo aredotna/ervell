@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Query, Mutation, MutationFn } from 'react-apollo'
+import { Query, Mutation, MutationFunction as MutationFn } from 'react-apollo'
 import { Form, Field } from 'react-final-form'
 import { FORM_ERROR } from 'final-form'
 import axios from 'axios'
