@@ -128,7 +128,7 @@ export const initApolloClient = ({
     },
     sharify: {
       __typename: 'Sharify',
-      ...sharifyData,
+      ...{ ...sharifyData, CURRENT_USER: null },
     },
   }
 
