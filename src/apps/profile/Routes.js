@@ -33,6 +33,7 @@ export default () => (
         <Query query={profileUiStateQuery}>
           {({ data, error }) => {
             if (error) return error.message
+            if (!data) return null
 
             const { cookies } = data
 
