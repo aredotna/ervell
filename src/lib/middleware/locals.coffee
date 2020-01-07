@@ -11,6 +11,6 @@ module.exports = (req, res, next) ->
   res.locals.homeHref = req.user?.homePath() or '/'
 
   # Respect do not track headers
-  res.locals.doNotTrack = res.locals.sd.DO_NOT_TRACK = req.headers.dnt
+  res.locals.doNotTrack = res.locals.sd.DO_NOT_TRACK = req.headers.dnt || false
 
   next()
