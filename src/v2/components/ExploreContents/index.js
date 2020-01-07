@@ -86,7 +86,7 @@ export default class ExploreContents extends PureComponent {
             return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
-          if (!data.contents) {
+          if (loading) {
             return <BlocksLoadingIndicator />
           }
 

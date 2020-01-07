@@ -38,9 +38,7 @@ export default class PrimarySearchResults extends PureComponent {
         variables={{ query: debouncedQuery }}
       >
         {({ data, loading, error }) => {
-          const { searches } = data
-
-          if (loading && !searches) {
+          if (loading) {
             this.selectResult()
 
             return (
@@ -62,7 +60,9 @@ export default class PrimarySearchResults extends PureComponent {
             )
           }
 
-          const { results } = searches
+          const {
+            searches: { results },
+          } = data
           const selected = cursor && mod(cursor, results.length + 1)
 
           this.selectResult(results[selected])

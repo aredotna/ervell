@@ -100,7 +100,7 @@ class ProfileContents extends PureComponent {
             return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
-          if (!data.identity) {
+          if (loading) {
             return <BlocksLoadingIndicator />
           }
 
