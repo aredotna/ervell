@@ -116,6 +116,7 @@
     "cookie-session": "*",
     "cookies-js": "^1.2.3",
     "copy-to-clipboard": "^3.0.8",
+    "core-js": "3",
     "cross-fetch": "^3.0.0",
     "debug": "^4.1.1",
     "diacritics": "*",
