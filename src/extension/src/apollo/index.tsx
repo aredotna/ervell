@@ -9,7 +9,6 @@ import {
   InMemoryCache,
   IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'
-import { withClientState } from 'apollo-link-state'
 
 import mount from 'v2/util/mount'
 
@@ -31,17 +30,6 @@ export const initApolloClient = ({
 } = {}) => {
   const cache = new InMemoryCache({ fragmentMatcher })
 
-  const stateLink = withClientState({
-    cache,
-    defaults: {
-      loginStatus: {
-        __typename: 'LoginStatus',
-        isLoggedIn,
-      },
-    },
-    resolvers: {},
-  })
-
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
@@ -50,13 +38,22 @@ export const initApolloClient = ({
     },
   }))
 
-  const link = ApolloLink.from([authLink, stateLink, httpLink])
+  const link = ApolloLink.from([authLink, httpLink])
 
   const client = new ApolloClient({
     ssrMode: false,
     link,
     cache,
   })
+
+  const data = {
+    loginStatus: {
+      __typename: 'LoginStatus',
+      isLoggedIn,
+    },
+  }
+
+  cache.writeData({ data })
 
   window.__APOLLO_CLIENT__ = client
 

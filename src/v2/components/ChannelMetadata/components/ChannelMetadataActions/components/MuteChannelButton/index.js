@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import compose from 'lodash.flowright'
 
 import GenericButton from 'v2/components/UI/GenericButton'
 import Icons from 'v2/components/UI/Icons'

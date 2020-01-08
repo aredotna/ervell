@@ -1,42 +1,21 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
+import { withApollo } from 'react-apollo'
 
 import serializedMeQuery from 'v2/hocs/WithSerializedMe/queries/serializedMe'
 
 const withSerializedMe = WrappedComponent => {
   class WithSerializedMe extends Component {
-    static propTypes = {
-      data: PropTypes.shape({
-        serializedMe: PropTypes.shape({
-          __typename: PropTypes.string.isRequired,
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string,
-          initials: PropTypes.string,
-          avatar: PropTypes.string,
-          authentication_token: PropTypes.string,
-          is_premium: PropTypes.bool,
-        }),
-      }),
-    }
-
-    static defaultProps = {
-      data: {
-        serailizedMe: null,
-      },
-    }
-
     render() {
-      const {
-        data: { serializedMe },
-        ...rest
-      } = this.props
+      const { client, ...rest } = this.props
+      const { serializedMe } = client.readQuery({
+        query: serializedMeQuery,
+      })
 
       return <WrappedComponent serializedMe={serializedMe} {...rest} />
     }
   }
 
-  return graphql(serializedMeQuery)(WithSerializedMe)
+  return withApollo(WithSerializedMe)
 }
 
 export default withSerializedMe

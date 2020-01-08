@@ -10,7 +10,6 @@ import {
   InMemoryCache,
   IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'
-import { withClientState } from 'apollo-link-state'
 import { HelmetProvider } from 'react-helmet-async'
 
 import mount from 'v2/util/mount'
@@ -54,41 +53,6 @@ export const initApolloClient = ({
 
   const { X_APP_TOKEN, X_SHARE_TOKEN } = sharifyData
 
-  const stateLink = withClientState({
-    cache,
-    defaults: {
-      currentRoute: {
-        __typename: 'CurrentRoute',
-        ...currentRoute,
-      },
-      loginStatus: {
-        __typename: 'LoginStatus',
-        isLoggedIn,
-      },
-      cookies: {
-        __typename: 'Cookies',
-      },
-      serializedMe: {
-        __typename: 'SerializedMe',
-        ...serializedMe,
-      },
-      sharify: {
-        __typename: 'Sharify',
-      },
-    },
-    resolvers: {
-      Cookies: {
-        get: (_obj, args) => cookies[args.name] || null,
-      },
-      Sharify: {
-        get: (_obj, args) => {
-          const value = sharifyData[args.name]
-          return value === undefined ? null : value
-        },
-      },
-    },
-  })
-
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
@@ -100,12 +64,76 @@ export const initApolloClient = ({
 
   const httpLink = isClientSide ? clientHttpLink : serverHttpLink
 
-  const link = ApolloLink.from([authLink, stateLink, httpLink])
+  const link = ApolloLink.from([authLink, httpLink])
+
+  const typeDefs = `
+    extend type Query {
+      cookies: {
+        get(name: String!): Boolean | null
+      }
+      sharify: {
+        get(name: String!): Boolean | null
+      }
+    }
+  `
+
+  const resolvers = {
+    Query: {
+      cookies: () => ({
+        __typename: 'Cookies',
+      }),
+      sharify: () => ({
+        __typename: 'Sharify',
+      }),
+      serializedMe: () => ({
+        __typename: 'SerializedMe',
+      }),
+    },
+    Cookies: {
+      get: (_obj, args) => {
+        return cookies[args.name] || null
+      },
+    },
+    Sharify: {
+      get: (_obj, args) => {
+        const value = sharifyData[args.name]
+        return value === undefined ? null : value
+      },
+    },
+  }
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
     link,
     cache,
+    resolvers,
+    typeDefs,
+  })
+
+  const data = {
+    currentRoute: {
+      __typename: 'CurrentRoute',
+      ...currentRoute,
+    },
+    loginStatus: {
+      __typename: 'LoginStatus',
+      isLoggedIn,
+    },
+    cookies: {
+      __typename: 'Cookies',
+    },
+    serializedMe: {
+      __typename: 'SerializedMe',
+      ...serializedMe,
+    },
+    sharify: {
+      __typename: 'Sharify',
+      ...{ ...sharifyData, CURRENT_USER: null },
+    },
+  }
+
+  cache.writeData({
+    data,
   })
 
   if (isClientSide) {

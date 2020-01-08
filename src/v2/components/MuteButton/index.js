@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { graphql, compose, Query } from 'react-apollo'
+import { graphql, Query } from 'react-apollo'
+import compose from 'lodash.flowright'
 
 import muteQuery from 'v2/components/MuteButton/queries/muted'
 import muteMutation from 'v2/components/MuteButton/mutations/mute'
@@ -52,6 +53,8 @@ class MuteButton extends Component {
       children,
       mute: _mute,
       unmute: _unmute,
+      muteResult,
+      unmuteResult,
       ...rest
     } = this.props
 

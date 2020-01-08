@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { propType } from 'graphql-anywhere'
-import { compose, graphql, withApollo } from 'react-apollo'
+import { graphql, withApollo } from 'react-apollo'
+import compose from 'lodash.flowright'
 import axios from 'axios'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
@@ -46,7 +47,7 @@ class AvatarUploader extends PureComponent {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
     }).isRequired,
-    updateCustomBadge: PropTypes.func.isRequired,
+    updateAvatar: PropTypes.func.isRequired,
     startPolling: PropTypes.func.isRequired,
     stopPolling: PropTypes.func.isRequired,
     me: propType(avatarQuery).isRequired,

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import axios from 'axios'
 import styled from 'styled-components'
+import compose from 'lodash.flowright'
 
 import mapErrors from 'v2/util/mapErrors'
 import compactObject from 'v2/util/compactObject'

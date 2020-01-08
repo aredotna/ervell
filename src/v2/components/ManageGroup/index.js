@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { some } from 'underscore'
+import compose from 'lodash.flowright'
 
 import mapErrors from 'v2/util/mapErrors'
 import compactObject from 'v2/util/compactObject'

@@ -80,7 +80,7 @@ export default class SearchContents extends PureComponent {
             return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
-          if (!data.contents) {
+          if (loading) {
             return <BlocksLoadingIndicator />
           }
 

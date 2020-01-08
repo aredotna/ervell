@@ -71,7 +71,8 @@ export default class BlockLightboxMetadataFold extends PureComponent {
             return <ErrorAlert>{error.message}</ErrorAlert>
           }
 
-          const fullBlock = { ...block, ...data.block }
+          const blockData = loading ? {} : data.block
+          const fullBlock = { ...block, ...blockData }
 
           return (
             <React.Fragment>

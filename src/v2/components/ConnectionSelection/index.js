@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import compose from 'lodash.flowright'
 import styled from 'styled-components'
 
 import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'

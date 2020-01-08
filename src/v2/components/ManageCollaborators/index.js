@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { propType } from 'graphql-anywhere'
+import compose from 'lodash.flowright'
 
 import manageCollaboratorsQuery from 'v2/components/ManageCollaborators/queries/manageCollaborators'
 import manageCollaboratorsFragment from 'v2/components/ManageCollaborators/fragments/manageCollaborators'

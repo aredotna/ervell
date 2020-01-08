@@ -284,4 +284,4 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
 
 export default graphql<Props>(moveConnectableMutation, {
   name: 'moveConnectable',
-})(withApollo(ChannelContents))
+})(withApollo<Props>(ChannelContents))
