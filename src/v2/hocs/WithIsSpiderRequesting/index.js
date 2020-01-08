@@ -13,8 +13,6 @@ const withIsSpiderRequesting = WrappedComponent => {
         query: isSpiderRequestingQuery,
       })
 
-      console.log('isSpiderRequesting', isSpiderRequesting)
-
       return (
         <WrappedComponent isSpiderRequesting={isSpiderRequesting} {...rest} />
       )

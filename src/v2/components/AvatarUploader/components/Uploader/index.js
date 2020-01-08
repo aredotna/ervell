@@ -47,7 +47,7 @@ class AvatarUploader extends PureComponent {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
     }).isRequired,
-    updateCustomBadge: PropTypes.func.isRequired,
+    updateAvatar: PropTypes.func.isRequired,
     startPolling: PropTypes.func.isRequired,
     stopPolling: PropTypes.func.isRequired,
     me: propType(avatarQuery).isRequired,

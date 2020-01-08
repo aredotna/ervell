@@ -71,6 +71,8 @@ class FollowButton extends Component {
       follow: _follow,
       unfollow: _unfollow,
       isLoggedIn: _isLoggedIn,
+      followResult,
+      unfollowResult,
       children,
       data,
       ...rest

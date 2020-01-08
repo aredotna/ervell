@@ -70,8 +70,8 @@ const LargeLabeledCheckbox: React.FC<CheckboxProps> = ({
   }
   return (
     <CheckboxContainer className={className} onClick={handleChecked}>
-      <HiddenCheckbox checked={isChecked} {...props} />
-      <StyledCheckbox checked={isChecked}>
+      <HiddenCheckbox defaultChecked={isChecked} {...props} />
+      <StyledCheckbox defaultChecked={isChecked}>
         <Icon viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />
         </Icon>

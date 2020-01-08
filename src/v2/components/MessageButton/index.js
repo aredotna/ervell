@@ -41,6 +41,7 @@ class MessageButton extends PureComponent {
     const {
       id: _id,
       createUserMessageChannel: _createUserMessageChannel,
+      createUserMessageChannelResult,
       children,
       ...rest
     } = this.props

@@ -79,8 +79,6 @@ class ProfileChannels extends PureComponent {
   }
 
   render() {
-    console.log('here!!!!!')
-
     const { per, hasMore, q } = this.state
     const { id, sort, fetchPolicy, isSpiderRequesting, seed } = this.props
 
@@ -105,8 +103,6 @@ class ProfileChannels extends PureComponent {
         ssr={isSpiderRequesting}
       >
         {({ loading, error, data, fetchMore }) => {
-          console.log('here', data)
-
           if (error) {
             return <ErrorAlert>{error.message}</ErrorAlert>
           }
@@ -177,4 +173,4 @@ class ProfileChannels extends PureComponent {
   }
 }
 
-export default ProfileChannels
+export default WithIsSpiderRequesting(ProfileChannels)

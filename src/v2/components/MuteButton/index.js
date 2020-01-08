@@ -53,6 +53,8 @@ class MuteButton extends Component {
       children,
       mute: _mute,
       unmute: _unmute,
+      muteResult,
+      unmuteResult,
       ...rest
     } = this.props
 
