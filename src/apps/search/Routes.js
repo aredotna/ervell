@@ -23,6 +23,7 @@ export default () => (
         <Query query={searchUiStateQuery}>
           {({ data, error }) => {
             if (error) return error.message
+            if (!data) return null
 
             const { cookies } = data
 
