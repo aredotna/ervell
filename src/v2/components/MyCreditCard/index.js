@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
-import { Query, graphql, compose } from 'react-apollo'
+import { Query, graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
+import compose from 'lodash.flowright'
 import { injectStripe } from 'react-stripe-elements'
 
 import myCreditCardQuery from 'v2/components/MyCreditCard/queries/myCreditCard'

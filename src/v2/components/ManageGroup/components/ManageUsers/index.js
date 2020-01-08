@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { propType } from 'graphql-anywhere'
 import gql from 'graphql-tag'
+import compose from 'lodash.flowright'
 
 import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers'
 

@@ -48,7 +48,7 @@ export const activeMixin = css`
   `}
 `
 
-export const Label = styled(Link).attrs({ fontSize: 3 })`
+export const Label = styled(Link).attrs({ fontSize: 3 })<{ active: boolean }>`
   display: block;
   text-align: center;
   border: 1px solid transparent;
