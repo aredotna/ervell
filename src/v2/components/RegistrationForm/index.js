@@ -26,6 +26,7 @@ import { track, en } from 'lib/analytics.coffee'
 const { REDIRECT_TO } = require('sharify').data
 
 const RegisterButton = styled(Button)`
+  background-color: white;
   ${props =>
     props.isPremium &&
     `
