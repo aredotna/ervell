@@ -34,9 +34,9 @@ class BlockLightboxAddComment extends PureComponent {
     errorMessage: null,
   }
 
-  handleChange = ({ target: { value: comment } }) => {
-    const mode = comment === '' ? 'resting' : 'active'
-    this.setState({ mode, comment })
+  handleChange = newValue => {
+    const mode = newValue === '' ? 'resting' : 'active'
+    this.setState({ mode, comment: newValue })
   }
 
   handleKeyDown = e => {
@@ -86,7 +86,7 @@ class BlockLightboxAddComment extends PureComponent {
   }
 
   render() {
-    const { mode, inputKey, errorMessage } = this.state
+    const { mode, inputKey, errorMessage, comment } = this.state
     const { ...rest } = this.props
 
     return (
@@ -100,13 +100,8 @@ class BlockLightboxAddComment extends PureComponent {
 
           <MentionTextarea
             key={inputKey}
-            f={3}
-            bg="gray.hint"
-            border={0}
-            rows={4}
-            placeholder="Add new comment"
+            value={comment}
             onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
           />
 
           {mode === 'active' && (
