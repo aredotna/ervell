@@ -113,20 +113,27 @@ export default class LoginForm extends Component {
         track.submit(en.LOGIN)
       })
 
-      .catch(({ response: { status, data: { description } } }) => {
-        // Account is unconfirmed and the confirmation period is expired
-        if (status === 401) {
-          window.location = `/confirm/expired?${qs.stringify({
-            email: this.state.email,
-          })}`
-          return
-        }
+      .catch(
+        ({
+          response: {
+            status,
+            data: { description },
+          },
+        }) => {
+          // Account is unconfirmed and the confirmation period is expired
+          if (status === 401) {
+            window.location = `/confirm/expired?${qs.stringify({
+              email: this.state.email,
+            })}`
+            return
+          }
 
-        this.setState({
-          mode: 'error',
-          errorMessage: description,
-        })
-      })
+          this.setState({
+            mode: 'error',
+            errorMessage: description,
+          })
+        }
+      )
   }
 
   render() {
@@ -176,7 +183,7 @@ export default class LoginForm extends Component {
         )}
 
         <AuthForm.Submit>
-          <Button type="submit">
+          <Button type="submit" bg="white">
             {
               {
                 resting: 'Log in',

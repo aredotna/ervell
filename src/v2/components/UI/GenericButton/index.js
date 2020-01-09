@@ -7,6 +7,7 @@ import {
   display,
   alignItems,
   justifyContent,
+  bgColor,
 } from 'styled-system'
 import chroma from 'chroma-js'
 
@@ -28,9 +29,10 @@ export const buttonSize = x =>
     : BUTTON_VARIANTS.LARGE
 
 export const buttonColor = props => {
-  const value = themeGet(`colors.${props.color}`, props.theme.colors.gray.base)(
-    props
-  )
+  const value = themeGet(
+    `colors.${props.color}`,
+    props.theme.colors.gray.base
+  )(props)
 
   return `
     color: ${value};
@@ -73,6 +75,7 @@ export const mixin = css`
   ${preset(alignItems, { alignItems: 'center' })}
   ${preset(justifyContent, { justifyContent: 'center' })}
   ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
+  ${preset(bgColor, { bgColor: 'white' })}
   border: ${buttonBorderWidth} solid;
   border-radius: ${BUTTON_BORDER_RADIUS};
   font-family: ${props => props.theme.fonts.sans};
