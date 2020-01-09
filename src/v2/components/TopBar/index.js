@@ -59,7 +59,7 @@ export default class TopBar extends PureComponent {
       <Container scheme={scheme} {...rest}>
         <PrimarySearch flex={1} scheme={scheme} />
 
-        {me ? (
+        {me && me.id ? (
           <React.Fragment>
             <NewChannelButton px={5} />
 
