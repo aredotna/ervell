@@ -11,7 +11,9 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import { FilledButton } from 'v2/components/UI/Buttons'
-import MentionTextarea from 'v2/components/UI/MentionTextarea'
+import MentionTextarea, {
+  SPECIAL_CHARACTER,
+} from 'v2/components/UI/MentionTextarea'
 
 const Tip = styled(Box)`
   position: absolute;
@@ -66,7 +68,13 @@ class BlockLightboxAddComment extends PureComponent {
 
     this.setState({ mode: 'submitting' })
 
-    createComment({ variables: { body, block_id } })
+    // This is a weird thing we have to do to get
+    // around a limitation in react-mention
+    const re = new RegExp(SPECIAL_CHARACTER, 'g')
+
+    createComment({
+      variables: { body: body.replace(re, ''), block_id },
+    })
       .then(() => {
         this.setState({
           mode: 'done',

@@ -11,6 +11,8 @@ interface MentionTextareaProps {
   onChange: (newValue: string) => void
 }
 
+export const SPECIAL_CHARACTER = '!%!'
+
 const MentionTextarea: React.FC<MentionTextareaProps> = ({
   value,
   onChange,
@@ -44,11 +46,15 @@ const MentionTextarea: React.FC<MentionTextareaProps> = ({
       value={value}
       onChange={(_e, newValue) => onChange(newValue)}
       style={defaultStyle}
+      markup="@__id__"
       allowSuggestionsAboveCursor
     >
       <Mention
         displayTransform={name => `@${name}`}
         trigger="@"
+        // This is a weird thing we have to do to get
+        // around a limitation in react-mention
+        markup={`${SPECIAL_CHARACTER}@__id__${SPECIAL_CHARACTER}`}
         data={fetchSuggestions}
         appendSpaceOnAdd
       />
