@@ -124,7 +124,15 @@ export const initApolloClient = ({
     },
     serializedMe: {
       __typename: 'SerializedMe',
-      ...serializedMe,
+      ...{
+        id: null,
+        name: null,
+        initials: null,
+        avatar: null,
+        authentication_token: null,
+        is_premium: null,
+        ...serializedMe,
+      },
     },
     sharify: {
       __typename: 'Sharify',
