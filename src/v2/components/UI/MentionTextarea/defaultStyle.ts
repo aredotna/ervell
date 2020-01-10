@@ -42,12 +42,12 @@ export default {
     },
 
     highlighter: {
-      padding: 9,
+      padding: '0.75em',
     },
 
     input: {
-      padding: 9,
-      minHeight: 63,
+      padding: '0.75em',
+      minHeight: 100,
       outline: 0,
       border: 0,
     },
