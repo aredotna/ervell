@@ -110,6 +110,7 @@ class BlockLightboxAddComment extends PureComponent {
             key={inputKey}
             value={comment}
             onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
           />
 
           {mode === 'active' && (
