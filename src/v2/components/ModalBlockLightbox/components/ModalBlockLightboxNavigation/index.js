@@ -40,6 +40,7 @@ const Prev = styled(Link).attrs({
 
     svg {
       fill: black;
+      cursor: pointer;
     }
   }
 `
