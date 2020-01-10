@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, KeyboardEvent } from 'react'
 import { MentionsInput, Mention } from 'react-mentions'
 import { useLazyQuery } from '@apollo/react-hooks'
 
@@ -9,6 +9,7 @@ import defaultStyle from 'v2/components/UI/MentionTextarea/defaultStyle'
 interface MentionTextareaProps {
   value: string
   onChange: (newValue: string) => void
+  onKeyDown?: (event: KeyboardEvent) => void
 }
 
 export const SPECIAL_CHARACTER = '!%!'
@@ -16,6 +17,7 @@ export const SPECIAL_CHARACTER = '!%!'
 const MentionTextarea: React.FC<MentionTextareaProps> = ({
   value,
   onChange,
+  onKeyDown,
 }) => {
   const [getSuggestions, { refetch }] = useLazyQuery<
     MentionTextareaUserSuggestions
@@ -48,6 +50,7 @@ const MentionTextarea: React.FC<MentionTextareaProps> = ({
       style={defaultStyle}
       markup="@__id__"
       allowSuggestionsAboveCursor
+      onKeyDown={onKeyDown}
     >
       <Mention
         displayTransform={name => `@${name}`}
