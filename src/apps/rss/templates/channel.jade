@@ -11,13 +11,11 @@ rss(version='2.0', xmlns:atom='http://www.w3.org/2005/Atom')
       lastBuildDate= new Date(channel.get('updated_at')).toUTCString()
     each block in blocks
       item
-        if block.get('class') == 'Link'
-          title= block.getSourceUrl()
-        else
-          title= block.get('title')
+        title= block.get('title')
         link #{sd.APP_URL}/block/#{block.id}
         pubDate= new Date(block.get('updated_at')).toUTCString()
         guid(isPermaLink='false') #{sd.APP_URL}/block/#{block.id}
+        source= block.getSourceUrl()
         description
           | <![CDATA[
           include block
