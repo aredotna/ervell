@@ -184,7 +184,7 @@
     "spider-detector": "^1.0.19",
     "sqreen": "^1.30.3",
     "striptags": "^2.2.1",
-    "styled-components": "^5.0.0-beta.8",
+    "styled-components": "5.0.0",
     "styled-system": "^2.3.2",
     "stylus": "^0.54.5",
     "superagent": "^3.6.0",
