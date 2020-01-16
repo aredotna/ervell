@@ -7,6 +7,8 @@ export const channelContentsFilterFragment = gql`
     title
     counts {
       contents
+      blocks
+      channels
     }
   }
 `
