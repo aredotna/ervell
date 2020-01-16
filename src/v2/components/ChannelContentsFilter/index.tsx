@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Query } from 'react-apollo'
 import styled from 'styled-components'
 import { unescape } from 'underscore'
-import { toSentence } from 'underscore.string'
 
 import constants from 'v2/styles/constants'
 
@@ -40,24 +39,22 @@ export const ChannelContentsFilter = ({ channel }) => {
 
   if (channel.counts.contents === 0) return null
 
-  const channelLabel =
-    channel.counts.channels === 1
-      ? '1 channel'
-      : `${channel.counts.channels} channels`
-  const blockLabel =
-    channel.counts.blocks === 1 ? '1 block' : `${channel.counts.blocks} blocks`
+  const { counts } = channel
 
-  const countLabels = []
-  if (channel.counts.blocks > 0) countLabels.push(blockLabel)
-  if (channel.counts.channels > 0) countLabels.push(channelLabel)
+  const countLabels = [
+    ...(counts.channels > 0
+      ? [`${counts.channels} channel${counts.channels === 1 ? '' : 's'}`]
+      : []),
+    ...(counts.blocks > 0
+      ? [`${counts.blocks} block${counts.blocks === 1 ? '' : 's'}`]
+      : []),
+  ].join(' and ')
 
   return (
     <>
       <SearchInput
         borderColor="transparent"
-        placeholder={`Filter ${unescape(channel.title)} (${toSentence(
-          countLabels
-        )})`}
+        placeholder={`Filter ${unescape(channel.title)} (${countLabels})`}
         mr={constants.doubleBlockGutter}
         mb={6}
         query={query}
