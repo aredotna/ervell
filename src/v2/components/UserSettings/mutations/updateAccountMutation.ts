@@ -43,8 +43,13 @@ export default gql`
         name
         first_name
         bio
+        home_path
         settings {
           receive_email
+          receive_tips_emails
+          receive_group_premium_emails
+          exclude_from_indexes
+          receive_newsletter
           show_nsfw
         }
       }

@@ -39,11 +39,22 @@ export const ChannelContentsFilter = ({ channel }) => {
 
   if (channel.counts.contents === 0) return null
 
+  const { counts } = channel
+
+  const countLabels = [
+    ...(counts.channels > 0
+      ? [`${counts.channels} channel${counts.channels === 1 ? '' : 's'}`]
+      : []),
+    ...(counts.blocks > 0
+      ? [`${counts.blocks} block${counts.blocks === 1 ? '' : 's'}`]
+      : []),
+  ].join(' and ')
+
   return (
     <>
       <SearchInput
         borderColor="transparent"
-        placeholder={`Filter ${unescape(channel.title)}`}
+        placeholder={`Filter ${unescape(channel.title)} (${countLabels})`}
         mr={constants.doubleBlockGutter}
         mb={6}
         query={query}
@@ -90,9 +101,7 @@ export const ChannelContentsFilter = ({ channel }) => {
                 <Grid mb={9}>
                   {contents.map(connectable => (
                     <Cell.Konnectable
-                      key={`FilteredConnectable:${connectable.id}:${
-                        connectable.__typename
-                      }`}
+                      key={`FilteredConnectable:${connectable.id}:${connectable.__typename}`}
                       konnectable={connectable}
                       context={contents}
                     />
