@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import styled from 'styled-components'
-import browser from 'webextension-polyfill'
+// import browser from 'webextension-polyfill'
 
 import loginMutation from 'extension/src/components/ExtensionLogin/mutations/loginMutation'
 import Layout from 'v2/components/Bookmarklet/components/Layout'
@@ -59,22 +59,28 @@ class Login extends Component {
       .login({
         variables: { email, password },
       })
-      .then(({ data: { login: { me } } }) => {
-        this.setState({ mode: 'redirecting' })
+      .then(
+        ({
+          data: {
+            login: { me },
+          },
+        }) => {
+          this.setState({ mode: 'redirecting' })
 
-        try {
-          window.localStorage.setItem(
-            'authentication_token',
-            me.authentication_token
-          )
-        } catch {
-          browser.storage.local.set({
-            authentication_token: me.authentication_token,
-          })
+          try {
+            window.localStorage.setItem(
+              'authentication_token',
+              me.authentication_token
+            )
+          } catch {
+            // browser.storage.local.set({
+            //   authentication_token: me.authentication_token,
+            // })
+          }
+
+          window.location.reload()
         }
-
-        window.location.reload()
-      })
+      )
       .catch(err => {
         this.setState({
           mode: 'error',

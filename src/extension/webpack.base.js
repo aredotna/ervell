@@ -22,7 +22,7 @@ const baseConfig = {
       formatter: 'codeframe',
       formatterOptions: 'highlightCode',
       checkSyntacticErrors: true,
-      watch: ['./src'],
+      watch: ['./src/extension/src'],
     }),
     new CopyWebpackPlugin([
       { from: './src/extension/src/index.html' },

@@ -17,9 +17,12 @@ newrelic_agent.log
 src/apps/marklet/public
 !src/apps/marklet/public/.gitkeep
 
-# Compiled extension code
+# Compiled Chrome/Firefox extension code
 src/extension/dist
 src/extension/src/config.js
+
+# Compiled Safari extension code
+src/extension/safari-extension/Are.na for Safari/Are.na for Safari Extension/app/scripts
 
 # Compiled server code
 server.dist.js
