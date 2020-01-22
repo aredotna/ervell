@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 import LegacyDarkTheme from 'v2/components/UI/Layouts/BlankLayout/components/LegacyDarkTheme'
-import LightboxResizer from 'v2/components/UI/Layouts/BlankLayout/components/LightboxResizer'
 import BaseStyles from 'v2/components/UI/Layouts/BlankLayout/components/BaseStyles'
 import Description from 'v2/components/UI/Head/components/Description'
 
@@ -38,7 +37,6 @@ export class BlankLayout extends PureComponent {
     return (
       <Fragment>
         <LegacyDarkTheme />
-        <LightboxResizer />
         <BaseStyles />
 
         <Description>

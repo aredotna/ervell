@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { unescape } from 'underscore'
-import Draggable from 'react-draggable'
 
 import constants from 'v2/styles/constants'
 
@@ -11,6 +10,7 @@ import Box from 'v2/components/UI/Box'
 import Title from 'v2/components/UI/Head/components/Title'
 import BlockLightboxContentPane from 'v2/components/BlockLightbox/components/BlockLightboxContentPane'
 import BlockLightboxMetadataPane from 'v2/components/BlockLightbox/components/BlockLightboxMetadataPane'
+import { SplitPane } from 'v2/components/UI/SplitPane'
 
 const Container = styled(Box).attrs({
   flexDirection: ['column', 'row', 'row'],
@@ -35,50 +35,28 @@ export default class BlockLightbox extends PureComponent<BlockLightboxProps> {
     children: null,
   }
 
-  state = {
-    deltaPosition: {
-      x: 0,
-      y: 0,
-    },
-  }
-
-  handleDrag = (_event, ui) => {
-    const { x, y } = this.state.deltaPosition
-    this.setState(
-      {
-        deltaPosition: {
-          x: x + ui.deltaX,
-          y: y + ui.deltaY,
-        },
-      },
-      () => {
-        console.log(this.state.deltaPosition)
-      }
-    )
-  }
-
   render() {
     const { block, layout, context, children, ...rest } = this.props
 
     return (
-      <Container {...rest}>
-        {block.title && <Title>{unescape(block.title)}</Title>}
+      <>
+        <Container {...rest}>
+          {block.title && <Title>{unescape(block.title)}</Title>}
 
-        <BlockLightboxContentPane block={block} layout={layout}>
-          {children}
-        </BlockLightboxContentPane>
+          <SplitPane context={context} layout={layout}>
+            <BlockLightboxContentPane block={block} layout={layout}>
+              {children}
+            </BlockLightboxContentPane>
 
-        <Draggable axis="x" onDrag={this.handleDrag}>
-          <div>Hi Draggable</div>
-        </Draggable>
-
-        {layout === 'DEFAULT' && (
-          <BlockLightboxMetadataPane
-            block={block}
-            pt={context === 'MODAL' ? constants.topBarHeight : undefined}
-          />
-        )}
-      </Container>
+            {layout === 'DEFAULT' && (
+              <BlockLightboxMetadataPane
+                block={block}
+                pt={context === 'MODAL' ? constants.topBarHeight : undefined}
+              />
+            )}
+          </SplitPane>
+        </Container>
+      </>
     )
   }
 }

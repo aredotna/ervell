@@ -21,6 +21,7 @@ import ModalBlockLightboxNavigation from 'v2/components/ModalBlockLightbox/compo
 const Fullscreen = styled(Link).attrs({
   border: '1px solid',
 })`
+  cursor: pointer;
   border-radius: ${props => props.theme.radii.subtle};
   user-select: none;
 
