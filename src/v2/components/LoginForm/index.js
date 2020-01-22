@@ -57,10 +57,12 @@ const InputWithLink = styled.div.attrs({
 export default class LoginForm extends Component {
   static propTypes = {
     onClose: PropTypes.func,
+    trackLogin: PropTypes.bool,
   }
 
   static defaultProps = {
     onClose: null,
+    trackLogin: true,
   }
 
   state = {
@@ -92,6 +94,7 @@ export default class LoginForm extends Component {
     e.preventDefault()
 
     const { email, password } = this.state
+    const { trackLogin } = this.props
 
     this.setState({ mode: 'submitting' })
 
@@ -110,7 +113,9 @@ export default class LoginForm extends Component {
       .then(() => {
         this.setState({ mode: 'redirecting' })
         window.location = REDIRECT_TO
-        track.submit(en.LOGIN)
+        if (trackLogin) {
+          track.submit(en.LOGIN)
+        }
       })
 
       .catch(
