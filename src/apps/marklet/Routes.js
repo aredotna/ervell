@@ -27,7 +27,10 @@ const Routes = ({ isLoggedIn }) => {
             render={() => (
               <Layout>
                 <CenterStretchBox>
-                  <Login onClose={() => messenger.send({ action: 'close' })} />
+                  <Login
+                    trackLogin={false}
+                    onClose={() => messenger.send({ action: 'close' })}
+                  />
                 </CenterStretchBox>
               </Layout>
             )}

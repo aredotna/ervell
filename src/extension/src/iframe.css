@@ -18,6 +18,7 @@
   margin: 12px 15px 0 0 !important;
   z-index: 9999999998 !important;
   background: rgba(255, 255, 255, 1) !important;
+  padding: 0 !important;
 }
 
 #arenaExtension_frame.is-expanded,
