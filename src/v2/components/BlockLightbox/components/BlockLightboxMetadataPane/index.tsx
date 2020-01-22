@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
 
-import blockLightboxMetadataPaneFragment from 'v2/components/BlockLightbox/components/BlockLightboxMetadataPane/fragments/blockLightboxMetadataPane'
+import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -14,11 +13,15 @@ import BlockLightboxActions from 'v2/components/BlockLightbox/components/BlockLi
 import BlockLightboxMetadataFold from 'v2/components/BlockLightbox/components/BlockLightboxMetadataFold'
 import BlockLightboxModalDialog from 'v2/components/BlockLightbox/components/BlockLightboxModalDialog'
 
-export default class BlockLightboxMetadataPane extends PureComponent {
-  static propTypes = {
-    block: propType(blockLightboxMetadataPaneFragment).isRequired,
-  }
+import { SpaceProps } from 'styled-system'
 
+interface BlockLightboxMetadataPaneProps extends SpaceProps {
+  block: Block
+}
+
+export default class BlockLightboxMetadataPane extends PureComponent<
+  BlockLightboxMetadataPaneProps
+> {
   state = {
     mode: 'resting',
     autoFocus: null,
@@ -45,6 +48,14 @@ export default class BlockLightboxMetadataPane extends PureComponent {
     this.setState({ mode: 'resting', autoFocus: null })
   }
 
+  get canManage() {
+    if (this.props.block.__typename !== 'Channel') {
+      return this.props.block.can.manage
+    } else {
+      return false
+    }
+  }
+
   render() {
     const { mode, autoFocus } = this.state
     const { block, ...rest } = this.props
@@ -66,13 +77,13 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           fontWeight="bold"
           hyphenate
           verticalAlign="middle"
-          onClick={block.can.manage ? this.openManageFor('title') : undefined}
+          onClick={this.canManage ? this.openManageFor('title') : undefined}
         >
-          {block.can.manage && !block.title && (
+          {this.canManage && !block.title && (
             <Text color="gray.medium">Add a title</Text>
           )}
 
-          {!block.can.manage && !block.title ? (
+          {!this.canManage && !block.title ? (
             <Text color="gray.medium">—</Text>
           ) : (
             <span dangerouslySetInnerHTML={{ __html: block.title }} />
@@ -121,20 +132,20 @@ export default class BlockLightboxMetadataPane extends PureComponent {
               if (event.target.nodeName === 'A') {
                 return
               }
-              if (block.can.manage) {
+              if (this.canManage) {
                 return this.openManageFor('description')(event)
               }
             }}
           />
         )}
 
-        {block.can.manage && !block.description && (
+        {this.canManage && !block.description && (
           <Text
             f={3}
             lineHeight={2}
             color="gray.medium"
             onClick={
-              block.can.manage ? this.openManageFor('description') : undefined
+              this.canManage ? this.openManageFor('description') : undefined
             }
           >
             Add a description
@@ -145,7 +156,7 @@ export default class BlockLightboxMetadataPane extends PureComponent {
           <BlockLightboxActions block={block} />
         </Text>
 
-        {block.can.manage && (
+        {this.canManage && (
           <GenericButton
             mt={7}
             onClick={this.openManage}

@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
 import { unescape } from 'underscore'
+import Draggable from 'react-draggable'
 
 import constants from 'v2/styles/constants'
 
-import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox'
+import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
 import Box from 'v2/components/UI/Box'
 import Title from 'v2/components/UI/Head/components/Title'
@@ -19,18 +18,43 @@ const Container = styled(Box).attrs({
   display: ['block', 'flex', 'flex'],
 })``
 
-export default class BlockLightbox extends PureComponent {
-  static propTypes = {
-    block: propType(blockLightboxFragment).isRequired,
-    context: PropTypes.oneOf(['MODAL', 'PAGE']),
-    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']),
-    children: PropTypes.node,
-  }
+export type LightboxContext = 'MODAL' | 'PAGE'
+export type LightboxLayout = 'DEFAULT' | 'FULLSCREEN'
 
+interface BlockLightboxProps {
+  block: Block
+  context: LightboxContext
+  layout: LightboxLayout
+  children: React.ReactNode
+}
+
+export default class BlockLightbox extends PureComponent<BlockLightboxProps> {
   static defaultProps = {
     layout: 'DEFAULT',
     context: 'PAGE',
     children: null,
+  }
+
+  state = {
+    deltaPosition: {
+      x: 0,
+      y: 0,
+    },
+  }
+
+  handleDrag = (_event, ui) => {
+    const { x, y } = this.state.deltaPosition
+    this.setState(
+      {
+        deltaPosition: {
+          x: x + ui.deltaX,
+          y: y + ui.deltaY,
+        },
+      },
+      () => {
+        console.log(this.state.deltaPosition)
+      }
+    )
   }
 
   render() {
@@ -43,6 +67,10 @@ export default class BlockLightbox extends PureComponent {
         <BlockLightboxContentPane block={block} layout={layout}>
           {children}
         </BlockLightboxContentPane>
+
+        <Draggable axis="x" onDrag={this.handleDrag}>
+          <div>Hi Draggable</div>
+        </Draggable>
 
         {layout === 'DEFAULT' && (
           <BlockLightboxMetadataPane
