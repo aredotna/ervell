@@ -13,6 +13,10 @@ declare global {
     __APOLLO_CLIENT__: any
     __APOLLO_STATE__: any
   }
+
+  interface Document {
+    requestStorageAccess?: () => Promise
+  }
 }
 
 export {}
