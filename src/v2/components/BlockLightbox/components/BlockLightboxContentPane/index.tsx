@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
 
-import blockLightboxContentPaneFragment from 'v2/components/BlockLightbox/components/BlockLightboxContentPane/fragments/blockLightboxContentPane'
+import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
 import Box from 'v2/components/UI/Box'
 import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage'
@@ -12,6 +10,8 @@ import BlockLightboxLink from 'v2/components/BlockLightbox/components/BlockLight
 import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment'
 import BlockLightboxEmbed from 'v2/components/BlockLightbox/components/BlockLightboxEmbed'
 import BlockLightboxPending from 'v2/components/BlockLightbox/components/BlockLightboxPending'
+
+import { LightboxLayout } from 'v2/components/BlockLightbox'
 
 const Container = styled(Box).attrs({
   minHeight: ['75vh', 'auto', 'auto'],
@@ -31,13 +31,15 @@ const Container = styled(Box).attrs({
   `}
 `
 
-export default class BlockLightboxContentPane extends PureComponent {
-  static propTypes = {
-    layout: PropTypes.oneOf(['DEFAULT', 'FULLSCREEN']).isRequired,
-    block: propType(blockLightboxContentPaneFragment).isRequired,
-    children: PropTypes.node,
-  }
+interface BlockLightboxContentPaneProps {
+  block: Block
+  layout: LightboxLayout
+  children: React.ReactNode
+}
 
+export default class BlockLightboxContentPane extends PureComponent<
+  BlockLightboxContentPaneProps
+> {
   static defaultProps = {
     children: null,
   }

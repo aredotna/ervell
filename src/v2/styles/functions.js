@@ -32,6 +32,8 @@ export const defaultTo = (v, dV) => (v == null || v !== v ? dV : v) // eslint-di
 
 export const getColor = name => themeGet(`colors.${name}`)({ theme })
 
+export const getSpace = index => themeGet(`space.${index}`)({ theme })
+
 export const lighten = (name, amount = 0.5) => {
   const color = getColor(name)
   return chroma(color).alpha(amount)
