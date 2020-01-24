@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C509DE1323DA301D002E6D48 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C509DE1223DA301D002E6D48 /* SafariExtensionViewController.xib */; };
 		C5DEE75223D54DF70097C8CA /* Are_na_for_Safari.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE75123D54DF70097C8CA /* Are_na_for_Safari.entitlements */; };
 		C5DEE75423D54DF70097C8CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE75323D54DF70097C8CA /* AppDelegate.swift */; };
 		C5DEE75723D54DF70097C8CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE75523D54DF70097C8CA /* Main.storyboard */; };
@@ -18,10 +19,8 @@
 		C5DEE77D23D54DFC0097C8CA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5DEE77C23D54DFC0097C8CA /* Cocoa.framework */; };
 		C5DEE78023D54DFC0097C8CA /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE77F23D54DFC0097C8CA /* SafariExtensionHandler.swift */; };
 		C5DEE78223D54DFC0097C8CA /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE78123D54DFC0097C8CA /* SafariExtensionViewController.swift */; };
-		C5DEE78823D54DFC0097C8CA /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE78723D54DFC0097C8CA /* script.js */; };
 		C5DEE78A23D54DFC0097C8CA /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE78923D54DFC0097C8CA /* ToolbarItemIcon.pdf */; };
 		C5DEE79E23D55C350097C8CA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE79D23D55C350097C8CA /* index.html */; };
-		C5DEE7A023D6152F0097C8CA /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE79F23D6152E0097C8CA /* SafariExtensionViewController.xib */; };
 		C5DEE7A523D646DF0097C8CA /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE7A323D646DF0097C8CA /* main.js */; };
 		C5DEE7A623D646DF0097C8CA /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE7A423D646DF0097C8CA /* background.js */; };
 /* End PBXBuildFile section */
@@ -65,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C509DE1223DA301D002E6D48 /* SafariExtensionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		C5DEE74E23D54DF70097C8CA /* Are.na for Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Are.na for Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DEE75123D54DF70097C8CA /* Are_na_for_Safari.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Are_na_for_Safari.entitlements; sourceTree = "<group>"; };
 		C5DEE75323D54DF70097C8CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,11 +83,9 @@
 		C5DEE77F23D54DFC0097C8CA /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
 		C5DEE78123D54DFC0097C8CA /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
 		C5DEE78623D54DFC0097C8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C5DEE78723D54DFC0097C8CA /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		C5DEE78923D54DFC0097C8CA /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 		C5DEE78B23D54DFC0097C8CA /* Are_na_for_Safari_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Are_na_for_Safari_Extension.entitlements; sourceTree = "<group>"; };
 		C5DEE79D23D55C350097C8CA /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		C5DEE79F23D6152E0097C8CA /* SafariExtensionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SafariExtensionViewController.xib; path = ../../../../../../../../../.Trash/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		C5DEE7A323D646DF0097C8CA /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
 		C5DEE7A423D646DF0097C8CA /* background.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,10 +190,9 @@
 			children = (
 				C5DEE79B23D55BF30097C8CA /* app */,
 				C5DEE77F23D54DFC0097C8CA /* SafariExtensionHandler.swift */,
-				C5DEE79F23D6152E0097C8CA /* SafariExtensionViewController.xib */,
+				C509DE1223DA301D002E6D48 /* SafariExtensionViewController.xib */,
 				C5DEE78123D54DFC0097C8CA /* SafariExtensionViewController.swift */,
 				C5DEE78623D54DFC0097C8CA /* Info.plist */,
-				C5DEE78723D54DFC0097C8CA /* script.js */,
 				C5DEE78923D54DFC0097C8CA /* ToolbarItemIcon.pdf */,
 				C5DEE78B23D54DFC0097C8CA /* Are_na_for_Safari_Extension.entitlements */,
 			);
@@ -379,10 +376,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5DEE7A023D6152F0097C8CA /* SafariExtensionViewController.xib in Resources */,
+				C509DE1323DA301D002E6D48 /* SafariExtensionViewController.xib in Resources */,
 				C5DEE78A23D54DFC0097C8CA /* ToolbarItemIcon.pdf in Resources */,
 				C5DEE79E23D55C350097C8CA /* index.html in Resources */,
-				C5DEE78823D54DFC0097C8CA /* script.js in Resources */,
 				C5DEE7A623D646DF0097C8CA /* background.js in Resources */,
 				C5DEE7A523D646DF0097C8CA /* main.js in Resources */,
 			);
