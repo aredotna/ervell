@@ -49,11 +49,9 @@ export default class BlockLightboxMetadataPane extends PureComponent<
   }
 
   get canManage() {
-    if (this.props.block.__typename !== 'Channel') {
-      return this.props.block.can.manage
-    } else {
-      return false
-    }
+    // FIXME: Property 'can' does not exist on type 'BlockLightbox_Channel'.
+    // @ts-ignore
+    return this.props.block.can.manage
   }
 
   render() {
