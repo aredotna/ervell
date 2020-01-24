@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import { isMobile as checkIfMobile } from 'v2/util/isMobile'
 
 import constants from 'v2/styles/constants'
+import { getSpace } from 'v2/styles/functions'
+
 import Box from 'v2/components/UI/Box'
 import { LightboxContext, LightboxLayout } from 'v2/components/BlockLightbox'
 
@@ -136,11 +138,12 @@ const Container = styled(Box)<{
   .Resizer {
     cursor: ${props => (props.isFullScreen ? 'inherit' : 'col-resize')};
     position: ${props => (props.isFullScreen ? 'absolute' : 'relative')};
-    padding-left: 10px;
-    padding-right: 10px;
-    left: 12px;
-    opacity: 0;
+    padding-left: ${getSpace(5)};
+    padding-right: ${getSpace(5)};
+    left: ${getSpace(6)};
     z-index: 2;
+
+    opacity: 0;
 
     &:hover {
       opacity: 1;
