@@ -161,8 +161,8 @@ const Container = styled(Box)<{
 
   ${constants.media.mobile`
     .SplitPane {
-      flex-direction: column !important;
       overflow: scroll !important;
+      display: block !important;
 
       .Pane1,
       .Pane2 {
