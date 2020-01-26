@@ -21,6 +21,7 @@ import Text from 'v2/components/UI/Text'
 import RadioOptions from 'v2/components/UI/RadioOptions'
 import Pulldown from 'v2/components/UI/Pulldown'
 import HorizontalRule from 'v2/components/UI/HorizontalRule'
+import { toggle as toggleOrSetTheme } from 'v2/components/UI/Layouts/BlankLayout/components/LegacyDarkTheme'
 
 import mapErrors from 'v2/util/mapErrors'
 
@@ -480,6 +481,47 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                   </Field>
                 </>
               )}
+
+              <ContextDivider />
+
+              <Field
+                name="darkmode"
+                initialValue={document.documentElement.dataset.theme === 'dark'}
+              >
+                {props => {
+                  return (
+                    <>
+                      <InputContainer mt={6} mb={5}>
+                        <Label>Dark mode</Label>
+
+                        <RadioOptions
+                          value={props.input.value}
+                          onSelect={value => {
+                            const theme = value === true ? 'dark' : 'default'
+                            toggleOrSetTheme(theme)
+                          }}
+                        >
+                          <RadioOptions.Option value={true}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Enable
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+                          <RadioOptions.Option value={false}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Disable
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+                        </RadioOptions>
+                      </InputContainer>
+                    </>
+                  )
+                }}
+              </Field>
+
               <Box mt={8} pt={6}>
                 {submitSucceeded && (
                   <Alert bg="state.premium" color="white" mb={6}>
