@@ -69,156 +69,179 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
         if message.name != "arenaApp" {
             return
         }
+                
         let messageBody = message.body as! String
-
+        
+        NSLog(messageBody)
+        
         let m: AppMessage? = jsonDeserialize(json: messageBody)
         
         if m == nil {
+            NSLog("m is nil")
             return
         }
         
         let command = m!.action
-        // print(command)
-        if command == "storage_get" {
-            let obj = UserDefaults.standard.string(forKey: m!.data!)
-            m!.responseData = obj
-            replyMessage(message: m!)
-        } else if command == "storage_save" {
-            let data: StorageData? = jsonDeserialize(json: m!.data)
-            if data?.obj == nil {
-                UserDefaults.standard.removeObject(forKey: data!.key)
-            } else {
-                UserDefaults.standard.set(data?.obj, forKey: data!.key)
-            }
-            replyMessage(message: m!)
-        } else if command == "storage_remove" {
-            UserDefaults.standard.removeObject(forKey: m!.data!)
-            replyMessage(message: m!)
-        } else if command == "getLocaleStrings" {
-            let language = m!.data ?? "en"
-            let bundleURL = Bundle.main.resourceURL!.absoluteURL
-            let messagesUrl = bundleURL.appendingPathComponent("app/_locales/\(language)/messages.json")
-            do {
-                let json = try String(contentsOf: messagesUrl, encoding: .utf8)
-                webView.evaluateJavaScript("window.arenaLocaleStrings = \(json);", completionHandler: nil)
-            } catch {}
-            replyMessage(message: m!)
-        } else if command == "tabs_query" {
-            let options: TabQueryOptions? = jsonDeserialize(json: m!.data)
-            if options?.currentWindow ?? false {
-                SFSafariApplication.getActiveWindow { win in
-                    processWindowsForTabs(wins: [win!], options: options, complete: { tabs in
-                        m!.responseData = jsonSerialize(obj: tabs)
-                        self.replyMessage(message: m!)
-                    })
-                }
-            } else {
-                SFSafariApplication.getAllWindows { wins in
-                    processWindowsForTabs(wins: wins, options: options, complete: { tabs in
-                        m!.responseData = jsonSerialize(obj: tabs)
-                        self.replyMessage(message: m!)
-                    })
-                }
-            }
-        } else if command == "tabs_message" {
-            let tabMsg: TabMessage? = jsonDeserialize(json: m!.data)
-            SFSafariApplication.getAllWindows { wins in
-                var theWin: SFSafariWindow?
-                var winIndex = 0
-                for win in wins {
-                    if tabMsg?.tab.windowId == winIndex {
-                        theWin = win
-                        break
-                    }
-                    winIndex = winIndex + 1
-                }
-                var theTab: SFSafariTab?
-                theWin?.getAllTabs { tabs in
-                    var tabIndex = 0
-                    for tab in tabs {
-                        if tabMsg?.tab.index == tabIndex {
-                            theTab = tab
-                            break
-                        }
-                        tabIndex = tabIndex + 1
-                    }
-                    theTab?.getActivePage { activePage in
-                        activePage?.dispatchMessageToScript(withName: "arena", userInfo: ["msg": tabMsg!.obj])
-                    }
-                }
-            }
-        } else if command == "close" {
-            dismissPopover()
-            replyMessage(message: m!)
-        } else if command == "showPopover" {
+        NSLog(command ?? "no command")
+        
+        switch command {
+        case "getCurrentPage":
+            NSLog("Getting current page")
             SFSafariApplication.getActiveWindow { win in
-                win?.getToolbarItem(completionHandler: { item in
-                    item?.showPopover()
+                processWindowsForTabs(wins: [win!], options: nil, complete: { tabs in
+                    m!.responseData = jsonSerialize(obj: tabs)
+                    NSLog(jsonSerialize(obj: tabs) ?? "Nothing here")
+                    self.replyMessage(message: m!)
                 })
             }
-        } else if command == "isPopoverOpen" {
-            m!.responseData = popoverOpenCount > 0 ? "true" : "false"
-            replyMessage(message: m!)
-        } else if command == "createNewTab" {
-            if m!.data != nil {
-                SFSafariApplication.getActiveWindow { win in
-                    win?.openTab(with: URL(string: m!.data!)!, makeActiveIfPossible: true, completionHandler: { _ in
-                        // Tab opened
-                    })
-                }
-            }
-        } else if command == "reloadExtension" {
+        case "close":
+            NSLog("CLOSING")
+            dismissPopover()
             webView?.reload()
             replyMessage(message: m!)
-        } else if command == "copyToClipboard" {
-            let pasteboard = NSPasteboard.general
-            pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-            pasteboard.setString(m!.data ?? "", forType: NSPasteboard.PasteboardType.string)
-            replyMessage(message: m!)
-        } else if command == "readFromClipboard" {
-            let pasteboard = NSPasteboard.general
-            m?.responseData = pasteboard.pasteboardItems?.first?.string(forType: .string)
-            replyMessage(message: m!)
-        } else if command == "downloadFile" {
-            if m!.data != nil {
-                if let dlMsg: DownloadFileMessage = jsonDeserialize(json: m!.data) {
-                    var data: Data?
-                    if dlMsg.blobOptions?.type == "text/plain" {
-                        data = dlMsg.blobData?.data(using: .utf8)
-                    } else {
-                        data = Data(base64Encoded: dlMsg.blobData!)
-                    }
-                    if data != nil {
-                        let panel = NSSavePanel()
-                        panel.canCreateDirectories = true
-                        panel.nameFieldStringValue = dlMsg.fileName
-                        panel.begin { response in
-                            if response == NSApplication.ModalResponse.OK {
-                                if let url = panel.url {
-                                    do {
-                                        let fileManager = FileManager.default
-                                        if !fileManager.fileExists(atPath: url.absoluteString) {
-                                            fileManager.createFile(atPath: url.absoluteString, contents: Data(),
-                                                                   attributes: nil)
-                                        }
-                                        try data!.write(to: url)
-                                    } catch {
-                                        print(error)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else if command == "getAppPath" {
-            SFSafariExtension.getBaseURI(completionHandler: { uri in
-                if uri != nil {
-                    m!.responseData = uri!.absoluteString
-                    self.replyMessage(message: m!)
-                }
-            })
+        default:
+            NSLog("Unhandled command: \(command ?? "nil command")")
         }
+        
+//        if command == "storage_get" {
+//            let obj = UserDefaults.standard.string(forKey: m!.data!)
+//            m!.responseData = obj
+//            replyMessage(message: m!)
+//        } else if command == "storage_save" {
+//            let data: StorageData? = jsonDeserialize(json: m!.data)
+//            if data?.obj == nil {
+//                UserDefaults.standard.removeObject(forKey: data!.key)
+//            } else {
+//                UserDefaults.standard.set(data?.obj, forKey: data!.key)
+//            }
+//            replyMessage(message: m!)
+//        } else if command == "storage_remove" {
+//            UserDefaults.standard.removeObject(forKey: m!.data!)
+//            replyMessage(message: m!)
+//        } else if command == "getLocaleStrings" {
+//            let language = m!.data ?? "en"
+//            let bundleURL = Bundle.main.resourceURL!.absoluteURL
+//            let messagesUrl = bundleURL.appendingPathComponent("app/_locales/\(language)/messages.json")
+//            do {
+//                let json = try String(contentsOf: messagesUrl, encoding: .utf8)
+//                webView.evaluateJavaScript("window.arenaLocaleStrings = \(json);", completionHandler: nil)
+//            } catch {}
+//            replyMessage(message: m!)
+//        } else if command == "tabs_query" {
+//            let options: TabQueryOptions? = jsonDeserialize(json: m!.data)
+//            if options?.currentWindow ?? false {
+//                SFSafariApplication.getActiveWindow { win in
+//                    processWindowsForTabs(wins: [win!], options: options, complete: { tabs in
+//                        m!.responseData = jsonSerialize(obj: tabs)
+//                        self.replyMessage(message: m!)
+//                    })
+//                }
+//            } else {
+//                SFSafariApplication.getAllWindows { wins in
+//                    processWindowsForTabs(wins: wins, options: options, complete: { tabs in
+//                        m!.responseData = jsonSerialize(obj: tabs)
+//                        self.replyMessage(message: m!)
+//                    })
+//                }
+//            }
+//        } else if command == "tabs_message" {
+//            let tabMsg: TabMessage? = jsonDeserialize(json: m!.data)
+//            SFSafariApplication.getAllWindows { wins in
+//                var theWin: SFSafariWindow?
+//                var winIndex = 0
+//                for win in wins {
+//                    if tabMsg?.tab.windowId == winIndex {
+//                        theWin = win
+//                        break
+//                    }
+//                    winIndex = winIndex + 1
+//                }
+//                var theTab: SFSafariTab?
+//                theWin?.getAllTabs { tabs in
+//                    var tabIndex = 0
+//                    for tab in tabs {
+//                        if tabMsg?.tab.index == tabIndex {
+//                            theTab = tab
+//                            break
+//                        }
+//                        tabIndex = tabIndex + 1
+//                    }
+//                    theTab?.getActivePage { activePage in
+//                        activePage?.dispatchMessageToScript(withName: "arena", userInfo: ["msg": tabMsg!.obj])
+//                    }
+//                }
+//            }
+//        } else if command == "close" {
+//
+//        } else if command == "showPopover" {
+//            SFSafariApplication.getActiveWindow { win in
+//                win?.getToolbarItem(completionHandler: { item in
+//                    item?.showPopover()
+//                })
+//            }
+//        } else if command == "isPopoverOpen" {
+//            m!.responseData = popoverOpenCount > 0 ? "true" : "false"
+//            replyMessage(message: m!)
+//        } else if command == "createNewTab" {
+//            if m!.data != nil {
+//                SFSafariApplication.getActiveWindow { win in
+//                    win?.openTab(with: URL(string: m!.data!)!, makeActiveIfPossible: true, completionHandler: { _ in
+//                        // Tab opened
+//                    })
+//                }
+//            }
+//        } else if command == "reloadExtension" {
+//            webView?.reload()
+//            replyMessage(message: m!)
+//        } else if command == "copyToClipboard" {
+//            let pasteboard = NSPasteboard.general
+//            pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
+//            pasteboard.setString(m!.data ?? "", forType: NSPasteboard.PasteboardType.string)
+//            replyMessage(message: m!)
+//        } else if command == "readFromClipboard" {
+//            let pasteboard = NSPasteboard.general
+//            m?.responseData = pasteboard.pasteboardItems?.first?.string(forType: .string)
+//            replyMessage(message: m!)
+//        } else if command == "downloadFile" {
+//            if m!.data != nil {
+//                if let dlMsg: DownloadFileMessage = jsonDeserialize(json: m!.data) {
+//                    var data: Data?
+//                    if dlMsg.blobOptions?.type == "text/plain" {
+//                        data = dlMsg.blobData?.data(using: .utf8)
+//                    } else {
+//                        data = Data(base64Encoded: dlMsg.blobData!)
+//                    }
+//                    if data != nil {
+//                        let panel = NSSavePanel()
+//                        panel.canCreateDirectories = true
+//                        panel.nameFieldStringValue = dlMsg.fileName
+//                        panel.begin { response in
+//                            if response == NSApplication.ModalResponse.OK {
+//                                if let url = panel.url {
+//                                    do {
+//                                        let fileManager = FileManager.default
+//                                        if !fileManager.fileExists(atPath: url.absoluteString) {
+//                                            fileManager.createFile(atPath: url.absoluteString, contents: Data(),
+//                                                                   attributes: nil)
+//                                        }
+//                                        try data!.write(to: url)
+//                                    } catch {
+//                                        print(error)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        } else if command == "getAppPath" {
+//            SFSafariExtension.getBaseURI(completionHandler: { uri in
+//                if uri != nil {
+//                    m!.responseData = uri!.absoluteString
+//                    self.replyMessage(message: m!)
+//                }
+//            })
+//        }
     }
 
     func replyMessage(message: AppMessage) {
@@ -346,9 +369,9 @@ class AppMessage: Decodable, Encodable {
         responseError = nil
     }
 
-    var id: String
-    var command: String
-    var action: String
+    var id: String?
+    var command: String?
+    var action: String?
     var data: String?
     var responseData: String?
     var responseError: Bool?

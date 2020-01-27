@@ -16,7 +16,7 @@ const safariExtensionConfig = {
     __dirname: true,
   },
   entry: {
-    background: './src/extension/safari-extension/background.js',
+    background: './src/extension/safari-extension/background.ts',
     main: './src/extension/safari-extension/main.js',
   },
   output: {
