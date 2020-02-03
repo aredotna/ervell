@@ -1,6 +1,3 @@
-// import { SafariApp } from './safariApp'
-import { handleContextMenu } from './handleContextMenu'
-
 export class SafariApp {
   static init() {
     if ((window as any).arenaSafariAppInited) {
@@ -128,9 +125,3 @@ export class SafariApp {
     })
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  SafariApp.init()
-})
-
-document.addEventListener('contextmenu', handleContextMenu, false)

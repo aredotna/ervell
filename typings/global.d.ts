@@ -14,6 +14,7 @@ declare global {
     __APOLLO_STATE__: any
     safariAppExtension?: boolean
     webkit?: any
+    safari?: any
   }
 }
 

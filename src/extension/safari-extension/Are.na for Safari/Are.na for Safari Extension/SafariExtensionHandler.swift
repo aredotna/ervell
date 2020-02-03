@@ -39,7 +39,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     override func popoverWillShow(in _: SFSafariWindow) {
         SafariExtensionViewController.shared.popoverOpenCount += 1
         DispatchQueue.main.async {
-            self.sendMessage(msg: ["command": "reloadPopup"], sender: nil)
+            SafariExtensionViewController.shared.sendCurrentPage()
         }
     }
 
@@ -61,6 +61,18 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             print("error converting to json: \(error)")
         }
         SafariExtensionViewController.shared.replyMessage(message: newMsg)
+    }
+    
+    override func contextMenuItemSelected(withCommand command: String, in page: SFSafariPage, userInfo: [String : Any]? = nil) {
+        
+        print(userInfo ?? "No user info")
+        
+        switch command {
+        case "AddFromContextMenu":
+            return print("Add to Are.na from context menu")
+        default:
+            NSLog("No command found")
+        }
     }
 }
 

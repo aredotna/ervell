@@ -11,7 +11,7 @@ const Container = styled(Box)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 20px);
   border: 1px solid ${x => x.theme.colors.gray.regular};
 `
 
