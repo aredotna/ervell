@@ -11,8 +11,13 @@ const Container = styled(Box)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: calc(100vh - 20px);
+  min-height: 100vh;
   border: 1px solid ${x => x.theme.colors.gray.regular};
+  ${props =>
+    props.isSafari &&
+    `
+    min-height: calc(100vh - 20px);
+  `}
 `
 
 const Top = styled(Box)`
@@ -51,10 +56,12 @@ class Layout extends Component {
     history: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
     showBack: PropTypes.bool,
+    isSafari: PropTypes.bool,
   }
 
   static defaultProps = {
     showBack: false,
+    isSafari: false,
   }
 
   goBack = () => {
@@ -62,10 +69,10 @@ class Layout extends Component {
   }
 
   render() {
-    const { children, showBack } = this.props
+    const { children, showBack, isSafari } = this.props
 
     return (
-      <Container p={5} pb={0}>
+      <Container p={5} pb={0} isSafari={isSafari}>
         <Top>{showBack && <Back onClick={this.goBack} />}</Top>
         {children}
       </Container>

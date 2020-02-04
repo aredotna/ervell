@@ -69,10 +69,12 @@ class Blocks extends Component {
     context: PropTypes.object.isRequired,
     createBlock: PropTypes.func.isRequired,
     query: PropTypes.object,
+    isSafari: PropTypes.boolean,
   }
 
   static defaultProps = {
     query: null,
+    isSafari: false,
   }
 
   messenger = null
@@ -186,10 +188,11 @@ class Blocks extends Component {
       selectedChannels,
       currentPage,
     } = this.props.context
+    const { isSafari } = this.props
     const { mode } = this.state
 
     return (
-      <Layout>
+      <Layout isSafari={isSafari}>
         <Container>
           <Section mb={5}>
             {!block && currentPage && (
