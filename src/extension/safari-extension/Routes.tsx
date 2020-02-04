@@ -19,8 +19,20 @@ const Routes: React.FC<RoutesProps> = ({ isLoggedIn }) => (
 
       {isLoggedIn && (
         <React.Fragment>
-          <Route path="/edit" component={EditBlock} />
-          <Route path="/" render={() => <Blocks isSafari />} />
+          <Route path="/edit" render={() => <EditBlock isSafari />} />
+          <Route
+            path="/"
+            render={renderProps => {
+              // We manually have to check this here because the
+              // initial safari extension pathname is always
+              // randomized
+              if (renderProps.location.pathname !== '/edit') {
+                return <Blocks isSafari />
+              }
+
+              return null
+            }}
+          />
         </React.Fragment>
       )}
     </Switch>
