@@ -17,6 +17,12 @@ const Container = styled(Box).attrs({ p: 6 })`
   align-items: center;
   min-height: 100vh;
   border: 1px solid ${props => props.theme.colors.gray.regular};
+
+  ${props =>
+    props.isSafari &&
+    `
+    min-height: calc(100vh - 20px);
+  `}
 `
 
 const Bottom = styled(Box)`
@@ -53,6 +59,7 @@ const Cancel = styled(Text).attrs({
 })`
   cursor: pointer;
   text-align: center;
+  background: white;
   a:hover {
     color: ${props => props.theme.colors.gray.bold};
   }
@@ -63,6 +70,11 @@ class EditBlock extends PureComponent {
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     context: PropTypes.object.isRequired,
+    isSafari: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isSafari: false,
   }
 
   constructor(props) {
@@ -106,12 +118,13 @@ class EditBlock extends PureComponent {
   render() {
     const {
       context: { block },
+      isSafari,
     } = this.props
     const { value, title, description } = this.state
 
     return (
       <form onSubmit={this.onSave}>
-        <Container>
+        <Container isSafari={isSafari}>
           <Box
             justifyContent="center"
             alignItems="stretch"
