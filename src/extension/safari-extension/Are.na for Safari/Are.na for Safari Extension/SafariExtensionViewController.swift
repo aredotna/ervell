@@ -13,6 +13,7 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
     var webView: WKWebView!
     var initedWebView: Bool = false
     var popoverOpenCount: Int = 0
+    var contextInfo: ContextMenuData = ContextMenuData()
 
     static let shared: SafariExtensionViewController = {
         let shared = SafariExtensionViewController()
@@ -31,7 +32,7 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
         let webViewConfig = WKWebViewConfiguration()
         let bundleURL = Bundle.main.resourceURL!.absoluteURL
         let html = Bundle.main.url(forResource: "index", withExtension: "html")
-        let url = URL(string: "\(html?.absoluteString ?? "Something")?appVersion=\(version!)")
+        let url = URL(string: html!.absoluteString)
         webViewConfig.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
         webViewConfig.preferences.setValue(true, forKey: "developerExtrasEnabled")
         webViewConfig.userContentController.add(self, name: "arenaApp")
@@ -86,10 +87,13 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
         
         switch command {
         case "getCurrentPage":
-            sendCurrentPage()
+            if self.contextInfo.id == "" {
+                sendCurrentPage()
+            }
+            NSLog("Current Page \(self.contextInfo.id)")
         case "close":
-            NSLog("CLOSING")
             dismissPopover()
+            contextInfo = ContextMenuData()
             webView?.reload()
             replyMessage(message: m!)
         default:
@@ -102,7 +106,7 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
             return
         }
         let json = (jsonSerialize(obj: message) ?? "null")
-    webView.evaluateJavaScript("window.arenaSafariAppMessageReceiver(\(json));", completionHandler: nil)
+        webView.evaluateJavaScript("window.arenaSafariAppMessageReceiver(\(json));", completionHandler: nil)
     }
     
     func sendCurrentPage() {
@@ -115,7 +119,33 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
                 response.command = "app_message"
                 response.action = "currentPage"
                 response.data = jsonSerialize(obj: tabs)
+                
+                print(self.contextInfo)
+                print("sending current page")
                 self.replyMessage(message: response)
+            })
+        }
+    }
+    
+    func sendContextMenuData(contextInfo: ContextMenuData) {
+        NSLog("Getting current page")
+        let options = TabQueryOptions()
+        options.active = true
+        SFSafariApplication.getActiveWindow { win in
+            processWindowsForTabs(wins: [win!], options: options, complete: { tabs in
+                let response = AppMessage()
+                response.command = "app_message"
+                response.action = "drop"
+                response.data = jsonSerialize(obj: contextInfo)
+                self.replyMessage(message: response)
+            })
+        }
+    }
+    
+    func openPopover() {
+        SFSafariApplication.getActiveWindow { (window) in
+            window?.getToolbarItem(completionHandler: { (item) in
+                item?.showPopover()
             })
         }
     }
@@ -244,6 +274,21 @@ class AppMessage: Decodable, Encodable {
     var responseData: String?
     var responseError: Bool?
     var senderTab: Tab?
+}
+
+class ContextMenuData: Decodable, Encodable {
+    init() {
+        id = ""
+        type = ""
+        value = ""
+        
+    }
+
+    var id: String?
+    var type: String?
+    var value: String?
+    var original_source_url: String?
+    var original_source_title: String?
 }
 
 class StorageData: Decodable, Encodable {

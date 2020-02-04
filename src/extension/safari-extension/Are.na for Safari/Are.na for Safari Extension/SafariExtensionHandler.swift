@@ -69,7 +69,22 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         
         switch command {
         case "AddFromContextMenu":
-            return print("Add to Are.na from context menu")
+            DispatchQueue.main.async {
+                SafariExtensionViewController.shared.openPopover()
+                    
+                let data = ContextMenuData()
+                
+                data.type = userInfo?["type"] as? String ?? ""
+                data.id = userInfo?["id"] as? String ?? ""
+                data.value = userInfo?["value"] as? String ?? ""
+                data.original_source_title = userInfo?["original_source_title"] as? String ?? ""
+                data.original_source_url = userInfo?["original_source_url"] as? String ?? ""
+                
+                SafariExtensionViewController.shared.contextInfo = data
+                
+                return SafariExtensionViewController.shared.sendContextMenuData(contextInfo: data)
+            }
+            
         default:
             NSLog("No command found")
         }

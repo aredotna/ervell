@@ -1,6 +1,3 @@
-// import { SafariApp } from './safariApp'
-import { handleContextMenu } from './handleContextMenu'
-
 export class SafariApp {
   static init() {
     if ((window as any).arenaSafariAppInited) {
@@ -87,6 +84,13 @@ export class SafariApp {
           }
         }
 
+        if (message.action === 'drop') {
+          msg = {
+            action: 'drop',
+            value: msg,
+          }
+        }
+
         if (msg.action === 'reloadPopup') {
           console.log('should reload app')
           return window.location.reload()
@@ -132,5 +136,3 @@ export class SafariApp {
 document.addEventListener('DOMContentLoaded', () => {
   SafariApp.init()
 })
-
-document.addEventListener('contextmenu', handleContextMenu, false)
