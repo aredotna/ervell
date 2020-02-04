@@ -114,16 +114,18 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
         let options = TabQueryOptions()
         options.active = true
         SFSafariApplication.getActiveWindow { win in
-            processWindowsForTabs(wins: [win!], options: options, complete: { tabs in
-                let response = AppMessage()
-                response.command = "app_message"
-                response.action = "currentPage"
-                response.data = jsonSerialize(obj: tabs)
-                
-                print(self.contextInfo)
-                print("sending current page")
-                self.replyMessage(message: response)
-            })
+            if ((win) != nil) {
+                processWindowsForTabs(wins: [win!], options: options, complete: { tabs in
+                    let response = AppMessage()
+                    response.command = "app_message"
+                    response.action = "currentPage"
+                    response.data = jsonSerialize(obj: tabs)
+                    
+                    print(self.contextInfo)
+                    print("sending current page")
+                    self.replyMessage(message: response)
+                })
+            }
         }
     }
     
