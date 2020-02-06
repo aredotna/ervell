@@ -50,6 +50,7 @@ const Container = styled.a.attrs({
   text-decoration: none;
   break-inside: avoid;
   overflow: hidden;
+  cursor: pointer;
   ${boxMixin}
   ${channelVisibilityForegroundColor}
 
