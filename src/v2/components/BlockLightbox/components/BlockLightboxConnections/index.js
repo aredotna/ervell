@@ -11,6 +11,8 @@ import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import CompactChannel, {
   EmptyCompactChannel,
 } from 'v2/components/CompactChannel'
+import { LoadMore } from 'v2/components/BlockLightbox/components/BlockLightboxConnections/components/LoadMore'
+
 import Connect from 'v2/components/Connect'
 import BlockLightboxChannelsAlsoIn from 'v2/components/BlockLightbox/components/BlockLightboxChannelsAlsoIn'
 
@@ -120,32 +122,7 @@ export default class BlockLightboxConnections extends PureComponent {
         )}
 
         {hasMore && !(loading || loadingMore) && (
-          <EmptyCompactChannel
-            onClick={onLoadMore}
-            my={3}
-            color="utility.transparent"
-          >
-            <Box
-              width="100%"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              {/* HACK: f={4} non-breaking spaces allow us to match the height perfectly */}
-              <Text f={4}>&nbsp;</Text>
-
-              <Text
-                f={1}
-                color="gray.semiBold"
-                textAlign="center"
-                textTransform="uppercase"
-              >
-                Load more
-              </Text>
-
-              <Text f={4}>&nbsp;</Text>
-            </Box>
-          </EmptyCompactChannel>
+          <LoadMore onLoadMore={onLoadMore} />
         )}
 
         {counts && counts.channels_with_same_source > 0 && (
