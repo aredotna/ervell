@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Are.na for Safari Extension</string>
+	<string>Are.na for Safari</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -19,20 +19,11 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSExtension</key>
 	<dict>
-		<key>SFSafariContextMenu</key>
-		<array>
-			<dict>
-				<key>Command</key>
-				<string>AddFromContextMenu</string>
-				<key>Text</key>
-				<string>Add to Are.na</string>
-			</dict>
-		</array>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.Safari.extension</string>
 		<key>NSExtensionPrincipalClass</key>
@@ -50,6 +41,15 @@
 			<dict>
 				<key>Script</key>
 				<string>app/scripts/background.js</string>
+			</dict>
+		</array>
+		<key>SFSafariContextMenu</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>AddFromContextMenu</string>
+				<key>Text</key>
+				<string>Add to Are.na</string>
 			</dict>
 		</array>
 		<key>SFSafariToolbarItem</key>
@@ -74,6 +74,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 When It Changed Inc. All rights reserved.</string>
 	<key>NSHumanReadableDescription</key>
-	<string>This is a Safari Extension. You should tell us what your extension does here.</string>
+	<string>Save images, text, links, and more. </string>
 </dict>
 </plist>

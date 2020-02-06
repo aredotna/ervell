@@ -7,39 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5016DD523E8E078002DA58B /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = C5016DD423E8E078002DA58B /* script.js */; };
 		C509DE1323DA301D002E6D48 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C509DE1223DA301D002E6D48 /* SafariExtensionViewController.xib */; };
 		C5DEE75223D54DF70097C8CA /* Are_na_for_Safari.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE75123D54DF70097C8CA /* Are_na_for_Safari.entitlements */; };
 		C5DEE75423D54DF70097C8CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE75323D54DF70097C8CA /* AppDelegate.swift */; };
 		C5DEE75723D54DF70097C8CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE75523D54DF70097C8CA /* Main.storyboard */; };
 		C5DEE75923D54DF70097C8CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE75823D54DF70097C8CA /* ViewController.swift */; };
 		C5DEE75B23D54DFC0097C8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE75A23D54DFC0097C8CA /* Assets.xcassets */; };
-		C5DEE76623D54DFC0097C8CA /* Are_na_for_SafariTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE76523D54DFC0097C8CA /* Are_na_for_SafariTests.swift */; };
-		C5DEE77123D54DFC0097C8CA /* Are_na_for_SafariUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE77023D54DFC0097C8CA /* Are_na_for_SafariUITests.swift */; };
 		C5DEE77823D54DFC0097C8CA /* Are.na for Safari Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C5DEE77723D54DFC0097C8CA /* Are.na for Safari Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C5DEE77D23D54DFC0097C8CA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5DEE77C23D54DFC0097C8CA /* Cocoa.framework */; };
 		C5DEE78023D54DFC0097C8CA /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE77F23D54DFC0097C8CA /* SafariExtensionHandler.swift */; };
 		C5DEE78223D54DFC0097C8CA /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEE78123D54DFC0097C8CA /* SafariExtensionViewController.swift */; };
 		C5DEE78A23D54DFC0097C8CA /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE78923D54DFC0097C8CA /* ToolbarItemIcon.pdf */; };
 		C5DEE79E23D55C350097C8CA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE79D23D55C350097C8CA /* index.html */; };
-		C5DEE7A523D646DF0097C8CA /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE7A323D646DF0097C8CA /* main.js */; };
-		C5DEE7A623D646DF0097C8CA /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE7A423D646DF0097C8CA /* background.js */; };
+		C5F8CD7823E9EDE100E498F0 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE7A423D646DF0097C8CA /* background.js */; };
+		C5F8CD7923E9EDE100E498F0 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = C5DEE7A323D646DF0097C8CA /* main.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C5DEE76223D54DFC0097C8CA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C5DEE74623D54DF60097C8CA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C5DEE74D23D54DF60097C8CA;
-			remoteInfo = "Are.na for Safari";
-		};
-		C5DEE76D23D54DFC0097C8CA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C5DEE74623D54DF60097C8CA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C5DEE74D23D54DF60097C8CA;
-			remoteInfo = "Are.na for Safari";
-		};
 		C5DEE77923D54DFC0097C8CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C5DEE74623D54DF60097C8CA /* Project object */;
@@ -64,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C5016DD423E8E078002DA58B /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		C509DE1223DA301D002E6D48 /* SafariExtensionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		C5DEE74E23D54DF70097C8CA /* Are.na for Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Are.na for Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DEE75123D54DF70097C8CA /* Are_na_for_Safari.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Are_na_for_Safari.entitlements; sourceTree = "<group>"; };
@@ -72,12 +58,6 @@
 		C5DEE75823D54DF70097C8CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C5DEE75A23D54DFC0097C8CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5DEE75C23D54DFC0097C8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C5DEE76123D54DFC0097C8CA /* Are.na for SafariTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Are.na for SafariTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5DEE76523D54DFC0097C8CA /* Are_na_for_SafariTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Are_na_for_SafariTests.swift; sourceTree = "<group>"; };
-		C5DEE76723D54DFC0097C8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C5DEE76C23D54DFC0097C8CA /* Are.na for SafariUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Are.na for SafariUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5DEE77023D54DFC0097C8CA /* Are_na_for_SafariUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Are_na_for_SafariUITests.swift; sourceTree = "<group>"; };
-		C5DEE77223D54DFC0097C8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5DEE77723D54DFC0097C8CA /* Are.na for Safari Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Are.na for Safari Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DEE77C23D54DFC0097C8CA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C5DEE77F23D54DFC0097C8CA /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
@@ -92,20 +72,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		C5DEE74B23D54DF60097C8CA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5DEE75E23D54DFC0097C8CA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5DEE76923D54DFC0097C8CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,8 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				C5DEE75023D54DF70097C8CA /* Are.na for Safari */,
-				C5DEE76423D54DFC0097C8CA /* Are.na for SafariTests */,
-				C5DEE76F23D54DFC0097C8CA /* Are.na for SafariUITests */,
 				C5DEE77E23D54DFC0097C8CA /* Are.na for Safari Extension */,
 				C5DEE77B23D54DFC0097C8CA /* Frameworks */,
 				C5DEE74F23D54DF70097C8CA /* Products */,
@@ -139,8 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				C5DEE74E23D54DF70097C8CA /* Are.na for Safari.app */,
-				C5DEE76123D54DFC0097C8CA /* Are.na for SafariTests.xctest */,
-				C5DEE76C23D54DFC0097C8CA /* Are.na for SafariUITests.xctest */,
 				C5DEE77723D54DFC0097C8CA /* Are.na for Safari Extension.appex */,
 			);
 			name = Products;
@@ -157,24 +119,6 @@
 				C5DEE75C23D54DFC0097C8CA /* Info.plist */,
 			);
 			path = "Are.na for Safari";
-			sourceTree = "<group>";
-		};
-		C5DEE76423D54DFC0097C8CA /* Are.na for SafariTests */ = {
-			isa = PBXGroup;
-			children = (
-				C5DEE76523D54DFC0097C8CA /* Are_na_for_SafariTests.swift */,
-				C5DEE76723D54DFC0097C8CA /* Info.plist */,
-			);
-			path = "Are.na for SafariTests";
-			sourceTree = "<group>";
-		};
-		C5DEE76F23D54DFC0097C8CA /* Are.na for SafariUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C5DEE77023D54DFC0097C8CA /* Are_na_for_SafariUITests.swift */,
-				C5DEE77223D54DFC0097C8CA /* Info.plist */,
-			);
-			path = "Are.na for SafariUITests";
 			sourceTree = "<group>";
 		};
 		C5DEE77B23D54DFC0097C8CA /* Frameworks */ = {
@@ -195,6 +139,7 @@
 				C5DEE78623D54DFC0097C8CA /* Info.plist */,
 				C5DEE78923D54DFC0097C8CA /* ToolbarItemIcon.pdf */,
 				C5DEE78B23D54DFC0097C8CA /* Are_na_for_Safari_Extension.entitlements */,
+				C5016DD423E8E078002DA58B /* script.js */,
 			);
 			path = "Are.na for Safari Extension";
 			sourceTree = "<group>";
@@ -247,42 +192,6 @@
 			productReference = C5DEE74E23D54DF70097C8CA /* Are.na for Safari.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C5DEE76023D54DFC0097C8CA /* Are.na for SafariTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C5DEE79523D54DFC0097C8CA /* Build configuration list for PBXNativeTarget "Are.na for SafariTests" */;
-			buildPhases = (
-				C5DEE75D23D54DFC0097C8CA /* Sources */,
-				C5DEE75E23D54DFC0097C8CA /* Frameworks */,
-				C5DEE75F23D54DFC0097C8CA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C5DEE76323D54DFC0097C8CA /* PBXTargetDependency */,
-			);
-			name = "Are.na for SafariTests";
-			productName = "Are.na for SafariTests";
-			productReference = C5DEE76123D54DFC0097C8CA /* Are.na for SafariTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		C5DEE76B23D54DFC0097C8CA /* Are.na for SafariUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C5DEE79823D54DFC0097C8CA /* Build configuration list for PBXNativeTarget "Are.na for SafariUITests" */;
-			buildPhases = (
-				C5DEE76823D54DFC0097C8CA /* Sources */,
-				C5DEE76923D54DFC0097C8CA /* Frameworks */,
-				C5DEE76A23D54DFC0097C8CA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C5DEE76E23D54DFC0097C8CA /* PBXTargetDependency */,
-			);
-			name = "Are.na for SafariUITests";
-			productName = "Are.na for SafariUITests";
-			productReference = C5DEE76C23D54DFC0097C8CA /* Are.na for SafariUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		C5DEE77623D54DFC0097C8CA /* Are.na for Safari Extension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5DEE78E23D54DFC0097C8CA /* Build configuration list for PBXNativeTarget "Are.na for Safari Extension" */;
@@ -313,14 +222,6 @@
 					C5DEE74D23D54DF60097C8CA = {
 						CreatedOnToolsVersion = 11.3;
 					};
-					C5DEE76023D54DFC0097C8CA = {
-						CreatedOnToolsVersion = 11.3;
-						TestTargetID = C5DEE74D23D54DF60097C8CA;
-					};
-					C5DEE76B23D54DFC0097C8CA = {
-						CreatedOnToolsVersion = 11.3;
-						TestTargetID = C5DEE74D23D54DF60097C8CA;
-					};
 					C5DEE77623D54DFC0097C8CA = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -340,8 +241,6 @@
 			projectRoot = "";
 			targets = (
 				C5DEE74D23D54DF60097C8CA /* Are.na for Safari */,
-				C5DEE76023D54DFC0097C8CA /* Are.na for SafariTests */,
-				C5DEE76B23D54DFC0097C8CA /* Are.na for SafariUITests */,
 				C5DEE77623D54DFC0097C8CA /* Are.na for Safari Extension */,
 			);
 		};
@@ -358,29 +257,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5DEE75F23D54DFC0097C8CA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5DEE76A23D54DFC0097C8CA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C5DEE77523D54DFC0097C8CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5F8CD7823E9EDE100E498F0 /* background.js in Resources */,
+				C5F8CD7923E9EDE100E498F0 /* main.js in Resources */,
 				C509DE1323DA301D002E6D48 /* SafariExtensionViewController.xib in Resources */,
+				C5016DD523E8E078002DA58B /* script.js in Resources */,
 				C5DEE78A23D54DFC0097C8CA /* ToolbarItemIcon.pdf in Resources */,
 				C5DEE79E23D55C350097C8CA /* index.html in Resources */,
-				C5DEE7A623D646DF0097C8CA /* background.js in Resources */,
-				C5DEE7A523D646DF0097C8CA /* main.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,22 +282,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5DEE75D23D54DFC0097C8CA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5DEE76623D54DFC0097C8CA /* Are_na_for_SafariTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5DEE76823D54DFC0097C8CA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5DEE77123D54DFC0097C8CA /* Are_na_for_SafariUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C5DEE77323D54DFC0097C8CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -424,16 +294,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C5DEE76323D54DFC0097C8CA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C5DEE74D23D54DF60097C8CA /* Are.na for Safari */;
-			targetProxy = C5DEE76223D54DFC0097C8CA /* PBXContainerItemProxy */;
-		};
-		C5DEE76E23D54DFC0097C8CA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C5DEE74D23D54DF60097C8CA /* Are.na for Safari */;
-			targetProxy = C5DEE76D23D54DFC0097C8CA /* PBXContainerItemProxy */;
-		};
 		C5DEE77A23D54DFC0097C8CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C5DEE77623D54DFC0097C8CA /* Are.na for Safari Extension */;
@@ -571,6 +431,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Are.na for Safari Extension/Are_na_for_Safari_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari Extension/Info.plist";
@@ -579,7 +440,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-Safari-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari.Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -591,6 +452,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Are.na for Safari Extension/Are_na_for_Safari_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari Extension/Info.plist";
@@ -599,7 +461,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-Safari-Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari.Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -612,8 +474,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Are.na for Safari/Are_na_for_Safari.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari/Info.plist";
@@ -621,7 +485,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-Safari";
+				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -633,8 +497,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Are.na for Safari/Are_na_for_Safari.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari/Info.plist";
@@ -642,93 +508,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-Safari";
+				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		C5DEE79623D54DFC0097C8CA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RCL6FRSRW9;
-				INFOPLIST_FILE = "Are.na for SafariTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-SafariTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Are.na for Safari.app/Contents/MacOS/Are.na for Safari";
-			};
-			name = Debug;
-		};
-		C5DEE79723D54DFC0097C8CA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RCL6FRSRW9;
-				INFOPLIST_FILE = "Are.na for SafariTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-SafariTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Are.na for Safari.app/Contents/MacOS/Are.na for Safari";
-			};
-			name = Release;
-		};
-		C5DEE79923D54DFC0097C8CA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RCL6FRSRW9;
-				INFOPLIST_FILE = "Are.na for SafariUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-SafariUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "Are.na for Safari";
-			};
-			name = Debug;
-		};
-		C5DEE79A23D54DFC0097C8CA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RCL6FRSRW9;
-				INFOPLIST_FILE = "Are.na for SafariUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "are.na.Are-na-for-SafariUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "Are.na for Safari";
 			};
 			name = Release;
 		};
@@ -758,24 +540,6 @@
 			buildConfigurations = (
 				C5DEE79323D54DFC0097C8CA /* Debug */,
 				C5DEE79423D54DFC0097C8CA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C5DEE79523D54DFC0097C8CA /* Build configuration list for PBXNativeTarget "Are.na for SafariTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C5DEE79623D54DFC0097C8CA /* Debug */,
-				C5DEE79723D54DFC0097C8CA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C5DEE79823D54DFC0097C8CA /* Build configuration list for PBXNativeTarget "Are.na for SafariUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C5DEE79923D54DFC0097C8CA /* Debug */,
-				C5DEE79A23D54DFC0097C8CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
