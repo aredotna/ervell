@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan/index.js'
-import TickerTapeHover from 'v2/components/UI/TickerTapeHover/index.js'
+import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan'
+import TickerTapeHover from 'v2/components/UI/TickerTapeHover'
 
-import { inputPadding } from 'v2/components/UI/Inputs/index.js'
-import { baseMixin as baseTextMixin } from 'v2/components/UI/Text/index.js'
-import Badge from 'v2/components/UI/Badge/index.js'
-import Box from 'v2/components/UI/Box/index.js'
-import BorderedLock from 'v2/components/UI/BorderedLock/index.js'
+import { inputPadding } from 'v2/components/UI/Inputs'
+import { baseMixin as baseTextMixin } from 'v2/components/UI/Text'
+import Badge from 'v2/components/UI/Badge'
+import Box from 'v2/components/UI/Box'
+import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 import { onConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
@@ -46,6 +46,7 @@ const Container = styled.div.attrs({
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+  outline: none;
 
   &:hover {
     z-index: 1;
@@ -142,12 +143,7 @@ export const SelectableChannel: React.FC<SelectableChannelProps> = ({
   } = channel
 
   return (
-    <Container
-      onClick={toggleSelection}
-      data-selected={selected}
-      onMouseEnter={this.handleMouseEnter}
-      onMouseLeave={this.handleMouseLeave}
-    >
+    <Container onClick={toggleSelection} data-selected={selected}>
       <HoverableInner>
         {name}
 

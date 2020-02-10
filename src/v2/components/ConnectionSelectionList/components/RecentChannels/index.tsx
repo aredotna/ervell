@@ -33,6 +33,12 @@ export const RecentChannels: React.FC<RecentChannelsProps> = ({
     return <Indicator label="Loading..." {...rest} />
   }
 
+  console.log('data', data)
+
+  if (!data) {
+    return null
+  }
+
   return (
     <>
       <ChannelsList

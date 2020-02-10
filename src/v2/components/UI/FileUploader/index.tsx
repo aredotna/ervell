@@ -16,10 +16,6 @@ interface Props {
   onError?: (err: Error) => any
 }
 
-interface Data {
-  me: UploadPolicy
-}
-
 const FileUploader: React.FC<Props> = ({
   files,
   onComplete = () => {},
@@ -46,7 +42,7 @@ const FileUploader: React.FC<Props> = ({
   )
 
   return (
-    <Query<Data> query={uploadPolicyQuery} onError={onError}>
+    <Query<UploadPolicy> query={uploadPolicyQuery} onError={onError}>
       {({ data, error, loading }) => {
         if (error || loading) return <div />
 

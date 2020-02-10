@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import compose from 'lodash.flowright'
 import styled from 'styled-components'
 
-import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
+import { ConnectionSelectionList } from 'v2/components/ConnectionSelectionList'
 import { ConnectCTA } from './components/ConnectCTA'
 
 import createConnectionMutation from 'v2/components/ConnectionSelection/mutations/createConnection'
