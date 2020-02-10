@@ -12,13 +12,13 @@ const Container = styled.div``
 interface ChannelsListProps {
   channels: Channel[]
   onConnectionSelection?: onConnectionSelectionType
-  selectedChannels: Channel[]
+  selectedChannels?: Channel[]
 }
 
 export const ChannelsList: React.FC<ChannelsListProps> = ({
   channels,
   onConnectionSelection,
-  selectedChannels,
+  selectedChannels = [],
   ...rest
 }) => {
   return (
