@@ -3,17 +3,17 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: UserInfoQuery
+// GraphQL query operation: OnboardingUserInfoQuery
 // ====================================================
 
-export interface UserInfoQuery_me {
+export interface OnboardingUserInfoQuery_me {
   __typename: "Me";
-  name: string | null;
+  slug: string | null;
 }
 
-export interface UserInfoQuery {
+export interface OnboardingUserInfoQuery {
   /**
    * The current logged in user
    */
-  me: UserInfoQuery_me | null;
+  me: OnboardingUserInfoQuery_me | null;
 }
