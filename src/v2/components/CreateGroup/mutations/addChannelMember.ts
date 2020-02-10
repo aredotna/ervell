@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import manageCollaboratorsFragment from 'v2/components/ManageCollaborators/fragments/manageCollaborators'
 
 export default gql`
-  mutation addChannelMemberMutation(
+  mutation addChannelMemberGroupMutation(
     $channel_id: ID!
     $member_id: ID!
     $member_type: MemberTypes

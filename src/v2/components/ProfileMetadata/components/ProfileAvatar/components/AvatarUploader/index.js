@@ -5,11 +5,9 @@ import axios from 'axios'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import uploadPolicyQuery from 'v2/components/ProfileMetadata/components/ProfileAvatar/queries/uploadPolicy'
+import { uploadPolicyQuery, uploadPolicyFragment } from 'v2/util/uploader'
 
 import updateGroupAvatarMutation from 'v2/components/ProfileMetadata/components/ProfileAvatar/mutations/updateGroupAvatar'
-
-import profileAvatarFragment from 'v2/components/ProfileMetadata/components/ProfileAvatar/fragments/profileAvatar'
 
 import Box from 'v2/components/UI/Box'
 import GenericButton from 'v2/components/UI/GenericButton'
@@ -45,7 +43,7 @@ class AvatarUploader extends PureComponent {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
     }).isRequired,
-    identifiable: propType(profileAvatarFragment).isRequired,
+    identifiable: propType(uploadPolicyFragment).isRequired,
     updateGroupAvatar: PropTypes.func.isRequired,
     startPolling: PropTypes.func.isRequired,
     stopPolling: PropTypes.func.isRequired,

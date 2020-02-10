@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 
 import { UploadPolicy } from '__generated__/UploadPolicy'
 
-import uploadPolicyQuery from 'v2/components/UI/FileUploader/queries/uploadPolicy'
+import { uploadPolicyQuery } from 'v2/util/uploader'
 
 import Box from 'v2/components/UI/Box'
 import { FileUpload } from 'v2/components/UI/FileUpload'

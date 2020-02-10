@@ -18,7 +18,7 @@ import {
 
 import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
-import UPLOAD_POLICY_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/queries/policy'
+import { uploadPolicyQuery as UPLOAD_POLICY_QUERY } from 'v2/util/uploader'
 import BLOCK_IMAGE_URL_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/queries/blockImageUrl'
 import UPDATE_BLOCK_THUMBNAIL_MUTATION from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/mutations/changeThumbnail'
 
@@ -154,9 +154,9 @@ interface BlockChangeThumbnailContainerProps {
   block: Block
 }
 
-const BlockChangeThumbnailContainer: React.FC<
-  BlockChangeThumbnailContainerProps
-> = ({ block }) => {
+const BlockChangeThumbnailContainer: React.FC<BlockChangeThumbnailContainerProps> = ({
+  block,
+}) => {
   return (
     <Query<Data> query={UPLOAD_POLICY_QUERY}>
       {({ loading, error, data }) => {

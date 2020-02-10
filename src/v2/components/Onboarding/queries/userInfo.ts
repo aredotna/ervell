@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query UserInfoQuery {
+  query OnboardingUserInfoQuery {
     me {
       __typename
       slug

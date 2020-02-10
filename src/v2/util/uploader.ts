@@ -1,4 +1,5 @@
 import axios from 'axios'
+import gql from 'graphql-tag'
 
 export interface S3UploadPolicy {
   key: string
@@ -9,6 +10,35 @@ export interface S3UploadPolicy {
   signature: string
   bucket: string
 }
+
+export const uploadPolicyFragment = gql`
+  fragment AvatarUploader on Me {
+    __typename
+    id
+    policy {
+      __typename
+      AWSAccessKeyId
+      acl
+      bucket
+      expires
+      key
+      policy
+      signature
+      success_action_status
+    }
+  }
+`
+
+export const uploadPolicyQuery = gql`
+  query UploadPolicy {
+    me {
+      __typename
+      id
+      ...AvatarUploader
+    }
+  }
+  ${uploadPolicyFragment}
+`
 
 export const buildFormDataFromFile = ({
   file,
