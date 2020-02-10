@@ -122,13 +122,13 @@ const GroupBadge = styled(Badge)`
 interface SelectableChannelProps {
   onSelection?: onConnectionSelectionType
   channel: Channel
-  isSelected: boolean
+  isSelected?: boolean
 }
 
 export const SelectableChannel: React.FC<SelectableChannelProps> = ({
   channel,
   onSelection,
-  isSelected,
+  isSelected = false,
 }) => {
   const [selected, setSelected] = useState(isSelected)
 
