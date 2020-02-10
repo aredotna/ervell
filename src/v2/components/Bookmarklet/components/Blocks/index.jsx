@@ -191,8 +191,6 @@ class Blocks extends Component {
     const { isSafari } = this.props
     const { mode } = this.state
 
-    console.log('selectedChannels', selectedChannels)
-
     return (
       <Layout isSafari={isSafari}>
         <Container>
@@ -215,6 +213,7 @@ class Blocks extends Component {
 
               <ConnectionSelectionList
                 onConnectionSelection={this.handleConnectionSelect}
+                selectedChannels={selectedChannels}
               />
             </ConnectContainer>
           </Section>

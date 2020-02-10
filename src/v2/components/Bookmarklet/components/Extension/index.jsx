@@ -81,14 +81,14 @@ class Extension extends Component {
     }
   }
 
-  selectChannel = channelId => {
+  selectChannel = channel => {
     this.setState({
-      selectedChannels: [...this.state.selectedChannels, channelId],
+      selectedChannels: [...this.state.selectedChannels, channel],
     })
   }
 
-  unselectChannel = channelId => {
-    const selectedChannels = without(this.state.selectedChannels, channelId)
+  unselectChannel = channel => {
+    const selectedChannels = without(this.state.selectedChannels, channel)
     this.setState({ selectedChannels })
   }
 

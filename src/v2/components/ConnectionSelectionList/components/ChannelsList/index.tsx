@@ -12,24 +12,31 @@ const Container = styled.div``
 interface ChannelsListProps {
   channels: Channel[]
   onConnectionSelection?: onConnectionSelectionType
+  selectedChannels: Channel[]
 }
 
 export const ChannelsList: React.FC<ChannelsListProps> = ({
   channels,
   onConnectionSelection,
+  selectedChannels,
   ...rest
 }) => {
   return (
     <Container {...rest}>
       {channels.length === 0 && <ListButton disabled>Nothing yet.</ListButton>}
 
-      {channels.map(channel => (
-        <SelectableChannel
-          key={channel.id}
-          channel={channel}
-          onSelection={onConnectionSelection}
-        />
-      ))}
+      {channels.map(channel => {
+        const isSelected = selectedChannels.find(c => c.id === channel.id)
+
+        return (
+          <SelectableChannel
+            isSelected={!!isSelected}
+            key={channel.id}
+            channel={channel}
+            onSelection={onConnectionSelection}
+          />
+        )
+      })}
     </Container>
   )
 }

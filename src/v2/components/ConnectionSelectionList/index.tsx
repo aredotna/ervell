@@ -55,11 +55,13 @@ export type onConnectionSelectionType = (
 export interface ConnectionSelectionListProps {
   isOutlined?: boolean
   onConnectionSelection?: onConnectionSelectionType
+  selectedChannels?: Channel[]
 }
 
 export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = ({
   isOutlined = true,
   onConnectionSelection = () => {},
+  selectedChannels = [],
 }) => {
   const [debouncedQuery, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'resting'>('resting')
@@ -86,6 +88,7 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
           <OutlinedRecentChannels
             isOutlined={isOutlined}
             onConnectionSelection={onConnectionSelection}
+            selectedChannels={selectedChannels}
           />
         </>
       )}
