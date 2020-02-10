@@ -20,13 +20,6 @@ import extensionData from 'extension/src/apollo/extensionData'
 
 const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
 
-console.log(
-  'process.env.GRAPHQL_ENDPOINT',
-  process.env.GRAPHQL_ENDPOINT,
-  'process.env',
-  process.env
-)
-
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
