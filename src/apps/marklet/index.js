@@ -18,7 +18,6 @@ const sendAsset = asset => (req, res) => {
 
   return res.sendFile(asset, options, err => {
     if (err) {
-      console.log('Error sending bookmarklet:', err)
       res.status(err.status).end()
     }
   })

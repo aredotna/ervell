@@ -2952,6 +2952,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/safari-extension-content@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@types/safari-extension-content/-/safari-extension-content-0.0.14.tgz#638e16d1ad0c2fc8c58e3f22913e61671c14f414"
+  integrity sha1-Y44W0a0ML8jFjj8ikT5hZxwU9BQ=
+
 "@types/serve-static@*":
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.1.tgz#1d2801fa635d274cd97d4ec07e26b21b44127492"

@@ -12,6 +12,9 @@ declare global {
   interface Window {
     __APOLLO_CLIENT__: any
     __APOLLO_STATE__: any
+    safariAppExtension?: boolean
+    webkit?: any
+    safari?: any
   }
 
   interface Document {

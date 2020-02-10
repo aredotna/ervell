@@ -1,38 +1,42 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 import ExtensionLogin from 'extension/src/components/ExtensionLogin'
 import Blocks from 'v2/components/Bookmarklet/components/Blocks'
 import EditBlock from 'v2/components/Bookmarklet/components/EditBlock'
 import Extension from 'v2/components/Bookmarklet/components/Extension'
 
-import parseRoute from 'v2/util/parseRoute'
 import withLoginStatus from 'v2/hocs/WithLoginStatus'
 
-const Routes = ({ isLoggedIn }) => (
+interface RoutesProps {
+  isLoggedIn: boolean
+}
+
+const Routes: React.FC<RoutesProps> = ({ isLoggedIn }) => (
   <Extension>
     <Switch>
       {!isLoggedIn && <Route path="/" component={ExtensionLogin} />}
 
       {isLoggedIn && (
         <React.Fragment>
-          <Route path="/edit" component={EditBlock} />
+          <Route path="/edit" render={() => <EditBlock isSafari />} />
           <Route
-            exact
-            path="/index.html"
-            render={parseRoute(({ query }) => (
-              <Blocks query={query} />
-            ))}
+            path="/"
+            render={renderProps => {
+              // We manually have to check this here because the
+              // initial safari extension pathname is always
+              // randomized
+              if (renderProps.location.pathname !== '/edit') {
+                return <Blocks isSafari />
+              }
+
+              return null
+            }}
           />
         </React.Fragment>
       )}
     </Switch>
   </Extension>
 )
-
-Routes.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-}
 
 export default withLoginStatus(Routes)
