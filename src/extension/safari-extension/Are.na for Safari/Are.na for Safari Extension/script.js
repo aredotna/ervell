@@ -17,9 +17,9 @@ function handleContextMenu(event) {
   var extraData = {}
 
   while (
-    target != null &&
-    target.nodeType == Node.ELEMENT_NODE &&
-    target.nodeName.toLowerCase() != 'a'
+    target !== null &&
+    target.nodeType === Node.ELEMENT_NODE &&
+    target.nodeName.toLowerCase() !== 'a'
   ) {
     target = target.parentNode
   }
