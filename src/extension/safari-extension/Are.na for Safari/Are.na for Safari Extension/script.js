@@ -19,7 +19,8 @@ function handleContextMenu(event) {
   while (
     target !== null &&
     target.nodeType === Node.ELEMENT_NODE &&
-    target.nodeName.toLowerCase() !== 'a'
+    target.nodeName.toLowerCase() !== 'a' &&
+    target.nodeName.toLowerCase() !== 'img'
   ) {
     target = target.parentNode
   }
