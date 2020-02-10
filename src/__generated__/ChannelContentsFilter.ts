@@ -9,6 +9,8 @@
 export interface ChannelContentsFilter_counts {
   __typename: "ChannelCounts";
   contents: number | null;
+  blocks: number | null;
+  channels: number | null;
 }
 
 export interface ChannelContentsFilter {
