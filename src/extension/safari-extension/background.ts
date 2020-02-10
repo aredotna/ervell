@@ -112,9 +112,9 @@ export class SafariApp {
       }
     } else if (
       message.id != null &&
-      (window as any).arenaSafariAppRequests.has(message.id)
+      window.arenaSafariAppRequests.has(message.id)
     ) {
-      const p = (window as any).arenaSafariAppRequests.get(message.id)
+      const p = window.arenaSafariAppRequests.get(message.id)
       p.resolve(message.responseData)
       window.arenaSafariAppRequests.delete(message.id)
     }
@@ -122,7 +122,7 @@ export class SafariApp {
 
   private static cleanupOldRequests() {
     const removeIds: string[] = []
-    ;((window as any).arenaSafariAppRequests as Map<
+    ;(window.arenaSafariAppRequests as Map<
       string,
       { resolve: (value?: unknown) => void; timeoutDate: Date }
     >).forEach((v, key) => {

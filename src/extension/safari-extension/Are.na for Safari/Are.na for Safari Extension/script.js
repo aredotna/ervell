@@ -58,5 +58,6 @@ function handleContextMenu(event) {
       ? { ...data, ...extraData }
       : { ...data, ...extraData, ...sourceData }
 
+  // eslint-disable-next-line no-undef
   safari.extension.setContextMenuEventUserInfo(event, messageData)
 }
