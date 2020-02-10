@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import channelMetadataFragment from 'v2/components/ChannelMetadata/fragments/channelMetadata'
 
 export default gql`
-  mutation createChannelMutation(
+  mutation createOnboardingChannelMutation(
     $title: String!
     $visibility: ChannelVisibility = PRIVATE
   ) {

@@ -6,7 +6,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import uploadPolicyQuery from 'v2/components/CustomBadgeUploader/queries/uploadPolicy'
+import { uploadPolicyQuery } from 'v2/util/uploader'
 import customBadgeQuery from 'v2/components/CustomBadgeUploader/queries/customBadge'
 
 import updateCustomBadgeMutation from 'v2/components/CustomBadgeUploader/mutations/updateCustomBadge'

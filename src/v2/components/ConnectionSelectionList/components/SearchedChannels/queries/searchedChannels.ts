@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel'
 
 export default gql`
-  query RecentChannelsQuery($query: String!) {
+  query SearchedChannelsQuery($query: String!) {
     me {
       __typename
       id
