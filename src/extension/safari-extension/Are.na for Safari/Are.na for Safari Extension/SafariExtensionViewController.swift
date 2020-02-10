@@ -112,7 +112,7 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
         let options = TabQueryOptions()
         options.active = true
         SFSafariApplication.getActiveWindow { win in
-            if ((win) != nil) {
+            if (win != nil) {
                 processWindowsForTabs(wins: [win!], options: options, complete: { tabs in
                     let response = AppMessage()
                     response.command = "app_message"
