@@ -90,7 +90,6 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
             if self.contextInfo.id == "" {
                 sendCurrentPage()
             }
-            NSLog("Current Page \(self.contextInfo.id)")
         case "close":
             dismissPopover()
             contextInfo = ContextMenuData()
@@ -110,7 +109,6 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
     }
     
     func sendCurrentPage() {
-        NSLog("Getting current page")
         let options = TabQueryOptions()
         options.active = true
         SFSafariApplication.getActiveWindow { win in
@@ -130,7 +128,6 @@ class SafariExtensionViewController: SFSafariExtensionViewController, WKScriptMe
     }
     
     func sendContextMenuData(contextInfo: ContextMenuData) {
-        NSLog("Getting current page")
         let options = TabQueryOptions()
         options.active = true
         SFSafariApplication.getActiveWindow { win in
