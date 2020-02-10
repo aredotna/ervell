@@ -6,28 +6,24 @@ import { ChannelsList } from 'v2/components/ConnectionSelectionList/components/C
 
 import recentChannelsQuery from 'v2/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels'
 
-import {
-  RecentChannelsQuery,
-  RecentChannelsQueryVariables,
-} from '__generated__/RecentChannelsQuery'
-import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
+import { RecentChannelsQuery } from '__generated__/RecentChannelsQuery'
+import { onConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
 
-interface RecentChannelsContainerProps {
+interface RecentChannelsProps {
   isOutlined: boolean
   cursor: number
-  onConnectionSelection?: (isSelected: boolean, channel: Channel) => void
+  onConnectionSelection?: onConnectionSelectionType
 }
 
-export const RecentChannelsContainer: React.FC<RecentChannelsContainerProps> = ({
+export const RecentChannels: React.FC<RecentChannelsProps> = ({
   isOutlined,
   cursor,
   onConnectionSelection,
   ...rest
 }) => {
-  const { data, loading, error } = useQuery<
-    RecentChannelsQuery,
-    RecentChannelsQueryVariables
-  >(recentChannelsQuery)
+  const { data, loading, error } = useQuery<RecentChannelsQuery>(
+    recentChannelsQuery
+  )
 
   if (error) {
     return <Indicator label="Error" {...rest} />
@@ -40,7 +36,7 @@ export const RecentChannelsContainer: React.FC<RecentChannelsContainerProps> = (
   return (
     <>
       <ChannelsList
-        channels={data.me}
+        channels={data.me.recent_channels}
         onConnectionSelection={onConnectionSelection}
       />
     </>

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { SelectableChannel } from 'v2/components/ConnectionSelectionList/components/SelectableChannel'
 import ListButton from 'v2/components/ConnectionSelectionList/components/ListButton'
+import { onConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
 
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 
@@ -10,7 +11,7 @@ const Container = styled.div``
 
 interface ChannelsListProps {
   channels: Channel[]
-  onConnectionSelection?: (isSelected: boolean, channel: Channel) => void
+  onConnectionSelection?: onConnectionSelectionType
 }
 
 export const ChannelsList: React.FC<ChannelsListProps> = ({
