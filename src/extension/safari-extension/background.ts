@@ -1,19 +1,23 @@
+declare const window: any
+
 export class SafariApp {
   static init() {
-    if ((window as any).arenaSafariAppInited) {
+    if (window.arenaSafariAppInited) {
       return
     }
-    ;(window as any).arenaSafariAppInited = true
+    window.arenaSafariAppInited = true
     if (window.safariAppExtension) {
-      ;(window as any).arenaSafariAppRequests = new Map<
+      window.arenaSafariAppRequests = new Map<
         string,
         { resolve: (value?: unknown) => void; timeoutDate: Date }
       >()
-      ;(window as any).arenaSafariAppMessageListeners = new Map<
+
+      window.arenaSafariAppMessageListeners = new Map<
         string,
         (message: any, sender: any, response: any) => void
       >()
-      ;(window as any).arenaSafariAppMessageReceiver = (message: any) => {
+
+      window.arenaSafariAppMessageReceiver = (message: any) => {
         SafariApp.receiveMessageFromApp(message)
       }
       setInterval(() => SafariApp.cleanupOldRequests(), 5 * 60000) // every 5 mins
@@ -34,7 +38,7 @@ export class SafariApp {
         now.getTime().toString() +
         '_' +
         Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
-      ;(window as any).webkit.messageHandlers.arenaApp.postMessage(
+      window.webkit.messageHandlers.arenaApp.postMessage(
         JSON.stringify({
           id: messageId,
           command: command,
@@ -45,7 +49,7 @@ export class SafariApp {
       if (resolveNow) {
         resolve()
       } else {
-        ;(window as any).arenaSafariAppRequests.set(messageId, {
+        window.arenaSafariAppRequests.set(messageId, {
           resolve: resolve,
           timeoutDate: new Date(now.getTime() + 5 * 60000),
         })
@@ -57,11 +61,11 @@ export class SafariApp {
     name: string,
     callback: (message: any, sender: any, response: any) => void
   ) {
-    ;(window as any).arenaSafariAppMessageListeners.set(name, callback)
+    window.arenaSafariAppMessageListeners.set(name, callback)
   }
 
   static sendMessageToListeners(message: any, sender: any, response: any) {
-    ;(window as any).arenaSafariAppMessageListeners.forEach((f: any) =>
+    window.arenaSafariAppMessageListeners.forEach((f: any) =>
       f(message, sender, response)
     )
   }
@@ -76,7 +80,7 @@ export class SafariApp {
     ) {
       try {
         let msg = JSON.parse(message.data)
-        console.log('message.action', message.action, 'message', message)
+
         if (message.action === 'currentPage') {
           msg = {
             action: 'currentPage',
@@ -92,7 +96,6 @@ export class SafariApp {
         }
 
         if (msg.action === 'reloadPopup') {
-          console.log('should reload app')
           return window.location.reload()
         }
 
@@ -113,7 +116,7 @@ export class SafariApp {
     ) {
       const p = (window as any).arenaSafariAppRequests.get(message.id)
       p.resolve(message.responseData)
-      ;(window as any).arenaSafariAppRequests.delete(message.id)
+      window.arenaSafariAppRequests.delete(message.id)
     }
   }
 
@@ -128,7 +131,7 @@ export class SafariApp {
       }
     })
     removeIds.forEach(id => {
-      ;(window as any).arenaSafariAppRequests.delete(id)
+      window.arenaSafariAppRequests.delete(id)
     })
   }
 }
