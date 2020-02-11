@@ -6,7 +6,9 @@ import { outlineBorder } from 'v2/styles/mixins'
 import Box from 'v2/components/UI/Box'
 import { DividerButton } from 'v2/components/UI/Buttons'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
-import ConnectionSelection from 'v2/components/ConnectionSelection'
+import { ConnectionSelection } from 'v2/components/ConnectionSelection'
+
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 const Container = styled(Box).attrs({
   pt: 4,
@@ -35,7 +37,7 @@ const Container = styled(Box).attrs({
 
 interface Props {
   id: number | string
-  type: 'CHANNEL' | 'BLOCK'
+  type: BaseConnectableTypeEnum
   onClose: (args?: any) => any
 }
 

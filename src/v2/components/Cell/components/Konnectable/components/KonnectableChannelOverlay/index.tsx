@@ -9,6 +9,7 @@ import Box from 'v2/components/UI/Box'
 import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 import KonnectableOverlayConnect from 'v2/components/Cell/components/Konnectable/components/KonnectableOverlayConnect'
 import KonnectableChannelPreview from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelPreview'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 enum Mode {
   RESTING,
@@ -126,7 +127,7 @@ class KonnectableChannelOverlay extends PureComponent<Props> {
         {mode === Mode.OVERLAY && (
           <KonnectableOverlayConnect
             id={id}
-            type="CHANNEL"
+            type={BaseConnectableTypeEnum.CHANNEL}
             onClose={this.close}
           />
         )}

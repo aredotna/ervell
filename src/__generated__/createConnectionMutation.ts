@@ -47,7 +47,7 @@ export interface createConnectionMutation {
 }
 
 export interface createConnectionMutationVariables {
-  channel_ids: (string | null)[];
-  connectable_id: string;
+  channel_ids: (string | number)[];
+  connectable_id: string | number;
   connectable_type: BaseConnectableTypeEnum;
 }
