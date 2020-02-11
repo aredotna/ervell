@@ -56,14 +56,22 @@ export const StorageAccessCheck: React.FC = () => {
       <Box p={6} mt={5}>
         <Message f={3} align="center">
           Download our{' '}
-          <a href="https://www.are.na/tools/bookmarklet" target="_blank">
+          <a
+            href="https://www.are.na/tools/bookmarklet"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             official browser extension
           </a>{' '}
           to bypass this check.
         </Message>
         {/* Some browsers block iframes from opening new tabs, so show the URL as well. */}
         <Message f={3} align="center" mt={6}>
-          <a href="https://www.are.na/tools/bookmarklet" target="_blank">
+          <a
+            href="https://www.are.na/tools/bookmarklet"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             https://www.are.na/tools/bookmarklet
           </a>
         </Message>
