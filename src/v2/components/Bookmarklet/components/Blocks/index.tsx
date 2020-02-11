@@ -200,7 +200,10 @@ class Blocks extends Component<BlocksProps> {
           <Section mb={5}>
             {!block && currentPage && (
               <BlocksContainer isEmpty>
-                <CurrentPageInfo currentPage={currentPage} />
+                <CurrentPageInfo
+                  currentPage={currentPage}
+                  isSafari={isSafari}
+                />
               </BlocksContainer>
             )}
             {block && (

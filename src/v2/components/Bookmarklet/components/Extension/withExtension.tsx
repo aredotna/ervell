@@ -5,7 +5,7 @@ import { SelectableChannel } from '__generated__/SelectableChannel'
 export interface ExtensionContextProps {
   block: any
   selectedChannels: SelectableChannel[] | null
-  currentPage: { url: string }
+  currentPage: { url: string; title: string }
   addBlock: () => {}
   removeBlock: () => {}
   editBlock: () => {}
