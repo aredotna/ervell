@@ -47,14 +47,14 @@ const OutlinedRecentChannels = styled(RecentChannels)`
   `}
 `
 
-export type onConnectionSelectionType = (
+export type OnConnectionSelectionType = (
   isSelected: boolean,
   channel: Channel
 ) => void
 
 export interface ConnectionSelectionListProps {
   isOutlined?: boolean
-  onConnectionSelection?: onConnectionSelectionType
+  onConnectionSelection?: OnConnectionSelectionType
   selectedChannels?: Channel[]
 }
 

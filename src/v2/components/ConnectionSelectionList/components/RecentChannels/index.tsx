@@ -6,14 +6,14 @@ import { ChannelsList } from 'v2/components/ConnectionSelectionList/components/C
 
 import recentChannelsQuery from 'v2/components/ConnectionSelectionList/components/RecentChannels/queries/recentChannels'
 
-import { onConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
+import { OnConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
 import { RecentChannelsQuery } from '__generated__/RecentChannelsQuery'
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 
 interface RecentChannelsProps {
   isOutlined: boolean
   cursor: number
-  onConnectionSelection?: onConnectionSelectionType
+  onConnectionSelection?: OnConnectionSelectionType
   selectedChannels: Channel[]
 }
 
@@ -40,8 +40,8 @@ export const RecentChannels: React.FC<RecentChannelsProps> = ({
     return null
   }
 
+  // Merge recent channels with selected channels and filter out the duplicates
   const mergedChannels = [...selectedChannels, ...data.me.recent_channels]
-
   const channels = mergedChannels.reduce(
     (channels, channel) =>
       channels.find(x => x.id === channel.id)
@@ -51,12 +51,10 @@ export const RecentChannels: React.FC<RecentChannelsProps> = ({
   )
 
   return (
-    <>
-      <ChannelsList
-        channels={channels}
-        selectedChannels={selectedChannels}
-        onConnectionSelection={onConnectionSelection}
-      />
-    </>
+    <ChannelsList
+      channels={channels}
+      selectedChannels={selectedChannels}
+      onConnectionSelection={onConnectionSelection}
+    />
   )
 }

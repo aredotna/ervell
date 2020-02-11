@@ -11,7 +11,7 @@ import Box from 'v2/components/UI/Box'
 import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
-import { onConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
+import { OnConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
 
 const Lock = styled(Box).attrs({
   pr: 3,
@@ -120,7 +120,7 @@ const GroupBadge = styled(Badge)`
 `
 
 interface SelectableChannelProps {
-  onSelection?: onConnectionSelectionType
+  onSelection?: OnConnectionSelectionType
   channel: Channel
   isSelected?: boolean
 }
