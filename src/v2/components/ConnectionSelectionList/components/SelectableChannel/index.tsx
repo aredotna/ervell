@@ -1,9 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import selectableChannelFragment from 'v2/components/ConnectionSelectionList/components/SelectableChannel/fragments/selectableChannel'
 
 import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan'
 import TickerTapeHover from 'v2/components/UI/TickerTapeHover'
@@ -13,6 +9,9 @@ import { baseMixin as baseTextMixin } from 'v2/components/UI/Text'
 import Badge from 'v2/components/UI/Badge'
 import Box from 'v2/components/UI/Box'
 import BorderedLock from 'v2/components/UI/BorderedLock'
+
+import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
+import { OnConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
 
 const Lock = styled(Box).attrs({
   pr: 3,
@@ -47,6 +46,7 @@ const Container = styled.div.attrs({
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+  outline: none;
 
   &:hover {
     z-index: 1;
@@ -119,76 +119,60 @@ const GroupBadge = styled(Badge)`
   transform: scale(0.8);
 `
 
-export default class SelectableChannel extends Component {
-  static propTypes = {
-    channel: propType(selectableChannelFragment).isRequired,
-    onSelection: PropTypes.func,
+interface SelectableChannelProps {
+  onSelection?: OnConnectionSelectionType
+  channel: Channel
+  isSelected?: boolean
+}
+
+export const SelectableChannel: React.FC<SelectableChannelProps> = ({
+  channel,
+  onSelection,
+  isSelected = false,
+}) => {
+  const [selected, setSelected] = useState(isSelected)
+
+  const toggleSelection = () => {
+    setSelected(!selected)
+    onSelection(!selected, channel)
   }
 
-  static defaultProps = {
-    onSelection: () => {},
-  }
+  const {
+    owner,
+    owner: { name },
+    title,
+    visibility,
+  } = channel
 
-  state = {
-    isSelected: false,
-  }
+  return (
+    <Container onClick={toggleSelection} data-selected={selected}>
+      <HoverableInner>
+        {name}
 
-  toggleSelection = () => {
-    const { onSelection, channel } = this.props
-
-    this.setState(({ isSelected }) => {
-      onSelection(!isSelected, channel.id)
-
-      return { isSelected: !isSelected }
-    })
-  }
-
-  render() {
-    const { isSelected } = this.state
-    const {
-      channel: {
-        title,
-        visibility,
-        owner,
-        owner: { name },
-      },
-    } = this.props
-
-    return (
-      <Container
-        onClick={this.toggleSelection}
-        data-selected={isSelected}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <HoverableInner>
-          {name}
-
-          {owner.__typename === 'Group' && (
-            <GroupBadge
-              ml={2}
-              f={0}
-              color="gray.medium"
-              icon={{ private: 'Lock' }[owner.visibility]}
-            >
-              Group
-            </GroupBadge>
-          )}
-
-          <Separator />
-
-          <ColoredChannelSpan
-            visibility={visibility}
-            dangerouslySetInnerHTML={{ __html: title }}
-          />
-        </HoverableInner>
-
-        {visibility === 'private' && (
-          <Lock>
-            <BorderedLock />
-          </Lock>
+        {owner.__typename === 'Group' && (
+          <GroupBadge
+            ml={2}
+            f={0}
+            color="gray.medium"
+            icon={{ private: 'Lock' }[owner.visibility]}
+          >
+            Group
+          </GroupBadge>
         )}
-      </Container>
-    )
-  }
+
+        <Separator />
+
+        <ColoredChannelSpan
+          visibility={visibility}
+          dangerouslySetInnerHTML={{ __html: title }}
+        />
+      </HoverableInner>
+
+      {visibility === 'private' && (
+        <Lock>
+          <BorderedLock />
+        </Lock>
+      )}
+    </Container>
+  )
 }

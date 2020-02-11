@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Icons from 'v2/components/UI/Icons'
 
 import {
-  UploadPolicy_policy as Policy,
+  UploadPolicy_me_policy as Policy,
   UploadPolicy,
 } from '__generated__/UploadPolicy'
 
@@ -146,10 +146,6 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
   )
 }
 
-interface Data {
-  me: UploadPolicy
-}
-
 interface BlockChangeThumbnailContainerProps {
   block: Block
 }
@@ -158,7 +154,7 @@ const BlockChangeThumbnailContainer: React.FC<BlockChangeThumbnailContainerProps
   block,
 }) => {
   return (
-    <Query<Data> query={UPLOAD_POLICY_QUERY}>
+    <Query<UploadPolicy> query={UPLOAD_POLICY_QUERY}>
       {({ loading, error, data }) => {
         if (error || loading) return <div />
 

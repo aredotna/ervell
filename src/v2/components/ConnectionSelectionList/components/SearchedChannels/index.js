@@ -5,7 +5,7 @@ import { Query } from 'react-apollo'
 import searchedChannelsQuery from 'v2/components/ConnectionSelectionList/components/SearchedChannels/queries/searchedChannels'
 
 import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
-import ChannelsList from 'v2/components/ConnectionSelectionList/components/ChannelsList'
+import { ChannelsList } from 'v2/components/ConnectionSelectionList/components/ChannelsList'
 import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
 
 export default class SearchedChannels extends Component {
@@ -27,6 +27,7 @@ export default class SearchedChannels extends Component {
           {({ data, error, loading }) => {
             if (error) return <Indicator label="Error" />
             if (loading) return <Indicator label="Searching..." />
+            if (!data) return null
 
             const {
               me: { searched_channels },

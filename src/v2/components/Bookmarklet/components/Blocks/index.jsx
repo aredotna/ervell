@@ -15,7 +15,7 @@ import Count from 'v2/components/UI/Count'
 import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 
 import Block from 'v2/components/Bookmarklet/components/Blocks/components/Block'
-import ConnectionSelectionList from 'v2/components/ConnectionSelectionList'
+import { ConnectionSelectionList } from 'v2/components/ConnectionSelectionList'
 import { ConnectCTA } from 'v2/components/Bookmarklet/components/Blocks/components/ConnectCTA'
 
 import createBlockMutation from 'v2/components/Bookmarklet/components/Blocks/mutations/createBlock'
@@ -213,6 +213,7 @@ class Blocks extends Component {
 
               <ConnectionSelectionList
                 onConnectionSelection={this.handleConnectionSelect}
+                selectedChannels={selectedChannels}
               />
             </ConnectContainer>
           </Section>
