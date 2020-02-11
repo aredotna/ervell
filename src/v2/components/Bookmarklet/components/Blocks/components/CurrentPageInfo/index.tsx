@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -42,7 +41,18 @@ const openHelp = () => {
   )
 }
 
-const CurrentPageInfo = ({ currentPage }) => (
+interface CurrentPageInfoProps {
+  currentPage: {
+    url: string
+    title: string
+  }
+  isSafari: boolean
+}
+
+const CurrentPageInfo: React.FC<CurrentPageInfoProps> = ({
+  currentPage,
+  isSafari,
+}) => (
   <Container>
     <Text f={4}>Saving as a link:</Text>
     <Text f={4} color="gray.medium" mt={4}>
@@ -59,9 +69,11 @@ const CurrentPageInfo = ({ currentPage }) => (
       (<u>{unescape(truncate(currentPage.url, 30))}</u>)
     </Text>
 
-    <Text f={4} mt={7}>
-      You can also drag text or images here
-    </Text>
+    {!isSafari && (
+      <Text f={4} mt={7}>
+        You can also drag text or images here
+      </Text>
+    )}
 
     <QuestionMark onClick={openHelp}>
       <Text f={2} fontWeight="bold" textAlign="center" color="gray.regular">
@@ -70,12 +82,5 @@ const CurrentPageInfo = ({ currentPage }) => (
     </QuestionMark>
   </Container>
 )
-
-CurrentPageInfo.propTypes = {
-  currentPage: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }),
-}
 
 export default CurrentPageInfo

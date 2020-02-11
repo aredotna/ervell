@@ -1,13 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import { graphql, MutationFunction } from 'react-apollo'
 import { omit } from 'underscore'
 
 import Layout from 'v2/components/Bookmarklet/components/Layout'
 import PaneMessenger from 'lib/PaneMessenger'
-import withExtensionContext from 'v2/components/Bookmarklet/components/Extension/withExtension'
+import withExtensionContext, {
+  ExtensionContextProps,
+} from 'v2/components/Bookmarklet/components/Extension/withExtension'
 
 import Box from 'v2/components/UI/Box'
 import Count from 'v2/components/UI/Count'
@@ -20,6 +21,7 @@ import { ConnectCTA } from 'v2/components/Bookmarklet/components/Blocks/componen
 
 import createBlockMutation from 'v2/components/Bookmarklet/components/Blocks/mutations/createBlock'
 import CurrentPageInfo from 'v2/components/Bookmarklet/components/Blocks/components/CurrentPageInfo'
+import { SelectableChannel } from '__generated__/SelectableChannel'
 
 const Container = styled(Box)`
   display: flex;
@@ -64,19 +66,14 @@ const ConnectContainer = styled(Box)`
   position: relative;
 `
 
-class Blocks extends Component {
-  static propTypes = {
-    context: PropTypes.object.isRequired,
-    createBlock: PropTypes.func.isRequired,
-    query: PropTypes.object,
-    isSafari: PropTypes.boolean,
-  }
+interface BlocksProps {
+  context: ExtensionContextProps
+  query: any
+  isSafari: boolean
+  createBlock: MutationFunction
+}
 
-  static defaultProps = {
-    query: null,
-    isSafari: false,
-  }
-
+class Blocks extends Component<BlocksProps> {
   messenger = null
   layoutRef = null
 
@@ -107,15 +104,18 @@ class Blocks extends Component {
     }
   }
 
-  handleConnectionSelect = (isSelected, channelId) => {
+  handleConnectionSelect = (
+    isSelected: boolean,
+    channel: SelectableChannel
+  ) => {
     const {
       context: { selectChannel, unselectChannel },
     } = this.props
 
     if (isSelected) {
-      selectChannel(channelId)
+      selectChannel(channel)
     } else {
-      unselectChannel(channelId)
+      unselectChannel(channel)
     }
   }
 
@@ -127,7 +127,10 @@ class Blocks extends Component {
 
     this.setState({ mode: 'saving' })
 
-    const values = { value: currentPage.url, channel_ids: selectedChannels }
+    const values = {
+      value: currentPage.url,
+      channel_ids: selectedChannels.map(c => c.id),
+    }
 
     createBlock({
       variables: values,
@@ -165,7 +168,7 @@ class Blocks extends Component {
 
     const values = {
       ...omit(block, 'id', 'type'),
-      channel_ids: selectedChannels,
+      channel_ids: selectedChannels.map(c => c.id),
     }
 
     return createBlock({
@@ -197,7 +200,10 @@ class Blocks extends Component {
           <Section mb={5}>
             {!block && currentPage && (
               <BlocksContainer isEmpty>
-                <CurrentPageInfo currentPage={currentPage} />
+                <CurrentPageInfo
+                  currentPage={currentPage}
+                  isSafari={isSafari}
+                />
               </BlocksContainer>
             )}
             {block && (
@@ -247,5 +253,5 @@ class Blocks extends Component {
 }
 
 export default withExtensionContext(
-  graphql(createBlockMutation, { name: 'createBlock' })(Blocks)
+  graphql<{ createBlock }>(createBlockMutation, { name: 'createBlock' })(Blocks)
 )
