@@ -6,7 +6,7 @@ import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
 import Box from 'v2/components/UI/Box'
 import GenericButton from 'v2/components/UI/GenericButton'
-import ConnectionSelection from 'v2/components/ConnectionSelection'
+import { ConnectionSelection } from 'v2/components/ConnectionSelection'
 
 import { inputPadding } from 'v2/components/UI/Inputs'
 
