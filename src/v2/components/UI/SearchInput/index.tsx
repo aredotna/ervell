@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { isEmpty, debounce, pick, omit } from 'underscore'
+import Mousetrap from 'mousetrap'
 
 import compactObject from 'v2/util/compactObject'
 
@@ -29,22 +30,23 @@ const Icon = styled.div`
 `
 
 interface IconMap {
-  resting: string
+  active: string
   focus: string
   hover: string
-  active: string
+  resting: string
 }
 
 interface Props extends BoxProps {
-  query?: string
-  onFocus?: () => any
-  onBlur?: () => any
-  onQueryChange?: (props: any) => any
-  onDebouncedQueryChange?: (props: any) => any
   debounceWait?: number
   forwardedRef?: any
+  globallyFocusOnKey?: string
   iconMap?: IconMap
+  onBlur?: () => any
+  onDebouncedQueryChange?: (props: any) => any
+  onFocus?: () => any
+  onQueryChange?: (props: any) => any
   placeholder?: string
+  query?: string
 }
 
 interface State {
@@ -88,6 +90,14 @@ class SearchInput extends PureComponent<Props, State> {
     }
   }
 
+  componentDidMount() {
+    this.maybeAttachGlobalFocusKeyListener()
+  }
+
+  componentWillUnmount() {
+    Mousetrap.unbind([this.props.globallyFocusOnKey])
+  }
+
   componentWillReceiveProps(nextProps) {
     if (isEmpty(nextProps.query) && !isEmpty(this.state.query)) {
       this.resetState()
@@ -98,6 +108,19 @@ class SearchInput extends PureComponent<Props, State> {
     this.setState({ query: '', mode: 'focus' })
     this.input.value = ''
     this.input.focus()
+  }
+
+  maybeAttachGlobalFocusKeyListener = () => {
+    const { globallyFocusOnKey } = this.props
+
+    if (globallyFocusOnKey) {
+      Mousetrap.bind(globallyFocusOnKey, event => {
+        event.preventDefault()
+        this.handleFocus()
+        this.input.focus()
+        this.input.value = ''
+      })
+    }
   }
 
   handleMouseEnter = () => {

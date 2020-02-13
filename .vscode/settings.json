@@ -10,7 +10,9 @@
     "**/node_modules": true,
     "**/public": true
   },
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "eslint.validate": [
@@ -25,5 +27,5 @@
   "eslint.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
 }
