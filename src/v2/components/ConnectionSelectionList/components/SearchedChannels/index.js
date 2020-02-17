@@ -6,7 +6,7 @@ import searchedChannelsQuery from 'v2/components/ConnectionSelectionList/compone
 
 import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
 import { ChannelsList } from 'v2/components/ConnectionSelectionList/components/ChannelsList'
-import CreatePrivateChannelButton from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
+import { CreatePrivateChannelButton } from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton'
 
 export default class SearchedChannels extends Component {
   static propTypes = {
