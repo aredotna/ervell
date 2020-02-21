@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { SearchType, SearchSorts } from "./globalTypes";
+import { SearchType, SearchSorts, BlockFilterEnum } from "./globalTypes";
 
 // ====================================================
 // GraphQL query operation: ExploreContents
@@ -346,4 +346,5 @@ export interface ExploreContentsVariables {
   per?: number | null;
   sort?: SearchSorts | null;
   seed?: number | null;
+  block_filter?: BlockFilterEnum | null;
 }

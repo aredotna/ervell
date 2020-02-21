@@ -6,7 +6,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import uploadPolicyQuery from 'v2/components/AvatarUploader/queries/uploadPolicy'
+import { uploadPolicyQuery } from 'v2/util/uploader'
 import avatarQuery from 'v2/components/AvatarUploader/queries/avatar'
 
 import updateAvatar from 'v2/components/AvatarUploader/mutations/updateAvatar'

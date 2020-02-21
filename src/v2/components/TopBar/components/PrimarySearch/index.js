@@ -106,6 +106,7 @@ export default class PrimarySearch extends PureComponent {
         {mode === 'resting' && <HomeLink />}
 
         <SearchInput
+          globallyFocusOnKey="/"
           tabIndex={1}
           flex="1"
           py={6}

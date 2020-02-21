@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 
 import { UploadPolicy } from '__generated__/UploadPolicy'
 
-import uploadPolicyQuery from 'v2/components/UI/FileUploader/queries/uploadPolicy'
+import { uploadPolicyQuery } from 'v2/util/uploader'
 
 import Box from 'v2/components/UI/Box'
 import { FileUpload } from 'v2/components/UI/FileUpload'
@@ -14,10 +14,6 @@ interface Props {
   onUpload: ({ url, file }: { url: string; file: File }) => any
   onComplete: () => any
   onError?: (err: Error) => any
-}
-
-interface Data {
-  me: UploadPolicy
 }
 
 const FileUploader: React.FC<Props> = ({
@@ -46,7 +42,7 @@ const FileUploader: React.FC<Props> = ({
   )
 
   return (
-    <Query<Data> query={uploadPolicyQuery} onError={onError}>
+    <Query<UploadPolicy> query={uploadPolicyQuery} onError={onError}>
       {({ data, error, loading }) => {
         if (error || loading) return <div />
 

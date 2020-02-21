@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Icons from 'v2/components/UI/Icons'
 
 import {
-  UploadPolicy_policy as Policy,
+  UploadPolicy_me_policy as Policy,
   UploadPolicy,
 } from '__generated__/UploadPolicy'
 
@@ -18,7 +18,7 @@ import {
 
 import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
-import UPLOAD_POLICY_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/queries/policy'
+import { uploadPolicyQuery as UPLOAD_POLICY_QUERY } from 'v2/util/uploader'
 import BLOCK_IMAGE_URL_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/queries/blockImageUrl'
 import UPDATE_BLOCK_THUMBNAIL_MUTATION from 'v2/components/BlockLightbox/components/BlockLightboxActions/components/BlockLightboxChangeThumbnail/mutations/changeThumbnail'
 
@@ -146,19 +146,15 @@ const BlockChangeThumbnail: React.FC<BlockChangeThumbnailProps> = ({
   )
 }
 
-interface Data {
-  me: UploadPolicy
-}
-
 interface BlockChangeThumbnailContainerProps {
   block: Block
 }
 
-const BlockChangeThumbnailContainer: React.FC<
-  BlockChangeThumbnailContainerProps
-> = ({ block }) => {
+const BlockChangeThumbnailContainer: React.FC<BlockChangeThumbnailContainerProps> = ({
+  block,
+}) => {
   return (
-    <Query<Data> query={UPLOAD_POLICY_QUERY}>
+    <Query<UploadPolicy> query={UPLOAD_POLICY_QUERY}>
       {({ loading, error, data }) => {
         if (error || loading) return <div />
 

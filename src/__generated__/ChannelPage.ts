@@ -27,6 +27,8 @@ export interface ChannelPage_channel_counts {
   collaborators: number | null;
   followers: number | null;
   contents: number | null;
+  blocks: number | null;
+  channels: number | null;
 }
 
 export interface ChannelPage_channel_can {

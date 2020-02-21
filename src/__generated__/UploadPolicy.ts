@@ -3,10 +3,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: UploadPolicy
+// GraphQL query operation: UploadPolicy
 // ====================================================
 
-export interface UploadPolicy_policy {
+export interface UploadPolicy_me_policy {
   __typename: "Policy";
   AWSAccessKeyId: string | null;
   acl: string | null;
@@ -18,11 +18,18 @@ export interface UploadPolicy_policy {
   success_action_status: string | null;
 }
 
-export interface UploadPolicy {
+export interface UploadPolicy_me {
   __typename: "Me";
   id: number | null;
   /**
    * Manifest for uploading new files to S3
    */
-  policy: UploadPolicy_policy | null;
+  policy: UploadPolicy_me_policy | null;
+}
+
+export interface UploadPolicy {
+  /**
+   * The current logged in user
+   */
+  me: UploadPolicy_me | null;
 }

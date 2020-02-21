@@ -8,7 +8,7 @@
 
 export interface UserInfoQuery_me {
   __typename: "Me";
-  slug: string | null;
+  name: string | null;
 }
 
 export interface UserInfoQuery {

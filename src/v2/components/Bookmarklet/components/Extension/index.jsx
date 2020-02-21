@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { find, without } from 'underscore'
 
 import PaneMessenger from 'lib/PaneMessenger'
+import PaneListener from 'lib/PaneListener'
 
 export const ExtensionContext = React.createContext({
   block: null,
@@ -27,8 +28,8 @@ class Extension extends Component {
 
   constructor(props) {
     super(props)
-    window.addEventListener('message', this.receiveMessage)
     this.messenger = new PaneMessenger(window.top)
+    this.listener = new PaneListener(this.receiveMessage)
   }
 
   state = {
@@ -80,14 +81,14 @@ class Extension extends Component {
     }
   }
 
-  selectChannel = channelId => {
+  selectChannel = channel => {
     this.setState({
-      selectedChannels: [...this.state.selectedChannels, channelId],
+      selectedChannels: [...this.state.selectedChannels, channel],
     })
   }
 
-  unselectChannel = channelId => {
-    const selectedChannels = without(this.state.selectedChannels, channelId)
+  unselectChannel = channel => {
+    const selectedChannels = without(this.state.selectedChannels, channel)
     this.setState({ selectedChannels })
   }
 

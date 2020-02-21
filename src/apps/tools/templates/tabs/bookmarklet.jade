@@ -11,6 +11,8 @@ block content
     .Narrow
       if isChrome
         include _chrome_extension
+      else if isSafari
+        include _safari_extension
       else if isFirefox
         include _firefox_extension
       else

@@ -9,6 +9,10 @@
 export interface UpdateAccountMutation_update_account_me_settings {
   __typename: "MeSettings";
   receive_email: string | null;
+  receive_tips_emails: boolean | null;
+  receive_group_premium_emails: boolean | null;
+  exclude_from_indexes: boolean | null;
+  receive_newsletter: boolean | null;
   show_nsfw: boolean | null;
 }
 
@@ -19,6 +23,7 @@ export interface UpdateAccountMutation_update_account_me {
   name: string | null;
   first_name: string | null;
   bio: string | null;
+  home_path: string | null;
   settings: UpdateAccountMutation_update_account_me_settings | null;
 }
 

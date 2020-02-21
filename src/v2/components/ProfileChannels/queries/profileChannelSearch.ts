@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import profileChannelSearchFragment from 'v2/components/ProfileChannels/fragments/profileChannelSearch'
 
 export default gql`
-  query ProfileChannels(
+  query ProfileChannelsSearch(
     $id: ID!
     $page: Int
     $per: Int

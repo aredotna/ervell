@@ -7,6 +7,7 @@ import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
 import { FilledButton } from 'v2/components/UI/Buttons'
 import KonnectableOverlayConnect from 'v2/components/Cell/components/Konnectable/components/KonnectableOverlayConnect'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 enum Mode {
   RESTING,
@@ -118,7 +119,7 @@ class KonnectableBlockOverlay extends PureComponent<Props> {
         {mode === Mode.OVERLAY && (
           <KonnectableOverlayConnect
             id={id}
-            type="BLOCK"
+            type={BaseConnectableTypeEnum.BLOCK}
             onClose={this.closeConnect}
           />
         )}

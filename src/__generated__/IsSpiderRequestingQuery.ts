@@ -8,7 +8,7 @@
 
 export interface IsSpiderRequestingQuery_sharify {
   __typename: "ClientSharify";
-  isSpiderRequesting: string | null;
+  isSpiderRequesting: boolean | null;
 }
 
 export interface IsSpiderRequestingQuery {
