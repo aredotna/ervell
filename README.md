@@ -31,7 +31,7 @@ The general idea here is something minimal, utilitarian, unobtrusive and adaptib
 
 URL: [www.are.na](https://www.are.na)
 
-- Create a new pull request from the `master` branch against the `deploy` branch. Merges into `deploy` are automatically deployed to our production instance
+- Create a new pull request from the `master` branch against the `deploy` branch. Merges into `deploy` are automatically deployed to our production instance. [Start a deploy...](https://github.com/aredotna/ervell/compare/deploy...master?expand=1)
 
 ## Deploying (Staging)
 
