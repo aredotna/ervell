@@ -46,7 +46,7 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
 
   return (
     <Container>
-      {showImageEditedDate && (
+      {!!showImageEditedDate && (
         <Text color="gray.regular" fontSize={1}>
           Cover image edited on {imageUpdatedAt}
         </Text>

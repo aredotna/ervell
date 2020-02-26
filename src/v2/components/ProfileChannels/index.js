@@ -108,7 +108,24 @@ class ProfileChannels extends PureComponent {
           }
 
           if (loading) {
-            return <BlocksLoadingIndicator />
+            return (
+              <div>
+                <SearchInput
+                  query={q}
+                  onDebouncedQueryChange={this.resetQuery}
+                  placeholder={`Filter channels`}
+                  mb={6}
+                  mr={[
+                    constants.blockGutter,
+                    constants.doubleBlockGutter,
+                    constants.doubleBlockGutter,
+                  ]}
+                  ml={[constants.blockGutter, 0, 0]}
+                  border={0}
+                />
+                <BlocksLoadingIndicator />
+              </div>
+            )
           }
 
           const {

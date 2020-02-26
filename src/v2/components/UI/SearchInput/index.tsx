@@ -95,7 +95,9 @@ class SearchInput extends PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
-    Mousetrap.unbind([this.props.globallyFocusOnKey])
+    if (this.props.globallyFocusOnKey) {
+      Mousetrap.unbind([this.props.globallyFocusOnKey])
+    }
   }
 
   componentWillReceiveProps(nextProps) {
