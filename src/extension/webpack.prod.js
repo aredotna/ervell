@@ -1,4 +1,5 @@
 const productionConfig = {
+  devtool: 'none',
   plugins: [],
 }
 
