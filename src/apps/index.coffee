@@ -80,6 +80,10 @@ console.time('vanity_redirects')
 app.use(require('../apps/vanity_redirects'))
 console.timeEnd('vanity_redirects')
 
+console.time('apple-site-association')
+app.use(require('../apps/apple_site_association'))
+console.timeEnd('apple-site-association')
+
 # Dynamic routing (in order)
 console.time('profile')
 app.use(require('../apps/profile'))
