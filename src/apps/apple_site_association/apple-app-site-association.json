@@ -1,0 +1,41 @@
+{
+  "activitycontinuation": {
+    "apps": ["RCL6FRSRW9.na.are.arenaapp"]
+  },
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "RCL6FRSRW9.na.are.arenaapp",
+        "paths": [
+          "NOT /log_in",
+          "NOT /sign_up",
+          "NOT /sign_up/*",
+          "NOT /forgot",
+          "NOT /reset/*",
+          "NOT /register",
+          "NOT /register/*",
+          "NOT /confirm/*",
+          "NOT /examples",
+          "NOT /examples/*",
+          "NOT /getting-started",
+          "NOT /import",
+          "NOT /import/*",
+          "NOT /manage",
+          "NOT /tools",
+          "NOT /tools/*",
+          "NOT /about",
+          "NOT /about/*",
+          "NOT /blog",
+          "NOT /blog/*",
+          "NOT /settings",
+          "NOT /settings/*",
+          "NOT /robots.txt",
+          "NOT /statuses/*",
+          "NOT /actions/*",
+          "*"
+        ]
+      }
+    ]
+  }
+}
