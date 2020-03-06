@@ -10,10 +10,13 @@ import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
+
 import { ChannelContentsFilter } from 'v2/components/ChannelContentsFilter'
 import { ChannelEmptyMessage } from 'v2/components/ChannelEmptyMessage'
 import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
 import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelContentsWithData'
+
+import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
 
 interface Variables {
@@ -55,10 +58,12 @@ export default ({ id }) => {
                   <ChannelContentsWithData channel={channel} />
                 )}
 
-                <BottomBanner
-                  banner="LOGGED_OUT_CHANNEL"
-                  name={channel.title}
-                />
+                <MobileOrChildren route="channel" id={channel.id}>
+                  <BottomBanner
+                    banner="LOGGED_OUT_CHANNEL"
+                    name={channel.title}
+                  />
+                </MobileOrChildren>
               </>
             )
           }}

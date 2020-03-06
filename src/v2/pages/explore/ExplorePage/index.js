@@ -9,6 +9,7 @@ import ExploreViews from 'v2/pages/explore/ExplorePage/components/ExploreViews'
 import ExploreMetadata from 'v2/components/ExploreMetadata'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import BottomBanner from 'v2/components/BottomBanner'
+import { MobileOrChildren } from 'v2/components/MobileBanner'
 import Title from 'v2/components/UI/Head/components/Title'
 
 export default class ExplorePage extends Component {
@@ -40,8 +41,9 @@ export default class ExplorePage extends Component {
             />
 
             <ExploreViews view={view} sort={sort} block_filter={block_filter} />
-
-            <BottomBanner banner="LOGGED_OUT_EXPLORE" />
+            <MobileOrChildren route="explore">
+              <BottomBanner banner="LOGGED_OUT_EXPLORE" />
+            </MobileOrChildren>
           </Constrain>
         </TopBarLayout>
       </ErrorBoundary>

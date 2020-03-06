@@ -10,6 +10,8 @@ import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ProfileMetadata from 'v2/components/ProfileMetadata'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
+
+import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
 
 import ProfileViews from 'v2/pages/profile/ProfilePage/components/ProfileViews'
@@ -106,10 +108,19 @@ export default class ProfilePage extends Component {
                     type={type}
                   />
 
-                  <BottomBanner
-                    banner="LOGGED_OUT_PROFILE"
-                    name={identifiable.name}
-                  />
+                  <MobileOrChildren
+                    route={
+                      identifiable.__typename === 'Group'
+                        ? 'groupProfile'
+                        : 'profile'
+                    }
+                    id={identifiable.id}
+                  >
+                    <BottomBanner
+                      banner="LOGGED_OUT_PROFILE"
+                      name={identifiable.name}
+                    />
+                  </MobileOrChildren>
                 </Constrain>
               </TopBarLayout>
             )

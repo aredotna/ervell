@@ -14,6 +14,8 @@ import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import BlockLightbox from 'v2/components/BlockLightbox'
 import BlockPageMetaTags from 'v2/pages/block/components/BlockPageMetaTags'
 
+import { MobileOrChildren } from 'v2/components/MobileBanner'
+
 const Container = styled(Box)`
   height: 100vh;
   padding-top: ${constants.topBarHeight};
@@ -47,6 +49,10 @@ export default class BlockPage extends PureComponent {
                   <BlockPageMetaTags block={block} />
 
                   <BlockLightbox block={block} />
+
+                  <MobileOrChildren route="block" id={block.id}>
+                    <div />
+                  </MobileOrChildren>
                 </React.Fragment>
               )
             }}
