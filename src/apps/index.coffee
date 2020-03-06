@@ -80,6 +80,10 @@ console.time('vanity_redirects')
 app.use(require('../apps/vanity_redirects'))
 console.timeEnd('vanity_redirects')
 
+console.time('deeplink')
+app.use(require('../apps/deeplink'))
+console.timeEnd('deeplink')
+
 console.time('apple-site-association')
 app.use(require('../apps/apple_site_association'))
 console.timeEnd('apple-site-association')
