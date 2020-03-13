@@ -86,7 +86,10 @@ export default class Page extends PureComponent {
             href={`${sharifyData.IMAGE_PATH}touch-icon-ipad-retina.png`}
           />
 
-          <meta name="apple-itunes-app" content="app-id=1299153149" />
+          <meta
+            name="apple-itunes-app"
+            content={`app-id=1299153149, app-argument=${sharifyData.CURRENT_URL}`}
+          />
           <link
             rel="mask-icon"
             href={`${sharifyData.IMAGE_PATH}arena-mark.svg`}
@@ -98,9 +101,7 @@ export default class Page extends PureComponent {
           {sharifyData.USE_CSP && (
             <meta
               httpEquiv="Content-Security-Policy"
-              content={`default-src 'self' *.are.na instant.page/1.2.2 arena-avatars.s3.amazonaws.com gravatar.com https://d2hp0ptr16qg89.cloudfront.net https://d2w9rnfcy7mm78.cloudfront.net https://www.google-analytics.com d62qkf7fve5zu.cloudfront.net arena-api-staging.herokuapp.com ${
-                sharifyData.CSP_SRCS
-              }
+              content={`default-src 'self' *.are.na instant.page/1.2.2 arena-avatars.s3.amazonaws.com gravatar.com https://d2hp0ptr16qg89.cloudfront.net https://d2w9rnfcy7mm78.cloudfront.net https://www.google-analytics.com d62qkf7fve5zu.cloudfront.net arena-api-staging.herokuapp.com ${sharifyData.CSP_SRCS}
               'unsafe-inline'; frame-src *;`}
             />
           )}
