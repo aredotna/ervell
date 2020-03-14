@@ -13141,7 +13141,7 @@ no-case@^2.2.0, no-case@^2.3.2:
 
 "node-deeplink@https://github.com/aredotna/node-deeplink":
   version "0.6.0"
-  resolved "https://github.com/aredotna/node-deeplink#d7aa46e3d62a153acf90f95f5949b485f7c78519"
+  resolved "https://github.com/aredotna/node-deeplink#a92a389eeb6e2addcb4f5935929f1b076fd6bfca"
   dependencies:
     html-inline "^1.2.0"
 
