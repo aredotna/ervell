@@ -16,11 +16,5 @@ storiesOf('Banner', module).add('default', () => (
     <Banners.ProposePremium mb={6} onClose={action('onClose')} />
 
     <Banners.StronglyProposePremium mb={6} onClose={action('onClose')} />
-
-    <Banners.JuneConnectionLimit mb={6} onClose={action('onClose')} />
-
-    <Banners.LoggedOutExplore mb={6} isCloseable={false} />
-
-    <Banners.LoggedOutProfile mb={6} isCloseable={false} name="Foo Bar" />
   </Specimen>
 ))
