@@ -28,9 +28,12 @@ const CHANNEL_QUERY = gql`
 `
 storiesOf('ChannelRow', module).add('default', () => (
   <Specimen>
-    <Query key={uuidv4()} query={CHANNEL_QUERY}>
-      {({ data, loading, error }) => {
-        if (loading || error) return 'LOADING'
+    <Query key={uuidv4()} query={CHANNEL_QUERY} fetchPolicy="no-cache">
+      {response => {
+        console.log('RESPONSE ', response)
+
+        const { data, loading, error } = response
+        if (loading || error || !data) return 'LOADING'
 
         const { channel } = data
 
