@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -14,6 +14,7 @@ import Text from 'v2/components/UI/Text'
 import Count from 'v2/components/UI/Count'
 import GroupBadge from 'v2/components/UI/GroupBadge'
 import BorderedLock from 'v2/components/UI/BorderedLock'
+import { GenericButtonLink } from 'v2/components/UI/GenericButton'
 
 import { CompactChannel as Channel } from '__generated__/CompactChannel'
 
@@ -58,6 +59,8 @@ const Container = styled.a.attrs({
   }
 `
 
+const Button = styled(GenericButtonLink).attrs({ py: 3, px: 4, f: 0 })``
+
 export const EmptyCompactChannel = ({ children, ...props }) => (
   <Container {...props}>
     {typeof children === 'string' ? (
@@ -76,14 +79,28 @@ EmptyCompactChannel.propTypes = {
 
 interface CompactChannelProps {
   channel: Channel
+  showEditButton?: boolean
 }
 
 export const CompactChannel: React.FC<CompactChannelProps> = ({
   channel,
+  showEditButton = false,
   ...rest
 }) => {
+  const [mode, setMode] = useState<'resting' | 'hovered'>('resting')
+
   return (
-    <Container href={channel.href} visibility={channel.visibility} {...rest}>
+    <Container
+      href={channel.href}
+      visibility={channel.visibility}
+      {...rest}
+      onMouseOver={() => {
+        showEditButton && setMode('hovered')
+      }}
+      onMouseOut={() => {
+        showEditButton && setMode('resting')
+      }}
+    >
       <Primary>
         <Label f={4} dangerouslySetInnerHTML={{ __html: channel.title }} />
 
@@ -94,15 +111,25 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
         </Label>
       </Primary>
 
-      <Label f={1} textAlign="right">
-        by {channel.owner.name}
-        {channel.owner.__typename === 'Group' && (
-          <GroupBadge
-            visibility={channel.owner.visibility}
-            color={`channel.${channel.visibility}`}
-          />
-        )}
-      </Label>
+      {mode === 'resting' && (
+        <Label f={1} textAlign="right">
+          by {channel.owner.name}
+          {channel.owner.__typename === 'Group' && (
+            <GroupBadge
+              visibility={channel.owner.visibility}
+              color={`channel.${channel.visibility}`}
+            />
+          )}
+        </Label>
+      )}
+
+      {mode === 'hovered' && (
+        <Label f={1} textAlign="right">
+          <Button color={`channel.${channel.visibility}`} onClick={() => {}}>
+            Edit
+          </Button>
+        </Label>
+      )}
     </Container>
   )
 }
