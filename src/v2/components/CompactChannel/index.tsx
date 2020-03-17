@@ -16,6 +16,9 @@ import GroupBadge from 'v2/components/UI/GroupBadge'
 import BorderedLock from 'v2/components/UI/BorderedLock'
 import { GenericButtonLink } from 'v2/components/UI/GenericButton'
 
+import ManageChannel from 'v2/components/ManageChannel'
+import Modal from 'v2/components/UI/Modal'
+
 import { CompactChannel as Channel } from '__generated__/CompactChannel'
 
 const Primary = styled.div`
@@ -82,6 +85,11 @@ interface CompactChannelProps {
   showEditButton?: boolean
 }
 
+const openEditChannel = (id: string | number) => {
+  const modal = new Modal(ManageChannel, { id })
+  modal.open()
+}
+
 export const CompactChannel: React.FC<CompactChannelProps> = ({
   channel,
   showEditButton = false,
@@ -89,17 +97,27 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
 }) => {
   const [mode, setMode] = useState<'resting' | 'hovered'>('resting')
 
+  const mouseOver = () => {
+    showEditButton && setMode('hovered')
+  }
+
+  const mouseOut = () => {
+    showEditButton && setMode('resting')
+  }
+
+  const onEditClick = e => {
+    e.preventDefault()
+    e.stopPropagation()
+    openEditChannel(channel.id)
+  }
+
   return (
     <Container
       href={channel.href}
       visibility={channel.visibility}
       {...rest}
-      onMouseOver={() => {
-        showEditButton && setMode('hovered')
-      }}
-      onMouseOut={() => {
-        showEditButton && setMode('resting')
-      }}
+      onMouseEnter={mouseOver}
+      onMouseLeave={mouseOut}
     >
       <Primary>
         <Label f={4} dangerouslySetInnerHTML={{ __html: channel.title }} />
@@ -125,7 +143,7 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
 
       {mode === 'hovered' && (
         <Label f={1} textAlign="right">
-          <Button color={`channel.${channel.visibility}`} onClick={() => {}}>
+          <Button color={`channel.${channel.visibility}`} onClick={onEditClick}>
             Edit
           </Button>
         </Label>

@@ -87,7 +87,12 @@ class ProfileChannelIndex extends Component {
                   </Text>
 
                   {channels.map(channel => (
-                    <CompactChannel mb={4} key={channel.id} channel={channel} />
+                    <CompactChannel
+                      mb={4}
+                      key={channel.id}
+                      channel={channel}
+                      showEditButton
+                    />
                   ))}
                 </Group>
               ))}
