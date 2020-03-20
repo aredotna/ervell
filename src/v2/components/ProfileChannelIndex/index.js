@@ -95,7 +95,7 @@ class ProfileChannelIndex extends Component {
                       mb={4}
                       key={channel.id}
                       channel={channel}
-                      showEditButton
+                      showEditButton={isMine}
                       refetchQueries={refetchQueries}
                     />
                   ))}

@@ -60,6 +60,8 @@ interface ManageChannelProps {
   loading: boolean
   error: ApolloError
   refetchQueries?: PureQueryOptions[]
+  onUpdate?: () => void
+  onDelete?: () => any
 }
 
 const ManageChannel: React.FC<ManageChannelProps> = ({
@@ -69,6 +71,9 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
   error,
   updateChannel,
   refetchQueries,
+  onDelete = () => {
+    window.location.href = '/'
+  },
 }) => {
   if (loading) return <LoadingIndicator />
   if (error) return <ErrorAlert>{error.message}</ErrorAlert>
@@ -104,6 +109,8 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
         return errors
       })
   }
+
+  console.log('onDelete', onDelete)
 
   return (
     <Form
@@ -224,10 +231,6 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
                 }}
               </Field>
 
-              {/* <LabelledInput mt={6} mb={8}>
-                
-              </LabelledInput> */}
-
               <Accordion label="NSFW?" mode="closed">
                 <Field
                   name="content_flag"
@@ -288,7 +291,7 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
               {channel.can.destroy && (
                 <Accordion label="Delete channel" mode="closed">
                   <Box m={7}>
-                    <DeleteChannel id={channel.id} />
+                    <DeleteChannel id={channel.id} onDelete={onDelete} />
                   </Box>
                 </Accordion>
               )}
@@ -303,11 +306,13 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
 interface ManageChannelContainerProps {
   id: string | number
   refetchQueries?: PureQueryOptions[]
+  onDelete?: () => any
 }
 
 const ManageChannelContainer: React.FC<ManageChannelContainerProps> = ({
   id,
   refetchQueries,
+  onDelete,
 }) => {
   const { data, loading, error } = useQuery<
     ManageChannelQuery,
@@ -327,6 +332,7 @@ const ManageChannelContainer: React.FC<ManageChannelContainerProps> = ({
       me={data && data.me}
       updateChannel={updateChannel}
       refetchQueries={refetchQueries}
+      onDelete={onDelete}
     />
   )
 }

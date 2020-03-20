@@ -12,6 +12,7 @@ class DeleteChannel extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     deleteChannel: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
   }
 
   state = {
@@ -27,7 +28,7 @@ class DeleteChannel extends Component {
 
     if (mode !== 'pending') return null
 
-    const { id, deleteChannel } = this.props
+    const { id, deleteChannel, onDelete } = this.props
 
     this.setState({ mode: 'deleting' })
 
@@ -35,7 +36,8 @@ class DeleteChannel extends Component {
       variables: { id },
     })
       .then(() => {
-        window.location = '/'
+        this.setState({ mode: 'deleted' })
+        onDelete()
       })
       .catch(err => {
         console.error(err)
@@ -75,6 +77,12 @@ class DeleteChannel extends Component {
             {mode === 'deleting' && (
               <Text mb={6} f={2} color="state.alert">
                 Deleting...
+              </Text>
+            )}
+
+            {mode === 'deleted' && (
+              <Text mb={6} f={2} color="state.alert">
+                Deleted!
               </Text>
             )}
 

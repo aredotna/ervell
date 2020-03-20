@@ -91,7 +91,11 @@ const openEditChannel = (
   id: string | number,
   refetchQueries: PureQueryOptions[]
 ) => {
-  const modal = new Modal(ManageChannel, { id, refetchQueries })
+  const modal = new Modal(ManageChannel, {
+    id,
+    refetchQueries,
+    onDelete: () => {},
+  })
   modal.open()
 }
 
