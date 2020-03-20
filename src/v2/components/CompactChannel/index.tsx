@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
+import { PureQueryOptions, ApolloClient } from 'apollo-client'
+import { useApolloClient } from 'react-apollo'
 import constants from 'v2/styles/constants'
 
 import {
@@ -20,7 +20,7 @@ import ManageChannel from 'v2/components/ManageChannel'
 import Modal from 'v2/components/UI/Modal'
 
 import { CompactChannel as Channel } from '__generated__/CompactChannel'
-import { PureQueryOptions } from 'apollo-client'
+import compactChannel from './fragments/compactChannel'
 
 const Primary = styled.div`
   ${overflowEllipsis}
@@ -77,10 +77,6 @@ export const EmptyCompactChannel = ({ children, ...props }) => (
   </Container>
 )
 
-EmptyCompactChannel.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-}
-
 interface CompactChannelProps {
   channel: Channel
   showEditButton?: boolean
@@ -89,12 +85,23 @@ interface CompactChannelProps {
 
 const openEditChannel = (
   id: string | number,
-  refetchQueries: PureQueryOptions[]
+  refetchQueries: PureQueryOptions[],
+  client: ApolloClient<object>
 ) => {
   const modal = new Modal(ManageChannel, {
     id,
     refetchQueries,
-    onDelete: () => {},
+    onDelete: () => {
+      client.writeFragment({
+        id: `Channel:${id}`,
+        fragment: compactChannel,
+        data: null,
+      })
+      modal.close()
+    },
+    onUpdate: () => {
+      modal.close()
+    },
   })
   modal.open()
 }
@@ -106,6 +113,7 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
   ...rest
 }) => {
   const [mode, setMode] = useState<'resting' | 'hovered'>('resting')
+  const client = useApolloClient()
 
   const handleMouseOver = useCallback(() => {
     showEditButton && setMode('hovered')
@@ -118,7 +126,7 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
   const onEditClick = e => {
     e.preventDefault()
     e.stopPropagation()
-    openEditChannel(channel.id, refetchQueries)
+    openEditChannel(channel.id, refetchQueries, client)
   }
 
   return (
@@ -145,7 +153,7 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
           {channel.owner.__typename === 'Group' && (
             <GroupBadge
               visibility={channel.owner.visibility}
-              color={`channel.${channel.visibility}`}
+              color={`channel.${channel.visibility.toLowerCase()}`}
             />
           )}
         </Label>

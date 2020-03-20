@@ -13,6 +13,12 @@ class DeleteChannel extends Component {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     deleteChannel: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
+    refetchQueries: PropTypes.arrayOf(
+      PropTypes.shape({
+        query: PropTypes.object.isRequired,
+        variables: PropTypes.object,
+      })
+    ),
   }
 
   state = {
@@ -28,12 +34,13 @@ class DeleteChannel extends Component {
 
     if (mode !== 'pending') return null
 
-    const { id, deleteChannel, onDelete } = this.props
+    const { id, deleteChannel, onDelete, refetchQueries } = this.props
 
     this.setState({ mode: 'deleting' })
 
     return deleteChannel({
       variables: { id },
+      refetchQueries,
     })
       .then(() => {
         this.setState({ mode: 'deleted' })

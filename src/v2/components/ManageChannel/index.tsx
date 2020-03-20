@@ -60,7 +60,7 @@ interface ManageChannelProps {
   loading: boolean
   error: ApolloError
   refetchQueries?: PureQueryOptions[]
-  onUpdate?: () => void
+  onUpdate?: () => any
   onDelete?: () => any
 }
 
@@ -71,6 +71,9 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
   error,
   updateChannel,
   refetchQueries,
+  onUpdate = () => {
+    window.location.reload()
+  },
   onDelete = () => {
     window.location.href = '/'
   },
@@ -100,6 +103,7 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
       refetchQueries,
     })
       .then(() => true)
+      .then(onUpdate)
       .catch(err => {
         const mappedErrors = mapErrors(err)
         const errors = {
@@ -109,8 +113,6 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
         return errors
       })
   }
-
-  console.log('onDelete', onDelete)
 
   return (
     <Form
@@ -291,7 +293,11 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
               {channel.can.destroy && (
                 <Accordion label="Delete channel" mode="closed">
                   <Box m={7}>
-                    <DeleteChannel id={channel.id} onDelete={onDelete} />
+                    <DeleteChannel
+                      id={channel.id}
+                      onDelete={onDelete}
+                      refetchQueries={refetchQueries}
+                    />
                   </Box>
                 </Accordion>
               )}
@@ -306,6 +312,7 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
 interface ManageChannelContainerProps {
   id: string | number
   refetchQueries?: PureQueryOptions[]
+  onUpdate?: () => any
   onDelete?: () => any
 }
 
@@ -313,6 +320,7 @@ const ManageChannelContainer: React.FC<ManageChannelContainerProps> = ({
   id,
   refetchQueries,
   onDelete,
+  onUpdate,
 }) => {
   const { data, loading, error } = useQuery<
     ManageChannelQuery,
@@ -333,6 +341,7 @@ const ManageChannelContainer: React.FC<ManageChannelContainerProps> = ({
       updateChannel={updateChannel}
       refetchQueries={refetchQueries}
       onDelete={onDelete}
+      onUpdate={onUpdate}
     />
   )
 }
