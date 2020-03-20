@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -20,6 +20,7 @@ import ManageChannel from 'v2/components/ManageChannel'
 import Modal from 'v2/components/UI/Modal'
 
 import { CompactChannel as Channel } from '__generated__/CompactChannel'
+import { PureQueryOptions } from 'apollo-client'
 
 const Primary = styled.div`
   ${overflowEllipsis}
@@ -83,32 +84,37 @@ EmptyCompactChannel.propTypes = {
 interface CompactChannelProps {
   channel: Channel
   showEditButton?: boolean
+  refetchQueries?: PureQueryOptions[]
 }
 
-const openEditChannel = (id: string | number) => {
-  const modal = new Modal(ManageChannel, { id })
+const openEditChannel = (
+  id: string | number,
+  refetchQueries: PureQueryOptions[]
+) => {
+  const modal = new Modal(ManageChannel, { id, refetchQueries })
   modal.open()
 }
 
 export const CompactChannel: React.FC<CompactChannelProps> = ({
   channel,
   showEditButton = false,
+  refetchQueries,
   ...rest
 }) => {
   const [mode, setMode] = useState<'resting' | 'hovered'>('resting')
 
-  const mouseOver = () => {
+  const handleMouseOver = useCallback(() => {
     showEditButton && setMode('hovered')
-  }
+  }, [showEditButton, setMode])
 
-  const mouseOut = () => {
+  const handleMouseOut = useCallback(() => {
     showEditButton && setMode('resting')
-  }
+  }, [showEditButton, setMode])
 
   const onEditClick = e => {
     e.preventDefault()
     e.stopPropagation()
-    openEditChannel(channel.id)
+    openEditChannel(channel.id, refetchQueries)
   }
 
   return (
@@ -116,8 +122,8 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
       href={channel.href}
       visibility={channel.visibility}
       {...rest}
-      onMouseEnter={mouseOver}
-      onMouseLeave={mouseOut}
+      onMouseEnter={handleMouseOver}
+      onMouseLeave={handleMouseOut}
     >
       <Primary>
         <Label f={4} dangerouslySetInnerHTML={{ __html: channel.title }} />
@@ -151,3 +157,5 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
     </Container>
   )
 }
+
+export const MemoizedCompactChannel = React.memo(CompactChannel)
