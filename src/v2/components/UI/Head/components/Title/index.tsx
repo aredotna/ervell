@@ -3,7 +3,7 @@ import { unescape } from 'underscore'
 
 import Head from 'v2/components/UI/Head'
 
-export const TITLE_TEMPLATE = 'Are.na / %s'
+export const TITLE_TEMPLATE = '%s — Are.na'
 
 interface Props {
   children: string

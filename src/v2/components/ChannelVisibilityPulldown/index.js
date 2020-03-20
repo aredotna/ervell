@@ -19,38 +19,40 @@ const explanations = {
   },
 }
 
-const ChannelVisibilityPulldown = ({ value, onChange, type }) => (
-  <Pulldown
-    value={value}
-    onChange={onChange}
-    options={{
-      PUBLIC: (
-        <ChannelVisibilityPulldownOption
-          label="Open"
-          visibility="public"
-          description="anyone can add"
-          explanation={explanations[type].PUBLIC}
-        />
-      ),
-      CLOSED: (
-        <ChannelVisibilityPulldownOption
-          label="Closed"
-          visibility="closed"
-          description="only collaborators can add"
-          explanation={explanations[type].CLOSED}
-        />
-      ),
-      PRIVATE: (
-        <ChannelVisibilityPulldownOption
-          label="Private"
-          visibility="private"
-          description="only collaborators can view / add"
-          explanation={explanations[type].PRIVATE}
-        />
-      ),
-    }}
-  />
-)
+const ChannelVisibilityPulldown = ({ value, onChange, type }) => {
+  return (
+    <Pulldown
+      value={value}
+      onChange={onChange}
+      options={{
+        PUBLIC: (
+          <ChannelVisibilityPulldownOption
+            label="Open"
+            visibility="public"
+            description="anyone can add"
+            explanation={explanations[type].PUBLIC}
+          />
+        ),
+        CLOSED: (
+          <ChannelVisibilityPulldownOption
+            label="Closed"
+            visibility="closed"
+            description="only collaborators can add"
+            explanation={explanations[type].CLOSED}
+          />
+        ),
+        PRIVATE: (
+          <ChannelVisibilityPulldownOption
+            label="Private"
+            visibility="private"
+            description="only collaborators can view / add"
+            explanation={explanations[type].PRIVATE}
+          />
+        ),
+      }}
+    />
+  )
+}
 
 ChannelVisibilityPulldown.propTypes = {
   value: PropTypes.oneOf(['PUBLIC', 'CLOSED', 'PRIVATE']),

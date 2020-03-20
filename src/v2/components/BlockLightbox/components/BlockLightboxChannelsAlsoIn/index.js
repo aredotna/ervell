@@ -4,7 +4,8 @@ import { propType } from 'graphql-anywhere'
 
 import Box from 'v2/components/UI/Box'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
-import CompactChannel, {
+import {
+  CompactChannel,
   EmptyCompactChannel,
 } from 'v2/components/CompactChannel'
 

@@ -8,7 +8,8 @@ import blockLightboxConnectionsFragment from 'v2/components/BlockLightbox/compon
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
-import CompactChannel, {
+import {
+  CompactChannel,
   EmptyCompactChannel,
 } from 'v2/components/CompactChannel'
 import { LoadMore } from 'v2/components/BlockLightbox/components/BlockLightboxConnections/components/LoadMore'
