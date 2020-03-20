@@ -10,7 +10,7 @@ import profileChannelIndexQuery from 'v2/components/ProfileChannelIndex/queries/
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
-import { MemoizedCompactChannel as CompactChannel } from 'v2/components/CompactChannel'
+import { CompactChannel } from 'v2/components/CompactChannel'
 import BlocksLoadingIndicator from 'v2/components/UI/BlocksLoadingIndicator'
 import ProfileEmptyMessage from 'v2/components/ProfileEmptyMessage'
 

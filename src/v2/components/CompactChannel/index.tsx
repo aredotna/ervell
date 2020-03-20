@@ -106,7 +106,7 @@ const openEditChannel = (
   modal.open()
 }
 
-export const CompactChannel: React.FC<CompactChannelProps> = ({
+const CompactChannelComponent: React.FC<CompactChannelProps> = ({
   channel,
   showEditButton = false,
   refetchQueries,
@@ -170,4 +170,4 @@ export const CompactChannel: React.FC<CompactChannelProps> = ({
   )
 }
 
-export const MemoizedCompactChannel = React.memo(CompactChannel)
+export const CompactChannel = React.memo(CompactChannelComponent)

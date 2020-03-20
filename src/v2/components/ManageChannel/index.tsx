@@ -60,8 +60,8 @@ interface ManageChannelProps {
   loading: boolean
   error: ApolloError
   refetchQueries?: PureQueryOptions[]
-  onUpdate?: () => any
-  onDelete?: () => any
+  onUpdate?: () => void
+  onDelete?: () => void
 }
 
 const ManageChannel: React.FC<ManageChannelProps> = ({
@@ -312,8 +312,8 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
 interface ManageChannelContainerProps {
   id: string | number
   refetchQueries?: PureQueryOptions[]
-  onUpdate?: () => any
-  onDelete?: () => any
+  onUpdate?: () => void
+  onDelete?: () => void
 }
 
 const ManageChannelContainer: React.FC<ManageChannelContainerProps> = ({
