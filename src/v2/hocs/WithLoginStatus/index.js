@@ -7,10 +7,15 @@ const withLoginStatus = WrappedComponent => {
   class WithLoginStatus extends Component {
     render() {
       const { client, ...rest } = this.props
-      const { loginStatus } = client.readQuery({
+      const cache = client.readQuery({
         query: isLoggedInQuery,
       })
 
+      if (!cache) {
+        return false
+      }
+
+      const { loginStatus } = cache
       const isLoggedIn = loginStatus && loginStatus.isLoggedIn
 
       return <WrappedComponent isLoggedIn={isLoggedIn} {...rest} />
