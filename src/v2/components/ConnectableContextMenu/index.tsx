@@ -35,14 +35,19 @@ export const ConnectableContextMenu: React.FC<Props> = ({
     sourceUrl ||
     findOriginalUrl ||
     connectable.can.mute ||
-    channel.can.reorder_connections
+    channel.can.reorder_connections ||
+    connectable.connection.can.destroy
+
+  const canRemove =
+    channel.can.remove_connections ||
+    (connectable.__typename !== 'Channel' && connectable.can.remove) ||
+    connectable.connection.can.destroy
 
   if (!isDisplayable) return null
 
   return (
     <ContextMenu position="absolute" top={8} right={8} zIndex={1} {...rest}>
-      {(channel.can.remove_connections ||
-        (connectable.__typename !== 'Channel' && connectable.can.remove)) && (
+      {canRemove && (
         <ConnectableContextMenuRemoveConnection
           channelId={channel.id}
           connectableId={connectable.id}
