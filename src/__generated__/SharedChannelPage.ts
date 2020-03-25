@@ -123,10 +123,16 @@ export interface SharedChannelPage_channel_initial_contents_Text_connection_user
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_Text_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_Text_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_Text_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_Text_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Text_source {
@@ -174,10 +180,16 @@ export interface SharedChannelPage_channel_initial_contents_Image_connection_use
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_Image_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_Image_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_Image_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_Image_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Image_source {
@@ -226,10 +238,16 @@ export interface SharedChannelPage_channel_initial_contents_Link_connection_user
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_Link_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_Link_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_Link_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_Link_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Link_source {
@@ -278,10 +296,16 @@ export interface SharedChannelPage_channel_initial_contents_Embed_connection_use
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_Embed_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_Embed_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_Embed_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Embed_source {
@@ -329,10 +353,16 @@ export interface SharedChannelPage_channel_initial_contents_Attachment_connectio
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_Attachment_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_Attachment_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_Attachment_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Attachment_source {
@@ -381,10 +411,16 @@ export interface SharedChannelPage_channel_initial_contents_PendingBlock_connect
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_PendingBlock_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_PendingBlock_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_PendingBlock_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_PendingBlock_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_PendingBlock_source {
@@ -431,10 +467,16 @@ export interface SharedChannelPage_channel_initial_contents_Channel_connection_u
   name: string | null;
 }
 
+export interface SharedChannelPage_channel_initial_contents_Channel_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface SharedChannelPage_channel_initial_contents_Channel_connection {
   __typename: "Connection";
   created_at: string | null;
   user: SharedChannelPage_channel_initial_contents_Channel_connection_user | null;
+  can: SharedChannelPage_channel_initial_contents_Channel_connection_can | null;
 }
 
 export interface SharedChannelPage_channel_initial_contents_Channel_source {
