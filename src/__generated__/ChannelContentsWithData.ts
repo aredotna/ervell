@@ -32,10 +32,16 @@ export interface ChannelContentsWithData_channel_initial_contents_Text_connectio
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Text_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Text_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_Text_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_Text_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_Text_source {
@@ -83,10 +89,16 @@ export interface ChannelContentsWithData_channel_initial_contents_Image_connecti
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Image_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Image_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_Image_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_Image_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_Image_source {
@@ -135,10 +147,16 @@ export interface ChannelContentsWithData_channel_initial_contents_Link_connectio
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Link_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Link_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_Link_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_Link_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_Link_source {
@@ -187,10 +205,16 @@ export interface ChannelContentsWithData_channel_initial_contents_Embed_connecti
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Embed_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_Embed_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_Embed_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_Embed_source {
@@ -238,10 +262,16 @@ export interface ChannelContentsWithData_channel_initial_contents_Attachment_con
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Attachment_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_Attachment_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_Attachment_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_Attachment_source {
@@ -290,10 +320,16 @@ export interface ChannelContentsWithData_channel_initial_contents_PendingBlock_c
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_PendingBlock_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_PendingBlock_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_PendingBlock_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_PendingBlock_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_PendingBlock_source {
@@ -340,10 +376,16 @@ export interface ChannelContentsWithData_channel_initial_contents_Channel_connec
   name: string | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Channel_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Channel_connection {
   __typename: "Connection";
   created_at: string | null;
   user: ChannelContentsWithData_channel_initial_contents_Channel_connection_user | null;
+  can: ChannelContentsWithData_channel_initial_contents_Channel_connection_can | null;
 }
 
 export interface ChannelContentsWithData_channel_initial_contents_Channel_source {

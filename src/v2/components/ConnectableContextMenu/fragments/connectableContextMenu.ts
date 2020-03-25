@@ -23,6 +23,16 @@ export const connectableContextMenuConnectableFragment = gql`
         remove: manage
       }
     }
+
+    ... on ConnectableInterface {
+      href
+      connection {
+        can {
+          destroy
+        }
+      }
+    }
+
     ... on Channel {
       can {
         mute
