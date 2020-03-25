@@ -18,6 +18,10 @@ export default createGlobalStyle`
     canvas,
     [style*='background-image'] {
       filter: invert(100%) hue-rotate(180deg);
+
+      iframe {
+        filter: invert(100%) hue-rotate(180deg);
+      }
     }
 
     // Chrome
