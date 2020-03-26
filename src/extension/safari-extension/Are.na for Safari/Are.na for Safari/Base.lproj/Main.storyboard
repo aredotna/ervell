@@ -49,6 +49,31 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Window" id="AxZ-jK-dJx">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="lYG-ye-sXg">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="xll-nM-OHZ">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="opK-28-GV6"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="NBq-Ab-dP5">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="Ywc-pk-bKt"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Mbs-pZ-yBI"/>
+                                        <menuItem title="Bring All to Front" id="BTk-jl-BJs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="0lW-fo-Nwu"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
