@@ -25,7 +25,12 @@ export default class ChannelMetadataActions extends Component {
     const {
       channel: { id },
     } = this.props
-    const modal = new Modal(ManageChannel, { id })
+
+    const onUpdate = href => {
+      window.location = href
+    }
+
+    const modal = new Modal(ManageChannel, { id, onUpdate })
     modal.open()
   }
 

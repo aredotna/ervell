@@ -60,7 +60,7 @@ interface ManageChannelProps {
   loading: boolean
   error: ApolloError
   refetchQueries?: PureQueryOptions[]
-  onUpdate?: () => void
+  onUpdate?: (href?: string) => void
   onDelete?: () => void
 }
 
@@ -102,8 +102,18 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
       variables,
       refetchQueries,
     })
-      .then(() => true)
-      .then(onUpdate)
+      .then(
+        ({
+          data: {
+            update_channel: {
+              channel: { href },
+            },
+          },
+        }) => {
+          onUpdate(href)
+          return true
+        }
+      )
       .catch(err => {
         const mappedErrors = mapErrors(err)
         const errors = {
