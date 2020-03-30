@@ -431,7 +431,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Are.na for Safari Extension/Are_na_for_Safari_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari Extension/Info.plist";
@@ -440,7 +440,8 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.120;
 				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari.Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -453,7 +454,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Are.na for Safari Extension/Are_na_for_Safari_Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari Extension/Info.plist";
@@ -462,7 +463,8 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.120;
 				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari.Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -479,7 +481,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari/Info.plist";
@@ -487,7 +489,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.120;
 				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -503,7 +506,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = RCL6FRSRW9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Are.na for Safari/Info.plist";
@@ -511,7 +514,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.120;
 				PRODUCT_BUNDLE_IDENTIFIER = "arena.Are-na-for-Safari";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
