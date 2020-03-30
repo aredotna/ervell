@@ -23,6 +23,7 @@ export default gql`
         receive_tips_emails
         receive_newsletter
         receive_group_premium_emails
+        receive_sunday_review_emails
       }
     }
   }

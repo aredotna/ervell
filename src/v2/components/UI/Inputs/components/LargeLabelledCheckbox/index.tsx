@@ -28,7 +28,8 @@ const StyledCheckbox = styled(Box).attrs({ mr: 6 })`
   width: 1.5em;
   height: 1.5em;
   border-radius: 3px;
-  box-shadow: 0 0 0 1px ${props => props.theme.colors.gray.base};
+  box-shadow: 0 0 0 1px
+    ${props => (props.disabled ? props.theme.colors.gray.light : 'black')};
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px pink;
@@ -52,12 +53,14 @@ const CheckboxLabel = styled(Label)`
 
 interface CheckboxProps {
   checked: boolean
+  disabled?: boolean
   className?: string
   onChange?: (any) => void
 }
 
 const LargeLabeledCheckbox: React.FC<CheckboxProps> = ({
   checked,
+  disabled,
   className,
   children,
   onChange,
@@ -71,7 +74,11 @@ const LargeLabeledCheckbox: React.FC<CheckboxProps> = ({
   return (
     <CheckboxContainer className={className} onClick={handleChecked}>
       <HiddenCheckbox defaultChecked={isChecked} {...props} checked={checked} />
-      <StyledCheckbox defaultChecked={isChecked} checked={checked}>
+      <StyledCheckbox
+        defaultChecked={isChecked}
+        checked={checked}
+        disabled={disabled}
+      >
         <Icon viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />
         </Icon>

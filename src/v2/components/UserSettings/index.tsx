@@ -84,6 +84,9 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
     }
 
     return updateAccount({ variables })
+      .then(response => {
+        console.log(response)
+      })
       .then(() => {
         return axios.get('/me/refresh')
       })
@@ -346,6 +349,42 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                         >
                           Send me alerts when members of my group hit their
                           block limits
+                        </LargeLabelledCheckbox>
+                      )
+                    }}
+                  </Field>
+
+                  <Field
+                    name="receive_sunday_review_emails"
+                    initialValue={me.settings.receive_sunday_review_emails}
+                  >
+                    {props => {
+                      return (
+                        <LargeLabelledCheckbox
+                          name={props.input.name}
+                          checked={me.is_premium ? props.input.value : false}
+                          onChange={props.input.onChange}
+                          disabled={!me.is_premium}
+                        >
+                          <Text>
+                            Receive Sunday Review emails{' '}
+                            {!me.is_premium && (
+                              <Text
+                                display="inline"
+                                f={1}
+                                color="state.premium"
+                                fontWeight="bold"
+                                pl={3}
+                              >
+                                <a
+                                  href="/settings/billing"
+                                  style={{ color: 'inherit' }}
+                                >
+                                  (Premium-only)
+                                </a>
+                              </Text>
+                            )}
+                          </Text>
                         </LargeLabelledCheckbox>
                       )
                     }}
