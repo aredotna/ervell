@@ -1603,6 +1603,7 @@ type MeSettings {
   receive_newsletter: Boolean
   receive_tips_emails: Boolean
   receive_group_premium_emails: Boolean
+  receive_sunday_review_emails: Boolean
   show_nsfw: Boolean
   show_tour: Boolean
 }

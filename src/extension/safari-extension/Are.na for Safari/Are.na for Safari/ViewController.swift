@@ -15,7 +15,12 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appNameLabel.stringValue = "Are.na for Safari";
+        self.view.window?.title = "Are.na for Safari"
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.view.window?.title = "Are.na for Safari"
     }
     
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
@@ -27,5 +32,4 @@ class ViewController: NSViewController {
             }
         }
     }
-
 }
