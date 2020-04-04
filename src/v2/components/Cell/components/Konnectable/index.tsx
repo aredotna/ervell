@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
+import { Link } from 'react-router-dom'
 
 import openBlockLightbox from 'v2/util/openBlockLightbox'
 import { touch as isTouchDevice } from 'v2/util/is'
@@ -17,7 +18,7 @@ import KonnectableMetadata from 'v2/components/Cell/components/Konnectable/compo
 import KonnectableBlockOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay'
 import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay'
 
-const Container = styled.a`
+const Container = styled(Link)`
   box-sizing: border-box;
   position: relative;
   display: block;
@@ -116,7 +117,7 @@ export class Konnectable extends PureComponent<Props> {
 
     return (
       <Container
-        href={mode !== Mode.OVERLAY ? konnectable.href : undefined}
+        to={mode !== Mode.OVERLAY ? konnectable.href : undefined}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}

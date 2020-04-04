@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { space } from 'styled-system'
 import { propType } from 'graphql-anywhere'
+import { Link } from 'react-router-dom'
 
 import constants from 'v2/styles/constants'
 
@@ -27,7 +28,7 @@ const Wrap = styled(Box).attrs({})`
   align-items: flex-end;
 `
 
-const Container = styled.a.attrs({
+const Container = styled(Link).attrs({
   px: 4,
   mb: 8,
 })`
@@ -78,7 +79,7 @@ export default class Indentifiable extends PureComponent {
 
     return (
       <Container
-        href={identifiable.href}
+        to={identifiable.href}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}

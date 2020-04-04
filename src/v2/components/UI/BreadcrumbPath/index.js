@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import constants from 'v2/styles/constants'
 
@@ -66,7 +67,7 @@ export default class BreadcrumbPath extends Component {
     return (
       <Container {...rest}>
         <Crumb>
-          <a href="/">Are.na</a>
+          <Link to="/">Are.na</Link>
         </Crumb>
 
         {children}

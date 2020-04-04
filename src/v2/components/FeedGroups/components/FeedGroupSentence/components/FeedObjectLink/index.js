@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import Text from 'v2/components/UI/Text'
 
-const Link = styled.a``
 const Span = styled.span``
 
 const Word = styled(Text)`
@@ -25,7 +25,7 @@ const FeedObjectLink = ({ __typename, label, href, visibility, ...rest }) => {
       color={__typename === 'Channel' ? `channel.${visibility}` : 'gray.base'}
       {...rest}
     >
-      <Tag href={href} dangerouslySetInnerHTML={{ __html: label }} />
+      <Tag to={href} dangerouslySetInnerHTML={{ __html: label }} />
     </Word>
   )
 }

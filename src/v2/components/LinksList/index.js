@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link as RouterLink } from 'react-router-dom'
 
 const Container = styled.div``
 
-const Link = styled.a`
+const Link = styled(RouterLink)`
   font-weight: bold;
   ${x => !x.href && 'cursor: default'}
 `
@@ -32,7 +33,7 @@ export default class LinksList extends Component {
         {links.map((link, i) => (
           <span key={link.id}>
             <Link
-              href={link.href}
+              to={link.href}
               length={link.label.length}
               dangerouslySetInnerHTML={{ __html: link.label }}
             />
