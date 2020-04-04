@@ -18,7 +18,7 @@ import ProfileViews from 'v2/pages/profile/ProfilePage/components/ProfileViews'
 import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'
 import profilePageQuery from 'v2/pages/profile/ProfilePage/queries/profilePage'
 
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     view: PropTypes.oneOf([
@@ -129,4 +129,68 @@ export default class ProfilePage extends Component {
       </ErrorBoundary>
     )
   }
+}
+
+import profileUiStateQuery from 'apps/profile/queries/profileUiState'
+
+const VALID_SORTS = ['UPDATED_AT', 'RANDOM']
+const VALID_INDEX_FILTERS = ['OWN', 'COLLABORATION']
+const VALID_BLOCK_FILTERS = [
+  'BLOCK',
+  'IMAGE',
+  'TEXT',
+  'EMBED',
+  'ATTACHMENT',
+  'LINK',
+]
+const VALID_FOLLOW_TYPES = ['CHANNEL', 'USER', 'GROUP']
+
+const setValid = (value, validValues, defaultValue) => {
+  if (validValues.includes(value)) return value
+  return defaultValue
+}
+
+// Weird container extracted from router
+export default ({ params, query }) => {
+  return (
+    <Query query={profileUiStateQuery}>
+      {({ data, error }) => {
+        if (error) return error.message
+        if (!data) return null
+
+        const { cookies } = data
+
+        const view = params.view || cookies.view || 'channels'
+        const sort = setValid(
+          query.sort || cookies.sort,
+          VALID_SORTS,
+          'UPDATED_AT'
+        )
+        const indexFilter = setValid(
+          query.filter || cookies.filter,
+          VALID_INDEX_FILTERS,
+          'OWN'
+        )
+
+        const blockFilter = setValid(
+          query.type || cookies.type,
+          VALID_BLOCK_FILTERS,
+          'BLOCK'
+        )
+
+        const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
+
+        return (
+          <ProfilePage
+            id={params.id}
+            view={view}
+            sort={sort}
+            filter={indexFilter}
+            type={blockFilter}
+            followType={followType}
+          />
+        )
+      }}
+    </Query>
+  )
 }
