@@ -113,16 +113,23 @@ export class Konnectable extends PureComponent<Props> {
 
   render() {
     const { mode } = this.state
-    const { konnectable, isPreviewable, children } = this.props
+    const { konnectable, isPreviewable, children, context } = this.props
 
     return (
       <Container
-        to={mode !== Mode.OVERLAY ? konnectable.href : undefined}
+        // to={mode !== Mode.OVERLAY ? konnectable.href : undefined}
+        to={{
+          pathname: mode !== Mode.OVERLAY ? konnectable.href : undefined,
+          state: {
+            background:
+              mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
+            context,
+          },
+        }}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onClick={this.openBlock}
         data-id={konnectable.id}
         data-no-instant={
           konnectable.__typename === 'Channel' ? undefined : true
