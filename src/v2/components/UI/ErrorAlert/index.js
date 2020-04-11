@@ -22,6 +22,9 @@ const ErrorAlert = ({ children, isReloadable, ...rest }) => (
             onClick={() => window.location.reload()}
             role="button"
             tabIndex={0}
+            style={{
+              cursor: 'pointer',
+            }}
           >
             Reload
           </a>
