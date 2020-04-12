@@ -24,6 +24,10 @@ console.time('authentication')
 app.use(require('../apps/authentication'))
 console.timeEnd('authentication')
 
+console.time('accept_invite')
+app.use(require('../apps/accept_invite'))
+console.timeEnd('accept_invite')
+
 console.time('confirmation')
 app.use(require('../apps/confirmation'))
 console.timeEnd('confirmation')
