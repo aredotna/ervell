@@ -4,7 +4,6 @@ import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
-// import Box from 'v2/components/UI/Box'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 import { Input } from 'v2/components/UI/Inputs'
 import CopyToClipboard from 'v2/components/UI/CopyToClipboard'
@@ -43,8 +42,6 @@ interface GroupInviteInviteProps {
 }
 
 export const GroupInvite: React.FC<GroupInviteInviteProps> = ({ group }) => {
-  console.log('group', group)
-
   const [createInviteCode] = useMutation<
     CreateGroupInviteMutation,
     CreateGroupInviteMutationVariables
@@ -63,8 +60,6 @@ export const GroupInvite: React.FC<GroupInviteInviteProps> = ({ group }) => {
         refetchQueries: [
           { query: MANAGE_GROUP_QUERY, variables: { id: group.id } },
         ],
-      }).then(response => {
-        console.log('response', response)
       })
     },
     [createInviteCode, group.id]
@@ -78,8 +73,6 @@ export const GroupInvite: React.FC<GroupInviteInviteProps> = ({ group }) => {
         refetchQueries: [
           { query: MANAGE_GROUP_QUERY, variables: { id: group.id } },
         ],
-      }).then(response => {
-        console.log('response', response)
       })
     },
     [deleteInviteCode, group.id]
@@ -90,11 +83,18 @@ export const GroupInvite: React.FC<GroupInviteInviteProps> = ({ group }) => {
       {!group.invite && (
         <>
           <Text f={1}>
-            Add new members to {group.name} by creating an invite link.
+            Add new members to <strong>{group.name}</strong> by creating an
+            invite link and sending it to your contacts.
           </Text>
-          <Button f={1} mt={4} bg="white" onClick={onCreate}>
+          <Button f={1} my={6} bg="white" onClick={onCreate}>
             Generate invite link
           </Button>
+          <Text f={1} mt={3}>
+            <em>
+              Invite links can be only be created by the group admin and can be
+              removed at any time.
+            </em>
+          </Text>
         </>
       )}
 

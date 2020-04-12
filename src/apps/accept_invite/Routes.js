@@ -10,7 +10,7 @@ export default () => (
   <BlankLayout>
     <Switch>
       <Route
-        path="/accept_invite/:code"
+        path="/i/:code"
         render={parseRoute(({ params }) => (
           <AcceptInvitePage code={params.code} />
         ))}
