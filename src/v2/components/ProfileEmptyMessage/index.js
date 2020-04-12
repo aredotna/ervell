@@ -10,6 +10,7 @@ import Box from 'v2/components/UI/Box'
 import Modal from 'v2/components/UI/Modal'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 import NewChannelForm from 'v2/components/NewChannelForm'
+import ManageGroup from 'v2/components/ManageGroup'
 
 const Copy = styled(Text)`
   text-align: center;
@@ -42,6 +43,16 @@ export default class ProfileEmptyMessage extends Component {
 
     const modal = new Modal(NewChannelForm, newChannelProps)
     modal.open()
+  }
+
+  openManageGroupModal = e => {
+    e.preventDefault()
+
+    const {
+      identifiable: { id },
+    } = this.props
+
+    new Modal(ManageGroup, { id, initialSection: 'invite' }).open()
   }
 
   render() {
@@ -79,14 +90,26 @@ export default class ProfileEmptyMessage extends Component {
               Your group will stay secret until you create a publicly visible
               channel.
             </Box>
-            <Button
-              f={[3, 3, 5]}
-              mt={7}
-              onClick={this.openNewChannelModal}
-              color="gray.bold"
-            >
-              Create a group channel
-            </Button>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <Button
+                f={[3, 3, 5]}
+                mt={7}
+                onClick={this.openNewChannelModal}
+                color="gray.bold"
+                bg="white"
+              >
+                Create a group channel
+              </Button>
+              <Button
+                f={[3, 3, 5]}
+                mt={3}
+                onClick={this.openManageGroupModal}
+                color="gray.bold"
+                bg="white"
+              >
+                Invite new members
+              </Button>
+            </Box>
           </div>
         )}
 
