@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import copy from 'copy-to-clipboard'
 
+import Text from 'v2/components/UI/Text'
+
 export default class CopyToClipboard extends Component {
   static propTypes = {
     value: PropTypes.string.isRequired,
@@ -45,8 +47,13 @@ export default class CopyToClipboard extends Component {
     const { currentLabel } = this.state
 
     return (
-      <a role="button" tabIndex={0} onClick={this.copyToClipboard}>
-        {currentLabel}
+      <a
+        role="button"
+        tabIndex={0}
+        onClick={this.copyToClipboard}
+        style={{ cursor: 'pointer' }}
+      >
+        <Text {...this.props}>{currentLabel}</Text>
       </a>
     )
   }
