@@ -106,7 +106,9 @@ export const AcceptInvitePage: React.FC<AcceptInvitePageProps> = ({ code }) => {
         <Button bg="white" f={6} mb={7} onClick={onAccept}>
           Yes
         </Button>
-        <SmallLink>No, but thanks anyway.</SmallLink>
+        <SmallLink>
+          <a href="/">No, but thanks anyway.</a>
+        </SmallLink>
       </ButtonContainer>
     </Container>
   )

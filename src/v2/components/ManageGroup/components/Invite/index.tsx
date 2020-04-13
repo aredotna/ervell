@@ -100,6 +100,10 @@ export const GroupInvite: React.FC<GroupInviteInviteProps> = ({ group }) => {
 
       {group.invite && (
         <>
+          <Text f={1} mb={4}>
+            Anyone with this link can join your group. Group members can view
+            and add content.
+          </Text>
           <Input f={1} mb={4} value={`${group.invite.href}`} readOnly />
           <CopyLink
             label="Copy invite link"
