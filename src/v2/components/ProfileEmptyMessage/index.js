@@ -25,6 +25,7 @@ const Copy = styled(Text)`
 export default class ProfileEmptyMessage extends Component {
   static propTypes = {
     isMine: PropTypes.bool,
+    isGroupIOwn: PropTypes.bool,
     identifiable: propType(emptyProfileFragment).isRequired,
   }
 
@@ -56,7 +57,7 @@ export default class ProfileEmptyMessage extends Component {
   }
 
   render() {
-    const { isMine, identifiable } = this.props
+    const { isMine, identifiable, isGroupIOwn } = this.props
     const isGroup = identifiable.__typename === 'Group'
 
     return (
@@ -100,15 +101,18 @@ export default class ProfileEmptyMessage extends Component {
               >
                 Create a group channel
               </Button>
-              <Button
-                f={[3, 3, 5]}
-                mt={3}
-                onClick={this.openManageGroupModal}
-                color="gray.bold"
-                bg="white"
-              >
-                Invite new members
-              </Button>
+
+              {isGroupIOwn && (
+                <Button
+                  f={[3, 3, 5]}
+                  mt={3}
+                  onClick={this.openManageGroupModal}
+                  color="gray.bold"
+                  bg="white"
+                >
+                  Invite new members
+                </Button>
+              )}
             </Box>
           </div>
         )}

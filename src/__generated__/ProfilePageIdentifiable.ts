@@ -52,6 +52,7 @@ export interface ProfilePageIdentifiable_Group {
   counts: ProfilePageIdentifiable_Group_counts | null;
   users: (ProfilePageIdentifiable_Group_users | null)[] | null;
   is_current_user_a_member: boolean | null;
+  is_current_user_the_owner: boolean | null;
   title: string | null;
   description: string | null;
   canonical: string | null;
