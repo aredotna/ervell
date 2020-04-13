@@ -1,7 +1,7 @@
 import express from 'express'
 
 import apolloMiddleware from 'v2/apollo/middleware'
-import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee'
+import ensureLoggedInMiddleware from 'lib/middleware/ensureLoggedIn'
 
 import pageResolver from 'v2/components/UI/Page/resolver'
 import Routes from 'apps/accept_invite/Routes'
