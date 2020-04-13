@@ -109,7 +109,7 @@ class ManageGroup extends Component {
 
   render() {
     const {
-      data: { loading, error },
+      data: { loading },
       initialSection,
     } = this.props
 
