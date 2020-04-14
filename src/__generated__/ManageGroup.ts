@@ -6,6 +6,12 @@
 // GraphQL fragment: ManageGroup
 // ====================================================
 
+export interface ManageGroup_invite {
+  __typename: "GroupInviteType";
+  code: string | null;
+  href: string | null;
+}
+
 export interface ManageGroup_can {
   __typename: "GroupCan";
   manage: boolean | null;
@@ -48,6 +54,7 @@ export interface ManageGroup {
   name: string | null;
   href: string | null;
   description: string | null;
+  invite: ManageGroup_invite | null;
   can: ManageGroup_can | null;
   owner: ManageGroup_owner | null;
   memberships: (ManageGroup_memberships | null)[] | null;

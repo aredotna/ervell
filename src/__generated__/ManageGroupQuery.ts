@@ -6,6 +6,12 @@
 // GraphQL query operation: ManageGroupQuery
 // ====================================================
 
+export interface ManageGroupQuery_group_invite {
+  __typename: "GroupInviteType";
+  code: string | null;
+  href: string | null;
+}
+
 export interface ManageGroupQuery_group_can {
   __typename: "GroupCan";
   manage: boolean | null;
@@ -48,6 +54,7 @@ export interface ManageGroupQuery_group {
   name: string | null;
   href: string | null;
   description: string | null;
+  invite: ManageGroupQuery_group_invite | null;
   can: ManageGroupQuery_group_can | null;
   owner: ManageGroupQuery_group_owner | null;
   memberships: (ManageGroupQuery_group_memberships | null)[] | null;

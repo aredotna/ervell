@@ -6,6 +6,12 @@
 // GraphQL mutation operation: updateGroupMutation
 // ====================================================
 
+export interface updateGroupMutation_update_group_group_invite {
+  __typename: "GroupInviteType";
+  code: string | null;
+  href: string | null;
+}
+
 export interface updateGroupMutation_update_group_group_can {
   __typename: "GroupCan";
   manage: boolean | null;
@@ -48,6 +54,7 @@ export interface updateGroupMutation_update_group_group {
   name: string | null;
   href: string | null;
   description: string | null;
+  invite: updateGroupMutation_update_group_group_invite | null;
   can: updateGroupMutation_update_group_group_can | null;
   owner: updateGroupMutation_update_group_group_owner | null;
   memberships: (updateGroupMutation_update_group_group_memberships | null)[] | null;

@@ -7,6 +7,7 @@ import profileUiStateQuery from 'apps/profile/queries/profileUiState'
 import parseRoute from 'v2/util/parseRoute'
 
 import ProfilePage from 'v2/pages/profile/ProfilePage'
+import { AcceptInvitePage } from 'v2/pages/accept_invite/AcceptInvitePage'
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM']
 const VALID_INDEX_FILTERS = ['OWN', 'COLLABORATION']
@@ -27,6 +28,12 @@ const setValid = (value, validValues, defaultValue) => {
 
 export default () => (
   <Switch>
+    <Route
+      path="/group/:id/invite/:code"
+      render={parseRoute(({ params }) => (
+        <AcceptInvitePage code={params.code} />
+      ))}
+    />
     <Route
       path="/:id/:view?"
       render={parseRoute(({ params, query }) => (

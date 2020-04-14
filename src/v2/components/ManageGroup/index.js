@@ -19,6 +19,7 @@ import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import TitledDialog from 'v2/components/UI/TitledDialog'
 import DeleteGroup from 'v2/components/ManageGroup/components/DeleteGroup'
 import ManageUsers from 'v2/components/ManageGroup/components/ManageUsers'
+import { GroupInvite } from 'v2/components/ManageGroup/components/Invite'
 import {
   LabelledInput,
   Label,
@@ -122,7 +123,7 @@ class ManageGroup extends Component {
 
     return (
       <TitledDialog
-        title={`Edit ${group.name}`}
+        title={`Edit ${group && group.name}`}
         label={
           {
             resting: 'Done',
@@ -180,6 +181,18 @@ class ManageGroup extends Component {
           >
             <Box m={7}>
               <ManageUsers channel_id={channel_id} group={group} />
+            </Box>
+          </Accordion>
+        )}
+
+        {group.can.manage && (
+          <Accordion
+            label="Invite members"
+            key="invite"
+            mode={initialSection === 'invite' ? 'open' : 'closed'}
+          >
+            <Box m={7}>
+              <GroupInvite group={group} />
             </Box>
           </Accordion>
         )}
