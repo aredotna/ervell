@@ -3,6 +3,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import styled from 'styled-components'
 
+import Title from 'v2/components/UI/Head/components/Title'
 import CenteringBox from 'v2/components/UI/CenteringBox'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import Text from 'v2/components/UI/Text'
@@ -82,6 +83,7 @@ export const AcceptInvitePage: React.FC<AcceptInvitePageProps> = ({ code }) => {
 
   return (
     <Container>
+      <Title>Join {group.name}</Title>
       <Headline>
         You have been invited to join <strong>{group.name}</strong>.
       </Headline>
