@@ -9,6 +9,10 @@ export default gql`
     name
     href
     description(format: MARKDOWN)
+    invite {
+      code
+      href(absolute: true)
+    }
     can {
       manage
       manage_users

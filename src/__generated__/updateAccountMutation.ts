@@ -11,6 +11,7 @@ export interface UpdateAccountMutation_update_account_me_settings {
   receive_email: string | null;
   receive_tips_emails: boolean | null;
   receive_group_premium_emails: boolean | null;
+  receive_sunday_review_emails: boolean | null;
   exclude_from_indexes: boolean | null;
   receive_newsletter: boolean | null;
   show_nsfw: boolean | null;
@@ -46,6 +47,7 @@ export interface UpdateAccountMutationVariables {
   receive_newsletter?: boolean | null;
   receive_tips_emails?: boolean | null;
   receive_group_premium_emails?: boolean | null;
+  receive_sunday_review_emails?: boolean | null;
   show_tour?: boolean | null;
   exclude_from_indexes?: boolean | null;
   bio?: string | null;

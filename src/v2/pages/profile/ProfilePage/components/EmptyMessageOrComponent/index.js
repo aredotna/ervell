@@ -23,6 +23,7 @@ const EmptyMessageOrComponent = ({
       <ProfileEmptyMessage
         key="profileEmptyMessage"
         isMine={isMyProfile}
+        isGroupIOwn={identifiable.is_current_user_the_owner}
         identifiable={identifiable}
         {...rest}
       />

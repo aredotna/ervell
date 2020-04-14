@@ -1,6 +1,8 @@
 import express from 'express'
 
 import apolloMiddleware from 'v2/apollo/middleware'
+import ensureLoggedInMiddleware from 'lib/middleware/ensureLoggedIn'
+
 import pageResolver from 'v2/components/UI/Page/resolver'
 import Routes from 'apps/profile/Routes'
 import withStaticRouter from 'v2/hocs/WithStaticRouter'
@@ -26,6 +28,9 @@ const resolve = [
 ]
 
 app
+
+app
+  .get('/group/:id/invite/:code', ensureLoggedInMiddleware, ...resolve)
   .get('/:id/', ...resolve)
   .get('/:id/all', ...resolve)
   .get('/:id/blocks', ...resolve)

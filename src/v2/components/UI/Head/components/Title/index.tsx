@@ -6,11 +6,12 @@ import Head from 'v2/components/UI/Head'
 export const TITLE_TEMPLATE = '%s — Are.na'
 
 interface Props {
-  children: string
+  children: string | string[]
 }
 
 export const Title: React.FC<Props> = ({ children }) => {
-  const title = TITLE_TEMPLATE.replace('%s', unescape(children))
+  const string = children instanceof Array ? children.join(' ') : children
+  const title = TITLE_TEMPLATE.replace('%s', unescape(string))
 
   return (
     <Head>
