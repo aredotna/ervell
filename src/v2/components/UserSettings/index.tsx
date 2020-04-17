@@ -79,7 +79,10 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
   const handleSubmit = values => {
     const variables = {
       ...values,
-      home_path: values.custom_home_path || values.home_path,
+      home_path:
+        values.home_path == 'custom'
+          ? values.custom_home_path
+          : values.home_path,
       custom_home_path: undefined,
     }
 
