@@ -14,6 +14,7 @@ export interface SerializeMeQuery_serializedMe {
   avatar: string | null;
   authentication_token: string | null;
   is_premium: boolean | null;
+  slug: string | null;
 }
 
 export interface SerializeMeQuery {

@@ -131,6 +131,7 @@ export const initApolloClient = ({
         avatar: null,
         authentication_token: null,
         is_premium: null,
+        slug: null,
         ...serializedMe,
       },
     },
