@@ -36,6 +36,7 @@ type ClientSerializedMe {
   avatar: String
   authentication_token: String
   is_premium: Boolean
+  slug: String
 }
 
 type ClientSharify {

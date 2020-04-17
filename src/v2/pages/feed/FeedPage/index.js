@@ -6,7 +6,7 @@ import Constrain from 'v2/components/UI/Constrain'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import Head from 'v2/components/UI/Head'
 
-import FeedMetadata from 'v2/components/FeedMetadata'
+import { FeedMetadata } from 'v2/components/FeedMetadata'
 import NoFollowingMessage from 'v2/components/Feed/components/NoFollowingMessage'
 import Feed from 'v2/components/Feed'
 

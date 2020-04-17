@@ -19,6 +19,7 @@ export default user => {
     initials,
     avatar,
     name,
+    slug: user.slug,
     authentication_token: user.authentication_token,
     is_premium: user.is_premium,
   }

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 
 import Grid from 'v2/components/UI/Grid'
 import HeaderMetadataContainer from 'v2/components/UI/HeaderMetadata/HeaderMetadataContainer'
-import ExploreBreadcrumb from 'v2/components/ExploreMetadata/components/ExploreBreadcrumb'
+import { ExploreBreadcrumb } from 'v2/components/ExploreMetadata/components/ExploreBreadcrumb'
 import ExploreMetadataView from 'v2/components/ExploreMetadata/components/ExploreMetadataView'
 import ExploreMetadataSort from 'v2/components/ExploreMetadata/components/ExploreMetadataSort'
 import ExploreMetdataBlockFilter from 'v2/components/ExploreMetadata/components/ExploreMetadataBlockFilter'

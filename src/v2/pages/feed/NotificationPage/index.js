@@ -10,7 +10,7 @@ import Constrain from 'v2/components/UI/Constrain'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import Title from 'v2/components/UI/Head/components/Title'
 
-import FeedMetadata from 'v2/components/FeedMetadata'
+import { FeedMetadata } from 'v2/components/FeedMetadata'
 import Feed from 'v2/components/Feed'
 
 class NotificationPage extends Component {
