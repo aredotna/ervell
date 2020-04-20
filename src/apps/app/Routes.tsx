@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import parseRoute from '../../v2/util/parseRoute'
 
 // Feed
@@ -18,15 +18,11 @@ import BlockPage from '../../v2/pages/block'
 // Block modal
 import Modal from 'v2/components/UI/Modal/Portal'
 import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
-import ModalBlockLightbox from 'v2/components/ModalBlockLightbox'
+import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
 
 export const Routes = () => {
   const location = useLocation()
-  const history = useHistory()
   const background = location.state && JSON.parse(location.state.background)
-
-  console.log('background', background)
-  console.log('location', location)
 
   return (
     <>
@@ -95,11 +91,9 @@ export const Routes = () => {
           path="/block/:id"
           render={parseRoute(({ params }) => {
             const context = location.state.context
-            // get the pathname before the block modal opened
-            const pathname = background.pathname
 
             const ids = [
-              ...new Set(
+              ...new Set<number>(
                 context
                   .filter(
                     k =>
@@ -109,18 +103,11 @@ export const Routes = () => {
                   )
                   .map(k => k.id)
               ),
-            ]
-            const onClose = () => {
-              history.push(pathname)
-            }
+            ].map(n => n.toFixed(0))
 
             return (
               <Modal Dialog={ModalFullscreenDialog}>
-                <ModalBlockLightbox
-                  id={params.id}
-                  ids={ids}
-                  onClose={onClose}
-                />
+                <ModalBlockLightbox id={params.id} ids={ids} />
               </Modal>
             )
           })}

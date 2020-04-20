@@ -20,9 +20,9 @@ app = module.exports = express()
 # app.use(require('../apps/blog'))
 # console.timeEnd('blog')
 
-# console.time('authentication')
-# app.use(require('../apps/authentication'))
-# console.timeEnd('authentication')
+console.time('authentication')
+app.use(require('../apps/authentication'))
+console.timeEnd('authentication')
 
 # console.time('confirmation')
 # app.use(require('../apps/confirmation'))
