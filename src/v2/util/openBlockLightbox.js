@@ -1,6 +1,6 @@
 import Modal from 'v2/components/UI/Modal'
 import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
-import ModalBlockLightbox from 'v2/components/ModalBlockLightbox'
+import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
 
 export default ({ id, context }) => {
   // Filter out Channels, Groups, Users and duplicates; return just IDs
