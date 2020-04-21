@@ -115,17 +115,24 @@ export class Konnectable extends PureComponent<Props> {
     const { mode } = this.state
     const { konnectable, isPreviewable, children, context } = this.props
 
+    const defaultToParams = {
+      pathname: mode !== Mode.OVERLAY ? konnectable.href : undefined,
+    }
+    const toParams =
+      konnectable.__typename === 'Channel'
+        ? defaultToParams
+        : {
+            ...defaultToParams,
+            state: {
+              background:
+                mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
+              context,
+            },
+          }
+
     return (
       <Container
-        // to={mode !== Mode.OVERLAY ? konnectable.href : undefined}
-        to={{
-          pathname: mode !== Mode.OVERLAY ? konnectable.href : undefined,
-          state: {
-            background:
-              mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
-            context,
-          },
-        }}
+        to={toParams}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}
