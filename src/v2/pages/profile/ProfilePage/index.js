@@ -5,11 +5,10 @@ import { Query } from 'react-apollo'
 import Title from 'v2/components/UI/Head/components/Title'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import Constrain from 'v2/components/UI/Constrain'
-import CenteringBox from 'v2/components/UI/CenteringBox'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ProfileMetadata from 'v2/components/ProfileMetadata'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import { LoadingPage } from 'v2/components/UI/LoadingPage'
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
@@ -62,11 +61,11 @@ class ProfilePage extends Component {
 
             if (loading) {
               return (
-                <CenteringBox>
-                  <Title>Loading...</Title>
-
-                  <LoadingIndicator f={9} />
-                </CenteringBox>
+                <TopBarLayout>
+                  <Constrain>
+                    <LoadingPage />
+                  </Constrain>
+                </TopBarLayout>
               )
             }
 

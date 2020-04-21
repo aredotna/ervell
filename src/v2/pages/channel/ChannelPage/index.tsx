@@ -18,6 +18,7 @@ import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelCont
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
+import { LoadingPage } from 'v2/components/UI/LoadingPage'
 
 interface Variables {
   id: string
@@ -33,7 +34,7 @@ export default ({ id }) => {
         >
           {({ data, loading, error }) => {
             if (loading) {
-              return <LoadingIndicator />
+              return <LoadingPage />
             }
 
             if (error) {
