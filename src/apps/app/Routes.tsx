@@ -4,6 +4,7 @@ import parseRoute from '../../v2/util/parseRoute'
 
 // Feed
 import FeedPage from '../../v2/pages/feed/FeedPage'
+import ExplorePage from '../../v2/pages/explore/ExplorePage'
 import NotificationPage from '../../v2/pages/feed/NotificationPage'
 // Profile
 import ProfilePage from '../../v2/pages/profile/ProfilePage'
@@ -29,6 +30,13 @@ export const Routes = () => {
       <Switch location={background || location}>
         {/* Feed */}
         <Route exact path="/feed" component={FeedPage} />
+        <Route
+          exact
+          path="/explore/:view?"
+          render={parseRoute(({ params, query }) => (
+            <ExplorePage params={params} query={query} view="all" />
+          ))}
+        />
 
         <Route exact path="/notifications" component={NotificationPage} />
 
