@@ -9,7 +9,7 @@ import parseRoute from 'v2/util/parseRoute'
 import ProfilePage from 'v2/pages/profile/ProfilePage'
 import { AcceptInvitePage } from 'v2/pages/accept_invite/AcceptInvitePage'
 
-const VALID_SORTS = ['UPDATED_AT', 'RANDOM']
+const VALID_SORTS = ['UPDATED_AT', 'RANDOM', 'CREATED_AT']
 const VALID_INDEX_FILTERS = ['OWN', 'COLLABORATION']
 const VALID_BLOCK_FILTERS = [
   'BLOCK',

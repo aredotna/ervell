@@ -36,6 +36,19 @@ class ProfileMetadataSort extends Component<
         <CookieLinkUnlessCurrent
           name="sort"
           prefix="Profile"
+          value="CREATED_AT"
+          to={{
+            pathname,
+            search: stringify({ type, sort: 'CREATED_AT' }),
+          }}
+          isActive={this.isSortActive('CREATED_AT')}
+        >
+          Recently created
+        </CookieLinkUnlessCurrent>
+
+        <CookieLinkUnlessCurrent
+          name="sort"
+          prefix="Profile"
           value="RANDOM"
           to={{
             pathname,
