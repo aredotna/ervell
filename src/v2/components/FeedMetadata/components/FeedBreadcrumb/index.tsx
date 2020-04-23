@@ -22,11 +22,6 @@ const linkMixin = css`
 const Option = styled(Link)`
   ${linkMixin}
 `
-
-const A = styled.a`
-  ${linkMixin}
-`
-
 export const FeedBreadcrumb: React.FC = () => {
   const { pathname } = useLocation()
   const me = useSerializedMe()
@@ -35,7 +30,7 @@ export const FeedBreadcrumb: React.FC = () => {
     <Options>
       <div>Feed</div>
       <Option to="/explore">Explore</Option>
-      {me && <A href={`/${me.slug}`}>Profile</A>}
+      {me && <Option to={`/${me.slug}`}>Profile</Option>}
     </Options>
   )
 

@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
+import { Link } from 'react-router-dom'
 
 const Options = styled.div``
 
@@ -19,7 +20,7 @@ const linkMixin = css`
   }
 `
 
-const A = styled.a`
+const A = styled(Link)`
   ${linkMixin}
 `
 
@@ -36,8 +37,8 @@ export const ExploreBreadcrumb: React.FC = () => {
       <StickyBreadcrumbPath.Crumb>
         <Options>
           <div>Explore</div>
-          {isLoggedIn && <A href="/feed">Feed</A>}
-          {isLoggedIn && me && <A href={`/${me.slug}`}>Profile</A>}
+          {isLoggedIn && <A to="/feed">Feed</A>}
+          {isLoggedIn && me && <A to={`/${me.slug}`}>Profile</A>}
         </Options>
       </StickyBreadcrumbPath.Crumb>
     </StickyBreadcrumbPath>

@@ -78,7 +78,7 @@ export default class UserDropdown extends PureComponent {
             <Container>
               <Inner>
                 <Section>
-                  <Link py={3} href={me.href}>
+                  <Link py={3} to={me.href}>
                     {me.name}
 
                     <Label>Profile</Label>
@@ -92,11 +92,11 @@ export default class UserDropdown extends PureComponent {
                 )}
 
                 <Section>
-                  <Link pt={3} pb={4} href="/feed">
+                  <Link pt={3} pb={4} to="/feed">
                     Feed
                   </Link>
 
-                  <Link pt={4} pb={3} href="/explore">
+                  <Link pt={4} pb={3} to="/explore">
                     Explore
                   </Link>
                 </Section>

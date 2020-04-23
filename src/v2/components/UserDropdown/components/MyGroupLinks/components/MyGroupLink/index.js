@@ -8,8 +8,9 @@ import Box, { mixin as boxMixin } from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import MemberAvatar from 'v2/components/MemberAvatar'
 import BorderedLock from 'v2/components/UI/BorderedLock'
+import { Link } from 'react-router-dom'
 
-const Container = styled.a`
+const Container = styled(Link)`
   ${boxMixin}
   text-decoration: none;
 `
@@ -50,7 +51,7 @@ export default class MyGroupLink extends Component {
 
     return (
       <Container
-        href={group.href}
+        to={group.href}
         py="0.5rem"
         px="1rem"
         display="flex"
