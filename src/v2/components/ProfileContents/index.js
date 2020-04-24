@@ -18,7 +18,7 @@ class ProfileContents extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.string,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     seed: PropTypes.number,
     isSpiderRequesting: PropTypes.bool,
