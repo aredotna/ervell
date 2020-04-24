@@ -49,6 +49,16 @@ export enum ChannelVisibility {
 }
 
 /**
+ * Ways to sort channels
+ */
+export enum ChannelsSort {
+  ADDED_TO_AT = "ADDED_TO_AT",
+  CREATED_AT = "CREATED_AT",
+  TITLE = "TITLE",
+  UPDATED_AT = "UPDATED_AT",
+}
+
+/**
  * Connectable types
  */
 export enum ConnectableTypeEnum {
