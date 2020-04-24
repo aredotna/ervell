@@ -26,7 +26,7 @@ export default gql`
       counts {
         channels
       }
-      channels(page: $page, per: $per) {
+      channels(page: $page, per: $per, sort_by: $sort) {
         ...KonnectableChannel
 
         blokks(per: 5, sort_by: POSITION, direction: DESC) {
