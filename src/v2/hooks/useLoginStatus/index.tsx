@@ -2,12 +2,12 @@ import { useApolloClient } from 'react-apollo'
 
 import LOGIN_STATUS_QUERY from 'v2/hooks/useLoginStatus/queries/loginStatus'
 
-import { IsLoggedInQuery } from '__generated__/IsLoggedInQuery'
+import { IsLoggedInQueryHook } from '__generated__/IsLoggedInQueryHook'
 
 export default function() {
   const client = useApolloClient()
 
-  const cache = client.readQuery<IsLoggedInQuery>({
+  const cache = client.readQuery<IsLoggedInQueryHook>({
     query: LOGIN_STATUS_QUERY,
   })
 
