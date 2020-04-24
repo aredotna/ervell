@@ -20,7 +20,7 @@ import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 class ProfileChannels extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
     fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
     isSpiderRequesting: PropTypes.bool,
     seed: PropTypes.number,
@@ -89,11 +89,10 @@ class ProfileChannels extends PureComponent {
       ? {
           id,
           per,
-          sort,
           seed,
           q,
         }
-      : { id, per }
+      : { id, per, sort }
 
     return (
       <Query

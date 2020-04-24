@@ -16,6 +16,7 @@ class ProfileMetadataSort extends Component<
     const {
       location: { pathname },
       type,
+      view,
     } = this.props
 
     return (
@@ -36,16 +37,31 @@ class ProfileMetadataSort extends Component<
         <CookieLinkUnlessCurrent
           name="sort"
           prefix="Profile"
-          value="RANDOM"
+          value="CREATED_AT"
           to={{
             pathname,
-            search: stringify({ type, sort: 'RANDOM' }),
+            search: stringify({ type, sort: 'CREATED_AT' }),
           }}
-          isActive={this.isSortActive('RANDOM')}
-          rel="nofollow"
+          isActive={this.isSortActive('CREATED_AT')}
         >
-          Random
+          Recently created
         </CookieLinkUnlessCurrent>
+
+        {view !== 'channels' && (
+          <CookieLinkUnlessCurrent
+            name="sort"
+            prefix="Profile"
+            value="RANDOM"
+            to={{
+              pathname,
+              search: stringify({ type, sort: 'RANDOM' }),
+            }}
+            isActive={this.isSortActive('RANDOM')}
+            rel="nofollow"
+          >
+            Random
+          </CookieLinkUnlessCurrent>
+        )}
       </Pocket>
     )
   }

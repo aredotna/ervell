@@ -24,7 +24,7 @@ const All = ({ id, sort, identifiable, fetchPolicy }) => (
 
 All.propTypes = {
   id: PropTypes.string.isRequired,
-  sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+  sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
@@ -46,7 +46,7 @@ const Blocks = ({ id, sort, identifiable, fetchPolicy, type }) => (
 
 Blocks.propTypes = {
   id: PropTypes.string.isRequired,
-  sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+  sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
   type: PropTypes.oneOf([
@@ -70,7 +70,7 @@ const Channels = ({ id, sort, identifiable, fetchPolicy }) => (
 
 Channels.propTypes = {
   id: PropTypes.string.isRequired,
-  sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+  sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
   identifiable: propType(profilePageIdentifiableFragment).isRequired,
   fetchPolicy: PropTypes.oneOf(['cache-first', 'network-only']).isRequired,
 }
@@ -144,7 +144,7 @@ class ProfileViews extends Component {
 
   static propTypes = {
     id: PropTypes.string.isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     followType: PropTypes.oneOf(['ALL', 'CHANNEL', 'GROUP', 'USER']).isRequired,
     identifiable: propType(profilePageIdentifiableFragment).isRequired,

@@ -2,12 +2,12 @@ import { useApolloClient } from 'react-apollo'
 
 import SERIALIZED_ME_QUERY from 'v2/hooks/useSerializedMe/queries/serializedMe'
 
-import { SerializeMeQuery } from '__generated__/SerializeMeQuery'
+import { SerializeMeQueryHook } from '__generated__/SerializeMeQueryHook'
 
 export default function() {
   const client = useApolloClient()
 
-  const { serializedMe } = client.readQuery<SerializeMeQuery>({
+  const { serializedMe } = client.readQuery<SerializeMeQueryHook>({
     query: SERIALIZED_ME_QUERY,
   })
 
