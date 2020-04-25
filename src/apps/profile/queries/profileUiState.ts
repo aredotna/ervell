@@ -6,6 +6,7 @@ export default gql`
       view: get(name: "Profile--view")
       filter: get(name: "Profile--filter")
       sort: get(name: "Profile--sort")
+      type: get(name: "Profile--type")
     }
   }
 `

@@ -152,7 +152,7 @@ const setValid = (value, validValues, defaultValue) => {
 // Weird container extracted from router
 export default ({ params, query }) => {
   return (
-    <Query query={profileUiStateQuery}>
+    <Query query={profileUiStateQuery} fetchPolicy="no-cache">
       {({ data, error }) => {
         if (error) return error.message
         if (!data) return null

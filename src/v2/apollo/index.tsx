@@ -1,6 +1,8 @@
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
+import Cookies from 'cookies-js'
+
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
@@ -91,13 +93,15 @@ export const initApolloClient = ({
     },
     Cookies: {
       get: (_obj, args) => {
-        return cookies[args.name] || null
+        return isClientSide
+          ? Cookies.get(args.name)
+          : cookies[args.name] || null
       },
     },
     Sharify: {
       get: (_obj, args) => {
         const value = sharifyData[args.name]
-        return value === undefined ? null : value
+        return value ? value : null
       },
     },
   }
