@@ -23,7 +23,7 @@ class ExploreMetadataFilter extends Component<
         <CookieLinkUnlessCurrent
           name="block_filter"
           value="ALL"
-          prefix="Search"
+          prefix="Explore"
           to={{
             pathname,
             search: stringify({ block_filter: 'All', sort }),
@@ -36,7 +36,7 @@ class ExploreMetadataFilter extends Component<
         <CookieLinkUnlessCurrent
           name="block_filter"
           value="LINK"
-          prefix="Search"
+          prefix="Explore"
           to={{
             pathname,
             search: stringify({ block_filter: 'LINK', sort }),
@@ -49,7 +49,7 @@ class ExploreMetadataFilter extends Component<
         <CookieLinkUnlessCurrent
           name="block_filter"
           value="ATTACHMENT"
-          prefix="Search"
+          prefix="Explore"
           to={{
             pathname,
             search: stringify({ block_filter: 'ATTACHMENT', sort }),
@@ -62,7 +62,7 @@ class ExploreMetadataFilter extends Component<
         <CookieLinkUnlessCurrent
           name="block_filter"
           value="IMAGE"
-          prefix="Search"
+          prefix="Explore"
           to={{
             pathname,
             search: stringify({ block_filter: 'IMAGE', sort }),
@@ -75,7 +75,7 @@ class ExploreMetadataFilter extends Component<
         <CookieLinkUnlessCurrent
           name="block_filter"
           value="TEXT"
-          prefix="Search"
+          prefix="Explore"
           to={{
             pathname,
             search: stringify({ block_filter: 'TEXT', sort }),
@@ -88,7 +88,7 @@ class ExploreMetadataFilter extends Component<
         <CookieLinkUnlessCurrent
           name="block_filter"
           value="EMBED"
-          prefix="Search"
+          prefix="Explore"
           to={{
             pathname,
             search: stringify({ block_filter: 'EMBED', sort }),

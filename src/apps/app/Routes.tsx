@@ -34,7 +34,7 @@ export const Routes = () => {
           exact
           path="/explore/:view?"
           render={parseRoute(({ params, query }) => (
-            <ExplorePage params={params} query={query} view="all" />
+            <ExplorePage params={params} query={query} />
           ))}
         />
 
