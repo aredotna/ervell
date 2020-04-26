@@ -12,6 +12,7 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { overflowEllipsis } from 'v2/styles/mixins'
 import { mixin as boxMixin } from 'v2/components/UI/Box'
+import { Link } from 'react-router-dom'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -20,7 +21,7 @@ const Label = styled(Text)`
   ${overflowEllipsis}
 `
 
-const Container = styled.a`
+const Container = styled(Link)`
   ${boxMixin}
   display: flex;
   text-decoration: none;
@@ -89,7 +90,7 @@ export default class PrimarySearchResult extends PureComponent {
 
     if (result) {
       return (
-        <Container href={result.href} onMouseDown={this.preventBlur} {...rest}>
+        <Container to={result.href} onMouseDown={this.preventBlur} {...rest}>
           <PathContainer>
             {result.owner && (
               <Label flex="1">

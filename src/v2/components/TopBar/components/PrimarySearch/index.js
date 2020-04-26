@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -21,9 +22,10 @@ const Results = styled(Box)`
   ${overflowScrolling}
 `
 
-export default class PrimarySearch extends PureComponent {
+class PrimarySearch extends PureComponent {
   static propTypes = {
     scheme: PropTypes.oneOf(['DEFAULT', 'GROUP']),
+    history: PropTypes.object,
   }
 
   static defaultProps = {
@@ -63,6 +65,7 @@ export default class PrimarySearch extends PureComponent {
 
   handleKeyDown = ({ key }) => {
     const { cursor, href, query } = this.state
+    const { history } = this.props
 
     switch (key) {
       case 'Escape':
@@ -70,7 +73,8 @@ export default class PrimarySearch extends PureComponent {
         break
       case 'Enter':
         if (query === '') return
-        window.location.href = href
+        this.setState({ query: '', debouncedQuery: '' })
+        history.push(href)
         break
       case 'ArrowDown':
         this.setState({
@@ -147,3 +151,10 @@ export default class PrimarySearch extends PureComponent {
     )
   }
 }
+
+const PrimarySearchContainer = ({ ...props }) => {
+  const history = useHistory()
+  return <PrimarySearch history={history} {...props} />
+}
+
+export default PrimarySearchContainer

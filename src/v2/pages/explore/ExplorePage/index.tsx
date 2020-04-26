@@ -71,13 +71,9 @@ export default ({ params, query }) => {
           'UPDATED_AT'
         )
 
-        console.log('cookies', cookies)
-
         const filter =
           query.block_filter || (cookies && cookies.block_filter) || null
         const block_filter = setValid(filter, VALID_FILTERS, null)
-
-        console.log('block_filter', block_filter)
 
         return (
           <ExplorePage view={view} sort={sort} block_filter={block_filter} />
