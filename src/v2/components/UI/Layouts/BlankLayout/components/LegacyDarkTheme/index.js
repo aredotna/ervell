@@ -39,5 +39,12 @@ export default createGlobalStyle`
         background-color: white;
       }
     }
+
+    // Firefox
+    @-moz-document url-prefix() {
+      body {
+        background-color: black;
+      }
+    }
   }
 `
