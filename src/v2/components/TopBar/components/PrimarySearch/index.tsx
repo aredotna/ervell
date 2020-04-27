@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -22,16 +21,12 @@ const Results = styled(Box)`
   ${overflowScrolling}
 `
 
-class PrimarySearch extends PureComponent {
-  static propTypes = {
-    scheme: PropTypes.oneOf(['DEFAULT', 'GROUP']),
-    history: PropTypes.object,
-  }
+interface PrimarySearchProps {
+  scheme: 'DEFAULT' | 'GROUP'
+  history: any
+}
 
-  static defaultProps = {
-    scheme: 'DEFAULT',
-  }
-
+class PrimarySearch extends PureComponent<PrimarySearchProps> {
   state = {
     mode: 'resting',
     debouncedQuery: '',
@@ -50,6 +45,10 @@ class PrimarySearch extends PureComponent {
 
   handleDebouncedQuery = debouncedQuery => {
     this.setState({ debouncedQuery, cursor: null })
+  }
+
+  handleClick = () => {
+    this.setState({ query: '', debouncedQuery: '' })
   }
 
   handleBlur = () => {
@@ -143,6 +142,7 @@ class PrimarySearch extends PureComponent {
                 debouncedQuery={debouncedQuery}
                 cursor={cursor}
                 onSelection={this.handleSelection}
+                onClick={this.handleClick}
               />
             </Results>
           </Overlay>
@@ -152,7 +152,9 @@ class PrimarySearch extends PureComponent {
   }
 }
 
-const PrimarySearchContainer = ({ ...props }) => {
+const PrimarySearchContainer: React.FC<{ scheme: 'DEFAULT' | 'GROUP' }> = ({
+  ...props
+}) => {
   const history = useHistory()
   return <PrimarySearch history={history} {...props} />
 }

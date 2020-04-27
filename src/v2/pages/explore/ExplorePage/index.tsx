@@ -60,9 +60,8 @@ export default ({ params, query }) => {
     <Query query={exploreUiStateQuery} fetchPolicy="network-only">
       {props => {
         if (props.error) return props.error.message
-        if (!props.data) return null
 
-        const { cookies } = props.data
+        const { cookies } = props.data || {}
 
         const view = params.view || (cookies && cookies.view) || 'all'
         const sort = setValid(

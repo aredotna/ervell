@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
-
-import primarySearchResultFragment from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult/fragments/primarySearchResult'
+import { Link } from 'react-router-dom'
 
 import Text from 'v2/components/UI/Text'
 import GroupBadge from 'v2/components/UI/GroupBadge'
@@ -12,7 +9,8 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { overflowEllipsis } from 'v2/styles/mixins'
 import { mixin as boxMixin } from 'v2/components/UI/Box'
-import { Link } from 'react-router-dom'
+
+import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -68,13 +66,17 @@ Container.defaultProps = {
   borderColor: 'gray.semiLight',
 }
 
-export default class PrimarySearchResult extends PureComponent {
-  static propTypes = {
-    result: propType(primarySearchResultFragment),
-    children: PropTypes.node,
-    selected: PropTypes.bool,
-  }
+interface PrimarySearchResultProps {
+  result: PrimarySearchResultType
+  selected: boolean
+  to?: string
+  bg?: any
+  onClick?: any
+}
 
+export default class PrimarySearchResult extends PureComponent<
+  PrimarySearchResultProps
+> {
   static defaultProps = {
     result: null,
     children: null,
@@ -92,7 +94,7 @@ export default class PrimarySearchResult extends PureComponent {
       return (
         <Container to={result.href} onMouseDown={this.preventBlur} {...rest}>
           <PathContainer>
-            {result.owner && (
+            {result.__typename === 'Channel' && result.owner && (
               <Label flex="1">
                 {result.owner.name}
 
@@ -104,7 +106,11 @@ export default class PrimarySearchResult extends PureComponent {
 
             <Label
               color={
-                result.visibility ? `channel.${result.visibility}` : 'gray.base'
+                (result.__typename === 'Channel' ||
+                  result.__typename === 'Group') &&
+                result.visibility
+                  ? `channel.${result.visibility}`
+                  : 'gray.base'
               }
             >
               <span
@@ -113,7 +119,9 @@ export default class PrimarySearchResult extends PureComponent {
                 }}
               />
 
-              {result.visibility === 'private' && <BorderedLock ml={3} />}
+              {(result.__typename === 'Channel' ||
+                result.__typename === 'Group') &&
+                result.visibility === 'private' && <BorderedLock ml={3} />}
 
               {result.__typename === 'Group' && (
                 <GroupBadge f={0} visibility={result.visibility} />

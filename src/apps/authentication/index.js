@@ -7,10 +7,13 @@ import pageResolver from 'v2/components/UI/Page/resolver'
 import logoutMiddleware from 'apps/authentication/middleware/logout'
 import redirectToMiddleware from 'lib/middleware/redirect_to.coffee'
 import setRedirectToMiddleware from 'lib/middleware/setRedirectTo'
+import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee'
 
 import Routes from 'apps/authentication/Routes'
 
 import withStaticRouter from 'v2/hocs/WithStaticRouter'
+
+import createAuthenticatedService from 'apps/authentication/mutations/createAuthenticatedService'
 
 const app = express()
 
@@ -56,6 +59,15 @@ const render = (req, res, next) => {
     .catch(next)
 }
 
+const findFriendsCallback = (req, res, next) =>
+  req.apollo.client
+    .mutate({
+      mutation: createAuthenticatedService,
+      variables: req.query,
+    })
+    .then(() => res.redirect('/?showModal=true'))
+    .catch(next)
+
 app
   .get(
     /^\/(sign_up|log_in|forgot|register\/\w+|reset\/\w+)/,
@@ -65,5 +77,11 @@ app
   )
   .post('/me/sign_out', logoutMiddleware, redirectToMiddleware)
   .get('/me/refresh', refresh)
+  .get(
+    '/feed/find-friends/callback',
+    apolloMiddleware,
+    ensureLoggedInMiddleware,
+    findFriendsCallback
+  )
 
 module.exports = app

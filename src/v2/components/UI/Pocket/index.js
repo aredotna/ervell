@@ -46,7 +46,6 @@ const Content = styled(Text).attrs({
 export default class Pocket extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
   }
 
   render() {

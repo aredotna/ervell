@@ -6,6 +6,8 @@ import parseRoute from '../../v2/util/parseRoute'
 import FeedPage from '../../v2/pages/feed/FeedPage'
 import ExplorePage from '../../v2/pages/explore/ExplorePage'
 import NotificationPage from '../../v2/pages/feed/NotificationPage'
+// Search
+import SearchPage from 'v2/pages/search/SearchPage'
 // Profile
 import ProfilePage from '../../v2/pages/profile/ProfilePage'
 // Channel
@@ -30,6 +32,8 @@ export const Routes = () => {
       <Switch location={background || location}>
         {/* Feed */}
         <Route exact path="/feed" component={FeedPage} />
+
+        {/* Explore */}
         <Route
           exact
           path="/explore/:view?"
@@ -41,6 +45,16 @@ export const Routes = () => {
         <Route exact path="/notifications" component={NotificationPage} />
 
         <Route exact path="/" component={FeedPage} />
+
+        {/* Search */}
+
+        <Route
+          exact
+          path="/search/:term/:view?"
+          render={parseRoute(({ params, query }) => (
+            <SearchPage params={params} query={query} />
+          ))}
+        />
 
         {/* Block */}
         <Route

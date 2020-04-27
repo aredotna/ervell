@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 
 import mod from 'v2/util/mod'
@@ -9,13 +8,17 @@ import primarySearchResultsQuery from 'v2/components/TopBar/components/PrimarySe
 import Text from 'v2/components/UI/Text'
 import PrimarySearchResult from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults/PrimarySearchResult'
 
-export default class PrimarySearchResults extends PureComponent {
-  static propTypes = {
-    query: PropTypes.string.isRequired,
-    cursor: PropTypes.number,
-    onSelection: PropTypes.func,
-  }
+interface PrimarySearchResultsProps {
+  query: string
+  debouncedQuery: string
+  cursor: number
+  onSelection: (href) => void
+  onClick: () => void
+}
 
+export default class PrimarySearchResults extends PureComponent<
+  PrimarySearchResultsProps
+> {
   static defaultProps = {
     cursor: null,
     onSelection: () => {},
@@ -30,17 +33,17 @@ export default class PrimarySearchResults extends PureComponent {
   }
 
   render() {
-    const { query, cursor, debouncedQuery } = this.props
+    const { query, cursor, debouncedQuery, onClick } = this.props
 
     return (
       <Query
         query={primarySearchResultsQuery}
         variables={{ query: debouncedQuery }}
       >
-        {({ data, loading, error }) => {
-          if (loading) {
-            this.selectResult()
+        {response => {
+          const { data, loading, error } = response
 
+          if (loading) {
             return (
               <PrimarySearchResult>
                 <Text fontWeight="bold">Searching...</Text>
@@ -49,8 +52,6 @@ export default class PrimarySearchResults extends PureComponent {
           }
 
           if (error) {
-            this.selectResult()
-
             return (
               <PrimarySearchResult>
                 <Text fontWeight="bold" color="state.alert">
@@ -74,12 +75,13 @@ export default class PrimarySearchResults extends PureComponent {
                   key={`result_${result.__typename}_${result.id}`}
                   result={result}
                   selected={selected === idx}
+                  onClick={onClick}
                 />
               ))}
 
               {results.length > 0 && (
                 <PrimarySearchResult
-                  href={`/search/${encodeURIComponent(query)}`}
+                  to={`/search/${encodeURIComponent(query)}`}
                   selected={selected === results.length}
                   bg="gray.semiLight"
                 >
