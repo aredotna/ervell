@@ -27,7 +27,7 @@ export default createGlobalStyle`
     // Chrome
     @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
       body {
-        background-color: black;
+        background-color: white;
       }
     }
 
@@ -37,6 +37,13 @@ export default createGlobalStyle`
     :root {
       body {
         background-color: white;
+      }
+    }
+
+    // Firefox
+    @-moz-document url-prefix() {
+      body {
+        background-color: black;
       }
     }
   }
