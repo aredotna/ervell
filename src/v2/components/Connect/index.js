@@ -31,6 +31,7 @@ const Close = styled.a.attrs({
   font-size: ${props => props.theme.fontSizesIndexed.xs};
   line-height: 1;
   border: 2px solid transparent;
+  cursor: pointer;
 
   > span {
     position: absolute;
