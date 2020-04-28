@@ -17,7 +17,6 @@ import KonnectableMetadata from 'v2/components/Cell/components/Konnectable/compo
 import KonnectableBlockOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay'
 import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay'
 import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
-import isSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting/queries/isSpiderRequesting'
 
 const Container = styled(Link)`
   box-sizing: border-box;
@@ -112,7 +111,13 @@ class KonnectableInner extends PureComponent<Props & InnerProps> {
 
   render() {
     const { mode } = this.state
-    const { konnectable, isPreviewable, children, context } = this.props
+    const {
+      konnectable,
+      isPreviewable,
+      children,
+      context,
+      isSpiderRequesting,
+    } = this.props
 
     const defaultToParams = {
       pathname: konnectable.href,
