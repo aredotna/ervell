@@ -10,7 +10,8 @@ contentfulFormatter = require '../../components/contentful/helpers.coffee'
 { documentToHtmlString } = require '@contentful/rich-text-html-renderer'
 posts = require '../../collections/posts.coffee'
 
-@index = (_req, res, next) ->
+@index = (req, res, next) ->
+  return next() if req.user?.id
 
   userIds = (HOMEPAGE_EXPLORE_USER_IDS or '').split(',').map (x) -> parseInt(x, 10)
   exploreBlocks = new ExploreBlocks

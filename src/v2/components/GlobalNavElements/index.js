@@ -38,7 +38,7 @@ class GlobalNavElements extends PureComponent {
     if (code !== 'UNAUTHORIZED') return
 
     // `UNAUTHORIZED` === Log out the user
-    axios({ method: 'GET', url: '/me/sign_out' }).then(() =>
+    axios({ method: 'POST', url: '/me/sign_out' }).then(() =>
       window.location.reload()
     )
   }
@@ -49,12 +49,7 @@ class GlobalNavElements extends PureComponent {
     const isLoggedIn = !isLoggedOut
 
     return (
-      <Query
-        query={globalNavElementsQuery}
-        ssr={false}
-        skip={isLoggedOut}
-        onError={this.signOut}
-      >
+      <Query query={globalNavElementsQuery} ssr={false} skip={isLoggedOut}>
         {({ data }) => {
           const components = []
 

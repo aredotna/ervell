@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
+import { Link } from 'react-router-dom'
 
-import openBlockLightbox from 'v2/util/openBlockLightbox'
 import { touch as isTouchDevice } from 'v2/util/is'
 
 import { KonnectableCell as KonnectableCellData } from '__generated__/KonnectableCell'
@@ -17,7 +17,7 @@ import KonnectableMetadata from 'v2/components/Cell/components/Konnectable/compo
 import KonnectableBlockOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay'
 import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay'
 
-const Container = styled.a`
+const Container = styled(Link)`
   box-sizing: border-box;
   position: relative;
   display: block;
@@ -94,34 +94,43 @@ export class Konnectable extends PureComponent<Props> {
     onOverlayClose && onOverlayClose()
   }
 
-  openBlock = (e: React.MouseEvent<HTMLElement>) => {
-    const {
-      konnectable: { __typename, id },
-      context,
-    } = this.props
+  onClick = (e: React.MouseEvent<HTMLElement>) => {
+    const { mode } = this.state
 
-    if (e.metaKey || e.ctrlKey || __typename === 'Channel') return null
-
-    e.preventDefault()
-
-    return openBlockLightbox({
-      id,
-      context,
-    })
+    if (mode === Mode.OVERLAY) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
   }
 
   render() {
     const { mode } = this.state
-    const { konnectable, isPreviewable, children } = this.props
+    const { konnectable, isPreviewable, children, context } = this.props
+
+    const defaultToParams = {
+      pathname: konnectable.href,
+    }
+
+    const toParams =
+      konnectable.__typename === 'Channel'
+        ? defaultToParams
+        : {
+            ...defaultToParams,
+            state: {
+              background:
+                mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
+              context,
+            },
+          }
 
     return (
       <Container
-        href={mode !== Mode.OVERLAY ? konnectable.href : undefined}
+        to={toParams}
         role="button"
         tabIndex={0}
+        onClick={this.onClick}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
-        onClick={this.openBlock}
         data-id={konnectable.id}
         data-no-instant={
           konnectable.__typename === 'Channel' ? undefined : true
@@ -137,7 +146,7 @@ export class Konnectable extends PureComponent<Props> {
 
         <KonnectableDisplay mode={mode} konnectable={konnectable} />
 
-        {konnectable.__typename !== 'Channel' && (
+        {konnectable.__typename !== 'Channel' && mode !== Mode.RESTING && (
           <KonnectableMetadata mode={mode} konnectable={konnectable} />
         )}
 

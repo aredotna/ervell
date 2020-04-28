@@ -7,7 +7,6 @@ import channelPageQuery from 'v2/pages/channel/ChannelPage/queries/channelPage'
 
 import Constrain from 'v2/components/UI/Constrain'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
 
@@ -18,6 +17,7 @@ import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelCont
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
+import { LoadingPage } from 'v2/components/UI/LoadingPage'
 
 interface Variables {
   id: string
@@ -33,7 +33,7 @@ export default ({ id }) => {
         >
           {({ data, loading, error }) => {
             if (loading) {
-              return <LoadingIndicator />
+              return <LoadingPage />
             }
 
             if (error) {

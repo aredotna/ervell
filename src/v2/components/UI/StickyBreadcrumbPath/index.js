@@ -8,7 +8,7 @@ import constants from 'v2/styles/constants'
 import is from 'v2/util/is'
 import provideChildrenWithProps from 'v2/util/provideChildrenWithProps'
 
-import BreadcrumbPath from 'v2/components/UI/BreadcrumbPath'
+import { BreadcrumbPath, Crumb } from 'v2/components/UI/BreadcrumbPath'
 
 const Container = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const StuckBreadcrumbPath = styled(BreadcrumbPath)`
 
 export default class StickyBreadcrumbPath extends PureComponent {
   static Container = Container
-  static Crumb = BreadcrumbPath.Crumb
+  static Crumb = Crumb
 
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,

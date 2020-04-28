@@ -5,11 +5,10 @@ import { Query } from 'react-apollo'
 import Title from 'v2/components/UI/Head/components/Title'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import Constrain from 'v2/components/UI/Constrain'
-import CenteringBox from 'v2/components/UI/CenteringBox'
-import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ProfileMetadata from 'v2/components/ProfileMetadata'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
+import { LoadingPage } from 'v2/components/UI/LoadingPage'
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
@@ -17,8 +16,9 @@ import BottomBanner from 'v2/components/BottomBanner'
 import ProfileViews from 'v2/pages/profile/ProfilePage/components/ProfileViews'
 import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'
 import profilePageQuery from 'v2/pages/profile/ProfilePage/queries/profilePage'
+import profileUiStateQuery from 'v2/pages/profile/ProfilePage/queries/profileUiState'
 
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     view: PropTypes.oneOf([
@@ -62,11 +62,11 @@ export default class ProfilePage extends Component {
 
             if (loading) {
               return (
-                <CenteringBox>
-                  <Title>Loading...</Title>
-
-                  <LoadingIndicator f={9} />
-                </CenteringBox>
+                <TopBarLayout>
+                  <Constrain>
+                    <LoadingPage />
+                  </Constrain>
+                </TopBarLayout>
               )
             }
 
@@ -129,4 +129,66 @@ export default class ProfilePage extends Component {
       </ErrorBoundary>
     )
   }
+}
+
+const VALID_SORTS = ['UPDATED_AT', 'RANDOM', 'CREATED_AT']
+const VALID_INDEX_FILTERS = ['OWN', 'COLLABORATION']
+const VALID_BLOCK_FILTERS = [
+  'BLOCK',
+  'IMAGE',
+  'TEXT',
+  'EMBED',
+  'ATTACHMENT',
+  'LINK',
+]
+const VALID_FOLLOW_TYPES = ['CHANNEL', 'USER', 'GROUP']
+
+const setValid = (value, validValues, defaultValue) => {
+  if (validValues.includes(value)) return value
+  return defaultValue
+}
+
+// Weird container extracted from router
+export default ({ params, query }) => {
+  return (
+    <Query query={profileUiStateQuery} fetchPolicy="no-cache">
+      {({ data, error }) => {
+        if (error) return error.message
+        if (!data) return null
+
+        const { cookies } = data
+
+        const view = params.view || cookies.view || 'channels'
+        const sort = setValid(
+          query.sort || cookies.sort,
+          VALID_SORTS,
+          'UPDATED_AT'
+        )
+        const indexFilter = setValid(
+          query.filter || cookies.filter,
+          VALID_INDEX_FILTERS,
+          'OWN'
+        )
+
+        const blockFilter = setValid(
+          query.type || cookies.type,
+          VALID_BLOCK_FILTERS,
+          'BLOCK'
+        )
+
+        const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
+
+        return (
+          <ProfilePage
+            id={params.id}
+            view={view}
+            sort={sort}
+            filter={indexFilter}
+            type={blockFilter}
+            followType={followType}
+          />
+        )
+      }}
+    </Query>
+  )
 }

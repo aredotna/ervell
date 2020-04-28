@@ -36,7 +36,7 @@ class ProfileMetadataBlockFilter extends Component<
         <CookieLinkUnlessCurrent
           name="type"
           value="LINK"
-          prefix="Search"
+          prefix="Profile"
           to={{
             pathname,
             search: stringify({ sort, type: 'LINK' }),
@@ -49,7 +49,7 @@ class ProfileMetadataBlockFilter extends Component<
         <CookieLinkUnlessCurrent
           name="type"
           value="ATTACHMENT"
-          prefix="Search"
+          prefix="Profile"
           to={{
             pathname,
             search: stringify({ sort, type: 'ATTACHMENT' }),
@@ -62,7 +62,7 @@ class ProfileMetadataBlockFilter extends Component<
         <CookieLinkUnlessCurrent
           name="type"
           value="IMAGE"
-          prefix="Search"
+          prefix="Profile"
           to={{
             pathname,
             search: stringify({ sort, type: 'IMAGE' }),
@@ -75,7 +75,7 @@ class ProfileMetadataBlockFilter extends Component<
         <CookieLinkUnlessCurrent
           name="type"
           value="TEXT"
-          prefix="Search"
+          prefix="Profile"
           to={{
             pathname,
             search: stringify({ sort, type: 'TEXT' }),
@@ -88,7 +88,7 @@ class ProfileMetadataBlockFilter extends Component<
         <CookieLinkUnlessCurrent
           name="type"
           value="EMBED"
-          prefix="Search"
+          prefix="Profile"
           to={{
             pathname,
             search: stringify({ sort, type: 'EMBED' }),

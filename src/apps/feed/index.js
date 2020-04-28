@@ -10,8 +10,6 @@ import pageResolver from 'v2/components/UI/Page/resolver'
 import Routes from 'apps/feed/Routes'
 import withStaticRouter from 'v2/hocs/WithStaticRouter'
 
-import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService'
-
 const app = express()
 
 const renderFeed = (req, res, next) => {
@@ -58,15 +56,6 @@ const renderExplore = (req, res, next) => {
     })
 }
 
-const findFriendsCallback = (req, res, next) =>
-  req.apollo.client
-    .mutate({
-      mutation: createAuthenticatedService,
-      variables: req.query,
-    })
-    .then(() => res.redirect('/?showModal=true'))
-    .catch(next)
-
 // Feed
 app.get('/', homePathMiddleware, apolloMiddleware, renderFeed)
 app.get('/feed', ensureLoggedInMiddleware, apolloMiddleware, renderFeed)
@@ -82,13 +71,5 @@ app.get('/explore', apolloMiddleware, renderExplore)
 app.get('/explore/all', apolloMiddleware, renderExplore)
 app.get('/explore/channels', apolloMiddleware, renderExplore)
 app.get('/explore/blocks', apolloMiddleware, renderExplore)
-
-// Find friends
-app.get(
-  '/feed/find-friends/callback',
-  apolloMiddleware,
-  ensureLoggedInMiddleware,
-  findFriendsCallback
-)
 
 module.exports = app
