@@ -165,7 +165,7 @@ export default ({ params, query }) => {
           sort: 'UPDATED_AT',
         }
 
-        const view = params.view || cookies.view
+        const view = params.view || cookies.view || 'channels'
         const sort = setValid(
           query.sort || cookies.sort,
           VALID_SORTS,
