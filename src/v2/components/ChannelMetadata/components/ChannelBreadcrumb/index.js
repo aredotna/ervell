@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import channelBreadcrumbFragment from 'v2/components/ChannelMetadata/components/ChannelBreadcrumb/fragments/channelBreadcrumb'
 
@@ -24,7 +25,7 @@ export default class ChannelBreadcrumb extends Component {
       <StickyBreadcrumbPath>
         {({ mode }) => [
           <StickyBreadcrumbPath.Crumb key="head">
-            <a href={channel.owner.href}>
+            <Link to={channel.owner.href}>
               {channel.owner.name}
 
               {channel.counts.collaborators > 0 && (
@@ -33,12 +34,13 @@ export default class ChannelBreadcrumb extends Component {
                   (+{channel.counts.collaborators})
                 </CollaboratorCount>
               )}
-            </a>
+            </Link>
           </StickyBreadcrumbPath.Crumb>,
 
           <StickyBreadcrumbPath.Crumb key="tail">
             <ColoredChannelLink
-              href={channel.href}
+              as={Link}
+              to={channel.href}
               visibility={channel.visibility}
             >
               {

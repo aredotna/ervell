@@ -8,10 +8,6 @@ console.time('actions')
 app.use(require('../apps/actions'))
 console.timeEnd('actions')
 
-console.time('feed')
-app.use(require('../apps/feed'))
-console.timeEnd('feed')
-
 console.time('home')
 app.use(require('../apps/home'))
 console.timeEnd('home')
@@ -43,10 +39,6 @@ console.timeEnd('util')
 console.time('about')
 app.use(require('../apps/about'))
 console.timeEnd('about')
-
-console.time('search')
-app.use(require('../apps/search'))
-console.timeEnd('search')
 
 console.time('manage')
 app.use(require('../apps/manage'))
@@ -88,24 +80,7 @@ console.time('apple-site-association')
 app.use(require('../apps/apple_site_association'))
 console.timeEnd('apple-site-association')
 
-# Dynamic routing (in order)
-console.time('profile')
-app.use(require('../apps/profile'))
-console.timeEnd('profile')
-
-console.time('block')
-app.use(require('../apps/block'))
-console.timeEnd('block')
-
-console.time('new_channel')
-app.use(require('../apps/new_channel'))
-console.timeEnd('new_channel')
-
-console.time('rss')
-app.use(require('../apps/rss'))
-console.timeEnd('rss')
-
-# Ennvironment specific
-switch NODE_ENV
-  when 'development'
-    app.use require '../apps/statuses'
+# All other SPA / client-side routes
+console.time('app')
+app.use(require('../apps/app'))
+console.timeEnd('app')

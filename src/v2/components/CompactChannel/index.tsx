@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { PureQueryOptions, ApolloClient } from 'apollo-client'
 import { useApolloClient } from 'react-apollo'
+import { Link } from 'react-router-dom'
 import constants from 'v2/styles/constants'
 
 import {
@@ -131,7 +132,8 @@ const CompactChannelComponent: React.FC<CompactChannelProps> = ({
 
   return (
     <Container
-      href={channel.href}
+      as={Link}
+      to={channel.href}
       visibility={channel.visibility}
       {...rest}
       onMouseEnter={handleMouseOver}

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { mixin } from 'v2/components/UI/Text'
+import { Link } from 'react-router-dom'
 
-const Anchor = styled.a.attrs({
+const Anchor = styled(Link).attrs({
   display: 'block',
   role: 'button',
   tabIndex: 0,
@@ -19,14 +20,14 @@ const Anchor = styled.a.attrs({
   }
 `
 
-const Link = ({ children, ...rest }) => (
+const UserMenuLink = ({ children, ...rest }) => (
   <Anchor py={4} px="1rem" fontWeight="bold" {...rest}>
     {children}
   </Anchor>
 )
 
-Link.propTypes = {
+UserMenuLink.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Link
+export default UserMenuLink

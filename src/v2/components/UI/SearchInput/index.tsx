@@ -47,6 +47,7 @@ interface Props extends BoxProps {
   onQueryChange?: (props: any) => any
   placeholder?: string
   query?: string
+  outlineless?: boolean
 }
 
 interface State {

@@ -32,6 +32,7 @@ const Button = styled.a.attrs({
   tabIndex: 0,
 })`
   display: block;
+  cursor: pointer;
 `
 
 class ChannelShareButton extends Component {
@@ -112,7 +113,11 @@ class ChannelShareButton extends Component {
             <Input f={1} value={channel.share.url} readOnly />
 
             <Actions>
-              <CopyToClipboard label="Copy link" value={channel.share.url} />
+              <CopyToClipboard
+                f={1}
+                label="Copy link"
+                value={channel.share.url}
+              />
 
               {channel.visibility === 'private' && (
                 <Button onClick={this.disableShareLink}>
