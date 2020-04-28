@@ -40,7 +40,7 @@ export class BlankLayout extends PureComponent {
         <BaseStyles />
 
         <Description>
-          Are.na is a social platform for creative and collaborative research.
+          Are.na is a platform for connecting ideas and building knowledge.
         </Description>
 
         {children}

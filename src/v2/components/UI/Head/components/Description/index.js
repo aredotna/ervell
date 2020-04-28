@@ -16,8 +16,7 @@ Description.propTypes = {
 }
 
 Description.defaultProps = {
-  children:
-    'Are.na is a social platform for creative and collaborative research.',
+  children: 'Are.na is a platform for connecting ideas and building knowledge.',
 }
 
 export default Description
