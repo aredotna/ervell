@@ -17,6 +17,8 @@ import ChannelFollowersPage from '../../v2/pages/channel/ChannelFollowersPage'
 import EmbeddedChannelPage from '../../v2/pages/channel/EmbeddedChannelPage'
 // Block
 import BlockPage from '../../v2/pages/block'
+// Settings
+import SettingsPage from 'v2/pages/settings'
 
 // Block modal
 import Modal from 'v2/components/UI/Modal/Portal'
@@ -110,6 +112,14 @@ export const Routes = () => {
           render={parseRoute(({ params }) => {
             return <ChannelPage id={params.id} key={params.id} />
           })}
+        />
+
+        {/* Settings */}
+        <Route
+          path="/settings:view(billing|group_billing|perks)?"
+          render={parseRoute(({ params }) => (
+            <SettingsPage tab={params.view || 'general'} />
+          ))}
         />
       </Switch>
 
