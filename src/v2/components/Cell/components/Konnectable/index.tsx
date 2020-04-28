@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
 import { Link } from 'react-router-dom'
 
-import openBlockLightbox from 'v2/util/openBlockLightbox'
 import { touch as isTouchDevice } from 'v2/util/is'
 
 import { KonnectableCell as KonnectableCellData } from '__generated__/KonnectableCell'
@@ -95,20 +94,13 @@ export class Konnectable extends PureComponent<Props> {
     onOverlayClose && onOverlayClose()
   }
 
-  openBlock = (e: React.MouseEvent<HTMLElement>) => {
-    const {
-      konnectable: { __typename, id },
-      context,
-    } = this.props
+  onClick = (e: React.MouseEvent<HTMLElement>) => {
+    const { mode } = this.state
 
-    if (e.metaKey || e.ctrlKey || __typename === 'Channel') return null
-
-    e.preventDefault()
-
-    return openBlockLightbox({
-      id,
-      context,
-    })
+    if (mode === Mode.OVERLAY) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
   }
 
   render() {
@@ -116,8 +108,9 @@ export class Konnectable extends PureComponent<Props> {
     const { konnectable, isPreviewable, children, context } = this.props
 
     const defaultToParams = {
-      pathname: mode !== Mode.OVERLAY ? konnectable.href : undefined,
+      pathname: konnectable.href,
     }
+
     const toParams =
       konnectable.__typename === 'Channel'
         ? defaultToParams
@@ -135,6 +128,7 @@ export class Konnectable extends PureComponent<Props> {
         to={toParams}
         role="button"
         tabIndex={0}
+        onClick={this.onClick}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
         data-id={konnectable.id}
@@ -152,7 +146,7 @@ export class Konnectable extends PureComponent<Props> {
 
         <KonnectableDisplay mode={mode} konnectable={konnectable} />
 
-        {konnectable.__typename !== 'Channel' && (
+        {konnectable.__typename !== 'Channel' && mode !== Mode.RESTING && (
           <KonnectableMetadata mode={mode} konnectable={konnectable} />
         )}
 

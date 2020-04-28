@@ -12,7 +12,7 @@ import Head from 'v2/components/UI/Head'
 
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 
-import searchUiStateQuery from 'apps/search/queries/searchUiState'
+import searchUiStateQuery from 'v2/pages/search/SearchPage/queries/searchUiState'
 
 interface SearchPageProps {
   view: 'all' | 'channels' | 'blocks' | 'groups' | 'users'

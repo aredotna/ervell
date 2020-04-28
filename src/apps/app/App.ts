@@ -1,7 +1,10 @@
 import { Router } from 'express'
-import apolloMiddleware from '../../v2/apollo/middleware'
-import pageResolver from '../../v2/components/UI/Page/resolver'
-import withStaticRouter from '../../v2/hocs/WithStaticRouter'
+import apolloMiddleware from 'v2/apollo/middleware'
+import homePathMiddleware from 'apps/app/middleware/homePath'
+
+import pageResolver from 'v2/components/UI/Page/resolver'
+import withStaticRouter from 'v2/hocs/WithStaticRouter'
+
 import { Routes } from './Routes'
 
 export const App = Router()
@@ -20,4 +23,13 @@ const resolve = [
   },
 ]
 
-App.get('*', ...resolve)
+App.get(
+  '/share/:token',
+  (req, res, next) => {
+    res.locals.sd.X_SHARE_TOKEN = req.params.token
+    next()
+  },
+  ...resolve
+)
+  .get('/', homePathMiddleware, ...resolve)
+  .get('*', ...resolve)

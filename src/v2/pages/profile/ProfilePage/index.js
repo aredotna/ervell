@@ -16,6 +16,7 @@ import BottomBanner from 'v2/components/BottomBanner'
 import ProfileViews from 'v2/pages/profile/ProfilePage/components/ProfileViews'
 import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'
 import profilePageQuery from 'v2/pages/profile/ProfilePage/queries/profilePage'
+import profileUiStateQuery from 'v2/pages/profile/ProfilePage/queries/profileUiState'
 
 class ProfilePage extends Component {
   static propTypes = {
@@ -129,8 +130,6 @@ class ProfilePage extends Component {
     )
   }
 }
-
-import profileUiStateQuery from 'apps/profile/queries/profileUiState'
 
 const VALID_SORTS = ['UPDATED_AT', 'RANDOM', 'CREATED_AT']
 const VALID_INDEX_FILTERS = ['OWN', 'COLLABORATION']

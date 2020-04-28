@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import parseRoute from '../../v2/util/parseRoute'
 
@@ -26,6 +26,10 @@ import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
 export const Routes = () => {
   const location = useLocation()
   const background = location.state && JSON.parse(location.state.background)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <>
@@ -60,9 +64,9 @@ export const Routes = () => {
         <Route
           exact
           path="/block/:id"
-          render={parseRoute(({ params }) => (
-            <BlockPage id={parseInt(params.id, 10)} />
-          ))}
+          render={parseRoute(({ params }) => {
+            return <BlockPage id={parseInt(params.id, 10)} />
+          })}
         />
 
         {/* Profile */}
@@ -99,12 +103,13 @@ export const Routes = () => {
           ))}
         />
 
+        {/* Channel */}
         <Route
           exact
           path="/:user_id/:id"
-          render={parseRoute(({ params }) => (
-            <ChannelPage id={params.id} />
-          ))}
+          render={parseRoute(({ params }) => {
+            return <ChannelPage id={params.id} key={params.id} />
+          })}
         />
       </Switch>
 

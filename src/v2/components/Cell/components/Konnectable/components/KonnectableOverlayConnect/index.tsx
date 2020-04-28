@@ -46,10 +46,10 @@ export const KonnectableOverlayConnect: React.FC<Props> = ({
   type,
   onClose,
 }) => {
-  const stopPropagation = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => e.stopPropagation(),
-    []
-  )
+  const stopPropagation = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }, [])
 
   return (
     <Container onClick={stopPropagation}>
