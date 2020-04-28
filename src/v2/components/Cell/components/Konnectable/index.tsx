@@ -16,6 +16,8 @@ import { KonnectableDisplay } from 'v2/components/Cell/components/Konnectable/co
 import KonnectableMetadata from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata'
 import KonnectableBlockOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay'
 import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay'
+import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
+import isSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting/queries/isSpiderRequesting'
 
 const Container = styled(Link)`
   box-sizing: border-box;
@@ -62,11 +64,12 @@ interface State {
   mode: Mode
 }
 
-interface LocationProps {
+interface InnerProps {
   location: any
+  isSpiderRequesting: boolean
 }
 
-class KonnectableInner extends PureComponent<Props & LocationProps> {
+class KonnectableInner extends PureComponent<Props & InnerProps> {
   static defaultProps = {
     context: [],
     isPreviewable: true,
@@ -116,7 +119,7 @@ class KonnectableInner extends PureComponent<Props & LocationProps> {
     }
 
     const toParams =
-      konnectable.__typename === 'Channel'
+      konnectable.__typename === 'Channel' || isSpiderRequesting
         ? defaultToParams
         : {
             ...defaultToParams,
@@ -177,5 +180,13 @@ class KonnectableInner extends PureComponent<Props & LocationProps> {
 
 export const Konnectable: React.FC<Props> = props => {
   const location = useLocation()
-  return <KonnectableInner location={location} {...props} />
+  const isSpiderRequesting = useIsSpiderRequesting()
+
+  return (
+    <KonnectableInner
+      isSpiderRequesting={isSpiderRequesting}
+      location={location}
+      {...props}
+    />
+  )
 }
