@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { touch as isTouchDevice } from 'v2/util/is'
 
@@ -62,7 +62,11 @@ interface State {
   mode: Mode
 }
 
-export class Konnectable extends PureComponent<Props> {
+interface LocationProps {
+  location: any
+}
+
+class KonnectableInner extends PureComponent<Props & LocationProps> {
   static defaultProps = {
     context: [],
     isPreviewable: true,
@@ -169,4 +173,9 @@ export class Konnectable extends PureComponent<Props> {
       </Container>
     )
   }
+}
+
+export const Konnectable: React.FC<Props> = props => {
+  const location = useLocation()
+  return <KonnectableInner location={location} {...props} />
 }
