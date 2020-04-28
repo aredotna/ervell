@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import Count from 'v2/components/UI/Count'
-import Link from 'v2/components/UI/LinkUnlessCurrent'
 import ChannelShareButton from 'v2/components/ChannelMetadata/components/ChannelMetadataInfo/components/ChannelShareButton'
 import { Expandable } from 'v2/components/UI/ExpandableSet'
 
@@ -41,15 +41,15 @@ export default class ChannelMetadataInfo extends Component {
 
         {channel.owner.__typename === 'Group' && (
           <Section>
-            Started by <Link href={channel.user.href}>{channel.user.name}</Link>
+            Started by <Link to={channel.user.href}>{channel.user.name}</Link>
           </Section>
         )}
 
         <Buttons>
           {channel.visibility !== 'private' && channel.counts.followers > 0 && (
-            <a href={`${channel.href}/followers`} role="button" tabIndex={0}>
+            <Link to={`${channel.href}/followers`} role="button" tabIndex={0}>
               <Count label="Follower" amount={channel.counts.followers} />
-            </a>
+            </Link>
           )}
 
           {channel.can.share && <ChannelShareButton channel={channel} />}

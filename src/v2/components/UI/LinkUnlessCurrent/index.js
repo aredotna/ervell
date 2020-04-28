@@ -42,7 +42,7 @@ class LinkUnlessCurrent extends Component {
     } = this.props
 
     return (
-      <a {...!this.isCurrent() && { href }} {...rest}>
+      <a {...(!this.isCurrent() && { href })} {...rest}>
         {children}
       </a>
     )
