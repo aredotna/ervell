@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { mixin } from 'v2/components/UI/Text'
-import { Link } from 'react-router-dom'
 
-const Anchor = styled(Link).attrs({
+const Anchor = styled.a.attrs({
   display: 'block',
   role: 'button',
   tabIndex: 0,

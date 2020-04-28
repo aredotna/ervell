@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-export default styled.a.attrs({
+import Link from 'v2/components/UserDropdown/components/Link'
+
+export default styled(Link).attrs({
   f: 2,
   fontWeight: 'normal',
 })`
