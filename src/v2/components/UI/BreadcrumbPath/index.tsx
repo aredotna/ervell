@@ -1,9 +1,11 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import constants from 'v2/styles/constants'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
+
+const A = styled.a``
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +24,7 @@ const Container = styled.div`
   `}
 `
 
-const Crumb = styled.div`
+export const Crumb = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,24 +56,18 @@ const Crumb = styled.div`
   }
 `
 
-export default class BreadcrumbPath extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  }
+export const BreadcrumbPath: React.FC = ({ children, ...rest }) => {
+  const { isLoggedIn } = useLoginStatus()
+  const Component = isLoggedIn ? Link : A
+  const props = isLoggedIn ? { to: '/' } : { href: '/' }
 
-  static Crumb = Crumb
+  return (
+    <Container {...rest}>
+      <Crumb>
+        <Component {...props}>Are.na</Component>
+      </Crumb>
 
-  render() {
-    const { children, ...rest } = this.props
-
-    return (
-      <Container {...rest}>
-        <Crumb>
-          <Link to="/">Are.na</Link>
-        </Crumb>
-
-        {children}
-      </Container>
-    )
-  }
+      {children}
+    </Container>
+  )
 }

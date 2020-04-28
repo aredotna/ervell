@@ -1,16 +1,25 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Text from 'v2/components/UI/Text'
 import { truncate } from 'v2/components/UI/Truncate'
 import BorderedLock from 'v2/components/UI/BorderedLock'
+import { Link } from 'react-router-dom'
 
-const NotificationObjectLink = ({
+interface NotificationObjectLinkProps {
+  __typename: string
+  label: string
+  href: string
+  visibility?: string
+  body?: string
+  is_me?: boolean
+}
+
+const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
   __typename,
   label,
   href,
-  visibility,
-  is_me,
+  visibility = null,
+  is_me = false,
   ...rest
 }) => {
   if (is_me) {
@@ -29,7 +38,7 @@ const NotificationObjectLink = ({
       color={__typename === 'Channel' ? `channel.${visibility}` : 'gray.base'}
       {...rest}
     >
-      <a href={href}>
+      <Link to={href}>
         <span dangerouslySetInnerHTML={{ __html: truncate(label, 40) }} />
 
         {visibility === 'private' && (
@@ -37,24 +46,9 @@ const NotificationObjectLink = ({
             <BorderedLock ml={3} />
           </React.Fragment>
         )}
-      </a>
+      </Link>
     </Text>
   )
-}
-
-NotificationObjectLink.propTypes = {
-  __typename: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  visibility: PropTypes.string,
-  body: PropTypes.string,
-  is_me: PropTypes.bool,
-}
-
-NotificationObjectLink.defaultProps = {
-  visibility: null,
-  body: null,
-  is_me: false,
 }
 
 export default NotificationObjectLink
