@@ -10,7 +10,7 @@ import CookieLinkUnlessCurrent from 'v2/components/UI/CookieLinkUnlessCurrent'
 export default class ProfileMetadataView extends Component {
   static propTypes = {
     identifiable: propType(profileMetadataViewFragment).isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
     view: PropTypes.oneOf([
       'all',
       'channels',

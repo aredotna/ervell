@@ -30,7 +30,7 @@ class ProfilePage extends Component {
       'following',
       'feed',
     ]).isRequired,
-    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM']).isRequired,
+    sort: PropTypes.oneOf(['UPDATED_AT', 'RANDOM', 'CREATED_AT']).isRequired,
     filter: PropTypes.oneOf(['OWN', 'COLLABORATION']).isRequired,
     type: PropTypes.oneOf([
       'BLOCK',
@@ -148,15 +148,22 @@ const setValid = (value, validValues, defaultValue) => {
   return defaultValue
 }
 
+const isClientSide = typeof window !== 'undefined'
+
 // Weird container extracted from router
 export default ({ params, query }) => {
   return (
-    <Query query={profileUiStateQuery} fetchPolicy="no-cache">
-      {({ data, error }) => {
-        if (error) return error.message
-        if (!data) return null
+    <Query
+      query={profileUiStateQuery}
+      fetchPolicy={isClientSide ? 'no-cache' : 'network-only'}
+    >
+      {props => {
+        if (props.error) return props.error.message
 
-        const { cookies } = data
+        const cookies = (props.data && props.data.cookies) || {
+          view: 'channels',
+          sort: 'UPDATED_AT',
+        }
 
         const view = params.view || cookies.view || 'channels'
         const sort = setValid(
