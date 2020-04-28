@@ -25,7 +25,7 @@ export interface ProfileMetadataProps {
     | 'following'
     | 'followers'
     | 'feed'
-  sort: 'UPDATED_AT' | 'RANDOM'
+  sort: 'UPDATED_AT' | 'RANDOM' | 'CREATED_AT'
   type?: 'BLOCK' | 'IMAGE' | 'EMBED' | 'TEXT' | 'ATTACHMENT' | 'LINK'
   filter?: 'OWN' | 'COLLABORATION'
   followType?: 'ALL' | 'CHANNEL' | 'GROUP' | 'USER'

@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 import constants from 'v2/styles/constants'
-import useLoginStatus from 'v2/hooks/useLoginStatus'
 
 const A = styled.a``
 
@@ -57,14 +55,10 @@ export const Crumb = styled.div`
 `
 
 export const BreadcrumbPath: React.FC = ({ children, ...rest }) => {
-  const { isLoggedIn } = useLoginStatus()
-  const Component = isLoggedIn ? Link : A
-  const props = isLoggedIn ? { to: '/' } : { href: '/' }
-
   return (
     <Container {...rest}>
       <Crumb>
-        <Component {...props}>Are.na</Component>
+        <A href="/">Are.na</A>
       </Crumb>
 
       {children}
