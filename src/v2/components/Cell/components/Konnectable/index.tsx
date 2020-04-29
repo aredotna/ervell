@@ -158,7 +158,7 @@ class KonnectableInner extends PureComponent<Props & InnerProps> {
 
         <KonnectableDisplay mode={mode} konnectable={konnectable} />
 
-        {konnectable.__typename !== 'Channel' && mode !== Mode.RESTING && (
+        {konnectable.__typename !== 'Channel' && (
           <KonnectableMetadata mode={mode} konnectable={konnectable} />
         )}
 

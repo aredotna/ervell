@@ -27,11 +27,17 @@ import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
 
 export const Routes = () => {
   const location = useLocation()
-  const background = location.state && JSON.parse(location.state.background)
+  const background =
+    location.state &&
+    location.state.background &&
+    JSON.parse(location.state.background)
+  const preventScroll = location.state && location.state.preventScroll
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location.pathname])
+    if (!background && !preventScroll) {
+      window.scrollTo(0, 0)
+    }
+  }, [location.pathname, background, preventScroll])
 
   return (
     <>
