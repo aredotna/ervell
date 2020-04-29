@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import colors from 'v2/styles/colors'
 
@@ -13,9 +14,9 @@ const ColoredChannelLink: React.FC<ColoredChannelLinkProps> = ({
   visibility,
   ...rest
 }) => (
-  <a href={href} style={{ color: colors.channel[visibility] }} {...rest}>
+  <Link to={href} style={{ color: colors.channel[visibility] }} {...rest}>
     {children}
-  </a>
+  </Link>
 )
 
 export default ColoredChannelLink

@@ -133,7 +133,7 @@ export const ModalBlockLightbox: React.FC<ModalBlockLightboxProps> = ({
   const background = location.state && JSON.parse(location.state.background)
 
   const onClose = useCallback(() => {
-    history.push(background.pathname)
+    history.push(background.pathname, { preventScroll: true })
   }, [background, history])
 
   //
