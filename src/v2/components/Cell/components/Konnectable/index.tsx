@@ -18,6 +18,8 @@ import KonnectableBlockOverlay from 'v2/components/Cell/components/Konnectable/c
 import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay'
 import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
 
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+
 const Container = styled(Link)`
   box-sizing: border-box;
   position: relative;
@@ -121,6 +123,7 @@ class KonnectableInner extends PureComponent<Props & InnerProps> {
 
     const defaultToParams = {
       pathname: konnectable.href,
+      state: getBreadcrumbPath(konnectable),
     }
 
     const toParams =
