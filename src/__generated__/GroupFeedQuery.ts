@@ -33,12 +33,26 @@ export interface GroupFeedQuery_group_feed_groups_item_Null {
   __typename: "Null";
 }
 
+export interface GroupFeedQuery_group_feed_groups_item_Channel_owner_User {
+  __typename: "User";
+  name: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Channel_owner_Group {
+  __typename: "Group";
+  name: string | null;
+}
+
+export type GroupFeedQuery_group_feed_groups_item_Channel_owner = GroupFeedQuery_group_feed_groups_item_Channel_owner_User | GroupFeedQuery_group_feed_groups_item_Channel_owner_Group;
+
 export interface GroupFeedQuery_group_feed_groups_item_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  owner: GroupFeedQuery_group_feed_groups_item_Channel_owner | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_item_Connectable {
@@ -52,6 +66,7 @@ export interface GroupFeedQuery_group_feed_groups_item_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -66,6 +81,7 @@ export interface GroupFeedQuery_group_feed_groups_item_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -75,12 +91,26 @@ export interface GroupFeedQuery_group_feed_groups_target_Null {
   __typename: "Null";
 }
 
+export interface GroupFeedQuery_group_feed_groups_target_Channel_owner_User {
+  __typename: "User";
+  name: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Channel_owner_Group {
+  __typename: "Group";
+  name: string | null;
+}
+
+export type GroupFeedQuery_group_feed_groups_target_Channel_owner = GroupFeedQuery_group_feed_groups_target_Channel_owner_User | GroupFeedQuery_group_feed_groups_target_Channel_owner_Group;
+
 export interface GroupFeedQuery_group_feed_groups_target_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  owner: GroupFeedQuery_group_feed_groups_target_Channel_owner | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_target_Connectable {
@@ -94,6 +124,7 @@ export interface GroupFeedQuery_group_feed_groups_target_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -108,6 +139,7 @@ export interface GroupFeedQuery_group_feed_groups_target_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 

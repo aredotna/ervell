@@ -62,7 +62,7 @@ export default class FeedGroupSentence extends PureComponent {
     return (
       <Container my={3} pr={6}>
         <Sentence>
-          <FeedObjectLink {...owner} />
+          <FeedObjectLink obj={owner} {...owner} />
 
           {action === 'commented' && (
             <span>
@@ -82,11 +82,11 @@ export default class FeedGroupSentence extends PureComponent {
             <span>
               <Label>{` ${action} `}</Label>
 
-              {item_phrase && <FeedObjectLink {...item} label={item_phrase} />}
+              {item_phrase && <FeedObjectLink obj={item} label={item_phrase} />}
 
               {connector && <Label>{` ${connector} `}</Label>}
 
-              {target && <FeedObjectLink {...target} />}
+              {target && <FeedObjectLink obj={target} />}
             </span>
           )}
         </Sentence>

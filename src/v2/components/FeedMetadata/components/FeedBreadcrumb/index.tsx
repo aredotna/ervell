@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 
 const Options = styled.div``
 
@@ -30,7 +31,11 @@ export const FeedBreadcrumb: React.FC = () => {
     <Options>
       <div>Feed</div>
       <Option to="/explore">Explore</Option>
-      {me && <Option to={`/${me.slug}`}>Profile</Option>}
+      {me && (
+        <Option to={{ pathname: `/${me.slug}`, state: getBreadcrumbPath(me) }}>
+          Profile
+        </Option>
+      )}
     </Options>
   )
 

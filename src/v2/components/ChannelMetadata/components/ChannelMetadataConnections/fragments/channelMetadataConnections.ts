@@ -10,6 +10,7 @@ export default gql`
     }
 
     connected_to_channels {
+      __typename
       id
       label: title
       href

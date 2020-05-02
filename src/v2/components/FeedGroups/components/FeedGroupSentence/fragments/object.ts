@@ -7,8 +7,17 @@ export default gql`
     ... on Channel {
       id
       label: title
+      truncatedTitle: title
       href
       visibility
+      owner {
+        ... on User {
+          name
+        }
+        ... on Group {
+          name
+        }
+      }
     }
 
     ... on Connectable {
@@ -20,6 +29,7 @@ export default gql`
     ... on User {
       id
       label: name
+      name
       href
     }
 
@@ -32,6 +42,7 @@ export default gql`
     ... on Group {
       id
       label: name
+      name
       href
     }
   }

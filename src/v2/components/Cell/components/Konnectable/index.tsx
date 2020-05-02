@@ -123,7 +123,8 @@ class KonnectableInner extends PureComponent<Props & InnerProps> {
 
     const defaultToParams = {
       pathname: konnectable.href,
-      state: getBreadcrumbPath(konnectable),
+      state:
+        konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable),
     }
 
     const toParams =

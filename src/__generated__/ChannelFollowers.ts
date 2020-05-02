@@ -17,6 +17,7 @@ export interface ChannelFollowers_channel_followers {
 
 export interface ChannelFollowers_channel {
   __typename: "Channel";
+  id: number | null;
   followers: (ChannelFollowers_channel_followers | null)[] | null;
 }
 

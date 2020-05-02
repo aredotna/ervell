@@ -12,6 +12,7 @@ export default gql`
       __typename
       id
       label: name
+      name
       href
     }
     owner {
@@ -19,11 +20,13 @@ export default gql`
       ... on User {
         id
         label: name
+        name
         href
       }
       ... on Group {
         id
         label: name
+        name
         href
       }
     }

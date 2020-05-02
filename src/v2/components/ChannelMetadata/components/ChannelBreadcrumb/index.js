@@ -9,6 +9,8 @@ import ColoredChannelLink from 'v2/components/UI/ColoredChannelLink'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import BorderedLock from 'v2/components/UI/BorderedLock'
 
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+
 const CollaboratorCount = styled.span`
   font-weight: normal;
 `
@@ -25,7 +27,12 @@ export default class ChannelBreadcrumb extends Component {
       <StickyBreadcrumbPath>
         {({ mode }) => [
           <StickyBreadcrumbPath.Crumb key="head">
-            <Link to={channel.owner.href}>
+            <Link
+              to={{
+                pathname: channel.owner.href,
+                state: getBreadcrumbPath(channel.owner),
+              }}
+            >
               {channel.owner.name}
 
               {channel.counts.collaborators > 0 && (
@@ -40,7 +47,10 @@ export default class ChannelBreadcrumb extends Component {
           <StickyBreadcrumbPath.Crumb key="tail">
             <ColoredChannelLink
               as={Link}
-              to={channel.href}
+              to={{
+                pathname: channel.href,
+                state: getBreadcrumbPath(channel),
+              }}
               visibility={channel.visibility}
             >
               {
