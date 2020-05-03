@@ -350,6 +350,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Channel {
   visibility: string | null;
   counts: ProfileChannelSearch_Group_channels_blokks_Channel_counts | null;
   owner: ProfileChannelSearch_Group_channels_blokks_Channel_owner | null;
+  label: string | null;
 }
 
 export type ProfileChannelSearch_Group_channels_blokks = ProfileChannelSearch_Group_channels_blokks_Text | ProfileChannelSearch_Group_channels_blokks_Image | ProfileChannelSearch_Group_channels_blokks_Link | ProfileChannelSearch_Group_channels_blokks_Embed | ProfileChannelSearch_Group_channels_blokks_Attachment | ProfileChannelSearch_Group_channels_blokks_PendingBlock | ProfileChannelSearch_Group_channels_blokks_Channel;
@@ -732,6 +733,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Channel {
   visibility: string | null;
   counts: ProfileChannelSearch_User_channels_Channel_blokks_Channel_counts | null;
   owner: ProfileChannelSearch_User_channels_Channel_blokks_Channel_owner | null;
+  label: string | null;
 }
 
 export type ProfileChannelSearch_User_channels_Channel_blokks = ProfileChannelSearch_User_channels_Channel_blokks_Text | ProfileChannelSearch_User_channels_Channel_blokks_Image | ProfileChannelSearch_User_channels_Channel_blokks_Link | ProfileChannelSearch_User_channels_Channel_blokks_Embed | ProfileChannelSearch_User_channels_Channel_blokks_Attachment | ProfileChannelSearch_User_channels_Channel_blokks_PendingBlock | ProfileChannelSearch_User_channels_Channel_blokks_Channel;

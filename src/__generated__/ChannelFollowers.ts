@@ -11,6 +11,7 @@ export interface ChannelFollowers_channel_followers {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

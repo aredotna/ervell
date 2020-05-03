@@ -12,11 +12,13 @@ export interface FeedObject_Null {
 
 export interface FeedObject_Channel_owner_User {
   __typename: "User";
+  id: number | null;
   name: string | null;
 }
 
 export interface FeedObject_Channel_owner_Group {
   __typename: "Group";
+  id: number | null;
   name: string | null;
 }
 

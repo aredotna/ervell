@@ -10,6 +10,7 @@ export interface FeedGroupSentence_user {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -17,6 +18,7 @@ export interface FeedGroupSentence_owner_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -24,7 +26,7 @@ export interface FeedGroupSentence_owner_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
-  href: string | null;
+  name: string | null;
 }
 
 export type FeedGroupSentence_owner = FeedGroupSentence_owner_User | FeedGroupSentence_owner_Group;
@@ -35,11 +37,13 @@ export interface FeedGroupSentence_item_Null {
 
 export interface FeedGroupSentence_item_Channel_owner_User {
   __typename: "User";
+  id: number | null;
   name: string | null;
 }
 
 export interface FeedGroupSentence_item_Channel_owner_Group {
   __typename: "Group";
+  id: number | null;
   name: string | null;
 }
 
@@ -93,11 +97,13 @@ export interface FeedGroupSentence_target_Null {
 
 export interface FeedGroupSentence_target_Channel_owner_User {
   __typename: "User";
+  id: number | null;
   name: string | null;
 }
 
 export interface FeedGroupSentence_target_Channel_owner_Group {
   __typename: "Group";
+  id: number | null;
   name: string | null;
 }
 

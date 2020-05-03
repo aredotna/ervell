@@ -7,12 +7,12 @@ import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import Grid from 'v2/components/UI/Grid'
 import Pocket from 'v2/components/UI/Pocket'
 
-interface Breadcrumbs {
+export interface Breadcrumbs {
   crumbs: Breadcrumb[]
 }
 
-interface Breadcrumb {
-  title: string
+export interface Breadcrumb {
+  label: string
 }
 
 const Crumb = styled(StickyBreadcrumbPath.Crumb)`
@@ -35,7 +35,7 @@ const LoadingPageBreadCrumb: React.FC = () => {
       <StickyBreadcrumbPath>
         {() =>
           breadcrumbs.crumbs.map((breadcrumb, index) => (
-            <Crumb key={`breadcrumb-${index}`}>{breadcrumb.title}</Crumb>
+            <Crumb key={`breadcrumb-${index}`}>{breadcrumb.label}</Crumb>
           ))
         }
       </StickyBreadcrumbPath>

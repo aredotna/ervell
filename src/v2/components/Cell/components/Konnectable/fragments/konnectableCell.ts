@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import konnectableDisplayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableDisplay/fragments/konnectableDisplay'
 import konnectableMetadataFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableMetadata/fragments/konnectableMetadata'
 import konnectableBlockOverlayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableBlockOverlay/fragments/konnectableBlockOverlay'
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`
   fragment KonnectableCell on Konnectable {
@@ -21,8 +22,10 @@ export default gql`
     ...KonnectableDisplay
     ...KonnectableMetadata
     ...KonnectableBlockOverlay
+    ...LoadingBreadcrumbChannel
   }
   ${konnectableDisplayFragment}
   ${konnectableMetadataFragment}
   ${konnectableBlockOverlayFragment}
+  ${loadingBreadcrumbChannelFragment}
 `

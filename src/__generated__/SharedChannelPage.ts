@@ -525,6 +525,7 @@ export interface SharedChannelPage_channel_initial_contents_Channel {
   visibility: string | null;
   counts: SharedChannelPage_channel_initial_contents_Channel_counts | null;
   owner: SharedChannelPage_channel_initial_contents_Channel_owner | null;
+  label: string | null;
   can: SharedChannelPage_channel_initial_contents_Channel_can | null;
 }
 

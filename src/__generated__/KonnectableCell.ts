@@ -330,6 +330,7 @@ export interface KonnectableCell_Channel {
   counts: KonnectableCell_Channel_counts | null;
   owner: KonnectableCell_Channel_owner | null;
   source: KonnectableCell_Channel_source | null;
+  label: string | null;
 }
 
 export type KonnectableCell = KonnectableCell_Text | KonnectableCell_Image | KonnectableCell_Link | KonnectableCell_Embed | KonnectableCell_Attachment | KonnectableCell_PendingBlock | KonnectableCell_Channel;

@@ -7,7 +7,7 @@
 // ====================================================
 
 export interface SerializeMeQueryHook_serializedMe {
-  __typename: "SerializedMe";
+  __typename: "ClientSerializedMe";
   id: string | null;
   name: string | null;
   initials: string | null;

@@ -298,6 +298,7 @@ export interface FeedGroupObjects_objects_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -308,6 +309,7 @@ export interface FeedGroupObjects_objects_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

@@ -422,6 +422,7 @@ export interface ChannelContentsSet_channel_contents_Channel {
   visibility: string | null;
   counts: ChannelContentsSet_channel_contents_Channel_counts | null;
   owner: ChannelContentsSet_channel_contents_Channel_owner | null;
+  label: string | null;
   can: ChannelContentsSet_channel_contents_Channel_can | null;
 }
 

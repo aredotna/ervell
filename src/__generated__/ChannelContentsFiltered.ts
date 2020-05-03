@@ -330,6 +330,7 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Channel {
   visibility: string | null;
   counts: ChannelContentsFiltered_channel_filtered_contents_Channel_counts | null;
   owner: ChannelContentsFiltered_channel_filtered_contents_Channel_owner | null;
+  label: string | null;
 }
 
 export type ChannelContentsFiltered_channel_filtered_contents = ChannelContentsFiltered_channel_filtered_contents_Text | ChannelContentsFiltered_channel_filtered_contents_Image | ChannelContentsFiltered_channel_filtered_contents_Link | ChannelContentsFiltered_channel_filtered_contents_Embed | ChannelContentsFiltered_channel_filtered_contents_Attachment | ChannelContentsFiltered_channel_filtered_contents_PendingBlock | ChannelContentsFiltered_channel_filtered_contents_Channel;

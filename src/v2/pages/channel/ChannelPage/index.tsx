@@ -17,7 +17,7 @@ import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelCont
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
-import { LoadingPage } from 'v2/components/UI/LoadingPage'
+import { LoadingPage } from 'v2/components/LoadingPage'
 
 interface Variables {
   id: string

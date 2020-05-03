@@ -330,6 +330,7 @@ export interface Blokk_blokk_Channel {
   visibility: string | null;
   counts: Blokk_blokk_Channel_counts | null;
   owner: Blokk_blokk_Channel_owner | null;
+  label: string | null;
 }
 
 export type Blokk_blokk = Blokk_blokk_Text | Blokk_blokk_Image | Blokk_blokk_Link | Blokk_blokk_Embed | Blokk_blokk_Attachment | Blokk_blokk_PendingBlock | Blokk_blokk_Channel;

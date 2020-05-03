@@ -10,6 +10,7 @@ export interface FeedQuery_me_feed_groups_user {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -17,6 +18,7 @@ export interface FeedQuery_me_feed_groups_owner_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -24,7 +26,7 @@ export interface FeedQuery_me_feed_groups_owner_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
-  href: string | null;
+  name: string | null;
 }
 
 export type FeedQuery_me_feed_groups_owner = FeedQuery_me_feed_groups_owner_User | FeedQuery_me_feed_groups_owner_Group;
@@ -35,11 +37,13 @@ export interface FeedQuery_me_feed_groups_item_Null {
 
 export interface FeedQuery_me_feed_groups_item_Channel_owner_User {
   __typename: "User";
+  id: number | null;
   name: string | null;
 }
 
 export interface FeedQuery_me_feed_groups_item_Channel_owner_Group {
   __typename: "Group";
+  id: number | null;
   name: string | null;
 }
 
@@ -93,11 +97,13 @@ export interface FeedQuery_me_feed_groups_target_Null {
 
 export interface FeedQuery_me_feed_groups_target_Channel_owner_User {
   __typename: "User";
+  id: number | null;
   name: string | null;
 }
 
 export interface FeedQuery_me_feed_groups_target_Channel_owner_Group {
   __typename: "Group";
+  id: number | null;
   name: string | null;
 }
 
@@ -437,6 +443,7 @@ export interface FeedQuery_me_feed_groups_objects_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -447,6 +454,7 @@ export interface FeedQuery_me_feed_groups_objects_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

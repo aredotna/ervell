@@ -1,28 +1,25 @@
-import { KonnectableCell } from '__generated__/KonnectableCell'
-import { IdentifiableCell } from '__generated__/IdentifiableCell'
-import { FeedObject } from '__generated__/FeedObject'
 import { SerializeMeQueryHook_serializedMe } from '__generated__/SerializeMeQueryHook'
+import { LoadingBreadcrumbChannel } from '__generated__/LoadingBreadcrumbChannel'
+import { LoadingBreadcrumbUser } from '__generated__/LoadingBreadcrumbUser'
+import { LoadingBreadcrumbGroup } from '__generated__/LoadingBreadcrumbGroup'
 
 type Crumbable =
-  | KonnectableCell
-  | IdentifiableCell
-  | FeedObject
+  | LoadingBreadcrumbChannel
+  | LoadingBreadcrumbUser
+  | LoadingBreadcrumbGroup
   | SerializeMeQueryHook_serializedMe
 
 export const getBreadcrumbPath = (crumbable: Crumbable) => {
   const crumbs = (crumbable => {
     switch (crumbable.__typename) {
       case 'Channel':
-        return [
-          { title: crumbable.owner.name },
-          { title: crumbable.truncatedTitle },
-        ]
-      case 'SerializedMe':
+        return [{ title: crumbable.owner.name }, { title: crumbable.label }]
+      case 'ClientSerializedMe':
         return [{ title: crumbable.name }]
       case 'User':
-        return [{ title: crumbable.name }]
+        return [{ title: crumbable.label }]
       case 'Group':
-        return [{ title: crumbable.name }]
+        return [{ title: crumbable.label }]
       default:
         return []
     }

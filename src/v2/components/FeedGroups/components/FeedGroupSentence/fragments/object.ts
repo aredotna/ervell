@@ -1,4 +1,7 @@
 import gql from 'graphql-tag'
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`
   fragment FeedObject on DeedKind {
@@ -10,14 +13,7 @@ export default gql`
       truncatedTitle: title
       href
       visibility
-      owner {
-        ... on User {
-          name
-        }
-        ... on Group {
-          name
-        }
-      }
+      ...LoadingBreadcrumbChannel
     }
 
     ... on Connectable {
@@ -31,6 +27,7 @@ export default gql`
       label: name
       name
       href
+      ...LoadingBreadcrumbUser
     }
 
     ... on Comment {
@@ -44,6 +41,10 @@ export default gql`
       label: name
       name
       href
+      ...LoadingBreadcrumbGroup
     }
   }
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
+  ${loadingBreadcrumbChannelFragment}
 `
