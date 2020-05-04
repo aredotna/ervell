@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 import memberAvatarFragment from 'v2/components/MemberAvatar/fragments/memberAvatar'
-import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
-import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
 
 export default gql`
   fragment IdentifiableCell on Identifiable {

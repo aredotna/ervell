@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Modal from 'v2/components/UI/Modal'
 import CreateGroup from 'v2/components/CreateGroup'
 import ManageCollaborators from 'v2/components/ManageCollaborators'
-import CollaboratorsList from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsList'
+import { CollaboratorsList } from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/components/CollaboratorsList'
 import { Expandable } from 'v2/components/UI/ExpandableSet'
 
 const Actions = styled.div`

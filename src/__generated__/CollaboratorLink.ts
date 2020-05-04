@@ -11,6 +11,7 @@ export interface CollaboratorLink_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface CollaboratorLink_Group_user {
@@ -43,6 +44,7 @@ export interface CollaboratorLink_Group {
   users: (CollaboratorLink_Group_users | null)[] | null;
   can: CollaboratorLink_Group_can | null;
   visibility: string | null;
+  label: string | null;
 }
 
 export type CollaboratorLink = CollaboratorLink_User | CollaboratorLink_Group;

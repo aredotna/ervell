@@ -16,6 +16,7 @@ export interface CollaboratorsList_collaborators_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface CollaboratorsList_collaborators_Group_user {
@@ -48,6 +49,7 @@ export interface CollaboratorsList_collaborators_Group {
   users: (CollaboratorsList_collaborators_Group_users | null)[] | null;
   can: CollaboratorsList_collaborators_Group_can | null;
   visibility: string | null;
+  label: string | null;
 }
 
 export type CollaboratorsList_collaborators = CollaboratorsList_collaborators_User | CollaboratorsList_collaborators_Group;

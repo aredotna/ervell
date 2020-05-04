@@ -53,6 +53,7 @@ export interface Channel_channel_collaborators_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface Channel_channel_collaborators_Group_user {
@@ -85,6 +86,7 @@ export interface Channel_channel_collaborators_Group {
   users: (Channel_channel_collaborators_Group_users | null)[] | null;
   can: Channel_channel_collaborators_Group_can | null;
   visibility: string | null;
+  label: string | null;
 }
 
 export type Channel_channel_collaborators = Channel_channel_collaborators_User | Channel_channel_collaborators_Group;

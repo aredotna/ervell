@@ -80,7 +80,13 @@ console.time('apple-site-association')
 app.use(require('../apps/apple_site_association'))
 console.timeEnd('apple-site-association')
 
+console.time('rss')
+app.use(require('../apps/rss'))
+console.timeEnd('rss')
+
 # All other SPA / client-side routes
 console.time('app')
 app.use(require('../apps/app'))
 console.timeEnd('app')
+
+
