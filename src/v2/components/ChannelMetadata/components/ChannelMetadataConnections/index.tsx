@@ -34,6 +34,7 @@ export const ChannelMetadataConnections: React.FC<ChannelMetadataConnectionsProp
   const links = channel.connected_to_channels.map(c => ({
     pathname: c.href,
     state: getBreadcrumbPath(c),
+    label: c.label,
   }))
   return (
     <div>

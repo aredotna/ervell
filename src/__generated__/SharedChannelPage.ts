@@ -11,6 +11,7 @@ export interface SharedChannelPage_channel_owner_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface SharedChannelPage_channel_owner_Group {
@@ -18,6 +19,7 @@ export interface SharedChannelPage_channel_owner_Group {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export type SharedChannelPage_channel_owner = SharedChannelPage_channel_owner_User | SharedChannelPage_channel_owner_Group;
@@ -555,6 +557,7 @@ export interface SharedChannelPage_channel {
   visibility: string | null;
   owner: SharedChannelPage_channel_owner | null;
   counts: SharedChannelPage_channel_counts | null;
+  label: string | null;
   can: SharedChannelPage_channel_can | null;
   is_muted: boolean | null;
   info: string | null;

@@ -6,7 +6,7 @@ import channelMetadataFragment from 'v2/components/ChannelMetadata/fragments/cha
 import Grid from 'v2/components/UI/Grid'
 import Pocket from 'v2/components/UI/Pocket'
 import HeaderMetadataContainer from 'v2/components/UI/HeaderMetadata/HeaderMetadataContainer'
-import ChannelBreadcrumb from 'v2/components/ChannelMetadata/components/ChannelBreadcrumb'
+import { ChannelBreadcrumb } from 'v2/components/ChannelMetadata/components/ChannelBreadcrumb'
 import ChannelMetadataCollaborators from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators'
 import ChannelMetadataInfo from 'v2/components/ChannelMetadata/components/ChannelMetadataInfo'
 import { ChannelMetadataConnections } from 'v2/components/ChannelMetadata/components/ChannelMetadataConnections'

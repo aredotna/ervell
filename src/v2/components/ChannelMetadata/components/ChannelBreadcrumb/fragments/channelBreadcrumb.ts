@@ -1,5 +1,8 @@
 import gql from 'graphql-tag'
 
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+
 export default gql`
   fragment ChannelBreadcrumb on Channel {
     __typename
@@ -14,15 +17,20 @@ export default gql`
         id
         name
         href
+        ...LoadingBreadcrumbUser
       }
       ... on Group {
         id
         name
         href
+        ...LoadingBreadcrumbGroup
       }
     }
     counts {
       collaborators
     }
+    ...LoadingBreadcrumbChannel
   }
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
 `

@@ -11,6 +11,7 @@ export interface ChannelFollowersPage_channel_owner_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface ChannelFollowersPage_channel_owner_Group {
@@ -18,6 +19,7 @@ export interface ChannelFollowersPage_channel_owner_Group {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export type ChannelFollowersPage_channel_owner = ChannelFollowersPage_channel_owner_User | ChannelFollowersPage_channel_owner_Group;
@@ -125,6 +127,7 @@ export interface ChannelFollowersPage_channel {
   visibility: string | null;
   owner: ChannelFollowersPage_channel_owner | null;
   counts: ChannelFollowersPage_channel_counts | null;
+  label: string | null;
   can: ChannelFollowersPage_channel_can | null;
   is_muted: boolean | null;
   info: string | null;

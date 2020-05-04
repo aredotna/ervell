@@ -13,6 +13,7 @@ export interface createOnboardingChannelMutation_create_channel_channel_owner_Us
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_owner_Group {
@@ -20,6 +21,7 @@ export interface createOnboardingChannelMutation_create_channel_channel_owner_Gr
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export type createOnboardingChannelMutation_create_channel_channel_owner = createOnboardingChannelMutation_create_channel_channel_owner_User | createOnboardingChannelMutation_create_channel_channel_owner_Group;
@@ -127,6 +129,7 @@ export interface createOnboardingChannelMutation_create_channel_channel {
   visibility: string | null;
   owner: createOnboardingChannelMutation_create_channel_channel_owner | null;
   counts: createOnboardingChannelMutation_create_channel_channel_counts | null;
+  label: string | null;
   can: createOnboardingChannelMutation_create_channel_channel_can | null;
   is_muted: boolean | null;
   info: string | null;
