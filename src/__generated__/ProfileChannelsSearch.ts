@@ -352,6 +352,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels_blok
   visibility: string | null;
   counts: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Channel_counts | null;
   owner: ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Channel_owner | null;
+  label: string | null;
 }
 
 export type ProfileChannelsSearch_identity_identifiable_Group_channels_blokks = ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Text | ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Image | ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Link | ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Embed | ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Attachment | ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_PendingBlock | ProfileChannelsSearch_identity_identifiable_Group_channels_blokks_Channel;
@@ -365,6 +366,7 @@ export interface ProfileChannelsSearch_identity_identifiable_Group_channels {
   updated_at: string | null;
   counts: ProfileChannelsSearch_identity_identifiable_Group_channels_counts | null;
   owner: ProfileChannelsSearch_identity_identifiable_Group_channels_owner | null;
+  label: string | null;
   blokks: (ProfileChannelsSearch_identity_identifiable_Group_channels_blokks | null)[] | null;
 }
 
@@ -734,6 +736,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   visibility: string | null;
   counts: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Channel_counts | null;
   owner: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Channel_owner | null;
+  label: string | null;
 }
 
 export type ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks = ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Text | ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Image | ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Link | ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Embed | ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Attachment | ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_PendingBlock | ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks_Channel;
@@ -747,6 +750,7 @@ export interface ProfileChannelsSearch_identity_identifiable_User_channels_Chann
   updated_at: string | null;
   counts: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_counts | null;
   owner: ProfileChannelsSearch_identity_identifiable_User_channels_Channel_owner | null;
+  label: string | null;
   blokks: (ProfileChannelsSearch_identity_identifiable_User_channels_Channel_blokks | null)[] | null;
 }
 

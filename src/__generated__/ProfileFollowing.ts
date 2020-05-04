@@ -11,6 +11,7 @@ export interface ProfileFollowing_following_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -21,6 +22,7 @@ export interface ProfileFollowing_following_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -77,6 +79,7 @@ export interface ProfileFollowing_following_Channel {
   updated_at: string | null;
   counts: ProfileFollowing_following_Channel_counts | null;
   owner: ProfileFollowing_following_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: ProfileFollowing_following_Channel_user | null;
   /**

@@ -11,6 +11,7 @@ export interface SharedChannelPage_channel_owner_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface SharedChannelPage_channel_owner_Group {
@@ -18,6 +19,7 @@ export interface SharedChannelPage_channel_owner_Group {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export type SharedChannelPage_channel_owner = SharedChannelPage_channel_owner_User | SharedChannelPage_channel_owner_Group;
@@ -91,11 +93,26 @@ export interface SharedChannelPage_channel_collaborators_Group {
 
 export type SharedChannelPage_channel_collaborators = SharedChannelPage_channel_collaborators_User | SharedChannelPage_channel_collaborators_Group;
 
+export interface SharedChannelPage_channel_connected_to_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface SharedChannelPage_channel_connected_to_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type SharedChannelPage_channel_connected_to_channels_owner = SharedChannelPage_channel_connected_to_channels_owner_User | SharedChannelPage_channel_connected_to_channels_owner_Group;
+
 export interface SharedChannelPage_channel_connected_to_channels {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
+  owner: SharedChannelPage_channel_connected_to_channels_owner | null;
 }
 
 export interface SharedChannelPage_channel_share {
@@ -525,6 +542,7 @@ export interface SharedChannelPage_channel_initial_contents_Channel {
   visibility: string | null;
   counts: SharedChannelPage_channel_initial_contents_Channel_counts | null;
   owner: SharedChannelPage_channel_initial_contents_Channel_owner | null;
+  label: string | null;
   can: SharedChannelPage_channel_initial_contents_Channel_can | null;
 }
 
@@ -539,6 +557,7 @@ export interface SharedChannelPage_channel {
   visibility: string | null;
   owner: SharedChannelPage_channel_owner | null;
   counts: SharedChannelPage_channel_counts | null;
+  label: string | null;
   can: SharedChannelPage_channel_can | null;
   is_muted: boolean | null;
   info: string | null;

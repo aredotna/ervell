@@ -12,7 +12,7 @@ import ErrorAlert from 'v2/components/UI/ErrorAlert'
 import Box from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
 import ChannelMetadata from 'v2/components/ChannelMetadata'
-import ChannelContents from 'v2/components/ChannelContents'
+import { ChannelContentsWithData } from 'v2/pages/channel/components/ChannelContentsWithData'
 import { ChannelPageMetaTags } from 'v2/pages/channel/components/ChannelPageMetaTags'
 
 export default ({ token }) => {
@@ -40,7 +40,7 @@ export default ({ token }) => {
 
                 <ChannelMetadata channel={channel} />
 
-                <ChannelContents channel={channel} />
+                <ChannelContentsWithData channel={channel} />
 
                 <Box my={9} textAlign="center">
                   <a href="https://www.are.na">

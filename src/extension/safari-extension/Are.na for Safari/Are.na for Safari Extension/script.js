@@ -1,11 +1,11 @@
 document.addEventListener('contextmenu', handleContextMenu, false)
 
 function handleContextMenu(event) {
-  var selectedText = window.getSelection().toString()
-  var url = window.parent.location.href
-  var target = event.target
+  const selectedText = window.getSelection().toString()
+  const url = window.parent.location.href
+  let target = event.target
 
-  var data = {
+  const data = {
     id: Math.floor(Math.random() * 1000000) + 1,
   }
 
@@ -14,7 +14,7 @@ function handleContextMenu(event) {
     original_source_title: window.parent.document.title,
   }
 
-  var extraData = {}
+  let extraData = {}
 
   while (
     target !== null &&
@@ -54,7 +54,7 @@ function handleContextMenu(event) {
     }
   }
 
-  var messageData =
+  const messageData =
     extraData.type === 'Link'
       ? { ...data, ...extraData }
       : { ...data, ...extraData, ...sourceData }

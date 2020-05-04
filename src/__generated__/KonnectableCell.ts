@@ -329,6 +329,7 @@ export interface KonnectableCell_Channel {
   visibility: string | null;
   counts: KonnectableCell_Channel_counts | null;
   owner: KonnectableCell_Channel_owner | null;
+  label: string | null;
   source: KonnectableCell_Channel_source | null;
 }
 

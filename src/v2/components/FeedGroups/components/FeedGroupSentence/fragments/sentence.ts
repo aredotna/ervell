@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 
 import feedObjectFragment from 'v2/components/FeedGroups/components/FeedGroupSentence/fragments/object'
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
 
 export default gql`
   fragment FeedGroupSentence on DeedGroup {
@@ -12,19 +14,24 @@ export default gql`
       __typename
       id
       label: name
+      name
       href
+      ...LoadingBreadcrumbUser
     }
     owner {
       __typename
       ... on User {
         id
         label: name
+        name
         href
+        ...LoadingBreadcrumbUser
       }
       ... on Group {
         id
         label: name
-        href
+        name
+        ...LoadingBreadcrumbGroup
       }
     }
     action
@@ -41,4 +48,6 @@ export default gql`
     is_private
   }
   ${feedObjectFragment}
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
 `

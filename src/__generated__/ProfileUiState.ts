@@ -11,6 +11,7 @@ export interface ProfileUiState_cookies {
   view: string | null;
   filter: string | null;
   sort: string | null;
+  type: string | null;
 }
 
 export interface ProfileUiState {

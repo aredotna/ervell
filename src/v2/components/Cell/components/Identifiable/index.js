@@ -16,6 +16,8 @@ import MemberAvatar from 'v2/components/MemberAvatar'
 import { mixin as dividerButtonMixin } from 'v2/components/UI/Buttons/components/DividerButton'
 import FollowButton from 'v2/components/FollowButton'
 
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+
 const IdentifiableFollowButton = styled(FollowButton)`
   ${dividerButtonMixin}
 `
@@ -79,7 +81,10 @@ export default class Indentifiable extends PureComponent {
 
     return (
       <Container
-        to={identifiable.href}
+        to={{
+          pathname: identifiable.href,
+          state: getBreadcrumbPath(identifiable),
+        }}
         role="button"
         tabIndex={0}
         onMouseEnter={this.onMouseEnter}

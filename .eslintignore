@@ -2,3 +2,5 @@ src/components/*
 src/lib/*
 src/apps/marklet/public/loader.js
 public/*
+src/extension/safari-extension/Are.na for Safari/
+src/extension/dist/

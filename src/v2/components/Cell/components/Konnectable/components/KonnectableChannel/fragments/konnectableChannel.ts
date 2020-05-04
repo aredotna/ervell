@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import konnectableChannelOverlayFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelOverlay/fragments/konnectableChannelOverlay'
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`
   fragment KonnectableChannel on Channel {
@@ -26,6 +27,8 @@ export default gql`
       }
     }
     ...KonnectableChannelOverlay
+    ...LoadingBreadcrumbChannel
   }
   ${konnectableChannelOverlayFragment}
+  ${loadingBreadcrumbChannelFragment}
 `

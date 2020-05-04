@@ -11,6 +11,7 @@ export interface ChannelMetadata_owner_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface ChannelMetadata_owner_Group {
@@ -18,6 +19,7 @@ export interface ChannelMetadata_owner_Group {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export type ChannelMetadata_owner = ChannelMetadata_owner_User | ChannelMetadata_owner_Group;
@@ -87,11 +89,26 @@ export interface ChannelMetadata_collaborators_Group {
 
 export type ChannelMetadata_collaborators = ChannelMetadata_collaborators_User | ChannelMetadata_collaborators_Group;
 
+export interface ChannelMetadata_connected_to_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface ChannelMetadata_connected_to_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type ChannelMetadata_connected_to_channels_owner = ChannelMetadata_connected_to_channels_owner_User | ChannelMetadata_connected_to_channels_owner_Group;
+
 export interface ChannelMetadata_connected_to_channels {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
+  owner: ChannelMetadata_connected_to_channels_owner | null;
 }
 
 export interface ChannelMetadata_share {
@@ -110,6 +127,7 @@ export interface ChannelMetadata {
   visibility: string | null;
   owner: ChannelMetadata_owner | null;
   counts: ChannelMetadata_counts | null;
+  label: string | null;
   can: ChannelMetadata_can | null;
   is_muted: boolean | null;
   info: string | null;

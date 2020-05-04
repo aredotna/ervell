@@ -10,6 +10,7 @@ export interface FeedQuery_me_feed_groups_user {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -17,6 +18,7 @@ export interface FeedQuery_me_feed_groups_owner_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -24,7 +26,7 @@ export interface FeedQuery_me_feed_groups_owner_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
-  href: string | null;
+  name: string | null;
 }
 
 export type FeedQuery_me_feed_groups_owner = FeedQuery_me_feed_groups_owner_User | FeedQuery_me_feed_groups_owner_Group;
@@ -33,12 +35,28 @@ export interface FeedQuery_me_feed_groups_item_Null {
   __typename: "Null";
 }
 
+export interface FeedQuery_me_feed_groups_item_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface FeedQuery_me_feed_groups_item_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type FeedQuery_me_feed_groups_item_Channel_owner = FeedQuery_me_feed_groups_item_Channel_owner_User | FeedQuery_me_feed_groups_item_Channel_owner_Group;
+
 export interface FeedQuery_me_feed_groups_item_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
+  owner: FeedQuery_me_feed_groups_item_Channel_owner | null;
 }
 
 export interface FeedQuery_me_feed_groups_item_Connectable {
@@ -52,6 +70,7 @@ export interface FeedQuery_me_feed_groups_item_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -66,6 +85,7 @@ export interface FeedQuery_me_feed_groups_item_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -75,12 +95,28 @@ export interface FeedQuery_me_feed_groups_target_Null {
   __typename: "Null";
 }
 
+export interface FeedQuery_me_feed_groups_target_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface FeedQuery_me_feed_groups_target_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type FeedQuery_me_feed_groups_target_Channel_owner = FeedQuery_me_feed_groups_target_Channel_owner_User | FeedQuery_me_feed_groups_target_Channel_owner_Group;
+
 export interface FeedQuery_me_feed_groups_target_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
+  owner: FeedQuery_me_feed_groups_target_Channel_owner | null;
 }
 
 export interface FeedQuery_me_feed_groups_target_Connectable {
@@ -94,6 +130,7 @@ export interface FeedQuery_me_feed_groups_target_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -108,6 +145,7 @@ export interface FeedQuery_me_feed_groups_target_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -169,6 +207,7 @@ export interface FeedQuery_me_feed_groups_objects_Channel {
   updated_at: string | null;
   counts: FeedQuery_me_feed_groups_objects_Channel_counts | null;
   owner: FeedQuery_me_feed_groups_objects_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: FeedQuery_me_feed_groups_objects_Channel_user | null;
   /**
@@ -405,6 +444,7 @@ export interface FeedQuery_me_feed_groups_objects_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -415,6 +455,7 @@ export interface FeedQuery_me_feed_groups_objects_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

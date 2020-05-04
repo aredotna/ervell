@@ -420,6 +420,7 @@ export interface ChannelContentsConnectable_Channel {
   visibility: string | null;
   counts: ChannelContentsConnectable_Channel_counts | null;
   owner: ChannelContentsConnectable_Channel_owner | null;
+  label: string | null;
   can: ChannelContentsConnectable_Channel_can | null;
 }
 

@@ -44,6 +44,7 @@ export interface BlockLightboxChannelsAlsoIn_Text_channels_with_same_source {
   title: string | null;
   owner: BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner | null;
   counts: BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxChannelsAlsoIn_Text {

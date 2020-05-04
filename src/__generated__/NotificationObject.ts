@@ -10,12 +10,27 @@ export interface NotificationObject_Null {
   __typename: "Null";
 }
 
+export interface NotificationObject_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface NotificationObject_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type NotificationObject_Channel_owner = NotificationObject_Channel_owner_User | NotificationObject_Channel_owner_Group;
+
 export interface NotificationObject_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
   visibility: string | null;
+  owner: NotificationObject_Channel_owner | null;
 }
 
 export interface NotificationObject_Connectable {

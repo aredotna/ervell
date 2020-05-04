@@ -12,6 +12,7 @@ export interface ProfileGroups_groups {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

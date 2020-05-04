@@ -12,7 +12,7 @@ import BottomBanner from 'v2/components/BottomBanner'
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import Title from 'v2/components/UI/Head/components/Title'
 
-import exploreUiStateQuery from 'apps/feed/queries/exploreUiState'
+import exploreUiStateQuery from 'v2/pages/explore/ExplorePage/queries/exploreUiState'
 
 interface ExplorePageProps {
   view: 'all' | 'channels' | 'blocks'

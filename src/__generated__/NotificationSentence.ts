@@ -26,12 +26,27 @@ export interface NotificationSentence_item_Null {
   __typename: "Null";
 }
 
+export interface NotificationSentence_item_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface NotificationSentence_item_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type NotificationSentence_item_Channel_owner = NotificationSentence_item_Channel_owner_User | NotificationSentence_item_Channel_owner_Group;
+
 export interface NotificationSentence_item_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
   visibility: string | null;
+  owner: NotificationSentence_item_Channel_owner | null;
 }
 
 export interface NotificationSentence_item_Connectable {
@@ -69,12 +84,27 @@ export interface NotificationSentence_target_Null {
   __typename: "Null";
 }
 
+export interface NotificationSentence_target_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface NotificationSentence_target_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type NotificationSentence_target_Channel_owner = NotificationSentence_target_Channel_owner_User | NotificationSentence_target_Channel_owner_Group;
+
 export interface NotificationSentence_target_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
   visibility: string | null;
+  owner: NotificationSentence_target_Channel_owner | null;
 }
 
 export interface NotificationSentence_target_Connectable {

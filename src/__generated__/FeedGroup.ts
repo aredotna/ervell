@@ -10,6 +10,7 @@ export interface FeedGroup_user {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -17,6 +18,7 @@ export interface FeedGroup_owner_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -24,7 +26,7 @@ export interface FeedGroup_owner_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
-  href: string | null;
+  name: string | null;
 }
 
 export type FeedGroup_owner = FeedGroup_owner_User | FeedGroup_owner_Group;
@@ -33,12 +35,28 @@ export interface FeedGroup_item_Null {
   __typename: "Null";
 }
 
+export interface FeedGroup_item_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface FeedGroup_item_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type FeedGroup_item_Channel_owner = FeedGroup_item_Channel_owner_User | FeedGroup_item_Channel_owner_Group;
+
 export interface FeedGroup_item_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
+  owner: FeedGroup_item_Channel_owner | null;
 }
 
 export interface FeedGroup_item_Connectable {
@@ -52,6 +70,7 @@ export interface FeedGroup_item_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -66,6 +85,7 @@ export interface FeedGroup_item_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -75,12 +95,28 @@ export interface FeedGroup_target_Null {
   __typename: "Null";
 }
 
+export interface FeedGroup_target_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface FeedGroup_target_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type FeedGroup_target_Channel_owner = FeedGroup_target_Channel_owner_User | FeedGroup_target_Channel_owner_Group;
+
 export interface FeedGroup_target_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
+  owner: FeedGroup_target_Channel_owner | null;
 }
 
 export interface FeedGroup_target_Connectable {
@@ -94,6 +130,7 @@ export interface FeedGroup_target_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -108,6 +145,7 @@ export interface FeedGroup_target_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -169,6 +207,7 @@ export interface FeedGroup_objects_Channel {
   updated_at: string | null;
   counts: FeedGroup_objects_Channel_counts | null;
   owner: FeedGroup_objects_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: FeedGroup_objects_Channel_user | null;
   /**
@@ -405,6 +444,7 @@ export interface FeedGroup_objects_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -415,6 +455,7 @@ export interface FeedGroup_objects_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

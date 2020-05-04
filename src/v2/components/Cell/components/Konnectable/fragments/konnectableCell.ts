@@ -21,6 +21,7 @@ export default gql`
     ...KonnectableDisplay
     ...KonnectableMetadata
     ...KonnectableBlockOverlay
+    ...LoadingBreadcrumbChannel
   }
   ${konnectableDisplayFragment}
   ${konnectableMetadataFragment}

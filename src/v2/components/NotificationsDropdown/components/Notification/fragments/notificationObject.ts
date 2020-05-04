@@ -1,5 +1,9 @@
 import gql from 'graphql-tag'
 
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
+
 export default gql`
   fragment NotificationObject on DeedKind {
     __typename
@@ -35,5 +39,11 @@ export default gql`
       label: name
       href
     }
+    ...LoadingBreadcrumbChannel
+    ...LoadingBreadcrumbGroup
+    ...LoadingBreadcrumbUser
   }
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
+  ${loadingBreadcrumbChannelFragment}
 `

@@ -14,7 +14,7 @@ const transformImages = (
 ) => {
   for (let i = 0; i < data.items.length; i++) {
     if (acceptedFiles.includes(data.items[i].type) !== false) {
-      let file: BlobLikeFile = data.items[i].getAsFile()
+      const file: BlobLikeFile = data.items[i].getAsFile()
 
       if (file) {
         callback(file)

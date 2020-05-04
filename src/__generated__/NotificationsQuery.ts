@@ -26,12 +26,27 @@ export interface NotificationsQuery_me_feed_notifications_item_Null {
   __typename: "Null";
 }
 
+export interface NotificationsQuery_me_feed_notifications_item_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface NotificationsQuery_me_feed_notifications_item_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type NotificationsQuery_me_feed_notifications_item_Channel_owner = NotificationsQuery_me_feed_notifications_item_Channel_owner_User | NotificationsQuery_me_feed_notifications_item_Channel_owner_Group;
+
 export interface NotificationsQuery_me_feed_notifications_item_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
   visibility: string | null;
+  owner: NotificationsQuery_me_feed_notifications_item_Channel_owner | null;
 }
 
 export interface NotificationsQuery_me_feed_notifications_item_Connectable {
@@ -69,12 +84,27 @@ export interface NotificationsQuery_me_feed_notifications_target_Null {
   __typename: "Null";
 }
 
+export interface NotificationsQuery_me_feed_notifications_target_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface NotificationsQuery_me_feed_notifications_target_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type NotificationsQuery_me_feed_notifications_target_Channel_owner = NotificationsQuery_me_feed_notifications_target_Channel_owner_User | NotificationsQuery_me_feed_notifications_target_Channel_owner_Group;
+
 export interface NotificationsQuery_me_feed_notifications_target_Channel {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
   visibility: string | null;
+  owner: NotificationsQuery_me_feed_notifications_target_Channel_owner | null;
 }
 
 export interface NotificationsQuery_me_feed_notifications_target_Connectable {

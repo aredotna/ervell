@@ -11,6 +11,7 @@ export interface ChannelBreadcrumb_owner_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface ChannelBreadcrumb_owner_Group {
@@ -18,6 +19,7 @@ export interface ChannelBreadcrumb_owner_Group {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export type ChannelBreadcrumb_owner = ChannelBreadcrumb_owner_User | ChannelBreadcrumb_owner_Group;
@@ -36,4 +38,5 @@ export interface ChannelBreadcrumb {
   visibility: string | null;
   owner: ChannelBreadcrumb_owner | null;
   counts: ChannelBreadcrumb_counts | null;
+  label: string | null;
 }

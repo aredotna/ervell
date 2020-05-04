@@ -34,6 +34,7 @@ export interface BlockLightboxFold_block_Channel_current_user_channels {
   title: string | null;
   owner: BlockLightboxFold_block_Channel_current_user_channels_owner | null;
   counts: BlockLightboxFold_block_Channel_current_user_channels_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Channel_public_channels_owner_Group {
@@ -64,6 +65,7 @@ export interface BlockLightboxFold_block_Channel_public_channels {
   title: string | null;
   owner: BlockLightboxFold_block_Channel_public_channels_owner | null;
   counts: BlockLightboxFold_block_Channel_public_channels_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Channel_private_channels_owner_Group {
@@ -94,6 +96,7 @@ export interface BlockLightboxFold_block_Channel_private_channels {
   title: string | null;
   owner: BlockLightboxFold_block_Channel_private_channels_owner | null;
   counts: BlockLightboxFold_block_Channel_private_channels_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Channel_source {
@@ -147,6 +150,7 @@ export interface BlockLightboxFold_block_Text_current_user_channels {
   title: string | null;
   owner: BlockLightboxFold_block_Text_current_user_channels_owner | null;
   counts: BlockLightboxFold_block_Text_current_user_channels_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Text_public_channels_owner_Group {
@@ -177,6 +181,7 @@ export interface BlockLightboxFold_block_Text_public_channels {
   title: string | null;
   owner: BlockLightboxFold_block_Text_public_channels_owner | null;
   counts: BlockLightboxFold_block_Text_public_channels_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Text_private_channels_owner_Group {
@@ -207,6 +212,7 @@ export interface BlockLightboxFold_block_Text_private_channels {
   title: string | null;
   owner: BlockLightboxFold_block_Text_private_channels_owner | null;
   counts: BlockLightboxFold_block_Text_private_channels_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Text_source {
@@ -242,6 +248,7 @@ export interface BlockLightboxFold_block_Text_channels_with_same_source {
   title: string | null;
   owner: BlockLightboxFold_block_Text_channels_with_same_source_owner | null;
   counts: BlockLightboxFold_block_Text_channels_with_same_source_counts | null;
+  label: string | null;
 }
 
 export interface BlockLightboxFold_block_Text_comments_user {
