@@ -52,10 +52,10 @@ export type FeedQuery_me_feed_groups_item_Channel_owner = FeedQuery_me_feed_grou
 export interface FeedQuery_me_feed_groups_item_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
   truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   owner: FeedQuery_me_feed_groups_item_Channel_owner | null;
 }
 
@@ -112,10 +112,10 @@ export type FeedQuery_me_feed_groups_target_Channel_owner = FeedQuery_me_feed_gr
 export interface FeedQuery_me_feed_groups_target_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
   truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   owner: FeedQuery_me_feed_groups_target_Channel_owner | null;
 }
 
@@ -207,6 +207,7 @@ export interface FeedQuery_me_feed_groups_objects_Channel {
   updated_at: string | null;
   counts: FeedQuery_me_feed_groups_objects_Channel_counts | null;
   owner: FeedQuery_me_feed_groups_objects_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: FeedQuery_me_feed_groups_objects_Channel_user | null;
   /**

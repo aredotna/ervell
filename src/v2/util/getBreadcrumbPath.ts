@@ -10,7 +10,7 @@ type Crumbable =
   | SerializeMeQueryHook_serializedMe
 
 export const getBreadcrumbPath = (crumbable: Crumbable) => {
-  console.log('crumbable', crumbable)
+  // console.log('crumbable', crumbable)
   const crumbs = (crumbable => {
     switch (crumbable.__typename) {
       case 'Channel':

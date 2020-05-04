@@ -87,11 +87,26 @@ export interface ChannelFollowersPage_channel_collaborators_Group {
 
 export type ChannelFollowersPage_channel_collaborators = ChannelFollowersPage_channel_collaborators_User | ChannelFollowersPage_channel_collaborators_Group;
 
+export interface ChannelFollowersPage_channel_connected_to_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface ChannelFollowersPage_channel_connected_to_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type ChannelFollowersPage_channel_connected_to_channels_owner = ChannelFollowersPage_channel_connected_to_channels_owner_User | ChannelFollowersPage_channel_connected_to_channels_owner_Group;
+
 export interface ChannelFollowersPage_channel_connected_to_channels {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
+  owner: ChannelFollowersPage_channel_connected_to_channels_owner | null;
 }
 
 export interface ChannelFollowersPage_channel_share {

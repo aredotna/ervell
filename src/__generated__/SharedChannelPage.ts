@@ -91,11 +91,26 @@ export interface SharedChannelPage_channel_collaborators_Group {
 
 export type SharedChannelPage_channel_collaborators = SharedChannelPage_channel_collaborators_User | SharedChannelPage_channel_collaborators_Group;
 
+export interface SharedChannelPage_channel_connected_to_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface SharedChannelPage_channel_connected_to_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type SharedChannelPage_channel_connected_to_channels_owner = SharedChannelPage_channel_connected_to_channels_owner_User | SharedChannelPage_channel_connected_to_channels_owner_Group;
+
 export interface SharedChannelPage_channel_connected_to_channels {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
+  owner: SharedChannelPage_channel_connected_to_channels_owner | null;
 }
 
 export interface SharedChannelPage_channel_share {

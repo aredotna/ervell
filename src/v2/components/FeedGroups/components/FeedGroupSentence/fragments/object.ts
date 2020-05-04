@@ -9,11 +9,9 @@ export default gql`
 
     ... on Channel {
       id
-      label: title
       truncatedTitle: title
       href
       visibility
-      ...LoadingBreadcrumbChannel
     }
 
     ... on Connectable {
@@ -27,7 +25,6 @@ export default gql`
       label: name
       name
       href
-      ...LoadingBreadcrumbUser
     }
 
     ... on Comment {
@@ -41,8 +38,10 @@ export default gql`
       label: name
       name
       href
-      ...LoadingBreadcrumbGroup
     }
+    ...LoadingBreadcrumbChannel
+    ...LoadingBreadcrumbGroup
+    ...LoadingBreadcrumbUser
   }
   ${loadingBreadcrumbUserFragment}
   ${loadingBreadcrumbGroupFragment}

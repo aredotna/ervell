@@ -62,6 +62,7 @@ export interface Object_Channel {
   updated_at: string | null;
   counts: Object_Channel_counts | null;
   owner: Object_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: Object_Channel_user | null;
   /**

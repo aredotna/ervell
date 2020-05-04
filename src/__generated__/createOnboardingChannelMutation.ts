@@ -89,11 +89,26 @@ export interface createOnboardingChannelMutation_create_channel_channel_collabor
 
 export type createOnboardingChannelMutation_create_channel_channel_collaborators = createOnboardingChannelMutation_create_channel_channel_collaborators_User | createOnboardingChannelMutation_create_channel_channel_collaborators_Group;
 
+export interface createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner = createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_User | createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_Group;
+
 export interface createOnboardingChannelMutation_create_channel_channel_connected_to_channels {
   __typename: "Channel";
   id: number | null;
   label: string | null;
   href: string | null;
+  owner: createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner | null;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_share {

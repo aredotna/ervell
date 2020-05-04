@@ -62,6 +62,7 @@ export interface FeedGroupObjects_objects_Channel {
   updated_at: string | null;
   counts: FeedGroupObjects_objects_Channel_counts | null;
   owner: FeedGroupObjects_objects_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: FeedGroupObjects_objects_Channel_user | null;
   /**

@@ -37,8 +37,8 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   const toParams = obj && {
     pathname: href,
     state:
-      obj.__typename == 'Channel' ||
-      (obj.__typename == 'User' && getBreadcrumbPath(obj)),
+      (obj.__typename == 'Channel' || obj.__typename == 'User') &&
+      getBreadcrumbPath(obj),
   }
 
   return (

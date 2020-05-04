@@ -52,10 +52,10 @@ export type FeedGroup_item_Channel_owner = FeedGroup_item_Channel_owner_User | F
 export interface FeedGroup_item_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
   truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   owner: FeedGroup_item_Channel_owner | null;
 }
 
@@ -112,10 +112,10 @@ export type FeedGroup_target_Channel_owner = FeedGroup_target_Channel_owner_User
 export interface FeedGroup_target_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
   truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   owner: FeedGroup_target_Channel_owner | null;
 }
 
@@ -207,6 +207,7 @@ export interface FeedGroup_objects_Channel {
   updated_at: string | null;
   counts: FeedGroup_objects_Channel_counts | null;
   owner: FeedGroup_objects_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: FeedGroup_objects_Channel_user | null;
   /**

@@ -27,10 +27,10 @@ export type FeedObject_Channel_owner = FeedObject_Channel_owner_User | FeedObjec
 export interface FeedObject_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
   truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   owner: FeedObject_Channel_owner | null;
 }
 

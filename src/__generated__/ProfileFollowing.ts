@@ -79,6 +79,7 @@ export interface ProfileFollowing_following_Channel {
   updated_at: string | null;
   counts: ProfileFollowing_following_Channel_counts | null;
   owner: ProfileFollowing_following_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: ProfileFollowing_following_Channel_user | null;
   /**
@@ -86,7 +87,6 @@ export interface ProfileFollowing_following_Channel {
    */
   connection: ProfileFollowing_following_Channel_connection | null;
   source: ProfileFollowing_following_Channel_source | null;
-  label: string | null;
 }
 
 export type ProfileFollowing_following = ProfileFollowing_following_User | ProfileFollowing_following_Group | ProfileFollowing_following_Channel;

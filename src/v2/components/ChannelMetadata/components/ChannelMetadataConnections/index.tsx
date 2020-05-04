@@ -8,6 +8,7 @@ import channelMetadataQuery from 'v2/components/ChannelMetadata/queries/channelM
 import { ChannelMetadataConnections as Channel } from '__generated__/ChannelMetadataConnections'
 
 import Connect from 'v2/components/Connect'
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 
 const Actions = styled.div`
   div + & {
@@ -30,11 +31,15 @@ interface ChannelMetadataConnectionsProps {
 export const ChannelMetadataConnections: React.FC<ChannelMetadataConnectionsProps> = ({
   channel,
 }) => {
+  const links = channel.connected_to_channels.map(c => ({
+    pathname: c.href,
+    state: getBreadcrumbPath(c),
+  }))
   return (
     <div>
       {channel.connected_to_channels.length > 0 && (
         <Expandable>
-          <ConnectionsList links={channel.connected_to_channels} />
+          <ConnectionsList links={links} />
         </Expandable>
       )}
 

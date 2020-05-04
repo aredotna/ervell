@@ -9,7 +9,7 @@ import HeaderMetadataContainer from 'v2/components/UI/HeaderMetadata/HeaderMetad
 import ChannelBreadcrumb from 'v2/components/ChannelMetadata/components/ChannelBreadcrumb'
 import ChannelMetadataCollaborators from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators'
 import ChannelMetadataInfo from 'v2/components/ChannelMetadata/components/ChannelMetadataInfo'
-import ChannelMetadataConnections from 'v2/components/ChannelMetadata/components/ChannelMetadataConnections'
+import { ChannelMetadataConnections } from 'v2/components/ChannelMetadata/components/ChannelMetadataConnections'
 import ChannelMetadataActions from 'v2/components/ChannelMetadata/components/ChannelMetadataActions'
 import { ExpandableContext } from 'v2/components/UI/ExpandableSet'
 

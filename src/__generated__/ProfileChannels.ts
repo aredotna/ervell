@@ -364,6 +364,7 @@ export interface ProfileChannels_Group_channels {
   updated_at: string | null;
   counts: ProfileChannels_Group_channels_counts | null;
   owner: ProfileChannels_Group_channels_owner | null;
+  label: string | null;
   blokks: (ProfileChannels_Group_channels_blokks | null)[] | null;
 }
 
@@ -743,6 +744,7 @@ export interface ProfileChannels_User_channels {
   updated_at: string | null;
   counts: ProfileChannels_User_channels_counts | null;
   owner: ProfileChannels_User_channels_owner | null;
+  label: string | null;
   blokks: (ProfileChannels_User_channels_blokks | null)[] | null;
 }
 
