@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
+
 export default gql`
   fragment ChannelMetadataConnections on Channel {
     __typename
@@ -14,6 +16,8 @@ export default gql`
       id
       label: title
       href
+      ...LoadingBreadcrumbChannel
     }
   }
+  ${loadingBreadcrumbChannelFragment}
 `
