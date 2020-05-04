@@ -55,6 +55,7 @@ export interface createOnboardingChannelMutation_create_channel_channel_collabor
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_collaborators_Group_user {
@@ -87,6 +88,7 @@ export interface createOnboardingChannelMutation_create_channel_channel_collabor
   users: (createOnboardingChannelMutation_create_channel_channel_collaborators_Group_users | null)[] | null;
   can: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_can | null;
   visibility: string | null;
+  label: string | null;
 }
 
 export type createOnboardingChannelMutation_create_channel_channel_collaborators = createOnboardingChannelMutation_create_channel_channel_collaborators_User | createOnboardingChannelMutation_create_channel_channel_collaborators_Group;

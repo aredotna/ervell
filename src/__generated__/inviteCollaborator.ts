@@ -18,6 +18,7 @@ export interface inviteCollaborator_invite_collaborator_channel_collaborators_Us
   href: string | null;
   initials: string | null;
   avatar: string | null;
+  label: string | null;
 }
 
 export interface inviteCollaborator_invite_collaborator_channel_collaborators_Group_user {
@@ -52,6 +53,7 @@ export interface inviteCollaborator_invite_collaborator_channel_collaborators_Gr
   description: string | null;
   users: (inviteCollaborator_invite_collaborator_channel_collaborators_Group_users | null)[] | null;
   can: inviteCollaborator_invite_collaborator_channel_collaborators_Group_can | null;
+  label: string | null;
 }
 
 export type inviteCollaborator_invite_collaborator_channel_collaborators = inviteCollaborator_invite_collaborator_channel_collaborators_User | inviteCollaborator_invite_collaborator_channel_collaborators_Group;

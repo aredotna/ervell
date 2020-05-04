@@ -20,6 +20,7 @@ export interface addChannelMemberMutation_add_channel_members_channel_collaborat
   href: string | null;
   initials: string | null;
   avatar: string | null;
+  label: string | null;
 }
 
 export interface addChannelMemberMutation_add_channel_members_channel_collaborators_Group_user {
@@ -54,6 +55,7 @@ export interface addChannelMemberMutation_add_channel_members_channel_collaborat
   description: string | null;
   users: (addChannelMemberMutation_add_channel_members_channel_collaborators_Group_users | null)[] | null;
   can: addChannelMemberMutation_add_channel_members_channel_collaborators_Group_can | null;
+  label: string | null;
 }
 
 export type addChannelMemberMutation_add_channel_members_channel_collaborators = addChannelMemberMutation_add_channel_members_channel_collaborators_User | addChannelMemberMutation_add_channel_members_channel_collaborators_Group;

@@ -57,6 +57,7 @@ export interface SharedChannelPage_channel_collaborators_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface SharedChannelPage_channel_collaborators_Group_user {
@@ -89,6 +90,7 @@ export interface SharedChannelPage_channel_collaborators_Group {
   users: (SharedChannelPage_channel_collaborators_Group_users | null)[] | null;
   can: SharedChannelPage_channel_collaborators_Group_can | null;
   visibility: string | null;
+  label: string | null;
 }
 
 export type SharedChannelPage_channel_collaborators = SharedChannelPage_channel_collaborators_User | SharedChannelPage_channel_collaborators_Group;
