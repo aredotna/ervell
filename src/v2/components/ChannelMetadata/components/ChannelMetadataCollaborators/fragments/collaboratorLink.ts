@@ -1,5 +1,8 @@
 import gql from 'graphql-tag'
 
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+
 export default gql`
   fragment CollaboratorLink on Member {
     __typename
@@ -29,5 +32,9 @@ export default gql`
       }
       visibility
     }
+    ...LoadingBreadcrumbGroup
+    ...LoadingBreadcrumbUser
   }
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
 `

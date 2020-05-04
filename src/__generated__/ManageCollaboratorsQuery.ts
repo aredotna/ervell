@@ -18,6 +18,7 @@ export interface ManageCollaboratorsQuery_channel_collaborators_User {
   href: string | null;
   initials: string | null;
   avatar: string | null;
+  label: string | null;
 }
 
 export interface ManageCollaboratorsQuery_channel_collaborators_Group_user {
@@ -52,6 +53,7 @@ export interface ManageCollaboratorsQuery_channel_collaborators_Group {
   description: string | null;
   users: (ManageCollaboratorsQuery_channel_collaborators_Group_users | null)[] | null;
   can: ManageCollaboratorsQuery_channel_collaborators_Group_can | null;
+  label: string | null;
 }
 
 export type ManageCollaboratorsQuery_channel_collaborators = ManageCollaboratorsQuery_channel_collaborators_User | ManageCollaboratorsQuery_channel_collaborators_Group;

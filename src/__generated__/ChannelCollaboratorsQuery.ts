@@ -16,6 +16,7 @@ export interface ChannelCollaboratorsQuery_channel_collaborators_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
 }
 
 export interface ChannelCollaboratorsQuery_channel_collaborators_Group_user {
@@ -48,6 +49,7 @@ export interface ChannelCollaboratorsQuery_channel_collaborators_Group {
   users: (ChannelCollaboratorsQuery_channel_collaborators_Group_users | null)[] | null;
   can: ChannelCollaboratorsQuery_channel_collaborators_Group_can | null;
   visibility: string | null;
+  label: string | null;
 }
 
 export type ChannelCollaboratorsQuery_channel_collaborators = ChannelCollaboratorsQuery_channel_collaborators_User | ChannelCollaboratorsQuery_channel_collaborators_Group;

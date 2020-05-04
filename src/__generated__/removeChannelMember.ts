@@ -20,6 +20,7 @@ export interface removeChannelMember_remove_channel_members_channel_collaborator
   href: string | null;
   initials: string | null;
   avatar: string | null;
+  label: string | null;
 }
 
 export interface removeChannelMember_remove_channel_members_channel_collaborators_Group_user {
@@ -54,6 +55,7 @@ export interface removeChannelMember_remove_channel_members_channel_collaborator
   description: string | null;
   users: (removeChannelMember_remove_channel_members_channel_collaborators_Group_users | null)[] | null;
   can: removeChannelMember_remove_channel_members_channel_collaborators_Group_can | null;
+  label: string | null;
 }
 
 export type removeChannelMember_remove_channel_members_channel_collaborators = removeChannelMember_remove_channel_members_channel_collaborators_User | removeChannelMember_remove_channel_members_channel_collaborators_Group;

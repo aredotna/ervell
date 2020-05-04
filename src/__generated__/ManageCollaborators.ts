@@ -18,6 +18,7 @@ export interface ManageCollaborators_collaborators_User {
   href: string | null;
   initials: string | null;
   avatar: string | null;
+  label: string | null;
 }
 
 export interface ManageCollaborators_collaborators_Group_user {
@@ -52,6 +53,7 @@ export interface ManageCollaborators_collaborators_Group {
   description: string | null;
   users: (ManageCollaborators_collaborators_Group_users | null)[] | null;
   can: ManageCollaborators_collaborators_Group_can | null;
+  label: string | null;
 }
 
 export type ManageCollaborators_collaborators = ManageCollaborators_collaborators_User | ManageCollaborators_collaborators_Group;
