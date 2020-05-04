@@ -6,6 +6,8 @@ import colors from 'v2/styles/colors'
 interface ColoredChannelLinkProps {
   href?: string
   visibility?: string
+  as?: any
+  to?: any
 }
 
 const ColoredChannelLink: React.FC<ColoredChannelLinkProps> = ({

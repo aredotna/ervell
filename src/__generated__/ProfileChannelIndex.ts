@@ -34,6 +34,7 @@ export interface ProfileChannelIndex_User_channels_index_channels {
   title: string | null;
   owner: ProfileChannelIndex_User_channels_index_channels_owner | null;
   counts: ProfileChannelIndex_User_channels_index_channels_counts | null;
+  label: string | null;
 }
 
 export interface ProfileChannelIndex_User_channels_index {
@@ -81,6 +82,7 @@ export interface ProfileChannelIndex_Group_channels_index_channels {
   title: string | null;
   owner: ProfileChannelIndex_Group_channels_index_channels_owner | null;
   counts: ProfileChannelIndex_Group_channels_index_channels_counts | null;
+  label: string | null;
 }
 
 export interface ProfileChannelIndex_Group_channels_index {

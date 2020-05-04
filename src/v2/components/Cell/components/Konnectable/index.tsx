@@ -127,13 +127,6 @@ class KonnectableInner extends PureComponent<Props & InnerProps> {
         konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable),
     }
 
-    console.log(
-      "konnectable.__typename === 'Channel'",
-      konnectable.__typename === 'Channel',
-      konnectable,
-      konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable)
-    )
-
     const toParams =
       konnectable.__typename === 'Channel' || isSpiderRequesting
         ? defaultToParams

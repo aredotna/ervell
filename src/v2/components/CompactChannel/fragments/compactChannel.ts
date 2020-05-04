@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import loadingBreadcrumbChannel from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`
   fragment CompactChannel on Channel {
@@ -23,5 +24,7 @@ export default gql`
     counts {
       contents
     }
+    ...LoadingBreadcrumbChannel
   }
+  ${loadingBreadcrumbChannel}
 `

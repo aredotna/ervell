@@ -23,7 +23,7 @@ export const LinksList: React.FC<LinksListProps> = ({ links, ...rest }) => {
       {links.map((link, i) => {
         const toParams = link.href ? link.href : link
         return (
-          <span key={link.id}>
+          <span key={`Link-${link.label}-${link.id}`}>
             <Link
               to={toParams}
               length={link.label.length}

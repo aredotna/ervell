@@ -22,6 +22,7 @@ import Modal from 'v2/components/UI/Modal'
 
 import { CompactChannel as Channel } from '__generated__/CompactChannel'
 import compactChannel from './fragments/compactChannel'
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 
 const Primary = styled.div`
   ${overflowEllipsis}
@@ -130,10 +131,15 @@ const CompactChannelComponent: React.FC<CompactChannelProps> = ({
     openEditChannel(channel.id, refetchQueries, client)
   }
 
+  const toParams = {
+    pathname: channel.href,
+    state: getBreadcrumbPath(channel),
+  }
+
   return (
     <Container
       as={Link}
-      to={channel.href}
+      to={toParams}
       visibility={channel.visibility}
       {...rest}
       onMouseEnter={handleMouseOver}

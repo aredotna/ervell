@@ -1,5 +1,9 @@
 import gql from 'graphql-tag'
 
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+
 export default gql`
   fragment PrimarySearchResult on QuickSearchResult {
     __typename
@@ -32,5 +36,11 @@ export default gql`
         }
       }
     }
+    ...LoadingBreadcrumbChannel
+    ...LoadingBreadcrumbGroup
+    ...LoadingBreadcrumbUser
   }
+  ${loadingBreadcrumbChannelFragment}
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
 `
