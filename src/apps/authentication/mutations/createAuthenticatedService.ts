@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation createAuthenticatedServiceMutation(
+  mutation FindFriendsCreateAuthenticatedServiceMutation(
     $token: String!
     $secret: String!
     $uid: String!

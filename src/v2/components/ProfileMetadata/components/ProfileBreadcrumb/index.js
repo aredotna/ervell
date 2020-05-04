@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import profileBreadcrumbFragment from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/fragments/profileBreadcrumb'
 
@@ -10,7 +11,9 @@ import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
 import ProfileBadge from 'v2/components/ProfileMetadata/components/ProfileBreadcrumb/components/ProfileBadge'
 import Badge from 'v2/components/UI/Badge'
 
-const ProfileLink = styled.a`
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+
+const ProfileLink = styled(Link)`
   vertical-align: middle;
   display: flex;
   align-items: center;
@@ -37,7 +40,12 @@ class ProfileBreadcrumb extends Component {
     return (
       <StickyBreadcrumbPath>
         <StickyBreadcrumbPath.Crumb>
-          <ProfileLink href={identifiable.href}>
+          <ProfileLink
+            to={{
+              pathname: identifiable.href,
+              state: getBreadcrumbPath(identifiable),
+            }}
+          >
             {identifiable.name}
             {showBadge && identifiable.__typename === 'Group' && (
               <Badge

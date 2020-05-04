@@ -434,6 +434,7 @@ export interface ChannelContentsWithData_channel_initial_contents_Channel {
   visibility: string | null;
   counts: ChannelContentsWithData_channel_initial_contents_Channel_counts | null;
   owner: ChannelContentsWithData_channel_initial_contents_Channel_owner | null;
+  label: string | null;
   can: ChannelContentsWithData_channel_initial_contents_Channel_can | null;
 }
 

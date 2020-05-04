@@ -334,6 +334,7 @@ export interface ProfileContents_User_contents_Channel {
   visibility: string | null;
   counts: ProfileContents_User_contents_Channel_counts | null;
   owner: ProfileContents_User_contents_Channel_owner | null;
+  label: string | null;
 }
 
 export type ProfileContents_User_contents = ProfileContents_User_contents_Text | ProfileContents_User_contents_Image | ProfileContents_User_contents_Link | ProfileContents_User_contents_Embed | ProfileContents_User_contents_Attachment | ProfileContents_User_contents_PendingBlock | ProfileContents_User_contents_Channel;

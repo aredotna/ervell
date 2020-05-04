@@ -54,7 +54,7 @@ export default class Notification extends Component {
     return (
       <Container my={3} pr={6} isUnread={!is_read}>
         <div>
-          <NotificationObjectLink {...owner} />
+          <NotificationObjectLink obj={owner} />
 
           {item.__typename === 'Comment' && (
             <span>
@@ -70,7 +70,7 @@ export default class Notification extends Component {
                 ”{action === 'commented on' && ' on '}
               </Label>
               {action === 'commented on' && (
-                <NotificationObjectLink {...target} />
+                <NotificationObjectLink obj={target} />
               )}
             </span>
           )}
@@ -79,11 +79,11 @@ export default class Notification extends Component {
             <span>
               <Label>{` ${action} `}</Label>
 
-              <NotificationObjectLink {...item} label={item_title} />
+              <NotificationObjectLink obj={item} label={item_title} />
 
               {connector && <Label>{` ${connector} `}</Label>}
 
-              {target && <NotificationObjectLink {...target} />}
+              {target && <NotificationObjectLink obj={target} />}
             </span>
           )}
         </div>

@@ -8,10 +8,10 @@ import Constrain from 'v2/components/UI/Constrain'
 import ProfileMetadata from 'v2/components/ProfileMetadata'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
-import { LoadingPage } from 'v2/components/UI/LoadingPage'
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
+import { LoadingPage } from 'v2/components/LoadingPage'
 
 import ProfileViews from 'v2/pages/profile/ProfilePage/components/ProfileViews'
 import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'

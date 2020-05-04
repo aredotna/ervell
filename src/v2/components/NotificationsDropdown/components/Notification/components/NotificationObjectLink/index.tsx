@@ -1,33 +1,49 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Text from 'v2/components/UI/Text'
 import { truncate } from 'v2/components/UI/Truncate'
 import BorderedLock from 'v2/components/UI/BorderedLock'
-import { Link } from 'react-router-dom'
+
+import { NotificationObject } from '__generated__/NotificationObject'
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 
 interface NotificationObjectLinkProps {
-  __typename: string
-  label: string
-  href: string
-  visibility?: string
-  body?: string
-  is_me?: boolean
+  obj: NotificationObject
+  label?: string
 }
 
 const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
-  __typename,
   label,
-  href,
-  visibility = null,
-  is_me = false,
+  obj,
   ...rest
 }) => {
+  const __typename = obj && obj.__typename
+  const href = obj && obj.__typename !== 'Null' && obj.href
+  const visibility = obj && obj.__typename === 'Channel' && obj.visibility
+  const title = label
+    ? label
+    : obj &&
+      obj.__typename !== 'Null' &&
+      obj.__typename !== 'Comment' &&
+      obj.label
+
+  const is_me = obj && obj.__typename === 'User' && obj.is_me
+
   if (is_me) {
     return (
       <Text display="inline" f={1}>
         you
       </Text>
     )
+  }
+
+  const toParams = obj && {
+    pathname: href,
+    state:
+      obj &&
+      (obj.__typename == 'Channel' || obj.__typename == 'User') &&
+      getBreadcrumbPath(obj),
   }
 
   return (
@@ -38,8 +54,8 @@ const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
       color={__typename === 'Channel' ? `channel.${visibility}` : 'gray.base'}
       {...rest}
     >
-      <Link to={href}>
-        <span dangerouslySetInnerHTML={{ __html: truncate(label, 40) }} />
+      <Link to={toParams}>
+        <span dangerouslySetInnerHTML={{ __html: truncate(title, 40) }} />
 
         {visibility === 'private' && (
           <React.Fragment>

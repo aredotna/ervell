@@ -332,6 +332,7 @@ export interface ExploreContents_contents_Channel {
   visibility: string | null;
   counts: ExploreContents_contents_Channel_counts | null;
   owner: ExploreContents_contents_Channel_owner | null;
+  label: string | null;
 }
 
 export type ExploreContents_contents = ExploreContents_contents_Text | ExploreContents_contents_Image | ExploreContents_contents_Link | ExploreContents_contents_Embed | ExploreContents_contents_Attachment | ExploreContents_contents_PendingBlock | ExploreContents_contents_Channel;

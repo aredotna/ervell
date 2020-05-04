@@ -83,6 +83,7 @@ export interface KonnectableDisplay_Channel {
   updated_at: string | null;
   counts: KonnectableDisplay_Channel_counts | null;
   owner: KonnectableDisplay_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: KonnectableDisplay_Channel_user | null;
   /**

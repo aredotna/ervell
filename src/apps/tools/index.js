@@ -1,12 +1,9 @@
 import express from 'express'
 import useragent from 'useragent'
 
-import apolloMiddleware from 'v2/apollo/middleware'
 import ensureLoggedInMiddleware from 'lib/middleware/ensure_logged_in.coffee'
 
 import bookmarklet from 'lib/bookmarklet.coffee'
-
-import createAuthenticatedService from 'apps/feed/mutations/createAuthenticatedService'
 
 const app = express()
 
@@ -39,22 +36,7 @@ const renderTools = (req, res) => {
   })
 }
 
-const findFriendsCallback = (req, res, next) =>
-  req.apollo.client
-    .mutate({
-      mutation: createAuthenticatedService,
-      variables: req.query,
-    })
-    .then(() => res.redirect('/tools/find-friends?showModal=true'))
-    .catch(next)
-
 app.get('/tools', ensureLoggedInMiddleware, renderTools)
 app.get('/tools/:tab', ensureLoggedInMiddleware, renderTools)
-app.get(
-  '/tools/find-friends/callback',
-  apolloMiddleware,
-  ensureLoggedInMiddleware,
-  findFriendsCallback
-)
 
 module.exports = app

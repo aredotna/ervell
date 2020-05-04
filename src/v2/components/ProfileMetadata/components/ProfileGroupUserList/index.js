@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import profileGroupUserListFragment from 'v2/components/ProfileMetadata/components/ProfileGroupUserList/fragments/profileGroupUserList'
 
 import Pocket from 'v2/components/UI/Pocket'
-import LinksList from 'v2/components/LinksList'
+import { LinksList } from 'v2/components/LinksList'
 import { Expandable } from 'v2/components/UI/ExpandableSet'
 
 import Modal from 'v2/components/UI/Modal'

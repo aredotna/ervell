@@ -11,6 +11,7 @@ export interface ProfileFollowers_identity_identifiable_User_followers {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -26,6 +27,7 @@ export interface ProfileFollowers_identity_identifiable_Group_followers {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

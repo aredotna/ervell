@@ -35,4 +35,5 @@ export interface KonnectableChannel {
   updated_at: string | null;
   counts: KonnectableChannel_counts | null;
   owner: KonnectableChannel_owner | null;
+  label: string | null;
 }

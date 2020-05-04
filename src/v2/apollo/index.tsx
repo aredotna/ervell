@@ -127,7 +127,7 @@ export const initApolloClient = ({
       __typename: 'Cookies',
     },
     serializedMe: {
-      __typename: 'SerializedMe',
+      __typename: 'ClientSerializedMe',
       ...{
         id: null,
         name: null,

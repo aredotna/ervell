@@ -67,6 +67,7 @@ export interface SearchContents_contents_Channel {
   visibility: string | null;
   counts: SearchContents_contents_Channel_counts | null;
   owner: SearchContents_contents_Channel_owner | null;
+  label: string | null;
 }
 
 export interface SearchContents_contents_Text_user {
@@ -339,6 +340,7 @@ export interface SearchContents_contents_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -349,6 +351,7 @@ export interface SearchContents_contents_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

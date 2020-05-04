@@ -15,6 +15,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
+
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -46,6 +47,8 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
 
     'react/display-name': 0,
     'react/jsx-filename-extension': [

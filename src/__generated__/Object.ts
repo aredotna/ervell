@@ -62,6 +62,7 @@ export interface Object_Channel {
   updated_at: string | null;
   counts: Object_Channel_counts | null;
   owner: Object_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: Object_Channel_user | null;
   /**
@@ -298,6 +299,7 @@ export interface Object_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -308,6 +310,7 @@ export interface Object_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

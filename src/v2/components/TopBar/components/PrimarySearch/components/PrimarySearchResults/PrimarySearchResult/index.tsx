@@ -11,6 +11,7 @@ import { overflowEllipsis } from 'v2/styles/mixins'
 import { mixin as boxMixin } from 'v2/components/UI/Box'
 
 import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
+import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -91,8 +92,12 @@ export default class PrimarySearchResult extends PureComponent<
     const { result, children, ...rest } = this.props
 
     if (result) {
+      const toParams = {
+        pathname: result.href,
+        state: getBreadcrumbPath(result),
+      }
       return (
-        <Container to={result.href} onMouseDown={this.preventBlur} {...rest}>
+        <Container to={toParams} onMouseDown={this.preventBlur} {...rest}>
           <PathContainer>
             {result.__typename === 'Channel' && result.owner && (
               <Label flex="1">

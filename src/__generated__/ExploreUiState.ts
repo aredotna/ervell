@@ -10,6 +10,7 @@ export interface ExploreUiState_cookies {
   __typename: "ClientCookies";
   view: string | null;
   sort: string | null;
+  block_filter: string | null;
 }
 
 export interface ExploreUiState {

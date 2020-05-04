@@ -34,4 +34,5 @@ export interface CompactChannel {
   title: string | null;
   owner: CompactChannel_owner | null;
   counts: CompactChannel_counts | null;
+  label: string | null;
 }

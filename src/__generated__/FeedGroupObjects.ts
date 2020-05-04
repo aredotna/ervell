@@ -62,6 +62,7 @@ export interface FeedGroupObjects_objects_Channel {
   updated_at: string | null;
   counts: FeedGroupObjects_objects_Channel_counts | null;
   owner: FeedGroupObjects_objects_Channel_owner | null;
+  label: string | null;
   title: string | null;
   user: FeedGroupObjects_objects_Channel_user | null;
   /**
@@ -298,6 +299,7 @@ export interface FeedGroupObjects_objects_User {
   id: number | null;
   name: string | null;
   href: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }
@@ -308,6 +310,7 @@ export interface FeedGroupObjects_objects_Group {
   name: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
   initials: string | null;
   avatar: string | null;
 }

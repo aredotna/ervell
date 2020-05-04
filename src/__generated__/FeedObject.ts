@@ -10,12 +10,28 @@ export interface FeedObject_Null {
   __typename: "Null";
 }
 
+export interface FeedObject_Channel_owner_User {
+  __typename: "User";
+  id: number | null;
+  name: string | null;
+}
+
+export interface FeedObject_Channel_owner_Group {
+  __typename: "Group";
+  id: number | null;
+  name: string | null;
+}
+
+export type FeedObject_Channel_owner = FeedObject_Channel_owner_User | FeedObject_Channel_owner_Group;
+
 export interface FeedObject_Channel {
   __typename: "Channel";
   id: number | null;
-  label: string | null;
+  truncatedTitle: string | null;
   href: string | null;
   visibility: string | null;
+  label: string | null;
+  owner: FeedObject_Channel_owner | null;
 }
 
 export interface FeedObject_Connectable {
@@ -29,6 +45,7 @@ export interface FeedObject_User {
   __typename: "User";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 
@@ -43,6 +60,7 @@ export interface FeedObject_Group {
   __typename: "Group";
   id: number | null;
   label: string | null;
+  name: string | null;
   href: string | null;
 }
 

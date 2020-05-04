@@ -1,4 +1,7 @@
 import gql from 'graphql-tag'
+import loadingBreadcrumbUserFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbUser'
+import loadingBreadcrumbGroupFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbGroup'
+import loadingBreadcrumbChannelFragment from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`
   fragment FeedObject on DeedKind {
@@ -6,7 +9,7 @@ export default gql`
 
     ... on Channel {
       id
-      label: title
+      truncatedTitle: title
       href
       visibility
     }
@@ -20,6 +23,7 @@ export default gql`
     ... on User {
       id
       label: name
+      name
       href
     }
 
@@ -32,7 +36,14 @@ export default gql`
     ... on Group {
       id
       label: name
+      name
       href
     }
+    ...LoadingBreadcrumbChannel
+    ...LoadingBreadcrumbGroup
+    ...LoadingBreadcrumbUser
   }
+  ${loadingBreadcrumbUserFragment}
+  ${loadingBreadcrumbGroupFragment}
+  ${loadingBreadcrumbChannelFragment}
 `
