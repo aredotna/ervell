@@ -34,11 +34,12 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   const Tag = obj && obj.__typename !== 'Null' && obj.href ? Link : Span
   const fontWeight = href ? 'bold' : 'normal'
 
-  const toParams = obj &&
-    obj.__typename !== 'Null' && {
-      pathname: href,
-      state: getBreadcrumbPath(obj),
-    }
+  const toParams = obj && {
+    pathname: href,
+    state:
+      obj.__typename == 'Channel' ||
+      (obj.__typename == 'User' && getBreadcrumbPath(obj)),
+  }
 
   return (
     <Word

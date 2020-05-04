@@ -10,16 +10,17 @@ type Crumbable =
   | SerializeMeQueryHook_serializedMe
 
 export const getBreadcrumbPath = (crumbable: Crumbable) => {
+  console.log('crumbable', crumbable)
   const crumbs = (crumbable => {
     switch (crumbable.__typename) {
       case 'Channel':
-        return [{ title: crumbable.owner.name }, { title: crumbable.label }]
+        return [{ label: crumbable.owner.name }, { label: crumbable.label }]
       case 'ClientSerializedMe':
-        return [{ title: crumbable.name }]
+        return [{ label: crumbable.name }]
       case 'User':
-        return [{ title: crumbable.label }]
+        return [{ label: crumbable.label }]
       case 'Group':
-        return [{ title: crumbable.label }]
+        return [{ label: crumbable.label }]
       default:
         return []
     }

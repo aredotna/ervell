@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query IsSpiderRequestingQuery {
+  query IsSpiderRequestingQueryHook {
     sharify @client {
       isSpiderRequesting: IS_SPIDER
     }

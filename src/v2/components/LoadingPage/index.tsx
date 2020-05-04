@@ -30,6 +30,8 @@ const LoadingPageBreadCrumb: React.FC = () => {
     location.state.breadcrumbs &&
     JSON.parse(location.state.breadcrumbs)
 
+  console.log('location.state', location.state)
+
   if (breadcrumbs) {
     return (
       <StickyBreadcrumbPath>
