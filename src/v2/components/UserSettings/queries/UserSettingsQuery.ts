@@ -24,6 +24,7 @@ export default gql`
         receive_newsletter
         receive_group_premium_emails
         receive_sunday_review_emails
+        hide_notification_count
       }
     }
   }

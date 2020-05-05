@@ -54,4 +54,5 @@ export interface UpdateAccountMutationVariables {
   custom_badge_url?: string | null;
   password?: string | null;
   password_confirmation?: string | null;
+  hide_notification_count?: boolean | null;
 }
