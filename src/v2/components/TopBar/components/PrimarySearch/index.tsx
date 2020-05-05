@@ -24,6 +24,7 @@ const Results = styled(Box)`
 interface PrimarySearchProps {
   scheme: 'DEFAULT' | 'GROUP'
   history: any
+  flex?: number
 }
 
 class PrimarySearch extends PureComponent<PrimarySearchProps> {
@@ -152,9 +153,10 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
   }
 }
 
-const PrimarySearchContainer: React.FC<{ scheme: 'DEFAULT' | 'GROUP' }> = ({
-  ...props
-}) => {
+const PrimarySearchContainer: React.FC<{
+  scheme: 'DEFAULT' | 'GROUP'
+  flex?: number
+}> = ({ ...props }) => {
   const history = useHistory()
   return <PrimarySearch history={history} {...props} />
 }

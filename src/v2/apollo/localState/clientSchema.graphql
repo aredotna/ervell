@@ -37,6 +37,7 @@ type ClientSerializedMe {
   authentication_token: String
   is_premium: Boolean
   slug: String
+  hide_notification_count: Boolean
 }
 
 type ClientSharify {

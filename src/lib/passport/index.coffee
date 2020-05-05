@@ -41,6 +41,7 @@ CONFIG =
     'is_pending_confirmation'
     'flags'
     'show_nsfw'
+    'hide_notification_count'
   ]
 
 app = express()

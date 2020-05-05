@@ -18,6 +18,7 @@ export default gql`
     $custom_badge_url: String
     $password: String
     $password_confirmation: String
+    $hide_notification_count: Boolean
   ) {
     update_account(
       input: {
@@ -37,6 +38,7 @@ export default gql`
         exclude_from_indexes: $exclude_from_indexes
         password: $password
         password_confirmation: $password_confirmation
+        hide_notification_count: $hide_notification_count
       }
     ) {
       me {
