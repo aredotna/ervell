@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import axios from 'axios'
 
-import TopBar from 'v2/components/TopBar'
+import { TopBar } from 'v2/components/TopBar'
 import FixedWrapper from 'v2/components/UI/FixedWrapper'
 import BottomBanner from 'v2/components/BottomBanner'
 

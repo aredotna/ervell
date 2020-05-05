@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -8,6 +7,9 @@ import AuthenticationLinks from 'v2/components/TopBar/components/AuthenticationL
 import NewChannelButton from 'v2/components/TopBar/components/NewChannelButton'
 import NotificationCount from 'v2/components/TopBar/components/NotificationCount'
 import MyRepresentation from 'v2/components/TopBar/components/MyRepresentation'
+
+import { GlobalNavElements_me as Me } from '__generated__/GlobalNavElements'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 const Container = styled(Box)`
   position: relative;
@@ -39,41 +41,34 @@ const Container = styled(Box)`
   `}
 `
 
-export default class TopBar extends PureComponent {
-  static propTypes = {
-    scheme: PropTypes.oneOf(['DEFAULT', 'GROUP']),
-    me: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }
+interface TopBarProps {
+  scheme: 'DEFAULT' | 'GROUP'
+  me: Me
+}
 
-  static defaultProps = {
-    scheme: 'DEFAULT',
-    me: null,
-  }
+export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
+  const serializedMe = useSerializedMe()
 
-  render() {
-    const { me, scheme, ...rest } = this.props
+  return (
+    <Container scheme={scheme} {...rest}>
+      <PrimarySearch flex={1} scheme={scheme} />
 
-    return (
-      <Container scheme={scheme} {...rest}>
-        <PrimarySearch flex={1} scheme={scheme} />
+      {me && me.id ? (
+        <React.Fragment>
+          <NewChannelButton px={5} />
 
-        {me && me.id ? (
-          <React.Fragment>
-            <NewChannelButton px={5} />
-
+          {serializedMe && !serializedMe.hide_notification_count && (
             <NotificationCount
               px={5}
               count={me.counts && me.counts.notifications}
             />
+          )}
 
-            <MyRepresentation px={5} me={me} />
-          </React.Fragment>
-        ) : (
-          <AuthenticationLinks px={6} />
-        )}
-      </Container>
-    )
-  }
+          <MyRepresentation px={5} me={me} />
+        </React.Fragment>
+      ) : (
+        <AuthenticationLinks px={6} />
+      )}
+    </Container>
+  )
 }

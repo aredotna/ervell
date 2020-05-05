@@ -471,6 +471,50 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                 }}
               </Field>
 
+              <Field
+                name="hide_notification_count"
+                initialValue={me.settings.hide_notification_count}
+              >
+                {props => {
+                  return (
+                    <>
+                      <InputContainer mt={6} mb={5}>
+                        <Label>Hide notification counter?</Label>
+
+                        <RadioOptions
+                          value={props.input.value}
+                          onSelect={props.input.onChange}
+                        >
+                          <RadioOptions.Option value={false}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Show counter
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+
+                          <RadioOptions.Option value={true}>
+                            {({ selected }) => (
+                              <Text f={4} mb={3} selected={selected}>
+                                Hide counter
+                              </Text>
+                            )}
+                          </RadioOptions.Option>
+                        </RadioOptions>
+                      </InputContainer>
+                      <InputContainer mt={0} mb={5}>
+                        <Label />
+                        <Text f={2} mb={7}>
+                          Show or hide the notification counter in the top right
+                          corner. You will still be able to visit the
+                          notifications page.
+                        </Text>
+                      </InputContainer>
+                    </>
+                  )
+                }}
+              </Field>
+
               {me.is_premium && (
                 <>
                   <Field

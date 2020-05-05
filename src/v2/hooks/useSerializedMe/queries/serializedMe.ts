@@ -11,6 +11,7 @@ export default gql`
       authentication_token
       slug
       is_premium
+      hide_notification_count
     }
   }
 `
