@@ -5,7 +5,7 @@ import sharify from 'sharify'
 import { ChannelContentsWithData as ChannelContentsWithDataData } from '__generated__/ChannelContentsWithData'
 
 import { setupPusherChannel } from 'v2/hooks/usePusher'
-import { channelContentsWithDataQuery } from './queries/channelContentsWithData'
+import { channelContentsWithDataQuery } from 'v2/pages/channel/components/ChannelContentsWithData/queries/channelContentsWithData'
 
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
@@ -34,6 +34,7 @@ export const ChannelContentsWithData: React.FC<Props> = WithIsSpiderRequesting<
       query={channelContentsWithDataQuery}
       variables={{ id: serverChannel.id }}
       ssr={isSpiderRequesting}
+      fetchPolicy="no-cache"
     >
       {({ loading, error, data }) => {
         if (loading) {
