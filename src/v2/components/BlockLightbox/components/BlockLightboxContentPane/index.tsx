@@ -5,7 +5,7 @@ import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
 import Box from 'v2/components/UI/Box'
 import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage'
-import BlockLightboxText from 'v2/components/BlockLightbox/components/BlockLightboxText'
+import { BlockLightboxText } from 'v2/components/BlockLightbox/components/BlockLightboxText'
 import BlockLightboxLink from 'v2/components/BlockLightbox/components/BlockLightboxLink'
 import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment'
 import BlockLightboxEmbed from 'v2/components/BlockLightbox/components/BlockLightboxEmbed'
@@ -57,15 +57,7 @@ export default class BlockLightboxContentPane extends PureComponent<
     }[block.__typename]
 
     return (
-      <Container
-        height={[
-          { DEFAULT: '75vh', FULLSCREEN: '100vh' }[layout],
-          'auto',
-          'auto',
-        ]}
-        layout={layout}
-        {...rest}
-      >
+      <Container height={['auto']} layout={layout} {...rest}>
         <Content block={block} layout={layout} />
 
         {children}

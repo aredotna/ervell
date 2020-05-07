@@ -41,7 +41,7 @@ export default class BlockLightbox extends PureComponent<BlockLightboxProps> {
     return (
       <>
         <Container {...rest}>
-          {block.title && <Title>{unescape(block.title)}</Title>}
+          {/* {block.title && <Title>{unescape(block.title)}</Title>} */}
 
           <SplitPane context={context} layout={layout}>
             <BlockLightboxContentPane block={block} layout={layout}>
