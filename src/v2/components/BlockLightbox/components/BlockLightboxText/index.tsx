@@ -68,7 +68,7 @@ export const BlockLightboxText: React.FC<BlockLightboxTextProps> = ({
             onClick={block.can.manage ? openModal : undefined}
           >
             <SansSerifText
-              color={{ DEFAULT: 'gray.base', FULLSCREEN: 'white' }[layout]}
+              color={{ DEFAULT: 'gray.block', FULLSCREEN: 'white' }[layout]}
               dangerouslySetInnerHTML={{ __html: block.content }}
             />
           </Box>

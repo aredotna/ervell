@@ -6,13 +6,13 @@ import { preset } from 'v2/styles/functions'
 
 export const baseMixin = css`
   ${antialiased}
-  ${preset(textColor, { color: 'gray.bold' })};
+  ${preset(textColor, { color: 'gray.block' })};
   font-size: 16px;
   line-height: 1.55;
 
   font-family: 'Arial';
 
-  p:first-child {
+  p {
     margin-top: 0;
   }
 `
@@ -21,22 +21,19 @@ const smallMixin = css`
   font-size: 13px;
 
   line-height: 1.45;
+
   p,
   li,
-  ol {
-    font-size: 1rem;
+  ol,
+  code,
+  pre {
+    font-size: 0.9rem / em;
   }
 
-  h1 {
-    font-size: 1.2rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
+  h1,
+  h2,
   h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   h4 {
@@ -56,7 +53,7 @@ export const mixin = css`
   ${baseMixin}
 
   p, li, ol {
-    font-size: 1.1rem;
+    font-size: 1.05rem/em;
   }
 
   ul,
@@ -71,6 +68,7 @@ export const mixin = css`
   h5,
   h6 {
     margin: 0;
+    margin-bottom: 0.5em;
   }
 
   h1,
@@ -105,6 +103,7 @@ export const mixin = css`
 
   mark {
     color: inherit;
+    background-color: rgb(250, 255, 195);
   }
 
   hr {
@@ -126,9 +125,10 @@ export const mixin = css`
     font-family: monospace;
     letter-spacing: -0.3px;
     line-height: 1.5em;
-    background-color: rgba(232, 232, 232, 0.5);
-    border: 1px solid rgba(232, 232, 232, 1);
     padding: 0.25em;
+    border: 1px solid rgba(232, 232, 232, 0.5);
+    background-color: rgba(232, 232, 232, 0.3);
+    border-radius: 3px;
   }
 
   code {
@@ -139,9 +139,10 @@ export const mixin = css`
   }
 
   blockquote {
-    border-left: 0.5em solid #eee;
-    margin: 0 0 0 0.5em;
-    padding: 0 0 0 0.75em;
+    margin: 0;
+    border-left: 4px solid rgba(232, 232, 232, 0.3);
+    padding: 0px 0px 0px 1em;
+    font-style italic;
   }
 
   pre {

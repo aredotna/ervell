@@ -22,6 +22,7 @@ const COLORS = {
     semiLight: '#e8e8e8',
     light: '#eee',
     hint: '#f7f7f7',
+    block: 'rgb(51, 51, 51)',
   },
   utility: {
     translucent: 'rgba(255, 255, 255, 0.9)',
