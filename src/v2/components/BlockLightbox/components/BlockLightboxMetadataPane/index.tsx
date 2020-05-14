@@ -47,7 +47,6 @@ export default class BlockLightboxMetadataPane extends PureComponent<
   }
 
   closeModal = e => {
-    console.log('closeModal ➡️')
     if (e) e.preventDefault()
     this.setState({ mode: 'resting', autoFocus: null })
   }
