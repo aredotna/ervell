@@ -59,6 +59,15 @@ export const mixin = css`
   ul,
   ol {
     margin-left: 0;
+    padding-left: 0;
+
+    li {
+      list-style-position: inside;
+    }
+
+    ol, ul {
+      padding-left: 2em;
+    }
   }
 
   h1,

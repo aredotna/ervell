@@ -1,21 +1,22 @@
 import React, { PureComponent } from 'react'
-
-import { BlockLightbox as Block } from '__generated__/BlockLightbox'
+import { SpaceProps } from 'styled-system'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Modal from 'v2/components/UI/Modal/Portal'
 import Icons from 'v2/components/UI/Icons'
 import GenericButton from 'v2/components/UI/GenericButton'
-import ManageBlock from 'v2/components/ManageBlock'
+import { ManageBlock } from 'v2/components/ManageBlock'
+
 import Header from 'v2/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header'
 import BlockLightboxActions from 'v2/components/BlockLightbox/components/BlockLightboxActions'
 import BlockLightboxMetadataFold from 'v2/components/BlockLightbox/components/BlockLightboxMetadataFold'
 import BlockLightboxModalDialog from 'v2/components/BlockLightbox/components/BlockLightboxModalDialog'
+import { MetadataContainer } from 'v2/components/BlockLightboxLayout'
 
 import { truncate } from 'v2/components/UI/Truncate'
 
-import { SpaceProps } from 'styled-system'
+import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 
 interface BlockLightboxMetadataPaneProps extends SpaceProps {
   block: Block
@@ -46,6 +47,7 @@ export default class BlockLightboxMetadataPane extends PureComponent<
   }
 
   closeModal = e => {
+    console.log('closeModal ➡️')
     if (e) e.preventDefault()
     this.setState({ mode: 'resting', autoFocus: null })
   }
@@ -61,18 +63,7 @@ export default class BlockLightboxMetadataPane extends PureComponent<
     const { block, ...rest } = this.props
 
     return (
-      <Box
-        flex={1}
-        px={7}
-        pt={4}
-        pb={8}
-        height="100%"
-        bg="white"
-        overflowScrolling
-        {...rest}
-      >
-        {/* <Header>Info</Header> */}
-
+      <MetadataContainer {...rest}>
         <Text
           mb={5}
           f={5}
@@ -210,7 +201,7 @@ export default class BlockLightboxMetadataPane extends PureComponent<
           key={`BlockLightboxMetadataFold_${block.id}`}
           block={block}
         />
-      </Box>
+      </MetadataContainer>
     )
   }
 }
