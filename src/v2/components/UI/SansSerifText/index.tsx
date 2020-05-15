@@ -27,7 +27,7 @@ const smallMixin = css`
   ol,
   code,
   pre {
-    font-size: 0.9rem / em;
+    font-size: 0.9rem;
   }
 
   h1,
@@ -53,7 +53,7 @@ export const mixin = css`
   ${baseMixin}
 
   p, li, ol {
-    font-size: 1.05rem/em;
+    font-size: 1.05rem;
   }
 
   ul,
