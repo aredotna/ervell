@@ -122,7 +122,7 @@ export const SplitPane: React.FC<SplitPaneProps> = ({
 const Container = styled(Box)<{
   context: LightboxContext
   isFullScreen: boolean
-  visbile?: boolean
+  visible?: boolean
   panelSize: string | number
 }>`
   position: absolute;
