@@ -7,9 +7,16 @@ const withLoginStatus = WrappedComponent => {
   class WithLoginStatus extends Component {
     render() {
       const { client, ...rest } = this.props
-      const cache = client.readQuery({
-        query: isLoggedInQuery,
-      })
+
+      let cache
+
+      try {
+        cache = client.readQuery({
+          query: isLoggedInQuery,
+        })
+      } catch {
+        return false
+      }
 
       if (!cache) {
         return false

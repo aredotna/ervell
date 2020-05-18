@@ -8,11 +8,16 @@ import constants from 'v2/styles/constants'
 import { getSpace } from 'v2/styles/functions'
 
 import Box from 'v2/components/UI/Box'
-import { LightboxContext, LightboxLayout } from 'v2/components/BlockLightbox'
+
+import {
+  LightboxLayout,
+  LightboxContext,
+} from 'v2/components/BlockLightboxLayout'
 
 interface SplitPaneProps extends ReactSplitPaneProps {
   context: LightboxContext
   layout: LightboxLayout
+  visible?: boolean
   children: any
 }
 
@@ -25,6 +30,7 @@ export const SplitPane: React.FC<SplitPaneProps> = ({
   children,
   context,
   layout,
+  visible,
   ...rest
 }) => {
   const [panelSize, setPanelSize] = useState(undefined)
@@ -93,6 +99,7 @@ export const SplitPane: React.FC<SplitPaneProps> = ({
       context={context}
       isFullScreen={isFullScreen}
       panelSize={panelSize}
+      visible={visible}
     >
       <ReactSplitPane
         split="vertical"
@@ -115,6 +122,7 @@ export const SplitPane: React.FC<SplitPaneProps> = ({
 const Container = styled(Box)<{
   context: LightboxContext
   isFullScreen: boolean
+  visible?: boolean
   panelSize: string | number
 }>`
   position: absolute;
@@ -148,6 +156,12 @@ const Container = styled(Box)<{
     &:hover {
       opacity: 1;
     }
+
+    ${props =>
+      props.visible &&
+      `
+      opacity: 1;
+    `}
 
     &:after {
       border-left: 1px solid ${props => props.theme.colors.gray.light};

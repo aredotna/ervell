@@ -70,7 +70,7 @@ interface InnerProps {
   isSpiderRequesting: boolean
 }
 
-class KonnectableInner extends PureComponent<Props & InnerProps> {
+export class KonnectableInner extends PureComponent<Props & InnerProps> {
   static defaultProps = {
     context: [],
     isPreviewable: true,

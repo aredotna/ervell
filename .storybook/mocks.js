@@ -31,6 +31,9 @@ const user = () => ({
 })
 
 const Mocks = {
+  Sharify: () => ({
+    IS_SPIDER: false,
+  }),
   Channel: () => ({
     id: random.number({ min: 1, max: 999999 }),
     slug: `slug-${random.number({ min: 1, max: 999999 })}`,

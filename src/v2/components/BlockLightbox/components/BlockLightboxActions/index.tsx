@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { truncate } from 'v2/components/UI/Truncate'
-
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import MuteButton from 'v2/components/MuteButton'
@@ -59,19 +57,6 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
       )}
 
       <BlockLightboxShare block={block} />
-
-      {block.source && (
-        <a
-          href={block.source.url}
-          rel="nofollow noopener noreferrer"
-          target="_blank"
-          dangerouslySetInnerHTML={{
-            __html: block.source.title
-              ? `Source: ${truncate(block.source.title, 40)}`
-              : 'Source',
-          }}
-        />
-      )}
 
       {(block.__typename === 'Image' || block.__typename === 'Text') &&
         block.find_original_url && (
