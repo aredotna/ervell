@@ -25,7 +25,7 @@ export const MobileBanner: React.FC<MobileBannerProps> = ({ route, id }) => {
   return (
     <FixedWrapper bottom>
       <Banner
-        bg="white"
+        bg="background"
         borderTop="3px solid"
         borderColor="gray.light"
         isCloseable

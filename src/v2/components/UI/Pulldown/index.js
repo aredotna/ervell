@@ -11,7 +11,7 @@ const Container = styled(Box).attrs({
   width: '88%',
 })`
   position: relative;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   border-radius: 0.25em;
   border: 1px solid
     ${x =>

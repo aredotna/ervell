@@ -59,7 +59,7 @@ const Cancel = styled(Text).attrs({
 })`
   cursor: pointer;
   text-align: center;
-  background: white;
+  background: ${props => props.theme.colors.background};
   a:hover {
     color: ${props => props.theme.colors.gray.bold};
   }

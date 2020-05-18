@@ -1,3 +1,40 @@
+// const COLORS = {
+//   channel: {
+//     closed: '#4b3d67',
+//     public: '#17ac10',
+//     open: '#17ac10', // alias `public`
+//     private: '#b60202',
+//   },
+//   state: {
+//     premium: '#00c5ff',
+//     alert: 'rgb(255, 94, 0)',
+//     editable: '#fdffdb',
+//     neutral: '#fdffdb', // alias editable
+//     investor: 'rgb(183, 158, 110)',
+//     supporter: '#00a06d',
+//   },
+//   gray: {
+//     bold: '#333',
+//     base: '#585858', // Matches `textgray`
+//     semiBold: '#6d6d6d',
+//     medium: '#999',
+//     regular: '#ccc',
+//     semiLight: '#e8e8e8',
+//     light: '#eee',
+//     hint: '#f7f7f7',
+//     block: 'rgb(51, 51, 51)',
+//   },
+//   utility: {
+//     translucent: 'rgba(255, 255, 255, 0.9)',
+//     semiTranslucent: 'rgba(255, 255, 255, 0.5)',
+//     transparent: 'rgba(255, 255, 255, 0.001)',
+//   },
+//   white: 'white',
+//   black: 'black',
+//   middleGray: '#929292',
+//   background: 'blue',
+// }
+
 const COLORS = {
   channel: {
     closed: '#4b3d67',
@@ -14,13 +51,13 @@ const COLORS = {
     supporter: '#00a06d',
   },
   gray: {
-    bold: '#333',
+    bold: '#eee',
     base: '#585858', // Matches `textgray`
-    semiBold: '#6d6d6d',
-    medium: '#999',
-    regular: '#ccc',
-    semiLight: '#e8e8e8',
-    light: '#eee',
+    semiBold: '#e8e8e8',
+    medium: '#ccc',
+    regular: '#999',
+    semiLight: '#6d6d6d',
+    light: '#333',
     hint: '#f7f7f7',
     block: 'rgb(51, 51, 51)',
     input: 'rgb(247, 245, 244)',
@@ -33,6 +70,7 @@ const COLORS = {
   white: 'white',
   black: 'black',
   middleGray: '#929292',
+  background: 'black',
 }
 
 const {

@@ -70,7 +70,7 @@ const PremiumButton = styled(CTAButton)`
 
   &:hover {
     border-color: ${x => x.theme.colors.state.premium};
-    background-color: white;
+    background-color: ${props => props.theme.colors.background};
     color: ${x => x.theme.colors.state.premium};
   }
 `
@@ -82,7 +82,7 @@ const GroupButton = styled(CTAButton)`
 
   &:hover {
     border-color: ${x => x.theme.colors.gray.base};
-    background-color: white;
+    background-color: ${props => props.theme.colors.background};
     color: ${x => x.theme.colors.gray.base};
   }
 `

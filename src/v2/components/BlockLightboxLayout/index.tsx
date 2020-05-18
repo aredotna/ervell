@@ -24,7 +24,7 @@ export const SidebarContainer = styled(Box).attrs({
   pt: 4,
   pb: 8,
   height: '100%',
-  bg: 'white',
+  bg: 'background',
   overflowScrolling: true,
 })``
 
@@ -34,7 +34,7 @@ export const MetadataContainer = styled(Box).attrs({
   pt: 8,
   pb: 8,
   height: '100%',
-  bg: 'white',
+  bg: 'background',
   overflowScrolling: true,
 })``
 
@@ -75,7 +75,7 @@ export const TextBoxContainer: React.FC<BlockLightboxLayoutProps &
           minHeight="100%"
           width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
           maxWidth="55em"
-          bg={{ DEFAULT: 'white' }[layout]}
+          bg={{ DEFAULT: 'background' }[layout]}
           border="1px solid"
           borderColor={
             { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]

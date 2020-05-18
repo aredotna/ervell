@@ -25,7 +25,7 @@ const Container = styled(Link)`
   position: relative;
   display: block;
   text-decoration: none;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   user-select: none;
   ${preset(width, { width: constants.blockWidth })}
   ${preset(height, { height: constants.blockWidth })}

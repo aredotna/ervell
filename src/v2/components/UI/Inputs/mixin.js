@@ -54,7 +54,7 @@ export const defaultMixin = css`
   appearance: none;
   box-sizing: border-box;
   display: block;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   line-height: ${LINE_HEIGHTS.input};
   ${preset(fontFamily, { font: 'sans' })}
   ${preset(width, { width: '100%' })}

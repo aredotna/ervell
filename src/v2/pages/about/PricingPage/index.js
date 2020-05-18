@@ -18,7 +18,10 @@ const Container = styled(Box).attrs({
 })``
 
 const GradientContent = styled.div`
-  background: linear-gradient(${x => x.theme.colors.gray.hint}, white);
+  background: linear-gradient(
+    ${x => x.theme.colors.gray.hint},
+    ${props => props.theme.colors.background}
+  );
   border-top: 1px solid ${x => x.theme.colors.gray.regular};
 `
 

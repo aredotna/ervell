@@ -5,7 +5,7 @@ import Box from 'v2/components/UI/Box'
 export const ContextToggle = styled(Box).attrs({
   role: 'button',
   tabIndex: 0,
-  bg: 'white',
+  bg: 'background',
 })`
   border-radius: 50%;
   width: 2rem;

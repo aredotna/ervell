@@ -24,7 +24,7 @@ export default class TotalBlocksMeter extends Component {
         <Meter
           startColor="gray.light"
           endColor="gray.light"
-          bg="white"
+          bg="background"
           amount={amount}
           limit={non_premium_connections_limit}
         >

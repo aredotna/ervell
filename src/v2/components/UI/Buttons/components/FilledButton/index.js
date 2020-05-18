@@ -28,13 +28,13 @@ const color = props => {
 export const activeMixin = css`
   border: none;
   color: ${x => x.theme.colors.gray.bold};
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 `
 
 export const hoverMixin = css`
   border: none;
   color: black;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 `
 
 const mixin = css`

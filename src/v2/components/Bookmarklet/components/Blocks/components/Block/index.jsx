@@ -125,7 +125,7 @@ class Block extends PureComponent {
         {block.type === 'Image' && <ImageContainer src={block.value} />}
         <Overlay>
           {block.type !== 'Link' && (
-            <FilledButton f={2} bg="white" onClick={this.onEdit}>
+            <FilledButton f={2} bg="background" onClick={this.onEdit}>
               Edit
             </FilledButton>
           )}

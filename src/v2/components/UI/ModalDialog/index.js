@@ -36,7 +36,7 @@ const Content = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   border: 1px solid ${x => x.theme.colors.gray.regular};
 `
 

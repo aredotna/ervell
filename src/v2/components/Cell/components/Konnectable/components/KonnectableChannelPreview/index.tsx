@@ -24,7 +24,7 @@ const Preview = styled(Box)`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 
   &:hover {
     opacity: 0.5;

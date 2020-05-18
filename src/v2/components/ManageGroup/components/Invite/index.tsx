@@ -86,7 +86,7 @@ export const GroupInvite: React.FC<GroupInviteInviteProps> = ({ group }) => {
             Add new members to <strong>{group.name}</strong> by creating an
             invite link and sending it to your contacts.
           </Text>
-          <Button f={1} my={6} bg="white" onClick={onCreate}>
+          <Button f={1} my={6} bg="background" onClick={onCreate}>
             Generate invite link
           </Button>
           <Text f={1} mt={3}>

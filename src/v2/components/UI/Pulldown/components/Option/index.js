@@ -7,7 +7,7 @@ export default styled.div`
   position: relative;
   box-sizing: border-box;
   outline: none;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   cursor: pointer;
   user-select: none;
   font-family: ${x => x.theme.fonts.sans};

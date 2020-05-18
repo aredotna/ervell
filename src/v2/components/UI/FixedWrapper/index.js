@@ -12,7 +12,7 @@ const FixedWrapper = styled(Box)`
 `
 
 FixedWrapper.defaultProps = {
-  bg: 'white',
+  bg: 'background',
 }
 
 export default FixedWrapper

@@ -67,7 +67,7 @@ const ContributeButton = styled(Button).attrs({
 
   &:hover {
     border-color: ${x => x.theme.colors.state.supporter};
-    background-color: white;
+    background-color: ${props => props.theme.colors.background};
     color: ${x => x.theme.colors.state.supporter};
   }
 `
@@ -83,7 +83,7 @@ const PremiumButton = styled(Button).attrs({
 
   &:hover {
     border-color: ${x => x.theme.colors.state.premium};
-    background-color: white;
+    background-color: ${props => props.theme.colors.background};
     color: ${x => x.theme.colors.state.premium};
   }
 `

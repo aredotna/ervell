@@ -17,7 +17,7 @@ const Container = styled(Box)`
   flex-direction: row;
   align-items: stretch;
   justify-content: center;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 
   ${props =>
     props.scheme === 'GROUP' &&
