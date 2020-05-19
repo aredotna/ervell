@@ -12,6 +12,7 @@ const COLORS = {
     neutral: '#50483F', // alias editable
     investor: '#F1CE57',
     supporter: '#6BD2B6',
+    highlight: `#696b51`,
   },
   gray: {
     extraBold: '#fff',

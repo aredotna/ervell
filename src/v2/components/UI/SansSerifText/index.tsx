@@ -114,7 +114,7 @@ export const mixin = css`
 
   mark {
     color: inherit;
-    background-color: rgb(250, 255, 195);
+    background-color: ${props => props.theme.colors.state.highlight};
   }
 
   hr {
