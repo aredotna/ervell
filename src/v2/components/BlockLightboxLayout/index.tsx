@@ -64,7 +64,13 @@ export const TextBoxContainer: React.FC<BlockLightboxLayoutProps &
   TextBoxContainerProps> = ({ children, layout, onClick }) => {
   return (
     <Box height="100%" width="100%">
-      <Box height={['auto', '100%']} width="100%" p={[3, 9]} overflowScrolling>
+      <Box
+        height={['auto', '100%']}
+        width="100%"
+        py={9}
+        px={[3, 9]}
+        overflowScrolling
+      >
         <Box
           minHeight="100%"
           width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}

@@ -15,6 +15,16 @@ export const baseMixin = css`
   p {
     margin-top: 0;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0px 0px 0.3em;
+    line-height: 1.45;
+  }
 `
 
 const smallMixin = css`
@@ -52,6 +62,8 @@ const smallMixin = css`
 export const mixin = css`
   ${baseMixin}
 
+  line-height: 1.6;
+
   p, li, ol {
     font-size: 1.05rem;
   }
@@ -66,18 +78,8 @@ export const mixin = css`
     }
 
     ol, ul {
-      padding-left: 2em;
+      padding-left: 1.1em;
     }
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0;
-    margin-bottom: 0.5em;
   }
 
   h1,
@@ -149,7 +151,7 @@ export const mixin = css`
 
   blockquote {
     margin: 0;
-    border-left: 4px solid rgba(232, 232, 232, 0.3);
+    border-left: 1px solid rgb(216, 216, 216);
     padding: 0px 0px 0px 1em;
     font-style italic;
   }
