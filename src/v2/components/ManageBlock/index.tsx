@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useMutation } from 'react-apollo'
 import { useForm, useField } from 'react-final-form-hooks'
@@ -17,6 +17,7 @@ import {
   TextBoxContainer,
 } from 'v2/components/BlockLightboxLayout'
 
+import { MarkdownCheatsheet } from 'v2/components/ManageBlock/components/MarkdownCheatsheet'
 import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage'
 import BlockLightboxLink from 'v2/components/BlockLightbox/components/BlockLightboxLink'
 import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment'
@@ -30,28 +31,50 @@ import {
   updateBlockMutation,
   updateBlockMutationVariables,
 } from '__generated__/updateBlockMutation'
+import Text from '../UI/Text'
 
-const TextField = styled(Textarea).attrs({ px: 7, py: 6, bg: 'gray.hint' })`
+const TextField = styled(Textarea).attrs({
+  px: 7,
+  py: 6,
+  bg: 'gray.input',
+  resizeable: false,
+})`
   width: 100%;
   height: 100%;
-  border: none;
+  border: none !important;
   box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
   border-radius: ${constants.radii.subtle};
   line-height: 1.55;
+  resize: none;
+`
+
+const FormattingLink = styled(Text).attrs({
+  color: 'gray.medium',
+  f: 1,
+  p: 3,
+})`
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  background-color: ${props => props.theme.colors.gray.input};
+  border: 1px solid ${props => props.theme.colors.gray.regular};
+  border-radius: ${constants.radii.regular};
 `
 
 const TextInput = styled(Input).attrs({
-  bg: 'gray.hint',
+  bg: 'gray.input',
   borderColor: 'gray.light',
 })`
   border-radius: ${constants.radii.subtle};
 `
 
 const DescriptionField = styled(Textarea).attrs({
-  bg: 'gray.hint',
+  bg: 'gray.input',
   borderColor: 'gray.light',
   mt: 6,
 })`
@@ -75,6 +98,11 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
   const [mode, setMode] = useState<'resting' | 'saving' | 'error' | 'saved'>(
     'resting'
   )
+  const [showCheatsheet, setShowCheatsheet] = useState<boolean>(false)
+  const toggleCheatsheet = useCallback(() => {
+    setShowCheatsheet(!showCheatsheet)
+  }, [showCheatsheet])
+
   const titleRef = useRef(null)
   const contentRef = useRef(null)
   const descriptionRef = useRef(null)
@@ -114,7 +142,7 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
     title: block.editable_title,
   }
 
-  const { form, handleSubmit, pristine, submitting } = useForm({
+  const { form, handleSubmit, submitting } = useForm({
     initialValues: initialValues,
     onSubmit, // the function to call with your form values upon valid submit
   })
@@ -144,12 +172,18 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
                   ref={contentRef}
                   {...contentField.input}
                 />
+                <FormattingLink onClick={toggleCheatsheet}>
+                  Formatting?
+                </FormattingLink>
               </TextBoxContainer>
             )}
 
             {block.__typename !== 'Text' && <Content block={block} />}
           </ContentContainer>
-          <SidebarContainer display="flex" style={{ paddingBottom: '1em' }}>
+          <SidebarContainer
+            display="flex"
+            style={{ paddingTop: '0.85em', paddingBottom: '1em' }}
+          >
             <Box
               pt={8}
               display="flex"
@@ -169,13 +203,15 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
                   placeholder="Description"
                   {...descriptionField.input}
                 />
+
+                {showCheatsheet && <MarkdownCheatsheet />}
               </div>
 
-              <Button type="submit" disabled={pristine || submitting}>
+              <Button type="submit" disabled={submitting}>
                 {
                   {
                     resting: 'Save',
-                    saving: 'Saving',
+                    saving: 'Saving...',
                     saved: 'Saved',
                     error: 'Error',
                   }[mode]
