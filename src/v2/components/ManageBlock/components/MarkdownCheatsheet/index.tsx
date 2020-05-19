@@ -24,7 +24,7 @@ const T = styled(Text).attrs({
 
 const T2 = styled(T).attrs({
   color: 'gray.base',
-  f: 3,
+  f: 2,
 })`
   font-family: monospace;
 `
