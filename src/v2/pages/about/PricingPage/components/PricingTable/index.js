@@ -48,7 +48,7 @@ const PlanTitle = styled(Text).attrs({
 const PlanPrice = styled(Text).attrs({
   f: 7,
   fontWeight: 'bold',
-  color: 'black',
+  color: 'gray.extraBold',
   pt: 4,
 })``
 
@@ -94,7 +94,7 @@ const Features = styled(Box).attrs({
 const Feature = styled(Text).attrs({
   f: 4,
   py: 3,
-  color: 'black',
+  color: 'gray.extraBold',
 })``
 
 class PricingTable extends PureComponent {
@@ -134,7 +134,11 @@ class PricingTable extends PureComponent {
           <PlanTitle>Are.na</PlanTitle>
           <PlanPrice>Free</PlanPrice>
           <PlanSubPrice>&nbsp;</PlanSubPrice>
-          <CTAButton color="black" href={signUpLink} disabled={isLoggedIn}>
+          <CTAButton
+            color="gray.extraBold"
+            href={signUpLink}
+            disabled={isLoggedIn}
+          >
             {signUpCopy}
           </CTAButton>
           <Features>

@@ -28,7 +28,7 @@ const OptionLabel = styled(Text).attrs({
 
 const Option = styled(Box)`
   &:hover ${OptionLabel} {
-    color: black;
+    color: ${props => props.theme.colors.gray.bold};
   }
 `
 

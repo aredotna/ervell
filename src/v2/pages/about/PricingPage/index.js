@@ -31,7 +31,7 @@ const CTA = styled(Box)`
 
 const Feature = styled(Text).attrs({
   f: 5,
-  color: 'black',
+  color: 'gray.bold',
   textAlign: 'left',
   py: 3,
   px: 5,
@@ -80,7 +80,7 @@ export default class PricingPage extends PureComponent {
           *A block is an individual piece of content. Blocks can be images,
           text, links, attachments, or embeds.
         </Text>
-        <Text f={4} color="black" textAlign="center" pb={9}>
+        <Text f={4} color="gray.extraBold" textAlign="center" pb={9}>
           We offer a 50% discount on Premium plans for
           <br />
           students and educators.&nbsp;

@@ -12,7 +12,7 @@ export default styled.div`
   user-select: none;
   font-family: ${x => x.theme.fonts.sans};
   ${preset(width, { width: '100%' })}
-  ${preset(color, { color: 'black' })}
+  ${preset(color, { color: 'gray.bold' })}
   ${preset(fontSize, { f: 4 })}
   ${preset(space, { px: 5, py: 4 })}
   ${fontSize}

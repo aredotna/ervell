@@ -89,7 +89,7 @@ export default class BlockLightboxMetadataPane extends PureComponent<
             dangerouslySetInnerHTML={{ __html: block.description }}
             breakWord
             boldLinks
-            hoverLinks={{ color: 'black' }}
+            hoverLinks={{ color: 'gray.bold' }}
             onClick={event => {
               // If clicking an A tag in the description don't open edit box and
               // instead defer to outbound link.

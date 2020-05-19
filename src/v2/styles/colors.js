@@ -6,7 +6,7 @@ const COLORS = {
     private: '#b60202',
   },
   state: {
-    premium: '#00c5ff',
+    premium: '#00BBF7',
     alert: 'rgb(255, 94, 0)',
     editable: '#fdffdb',
     neutral: '#fdffdb', // alias editable
@@ -15,9 +15,9 @@ const COLORS = {
   },
   gray: {
     extraBold: '#000',
-    bold: '#333',
+    bold: '#333333',
     base: '#585858', // Matches `textgray`
-    semiBold: '#6d6d6d',
+    semiBold: '#6A6A6A',
     medium: '#999',
     regular: '#ccc',
     semiLight: '#e8e8e8',

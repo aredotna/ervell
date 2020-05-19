@@ -9,7 +9,7 @@ const Link = styled(NavLink)`
   color: ${props => props.theme.colors.gray.regular} !important;
 
   &:hover {
-    color: black !important;
+    color: ${props => props.theme.colors.gray.bold} !important;
   }
 
   ${({ isActive, theme }) =>

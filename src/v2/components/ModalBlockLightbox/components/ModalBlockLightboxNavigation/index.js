@@ -39,7 +39,7 @@ const Prev = styled(Link).attrs({
     opacity: 1;
 
     svg {
-      fill: black;
+      fill: ${props => props.theme.colors.gray.bold};
       cursor: pointer;
     }
   }

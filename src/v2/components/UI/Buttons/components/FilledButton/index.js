@@ -33,7 +33,7 @@ export const activeMixin = css`
 
 export const hoverMixin = css`
   border: none;
-  color: black;
+  color: ${props => props.theme.colors.gray.bold};
   background-color: ${props => props.theme.colors.background};
 `
 

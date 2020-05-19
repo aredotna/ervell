@@ -32,9 +32,10 @@ const Close = styled.a`
     top: 50%;
     left: 50%;
     background-color: ${props =>
-      themeGet(`colors.${props.color}`, props.theme.colors.gray.semiBold)(
-        props
-      )};
+      themeGet(
+        `colors.${props.color}`,
+        props.theme.colors.gray.semiBold
+      )(props)};
   }
 
   &:before {
@@ -47,7 +48,7 @@ const Close = styled.a`
 
   &:hover:before,
   &:hover:after {
-    background-color: black;
+    background-color: ${props => props.theme.colors.gray.bold};
   }
 `
 

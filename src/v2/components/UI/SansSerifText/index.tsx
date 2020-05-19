@@ -126,7 +126,7 @@ export const mixin = css`
 
   a {
     font-weight: bold;
-    color: ${props => props.theme.colors.bold};
+    color: ${props => props.theme.colors.gray.bold};
     text-decoration: none;
   }
 

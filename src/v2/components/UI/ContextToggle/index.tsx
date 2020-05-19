@@ -17,6 +17,6 @@ export const ContextToggle = styled(Box).attrs({
   user-select: none;
 
   &:hover svg {
-    fill: black;
+    fill: ${props => props.theme.colors.gray.bold};
   }
 `

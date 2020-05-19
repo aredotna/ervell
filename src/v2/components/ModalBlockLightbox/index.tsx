@@ -31,9 +31,9 @@ const Fullscreen = styled(Link).attrs({
   user-select: none;
 
   &:hover {
-    border-color: black;
+    border-color: ${props => props.theme.colors.gray.bold};
     svg {
-      fill: black;
+      fill: ${props => props.theme.colors.gray.bold};
     }
   }
 `

@@ -48,7 +48,7 @@ const Container = styled(Link).attrs({
   ${space}
 
   &:hover {
-    border-color: black;
+    border-color: ${props => props.theme.colors.gray.bold};
   }
 
   ${x =>

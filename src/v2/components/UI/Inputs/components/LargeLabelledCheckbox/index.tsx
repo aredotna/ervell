@@ -19,7 +19,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 
 const Icon = styled.svg`
   fill: none;
-  stroke: black;
+  stroke: ${props => props.theme.colors.gray.bold};
   stroke-width: 2px;
 `
 
@@ -29,7 +29,10 @@ const StyledCheckbox = styled(Box).attrs({ mr: 6 })`
   height: 1.5em;
   border-radius: 3px;
   box-shadow: 0 0 0 1px
-    ${props => (props.disabled ? props.theme.colors.gray.light : 'black')};
+    ${props =>
+      props.disabled
+        ? props.theme.colors.gray.light
+        : 'props.theme.colors.gray.bold'};
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px pink;
