@@ -52,7 +52,11 @@ export const ContentContainer = styled(Box).attrs({
   ${props =>
     props.layout === 'FULLSCREEN' &&
     `
-    background-color: ${props.theme.colors.gray.bold};
+    background-color: ${
+      props.theme.name === 'light'
+        ? props.theme.colors.middleGray
+        : props.theme.colors.black
+    };
   `}
 `
 

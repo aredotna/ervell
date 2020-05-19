@@ -1,7 +1,6 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-
-import colors from 'v2/styles/colors'
 
 interface ColoredChannelLinkProps {
   href?: string
@@ -10,15 +9,19 @@ interface ColoredChannelLinkProps {
   to?: any
 }
 
+const ColoredLink = styled<{ visibility: boolean }>(Link)`
+  color: ${props => props.theme.colors.channel[props.visibility]};
+`
+
 const ColoredChannelLink: React.FC<ColoredChannelLinkProps> = ({
   href,
   children,
   visibility,
   ...rest
 }) => (
-  <Link to={href} style={{ color: colors.channel[visibility] }} {...rest}>
+  <ColoredLink to={href} {...rest}>
     {children}
-  </Link>
+  </ColoredLink>
 )
 
 export default ColoredChannelLink

@@ -14,7 +14,7 @@ import TotalBlocksMeter from 'v2/components/TotalBlocksMeter'
 const OptionLabel = styled(Text).attrs({
   f: 4,
   mb: 2,
-  color: 'gray.medium',
+  color: 'gray.bold',
 })`
   display: flex;
   justify-content: space-between;
@@ -22,19 +22,19 @@ const OptionLabel = styled(Text).attrs({
   ${props =>
     props.selected &&
     `
-    color: ${props.theme.colors.gray.bold};
+    color: ${props.theme.colors.gray.extraBold};
   `}
 `
 
 const Option = styled(Box)`
   &:hover ${OptionLabel} {
-    color: ${props => props.theme.colors.gray.bold};
+    color: ${props => props.theme.colors.gray.extraBold};
   }
 `
 
 const OptionDescription = styled(Text).attrs({
   f: 2,
-  color: 'gray.medium',
+  color: 'gray.bold',
 })`
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,7 @@ const OptionDescription = styled(Text).attrs({
 const Link = styled.a`
   display: block;
   &:hover {
-    color: ${props => props.theme.colors.gray.bold};
+    color: ${props => props.theme.colors.gray.extraBold};
   }
 `
 

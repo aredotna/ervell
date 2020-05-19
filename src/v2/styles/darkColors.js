@@ -1,17 +1,17 @@
 const COLORS = {
   channel: {
-    closed: '#999',
-    public: '#17ac10',
-    open: '#17ac10', // alias `public`
-    private: '#b60202',
+    closed: '#D3D3D3',
+    public: '#2BA425',
+    open: '#2BA425', // alias `public`
+    private: '#E24937',
   },
   state: {
-    premium: '#00c5ff',
-    alert: 'rgb(255, 94, 0)',
-    editable: '#020024',
-    neutral: '#020024', // alias editable
-    investor: 'rgb(183, 158, 110)',
-    supporter: '#00a06d',
+    premium: '#17B0E2',
+    alert: '#B08064',
+    editable: '#50483F',
+    neutral: '#50483F', // alias editable
+    investor: '#F1CE57',
+    supporter: '#6BD2B6',
   },
   gray: {
     extraBold: '#fff',
