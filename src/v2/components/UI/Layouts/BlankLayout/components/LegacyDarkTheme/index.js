@@ -12,39 +12,5 @@ export const toggle = mode => {
 }
 
 export default createGlobalStyle`
-  html[data-theme='dark'] {
-    &,
-    img,
-    canvas,
-    [style*='background-image'] {
-      filter: invert(100%) hue-rotate(180deg);
 
-      iframe {
-        filter: invert(100%) hue-rotate(180deg);
-      }
-    }
-
-    // Chrome
-    @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
-      body {
-        background-color: white;
-      }
-    }
-
-    // Safari 8+
-    _::-webkit-full-page-media,
-    _:future,
-    :root {
-      body {
-        background-color: white;
-      }
-    }
-
-    // Firefox
-    @-moz-document url-prefix() {
-      body {
-        background-color: black;
-      }
-    }
-  }
 `

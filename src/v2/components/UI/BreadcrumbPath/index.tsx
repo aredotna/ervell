@@ -34,7 +34,7 @@ export const Crumb = styled.div`
     color: inherit;
 
     &:hover {
-      color: black;
+      color: ${x => x.theme.colors.gray.bold};
     }
   }
 

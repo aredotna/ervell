@@ -11,7 +11,12 @@ import {
 } from 'styled-system'
 import chroma from 'chroma-js'
 
-import { defaultTo, preset, translucentGray } from 'v2/styles/functions'
+import {
+  defaultTo,
+  preset,
+  translucentGray,
+  translucentWhite,
+} from 'v2/styles/functions'
 import { antialiased } from 'v2/styles/mixins'
 import constants from 'v2/styles/constants'
 
@@ -34,9 +39,14 @@ export const buttonColor = props => {
     props.theme.colors.gray.base
   )(props)
 
+  const borderColor = themeGet(
+    `colors.${props.borderColor}`,
+    props.theme.colors.gray.regular
+  )(props)
+
   return `
     color: ${value};
-    border-color: ${chroma.blend(value, '#bbb', 'screen')};
+    border-color: ${chroma.blend(value, borderColor, 'screen')};
   `
 }
 
@@ -55,14 +65,16 @@ export const buttonBorderWidth = x =>
     SMALL: BUTTON_SMALL_BORDER_WIDTH,
   }[buttonSize(x)])
 
+// To-do switch function based on theme
 export const activeMixin = css`
-  border: ${buttonBorderWidth} solid ${translucentGray('bold')};
-  color: ${translucentGray('bold')};
+  border: ${buttonBorderWidth} solid ${translucentWhite('bold')};
+  color: ${translucentWhite('bold')};
 `
 
+// To-do switch function based on theme
 export const hoverMixin = css`
-  border: ${buttonBorderWidth} solid ${translucentGray('medium')};
-  color: ${translucentGray('bold')};
+  border: ${buttonBorderWidth} solid ${translucentWhite('medium')};
+  color: ${translucentWhite('bold')};
 `
 
 export const disabledMixin = css`

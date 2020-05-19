@@ -1,9 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
 import constants, { SPACING_SCALE, CONSTANT_VALUES } from 'v2/styles/constants'
 import colors, { COLOR_NAMES as colorNames } from 'v2/styles/colors'
+import darkColors from 'v2/styles/darkColors'
 import text, { FONT_SIZE_NAMES as fontSizeNames } from 'v2/styles/text'
 
 const META = {
@@ -13,6 +13,7 @@ const META = {
 
 const THEME = {
   colors,
+  name: 'default',
   fonts: text.fonts,
   fontSizes: text.fontSizeScale,
   fontSizesIndexed: text.fontSizes,
@@ -26,20 +27,26 @@ const THEME = {
   radii: constants.radii,
 }
 
+const DARK_THEME = {
+  ...THEME,
+  name: 'dark',
+  colors: darkColors,
+}
+
+interface ThemedProps {
+  theme: 'dark' | 'default'
+}
+
 export const wrapWithThemeProvider = (Component, props = {}) => (
   <ThemeProvider theme={THEME}>
     <Component {...props} />
   </ThemeProvider>
 )
 
-export const Themed = ({ children, ...rest }) => (
-  <ThemeProvider theme={THEME} {...rest}>
+export const Themed: React.FC<ThemedProps> = ({ children, theme, ...rest }) => (
+  <ThemeProvider theme={theme == 'dark' ? DARK_THEME : THEME} {...rest}>
     {children}
   </ThemeProvider>
 )
-
-Themed.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default THEME

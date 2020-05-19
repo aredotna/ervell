@@ -83,15 +83,17 @@ export const neutralMargins = css`
 export const channelVisibilityForegroundColor = css`
   ${props => {
     const color =
-      theme.colors.channel[props.visibility] ||
+      props.theme.colors.channel[props.visibility] ||
       themeGet(`colors.${props.color}`, props.theme.colors.gray.base)(props)
+
+    const blendMode = props.theme.name === 'dark' ? 'darken' : 'screen'
 
     return `
       color: ${color};
       border-color: ${
         props.mode === 'hover'
           ? `border-color: ${color};`
-          : blend(color, '#bbb', 'screen')
+          : blend(color, '#bbb', blendMode)
       };
 
       &:hover {

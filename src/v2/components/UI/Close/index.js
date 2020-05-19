@@ -34,7 +34,7 @@ const Container = styled.a`
   &:hover > span {
     &:after,
     &:before {
-      background-color: black;
+      background-color: ${props => props.theme.colors.bold};
     }
   }
 `
@@ -56,9 +56,10 @@ const Glyph = styled.span`
     top: 50%;
     left: 50%;
     background-color: ${props =>
-      themeGet(`colors.${props.color}`, props.theme.colors.gray.semiBold)(
-        props
-      )};
+      themeGet(
+        `colors.${props.color}`,
+        props.theme.colors.gray.semiBold
+      )(props)};
   }
 
   &:before {

@@ -40,6 +40,8 @@ export const lighten = (name, amount = 0.5) => {
 }
 
 export const translucentGray = key => `rgba(0, 0, 0, ${GRAY_ALPHA_VALUES[key]})`
+export const translucentWhite = key =>
+  `rgba(255, 255, 255, ${GRAY_ALPHA_VALUES[key]})`
 
 export default {
   parse,

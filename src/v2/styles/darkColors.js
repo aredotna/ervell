@@ -1,6 +1,6 @@
 const COLORS = {
   channel: {
-    closed: '#4b3d67',
+    closed: '#999',
     public: '#17ac10',
     open: '#17ac10', // alias `public`
     private: '#b60202',
@@ -8,33 +8,32 @@ const COLORS = {
   state: {
     premium: '#00c5ff',
     alert: 'rgb(255, 94, 0)',
-    editable: '#fdffdb',
-    neutral: '#fdffdb', // alias editable
+    editable: '#020024',
+    neutral: '#020024', // alias editable
     investor: 'rgb(183, 158, 110)',
     supporter: '#00a06d',
   },
   gray: {
-    extraBold: '#000',
-    bold: '#333',
-    base: '#585858', // Matches `textgray`
-    semiBold: '#6d6d6d',
-    medium: '#999',
-    regular: '#ccc',
-    semiLight: '#e8e8e8',
-    light: '#eee',
-    hint: '#f7f7f7',
-    block: 'rgb(51, 51, 51)',
-    input: 'rgb(247, 245, 244)',
+    extraBold: '#fff',
+    bold: '#eee',
+    base: '#a7a7a7', // Matches `textgray`
+    semiBold: '#929292',
+    medium: '#666',
+    regular: '#333',
+    semiLight: '#171717',
+    light: '#111111',
+    hint: '#080808',
+    block: '#cccccc',
   },
   utility: {
-    translucent: 'rgba(255, 255, 255, 0.9)',
-    semiTranslucent: 'rgba(255, 255, 255, 0.5)',
-    transparent: 'rgba(255, 255, 255, 0.001)',
+    translucent: 'rgba(0, 0, 0, 0.9)',
+    semiTranslucent: 'rgba(0, 0, 0, 0.5)',
+    transparent: 'rgba(0, 0, 0, 0.001)',
   },
   white: 'white',
   black: 'black',
-  middleGray: '#929292',
-  background: 'white',
+  middleGray: '#6d6d6d',
+  background: 'black',
 }
 
 const {
