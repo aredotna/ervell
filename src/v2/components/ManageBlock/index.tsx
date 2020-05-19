@@ -46,7 +46,9 @@ const TextField = styled(Textarea).attrs({
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: ${constants.radii.subtle};
+  height: 100%;
+  width: 100%;
+  margin: 0;
   line-height: 1.55;
   resize: none;
 `
