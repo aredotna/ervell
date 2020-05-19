@@ -59,8 +59,8 @@ const FormattingLink = styled(Text).attrs({
   font-weight: bold;
   cursor: pointer;
   position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
+  bottom: 0.75em;
+  right: 0.75em;
   background-color: ${props => props.theme.colors.gray.input};
   border: 1px solid ${props => props.theme.colors.gray.regular};
   border-radius: ${constants.radii.regular};
@@ -71,6 +71,12 @@ const TextInput = styled(Input).attrs({
   borderColor: 'gray.light',
 })`
   border-radius: ${constants.radii.subtle};
+`
+
+const TextSpacer = styled(Box)`
+  ${constants.media.small`
+    min-height: 60vh;
+  `}
 `
 
 const DescriptionField = styled(Textarea).attrs({
@@ -166,15 +172,17 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
           <ContentContainer layout="DEFAULT">
             {block.__typename === 'Text' && (
               <TextBoxContainer layout="DEFAULT">
-                <TextField
-                  layout="DEFAULT"
-                  block={block}
-                  ref={contentRef}
-                  {...contentField.input}
-                />
-                <FormattingLink onClick={toggleCheatsheet}>
-                  Formatting?
-                </FormattingLink>
+                <TextSpacer>
+                  <TextField
+                    layout="DEFAULT"
+                    block={block}
+                    ref={contentRef}
+                    {...contentField.input}
+                  />
+                  <FormattingLink onClick={toggleCheatsheet}>
+                    Formatting?
+                  </FormattingLink>
+                </TextSpacer>
               </TextBoxContainer>
             )}
 
