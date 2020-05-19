@@ -162,7 +162,7 @@ export const MarkdownCheatsheet: React.FC = () => {
             <T>Blockquote</T>
           </Cell>
           <Cell>
-            <T2>&gt; I'm a quote</T2>
+            <T2>&gt; I&apos;m a quote</T2>
           </Cell>
         </Row>
         <Row>
