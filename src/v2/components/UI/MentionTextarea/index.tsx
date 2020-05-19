@@ -1,11 +1,11 @@
 import React, { useEffect, KeyboardEvent } from 'react'
 import { MentionsInput, Mention } from 'react-mentions'
 import { useLazyQuery } from '@apollo/react-hooks'
-import { themeGet } from 'styled-system'
 
 import { MentionTextareaUserSuggestions } from '__generated__/MentionTextareaUserSuggestions'
 import USER_SUGGESTION_QUERY from 'v2/components/UI/MentionTextarea/queries/userSuggestions'
 import defaultStyle from 'v2/components/UI/MentionTextarea/defaultStyle'
+import useCurrentTheme from 'v2/hooks/useCurrentTheme'
 
 interface MentionTextareaProps {
   value: string
@@ -43,12 +43,14 @@ const MentionTextarea: React.FC<MentionTextareaProps> = ({
     getSuggestions()
   }, [getSuggestions])
 
+  const theme = useCurrentTheme()
+
   return (
     <MentionsInput
       placeholder="Add new comment (mention by typing `@`)"
       value={value}
       onChange={(_e, newValue) => onChange(newValue)}
-      style={defaultStyle({ themeGet })}
+      style={defaultStyle({ theme })}
       markup="@__id__"
       allowSuggestionsAboveCursor
       onKeyDown={onKeyDown}

@@ -67,14 +67,28 @@ export const buttonBorderWidth = x =>
 
 // To-do switch function based on theme
 export const activeMixin = css`
-  border: ${buttonBorderWidth} solid ${translucentWhite('bold')};
-  color: ${translucentWhite('bold')};
+  border: ${buttonBorderWidth} solid
+    ${props =>
+      props.theme.name === 'default'
+        ? translucentGray('bold')
+        : translucentWhite('bold')};
+  color: ${props =>
+    props.theme.name === 'default'
+      ? translucentGray('bold')
+      : translucentWhite('bold')};
 `
 
 // To-do switch function based on theme
 export const hoverMixin = css`
-  border: ${buttonBorderWidth} solid ${translucentWhite('medium')};
-  color: ${translucentWhite('bold')};
+  border: ${buttonBorderWidth} solid
+    ${props =>
+      props.theme.name === 'default'
+        ? translucentGray('medium')
+        : translucentWhite('bold')};
+  color: ${props =>
+    props.theme.name === 'default'
+      ? translucentGray('bold')
+      : translucentWhite('bold')};
 `
 
 export const disabledMixin = css`

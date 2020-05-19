@@ -1,7 +1,12 @@
-export default ({ themeGet }) => {
+import lightColors from 'v2/styles/colors'
+import darkColors from 'v2/styles/darkColors'
+
+export default ({ theme }) => {
+  const colors = theme === 'default' ? lightColors : darkColors
+
   return {
     control: {
-      backgroundColor: themeGet('colors.background'),
+      backgroundColor: colors.gray.input,
       fontFamily: 'Arial, sans-serif',
       fontSize: '0.875rem',
       lineHeight: 1.33,
@@ -14,12 +19,12 @@ export default ({ themeGet }) => {
 
     input: {
       margin: 0,
-      color: themeGet('colors.gray.base'),
     },
 
     '&singleLine': {
       control: {
         display: 'inline-block',
+
         width: 130,
       },
 
@@ -30,7 +35,7 @@ export default ({ themeGet }) => {
 
       input: {
         padding: 1,
-        color: themeGet('colors.gray.base'),
+        color: colors.gray.bold,
         border: '2px inset',
       },
     },
@@ -49,24 +54,24 @@ export default ({ themeGet }) => {
         minHeight: 100,
         outline: 0,
         border: 0,
-        color: themeGet('colors.gray.base'),
+        color: colors.gray.bold,
       },
     },
 
     suggestions: {
       list: {
-        backgroundColor: 'white',
-        border: `1px solid ${themeGet('colors.gray.hint')}`,
+        backgroundColor: colors.gray.hint,
+        border: `1px solid ${colors.gray.hint}`,
         fontSize: '0.875rem',
-        color: themeGet('colors.gray.base'),
+        color: colors.gray.base,
       },
 
       item: {
         padding: '0.65625em 0.75em',
-        borderBottom: `1px solid ${themeGet('colors.gray.hint')}`,
+        borderBottom: `1px solid ${colors.gray.hint}`,
 
         '&focused': {
-          backgroundColor: themeGet('colors.gray.semiLight'),
+          backgroundColor: colors.gray.semiLight,
         },
       },
     },

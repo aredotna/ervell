@@ -24,6 +24,7 @@ const COLORS = {
     light: '#111111',
     hint: '#080808',
     block: '#cccccc',
+    input: '#080a0b',
   },
   utility: {
     translucent: 'rgba(0, 0, 0, 0.9)',

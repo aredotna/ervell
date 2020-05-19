@@ -10,7 +10,7 @@ interface ColoredChannelLinkProps {
 }
 
 const ColoredLink = styled<{ visibility: boolean }>(Link)`
-  color: ${props => props.theme.colors.channel[props.visibility]};
+  color: ${props => props.theme.colors.channel[props.visibility]} !important;
 `
 
 const ColoredChannelLink: React.FC<ColoredChannelLinkProps> = ({
@@ -19,7 +19,7 @@ const ColoredChannelLink: React.FC<ColoredChannelLinkProps> = ({
   visibility,
   ...rest
 }) => (
-  <ColoredLink to={href} {...rest}>
+  <ColoredLink to={href} visibility={visibility} {...rest}>
     {children}
   </ColoredLink>
 )
