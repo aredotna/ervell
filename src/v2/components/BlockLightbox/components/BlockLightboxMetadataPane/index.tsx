@@ -26,7 +26,7 @@ export default class BlockLightboxMetadataPane extends PureComponent<
   BlockLightboxMetadataPaneProps
 > {
   state = {
-    mode: 'manage',
+    mode: 'resting',
     autoFocus: null,
   }
 
