@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import React from 'react'
+import Box from 'v2/components/UI/Box'
 
-import ModalDialog from 'v2/components/UI/ModalDialog'
-
-export default styled(ModalDialog).attrs({
-  maxWidth: '55em',
-})``
+export default ({ children, ...rest }) => (
+  <Box position="relative" width="100%" height="100%" {...rest}>
+    {children}
+  </Box>
+)

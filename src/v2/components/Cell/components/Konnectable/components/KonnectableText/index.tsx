@@ -6,7 +6,7 @@ import { KonnectableText as KonnectableTextData } from '__generated__/Konnectabl
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 
 import Box from 'v2/components/UI/Box'
-import Typography from 'v2/components/UI/Text'
+import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
 const hoverMixin = css`
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
@@ -40,9 +40,7 @@ const Container = styled(Box).attrs({
       bottom: 0;
       left: 0;
       height: 3em;
-      background: linear-gradient(${
-        props.theme.colors.utility.transparent
-      } 0%, white 100%);
+      background: linear-gradient(${props.theme.colors.utility.transparent} 0%, white 100%);
     }
   `}
 `
@@ -61,9 +59,8 @@ export const KonnectableText: React.FC<Props> = ({
     <Container length={content.length} mode={mode} {...rest}>
       {/* We should truncate content to prevent an excess of data being needlessly returned */}
       {/* Try truncating markdown source then rendering it as a possible solution */}
-      <Typography
-        font="serif"
-        lineHeight={2}
+      <SansSerifText
+        isSmall
         color={{ [Mode.HOVER]: 'black', [Mode.RESTING]: 'gray.base' }[mode]}
         dangerouslySetInnerHTML={{ __html: content }}
       />

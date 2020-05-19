@@ -13,7 +13,7 @@ const Header = ({ children: title, ...rest }) => (
     borderColor="gray.light"
     {...rest}
   >
-    <Text f={3} color="gray.medium">
+    <Text f={2} color="gray.medium">
       {title}
     </Text>
   </Box>

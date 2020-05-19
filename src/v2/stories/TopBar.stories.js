@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import TopBar from 'v2/components/TopBar'
+import { TopBar } from 'v2/components/TopBar'
 
 storiesOf('TopBar', module)
   .add('logged in', () => (
