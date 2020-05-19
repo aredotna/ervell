@@ -61,6 +61,14 @@ export default class BlockLightboxAttachment extends PureComponent {
           </Box>
         )}
 
+        {block.file_content_type === 'audio/mpeg' && (
+          <Box my={3}>
+            <Player controls>
+              <source src={block.file_url} type="audio/mpeg" />
+            </Player>
+          </Box>
+        )}
+
         <Link
           display="block"
           p={6}
@@ -69,14 +77,6 @@ export default class BlockLightboxAttachment extends PureComponent {
           target="_blank"
           download
         >
-          {block.file_content_type === 'audio/mpeg' && (
-            <Box my={3}>
-              <Player controls>
-                <source src={block.file_url} type="audio/mpeg" />
-              </Player>
-            </Box>
-          )}
-
           <Text
             f={5}
             fontWeight="bold"
