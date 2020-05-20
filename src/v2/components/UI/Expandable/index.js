@@ -22,7 +22,7 @@ const Button = styled.a`
   height: 3rem;
   background: linear-gradient(
     ${x => x.theme.colors.utility.transparent} 0%,
-    white 75%
+    ${props => props.theme.colors.background} 75%
   );
   opacity: 0;
 
@@ -33,7 +33,7 @@ const Button = styled.a`
   &:hover {
     background: linear-gradient(
       ${x => x.theme.colors.utility.transparent} 25%,
-      white 90%
+      ${props => props.theme.colors.background} 90%
     );
   }
 `

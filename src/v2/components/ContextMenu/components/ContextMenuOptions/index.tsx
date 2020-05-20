@@ -6,7 +6,7 @@ import Box from 'v2/components/UI/Box'
 const Container = styled(Box).attrs({
   border: '1px solid',
   borderColor: 'gray.regular',
-  bg: 'white',
+  bg: 'background',
 })`
   border-radius: ${props => props.theme.radii.regular};
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.25);

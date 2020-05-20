@@ -78,7 +78,7 @@ export default class BlockLightboxLink extends PureComponent {
               borderColor={
                 { DEFAULT: 'gray.light', light: 'gray.semiBold' }[layout]
               }
-              bg={{ DEFAULT: 'white', FULLSCREEN: 'black' }[layout]}
+              bg={{ DEFAULT: 'background', FULLSCREEN: 'gray.bold' }[layout]}
             >
               <Icons
                 name="Link"

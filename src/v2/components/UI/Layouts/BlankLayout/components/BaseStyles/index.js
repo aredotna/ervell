@@ -6,6 +6,7 @@ export default createGlobalStyle`
     padding: 0;
     -webkit-font-smoothing: antialiased;
     font-family: ${props => props.theme.fonts.sans};
+    background-color: ${props => props.theme.colors.background};
   }
 
   a {

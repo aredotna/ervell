@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import constants from 'v2/styles/constants'
-import colors from 'v2/styles/colors'
 
 import Box from 'v2/components/UI/Box'
 
@@ -29,7 +28,7 @@ const Skeletal = styled(Box).attrs({
     content: '';
     width: 150%;
     height: 1px;
-    background-color: ${colors.gray.light};
+    background-color: ${props => props.theme.colors.gray.light};
     transform-origin: 0 0;
   }
 

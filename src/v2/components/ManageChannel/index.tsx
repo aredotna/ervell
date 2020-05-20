@@ -148,7 +148,7 @@ const ManageChannel: React.FC<ManageChannelProps> = ({
               <ErrorAlert isReloadable={false}>{submitError}</ErrorAlert>
             )}
             {submitSucceeded && (
-              <Alert bg="state.premium" color="white" mb={6}>
+              <Alert bg="state.premium" color="background" mb={6}>
                 Channel Saved.
               </Alert>
             )}

@@ -24,6 +24,7 @@ const Container = styled(Box).attrs({
   text-align: left;
 
   ${props => props.mode === Mode.HOVER && hoverMixin}
+
   &:hover {
     ${hoverMixin}
   }
@@ -40,7 +41,7 @@ const Container = styled(Box).attrs({
       bottom: 0;
       left: 0;
       height: 3em;
-      background: linear-gradient(${props.theme.colors.utility.transparent} 0%, white 100%);
+      background: linear-gradient(${props.theme.colors.utility.transparent} 0%, ${props.theme.colors.background} 100%);
     }
   `}
 `
@@ -61,7 +62,7 @@ export const KonnectableText: React.FC<Props> = ({
       {/* Try truncating markdown source then rendering it as a possible solution */}
       <SansSerifText
         isSmall
-        color={{ [Mode.HOVER]: 'black', [Mode.RESTING]: 'gray.base' }[mode]}
+        color={{ [Mode.HOVER]: 'gray.bold', [Mode.RESTING]: 'gray.base' }[mode]}
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </Container>

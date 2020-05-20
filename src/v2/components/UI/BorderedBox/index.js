@@ -13,7 +13,7 @@ const Inner = styled(Box)`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   border: 1px solid ${x => x.theme.colors.gray.regular};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

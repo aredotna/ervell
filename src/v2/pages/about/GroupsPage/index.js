@@ -20,7 +20,10 @@ const Content = styled.div`
   width: 100%;
   padding-bottom: 0;
   border-top: 1px solid ${x => x.theme.colors.gray.regular};
-  background: linear-gradient(${x => x.theme.colors.gray.extraLight}, white);
+  background: linear-gradient(
+    ${x => x.theme.colors.gray.extraLight},
+    ${props => props.theme.colors.background}
+  );
 `
 
 const Instructions = styled(Description).attrs({ p: 7 })`

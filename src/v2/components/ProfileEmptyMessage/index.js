@@ -97,7 +97,7 @@ export default class ProfileEmptyMessage extends Component {
                 mt={7}
                 onClick={this.openNewChannelModal}
                 color="gray.bold"
-                bg="white"
+                bg="background"
               >
                 Create a group channel
               </Button>
@@ -108,7 +108,7 @@ export default class ProfileEmptyMessage extends Component {
                   mt={3}
                   onClick={this.openManageGroupModal}
                   color="gray.bold"
-                  bg="white"
+                  bg="background"
                 >
                   Invite new members
                 </Button>

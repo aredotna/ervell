@@ -43,4 +43,5 @@ type ClientSerializedMe {
 type ClientSharify {
   get(name: String): String
   IS_SPIDER: Boolean
+  THEME: String
 }

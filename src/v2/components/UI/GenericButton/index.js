@@ -11,7 +11,12 @@ import {
 } from 'styled-system'
 import chroma from 'chroma-js'
 
-import { defaultTo, preset, translucentGray } from 'v2/styles/functions'
+import {
+  defaultTo,
+  preset,
+  translucentGray,
+  translucentWhite,
+} from 'v2/styles/functions'
 import { antialiased } from 'v2/styles/mixins'
 import constants from 'v2/styles/constants'
 
@@ -34,9 +39,14 @@ export const buttonColor = props => {
     props.theme.colors.gray.base
   )(props)
 
+  const borderColor = themeGet(
+    `colors.${props.borderColor}`,
+    props.theme.colors.gray.regular
+  )(props)
+
   return `
     color: ${value};
-    border-color: ${chroma.blend(value, '#bbb', 'screen')};
+    border-color: ${chroma.blend(value, borderColor, 'screen')};
   `
 }
 
@@ -55,14 +65,30 @@ export const buttonBorderWidth = x =>
     SMALL: BUTTON_SMALL_BORDER_WIDTH,
   }[buttonSize(x)])
 
+// To-do switch function based on theme
 export const activeMixin = css`
-  border: ${buttonBorderWidth} solid ${translucentGray('bold')};
-  color: ${translucentGray('bold')};
+  border: ${buttonBorderWidth} solid
+    ${props =>
+      props.theme.name === 'default'
+        ? translucentGray('bold')
+        : translucentWhite('bold')};
+  color: ${props =>
+    props.theme.name === 'default'
+      ? translucentGray('bold')
+      : translucentWhite('bold')};
 `
 
+// To-do switch function based on theme
 export const hoverMixin = css`
-  border: ${buttonBorderWidth} solid ${translucentGray('medium')};
-  color: ${translucentGray('bold')};
+  border: ${buttonBorderWidth} solid
+    ${props =>
+      props.theme.name === 'default'
+        ? translucentGray('medium')
+        : translucentWhite('bold')};
+  color: ${props =>
+    props.theme.name === 'default'
+      ? translucentGray('bold')
+      : translucentWhite('bold')};
 `
 
 export const disabledMixin = css`
@@ -75,7 +101,7 @@ export const mixin = css`
   ${preset(alignItems, { alignItems: 'center' })}
   ${preset(justifyContent, { justifyContent: 'center' })}
   ${preset(fontSize, { f: BUTTON_DEFAULT_FONT_SIZE })}
-  ${preset(bgColor, { bgColor: 'white' })}
+  ${preset(bgColor, { bg: 'background' })}
   border: ${buttonBorderWidth} solid;
   border-radius: ${BUTTON_BORDER_RADIUS};
   font-family: ${props => props.theme.fonts.sans};

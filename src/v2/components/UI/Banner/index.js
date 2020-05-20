@@ -95,7 +95,7 @@ class Banner extends PureComponent {
               fontWeight="bold"
               textAlign="center"
               underlineLinks
-              hoverLinks={{ color: 'black' }}
+              hoverLinks={{ color: 'gray.bold' }}
             >
               <Wrapper>{children}</Wrapper>
             </Text>

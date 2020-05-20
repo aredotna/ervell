@@ -10,7 +10,7 @@ export const baseMixin = css`
   font-size: 16px;
   line-height: 1.55;
 
-  font-family: 'Arial';
+  font-family: ${props => props.theme.fonts.sans};
 
   p {
     margin-top: 0;
@@ -114,7 +114,7 @@ export const mixin = css`
 
   mark {
     color: inherit;
-    background-color: rgb(250, 255, 195);
+    background-color: ${props => props.theme.colors.state.highlight};
   }
 
   hr {
@@ -126,7 +126,7 @@ export const mixin = css`
 
   a {
     font-weight: bold;
-    color: #333;
+    color: ${props => props.theme.colors.gray.bold};
     text-decoration: none;
   }
 

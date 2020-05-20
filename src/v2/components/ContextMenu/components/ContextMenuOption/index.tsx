@@ -8,7 +8,7 @@ import Icons from 'v2/components/UI/Icons'
 const Container = styled(Link).attrs({
   role: 'button',
   tabIndex: 0,
-  bg: 'white',
+  bg: 'background',
 })`
   display: flex;
   align-items: center;
@@ -45,11 +45,11 @@ export const ContextMenuOption: React.FC<Props> = ({
 }) => (
   <Container
     onClick={onClick}
-    {...href && {
+    {...(href && {
       href,
       target: '_blank',
       rel: 'noopener noreferrer',
-    }}
+    })}
     {...rest}
   >
     {iconName && <Icons mx={6} color="gray.medium" name={iconName} />}

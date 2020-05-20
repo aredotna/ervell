@@ -40,7 +40,7 @@ export const activeMixin = css`
   border-left: 1px solid ${x => x.theme.colors.gray.regular};
   border-right: 1px solid ${x => x.theme.colors.gray.regular};
   color: ${x => x.theme.colors.gray.bold};
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 
   ${constants.media.mobile`
     border: none;
