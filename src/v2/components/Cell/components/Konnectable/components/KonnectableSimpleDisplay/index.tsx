@@ -28,7 +28,7 @@ const Snippet = styled(Box)`
     width: 100%;
     background: linear-gradient(
       ${props => props.theme.colors.utility.transparent} 0%,
-      white 100%
+      ${props => props.theme.colors.background} 100%
     );
   }
 `

@@ -42,8 +42,8 @@ export const errorMixin = css`
 `
 
 export const focusMixin = css`
-  background-color: ${props => props.theme.colors.gray.hint};
-  color: black;
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.gray.bold};
   ${preset(borders, { border: '1px solid' })}
   ${preset(borderColor, { borderColor: 'gray.bold' })}
   ${color}
@@ -54,11 +54,11 @@ export const defaultMixin = css`
   appearance: none;
   box-sizing: border-box;
   display: block;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   line-height: ${LINE_HEIGHTS.input};
   ${preset(fontFamily, { font: 'sans' })}
   ${preset(width, { width: '100%' })}
-  ${preset(color, { color: 'black' })}
+  ${preset(color, { color: 'gray.bold' })}
   ${preset(fontSize, { f: 4 })}
   ${preset(space, { px: 5, py: 4 })}
   ${preset(borders, { border: '1px solid' })}
@@ -66,7 +66,7 @@ export const defaultMixin = css`
   ${antialiased}
 
   ::placeholder {
-    ${preset(color, { color: 'black' })}
+    ${preset(color, { color: 'gray.bold' })}
     opacity: 0.5;
     font-family: inherit;
   }

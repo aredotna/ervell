@@ -17275,7 +17275,7 @@ styled-components@5.0.0:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
-styled-system@^2.3.2:
+styled-system@2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-2.3.2.tgz#b5dbc7d197b41dd06b80b16e17b52503363a5aac"
   integrity sha512-9B2t6nQm8jLBZejlWcCxSHCsAElGiEwcn+rQmvvpgJH/UyVI89wkiPSMSodMLwbMEov5Rx86cIEmXc3nJaJRuw==

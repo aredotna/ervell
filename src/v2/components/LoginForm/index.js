@@ -188,7 +188,7 @@ export default class LoginForm extends Component {
         )}
 
         <AuthForm.Submit>
-          <Button type="submit" bg="white">
+          <Button type="submit" bg="background">
             {
               {
                 resting: 'Log in',

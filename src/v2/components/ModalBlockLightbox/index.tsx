@@ -31,9 +31,9 @@ const Fullscreen = styled(Link).attrs({
   user-select: none;
 
   &:hover {
-    border-color: black;
+    border-color: ${props => props.theme.colors.gray.bold};
     svg {
-      fill: black;
+      fill: ${props => props.theme.colors.gray.bold};
     }
   }
 `
@@ -184,7 +184,7 @@ export const ModalBlockLightbox: React.FC<ModalBlockLightboxProps> = ({
         <Fullscreen
           p={4}
           onClick={toggleLayout}
-          bg={{ DEFAULT: 'white' }[layout]}
+          bg={{ DEFAULT: 'background' }[layout]}
           borderColor={
             {
               DEFAULT: 'gray.semiLight',

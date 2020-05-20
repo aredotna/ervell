@@ -27,7 +27,7 @@ const Container = styled(Box).attrs({
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 
   &:after {
     margin: -1px;

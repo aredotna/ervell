@@ -10,7 +10,7 @@ const AvatarContainer = styled(AvatarBox)`
   height: auto;
   max-width: 140px;
   max-height: 140px;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 `
 
 export default class Avatar extends Component {

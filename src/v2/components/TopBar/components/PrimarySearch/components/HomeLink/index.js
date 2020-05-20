@@ -21,7 +21,7 @@ const Container = styled.a`
 
   &:hover {
     svg {
-      fill: black;
+      fill: ${props => props.theme.colors.gray.bold};
     }
   }
 `

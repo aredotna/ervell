@@ -70,7 +70,7 @@ export const wrapWithProviders = (client = window.__APOLLO_CLIENT__) => (
   props = {}
 ) => (
   <ApolloProvider client={client}>
-    <Themed>
+    <Themed theme="default">
       <Component {...props} />
     </Themed>
   </ApolloProvider>

@@ -15,7 +15,7 @@ const Anchor = styled.a.attrs({
 
   &:hover,
   &:hover > * {
-    color: black;
+    color: ${props => props.theme.colors.gray.bold};
   }
 `
 

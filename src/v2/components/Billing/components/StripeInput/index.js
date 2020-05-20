@@ -9,13 +9,13 @@ export default Component => styled(Component).attrs({
     base: {
       fontSize: theme.fontSizesIndexed.root.desktop,
       fontFamily: theme.fonts.sans,
-      color: 'black',
       '::placeholder': {
         color: theme.colors.utility.middleGray,
       },
     },
   },
 })`
+  color: ${props => props.theme.colors.gray.bold};
   ${inputMixins.defaultMixin}
   &.StripeElement--focus {
     ${inputMixins.focusMixin}

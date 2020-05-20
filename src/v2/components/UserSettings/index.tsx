@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import gql from 'graphql-tag'
 import { Query, Mutation, MutationFunction as MutationFn } from 'react-apollo'
 import { Form, Field } from 'react-final-form'
 import { FORM_ERROR } from 'final-form'
 import axios from 'axios'
+import { useApolloClient } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
 import Alert from 'v2/components/UI/Alert'
@@ -76,6 +78,20 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
     me.home_path !== `/${me.slug}`
   const homePath = isCustom ? 'custom' : me.home_path
 
+  const client = useApolloClient()
+  const results = client.readQuery({
+    query: gql`
+      query ThemeQuery {
+        sharify @client {
+          theme: THEME
+        }
+      }
+    `,
+  })
+
+  const theme = results.sharify && results.sharify.theme
+  const darkModeEnabled = theme === 'dark'
+
   const handleSubmit = values => {
     const variables = {
       ...values,
@@ -90,7 +106,10 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
       .then(() => {
         return axios.get('/me/refresh')
       })
-      .then(() => true)
+      .then(() => {
+        window.location.reload()
+        true
+      })
       .catch(err => {
         const mappedErrors = mapErrors(err)
         const errors = {
@@ -567,10 +586,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
 
               <ContextDivider />
 
-              <Field
-                name="darkmode"
-                initialValue={document.documentElement.dataset.theme === 'dark'}
-              >
+              <Field name="darkmode" initialValue={darkModeEnabled}>
                 {props => {
                   return (
                     <>
@@ -582,6 +598,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                           onSelect={value => {
                             const theme = value === true ? 'dark' : 'default'
                             toggleOrSetTheme(theme)
+                            props.input.onChange(value)
                           }}
                         >
                           <RadioOptions.Option value={true}>

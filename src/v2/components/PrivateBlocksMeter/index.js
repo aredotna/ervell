@@ -27,7 +27,7 @@ export default class PrivateBlocksMeter extends Component {
         <Meter
           startColor="gray.light"
           endColor="gray.light"
-          bg="white"
+          bg="background"
           amount={amount}
           limit={non_premium_private_connections_limit}
         >

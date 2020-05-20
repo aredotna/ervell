@@ -7,7 +7,7 @@ export default styled(LinkUnlessCurrent)`
   color: ${props => props.theme.colors.gray.regular};
 
   &:hover {
-    color: black;
+    color: ${props => props.theme.colors.gray.bold};
   }
 
   &:not([href]) {

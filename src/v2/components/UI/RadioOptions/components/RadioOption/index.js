@@ -34,7 +34,8 @@ const Container = styled(Box).attrs({
 const Radio = styled(Box).attrs({
   mr: 6,
 })`
-  border: ${props => divide(props.size, 4)} solid white;
+  border: ${props => divide(props.size, 4)} solid
+    ${props => props.theme.colors.background};
   box-shadow: 0 0 0 1px ${props => props.theme.colors.gray.base};
   border-radius: 50%;
   width: ${props => props.size};

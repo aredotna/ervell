@@ -31,7 +31,7 @@ export const Divider = styled(Box).attrs({
   mr: constants.doubleBlockGutter,
 })`
   height: 3em; // 8
-  box-shadow: 0 1em 1em -1.33em black;
+  box-shadow: 0 1em 1em -1.33em ${props => props.theme.colors.gray.bold};
 `
 
 export const ChannelContentsFilter = ({ channel }) => {

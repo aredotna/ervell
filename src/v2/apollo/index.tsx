@@ -2,6 +2,7 @@ import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
 import Cookies from 'cookies-js'
+import gql from 'graphql-tag'
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
@@ -166,15 +167,29 @@ if (isClientSide) {
 export const wrapWithProviders = (
   client = isClientSide && window.__APOLLO_CLIENT__,
   helmetContext = {}
-) => (Component, props = {}) => (
-  <HelmetProvider context={helmetContext}>
-    <ApolloProvider client={client}>
-      <Themed>
-        <Component {...props} />
-      </Themed>
-    </ApolloProvider>
-  </HelmetProvider>
-)
+) => (Component, props = {}) => {
+  const results = client.readQuery({
+    query: gql`
+      query ThemeQuery {
+        sharify @client {
+          theme: THEME
+        }
+      }
+    `,
+  })
+
+  const theme = results.sharify && results.sharify.theme
+
+  return (
+    <HelmetProvider context={helmetContext}>
+      <ApolloProvider client={client}>
+        <Themed theme={theme || 'default'}>
+          <Component {...props} />
+        </Themed>
+      </ApolloProvider>
+    </HelmetProvider>
+  )
+}
 
 export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
   if (!mountNode) return null

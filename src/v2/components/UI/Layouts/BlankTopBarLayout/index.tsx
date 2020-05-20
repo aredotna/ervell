@@ -10,7 +10,7 @@ const BlankTopBar = styled.div`
   left: 0;
   width: 100%;
   height: ${props => props.theme.constantValues.topBarHeight};
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
   z-index: 1;
 `
 

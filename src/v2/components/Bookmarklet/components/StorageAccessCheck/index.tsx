@@ -8,7 +8,7 @@ import { GenericButton } from 'v2/components/UI/GenericButton'
 const Button = styled(GenericButton).attrs({
   py: 6,
   f: 4,
-  bg: 'white',
+  bg: 'background',
 })`
   &:hover {
     background-color: transparent;

@@ -44,7 +44,7 @@ const Label = styled.div`
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: ${props => props.theme.colors.background};
 
   font-family: 'Arial Narrow', 'Arial', sans-serif;
   font-weight: bold;

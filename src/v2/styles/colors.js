@@ -6,17 +6,19 @@ const COLORS = {
     private: '#b60202',
   },
   state: {
-    premium: '#00c5ff',
+    premium: '#00BBF7',
     alert: 'rgb(255, 94, 0)',
     editable: '#fdffdb',
     neutral: '#fdffdb', // alias editable
     investor: 'rgb(183, 158, 110)',
     supporter: '#00a06d',
+    highlight: `rgb(250, 255, 195)`,
   },
   gray: {
-    bold: '#333',
+    extraBold: '#000',
+    bold: '#333333',
     base: '#585858', // Matches `textgray`
-    semiBold: '#6d6d6d',
+    semiBold: '#6A6A6A',
     medium: '#999',
     regular: '#ccc',
     semiLight: '#e8e8e8',
@@ -33,6 +35,7 @@ const COLORS = {
   white: 'white',
   black: 'black',
   middleGray: '#929292',
+  background: 'white',
 }
 
 const {

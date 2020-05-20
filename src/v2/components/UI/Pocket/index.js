@@ -38,7 +38,7 @@ const Content = styled(Text).attrs({
     font-weight: bold;
 
     &:hover {
-      color: black;
+      color: ${props => props.theme.colors.gray.bold};
     }
   }
 `
