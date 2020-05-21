@@ -28,10 +28,6 @@ console.time('getting_started')
 app.use(require('../apps/getting_started'))
 console.timeEnd('getting_started')
 
-console.time('tools')
-app.use(require('../apps/tools'))
-console.timeEnd('tools')
-
 console.time('util')
 app.use(require('../apps/util'))
 console.timeEnd('util')
