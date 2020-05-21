@@ -21,6 +21,8 @@ import BlockPage from '../../v2/pages/block'
 import SettingsPage from 'v2/pages/settings'
 // Tools
 import { ToolsPage } from 'v2/pages/tools'
+// Accept invite
+import { AcceptInvitePage } from 'v2/pages/accept_invite/AcceptInvitePage'
 
 // Block modal
 import Modal from 'v2/components/UI/Modal/Portal'
@@ -61,7 +63,6 @@ export const Routes = () => {
         <Route exact path="/" component={FeedPage} />
 
         {/* Search */}
-
         <Route
           exact
           path="/search/:term/:view?"
@@ -93,6 +94,14 @@ export const Routes = () => {
           render={parseRoute(({ params }) => {
             return <ToolsPage tab={params.view || 'bookmarklet'} />
           })}
+        />
+
+        {/* Accept group invite */}
+        <Route
+          path="/group/:id/invite/:code"
+          render={parseRoute(({ params }) => (
+            <AcceptInvitePage code={params.code} />
+          ))}
         />
 
         {/* Profile */}
