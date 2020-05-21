@@ -19,6 +19,8 @@ import EmbeddedChannelPage from '../../v2/pages/channel/EmbeddedChannelPage'
 import BlockPage from '../../v2/pages/block'
 // Settings
 import SettingsPage from 'v2/pages/settings'
+// Tools
+import { ToolsPage } from 'v2/pages/tools'
 
 // Block modal
 import Modal from 'v2/components/UI/Modal/Portal'
@@ -77,6 +79,22 @@ export const Routes = () => {
           })}
         />
 
+        {/* Settings */}
+        <Route
+          path="/settings/:view(billing|group_billing|perks)?"
+          render={parseRoute(({ params }) => (
+            <SettingsPage tab={params.view || 'general'} />
+          ))}
+        />
+
+        {/* Tools */}
+        <Route
+          path="/tools/:view(bookmarklet|find-friends|add-via-email|send-invitation)?"
+          render={parseRoute(({ params }) => {
+            return <ToolsPage tab={params.view || 'bookmarklet'} />
+          })}
+        />
+
         {/* Profile */}
         <Route
           exact
@@ -118,14 +136,6 @@ export const Routes = () => {
           render={parseRoute(({ params }) => {
             return <ChannelPage id={params.id} key={params.id} />
           })}
-        />
-
-        {/* Settings */}
-        <Route
-          path="/settings:view(billing|group_billing|perks)?"
-          render={parseRoute(({ params }) => (
-            <SettingsPage tab={params.view || 'general'} />
-          ))}
         />
       </Switch>
 
