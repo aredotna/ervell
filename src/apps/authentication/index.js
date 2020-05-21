@@ -83,11 +83,5 @@ app
     ensureLoggedInMiddleware,
     findFriendsCallback
   )
-  .get(
-    '/find-friends/callback',
-    apolloMiddleware,
-    ensureLoggedInMiddleware,
-    findFriendsCallback
-  )
 
 module.exports = app

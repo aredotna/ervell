@@ -32,6 +32,7 @@ App.get(
   },
   ...resolve
 )
+  .get('/group/:id/invite/:code', ensureLoggedIn, ...resolve)
   .get('/tools/*', ensureLoggedIn, ...resolve)
   .get('/', homePathMiddleware, ...resolve)
   .get('*', ...resolve)
