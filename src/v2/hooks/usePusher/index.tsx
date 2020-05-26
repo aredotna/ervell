@@ -19,7 +19,7 @@ export const setupPusherChannel = socketId => {
   const socket = initPusherClient()
   const channel = socket && socket.subscribe(socketId)
 
-  return channel
+  return { channel, socket }
 }
 
 export const usePusher = ({
@@ -31,27 +31,17 @@ export const usePusher = ({
   const [payloads, setPayloads] = useState([])
 
   useEffect(() => {
-    channel.bind(
-      'created',
-      (payload): void => {
-        const parsed = parsePayload(payload)
-        setPayloads(prevPayloads =>
-          normalizePayloads([parsed, ...prevPayloads])
-        )
-        onCreated(parsed)
-      }
-    )
+    channel.bind('created', (payload): void => {
+      const parsed = parsePayload(payload)
+      setPayloads(prevPayloads => normalizePayloads([parsed, ...prevPayloads]))
+      onCreated(parsed)
+    })
 
-    channel.bind(
-      'updated',
-      (payload): void => {
-        const parsed = parsePayload(payload)
-        setPayloads(prevPayloads =>
-          normalizePayloads([...prevPayloads, parsed])
-        )
-        onUpdated(parsed)
-      }
-    )
+    channel.bind('updated', (payload): void => {
+      const parsed = parsePayload(payload)
+      setPayloads(prevPayloads => normalizePayloads([...prevPayloads, parsed]))
+      onUpdated(parsed)
+    })
 
     return () => {
       channel.unbind()
