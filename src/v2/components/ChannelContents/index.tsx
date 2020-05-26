@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo, useCallback } from 'react'
+import React, { memo, useState, useMemo, useCallback, useEffect } from 'react'
 import Waypoint from 'react-waypoint'
 import { ApolloClient } from 'apollo-client'
 import { graphql, withApollo } from 'react-apollo'
@@ -29,6 +29,7 @@ interface Props {
   chunkSize?: number
   channel: ChannelContentsData
   pusherChannel?: any
+  socket?: any
 }
 
 interface ChannelContentsProps extends Props {
@@ -43,6 +44,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     client,
     moveConnectable,
     pusherChannel,
+    socket,
     ...rest
   }) => {
     // Used to load/unload waypoints
@@ -117,6 +119,14 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
         parsePayload,
       })
     }
+
+    useEffect(() => {
+      return () => {
+        if (pusherChannel) {
+          socket.unsubscribe(pusherChannel.name)
+        }
+      }
+    }, [pusherChannel, socket])
 
     const chunked = useMemo(() => chunk(connectables, chunkSize), [
       connectables,
