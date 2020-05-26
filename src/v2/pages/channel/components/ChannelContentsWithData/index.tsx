@@ -48,20 +48,24 @@ export const ChannelContentsWithData: React.FC<Props> = WithIsSpiderRequesting<
         const { channel: clientChannel } = data
         const channel = { ...serverChannel, ...clientChannel }
 
-        let pusherChannel
+        const shouldSubscribeToPusher =
+          !isSpiderRequesting && channel.can.add_to
 
-        if (channel.can.add_to) {
-          pusherChannel = setupPusherChannel(
+        if (shouldSubscribeToPusher) {
+          const { channel: pusherChannel, socket } = setupPusherChannel(
             `channel-${NODE_ENV}-${channel.id}`
+          )
+
+          return (
+            <ChannelContents
+              channel={channel}
+              socket={socket}
+              pusherChannel={pusherChannel}
+            />
           )
         }
 
-        return (
-          <ChannelContents
-            channel={channel}
-            pusherChannel={!isSpiderRequesting && pusherChannel}
-          />
-        )
+        return <ChannelContents channel={channel} />
       }}
     </Query>
   )
