@@ -124,6 +124,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       return () => {
         if (pusherChannel) {
           socket.unsubscribe(pusherChannel.name)
+          socket.disconnect()
         }
       }
     }, [pusherChannel, socket])
