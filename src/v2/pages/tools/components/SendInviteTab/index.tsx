@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useMutation } from 'react-apollo'
 import { useForm, useField } from 'react-final-form-hooks'
 import { FORM_ERROR } from 'final-form'
-import isEmail from 'validator/lib/isEmail'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -64,9 +63,6 @@ export const SendInviteTab: React.FC = () => {
   const { form, handleSubmit, submitting, pristine } = useForm({
     initialValues: { email: '' },
     onSubmit,
-    validate: values => {
-      return { email: !isEmail(values.email) }
-    },
   })
 
   const emailField = useField('email', form)
