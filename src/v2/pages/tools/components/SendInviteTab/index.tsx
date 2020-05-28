@@ -64,7 +64,9 @@ export const SendInviteTab: React.FC = () => {
   const { form, handleSubmit, submitting, pristine } = useForm({
     initialValues: { email: '' },
     onSubmit,
-    validate: values => ({ email: isEmail(values.email) }),
+    validate: values => {
+      return { email: !isEmail(values.email) }
+    },
   })
 
   const emailField = useField('email', form)
