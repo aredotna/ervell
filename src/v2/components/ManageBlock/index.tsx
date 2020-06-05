@@ -19,7 +19,7 @@ import {
 
 import { MarkdownCheatsheet } from 'v2/components/ManageBlock/components/MarkdownCheatsheet'
 import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage'
-import BlockLightboxLink from 'v2/components/BlockLightbox/components/BlockLightboxLink'
+import { BlockLightboxLink } from 'v2/components/BlockLightbox/components/BlockLightboxLink'
 import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment'
 import BlockLightboxEmbed from 'v2/components/BlockLightbox/components/BlockLightboxEmbed'
 import BlockLightboxPending from 'v2/components/BlockLightbox/components/BlockLightboxPending'
