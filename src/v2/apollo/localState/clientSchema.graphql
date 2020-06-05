@@ -36,6 +36,8 @@ type ClientSerializedMe {
   avatar: String
   authentication_token: String
   is_premium: Boolean
+  is_lifetime_premium: Boolean
+  is_supporter: Boolean
   slug: String
   hide_notification_count: Boolean
 }
