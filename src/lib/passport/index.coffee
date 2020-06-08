@@ -28,6 +28,8 @@ CONFIG =
     'post_address'
     'show_tour'
     'is_premium'
+    'is_lifetime_premium'
+    'is_supporter'
     'channel_count'
     'exclude_from_indexes'
     'following_count'

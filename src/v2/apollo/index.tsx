@@ -136,6 +136,8 @@ export const initApolloClient = ({
         avatar: null,
         authentication_token: null,
         is_premium: null,
+        is_lifetime_premium: null,
+        is_supporter: null,
         slug: null,
         hide_notification_count: false,
         ...serializedMe,

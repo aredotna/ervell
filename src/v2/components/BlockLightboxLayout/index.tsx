@@ -5,6 +5,7 @@ import Box from 'v2/components/UI/Box'
 
 export type LightboxContext = 'MODAL' | 'PAGE'
 export type LightboxLayout = 'DEFAULT' | 'FULLSCREEN'
+export type LightboxLinkView = 'SCREENSHOT' | 'READER'
 
 interface BlockLightboxLayoutProps {
   context?: LightboxContext
@@ -62,10 +63,11 @@ export const ContentContainer = styled(Box).attrs({
 
 interface TextBoxContainerProps {
   onClick?: (e: any) => void
+  border?: boolean
 }
 
 export const TextBoxContainer: React.FC<BlockLightboxLayoutProps &
-  TextBoxContainerProps> = ({ children, layout, onClick }) => {
+  TextBoxContainerProps> = ({ children, layout, onClick, border = true }) => {
   return (
     <Box height="100%" width="100%">
       <Box
@@ -80,8 +82,9 @@ export const TextBoxContainer: React.FC<BlockLightboxLayoutProps &
           width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
           maxWidth="55em"
           bg={{ DEFAULT: 'background' }[layout]}
-          border="1px solid"
+          border={border && '1px solid'}
           borderColor={
+            border &&
             { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]
           }
           px={7}

@@ -15,6 +15,8 @@ export default user => {
   const name = `${user.first_name} ${user.last_name}`
 
   const hide_notification_count = user.hide_notification_count || false
+  const is_lifetime_premium = user.is_lifetime_premium || false
+  const is_supporter = user.is_supporter || false
 
   return {
     id: user.id,
@@ -24,6 +26,8 @@ export default user => {
     slug: user.slug,
     authentication_token: user.authentication_token,
     is_premium: user.is_premium,
+    is_lifetime_premium,
+    is_supporter,
     hide_notification_count,
   }
 }
