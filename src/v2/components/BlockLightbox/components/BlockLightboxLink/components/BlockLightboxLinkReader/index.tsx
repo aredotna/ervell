@@ -41,6 +41,10 @@ const TextContainer = styled(Box).attrs({
   img {
     max-width: 100%;
   }
+
+  li p:first-child {
+    display: inline;
+  }
 `
 
 const ReaderText = styled(SansSerifText)`
@@ -141,18 +145,27 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
         </Box>
       )}
 
-      {canonical_link.content && (
+      {canonical_link && canonical_link.content && (
         <ReaderText
           dangerouslySetInnerHTML={{
             __html: canonical_link.content,
           }}
         />
       )}
-      {!canonical_link.content && (
+      {(!canonical_link ||
+        !canonical_link.content ||
+        canonical_link.state === 'failed') && (
         <ErrorContainer>
-          <Text f={4} pt={7}>
-            No link content found. Do you want to try extracting the content
-            again?
+          <Text f={4} p={5} pt={7} textAlign="center">
+            {
+              {
+                pending:
+                  'This link has not been fully processed yet. Do you want to run a text extraction?',
+                failed:
+                  'It looks like the last time we tried extracting content the process failed. Do you want to try extracting the content again?',
+                remote_processing: 'Performing content extraction...',
+              }[canonical_link.state]
+            }
           </Text>
           <GenericButton
             mt={7}
