@@ -8,23 +8,23 @@ const COLORS = {
   state: {
     premium: '#17B0E2',
     alert: '#B08064',
-    editable: '#50483F',
-    neutral: '#50483F', // alias editable
+    editable: 'rgba(247, 225, 199, 0.14)',
+    neutral: 'rgba(247, 225, 199, 0.14)', // alias editable
     investor: '#F1CE57',
     supporter: '#6BD2B6',
-    highlight: `#696b51`,
+    highlight: `rgba(247, 225, 199, 0.14)`,
   },
   gray: {
     extraBold: '#fff',
-    bold: '#eee',
-    base: '#a7a7a7', // Matches `textgray`
-    semiBold: '#929292',
-    medium: '#666',
-    regular: '#333',
-    semiLight: '#171717',
-    light: '#111111',
-    hint: '#080808',
-    block: '#cccccc',
+    bold: '#D3D3D3',
+    base: '#D3D3D3', // Matches `textgray`
+    semiBold: '#D3D3D3',
+    medium: '#6E6E6E',
+    regular: '#2F2F2F',
+    semiLight: '#2F2F2F',
+    light: '#2F2F2F',
+    hint: '#131313',
+    block: '#D3D3D3',
     input: '#080a0b',
   },
   utility: {
