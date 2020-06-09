@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import readerCanonicalLink from '../fragments/readerCanonicalLink'
 
 export default gql`
   mutation regenerateCanonicalLink($block_id: ID!) {
@@ -11,18 +12,11 @@ export default gql`
 
         ... on Link {
           canonical_link {
-            __typename
-            id
-            url
-            title
-            content
-            provider_name
-            authors
-            published_at(format: "%B %-d, %Y")
-            state
+            ...ReaderCanonicalLink
           }
         }
       }
     }
   }
+  ${readerCanonicalLink}
 `

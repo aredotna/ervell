@@ -48,7 +48,7 @@ export default class BlockPage extends PureComponent {
                 <React.Fragment>
                   <BlockPageMetaTags block={block} />
 
-                  <BlockLightbox block={block} />
+                  <BlockLightbox block={block} layout="DEFAULT" />
 
                   <MobileOrChildren route="block" id={block.id}>
                     <div />

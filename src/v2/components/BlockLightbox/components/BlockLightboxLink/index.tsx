@@ -16,7 +16,6 @@ export const BlockLightboxLink: React.FC<BlockLightboxLinkProps> = ({
   linkViewMode,
   ...rest
 }) => {
-  console.log('BlockLightboxLink', { linkViewMode })
   const Content = {
     screenshot: props => <BlockLightboxLinkScreenshot {...props} />,
     reader: props => <BlockLightboxLinkReader {...props} />,
