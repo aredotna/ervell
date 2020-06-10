@@ -36,7 +36,6 @@ const Container = styled(Box)`
 
 export const BlockLightboxLinkScreenshot: React.FC<BlockLightboxLinkProps> = ({
   block,
-  layout,
 }) => {
   return (
     <Box
@@ -53,9 +52,7 @@ export const BlockLightboxLinkScreenshot: React.FC<BlockLightboxLinkProps> = ({
         height="95%"
         width="90%"
         border="1px solid"
-        borderColor={
-          { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]
-        }
+        borderColor="gray.light"
         borderRadius="0.25em"
       >
         <a
@@ -68,10 +65,8 @@ export const BlockLightboxLinkScreenshot: React.FC<BlockLightboxLinkProps> = ({
             py={4}
             display="flex"
             borderBottom="1px solid"
-            borderColor={
-              { DEFAULT: 'gray.light', light: 'gray.semiBold' }[layout]
-            }
-            bg={{ DEFAULT: 'background', FULLSCREEN: 'gray.bold' }[layout]}
+            borderColor="gray.light"
+            bg="background"
           >
             <Icons
               name="Link"

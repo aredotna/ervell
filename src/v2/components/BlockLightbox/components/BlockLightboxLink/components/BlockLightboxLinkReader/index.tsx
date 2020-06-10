@@ -7,11 +7,14 @@ import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
 import GenericButton from 'v2/components/UI/GenericButton'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
-import { TextBoxContainer } from 'v2/components/BlockLightboxLayout'
 
 import Truncate from 'v2/components/UI/Truncate'
 
 import { BlockLightboxLinkProps } from 'v2/components/BlockLightbox/components/BlockLightboxLink'
+import {
+  BlockLightboxLayoutProps,
+  TextBoxContainerProps,
+} from 'v2/components/BlockLightboxLayout'
 
 import {
   CanonicalLinkForReader as ReaderData,
@@ -26,20 +29,71 @@ import {
 import BLOCK_CANONICAL_LINK_READER_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/queries/canonicalLinkReader'
 import REGENERATE_CANONICAL_LINK_MUTATION from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/mutations/regenerateCanonicalLinkMutation'
 
+export const ReaderContainer: React.FC<BlockLightboxLayoutProps &
+  TextBoxContainerProps> = ({ children, layout, onClick, border = true }) => {
+  return (
+    <Box height="100%" width="100%">
+      <Box
+        height={['auto', '100%']}
+        width="100%"
+        pt={6}
+        pr={[4, 9]}
+        pb={[6, 7]}
+        pl={[3, 8]}
+        overflowScrolling
+      >
+        <Box
+          minHeight="100%"
+          width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
+          maxWidth="55em"
+          bg="background"
+          border={border && '1px solid'}
+          borderColor={
+            border &&
+            { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]
+          }
+          px={7}
+          py={6}
+          mx="auto"
+          overflow="hidden"
+          position="relative"
+          onClick={onClick}
+        >
+          {children}
+        </Box>
+      </Box>
+    </Box>
+  )
+}
 const TextContainer = styled(Box).attrs({
   p: 3,
 })`
   font-family: ${props => props.theme.fonts.serif} !important;
   font-size: 18px;
+  line-height: 1.5;
 
   p,
   li,
-  ol {
-    font-size: 1.35rem !important;
+  ol,
+  blockquote {
+    font-size: 1.25rem !important;
   }
 
-  img {
+  img,
+  iframe,
+  figure {
     max-width: 100%;
+    height: auto;
+    margin: ${props => props.theme.space[7]} auto;
+    display: block;
+  }
+
+  svg {
+    display: none;
+  }
+
+  figure {
+    text-align: center;
   }
 
   li p:first-child {
@@ -63,10 +117,11 @@ const Title = styled(Text).attrs({
   f: 8,
   font: 'serif',
   color: 'hover',
+  lineHeight: 0,
 })``
 
 const Metadata = styled(Box).attrs({
-  py: 5,
+  py: 4,
 })`
   display: flex;
   flex-direction: row;
@@ -114,6 +169,8 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
     }
   }, [block.canonical_link, stopPolling])
 
+  const state = (canonical_link && canonical_link.state) || 'pending'
+
   return (
     <TextContainer>
       {canonical_link && canonical_link.title && (
@@ -129,12 +186,6 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
                 {canonical_link.provider_name}
               </a>{' '}
             </MetadataLine>
-            {canonical_link.authors && canonical_link.authors !== '[]' && (
-              <>
-                <MetadataLine>•</MetadataLine>
-                <MetadataLine>{canonical_link.authors}</MetadataLine>
-              </>
-            )}
             {canonical_link.published_at && (
               <>
                 <MetadataLine>•</MetadataLine>
@@ -152,9 +203,7 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
           }}
         />
       )}
-      {(!canonical_link ||
-        !canonical_link.content ||
-        canonical_link.state === 'failed') && (
+      {(!canonical_link || !canonical_link.content || state === 'failed') && (
         <ErrorContainer>
           <Text f={4} p={5} pt={7} textAlign="center">
             {
@@ -164,7 +213,7 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
                 failed:
                   'It looks like the last time we tried extracting content the process failed. Do you want to try extracting the content again?',
                 remote_processing: 'Performing content extraction...',
-              }[canonical_link.state]
+              }[state]
             }
           </Text>
           <GenericButton
@@ -190,7 +239,6 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
 
 export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
   block,
-  layout,
 }) => {
   const { data, loading, error, startPolling, stopPolling } = useQuery<
     ReaderData,
@@ -200,22 +248,20 @@ export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
   })
 
   return (
-    <TextBoxContainer layout="DEFAULT" border={false}>
+    <ReaderContainer layout="DEFAULT" border={false}>
       <a
         href={block.source_url}
         rel="noopener nofollow noreferrer"
         target="_blank"
       >
         <Box
-          px={6}
-          py={4}
+          px={4}
+          py={5}
           display="flex"
-          border="2px solid"
+          border="1px solid"
           borderRadius="2px"
-          borderColor={
-            { DEFAULT: 'gray.light', light: 'gray.semiBold' }[layout]
-          }
-          bg={{ DEFAULT: 'background', FULLSCREEN: 'gray.bold' }[layout]}
+          borderColor="gray.light"
+          bg="background"
           justifyContent="space-between"
         >
           <Box display="flex">
@@ -227,14 +273,14 @@ export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
               flexShrink={0}
             />
 
-            <Text f={2} font="mono" color="gray.semiBold" breakWord>
+            <Text f={1} font="mono" color="rgb(153, 153, 153)" breakWord>
               <u>
                 <Truncate length={40}>{block.source_url}</Truncate>
               </u>
             </Text>
           </Box>
           <Box>
-            <Text f={2} font="mono">
+            <Text f={1} font="mono">
               {loading && 'Loading...'}
             </Text>
           </Box>
@@ -248,6 +294,6 @@ export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
           stopPolling={stopPolling}
         />
       )}
-    </TextBoxContainer>
+    </ReaderContainer>
   )
 }

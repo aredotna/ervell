@@ -21,6 +21,7 @@ const BetaMessage = styled(Box).attrs({
 
 const Option = styled.a`
   cursor: pointer;
+  color: ${props => props.theme.colors.gray.regular} !important;
   &:before {
     content: '○ ';
   }
@@ -28,6 +29,8 @@ const Option = styled.a`
   ${props =>
     props.selected &&
     `
+    color: ${props.theme.colors.gray.semiBold} !important;
+
     &:before {
       content: '● ';
     }
