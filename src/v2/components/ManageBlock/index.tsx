@@ -27,6 +27,8 @@ import BlockLightboxPending from 'v2/components/BlockLightbox/components/BlockLi
 import UPDATE_BLOCK_MUTATION from 'v2/components/ManageBlock/mutations/updateBlock'
 
 import { ManageBlock as Block } from '__generated__/ManageBlock'
+import { BlockLightbox, BlockLightbox_Link } from '__generated__/BlockLightbox'
+
 import {
   updateBlockMutation,
   updateBlockMutationVariables,
@@ -91,12 +93,30 @@ const DescriptionField = styled(Textarea).attrs({
 `
 
 interface ManageBlockProps {
-  block: Block
+  block: Block & BlockLightbox
   updateBlock?: (e?: any) => void
   onDone?: (e?: any) => void
   onChangePending?: () => void
   autoFocus?: 'title' | 'description' | 'body'
 }
+
+const MemoizedContent = React.memo<{ block: Block & BlockLightbox }>(
+  props =>
+    ({
+      Image: <BlockLightboxImage {...props} />,
+      Link: (
+        <BlockLightboxLink
+          linkViewMode="screenshot"
+          layout="DEFAULT"
+          block={props.block as BlockLightbox_Link}
+        />
+      ),
+      Attachment: <BlockLightboxAttachment {...props} />,
+      Embed: <BlockLightboxEmbed layout="DEFAULT" {...props} />,
+      PendingBlock: <BlockLightboxPending {...props} />,
+    }[props.block.__typename]),
+  () => true
+)
 
 export const ManageBlock: React.FC<ManageBlockProps> = ({
   block,
@@ -159,14 +179,6 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
   const titleField = useField('title', form)
   const descriptionField = useField('description', form)
 
-  const Content = {
-    Image: props => <BlockLightboxImage {...props} />,
-    Link: props => <BlockLightboxLink {...props} />,
-    Attachment: props => <BlockLightboxAttachment {...props} />,
-    Embed: props => <BlockLightboxEmbed {...props} />,
-    PendingBlock: props => <BlockLightboxPending {...props} />,
-  }[block.__typename]
-
   return (
     <Container layout="DEFAULT">
       <form onSubmit={handleSubmit}>
@@ -188,7 +200,7 @@ export const ManageBlock: React.FC<ManageBlockProps> = ({
               </TextBoxContainer>
             )}
 
-            {block.__typename !== 'Text' && <Content block={block} />}
+            {block.__typename !== 'Text' && <MemoizedContent block={block} />}
           </ContentContainer>
           <SidebarContainer
             display="flex"
