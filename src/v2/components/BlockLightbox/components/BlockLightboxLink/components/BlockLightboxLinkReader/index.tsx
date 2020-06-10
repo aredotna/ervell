@@ -116,7 +116,7 @@ const ErrorContainer = styled(Box)`
 const Title = styled(Text).attrs({
   f: 8,
   font: 'serif',
-  color: 'hover',
+  color: 'gray.block',
   lineHeight: 0,
 })``
 
