@@ -17,9 +17,12 @@ import { MetadataContainer } from 'v2/components/BlockLightboxLayout'
 import { truncate } from 'v2/components/UI/Truncate'
 
 import { BlockLightbox as Block } from '__generated__/BlockLightbox'
+import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/BlockLightbox'
 
 interface BlockLightboxMetadataPaneProps extends SpaceProps {
   block: Block
+  linkViewMode: LinkViewMode
+  onLinkViewModeChange: OnLinkViewModeChange
 }
 
 export default class BlockLightboxMetadataPane extends PureComponent<
@@ -59,7 +62,7 @@ export default class BlockLightboxMetadataPane extends PureComponent<
 
   render() {
     const { mode, autoFocus } = this.state
-    const { block, ...rest } = this.props
+    const { block, linkViewMode, onLinkViewModeChange, ...rest } = this.props
 
     return (
       <MetadataContainer {...rest}>
@@ -170,7 +173,11 @@ export default class BlockLightboxMetadataPane extends PureComponent<
         </Header>
 
         <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
-          <BlockLightboxActions block={block} />
+          <BlockLightboxActions
+            block={block}
+            linkViewMode={linkViewMode}
+            onLinkViewModeChange={onLinkViewModeChange}
+          />
         </Text>
 
         {this.canManage && (

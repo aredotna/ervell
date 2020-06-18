@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState, useCallback } from 'react'
 import { unescape } from 'underscore'
 
 import constants from 'v2/styles/constants'
@@ -23,35 +23,51 @@ interface BlockLightboxProps {
   children: React.ReactNode
 }
 
-export default class BlockLightbox extends PureComponent<BlockLightboxProps> {
-  static defaultProps = {
-    layout: 'DEFAULT',
-    context: 'PAGE',
-    children: null,
-  }
+export type LinkViewMode = 'screenshot' | 'reader'
+export type OnLinkViewModeChange = (mode: LinkViewMode) => void
 
-  render() {
-    const { block, layout, context, children, ...rest } = this.props
+const BlockLightbox: React.FC<BlockLightboxProps> = ({
+  block,
+  layout,
+  context,
+  children,
+  ...rest
+}) => {
+  const [linkViewMode, setLinkViewMode] = useState<LinkViewMode>('screenshot')
 
-    return (
-      <>
-        <Container {...rest}>
-          {block.title && <Title>{unescape(block.title)}</Title>}
+  const onLinkViewModeChange = useCallback<OnLinkViewModeChange>(
+    (mode: LinkViewMode) => {
+      setLinkViewMode(mode)
+    },
+    [setLinkViewMode]
+  )
 
-          <SplitPane context={context} layout={layout}>
-            <BlockLightboxContentPane block={block} layout={layout}>
-              {children}
-            </BlockLightboxContentPane>
+  return (
+    <>
+      <Container {...rest}>
+        {block.title && <Title>{unescape(block.title)}</Title>}
 
-            {layout === 'DEFAULT' && (
-              <BlockLightboxMetadataPane
-                block={block}
-                pt={context === 'MODAL' ? constants.topBarHeight : undefined}
-              />
-            )}
-          </SplitPane>
-        </Container>
-      </>
-    )
-  }
+        <SplitPane context={context} layout={layout}>
+          <BlockLightboxContentPane
+            block={block}
+            layout={layout}
+            linkViewMode={linkViewMode}
+          >
+            {children}
+          </BlockLightboxContentPane>
+
+          {layout === 'DEFAULT' && (
+            <BlockLightboxMetadataPane
+              block={block}
+              linkViewMode={linkViewMode}
+              onLinkViewModeChange={onLinkViewModeChange}
+              pt={context === 'MODAL' ? constants.topBarHeight : undefined}
+            />
+          )}
+        </SplitPane>
+      </Container>
+    </>
+  )
 }
+
+export default BlockLightbox

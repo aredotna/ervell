@@ -15,6 +15,8 @@ export interface SerializeMeQueryHook_serializedMe {
   authentication_token: string | null;
   slug: string | null;
   is_premium: boolean | null;
+  is_lifetime_premium: boolean | null;
+  is_supporter: boolean | null;
   hide_notification_count: boolean | null;
 }
 

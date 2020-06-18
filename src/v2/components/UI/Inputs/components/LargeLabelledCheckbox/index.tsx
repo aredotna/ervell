@@ -32,7 +32,7 @@ const StyledCheckbox = styled(Box).attrs({ mr: 6 })`
     ${props =>
       props.disabled
         ? props.theme.colors.gray.light
-        : 'props.theme.colors.gray.bold'};
+        : props.theme.colors.gray.bold};
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 3px pink;
