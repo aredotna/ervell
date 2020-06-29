@@ -64,6 +64,15 @@ export const mixin = css`
 
   line-height: 1.6;
 
+  p {
+    white-space: pre-wrap;
+
+    // remove br's since we are doing pre-wrap now
+    br {
+      display none;
+    }
+  }
+
   p, li, ol {
     font-size: 1.05rem;
   }
