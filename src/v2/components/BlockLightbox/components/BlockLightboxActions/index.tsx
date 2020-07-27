@@ -10,7 +10,6 @@ import BlockLightboxChangeThumbnail from 'v2/components/BlockLightbox/components
 import { BlockLightbox as Block } from '__generated__/BlockLightbox'
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/BlockLightbox'
 
-import useSerializedMe from 'v2/hooks/useSerializedMe'
 import { BlockLightboxSwitchViewMode } from './components/BlockLightboxSwitchViewMode'
 
 const Container = styled(Box)`
@@ -49,8 +48,6 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
   linkViewMode,
   onLinkViewModeChange,
 }) => {
-  const { is_lifetime_premium, is_supporter } = useSerializedMe()
-
   if (block.__typename === 'Channel') {
     return null
   }
@@ -69,7 +66,7 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
 
   return (
     <Container>
-      {block.__typename === 'Link' && (is_lifetime_premium || is_supporter) && (
+      {block.__typename === 'Link' && (
         <Inner withBorder>
           <BlockLightboxSwitchViewMode
             linkViewMode={linkViewMode}

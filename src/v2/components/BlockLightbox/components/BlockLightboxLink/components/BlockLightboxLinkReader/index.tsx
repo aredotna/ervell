@@ -39,8 +39,9 @@ export const ReaderContainer: React.FC<BlockLightboxLayoutProps &
         pt={6}
         pr={[4, 9]}
         pb={[6, 7]}
-        pl={[3, 8]}
+        pl={[4, 9]}
         overflowScrolling
+        bg={{ DEFAULT: 'transparent', FULLSCREEN: 'background' }[layout]}
       >
         <Box
           minHeight="100%"
@@ -79,10 +80,14 @@ const TextContainer = styled(Box).attrs({
     font-size: 1.25rem !important;
   }
 
+  figcaption {
+    fontsize: 1em !important;
+  }
+
   img,
   iframe,
   figure {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
     margin: ${props => props.theme.space[7]} auto;
     display: block;
@@ -98,6 +103,16 @@ const TextContainer = styled(Box).attrs({
 
   li p:first-child {
     display: inline;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 22px !important;
+    margin: ${props => props.theme.space[7]} 0;
   }
 `
 
@@ -239,6 +254,7 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
 
 export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
   block,
+  layout,
 }) => {
   const { data, loading, error, startPolling, stopPolling } = useQuery<
     ReaderData,
@@ -248,7 +264,7 @@ export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
   })
 
   return (
-    <ReaderContainer layout="DEFAULT" border={false}>
+    <ReaderContainer layout={layout} border={false}>
       <a
         href={block.source_url}
         rel="noopener nofollow noreferrer"

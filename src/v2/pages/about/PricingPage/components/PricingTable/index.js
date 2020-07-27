@@ -158,18 +158,20 @@ class PricingTable extends PureComponent {
               Unlimited public and private blocks
             </Feature>
             <Feature fontWeight="bold">Hide from search engines</Feature>
+            <Feature fontWeight="bold">Reader mode</Feature>
             <Feature fontWeight="bold">Priority support</Feature>
           </Features>
         </Cell>
         <Cell>
-          <PlanTitle color="state.premium">Are.na Premium</PlanTitle>
+          <PlanTitle color="state.premium">Are.na Premium (Team)</PlanTitle>
           <PlanPrice>$5 / user / month</PlanPrice>
           <PlanSubPrice>or $45 / user / year</PlanSubPrice>
           <GroupButton href={groupLink}>Create group</GroupButton>
           <Features>
-            <Feature>Unlimited public blocks*</Feature>
-            <Feature>Unlimited private blocks</Feature>
+            <Feature>Unlimited public and private blocks</Feature>
+
             <Feature>Hide from search engines</Feature>
+            <Feature>Reader mode</Feature>
             <Feature>Priority support</Feature>
             <Feature fontWeight="bold">Upgrade team members</Feature>
           </Features>
