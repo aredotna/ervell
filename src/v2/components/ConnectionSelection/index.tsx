@@ -80,7 +80,7 @@ export const ConnectionSelection: React.FC<ConnectionSelectionProps> = ({
 
   return (
     <Container>
-      <ConnectCTA id={id} type={type} />
+      {/* <ConnectCTA id={id} type={type} /> */}
 
       <ConnectionSelectionList
         onConnectionSelection={handleConnectionSelection}

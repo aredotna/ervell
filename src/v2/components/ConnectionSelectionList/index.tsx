@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import styled from 'styled-components'
 import { debounce, isEmpty } from 'underscore'
 
@@ -6,6 +6,10 @@ import { __outlineBorder__ } from 'v2/styles/mixins'
 
 import { Input } from 'v2/components/UI/Inputs'
 import Text from 'v2/components/UI/Text'
+import Icons from 'v2/components/UI/Icons'
+import { getSpace } from 'v2/styles/functions'
+import Overlay from 'v2/components/UI/Overlay'
+
 import { RecentChannels } from 'v2/components/ConnectionSelectionList/components/RecentChannels'
 import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
 
@@ -22,6 +26,33 @@ const Container = styled.div`
       ${__outlineBorder__()}
     }
   `}
+`
+
+const SearchContainer = styled.div`
+  position: relative;
+`
+
+const SearchSettingsContainer = styled.div`
+  position: absolute;
+  right: ${getSpace(1)};
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`
+
+const SearchSettings = styled(Icons).attrs({
+  name: 'Cog',
+  size: '1rem',
+  color: 'gray.medium',
+  mr: 4,
+})`
+  cursor: pointer;
+  &:hover {
+    svg {
+      fill: ${props => props.theme.colors.gray.bold};
+    }
+  }
 `
 
 const SearchInput = styled(Input).attrs({
@@ -76,9 +107,51 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
     debounceQuery(query)
   }
 
+  const [settingsMode, setSettingsMode] = useState<'resting' | 'open'>(
+    'resting'
+  )
+
+  const openMenu = useCallback(e => {
+    e.preventDefault()
+    e.stopPropagation()
+    setSettingsMode('open')
+  }, [])
+
+  const closeMenu = useCallback(e => {
+    e.preventDefault()
+    e.stopPropagation()
+    setSettingsMode('resting')
+  }, [])
+
+  const targetEl = useRef(null)
+
+  console.log('ref', targetEl)
+
   return (
     <Container mode={mode} isOutlined={isOutlined}>
-      <SearchInput onChange={handleChange} />
+      <SearchContainer>
+        <SearchInput onChange={handleChange} />
+        <SearchSettingsContainer ref={targetEl}>
+          <SearchSettings
+            onClick={{ open: closeMenu, resting: openMenu }[settingsMode]}
+          />
+        </SearchSettingsContainer>
+        {settingsMode === 'open' && (
+          <Overlay
+            onClose={closeMenu}
+            targetEl={() => targetEl.current}
+            alignToY="bottom"
+            alignToX="right"
+            anchorY="top"
+            anchorX="right"
+            offsetY={5}
+            offsetX={0}
+            disableTarget
+          >
+            <h1>Hello</h1>
+          </Overlay>
+        )}
+      </SearchContainer>
 
       {mode === 'resting' && (
         <>

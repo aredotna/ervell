@@ -134,6 +134,7 @@ export default class Overlay extends PureComponent {
 
   overlayTarget = () => {
     const { targetEl } = this.props
+    console.log('target', targetEl, this.props)
     const { top, left, width, height } = targetEl().getBoundingClientRect()
 
     this.setState({
@@ -152,6 +153,18 @@ export default class Overlay extends PureComponent {
       fullWidth,
       marginY,
     } = this.props
+
+    console.log({
+      anchorY,
+      anchorX,
+      alignToY,
+      alignToX,
+      offsetY,
+      offsetX,
+      fullWidth,
+      marginY,
+      el,
+    })
 
     const {
       [alignToY]: y,
