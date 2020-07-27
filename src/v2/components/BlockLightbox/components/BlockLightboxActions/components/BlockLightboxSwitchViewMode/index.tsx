@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -6,10 +6,11 @@ import Text from 'v2/components/UI/Text'
 import Overlay from 'v2/components/UI/Overlay'
 
 import { LinkViewMode, OnLinkViewModeChange } from 'v2/components/BlockLightbox'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
 
 const BetaMessage = styled(Box).attrs({
   border: '1px solid',
-  borderColor: 'gray.regular',
+  borderColor: 'state.premium',
   bg: 'background',
   p: 4,
 })`
@@ -25,6 +26,12 @@ const Option = styled.a`
   &:before {
     content: '○ ';
   }
+
+  ${props =>
+    props.disabled &&
+    `
+    opacity: 50%;
+  `}
 
   ${props =>
     props.selected &&
@@ -48,6 +55,15 @@ export const BlockLightboxSwitchViewMode: React.FC<BlockLightboxSwitchViewModePr
 }) => {
   const [open, setOpen] = useState<boolean>(false)
   const targetEl = useRef(null)
+  const { is_premium } = useSerializedMe()
+
+  const openReader = useCallback(() => {
+    if (!is_premium) {
+      setOpen(!open)
+    } else {
+      onLinkViewModeChange('reader')
+    }
+  }, [is_premium, setOpen, open, onLinkViewModeChange])
 
   return (
     <>
@@ -55,11 +71,12 @@ export const BlockLightboxSwitchViewMode: React.FC<BlockLightboxSwitchViewModePr
         onClick={() => onLinkViewModeChange('screenshot')}
         selected={linkViewMode === 'screenshot'}
       >
-        Screenshot
+        Preview
       </Option>
       <Option
-        onClick={() => onLinkViewModeChange('reader')}
+        onClick={openReader}
         selected={linkViewMode === 'reader'}
+        disabled={!is_premium}
       >
         Reader
       </Option>
@@ -92,22 +109,22 @@ export const BlockLightboxSwitchViewMode: React.FC<BlockLightboxSwitchViewModePr
         >
           <BetaMessage>
             <Text f={1} m={4}>
-              This is an early look at an reader mode for our lifetime and
-              supporter premium members. From now on, when links are saved to
-              Are.na, we will automatically extract content automatically.
+              <strong>Reader mode (beta)</strong>
             </Text>
             <Text f={1} m={4}>
-              Still to come: full-text search, static PDF archive of URL and
-              automatic content extraction when you connect another
-              person&apos;s block.
+              Content from external websites is displayed in a stripped-down,
+              reader-friendly format. Useful for articles, essays, interviews or
+              any other long read formats. Still to come: full text search,
+              website archives, and offline mode.
             </Text>
-            <Text f={1} m={4}>
-              Feel free to send us feedback or questions at{' '}
-              <strong>
-                <a href="mailto:help@are.na">help@are.na</a>
-              </strong>
-              .
-            </Text>
+            <Text f={1} m={4}></Text>
+            {!is_premium && (
+              <Text f={1} m={4} color="state.premium">
+                <strong>
+                  <a href="/pricing">Upgrade to premium to get access</a>
+                </strong>
+              </Text>
+            )}
           </BetaMessage>
         </Overlay>
       )}
