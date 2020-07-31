@@ -5,16 +5,12 @@ import { useQuery, useMutation } from 'react-apollo'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
-import GenericButton from 'v2/components/UI/GenericButton'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
 import Truncate from 'v2/components/UI/Truncate'
 
+import { ReaderContainer } from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/components/ReaderContainer'
 import { BlockLightboxLinkProps } from 'v2/components/BlockLightbox/components/BlockLightboxLink'
-import {
-  BlockLightboxLayoutProps,
-  TextBoxContainerProps,
-} from 'v2/components/BlockLightboxLayout'
 
 import {
   CanonicalLinkForReader as ReaderData,
@@ -28,43 +24,9 @@ import {
 
 import BLOCK_CANONICAL_LINK_READER_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/queries/canonicalLinkReader'
 import REGENERATE_CANONICAL_LINK_MUTATION from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/mutations/regenerateCanonicalLinkMutation'
+import { ApolloError } from 'apollo-client'
+import { ReaderError } from './components/ReaderError'
 
-export const ReaderContainer: React.FC<BlockLightboxLayoutProps &
-  TextBoxContainerProps> = ({ children, layout, onClick, border = true }) => {
-  return (
-    <Box height="100%" width="100%">
-      <Box
-        height={['auto', '100%']}
-        width="100%"
-        pt={6}
-        pr={[4, 9]}
-        pb={[6, 7]}
-        pl={[3, 8]}
-        overflowScrolling
-      >
-        <Box
-          minHeight="100%"
-          width={{ DEFAULT: '100%', FULLSCREEN: '75%' }[layout]}
-          maxWidth="55em"
-          bg="background"
-          border={border && '1px solid'}
-          borderColor={
-            border &&
-            { DEFAULT: 'gray.light', FULLSCREEN: 'gray.semiBold' }[layout]
-          }
-          px={7}
-          py={6}
-          mx="auto"
-          overflow="hidden"
-          position="relative"
-          onClick={onClick}
-        >
-          {children}
-        </Box>
-      </Box>
-    </Box>
-  )
-}
 const TextContainer = styled(Box).attrs({
   p: 3,
 })`
@@ -79,10 +41,14 @@ const TextContainer = styled(Box).attrs({
     font-size: 1.25rem !important;
   }
 
+  figcaption {
+    fontsize: 1em !important;
+  }
+
   img,
   iframe,
   figure {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
     margin: ${props => props.theme.space[7]} auto;
     display: block;
@@ -99,18 +65,20 @@ const TextContainer = styled(Box).attrs({
   li p:first-child {
     display: inline;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 22px !important;
+    margin: ${props => props.theme.space[7]} 0;
+  }
 `
 
 const ReaderText = styled(SansSerifText)`
   font-family: Times New Roman;
-`
-
-const ErrorContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  flex-direction: column;
 `
 
 const Title = styled(Text).attrs({
@@ -137,12 +105,16 @@ interface BlockLightboxLinkReaderInnerProps {
   block: CanonicalLinkForReader_blokk_Link
   startPolling: (pollInterval: number) => void
   stopPolling: () => void
+  loading: boolean
+  error: ApolloError
 }
 
 const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> = ({
   block,
   startPolling,
   stopPolling,
+  loading,
+  error,
 }) => {
   const { canonical_link } = block
 
@@ -158,18 +130,61 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
     regenerateCanonicalLink({
       variables: { block_id: block.id.toString() },
     }).then(() => {
-      startPolling(1000)
+      startPolling(3000)
     })
   }, [block.id, regenerateCanonicalLink, startPolling])
 
   useEffect(() => {
-    if (block.canonical_link && block.canonical_link.title) {
+    if (
+      !loading &&
+      !error &&
+      block &&
+      (!block.canonical_link || block.canonical_link.state === 'pending') &&
+      mode !== 'polling'
+    ) {
+      setMode('polling')
+      regenerateCanonicalLink({ variables: { block_id: block.id.toString() } })
+        .then(() => {
+          startPolling(3000)
+        })
+        .catch(() => {
+          stopPolling()
+        })
+    }
+
+    if (
+      mode === 'polling' &&
+      block &&
+      block.canonical_link &&
+      (block.canonical_link.state === 'failed' ||
+        block.canonical_link.state === 'available')
+    ) {
       stopPolling()
       setMode('resting')
     }
-  }, [block.canonical_link, stopPolling])
+  }, [
+    loading,
+    block,
+    mode,
+    error,
+    setMode,
+    stopPolling,
+    startPolling,
+    regenerateCanonicalLink,
+  ])
 
   const state = (canonical_link && canonical_link.state) || 'pending'
+
+  if (!canonical_link || !canonical_link.content || state === 'failed') {
+    return (
+      <ReaderError
+        onRegenerate={onRegenerate}
+        canonical_link={canonical_link}
+        state={state}
+        mode={mode}
+      />
+    )
+  }
 
   return (
     <TextContainer>
@@ -203,42 +218,13 @@ const BlockLightboxLinkReaderInner: React.FC<BlockLightboxLinkReaderInnerProps> 
           }}
         />
       )}
-      {(!canonical_link || !canonical_link.content || state === 'failed') && (
-        <ErrorContainer>
-          <Text f={4} p={5} pt={7} textAlign="center">
-            {
-              {
-                pending:
-                  'This link has not been fully processed yet. Do you want to run a text extraction?',
-                failed:
-                  'It looks like the last time we tried extracting content the process failed. Do you want to try extracting the content again?',
-                remote_processing: 'Performing content extraction...',
-              }[state]
-            }
-          </Text>
-          <GenericButton
-            mt={7}
-            title="Regenerate content"
-            display="flex"
-            f={2}
-            onClick={onRegenerate}
-            disabled={mode === 'polling'}
-          >
-            {
-              {
-                resting: 'Extract content from link',
-                polling: 'Extracting content...',
-              }[mode]
-            }
-          </GenericButton>
-        </ErrorContainer>
-      )}
     </TextContainer>
   )
 }
 
 export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
   block,
+  layout,
 }) => {
   const { data, loading, error, startPolling, stopPolling } = useQuery<
     ReaderData,
@@ -248,7 +234,7 @@ export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
   })
 
   return (
-    <ReaderContainer layout="DEFAULT" border={false}>
+    <ReaderContainer layout={layout} border={false}>
       <a
         href={block.source_url}
         rel="noopener nofollow noreferrer"
@@ -290,6 +276,8 @@ export const BlockLightboxLinkReader: React.FC<BlockLightboxLinkProps> = ({
       {!loading && !error && data.blokk.__typename === 'Link' && (
         <BlockLightboxLinkReaderInner
           block={data.blokk}
+          loading={loading}
+          error={error}
           startPolling={startPolling}
           stopPolling={stopPolling}
         />
