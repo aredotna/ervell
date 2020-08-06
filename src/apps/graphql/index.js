@@ -38,4 +38,26 @@ app.post('/graphql', (req, res) => {
     )
 })
 
+app.post('/graphql/contentful', (req, res) => {
+  const { CONTENTFUL_TOKEN } = CONFIG
+  const headers = {
+    ...(CONTENTFUL_TOKEN && { Authorization: `Bearer ${CONTENTFUL_TOKEN}` }),
+  }
+
+  return axios({
+    method: 'post',
+    url: CONFIG.CONTENTFUL_GRAPHQL_ENDPOINT,
+    data: req.body,
+    headers,
+  })
+    .then(({ data }) => res.json(data))
+    .catch(err => {
+      return res.json({
+        code: err.status || 500,
+        message: err.message,
+        stack: err.stack,
+      })
+    })
+})
+
 module.exports = app

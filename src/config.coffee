@@ -12,6 +12,8 @@ module.exports =
   API_BASE: "https://api.are.na"
   GRAPHQL_ENDPOINT: "https://api.are.na/graphql"
   CLIENT_GRAPHQL_ENDPOINT: "https://api.are.na/graphql"
+  CONTENTFUL_GRAPHQL_ENDPOINT: null
+  CONTENTFUL_TOKEN: null
   API_URL: "https://api.are.na/v2"
   PUSHER_KEY: '19beda1f7e2ca403abab'
   S3_KEY: null
