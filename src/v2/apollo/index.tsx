@@ -8,6 +8,7 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { BatchHttpLink } from 'apollo-link-batch-http'
+import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import {
   InMemoryCache,
@@ -31,6 +32,9 @@ const {
 
 const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT })
 const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT })
+const contentfulHttpLink = createHttpLink({
+  uri: 'http://localhost:5000/graphql/contentful',
+})
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -109,7 +113,13 @@ export const initApolloClient = ({
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
-    link,
+    link: ApolloLink.split(
+      operation => {
+        return operation.getContext().clientName === 'contentful'
+      },
+      contentfulHttpLink,
+      link
+    ),
     cache,
     resolvers,
     typeDefs,

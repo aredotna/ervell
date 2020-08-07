@@ -28,6 +28,7 @@ import { AcceptInvitePage } from 'v2/pages/accept_invite/AcceptInvitePage'
 import Modal from 'v2/components/UI/Modal/Portal'
 import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
 import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
+import { BlogIndex } from 'v2/pages/blog/BlogIndex'
 
 export const Routes = () => {
   const location = useLocation()
@@ -99,6 +100,16 @@ export const Routes = () => {
         {/* Accept group invite */}
         <Route
           path="/group/:id/invite/:code"
+          render={parseRoute(({ params }) => (
+            <AcceptInvitePage code={params.code} />
+          ))}
+        />
+
+        {/* Blog */}
+        <Route path="/blog2" component={BlogIndex} />
+
+        <Route
+          path="/blog2/:id"
           render={parseRoute(({ params }) => (
             <AcceptInvitePage code={params.code} />
           ))}

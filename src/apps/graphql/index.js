@@ -50,8 +50,11 @@ app.post('/graphql/contentful', (req, res) => {
     data: req.body,
     headers,
   })
-    .then(({ data }) => res.json(data))
+    .then(({ data }) => {
+      return res.json(data)
+    })
     .catch(err => {
+      console.log({ err })
       return res.json({
         code: err.status || 500,
         message: err.message,

@@ -16,7 +16,7 @@
     "deploy": "sh scripts/deploy.sh",
     "extension": "NODE_ENV=development webpack --config src/extension/webpack.config.js --watch",
     "extension:production": "NODE_ENV=production webpack --config src/extension/webpack.config.js",
-    "generate-types": "apollo codegen:generate --target typescript --outputFlat src/__generated__",
+    "generate-types": "apollo codegen:generate --target typescript --outputFlat src/__generated__ --excludes=src/v2/pages/blog/**",
     "generate-types:watch": "yarn generate-types --watch",
     "jest": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix",
