@@ -22,7 +22,7 @@ const Headline = styled(Text).attrs({
 
 const TopContainer = styled(Box).attrs({
   mt: 10,
-  mb: 8,
+  mb: 9,
   mx: 'auto',
 })`
   max-width: 470px;
