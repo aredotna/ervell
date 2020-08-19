@@ -10,7 +10,9 @@ export default gql`
               sys {
                 id
               }
-              url
+              small: url(transform: { width: 670 })
+              medium: url(transform: { width: 1340 })
+              large: url(transform: { width: 2010 })
               description
             }
           }

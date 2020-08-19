@@ -40,12 +40,12 @@ const HR = styled(HorizontalRule).attrs({ color: 'gray.light' })`
 const Figure = styled.figure`
   margin: ${({ theme }) => `${theme.space[8]} auto`};
   padding: 0;
+`
 
-  img {
-    max-width: 100%;
-    margin: 0 auto;
-    display: block;
-  }
+const Image = styled.img`
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
 `
 
 const Figcaption = styled.figcaption`
@@ -82,7 +82,13 @@ const optionsWithEmbeds = (embedData: any) => {
 
         return (
           <Figure>
-            <img src={block.url} />
+            <Image
+              srcSet={[
+                `${block.small} 670w`,
+                `${block.medium} 1340w`,
+                `${block.large} 2010w`,
+              ]}
+            />
             {block.description && (
               <Figcaption
                 dangerouslySetInnerHTML={{ __html: block.description }}
