@@ -6,6 +6,8 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Link from 'v2/components/UI/Link'
 
+import constants from 'v2/styles/constants'
+
 const {
   data: { ITUNES_LINK, ANDROID_LINK },
 } = sharify
@@ -13,10 +15,18 @@ const {
 const Container = styled(Box).attrs({ py: 8, px: 8, my: 8 })`
   border-top: 1px solid ${({ theme }) => theme.colors.gray.light};
   display: flex;
+
+  ${constants.media.mobile`
+    flex-direction: column;
+  `}
 `
 
 const Section = styled(Box).attrs({ mr: 8 })`
   flex: 1;
+
+  ${constants.media.mobile`
+    margin-bottom: ${({ theme }) => theme.space[8]};
+  `}
 `
 
 const Title = styled(Text).attrs({ f: 4, mb: 6 })``
