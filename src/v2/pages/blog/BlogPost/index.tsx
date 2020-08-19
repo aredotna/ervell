@@ -3,12 +3,15 @@ import { useQuery } from 'react-apollo'
 import styled from 'styled-components'
 import moment from 'moment'
 
+import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import Constrain from 'v2/components/UI/Constrain'
+import Description from 'v2/components/UI/Head/components/Description'
+import Image from 'v2/components/UI/Head/components/Image'
 
 import Title from 'v2/components/UI/Head/components/Title'
-import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+
 import { BlogPostContent } from './components/BlogPostContent'
 import { BlogPostAuthor } from './components/BlogPostAuthor'
 import { BlogPostCTA } from './components/BlogPostCTA'
@@ -60,6 +63,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
   return (
     <ErrorBoundary>
       <Title>{post ? post.title : 'Blog'}</Title>
+      <Description>{post && post.previewText}</Description>
+      <Image>{post && post.image.medium}</Image>
 
       <AboutTopBarLayout>
         <Constrain>
