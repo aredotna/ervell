@@ -49,7 +49,12 @@ class GlobalNavElements extends PureComponent {
     const isLoggedIn = !isLoggedOut
 
     return (
-      <Query query={globalNavElementsQuery} ssr={false} skip={isLoggedOut}>
+      <Query
+        query={globalNavElementsQuery}
+        ssr={false}
+        skip={isLoggedOut}
+        onError={this.signOut}
+      >
         {({ data }) => {
           const components = []
 

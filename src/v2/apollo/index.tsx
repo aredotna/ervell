@@ -8,6 +8,7 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { BatchHttpLink } from 'apollo-link-batch-http'
+import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import {
   InMemoryCache,
@@ -26,11 +27,18 @@ import clientData from 'v2/apollo/localState/clientData'
 const isClientSide = typeof window !== 'undefined'
 
 const {
-  data: { GRAPHQL_ENDPOINT, CLIENT_GRAPHQL_ENDPOINT },
+  data: {
+    GRAPHQL_ENDPOINT,
+    CLIENT_GRAPHQL_ENDPOINT,
+    CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
+  },
 } = sharify
 
 const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT })
 const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT })
+const contentfulHttpLink = createHttpLink({
+  uri: CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
+})
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -109,7 +117,13 @@ export const initApolloClient = ({
 
   const client = new ApolloClient({
     ssrMode: !isClientSide,
-    link,
+    link: ApolloLink.split(
+      operation => {
+        return operation.getContext().clientName === 'contentful'
+      },
+      contentfulHttpLink,
+      link
+    ),
     cache,
     resolvers,
     typeDefs,
