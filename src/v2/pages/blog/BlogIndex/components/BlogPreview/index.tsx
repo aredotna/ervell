@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 
-import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
-const Post = styled(Box)`
+const Post = styled.a`
+  display: block;
   height: 550px;
   width: 250px;
   margin: 1em;
@@ -47,7 +47,7 @@ interface BlogPreviewProps {
 
 export const BlogPreview: React.FC<BlogPreviewProps> = ({ post }) => {
   return (
-    <Post>
+    <Post href={`/blog2/${post.slug}`}>
       <Image
         srcSet={[
           `${post.image.small} 250w`,
