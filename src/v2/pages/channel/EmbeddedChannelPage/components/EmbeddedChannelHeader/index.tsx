@@ -60,7 +60,7 @@ export const EmbeddedChannelHeader: React.FC<Props> = ({ channel }) => {
 
         <Text color={`channel.${channel.visibility}`}>
           <a href={channel.href} target="_blank">
-            {channel.title}
+            <span dangerouslySetInnerHTML={{ __html: channel.title }} />
           </a>
         </Text>
       </Metadata>
