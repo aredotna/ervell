@@ -29,6 +29,7 @@ import Modal from 'v2/components/UI/Modal/Portal'
 import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
 import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
 import { BlogIndex } from 'v2/pages/blog/BlogIndex'
+import { BlogPost } from 'v2/pages/blog/BlogPost'
 
 export const Routes = () => {
   const location = useLocation()
@@ -106,12 +107,12 @@ export const Routes = () => {
         />
 
         {/* Blog */}
-        <Route path="/blog2" component={BlogIndex} />
+        <Route exact path="/blog2" component={BlogIndex} />
 
         <Route
-          path="/blog2/:id"
+          path="/blog2/:slug"
           render={parseRoute(({ params }) => (
-            <AcceptInvitePage code={params.code} />
+            <BlogPost slug={params.slug} />
           ))}
         />
 
