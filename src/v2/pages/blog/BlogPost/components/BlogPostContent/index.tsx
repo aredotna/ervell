@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useQuery } from 'react-apollo'
-import find from 'lodash/find'
 import { Document, MARKS, BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
@@ -76,7 +75,7 @@ const optionsWithEmbeds = (embedData: any) => {
           return null
         }
 
-        const block = find(embedData.blogPost.body.links.assets.block, b => {
+        const block = embedData.blogPost.body.links.assets.block.find(b => {
           return b.sys.id === node.data.target.sys.id
         })
 

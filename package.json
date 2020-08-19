@@ -143,7 +143,6 @@
     "jeet": "*",
     "jquery": "*",
     "jquery.finger": "*",
-    "lodash": "^4.17.20",
     "lodash.flowright": "^3.5.0",
     "marked": "^0.3.18",
     "moment": "^2.22.2",

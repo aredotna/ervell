@@ -27,13 +27,19 @@ import clientData from 'v2/apollo/localState/clientData'
 const isClientSide = typeof window !== 'undefined'
 
 const {
-  data: { GRAPHQL_ENDPOINT, CLIENT_GRAPHQL_ENDPOINT },
+  data: {
+    GRAPHQL_ENDPOINT,
+    CLIENT_GRAPHQL_ENDPOINT,
+    CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
+  },
 } = sharify
+
+console.log({ CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT })
 
 const clientHttpLink = new BatchHttpLink({ uri: CLIENT_GRAPHQL_ENDPOINT })
 const serverHttpLink = new BatchHttpLink({ uri: GRAPHQL_ENDPOINT })
 const contentfulHttpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql/contentful',
+  uri: CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
 })
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({

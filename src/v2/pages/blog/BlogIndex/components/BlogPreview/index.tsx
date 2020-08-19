@@ -47,7 +47,7 @@ interface BlogPreviewProps {
 
 export const BlogPreview: React.FC<BlogPreviewProps> = ({ post }) => {
   return (
-    <Post href={`/blog/${post.slug}`}>
+    <Post href={`/blog/${post.slug}`} key={`post-${post.slug}`}>
       <Image
         srcSet={[
           `${post.image.small} 250w`,
