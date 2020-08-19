@@ -64,7 +64,11 @@ const Blockquote = styled.blockquote`
 const optionsWithEmbeds = (embedData: any) => {
   return {
     renderMark: {
-      [MARKS.BOLD]: text => <BaseText fontWeight="bold">{text}</BaseText>,
+      [MARKS.BOLD]: text => (
+        <BaseText fontWeight="bold" display="inline">
+          {text}
+        </BaseText>
+      ),
     },
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => {

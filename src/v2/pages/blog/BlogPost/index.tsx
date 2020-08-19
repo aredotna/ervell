@@ -1,21 +1,21 @@
 import React from 'react'
 import { useQuery } from 'react-apollo'
 import styled from 'styled-components'
+import moment from 'moment'
 
-import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import Constrain from 'v2/components/UI/Constrain'
 
 import Title from 'v2/components/UI/Head/components/Title'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import Box from 'v2/components/UI/Box'
-
-import BLOG_POST_CONTENT_QUERY from 'v2/pages/blog/BlogPost/queries/BlogPostBySlug'
 import Text from 'v2/components/UI/Text'
-import moment from 'moment'
 import { BlogPostContent } from './components/BlogPostContent'
 import { BlogPostAuthor } from './components/BlogPostAuthor'
 import { BlogPostCTA } from './components/BlogPostCTA'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
+import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
+
+import BLOG_POST_CONTENT_QUERY from 'v2/pages/blog/BlogPost/queries/BlogPostBySlug'
 
 interface BlogPostProps {
   slug: string
@@ -61,7 +61,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
     <ErrorBoundary>
       <Title>{post ? post.title : 'Blog'}</Title>
 
-      <TopBarLayout>
+      <AboutTopBarLayout>
         <Constrain>
           <Container>
             <Category>{post.category}</Category>
@@ -80,7 +80,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         </Constrain>
         <BlogPostCTA />
         <LoggedOutFooter />
-      </TopBarLayout>
+      </AboutTopBarLayout>
     </ErrorBoundary>
   )
 }
