@@ -2,16 +2,17 @@ import React from 'react'
 import { useQuery } from 'react-apollo'
 import styled from 'styled-components'
 
-import Text from 'v2/components/UI/Text'
-import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
-import Constrain from 'v2/components/UI/Constrain'
-
 import Title from 'v2/components/UI/Head/components/Title'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
+import Constrain from 'v2/components/UI/Constrain'
+import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
+
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+
+import { BlogPreview } from 'v2/pages/blog/BlogIndex/components/BlogPreview'
 
 import BLOG_INDEX_QUERY from 'v2/pages/blog/BlogIndex/queries/BlogIndex'
-import Box from 'v2/components/UI/Box'
-import { BlogPreview } from 'v2/pages/blog/BlogIndex/components/BlogPreview'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,
@@ -53,7 +54,7 @@ export const BlogIndex: React.FC = () => {
     <ErrorBoundary>
       <Title>Blog</Title>
 
-      <TopBarLayout>
+      <AboutTopBarLayout>
         <Constrain>
           <TopContainer>
             <Headline>Are.na Blog</Headline>
@@ -70,7 +71,7 @@ export const BlogIndex: React.FC = () => {
               })}
           </BlogPostContainer>
         </Constrain>
-      </TopBarLayout>
+      </AboutTopBarLayout>
     </ErrorBoundary>
   )
 }

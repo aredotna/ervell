@@ -107,10 +107,10 @@ export const Routes = () => {
         />
 
         {/* Blog */}
-        <Route exact path="/blog2" component={BlogIndex} />
+        <Route exact path="/blog" component={BlogIndex} />
 
         <Route
-          path="/blog2/:slug"
+          path="/blog/:slug"
           render={parseRoute(({ params }) => (
             <BlogPost slug={params.slug} />
           ))}

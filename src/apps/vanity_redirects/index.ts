@@ -16,4 +16,8 @@ app.get('/blog/when-it-changed-part-3', (_req, res) =>
   res.redirect('/blog/when-it-changed-part-3-an-ambient-aftermath')
 )
 
+app.get('/blog/**/:slug.html', (req, res) => {
+  return res.redirect(301, `/blog/${req.params.slug}`)
+})
+
 module.exports = app

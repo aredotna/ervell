@@ -10,6 +10,7 @@ const Container = styled(Box)`
   border-top: 2px solid ${props => props.theme.colors.gray.light};
   padding-top: ${props => props.theme.space[8]};
   margin-top: ${props => props.theme.space[8]};
+  margin-bottom: ${props => props.theme.space[11]};
 `
 
 const BaseText = styled(Text).attrs({
@@ -23,12 +24,6 @@ const options = {
     [MARKS.BOLD]: text => <BaseText fontWeight="bold">{text}</BaseText>,
   },
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: node => {
-      // const { title, description } = node.data.target.fields;
-
-      console.log({ node, data: node.data })
-      return null
-    },
     [BLOCKS.HEADING_1]: (_, children) => (
       <BaseText fontWeight="bold" f={9}>
         {children}
