@@ -20,9 +20,11 @@ storiesOf('ChannelContents', module).add('default', () => (
         ${channelContentsFragment}
       `}
     >
-      {({ data, loading, error }) =>
-        loading || error ? null : <ChannelContents channel={data.channel} />
-      }
+      {({ data, loading, error }) => {
+        return loading || error || !data || !data.channel ? null : (
+          <ChannelContents channel={data.channel} />
+        )
+      }}
     </Query>
   </Specimen>
 ))

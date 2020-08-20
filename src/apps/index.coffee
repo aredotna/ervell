@@ -12,10 +12,6 @@ console.time('home')
 app.use(require('../apps/home'))
 console.timeEnd('home')
 
-console.time('blog')
-app.use(require('../apps/blog'))
-console.timeEnd('blog')
-
 console.time('authentication')
 app.use(require('../apps/authentication'))
 console.timeEnd('authentication')
