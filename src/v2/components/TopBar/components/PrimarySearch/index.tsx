@@ -157,8 +157,12 @@ const PrimarySearchContainer: React.FC<{
   scheme: 'DEFAULT' | 'GROUP'
   flex?: number
 }> = ({ ...props }) => {
-  const history = useHistory()
-  return <PrimarySearch history={history} {...props} />
+  try {
+    const history = useHistory()
+    return <PrimarySearch history={history} {...props} />
+  } catch {
+    return <PrimarySearch history={history} {...props} />
+  }
 }
 
 export default PrimarySearchContainer

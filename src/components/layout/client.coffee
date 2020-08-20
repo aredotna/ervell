@@ -20,7 +20,7 @@ initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts')
 
 { mountWithApolloProvider } = require '../../v2/apollo/index'
-{ default: GlobalNavElements } = require '../../v2/components/GlobalNavElements/index'
+{ GlobalNavElementsWithRouter } = require '../../v2/components/GlobalNavElements/index'
 
 module.exports = ->
   setDeviceClasses()
@@ -68,7 +68,7 @@ setupViews = ->
 
   if ($topBar = $('.js-topbar')).length
     scheme = if sd.IS_GROUP_PAGE then 'GROUP' else 'DEFAULT'
-    mountWithApolloProvider(GlobalNavElements, { scheme: scheme }, $topBar)
+    mountWithApolloProvider(GlobalNavElementsWithRouter, { scheme: scheme }, $topBar)
 
 # TODO: Extract
 setupAjaxHeaders = ->
