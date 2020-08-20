@@ -9,6 +9,7 @@ import SearchInput from 'v2/components/UI/SearchInput'
 import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults'
 
 import { overflowScrolling } from 'v2/styles/mixins'
+import useIsErrorPage from 'v2/hooks/useIsErrorPage'
 
 const Container = styled(Box)`
   position: relative;
@@ -24,6 +25,7 @@ const Results = styled(Box)`
 interface PrimarySearchProps {
   scheme: 'DEFAULT' | 'GROUP'
   history: any
+  isErrorPage: boolean
   flex?: number
 }
 
@@ -65,7 +67,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
 
   handleKeyDown = ({ key }) => {
     const { cursor, href, query } = this.state
-    const { history } = this.props
+    const { history, isErrorPage } = this.props
 
     switch (key) {
       case 'Escape':
@@ -74,6 +76,12 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
       case 'Enter':
         if (query === '') return
         this.setState({ query: '', debouncedQuery: '' })
+
+        if (isErrorPage) {
+          window.location.href = href
+          break
+        }
+
         history.push(href)
         break
       case 'ArrowDown':
@@ -157,12 +165,11 @@ const PrimarySearchContainer: React.FC<{
   scheme: 'DEFAULT' | 'GROUP'
   flex?: number
 }> = ({ ...props }) => {
-  try {
-    const history = useHistory()
-    return <PrimarySearch history={history} {...props} />
-  } catch {
-    return <PrimarySearch history={history} {...props} />
-  }
+  const history = useHistory()
+  const isErrorPage = useIsErrorPage()
+  return (
+    <PrimarySearch history={history} isErrorPage={isErrorPage} {...props} />
+  )
 }
 
 export default PrimarySearchContainer

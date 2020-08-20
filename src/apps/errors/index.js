@@ -12,6 +12,8 @@ export default (err, req, res, _next) => {
   const status = err.status || 500
   const isVisible = NODE_ENV === 'development'
 
+  res.locals.sd.IS_ERROR = true
+
   const response = {
     code: status,
     message: isVisible ? err.message : 'Internal server error',
