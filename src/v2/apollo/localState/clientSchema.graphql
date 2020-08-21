@@ -45,6 +45,9 @@ type ClientSerializedMe {
 type ClientSharify {
   get(name: String): String
   IS_SPIDER: Boolean
-  IS_ERROR: Boolean
+  # // TODO: Delete IS_OUTSIDE_MAIN_ROUTER
+  # // This is a temporary measure to handle cases where components can exist both
+  # // inside and outside the main router.
+  IS_OUTSIDE_MAIN_ROUTER: Boolean
   THEME: String
 }

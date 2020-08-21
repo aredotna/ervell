@@ -3,14 +3,14 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: IsErrorPageQueryHook
+// GraphQL query operation: IsOutsideMainRouterQueryHook
 // ====================================================
 
-export interface IsErrorPageQueryHook_sharify {
+export interface IsOutsideMainRouterQueryHook_sharify {
   __typename: "ClientSharify";
-  isErrorPage: boolean | null;
+  isOutsideMainRouter: boolean | null;
 }
 
-export interface IsErrorPageQueryHook {
-  sharify: IsErrorPageQueryHook_sharify | null;
+export interface IsOutsideMainRouterQueryHook {
+  sharify: IsOutsideMainRouterQueryHook_sharify | null;
 }

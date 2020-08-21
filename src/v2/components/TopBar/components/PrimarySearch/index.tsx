@@ -9,7 +9,7 @@ import SearchInput from 'v2/components/UI/SearchInput'
 import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults'
 
 import { overflowScrolling } from 'v2/styles/mixins'
-import useIsErrorPage from 'v2/hooks/useIsErrorPage'
+import useIsOutsideMainRouter from 'v2/hooks/useIsOutsideMainRouter'
 
 const Container = styled(Box)`
   position: relative;
@@ -25,7 +25,10 @@ const Results = styled(Box)`
 interface PrimarySearchProps {
   scheme: 'DEFAULT' | 'GROUP'
   history: any
-  isErrorPage: boolean
+  // TODO: Delete isOutsideMainRouter
+  // This is a temporary measure to handle cases where components can exist both
+  // inside and outside the main router.
+  isOutsideMainRouter: boolean
   flex?: number
 }
 
@@ -67,7 +70,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
 
   handleKeyDown = ({ key }) => {
     const { cursor, href, query } = this.state
-    const { history, isErrorPage } = this.props
+    const { history, isOutsideMainRouter } = this.props
 
     switch (key) {
       case 'Escape':
@@ -77,7 +80,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
         if (query === '') return
         this.setState({ query: '', debouncedQuery: '' })
 
-        if (isErrorPage) {
+        if (isOutsideMainRouter) {
           window.location.href = href
           break
         }
@@ -113,6 +116,8 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
     const { scheme, ...rest } = this.props
     const { mode, query, debouncedQuery, cursor } = this.state
 
+    console.log({ query })
+
     return (
       <Container {...rest}>
         {mode === 'resting' && <HomeLink />}
@@ -143,7 +148,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
           }}
         />
 
-        {query && mode === 'focus' && (
+        {query && (
           <Overlay targetEl={() => this.searchInputRef.current} fullWidth>
             <Results>
               <PrimarySearchResults
@@ -166,9 +171,13 @@ const PrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ ...props }) => {
   const history = useHistory()
-  const isErrorPage = useIsErrorPage()
+  const isOutsideMainRouter = useIsOutsideMainRouter()
   return (
-    <PrimarySearch history={history} isErrorPage={isErrorPage} {...props} />
+    <PrimarySearch
+      history={history}
+      isOutsideMainRouter={isOutsideMainRouter}
+      {...props}
+    />
   )
 }
 

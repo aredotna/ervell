@@ -1,9 +1,7 @@
-import React, { useCallback } from 'react'
-import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
-import A from 'v2/components/UI/Link'
 import GroupBadge from 'v2/components/UI/GroupBadge'
 import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import BorderedLock from 'v2/components/UI/BorderedLock'
@@ -13,7 +11,7 @@ import { mixin as boxMixin } from 'v2/components/UI/Box'
 
 import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
-import useIsErrorPage from 'v2/hooks/useIsErrorPage'
+import { AdaptibleLink } from 'v2/components/UI/AdaptibleLink'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -22,7 +20,7 @@ const Label = styled(Text)`
   ${overflowEllipsis}
 `
 
-const containerMixin = css`
+const Container = styled(AdaptibleLink)`
   ${boxMixin}
   display: flex;
   text-decoration: none;
@@ -39,14 +37,6 @@ const containerMixin = css`
     `
     background-color: ${props.theme.colors.state.neutral};
   `}
-`
-
-const ClientLink = styled(Link)`
-  ${containerMixin}
-`
-
-const StandardLink = styled(A)`
-  ${containerMixin}
 `
 
 const PathContainer = styled.div`
@@ -68,7 +58,7 @@ const PathContainer = styled.div`
   }
 `
 
-const defaultProps = {
+Container.defaultProps = {
   pl: ICON_OFFSET,
   pr: 6,
   py: 6,
@@ -76,9 +66,6 @@ const defaultProps = {
   borderTop: '1px solid',
   borderColor: 'gray.semiLight',
 }
-
-ClientLink.defaultProps = defaultProps
-StandardLink.defaultProps = defaultProps
 
 interface PrimarySearchResultProps {
   result?: PrimarySearchResultType
@@ -94,35 +81,15 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
   selected = false,
   ...rest
 }) => {
-  const isErrorPage = useIsErrorPage()
-
-  const Container = isErrorPage ? StandardLink : ClientLink
-
-  const onClick = useCallback(
-    e => {
-      if (isErrorPage) {
-        return (window.location.href = result.href)
-      }
-
-      e.preventDefault()
-    },
-    [isErrorPage, result]
-  )
-
   if (result) {
-    const toParams = isErrorPage
-      ? { href: result.href }
-      : {
-          to: {
-            pathname: result.href,
-            state: getBreadcrumbPath(result),
-          },
-        }
     return (
       <Container
-        onMouseDown={onClick}
+        href={result.href}
+        to={{
+          pathname: result.href,
+          state: getBreadcrumbPath(result),
+        }}
         selected={selected}
-        {...toParams}
         {...rest}
       >
         <PathContainer>
@@ -164,11 +131,7 @@ export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
     )
   }
 
-  return (
-    <Container onMouseDown={onClick} {...rest}>
-      {children}
-    </Container>
-  )
+  return <Container {...rest}>{children}</Container>
 }
 
 export default PrimarySearchResult
