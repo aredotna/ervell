@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { Link as ClientLink } from 'react-router-dom'
 
 import StandardLink from 'v2/components/UI/Link'
-import useIsOutsideMainRouter from 'v2/hooks/useIsOutsideMainRouter'
+import { useIsOutsideMainRouter } from 'v2/hooks/useIsOutsideMainRouter'
 import Text from 'v2/components/UI/Text'
 
 interface AdaptibleLinkProps {
@@ -13,7 +13,7 @@ interface AdaptibleLinkProps {
   href: string
 }
 
-// TO DO: *Delete and replace with react-router Link*
+// TODO: *Delete and replace with react-router Link*
 // This is a temporary measure to handle cases where components can exist both
 // inside and outside the main router.
 
@@ -30,6 +30,11 @@ export const AdaptibleLink: React.FC<AdaptibleLinkProps> = ({
 
   const onClick = useCallback(
     e => {
+      if (isOutsideMainRouter && e.metaKey) {
+        window.open(href, '_blank')
+        return
+      }
+
       if (isOutsideMainRouter) {
         return (window.location.href = href)
       }

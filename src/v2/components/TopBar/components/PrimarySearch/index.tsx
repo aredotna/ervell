@@ -9,7 +9,7 @@ import SearchInput from 'v2/components/UI/SearchInput'
 import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults'
 
 import { overflowScrolling } from 'v2/styles/mixins'
-import useIsOutsideMainRouter from 'v2/hooks/useIsOutsideMainRouter'
+import { useIsOutsideMainRouter } from 'v2/hooks/useIsOutsideMainRouter'
 
 const Container = styled(Box)`
   position: relative;
@@ -115,8 +115,6 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
   render() {
     const { scheme, ...rest } = this.props
     const { mode, query, debouncedQuery, cursor } = this.state
-
-    console.log({ query })
 
     return (
       <Container {...rest}>

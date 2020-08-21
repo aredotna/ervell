@@ -8,7 +8,7 @@ import { IsOutsideMainRouterQueryHook } from '__generated__/IsOutsideMainRouterQ
 // This is a temporary measure to handle cases where components can exist both
 // inside and outside the main router.
 
-export default function() {
+export const useIsOutsideMainRouter = () => {
   const client = useApolloClient()
 
   try {
