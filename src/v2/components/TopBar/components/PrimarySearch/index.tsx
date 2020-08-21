@@ -9,6 +9,7 @@ import SearchInput from 'v2/components/UI/SearchInput'
 import PrimarySearchResults from 'v2/components/TopBar/components/PrimarySearch/components/PrimarySearchResults'
 
 import { overflowScrolling } from 'v2/styles/mixins'
+import { useIsOutsideMainRouter } from 'v2/hooks/useIsOutsideMainRouter'
 
 const Container = styled(Box)`
   position: relative;
@@ -24,6 +25,10 @@ const Results = styled(Box)`
 interface PrimarySearchProps {
   scheme: 'DEFAULT' | 'GROUP'
   history: any
+  // TODO: Delete isOutsideMainRouter
+  // This is a temporary measure to handle cases where components can exist both
+  // inside and outside the main router.
+  isOutsideMainRouter: boolean
   flex?: number
 }
 
@@ -65,7 +70,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
 
   handleKeyDown = ({ key }) => {
     const { cursor, href, query } = this.state
-    const { history } = this.props
+    const { history, isOutsideMainRouter } = this.props
 
     switch (key) {
       case 'Escape':
@@ -74,6 +79,12 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
       case 'Enter':
         if (query === '') return
         this.setState({ query: '', debouncedQuery: '' })
+
+        if (isOutsideMainRouter) {
+          window.location.href = href
+          break
+        }
+
         history.push(href)
         break
       case 'ArrowDown':
@@ -135,7 +146,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
           }}
         />
 
-        {query && mode === 'focus' && (
+        {query && (
           <Overlay targetEl={() => this.searchInputRef.current} fullWidth>
             <Results>
               <PrimarySearchResults
@@ -158,7 +169,14 @@ const PrimarySearchContainer: React.FC<{
   flex?: number
 }> = ({ ...props }) => {
   const history = useHistory()
-  return <PrimarySearch history={history} {...props} />
+  const isOutsideMainRouter = useIsOutsideMainRouter()
+  return (
+    <PrimarySearch
+      history={history}
+      isOutsideMainRouter={isOutsideMainRouter}
+      {...props}
+    />
+  )
 }
 
 export default PrimarySearchContainer

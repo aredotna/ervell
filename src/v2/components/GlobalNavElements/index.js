@@ -10,6 +10,7 @@ import BottomBanner from 'v2/components/BottomBanner'
 import WithSerializedMe from 'v2/hocs/WithSerializedMe'
 
 import globalNavElementsQuery from 'v2/components/GlobalNavElements/queries/globalNavElements'
+import { BrowserRouter } from 'react-router-dom'
 
 // Includes
 // - TopBar (logged-in/out)
@@ -82,4 +83,14 @@ class GlobalNavElements extends PureComponent {
   }
 }
 
-export default WithSerializedMe(GlobalNavElements)
+const GlobalNavElementsWithSerializedMe = WithSerializedMe(GlobalNavElements)
+
+export default GlobalNavElementsWithSerializedMe
+
+export const GlobalNavElementsWithRouter = () => {
+  return (
+    <BrowserRouter>
+      <GlobalNavElementsWithSerializedMe />
+    </BrowserRouter>
+  )
+}
