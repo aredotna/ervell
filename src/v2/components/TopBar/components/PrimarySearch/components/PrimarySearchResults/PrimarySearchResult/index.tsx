@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react'
-import styled from 'styled-components'
+import React, { useCallback } from 'react'
+import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import Text from 'v2/components/UI/Text'
+import A from 'v2/components/UI/Link'
 import GroupBadge from 'v2/components/UI/GroupBadge'
 import { ICON_OFFSET } from 'v2/components/UI/SearchInput'
 import BorderedLock from 'v2/components/UI/BorderedLock'
@@ -12,6 +13,7 @@ import { mixin as boxMixin } from 'v2/components/UI/Box'
 
 import { PrimarySearchResult as PrimarySearchResultType } from '__generated__/PrimarySearchResult'
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import useIsErrorPage from 'v2/hooks/useIsErrorPage'
 
 const Label = styled(Text)`
   font-weight: bold;
@@ -20,7 +22,7 @@ const Label = styled(Text)`
   ${overflowEllipsis}
 `
 
-const Container = styled(Link)`
+const containerMixin = css`
   ${boxMixin}
   display: flex;
   text-decoration: none;
@@ -37,6 +39,14 @@ const Container = styled(Link)`
     `
     background-color: ${props.theme.colors.state.neutral};
   `}
+`
+
+const ClientLink = styled(Link)`
+  ${containerMixin}
+`
+
+const StandardLink = styled(A)`
+  ${containerMixin}
 `
 
 const PathContainer = styled.div`
@@ -58,7 +68,7 @@ const PathContainer = styled.div`
   }
 `
 
-Container.defaultProps = {
+const defaultProps = {
   pl: ICON_OFFSET,
   pr: 6,
   py: 6,
@@ -67,80 +77,98 @@ Container.defaultProps = {
   borderColor: 'gray.semiLight',
 }
 
+ClientLink.defaultProps = defaultProps
+StandardLink.defaultProps = defaultProps
+
 interface PrimarySearchResultProps {
-  result: PrimarySearchResultType
-  selected: boolean
+  result?: PrimarySearchResultType
+  selected?: boolean
   to?: string
   bg?: any
   onClick?: any
 }
 
-export default class PrimarySearchResult extends PureComponent<
-  PrimarySearchResultProps
-> {
-  static defaultProps = {
-    result: null,
-    children: null,
-    selected: false,
-  }
+export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
+  result,
+  children,
+  selected = false,
+  ...rest
+}) => {
+  const isErrorPage = useIsErrorPage()
 
-  preventBlur = e => {
-    e.preventDefault()
-  }
+  const Container = isErrorPage ? StandardLink : ClientLink
 
-  render() {
-    const { result, children, ...rest } = this.props
-
-    if (result) {
-      const toParams = {
-        pathname: result.href,
-        state: getBreadcrumbPath(result),
+  const onClick = useCallback(
+    e => {
+      if (isErrorPage) {
+        return (window.location.href = result.href)
       }
-      return (
-        <Container to={toParams} onMouseDown={this.preventBlur} {...rest}>
-          <PathContainer>
-            {result.__typename === 'Channel' && result.owner && (
-              <Label flex="1">
-                {result.owner.name}
 
-                {result.owner.__typename === 'Group' && (
-                  <GroupBadge f={0} visibility={result.owner.visibility} />
-                )}
-              </Label>
-            )}
+      e.preventDefault()
+    },
+    [isErrorPage, result]
+  )
 
-            <Label
-              color={
-                (result.__typename === 'Channel' ||
-                  result.__typename === 'Group') &&
-                result.visibility
-                  ? `channel.${result.visibility}`
-                  : 'gray.base'
-              }
-            >
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: result.label,
-                }}
-              />
+  if (result) {
+    const toParams = isErrorPage
+      ? { href: result.href }
+      : {
+          to: {
+            pathname: result.href,
+            state: getBreadcrumbPath(result),
+          },
+        }
+    return (
+      <Container
+        onMouseDown={onClick}
+        selected={selected}
+        {...toParams}
+        {...rest}
+      >
+        <PathContainer>
+          {result.__typename === 'Channel' && result.owner && (
+            <Label flex="1">
+              {result.owner.name}
 
-              {(result.__typename === 'Channel' ||
-                result.__typename === 'Group') &&
-                result.visibility === 'private' && <BorderedLock ml={3} />}
-
-              {result.__typename === 'Group' && (
-                <GroupBadge f={0} visibility={result.visibility} />
+              {result.owner.__typename === 'Group' && (
+                <GroupBadge f={0} visibility={result.owner.visibility} />
               )}
             </Label>
-          </PathContainer>
-        </Container>
-      )
-    }
+          )}
 
-    return (
-      <Container onMouseDown={this.preventBlur} {...rest}>
-        {children}
+          <Label
+            color={
+              (result.__typename === 'Channel' ||
+                result.__typename === 'Group') &&
+              result.visibility
+                ? `channel.${result.visibility}`
+                : 'gray.base'
+            }
+          >
+            <span
+              dangerouslySetInnerHTML={{
+                __html: result.label,
+              }}
+            />
+
+            {(result.__typename === 'Channel' ||
+              result.__typename === 'Group') &&
+              result.visibility === 'private' && <BorderedLock ml={3} />}
+
+            {result.__typename === 'Group' && (
+              <GroupBadge f={0} visibility={result.visibility} />
+            )}
+          </Label>
+        </PathContainer>
       </Container>
     )
   }
+
+  return (
+    <Container onMouseDown={onClick} {...rest}>
+      {children}
+    </Container>
+  )
 }
+
+export default PrimarySearchResult
