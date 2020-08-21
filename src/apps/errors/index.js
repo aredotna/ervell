@@ -5,12 +5,16 @@ import { NODE_ENV } from 'config.coffee'
 
 const logger = debug('error')
 
+// TODO: Delete this whole file
+
 // eslint-disable-next-line no-unused-vars
 export default (err, req, res, _next) => {
   logger(err.stack)
 
   const status = err.status || 500
   const isVisible = NODE_ENV === 'development'
+
+  res.locals.sd.IS_OUTSIDE_MAIN_ROUTER = true
 
   const response = {
     code: status,
