@@ -43,7 +43,7 @@ const Container = styled(Box)`
 
 interface TopBarProps {
   scheme: 'DEFAULT' | 'GROUP'
-  me: Me
+  me?: Me
 }
 
 export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
@@ -64,7 +64,7 @@ export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
             />
           )}
 
-          <MyRepresentation px={5} me={me} />
+          <MyRepresentation px={5} me={serializedMe} />
         </React.Fragment>
       ) : (
         <AuthenticationLinks px={6} />

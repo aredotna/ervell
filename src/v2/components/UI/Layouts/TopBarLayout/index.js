@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
-import GlobalNavElements from 'v2/components/GlobalNavElements'
+import { GlobalNavElements } from 'v2/components/GlobalNavElements'
 
 export default class TopBarLayout extends PureComponent {
   static propTypes = {
