@@ -10,7 +10,7 @@ import { ConfirmedStatus } from '__generated__/globalTypes'
 import Box from 'v2/components/UI/Box'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 
-import CONFIRM_ACCOUNT_MUTATION from './mutations/ConfirmAccountMutation'
+import CONFIRM_ACCOUNT_MUTATION from './mutations/confirmAccountMutation'
 import {
   confirmAccountMutation,
   confirmAccountMutationVariables,
