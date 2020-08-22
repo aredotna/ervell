@@ -46,7 +46,8 @@ class GlobalNavElements extends PureComponent {
 
   render() {
     const { scheme, serializedMe } = this.props
-    const isLoggedOut = !serializedMe
+
+    const isLoggedOut = !serializedMe.id
     const isLoggedIn = !isLoggedOut
 
     return (
