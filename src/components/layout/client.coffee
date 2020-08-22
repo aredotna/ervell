@@ -20,7 +20,7 @@ initLoggedOutCTA = require '../logged_out_cta/index.coffee'
 initLightboxKeyboardShortcuts = require('./initLightboxKeyboardShortcuts')
 
 { mountWithApolloProvider } = require '../../v2/apollo/index'
-{ GlobalNavElementsWithRouter } = require '../../v2/components/GlobalNavElements/index'
+{ GlobalNavElementsWithRouter } = require '../../v2/components/GlobalNavElements/index.tsx'
 
 module.exports = ->
   setDeviceClasses()
