@@ -5,12 +5,18 @@ import styled from 'styled-components'
 import { BlankTopBarLayout } from 'v2/components/UI/Layouts/BlankTopBarLayout'
 import CenteringBox from 'v2/components/UI/CenteringBox'
 import Constrain from 'v2/components/UI/Constrain'
+import Alert from 'v2/components/UI/Alert'
 
 import Text from 'v2/components/UI/Text'
 import { GenericButton as Button } from 'v2/components/UI/GenericButton'
 
 import RESEND_CONFIRMATION_EMAIL from './mutations/resendConfirmationEmail'
-import { ResendConfirmationEmailMutation } from '__generated__/ResendConfirmationEmailMutation'
+import {
+  ResendLoggedOutConfirmationEmailMutation,
+  ResendLoggedOutConfirmationEmailMutationVariables,
+} from '__generated__/ResendLoggedOutConfirmationEmailMutation'
+import { ApolloError } from 'apollo-client'
+import Box from 'v2/components/UI/Box'
 
 const Container = styled(CenteringBox)`
   flex-direction: column;
@@ -28,19 +34,30 @@ interface ExpiredConfirmationPageProps {
   email: string
 }
 
-export const ExpiredConfirmationPage: React.FC<ExpiredConfirmationPageProps> = () => {
-  const [state, setState] = useState<'resting' | 'sending' | 'done'>('resting')
+export const ExpiredConfirmationPage: React.FC<ExpiredConfirmationPageProps> = ({
+  email,
+}) => {
+  const [state, setState] = useState<'resting' | 'sending' | 'done' | 'error'>(
+    'resting'
+  )
+  const [error, setError] = useState<string | null>(null)
 
   const [resendConfirmationEmail] = useMutation<
-    ResendConfirmationEmailMutation
-  >(RESEND_CONFIRMATION_EMAIL)
+    ResendLoggedOutConfirmationEmailMutation,
+    ResendLoggedOutConfirmationEmailMutationVariables
+  >(RESEND_CONFIRMATION_EMAIL, { variables: { email } })
 
   const onClick = useCallback(() => {
     if (state === 'resting') {
       setState('sending')
-      resendConfirmationEmail().then(() => {
-        setState('done')
-      })
+      resendConfirmationEmail()
+        .then(() => {
+          setState('done')
+        })
+        .catch((err: ApolloError) => {
+          setState('error')
+          setError(err.graphQLErrors[0].message)
+        })
     }
   }, [resendConfirmationEmail, state])
 
@@ -57,12 +74,21 @@ export const ExpiredConfirmationPage: React.FC<ExpiredConfirmationPageProps> = (
             account to continue.
           </Headline>
 
-          <Button f={4} mt={7} onClick={onClick} disabled={state !== 'resting'}>
+          <Box mt={7} />
+
+          {error && (
+            <Alert mb={5} bg="state.alert" color="white">
+              {error}
+            </Alert>
+          )}
+
+          <Button f={4} onClick={onClick} disabled={state !== 'resting'}>
             {
               {
                 resting: 'Resend my confirmation email',
-                sending: 'Sending you a new confirmation email..',
+                sending: `Sending a new confirmation email to ${email}...`,
                 done: 'Confimation email sent.',
+                error: `Error!`,
               }[state]
             }
           </Button>

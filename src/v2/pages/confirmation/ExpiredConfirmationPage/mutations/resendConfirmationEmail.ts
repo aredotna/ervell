@@ -1,12 +1,9 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation ResendConfirmationEmailMutation {
-    resend_confirmation_email(input: {}) {
-      me {
-        __typename
-        id
-      }
+  mutation ResendLoggedOutConfirmationEmailMutation($email: String!) {
+    resend_logged_out_confirmation_email(input: { email: $email }) {
+      status
     }
   }
 `
