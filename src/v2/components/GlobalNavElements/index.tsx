@@ -37,7 +37,7 @@ export const GlobalNavElements: React.FC<GlobalNavElementsProps> = ({
         window.location.reload()
       )
     }
-  }, [data, error, isLoggedIn])
+  }, [error, isLoggedIn])
 
   const components = []
 

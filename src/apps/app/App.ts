@@ -47,5 +47,5 @@ App.get(
 )
   .get('/group/:id/invite/:code', ensureLoggedIn, ...resolve)
   .get('/tools/*', ensureLoggedIn, ...resolve)
-  .get('/', homePathMiddleware, apolloMiddleware, ...resolve)
+  .get('/', homePathMiddleware, ...resolve)
   .get('*', ...resolve)
