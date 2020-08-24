@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import apolloMiddleware from 'v2/apollo/middleware'
 import homePathMiddleware from 'apps/app/middleware/homePath'
+import getFirstStatusCode from 'v2/util/getFirstStatusCode'
 
 import pageResolver from 'v2/components/UI/Page/resolver'
 import withStaticRouter from 'v2/hocs/WithStaticRouter'
@@ -20,7 +21,19 @@ const resolve = [
       .then(apolloRes => {
         pageResolver({ bundleName: 'app', apolloRes, res })
       })
-      .catch(next)
+      .catch(err => {
+        const STATUS_CODE = getFirstStatusCode(err)
+
+        if (STATUS_CODE === 'UNAUTHORIZED' && req.url === '/') {
+          // This typically happens if the serialized user is "bad"
+          // or not actually logged in. If so: logout, then redirect somewhere.
+          // Falling through by using `next()` doesn't seem to actually purge the session.
+          req.logout()
+          return res.redirect('/log_in')
+        }
+
+        return next(err)
+      })
   },
 ]
 
