@@ -1,1 +1,0 @@
-$ require('../apps/confirmation/client/index.coffee')

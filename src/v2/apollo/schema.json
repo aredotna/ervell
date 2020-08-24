@@ -295,7 +295,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "block_filter",
@@ -632,7 +632,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -762,7 +762,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -3476,7 +3476,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -3965,7 +3965,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -4322,7 +4322,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -4705,7 +4705,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -14444,7 +14444,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -14884,7 +14884,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -15340,7 +15340,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -15988,7 +15988,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "157"
+                "defaultValue": "236"
               },
               {
                 "name": "q",
@@ -18076,6 +18076,18 @@
             "deprecationReason": null
           },
           {
+            "name": "IS_OUTSIDE_MAIN_ROUTER",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "THEME",
             "description": null,
             "args": [],
@@ -18417,6 +18429,33 @@
             "type": {
               "kind": "OBJECT",
               "name": "ClearNotificationsPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "confirm_account",
+            "description": null,
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ConfirmAccountInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ConfirmAccountPayload",
               "ofType": null
             },
             "isDeprecated": false,
@@ -19389,6 +19428,33 @@
             "type": {
               "kind": "OBJECT",
               "name": "ResendConfirmationEmailPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "resend_logged_out_confirmation_email",
+            "description": null,
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ResendLoggedOutConfirmationEmailMutationInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ResendLoggedOutConfirmationEmailMutationPayload",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20871,6 +20937,117 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ConfirmAccountInput",
+        "description": "Autogenerated input type of ConfirmAccount",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "token",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ConfirmAccountPayload",
+        "description": "Autogenerated return type of ConfirmAccount",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ConfirmedStatus",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Me",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "ConfirmedStatus",
+        "description": "State of the logged in account",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "CONFIRMED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ALREADY_CONFIRMED",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ERROR",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -24130,6 +24307,72 @@
             "type": {
               "kind": "OBJECT",
               "name": "Me",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ResendLoggedOutConfirmationEmailMutationInput",
+        "description": "Autogenerated input type of ResendLoggedOutConfirmationEmailMutation",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ResendLoggedOutConfirmationEmailMutationPayload",
+        "description": "Autogenerated return type of ResendLoggedOutConfirmationEmailMutation",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "description": "A unique identifier for the client performing the mutation.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,

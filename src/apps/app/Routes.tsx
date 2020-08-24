@@ -30,6 +30,8 @@ import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
 import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
 import { BlogIndex } from 'v2/pages/blog/BlogIndex'
 import { BlogPost } from 'v2/pages/blog/BlogPost'
+import { ConfirmationPage } from 'v2/pages/confirmation/ConfirmationPage'
+import { ExpiredConfirmationPage } from 'v2/pages/confirmation/ExpiredConfirmationPage'
 
 export const Routes = () => {
   const location = useLocation()
@@ -103,6 +105,21 @@ export const Routes = () => {
           path="/group/:id/invite/:code"
           render={parseRoute(({ params }) => (
             <AcceptInvitePage code={params.code} />
+          ))}
+        />
+
+        {/* Confirm account */}
+        <Route
+          path="/confirm/expired"
+          render={parseRoute(({ query }) => (
+            <ExpiredConfirmationPage email={query.email} />
+          ))}
+        />
+
+        <Route
+          path="/confirm/:token"
+          render={parseRoute(({ params }) => (
+            <ConfirmationPage token={params.token} />
           ))}
         />
 

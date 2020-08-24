@@ -16,10 +16,6 @@ console.time('authentication')
 app.use(require('../apps/authentication'))
 console.timeEnd('authentication')
 
-console.time('confirmation')
-app.use(require('../apps/confirmation'))
-console.timeEnd('confirmation')
-
 console.time('getting_started')
 app.use(require('../apps/getting_started'))
 console.timeEnd('getting_started')
