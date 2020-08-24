@@ -25,7 +25,7 @@ export const GlobalNavElements: React.FC<GlobalNavElementsProps> = ({
   )
 
   useEffect(() => {
-    if (error && !isLoggedIn && error.graphQLErrors) {
+    if (error && error.graphQLErrors && isLoggedIn) {
       const {
         extensions: { code },
       } = error.graphQLErrors[0]

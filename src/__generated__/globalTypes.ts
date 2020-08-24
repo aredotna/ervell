@@ -59,6 +59,15 @@ export enum ChannelsSort {
 }
 
 /**
+ * State of the logged in account
+ */
+export enum ConfirmedStatus {
+  ALREADY_CONFIRMED = "ALREADY_CONFIRMED",
+  CONFIRMED = "CONFIRMED",
+  ERROR = "ERROR",
+}
+
+/**
  * Connectable types
  */
 export enum ConnectableTypeEnum {
