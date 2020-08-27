@@ -296,6 +296,9 @@ export interface FeedGroup_objects_Image {
   id: number | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
   user: FeedGroup_objects_Image_user | null;
   /**
@@ -339,6 +342,9 @@ export interface FeedGroup_objects_Link {
   counts: FeedGroup_objects_Link_counts | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
   updated_at: string | null;
   user: FeedGroup_objects_Link_user | null;
@@ -385,6 +391,9 @@ export interface FeedGroup_objects_Embed {
   id: number | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
   user: FeedGroup_objects_Embed_user | null;
   /**
@@ -429,6 +438,9 @@ export interface FeedGroup_objects_Attachment {
   id: number | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
   updated_at: string | null;
   user: FeedGroup_objects_Attachment_user | null;

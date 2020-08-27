@@ -13,6 +13,7 @@ interface Props {
 export const KonnectableLink: React.FC<Props> = ({ link, mode, ...rest }) => (
   <KonnectableGeneric
     src={link.src}
+    srcs={[link.src_1x, link.src_2x, link.src_3x]}
     title={link.title}
     borderColor="gray.hint"
     mode={mode}

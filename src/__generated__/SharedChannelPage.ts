@@ -241,6 +241,9 @@ export interface SharedChannelPage_channel_initial_contents_Image {
   source: SharedChannelPage_channel_initial_contents_Image_source | null;
   counts: SharedChannelPage_channel_initial_contents_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   can: SharedChannelPage_channel_initial_contents_Image_can | null;
   find_original_url: string | null;
 }
@@ -299,6 +302,9 @@ export interface SharedChannelPage_channel_initial_contents_Link {
   source: SharedChannelPage_channel_initial_contents_Link_source | null;
   counts: SharedChannelPage_channel_initial_contents_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
   can: SharedChannelPage_channel_initial_contents_Link_can | null;
 }
@@ -357,6 +363,9 @@ export interface SharedChannelPage_channel_initial_contents_Embed {
   source: SharedChannelPage_channel_initial_contents_Embed_source | null;
   counts: SharedChannelPage_channel_initial_contents_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   can: SharedChannelPage_channel_initial_contents_Embed_can | null;
 }
 
@@ -414,6 +423,9 @@ export interface SharedChannelPage_channel_initial_contents_Attachment {
   source: SharedChannelPage_channel_initial_contents_Attachment_source | null;
   counts: SharedChannelPage_channel_initial_contents_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
   can: SharedChannelPage_channel_initial_contents_Attachment_can | null;
 }

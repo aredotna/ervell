@@ -21,11 +21,16 @@ const Container = styled(Box).attrs({
 
 interface Props {
   src: string
+  srcs: string[]
   alt?: string
 }
 
-export const KonnectableImg: React.FC<Props> = ({ src, alt = null }) => (
+export const KonnectableImg: React.FC<Props> = ({ srcs, alt = null }) => (
   <Container>
-    <img src={src} alt={alt} />
+    <img
+      src={srcs[0]}
+      srcSet={`${srcs[0]} 1x, ${srcs[1]} 2x, ${srcs[2]} 3x,`}
+      alt={alt}
+    />
   </Container>
 )

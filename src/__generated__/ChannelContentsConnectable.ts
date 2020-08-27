@@ -117,6 +117,9 @@ export interface ChannelContentsConnectable_Image {
   source: ChannelContentsConnectable_Image_source | null;
   counts: ChannelContentsConnectable_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   can: ChannelContentsConnectable_Image_can | null;
   find_original_url: string | null;
 }
@@ -175,6 +178,9 @@ export interface ChannelContentsConnectable_Link {
   source: ChannelContentsConnectable_Link_source | null;
   counts: ChannelContentsConnectable_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
   can: ChannelContentsConnectable_Link_can | null;
 }
@@ -233,6 +239,9 @@ export interface ChannelContentsConnectable_Embed {
   source: ChannelContentsConnectable_Embed_source | null;
   counts: ChannelContentsConnectable_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   can: ChannelContentsConnectable_Embed_can | null;
 }
 
@@ -290,6 +299,9 @@ export interface ChannelContentsConnectable_Attachment {
   source: ChannelContentsConnectable_Attachment_source | null;
   counts: ChannelContentsConnectable_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
   can: ChannelContentsConnectable_Attachment_can | null;
 }
