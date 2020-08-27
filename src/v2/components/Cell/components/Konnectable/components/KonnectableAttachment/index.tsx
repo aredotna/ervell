@@ -41,6 +41,7 @@ const KonnectableAttachment: React.FC<Props> = ({
     return (
       <KonnectableGeneric
         src={attachment.src}
+        srcs={[attachment.src_1x, attachment.src_2x, attachment.src_3x]}
         title={attachment.title}
         mode={mode}
         {...rest}

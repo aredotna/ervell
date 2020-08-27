@@ -22,18 +22,20 @@ const Container = styled(Box)`
 
 interface Props extends BoxProps {
   src: string
+  srcs: string[]
   title?: string
   mode: Mode
 }
 
 export const KonnectableGeneric: React.FC<Props> = ({
   src,
+  srcs,
   title = null,
   mode = Mode.RESTING,
   ...rest
 }) => (
   <Container mode={mode} border="1px solid" borderColor="transparent" {...rest}>
-    <KonnectableImg src={src} alt={title} />
+    <KonnectableImg src={src} srcs={srcs} alt={title} />
   </Container>
 )
 

@@ -119,6 +119,9 @@ export interface ChannelContentsSet_channel_contents_Image {
   source: ChannelContentsSet_channel_contents_Image_source | null;
   counts: ChannelContentsSet_channel_contents_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   can: ChannelContentsSet_channel_contents_Image_can | null;
   find_original_url: string | null;
 }
@@ -177,6 +180,9 @@ export interface ChannelContentsSet_channel_contents_Link {
   source: ChannelContentsSet_channel_contents_Link_source | null;
   counts: ChannelContentsSet_channel_contents_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
   can: ChannelContentsSet_channel_contents_Link_can | null;
 }
@@ -235,6 +241,9 @@ export interface ChannelContentsSet_channel_contents_Embed {
   source: ChannelContentsSet_channel_contents_Embed_source | null;
   counts: ChannelContentsSet_channel_contents_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   can: ChannelContentsSet_channel_contents_Embed_can | null;
 }
 
@@ -292,6 +301,9 @@ export interface ChannelContentsSet_channel_contents_Attachment {
   source: ChannelContentsSet_channel_contents_Attachment_source | null;
   counts: ChannelContentsSet_channel_contents_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
   can: ChannelContentsSet_channel_contents_Attachment_can | null;
 }

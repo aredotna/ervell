@@ -295,7 +295,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "block_filter",
@@ -632,7 +632,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -762,7 +762,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -3476,7 +3476,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -3965,7 +3965,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -4322,7 +4322,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -4705,7 +4705,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -8237,6 +8237,69 @@
             "deprecationReason": null
           },
           {
+            "name": "resized_image_url",
+            "description": null,
+            "args": [
+              {
+                "name": "width",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "height",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "quality",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "75"
+              },
+              {
+                "name": "blur",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "sharpen",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "source",
             "description": null,
             "args": [],
@@ -8945,6 +9008,69 @@
                 "name": "Channel",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "resized_image_url",
+            "description": null,
+            "args": [
+              {
+                "name": "width",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "height",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "quality",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "75"
+              },
+              {
+                "name": "blur",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "sharpen",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9835,6 +9961,69 @@
             "deprecationReason": null
           },
           {
+            "name": "resized_image_url",
+            "description": null,
+            "args": [
+              {
+                "name": "width",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "height",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "quality",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "75"
+              },
+              {
+                "name": "blur",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "sharpen",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "source",
             "description": null,
             "args": [],
@@ -10502,6 +10691,69 @@
                 "name": "Channel",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "resized_image_url",
+            "description": null,
+            "args": [
+              {
+                "name": "width",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "height",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "quality",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": "75"
+              },
+              {
+                "name": "blur",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "sharpen",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -14444,7 +14696,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -14884,7 +15136,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -15340,7 +15592,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",
@@ -15988,7 +16240,7 @@
                   "name": "Int",
                   "ofType": null
                 },
-                "defaultValue": "236"
+                "defaultValue": "240"
               },
               {
                 "name": "q",

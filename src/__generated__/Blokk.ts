@@ -92,6 +92,9 @@ export interface Blokk_blokk_Image {
   source: Blokk_blokk_Image_source | null;
   counts: Blokk_blokk_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface Blokk_blokk_Link_user {
@@ -136,6 +139,9 @@ export interface Blokk_blokk_Link {
   source: Blokk_blokk_Link_source | null;
   counts: Blokk_blokk_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
 }
 
@@ -181,6 +187,9 @@ export interface Blokk_blokk_Embed {
   source: Blokk_blokk_Embed_source | null;
   counts: Blokk_blokk_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface Blokk_blokk_Attachment_user {
@@ -225,6 +234,9 @@ export interface Blokk_blokk_Attachment {
   source: Blokk_blokk_Attachment_source | null;
   counts: Blokk_blokk_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
 }
 

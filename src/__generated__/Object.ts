@@ -151,6 +151,9 @@ export interface Object_Image {
   id: number | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
   user: Object_Image_user | null;
   /**
@@ -194,6 +197,9 @@ export interface Object_Link {
   counts: Object_Link_counts | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
   updated_at: string | null;
   user: Object_Link_user | null;
@@ -240,6 +246,9 @@ export interface Object_Embed {
   id: number | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
   user: Object_Embed_user | null;
   /**
@@ -284,6 +293,9 @@ export interface Object_Attachment {
   id: number | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
   updated_at: string | null;
   user: Object_Attachment_user | null;

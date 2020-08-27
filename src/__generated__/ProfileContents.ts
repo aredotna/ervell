@@ -96,6 +96,9 @@ export interface ProfileContents_User_contents_Image {
   source: ProfileContents_User_contents_Image_source | null;
   counts: ProfileContents_User_contents_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ProfileContents_User_contents_Link_user {
@@ -140,6 +143,9 @@ export interface ProfileContents_User_contents_Link {
   source: ProfileContents_User_contents_Link_source | null;
   counts: ProfileContents_User_contents_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
 }
 
@@ -185,6 +191,9 @@ export interface ProfileContents_User_contents_Embed {
   source: ProfileContents_User_contents_Embed_source | null;
   counts: ProfileContents_User_contents_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ProfileContents_User_contents_Attachment_user {
@@ -229,6 +238,9 @@ export interface ProfileContents_User_contents_Attachment {
   source: ProfileContents_User_contents_Attachment_source | null;
   counts: ProfileContents_User_contents_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
 }
 

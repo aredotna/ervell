@@ -11,5 +11,8 @@ export interface KonnectableLink {
   href: string | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
 }
