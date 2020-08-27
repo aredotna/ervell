@@ -112,6 +112,9 @@ export interface ProfileChannelSearch_Group_channels_blokks_Image {
   source: ProfileChannelSearch_Group_channels_blokks_Image_source | null;
   counts: ProfileChannelSearch_Group_channels_blokks_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ProfileChannelSearch_Group_channels_blokks_Link_user {
@@ -156,6 +159,9 @@ export interface ProfileChannelSearch_Group_channels_blokks_Link {
   source: ProfileChannelSearch_Group_channels_blokks_Link_source | null;
   counts: ProfileChannelSearch_Group_channels_blokks_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
 }
 
@@ -201,6 +207,9 @@ export interface ProfileChannelSearch_Group_channels_blokks_Embed {
   source: ProfileChannelSearch_Group_channels_blokks_Embed_source | null;
   counts: ProfileChannelSearch_Group_channels_blokks_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ProfileChannelSearch_Group_channels_blokks_Attachment_user {
@@ -245,6 +254,9 @@ export interface ProfileChannelSearch_Group_channels_blokks_Attachment {
   source: ProfileChannelSearch_Group_channels_blokks_Attachment_source | null;
   counts: ProfileChannelSearch_Group_channels_blokks_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
 }
 
@@ -496,6 +508,9 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Image {
   source: ProfileChannelSearch_User_channels_Channel_blokks_Image_source | null;
   counts: ProfileChannelSearch_User_channels_Channel_blokks_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Link_user {
@@ -540,6 +555,9 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Link {
   source: ProfileChannelSearch_User_channels_Channel_blokks_Link_source | null;
   counts: ProfileChannelSearch_User_channels_Channel_blokks_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
 }
 
@@ -585,6 +603,9 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Embed {
   source: ProfileChannelSearch_User_channels_Channel_blokks_Embed_source | null;
   counts: ProfileChannelSearch_User_channels_Channel_blokks_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Attachment_user {
@@ -629,6 +650,9 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Attachment {
   source: ProfileChannelSearch_User_channels_Channel_blokks_Attachment_source | null;
   counts: ProfileChannelSearch_User_channels_Channel_blokks_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
 }
 

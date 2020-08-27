@@ -13,6 +13,7 @@ interface Props {
 export const KonnectableImage: React.FC<Props> = ({ image, mode, ...rest }) => (
   <KonnectableGeneric
     src={image.src}
+    srcs={[image.src_1x, image.src_2x, image.src_3x]}
     title={image.title}
     mode={mode}
     {...rest}

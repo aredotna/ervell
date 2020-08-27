@@ -94,6 +94,9 @@ export interface ExploreContents_contents_Image {
   source: ExploreContents_contents_Image_source | null;
   counts: ExploreContents_contents_Image_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ExploreContents_contents_Link_user {
@@ -138,6 +141,9 @@ export interface ExploreContents_contents_Link {
   source: ExploreContents_contents_Link_source | null;
   counts: ExploreContents_contents_Link_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
 }
 
@@ -183,6 +189,9 @@ export interface ExploreContents_contents_Embed {
   source: ExploreContents_contents_Embed_source | null;
   counts: ExploreContents_contents_Embed_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ExploreContents_contents_Attachment_user {
@@ -227,6 +236,9 @@ export interface ExploreContents_contents_Attachment {
   source: ExploreContents_contents_Attachment_source | null;
   counts: ExploreContents_contents_Attachment_counts | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
 }
 

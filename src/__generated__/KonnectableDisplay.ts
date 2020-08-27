@@ -148,6 +148,9 @@ export interface KonnectableDisplay_Image {
   title: string | null;
   href: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
   user: KonnectableDisplay_Image_user | null;
   /**
@@ -180,6 +183,9 @@ export interface KonnectableDisplay_Link {
   href: string | null;
   title: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   external_url: string | null;
   updated_at: string | null;
   user: KonnectableDisplay_Link_user | null;
@@ -213,6 +219,9 @@ export interface KonnectableDisplay_Embed {
   title: string | null;
   href: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
   user: KonnectableDisplay_Embed_user | null;
   /**
@@ -245,6 +254,9 @@ export interface KonnectableDisplay_Attachment {
   title: string | null;
   href: string | null;
   src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   file_extension: string | null;
   updated_at: string | null;
   user: KonnectableDisplay_Attachment_user | null;
