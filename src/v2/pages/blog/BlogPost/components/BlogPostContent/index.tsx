@@ -10,13 +10,9 @@ import HorizontalRule from 'v2/components/UI/HorizontalRule'
 
 import BLOG_POST_ASSETS_QUERY from 'v2/pages/blog/BlogPost/queries/BlogPostByID'
 
-interface BlogPostContentProps {
-  id: string
-  content: Document
-}
-
 const BaseText = styled(Text).attrs({
   my: 6,
+  f: 4,
   lineHeight: 2,
   underlineLinks: true,
 })``
@@ -60,7 +56,7 @@ const Blockquote = styled.blockquote`
   margin: ${({ theme }) => `${theme.space[8]} 0`};
 `
 
-const optionsWithEmbeds = (embedData: any) => {
+export const optionsWithEmbeds = (embedData: any) => {
   return {
     renderMark: {
       [MARKS.BOLD]: text => (
@@ -123,6 +119,28 @@ const optionsWithEmbeds = (embedData: any) => {
   }
 }
 
+interface BlogPostInnerProps {
+  content: Document
+  embedData?: any
+}
+
+export const BlogPostInner: React.FC<BlogPostInnerProps> = ({
+  content,
+  embedData,
+}) => {
+  const parsedContent = documentToReactComponents(
+    content,
+    optionsWithEmbeds(embedData)
+  )
+
+  return <Container>{parsedContent}</Container>
+}
+
+interface BlogPostContentProps {
+  id: string
+  content: Document
+}
+
 export const BlogPostContent: React.FC<BlogPostContentProps> = ({
   content,
   id,
@@ -132,10 +150,5 @@ export const BlogPostContent: React.FC<BlogPostContentProps> = ({
     variables: { id },
   })
 
-  const parsedContent = documentToReactComponents(
-    content,
-    optionsWithEmbeds(embedData)
-  )
-
-  return <Container>{parsedContent}</Container>
+  return <BlogPostInner content={content} embedData={embedData} />
 }

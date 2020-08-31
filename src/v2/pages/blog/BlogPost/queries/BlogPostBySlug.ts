@@ -11,6 +11,17 @@ export default gql`
         slug
         title
         category
+        blocksCollection {
+          items {
+            sys {
+              id
+            }
+            blockUrl
+            text {
+              json
+            }
+          }
+        }
         image {
           small: url(transform: { width: 250 })
           medium: url(transform: { width: 500 })
@@ -25,6 +36,10 @@ export default gql`
           }
         }
         body {
+          json
+        }
+
+        epilogue {
           json
         }
       }
