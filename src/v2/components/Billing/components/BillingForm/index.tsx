@@ -124,7 +124,6 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       })
       .then(() => {
         window.location.reload()
-        true
       })
   }
 
