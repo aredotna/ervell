@@ -3,6 +3,7 @@ import { propType } from 'graphql-anywhere'
 import { injectStripe } from 'react-stripe-elements'
 import { graphql } from 'react-apollo'
 import compose from 'lodash.flowright'
+import axios from 'axios'
 
 import mapErrors from 'v2/util/mapErrors'
 
@@ -118,6 +119,12 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       refetchQueries: [{ query: billingQuery }],
       awaitRefetchQueries: true,
     })
+      .then(() => {
+        return axios.get('/me/refresh')
+      })
+      .then(() => {
+        window.location.reload()
+      })
   }
 
   handleErrors = err => {
@@ -340,9 +347,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
                     <br />
                     {customer.is_canceled
                       ? `Subscription ends on ${customer.current_period_end_at}`
-                      : `Automatically renews on ${
-                          customer.current_period_end_at
-                        }`}
+                      : `Automatically renews on ${customer.current_period_end_at}`}
                   </Text>
                 </React.Fragment>
               )}

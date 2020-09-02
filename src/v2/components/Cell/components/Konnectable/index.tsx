@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
 import { Link, useLocation } from 'react-router-dom'
+import { useQuery } from 'react-apollo'
 
 import { touch as isTouchDevice } from 'v2/util/is'
 
@@ -19,6 +20,8 @@ import KonnectableChannelOverlay from 'v2/components/Cell/components/Konnectable
 import useIsSpiderRequesting from 'v2/hooks/useIsSpiderRequesting'
 
 import { getBreadcrumbPath } from 'v2/util/getBreadcrumbPath'
+import BLOCK_QUERY from './queries/blokk'
+import { Blokk, BlokkVariables } from '__generated__/Blokk'
 
 const Container = styled(Link)`
   box-sizing: border-box;
@@ -66,7 +69,7 @@ interface State {
 }
 
 interface InnerProps {
-  location: any
+  location?: any
   isSpiderRequesting: boolean
 }
 
@@ -119,6 +122,8 @@ export class KonnectableInner extends PureComponent<Props & InnerProps> {
       children,
       context,
       isSpiderRequesting,
+      location,
+      ...rest
     } = this.props
 
     const defaultToParams = {
@@ -128,7 +133,7 @@ export class KonnectableInner extends PureComponent<Props & InnerProps> {
     }
 
     const toParams =
-      konnectable.__typename === 'Channel' || isSpiderRequesting
+      konnectable.__typename === 'Channel' || isSpiderRequesting || !location
         ? defaultToParams
         : {
             ...defaultToParams,
@@ -151,6 +156,7 @@ export class KonnectableInner extends PureComponent<Props & InnerProps> {
         data-no-instant={
           konnectable.__typename === 'Channel' ? undefined : true
         }
+        {...rest}
       >
         {children && children}
 
@@ -196,6 +202,35 @@ export const Konnectable: React.FC<Props> = props => {
       isSpiderRequesting={isSpiderRequesting}
       location={location}
       {...props}
+    />
+  )
+}
+
+interface BlockWithQueryProps {
+  id: string
+}
+
+export const BlokkWithQuery: React.FC<BlockWithQueryProps> = ({
+  id,
+  ...rest
+}) => {
+  const location = useLocation()
+  const { data, loading, error } = useQuery<Blokk, BlokkVariables>(
+    BLOCK_QUERY,
+    { variables: { id } }
+  )
+
+  if (loading || error) {
+    return <Container />
+  }
+
+  return (
+    <KonnectableInner
+      konnectable={data.blokk}
+      location={location}
+      isPreviewable
+      isSpiderRequesting={false}
+      {...rest}
     />
   )
 }

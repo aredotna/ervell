@@ -6,6 +6,7 @@ import { __outlineBorder__ } from 'v2/styles/mixins'
 
 import { Input } from 'v2/components/UI/Inputs'
 import Text from 'v2/components/UI/Text'
+
 import { RecentChannels } from 'v2/components/ConnectionSelectionList/components/RecentChannels'
 import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
 
@@ -22,6 +23,33 @@ const Container = styled.div`
       ${__outlineBorder__()}
     }
   `}
+`
+
+const SearchContainer = styled.div`
+  position: relative;
+`
+
+const SearchTabContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`
+
+const SearchTab = styled(Text).attrs({
+  f: 1,
+  py: 4,
+  px: 5,
+  textAlign: 'center',
+})`
+  color: ${props =>
+    props.active
+      ? props.theme.colors.gray.base
+      : props.theme.colors.gray.regular};
+
+  &:hover {
+    color: ${props => props.theme.colors.gray.bold};
+  }
 `
 
 const SearchInput = styled(Input).attrs({
@@ -66,6 +94,8 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
   const [debouncedQuery, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'resting'>('resting')
 
+  const [includeOpenChannels, setIncludeOpenChannels] = useState<boolean>(false)
+
   const debounceQuery = debounce(debouncedQuery => {
     setDebouncedQuery(debouncedQuery)
   }, 200)
@@ -78,7 +108,9 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
 
   return (
     <Container mode={mode} isOutlined={isOutlined}>
-      <SearchInput onChange={handleChange} />
+      <SearchContainer>
+        <SearchInput onChange={handleChange} />
+      </SearchContainer>
 
       {mode === 'resting' && (
         <>
@@ -94,9 +126,25 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
       )}
       {mode === 'active' && (
         <>
+          <SearchTabContainer>
+            <SearchTab
+              active={!includeOpenChannels}
+              onClick={() => setIncludeOpenChannels(false)}
+            >
+              Your channels
+            </SearchTab>
+            <SearchTab
+              active={includeOpenChannels}
+              onClick={() => setIncludeOpenChannels(true)}
+            >
+              All channels
+            </SearchTab>
+          </SearchTabContainer>
+
           <SearchedChannels
             query={debouncedQuery}
             onConnectionSelection={onConnectionSelection}
+            includeOpenChannels={includeOpenChannels}
           />
         </>
       )}

@@ -44,4 +44,5 @@ export interface SearchedChannelsQuery {
 
 export interface SearchedChannelsQueryVariables {
   query: string;
+  includeOpenChannels: boolean;
 }
