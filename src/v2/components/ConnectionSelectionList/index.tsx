@@ -42,6 +42,7 @@ const SearchTab = styled(Text).attrs({
   px: 5,
   textAlign: 'center',
 })`
+  cursor: pointer;
   color: ${props =>
     props.active
       ? props.theme.colors.gray.base
