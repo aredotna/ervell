@@ -154,18 +154,6 @@ export default class Overlay extends PureComponent {
       marginY,
     } = this.props
 
-    console.log({
-      anchorY,
-      anchorX,
-      alignToY,
-      alignToX,
-      offsetY,
-      offsetX,
-      fullWidth,
-      marginY,
-      el,
-    })
-
     const {
       [alignToY]: y,
       [alignToX]: x,
