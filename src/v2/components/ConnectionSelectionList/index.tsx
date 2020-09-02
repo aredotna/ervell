@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { debounce, isEmpty } from 'underscore'
 
@@ -6,9 +6,6 @@ import { __outlineBorder__ } from 'v2/styles/mixins'
 
 import { Input } from 'v2/components/UI/Inputs'
 import Text from 'v2/components/UI/Text'
-import Icons from 'v2/components/UI/Icons'
-import { getSpace } from 'v2/styles/functions'
-import Overlay from 'v2/components/UI/Overlay'
 
 import { RecentChannels } from 'v2/components/ConnectionSelectionList/components/RecentChannels'
 import SearchedChannels from 'v2/components/ConnectionSelectionList/components/SearchedChannels'
@@ -32,26 +29,26 @@ const SearchContainer = styled.div`
   position: relative;
 `
 
-const SearchSettingsContainer = styled.div`
-  position: absolute;
-  right: ${getSpace(1)};
-  top: 0;
-  height: 100%;
+const SearchTabContainer = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 `
 
-const SearchSettings = styled(Icons).attrs({
-  name: 'Cog',
-  size: '1rem',
-  color: 'gray.medium',
-  mr: 4,
+const SearchTab = styled(Text).attrs({
+  f: 1,
+  py: 4,
+  px: 5,
+  textAlign: 'center',
 })`
-  cursor: pointer;
+  color: ${props =>
+    props.active
+      ? props.theme.colors.gray.base
+      : props.theme.colors.gray.regular};
+
   &:hover {
-    svg {
-      fill: ${props => props.theme.colors.gray.bold};
-    }
+    color: ${props => props.theme.colors.gray.bold};
   }
 `
 
@@ -97,6 +94,8 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
   const [debouncedQuery, setDebouncedQuery] = useState<string>('')
   const [mode, setMode] = useState<'active' | 'resting'>('resting')
 
+  const [includeOpenChannels, setIncludeOpenChannels] = useState<boolean>(false)
+
   const debounceQuery = debounce(debouncedQuery => {
     setDebouncedQuery(debouncedQuery)
   }, 200)
@@ -107,50 +106,10 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
     debounceQuery(query)
   }
 
-  const [settingsMode, setSettingsMode] = useState<'resting' | 'open'>(
-    'resting'
-  )
-
-  const openMenu = useCallback(e => {
-    e.preventDefault()
-    e.stopPropagation()
-    setSettingsMode('open')
-  }, [])
-
-  const closeMenu = useCallback(e => {
-    e.preventDefault()
-    e.stopPropagation()
-    setSettingsMode('resting')
-  }, [])
-
-  const targetEl = useRef(null)
-
-  console.log('ref', targetEl)
-
   return (
     <Container mode={mode} isOutlined={isOutlined}>
       <SearchContainer>
         <SearchInput onChange={handleChange} />
-        <SearchSettingsContainer ref={targetEl}>
-          <SearchSettings
-            onClick={{ open: closeMenu, resting: openMenu }[settingsMode]}
-          />
-        </SearchSettingsContainer>
-        {settingsMode === 'open' && (
-          <Overlay
-            onClose={closeMenu}
-            targetEl={() => targetEl.current}
-            alignToY="bottom"
-            alignToX="right"
-            anchorY="top"
-            anchorX="right"
-            offsetY={5}
-            offsetX={0}
-            disableTarget
-          >
-            <h1>Hello</h1>
-          </Overlay>
-        )}
       </SearchContainer>
 
       {mode === 'resting' && (
@@ -167,9 +126,25 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
       )}
       {mode === 'active' && (
         <>
+          <SearchTabContainer>
+            <SearchTab
+              active={!includeOpenChannels}
+              onClick={() => setIncludeOpenChannels(false)}
+            >
+              Your channels
+            </SearchTab>
+            <SearchTab
+              active={includeOpenChannels}
+              onClick={() => setIncludeOpenChannels(true)}
+            >
+              All channels
+            </SearchTab>
+          </SearchTabContainer>
+
           <SearchedChannels
             query={debouncedQuery}
             onConnectionSelection={onConnectionSelection}
+            includeOpenChannels={includeOpenChannels}
           />
         </>
       )}
