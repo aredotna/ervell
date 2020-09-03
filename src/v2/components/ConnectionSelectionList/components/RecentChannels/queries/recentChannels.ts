@@ -7,7 +7,7 @@ export default gql`
     me {
       __typename
       id
-      recent_channels: recent_connections(per: 5) {
+      recent_channels: recent_connections(per: 6) {
         ...SelectableChannel
       }
     }
