@@ -56,10 +56,27 @@ class ResetPasswordForm extends Component {
         password_confirmation,
       },
     })
-      .then(({ data: { reset_password: { me: { email } } } }) => {
-        this.setState({ mode: 'logging_in', email })
-        return axios.post('/me/sign_in', { email, password })
-      })
+      .then(
+        ({
+          data: {
+            reset_password: {
+              me: { email },
+            },
+          },
+        }) => {
+          this.setState({ mode: 'logging_in', email })
+          return axios.post(
+            '/me/sign_in',
+            { email, password },
+            {
+              headers: {
+                // Sets `req.xhr` in Express
+                'X-Requested-With': 'XMLHttpRequest',
+              },
+            }
+          )
+        }
+      )
 
       .then(() => {
         this.setState({ mode: 'redirecting' })
