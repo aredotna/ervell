@@ -15354,6 +15354,13 @@ react-transition-group@^1.2.0:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
+react-use-webp-support-check@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-use-webp-support-check/-/react-use-webp-support-check-1.0.5.tgz#36d0223d3ca0a2b9cefe538ab9a1accbd45d129a"
+  integrity sha512-FWLAZiC7S4C5DwbBq316CdfjZkNwBnNbuja/HeUNFP78Yip+FKFXPSIav3JVSrOgTXS2V2ULMQni1ZU7ltY7fQ==
+  dependencies:
+    supports-webp "^2.0.1"
+
 react-waypoint@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-waypoint/-/react-waypoint-8.1.0.tgz#91d926a2fd1be4cbd0351cb8c3d494fac0ef1699"
@@ -17447,6 +17454,11 @@ supports-hyperlinks@^1.0.1:
   dependencies:
     has-flag "^2.0.0"
     supports-color "^5.0.0"
+
+supports-webp@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/supports-webp/-/supports-webp-2.0.1.tgz#c0b22d9cfe6ea9b9ac7f56363a0aaf9ed9d9e18e"
+  integrity sha512-dSnAw44W4hqeIBb6GwbETzEZoYOjNNmcROUsZWqMjdJd1mpSKxiVMKh59Py/DI2fH/RlojjS1wCYjFBT68Q9zA==
 
 svg-url-loader@^2.3.2:
   version "2.3.2"

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useWebPSupportCheck } from 'react-use-webp-support-check'
 
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 import { KonnectableImage as KonnectableImageData } from '__generated__/KonnectableImage'
@@ -10,14 +11,19 @@ interface Props {
   mode: Mode
 }
 
-export const KonnectableImage: React.FC<Props> = ({ image, mode, ...rest }) => (
-  <KonnectableGeneric
-    src={image.src}
-    srcs={[image.src_1x, image.src_2x, image.src_3x]}
-    title={image.title}
-    mode={mode}
-    {...rest}
-  />
-)
+export const KonnectableImage: React.FC<Props> = ({ image, mode, ...rest }) => {
+  const supportsWebP = useWebPSupportCheck()
+  const srcs = supportsWebP ? [image.src_1x, image.src_2x, image.src_3x] : []
+
+  return (
+    <KonnectableGeneric
+      src={image.src}
+      srcs={srcs}
+      title={image.title}
+      mode={mode}
+      {...rest}
+    />
+  )
+}
 
 export default KonnectableImage

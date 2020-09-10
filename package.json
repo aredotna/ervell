@@ -184,6 +184,7 @@
     "react-split-pane": "^0.1.89",
     "react-stripe-elements": "^2.0.1",
     "react-transition-group": "^1.2.0",
+    "react-use-webp-support-check": "^1.0.5",
     "react-waypoint": "^8.1.0",
     "redis": "*",
     "regenerator-runtime": "^0.13.2",
