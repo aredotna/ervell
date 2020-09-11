@@ -25,6 +25,7 @@ interface Props extends BoxProps {
   srcs: string[]
   title?: string
   mode: Mode
+  fallbackToProxyJpeg?: boolean
 }
 
 export const KonnectableGeneric: React.FC<Props> = ({
@@ -32,10 +33,16 @@ export const KonnectableGeneric: React.FC<Props> = ({
   srcs,
   title = null,
   mode = Mode.RESTING,
+  fallbackToProxyJpeg,
   ...rest
 }) => (
   <Container mode={mode} border="1px solid" borderColor="transparent" {...rest}>
-    <KonnectableImg src={src} srcs={srcs} alt={title} />
+    <KonnectableImg
+      src={src}
+      srcs={srcs}
+      alt={title}
+      fallbackToProxyJpeg={fallbackToProxyJpeg}
+    />
   </Container>
 )
 
