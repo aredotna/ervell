@@ -85,7 +85,7 @@ export default class PricingPage extends PureComponent {
           <br />
           students and educators.&nbsp;
           <strong>
-            <a href="/education">Learn more</a>
+            <a href="/education" role="link" aria-label="Learn more about our 50% discount on Premium plans for students and educators">Learn more</a>
           </strong>
         </Text>
         <GradientContent>
