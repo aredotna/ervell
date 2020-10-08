@@ -25,7 +25,9 @@ const ButtonLink = styled(GenericButtonLink).attrs({
   f: [1, 2, 3],
   ml: 6,
   mt: [6, 6, 0],
-})``
+})`
+  background: transparent;
+`
 
 const Buttons = styled(Box).attrs({
   flexDirection: ['column', 'column', 'row'],
@@ -114,16 +116,18 @@ export const ProposePremium = props => (
   </Banner>
 )
 
-export const DecemberPremiumPush = props => (
-  <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
+export const ResidencyReminder = props => (
+  <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
     <Box>
-      Did you know you get these free stickers if you upgrade this month?
+      We are hosting a 1-month remote residency with SPACE10. The deadline for
+      applications is October 16th, 2020 at 11:59pm (CEST).
     </Box>
-    <ButtonLink color="white" href="/block/5666101" target="_blank">
+    <ButtonLink
+      color="state.supporter"
+      href="https://space10.com/residencies-new-everyday-life/"
+      target="_blank"
+    >
       Learn more
-    </ButtonLink>
-    <ButtonLink color="white" href="/settings/billing">
-      Upgrade
     </ButtonLink>
   </Banner>
 )
@@ -202,7 +206,7 @@ export const LoggedOutChannel = LoggedOutProfile
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
-  DECEMBER_PREMIUM_PUSH: DecemberPremiumPush,
+  RESIDENCY_REMINDER: ResidencyReminder,
   CONFIRM: Confirm,
   BOOKMARKLET: Bookmarklet,
   INVITE: Invite,
