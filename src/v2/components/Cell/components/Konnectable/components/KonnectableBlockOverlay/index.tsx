@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
+import { useLocation } from 'react-router'
 
 import { KonnectableBlockOverlay as KonnectableBlockOverlayData } from '__generated__/KonnectableBlockOverlay'
-
-import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
 import { FilledButton } from 'v2/components/UI/Buttons'
 import KonnectableOverlayConnect from 'v2/components/Cell/components/Konnectable/components/KonnectableOverlayConnect'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
 
 enum Mode {
   RESTING,
@@ -41,91 +41,96 @@ interface Props {
   konnectable: KonnectableBlockOverlayData
   onOverlay: () => any
   onClose: () => any
-  isLoggedIn: boolean
 }
 
-class KonnectableBlockOverlay extends PureComponent<Props> {
-  state = {
-    mode: Mode.RESTING,
-  }
+export const KonnectableBlockOverlay: React.FC<Props> = ({
+  konnectable,
+  onOverlay,
+  onClose,
+}) => {
+  const [mode, setMode] = useState<Mode>(Mode.RESTING)
+  const { isLoggedIn } = useLoginStatus()
+  const location = useLocation()
 
-  openSource = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const { id, source, __typename } = konnectable
+  const sourceUrl = source && __typename !== 'Image' && source.url
 
-    const {
-      konnectable: {
+  // We shouldn't show the connect button on the private share link page
+  const showConnectButton = location.pathname.indexOf('/share/') === -1
+
+  const handleClickSource = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      const {
         source: { url: href },
-      },
-    } = this.props
+      } = konnectable
 
-    const newTab = window.open(href, '_blank')
-    newTab.focus()
+      const newTab = window.open(href, '_blank')
+      newTab.focus()
 
-    // Prevent new window from gaining access to this window
-    newTab.opener = null
-  }
+      // Prevent new window from gaining access to this window
+      newTab.opener = null
+    },
+    [konnectable]
+  )
 
-  openConnect = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const openConnect = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
 
-    const { isLoggedIn, onOverlay } = this.props
+      if (!isLoggedIn) {
+        window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
+        return null
+      }
 
-    if (!isLoggedIn) {
-      window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
-      return null
-    }
+      setMode(Mode.OVERLAY)
 
-    this.setState({ mode: Mode.OVERLAY })
+      return onOverlay()
+    },
+    [isLoggedIn, onOverlay]
+  )
 
-    return onOverlay()
-  }
+  const closeConnect = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
 
-  closeConnect = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
+      setMode(Mode.RESTING)
+      onClose()
+    },
+    [onClose]
+  )
 
-    this.setState({ mode: Mode.RESTING })
-    this.props.onClose()
-  }
+  return (
+    <Container>
+      {mode === Mode.RESTING && sourceUrl && (
+        <OverlayButton ml={4} mr={2} onClick={handleClickSource}>
+          Source
+        </OverlayButton>
+      )}
 
-  render() {
-    const { mode } = this.state
-    const {
-      konnectable: { id, source, __typename },
-    } = this.props
+      {mode === Mode.RESTING && showConnectButton && (
+        <OverlayButton
+          ml={sourceUrl && 2}
+          mr={sourceUrl && 4}
+          onClick={openConnect}
+        >
+          Connect &rarr;
+        </OverlayButton>
+      )}
 
-    const sourceUrl = source && __typename !== 'Image' && source.url
-
-    return (
-      <Container>
-        {mode === Mode.RESTING && sourceUrl && (
-          <OverlayButton ml={4} mr={2} onClick={this.openSource}>
-            Source
-          </OverlayButton>
-        )}
-
-        {mode === Mode.RESTING && (
-          <OverlayButton
-            ml={sourceUrl && 2}
-            mr={sourceUrl && 4}
-            onClick={this.openConnect}
-          >
-            Connect &rarr;
-          </OverlayButton>
-        )}
-
-        {mode === Mode.OVERLAY && (
-          <KonnectableOverlayConnect
-            id={id}
-            type={BaseConnectableTypeEnum.BLOCK}
-            onClose={this.closeConnect}
-          />
-        )}
-      </Container>
-    )
-  }
+      {mode === Mode.OVERLAY && (
+        <KonnectableOverlayConnect
+          id={id}
+          type={BaseConnectableTypeEnum.BLOCK}
+          onClose={closeConnect}
+        />
+      )}
+    </Container>
+  )
 }
 
-export default WithLoginStatus(KonnectableBlockOverlay)
+export default KonnectableBlockOverlay
