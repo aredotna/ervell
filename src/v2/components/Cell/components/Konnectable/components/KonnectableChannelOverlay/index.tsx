@@ -57,7 +57,7 @@ export const KonnectableChannelOverlay: React.FC<Props> = ({
   const location = useLocation()
 
   // We shouldn't show the connect button on the private share link page
-  const showConnectButton = location.pathname.indexOf('/share/') === -1
+  const showConnectButton = location.pathname.startsWith('/index/')
 
   const { id, visibility, counts } = channel
 
