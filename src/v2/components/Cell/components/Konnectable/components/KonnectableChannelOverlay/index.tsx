@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 
 import { KonnectableChannelOverlay as KonnectableChannelOverlayData } from '__generated__/KonnectableChannelOverlay'
-
-import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 
 import Box from 'v2/components/UI/Box'
 import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 import KonnectableOverlayConnect from 'v2/components/Cell/components/Konnectable/components/KonnectableOverlayConnect'
 import KonnectableChannelPreview from 'v2/components/Cell/components/Konnectable/components/KonnectableChannelPreview'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
+import { useLocation } from 'react-router'
 
 enum Mode {
   RESTING,
@@ -43,105 +43,110 @@ interface Props {
   channel: KonnectableChannelOverlayData
   onOverlay: () => any
   onClose: () => any
-  isLoggedIn: boolean
   isPreviewable?: boolean
 }
 
-class KonnectableChannelOverlay extends PureComponent<Props> {
-  static defaultProps = {
-    isPreviewable: true,
-  }
+export const KonnectableChannelOverlay: React.FC<Props> = ({
+  channel,
+  onOverlay,
+  onClose,
+  isPreviewable,
+}) => {
+  const [mode, setMode] = useState<Mode>(Mode.RESTING)
+  const { isLoggedIn } = useLoginStatus()
+  const location = useLocation()
 
-  state = {
-    mode: Mode.RESTING,
-  }
+  // We shouldn't show the connect button on the private share link page
+  const showConnectButton = location.pathname.startsWith('/index/')
 
-  openConnect = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
+  const { id, visibility, counts } = channel
 
-    const { isLoggedIn, onOverlay } = this.props
+  const allowPreview = isPreviewable && counts.contents > 0
 
-    if (!isLoggedIn) {
-      window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
-      return null
-    }
+  const openPreview = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
 
-    this.setState({ mode: Mode.OVERLAY })
+      setMode(Mode.OVERLAY)
 
-    return onOverlay()
-  }
+      return onOverlay()
+    },
+    [onOverlay]
+  )
 
-  openPreview = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
+  const openConnect = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
 
-    const { onOverlay } = this.props
+      if (!isLoggedIn) {
+        window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
+        return null
+      }
 
-    this.setState({ mode: Mode.PREVIEW })
+      setMode(Mode.OVERLAY)
 
-    return onOverlay()
-  }
+      return onOverlay()
+    },
+    [isLoggedIn, onOverlay]
+  )
 
-  close = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
+  const close = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      e.stopPropagation()
 
-    this.setState({ mode: Mode.RESTING })
+      setMode(Mode.RESTING)
+      onClose()
+    },
+    [onClose]
+  )
 
-    this.props.onClose()
-  }
+  return (
+    <Container mode={mode}>
+      {mode === Mode.RESTING && (
+        <>
+          {allowPreview && (
+            <DividerButton
+              f={4}
+              mr={2}
+              color={`channel.${visibility}`}
+              onClick={openPreview}
+            >
+              Preview
+            </DividerButton>
+          )}
 
-  render() {
-    const { mode } = this.state
-    const {
-      channel: { id, visibility, counts },
-      isPreviewable,
-    } = this.props
-
-    const allowPreview = isPreviewable && counts.contents > 0
-
-    return (
-      <Container mode={mode}>
-        {mode === Mode.RESTING && (
-          <>
-            {allowPreview && (
-              <DividerButton
-                f={4}
-                mr={2}
-                color={`channel.${visibility}`}
-                onClick={this.openPreview}
-              >
-                Preview
-              </DividerButton>
-            )}
-
+          {showConnectButton && (
             <DividerButton
               f={4}
               ml={allowPreview && 2}
               color={`channel.${visibility}`}
-              onClick={this.openConnect}
+              onClick={openConnect}
             >
               Connect &rarr;
             </DividerButton>
-          </>
-        )}
+          )}
+        </>
+      )}
 
-        {mode === Mode.OVERLAY && (
-          <KonnectableOverlayConnect
-            id={id}
-            type={BaseConnectableTypeEnum.CHANNEL}
-            onClose={this.close}
-          />
-        )}
+      {mode === Mode.OVERLAY && (
+        <KonnectableOverlayConnect
+          id={id}
+          type={BaseConnectableTypeEnum.CHANNEL}
+          onClose={close}
+        />
+      )}
 
-        {mode === Mode.PREVIEW && (
-          <KonnectableChannelPreview
-            id={id}
-            color={`channel.${visibility}`}
-            onClose={this.close}
-          />
-        )}
-      </Container>
-    )
-  }
+      {mode === Mode.PREVIEW && (
+        <KonnectableChannelPreview
+          id={id}
+          color={`channel.${visibility}`}
+          onClose={close}
+        />
+      )}
+    </Container>
+  )
 }
 
-export default WithLoginStatus(KonnectableChannelOverlay)
+export default KonnectableChannelOverlay

@@ -100,7 +100,7 @@ class ChannelShareButton extends Component {
           <Button onClick={this.displayShareOptions}>
             {
               {
-                resting: 'Share',
+                resting: 'Generate shareable link',
                 generating: 'Generating...',
                 error: 'An error has occurred. Try again.',
               }[remote]
