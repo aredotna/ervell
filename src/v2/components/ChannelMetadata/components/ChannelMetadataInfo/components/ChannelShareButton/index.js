@@ -94,13 +94,16 @@ class ChannelShareButton extends Component {
     const { mode, remote } = this.state
     const { channel } = this.props
 
+    const restingLabel =
+      channel.visibility === 'private' ? 'Generate shareable link' : 'Share'
+
     return (
       <Container mode={mode}>
         {mode !== 'active' && (
           <Button onClick={this.displayShareOptions}>
             {
               {
-                resting: 'Share',
+                resting: restingLabel,
                 generating: 'Generating...',
                 error: 'An error has occurred. Try again.',
               }[remote]
