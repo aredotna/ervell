@@ -67,7 +67,7 @@ export const KonnectableChannelOverlay: React.FC<Props> = ({
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault()
 
-      setMode(Mode.OVERLAY)
+      setMode(Mode.PREVIEW)
 
       return onOverlay()
     },
