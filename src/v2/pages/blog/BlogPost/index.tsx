@@ -10,6 +10,7 @@ import Image from 'v2/components/UI/Head/components/Image'
 import Title from 'v2/components/UI/Head/components/Title'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import HorizontalRule from 'v2/components/UI/HorizontalRule'
 
 import { BlogPostContent } from './components/BlogPostContent'
 import { BlogPostAuthor } from './components/BlogPostAuthor'
@@ -43,6 +44,10 @@ const Category = styled(Text).attrs({
 `
 
 const Metadata = styled(Box).attrs({ my: 7 })``
+
+const HR = styled(HorizontalRule).attrs({ color: 'gray.light', mb: 10 })`
+  height: 2px;
+`
 
 const Meta = styled(Text).attrs({
   f: 4,
@@ -84,6 +89,19 @@ export const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
 
           {post.epilogue && post.epilogue.json && (
             <BlogPostContent content={post.epilogue.json} id={post.sys.id} />
+          )}
+
+          {post.footnotes && post.footnotes.json && (
+            <>
+              <HR />
+              <Box mb={8} />
+              <BlogPostContent
+                content={post.footnotes.json}
+                id={post.sys.id}
+                divId="footnotes"
+                defaultFontSize={2}
+              />
+            </>
           )}
 
           {post.author.bio && <BlogPostAuthor author={post.author.bio.json} />}

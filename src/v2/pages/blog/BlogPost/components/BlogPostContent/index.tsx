@@ -12,10 +12,14 @@ import BLOG_POST_ASSETS_QUERY from 'v2/pages/blog/BlogPost/queries/BlogPostByID'
 
 const BaseText = styled(Text).attrs({
   my: 6,
-  f: 4,
   lineHeight: 2,
   underlineLinks: true,
-})``
+})`
+  a[href*='#'] {
+    vertical-align: super;
+    font-size: 10px;
+  }
+`
 
 const Container = styled(Box)`
   iframe {
@@ -56,7 +60,7 @@ const Blockquote = styled.blockquote`
   margin: ${({ theme }) => `${theme.space[8]} 0`};
 `
 
-export const optionsWithEmbeds = (embedData: any) => {
+export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
   return {
     renderMark: {
       [MARKS.BOLD]: text => (
@@ -112,7 +116,7 @@ export const optionsWithEmbeds = (embedData: any) => {
         ) {
           return <div dangerouslySetInnerHTML={{ __html: children[0] }} />
         }
-        return <BaseText>{children}</BaseText>
+        return <BaseText f={defaultFontSize}>{children}</BaseText>
       },
     },
     renderText: text => text.replace('!', '?'),
@@ -122,33 +126,48 @@ export const optionsWithEmbeds = (embedData: any) => {
 interface BlogPostInnerProps {
   content: Document
   embedData?: any
+  defaultFontSize?: number
+  id?: string
 }
 
 export const BlogPostInner: React.FC<BlogPostInnerProps> = ({
   content,
   embedData,
+  defaultFontSize = 4,
+  id,
 }) => {
   const parsedContent = documentToReactComponents(
     content,
-    optionsWithEmbeds(embedData)
+    optionsWithEmbeds(embedData, defaultFontSize)
   )
 
-  return <Container>{parsedContent}</Container>
+  return <Container id={id}>{parsedContent}</Container>
 }
 
 interface BlogPostContentProps {
   id: string
   content: Document
+  defaultFontSize?: number
+  divId?: string
 }
 
 export const BlogPostContent: React.FC<BlogPostContentProps> = ({
   content,
   id,
+  defaultFontSize = 4,
+  divId = '',
 }) => {
   const { data: embedData } = useQuery(BLOG_POST_ASSETS_QUERY, {
     context: { clientName: 'contentful' },
     variables: { id },
   })
 
-  return <BlogPostInner content={content} embedData={embedData} />
+  return (
+    <BlogPostInner
+      id={divId}
+      content={content}
+      embedData={embedData}
+      defaultFontSize={defaultFontSize}
+    />
+  )
 }
