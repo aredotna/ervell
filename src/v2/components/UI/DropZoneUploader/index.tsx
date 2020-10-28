@@ -98,7 +98,7 @@ const DropZoneUploader: React.FC<Props> = ({
         <input {...getInputProps()} />
 
         <Backdrop>
-          {
+          {isDragActive && (
             <>
               <Text f={7} color="gray.semiBold" textAlign="center">
                 Drop files to add
@@ -107,7 +107,7 @@ const DropZoneUploader: React.FC<Props> = ({
                 Max file size for images is 25MB, and for all other files 250mb
               </Text>
             </>
-          }
+          )}
 
           {mode === 'error' && (
             <Text
