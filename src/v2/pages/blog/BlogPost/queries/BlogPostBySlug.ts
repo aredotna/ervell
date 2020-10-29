@@ -35,7 +35,12 @@ export default gql`
             json
           }
         }
+
         body {
+          json
+        }
+
+        footnotes {
           json
         }
 

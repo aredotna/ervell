@@ -76,6 +76,7 @@ const DropZoneUploader: React.FC<Props> = ({
     noClick: true,
     noKeyboard: true,
     accept,
+    maxSize: 250000000, // 25mb
   })
 
   // Use `dragenter` event on `window` to trigger the actual drop-zone,
@@ -98,9 +99,14 @@ const DropZoneUploader: React.FC<Props> = ({
 
         <Backdrop>
           {isDragActive && (
-            <Text f={9} color="gray.base" textAlign="center">
-              Drop files to add
-            </Text>
+            <>
+              <Text f={7} color="gray.semiBold" textAlign="center">
+                Drop files to add
+              </Text>
+              <Text f={2} mt={6} color="gray.medium" textAlign="center">
+                Max file size for images is 25MB, and for all other files 250mb
+              </Text>
+            </>
           )}
 
           {mode === 'error' && (
