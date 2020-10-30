@@ -124,6 +124,12 @@ export interface KonnectableDisplay_Text {
   connection: KonnectableDisplay_Text_connection | null;
 }
 
+export interface KonnectableDisplay_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface KonnectableDisplay_Image_user {
   __typename: "User";
   id: number | null;
@@ -151,6 +157,7 @@ export interface KonnectableDisplay_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: KonnectableDisplay_Image_original_dimensions | null;
   updated_at: string | null;
   user: KonnectableDisplay_Image_user | null;
   /**

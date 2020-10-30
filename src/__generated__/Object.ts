@@ -121,6 +121,12 @@ export interface Object_Image_counts {
   comments: number | null;
 }
 
+export interface Object_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface Object_Image_user {
   __typename: "User";
   id: number | null;
@@ -154,6 +160,7 @@ export interface Object_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: Object_Image_original_dimensions | null;
   updated_at: string | null;
   user: Object_Image_user | null;
   /**

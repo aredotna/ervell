@@ -78,6 +78,12 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Image_counts 
   comments: number | null;
 }
 
+export interface ChannelContentsFiltered_channel_filtered_contents_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface ChannelContentsFiltered_channel_filtered_contents_Image {
   __typename: "Image";
   id: number | null;
@@ -95,6 +101,7 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: ChannelContentsFiltered_channel_filtered_contents_Image_original_dimensions | null;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Link_user {

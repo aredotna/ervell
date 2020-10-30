@@ -78,6 +78,12 @@ export interface Blokk_blokk_Image_counts {
   comments: number | null;
 }
 
+export interface Blokk_blokk_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface Blokk_blokk_Image {
   __typename: "Image";
   id: number | null;
@@ -95,6 +101,7 @@ export interface Blokk_blokk_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: Blokk_blokk_Image_original_dimensions | null;
 }
 
 export interface Blokk_blokk_Link_user {
