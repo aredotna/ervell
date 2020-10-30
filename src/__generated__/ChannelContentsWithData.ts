@@ -111,6 +111,12 @@ export interface ChannelContentsWithData_channel_initial_contents_Image_counts {
   comments: number | null;
 }
 
+export interface ChannelContentsWithData_channel_initial_contents_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface ChannelContentsWithData_channel_initial_contents_Image_can {
   __typename: "BlockCan";
   mute: boolean | null;
@@ -134,6 +140,7 @@ export interface ChannelContentsWithData_channel_initial_contents_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: ChannelContentsWithData_channel_initial_contents_Image_original_dimensions | null;
   can: ChannelContentsWithData_channel_initial_contents_Image_can | null;
   find_original_url: string | null;
 }

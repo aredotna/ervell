@@ -1,10 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { scale } from 'proportional-scale'
 
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 
 import Box, { BoxProps } from 'v2/components/UI/Box'
 import { KonnectableImg } from 'v2/components/Cell/components/Konnectable/components/KonnectableImg'
+
+import constants from 'v2/styles/constants'
 
 const hoverMixin = css`
   border: 1px solid ${props => props.theme.colors.gray.semiLight};
@@ -25,6 +28,10 @@ interface Props extends BoxProps {
   srcs: string[]
   title?: string
   mode: Mode
+  originalDimensions?: {
+    width: number
+    height: number
+  }
 }
 
 export const KonnectableGeneric: React.FC<Props> = ({
@@ -32,11 +39,34 @@ export const KonnectableGeneric: React.FC<Props> = ({
   srcs,
   title = null,
   mode = Mode.RESTING,
+  originalDimensions,
   ...rest
-}) => (
-  <Container mode={mode} border="1px solid" borderColor="transparent" {...rest}>
-    <KonnectableImg src={src} srcs={srcs} alt={title} />
-  </Container>
-)
+}) => {
+  const { width: originalWidth, height: originalHeight } = originalDimensions
+
+  const { width, height } = scale({
+    width: originalWidth,
+    height: originalHeight,
+    maxWidth: Math.min(originalWidth, parseInt(constants.blockWidth)),
+    maxHeight: Math.min(originalHeight, parseInt(constants.blockWidth)),
+  })
+
+  return (
+    <Container
+      mode={mode}
+      border="1px solid"
+      borderColor="transparent"
+      {...rest}
+    >
+      <KonnectableImg
+        src={src}
+        srcs={srcs}
+        alt={title}
+        width={width}
+        height={height}
+      />
+    </Container>
+  )
+}
 
 export default KonnectableGeneric
