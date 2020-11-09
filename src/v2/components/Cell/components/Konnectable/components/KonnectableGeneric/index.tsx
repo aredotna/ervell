@@ -42,7 +42,8 @@ export const KonnectableGeneric: React.FC<Props> = ({
   originalDimensions,
   ...rest
 }) => {
-  const { width: originalWidth, height: originalHeight } = originalDimensions
+  const { width: originalWidth, height: originalHeight } =
+    originalDimensions || {}
 
   const { width, height } = scale({
     width: originalWidth,
