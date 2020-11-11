@@ -13,7 +13,7 @@ interface PrimarySearchResultsProps {
   debouncedQuery: string
   cursor: number
   onSelection: (href) => void
-  onClick: () => void
+  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 export default class PrimarySearchResults extends PureComponent<
