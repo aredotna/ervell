@@ -156,6 +156,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "prop-types": "^15.6.0",
+    "proportional-scale": "^4.0.0",
     "pug": "^2.0.0-rc.4",
     "pug-loader": "damassi/pug-loader#02921c5",
     "pusher-js": "6.0.1",

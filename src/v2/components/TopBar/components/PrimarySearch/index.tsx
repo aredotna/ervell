@@ -53,8 +53,10 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
     this.setState({ debouncedQuery, cursor: null })
   }
 
-  handleClick = () => {
-    this.setState({ query: '', debouncedQuery: '' })
+  handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!e.metaKey) {
+      this.setState({ query: '', debouncedQuery: '' })
+    }
   }
 
   handleBlur = () => {

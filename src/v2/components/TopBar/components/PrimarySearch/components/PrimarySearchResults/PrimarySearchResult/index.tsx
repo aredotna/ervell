@@ -72,19 +72,21 @@ interface PrimarySearchResultProps {
   selected?: boolean
   to?: string
   bg?: any
-  onClick?: any
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 export const PrimarySearchResult: React.FC<PrimarySearchResultProps> = ({
   result,
   children,
   selected = false,
+  onClick,
   ...rest
 }) => {
   if (result) {
     return (
       <Container
         href={result.href}
+        onClick={onClick}
         to={{
           pathname: result.href,
           state: getBreadcrumbPath(result),

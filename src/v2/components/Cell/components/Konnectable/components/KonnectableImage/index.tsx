@@ -16,6 +16,7 @@ export const KonnectableImage: React.FC<Props> = ({ image, mode, ...rest }) => (
     srcs={[image.src_1x, image.src_2x, image.src_3x]}
     title={image.title}
     mode={mode}
+    originalDimensions={image.original_dimensions}
     {...rest}
   />
 )

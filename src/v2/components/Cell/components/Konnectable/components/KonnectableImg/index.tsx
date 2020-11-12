@@ -23,11 +23,20 @@ interface Props {
   src: string
   srcs: string[]
   alt?: string
+  width?: number
+  height?: number
 }
 
-export const KonnectableImg: React.FC<Props> = ({ srcs, alt = null }) => (
+export const KonnectableImg: React.FC<Props> = ({
+  srcs,
+  width,
+  height,
+  alt = null,
+}) => (
   <Container>
     <img
+      width={width}
+      height={height}
       src={srcs[0]}
       srcSet={`${srcs[0]} 1x, ${srcs[1]} 2x, ${srcs[2]} 3x,`}
       alt={alt}

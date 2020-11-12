@@ -73,6 +73,12 @@ export interface KonnectableCell_Image_connection {
   user: KonnectableCell_Image_connection_user | null;
 }
 
+export interface KonnectableCell_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface KonnectableCell_Image_source {
   __typename: "ConnectableSource";
   url: string | null;
@@ -94,6 +100,7 @@ export interface KonnectableCell_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: KonnectableCell_Image_original_dimensions | null;
   source: KonnectableCell_Image_source | null;
 }
 

@@ -98,6 +98,12 @@ export interface ProfileChannelSearch_Group_channels_blokks_Image_counts {
   comments: number | null;
 }
 
+export interface ProfileChannelSearch_Group_channels_blokks_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface ProfileChannelSearch_Group_channels_blokks_Image {
   __typename: "Image";
   id: number | null;
@@ -115,6 +121,7 @@ export interface ProfileChannelSearch_Group_channels_blokks_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: ProfileChannelSearch_Group_channels_blokks_Image_original_dimensions | null;
 }
 
 export interface ProfileChannelSearch_Group_channels_blokks_Link_user {
@@ -494,6 +501,12 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Image_counts 
   comments: number | null;
 }
 
+export interface ProfileChannelSearch_User_channels_Channel_blokks_Image_original_dimensions {
+  __typename: "Dimensions";
+  width: number | null;
+  height: number | null;
+}
+
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Image {
   __typename: "Image";
   id: number | null;
@@ -511,6 +524,7 @@ export interface ProfileChannelSearch_User_channels_Channel_blokks_Image {
   src_1x: string | null;
   src_2x: string | null;
   src_3x: string | null;
+  original_dimensions: ProfileChannelSearch_User_channels_Channel_blokks_Image_original_dimensions | null;
 }
 
 export interface ProfileChannelSearch_User_channels_Channel_blokks_Link_user {
