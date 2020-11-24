@@ -6,7 +6,6 @@ import { preset } from 'v2/styles/functions'
 import { graphql } from 'react-apollo'
 import compose from 'lodash.flowright'
 
-import { setChannelOnboardingCookie } from 'v2/components/Onboarding/util/channelOnboardingCookieManager'
 import userInfoQuery from 'v2/components/Onboarding/components/Channels/components/CreateChannel/queries/userInfo'
 import createChannelMutation from 'v2/components/Onboarding/components/Channels/components/CreateChannel/mutations/createChannel'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
