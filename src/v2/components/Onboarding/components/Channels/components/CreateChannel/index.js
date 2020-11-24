@@ -114,11 +114,17 @@ class CreateChannel extends React.Component {
       const { channelTitle: title } = this.state
 
       return createChannel({ variables: { title } })
-        .then(({ data: { create_channel: { channel: { href, id } } } }) => {
-          setChannelOnboardingCookie(id)
-
-          window.location = href
-        })
+        .then(
+          ({
+            data: {
+              create_channel: {
+                channel: { href },
+              },
+            },
+          }) => {
+            window.location = `${href}?fromOnboarding=true`
+          }
+        )
         .catch(err => {
           console.error(err)
           this.setState({ saving: false })
@@ -157,9 +163,7 @@ class CreateChannel extends React.Component {
       <CreateChannelWrapper>
         <TransitionGroup style={{ display: 'block', position: 'relative' }}>
           <AnimatedCTAText
-            key={`onboarding-create-channel-cta-step-${
-              this.state.channelTitleStep
-            }`}
+            key={`onboarding-create-channel-cta-step-${this.state.channelTitleStep}`}
             positionAbsoluteDuringTransition={this.state.channelTitleStep === 1}
           >
             {this.ctaTextForChannelTitleStep()}

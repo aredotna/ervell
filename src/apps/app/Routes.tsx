@@ -171,8 +171,14 @@ export const Routes = () => {
         <Route
           exact
           path="/:user_id/:id"
-          render={parseRoute(({ params }) => {
-            return <ChannelPage id={params.id} key={params.id} />
+          render={parseRoute(({ params, query }) => {
+            return (
+              <ChannelPage
+                id={params.id}
+                key={params.id}
+                fromOnboarding={query.fromOnboarding}
+              />
+            )
           })}
         />
       </Switch>

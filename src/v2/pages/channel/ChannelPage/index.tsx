@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Query } from 'react-apollo'
+import styled from 'styled-components'
 
 import { ChannelPage as ChannelPageData } from '__generated__/ChannelPage'
 
@@ -19,11 +20,34 @@ import { MobileOrChildren } from 'v2/components/MobileBanner'
 import BottomBanner from 'v2/components/BottomBanner'
 import { LoadingPage } from 'v2/components/LoadingPage'
 
+import Modal from 'v2/components/UI/Modal'
+import ModalDialog from 'v2/components/UI/ModalDialog'
+import IntroduceChannel from 'v2/components/Onboarding/components/Channels/components/IntroduceChannel'
+
+const Dialog = styled(ModalDialog).attrs({
+  width: 'auto',
+  height: 'auto',
+  maxHeight: '100%',
+  maxWidth: '100%',
+})``
+
+interface ChannelPageProps {
+  id: string
+  fromOnboarding?: boolean
+}
+
 interface Variables {
   id: string
 }
 
-export default ({ id }) => {
+const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
+  useEffect(() => {
+    if (fromOnboarding) {
+      const modal = new Modal(IntroduceChannel, {}, { Dialog })
+      modal.open()
+    }
+  }, [fromOnboarding])
+
   return (
     <TopBarLayout>
       <Constrain>
@@ -72,3 +96,5 @@ export default ({ id }) => {
     </TopBarLayout>
   )
 }
+
+export default ChannelPage
