@@ -72,7 +72,7 @@ export default class PlanSelection extends PureComponent {
     const planId = plan_id || customer.plan.id
 
     // TODO: Extract into actual can field
-    const canManagePlan =
+    const plansDisabled =
       customer.is_canceled || customer.is_lifetime || customer.is_beneficiary
 
     return (
@@ -82,7 +82,7 @@ export default class PlanSelection extends PureComponent {
             <RadioOptions.Option
               selectedValue={selectedValue}
               value="basic"
-              disabled={canManagePlan}
+              disabled={plansDisabled}
               {...rest}
             >
               {({ selected }) => (
@@ -128,7 +128,7 @@ export default class PlanSelection extends PureComponent {
             <RadioOptions.Option
               selectedValue={selectedValue}
               value="yearly"
-              disabled={canManagePlan}
+              disabled={plansDisabled}
               {...rest}
             >
               {({ selected }) => (
@@ -153,7 +153,7 @@ export default class PlanSelection extends PureComponent {
             <RadioOptions.Option
               selectedValue={selectedValue}
               value="monthly"
-              disabled={canManagePlan}
+              disabled={plansDisabled}
               {...rest}
             >
               {({ selected }) => (
@@ -196,6 +196,31 @@ export default class PlanSelection extends PureComponent {
                 )}
               </RadioOptions.Option>
             )}
+
+            <RadioOptions.Option
+              selectedValue={selectedValue}
+              value="plus_yearly"
+              disabled={plansDisabled}
+              {...rest}
+            >
+              {({ selected }) => (
+                <Option>
+                  <OptionLabel selected={selected}>
+                    <strong>Annual Premium Supporter</strong>
+                    <strong>$10 / month</strong>
+                  </OptionLabel>
+
+                  <OptionDescription>
+                    <Box width="75%">
+                      Premium + offer extra support to the Are.na team, and in
+                      turn get custom badges and access to quarterly reports.
+                    </Box>
+
+                    <Box textAlign="right">$120 billed annually</Box>
+                  </OptionDescription>
+                </Option>
+              )}
+            </RadioOptions.Option>
           </div>
         )}
       </RadioOptions>
