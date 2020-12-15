@@ -69,7 +69,7 @@ export default class PlanSelection extends PureComponent {
       me,
       me: { customer },
     } = this.props
-    const planId = plan_id || customer.plan.id
+    const planId = plan_id || customer.plan?.id
 
     // TODO: Extract into actual can field
     const plansDisabled =

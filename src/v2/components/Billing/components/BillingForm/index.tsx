@@ -67,7 +67,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
     mode: 'resting',
     errorMessage: null,
     operations: [],
-    plan_id: this.props.me.customer.plan.id,
+    plan_id: this.props.me.customer?.plan?.id,
     coupon_code: '',
   }
 
@@ -269,8 +269,8 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       me: { customer },
     } = this.props
 
-    const isPlanChanged = plan_id !== customer.plan.id
-    const fromPlanToPlan = `${customer.plan.id}:${plan_id}`
+    const isPlanChanged = plan_id !== customer?.plan?.id
+    const fromPlanToPlan = `${customer?.plan?.id}:${plan_id}`
 
     return (
       <Box>
@@ -416,7 +416,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
                   }[fromPlanToPlan] || 'Save changes'}
                 </GenericButton>
 
-                {plan_id !== 'basic' && customer.plan.id !== 'basic' && (
+                {plan_id !== 'basic' && customer.plan?.id !== 'basic' && (
                   <CancelPremium my={6} onCancel={this.handleCancelPremium} />
                 )}
               </Box>
