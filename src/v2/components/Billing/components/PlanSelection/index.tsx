@@ -67,29 +67,31 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
     <RadioOptions value={planId} onSelect={onSelect}>
       {({ selectedValue, ...rest }) => (
         <div>
-          <RadioOptions.Option
-            selectedValue={selectedValue}
-            value="basic"
-            disabled={plansDisabled}
-            {...rest}
-          >
-            {({ selected }) => (
-              <Option>
-                <OptionLabel selected={selected}>
-                  <strong>Basic</strong>
-                  <strong>Free</strong>
-                </OptionLabel>
+          {!customer.can_select_lifetime && (
+            <RadioOptions.Option
+              selectedValue={selectedValue}
+              value="basic"
+              disabled={plansDisabled}
+              {...rest}
+            >
+              {({ selected }) => (
+                <Option>
+                  <OptionLabel selected={selected}>
+                    <strong>Basic</strong>
+                    <strong>Free</strong>
+                  </OptionLabel>
 
-                <OptionDescription>
-                  <span>
-                    Basic members are limited to{' '}
-                    {me.non_premium_private_connections_limit} private blocks{' '}
-                    and {me.non_premium_connections_limit} total blocks.
-                  </span>
-                </OptionDescription>
-              </Option>
-            )}
-          </RadioOptions.Option>
+                  <OptionDescription>
+                    <span>
+                      Basic members are limited to{' '}
+                      {me.non_premium_private_connections_limit} private blocks{' '}
+                      and {me.non_premium_connections_limit} total blocks.
+                    </span>
+                  </OptionDescription>
+                </Option>
+              )}
+            </RadioOptions.Option>
+          )}
 
           {selectedValue === 'basic' && (
             <Box ml={8} mb={6}>
@@ -112,65 +114,18 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
             </Box>
           )}
 
-          <RadioOptions.Option
-            selectedValue={selectedValue}
-            value="yearly"
-            disabled={plansDisabled}
-            {...rest}
-          >
-            {({ selected }) => (
-              <Option>
-                <OptionLabel selected={selected}>
-                  <strong>Annual Premium</strong>
-                  <strong>$3.75 / month</strong>
-                </OptionLabel>
-
-                <OptionDescription>
-                  <Box width="75%">
-                    Premium members can upload unlimited blocks, hide from
-                    search engines, and gain access to new features.
-                  </Box>
-
-                  <Box textAlign="right">$45 billed annually</Box>
-                </OptionDescription>
-              </Option>
-            )}
-          </RadioOptions.Option>
-
-          <RadioOptions.Option
-            selectedValue={selectedValue}
-            value="monthly"
-            disabled={plansDisabled}
-            {...rest}
-          >
-            {({ selected }) => (
-              <Option>
-                <OptionLabel selected={selected}>
-                  <strong>Monthly Premium</strong>
-                  <strong>$5 / month</strong>
-                </OptionLabel>
-
-                <OptionDescription>
-                  <Box width="75%">
-                    Premium members can upload unlimited blocks, hide from
-                    search engines, and gain access to new features.
-                  </Box>
-                </OptionDescription>
-              </Option>
-            )}
-          </RadioOptions.Option>
-
-          {customer.is_lifetime && (
+          {!customer.can_select_lifetime && (
             <RadioOptions.Option
               selectedValue={selectedValue}
-              value="lifetime"
-              disabled
+              value="yearly"
+              disabled={plansDisabled}
               {...rest}
             >
               {({ selected }) => (
                 <Option>
                   <OptionLabel selected={selected}>
-                    <strong>Lifetime Premium</strong>
+                    <strong>Annual Premium</strong>
+                    <strong>$3.75 / month</strong>
                   </OptionLabel>
 
                   <OptionDescription>
@@ -178,6 +133,59 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                       Premium members can upload unlimited blocks, hide from
                       search engines, and gain access to new features.
                     </Box>
+
+                    <Box textAlign="right">$45 billed annually</Box>
+                  </OptionDescription>
+                </Option>
+              )}
+            </RadioOptions.Option>
+          )}
+
+          {!customer.can_select_lifetime && (
+            <RadioOptions.Option
+              selectedValue={selectedValue}
+              value="monthly"
+              disabled={plansDisabled}
+              {...rest}
+            >
+              {({ selected }) => (
+                <Option>
+                  <OptionLabel selected={selected}>
+                    <strong>Monthly Premium</strong>
+                    <strong>$5 / month</strong>
+                  </OptionLabel>
+
+                  <OptionDescription>
+                    <Box width="75%">
+                      Premium members can upload unlimited blocks, hide from
+                      search engines, and gain access to new features.
+                    </Box>
+                  </OptionDescription>
+                </Option>
+              )}
+            </RadioOptions.Option>
+          )}
+
+          {(customer.is_lifetime || customer.can_select_lifetime) && (
+            <RadioOptions.Option
+              selectedValue={selectedValue}
+              value="lifetime"
+              disabled={customer.is_lifetime}
+              {...rest}
+            >
+              {({ selected }) => (
+                <Option>
+                  <OptionLabel selected={selected}>
+                    <strong>Lifetime Premium</strong>
+                    <strong>Free</strong>
+                  </OptionLabel>
+
+                  <OptionDescription>
+                    <Box width="75%">
+                      Premium members can upload unlimited blocks, hide from
+                      search engines, and gain access to new features.
+                    </Box>
+                    <Box textAlign="right">Forever</Box>
                   </OptionDescription>
                 </Option>
               )}

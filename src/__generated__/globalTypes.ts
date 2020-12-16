@@ -186,6 +186,7 @@ export enum SsearchType {
  */
 export enum SupportedPlanEnum {
   MONTHLY = "MONTHLY",
+  PLUS_YEARLY = "PLUS_YEARLY",
   YEARLY = "YEARLY",
 }
 
