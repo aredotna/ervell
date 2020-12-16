@@ -16,6 +16,7 @@ export interface PlanSelection_customer {
   id: number | null;
   is_canceled: boolean | null;
   is_lifetime: boolean | null;
+  can_select_lifetime: boolean | null;
   is_beneficiary: boolean | null;
   plan: PlanSelection_customer_plan | null;
 }
