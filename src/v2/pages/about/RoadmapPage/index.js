@@ -187,13 +187,12 @@ class RoadmapPage extends PureComponent {
             </Box>
           </div>
           <div>
-            <Subheadline color="gray.bold">Monthly Patron</Subheadline>
+            <Subheadline color="gray.bold">Premium Supporter</Subheadline>
 
             <SmallParagraph>
-              If you’re already Premium and want to chip in a little extra, or
-              if you simply want to help Are.na make faster progress, you can
-              make a monthly contribution. You’ll receive regular emails from
-              the team, plus a unique piece of Are.na merch.
+              If you’re already Premium and want to chip in a little extra, you
+              can upgrade to our Supporter tier. You’ll receive regular emails
+              from the team, plus a free Are.na Annual.
             </SmallParagraph>
 
             <Box
@@ -204,23 +203,11 @@ class RoadmapPage extends PureComponent {
               display="flex"
               flexDirection="column"
             >
-              <script
-                src="https://app.giveforms.com/install-popup-button.js"
-                type="text/javascript"
-                defer
-              />
-              <link
-                rel="stylesheet"
-                href="https://app.giveforms.com/giveforms_embed.css"
-              />
-              <ContributeButton
-                className="giveforms-donation-button"
-                href="https://arena.giveforms.com/are-na-supporter"
-              >
-                Become a Patron
+              <ContributeButton href={premiumLink}>
+                Become a Supporter
               </ContributeButton>
               <Text f={2} textAlign="center" mt={4}>
-                Patrons currently contribute&nbsp;
+                Supporters currently contribute&nbsp;
                 <br />
                 <strong>{roadmap.fields.statsPatronRevenue}</strong>&nbsp; in
                 monthly recurring revenue.
