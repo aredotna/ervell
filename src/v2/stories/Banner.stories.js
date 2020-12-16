@@ -16,5 +16,7 @@ storiesOf('Banner', module).add('default', () => (
     <Banners.ProposePremium mb={6} onClose={action('onClose')} />
 
     <Banners.StronglyProposePremium mb={6} onClose={action('onClose')} />
+
+    <Banners.PremiumSupporter mb={6} onClose={action('onClose')} />
   </Specimen>
 ))

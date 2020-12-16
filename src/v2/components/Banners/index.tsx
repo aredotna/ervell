@@ -116,15 +116,15 @@ export const ProposePremium = props => (
   </Banner>
 )
 
-export const ResidencyReminder = props => (
+export const PremiumSupporter = props => (
   <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
     <Box>
-      We are hosting a 1-month remote residency with SPACE10. The deadline for
-      applications is October 16th, 2020 at 11:59pm (CEST).
+      Upgrade to Premium Supporter before Jan 1st 2021 and get a free Are.na
+      Annual.
     </Box>
     <ButtonLink
       color="state.supporter"
-      href="https://space10.com/residencies-new-everyday-life/"
+      href="/settings/billing"
       target="_blank"
     >
       Learn more
@@ -206,7 +206,7 @@ export const LoggedOutChannel = LoggedOutProfile
 export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
-  RESIDENCY_REMINDER: ResidencyReminder,
+  PREMIUM_PLUS: PremiumSupporter,
   CONFIRM: Confirm,
   BOOKMARKLET: Bookmarklet,
   INVITE: Invite,

@@ -42,6 +42,7 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
   id: number | null;
   is_canceled: boolean | null;
   is_lifetime: boolean | null;
+  can_select_lifetime: boolean | null;
   is_beneficiary: boolean | null;
   plan: ApplyCouponToSubscription_apply_coupon_to_subscription_me_customer_plan | null;
   updated_at: string | null;

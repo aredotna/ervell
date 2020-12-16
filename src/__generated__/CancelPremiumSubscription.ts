@@ -42,6 +42,7 @@ export interface CancelPremiumSubscription_cancel_premium_subscription_me_custom
   id: number | null;
   is_canceled: boolean | null;
   is_lifetime: boolean | null;
+  can_select_lifetime: boolean | null;
   is_beneficiary: boolean | null;
   plan: CancelPremiumSubscription_cancel_premium_subscription_me_customer_plan | null;
   updated_at: string | null;

@@ -12,6 +12,7 @@ import billingQuery from 'v2/components/Billing/queries/billing'
 import subscribeToPremiumMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremium'
 import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription'
 import applyCouponToSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/applyCouponToSubscription'
+import downgradeToLifetimeSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/downgradeToLifetimeSubscription'
 
 import billingFormFragment from 'v2/components/Billing/components/BillingForm/fragments/billingForm'
 
@@ -33,12 +34,14 @@ import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
 const OPERATIONS = {
   CHANGE_PLAN_ID: 'CHANGE_PLAN_ID',
   CANCEL_PREMIUM_SUBSCRIPTION: 'CANCEL_PREMIUM_SUBSCRIPTION',
+  DOWNGRADE_TO_LIFETIME: 'DOWNGRADE_TO_LIFETIME',
   APPLY_COUPON_CODE: 'APPLY_COUPON_CODE',
 }
 
 interface BillingFormProps {
   applyCouponToSubscription: any
   cancelPremiumSubscription: any
+  downgradeToLifetimeSubscription: any
   me: any
   onSuccess?: any
   plan_id?: string
@@ -67,7 +70,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
     mode: 'resting',
     errorMessage: null,
     operations: [],
-    plan_id: this.props.me.customer.plan.id,
+    plan_id: this.props.me.customer?.plan?.id,
     coupon_code: '',
   }
 
@@ -200,11 +203,29 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
     )
   }
 
+  handleDowngradePremium = e => {
+    this.setState(
+      prevState => ({
+        operations: this.addOperation(
+          prevState.operations,
+          'DOWNGRADE_TO_LIFETIME'
+        ),
+      }),
+      () => {
+        this.handleSubmit(e)
+      }
+    )
+  }
+
   handleSubmit = e => {
     e.preventDefault()
 
     const { plan_id } = this.state
-    const { cancelPremiumSubscription, onSuccess } = this.props
+    const {
+      cancelPremiumSubscription,
+      onSuccess,
+      downgradeToLifetimeSubscription,
+    } = this.props
 
     this.setState({ mode: 'processing' })
 
@@ -215,6 +236,17 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       (this.doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'basic')
     ) {
       return cancelPremiumSubscription()
+        .then(() => this.resolveWithMode('canceled'))
+        .catch(this.handleErrors)
+    }
+
+    if (
+      this.doWeNeedTo('DOWNGRADE_TO_LIFETIME') ||
+      // If we are changing to `basic`, then we are actually cancelling.
+      // Nothing else needs to happen so return.
+      (this.doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'lifetime')
+    ) {
+      return downgradeToLifetimeSubscription()
         .then(() => this.resolveWithMode('canceled'))
         .catch(this.handleErrors)
     }
@@ -269,8 +301,8 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       me: { customer },
     } = this.props
 
-    const isPlanChanged = plan_id !== customer.plan.id
-    const fromPlanToPlan = `${customer.plan.id}:${plan_id}`
+    const isPlanChanged = plan_id !== customer?.plan?.id
+    const fromPlanToPlan = `${customer?.plan?.id}:${plan_id}`
 
     return (
       <Box>
@@ -318,7 +350,7 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
                 </Text>
               </Box>
 
-              {customer.is_canceled && (
+              {customer.is_canceled && !customer.is_lifetime && (
                 <CancellationNotice
                   my={6}
                   customer={customer}
@@ -353,47 +385,46 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
               )}
             </Box>
 
-            {plan_id !== 'basic' &&
-              !customer.is_lifetime &&
-              !customer.is_beneficiary && (
-                <Box flex="1" ml={[0, 0, 6]}>
-                  <Box
-                    borderBottom="1px solid"
-                    borderColor="gray.semiLight"
-                    pb={6}
+            {plan_id !== 'basic' && !customer.is_beneficiary && (
+              <Box flex="1" ml={[0, 0, 6]}>
+                <Box
+                  borderBottom="1px solid"
+                  borderColor="gray.semiLight"
+                  pb={6}
+                  mb={6}
+                  mt={[8, 8, 0]}
+                >
+                  <Text f={4} fontWeight="bold">
+                    Billing
+                  </Text>
+                </Box>
+
+                <CreditCard mb={8} customer={customer} />
+
+                {!customer.is_canceled && (
+                  <CouponCode
                     mb={6}
-                    mt={[8, 8, 0]}
-                  >
-                    <Text f={4} fontWeight="bold">
-                      Billing
-                    </Text>
-                  </Box>
+                    key={`coupon_${mode}`}
+                    onDebouncedCode={this.handleCouponCode}
+                    code={coupon_code}
+                  />
+                )}
 
-                  <CreditCard mb={8} customer={customer} />
-
-                  {!customer.is_canceled && (
-                    <CouponCode
-                      mb={6}
-                      key={`coupon_${mode}`}
-                      onDebouncedCode={this.handleCouponCode}
-                      code={coupon_code}
-                    />
-                  )}
-
-                  {(coupon_code !== '' || isPlanChanged) && (
+                {(coupon_code !== '' || isPlanChanged) &&
+                  plan_id !== 'lifetime' && (
                     <PlanChanges
                       entity={customer}
                       plan_id={plan_id}
                       coupon_code={coupon_code}
                     />
                   )}
-                </Box>
-              )}
+              </Box>
+            )}
           </Box>
 
           {!customer.is_canceled &&
-            !customer.is_lifetime &&
             !customer.is_beneficiary &&
+            fromPlanToPlan !== 'plus_yearly:lifetime' &&
             fromPlanToPlan !== 'basic:basic' && (
               <Box width="100%" textAlign="center" mt={8}>
                 <GenericButton
@@ -416,11 +447,26 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
                   }[fromPlanToPlan] || 'Save changes'}
                 </GenericButton>
 
-                {plan_id !== 'basic' && customer.plan.id !== 'basic' && (
+                {plan_id !== 'basic' && customer.plan?.id !== 'basic' && (
                   <CancelPremium my={6} onCancel={this.handleCancelPremium} />
                 )}
               </Box>
             )}
+
+          {fromPlanToPlan === 'plus_yearly:lifetime' && (
+            <Box width="100%" textAlign="center" mt={8}>
+              <GenericButton
+                display="block"
+                f={4}
+                onClick={this.handleDowngradePremium}
+                disabled={
+                  !customer.default_credit_card || operations.length === 0
+                }
+              >
+                Downgrade to Lifetime
+              </GenericButton>
+            </Box>
+          )}
         </form>
       </Box>
     )
@@ -432,6 +478,9 @@ export default injectStripe(
     graphql(subscribeToPremiumMutation, { name: 'subscribeToPremium' }),
     graphql(cancelPremiumSubscriptionMutation, {
       name: 'cancelPremiumSubscription',
+    }),
+    graphql(downgradeToLifetimeSubscriptionMutation, {
+      name: 'downgradeToLifetimeSubscription',
     }),
     graphql(applyCouponToSubscriptionMutation, {
       name: 'applyCouponToSubscription',
