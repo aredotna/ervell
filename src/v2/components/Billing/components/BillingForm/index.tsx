@@ -353,46 +353,43 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
               )}
             </Box>
 
-            {plan_id !== 'basic' &&
-              !customer.is_lifetime &&
-              !customer.is_beneficiary && (
-                <Box flex="1" ml={[0, 0, 6]}>
-                  <Box
-                    borderBottom="1px solid"
-                    borderColor="gray.semiLight"
-                    pb={6}
-                    mb={6}
-                    mt={[8, 8, 0]}
-                  >
-                    <Text f={4} fontWeight="bold">
-                      Billing
-                    </Text>
-                  </Box>
-
-                  <CreditCard mb={8} customer={customer} />
-
-                  {!customer.is_canceled && (
-                    <CouponCode
-                      mb={6}
-                      key={`coupon_${mode}`}
-                      onDebouncedCode={this.handleCouponCode}
-                      code={coupon_code}
-                    />
-                  )}
-
-                  {(coupon_code !== '' || isPlanChanged) && (
-                    <PlanChanges
-                      entity={customer}
-                      plan_id={plan_id}
-                      coupon_code={coupon_code}
-                    />
-                  )}
+            {plan_id !== 'basic' && !customer.is_beneficiary && (
+              <Box flex="1" ml={[0, 0, 6]}>
+                <Box
+                  borderBottom="1px solid"
+                  borderColor="gray.semiLight"
+                  pb={6}
+                  mb={6}
+                  mt={[8, 8, 0]}
+                >
+                  <Text f={4} fontWeight="bold">
+                    Billing
+                  </Text>
                 </Box>
-              )}
+
+                <CreditCard mb={8} customer={customer} />
+
+                {!customer.is_canceled && (
+                  <CouponCode
+                    mb={6}
+                    key={`coupon_${mode}`}
+                    onDebouncedCode={this.handleCouponCode}
+                    code={coupon_code}
+                  />
+                )}
+
+                {(coupon_code !== '' || isPlanChanged) && (
+                  <PlanChanges
+                    entity={customer}
+                    plan_id={plan_id}
+                    coupon_code={coupon_code}
+                  />
+                )}
+              </Box>
+            )}
           </Box>
 
           {!customer.is_canceled &&
-            !customer.is_lifetime &&
             !customer.is_beneficiary &&
             fromPlanToPlan !== 'basic:basic' && (
               <Box width="100%" textAlign="center" mt={8}>
