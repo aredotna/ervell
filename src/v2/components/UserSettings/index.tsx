@@ -381,29 +381,10 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
                       return (
                         <LargeLabelledCheckbox
                           name={props.input.name}
-                          checked={me.is_premium ? props.input.value : false}
+                          checked={props.input.value}
                           onChange={props.input.onChange}
-                          disabled={!me.is_premium}
                         >
-                          <Text>
-                            Receive Sunday Review emails{' '}
-                            {!me.is_premium && (
-                              <Text
-                                display="inline"
-                                f={1}
-                                color="state.premium"
-                                fontWeight="bold"
-                                pl={3}
-                              >
-                                <a
-                                  href="/settings/billing"
-                                  style={{ color: 'inherit' }}
-                                >
-                                  (Premium-only)
-                                </a>
-                              </Text>
-                            )}
-                          </Text>
+                          <Text>Receive Sunday Review emails</Text>
                         </LargeLabelledCheckbox>
                       )
                     }}
