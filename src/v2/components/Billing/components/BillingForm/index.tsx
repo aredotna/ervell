@@ -1,8 +1,6 @@
-import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import React, { FormEvent, useCallback } from 'react'
 import { injectStripe } from 'react-stripe-elements'
-import { graphql } from 'react-apollo'
-import compose from 'lodash.flowright'
+import { useMutation } from 'react-apollo'
 import axios from 'axios'
 
 import mapErrors from 'v2/util/mapErrors'
@@ -10,11 +8,10 @@ import mapErrors from 'v2/util/mapErrors'
 import billingQuery from 'v2/components/Billing/queries/billing'
 
 import subscribeToPremiumMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremium'
+import subscribeToPremiumWithoutTokenMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremiumWithoutToken'
 import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription'
 import applyCouponToSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/applyCouponToSubscription'
 import downgradeToLifetimeSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/downgradeToLifetimeSubscription'
-
-import billingFormFragment from 'v2/components/Billing/components/BillingForm/fragments/billingForm'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -30,93 +27,172 @@ import PlanChanges from 'v2/components/Billing/components/PlanChanges'
 import CancellationNotice from 'v2/components/Billing/components/CancellationNotice'
 import CancelPremium from 'v2/components/Billing/components/CancelPremium'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
+import {
+  SubscribeToPremium as SubscribeToPremiumType,
+  SubscribeToPremiumVariables,
+} from '__generated__/SubscribeToPremium'
+import { CancelPremiumSubscription as CancelPremiumSubscriptionType } from '__generated__/CancelPremiumSubscription'
+import {
+  ApplyCouponToSubscription as ApplyCouponToSubscriptionType,
+  ApplyCouponToSubscriptionVariables,
+} from '__generated__/ApplyCouponToSubscription'
+import { DowngradeToLifetime } from '__generated__/DowngradeToLifetime'
+import { Billing as Me } from '__generated__/Billing'
+import useMergeState from 'v2/hooks/useMergeState'
+import { SupportedPlanEnum } from '__generated__/globalTypes'
+import {
+  SubscribeToPremiumWithoutToken,
+  SubscribeToPremiumWithoutTokenVariables,
+} from '__generated__/SubscribeToPremiumWithoutToken'
 
-const OPERATIONS = {
-  CHANGE_PLAN_ID: 'CHANGE_PLAN_ID',
-  CANCEL_PREMIUM_SUBSCRIPTION: 'CANCEL_PREMIUM_SUBSCRIPTION',
-  DOWNGRADE_TO_LIFETIME: 'DOWNGRADE_TO_LIFETIME',
-  APPLY_COUPON_CODE: 'APPLY_COUPON_CODE',
-}
+type OperationsEnum =
+  | 'CHANGE_PLAN_ID'
+  | 'CANCEL_PREMIUM_SUBSCRIPTION'
+  | 'DOWNGRADE_TO_LIFETIME'
+  | 'APPLY_COUPON_CODE'
 
 interface BillingFormProps {
-  applyCouponToSubscription: any
-  cancelPremiumSubscription: any
-  downgradeToLifetimeSubscription: any
-  me: any
+  me: Me
   onSuccess?: any
   plan_id?: string
-  subscribeToPremium: any // FIXME: Type
 }
 
 interface BillingFormState {
-  mode: string
-  errorMessage: string
-  operations: any[]
-  plan_id: string
-  coupon_code: string
+  mode:
+    | 'resting'
+    | 'error'
+    | 'processing'
+    | 'canceled'
+    | 'subscribed'
+    | 'card_changed'
+  operations: OperationsEnum[]
+  planId?: SupportedPlanEnum | 'basic' | 'lifetime'
+  couponCode?: string
+  errorMessage?: string
+  total?: number
 }
 
-class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
-  static propTypes = {
-    me: propType(billingFormFragment).isRequired, // TODO: Figure out how to move this to TS
-  }
+const BillingForm: React.FC<BillingFormProps> = ({
+  plan_id,
+  me,
+  onSuccess,
+}) => {
+  const { customer } = me
 
-  static defaultProps = {
-    plan_id: null,
-    onSuccess: () => null,
-  }
-
-  state = {
+  const [state, setState] = useMergeState<BillingFormState>({
     mode: 'resting',
-    errorMessage: null,
     operations: [],
-    plan_id: this.props.me.customer?.plan?.id,
-    coupon_code: '',
-  }
+  })
 
-  componentDidMount() {
-    if (this.props.plan_id) {
-      this.handlePlan(this.props.plan_id)
-    }
-  }
+  const { operations, mode, errorMessage, couponCode, total } = state
 
-  doWeNeedTo = operationName =>
-    this.state.operations.includes(OPERATIONS[operationName])
+  const [subscribeToPremium] = useMutation<
+    SubscribeToPremiumType,
+    SubscribeToPremiumVariables
+  >(subscribeToPremiumMutation)
+  const [subscribeToPremiumWithoutToken] = useMutation<
+    SubscribeToPremiumWithoutToken,
+    SubscribeToPremiumWithoutTokenVariables
+  >(subscribeToPremiumWithoutTokenMutation)
+  const [cancelPremiumSubscription] = useMutation<
+    CancelPremiumSubscriptionType
+  >(cancelPremiumSubscriptionMutation)
+  const [applyCouponToSubscription] = useMutation<
+    ApplyCouponToSubscriptionType,
+    ApplyCouponToSubscriptionVariables
+  >(applyCouponToSubscriptionMutation)
+  const [downgradeToLifetimeSubscription] = useMutation<DowngradeToLifetime>(
+    downgradeToLifetimeSubscriptionMutation
+  )
 
-  addOperation = (currentOperations = [], operationName) => [
-    ...new Set([...currentOperations, OPERATIONS[operationName]]),
-  ]
+  const planId = state.planId || customer.plan?.id
 
-  removeOperation = (currentOperations, operationName) => {
-    const set = new Set(currentOperations)
-    set.delete(OPERATIONS[operationName])
-    return [...set]
-  }
+  const isPlanChanged = plan_id !== customer?.plan?.id
+  const fromPlanToPlan = `${customer?.plan?.id}:${plan_id}`
+  const customerCanSubmit =
+    (customer.default_credit_card && operations.length > 0) || total === 0
 
-  applyCouponToSubscription = () => {
-    const { applyCouponToSubscription } = this.props
-    const { coupon_code } = this.state
+  const doWeNeedTo = useCallback(
+    (operationName: OperationsEnum) => operations.includes(operationName),
+    [operations]
+  )
 
-    return applyCouponToSubscription({
-      variables: { coupon_code },
-    })
-  }
+  const addOperation = useCallback(
+    (operationName: OperationsEnum) => {
+      const updatedOperations = [...new Set([...operations, operationName])]
+      return updatedOperations
+    },
+    [operations]
+  )
 
-  subscribeToPremium = () => {
-    const { plan_id, coupon_code } = this.state
-    const {
-      subscribeToPremium,
-      me: { customer },
-    } = this.props
+  const removeOperation = useCallback(
+    operationName => {
+      const set = new Set(operations)
+      set.delete(operationName)
+      return [...set]
+    },
+    [operations]
+  )
 
-    if (!customer.default_credit_card) {
+  const handleErrors = useCallback(
+    err => {
+      setState({
+        mode: 'error',
+        ...mapErrors(err),
+      })
+    },
+    [setState]
+  )
+
+  const resolveWithMode = useCallback(
+    mode => {
+      setState({
+        mode,
+        couponCode: '',
+        errorMessage: null,
+        operations: [],
+      })
+
+      setTimeout(() => setState({ mode: 'resting' }), 10000)
+    },
+    [setState]
+  )
+
+  const handleUpdateTotal = useCallback(
+    (total: number) => {
+      setState({ total })
+    },
+    [setState]
+  )
+
+  const handleSubscribeToPremium = useCallback(() => {
+    if (!customer.default_credit_card && total !== 0) {
       return Promise.reject(new Error('Please add a credit card to continue'))
+    }
+
+    if (planId === 'basic' || planId === 'lifetime') {
+      return Promise.reject('Not a valid plan id')
+    }
+
+    if (total === 0) {
+      return subscribeToPremiumWithoutToken({
+        variables: {
+          coupon_code: couponCode,
+          plan_id: planId.toUpperCase() as SupportedPlanEnum,
+        },
+      })
+        .then(() => {
+          return axios.get('/me/refresh')
+        })
+        .then(() => {
+          window.location.reload()
+        })
     }
 
     return subscribeToPremium({
       variables: {
-        coupon_code,
-        plan_id: plan_id.toUpperCase(),
+        coupon_code: couponCode,
+        plan_id: planId.toUpperCase() as SupportedPlanEnum,
         token: customer.default_credit_card.id,
       },
       refetchQueries: [{ query: billingQuery }],
@@ -128,362 +204,317 @@ class BillingForm extends PureComponent<BillingFormProps, BillingFormState> {
       .then(() => {
         window.location.reload()
       })
-  }
+  }, [
+    customer.default_credit_card,
+    total,
+    planId,
+    subscribeToPremium,
+    couponCode,
+    subscribeToPremiumWithoutToken,
+  ])
 
-  handleErrors = err => {
-    this.setState({
-      mode: 'error',
-      ...mapErrors(err),
-    })
-  }
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
 
-  handlePlan = plan_id => {
-    const {
-      me: { customer },
-    } = this.props
+      const plan_id = planId
 
-    if (plan_id === customer.plan.id) {
-      return this.setState(prevState => ({
-        plan_id,
-        operations: this.removeOperation(
-          prevState.operations,
-          'CHANGE_PLAN_ID'
-        ),
-      }))
-    }
+      setState({ mode: 'processing' })
 
-    return this.setState(prevState => ({
-      plan_id,
-      operations: this.addOperation(prevState.operations, 'CHANGE_PLAN_ID'),
-    }))
-  }
-
-  handleCouponCode = coupon_code => {
-    this.setState(prevState => ({
-      coupon_code,
-      operations: this[coupon_code === '' ? 'removeOperation' : 'addOperation'](
-        prevState.operations,
-        'APPLY_COUPON_CODE'
-      ),
-    }))
-  }
-
-  handleReenable = e => {
-    const {
-      me: { customer },
-    } = this.props
-
-    if (customer.is_beneficiary) {
-      return this.setState({
-        mode: 'error',
-        errorMessage: 'Contact your group administrator',
-      })
-    }
-
-    return this.setState(
-      prevState => ({
-        plan_id: customer.plan.id,
-        operations: this.addOperation(prevState.operations, 'CHANGE_PLAN_ID'),
-      }),
-      () => this.handleSubmit(e)
-    )
-  }
-
-  handleCancelPremium = e => {
-    this.setState(
-      prevState => ({
-        operations: this.addOperation(
-          prevState.operations,
-          'CANCEL_PREMIUM_SUBSCRIPTION'
-        ),
-      }),
-      () => {
-        this.handleSubmit(e)
+      if (
+        doWeNeedTo('CANCEL_PREMIUM_SUBSCRIPTION') ||
+        // If we are changing to `basic`, then we are actually cancelling.
+        // Nothing else needs to happen so return.
+        (doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'basic')
+      ) {
+        return cancelPremiumSubscription()
+          .then(() => resolveWithMode('canceled'))
+          .catch(handleErrors)
       }
-    )
-  }
 
-  handleDowngradePremium = e => {
-    this.setState(
-      prevState => ({
-        operations: this.addOperation(
-          prevState.operations,
-          'DOWNGRADE_TO_LIFETIME'
-        ),
-      }),
-      () => {
-        this.handleSubmit(e)
+      if (
+        doWeNeedTo('DOWNGRADE_TO_LIFETIME') ||
+        // If we are changing to `basic`, then we are actually cancelling.
+        // Nothing else needs to happen so return.
+        (doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'lifetime')
+      ) {
+        return downgradeToLifetimeSubscription()
+          .then(() => resolveWithMode('canceled'))
+          .catch(handleErrors)
       }
-    )
-  }
 
-  handleSubmit = e => {
-    e.preventDefault()
+      // Otherwise we are subscribing.
+      const waitForCouponCode =
+        doWeNeedTo('APPLY_COUPON_CODE') &&
+        // APPLY_COUPON_CODE is inclusive with swtiching plans so ignore this
+        // if we are also going to change the plan up
+        !doWeNeedTo('CHANGE_PLAN_ID')
+          ? applyCouponToSubscription()
+          : Promise.resolve(null)
 
-    const { plan_id } = this.state
-    const {
+      return waitForCouponCode
+        .then(() => {
+          // Now we can change the plan id if we need to
+          if (doWeNeedTo('CHANGE_PLAN_ID')) {
+            return handleSubscribeToPremium()
+          }
+          return null
+        })
+        .then(() => {
+          // Most of the time, this will mean nothing.
+          // But when we are embedding the billing page elsewhere,
+          // we can trigger a redirect using this prop.
+          onSuccess()
+
+          const resolution = doWeNeedTo('CHANGE_PLAN_ID')
+            ? 'subscribed'
+            : 'card_changed'
+          return resolveWithMode(resolution)
+        })
+        .catch(handleErrors)
+    },
+    [
+      applyCouponToSubscription,
       cancelPremiumSubscription,
-      onSuccess,
+      doWeNeedTo,
       downgradeToLifetimeSubscription,
-    } = this.props
+      handleErrors,
+      onSuccess,
+      resolveWithMode,
+      setState,
+      planId,
+      handleSubscribeToPremium,
+    ]
+  )
 
-    this.setState({ mode: 'processing' })
+  const handleDowngradePremium = useCallback(
+    e => {
+      setState({ operations: addOperation('DOWNGRADE_TO_LIFETIME') })
+      handleSubmit(e)
+    },
+    [handleSubmit, addOperation, setState]
+  )
 
-    if (
-      this.doWeNeedTo('CANCEL_PREMIUM_SUBSCRIPTION') ||
-      // If we are changing to `basic`, then we are actually cancelling.
-      // Nothing else needs to happen so return.
-      (this.doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'basic')
-    ) {
-      return cancelPremiumSubscription()
-        .then(() => this.resolveWithMode('canceled'))
-        .catch(this.handleErrors)
-    }
+  const handleCancelPremium = useCallback(
+    e => {
+      setState({ operations: addOperation('CANCEL_PREMIUM_SUBSCRIPTION') })
+      handleSubmit(e)
+    },
+    [handleSubmit, addOperation, setState]
+  )
 
-    if (
-      this.doWeNeedTo('DOWNGRADE_TO_LIFETIME') ||
-      // If we are changing to `basic`, then we are actually cancelling.
-      // Nothing else needs to happen so return.
-      (this.doWeNeedTo('CHANGE_PLAN_ID') && plan_id === 'lifetime')
-    ) {
-      return downgradeToLifetimeSubscription()
-        .then(() => this.resolveWithMode('canceled'))
-        .catch(this.handleErrors)
-    }
-
-    // Otherwise we are subscribing.
-    const waitForCouponCode =
-      this.doWeNeedTo('APPLY_COUPON_CODE') &&
-      // APPLY_COUPON_CODE is inclusive with swtiching plans so ignore this
-      // if we are also going to change the plan up
-      !this.doWeNeedTo('CHANGE_PLAN_ID')
-        ? this.applyCouponToSubscription()
-        : Promise.resolve()
-
-    return waitForCouponCode
-      .then(() => {
-        // Now we can change the plan id if we need to
-        if (this.doWeNeedTo('CHANGE_PLAN_ID')) {
-          return this.subscribeToPremium()
-        }
-        return null
+  const handleCouponCode = useCallback(
+    coupon_code => {
+      const operation = coupon_code === '' ? removeOperation : addOperation
+      setState({
+        couponCode: coupon_code,
+        operations: operation('APPLY_COUPON_CODE'),
       })
-      .then(() => {
-        // Most of the time, this will mean nothing.
-        // But when we are embedding the billing page elsewhere,
-        // we can trigger a redirect using this prop.
-        onSuccess()
+    },
+    [addOperation, removeOperation, setState]
+  )
 
-        const resolution = this.doWeNeedTo('CHANGE_PLAN_ID')
-          ? 'subscribed'
-          : 'card_changed'
-        return this.resolveWithMode(resolution)
+  const handleReenable = useCallback(
+    e => {
+      if (customer.is_beneficiary) {
+        return setState({
+          mode: 'error',
+          errorMessage: 'Contact your group administrator',
+        })
+      }
+
+      setState({
+        planId: customer.plan.id as SupportedPlanEnum,
+        operations: addOperation('CHANGE_PLAN_ID'),
       })
-      .catch(this.handleErrors)
-  }
+      handleSubmit(e)
+    },
+    [addOperation, handleSubmit, customer, setState]
+  )
 
-  resolveWithMode = mode => {
-    this.setState({
-      mode,
-      // Reset remaining state
-      coupon_code: '',
-      errorMessage: null,
-      operations: [],
-    })
+  const handlePlan = useCallback(
+    plan_id => {
+      if (plan_id === customer.plan.id) {
+        return setState({
+          planId: plan_id,
+          operations: removeOperation('CHANGE_PLAN_ID'),
+        })
+      }
 
-    setTimeout(() => this.setState({ mode: 'resting' }), 10000)
-  }
+      return setState({
+        planId: plan_id,
+        operations: addOperation('CHANGE_PLAN_ID'),
+      })
+    },
+    [addOperation, removeOperation, setState, customer]
+  )
 
-  render() {
-    const { mode, errorMessage, plan_id, coupon_code, operations } = this.state
-    const {
-      me,
-      me: { customer },
-    } = this.props
+  return (
+    <Box>
+      {mode === 'processing' && (
+        <StatusOverlay>
+          <LoadingIndicator f={9} />
+        </StatusOverlay>
+      )}
 
-    const isPlanChanged = plan_id !== customer?.plan?.id
-    const fromPlanToPlan = `${customer?.plan?.id}:${plan_id}`
+      {mode === 'subscribed' && (
+        <Alert mb={6} bg="state.premium" color="white" isCloseable={false}>
+          Subscribed! You’re all set!
+        </Alert>
+      )}
 
-    return (
-      <Box>
-        {mode === 'processing' && (
-          <StatusOverlay>
-            <LoadingIndicator f={9} />
-          </StatusOverlay>
-        )}
+      {mode === 'card_changed' && (
+        <Alert mb={6} bg="state.neutral" isCloseable={false}>
+          Billing details updated! You’re all set!
+        </Alert>
+      )}
 
-        {mode === 'subscribed' && (
-          <Alert mb={6} bg="state.premium" color="white" isCloseable={false}>
-            Subscribed! You’re all set!
-          </Alert>
-        )}
+      {mode === 'error' && (
+        <ErrorAlert mb={6} isReloadable={false}>
+          {errorMessage}
+        </ErrorAlert>
+      )}
 
-        {mode === 'card_changed' && (
-          <Alert mb={6} bg="state.neutral" isCloseable={false}>
-            Billing details updated! You’re all set!
-          </Alert>
-        )}
-
-        {mode === 'error' && (
-          <ErrorAlert mb={6} isReloadable={false}>
-            {errorMessage}
-          </ErrorAlert>
-        )}
-
-        <form onSubmit={this.handleSubmit}>
-          <Box display="flex" flexDirection={['column', 'column', 'row']}>
+      <form onSubmit={handleSubmit}>
+        <Box display="flex" flexDirection={['column', 'column', 'row']}>
+          <Box
+            flex="1"
+            borderBottom="1px solid"
+            borderColor="gray.semiLight"
+            pb={6}
+            mr={[0, 0, 6]}
+          >
             <Box
-              flex="1"
               borderBottom="1px solid"
               borderColor="gray.semiLight"
               pb={6}
-              mr={[0, 0, 6]}
+              mb={6}
             >
+              <Text f={4} fontWeight="bold">
+                Plan type
+              </Text>
+            </Box>
+
+            {customer.is_canceled && !customer.is_lifetime && (
+              <CancellationNotice
+                my={6}
+                customer={customer}
+                onReenable={handleReenable}
+              />
+            )}
+
+            <PlanSelection
+              key={plan_id + customer.is_canceled}
+              me={me}
+              onSelect={handlePlan}
+              plan_id={plan_id}
+            />
+
+            {customer.is_beneficiary && (
+              <React.Fragment>
+                <Box bg="gray.hint" p={6} mb={6} borderRadius="0.25em">
+                  <Text>
+                    {customer.patron.name} ({customer.patron.hidden_email})
+                  </Text>
+                </Box>
+
+                <Text f={1} mx={6}>
+                  {customer.patron.name} is upgrading you to{' '}
+                  {customer.plan.term} Premium
+                  <br />
+                  {customer.is_canceled
+                    ? `Subscription ends on ${customer.current_period_end_at}`
+                    : `Automatically renews on ${customer.current_period_end_at}`}
+                </Text>
+              </React.Fragment>
+            )}
+          </Box>
+
+          {plan_id !== 'basic' && !customer.is_beneficiary && (
+            <Box flex="1" ml={[0, 0, 6]}>
               <Box
                 borderBottom="1px solid"
                 borderColor="gray.semiLight"
                 pb={6}
                 mb={6}
+                mt={[8, 8, 0]}
               >
                 <Text f={4} fontWeight="bold">
-                  Plan type
+                  Billing
                 </Text>
               </Box>
 
-              {customer.is_canceled && !customer.is_lifetime && (
-                <CancellationNotice
-                  my={6}
-                  customer={customer}
-                  onReenable={this.handleReenable}
+              <CreditCard mb={8} customer={customer} />
+
+              {!customer.is_canceled && (
+                <CouponCode
+                  mb={6}
+                  key={`coupon_${mode}`}
+                  onDebouncedCode={handleCouponCode}
+                  code={couponCode}
                 />
               )}
 
-              <PlanSelection
-                key={plan_id + customer.is_canceled}
-                me={me}
-                onSelect={this.handlePlan}
-                plan_id={plan_id}
-              />
-
-              {customer.is_beneficiary && (
-                <React.Fragment>
-                  <Box bg="gray.hint" p={6} mb={6} borderRadius="0.25em">
-                    <Text>
-                      {customer.patron.name} ({customer.patron.hidden_email})
-                    </Text>
-                  </Box>
-
-                  <Text f={1} mx={6}>
-                    {customer.patron.name} is upgrading you to{' '}
-                    {customer.plan.term} Premium
-                    <br />
-                    {customer.is_canceled
-                      ? `Subscription ends on ${customer.current_period_end_at}`
-                      : `Automatically renews on ${customer.current_period_end_at}`}
-                  </Text>
-                </React.Fragment>
-              )}
-            </Box>
-
-            {plan_id !== 'basic' && !customer.is_beneficiary && (
-              <Box flex="1" ml={[0, 0, 6]}>
-                <Box
-                  borderBottom="1px solid"
-                  borderColor="gray.semiLight"
-                  pb={6}
-                  mb={6}
-                  mt={[8, 8, 0]}
-                >
-                  <Text f={4} fontWeight="bold">
-                    Billing
-                  </Text>
-                </Box>
-
-                <CreditCard mb={8} customer={customer} />
-
-                {!customer.is_canceled && (
-                  <CouponCode
-                    mb={6}
-                    key={`coupon_${mode}`}
-                    onDebouncedCode={this.handleCouponCode}
-                    code={coupon_code}
+              {(couponCode !== '' || isPlanChanged) &&
+                planId !== 'lifetime' &&
+                planId !== 'basic' && (
+                  <PlanChanges
+                    entity={customer}
+                    planId={planId.toUpperCase() as SupportedPlanEnum}
+                    couponCode={couponCode}
+                    handleTotalChange={handleUpdateTotal}
                   />
                 )}
+            </Box>
+          )}
+        </Box>
 
-                {(coupon_code !== '' || isPlanChanged) &&
-                  plan_id !== 'lifetime' && (
-                    <PlanChanges
-                      entity={customer}
-                      plan_id={plan_id}
-                      coupon_code={coupon_code}
-                    />
-                  )}
-              </Box>
-            )}
-          </Box>
-
-          {!customer.is_canceled &&
-            !customer.is_beneficiary &&
-            fromPlanToPlan !== 'plus_yearly:lifetime' &&
-            fromPlanToPlan !== 'basic:basic' && (
-              <Box width="100%" textAlign="center" mt={8}>
-                <GenericButton
-                  display="block"
-                  f={4}
-                  onClick={this.handleSubmit}
-                  disabled={
-                    !customer.default_credit_card || operations.length === 0
-                  }
-                >
-                  <Icons name="CreditCard" size="1rem" mr={4} />
-
-                  {{
-                    'basic:monthly': 'Activate',
-                    'basic:yearly': 'Activate',
-                    'monthly:yearly': 'Save changes',
-                    'yearly:monthly': 'Save changes',
-                    'monthly:basic': 'Cancel Premium',
-                    'yearly:basic': 'Cancel Premium',
-                  }[fromPlanToPlan] || 'Save changes'}
-                </GenericButton>
-
-                {plan_id !== 'basic' && customer.plan?.id !== 'basic' && (
-                  <CancelPremium my={6} onCancel={this.handleCancelPremium} />
-                )}
-              </Box>
-            )}
-
-          {fromPlanToPlan === 'plus_yearly:lifetime' && (
+        {!customer.is_canceled &&
+          !customer.is_beneficiary &&
+          fromPlanToPlan !== 'plus_yearly:lifetime' &&
+          fromPlanToPlan !== 'basic:basic' && (
             <Box width="100%" textAlign="center" mt={8}>
               <GenericButton
                 display="block"
                 f={4}
-                onClick={this.handleDowngradePremium}
-                disabled={
-                  !customer.default_credit_card || operations.length === 0
-                }
+                onClick={handleSubmit}
+                disabled={!customerCanSubmit}
               >
-                Downgrade to Lifetime
+                <Icons name="CreditCard" size="1rem" mr={4} />
+
+                {{
+                  'basic:monthly': 'Activate',
+                  'basic:yearly': 'Activate',
+                  'monthly:yearly': 'Save changes',
+                  'yearly:monthly': 'Save changes',
+                  'monthly:basic': 'Cancel Premium',
+                  'yearly:basic': 'Cancel Premium',
+                }[fromPlanToPlan] || 'Save changes'}
               </GenericButton>
+
+              {plan_id !== 'basic' && customer.plan?.id !== 'basic' && (
+                <CancelPremium my={6} onCancel={handleCancelPremium} />
+              )}
             </Box>
           )}
-        </form>
-      </Box>
-    )
-  }
+
+        {fromPlanToPlan === 'plus_yearly:lifetime' && (
+          <Box width="100%" textAlign="center" mt={8}>
+            <GenericButton
+              display="block"
+              f={4}
+              onClick={handleDowngradePremium}
+              disabled={
+                !customer.default_credit_card || operations.length === 0
+              }
+            >
+              Downgrade to Lifetime
+            </GenericButton>
+          </Box>
+        )}
+      </form>
+    </Box>
+  )
 }
 
-export default injectStripe(
-  compose(
-    graphql(subscribeToPremiumMutation, { name: 'subscribeToPremium' }),
-    graphql(cancelPremiumSubscriptionMutation, {
-      name: 'cancelPremiumSubscription',
-    }),
-    graphql(downgradeToLifetimeSubscriptionMutation, {
-      name: 'downgradeToLifetimeSubscription',
-    }),
-    graphql(applyCouponToSubscriptionMutation, {
-      name: 'applyCouponToSubscription',
-    })
-  )(BillingForm)
-)
+export default injectStripe(BillingForm)
