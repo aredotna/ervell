@@ -7,8 +7,7 @@ import mapErrors from 'v2/util/mapErrors'
 
 import billingQuery from 'v2/components/Billing/queries/billing'
 
-import subscribeToPremiumMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremium'
-import subscribeToPremiumWithoutTokenMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremiumWithoutToken'
+import subscribeToPremiumWithOptionalTokenMutation from 'v2/components/Billing/components/BillingForm/mutations/subscribeToPremiumWithOptionalToken'
 import cancelPremiumSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/cancelPremiumSubscription'
 import applyCouponToSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/applyCouponToSubscription'
 import downgradeToLifetimeSubscriptionMutation from 'v2/components/Billing/components/BillingForm/mutations/downgradeToLifetimeSubscription'
@@ -27,10 +26,9 @@ import PlanChanges from 'v2/components/Billing/components/PlanChanges'
 import CancellationNotice from 'v2/components/Billing/components/CancellationNotice'
 import CancelPremium from 'v2/components/Billing/components/CancelPremium'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
-import {
-  SubscribeToPremium as SubscribeToPremiumType,
-  SubscribeToPremiumVariables,
-} from '__generated__/SubscribeToPremium'
+
+import useMergeState from 'v2/hooks/useMergeState'
+
 import { CancelPremiumSubscription as CancelPremiumSubscriptionType } from '__generated__/CancelPremiumSubscription'
 import {
   ApplyCouponToSubscription as ApplyCouponToSubscriptionType,
@@ -38,12 +36,11 @@ import {
 } from '__generated__/ApplyCouponToSubscription'
 import { DowngradeToLifetime } from '__generated__/DowngradeToLifetime'
 import { Billing as Me } from '__generated__/Billing'
-import useMergeState from 'v2/hooks/useMergeState'
 import { SupportedPlanEnum } from '__generated__/globalTypes'
 import {
-  SubscribeToPremiumWithoutToken,
-  SubscribeToPremiumWithoutTokenVariables,
-} from '__generated__/SubscribeToPremiumWithoutToken'
+  SubscribeToPremiumWithOptionalToken,
+  SubscribeToPremiumWithOptionalTokenVariables,
+} from '__generated__/SubscribeToPremiumWithOptionalToken'
 
 type OperationsEnum =
   | 'CHANGE_PLAN_ID'
@@ -86,14 +83,10 @@ const BillingForm: React.FC<BillingFormProps> = ({
 
   const { operations, mode, errorMessage, couponCode, total } = state
 
-  const [subscribeToPremium] = useMutation<
-    SubscribeToPremiumType,
-    SubscribeToPremiumVariables
-  >(subscribeToPremiumMutation)
-  const [subscribeToPremiumWithoutToken] = useMutation<
-    SubscribeToPremiumWithoutToken,
-    SubscribeToPremiumWithoutTokenVariables
-  >(subscribeToPremiumWithoutTokenMutation)
+  const [subscribeToPremiumWithOptionalToken] = useMutation<
+    SubscribeToPremiumWithOptionalToken,
+    SubscribeToPremiumWithOptionalTokenVariables
+  >(subscribeToPremiumWithOptionalTokenMutation)
   const [cancelPremiumSubscription] = useMutation<
     CancelPremiumSubscriptionType
   >(cancelPremiumSubscriptionMutation)
@@ -174,27 +167,20 @@ const BillingForm: React.FC<BillingFormProps> = ({
       return Promise.reject('Not a valid plan id')
     }
 
-    if (total === 0) {
-      return subscribeToPremiumWithoutToken({
-        variables: {
-          coupon_code: couponCode,
-          plan_id: planId.toUpperCase() as SupportedPlanEnum,
-        },
-      })
-        .then(() => {
-          return axios.get('/me/refresh')
-        })
-        .then(() => {
-          window.location.reload()
-        })
+    const defaultVariables = {
+      coupon_code: couponCode,
+      plan_id: planId.toUpperCase() as SupportedPlanEnum,
     }
+    const variables =
+      total === 0
+        ? defaultVariables
+        : {
+            ...defaultVariables,
+            token: customer.default_credit_card?.id,
+          }
 
-    return subscribeToPremium({
-      variables: {
-        coupon_code: couponCode,
-        plan_id: planId.toUpperCase() as SupportedPlanEnum,
-        token: customer.default_credit_card.id,
-      },
+    return subscribeToPremiumWithOptionalToken({
+      variables,
       refetchQueries: [{ query: billingQuery }],
       awaitRefetchQueries: true,
     })
@@ -208,9 +194,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
     customer.default_credit_card,
     total,
     planId,
-    subscribeToPremium,
     couponCode,
-    subscribeToPremiumWithoutToken,
+    subscribeToPremiumWithOptionalToken,
   ])
 
   const handleSubmit = useCallback(
