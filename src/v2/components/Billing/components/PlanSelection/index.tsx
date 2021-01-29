@@ -47,7 +47,7 @@ const Link = styled.a`
 interface PlanSelectionProps {
   me: PlanSelectionType
   onSelect: (plan_id: any) => void
-  plan_id: string
+  plan_id?: string
 }
 
 const PlanSelection: React.FC<PlanSelectionProps> = props => {
