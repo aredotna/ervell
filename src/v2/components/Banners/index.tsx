@@ -104,9 +104,9 @@ export const Invite = props => (
 export const ProposePremium = props => (
   <Banner bg="state.premium" color="white" iconName="Exclaim" {...props}>
     <Box>
-      Get 25% off Are.na Premium with the coupon code{' '}
+      Get 20% off Are.na Premium with the coupon code{' '}
       <Text display="inline" font="mono" color="white">
-        flower
+        GATHER
       </Text>
     </Box>
 

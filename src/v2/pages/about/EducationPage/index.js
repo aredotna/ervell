@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
+
 import Tabs from 'v2/components/UI/Tabs'
 
 import {
@@ -72,13 +74,15 @@ export default class EducationPage extends Component {
             <CenterBox my={10}>
               <Subheadline>Get 50% off Are.na Premium</Subheadline>
               <Description>
-                Are.na Premium gives you unlimited privacy for personal
-                projects. Use coupon code <strong>learning</strong> to get two
-                years of Premium for half the price.
+                Are.na Premium gives you unlimited blocks and extra features.
+                Use coupon code{' '}
+                <a href="/settings/billing">
+                  <Text display="inline" color="state.premium" font="mono">
+                    CURIOUS
+                  </Text>
+                </a>{' '}
+                to get two years of Premium for half the price.
               </Description>
-              <Button f={5} mt={6} py={6} href="/sign_up">
-                Join Now
-              </Button>
             </CenterBox>
           </CTA>
         </div>
