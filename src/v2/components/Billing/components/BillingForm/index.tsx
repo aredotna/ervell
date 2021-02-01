@@ -335,7 +335,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
   )
 
   return (
-    <Box>
+    <Box mb={10}>
       {mode === 'processing' && (
         <StatusOverlay>
           <LoadingIndicator f={9} />
