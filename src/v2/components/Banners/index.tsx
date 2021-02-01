@@ -118,10 +118,7 @@ export const ProposePremium = props => (
 
 export const PremiumSupporter = props => (
   <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
-    <Box>
-      Upgrade to Premium Supporter before Jan 1st 2021 and get a free Are.na
-      Annual.
-    </Box>
+    <Box>Upgrade to Premium Supporter and get a free Are.na Annual.</Box>
     <ButtonLink
       color="state.supporter"
       href="/settings/billing"
