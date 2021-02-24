@@ -8,6 +8,7 @@ enum ConnectableTypenameEnum {
   Image = 'Image',
   Link = 'Link',
   Text = 'Text',
+  PendingBlock = 'Block',
 }
 
 enum BaseConnectableTypenameEnum {
@@ -23,6 +24,8 @@ enum BaseConnectableTypenameEnum {
 export const toBaseConnectableTypename = (
   typename: ConnectableTypenameEnum
 ): BaseConnectableTypenameEnum => {
+  console.log({ typename })
+
   if (typename === 'Channel') {
     return BaseConnectableTypenameEnum.Channel
   }
