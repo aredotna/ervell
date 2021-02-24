@@ -8,6 +8,7 @@ enum ConnectableTypenameEnum {
   Image = 'Image',
   Link = 'Link',
   Text = 'Text',
+  PendingBlock = 'Block',
 }
 
 enum BaseConnectableTypenameEnum {
