@@ -24,8 +24,6 @@ enum BaseConnectableTypenameEnum {
 export const toBaseConnectableTypename = (
   typename: ConnectableTypenameEnum
 ): BaseConnectableTypenameEnum => {
-  console.log({ typename })
-
   if (typename === 'Channel') {
     return BaseConnectableTypenameEnum.Channel
   }
