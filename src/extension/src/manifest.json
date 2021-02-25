@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Are.na",
   "description": "Assemble and connect information.",
-  "version": "0.39",
+  "version": "0.41",
   "commands": {
     "save-page": {
       "suggested_key": {

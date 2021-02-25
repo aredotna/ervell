@@ -18,6 +18,7 @@ browser.contextMenus.create({
       title: tab.title,
       url: tab.url,
       tab_id: tab.id,
+      tab,
     })
   },
 })

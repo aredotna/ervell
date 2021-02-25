@@ -19,6 +19,7 @@ class ExtensionPane extends Pane {
 
   getURL = () => {
     const data = new PaneDataExtractor().extractSelection(this.msg)
+
     const params = stringify(data, { arrayFormat: 'brackets', encode: false })
 
     const baseURL = browser.extension.getURL('/index.html')
