@@ -147,8 +147,6 @@ class PaneDataExtractor {
     const html = new DOMParser().parseFromString(data['text/html'], 'text/html')
       .body.firstChild
 
-    console.log({ html })
-
     this.image =
       (<Element>html).querySelector('img') &&
       (<Element>html).querySelector('img').src
