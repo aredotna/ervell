@@ -2,7 +2,11 @@ import { css } from 'styled-components'
 
 import { LINE_HEIGHTS } from 'v2/styles/text'
 
-export const BREAKPOINTS = {
+interface MediaQueryProps {
+  [key: string]: number
+}
+
+export const BREAKPOINTS: MediaQueryProps = {
   mobile: 640,
   small: 1024,
 }
@@ -15,7 +19,7 @@ export const MEDIA_QUERIES = Object.keys(BREAKPOINTS).reduce((acc, label) => {
   `
 
   return acc
-}, {})
+}, {} as Record<keyof MediaQueryProps, () => void>)
 
 export const Z_INDEXES = {
   header: 4001,
@@ -65,6 +69,26 @@ export const RADII = {
   subtle: '0.125em',
 }
 
+interface ConstantTypes {
+  emptySpaceWidth: string
+  doubleEmptySpaceWidth: string
+  headerHeight: string
+  blockWidth: string
+  blockGutter: string
+  doubleBlockGutter: string
+  blockAndGutter: string
+  containerOffset: string
+  blockPreviewWidth: string
+  legacyUnit: string
+  topBarHeight: string
+  // TODO give these real types
+  media: any
+  radii: any
+  breakpoints: any
+  space: any
+  z: any
+}
+
 export default {
   ...CONSTANT_VALUES,
   media: MEDIA_QUERIES,
@@ -72,4 +96,4 @@ export default {
   breakpoints: BREAKPOINTS,
   space: SPACING_SCALE,
   radii: RADII,
-}
+} as ConstantTypes

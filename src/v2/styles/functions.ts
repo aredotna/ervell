@@ -20,7 +20,7 @@ export const divide = (string, divisor) =>
   parse(string)(n => n / parseFloat(divisor))
 
 export const calculateLineHeight = (fontSizeName, lineHeightName) => {
-  const fontSizeValue = parseFloat(theme.fontSizesIndexed[fontSizeName], 10)
+  const fontSizeValue = parseFloat(theme.fontSizesIndexed[fontSizeName])
   const lineHeightValue = theme.lineHeightsIndexed[lineHeightName]
   return fontSizeValue * lineHeightValue
 }
