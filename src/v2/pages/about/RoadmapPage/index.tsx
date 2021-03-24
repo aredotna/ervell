@@ -25,7 +25,7 @@ import GoalMeter from 'v2/pages/about/RoadmapPage/components/GoalMeter'
 
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 
-import { ChangelogChannelContents } from 'v2/pages/about/RoadmapPage/queries/ChangelogChannelContents'
+// import { ChangelogChannelContents } from 'v2/pages/about/RoadmapPage/queries/ChangelogChannelContents'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -113,7 +113,7 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
   const premiumButtonCopy = isPremium ? '👍 Thank you!' : 'Go Premium'
   const premiumLink = isLoggedIn ? '/settings/billing' : '/pricing'
 
-  const [data] = useQuery(ChangelogChannelContents)
+  // const [data] = useQuery(ChangelogChannelContents)
 
   return (
     <Container pb={10}>
