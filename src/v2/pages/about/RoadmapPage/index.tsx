@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-// import { useQuery } from 'react-apollo'
+import { useQuery } from 'react-apollo'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -25,7 +25,14 @@ import GoalMeter from 'v2/pages/about/RoadmapPage/components/GoalMeter'
 
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 
-// import { ChangelogChannelContents } from 'v2/pages/about/RoadmapPage/queries/ChangelogChannelContents'
+import { ChangelogChannelContents } from 'v2/pages/about/RoadmapPage/queries/ChangelogChannelContents'
+import {
+  ChangelogChannelContents as ChangelogChannelContentsType,
+  ChangelogChannelContentsVariables,
+  ChangelogChannelContents_channel_blokks_Text,
+} from '__generated__/ChangelogChannelContents'
+import KonnectableText from 'v2/components/Cell/components/Konnectable/components/KonnectableText'
+import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -44,6 +51,15 @@ const SmallParagraph = styled(Paragraph)`
   max-width: 460px;
   width: 100%;
   height: 7em;
+`
+
+const Link = styled.a`
+  * {
+    font-size: 1em !important;
+  }
+  li {
+    font-weight: normal;
+  }
 `
 
 const SupportOptions = styled(Box)`
@@ -113,7 +129,10 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
   const premiumButtonCopy = isPremium ? '👍 Thank you!' : 'Go Premium'
   const premiumLink = isLoggedIn ? '/settings/billing' : '/pricing'
 
-  // const [data] = useQuery(ChangelogChannelContents)
+  const { data } = useQuery<
+    ChangelogChannelContentsType,
+    ChangelogChannelContentsVariables
+  >(ChangelogChannelContents, { variables: { id: 'changelog' } })
 
   return (
     <Container pb={10}>
@@ -220,7 +239,7 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
 
       <TableSection>
         <Subheadline pb={1} mb={0} color="gray.bold">
-          Product
+          Product Plan
         </Subheadline>
         <Text f={2} pb={8} color="gray.medium">
           Last updated: {lastUpdated}
@@ -261,6 +280,38 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             />
           </LightColumn>
         </Table>
+      </TableSection>
+
+      <TableSection>
+        <Subheadline pb={1} mb={0} color="gray.bold">
+          Changelog
+        </Subheadline>
+        <Text f={2} pb={8} color="gray.medium">
+          Last updated: {data?.channel?.added_to_at}
+        </Text>
+        <Table>
+          {data?.channel?.blokks.map(
+            (blokk: ChangelogChannelContents_channel_blokks_Text) => {
+              return (
+                <Column key={blokk.id}>
+                  <ColumnHeader>{blokk.created_at}</ColumnHeader>
+                  <Cell>
+                    <Link href={blokk.href}>
+                      <Box height="190px">
+                        <KonnectableText text={blokk} mode={Mode.RESTING} />
+                      </Box>
+                    </Link>
+                  </Cell>
+                </Column>
+              )
+            }
+          )}
+        </Table>
+        <Box mt={7}>
+          <Text boldLinks f={2}>
+            <a href={data?.channel?.href}>See all logs</a>
+          </Text>
+        </Box>
       </TableSection>
 
       <TableSection>
