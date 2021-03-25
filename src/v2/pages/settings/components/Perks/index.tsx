@@ -16,6 +16,19 @@ interface PerkProps {
   isSupporter: boolean
 }
 
+const NonPremiumDiscord: React.FC = () => {
+  const url = 'https://discord.gg/GapEUYhXCj'
+  return (
+    <Text>
+      Join our Office Hours Discord server{' '}
+      <Text display="inline" color="state.premium">
+        <a href={url}>here</a>
+      </Text>
+      .
+    </Text>
+  )
+}
+
 const AnnualPerk: React.FC<PerkProps> = () => {
   return (
     <Text>
@@ -87,6 +100,11 @@ const Perks: React.FC<PerksProps> = ({
     return (
       <Container>
         <Box my={8}>
+          <Box pb={3} mb={8}>
+            <Box py={4} borderBottom="1px solid" borderColor="gray.light">
+              <NonPremiumDiscord />
+            </Box>
+          </Box>
           <Text color="gray.semiBold">
             <strong>
               <a href="/settings/billing">Upgrade to Premium</a>
