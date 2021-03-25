@@ -2,14 +2,12 @@ import { css } from 'styled-components'
 
 import { LINE_HEIGHTS } from 'v2/styles/text'
 
-interface MediaQueryProps {
-  [key: string]: number
-}
-
-export const BREAKPOINTS: MediaQueryProps = {
+export const BREAKPOINTS = {
   mobile: 640,
   small: 1024,
 }
+
+type BreakpointType = typeof BREAKPOINTS
 
 export const MEDIA_QUERIES = Object.keys(BREAKPOINTS).reduce((acc, label) => {
   acc[label] = (...args) => css`
@@ -19,7 +17,7 @@ export const MEDIA_QUERIES = Object.keys(BREAKPOINTS).reduce((acc, label) => {
   `
 
   return acc
-}, {} as Record<keyof MediaQueryProps, () => void>)
+}, {})
 
 export const Z_INDEXES = {
   header: 4001,
@@ -29,6 +27,8 @@ export const Z_INDEXES = {
   lightbox: 6001,
   rotate: 7001,
 }
+
+type ZIndexType = typeof Z_INDEXES
 
 export const SPACING_SCALE = [
   '0',
@@ -47,6 +47,8 @@ export const SPACING_SCALE = [
   '32em',
   '64em',
 ]
+
+type SpacingScaleType = typeof SPACING_SCALE
 
 export const CONSTANT_VALUES = {
   emptySpaceWidth: '0.33em',
@@ -69,6 +71,8 @@ export const RADII = {
   subtle: '0.125em',
 }
 
+type RadiiType = typeof RADII
+
 interface ConstantTypes {
   emptySpaceWidth: string
   doubleEmptySpaceWidth: string
@@ -83,13 +87,13 @@ interface ConstantTypes {
   topBarHeight: string
   // TODO give these real types
   media: any
-  radii: any
-  breakpoints: any
-  space: any
-  z: any
+  radii: RadiiType
+  breakpoints: BreakpointType
+  space: SpacingScaleType
+  z: ZIndexType
 }
 
-export default {
+export const constants = {
   ...CONSTANT_VALUES,
   media: MEDIA_QUERIES,
   z: Z_INDEXES,
@@ -97,3 +101,5 @@ export default {
   space: SPACING_SCALE,
   radii: RADII,
 } as ConstantTypes
+
+export default constants
