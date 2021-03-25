@@ -121,7 +121,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                   <SettingsPath />
                   <Tabs tabs={tabs}>
                     <TabContent>
-                      <ContentComponent isPremium={data.me.is_premium} />
+                      <ContentComponent
+                        isPremium={data.me.is_premium}
+                        isSupporter={data.me.is_supporter}
+                        isInvestor={data.me.is_investor}
+                      />
                     </TabContent>
                   </Tabs>
                 </>
