@@ -7,6 +7,8 @@ export default gql`
       id
       name
       is_premium
+      is_supporter
+      is_investor
       groups(type: OWNER) {
         id
       }

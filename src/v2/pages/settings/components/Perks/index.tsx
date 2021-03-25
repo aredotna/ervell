@@ -12,25 +12,76 @@ const Container = styled(Box).attrs({
   width: 100%;
 `
 
-const AnnualPerk: React.FC = () => {
+interface PerkProps {
+  isSupporter: boolean
+}
+
+const AnnualPerk: React.FC<PerkProps> = () => {
   return (
     <Text>
-      For a $4 discount on our <strong>Are.na Annual 2020 book</strong>, use the
-      coupon{' '}
+      Our Annual books are sold out, hold tight for 2021 Supporter perks.
+    </Text>
+  )
+}
+
+const StorePerk: React.FC<PerkProps> = () => {
+  return (
+    <Text>
+      For a 20% discount on any item in our{' '}
+      <a href="https://store.are.na">Store</a>, use the coupon{' '}
       <Text display="inline" color="state.premium">
-        ANNUAL-B5HS
+        2021TWENTY
       </Text>{' '}
       on checkout.
     </Text>
   )
 }
 
-interface PerksProps {
-  isPremium: boolean
+const ReportPerk: React.FC<PerkProps> = () => {
+  return (
+    <Text>
+      Find all past investor reports{' '}
+      <Text display="inline" color="state.premium">
+        <a href="https://www.are.na/share/JlSzNKI">here</a>
+      </Text>
+    </Text>
+  )
 }
 
-const Perks: React.FC<PerksProps> = ({ isPremium }) => {
-  const perks = [AnnualPerk]
+const PremiumDiscordPerk: React.FC<PerkProps> = ({ isSupporter }) => {
+  const url = isSupporter
+    ? 'https://discord.gg/WZTGRc4C5P'
+    : 'https://discord.gg/GXfzEpFpby'
+  return (
+    <Text>
+      Access premium-only channels on our Discord server{' '}
+      <Text display="inline" color="state.premium">
+        <a href={url}>here</a>
+      </Text>
+      .
+    </Text>
+  )
+}
+
+interface PerksProps {
+  isPremium: boolean
+  isSupporter: boolean
+  isInvestor: boolean
+}
+
+const Perks: React.FC<PerksProps> = ({
+  isPremium,
+  isSupporter,
+  isInvestor,
+}) => {
+  const premiumPerks = [PremiumDiscordPerk, StorePerk, AnnualPerk]
+  const supporterPerks = [PremiumDiscordPerk, StorePerk, ReportPerk, AnnualPerk]
+
+  if (isInvestor) {
+    premiumPerks.push(ReportPerk)
+  }
+
+  const perks = isSupporter ? supporterPerks : premiumPerks
 
   if (!isPremium) {
     return (
@@ -62,7 +113,7 @@ const Perks: React.FC<PerksProps> = ({ isPremium }) => {
         </Text>
       </Box>
 
-      <Box mt={8} pb={3} borderBottom="1px solid" borderColor="gray.light">
+      <Box mt={8} pb={5} borderBottom="1px solid" borderColor="gray.light">
         <Text color="gray.bold" fontWeight="bold">
           Current Perks
         </Text>
@@ -71,12 +122,12 @@ const Perks: React.FC<PerksProps> = ({ isPremium }) => {
         {perks.map((Perk, i) => {
           return (
             <Box
-              py={3}
+              py={4}
               key={`perk-${i}`}
               borderBottom="1px solid"
               borderColor="gray.light"
             >
-              <Perk />
+              <Perk isSupporter={isSupporter} />
             </Box>
           )
         })}

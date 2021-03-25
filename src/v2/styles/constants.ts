@@ -7,6 +7,8 @@ export const BREAKPOINTS = {
   small: 1024,
 }
 
+type BreakpointType = typeof BREAKPOINTS
+
 export const MEDIA_QUERIES = Object.keys(BREAKPOINTS).reduce((acc, label) => {
   acc[label] = (...args) => css`
     @media (max-width: ${BREAKPOINTS[label] / 16}em) {
@@ -26,6 +28,8 @@ export const Z_INDEXES = {
   rotate: 7001,
 }
 
+type ZIndexType = typeof Z_INDEXES
+
 export const SPACING_SCALE = [
   '0',
   '0.125em',
@@ -43,6 +47,8 @@ export const SPACING_SCALE = [
   '32em',
   '64em',
 ]
+
+type SpacingScaleType = typeof SPACING_SCALE
 
 export const CONSTANT_VALUES = {
   emptySpaceWidth: '0.33em',
@@ -65,11 +71,35 @@ export const RADII = {
   subtle: '0.125em',
 }
 
-export default {
+type RadiiType = typeof RADII
+
+interface ConstantTypes {
+  emptySpaceWidth: string
+  doubleEmptySpaceWidth: string
+  headerHeight: string
+  blockWidth: string
+  blockGutter: string
+  doubleBlockGutter: string
+  blockAndGutter: string
+  containerOffset: string
+  blockPreviewWidth: string
+  legacyUnit: string
+  topBarHeight: string
+  // TODO give these real types
+  media: any
+  radii: RadiiType
+  breakpoints: BreakpointType
+  space: SpacingScaleType
+  z: ZIndexType
+}
+
+export const constants = {
   ...CONSTANT_VALUES,
   media: MEDIA_QUERIES,
   z: Z_INDEXES,
   breakpoints: BREAKPOINTS,
   space: SPACING_SCALE,
   radii: RADII,
-}
+} as ConstantTypes
+
+export default constants

@@ -16,6 +16,8 @@ export interface SettingsPage_me {
   id: number | null;
   name: string | null;
   is_premium: boolean | null;
+  is_supporter: boolean | null;
+  is_investor: boolean | null;
   groups: (SettingsPage_me_groups | null)[] | null;
 }
 
