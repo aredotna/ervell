@@ -100,14 +100,12 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                 })
               }
 
-              if (data.me.is_premium) {
-                tabs.push({
-                  url: '/settings/perks',
-                  label: 'Perks',
-                  active: tab === 'perks',
-                  LabelComponent: PremiumLabel,
-                })
-              }
+              tabs.push({
+                url: '/settings/perks',
+                label: 'Perks',
+                active: tab === 'perks',
+                LabelComponent: PremiumLabel,
+              })
 
               const ContentComponent = {
                 general: UserSettingsComponent,
