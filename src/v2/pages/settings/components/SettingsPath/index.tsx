@@ -2,15 +2,17 @@ import React from 'react'
 
 import HeaderMetadataContainer from 'v2/components/UI/HeaderMetadata/HeaderMetadataContainer'
 import StickyBreadcrumbPath from 'v2/components/UI/StickyBreadcrumbPath'
+import useSerializedMe from 'v2/hooks/useSerializedMe'
+import { SerializeMeQueryHook_serializedMe } from '__generated__/SerializeMeQueryHook'
 
 interface SettingsPathProps {
-  name: string
+  me: SerializeMeQueryHook_serializedMe
 }
 
-const SettingsBreadcrumb: React.FC<SettingsPathProps> = ({ name }) => (
+const SettingsBreadcrumb: React.FC<SettingsPathProps> = ({ me }) => (
   <StickyBreadcrumbPath>
     <StickyBreadcrumbPath.Crumb>
-      <div>{name}</div>
+      <a href={`/${me.slug}`}>{me.name}</a>
     </StickyBreadcrumbPath.Crumb>
     <StickyBreadcrumbPath.Crumb>
       <div>Settings</div>
@@ -18,9 +20,12 @@ const SettingsBreadcrumb: React.FC<SettingsPathProps> = ({ name }) => (
   </StickyBreadcrumbPath>
 )
 
-const SettingsPath: React.FC<SettingsPathProps> = ({ name }) => {
+const SettingsPath: React.FC = () => {
+  const serializedMe = useSerializedMe()
   return (
-    <HeaderMetadataContainer breadcrumb={<SettingsBreadcrumb name={name} />} />
+    <HeaderMetadataContainer
+      breadcrumb={<SettingsBreadcrumb me={serializedMe} />}
+    />
   )
 }
 

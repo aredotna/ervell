@@ -118,7 +118,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
 
               return (
                 <>
-                  <SettingsPath name={data.me.name} />
+                  <SettingsPath />
                   <Tabs tabs={tabs}>
                     <TabContent>
                       <ContentComponent isPremium={data.me.is_premium} />
