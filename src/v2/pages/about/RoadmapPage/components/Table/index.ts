@@ -43,6 +43,16 @@ export const Column = styled(Box).attrs({})`
   width: 15em;
   margin-right: -1px;
   color: ${x => x.theme.colors.gray.bold};
+
+  &:first-child {
+    border-top-left-radius: ${constants.radii.regular};
+    border-bottom-left-radius: ${constants.radii.regular};
+  }
+
+  &:last-child {
+    border-top-right-radius: ${constants.radii.regular};
+    border-bottom-right-radius: ${constants.radii.regular};
+  }
 `
 
 export const LightColumn = styled(Column)`
@@ -53,6 +63,9 @@ export const Cell = styled(Box).attrs({
   p: 6,
 })`
   line-height: ${x => x.theme.lineHeightsIndexed.base};
+  max-height: ${x => x.theme.space[11]};
+  overflow: scroll;
+  font-size: ${x => x.theme.fontSizesIndexed.sm};
 
   ul {
     list-style-type: disc;
@@ -71,5 +84,4 @@ export const Cell = styled(Box).attrs({
 export const ColumnHeader = styled(Cell)`
   font-size: ${x => x.theme.fontSizesIndexed.h6};
   border-bottom: 1px solid ${x => x.theme.colors.gray.light};
-  font-weight: bold;
 `

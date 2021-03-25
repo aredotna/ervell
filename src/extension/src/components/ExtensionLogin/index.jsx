@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import styled from 'styled-components'
-// import browser from 'webextension-polyfill'
+import browser from 'webextension-polyfill'
 
 import loginMutation from 'extension/src/components/ExtensionLogin/mutations/loginMutation'
 import Layout from 'v2/components/Bookmarklet/components/Layout'
@@ -73,9 +73,9 @@ class Login extends Component {
               me.authentication_token
             )
           } catch {
-            // browser.storage.local.set({
-            //   authentication_token: me.authentication_token,
-            // })
+            browser.storage.local.set({
+              authentication_token: me.authentication_token,
+            })
           }
 
           window.location.reload()

@@ -8,23 +8,25 @@ interface GoalMeterProps {
   currentMrr: number
   goalMrr: number
   goalDate: string
+  monthlyActiveMembers: string
+  totalPayingMembers: string
+  monthlyConnections: string
 }
 
 export const GoalMeter: React.FC<GoalMeterProps> = ({
   currentMrr,
   goalMrr,
   goalDate,
+  monthlyActiveMembers,
+  monthlyConnections,
+  totalPayingMembers,
 }) => {
-  const dateOptions = {
+  const formattedDate = new Date(goalDate).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }
-  const formattedDate = new Date(goalDate).toLocaleDateString(
-    'en-US',
-    dateOptions
-  )
+  })
   return (
     <>
       <Meter
@@ -43,11 +45,21 @@ export const GoalMeter: React.FC<GoalMeterProps> = ({
         flexDirection="row"
         display="flex"
         px={2}
+        pb={5}
       >
         <Box>
           <Text f={1}>Today</Text>
           <Text f={1}>
             <strong>${currentMrr}</strong> Monthly recurring revenue
+          </Text>
+          <Text f={1} mt={5} color="gray.medium">
+            <strong>{monthlyActiveMembers}</strong> Monthly active members
+          </Text>
+          <Text f={1} color="gray.medium">
+            <strong>{monthlyConnections}</strong> Monthly connections
+          </Text>
+          <Text f={1} color="gray.medium">
+            <strong>{totalPayingMembers}</strong> Total paying members
           </Text>
         </Box>
         <Box>
