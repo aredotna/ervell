@@ -82,8 +82,8 @@ export const initApolloClient = ({
     ({ graphQLErrors, networkError, operation, response }) => {
       const isUnAuthOrNotFound = graphQLErrors?.every(
         err =>
-          err.extensions.code === 'UNAUTHORIZED' ||
-          err.extensions.code === 'NOT_FOUND'
+          err.extensions?.code === 'UNAUTHORIZED' ||
+          err.extensions?.code === 'NOT_FOUND'
       )
 
       if (graphQLErrors && !isUnAuthOrNotFound) {
