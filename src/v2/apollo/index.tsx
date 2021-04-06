@@ -80,7 +80,13 @@ export const initApolloClient = ({
 
   const errorLink = onError(
     ({ graphQLErrors, networkError, operation, response }) => {
-      if (graphQLErrors) {
+      const isUnAuthOrNotFound = graphQLErrors?.every(
+        err =>
+          err.extensions.code === 'UNAUTHORIZED' ||
+          err.extensions.code === 'NOT_FOUND'
+      )
+
+      if (graphQLErrors && !isUnAuthOrNotFound) {
         graphQLErrors.forEach(
           ({ message, locations, path, extensions, originalError }) => {
             console.error(
@@ -90,7 +96,7 @@ export const initApolloClient = ({
             )
             if (!isClientSide)
               airbrake?.notify({
-                error: originalError,
+                error: originalError.message,
                 params: { operation, response },
               })
           }
@@ -101,7 +107,7 @@ export const initApolloClient = ({
         console.error(`[Network error]: ${networkError}`, { networkError })
         if (!isClientSide)
           airbrake?.notify({
-            error: networkError,
+            error: networkError.message,
             params: {
               operation,
               responseBody: (networkError as any)?.bodyText,
