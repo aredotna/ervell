@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -48,27 +48,6 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
   linkViewMode,
   onLinkViewModeChange,
 }) => {
-  const downloadImage = useCallback(() => {
-    if (block.__typename !== 'Image') {
-      return false
-    }
-
-    const img = new Image()
-    img.setAttribute('crossorigin', 'anonymous')
-    img.src = block.image_url
-    img.onload = () => {
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      canvas.width = img.width
-      canvas.height = img.height
-      ctx.drawImage(img, 0, 0)
-      const a = document.createElement('a')
-      a.download = `block-${block.id}.jpg`
-      a.href = canvas.toDataURL('image/jpg')
-      a.click()
-    }
-  }, [block])
-
   if (block.__typename === 'Channel') {
     return null
   }
@@ -123,7 +102,10 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
           )}
 
         {block.__typename === 'Image' && (
-          <a onClick={downloadImage} rel="nofollow noopener noreferrer">
+          <a
+            download={`block-${block.id}.jpg`}
+            rel="nofollow noopener noreferrer"
+          >
             Download
           </a>
         )}
