@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
+import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'
 import { BatchHttpLink } from 'apollo-link-batch-http'
 import { createHttpLink } from 'apollo-link-http'
@@ -25,6 +26,8 @@ import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
 import clientData from 'v2/apollo/localState/clientData'
 
 const isClientSide = typeof window !== 'undefined'
+
+const { airbrake } = isClientSide ? { airbrake: null } : require('lib/airbrake')
 
 const {
   data: {
@@ -75,7 +78,43 @@ export const initApolloClient = ({
 
   const httpLink = isClientSide ? clientHttpLink : serverHttpLink
 
-  const link = ApolloLink.from([authLink, httpLink])
+  const errorLink = onError(
+    ({ graphQLErrors, networkError, operation, response }) => {
+      if (graphQLErrors) {
+        graphQLErrors.forEach(
+          ({ message, locations, path, extensions, originalError }) => {
+            console.error(
+              `[GraphQL error]: ${
+                extensions?.code ? `Code: ${extensions.code}` : ''
+              } Message: ${message}, Location: ${locations}, Path: ${path}`
+            )
+            if (!isClientSide)
+              airbrake?.notify({
+                error: originalError,
+                params: { operation, response },
+              })
+          }
+        )
+      }
+
+      if (networkError) {
+        console.error(`[Network error]: ${networkError}`, { networkError })
+        if (!isClientSide)
+          airbrake?.notify({
+            error: networkError,
+            params: {
+              operation,
+              responseBody: (networkError as any)?.bodyText,
+              responseUrl: (networkError as any)?.response?.url,
+              responseStatus: (networkError as any)?.response?.status,
+              networkError,
+            },
+          })
+      }
+    }
+  )
+
+  const link = ApolloLink.from([errorLink, authLink, httpLink])
 
   const typeDefs = `
     extend type Query {
