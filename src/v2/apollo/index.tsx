@@ -88,14 +88,15 @@ export const initApolloClient = ({
 
       if (graphQLErrors && !isUnAuthOrNotFound) {
         graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-          console.error(
-            `[GraphQL error]: ${
-              extensions?.code ? `Code: ${extensions.code}` : ''
-            } Message: ${message}, Location: ${locations}, Path: ${path}`
-          )
+          const loggedError = `[GraphQL error]: ${
+            extensions?.code ? `Code: ${extensions.code}` : ''
+          } Message: ${message}, Location: ${locations}, Path: ${path}`
+
+          console.error(loggedError)
+
           if (!isClientSide)
             airbrake?.notify({
-              error: message,
+              error: loggedError,
               params: { operation, response },
             })
         })
