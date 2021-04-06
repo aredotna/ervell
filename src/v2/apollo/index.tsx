@@ -87,27 +87,26 @@ export const initApolloClient = ({
       )
 
       if (graphQLErrors && !isUnAuthOrNotFound) {
-        graphQLErrors.forEach(
-          ({ message, locations, path, extensions, originalError }) => {
-            console.error(
-              `[GraphQL error]: ${
-                extensions?.code ? `Code: ${extensions.code}` : ''
-              } Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-            if (!isClientSide)
-              airbrake?.notify({
-                error: originalError.message,
-                params: { operation, response },
-              })
-          }
-        )
+        graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+          const loggedError = `[GraphQL error]: ${
+            extensions?.code ? `Code: ${extensions.code}` : ''
+          } Message: ${message}, Location: ${locations}, Path: ${path}`
+
+          console.error(loggedError)
+
+          if (!isClientSide)
+            airbrake?.notify({
+              error: loggedError,
+              params: { operation, response },
+            })
+        })
       }
 
       if (networkError) {
         console.error(`[Network error]: ${networkError}`, { networkError })
         if (!isClientSide)
           airbrake?.notify({
-            error: networkError.message,
+            error: networkError?.message,
             params: {
               operation,
               responseBody: (networkError as any)?.bodyText,
