@@ -35,7 +35,6 @@ export interface BlockLightboxActions_Image_can {
 export interface BlockLightboxActions_Image {
   __typename: "Image";
   find_original_url: string | null;
-  downloadable_image: string | null;
   source: BlockLightboxActions_Image_source | null;
   can: BlockLightboxActions_Image_can | null;
   shareable_href: string | null;

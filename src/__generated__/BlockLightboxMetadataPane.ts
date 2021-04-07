@@ -117,7 +117,6 @@ export interface BlockLightboxMetadataPane_Image {
   shareable_href: string | null;
   shareable_title: string | null;
   find_original_url: string | null;
-  downloadable_image: string | null;
   id: number | null;
   editable_title: string | null;
   editable_description: string | null;

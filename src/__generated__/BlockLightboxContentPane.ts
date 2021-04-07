@@ -17,6 +17,7 @@ export interface BlockLightboxContentPane_Image {
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
+  downloadable_image: string | null;
 }
 
 export interface BlockLightboxContentPane_Text_can {

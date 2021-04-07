@@ -78,9 +78,9 @@ export interface ModalBlockLightbox_block_Image {
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
+  downloadable_image: string | null;
   can: ModalBlockLightbox_block_Image_can | null;
   find_original_url: string | null;
-  downloadable_image: string | null;
 }
 
 export interface ModalBlockLightbox_block_Text_user {
