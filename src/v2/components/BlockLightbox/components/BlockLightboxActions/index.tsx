@@ -104,6 +104,7 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
         {block.__typename === 'Image' && (
           <a
             download={`block-${block.id}.jpg`}
+            href={block.downloadable_image}
             rel="nofollow noopener noreferrer"
           >
             Download
