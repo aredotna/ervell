@@ -80,6 +80,7 @@ export interface BlockLightbox_Image {
   editable_description: string | null;
   can: BlockLightbox_Image_can | null;
   find_original_url: string | null;
+  downloadable_image: string | null;
 }
 
 export interface BlockLightbox_Text_can {
