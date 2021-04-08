@@ -7,7 +7,6 @@ export default gql`
     __typename
     ... on Image {
       find_original_url
-      downloadable_image: resized_image_url(downloadable: true)
     }
     ... on Text {
       find_original_url
