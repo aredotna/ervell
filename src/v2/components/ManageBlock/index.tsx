@@ -34,6 +34,7 @@ import {
   updateBlockMutationVariables,
 } from '__generated__/updateBlockMutation'
 import Text from '../UI/Text'
+import { BlockLightboxImage_Image } from '__generated__/BlockLightboxImage'
 
 const TextField = styled(Textarea).attrs({
   px: 7,
@@ -103,7 +104,13 @@ interface ManageBlockProps {
 const MemoizedContent = React.memo<{ block: Block & BlockLightbox }>(
   props =>
     ({
-      Image: <BlockLightboxImage {...props} />,
+      Image: (
+        <BlockLightboxImage
+          {...props}
+          block={props.block as BlockLightboxImage_Image}
+          layout="DEFAULT"
+        />
+      ),
       Link: (
         <BlockLightboxLink
           linkViewMode="screenshot"
