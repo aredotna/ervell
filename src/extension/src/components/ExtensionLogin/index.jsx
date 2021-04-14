@@ -68,14 +68,14 @@ class Login extends Component {
           this.setState({ mode: 'redirecting' })
 
           try {
+            browser.storage.local.set({
+              authentication_token: me.authentication_token,
+            })
+          } catch {
             window.localStorage.setItem(
               'authentication_token',
               me.authentication_token
             )
-          } catch {
-            browser.storage.local.set({
-              authentication_token: me.authentication_token,
-            })
           }
 
           window.location.reload()
