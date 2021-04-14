@@ -22,7 +22,7 @@ export interface removeConnectionMutation {
 }
 
 export interface removeConnectionMutationVariables {
-  channel_id: string | number;
-  connectable_id: string | number;
+  channel_id: string;
+  connectable_id: string;
   connectable_type: BaseConnectableTypeEnum;
 }
