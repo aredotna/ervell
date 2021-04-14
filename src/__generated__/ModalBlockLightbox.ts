@@ -314,5 +314,5 @@ export interface ModalBlockLightbox {
 }
 
 export interface ModalBlockLightboxVariables {
-  id: string | number;
+  id: string;
 }
