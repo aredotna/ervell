@@ -3,7 +3,6 @@ import { useQuery } from 'react-apollo'
 import { useTable } from 'react-table'
 import styled from 'styled-components'
 
-import constants from 'v2/styles/constants'
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
@@ -13,28 +12,34 @@ import { ContentCell } from './components/ContentCell'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 
 const Table = styled.table`
-  border: 1px solid ${x => x.theme.colors.gray.light};
   width: 100%;
-  border-collapse: collapse;
-  border-radius: ${constants.radii.button};
-  border-style: hidden;
-  box-shadow: 0 0 0 1px ${x => x.theme.colors.gray.light};
+  border-collapse: separate;
+  border-spacing: 0 ${x => x.theme.space[4]};
   margin-bottom: ${x => x.theme.space[7]};
 `
 
 const TR = styled.tr``
 
 const TD = styled.td`
-  font-size: ${x => x.theme.fontSizesIndexed.sm};
   color: ${x => x.theme.colors.gray.bold};
-  padding: ${x => x.theme.space[4]};
+  border: 1px solid ${x => x.theme.colors.gray.light};
+  border-right: none;
+  font-size: ${x => x.theme.fontSizesIndexed.sx};
+  height: 30px;
 
-  border-right: 1px solid ${x => x.theme.colors.gray.light};
-  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
+  &:last-child {
+    border-right: 1px solid ${x => x.theme.colors.gray.light};
+  }
+`
+
+const TDInner = styled.div`
+  padding: ${x => x.theme.space[2]};
 `
 
 const TH = styled(TD)`
   font-weight: bold;
+  height: 30px;
+  padding: ${x => x.theme.space[2]};
 `
 
 interface ChannelTableQueryProps {
@@ -124,7 +129,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
               {row.cells.map((cell, j) => {
                 return (
                   <TD key={`td-key-${j}`} {...cell.getCellProps()}>
-                    {cell.render('Cell')}
+                    <TDInner>{cell.render('Cell')}</TDInner>
                   </TD>
                 )
               })}
