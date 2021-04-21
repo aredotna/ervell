@@ -127,6 +127,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           return (
             <TR key={`tr-key-${i}`} {...row.getRowProps()}>
               {row.cells.map((cell, j) => {
+                const props = cell.getCellProps()
+                console.log({ props })
+
                 return (
                   <TD key={`td-key-${j}`} {...cell.getCellProps()}>
                     <TDInner>{cell.render('Cell')}</TDInner>
