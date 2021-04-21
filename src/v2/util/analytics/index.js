@@ -61,8 +61,9 @@ export default {
     })
   },
 
-  registerCurrentUser({ isLoggedIn, registeredTimestamp }) {
+  registerCurrentUser({ isLoggedIn, registeredTimestamp, isPremium }) {
     ga('set', 'dimension1', isLoggedIn)
+    ga('set', 'dimension10', isPremium)
     if (!registeredTimestamp) return
     ga('set', 'dimension2', registeredTimestamp)
   },
@@ -95,6 +96,7 @@ export default {
     this.registerCurrentUser({
       isLoggedIn,
       registeredTimestamp: CURRENT_USER && CURRENT_USER.registered,
+      isPremium: CURRENT_USER && CURRENT_USER.is_premium,
     })
 
     this.trackPageView()
