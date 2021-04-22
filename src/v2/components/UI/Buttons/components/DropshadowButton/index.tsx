@@ -29,7 +29,7 @@ const mixin = css`
   &:active {
     ${activeMixin}
   }
-
+  padding: ${props => props.theme.space[4]} ${props => props.theme.space[6]};
   color: ${props => props.theme.colors.gray.bold};
   border: 1px solid ${props => props.theme.colors.gray.bold};
   box-shadow: 2px 2px 0px ${props => props.theme.colors.gray.bold};

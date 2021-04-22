@@ -73,23 +73,13 @@ export const MonthlyPremiumReminder: React.FC = () => {
         <Inner>
           <Copy>
             <p>
-              Hi, {name}. This is a reminder that every month we rely on members
-              subscriptions to maintain, build and support Are.na.
+              Hi, {name}. Every month we rely on member subscriptions to build
+              and maintain Are.na.
             </p>
 
             <p>
-              We regularly update the{' '}
-              <a href="/roadmap" target="_blank">
-                Roadmap
-              </a>{' '}
-              page where you can transparently follow what we’re working on, how
-              much money the company makes and our broarder plans.
-            </p>
-
-            <p>
-              In addition to contributing to Are.na’s future, with Premium you
-              get unlimited blocks, more privacy settings, Reader mode and soon
-              the new Table View.
+              With a Premium membership you get unlimited blocks, more privacy
+              settings, Reader mode and more.
             </p>
           </Copy>
 
@@ -100,11 +90,20 @@ export const MonthlyPremiumReminder: React.FC = () => {
             my={7}
           >
             <DropshadowButtonLink href="/settings/billing" target="_blank">
-              Try Premium <Icons name="ArenaMark" size={6} ml={3} />
+              Upgrade to Premium <Icons name="ArenaMark" size={6} ml={3} />
             </DropshadowButtonLink>
           </Box>
 
           <Copy>
+            <p>
+              You can see where your subscription goes on our{' '}
+              <a href="/roadmap" target="_blank">
+                Roadmap
+              </a>{' '}
+              page, which shows what we’re currently working on, how we’re doing
+              and what the long-term plans are.
+            </p>
+
             <p>
               Thank you for considering,
               <br />
