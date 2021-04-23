@@ -33,17 +33,19 @@ browser.browserAction.onClicked.addListener(tab => {
   })
 })
 
-browser.commands.onCommand.addListener(command => {
-  browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
-    browser.tabs.sendMessage(tabs[0].id, {
-      text: command,
-      title: tabs[0].title,
-      options: { srcUrl: tabs[0].url },
-      url: tabs[0].url,
-      tab_id: tabs[0].id,
+if (browser.commands) {
+  browser.commands.onCommand.addListener(command => {
+    browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+      browser.tabs.sendMessage(tabs[0].id, {
+        text: command,
+        title: tabs[0].title,
+        options: { srcUrl: tabs[0].url },
+        url: tabs[0].url,
+        tab_id: tabs[0].id,
+      })
     })
   })
-})
+}
 
 browser.runtime.onInstalled.addListener(object => {
   if (object.reason === 'install') {

@@ -101,6 +101,16 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
             </a>
           )}
 
+        {block.__typename === 'Image' && (
+          <a
+            download={`block-${block.id}.jpg`}
+            href={block.downloadable_image}
+            rel="nofollow noopener noreferrer"
+          >
+            Download
+          </a>
+        )}
+
         {block.can.mute && <Mute id={block.id} type="BLOCK" />}
       </Inner>
     </Container>

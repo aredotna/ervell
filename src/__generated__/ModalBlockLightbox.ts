@@ -80,6 +80,7 @@ export interface ModalBlockLightbox_block_Image {
   original_image_url: string | null;
   can: ModalBlockLightbox_block_Image_can | null;
   find_original_url: string | null;
+  downloadable_image: string | null;
 }
 
 export interface ModalBlockLightbox_block_Text_user {
@@ -313,5 +314,5 @@ export interface ModalBlockLightbox {
 }
 
 export interface ModalBlockLightboxVariables {
-  id: string | number;
+  id: string;
 }

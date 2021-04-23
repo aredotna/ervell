@@ -61,9 +61,9 @@ export const ConnectionSelection: React.FC<ConnectionSelectionProps> = ({
       return createConnection({
         refetchQueries: _refetchQueries,
         variables: {
-          connectable_id: id,
+          connectable_id: id.toString(),
           connectable_type: type,
-          channel_ids: [channel.id],
+          channel_ids: [channel.id.toString()],
         },
       })
     }
@@ -71,8 +71,8 @@ export const ConnectionSelection: React.FC<ConnectionSelectionProps> = ({
     return removeConnection({
       refetchQueries: [...refetchQueries],
       variables: {
-        channel_id: channel.id,
-        connectable_id: id,
+        channel_id: channel.id.toString(),
+        connectable_id: id.toString(),
         connectable_type: type,
       },
     })

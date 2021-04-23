@@ -10,6 +10,8 @@ import globalNavElementsQuery from 'v2/components/GlobalNavElements/queries/glob
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalNavElements as GlobalNavElementsType } from '__generated__/GlobalNavElements'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
+import { BannerEnum } from '__generated__/globalTypes'
+import MonthlyPremiumReminder from '../MonthlyPremiumBanner'
 
 interface GlobalNavElementsProps {
   scheme: 'DEFAULT' | 'GROUP'
@@ -49,6 +51,10 @@ export const GlobalNavElements: React.FC<GlobalNavElementsProps> = ({
 
   if (isLoggedIn && data?.me?.banner) {
     components.push(<BottomBanner key="BottomBanner" banner={data.me.banner} />)
+  }
+
+  if (data?.me?.banner === BannerEnum.MONTHLY_PREMIUM_REMINDER) {
+    components.push(<MonthlyPremiumReminder />)
   }
 
   return <>{components}</>

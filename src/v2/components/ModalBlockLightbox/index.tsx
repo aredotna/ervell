@@ -113,7 +113,7 @@ export const ModalBlockLightbox: React.FC<ModalBlockLightboxProps> = ({
   const { data, loading, error } = useQuery<
     ModalBlockLightboxQuery,
     ModalBlockLightboxVariables
-  >(modalBlockLightboxQuery, { variables: { id } })
+  >(modalBlockLightboxQuery, { variables: { id: id.toString() } })
 
   //
   // Handle toggling layout modes
