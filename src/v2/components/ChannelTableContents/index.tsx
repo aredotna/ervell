@@ -3,11 +3,13 @@ import { useQuery } from 'react-apollo'
 import { useTable } from 'react-table'
 import styled from 'styled-components'
 
+import { ContentCell } from './components/ContentCell'
+import { StandardCell } from './components/StandardCell'
+import Text from 'v2/components/UI/Text'
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
 } from '__generated__/ChannelTableContentsSet'
-import { ContentCell } from './components/ContentCell'
 
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 
@@ -26,20 +28,19 @@ const TD = styled.td`
   border-right: none;
   font-size: ${x => x.theme.fontSizesIndexed.sx};
   height: 30px;
+  line-height: 0;
+  padding: 0;
+  width: ${x => x.width};
 
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
   }
 `
 
-const TDInner = styled.div`
-  padding: ${x => x.theme.space[2]};
-`
-
 const TH = styled(TD)`
   font-weight: bold;
-  height: 30px;
-  padding: ${x => x.theme.space[2]};
+  padding: ${x => x.theme.space[2]} ${x => x.theme.space[4]};
+  vertical-align: middle;
 `
 
 interface ChannelTableQueryProps {
@@ -72,23 +73,32 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         Header: 'Content',
         accessor: block => block,
         Cell: ContentCell,
+        width: 420,
       },
       {
         Header: 'Title',
         accessor: 'title',
+        Cell: StandardCell,
+        maxWidth: 200,
       },
       {
         Header: 'Added at',
         accessor: 'connection.created_at',
+        Cell: StandardCell,
+        maxWidth: 200,
       },
       {
         Header: 'Author',
         accessor: 'user.name',
+        Cell: StandardCell,
+        maxWidth: 200,
       },
-      // {
-      //   Header: 'Connector',
-      //   accessor: 'connection.user.name',
-      // },
+      {
+        Header: 'Connections',
+        accessor: 'counts.public_channels',
+        Cell: StandardCell,
+        maxWidth: 200,
+      },
     ],
     []
   ) as any
@@ -114,7 +124,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
             {headerGroup.headers.map((column, j) => {
               return (
                 <TH key={`key-${j}`} {...column.getHeaderProps()}>
-                  {column.render('Header')}
+                  <Text f={1}>{column.render('Header')}</Text>
                 </TH>
               )
             })}
@@ -127,12 +137,13 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           return (
             <TR key={`tr-key-${i}`} {...row.getRowProps()}>
               {row.cells.map((cell, j) => {
-                const props = cell.getCellProps()
-                console.log({ props })
-
                 return (
-                  <TD key={`td-key-${j}`} {...cell.getCellProps()}>
-                    <TDInner>{cell.render('Cell')}</TDInner>
+                  <TD
+                    width={cell.column.maxWidth}
+                    key={`td-key-${j}`}
+                    {...cell.getCellProps()}
+                  >
+                    {cell.render('Cell')}
                   </TD>
                 )
               })}

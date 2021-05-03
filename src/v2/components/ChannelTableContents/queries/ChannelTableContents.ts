@@ -7,6 +7,11 @@ export default gql`
       id
       blokks {
         __typename
+        ... on Block {
+          counts {
+            public_channels
+          }
+        }
         ... on Model {
           created_at(relative: true)
           updated_at(relative: true)
@@ -15,22 +20,39 @@ export default gql`
         ... on Attachment {
           file_url
           image_url(size: THUMB)
+          source {
+            url
+            provider_url
+          }
         }
 
         ... on Embed {
           embed_html
+          image_url(size: THUMB)
+          source {
+            url
+            provider_url
+          }
         }
 
         ... on Link {
           image_url(size: THUMB)
+          source {
+            url
+            provider_url
+          }
         }
 
         ... on Image {
           image_url(size: THUMB)
+          source {
+            url
+            provider_url
+          }
         }
 
         ... on Text {
-          content(format: HTML)
+          content(format: MARKDOWN)
         }
 
         ... on ConnectableInterface {
