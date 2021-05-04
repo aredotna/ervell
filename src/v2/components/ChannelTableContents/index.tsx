@@ -21,8 +21,6 @@ const Table = styled.table`
   margin-bottom: ${x => x.theme.space[7]};
 `
 
-const TR = styled.tr``
-
 export const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
   border: 1px solid ${x => x.theme.colors.gray.light};
@@ -42,6 +40,25 @@ const TH = styled(TD)`
   font-weight: bold;
   padding: ${x => x.theme.space[2]} ${x => x.theme.space[4]};
   vertical-align: middle;
+`
+
+const TR = styled.tr`
+  &:hover ${TD} {
+    border-top-color: ${x => x.theme.colors.gray.regular};
+    border-bottom-color: ${x => x.theme.colors.gray.regular};
+  }
+
+  &:hover ${TD}:first-child {
+    border-left-color: ${x => x.theme.colors.gray.regular};
+  }
+
+  &:hover ${TD}:last-child {
+    border-right-color: ${x => x.theme.colors.gray.regular};
+  }
+
+  &:hover ${TH} {
+    border-color: ${x => x.theme.colors.gray.light};
+  }
 `
 
 interface ChannelTableQueryProps {

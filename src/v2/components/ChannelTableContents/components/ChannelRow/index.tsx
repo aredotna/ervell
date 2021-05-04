@@ -6,8 +6,6 @@ import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/Ch
 import { StandardCell } from '../StandardCell'
 import { lighten } from 'v2/styles/functions'
 
-const Row = styled.tr``
-
 const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
   border: 1px solid ${x => x.theme.colors.gray.light};
@@ -45,13 +43,34 @@ const Cell = styled(TD)`
   }}
 `
 
+const Row = styled.tr`
+  ${props => {
+    const color = props.theme.colors.channel[props.visibility]
+
+    return `
+      &:hover ${TD} {
+        border-top-color: ${color};
+        border-bottom-color: ${color};
+      }
+
+      &:hover ${TD}:first-child {
+        border-left-color: ${color};
+      }
+
+      &:hover ${TD}:last-child {
+        border-right-color: ${color};
+      }
+    `
+  }}
+`
+
 interface ChannelRowProps {
   channel: ChannelTableContentsSet_channel_blokks_Channel
 }
 
 export const ChannelRow: React.FC<ChannelRowProps> = ({ channel }) => {
   return (
-    <Row>
+    <Row visibility={channel.visibility}>
       <Cell visibility={channel.visibility} colSpan={2}>
         <StandardCell
           value={channel.title}
