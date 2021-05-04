@@ -160,7 +160,7 @@
     "process": "^0.11.10",
     "prop-types": "^15.6.0",
     "proportional-scale": "^4.0.0",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^3.0.1",
     "pug-loader": "damassi/pug-loader#02921c5",
     "pusher-js": "6.0.1",
     "qlimit": "^0.1.1",
