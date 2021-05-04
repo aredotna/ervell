@@ -12,6 +12,7 @@ import SearchPage from 'v2/pages/search/SearchPage'
 import ProfilePage from '../../v2/pages/profile/ProfilePage'
 // Channel
 import ChannelPage from '../../v2/pages/channel/ChannelPage'
+import ChannelTablePage from '../../v2/pages/channel/ChannelTablePage'
 import SharedChannelPage from '../../v2/pages/channel/SharedChannelPage'
 import ChannelFollowersPage from '../../v2/pages/channel/ChannelFollowersPage'
 import EmbeddedChannelPage from '../../v2/pages/channel/EmbeddedChannelPage'
@@ -32,6 +33,7 @@ import { BlogIndex } from 'v2/pages/blog/BlogIndex'
 import { BlogPost } from 'v2/pages/blog/BlogPost'
 import { ConfirmationPage } from 'v2/pages/confirmation/ConfirmationPage'
 import { ExpiredConfirmationPage } from 'v2/pages/confirmation/ExpiredConfirmationPage'
+import isDev from 'v2/util/isDev'
 
 export const Routes = () => {
   const location = useLocation()
@@ -166,6 +168,22 @@ export const Routes = () => {
             />
           ))}
         />
+
+        {isDev && (
+          <Route
+            exact
+            path="/:user_id/:id/table"
+            render={parseRoute(({ params, query }) => {
+              return (
+                <ChannelTablePage
+                  id={params.id}
+                  key={params.id}
+                  fromOnboarding={query.fromOnboarding}
+                />
+              )
+            })}
+          />
+        )}
 
         {/* Channel */}
         <Route
