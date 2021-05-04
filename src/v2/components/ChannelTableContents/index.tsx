@@ -153,8 +153,6 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         {rows.map((row, i) => {
           prepareRow(row)
 
-          console.log({ row })
-
           if (row.original.__typename === 'Channel') {
             return <ChannelRow channel={row.original} />
           }
