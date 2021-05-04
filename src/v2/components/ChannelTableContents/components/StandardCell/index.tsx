@@ -7,10 +7,15 @@ const Inner = styled.div`
   max-width: 200px;
 `
 
-export const StandardCell = ({ value }) => {
+interface StandardCellProps {
+  value: any
+  color?: string
+}
+
+export const StandardCell: React.FC<StandardCellProps> = ({ value, color }) => {
   return (
     <Inner>
-      <Text f={1} overflowEllipsis>
+      <Text f={1} color={color} overflowEllipsis>
         {value}
       </Text>
     </Inner>

@@ -61,7 +61,11 @@ export const ContentCell = ({
     case 'Text':
       return (
         <TextContainer length={content.content.length}>
-          <Text f={1} dangerouslySetInnerHTML={{ __html: content.content }} />
+          <Text
+            f={1}
+            dangerouslySetInnerHTML={{ __html: content.content }}
+            overflowEllipsis
+          />
         </TextContainer>
       )
     default:

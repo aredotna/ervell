@@ -12,6 +12,15 @@ export default gql`
             public_channels
           }
         }
+
+        ... on Channel {
+          visibility
+          title
+          counts {
+            connected_to_channels
+          }
+        }
+
         ... on Model {
           created_at(relative: true)
           updated_at(relative: true)
