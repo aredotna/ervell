@@ -254,6 +254,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock {
 export interface ChannelTableContentsSet_channel_blokks_Channel_counts {
   __typename: "ChannelCounts";
   connected_to_channels: number | null;
+  contents: number | null;
 }
 
 export interface ChannelTableContentsSet_channel_blokks_Channel_user {

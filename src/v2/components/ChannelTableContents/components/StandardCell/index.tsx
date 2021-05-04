@@ -4,7 +4,6 @@ import Text from 'v2/components/UI/Text'
 
 const Inner = styled.div`
   padding: ${x => x.theme.space[3]};
-  max-width: 200px;
 `
 
 interface StandardCellProps {

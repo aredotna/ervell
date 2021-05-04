@@ -18,6 +18,7 @@ export default gql`
           title
           counts {
             connected_to_channels
+            contents
           }
         }
 
