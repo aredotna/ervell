@@ -4,13 +4,17 @@ import Text from 'v2/components/UI/Text'
 
 const Inner = styled.div`
   padding: ${x => x.theme.space[3]};
-  max-width: 200px;
 `
 
-export const StandardCell = ({ value }) => {
+interface StandardCellProps {
+  value: any
+  color?: string
+}
+
+export const StandardCell: React.FC<StandardCellProps> = ({ value, color }) => {
   return (
     <Inner>
-      <Text f={1} overflowEllipsis>
+      <Text f={1} color={color} overflowEllipsis>
         {value}
       </Text>
     </Inner>
