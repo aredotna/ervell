@@ -45,15 +45,17 @@ export const BlockLightboxLinkScreenshot: React.FC<BlockLightboxLinkProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
+      position="relative"
     >
       <Container
         display="flex"
         flexDirection="column"
-        height="95%"
+        height={['95vh', '95%']}
         width="90%"
         border="1px solid"
         borderColor="gray.light"
         borderRadius="0.25em"
+        position="relative"
       >
         <a
           href={block.source_url}
