@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */ //tvler: remove this
 import React from 'react'
 import {
   ApolloClient,
@@ -25,7 +26,7 @@ const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN = '',
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-ignore
   isLoggedIn = false, // tvler: remove this
 } = {}) => {
   const cache = new InMemoryCache({

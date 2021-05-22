@@ -50,9 +50,12 @@ const contentfulHttpLink = createHttpLink({
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN,
+  // @ts-ignore
   currentRoute,
+  // @ts-ignore
   isLoggedIn,
   cookies,
+  // @ts-ignore
   serializedMe,
   sharifyData,
 }: any = {}) => {
