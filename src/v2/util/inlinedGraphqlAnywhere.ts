@@ -266,9 +266,12 @@ export function check(
   variables: VariableMap = {}
 ): void {
   const resolver = (
+    // @ts-ignore
     fieldName: string,
     root: any,
+    // @ts-ignore
     args: any,
+    // @ts-ignore
     context: any,
     info: any
   ) => {
