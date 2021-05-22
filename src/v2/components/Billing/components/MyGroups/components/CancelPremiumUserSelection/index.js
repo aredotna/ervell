@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import { graphql } from '@apollo/client/react/hoc'
 
 import mapErrors from 'v2/util/mapErrors'

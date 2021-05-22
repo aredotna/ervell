@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import { Query } from '@apollo/client/react/components'
 
 import profileAvatarQuery from 'v2/components/ProfileMetadata/components/ProfileAvatar/queries/profileAvatar'

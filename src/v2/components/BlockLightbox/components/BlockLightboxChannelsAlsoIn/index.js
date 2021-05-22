@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import Box from 'v2/components/UI/Box'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'

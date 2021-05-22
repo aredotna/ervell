@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import { debounce } from 'underscore'
 
 import transferChannelFragment from 'v2/components/ManageChannel/components/TransferChannel/fragments/transferChannelFragment'

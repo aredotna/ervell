@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from '@apollo/client/react/hoc'
 import compose from 'lodash.flowright'
 import { without } from 'underscore'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import mapErrors from 'v2/util/mapErrors'
 import currentUserService from 'v2/util/currentUserService'

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import StripeContext from 'v2/components/StripeContext'
 import MyGroup from 'v2/components/Billing/components/MyGroups/components/MyGroup'

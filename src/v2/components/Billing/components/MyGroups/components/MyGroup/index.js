@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import mapErrors from 'v2/util/mapErrors'
 

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
