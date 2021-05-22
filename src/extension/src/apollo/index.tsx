@@ -13,16 +13,11 @@ import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-// import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json' tvler: remove this
+import possibleTypes from 'v2/apollo/possibleTypes.json'
 
 import extensionData from 'extension/src/apollo/extensionData'
 
 const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
-
-// tvler: add this back
-// const fragmentMatcher = new IntrospectionFragmentMatcher({
-//   introspectionQueryResultData,
-// })
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN = '',
@@ -30,7 +25,7 @@ export const initApolloClient = ({
   isLoggedIn = false, // tvler: remove this
 } = {}) => {
   const cache = new InMemoryCache({
-    // fragmentMatcher tvler: add this back
+    possibleTypes: possibleTypes,
   })
 
   const authLink = setContext((_, { headers }) => ({

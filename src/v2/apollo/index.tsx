@@ -21,8 +21,7 @@ import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-// import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json' tvler: remove this
-
+import possibleTypes from 'v2/apollo/possibleTypes.json'
 import clientData from 'v2/apollo/localState/clientData'
 
 const isClientSide = typeof window !== 'undefined'
@@ -43,11 +42,6 @@ const contentfulHttpLink = createHttpLink({
   uri: CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
 })
 
-// tvler: add this back
-// const fragmentMatcher = new IntrospectionFragmentMatcher({
-//   introspectionQueryResultData,
-// })
-
 export const initApolloClient = ({
   token: X_AUTH_TOKEN,
   // @ts-ignore
@@ -64,7 +58,7 @@ export const initApolloClient = ({
   }
 
   const cache = new InMemoryCache({
-    // fragmentMatcher tvler: add this back
+    possibleTypes: possibleTypes,
   })
 
   if (isClientSide && window.__APOLLO_STATE__) {

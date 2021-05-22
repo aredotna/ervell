@@ -6,7 +6,7 @@ import StoryRouter from 'storybook-react-router'
 
 // import apiTypeDefs from 'v2/apollo/schema.graphql'
 // import clientTypeDefs from 'v2/apollo/localState/clientSchema.graphql'
-// import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json' tvler: remove this
+// import possibleTypes from 'v2/apollo/possibleTypes.json'
 
 import mocks from './mocks'
 
