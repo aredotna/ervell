@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'
-import { ApolloConsumer } from 'react-apollo'
+import { ApolloConsumer } from '@apollo/client'
 
 import billingQuery from 'v2/components/Billing/queries/billing'
 

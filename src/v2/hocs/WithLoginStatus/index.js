@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withApollo } from 'react-apollo'
+import { withApollo } from '@apollo/client/react/hoc'
 
 import isLoggedInQuery from 'v2/hocs/WithLoginStatus/queries/isLoggedIn'
 

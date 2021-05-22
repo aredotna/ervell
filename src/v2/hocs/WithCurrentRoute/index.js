@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withApollo } from 'react-apollo'
+import { withApollo } from '@apollo/client/react/hoc'
 
 import currentRouteQuery from 'v2/hocs/WithCurrentRoute/queries/currentRoute'
 

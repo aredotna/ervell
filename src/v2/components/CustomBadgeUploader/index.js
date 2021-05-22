@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import customBadgeQuery from 'v2/components/CustomBadgeUploader/queries/customBadge'
 

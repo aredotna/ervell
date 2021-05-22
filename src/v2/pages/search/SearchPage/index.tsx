@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import { remove as removeDiacritics } from 'diacritics'
 
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'

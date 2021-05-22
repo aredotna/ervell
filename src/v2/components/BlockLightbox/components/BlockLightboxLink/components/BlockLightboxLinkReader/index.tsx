@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { useQuery, useMutation } from 'react-apollo'
+import { useQuery, useMutation } from '@apollo/client'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 
 import { toBaseConnectableType } from 'v2/util/transformConnectableTypes'
 
@@ -18,9 +18,7 @@ interface ConnectableContextMenuRemoveConnectionProps extends Props {
   removeConnection: any
 }
 
-const _ConnectableContextMenuRemoveConnection: React.FC<
-  ConnectableContextMenuRemoveConnectionProps
-> = ({
+const _ConnectableContextMenuRemoveConnection: React.FC<ConnectableContextMenuRemoveConnectionProps> = ({
   channelId,
   connectableId,
   connectableType,

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import userDropdownQuery from 'v2/components/UserDropdown/queries/userDropdown'
 

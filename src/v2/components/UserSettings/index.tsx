@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
-import { Query, Mutation, MutationFunction as MutationFn } from 'react-apollo'
 import { Form, Field } from 'react-final-form'
 import { FORM_ERROR } from 'final-form'
 import axios from 'axios'
-import { useApolloClient } from 'react-apollo'
+import { useApolloClient, MutationFunction as MutationFn } from '@apollo/client'
+import { Query, Mutation } from '@apollo/client/react/components'
 
 import Box from 'v2/components/UI/Box'
 import Alert from 'v2/components/UI/Alert'

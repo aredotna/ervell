@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import Grid from 'v2/components/UI/Grid'
 import Cell from 'v2/components/Cell'

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import PropTypes from 'prop-types'
 import { propType } from 'graphql-anywhere'
 import styled from 'styled-components'

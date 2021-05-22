@@ -1,4 +1,4 @@
-import { useApolloClient } from 'react-apollo'
+import { useApolloClient } from '@apollo/client'
 
 import SPIDER_REQUESTING_QUERY from 'v2/hooks/useIsSpiderRequesting/queries/isSpiderRequesting'
 

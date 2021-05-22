@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 

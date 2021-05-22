@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
 import { EmbeddedChannel as EmbeddedChannelData } from '__generated__/EmbeddedChannel'

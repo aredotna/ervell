@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
 import constants from 'v2/styles/constants'

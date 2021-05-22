@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { ApolloConsumer } from 'react-apollo'
+import { ApolloConsumer } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import Title from 'v2/components/UI/Head/components/Title'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'

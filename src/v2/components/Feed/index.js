@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 import InfiniteScroll from 'react-infinite-scroller'
 import { map, flatten } from 'underscore'
