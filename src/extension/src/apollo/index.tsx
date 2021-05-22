@@ -1,34 +1,36 @@
 import React from 'react'
-import { ApolloProvider } from '@apollo/client'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-
-import { setContext } from 'apollo-link-context'
 import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
   InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
+} from '@apollo/client'
+import { BatchHttpLink } from '@apollo/client/link/batch-http'
+import { setContext } from '@apollo/client/link/context'
 
 import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
+// import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json' tvler: remove this
 
 import extensionData from 'extension/src/apollo/extensionData'
 
 const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
+// tvler: add this back
+// const fragmentMatcher = new IntrospectionFragmentMatcher({
+//   introspectionQueryResultData,
+// })
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN = '',
-  isLoggedIn = false,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  isLoggedIn = false, // tvler: remove this
 } = {}) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = new InMemoryCache({
+    // fragmentMatcher tvler: add this back
+  })
 
   const authLink = setContext((_, { headers }) => ({
     headers: {
@@ -46,14 +48,13 @@ export const initApolloClient = ({
     cache,
   })
 
-  const data = {
-    loginStatus: {
-      __typename: 'LoginStatus',
-      isLoggedIn,
-    },
-  }
-
-  cache.writeData({ data })
+  // const data = {
+  //   loginStatus: {
+  //     __typename: 'LoginStatus',
+  //     isLoggedIn,
+  //   },
+  // }
+  // cache.writeData({ data }) tvler: add this back
 
   window.__APOLLO_CLIENT__ = client
 

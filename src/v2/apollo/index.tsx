@@ -1,27 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */ // tvler: remove this
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
 import Cookies from 'cookies-js'
 import gql from 'graphql-tag'
 
-import { ApolloProvider } from '@apollo/client'
-import { ApolloClient } from 'apollo-client'
-import { onError } from 'apollo-link-error'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-import { createHttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
 import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
   InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
+} from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import { BatchHttpLink } from '@apollo/client/link/batch-http'
+import { createHttpLink } from '@apollo/client/link/http'
+import { setContext } from '@apollo/client/link/context'
 import { HelmetProvider } from 'react-helmet-async'
 
 import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
+// import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json' tvler: remove this
 
 import clientData from 'v2/apollo/localState/clientData'
 
@@ -43,9 +43,10 @@ const contentfulHttpLink = createHttpLink({
   uri: CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
 })
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
+// tvler: add this back
+// const fragmentMatcher = new IntrospectionFragmentMatcher({
+//   introspectionQueryResultData,
+// })
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN,
@@ -59,7 +60,9 @@ export const initApolloClient = ({
     return window.__APOLLO_CLIENT__
   }
 
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = new InMemoryCache({
+    // fragmentMatcher tvler: add this back
+  })
 
   if (isClientSide && window.__APOLLO_STATE__) {
     cache.restore(window.__APOLLO_STATE__)
@@ -173,43 +176,43 @@ export const initApolloClient = ({
     typeDefs,
   })
 
-  const data = {
-    currentRoute: {
-      __typename: 'CurrentRoute',
-      ...currentRoute,
-    },
-    loginStatus: {
-      __typename: 'LoginStatus',
-      isLoggedIn,
-    },
-    cookies: {
-      __typename: 'Cookies',
-    },
-    serializedMe: {
-      __typename: 'ClientSerializedMe',
-      ...{
-        id: null,
-        name: null,
-        initials: null,
-        avatar: null,
-        authentication_token: null,
-        is_premium: null,
-        is_lifetime_premium: null,
-        is_supporter: null,
-        slug: null,
-        hide_notification_count: false,
-        ...serializedMe,
-      },
-    },
-    sharify: {
-      __typename: 'Sharify',
-      ...{ ...sharifyData, CURRENT_USER: null },
-    },
-  }
-
-  cache.writeData({
-    data,
-  })
+  // tvler: add this back
+  // const data = {
+  //   currentRoute: {
+  //     __typename: 'CurrentRoute',
+  //     ...currentRoute,
+  //   },
+  //   loginStatus: {
+  //     __typename: 'LoginStatus',
+  //     isLoggedIn,
+  //   },
+  //   cookies: {
+  //     __typename: 'Cookies',
+  //   },
+  //   serializedMe: {
+  //     __typename: 'ClientSerializedMe',
+  //     ...{
+  //       id: null,
+  //       name: null,
+  //       initials: null,
+  //       avatar: null,
+  //       authentication_token: null,
+  //       is_premium: null,
+  //       is_lifetime_premium: null,
+  //       is_supporter: null,
+  //       slug: null,
+  //       hide_notification_count: false,
+  //       ...serializedMe,
+  //     },
+  //   },
+  //   sharify: {
+  //     __typename: 'Sharify',
+  //     ...{ ...sharifyData, CURRENT_USER: null },
+  //   },
+  // }
+  // cache.writeData({
+  //   data,
+  // })
 
   if (isClientSide) {
     window.__APOLLO_CLIENT__ = client
