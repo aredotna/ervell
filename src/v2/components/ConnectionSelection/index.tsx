@@ -1,6 +1,6 @@
 import React from 'react'
 import { useMutation } from 'react-apollo'
-import { PureQueryOptions } from 'apollo-client'
+import { PureQueryOptions } from '@apollo/client'
 import styled from 'styled-components'
 
 import { ConnectionSelectionList } from 'v2/components/ConnectionSelectionList'

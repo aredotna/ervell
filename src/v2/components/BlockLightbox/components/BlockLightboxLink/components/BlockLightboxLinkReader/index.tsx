@@ -24,7 +24,7 @@ import {
 
 import BLOCK_CANONICAL_LINK_READER_QUERY from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/queries/canonicalLinkReader'
 import REGENERATE_CANONICAL_LINK_MUTATION from 'v2/components/BlockLightbox/components/BlockLightboxLink/components/BlockLightboxLinkReader/mutations/regenerateCanonicalLinkMutation'
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 import { ReaderError } from './components/ReaderError'
 
 const TextContainer = styled(Box).attrs({

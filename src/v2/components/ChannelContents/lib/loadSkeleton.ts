@@ -1,4 +1,4 @@
-import { ApolloClient, OperationVariables } from 'apollo-client'
+import { ApolloClient, OperationVariables } from '@apollo/client'
 
 import channelContentsSetQuery from 'v2/components/ChannelContents/queries/channelContentsSet'
 

@@ -15,7 +15,7 @@ import {
   ResendLoggedOutConfirmationEmailMutation,
   ResendLoggedOutConfirmationEmailMutationVariables,
 } from '__generated__/ResendLoggedOutConfirmationEmailMutation'
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 import Box from 'v2/components/UI/Box'
 
 const Container = styled(CenteringBox)`

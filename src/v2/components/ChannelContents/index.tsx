@@ -1,7 +1,7 @@
 import React, { memo, useState, useMemo, useCallback, useEffect } from 'react'
 import Waypoint from 'react-waypoint'
-import { ApolloClient } from 'apollo-client'
-import { graphql, withApollo } from 'react-apollo'
+import { ApolloClient } from '@apollo/client'
+import { graphql, withApollo } from '@apollo/client/react/hoc'
 import { SortableContainer } from 'react-sortable-hoc'
 
 import { chunk } from 'v2/util/chunk'

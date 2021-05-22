@@ -5,7 +5,7 @@ import {
   useQuery,
 } from 'react-apollo'
 import { Form, Field } from 'react-final-form'
-import { ApolloError, PureQueryOptions } from 'apollo-client'
+import { ApolloError, PureQueryOptions } from '@apollo/client'
 import { unescape } from 'underscore'
 import styled from 'styled-components'
 
