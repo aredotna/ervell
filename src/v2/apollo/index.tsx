@@ -4,7 +4,7 @@ import React from 'react'
 import Cookies from 'cookies-js'
 import gql from 'graphql-tag'
 
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider } from '@apollo/client'
 import { ApolloClient } from 'apollo-client'
 import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'

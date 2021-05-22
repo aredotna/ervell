@@ -1,5 +1,5 @@
 import React from 'react'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider } from '@apollo/client'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { BatchHttpLink } from 'apollo-link-batch-http'
