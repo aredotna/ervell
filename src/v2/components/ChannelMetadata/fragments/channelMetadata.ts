@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import channelMetadataCollaboratorsFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataCollaborators/fragments/collaboratorsList'
 import channelMetadataInfoFragment from 'v2/components/ChannelMetadata/components/ChannelMetadataInfo/fragments/channelMetadataInfo'

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import deleteGroupFragment from 'v2/components/ManageGroup/components/DeleteGroup/fragments/deleteGroup'
 import manageUsersFragment from 'v2/components/ManageGroup/components/ManageUsers/fragments/manageUsers'

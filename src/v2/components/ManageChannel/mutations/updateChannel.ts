@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import manageChannelFragment from 'v2/components/ManageChannel/fragments/manageChannel'
 

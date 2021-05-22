@@ -1,5 +1,5 @@
 import axios from 'axios'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export interface S3UploadPolicy {
   key: string

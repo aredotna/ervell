@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import userAvatarFragment from 'v2/components/UserAvatar/fragments/userAvatar'
 import upcomingInvoiceFragment from 'v2/components/Billing/components/UpcomingInvoice/fragments/upcomingInvoice'

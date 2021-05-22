@@ -3,7 +3,7 @@ import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
 import Cookies from 'cookies-js'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import {
   ApolloClient,

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import followableFragment from 'v2/components/FollowButton/fragments/followable'
 

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export default gql`
   mutation updateGroupAvatar($id: ID!, $avatar_url: String!) {

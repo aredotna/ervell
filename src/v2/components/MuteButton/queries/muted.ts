@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import mutableFragment from 'v2/components/MuteButton/fragments/mutable'
 

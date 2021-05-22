@@ -2,7 +2,7 @@ import { addDecorator, configure } from '@storybook/react'
 import { setOptions } from '@storybook/addon-options'
 // import apolloStorybookDecorator from 'apollo-storybook-react'
 import StoryRouter from 'storybook-react-router'
-// import gql from 'graphql-tag'
+// import { gql } from '@apollo/client'
 
 // import apiTypeDefs from 'v2/apollo/schema.graphql'
 // import clientTypeDefs from 'v2/apollo/localState/clientSchema.graphql'

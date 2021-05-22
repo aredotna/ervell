@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { Form, Field } from 'react-final-form'
 import { FORM_ERROR } from 'final-form'
 import axios from 'axios'

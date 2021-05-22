@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import pendingGroupUserFragment from 'v2/components/CreateGroup/components/PendingGroupUser/fragments/pendingGroupUser'
 

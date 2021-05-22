@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import myGroupLinkFragment from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink'
 
