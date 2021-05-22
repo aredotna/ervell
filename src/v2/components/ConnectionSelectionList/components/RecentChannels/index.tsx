@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 
 import Indicator from 'v2/components/ConnectionSelectionList/components/Indicator'
 import { ChannelsList } from 'v2/components/ConnectionSelectionList/components/ChannelsList'

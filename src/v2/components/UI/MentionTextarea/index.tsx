@@ -1,6 +1,6 @@
 import React, { useEffect, KeyboardEvent } from 'react'
 import { MentionsInput, Mention } from 'react-mentions'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 
 import { MentionTextareaUserSuggestions } from '__generated__/MentionTextareaUserSuggestions'
 import USER_SUGGESTION_QUERY from 'v2/components/UI/MentionTextarea/queries/userSuggestions'
