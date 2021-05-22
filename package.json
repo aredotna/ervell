@@ -90,7 +90,6 @@
     "@types/react-table": "^7.0.29",
     "@vimeo/player": "^2.7.0",
     "airbrake-js": "^1.6.3",
-    "apollo-client": "2.6.8",
     "axios": "^0.21.1",
     "axis": "*",
     "babel-loader": "^8.0.5",
