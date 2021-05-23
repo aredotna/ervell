@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */ // tvler: remove this
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
 import Cookies from 'cookies-js'
 import { gql } from '@apollo/client'
+import url from 'url'
 
 import {
   ApolloClient,
@@ -21,8 +21,12 @@ import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
+import { InitialAppDataFragment } from '__generated__/InitialAppDataFragment'
+
 import possibleTypes from 'v2/apollo/possibleTypes.json'
 import clientData from 'v2/apollo/localState/clientData'
+import serializedMeFn from 'v2/apollo/localState/serializedMe'
+import INITIAL_DATA from 'v2/apollo/fragments/initialData'
 
 const isClientSide = typeof window !== 'undefined'
 
@@ -44,15 +48,19 @@ const contentfulHttpLink = createHttpLink({
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN,
-  // @ts-ignore
   currentRoute,
-  // @ts-ignore
   isLoggedIn,
   cookies,
-  // @ts-ignore
   serializedMe,
   sharifyData,
-}: any = {}) => {
+}: {
+  token?: any
+  currentRoute?: url.UrlWithStringQuery
+  isLoggedIn?: boolean
+  cookies?: any
+  serializedMe?: ReturnType<typeof serializedMeFn>
+  sharifyData?: any
+} = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__
   }
@@ -173,43 +181,44 @@ export const initApolloClient = ({
     typeDefs,
   })
 
-  // tvler: add this back
-  // const data = {
-  //   currentRoute: {
-  //     __typename: 'CurrentRoute',
-  //     ...currentRoute,
-  //   },
-  //   loginStatus: {
-  //     __typename: 'LoginStatus',
-  //     isLoggedIn,
-  //   },
-  //   cookies: {
-  //     __typename: 'Cookies',
-  //   },
-  //   serializedMe: {
-  //     __typename: 'ClientSerializedMe',
-  //     ...{
-  //       id: null,
-  //       name: null,
-  //       initials: null,
-  //       avatar: null,
-  //       authentication_token: null,
-  //       is_premium: null,
-  //       is_lifetime_premium: null,
-  //       is_supporter: null,
-  //       slug: null,
-  //       hide_notification_count: false,
-  //       ...serializedMe,
-  //     },
-  //   },
-  //   sharify: {
-  //     __typename: 'Sharify',
-  //     ...{ ...sharifyData, CURRENT_USER: null },
-  //   },
-  // }
-  // cache.writeData({
-  //   data,
-  // })
+  cache.writeFragment<InitialAppDataFragment>({
+    fragment: INITIAL_DATA,
+    data: {
+      __typename: 'Query',
+      currentRoute: {
+        __typename: 'ClientCurrentRoute',
+        protocol: null,
+        slashes: null,
+        auth: null,
+        host: null,
+        port: null,
+        hostname: null,
+        hash: null,
+        search: null,
+        query: null,
+        pathname: null,
+        path: null,
+        href: null,
+        ...currentRoute,
+      },
+      loginStatus: {
+        __typename: 'ClientLoginStatus',
+        isLoggedIn: isLoggedIn,
+      },
+      cookies: {
+        __typename: 'ClientCookies',
+        get: null,
+      },
+      serializedMe: {
+        __typename: 'ClientSerializedMe',
+        ...serializedMe,
+      },
+      sharify: {
+        __typename: 'ClientSharify',
+        ...{ ...sharifyData, CURRENT_USER: null },
+      },
+    },
+  })
 
   if (isClientSide) {
     window.__APOLLO_CLIENT__ = client

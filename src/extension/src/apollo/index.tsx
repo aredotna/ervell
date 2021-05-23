@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */ //tvler: remove this
 import React from 'react'
 import {
   ApolloClient,
@@ -15,14 +14,16 @@ import { Themed } from 'v2/styles/theme'
 
 import possibleTypes from 'v2/apollo/possibleTypes.json'
 
+import { InitialExtensionDataFragment } from '__generated__/InitialExtensionDataFragment'
+
 import extensionData from 'extension/src/apollo/extensionData'
+import INITIAL_DATA from 'extension/src/apollo/fragments/initialData'
 
 const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN = '',
-  // @ts-ignore
-  isLoggedIn = false, // tvler: remove this
+  isLoggedIn = false,
 } = {}) => {
   const cache = new InMemoryCache({
     possibleTypes: possibleTypes,
@@ -44,13 +45,16 @@ export const initApolloClient = ({
     cache,
   })
 
-  // const data = {
-  //   loginStatus: {
-  //     __typename: 'LoginStatus',
-  //     isLoggedIn,
-  //   },
-  // }
-  // cache.writeData({ data }) tvler: add this back
+  client.writeFragment<InitialExtensionDataFragment>({
+    fragment: INITIAL_DATA,
+    data: {
+      __typename: 'Query',
+      loginStatus: {
+        __typename: 'ClientLoginStatus',
+        isLoggedIn: isLoggedIn,
+      },
+    },
+  })
 
   window.__APOLLO_CLIENT__ = client
 
