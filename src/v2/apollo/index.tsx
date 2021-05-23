@@ -68,6 +68,9 @@ export const initApolloClient = ({
   const cache = new InMemoryCache({
     possibleTypes: possibleTypes,
     typePolicies: {
+      MeCounts: {
+        keyFields: [],
+      },
       ClientCurrentRoute: {
         keyFields: [],
       },
