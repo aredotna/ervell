@@ -76,12 +76,25 @@ export const initApolloClient = ({
       },
       ClientCookies: {
         keyFields: [],
+        fields: {
+          get(_existing, { args }) {
+            return isClientSide
+              ? Cookies.get(args.name)
+              : cookies[args.name] || null
+          },
+        },
       },
       ClientSerializedMe: {
         keyFields: [],
       },
       ClientSharify: {
         keyFields: [],
+        fields: {
+          get(_existing, { args }) {
+            const value = sharifyData[args.name]
+            return value ? value : null
+          },
+        },
       },
     },
   })
@@ -146,33 +159,6 @@ export const initApolloClient = ({
 
   const link = ApolloLink.from([errorLink, authLink, httpLink])
 
-  const resolvers = {
-    Query: {
-      cookies: () => ({
-        __typename: 'Cookies',
-      }),
-      sharify: () => ({
-        __typename: 'Sharify',
-      }),
-      serializedMe: () => ({
-        __typename: 'SerializedMe',
-      }),
-    },
-    Cookies: {
-      get: (_obj, args) => {
-        return isClientSide
-          ? Cookies.get(args.name)
-          : cookies[args.name] || null
-      },
-    },
-    Sharify: {
-      get: (_obj, args) => {
-        const value = sharifyData[args.name]
-        return value ? value : null
-      },
-    },
-  }
-
   const client = new ApolloClient({
     ssrMode: !isClientSide,
     link: ApolloLink.split(
@@ -183,7 +169,6 @@ export const initApolloClient = ({
       link
     ),
     cache,
-    resolvers,
   })
 
   cache.writeFragment<InitialAppDataFragment>({

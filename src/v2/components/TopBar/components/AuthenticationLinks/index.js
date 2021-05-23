@@ -19,7 +19,7 @@ export default props => (
       {' or '}
 
       <strong>
-        <a href="/log_in">Log in</a>
+        <a href="/log_in">Log in COMPONENT</a>
       </strong>
     </Text>
   </Container>
