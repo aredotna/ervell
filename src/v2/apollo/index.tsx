@@ -67,6 +67,23 @@ export const initApolloClient = ({
 
   const cache = new InMemoryCache({
     possibleTypes: possibleTypes,
+    typePolicies: {
+      ClientCurrentRoute: {
+        keyFields: [],
+      },
+      ClientLoginStatus: {
+        keyFields: [],
+      },
+      ClientCookies: {
+        keyFields: [],
+      },
+      ClientSerializedMe: {
+        keyFields: [],
+      },
+      ClientSharify: {
+        keyFields: [],
+      },
+    },
   })
 
   if (isClientSide && window.__APOLLO_STATE__) {
@@ -129,17 +146,6 @@ export const initApolloClient = ({
 
   const link = ApolloLink.from([errorLink, authLink, httpLink])
 
-  const typeDefs = `
-    extend type Query {
-      cookies: {
-        get(name: String!): Boolean | null
-      }
-      sharify: {
-        get(name: String!): Boolean | null
-      }
-    }
-  `
-
   const resolvers = {
     Query: {
       cookies: () => ({
@@ -178,7 +184,6 @@ export const initApolloClient = ({
     ),
     cache,
     resolvers,
-    typeDefs,
   })
 
   cache.writeFragment<InitialAppDataFragment>({
@@ -211,6 +216,16 @@ export const initApolloClient = ({
       },
       serializedMe: {
         __typename: 'ClientSerializedMe',
+        id: null,
+        initials: null,
+        name: null,
+        avatar: null,
+        authentication_token: null,
+        is_premium: null,
+        is_lifetime_premium: null,
+        is_supporter: null,
+        slug: null,
+        hide_notification_count: null,
         ...serializedMe,
       },
       sharify: {
