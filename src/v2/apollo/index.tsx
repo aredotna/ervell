@@ -215,6 +215,10 @@ export const initApolloClient = ({
       },
       sharify: {
         __typename: 'ClientSharify',
+        get: null,
+        IS_SPIDER: null,
+        IS_OUTSIDE_MAIN_ROUTER: null,
+        THEME: null,
         ...{ ...sharifyData, CURRENT_USER: null },
       },
     },
