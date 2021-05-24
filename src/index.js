@@ -8,7 +8,7 @@ require('sqreen')
 /*
  * Apollo client uses Promise.prototype.finally,
  * but this isn't automatically polyfilled into
- * our app because we Babel only polyfills features
+ * our app because Babel only polyfills features
  * if they're actually being used in our client code
  * (not in node_modules I guess).
  *
