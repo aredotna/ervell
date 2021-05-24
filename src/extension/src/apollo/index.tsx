@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  InMemoryCache,
-} from '@apollo/client'
+import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
 import { BatchHttpLink } from '@apollo/client/link/batch-http'
 import { setContext } from '@apollo/client/link/context'
 
@@ -12,7 +7,7 @@ import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-import possibleTypes from 'v2/apollo/possibleTypes.json'
+import { getCache } from 'v2/apollo/cache'
 
 import { InitialExtensionDataFragment } from '__generated__/InitialExtensionDataFragment'
 
@@ -25,9 +20,7 @@ export const initApolloClient = ({
   token: X_AUTH_TOKEN = '',
   isLoggedIn = false,
 } = {}) => {
-  const cache = new InMemoryCache({
-    possibleTypes: possibleTypes,
-  })
+  const cache = getCache()
 
   const authLink = setContext((_, { headers }) => ({
     headers: {

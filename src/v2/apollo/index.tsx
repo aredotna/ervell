@@ -51,9 +51,9 @@ export const initApolloClient = ({
   token?: any
   currentRoute?: url.UrlWithStringQuery
   isLoggedIn?: boolean
-  cookies?: any
+  cookies?: Record<string, any>
   serializedMe?: ReturnType<typeof serializedMeFn>
-  sharifyData?: any
+  sharifyData?: Record<string, any>
 } = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__

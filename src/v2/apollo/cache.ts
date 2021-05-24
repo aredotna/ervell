@@ -1,4 +1,4 @@
-import { InMemoryCache, TypePolicy } from '@apollo/client'
+import { InMemoryCache, InMemoryCacheConfig, TypePolicy } from '@apollo/client'
 import Cookies from 'cookies-js'
 import possibleTypes from 'v2/apollo/possibleTypes.json'
 
@@ -30,10 +30,10 @@ export function getCache({
   cookies,
   sharifyData,
 }: {
-  cookies: any
-  sharifyData: any
-}): InMemoryCache {
-  return new InMemoryCache({
+  cookies?: Record<string, any>
+  sharifyData?: Record<string, any>
+} = {}): InMemoryCache {
+  const cacheConfig: InMemoryCacheConfig = {
     possibleTypes: possibleTypes,
     typePolicies: {
       /*
@@ -66,29 +66,37 @@ export function getCache({
       Searches: nonNormalizedMergeableObject,
       UserCan: nonNormalizedMergeableObject,
       UserCounts: nonNormalizedMergeableObject,
-
-      /*
-       * Custom type policies
-       */
-      ClientCookies: {
-        keyFields: [],
-        fields: {
-          get(_existing, { args }) {
-            return isClientSide
-              ? Cookies.get(args.name)
-              : cookies[args.name] || null
-          },
-        },
-      },
-      ClientSharify: {
-        keyFields: [],
-        fields: {
-          get(_existing, { args }) {
-            const value = sharifyData[args.name]
-            return value ? value : null
-          },
-        },
-      },
     },
-  })
+  }
+
+  /*
+   * Custom type policies
+   */
+
+  if (cookies) {
+    cacheConfig.typePolicies.ClientCookies = {
+      keyFields: [],
+      fields: {
+        get(_existing, { args }) {
+          return isClientSide
+            ? Cookies.get(args.name)
+            : cookies[args.name] || null
+        },
+      },
+    }
+  }
+
+  if (sharifyData) {
+    cacheConfig.typePolicies.ClientSharify = {
+      keyFields: [],
+      fields: {
+        get(_existing, { args }) {
+          const value = sharifyData[args.name]
+          return value ? value : null
+        },
+      },
+    }
+  }
+
+  return new InMemoryCache(cacheConfig)
 }
