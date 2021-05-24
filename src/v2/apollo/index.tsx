@@ -1,16 +1,10 @@
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
-import Cookies from 'cookies-js'
 import { gql } from '@apollo/client'
 import url from 'url'
 
-import {
-  ApolloClient,
-  ApolloLink,
-  ApolloProvider,
-  InMemoryCache,
-} from '@apollo/client'
+import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 import { BatchHttpLink } from '@apollo/client/link/batch-http'
 import { createHttpLink } from '@apollo/client/link/http'
@@ -23,10 +17,10 @@ import { Themed } from 'v2/styles/theme'
 
 import { InitialAppDataFragment } from '__generated__/InitialAppDataFragment'
 
-import possibleTypes from 'v2/apollo/possibleTypes.json'
 import clientData from 'v2/apollo/localState/clientData'
 import serializedMeFn from 'v2/apollo/localState/serializedMe'
 import INITIAL_DATA from 'v2/apollo/fragments/initialData'
+import { getCache } from 'v2/apollo//cache'
 
 const isClientSide = typeof window !== 'undefined'
 
@@ -65,42 +59,7 @@ export const initApolloClient = ({
     return window.__APOLLO_CLIENT__
   }
 
-  const cache = new InMemoryCache({
-    possibleTypes: possibleTypes,
-    typePolicies: {
-      MeCounts: {
-        keyFields: [],
-      },
-      ClientCurrentRoute: {
-        keyFields: [],
-      },
-      ClientLoginStatus: {
-        keyFields: [],
-      },
-      ClientCookies: {
-        keyFields: [],
-        fields: {
-          get(_existing, { args }) {
-            return isClientSide
-              ? Cookies.get(args.name)
-              : cookies[args.name] || null
-          },
-        },
-      },
-      ClientSerializedMe: {
-        keyFields: [],
-      },
-      ClientSharify: {
-        keyFields: [],
-        fields: {
-          get(_existing, { args }) {
-            const value = sharifyData[args.name]
-            return value ? value : null
-          },
-        },
-      },
-    },
-  })
+  const cache = getCache({ cookies, sharifyData })
 
   if (isClientSide && window.__APOLLO_STATE__) {
     cache.restore(window.__APOLLO_STATE__)
