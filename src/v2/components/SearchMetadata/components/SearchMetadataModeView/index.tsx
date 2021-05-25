@@ -50,7 +50,7 @@ export default class SearchMetadataView extends Component<SearchMetadataProps> {
           name="view"
           value="users"
         >
-          Users
+          People
         </CookieLinkUnlessCurrent>
 
         <CookieLinkUnlessCurrent
