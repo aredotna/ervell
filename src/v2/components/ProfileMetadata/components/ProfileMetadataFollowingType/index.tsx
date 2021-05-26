@@ -63,7 +63,7 @@ class ProfileMetadataFollowingType extends Component<
             }}
             isActive={this.isFilterActive('USER')}
           >
-            Users
+            People
           </LinkUnlessCurrent>
         )}
 
