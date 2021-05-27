@@ -45,7 +45,7 @@ export const ConnectCTA: React.FC = () => {
   return (
     <Query<CanUserConnectData> query={canUserConnectQuery}>
       {({ data, loading, error }) => {
-        if (loading || error) return null
+        if (loading || error || !data) return null
 
         const {
           me: { is_exceeding_either_connections_limit },
