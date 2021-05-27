@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import konnectableChannelFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableChannel/fragments/konnectableChannel'
 import konnectableTextFragment from 'v2/components/Cell/components/Konnectable/components/KonnectableText/fragments/konnectableText'

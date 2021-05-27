@@ -1,6 +1,6 @@
 import React from 'react'
-import { useMutation } from 'react-apollo'
-import { PureQueryOptions } from 'apollo-client'
+import { useMutation } from '@apollo/client'
+import { PureQueryOptions } from '@apollo/client'
 import styled from 'styled-components'
 
 import { ConnectionSelectionList } from 'v2/components/ConnectionSelectionList'
@@ -18,7 +18,7 @@ import {
 import {
   removeConnectionMutation as RemoveConnection,
   removeConnectionMutationVariables as RemoveConnectionVariables,
-} from '__generated__/removeConnectionMutation'
+} from '__generated__/RemoveConnectionMutation'
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import userSearchResultFragment from 'v2/components/UI/SearchResults/User/fragments/userSearchResult'
 import groupSearchResultFragment from 'v2/components/UI/SearchResults/Group/fragments/groupSearchResult'

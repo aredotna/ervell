@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { Query } from '@apollo/client/react/components'
+import { gql } from '@apollo/client'
 import contactFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact'
 
 import ConnectTwitter from 'v2/components/ConnectTwitter'

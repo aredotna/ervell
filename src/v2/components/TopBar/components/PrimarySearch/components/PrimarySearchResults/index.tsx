@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import mod from 'v2/util/mod'
 

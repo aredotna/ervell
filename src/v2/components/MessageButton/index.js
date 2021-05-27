@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 
 import createUserMessageChannelMutation from 'v2/components/MessageButton/mutations/createUserMessageChannel'
 

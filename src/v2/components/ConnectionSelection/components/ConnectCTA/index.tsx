@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
 import { CanConnectChannelQuery as CanConnectChannelQueryData } from '__generated__/CanConnectChannelQuery'

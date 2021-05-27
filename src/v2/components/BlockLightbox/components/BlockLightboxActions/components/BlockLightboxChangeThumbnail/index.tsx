@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Query, Mutation, MutationFunction as MutationFn } from 'react-apollo'
+import { MutationFunction as MutationFn } from '@apollo/client'
+import { Query, Mutation } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
 import Icons from 'v2/components/UI/Icons'

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import createGroupFragment from 'v2/components/CreateGroup/fragments/createGroup'
 

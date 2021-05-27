@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { useTable } from 'react-table'
 import styled from 'styled-components'
 

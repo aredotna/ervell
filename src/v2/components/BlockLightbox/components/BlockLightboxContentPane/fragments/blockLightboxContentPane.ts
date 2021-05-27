@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import blockLightboxImageFragment from 'v2/components/BlockLightbox/components/BlockLightboxImage/fragments/blockLightboxImage'
 import blockLightboxTextFragment from 'v2/components/BlockLightbox/components/BlockLightboxText/fragments/blockLightboxText'

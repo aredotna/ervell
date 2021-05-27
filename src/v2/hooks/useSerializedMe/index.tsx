@@ -1,4 +1,4 @@
-import { useApolloClient } from 'react-apollo'
+import { useApolloClient } from '@apollo/client'
 
 import SERIALIZED_ME_QUERY from 'v2/hooks/useSerializedMe/queries/serializedMe'
 

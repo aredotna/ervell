@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { ApolloConsumer } from 'react-apollo'
-import gql from 'graphql-tag'
+import { ApolloConsumer } from '@apollo/client'
+import { gql } from '@apollo/client'
 import styled from 'styled-components'
 
 const Icon = styled.span.attrs({

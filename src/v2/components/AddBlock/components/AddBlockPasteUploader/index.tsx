@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { MutationFunction as MutationFn } from 'react-apollo'
+import { MutationFunction as MutationFn } from '@apollo/client'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'

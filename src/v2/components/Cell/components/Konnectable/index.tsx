@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
 import { Link, useLocation } from 'react-router-dom'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 
 import { touch as isTouchDevice } from 'v2/util/is'
 

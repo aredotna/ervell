@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { KonnectableChannelPreviewConnectable as KonnectableChannelPreviewConnectableData } from '__generated__/KonnectableChannelPreviewConnectable'
+import { KonnectableChannelPreview_channel_preview_connectables } from '__generated__/KonnectableChannelPreview'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
@@ -42,7 +42,7 @@ export enum ObjectFit {
 }
 
 interface Props {
-  connectable: KonnectableChannelPreviewConnectableData
+  connectable: KonnectableChannelPreview_channel_preview_connectables
   objectFit?: ObjectFit
 }
 

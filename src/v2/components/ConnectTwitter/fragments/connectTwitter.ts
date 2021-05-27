@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import contactFragment from 'v2/components/ConnectTwitter/components/Contact/fragments/contact'
 

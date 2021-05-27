@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 
 import { BlankTopBarLayout } from 'v2/components/UI/Layouts/BlankTopBarLayout'
@@ -15,7 +15,7 @@ import {
   ResendLoggedOutConfirmationEmailMutation,
   ResendLoggedOutConfirmationEmailMutationVariables,
 } from '__generated__/ResendLoggedOutConfirmationEmailMutation'
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 import Box from 'v2/components/UI/Box'
 
 const Container = styled(CenteringBox)`

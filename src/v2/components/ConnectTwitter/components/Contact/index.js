@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import styled, { css } from 'styled-components'
 
 import UserAvatar from 'v2/components/UserAvatar'

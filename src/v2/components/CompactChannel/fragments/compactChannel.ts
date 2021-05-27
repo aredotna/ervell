@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import loadingBreadcrumbChannel from 'v2/components/LoadingPage/fragments/loadingBreadcrumbChannel'
 
 export default gql`

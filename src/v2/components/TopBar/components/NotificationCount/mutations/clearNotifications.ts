@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import notificationCountFragment from 'v2/components/TopBar/components/NotificationCount/fragments/notificationCount'
 

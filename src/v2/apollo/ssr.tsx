@@ -1,4 +1,4 @@
-import { renderToStringWithData } from 'react-apollo'
+import { renderToStringWithData } from '@apollo/client/react/ssr'
 import { ServerStyleSheet } from 'styled-components'
 
 import { wrapWithProviders } from 'v2/apollo'

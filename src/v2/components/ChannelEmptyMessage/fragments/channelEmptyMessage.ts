@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const channelEmptyMessageFragment = gql`
   fragment ChannelEmptyMessage on Channel {

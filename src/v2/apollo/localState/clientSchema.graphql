@@ -8,7 +8,7 @@ extend type Query {
 
 type ClientCurrentRoute {
   protocol: String
-  slashes: String
+  slashes: Boolean
   auth: String
   host: String
   port: String

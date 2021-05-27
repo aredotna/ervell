@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import groupOwnerFragment from 'v2/components/Billing/components/MyGroups/components/UserSelection/components/GroupOwner/fragments/groupOwner'
 

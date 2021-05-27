@@ -1,4 +1,4 @@
-import { useApolloClient } from 'react-apollo'
+import { useApolloClient } from '@apollo/client'
 
 import CURRENT_THEME_QUERY from 'v2/hooks/useCurrentTheme/queries/theme'
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql, Query } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
+import { Query } from '@apollo/client/react/components'
 
 import styled from 'styled-components'
 
@@ -108,16 +109,22 @@ class NewChannelForm extends Component {
     this.setState({ mode: 'creating' })
 
     return createChannel({ variables })
-      .then(({ data: { create_channel: { channel } } }) => {
-        if (visit_channel) {
-          window.location.href = channel.href
-          this.setState({ mode: 'redirecting' })
-          return
-        }
+      .then(
+        ({
+          data: {
+            create_channel: { channel },
+          },
+        }) => {
+          if (visit_channel) {
+            window.location.href = channel.href
+            this.setState({ mode: 'redirecting' })
+            return
+          }
 
-        this.setState({ mode: 'success' })
-        setTimeout(() => onClose(), 500)
-      })
+          this.setState({ mode: 'success' })
+          setTimeout(() => onClose(), 500)
+        }
+      )
       .catch(err => {
         this.setState({
           mode: 'error',

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import blockLightboxShareFragment from 'v2/components/BlockLightbox/components/BlockLightboxShare/fragments/blockLightboxShare'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import profileMetadataFilterFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataFilter/fragments/profileMetadataFilter'
 

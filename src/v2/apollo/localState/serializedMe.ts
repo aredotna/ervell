@@ -1,7 +1,20 @@
 // This is sort of a stop gap until we switch over login to be using our GraphQL endpoint.
 // We have to map the model directly to the fields we're expecting.
 
-export default user => {
+export default (
+  user: any
+): null | {
+  id?: any
+  initials?: any
+  avatar?: any
+  name?: any
+  slug?: any
+  authentication_token?: any
+  is_premium?: any
+  is_lifetime_premium?: any
+  is_supporter?: any
+  hide_notification_count?: any
+} => {
   if (!user) return null
 
   const initials = user.username

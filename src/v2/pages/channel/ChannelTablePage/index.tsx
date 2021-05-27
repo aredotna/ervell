@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
 import { ChannelPage as ChannelPageData } from '__generated__/ChannelPage'

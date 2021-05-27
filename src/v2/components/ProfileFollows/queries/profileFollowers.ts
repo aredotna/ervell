@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import userProfileFollowersFragment from 'v2/components/ProfileFollows/fragments/userProfileFollowers'
 import groupProfileFollowersFragment from 'v2/components/ProfileFollows/fragments/groupProfileFollowers'

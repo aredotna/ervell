@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import { KonnectableChannelPreview as KonnectableChannelPreviewData } from '__generated__/KonnectableChannelPreview'
 

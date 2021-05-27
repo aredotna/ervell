@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { embeddedChannelHeaderFragment } from '../../EmbeddedChannelHeader/fragments/embeddedChannelHeader'
 import { embeddedChannelContentsFragment } from '../../EmbeddedChannelContents/fragments/embeddedChannelContents'

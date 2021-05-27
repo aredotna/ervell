@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import compose from 'lodash.flowright'
 import { without } from 'underscore'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import mapErrors from 'v2/util/mapErrors'
 import currentUserService from 'v2/util/currentUserService'
@@ -85,25 +85,33 @@ class CreateGroup extends Component {
     return (
       createGroup({ variables: { name, description } })
         // Add users to the Group
-        .then(({ data: { create_group: { group: { id, href } } } }) => {
-          if (user_ids.length === 0) return Promise.resolve()
-
-          return addGroupUsers({
-            variables: {
-              id,
-              user_ids,
+        .then(
+          ({
+            data: {
+              create_group: {
+                group: { id, href },
+              },
             },
-          }).then(() => {
-            // If there's no channel context then redirect to the new group
-            if (!channel_id) {
-              window.location = href
-              return Promise.resolve()
-            }
+          }) => {
+            if (user_ids.length === 0) return Promise.resolve()
 
-            // Pass along the group id
-            return id
-          })
-        })
+            return addGroupUsers({
+              variables: {
+                id,
+                user_ids,
+              },
+            }).then(() => {
+              // If there's no channel context then redirect to the new group
+              if (!channel_id) {
+                window.location = href
+                return Promise.resolve()
+              }
+
+              // Pass along the group id
+              return id
+            })
+          }
+        )
 
         // Add the group to the channel if a `channel_id` is present
         .then(member_id => {

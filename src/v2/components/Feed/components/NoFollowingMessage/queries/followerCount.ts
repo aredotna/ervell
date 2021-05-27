@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import FollowerCountCheck from 'v2/components/Feed/components/NoFollowingMessage/fragments/followerCount'
 

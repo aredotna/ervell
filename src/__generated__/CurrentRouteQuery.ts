@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -9,7 +10,7 @@
 export interface CurrentRouteQuery_currentRoute {
   __typename: "ClientCurrentRoute";
   protocol: string | null;
-  slashes: string | null;
+  slashes: boolean | null;
   auth: string | null;
   host: string | null;
   port: string | null;

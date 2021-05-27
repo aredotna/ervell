@@ -1,4 +1,4 @@
-import { useApolloClient } from 'react-apollo'
+import { useApolloClient } from '@apollo/client'
 
 import LOGIN_STATUS_QUERY from 'v2/hooks/useLoginStatus/queries/loginStatus'
 

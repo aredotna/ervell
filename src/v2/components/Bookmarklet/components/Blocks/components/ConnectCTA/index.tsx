@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
 import { CanUserConnect as CanUserConnectData } from '__generated__/CanUserConnect'
@@ -45,7 +45,7 @@ export const ConnectCTA: React.FC = () => {
   return (
     <Query<CanUserConnectData> query={canUserConnectQuery}>
       {({ data, loading, error }) => {
-        if (loading || error) return null
+        if (loading || error || !data) return null
 
         const {
           me: { is_exceeding_either_connections_limit },

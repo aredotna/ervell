@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import groupBillingFragment from 'v2/components/Billing/fragments/groupBilling'
 

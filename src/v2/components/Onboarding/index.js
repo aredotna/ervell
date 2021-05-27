@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import userInfoQuery from 'v2/components/Onboarding/queries/userInfo'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import AnimatedPage from 'v2/components/Onboarding/components/AnimatedPage'

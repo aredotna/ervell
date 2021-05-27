@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
-import { graphql } from 'react-apollo'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
+import { graphql } from '@apollo/client/react/hoc'
 import { some } from 'underscore'
 import compose from 'lodash.flowright'
 

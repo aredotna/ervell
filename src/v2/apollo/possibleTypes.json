@@ -1,0 +1,155 @@
+{
+  "Model": [
+    "Attachment",
+    "Authentication",
+    "CanonicalLink",
+    "Channel",
+    "ChannelMembership",
+    "ChannelTransferRequest",
+    "Comment",
+    "Connectable",
+    "Connection",
+    "Customer",
+    "Deed",
+    "Embed",
+    "Group",
+    "GroupInviteType",
+    "GroupMembership",
+    "GroupPreview",
+    "Image",
+    "Invitee",
+    "Link",
+    "Me",
+    "PendingBlock",
+    "Text",
+    "User"
+  ],
+  "Followable": [
+    "Channel",
+    "Group",
+    "User"
+  ],
+  "UserInterface": [
+    "Invitee",
+    "Me",
+    "User"
+  ],
+  "DeedOwner": [
+    "Group",
+    "User"
+  ],
+  "DeedKind": [
+    "Channel",
+    "Comment",
+    "Connectable",
+    "Group",
+    "Null",
+    "User"
+  ],
+  "Mutable": [
+    "Channel",
+    "Connectable"
+  ],
+  "ConnectableInterface": [
+    "Attachment",
+    "Channel",
+    "Connectable",
+    "Embed",
+    "Image",
+    "Link",
+    "PendingBlock",
+    "Text"
+  ],
+  "ConnectableKind": [
+    "Attachment",
+    "Channel",
+    "Embed",
+    "Image",
+    "Link",
+    "PendingBlock",
+    "Text"
+  ],
+  "Block": [
+    "Attachment",
+    "Embed",
+    "Image",
+    "Link",
+    "PendingBlock",
+    "Text"
+  ],
+  "Commentable": [
+    "Attachment",
+    "Embed",
+    "Image",
+    "Link",
+    "PendingBlock",
+    "Text"
+  ],
+  "DeedKkind": [
+    "Attachment",
+    "Channel",
+    "Comment",
+    "Embed",
+    "Group",
+    "Image",
+    "Link",
+    "Text",
+    "User"
+  ],
+  "Konnectable": [
+    "Attachment",
+    "Channel",
+    "Embed",
+    "Image",
+    "Link",
+    "PendingBlock",
+    "Text"
+  ],
+  "FollowableType": [
+    "Channel",
+    "Group",
+    "User"
+  ],
+  "UserCountsInterface": [
+    "MeCounts",
+    "UserCounts"
+  ],
+  "ChannelOwner": [
+    "Group",
+    "User"
+  ],
+  "Member": [
+    "Group",
+    "User"
+  ],
+  "SearchResult": [
+    "Channel",
+    "Connectable",
+    "Group",
+    "User"
+  ],
+  "SsearchResult": [
+    "Attachment",
+    "Channel",
+    "Embed",
+    "Group",
+    "Image",
+    "Link",
+    "PendingBlock",
+    "Text",
+    "User"
+  ],
+  "MutableType": [
+    "Channel",
+    "Connectable"
+  ],
+  "Identifiable": [
+    "Group",
+    "User"
+  ],
+  "QuickSearchResult": [
+    "Channel",
+    "Group",
+    "User"
+  ]
+}

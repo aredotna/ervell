@@ -13,6 +13,7 @@
     "pretty": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "target": "ES2017"
   },
   "include": ["src", "typings/*.d.ts"],

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import styled from 'styled-components'
 import { isNull } from 'underscore'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 
 import { Input } from 'v2/components/UI/Inputs'
 import CopyToClipboard from 'v2/components/UI/CopyToClipboard'

@@ -1,4 +1,4 @@
-import { useApolloClient } from 'react-apollo'
+import { useApolloClient } from '@apollo/client'
 
 import ERROR_PAGE_QUERY from 'v2/hooks/useIsOutsideMainRouter/queries/isOutsideMainRouter'
 

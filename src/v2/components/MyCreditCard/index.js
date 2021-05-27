@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Query, graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
+import { Query } from '@apollo/client/react/components'
 import PropTypes from 'prop-types'
 import compose from 'lodash.flowright'
 import { injectStripe } from 'react-stripe-elements'

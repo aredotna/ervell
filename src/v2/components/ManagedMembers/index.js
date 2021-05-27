@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import ManagedMember from 'v2/components/ManagedMembers/components/ManagedMember'
 import managedMemberFragment from 'v2/components/ManagedMembers/components/ManagedMember/fragments/managedMember'

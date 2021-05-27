@@ -3,9 +3,9 @@ import {
   MutationFunction as MutationFn,
   useMutation,
   useQuery,
-} from 'react-apollo'
+} from '@apollo/client'
 import { Form, Field } from 'react-final-form'
-import { ApolloError, PureQueryOptions } from 'apollo-client'
+import { ApolloError, PureQueryOptions } from '@apollo/client'
 import { unescape } from 'underscore'
 import styled from 'styled-components'
 

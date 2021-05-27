@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import upcomingInvoiceFragment from 'v2/components/Billing/components/UpcomingInvoice/fragments/upcomingInvoice'
 

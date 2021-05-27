@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'

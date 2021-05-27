@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import myCreditCardFragment from 'v2/components/MyCreditCard/fragments/myCreditCard'
 
