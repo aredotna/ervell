@@ -3963,18 +3963,6 @@ apollo-server-errors@^2.0.2:
   resolved "https://registry.yarnpkg.com/apollo-server-errors/-/apollo-server-errors-2.5.0.tgz#5d1024117c7496a2979e3e34908b5685fe112b68"
   integrity sha512-lO5oTjgiC3vlVg2RKr3RiXIIQ5pGXBFxYGGUkKDhTud3jMIhs+gel8L8zsEjKaKxkjHhCQAA/bcEfYiKkGQIvA==
 
-apollo-storybook-core@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/apollo-storybook-core/-/apollo-storybook-core-0.5.4.tgz#8357861cfb127ac9a9d0afc4d87fdf5ff97f39b2"
-  integrity sha512-5h+Yr4Pt2foGJi078gmjlQZ4mj8NBNravjjyhFOrfXTDQd2ODgWn2cwoSGJcpp+iZdkGwwlFkZbyJ1nBTsxukg==
-
-apollo-storybook-react@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/apollo-storybook-react/-/apollo-storybook-react-0.2.4.tgz#6cf31e1a8e3ad4d3f3e80480b0966deab6661c17"
-  integrity sha512-nop1YHsCXbk/xoqnUDmSvHhxwo4IMCYpQyzgTpSVA8Gey9sbRELdI1GyfJYOl7yP+wpP0Eth7tKQRiUWjXPmdQ==
-  dependencies:
-    apollo-storybook-core "^0.5.4"
-
 apollo-utilities@^1.3.0:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.3.4.tgz#6129e438e8be201b6c55b0f13ce49d2c7175c9cf"
