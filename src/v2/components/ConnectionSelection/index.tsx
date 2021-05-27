@@ -18,7 +18,7 @@ import {
 import {
   removeConnectionMutation as RemoveConnection,
   removeConnectionMutationVariables as RemoveConnectionVariables,
-} from '__generated__/removeConnectionMutation'
+} from '__generated__/RemoveConnectionMutation'
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 

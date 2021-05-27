@@ -34,7 +34,7 @@ import { MySettings, MySettings_me as Me } from '__generated__/MySettings'
 import {
   UpdateAccountMutation,
   UpdateAccountMutationVariables,
-} from '__generated__/updateAccountMutation'
+} from '__generated__/UpdateAccountMutation'
 
 interface UserSettingsProps {
   me: Me
