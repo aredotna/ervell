@@ -1,18 +1,11 @@
 import { addDecorator, configure } from '@storybook/react'
 import { setOptions } from '@storybook/addon-options'
-// import apolloStorybookDecorator from 'apollo-storybook-react'
 import StoryRouter from 'storybook-react-router'
-// import { gql } from '@apollo/client'
-
-// import apiTypeDefs from 'v2/apollo/schema.graphql'
-// import clientTypeDefs from 'v2/apollo/localState/clientSchema.graphql'
-// import possibleTypes from 'v2/apollo/possibleTypes.json'
-
-import mocks from './mocks'
 
 import { wrapWithThemeProvider } from 'v2/styles/theme'
 
-// @tvler: fix this
+// @tvler: ARE-162 fast follow: add back mocks & apollo interop
+// import mocks from './mocks'
 // const typeDefs = gql`
 //   ${apiTypeDefs}
 //   ${clientTypeDefs}
