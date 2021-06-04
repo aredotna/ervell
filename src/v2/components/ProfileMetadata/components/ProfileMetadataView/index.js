@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import PropTypes from 'prop-types'
 
 import profileMetadataViewFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataView/fragments/profileMetadataView'

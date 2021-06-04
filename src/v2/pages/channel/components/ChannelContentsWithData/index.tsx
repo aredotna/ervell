@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 import sharify from 'sharify'
 
 import { ChannelContentsWithData as ChannelContentsWithDataData } from '__generated__/ChannelContentsWithData'

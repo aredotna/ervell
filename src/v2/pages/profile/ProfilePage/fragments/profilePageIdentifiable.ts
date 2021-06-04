@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import profileMetadataFragment from 'v2/components/ProfileMetadata/fragments/profileMetadata'
 import emptyOrTipsFragment from 'v2/pages/profile/ProfilePage/components/EmptyMessageOrComponent/fragments/emptyOrTips'

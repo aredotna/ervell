@@ -10,7 +10,7 @@ import DividerButton from 'v2/components/UI/Buttons/components/DividerButton'
 import constants from 'v2/styles/constants'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
 import { DropshadowButtonLink } from '../UI/Buttons/components/DropshadowButton'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import {
   dismissBannerMutation,
   dismissBannerMutationVariables,

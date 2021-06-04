@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withApollo } from 'react-apollo'
+import { withApollo } from '@apollo/client/react/hoc'
 
 import isSpiderRequestingQuery from 'v2/hocs/WithIsSpiderRequesting/queries/isSpiderRequesting'
 

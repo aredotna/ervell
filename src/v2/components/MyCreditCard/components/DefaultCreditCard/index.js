@@ -1,5 +1,5 @@
 import React from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import defaultCreditCardFragment from 'v2/components/MyCreditCard/components/DefaultCreditCard/fragments/defaultCreditCard'
 

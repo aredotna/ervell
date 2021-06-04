@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import privateBlocksMeterFragment from 'v2/components/PrivateBlocksMeter/fragments/privateBlocksMeter'
 import totalBlocksMeterFragment from 'v2/components/TotalBlocksMeter/fragments/totalBlocksMeter'

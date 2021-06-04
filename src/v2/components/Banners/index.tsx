@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 
 import WithLoginStatus from 'v2/hocs/WithLoginStatus'
 

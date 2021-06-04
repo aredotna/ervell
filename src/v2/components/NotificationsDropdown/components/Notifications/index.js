@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import styled from 'styled-components'
 
 import notificationSentenceFragment from 'v2/components/NotificationsDropdown/components/Notification/fragments/notificationSentence'

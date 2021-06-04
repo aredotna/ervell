@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Mousetrap from 'mousetrap'

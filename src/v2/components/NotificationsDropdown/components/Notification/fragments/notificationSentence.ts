@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import notificationObjectFragment from 'v2/components/NotificationsDropdown/components/Notification/fragments/notificationObject'
 

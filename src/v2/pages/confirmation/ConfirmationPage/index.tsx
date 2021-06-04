@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 
 import { BlankTopBarLayout } from 'v2/components/UI/Layouts/BlankTopBarLayout'

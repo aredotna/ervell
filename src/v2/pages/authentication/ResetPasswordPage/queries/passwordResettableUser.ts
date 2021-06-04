@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import passwordResettableUserFragment from 'v2/pages/authentication/ResetPasswordPage/fragments/passwordResettableUser'
 

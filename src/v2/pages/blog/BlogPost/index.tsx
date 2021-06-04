@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import moment from 'moment'
 

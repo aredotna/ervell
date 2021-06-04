@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import profileMetadataActionsFragment from 'v2/components/ProfileMetadata/components/ProfileMetadataActions/fragments/profileMetadataActions'
 
@@ -66,9 +66,7 @@ export default class ProfileMetadataActions extends Component {
           <UserMessageButton
             id={identifiable.id}
             type={identifiable.__typename.toUpperCase()}
-            title={`Clicking this creates a collaborative channel between you and ${
-              identifiable.name
-            }`}
+            title={`Clicking this creates a collaborative channel between you and ${identifiable.name}`}
           >
             {({ mode }) => (
               <React.Fragment>
@@ -135,7 +133,7 @@ export default class ProfileMetadataActions extends Component {
           )}
 
         {identifiable.__typename === 'Group' &&
-          (identifiable.can.manage && identifiable.is_upgradeable) && (
+          identifiable.can.manage && identifiable.is_upgradeable && (
             <PremiumButton href="/settings/group_billing">
               <Icons
                 name="Medallion"

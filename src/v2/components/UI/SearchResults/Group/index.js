@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 
 import groupSearchResultFragment from 'v2/components/UI/SearchResults/Group/fragments/groupSearchResult'
 

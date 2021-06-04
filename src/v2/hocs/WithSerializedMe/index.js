@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withApollo } from 'react-apollo'
+import { withApollo } from '@apollo/client/react/hoc'
 
 import serializedMeQuery from 'v2/hocs/WithSerializedMe/queries/serializedMe'
 

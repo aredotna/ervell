@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import axios from 'axios'
 import styled from 'styled-components'
 import compose from 'lodash.flowright'

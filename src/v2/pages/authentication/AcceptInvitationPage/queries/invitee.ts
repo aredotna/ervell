@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import inviteeFragment from 'v2/pages/authentication/AcceptInvitationPage/fragments/invitee'
 

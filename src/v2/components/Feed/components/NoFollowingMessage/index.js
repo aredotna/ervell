@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
-import { propType } from 'graphql-anywhere'
+import { graphql } from '@apollo/client/react/hoc'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import PropTypes from 'prop-types'
 import sharify from 'sharify'
 

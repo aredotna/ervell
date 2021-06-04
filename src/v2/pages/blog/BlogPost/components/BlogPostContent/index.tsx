@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { Document, MARKS, BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 

@@ -31,3 +31,6 @@ server.dist.js.map
 # Temporary
 bench.rb
 bench.txt
+
+# asdf version manager config
+.tool-versions

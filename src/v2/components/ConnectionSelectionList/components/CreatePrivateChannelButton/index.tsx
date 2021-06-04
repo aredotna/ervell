@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 
 import createPrivateChannelMutation from 'v2/components/ConnectionSelectionList/components/CreatePrivateChannelButton/mutations/createPrivateChannel'
 

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export default gql`
   mutation CreateGroupInvite($group_id: ID!) {

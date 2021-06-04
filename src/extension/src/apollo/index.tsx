@@ -1,34 +1,26 @@
 import React from 'react'
-import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-
-import { setContext } from 'apollo-link-context'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
+import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
+import { BatchHttpLink } from '@apollo/client/link/batch-http'
+import { setContext } from '@apollo/client/link/context'
 
 import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
+import { getCache } from 'v2/apollo/cache'
+
+import { InitialExtensionDataFragment } from '__generated__/InitialExtensionDataFragment'
 
 import extensionData from 'extension/src/apollo/extensionData'
+import INITIAL_DATA from 'extension/src/apollo/fragments/initialData'
 
 const httpLink = new BatchHttpLink({ uri: process.env.GRAPHQL_ENDPOINT })
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
 
 export const initApolloClient = ({
   token: X_AUTH_TOKEN = '',
   isLoggedIn = false,
 } = {}) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = getCache()
 
   const authLink = setContext((_, { headers }) => ({
     headers: {
@@ -46,14 +38,16 @@ export const initApolloClient = ({
     cache,
   })
 
-  const data = {
-    loginStatus: {
-      __typename: 'LoginStatus',
-      isLoggedIn,
+  client.writeFragment<InitialExtensionDataFragment>({
+    fragment: INITIAL_DATA,
+    data: {
+      __typename: 'Query',
+      loginStatus: {
+        __typename: 'ClientLoginStatus',
+        isLoggedIn: isLoggedIn,
+      },
     },
-  }
-
-  cache.writeData({ data })
+  })
 
   window.__APOLLO_CLIENT__ = client
 

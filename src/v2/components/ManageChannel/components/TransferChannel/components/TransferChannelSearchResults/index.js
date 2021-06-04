@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 import PropTypes from 'prop-types'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'

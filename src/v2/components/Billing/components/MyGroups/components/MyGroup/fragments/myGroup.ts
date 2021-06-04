@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import myGroupHeaderFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/MyGroupHeader/fragments/myGroupHeader'
 import upgradeSelectionFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/fragments/upgradeSelection'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 
 import customerPlanChangesQuery from 'v2/components/Billing/components/PlanChanges/queries/customerPlanChanges'
 import groupPlanChangesQuery from 'v2/components/Billing/components/PlanChanges/queries/groupPlanChanges'

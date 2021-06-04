@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import avatarQuery from 'v2/components/AvatarUploader/queries/avatar'
 

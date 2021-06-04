@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import compactChannelFragment from 'v2/components/CompactChannel/fragments/compactChannel'
 import blockLightboxChannelsAlsoInFragment from 'v2/components/BlockLightbox/components/BlockLightboxChannelsAlsoIn/fragments/blockLightboxChannelsAlsoIn'

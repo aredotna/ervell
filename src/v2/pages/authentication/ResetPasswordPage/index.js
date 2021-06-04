@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import passwordResettableUserQuery from 'v2/pages/authentication/ResetPasswordPage/queries/passwordResettableUser'
 

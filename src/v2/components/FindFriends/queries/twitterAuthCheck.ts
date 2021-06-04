@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import TwitterAuthCheck from 'v2/components/FindFriends/fragments/twitterAuthCheck'
 

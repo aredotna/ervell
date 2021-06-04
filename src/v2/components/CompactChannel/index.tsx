@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { PureQueryOptions, ApolloClient } from 'apollo-client'
-import { useApolloClient } from 'react-apollo'
+import { PureQueryOptions, ApolloClient, useApolloClient } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import constants from 'v2/styles/constants'
 

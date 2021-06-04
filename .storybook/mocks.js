@@ -1,6 +1,5 @@
 import { random, name, lorem, commerce, company, internet } from 'faker'
 import { sample } from 'lodash'
-import { MockList } from 'graphql-tools'
 
 const generateImage = (width, height, mode = 'any') =>
   `https://placeimg.com/${width}/${height}/${mode}`
@@ -42,7 +41,7 @@ const Mocks = {
   }),
 
   Authentication: () => ({
-    contacts: () => new MockList(0),
+    contacts: () => [],
   }),
 
   User: () => ({

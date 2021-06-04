@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import upgradeCTAFragment from 'v2/components/Billing/components/MyGroups/components/MyGroup/components/UpgradeSelection/components/UpgradeCTA/fragments/upgradeCTA'
 

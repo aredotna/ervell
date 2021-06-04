@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export default gql`
   mutation addGroupUsersMutation($user_ids: [ID]!, $id: ID!) {

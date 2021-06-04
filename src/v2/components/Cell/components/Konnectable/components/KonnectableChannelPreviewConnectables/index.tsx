@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
-import { KonnectableChannelPreviewConnectable as KonnectableChannelPreviewConnectableData } from '__generated__/KonnectableChannelPreviewConnectable'
-
 import preloadImages from 'v2/util/preloadImages'
+
+import { KonnectableChannelPreview_channel_preview_connectables } from '__generated__/KonnectableChannelPreview'
 
 import Box from 'v2/components/UI/Box'
 import { KonnectableSimpleDisplay } from 'v2/components/Cell/components/Konnectable/components/KonnectableSimpleDisplay'
@@ -29,7 +29,7 @@ enum Mode {
 }
 
 interface Props {
-  connectables: KonnectableChannelPreviewConnectableData[]
+  connectables: KonnectableChannelPreview_channel_preview_connectables[]
   LoadingIndicator: React.ComponentType
   speed?: number
 }

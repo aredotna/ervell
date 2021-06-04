@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { graphql, Query } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
+import { Query } from '@apollo/client/react/components'
 import compose from 'lodash.flowright'
 
 import muteQuery from 'v2/components/MuteButton/queries/muted'

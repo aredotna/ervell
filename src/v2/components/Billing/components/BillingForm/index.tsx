@@ -1,6 +1,6 @@
 import React, { FormEvent, useCallback } from 'react'
 import { injectStripe } from 'react-stripe-elements'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import axios from 'axios'
 
 import mapErrors from 'v2/util/mapErrors'

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
-import { useMutation } from 'react-apollo'
+import { useMutation } from '@apollo/client'
 import { useForm, useField } from 'react-final-form-hooks'
 
 import Box from 'v2/components/UI/Box'

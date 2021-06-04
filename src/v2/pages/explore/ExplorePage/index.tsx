@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query } from '@apollo/client/react/components'
 
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import Constrain from 'v2/components/UI/Constrain'

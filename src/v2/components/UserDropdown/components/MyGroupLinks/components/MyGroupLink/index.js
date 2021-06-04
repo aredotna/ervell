@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { propType } from 'graphql-anywhere'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
 import styled from 'styled-components'
 
 import myGroupLinkFragment from 'v2/components/UserDropdown/components/MyGroupLinks/components/MyGroupLink/fragments/myGroupLink'

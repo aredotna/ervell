@@ -1,7 +1,8 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { graphql, MutationFunction } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
+import { MutationFunction } from '@apollo/client'
 import { omit } from 'underscore'
 
 import Layout from 'v2/components/Bookmarklet/components/Layout'

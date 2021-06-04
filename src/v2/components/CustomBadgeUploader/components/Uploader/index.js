@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { propType } from 'graphql-anywhere'
-import { graphql, withApollo } from 'react-apollo'
+import { propType } from 'v2/util/inlinedGraphqlAnywhere'
+import { graphql, withApollo } from '@apollo/client/react/hoc'
 import compose from 'lodash.flowright'
 import axios from 'axios'
 import styled from 'styled-components'

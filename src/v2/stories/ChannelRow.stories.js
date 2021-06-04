@@ -2,8 +2,8 @@ import uuidv4 from 'uuid/v4'
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { Query } from '@apollo/client/react/components'
+import { gql } from '@apollo/client'
 
 import Specimen from 'v2/stories/__components__/Specimen'
 

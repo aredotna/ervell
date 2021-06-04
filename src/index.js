@@ -5,6 +5,18 @@ require('regenerator-runtime/runtime')
 require('newrelic')
 require('sqreen')
 
+/*
+ * Apollo client uses Promise.prototype.finally,
+ * but this isn't automatically polyfilled into
+ * our app because Babel only polyfills features
+ * if they're actually being used in our client code
+ * (not in node_modules I guess).
+ *
+ * This manually includes the polyfill so that apollo
+ * works.
+ */
+require('core-js/fn/promise/finally')
+
 if (process.env.NODE_ENV === 'development') {
   require('coffee-register')
   require('@babel/register')({

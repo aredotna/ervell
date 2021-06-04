@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { graphql } from 'react-apollo'
+import { graphql } from '@apollo/client/react/hoc'
 
 import dismissBannerMutation from 'v2/components/UI/Banner/mutations/dimissBanner'
 

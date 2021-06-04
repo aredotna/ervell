@@ -1,29 +1,26 @@
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
-import Cookies from 'cookies-js'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
+import url from 'url'
 
-import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { onError } from 'apollo-link-error'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-import { createHttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
+import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import { BatchHttpLink } from '@apollo/client/link/batch-http'
+import { createHttpLink } from '@apollo/client/link/http'
+import { setContext } from '@apollo/client/link/context'
 import { HelmetProvider } from 'react-helmet-async'
 
 import mount from 'v2/util/mount'
 
 import { Themed } from 'v2/styles/theme'
 
-import introspectionQueryResultData from 'v2/apollo/fragmentTypes.json'
+import { InitialAppDataFragment } from '__generated__/InitialAppDataFragment'
 
 import clientData from 'v2/apollo/localState/clientData'
+import serializedMeFn from 'v2/apollo/localState/serializedMe'
+import INITIAL_DATA from 'v2/apollo/fragments/initialData'
+import { getCache } from 'v2/apollo//cache'
 
 const isClientSide = typeof window !== 'undefined'
 
@@ -43,10 +40,6 @@ const contentfulHttpLink = createHttpLink({
   uri: CLIENT_CONTENTFUL_GRAPHQL_ENDPOINT,
 })
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
-
 export const initApolloClient = ({
   token: X_AUTH_TOKEN,
   currentRoute,
@@ -54,12 +47,19 @@ export const initApolloClient = ({
   cookies,
   serializedMe,
   sharifyData,
-}: any = {}) => {
+}: {
+  token?: any
+  currentRoute?: url.UrlWithStringQuery
+  isLoggedIn?: boolean
+  cookies?: Record<string, any>
+  serializedMe?: ReturnType<typeof serializedMeFn>
+  sharifyData?: Record<string, any>
+} = {}) => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__
   }
 
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = getCache({ cookies, sharifyData })
 
   if (isClientSide && window.__APOLLO_STATE__) {
     cache.restore(window.__APOLLO_STATE__)
@@ -121,44 +121,6 @@ export const initApolloClient = ({
 
   const link = ApolloLink.from([errorLink, authLink, httpLink])
 
-  const typeDefs = `
-    extend type Query {
-      cookies: {
-        get(name: String!): Boolean | null
-      }
-      sharify: {
-        get(name: String!): Boolean | null
-      }
-    }
-  `
-
-  const resolvers = {
-    Query: {
-      cookies: () => ({
-        __typename: 'Cookies',
-      }),
-      sharify: () => ({
-        __typename: 'Sharify',
-      }),
-      serializedMe: () => ({
-        __typename: 'SerializedMe',
-      }),
-    },
-    Cookies: {
-      get: (_obj, args) => {
-        return isClientSide
-          ? Cookies.get(args.name)
-          : cookies[args.name] || null
-      },
-    },
-    Sharify: {
-      get: (_obj, args) => {
-        const value = sharifyData[args.name]
-        return value ? value : null
-      },
-    },
-  }
-
   const client = new ApolloClient({
     ssrMode: !isClientSide,
     link: ApolloLink.split(
@@ -169,46 +131,59 @@ export const initApolloClient = ({
       link
     ),
     cache,
-    resolvers,
-    typeDefs,
   })
 
-  const data = {
-    currentRoute: {
-      __typename: 'CurrentRoute',
-      ...currentRoute,
-    },
-    loginStatus: {
-      __typename: 'LoginStatus',
-      isLoggedIn,
-    },
-    cookies: {
-      __typename: 'Cookies',
-    },
-    serializedMe: {
-      __typename: 'ClientSerializedMe',
-      ...{
+  cache.writeFragment<InitialAppDataFragment>({
+    fragment: INITIAL_DATA,
+    data: {
+      __typename: 'Query',
+      currentRoute: {
+        __typename: 'ClientCurrentRoute',
+        protocol: null,
+        slashes: null,
+        auth: null,
+        host: null,
+        port: null,
+        hostname: null,
+        hash: null,
+        search: null,
+        query: null,
+        pathname: null,
+        path: null,
+        href: null,
+        ...currentRoute,
+      },
+      loginStatus: {
+        __typename: 'ClientLoginStatus',
+        isLoggedIn: isLoggedIn,
+      },
+      cookies: {
+        __typename: 'ClientCookies',
+        get: null,
+      },
+      serializedMe: {
+        __typename: 'ClientSerializedMe',
         id: null,
-        name: null,
         initials: null,
+        name: null,
         avatar: null,
         authentication_token: null,
         is_premium: null,
         is_lifetime_premium: null,
         is_supporter: null,
         slug: null,
-        hide_notification_count: false,
+        hide_notification_count: null,
         ...serializedMe,
       },
+      sharify: {
+        __typename: 'ClientSharify',
+        get: null,
+        IS_SPIDER: null,
+        IS_OUTSIDE_MAIN_ROUTER: null,
+        THEME: null,
+        ...{ ...sharifyData, CURRENT_USER: null },
+      },
     },
-    sharify: {
-      __typename: 'Sharify',
-      ...{ ...sharifyData, CURRENT_USER: null },
-    },
-  }
-
-  cache.writeData({
-    data,
   })
 
   if (isClientSide) {
