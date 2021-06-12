@@ -12,7 +12,10 @@ import * as ActiveQueriesCollection from 'v2/components/ChannelContents/lib/Acti
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
-import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
+import {
+  ChannelContents as ChannelContentsData,
+  ChannelContents_skeleton,
+} from '__generated__/ChannelContents'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -190,7 +193,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     )
 
     const handleOnEnter = useCallback(
-      pageSkeleton => (): void => {
+      (pageSkeleton: ChannelContents_skeleton[]) => (): void => {
         const queryKey = ActiveQueriesCollection.key(pageSkeleton)
 
         if (activeQueries[queryKey]) {
