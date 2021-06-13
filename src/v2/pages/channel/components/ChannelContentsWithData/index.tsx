@@ -2,7 +2,10 @@ import React from 'react'
 import { Query } from '@apollo/client/react/components'
 import sharify from 'sharify'
 
-import { ChannelContentsWithData as ChannelContentsWithDataData } from '__generated__/ChannelContentsWithData'
+import {
+  ChannelContentsWithData as ChannelContentsWithDataData,
+  ChannelContentsWithDataVariables,
+} from '__generated__/ChannelContentsWithData'
 
 import { setupPusherChannel } from 'v2/hooks/usePusher'
 import { channelContentsWithDataQuery } from 'v2/pages/channel/components/ChannelContentsWithData/queries/channelContentsWithData'
@@ -30,9 +33,9 @@ export const ChannelContentsWithData: React.FC<Props> = WithIsSpiderRequesting<
   ExtendedProps
 >(({ channel: serverChannel, isSpiderRequesting }) => {
   return (
-    <Query<ChannelContentsWithDataData>
+    <Query<ChannelContentsWithDataData, ChannelContentsWithDataVariables>
       query={channelContentsWithDataQuery}
-      variables={{ id: serverChannel.id }}
+      variables={{ id: serverChannel.id.toString() }}
       ssr={isSpiderRequesting}
       // fetchPolicy="no-cache"
     >

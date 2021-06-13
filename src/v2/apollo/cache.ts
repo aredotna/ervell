@@ -1,4 +1,9 @@
-import { InMemoryCache, InMemoryCacheConfig, TypePolicy } from '@apollo/client'
+import {
+  InMemoryCache,
+  InMemoryCacheConfig,
+  TypePolicy,
+  FieldPolicy,
+} from '@apollo/client'
 import Cookies from 'cookies-js'
 import possibleTypes from 'v2/apollo/possibleTypes.json'
 
@@ -15,10 +20,83 @@ const isClientSide = typeof window !== 'undefined'
 const nonNormalizedMergeableObject: TypePolicy = {
   keyFields: false,
   merge(existing, incoming) {
+    if (existing === null || existing === undefined) {
+      return incoming
+    }
+
+    if (incoming === null || incoming === undefined) {
+      return existing
+    }
+
     return {
       ...existing,
       ...incoming,
     }
+  },
+}
+
+const paginationPolicy: FieldPolicy = {
+  keyArgs: false,
+  merge(existing, incoming, { args }) {
+    /*
+     * Ensure args and data is properly set up
+     */
+
+    if (!args) {
+      throw new Error('args not given')
+    }
+
+    if (!Array.isArray(incoming)) {
+      throw new Error("incoming isn't an array")
+    }
+
+    if (typeof args?.page !== 'number') {
+      throw new Error("page isn't a number")
+    }
+
+    if (args.page === 0) {
+      throw new Error('page is 0')
+    }
+
+    if (typeof args?.per !== 'number') {
+      throw new Error("per isn't a number")
+    }
+
+    // New array to be returned
+    const newData = []
+
+    // Length of the new array
+    const newDataLength = Math.max(
+      Array.isArray(existing) ? existing.length : 0,
+      args.page * args.per
+    )
+
+    // Index that the incoming data starts at in the newData array
+    const incomingStartingIndex = (args.page - 1) * args.per
+
+    for (let i = 0; i < newDataLength; i++) {
+      const isInIncomingWindow =
+        i >= incomingStartingIndex && i < args.page * args.per
+
+      if (isInIncomingWindow) {
+        const incomingItem = incoming[i - incomingStartingIndex]
+
+        // For some reason, are.na sometimes doesn't return the amount of items
+        // from the per argument. Set to null instead of undefined so that
+        // the undefined item doesn't get squashed.
+        if (incomingItem === undefined) {
+          newData[i] = null
+        } else {
+          newData[i] = incomingItem
+        }
+      } else if (Array.isArray(existing) && i < existing.length) {
+        newData[i] = existing[i]
+      } else {
+        newData[i] = null
+      }
+    }
+
+    return newData
   },
 }
 
@@ -39,6 +117,7 @@ export function getCache({
       /*
        * nonNormalizedMergeableObject
        */
+
       BlockCounts: nonNormalizedMergeableObject,
       BlockCan: nonNormalizedMergeableObject,
       ChannelCan: nonNormalizedMergeableObject,
@@ -66,12 +145,18 @@ export function getCache({
       Searches: nonNormalizedMergeableObject,
       UserCan: nonNormalizedMergeableObject,
       UserCounts: nonNormalizedMergeableObject,
+
+      /*
+       * Custom type policies
+       */
+
+      Channel: {
+        fields: {
+          blokks: paginationPolicy,
+        },
+      },
     },
   }
-
-  /*
-   * Custom type policies
-   */
 
   if (cookies) {
     cacheConfig.typePolicies.ClientCookies = {

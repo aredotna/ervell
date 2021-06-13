@@ -6,7 +6,7 @@ import { SortableContainer } from 'react-sortable-hoc'
 
 import { chunk } from 'v2/util/chunk'
 import { reorder } from 'v2/components/ChannelContents/lib/reorder'
-import { loadSkeleton } from 'v2/components/ChannelContents/lib/loadSkeleton'
+// import { loadSkeleton } from 'v2/components/ChannelContents/lib/loadSkeleton'
 import * as ConnectableCellsCollection from 'v2/components/ChannelContents/lib/ConnectableCells'
 import * as ActiveQueriesCollection from 'v2/components/ChannelContents/lib/ActiveQueries'
 
@@ -14,7 +14,7 @@ import moveConnectableMutation from 'v2/components/ChannelContents/mutations/mov
 
 import {
   ChannelContents as ChannelContentsData,
-  ChannelContents_skeleton,
+  // ChannelContents_skeleton,
 } from '__generated__/ChannelContents'
 
 import Grid from 'v2/components/UI/Grid'
@@ -22,7 +22,7 @@ import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 
-import { usePusher } from 'v2/hooks/usePusher'
+// import { usePusher } from 'v2/hooks/usePusher'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -56,72 +56,72 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     >({})
 
     // Handles ordering of block grid items
-    const [connectables, setConnectables] = useState(channel.skeleton)
+    // const [connectables, setConnectables] = useState(channel.skeleton)
 
     // Handles actual contents of block grid items
     const [collection, setCollection] = useState(
       ConnectableCellsCollection.normalize(channel.initial_contents)
     )
 
-    const addConnectable = useCallback(newConnectable => {
-      setConnectables(prevConnectables => {
-        if (
-          !prevConnectables.some(
-            c =>
-              c.id === newConnectable.id &&
-              c.type.toUpperCase() === newConnectable.type.toUpperCase()
-          )
-        ) {
-          return [
-            {
-              id: newConnectable.id,
-              type: { BLOCK: 'Block', CHANNEL: 'Channel' }[
-                newConnectable.type.toUpperCase()
-              ],
-              __typename: 'SkeletalConnectable',
-            },
-            ...prevConnectables,
-          ]
-        }
+    // const addConnectable = useCallback(newConnectable => {
+    //   setConnectables(prevConnectables => {
+    //     if (
+    //       !prevConnectables.some(
+    //         c =>
+    //           c.id === newConnectable.id &&
+    //           c.type.toUpperCase() === newConnectable.type.toUpperCase()
+    //       )
+    //     ) {
+    //       return [
+    //         {
+    //           id: newConnectable.id,
+    //           type: { BLOCK: 'Block', CHANNEL: 'Channel' }[
+    //             newConnectable.type.toUpperCase()
+    //           ],
+    //           __typename: 'SkeletalConnectable',
+    //         },
+    //         ...prevConnectables,
+    //       ]
+    //     }
 
-        return prevConnectables
-      })
-    }, [])
+    //     return prevConnectables
+    //   })
+    // }, [])
 
-    const updateConnectable = useCallback(
-      connectable => {
-        loadSkeleton({
-          client,
-          channelId: channel.id,
-          pageSkeleton: [connectable],
-          collection,
-          queryOptions: {
-            fetchPolicy: 'network-only',
-          },
-        }).then(contents => {
-          if (!contents) return
-          setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-        })
-      },
-      [channel.id, client, collection]
-    )
+    // const updateConnectable = useCallback(
+    //   connectable => {
+    //     loadSkeleton({
+    //       client,
+    //       channelId: channel.id,
+    //       pageSkeleton: [connectable],
+    //       collection,
+    //       queryOptions: {
+    //         fetchPolicy: 'network-only',
+    //       },
+    //     }).then(contents => {
+    //       if (!contents) return
+    //       setCollection(prevCollection => ({ ...prevCollection, ...contents }))
+    //     })
+    //   },
+    //   [channel.id, client, collection]
+    // )
 
-    const parsePayload = useCallback(
-      ({ id, base_class }) => ({
-        id,
-        type: base_class.toUpperCase(),
-      }),
-      []
-    )
+    // const parsePayload = useCallback(
+    //   ({ id, base_class }) => ({
+    //     id,
+    //     type: base_class.toUpperCase(),
+    //   }),
+    //   []
+    // )
 
-    if (pusherChannel) {
-      usePusher({
-        channel: pusherChannel,
-        onCreated: addConnectable,
-        onUpdated: updateConnectable,
-        parsePayload,
-      })
-    }
+    // if (pusherChannel) {
+    //   usePusher({
+    //     channel: pusherChannel,
+    //     onCreated: addConnectable,
+    //     onUpdated: updateConnectable,
+    //     parsePayload,
+    //   })
+    // }
 
     useEffect(() => {
       return () => {
@@ -132,95 +132,101 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       }
     }, [pusherChannel, socket])
 
-    const chunked = useMemo(() => chunk(connectables, chunkSize), [
-      connectables,
-      chunkSize,
-    ])
+    // const chunked = useMemo(() => chunk(connectables, chunkSize), [
+    //   connectables,
+    //   chunkSize,
+    // ])
+    const chunked = []
 
-    const handleAddBlock = useCallback(
-      ({ id }: { id: number }) => {
-        addConnectable({ id, type: 'Block' })
-      },
-      [addConnectable]
-    )
+    // const handleAddBlock = useCallback(
+    //   ({ id }: { id: number }) => {
+    //     addConnectable({ id, type: 'Block' })
+    //   },
+    //   [addConnectable]
+    // )
+    const handleAddBlock = () => {}
 
-    const handleRemoveBlock = useCallback(
-      ({ id, type }: { id: number; type: string }) => {
-        setConnectables(prevConnectables => {
-          return prevConnectables.filter(
-            connectable => connectable.id !== id && connectable.type !== type
-          )
-        })
-      },
-      []
-    )
+    // const handleRemoveBlock = useCallback(
+    //   ({ id, type }: { id: number; type: string }) => {
+    //     setConnectables(prevConnectables => {
+    //       return prevConnectables.filter(
+    //         connectable => connectable.id !== id && connectable.type !== type
+    //       )
+    //     })
+    //   },
+    //   []
+    // )
+    const handleRemoveBlock = () => {}
 
-    const handleSortEnd = useCallback(
-      ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-        const connectable = connectables[oldIndex]
+    // const handleSortEnd = useCallback(
+    //   ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+    //     const connectable = connectables[oldIndex]
 
-        let startIndex = oldIndex
-        let endIndex = newIndex
+    //     let startIndex = oldIndex
+    //     let endIndex = newIndex
 
-        if (newIndex === -1) {
-          // Moving to the "bottom"
-          startIndex = oldIndex
-          endIndex = connectables.length - 1
-        }
+    //     if (newIndex === -1) {
+    //       // Moving to the "bottom"
+    //       startIndex = oldIndex
+    //       endIndex = connectables.length - 1
+    //     }
 
-        const sorted = reorder({
-          list: connectables,
-          startIndex,
-          endIndex,
-        })
+    //     const sorted = reorder({
+    //       list: connectables,
+    //       startIndex,
+    //       endIndex,
+    //     })
 
-        setConnectables(sorted)
+    //     setConnectables(sorted)
 
-        const insertAt = connectables.length - endIndex
+    //     const insertAt = connectables.length - endIndex
 
-        moveConnectable({
-          variables: {
-            channel_id: channel.id,
-            connectable: {
-              id: connectable.id,
-              type: connectable.type.toUpperCase(),
-            },
-            insert_at: insertAt,
-          },
-        })
-      },
-      [channel.id, connectables, moveConnectable]
-    )
+    //     moveConnectable({
+    //       variables: {
+    //         channel_id: channel.id,
+    //         connectable: {
+    //           id: connectable.id,
+    //           type: connectable.type.toUpperCase(),
+    //         },
+    //         insert_at: insertAt,
+    //       },
+    //     })
+    //   },
+    //   [channel.id, connectables, moveConnectable]
+    // )
+    const handleSortEnd = () => {}
 
-    const handleOnEnter = useCallback(
-      (pageSkeleton: ChannelContents_skeleton[]) => (): void => {
-        const queryKey = ActiveQueriesCollection.key(pageSkeleton)
+    // const handleOnEnter = useCallback(
+    //   (pageSkeleton: ChannelContents_skeleton[]) => (): void => {
+    //     const queryKey = ActiveQueriesCollection.key(pageSkeleton)
 
-        if (activeQueries[queryKey]) {
-          // Already loading
-          return
-        }
+    //     if (activeQueries[queryKey]) {
+    //       // Already loading
+    //       return
+    //     }
 
-        setActiveQueries(prevActiveQuerys => ({
-          ...prevActiveQuerys,
-          [queryKey]: true,
-        }))
+    //     setActiveQueries(prevActiveQuerys => ({
+    //       ...prevActiveQuerys,
+    //       [queryKey]: true,
+    //     }))
 
-        loadSkeleton({
-          client,
-          channelId: channel.id,
-          pageSkeleton,
-          collection,
-        }).then(contents => {
-          if (!contents) return
-          setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-        })
-      },
-      [activeQueries, client, collection, channel.id]
-    )
+    //     loadSkeleton({
+    //       client,
+    //       channelId: channel.id,
+    //       pageSkeleton,
+    //       collection,
+    //     }).then(contents => {
+    //       if (!contents) return
+    //       setCollection(prevCollection => ({ ...prevCollection, ...contents }))
+    //     })
+    //   },
+    //   [activeQueries, client, collection, channel.id]
+    // )
+    const handleOnEnter = (_args: any) => () => {}
 
     // For the lightbox, we need to filter out channels
-    const lightboxConnectables = connectables.filter(c => c.type === 'Block')
+    // const lightboxConnectables = connectables.filter(c => c.type === 'Block')
+    const lightboxConnectables = []
 
     return (
       <>
