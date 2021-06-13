@@ -15,6 +15,11 @@ export interface ChannelContents_can {
   remove_connections: boolean | null;
 }
 
+export interface ChannelContents_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+}
+
 export interface ChannelContents_blokks_Text_user {
   __typename: "User";
   id: number | null;
@@ -458,6 +463,7 @@ export interface ChannelContents {
   __typename: "Channel";
   id: number | null;
   can: ChannelContents_can | null;
+  counts: ChannelContents_counts | null;
   blokks: (ChannelContents_blokks | null)[] | null;
   visibility: string | null;
 }

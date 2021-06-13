@@ -29,6 +29,7 @@ export interface SharedChannelPage_channel_counts {
   __typename: "ChannelCounts";
   collaborators: number | null;
   followers: number | null;
+  contents: number | null;
 }
 
 export interface SharedChannelPage_channel_can {

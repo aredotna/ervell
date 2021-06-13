@@ -12,6 +12,9 @@ export default gql`
       add_to
       reorder_connections: update
     }
+    counts {
+      contents
+    }
     blokks(page: 1, per: 10, sort_by: POSITION, direction: DESC) {
       __typename
       ...ChannelContentsConnectable

@@ -2,12 +2,15 @@ import { gql } from '@apollo/client'
 
 import { channelContentsConnectableFragment } from 'v2/components/ChannelContents/fragments/channelContentsConnectable'
 
+export const channelBlokksPaginatedPerPage = 10
+
 export default gql`
-  query ChannelContentsSet($id: ID!, $connectables: [ConnectableInput]!) {
+  query ChannelBlokksPaginated($id: ID!, $page: Int!, $per: Int!) {
     channel(id: $id) {
       __typename
       id
-      contents(connectables: $connectables) {
+      blokks(page: $page, per: $per, sort_by: POSITION, direction: DESC) {
+        __typename
         ...ChannelContentsConnectable
       }
     }

@@ -1,13 +1,7 @@
-import React, { memo, useState, useMemo, useCallback, useEffect } from 'react'
-import { ApolloClient } from '@apollo/client'
+import React, { memo, useEffect } from 'react'
+import { ApolloClient, useApolloClient } from '@apollo/client'
 import { graphql, withApollo } from '@apollo/client/react/hoc'
 import { SortableContainer } from 'react-sortable-hoc'
-
-import { chunk } from 'v2/util/chunk'
-import { reorder } from 'v2/components/ChannelContents/lib/reorder'
-// import { loadSkeleton } from 'v2/components/ChannelContents/lib/loadSkeleton'
-import * as ConnectableCellsCollection from 'v2/components/ChannelContents/lib/ConnectableCells'
-import * as ActiveQueriesCollection from 'v2/components/ChannelContents/lib/ActiveQueries'
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
@@ -20,6 +14,7 @@ import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
+import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
 
 // import { usePusher } from 'v2/hooks/usePusher'
 
@@ -28,7 +23,6 @@ const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
 ))
 
 interface Props {
-  chunkSize?: number
   channel: ChannelContentsData
   pusherChannel?: any
   socket?: any
@@ -40,27 +34,31 @@ interface ChannelContentsProps extends Props {
 }
 
 const ChannelContents: React.FC<ChannelContentsProps> = memo(
-  ({
-    chunkSize = 10,
-    channel,
-    client,
-    moveConnectable,
-    pusherChannel,
-    socket,
-    ...rest
-  }) => {
+  ({ channel, client, moveConnectable, pusherChannel, socket, ...rest }) => {
+    const { blocks, getPage, hasQueriedPage } = usePaginatedBlocks({
+      channelId: channel.id,
+      initialData: channel.blokks,
+      initialBlockCount: channel.counts.contents,
+    })
+
+    useEffect(() => {
+      getPage(1)
+    }, [getPage])
+
+    console.log(blocks)
+
     // Used to load/unload waypoints
-    const [activeQueries, setActiveQueries] = useState<
-      ActiveQueriesCollection.ActiveQueries
-    >({})
+    // const [activeQueries, setActiveQueries] = useState<
+    //   ActiveQueriesCollection.ActiveQueries
+    // >({})
 
     // Handles ordering of block grid items
     // const [connectables, setConnectables] = useState(channel.skeleton)
 
     // Handles actual contents of block grid items
-    const [collection, setCollection] = useState(
-      ConnectableCellsCollection.normalize(channel.blokks)
-    )
+    // const [collection, setCollection] = useState(
+    //   ConnectableCellsCollection.normalize(channel.blokks)
+    // )
 
     // const addConnectable = useCallback(newConnectable => {
     //   setConnectables(prevConnectables => {
@@ -131,12 +129,6 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       }
     }, [pusherChannel, socket])
 
-    // const chunked = useMemo(() => chunk(connectables, chunkSize), [
-    //   connectables,
-    //   chunkSize,
-    // ])
-    const chunked = []
-
     // const handleAddBlock = useCallback(
     //   ({ id }: { id: number }) => {
     //     addConnectable({ id, type: 'Block' })
@@ -195,36 +187,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     // )
     const handleSortEnd = () => {}
 
-    // const handleOnEnter = useCallback(
-    //   (pageSkeleton: ChannelContents_skeleton[]) => (): void => {
-    //     const queryKey = ActiveQueriesCollection.key(pageSkeleton)
-
-    //     if (activeQueries[queryKey]) {
-    //       // Already loading
-    //       return
-    //     }
-
-    //     setActiveQueries(prevActiveQuerys => ({
-    //       ...prevActiveQuerys,
-    //       [queryKey]: true,
-    //     }))
-
-    //     loadSkeleton({
-    //       client,
-    //       channelId: channel.id,
-    //       pageSkeleton,
-    //       collection,
-    //     }).then(contents => {
-    //       if (!contents) return
-    //       setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-    //     })
-    //   },
-    //   [activeQueries, client, collection, channel.id]
-    // )
-    const handleOnEnter = (_args: any) => () => {}
-
     // For the lightbox, we need to filter out channels
-    // const lightboxConnectables = connectables.filter(c => c.type === 'Block')
     const lightboxConnectables = []
 
     return (
@@ -251,7 +214,22 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
             </GridItem>
           )}
 
-          {chunked.map((pageSkeleton, pageIndex: number) => {
+          {/* DEV */}
+          {blocks.map((block, i) => {
+            return (
+              <ChannelContentsItem
+                key={block?.id ?? `nullState${i}`}
+                index={i}
+                channel={channel}
+                connectable={block}
+                context={lightboxConnectables}
+                onRemove={handleRemoveBlock}
+                onChangePosition={handleSortEnd}
+              />
+            )
+          })}
+
+          {/* {chunked.map((pageSkeleton, pageIndex: number) => {
             const pageKey = ActiveQueriesCollection.key(pageSkeleton)
 
             return (
@@ -276,7 +254,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
                 })}
               </React.Fragment>
             )
-          })}
+          })} */}
         </SortableGrid>
       </>
     )

@@ -1,9 +1,4 @@
-import {
-  InMemoryCache,
-  InMemoryCacheConfig,
-  TypePolicy,
-  FieldPolicy,
-} from '@apollo/client'
+import { InMemoryCache, InMemoryCacheConfig, TypePolicy } from '@apollo/client'
 import Cookies from 'cookies-js'
 import possibleTypes from 'v2/apollo/possibleTypes.json'
 
@@ -32,71 +27,6 @@ const nonNormalizedMergeableObject: TypePolicy = {
       ...existing,
       ...incoming,
     }
-  },
-}
-
-const paginationPolicy: FieldPolicy = {
-  keyArgs: false,
-  merge(existing, incoming, { args }) {
-    /*
-     * Ensure args and data is properly set up
-     */
-
-    if (!args) {
-      throw new Error('args not given')
-    }
-
-    if (!Array.isArray(incoming)) {
-      throw new Error("incoming isn't an array")
-    }
-
-    if (typeof args?.page !== 'number') {
-      throw new Error("page isn't a number")
-    }
-
-    if (args.page === 0) {
-      throw new Error('page is 0')
-    }
-
-    if (typeof args?.per !== 'number') {
-      throw new Error("per isn't a number")
-    }
-
-    // New array to be returned
-    const newData = []
-
-    // Length of the new array
-    const newDataLength = Math.max(
-      Array.isArray(existing) ? existing.length : 0,
-      args.page * args.per
-    )
-
-    // Index that the incoming data starts at in the newData array
-    const incomingStartingIndex = (args.page - 1) * args.per
-
-    for (let i = 0; i < newDataLength; i++) {
-      const isInIncomingWindow =
-        i >= incomingStartingIndex && i < args.page * args.per
-
-      if (isInIncomingWindow) {
-        const incomingItem = incoming[i - incomingStartingIndex]
-
-        // For some reason, are.na sometimes doesn't return the amount of items
-        // from the per argument. Set to null instead of undefined so that
-        // the undefined item doesn't get squashed.
-        if (incomingItem === undefined) {
-          newData[i] = null
-        } else {
-          newData[i] = incomingItem
-        }
-      } else if (Array.isArray(existing) && i < existing.length) {
-        newData[i] = existing[i]
-      } else {
-        newData[i] = null
-      }
-    }
-
-    return newData
   },
 }
 
@@ -145,24 +75,21 @@ export function getCache({
       Searches: nonNormalizedMergeableObject,
       UserCan: nonNormalizedMergeableObject,
       UserCounts: nonNormalizedMergeableObject,
-
-      /*
-       * Custom type policies
-       */
-
-      Channel: {
-        fields: {
-          blokks: paginationPolicy,
-        },
-      },
     },
   }
 
   if (cookies) {
+    if (!cacheConfig.typePolicies) {
+      cacheConfig.typePolicies = {}
+    }
     cacheConfig.typePolicies.ClientCookies = {
       keyFields: [],
       fields: {
         get(_existing, { args }) {
+          if (args === null) {
+            return null
+          }
+
           return isClientSide
             ? Cookies.get(args.name)
             : cookies[args.name] || null
@@ -172,11 +99,14 @@ export function getCache({
   }
 
   if (sharifyData) {
+    if (!cacheConfig.typePolicies) {
+      cacheConfig.typePolicies = {}
+    }
     cacheConfig.typePolicies.ClientSharify = {
       keyFields: [],
       fields: {
         get(_existing, { args }) {
-          const value = sharifyData[args.name]
+          const value = sharifyData[args?.name]
           return value ? value : null
         },
       },
