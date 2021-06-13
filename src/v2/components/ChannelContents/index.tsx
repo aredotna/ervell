@@ -1,5 +1,4 @@
 import React, { memo, useState, useMemo, useCallback, useEffect } from 'react'
-import Waypoint from 'react-waypoint'
 import { ApolloClient } from '@apollo/client'
 import { graphql, withApollo } from '@apollo/client/react/hoc'
 import { SortableContainer } from 'react-sortable-hoc'
@@ -60,7 +59,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
 
     // Handles actual contents of block grid items
     const [collection, setCollection] = useState(
-      ConnectableCellsCollection.normalize(channel.initial_contents)
+      ConnectableCellsCollection.normalize(channel.blokks)
     )
 
     // const addConnectable = useCallback(newConnectable => {
@@ -257,15 +256,6 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
 
             return (
               <React.Fragment key={pageKey}>
-                {!activeQueries[pageKey] && (
-                  <Waypoint
-                    onEnter={handleOnEnter(pageSkeleton)}
-                    fireOnRapidScroll={false}
-                    topOffset="-100%"
-                    bottomOffset="-100%"
-                  />
-                )}
-
                 {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
                   const connectableKey = ConnectableCellsCollection.key(
                     connectableSkeleton
@@ -284,15 +274,6 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
                     />
                   )
                 })}
-
-                {!activeQueries[pageKey] && (
-                  <Waypoint
-                    onEnter={handleOnEnter(pageSkeleton)}
-                    fireOnRapidScroll={false}
-                    topOffset="-100%"
-                    bottomOffset="-100%"
-                  />
-                )}
               </React.Fragment>
             )
           })}
