@@ -10,7 +10,7 @@ import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import { ConnectableContextMenu } from 'v2/components/ConnectableContextMenu'
 import { DragHandle } from 'v2/components/UI/DragHandle'
 
-const SortableGridItem = SortableElement(GridItem)
+const SortableGridItem = SortableElement(GridItem, { withRef: true })
 
 interface Props {
   channel: any
@@ -48,6 +48,11 @@ export const ChannelContentsItem: React.FC<Props> = memo(
     if (connectable) {
       return (
         <SortableGridItem
+          ref={r => {
+            console.log(r)
+            console.log(r && r.getWrappedInstance())
+            console.log('')
+          }}
           disabled={!channel.can.reorder_connections}
           index={index}
           onMouseEnter={startHover}

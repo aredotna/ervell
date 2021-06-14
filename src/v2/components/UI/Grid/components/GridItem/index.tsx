@@ -41,7 +41,6 @@ const GridItem: React.FC<Props> = ({
   onDrag = () => {},
   onMouseEnter = () => {},
   onMouseLeave = () => {},
-  ...rest
 }) => (
   <Container
     gutterSpacing={gutterSpacing}
@@ -50,7 +49,6 @@ const GridItem: React.FC<Props> = ({
     onMouseLeave={onMouseLeave}
     width={width}
     height={!variableHeight ? height : undefined}
-    {...rest}
   >
     {children}
   </Container>
