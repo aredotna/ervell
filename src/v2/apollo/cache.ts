@@ -79,7 +79,7 @@ export function getCache({
       fields: {
         get(_existing, { args }) {
           return isClientSide
-            ? Cookies.get(args.name)
+            ? Cookies.get(args.name) || null
             : cookies[args.name] || null
         },
       },
