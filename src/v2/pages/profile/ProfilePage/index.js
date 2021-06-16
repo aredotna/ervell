@@ -17,6 +17,7 @@ import ProfileViews from 'v2/pages/profile/ProfilePage/components/ProfileViews'
 import ProfileMetaTags from 'v2/pages/profile/ProfilePage/components/ProfileMetaTags'
 import profilePageQuery from 'v2/pages/profile/ProfilePage/queries/profilePage'
 import profileUiStateQuery from 'v2/pages/profile/ProfilePage/queries/profileUiState'
+import { useQuery } from '@apollo/client'
 
 class ProfilePage extends Component {
   static propTypes = {
@@ -152,50 +153,41 @@ const isClientSide = typeof window !== 'undefined'
 
 // Weird container extracted from router
 export default ({ params, query }) => {
+  const { data, error } = useQuery(profileUiStateQuery, {
+    fetchPolicy: isClientSide ? 'cache-only' : 'network-only',
+  })
+
+  if (error) return error.message
+
+  const cookies = (data && data.cookies) || {
+    view: 'channels',
+    sort: 'UPDATED_AT',
+  }
+
+  const view = params.view || cookies.view || 'channels'
+  const sort = setValid(query.sort || cookies.sort, VALID_SORTS, 'UPDATED_AT')
+  const indexFilter = setValid(
+    query.filter || cookies.filter,
+    VALID_INDEX_FILTERS,
+    'OWN'
+  )
+
+  const blockFilter = setValid(
+    query.type || cookies.type,
+    VALID_BLOCK_FILTERS,
+    'BLOCK'
+  )
+
+  const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
+
   return (
-    <Query
-      query={profileUiStateQuery}
-      fetchPolicy={isClientSide ? 'no-cache' : 'network-only'}
-    >
-      {props => {
-        if (props.error) return props.error.message
-
-        const cookies = (props.data && props.data.cookies) || {
-          view: 'channels',
-          sort: 'UPDATED_AT',
-        }
-
-        const view = params.view || cookies.view || 'channels'
-        const sort = setValid(
-          query.sort || cookies.sort,
-          VALID_SORTS,
-          'UPDATED_AT'
-        )
-        const indexFilter = setValid(
-          query.filter || cookies.filter,
-          VALID_INDEX_FILTERS,
-          'OWN'
-        )
-
-        const blockFilter = setValid(
-          query.type || cookies.type,
-          VALID_BLOCK_FILTERS,
-          'BLOCK'
-        )
-
-        const followType = setValid(query.followType, VALID_FOLLOW_TYPES, 'ALL')
-
-        return (
-          <ProfilePage
-            id={params.id}
-            view={view}
-            sort={sort}
-            filter={indexFilter}
-            type={blockFilter}
-            followType={followType}
-          />
-        )
-      }}
-    </Query>
+    <ProfilePage
+      id={params.id}
+      view={view}
+      sort={sort}
+      filter={indexFilter}
+      type={blockFilter}
+      followType={followType}
+    />
   )
 }
