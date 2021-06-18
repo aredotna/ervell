@@ -11,6 +11,8 @@ const logger = debug('error')
 export default (err, req, res, _next) => {
   logger(err.stack)
 
+  console.log('In error APP', { err })
+
   const status = err.status || 500
   const isVisible = NODE_ENV === 'development'
 
