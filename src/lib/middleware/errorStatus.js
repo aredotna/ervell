@@ -23,6 +23,8 @@ export default (err, req, res, next) => {
     return res.status(403).end()
   }
 
+  console.log('🚨 Encountered a GRAPHQL error')
+
   if (err.graphQLErrors && err.graphQLErrors.length > 0) {
     const firstErr = err.graphQLErrors[0]
     const statusCode = firstErr.extensions && firstErr.extensions.code
