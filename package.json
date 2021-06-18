@@ -187,7 +187,7 @@
     "sharify": "*",
     "spider-detector": "^1.0.19",
     "sqreen": "^1.30.3",
-    "striptags": "^2.2.1",
+    "striptags": "^3.2.0",
     "styled-components": "5.0.0",
     "styled-system": "2.3.2",
     "stylus": "^0.54.5",
