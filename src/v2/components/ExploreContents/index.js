@@ -46,10 +46,7 @@ export default class ExploreContents extends PureComponent {
     const { page, per } = this.state
 
     fetchMore({
-      variables: { page: page + 1, per },
-      updateQuery: (prevResult, { fetchMoreResult }) => ({
-        contents: [...prevResult.contents, ...fetchMoreResult.contents],
-      }),
+      variables: { page: page + 1 },
     }).then(({ errors, data }) => {
       const {
         contents: { length },
@@ -77,6 +74,7 @@ export default class ExploreContents extends PureComponent {
           q,
           seed,
           block_filter,
+          page: 1,
         }}
         fetchPolicy={fetchPolicy}
         ssr={false}

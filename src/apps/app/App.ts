@@ -18,9 +18,7 @@ const resolve = [
   (req, res, next) => {
     req.apollo
       .render(withStaticRouter(Routes), null, { mode: 'page' })
-      .then(apolloRes => {
-        pageResolver({ bundleName: 'app', apolloRes, res })
-      })
+      .then(apolloRes => pageResolver({ bundleName: 'app', apolloRes, res }))
       .catch(err => {
         const STATUS_CODE = getFirstStatusCode(err)
 

@@ -116,6 +116,13 @@ export const initApolloClient = ({
             },
           })
       }
+
+      // if (graphQLErrors || networkError) {
+      //   throw new ApolloError({
+      //     graphQLErrors,
+      //     networkError,
+      //   })
+      // }
     }
   )
 
