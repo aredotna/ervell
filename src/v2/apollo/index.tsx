@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
-import { ApolloError, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 import url from 'url'
 
 import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
@@ -117,12 +117,12 @@ export const initApolloClient = ({
           })
       }
 
-      if (graphQLErrors || networkError) {
-        throw new ApolloError({
-          graphQLErrors,
-          networkError,
-        })
-      }
+      // if (graphQLErrors || networkError) {
+      //   throw new ApolloError({
+      //     graphQLErrors,
+      //     networkError,
+      //   })
+      // }
     }
   )
 
