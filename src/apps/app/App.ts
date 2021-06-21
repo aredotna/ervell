@@ -16,15 +16,10 @@ const middlewareStack = [apolloMiddleware]
 const resolve = [
   ...middlewareStack,
   (req, res, next) => {
-    console.log('HERE!!!!')
     req.apollo
       .render(withStaticRouter(Routes), null, { mode: 'page' })
-      .then(apolloRes => {
-        console.log('❤️ apolloRes')
-        pageResolver({ bundleName: 'app', apolloRes, res })
-      })
+      .then(apolloRes => pageResolver({ bundleName: 'app', apolloRes, res }))
       .catch(err => {
-        console.log('catching error here', { err })
         const STATUS_CODE = getFirstStatusCode(err)
 
         if (STATUS_CODE === 'UNAUTHORIZED' && req.url === '/') {

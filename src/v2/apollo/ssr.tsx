@@ -31,8 +31,6 @@ export const renderPageComponent = ({ client, Component, props = {} }) => {
     props
   )
 
-  console.log('rendering component')
-
   return renderToStringWithData(sheet.collectStyles(WrappedComponent)).then(
     html => ({
       client,
