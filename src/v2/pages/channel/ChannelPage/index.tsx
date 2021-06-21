@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
-import { Query } from '@apollo/client/react/components'
 import styled from 'styled-components'
 
-import { ChannelPage as ChannelPageData } from '__generated__/ChannelPage'
+import {
+  ChannelPage as ChannelPageData,
+  ChannelPageVariables,
+} from '__generated__/ChannelPage'
 
 import channelPageQuery from 'v2/pages/channel/ChannelPage/queries/channelPage'
 
@@ -23,6 +25,7 @@ import { LoadingPage } from 'v2/components/LoadingPage'
 import Modal from 'v2/components/UI/Modal'
 import ModalDialog from 'v2/components/UI/ModalDialog'
 import IntroduceChannel from 'v2/components/Onboarding/components/Channels/components/IntroduceChannel'
+import { useQuery } from '@apollo/client'
 
 const Dialog = styled(ModalDialog).attrs({
   width: 'auto',
@@ -40,7 +43,53 @@ interface Variables {
   id: string
 }
 
-const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
+const isClientSide = typeof window !== 'undefined'
+
+const ChannelPage: React.FC<Variables> = ({ id }) => {
+  const { data, loading, error } = useQuery<
+    ChannelPageData,
+    ChannelPageVariables
+  >(channelPageQuery, { variables: { id } })
+
+  if (error && !isClientSide) throw error
+
+  if (loading) {
+    return <LoadingPage />
+  }
+
+  if (error) {
+    return <ErrorAlert isReloadable>{error.message}</ErrorAlert>
+  }
+
+  const { channel } = data
+
+  return (
+    <>
+      <ChannelPageMetaTags channel={channel} />
+
+      <ChannelMetadata channel={channel} />
+
+      <ChannelContentsFilter channel={channel} />
+
+      {channel.counts.contents === 0 &&
+      !channel.can.add_to &&
+      !channel.can.add_to_as_premium ? (
+        <ChannelEmptyMessage my={8} channelOwner={channel.owner} />
+      ) : (
+        <ChannelContentsWithData channel={channel} />
+      )}
+
+      <MobileOrChildren route="channel" id={channel.id}>
+        <BottomBanner banner="LOGGED_OUT_CHANNEL" name={channel.title} />
+      </MobileOrChildren>
+    </>
+  )
+}
+
+const ChannelPageWrapper: React.FC<ChannelPageProps> = ({
+  id,
+  fromOnboarding,
+}) => {
   useEffect(() => {
     if (fromOnboarding) {
       const modal = new Modal(IntroduceChannel, {}, { Dialog })
@@ -51,50 +100,10 @@ const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
   return (
     <TopBarLayout>
       <Constrain>
-        <Query<ChannelPageData, Variables>
-          query={channelPageQuery}
-          variables={{ id }}
-        >
-          {({ data, loading, error }) => {
-            if (loading) {
-              return <LoadingPage />
-            }
-
-            if (error) {
-              return <ErrorAlert isReloadable>{error.message}</ErrorAlert>
-            }
-
-            const { channel } = data
-
-            return (
-              <>
-                <ChannelPageMetaTags channel={channel} />
-
-                <ChannelMetadata channel={channel} />
-
-                <ChannelContentsFilter channel={channel} />
-
-                {channel.counts.contents === 0 &&
-                !channel.can.add_to &&
-                !channel.can.add_to_as_premium ? (
-                  <ChannelEmptyMessage my={8} channelOwner={channel.owner} />
-                ) : (
-                  <ChannelContentsWithData channel={channel} />
-                )}
-
-                <MobileOrChildren route="channel" id={channel.id}>
-                  <BottomBanner
-                    banner="LOGGED_OUT_CHANNEL"
-                    name={channel.title}
-                  />
-                </MobileOrChildren>
-              </>
-            )
-          }}
-        </Query>
+        <ChannelPage id={id} />
       </Constrain>
     </TopBarLayout>
   )
 }
 
-export default ChannelPage
+export default ChannelPageWrapper
