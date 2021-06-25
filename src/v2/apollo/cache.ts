@@ -103,15 +103,7 @@ const paginationWithPageAndPer: FieldMergeFunction<any, any> = (
 
     if (isInIncomingWindow) {
       const incomingItem = incoming[i - incomingStartingIndex]
-
-      // are.na sometimes doesn't return the amount of items
-      // from the per argument. Set to null instead of undefined so that
-      // the undefined item doesn't get squashed.
-      if (incomingItem === undefined) {
-        newData[i] = null
-      } else {
-        newData[i] = incomingItem
-      }
+      newData[i] = incomingItem
     } else if (Array.isArray(existing) && i < existing.length) {
       newData[i] = existing[i]
     } else {
