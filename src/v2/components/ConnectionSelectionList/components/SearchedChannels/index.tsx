@@ -52,6 +52,7 @@ export const SearchedChannelsResults: React.FC<SearchedChannelsProps &
 
   useEffect(() => {
     if (data) {
+      // the null here is stading in for the "create private channel" button
       setChannels([null, ...data.me.searched_channels])
     }
   }, [data, setChannels])
