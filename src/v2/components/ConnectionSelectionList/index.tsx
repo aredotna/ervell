@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { debounce, isEmpty } from 'underscore'
 
@@ -97,6 +97,7 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
 
   const [includeOpenChannels, setIncludeOpenChannels] = useState<boolean>(false)
 
+  const inputRef = useRef(null)
   const debounceQuery = debounce(debouncedQuery => {
     setDebouncedQuery(debouncedQuery)
   }, 200)
@@ -110,9 +111,8 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
   return (
     <Container mode={mode} isOutlined={isOutlined}>
       <SearchContainer>
-        <SearchInput onChange={handleChange} />
+        <SearchInput onChange={handleChange} ref={inputRef} />
       </SearchContainer>
-
       {mode === 'resting' && (
         <>
           <Text f={1} py={4} px={5} textAlign="center" color="gray.medium">
@@ -122,6 +122,7 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
             isOutlined={isOutlined}
             onConnectionSelection={onConnectionSelection}
             selectedChannels={selectedChannels}
+            searchRef={inputRef}
           />
         </>
       )}
@@ -146,6 +147,8 @@ export const ConnectionSelectionList: React.FC<ConnectionSelectionListProps> = (
             query={debouncedQuery}
             onConnectionSelection={onConnectionSelection}
             includeOpenChannels={includeOpenChannels}
+            selectedChannels={selectedChannels}
+            searchRef={inputRef}
           />
         </>
       )}

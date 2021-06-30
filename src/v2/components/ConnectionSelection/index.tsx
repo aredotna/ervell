@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { PureQueryOptions } from '@apollo/client'
 import styled from 'styled-components'
@@ -50,33 +50,51 @@ export const ConnectionSelection: React.FC<ConnectionSelectionProps> = ({
     RemoveConnectionVariables
   >(removeConnectionMutation)
 
-  const handleConnectionSelection = (isSelected: boolean, channel: Channel) => {
-    const refetchRecentConnections = {
-      query: recentConnectionsQuery,
-    }
+  const [selectedChannels, setSelectedChannels] = useState<Channel[]>([])
 
-    const _refetchQueries = [...refetchQueries, refetchRecentConnections]
+  const handleConnectionSelection = useCallback(
+    (isSelected: boolean, channel: Channel) => {
+      const refetchRecentConnections = {
+        query: recentConnectionsQuery,
+      }
 
-    if (isSelected) {
-      return createConnection({
-        refetchQueries: _refetchQueries,
+      const _refetchQueries = [...refetchQueries, refetchRecentConnections]
+
+      if (isSelected) {
+        setSelectedChannels([...selectedChannels, channel])
+        return createConnection({
+          refetchQueries: _refetchQueries,
+          variables: {
+            connectable_id: id.toString(),
+            connectable_type: type,
+            channel_ids: [channel.id.toString()],
+          },
+        })
+      }
+
+      const newSelected = selectedChannels.filter(c => {
+        c.id === channel.id
+      })
+      setSelectedChannels(newSelected)
+
+      return removeConnection({
+        refetchQueries: [...refetchQueries],
         variables: {
+          channel_id: channel.id.toString(),
           connectable_id: id.toString(),
           connectable_type: type,
-          channel_ids: [channel.id.toString()],
         },
       })
-    }
-
-    return removeConnection({
-      refetchQueries: [...refetchQueries],
-      variables: {
-        channel_id: channel.id.toString(),
-        connectable_id: id.toString(),
-        connectable_type: type,
-      },
-    })
-  }
+    },
+    [
+      createConnection,
+      id,
+      refetchQueries,
+      removeConnection,
+      selectedChannels,
+      type,
+    ]
+  )
 
   return (
     <Container>
@@ -85,6 +103,7 @@ export const ConnectionSelection: React.FC<ConnectionSelectionProps> = ({
       <ConnectionSelectionList
         onConnectionSelection={handleConnectionSelection}
         isOutlined={isOutlined}
+        selectedChannels={selectedChannels}
         {...rest}
       />
     </Container>

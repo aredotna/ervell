@@ -22,7 +22,7 @@ export default styled.div.attrs({
   ${props =>
     props.highlighted &&
     `
-    background-color: ${props.theme.colors.state.highlighted};
+    background-color: ${props.theme.colors.state.highlight};
   `}
 
   ${x =>
