@@ -42,6 +42,7 @@ export const SearchedChannelsResults: React.FC<SearchedChannelsProps &
   onConnectionSelection,
   includeOpenChannels,
   setChannels,
+  selectedChannels,
   highlightedIndex,
 }) => {
   const { data, error, loading } = useQuery<
@@ -68,6 +69,7 @@ export const SearchedChannelsResults: React.FC<SearchedChannelsProps &
       channels={searched_channels}
       onConnectionSelection={onConnectionSelection}
       highlightedIndex={highlightedIndex}
+      selectedChannels={selectedChannels}
     />
   )
 }
@@ -110,9 +112,17 @@ export const SearchedChannels: React.FC<SearchedChannelsProps> = ({
       })
   }, [createPrivateChannel, onConnectionSelection, query])
 
-  const onEnter = useCallback(() => {
-    createAndConnect()
-  }, [createAndConnect])
+  const onEnter = useCallback(
+    ({ index, element }: { index: number; element: Channel }) => {
+      if (index === 0) {
+        return createAndConnect()
+      }
+
+      const isSelected = selectedChannels.find(c => c.id === element.id)
+      onConnectionSelection(!isSelected, element)
+    },
+    [createAndConnect, onConnectionSelection, selectedChannels]
+  )
 
   const { index } = useKeyboardListNavigation({
     ref: searchRef,
