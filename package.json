@@ -195,6 +195,7 @@
     "throng": "^4.0.0",
     "underscore": "*",
     "underscore.string": "*",
+    "use-keyboard-list-navigation": "^2.3.1",
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",

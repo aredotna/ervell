@@ -13,19 +13,21 @@ interface ChannelsListProps {
   channels: Channel[]
   onConnectionSelection?: OnConnectionSelectionType
   selectedChannels?: Channel[]
+  highlightedIndex?: number
 }
 
 export const ChannelsList: React.FC<ChannelsListProps> = ({
   channels,
   onConnectionSelection,
   selectedChannels = [],
+  highlightedIndex,
   ...rest
 }) => {
   return (
     <Container {...rest}>
       {channels.length === 0 && <ListButton disabled>Nothing yet.</ListButton>}
 
-      {channels.map(channel => {
+      {channels.map((channel, index) => {
         const isSelected = selectedChannels.find(c => c.id === channel.id)
 
         return (
@@ -34,6 +36,7 @@ export const ChannelsList: React.FC<ChannelsListProps> = ({
             key={channel.id}
             channel={channel}
             onSelection={onConnectionSelection}
+            isHighlighted={index === highlightedIndex}
           />
         )
       })}
