@@ -156,9 +156,6 @@ class CustomBadgeUploader extends PureComponent {
 
     const { custom_badge, badge } = this.props.me
 
-    // eslint-disable-next-line no-console
-    console.log('badge', badge)
-
     return (
       <ErrorBoundary>
         <Container>

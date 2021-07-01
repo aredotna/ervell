@@ -99,11 +99,8 @@ class ModalBlockLightboxNavigation extends PureComponent {
   next = e => {
     e.preventDefault()
 
-    const { onChange, id } = this.props
+    const { onChange } = this.props
     const nextId = this.__next__(this.cursor())
-
-    console.log('nextId', nextId)
-    console.log('currentId', id)
     return onChange(nextId)
   }
 
