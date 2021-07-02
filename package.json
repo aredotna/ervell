@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "assets": "sh scripts/assets.sh",
-    "build": "yarn webpack --config ./webpack/webpack.config.js",
-    "build:server": "BUILD_SERVER=true NODE_ENV=production yarn build",
+    "build:repo": "yarn webpack --config ./webpack/webpack.config.js",
+    "build:server": "BUILD_SERVER=true NODE_ENV=production yarn build:repo",
     "build:bookmarklet:dev": "NODE_ENV=development webpack --config src/apps/marklet/webpack.config.js --watch",
     "build:bookmarklet:prod": "NODE_ENV=production webpack --config src/apps/marklet/webpack.config.js",
     "build:safari-ext:dev": "NODE_ENV=production webpack --config src/extension/safari-extension/webpack.config.js --watch",
