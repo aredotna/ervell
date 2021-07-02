@@ -35,6 +35,7 @@
     "type-check": "yarn tsc",
     "upload-to-s3": "node scripts/uploadToS3.js"
   },
+  "heroku-run-build-script": false,
   "engines": {
     "node": "12.x.x",
     "yarn": "1.x.x"
