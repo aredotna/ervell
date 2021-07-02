@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import ColoredChannelSpan from 'v2/components/UI/ColoredChannelSpan'
@@ -12,6 +12,16 @@ import BorderedLock from 'v2/components/UI/BorderedLock'
 
 import { SelectableChannel as Channel } from '__generated__/SelectableChannel'
 import { OnConnectionSelectionType } from 'v2/components/ConnectionSelectionList'
+
+const Separator = styled.div`
+  display: inline-block;
+  width: 1px;
+  height: 0.75em;
+  margin: 0 ${props => props.theme.constantValues.doubleEmptySpaceWidth};
+  vertical-align: baseline;
+  transform: rotate(30deg);
+  background-color: ${props => props.theme.colors.gray.medium};
+`
 
 const Lock = styled(Box).attrs({
   pr: 3,
@@ -96,6 +106,21 @@ const Container = styled.div.attrs({
       opacity: 0.5;
     }
   }
+
+  &[data-highlighted="true"] {
+    &:before {
+      width: 3em;
+      background: transparent;
+    }
+
+    > div {
+      background: ${props => props.theme.colors.state.highlight};
+    }
+
+    &:after {
+      background: transparent;
+    }
+  }
 `
 
 const HoverableInner = styled(TickerTapeHover).attrs({
@@ -103,16 +128,6 @@ const HoverableInner = styled(TickerTapeHover).attrs({
   offsetBuffer: 32,
 })`
   padding: ${inputPadding}; // TODO
-`
-
-const Separator = styled.div`
-  display: inline-block;
-  width: 1px;
-  height: 0.75em;
-  margin: 0 ${props => props.theme.constantValues.doubleEmptySpaceWidth};
-  vertical-align: baseline;
-  transform: rotate(30deg);
-  background-color: ${props => props.theme.colors.gray.medium};
 `
 
 const GroupBadge = styled(Badge)`
@@ -123,19 +138,25 @@ interface SelectableChannelProps {
   onSelection?: OnConnectionSelectionType
   channel: Channel
   isSelected?: boolean
+  isHighlighted?: boolean
 }
 
 export const SelectableChannel: React.FC<SelectableChannelProps> = ({
   channel,
   onSelection,
   isSelected = false,
+  isHighlighted = false,
 }) => {
   const [selected, setSelected] = useState(isSelected)
 
-  const toggleSelection = () => {
+  useEffect(() => {
+    setSelected(isSelected)
+  }, [isSelected])
+
+  const toggleSelection = useCallback(() => {
     setSelected(!selected)
     onSelection(!selected, channel)
-  }
+  }, [channel, onSelection, selected])
 
   const {
     owner,
@@ -145,7 +166,11 @@ export const SelectableChannel: React.FC<SelectableChannelProps> = ({
   } = channel
 
   return (
-    <Container onClick={toggleSelection} data-selected={selected}>
+    <Container
+      onClick={toggleSelection}
+      data-selected={selected}
+      data-highlighted={isHighlighted}
+    >
       <HoverableInner>
         {name}
 

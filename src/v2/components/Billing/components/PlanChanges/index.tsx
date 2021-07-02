@@ -56,8 +56,6 @@ const PlanChanges: React.FC<PlanChangesProps> = ({
         ? data?.group.invoice
         : data?.me.customer.invoice
 
-    console.log({ data, total, invoice })
-
     if (invoice && invoice.total !== total) {
       setTotal(invoice.total)
       handleTotalChange(invoice.total)
