@@ -11,21 +11,21 @@ import { MutableTypeEnum } from "./globalTypes";
 
 export interface UnmuteMutation_unmute_mutable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 
 export interface UnmuteMutation_unmute_mutable_Connectable {
   __typename: "Connectable";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 
 export type UnmuteMutation_unmute_mutable = UnmuteMutation_unmute_mutable_Channel | UnmuteMutation_unmute_mutable_Connectable;
 
 export interface UnmuteMutation_unmute {
-  __typename: "UnmutePayload";
-  mutable: UnmuteMutation_unmute_mutable | null;
+  __typename: "UnmuteMutationPayload";
+  mutable: UnmuteMutation_unmute_mutable;
 }
 
 export interface UnmuteMutation {

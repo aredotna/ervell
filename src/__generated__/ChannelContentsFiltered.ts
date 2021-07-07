@@ -7,60 +7,111 @@
 // GraphQL query operation: ChannelContentsFiltered
 // ====================================================
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Text_user {
+export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Text_connection_user {
+export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Text_connection {
+export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: ChannelContentsFiltered_channel_filtered_contents_Text_connection_user | null;
+  user: ChannelContentsFiltered_channel_filtered_contents_Attachment_connection_user | null;
 }
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Text_source {
+export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Text_counts {
+export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Text {
-  __typename: "Text";
-  id: number | null;
+export interface ChannelContentsFiltered_channel_filtered_contents_Attachment {
+  __typename: "Attachment";
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsFiltered_channel_filtered_contents_Text_user | null;
+  title: string;
+  user: ChannelContentsFiltered_channel_filtered_contents_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: ChannelContentsFiltered_channel_filtered_contents_Text_connection | null;
-  source: ChannelContentsFiltered_channel_filtered_contents_Text_source | null;
-  counts: ChannelContentsFiltered_channel_filtered_contents_Text_counts | null;
-  content: string | null;
+  connection: ChannelContentsFiltered_channel_filtered_contents_Attachment_connection | null;
+  source: ChannelContentsFiltered_channel_filtered_contents_Attachment_source | null;
+  counts: ChannelContentsFiltered_channel_filtered_contents_Attachment_counts | null;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  file_extension: string | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Embed_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Embed_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Embed_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: ChannelContentsFiltered_channel_filtered_contents_Embed_connection_user | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Embed_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Embed_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Embed {
+  __typename: "Embed";
+  id: number;
+  href: string | null;
+  updated_at: string | null;
+  title: string;
+  user: ChannelContentsFiltered_channel_filtered_contents_Embed_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: ChannelContentsFiltered_channel_filtered_contents_Embed_connection | null;
+  source: ChannelContentsFiltered_channel_filtered_contents_Embed_source | null;
+  counts: ChannelContentsFiltered_channel_filtered_contents_Embed_counts | null;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Image_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Image_connection {
@@ -87,10 +138,10 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Image_origina
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Image {
   __typename: "Image";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsFiltered_channel_filtered_contents_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -107,14 +158,14 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Image {
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Link_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Link_connection {
@@ -135,10 +186,10 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Link_counts {
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsFiltered_channel_filtered_contents_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -153,111 +204,16 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Link {
   external_url: string | null;
 }
 
-export interface ChannelContentsFiltered_channel_filtered_contents_Embed_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Embed_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Embed_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: ChannelContentsFiltered_channel_filtered_contents_Embed_connection_user | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Embed_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Embed_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Embed {
-  __typename: "Embed";
-  id: number | null;
-  href: string | null;
-  updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsFiltered_channel_filtered_contents_Embed_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: ChannelContentsFiltered_channel_filtered_contents_Embed_connection | null;
-  source: ChannelContentsFiltered_channel_filtered_contents_Embed_source | null;
-  counts: ChannelContentsFiltered_channel_filtered_contents_Embed_counts | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: ChannelContentsFiltered_channel_filtered_contents_Attachment_connection_user | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Attachment_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface ChannelContentsFiltered_channel_filtered_contents_Attachment {
-  __typename: "Attachment";
-  id: number | null;
-  href: string | null;
-  updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsFiltered_channel_filtered_contents_Attachment_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: ChannelContentsFiltered_channel_filtered_contents_Attachment_connection | null;
-  source: ChannelContentsFiltered_channel_filtered_contents_Attachment_source | null;
-  counts: ChannelContentsFiltered_channel_filtered_contents_Attachment_counts | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  file_extension: string | null;
-}
-
 export interface ChannelContentsFiltered_channel_filtered_contents_PendingBlock_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_PendingBlock_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_PendingBlock_connection {
@@ -278,10 +234,10 @@ export interface ChannelContentsFiltered_channel_filtered_contents_PendingBlock_
 
 export interface ChannelContentsFiltered_channel_filtered_contents_PendingBlock {
   __typename: "PendingBlock";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsFiltered_channel_filtered_contents_PendingBlock_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -291,16 +247,60 @@ export interface ChannelContentsFiltered_channel_filtered_contents_PendingBlock 
   counts: ChannelContentsFiltered_channel_filtered_contents_PendingBlock_counts | null;
 }
 
+export interface ChannelContentsFiltered_channel_filtered_contents_Text_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Text_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Text_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: ChannelContentsFiltered_channel_filtered_contents_Text_connection_user | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Text_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Text_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface ChannelContentsFiltered_channel_filtered_contents_Text {
+  __typename: "Text";
+  id: number;
+  href: string | null;
+  updated_at: string | null;
+  title: string;
+  user: ChannelContentsFiltered_channel_filtered_contents_Text_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: ChannelContentsFiltered_channel_filtered_contents_Text_connection | null;
+  source: ChannelContentsFiltered_channel_filtered_contents_Text_source | null;
+  counts: ChannelContentsFiltered_channel_filtered_contents_Text_counts | null;
+  content: string;
+}
+
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel_connection {
@@ -321,44 +321,44 @@ export interface ChannelContentsFiltered_channel_filtered_contents_Channel_count
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type ChannelContentsFiltered_channel_filtered_contents_Channel_owner = ChannelContentsFiltered_channel_filtered_contents_Channel_owner_Group | ChannelContentsFiltered_channel_filtered_contents_Channel_owner_User;
 
 export interface ChannelContentsFiltered_channel_filtered_contents_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsFiltered_channel_filtered_contents_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelContentsFiltered_channel_filtered_contents_Channel_connection | null;
   source: ChannelContentsFiltered_channel_filtered_contents_Channel_source | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
+  truncatedTitle: string;
+  visibility: string;
   counts: ChannelContentsFiltered_channel_filtered_contents_Channel_counts | null;
-  owner: ChannelContentsFiltered_channel_filtered_contents_Channel_owner | null;
-  label: string | null;
+  owner: ChannelContentsFiltered_channel_filtered_contents_Channel_owner;
+  label: string;
 }
 
-export type ChannelContentsFiltered_channel_filtered_contents = ChannelContentsFiltered_channel_filtered_contents_Text | ChannelContentsFiltered_channel_filtered_contents_Image | ChannelContentsFiltered_channel_filtered_contents_Link | ChannelContentsFiltered_channel_filtered_contents_Embed | ChannelContentsFiltered_channel_filtered_contents_Attachment | ChannelContentsFiltered_channel_filtered_contents_PendingBlock | ChannelContentsFiltered_channel_filtered_contents_Channel;
+export type ChannelContentsFiltered_channel_filtered_contents = ChannelContentsFiltered_channel_filtered_contents_Attachment | ChannelContentsFiltered_channel_filtered_contents_Embed | ChannelContentsFiltered_channel_filtered_contents_Image | ChannelContentsFiltered_channel_filtered_contents_Link | ChannelContentsFiltered_channel_filtered_contents_PendingBlock | ChannelContentsFiltered_channel_filtered_contents_Text | ChannelContentsFiltered_channel_filtered_contents_Channel;
 
 export interface ChannelContentsFiltered_channel {
   __typename: "Channel";
-  id: number | null;
-  filtered_contents: (ChannelContentsFiltered_channel_filtered_contents | null)[] | null;
+  id: number;
+  filtered_contents: ChannelContentsFiltered_channel_filtered_contents[] | null;
 }
 
 export interface ChannelContentsFiltered {

@@ -14,14 +14,14 @@ export interface CancelPremiumUserSelection_user_can {
 
 export interface CancelPremiumUserSelection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: CancelPremiumUserSelection_user_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -32,21 +32,21 @@ export interface CancelPremiumUserSelection_users_can {
 
 export interface CancelPremiumUserSelection_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: CancelPremiumUserSelection_users_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface CancelPremiumUserSelection {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  user: CancelPremiumUserSelection_user | null;
-  users: (CancelPremiumUserSelection_users | null)[] | null;
+  id: number;
+  name: string;
+  user: CancelPremiumUserSelection_user;
+  users: CancelPremiumUserSelection_users[] | null;
 }

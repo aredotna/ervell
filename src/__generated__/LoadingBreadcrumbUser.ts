@@ -9,6 +9,6 @@
 
 export interface LoadingBreadcrumbUser {
   __typename: "User";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
 }

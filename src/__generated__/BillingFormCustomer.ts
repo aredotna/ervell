@@ -9,7 +9,7 @@
 
 export interface BillingFormCustomer_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
@@ -24,9 +24,9 @@ export interface BillingFormCustomer_default_credit_card {
 
 export interface BillingFormCustomer_patron {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
+  id: number;
+  name: string;
+  hidden_email: string;
 }
 
 export interface BillingFormCustomer_credit_cards {
@@ -40,14 +40,14 @@ export interface BillingFormCustomer_credit_cards {
 
 export interface BillingFormCustomer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   updated_at: string | null;
-  is_lifetime: boolean | null;
+  is_lifetime: boolean;
   plan: BillingFormCustomer_plan | null;
   default_credit_card: BillingFormCustomer_default_credit_card | null;
-  is_canceled: boolean | null;
-  is_beneficiary: boolean | null;
+  is_canceled: boolean;
+  is_beneficiary: boolean;
   patron: BillingFormCustomer_patron | null;
   current_period_end_at: string | null;
-  credit_cards: (BillingFormCustomer_credit_cards | null)[] | null;
+  credit_cards: BillingFormCustomer_credit_cards[] | null;
 }

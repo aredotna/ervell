@@ -9,22 +9,22 @@
 
 export interface ConnectTwitterQuery_me_authenticated_service_contacts {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ConnectTwitterQuery_me_authenticated_service {
   __typename: "Authentication";
-  id: number | null;
-  contacts: (ConnectTwitterQuery_me_authenticated_service_contacts | null)[] | null;
+  id: number;
+  contacts: ConnectTwitterQuery_me_authenticated_service_contacts[] | null;
 }
 
 export interface ConnectTwitterQuery_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   authenticated_service: ConnectTwitterQuery_me_authenticated_service | null;
 }
 

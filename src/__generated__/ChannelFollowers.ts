@@ -9,18 +9,18 @@
 
 export interface ChannelFollowers_channel_followers {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
-  initials: string | null;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ChannelFollowers_channel {
   __typename: "Channel";
-  id: number | null;
-  followers: (ChannelFollowers_channel_followers | null)[] | null;
+  id: number;
+  followers: ChannelFollowers_channel_followers[] | null;
 }
 
 export interface ChannelFollowers {

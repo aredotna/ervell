@@ -9,34 +9,34 @@
 
 export interface ProfileFollowers_identity_identifiable_User_followers {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
-  initials: string | null;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ProfileFollowers_identity_identifiable_User {
   __typename: "User";
-  id: number | null;
-  followers: (ProfileFollowers_identity_identifiable_User_followers | null)[] | null;
+  id: number;
+  followers: ProfileFollowers_identity_identifiable_User_followers[] | null;
 }
 
 export interface ProfileFollowers_identity_identifiable_Group_followers {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
-  initials: string | null;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ProfileFollowers_identity_identifiable_Group {
   __typename: "Group";
-  id: number | null;
-  followers: (ProfileFollowers_identity_identifiable_Group_followers | null)[] | null;
+  id: number;
+  followers: ProfileFollowers_identity_identifiable_Group_followers[] | null;
 }
 
 export type ProfileFollowers_identity_identifiable = ProfileFollowers_identity_identifiable_User | ProfileFollowers_identity_identifiable_Group;

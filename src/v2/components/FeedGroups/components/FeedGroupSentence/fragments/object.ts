@@ -27,6 +27,36 @@ export default gql`
       href
     }
 
+    ... on Attachment {
+      id
+      label: to_s
+      href
+    }
+
+    ... on Embed {
+      id
+      label: to_s
+      href
+    }
+
+    ... on Text {
+      id
+      label: to_s
+      href
+    }
+
+    ... on Image {
+      id
+      label: to_s
+      href
+    }
+
+    ... on Link {
+      id
+      label: to_s
+      href
+    }
+
     ... on Comment {
       id
       body(truncate: 100)

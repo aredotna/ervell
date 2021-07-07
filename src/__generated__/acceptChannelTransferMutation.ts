@@ -9,19 +9,19 @@
 
 export interface acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request_channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
 }
 
 export interface acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request {
   __typename: "ChannelTransferRequest";
-  channel: acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request_channel | null;
+  channel: acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request_channel;
 }
 
 export interface acceptChannelTransferMutation_accept_channel_transfer {
-  __typename: "AcceptChannelTransferPayload";
-  channel_transfer_request: acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request | null;
+  __typename: "AcceptChannelTransferMutationPayload";
+  channel_transfer_request: acceptChannelTransferMutation_accept_channel_transfer_channel_transfer_request;
 }
 
 export interface acceptChannelTransferMutation {

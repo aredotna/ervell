@@ -8,13 +8,13 @@
 // ====================================================
 
 export interface createAddBlockMutation_create_block_block {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  id: number;
 }
 
 export interface createAddBlockMutation_create_block {
-  __typename: "CreateBlockPayload";
-  block: createAddBlockMutation_create_block_block | null;
+  __typename: "CreateBlockMutationPayload";
+  block: createAddBlockMutation_create_block_block;
 }
 
 export interface createAddBlockMutation {

@@ -14,7 +14,7 @@ export interface GroupsCountQuery_me_counts {
 
 export interface GroupsCountQuery_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: GroupsCountQuery_me_counts | null;
 }
 

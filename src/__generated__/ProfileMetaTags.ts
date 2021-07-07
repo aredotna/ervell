@@ -9,18 +9,18 @@
 
 export interface ProfileMetaTags_User {
   __typename: "User";
-  title: string | null;
-  name: string | null;
+  title: string;
+  name: string;
   description: string | null;
   href: string | null;
   canonical: string | null;
-  is_indexable: boolean | null;
+  is_indexable: boolean;
 }
 
 export interface ProfileMetaTags_Group {
   __typename: "Group";
-  title: string | null;
-  name: string | null;
+  title: string;
+  name: string;
   description: string | null;
   canonical: string | null;
   href: string | null;

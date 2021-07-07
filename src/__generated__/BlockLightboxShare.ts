@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface BlockLightboxShare {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   shareable_href: string | null;
-  shareable_title: string | null;
+  shareable_title: string;
 }

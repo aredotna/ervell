@@ -9,22 +9,22 @@
 
 export interface NewChannelGroupsQuery_me_groups {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface NewChannelGroupsQuery_me {
   __typename: "Me";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  groups: (NewChannelGroupsQuery_me_groups | null)[] | null;
+  groups: NewChannelGroupsQuery_me_groups[];
 }
 
 export interface NewChannelGroupsQuery {

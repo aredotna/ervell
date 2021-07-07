@@ -9,151 +9,261 @@
 
 export interface GroupFeedQuery_group_feed_groups_user {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_owner_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_owner_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
 }
 
 export type GroupFeedQuery_group_feed_groups_owner = GroupFeedQuery_group_feed_groups_owner_User | GroupFeedQuery_group_feed_groups_owner_Group;
 
-export interface GroupFeedQuery_group_feed_groups_item_Null {
-  __typename: "Null";
-}
-
 export interface GroupFeedQuery_group_feed_groups_item_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_item_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type GroupFeedQuery_group_feed_groups_item_Channel_owner = GroupFeedQuery_group_feed_groups_item_Channel_owner_User | GroupFeedQuery_group_feed_groups_item_Channel_owner_Group;
 
 export interface GroupFeedQuery_group_feed_groups_item_Channel {
   __typename: "Channel";
-  id: number | null;
-  truncatedTitle: string | null;
+  id: number;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  owner: GroupFeedQuery_group_feed_groups_item_Channel_owner | null;
+  visibility: string;
+  label: string;
+  owner: GroupFeedQuery_group_feed_groups_item_Channel_owner;
 }
 
 export interface GroupFeedQuery_group_feed_groups_item_Connectable {
   __typename: "Connectable";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_item_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Attachment {
+  __typename: "Attachment";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Embed {
+  __typename: "Embed";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Text {
+  __typename: "Text";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Image {
+  __typename: "Image";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Link {
+  __typename: "Link";
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_item_Comment {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_item_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
-export type GroupFeedQuery_group_feed_groups_item = GroupFeedQuery_group_feed_groups_item_Null | GroupFeedQuery_group_feed_groups_item_Channel | GroupFeedQuery_group_feed_groups_item_Connectable | GroupFeedQuery_group_feed_groups_item_User | GroupFeedQuery_group_feed_groups_item_Comment | GroupFeedQuery_group_feed_groups_item_Group;
-
-export interface GroupFeedQuery_group_feed_groups_target_Null {
-  __typename: "Null";
-}
+export type GroupFeedQuery_group_feed_groups_item = GroupFeedQuery_group_feed_groups_item_Channel | GroupFeedQuery_group_feed_groups_item_Connectable | GroupFeedQuery_group_feed_groups_item_User | GroupFeedQuery_group_feed_groups_item_Attachment | GroupFeedQuery_group_feed_groups_item_Embed | GroupFeedQuery_group_feed_groups_item_Text | GroupFeedQuery_group_feed_groups_item_Image | GroupFeedQuery_group_feed_groups_item_Link | GroupFeedQuery_group_feed_groups_item_Comment | GroupFeedQuery_group_feed_groups_item_Group;
 
 export interface GroupFeedQuery_group_feed_groups_target_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_target_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type GroupFeedQuery_group_feed_groups_target_Channel_owner = GroupFeedQuery_group_feed_groups_target_Channel_owner_User | GroupFeedQuery_group_feed_groups_target_Channel_owner_Group;
 
 export interface GroupFeedQuery_group_feed_groups_target_Channel {
   __typename: "Channel";
-  id: number | null;
-  truncatedTitle: string | null;
+  id: number;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  owner: GroupFeedQuery_group_feed_groups_target_Channel_owner | null;
+  visibility: string;
+  label: string;
+  owner: GroupFeedQuery_group_feed_groups_target_Channel_owner;
 }
 
 export interface GroupFeedQuery_group_feed_groups_target_Connectable {
   __typename: "Connectable";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_target_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Attachment {
+  __typename: "Attachment";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Embed {
+  __typename: "Embed";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Text {
+  __typename: "Text";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Image {
+  __typename: "Image";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Link {
+  __typename: "Link";
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_target_Comment {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   href: string | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_target_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
-export type GroupFeedQuery_group_feed_groups_target = GroupFeedQuery_group_feed_groups_target_Null | GroupFeedQuery_group_feed_groups_target_Channel | GroupFeedQuery_group_feed_groups_target_Connectable | GroupFeedQuery_group_feed_groups_target_User | GroupFeedQuery_group_feed_groups_target_Comment | GroupFeedQuery_group_feed_groups_target_Group;
+export type GroupFeedQuery_group_feed_groups_target = GroupFeedQuery_group_feed_groups_target_Channel | GroupFeedQuery_group_feed_groups_target_Connectable | GroupFeedQuery_group_feed_groups_target_User | GroupFeedQuery_group_feed_groups_target_Attachment | GroupFeedQuery_group_feed_groups_target_Embed | GroupFeedQuery_group_feed_groups_target_Text | GroupFeedQuery_group_feed_groups_target_Image | GroupFeedQuery_group_feed_groups_target_Link | GroupFeedQuery_group_feed_groups_target_Comment | GroupFeedQuery_group_feed_groups_target_Group;
 
 export interface GroupFeedQuery_group_feed_groups_objects_Comment {
   __typename: "Comment";
+}
+
+export interface GroupFeedQuery_group_feed_groups_objects_Attachment_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_objects_Attachment_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface GroupFeedQuery_group_feed_groups_objects_Attachment_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface GroupFeedQuery_group_feed_groups_objects_Attachment_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: GroupFeedQuery_group_feed_groups_objects_Attachment_connection_user | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_objects_Attachment_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_objects_Attachment {
+  __typename: "Attachment";
+  href: string | null;
+  counts: GroupFeedQuery_group_feed_groups_objects_Attachment_counts | null;
+  id: number;
+  title: string;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  file_extension: string | null;
+  updated_at: string | null;
+  user: GroupFeedQuery_group_feed_groups_objects_Attachment_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: GroupFeedQuery_group_feed_groups_objects_Attachment_connection | null;
+  source: GroupFeedQuery_group_feed_groups_objects_Attachment_source | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Channel_counts {
@@ -163,29 +273,29 @@ export interface GroupFeedQuery_group_feed_groups_objects_Channel_counts {
 
 export interface GroupFeedQuery_group_feed_groups_objects_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type GroupFeedQuery_group_feed_groups_objects_Channel_owner = GroupFeedQuery_group_feed_groups_objects_Channel_owner_Group | GroupFeedQuery_group_feed_groups_objects_Channel_owner_User;
 
 export interface GroupFeedQuery_group_feed_groups_objects_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Channel_connection {
@@ -202,14 +312,14 @@ export interface GroupFeedQuery_group_feed_groups_objects_Channel_source {
 export interface GroupFeedQuery_group_feed_groups_objects_Channel {
   __typename: "Channel";
   href: string | null;
-  id: number | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
+  id: number;
+  truncatedTitle: string;
+  visibility: string;
   updated_at: string | null;
   counts: GroupFeedQuery_group_feed_groups_objects_Channel_counts | null;
-  owner: GroupFeedQuery_group_feed_groups_objects_Channel_owner | null;
-  label: string | null;
-  title: string | null;
+  owner: GroupFeedQuery_group_feed_groups_objects_Channel_owner;
+  label: string;
+  title: string;
   user: GroupFeedQuery_group_feed_groups_objects_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -218,48 +328,51 @@ export interface GroupFeedQuery_group_feed_groups_objects_Channel {
   source: GroupFeedQuery_group_feed_groups_objects_Channel_source | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Text_counts {
+export interface GroupFeedQuery_group_feed_groups_objects_Embed_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Text_user {
+export interface GroupFeedQuery_group_feed_groups_objects_Embed_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Text_connection_user {
+export interface GroupFeedQuery_group_feed_groups_objects_Embed_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Text_connection {
+export interface GroupFeedQuery_group_feed_groups_objects_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: GroupFeedQuery_group_feed_groups_objects_Text_connection_user | null;
+  user: GroupFeedQuery_group_feed_groups_objects_Embed_connection_user | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Text_source {
+export interface GroupFeedQuery_group_feed_groups_objects_Embed_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Text {
-  __typename: "Text";
+export interface GroupFeedQuery_group_feed_groups_objects_Embed {
+  __typename: "Embed";
   href: string | null;
-  counts: GroupFeedQuery_group_feed_groups_objects_Text_counts | null;
-  id: number | null;
-  title: string | null;
-  content: string | null;
+  counts: GroupFeedQuery_group_feed_groups_objects_Embed_counts | null;
+  id: number;
+  title: string;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
-  user: GroupFeedQuery_group_feed_groups_objects_Text_user | null;
+  user: GroupFeedQuery_group_feed_groups_objects_Embed_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: GroupFeedQuery_group_feed_groups_objects_Text_connection | null;
-  source: GroupFeedQuery_group_feed_groups_objects_Text_source | null;
+  connection: GroupFeedQuery_group_feed_groups_objects_Embed_connection | null;
+  source: GroupFeedQuery_group_feed_groups_objects_Embed_source | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Image_counts {
@@ -275,14 +388,14 @@ export interface GroupFeedQuery_group_feed_groups_objects_Image_original_dimensi
 
 export interface GroupFeedQuery_group_feed_groups_objects_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Image_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Image_connection {
@@ -300,8 +413,8 @@ export interface GroupFeedQuery_group_feed_groups_objects_Image {
   __typename: "Image";
   href: string | null;
   counts: GroupFeedQuery_group_feed_groups_objects_Image_counts | null;
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -323,14 +436,14 @@ export interface GroupFeedQuery_group_feed_groups_objects_Link_counts {
 
 export interface GroupFeedQuery_group_feed_groups_objects_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Link_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Link_connection {
@@ -348,7 +461,7 @@ export interface GroupFeedQuery_group_feed_groups_objects_Link {
   __typename: "Link";
   href: string | null;
   counts: GroupFeedQuery_group_feed_groups_objects_Link_counts | null;
-  title: string | null;
+  title: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -360,155 +473,104 @@ export interface GroupFeedQuery_group_feed_groups_objects_Link {
    * Returns the outer channel if we are inside of one
    */
   connection: GroupFeedQuery_group_feed_groups_objects_Link_connection | null;
-  id: number | null;
+  id: number;
   source: GroupFeedQuery_group_feed_groups_objects_Link_source | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Embed_counts {
+export interface GroupFeedQuery_group_feed_groups_objects_Text_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Embed_user {
+export interface GroupFeedQuery_group_feed_groups_objects_Text_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Embed_connection_user {
+export interface GroupFeedQuery_group_feed_groups_objects_Text_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Embed_connection {
+export interface GroupFeedQuery_group_feed_groups_objects_Text_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: GroupFeedQuery_group_feed_groups_objects_Embed_connection_user | null;
+  user: GroupFeedQuery_group_feed_groups_objects_Text_connection_user | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Embed_source {
+export interface GroupFeedQuery_group_feed_groups_objects_Text_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface GroupFeedQuery_group_feed_groups_objects_Embed {
-  __typename: "Embed";
+export interface GroupFeedQuery_group_feed_groups_objects_Text {
+  __typename: "Text";
   href: string | null;
-  counts: GroupFeedQuery_group_feed_groups_objects_Embed_counts | null;
-  id: number | null;
-  title: string | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
+  counts: GroupFeedQuery_group_feed_groups_objects_Text_counts | null;
+  id: number;
+  title: string;
+  content: string;
   updated_at: string | null;
-  user: GroupFeedQuery_group_feed_groups_objects_Embed_user | null;
+  user: GroupFeedQuery_group_feed_groups_objects_Text_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: GroupFeedQuery_group_feed_groups_objects_Embed_connection | null;
-  source: GroupFeedQuery_group_feed_groups_objects_Embed_source | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_Attachment_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_Attachment_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_Attachment_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_Attachment_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: GroupFeedQuery_group_feed_groups_objects_Attachment_connection_user | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_Attachment_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_Attachment {
-  __typename: "Attachment";
-  href: string | null;
-  counts: GroupFeedQuery_group_feed_groups_objects_Attachment_counts | null;
-  id: number | null;
-  title: string | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  file_extension: string | null;
-  updated_at: string | null;
-  user: GroupFeedQuery_group_feed_groups_objects_Attachment_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: GroupFeedQuery_group_feed_groups_objects_Attachment_connection | null;
-  source: GroupFeedQuery_group_feed_groups_objects_Attachment_source | null;
-}
-
-export interface GroupFeedQuery_group_feed_groups_objects_User {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-  href: string | null;
-  label: string | null;
-  initials: string | null;
-  avatar: string | null;
+  connection: GroupFeedQuery_group_feed_groups_objects_Text_connection | null;
+  source: GroupFeedQuery_group_feed_groups_objects_Text_source | null;
 }
 
 export interface GroupFeedQuery_group_feed_groups_objects_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  initials: string | null;
+  visibility: string;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
-export type GroupFeedQuery_group_feed_groups_objects = GroupFeedQuery_group_feed_groups_objects_Comment | GroupFeedQuery_group_feed_groups_objects_Channel | GroupFeedQuery_group_feed_groups_objects_Text | GroupFeedQuery_group_feed_groups_objects_Image | GroupFeedQuery_group_feed_groups_objects_Link | GroupFeedQuery_group_feed_groups_objects_Embed | GroupFeedQuery_group_feed_groups_objects_Attachment | GroupFeedQuery_group_feed_groups_objects_User | GroupFeedQuery_group_feed_groups_objects_Group;
+export interface GroupFeedQuery_group_feed_groups_objects_User {
+  __typename: "User";
+  id: number;
+  name: string;
+  href: string | null;
+  label: string;
+  initials: string;
+  avatar: string | null;
+}
+
+export type GroupFeedQuery_group_feed_groups_objects = GroupFeedQuery_group_feed_groups_objects_Comment | GroupFeedQuery_group_feed_groups_objects_Attachment | GroupFeedQuery_group_feed_groups_objects_Channel | GroupFeedQuery_group_feed_groups_objects_Embed | GroupFeedQuery_group_feed_groups_objects_Image | GroupFeedQuery_group_feed_groups_objects_Link | GroupFeedQuery_group_feed_groups_objects_Text | GroupFeedQuery_group_feed_groups_objects_Group | GroupFeedQuery_group_feed_groups_objects_User;
 
 export interface GroupFeedQuery_group_feed_groups {
   __typename: "DeedGroup";
-  id: string | null;
-  key: string | null;
-  length: number | null;
+  id: string;
+  key: string;
+  length: number;
   user: GroupFeedQuery_group_feed_groups_user | null;
-  owner: GroupFeedQuery_group_feed_groups_owner | null;
-  action: string | null;
+  owner: GroupFeedQuery_group_feed_groups_owner;
+  action: string;
   item: GroupFeedQuery_group_feed_groups_item | null;
-  item_phrase: string | null;
+  item_phrase: string;
   connector: string | null;
   target: GroupFeedQuery_group_feed_groups_target | null;
-  target_phrase: string | null;
+  target_phrase: string;
   created_at: string | null;
-  is_private: boolean | null;
-  objects: (GroupFeedQuery_group_feed_groups_objects | null)[] | null;
+  is_private: boolean;
+  objects: GroupFeedQuery_group_feed_groups_objects[] | null;
 }
 
 export interface GroupFeedQuery_group_feed {
   __typename: "Feed";
-  groups: (GroupFeedQuery_group_feed_groups | null)[] | null;
+  groups: GroupFeedQuery_group_feed_groups[];
 }
 
 export interface GroupFeedQuery_group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   feed: GroupFeedQuery_group_feed | null;
 }
 

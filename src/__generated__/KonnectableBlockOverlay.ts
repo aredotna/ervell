@@ -13,7 +13,7 @@ export interface KonnectableBlockOverlay_source {
 }
 
 export interface KonnectableBlockOverlay {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  id: number;
   source: KonnectableBlockOverlay_source | null;
 }

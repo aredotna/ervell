@@ -20,7 +20,7 @@ export interface MyHeader_customer_upcoming_invoice {
   /**
    * Can be `null` in cases where there is a manually sent invoice
    */
-  next_payment_attempt_at: string | null;
+  next_payment_attempt_at: string;
 }
 
 export interface MyHeader_customer {
@@ -30,10 +30,10 @@ export interface MyHeader_customer {
 
 export interface MyHeader {
   __typename: "Me";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
   customer: MyHeader_customer | null;
 }

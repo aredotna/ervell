@@ -17,40 +17,40 @@ export interface ProfileMetadata_Group_can {
 
 export interface ProfileMetadata_Group_user {
   __typename: "User";
-  name: string | null;
+  name: string;
   href: string | null;
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
 }
 
 export interface ProfileMetadata_Group_counts {
   __typename: "GroupCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface ProfileMetadata_Group_users {
   __typename: "User";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface ProfileMetadata_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   avatar: string | null;
   can: ProfileMetadata_Group_can | null;
-  name: string | null;
+  name: string;
   href: string | null;
-  visibility: string | null;
+  visibility: string;
   /**
    * Are *any* users in the group upgradeable to Premium?
    */
   is_upgradeable: boolean | null;
   about: string | null;
-  user: ProfileMetadata_Group_user | null;
+  user: ProfileMetadata_Group_user;
   counts: ProfileMetadata_Group_counts | null;
-  users: (ProfileMetadata_Group_users | null)[] | null;
+  users: ProfileMetadata_Group_users[] | null;
 }
 
 export interface ProfileMetadata_User_can {
@@ -62,21 +62,21 @@ export interface ProfileMetadata_User_can {
 
 export interface ProfileMetadata_User_counts {
   __typename: "UserCounts";
-  followers: number | null;
-  following: number | null;
+  followers: number;
+  following: number;
   groups: number | null;
-  following_channels: number | null;
-  following_users: number | null;
-  following_groups: number | null;
+  following_channels: number;
+  following_users: number;
+  following_groups: number;
 }
 
 export interface ProfileMetadata_User {
   __typename: "User";
-  name: string | null;
+  name: string;
   href: string | null;
   badge: string | null;
   custom_badge: string | null;
-  id: number | null;
+  id: number;
   can: ProfileMetadata_User_can | null;
   about: string | null;
   counts: ProfileMetadata_User_counts | null;

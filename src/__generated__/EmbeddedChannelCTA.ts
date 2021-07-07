@@ -9,6 +9,6 @@
 
 export interface EmbeddedChannelCTA {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
 }

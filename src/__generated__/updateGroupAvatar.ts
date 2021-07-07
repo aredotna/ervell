@@ -9,13 +9,13 @@
 
 export interface updateGroupAvatar_update_group_group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   avatar: string | null;
 }
 
 export interface updateGroupAvatar_update_group {
-  __typename: "UpdateGroupPayload";
-  group: updateGroupAvatar_update_group_group | null;
+  __typename: "UpdateGroupMutationPayload";
+  group: updateGroupAvatar_update_group_group;
 }
 
 export interface updateGroupAvatar {

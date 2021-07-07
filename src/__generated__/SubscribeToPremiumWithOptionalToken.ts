@@ -11,7 +11,7 @@ import { SupportedPlanEnum } from "./globalTypes";
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
@@ -26,9 +26,9 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_patron {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
+  id: number;
+  name: string;
+  hidden_email: string;
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_credit_cards {
@@ -42,17 +42,17 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer {
   __typename: "Customer";
-  id: number | null;
-  is_canceled: boolean | null;
-  is_lifetime: boolean | null;
-  can_select_lifetime: boolean | null;
-  is_beneficiary: boolean | null;
+  id: number;
+  is_canceled: boolean;
+  is_lifetime: boolean;
+  can_select_lifetime: boolean;
+  is_beneficiary: boolean;
   plan: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_plan | null;
   updated_at: string | null;
   default_credit_card: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_default_credit_card | null;
   patron: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_patron | null;
   current_period_end_at: string | null;
-  credit_cards: (SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_credit_cards | null)[] | null;
+  credit_cards: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer_credit_cards[] | null;
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_counts {
@@ -63,7 +63,7 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_customer | null;
@@ -71,8 +71,8 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
 }
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token {
-  __typename: "SubscribeToPremiumWithOptionalTokenPayload";
-  me: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me | null;
+  __typename: "SubscribeToPremiumWithOptionalTokenMutationPayload";
+  me: SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me;
 }
 
 export interface SubscribeToPremiumWithOptionalToken {

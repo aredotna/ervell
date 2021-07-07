@@ -9,13 +9,13 @@
 
 export interface createGroupMutation_create_group_group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   href: string | null;
 }
 
 export interface createGroupMutation_create_group {
-  __typename: "CreateGroupPayload";
-  group: createGroupMutation_create_group_group | null;
+  __typename: "CreateGroupMutationPayload";
+  group: createGroupMutation_create_group_group;
 }
 
 export interface createGroupMutation {

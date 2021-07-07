@@ -9,8 +9,8 @@
 
 export interface ProfileMetadataInfo_User_counts {
   __typename: "UserCounts";
-  followers: number | null;
-  following: number | null;
+  followers: number;
+  following: number;
   groups: number | null;
 }
 
@@ -23,20 +23,20 @@ export interface ProfileMetadataInfo_User {
 
 export interface ProfileMetadataInfo_Group_user {
   __typename: "User";
-  name: string | null;
+  name: string;
   href: string | null;
 }
 
 export interface ProfileMetadataInfo_Group_counts {
   __typename: "GroupCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface ProfileMetadataInfo_Group {
   __typename: "Group";
   href: string | null;
   about: string | null;
-  user: ProfileMetadataInfo_Group_user | null;
+  user: ProfileMetadataInfo_Group_user;
   counts: ProfileMetadataInfo_Group_counts | null;
 }
 

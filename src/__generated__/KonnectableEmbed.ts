@@ -9,8 +9,8 @@
 
 export interface KonnectableEmbed {
   __typename: "Embed";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
   src: string | null;
   src_1x: string | null;

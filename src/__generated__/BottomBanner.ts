@@ -11,6 +11,6 @@ import { BannerEnum } from "./globalTypes";
 
 export interface BottomBanner {
   __typename: "Me";
-  id: number | null;
+  id: number;
   banner: BannerEnum | null;
 }

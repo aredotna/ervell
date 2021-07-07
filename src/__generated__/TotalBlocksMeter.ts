@@ -14,7 +14,7 @@ export interface TotalBlocksMeter_counts {
 
 export interface TotalBlocksMeter {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: TotalBlocksMeter_counts | null;
   non_premium_connections_limit: number | null;
 }

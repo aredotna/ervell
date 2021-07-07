@@ -13,15 +13,15 @@ export interface ProfileGroupUserList_User {
 
 export interface ProfileGroupUserList_Group_user {
   __typename: "User";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface ProfileGroupUserList_Group_users {
   __typename: "User";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -32,9 +32,9 @@ export interface ProfileGroupUserList_Group_can {
 
 export interface ProfileGroupUserList_Group {
   __typename: "Group";
-  id: number | null;
-  user: ProfileGroupUserList_Group_user | null;
-  users: (ProfileGroupUserList_Group_users | null)[] | null;
+  id: number;
+  user: ProfileGroupUserList_Group_user;
+  users: ProfileGroupUserList_Group_users[] | null;
   can: ProfileGroupUserList_Group_can | null;
 }
 

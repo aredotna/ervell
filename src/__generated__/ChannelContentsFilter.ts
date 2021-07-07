@@ -16,7 +16,7 @@ export interface ChannelContentsFilter_counts {
 
 export interface ChannelContentsFilter {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   counts: ChannelContentsFilter_counts | null;
 }

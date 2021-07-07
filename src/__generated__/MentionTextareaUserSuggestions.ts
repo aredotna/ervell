@@ -9,21 +9,21 @@
 
 export interface MentionTextareaUserSuggestions_suggestions_users_User {
   __typename: "User";
-  id: string | null;
-  label: string | null;
+  id: string;
+  label: string;
 }
 
 export interface MentionTextareaUserSuggestions_suggestions_users_Group {
   __typename: "Group";
-  id: string | null;
-  label: string | null;
+  id: string;
+  label: string;
 }
 
 export type MentionTextareaUserSuggestions_suggestions_users = MentionTextareaUserSuggestions_suggestions_users_User | MentionTextareaUserSuggestions_suggestions_users_Group;
 
 export interface MentionTextareaUserSuggestions_suggestions {
   __typename: "Searches";
-  users: (MentionTextareaUserSuggestions_suggestions_users | null)[] | null;
+  users: MentionTextareaUserSuggestions_suggestions_users[] | null;
 }
 
 export interface MentionTextareaUserSuggestions {

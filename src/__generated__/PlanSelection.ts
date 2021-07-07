@@ -9,16 +9,16 @@
 
 export interface PlanSelection_customer_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
 }
 
 export interface PlanSelection_customer {
   __typename: "Customer";
-  id: number | null;
-  is_canceled: boolean | null;
-  is_lifetime: boolean | null;
-  can_select_lifetime: boolean | null;
-  is_beneficiary: boolean | null;
+  id: number;
+  is_canceled: boolean;
+  is_lifetime: boolean;
+  can_select_lifetime: boolean;
+  is_beneficiary: boolean;
   plan: PlanSelection_customer_plan | null;
 }
 
@@ -33,6 +33,6 @@ export interface PlanSelection {
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: PlanSelection_customer | null;
-  id: number | null;
+  id: number;
   counts: PlanSelection_counts | null;
 }

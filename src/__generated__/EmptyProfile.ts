@@ -9,12 +9,12 @@
 
 export interface EmptyProfile_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
 }
 
 export interface EmptyProfile_User {
   __typename: "User";
-  id: number | null;
+  id: number;
 }
 
 export type EmptyProfile = EmptyProfile_Group | EmptyProfile_User;

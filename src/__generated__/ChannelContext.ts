@@ -9,14 +9,14 @@
 
 export interface ChannelContext_channel_skeleton {
   __typename: "SkeletalConnectable";
-  id: number | null;
-  type: string | null;
+  id: number;
+  type: string;
 }
 
 export interface ChannelContext_channel {
   __typename: "Channel";
-  id: number | null;
-  skeleton: (ChannelContext_channel_skeleton | null)[] | null;
+  id: number;
+  skeleton: ChannelContext_channel_skeleton[] | null;
 }
 
 export interface ChannelContext {

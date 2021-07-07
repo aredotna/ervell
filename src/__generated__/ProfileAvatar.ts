@@ -18,7 +18,7 @@ export interface ProfileAvatar_Group_can {
 
 export interface ProfileAvatar_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   avatar: string | null;
   can: ProfileAvatar_Group_can | null;
 }

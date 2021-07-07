@@ -9,18 +9,18 @@
 
 export interface Contact_Invitee {
   __typename: "Invitee" | "Me";
-  name: string | null;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface Contact_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 

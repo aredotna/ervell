@@ -18,59 +18,59 @@ export interface updateChannelMutation_update_channel_channel_can {
 
 export interface updateChannelMutation_update_channel_channel_user {
   __typename: "User";
-  id: number | null;
+  id: number;
 }
 
 export interface updateChannelMutation_update_channel_channel_owner_User {
   __typename: "User";
-  id: number | null;
+  id: number;
 }
 
 export interface updateChannelMutation_update_channel_channel_owner_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
 }
 
 export type updateChannelMutation_update_channel_channel_owner = updateChannelMutation_update_channel_channel_owner_User | updateChannelMutation_update_channel_channel_owner_Group;
 
 export interface updateChannelMutation_update_channel_channel_transfer_request_recipient_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface updateChannelMutation_update_channel_channel_transfer_request_recipient_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type updateChannelMutation_update_channel_channel_transfer_request_recipient = updateChannelMutation_update_channel_channel_transfer_request_recipient_User | updateChannelMutation_update_channel_channel_transfer_request_recipient_Group;
 
 export interface updateChannelMutation_update_channel_channel_transfer_request {
   __typename: "ChannelTransferRequest";
-  recipient: updateChannelMutation_update_channel_channel_transfer_request_recipient | null;
+  recipient: updateChannelMutation_update_channel_channel_transfer_request_recipient;
   is_recipient_member: boolean | null;
 }
 
 export interface updateChannelMutation_update_channel_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  title: string | null;
+  title: string;
   description: string | null;
-  visibility: string | null;
+  visibility: string;
   content_flag: string | null;
   can: updateChannelMutation_update_channel_channel_can | null;
   user: updateChannelMutation_update_channel_channel_user | null;
-  owner: updateChannelMutation_update_channel_channel_owner | null;
-  is_pending_transfer: boolean | null;
+  owner: updateChannelMutation_update_channel_channel_owner;
+  is_pending_transfer: boolean;
   transfer_request: updateChannelMutation_update_channel_channel_transfer_request | null;
 }
 
 export interface updateChannelMutation_update_channel {
-  __typename: "UpdateChannelPayload";
-  channel: updateChannelMutation_update_channel_channel | null;
+  __typename: "UpdateChannelMutationPayload";
+  channel: updateChannelMutation_update_channel_channel;
 }
 
 export interface updateChannelMutation {

@@ -9,7 +9,7 @@
 
 export interface AvatarCheck_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   avatar: string | null;
 }
 

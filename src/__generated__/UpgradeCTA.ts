@@ -9,32 +9,32 @@
 
 export interface UpgradeCTA_subscription_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
 export interface UpgradeCTA_subscription_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface UpgradeCTA_subscription {
   __typename: "PremiumSubscription";
-  id: string | null;
+  id: string;
   plan: UpgradeCTA_subscription_plan | null;
-  users: (UpgradeCTA_subscription_users | null)[] | null;
+  users: UpgradeCTA_subscription_users[] | null;
 }
 
 export interface UpgradeCTA_users {
   __typename: "User";
-  id: number | null;
-  is_premium: boolean | null;
+  id: number;
+  is_premium: boolean;
 }
 
 export interface UpgradeCTA {
   __typename: "Group";
-  id: number | null;
+  id: number;
   subscription: UpgradeCTA_subscription | null;
-  users: (UpgradeCTA_users | null)[] | null;
+  users: UpgradeCTA_users[] | null;
 }

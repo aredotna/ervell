@@ -9,19 +9,19 @@
 
 export interface ManageUsers_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ManageUsers_memberships_member {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -32,15 +32,15 @@ export interface ManageUsers_memberships_can {
 
 export interface ManageUsers_memberships {
   __typename: "GroupMembership";
-  id: number | null;
+  id: number;
   member: ManageUsers_memberships_member | null;
   can: ManageUsers_memberships_can | null;
 }
 
 export interface ManageUsers {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  owner: ManageUsers_owner | null;
-  memberships: (ManageUsers_memberships | null)[] | null;
+  id: number;
+  name: string;
+  owner: ManageUsers_owner;
+  memberships: ManageUsers_memberships[] | null;
 }

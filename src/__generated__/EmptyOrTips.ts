@@ -9,13 +9,13 @@
 
 export interface EmptyOrTips_User {
   __typename: "User";
-  id: number | null;
+  id: number;
   is_me: boolean | null;
 }
 
 export interface EmptyOrTips_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   is_current_user_a_member: boolean | null;
   is_current_user_the_owner: boolean | null;
 }

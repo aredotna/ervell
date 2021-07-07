@@ -13,9 +13,9 @@ export interface ProfileMetadataFollowingType_Group {
 
 export interface ProfileMetadataFollowingType_User_counts {
   __typename: "UserCounts";
-  following_channels: number | null;
-  following_users: number | null;
-  following_groups: number | null;
+  following_channels: number;
+  following_users: number;
+  following_groups: number;
 }
 
 export interface ProfileMetadataFollowingType_User {

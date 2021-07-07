@@ -9,13 +9,13 @@
 
 export interface acceptGroupInvite_accept_group_invite_group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   href: string | null;
 }
 
 export interface acceptGroupInvite_accept_group_invite {
-  __typename: "AcceptGroupInvitePayload";
-  group: acceptGroupInvite_accept_group_invite_group | null;
+  __typename: "AcceptGroupInviteMutationPayload";
+  group: acceptGroupInvite_accept_group_invite_group;
 }
 
 export interface acceptGroupInvite {

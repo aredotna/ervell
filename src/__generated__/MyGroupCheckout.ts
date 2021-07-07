@@ -27,13 +27,13 @@ export interface MyGroupCheckout_customer_credit_cards {
 
 export interface MyGroupCheckout_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: MyGroupCheckout_customer_default_credit_card | null;
-  credit_cards: (MyGroupCheckout_customer_credit_cards | null)[] | null;
+  credit_cards: MyGroupCheckout_customer_credit_cards[] | null;
 }
 
 export interface MyGroupCheckout {
   __typename: "Me";
-  id: number | null;
+  id: number;
   customer: MyGroupCheckout_customer | null;
 }

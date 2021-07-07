@@ -9,13 +9,13 @@
 
 export interface muteChannelMutation_mute_channel_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 
 export interface muteChannelMutation_mute_channel {
-  __typename: "MuteChannelPayload";
-  channel: muteChannelMutation_mute_channel_channel | null;
+  __typename: "MuteChannelMutationPayload";
+  channel: muteChannelMutation_mute_channel_channel;
 }
 
 export interface muteChannelMutation {

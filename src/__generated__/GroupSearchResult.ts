@@ -9,16 +9,16 @@
 
 export interface GroupSearchResult_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupSearchResult {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  user: GroupSearchResult_user | null;
+  id: number;
+  name: string;
+  user: GroupSearchResult_user;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }

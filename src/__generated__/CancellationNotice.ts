@@ -9,6 +9,6 @@
 
 export interface CancellationNotice {
   __typename: "Customer";
-  is_canceled: boolean | null;
+  is_canceled: boolean;
   current_period_end_at: string | null;
 }

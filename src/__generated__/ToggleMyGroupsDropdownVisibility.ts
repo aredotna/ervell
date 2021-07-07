@@ -11,24 +11,24 @@ import { MeFlagInput } from "./globalTypes";
 
 export interface ToggleMyGroupsDropdownVisibility_set_me_flags_me_groups {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  initials: string | null;
+  visibility: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ToggleMyGroupsDropdownVisibility_set_me_flags_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   is_my_groups_dropdown_hidden: boolean | null;
-  groups: (ToggleMyGroupsDropdownVisibility_set_me_flags_me_groups | null)[] | null;
+  groups: ToggleMyGroupsDropdownVisibility_set_me_flags_me_groups[];
 }
 
 export interface ToggleMyGroupsDropdownVisibility_set_me_flags {
-  __typename: "SetMeFlagsPayload";
-  me: ToggleMyGroupsDropdownVisibility_set_me_flags_me | null;
+  __typename: "SetMeFlagsMutationPayload";
+  me: ToggleMyGroupsDropdownVisibility_set_me_flags_me;
 }
 
 export interface ToggleMyGroupsDropdownVisibility {

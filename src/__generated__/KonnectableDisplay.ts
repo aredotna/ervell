@@ -9,14 +9,14 @@
 
 export interface KonnectableDisplay_PendingBlock_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_PendingBlock_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_PendingBlock_connection {
@@ -27,9 +27,9 @@ export interface KonnectableDisplay_PendingBlock_connection {
 
 export interface KonnectableDisplay_PendingBlock {
   __typename: "PendingBlock";
-  id: number | null;
+  id: number;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: KonnectableDisplay_PendingBlock_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -44,29 +44,29 @@ export interface KonnectableDisplay_Channel_counts {
 
 export interface KonnectableDisplay_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface KonnectableDisplay_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type KonnectableDisplay_Channel_owner = KonnectableDisplay_Channel_owner_Group | KonnectableDisplay_Channel_owner_User;
 
 export interface KonnectableDisplay_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Channel_connection {
@@ -77,15 +77,15 @@ export interface KonnectableDisplay_Channel_connection {
 
 export interface KonnectableDisplay_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
+  truncatedTitle: string;
+  visibility: string;
   updated_at: string | null;
   counts: KonnectableDisplay_Channel_counts | null;
-  owner: KonnectableDisplay_Channel_owner | null;
-  label: string | null;
-  title: string | null;
+  owner: KonnectableDisplay_Channel_owner;
+  label: string;
+  title: string;
   user: KonnectableDisplay_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -95,14 +95,14 @@ export interface KonnectableDisplay_Channel {
 
 export interface KonnectableDisplay_Text_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Text_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Text_connection {
@@ -113,10 +113,10 @@ export interface KonnectableDisplay_Text_connection {
 
 export interface KonnectableDisplay_Text {
   __typename: "Text";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
-  content: string | null;
+  content: string;
   updated_at: string | null;
   user: KonnectableDisplay_Text_user | null;
   /**
@@ -133,14 +133,14 @@ export interface KonnectableDisplay_Image_original_dimensions {
 
 export interface KonnectableDisplay_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Image_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Image_connection {
@@ -151,8 +151,8 @@ export interface KonnectableDisplay_Image_connection {
 
 export interface KonnectableDisplay_Image {
   __typename: "Image";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
   src: string | null;
   src_1x: string | null;
@@ -169,14 +169,14 @@ export interface KonnectableDisplay_Image {
 
 export interface KonnectableDisplay_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Link_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Link_connection {
@@ -187,9 +187,9 @@ export interface KonnectableDisplay_Link_connection {
 
 export interface KonnectableDisplay_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   href: string | null;
-  title: string | null;
+  title: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -205,14 +205,14 @@ export interface KonnectableDisplay_Link {
 
 export interface KonnectableDisplay_Embed_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Embed_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Embed_connection {
@@ -223,8 +223,8 @@ export interface KonnectableDisplay_Embed_connection {
 
 export interface KonnectableDisplay_Embed {
   __typename: "Embed";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
   src: string | null;
   src_1x: string | null;
@@ -240,14 +240,14 @@ export interface KonnectableDisplay_Embed {
 
 export interface KonnectableDisplay_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Attachment_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableDisplay_Attachment_connection {
@@ -258,8 +258,8 @@ export interface KonnectableDisplay_Attachment_connection {
 
 export interface KonnectableDisplay_Attachment {
   __typename: "Attachment";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
   src: string | null;
   src_1x: string | null;

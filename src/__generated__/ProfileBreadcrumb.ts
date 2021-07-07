@@ -9,7 +9,7 @@
 
 export interface ProfileBreadcrumb_User {
   __typename: "User";
-  name: string | null;
+  name: string;
   href: string | null;
   badge: string | null;
   custom_badge: string | null;
@@ -17,9 +17,9 @@ export interface ProfileBreadcrumb_User {
 
 export interface ProfileBreadcrumb_Group {
   __typename: "Group";
-  name: string | null;
+  name: string;
   href: string | null;
-  visibility: string | null;
+  visibility: string;
 }
 
 export type ProfileBreadcrumb = ProfileBreadcrumb_User | ProfileBreadcrumb_Group;

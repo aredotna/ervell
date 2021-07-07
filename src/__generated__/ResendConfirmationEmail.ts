@@ -9,12 +9,12 @@
 
 export interface ResendConfirmationEmail_resend_confirmation_email_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
 }
 
 export interface ResendConfirmationEmail_resend_confirmation_email {
-  __typename: "ResendConfirmationEmailPayload";
-  me: ResendConfirmationEmail_resend_confirmation_email_me | null;
+  __typename: "ResendConfirmationEmailMutationPayload";
+  me: ResendConfirmationEmail_resend_confirmation_email_me;
 }
 
 export interface ResendConfirmationEmail {

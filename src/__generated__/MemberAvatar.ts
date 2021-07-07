@@ -10,14 +10,14 @@
 export interface MemberAvatar_User {
   __typename: "User";
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface MemberAvatar_Group {
   __typename: "Group";
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 

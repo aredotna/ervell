@@ -22,18 +22,18 @@ export interface CustomerPlanChanges_me_customer_invoice {
   /**
    * Can be `null` in cases where there is a manually sent invoice
    */
-  next_payment_attempt_at: string | null;
+  next_payment_attempt_at: string;
 }
 
 export interface CustomerPlanChanges_me_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   invoice: CustomerPlanChanges_me_customer_invoice | null;
 }
 
 export interface CustomerPlanChanges_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   customer: CustomerPlanChanges_me_customer | null;
 }
 

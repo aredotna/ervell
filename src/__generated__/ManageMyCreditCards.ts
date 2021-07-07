@@ -23,7 +23,7 @@ export interface ManageMyCreditCards_credit_cards {
 
 export interface ManageMyCreditCards {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: ManageMyCreditCards_default_credit_card | null;
-  credit_cards: (ManageMyCreditCards_credit_cards | null)[] | null;
+  credit_cards: ManageMyCreditCards_credit_cards[] | null;
 }

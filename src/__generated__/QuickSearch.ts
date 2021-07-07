@@ -9,48 +9,48 @@
 
 export interface QuickSearch_searches_results_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface QuickSearch_searches_results_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
-  visibility: string | null;
+  visibility: string;
 }
 
 export interface QuickSearch_searches_results_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface QuickSearch_searches_results_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export type QuickSearch_searches_results_Channel_owner = QuickSearch_searches_results_Channel_owner_User | QuickSearch_searches_results_Channel_owner_Group;
 
 export interface QuickSearch_searches_results_Channel {
   __typename: "Channel";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
-  visibility: string | null;
-  owner: QuickSearch_searches_results_Channel_owner | null;
+  visibility: string;
+  owner: QuickSearch_searches_results_Channel_owner;
 }
 
 export type QuickSearch_searches_results = QuickSearch_searches_results_User | QuickSearch_searches_results_Group | QuickSearch_searches_results_Channel;
 
 export interface QuickSearch_searches {
   __typename: "Searches";
-  results: (QuickSearch_searches_results | null)[] | null;
+  results: QuickSearch_searches_results[] | null;
 }
 
 export interface QuickSearch {

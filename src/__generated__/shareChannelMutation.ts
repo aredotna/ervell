@@ -16,14 +16,14 @@ export interface shareChannelMutation_share_channel_channel_share {
 
 export interface shareChannelMutation_share_channel_channel {
   __typename: "Channel";
-  id: number | null;
-  visibility: string | null;
+  id: number;
+  visibility: string;
   share: shareChannelMutation_share_channel_channel_share | null;
 }
 
 export interface shareChannelMutation_share_channel {
-  __typename: "ShareChannelPayload";
-  channel: shareChannelMutation_share_channel_channel | null;
+  __typename: "ShareChannelMutationPayload";
+  channel: shareChannelMutation_share_channel_channel;
 }
 
 export interface shareChannelMutation {

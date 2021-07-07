@@ -14,7 +14,7 @@ export interface CanConnectChannelQuery_connectable_can {
 
 export interface CanConnectChannelQuery_connectable {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: CanConnectChannelQuery_connectable_can | null;
 }
 
