@@ -8,6 +8,7 @@
 //==============================================================
 
 export enum BannerEnum {
+  ANNUAL_SUBMISSION = "ANNUAL_SUBMISSION",
   BOOKMARKLET = "BOOKMARKLET",
   CONFIRM = "CONFIRM",
   INVITE = "INVITE",

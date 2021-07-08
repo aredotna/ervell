@@ -141,6 +141,19 @@ export const StronglyProposePremium = props => (
   </Banner>
 )
 
+export const AnnualSubmissionReminder = props => (
+  <Banner bg="state.supporter" color="white" iconName="Exclaim" {...props}>
+    <Box>Submit your pitch for the 2022 Are.na Annual</Box>
+    <ButtonLink
+      color="state.supporter"
+      href="https://www.are.na/blog/open-call-for-pitches-for-the-2022-are-na-annual"
+      target="_blank"
+    >
+      Learn more
+    </ButtonLink>
+  </Banner>
+)
+
 interface LoggedOutExploreBlockProps {
   isLoggedIn: boolean
 }
@@ -210,4 +223,5 @@ export default {
   LOGGED_OUT_EXPLORE: LoggedOutExplore,
   LOGGED_OUT_PROFILE: LoggedOutProfile,
   LOGGED_OUT_CHANNEL: LoggedOutChannel,
+  ANNUAL_SUBMISSION: AnnualSubmissionReminder,
 }
