@@ -7,6 +7,11 @@ export default gql`
       id
       blokks {
         __typename
+
+        ... on Model {
+          id
+        }
+
         ... on Block {
           counts {
             public_channels
@@ -63,6 +68,7 @@ export default gql`
 
         ... on Text {
           content(format: MARKDOWN)
+          html: content(format: HTML)
         }
 
         ... on ConnectableInterface {

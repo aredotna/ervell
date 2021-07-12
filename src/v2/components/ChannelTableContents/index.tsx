@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useQuery } from '@apollo/client'
-import { useTable } from 'react-table'
+import { useExpanded, useTable } from 'react-table'
 import styled from 'styled-components'
 
 import { ContentCell } from './components/ContentCell'
@@ -9,10 +9,12 @@ import Text from 'v2/components/UI/Text'
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
+  ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
 
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
+import ExpandedBlockRow from './components/ExpandedBlockRow'
 
 const Table = styled.table`
   width: 100%;
@@ -61,6 +63,8 @@ const TR = styled.tr`
   }
 `
 
+export const FIRST_COLUMN_WIDTH = 420
+
 interface ChannelTableQueryProps {
   id: string
 }
@@ -91,7 +95,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         Header: 'Content',
         accessor: block => block,
         Cell: ContentCell,
-        width: 420,
+        width: FIRST_COLUMN_WIDTH,
       },
       {
         Header: 'Title',
@@ -121,10 +125,13 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     []
   ) as any
 
-  const tableInstance = useTable({
-    data: data?.channel.blokks,
-    columns: headers,
-  })
+  const tableInstance = useTable(
+    {
+      data: data?.channel.blokks,
+      columns: headers,
+    },
+    useExpanded
+  )
 
   const {
     getTableProps,
@@ -132,6 +139,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     headerGroups,
     rows,
     prepareRow,
+    columns,
   } = tableInstance
 
   return (
@@ -153,12 +161,29 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         {rows.map((row, i) => {
           prepareRow(row)
 
-          if (row.original.__typename === 'Channel') {
-            return <ChannelRow channel={row.original} />
+          const typedRowOriginal = row.original as ChannelTableContentsSet_channel_blokks
+
+          if (row.isExpanded && typedRowOriginal.__typename !== 'Channel') {
+            return (
+              <ExpandedBlockRow
+                block={typedRowOriginal}
+                columnLength={columns.length}
+                {...row.getRowProps()}
+                onClick={() => row.toggleRowExpanded(false)}
+              />
+            )
+          }
+
+          if (typedRowOriginal.__typename === 'Channel') {
+            return <ChannelRow channel={typedRowOriginal} />
           }
 
           return (
-            <TR key={`tr-key-${i}`} {...row.getRowProps()}>
+            <TR
+              key={`tr-key-${i}`}
+              {...row.getRowProps()}
+              onClick={row.toggleRowExpanded}
+            >
               {row.cells.map((cell, j) => {
                 return (
                   <TD
