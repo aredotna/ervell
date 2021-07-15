@@ -1,0 +1,1150 @@
+{
+  "data": {
+    "channel": {
+      "contents": [
+        {
+          "to_s": "Flowers for All Occasions",
+          "id": 929964,
+          "blocks": [
+            {
+              "__typename": "Image",
+              "id": 10164007,
+              "channels": [
+                {
+                  "to_s": "Flowers for All Occasions",
+                  "id": 929964,
+                  "slug": "flowers-for-all-occasions"
+                }
+              ]
+            },
+            {
+              "__typename": "Image",
+              "id": 10164010,
+              "channels": [
+                {
+                  "to_s": "Flowers for All Occasions",
+                  "id": 929964,
+                  "slug": "flowers-for-all-occasions"
+                }
+              ]
+            },
+            {
+              "__typename": "Image",
+              "id": 10164012,
+              "channels": [
+                {
+                  "to_s": "Flowers for All Occasions",
+                  "id": 929964,
+                  "slug": "flowers-for-all-occasions"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "to_s": "Social Patterns",
+          "id": 225965,
+          "blocks": [
+            {
+              "__typename": "Image",
+              "id": 1922503,
+              "channels": [
+                {
+                  "to_s": "⏍ sexy charts",
+                  "id": 52345,
+                  "slug": "sexy-charts"
+                },
+                {
+                  "to_s": "Graphicacy",
+                  "id": 75227,
+                  "slug": "graphicacy"
+                },
+                {
+                  "to_s": "diagrams of thought",
+                  "id": 88862,
+                  "slug": "diagrams-of-thought"
+                },
+                {
+                  "to_s": "strange loops",
+                  "id": 132245,
+                  "slug": "strange-loops"
+                },
+                {
+                  "to_s": "Rules to follow",
+                  "id": 186247,
+                  "slug": "rules-to-follow"
+                },
+                {
+                  "to_s": "Sensemaking",
+                  "id": 188245,
+                  "slug": "sensemaking"
+                },
+                {
+                  "to_s": "Pattern Language",
+                  "id": 188401,
+                  "slug": "pattern-language"
+                },
+                {
+                  "to_s": "sorting hat",
+                  "id": 196559,
+                  "slug": "sorting-hat"
+                },
+                {
+                  "to_s": "schemes",
+                  "id": 220549,
+                  "slug": "schemes"
+                },
+                {
+                  "to_s": "Social Patterns",
+                  "id": 225965,
+                  "slug": "social-patterns"
+                },
+                {
+                  "to_s": "self) Self",
+                  "id": 232194,
+                  "slug": "self-self"
+                },
+                {
+                  "to_s": "for personal reconsideration",
+                  "id": 265995,
+                  "slug": "for-personal-reconsideration"
+                },
+                {
+                  "to_s": "creativity",
+                  "id": 287937,
+                  "slug": "creativity-0wk_el07ori"
+                },
+                {
+                  "to_s": "infographics",
+                  "id": 290490,
+                  "slug": "infographics-0wzejvtnhm4"
+                },
+                {
+                  "to_s": "* CHARTS, GRAPHS, LAYOUTS",
+                  "id": 315834,
+                  "slug": "charts-graphs-layouts"
+                },
+                {
+                  "to_s": "how i'm tryna be ",
+                  "id": 344776,
+                  "slug": "how-i-m-tryna-be-wnakqamhzeo"
+                },
+                {
+                  "to_s": "asp",
+                  "id": 387868,
+                  "slug": "asp"
+                },
+                {
+                  "to_s": "my mind",
+                  "id": 388803,
+                  "slug": "my-mind-6w1ilrjukj0"
+                },
+                {
+                  "to_s": "Personalities Feelings Alignments Emotions Differences",
+                  "id": 392097,
+                  "slug": "personalities-feelings-alignments-emotions-differences"
+                },
+                {
+                  "to_s": "creation + process thoughts ",
+                  "id": 392956,
+                  "slug": "creation-process-thoughts"
+                },
+                {
+                  "to_s": "strange loops",
+                  "id": 394173,
+                  "slug": "strange-loops-msjeycizqeu"
+                },
+                {
+                  "to_s": "Mood Research",
+                  "id": 404050,
+                  "slug": "mood-research"
+                },
+                {
+                  "to_s": "Schematics for the Master Plan",
+                  "id": 471339,
+                  "slug": "schematics-for-the-master-plan"
+                },
+                {
+                  "to_s": "espiritualidades",
+                  "id": 497454,
+                  "slug": "espiritualidades"
+                },
+                {
+                  "to_s": "Silence",
+                  "id": 506207,
+                  "slug": "silence-4f1gstm8dl8"
+                },
+                {
+                  "to_s": "In The Pursuit Of Perfection",
+                  "id": 519665,
+                  "slug": "in-the-pursuit-of-perfection"
+                },
+                {
+                  "to_s": "tenderness.",
+                  "id": 522439,
+                  "slug": "tenderness-qmv6fa9jctc"
+                },
+                {
+                  "to_s": "TNN Resources",
+                  "id": 541935,
+                  "slug": "tnn-resources"
+                },
+                {
+                  "to_s": "Informative Graphics",
+                  "id": 576552,
+                  "slug": "informative-graphics-ithogk684be"
+                },
+                {
+                  "to_s": "Diagramming Ideas",
+                  "id": 581679,
+                  "slug": "diagramming-ideas"
+                },
+                {
+                  "to_s": "grapho",
+                  "id": 609764,
+                  "slug": "grapho-knnyogjeah8"
+                },
+                {
+                  "to_s": "feel",
+                  "id": 658569,
+                  "slug": "feel-zotgyl1xn2w"
+                },
+                {
+                  "to_s": "essere",
+                  "id": 666005,
+                  "slug": "essere"
+                },
+                {
+                  "to_s": "quarantine softness",
+                  "id": 672226,
+                  "slug": "quarantine-softness"
+                },
+                {
+                  "to_s": "ponderings",
+                  "id": 682927,
+                  "slug": "ponderings-ebad1hkjbwg"
+                },
+                {
+                  "to_s": "What is this all about? ",
+                  "id": 690256,
+                  "slug": "what-is-this-all-about"
+                },
+                {
+                  "to_s": "something about feeling things and more",
+                  "id": 693958,
+                  "slug": "something-about-feeling-things-and-more"
+                },
+                {
+                  "to_s": "reconsidering reality ✶",
+                  "id": 706516,
+                  "slug": "reconsidering-reality"
+                },
+                {
+                  "to_s": "making sense",
+                  "id": 737857,
+                  "slug": "making-sense-hv6h0tp5rzq"
+                },
+                {
+                  "to_s": "Mindfulness and Meditation",
+                  "id": 745044,
+                  "slug": "mindfulness-and-meditation"
+                },
+                {
+                  "to_s": "Where is my mind 🐠",
+                  "id": 754291,
+                  "slug": "where-is-my-mind-kkh67f2hefm"
+                },
+                {
+                  "to_s": "Diagrams",
+                  "id": 848617,
+                  "slug": "diagrams-mrhmpxjhd2i"
+                },
+                {
+                  "to_s": "Diagrams",
+                  "id": 848694,
+                  "slug": "diagrams-i7rn-9bmrva"
+                },
+                {
+                  "to_s": "charts 📊 &amp; 🌿 diagrams for 💡 learning 💿",
+                  "id": 852680,
+                  "slug": "charts-diagrams-for-learning"
+                },
+                {
+                  "to_s": "Profound",
+                  "id": 864832,
+                  "slug": "profound-u-mhoqdcj3m"
+                },
+                {
+                  "to_s": "the study of love",
+                  "id": 888491,
+                  "slug": "the-study-of-love"
+                },
+                {
+                  "to_s": "Minah’s Mind",
+                  "id": 895244,
+                  "slug": "minah-s-mind"
+                },
+                {
+                  "to_s": "bpd brain pWr",
+                  "id": 925380,
+                  "slug": "bpd-brain-pwr"
+                },
+                {
+                  "to_s": "the embodied",
+                  "id": 927449,
+                  "slug": "the-embodied"
+                },
+                {
+                  "to_s": "antidote ·",
+                  "id": 1009952,
+                  "slug": "antidote-n3ipgzy6trm"
+                },
+                {
+                  "to_s": "Ideas",
+                  "id": 1065301,
+                  "slug": "ideas-x-6mpcxzgzq"
+                },
+                {
+                  "to_s": "Diagrams ",
+                  "id": 1067676,
+                  "slug": "diagrams-moyajy9bgbw"
+                },
+                {
+                  "to_s": "the world is a piece of bread i'm holding out half to you",
+                  "id": 1068180,
+                  "slug": "the-world-is-a-piece-of-bread-i-m-holding-out-half-to-you"
+                },
+                {
+                  "to_s": "HELLOOOO",
+                  "id": 1071999,
+                  "slug": "helloooo"
+                }
+              ]
+            },
+            {
+              "__typename": "Image",
+              "id": 1510318,
+              "channels": [
+                {
+                  "to_s": "Dot and Line",
+                  "id": 34603,
+                  "slug": "dot-and-line"
+                },
+                {
+                  "to_s": "dérive",
+                  "id": 71448,
+                  "slug": "derive-1491517063"
+                },
+                {
+                  "to_s": "Misc",
+                  "id": 76181,
+                  "slug": "misc-1495550495"
+                },
+                {
+                  "to_s": "diagrams of thought",
+                  "id": 88862,
+                  "slug": "diagrams-of-thought"
+                },
+                {
+                  "to_s": "inƒo",
+                  "id": 90280,
+                  "slug": "in-o"
+                },
+                {
+                  "to_s": "Help With",
+                  "id": 93056,
+                  "slug": "help-with"
+                },
+                {
+                  "to_s": "Circles",
+                  "id": 99311,
+                  "slug": "circles-1507612575"
+                },
+                {
+                  "to_s": "desssssssssssssign",
+                  "id": 114236,
+                  "slug": "desssssssssssssign"
+                },
+                {
+                  "to_s": "thesis thoughts",
+                  "id": 115651,
+                  "slug": "thesis-thoughts"
+                },
+                {
+                  "to_s": "bonito graphic design",
+                  "id": 118325,
+                  "slug": "bonito-graphic-design"
+                },
+                {
+                  "to_s": "shelters and structures",
+                  "id": 121846,
+                  "slug": "shelters-and-structures"
+                },
+                {
+                  "to_s": "diagramatic",
+                  "id": 122040,
+                  "slug": "diagramatic"
+                },
+                {
+                  "to_s": "⋯ info(graphs)",
+                  "id": 150176,
+                  "slug": "info-graphs"
+                },
+                {
+                  "to_s": "xdx",
+                  "id": 151771,
+                  "slug": "xdx"
+                },
+                {
+                  "to_s": "Charts, Diagrams and Trigonometry",
+                  "id": 163933,
+                  "slug": "charts-diagrams-and-trigonometry"
+                },
+                {
+                  "to_s": "a graph",
+                  "id": 164337,
+                  "slug": "a-graph"
+                },
+                {
+                  "to_s": "Symbols",
+                  "id": 166132,
+                  "slug": "symbols-1521643290"
+                },
+                {
+                  "to_s": "IS",
+                  "id": 173926,
+                  "slug": "is-1522825836"
+                },
+                {
+                  "to_s": "RS",
+                  "id": 177207,
+                  "slug": "rs"
+                },
+                {
+                  "to_s": "Bucket",
+                  "id": 182908,
+                  "slug": "bucket-1527276543"
+                },
+                {
+                  "to_s": "Unarchived",
+                  "id": 185860,
+                  "slug": "unarchived"
+                },
+                {
+                  "to_s": "Sensemaking",
+                  "id": 188245,
+                  "slug": "sensemaking"
+                },
+                {
+                  "to_s": "sorting hat",
+                  "id": 196559,
+                  "slug": "sorting-hat"
+                },
+                {
+                  "to_s": "Ideation",
+                  "id": 212583,
+                  "slug": "ideation"
+                },
+                {
+                  "to_s": "Social Patterns",
+                  "id": 225965,
+                  "slug": "social-patterns"
+                },
+                {
+                  "to_s": "Pain",
+                  "id": 240340,
+                  "slug": "pain-e_skdh7qthm"
+                },
+                {
+                  "to_s": "Diagram",
+                  "id": 243120,
+                  "slug": "diagram-iottre_liso"
+                },
+                {
+                  "to_s": "diagrams",
+                  "id": 249386,
+                  "slug": "diagrams-3u3hayiws4m"
+                },
+                {
+                  "to_s": "info img",
+                  "id": 253817,
+                  "slug": "info-img"
+                },
+                {
+                  "to_s": "GrEaT",
+                  "id": 274711,
+                  "slug": "great-b_jcyjrmzy4"
+                },
+                {
+                  "to_s": "Circles and Communities ",
+                  "id": 288201,
+                  "slug": "circles-and-communities"
+                },
+                {
+                  "to_s": "infographics",
+                  "id": 290490,
+                  "slug": "infographics-0wzejvtnhm4"
+                },
+                {
+                  "to_s": "gfx",
+                  "id": 293165,
+                  "slug": "gfx-sb6af6b6wxe"
+                },
+                {
+                  "to_s": "Words",
+                  "id": 296565,
+                  "slug": "words-gtwxljzdmra"
+                },
+                {
+                  "to_s": "i have feelings",
+                  "id": 298501,
+                  "slug": "i-have-feelings"
+                },
+                {
+                  "to_s": "INSPO | Graphics ",
+                  "id": 303907,
+                  "slug": "inspo-graphics"
+                },
+                {
+                  "to_s": "Biosystems iii",
+                  "id": 304232,
+                  "slug": "biosystems-iii"
+                },
+                {
+                  "to_s": "* CHARTS, GRAPHS, LAYOUTS",
+                  "id": 315834,
+                  "slug": "charts-graphs-layouts"
+                },
+                {
+                  "to_s": "type",
+                  "id": 323963,
+                  "slug": "type-cm5f5-1mh5k"
+                },
+                {
+                  "to_s": "I felt that 🌀",
+                  "id": 341069,
+                  "slug": "i-felt-that-wyyy6ks9840"
+                },
+                {
+                  "to_s": "eros/ion",
+                  "id": 344781,
+                  "slug": "eros-ion"
+                },
+                {
+                  "to_s": "diagrams",
+                  "id": 349110,
+                  "slug": "diagrams-ylbwsvbeg84"
+                },
+                {
+                  "to_s": "Pointless",
+                  "id": 352577,
+                  "slug": "pointless"
+                },
+                {
+                  "to_s": "*inform me",
+                  "id": 381034,
+                  "slug": "inform-me"
+                },
+                {
+                  "to_s": "diagrams_",
+                  "id": 387914,
+                  "slug": "diagrams_"
+                },
+                {
+                  "to_s": "⬛ Method",
+                  "id": 391283,
+                  "slug": "method-zhcyqtis4l4"
+                },
+                {
+                  "to_s": "Personalities Feelings Alignments Emotions Differences",
+                  "id": 392097,
+                  "slug": "personalities-feelings-alignments-emotions-differences"
+                },
+                {
+                  "to_s": "UntitledWIP",
+                  "id": 416721,
+                  "slug": "untitledwip"
+                },
+                {
+                  "to_s": "figure",
+                  "id": 467928,
+                  "slug": "figure-npwxc8pu-hg"
+                },
+                {
+                  "to_s": "visual",
+                  "id": 479176,
+                  "slug": "visual-n0iwoujqbuy"
+                },
+                {
+                  "to_s": "How to Get to Brooklyn",
+                  "id": 479708,
+                  "slug": "how-to-get-to-brooklyn"
+                },
+                {
+                  "to_s": "diagrams +",
+                  "id": 483619,
+                  "slug": "diagrams-79-ohwzewbs"
+                },
+                {
+                  "to_s": "type + diagramming from the diaphragm",
+                  "id": 490496,
+                  "slug": "type-diagramming-from-the-diaphragm"
+                },
+                {
+                  "to_s": "Holiday",
+                  "id": 491315,
+                  "slug": "holiday-pmeekynq1s"
+                },
+                {
+                  "to_s": "me / you / us / them / etc",
+                  "id": 496562,
+                  "slug": "me-you-us-them-etc"
+                },
+                {
+                  "to_s": "MiР",
+                  "id": 502876,
+                  "slug": "mi-ontuklga9i0"
+                },
+                {
+                  "to_s": "Radical leftie",
+                  "id": 511096,
+                  "slug": "radical-leftie"
+                },
+                {
+                  "to_s": "~3 Pic Selected",
+                  "id": 515999,
+                  "slug": "3-pic-selected"
+                },
+                {
+                  "to_s": "Clock Faces🕑",
+                  "id": 539438,
+                  "slug": "clock-faces"
+                },
+                {
+                  "to_s": "TNN Resources",
+                  "id": 541935,
+                  "slug": "tnn-resources"
+                },
+                {
+                  "to_s": "data",
+                  "id": 552754,
+                  "slug": "data-xtzgvyl6ge"
+                },
+                {
+                  "to_s": "my g",
+                  "id": 565452,
+                  "slug": "my-g"
+                },
+                {
+                  "to_s": "typo",
+                  "id": 574212,
+                  "slug": "typo-jcifo0hgfkm"
+                },
+                {
+                  "to_s": "dismantle this ",
+                  "id": 576120,
+                  "slug": "dismantle-this"
+                },
+                {
+                  "to_s": "money makes you feel better?",
+                  "id": 576945,
+                  "slug": "money-makes-you-feel-better"
+                },
+                {
+                  "to_s": "graph",
+                  "id": 580650,
+                  "slug": "graph-iss1xuwvn1e"
+                },
+                {
+                  "to_s": "human ♡ empathy",
+                  "id": 588988,
+                  "slug": "human-empathy"
+                },
+                {
+                  "to_s": "🧿 diagrams",
+                  "id": 597691,
+                  "slug": "diagrams-umhbxe1ohmq"
+                },
+                {
+                  "to_s": "Space + Time",
+                  "id": 599584,
+                  "slug": "space-time-wbdhzswlwvq"
+                },
+                {
+                  "to_s": "charts",
+                  "id": 600594,
+                  "slug": "charts-iwatcjtdus0"
+                },
+                {
+                  "to_s": "Visual Narrative",
+                  "id": 605920,
+                  "slug": "visual-narrative-k53k7ghgdkk"
+                },
+                {
+                  "to_s": "☉",
+                  "id": 608396,
+                  "slug": "wpwghv30gui"
+                },
+                {
+                  "to_s": "feel",
+                  "id": 658569,
+                  "slug": "feel-zotgyl1xn2w"
+                },
+                {
+                  "to_s": "diagrams and such",
+                  "id": 661573,
+                  "slug": "diagrams-and-such"
+                },
+                {
+                  "to_s": "scales-and-frames",
+                  "id": 671346,
+                  "slug": "scales-and-frames"
+                },
+                {
+                  "to_s": "* WEBSITES",
+                  "id": 675972,
+                  "slug": "websites-0acqgnypg_m"
+                },
+                {
+                  "to_s": "my taste buds",
+                  "id": 679888,
+                  "slug": "my-taste-buds"
+                },
+                {
+                  "to_s": "SNSTV RSRCH",
+                  "id": 714004,
+                  "slug": "snstv-rsrch"
+                },
+                {
+                  "to_s": "⁂ microsm 🌀macrosm",
+                  "id": 716836,
+                  "slug": "microsm-macrosm"
+                },
+                {
+                  "to_s": "yellow paint and white wallpaper",
+                  "id": 744752,
+                  "slug": "yellow-paint-and-white-wallpaper"
+                },
+                {
+                  "to_s": "live by design",
+                  "id": 753752,
+                  "slug": "live-by-design"
+                },
+                {
+                  "to_s": "random deep",
+                  "id": 764940,
+                  "slug": "random-deep"
+                },
+                {
+                  "to_s": "Unraveling Identity 🧶 ",
+                  "id": 773900,
+                  "slug": "unraveling-identity"
+                },
+                {
+                  "to_s": "Zin3",
+                  "id": 789528,
+                  "slug": "zin3"
+                },
+                {
+                  "to_s": "TECH LANGUAGE ",
+                  "id": 840404,
+                  "slug": "tech-language"
+                },
+                {
+                  "to_s": "answers",
+                  "id": 868500,
+                  "slug": "answers-nteytiaqvac"
+                },
+                {
+                  "to_s": "Minah’s Mind",
+                  "id": 895244,
+                  "slug": "minah-s-mind"
+                },
+                {
+                  "to_s": "ff",
+                  "id": 897503,
+                  "slug": "ff-eduixe5llvq"
+                },
+                {
+                  "to_s": "Apothecary Alchemy ",
+                  "id": 915155,
+                  "slug": "apothecary-alchemy"
+                },
+                {
+                  "to_s": "shemas",
+                  "id": 929230,
+                  "slug": "shemas"
+                },
+                {
+                  "to_s": "Graphic.",
+                  "id": 932844,
+                  "slug": "graphic-byfaskursq4"
+                },
+                {
+                  "to_s": "healing",
+                  "id": 938224,
+                  "slug": "healing-qbrdwexcnfw"
+                },
+                {
+                  "to_s": "Researching myself into Being",
+                  "id": 946443,
+                  "slug": "researching-myself-into-being"
+                },
+                {
+                  "to_s": "Thinking",
+                  "id": 952912,
+                  "slug": "thinking-7cit7qncs6u"
+                },
+                {
+                  "to_s": "FONTS + DESIGN",
+                  "id": 955023,
+                  "slug": "fonts-design"
+                },
+                {
+                  "to_s": "time, space &amp; being",
+                  "id": 965243,
+                  "slug": "time-space-being"
+                },
+                {
+                  "to_s": "Because of Him I am...",
+                  "id": 970687,
+                  "slug": "because-of-him-i-am"
+                },
+                {
+                  "to_s": "being human",
+                  "id": 977089,
+                  "slug": "being-human-2i3qwbdbiq4"
+                },
+                {
+                  "to_s": " +type +layout",
+                  "id": 979243,
+                  "slug": "type-layout-okbzkxy_qaa"
+                },
+                {
+                  "to_s": " cultural attachment",
+                  "id": 999010,
+                  "slug": "cultural-attachment"
+                },
+                {
+                  "to_s": "Midnite",
+                  "id": 1008573,
+                  "slug": "midnite"
+                },
+                {
+                  "to_s": "antidote ·",
+                  "id": 1009952,
+                  "slug": "antidote-n3ipgzy6trm"
+                }
+              ]
+            },
+            {
+              "__typename": "Image",
+              "id": 308474,
+              "channels": [
+                {
+                  "to_s": "Diagrams",
+                  "id": 13047,
+                  "slug": "diagrams--2"
+                },
+                {
+                  "to_s": "Right Click",
+                  "id": 14748,
+                  "slug": "right-click"
+                },
+                {
+                  "to_s": "⏍ sexy charts",
+                  "id": 52345,
+                  "slug": "sexy-charts"
+                },
+                {
+                  "to_s": "Graphicacy",
+                  "id": 75227,
+                  "slug": "graphicacy"
+                },
+                {
+                  "to_s": "Trying To Understand It",
+                  "id": 90096,
+                  "slug": "trying-to-understand-it"
+                },
+                {
+                  "to_s": "inƒo",
+                  "id": 90280,
+                  "slug": "in-o"
+                },
+                {
+                  "to_s": "Models",
+                  "id": 100914,
+                  "slug": "models-1508248204"
+                },
+                {
+                  "to_s": "is good",
+                  "id": 147547,
+                  "slug": "is-good"
+                },
+                {
+                  "to_s": "OPERA OF/FOR KNOWN &amp; UNKNOWABLE UN-I-VERSES",
+                  "id": 183502,
+                  "slug": "opera-of-for-known-unknowable-un-i-verses"
+                },
+                {
+                  "to_s": "Sensemaking",
+                  "id": 188245,
+                  "slug": "sensemaking"
+                },
+                {
+                  "to_s": "Diagrams",
+                  "id": 216212,
+                  "slug": "diagrams-1531493944"
+                },
+                {
+                  "to_s": "Social Patterns",
+                  "id": 225965,
+                  "slug": "social-patterns"
+                },
+                {
+                  "to_s": "Schematics &amp; Diagrams",
+                  "id": 275916,
+                  "slug": "schematics-diagrams"
+                },
+                {
+                  "to_s": "design curiosity",
+                  "id": 275951,
+                  "slug": "design-curiosity"
+                },
+                {
+                  "to_s": "mapping",
+                  "id": 334603,
+                  "slug": "mapping-8yewjqz-mei"
+                },
+                {
+                  "to_s": "📌 HCI",
+                  "id": 352716,
+                  "slug": "hci-2mmm17ribjm"
+                },
+                {
+                  "to_s": "a.sketches",
+                  "id": 438843,
+                  "slug": "a-sketches"
+                },
+                {
+                  "to_s": "Schematics for the Master Plan",
+                  "id": 471339,
+                  "slug": "schematics-for-the-master-plan"
+                },
+                {
+                  "to_s": "You’re my inspiration ",
+                  "id": 473051,
+                  "slug": "you-re-my-inspiration"
+                },
+                {
+                  "to_s": "data, but in specific forms",
+                  "id": 523792,
+                  "slug": "data-but-in-specific-forms"
+                },
+                {
+                  "to_s": "tech love",
+                  "id": 533136,
+                  "slug": "tech-love"
+                },
+                {
+                  "to_s": "Diagrams &amp; Schematics",
+                  "id": 538490,
+                  "slug": "diagrams-schematics"
+                },
+                {
+                  "to_s": "Creativity",
+                  "id": 538493,
+                  "slug": "creativity-uibrjdgbnza"
+                },
+                {
+                  "to_s": "which direction?",
+                  "id": 545290,
+                  "slug": "which-direction"
+                },
+                {
+                  "to_s": "dismantle this ",
+                  "id": 576120,
+                  "slug": "dismantle-this"
+                },
+                {
+                  "to_s": "Space + Time",
+                  "id": 599584,
+                  "slug": "space-time-wbdhzswlwvq"
+                },
+                {
+                  "to_s": "Ideas • Future Everything",
+                  "id": 622770,
+                  "slug": "ideas-future-everything"
+                },
+                {
+                  "to_s": "Diagrams",
+                  "id": 636206,
+                  "slug": "diagrams-aynvucxovva"
+                },
+                {
+                  "to_s": "Better Future",
+                  "id": 646332,
+                  "slug": "better-future-iki-hdgkt9i"
+                },
+                {
+                  "to_s": "Linguista",
+                  "id": 658306,
+                  "slug": "linguista"
+                },
+                {
+                  "to_s": "meme infographics ",
+                  "id": 674145,
+                  "slug": "meme-infographics"
+                },
+                {
+                  "to_s": "Critique • Internet, Tech &amp; Design Thinking",
+                  "id": 705938,
+                  "slug": "critique-internet-tech-design-thinking"
+                },
+                {
+                  "to_s": "Introductions",
+                  "id": 727556,
+                  "slug": "introductions-bcb86jgphv8"
+                },
+                {
+                  "to_s": "WAVELENGTH",
+                  "id": 739707,
+                  "slug": "wavelength-bnqt27o-sna"
+                },
+                {
+                  "to_s": "Idea Visuals",
+                  "id": 769688,
+                  "slug": "idea-visuals"
+                },
+                {
+                  "to_s": "the file cabinet",
+                  "id": 797658,
+                  "slug": "the-file-cabinet"
+                },
+                {
+                  "to_s": "graphic features",
+                  "id": 812896,
+                  "slug": "graphic-features"
+                },
+                {
+                  "to_s": "I N F O R M A T I O N",
+                  "id": 860536,
+                  "slug": "i-n-f-o-r-m-a-t-i-o-n"
+                },
+                {
+                  "to_s": "SD01",
+                  "id": 952037,
+                  "slug": "sd01"
+                },
+                {
+                  "to_s": "10   192 ",
+                  "id": 969707,
+                  "slug": "10-192"
+                },
+                {
+                  "to_s": "Graphics // Diagrams",
+                  "id": 976375,
+                  "slug": "graphics-diagrams-vzjgosmcwlc"
+                },
+                {
+                  "to_s": "Diagrams/Slow Memes",
+                  "id": 978447,
+                  "slug": "diagrams-slow-memes"
+                },
+                {
+                  "to_s": "a binded ocean floor",
+                  "id": 1001625,
+                  "slug": "a-binded-ocean-floor"
+                },
+                {
+                  "to_s": "D8TA",
+                  "id": 1038020,
+                  "slug": "d8ta"
+                },
+                {
+                  "to_s": "things",
+                  "id": 1063301,
+                  "slug": "things-atjsmg189kc"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "to_s": "nappytex ",
+          "id": 723181,
+          "blocks": [
+            {
+              "__typename": "Image",
+              "id": 7692656,
+              "channels": [
+                {
+                  "to_s": "nappytex ",
+                  "id": 723181,
+                  "slug": "nappytex"
+                }
+              ]
+            },
+            {
+              "__typename": "Image",
+              "id": 3920610,
+              "channels": [
+                {
+                  "to_s": "neoblack",
+                  "id": 372478,
+                  "slug": "neoblack"
+                },
+                {
+                  "to_s": "✨",
+                  "id": 507669,
+                  "slug": "vymrfy0noro"
+                },
+                {
+                  "to_s": "Black Life",
+                  "id": 554756,
+                  "slug": "black-life"
+                },
+                {
+                  "to_s": "brick and satin",
+                  "id": 686872,
+                  "slug": "brick-and-satin"
+                },
+                {
+                  "to_s": "Black Black Black",
+                  "id": 696258,
+                  "slug": "black-black-black"
+                },
+                {
+                  "to_s": "nappytex ",
+                  "id": 723181,
+                  "slug": "nappytex"
+                },
+                {
+                  "to_s": "Caribana: Caribbean Image And Narrative",
+                  "id": 921249,
+                  "slug": "caribana-caribbean-image-and-narrative"
+                }
+              ]
+            },
+            {
+              "__typename": "Image",
+              "id": 7668796,
+              "channels": [
+                {
+                  "to_s": "brick and satin",
+                  "id": 686872,
+                  "slug": "brick-and-satin"
+                },
+                {
+                  "to_s": "nappytex ",
+                  "id": 723181,
+                  "slug": "nappytex"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

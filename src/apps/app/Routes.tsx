@@ -34,8 +34,12 @@ import { BlogPost } from 'v2/pages/blog/BlogPost'
 import { ConfirmationPage } from 'v2/pages/confirmation/ConfirmationPage'
 import { ExpiredConfirmationPage } from 'v2/pages/confirmation/ExpiredConfirmationPage'
 import isDev from 'v2/util/isDev'
+import useLoginStatus from 'v2/hooks/useLoginStatus'
+import HomePage from 'v2/pages/home/HomePage'
 
 export const Routes = () => {
+  const { isLoggedIn } = useLoginStatus()
+
   const location = useLocation()
   const background =
     location.state &&
@@ -66,7 +70,11 @@ export const Routes = () => {
 
         <Route exact path="/notifications" component={NotificationPage} />
 
-        <Route exact path="/" component={FeedPage} />
+        {isLoggedIn ? (
+          <Route exact path="/" component={FeedPage} />
+        ) : (
+          <Route exact path="/" component={HomePage} />
+        )}
 
         {/* Search */}
         <Route
