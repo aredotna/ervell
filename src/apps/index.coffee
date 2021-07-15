@@ -8,10 +8,6 @@ console.time('actions')
 app.use(require('../apps/actions'))
 console.timeEnd('actions')
 
-console.time('home')
-app.use(require('../apps/home'))
-console.timeEnd('home')
-
 console.time('authentication')
 app.use(require('../apps/authentication'))
 console.timeEnd('authentication')
