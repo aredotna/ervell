@@ -8,12 +8,12 @@
 // ====================================================
 
 export interface deleteChannelMutation_delete_channel {
-  __typename: "DeleteChannelPayload";
+  __typename: "DeleteChannelMutationPayload";
   /**
    * A unique identifier for the client performing the mutation.
    */
   clientMutationId: string | null;
-  status: string | null;
+  status: string;
 }
 
 export interface deleteChannelMutation {

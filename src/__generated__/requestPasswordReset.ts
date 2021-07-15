@@ -8,8 +8,8 @@
 // ====================================================
 
 export interface requestPasswordReset_request_password_reset {
-  __typename: "RequestPasswordResetPayload";
-  email: string | null;
+  __typename: "RequestPasswordResetMutationPayload";
+  email: string;
 }
 
 export interface requestPasswordReset {

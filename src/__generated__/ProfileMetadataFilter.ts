@@ -9,14 +9,14 @@
 
 export interface ProfileMetadataFilter_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ProfileMetadataFilter_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type ProfileMetadataFilter = ProfileMetadataFilter_User | ProfileMetadataFilter_Group;

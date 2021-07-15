@@ -9,23 +9,23 @@
 
 export interface CollaboratorLink_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export interface CollaboratorLink_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
 export interface CollaboratorLink_Group_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -37,15 +37,15 @@ export interface CollaboratorLink_Group_can {
 
 export interface CollaboratorLink_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
   description: string | null;
-  user: CollaboratorLink_Group_user | null;
-  users: (CollaboratorLink_Group_users | null)[] | null;
+  user: CollaboratorLink_Group_user;
+  users: CollaboratorLink_Group_users[] | null;
   can: CollaboratorLink_Group_can | null;
-  visibility: string | null;
-  label: string | null;
+  visibility: string;
+  label: string;
 }
 
 export type CollaboratorLink = CollaboratorLink_User | CollaboratorLink_Group;

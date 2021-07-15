@@ -9,6 +9,6 @@
 
 export interface Avatar {
   __typename: "Me";
-  id: number | null;
+  id: number;
   avatar: string | null;
 }

@@ -9,28 +9,28 @@
 
 export interface ManagedMember_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ManagedMember_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ManagedMember_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  visibility: string | null;
-  user: ManagedMember_Group_user | null;
+  visibility: string;
+  user: ManagedMember_Group_user;
 }
 
 export type ManagedMember = ManagedMember_User | ManagedMember_Group;

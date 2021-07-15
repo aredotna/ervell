@@ -7,13 +7,13 @@
 // GraphQL query operation: CanonicalLinkForReader
 // ====================================================
 
-export interface CanonicalLinkForReader_blokk_Channel {
-  __typename: "Channel" | "Text" | "Image" | "Embed" | "Attachment" | "PendingBlock";
+export interface CanonicalLinkForReader_blokk_Attachment {
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "PendingBlock" | "Text";
 }
 
 export interface CanonicalLinkForReader_blokk_Link_canonical_link {
   __typename: "CanonicalLink";
-  id: number | null;
+  id: number;
   url: string | null;
   title: string | null;
   content: string | null;
@@ -25,11 +25,11 @@ export interface CanonicalLinkForReader_blokk_Link_canonical_link {
 
 export interface CanonicalLinkForReader_blokk_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   canonical_link: CanonicalLinkForReader_blokk_Link_canonical_link | null;
 }
 
-export type CanonicalLinkForReader_blokk = CanonicalLinkForReader_blokk_Channel | CanonicalLinkForReader_blokk_Link;
+export type CanonicalLinkForReader_blokk = CanonicalLinkForReader_blokk_Attachment | CanonicalLinkForReader_blokk_Link;
 
 export interface CanonicalLinkForReader {
   blokk: CanonicalLinkForReader_blokk | null;

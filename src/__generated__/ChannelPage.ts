@@ -9,18 +9,18 @@
 
 export interface ChannelPage_channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export interface ChannelPage_channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export type ChannelPage_channel_owner = ChannelPage_channel_owner_User | ChannelPage_channel_owner_Group;
@@ -28,7 +28,7 @@ export type ChannelPage_channel_owner = ChannelPage_channel_owner_User | Channel
 export interface ChannelPage_channel_counts {
   __typename: "ChannelCounts";
   collaborators: number | null;
-  followers: number | null;
+  followers: number;
   contents: number | null;
   blocks: number | null;
   channels: number | null;
@@ -41,7 +41,7 @@ export interface ChannelPage_channel_can {
   destroy: boolean | null;
   mute: boolean | null;
   share: boolean | null;
-  manage_collaborators: boolean | null;
+  manage_collaborators: boolean;
   connect: boolean | null;
   add_to: boolean | null;
   add_to_as_premium: boolean | null;
@@ -49,30 +49,30 @@ export interface ChannelPage_channel_can {
 
 export interface ChannelPage_channel_user {
   __typename: "User";
-  id: number | null;
+  id: number;
   href: string | null;
-  name: string | null;
+  name: string;
 }
 
 export interface ChannelPage_channel_collaborators_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export interface ChannelPage_channel_collaborators_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
 export interface ChannelPage_channel_collaborators_Group_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -84,39 +84,39 @@ export interface ChannelPage_channel_collaborators_Group_can {
 
 export interface ChannelPage_channel_collaborators_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
   description: string | null;
-  user: ChannelPage_channel_collaborators_Group_user | null;
-  users: (ChannelPage_channel_collaborators_Group_users | null)[] | null;
+  user: ChannelPage_channel_collaborators_Group_user;
+  users: ChannelPage_channel_collaborators_Group_users[] | null;
   can: ChannelPage_channel_collaborators_Group_can | null;
-  visibility: string | null;
-  label: string | null;
+  visibility: string;
+  label: string;
 }
 
 export type ChannelPage_channel_collaborators = ChannelPage_channel_collaborators_User | ChannelPage_channel_collaborators_Group;
 
 export interface ChannelPage_channel_connected_to_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelPage_channel_connected_to_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type ChannelPage_channel_connected_to_channels_owner = ChannelPage_channel_connected_to_channels_owner_User | ChannelPage_channel_connected_to_channels_owner_Group;
 
 export interface ChannelPage_channel_connected_to_channels {
   __typename: "Channel";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
-  owner: ChannelPage_channel_connected_to_channels_owner | null;
+  owner: ChannelPage_channel_connected_to_channels_owner;
 }
 
 export interface ChannelPage_channel_share {
@@ -128,25 +128,25 @@ export interface ChannelPage_channel_share {
 
 export interface ChannelPage_channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
-  truncatedTitle: string | null;
+  id: number;
+  title: string;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  owner: ChannelPage_channel_owner | null;
+  visibility: string;
+  owner: ChannelPage_channel_owner;
   counts: ChannelPage_channel_counts | null;
-  label: string | null;
+  label: string;
   can: ChannelPage_channel_can | null;
   is_muted: boolean | null;
   info: string | null;
   user: ChannelPage_channel_user | null;
-  collaborators: (ChannelPage_channel_collaborators | null)[] | null;
-  connected_to_channels: (ChannelPage_channel_connected_to_channels | null)[] | null;
+  collaborators: ChannelPage_channel_collaborators[] | null;
+  connected_to_channels: ChannelPage_channel_connected_to_channels[] | null;
   share: ChannelPage_channel_share | null;
-  meta_title: string | null;
+  meta_title: string;
   meta_description: string | null;
   canonical: string | null;
-  is_nsfw: boolean | null;
+  is_nsfw: boolean;
   image_url: string | null;
 }
 

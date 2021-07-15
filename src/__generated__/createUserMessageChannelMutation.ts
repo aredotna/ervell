@@ -13,8 +13,8 @@ export interface createUserMessageChannelMutation_create_user_message_channel_ch
 }
 
 export interface createUserMessageChannelMutation_create_user_message_channel {
-  __typename: "CreateUserMessageChannelPayload";
-  channel: createUserMessageChannelMutation_create_user_message_channel_channel | null;
+  __typename: "CreateUserMessageChannelMutationPayload";
+  channel: createUserMessageChannelMutation_create_user_message_channel_channel;
 }
 
 export interface createUserMessageChannelMutation {

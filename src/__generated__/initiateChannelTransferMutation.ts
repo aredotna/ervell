@@ -16,41 +16,41 @@ export interface initiateChannelTransferMutation_initiate_channel_transfer_chann
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient = initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient_User | initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient_Group;
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request {
   __typename: "ChannelTransferRequest";
-  recipient: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient | null;
+  recipient: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request_recipient;
   is_recipient_member: boolean | null;
 }
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_can | null;
-  is_pending_transfer: boolean | null;
+  is_pending_transfer: boolean;
   transfer_request: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel_transfer_request | null;
-  visibility: string | null;
+  visibility: string;
 }
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request {
   __typename: "ChannelTransferRequest";
-  channel: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel | null;
+  channel: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request_channel;
 }
 
 export interface initiateChannelTransferMutation_initiate_channel_transfer {
-  __typename: "InitiateChannelTransferPayload";
-  channel_transfer_request: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request | null;
+  __typename: "InitiateChannelTransferMutationPayload";
+  channel_transfer_request: initiateChannelTransferMutation_initiate_channel_transfer_channel_transfer_request;
 }
 
 export interface initiateChannelTransferMutation {

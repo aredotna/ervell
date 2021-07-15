@@ -9,8 +9,8 @@
 
 export interface ModalBlockLightbox_block_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -22,8 +22,8 @@ export interface ModalBlockLightbox_block_Channel_source {
 
 export interface ModalBlockLightbox_block_Channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -33,15 +33,15 @@ export interface ModalBlockLightbox_block_Channel {
   user: ModalBlockLightbox_block_Channel_user | null;
   source: ModalBlockLightbox_block_Channel_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
 }
 
 export interface ModalBlockLightbox_block_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -62,8 +62,8 @@ export interface ModalBlockLightbox_block_Image_can {
 
 export interface ModalBlockLightbox_block_Image {
   __typename: "Image";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -73,8 +73,8 @@ export interface ModalBlockLightbox_block_Image {
   user: ModalBlockLightbox_block_Image_user | null;
   source: ModalBlockLightbox_block_Image_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
   thumb_url: string | null;
   image_url: string | null;
@@ -86,8 +86,8 @@ export interface ModalBlockLightbox_block_Image {
 
 export interface ModalBlockLightbox_block_Text_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -108,8 +108,8 @@ export interface ModalBlockLightbox_block_Text_can {
 
 export interface ModalBlockLightbox_block_Text {
   __typename: "Text";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -119,19 +119,19 @@ export interface ModalBlockLightbox_block_Text {
   user: ModalBlockLightbox_block_Text_user | null;
   source: ModalBlockLightbox_block_Text_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
-  content: string | null;
+  content: string;
   can: ModalBlockLightbox_block_Text_can | null;
   find_original_url: string | null;
-  editable_content: string | null;
+  editable_content: string;
 }
 
 export interface ModalBlockLightbox_block_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -154,8 +154,8 @@ export interface ModalBlockLightbox_block_Link_can {
 
 export interface ModalBlockLightbox_block_Link {
   __typename: "Link";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -165,8 +165,8 @@ export interface ModalBlockLightbox_block_Link {
   user: ModalBlockLightbox_block_Link_user | null;
   source: ModalBlockLightbox_block_Link_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
   source_url: string | null;
   image_url: string | null;
@@ -177,8 +177,8 @@ export interface ModalBlockLightbox_block_Link {
 
 export interface ModalBlockLightbox_block_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -199,8 +199,8 @@ export interface ModalBlockLightbox_block_Attachment_can {
 
 export interface ModalBlockLightbox_block_Attachment {
   __typename: "Attachment";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -210,8 +210,8 @@ export interface ModalBlockLightbox_block_Attachment {
   user: ModalBlockLightbox_block_Attachment_user | null;
   source: ModalBlockLightbox_block_Attachment_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
   file_extension: string | null;
   file_url: string | null;
@@ -225,8 +225,8 @@ export interface ModalBlockLightbox_block_Attachment {
 
 export interface ModalBlockLightbox_block_Embed_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -247,8 +247,8 @@ export interface ModalBlockLightbox_block_Embed_can {
 
 export interface ModalBlockLightbox_block_Embed {
   __typename: "Embed";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -258,8 +258,8 @@ export interface ModalBlockLightbox_block_Embed {
   user: ModalBlockLightbox_block_Embed_user | null;
   source: ModalBlockLightbox_block_Embed_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
   embed_html: string | null;
   embed_width: number | null;
@@ -269,8 +269,8 @@ export interface ModalBlockLightbox_block_Embed {
 
 export interface ModalBlockLightbox_block_PendingBlock_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -291,8 +291,8 @@ export interface ModalBlockLightbox_block_PendingBlock_can {
 
 export interface ModalBlockLightbox_block_PendingBlock {
   __typename: "PendingBlock";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
@@ -302,8 +302,8 @@ export interface ModalBlockLightbox_block_PendingBlock {
   user: ModalBlockLightbox_block_PendingBlock_user | null;
   source: ModalBlockLightbox_block_PendingBlock_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
   can: ModalBlockLightbox_block_PendingBlock_can | null;
 }

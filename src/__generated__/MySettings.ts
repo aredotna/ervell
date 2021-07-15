@@ -26,14 +26,14 @@ export interface MySettings_me_settings {
 
 export interface MySettings_me {
   __typename: "Me";
-  id: number | null;
-  first_name: string | null;
-  last_name: string | null;
-  email: string | null;
-  slug: string | null;
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  slug: string;
   unconfirmed_email: string | null;
   bio: string | null;
-  is_premium: boolean | null;
+  is_premium: boolean;
   home_path: string | null;
   can: MySettings_me_can | null;
   settings: MySettings_me_settings | null;

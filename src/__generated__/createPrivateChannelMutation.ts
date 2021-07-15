@@ -9,25 +9,25 @@
 
 export interface createPrivateChannelMutation_create_channel_channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface createPrivateChannelMutation_create_channel_channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type createPrivateChannelMutation_create_channel_channel_owner = createPrivateChannelMutation_create_channel_channel_owner_Group | createPrivateChannelMutation_create_channel_channel_owner_User;
 
 export interface createPrivateChannelMutation_create_channel_channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
-  visibility: string | null;
-  owner: createPrivateChannelMutation_create_channel_channel_owner | null;
+  id: number;
+  title: string;
+  visibility: string;
+  owner: createPrivateChannelMutation_create_channel_channel_owner;
 }
 
 export interface createPrivateChannelMutation_create_channel {
@@ -36,7 +36,7 @@ export interface createPrivateChannelMutation_create_channel {
    * A unique identifier for the client performing the mutation.
    */
   clientMutationId: string | null;
-  channel: createPrivateChannelMutation_create_channel_channel | null;
+  channel: createPrivateChannelMutation_create_channel_channel;
 }
 
 export interface createPrivateChannelMutation {

@@ -14,6 +14,6 @@ export interface NotificationCount_counts {
 
 export interface NotificationCount {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: NotificationCount_counts | null;
 }

@@ -14,6 +14,6 @@ export interface UnreadNotificationsCount_counts {
 
 export interface UnreadNotificationsCount {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: UnreadNotificationsCount_counts | null;
 }

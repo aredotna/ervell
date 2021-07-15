@@ -9,13 +9,13 @@
 
 export interface inviteUserMutation_invite_users_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface inviteUserMutation_invite_users {
-  __typename: "InviteUsersPayload";
-  users: (inviteUserMutation_invite_users_users | null)[] | null;
+  __typename: "InviteUsersMutationPayload";
+  users: inviteUserMutation_invite_users_users[];
 }
 
 export interface inviteUserMutation {

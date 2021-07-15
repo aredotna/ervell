@@ -11,12 +11,12 @@ import { ConnectableInput, Movements } from "./globalTypes";
 
 export interface moveConnectableMutation_move_connectable_mutation_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
 }
 
 export interface moveConnectableMutation_move_connectable_mutation {
-  __typename: "MoveConnectablePayload";
-  channel: moveConnectableMutation_move_connectable_mutation_channel | null;
+  __typename: "MoveConnectableMutationPayload";
+  channel: moveConnectableMutation_move_connectable_mutation_channel;
 }
 
 export interface moveConnectableMutation {

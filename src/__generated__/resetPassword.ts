@@ -9,12 +9,12 @@
 
 export interface resetPassword_reset_password_me {
   __typename: "Me";
-  email: string | null;
+  email: string;
 }
 
 export interface resetPassword_reset_password {
-  __typename: "ResetPasswordPayload";
-  me: resetPassword_reset_password_me | null;
+  __typename: "ResetPasswordMutationPayload";
+  me: resetPassword_reset_password_me;
 }
 
 export interface resetPassword {

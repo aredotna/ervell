@@ -16,7 +16,7 @@ export interface GlobalNavElements_me_counts {
 
 export interface GlobalNavElements_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   banner: BannerEnum | null;
   counts: GlobalNavElements_me_counts | null;
 }

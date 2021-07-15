@@ -9,13 +9,13 @@
 
 export interface loginMutation_login_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   authentication_token: string | null;
 }
 
 export interface loginMutation_login {
-  __typename: "LoginPayload";
-  me: loginMutation_login_me | null;
+  __typename: "LoginMutationPayload";
+  me: loginMutation_login_me;
 }
 
 export interface loginMutation {

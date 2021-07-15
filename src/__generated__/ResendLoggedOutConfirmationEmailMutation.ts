@@ -9,7 +9,7 @@
 
 export interface ResendLoggedOutConfirmationEmailMutation_resend_logged_out_confirmation_email {
   __typename: "ResendLoggedOutConfirmationEmailMutationPayload";
-  status: string | null;
+  status: string;
 }
 
 export interface ResendLoggedOutConfirmationEmailMutation {

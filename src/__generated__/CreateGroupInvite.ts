@@ -14,14 +14,14 @@ export interface CreateGroupInvite_create_group_invite_group_invite {
 
 export interface CreateGroupInvite_create_group_invite_group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   href: string | null;
   invite: CreateGroupInvite_create_group_invite_group_invite | null;
 }
 
 export interface CreateGroupInvite_create_group_invite {
-  __typename: "CreateGroupInvitePayload";
-  group: CreateGroupInvite_create_group_invite_group | null;
+  __typename: "CreateGroupInviteMutationPayload";
+  group: CreateGroupInvite_create_group_invite_group;
 }
 
 export interface CreateGroupInvite {

@@ -21,19 +21,19 @@ export interface removeGroupUser_remove_group_users_group_can {
 
 export interface removeGroupUser_remove_group_users_group_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface removeGroupUser_remove_group_users_group_memberships_member {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -44,26 +44,26 @@ export interface removeGroupUser_remove_group_users_group_memberships_can {
 
 export interface removeGroupUser_remove_group_users_group_memberships {
   __typename: "GroupMembership";
-  id: number | null;
+  id: number;
   member: removeGroupUser_remove_group_users_group_memberships_member | null;
   can: removeGroupUser_remove_group_users_group_memberships_can | null;
 }
 
 export interface removeGroupUser_remove_group_users_group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
   description: string | null;
   invite: removeGroupUser_remove_group_users_group_invite | null;
   can: removeGroupUser_remove_group_users_group_can | null;
-  owner: removeGroupUser_remove_group_users_group_owner | null;
-  memberships: (removeGroupUser_remove_group_users_group_memberships | null)[] | null;
+  owner: removeGroupUser_remove_group_users_group_owner;
+  memberships: removeGroupUser_remove_group_users_group_memberships[] | null;
 }
 
 export interface removeGroupUser_remove_group_users {
-  __typename: "RemoveGroupUsersPayload";
-  group: removeGroupUser_remove_group_users_group | null;
+  __typename: "RemoveGroupUsersMutationPayload";
+  group: removeGroupUser_remove_group_users_group;
 }
 
 export interface removeGroupUser {

@@ -15,6 +15,6 @@ export interface ConnectableContextMenuChannel_can {
 
 export interface ConnectableContextMenuChannel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: ConnectableContextMenuChannel_can | null;
 }

@@ -9,17 +9,17 @@
 
 export interface ProfileGroups_groups {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  initials: string | null;
+  visibility: string;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ProfileGroups {
   __typename: "User";
-  id: number | null;
-  groups: (ProfileGroups_groups | null)[] | null;
+  id: number;
+  groups: ProfileGroups_groups[] | null;
 }

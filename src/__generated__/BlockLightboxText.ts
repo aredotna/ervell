@@ -14,7 +14,7 @@ export interface BlockLightboxText_can {
 
 export interface BlockLightboxText {
   __typename: "Text";
-  id: number | null;
-  content: string | null;
+  id: number;
+  content: string;
   can: BlockLightboxText_can | null;
 }

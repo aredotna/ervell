@@ -9,14 +9,14 @@
 
 export interface KonnectableMetadata_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableMetadata_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableMetadata_Channel_connection {
@@ -26,9 +26,9 @@ export interface KonnectableMetadata_Channel_connection {
 }
 
 export interface KonnectableMetadata_Channel {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Embed" | "PendingBlock";
+  __typename: "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: KonnectableMetadata_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -38,14 +38,14 @@ export interface KonnectableMetadata_Channel {
 
 export interface KonnectableMetadata_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableMetadata_Attachment_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface KonnectableMetadata_Attachment_connection {
@@ -57,7 +57,7 @@ export interface KonnectableMetadata_Attachment_connection {
 export interface KonnectableMetadata_Attachment {
   __typename: "Attachment";
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: KonnectableMetadata_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one

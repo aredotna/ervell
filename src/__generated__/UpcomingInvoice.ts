@@ -20,7 +20,7 @@ export interface UpcomingInvoice_upcoming_invoice {
   /**
    * Can be `null` in cases where there is a manually sent invoice
    */
-  next_payment_attempt_at: string | null;
+  next_payment_attempt_at: string;
 }
 
 export interface UpcomingInvoice {

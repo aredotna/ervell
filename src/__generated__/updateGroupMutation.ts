@@ -21,19 +21,19 @@ export interface updateGroupMutation_update_group_group_can {
 
 export interface updateGroupMutation_update_group_group_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface updateGroupMutation_update_group_group_memberships_member {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -44,26 +44,26 @@ export interface updateGroupMutation_update_group_group_memberships_can {
 
 export interface updateGroupMutation_update_group_group_memberships {
   __typename: "GroupMembership";
-  id: number | null;
+  id: number;
   member: updateGroupMutation_update_group_group_memberships_member | null;
   can: updateGroupMutation_update_group_group_memberships_can | null;
 }
 
 export interface updateGroupMutation_update_group_group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
   description: string | null;
   invite: updateGroupMutation_update_group_group_invite | null;
   can: updateGroupMutation_update_group_group_can | null;
-  owner: updateGroupMutation_update_group_group_owner | null;
-  memberships: (updateGroupMutation_update_group_group_memberships | null)[] | null;
+  owner: updateGroupMutation_update_group_group_owner;
+  memberships: updateGroupMutation_update_group_group_memberships[] | null;
 }
 
 export interface updateGroupMutation_update_group {
-  __typename: "UpdateGroupPayload";
-  group: updateGroupMutation_update_group_group | null;
+  __typename: "UpdateGroupMutationPayload";
+  group: updateGroupMutation_update_group_group;
 }
 
 export interface updateGroupMutation {

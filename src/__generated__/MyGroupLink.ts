@@ -9,10 +9,10 @@
 
 export interface MyGroupLink {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  initials: string | null;
+  visibility: string;
+  initials: string;
   avatar: string | null;
 }

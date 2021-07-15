@@ -9,17 +9,17 @@
 
 export interface FollowerCountCheck_counts {
   __typename: "MeCounts";
-  following: number | null;
+  following: number;
 }
 
 export interface FollowerCountCheck_twitter_authentication {
   __typename: "Authentication";
-  id: number | null;
+  id: number;
 }
 
 export interface FollowerCountCheck {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: FollowerCountCheck_counts | null;
   twitter_authentication: FollowerCountCheck_twitter_authentication | null;
 }

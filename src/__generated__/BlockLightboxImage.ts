@@ -7,17 +7,17 @@
 // GraphQL fragment: BlockLightboxImage
 // ====================================================
 
-export interface BlockLightboxImage_Channel {
-  __typename: "Channel" | "Text" | "Link" | "Embed" | "Attachment" | "PendingBlock";
+export interface BlockLightboxImage_Attachment {
+  __typename: "Attachment" | "Channel" | "Embed" | "Link" | "PendingBlock" | "Text";
 }
 
 export interface BlockLightboxImage_Image {
   __typename: "Image";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
 }
 
-export type BlockLightboxImage = BlockLightboxImage_Channel | BlockLightboxImage_Image;
+export type BlockLightboxImage = BlockLightboxImage_Attachment | BlockLightboxImage_Image;

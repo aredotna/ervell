@@ -9,7 +9,7 @@
 
 export interface ReaderCanonicalLink {
   __typename: "CanonicalLink";
-  id: number | null;
+  id: number;
   url: string | null;
   title: string | null;
   content: string | null;

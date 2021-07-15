@@ -9,15 +9,15 @@
 
 export interface EmbeddedChannel_channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -30,73 +30,73 @@ export interface EmbeddedChannel_channel_counts {
 
 export interface EmbeddedChannel_channel_contents_PendingBlock {
   __typename: "PendingBlock";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_contents_Text {
   __typename: "Text";
-  id: number | null;
-  preview_content: string | null;
-  title: string | null;
+  id: number;
+  preview_content: string;
+  title: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_contents_Image {
   __typename: "Image";
-  id: number | null;
+  id: number;
   preview_image_url: string | null;
-  title: string | null;
+  title: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_contents_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   preview_image_url: string | null;
-  title: string | null;
+  title: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_contents_Attachment {
   __typename: "Attachment";
-  id: number | null;
+  id: number;
   preview_image_url: string | null;
   file_extension: string | null;
-  title: string | null;
+  title: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_contents_Embed {
   __typename: "Embed";
-  id: number | null;
+  id: number;
   preview_image_url: string | null;
-  title: string | null;
+  title: string;
   href: string | null;
 }
 
 export interface EmbeddedChannel_channel_contents_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface EmbeddedChannel_channel_contents_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type EmbeddedChannel_channel_contents_Channel_owner = EmbeddedChannel_channel_contents_Channel_owner_User | EmbeddedChannel_channel_contents_Channel_owner_Group;
 
 export interface EmbeddedChannel_channel_contents_Channel {
   __typename: "Channel";
-  id: number | null;
-  preview_title: string | null;
-  visibility: string | null;
-  owner: EmbeddedChannel_channel_contents_Channel_owner | null;
-  title: string | null;
+  id: number;
+  preview_title: string;
+  visibility: string;
+  owner: EmbeddedChannel_channel_contents_Channel_owner;
+  title: string;
   href: string | null;
 }
 
@@ -104,14 +104,14 @@ export type EmbeddedChannel_channel_contents = EmbeddedChannel_channel_contents_
 
 export interface EmbeddedChannel_channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
-  truncatedTitle: string | null;
+  id: number;
+  title: string;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  owner: EmbeddedChannel_channel_owner | null;
+  visibility: string;
+  owner: EmbeddedChannel_channel_owner;
   counts: EmbeddedChannel_channel_counts | null;
-  contents: (EmbeddedChannel_channel_contents | null)[] | null;
+  contents: EmbeddedChannel_channel_contents[] | null;
 }
 
 export interface EmbeddedChannel {

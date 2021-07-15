@@ -9,16 +9,16 @@
 
 export interface UserProfileFollowers_followers {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
-  initials: string | null;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface UserProfileFollowers {
   __typename: "User";
-  id: number | null;
-  followers: (UserProfileFollowers_followers | null)[] | null;
+  id: number;
+  followers: UserProfileFollowers_followers[] | null;
 }

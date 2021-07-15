@@ -9,11 +9,11 @@
 
 export interface GroupOwner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }

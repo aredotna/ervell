@@ -9,7 +9,7 @@
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
@@ -24,9 +24,9 @@ export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer_default_c
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer_patron {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
+  id: number;
+  name: string;
+  hidden_email: string;
 }
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer_credit_cards {
@@ -40,17 +40,17 @@ export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer_credit_ca
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer {
   __typename: "Customer";
-  id: number | null;
-  is_canceled: boolean | null;
-  is_lifetime: boolean | null;
-  can_select_lifetime: boolean | null;
-  is_beneficiary: boolean | null;
+  id: number;
+  is_canceled: boolean;
+  is_lifetime: boolean;
+  can_select_lifetime: boolean;
+  is_beneficiary: boolean;
   plan: DowngradeToLifetime_downgrade_to_lifetime_me_customer_plan | null;
   updated_at: string | null;
   default_credit_card: DowngradeToLifetime_downgrade_to_lifetime_me_customer_default_credit_card | null;
   patron: DowngradeToLifetime_downgrade_to_lifetime_me_customer_patron | null;
   current_period_end_at: string | null;
-  credit_cards: (DowngradeToLifetime_downgrade_to_lifetime_me_customer_credit_cards | null)[] | null;
+  credit_cards: DowngradeToLifetime_downgrade_to_lifetime_me_customer_credit_cards[] | null;
 }
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me_counts {
@@ -61,7 +61,7 @@ export interface DowngradeToLifetime_downgrade_to_lifetime_me_counts {
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: DowngradeToLifetime_downgrade_to_lifetime_me_customer | null;
@@ -69,8 +69,8 @@ export interface DowngradeToLifetime_downgrade_to_lifetime_me {
 }
 
 export interface DowngradeToLifetime_downgrade_to_lifetime {
-  __typename: "DowngradeToLifetimePayload";
-  me: DowngradeToLifetime_downgrade_to_lifetime_me | null;
+  __typename: "DowngradeToLifetimeMutationPayload";
+  me: DowngradeToLifetime_downgrade_to_lifetime_me;
 }
 
 export interface DowngradeToLifetime {

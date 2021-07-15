@@ -14,8 +14,8 @@ export interface CreateComment_create_comment_comment_commentable_counts {
 
 export interface CreateComment_create_comment_comment_commentable_comments_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -26,7 +26,7 @@ export interface CreateComment_create_comment_comment_commentable_comments_can {
 
 export interface CreateComment_create_comment_comment_commentable_comments {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   created_at: string | null;
   user: CreateComment_create_comment_comment_commentable_comments_user | null;
@@ -34,21 +34,21 @@ export interface CreateComment_create_comment_comment_commentable_comments {
 }
 
 export interface CreateComment_create_comment_comment_commentable {
-  __typename: "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
+  __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  id: number;
   counts: CreateComment_create_comment_comment_commentable_counts | null;
-  comments: (CreateComment_create_comment_comment_commentable_comments | null)[] | null;
+  comments: CreateComment_create_comment_comment_commentable_comments[] | null;
 }
 
 export interface CreateComment_create_comment_comment {
   __typename: "Comment";
-  id: number | null;
-  commentable: CreateComment_create_comment_comment_commentable | null;
+  id: number;
+  commentable: CreateComment_create_comment_comment_commentable;
 }
 
 export interface CreateComment_create_comment {
-  __typename: "CreateCommentPayload";
-  comment: CreateComment_create_comment_comment | null;
+  __typename: "CreateCommentMutationPayload";
+  comment: CreateComment_create_comment_comment;
 }
 
 export interface CreateComment {

@@ -9,38 +9,38 @@ import { BaseConnectableTypeEnum } from "./globalTypes";
 // GraphQL mutation operation: createConnectionMutation
 // ====================================================
 
-export interface createConnectionMutation_create_connection_konnectable_Text {
-  __typename: "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
+export interface createConnectionMutation_create_connection_konnectable_Attachment {
+  __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
 }
 
 export interface createConnectionMutation_create_connection_konnectable_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface createConnectionMutation_create_connection_konnectable_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type createConnectionMutation_create_connection_konnectable_Channel_owner = createConnectionMutation_create_connection_konnectable_Channel_owner_Group | createConnectionMutation_create_connection_konnectable_Channel_owner_User;
 
 export interface createConnectionMutation_create_connection_konnectable_Channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
-  visibility: string | null;
-  owner: createConnectionMutation_create_connection_konnectable_Channel_owner | null;
+  id: number;
+  title: string;
+  visibility: string;
+  owner: createConnectionMutation_create_connection_konnectable_Channel_owner;
 }
 
-export type createConnectionMutation_create_connection_konnectable = createConnectionMutation_create_connection_konnectable_Text | createConnectionMutation_create_connection_konnectable_Channel;
+export type createConnectionMutation_create_connection_konnectable = createConnectionMutation_create_connection_konnectable_Attachment | createConnectionMutation_create_connection_konnectable_Channel;
 
 export interface createConnectionMutation_create_connection {
-  __typename: "CreateConnectionPayload";
-  konnectable: createConnectionMutation_create_connection_konnectable | null;
+  __typename: "CreateConnectionMutationPayload";
+  konnectable: createConnectionMutation_create_connection_konnectable;
 }
 
 export interface createConnectionMutation {

@@ -27,14 +27,14 @@ export interface ChangeDefaultCreditCard_update_customer_customer_credit_cards {
 
 export interface ChangeDefaultCreditCard_update_customer_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: ChangeDefaultCreditCard_update_customer_customer_default_credit_card | null;
-  credit_cards: (ChangeDefaultCreditCard_update_customer_customer_credit_cards | null)[] | null;
+  credit_cards: ChangeDefaultCreditCard_update_customer_customer_credit_cards[] | null;
 }
 
 export interface ChangeDefaultCreditCard_update_customer {
-  __typename: "UpdateCustomerPayload";
-  customer: ChangeDefaultCreditCard_update_customer_customer | null;
+  __typename: "UpdateCustomerMutationPayload";
+  customer: ChangeDefaultCreditCard_update_customer_customer;
 }
 
 export interface ChangeDefaultCreditCard {

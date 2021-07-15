@@ -18,15 +18,10 @@ const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
   obj,
   ...rest
 }) => {
-  const __typename = obj && obj.__typename
-  const href = obj && obj.__typename !== 'Null' && obj.href
-  const visibility = obj && obj.__typename === 'Channel' && obj.visibility
-  const title = label
-    ? label
-    : obj &&
-      obj.__typename !== 'Null' &&
-      obj.__typename !== 'Comment' &&
-      obj.label
+  const __typename = obj && obj?.__typename
+  const href = obj?.href
+  const visibility = obj?.__typename === 'Channel' && obj.visibility
+  const title = label ? label : obj.__typename !== 'Comment' && obj?.label
 
   const is_me = obj && obj.__typename === 'User' && obj.is_me
 
@@ -42,7 +37,7 @@ const NotificationObjectLink: React.FC<NotificationObjectLinkProps> = ({
     pathname: href,
     state:
       obj &&
-      (obj.__typename == 'Channel' || obj.__typename == 'User') &&
+      (obj?.__typename == 'Channel' || obj?.__typename == 'User') &&
       getBreadcrumbPath(obj),
   }
 

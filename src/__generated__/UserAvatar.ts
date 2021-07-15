@@ -8,8 +8,8 @@
 // ====================================================
 
 export interface UserAvatar {
-  __typename: "User" | "Invitee" | "Me";
+  __typename: "Invitee" | "Me" | "User";
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }

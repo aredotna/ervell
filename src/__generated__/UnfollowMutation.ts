@@ -11,36 +11,36 @@ import { FollowableTypeEnum } from "./globalTypes";
 
 export interface UnfollowMutation_unfollow_followable_User_counts {
   __typename: "UserCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface UnfollowMutation_unfollow_followable_User {
   __typename: "User";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: UnfollowMutation_unfollow_followable_User_counts | null;
 }
 
 export interface UnfollowMutation_unfollow_followable_Channel_counts {
   __typename: "ChannelCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface UnfollowMutation_unfollow_followable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: UnfollowMutation_unfollow_followable_Channel_counts | null;
 }
 
 export interface UnfollowMutation_unfollow_followable_Group_counts {
   __typename: "GroupCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface UnfollowMutation_unfollow_followable_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: UnfollowMutation_unfollow_followable_Group_counts | null;
 }
@@ -48,8 +48,8 @@ export interface UnfollowMutation_unfollow_followable_Group {
 export type UnfollowMutation_unfollow_followable = UnfollowMutation_unfollow_followable_User | UnfollowMutation_unfollow_followable_Channel | UnfollowMutation_unfollow_followable_Group;
 
 export interface UnfollowMutation_unfollow {
-  __typename: "UnfollowPayload";
-  followable: UnfollowMutation_unfollow_followable | null;
+  __typename: "UnfollowMutationPayload";
+  followable: UnfollowMutation_unfollow_followable;
 }
 
 export interface UnfollowMutation {
