@@ -32,6 +32,8 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   const Tag = obj?.href ? Link : Span
   const fontWeight = href ? 'bold' : 'normal'
 
+  console.log({ title, href, obj })
+
   const toParams = obj && {
     pathname: href,
     state:

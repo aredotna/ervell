@@ -27,6 +27,7 @@ export interface FeedGroupSentence_owner_Group {
   __typename: "Group";
   id: number;
   label: string;
+  href: string | null;
   name: string;
 }
 
@@ -56,18 +57,18 @@ export interface FeedGroupSentence_item_Channel {
   owner: FeedGroupSentence_item_Channel_owner;
 }
 
-export interface FeedGroupSentence_item_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedGroupSentence_item_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedGroupSentence_item_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -121,7 +122,7 @@ export interface FeedGroupSentence_item_Group {
   href: string | null;
 }
 
-export type FeedGroupSentence_item = FeedGroupSentence_item_Channel | FeedGroupSentence_item_Connectable | FeedGroupSentence_item_User | FeedGroupSentence_item_Attachment | FeedGroupSentence_item_Embed | FeedGroupSentence_item_Text | FeedGroupSentence_item_Image | FeedGroupSentence_item_Link | FeedGroupSentence_item_Comment | FeedGroupSentence_item_Group;
+export type FeedGroupSentence_item = FeedGroupSentence_item_Channel | FeedGroupSentence_item_User | FeedGroupSentence_item_Connectable | FeedGroupSentence_item_Attachment | FeedGroupSentence_item_Embed | FeedGroupSentence_item_Text | FeedGroupSentence_item_Image | FeedGroupSentence_item_Link | FeedGroupSentence_item_Comment | FeedGroupSentence_item_Group;
 
 export interface FeedGroupSentence_target_Channel_owner_User {
   __typename: "User";
@@ -147,18 +148,18 @@ export interface FeedGroupSentence_target_Channel {
   owner: FeedGroupSentence_target_Channel_owner;
 }
 
-export interface FeedGroupSentence_target_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedGroupSentence_target_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedGroupSentence_target_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -212,7 +213,7 @@ export interface FeedGroupSentence_target_Group {
   href: string | null;
 }
 
-export type FeedGroupSentence_target = FeedGroupSentence_target_Channel | FeedGroupSentence_target_Connectable | FeedGroupSentence_target_User | FeedGroupSentence_target_Attachment | FeedGroupSentence_target_Embed | FeedGroupSentence_target_Text | FeedGroupSentence_target_Image | FeedGroupSentence_target_Link | FeedGroupSentence_target_Comment | FeedGroupSentence_target_Group;
+export type FeedGroupSentence_target = FeedGroupSentence_target_Channel | FeedGroupSentence_target_User | FeedGroupSentence_target_Connectable | FeedGroupSentence_target_Attachment | FeedGroupSentence_target_Embed | FeedGroupSentence_target_Text | FeedGroupSentence_target_Image | FeedGroupSentence_target_Link | FeedGroupSentence_target_Comment | FeedGroupSentence_target_Group;
 
 export interface FeedGroupSentence {
   __typename: "DeedGroup";

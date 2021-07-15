@@ -27,6 +27,7 @@ export interface FeedQuery_me_feed_groups_owner_Group {
   __typename: "Group";
   id: number;
   label: string;
+  href: string | null;
   name: string;
 }
 
@@ -56,18 +57,18 @@ export interface FeedQuery_me_feed_groups_item_Channel {
   owner: FeedQuery_me_feed_groups_item_Channel_owner;
 }
 
-export interface FeedQuery_me_feed_groups_item_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedQuery_me_feed_groups_item_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedQuery_me_feed_groups_item_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -121,7 +122,7 @@ export interface FeedQuery_me_feed_groups_item_Group {
   href: string | null;
 }
 
-export type FeedQuery_me_feed_groups_item = FeedQuery_me_feed_groups_item_Channel | FeedQuery_me_feed_groups_item_Connectable | FeedQuery_me_feed_groups_item_User | FeedQuery_me_feed_groups_item_Attachment | FeedQuery_me_feed_groups_item_Embed | FeedQuery_me_feed_groups_item_Text | FeedQuery_me_feed_groups_item_Image | FeedQuery_me_feed_groups_item_Link | FeedQuery_me_feed_groups_item_Comment | FeedQuery_me_feed_groups_item_Group;
+export type FeedQuery_me_feed_groups_item = FeedQuery_me_feed_groups_item_Channel | FeedQuery_me_feed_groups_item_User | FeedQuery_me_feed_groups_item_Connectable | FeedQuery_me_feed_groups_item_Attachment | FeedQuery_me_feed_groups_item_Embed | FeedQuery_me_feed_groups_item_Text | FeedQuery_me_feed_groups_item_Image | FeedQuery_me_feed_groups_item_Link | FeedQuery_me_feed_groups_item_Comment | FeedQuery_me_feed_groups_item_Group;
 
 export interface FeedQuery_me_feed_groups_target_Channel_owner_User {
   __typename: "User";
@@ -147,18 +148,18 @@ export interface FeedQuery_me_feed_groups_target_Channel {
   owner: FeedQuery_me_feed_groups_target_Channel_owner;
 }
 
-export interface FeedQuery_me_feed_groups_target_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedQuery_me_feed_groups_target_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedQuery_me_feed_groups_target_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -212,7 +213,7 @@ export interface FeedQuery_me_feed_groups_target_Group {
   href: string | null;
 }
 
-export type FeedQuery_me_feed_groups_target = FeedQuery_me_feed_groups_target_Channel | FeedQuery_me_feed_groups_target_Connectable | FeedQuery_me_feed_groups_target_User | FeedQuery_me_feed_groups_target_Attachment | FeedQuery_me_feed_groups_target_Embed | FeedQuery_me_feed_groups_target_Text | FeedQuery_me_feed_groups_target_Image | FeedQuery_me_feed_groups_target_Link | FeedQuery_me_feed_groups_target_Comment | FeedQuery_me_feed_groups_target_Group;
+export type FeedQuery_me_feed_groups_target = FeedQuery_me_feed_groups_target_Channel | FeedQuery_me_feed_groups_target_User | FeedQuery_me_feed_groups_target_Connectable | FeedQuery_me_feed_groups_target_Attachment | FeedQuery_me_feed_groups_target_Embed | FeedQuery_me_feed_groups_target_Text | FeedQuery_me_feed_groups_target_Image | FeedQuery_me_feed_groups_target_Link | FeedQuery_me_feed_groups_target_Comment | FeedQuery_me_feed_groups_target_Group;
 
 export interface FeedQuery_me_feed_groups_objects_Comment {
   __typename: "Comment";

@@ -14,16 +14,16 @@ export default gql`
       visibility
     }
 
-    ... on Connectable {
-      id
-      label: to_s
-      href
-    }
-
     ... on User {
       id
       label: name
       name
+      href
+    }
+
+    ... on Connectable {
+      id
+      label: to_s
       href
     }
 

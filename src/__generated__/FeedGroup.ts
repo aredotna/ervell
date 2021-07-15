@@ -27,6 +27,7 @@ export interface FeedGroup_owner_Group {
   __typename: "Group";
   id: number;
   label: string;
+  href: string | null;
   name: string;
 }
 
@@ -56,18 +57,18 @@ export interface FeedGroup_item_Channel {
   owner: FeedGroup_item_Channel_owner;
 }
 
-export interface FeedGroup_item_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedGroup_item_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -121,7 +122,7 @@ export interface FeedGroup_item_Group {
   href: string | null;
 }
 
-export type FeedGroup_item = FeedGroup_item_Channel | FeedGroup_item_Connectable | FeedGroup_item_User | FeedGroup_item_Attachment | FeedGroup_item_Embed | FeedGroup_item_Text | FeedGroup_item_Image | FeedGroup_item_Link | FeedGroup_item_Comment | FeedGroup_item_Group;
+export type FeedGroup_item = FeedGroup_item_Channel | FeedGroup_item_User | FeedGroup_item_Connectable | FeedGroup_item_Attachment | FeedGroup_item_Embed | FeedGroup_item_Text | FeedGroup_item_Image | FeedGroup_item_Link | FeedGroup_item_Comment | FeedGroup_item_Group;
 
 export interface FeedGroup_target_Channel_owner_User {
   __typename: "User";
@@ -147,18 +148,18 @@ export interface FeedGroup_target_Channel {
   owner: FeedGroup_target_Channel_owner;
 }
 
-export interface FeedGroup_target_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedGroup_target_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -212,7 +213,7 @@ export interface FeedGroup_target_Group {
   href: string | null;
 }
 
-export type FeedGroup_target = FeedGroup_target_Channel | FeedGroup_target_Connectable | FeedGroup_target_User | FeedGroup_target_Attachment | FeedGroup_target_Embed | FeedGroup_target_Text | FeedGroup_target_Image | FeedGroup_target_Link | FeedGroup_target_Comment | FeedGroup_target_Group;
+export type FeedGroup_target = FeedGroup_target_Channel | FeedGroup_target_User | FeedGroup_target_Connectable | FeedGroup_target_Attachment | FeedGroup_target_Embed | FeedGroup_target_Text | FeedGroup_target_Image | FeedGroup_target_Link | FeedGroup_target_Comment | FeedGroup_target_Group;
 
 export interface FeedGroup_objects_Comment {
   __typename: "Comment";

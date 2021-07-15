@@ -27,6 +27,7 @@ export interface GroupFeedQuery_group_feed_groups_owner_Group {
   __typename: "Group";
   id: number;
   label: string;
+  href: string | null;
   name: string;
 }
 
@@ -56,18 +57,18 @@ export interface GroupFeedQuery_group_feed_groups_item_Channel {
   owner: GroupFeedQuery_group_feed_groups_item_Channel_owner;
 }
 
-export interface GroupFeedQuery_group_feed_groups_item_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface GroupFeedQuery_group_feed_groups_item_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_item_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -121,7 +122,7 @@ export interface GroupFeedQuery_group_feed_groups_item_Group {
   href: string | null;
 }
 
-export type GroupFeedQuery_group_feed_groups_item = GroupFeedQuery_group_feed_groups_item_Channel | GroupFeedQuery_group_feed_groups_item_Connectable | GroupFeedQuery_group_feed_groups_item_User | GroupFeedQuery_group_feed_groups_item_Attachment | GroupFeedQuery_group_feed_groups_item_Embed | GroupFeedQuery_group_feed_groups_item_Text | GroupFeedQuery_group_feed_groups_item_Image | GroupFeedQuery_group_feed_groups_item_Link | GroupFeedQuery_group_feed_groups_item_Comment | GroupFeedQuery_group_feed_groups_item_Group;
+export type GroupFeedQuery_group_feed_groups_item = GroupFeedQuery_group_feed_groups_item_Channel | GroupFeedQuery_group_feed_groups_item_User | GroupFeedQuery_group_feed_groups_item_Connectable | GroupFeedQuery_group_feed_groups_item_Attachment | GroupFeedQuery_group_feed_groups_item_Embed | GroupFeedQuery_group_feed_groups_item_Text | GroupFeedQuery_group_feed_groups_item_Image | GroupFeedQuery_group_feed_groups_item_Link | GroupFeedQuery_group_feed_groups_item_Comment | GroupFeedQuery_group_feed_groups_item_Group;
 
 export interface GroupFeedQuery_group_feed_groups_target_Channel_owner_User {
   __typename: "User";
@@ -147,18 +148,18 @@ export interface GroupFeedQuery_group_feed_groups_target_Channel {
   owner: GroupFeedQuery_group_feed_groups_target_Channel_owner;
 }
 
-export interface GroupFeedQuery_group_feed_groups_target_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface GroupFeedQuery_group_feed_groups_target_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface GroupFeedQuery_group_feed_groups_target_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -212,7 +213,7 @@ export interface GroupFeedQuery_group_feed_groups_target_Group {
   href: string | null;
 }
 
-export type GroupFeedQuery_group_feed_groups_target = GroupFeedQuery_group_feed_groups_target_Channel | GroupFeedQuery_group_feed_groups_target_Connectable | GroupFeedQuery_group_feed_groups_target_User | GroupFeedQuery_group_feed_groups_target_Attachment | GroupFeedQuery_group_feed_groups_target_Embed | GroupFeedQuery_group_feed_groups_target_Text | GroupFeedQuery_group_feed_groups_target_Image | GroupFeedQuery_group_feed_groups_target_Link | GroupFeedQuery_group_feed_groups_target_Comment | GroupFeedQuery_group_feed_groups_target_Group;
+export type GroupFeedQuery_group_feed_groups_target = GroupFeedQuery_group_feed_groups_target_Channel | GroupFeedQuery_group_feed_groups_target_User | GroupFeedQuery_group_feed_groups_target_Connectable | GroupFeedQuery_group_feed_groups_target_Attachment | GroupFeedQuery_group_feed_groups_target_Embed | GroupFeedQuery_group_feed_groups_target_Text | GroupFeedQuery_group_feed_groups_target_Image | GroupFeedQuery_group_feed_groups_target_Link | GroupFeedQuery_group_feed_groups_target_Comment | GroupFeedQuery_group_feed_groups_target_Group;
 
 export interface GroupFeedQuery_group_feed_groups_objects_Comment {
   __typename: "Comment";

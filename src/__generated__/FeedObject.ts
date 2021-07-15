@@ -31,18 +31,18 @@ export interface FeedObject_Channel {
   owner: FeedObject_Channel_owner;
 }
 
-export interface FeedObject_Connectable {
-  __typename: "Connectable";
-  id: number;
-  label: string;
-  href: string | null;
-}
-
 export interface FeedObject_User {
   __typename: "User";
   id: number;
   label: string;
   name: string;
+  href: string | null;
+}
+
+export interface FeedObject_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
   href: string | null;
 }
 
@@ -96,4 +96,4 @@ export interface FeedObject_Group {
   href: string | null;
 }
 
-export type FeedObject = FeedObject_Channel | FeedObject_Connectable | FeedObject_User | FeedObject_Attachment | FeedObject_Embed | FeedObject_Text | FeedObject_Image | FeedObject_Link | FeedObject_Comment | FeedObject_Group;
+export type FeedObject = FeedObject_Channel | FeedObject_User | FeedObject_Connectable | FeedObject_Attachment | FeedObject_Embed | FeedObject_Text | FeedObject_Image | FeedObject_Link | FeedObject_Comment | FeedObject_Group;
