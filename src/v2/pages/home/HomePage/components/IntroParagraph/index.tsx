@@ -3,22 +3,12 @@ import styled from 'styled-components'
 import moment from 'moment'
 
 import Box from 'v2/components/UI/Box'
-import Text from 'v2/components/UI/Text'
 import Button from 'v2/components/UI/GenericButton'
+import { P } from '../Common'
 
-const Container = styled(Box)`
+const Container = styled(Box).attrs({ pb: 7 })`
   display: flex;
   flex-direction: row;
-`
-
-const P = styled(Text).attrs({
-  mb: 7,
-  color: 'gray.block',
-})`
-  ul {
-    margin-left: 0;
-    padding-left: ${x => x.theme.space[7]};
-  }
 `
 
 export const IntroParagraph: React.FC = () => {
@@ -55,8 +45,7 @@ export const IntroParagraph: React.FC = () => {
       <Box flex={1}>
         <P>
           People describe Are.na as a garden of ideas, or Tumblr meets
-          Wikipedia. <br />
-          If this speaks to you, try it now:
+          Wikipedia. If this speaks to you, try it now:
         </P>
 
         <Box display="flex" mt={4}>

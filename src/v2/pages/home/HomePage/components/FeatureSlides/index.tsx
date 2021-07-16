@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Carousel from 'v2/components/Carousel'
 import Text from 'v2/components/UI/Text/index'
+import { P } from '../Common/index'
 import slides from './slides.js'
 
 const MOBILE_BREAKPOINT = 1024
@@ -95,23 +96,29 @@ export const DescriptiveCarousel: React.FC<DescriptiveCarouselProps> = ({
   }
 
   return (
-    <Carousel {...settings}>
-      {slides.map(slide => (
-        <Slide key={slide.id}>
-          <Inner>
-            <Image alt={slide.headline} src={slide.image} />
-            {slide.link ? (
-              <A href={slide.link} target="_blank" rel="noopener noreferrer">
+    <>
+      <P f={4} pl={7}>
+        How it works
+      </P>
+
+      <Carousel {...settings}>
+        {slides.map(slide => (
+          <Slide key={slide.id}>
+            <Inner>
+              <Image alt={slide.headline} src={slide.image} />
+              {slide.link ? (
+                <A href={slide.link} target="_blank" rel="noopener noreferrer">
+                  <Headline>{slide.headline}</Headline>
+                </A>
+              ) : (
                 <Headline>{slide.headline}</Headline>
-              </A>
-            ) : (
-              <Headline>{slide.headline}</Headline>
-            )}
-            <Copy dangerouslySetInnerHTML={{ __html: slide.copy }} />
-          </Inner>
-        </Slide>
-      ))}
-    </Carousel>
+              )}
+              <Copy dangerouslySetInnerHTML={{ __html: slide.copy }} />
+            </Inner>
+          </Slide>
+        ))}
+      </Carousel>
+    </>
   )
 }
 

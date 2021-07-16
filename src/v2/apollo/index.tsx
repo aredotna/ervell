@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import sharify from 'sharify'
 import React from 'react'
-import { gql } from '@apollo/client'
+import { gql, NormalizedCacheObject } from '@apollo/client'
 import url from 'url'
 
 import { ApolloClient, ApolloLink, ApolloProvider } from '@apollo/client'
@@ -54,7 +54,7 @@ export const initApolloClient = ({
   cookies?: Record<string, any>
   serializedMe?: ReturnType<typeof serializedMeFn>
   sharifyData?: Record<string, any>
-} = {}) => {
+} = {}): ApolloClient<NormalizedCacheObject> => {
   if (isClientSide && window.__APOLLO_CLIENT__) {
     return window.__APOLLO_CLIENT__
   }
