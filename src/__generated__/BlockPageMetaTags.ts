@@ -9,35 +9,16 @@
 
 export interface BlockPageMetaTags_Channel {
   __typename: "Channel";
-  id: number | null;
-  meta_title: string | null;
+  id: number;
+  meta_title: string;
   meta_description: string | null;
   canonical: string | null;
 }
 
-export interface BlockPageMetaTags_Text {
-  __typename: "Text" | "PendingBlock";
-  id: number | null;
-  meta_title: string | null;
-  meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
-}
-
-export interface BlockPageMetaTags_Image {
-  __typename: "Image";
-  id: number | null;
-  meta_title: string | null;
-  meta_description: string | null;
-  canonical: string | null;
-  is_nsfw: boolean | null;
-  meta_image: string | null;
-}
-
-export interface BlockPageMetaTags_Link {
-  __typename: "Link";
-  id: number | null;
-  meta_title: string | null;
+export interface BlockPageMetaTags_Attachment {
+  __typename: "Attachment";
+  id: number;
+  meta_title: string;
   meta_description: string | null;
   canonical: string | null;
   is_nsfw: boolean | null;
@@ -46,22 +27,41 @@ export interface BlockPageMetaTags_Link {
 
 export interface BlockPageMetaTags_Embed {
   __typename: "Embed";
-  id: number | null;
-  meta_title: string | null;
+  id: number;
+  meta_title: string;
   meta_description: string | null;
   canonical: string | null;
   is_nsfw: boolean | null;
   meta_image: string | null;
 }
 
-export interface BlockPageMetaTags_Attachment {
-  __typename: "Attachment";
-  id: number | null;
-  meta_title: string | null;
+export interface BlockPageMetaTags_Image {
+  __typename: "Image";
+  id: number;
+  meta_title: string;
   meta_description: string | null;
   canonical: string | null;
   is_nsfw: boolean | null;
   meta_image: string | null;
 }
 
-export type BlockPageMetaTags = BlockPageMetaTags_Channel | BlockPageMetaTags_Text | BlockPageMetaTags_Image | BlockPageMetaTags_Link | BlockPageMetaTags_Embed | BlockPageMetaTags_Attachment;
+export interface BlockPageMetaTags_Link {
+  __typename: "Link";
+  id: number;
+  meta_title: string;
+  meta_description: string | null;
+  canonical: string | null;
+  is_nsfw: boolean | null;
+  meta_image: string | null;
+}
+
+export interface BlockPageMetaTags_PendingBlock {
+  __typename: "PendingBlock" | "Text";
+  id: number;
+  meta_title: string;
+  meta_description: string | null;
+  canonical: string | null;
+  is_nsfw: boolean | null;
+}
+
+export type BlockPageMetaTags = BlockPageMetaTags_Channel | BlockPageMetaTags_Attachment | BlockPageMetaTags_Embed | BlockPageMetaTags_Image | BlockPageMetaTags_Link | BlockPageMetaTags_PendingBlock;

@@ -9,50 +9,50 @@
 
 export interface BlockLightboxChannelsAlsoIn_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
 }
 
-export interface BlockLightboxChannelsAlsoIn_Text_counts {
+export interface BlockLightboxChannelsAlsoIn_Attachment_counts {
   __typename: "BlockCounts";
   channels_with_same_source: number | null;
 }
 
-export interface BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner_Group {
+export interface BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
-export interface BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner_User {
+export interface BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export type BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner = BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner_Group | BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner_User;
+export type BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_owner = BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_owner_Group | BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_owner_User;
 
-export interface BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_counts {
+export interface BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface BlockLightboxChannelsAlsoIn_Text_channels_with_same_source {
+export interface BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_owner | null;
-  counts: BlockLightboxChannelsAlsoIn_Text_channels_with_same_source_counts | null;
-  label: string | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_owner;
+  counts: BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source_counts | null;
+  label: string;
 }
 
-export interface BlockLightboxChannelsAlsoIn_Text {
-  __typename: "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
-  counts: BlockLightboxChannelsAlsoIn_Text_counts | null;
-  channels_with_same_source: (BlockLightboxChannelsAlsoIn_Text_channels_with_same_source | null)[] | null;
+export interface BlockLightboxChannelsAlsoIn_Attachment {
+  __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  id: number;
+  counts: BlockLightboxChannelsAlsoIn_Attachment_counts | null;
+  channels_with_same_source: BlockLightboxChannelsAlsoIn_Attachment_channels_with_same_source[] | null;
 }
 
-export type BlockLightboxChannelsAlsoIn = BlockLightboxChannelsAlsoIn_Channel | BlockLightboxChannelsAlsoIn_Text;
+export type BlockLightboxChannelsAlsoIn = BlockLightboxChannelsAlsoIn_Channel | BlockLightboxChannelsAlsoIn_Attachment;

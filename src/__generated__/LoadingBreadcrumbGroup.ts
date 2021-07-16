@@ -9,6 +9,6 @@
 
 export interface LoadingBreadcrumbGroup {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
 }

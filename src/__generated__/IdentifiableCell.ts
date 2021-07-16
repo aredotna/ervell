@@ -9,22 +9,22 @@
 
 export interface IdentifiableCell_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
-  initials: string | null;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface IdentifiableCell_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  initials: string | null;
+  visibility: string;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 

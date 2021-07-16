@@ -27,7 +27,7 @@ export interface MyCreditCard_credit_cards {
 
 export interface MyCreditCard {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: MyCreditCard_default_credit_card | null;
-  credit_cards: (MyCreditCard_credit_cards | null)[] | null;
+  credit_cards: MyCreditCard_credit_cards[] | null;
 }

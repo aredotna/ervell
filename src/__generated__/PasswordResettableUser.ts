@@ -9,5 +9,5 @@
 
 export interface PasswordResettableUser {
   __typename: "User";
-  id: number | null;
+  id: number;
 }

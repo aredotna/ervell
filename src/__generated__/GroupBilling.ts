@@ -27,9 +27,9 @@ export interface GroupBilling_customer_credit_cards {
 
 export interface GroupBilling_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: GroupBilling_customer_default_credit_card | null;
-  credit_cards: (GroupBilling_customer_credit_cards | null)[] | null;
+  credit_cards: GroupBilling_customer_credit_cards[] | null;
 }
 
 export interface GroupBilling_groups_counts {
@@ -39,21 +39,21 @@ export interface GroupBilling_groups_counts {
 
 export interface GroupBilling_groups_subscription_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
 export interface GroupBilling_groups_subscription_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface GroupBilling_groups_subscription {
   __typename: "PremiumSubscription";
-  id: string | null;
+  id: string;
   plan: GroupBilling_groups_subscription_plan | null;
-  users: (GroupBilling_groups_subscription_users | null)[] | null;
+  users: GroupBilling_groups_subscription_users[] | null;
 }
 
 export interface GroupBilling_groups_user_can {
@@ -63,14 +63,14 @@ export interface GroupBilling_groups_user_can {
 
 export interface GroupBilling_groups_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: GroupBilling_groups_user_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -81,34 +81,34 @@ export interface GroupBilling_groups_users_can {
 
 export interface GroupBilling_groups_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: GroupBilling_groups_users_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  is_upgradeable: boolean | null;
-  is_approaching_either_connections_limit: boolean | null;
-  is_exceeding_either_connections_limit: boolean | null;
+  is_upgradeable: boolean;
+  is_approaching_either_connections_limit: boolean;
+  is_exceeding_either_connections_limit: boolean;
 }
 
 export interface GroupBilling_groups_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface GroupBilling_groups {
   __typename: "Group";
-  id: number | null;
+  id: number;
   counts: GroupBilling_groups_counts | null;
   /**
    * Is *every* user in the group Premium?
@@ -119,18 +119,18 @@ export interface GroupBilling_groups {
    */
   is_upgradeable: boolean | null;
   subscription: GroupBilling_groups_subscription | null;
-  name: string | null;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  user: GroupBilling_groups_user | null;
-  users: (GroupBilling_groups_users | null)[] | null;
-  owner: GroupBilling_groups_owner | null;
+  user: GroupBilling_groups_user;
+  users: GroupBilling_groups_users[] | null;
+  owner: GroupBilling_groups_owner;
 }
 
 export interface GroupBilling {
   __typename: "Me";
-  id: number | null;
+  id: number;
   customer: GroupBilling_customer | null;
-  groups: (GroupBilling_groups | null)[] | null;
+  groups: GroupBilling_groups[];
 }

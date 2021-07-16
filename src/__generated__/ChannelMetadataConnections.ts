@@ -14,29 +14,29 @@ export interface ChannelMetadataConnections_can {
 
 export interface ChannelMetadataConnections_connected_to_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelMetadataConnections_connected_to_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type ChannelMetadataConnections_connected_to_channels_owner = ChannelMetadataConnections_connected_to_channels_owner_User | ChannelMetadataConnections_connected_to_channels_owner_Group;
 
 export interface ChannelMetadataConnections_connected_to_channels {
   __typename: "Channel";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
-  owner: ChannelMetadataConnections_connected_to_channels_owner | null;
+  owner: ChannelMetadataConnections_connected_to_channels_owner;
 }
 
 export interface ChannelMetadataConnections {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: ChannelMetadataConnections_can | null;
-  connected_to_channels: (ChannelMetadataConnections_connected_to_channels | null)[] | null;
+  connected_to_channels: ChannelMetadataConnections_connected_to_channels[] | null;
 }

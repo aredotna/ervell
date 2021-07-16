@@ -9,14 +9,14 @@
 
 export interface rejectChannelTransferMutation_reject_channel_transfer_channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
 }
 
 export interface rejectChannelTransferMutation_reject_channel_transfer {
-  __typename: "RejectChannelTransferPayload";
-  channel: rejectChannelTransferMutation_reject_channel_transfer_channel | null;
+  __typename: "RejectChannelTransferMutationPayload";
+  channel: rejectChannelTransferMutation_reject_channel_transfer_channel;
 }
 
 export interface rejectChannelTransferMutation {

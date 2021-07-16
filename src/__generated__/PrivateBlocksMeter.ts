@@ -14,7 +14,7 @@ export interface PrivateBlocksMeter_counts {
 
 export interface PrivateBlocksMeter {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: PrivateBlocksMeter_counts | null;
   non_premium_private_connections_limit: number | null;
 }

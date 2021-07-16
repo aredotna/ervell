@@ -9,7 +9,7 @@
 
 export interface CanUserConnect_me {
   __typename: "Me";
-  is_exceeding_either_connections_limit: boolean | null;
+  is_exceeding_either_connections_limit: boolean;
 }
 
 export interface CanUserConnect {

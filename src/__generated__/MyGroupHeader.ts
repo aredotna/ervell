@@ -14,14 +14,14 @@ export interface MyGroupHeader_user_can {
 
 export interface MyGroupHeader_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: MyGroupHeader_user_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -32,24 +32,24 @@ export interface MyGroupHeader_users_can {
 
 export interface MyGroupHeader_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: MyGroupHeader_users_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface MyGroupHeader {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  user: MyGroupHeader_user | null;
-  users: (MyGroupHeader_users | null)[] | null;
+  user: MyGroupHeader_user;
+  users: MyGroupHeader_users[] | null;
 }

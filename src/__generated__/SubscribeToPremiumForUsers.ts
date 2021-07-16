@@ -29,20 +29,20 @@ export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_cu
 
 export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_default_credit_card | null;
-  credit_cards: (SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_credit_cards | null)[] | null;
+  credit_cards: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer_credit_cards[] | null;
 }
 
 export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   customer: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me_customer | null;
 }
 
 export interface SubscribeToPremiumForUsers_subscribe_to_premium_for_users {
-  __typename: "SubscribeToPremiumForUsersPayload";
-  me: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me | null;
+  __typename: "SubscribeToPremiumForUsersMutationPayload";
+  me: SubscribeToPremiumForUsers_subscribe_to_premium_for_users_me;
 }
 
 export interface SubscribeToPremiumForUsers {

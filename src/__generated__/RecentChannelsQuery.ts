@@ -9,31 +9,31 @@
 
 export interface RecentChannelsQuery_me_recent_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface RecentChannelsQuery_me_recent_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type RecentChannelsQuery_me_recent_channels_owner = RecentChannelsQuery_me_recent_channels_owner_Group | RecentChannelsQuery_me_recent_channels_owner_User;
 
 export interface RecentChannelsQuery_me_recent_channels {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
-  visibility: string | null;
-  owner: RecentChannelsQuery_me_recent_channels_owner | null;
+  id: number;
+  title: string;
+  visibility: string;
+  owner: RecentChannelsQuery_me_recent_channels_owner;
 }
 
 export interface RecentChannelsQuery_me {
   __typename: "Me";
-  id: number | null;
-  recent_channels: (RecentChannelsQuery_me_recent_channels | null)[] | null;
+  id: number;
+  recent_channels: RecentChannelsQuery_me_recent_channels[] | null;
 }
 
 export interface RecentChannelsQuery {

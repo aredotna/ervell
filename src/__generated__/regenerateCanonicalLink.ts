@@ -7,14 +7,14 @@
 // GraphQL mutation operation: regenerateCanonicalLink
 // ====================================================
 
-export interface regenerateCanonicalLink_regenerate_canonical_link_blokk_Channel {
-  __typename: "Channel" | "Text" | "Image" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
+export interface regenerateCanonicalLink_regenerate_canonical_link_blokk_Attachment {
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "PendingBlock" | "Text";
+  id: number;
 }
 
 export interface regenerateCanonicalLink_regenerate_canonical_link_blokk_Link_canonical_link {
   __typename: "CanonicalLink";
-  id: number | null;
+  id: number;
   url: string | null;
   title: string | null;
   content: string | null;
@@ -26,15 +26,15 @@ export interface regenerateCanonicalLink_regenerate_canonical_link_blokk_Link_ca
 
 export interface regenerateCanonicalLink_regenerate_canonical_link_blokk_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   canonical_link: regenerateCanonicalLink_regenerate_canonical_link_blokk_Link_canonical_link | null;
 }
 
-export type regenerateCanonicalLink_regenerate_canonical_link_blokk = regenerateCanonicalLink_regenerate_canonical_link_blokk_Channel | regenerateCanonicalLink_regenerate_canonical_link_blokk_Link;
+export type regenerateCanonicalLink_regenerate_canonical_link_blokk = regenerateCanonicalLink_regenerate_canonical_link_blokk_Attachment | regenerateCanonicalLink_regenerate_canonical_link_blokk_Link;
 
 export interface regenerateCanonicalLink_regenerate_canonical_link {
-  __typename: "RegenerateCanonicalLinkPayload";
-  blokk: regenerateCanonicalLink_regenerate_canonical_link_blokk | null;
+  __typename: "RegenerateCanonicalLinkMutationPayload";
+  blokk: regenerateCanonicalLink_regenerate_canonical_link_blokk;
 }
 
 export interface regenerateCanonicalLink {

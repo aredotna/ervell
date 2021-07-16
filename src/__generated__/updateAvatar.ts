@@ -9,13 +9,13 @@
 
 export interface updateAvatar_update_account_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   avatar: string | null;
 }
 
 export interface updateAvatar_update_account {
-  __typename: "UpdateAccountPayload";
-  me: updateAvatar_update_account_me | null;
+  __typename: "UpdateAccountMutationPayload";
+  me: updateAvatar_update_account_me;
 }
 
 export interface updateAvatar {

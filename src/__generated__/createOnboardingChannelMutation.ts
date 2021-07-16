@@ -11,18 +11,18 @@ import { ChannelVisibility } from "./globalTypes";
 
 export interface createOnboardingChannelMutation_create_channel_channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export type createOnboardingChannelMutation_create_channel_channel_owner = createOnboardingChannelMutation_create_channel_channel_owner_User | createOnboardingChannelMutation_create_channel_channel_owner_Group;
@@ -30,7 +30,7 @@ export type createOnboardingChannelMutation_create_channel_channel_owner = creat
 export interface createOnboardingChannelMutation_create_channel_channel_counts {
   __typename: "ChannelCounts";
   collaborators: number | null;
-  followers: number | null;
+  followers: number;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_can {
@@ -40,36 +40,36 @@ export interface createOnboardingChannelMutation_create_channel_channel_can {
   destroy: boolean | null;
   mute: boolean | null;
   share: boolean | null;
-  manage_collaborators: boolean | null;
+  manage_collaborators: boolean;
   connect: boolean | null;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_user {
   __typename: "User";
-  id: number | null;
+  id: number;
   href: string | null;
-  name: string | null;
+  name: string;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_collaborators_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
+  label: string;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_collaborators_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_collaborators_Group_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -81,39 +81,39 @@ export interface createOnboardingChannelMutation_create_channel_channel_collabor
 
 export interface createOnboardingChannelMutation_create_channel_channel_collaborators_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
   description: string | null;
-  user: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_user | null;
-  users: (createOnboardingChannelMutation_create_channel_channel_collaborators_Group_users | null)[] | null;
+  user: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_user;
+  users: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_users[] | null;
   can: createOnboardingChannelMutation_create_channel_channel_collaborators_Group_can | null;
-  visibility: string | null;
-  label: string | null;
+  visibility: string;
+  label: string;
 }
 
 export type createOnboardingChannelMutation_create_channel_channel_collaborators = createOnboardingChannelMutation_create_channel_channel_collaborators_User | createOnboardingChannelMutation_create_channel_channel_collaborators_Group;
 
 export interface createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner = createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_User | createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner_Group;
 
 export interface createOnboardingChannelMutation_create_channel_channel_connected_to_channels {
   __typename: "Channel";
-  id: number | null;
-  label: string | null;
+  id: number;
+  label: string;
   href: string | null;
-  owner: createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner | null;
+  owner: createOnboardingChannelMutation_create_channel_channel_connected_to_channels_owner;
 }
 
 export interface createOnboardingChannelMutation_create_channel_channel_share {
@@ -125,26 +125,26 @@ export interface createOnboardingChannelMutation_create_channel_channel_share {
 
 export interface createOnboardingChannelMutation_create_channel_channel {
   __typename: "Channel";
-  id: number | null;
-  title: string | null;
-  truncatedTitle: string | null;
+  id: number;
+  title: string;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  owner: createOnboardingChannelMutation_create_channel_channel_owner | null;
+  visibility: string;
+  owner: createOnboardingChannelMutation_create_channel_channel_owner;
   counts: createOnboardingChannelMutation_create_channel_channel_counts | null;
-  label: string | null;
+  label: string;
   can: createOnboardingChannelMutation_create_channel_channel_can | null;
   is_muted: boolean | null;
   info: string | null;
   user: createOnboardingChannelMutation_create_channel_channel_user | null;
-  collaborators: (createOnboardingChannelMutation_create_channel_channel_collaborators | null)[] | null;
-  connected_to_channels: (createOnboardingChannelMutation_create_channel_channel_connected_to_channels | null)[] | null;
+  collaborators: createOnboardingChannelMutation_create_channel_channel_collaborators[] | null;
+  connected_to_channels: createOnboardingChannelMutation_create_channel_channel_connected_to_channels[] | null;
   share: createOnboardingChannelMutation_create_channel_channel_share | null;
 }
 
 export interface createOnboardingChannelMutation_create_channel {
   __typename: "CreateChannelPayload";
-  channel: createOnboardingChannelMutation_create_channel_channel | null;
+  channel: createOnboardingChannelMutation_create_channel_channel;
 }
 
 export interface createOnboardingChannelMutation {

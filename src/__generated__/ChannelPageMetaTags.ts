@@ -9,10 +9,10 @@
 
 export interface ChannelPageMetaTags {
   __typename: "Channel";
-  id: number | null;
-  meta_title: string | null;
+  id: number;
+  meta_title: string;
   meta_description: string | null;
   canonical: string | null;
-  is_nsfw: boolean | null;
+  is_nsfw: boolean;
   image_url: string | null;
 }

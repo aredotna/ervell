@@ -10,12 +10,12 @@ import { ExportFormats } from "./globalTypes";
 // ====================================================
 
 export interface exportChannelMutation_export_channel {
-  __typename: "ExportChannelPayload";
+  __typename: "ExportChannelMutationPayload";
   /**
    * A unique identifier for the client performing the mutation.
    */
   clientMutationId: string | null;
-  status: string | null;
+  status: string;
 }
 
 export interface exportChannelMutation {

@@ -27,14 +27,14 @@ export interface RemoveCreditCard_remove_credit_card_customer_credit_cards {
 
 export interface RemoveCreditCard_remove_credit_card_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: RemoveCreditCard_remove_credit_card_customer_default_credit_card | null;
-  credit_cards: (RemoveCreditCard_remove_credit_card_customer_credit_cards | null)[] | null;
+  credit_cards: RemoveCreditCard_remove_credit_card_customer_credit_cards[] | null;
 }
 
 export interface RemoveCreditCard_remove_credit_card {
-  __typename: "RemoveCreditCardPayload";
-  customer: RemoveCreditCard_remove_credit_card_customer | null;
+  __typename: "RemoveCreditCardMutationPayload";
+  customer: RemoveCreditCard_remove_credit_card_customer;
 }
 
 export interface RemoveCreditCard {

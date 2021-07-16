@@ -9,12 +9,12 @@
 
 export interface registerMutation_registration_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
 }
 
 export interface registerMutation_registration {
-  __typename: "RegistrationPayload";
-  me: registerMutation_registration_me | null;
+  __typename: "RegistrationMutationPayload";
+  me: registerMutation_registration_me;
 }
 
 export interface registerMutation {

@@ -13,8 +13,8 @@ export interface BlockLightboxContentPane_Channel {
 
 export interface BlockLightboxContentPane_Image {
   __typename: "Image";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
@@ -27,8 +27,8 @@ export interface BlockLightboxContentPane_Text_can {
 
 export interface BlockLightboxContentPane_Text {
   __typename: "Text";
-  id: number | null;
-  content: string | null;
+  id: number;
+  content: string;
   can: BlockLightboxContentPane_Text_can | null;
 }
 
@@ -42,8 +42,8 @@ export interface BlockLightboxContentPane_Link_source {
 
 export interface BlockLightboxContentPane_Link {
   __typename: "Link";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
@@ -53,8 +53,8 @@ export interface BlockLightboxContentPane_Link {
 
 export interface BlockLightboxContentPane_Attachment {
   __typename: "Attachment";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   file_extension: string | null;
   file_url: string | null;
   file_size: string | null;
@@ -66,8 +66,8 @@ export interface BlockLightboxContentPane_Attachment {
 
 export interface BlockLightboxContentPane_Embed {
   __typename: "Embed";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   embed_html: string | null;
   embed_width: number | null;
   embed_height: number | null;

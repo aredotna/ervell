@@ -9,17 +9,17 @@
 
 export interface SettingsPage_me_groups {
   __typename: "Group";
-  id: number | null;
+  id: number;
 }
 
 export interface SettingsPage_me {
   __typename: "Me";
-  id: number | null;
-  name: string | null;
-  is_premium: boolean | null;
-  is_supporter: boolean | null;
-  is_investor: boolean | null;
-  groups: (SettingsPage_me_groups | null)[] | null;
+  id: number;
+  name: string;
+  is_premium: boolean;
+  is_supporter: boolean;
+  is_investor: boolean;
+  groups: SettingsPage_me_groups[];
 }
 
 export interface SettingsPage {

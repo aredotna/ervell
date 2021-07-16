@@ -21,19 +21,19 @@ export interface ManageGroupQuery_group_can {
 
 export interface ManageGroupQuery_group_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface ManageGroupQuery_group_memberships_member {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -44,21 +44,21 @@ export interface ManageGroupQuery_group_memberships_can {
 
 export interface ManageGroupQuery_group_memberships {
   __typename: "GroupMembership";
-  id: number | null;
+  id: number;
   member: ManageGroupQuery_group_memberships_member | null;
   can: ManageGroupQuery_group_memberships_can | null;
 }
 
 export interface ManageGroupQuery_group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
   description: string | null;
   invite: ManageGroupQuery_group_invite | null;
   can: ManageGroupQuery_group_can | null;
-  owner: ManageGroupQuery_group_owner | null;
-  memberships: (ManageGroupQuery_group_memberships | null)[] | null;
+  owner: ManageGroupQuery_group_owner;
+  memberships: ManageGroupQuery_group_memberships[] | null;
 }
 
 export interface ManageGroupQuery {

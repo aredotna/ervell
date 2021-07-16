@@ -14,20 +14,20 @@ export interface CancelPremiumSubscriptions_cancel_premium_subscriptions_users_c
 
 export interface CancelPremiumSubscriptions_cancel_premium_subscriptions_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: CancelPremiumSubscriptions_cancel_premium_subscriptions_users_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface CancelPremiumSubscriptions_cancel_premium_subscriptions {
-  __typename: "CancelPremiumSubscriptionsPayload";
-  users: (CancelPremiumSubscriptions_cancel_premium_subscriptions_users | null)[] | null;
+  __typename: "CancelPremiumSubscriptionsMutationPayload";
+  users: CancelPremiumSubscriptions_cancel_premium_subscriptions_users[];
 }
 
 export interface CancelPremiumSubscriptions {

@@ -16,5 +16,5 @@ export interface AddBlock_can {
 export interface AddBlock {
   __typename: "Channel";
   can: AddBlock_can | null;
-  visibility: string | null;
+  visibility: string;
 }

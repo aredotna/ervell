@@ -9,6 +9,6 @@
 
 export interface DeleteGroup {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }

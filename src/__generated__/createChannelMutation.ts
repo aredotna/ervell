@@ -11,13 +11,13 @@ import { ChannelVisibility } from "./globalTypes";
 
 export interface createChannelMutation_create_channel_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
 }
 
 export interface createChannelMutation_create_channel {
   __typename: "CreateChannelPayload";
-  channel: createChannelMutation_create_channel_channel | null;
+  channel: createChannelMutation_create_channel_channel;
 }
 
 export interface createChannelMutation {

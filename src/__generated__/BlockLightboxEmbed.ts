@@ -7,17 +7,17 @@
 // GraphQL fragment: BlockLightboxEmbed
 // ====================================================
 
-export interface BlockLightboxEmbed_Channel {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Attachment" | "PendingBlock";
+export interface BlockLightboxEmbed_Attachment {
+  __typename: "Attachment" | "Channel" | "Image" | "Link" | "PendingBlock" | "Text";
 }
 
 export interface BlockLightboxEmbed_Embed {
   __typename: "Embed";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   embed_html: string | null;
   embed_width: number | null;
   embed_height: number | null;
 }
 
-export type BlockLightboxEmbed = BlockLightboxEmbed_Channel | BlockLightboxEmbed_Embed;
+export type BlockLightboxEmbed = BlockLightboxEmbed_Attachment | BlockLightboxEmbed_Embed;

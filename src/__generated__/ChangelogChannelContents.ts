@@ -7,31 +7,31 @@
 // GraphQL query operation: ChangelogChannelContents
 // ====================================================
 
-export interface ChangelogChannelContents_channel_blokks_Channel {
-  __typename: "Channel" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
+export interface ChangelogChannelContents_channel_blokks_Attachment {
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock";
+  id: number;
   created_at: string | null;
   href: string | null;
-  title: string | null;
+  title: string;
 }
 
 export interface ChangelogChannelContents_channel_blokks_Text {
   __typename: "Text";
-  id: number | null;
+  id: number;
   created_at: string | null;
   href: string | null;
-  title: string | null;
-  content: string | null;
+  title: string;
+  content: string;
 }
 
-export type ChangelogChannelContents_channel_blokks = ChangelogChannelContents_channel_blokks_Channel | ChangelogChannelContents_channel_blokks_Text;
+export type ChangelogChannelContents_channel_blokks = ChangelogChannelContents_channel_blokks_Attachment | ChangelogChannelContents_channel_blokks_Text;
 
 export interface ChangelogChannelContents_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   added_to_at: string | null;
   href: string | null;
-  blokks: (ChangelogChannelContents_channel_blokks | null)[] | null;
+  blokks: ChangelogChannelContents_channel_blokks[] | null;
 }
 
 export interface ChangelogChannelContents {

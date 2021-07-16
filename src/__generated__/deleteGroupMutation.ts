@@ -8,8 +8,8 @@
 // ====================================================
 
 export interface deleteGroupMutation_delete_group {
-  __typename: "DeleteGroupPayload";
-  status: string | null;
+  __typename: "DeleteGroupMutationPayload";
+  status: string;
 }
 
 export interface deleteGroupMutation {

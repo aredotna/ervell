@@ -7,62 +7,93 @@
 // GraphQL fragment: FeedObject
 // ====================================================
 
-export interface FeedObject_Null {
-  __typename: "Null";
-}
-
 export interface FeedObject_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedObject_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type FeedObject_Channel_owner = FeedObject_Channel_owner_User | FeedObject_Channel_owner_Group;
 
 export interface FeedObject_Channel {
   __typename: "Channel";
-  id: number | null;
-  truncatedTitle: string | null;
+  id: number;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  owner: FeedObject_Channel_owner | null;
-}
-
-export interface FeedObject_Connectable {
-  __typename: "Connectable";
-  id: number | null;
-  label: string | null;
-  href: string | null;
+  visibility: string;
+  label: string;
+  owner: FeedObject_Channel_owner;
 }
 
 export interface FeedObject_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
+  href: string | null;
+}
+
+export interface FeedObject_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedObject_Attachment {
+  __typename: "Attachment";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedObject_Embed {
+  __typename: "Embed";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedObject_Text {
+  __typename: "Text";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedObject_Image {
+  __typename: "Image";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedObject_Link {
+  __typename: "Link";
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface FeedObject_Comment {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   href: string | null;
 }
 
 export interface FeedObject_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
-export type FeedObject = FeedObject_Null | FeedObject_Channel | FeedObject_Connectable | FeedObject_User | FeedObject_Comment | FeedObject_Group;
+export type FeedObject = FeedObject_Channel | FeedObject_User | FeedObject_Connectable | FeedObject_Attachment | FeedObject_Embed | FeedObject_Text | FeedObject_Image | FeedObject_Link | FeedObject_Comment | FeedObject_Group;

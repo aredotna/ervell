@@ -11,36 +11,36 @@ import { FollowableTypeEnum } from "./globalTypes";
 
 export interface FollowQuery_followable_User_counts {
   __typename: "UserCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface FollowQuery_followable_User {
   __typename: "User";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: FollowQuery_followable_User_counts | null;
 }
 
 export interface FollowQuery_followable_Channel_counts {
   __typename: "ChannelCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface FollowQuery_followable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: FollowQuery_followable_Channel_counts | null;
 }
 
 export interface FollowQuery_followable_Group_counts {
   __typename: "GroupCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface FollowQuery_followable_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: FollowQuery_followable_Group_counts | null;
 }

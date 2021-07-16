@@ -20,18 +20,18 @@ export interface UpdateAccountMutation_update_account_me_settings {
 
 export interface UpdateAccountMutation_update_account_me {
   __typename: "Me";
-  id: number | null;
-  email: string | null;
-  name: string | null;
-  first_name: string | null;
+  id: number;
+  email: string;
+  name: string;
+  first_name: string;
   bio: string | null;
   home_path: string | null;
   settings: UpdateAccountMutation_update_account_me_settings | null;
 }
 
 export interface UpdateAccountMutation_update_account {
-  __typename: "UpdateAccountPayload";
-  me: UpdateAccountMutation_update_account_me | null;
+  __typename: "UpdateAccountMutationPayload";
+  me: UpdateAccountMutation_update_account_me;
 }
 
 export interface UpdateAccountMutation {

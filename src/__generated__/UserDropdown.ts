@@ -9,24 +9,24 @@
 
 export interface UserDropdown_me_groups {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  initials: string | null;
+  visibility: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface UserDropdown_me {
   __typename: "Me";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  is_premium: boolean | null;
-  is_confirmed: boolean | null;
+  is_premium: boolean;
+  is_confirmed: boolean;
   created_at: string | null;
   is_my_groups_dropdown_hidden: boolean | null;
-  groups: (UserDropdown_me_groups | null)[] | null;
+  groups: UserDropdown_me_groups[];
 }
 
 export interface UserDropdown {

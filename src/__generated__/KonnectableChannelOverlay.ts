@@ -14,7 +14,7 @@ export interface KonnectableChannelOverlay_counts {
 
 export interface KonnectableChannelOverlay {
   __typename: "Channel";
-  id: number | null;
-  visibility: string | null;
+  id: number;
+  visibility: string;
   counts: KonnectableChannelOverlay_counts | null;
 }

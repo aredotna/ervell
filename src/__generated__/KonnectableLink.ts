@@ -10,7 +10,7 @@
 export interface KonnectableLink {
   __typename: "Link";
   href: string | null;
-  title: string | null;
+  title: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;

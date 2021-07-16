@@ -11,13 +11,13 @@ import { MutableTypeEnum } from "./globalTypes";
 
 export interface MuteQuery_mutable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 
 export interface MuteQuery_mutable_Connectable {
   __typename: "Connectable";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 

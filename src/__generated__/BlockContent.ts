@@ -9,14 +9,14 @@
 
 export interface BlockContent_blokk_Channel {
   __typename: "Channel" | "PendingBlock";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
 }
 
 export interface BlockContent_blokk_Image {
   __typename: "Image";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   thumb_url: string | null;
   image_url: string | null;
   original_image_url: string | null;
@@ -29,9 +29,9 @@ export interface BlockContent_blokk_Text_can {
 
 export interface BlockContent_blokk_Text {
   __typename: "Text";
-  id: number | null;
-  title: string | null;
-  content: string | null;
+  id: number;
+  title: string;
+  content: string;
   can: BlockContent_blokk_Text_can | null;
 }
 
@@ -45,8 +45,8 @@ export interface BlockContent_blokk_Link_source {
 
 export interface BlockContent_blokk_Link {
   __typename: "Link";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   source_url: string | null;
   image_url: string | null;
   image_updated_at: string | null;
@@ -56,8 +56,8 @@ export interface BlockContent_blokk_Link {
 
 export interface BlockContent_blokk_Attachment {
   __typename: "Attachment";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   file_extension: string | null;
   file_url: string | null;
   file_size: string | null;
@@ -69,8 +69,8 @@ export interface BlockContent_blokk_Attachment {
 
 export interface BlockContent_blokk_Embed {
   __typename: "Embed";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   embed_html: string | null;
   embed_width: number | null;
   embed_height: number | null;
