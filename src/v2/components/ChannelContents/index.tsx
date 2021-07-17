@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react'
-import { ApolloClient, useApolloClient } from '@apollo/client'
+import { ApolloClient } from '@apollo/client'
 import { graphql, withApollo } from '@apollo/client/react/hoc'
 import { SortableContainer } from 'react-sortable-hoc'
 
@@ -35,7 +35,11 @@ interface ChannelContentsProps extends Props {
 
 const ChannelContents: React.FC<ChannelContentsProps> = memo(
   ({ channel, client, moveConnectable, pusherChannel, socket, ...rest }) => {
-    const { blocks, getPage, hasQueriedPage } = usePaginatedBlocks({
+    const {
+      blocks,
+      getPage,
+      // hasQueriedPage
+    } = usePaginatedBlocks({
       channelId: channel.id,
       initialData: channel.blokks,
       initialBlockCount: channel.counts.contents,
