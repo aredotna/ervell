@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, forwardRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import constants from 'v2/styles/constants'
@@ -32,26 +32,32 @@ interface Props extends BoxProps {
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const GridItem: React.FC<Props> = ({
-  children,
-  gutterSpacing = 4,
-  width = SIZE,
-  height = SIZE,
-  variableHeight = true,
-  onDrag = () => {},
-  onMouseEnter = () => {},
-  onMouseLeave = () => {},
-}) => (
-  <Container
-    gutterSpacing={gutterSpacing}
-    onDrag={onDrag}
-    onMouseEnter={onMouseEnter}
-    onMouseLeave={onMouseLeave}
-    width={width}
-    height={!variableHeight ? height : undefined}
-  >
-    {children}
-  </Container>
+const GridItem: React.FC<Props> = forwardRef(
+  (
+    {
+      children,
+      gutterSpacing = 4,
+      width = SIZE,
+      height = SIZE,
+      variableHeight = true,
+      onDrag = () => {},
+      onMouseEnter = () => {},
+      onMouseLeave = () => {},
+    },
+    ref
+  ) => (
+    <Container
+      ref={ref}
+      gutterSpacing={gutterSpacing}
+      onDrag={onDrag}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      width={width}
+      height={!variableHeight ? height : undefined}
+    >
+      {children}
+    </Container>
+  )
 )
 
 export default GridItem
