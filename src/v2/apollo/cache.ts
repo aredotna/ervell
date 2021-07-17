@@ -19,14 +19,6 @@ const isClientSide = typeof window !== 'undefined'
 const nonNormalizedMergeableObject: TypePolicy = {
   keyFields: false,
   merge(existing, incoming) {
-    if (existing === null || existing === undefined) {
-      return incoming
-    }
-
-    if (incoming === null || incoming === undefined) {
-      return existing
-    }
-
     return {
       ...existing,
       ...incoming,
@@ -148,7 +140,6 @@ export function getCache({
       /*
        * nonNormalizedMergeableObject
        */
-
       BlockCounts: nonNormalizedMergeableObject,
       BlockCan: nonNormalizedMergeableObject,
       ChannelCan: nonNormalizedMergeableObject,
@@ -179,18 +170,15 @@ export function getCache({
     },
   }
 
+  /*
+   * Custom type policies
+   */
+
   if (cookies) {
-    if (!cacheConfig.typePolicies) {
-      cacheConfig.typePolicies = {}
-    }
     cacheConfig.typePolicies.ClientCookies = {
       keyFields: [],
       fields: {
         get(_existing, { args }) {
-          if (args === null) {
-            return null
-          }
-
           return isClientSide
             ? Cookies.get(args.name) || null
             : cookies[args.name] || null
@@ -200,14 +188,11 @@ export function getCache({
   }
 
   if (sharifyData) {
-    if (!cacheConfig.typePolicies) {
-      cacheConfig.typePolicies = {}
-    }
     cacheConfig.typePolicies.ClientSharify = {
       keyFields: [],
       fields: {
         get(_existing, { args }) {
-          const value = sharifyData[args?.name]
+          const value = sharifyData[args.name]
           return value ? value : null
         },
       },
