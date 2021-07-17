@@ -11,13 +11,13 @@ import { BannerEnum } from "./globalTypes";
 
 export interface dismissMonthlyBannerMutation_dismiss_banner_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   banner: BannerEnum | null;
 }
 
 export interface dismissMonthlyBannerMutation_dismiss_banner {
-  __typename: "DismissBannerPayload";
-  me: dismissMonthlyBannerMutation_dismiss_banner_me | null;
+  __typename: "DismissBannerMutationPayload";
+  me: dismissMonthlyBannerMutation_dismiss_banner_me;
 }
 
 export interface dismissMonthlyBannerMutation {

@@ -9,7 +9,7 @@
 
 export interface Billing_customer_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
@@ -24,9 +24,9 @@ export interface Billing_customer_default_credit_card {
 
 export interface Billing_customer_patron {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
+  id: number;
+  name: string;
+  hidden_email: string;
 }
 
 export interface Billing_customer_credit_cards {
@@ -51,22 +51,22 @@ export interface Billing_customer_upcoming_invoice {
   /**
    * Can be `null` in cases where there is a manually sent invoice
    */
-  next_payment_attempt_at: string | null;
+  next_payment_attempt_at: string;
 }
 
 export interface Billing_customer {
   __typename: "Customer";
-  id: number | null;
-  is_canceled: boolean | null;
-  is_lifetime: boolean | null;
-  can_select_lifetime: boolean | null;
-  is_beneficiary: boolean | null;
+  id: number;
+  is_canceled: boolean;
+  is_lifetime: boolean;
+  can_select_lifetime: boolean;
+  is_beneficiary: boolean;
   plan: Billing_customer_plan | null;
   updated_at: string | null;
   default_credit_card: Billing_customer_default_credit_card | null;
   patron: Billing_customer_patron | null;
   current_period_end_at: string | null;
-  credit_cards: (Billing_customer_credit_cards | null)[] | null;
+  credit_cards: Billing_customer_credit_cards[] | null;
   upcoming_invoice: Billing_customer_upcoming_invoice | null;
 }
 
@@ -78,13 +78,13 @@ export interface Billing_counts {
 
 export interface Billing {
   __typename: "Me";
-  id: number | null;
+  id: number;
   non_premium_private_connections_limit: number | null;
   non_premium_connections_limit: number | null;
   customer: Billing_customer | null;
   counts: Billing_counts | null;
-  name: string | null;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }

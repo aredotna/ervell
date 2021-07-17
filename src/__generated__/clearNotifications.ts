@@ -14,13 +14,13 @@ export interface clearNotifications_clear_notifications_me_counts {
 
 export interface clearNotifications_clear_notifications_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: clearNotifications_clear_notifications_me_counts | null;
 }
 
 export interface clearNotifications_clear_notifications {
-  __typename: "ClearNotificationsPayload";
-  me: clearNotifications_clear_notifications_me | null;
+  __typename: "ClearNotificationsMutationPayload";
+  me: clearNotifications_clear_notifications_me;
 }
 
 export interface clearNotifications {

@@ -14,16 +14,16 @@ export interface UserSelector_can {
 
 export interface UserSelector {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
-  is_upgradeable: boolean | null;
-  is_approaching_either_connections_limit: boolean | null;
-  is_exceeding_either_connections_limit: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
+  is_upgradeable: boolean;
+  is_approaching_either_connections_limit: boolean;
+  is_exceeding_either_connections_limit: boolean;
   can: UserSelector_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }

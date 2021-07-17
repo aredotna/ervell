@@ -17,7 +17,7 @@ export interface BlockLightboxActions_Channel {
   __typename: "Channel";
   source: BlockLightboxActions_Channel_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
+  shareable_title: string;
 }
 
 export interface BlockLightboxActions_Image_source {
@@ -40,7 +40,7 @@ export interface BlockLightboxActions_Image {
   source: BlockLightboxActions_Image_source | null;
   can: BlockLightboxActions_Image_can | null;
   shareable_href: string | null;
-  shareable_title: string | null;
+  shareable_title: string;
 }
 
 export interface BlockLightboxActions_Text_source {
@@ -62,28 +62,28 @@ export interface BlockLightboxActions_Text {
   source: BlockLightboxActions_Text_source | null;
   can: BlockLightboxActions_Text_can | null;
   shareable_href: string | null;
-  shareable_title: string | null;
+  shareable_title: string;
 }
 
-export interface BlockLightboxActions_Link_source {
+export interface BlockLightboxActions_Attachment_source {
   __typename: "ConnectableSource";
   title: string | null;
   url: string | null;
 }
 
-export interface BlockLightboxActions_Link_can {
+export interface BlockLightboxActions_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   potentially_edit_thumbnail: boolean | null;
   edit_thumbnail: boolean | null;
 }
 
-export interface BlockLightboxActions_Link {
-  __typename: "Link" | "Embed" | "Attachment" | "PendingBlock";
-  source: BlockLightboxActions_Link_source | null;
-  can: BlockLightboxActions_Link_can | null;
+export interface BlockLightboxActions_Attachment {
+  __typename: "Attachment" | "Embed" | "Link" | "PendingBlock";
+  source: BlockLightboxActions_Attachment_source | null;
+  can: BlockLightboxActions_Attachment_can | null;
   shareable_href: string | null;
-  shareable_title: string | null;
+  shareable_title: string;
 }
 
-export type BlockLightboxActions = BlockLightboxActions_Channel | BlockLightboxActions_Image | BlockLightboxActions_Text | BlockLightboxActions_Link;
+export type BlockLightboxActions = BlockLightboxActions_Channel | BlockLightboxActions_Image | BlockLightboxActions_Text | BlockLightboxActions_Attachment;

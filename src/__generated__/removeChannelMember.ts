@@ -16,25 +16,25 @@ export interface removeChannelMember_remove_channel_members_channel_counts {
 
 export interface removeChannelMember_remove_channel_members_channel_collaborators_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  label: string | null;
+  label: string;
 }
 
 export interface removeChannelMember_remove_channel_members_channel_collaborators_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
 export interface removeChannelMember_remove_channel_members_channel_collaborators_Group_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -46,45 +46,45 @@ export interface removeChannelMember_remove_channel_members_channel_collaborator
 
 export interface removeChannelMember_remove_channel_members_channel_collaborators_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  visibility: string | null;
-  user: removeChannelMember_remove_channel_members_channel_collaborators_Group_user | null;
+  visibility: string;
+  user: removeChannelMember_remove_channel_members_channel_collaborators_Group_user;
   description: string | null;
-  users: (removeChannelMember_remove_channel_members_channel_collaborators_Group_users | null)[] | null;
+  users: removeChannelMember_remove_channel_members_channel_collaborators_Group_users[] | null;
   can: removeChannelMember_remove_channel_members_channel_collaborators_Group_can | null;
-  label: string | null;
+  label: string;
 }
 
 export type removeChannelMember_remove_channel_members_channel_collaborators = removeChannelMember_remove_channel_members_channel_collaborators_User | removeChannelMember_remove_channel_members_channel_collaborators_Group;
 
 export interface removeChannelMember_remove_channel_members_channel_memberships_member_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface removeChannelMember_remove_channel_members_channel_memberships_member_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface removeChannelMember_remove_channel_members_channel_memberships_member_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  visibility: string | null;
-  user: removeChannelMember_remove_channel_members_channel_memberships_member_Group_user | null;
+  visibility: string;
+  user: removeChannelMember_remove_channel_members_channel_memberships_member_Group_user;
 }
 
 export type removeChannelMember_remove_channel_members_channel_memberships_member = removeChannelMember_remove_channel_members_channel_memberships_member_User | removeChannelMember_remove_channel_members_channel_memberships_member_Group;
@@ -96,28 +96,28 @@ export interface removeChannelMember_remove_channel_members_channel_memberships_
 
 export interface removeChannelMember_remove_channel_members_channel_memberships {
   __typename: "ChannelMembership";
-  id: number | null;
+  id: number;
   member: removeChannelMember_remove_channel_members_channel_memberships_member | null;
   can: removeChannelMember_remove_channel_members_channel_memberships_can | null;
 }
 
 export interface removeChannelMember_remove_channel_members_channel_can {
   __typename: "ChannelCan";
-  manage_collaborators: boolean | null;
+  manage_collaborators: boolean;
 }
 
 export interface removeChannelMember_remove_channel_members_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   counts: removeChannelMember_remove_channel_members_channel_counts | null;
-  collaborators: (removeChannelMember_remove_channel_members_channel_collaborators | null)[] | null;
-  memberships: (removeChannelMember_remove_channel_members_channel_memberships | null)[] | null;
+  collaborators: removeChannelMember_remove_channel_members_channel_collaborators[] | null;
+  memberships: removeChannelMember_remove_channel_members_channel_memberships[] | null;
   can: removeChannelMember_remove_channel_members_channel_can | null;
 }
 
 export interface removeChannelMember_remove_channel_members {
-  __typename: "RemoveChannelMembersPayload";
-  channel: removeChannelMember_remove_channel_members_channel | null;
+  __typename: "RemoveChannelMembersMutationPayload";
+  channel: removeChannelMember_remove_channel_members_channel;
 }
 
 export interface removeChannelMember {

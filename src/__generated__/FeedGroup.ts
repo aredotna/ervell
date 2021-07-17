@@ -9,151 +9,262 @@
 
 export interface FeedGroup_user {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
 export interface FeedGroup_owner_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
 export interface FeedGroup_owner_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  href: string | null;
+  name: string;
 }
 
 export type FeedGroup_owner = FeedGroup_owner_User | FeedGroup_owner_Group;
 
-export interface FeedGroup_item_Null {
-  __typename: "Null";
-}
-
 export interface FeedGroup_item_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_item_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type FeedGroup_item_Channel_owner = FeedGroup_item_Channel_owner_User | FeedGroup_item_Channel_owner_Group;
 
 export interface FeedGroup_item_Channel {
   __typename: "Channel";
-  id: number | null;
-  truncatedTitle: string | null;
+  id: number;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  owner: FeedGroup_item_Channel_owner | null;
-}
-
-export interface FeedGroup_item_Connectable {
-  __typename: "Connectable";
-  id: number | null;
-  label: string | null;
-  href: string | null;
+  visibility: string;
+  label: string;
+  owner: FeedGroup_item_Channel_owner;
 }
 
 export interface FeedGroup_item_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Attachment {
+  __typename: "Attachment";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Embed {
+  __typename: "Embed";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Text {
+  __typename: "Text";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Image {
+  __typename: "Image";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_item_Link {
+  __typename: "Link";
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface FeedGroup_item_Comment {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   href: string | null;
 }
 
 export interface FeedGroup_item_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
-export type FeedGroup_item = FeedGroup_item_Null | FeedGroup_item_Channel | FeedGroup_item_Connectable | FeedGroup_item_User | FeedGroup_item_Comment | FeedGroup_item_Group;
-
-export interface FeedGroup_target_Null {
-  __typename: "Null";
-}
+export type FeedGroup_item = FeedGroup_item_Channel | FeedGroup_item_User | FeedGroup_item_Connectable | FeedGroup_item_Attachment | FeedGroup_item_Embed | FeedGroup_item_Text | FeedGroup_item_Image | FeedGroup_item_Link | FeedGroup_item_Comment | FeedGroup_item_Group;
 
 export interface FeedGroup_target_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_target_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type FeedGroup_target_Channel_owner = FeedGroup_target_Channel_owner_User | FeedGroup_target_Channel_owner_Group;
 
 export interface FeedGroup_target_Channel {
   __typename: "Channel";
-  id: number | null;
-  truncatedTitle: string | null;
+  id: number;
+  truncatedTitle: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  owner: FeedGroup_target_Channel_owner | null;
-}
-
-export interface FeedGroup_target_Connectable {
-  __typename: "Connectable";
-  id: number | null;
-  label: string | null;
-  href: string | null;
+  visibility: string;
+  label: string;
+  owner: FeedGroup_target_Channel_owner;
 }
 
 export interface FeedGroup_target_User {
   __typename: "User";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Connectable {
+  __typename: "Connectable";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Attachment {
+  __typename: "Attachment";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Embed {
+  __typename: "Embed";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Text {
+  __typename: "Text";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Image {
+  __typename: "Image";
+  id: number;
+  label: string;
+  href: string | null;
+}
+
+export interface FeedGroup_target_Link {
+  __typename: "Link";
+  id: number;
+  label: string;
   href: string | null;
 }
 
 export interface FeedGroup_target_Comment {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   href: string | null;
 }
 
 export interface FeedGroup_target_Group {
   __typename: "Group";
-  id: number | null;
-  label: string | null;
-  name: string | null;
+  id: number;
+  label: string;
+  name: string;
   href: string | null;
 }
 
-export type FeedGroup_target = FeedGroup_target_Null | FeedGroup_target_Channel | FeedGroup_target_Connectable | FeedGroup_target_User | FeedGroup_target_Comment | FeedGroup_target_Group;
+export type FeedGroup_target = FeedGroup_target_Channel | FeedGroup_target_User | FeedGroup_target_Connectable | FeedGroup_target_Attachment | FeedGroup_target_Embed | FeedGroup_target_Text | FeedGroup_target_Image | FeedGroup_target_Link | FeedGroup_target_Comment | FeedGroup_target_Group;
 
 export interface FeedGroup_objects_Comment {
   __typename: "Comment";
+}
+
+export interface FeedGroup_objects_Attachment_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface FeedGroup_objects_Attachment_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface FeedGroup_objects_Attachment_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface FeedGroup_objects_Attachment_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: FeedGroup_objects_Attachment_connection_user | null;
+}
+
+export interface FeedGroup_objects_Attachment_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface FeedGroup_objects_Attachment {
+  __typename: "Attachment";
+  href: string | null;
+  counts: FeedGroup_objects_Attachment_counts | null;
+  id: number;
+  title: string;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  file_extension: string | null;
+  updated_at: string | null;
+  user: FeedGroup_objects_Attachment_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: FeedGroup_objects_Attachment_connection | null;
+  source: FeedGroup_objects_Attachment_source | null;
 }
 
 export interface FeedGroup_objects_Channel_counts {
@@ -163,29 +274,29 @@ export interface FeedGroup_objects_Channel_counts {
 
 export interface FeedGroup_objects_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface FeedGroup_objects_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type FeedGroup_objects_Channel_owner = FeedGroup_objects_Channel_owner_Group | FeedGroup_objects_Channel_owner_User;
 
 export interface FeedGroup_objects_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_objects_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_objects_Channel_connection {
@@ -202,14 +313,14 @@ export interface FeedGroup_objects_Channel_source {
 export interface FeedGroup_objects_Channel {
   __typename: "Channel";
   href: string | null;
-  id: number | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
+  id: number;
+  truncatedTitle: string;
+  visibility: string;
   updated_at: string | null;
   counts: FeedGroup_objects_Channel_counts | null;
-  owner: FeedGroup_objects_Channel_owner | null;
-  label: string | null;
-  title: string | null;
+  owner: FeedGroup_objects_Channel_owner;
+  label: string;
+  title: string;
   user: FeedGroup_objects_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -218,48 +329,51 @@ export interface FeedGroup_objects_Channel {
   source: FeedGroup_objects_Channel_source | null;
 }
 
-export interface FeedGroup_objects_Text_counts {
+export interface FeedGroup_objects_Embed_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface FeedGroup_objects_Text_user {
+export interface FeedGroup_objects_Embed_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface FeedGroup_objects_Text_connection_user {
+export interface FeedGroup_objects_Embed_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface FeedGroup_objects_Text_connection {
+export interface FeedGroup_objects_Embed_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: FeedGroup_objects_Text_connection_user | null;
+  user: FeedGroup_objects_Embed_connection_user | null;
 }
 
-export interface FeedGroup_objects_Text_source {
+export interface FeedGroup_objects_Embed_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface FeedGroup_objects_Text {
-  __typename: "Text";
+export interface FeedGroup_objects_Embed {
+  __typename: "Embed";
   href: string | null;
-  counts: FeedGroup_objects_Text_counts | null;
-  id: number | null;
-  title: string | null;
-  content: string | null;
+  counts: FeedGroup_objects_Embed_counts | null;
+  id: number;
+  title: string;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
   updated_at: string | null;
-  user: FeedGroup_objects_Text_user | null;
+  user: FeedGroup_objects_Embed_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: FeedGroup_objects_Text_connection | null;
-  source: FeedGroup_objects_Text_source | null;
+  connection: FeedGroup_objects_Embed_connection | null;
+  source: FeedGroup_objects_Embed_source | null;
 }
 
 export interface FeedGroup_objects_Image_counts {
@@ -275,14 +389,14 @@ export interface FeedGroup_objects_Image_original_dimensions {
 
 export interface FeedGroup_objects_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_objects_Image_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_objects_Image_connection {
@@ -300,8 +414,8 @@ export interface FeedGroup_objects_Image {
   __typename: "Image";
   href: string | null;
   counts: FeedGroup_objects_Image_counts | null;
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -323,14 +437,14 @@ export interface FeedGroup_objects_Link_counts {
 
 export interface FeedGroup_objects_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_objects_Link_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface FeedGroup_objects_Link_connection {
@@ -348,7 +462,7 @@ export interface FeedGroup_objects_Link {
   __typename: "Link";
   href: string | null;
   counts: FeedGroup_objects_Link_counts | null;
-  title: string | null;
+  title: string;
   src: string | null;
   src_1x: string | null;
   src_2x: string | null;
@@ -360,142 +474,91 @@ export interface FeedGroup_objects_Link {
    * Returns the outer channel if we are inside of one
    */
   connection: FeedGroup_objects_Link_connection | null;
-  id: number | null;
+  id: number;
   source: FeedGroup_objects_Link_source | null;
 }
 
-export interface FeedGroup_objects_Embed_counts {
+export interface FeedGroup_objects_Text_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface FeedGroup_objects_Embed_user {
+export interface FeedGroup_objects_Text_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface FeedGroup_objects_Embed_connection_user {
+export interface FeedGroup_objects_Text_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface FeedGroup_objects_Embed_connection {
+export interface FeedGroup_objects_Text_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: FeedGroup_objects_Embed_connection_user | null;
+  user: FeedGroup_objects_Text_connection_user | null;
 }
 
-export interface FeedGroup_objects_Embed_source {
+export interface FeedGroup_objects_Text_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface FeedGroup_objects_Embed {
-  __typename: "Embed";
+export interface FeedGroup_objects_Text {
+  __typename: "Text";
   href: string | null;
-  counts: FeedGroup_objects_Embed_counts | null;
-  id: number | null;
-  title: string | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
+  counts: FeedGroup_objects_Text_counts | null;
+  id: number;
+  title: string;
+  content: string;
   updated_at: string | null;
-  user: FeedGroup_objects_Embed_user | null;
+  user: FeedGroup_objects_Text_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: FeedGroup_objects_Embed_connection | null;
-  source: FeedGroup_objects_Embed_source | null;
-}
-
-export interface FeedGroup_objects_Attachment_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface FeedGroup_objects_Attachment_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface FeedGroup_objects_Attachment_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface FeedGroup_objects_Attachment_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: FeedGroup_objects_Attachment_connection_user | null;
-}
-
-export interface FeedGroup_objects_Attachment_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface FeedGroup_objects_Attachment {
-  __typename: "Attachment";
-  href: string | null;
-  counts: FeedGroup_objects_Attachment_counts | null;
-  id: number | null;
-  title: string | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  file_extension: string | null;
-  updated_at: string | null;
-  user: FeedGroup_objects_Attachment_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: FeedGroup_objects_Attachment_connection | null;
-  source: FeedGroup_objects_Attachment_source | null;
-}
-
-export interface FeedGroup_objects_User {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-  href: string | null;
-  label: string | null;
-  initials: string | null;
-  avatar: string | null;
+  connection: FeedGroup_objects_Text_connection | null;
+  source: FeedGroup_objects_Text_source | null;
 }
 
 export interface FeedGroup_objects_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  label: string | null;
-  initials: string | null;
+  visibility: string;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
-export type FeedGroup_objects = FeedGroup_objects_Comment | FeedGroup_objects_Channel | FeedGroup_objects_Text | FeedGroup_objects_Image | FeedGroup_objects_Link | FeedGroup_objects_Embed | FeedGroup_objects_Attachment | FeedGroup_objects_User | FeedGroup_objects_Group;
+export interface FeedGroup_objects_User {
+  __typename: "User";
+  id: number;
+  name: string;
+  href: string | null;
+  label: string;
+  initials: string;
+  avatar: string | null;
+}
+
+export type FeedGroup_objects = FeedGroup_objects_Comment | FeedGroup_objects_Attachment | FeedGroup_objects_Channel | FeedGroup_objects_Embed | FeedGroup_objects_Image | FeedGroup_objects_Link | FeedGroup_objects_Text | FeedGroup_objects_Group | FeedGroup_objects_User;
 
 export interface FeedGroup {
   __typename: "DeedGroup";
-  id: string | null;
-  key: string | null;
-  length: number | null;
+  id: string;
+  key: string;
+  length: number;
   user: FeedGroup_user | null;
-  owner: FeedGroup_owner | null;
-  action: string | null;
+  owner: FeedGroup_owner;
+  action: string;
   item: FeedGroup_item | null;
-  item_phrase: string | null;
+  item_phrase: string;
   connector: string | null;
   target: FeedGroup_target | null;
-  target_phrase: string | null;
+  target_phrase: string;
   created_at: string | null;
-  is_private: boolean | null;
-  objects: (FeedGroup_objects | null)[] | null;
+  is_private: boolean;
+  objects: FeedGroup_objects[] | null;
 }

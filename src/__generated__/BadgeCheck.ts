@@ -14,7 +14,7 @@ export interface BadgeCheck_me_can {
 
 export interface BadgeCheck_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   custom_badge: string | null;
   badge: string | null;
   can: BadgeCheck_me_can | null;

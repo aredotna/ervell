@@ -9,12 +9,12 @@
 
 export interface acceptInvitationMutation_accept_invitation_me {
   __typename: "Me";
-  id: number | null;
-  email: string | null;
+  id: number;
+  email: string;
 }
 
 export interface acceptInvitationMutation_accept_invitation {
-  __typename: "AcceptInvitationPayload";
+  __typename: "AcceptInvitationMutationPayload";
   me: acceptInvitationMutation_accept_invitation_me | null;
 }
 

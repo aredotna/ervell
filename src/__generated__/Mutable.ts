@@ -9,13 +9,13 @@
 
 export interface Mutable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 
 export interface Mutable_Connectable {
   __typename: "Connectable";
-  id: number | null;
+  id: number;
   is_muted: boolean | null;
 }
 

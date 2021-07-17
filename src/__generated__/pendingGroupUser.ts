@@ -9,10 +9,10 @@
 
 export interface PendingGroupUser {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  hidden_email: string | null;
-  initials: string | null;
+  hidden_email: string;
+  initials: string;
   avatar: string | null;
 }

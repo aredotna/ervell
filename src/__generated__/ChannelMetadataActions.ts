@@ -17,7 +17,7 @@ export interface ChannelMetadataActions_can {
 
 export interface ChannelMetadataActions {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: ChannelMetadataActions_can | null;
   is_muted: boolean | null;
 }

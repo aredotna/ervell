@@ -8,13 +8,13 @@
 // ====================================================
 
 export interface updateBlockThumbnailMutation_update_block_thumbnail_blokk {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
+  __typename: "Attachment" | "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  id: number;
 }
 
 export interface updateBlockThumbnailMutation_update_block_thumbnail {
-  __typename: "UpdateBlockThumbnailPayload";
-  blokk: updateBlockThumbnailMutation_update_block_thumbnail_blokk | null;
+  __typename: "UpdateBlockThumbnailMutationPayload";
+  blokk: updateBlockThumbnailMutation_update_block_thumbnail_blokk;
 }
 
 export interface updateBlockThumbnailMutation {

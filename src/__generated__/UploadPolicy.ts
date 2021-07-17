@@ -9,19 +9,19 @@
 
 export interface UploadPolicy_me_policy {
   __typename: "Policy";
-  AWSAccessKeyId: string | null;
-  acl: string | null;
-  bucket: string | null;
-  expires: string | null;
+  AWSAccessKeyId: string;
+  acl: string;
+  bucket: string;
+  expires: string;
   key: string | null;
-  policy: string | null;
-  signature: string | null;
-  success_action_status: string | null;
+  policy: string;
+  signature: string;
+  success_action_status: string;
 }
 
 export interface UploadPolicy_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   /**
    * Manifest for uploading new files to S3
    */

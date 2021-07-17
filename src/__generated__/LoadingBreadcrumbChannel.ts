@@ -9,21 +9,21 @@
 
 export interface LoadingBreadcrumbChannel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface LoadingBreadcrumbChannel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type LoadingBreadcrumbChannel_owner = LoadingBreadcrumbChannel_owner_User | LoadingBreadcrumbChannel_owner_Group;
 
 export interface LoadingBreadcrumbChannel {
   __typename: "Channel";
-  id: number | null;
-  label: string | null;
-  owner: LoadingBreadcrumbChannel_owner | null;
+  id: number;
+  label: string;
+  owner: LoadingBreadcrumbChannel_owner;
 }

@@ -9,8 +9,8 @@
 
 export interface BlockLightboxComment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -21,7 +21,7 @@ export interface BlockLightboxComment_can {
 
 export interface BlockLightboxComment {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   created_at: string | null;
   user: BlockLightboxComment_user | null;

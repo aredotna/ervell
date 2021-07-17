@@ -12652,6 +12652,11 @@ map-cache@^0.2.2:
   resolved "https://registry.yarnpkg.com/map-cache/-/map-cache-0.2.2.tgz#c32abd0bd6525d9b051645bb4f26ac5dc98a0dbf"
   integrity sha1-wyq9C9ZSXZsFFkW7TyasXcmKDb8=
 
+map-cursor-to-max@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/map-cursor-to-max/-/map-cursor-to-max-1.0.0.tgz#d46fbab9429094ae586d5995f0a1d06dd3999f15"
+  integrity sha512-BBuyrvO7X3eyQGC9GJKeNeGUnF/69OAjfI4OfroIQF0CqC3cf/vnmGJyxb2oWjwasC3eEtW4JGaO/XcArp03ig==
+
 map-obj@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
@@ -18525,6 +18530,13 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-keyboard-list-navigation@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/use-keyboard-list-navigation/-/use-keyboard-list-navigation-2.3.1.tgz#d73420a7f87206f54ed87a7b6055293888884a81"
+  integrity sha512-qWSQQlwINfS0daXEZKVUjcDap6funZ8XKK7gkDPkKip1ay6AAPdnPWH/ev+c3pGPNd4+xdt4hTpbvUDQybNsAg==
+  dependencies:
+    map-cursor-to-max "^1.0.0"
 
 use@^3.1.0:
   version "3.1.1"

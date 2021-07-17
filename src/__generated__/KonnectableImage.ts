@@ -15,8 +15,8 @@ export interface KonnectableImage_original_dimensions {
 
 export interface KonnectableImage {
   __typename: "Image";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   href: string | null;
   src: string | null;
   src_1x: string | null;

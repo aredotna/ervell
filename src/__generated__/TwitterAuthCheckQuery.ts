@@ -9,12 +9,12 @@
 
 export interface TwitterAuthCheckQuery_me_twitter_authentication {
   __typename: "Authentication";
-  id: number | null;
+  id: number;
 }
 
 export interface TwitterAuthCheckQuery_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   twitter_authentication: TwitterAuthCheckQuery_me_twitter_authentication | null;
 }
 

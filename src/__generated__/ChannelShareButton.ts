@@ -16,7 +16,7 @@ export interface ChannelShareButton_share {
 
 export interface ChannelShareButton {
   __typename: "Channel";
-  id: number | null;
-  visibility: string | null;
+  id: number;
+  visibility: string;
   share: ChannelShareButton_share | null;
 }

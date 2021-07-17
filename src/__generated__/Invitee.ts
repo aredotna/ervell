@@ -9,6 +9,6 @@
 
 export interface Invitee {
   __typename: "Invitee";
-  id: number | null;
+  id: number;
   email: string | null;
 }

@@ -14,14 +14,14 @@ export interface DeleteGroupInvite_delete_group_invite_group_invite {
 
 export interface DeleteGroupInvite_delete_group_invite_group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   href: string | null;
   invite: DeleteGroupInvite_delete_group_invite_group_invite | null;
 }
 
 export interface DeleteGroupInvite_delete_group_invite {
-  __typename: "DeleteGroupInvitePayload";
-  group: DeleteGroupInvite_delete_group_invite_group | null;
+  __typename: "DeleteGroupInviteMutationPayload";
+  group: DeleteGroupInvite_delete_group_invite_group;
 }
 
 export interface DeleteGroupInvite {

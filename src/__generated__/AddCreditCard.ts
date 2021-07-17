@@ -27,14 +27,14 @@ export interface AddCreditCard_add_credit_card_customer_credit_cards {
 
 export interface AddCreditCard_add_credit_card_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: AddCreditCard_add_credit_card_customer_default_credit_card | null;
-  credit_cards: (AddCreditCard_add_credit_card_customer_credit_cards | null)[] | null;
+  credit_cards: AddCreditCard_add_credit_card_customer_credit_cards[] | null;
 }
 
 export interface AddCreditCard_add_credit_card {
-  __typename: "AddCreditCardPayload";
-  customer: AddCreditCard_add_credit_card_customer | null;
+  __typename: "AddCreditCardMutationPayload";
+  customer: AddCreditCard_add_credit_card_customer;
 }
 
 export interface AddCreditCard {

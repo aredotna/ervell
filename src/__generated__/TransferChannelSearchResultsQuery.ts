@@ -9,27 +9,27 @@
 
 export interface TransferChannelSearchResultsQuery_results_members_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  hidden_email: string | null;
-  initials: string | null;
+  hidden_email: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface TransferChannelSearchResultsQuery_results_members_Group_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface TransferChannelSearchResultsQuery_results_members_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  user: TransferChannelSearchResultsQuery_results_members_Group_user | null;
+  id: number;
+  name: string;
+  user: TransferChannelSearchResultsQuery_results_members_Group_user;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -37,7 +37,7 @@ export type TransferChannelSearchResultsQuery_results_members = TransferChannelS
 
 export interface TransferChannelSearchResultsQuery_results {
   __typename: "Searches";
-  members: (TransferChannelSearchResultsQuery_results_members | null)[] | null;
+  members: TransferChannelSearchResultsQuery_results_members[] | null;
 }
 
 export interface TransferChannelSearchResultsQuery {

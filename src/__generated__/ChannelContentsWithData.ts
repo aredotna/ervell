@@ -20,73 +20,137 @@ export interface ChannelContentsWithData_channel_counts {
   contents: number | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_user {
+export interface ChannelContentsWithData_channel_blokks_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_connection_user {
+export interface ChannelContentsWithData_channel_blokks_Attachment_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_connection_can {
+export interface ChannelContentsWithData_channel_blokks_Attachment_connection_can {
   __typename: "ConnectionCan";
   destroy: boolean | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_connection {
+export interface ChannelContentsWithData_channel_blokks_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: ChannelContentsWithData_channel_blokks_Text_connection_user | null;
-  can: ChannelContentsWithData_channel_blokks_Text_connection_can | null;
+  user: ChannelContentsWithData_channel_blokks_Attachment_connection_user | null;
+  can: ChannelContentsWithData_channel_blokks_Attachment_connection_can | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_source {
+export interface ChannelContentsWithData_channel_blokks_Attachment_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_counts {
+export interface ChannelContentsWithData_channel_blokks_Attachment_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text_can {
+export interface ChannelContentsWithData_channel_blokks_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Text {
-  __typename: "Text";
-  id: number | null;
+export interface ChannelContentsWithData_channel_blokks_Attachment {
+  __typename: "Attachment";
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsWithData_channel_blokks_Text_user | null;
+  title: string;
+  user: ChannelContentsWithData_channel_blokks_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: ChannelContentsWithData_channel_blokks_Text_connection | null;
-  source: ChannelContentsWithData_channel_blokks_Text_source | null;
-  counts: ChannelContentsWithData_channel_blokks_Text_counts | null;
-  content: string | null;
-  can: ChannelContentsWithData_channel_blokks_Text_can | null;
+  connection: ChannelContentsWithData_channel_blokks_Attachment_connection | null;
+  source: ChannelContentsWithData_channel_blokks_Attachment_source | null;
+  counts: ChannelContentsWithData_channel_blokks_Attachment_counts | null;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  file_extension: string | null;
+  can: ChannelContentsWithData_channel_blokks_Attachment_can | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: ChannelContentsWithData_channel_blokks_Embed_connection_user | null;
+  can: ChannelContentsWithData_channel_blokks_Embed_connection_can | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+  remove: boolean | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Embed {
+  __typename: "Embed";
+  id: number;
+  href: string | null;
+  updated_at: string | null;
+  title: string;
+  user: ChannelContentsWithData_channel_blokks_Embed_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: ChannelContentsWithData_channel_blokks_Embed_connection | null;
+  source: ChannelContentsWithData_channel_blokks_Embed_source | null;
+  counts: ChannelContentsWithData_channel_blokks_Embed_counts | null;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  can: ChannelContentsWithData_channel_blokks_Embed_can | null;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Image_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Image_connection_can {
@@ -125,10 +189,10 @@ export interface ChannelContentsWithData_channel_blokks_Image_can {
 
 export interface ChannelContentsWithData_channel_blokks_Image {
   __typename: "Image";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsWithData_channel_blokks_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -147,14 +211,14 @@ export interface ChannelContentsWithData_channel_blokks_Image {
 
 export interface ChannelContentsWithData_channel_blokks_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Link_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Link_connection_can {
@@ -187,10 +251,10 @@ export interface ChannelContentsWithData_channel_blokks_Link_can {
 
 export interface ChannelContentsWithData_channel_blokks_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsWithData_channel_blokks_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -206,137 +270,16 @@ export interface ChannelContentsWithData_channel_blokks_Link {
   can: ChannelContentsWithData_channel_blokks_Link_can | null;
 }
 
-export interface ChannelContentsWithData_channel_blokks_Embed_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: ChannelContentsWithData_channel_blokks_Embed_connection_user | null;
-  can: ChannelContentsWithData_channel_blokks_Embed_connection_can | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Embed {
-  __typename: "Embed";
-  id: number | null;
-  href: string | null;
-  updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsWithData_channel_blokks_Embed_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: ChannelContentsWithData_channel_blokks_Embed_connection | null;
-  source: ChannelContentsWithData_channel_blokks_Embed_source | null;
-  counts: ChannelContentsWithData_channel_blokks_Embed_counts | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  can: ChannelContentsWithData_channel_blokks_Embed_can | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: ChannelContentsWithData_channel_blokks_Attachment_connection_user | null;
-  can: ChannelContentsWithData_channel_blokks_Attachment_connection_can | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-}
-
-export interface ChannelContentsWithData_channel_blokks_Attachment {
-  __typename: "Attachment";
-  id: number | null;
-  href: string | null;
-  updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsWithData_channel_blokks_Attachment_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: ChannelContentsWithData_channel_blokks_Attachment_connection | null;
-  source: ChannelContentsWithData_channel_blokks_Attachment_source | null;
-  counts: ChannelContentsWithData_channel_blokks_Attachment_counts | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  file_extension: string | null;
-  can: ChannelContentsWithData_channel_blokks_Attachment_can | null;
-}
-
 export interface ChannelContentsWithData_channel_blokks_PendingBlock_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_PendingBlock_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_PendingBlock_connection_can {
@@ -369,10 +312,10 @@ export interface ChannelContentsWithData_channel_blokks_PendingBlock_can {
 
 export interface ChannelContentsWithData_channel_blokks_PendingBlock {
   __typename: "PendingBlock";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsWithData_channel_blokks_PendingBlock_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -383,16 +326,73 @@ export interface ChannelContentsWithData_channel_blokks_PendingBlock {
   can: ChannelContentsWithData_channel_blokks_PendingBlock_can | null;
 }
 
+export interface ChannelContentsWithData_channel_blokks_Text_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: ChannelContentsWithData_channel_blokks_Text_connection_user | null;
+  can: ChannelContentsWithData_channel_blokks_Text_connection_can | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+  remove: boolean | null;
+}
+
+export interface ChannelContentsWithData_channel_blokks_Text {
+  __typename: "Text";
+  id: number;
+  href: string | null;
+  updated_at: string | null;
+  title: string;
+  user: ChannelContentsWithData_channel_blokks_Text_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: ChannelContentsWithData_channel_blokks_Text_connection | null;
+  source: ChannelContentsWithData_channel_blokks_Text_source | null;
+  counts: ChannelContentsWithData_channel_blokks_Text_counts | null;
+  content: string;
+  can: ChannelContentsWithData_channel_blokks_Text_can | null;
+}
+
 export interface ChannelContentsWithData_channel_blokks_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Channel_connection_can {
@@ -419,15 +419,15 @@ export interface ChannelContentsWithData_channel_blokks_Channel_counts {
 
 export interface ChannelContentsWithData_channel_blokks_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface ChannelContentsWithData_channel_blokks_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type ChannelContentsWithData_channel_blokks_Channel_owner = ChannelContentsWithData_channel_blokks_Channel_owner_Group | ChannelContentsWithData_channel_blokks_Channel_owner_User;
@@ -439,33 +439,33 @@ export interface ChannelContentsWithData_channel_blokks_Channel_can {
 
 export interface ChannelContentsWithData_channel_blokks_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsWithData_channel_blokks_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelContentsWithData_channel_blokks_Channel_connection | null;
   source: ChannelContentsWithData_channel_blokks_Channel_source | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
+  truncatedTitle: string;
+  visibility: string;
   counts: ChannelContentsWithData_channel_blokks_Channel_counts | null;
-  owner: ChannelContentsWithData_channel_blokks_Channel_owner | null;
-  label: string | null;
+  owner: ChannelContentsWithData_channel_blokks_Channel_owner;
+  label: string;
   can: ChannelContentsWithData_channel_blokks_Channel_can | null;
 }
 
-export type ChannelContentsWithData_channel_blokks = ChannelContentsWithData_channel_blokks_Text | ChannelContentsWithData_channel_blokks_Image | ChannelContentsWithData_channel_blokks_Link | ChannelContentsWithData_channel_blokks_Embed | ChannelContentsWithData_channel_blokks_Attachment | ChannelContentsWithData_channel_blokks_PendingBlock | ChannelContentsWithData_channel_blokks_Channel;
+export type ChannelContentsWithData_channel_blokks = ChannelContentsWithData_channel_blokks_Attachment | ChannelContentsWithData_channel_blokks_Embed | ChannelContentsWithData_channel_blokks_Image | ChannelContentsWithData_channel_blokks_Link | ChannelContentsWithData_channel_blokks_PendingBlock | ChannelContentsWithData_channel_blokks_Text | ChannelContentsWithData_channel_blokks_Channel;
 
 export interface ChannelContentsWithData_channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: ChannelContentsWithData_channel_can | null;
   counts: ChannelContentsWithData_channel_counts | null;
-  blokks: (ChannelContentsWithData_channel_blokks | null)[] | null;
-  visibility: string | null;
+  blokks: ChannelContentsWithData_channel_blokks[] | null;
+  visibility: string;
 }
 
 export interface ChannelContentsWithData {

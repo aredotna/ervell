@@ -30,9 +30,14 @@ const NonPremiumDiscord: React.FC = () => {
 }
 
 const AnnualPerk: React.FC<PerkProps> = () => {
+  const url =
+    'https://store.are.na/collections/frontpage/products/are-na-annual-2021'
   return (
     <Text>
-      Our Annual books are sold out, hold tight for 2021 Supporter perks.
+      <Text color="state.premium" display="inline">
+        <a href={url}>Free 2021 Are.na Annual </a>
+      </Text>
+      (use code TEND2021)
     </Text>
   )
 }

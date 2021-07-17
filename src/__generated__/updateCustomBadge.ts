@@ -9,13 +9,13 @@
 
 export interface updateCustomBadge_update_account_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   custom_badge: string | null;
 }
 
 export interface updateCustomBadge_update_account {
-  __typename: "UpdateAccountPayload";
-  me: updateCustomBadge_update_account_me | null;
+  __typename: "UpdateAccountMutationPayload";
+  me: updateCustomBadge_update_account_me;
 }
 
 export interface updateCustomBadge {

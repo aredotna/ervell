@@ -9,7 +9,7 @@
 
 export interface UserInfoQuery_me {
   __typename: "Me";
-  name: string | null;
+  name: string;
 }
 
 export interface UserInfoQuery {

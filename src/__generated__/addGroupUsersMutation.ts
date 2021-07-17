@@ -9,18 +9,18 @@
 
 export interface addGroupUsersMutation_add_group_users_group_users {
   __typename: "User";
-  id: number | null;
+  id: number;
 }
 
 export interface addGroupUsersMutation_add_group_users_group {
   __typename: "Group";
-  id: number | null;
-  users: (addGroupUsersMutation_add_group_users_group_users | null)[] | null;
+  id: number;
+  users: addGroupUsersMutation_add_group_users_group_users[] | null;
 }
 
 export interface addGroupUsersMutation_add_group_users {
-  __typename: "AddGroupUsersPayload";
-  group: addGroupUsersMutation_add_group_users_group | null;
+  __typename: "AddGroupUsersMutationPayload";
+  group: addGroupUsersMutation_add_group_users_group;
 }
 
 export interface addGroupUsersMutation {

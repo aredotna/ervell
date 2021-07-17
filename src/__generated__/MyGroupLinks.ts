@@ -9,17 +9,17 @@
 
 export interface MyGroupLinks_groups {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  visibility: string | null;
-  initials: string | null;
+  visibility: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface MyGroupLinks {
   __typename: "Me";
-  id: number | null;
+  id: number;
   is_my_groups_dropdown_hidden: boolean | null;
-  groups: (MyGroupLinks_groups | null)[] | null;
+  groups: MyGroupLinks_groups[];
 }

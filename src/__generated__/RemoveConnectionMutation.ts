@@ -10,12 +10,12 @@ import { BaseConnectableTypeEnum } from "./globalTypes";
 // ====================================================
 
 export interface removeConnectionMutation_remove_connection {
-  __typename: "RemoveConnectionPayload";
+  __typename: "RemoveConnectionMutationPayload";
   /**
    * A unique identifier for the client performing the mutation.
    */
   clientMutationId: string | null;
-  status: string | null;
+  status: string;
 }
 
 export interface removeConnectionMutation {

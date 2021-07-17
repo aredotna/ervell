@@ -7,73 +7,137 @@
 // GraphQL fragment: ChannelContentsConnectable
 // ====================================================
 
-export interface ChannelContentsConnectable_Text_user {
+export interface ChannelContentsConnectable_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface ChannelContentsConnectable_Text_connection_user {
+export interface ChannelContentsConnectable_Attachment_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export interface ChannelContentsConnectable_Text_connection_can {
+export interface ChannelContentsConnectable_Attachment_connection_can {
   __typename: "ConnectionCan";
   destroy: boolean | null;
 }
 
-export interface ChannelContentsConnectable_Text_connection {
+export interface ChannelContentsConnectable_Attachment_connection {
   __typename: "Connection";
   created_at: string | null;
-  user: ChannelContentsConnectable_Text_connection_user | null;
-  can: ChannelContentsConnectable_Text_connection_can | null;
+  user: ChannelContentsConnectable_Attachment_connection_user | null;
+  can: ChannelContentsConnectable_Attachment_connection_can | null;
 }
 
-export interface ChannelContentsConnectable_Text_source {
+export interface ChannelContentsConnectable_Attachment_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface ChannelContentsConnectable_Text_counts {
+export interface ChannelContentsConnectable_Attachment_counts {
   __typename: "BlockCounts";
   comments: number | null;
 }
 
-export interface ChannelContentsConnectable_Text_can {
+export interface ChannelContentsConnectable_Attachment_can {
   __typename: "BlockCan";
   mute: boolean | null;
   remove: boolean | null;
 }
 
-export interface ChannelContentsConnectable_Text {
-  __typename: "Text";
-  id: number | null;
+export interface ChannelContentsConnectable_Attachment {
+  __typename: "Attachment";
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsConnectable_Text_user | null;
+  title: string;
+  user: ChannelContentsConnectable_Attachment_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
-  connection: ChannelContentsConnectable_Text_connection | null;
-  source: ChannelContentsConnectable_Text_source | null;
-  counts: ChannelContentsConnectable_Text_counts | null;
-  content: string | null;
-  can: ChannelContentsConnectable_Text_can | null;
+  connection: ChannelContentsConnectable_Attachment_connection | null;
+  source: ChannelContentsConnectable_Attachment_source | null;
+  counts: ChannelContentsConnectable_Attachment_counts | null;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  file_extension: string | null;
+  can: ChannelContentsConnectable_Attachment_can | null;
+}
+
+export interface ChannelContentsConnectable_Embed_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsConnectable_Embed_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsConnectable_Embed_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
+export interface ChannelContentsConnectable_Embed_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: ChannelContentsConnectable_Embed_connection_user | null;
+  can: ChannelContentsConnectable_Embed_connection_can | null;
+}
+
+export interface ChannelContentsConnectable_Embed_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface ChannelContentsConnectable_Embed_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface ChannelContentsConnectable_Embed_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+  remove: boolean | null;
+}
+
+export interface ChannelContentsConnectable_Embed {
+  __typename: "Embed";
+  id: number;
+  href: string | null;
+  updated_at: string | null;
+  title: string;
+  user: ChannelContentsConnectable_Embed_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: ChannelContentsConnectable_Embed_connection | null;
+  source: ChannelContentsConnectable_Embed_source | null;
+  counts: ChannelContentsConnectable_Embed_counts | null;
+  src: string | null;
+  src_1x: string | null;
+  src_2x: string | null;
+  src_3x: string | null;
+  can: ChannelContentsConnectable_Embed_can | null;
 }
 
 export interface ChannelContentsConnectable_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_Image_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_Image_connection_can {
@@ -112,10 +176,10 @@ export interface ChannelContentsConnectable_Image_can {
 
 export interface ChannelContentsConnectable_Image {
   __typename: "Image";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsConnectable_Image_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -134,14 +198,14 @@ export interface ChannelContentsConnectable_Image {
 
 export interface ChannelContentsConnectable_Link_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_Link_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_Link_connection_can {
@@ -174,10 +238,10 @@ export interface ChannelContentsConnectable_Link_can {
 
 export interface ChannelContentsConnectable_Link {
   __typename: "Link";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsConnectable_Link_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -193,137 +257,16 @@ export interface ChannelContentsConnectable_Link {
   can: ChannelContentsConnectable_Link_can | null;
 }
 
-export interface ChannelContentsConnectable_Embed_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsConnectable_Embed_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsConnectable_Embed_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
-export interface ChannelContentsConnectable_Embed_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: ChannelContentsConnectable_Embed_connection_user | null;
-  can: ChannelContentsConnectable_Embed_connection_can | null;
-}
-
-export interface ChannelContentsConnectable_Embed_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface ChannelContentsConnectable_Embed_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface ChannelContentsConnectable_Embed_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-}
-
-export interface ChannelContentsConnectable_Embed {
-  __typename: "Embed";
-  id: number | null;
-  href: string | null;
-  updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsConnectable_Embed_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: ChannelContentsConnectable_Embed_connection | null;
-  source: ChannelContentsConnectable_Embed_source | null;
-  counts: ChannelContentsConnectable_Embed_counts | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  can: ChannelContentsConnectable_Embed_can | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_connection_user {
-  __typename: "User";
-  id: number | null;
-  name: string | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_connection_can {
-  __typename: "ConnectionCan";
-  destroy: boolean | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_connection {
-  __typename: "Connection";
-  created_at: string | null;
-  user: ChannelContentsConnectable_Attachment_connection_user | null;
-  can: ChannelContentsConnectable_Attachment_connection_can | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_source {
-  __typename: "ConnectableSource";
-  url: string | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_counts {
-  __typename: "BlockCounts";
-  comments: number | null;
-}
-
-export interface ChannelContentsConnectable_Attachment_can {
-  __typename: "BlockCan";
-  mute: boolean | null;
-  remove: boolean | null;
-}
-
-export interface ChannelContentsConnectable_Attachment {
-  __typename: "Attachment";
-  id: number | null;
-  href: string | null;
-  updated_at: string | null;
-  title: string | null;
-  user: ChannelContentsConnectable_Attachment_user | null;
-  /**
-   * Returns the outer channel if we are inside of one
-   */
-  connection: ChannelContentsConnectable_Attachment_connection | null;
-  source: ChannelContentsConnectable_Attachment_source | null;
-  counts: ChannelContentsConnectable_Attachment_counts | null;
-  src: string | null;
-  src_1x: string | null;
-  src_2x: string | null;
-  src_3x: string | null;
-  file_extension: string | null;
-  can: ChannelContentsConnectable_Attachment_can | null;
-}
-
 export interface ChannelContentsConnectable_PendingBlock_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_PendingBlock_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_PendingBlock_connection_can {
@@ -356,10 +299,10 @@ export interface ChannelContentsConnectable_PendingBlock_can {
 
 export interface ChannelContentsConnectable_PendingBlock {
   __typename: "PendingBlock";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsConnectable_PendingBlock_user | null;
   /**
    * Returns the outer channel if we are inside of one
@@ -370,16 +313,73 @@ export interface ChannelContentsConnectable_PendingBlock {
   can: ChannelContentsConnectable_PendingBlock_can | null;
 }
 
+export interface ChannelContentsConnectable_Text_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsConnectable_Text_connection_user {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface ChannelContentsConnectable_Text_connection_can {
+  __typename: "ConnectionCan";
+  destroy: boolean | null;
+}
+
+export interface ChannelContentsConnectable_Text_connection {
+  __typename: "Connection";
+  created_at: string | null;
+  user: ChannelContentsConnectable_Text_connection_user | null;
+  can: ChannelContentsConnectable_Text_connection_can | null;
+}
+
+export interface ChannelContentsConnectable_Text_source {
+  __typename: "ConnectableSource";
+  url: string | null;
+}
+
+export interface ChannelContentsConnectable_Text_counts {
+  __typename: "BlockCounts";
+  comments: number | null;
+}
+
+export interface ChannelContentsConnectable_Text_can {
+  __typename: "BlockCan";
+  mute: boolean | null;
+  remove: boolean | null;
+}
+
+export interface ChannelContentsConnectable_Text {
+  __typename: "Text";
+  id: number;
+  href: string | null;
+  updated_at: string | null;
+  title: string;
+  user: ChannelContentsConnectable_Text_user | null;
+  /**
+   * Returns the outer channel if we are inside of one
+   */
+  connection: ChannelContentsConnectable_Text_connection | null;
+  source: ChannelContentsConnectable_Text_source | null;
+  counts: ChannelContentsConnectable_Text_counts | null;
+  content: string;
+  can: ChannelContentsConnectable_Text_can | null;
+}
+
 export interface ChannelContentsConnectable_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_Channel_connection_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface ChannelContentsConnectable_Channel_connection_can {
@@ -406,15 +406,15 @@ export interface ChannelContentsConnectable_Channel_counts {
 
 export interface ChannelContentsConnectable_Channel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface ChannelContentsConnectable_Channel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type ChannelContentsConnectable_Channel_owner = ChannelContentsConnectable_Channel_owner_Group | ChannelContentsConnectable_Channel_owner_User;
@@ -426,22 +426,22 @@ export interface ChannelContentsConnectable_Channel_can {
 
 export interface ChannelContentsConnectable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
   updated_at: string | null;
-  title: string | null;
+  title: string;
   user: ChannelContentsConnectable_Channel_user | null;
   /**
    * Returns the outer channel if we are inside of one
    */
   connection: ChannelContentsConnectable_Channel_connection | null;
   source: ChannelContentsConnectable_Channel_source | null;
-  truncatedTitle: string | null;
-  visibility: string | null;
+  truncatedTitle: string;
+  visibility: string;
   counts: ChannelContentsConnectable_Channel_counts | null;
-  owner: ChannelContentsConnectable_Channel_owner | null;
-  label: string | null;
+  owner: ChannelContentsConnectable_Channel_owner;
+  label: string;
   can: ChannelContentsConnectable_Channel_can | null;
 }
 
-export type ChannelContentsConnectable = ChannelContentsConnectable_Text | ChannelContentsConnectable_Image | ChannelContentsConnectable_Link | ChannelContentsConnectable_Embed | ChannelContentsConnectable_Attachment | ChannelContentsConnectable_PendingBlock | ChannelContentsConnectable_Channel;
+export type ChannelContentsConnectable = ChannelContentsConnectable_Attachment | ChannelContentsConnectable_Embed | ChannelContentsConnectable_Image | ChannelContentsConnectable_Link | ChannelContentsConnectable_PendingBlock | ChannelContentsConnectable_Text | ChannelContentsConnectable_Channel;

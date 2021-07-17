@@ -11,14 +11,14 @@ import { ConfirmedStatus } from "./globalTypes";
 
 export interface confirmAccountMutation_confirm_account_user {
   __typename: "Me";
-  id: number | null;
+  id: number;
   href: string | null;
 }
 
 export interface confirmAccountMutation_confirm_account {
-  __typename: "ConfirmAccountPayload";
-  status: ConfirmedStatus | null;
-  user: confirmAccountMutation_confirm_account_user | null;
+  __typename: "ConfirmAccountMutationPayload";
+  status: ConfirmedStatus;
+  user: confirmAccountMutation_confirm_account_user;
 }
 
 export interface confirmAccountMutation {

@@ -9,14 +9,14 @@
 
 export interface FindFriendsCreateAuthenticatedServiceMutation_create_authenticated_service_authenticated_service {
   __typename: "Authentication";
-  id: number | null;
+  id: number;
   provider: string | null;
   uid: string | null;
 }
 
 export interface FindFriendsCreateAuthenticatedServiceMutation_create_authenticated_service {
-  __typename: "CreateAuthenticatedServicePayload";
-  authenticated_service: FindFriendsCreateAuthenticatedServiceMutation_create_authenticated_service_authenticated_service | null;
+  __typename: "CreateAuthenticatedServiceMutationPayload";
+  authenticated_service: FindFriendsCreateAuthenticatedServiceMutation_create_authenticated_service_authenticated_service;
 }
 
 export interface FindFriendsCreateAuthenticatedServiceMutation {

@@ -8,13 +8,13 @@
 // ====================================================
 
 export interface BlockLightboxAttachment_Channel {
-  __typename: "Channel" | "Text" | "Image" | "Link" | "Embed" | "PendingBlock";
+  __typename: "Channel" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
 }
 
 export interface BlockLightboxAttachment_Attachment {
   __typename: "Attachment";
-  id: number | null;
-  title: string | null;
+  id: number;
+  title: string;
   file_extension: string | null;
   file_url: string | null;
   file_size: string | null;

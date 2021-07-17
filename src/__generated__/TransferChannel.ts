@@ -14,29 +14,29 @@ export interface TransferChannel_can {
 
 export interface TransferChannel_transfer_request_recipient_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface TransferChannel_transfer_request_recipient_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type TransferChannel_transfer_request_recipient = TransferChannel_transfer_request_recipient_User | TransferChannel_transfer_request_recipient_Group;
 
 export interface TransferChannel_transfer_request {
   __typename: "ChannelTransferRequest";
-  recipient: TransferChannel_transfer_request_recipient | null;
+  recipient: TransferChannel_transfer_request_recipient;
   is_recipient_member: boolean | null;
 }
 
 export interface TransferChannel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   can: TransferChannel_can | null;
-  is_pending_transfer: boolean | null;
+  is_pending_transfer: boolean;
   transfer_request: TransferChannel_transfer_request | null;
-  visibility: string | null;
+  visibility: string;
 }

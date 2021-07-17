@@ -20,15 +20,15 @@ export interface ChannelEmptyMessage_can {
 
 export interface ChannelEmptyMessage_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
 export interface ChannelEmptyMessage_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -36,8 +36,8 @@ export type ChannelEmptyMessage_owner = ChannelEmptyMessage_owner_User | Channel
 
 export interface ChannelEmptyMessage {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   counts: ChannelEmptyMessage_counts | null;
   can: ChannelEmptyMessage_can | null;
-  owner: ChannelEmptyMessage_owner | null;
+  owner: ChannelEmptyMessage_owner;
 }

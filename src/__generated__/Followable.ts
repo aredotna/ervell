@@ -9,36 +9,36 @@
 
 export interface Followable_User_counts {
   __typename: "UserCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface Followable_User {
   __typename: "User";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: Followable_User_counts | null;
 }
 
 export interface Followable_Channel_counts {
   __typename: "ChannelCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface Followable_Channel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: Followable_Channel_counts | null;
 }
 
 export interface Followable_Group_counts {
   __typename: "GroupCounts";
-  followers: number | null;
+  followers: number;
 }
 
 export interface Followable_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   is_followed: boolean | null;
   counts: Followable_Group_counts | null;
 }

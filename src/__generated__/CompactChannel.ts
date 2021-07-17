@@ -9,15 +9,15 @@
 
 export interface CompactChannel_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface CompactChannel_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type CompactChannel_owner = CompactChannel_owner_Group | CompactChannel_owner_User;
@@ -29,11 +29,11 @@ export interface CompactChannel_counts {
 
 export interface CompactChannel {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: CompactChannel_owner | null;
+  visibility: string;
+  title: string;
+  owner: CompactChannel_owner;
   counts: CompactChannel_counts | null;
-  label: string | null;
+  label: string;
 }

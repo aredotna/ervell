@@ -14,6 +14,6 @@ export interface GroupsCount_counts {
 
 export interface GroupsCount {
   __typename: "Me";
-  id: number | null;
+  id: number;
   counts: GroupsCount_counts | null;
 }

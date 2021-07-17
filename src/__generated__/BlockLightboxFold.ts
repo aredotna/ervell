@@ -9,15 +9,15 @@
 
 export interface BlockLightboxFold_block_Channel_current_user_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface BlockLightboxFold_block_Channel_current_user_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type BlockLightboxFold_block_Channel_current_user_channels_owner = BlockLightboxFold_block_Channel_current_user_channels_owner_Group | BlockLightboxFold_block_Channel_current_user_channels_owner_User;
@@ -29,26 +29,26 @@ export interface BlockLightboxFold_block_Channel_current_user_channels_counts {
 
 export interface BlockLightboxFold_block_Channel_current_user_channels {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Channel_current_user_channels_owner | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Channel_current_user_channels_owner;
   counts: BlockLightboxFold_block_Channel_current_user_channels_counts | null;
-  label: string | null;
+  label: string;
 }
 
 export interface BlockLightboxFold_block_Channel_public_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface BlockLightboxFold_block_Channel_public_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type BlockLightboxFold_block_Channel_public_channels_owner = BlockLightboxFold_block_Channel_public_channels_owner_Group | BlockLightboxFold_block_Channel_public_channels_owner_User;
@@ -60,26 +60,26 @@ export interface BlockLightboxFold_block_Channel_public_channels_counts {
 
 export interface BlockLightboxFold_block_Channel_public_channels {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Channel_public_channels_owner | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Channel_public_channels_owner;
   counts: BlockLightboxFold_block_Channel_public_channels_counts | null;
-  label: string | null;
+  label: string;
 }
 
 export interface BlockLightboxFold_block_Channel_private_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
 export interface BlockLightboxFold_block_Channel_private_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export type BlockLightboxFold_block_Channel_private_channels_owner = BlockLightboxFold_block_Channel_private_channels_owner_Group | BlockLightboxFold_block_Channel_private_channels_owner_User;
@@ -91,13 +91,13 @@ export interface BlockLightboxFold_block_Channel_private_channels_counts {
 
 export interface BlockLightboxFold_block_Channel_private_channels {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Channel_private_channels_owner | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Channel_private_channels_owner;
   counts: BlockLightboxFold_block_Channel_private_channels_counts | null;
-  label: string | null;
+  label: string;
 }
 
 export interface BlockLightboxFold_block_Channel_source {
@@ -107,14 +107,14 @@ export interface BlockLightboxFold_block_Channel_source {
 
 export interface BlockLightboxFold_block_Channel {
   __typename: "Channel";
-  id: number | null;
-  current_user_channels: (BlockLightboxFold_block_Channel_current_user_channels | null)[] | null;
-  public_channels: (BlockLightboxFold_block_Channel_public_channels | null)[] | null;
-  private_channels: (BlockLightboxFold_block_Channel_private_channels | null)[] | null;
+  id: number;
+  current_user_channels: BlockLightboxFold_block_Channel_current_user_channels[] | null;
+  public_channels: BlockLightboxFold_block_Channel_public_channels[] | null;
+  private_channels: BlockLightboxFold_block_Channel_private_channels[] | null;
   source: BlockLightboxFold_block_Channel_source | null;
 }
 
-export interface BlockLightboxFold_block_Text_counts {
+export interface BlockLightboxFold_block_Attachment_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
   private_channels: number | null;
@@ -123,169 +123,169 @@ export interface BlockLightboxFold_block_Text_counts {
   channels_with_same_source: number | null;
 }
 
-export interface BlockLightboxFold_block_Text_current_user_channels_owner_Group {
+export interface BlockLightboxFold_block_Attachment_current_user_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
-export interface BlockLightboxFold_block_Text_current_user_channels_owner_User {
+export interface BlockLightboxFold_block_Attachment_current_user_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export type BlockLightboxFold_block_Text_current_user_channels_owner = BlockLightboxFold_block_Text_current_user_channels_owner_Group | BlockLightboxFold_block_Text_current_user_channels_owner_User;
+export type BlockLightboxFold_block_Attachment_current_user_channels_owner = BlockLightboxFold_block_Attachment_current_user_channels_owner_Group | BlockLightboxFold_block_Attachment_current_user_channels_owner_User;
 
-export interface BlockLightboxFold_block_Text_current_user_channels_counts {
+export interface BlockLightboxFold_block_Attachment_current_user_channels_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface BlockLightboxFold_block_Text_current_user_channels {
+export interface BlockLightboxFold_block_Attachment_current_user_channels {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Text_current_user_channels_owner | null;
-  counts: BlockLightboxFold_block_Text_current_user_channels_counts | null;
-  label: string | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Attachment_current_user_channels_owner;
+  counts: BlockLightboxFold_block_Attachment_current_user_channels_counts | null;
+  label: string;
 }
 
-export interface BlockLightboxFold_block_Text_public_channels_owner_Group {
+export interface BlockLightboxFold_block_Attachment_public_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
-export interface BlockLightboxFold_block_Text_public_channels_owner_User {
+export interface BlockLightboxFold_block_Attachment_public_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export type BlockLightboxFold_block_Text_public_channels_owner = BlockLightboxFold_block_Text_public_channels_owner_Group | BlockLightboxFold_block_Text_public_channels_owner_User;
+export type BlockLightboxFold_block_Attachment_public_channels_owner = BlockLightboxFold_block_Attachment_public_channels_owner_Group | BlockLightboxFold_block_Attachment_public_channels_owner_User;
 
-export interface BlockLightboxFold_block_Text_public_channels_counts {
+export interface BlockLightboxFold_block_Attachment_public_channels_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface BlockLightboxFold_block_Text_public_channels {
+export interface BlockLightboxFold_block_Attachment_public_channels {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Text_public_channels_owner | null;
-  counts: BlockLightboxFold_block_Text_public_channels_counts | null;
-  label: string | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Attachment_public_channels_owner;
+  counts: BlockLightboxFold_block_Attachment_public_channels_counts | null;
+  label: string;
 }
 
-export interface BlockLightboxFold_block_Text_private_channels_owner_Group {
+export interface BlockLightboxFold_block_Attachment_private_channels_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
-export interface BlockLightboxFold_block_Text_private_channels_owner_User {
+export interface BlockLightboxFold_block_Attachment_private_channels_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export type BlockLightboxFold_block_Text_private_channels_owner = BlockLightboxFold_block_Text_private_channels_owner_Group | BlockLightboxFold_block_Text_private_channels_owner_User;
+export type BlockLightboxFold_block_Attachment_private_channels_owner = BlockLightboxFold_block_Attachment_private_channels_owner_Group | BlockLightboxFold_block_Attachment_private_channels_owner_User;
 
-export interface BlockLightboxFold_block_Text_private_channels_counts {
+export interface BlockLightboxFold_block_Attachment_private_channels_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface BlockLightboxFold_block_Text_private_channels {
+export interface BlockLightboxFold_block_Attachment_private_channels {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Text_private_channels_owner | null;
-  counts: BlockLightboxFold_block_Text_private_channels_counts | null;
-  label: string | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Attachment_private_channels_owner;
+  counts: BlockLightboxFold_block_Attachment_private_channels_counts | null;
+  label: string;
 }
 
-export interface BlockLightboxFold_block_Text_source {
+export interface BlockLightboxFold_block_Attachment_source {
   __typename: "ConnectableSource";
   url: string | null;
 }
 
-export interface BlockLightboxFold_block_Text_channels_with_same_source_owner_Group {
+export interface BlockLightboxFold_block_Attachment_channels_with_same_source_owner_Group {
   __typename: "Group";
-  id: number | null;
-  name: string | null;
-  visibility: string | null;
+  id: number;
+  name: string;
+  visibility: string;
 }
 
-export interface BlockLightboxFold_block_Text_channels_with_same_source_owner_User {
+export interface BlockLightboxFold_block_Attachment_channels_with_same_source_owner_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
-export type BlockLightboxFold_block_Text_channels_with_same_source_owner = BlockLightboxFold_block_Text_channels_with_same_source_owner_Group | BlockLightboxFold_block_Text_channels_with_same_source_owner_User;
+export type BlockLightboxFold_block_Attachment_channels_with_same_source_owner = BlockLightboxFold_block_Attachment_channels_with_same_source_owner_Group | BlockLightboxFold_block_Attachment_channels_with_same_source_owner_User;
 
-export interface BlockLightboxFold_block_Text_channels_with_same_source_counts {
+export interface BlockLightboxFold_block_Attachment_channels_with_same_source_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface BlockLightboxFold_block_Text_channels_with_same_source {
+export interface BlockLightboxFold_block_Attachment_channels_with_same_source {
   __typename: "Channel";
-  id: number | null;
+  id: number;
   href: string | null;
-  visibility: string | null;
-  title: string | null;
-  owner: BlockLightboxFold_block_Text_channels_with_same_source_owner | null;
-  counts: BlockLightboxFold_block_Text_channels_with_same_source_counts | null;
-  label: string | null;
+  visibility: string;
+  title: string;
+  owner: BlockLightboxFold_block_Attachment_channels_with_same_source_owner;
+  counts: BlockLightboxFold_block_Attachment_channels_with_same_source_counts | null;
+  label: string;
 }
 
-export interface BlockLightboxFold_block_Text_comments_user {
+export interface BlockLightboxFold_block_Attachment_comments_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
-export interface BlockLightboxFold_block_Text_comments_can {
+export interface BlockLightboxFold_block_Attachment_comments_can {
   __typename: "CommentCan";
   destroy: boolean | null;
 }
 
-export interface BlockLightboxFold_block_Text_comments {
+export interface BlockLightboxFold_block_Attachment_comments {
   __typename: "Comment";
-  id: number | null;
+  id: number;
   body: string | null;
   created_at: string | null;
-  user: BlockLightboxFold_block_Text_comments_user | null;
-  can: BlockLightboxFold_block_Text_comments_can | null;
+  user: BlockLightboxFold_block_Attachment_comments_user | null;
+  can: BlockLightboxFold_block_Attachment_comments_can | null;
 }
 
-export interface BlockLightboxFold_block_Text {
-  __typename: "Text" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
-  id: number | null;
-  counts: BlockLightboxFold_block_Text_counts | null;
-  current_user_channels: (BlockLightboxFold_block_Text_current_user_channels | null)[] | null;
-  public_channels: (BlockLightboxFold_block_Text_public_channels | null)[] | null;
-  private_channels: (BlockLightboxFold_block_Text_private_channels | null)[] | null;
-  source: BlockLightboxFold_block_Text_source | null;
-  channels_with_same_source: (BlockLightboxFold_block_Text_channels_with_same_source | null)[] | null;
-  comments: (BlockLightboxFold_block_Text_comments | null)[] | null;
+export interface BlockLightboxFold_block_Attachment {
+  __typename: "Attachment" | "Embed" | "Image" | "Link" | "PendingBlock" | "Text";
+  id: number;
+  counts: BlockLightboxFold_block_Attachment_counts | null;
+  current_user_channels: BlockLightboxFold_block_Attachment_current_user_channels[] | null;
+  public_channels: BlockLightboxFold_block_Attachment_public_channels[] | null;
+  private_channels: BlockLightboxFold_block_Attachment_private_channels[] | null;
+  source: BlockLightboxFold_block_Attachment_source | null;
+  channels_with_same_source: BlockLightboxFold_block_Attachment_channels_with_same_source[] | null;
+  comments: BlockLightboxFold_block_Attachment_comments[] | null;
 }
 
-export type BlockLightboxFold_block = BlockLightboxFold_block_Channel | BlockLightboxFold_block_Text;
+export type BlockLightboxFold_block = BlockLightboxFold_block_Channel | BlockLightboxFold_block_Attachment;
 
 export interface BlockLightboxFold {
   block: BlockLightboxFold_block | null;

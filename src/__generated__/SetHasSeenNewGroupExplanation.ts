@@ -9,13 +9,13 @@
 
 export interface SetHasSeenNewGroupExplanation_set_me_flags_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   has_seen_new_group_explanation: boolean | null;
 }
 
 export interface SetHasSeenNewGroupExplanation_set_me_flags {
-  __typename: "SetMeFlagsPayload";
-  me: SetHasSeenNewGroupExplanation_set_me_flags_me | null;
+  __typename: "SetMeFlagsMutationPayload";
+  me: SetHasSeenNewGroupExplanation_set_me_flags_me;
 }
 
 export interface SetHasSeenNewGroupExplanation {

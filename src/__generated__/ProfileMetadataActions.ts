@@ -16,8 +16,8 @@ export interface ProfileMetadataActions_User_can {
 
 export interface ProfileMetadataActions_User {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   can: ProfileMetadataActions_User_can | null;
 }
 
@@ -30,7 +30,7 @@ export interface ProfileMetadataActions_Group_can {
 
 export interface ProfileMetadataActions_Group {
   __typename: "Group";
-  id: number | null;
+  id: number;
   /**
    * Are *any* users in the group upgradeable to Premium?
    */

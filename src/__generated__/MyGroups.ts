@@ -27,9 +27,9 @@ export interface MyGroups_customer_credit_cards {
 
 export interface MyGroups_customer {
   __typename: "Customer";
-  id: number | null;
+  id: number;
   default_credit_card: MyGroups_customer_default_credit_card | null;
-  credit_cards: (MyGroups_customer_credit_cards | null)[] | null;
+  credit_cards: MyGroups_customer_credit_cards[] | null;
 }
 
 export interface MyGroups_groups_counts {
@@ -39,21 +39,21 @@ export interface MyGroups_groups_counts {
 
 export interface MyGroups_groups_subscription_plan {
   __typename: "Plan";
-  id: string | null;
+  id: string;
   term: string | null;
 }
 
 export interface MyGroups_groups_subscription_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
 }
 
 export interface MyGroups_groups_subscription {
   __typename: "PremiumSubscription";
-  id: string | null;
+  id: string;
   plan: MyGroups_groups_subscription_plan | null;
-  users: (MyGroups_groups_subscription_users | null)[] | null;
+  users: MyGroups_groups_subscription_users[] | null;
 }
 
 export interface MyGroups_groups_user_can {
@@ -63,14 +63,14 @@ export interface MyGroups_groups_user_can {
 
 export interface MyGroups_groups_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: MyGroups_groups_user_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -81,34 +81,34 @@ export interface MyGroups_groups_users_can {
 
 export interface MyGroups_groups_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
   can: MyGroups_groups_users_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  is_upgradeable: boolean | null;
-  is_approaching_either_connections_limit: boolean | null;
-  is_exceeding_either_connections_limit: boolean | null;
+  is_upgradeable: boolean;
+  is_approaching_either_connections_limit: boolean;
+  is_exceeding_either_connections_limit: boolean;
 }
 
 export interface MyGroups_groups_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface MyGroups_groups {
   __typename: "Group";
-  id: number | null;
+  id: number;
   counts: MyGroups_groups_counts | null;
   /**
    * Is *every* user in the group Premium?
@@ -119,18 +119,18 @@ export interface MyGroups_groups {
    */
   is_upgradeable: boolean | null;
   subscription: MyGroups_groups_subscription | null;
-  name: string | null;
+  name: string;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
-  user: MyGroups_groups_user | null;
-  users: (MyGroups_groups_users | null)[] | null;
-  owner: MyGroups_groups_owner | null;
+  user: MyGroups_groups_user;
+  users: MyGroups_groups_users[] | null;
+  owner: MyGroups_groups_owner;
 }
 
 export interface MyGroups {
   __typename: "Me";
-  id: number | null;
+  id: number;
   customer: MyGroups_customer | null;
-  groups: (MyGroups_groups | null)[] | null;
+  groups: MyGroups_groups[];
 }

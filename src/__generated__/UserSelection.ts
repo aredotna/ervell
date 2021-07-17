@@ -9,12 +9,12 @@
 
 export interface UserSelection_owner {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
@@ -25,35 +25,35 @@ export interface UserSelection_users_can {
 
 export interface UserSelection_users {
   __typename: "User";
-  id: number | null;
-  name: string | null;
-  hidden_email: string | null;
-  is_premium: boolean | null;
-  is_canceled: boolean | null;
-  is_upgradeable: boolean | null;
-  is_approaching_either_connections_limit: boolean | null;
-  is_exceeding_either_connections_limit: boolean | null;
+  id: number;
+  name: string;
+  hidden_email: string;
+  is_premium: boolean;
+  is_canceled: boolean;
+  is_upgradeable: boolean;
+  is_approaching_either_connections_limit: boolean;
+  is_exceeding_either_connections_limit: boolean;
   can: UserSelection_users_can | null;
   href: string | null;
-  initials: string | null;
+  initials: string;
   avatar: string | null;
 }
 
 export interface UserSelection_subscription_users {
   __typename: "User";
-  id: number | null;
+  id: number;
 }
 
 export interface UserSelection_subscription {
   __typename: "PremiumSubscription";
-  id: string | null;
-  users: (UserSelection_subscription_users | null)[] | null;
+  id: string;
+  users: UserSelection_subscription_users[] | null;
 }
 
 export interface UserSelection {
   __typename: "Group";
-  name: string | null;
-  owner: UserSelection_owner | null;
-  users: (UserSelection_users | null)[] | null;
+  name: string;
+  owner: UserSelection_owner;
+  users: UserSelection_users[] | null;
   subscription: UserSelection_subscription | null;
 }

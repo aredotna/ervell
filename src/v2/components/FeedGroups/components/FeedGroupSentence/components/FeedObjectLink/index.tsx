@@ -25,14 +25,14 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   label,
   ...rest
 }) => {
-  const href = obj && obj.__typename !== 'Null' && obj.href
-  const visibility = obj && obj.__typename === 'Channel' && obj.visibility
-  const title = label
-    ? label
-    : obj.__typename !== 'Null' && obj.__typename !== 'Comment' && obj.label
+  const href = obj?.href
+  const visibility = obj?.__typename === 'Channel' && obj.visibility
+  const title = label ? label : obj.__typename !== 'Comment' && obj?.label
 
-  const Tag = obj && obj.__typename !== 'Null' && obj.href ? Link : Span
+  const Tag = obj?.href ? Link : Span
   const fontWeight = href ? 'bold' : 'normal'
+
+  console.log({ title, href, obj })
 
   const toParams = obj && {
     pathname: href,

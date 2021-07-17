@@ -9,7 +9,7 @@
 
 export interface ToolsPage_me {
   __typename: "Me";
-  id: number | null;
+  id: number;
   post_address: string | null;
 }
 

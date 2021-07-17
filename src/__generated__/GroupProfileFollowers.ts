@@ -9,16 +9,16 @@
 
 export interface GroupProfileFollowers_followers {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
-  label: string | null;
-  initials: string | null;
+  label: string;
+  initials: string;
   avatar: string | null;
 }
 
 export interface GroupProfileFollowers {
   __typename: "Group";
-  id: number | null;
-  followers: (GroupProfileFollowers_followers | null)[] | null;
+  id: number;
+  followers: GroupProfileFollowers_followers[] | null;
 }
