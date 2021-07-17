@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useCallback } from 'react'
 import { ApolloClient } from '@apollo/client'
 import { graphql, withApollo } from '@apollo/client/react/hoc'
 import { SortableContainer } from 'react-sortable-hoc'
@@ -38,7 +38,8 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     const {
       blocks,
       getPage,
-      // hasQueriedPage
+      getPageFromIndex,
+      hasQueriedPage,
     } = usePaginatedBlocks({
       channelId: channel.id,
       initialData: channel.blokks,
@@ -49,7 +50,16 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       getPage(1)
     }, [getPage])
 
-    console.log(blocks)
+    const onItemIntersected = useCallback(
+      (index: number) => {
+        const page = getPageFromIndex(index)
+        if (!hasQueriedPage(page)) {
+          getPage(page)
+        }
+      },
+      [getPage, getPageFromIndex, hasQueriedPage]
+    )
+    console.log('🦺', blocks)
 
     // Used to load/unload waypoints
     // const [activeQueries, setActiveQueries] = useState<
@@ -229,6 +239,7 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
                 context={lightboxConnectables}
                 onRemove={handleRemoveBlock}
                 onChangePosition={handleSortEnd}
+                onItemIntersected={onItemIntersected}
               />
             )
           })}

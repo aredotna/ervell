@@ -32,7 +32,7 @@ interface Props extends BoxProps {
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const GridItem: React.FC<Props> = forwardRef(
+const GridItem = forwardRef<HTMLElement, Props>(
   (
     {
       children,

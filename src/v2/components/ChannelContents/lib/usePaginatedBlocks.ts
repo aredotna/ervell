@@ -56,7 +56,20 @@ function mergePaginatedBlocks({
     }
   }
 
-  return newData
+  // Trim the end of the array of all sequential nulls until there is a
+  // block with data
+  let indexToBeginTrim = newData.length - 1
+  while (indexToBeginTrim > existing.length) {
+    if (newData[indexToBeginTrim] !== null) {
+      break
+    }
+
+    indexToBeginTrim--
+  }
+
+  const amountToTrim = newData.length - 1 - indexToBeginTrim
+
+  return amountToTrim === 0 ? newData : newData.slice(0, -amountToTrim)
 }
 
 const useIsMountedRef = () => {
@@ -106,6 +119,7 @@ export const usePaginatedBlocks = (argsObject: {
 
   const getPage = useCallback(
     async (pageNumber: number) => {
+      console.log('getting page', pageNumber)
       if (queriedPageNumbersRef.current.has(pageNumber)) {
         return
       }
@@ -144,9 +158,14 @@ export const usePaginatedBlocks = (argsObject: {
     return queriedPageNumbersRef.current.has(pageNember)
   }, [])
 
+  const getPageFromIndex = useCallback((index: number): number => {
+    return Math.floor(index / channelBlokksPaginatedPerPage) + 1
+  }, [])
+
   return {
     blocks,
     getPage,
     hasQueriedPage,
+    getPageFromIndex,
   }
 }

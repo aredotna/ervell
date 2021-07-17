@@ -65,10 +65,19 @@ interface Props {
     oldIndex: number
     newIndex: number
   }) => any
+  onItemIntersected: (index: number) => void
 }
 
 export const ChannelContentsItem: React.FC<Props> = memo(
-  ({ channel, connectable, index, context, onRemove, onChangePosition }) => {
+  ({
+    channel,
+    connectable,
+    index,
+    context,
+    onRemove,
+    onChangePosition,
+    onItemIntersected,
+  }) => {
     const [isHovering, setHover] = useState(false)
 
     type Ev = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
@@ -87,20 +96,27 @@ export const ChannelContentsItem: React.FC<Props> = memo(
     )
 
     const intersectionObserverCallback = useCallback<
-      (cellID: number) => (entries: IntersectionObserverEntry[]) => void
+      (itemIndex: number) => (entries: IntersectionObserverEntry[]) => void
     >(
-      cellID => entries => {
-        for (const entry of entries) {
-          console.log(cellID, entry)
+      itemIndex => entries => {
+        const entry = entries[0]
+        if (entry.isIntersecting) {
+          onItemIntersected(itemIndex)
         }
       },
-      []
+      [onItemIntersected]
     )
 
     const intersectionObserverOptions = useMemo<IntersectionObserverInit>(
       () => ({ rootMargin: '400px' }),
       []
     )
+
+    const sharedProps = {
+      callback: intersectionObserverCallback,
+      id: index,
+      options: intersectionObserverOptions,
+    }
 
     if (connectable) {
       const children: React.ReactNode = (
@@ -129,10 +145,8 @@ export const ChannelContentsItem: React.FC<Props> = memo(
 
       return (
         <IntersectionObserverBox
+          {...sharedProps}
           Component={SortableGridItemWithGridItemRef}
-          callback={intersectionObserverCallback}
-          id={index}
-          options={intersectionObserverOptions}
           componentProps={{
             disabled: !channel.can.reorder_connections,
             index: index,
@@ -144,10 +158,15 @@ export const ChannelContentsItem: React.FC<Props> = memo(
       )
     }
 
+    const children: React.ReactNode = <Cell.Skeletal />
     return (
-      <GridItem>
-        <Cell.Skeletal />
-      </GridItem>
+      <IntersectionObserverBox
+        {...sharedProps}
+        Component={GridItem}
+        componentProps={{
+          children: children,
+        }}
+      />
     )
   }
 )
