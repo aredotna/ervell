@@ -153,6 +153,7 @@ export const usePaginatedBlocks = (argsObject: {
 
   const getPage = useCallback(
     async (pageNumber: number) => {
+      console.log('🐛getting page', pageNumber)
       if (queriedPageNumbersRef.current.has(pageNumber)) {
         return
       }
@@ -195,8 +196,25 @@ export const usePaginatedBlocks = (argsObject: {
     return Math.floor(index / channelBlokksPaginatedPerPage) + 1
   }, [])
 
+  const clearQueriedPageNumbers = useCallback(() => {
+    queriedPageNumbersRef.current = new Set()
+  }, [])
+
+  const removeBlock = useCallback(
+    ({ id, type }: { id: number; type: string }) => {
+      clearQueriedPageNumbers()
+
+      setBlocks(b => {
+        return b.filter(block => block.id !== id && block.__typename !== type)
+      })
+    },
+    [clearQueriedPageNumbers]
+  )
+
   const moveBlock = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+      clearQueriedPageNumbers()
+
       setBlocks(b => {
         const startIndex = oldIndex
         let endIndex = newIndex
@@ -234,7 +252,7 @@ export const usePaginatedBlocks = (argsObject: {
         })
       })
     },
-    [client]
+    [clearQueriedPageNumbers, client]
   )
 
   return {
@@ -243,5 +261,6 @@ export const usePaginatedBlocks = (argsObject: {
     hasQueriedPage,
     getPageFromIndex,
     moveBlock,
+    removeBlock,
   }
 }

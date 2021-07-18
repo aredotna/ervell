@@ -33,6 +33,7 @@ const ChannelContents: React.FC<Props> = memo(
       getPageFromIndex,
       hasQueriedPage,
       moveBlock,
+      removeBlock,
     } = usePaginatedBlocks({
       channelId: channel.id,
       initialData: channel.blokks,
@@ -52,19 +53,6 @@ const ChannelContents: React.FC<Props> = memo(
       },
       [getPage, getPageFromIndex, hasQueriedPage]
     )
-
-    // Used to load/unload waypoints
-    // const [activeQueries, setActiveQueries] = useState<
-    //   ActiveQueriesCollection.ActiveQueries
-    // >({})
-
-    // Handles ordering of block grid items
-    // const [connectables, setConnectables] = useState(channel.skeleton)
-
-    // Handles actual contents of block grid items
-    // const [collection, setCollection] = useState(
-    //   ConnectableCellsCollection.normalize(channel.blokks)
-    // )
 
     // const addConnectable = useCallback(newConnectable => {
     //   setConnectables(prevConnectables => {
@@ -143,54 +131,13 @@ const ChannelContents: React.FC<Props> = memo(
     // )
     const handleAddBlock = () => {}
 
-    // const handleRemoveBlock = useCallback(
-    //   ({ id, type }: { id: number; type: string }) => {
-    //     setConnectables(prevConnectables => {
-    //       return prevConnectables.filter(
-    //         connectable => connectable.id !== id && connectable.type !== type
-    //       )
-    //     })
-    //   },
-    //   []
-    // )
-    const handleRemoveBlock = () => {}
+    const handleRemoveBlock = useCallback(
+      ({ id, type }: { id: number; type: string }) => {
+        removeBlock({ id, type })
+      },
+      [removeBlock]
+    )
 
-    // const handleSortEnd = useCallback(
-    //   ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-    //     const connectable = connectables[oldIndex]
-
-    //     let startIndex = oldIndex
-    //     let endIndex = newIndex
-
-    //     if (newIndex === -1) {
-    //       // Moving to the "bottom"
-    //       startIndex = oldIndex
-    //       endIndex = connectables.length - 1
-    //     }
-
-    //     const sorted = reorder({
-    //       list: connectables,
-    //       startIndex,
-    //       endIndex,
-    //     })
-
-    //     setConnectables(sorted)
-
-    //     const insertAt = connectables.length - endIndex
-
-    //     moveConnectable({
-    //       variables: {
-    //         channel_id: channel.id,
-    //         connectable: {
-    //           id: connectable.id,
-    //           type: connectable.type.toUpperCase(),
-    //         },
-    //         insert_at: insertAt,
-    //       },
-    //     })
-    //   },
-    //   [channel.id, connectables, moveConnectable]
-    // )
     const handleSortEnd = useCallback(
       ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
         moveBlock({ oldIndex, newIndex })
