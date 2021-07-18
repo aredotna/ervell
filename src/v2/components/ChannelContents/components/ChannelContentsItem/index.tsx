@@ -116,6 +116,7 @@ export const ChannelContentsItem: React.FC<Props> = memo(
       callback: intersectionObserverCallback,
       id: index,
       options: intersectionObserverOptions,
+      skip: !!connectable,
     }
 
     if (connectable) {

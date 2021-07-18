@@ -262,7 +262,7 @@
     "sinon": "*",
     "source-map-support": "^0.5.12",
     "storybook-react-router": "^1.0.5",
-    "typescript": "^3.8.3",
+    "typescript": "^4.3.5",
     "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-chrome-extension-reloader": "^1.3.0",

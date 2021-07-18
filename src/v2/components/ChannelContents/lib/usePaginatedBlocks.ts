@@ -8,6 +8,12 @@ import {
 import channelBlokksPaginatedQuery, {
   channelBlokksPaginatedPerPage,
 } from '../queries/channelBlokksPaginated'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import {
+  moveConnectableMutationVariables,
+  moveConnectableMutation as moveConnectableMutationData,
+} from '__generated__/moveConnectableMutation'
+import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
 /*
  * Helper functions
@@ -59,7 +65,7 @@ function mergePaginatedBlocks({
   // Trim the end of the array of all sequential nulls until there is a
   // block with data
   let indexToBeginTrim = newData.length - 1
-  while (indexToBeginTrim > existing.length) {
+  while (indexToBeginTrim > existing.length - 1) {
     if (newData[indexToBeginTrim] !== null) {
       break
     }
@@ -84,6 +90,34 @@ const useIsMountedRef = () => {
   }, [])
 
   return isMounted
+}
+
+const reorderBlocks = ({
+  blocks,
+  startIndex,
+  endIndex,
+}: {
+  blocks: ChannelContentsConnectable[]
+  startIndex: number
+  endIndex: number
+}): ChannelContentsConnectable[] => {
+  const start = blocks[startIndex]
+  const end = blocks[endIndex]
+
+  const newBlocks = [...blocks]
+  newBlocks[startIndex] = end
+  newBlocks[endIndex] = start
+  return newBlocks
+}
+
+function getConnectableType(
+  blockType: ChannelContentsConnectable['__typename']
+): BaseConnectableTypeEnum {
+  if (blockType === 'Channel') {
+    return BaseConnectableTypeEnum.CHANNEL
+  }
+
+  return BaseConnectableTypeEnum.BLOCK
 }
 
 /*
@@ -119,7 +153,6 @@ export const usePaginatedBlocks = (argsObject: {
 
   const getPage = useCallback(
     async (pageNumber: number) => {
-      console.log('getting page', pageNumber)
       if (queriedPageNumbersRef.current.has(pageNumber)) {
         return
       }
@@ -162,10 +195,53 @@ export const usePaginatedBlocks = (argsObject: {
     return Math.floor(index / channelBlokksPaginatedPerPage) + 1
   }, [])
 
+  const moveBlock = useCallback(
+    ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+      setBlocks(b => {
+        const startIndex = oldIndex
+        let endIndex = newIndex
+
+        if (newIndex === -1) {
+          // Moving to the "bottom"
+          endIndex = b.length - 1
+        }
+
+        const block = b[startIndex]
+
+        if (!block) {
+          return b
+        }
+
+        client.mutate<
+          moveConnectableMutationData,
+          moveConnectableMutationVariables
+        >({
+          mutation: moveConnectableMutation,
+          variables: {
+            channel_id: args.current.channelId.toString(),
+            connectable: {
+              id: block.id.toString(),
+              type: getConnectableType(block.__typename),
+            },
+            insert_at: b.length - endIndex,
+          },
+        })
+
+        return reorderBlocks({
+          blocks: b,
+          startIndex,
+          endIndex,
+        })
+      })
+    },
+    [client]
+  )
+
   return {
     blocks,
     getPage,
     hasQueriedPage,
     getPageFromIndex,
+    moveBlock,
   }
 }

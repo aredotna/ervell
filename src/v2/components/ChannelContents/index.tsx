@@ -1,9 +1,6 @@
 import React, { memo, useEffect, useCallback } from 'react'
-import { ApolloClient } from '@apollo/client'
-import { graphql, withApollo } from '@apollo/client/react/hoc'
-import { SortableContainer } from 'react-sortable-hoc'
 
-import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
+import { SortableContainer } from 'react-sortable-hoc'
 
 import {
   ChannelContents as ChannelContentsData,
@@ -28,18 +25,14 @@ interface Props {
   socket?: any
 }
 
-interface ChannelContentsProps extends Props {
-  moveConnectable: (props: any) => Promise<any>
-  client: ApolloClient<any>
-}
-
-const ChannelContents: React.FC<ChannelContentsProps> = memo(
-  ({ channel, client, moveConnectable, pusherChannel, socket, ...rest }) => {
+const ChannelContents: React.FC<Props> = memo(
+  ({ channel, pusherChannel, socket, ...rest }) => {
     const {
       blocks,
       getPage,
       getPageFromIndex,
       hasQueriedPage,
+      moveBlock,
     } = usePaginatedBlocks({
       channelId: channel.id,
       initialData: channel.blokks,
@@ -59,7 +52,6 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
       },
       [getPage, getPageFromIndex, hasQueriedPage]
     )
-    console.log('🦺', blocks)
 
     // Used to load/unload waypoints
     // const [activeQueries, setActiveQueries] = useState<
@@ -199,7 +191,12 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
     //   },
     //   [channel.id, connectables, moveConnectable]
     // )
-    const handleSortEnd = () => {}
+    const handleSortEnd = useCallback(
+      ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+        moveBlock({ oldIndex, newIndex })
+      },
+      [moveBlock]
+    )
 
     // For the lightbox, we need to filter out channels
     const lightboxConnectables = []
@@ -276,6 +273,4 @@ const ChannelContents: React.FC<ChannelContentsProps> = memo(
   }
 )
 
-export default graphql<Props>(moveConnectableMutation, {
-  name: 'moveConnectable',
-})(withApollo<Props>(ChannelContents))
+export default ChannelContents
