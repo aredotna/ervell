@@ -30,41 +30,38 @@ const Section = styled(Box).attrs({ mr: 8 })`
   `}
 `
 
-const Title = styled(Text).attrs({ f: 4, mb: 6, color: 'gray.light' })``
-
 const A = styled(Link)`
   display: block;
   line-height: 1.5;
   color: ${({ theme }) => theme.colors.gray.light} !important;
 `
 
-export const LoggedOutFooter: React.FC = () => {
+interface LoggedOutFooterProps {
+  isHomepage?: boolean
+}
+
+export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
+  isHomepage,
+}) => {
   return (
     <Container>
-      <Section>
-        <Icons name="ArenaMark" mb={6} size="1.5em" color="gray.light" />
-        <Text>
-          <A href="/about">About</A>
-          <A href="https://www.are.na/share/bEAsbbB">Press Kit</A>
-          <A href="http://store.are.na">Store</A>
-          <A href="/privacy">Privacy policy</A>
-          <A href="/terms">Terms of use</A>
-          <A href="/community-guidelines">Guidelines</A>
-          <A href="http://help.are.na/help_center">Help / FAQs</A>
-
-          <A href="/blog">Blog</A>
-          <A href="/education">Education</A>
-          <A href="/experiments">Experiments</A>
-          <A href="/roadmap">Roadmap</A>
-
-          <A href={ITUNES_LINK}>Download iOS App</A>
-          <A href={ANDROID_LINK}>Download Android App</A>
-
-          <A href="mailto:info@are.na">Email</A>
-          <A href="https://twitter.com/aredotna">Twitter</A>
-          <A href="https://instagram.com/aredotna">Instagram</A>
-        </Text>
-      </Section>
+      {isHomepage && (
+        <Section>
+          <Icons name="ArenaMark" mb={6} size="1.5em" color="gray.light" />
+          <Text mb={6}>
+            <A href="/about">About &amp; Features</A>
+            <A href="/pricing">Pricing &amp; Education Plans</A>
+            <A href="/roadmap">Roadmap</A>
+            <A href="/about">Writing &amp; Events</A>
+            <A href="/about">Team</A>
+            <A href="/about">Contact &amp; help</A>
+          </Text>
+          <Text mb={6}>
+            <A href={ITUNES_LINK}>Download iOS App</A>
+            <A href={ANDROID_LINK}>Download Android App</A>
+          </Text>
+        </Section>
+      )}
     </Container>
   )
 }

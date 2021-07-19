@@ -1,11 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { height, width, space } from 'styled-system'
-
-import constants from 'v2/styles/constants'
-import { preset } from 'v2/styles/functions'
 import Box from 'v2/components/UI/Box'
+import { BlokkWithQuery } from 'v2/components/Cell/components/Konnectable'
+import pathData from './pathData.json'
 
 const Container = styled(Box).attrs({
   pt: 6,
@@ -20,26 +17,22 @@ const Container = styled(Box).attrs({
   overflow: hidden;
 `
 
-const Block = styled(Link)`
-  box-sizing: border-box;
-  position: relative;
-  display: block;
-  text-decoration: none;
-  background-color: ${props => props.theme.colors.background};
-  border: 1px solid ${props => props.theme.colors.gray.light};
-  user-select: none;
-  ${preset(width, { width: constants.blockPreviewWidth })}
-  ${preset(height, { height: constants.blockPreviewWidth })}
-  ${preset(space, { mb: 8 })}
-`
+const Block = styled(BlokkWithQuery).attrs({
+  width: '225px',
+  height: '225px',
+})``
+
+const isClientSide = typeof window !== 'undefined'
 
 export const DesireLine: React.FC = () => {
-  const fakeBlocks = [1, 2, 3, 4, 5]
+  if (!isClientSide) return null
+
+  const blockIds = pathData.blockIds.sort(() => Math.random() - 0.5).slice(0, 5)
 
   return (
     <Container>
-      {fakeBlocks.map(index => {
-        return <Block key={index} />
+      {blockIds.map(id => {
+        return <Block key={id} id={id} />
       })}
     </Container>
   )

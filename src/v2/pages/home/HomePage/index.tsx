@@ -20,8 +20,10 @@ const HomePage: React.FC = () => {
     <BlankLayout>
       <Container>
         <TopLogin />
-        <DesireLine />
-        <IntroParagraph />
+        {/* <DesireLine /> */}
+        <Box my={6} pt={9}>
+          <IntroParagraph />
+        </Box>
       </Container>
       <Box my={7}>
         <FeatureCarouselWithSlides />
@@ -29,7 +31,7 @@ const HomePage: React.FC = () => {
       <Container>
         <LongTermVision />
       </Container>
-      <LoggedOutFooter />
+      <LoggedOutFooter isHomepage />
     </BlankLayout>
   )
 }
