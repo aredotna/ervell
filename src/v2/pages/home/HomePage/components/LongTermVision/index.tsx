@@ -55,7 +55,7 @@ const Member = styled(Text).attrs({
 
 export const LongTermVision: React.FC = () => {
   return (
-    <Box width="50%" py={10}>
+    <Box width="50%" py={10} mb={10}>
       <P mb={6}>Long-term vision</P>
 
       <P>
@@ -91,8 +91,12 @@ export const LongTermVision: React.FC = () => {
 
         <P>
           The company that builds Are.na is independent and sustained entirely
-          by our members. Currently <strong>7,050 people</strong> support Are.na
-          through their Premium subscriptions.
+          by our members.
+        </P>
+        <P>
+          Our business is to make Are.na a good enough experience that you are
+          willing to pay for it. Currently <strong>7,050 people</strong> support
+          Are.na through their Premium subscriptions.
         </P>
       </Chart>
     </Box>

@@ -28,9 +28,9 @@ export const IntroParagraph: React.FC = () => {
         </P>
         <P>
           Are.na is: <br />
-          1. a tool for saving and organizing the content that is important to
-          you and <br />
-          2. a place where you can grow said content into new forms.
+          1. online software for saving and organizing the content that is
+          important to you <br />
+          2. a toolkit for assembling new worlds from the scraps of the old
         </P>
         <P>
           Students, hobbyists and what we call connected knowledge collectors

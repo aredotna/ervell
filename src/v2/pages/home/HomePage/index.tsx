@@ -3,12 +3,13 @@ import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
-import { DesireLine } from './components/DesireLine'
+// import { DesireLine } from './components/DesireLine'
 import FeatureCarouselWithSlides from './components/FeatureSlides'
 import { IntroParagraph } from './components/IntroParagraph'
 import { TopLogin } from './components/TopLogin'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 import { LongTermVision } from './components/LongTermVision'
+import { TheSecret } from './components/TheSecret'
 
 const Container = styled(Box).attrs({
   p: 7,
@@ -25,11 +26,16 @@ const HomePage: React.FC = () => {
           <IntroParagraph />
         </Box>
       </Container>
+
       <Box my={7}>
         <FeatureCarouselWithSlides />
       </Box>
+
       <Container>
         <LongTermVision />
+        <Box my={7}>
+          <TheSecret />
+        </Box>
       </Container>
       <LoggedOutFooter isHomepage />
     </BlankLayout>
