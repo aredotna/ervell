@@ -92,7 +92,7 @@ const Perks: React.FC<PerksProps> = ({
   isSupporter,
   isInvestor,
 }) => {
-  const premiumPerks = [PremiumDiscordPerk, StorePerk, AnnualPerk]
+  const premiumPerks = [PremiumDiscordPerk, StorePerk]
   const supporterPerks = [PremiumDiscordPerk, StorePerk, ReportPerk, AnnualPerk]
 
   if (isInvestor) {
