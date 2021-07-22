@@ -42,7 +42,6 @@ export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
   onClick,
   ...rest
 }) => {
-  console.log({ onClick })
   return (
     <Row onClick={onClick} {...rest}>
       <TD width={FIRST_COLUMN_WIDTH}>

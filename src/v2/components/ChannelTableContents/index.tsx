@@ -119,7 +119,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         Header: 'Connections',
         accessor: 'counts.public_channels',
         Cell: StandardCell,
-        maxWidth: 200,
+        maxWidth: 300,
       },
     ],
     []
