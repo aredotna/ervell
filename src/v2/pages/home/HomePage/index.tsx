@@ -8,8 +8,8 @@ import FeatureCarouselWithSlides from './components/FeatureSlides'
 import { IntroParagraph } from './components/IntroParagraph'
 import { TopLogin } from './components/TopLogin'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
-import { LongTermVision } from './components/LongTermVision'
 import { TheSecret } from './components/TheSecret'
+import { LongTermVision } from 'v2/pages/home/components/LongTermVision'
 
 const Container = styled(Box).attrs({
   p: 7,

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import Carousel from 'v2/components/Carousel'
 import Text from 'v2/components/UI/Text/index'
-import { P } from '../Common/index'
+import { P } from 'v2/pages/home/components/Common'
 import slides from './slides.js'
 
 const MOBILE_BREAKPOINT = 1024

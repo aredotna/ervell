@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import constants from 'v2/styles/constants'
-import { P } from '../Common'
+import { P } from 'v2/pages/home/components/Common'
 
 const Chart = styled(Box)`
   border: 1px solid ${props => props.theme.colors.gray.light};

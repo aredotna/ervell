@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import Box from 'v2/components/UI/Box'
 import Button from 'v2/components/UI/GenericButton'
-import { P } from '../Common'
+import { P } from 'v2/pages/home/components/Common'
 
 const Container = styled(Box).attrs({ pb: 7 })`
   display: flex;
