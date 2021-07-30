@@ -44,6 +44,8 @@ app.post('/graphql/contentful', (req, res) => {
     ...(CONTENTFUL_TOKEN && { Authorization: `Bearer ${CONTENTFUL_TOKEN}` }),
   }
 
+  console.log({ headers })
+
   return axios({
     method: 'post',
     url: CONFIG.CONTENTFUL_GRAPHQL_ENDPOINT,
@@ -51,9 +53,11 @@ app.post('/graphql/contentful', (req, res) => {
     headers,
   })
     .then(({ data }) => {
+      console.log({ data })
       return res.json(data)
     })
     .catch(err => {
+      console.log({ err })
       return res.json({
         code: err.status || 500,
         message: err.message,

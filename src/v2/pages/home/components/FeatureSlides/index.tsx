@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import Carousel from 'v2/components/Carousel'
 import Text from 'v2/components/UI/Text/index'
-import { P } from 'v2/pages/home/components/Common'
 import slides from './slides.js'
 
 const MOBILE_BREAKPOINT = 1024
@@ -97,10 +96,6 @@ export const DescriptiveCarousel: React.FC<DescriptiveCarouselProps> = ({
 
   return (
     <>
-      <P f={4} pl={7}>
-        How it works
-      </P>
-
       <Carousel {...settings}>
         {slides.map(slide => (
           <Slide key={slide.id}>

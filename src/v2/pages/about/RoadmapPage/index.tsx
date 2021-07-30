@@ -33,6 +33,8 @@ import {
 } from '__generated__/ChangelogChannelContents'
 import KonnectableText from 'v2/components/Cell/components/Konnectable/components/KonnectableText'
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
+import { RoadmapContents as ROADMAP_CONTENTS_QUERY } from './contentfulQueries/roadmapQuery'
+import { RoadmapContents } from '__generated__/contentful/RoadmapContents'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -134,6 +136,10 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
     ChangelogChannelContentsVariables
   >(ChangelogChannelContents, { variables: { id: 'changelog' } })
 
+  const { data: roadmapData } = useQuery<RoadmapContents>(
+    ROADMAP_CONTENTS_QUERY
+  )
+
   return (
     <Container pb={10}>
       <Headline color="gray.bold">Here&apos;s where we&apos;re at.</Headline>
@@ -169,12 +175,12 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
 
       <Paragraph pb={7}>
         <GoalMeter
-          currentMrr={roadmap.fields.rawMrr}
-          goalMrr={roadmap.fields.rawGoalMrr}
-          goalDate={roadmap.fields.goalDate}
-          monthlyActiveMembers={roadmap.fields.statsRawMaMs}
-          totalPayingMembers={roadmap.fields.statsRawCustomers}
-          monthlyConnections={roadmap.fields.statsRawConnections}
+          currentMrr={roadmapData?.roadmap.rawMrr}
+          goalMrr={roadmapData?.roadmap.rawGoalMrr}
+          goalDate={roadmapData?.roadmap.goalDate}
+          monthlyActiveMembers={roadmapData?.roadmap.statsRawMaMs}
+          totalPayingMembers={roadmapData?.roadmap.statsRawCustomers}
+          monthlyConnections={roadmapData?.roadmap.statsRawConnections}
         />
       </Paragraph>
 
@@ -202,8 +208,8 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <Text f={1} textAlign="center" mt={4}>
               Premium members currently contribute&nbsp;
               <br />
-              <strong>{roadmap.fields.statsPremiumRevenue}</strong>&nbsp; in
-              monthly recurring revenue.
+              <strong>{roadmapData?.roadmap.statsPremiumRevenue}</strong>&nbsp;
+              in monthly recurring revenue.
             </Text>
           </Box>
         </div>
@@ -230,8 +236,8 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <Text f={2} textAlign="center" mt={4}>
               Supporters currently contribute&nbsp;
               <br />
-              <strong>{roadmap.fields.statsPatronRevenue}</strong>&nbsp; in
-              monthly recurring revenue.
+              <strong>{roadmapData?.roadmap.statsPatronRevenue}</strong>&nbsp;
+              in monthly recurring revenue.
             </Text>
           </Box>
         </div>
@@ -249,7 +255,9 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>In Progress</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.productInProgress),
+                __html: documentToHtmlString(
+                  roadmapData?.roadmap.productInProgress
+                ),
               }}
             />
           </Column>
@@ -257,7 +265,9 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>Up next</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.productUpNext),
+                __html: documentToHtmlString(
+                  roadmapData?.roadmap.productUpNext
+                ),
               }}
             />
           </Column>
@@ -266,7 +276,7 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <Cell
               dangerouslySetInnerHTML={{
                 __html: documentToHtmlString(
-                  roadmap.fields.productOnTheHorizon
+                  roadmapData?.roadmap.productOnTheHorizon
                 ),
               }}
             />
@@ -275,7 +285,9 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>Archived</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.productCompleted),
+                __html: documentToHtmlString(
+                  roadmapData?.roadmap.productCompleted
+                ),
               }}
             />
           </LightColumn>
@@ -326,7 +338,9 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>Revenue &amp; Strategy</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.businessRevenue),
+                __html: documentToHtmlString(
+                  roadmapData?.roadmap.businessRevenue
+                ),
               }}
             />
           </Column>
@@ -334,7 +348,9 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>Ethics</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.businessEthics),
+                __html: documentToHtmlString(
+                  roadmapData?.roadmap.businessEthics
+                ),
               }}
             />
           </Column>
@@ -342,7 +358,9 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>Community</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.businessCommunity),
+                __html: documentToHtmlString(
+                  roadmapData?.roadmap.businessCommunity
+                ),
               }}
             />
           </Column>
@@ -350,7 +368,7 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <ColumnHeader>Team</ColumnHeader>
             <Cell
               dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmap.fields.businessTeam),
+                __html: documentToHtmlString(roadmapData?.roadmap.businessTeam),
               }}
             />
           </Column>

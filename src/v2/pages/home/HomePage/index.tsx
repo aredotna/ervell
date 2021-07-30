@@ -10,6 +10,7 @@ import { TopLogin } from 'v2/pages/home/components/TopLogin'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 import { TheSecret } from './components/TheSecret'
 import { LongTermVision } from 'v2/pages/home/components/LongTermVision'
+import { P } from '../components/Common'
 
 const Container = styled(Box).attrs({
   p: 7,
@@ -28,6 +29,9 @@ const HomePage: React.FC = () => {
       </Container>
 
       <Box my={7}>
+        <P f={4} pl={7}>
+          How it works
+        </P>
         <FeatureCarouselWithSlides />
       </Box>
 

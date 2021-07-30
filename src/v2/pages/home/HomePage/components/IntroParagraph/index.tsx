@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import moment from 'moment'
 
 import Box from 'v2/components/UI/Box'
 import Button from 'v2/components/UI/GenericButton'
 import { P } from 'v2/pages/home/components/Common'
+import { calculateAge } from 'v2/pages/home/lib/calculateAge'
 
 const Container = styled(Box).attrs({ pb: 7 })`
   display: flex;
@@ -12,11 +12,7 @@ const Container = styled(Box).attrs({ pb: 7 })`
 `
 
 export const IntroParagraph: React.FC = () => {
-  const originDate = moment('2011-08-09', 'YYYY-MM-DD')
-  const current = moment().startOf('day')
-  const years = current.diff(originDate, 'years')
-  originDate.add(years, 'years')
-  const days = current.diff(originDate, 'days')
+  const { years, days } = calculateAge()
 
   return (
     <Container>

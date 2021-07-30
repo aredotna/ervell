@@ -36,6 +36,7 @@ import { ExpiredConfirmationPage } from 'v2/pages/confirmation/ExpiredConfirmati
 import isDev from 'v2/util/isDev'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
 import HomePage from 'v2/pages/home/HomePage'
+import { AboutPage } from 'v2/pages/home/AboutPage'
 
 export const Routes = () => {
   const { isLoggedIn } = useLoginStatus()
@@ -75,6 +76,8 @@ export const Routes = () => {
         ) : (
           <Route exact path="/" component={HomePage} />
         )}
+
+        <Route exact path="/about" component={AboutPage} />
 
         {/* Search */}
         <Route

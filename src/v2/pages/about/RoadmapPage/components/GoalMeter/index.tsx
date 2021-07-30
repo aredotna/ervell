@@ -5,8 +5,8 @@ import Text from 'v2/components/UI/Text'
 import Meter from 'v2/components/UI/Meter'
 
 interface GoalMeterProps {
-  currentMrr: number
-  goalMrr: number
+  currentMrr: string
+  goalMrr: string
   goalDate: string
   monthlyActiveMembers: string
   totalPayingMembers: string

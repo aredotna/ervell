@@ -7,6 +7,8 @@ export const P = styled(Text).attrs({
   lineHeight: 1.5,
   mb: 7,
 })`
+  text-align: left;
+
   ul {
     margin-left: 0;
     padding-left: ${x => x.theme.space[7]};

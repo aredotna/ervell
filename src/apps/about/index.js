@@ -27,7 +27,6 @@ const resolveRoadmap = (req, res, next) =>
     .catch(next)
 
 app
-  .get('/about', (req, res) => res.render('index'))
   .get('/terms', (req, res) => res.render('terms'))
   .get('/form-c', (req, res) => res.render('form-c'))
   .get('/privacy', (req, res) => res.render('privacy'))
