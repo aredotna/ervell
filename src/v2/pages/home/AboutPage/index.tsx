@@ -9,13 +9,18 @@ import { P } from '../components/Common'
 import { calculateAge } from '../lib/calculateAge'
 import FeatureCarouselWithSlides from '../components/FeatureSlides'
 import PricingTable from '../components/PricingTable'
+import { RoadmapPageInner } from 'v2/pages/about/RoadmapPage'
+import { EssaysCommunity } from './components/EssaysCommunity'
 
-const Section = styled(Box).attrs({
+const MaxBox = styled(Box).attrs({
   mx: 'auto',
   mb: 10,
 })`
-  max-width: 570px;
+  max-width: 670px;
   width: 100%;
+`
+
+const Section = styled(MaxBox)`
   text-align: center;
 `
 
@@ -53,18 +58,38 @@ export const AboutPage: React.FC = () => {
           structure your ideas and build new forms of knowledge together.
         </P>
       </Section>
-      <Box mb={11}>
+
+      <Box mb={10}>
         <Box textAlign="center" mb={6}>
           <Header>How it works</Header>
         </Box>
         <FeatureCarouselWithSlides />
       </Box>
+
       <Box mb={10}>
         <Box textAlign="center" mb={6}>
           <Header>Pricing &amp; Features</Header>
         </Box>
         <PricingTable />
       </Box>
+
+      <MaxBox>
+        <Box textAlign="center" mb={6}>
+          <Header>Roadmap</Header>
+        </Box>
+        <RoadmapPageInner />
+      </MaxBox>
+
+      <MaxBox>
+        <Box textAlign="center" mb={9}>
+          <Header>Essays, Community and Events</Header>
+          <P>
+            We regularly interterview and commission essays from members of our
+            community, and we publish a printed Annual once a year.
+          </P>
+        </Box>
+        <EssaysCommunity />
+      </MaxBox>
     </BlankLayout>
   )
 }

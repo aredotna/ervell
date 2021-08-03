@@ -3,6 +3,9 @@ import { gql } from '@apollo/client'
 export const RoadmapContents = gql`
   query RoadmapContents {
     roadmap(id: "XIpMMSAIWz0OlWhW7GEUy") {
+      sys {
+        publishedAt
+      }
       rawMrr
       rawGoalMrr
       goalDate

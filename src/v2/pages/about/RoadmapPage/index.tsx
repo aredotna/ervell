@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { useQuery } from '@apollo/client'
 
 import Box from 'v2/components/UI/Box'
@@ -35,6 +34,8 @@ import KonnectableText from 'v2/components/Cell/components/Konnectable/component
 import { Mode } from 'v2/components/Cell/components/Konnectable/types'
 import { RoadmapContents as ROADMAP_CONTENTS_QUERY } from './contentfulQueries/roadmapQuery'
 import { RoadmapContents } from '__generated__/contentful/RoadmapContents'
+import { ContentfulContent } from 'v2/components/ContentfulContent'
+import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -108,22 +109,14 @@ const PremiumButton = styled(Button).attrs({
   }
 `
 
-interface RoadmapPageProps {
-  roadmap: any
+interface RoadmapPageInnerProps {
+  isHomepage?: boolean
 }
 
-export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
+export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
+  isHomepage,
+}) => {
   const serializedMe = useSerializedMe()
-
-  const lastUpdated = new Date(roadmap.sys.updatedAt).toLocaleDateString(
-    'en-US',
-    {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }
-  )
 
   const isLoggedIn = serializedMe && serializedMe.id !== null
   const isPremium = isLoggedIn && serializedMe.is_premium
@@ -136,17 +129,34 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
     ChangelogChannelContentsVariables
   >(ChangelogChannelContents, { variables: { id: 'changelog' } })
 
+  console.log({ data })
+
   const { data: roadmapData } = useQuery<RoadmapContents>(
-    ROADMAP_CONTENTS_QUERY
+    ROADMAP_CONTENTS_QUERY,
+    {
+      context: { clientName: 'contentful' },
+    }
   )
 
+  const lastUpdated = new Date(
+    roadmapData?.roadmap.sys.publishedAt
+  ).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+
   return (
-    <Container pb={10}>
-      <Headline color="gray.bold">Here&apos;s where we&apos;re at.</Headline>
+    <>
+      {isHomepage && (
+        <Headline color="gray.bold">Here&apos;s where we&apos;re at.</Headline>
+      )}
 
       <Paragraph>
-        Welcome to the Are.na roadmap. Here you can see what we’ve shipped
-        recently, what we’re building next, and how we’re doing as a company.
+        {isHomepage && `Welcome to the Are.na roadmap. `}Here you can see what
+        we’ve shipped recently, what we’re building next, and how we’re doing as
+        a company.
       </Paragraph>
 
       <Paragraph>
@@ -163,7 +173,7 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
         everyone@are.na.
       </Paragraph>
 
-      <Headline color="gray.bold">Road to self-sustainability</Headline>
+      <Subheadline color="gray.bold">Road to self-sustainability</Subheadline>
 
       <Paragraph pb={6}>
         Are.na’s mission is to build a member-supported community. Since
@@ -208,8 +218,8 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
             <Text f={1} textAlign="center" mt={4}>
               Premium members currently contribute&nbsp;
               <br />
-              <strong>{roadmapData?.roadmap.statsPremiumRevenue}</strong>&nbsp;
-              in monthly recurring revenue.
+              <strong>{roadmapData?.roadmap.statsPremiumRevenue}</strong>
+              &nbsp; in monthly recurring revenue.
             </Text>
           </Box>
         </div>
@@ -253,43 +263,39 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
         <Table>
           <Column>
             <ColumnHeader>In Progress</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.productInProgress
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.productInProgress.json}
+                defaultFontSize={2}
+              />
+            </Cell>
           </Column>
           <Column>
             <ColumnHeader>Up next</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.productUpNext
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.productUpNext.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </Column>
           <Column>
             <ColumnHeader>On the Horizon</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.productOnTheHorizon
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.productOnTheHorizon.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </Column>
           <LightColumn>
             <ColumnHeader>Archived</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.productCompleted
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.productCompleted.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </LightColumn>
         </Table>
       </TableSection>
@@ -330,51 +336,59 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ roadmap }) => {
         <Subheadline pb={1} mb={0} color="gray.bold">
           Company Vision
         </Subheadline>
-        <Text f={3} pb={8} color="gray.medium">
+        <Text f={2} pb={8} color="gray.medium">
           Last updated: {lastUpdated}
         </Text>
         <Table>
           <Column>
             <ColumnHeader>Revenue &amp; Strategy</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.businessRevenue
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.businessRevenue.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </Column>
           <Column>
             <ColumnHeader>Ethics</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.businessEthics
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.businessEthics.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </Column>
           <Column>
             <ColumnHeader>Community</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(
-                  roadmapData?.roadmap.businessCommunity
-                ),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.businessCommunity.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </Column>
           <Column>
             <ColumnHeader>Team</ColumnHeader>
-            <Cell
-              dangerouslySetInnerHTML={{
-                __html: documentToHtmlString(roadmapData?.roadmap.businessTeam),
-              }}
-            />
+            <Cell>
+              <ContentfulContent
+                content={roadmapData?.roadmap.businessTeam.json}
+                defaultFontSize={3}
+              />
+            </Cell>
           </Column>
         </Table>
       </TableSection>
-    </Container>
+    </>
+  )
+}
+
+export const RoadmapPage: React.FC = () => {
+  return (
+    <AboutTopBarLayout>
+      <Container pb={10}>
+        <RoadmapPageInner isHomepage />
+      </Container>
+    </AboutTopBarLayout>
   )
 }
 

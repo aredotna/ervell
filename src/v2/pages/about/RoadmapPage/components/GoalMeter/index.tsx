@@ -35,8 +35,8 @@ export const GoalMeter: React.FC<GoalMeterProps> = ({
         borderRadius="1.5em"
         startColor="state.premium"
         endColor="state.supporter"
-        amount={currentMrr}
-        limit={goalMrr}
+        amount={parseInt(currentMrr)}
+        limit={parseInt(goalMrr)}
         p={4}
         mb={4}
       />

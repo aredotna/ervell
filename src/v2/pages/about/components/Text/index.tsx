@@ -5,16 +5,18 @@ import Text from 'v2/components/UI/Text'
 const Headline = styled(Text).attrs({
   fontSize: 8,
   lineHeight: 1,
-  align: 'center',
   my: 6,
 })``
 
 const Subheadline = styled(Text).attrs({
-  fontSize: 6,
+  fontSize: 5,
   lineHeight: 1,
-  align: 'center',
-  m: 5,
-})``
+  my: 5,
+  mx: 'auto',
+  px: 4,
+})`
+  max-width: 670px;
+`
 
 const Description = styled(Text).attrs({
   fontSize: 4,

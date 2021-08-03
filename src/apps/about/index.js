@@ -1,12 +1,10 @@
 import express from 'express'
 
 import apolloMiddleware from 'v2/apollo/middleware'
-import client from 'lib/contentful'
 
 import EducationPage from 'v2/pages/about/EducationPage'
 import GroupsPage from 'v2/pages/about/GroupsPage'
 import PricingPage from 'v2/pages/about/PricingPage'
-import RoadmapPage from 'v2/pages/about/RoadmapPage'
 
 const app = express()
 
@@ -14,17 +12,6 @@ app.set('views', `${__dirname}/templates`)
 app.set('view engine', 'jade')
 
 const middlewareStack = [apolloMiddleware]
-
-const ROADMAP_ENTRY_ID = 'XIpMMSAIWz0OlWhW7GEUy'
-
-const resolveRoadmap = (req, res, next) =>
-  client
-    .getEntry(ROADMAP_ENTRY_ID)
-    .then(entry => req.apollo.render(RoadmapPage, { roadmap: entry }))
-    .then(apollo => {
-      res.render('roadmap', { apollo })
-    })
-    .catch(next)
 
 app
   .get('/terms', (req, res) => res.render('terms'))
@@ -34,7 +21,6 @@ app
   .get('/experiments', (req, res) => res.render('experiments'))
   .get('/community-guidelines', (req, res) => res.render('community'))
   .get('/thankyou', (req, res) => res.render('thankyou'))
-  .get('/roadmap', ...middlewareStack, resolveRoadmap)
   .get('/pricing', ...middlewareStack, (req, res) =>
     req.apollo
       .render(PricingPage)

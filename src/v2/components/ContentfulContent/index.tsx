@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Document, MARKS, BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
 
 import HorizontalRule from 'v2/components/UI/HorizontalRule'
+import Text from '../UI/Text'
 
 const BaseText = styled(Text).attrs({
   my: 6,
@@ -62,7 +62,7 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
   return {
     renderMark: {
       [MARKS.BOLD]: text => (
-        <BaseText fontWeight="bold" display="inline">
+        <BaseText fontWeight="bold" display="inline" f={defaultFontSize}>
           {text}
         </BaseText>
       ),

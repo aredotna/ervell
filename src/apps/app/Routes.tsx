@@ -37,6 +37,7 @@ import isDev from 'v2/util/isDev'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
 import HomePage from 'v2/pages/home/HomePage'
 import { AboutPage } from 'v2/pages/home/AboutPage'
+import RoadmapPage from 'v2/pages/about/RoadmapPage'
 
 export const Routes = () => {
   const { isLoggedIn } = useLoginStatus()
@@ -78,6 +79,7 @@ export const Routes = () => {
         )}
 
         <Route exact path="/about" component={AboutPage} />
+        <Route exact path="/roadmap" component={RoadmapPage} />
 
         {/* Search */}
         <Route

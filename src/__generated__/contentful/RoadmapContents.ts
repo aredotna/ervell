@@ -7,6 +7,11 @@
 // GraphQL query operation: RoadmapContents
 // ====================================================
 
+export interface RoadmapContents_roadmap_sys {
+  __typename: "Sys";
+  publishedAt: any | null;
+}
+
 export interface RoadmapContents_roadmap_businessRevenue {
   __typename: "RoadmapBusinessRevenue";
   json: any;
@@ -49,6 +54,7 @@ export interface RoadmapContents_roadmap_productCompleted {
 
 export interface RoadmapContents_roadmap {
   __typename: "Roadmap";
+  sys: RoadmapContents_roadmap_sys;
   rawMrr: string | null;
   rawGoalMrr: string | null;
   goalDate: any | null;
