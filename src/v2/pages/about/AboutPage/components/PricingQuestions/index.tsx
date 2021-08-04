@@ -11,6 +11,7 @@ import Text from 'v2/components/UI/Text'
 export const PricingQuestions: React.FC = () => {
   const { data } = useQuery<PricingQuestionsType>(PricingQuestionsQuery, {
     context: { clientName: 'contentful' },
+    ssr: false,
   })
 
   if (!data) return null

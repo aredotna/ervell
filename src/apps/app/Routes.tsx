@@ -36,7 +36,7 @@ import { ExpiredConfirmationPage } from 'v2/pages/confirmation/ExpiredConfirmati
 import isDev from 'v2/util/isDev'
 import useLoginStatus from 'v2/hooks/useLoginStatus'
 import HomePage from 'v2/pages/home/HomePage'
-import { AboutPage } from 'v2/pages/home/AboutPage'
+import { AboutPage } from 'v2/pages/about/AboutPage'
 import RoadmapPage from 'v2/pages/about/RoadmapPage'
 
 export const Routes = () => {

@@ -127,12 +127,13 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
   const { data } = useQuery<
     ChangelogChannelContentsType,
     ChangelogChannelContentsVariables
-  >(ChangelogChannelContents, { variables: { id: 'changelog' } })
+  >(ChangelogChannelContents, { variables: { id: 'changelog' }, ssr: false })
 
   const { data: roadmapData } = useQuery<RoadmapContents>(
     ROADMAP_CONTENTS_QUERY,
     {
       context: { clientName: 'contentful' },
+      ssr: false,
     }
   )
 

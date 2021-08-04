@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Button from 'v2/components/UI/GenericButton'
 import { P } from 'v2/pages/home/components/Common'
-import { calculateAge } from 'v2/pages/home/lib/calculateAge'
+import { calculateAge } from 'v2/util/calculateAge'
 
 const Container = styled(Box).attrs({ pb: 7 })`
   display: flex;
