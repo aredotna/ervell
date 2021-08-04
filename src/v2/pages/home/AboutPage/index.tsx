@@ -11,6 +11,8 @@ import FeatureCarouselWithSlides from '../components/FeatureSlides'
 import PricingTable from '../components/PricingTable'
 import { RoadmapPageInner } from 'v2/pages/about/RoadmapPage'
 import { EssaysCommunity } from './components/EssaysCommunity'
+import { PricingQuestions } from './components/PricingQuestions'
+import { PricingCTAs } from './components/PricingCTAs'
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
@@ -71,6 +73,14 @@ export const AboutPage: React.FC = () => {
           <Header>Pricing &amp; Features</Header>
         </Box>
         <PricingTable />
+
+        <MaxBox py={8}>
+          <PricingCTAs />
+        </MaxBox>
+
+        <MaxBox py={9}>
+          <PricingQuestions />
+        </MaxBox>
       </Box>
 
       <MaxBox>
