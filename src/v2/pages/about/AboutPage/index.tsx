@@ -11,8 +11,9 @@ import FeatureCarouselWithSlides from 'v2/components/FeatureSlides'
 import PricingTable from 'v2/pages/about/PricingPage/components/PricingTable'
 import { RoadmapPageInner } from 'v2/pages/about/RoadmapPage'
 import { EssaysCommunity } from './components/EssaysCommunity'
-import { PricingQuestions } from './components/PricingQuestions'
-import { PricingCTAs } from './components/PricingCTAs'
+import { PricingQuestions } from 'v2/pages/about/PricingPage/components/PricingQuestions'
+import { PricingCTAs } from 'v2/pages/about/PricingPage/components/PricingCTAs'
+import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
@@ -100,6 +101,8 @@ export const AboutPage: React.FC = () => {
         </Box>
         <EssaysCommunity />
       </MaxBox>
+
+      <LoggedOutFooter />
     </BlankLayout>
   )
 }

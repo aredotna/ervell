@@ -151,7 +151,7 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
           </ColumnContents>
         </Column>
         <Column>
-          <ColumnHeader>Writing &amp; Events</ColumnHeader>
+          <ColumnHeader>Essays &amp; Events</ColumnHeader>
           <ColumnContents>
             <ul>
               <li>

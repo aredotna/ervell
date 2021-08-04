@@ -4,7 +4,6 @@ import apolloMiddleware from 'v2/apollo/middleware'
 
 import EducationPage from 'v2/pages/about/EducationPage'
 import GroupsPage from 'v2/pages/about/GroupsPage'
-import PricingPage from 'v2/pages/about/PricingPage'
 
 const app = express()
 
@@ -21,11 +20,6 @@ app
   .get('/experiments', (req, res) => res.render('experiments'))
   .get('/community-guidelines', (req, res) => res.render('community'))
   .get('/thankyou', (req, res) => res.render('thankyou'))
-  .get('/pricing', ...middlewareStack, (req, res) =>
-    req.apollo
-      .render(PricingPage)
-      .then(apollo => res.render('pricing', { apollo }))
-  )
   .get('/getting-started-with-groups', ...middlewareStack, (req, res) =>
     req.apollo
       .render(GroupsPage)
