@@ -35,7 +35,6 @@
     "<all_urls>",
     "http:///",
     "https:///",
-    "identity"
   ],
   "background": {
     "scripts": ["background.js"]
