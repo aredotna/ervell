@@ -2,10 +2,7 @@ import React, { memo, useEffect, useCallback } from 'react'
 
 import { SortableContainer } from 'react-sortable-hoc'
 
-import {
-  ChannelContents as ChannelContentsData,
-  // ChannelContents_skeleton,
-} from '__generated__/ChannelContents'
+import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -13,7 +10,7 @@ import AddBlock from 'v2/components/AddBlock'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
 
-// import { usePusher } from 'v2/hooks/usePusher'
+import { usePusher } from 'v2/hooks/usePusher'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -34,6 +31,7 @@ const ChannelContents: React.FC<Props> = memo(
       hasQueriedPage,
       moveBlock,
       removeBlock,
+      addBlock,
     } = usePaginatedBlocks({
       channelId: channel.id,
       initialData: channel.blokks,
@@ -54,65 +52,17 @@ const ChannelContents: React.FC<Props> = memo(
       [getPage, getPageFromIndex, hasQueriedPage]
     )
 
-    // const addConnectable = useCallback(newConnectable => {
-    //   setConnectables(prevConnectables => {
-    //     if (
-    //       !prevConnectables.some(
-    //         c =>
-    //           c.id === newConnectable.id &&
-    //           c.type.toUpperCase() === newConnectable.type.toUpperCase()
-    //       )
-    //     ) {
-    //       return [
-    //         {
-    //           id: newConnectable.id,
-    //           type: { BLOCK: 'Block', CHANNEL: 'Channel' }[
-    //             newConnectable.type.toUpperCase()
-    //           ],
-    //           __typename: 'SkeletalConnectable',
-    //         },
-    //         ...prevConnectables,
-    //       ]
-    //     }
-
-    //     return prevConnectables
-    //   })
-    // }, [])
-
-    // const updateConnectable = useCallback(
-    //   connectable => {
-    //     loadSkeleton({
-    //       client,
-    //       channelId: channel.id,
-    //       pageSkeleton: [connectable],
-    //       collection,
-    //       queryOptions: {
-    //         fetchPolicy: 'network-only',
-    //       },
-    //     }).then(contents => {
-    //       if (!contents) return
-    //       setCollection(prevCollection => ({ ...prevCollection, ...contents }))
-    //     })
-    //   },
-    //   [channel.id, client, collection]
-    // )
-
-    // const parsePayload = useCallback(
-    //   ({ id, base_class }) => ({
-    //     id,
-    //     type: base_class.toUpperCase(),
-    //   }),
-    //   []
-    // )
-
-    // if (pusherChannel) {
-    //   usePusher({
-    //     channel: pusherChannel,
-    //     onCreated: addConnectable,
-    //     onUpdated: updateConnectable,
-    //     parsePayload,
-    //   })
-    // }
+    if (pusherChannel) {
+      usePusher({
+        channel: pusherChannel,
+        // onCreated: addBlock,
+        onCreated: () => {
+          console.log('here')
+        },
+        onUpdated: () => {},
+        parsePayload: () => {},
+      })
+    }
 
     useEffect(() => {
       return () => {
@@ -122,14 +72,6 @@ const ChannelContents: React.FC<Props> = memo(
         }
       }
     }, [pusherChannel, socket])
-
-    // const handleAddBlock = useCallback(
-    //   ({ id }: { id: number }) => {
-    //     addConnectable({ id, type: 'Block' })
-    //   },
-    //   [addConnectable]
-    // )
-    const handleAddBlock = () => {}
 
     const handleRemoveBlock = useCallback(
       ({ id, type }: { id: number; type: string }) => {
@@ -164,7 +106,7 @@ const ChannelContents: React.FC<Props> = memo(
             <GridItem>
               <AddBlock
                 channel_id={channel.id}
-                onAddBlock={handleAddBlock}
+                onAddBlock={addBlock}
                 isElligbleForPremium={
                   !channel.can.add_to && channel.can.add_to_as_premium
                 }
@@ -176,7 +118,9 @@ const ChannelContents: React.FC<Props> = memo(
           {blocks.map((block, i) => {
             return (
               <ChannelContentsItem
-                key={block?.id ?? `nullState${i}`}
+                key={
+                  block ? `${block.id}.${block.__typename}` : `nullState${i}`
+                }
                 index={i}
                 channel={channel}
                 connectable={block}

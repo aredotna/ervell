@@ -304,6 +304,14 @@ export const usePaginatedBlocks = (argsObject: {
     [clearQueriedPageNumbers, client]
   )
 
+  const addBlock = useCallback(() => {
+    clearQueriedPageNumbers()
+
+    setBlocks(b => {
+      return [null, ...b]
+    })
+  }, [clearQueriedPageNumbers])
+
   return {
     blocks,
     getPage,
@@ -311,5 +319,6 @@ export const usePaginatedBlocks = (argsObject: {
     getPageFromIndex,
     moveBlock,
     removeBlock,
+    addBlock,
   }
 }
