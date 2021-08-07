@@ -32,17 +32,23 @@ function mergePaginatedBlocks({
 }): ChannelContentsConnectable[] {
   const newData: ChannelContentsConnectable[] = []
 
-  // Length of the new array
-  const newDataLength = Math.max(
-    Array.isArray(existing) ? existing.length : 0,
-    page * per
-  )
-
   // Index that the incoming data starts at in the newData array
   const incomingStartingIndex = (page - 1) * per
 
+  const incomingEndingIndex =
+    incomingStartingIndex +
+    Math.min(Array.isArray(incoming) ? incoming.length : 0, per) -
+    1
+
+  // Length of the new array
+  const newDataLength = Math.max(
+    Array.isArray(existing) ? existing.length : 0,
+    incomingEndingIndex + 1
+  )
+
   for (let i = 0; i < newDataLength; i++) {
-    const isInIncomingWindow = i >= incomingStartingIndex && i < page * per
+    const isInIncomingWindow =
+      i >= incomingStartingIndex && i <= incomingEndingIndex
 
     if (isInIncomingWindow) {
       const incomingItem = incoming[i - incomingStartingIndex]
@@ -62,20 +68,7 @@ function mergePaginatedBlocks({
     }
   }
 
-  // Trim the end of the array of all sequential nulls until there is a
-  // block with data
-  let indexToBeginTrim = newData.length - 1
-  while (indexToBeginTrim > existing.length - 1) {
-    if (newData[indexToBeginTrim] !== null) {
-      break
-    }
-
-    indexToBeginTrim--
-  }
-
-  const amountToTrim = newData.length - 1 - indexToBeginTrim
-
-  return amountToTrim === 0 ? newData : newData.slice(0, -amountToTrim)
+  return newData
 }
 
 const useIsMountedRef = () => {
