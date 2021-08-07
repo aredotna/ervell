@@ -105,12 +105,9 @@ const reorderBlocks = ({
   startIndex: number
   endIndex: number
 }): ChannelContentsConnectable[] => {
-  const start = blocks[startIndex]
-  const end = blocks[endIndex]
   const newBlocks = [...blocks]
-
-  newBlocks[startIndex] = end
-  newBlocks[endIndex] = start
+  const [removed] = newBlocks.splice(startIndex, 1)
+  newBlocks.splice(endIndex, 0, removed)
 
   return newBlocks
 }
