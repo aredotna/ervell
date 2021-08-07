@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Are.na",
   "description": "Assemble and connect information.",
-  "version": "0.44",
+  "version": "0.45",
   "browser_action": {
     "default_icon": "icon-128.png",
     "default_title": "Are.na"
@@ -15,11 +15,9 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "webNavigation",
     "<all_urls>",
     "http://*/*",
     "https://*/*",
-    "storage",
     "identity"
   ],
   "background": {

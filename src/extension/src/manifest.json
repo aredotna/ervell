@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Are.na",
   "description": "Assemble and connect information.",
-  "version": "0.44",
+  "version": "0.45",
   "commands": {
     "save-page": {
       "suggested_key": {
@@ -32,11 +32,9 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "webNavigation",
     "<all_urls>",
     "http:///",
     "https:///",
-    "storage",
     "identity"
   ],
   "background": {
