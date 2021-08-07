@@ -15,10 +15,14 @@ import {
 } from '__generated__/moveConnectableMutation'
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
-/*
- * Helper functions
+/**
+ * A function that merges an incoming subsection of an array
+ * into an existing array, based on the page and per values
+ * passed in. Handles many edge cases such as
+ * 1. Normalizing "undefined" incoming data to null
+ * 2. Extending an array
+ * 3. Assuring everything is immutably modified
  */
-
 function mergePaginatedBlocks({
   incoming,
   existing,
@@ -71,6 +75,10 @@ function mergePaginatedBlocks({
   return newData
 }
 
+/**
+ * A hook that returns a ref that gives the mounted
+ * state of a component
+ */
 const useIsMountedRef = () => {
   const isMounted = useRef(false)
 
@@ -85,6 +93,9 @@ const useIsMountedRef = () => {
   return isMounted
 }
 
+/**
+ * Move a block from one part of an array to another
+ */
 const reorderBlocks = ({
   blocks,
   startIndex,
@@ -96,13 +107,20 @@ const reorderBlocks = ({
 }): ChannelContentsConnectable[] => {
   const start = blocks[startIndex]
   const end = blocks[endIndex]
-
   const newBlocks = [...blocks]
+
   newBlocks[startIndex] = end
   newBlocks[endIndex] = start
+
   return newBlocks
 }
 
+/**
+ * Resolves a block's type to a connectable type.
+ * If a block is a channel the connectable type is
+ * BaseConnectableTypeEnum.CHANNEL. Otherwise,
+ * BaseConnectableTypeEnum.BLOCK
+ */
 function getConnectableType(
   blockType: ChannelContentsConnectable['__typename']
 ): BaseConnectableTypeEnum {
@@ -113,17 +131,28 @@ function getConnectableType(
   return BaseConnectableTypeEnum.BLOCK
 }
 
-/*
- * usePaginatedBlocks
+/**
+ * A hook to easily work with a collection of blocks from a channel.
+ * Returns the channel's blocks as well as utility methods to fetch more,
+ * move blocks around, add blocks, and delete blocks.
  */
-
 export const usePaginatedBlocks = (argsObject: {
   channelId: string | number
   initialData: ChannelContentsConnectable[]
   initialBlockCount: number
 }) => {
+  /**
+   * This hook doesn't support updating the intiially passed-in args in any way.
+   * So to make that clear we are creating a ref of the initial argsObject and
+   * only accessing the args this way. This will assert that the args won't
+   * change from under us, while also making it so that we don't needs to pass
+   * any of these values into dependency arrays for useCallback, useEffect, etc.
+   */
   const args = useRef(argsObject)
 
+  /**
+   * The current blocks that we have for a channel
+   */
   const [blocks, setBlocks] = useState<ChannelContentsConnectable[]>(() => {
     const initialBlocks = []
     for (let i = 0; i < args.current.initialBlockCount; i++) {
@@ -138,15 +167,26 @@ export const usePaginatedBlocks = (argsObject: {
     return initialBlocks
   })
 
+  /**
+   * The apollo client ref that we will be using for IO
+   */
   const client = useApolloClient()
 
+  /**
+   * A set that keeps track of which pages have already been queried for
+   */
   const queriedPageNumbersRef = useRef(new Set<number>())
 
+  /**
+   * A ref object that keeps track of the mounted state of the component
+   */
   const isMountedRef = useIsMountedRef()
 
+  /**
+   * Gets block data from a given page
+   */
   const getPage = useCallback(
     async (pageNumber: number) => {
-      console.log('🐛getting page', pageNumber)
       if (queriedPageNumbersRef.current.has(pageNumber)) {
         return
       }
@@ -181,18 +221,33 @@ export const usePaginatedBlocks = (argsObject: {
     [client, isMountedRef]
   )
 
+  /**
+   * Returns if a given page has already been queried for or not
+   */
   const hasQueriedPage = useCallback((pageNember: number): boolean => {
     return queriedPageNumbersRef.current.has(pageNember)
   }, [])
 
+  /**
+   * Returns the page number that a block's index would be in
+   */
   const getPageFromIndex = useCallback((index: number): number => {
     return Math.floor(index / channelBlokksPaginatedPerPage) + 1
   }, [])
 
+  /**
+   * Resets every hasQueriedPage return value to false. Useful for if
+   * you have mutated the channel's blocks and want to trigger a
+   * network request
+   */
   const clearQueriedPageNumbers = useCallback(() => {
     queriedPageNumbersRef.current = new Set()
   }, [])
 
+  /**
+   * Removes a block from a channel ONLY on the frontend. Does not do any
+   * actual mutation/network request.
+   */
   const removeBlock = useCallback(
     ({ id, type }: { id: number; type: string }) => {
       clearQueriedPageNumbers()
@@ -204,6 +259,10 @@ export const usePaginatedBlocks = (argsObject: {
     [clearQueriedPageNumbers]
   )
 
+  /**
+   * Moves a block from an old index to a new index and triggers an
+   * apollo mutation
+   */
   const moveBlock = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
       clearQueriedPageNumbers()
