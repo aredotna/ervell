@@ -43,7 +43,10 @@ export const TopMenu: React.FC = () => {
   return (
     <Container>
       <Box flex={1}>
-        <Icons name="ArenaMark" size="1.5em" color="gray.block" />
+        <a href="/">
+          <Icons name="ArenaMark" size="1.5em" color="gray.block" />
+        </a>
+
         <MenuContainer>
           {sections.map(({ id, onClick, selected }, index) => {
             return (
