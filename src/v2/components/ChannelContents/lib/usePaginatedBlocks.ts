@@ -39,11 +39,7 @@ function getConnectableType(
  * Returns the channel's blocks as well as utility methods to fetch more,
  * move blocks around, add blocks, and delete blocks.
  */
-export const usePaginatedBlocks = (unsafeArgs: {
-  channelId: number
-  initialData: ChannelContentsConnectable[]
-  initialBlockCount: number
-}) => {
+export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
   /**
    * This hook doesn't support updating the intiially passed-in args in any way.
    * So to make that clear we are creating a ref of the initial argsObject and

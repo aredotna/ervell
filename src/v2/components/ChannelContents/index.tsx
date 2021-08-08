@@ -34,7 +34,6 @@ const ChannelContents: React.FC<Props> = memo(
       addBlock,
     } = usePaginatedBlocks({
       channelId: channel.id,
-      initialData: channel.blokks,
     })
 
     const onItemIntersected = useCallback(
