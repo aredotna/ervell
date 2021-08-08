@@ -75,6 +75,8 @@ const ChannelContents: React.FC<Props> = memo(
 
     const blocksJsx: JSX.Element[] = []
 
+    console.log(blocks)
+
     for (let i = 0; i < Math.max(channel.counts.contents, blocks.length); i++) {
       const block = blocks[i]
 
@@ -116,35 +118,7 @@ const ChannelContents: React.FC<Props> = memo(
             </GridItem>
           )}
 
-          {/* DEV */}
           {blocksJsx}
-
-          {/* {chunked.map((pageSkeleton, pageIndex: number) => {
-            const pageKey = ActiveQueriesCollection.key(pageSkeleton)
-
-            return (
-              <React.Fragment key={pageKey}>
-                {pageSkeleton.map((connectableSkeleton, connectableIndex) => {
-                  const connectableKey = ConnectableCellsCollection.key(
-                    connectableSkeleton
-                  )
-                  const connectable = collection[connectableKey]
-
-                  return (
-                    <ChannelContentsItem
-                      key={connectableKey}
-                      index={connectableIndex + pageIndex * chunkSize}
-                      channel={channel}
-                      connectable={connectable}
-                      context={lightboxConnectables}
-                      onRemove={handleRemoveBlock}
-                      onChangePosition={handleSortEnd}
-                    />
-                  )
-                })}
-              </React.Fragment>
-            )
-          })} */}
         </SortableGrid>
       </>
     )

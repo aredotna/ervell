@@ -1,6 +1,6 @@
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
 import { useRef, useCallback } from 'react'
-import { useApolloClient, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import {
   ChannelBlokksPaginated,
   ChannelBlokksPaginatedVariables,
@@ -15,6 +15,8 @@ import {
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
+import { ChannelContentsCount } from '__generated__/ChannelContentsCount'
+import channelContentsCount from '../fragments/channelContentsCount'
 
 /**
  * Move a block from one part of an array to another
@@ -73,26 +75,17 @@ export const usePaginatedBlocks = (argsObject: {
   /**
    * The current blocks that we have for a channel
    */
-  const {
-    data: unsafeData,
-    fetchMore,
-    updateQuery: unsafeUpdateQuery,
-  } = useQuery<ChannelBlokksPaginated, ChannelBlokksPaginatedVariables>(
-    channelBlokksPaginatedQuery,
-    {
-      variables: {
-        id: args.current.channelId.toString(),
-        page: 1,
-        per: channelBlokksPaginatedPerPage,
-      },
-    }
-  )
+  const { data: unsafeData, fetchMore, client } = useQuery<
+    ChannelBlokksPaginated,
+    ChannelBlokksPaginatedVariables
+  >(channelBlokksPaginatedQuery, {
+    variables: {
+      id: args.current.channelId.toString(),
+      page: 1,
+      per: channelBlokksPaginatedPerPage,
+    },
+  })
   const blocks = unsafeData?.channel?.blokks ?? []
-
-  /**
-   * The apollo client ref that we will be using for IO
-   */
-  const client = useApolloClient()
 
   const updateBlocks = useCallback(
     (
@@ -100,18 +93,57 @@ export const usePaginatedBlocks = (argsObject: {
         prev: ChannelBlokksPaginated_channel_blokks[]
       ) => ChannelBlokksPaginated_channel_blokks[]
     ) => {
-      unsafeUpdateQuery(data => {
-        const newBlocks = updateBlocksFn(data?.channel?.blokks ?? [])
+      const data = client.readQuery<
+        ChannelBlokksPaginated,
+        ChannelBlokksPaginatedVariables
+      >({
+        query: channelBlokksPaginatedQuery,
+        variables: {
+          id: args.current.channelId.toString(),
+          page: 1,
+          per: channelBlokksPaginatedPerPage,
+        },
+      })
 
-        return {
+      const newBlocks = updateBlocksFn(data?.channel?.blokks ?? [])
+
+      if (newBlocks.length !== data?.channel?.blokks?.length) {
+        client.writeFragment<ChannelContentsCount>({
+          fragment: channelContentsCount,
+          variables: {
+            id: args.current.channelId,
+          },
+          data: {
+            __typename: 'Channel',
+            id: args.current.channelId,
+            counts: {
+              __typename: 'ChannelCounts',
+              contents: newBlocks.length,
+            },
+          },
+        })
+      }
+
+      client.writeQuery<
+        ChannelBlokksPaginated,
+        ChannelBlokksPaginatedVariables
+      >({
+        query: channelBlokksPaginatedQuery,
+        variables: {
+          id: args.current.channelId.toString(),
+          page: 1,
+          per: newBlocks.length,
+        },
+        overwrite: true,
+        data: {
           channel: {
             ...data.channel,
             blokks: newBlocks,
           },
-        }
+        },
       })
     },
-    [unsafeUpdateQuery]
+    [client]
   )
 
   /**
@@ -168,11 +200,15 @@ export const usePaginatedBlocks = (argsObject: {
    */
   const removeBlock = useCallback(
     ({ id, type }: { id: number; type: string }) => {
-      clearQueriedPageNumbers()
+      updateBlocks(b => {
+        const newBlocks = b.filter(
+          block => !(block.id === id && block.__typename === type)
+        )
+        console.log('removeBlock', id, type, b, newBlocks)
+        return newBlocks
+      })
 
-      updateBlocks(b =>
-        b.filter(block => block.id !== id && block.__typename !== type)
-      )
+      // clearQueriedPageNumbers()
     },
     [clearQueriedPageNumbers, updateBlocks]
   )
@@ -198,22 +234,24 @@ export const usePaginatedBlocks = (argsObject: {
           return b
         }
 
-        clearQueriedPageNumbers()
-
-        client.mutate<
-          moveConnectableMutationData,
-          moveConnectableMutationVariables
-        >({
-          mutation: moveConnectableMutation,
-          variables: {
-            channel_id: args.current.channelId.toString(),
-            connectable: {
-              id: block.id.toString(),
-              type: getConnectableType(block.__typename),
+        client
+          .mutate<
+            moveConnectableMutationData,
+            moveConnectableMutationVariables
+          >({
+            mutation: moveConnectableMutation,
+            variables: {
+              channel_id: args.current.channelId.toString(),
+              connectable: {
+                id: block.id.toString(),
+                type: getConnectableType(block.__typename),
+              },
+              insert_at: b.length - endIndex,
             },
-            insert_at: b.length - endIndex,
-          },
-        })
+          })
+          .then(() => {
+            clearQueriedPageNumbers()
+          })
 
         return reorderBlocks({
           blocks: b,
