@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
 // import { DesireLine } from './components/DesireLine'
+import Icons from 'v2/components/UI/Icons'
+
 import FeatureCarouselWithSlides from 'v2/components/FeatureSlides'
 import { IntroParagraph } from './components/IntroParagraph'
 import { TopLogin } from 'v2/components/TopLogin'
@@ -17,6 +19,8 @@ const Container = styled(Box).attrs({
   px: 7,
 })``
 
+const IconContainer = styled(Box).attrs({ py: 6, px: 6 })``
+
 const TeamAndSecretContainer = styled(Container).attrs({
   maxWidth: '700px',
 })``
@@ -24,6 +28,10 @@ const TeamAndSecretContainer = styled(Container).attrs({
 const HomePage: React.FC = () => {
   return (
     <BlankLayout>
+      <IconContainer>
+        <Icons name="ArenaMark" size="1.5em" color="gray.block" />
+      </IconContainer>
+
       <Container>
         <TopLogin />
         {/* <DesireLine /> */}
