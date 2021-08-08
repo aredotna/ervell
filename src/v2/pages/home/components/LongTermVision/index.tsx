@@ -53,9 +53,40 @@ const Member = styled(Text).attrs({
   }
 `
 
+export const TeamChart: React.FC = () => {
+  return (
+    <Chart>
+      <Top>
+        <TopLabel>Full-time</TopLabel>
+        <TopLabel>Part-time</TopLabel>
+        <TopLabel>Advisors</TopLabel>
+      </Top>
+      <TeamContainer>
+        <Team>
+          <Member>Engineer</Member>
+          <Member>Product</Member>
+        </Team>
+
+        <Team ml={5}>
+          <Member>Community</Member>
+          <Member>Engineer</Member>
+          <Member>Engineer</Member>
+        </Team>
+
+        <Team mr={7}>
+          <Member>Community</Member>
+          <Member>Community</Member>
+          <Member>Product</Member>
+          <Member>Engineer</Member>
+        </Team>
+      </TeamContainer>
+    </Chart>
+  )
+}
+
 export const LongTermVision: React.FC = () => {
   return (
-    <Box width="50%" py={10} mb={10}>
+    <Box>
       <P mb={6}>Long-term vision</P>
 
       <P>
@@ -63,42 +94,19 @@ export const LongTermVision: React.FC = () => {
         platform:
       </P>
 
-      <Chart>
-        <Top>
-          <TopLabel>Full-time</TopLabel>
-          <TopLabel>Part-time</TopLabel>
-          <TopLabel>Advisors</TopLabel>
-        </Top>
-        <TeamContainer>
-          <Team>
-            <Member>Engineer</Member>
-            <Member>Product</Member>
-          </Team>
+      <Box mb={8}>
+        <TeamChart />
+      </Box>
 
-          <Team ml={5}>
-            <Member>Community</Member>
-            <Member>Engineer</Member>
-            <Member>Engineer</Member>
-          </Team>
-
-          <Team mr={7}>
-            <Member>Community</Member>
-            <Member>Community</Member>
-            <Member>Product</Member>
-            <Member>Engineer</Member>
-          </Team>
-        </TeamContainer>
-
-        <P>
-          The company that builds Are.na is independent and sustained entirely
-          by our members.
-        </P>
-        <P>
-          Our business is to make Are.na a good enough experience that you are
-          willing to pay for it. Currently <strong>7,050 people</strong> support
-          Are.na through their Premium subscriptions.
-        </P>
-      </Chart>
+      <P>
+        The company that builds Are.na is independent and sustained entirely by
+        our members.
+      </P>
+      <P>
+        Our business is to make Are.na a good enough experience that you are
+        willing to pay for it. Currently <strong>7,050 people</strong> support
+        Are.na through their Premium subscriptions.
+      </P>
     </Box>
   )
 }

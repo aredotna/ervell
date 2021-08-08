@@ -4,7 +4,7 @@ import { P } from 'v2/pages/home/components/Common'
 
 export const TheSecret: React.FC = () => {
   return (
-    <Box maxWidth="700px">
+    <Box>
       <P>
         <P mb={6}>The Secret</P>
         <Box my={6} mt={9}>

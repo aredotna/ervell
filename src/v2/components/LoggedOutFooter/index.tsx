@@ -19,6 +19,7 @@ const Container = styled(Box).attrs({ pt: 8, px: 8, pb: 10, mt: 8 })`
   display: flex;
   background-color: ${({ theme }) => theme.colors.brand.deepBlue};
   flex-direction: column;
+  vertical-align: top;
 
   ${constants.media.mobile`
     flex-direction: column;

@@ -17,6 +17,10 @@ const Container = styled(Box).attrs({
   px: 7,
 })``
 
+const TeamAndSecretContainer = styled(Container).attrs({
+  maxWidth: '700px',
+})``
+
 const HomePage: React.FC = () => {
   return (
     <BlankLayout>
@@ -35,12 +39,15 @@ const HomePage: React.FC = () => {
         <FeatureCarouselWithSlides />
       </Box>
 
-      <Container>
-        <LongTermVision />
+      <TeamAndSecretContainer>
+        <Box py={10} mb={10}>
+          <LongTermVision />
+        </Box>
+
         <Box my={7}>
           <TheSecret />
         </Box>
-      </Container>
+      </TeamAndSecretContainer>
       <LoggedOutFooter isHomepage />
     </BlankLayout>
   )

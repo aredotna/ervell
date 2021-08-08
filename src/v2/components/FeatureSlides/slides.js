@@ -3,8 +3,8 @@ module.exports = [
     id: 'save-and-organize',
     headline: 'Collect anything',
     image:
-      'https://d2w9rnfcy7mm78.cloudfront.net/1586587/original_971cf68a81483a8c80a9f574a62ec24e.png',
-    copy: 'Save anything from your phone or browser',
+      'https://d2w9rnfcy7mm78.cloudfront.net/12759271/original_b13ce5fd6da98c7a47b27564e8d80bd7.png?1628198116?bc=0',
+    copy: 'Save images, text, links, files and more from your phone or browser',
   },
   {
     id: 'learn-from-links',

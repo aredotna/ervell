@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import constants from 'v2/styles/constants'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
@@ -12,6 +11,7 @@ import { PricingQuestions } from './components/PricingQuestions'
 import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 import { PricingFeatures } from './components/PricingFeatures'
+import { PricingLogos } from './components/PricingLogos'
 
 const Container = styled(Box).attrs({
   mt: 10,
@@ -27,21 +27,6 @@ const GradientContent = styled.div`
 
 const CTA = styled(Box)`
   border-bottom: 1px solid ${x => x.theme.colors.gray.light};
-`
-
-const LogoContainer = styled(Box)`
-  max-width: auto;
-  border-bottom: 1px solid ${x => x.theme.colors.gray.light};
-
-  ${constants.media.mobile`
-    display: none;
-  `}
-`
-
-const Logos = styled.img`
-  width: 80%;
-  margin: 3em auto 0;
-  display: block;
 `
 
 const PricingPage: React.FC = () => {
@@ -121,15 +106,9 @@ const PricingPage: React.FC = () => {
               <PricingFeatures />
             </CenterBox>
           </CTA>
-          <LogoContainer px={9} mt={9} mb={6} pb={9} maxWidth="100%">
-            <Subheadline color="gray.bold" mb={3} textAlign="center">
-              Are.na is used by people and teams at:
-            </Subheadline>
-            <Logos
-              src="https://d2w9rnfcy7mm78.cloudfront.net/9910791/original_29b8e431accf9b5996dbeaf8d6f85721.png"
-              alt="brand logos"
-            />
-          </LogoContainer>
+
+          <PricingLogos />
+
           <Box mt={9} mb={6} pb={9} maxWidth="470px" mx="auto">
             <Subheadline color="gray.bold" mb={8} textAlign="center">
               FAQs
