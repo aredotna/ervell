@@ -1,5 +1,6 @@
-import React, { createRef, useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { ScrollingProvider, Section } from 'v2/util/react-scroll-section'
 
 import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
@@ -30,7 +31,7 @@ const MaxBoxBottom = styled(MaxBox).attrs({
   mb: 11,
 })``
 
-const Section = styled(MaxBoxBottom)`
+const CenteredSection = styled(MaxBoxBottom)`
   text-align: center;
 `
 
@@ -47,213 +48,148 @@ const SmallHeader = styled(Text).attrs({
   mb: 6,
 })``
 
-export interface Section {
-  name: string
-  id: string
-  ref: React.MutableRefObject<any>
-}
-
 export const AboutPage: React.FC = () => {
   const { years, days } = calculateAge()
 
-  const sectionNames = [
-    'About',
-    'How it works',
-    'Pricing &amp; Features',
-    'Education',
-    'Team',
-    'Roadmap',
-    'Editorial',
-    'Testimonials',
-    'Extended Are.na',
-    'Contact',
-  ] as const
-
-  const [activeSection, setActiveSection] = useState<
-    typeof sectionNames[number]
-  >('About')
-
-  const sections = sectionNames.map(name => {
-    const section: Section = {
-      name,
-      id: name,
-      ref: createRef(),
-    }
-    return section
-  })
-
-  const getSection = (name: typeof sectionNames[number]): Section => {
-    const foundSection = sections.find(section => {
-      return section.name === name
-    })
-    return foundSection
-  }
-
-  // useEffect(() => {
-  //   let observer
-  //   const hasRefs = sections.every(section => {
-  //     return section.ref.current
-  //   })
-
-  //   if (hasRefs) {
-  //     const options = {
-  //       threshold: 0.2,
-  //     }
-  //     observer = new IntersectionObserver((entries, _observer) => {
-  //       entries.forEach(entry => {
-  //         if (entry.isIntersecting) {
-  //           setActiveSection(entry.target.id as typeof sectionNames[number])
-  //         }
-  //       })
-  //     }, options)
-  //     sections.forEach(section => observer.observe(section.ref.current))
-  //   }
-  //   return () => {
-  //     observer.disconnect()
-  //   }
-  // }, [sections, sectionNames])
-
   return (
-    <BlankLayout>
-      <TopMenu sections={sections} selected={activeSection} />
-      <Section
-        mt={9}
-        id={getSection('About')?.id}
-        ref={getSection('About')?.ref}
-      >
-        <Header>About</Header>
-        <P>
-          Are.na is a place to save content, create collections over time and
-          connect ideas. Privately or with other people.
-        </P>
-        <P>
-          Students (highly curious and open to new information), hobbyists
-          (deeply into a topic or topics, narrowly focused) or what we call
-          connected knowledge collectors (those more experienced but highly
-          curious information gatherers who can make disparate connections
-          between disciplines) have been the core of our community for{' '}
-          <strong>
-            {years} years and {days} days
-          </strong>
-        </P>
-        <P>
-          With no ads, likes, or recommendations, Are.na is a more mindful space
-          where you can work through any project over time. It&#39;s a place to
-          structure your ideas and build new forms of knowledge together.
-        </P>
-      </Section>
+    <ScrollingProvider offset={-100}>
+      <BlankLayout>
+        <TopMenu />
+        <Section id={'About'}>
+          <CenteredSection mt={9}>
+            <Header>About</Header>
+            <P>
+              Are.na is a place to save content, create collections over time
+              and connect ideas. Privately or with other people.
+            </P>
+            <P>
+              Students (highly curious and open to new information), hobbyists
+              (deeply into a topic or topics, narrowly focused) or what we call
+              connected knowledge collectors (those more experienced but highly
+              curious information gatherers who can make disparate connections
+              between disciplines) have been the core of our community for{' '}
+              <strong>
+                {years} years and {days} days
+              </strong>
+            </P>
+            <P>
+              With no ads, likes, or recommendations, Are.na is a more mindful
+              space where you can work through any project over time. It&#39;s a
+              place to structure your ideas and build new forms of knowledge
+              together.
+            </P>
+          </CenteredSection>
+        </Section>
 
-      <Box
-        mb={10}
-        id={getSection('How it works')?.id}
-        ref={getSection('How it works')?.ref}
-      >
-        <Box textAlign="center" mb={6}>
-          <Header>How it works</Header>
-        </Box>
-        <FeatureCarouselWithSlides />
-      </Box>
+        <Section id={'How it works'}>
+          <Box mb={10}>
+            <Box textAlign="center" mb={6}>
+              <Header>How it works</Header>
+            </Box>
+            <FeatureCarouselWithSlides />
+          </Box>
+        </Section>
 
-      <Box
-        mb={10}
-        id={getSection('Pricing &amp; Features')?.id}
-        ref={getSection('Pricing &amp; Features')?.ref}
-      >
-        <Box textAlign="center" mb={6}>
-          <Header>Pricing &amp; Features</Header>
-        </Box>
-        <PricingTable />
+        <Section id={'Pricing &amp; Features'}>
+          <Box mb={10}>
+            <Box textAlign="center" mb={6}>
+              <Header>Pricing &amp; Features</Header>
+            </Box>
+            <PricingTable />
 
-        <MaxBox pt={8} mb={8}>
-          <PricingCTAs />
-        </MaxBox>
+            <MaxBox pt={8} mb={8}>
+              <PricingCTAs />
+            </MaxBox>
 
-        <MaxBox py={5} mb={8}>
-          <SmallHeader>All plans include:</SmallHeader>
-          <PricingFeatures />
-        </MaxBox>
+            <MaxBox py={5} mb={8}>
+              <SmallHeader>All plans include:</SmallHeader>
+              <PricingFeatures />
+            </MaxBox>
 
-        <MaxBox py={5} mb={8}>
-          <SmallHeader>Pricing FAQs</SmallHeader>
-          <PricingQuestions />
-        </MaxBox>
-      </Box>
+            <MaxBox py={5} mb={8}>
+              <SmallHeader>Pricing FAQs</SmallHeader>
+              <PricingQuestions />
+            </MaxBox>
+          </Box>
+        </Section>
 
-      <MaxBoxBottom
-        id={getSection('Education')?.id}
-        ref={getSection('Education')?.ref}
-      >
-        <Box textAlign="center" mb={6}>
-          <Header>Education</Header>
-        </Box>
-        <EducationCTA />
-      </MaxBoxBottom>
+        <Section id={'Education'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={6}>
+              <Header>Education</Header>
+            </Box>
+            <EducationCTA />
+          </MaxBoxBottom>
+        </Section>
 
-      <MaxBoxBottom id={getSection('Team')?.id} ref={getSection('Team')?.ref}>
-        <Box textAlign="center" mb={6}>
-          <Header>Team</Header>
-        </Box>
-        <P>
-          Are.na has many co-founders. Currently, a small team is building the
-          platform:
-        </P>
-        <TeamChart />
-        <P mt={6}>
-          You can chat with them most Friday mornings (EST) on{' '}
-          <a href="/settings/perks">Discord</a>.
-        </P>
-      </MaxBoxBottom>
+        <Section id={'Team'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={6}>
+              <Header>Team</Header>
+            </Box>
+            <P>
+              Are.na has many co-founders. Currently, a small team is building
+              the platform:
+            </P>
+            <TeamChart />
+            <P mt={6}>
+              You can chat with them most Friday mornings (EST) on{' '}
+              <a href="/settings/perks">Discord</a>.
+            </P>
+          </MaxBoxBottom>
+        </Section>
 
-      <MaxBoxBottom
-        id={getSection('Roadmap')?.id}
-        ref={getSection('Roadmap')?.ref}
-      >
-        <Box textAlign="center" mb={6}>
-          <Header>Roadmap</Header>
-        </Box>
-        <RoadmapPageInner />
-      </MaxBoxBottom>
+        <Section id={'Roadmap'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={6}>
+              <Header>Roadmap</Header>
+            </Box>
+            <RoadmapPageInner />
+          </MaxBoxBottom>
+        </Section>
 
-      <MaxBoxBottom
-        id={getSection('Editorial')?.id}
-        ref={getSection('Editorial')?.ref}
-      >
-        <Box textAlign="center" mb={9}>
-          <Header>Editiorial, Community and Events</Header>
-          <P>
-            We regularly feature essays, interviews, and other writing from the
-            Are.na community, and we publish a printed Annual once a year.
-          </P>
-        </Box>
-        <EssaysCommunity />
-      </MaxBoxBottom>
+        <Section id={'Editorial'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={9}>
+              <Header>Editiorial, Community and Events</Header>
+              <P>
+                We regularly feature essays, interviews, and other writing from
+                the Are.na community, and we publish a printed Annual once a
+                year.
+              </P>
+            </Box>
+            <EssaysCommunity />
+          </MaxBoxBottom>
+        </Section>
 
-      <MaxBoxBottom
-        id={getSection('Testimonials')?.id}
-        ref={getSection('Testimonials')?.ref}
-      >
-        <Box textAlign="center" mb={9}>
-          <Header>Testimonials</Header>
-        </Box>
-        <Testimonials />
-      </MaxBoxBottom>
+        <Section id={'Testimonials'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={9}>
+              <Header>Testimonials</Header>
+            </Box>
+            <Testimonials />
+          </MaxBoxBottom>
+        </Section>
 
-      <MaxBoxBottom
-        id={getSection('Extended Are.na')?.id}
-        ref={getSection('Extended Are.na')?.ref}
-      >
-        <Box textAlign="center" mb={8}>
-          <Header>Extended Are.na</Header>
-        </Box>
-        <ExtendedArena />
-      </MaxBoxBottom>
+        <Section id={'Extended Are.na'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={8}>
+              <Header>Extended Are.na</Header>
+            </Box>
+            <ExtendedArena />
+          </MaxBoxBottom>
+        </Section>
 
-      <MaxBoxBottom
-        id={getSection('Contact')?.id}
-        ref={getSection('Contact')?.ref}
-      ></MaxBoxBottom>
+        <Section id={'Contact'}>
+          <MaxBoxBottom>
+            <Box textAlign="center" mb={8}>
+              <Header>Contact</Header>
+            </Box>
+          </MaxBoxBottom>
+        </Section>
 
-      <LoggedOutFooter />
-    </BlankLayout>
+        <LoggedOutFooter />
+      </BlankLayout>
+    </ScrollingProvider>
   )
 }

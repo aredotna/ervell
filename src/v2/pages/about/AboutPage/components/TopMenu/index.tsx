@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useScrollSections } from 'v2/util/react-scroll-section'
 
 import Box from 'v2/components/UI/Box'
 import Icons from 'v2/components/UI/Icons'
 import Button from 'v2/components/UI/GenericButton'
 import constants from 'v2/styles/constants'
 import Text from 'v2/components/UI/Text'
-import { Section } from '../..'
 
 const Container = styled(Box).attrs({ py: 6, px: 6 })`
   display: flex;
@@ -29,28 +29,29 @@ const MenuContainer = styled(Box).attrs({})`
 const Item = styled(Text).attrs({
   color: 'gray.regular',
 })`
+  cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.colors.gray.bold};
+  }
   ${({ selected, theme }) => {
     return selected && `color: ${theme.colors.gray.bold};`
   }}
 `
 
-interface TopMenuProps {
-  sections: Section[]
-  selected: string
-}
-
-export const TopMenu: React.FC<TopMenuProps> = ({ sections, selected }) => {
+export const TopMenu: React.FC = () => {
+  const sections = useScrollSections()
   return (
     <Container>
       <Box flex={1}>
         <Icons name="ArenaMark" size="1.5em" color="gray.block" />
         <MenuContainer>
-          {sections.map((section, index) => {
+          {sections.map(({ id, onClick, selected }, index) => {
             return (
               <Item
                 key={index}
-                selected={section.name === selected}
-                dangerouslySetInnerHTML={{ __html: section.name }}
+                selected={selected}
+                onClick={onClick}
+                dangerouslySetInnerHTML={{ __html: id }}
               />
             )
           })}
