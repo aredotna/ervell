@@ -1,10 +1,9 @@
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
 import { useRef, useCallback } from 'react'
-import { useQuery } from '@apollo/client'
+import { Reference, StoreObject, useQuery } from '@apollo/client'
 import {
   ChannelBlokksPaginated,
   ChannelBlokksPaginatedVariables,
-  ChannelBlokksPaginated_channel_blokks,
 } from '__generated__/ChannelBlokksPaginated'
 import channelBlokksPaginatedQuery, {
   channelBlokksPaginatedPerPage,
@@ -17,25 +16,7 @@ import {
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 import { ChannelContentsCount } from '__generated__/ChannelContentsCount'
 import channelContentsCount from '../fragments/channelContentsCount'
-
-/**
- * Move a block from one part of an array to another
- */
-const reorderBlocks = ({
-  blocks,
-  startIndex,
-  endIndex,
-}: {
-  blocks: ChannelContentsConnectable[]
-  startIndex: number
-  endIndex: number
-}): ChannelContentsConnectable[] => {
-  const newBlocks = [...blocks]
-  const [removed] = newBlocks.splice(startIndex, 1)
-  newBlocks.splice(endIndex, 0, removed)
-
-  return newBlocks
-}
+import { Modifier } from '@apollo/client/cache/core/types/common'
 
 /**
  * Resolves a block's type to a connectable type.
@@ -58,7 +39,7 @@ function getConnectableType(
  * Returns the channel's blocks as well as utility methods to fetch more,
  * move blocks around, add blocks, and delete blocks.
  */
-export const usePaginatedBlocks = (argsObject: {
+export const usePaginatedBlocks = (unsafeArgs: {
   channelId: number
   initialData: ChannelContentsConnectable[]
   initialBlockCount: number
@@ -70,7 +51,7 @@ export const usePaginatedBlocks = (argsObject: {
    * change from under us, while also making it so that we don't needs to pass
    * any of these values into dependency arrays for useCallback, useEffect, etc.
    */
-  const args = useRef(argsObject)
+  const args = useRef(unsafeArgs)
 
   /**
    * The current blocks that we have for a channel
@@ -87,58 +68,54 @@ export const usePaginatedBlocks = (argsObject: {
   })
   const blocks = unsafeData?.channel?.blokks ?? []
 
+  /**
+   * A function that allows you to directly modify the channel's "blokks"
+   * cache value. If the length of blokks changes, the channel.counts.contents
+   * field will be updated to the new value.
+   */
   const updateBlocks = useCallback(
-    (
-      updateBlocksFn: (
-        prev: ChannelBlokksPaginated_channel_blokks[]
-      ) => ChannelBlokksPaginated_channel_blokks[]
-    ) => {
-      const data = client.readQuery<
-        ChannelBlokksPaginated,
-        ChannelBlokksPaginatedVariables
-      >({
-        query: channelBlokksPaginatedQuery,
-        variables: {
-          id: args.current.channelId.toString(),
-          page: 1,
-          per: channelBlokksPaginatedPerPage,
+    (updateBlocksFn: Modifier<Array<StoreObject | Reference>>) => {
+      // The normalized cache name of the channel
+      const id = client.cache.identify({
+        __typename: 'Channel',
+        id: args.current.channelId,
+      })
+
+      // Values we'll be saving during the first cache.modify call
+      let newBlocks: Array<any>
+      let blockLengthDiff = 0
+
+      // This is a dry run of the cache modification that sets the
+      // newBlocks and blockLengthDiff. We need to do a dry run
+      // Because the updated counts.contents value requires knowing
+      // both the previous and next values of blokks
+      client.cache.modify({
+        id: id,
+        fields: {
+          blokks(b, options) {
+            newBlocks = updateBlocksFn(b, options)
+            blockLengthDiff = newBlocks.length - b.length
+            return b
+          },
         },
       })
 
-      const newBlocks = updateBlocksFn(data?.channel?.blokks ?? [])
-
-      if (newBlocks.length !== data?.channel?.blokks?.length) {
-        client.writeFragment<ChannelContentsCount>({
-          fragment: channelContentsCount,
-          variables: {
-            id: args.current.channelId,
+      // Do the actual modification of blokks and counts
+      client.cache.modify({
+        id: id,
+        fields: {
+          blokks(b) {
+            return newBlocks || b
           },
-          data: {
-            __typename: 'Channel',
-            id: args.current.channelId,
-            counts: {
-              __typename: 'ChannelCounts',
-              contents: newBlocks.length,
-            },
-          },
-        })
-      }
-
-      client.writeQuery<
-        ChannelBlokksPaginated,
-        ChannelBlokksPaginatedVariables
-      >({
-        query: channelBlokksPaginatedQuery,
-        variables: {
-          id: args.current.channelId.toString(),
-          page: 1,
-          per: newBlocks.length,
-        },
-        overwrite: true,
-        data: {
-          channel: {
-            ...data.channel,
-            blokks: newBlocks,
+          counts(countsCache) {
+            if (blockLengthDiff !== 0) {
+              return {
+                ...countsCache,
+                contents: countsCache.contents + blockLengthDiff,
+              }
+            } else {
+              return countsCache
+            }
           },
         },
       })
@@ -186,31 +163,22 @@ export const usePaginatedBlocks = (argsObject: {
   }, [])
 
   /**
-   * Resets every hasQueriedPage return value to false. Useful for if
-   * you have mutated the channel's blocks and want to trigger a
-   * network request
-   */
-  const clearQueriedPageNumbers = useCallback(() => {
-    queriedPageNumbersRef.current = new Set()
-  }, [])
-
-  /**
    * Removes a block from a channel ONLY on the frontend. Does not do any
    * actual mutation/network request.
    */
   const removeBlock = useCallback(
     ({ id, type }: { id: number; type: string }) => {
-      updateBlocks(b => {
-        const newBlocks = b.filter(
-          block => !(block.id === id && block.__typename === type)
+      updateBlocks((b, { readField }) => {
+        return b.filter(
+          block =>
+            !(
+              readField('id', block) === id &&
+              readField('__typename', block) === type
+            )
         )
-        console.log('removeBlock', id, type, b, newBlocks)
-        return newBlocks
       })
-
-      // clearQueriedPageNumbers()
     },
-    [clearQueriedPageNumbers, updateBlocks]
+    [updateBlocks]
   )
 
   /**
@@ -219,57 +187,84 @@ export const usePaginatedBlocks = (argsObject: {
    */
   const moveBlock = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-      updateBlocks(b => {
-        const startIndex = oldIndex
-        let endIndex = newIndex
+      updateBlocks((b, { readField }) => {
+        const channelContentsCountFragment = client.readFragment<
+          ChannelContentsCount
+        >({
+          fragment: channelContentsCount,
+          id: client.cache.identify({
+            id: args.current.channelId,
+            __typename: 'Channel',
+          }),
+        })
+
+        const contentsCount = channelContentsCountFragment?.counts?.contents
 
         if (newIndex === -1) {
           // Moving to the "bottom"
-          endIndex = b.length - 1
+          newIndex = contentsCount - 1
         }
 
-        const block = b[startIndex]
+        if (!contentsCount) {
+          return b
+        }
+
+        const block = b[oldIndex]
 
         if (!block) {
           return b
         }
 
-        client
-          .mutate<
-            moveConnectableMutationData,
-            moveConnectableMutationVariables
-          >({
-            mutation: moveConnectableMutation,
-            variables: {
-              channel_id: args.current.channelId.toString(),
-              connectable: {
-                id: block.id.toString(),
-                type: getConnectableType(block.__typename),
-              },
-              insert_at: b.length - endIndex,
-            },
-          })
-          .then(() => {
-            clearQueriedPageNumbers()
-          })
+        const id = readField('id', block) || undefined
+        const typename = readField('__typename', block) || undefined
 
-        return reorderBlocks({
-          blocks: b,
-          startIndex,
-          endIndex,
+        if (id === undefined || typename === undefined) {
+          return b
+        }
+
+        client.mutate<
+          moveConnectableMutationData,
+          moveConnectableMutationVariables
+        >({
+          mutation: moveConnectableMutation,
+          variables: {
+            channel_id: args.current.channelId.toString(),
+            connectable: {
+              id: id.toString(),
+              type: getConnectableType(
+                typename as ChannelContentsConnectable['__typename']
+              ),
+            },
+            insert_at: contentsCount - newIndex,
+          },
         })
+
+        const newBlocks = [...b]
+        const [removed] = newBlocks.splice(oldIndex, 1)
+        newBlocks.splice(newIndex, 0, removed)
+
+        return newBlocks
       })
     },
-    [clearQueriedPageNumbers, client, updateBlocks]
+    [client, updateBlocks]
   )
 
+  /**
+   * Adds a null block placeholder to the begining of the blocks cache
+   * and fires a query to get the block's actua data
+   */
   const addBlock = useCallback(() => {
-    clearQueriedPageNumbers()
-
     updateBlocks(b => {
       return [null, ...b]
     })
-  }, [clearQueriedPageNumbers, updateBlocks])
+
+    fetchMore({
+      variables: {
+        page: 1,
+        per: 1,
+      },
+    })
+  }, [fetchMore, updateBlocks])
 
   return {
     blocks,

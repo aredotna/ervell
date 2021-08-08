@@ -65,7 +65,6 @@ const paginationWithPageAndPer: FieldMergeFunction<any, any> = (
   incoming,
   { args: { page = 1, per } = {} }
 ) => {
-  console.log('here', { existing, incoming, page, per })
   /*
    * Ensure args and data is properly set up
    */

@@ -35,7 +35,6 @@ const ChannelContents: React.FC<Props> = memo(
     } = usePaginatedBlocks({
       channelId: channel.id,
       initialData: channel.blokks,
-      initialBlockCount: channel.counts.contents,
     })
 
     const onItemIntersected = useCallback(
@@ -74,9 +73,6 @@ const ChannelContents: React.FC<Props> = memo(
     const lightboxConnectables = []
 
     const blocksJsx: JSX.Element[] = []
-
-    console.log(blocks)
-
     for (let i = 0; i < Math.max(channel.counts.contents, blocks.length); i++) {
       const block = blocks[i]
 
