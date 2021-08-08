@@ -38,10 +38,6 @@ const ChannelContents: React.FC<Props> = memo(
       initialBlockCount: channel.counts.contents,
     })
 
-    useEffect(() => {
-      getPage(1)
-    }, [getPage])
-
     const onItemIntersected = useCallback(
       (index: number) => {
         const page = getPageFromIndex(index)
@@ -53,6 +49,7 @@ const ChannelContents: React.FC<Props> = memo(
     )
 
     if (pusherChannel) {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       usePusher({
         channel: pusherChannel,
         // onCreated: addBlock,
@@ -73,22 +70,27 @@ const ChannelContents: React.FC<Props> = memo(
       }
     }, [pusherChannel, socket])
 
-    const handleRemoveBlock = useCallback(
-      ({ id, type }: { id: number; type: string }) => {
-        removeBlock({ id, type })
-      },
-      [removeBlock]
-    )
-
-    const handleSortEnd = useCallback(
-      ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-        moveBlock({ oldIndex, newIndex })
-      },
-      [moveBlock]
-    )
-
     // For the lightbox, we need to filter out channels
     const lightboxConnectables = []
+
+    const blocksJsx: JSX.Element[] = []
+
+    for (let i = 0; i < Math.max(channel.counts.contents, blocks.length); i++) {
+      const block = blocks[i]
+
+      blocksJsx.push(
+        <ChannelContentsItem
+          key={block ? `${block.id}.${block.__typename}` : `nullState${i}`}
+          index={i}
+          channel={channel}
+          connectable={block}
+          context={lightboxConnectables}
+          onRemove={removeBlock}
+          onChangePosition={moveBlock}
+          onItemIntersected={onItemIntersected}
+        />
+      )
+    }
 
     return (
       <>
@@ -96,7 +98,7 @@ const ChannelContents: React.FC<Props> = memo(
           axis="xy"
           useWindowAsScrollContainer
           transitionDuration={0}
-          onSortEnd={handleSortEnd}
+          onSortEnd={moveBlock}
           wrapChildren={false}
           distance={1}
           useDragHandle
@@ -115,22 +117,7 @@ const ChannelContents: React.FC<Props> = memo(
           )}
 
           {/* DEV */}
-          {blocks.map((block, i) => {
-            return (
-              <ChannelContentsItem
-                key={
-                  block ? `${block.id}.${block.__typename}` : `nullState${i}`
-                }
-                index={i}
-                channel={channel}
-                connectable={block}
-                context={lightboxConnectables}
-                onRemove={handleRemoveBlock}
-                onChangePosition={handleSortEnd}
-                onItemIntersected={onItemIntersected}
-              />
-            )
-          })}
+          {blocksJsx}
 
           {/* {chunked.map((pageSkeleton, pageIndex: number) => {
             const pageKey = ActiveQueriesCollection.key(pageSkeleton)

@@ -64,7 +64,7 @@ interface Props {
   }: {
     oldIndex: number
     newIndex: number
-  }) => any
+  }) => void
   onItemIntersected: (index: number) => void
 }
 
@@ -91,7 +91,12 @@ export const ChannelContentsItem: React.FC<Props> = memo(
     }, [])
 
     const handleChangePosition = useCallback(
-      (newIndex: number) => onChangePosition({ oldIndex: index, newIndex }),
+      (newIndex: number) => {
+        onChangePosition({
+          oldIndex: index,
+          newIndex,
+        })
+      },
       [index, onChangePosition]
     )
 

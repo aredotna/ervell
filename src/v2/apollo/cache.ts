@@ -63,47 +63,54 @@ const everythingExcept = (
 const paginationWithPageAndPer: FieldMergeFunction<any, any> = (
   existing,
   incoming,
-  { args }
+  { args: { page = 1, per } = {} }
 ) => {
   /*
    * Ensure args and data is properly set up
    */
 
-  if (!args) {
-    throw new Error('args not given')
-  }
   if (!Array.isArray(incoming)) {
     throw new Error("incoming isn't an array")
   }
-  if (typeof args?.page !== 'number') {
-    throw new Error("page isn't a number")
-  }
-  if (args.page === 0) {
+  if (page === 0) {
     throw new Error('page is 0')
   }
-  if (typeof args?.per !== 'number') {
+  if (typeof per !== 'number') {
     throw new Error("per isn't a number")
   }
 
   // New array to be returned
   const newData = []
 
+  // Index that the incoming data starts at in the newData array
+  const incomingStartingIndex = (page - 1) * per
+
+  const incomingEndingIndex =
+    incomingStartingIndex +
+    Math.min(Array.isArray(incoming) ? incoming.length : 0, per) -
+    1
+
   // Length of the new array
   const newDataLength = Math.max(
     Array.isArray(existing) ? existing.length : 0,
-    args.page * args.per
+    incomingEndingIndex + 1
   )
-
-  // Index that the incoming data starts at in the newData array
-  const incomingStartingIndex = (args.page - 1) * args.per
 
   for (let i = 0; i < newDataLength; i++) {
     const isInIncomingWindow =
-      i >= incomingStartingIndex && i < args.page * args.per
+      i >= incomingStartingIndex && i <= incomingEndingIndex
 
     if (isInIncomingWindow) {
       const incomingItem = incoming[i - incomingStartingIndex]
-      newData[i] = incomingItem
+
+      // For some reason, are.na sometimes doesn't return the amount of items
+      // from the per argument. Set to null instead of undefined so that
+      // the undefined item doesn't get squashed.
+      if (incomingItem === undefined) {
+        newData[i] = null
+      } else {
+        newData[i] = incomingItem
+      }
     } else if (Array.isArray(existing) && i < existing.length) {
       newData[i] = existing[i]
     } else {
@@ -131,6 +138,15 @@ export function getCache({
       Query: {
         fields: {
           exxplore: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge: paginationWithPageAndPer,
+          },
+        },
+      },
+
+      Channel: {
+        fields: {
+          blokks: {
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,
           },

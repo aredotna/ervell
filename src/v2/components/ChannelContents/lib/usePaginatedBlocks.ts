@@ -1,9 +1,10 @@
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
-import { useRef, useLayoutEffect, useState, useCallback } from 'react'
-import { useApolloClient } from '@apollo/client'
+import { useRef, useCallback } from 'react'
+import { useApolloClient, useQuery } from '@apollo/client'
 import {
   ChannelBlokksPaginated,
   ChannelBlokksPaginatedVariables,
+  ChannelBlokksPaginated_channel_blokks,
 } from '__generated__/ChannelBlokksPaginated'
 import channelBlokksPaginatedQuery, {
   channelBlokksPaginatedPerPage,
@@ -14,84 +15,6 @@ import {
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
-
-/**
- * A function that merges an incoming subsection of an array
- * into an existing array, based on the page and per values
- * passed in. Handles many edge cases such as
- * 1. Normalizing "undefined" incoming data to null
- * 2. Extending an array
- * 3. Assuring everything is immutably modified
- */
-function mergePaginatedBlocks({
-  incoming,
-  existing,
-  page,
-  per,
-}: {
-  incoming: ChannelContentsConnectable[]
-  existing: ChannelContentsConnectable[]
-  page: number
-  per: number
-}): ChannelContentsConnectable[] {
-  const newData: ChannelContentsConnectable[] = []
-
-  // Index that the incoming data starts at in the newData array
-  const incomingStartingIndex = (page - 1) * per
-
-  const incomingEndingIndex =
-    incomingStartingIndex +
-    Math.min(Array.isArray(incoming) ? incoming.length : 0, per) -
-    1
-
-  // Length of the new array
-  const newDataLength = Math.max(
-    Array.isArray(existing) ? existing.length : 0,
-    incomingEndingIndex + 1
-  )
-
-  for (let i = 0; i < newDataLength; i++) {
-    const isInIncomingWindow =
-      i >= incomingStartingIndex && i <= incomingEndingIndex
-
-    if (isInIncomingWindow) {
-      const incomingItem = incoming[i - incomingStartingIndex]
-
-      // For some reason, are.na sometimes doesn't return the amount of items
-      // from the per argument. Set to null instead of undefined so that
-      // the undefined item doesn't get squashed.
-      if (incomingItem === undefined) {
-        newData[i] = null
-      } else {
-        newData[i] = incomingItem
-      }
-    } else if (Array.isArray(existing) && i < existing.length) {
-      newData[i] = existing[i]
-    } else {
-      newData[i] = null
-    }
-  }
-
-  return newData
-}
-
-/**
- * A hook that returns a ref that gives the mounted
- * state of a component
- */
-const useIsMountedRef = () => {
-  const isMounted = useRef(false)
-
-  useLayoutEffect(() => {
-    isMounted.current = true
-
-    return () => {
-      isMounted.current = false
-    }
-  }, [])
-
-  return isMounted
-}
 
 /**
  * Move a block from one part of an array to another
@@ -134,7 +57,7 @@ function getConnectableType(
  * move blocks around, add blocks, and delete blocks.
  */
 export const usePaginatedBlocks = (argsObject: {
-  channelId: string | number
+  channelId: number
   initialData: ChannelContentsConnectable[]
   initialBlockCount: number
 }) => {
@@ -150,24 +73,46 @@ export const usePaginatedBlocks = (argsObject: {
   /**
    * The current blocks that we have for a channel
    */
-  const [blocks, setBlocks] = useState<ChannelContentsConnectable[]>(() => {
-    const initialBlocks = []
-    for (let i = 0; i < args.current.initialBlockCount; i++) {
-      let itemData: ChannelContentsConnectable | null = null
-      if (args.current.initialData && i < args.current.initialData.length) {
-        itemData = args.current.initialData[i] ?? null
-      }
-
-      initialBlocks.push(itemData)
+  const {
+    data: unsafeData,
+    fetchMore,
+    updateQuery: unsafeUpdateQuery,
+  } = useQuery<ChannelBlokksPaginated, ChannelBlokksPaginatedVariables>(
+    channelBlokksPaginatedQuery,
+    {
+      variables: {
+        id: args.current.channelId.toString(),
+        page: 1,
+        per: channelBlokksPaginatedPerPage,
+      },
     }
-
-    return initialBlocks
-  })
+  )
+  const blocks = unsafeData?.channel?.blokks ?? []
 
   /**
    * The apollo client ref that we will be using for IO
    */
   const client = useApolloClient()
+
+  const updateBlocks = useCallback(
+    (
+      updateBlocksFn: (
+        prev: ChannelBlokksPaginated_channel_blokks[]
+      ) => ChannelBlokksPaginated_channel_blokks[]
+    ) => {
+      unsafeUpdateQuery(data => {
+        const newBlocks = updateBlocksFn(data?.channel?.blokks ?? [])
+
+        return {
+          channel: {
+            ...data.channel,
+            blokks: newBlocks,
+          },
+        }
+      })
+    },
+    [unsafeUpdateQuery]
+  )
 
   /**
    * A set that keeps track of which pages have already been queried for
@@ -175,47 +120,23 @@ export const usePaginatedBlocks = (argsObject: {
   const queriedPageNumbersRef = useRef(new Set<number>())
 
   /**
-   * A ref object that keeps track of the mounted state of the component
-   */
-  const isMountedRef = useIsMountedRef()
-
-  /**
    * Gets block data from a given page
    */
   const getPage = useCallback(
-    async (pageNumber: number) => {
+    (pageNumber: number) => {
       if (queriedPageNumbersRef.current.has(pageNumber)) {
         return
       }
 
       queriedPageNumbersRef.current.add(pageNumber)
 
-      const queryResult = await client.query<
-        ChannelBlokksPaginated,
-        ChannelBlokksPaginatedVariables
-      >({
-        query: channelBlokksPaginatedQuery,
+      fetchMore({
         variables: {
-          id: args.current.channelId.toString(),
           page: pageNumber,
-          per: channelBlokksPaginatedPerPage,
         },
-        fetchPolicy: 'no-cache',
       })
-
-      const incomingBlocks = queryResult?.data?.channel?.blokks
-      if (incomingBlocks.length && isMountedRef.current) {
-        setBlocks(b => {
-          return mergePaginatedBlocks({
-            incoming: incomingBlocks,
-            existing: b,
-            page: pageNumber,
-            per: channelBlokksPaginatedPerPage,
-          })
-        })
-      }
     },
-    [client, isMountedRef]
+    [fetchMore]
   )
 
   /**
@@ -249,11 +170,11 @@ export const usePaginatedBlocks = (argsObject: {
     ({ id, type }: { id: number; type: string }) => {
       clearQueriedPageNumbers()
 
-      setBlocks(b => {
-        return b.filter(block => block.id !== id && block.__typename !== type)
-      })
+      updateBlocks(b =>
+        b.filter(block => block.id !== id && block.__typename !== type)
+      )
     },
-    [clearQueriedPageNumbers]
+    [clearQueriedPageNumbers, updateBlocks]
   )
 
   /**
@@ -262,9 +183,7 @@ export const usePaginatedBlocks = (argsObject: {
    */
   const moveBlock = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-      clearQueriedPageNumbers()
-
-      setBlocks(b => {
+      updateBlocks(b => {
         const startIndex = oldIndex
         let endIndex = newIndex
 
@@ -278,6 +197,8 @@ export const usePaginatedBlocks = (argsObject: {
         if (!block) {
           return b
         }
+
+        clearQueriedPageNumbers()
 
         client.mutate<
           moveConnectableMutationData,
@@ -301,16 +222,16 @@ export const usePaginatedBlocks = (argsObject: {
         })
       })
     },
-    [clearQueriedPageNumbers, client]
+    [clearQueriedPageNumbers, client, updateBlocks]
   )
 
   const addBlock = useCallback(() => {
     clearQueriedPageNumbers()
 
-    setBlocks(b => {
+    updateBlocks(b => {
       return [null, ...b]
     })
-  }, [clearQueriedPageNumbers])
+  }, [clearQueriedPageNumbers, updateBlocks])
 
   return {
     blocks,
