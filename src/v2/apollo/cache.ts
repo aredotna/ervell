@@ -168,6 +168,7 @@ export function getCache({
       CommentCan: nonNormalizedMergeableObject,
       ConnectableCan: nonNormalizedMergeableObject,
       ConnectableSource: nonNormalizedMergeableObject,
+      Connection: nonNormalizedMergeableObject,
       ConnectionCan: nonNormalizedMergeableObject,
       Dimensions: nonNormalizedMergeableObject,
       Feed: nonNormalizedMergeableObject,
