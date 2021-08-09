@@ -15415,6 +15415,13 @@ react-safe-universal-inputs@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-safe-universal-inputs/-/react-safe-universal-inputs-3.0.1.tgz#784cfd88d179786f0e9fed8b98d8a80ab0e28165"
   integrity sha1-eEz9iNF5eG8On+2LmNioCrDigWU=
 
+react-scroll-section@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-scroll-section/-/react-scroll-section-3.0.2.tgz#28e9697f4e2f91348a121151bd9c5e4df089d301"
+  integrity sha512-ktOGETDiFK4YLTwauxGELWzmuGcD7J/ePv9D39Se+4Fs0pT4r/dip65vGPae18MOqY7MwyMKVjJFMx1n6kR6Bg==
+  dependencies:
+    smoothscroll-polyfill "^0.4.4"
+
 react-slick@^0.19.0:
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.19.0.tgz#dade3b34c24db0b09a27911b308fcdd53baa592d"
