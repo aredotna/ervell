@@ -47,7 +47,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
 
   /**
-   * This hook doesn't support updating the intiially passed-in args in any way.
+   * This hook doesn't support updating the initially passed-in args in any way.
    * So to make that clear we are creating a ref of the initial argsObject and
    * only accessing the args this way. This will assert that the args won't
    * change from under us, while also making it so that we don't needs to pass
