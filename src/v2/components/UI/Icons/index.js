@@ -36,6 +36,9 @@ import Globe from 'v2/components/UI/Icons/Globe.svg'
 import UpArrow from 'v2/components/UI/Icons/UpArrow.svg'
 import DownArrow from 'v2/components/UI/Icons/DownArrow.svg'
 import Drag from 'v2/components/UI/Icons/Drag.svg'
+import Ios from 'v2/components/UI/Icons/Ios.svg'
+import Android from 'v2/components/UI/Icons/Android.svg'
+import Hamburger from 'v2/components/UI/Icons/Hamburger.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -69,6 +72,9 @@ export const COMPONENTS = {
   UpArrow: <UpArrow />,
   DownArrow: <DownArrow />,
   Drag: <Drag />,
+  Ios: <Ios />,
+  Android: <Android />,
+  Hamburger: <Hamburger />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

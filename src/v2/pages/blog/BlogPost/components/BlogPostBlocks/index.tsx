@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
-import { BlogPostInner } from '../BlogPostContent'
 import { BlokkWithQuery } from 'v2/components/Cell/components/Konnectable'
 
 import constants from 'v2/styles/constants'
+import { ContentfulContent } from 'v2/components/ContentfulContent'
 
 const Outer = styled(Box).attrs({ my: 9 })``
 
@@ -59,7 +59,7 @@ export const BlogPostBlocks: React.FC<BlogPostBlocksProps> = ({ blocks }) => {
         return (
           <Container key={sys.id}>
             <TextContainer>
-              <BlogPostInner content={text.json} />
+              <ContentfulContent content={text.json} />
             </TextContainer>
             <BlockContainer>
               <Block id={blockID} />

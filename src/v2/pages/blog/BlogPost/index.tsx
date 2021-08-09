@@ -18,7 +18,7 @@ import { BlogPostCTA } from './components/BlogPostCTA'
 import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
 
-import BLOG_POST_CONTENT_QUERY from 'v2/pages/blog/BlogPost/queries/BlogPostBySlug'
+import BLOG_POST_CONTENT_QUERY from 'v2/pages/blog/BlogPost/contentfulQueries/BlogPostBySlug'
 import { BlogPostBlocks } from './components/BlogPostBlocks'
 
 interface BlogPostProps {

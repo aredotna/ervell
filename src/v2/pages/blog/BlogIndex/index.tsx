@@ -12,7 +12,7 @@ import Text from 'v2/components/UI/Text'
 
 import { BlogPreview } from 'v2/pages/blog/BlogIndex/components/BlogPreview'
 
-import BLOG_INDEX_QUERY from 'v2/pages/blog/BlogIndex/queries/BlogIndex'
+import BLOG_INDEX_QUERY from 'v2/pages/blog/BlogIndex/contentfulQueries/BlogIndex'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,

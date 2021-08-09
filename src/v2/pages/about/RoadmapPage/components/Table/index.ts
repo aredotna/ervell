@@ -69,11 +69,13 @@ export const Cell = styled(Box).attrs({
 
   ul {
     list-style-type: disc;
-    margin-left: ${x => x.theme.space[6]};
+    margin-left: ${x => x.theme.space[6]} !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
   }
 
   li {
-    padding: ${x => x.theme.space[3]} 0;
+    padding: ${x => x.theme.space[3]} 0 !important;
   }
 
   h1 {

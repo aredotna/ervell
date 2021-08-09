@@ -5,8 +5,8 @@ import Text from 'v2/components/UI/Text'
 import Meter from 'v2/components/UI/Meter'
 
 interface GoalMeterProps {
-  currentMrr: number
-  goalMrr: number
+  currentMrr: string
+  goalMrr: string
   goalDate: string
   monthlyActiveMembers: string
   totalPayingMembers: string
@@ -35,8 +35,8 @@ export const GoalMeter: React.FC<GoalMeterProps> = ({
         borderRadius="1.5em"
         startColor="state.premium"
         endColor="state.supporter"
-        amount={currentMrr}
-        limit={goalMrr}
+        amount={parseInt(currentMrr)}
+        limit={parseInt(goalMrr)}
         p={4}
         mb={4}
       />
