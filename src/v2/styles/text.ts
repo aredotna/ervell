@@ -3,7 +3,10 @@ export const FONT_SIZES = {
     desktop: '16px',
     mobile: '13px',
   },
-
+  home: {
+    lg: '1.11rem',
+    md: '0.94rem',
+  },
   base: '1rem',
   lg: '1.25rem',
   md: '1rem',

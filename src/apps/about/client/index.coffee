@@ -49,8 +49,8 @@ module.exports = ->
   return unless location.hash
 
   # Prevent default anchor jump
-  setTimeout (-> window.scrollTo(0, 0)), 1
+  # setTimeout (-> window.scrollTo(0, 0)), 1
 
-  id = location.hash.substring(1)
+  # id = location.hash.substring(1)
 
-  scrollToId id
+  # scrollToId id
