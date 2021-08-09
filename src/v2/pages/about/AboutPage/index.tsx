@@ -10,7 +10,7 @@ import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
 import Text from 'v2/components/UI/Text'
 import { P } from 'v2/pages/about/components/Text'
-import { calculateAge } from 'v2/util/calculateAge'
+import { calculatedAgePhrase } from 'v2/util/calculateAge'
 import FeatureCarouselWithSlides from 'v2/components/FeatureSlides'
 import PricingTable from 'v2/pages/about/PricingPage/components/PricingTable'
 import { RoadmapPageInner } from 'v2/pages/about/RoadmapPage'
@@ -27,6 +27,7 @@ import { TopMenu } from './components/TopMenu'
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
+  px: 6,
 })`
   max-width: 670px;
   width: 100%;
@@ -57,8 +58,6 @@ interface AboutPageProps {
 }
 
 const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
-  const { years, days } = calculateAge()
-
   const { scrollTo } = useContext(ScrollContext)
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
     <BlankLayout>
       <TopMenu />
       <Section id={'About'}>
-        <CenteredSection mt={9}>
+        <CenteredSection mt={[11, 11, 9]}>
           <Header>About</Header>
           <P>
             Are.na is a place to save content, create collections over time and
@@ -88,9 +87,7 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
             connected knowledge collectors (those more experienced but highly
             curious information gatherers who can make disparate connections
             between disciplines) have been the core of our community for{' '}
-            <strong>
-              {years} years and {days} days
-            </strong>
+            <strong>{calculatedAgePhrase()}</strong>
           </P>
           <P>
             With no ads, likes, or recommendations, Are.na is a more mindful

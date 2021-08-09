@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { useScrollSections } from 'v2/util/react-scroll-section'
 
@@ -16,14 +16,49 @@ const Container = styled(Box).attrs({ py: 6, px: 6 })`
   top: 0;
   right: 0;
   left: 0;
-  background: ${({ theme }) => theme.colors.background};
   z-index: ${constants.z.header};
-  height
+
+  ${constants.media.small`
+    background: ${({ theme }) => theme.colors.background};
+  `}
 `
 
-const MenuContainer = styled(Box).attrs({})`
+const IconContainer = styled(Box).attrs({
+  display: 'flex',
+  flexDirection: 'row',
+})``
+
+const HamburgerContainer = styled(Box).attrs({ mr: 6 })`
+  display: none;
+  ${constants.media.small`
+    display: flex;
+  `}
+`
+
+const MenuContainer = styled(Box).attrs({ px: 6 })`
   position: fixed;
   top: 50px;
+  left: 0;
+
+  ${constants.media.small`
+    height: ${({ expanded }) => (expanded ? '100%' : '50px')};
+    width: 100%;
+    overflow: hidden;
+    background: ${({ theme }) => theme.colors.background};
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 3em;
+      background: linear-gradient(${({ theme }) =>
+        theme.colors.utility.transparent} 0%, ${({ theme }) =>
+    theme.colors.background} 100%);
+    }
+  `}
 `
 
 const Item = styled(Text).attrs({
@@ -40,20 +75,35 @@ const Item = styled(Text).attrs({
 
 export const TopMenu: React.FC = () => {
   const sections = useScrollSections()
+  const [expanded, setExpanded] = useState<boolean>(false)
+  const toggleExpanded = useCallback(() => {
+    expanded ? setExpanded(false) : setExpanded(true)
+  }, [expanded, setExpanded])
+
   return (
     <Container>
       <Box flex={1}>
-        <a href="/">
-          <Icons name="ArenaMark" size="1.5em" color="gray.block" />
-        </a>
+        <IconContainer>
+          <HamburgerContainer onClick={toggleExpanded}>
+            <Icons name="Hamburger" size="1.5em" color="gray.block" />
+          </HamburgerContainer>
+          <a href="/">
+            <Icons name="ArenaMark" size="1.5em" color="gray.block" />
+          </a>
+        </IconContainer>
 
-        <MenuContainer>
+        <MenuContainer expanded={expanded}>
           {sections.map(({ id, onClick, selected }, index) => {
+            const handleClick = () => {
+              setExpanded(false)
+              onClick()
+            }
+
             return (
               <Item
                 key={index}
                 selected={selected}
-                onClick={onClick}
+                onClick={handleClick}
                 dangerouslySetInnerHTML={{ __html: id }}
               />
             )

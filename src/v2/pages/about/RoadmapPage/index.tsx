@@ -36,6 +36,7 @@ import { RoadmapContents as ROADMAP_CONTENTS_QUERY } from './contentfulQueries/r
 import { RoadmapContents } from '__generated__/contentful/RoadmapContents'
 import { ContentfulContent } from 'v2/components/ContentfulContent'
 import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
+import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 
 const Container = styled(Box).attrs({
   mt: 9,
@@ -149,7 +150,9 @@ export const RoadmapPageInner: React.FC<RoadmapPageInnerProps> = ({
   return (
     <>
       {isHomepage && (
-        <Headline color="gray.bold">Here&apos;s where we&apos;re at.</Headline>
+        <Headline textAlign="center" color="gray.bold">
+          Here&apos;s where we&apos;re at.
+        </Headline>
       )}
 
       <Paragraph>
@@ -387,6 +390,7 @@ export const RoadmapPage: React.FC = () => {
       <Container pb={10}>
         <RoadmapPageInner isHomepage />
       </Container>
+      <LoggedOutFooter />
     </AboutTopBarLayout>
   )
 }

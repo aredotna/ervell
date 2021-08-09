@@ -65,7 +65,9 @@ export default class CaseStudiesCta extends Component {
   render() {
     return (
       <CTA>
-        <Headline pb={7}>How are teachers and students using Are.na?</Headline>
+        <Headline pb={7} textAlign="center">
+          How are teachers and students using Are.na?
+        </Headline>
         <CaseStudies>
           <CaseStudy href="https://www.are.na/lucy-siyao-liu/orthographies">
             <Thumb src="https://d2w9rnfcy7mm78.cloudfront.net/2988720/original_37979b237534ae7e6b18823f289e25df.png?1541428472" />

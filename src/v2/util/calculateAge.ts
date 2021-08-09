@@ -8,3 +8,11 @@ export function calculateAge() {
   const days = current.diff(originDate, 'days')
   return { years, days }
 }
+
+export function calculatedAgePhrase() {
+  const { years, days } = calculateAge()
+
+  const daysWord = days == 1 ? 'day' : 'days'
+
+  return `${years} years and ${days} ${daysWord}`
+}

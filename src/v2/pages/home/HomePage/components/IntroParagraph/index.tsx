@@ -4,21 +4,40 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Button from 'v2/components/UI/GenericButton'
 import { P } from 'v2/pages/home/components/Common'
+import constants from 'v2/styles/constants'
 import { FONT_SIZES } from 'v2/styles/text'
-import { calculateAge } from 'v2/util/calculateAge'
+import { calculatedAgePhrase } from 'v2/util/calculateAge'
 
-const Container = styled(Box).attrs({ pb: 7, mx: 'auto' })`
+const Container = styled(Box).attrs({ pb: 7 })`
   display: flex;
+  max-width: 1500px;
   flex-direction: row;
-  max-width: 1300px;
+  margin: 0 auto;
+
+  ${constants.media.small`
+    flex-direction: column;
+  `}
+
+  ${constants.media.large`
+    margin: 0;
+  `}
 `
 
-export const IntroParagraph: React.FC = () => {
-  const { years, days } = calculateAge()
+const IntroBox = styled(Box).attrs({
+  minWidth: ['auto', '520px'],
+  flex: 1,
+})``
 
+const ButtonBox = styled(Box).attrs({
+  display: 'flex',
+  flex: 1,
+  flexDirection: 'column',
+})``
+
+export const IntroParagraph: React.FC = () => {
   return (
     <Container>
-      <Box flex={1} pr={8}>
+      <IntroBox pr={8}>
         <P>
           <em>
             Are.na is a platform for connecting ideas and building knowledge.
@@ -30,13 +49,12 @@ export const IntroParagraph: React.FC = () => {
           important to you <br />
           2. a toolkit for assembling new worlds from the scraps of the old
         </P>
-      </Box>
+      </IntroBox>
 
-      <Box flex={1}>
+      <IntroBox flex={1} mt={[8, 0]}>
         <P>
           Students, hobbyists and what we call connected knowledge collectors
-          have been the core of our community for {years} years and {days} days
-          .
+          have been the core of our community for {calculatedAgePhrase()}.
         </P>
         <P>
           People describe Are.na as a garden of ideas, or Tumblr meets
@@ -44,12 +62,11 @@ export const IntroParagraph: React.FC = () => {
         </P>
 
         <Box display="flex" mt={4} justifyContent="space-between">
-          <Box pr={4}>
+          <ButtonBox pr={4}>
             <Button
-              f={FONT_SIZES.home.lg}
-              minWidth="160px"
+              f={[3, FONT_SIZES.home.lg]}
               borderWidth={'1px'}
-              px={9}
+              flex={1}
               href="/sign_up/premium"
             >
               Premium
@@ -62,14 +79,13 @@ export const IntroParagraph: React.FC = () => {
                 <li>unlimited blocks</li>
               </ul>
             </P>
-          </Box>
+          </ButtonBox>
 
-          <Box pl={4}>
+          <ButtonBox pl={4}>
             <Button
               color="gray.block"
-              f={FONT_SIZES.home.lg}
-              minWidth="160px"
-              px={9}
+              f={[3, FONT_SIZES.home.lg]}
+              flex={1}
               href="/sign_up"
             >
               Free
@@ -79,9 +95,9 @@ export const IntroParagraph: React.FC = () => {
                 <li>limited to 100 total blocks</li>
               </ul>
             </P>
-          </Box>
+          </ButtonBox>
         </Box>
-      </Box>
+      </IntroBox>
     </Container>
   )
 }

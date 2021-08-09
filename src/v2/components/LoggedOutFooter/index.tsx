@@ -15,7 +15,7 @@ const {
   data: { ITUNES_LINK, ANDROID_LINK },
 } = sharify
 
-const Container = styled(Box).attrs({ pt: 8, px: 8, pb: 10, mt: 8 })`
+const Container = styled(Box).attrs({ pt: 7, px: 7, pb: 10, mt: 5 })`
   display: flex;
   background-color: ${({ theme }) => theme.colors.brand.deepBlue};
   flex-direction: column;
@@ -39,12 +39,21 @@ const MapSection = styled(Box).attrs({})`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-wrap: wrap;
 `
 
-const Column = styled(Box).attrs({ m: 6, mr: 9 })``
+const Column = styled(Box).attrs({ m: [4, 6], mr: [7, 9] })`
+  ${constants.media.small`
+    width: 200px;
+  `}
+`
 
-const ColumnHeader = styled(Text).attrs({ f: 3, color: 'gray.light' })``
-const ColumnContents = styled(Text).attrs({ f: 3, color: 'gray.light', mt: 4 })`
+const ColumnHeader = styled(Text).attrs({ f: [2, 3], color: 'gray.light' })``
+const ColumnContents = styled(Text).attrs({
+  f: [2, 3],
+  color: 'gray.light',
+  mt: 4,
+})`
   ul {
     margin-left: 0;
     padding-left: ${({ theme }) => theme.space[7]};
@@ -160,7 +169,7 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
           </ColumnContents>
         </Column>
         <Column>
-          <ColumnHeader>Essays &amp; Events</ColumnHeader>
+          <ColumnHeader>Editorial</ColumnHeader>
           <ColumnContents>
             <ul>
               <li>

@@ -5,6 +5,7 @@ import { LINE_HEIGHTS } from 'v2/styles/text'
 export const BREAKPOINTS = {
   mobile: 640,
   small: 1024,
+  large: 1500,
 }
 
 type BreakpointType = typeof BREAKPOINTS

@@ -26,8 +26,9 @@ const Inner = styled.div`
   flex-direction: column;
 `
 
-const Copy = styled(Text)`
-  font-size: ${FONT_SIZES.home.md};
+const Copy = styled(Text).attrs({
+  f: 3,
+})`
   width: 70%;
   line-height: 1.5;
   text-align: center;

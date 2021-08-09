@@ -5,6 +5,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import constants from 'v2/styles/constants'
 import { P } from 'v2/pages/home/components/Common'
+import { CustomerCount } from 'v2/components/CustomerCount'
 
 const Chart = styled(Box)`
   border: 1px solid ${props => props.theme.colors.gray.light};
@@ -23,7 +24,7 @@ const Top = styled(Box).attrs({
 `
 
 const TopLabel = styled(Text).attrs({
-  f: 4,
+  f: 3,
   color: 'gray.bold',
 })``
 
@@ -36,14 +37,14 @@ const TeamContainer = styled(Box).attrs({
 
 const Team = styled(Box)`
   transform-origin: bottom right;
-  transform: rotate(-90deg) translateY(1.25em) translateX(5.5em);
+  transform: rotate(-90deg) translateY(1.25em) translateX(5em);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 `
 
 const Member = styled(Text).attrs({
-  f: 4,
+  f: 3,
   color: 'gray.block',
   lineHeight: 1.5,
 })`
@@ -104,8 +105,11 @@ export const LongTermVision: React.FC = () => {
       </P>
       <P>
         Our business is to make Are.na a good enough experience that you are
-        willing to pay for it. Currently <strong>7,050 people</strong> support
-        Are.na through their Premium subscriptions.
+        willing to pay for it. Currently{' '}
+        <strong>
+          <CustomerCount />
+        </strong>{' '}
+        people support Are.na through their Premium subscriptions.
       </P>
     </Box>
   )

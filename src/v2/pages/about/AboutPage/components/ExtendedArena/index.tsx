@@ -66,11 +66,17 @@ export const ExtendedArena: React.FC = () => {
       <Text f={5} mt={8} mb={6}>
         Browser Extensions
       </Text>
-      <Box textAlign="center" display="flex" justifyContent="space-between">
+      <Box
+        textAlign="center"
+        display="flex"
+        justifyContent="space-between"
+        flexDirection={['column', 'row']}
+      >
         <Button
           f={3}
           mr={6}
           px={9}
+          my={5}
           color="gray.block"
           href="https://chrome.google.com/webstore/detail/arena/lkihjlcipnbgeokmfnpogjfflofbfhga?hl=en-US"
         >
@@ -81,6 +87,7 @@ export const ExtendedArena: React.FC = () => {
           f={3}
           mr={6}
           px={9}
+          my={5}
           color="gray.block"
           href="https://apps.apple.com/us/app/are-na-for-safari/id1497800947?mt=12"
         >
@@ -91,6 +98,7 @@ export const ExtendedArena: React.FC = () => {
           f={3}
           mr={6}
           px={9}
+          my={5}
           color="gray.block"
           href="https://addons.mozilla.org/en-US/firefox/addon/are-na/"
         >

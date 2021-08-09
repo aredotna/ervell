@@ -20,10 +20,10 @@ const Container = styled(Box).attrs({
 })``
 
 const TopContainer = styled(Container).attrs({
-  pt: 4,
+  pt: 10,
 })``
 
-const IconContainer = styled(Box).attrs({ py: 6, px: 6 })``
+const IconContainer = styled(Box).attrs({ py: 6, px: 7 })``
 
 const TeamAndSecretContainer = styled(Container).attrs({
   maxWidth: '700px',
@@ -56,10 +56,16 @@ const HomePage: React.FC = () => {
           <LongTermVision />
         </Box>
 
-        <Box my={7}>
+        <Box my={7} pb={9}>
           <TheSecret />
         </Box>
       </TeamAndSecretContainer>
+
+      <Box px={7} pb={5}>
+        <P boldLinks>
+          <a href="/sign_up">Try Are.na</a>...or learn more in the links below.
+        </P>
+      </Box>
       <LoggedOutFooter isHomepage />
     </BlankLayout>
   )
