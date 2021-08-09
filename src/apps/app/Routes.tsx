@@ -80,7 +80,12 @@ export const Routes = () => {
         )}
 
         {/* About pages */}
-        <Route exact path="/about" component={AboutPage} />
+        <Route
+          path="/about/:section?"
+          render={parseRoute(({ params }) => {
+            return <AboutPage section={params.section} />
+          })}
+        />
         <Route exact path="/roadmap" component={RoadmapPage} />
         <Route exact path="/pricing" component={PricingPage} />
 

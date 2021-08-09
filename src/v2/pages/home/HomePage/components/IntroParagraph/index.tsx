@@ -7,9 +7,10 @@ import { P } from 'v2/pages/home/components/Common'
 import { FONT_SIZES } from 'v2/styles/text'
 import { calculateAge } from 'v2/util/calculateAge'
 
-const Container = styled(Box).attrs({ pb: 7 })`
+const Container = styled(Box).attrs({ pb: 7, mx: 'auto' })`
   display: flex;
   flex-direction: row;
+  max-width: 1300px;
 `
 
 export const IntroParagraph: React.FC = () => {

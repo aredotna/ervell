@@ -83,11 +83,17 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
             <Icons name="ArenaMark" mb={6} size="1.5em" color="gray.light" />
             <Text mb={6}>
               <A href="/about">About &amp; Features</A>
-              <A href="/pricing">Pricing &amp; Education Plans</A>
-              <A href="/roadmap">Roadmap</A>
-              <A href="/about">Writing &amp; Events</A>
-              <A href="/about">Team</A>
-              <A href="/about">Help</A>
+              <A
+                href={`/about/${encodeURIComponent('Pricing &amp; Features')}`}
+              >
+                Pricing &amp; Education Plans
+              </A>
+              <A href={`/about/Roadmap`}>Roadmap</A>
+              <A href={`/about/Editorial`}>Editorial &amp; Events</A>
+              <A href={`/about/Team`}>Team</A>
+              <A href={`/about/${encodeURIComponent('Contact &amp; Support')}`}>
+                Help
+              </A>
             </Text>
             <Text mb={6}>
               <A href={ITUNES_LINK}>Download iOS App</A>

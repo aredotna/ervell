@@ -81,11 +81,17 @@ const ScrollingProvider = ({
 
   const scrollTo = useCallback(
     (section: string) => {
+      console.log('section', section, REFS)
       const sectionRef = REFS[section]
+
+      console.log({ sectionRef })
 
       if (!sectionRef) return console.warn('Section ID not recognized!') // eslint-disable-line
 
       const top = sectionRef.current.offsetTop + offset
+
+      console.log({ top })
+
       window.scrollTo({
         top,
         behavior: scrollBehavior,
