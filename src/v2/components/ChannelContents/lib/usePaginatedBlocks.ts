@@ -63,6 +63,7 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
     },
   })
   const blocks = unsafeData?.channel?.blokks ?? []
+  const contentCount = unsafeData?.channel?.counts?.contents ?? 0
 
   /**
    * A function that allows you to directly modify the channel's "blokks"
@@ -184,40 +185,44 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
   const moveBlock = useCallback(
     ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
       updateBlocks((b, { readField }) => {
-        const channelContentsCountFragment = client.readFragment<
-          ChannelContentsCount
-        >({
+        // Read the current contentCount of the channel instead
+        // of passing it in as a useCallback dependency to reduce
+        // re renders
+        const count = client.readFragment<ChannelContentsCount>({
           fragment: channelContentsCount,
           id: client.cache.identify({
             id: args.current.channelId,
             __typename: 'Channel',
           }),
-        })
+        })?.counts?.contents
 
-        const contentsCount = channelContentsCountFragment?.counts?.contents
-
-        if (newIndex === -1) {
-          // Moving to the "bottom"
-          newIndex = contentsCount - 1
-        }
-
-        if (!contentsCount) {
+        // Early exit if we can't read the count
+        if (!count) {
           return b
         }
 
-        const block = b[oldIndex]
+        // Moving to the "bottom". Convert a -1 newIndex value to a
+        // synonymous "count - 1" value that the mutation can understand
+        if (newIndex === -1) {
+          newIndex = count - 1
+        }
 
+        // Get the block reference in the cache. Early exit if we can't
+        // read it
+        const block = b[oldIndex]
         if (!block) {
           return b
         }
 
+        // Get the id and typename from the cache. Early exit if we
+        // cant read any of those values
         const id = readField('id', block) || undefined
         const typename = readField('__typename', block) || undefined
-
         if (id === undefined || typename === undefined) {
           return b
         }
 
+        // Fire the mutation
         client.mutate<
           moveConnectableMutationData,
           moveConnectableMutationVariables
@@ -231,14 +236,14 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
                 typename as ChannelContentsConnectable['__typename']
               ),
             },
-            insert_at: contentsCount - newIndex,
+            insert_at: count - newIndex,
           },
         })
 
+        // Return the updated cache of the blocks array
         const newBlocks = [...b]
         const [removed] = newBlocks.splice(oldIndex, 1)
         newBlocks.splice(newIndex, 0, removed)
-
         return newBlocks
       })
     },
@@ -264,6 +269,7 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
 
   return {
     blocks,
+    contentCount,
     getPage,
     hasQueriedPage,
     getPageFromIndex,

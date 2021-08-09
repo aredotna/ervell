@@ -446,10 +446,16 @@ export interface ChannelBlokksPaginated_channel_blokks_Channel {
 
 export type ChannelBlokksPaginated_channel_blokks = ChannelBlokksPaginated_channel_blokks_Attachment | ChannelBlokksPaginated_channel_blokks_Embed | ChannelBlokksPaginated_channel_blokks_Image | ChannelBlokksPaginated_channel_blokks_Link | ChannelBlokksPaginated_channel_blokks_PendingBlock | ChannelBlokksPaginated_channel_blokks_Text | ChannelBlokksPaginated_channel_blokks_Channel;
 
+export interface ChannelBlokksPaginated_channel_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+}
+
 export interface ChannelBlokksPaginated_channel {
   __typename: "Channel";
   id: number;
   blokks: ChannelBlokksPaginated_channel_blokks[] | null;
+  counts: ChannelBlokksPaginated_channel_counts | null;
 }
 
 export interface ChannelBlokksPaginated {

@@ -146,6 +146,10 @@ export function getCache({
 
       Channel: {
         fields: {
+          filter: {
+            keyArgs: everythingExcept('page', 'per'),
+            merge: paginationWithPageAndPer,
+          },
           blokks: {
             keyArgs: everythingExcept('page', 'per'),
             merge: paginationWithPageAndPer,

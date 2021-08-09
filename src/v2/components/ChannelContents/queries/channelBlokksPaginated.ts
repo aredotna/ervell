@@ -13,6 +13,9 @@ export default gql`
         __typename
         ...ChannelContentsConnectable
       }
+      counts {
+        contents
+      }
     }
   }
   ${channelContentsConnectableFragment}

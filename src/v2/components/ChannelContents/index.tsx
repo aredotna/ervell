@@ -32,6 +32,7 @@ const ChannelContents: React.FC<Props> = memo(
       moveBlock,
       removeBlock,
       addBlock,
+      contentCount,
     } = usePaginatedBlocks({
       channelId: channel.id,
     })
@@ -50,10 +51,7 @@ const ChannelContents: React.FC<Props> = memo(
       // eslint-disable-next-line react-hooks/rules-of-hooks
       usePusher({
         channel: pusherChannel,
-        // onCreated: addBlock,
-        onCreated: () => {
-          console.log('here')
-        },
+        onCreated: addBlock,
         onUpdated: () => {},
         parsePayload: () => {},
       })
@@ -72,7 +70,7 @@ const ChannelContents: React.FC<Props> = memo(
     const lightboxConnectables = []
 
     const blocksJsx: JSX.Element[] = []
-    for (let i = 0; i < Math.max(channel.counts.contents, blocks.length); i++) {
+    for (let i = 0; i < (contentCount || channel.counts.contents); i++) {
       const block = blocks[i]
 
       blocksJsx.push(
