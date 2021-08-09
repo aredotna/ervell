@@ -109,25 +109,25 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
           <ColumnContents>
             <ul>
               <li>
-                <A href="">How it works</A>
+                <A href="/about">How it works</A>
               </li>
               <li>
-                <A href="">Pricing</A>
+                <A href="/pricing">Pricing</A>
               </li>
               <li>
-                <A href="">Education</A>
+                <A href="/education">Education</A>
               </li>
               <li>
-                <A href="">Team</A>
+                <A href={`/about/Team`}>Team</A>
               </li>
-              <li>
+              {/* <li>
                 <A href="">Business model</A>
+              </li> */}
+              <li>
+                <A href={`/about/Roadmap`}>Roadmap</A>
               </li>
               <li>
-                <A href="">Roadmap</A>
-              </li>
-              <li>
-                <A href="">Changelog</A>
+                <A href={`/about/Roadmap`}>Changelog</A>
               </li>
             </ul>
           </ColumnContents>
@@ -143,17 +143,19 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
                 <A href={ANDROID_LINK}>Android App</A>
               </li>
               <li>
-                <A href="">Browser extensions</A>
+                <A href={`/about/${encodeURIComponent('Extended Are.na')}`}>
+                  Browser extensions
+                </A>
               </li>
               <li>
-                <A href="">API</A>
+                <A href="https://dev.are.na">API</A>
               </li>
               <li>
-                <A href="">Experiments</A>
+                <A href="/experiments">Experiments</A>
               </li>
-              <li>
+              {/* <li>
                 <A href="">Community tools</A>
-              </li>
+              </li> */}
             </ul>
           </ColumnContents>
         </Column>
@@ -165,10 +167,10 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
                 <A href="/blog">Blog</A>
               </li>
               <li>
-                <A href="">Channel walkthroughs</A>
+                <A href="/about/Editorial">Channel walkthroughs</A>
               </li>
               <li>
-                <A href="">Annual books</A>
+                <A href="/about/Editorial">Annual books</A>
               </li>
             </ul>
           </ColumnContents>
@@ -178,7 +180,11 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
           <ColumnContents>
             <ul>
               <li>
-                <A href="">Contact &amp; Help</A>
+                <A
+                  href={`/about/${encodeURIComponent('Contact &amp; Support')}`}
+                >
+                  Contact &amp; Help
+                </A>
               </li>
               <li>
                 <A href="/community-guidelines">Community Guidelines</A>
@@ -207,16 +213,16 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
                   <A href={`/${slug}`}>Profile</A>
                 </li>
                 <li>
-                  <A href="">Feed</A>
+                  <A href={`/feed`}>Feed</A>
                 </li>
                 <li>
-                  <A href="">Settings</A>
+                  <A href="/settings">Settings</A>
                 </li>
                 <li>
-                  <A href="">Billing</A>
+                  <A href="/settings/billing">Billing</A>
                 </li>
                 <li>
-                  <A href="">Tools</A>
+                  <A href="/tools">Tools</A>
                 </li>
               </ul>
             </ColumnContents>
