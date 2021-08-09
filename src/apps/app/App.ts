@@ -16,8 +16,10 @@ const middlewareStack = [apolloMiddleware]
 const resolve = [
   ...middlewareStack,
   (req, res, next) => {
+    const isLoggedIn = !!req.user?.id
+
     req.apollo
-      .render(withStaticRouter(Routes), null, { mode: 'page' })
+      .render(withStaticRouter(Routes), { isLoggedIn }, { mode: 'page' })
       .then(apolloRes => pageResolver({ bundleName: 'app', apolloRes, res }))
       .catch(err => {
         const STATUS_CODE = getFirstStatusCode(err)

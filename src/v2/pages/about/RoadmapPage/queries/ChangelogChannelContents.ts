@@ -5,7 +5,7 @@ export const ChangelogChannelContents = gql`
     channel(id: $id) {
       __typename
       id
-      added_to_at(format: "%B %d, %Y")
+      added_to_at(relative: true)
       href
       blokks(per: 4, sort_by: POSITION, direction: DESC) {
         __typename
