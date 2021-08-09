@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Carousel from 'v2/components/Carousel'
 import Text from 'v2/components/UI/Text/index'
+import { FONT_SIZES } from 'v2/styles/text'
 import slides from './slides.js'
 
 const MOBILE_BREAKPOINT = 1024
@@ -26,7 +27,7 @@ const Inner = styled.div`
 `
 
 const Copy = styled(Text)`
-  font-size: ${x => x.theme.fontSizesIndexed.base};
+  font-size: ${FONT_SIZES.home.md};
   width: 70%;
   line-height: 1.5;
   text-align: center;
@@ -37,7 +38,8 @@ const Copy = styled(Text)`
 `
 
 const Headline = styled(Text).attrs({
-  f: 6,
+  f: FONT_SIZES.home.lg,
+  color: 'gray.block',
 })`
   font-weight: normal;
   margin-bottom: 1rem;

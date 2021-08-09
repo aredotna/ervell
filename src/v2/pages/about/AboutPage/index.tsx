@@ -180,11 +180,41 @@ export const AboutPage: React.FC = () => {
           </MaxBoxBottom>
         </Section>
 
-        <Section id={'Contact'}>
+        <Section id={'Contact &amp; Support'}>
           <MaxBoxBottom>
             <Box textAlign="center" mb={8}>
-              <Header>Contact</Header>
+              <Header>Contact &amp; Support</Header>
             </Box>
+
+            <P>
+              Find questions and answers in our{' '}
+              <a href="https://support.are.na">Help Center</a>.
+            </P>
+
+            <P>
+              For support questions, email us at{' '}
+              <a href="mailto:help@are.na">help@are.na</a>.<br />
+              Find us on <a href="https://twitter.com/aredotna">Twitter</a>.
+            </P>
+
+            <P>
+              For merch, visit our <a href="https://store.are.na">Store</a>.
+            </P>
+
+            <P>
+              <a href="https://are.na/community-guidelines">
+                Community Guidelines
+              </a>
+              <br />
+              <a href="https://are.na/terms">Terms of Use</a>
+              <br />
+              <a href="https://are.na/privacy">Privacy Policy</a>
+              <br />
+              <a href="https://www.are.na/share/bEAsbbB">Press Kit</a>
+              <br />
+              <a href="https://are.na/terms">DMCA</a>
+              <br />
+            </P>
           </MaxBoxBottom>
         </Section>
 

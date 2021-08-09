@@ -12,7 +12,8 @@ export const TheSecret: React.FC = () => {
         </Box>
         <Box>
           A rabbit hole is not a distraction. A rabbit hole is your brain trying
-          to tell you to pay attention to something you’re curious about
+          to tell you to pay attention to something you’re curious about. Ignore
+          algorithmic rabbit holes.
         </Box>
         <Box my={6} mt={9}>
           <strong>If you see something, save something</strong>

@@ -19,6 +19,10 @@ const Container = styled(Box).attrs({
   px: 7,
 })``
 
+const TopContainer = styled(Container).attrs({
+  pt: 4,
+})``
+
 const IconContainer = styled(Box).attrs({ py: 6, px: 6 })``
 
 const TeamAndSecretContainer = styled(Container).attrs({
@@ -32,13 +36,13 @@ const HomePage: React.FC = () => {
         <Icons name="ArenaMark" size="1.5em" color="gray.block" />
       </IconContainer>
 
-      <Container>
+      <TopContainer>
         <TopLogin />
         {/* <DesireLine /> */}
-        <Box my={6} pt={9}>
+        <Box mt={3} mb={6}>
           <IntroParagraph />
         </Box>
-      </Container>
+      </TopContainer>
 
       <Box my={7}>
         <P f={4} pl={7}>

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
+import { FONT_SIZES } from 'v2/styles/text'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,
@@ -19,7 +20,7 @@ const Subheadline = styled(Text).attrs({
 `
 
 const Description = styled(Text).attrs({
-  fontSize: 4,
+  fontSize: FONT_SIZES.home.lg,
   lineHeight: 2,
   align: 'center',
   my: 6,
@@ -35,10 +36,11 @@ const Description = styled(Text).attrs({
 `
 
 export const P = styled(Text).attrs({
-  f: 4,
   color: 'gray.bold',
   lineHeight: 1.5,
   mb: 7,
+  f: FONT_SIZES.home.lg,
+  boldLinks: true,
 })`
   text-align: left;
 

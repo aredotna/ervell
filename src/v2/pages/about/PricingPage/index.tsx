@@ -107,7 +107,9 @@ const PricingPage: React.FC = () => {
             </CenterBox>
           </CTA>
 
-          <PricingLogos />
+          <Box px={9} mt={9} mb={6} pb={9}>
+            <PricingLogos />
+          </Box>
 
           <Box mt={9} mb={6} pb={9} maxWidth="470px" mx="auto">
             <Subheadline color="gray.bold" mb={8} textAlign="center">

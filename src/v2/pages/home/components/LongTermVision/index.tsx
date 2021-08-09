@@ -23,7 +23,7 @@ const Top = styled(Box).attrs({
 `
 
 const TopLabel = styled(Text).attrs({
-  f: 3,
+  f: 4,
   color: 'gray.bold',
 })``
 

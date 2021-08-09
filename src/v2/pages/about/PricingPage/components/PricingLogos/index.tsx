@@ -21,7 +21,7 @@ const Logos = styled.img`
 
 export const PricingLogos: React.FC = () => {
   return (
-    <LogoContainer px={9} mt={9} mb={6} pb={9} maxWidth="100%">
+    <LogoContainer mt={9} mb={6} pb={9} maxWidth="100%">
       <Text color="gray.bold" f={4} mb={3}>
         Are.na is used by people and teams at:
       </Text>

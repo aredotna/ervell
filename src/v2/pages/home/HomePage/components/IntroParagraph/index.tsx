@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Button from 'v2/components/UI/GenericButton'
 import { P } from 'v2/pages/home/components/Common'
+import { FONT_SIZES } from 'v2/styles/text'
 import { calculateAge } from 'v2/util/calculateAge'
 
 const Container = styled(Box).attrs({ pb: 7 })`
@@ -18,9 +19,9 @@ export const IntroParagraph: React.FC = () => {
     <Container>
       <Box flex={1} pr={8}>
         <P>
-          <strong>
+          <em>
             Are.na is a platform for connecting ideas and building knowledge.
-          </strong>
+          </em>
         </P>
         <P>
           Are.na is: <br />
@@ -28,25 +29,28 @@ export const IntroParagraph: React.FC = () => {
           important to you <br />
           2. a toolkit for assembling new worlds from the scraps of the old
         </P>
-        <P>
-          Students, hobbyists and what we call connected knowledge collectors
-          have been the core of our community for{' '}
-          <strong>
-            {years} years and {days} days
-          </strong>
-          .
-        </P>
       </Box>
 
       <Box flex={1}>
+        <P>
+          Students, hobbyists and what we call connected knowledge collectors
+          have been the core of our community for {years} years and {days} days
+          .
+        </P>
         <P>
           People describe Are.na as a garden of ideas, or Tumblr meets
           Wikipedia. If this speaks to you, try it now:
         </P>
 
-        <Box display="flex" mt={4}>
+        <Box display="flex" mt={4} justifyContent="space-between">
           <Box pr={4}>
-            <Button color="state.premium" f={3} minWidth="160px">
+            <Button
+              f={FONT_SIZES.home.lg}
+              minWidth="160px"
+              borderWidth={'1px'}
+              px={9}
+              href="/sign_up/premium"
+            >
               Premium
             </Button>
             <P mt={5}>
@@ -60,7 +64,13 @@ export const IntroParagraph: React.FC = () => {
           </Box>
 
           <Box pl={4}>
-            <Button color="gray.block" f={3} minWidth="160px">
+            <Button
+              color="gray.block"
+              f={FONT_SIZES.home.lg}
+              minWidth="160px"
+              px={9}
+              href="/sign_up"
+            >
               Free
             </Button>
             <P mt={5}>
