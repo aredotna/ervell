@@ -8,7 +8,6 @@ import {
 import channelBlokksPaginatedQuery, {
   channelBlokksPaginatedPerPage,
 } from '../queries/channelBlokksPaginated'
-import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 import {
   moveConnectableMutationVariables,
   moveConnectableMutation as moveConnectableMutationData,
@@ -17,22 +16,7 @@ import moveConnectableMutation from 'v2/components/ChannelContents/mutations/mov
 import { ChannelContentsCount } from '__generated__/ChannelContentsCount'
 import channelContentsCount from '../fragments/channelContentsCount'
 import { Modifier } from '@apollo/client/cache/core/types/common'
-
-/**
- * Resolves a block's type to a connectable type.
- * If a block is a channel the connectable type is
- * BaseConnectableTypeEnum.CHANNEL. Otherwise,
- * BaseConnectableTypeEnum.BLOCK
- */
-function getConnectableType(
-  blockType: ChannelContentsConnectable['__typename']
-): BaseConnectableTypeEnum {
-  if (blockType === 'Channel') {
-    return BaseConnectableTypeEnum.CHANNEL
-  }
-
-  return BaseConnectableTypeEnum.BLOCK
-}
+import { getConnectableType } from './getConnectableType'
 
 /**
  * A hook to easily work with a collection of blocks from a channel.

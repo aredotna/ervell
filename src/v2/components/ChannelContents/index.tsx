@@ -1,16 +1,23 @@
 import React, { memo, useEffect, useCallback } from 'react'
-
 import { SortableContainer } from 'react-sortable-hoc'
+import { useApolloClient } from '@apollo/client'
 
 import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import {
+  ConnectableBlokk,
+  ConnectableBlokkVariables,
+} from '__generated__/ConnectableBlokk'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
+import { usePusher } from 'v2/hooks/usePusher'
+
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
-
-import { usePusher } from 'v2/hooks/usePusher'
+import { getConnectableType } from './lib/getConnectableType'
+import connectableBlokk from './queries/connectableBlokk'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -47,15 +54,34 @@ const ChannelContents: React.FC<Props> = memo(
       [getPage, getPageFromIndex, hasQueriedPage]
     )
 
-    if (pusherChannel) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      usePusher({
-        channel: pusherChannel,
-        onCreated: addBlock,
-        onUpdated: () => {},
-        parsePayload: () => {},
-      })
-    }
+    const parsePayload = useCallback(
+      ({ id }) => ({
+        id: id.toString(),
+      }),
+      []
+    )
+
+    const client = useApolloClient()
+
+    const updateConnectable = useCallback(
+      ({ id }: { id: string | number }) => {
+        client.query<ConnectableBlokk, ConnectableBlokkVariables>({
+          query: connectableBlokk,
+          variables: {
+            id: id.toString(),
+          },
+          fetchPolicy: 'network-only',
+        })
+      },
+      [client]
+    )
+
+    usePusher({
+      channel: pusherChannel,
+      onCreated: addBlock,
+      onUpdated: updateConnectable,
+      parsePayload: parsePayload,
+    })
 
     useEffect(() => {
       return () => {
@@ -67,7 +93,11 @@ const ChannelContents: React.FC<Props> = memo(
     }, [pusherChannel, socket])
 
     // For the lightbox, we need to filter out channels
-    const lightboxConnectables = []
+    const lightboxConnectables = blocks.filter(
+      block =>
+        !!block &&
+        getConnectableType(block.__typename) === BaseConnectableTypeEnum.BLOCK
+    )
 
     const blocksJsx: JSX.Element[] = []
     for (let i = 0; i < (contentCount || channel.counts.contents); i++) {
