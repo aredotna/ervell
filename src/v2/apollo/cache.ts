@@ -103,9 +103,10 @@ const paginationWithPageAndPer: FieldMergeFunction<any, any> = (
     if (isInIncomingWindow) {
       const incomingItem = incoming[i - incomingStartingIndex]
 
-      // For some reason, are.na sometimes doesn't return the amount of items
-      // from the per argument. Set to null instead of undefined so that
-      // the undefined item doesn't get squashed.
+      // If the incomingItem is undefined, this probably means
+      // that the incoming data is private to the current user.
+      // Apollo cache squashes undefined elements in an array,
+      // so set them to null instead.
       if (incomingItem === undefined) {
         newData[i] = null
       } else {

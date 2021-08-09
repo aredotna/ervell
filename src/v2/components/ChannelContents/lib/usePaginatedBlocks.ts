@@ -1,29 +1,51 @@
-import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
-import { useRef, useCallback } from 'react'
 import { Reference, StoreObject, useQuery } from '@apollo/client'
+import { Modifier } from '@apollo/client/cache/core/types/common'
+import { useRef, useCallback } from 'react'
+
+import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
+import { ChannelContentsCount } from '__generated__/ChannelContentsCount'
 import {
   ChannelBlokksPaginated,
   ChannelBlokksPaginatedVariables,
+  ChannelBlokksPaginated_channel_blokks,
 } from '__generated__/ChannelBlokksPaginated'
-import channelBlokksPaginatedQuery, {
-  channelBlokksPaginatedPerPage,
-} from '../queries/channelBlokksPaginated'
 import {
   moveConnectableMutationVariables,
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
-import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
-import { ChannelContentsCount } from '__generated__/ChannelContentsCount'
+
+import moveConnectableMutation from '../mutations/moveConnectable'
 import channelContentsCount from '../fragments/channelContentsCount'
-import { Modifier } from '@apollo/client/cache/core/types/common'
+import channelBlokksPaginatedQuery, {
+  channelBlokksPaginatedPerPage,
+} from '../queries/channelBlokksPaginated'
 import { getConnectableType } from './getConnectableType'
+
+type UsePaginatedBlocksApi = {
+  blocks: ChannelBlokksPaginated_channel_blokks[]
+  contentCount: number
+  getPage: (pageNumber: number) => void
+  hasQueriedPage: (pageNumber: number) => boolean
+  getPageFromIndex: (index: number) => number
+  removeBlock: (args: { id: number; type: string }) => void
+  moveBlock: (args: { oldIndex: number; newIndex: number }) => void
+  addBlock: () => void
+}
 
 /**
  * A hook to easily work with a collection of blocks from a channel.
  * Returns the channel's blocks as well as utility methods to fetch more,
  * move blocks around, add blocks, and delete blocks.
  */
-export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
+export const usePaginatedBlocks = (unsafeArgs: {
+  channelId: number
+}): UsePaginatedBlocksApi => {
+  /**
+   * =============================
+   * "Private" fields of this hook
+   * =============================
+   */
+
   /**
    * This hook doesn't support updating the intiially passed-in args in any way.
    * So to make that clear we are creating a ref of the initial argsObject and
@@ -46,16 +68,16 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
       per: channelBlokksPaginatedPerPage,
     },
   })
-  const blocks = unsafeData?.channel?.blokks ?? []
-  const contentCount = unsafeData?.channel?.counts?.contents ?? 0
 
   /**
    * A function that allows you to directly modify the channel's "blokks"
    * cache value. If the length of blokks changes, the channel.counts.contents
    * field will be updated to the new value.
    */
-  const updateBlocks = useCallback(
-    (updateBlocksFn: Modifier<Array<StoreObject | Reference>>) => {
+  const updateBlocks: (
+    updateBlocksFn: Modifier<Array<StoreObject | Reference>>
+  ) => void = useCallback(
+    updateBlocksFn => {
       // The normalized cache name of the channel
       const id = client.cache.identify({
         __typename: 'Channel',
@@ -110,10 +132,30 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
   const queriedPageNumbersRef = useRef(new Set<number>())
 
   /**
+   * =====================
+   * The hook's public api
+   * =====================
+   */
+
+  /**
+   * An array of blocks that apollo currently has cached
+   */
+  const blocks: UsePaginatedBlocksApi['blocks'] =
+    unsafeData?.channel?.blokks ?? []
+
+  /**
+   * The total number of blocks that a channel has. Note that this
+   * could be different than the current length of the "blocks" array
+   * due to not downloading all the block information from a channel
+   */
+  const contentCount: UsePaginatedBlocksApi['contentCount'] =
+    unsafeData?.channel?.counts?.contents ?? 0
+
+  /**
    * Gets block data from a given page
    */
-  const getPage = useCallback(
-    (pageNumber: number) => {
+  const getPage: UsePaginatedBlocksApi['getPage'] = useCallback(
+    pageNumber => {
       if (queriedPageNumbersRef.current.has(pageNumber)) {
         return
       }
@@ -132,23 +174,29 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
   /**
    * Returns if a given page has already been queried for or not
    */
-  const hasQueriedPage = useCallback((pageNember: number): boolean => {
-    return queriedPageNumbersRef.current.has(pageNember)
-  }, [])
+  const hasQueriedPage: UsePaginatedBlocksApi['hasQueriedPage'] = useCallback(
+    pageNember => {
+      return queriedPageNumbersRef.current.has(pageNember)
+    },
+    []
+  )
 
   /**
    * Returns the page number that a block's index would be in
    */
-  const getPageFromIndex = useCallback((index: number): number => {
-    return Math.floor(index / channelBlokksPaginatedPerPage) + 1
-  }, [])
+  const getPageFromIndex: UsePaginatedBlocksApi['getPageFromIndex'] = useCallback(
+    index => {
+      return Math.floor(index / channelBlokksPaginatedPerPage) + 1
+    },
+    []
+  )
 
   /**
    * Removes a block from a channel ONLY on the frontend. Does not do any
    * actual mutation/network request.
    */
-  const removeBlock = useCallback(
-    ({ id, type }: { id: number; type: string }) => {
+  const removeBlock: UsePaginatedBlocksApi['removeBlock'] = useCallback(
+    ({ id, type }) => {
       updateBlocks((b, { readField }) => {
         return b.filter(
           block =>
@@ -166,8 +214,8 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
    * Moves a block from an old index to a new index and triggers an
    * apollo mutation
    */
-  const moveBlock = useCallback(
-    ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+  const moveBlock: UsePaginatedBlocksApi['moveBlock'] = useCallback(
+    ({ oldIndex, newIndex }) => {
       updateBlocks((b, { readField }) => {
         // Read the current contentCount of the channel instead
         // of passing it in as a useCallback dependency to reduce
@@ -238,7 +286,7 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
    * Adds a null block placeholder to the begining of the blocks cache
    * and fires a query to get the block's actua data
    */
-  const addBlock = useCallback(() => {
+  const addBlock: UsePaginatedBlocksApi['addBlock'] = useCallback(() => {
     updateBlocks(b => {
       return [null, ...b]
     })
@@ -251,7 +299,13 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
     })
   }, [fetchMore, updateBlocks])
 
-  return {
+  /**
+   * ==============================
+   * Build and return the final api
+   * ==============================
+   */
+
+  const api: UsePaginatedBlocksApi = {
     blocks,
     contentCount,
     getPage,
@@ -261,4 +315,6 @@ export const usePaginatedBlocks = (unsafeArgs: { channelId: number }) => {
     removeBlock,
     addBlock,
   }
+
+  return api
 }
