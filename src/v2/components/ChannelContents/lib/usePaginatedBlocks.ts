@@ -236,27 +236,11 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
   const moveBlock: UsePaginatedBlocksApi['moveBlock'] = useCallback(
     ({ oldIndex, newIndex }) => {
-      updateCache(({ blockArgs: [prevBlocks, { readField }] }) => {
-        // Read the current contentCount of the channel instead
-        // of passing it in as a useCallback dependency to reduce
-        // re renders
-        const count = client.readFragment<ChannelContentsCount>({
-          fragment: channelContentsCount,
-          id: client.cache.identify({
-            id: args.current.channelId,
-            __typename: 'Channel',
-          }),
-        })?.counts?.contents
-
-        // Early exit if we can't read the count
-        if (!count) {
-          return null
-        }
-
+      updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
         // Moving to the "bottom". Convert a -1 newIndex value to a
         // synonymous "count - 1" value that the mutation can understand
         if (newIndex === -1) {
-          newIndex = count - 1
+          newIndex = prevCount - 1
         }
 
         // Get the block reference in the cache. Early exit if we can't
@@ -288,7 +272,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
                 typename as ChannelContentsConnectable['__typename']
               ),
             },
-            insert_at: count - newIndex,
+            insert_at: prevCount - newIndex,
           },
         })
 
