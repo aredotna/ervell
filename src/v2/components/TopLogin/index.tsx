@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
-import Button from 'v2/components/UI/GenericButton'
 import constants from 'v2/styles/constants'
+import { TopSignupLoginButtons } from '../TopSignupLoginButtons'
 
 const Container = styled(Box).attrs({ py: 6, px: 6 })`
   display: flex;
@@ -21,14 +21,7 @@ export const TopLogin: React.FC = () => {
     <Container>
       <Box flex={1}></Box>
 
-      <Box>
-        <Button f={1} mr={6} color="gray.block">
-          Login
-        </Button>
-        <Button f={1} color="gray.block">
-          Sign Up
-        </Button>
-      </Box>
+      <TopSignupLoginButtons />
     </Container>
   )
 }
