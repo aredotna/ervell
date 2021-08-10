@@ -71,7 +71,7 @@
     "uglify-js": "^2.6.0"
   },
   "dependencies": {
-    "@apollo/client": "3.3.21",
+    "@apollo/client": "^3.4.7",
     "@artsy/express-reloadable": "^1.4.0",
     "@auth0/s3": "^1.0.0",
     "@babel/core": "^7.0.0",
