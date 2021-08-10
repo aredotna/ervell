@@ -74,19 +74,34 @@ export const usePaginatedBlocks = (unsafeArgs: {
    * cache value. If the length of blokks changes, the channel.counts.contents
    * field will be updated to the new value.
    */
-  const updateBlocks: (
-    updateBlocksFn: Modifier<Array<StoreObject | Reference>>
+  const updateCache: (
+    updater: (args: {
+      blockArgs: Parameters<Modifier<Array<StoreObject | Reference>>>
+      prevCount: number
+    }) => {
+      newBlocks?: Array<StoreObject | Reference>
+      newCount?: number
+    } | null
   ) => void = useCallback(
-    updateBlocksFn => {
+    updater => {
       // The normalized cache name of the channel
       const id = client.cache.identify({
         __typename: 'Channel',
         id: args.current.channelId,
       })
 
+      // Read the current contentCount of the channel instead
+      // of passing it in as a useCallback dependency to reduce
+      // re renders
+      const prevCount =
+        client.readFragment<ChannelContentsCount>({
+          fragment: channelContentsCount,
+          id: id,
+        })?.counts?.contents ?? 0
+
       // Values we'll be saving during the first cache.modify call
       let newBlocks: Array<any>
-      let blockLengthDiff = 0
+      let newCount = 0
 
       // This is a dry run of the cache modification that sets the
       // newBlocks and blockLengthDiff. We need to do a dry run
@@ -96,8 +111,13 @@ export const usePaginatedBlocks = (unsafeArgs: {
         id: id,
         fields: {
           blokks(b, options) {
-            newBlocks = updateBlocksFn(b, options)
-            blockLengthDiff = newBlocks.length - b.length
+            const res = updater({
+              blockArgs: [b, options],
+              prevCount: prevCount,
+            })
+            newBlocks = res?.newBlocks ?? b
+            newCount = res?.newCount ?? prevCount
+
             return b
           },
         },
@@ -111,13 +131,9 @@ export const usePaginatedBlocks = (unsafeArgs: {
             return newBlocks || b
           },
           counts(countsCache) {
-            if (blockLengthDiff !== 0) {
-              return {
-                ...countsCache,
-                contents: countsCache.contents + blockLengthDiff,
-              }
-            } else {
-              return countsCache
+            return {
+              ...countsCache,
+              contents: newCount,
             }
           },
         },
@@ -197,17 +213,21 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
   const removeBlock: UsePaginatedBlocksApi['removeBlock'] = useCallback(
     ({ id, type }) => {
-      updateBlocks((b, { readField }) => {
-        return b.filter(
+      updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
+        const newBlocks = prevBlocks.filter(
           block =>
             !(
               readField('id', block) === id &&
               readField('__typename', block) === type
             )
         )
+        return {
+          newBlocks: newBlocks,
+          newCount: prevCount + (newBlocks.length - prevBlocks.length),
+        }
       })
     },
-    [updateBlocks]
+    [updateCache]
   )
 
   /**
@@ -216,7 +236,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
   const moveBlock: UsePaginatedBlocksApi['moveBlock'] = useCallback(
     ({ oldIndex, newIndex }) => {
-      updateBlocks((b, { readField }) => {
+      updateCache(({ blockArgs: [prevBlocks, { readField }] }) => {
         // Read the current contentCount of the channel instead
         // of passing it in as a useCallback dependency to reduce
         // re renders
@@ -230,7 +250,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
 
         // Early exit if we can't read the count
         if (!count) {
-          return b
+          return null
         }
 
         // Moving to the "bottom". Convert a -1 newIndex value to a
@@ -241,9 +261,9 @@ export const usePaginatedBlocks = (unsafeArgs: {
 
         // Get the block reference in the cache. Early exit if we can't
         // read it
-        const block = b[oldIndex]
+        const block = prevBlocks[oldIndex]
         if (!block) {
-          return b
+          return null
         }
 
         // Get the id and typename from the cache. Early exit if we
@@ -251,7 +271,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         const id = readField('id', block) || undefined
         const typename = readField('__typename', block) || undefined
         if (id === undefined || typename === undefined) {
-          return b
+          return null
         }
 
         // Fire the mutation
@@ -273,13 +293,16 @@ export const usePaginatedBlocks = (unsafeArgs: {
         })
 
         // Return the updated cache of the blocks array
-        const newBlocks = [...b]
+        const newBlocks: typeof prevBlocks = []
+        for (let i = 0; i < Math.max(prevBlocks.length, newIndex + 1); i++) {
+          newBlocks.push(prevBlocks[i] ?? null)
+        }
         const [removed] = newBlocks.splice(oldIndex, 1)
         newBlocks.splice(newIndex, 0, removed)
-        return newBlocks
+        return { newBlocks }
       })
     },
-    [client, updateBlocks]
+    [client, updateCache]
   )
 
   /**
@@ -287,8 +310,8 @@ export const usePaginatedBlocks = (unsafeArgs: {
    * and fires a query to get the block's actua data
    */
   const addBlock: UsePaginatedBlocksApi['addBlock'] = useCallback(() => {
-    updateBlocks(b => {
-      return [null, ...b]
+    updateCache(({ blockArgs: [prevBlocks], prevCount }) => {
+      return { newBlocks: [null, ...prevBlocks], newCount: prevCount + 1 }
     })
 
     fetchMore({
@@ -297,7 +320,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         per: 1,
       },
     })
-  }, [fetchMore, updateBlocks])
+  }, [fetchMore, updateCache])
 
   /**
    * ==============================
