@@ -172,10 +172,6 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
   const getPage: UsePaginatedBlocksApi['getPage'] = useCallback(
     pageNumber => {
-      if (queriedPageNumbersRef.current.has(pageNumber)) {
-        return
-      }
-
       queriedPageNumbersRef.current.add(pageNumber)
 
       fetchMore({
@@ -259,22 +255,39 @@ export const usePaginatedBlocks = (unsafeArgs: {
         }
 
         // Fire the mutation
-        client.mutate<
-          moveConnectableMutationData,
-          moveConnectableMutationVariables
-        >({
-          mutation: moveConnectableMutation,
-          variables: {
-            channel_id: args.current.channelId.toString(),
-            connectable: {
-              id: id.toString(),
-              type: getConnectableType(
-                typename as ChannelContentsConnectable['__typename']
-              ),
+        client
+          .mutate<
+            moveConnectableMutationData,
+            moveConnectableMutationVariables
+          >({
+            mutation: moveConnectableMutation,
+            variables: {
+              channel_id: args.current.channelId.toString(),
+              connectable: {
+                id: id.toString(),
+                type: getConnectableType(
+                  typename as ChannelContentsConnectable['__typename']
+                ),
+              },
+              insert_at: prevCount - newIndex,
             },
-            insert_at: prevCount - newIndex,
-          },
-        })
+          })
+          .then(() => {
+            // After the mutation we need to revalidate pages that have
+            // already been queried, if a block moves into the page
+            // that previously was in a page that wasn't loaded.
+            // This is because we try to not call getPage if hasQueriedPage
+            // returns true, and if an unloaded block moves into the page
+            // then there will be no opportunity for that block to ever load.
+            const oldPage = getPageFromIndex(oldIndex)
+            const newPage = getPageFromIndex(newIndex)
+            const dir = newPage > oldPage ? 1 : -1
+            for (let page = oldPage; page !== newPage; page += dir) {
+              if (hasQueriedPage(page) && !hasQueriedPage(page + dir)) {
+                getPage(page)
+              }
+            }
+          })
 
         // Return the updated cache of the blocks array
         const newBlocks: typeof prevBlocks = []
@@ -286,7 +299,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         return { newBlocks }
       })
     },
-    [client, updateCache]
+    [client, getPage, getPageFromIndex, hasQueriedPage, updateCache]
   )
 
   /**
