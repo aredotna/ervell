@@ -36,8 +36,7 @@ export const ChannelContentsWithData: React.FC<Props> = WithIsSpiderRequesting<
     <Query<ChannelContentsWithDataData, ChannelContentsWithDataVariables>
       query={channelContentsWithDataQuery}
       variables={{ id: serverChannel.id.toString() }}
-      ssr={isSpiderRequesting}
-      fetchPolicy="no-cache"
+      ssr={true}
     >
       {({ loading, error, data }) => {
         if (loading) {

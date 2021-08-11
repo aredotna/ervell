@@ -13,6 +13,7 @@ import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { usePusher } from 'v2/hooks/usePusher'
+import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
@@ -29,8 +30,12 @@ interface Props {
   socket?: any
 }
 
-const ChannelContents: React.FC<Props> = memo(
-  ({ channel, pusherChannel, socket, ...rest }) => {
+interface ExtendedProps extends Props {
+  isSpiderRequesting: boolean
+}
+
+const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
+  memo(({ channel, pusherChannel, socket, isSpiderRequesting, ...rest }) => {
     const {
       blocks,
       getPage,
@@ -42,6 +47,7 @@ const ChannelContents: React.FC<Props> = memo(
       contentCount,
     } = usePaginatedBlocks({
       channelId: channel.id,
+      ssr: isSpiderRequesting,
     })
 
     const onItemIntersected = useCallback(
@@ -145,7 +151,7 @@ const ChannelContents: React.FC<Props> = memo(
         </SortableGrid>
       </>
     )
-  }
+  })
 )
 
 export default ChannelContents

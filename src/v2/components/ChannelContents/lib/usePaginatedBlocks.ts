@@ -39,6 +39,7 @@ type UsePaginatedBlocksApi = {
  */
 export const usePaginatedBlocks = (unsafeArgs: {
   channelId: number
+  ssr?: boolean
 }): UsePaginatedBlocksApi => {
   /**
    * =============================
@@ -67,6 +68,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
       page: 1,
       per: channelBlokksPaginatedPerPage,
     },
+    ssr: args.current.ssr,
   })
 
   /**
