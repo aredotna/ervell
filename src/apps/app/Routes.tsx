@@ -39,6 +39,7 @@ import HomePage from 'v2/pages/home/HomePage'
 import { AboutPage } from 'v2/pages/about/AboutPage'
 import RoadmapPage from 'v2/pages/about/RoadmapPage'
 import PricingPage from 'v2/pages/about/PricingPage'
+import { EducationPage } from 'v2/pages/about/EducationPage'
 
 export const Routes = () => {
   const { isLoggedIn } = useLoginStatus()
@@ -88,6 +89,7 @@ export const Routes = () => {
         />
         <Route exact path="/roadmap" component={RoadmapPage} />
         <Route exact path="/pricing" component={PricingPage} />
+        <Route exact path="/education" component={EducationPage} />
 
         {/* Search */}
         <Route

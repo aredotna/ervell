@@ -25,10 +25,5 @@ app
       .render(GroupsPage)
       .then(apollo => res.render('groups', { apollo }))
   )
-  .get('/education', ...middlewareStack, (req, res) => {
-    req.apollo
-      .render(EducationPage)
-      .then(apollo => res.render('education', { apollo }))
-  })
 
 module.exports = app

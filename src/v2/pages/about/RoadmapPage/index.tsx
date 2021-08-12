@@ -46,6 +46,7 @@ const Paragraph = styled(Description).attrs({
   mx: 'auto',
   my: 7,
   align: 'left',
+  color: 'gray.block',
 })`
   max-width: 670px;
   width: 100%;

@@ -19,10 +19,14 @@ const Screenshots = styled(Box).attrs({
   textAlign: 'center',
   alignItems: 'center',
   justifyContent: 'space-around',
-})``
+  maxWidth: '75%',
+})`
+  position: relative;
+`
 
 const Screenshot = styled.img`
-  width: 200px;
+  max-width: 200px;
+  width: 50%;
 `
 
 const AppStoreLinks = styled(Box)`
@@ -48,7 +52,7 @@ export const ExtendedArena: React.FC = () => {
           mr={6}
           px={0}
         >
-          <Icons name="Ios" size="1em" color="gray.block" mr={3} />
+          <Icons name="Apple" size="1em" color="gray.block" mr={3} />
           iOS
         </Button>
         <Button

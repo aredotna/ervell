@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
-import { GenericButtonLink as Button } from 'v2/components/UI/GenericButton'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 
@@ -18,6 +17,8 @@ import ForEducatorsTab from 'v2/pages/about/EducationPage/components/ForEducator
 import ForStudentsTab from 'v2/pages/about/EducationPage/components/ForStudentsTab'
 import UniversityLogoCta from 'v2/pages/about/EducationPage/components/UniversityLogoCta'
 import CaseStudiesCta from 'v2/pages/about/EducationPage/components/CaseStudiesCta'
+import { AboutTopBarLayout } from 'v2/components/UI/Layouts/AboutTopBarLayout'
+import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 
 const Container = styled.div`
   margin-top: 4em;
@@ -33,18 +34,18 @@ const CTA = styled(Box)`
   border-bottom: 1px solid ${x => x.theme.colors.gray.semiLight};
 `
 
-export default class EducationPage extends Component {
-  premiumRef = React.createRef()
+export const EducationPage: React.FC = () => {
+  const premiumRef = React.createRef<any>()
 
-  scrollToPremium = () => {
+  const scrollToPremium = () => {
     window.scroll({
-      top: this.premiumRef.current.offsetTop - 100,
+      top: premiumRef.current.offsetTop - 100,
       behavior: 'smooth',
     })
   }
 
-  render() {
-    return (
+  return (
+    <AboutTopBarLayout>
       <Container>
         <CenterBox mb={8}>
           <Headline>Grow ideas organically</Headline>
@@ -52,24 +53,16 @@ export default class EducationPage extends Component {
             Are.na helps students and educators share knowledge by making
             connections together.
           </Subheadline>
-          <Button
-            f={2}
-            mt={6}
-            onClick={this.scrollToPremium}
-            color="state.premium"
-          >
-            Get 50% off Are.na Premium
-          </Button>
         </CenterBox>
         <Tabs>
           <TabContent label="For Students">
-            <ForStudentsTab />
+            <ForStudentsTab scrollToPremium={scrollToPremium} />
           </TabContent>
           <TabContent label="For Educators">
             <ForEducatorsTab />
           </TabContent>
         </Tabs>
-        <div ref={this.premiumRef}>
+        <div ref={premiumRef}>
           <CTA>
             <CenterBox my={10}>
               <Subheadline>Get 50% off Are.na Premium</Subheadline>
@@ -88,7 +81,7 @@ export default class EducationPage extends Component {
         </div>
         <UniversityLogoCta />
         <CaseStudiesCta />
-        <CTA>
+        <Box>
           <CenterBox my={10}>
             <Subheadline>Questions? Contact Us.</Subheadline>
             <Description align="left">
@@ -102,8 +95,9 @@ export default class EducationPage extends Component {
               for monthly updates.
             </Description>
           </CenterBox>
-        </CTA>
+        </Box>
       </Container>
-    )
-  }
+      <LoggedOutFooter />
+    </AboutTopBarLayout>
+  )
 }

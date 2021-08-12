@@ -30,7 +30,7 @@ export default class UniversityLogoCta extends Component {
   render() {
     return (
       <CTA>
-        <Subheadline>Where is Are.na used?</Subheadline>
+        <Subheadline textAlign="center">Where is Are.na used?</Subheadline>
         <LogoContainer>
           <Logo
             title="Columbia University"
@@ -67,10 +67,6 @@ export default class UniversityLogoCta extends Component {
           <Logo
             title="Harvard"
             src="https://d2w9rnfcy7mm78.cloudfront.net/2988480/original_b068b49911ced45b4dffe8b409910566.png?1541425442"
-          />
-          <Logo
-            title="MIT"
-            src="https://d2w9rnfcy7mm78.cloudfront.net/2988481/original_dfb329e1fd0b851947a7a649b0b12d88.png?1541425447"
           />
           <Logo
             title="Pratt"
