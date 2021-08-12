@@ -1,8 +1,6 @@
 import express from 'express'
 
 import apolloMiddleware from 'v2/apollo/middleware'
-
-import EducationPage from 'v2/pages/about/EducationPage'
 import GroupsPage from 'v2/pages/about/GroupsPage'
 
 const app = express()
