@@ -15,7 +15,6 @@ const Subheadline = styled(Text).attrs({
   lineHeight: 1,
   my: 5,
   mx: 'auto',
-  px: 4,
 })`
   max-width: 670px;
 `
@@ -26,12 +25,6 @@ const Description = styled(Text).attrs({
   align: 'center',
   my: 6,
 })`
-  padding: 50px;
-
-  ${constants.media.large`
-    padding: 3vw;
-  `}
-
   > a {
     font-weight: bold;
   }
