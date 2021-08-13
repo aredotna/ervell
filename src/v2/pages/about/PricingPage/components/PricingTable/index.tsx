@@ -57,9 +57,10 @@ const PlanSubPrice = styled(Text).attrs({
 })``
 
 const CTAButton = styled(Button).attrs({
-  f: 4,
+  f: [3, 3, 3, 4],
   flex: 1,
   mt: 9,
+  px: 'auto',
 })``
 
 const PremiumButton = styled(CTAButton)`
@@ -91,7 +92,7 @@ const Features = styled(Box).attrs({
 })``
 
 const Feature = styled(Text).attrs({
-  f: 4,
+  f: [1, 1, 4, 4],
   py: 3,
   color: 'gray.extraBold',
 })``

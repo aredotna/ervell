@@ -60,7 +60,7 @@ export const LightColumn = styled(Column)`
 `
 
 export const Cell = styled(Box).attrs({
-  p: 6,
+  p: [4],
 })`
   line-height: ${x => x.theme.lineHeightsIndexed.base};
   max-height: ${x => x.theme.space[11]};
