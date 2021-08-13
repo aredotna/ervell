@@ -43,7 +43,7 @@ const HamburgerContainer = styled(Box).attrs({ mr: 6 })`
 
 const MenuContainer = styled(Box)`
   position: fixed;
-  top: 50px;
+  top: calc(3vw + 50px);
   left: 0;
 
   padding: 0 50px;

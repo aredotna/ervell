@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
 import { FONT_SIZES } from 'v2/styles/text'
-import constants from 'v2/styles/constants'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,
@@ -15,7 +14,6 @@ const Subheadline = styled(Text).attrs({
   lineHeight: 1,
   my: 5,
   mx: 'auto',
-  px: 4,
 })`
   max-width: 670px;
 `
@@ -26,12 +24,6 @@ const Description = styled(Text).attrs({
   align: 'center',
   my: 6,
 })`
-  padding: 50px;
-
-  ${constants.media.large`
-    padding: 3vw;
-  `}
-
   > a {
     font-weight: bold;
   }

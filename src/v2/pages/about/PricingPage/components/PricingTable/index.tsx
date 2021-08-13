@@ -132,7 +132,7 @@ const PricingTable: React.FC = () => {
   return (
     <Table>
       <Cell>
-        <PlanTitle color="state.premium">Are.na Premium</PlanTitle>
+        <PlanTitle color="state.premium">Premium</PlanTitle>
         <PlanPrice>$5 / month</PlanPrice>
         <PlanSubPrice>or $45 / year</PlanSubPrice>
         <PremiumButton href={premiumLink} disabled={isPremium}>
@@ -150,7 +150,7 @@ const PricingTable: React.FC = () => {
         </Features>
       </Cell>
       <Cell>
-        <PlanTitle color="state.supporter">Are.na Premium Supporter</PlanTitle>
+        <PlanTitle color="state.supporter">Premium Supporter</PlanTitle>
         <PlanPrice>$120 / year</PlanPrice>
         <PlanSubPrice dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />
         <GroupButton href={supporterLink}>{supporterButtonCopy}</GroupButton>
@@ -166,7 +166,7 @@ const PricingTable: React.FC = () => {
         </Features>
       </Cell>
       <Cell>
-        <PlanTitle>Are.na</PlanTitle>
+        <PlanTitle>Standard</PlanTitle>
         <PlanPrice>Free</PlanPrice>
         <PlanSubPrice>&nbsp;</PlanSubPrice>
         <CTAButton

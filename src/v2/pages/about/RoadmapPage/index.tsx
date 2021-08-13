@@ -40,6 +40,7 @@ import { LoggedOutFooter } from 'v2/components/LoggedOutFooter'
 
 const Container = styled(Box).attrs({
   mt: 9,
+  px: 6,
 })``
 
 const Paragraph = styled(Description).attrs({
