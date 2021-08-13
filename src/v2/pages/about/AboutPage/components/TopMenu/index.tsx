@@ -8,7 +8,7 @@ import constants from 'v2/styles/constants'
 import Text from 'v2/components/UI/Text'
 import { TopSignupLoginButtons } from 'v2/components/TopSignupLoginButtons'
 
-const Container = styled(Box).attrs({ py: 6, px: 6 })`
+const Container = styled(Box)`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -17,6 +17,12 @@ const Container = styled(Box).attrs({ py: 6, px: 6 })`
   right: 0;
   left: 0;
   z-index: ${constants.z.header};
+
+  padding: 50px;
+
+  ${constants.media.large`
+    padding: 3vw;
+  `}
 
   ${constants.media.small`
     background: ${({ theme }) => theme.colors.background};
@@ -35,13 +41,19 @@ const HamburgerContainer = styled(Box).attrs({ mr: 6 })`
   `}
 `
 
-const MenuContainer = styled(Box).attrs({ px: 6 })`
+const MenuContainer = styled(Box)`
   position: fixed;
-  top: 50px;
+  top: calc(3vw + 50px);
   left: 0;
 
+  padding: 0 50px;
+
+  ${constants.media.large`
+    padding: 0 3vw;
+  `}
+
   ${constants.media.small`
-    height: ${({ expanded }) => (expanded ? '100%' : '50px')};
+    height: ${({ expanded }) => (expanded ? '100%' : '0px')};
     width: 100%;
     overflow: hidden;
     background: ${({ theme }) => theme.colors.background};

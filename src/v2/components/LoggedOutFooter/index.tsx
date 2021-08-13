@@ -15,11 +15,17 @@ const {
   data: { ITUNES_LINK, ANDROID_LINK },
 } = sharify
 
-const Container = styled(Box).attrs({ pt: 7, px: 7, pb: 10, mt: 5 })`
+const Container = styled(Box)`
   display: flex;
   background-color: ${({ theme }) => theme.colors.brand.deepBlue};
   flex-direction: column;
   vertical-align: top;
+
+  padding: 50px;
+
+  ${constants.media.large`
+    padding: 3vw;
+  `}
 
   ${constants.media.mobile`
     flex-direction: column;

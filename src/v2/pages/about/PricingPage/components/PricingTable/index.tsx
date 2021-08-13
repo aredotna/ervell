@@ -57,9 +57,10 @@ const PlanSubPrice = styled(Text).attrs({
 })``
 
 const CTAButton = styled(Button).attrs({
-  f: 4,
+  f: [3, 3, 3, 4],
   flex: 1,
   mt: 9,
+  px: 'auto',
 })``
 
 const PremiumButton = styled(CTAButton)`
@@ -91,7 +92,7 @@ const Features = styled(Box).attrs({
 })``
 
 const Feature = styled(Text).attrs({
-  f: 4,
+  f: [1, 1, 4, 4],
   py: 3,
   color: 'gray.extraBold',
 })``
@@ -131,7 +132,7 @@ const PricingTable: React.FC = () => {
   return (
     <Table>
       <Cell>
-        <PlanTitle color="state.premium">Are.na Premium</PlanTitle>
+        <PlanTitle color="state.premium">Premium</PlanTitle>
         <PlanPrice>$5 / month</PlanPrice>
         <PlanSubPrice>or $45 / year</PlanSubPrice>
         <PremiumButton href={premiumLink} disabled={isPremium}>
@@ -149,7 +150,7 @@ const PricingTable: React.FC = () => {
         </Features>
       </Cell>
       <Cell>
-        <PlanTitle color="state.supporter">Are.na Premium Supporter</PlanTitle>
+        <PlanTitle color="state.supporter">Premium Supporter</PlanTitle>
         <PlanPrice>$120 / year</PlanPrice>
         <PlanSubPrice dangerouslySetInnerHTML={{ __html: '&nbsp;' }} />
         <GroupButton href={supporterLink}>{supporterButtonCopy}</GroupButton>
@@ -165,7 +166,7 @@ const PricingTable: React.FC = () => {
         </Features>
       </Cell>
       <Cell>
-        <PlanTitle>Are.na</PlanTitle>
+        <PlanTitle>Standard</PlanTitle>
         <PlanPrice>Free</PlanPrice>
         <PlanSubPrice>&nbsp;</PlanSubPrice>
         <CTAButton

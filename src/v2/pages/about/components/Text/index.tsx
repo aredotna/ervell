@@ -10,11 +10,10 @@ const Headline = styled(Text).attrs({
 })``
 
 const Subheadline = styled(Text).attrs({
-  fontSize: 5,
+  fontSize: FONT_SIZES.home.lg,
   lineHeight: 1,
   my: 5,
   mx: 'auto',
-  px: 4,
 })`
   max-width: 670px;
 `
@@ -24,7 +23,6 @@ const Description = styled(Text).attrs({
   lineHeight: 2,
   align: 'center',
   my: 6,
-  px: 5,
 })`
   > a {
     font-weight: bold;

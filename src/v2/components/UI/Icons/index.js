@@ -36,7 +36,7 @@ import Globe from 'v2/components/UI/Icons/Globe.svg'
 import UpArrow from 'v2/components/UI/Icons/UpArrow.svg'
 import DownArrow from 'v2/components/UI/Icons/DownArrow.svg'
 import Drag from 'v2/components/UI/Icons/Drag.svg'
-import Ios from 'v2/components/UI/Icons/Ios.svg'
+import Apple from 'v2/components/UI/Icons/Apple.svg'
 import Android from 'v2/components/UI/Icons/Android.svg'
 import Hamburger from 'v2/components/UI/Icons/Hamburger.svg'
 
@@ -72,7 +72,7 @@ export const COMPONENTS = {
   UpArrow: <UpArrow />,
   DownArrow: <DownArrow />,
   Drag: <Drag />,
-  Ios: <Ios />,
+  Apple: <Apple />,
   Android: <Android />,
   Hamburger: <Hamburger />,
 }

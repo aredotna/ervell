@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import constants from 'v2/styles/constants'
 import Box from 'v2/components/UI/Box'
 import BlankLayout from 'v2/components/UI/Layouts/BlankLayout'
 // import { DesireLine } from './components/DesireLine'
@@ -14,16 +15,25 @@ import { TheSecret } from './components/TheSecret'
 import { LongTermVision } from 'v2/pages/home/components/LongTermVision'
 import { P } from '../components/Common'
 
-const Container = styled(Box).attrs({
-  p: 7,
-  px: 7,
-})``
+const Container = styled(Box)`
+  padding: 50px;
+
+  ${constants.media.large`
+    padding: 3vw;
+  `}
+`
 
 const TopContainer = styled(Container).attrs({
   pt: 10,
 })``
 
-const IconContainer = styled(Box).attrs({ py: 6, px: 7 })``
+const IconContainer = styled(Box)`
+  padding: 50px;
+
+  ${constants.media.large`
+    padding: 3vw;
+  `}
+`
 
 const TeamAndSecretContainer = styled(Container).attrs({
   maxWidth: '700px',
@@ -61,11 +71,11 @@ const HomePage: React.FC = () => {
         </Box>
       </TeamAndSecretContainer>
 
-      <Box px={7} pb={5}>
+      <Container>
         <P boldLinks>
           <a href="/sign_up">Try Are.na</a>...or learn more in the links below.
         </P>
-      </Box>
+      </Container>
       <LoggedOutFooter isHomepage />
     </BlankLayout>
   )
