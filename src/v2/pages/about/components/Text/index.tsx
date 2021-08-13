@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
 import { FONT_SIZES } from 'v2/styles/text'
-import constants from 'v2/styles/constants'
 
 const Headline = styled(Text).attrs({
   fontSize: 8,
