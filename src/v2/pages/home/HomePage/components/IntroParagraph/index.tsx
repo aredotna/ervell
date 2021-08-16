@@ -75,7 +75,7 @@ export const IntroParagraph: React.FC = () => {
               <ul>
                 <li>$5/month or $45/year</li>
                 <li>reader mode + table view</li>
-                <li>increased pivacy settings</li>
+                <li>increased privacy settings</li>
                 <li>unlimited blocks</li>
               </ul>
             </P>
