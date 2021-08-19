@@ -16,7 +16,7 @@ const Container = styled(Box)`
   user-select: none;
   cursor: pointer;
 
-  &:focus {
+  &:focus-visible {
     outline: 0;
   }
 
@@ -91,6 +91,7 @@ class NotificationCount extends PureComponent {
           ref={this.containerRef}
           onClick={this.handleClick}
           role="button"
+          aria-label="Check notifications"
           tabIndex={0}
         >
           <Badge amount={count}>{count}</Badge>

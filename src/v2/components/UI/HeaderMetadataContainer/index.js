@@ -13,7 +13,7 @@ const Container = styled(Box)`
   position: relative;
 `
 
-const Header = styled.div`
+const Header = styled.nav`
   display: flex;
   width: 100%;
   padding-right: ${multiply(constants.blockGutter, 2)}; // TODO: Remove

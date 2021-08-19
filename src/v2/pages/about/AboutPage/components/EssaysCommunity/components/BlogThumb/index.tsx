@@ -46,7 +46,6 @@ interface BlogThumbProps {
 }
 
 export const BlogThumb: React.FC<BlogThumbProps> = ({ post }) => {
-  console.log({ post })
   return (
     <Container>
       <Link href={`/blog/${post.slug}`}>

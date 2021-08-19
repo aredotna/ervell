@@ -56,8 +56,6 @@ export const FeedGroupSentence: React.FC<FeedGroupSentenceProps> = ({
     is_private,
   } = group
 
-  console.log({ item, item_phrase })
-
   return (
     <Container my={3} pr={6}>
       <Sentence>
