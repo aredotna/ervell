@@ -148,6 +148,7 @@ export class KonnectableInner extends PureComponent<Props & InnerProps> {
       <Container
         to={toParams}
         role="button"
+        aria-label={`Link to ${konnectable.__typename}: ${konnectable.title}`}
         tabIndex={0}
         onClick={this.onClick}
         onMouseEnter={this.onMouseEnter}

@@ -124,7 +124,7 @@ class PrimarySearch extends PureComponent<PrimarySearchProps> {
 
         <SearchInput
           globallyFocusOnKey="/"
-          tabIndex={1}
+          tabIndex={0}
           flex="1"
           py={6}
           placeholder="Search Are.na"

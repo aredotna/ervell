@@ -27,7 +27,7 @@ const Container = styled.a`
 `
 
 export default props => (
-  <Container href="/" {...props}>
+  <Container href="/" {...props} aria-label="Go to home">
     <Icons name="ArenaMark" width="100%" />
   </Container>
 )

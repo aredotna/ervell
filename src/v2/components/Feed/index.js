@@ -75,8 +75,6 @@ export default class Feed extends PureComponent {
             },
           } = data
 
-          console.log({ groups })
-
           return (
             <InfiniteScroll
               pageStart={1}

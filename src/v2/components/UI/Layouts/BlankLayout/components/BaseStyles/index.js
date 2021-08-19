@@ -15,7 +15,15 @@ export default createGlobalStyle`
     cursor: pointer;
   }
   
-  a:focus {
+  a:focus-visible {
     outline: 0;
+  }
+
+  @media not all and (min-resolution:.001dpcm){ 
+    @supports (-webkit-appearance:none) {
+      a:focus { 
+        outline: 0;
+      }
+    }
   }
 `
