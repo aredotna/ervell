@@ -153,12 +153,9 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
   const revalidatePages = useCallback(
     (fromPage: number, toPage: number) => {
-      console.log('revalidating', fromPage, 'to', toPage)
-
       const dir = toPage > fromPage ? 1 : -1
       for (let page = fromPage; page !== toPage + dir; page += dir) {
         if (queriedPageNumbersRef.current.has(page)) {
-          console.log('page', page)
           fetchMore({
             variables: {
               page: page,
@@ -244,8 +241,9 @@ export const usePaginatedBlocks = (unsafeArgs: {
         }
 
         // Build the new cache data
-        const newBlocks = [...prevBlocks].splice(blockIndex, 1)
         const newCount = prevCount - 1
+        const newBlocks = [...prevBlocks]
+        newBlocks.splice(blockIndex, 1)
 
         // Revalidate pages between the block index that was removed and
         // the end of the blocks array
@@ -310,12 +308,6 @@ export const usePaginatedBlocks = (unsafeArgs: {
             },
           })
           .then(() => {
-            // After the mutation we need to revalidate pages that have
-            // already been queried, if a block moves into the page
-            // that previously was in a page that wasn't loaded.
-            // This is because we try to not call getPage if hasQueriedPage
-            // returns true, and if an unloaded block moves into the page
-            // then there will be no opportunity for that block to ever load.
             const oldPage = getPageFromIndex(oldIndex)
             const newPage = getPageFromIndex(newIndex)
             revalidatePages(oldPage, newPage)
