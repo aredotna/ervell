@@ -18,7 +18,7 @@
     "<all_urls>",
     "http://*/*",
     "https://*/*",
-    "identity"
+    "storage"
   ],
   "background": {
     "scripts": ["background.js"],

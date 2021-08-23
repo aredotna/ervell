@@ -3,14 +3,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Text from 'v2/components/UI/Text'
+import { FONT_SIZES } from 'v2/styles/text'
 import { PricingFeatures as PricingFeaturesType } from '__generated__/contentful/PricingFeatures'
 import { PricingFeaturesQuery } from './contentfulQueries/pricingFeaturesQuery'
 
 const Feature = styled(Text).attrs({
-  f: 5,
+  f: FONT_SIZES.home.md,
   color: 'gray.bold',
   textAlign: 'left',
-  py: 3,
+  py: 2,
   px: 5,
 })`
   &:before {

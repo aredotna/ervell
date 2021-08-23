@@ -14,7 +14,7 @@ const Button = styled(Box)`
   cursor: pointer;
   user-select: none;
 
-  &:focus {
+  &:focus-visible {
     outline: 0;
   }
 
@@ -69,6 +69,7 @@ export default class NewChannelButton extends PureComponent {
           onClick={this.openModal}
           role="button"
           tabIndex={0}
+          aria-label="Create new channel"
           {...this.props}
         >
           <PlusSign width="10px" height="10px" mr={[0, '0.5em']} />

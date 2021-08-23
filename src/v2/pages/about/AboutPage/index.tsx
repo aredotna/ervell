@@ -24,14 +24,28 @@ import { TeamChart } from 'v2/pages/home/components/LongTermVision'
 import { PricingFeatures } from '../PricingPage/components/PricingFeatures'
 import { EducationCTA } from './components/EducationCTA'
 import { TopMenu } from './components/TopMenu'
+import constants from 'v2/styles/constants'
 
 const MaxBox = styled(Box).attrs({
   mx: 'auto',
-  px: 6,
 })`
+  padding: 0 50px;
+
+  ${constants.media.large`
+    padding: 0 3vw;
+  `}
   max-width: 670px;
   width: 100%;
 `
+
+const PricingTableContainer = styled(MaxBox)`
+  max-width: initial;
+
+  ${constants.media.large`
+    max-width: 670px;
+  `}
+`
+
 const MaxBoxBottom = styled(MaxBox).attrs({
   mb: 11,
 })``
@@ -75,7 +89,7 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
     <BlankLayout>
       <TopMenu />
       <Section id={'About'}>
-        <CenteredSection mt={[11, 11, 9]}>
+        <CenteredSection mt={[10, 10, 9]}>
           <Header>About</Header>
           <P>
             Are.na is a place to save content, create collections over time and
@@ -112,7 +126,10 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
           <Box textAlign="center" mb={6}>
             <Header>Pricing &amp; Features</Header>
           </Box>
-          <PricingTable />
+
+          <PricingTableContainer>
+            <PricingTable />
+          </PricingTableContainer>
 
           <MaxBox pt={8} mb={8}>
             <PricingCTAs />

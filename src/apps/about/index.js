@@ -1,8 +1,6 @@
 import express from 'express'
 
 import apolloMiddleware from 'v2/apollo/middleware'
-
-import EducationPage from 'v2/pages/about/EducationPage'
 import GroupsPage from 'v2/pages/about/GroupsPage'
 
 const app = express()
@@ -25,10 +23,5 @@ app
       .render(GroupsPage)
       .then(apollo => res.render('groups', { apollo }))
   )
-  .get('/education', ...middlewareStack, (req, res) => {
-    req.apollo
-      .render(EducationPage)
-      .then(apollo => res.render('education', { apollo }))
-  })
 
 module.exports = app
