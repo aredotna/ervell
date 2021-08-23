@@ -41,11 +41,9 @@ export const usePaginatedBlocks = (unsafeArgs: {
   channelId: number
   ssr?: boolean
 }): UsePaginatedBlocksApi => {
-  /**
-   * =============================
-   * "Private" fields of this hook
-   * =============================
-   */
+  // =============================
+  // "Private" fields of this hook
+  // =============================
 
   /**
    * This hook doesn't support updating the initially passed-in args in any way.
@@ -150,10 +148,31 @@ export const usePaginatedBlocks = (unsafeArgs: {
   const queriedPageNumbersRef = useRef(new Set<number>())
 
   /**
-   * =====================
-   * The hook's public api
-   * =====================
+   * A helper function to re-query for pages that have already been
+   * queried. This is used after a mutation updates the blocks array.
    */
+  const revalidatePages = useCallback(
+    (fromPage: number, toPage: number) => {
+      console.log('revalidating', fromPage, 'to', toPage)
+
+      const dir = toPage > fromPage ? 1 : -1
+      for (let page = fromPage; page !== toPage + dir; page += dir) {
+        if (queriedPageNumbersRef.current.has(page)) {
+          console.log('page', page)
+          fetchMore({
+            variables: {
+              page: page,
+            },
+          })
+        }
+      }
+    },
+    [fetchMore]
+  )
+
+  // =====================
+  // The hook's public api
+  // =====================
 
   /**
    * An array of blocks that apollo currently has cached
@@ -212,20 +231,36 @@ export const usePaginatedBlocks = (unsafeArgs: {
   const removeBlock: UsePaginatedBlocksApi['removeBlock'] = useCallback(
     ({ id, type }) => {
       updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
-        const newBlocks = prevBlocks.filter(
+        // Find the block in the blocks array
+        const blockIndex = prevBlocks.findIndex(
           block =>
-            !(
-              readField('id', block) === id &&
-              readField('__typename', block) === type
-            )
+            readField('id', block) === id &&
+            readField('__typename', block) === type
         )
+
+        // Early exit if the block can't be found
+        if (blockIndex === -1) {
+          return null
+        }
+
+        // Build the new cache data
+        const newBlocks = [...prevBlocks].splice(blockIndex, 1)
+        const newCount = prevCount - 1
+
+        // Revalidate pages between the block index that was removed and
+        // the end of the blocks array
+        revalidatePages(
+          getPageFromIndex(blockIndex),
+          getPageFromIndex(newCount - 1)
+        )
+
         return {
           newBlocks: newBlocks,
-          newCount: prevCount + (newBlocks.length - prevBlocks.length),
+          newCount: newCount,
         }
       })
     },
-    [updateCache]
+    [getPageFromIndex, revalidatePages, updateCache]
   )
 
   /**
@@ -283,12 +318,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
             // then there will be no opportunity for that block to ever load.
             const oldPage = getPageFromIndex(oldIndex)
             const newPage = getPageFromIndex(newIndex)
-            const dir = newPage > oldPage ? 1 : -1
-            for (let page = oldPage; page !== newPage; page += dir) {
-              if (hasQueriedPage(page) && !hasQueriedPage(page + dir)) {
-                getPage(page)
-              }
-            }
+            revalidatePages(oldPage, newPage)
           })
 
         // Return the updated cache of the blocks array
@@ -301,7 +331,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         return { newBlocks }
       })
     },
-    [client, getPage, getPageFromIndex, hasQueriedPage, updateCache]
+    [client, getPageFromIndex, revalidatePages, updateCache]
   )
 
   /**
@@ -310,22 +340,18 @@ export const usePaginatedBlocks = (unsafeArgs: {
    */
   const addBlock: UsePaginatedBlocksApi['addBlock'] = useCallback(() => {
     updateCache(({ blockArgs: [prevBlocks], prevCount }) => {
-      return { newBlocks: [null, ...prevBlocks], newCount: prevCount + 1 }
-    })
+      const newBlocks = [null, ...prevBlocks]
+      const newCount = prevCount + 1
 
-    fetchMore({
-      variables: {
-        page: 1,
-        per: 1,
-      },
-    })
-  }, [fetchMore, updateCache])
+      revalidatePages(1, getPageFromIndex(newCount - 1))
 
-  /**
-   * ==============================
-   * Build and return the final api
-   * ==============================
-   */
+      return { newBlocks, newCount }
+    })
+  }, [getPageFromIndex, revalidatePages, updateCache])
+
+  // ==============================
+  // Build and return the final api
+  // ==============================
 
   const api: UsePaginatedBlocksApi = {
     blocks,
