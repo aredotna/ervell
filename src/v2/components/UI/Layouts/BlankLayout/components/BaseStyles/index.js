@@ -15,8 +15,12 @@ export default createGlobalStyle`
     cursor: pointer;
   }
   
+  a:focus {
+    outline: none;
+  }
+
   a:focus-visible {
-    outline: 0;
+    outline: 1px solid ${({ theme }) => theme.colors.state.premium};
   }
 
   @media not all and (min-resolution:.001dpcm){ 
