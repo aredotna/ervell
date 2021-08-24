@@ -79,8 +79,13 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
 
     const updateConnectable = useCallback(
       ({ id, type }: PusherPayload) => {
+        // Call getBlocksFromCache instead of using standard
+        // "blocks" value so that this useCallback can have a
+        // reference-stable value, even if the "blocks" value
+        // changes.
         const cacheBlocks = getBlocksFromCache()
 
+        // Get the index of the block that was updated
         const blockIndex = cacheBlocks.findIndex(block => {
           return (
             block &&
@@ -89,10 +94,12 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
           )
         })
 
+        // Early exit if the block can't be found
         if (blockIndex === -1) {
           return
         }
 
+        // Revalidate the page that the block is contained in
         getPage(getPageFromIndex(blockIndex))
       },
       [getBlocksFromCache, getPage, getPageFromIndex]
