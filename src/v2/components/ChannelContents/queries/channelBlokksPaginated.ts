@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 import { channelContentsConnectableFragment } from 'v2/components/ChannelContents/fragments/channelContentsConnectable'
 
-export const channelBlokksPaginatedPerPage = 8
+export const channelBlokksPaginatedPerPage = 10
 
 export default gql`
   query ChannelBlokksPaginated($id: ID!, $page: Int!, $per: Int!) {
@@ -15,6 +15,8 @@ export default gql`
       }
       counts {
         contents
+        blocks
+        channels
       }
     }
   }

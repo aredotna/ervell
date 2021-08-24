@@ -449,6 +449,8 @@ export type ChannelBlokksPaginated_channel_blokks = ChannelBlokksPaginated_chann
 export interface ChannelBlokksPaginated_channel_counts {
   __typename: "ChannelCounts";
   contents: number | null;
+  blocks: number | null;
+  channels: number | null;
 }
 
 export interface ChannelBlokksPaginated_channel {
