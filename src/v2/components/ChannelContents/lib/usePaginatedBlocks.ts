@@ -30,6 +30,7 @@ type UsePaginatedBlocksApi = {
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
+  getBlocksFromCache: () => ChannelBlokksPaginated_channel_blokks[]
 }
 
 /**
@@ -231,6 +232,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         // Find the block in the blocks array
         const blockIndex = prevBlocks.findIndex(
           block =>
+            block &&
             readField('id', block) === id &&
             readField('__typename', block) === type
         )
@@ -327,17 +329,36 @@ export const usePaginatedBlocks = (unsafeArgs: {
   )
 
   /**
-   * Adds a null block placeholder to the begining of the blocks cache
-   * and fires a query to get the block's actua data
+   * A helper function to pull the most recent block data from the cache,
+   * instead of passing the blocks data in as a dependency that will change
+   * whenever the blocks are mutated
+   */
+  const getBlocksFromCache: UsePaginatedBlocksApi['getBlocksFromCache'] = useCallback(() => {
+    const unsafeResult = client.readQuery<
+      ChannelBlokksPaginated,
+      ChannelBlokksPaginatedVariables
+    >({
+      query: channelBlokksPaginatedQuery,
+      variables: {
+        id: args.current.channelId.toString(),
+        page: 1,
+        per: channelBlokksPaginatedPerPage,
+      },
+    })
+
+    return unsafeResult?.channel?.blokks || []
+  }, [client])
+
+  /**
+   * Delete block cache and revalidate all queried pages
    */
   const addBlock: UsePaginatedBlocksApi['addBlock'] = useCallback(() => {
-    updateCache(({ blockArgs: [prevBlocks], prevCount }) => {
-      const newBlocks = [null, ...prevBlocks]
-      const newCount = prevCount + 1
+    updateCache(({ blockArgs: [_prevBlocks, { DELETE }], prevCount }) => {
+      revalidatePages(1, getPageFromIndex(prevCount - 1))
 
-      revalidatePages(1, getPageFromIndex(newCount - 1))
-
-      return { newBlocks, newCount }
+      return {
+        newBlocks: DELETE,
+      }
     })
   }, [getPageFromIndex, revalidatePages, updateCache])
 
@@ -354,6 +375,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
     moveBlock,
     removeBlock,
     addBlock,
+    getBlocksFromCache,
   }
 
   return api

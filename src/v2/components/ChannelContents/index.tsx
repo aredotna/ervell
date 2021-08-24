@@ -1,13 +1,8 @@
 import React, { memo, useEffect, useCallback } from 'react'
 import { SortableContainer } from 'react-sortable-hoc'
-import { useApolloClient } from '@apollo/client'
 
 import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
-import {
-  ConnectableBlokk,
-  ConnectableBlokkVariables,
-} from '__generated__/ConnectableBlokk'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -18,7 +13,6 @@ import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
 import { getConnectableType } from './lib/getConnectableType'
-import connectableBlokk from './queries/connectableBlokk'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -34,6 +28,28 @@ interface ExtendedProps extends Props {
   isSpiderRequesting: boolean
 }
 
+type PusherPayload = {
+  id: string
+  type: BaseConnectableTypeEnum | false
+}
+
+const parsePayload = (payload: any): PusherPayload => {
+  let type: BaseConnectableTypeEnum | false = false
+  switch (payload.base_class.toUpperCase()) {
+    case 'BLOCK':
+      type = BaseConnectableTypeEnum.BLOCK
+      break
+    case 'CHANNEL':
+      type = BaseConnectableTypeEnum.CHANNEL
+      break
+  }
+
+  return {
+    id: payload.id.toString(),
+    type: type,
+  }
+}
+
 const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
   memo(({ channel, pusherChannel, socket, isSpiderRequesting, ...rest }) => {
     const {
@@ -45,6 +61,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       removeBlock,
       addBlock,
       contentCount,
+      getBlocksFromCache,
     } = usePaginatedBlocks({
       channelId: channel.id,
       ssr: isSpiderRequesting,
@@ -60,26 +77,25 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       [getPage, getPageFromIndex, hasQueriedPage]
     )
 
-    const parsePayload = useCallback(
-      ({ id }) => ({
-        id: id.toString(),
-      }),
-      []
-    )
-
-    const client = useApolloClient()
-
     const updateConnectable = useCallback(
-      ({ id }: { id: string | number }) => {
-        client.query<ConnectableBlokk, ConnectableBlokkVariables>({
-          query: connectableBlokk,
-          variables: {
-            id: id.toString(),
-          },
-          fetchPolicy: 'network-only',
+      ({ id, type }: PusherPayload) => {
+        const cacheBlocks = getBlocksFromCache()
+
+        const blockIndex = cacheBlocks.findIndex(block => {
+          return (
+            block &&
+            block.id.toString() === id &&
+            getConnectableType(block.__typename) === type
+          )
         })
+
+        if (blockIndex === -1) {
+          return
+        }
+
+        getPage(getPageFromIndex(blockIndex))
       },
-      [client]
+      [getBlocksFromCache, getPage, getPageFromIndex]
     )
 
     usePusher({
