@@ -350,17 +350,16 @@ export const usePaginatedBlocks = (unsafeArgs: {
   }, [client])
 
   /**
-   * Delete block cache and revalidate all queried pages
+   * Delete block cache and wipe queriedPageNumbersRef
    */
   const addBlock: UsePaginatedBlocksApi['addBlock'] = useCallback(() => {
-    updateCache(({ blockArgs: [_prevBlocks, { DELETE }], prevCount }) => {
-      revalidatePages(1, getPageFromIndex(prevCount - 1))
-
+    queriedPageNumbersRef.current = new Set()
+    updateCache(({ blockArgs: [_prevBlocks, { DELETE }] }) => {
       return {
         newBlocks: DELETE,
       }
     })
-  }, [getPageFromIndex, revalidatePages, updateCache])
+  }, [updateCache])
 
   // ==============================
   // Build and return the final api
