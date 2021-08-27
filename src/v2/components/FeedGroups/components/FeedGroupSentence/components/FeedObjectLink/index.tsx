@@ -32,8 +32,6 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
   const Tag = obj?.href ? Link : Span
   const fontWeight = href ? 'bold' : 'normal'
 
-  console.log({ title, href, obj })
-
   const toParams = obj && {
     pathname: href,
     state:
@@ -49,7 +47,11 @@ const FeedObjectLink: React.FC<FeedObjectLinkProps> = ({
       color={visibility ? `channel.${visibility}` : 'gray.base'}
       {...rest}
     >
-      <Tag to={toParams} dangerouslySetInnerHTML={{ __html: title }} />
+      <Tag
+        to={toParams}
+        aria-label={`Feed link to ${title}`}
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
     </Word>
   )
 }

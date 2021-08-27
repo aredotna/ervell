@@ -16,6 +16,18 @@ export default createGlobalStyle`
   }
   
   a:focus {
-    outline: 0;
+    outline: none;
+  }
+
+  a:focus-visible {
+    outline: 1px solid ${({ theme }) => theme.colors.state.premium};
+  }
+
+  @media not all and (min-resolution:.001dpcm){ 
+    @supports (-webkit-appearance:none) {
+      a:focus { 
+        outline: 0;
+      }
+    }
   }
 `
