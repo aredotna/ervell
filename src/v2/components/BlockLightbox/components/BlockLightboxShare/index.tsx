@@ -31,8 +31,8 @@ export default class BlockLightboxShare extends PureComponent {
     const { mode } = this.state
     const { block } = this.props
 
-    const url = `https://www.are.na${block.shareable_href}`
-    const text = block.shareable_title
+    const url = `https://www.are.na${block?.shareable_href}`
+    const text = block?.shareable_title
 
     return (
       <React.Fragment>

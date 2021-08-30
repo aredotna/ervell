@@ -48,25 +48,25 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
   linkViewMode,
   onLinkViewModeChange,
 }) => {
-  if (block.__typename === 'Channel') {
+  if (block?.__typename === 'Channel') {
     return null
   }
 
   const imageUpdatedAtTimeStamp =
-    (block.__typename === 'Link' || block.__typename === 'Attachment') &&
-    parseInt(block.image_updated_at_unix_time)
+    (block?.__typename === 'Link' || block?.__typename === 'Attachment') &&
+    parseInt(block?.image_updated_at_unix_time)
 
   const showImageEditedDate =
     imageUpdatedAtTimeStamp &&
-    imageUpdatedAtTimeStamp - parseInt(block.created_at_unix_time) > 60
+    imageUpdatedAtTimeStamp - parseInt(block?.created_at_unix_time) > 60
 
   const imageUpdatedAt =
-    (block.__typename === 'Link' || block.__typename === 'Attachment') &&
-    block.image_updated_at
+    (block?.__typename === 'Link' || block?.__typename === 'Attachment') &&
+    block?.image_updated_at
 
   return (
     <Container>
-      {block.__typename === 'Link' && (
+      {block?.__typename === 'Link' && (
         <Inner withBorder>
           <BlockLightboxSwitchViewMode
             linkViewMode={linkViewMode}
@@ -82,7 +82,8 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
           </Text>
         )}
 
-        {(block.can.potentially_edit_thumbnail || block.can.edit_thumbnail) && (
+        {(block?.can.potentially_edit_thumbnail ||
+          block?.can.edit_thumbnail) && (
           <>
             <BlockLightboxChangeThumbnail block={block} />
           </>
@@ -90,10 +91,10 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
 
         <BlockLightboxShare block={block} />
 
-        {(block.__typename === 'Image' || block.__typename === 'Text') &&
-          block.find_original_url && (
+        {(block?.__typename === 'Image' || block?.__typename === 'Text') &&
+          block?.find_original_url && (
             <a
-              href={block.find_original_url}
+              href={block?.find_original_url}
               rel="nofollow noopener noreferrer"
               target="_blank"
             >
@@ -101,17 +102,17 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
             </a>
           )}
 
-        {block.__typename === 'Image' && (
+        {block?.__typename === 'Image' && (
           <a
-            download={`block-${block.id}.jpg`}
-            href={block.downloadable_image}
+            download={`block-${block?.id}.jpg`}
+            href={block?.downloadable_image}
             rel="nofollow noopener noreferrer"
           >
             Download
           </a>
         )}
 
-        {block.can.mute && <Mute id={block.id} type="BLOCK" />}
+        {block?.can.mute && <Mute id={block?.id} type="BLOCK" />}
       </Inner>
     </Container>
   )

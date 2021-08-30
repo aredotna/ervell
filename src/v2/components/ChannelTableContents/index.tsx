@@ -45,6 +45,8 @@ const TH = styled(TD)`
 `
 
 const TR = styled.tr`
+  cursor: zoom-in;
+
   &:hover ${TD} {
     border-top-color: ${x => x.theme.colors.gray.regular};
     border-bottom-color: ${x => x.theme.colors.gray.regular};

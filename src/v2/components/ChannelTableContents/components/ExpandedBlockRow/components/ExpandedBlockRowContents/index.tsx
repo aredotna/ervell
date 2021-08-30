@@ -30,7 +30,7 @@ interface ExpandedBlockRowContentsProps {
 export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> = ({
   block,
 }) => {
-  if (block.__typename === 'Text') {
+  if (block?.__typename === 'Text') {
     return (
       <TextContainer>
         <SansSerifText
@@ -42,7 +42,7 @@ export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> =
     )
   }
 
-  if (block.__typename === 'Image') {
+  if (block?.__typename === 'Image') {
     return (
       <ImageContainer>
         <Image src={block.image_url} alt={block.title} title={block.title} />

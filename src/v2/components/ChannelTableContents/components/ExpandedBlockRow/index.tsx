@@ -11,10 +11,8 @@ const Row = styled.tr`
 
 const TD = styled.td`
   color: ${x => x.theme.colors.gray.bold};
-  border: 1px solid ${x => x.theme.colors.gray.light};
-  border-top-color: ${x => x.theme.colors.gray.block};
-  border-bottom-color: ${x => x.theme.colors.gray.block};
-  border-right-color: transparent;
+  border-top: 1px solid ${x => x.theme.colors.gray.block};
+  border-bottom: 1px solid ${x => x.theme.colors.gray.block};
   font-size: ${x => x.theme.fontSizesIndexed.sx};
   height: 450px;
   line-height: 0;

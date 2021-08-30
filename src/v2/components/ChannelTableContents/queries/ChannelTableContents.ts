@@ -5,7 +5,7 @@ export default gql`
     channel(id: $id) {
       __typename
       id
-      blokks {
+      blokks(direction: DESC) {
         __typename
 
         ... on Model {

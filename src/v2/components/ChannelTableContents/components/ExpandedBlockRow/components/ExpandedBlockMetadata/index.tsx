@@ -23,15 +23,12 @@ interface ExpandedBlockMetadataProps {
 export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
   block: { id, title },
 }) => {
-  const { data, error, loading } = useQuery<
+  const { data } = useQuery<
     ExpandedBlockMetadataType,
     ExpandedBlockMetadataVariables
   >(EXPANDED_BLOCK_METADATA_QUERY, { variables: { id: id.toString() } })
 
-  if (loading) return null
-  if (error) return null
-
-  const { block } = data
+  const { block } = data || {}
 
   return (
     <Box height="100%" p={3}>
@@ -43,7 +40,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
         )}
       </Text>
 
-      {block.description && (
+      {block?.description && (
         <Text
           f={3}
           lineHeight={2}
@@ -60,30 +57,30 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
       <Box mb={8}>
         <Text f={1} lineHeight={2} color="gray.medium">
           <time
-            dateTime={block.created_at_timestamp}
-            title={block.created_at_timestamp}
+            dateTime={block?.created_at_timestamp}
+            title={block?.created_at_timestamp}
           >
-            Added {block.created_at} by{' '}
+            Added {block?.created_at} by{' '}
           </time>
 
-          <a href={block.user.href}>
-            <strong>{block.user.name}</strong>
+          <a href={block?.user.href}>
+            <strong>{block?.user.name}</strong>
           </a>
 
-          {block.created_at !== block.updated_at && (
+          {block?.created_at !== block?.updated_at && (
             <React.Fragment>
               <br />
 
               <time
-                dateTime={block.updated_at_timestamp}
-                title={block.updated_at_timestamp}
+                dateTime={block?.updated_at_timestamp}
+                title={block?.updated_at_timestamp}
               >
                 Last updated {block.updated_at}
               </time>
             </React.Fragment>
           )}
 
-          {block.source && block.source.url && (
+          {block?.source && block?.source.url && (
             <>
               <br />
               <a
@@ -102,7 +99,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
             </>
           )}
         </Text>
-        {block.__typename !== 'PendingBlock' && (
+        {block?.__typename !== 'PendingBlock' && (
           <>
             <Header mt={4} mb={4}>
               Actions
