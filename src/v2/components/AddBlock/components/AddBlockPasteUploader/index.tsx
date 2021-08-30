@@ -39,7 +39,7 @@ const Backdrop = styled(Box).attrs({
 `
 
 interface AddBlockPasteUploader {
-  onAddBlock: ({ id: number }) => void
+  onAddBlock: () => void
   channelId: string | number
   createBlock: MutationFn<CreateBlock, CreateBlockVariables>
 }
@@ -83,8 +83,7 @@ const AddBlockPasteUploader: React.FC<AddBlockPasteUploader> = ({
       })
         .then(response => {
           if (response && response.data) {
-            const { block } = response.data.create_block
-            onAddBlock(block)
+            onAddBlock()
           }
         })
         .catch(err => {

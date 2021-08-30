@@ -12,7 +12,7 @@ interface Props {
   channel: ConnectableContextMenuChannelData
   connectable: ConnectableContextMenuConnectableData
   onRemove: ({ id, type }: { id: number; type: string }) => any
-  onChangePosition: (newIndex: number) => { newIndex: number; oldIndex: number }
+  onChangePosition: (newIndex: number) => void
 }
 
 export const ConnectableContextMenu: React.FC<Props> = ({

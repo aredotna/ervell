@@ -9,7 +9,10 @@ export function normalizePayloads(payloads) {
 }
 
 interface PusherHook {
-  channel: any
+  channel?: {
+    bind: (eventName: string, event: (payload: any) => void) => {}
+    unbind: () => void
+  }
   onCreated?: (payload: any) => any
   onUpdated?: (payload: any) => any
   parsePayload?: (payload: any) => any
@@ -22,29 +25,39 @@ export const setupPusherChannel = socketId => {
   return { channel, socket }
 }
 
+const emptyFn = () => {}
+
 export const usePusher = ({
   channel,
-  onCreated = () => {},
-  onUpdated = () => {},
-  parsePayload = () => {},
+  onCreated = emptyFn,
+  onUpdated = emptyFn,
+  parsePayload = emptyFn,
 }: PusherHook): any[] => {
   const [payloads, setPayloads] = useState([])
 
   useEffect(() => {
-    channel.bind('created', (payload): void => {
-      const parsed = parsePayload(payload)
-      setPayloads(prevPayloads => normalizePayloads([parsed, ...prevPayloads]))
-      onCreated(parsed)
-    })
+    if (channel) {
+      channel.bind('created', (payload): void => {
+        const parsed = parsePayload(payload)
+        setPayloads(prevPayloads =>
+          normalizePayloads([parsed, ...prevPayloads])
+        )
+        onCreated(parsed)
+      })
 
-    channel.bind('updated', (payload): void => {
-      const parsed = parsePayload(payload)
-      setPayloads(prevPayloads => normalizePayloads([...prevPayloads, parsed]))
-      onUpdated(parsed)
-    })
+      channel.bind('updated', (payload): void => {
+        const parsed = parsePayload(payload)
+        setPayloads(prevPayloads =>
+          normalizePayloads([...prevPayloads, parsed])
+        )
+        onUpdated(parsed)
+      })
+    }
 
     return () => {
-      channel.unbind()
+      if (channel) {
+        channel.unbind()
+      }
     }
   }, [channel, onCreated, onUpdated, parsePayload])
 
