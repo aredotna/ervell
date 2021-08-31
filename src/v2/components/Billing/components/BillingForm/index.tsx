@@ -27,7 +27,7 @@ import CancellationNotice from 'v2/components/Billing/components/CancellationNot
 import CancelPremium from 'v2/components/Billing/components/CancelPremium'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
 
-import useMergeState from 'v2/hooks/useMergeState'
+import { useMergeState } from 'use-merge-state'
 
 import { CancelPremiumSubscription as CancelPremiumSubscriptionType } from '__generated__/CancelPremiumSubscription'
 import {
@@ -55,14 +55,14 @@ interface BillingFormProps {
 }
 
 interface BillingFormState {
-  mode:
+  mode?:
     | 'resting'
     | 'error'
     | 'processing'
     | 'canceled'
     | 'subscribed'
     | 'card_changed'
-  operations: OperationsEnum[]
+  operations?: OperationsEnum[]
   planId?: SupportedPlanEnum | 'basic' | 'lifetime'
   couponCode?: string
   errorMessage?: string
