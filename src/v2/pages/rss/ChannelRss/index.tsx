@@ -9,7 +9,7 @@ import RssLayout from '../components/RssLayout'
 import channelRssQuery from './queries/channelRss'
 
 interface ChannelRssProps {
-  params: any
+  params: { slug?: string }
 }
 
 const ChannelRss: React.FC<ChannelRssProps> = ({ params }) => {

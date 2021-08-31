@@ -6,7 +6,7 @@ import RssLayout from '../components/RssLayout'
 import channelRssQuery from './queries/userRss'
 
 interface UserRssProps {
-  params: any
+  params: { username?: string }
 }
 
 const UserRss: React.FC<UserRssProps> = ({ params }) => {
