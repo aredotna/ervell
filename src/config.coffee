@@ -9,7 +9,7 @@ module.exports =
   NODE_ENV: "development"
   PORT: 4000
   APP_URL: "http://localhost:4000"
-  API_BASE: "https://api.are.na/v2"
+  API_BASE: "https://api.are.na"
   GRAPHQL_ENDPOINT: "https://api.are.na/graphql"
   CLIENT_GRAPHQL_ENDPOINT: "https://api.are.na/graphql"
   CONTENTFUL_GRAPHQL_ENDPOINT: null

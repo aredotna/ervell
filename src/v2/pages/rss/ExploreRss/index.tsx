@@ -12,8 +12,6 @@ interface ExploreRssProps {
 const ExploreRss: React.FC<ExploreRssProps> = () => {
   const { data } = useQuery<ExploreRssType>(exploreRssQuery)
 
-  console.log({ data })
-
   if (!data) return null
 
   const { exxplore } = data
