@@ -30,7 +30,7 @@ export interface MySettings_me {
   first_name: string;
   last_name: string;
   email: string;
-  slug: string;
+  slug: string | null;
   unconfirmed_email: string | null;
   bio: string | null;
   is_premium: boolean;
