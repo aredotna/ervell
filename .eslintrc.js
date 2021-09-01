@@ -49,7 +49,8 @@ module.exports = {
     ],
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-empty-function': 'off',
-
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'off',
     'react/display-name': 0,
     'react/jsx-filename-extension': [
       1,

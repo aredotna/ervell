@@ -1,4 +1,3 @@
-// https://github.com/react-restart/hooks/blob/master/src/useMergeState.ts
 import { useCallback, useState } from 'react'
 
 type Updater<TState> = (state: TState) => Partial<TState> | null

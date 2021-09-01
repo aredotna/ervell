@@ -40,7 +40,7 @@ const Container = styled(Box).attrs({
 
 interface Props {
   channel_id: string | number
-  onAddBlock: ({ id: number }) => void
+  onAddBlock: () => void
   isElligbleForPremium: boolean
 }
 
@@ -88,14 +88,12 @@ class AddBlock extends PureComponent<AddBlockProps> {
     })
       .then(response => {
         if (response && response.data) {
-          const { block } = response.data.create_block
-
           this.setState({
             mode: 'resting',
             inputKey: new Date().getTime(),
           })
 
-          return onAddBlock(block)
+          return onAddBlock()
         }
       })
       .catch(err => {
@@ -112,8 +110,7 @@ class AddBlock extends PureComponent<AddBlockProps> {
     })
       .then(response => {
         if (response && response.data) {
-          const { block } = response.data.create_block
-          onAddBlock(block)
+          onAddBlock()
         }
       })
       .catch(err => {

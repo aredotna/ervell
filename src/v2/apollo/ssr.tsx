@@ -42,9 +42,31 @@ export const renderPageComponent = ({ client, Component, props = {} }) => {
   )
 }
 
+// This is for rendering a component without
+// any of HTML wrapping or stylesheets
+//
+// This is used primarily for XML / RSS rendering
+export const renderBareComponent = ({ client, Component, props = {} }) => {
+  const helmetContext: any = {}
+  const WrappedComponent = wrapWithProviders(client, helmetContext)(
+    Component,
+    props
+  )
+
+  return renderToStringWithData(WrappedComponent).then(html => ({
+    client,
+    html,
+    state: client.extract(),
+  }))
+}
+
 export default client => (Component, props = {}, options: any = {}) => {
   if (options.mode === 'page') {
     return renderPageComponent({ client, Component, props })
+  }
+
+  if (options.mode === 'bare') {
+    return renderBareComponent({ client, Component, props })
   }
 
   return renderInlineComponent({ client, Component, props })

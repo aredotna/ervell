@@ -169,13 +169,17 @@ class ProfileChannels extends PureComponent {
                           isPreviewable={false}
                         />
 
-                        {channel.blokks.map(blokk => (
-                          <Cell.Konnectable
-                            key={`${blokk.__typename}_${blokk.id}`}
-                            konnectable={blokk}
-                            context={channel.blokks}
-                          />
-                        ))}
+                        {channel.blokks.map((blokk, i) =>
+                          blokk ? (
+                            <Cell.Konnectable
+                              key={`${blokk.__typename}_${blokk.id}`}
+                              konnectable={blokk}
+                              context={channel.blokks}
+                            />
+                          ) : (
+                            <Cell.Skeletal key={i} />
+                          )
+                        )}
                       </Grid>
                     </ChannelRow>
                   ))}

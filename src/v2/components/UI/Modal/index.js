@@ -1,3 +1,5 @@
+/* global this */
+
 import React from 'react'
 
 import { wrapWithProviders, initClientSideApolloClient } from 'v2/apollo'

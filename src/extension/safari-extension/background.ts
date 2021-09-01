@@ -47,7 +47,7 @@ export class SafariApp {
         })
       )
       if (resolveNow) {
-        resolve()
+        resolve(undefined)
       } else {
         window.arenaSafariAppRequests.set(messageId, {
           resolve: resolve,

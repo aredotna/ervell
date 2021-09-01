@@ -55,14 +55,14 @@ interface BillingFormProps {
 }
 
 interface BillingFormState {
-  mode:
+  mode?:
     | 'resting'
     | 'error'
     | 'processing'
     | 'canceled'
     | 'subscribed'
     | 'card_changed'
-  operations: OperationsEnum[]
+  operations?: OperationsEnum[]
   planId?: SupportedPlanEnum | 'basic' | 'lifetime'
   couponCode?: string
   errorMessage?: string
