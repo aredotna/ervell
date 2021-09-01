@@ -202,6 +202,7 @@
     "underscore": "*",
     "underscore.string": "*",
     "use-keyboard-list-navigation": "^2.3.1",
+    "use-merge-state": "^1.2.3",
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",

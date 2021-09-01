@@ -18550,6 +18550,11 @@ use-keyboard-list-navigation@^2.3.1:
   dependencies:
     map-cursor-to-max "^1.0.0"
 
+use-merge-state@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/use-merge-state/-/use-merge-state-1.2.3.tgz#4e86efcc10956153261e5672052da268fb0256cc"
+  integrity sha512-gWL0y72Bdi/Uy9mrd7KcaRN5G5LQ4t6yy7OyVL/iJXEywPaL7VFQkG5MmfJqPLZ670OuS43m0HLL7LMk/kjgOw==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
