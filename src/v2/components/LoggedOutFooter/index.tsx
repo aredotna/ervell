@@ -54,10 +54,10 @@ const Column = styled(Box).attrs({ m: [4, 6], mr: [7, 9] })`
   `}
 `
 
-const ColumnHeader = styled(Text).attrs({ f: [2, 3], color: 'gray.light' })``
+const ColumnHeader = styled(Text).attrs({ f: [2, 3], color: 'lightGray' })``
 const ColumnContents = styled(Text).attrs({
   f: [2, 3],
-  color: 'gray.light',
+  color: 'lightGray',
   mt: 4,
 })`
   ul {
@@ -73,10 +73,10 @@ const ColumnContents = styled(Text).attrs({
 const A = styled(Link)`
   display: block;
   line-height: 1.5;
-  color: ${({ theme }) => theme.colors.gray.light} !important;
+  color: ${({ theme }) => theme.colors.lightGray} !important;
 `
 
-const HR = styled(HorizontalRule).attrs({ color: 'gray.semiLight', mb: 10 })`
+const HR = styled(HorizontalRule).attrs({ color: 'middleGray', mb: 10 })`
   height: 1px;
   width: 100%;
 `
@@ -95,7 +95,7 @@ export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
       {isHomepage && (
         <Box display="flex" flexDirection="column" flex={1} mr={6}>
           <TopSection>
-            <Icons name="ArenaMark" mb={6} size="1.5em" color="gray.light" />
+            <Icons name="ArenaMark" mb={6} size="1.5em" color="lightGray" />
             <Text mb={6}>
               <A href="/about">About &amp; Features</A>
               <A
