@@ -23,6 +23,15 @@ export const ChannelPageMetaTags: React.FC<Props> = ({ channel, subtitle }) => {
         <Description>{channel.meta_description}</Description>
       )}
 
+      {channel.visibility !== 'private' && (
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${title} RSS`}
+          href={`${channel.canonical}/feed/rss`}
+        />
+      )}
+
       <Canonical>{channel.canonical}</Canonical>
 
       {channel.image_url && <Image>{channel.image_url}</Image>}
