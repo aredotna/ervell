@@ -23,7 +23,7 @@ const UserRss: React.FC<UserRssProps> = ({ params }) => {
       title={`Are.na / ${user.name}`}
       link={user.href}
       atomLink={`${user.href}/feed/rss`}
-      lastBuildDate={user.contents[0].updated_at}
+      lastBuildDate={user.contents[0]?.updated_at}
     >
       {user.contents.map(block => {
         return <RssBlock key={block.id} block={block} />

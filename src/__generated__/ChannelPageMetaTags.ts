@@ -15,4 +15,5 @@ export interface ChannelPageMetaTags {
   canonical: string | null;
   is_nsfw: boolean;
   image_url: string | null;
+  visibility: string;
 }

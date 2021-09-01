@@ -9,5 +9,6 @@ export const channelPageMetaTagsFragment = gql`
     canonical: href(absolute: true)
     is_nsfw
     image_url(size: DISPLAY)
+    visibility
   }
 `
