@@ -86,7 +86,7 @@ interface LoggedOutFooterProps {
 }
 
 export const LoggedOutFooter: React.FC<LoggedOutFooterProps> = ({
-  isHomepage = true,
+  isHomepage,
 }) => {
   const { slug, id } = useSerializedMe()
 
