@@ -27,7 +27,7 @@ import CancellationNotice from 'v2/components/Billing/components/CancellationNot
 import CancelPremium from 'v2/components/Billing/components/CancelPremium'
 import StatusOverlay from 'v2/components/Billing/components/StatusOverlay'
 
-import { useMergeState } from 'use-merge-state'
+import useMergeState from 'v2/hooks/useMergeState'
 
 import { CancelPremiumSubscription as CancelPremiumSubscriptionType } from '__generated__/CancelPremiumSubscription'
 import {
