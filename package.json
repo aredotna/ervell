@@ -68,7 +68,9 @@
     "constantinople": "^3.1.1",
     "js-yaml": "^3.13.1",
     "cryptiles": "^4.1.2",
-    "uglify-js": "^2.6.0"
+    "uglify-js": "^2.6.0",
+    "**/@typescript-eslint/eslint-plugin": "^4.1.1",
+    "**/@typescript-eslint/parser": "^4.1.1"
   },
   "dependencies": {
     "@apollo/client": "^3.4.7",
@@ -202,7 +204,6 @@
     "underscore": "*",
     "underscore.string": "*",
     "use-keyboard-list-navigation": "^2.3.1",
-    "use-merge-state": "^1.2.3",
     "useragent": "^2.3.0",
     "validator": "*",
     "waypoints": "^4.0.1",
@@ -230,7 +231,7 @@
     "@types/safari-extension-content": "^0.0.14",
     "@types/styled-system": "^4.1.0",
     "@types/webpack-env": "^1.13.9",
-    "@typescript-eslint/eslint-plugin": "2.30.0",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "2.30.0",
     "apollo": "2.33.2",
     "babel-core": "^7.0.0-bridge.0",
