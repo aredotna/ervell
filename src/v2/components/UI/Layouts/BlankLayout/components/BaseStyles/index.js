@@ -5,6 +5,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-family: ${props => props.theme.fonts.sans};
     background-color: ${props => props.theme.colors.background};
   }

@@ -28,6 +28,13 @@ const getCache = (key, callback) => {
   return client.get(key, callback)
 }
 
+const sendFeed = (res, data) => {
+  res.status(200)
+  res.set('Content-Type', 'application/rss+xml')
+  res.send(data)
+  res.end()
+}
+
 const middlewareStack = [apolloMiddleware]
 
 const app = express()
@@ -39,19 +46,14 @@ const resolve = [
     getCache(key, (err, data) => {
       if (err) return next(err)
       if (data) {
-        res.status(200)
-        res.send(data)
-        res.end()
+        sendFeed(res, data)
       } else {
         req.apollo
           .render(withStaticRouter(Routes), {}, { mode: 'bare' })
           .then(apolloRes => {
             const feed = pageResolver({ apolloRes })
             setCache(key, feed)
-
-            res.status(200)
-            res.send(feed)
-            res.end()
+            sendFeed(res, feed)
           })
           .catch(err => {
             return next(err)
