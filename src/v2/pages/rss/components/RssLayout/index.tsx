@@ -20,13 +20,11 @@ interface RssLayoutProps {
 export const RssLayout: React.FC<RssLayoutProps> = ({
   title,
   link,
-  atomLink,
   description,
   lastBuildDate,
   children,
 }) => {
   const html = `
-    <atom:link href="${atomLink}" rel="self" type="application/rss+xml" />
     <title>${title}</title>
     <link>${link}</link>
     <description>${description || ''}</description>
