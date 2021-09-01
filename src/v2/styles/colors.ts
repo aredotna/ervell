@@ -37,6 +37,7 @@ const COLORS = {
   },
   white: 'white',
   black: 'black',
+  lightGray: '#eee',
   middleGray: '#929292',
   background: 'white',
 }

@@ -32,8 +32,12 @@ const COLORS = {
     semiTranslucent: 'rgba(0, 0, 0, 0.5)',
     transparent: 'rgba(0, 0, 0, 0.001)',
   },
+  brand: {
+    deepBlue: '#00075F',
+  },
   white: 'white',
   black: 'black',
+  lightGray: '#eee',
   middleGray: '#6d6d6d',
   background: 'black',
 }
