@@ -30,7 +30,7 @@ export const RssItem: React.FC<RssItemProps> = ({
     <link>${link}</link>
     <pubDate>${new Date(pubDate).toUTCString()}</pubDate>
     <guid>${guid}</guid>
-    <source url="${source.split('?')[0]}" />
+    <source url="${source?.split('?')[0]}" />
     <description>
       <![CDATA[${description}]]>
     </description>
