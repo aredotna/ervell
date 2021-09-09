@@ -21,6 +21,7 @@ const Table = styled.table`
   border-collapse: separate;
   border-spacing: 0 ${x => x.theme.space[4]};
   margin-bottom: ${x => x.theme.space[7]};
+  table-layout: fixed;
 `
 
 export const TD = styled.td`
@@ -32,6 +33,8 @@ export const TD = styled.td`
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
+  max-width: ${x => x.maxWidth};
+  overflow: hidden;
 
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
@@ -65,7 +68,7 @@ const TR = styled.tr`
   }
 `
 
-export const FIRST_COLUMN_WIDTH = 420
+export const FIRST_COLUMN_WIDTH = `320px`
 
 interface ChannelTableQueryProps {
   id: string
@@ -151,7 +154,11 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           <TR key={`header-${i}`} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, j) => {
               return (
-                <TH key={`key-${j}`} {...column.getHeaderProps()}>
+                <TH
+                  key={`key-${j}`}
+                  width={column.width}
+                  {...column.getHeaderProps()}
+                >
                   <Text f={1}>{column.render('Header')}</Text>
                 </TH>
               )
@@ -171,7 +178,6 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 block={typedRowOriginal}
                 columnLength={columns.length}
                 {...row.getRowProps()}
-                onClick={() => row.toggleRowExpanded(false)}
               />
             )
           }
@@ -189,7 +195,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
               {row.cells.map((cell, j) => {
                 return (
                   <TD
-                    width={cell.column.maxWidth}
+                    width={cell.column.width}
+                    maxWidth={cell.column.maxWidth}
                     key={`td-key-${j}`}
                     {...cell.getCellProps()}
                   >

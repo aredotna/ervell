@@ -63,7 +63,7 @@ const everythingExcept = (
 const paginationWithPageAndPer: FieldMergeFunction<any, any> = (
   existing,
   incoming,
-  { args: { page = 1, per } = {} }
+  { args: { page = 1, per = 25 } = {} }
 ) => {
   /*
    * Ensure args and data is properly set up

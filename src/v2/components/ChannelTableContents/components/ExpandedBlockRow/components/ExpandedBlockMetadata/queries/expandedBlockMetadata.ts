@@ -7,6 +7,7 @@ export default gql`
   query ExpandedBlockMetadata($id: ID!) {
     block: blokk(id: $id) {
       ... on Model {
+        id
         created_at_unix_time: created_at(format: "%s")
         created_at_timestamp: created_at
         created_at(relative: true)

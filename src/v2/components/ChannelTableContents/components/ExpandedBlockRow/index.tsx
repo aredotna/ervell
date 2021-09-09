@@ -31,7 +31,7 @@ const TD = styled.td`
 interface ExpandedBlockRowProps {
   block: ChannelTableContentsSet_channel_blokks
   columnLength: number
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({

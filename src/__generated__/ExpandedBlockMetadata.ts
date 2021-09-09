@@ -9,8 +9,8 @@
 
 export interface ExpandedBlockMetadata_block_Channel_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -22,30 +22,30 @@ export interface ExpandedBlockMetadata_block_Channel_source {
 
 export interface ExpandedBlockMetadata_block_Channel {
   __typename: "Channel";
+  id: number;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
   updated_at_timestamp: string | null;
-  title: string | null;
+  title: string;
   description: string | null;
   user: ExpandedBlockMetadata_block_Channel_user | null;
   source: ExpandedBlockMetadata_block_Channel_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  id: number | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
 }
 
-export interface ExpandedBlockMetadata_block_Text_user {
+export interface ExpandedBlockMetadata_block_Attachment_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
-export interface ExpandedBlockMetadata_block_Text_can {
+export interface ExpandedBlockMetadata_block_Attachment_can {
   __typename: "BlockCan";
   manage: boolean | null;
   comment: boolean | null;
@@ -54,38 +54,35 @@ export interface ExpandedBlockMetadata_block_Text_can {
   edit_thumbnail: boolean | null;
 }
 
-export interface ExpandedBlockMetadata_block_Text_source {
+export interface ExpandedBlockMetadata_block_Attachment_source {
   __typename: "ConnectableSource";
   title: string | null;
   url: string | null;
 }
 
-export interface ExpandedBlockMetadata_block_Text {
-  __typename: "Text";
+export interface ExpandedBlockMetadata_block_Attachment {
+  __typename: "Attachment" | "Embed" | "Link" | "PendingBlock";
+  id: number;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
   updated_at_timestamp: string | null;
-  title: string | null;
+  title: string;
   description: string | null;
-  user: ExpandedBlockMetadata_block_Text_user | null;
-  can: ExpandedBlockMetadata_block_Text_can | null;
-  content: string | null;
-  source: ExpandedBlockMetadata_block_Text_source | null;
+  user: ExpandedBlockMetadata_block_Attachment_user | null;
+  can: ExpandedBlockMetadata_block_Attachment_can | null;
+  source: ExpandedBlockMetadata_block_Attachment_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  find_original_url: string | null;
-  id: number | null;
-  editable_title: string | null;
+  shareable_title: string;
+  editable_title: string;
   editable_description: string | null;
-  editable_content: string | null;
 }
 
 export interface ExpandedBlockMetadata_block_Image_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
@@ -106,12 +103,13 @@ export interface ExpandedBlockMetadata_block_Image_source {
 
 export interface ExpandedBlockMetadata_block_Image {
   __typename: "Image";
+  id: number;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
   updated_at_timestamp: string | null;
-  title: string | null;
+  title: string;
   description: string | null;
   user: ExpandedBlockMetadata_block_Image_user | null;
   can: ExpandedBlockMetadata_block_Image_can | null;
@@ -120,22 +118,21 @@ export interface ExpandedBlockMetadata_block_Image {
   original_image_url: string | null;
   source: ExpandedBlockMetadata_block_Image_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
+  shareable_title: string;
   find_original_url: string | null;
   downloadable_image: string | null;
-  id: number | null;
-  editable_title: string | null;
+  editable_title: string;
   editable_description: string | null;
 }
 
-export interface ExpandedBlockMetadata_block_Link_user {
+export interface ExpandedBlockMetadata_block_Text_user {
   __typename: "User";
-  id: number | null;
-  name: string | null;
+  id: number;
+  name: string;
   href: string | null;
 }
 
-export interface ExpandedBlockMetadata_block_Link_can {
+export interface ExpandedBlockMetadata_block_Text_can {
   __typename: "BlockCan";
   manage: boolean | null;
   comment: boolean | null;
@@ -144,32 +141,35 @@ export interface ExpandedBlockMetadata_block_Link_can {
   edit_thumbnail: boolean | null;
 }
 
-export interface ExpandedBlockMetadata_block_Link_source {
+export interface ExpandedBlockMetadata_block_Text_source {
   __typename: "ConnectableSource";
   title: string | null;
   url: string | null;
 }
 
-export interface ExpandedBlockMetadata_block_Link {
-  __typename: "Link" | "Embed" | "Attachment" | "PendingBlock";
+export interface ExpandedBlockMetadata_block_Text {
+  __typename: "Text";
+  id: number;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
   created_at: string | null;
   updated_at: string | null;
   updated_at_timestamp: string | null;
-  title: string | null;
+  title: string;
   description: string | null;
-  user: ExpandedBlockMetadata_block_Link_user | null;
-  can: ExpandedBlockMetadata_block_Link_can | null;
-  source: ExpandedBlockMetadata_block_Link_source | null;
+  user: ExpandedBlockMetadata_block_Text_user | null;
+  can: ExpandedBlockMetadata_block_Text_can | null;
+  content: string;
+  source: ExpandedBlockMetadata_block_Text_source | null;
   shareable_href: string | null;
-  shareable_title: string | null;
-  id: number | null;
-  editable_title: string | null;
+  shareable_title: string;
+  find_original_url: string | null;
+  editable_title: string;
   editable_description: string | null;
+  editable_content: string;
 }
 
-export type ExpandedBlockMetadata_block = ExpandedBlockMetadata_block_Channel | ExpandedBlockMetadata_block_Text | ExpandedBlockMetadata_block_Image | ExpandedBlockMetadata_block_Link;
+export type ExpandedBlockMetadata_block = ExpandedBlockMetadata_block_Channel | ExpandedBlockMetadata_block_Attachment | ExpandedBlockMetadata_block_Image | ExpandedBlockMetadata_block_Text;
 
 export interface ExpandedBlockMetadata {
   block: ExpandedBlockMetadata_block | null;
