@@ -177,8 +177,7 @@ const PricingTable: React.FC = () => {
           {signUpCopy}
         </CTAButton>
         <Features>
-          <Feature>Up to 500 total blocks*</Feature>
-          <Feature>Up to 50 private blocks</Feature>
+          <Feature>Up to 200 total blocks*</Feature>
         </Features>
       </Cell>
     </Table>

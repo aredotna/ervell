@@ -31,7 +31,7 @@ export default class TotalBlocksMeter extends Component {
           <strong>
             {amount} out of {non_premium_connections_limit}
           </strong>{' '}
-          total blocks used
+          blocks used
         </Meter>
       </Box>
     )
