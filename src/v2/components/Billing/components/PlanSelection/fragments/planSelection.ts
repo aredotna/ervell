@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client'
 
-import privateBlocksMeterFragment from 'v2/components/PrivateBlocksMeter/fragments/privateBlocksMeter'
 import totalBlocksMeterFragment from 'v2/components/TotalBlocksMeter/fragments/totalBlocksMeter'
 
 export default gql`
@@ -19,9 +18,7 @@ export default gql`
         id
       }
     }
-    ...PrivateBlocksMeter
     ...TotalBlocksMeter
   }
-  ${privateBlocksMeterFragment}
   ${totalBlocksMeterFragment}
 `

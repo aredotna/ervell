@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import RadioOptions from 'v2/components/UI/RadioOptions'
-import PrivateBlocksMeter from 'v2/components/PrivateBlocksMeter'
 import TotalBlocksMeter from 'v2/components/TotalBlocksMeter'
 import { PlanSelection as PlanSelectionType } from '__generated__/PlanSelection'
 
@@ -84,8 +83,7 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
                   <OptionDescription>
                     <span>
                       Basic members are limited to{' '}
-                      {me.non_premium_private_connections_limit} private blocks{' '}
-                      and {me.non_premium_connections_limit} total blocks.
+                      {me.non_premium_connections_limit} blocks.
                     </span>
                   </OptionDescription>
                 </Option>
@@ -95,7 +93,6 @@ const PlanSelection: React.FC<PlanSelectionProps> = props => {
 
           {selectedValue === 'basic' && (
             <Box ml={8} mb={6}>
-              <PrivateBlocksMeter me={me} my={6} />
               <TotalBlocksMeter me={me} my={6} />
 
               <Text mt={5} f={3} color="state.premium">
