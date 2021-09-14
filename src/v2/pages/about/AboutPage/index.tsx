@@ -131,6 +131,11 @@ const AboutPageInner: React.FC<AboutPageProps> = ({ section }) => {
             <PricingTable />
           </PricingTableContainer>
 
+          <Text f={3} color="gray.medium" textAlign="center" py={6} mb={8}>
+            *A block is an individual piece of content. Blocks can be images,
+            text, links, attachments, or embeds.
+          </Text>
+
           <MaxBox pt={8} mb={8}>
             <PricingCTAs />
           </MaxBox>

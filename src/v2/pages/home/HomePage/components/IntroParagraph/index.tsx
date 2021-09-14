@@ -92,7 +92,7 @@ export const IntroParagraph: React.FC = () => {
             </Button>
             <P mt={5}>
               <ul>
-                <li>limited to 100 total blocks</li>
+                <li>limited to 200 total blocks</li>
               </ul>
             </P>
           </ButtonBox>
