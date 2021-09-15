@@ -21,6 +21,7 @@ export const MEDIA_QUERIES = Object.keys(BREAKPOINTS).reduce((acc, label) => {
 }, {})
 
 export const Z_INDEXES = {
+  connect: 1000,
   header: 4001,
   dropdown: 4002,
   loader: 5001,
