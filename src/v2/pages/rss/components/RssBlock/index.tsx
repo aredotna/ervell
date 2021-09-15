@@ -24,9 +24,11 @@ export const RssBlock: React.FC<RssBlockProps> = ({ block }) => {
       }" /></a>`
       break
     case 'Link':
-      description = `<a href="${block.href}"><img src="${
-        (block as RssBlock_Link).image_url
-      }" /></a>`
+      description = `
+        <p>${block.description}</p>
+        <a href="${block.href}">
+          <img src="${(block as RssBlock_Link).image_url}" />
+        </a>`
       break
     case 'Text':
       description = `<p>${(block as RssBlock_Text).content}</p>`
