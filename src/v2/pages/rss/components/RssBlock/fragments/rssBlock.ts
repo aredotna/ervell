@@ -29,7 +29,7 @@ export default gql`
     }
 
     ... on Link {
-      description
+      description(format: HTML)
       source {
         url
       }

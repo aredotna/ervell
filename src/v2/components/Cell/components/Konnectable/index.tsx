@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { height, width, space } from 'styled-system'
 import { Link, useLocation } from 'react-router-dom'
@@ -57,15 +57,11 @@ interface ContextProps {
 
 interface Props {
   konnectable: KonnectableCellData
-  context: ContextProps[]
+  context?: ContextProps[]
   isPreviewable: boolean
   onOverlay?: () => any
   onOverlayClose?: () => any
   children?: React.ReactNode
-}
-
-interface State {
-  mode: Mode
 }
 
 interface InnerProps {
@@ -73,125 +69,112 @@ interface InnerProps {
   isSpiderRequesting: boolean
 }
 
-export class KonnectableInner extends PureComponent<Props & InnerProps> {
-  static defaultProps = {
-    context: [],
-    isPreviewable: true,
+export const KonnectableInner: React.FC<Props & InnerProps> = ({
+  konnectable,
+  isPreviewable,
+  children,
+  context,
+  isSpiderRequesting,
+  location,
+  onOverlay: onOverlayCallback,
+  onOverlayClose: onOverlayCloseCallback,
+  ...rest
+}) => {
+  const [mode, setMode] = useState<Mode>(Mode.RESTING)
+
+  const onClick = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (mode === Mode.OVERLAY) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    },
+    [mode]
+  )
+
+  const onMouseEnter = useCallback(() => {
+    if (mode === Mode.OVERLAY || isTouchDevice()) return
+    setMode(Mode.HOVER)
+  }, [mode])
+
+  const onMouseLeave = useCallback(() => {
+    if (mode === Mode.OVERLAY || isTouchDevice()) return
+    setMode(Mode.RESTING)
+  }, [mode])
+
+  const onOverlay = useCallback(() => {
+    setMode(Mode.OVERLAY)
+    onOverlayCallback && onOverlayCallback()
+  }, [onOverlayCallback])
+
+  const onOverlayClose = useCallback(() => {
+    setMode(Mode.HOVER)
+    onOverlayCloseCallback && onOverlayCloseCallback()
+  }, [onOverlayCloseCallback])
+
+  const defaultToParams = {
+    pathname: konnectable.href,
+    state:
+      konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable),
   }
 
-  state: Readonly<State> = {
-    mode: Mode.RESTING,
-  }
-
-  onMouseEnter = () => {
-    if (this.state.mode === Mode.OVERLAY || isTouchDevice()) return
-    this.setState({ mode: Mode.HOVER })
-  }
-
-  onMouseLeave = () => {
-    if (this.state.mode === Mode.OVERLAY || isTouchDevice()) return
-    this.setState({ mode: Mode.RESTING })
-  }
-
-  onOverlay = () => {
-    this.setState({ mode: Mode.OVERLAY })
-    const { onOverlay } = this.props
-    onOverlay && onOverlay()
-  }
-
-  onOverlayClose = () => {
-    this.setState({ mode: Mode.HOVER })
-    const { onOverlayClose } = this.props
-    onOverlayClose && onOverlayClose()
-  }
-
-  onClick = (e: React.MouseEvent<HTMLElement>) => {
-    const { mode } = this.state
-
-    if (mode === Mode.OVERLAY) {
-      e.preventDefault()
-      e.stopPropagation()
-    }
-  }
-
-  render() {
-    const { mode } = this.state
-    const {
-      konnectable,
-      isPreviewable,
-      children,
-      context,
-      isSpiderRequesting,
-      location,
-      ...rest
-    } = this.props
-
-    const defaultToParams = {
-      pathname: konnectable.href,
-      state:
-        konnectable.__typename === 'Channel' && getBreadcrumbPath(konnectable),
-    }
-
-    const toParams =
-      konnectable.__typename === 'Channel' || isSpiderRequesting || !location
-        ? defaultToParams
-        : {
-            ...defaultToParams,
-            state: {
-              background:
-                mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
-              context,
-            },
-          }
-
-    return (
-      <Container
-        to={toParams}
-        role="button"
-        aria-label={`Link to ${konnectable.__typename}: ${konnectable.title}`}
-        tabIndex={0}
-        onClick={this.onClick}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        data-id={konnectable.id}
-        data-no-instant={
-          konnectable.__typename === 'Channel' ? undefined : true
+  const toParams =
+    konnectable.__typename === 'Channel' || isSpiderRequesting || !location
+      ? defaultToParams
+      : {
+          ...defaultToParams,
+          state: {
+            background:
+              mode !== Mode.OVERLAY ? JSON.stringify(location) : undefined,
+            context,
+          },
         }
-        {...rest}
-      >
-        {children && children}
 
-        {konnectable.__typename !== 'Channel' &&
-          konnectable.counts.comments > 0 &&
-          mode !== Mode.OVERLAY && (
-            <Comments>{konnectable.counts.comments}</Comments>
-          )}
+  return (
+    <Container
+      to={toParams}
+      role="button"
+      aria-label={`Link to ${konnectable.__typename}: ${konnectable.title}`}
+      tabIndex={0}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      data-id={konnectable.id}
+      data-no-instant={konnectable.__typename === 'Channel' ? undefined : true}
+      {...rest}
+    >
+      {children && children}
 
-        <KonnectableDisplay mode={mode} konnectable={konnectable} />
-
-        {konnectable.__typename !== 'Channel' && (
-          <KonnectableMetadata mode={mode} konnectable={konnectable} />
+      {konnectable.__typename !== 'Channel' &&
+        konnectable.counts.comments > 0 &&
+        mode !== Mode.OVERLAY && (
+          <Comments>{konnectable.counts.comments}</Comments>
         )}
 
-        {konnectable.__typename !== 'Channel' && mode !== Mode.RESTING && (
-          <KonnectableBlockOverlay
-            konnectable={konnectable}
-            onOverlay={this.onOverlay}
-            onClose={this.onOverlayClose}
-          />
-        )}
+      <KonnectableDisplay mode={mode} konnectable={konnectable} />
 
-        {konnectable.__typename === 'Channel' && mode !== Mode.RESTING && (
-          <KonnectableChannelOverlay
-            channel={konnectable}
-            onOverlay={this.onOverlay}
-            onClose={this.onOverlayClose}
-            isPreviewable={isPreviewable}
-          />
-        )}
-      </Container>
-    )
-  }
+      {konnectable.__typename !== 'Channel' && (
+        <KonnectableMetadata mode={mode} konnectable={konnectable} />
+      )}
+
+      {konnectable.__typename !== 'Channel' && mode !== Mode.RESTING && (
+        <KonnectableBlockOverlay
+          konnectable={konnectable}
+          onOverlay={onOverlay}
+          onClose={onOverlayClose}
+        />
+      )}
+
+      {konnectable.__typename === 'Channel' && mode !== Mode.RESTING && (
+        <KonnectableChannelOverlay
+          channel={konnectable}
+          onOverlay={onOverlay}
+          onClose={onOverlayClose}
+          isPreviewable={isPreviewable}
+        />
+      )}
+    </Container>
+  )
 }
 
 export const Konnectable: React.FC<Props> = props => {
