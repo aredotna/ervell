@@ -15,26 +15,25 @@ import {
   ContentContainer,
   SidebarContainer,
   TextBoxContainer,
-} from 'v2/components/BlockLightboxLayout'
+} from 'v2/components/FullBlockLayout'
 
 import { MarkdownCheatsheet } from 'v2/components/ManageBlock/components/MarkdownCheatsheet'
-import BlockLightboxImage from 'v2/components/BlockLightbox/components/BlockLightboxImage'
-import { BlockLightboxLink } from 'v2/components/BlockLightbox/components/BlockLightboxLink'
-import BlockLightboxAttachment from 'v2/components/BlockLightbox/components/BlockLightboxAttachment'
-import BlockLightboxEmbed from 'v2/components/BlockLightbox/components/BlockLightboxEmbed'
-import BlockLightboxPending from 'v2/components/BlockLightbox/components/BlockLightboxPending'
+import FullBlockImage from 'v2/components/FullBlock/components/FullBlockImage'
+import { FullBlockLink } from 'v2/components/FullBlock/components/FullBlockLink'
+import FullBlockAttachment from 'v2/components/FullBlock/components/FullBlockAttachment'
+import FullBlockEmbed from 'v2/components/FullBlock/components/FullBlockEmbed'
+import FullBlockPending from 'v2/components/FullBlock/components/FullBlockPending'
+import Text from 'v2/components/UI/Text'
 
 import UPDATE_BLOCK_MUTATION from 'v2/components/ManageBlock/mutations/updateBlock'
 
 import { ManageBlock as Block } from '__generated__/ManageBlock'
-import { BlockLightbox, BlockLightbox_Link } from '__generated__/BlockLightbox'
-
+import { FullBlock, FullBlock_Link } from '__generated__/FullBlock'
+import { FullBlockImage_Image } from '__generated__/FullBlockImage'
 import {
   updateBlockMutation,
   updateBlockMutationVariables,
 } from '__generated__/updateBlockMutation'
-import Text from '../UI/Text'
-import { BlockLightboxImage_Image } from '__generated__/BlockLightboxImage'
 
 const TextField = styled(Textarea).attrs({
   px: 7,
@@ -94,33 +93,33 @@ const DescriptionField = styled(Textarea).attrs({
 `
 
 interface ManageBlockProps {
-  block: Block & BlockLightbox
+  block: Block & FullBlock
   updateBlock?: (e?: any) => void
   onDone?: (e?: any) => void
   onChangePending?: () => void
   autoFocus?: 'title' | 'description' | 'body'
 }
 
-const MemoizedContent = React.memo<{ block: Block & BlockLightbox }>(
+const MemoizedContent = React.memo<{ block: Block & FullBlock }>(
   props =>
     ({
       Image: (
-        <BlockLightboxImage
+        <FullBlockImage
           {...props}
-          block={props.block as BlockLightboxImage_Image}
+          block={props.block as FullBlockImage_Image}
           layout="DEFAULT"
         />
       ),
       Link: (
-        <BlockLightboxLink
+        <FullBlockLink
           linkViewMode="screenshot"
           layout="DEFAULT"
-          block={props.block as BlockLightbox_Link}
+          block={props.block as FullBlock_Link}
         />
       ),
-      Attachment: <BlockLightboxAttachment {...props} />,
-      Embed: <BlockLightboxEmbed layout="DEFAULT" {...props} />,
-      PendingBlock: <BlockLightboxPending {...props} />,
+      Attachment: <FullBlockAttachment {...props} />,
+      Embed: <FullBlockEmbed layout="DEFAULT" {...props} />,
+      PendingBlock: <FullBlockPending {...props} />,
     }[props.block.__typename]),
   () => true
 )

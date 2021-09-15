@@ -11,7 +11,7 @@ import Box from 'v2/components/UI/Box'
 import TopBarLayout from 'v2/components/UI/Layouts/TopBarLayout'
 import LoadingIndicator from 'v2/components/UI/LoadingIndicator'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
-import BlockLightbox from 'v2/components/BlockLightbox'
+import FullBlock from 'v2/components/FullBlock'
 import BlockPageMetaTags from 'v2/pages/block/components/BlockPageMetaTags'
 
 import { MobileOrChildren } from 'v2/components/MobileBanner'
@@ -48,7 +48,7 @@ export default class BlockPage extends PureComponent {
                 <React.Fragment>
                   <BlockPageMetaTags block={block} />
 
-                  <BlockLightbox block={block} layout="DEFAULT" />
+                  <FullBlock block={block} layout="DEFAULT" />
 
                   <MobileOrChildren route="block" id={block.id}>
                     <div />

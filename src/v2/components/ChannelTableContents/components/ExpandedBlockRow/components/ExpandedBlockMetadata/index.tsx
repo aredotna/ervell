@@ -5,8 +5,8 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import { truncate } from 'v2/components/UI/Truncate'
 
-import BlockLightboxActions from 'v2/components/BlockLightbox/components/BlockLightboxActions'
-import Header from 'v2/components/BlockLightbox/components/BlockLightboxMetadataPane/components/Header'
+import FullBlockActions from 'v2/components/FullBlock/components/FullBlockActions'
+import Header from 'v2/components/FullBlock/components/FullBlockMetadataPane/components/Header'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import EXPANDED_BLOCK_METADATA_QUERY from './queries/expandedBlockMetadata'
@@ -14,7 +14,7 @@ import {
   ExpandedBlockMetadata as ExpandedBlockMetadataType,
   ExpandedBlockMetadataVariables,
 } from '__generated__/ExpandedBlockMetadata'
-import { BlockLightbox } from '__generated__/BlockLightbox'
+import { FullBlock } from '__generated__/FullBlock'
 
 interface ExpandedBlockMetadataProps {
   block: ChannelTableContentsSet_channel_blokks
@@ -105,8 +105,8 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
               Actions
             </Header>
             <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
-              <BlockLightboxActions
-                block={block as BlockLightbox}
+              <FullBlockActions
+                block={block as FullBlock}
                 linkViewMode={'screenshot'}
                 onLinkViewModeChange={() => null}
                 hideLinkMode

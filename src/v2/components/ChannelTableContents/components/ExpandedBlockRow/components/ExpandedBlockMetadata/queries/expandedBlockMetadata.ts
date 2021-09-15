@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import blockLightboxActionsFragment from 'v2/components/BlockLightbox/components/BlockLightboxActions/fragments/blockLightboxActions'
+import fullBlockActionsFragment from 'v2/components/FullBlock/components/FullBlockActions/fragments/fullBlockActions'
 import manageBlockFragment from 'v2/components/ManageBlock/fragments/manageBlock'
 
 export default gql`
@@ -41,10 +41,10 @@ export default gql`
         original_image_url: image_url(size: ORIGINAL)
       }
 
-      ...BlockLightboxActions
+      ...FullBlockActions
       ...ManageBlock
     }
   }
-  ${blockLightboxActionsFragment}
+  ${fullBlockActionsFragment}
   ${manageBlockFragment}
 `

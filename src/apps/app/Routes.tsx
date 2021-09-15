@@ -28,7 +28,7 @@ import { AcceptInvitePage } from 'v2/pages/accept_invite/AcceptInvitePage'
 // Block modal
 import Modal from 'v2/components/UI/Modal/Portal'
 import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
-import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
+import { ModalFullBlock } from 'v2/components/ModalFullBlock'
 import { BlogIndex } from 'v2/pages/blog/BlogIndex'
 import { BlogPost } from 'v2/pages/blog/BlogPost'
 import { ConfirmationPage } from 'v2/pages/confirmation/ConfirmationPage'
@@ -245,7 +245,7 @@ export const Routes = () => {
 
             return (
               <Modal Dialog={ModalFullscreenDialog}>
-                <ModalBlockLightbox id={params.id} ids={ids} />
+                <ModalFullBlock id={params.id} ids={ids} />
               </Modal>
             )
           })}
