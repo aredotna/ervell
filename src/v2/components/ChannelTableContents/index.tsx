@@ -33,8 +33,10 @@ export const TD = styled.td`
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
-  max-width: ${x => x.maxWidth};
+  max-width: ${x => x.maxWidth || 0};
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
@@ -68,7 +70,7 @@ const TR = styled.tr`
   }
 `
 
-export const FIRST_COLUMN_WIDTH = `320px`
+export const FIRST_COLUMN_WIDTH = `35%`
 
 interface ChannelTableQueryProps {
   id: string
@@ -106,7 +108,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         Header: 'Title',
         accessor: 'title',
         Cell: StandardCell,
-        maxWidth: 200,
+        width: '40%',
       },
       {
         Header: 'Added at',
@@ -125,6 +127,12 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         accessor: 'counts.public_channels',
         Cell: StandardCell,
         maxWidth: 300,
+      },
+      {
+        Header: '',
+        Cell: StandardCell,
+        id: 'id',
+        width: 70,
       },
     ],
     []
@@ -178,6 +186,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 block={typedRowOriginal}
                 columnLength={columns.length}
                 {...row.getRowProps()}
+                // onClick={() => row.toggleRowExpanded(false)}
               />
             )
           }
@@ -186,12 +195,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
             return <ChannelRow channel={typedRowOriginal} />
           }
 
+          const openRow = () => row.toggleRowExpanded(true)
+
           return (
-            <TR
-              key={`tr-key-${i}`}
-              {...row.getRowProps()}
-              onClick={row.toggleRowExpanded}
-            >
+            <TR key={`tr-key-${i}`} {...row.getRowProps()} onClick={openRow}>
               {row.cells.map((cell, j) => {
                 return (
                   <TD

@@ -45,10 +45,10 @@ export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
       <TD width={FIRST_COLUMN_WIDTH}>
         <ExpandedBlockRowContents block={block} />
       </TD>
-      <TD colSpan={columnLength - 2}>
+      <TD colSpan={columnLength - 3}>
         <ExpandedBlockMetadata block={block} />
       </TD>
-      <TD></TD>
+      <TD colSpan={2}></TD>
     </Row>
   )
 }

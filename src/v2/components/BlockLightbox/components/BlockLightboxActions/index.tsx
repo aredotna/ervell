@@ -41,12 +41,14 @@ interface BlockLightboxActionsProps {
   block: Block
   linkViewMode: LinkViewMode
   onLinkViewModeChange: OnLinkViewModeChange
+  hideLinkMode?: boolean
 }
 
 const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
   block,
   linkViewMode,
   onLinkViewModeChange,
+  hideLinkMode = false,
 }) => {
   if (block?.__typename === 'Channel') {
     return null
@@ -66,7 +68,7 @@ const BlockLightboxActions: React.FC<BlockLightboxActionsProps> = ({
 
   return (
     <Container>
-      {block?.__typename === 'Link' && (
+      {block?.__typename === 'Link' && !hideLinkMode && (
         <Inner withBorder>
           <BlockLightboxSwitchViewMode
             linkViewMode={linkViewMode}

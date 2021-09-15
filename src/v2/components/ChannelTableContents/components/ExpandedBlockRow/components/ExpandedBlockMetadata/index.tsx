@@ -109,6 +109,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
                 block={block as BlockLightbox}
                 linkViewMode={'screenshot'}
                 onLinkViewModeChange={() => null}
+                hideLinkMode
               />
             </Text>
           </>
