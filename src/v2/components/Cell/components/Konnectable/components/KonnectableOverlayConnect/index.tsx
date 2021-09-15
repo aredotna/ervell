@@ -9,6 +9,7 @@ import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 import { ConnectionSelection } from 'v2/components/ConnectionSelection'
 
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import constants from 'v2/styles/constants'
 
 const Container = styled(Box).attrs({
   pt: 4,
@@ -28,6 +29,7 @@ const Container = styled(Box).attrs({
   bottom: 0;
   left: 0;
   background-color: ${props => props.theme.colors.background};
+  z-index: ${constants.z.connect};
 
   &:after {
     margin: -1px;

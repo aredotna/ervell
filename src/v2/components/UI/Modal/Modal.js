@@ -21,7 +21,7 @@ export default class Modal extends Component {
   static propTypes = {
     Dialog: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     children: PropTypes.node.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
   }
 
   static defaultProps = {
