@@ -4,6 +4,8 @@ import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTab
 import { FIRST_COLUMN_WIDTH } from '../..'
 import { ExpandedBlockRowContents } from './components/ExpandedBlockRowContents'
 import { ExpandedBlockMetadata } from './components/ExpandedBlockMetadata'
+import { FullBlockMetadataFoldWithQuery } from 'v2/components/FullBlock/components/FullBlockMetadataFold'
+import Box from 'v2/components/UI/Box'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -18,6 +20,7 @@ const TD = styled.td`
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
+  vertical-align: top;
 
   &:first-child {
     border-left: 1px solid ${x => x.theme.colors.gray.block};
@@ -26,6 +29,11 @@ const TD = styled.td`
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.block};
   }
+`
+
+const MetadataFoldContainer = styled(Box)`
+  overflow: scroll;
+  height: 100%;
 `
 
 interface ExpandedBlockRowProps {
@@ -48,7 +56,13 @@ export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
       <TD colSpan={columnLength - 3}>
         <ExpandedBlockMetadata block={block} />
       </TD>
-      <TD colSpan={2}></TD>
+      <TD colSpan={2}>
+        <MetadataFoldContainer>
+          <Box p={4}>
+            <FullBlockMetadataFoldWithQuery id={block.id.toString()} />
+          </Box>
+        </MetadataFoldContainer>
+      </TD>
     </Row>
   )
 }

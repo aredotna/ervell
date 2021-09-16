@@ -1,68 +1,55 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/client'
 
 import fullBlockFoldQuery from 'v2/components/FullBlock/components/FullBlockMetadataFold/queries/fullBlockFold'
 
+import Box from 'v2/components/UI/Box'
+import Text from 'v2/components/UI/Text'
 import Count from 'v2/components/UI/Count'
 import ErrorAlert from 'v2/components/UI/ErrorAlert'
-import Header from 'v2/components/FullBlock/components/FullBlockMetadataPane/components/Header'
-import FullBlockConnections from 'v2/components/FullBlock/components/FullBlockConnections'
-import FullBlockComments from 'v2/components/FullBlock/components/FullBlockComments'
+import { FullBlockConnections } from 'v2/components/FullBlock/components/FullBlockConnections'
+import { FullBlockCommentsWithQuery } from 'v2/components/FullBlock/components/FullBlockComments'
 import { FullBlock as Block } from '__generated__/FullBlock'
 
 import {
   FullBlockFold as FullBlockFoldType,
   FullBlockFoldVariables,
+  FullBlockFold_block,
 } from '__generated__/FullBlockFold'
 
 interface FullBlockMetadataFoldProps {
-  block: Block
+  block: Block | FullBlockFold_block
 }
 
-export const BlockLightMetadataFold: React.FC<FullBlockMetadataFoldProps> = ({
+const Header = ({ children: title, selected = false, ...rest }) => (
+  <Box
+    mt={6}
+    mb={3}
+    pb={3}
+    borderBottom="1px solid"
+    borderColor={selected ? 'gray.bold' : 'gray.light'}
+    flex={1}
+    style={{ cursor: 'pointer' }}
+    {...rest}
+  >
+    <Text f={2} color={selected ? 'gray.bold' : 'gray.medium'} align="center">
+      {title}
+    </Text>
+  </Box>
+)
+
+export const FullBlockMetadataFold: React.FC<FullBlockMetadataFoldProps> = ({
   block: { id },
   block,
 }) => {
-  const { data, loading, error, fetchMore } = useQuery<
+  const { data, loading, error } = useQuery<
     FullBlockFoldType,
     FullBlockFoldVariables
   >(fullBlockFoldQuery, { variables: { id: id.toString() } })
-  const [state, setState] = useState({ per: 10, page: 1, loadingMore: false })
 
-  const loadMore = useCallback(() => {
-    const { page, per } = state
-
-    setState(prevState => ({
-      ...prevState,
-      loadingMore: true,
-    }))
-
-    fetchMore({
-      variables: { page: page + 1, per },
-      updateQuery: (prevResult, { fetchMoreResult }) => ({
-        block: {
-          ...prevResult.block,
-          ...fetchMoreResult.block,
-          private_channels: [
-            ...prevResult.block.private_channels,
-            ...fetchMoreResult.block.private_channels,
-          ],
-          public_channels: [
-            ...prevResult.block.public_channels,
-            ...fetchMoreResult.block.public_channels,
-          ],
-        },
-      }),
-    }).then(({ errors }) => {
-      if (errors) return
-
-      setState(prevState => ({
-        ...prevState,
-        page: page + 1,
-        loadingMore: false,
-      }))
-    })
-  }, [fetchMore, state])
+  const [selectedTab, setSelectedTab] = useState<'connections' | 'comments'>(
+    'connections'
+  )
 
   if (
     error ||
@@ -74,47 +61,74 @@ export const BlockLightMetadataFold: React.FC<FullBlockMetadataFoldProps> = ({
 
   const blockData = loading ? {} : data?.block
   const fullBlock = { ...block, ...blockData }
-  const { loadingMore } = state
 
   return (
-    <React.Fragment>
-      <Header mt={8}>
-        {data?.block.counts ? (
-          <Count
-            amount={
-              data?.block.counts.private_channels +
-              data?.block.counts.public_channels
-            }
-            label="Connection"
-          />
-        ) : (
-          'Connections'
+    <Box>
+      <Box display="flex" flexDirection="row" width="100%">
+        <Header
+          selected={selectedTab === 'connections'}
+          onClick={() => setSelectedTab('connections')}
+        >
+          {data?.block.counts ? (
+            <Count
+              amount={
+                data?.block.counts.private_channels +
+                data?.block.counts.public_channels
+              }
+              label="Connection"
+            />
+          ) : (
+            'Connections'
+          )}
+        </Header>
+        {fullBlock.can.comment && (
+          <>
+            <Header
+              selected={selectedTab === 'comments'}
+              onClick={() => setSelectedTab('comments')}
+            >
+              {Object.prototype.hasOwnProperty.call(fullBlock, 'counts') ? (
+                <Count amount={data?.block.counts.comments} label="Comment" />
+              ) : (
+                'Comment'
+              )}
+            </Header>
+          </>
         )}
-      </Header>
+      </Box>
 
-      <FullBlockConnections
-        block={fullBlock}
-        loading={loading}
-        onLoadMore={loadMore()}
-        loadingMore={loadingMore}
-        mt={4}
-      />
-
-      {fullBlock.can.comment && (
-        <React.Fragment>
-          <Header mt={8}>
-            {Object.prototype.hasOwnProperty.call(fullBlock, 'counts') ? (
-              <Count amount={data?.block.counts.comments} label="Comment" />
-            ) : (
-              'Comment'
-            )}
-          </Header>
-
-          <FullBlockComments block={fullBlock} loading={loading} mt={4} />
-        </React.Fragment>
-      )}
-    </React.Fragment>
+      <Box
+        mt={3}
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-start"
+      >
+        {selectedTab === 'connections' && (
+          <FullBlockConnections id={block.id.toString()} />
+        )}
+        {selectedTab === 'comments' && (
+          <FullBlockCommentsWithQuery id={block.id.toString()} />
+        )}
+      </Box>
+    </Box>
   )
 }
 
-export default BlockLightMetadataFold
+interface FullBlockMetadataFoldWithQueryProps {
+  id: string
+}
+
+export const FullBlockMetadataFoldWithQuery: React.FC<FullBlockMetadataFoldWithQueryProps> = ({
+  id,
+}) => {
+  const { data } = useQuery<FullBlockFoldType, FullBlockFoldVariables>(
+    fullBlockFoldQuery,
+    { variables: { id } }
+  )
+
+  if (!data) return null
+
+  return <FullBlockMetadataFold block={data.block} />
+}
+
+export default FullBlockMetadataFold
