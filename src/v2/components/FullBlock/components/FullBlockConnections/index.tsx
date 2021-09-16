@@ -28,14 +28,12 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
   id,
   ...rest
 }) => {
-  const { data, loading, fetchMore, error } = useQuery<
+  const { data, loading, fetchMore } = useQuery<
     FullBlockConnectionsQuery,
     FullBlockConnectionsQueryVariables
   >(fullBlockConnectionsQuery, { variables: { id } })
 
   const [state, setState] = useState({ per: 10, page: 1, loadingMore: false })
-
-  console.log({ data, error })
 
   const onLoadMore = useCallback(() => {
     const { page, per } = state
@@ -76,13 +74,8 @@ export const FullBlockConnections: React.FC<FullBlockConnectionsProps> = ({
 
   const { loadingMore } = state
 
-  console.log({ data })
-  console.log('before guard')
-
   if (data?.block.__typename === 'Channel' || !data || !data?.block || loading)
     return null
-
-  console.log('here i am')
 
   const {
     block,

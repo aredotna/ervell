@@ -186,7 +186,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 block={typedRowOriginal}
                 columnLength={columns.length}
                 {...row.getRowProps()}
-                // onClick={() => row.toggleRowExpanded(false)}
+                onMinimize={() => row.toggleRowExpanded(false)}
               />
             )
           }

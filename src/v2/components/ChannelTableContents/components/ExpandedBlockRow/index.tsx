@@ -6,6 +6,7 @@ import { ExpandedBlockRowContents } from './components/ExpandedBlockRowContents'
 import { ExpandedBlockMetadata } from './components/ExpandedBlockMetadata'
 import { FullBlockMetadataFoldWithQuery } from 'v2/components/FullBlock/components/FullBlockMetadataFold'
 import Box from 'v2/components/UI/Box'
+import { ActionButtons } from '../ActionButtons'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -21,6 +22,7 @@ const TD = styled.td`
   padding: 0;
   width: ${x => x.width};
   vertical-align: top;
+  position: relative;
 
   &:first-child {
     border-left: 1px solid ${x => x.theme.colors.gray.block};
@@ -31,6 +33,12 @@ const TD = styled.td`
   }
 `
 
+const ButtonContainer = styled(Box)`
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
 const MetadataFoldContainer = styled(Box)`
   overflow: scroll;
   height: 100%;
@@ -39,17 +47,17 @@ const MetadataFoldContainer = styled(Box)`
 interface ExpandedBlockRowProps {
   block: ChannelTableContentsSet_channel_blokks
   columnLength: number
-  onClick?: () => void
+  onMinimize?: () => void
 }
 
 export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
   block,
   columnLength,
-  onClick,
+  onMinimize,
   ...rest
 }) => {
   return (
-    <Row onClick={onClick} {...rest}>
+    <Row {...rest}>
       <TD width={FIRST_COLUMN_WIDTH}>
         <ExpandedBlockRowContents block={block} />
       </TD>
@@ -57,8 +65,11 @@ export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
         <ExpandedBlockMetadata block={block} />
       </TD>
       <TD colSpan={2}>
+        <ButtonContainer>
+          <ActionButtons isExpanded={true} canDelete onMinimize={onMinimize} />
+        </ButtonContainer>
         <MetadataFoldContainer>
-          <Box p={4}>
+          <Box p={4} mt={7}>
             <FullBlockMetadataFoldWithQuery id={block.id.toString()} />
           </Box>
         </MetadataFoldContainer>
