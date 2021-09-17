@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox'
+import fullBlockFragment from 'v2/components/FullBlock/fragments/fullBlock'
 
 export default gql`
   mutation updateBlockMutation(
@@ -18,9 +18,9 @@ export default gql`
       }
     ) {
       block: blokk {
-        ...BlockLightbox
+        ...FullBlock
       }
     }
   }
-  ${blockLightboxFragment}
+  ${fullBlockFragment}
 `

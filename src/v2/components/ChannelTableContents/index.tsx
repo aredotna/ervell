@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useQuery } from '@apollo/client'
-import { useTable } from 'react-table'
+import { useExpanded, useTable } from 'react-table'
 import styled from 'styled-components'
 
 import { ContentCell } from './components/ContentCell'
@@ -9,16 +9,19 @@ import Text from 'v2/components/UI/Text'
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
+  ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
 
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
+import ExpandedBlockRow from './components/ExpandedBlockRow'
 
 const Table = styled.table`
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 ${x => x.theme.space[4]};
   margin-bottom: ${x => x.theme.space[7]};
+  table-layout: fixed;
 `
 
 export const TD = styled.td`
@@ -30,6 +33,10 @@ export const TD = styled.td`
   line-height: 0;
   padding: 0;
   width: ${x => x.width};
+  max-width: ${x => x.maxWidth || 0};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:last-child {
     border-right: 1px solid ${x => x.theme.colors.gray.light};
@@ -43,6 +50,8 @@ const TH = styled(TD)`
 `
 
 const TR = styled.tr`
+  cursor: zoom-in;
+
   &:hover ${TD} {
     border-top-color: ${x => x.theme.colors.gray.regular};
     border-bottom-color: ${x => x.theme.colors.gray.regular};
@@ -60,6 +69,8 @@ const TR = styled.tr`
     border-color: ${x => x.theme.colors.gray.light};
   }
 `
+
+export const FIRST_COLUMN_WIDTH = `35%`
 
 interface ChannelTableQueryProps {
   id: string
@@ -91,13 +102,13 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         Header: 'Content',
         accessor: block => block,
         Cell: ContentCell,
-        width: 420,
+        width: FIRST_COLUMN_WIDTH,
       },
       {
         Header: 'Title',
         accessor: 'title',
         Cell: StandardCell,
-        maxWidth: 200,
+        width: '40%',
       },
       {
         Header: 'Added at',
@@ -115,16 +126,25 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         Header: 'Connections',
         accessor: 'counts.public_channels',
         Cell: StandardCell,
-        maxWidth: 200,
+        width: 200,
+      },
+      {
+        Header: '',
+        Cell: StandardCell,
+        id: 'id',
+        width: 70,
       },
     ],
     []
   ) as any
 
-  const tableInstance = useTable({
-    data: data?.channel.blokks,
-    columns: headers,
-  })
+  const tableInstance = useTable(
+    {
+      data: data?.channel.blokks,
+      columns: headers,
+    },
+    useExpanded
+  )
 
   const {
     getTableProps,
@@ -132,6 +152,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     headerGroups,
     rows,
     prepareRow,
+    columns,
   } = tableInstance
 
   return (
@@ -141,7 +162,11 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           <TR key={`header-${i}`} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, j) => {
               return (
-                <TH key={`key-${j}`} {...column.getHeaderProps()}>
+                <TH
+                  key={`key-${j}`}
+                  width={column.width}
+                  {...column.getHeaderProps()}
+                >
                   <Text f={1}>{column.render('Header')}</Text>
                 </TH>
               )
@@ -153,16 +178,32 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         {rows.map((row, i) => {
           prepareRow(row)
 
-          if (row.original.__typename === 'Channel') {
-            return <ChannelRow channel={row.original} />
+          const typedRowOriginal = row.original as ChannelTableContentsSet_channel_blokks
+
+          if (row.isExpanded && typedRowOriginal.__typename !== 'Channel') {
+            return (
+              <ExpandedBlockRow
+                block={typedRowOriginal}
+                columnLength={columns.length}
+                {...row.getRowProps()}
+                onMinimize={() => row.toggleRowExpanded(false)}
+              />
+            )
           }
 
+          if (typedRowOriginal.__typename === 'Channel') {
+            return <ChannelRow channel={typedRowOriginal} />
+          }
+
+          const openRow = () => row.toggleRowExpanded(true)
+
           return (
-            <TR key={`tr-key-${i}`} {...row.getRowProps()}>
+            <TR key={`tr-key-${i}`} {...row.getRowProps()} onClick={openRow}>
               {row.cells.map((cell, j) => {
                 return (
                   <TD
-                    width={cell.column.maxWidth}
+                    width={cell.column.width}
+                    maxWidth={cell.column.maxWidth}
                     key={`td-key-${j}`}
                     {...cell.getCellProps()}
                   >

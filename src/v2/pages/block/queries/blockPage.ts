@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 import blockPageMetaTagsFragment from 'v2/pages/block/components/BlockPageMetaTags/fragments/blockPageMetaTags'
-import blockLightboxFragment from 'v2/components/BlockLightbox/fragments/blockLightbox'
+import fullBlockFragment from 'v2/components/FullBlock/fragments/fullBlock'
 
 export default gql`
   query BlockPage($id: ID!) {
@@ -11,9 +11,9 @@ export default gql`
         id
       }
       ...BlockPageMetaTags
-      ...BlockLightbox
+      ...FullBlock
     }
   }
-  ${blockLightboxFragment}
+  ${fullBlockFragment}
   ${blockPageMetaTagsFragment}
 `

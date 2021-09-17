@@ -39,6 +39,7 @@ import Drag from 'v2/components/UI/Icons/Drag.svg'
 import Apple from 'v2/components/UI/Icons/Apple.svg'
 import Android from 'v2/components/UI/Icons/Android.svg'
 import Hamburger from 'v2/components/UI/Icons/Hamburger.svg'
+import Minimize from 'v2/components/UI/Icons/Minimize.svg'
 
 export const COMPONENTS = {
   ArenaMark: <ArenaMark />,
@@ -75,6 +76,7 @@ export const COMPONENTS = {
   Apple: <Apple />,
   Android: <Android />,
   Hamburger: <Hamburger />,
+  Minimize: <Minimize />,
 }
 
 export const ICON_NAMES = Object.keys(COMPONENTS)

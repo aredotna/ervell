@@ -5,8 +5,13 @@ export default gql`
     channel(id: $id) {
       __typename
       id
-      blokks {
+      blokks(direction: DESC) {
         __typename
+
+        ... on Model {
+          id
+        }
+
         ... on Block {
           counts {
             public_channels
@@ -63,6 +68,7 @@ export default gql`
 
         ... on Text {
           content(format: MARKDOWN)
+          html: content(format: HTML)
         }
 
         ... on ConnectableInterface {

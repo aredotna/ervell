@@ -24,7 +24,8 @@
   "tslint.enable": false,
   "typescript.tsdk": "./node_modules/typescript/lib",
   "debug.node.autoAttach": "on",
-  "eslint.enable": true,
+  "typescript.updateImportsOnFileMove.enabled": "prompt",
+  "javascript.updateImportsOnFileMove.enabled": "prompt",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },

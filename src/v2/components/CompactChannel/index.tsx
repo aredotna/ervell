@@ -82,6 +82,7 @@ interface CompactChannelProps {
   channel: Channel
   showEditButton?: boolean
   refetchQueries?: PureQueryOptions[]
+  mt?: number
 }
 
 const openEditChannel = (

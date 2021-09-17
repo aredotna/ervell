@@ -9,10 +9,7 @@ import { getSpace } from 'v2/styles/functions'
 
 import Box from 'v2/components/UI/Box'
 
-import {
-  LightboxLayout,
-  LightboxContext,
-} from 'v2/components/BlockLightboxLayout'
+import { LightboxLayout, LightboxContext } from 'v2/components/FullBlockLayout'
 
 interface SplitPaneProps extends ReactSplitPaneProps {
   context: LightboxContext
