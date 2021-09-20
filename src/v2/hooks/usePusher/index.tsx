@@ -39,14 +39,14 @@ export const usePusher = ({
    */
   useEffect(() => {
     const pusher: Pusher | false = initPusherClient()
-    const pusherChannel =
+    const channel =
       !skip && pusher && pusher.subscribe(`channel-${NODE_ENV}-${channelId}`)
 
-    setChannel(pusherChannel)
+    setChannel(channel)
 
     return () => {
-      pusherChannel.unsubscribe()
-      pusherChannel.disconnect()
+      channel.unsubscribe()
+      channel.disconnect()
 
       setChannel(false)
     }
