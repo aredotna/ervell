@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import Pusher, { Channel } from 'pusher-js'
+import sharify from 'sharify'
 
 import { initPusherClient } from 'v2/util/initPusherClient'
 
@@ -9,32 +11,50 @@ export function normalizePayloads(payloads) {
 }
 
 interface PusherHook {
-  channel?: {
-    bind: (eventName: string, event: (payload: any) => void) => {}
-    unbind: () => void
-  }
+  channelId: number
+  skip: boolean
   onCreated?: (payload: any) => any
   onUpdated?: (payload: any) => any
   parsePayload?: (payload: any) => any
 }
 
-export const setupPusherChannel = socketId => {
-  const socket = initPusherClient()
-  const channel = socket && socket.subscribe(socketId)
-
-  return { channel, socket }
-}
-
 const emptyFn = () => {}
 
+const {
+  data: { NODE_ENV },
+} = sharify
+
 export const usePusher = ({
-  channel,
+  channelId,
+  skip,
   onCreated = emptyFn,
   onUpdated = emptyFn,
   parsePayload = emptyFn,
 }: PusherHook): any[] => {
+  const [channel, setChannel] = useState<Channel | false>(false)
   const [payloads, setPayloads] = useState([])
 
+  /**
+   * Effect to subscribe and unsubscribe to the channel
+   */
+  useEffect(() => {
+    const pusher: Pusher | false = initPusherClient()
+    const pusherChannel =
+      !skip && pusher && pusher.subscribe(`channel-${NODE_ENV}-${channelId}`)
+
+    setChannel(pusherChannel)
+
+    return () => {
+      pusherChannel.unsubscribe()
+      pusherChannel.disconnect()
+
+      setChannel(false)
+    }
+  }, [channelId, skip])
+
+  /**
+   * Effect to bind and unbind callbacks to the events
+   */
   useEffect(() => {
     if (channel) {
       channel.bind('created', (payload): void => {
@@ -59,7 +79,7 @@ export const usePusher = ({
         channel.unbind()
       }
     }
-  }, [channel, onCreated, onUpdated, parsePayload])
+  }, [channelId, onCreated, onUpdated, parsePayload, channel, skip])
 
   return payloads
 }

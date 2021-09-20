@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import { SortableContainer } from 'react-sortable-hoc'
 
 import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
@@ -20,8 +20,6 @@ const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
 
 interface Props {
   channel: ChannelContentsData
-  pusherChannel?: any
-  socket?: any
 }
 
 interface ExtendedProps extends Props {
@@ -51,7 +49,7 @@ const parsePayload = (payload: any): PusherPayload => {
 }
 
 const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
-  memo(({ channel, pusherChannel, socket, isSpiderRequesting, ...rest }) => {
+  memo(({ channel, isSpiderRequesting, ...rest }) => {
     const {
       blocks,
       getPage,
@@ -106,20 +104,12 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
     )
 
     usePusher({
-      channel: pusherChannel,
+      channelId: channel.id,
+      skip: !isSpiderRequesting,
       onCreated: addBlock,
       onUpdated: updateConnectable,
       parsePayload: parsePayload,
     })
-
-    useEffect(() => {
-      return () => {
-        if (pusherChannel) {
-          socket.unsubscribe(pusherChannel.name)
-          socket.disconnect()
-        }
-      }
-    }, [pusherChannel, socket])
 
     // For the lightbox, we need to filter out channels
     const lightboxConnectables = blocks.filter(
