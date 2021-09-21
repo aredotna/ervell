@@ -68,6 +68,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
       per: channelBlokksPaginatedPerPage,
     },
     ssr: args.current.ssr,
+    context: { queryDeduplication: false },
   })
 
   /**
