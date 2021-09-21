@@ -79,7 +79,7 @@ export const usePusher = ({
         channel.unbind()
       }
     }
-  }, [channelId, onCreated, onUpdated, parsePayload, channel, skip])
+  }, [onCreated, onUpdated, parsePayload, channel])
 
   return payloads
 }
