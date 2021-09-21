@@ -12,7 +12,7 @@ export function normalizePayloads(payloads) {
 
 interface PusherHook {
   channelId: number
-  skip: boolean
+  shouldSubscribe?: boolean
   onCreated?: (payload: any) => any
   onUpdated?: (payload: any) => any
   parsePayload?: (payload: any) => any
@@ -26,7 +26,7 @@ const {
 
 export const usePusher = ({
   channelId,
-  skip,
+  shouldSubscribe = true,
   onCreated = emptyFn,
   onUpdated = emptyFn,
   parsePayload = emptyFn,
@@ -40,7 +40,9 @@ export const usePusher = ({
   useEffect(() => {
     const pusher: Pusher | false = initPusherClient()
     const channel =
-      !skip && pusher && pusher.subscribe(`channel-${NODE_ENV}-${channelId}`)
+      shouldSubscribe &&
+      pusher &&
+      pusher.subscribe(`channel-${NODE_ENV}-${channelId}`)
 
     setChannel(channel)
 
@@ -50,7 +52,7 @@ export const usePusher = ({
 
       setChannel(false)
     }
-  }, [channelId, skip])
+  }, [channelId, shouldSubscribe])
 
   /**
    * Effect to bind and unbind callbacks to the events

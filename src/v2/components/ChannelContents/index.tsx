@@ -105,7 +105,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
 
     usePusher({
       channelId: channel.id,
-      skip: !isSpiderRequesting,
+      shouldSubscribe: !isSpiderRequesting && channel.can.add_to,
       onCreated: addBlock,
       onUpdated: updateConnectable,
       parsePayload: parsePayload,
