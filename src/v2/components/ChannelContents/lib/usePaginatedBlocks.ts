@@ -117,7 +117,6 @@ export const usePaginatedBlocks = (unsafeArgs: {
               blockArgs: [b, options],
               prevCount: prevCount,
             })
-            console.log('[b, options]', [b, options])
             newBlocks = res?.newBlocks ?? b
             newCount = res?.newCount ?? prevCount
 
