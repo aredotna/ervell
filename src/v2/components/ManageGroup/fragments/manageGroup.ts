@@ -15,7 +15,7 @@ export default gql`
     }
     can {
       manage
-      manage_users
+      manage_users: add_to
     }
     ...DeleteGroup
     ...ManageUsers

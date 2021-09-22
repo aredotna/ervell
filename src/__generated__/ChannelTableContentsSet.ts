@@ -37,6 +37,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Attachment {
   __typename: "Attachment";
+  id: number;
   counts: ChannelTableContentsSet_channel_blokks_Attachment_counts | null;
   created_at: string | null;
   updated_at: string | null;
@@ -81,6 +82,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Embed {
   __typename: "Embed";
+  id: number;
   counts: ChannelTableContentsSet_channel_blokks_Embed_counts | null;
   created_at: string | null;
   updated_at: string | null;
@@ -125,6 +127,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Image {
   __typename: "Image";
+  id: number;
   counts: ChannelTableContentsSet_channel_blokks_Image_counts | null;
   created_at: string | null;
   updated_at: string | null;
@@ -168,6 +171,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Link {
   __typename: "Link";
+  id: number;
   counts: ChannelTableContentsSet_channel_blokks_Link_counts | null;
   created_at: string | null;
   updated_at: string | null;
@@ -205,6 +209,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection 
 
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock {
   __typename: "PendingBlock";
+  id: number;
   counts: ChannelTableContentsSet_channel_blokks_PendingBlock_counts | null;
   created_at: string | null;
   updated_at: string | null;
@@ -240,10 +245,12 @@ export interface ChannelTableContentsSet_channel_blokks_Text_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Text {
   __typename: "Text";
+  id: number;
   counts: ChannelTableContentsSet_channel_blokks_Text_counts | null;
   created_at: string | null;
   updated_at: string | null;
   content: string;
+  html: string;
   title: string;
   user: ChannelTableContentsSet_channel_blokks_Text_user | null;
   /**
@@ -277,6 +284,7 @@ export interface ChannelTableContentsSet_channel_blokks_Channel_connection {
 
 export interface ChannelTableContentsSet_channel_blokks_Channel {
   __typename: "Channel";
+  id: number;
   visibility: string;
   title: string;
   counts: ChannelTableContentsSet_channel_blokks_Channel_counts | null;

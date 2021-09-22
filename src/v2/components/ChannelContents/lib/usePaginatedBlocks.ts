@@ -68,6 +68,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
       per: channelBlokksPaginatedPerPage,
     },
     ssr: args.current.ssr,
+    context: { queryDeduplication: false },
   })
 
   /**
@@ -292,28 +293,22 @@ export const usePaginatedBlocks = (unsafeArgs: {
         }
 
         // Fire the mutation
-        client
-          .mutate<
-            moveConnectableMutationData,
-            moveConnectableMutationVariables
-          >({
-            mutation: moveConnectableMutation,
-            variables: {
-              channel_id: args.current.channelId.toString(),
-              connectable: {
-                id: id.toString(),
-                type: getConnectableType(
-                  typename as ChannelContentsConnectable['__typename']
-                ),
-              },
-              insert_at: prevCount - newIndex,
+        client.mutate<
+          moveConnectableMutationData,
+          moveConnectableMutationVariables
+        >({
+          mutation: moveConnectableMutation,
+          variables: {
+            channel_id: args.current.channelId.toString(),
+            connectable: {
+              id: id.toString(),
+              type: getConnectableType(
+                typename as ChannelContentsConnectable['__typename']
+              ),
             },
-          })
-          .then(() => {
-            const oldPage = getPageFromIndex(oldIndex)
-            const newPage = getPageFromIndex(newIndex)
-            revalidatePages(oldPage, newPage)
-          })
+            insert_at: prevCount - newIndex,
+          },
+        })
 
         // Return the updated cache of the blocks array
         const newBlocks: typeof prevBlocks = []
@@ -325,7 +320,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         return { newBlocks }
       })
     },
-    [client, getPageFromIndex, revalidatePages, updateCache]
+    [client, updateCache]
   )
 
   /**

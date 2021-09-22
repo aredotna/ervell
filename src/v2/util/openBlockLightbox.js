@@ -1,6 +1,6 @@
 import Modal from 'v2/components/UI/Modal'
 import ModalFullscreenDialog from 'v2/components/UI/ModalFullscreenDialog'
-import { ModalBlockLightbox } from 'v2/components/ModalBlockLightbox'
+import { ModalFullBlock } from 'v2/components/ModalFullBlock'
 
 export default ({ id, context }) => {
   // Filter out Channels, Groups, Users and duplicates; return just IDs
@@ -23,7 +23,7 @@ export default ({ id, context }) => {
   }
 
   new Modal(
-    ModalBlockLightbox,
+    ModalFullBlock,
     { id, ids, onClose },
     { Dialog: ModalFullscreenDialog }
   ).open()

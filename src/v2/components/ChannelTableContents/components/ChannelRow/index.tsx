@@ -89,7 +89,7 @@ export const ChannelRow: React.FC<ChannelRowProps> = ({ channel }) => {
           color={`channel.${channel.visibility}`}
         />
       </Cell>
-      <Cell visibility={channel.visibility}>
+      <Cell visibility={channel.visibility} colSpan={2}>
         <StandardCell
           value={channel.counts.connected_to_channels}
           color={`channel.${channel.visibility}`}
