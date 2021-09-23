@@ -14,12 +14,18 @@ import {
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
 
+import ConnectableBlockQuery from '../queries/connectableBlokk'
 import moveConnectableMutation from '../mutations/moveConnectable'
 import channelContentsCount from '../fragments/channelContentsCount'
 import channelBlokksPaginatedQuery, {
   channelBlokksPaginatedPerPage,
 } from '../queries/channelBlokksPaginated'
 import { getConnectableType } from './getConnectableType'
+import {
+  ConnectableBlokk,
+  ConnectableBlokkVariables,
+} from '__generated__/ConnectableBlokk'
+import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 type UsePaginatedBlocksApi = {
   blocks: ChannelBlokksPaginated_channel_blokks[]
@@ -30,6 +36,10 @@ type UsePaginatedBlocksApi = {
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
+  updateBlock: (args: {
+    id: string
+    type: BaseConnectableTypeEnum | false
+  }) => void
   getBlocksFromCache: () => ChannelBlokksPaginated_channel_blokks[]
 }
 
@@ -345,6 +355,57 @@ export const usePaginatedBlocks = (unsafeArgs: {
   }, [client])
 
   /**
+   * Refetch block and update cache
+   */
+  const updateBlock: UsePaginatedBlocksApi['updateBlock'] = useCallback(
+    ({ id, type }) => {
+      //
+      // No need to update a channel block, just return early
+      //
+      if (type === BaseConnectableTypeEnum.CHANNEL) return null
+
+      // Refetch the block
+      // Fire the mutation
+      client
+        .query<ConnectableBlokk, ConnectableBlokkVariables>({
+          query: ConnectableBlockQuery,
+          variables: {
+            id: id.toString(),
+          },
+          fetchPolicy: 'network-only',
+        })
+        .then(result => {
+          updateCache(({ blockArgs: [prevBlocks, { readField }] }) => {
+            // Find the block in the blocks array
+            const blockIndex = prevBlocks.findIndex(block => {
+              return block && readField('id', block) === parseInt(id)
+            })
+
+            // Early exit if the block can't be found
+            if (blockIndex === -1) {
+              return null
+            }
+
+            const block = result.data?.blokk
+
+            if (!block) return null
+
+            const newBlocks = prevBlocks.map((prevBlock, i) =>
+              i === blockIndex
+                ? { __ref: `${block.__typename}:${block.id}` }
+                : prevBlock
+            )
+
+            return {
+              newBlocks,
+            }
+          })
+        })
+    },
+    [updateCache, client]
+  )
+
+  /**
    * Refetch query and wipe queriedPageNumbersRef
    */
   const addBlock: UsePaginatedBlocksApi['addBlock'] = useCallback(() => {
@@ -368,6 +429,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
     moveBlock,
     removeBlock,
     addBlock,
+    updateBlock,
     getBlocksFromCache,
   }
 
