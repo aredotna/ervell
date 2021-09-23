@@ -47,9 +47,10 @@ export const usePusher = ({
     setChannel(channel)
 
     return () => {
-      channel.unsubscribe()
-      channel.disconnect()
-
+      if (channel) {
+        channel?.unsubscribe()
+        channel?.disconnect()
+      }
       setChannel(false)
     }
   }, [channelId, shouldSubscribe])
