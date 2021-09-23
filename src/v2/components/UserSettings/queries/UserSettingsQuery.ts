@@ -25,6 +25,7 @@ export default gql`
         receive_group_premium_emails
         receive_sunday_review_emails
         hide_notification_count
+        dark_mode
       }
     }
   }
