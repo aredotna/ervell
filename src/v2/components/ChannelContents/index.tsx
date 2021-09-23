@@ -60,6 +60,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       addBlock,
       contentCount,
       updateBlock,
+      getBlocksFromCache,
     } = usePaginatedBlocks({
       channelId: channel.id,
       ssr: isSpiderRequesting,
@@ -92,7 +93,9 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         // We need to first check if the block already exists in this channel,
         // if it does, do nothing. Otherwise, proceed.
         //
-        const blockIndex = blocks.findIndex(
+        const cacheBlocks = getBlocksFromCache()
+
+        const blockIndex = cacheBlocks.findIndex(
           block =>
             block &&
             block.id === parseInt(id) &&
@@ -105,7 +108,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         // Otherwise proceed.
         addBlock()
       },
-      [blocks, addBlock]
+      [getBlocksFromCache, addBlock]
     )
 
     usePusher({
