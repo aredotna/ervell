@@ -19,6 +19,7 @@ export default gql`
     $password: String
     $password_confirmation: String
     $hide_notification_count: Boolean
+    $dark_mode: Boolean
   ) {
     update_account(
       input: {
@@ -39,6 +40,7 @@ export default gql`
         password: $password
         password_confirmation: $password_confirmation
         hide_notification_count: $hide_notification_count
+        dark_mode: $dark_mode
       }
     ) {
       me {
@@ -56,6 +58,7 @@ export default gql`
           exclude_from_indexes
           receive_newsletter
           show_nsfw
+          dark_mode
         }
       }
     }

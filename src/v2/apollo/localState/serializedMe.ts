@@ -14,6 +14,7 @@ export default (
   is_lifetime_premium?: any
   is_supporter?: any
   hide_notification_count?: any
+  dark_mode?: any
 } => {
   if (!user) return null
 
@@ -30,6 +31,7 @@ export default (
   const hide_notification_count = user.hide_notification_count || false
   const is_lifetime_premium = user.is_lifetime_premium || false
   const is_supporter = user.is_supporter || false
+  const dark_mode = user.dark_mode || false
 
   return {
     id: user.id,
@@ -42,5 +44,6 @@ export default (
     is_lifetime_premium,
     is_supporter,
     hide_notification_count,
+    dark_mode,
   }
 }

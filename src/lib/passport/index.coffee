@@ -44,6 +44,7 @@ CONFIG =
     'flags'
     'show_nsfw'
     'hide_notification_count'
+    'dark_mode'
   ]
 
 app = express()
