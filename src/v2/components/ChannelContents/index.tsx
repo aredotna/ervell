@@ -59,6 +59,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       removeBlock,
       addBlock,
       contentCount,
+      updateBlock,
       getBlocksFromCache,
     } = usePaginatedBlocks({
       channelId: channel.id,
@@ -77,36 +78,43 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
 
     const updateConnectable = useCallback(
       ({ id, type }: PusherPayload) => {
-        // Call getBlocksFromCache instead of using standard
-        // "blocks" value so that this useCallback can have a
-        // reference-stable value, even if the "blocks" value
-        // changes.
+        updateBlock({ id, type })
+      },
+      [updateBlock]
+    )
+
+    const createdConnectable = useCallback(
+      ({ id, type }: PusherPayload) => {
+        //
+        // This method can be called in a few different cases:
+        // - When a block is added via add block either by you or from another person (via pusher)
+        // - When a block is connected into the channel from another person
+        // - AND when a block in the current channel is connected into another channel
+        // We need to first check if the block already exists in this channel,
+        // if it does, do nothing. Otherwise, proceed.
+        //
         const cacheBlocks = getBlocksFromCache()
 
-        // Get the index of the block that was updated
-        const blockIndex = cacheBlocks.findIndex(block => {
-          return (
+        const blockIndex = cacheBlocks.findIndex(
+          block =>
             block &&
-            block.id.toString() === id &&
+            block.id === parseInt(id) &&
             getConnectableType(block.__typename) === type
-          )
-        })
+        )
 
-        // Early exit if the block can't be found
-        if (blockIndex === -1) {
-          return
-        }
+        // If the block already exists, early return
+        if (blockIndex > 0) return null
 
-        // Revalidate the page that the block is contained in
-        getPage(getPageFromIndex(blockIndex))
+        // Otherwise proceed.
+        addBlock()
       },
-      [getBlocksFromCache, getPage, getPageFromIndex]
+      [getBlocksFromCache, addBlock]
     )
 
     usePusher({
       channelId: channel.id,
       shouldSubscribe: !isSpiderRequesting && channel.can.add_to,
-      onCreated: addBlock,
+      onCreated: createdConnectable,
       onUpdated: updateConnectable,
       parsePayload: parsePayload,
     })
