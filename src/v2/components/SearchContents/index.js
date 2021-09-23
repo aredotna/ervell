@@ -103,65 +103,67 @@ export default class SearchContents extends PureComponent {
                   hasMore={contents.length >= per && hasMore}
                   loadMore={this.loadMore(fetchMore)}
                 >
-                  {contents.map(cell =>
-                    ({
-                      Image: () => (
-                        <Cell.Konnectable
-                          key={`${cell.__typename}_${cell.id}`}
-                          konnectable={cell}
-                          context={contents}
-                        />
-                      ),
-                      Attachment: () => (
-                        <Cell.Konnectable
-                          key={`${cell.__typename}_${cell.id}`}
-                          konnectable={cell}
-                          context={contents}
-                        />
-                      ),
-                      Text: () => (
-                        <Cell.Konnectable
-                          key={`${cell.__typename}_${cell.id}`}
-                          konnectable={cell}
-                          context={contents}
-                        />
-                      ),
-                      Link: () => (
-                        <Cell.Konnectable
-                          key={`${cell.__typename}_${cell.id}`}
-                          konnectable={cell}
-                          context={contents}
-                        />
-                      ),
-                      Embed: () => (
-                        <Cell.Konnectable
-                          key={`${cell.__typename}_${cell.id}`}
-                          konnectable={cell}
-                          context={contents}
-                        />
-                      ),
-                      Channel: () => (
-                        <Cell.Konnectable
-                          key={`${cell.__typename}_${cell.id}`}
-                          konnectable={cell}
-                          context={contents}
-                        />
-                      ),
-                      User: () => (
-                        <Cell.Identifiable
-                          key={`${cell.__typename}_${cell.id}`}
-                          identifiable={cell}
-                          context={contents}
-                        />
-                      ),
-                      Group: () => (
-                        <Cell.Identifiable
-                          key={`${cell.__typename}_${cell.id}`}
-                          identifiable={cell}
-                          context={contents}
-                        />
-                      ),
-                    }[cell.__typename]())
+                  {contents.map(
+                    cell =>
+                      cell &&
+                      {
+                        Image: () => (
+                          <Cell.Konnectable
+                            key={`${cell.__typename}_${cell.id}`}
+                            konnectable={cell}
+                            context={contents}
+                          />
+                        ),
+                        Attachment: () => (
+                          <Cell.Konnectable
+                            key={`${cell.__typename}_${cell.id}`}
+                            konnectable={cell}
+                            context={contents}
+                          />
+                        ),
+                        Text: () => (
+                          <Cell.Konnectable
+                            key={`${cell.__typename}_${cell.id}`}
+                            konnectable={cell}
+                            context={contents}
+                          />
+                        ),
+                        Link: () => (
+                          <Cell.Konnectable
+                            key={`${cell.__typename}_${cell.id}`}
+                            konnectable={cell}
+                            context={contents}
+                          />
+                        ),
+                        Embed: () => (
+                          <Cell.Konnectable
+                            key={`${cell.__typename}_${cell.id}`}
+                            konnectable={cell}
+                            context={contents}
+                          />
+                        ),
+                        Channel: () => (
+                          <Cell.Konnectable
+                            key={`${cell.__typename}_${cell.id}`}
+                            konnectable={cell}
+                            context={contents}
+                          />
+                        ),
+                        User: () => (
+                          <Cell.Identifiable
+                            key={`${cell.__typename}_${cell.id}`}
+                            identifiable={cell}
+                            context={contents}
+                          />
+                        ),
+                        Group: () => (
+                          <Cell.Identifiable
+                            key={`${cell.__typename}_${cell.id}`}
+                            identifiable={cell}
+                            context={contents}
+                          />
+                        ),
+                      }[cell.__typename]()
                   )}
                 </Grid>
               )}

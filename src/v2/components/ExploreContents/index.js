@@ -103,13 +103,16 @@ export default class ExploreContents extends PureComponent {
                   hasMore={contents.length >= per && hasMore}
                   loadMore={this.loadMore(fetchMore)}
                 >
-                  {contents.map(blokk => (
-                    <Cell.Konnectable
-                      key={`${blokk.__typename}_${blokk.id}`}
-                      konnectable={blokk}
-                      context={contents}
-                    />
-                  ))}
+                  {contents.map(
+                    blokk =>
+                      blokk && (
+                        <Cell.Konnectable
+                          key={`${blokk.__typename}_${blokk.id}`}
+                          konnectable={blokk}
+                          context={contents}
+                        />
+                      )
+                  )}
                 </Grid>
               )}
             </div>
