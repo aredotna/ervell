@@ -59,7 +59,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       removeBlock,
       addBlock,
       contentCount,
-      getBlocksFromCache,
+      updateBlock,
     } = usePaginatedBlocks({
       channelId: channel.id,
       ssr: isSpiderRequesting,
@@ -77,36 +77,41 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
 
     const updateConnectable = useCallback(
       ({ id, type }: PusherPayload) => {
-        // Call getBlocksFromCache instead of using standard
-        // "blocks" value so that this useCallback can have a
-        // reference-stable value, even if the "blocks" value
-        // changes.
-        const cacheBlocks = getBlocksFromCache()
-
-        // Get the index of the block that was updated
-        const blockIndex = cacheBlocks.findIndex(block => {
-          return (
-            block &&
-            block.id.toString() === id &&
-            getConnectableType(block.__typename) === type
-          )
-        })
-
-        // Early exit if the block can't be found
-        if (blockIndex === -1) {
-          return
-        }
-
-        // Revalidate the page that the block is contained in
-        getPage(getPageFromIndex(blockIndex))
+        updateBlock({ id, type })
       },
-      [getBlocksFromCache, getPage, getPageFromIndex]
+      [updateBlock]
+    )
+
+    const createdConnectable = useCallback(
+      ({ id, type }: PusherPayload) => {
+        //
+        // This method can be called in a few different cases:
+        // - When a block is added via add block either by you or from another person (via pusher)
+        // - When a block is connected into the channel from another person
+        // - AND when a block in the current channel is connected into another channel
+        // We need to first check if the block already exists in this channel,
+        // if it does, do nothing. Otherwise, proceed.
+        //
+        const blockIndex = blocks.findIndex(
+          block =>
+            block &&
+            block.id === parseInt(id) &&
+            getConnectableType(block.__typename) === type
+        )
+
+        // If the block already exists, early return
+        if (blockIndex > 0) return null
+
+        // Otherwise proceed.
+        addBlock()
+      },
+      [blocks, addBlock]
     )
 
     usePusher({
       channelId: channel.id,
       shouldSubscribe: !isSpiderRequesting && channel.can.add_to,
-      onCreated: addBlock,
+      onCreated: createdConnectable,
       onUpdated: updateConnectable,
       parsePayload: parsePayload,
     })
