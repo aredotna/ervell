@@ -567,7 +567,7 @@ const UserSettings: React.FC<UserSettingsProps> = ({ me, updateAccount }) => {
 
               <ContextDivider />
 
-              <Field name="darkmode" initialValue={darkModeEnabled}>
+              <Field name="dark_mode" initialValue={darkModeEnabled}>
                 {props => {
                   return (
                     <>
