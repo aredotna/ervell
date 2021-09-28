@@ -55,7 +55,6 @@ export interface BillingForm_customer {
 
 export interface BillingForm_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 

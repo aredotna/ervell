@@ -55,7 +55,6 @@ export interface DowngradeToLifetime_downgrade_to_lifetime_me_customer {
 
 export interface DowngradeToLifetime_downgrade_to_lifetime_me_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 

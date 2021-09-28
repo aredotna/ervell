@@ -57,7 +57,6 @@ export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_o
 
 export interface SubscribeToPremiumWithOptionalToken_subscribe_to_premium_with_optional_token_me_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 
