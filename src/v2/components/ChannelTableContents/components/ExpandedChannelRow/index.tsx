@@ -6,6 +6,7 @@ import { ChannelTableContentsSet_channel_blokks_Channel } from '__generated__/Ch
 import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
 import { ExpandedChannelRowContents } from './ExpandedChannelRowContents'
+import { FullChannelMetadataPane } from 'v2/components/FullChannel/components/FullChannelMetadataPane'
 
 const Row = styled.tr`
   border-color: transparent;
@@ -78,7 +79,9 @@ export const ExpandedChannelRow: React.FC<ExpandedChannelRowProps> = ({
           <ExpandedChannelRowContents id={channel.id} />
         </Box>
       </Cell>
-      <Cell visibility={channel.visibility} colSpan={3}></Cell>
+      <Cell visibility={channel.visibility} colSpan={3}>
+        <FullChannelMetadataPane id={channel.id.toString()} />
+      </Cell>
     </Row>
   )
 }

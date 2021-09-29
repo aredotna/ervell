@@ -20,6 +20,5 @@ export const ExpandedChannelRowContents: React.FC<ExpandedChannelRowContentsProp
   >(expandedChannelRowContentsQuery, { variables: { id: id.toString() } })
 
   if (loading || error) return null
-
   return <EmbeddedChannelContents channel={data.channel} />
 }
