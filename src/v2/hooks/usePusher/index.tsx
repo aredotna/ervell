@@ -38,11 +38,12 @@ export const usePusher = ({
    * Effect to subscribe and unsubscribe to the channel
    */
   useEffect(() => {
+    // if we don't return early, we will actually get an attempt to subscribe
+    if (!shouldSubscribe) return null
+
     const pusher: Pusher | false = initPusherClient()
-    const channel =
-      shouldSubscribe &&
-      pusher &&
-      pusher.subscribe(`channel-${NODE_ENV}-${channelId}`)
+    const pusherChannelId = `channel-${NODE_ENV}-${channelId}`
+    const channel = pusher && pusher.subscribe(pusherChannelId)
 
     setChannel(channel)
 
