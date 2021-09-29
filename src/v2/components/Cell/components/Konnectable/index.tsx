@@ -58,7 +58,7 @@ interface ContextProps {
 interface Props {
   konnectable: KonnectableCellData
   context?: ContextProps[]
-  isPreviewable: boolean
+  isPreviewable?: boolean
   onOverlay?: () => any
   onOverlayClose?: () => any
   children?: React.ReactNode
@@ -71,7 +71,7 @@ interface InnerProps {
 
 export const KonnectableInner: React.FC<Props & InnerProps> = ({
   konnectable,
-  isPreviewable,
+  isPreviewable = true,
   children,
   context,
   isSpiderRequesting,
