@@ -12,13 +12,15 @@ const Container = styled(Box)`
 `
 
 interface FullBlockShareProps {
-  block: FullBlockShareType
+  connectable: FullBlockShareType
 }
 
-export const FullBlockShare: React.FC<FullBlockShareProps> = ({ block }) => {
+export const FullBlockShare: React.FC<FullBlockShareProps> = ({
+  connectable,
+}) => {
   const [mode, setMode] = useState<'resting' | 'active'>('resting')
-  const url = `https://www.are.na${block?.shareable_href}`
-  const text = block?.shareable_title
+  const url = `https://www.are.na${connectable?.shareable_href}`
+  const text = connectable?.shareable_title
 
   const handleClick = e => {
     e.preventDefault()

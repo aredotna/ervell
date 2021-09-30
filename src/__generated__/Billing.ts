@@ -72,7 +72,6 @@ export interface Billing_customer {
 
 export interface Billing_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 

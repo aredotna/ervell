@@ -55,7 +55,6 @@ export interface CancelPremiumSubscription_cancel_premium_subscription_me_custom
 
 export interface CancelPremiumSubscription_cancel_premium_subscription_me_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 

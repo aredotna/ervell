@@ -27,6 +27,38 @@ export const baseMixin = css`
   }
 `
 
+const tinyMixin = css`
+  font-size: 11px;
+
+  line-height: 1.45;
+
+  p,
+  li,
+  ol,
+  code,
+  pre {
+    font-size: 0.8rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-size: 1rem;
+  }
+
+  h4 {
+    font-size: 0.9rem;
+  }
+
+  h5 {
+    font-size: 0.9rem;
+  }
+
+  h6 {
+    font-size: 0.9rem;
+  }
+`
+
 const smallMixin = css`
   font-size: 13px;
 
@@ -170,12 +202,18 @@ export const mixin = css`
   }
 `
 
-export const SansSerifText = styled.div<{ isSmall: boolean }>`
+export const SansSerifText = styled.div<{ isSmall: boolean; isTiny: boolean }>`
   ${mixin}
 
   ${props =>
     props.isSmall &&
     `
     ${smallMixin}
+  `}
+
+  ${props =>
+    props.isTiny &&
+    `
+    ${tinyMixin}
   `}
 `

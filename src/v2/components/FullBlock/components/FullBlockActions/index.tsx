@@ -91,7 +91,7 @@ const FullBlockActions: React.FC<FullBlockActionsProps> = ({
           </>
         )}
 
-        <FullBlockShare block={block} />
+        <FullBlockShare connectable={block} />
 
         {(block?.__typename === 'Image' || block?.__typename === 'Text') &&
           block?.find_original_url && (

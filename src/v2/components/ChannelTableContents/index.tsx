@@ -15,6 +15,7 @@ import {
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
+import ExpandedChannelRow from './components/ExpandedChannelRow'
 
 const Table = styled.table`
   width: 100%;
@@ -179,6 +180,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           prepareRow(row)
 
           const typedRowOriginal = row.original as ChannelTableContentsSet_channel_blokks
+          const openRow = () => row.toggleRowExpanded(true)
 
           if (row.isExpanded && typedRowOriginal.__typename !== 'Channel') {
             return (
@@ -191,11 +193,25 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
             )
           }
 
-          if (typedRowOriginal.__typename === 'Channel') {
-            return <ChannelRow channel={typedRowOriginal} />
+          if (row.isExpanded && typedRowOriginal.__typename === 'Channel') {
+            return (
+              <ExpandedChannelRow
+                channel={typedRowOriginal}
+                columnLength={columns.length}
+                {...row.getRowProps()}
+              />
+            )
           }
 
-          const openRow = () => row.toggleRowExpanded(true)
+          if (typedRowOriginal.__typename === 'Channel') {
+            return (
+              <ChannelRow
+                channel={typedRowOriginal}
+                {...row.getRowProps()}
+                onClick={openRow}
+              />
+            )
+          }
 
           return (
             <TR key={`tr-key-${i}`} {...row.getRowProps()} onClick={openRow}>

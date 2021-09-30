@@ -48,6 +48,8 @@ const Row = styled.tr`
     const color = props.theme.colors.channel[props.visibility]
 
     return `
+      cursor: zoom-in;
+
       &:hover ${TD} {
         border-top-color: ${color};
         border-bottom-color: ${color};
@@ -66,11 +68,12 @@ const Row = styled.tr`
 
 interface ChannelRowProps {
   channel: ChannelTableContentsSet_channel_blokks_Channel
+  onClick: () => void
 }
 
-export const ChannelRow: React.FC<ChannelRowProps> = ({ channel }) => {
+export const ChannelRow: React.FC<ChannelRowProps> = ({ channel, onClick }) => {
   return (
-    <Row visibility={channel.visibility}>
+    <Row visibility={channel.visibility} onClick={onClick}>
       <Cell visibility={channel.visibility} colSpan={2}>
         <StandardCell
           value={`${channel.title} – ${channel.counts.contents} blocks`}
