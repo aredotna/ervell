@@ -33,6 +33,14 @@ export default gql`
         image_updated_at_unix_time: image_updated_at(format: "%s")
       }
 
+      ... on Embed {
+        id
+        title
+        embed_html
+        embed_width
+        embed_height
+      }
+
       ... on Link {
         id
         title

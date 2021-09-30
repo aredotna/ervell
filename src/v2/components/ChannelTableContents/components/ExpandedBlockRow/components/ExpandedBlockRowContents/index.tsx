@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import React from 'react'
 import styled from 'styled-components'
 import { FullBlockAttachment } from 'v2/components/FullBlock/components/FullBlockAttachment'
+import FullBlockEmbed from 'v2/components/FullBlock/components/FullBlockEmbed'
 import { FullBlockLinkScreenshot } from 'v2/components/FullBlock/components/FullBlockLink/components/FullBlockLinkScreenshot'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
@@ -71,6 +72,10 @@ export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> =
         layout="DEFAULT"
       />
     )
+  }
+
+  if (data?.block.__typename === 'Embed') {
+    return <FullBlockEmbed block={data?.block} />
   }
 
   if (block?.__typename === 'Image') {

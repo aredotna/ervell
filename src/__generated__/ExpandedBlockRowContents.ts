@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface ExpandedBlockRowContents_block_Channel {
-  __typename: "Channel" | "Embed" | "PendingBlock";
+  __typename: "Channel" | "PendingBlock";
   id: number;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
@@ -59,6 +59,20 @@ export interface ExpandedBlockRowContents_block_Attachment {
   image_updated_at_unix_time: string | null;
 }
 
+export interface ExpandedBlockRowContents_block_Embed {
+  __typename: "Embed";
+  id: number;
+  created_at_unix_time: string | null;
+  created_at_timestamp: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  updated_at_timestamp: string | null;
+  title: string;
+  embed_html: string | null;
+  embed_width: number | null;
+  embed_height: number | null;
+}
+
 export interface ExpandedBlockRowContents_block_Link_source {
   __typename: "ConnectableSource";
   title: string | null;
@@ -83,7 +97,7 @@ export interface ExpandedBlockRowContents_block_Link {
   source: ExpandedBlockRowContents_block_Link_source | null;
 }
 
-export type ExpandedBlockRowContents_block = ExpandedBlockRowContents_block_Channel | ExpandedBlockRowContents_block_Text | ExpandedBlockRowContents_block_Image | ExpandedBlockRowContents_block_Attachment | ExpandedBlockRowContents_block_Link;
+export type ExpandedBlockRowContents_block = ExpandedBlockRowContents_block_Channel | ExpandedBlockRowContents_block_Text | ExpandedBlockRowContents_block_Image | ExpandedBlockRowContents_block_Attachment | ExpandedBlockRowContents_block_Embed | ExpandedBlockRowContents_block_Link;
 
 export interface ExpandedBlockRowContents {
   block: ExpandedBlockRowContents_block | null;
