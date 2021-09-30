@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
 import styled from 'styled-components'
+import { FullBlockAttachment } from 'v2/components/FullBlock/components/FullBlockAttachment'
 import { FullBlockLinkScreenshot } from 'v2/components/FullBlock/components/FullBlockLink/components/FullBlockLinkScreenshot'
 import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
@@ -37,12 +38,10 @@ interface ExpandedBlockRowContentsProps {
 export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> = ({
   block,
 }) => {
-  const { data, error } = useQuery<
+  const { data } = useQuery<
     ExpandedBlockRowContentsType,
     ExpandedBlockRowContentsVariables
   >(expandedBlockRowContents, { variables: { id: block.id.toString() } })
-
-  console.log('data?.block', data?.block, { error })
 
   if (block?.__typename === 'Text') {
     return (
@@ -56,8 +55,15 @@ export const ExpandedBlockRowContents: React.FC<ExpandedBlockRowContentsProps> =
     )
   }
 
+  if (data?.block.__typename === 'Attachment') {
+    return (
+      <TextContainer>
+        <FullBlockAttachment block={data.block} layout="DEFAULT" />
+      </TextContainer>
+    )
+  }
+
   if (data?.block.__typename === 'Link') {
-    console.log({ block: data.block })
     return (
       <FullBlockLinkScreenshot
         linkViewMode={'screenshot'}

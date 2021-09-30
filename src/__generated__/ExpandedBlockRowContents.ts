@@ -7,8 +7,8 @@
 // GraphQL query operation: ExpandedBlockRowContents
 // ====================================================
 
-export interface ExpandedBlockRowContents_block_Attachment {
-  __typename: "Attachment" | "Channel" | "Embed" | "PendingBlock";
+export interface ExpandedBlockRowContents_block_Channel {
+  __typename: "Channel" | "Embed" | "PendingBlock";
   id: number;
   created_at_unix_time: string | null;
   created_at_timestamp: string | null;
@@ -41,6 +41,24 @@ export interface ExpandedBlockRowContents_block_Image {
   original_image_url: string | null;
 }
 
+export interface ExpandedBlockRowContents_block_Attachment {
+  __typename: "Attachment";
+  id: number;
+  created_at_unix_time: string | null;
+  created_at_timestamp: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  updated_at_timestamp: string | null;
+  title: string;
+  file_extension: string | null;
+  file_url: string | null;
+  file_size: string | null;
+  file_content_type: string | null;
+  image_url: string | null;
+  image_updated_at: string | null;
+  image_updated_at_unix_time: string | null;
+}
+
 export interface ExpandedBlockRowContents_block_Link_source {
   __typename: "ConnectableSource";
   title: string | null;
@@ -65,7 +83,7 @@ export interface ExpandedBlockRowContents_block_Link {
   source: ExpandedBlockRowContents_block_Link_source | null;
 }
 
-export type ExpandedBlockRowContents_block = ExpandedBlockRowContents_block_Attachment | ExpandedBlockRowContents_block_Text | ExpandedBlockRowContents_block_Image | ExpandedBlockRowContents_block_Link;
+export type ExpandedBlockRowContents_block = ExpandedBlockRowContents_block_Channel | ExpandedBlockRowContents_block_Text | ExpandedBlockRowContents_block_Image | ExpandedBlockRowContents_block_Attachment | ExpandedBlockRowContents_block_Link;
 
 export interface ExpandedBlockRowContents {
   block: ExpandedBlockRowContents_block | null;
