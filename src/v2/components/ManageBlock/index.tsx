@@ -35,6 +35,7 @@ import {
   updateBlockMutationVariables,
 } from '__generated__/updateBlockMutation'
 import { FullBlockAttachment_Attachment } from '__generated__/FullBlockAttachment'
+import { FullBlockEmbed_Embed } from '__generated__/FullBlockEmbed'
 
 const TextField = styled(Textarea).attrs({
   px: 7,
@@ -124,7 +125,13 @@ const MemoizedContent = React.memo<{ block: Block & FullBlock }>(
           block={props.block as FullBlockAttachment_Attachment}
         />
       ),
-      Embed: <FullBlockEmbed layout="DEFAULT" {...props} />,
+      Embed: (
+        <FullBlockEmbed
+          layout="DEFAULT"
+          {...props}
+          block={props.block as FullBlockEmbed_Embed}
+        />
+      ),
       PendingBlock: <FullBlockPending {...props} />,
     }[props.block.__typename]),
   () => true
