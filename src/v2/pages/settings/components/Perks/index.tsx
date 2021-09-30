@@ -42,6 +42,19 @@ const AnnualPerk: React.FC<PerkProps> = () => {
   )
 }
 
+const StickerPerk: React.FC<PerkProps> = () => {
+  const url =
+    'https://store.are.na/collections/frontpage/products/sticker-sheet-v2'
+  return (
+    <Text>
+      <Text color="state.premium" display="inline">
+        <a href={url}>Free Are.na Stickers</a>
+      </Text>
+      (use code STICK21)
+    </Text>
+  )
+}
+
 const StorePerk: React.FC<PerkProps> = () => {
   return (
     <Text>
@@ -93,7 +106,13 @@ const Perks: React.FC<PerksProps> = ({
   isInvestor,
 }) => {
   const premiumPerks = [PremiumDiscordPerk, StorePerk]
-  const supporterPerks = [PremiumDiscordPerk, StorePerk, ReportPerk, AnnualPerk]
+  const supporterPerks = [
+    PremiumDiscordPerk,
+    StorePerk,
+    ReportPerk,
+    AnnualPerk,
+    StickerPerk,
+  ]
 
   if (isInvestor) {
     premiumPerks.push(ReportPerk)
