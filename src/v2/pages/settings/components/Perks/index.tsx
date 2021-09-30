@@ -49,7 +49,7 @@ const StickerPerk: React.FC<PerkProps> = () => {
     <Text>
       <Text color="state.premium" display="inline">
         <a href={url}>Free Are.na Stickers</a>
-      </Text>
+      </Text>{' '}
       (use code STICK21)
     </Text>
   )
