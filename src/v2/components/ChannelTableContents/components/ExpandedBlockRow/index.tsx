@@ -61,10 +61,10 @@ export const ExpandedBlockRow: React.FC<ExpandedBlockRowProps> = ({
       <TD width={FIRST_COLUMN_WIDTH}>
         <ExpandedBlockRowContents block={block} />
       </TD>
-      <TD colSpan={columnLength - 3}>
+      <TD colSpan={columnLength - 4}>
         <ExpandedBlockMetadata block={block} />
       </TD>
-      <TD colSpan={2}>
+      <TD colSpan={3}>
         <ButtonContainer>
           <ActionButtons isExpanded={true} canDelete onMinimize={onMinimize} />
         </ButtonContainer>
