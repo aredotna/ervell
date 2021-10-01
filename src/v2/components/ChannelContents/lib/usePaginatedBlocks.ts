@@ -250,7 +250,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
 
         // Early exit if the block can't be found
         if (blockIndex === -1) {
-          return null
+          return
         }
 
         // Build the new cache data
@@ -291,7 +291,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         // read it
         const block = prevBlocks[oldIndex]
         if (!block) {
-          return null
+          return
         }
 
         // Get the id and typename from the cache. Early exit if we
@@ -299,7 +299,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         const id = readField('id', block) || undefined
         const typename = readField('__typename', block) || undefined
         if (id === undefined || typename === undefined) {
-          return null
+          return
         }
 
         // Fire the mutation
@@ -383,12 +383,12 @@ export const usePaginatedBlocks = (unsafeArgs: {
 
             // Early exit if the block can't be found
             if (blockIndex === -1) {
-              return null
+              return
             }
 
             const block = result.data?.blokk
 
-            if (!block) return null
+            if (!block) return
 
             const newBlocks = prevBlocks.map((prevBlock, i) =>
               i === blockIndex

@@ -39,7 +39,7 @@ export const usePusher = ({
    */
   useEffect(() => {
     // if we don't return early, we will actually get an attempt to subscribe
-    if (!shouldSubscribe) return null
+    if (!shouldSubscribe) return
 
     const pusher: Pusher | false = initPusherClient()
     const pusherChannelId = `channel-${NODE_ENV}-${channelId}`
