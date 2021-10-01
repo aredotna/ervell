@@ -36,10 +36,6 @@ console.time('import')
 app.use(require('../apps/import'))
 console.timeEnd('import')
 
-console.time('settings')
-app.use(require('../apps/settings'))
-console.timeEnd('settings')
-
 console.time('onboarding')
 app.use(require('../apps/onboarding'))
 console.timeEnd('onboarding')
