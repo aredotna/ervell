@@ -234,7 +234,7 @@ export const wrapWithProviders = (
 }
 
 export const mountWithApolloProvider = (Component, props = {}, mountNode) => {
-  if (!mountNode) return null
+  if (!mountNode) return
 
   const client = initClientSideApolloClient()
   const WrappedComponent = wrapWithProviders(client)(Component, props)

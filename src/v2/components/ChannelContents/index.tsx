@@ -103,7 +103,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         )
 
         // If the block already exists, early return
-        if (blockIndex > 0) return null
+        if (blockIndex > 0) return
 
         // Otherwise proceed.
         addBlock()

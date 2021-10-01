@@ -8,8 +8,8 @@ const COLORS = {
   state: {
     premium: '#17B0E2',
     alert: '#B08064',
-    editable: 'rgba(247, 225, 199, 0.14)',
-    neutral: 'rgba(247, 225, 199, 0.14)', // alias editable
+    editable: '#131313',
+    neutral: '#131313', // alias editable
     investor: '#F1CE57',
     supporter: '#6BD2B6',
     highlight: `rgba(247, 225, 199, 0.14)`,
