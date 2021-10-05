@@ -5,6 +5,7 @@ import { KonnectableChannelPreview_channel_preview_connectables } from '__genera
 
 import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
+import { SansSerifText } from 'v2/components/UI/SansSerifText'
 
 const Img = styled.img`
   width: 100%;
@@ -54,10 +55,9 @@ export const KonnectableSimpleDisplay: React.FC<Props> = ({
     case 'Text':
       return (
         <Snippet>
-          <Text
-            f={4}
-            font="serif"
-            textAlign="left"
+          <SansSerifText
+            isTiny
+            color="gray.base"
             dangerouslySetInnerHTML={{ __html: connectable.preview_content }}
           />
         </Snippet>

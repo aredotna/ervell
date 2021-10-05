@@ -57,7 +57,6 @@ export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_custo
 
 export interface ApplyCouponToSubscription_apply_coupon_to_subscription_me_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 

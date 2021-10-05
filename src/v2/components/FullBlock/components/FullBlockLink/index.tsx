@@ -4,7 +4,7 @@ import { LinkViewMode } from 'v2/components/FullBlock'
 import { FullBlockLinkScreenshot } from 'v2/components/FullBlock/components/FullBlockLink/components/FullBlockLinkScreenshot'
 import { FullBlockLinkReader } from 'v2/components/FullBlock/components/FullBlockLink/components/FullBlockLinkReader'
 
-import { FullBlock_Link as Block } from '__generated__/FullBlock'
+import { FullBlockLinkQuery_block_Link as Block } from '__generated__/FullBlockLinkQuery'
 
 export interface FullBlockLinkProps {
   layout: LightboxLayout

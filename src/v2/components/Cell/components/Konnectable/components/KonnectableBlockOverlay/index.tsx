@@ -83,7 +83,7 @@ export const KonnectableBlockOverlay: React.FC<Props> = ({
 
       if (!isLoggedIn) {
         window.location.href = `/sign_up?redirect-to=${window.location.pathname}`
-        return null
+        return
       }
 
       setMode(Mode.OVERLAY)

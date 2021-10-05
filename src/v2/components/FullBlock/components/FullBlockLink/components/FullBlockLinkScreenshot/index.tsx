@@ -30,6 +30,16 @@ const Image = styled(Box)`
   }
 `
 
+const Url = styled(Text).attrs({
+  f: 2,
+  font: 'mono',
+  color: 'gray.semiBold',
+})`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
 const Container = styled(Box)`
   overflow: hidden;
 `
@@ -78,9 +88,9 @@ export const FullBlockLinkScreenshot: React.FC<FullBlockLinkProps> = ({
               flexShrink={0}
             />
 
-            <Text f={2} font="mono" color="gray.semiBold" breakWord>
+            <Url>
               <u>{block.source_url}</u>
-            </Text>
+            </Url>
           </Box>
         </a>
 

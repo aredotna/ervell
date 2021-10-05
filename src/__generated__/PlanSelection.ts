@@ -24,7 +24,6 @@ export interface PlanSelection_customer {
 
 export interface PlanSelection_counts {
   __typename: "MeCounts";
-  private_connections: number | null;
   connections: number | null;
 }
 
