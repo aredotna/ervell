@@ -16,6 +16,7 @@ import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
+import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
 
 const Table = styled.table`
   width: 100%;
@@ -107,8 +108,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       },
       {
         Header: 'Title',
-        accessor: 'title',
-        Cell: StandardCell,
+        Cell: PotentiallyEditableBlockCell,
+        accessor: block => ({ block, attr: 'title' }),
         width: '40%',
       },
       {
