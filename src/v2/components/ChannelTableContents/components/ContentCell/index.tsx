@@ -35,7 +35,7 @@ export const ContentCell = ({
   value: content,
 }: {
   value: ChannelTableContentsSet_channel_blokks
-}) => {
+}): JSX.Element => {
   switch (content.__typename) {
     case 'Attachment':
     case 'Embed':

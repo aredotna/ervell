@@ -22,6 +22,7 @@ export interface MySettings_me_settings {
   receive_group_premium_emails: boolean | null;
   receive_sunday_review_emails: boolean | null;
   hide_notification_count: boolean | null;
+  dark_mode: boolean | null;
 }
 
 export interface MySettings_me {
