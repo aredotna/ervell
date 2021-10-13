@@ -123,7 +123,7 @@ export const FullBlockMetadataFoldWithQuery: React.FC<FullBlockMetadataFoldWithQ
 }) => {
   const { data } = useQuery<FullBlockFoldType, FullBlockFoldVariables>(
     fullBlockFoldQuery,
-    { variables: { id } }
+    { variables: { id }, ssr: false }
   )
 
   if (!data) return null
