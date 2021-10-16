@@ -145,32 +145,30 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
     }
 
     return (
-      <>
-        <SortableGrid
-          axis="xy"
-          useWindowAsScrollContainer
-          transitionDuration={0}
-          onSortEnd={moveBlock}
-          wrapChildren={false}
-          distance={1}
-          useDragHandle
-          {...rest}
-        >
-          {(channel.can.add_to || channel.can.add_to_as_premium) && (
-            <GridItem>
-              <AddBlock
-                channel_id={channel.id}
-                onAddBlock={addBlock}
-                isElligbleForPremium={
-                  !channel.can.add_to && channel.can.add_to_as_premium
-                }
-              />
-            </GridItem>
-          )}
+      <SortableGrid
+        axis="xy"
+        useWindowAsScrollContainer
+        transitionDuration={0}
+        onSortEnd={moveBlock}
+        wrapChildren={false}
+        distance={1}
+        useDragHandle
+        {...rest}
+      >
+        {(channel.can.add_to || channel.can.add_to_as_premium) && (
+          <GridItem>
+            <AddBlock
+              channel_id={channel.id}
+              onAddBlock={addBlock}
+              isElligbleForPremium={
+                !channel.can.add_to && channel.can.add_to_as_premium
+              }
+            />
+          </GridItem>
+        )}
 
-          {blocksJsx}
-        </SortableGrid>
-      </>
+        {blocksJsx}
+      </SortableGrid>
     )
   })
 )
