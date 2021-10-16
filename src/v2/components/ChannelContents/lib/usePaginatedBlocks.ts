@@ -24,6 +24,7 @@ import { getConnectableType } from './getConnectableType'
 import {
   ConnectableBlokk,
   ConnectableBlokkVariables,
+  ConnectableBlokk_blokk,
 } from '__generated__/ConnectableBlokk'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
@@ -39,7 +40,7 @@ type UsePaginatedBlocksApi = {
   updateBlock: (args: {
     id: string
     type: BaseConnectableTypeEnum | false
-  }) => void
+  }) => Promise<void>
   getBlocksFromCache: () => ChannelBlokksPaginated_channel_blokks[]
 }
 
@@ -250,7 +251,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
 
         // Early exit if the block can't be found
         if (blockIndex === -1) {
-          return
+          return null
         }
 
         // Build the new cache data
@@ -291,7 +292,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         // read it
         const block = prevBlocks[oldIndex]
         if (!block) {
-          return
+          return null
         }
 
         // Get the id and typename from the cache. Early exit if we
@@ -299,7 +300,7 @@ export const usePaginatedBlocks = (unsafeArgs: {
         const id = readField('id', block) || undefined
         const typename = readField('__typename', block) || undefined
         if (id === undefined || typename === undefined) {
-          return
+          return null
         }
 
         // Fire the mutation
@@ -358,49 +359,57 @@ export const usePaginatedBlocks = (unsafeArgs: {
    * Refetch block and update cache
    */
   const updateBlock: UsePaginatedBlocksApi['updateBlock'] = useCallback(
-    ({ id, type }) => {
-      //
+    async ({ id, type }) => {
       // No need to update a channel block, just return early
-      //
       if (type === BaseConnectableTypeEnum.CHANNEL) return null
 
       // Refetch the block
-      // Fire the mutation
-      client
-        .query<ConnectableBlokk, ConnectableBlokkVariables>({
+      let block: ConnectableBlokk_blokk | null = null
+      try {
+        const result = await client.query<
+          ConnectableBlokk,
+          ConnectableBlokkVariables
+        >({
           query: ConnectableBlockQuery,
           variables: {
             id: id.toString(),
           },
           fetchPolicy: 'network-only',
         })
-        .then(result => {
-          updateCache(({ blockArgs: [prevBlocks, { readField }] }) => {
-            // Find the block in the blocks array
-            const blockIndex = prevBlocks.findIndex(block => {
-              return block && readField('id', block) === parseInt(id)
-            })
 
-            // Early exit if the block can't be found
-            if (blockIndex === -1) {
-              return
-            }
+        block = result.data.blokk
+      } catch {
+        // do nothing
+      }
 
-            const block = result.data?.blokk
+      // Early exit if we can't find a block
+      if (!block) {
+        return
+      }
 
-            if (!block) return
-
-            const newBlocks = prevBlocks.map((prevBlock, i) =>
-              i === blockIndex
-                ? { __ref: `${block.__typename}:${block.id}` }
-                : prevBlock
-            )
-
-            return {
-              newBlocks,
-            }
-          })
+      // Update the cache to replace the previous block with the new block
+      updateCache(({ blockArgs: [prevBlocks, { readField, toReference }] }) => {
+        // Find the block in the blocks array
+        const blockIndex = prevBlocks.findIndex(block => {
+          return block && readField('id', block) === parseInt(id)
         })
+
+        // Early exit if the block can't be found
+        if (blockIndex === -1) {
+          return null
+        }
+
+        // Build the new blocks array
+        const newBlocks = prevBlocks.map((prevBlock, i) =>
+          i === blockIndex
+            ? toReference(client.cache.identify({ ...block }))
+            : prevBlock
+        )
+
+        return {
+          newBlocks,
+        }
+      })
     },
     [updateCache, client]
   )
