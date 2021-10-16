@@ -7,6 +7,13 @@
 // GraphQL query operation: ChannelTableContentsSet
 // ====================================================
 
+export interface ChannelTableContentsSet_channel_counts {
+  __typename: "ChannelCounts";
+  contents: number | null;
+  blocks: number | null;
+  channels: number | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Attachment_counts {
   __typename: "BlockCounts";
   public_channels: number | null;
@@ -316,6 +323,7 @@ export type ChannelTableContentsSet_channel_blokks = ChannelTableContentsSet_cha
 export interface ChannelTableContentsSet_channel {
   __typename: "Channel";
   id: number;
+  counts: ChannelTableContentsSet_channel_counts | null;
   blokks: ChannelTableContentsSet_channel_blokks[] | null;
 }
 
@@ -328,4 +336,6 @@ export interface ChannelTableContentsSet {
 
 export interface ChannelTableContentsSetVariables {
   id: string;
+  page: number;
+  per: number;
 }

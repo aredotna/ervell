@@ -3,6 +3,10 @@ import { SortableContainer } from 'react-sortable-hoc'
 
 import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import {
+  ChannelBlokksPaginated,
+  ChannelBlokksPaginatedVariables,
+} from '__generated__/ChannelBlokksPaginated'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -13,6 +17,7 @@ import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
 import { getConnectableType } from './lib/getConnectableType'
+import channelBlokksPaginatedQuery from './queries/channelBlokksPaginated'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -61,9 +66,14 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       contentCount,
       updateBlock,
       getBlocksFromCache,
-    } = usePaginatedBlocks({
-      channelId: channel.id,
+    } = usePaginatedBlocks<
+      ChannelBlokksPaginated,
+      ChannelBlokksPaginatedVariables
+    >({
+      channelId: channel.id.toString(),
       ssr: isSpiderRequesting,
+      query: channelBlokksPaginatedQuery,
+      per: 10,
     })
 
     const onItemIntersected = useCallback(

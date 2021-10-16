@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import { useQuery } from '@apollo/client'
 import { useExpanded, useTable } from 'react-table'
 import styled from 'styled-components'
 
@@ -17,6 +16,9 @@ import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
+
+// ARE-151 todo move usepaginatedblocks to a better place
+import { usePaginatedBlocks } from '../ChannelContents/lib/usePaginatedBlocks'
 
 const Table = styled.table`
   width: 100%;
@@ -91,24 +93,24 @@ interface ChannelTableQueryProps {
 }
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
-  const { data } = useQuery<
+  const { blocks } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables
-  >(CHANNEL_TABLE_CONTENTS_QUERY, { variables: { id } })
+  >({
+    channelId: id,
+    per: 10,
+    query: CHANNEL_TABLE_CONTENTS_QUERY,
+  })
 
-  if (data?.channel) {
-    return <ChannelTableContents data={data} />
-  }
-
-  return <div />
+  return <ChannelTableContents blocks={blocks} />
 }
 
 interface ChannelTableContentsProps {
-  data: ChannelTableContentsSet
+  blocks: ChannelTableContentsSet['channel']['blokks']
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
-  data,
+  blocks,
 }) => {
   const headers = useMemo(
     () => [
@@ -154,7 +156,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
   const tableInstance = useTable(
     {
-      data: data?.channel.blokks,
+      data: blocks,
       columns: headers,
       autoResetExpanded: false,
       getRowId: (row, _index) => {
@@ -162,7 +164,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         return `${typedRowOriginal.id}`
       },
       initialState: {
-        expanded: getInitialExpandedState(data?.channel.blokks),
+        expanded: getInitialExpandedState(blocks),
       },
     },
     useExpanded
