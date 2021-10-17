@@ -72,7 +72,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
     >({
       channelId: channel.id.toString(),
       ssr: isSpiderRequesting,
-      query: channelBlokksPaginatedQuery,
+      channelQuery: channelBlokksPaginatedQuery,
       per: 10,
     })
 

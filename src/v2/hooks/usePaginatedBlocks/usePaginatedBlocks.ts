@@ -16,13 +16,12 @@ import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
 import ConnectableBlockQuery from 'v2/components/ChannelContents/queries/connectableBlokk'
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
-
-import { getConnectableType } from '../../util/getConnectableType'
+import { getConnectableType } from 'v2/util/getConnectableType'
 
 /**
  * The required minimum shape of the query
  */
-type QueryDataBase = {
+interface RequiredChannelQueryData {
   channel: null | {
     __typename: 'Channel'
     id: number
@@ -42,28 +41,34 @@ type QueryDataBase = {
 /**
  * The required variables needed for the passed-in query
  */
-type QueryVariablesBase = {
+interface RequiredChannelQueryVariables {
   id: string
   page: number
   per: number
 }
 
-/**
- * The required variables needed for the passed-in query
- */
-type UsePaginatedBlocksArgs = {
+interface UsePaginatedBlocksBaseArgs {
   channelId: string
-  query: DocumentNode
+  channelQuery: DocumentNode
   per: number
   ssr?: boolean
+}
+
+/**
+ * The arguments for usePaginatedBlocks
+ */
+interface UsePaginatedBlocksArgs extends UsePaginatedBlocksBaseArgs {
+  test?: any
 }
 
 /**
  * The return type of usePaginatedBlocks. Everything you need
  * to render and edit a channel
  */
-type UsePaginatedBlocksApi<QueryData extends QueryDataBase> = {
-  blocks: QueryData['channel']['blokks']
+interface UsePaginatedBlocksBaseApi<
+  ChannelQueryData extends RequiredChannelQueryData
+> {
+  blocks: ChannelQueryData['channel']['blokks']
   contentCount: number
   getPage: (pageNumber: number) => void
   hasQueriedPage: (pageNumber: number) => boolean
@@ -75,8 +80,28 @@ type UsePaginatedBlocksApi<QueryData extends QueryDataBase> = {
     id: string
     type: BaseConnectableTypeEnum | false
   }) => Promise<void>
-  getBlocksFromCache: () => QueryData['channel']['blokks']
+  getBlocksFromCache: () => ChannelQueryData['channel']['blokks']
 }
+
+interface UsePaginatedBlocksApi<
+  ChannelQueryData extends RequiredChannelQueryData
+> extends UsePaginatedBlocksBaseApi<ChannelQueryData> {
+  test?: any
+}
+
+export function usePaginatedBlocks<
+  ChannelQueryData extends RequiredChannelQueryData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ChannelQueryVariables extends RequiredChannelQueryVariables
+>(
+  unsafeArgs: UsePaginatedBlocksBaseArgs
+): UsePaginatedBlocksBaseApi<ChannelQueryData>
+
+export function usePaginatedBlocks<
+  ChannelQueryData extends RequiredChannelQueryData,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ChannelQueryVariables extends RequiredChannelQueryVariables
+>(unsafeArgs: UsePaginatedBlocksArgs): UsePaginatedBlocksApi<ChannelQueryData>
 
 /**
  * A hook to easily work with a collection of blocks from a channel.
@@ -84,9 +109,13 @@ type UsePaginatedBlocksApi<QueryData extends QueryDataBase> = {
  * move blocks around, add blocks, and delete blocks.
  */
 export function usePaginatedBlocks<
-  QueryData extends QueryDataBase,
-  QueryVariables extends QueryVariablesBase
->(unsafeArgs: UsePaginatedBlocksArgs): UsePaginatedBlocksApi<QueryData> {
+  ChannelQueryData extends RequiredChannelQueryData,
+  ChannelQueryVariables extends RequiredChannelQueryVariables
+>(
+  unsafeArgs: UsePaginatedBlocksBaseArgs | UsePaginatedBlocksArgs
+):
+  | UsePaginatedBlocksBaseApi<ChannelQueryData>
+  | UsePaginatedBlocksApi<ChannelQueryData> {
   // =============================
   // "Private" fields of this hook
   // =============================
@@ -104,26 +133,26 @@ export function usePaginatedBlocks<
    * The current blocks that we have for a channel
    */
   const { data: unsafeData, fetchMore, client } = useQuery<
-    QueryData,
-    QueryVariables
-  >(args.current.query, {
+    ChannelQueryData,
+    ChannelQueryVariables
+  >(args.current.channelQuery, {
     variables: {
       id: args.current.channelId,
       page: 1,
       per: args.current.per,
-    } as QueryVariables,
+    } as ChannelQueryVariables,
     ssr: args.current.ssr,
     context: { queryDeduplication: false },
   })
 
-  const getQueryFromCache: () => QueryData = useCallback(() => {
-    return client.readQuery<QueryData, QueryVariables>({
-      query: args.current.query,
+  const getQueryFromCache: () => ChannelQueryData = useCallback(() => {
+    return client.readQuery<ChannelQueryData, ChannelQueryVariables>({
+      query: args.current.channelQuery,
       variables: {
         id: args.current.channelId,
         page: 1,
         per: args.current.per,
-      } as QueryVariables,
+      } as ChannelQueryVariables,
     })
   }, [client])
 
@@ -228,7 +257,7 @@ export function usePaginatedBlocks<
   /**
    * An array of blocks that apollo currently has cached
    */
-  const blocks: UsePaginatedBlocksApi<QueryData>['blocks'] =
+  const blocks: UsePaginatedBlocksApi<ChannelQueryData>['blocks'] =
     unsafeData?.channel?.blokks ?? []
 
   /**
@@ -236,13 +265,15 @@ export function usePaginatedBlocks<
    * could be different than the current length of the "blocks" array
    * due to not downloading all the block information from a channel
    */
-  const contentCount: UsePaginatedBlocksApi<QueryData>['contentCount'] =
+  const contentCount: UsePaginatedBlocksApi<ChannelQueryData>['contentCount'] =
     unsafeData?.channel?.counts?.contents ?? 0
 
   /**
    * Gets block data from a given page
    */
-  const getPage: UsePaginatedBlocksApi<QueryData>['getPage'] = useCallback(
+  const getPage: UsePaginatedBlocksApi<
+    ChannelQueryData
+  >['getPage'] = useCallback(
     pageNumber => {
       queriedPageNumbersRef.current.add(pageNumber)
 
@@ -259,7 +290,7 @@ export function usePaginatedBlocks<
    * Returns if a given page has already been queried for or not
    */
   const hasQueriedPage: UsePaginatedBlocksApi<
-    QueryData
+    ChannelQueryData
   >['hasQueriedPage'] = useCallback(pageNember => {
     return queriedPageNumbersRef.current.has(pageNember)
   }, [])
@@ -268,7 +299,7 @@ export function usePaginatedBlocks<
    * Returns the page number that a block's index would be in
    */
   const getPageFromIndex: UsePaginatedBlocksApi<
-    QueryData
+    ChannelQueryData
   >['getPageFromIndex'] = useCallback(index => {
     return Math.floor(index / args.current.per) + 1
   }, [])
@@ -278,7 +309,7 @@ export function usePaginatedBlocks<
    * actual mutation/network request.
    */
   const removeBlock: UsePaginatedBlocksApi<
-    QueryData
+    ChannelQueryData
   >['removeBlock'] = useCallback(
     ({ id, type }) => {
       updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
@@ -320,7 +351,9 @@ export function usePaginatedBlocks<
    * Moves a block from an old index to a new index and triggers an
    * apollo mutation
    */
-  const moveBlock: UsePaginatedBlocksApi<QueryData>['moveBlock'] = useCallback(
+  const moveBlock: UsePaginatedBlocksApi<
+    ChannelQueryData
+  >['moveBlock'] = useCallback(
     ({ oldIndex, newIndex }) => {
       updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
         // Moving to the "bottom". Convert a -1 newIndex value to a
@@ -381,7 +414,7 @@ export function usePaginatedBlocks<
    * whenever the blocks are mutated
    */
   const getBlocksFromCache: UsePaginatedBlocksApi<
-    QueryData
+    ChannelQueryData
   >['getBlocksFromCache'] = useCallback(() => {
     const cachedQuery = getQueryFromCache()
 
@@ -392,7 +425,7 @@ export function usePaginatedBlocks<
    * Refetch block and update cache
    */
   const updateBlock: UsePaginatedBlocksApi<
-    QueryData
+    ChannelQueryData
   >['updateBlock'] = useCallback(
     async ({ id, type }) => {
       // No need to update a channel block, just return early
@@ -453,11 +486,11 @@ export function usePaginatedBlocks<
    * Refetch query and wipe queriedPageNumbersRef
    */
   const addBlock: UsePaginatedBlocksApi<
-    QueryData
+    ChannelQueryData
   >['addBlock'] = useCallback(() => {
     queriedPageNumbersRef.current = new Set()
     client.refetchQueries({
-      include: [args.current.query],
+      include: [args.current.channelQuery],
       optimistic: true,
     })
   }, [client])
@@ -466,7 +499,7 @@ export function usePaginatedBlocks<
   // Build and return the final api
   // ==============================
 
-  const api: UsePaginatedBlocksApi<QueryData> = {
+  const api: UsePaginatedBlocksApi<ChannelQueryData> = {
     blocks,
     contentCount,
     getPage,

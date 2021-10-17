@@ -98,7 +98,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
   >({
     channelId: id,
     per: 10,
-    query: CHANNEL_TABLE_CONTENTS_QUERY,
+    channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
   })
 
   return <ChannelTableContents blocks={blocks} />
