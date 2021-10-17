@@ -7,6 +7,10 @@ import {
   ChannelBlokksPaginated,
   ChannelBlokksPaginatedVariables,
 } from '__generated__/ChannelBlokksPaginated'
+import {
+  ConnectableBlokk,
+  ConnectableBlokkVariables,
+} from '__generated__/ConnectableBlokk'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
@@ -18,6 +22,7 @@ import { getConnectableType } from 'v2/util/getConnectableType'
 
 import { ChannelContentsItem } from './components/ChannelContentsItem'
 import channelBlokksPaginatedQuery from './queries/channelBlokksPaginated'
+import ConnectableBlockQuery from './queries/connectableBlokk'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -68,12 +73,15 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       getBlocksFromCache,
     } = usePaginatedBlocks<
       ChannelBlokksPaginated,
-      ChannelBlokksPaginatedVariables
+      ChannelBlokksPaginatedVariables,
+      ConnectableBlokk,
+      ConnectableBlokkVariables
     >({
       channelId: channel.id.toString(),
       ssr: isSpiderRequesting,
       channelQuery: channelBlokksPaginatedQuery,
       per: 10,
+      blockquery: ConnectableBlockQuery,
     })
 
     const onItemIntersected = useCallback(
