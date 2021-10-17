@@ -503,7 +503,7 @@ export function usePaginatedBlocks<
         // Build the new blocks array
         const newBlocks = prevBlocks.map((prevBlock, i) =>
           i === blockIndex
-            ? toReference(client.cache.identify({ ...block }))
+            ? toReference(client.cache.identify(block))
             : prevBlock
         )
 
