@@ -172,6 +172,11 @@ export function usePaginatedBlocks<
     context: { queryDeduplication: false },
   })
 
+  /**
+   * A function to get the currently cached query data. Useful if
+   * you want to use this data in a memoized function without re-memoizing
+   * every time the query data changes (which happens a lot)
+   */
   const getQueryFromCache: () => ChannelQueryData = useCallback(() => {
     return client.readQuery<ChannelQueryData, ChannelQueryVariables>({
       query: args.current.channelQuery,
