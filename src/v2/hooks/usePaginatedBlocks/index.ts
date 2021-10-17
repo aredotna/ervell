@@ -13,7 +13,7 @@ import moveConnectableMutation from 'v2/components/ChannelContents/mutations/mov
 import { getConnectableType } from 'v2/util/getConnectableType'
 
 /**
- * The required minimum shape for the channel query
+ * The minimum required shape for the channel query
  */
 type RequiredChannelQueryData = {
   channel: null | {
@@ -33,7 +33,7 @@ type RequiredChannelQueryData = {
 }
 
 /**
- * The required minimum shape for the channel query variables
+ * The minimum required shape for the channel query variables
  */
 type RequiredChannelQueryVariables = {
   id: string
@@ -42,7 +42,7 @@ type RequiredChannelQueryVariables = {
 }
 
 /**
- * The required minimum shape for the block query
+ * The minimum required shape for the block query
  */
 type RequiredBlockQueryData = {
   blokk: null | {
@@ -52,7 +52,7 @@ type RequiredBlockQueryData = {
 }
 
 /**
- * The required minimum shape for the block query variables
+ * The minimum required shape for the block query variables
  */
 type RequiredBlockQueryVariables = {
   id: string
