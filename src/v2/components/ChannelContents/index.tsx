@@ -13,10 +13,10 @@ import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { usePusher } from 'v2/hooks/usePusher'
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
+import { getConnectableType } from 'v2/pages/channel/lib/getConnectableType'
+import { usePaginatedBlocks } from 'v2/pages/channel/lib/usePaginatedBlocks'
 
 import { ChannelContentsItem } from './components/ChannelContentsItem'
-import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
-import { getConnectableType } from './lib/getConnectableType'
 import channelBlokksPaginatedQuery from './queries/channelBlokksPaginated'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (

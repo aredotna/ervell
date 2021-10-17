@@ -3,16 +3,10 @@ import { Modifier } from '@apollo/client/cache/core/types/common'
 import { useRef, useCallback } from 'react'
 
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
-import { ChannelContentsCount } from '__generated__/ChannelContentsCount'
 import {
   moveConnectableMutationVariables,
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
-
-import ConnectableBlockQuery from '../queries/connectableBlokk'
-import moveConnectableMutation from '../mutations/moveConnectable'
-import channelContentsCount from '../fragments/channelContentsCount'
-import { getConnectableType } from './getConnectableType'
 import {
   ConnectableBlokk,
   ConnectableBlokkVariables,
@@ -20,11 +14,20 @@ import {
 } from '__generated__/ConnectableBlokk'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 
+import ConnectableBlockQuery from 'v2/components/ChannelContents/queries/connectableBlokk'
+import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
+
+import { getConnectableType } from './getConnectableType'
+
+/**
+ * The required minimum shape of the query
+ */
 type QueryDataBase = {
   channel: null | {
     __typename: 'Channel'
     id: number
     blokks: null | Array<{
+      __typename: ChannelContentsConnectable['__typename']
       id: number
     }>
     counts: null | {
@@ -36,10 +39,23 @@ type QueryDataBase = {
   }
 }
 
+/**
+ * The required variables needed for the passed-in query
+ */
 type QueryVariablesBase = {
   id: string
   page: number
   per: number
+}
+
+/**
+ * The required variables needed for the passed-in query
+ */
+type UsePaginatedBlocksArgs = {
+  channelId: string
+  query: DocumentNode
+  per: number
+  ssr?: boolean
 }
 
 type UsePaginatedBlocksApi<QueryData extends QueryDataBase> = {
@@ -66,12 +82,7 @@ type UsePaginatedBlocksApi<QueryData extends QueryDataBase> = {
 export function usePaginatedBlocks<
   QueryData extends QueryDataBase,
   QueryVariables extends QueryVariablesBase
->(unsafeArgs: {
-  channelId: string
-  query: DocumentNode
-  per: number
-  ssr?: boolean
-}): UsePaginatedBlocksApi<QueryData> {
+>(unsafeArgs: UsePaginatedBlocksArgs): UsePaginatedBlocksApi<QueryData> {
   // =============================
   // "Private" fields of this hook
   // =============================
@@ -101,6 +112,17 @@ export function usePaginatedBlocks<
     context: { queryDeduplication: false },
   })
 
+  const getQueryFromCache: () => QueryData = useCallback(() => {
+    return client.readQuery<QueryData, QueryVariables>({
+      query: args.current.query,
+      variables: {
+        id: args.current.channelId,
+        page: 1,
+        per: args.current.per,
+      } as QueryVariables,
+    })
+  }, [client])
+
   /**
    * A function that allows you to directly modify the channel's "blokks"
    * cache value. If the length of blokks changes, the channel.counts.contents
@@ -125,11 +147,7 @@ export function usePaginatedBlocks<
       // Read the current contentCount of the channel instead
       // of passing it in as a useCallback dependency to reduce
       // re renders
-      const prevCount =
-        client.readFragment<ChannelContentsCount>({
-          fragment: channelContentsCount,
-          id: id,
-        })?.counts?.contents ?? 0
+      const prevCount = getQueryFromCache().channel?.counts?.contents ?? 0
 
       // Values we'll be saving during the first cache.modify call
       let newBlocks: Array<any>
@@ -171,7 +189,7 @@ export function usePaginatedBlocks<
         },
       })
     },
-    [client]
+    [client.cache, getQueryFromCache]
   )
 
   /**
@@ -361,17 +379,10 @@ export function usePaginatedBlocks<
   const getBlocksFromCache: UsePaginatedBlocksApi<
     QueryData
   >['getBlocksFromCache'] = useCallback(() => {
-    const unsafeResult = client.readQuery<QueryData, QueryVariables>({
-      query: args.current.query,
-      variables: {
-        id: args.current.channelId,
-        page: 1,
-        per: args.current.per,
-      } as QueryVariables,
-    })
+    const cachedQuery = getQueryFromCache()
 
-    return unsafeResult?.channel?.blokks || []
-  }, [client])
+    return cachedQuery?.channel?.blokks || []
+  }, [getQueryFromCache])
 
   /**
    * Refetch block and update cache

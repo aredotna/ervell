@@ -2,23 +2,22 @@ import React, { useMemo } from 'react'
 import { useExpanded, useTable } from 'react-table'
 import styled from 'styled-components'
 
-import { ContentCell } from './components/ContentCell'
-import { StandardCell } from './components/StandardCell'
-import Text from 'v2/components/UI/Text'
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
   ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
 
+import Text from 'v2/components/UI/Text'
+import { usePaginatedBlocks } from 'v2/pages/channel/lib/usePaginatedBlocks'
+
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
-
-// ARE-151 todo move usepaginatedblocks to a better place
-import { usePaginatedBlocks } from '../ChannelContents/lib/usePaginatedBlocks'
+import { ContentCell } from './components/ContentCell'
+import { StandardCell } from './components/StandardCell'
 
 const Table = styled.table`
   width: 100%;
