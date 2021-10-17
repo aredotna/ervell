@@ -16,7 +16,7 @@ import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { usePusher } from 'v2/hooks/usePusher'
-import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks/usePaginatedBlocks'
+import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
 import { getConnectableType } from 'v2/util/getConnectableType'
 

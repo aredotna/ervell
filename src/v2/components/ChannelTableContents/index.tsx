@@ -9,7 +9,7 @@ import {
 } from '__generated__/ChannelTableContentsSet'
 
 import Text from 'v2/components/UI/Text'
-import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks/usePaginatedBlocks'
+import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
@@ -97,7 +97,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
     ChannelTableContentsSetVariables
   >({
     channelId: id,
-    per: 10,
+    per: 25,
     channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
   })
 
