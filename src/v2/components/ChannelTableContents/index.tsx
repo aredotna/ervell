@@ -9,7 +9,7 @@ import {
 } from '__generated__/ChannelTableContentsSet'
 
 import Text from 'v2/components/UI/Text'
-import { usePaginatedBlocks } from 'v2/pages/channel/lib/usePaginatedBlocks'
+import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks/usePaginatedBlocks'
 
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'

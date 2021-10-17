@@ -17,7 +17,7 @@ import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
 import ConnectableBlockQuery from 'v2/components/ChannelContents/queries/connectableBlokk'
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 
-import { getConnectableType } from './getConnectableType'
+import { getConnectableType } from '../../util/getConnectableType'
 
 /**
  * The required minimum shape of the query
@@ -58,6 +58,10 @@ type UsePaginatedBlocksArgs = {
   ssr?: boolean
 }
 
+/**
+ * The return type of usePaginatedBlocks. Everything you need
+ * to render and edit a channel
+ */
 type UsePaginatedBlocksApi<QueryData extends QueryDataBase> = {
   blocks: QueryData['channel']['blokks']
   contentCount: number
