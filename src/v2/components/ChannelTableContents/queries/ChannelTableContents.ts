@@ -77,7 +77,10 @@ export default gql`
             name
           }
           connection {
+            __typename
             position
+            selected
+            id
             created_at(relative: true)
             user {
               name

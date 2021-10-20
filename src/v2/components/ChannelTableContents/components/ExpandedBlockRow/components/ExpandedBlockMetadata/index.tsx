@@ -15,6 +15,7 @@ import {
   ExpandedBlockMetadataVariables,
 } from '__generated__/ExpandedBlockMetadata'
 import { FullBlock } from '__generated__/FullBlock'
+import { ToggleConnectionExpanded } from 'v2/components/ToggleConnectionExpanded'
 
 interface ExpandedBlockMetadataProps {
   block: ChannelTableContentsSet_channel_blokks
@@ -22,11 +23,15 @@ interface ExpandedBlockMetadataProps {
 
 export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
   block: { id, title },
+  block: existing,
 }) => {
   const { data } = useQuery<
     ExpandedBlockMetadataType,
     ExpandedBlockMetadataVariables
-  >(EXPANDED_BLOCK_METADATA_QUERY, { variables: { id: id.toString() } })
+  >(EXPANDED_BLOCK_METADATA_QUERY, {
+    variables: { id: id.toString() },
+    ssr: false,
+  })
 
   const { block } = data || {}
 
@@ -105,6 +110,7 @@ export const ExpandedBlockMetadata: React.FC<ExpandedBlockMetadataProps> = ({
               Actions
             </Header>
             <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
+              <ToggleConnectionExpanded connection={existing.connection} />
               <FullBlockActions
                 block={block as FullBlock}
                 linkViewMode={'screenshot'}

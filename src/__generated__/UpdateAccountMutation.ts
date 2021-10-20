@@ -16,6 +16,7 @@ export interface UpdateAccountMutation_update_account_me_settings {
   exclude_from_indexes: boolean | null;
   receive_newsletter: boolean | null;
   show_nsfw: boolean | null;
+  dark_mode: boolean | null;
 }
 
 export interface UpdateAccountMutation_update_account_me {
@@ -56,4 +57,5 @@ export interface UpdateAccountMutationVariables {
   password?: string | null;
   password_confirmation?: string | null;
   hide_notification_count?: boolean | null;
+  dark_mode?: boolean | null;
 }

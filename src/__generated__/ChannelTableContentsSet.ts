@@ -31,6 +31,8 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_connection_us
 export interface ChannelTableContentsSet_channel_blokks_Attachment_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_Attachment_connection_user | null;
 }
@@ -76,6 +78,8 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_connection_user {
 export interface ChannelTableContentsSet_channel_blokks_Embed_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_Embed_connection_user | null;
 }
@@ -121,6 +125,8 @@ export interface ChannelTableContentsSet_channel_blokks_Image_connection_user {
 export interface ChannelTableContentsSet_channel_blokks_Image_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_Image_connection_user | null;
 }
@@ -165,6 +171,8 @@ export interface ChannelTableContentsSet_channel_blokks_Link_connection_user {
 export interface ChannelTableContentsSet_channel_blokks_Link_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_Link_connection_user | null;
 }
@@ -203,6 +211,8 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection_
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_PendingBlock_connection_user | null;
 }
@@ -239,6 +249,8 @@ export interface ChannelTableContentsSet_channel_blokks_Text_connection_user {
 export interface ChannelTableContentsSet_channel_blokks_Text_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_Text_connection_user | null;
 }
@@ -278,6 +290,8 @@ export interface ChannelTableContentsSet_channel_blokks_Channel_connection_user 
 export interface ChannelTableContentsSet_channel_blokks_Channel_connection {
   __typename: "Connection";
   position: number;
+  selected: boolean;
+  id: number;
   created_at: string | null;
   user: ChannelTableContentsSet_channel_blokks_Channel_connection_user | null;
 }

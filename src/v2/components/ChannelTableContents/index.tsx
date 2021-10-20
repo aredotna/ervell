@@ -16,6 +16,7 @@ import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
+import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
 
 const Table = styled.table`
   width: 100%;
@@ -71,6 +72,18 @@ const TR = styled.tr`
   }
 `
 
+function getInitialExpandedState(
+  blocks: ChannelTableContentsSet_channel_blokks[]
+) {
+  const record = {}
+  blocks.forEach(block => {
+    record[`${block.id.toString()}`] = block.connection.selected
+  })
+
+  console.log(record)
+  return record
+}
+
 export const FIRST_COLUMN_WIDTH = `35%`
 
 interface ChannelTableQueryProps {
@@ -107,8 +120,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       },
       {
         Header: 'Title',
-        accessor: 'title',
-        Cell: StandardCell,
+        Cell: PotentiallyEditableBlockCell,
+        accessor: block => ({ block, attr: 'title' }),
         width: '40%',
       },
       {
@@ -143,6 +156,14 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     {
       data: data?.channel.blokks,
       columns: headers,
+      autoResetExpanded: false,
+      getRowId: (row, _index) => {
+        const typedRowOriginal = row as ChannelTableContentsSet_channel_blokks
+        return `${typedRowOriginal.id}`
+      },
+      initialState: {
+        expanded: getInitialExpandedState(data?.channel.blokks),
+      },
     },
     useExpanded
   )
