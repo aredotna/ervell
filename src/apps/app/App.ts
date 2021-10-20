@@ -13,6 +13,16 @@ export const App = Router()
 
 const middlewareStack = [apolloMiddleware]
 
+const redirectLoggedOutToPricing = (req, res, next) => {
+  console.log('redirectLoggedOutToPricing ')
+  if (!req.user) {
+    res.locals.sd.REDIRECT_TO = req.originalUrl
+    return res.redirect(`/pricing`)
+  }
+
+  next()
+}
+
 const resolve = [
   ...middlewareStack,
   (req, res, next) => {
@@ -46,6 +56,13 @@ App.get(
   ...resolve
 )
   .get('/group/:id/invite/:code', ensureLoggedIn, ...resolve)
+  .get(
+    '/settings/:page(billing|group_billing|perks)?',
+    redirectLoggedOutToPricing,
+    ...resolve
+  )
+  .get('/settings', ensureLoggedIn, ...resolve)
+  .get('/settings/*', ensureLoggedIn, ...resolve)
   .get('/tools/*', ensureLoggedIn, ...resolve)
   .get('/', homePathMiddleware, ...resolve)
   .get('*', ...resolve)
