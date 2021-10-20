@@ -14,7 +14,6 @@ export const App = Router()
 const middlewareStack = [apolloMiddleware]
 
 const redirectLoggedOutToPricing = (req, res, next) => {
-  console.log('redirectLoggedOutToPricing ')
   if (!req.user) {
     res.locals.sd.REDIRECT_TO = req.originalUrl
     return res.redirect(`/pricing`)
