@@ -18,6 +18,7 @@ import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
 import { ContentCell } from './components/ContentCell'
 import { StandardCell } from './components/StandardCell'
+import constants from 'v2/styles/constants'
 
 const Table = styled.table`
   width: 100%;
@@ -46,10 +47,16 @@ export const TD = styled.td`
   }
 `
 
+const THead = styled.thead``
+
 const TH = styled(TD)`
   font-weight: bold;
   padding: ${x => x.theme.space[2]} ${x => x.theme.space[4]};
   vertical-align: middle;
+  position: sticky;
+  top: ${constants.headerHeight};
+  background: ${x => x.theme.colors.background};
+  z-index: 1;
 `
 
 const TR = styled.tr`
@@ -73,6 +80,10 @@ const TR = styled.tr`
   }
 `
 
+const HeaderRow = styled(TR)`
+  cursor: text;
+`
+
 function getInitialExpandedState(
   blocks: ChannelTableContentsSet_channel_blokks[]
 ) {
@@ -81,7 +92,6 @@ function getInitialExpandedState(
     record[`${block.id.toString()}`] = block.connection.selected
   })
 
-  console.log(record)
   return record
 }
 
@@ -180,9 +190,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
   return (
     <Table {...getTableProps()}>
-      <thead>
+      <THead>
         {headerGroups.map((headerGroup, i) => (
-          <TR key={`header-${i}`} {...headerGroup.getHeaderGroupProps()}>
+          <HeaderRow key={`header-${i}`} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, j) => {
               return (
                 <TH
@@ -194,9 +204,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 </TH>
               )
             })}
-          </TR>
+          </HeaderRow>
         ))}
-      </thead>
+      </THead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row)
