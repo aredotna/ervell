@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { Sorts, SortDirection } from "./globalTypes";
+
 // ====================================================
 // GraphQL query operation: ChannelTableContentsSet
 // ====================================================
@@ -338,4 +340,6 @@ export interface ChannelTableContentsSetVariables {
   id: string;
   page: number;
   per: number;
+  sort?: Sorts | null;
+  direction?: SortDirection | null;
 }

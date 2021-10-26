@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { useExpanded, useTable } from 'react-table'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useExpanded, useSortBy, useTable } from 'react-table'
 import styled from 'styled-components'
 
 import {
@@ -9,8 +9,6 @@ import {
 } from '__generated__/ChannelTableContentsSet'
 
 import Text from 'v2/components/UI/Text'
-import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
-
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
@@ -19,6 +17,10 @@ import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBl
 import { ContentCell } from './components/ContentCell'
 import { StandardCell } from './components/StandardCell'
 import constants from 'v2/styles/constants'
+import SortArrows from '../UI/SortArrows'
+import Box from '../UI/Box'
+import { SortDirection, Sorts } from '__generated__/globalTypes'
+import { useQuery } from '@apollo/client'
 
 const Table = styled.table`
   width: 100%;
@@ -88,11 +90,19 @@ function getInitialExpandedState(
   blocks: ChannelTableContentsSet_channel_blokks[]
 ) {
   const record = {}
-  blocks.forEach(block => {
+  blocks?.forEach(block => {
     record[`${block.id.toString()}`] = block.connection.selected
   })
 
   return record
+}
+
+function mapSort(id: string) {
+  const sort = {
+    'connection.created_at': Sorts.CREATED_AT,
+  }[id]
+
+  return sort
 }
 
 export const FIRST_COLUMN_WIDTH = `35%`
@@ -102,24 +112,41 @@ interface ChannelTableQueryProps {
 }
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
-  const { blocks } = usePaginatedBlocks<
+  const [sort, setSort] = useState<Sorts | null>(null)
+  const [direction, setDirection] = useState<SortDirection | null>(null)
+
+  const { data } = useQuery<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables
-  >({
-    channelId: id,
-    per: 25,
-    channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
+  >(CHANNEL_TABLE_CONTENTS_QUERY, {
+    variables: {
+      id,
+      per: 25,
+      page: 1,
+      sort,
+      direction,
+    },
   })
 
-  return <ChannelTableContents blocks={blocks} />
+  return (
+    <ChannelTableContents
+      blocks={data?.channel.blokks}
+      setSort={setSort}
+      setDirection={setDirection}
+    />
+  )
 }
 
 interface ChannelTableContentsProps {
   blocks: ChannelTableContentsSet['channel']['blokks']
+  setSort: React.Dispatch<React.SetStateAction<Sorts>>
+  setDirection: React.Dispatch<React.SetStateAction<SortDirection>>
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
+  setSort,
+  setDirection,
 }) => {
   const headers = useMemo(
     () => [
@@ -128,12 +155,14 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         accessor: block => block,
         Cell: ContentCell,
         width: FIRST_COLUMN_WIDTH,
+        disableSortBy: true,
       },
       {
         Header: 'Title',
         Cell: PotentiallyEditableBlockCell,
         accessor: block => ({ block, attr: 'title' }),
         width: '40%',
+        disableSortBy: true,
       },
       {
         Header: 'Added at',
@@ -146,12 +175,14 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         accessor: 'user.name',
         Cell: StandardCell,
         maxWidth: 200,
+        disableSortBy: true,
       },
       {
         Header: 'Connections',
         accessor: 'counts.public_channels',
         Cell: StandardCell,
         width: 200,
+        disableSortBy: true,
       },
       {
         Header: '',
@@ -165,9 +196,11 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
   const tableInstance = useTable(
     {
-      data: blocks,
+      data: blocks || [],
       columns: headers,
       autoResetExpanded: false,
+      autoResetSortBy: true,
+      manualSortBy: true,
       getRowId: (row, _index) => {
         const typedRowOriginal = row as ChannelTableContentsSet_channel_blokks
         return `${typedRowOriginal.id}`
@@ -176,6 +209,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         expanded: getInitialExpandedState(blocks),
       },
     },
+    useSortBy,
     useExpanded
   )
 
@@ -186,7 +220,19 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     rows,
     prepareRow,
     columns,
+    state,
   } = tableInstance
+
+  useEffect(() => {
+    if (state.sortBy.length > 0) {
+      const [{ id, desc }] = state.sortBy
+      setSort(mapSort(id))
+      setDirection(desc ? SortDirection.DESC : SortDirection.ASC)
+    } else {
+      setDirection(null)
+      setSort(null)
+    }
+  }, [state, setDirection, setSort])
 
   return (
     <Table {...getTableProps()}>
@@ -194,13 +240,37 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         {headerGroups.map((headerGroup, i) => (
           <HeaderRow key={`header-${i}`} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, j) => {
+              const sortState = column.isSorted
+                ? column.isSortedDesc
+                  ? 'down'
+                  : 'up'
+                : 'off'
               return (
                 <TH
                   key={`key-${j}`}
                   width={column.width}
                   {...column.getHeaderProps()}
                 >
-                  <Text f={1}>{column.render('Header')}</Text>
+                  <Box display="flex" flexDirection="row" alignItems="center">
+                    <Text f={1} mr={5}>
+                      {column.render('Header')}
+                    </Text>
+                    {column.canSort && (
+                      <SortArrows
+                        state={sortState}
+                        onDown={() =>
+                          column.isSortedDesc
+                            ? column.toggleSortBy()
+                            : column.toggleSortBy(true)
+                        }
+                        onUp={() =>
+                          column.isSorted
+                            ? column.clearSortBy()
+                            : column.toggleSortBy()
+                        }
+                      />
+                    )}
+                  </Box>
                 </TH>
               )
             })}

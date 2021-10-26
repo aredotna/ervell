@@ -17,5 +17,6 @@
     "target": "ES2017"
   },
   "include": ["src", "typings/*.d.ts"],
+  "files": ["typings/global.d.ts"],
   "exclude": ["node_modules"]
 }
