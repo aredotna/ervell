@@ -1,11 +1,16 @@
 import { gql } from '@apollo/client'
 
 export default gql`
-  query ChannelTableContentsSet($id: ID!) {
+  query ChannelTableContentsSet($id: ID!, $page: Int!, $per: Int!) {
     channel(id: $id) {
       __typename
       id
-      blokks(direction: DESC) {
+      counts {
+        contents
+        blocks
+        channels
+      }
+      blokks(page: $page, per: $per, direction: DESC) {
         __typename
 
         ... on Model {

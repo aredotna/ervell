@@ -1,22 +1,23 @@
 import React, { useMemo } from 'react'
-import { useQuery } from '@apollo/client'
 import { useExpanded, useTable } from 'react-table'
 import styled from 'styled-components'
 
-import { ContentCell } from './components/ContentCell'
-import { StandardCell } from './components/StandardCell'
-import Text from 'v2/components/UI/Text'
 import {
   ChannelTableContentsSet,
   ChannelTableContentsSetVariables,
   ChannelTableContentsSet_channel_blokks,
 } from '__generated__/ChannelTableContentsSet'
 
+import Text from 'v2/components/UI/Text'
+import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
+
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
 import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
+import { ContentCell } from './components/ContentCell'
+import { StandardCell } from './components/StandardCell'
 
 const Table = styled.table`
   width: 100%;
@@ -91,24 +92,24 @@ interface ChannelTableQueryProps {
 }
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
-  const { data } = useQuery<
+  const { blocks } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables
-  >(CHANNEL_TABLE_CONTENTS_QUERY, { variables: { id } })
+  >({
+    channelId: id,
+    per: 25,
+    channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
+  })
 
-  if (data?.channel) {
-    return <ChannelTableContents data={data} />
-  }
-
-  return <div />
+  return <ChannelTableContents blocks={blocks} />
 }
 
 interface ChannelTableContentsProps {
-  data: ChannelTableContentsSet
+  blocks: ChannelTableContentsSet['channel']['blokks']
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
-  data,
+  blocks,
 }) => {
   const headers = useMemo(
     () => [
@@ -154,7 +155,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
   const tableInstance = useTable(
     {
-      data: data?.channel.blokks,
+      data: blocks,
       columns: headers,
       autoResetExpanded: false,
       getRowId: (row, _index) => {
@@ -162,7 +163,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         return `${typedRowOriginal.id}`
       },
       initialState: {
-        expanded: getInitialExpandedState(data?.channel.blokks),
+        expanded: getInitialExpandedState(blocks),
       },
     },
     useExpanded
