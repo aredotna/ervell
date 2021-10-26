@@ -175,6 +175,23 @@ export enum SearchesCollaboratorsType {
 }
 
 /**
+ * Directions to sort blocks
+ */
+export enum SortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+/**
+ * Ways to sort blocks
+ */
+export enum Sorts {
+  CREATED_AT = "CREATED_AT",
+  POSITION = "POSITION",
+  UPDATED_AT = "UPDATED_AT",
+}
+
+/**
  * Ways to filter search by type
  */
 export enum SsearchType {

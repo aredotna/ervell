@@ -7,7 +7,7 @@ import {
   moveConnectableMutationVariables,
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
-import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import { BaseConnectableTypeEnum, SortDirection, Sorts } from '__generated__/globalTypes'
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 import { getConnectableType } from 'v2/util/getConnectableType'
@@ -39,6 +39,8 @@ type RequiredChannelQueryVariables = {
   id: string
   page: number
   per: number
+  sort?: Sorts | null
+  direction?: SortDirection | null
 }
 
 /**
@@ -65,6 +67,8 @@ type UsePaginatedBlocksBaseArgs = {
   channelId: string
   channelQuery: DocumentNode
   per: number
+  sort?: Sorts | null
+  direction?: SortDirection | null
   ssr?: boolean
 }
 
@@ -167,6 +171,8 @@ export function usePaginatedBlocks<
       id: args.current.channelId,
       page: 1,
       per: args.current.per,
+      sort: args.current.sort,
+      direction: args.current.direction,
     } as ChannelQueryVariables,
     ssr: args.current.ssr,
     context: { queryDeduplication: false },

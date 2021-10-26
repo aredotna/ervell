@@ -31,12 +31,6 @@ const Inner = styled.div<{ mode: EditableCellMode }>`
   align-items: center;
 
   ${x =>
-    x.mode === 'checking' &&
-    `
-    cursor: wait;
-  `}
-
-  ${x =>
     x.mode === 'editable' &&
     `
     cursor: text;
