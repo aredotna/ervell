@@ -30,7 +30,10 @@ export const ToggleConnectionExpanded: React.FC<ToggleConnectionExpandedProps> =
   const { data, loading } = useQuery<
     GetConnectionSelection,
     GetConnectionSelectionVariables
-  >(getConnectionSelection, { variables: { id: connection.id.toString() } })
+  >(getConnectionSelection, {
+    variables: { id: connection.id.toString() },
+    skip: !connection.can.manage,
+  })
 
   const [toggleExpanded] = useMutation<
     ToggleConnectionExpandedMutation,
@@ -41,12 +44,16 @@ export const ToggleConnectionExpanded: React.FC<ToggleConnectionExpandedProps> =
     optimisticResponse: () => ({
       toggle_connection_selection: {
         __typename: 'ToggleConnectionSelectionMutationPayload',
-        connection: { ...connection, selected: !!data.connection.selected },
+        connection: { ...connection, selected: !!data?.connection.selected },
       },
     }),
   })
 
-  const expanded = loading ? connection.selected : data.connection.selected
+  if (!connection.can.manage) {
+    return null
+  }
+
+  const expanded = loading ? connection.selected : data?.connection.selected
 
   return (
     <Wrapper

@@ -32,6 +32,11 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_Attachment_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Attachment_connection_user {
   __typename: "User";
   name: string;
@@ -43,6 +48,7 @@ export interface ChannelTableContentsSet_channel_blokks_Attachment_connection {
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_Attachment_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_Attachment_connection_user | null;
 }
 
@@ -79,6 +85,11 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_Embed_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Embed_connection_user {
   __typename: "User";
   name: string;
@@ -90,6 +101,7 @@ export interface ChannelTableContentsSet_channel_blokks_Embed_connection {
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_Embed_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_Embed_connection_user | null;
 }
 
@@ -126,6 +138,11 @@ export interface ChannelTableContentsSet_channel_blokks_Image_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_Image_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Image_connection_user {
   __typename: "User";
   name: string;
@@ -137,6 +154,7 @@ export interface ChannelTableContentsSet_channel_blokks_Image_connection {
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_Image_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_Image_connection_user | null;
 }
 
@@ -172,6 +190,11 @@ export interface ChannelTableContentsSet_channel_blokks_Link_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_Link_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Link_connection_user {
   __typename: "User";
   name: string;
@@ -183,6 +206,7 @@ export interface ChannelTableContentsSet_channel_blokks_Link_connection {
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_Link_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_Link_connection_user | null;
 }
 
@@ -212,6 +236,11 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection_user {
   __typename: "User";
   name: string;
@@ -223,6 +252,7 @@ export interface ChannelTableContentsSet_channel_blokks_PendingBlock_connection 
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_PendingBlock_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_PendingBlock_connection_user | null;
 }
 
@@ -250,6 +280,11 @@ export interface ChannelTableContentsSet_channel_blokks_Text_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_Text_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Text_connection_user {
   __typename: "User";
   name: string;
@@ -261,6 +296,7 @@ export interface ChannelTableContentsSet_channel_blokks_Text_connection {
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_Text_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_Text_connection_user | null;
 }
 
@@ -291,6 +327,11 @@ export interface ChannelTableContentsSet_channel_blokks_Channel_user {
   name: string;
 }
 
+export interface ChannelTableContentsSet_channel_blokks_Channel_connection_can {
+  __typename: "ConnectionCan";
+  manage: boolean | null;
+}
+
 export interface ChannelTableContentsSet_channel_blokks_Channel_connection_user {
   __typename: "User";
   name: string;
@@ -302,6 +343,7 @@ export interface ChannelTableContentsSet_channel_blokks_Channel_connection {
   selected: boolean;
   id: number;
   created_at: string | null;
+  can: ChannelTableContentsSet_channel_blokks_Channel_connection_can | null;
   user: ChannelTableContentsSet_channel_blokks_Channel_connection_user | null;
 }
 
