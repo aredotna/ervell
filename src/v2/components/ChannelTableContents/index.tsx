@@ -260,7 +260,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                         state={sortState}
                         onDown={() =>
                           column.isSortedDesc
-                            ? column.toggleSortBy()
+                            ? column.clearSortBy()
                             : column.toggleSortBy(true)
                         }
                         onUp={() =>
@@ -301,6 +301,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
                 channel={typedRowOriginal}
                 columnLength={columns.length}
                 {...row.getRowProps()}
+                onMinimize={() => row.toggleRowExpanded(false)}
               />
             )
           }

@@ -7,9 +7,16 @@ import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
 import { ExpandedChannelRowContents } from './ExpandedChannelRowContents'
 import { FullChannelMetadataPane } from 'v2/components/FullChannel/components/FullChannelMetadataPane'
+import { ActionButtons } from '../ActionButtons'
 
 const Row = styled.tr`
   border-color: transparent;
+`
+
+const ButtonContainer = styled(Box)`
+  position: absolute;
+  top: 0;
+  right: 0;
 `
 
 const TD = styled.td`
@@ -61,11 +68,13 @@ const Cell = styled(TD)`
 interface ExpandedChannelRowProps {
   channel: ChannelTableContentsSet_channel_blokks_Channel
   columnLength: number
+  onMinimize?: () => void
 }
 
 export const ExpandedChannelRow: React.FC<ExpandedChannelRowProps> = ({
   channel,
   columnLength,
+  onMinimize,
 }) => {
   return (
     <Row>
@@ -80,7 +89,13 @@ export const ExpandedChannelRow: React.FC<ExpandedChannelRowProps> = ({
         </Box>
       </Cell>
       <Cell visibility={channel.visibility} colSpan={3}>
-        <FullChannelMetadataPane id={channel.id.toString()} />
+        <ButtonContainer>
+          <ActionButtons isExpanded={true} canDelete onMinimize={onMinimize} />
+        </ButtonContainer>
+        <FullChannelMetadataPane
+          id={channel.id.toString()}
+          connection={channel.connection}
+        />
       </Cell>
     </Row>
   )
