@@ -1,8 +1,13 @@
 import { gql } from '@apollo/client'
 
 export default gql`
-  query ChannelTableContentsSet($id: ID!, $page: Int!, $per: Int!, $sort: Sorts
-    $direction: SortDirection) {
+  query ChannelTableContentsSet(
+    $id: ID!
+    $page: Int!
+    $per: Int!
+    $sort: Sorts
+    $direction: SortDirection
+  ) {
     channel(id: $id) {
       __typename
       id
@@ -88,6 +93,9 @@ export default gql`
             selected
             id
             created_at(relative: true)
+            can {
+              manage
+            }
             user {
               name
             }
