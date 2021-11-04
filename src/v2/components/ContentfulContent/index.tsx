@@ -107,7 +107,6 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
       [BLOCKS.QUOTE]: (_, children) => <Blockquote>{children}</Blockquote>,
       [BLOCKS.HR]: () => <HR />,
       [BLOCKS.PARAGRAPH]: (_, children) => {
-        console.log({ children })
         if (
           children[0] &&
           typeof children[0] === 'string' &&
