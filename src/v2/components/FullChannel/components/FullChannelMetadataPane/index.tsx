@@ -13,13 +13,17 @@ import {
 import Box from 'v2/components/UI/Box'
 import FullChannelMetadataActions from '../FullChannelMetadataActions'
 import { FullChannelMetadataFold } from '../FullChannelMetadataFold'
+import { ToggleConnectionExpanded } from 'v2/components/ToggleConnectionExpanded'
+import { ChannelTableContentsSet_channel_blokks_Channel_connection } from '__generated__/ChannelTableContentsSet'
 
 interface FullChannelMetadataPaneProps {
   id: string
+  connection?: ChannelTableContentsSet_channel_blokks_Channel_connection
 }
 
 export const FullChannelMetadataPane: React.FC<FullChannelMetadataPaneProps> = ({
   id,
+  connection,
 }) => {
   const { data } = useQuery<FullChannelMetadata, FullChannelMetadataVariables>(
     fullChannelMetadataPaneQuery,
@@ -65,6 +69,8 @@ export const FullChannelMetadataPane: React.FC<FullChannelMetadataPaneProps> = (
       </Header>
 
       <Text my={6} f={1} fontWeight="bold" lineHeight={2}>
+        {connection && <ToggleConnectionExpanded connection={connection} />}
+
         <FullChannelMetadataActions channel={data?.channel} />
       </Text>
 

@@ -117,7 +117,7 @@ export const optionsWithEmbeds = (embedData: any, defaultFontSize: number) => {
         return <BaseText f={defaultFontSize}>{children}</BaseText>
       },
     },
-    renderText: text => text.replace('!', '?'),
+    renderText: text => text,
   }
 }
 

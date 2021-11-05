@@ -3,16 +3,26 @@ import { SortableContainer } from 'react-sortable-hoc'
 
 import { ChannelContents as ChannelContentsData } from '__generated__/ChannelContents'
 import { BaseConnectableTypeEnum } from '__generated__/globalTypes'
+import {
+  ChannelBlokksPaginated,
+  ChannelBlokksPaginatedVariables,
+} from '__generated__/ChannelBlokksPaginated'
+import {
+  ConnectableBlokk,
+  ConnectableBlokkVariables,
+} from '__generated__/ConnectableBlokk'
 
 import Grid from 'v2/components/UI/Grid'
 import GridItem from 'v2/components/UI/Grid/components/GridItem'
 import AddBlock from 'v2/components/AddBlock'
 import { usePusher } from 'v2/hooks/usePusher'
+import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 import WithIsSpiderRequesting from 'v2/hocs/WithIsSpiderRequesting'
+import { getConnectableType } from 'v2/util/getConnectableType'
 
 import { ChannelContentsItem } from './components/ChannelContentsItem'
-import { usePaginatedBlocks } from './lib/usePaginatedBlocks'
-import { getConnectableType } from './lib/getConnectableType'
+import channelBlokksPaginatedQuery from './queries/channelBlokksPaginated'
+import ConnectableBlockQuery from './queries/connectableBlokk'
 
 const SortableGrid = SortableContainer(({ onSortEnd: _onSortEnd, ...rest }) => (
   <Grid {...rest} />
@@ -61,9 +71,17 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       contentCount,
       updateBlock,
       getBlocksFromCache,
-    } = usePaginatedBlocks({
-      channelId: channel.id,
+    } = usePaginatedBlocks<
+      ChannelBlokksPaginated,
+      ChannelBlokksPaginatedVariables,
+      ConnectableBlokk,
+      ConnectableBlokkVariables
+    >({
+      channelId: channel.id.toString(),
       ssr: isSpiderRequesting,
+      channelQuery: channelBlokksPaginatedQuery,
+      per: 10,
+      blockquery: ConnectableBlockQuery,
     })
 
     const onItemIntersected = useCallback(
@@ -145,32 +163,30 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
     }
 
     return (
-      <>
-        <SortableGrid
-          axis="xy"
-          useWindowAsScrollContainer
-          transitionDuration={0}
-          onSortEnd={moveBlock}
-          wrapChildren={false}
-          distance={1}
-          useDragHandle
-          {...rest}
-        >
-          {(channel.can.add_to || channel.can.add_to_as_premium) && (
-            <GridItem>
-              <AddBlock
-                channel_id={channel.id}
-                onAddBlock={addBlock}
-                isElligbleForPremium={
-                  !channel.can.add_to && channel.can.add_to_as_premium
-                }
-              />
-            </GridItem>
-          )}
+      <SortableGrid
+        axis="xy"
+        useWindowAsScrollContainer
+        transitionDuration={0}
+        onSortEnd={moveBlock}
+        wrapChildren={false}
+        distance={1}
+        useDragHandle
+        {...rest}
+      >
+        {(channel.can.add_to || channel.can.add_to_as_premium) && (
+          <GridItem>
+            <AddBlock
+              channel_id={channel.id}
+              onAddBlock={addBlock}
+              isElligbleForPremium={
+                !channel.can.add_to && channel.can.add_to_as_premium
+              }
+            />
+          </GridItem>
+        )}
 
-          {blocksJsx}
-        </SortableGrid>
-      </>
+        {blocksJsx}
+      </SortableGrid>
     )
   })
 )

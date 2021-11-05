@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
-import { Query } from '@apollo/client/react/components'
+import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 
-import { ChannelPage as ChannelPageData } from '__generated__/ChannelPage'
+import {
+  ChannelPage as ChannelPageData,
+  ChannelPageVariables,
+} from '__generated__/ChannelPage'
 
 import channelPageQuery from 'v2/pages/channel/ChannelPage/queries/channelPage'
 
@@ -31,10 +34,6 @@ interface ChannelTablePageProps {
   fromOnboarding?: boolean
 }
 
-interface Variables {
-  id: string
-}
-
 export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
   id,
   fromOnboarding,
@@ -46,35 +45,32 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
     }
   }, [fromOnboarding])
 
+  const { data, loading, error } = useQuery<
+    ChannelPageData,
+    ChannelPageVariables
+  >(channelPageQuery, {
+    variables: { id },
+  })
+
+  let pageJsx: React.ReactNode | null = null
+  if (loading) {
+    pageJsx = <LoadingPage />
+  } else if (error) {
+    pageJsx = <ErrorAlert isReloadable>{error.message}</ErrorAlert>
+  } else {
+    pageJsx = (
+      <>
+        <ChannelPageMetaTags channel={data.channel} />
+        <ChannelMetadata channel={data.channel} />
+
+        <ChannelTableQuery id={data.channel.id.toString()} />
+      </>
+    )
+  }
+
   return (
     <TopBarLayout>
-      <Constrain>
-        <Query<ChannelPageData, Variables>
-          query={channelPageQuery}
-          variables={{ id }}
-        >
-          {({ data, loading, error }) => {
-            if (loading) {
-              return <LoadingPage />
-            }
-
-            if (error) {
-              return <ErrorAlert isReloadable>{error.message}</ErrorAlert>
-            }
-
-            const { channel } = data
-
-            return (
-              <>
-                <ChannelPageMetaTags channel={channel} />
-                <ChannelMetadata channel={channel} />
-
-                <ChannelTableQuery id={channel.id.toString()} />
-              </>
-            )
-          }}
-        </Query>
-      </Constrain>
+      <Constrain>{pageJsx}</Constrain>
     </TopBarLayout>
   )
 }
