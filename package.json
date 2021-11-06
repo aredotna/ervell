@@ -186,6 +186,7 @@
     "react-stripe-elements": "^2.0.1",
     "react-table": "^7.6.3",
     "react-transition-group": "^1.2.0",
+    "react-virtual": "^2.8.2",
     "react-waypoint": "^8.1.0",
     "react-window-infinite-loader": "^1.0.5",
     "redis": "*",
