@@ -88,9 +88,7 @@ type UsePaginatedBlocksArgs = UsePaginatedBlocksBaseArgs & {
   blockquery: DocumentNode
 }
 
-type BlocksTypeFromQueryData<
-  ChannelQueryData extends RequiredChannelQueryData
-> = Array<
+type Blocks<ChannelQueryData extends RequiredChannelQueryData> = Array<
   NonNullable<NonNullable<ChannelQueryData['channel']>['blokks']>[number] | null
 >
 
@@ -100,14 +98,14 @@ type BlocksTypeFromQueryData<
 type UsePaginatedBlocksBaseApi<
   ChannelQueryData extends RequiredChannelQueryData
 > = {
-  blocks: BlocksTypeFromQueryData<ChannelQueryData>
+  blocks: Blocks<ChannelQueryData>
   getPage: (pageNumber: number) => void
   hasQueriedPage: (pageNumber: number) => boolean
   getPageFromIndex: (index: number) => number
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
-  getBlocksFromCache: () => BlocksTypeFromQueryData<ChannelQueryData>
+  getBlocksFromCache: () => Blocks<ChannelQueryData>
 }
 
 /**
@@ -332,7 +330,7 @@ export function usePaginatedBlocks<
   >['blocks'] = useMemo(() => {
     const partialBlocks = unsafeData?.channel?.blokks ?? []
 
-    const fullBlocks: BlocksTypeFromQueryData<ChannelQueryData> = []
+    const fullBlocks: Blocks<ChannelQueryData> = []
     for (let i = 0; i < contentCount; i++) {
       fullBlocks.push(partialBlocks[i] ?? null)
     }

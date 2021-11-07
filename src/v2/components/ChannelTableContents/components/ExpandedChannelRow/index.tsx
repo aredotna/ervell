@@ -68,7 +68,7 @@ const Cell = styled(TD)`
 interface ExpandedChannelRowProps {
   channel: ChannelTableContentsSet_channel_blokks_Channel
   columnLength: number
-  onMinimize?: () => void
+  onMinimize: () => void
 }
 
 export const ExpandedChannelRow = forwardRef<

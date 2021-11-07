@@ -14,7 +14,7 @@ import { TableData } from '../../lib/types'
 import { FIRST_COLUMN_WIDTH } from '../../lib/constants'
 
 import { ChannelRow } from '../ChannelRow'
-import ExpandedBlockRow from '../ExpandedBlockRow'
+import ExpandedBlockRow, { ExpandedBlockRowProps } from '../ExpandedBlockRow'
 import ExpandedChannelRow from '../ExpandedChannelRow'
 import { HeaderRow, Table, TD, TH, THead, TR } from '../TableComponents'
 import { ContentCell } from '../ContentCell'
@@ -25,12 +25,14 @@ interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
   setSort: (value: Sorts | null) => void
   setDirection: (value: SortDirection | null) => void
+  onItemIntersected: (index: number) => void
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
   setSort,
   setDirection,
+  onItemIntersected,
 }) => {
   const tableData = useMemo<Array<TableData>>(() => {
     return blocks.map(block => {
@@ -173,10 +175,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     itemIndex => entries => {
       const entry = entries[0]
       if (entry.isIntersecting) {
-        console.log('intersected', itemIndex)
+        onItemIntersected(itemIndex)
       }
     },
-    []
+    [onItemIntersected]
   )
 
   const intersectionObserverOptions = useMemo<IntersectionObserverInit>(
@@ -247,16 +249,17 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
           if ('__typename' in row.original) {
             if (row.isExpanded && row.original.__typename !== 'Channel') {
+              const componentProps: ExpandedBlockRowProps = {
+                block: row.original,
+                columnLength: columns.length,
+                ...rowProps,
+                onMinimize: () => row.toggleRowExpanded(false),
+              }
               return (
                 <IntersectionObserverBox
                   {...sharedIntersectionObserverBoxProps}
                   Component={ExpandedBlockRow}
-                  componentProps={{
-                    block: row.original as ChannelTableContentsSet_channel_blokks,
-                    columnLength: columns.length,
-                    ...rowProps,
-                    onMinimize: () => row.toggleRowExpanded(false),
-                  }}
+                  componentProps={componentProps}
                 />
               )
             }

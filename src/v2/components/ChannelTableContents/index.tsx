@@ -14,6 +14,8 @@ interface ChannelTableQueryProps {
   id: string
 }
 
+const devOnItemIntersected = () => {}
+
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
   const [sort, setSort] = useState<Sorts | null>(null)
   const [direction, setDirection] = useState<SortDirection | null>(null)
@@ -36,6 +38,7 @@ export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
       blocks={data?.channel?.blokks ?? []}
       setSort={setSort}
       setDirection={setDirection}
+      onItemIntersected={devOnItemIntersected}
     />
   )
 }
