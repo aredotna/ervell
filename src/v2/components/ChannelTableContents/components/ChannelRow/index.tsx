@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { blend } from 'chroma-js'
 import { themeGet } from 'styled-system'
@@ -71,33 +71,35 @@ interface ChannelRowProps {
   onClick: () => void
 }
 
-export const ChannelRow: React.FC<ChannelRowProps> = ({ channel, onClick }) => {
-  return (
-    <Row visibility={channel.visibility} onClick={onClick}>
-      <Cell visibility={channel.visibility} colSpan={2}>
-        <StandardCell
-          value={`${channel.title} – ${channel.counts.contents} blocks`}
-          color={`channel.${channel.visibility}`}
-        />
-      </Cell>
-      <Cell visibility={channel.visibility}>
-        <StandardCell
-          value={channel.updated_at}
-          color={`channel.${channel.visibility}`}
-        />
-      </Cell>
-      <Cell visibility={channel.visibility}>
-        <StandardCell
-          value={channel.user.name}
-          color={`channel.${channel.visibility}`}
-        />
-      </Cell>
-      <Cell visibility={channel.visibility} colSpan={2}>
-        <StandardCell
-          value={channel.counts.connected_to_channels}
-          color={`channel.${channel.visibility}`}
-        />
-      </Cell>
-    </Row>
-  )
-}
+export const ChannelRow = forwardRef<HTMLElement, ChannelRowProps>(
+  ({ channel, onClick }, ref) => {
+    return (
+      <Row ref={ref} visibility={channel.visibility} onClick={onClick}>
+        <Cell visibility={channel.visibility} colSpan={2}>
+          <StandardCell
+            value={`${channel.title} – ${channel.counts.contents} blocks`}
+            color={`channel.${channel.visibility}`}
+          />
+        </Cell>
+        <Cell visibility={channel.visibility}>
+          <StandardCell
+            value={channel.updated_at}
+            color={`channel.${channel.visibility}`}
+          />
+        </Cell>
+        <Cell visibility={channel.visibility}>
+          <StandardCell
+            value={channel.user.name}
+            color={`channel.${channel.visibility}`}
+          />
+        </Cell>
+        <Cell visibility={channel.visibility} colSpan={2}>
+          <StandardCell
+            value={channel.counts.connected_to_channels}
+            color={`channel.${channel.visibility}`}
+          />
+        </Cell>
+      </Row>
+    )
+  }
+)

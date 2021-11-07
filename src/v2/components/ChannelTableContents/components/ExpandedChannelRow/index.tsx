@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { blend } from 'chroma-js'
 import { themeGet } from 'styled-system'
@@ -71,13 +71,12 @@ interface ExpandedChannelRowProps {
   onMinimize?: () => void
 }
 
-export const ExpandedChannelRow: React.FC<ExpandedChannelRowProps> = ({
-  channel,
-  columnLength,
-  onMinimize,
-}) => {
+export const ExpandedChannelRow = forwardRef<
+  HTMLElement,
+  ExpandedChannelRowProps
+>(({ channel, columnLength, onMinimize }, ref) => {
   return (
-    <Row>
+    <Row ref={ref}>
       <Cell visibility={channel.visibility} colSpan={columnLength - 3}>
         <Box p={4}>
           <Text color={`channel.${channel.visibility}`} f={5}>
@@ -99,6 +98,6 @@ export const ExpandedChannelRow: React.FC<ExpandedChannelRowProps> = ({
       </Cell>
     </Row>
   )
-}
+})
 
 export default ExpandedChannelRow
