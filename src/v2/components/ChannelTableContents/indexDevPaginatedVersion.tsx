@@ -59,13 +59,15 @@ interface ChannelTableContentsProps {
   setDirection: React.Dispatch<React.SetStateAction<SortDirection | null>>
 }
 
-export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
+const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   blocks,
   setSort,
   setDirection,
 }) => {
   const tableData = useMemo<Array<TableData>>(() => {
-    return blocks.map(block => block || { isNull: true })
+    return blocks.map(block => {
+      return block ?? { isNull: true }
+    })
   }, [blocks])
 
   const tableInstance = useTable<TableData>(
@@ -75,9 +77,8 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       autoResetExpanded: false,
       autoResetSortBy: true,
       manualSortBy: true,
-      getRowId: (row, _index) => {
-        const typedRowOriginal = row as ChannelTableContentsSet_channel_blokks
-        return `${typedRowOriginal.id}`
+      getRowId: (row, index) => {
+        return '__typename' in row ? row.id.toString() : `nullRow${index}`
       },
       initialState: {
         expanded: getInitialExpandedState(tableData),
@@ -161,39 +162,40 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         {rows.map(row => {
           prepareRow(row)
 
-          const typedRowOriginal = row.original as ChannelTableContentsSet_channel_blokks
           const openRow = () => row.toggleRowExpanded(true)
 
-          if (row.isExpanded && typedRowOriginal.__typename !== 'Channel') {
-            return (
-              <ExpandedBlockRow
-                block={typedRowOriginal}
-                columnLength={columns.length}
-                {...row.getRowProps()}
-                onMinimize={() => row.toggleRowExpanded(false)}
-              />
-            )
-          }
+          if ('__typename' in row.original) {
+            if (row.isExpanded && row.original.__typename !== 'Channel') {
+              return (
+                <ExpandedBlockRow
+                  block={row.original}
+                  columnLength={columns.length}
+                  {...row.getRowProps()}
+                  onMinimize={() => row.toggleRowExpanded(false)}
+                />
+              )
+            }
 
-          if (row.isExpanded && typedRowOriginal.__typename === 'Channel') {
-            return (
-              <ExpandedChannelRow
-                channel={typedRowOriginal}
-                columnLength={columns.length}
-                {...row.getRowProps()}
-                onMinimize={() => row.toggleRowExpanded(false)}
-              />
-            )
-          }
+            if (row.isExpanded && row.original.__typename === 'Channel') {
+              return (
+                <ExpandedChannelRow
+                  channel={row.original}
+                  columnLength={columns.length}
+                  {...row.getRowProps()}
+                  onMinimize={() => row.toggleRowExpanded(false)}
+                />
+              )
+            }
 
-          if (typedRowOriginal.__typename === 'Channel') {
-            return (
-              <ChannelRow
-                channel={typedRowOriginal}
-                {...row.getRowProps()}
-                onClick={openRow}
-              />
-            )
+            if (row.original.__typename === 'Channel') {
+              return (
+                <ChannelRow
+                  channel={row.original}
+                  {...row.getRowProps()}
+                  onClick={openRow}
+                />
+              )
+            }
           }
 
           const { key: rowKey, ...rowProps } = row.getRowProps()

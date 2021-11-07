@@ -20,7 +20,8 @@ import { LoadingPage } from 'v2/components/LoadingPage'
 import Modal from 'v2/components/UI/Modal'
 import ModalDialog from 'v2/components/UI/ModalDialog'
 import IntroduceChannel from 'v2/components/Onboarding/components/Channels/components/IntroduceChannel'
-import { ChannelTableQuery } from 'v2/components/ChannelTableContents'
+// import { ChannelTableQuery } from 'v2/components/ChannelTableContents'
+import { ChannelTableQuery } from 'v2/components/ChannelTableContents/indexDevPaginatedVersion'
 
 const Dialog = styled(ModalDialog).attrs({
   width: 'auto',
@@ -53,7 +54,7 @@ export const ChannelTablePage: React.FC<ChannelTablePageProps> = ({
   })
 
   let pageJsx: React.ReactNode | null = null
-  if (loading) {
+  if (loading || !data?.channel) {
     pageJsx = <LoadingPage />
   } else if (error) {
     pageJsx = <ErrorAlert isReloadable>{error.message}</ErrorAlert>
