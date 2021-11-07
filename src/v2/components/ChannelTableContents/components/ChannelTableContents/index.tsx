@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from 'react'
-import { useExpanded, useSortBy, useTable } from 'react-table'
+import React, { useEffect, useMemo, useCallback, useRef } from 'react'
+import { Column, Row, useExpanded, useSortBy, useTable } from 'react-table'
 
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
 import { SortDirection, Sorts } from '__generated__/globalTypes'
@@ -8,19 +8,22 @@ import Box from 'v2/components/UI/Box'
 import SortArrows from 'v2/components/UI/SortArrows'
 import Text from 'v2/components/UI/Text'
 
-import { tableColumns } from '../../lib/constants'
-import { getInitialExpandedState } from '../../lib/getInitialExpandedState'
 import { mapSort } from '../../lib/mapSort'
 import { TableData } from '../../lib/types'
+import { FIRST_COLUMN_WIDTH } from '../../lib/constants'
+
 import { ChannelRow } from '../ChannelRow'
 import ExpandedBlockRow from '../ExpandedBlockRow'
 import ExpandedChannelRow from '../ExpandedChannelRow'
 import { HeaderRow, Table, TD, TH, THead, TR } from '../TableComponents'
+import { ContentCell } from '../ContentCell'
+import { PotentiallyEditableBlockCell } from '../PotentiallyEditableBlockCell'
+import { StandardCell } from '../StandardCell'
 
 interface ChannelTableContentsProps {
   blocks: Array<ChannelTableContentsSet_channel_blokks | null>
-  setSort: React.Dispatch<React.SetStateAction<Sorts | null>>
-  setDirection: React.Dispatch<React.SetStateAction<SortDirection | null>>
+  setSort: (value: Sorts | null) => void
+  setDirection: (value: SortDirection | null) => void
 }
 
 export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
@@ -34,6 +37,98 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     })
   }, [blocks])
 
+  const tableColumns = useMemo<Array<Column<TableData>>>(() => {
+    function guard<
+      T extends Column<TableData> & {
+        Cell: React.FC<{ value: any }>
+        accessor?: (row: TableData) => React.ComponentProps<T['Cell']>['value']
+      }
+    >(valueToCheck: Array<T>) {
+      return valueToCheck
+    }
+
+    return guard([
+      {
+        Header: 'Content',
+        id: 'content',
+        accessor: block => block,
+        Cell: ContentCell,
+        width: FIRST_COLUMN_WIDTH,
+        disableSortBy: true,
+      },
+      {
+        Header: 'Title',
+        id: 'title',
+        Cell: PotentiallyEditableBlockCell,
+        accessor: block => ({ block, attr: 'title' } as const),
+        width: '40%',
+        disableSortBy: true,
+      },
+      {
+        Header: 'Added at',
+        id: 'added at',
+        accessor: block =>
+          '__typename' in block && block?.connection?.created_at,
+        Cell: StandardCell,
+        maxWidth: 200,
+      },
+      {
+        Header: 'Author',
+        id: 'author',
+        accessor: block => '__typename' in block && block?.user?.name,
+        Cell: StandardCell,
+        maxWidth: 200,
+        disableSortBy: true,
+      },
+      {
+        Header: 'Connections',
+        id: 'connections',
+        accessor: block => {
+          if ('isNull' in block) {
+            return null
+          }
+
+          return block.counts?.__typename === 'BlockCounts'
+            ? block.counts.public_channels
+            : block.counts?.connected_to_channels
+        },
+        Cell: StandardCell,
+        width: 200,
+        disableSortBy: true,
+      },
+      {
+        Header: '',
+        id: 'id',
+        Cell: StandardCell,
+        width: 70,
+      },
+    ])
+  }, [])
+
+  const getRowId = useCallback(
+    (
+      row: TableData,
+      index: number,
+      parent?: Row<TableData> | undefined
+    ): string => {
+      const parentId = parent?.id ?? 'noParent'
+      const rowId = '__typename' in row ? row.id.toString() : `nullRow${index}`
+      return `${parentId},${rowId}`
+    },
+    []
+  )
+
+  const initialExpandedStateRef = useRef<Record<string, boolean> | undefined>()
+  if (!initialExpandedStateRef.current) {
+    const initialState = {}
+    tableData.forEach(row => {
+      if ('__typename' in row && row.connection) {
+        initialState[row.id.toString()] = row.connection.selected
+      }
+    })
+    initialExpandedStateRef.current = initialState
+  }
+
   const tableInstance = useTable<TableData>(
     {
       data: tableData,
@@ -41,11 +136,9 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
       autoResetExpanded: false,
       autoResetSortBy: true,
       manualSortBy: true,
-      getRowId: (row, index) => {
-        return '__typename' in row ? row.id.toString() : `nullRow${index}`
-      },
+      getRowId: getRowId,
       initialState: {
-        expanded: getInitialExpandedState(tableData),
+        expanded: initialExpandedStateRef.current,
       },
     },
     useSortBy,
@@ -166,13 +259,13 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
           return (
             <TR key={rowKey} {...rowProps} onClick={openRow}>
               {row.cells.map(cell => {
-                const { key: colKey, ...colProps } = cell.getCellProps()
+                const { key: cellKey, ...cellProps } = cell.getCellProps()
                 return (
                   <TD
-                    key={colKey}
+                    key={cellKey}
                     width={cell.column.width}
                     maxWidth={cell.column.maxWidth}
-                    {...colProps}
+                    {...cellProps}
                   >
                     {cell.render('Cell')}
                   </TD>

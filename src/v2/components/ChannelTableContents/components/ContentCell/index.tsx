@@ -4,7 +4,7 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import Icons from 'v2/components/UI/Icons'
 
-import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
+import { TableData } from '../../lib/types'
 
 const TextContainer = styled(Box).attrs({
   px: 5,
@@ -34,8 +34,12 @@ const Source = styled(Text).attrs({
 export const ContentCell = ({
   value: content,
 }: {
-  value: ChannelTableContentsSet_channel_blokks
-}): JSX.Element => {
+  value: TableData
+}): JSX.Element | null => {
+  if ('isNull' in content) {
+    return null
+  }
+
   switch (content.__typename) {
     case 'Attachment':
     case 'Embed':
@@ -44,7 +48,7 @@ export const ContentCell = ({
       return (
         <Wrapper>
           <Img src={content.image_url} />
-          {content.source.provider_url && (
+          {content?.source?.provider_url && content.source.url && (
             <a href={content.source.url} style={{ display: 'flex' }}>
               <Source>{content.source.provider_url}</Source>
               <Icons
