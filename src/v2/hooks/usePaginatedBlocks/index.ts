@@ -1,16 +1,25 @@
 import { DocumentNode, Reference, StoreObject, useQuery } from '@apollo/client'
 import { Modifier } from '@apollo/client/cache/core/types/common'
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useMemo } from 'react'
 
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
 import {
   moveConnectableMutationVariables,
   moveConnectableMutation as moveConnectableMutationData,
 } from '__generated__/moveConnectableMutation'
-import { BaseConnectableTypeEnum, SortDirection, Sorts } from '__generated__/globalTypes'
+import {
+  BaseConnectableTypeEnum,
+  SortDirection,
+  Sorts,
+} from '__generated__/globalTypes'
+import {
+  ChannelContentCount,
+  ChannelContentCountVariables,
+} from '__generated__/ChannelContentCount'
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 import { getConnectableType } from 'v2/util/getConnectableType'
+import { CHANNEL_CONTENT_COUNT } from './ChannelContentCount'
 
 /**
  * The minimum required shape for the channel query
@@ -79,21 +88,26 @@ type UsePaginatedBlocksArgs = UsePaginatedBlocksBaseArgs & {
   blockquery: DocumentNode
 }
 
+type BlocksTypeFromQueryData<
+  ChannelQueryData extends RequiredChannelQueryData
+> = Array<
+  NonNullable<NonNullable<ChannelQueryData['channel']>['blokks']>[number] | null
+>
+
 /**
  * The base return type for usePaginatedBlocks
  */
 type UsePaginatedBlocksBaseApi<
   ChannelQueryData extends RequiredChannelQueryData
 > = {
-  blocks: ChannelQueryData['channel']['blokks']
-  contentCount: number
+  blocks: BlocksTypeFromQueryData<ChannelQueryData>
   getPage: (pageNumber: number) => void
   hasQueriedPage: (pageNumber: number) => boolean
   getPageFromIndex: (index: number) => number
   removeBlock: (args: { id: number; type: string }) => void
   moveBlock: (args: { oldIndex: number; newIndex: number }) => void
   addBlock: () => void
-  getBlocksFromCache: () => ChannelQueryData['channel']['blokks']
+  getBlocksFromCache: () => BlocksTypeFromQueryData<ChannelQueryData>
 }
 
 /**
@@ -183,7 +197,7 @@ export function usePaginatedBlocks<
    * you want to use this data in a memoized function without re-memoizing
    * every time the query data changes (which happens a lot)
    */
-  const getQueryFromCache: () => ChannelQueryData = useCallback(() => {
+  const getQueryFromCache: () => ChannelQueryData | null = useCallback(() => {
     return client.readQuery<ChannelQueryData, ChannelQueryVariables>({
       query: args.current.channelQuery,
       variables: {
@@ -218,7 +232,7 @@ export function usePaginatedBlocks<
       // Read the current contentCount of the channel instead
       // of passing it in as a useCallback dependency to reduce
       // re renders
-      const prevCount = getQueryFromCache().channel?.counts?.contents ?? 0
+      const prevCount = getQueryFromCache()?.channel?.counts?.contents ?? 0
 
       // Values we'll be saving during the first cache.modify call
       let newBlocks: Array<any>
@@ -288,6 +302,24 @@ export function usePaginatedBlocks<
     [fetchMore]
   )
 
+  /**
+   * The total number of blocks/channels that a channel has. Note that this
+   * could be different than the current length of the "blocks" array
+   * due to not downloading all the block information from a channel
+   */
+  const contentCount: number =
+    useQuery<ChannelContentCount, ChannelContentCountVariables>(
+      CHANNEL_CONTENT_COUNT,
+      {
+        fetchPolicy: 'cache-only',
+        variables: {
+          id: args.current.channelId,
+        },
+      }
+    )?.data?.channel?.counts?.contents ??
+    unsafeData?.channel?.counts?.contents ??
+    0
+
   // =====================
   // The hook's public api
   // =====================
@@ -295,16 +327,18 @@ export function usePaginatedBlocks<
   /**
    * An array of blocks that apollo currently has cached
    */
-  const blocks: UsePaginatedBlocksApi<ChannelQueryData>['blocks'] =
-    unsafeData?.channel?.blokks ?? []
+  const blocks: UsePaginatedBlocksApi<
+    ChannelQueryData
+  >['blocks'] = useMemo(() => {
+    const partialBlocks = unsafeData?.channel?.blokks ?? []
 
-  /**
-   * The total number of blocks that a channel has. Note that this
-   * could be different than the current length of the "blocks" array
-   * due to not downloading all the block information from a channel
-   */
-  const contentCount: UsePaginatedBlocksApi<ChannelQueryData>['contentCount'] =
-    unsafeData?.channel?.counts?.contents ?? 0
+    const fullBlocks: BlocksTypeFromQueryData<ChannelQueryData> = []
+    for (let i = 0; i < contentCount; i++) {
+      fullBlocks.push(partialBlocks[i] ?? null)
+    }
+
+    return fullBlocks
+  }, [unsafeData, contentCount])
 
   /**
    * Gets block data from a given page
@@ -540,7 +574,6 @@ export function usePaginatedBlocks<
 
   const api: UsePaginatedBlocksApi<ChannelQueryData> = {
     blocks,
-    contentCount,
     getPage,
     hasQueriedPage,
     getPageFromIndex,

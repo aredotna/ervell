@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Column, useExpanded, useSortBy, useTable } from 'react-table'
-import { useQuery } from '@apollo/client'
+import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
 import {
   ChannelTableContentsSet,
@@ -13,7 +13,6 @@ import Text from 'v2/components/UI/Text'
 import Box from 'v2/components/UI/Box'
 import SortArrows from 'v2/components/UI/SortArrows'
 
-import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
@@ -30,6 +29,7 @@ import {
 } from './components/TableComponents'
 import { TableData } from './lib/types'
 import { getInitialExpandedState } from './lib/getInitialExpandedState'
+import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { mapSort } from './lib/mapSort'
 
 export const FIRST_COLUMN_WIDTH = `35%`
@@ -39,33 +39,26 @@ interface ChannelTableQueryProps {
 }
 
 export const ChannelTableQuery: React.FC<ChannelTableQueryProps> = ({ id }) => {
-  const [sort, setSort] = useState<Sorts | null>(null)
-  const [direction, setDirection] = useState<SortDirection | null>(null)
-
-  const { data } = useQuery<
+  const { blocks } = usePaginatedBlocks<
     ChannelTableContentsSet,
     ChannelTableContentsSetVariables
-  >(CHANNEL_TABLE_CONTENTS_QUERY, {
-    variables: {
-      id,
-      per: 25,
-      page: 1,
-      sort,
-      direction,
-    },
+  >({
+    channelQuery: CHANNEL_TABLE_CONTENTS_QUERY,
+    channelId: id,
+    per: 25,
   })
 
   return (
     <ChannelTableContents
-      blocks={data?.channel?.blokks ?? []}
-      setSort={setSort}
-      setDirection={setDirection}
+      blocks={blocks}
+      setSort={() => {}}
+      setDirection={() => {}}
     />
   )
 }
 
 interface ChannelTableContentsProps {
-  blocks: Array<ChannelTableContentsSet_channel_blokks>
+  blocks: Array<ChannelTableContentsSet_channel_blokks | null>
   setSort: React.Dispatch<React.SetStateAction<Sorts | null>>
   setDirection: React.Dispatch<React.SetStateAction<SortDirection | null>>
 }
@@ -75,6 +68,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   setSort,
   setDirection,
 }) => {
+  const tableData = useMemo<Array<TableData>>(() => {
+    return blocks.map(block => block || { isNull: true })
+  }, [blocks])
+
   const headers = useMemo<Array<Column<TableData>>>(
     () => [
       {
@@ -137,7 +134,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
 
   const tableInstance = useTable<TableData>(
     {
-      data: blocks,
+      data: tableData,
       columns: headers,
       autoResetExpanded: false,
       autoResetSortBy: true,
@@ -147,7 +144,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
         return `${typedRowOriginal.id}`
       },
       initialState: {
-        expanded: getInitialExpandedState(blocks),
+        expanded: getInitialExpandedState(tableData),
       },
     },
     useSortBy,

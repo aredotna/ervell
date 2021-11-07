@@ -7,7 +7,7 @@ const Inner = styled.div`
 `
 
 interface StandardCellProps {
-  value: any
+  value: string | number
   color?: string
 }
 

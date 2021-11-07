@@ -68,7 +68,6 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       moveBlock,
       removeBlock,
       addBlock,
-      contentCount,
       updateBlock,
       getBlocksFromCache,
     } = usePaginatedBlocks<
@@ -131,7 +130,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
 
     usePusher({
       channelId: channel.id,
-      shouldSubscribe: !isSpiderRequesting && channel.can.add_to,
+      shouldSubscribe: !isSpiderRequesting && (channel?.can?.add_to ?? false),
       onCreated: createdConnectable,
       onUpdated: updateConnectable,
       parsePayload: parsePayload,
@@ -144,23 +143,18 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         getConnectableType(block.__typename) === BaseConnectableTypeEnum.BLOCK
     )
 
-    const blocksJsx: JSX.Element[] = []
-    for (let i = 0; i < (contentCount || channel.counts.contents); i++) {
-      const block = blocks[i]
-
-      blocksJsx.push(
-        <ChannelContentsItem
-          key={block ? `${block.id}.${block.__typename}` : `nullState${i}`}
-          index={i}
-          channel={channel}
-          connectable={block}
-          context={lightboxConnectables}
-          onRemove={removeBlock}
-          onChangePosition={moveBlock}
-          onItemIntersected={onItemIntersected}
-        />
-      )
-    }
+    const blocksJsx = blocks.map((block, i) => (
+      <ChannelContentsItem
+        key={block ? `${block.id}.${block.__typename}` : `nullState${i}`}
+        index={i}
+        channel={channel}
+        connectable={block}
+        context={lightboxConnectables}
+        onRemove={removeBlock}
+        onChangePosition={moveBlock}
+        onItemIntersected={onItemIntersected}
+      />
+    ))
 
     return (
       <SortableGrid
@@ -173,13 +167,13 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         useDragHandle
         {...rest}
       >
-        {(channel.can.add_to || channel.can.add_to_as_premium) && (
+        {(channel?.can?.add_to || channel?.can?.add_to_as_premium) && (
           <GridItem>
             <AddBlock
               channel_id={channel.id}
               onAddBlock={addBlock}
               isElligbleForPremium={
-                !channel.can.add_to && channel.can.add_to_as_premium
+                !channel.can.add_to && !!channel.can.add_to_as_premium
               }
             />
           </GridItem>
