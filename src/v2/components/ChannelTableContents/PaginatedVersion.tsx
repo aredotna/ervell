@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { Column, useExpanded, useSortBy, useTable } from 'react-table'
+import { useExpanded, useSortBy, useTable } from 'react-table'
 import { usePaginatedBlocks } from 'v2/hooks/usePaginatedBlocks'
 
 import {
@@ -16,9 +16,6 @@ import SortArrows from 'v2/components/UI/SortArrows'
 import { ChannelRow } from './components/ChannelRow'
 import ExpandedBlockRow from './components/ExpandedBlockRow'
 import ExpandedChannelRow from './components/ExpandedChannelRow'
-import { PotentiallyEditableBlockCell } from './components/PotentiallyEditableBlockCell'
-import { ContentCell } from './components/ContentCell'
-import { StandardCell } from './components/StandardCell'
 import {
   HeaderRow,
   Table,
@@ -31,8 +28,7 @@ import { TableData } from './lib/types'
 import { getInitialExpandedState } from './lib/getInitialExpandedState'
 import CHANNEL_TABLE_CONTENTS_QUERY from './queries/ChannelTableContents'
 import { mapSort } from './lib/mapSort'
-
-export const FIRST_COLUMN_WIDTH = `35%`
+import { tableColumns } from './lib/constants'
 
 interface ChannelTableQueryProps {
   id: string
@@ -72,70 +68,10 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
     return blocks.map(block => block || { isNull: true })
   }, [blocks])
 
-  const headers = useMemo<Array<Column<TableData>>>(
-    () => [
-      {
-        Header: 'Content',
-        id: 'content',
-        accessor: block => block,
-        Cell: ContentCell,
-        width: FIRST_COLUMN_WIDTH,
-        disableSortBy: true,
-      },
-      {
-        Header: 'Title',
-        id: 'title',
-        Cell: PotentiallyEditableBlockCell,
-        accessor: block => ({ block, attr: 'title' }),
-        width: '40%',
-        disableSortBy: true,
-      },
-      {
-        Header: 'Added at',
-        id: 'added at',
-        accessor: block =>
-          '__typename' in block && block?.connection?.created_at,
-        Cell: StandardCell,
-        maxWidth: 200,
-      },
-      {
-        Header: 'Author',
-        id: 'author',
-        accessor: block => '__typename' in block && block?.user?.name,
-        Cell: StandardCell,
-        maxWidth: 200,
-        disableSortBy: true,
-      },
-      {
-        Header: 'Connections',
-        id: 'connections',
-        accessor: block => {
-          if ('isNull' in block) {
-            return null
-          }
-
-          return block.counts?.__typename === 'BlockCounts'
-            ? block.counts.public_channels
-            : block.counts?.connected_to_channels
-        },
-        Cell: StandardCell,
-        width: 200,
-        disableSortBy: true,
-      },
-      {
-        Header: '',
-        id: 'id',
-        Cell: StandardCell,
-        width: 70,
-      },
-    ],
-    []
-  )
-
   const tableInstance = useTable<TableData>(
     {
       data: tableData,
-      columns: headers,
+      columns: tableColumns,
       autoResetExpanded: false,
       autoResetSortBy: true,
       manualSortBy: true,

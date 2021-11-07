@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ChannelTableContentsSet_channel_blokks } from '__generated__/ChannelTableContentsSet'
-import { FIRST_COLUMN_WIDTH } from '../..'
 import { ExpandedBlockRowContents } from './components/ExpandedBlockRowContents'
 import { ExpandedBlockMetadata } from './components/ExpandedBlockMetadata'
 import { FullBlockMetadataFoldWithQuery } from 'v2/components/FullBlock/components/FullBlockMetadataFold'
 import Box from 'v2/components/UI/Box'
 import { ActionButtons } from '../ActionButtons'
+import { FIRST_COLUMN_WIDTH } from '../../lib/constants'
 
 const Row = styled.tr`
   border-color: transparent;

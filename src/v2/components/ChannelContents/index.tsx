@@ -130,7 +130,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
 
     usePusher({
       channelId: channel.id,
-      shouldSubscribe: !isSpiderRequesting && (channel?.can?.add_to ?? false),
+      shouldSubscribe: !isSpiderRequesting && !!channel?.can?.add_to,
       onCreated: createdConnectable,
       onUpdated: updateConnectable,
       parsePayload: parsePayload,
@@ -167,7 +167,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         useDragHandle
         {...rest}
       >
-        {(channel?.can?.add_to || channel?.can?.add_to_as_premium) && (
+        {(!!channel?.can?.add_to || !!channel?.can?.add_to_as_premium) && (
           <GridItem>
             <AddBlock
               channel_id={channel.id}
