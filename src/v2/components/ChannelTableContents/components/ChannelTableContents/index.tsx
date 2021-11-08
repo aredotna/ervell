@@ -182,7 +182,7 @@ export const ChannelTableContents: React.FC<ChannelTableContentsProps> = ({
   )
 
   const intersectionObserverOptions = useMemo<IntersectionObserverInit>(
-    () => ({ rootMargin: '400px' }),
+    () => ({ rootMargin: '200px' }),
     []
   )
 

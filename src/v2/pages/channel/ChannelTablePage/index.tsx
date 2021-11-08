@@ -20,8 +20,8 @@ import { LoadingPage } from 'v2/components/LoadingPage'
 import Modal from 'v2/components/UI/Modal'
 import ModalDialog from 'v2/components/UI/ModalDialog'
 import IntroduceChannel from 'v2/components/Onboarding/components/Channels/components/IntroduceChannel'
-import { ChannelTableQuery } from 'v2/components/ChannelTableContents'
-// import { ChannelTableQuery } from 'v2/components/ChannelTableContents/indexDevPaginatedVersion'
+// import { ChannelTableQuery } from 'v2/components/ChannelTableContents'
+import { ChannelTableQuery } from 'v2/components/ChannelTableContents/indexDevPaginatedVersion'
 
 const Dialog = styled(ModalDialog).attrs({
   width: 'auto',
