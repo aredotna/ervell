@@ -13,14 +13,10 @@ const ButtonLink = styled(GenericButtonLink).attrs({
   flex: [1],
 })``
 
-interface MobileBannerProps {
-  route: 'explore' | 'feed' | 'channel' | 'profile' | 'groupProfile'
-  id?: string | number
-}
+export const MobileBanner: React.FC = () => {
+  if (!window) return null
 
-export const MobileBanner: React.FC<MobileBannerProps> = ({ route, id }) => {
-  const urlParts = [route, id]
-  const url = encodeURIComponent(`arena://${urlParts.join('/')}`)
+  const url = encodeURIComponent(window.location.href)
 
   return (
     <FixedWrapper bottom>
@@ -36,7 +32,7 @@ export const MobileBanner: React.FC<MobileBannerProps> = ({ route, id }) => {
   )
 }
 
-interface MobileOrChildrenProps extends MobileBannerProps {
+interface MobileOrChildrenProps {
   children: any
 }
 

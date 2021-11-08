@@ -106,12 +106,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
           type={type}
         />
 
-        <MobileOrChildren
-          route={
-            identifiable.__typename === 'Group' ? 'groupProfile' : 'profile'
-          }
-          id={identifiable.id}
-        >
+        <MobileOrChildren>
           <BottomBanner banner="LOGGED_OUT_PROFILE" name={identifiable.name} />
         </MobileOrChildren>
       </Constrain>

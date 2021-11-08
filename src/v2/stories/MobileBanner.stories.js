@@ -8,7 +8,7 @@ import Box from 'v2/components/UI/Box'
 storiesOf('MobileBanner', module).add('default', () => (
   <Specimen>
     <Box height="30em">
-      <MobileBanner route="explore" />
+      <MobileBanner />
     </Box>
   </Specimen>
 ))
