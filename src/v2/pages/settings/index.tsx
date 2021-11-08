@@ -123,6 +123,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                         isPremium={data.me.is_premium}
                         isSupporter={data.me.is_supporter}
                         isInvestor={data.me.is_investor}
+                        hasHadRecentBirthday={data.me.has_had_recent_birthday}
                       />
                     </TabContent>
                   </Tabs>
