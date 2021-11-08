@@ -156,7 +156,7 @@ export function usePaginatedBlocks<
   BlockQueryData extends RequiredBlockQueryData,
   BlockQueryVariables extends RequiredBlockQueryVariables
 >(
-  unsafeArgs: UsePaginatedBlocksBaseArgs & Partial<UsePaginatedBlocksArgs>
+  args: UsePaginatedBlocksBaseArgs & Partial<UsePaginatedBlocksArgs>
 ): UsePaginatedBlocksBaseApi<ChannelQueryData> &
   Partial<UsePaginatedBlocksApi<ChannelQueryData>> {
   // =============================
@@ -164,13 +164,32 @@ export function usePaginatedBlocks<
   // =============================
 
   /**
-   * This hook doesn't support updating the initially passed-in args in any way.
-   * So to make that clear we are creating a ref of the initial argsObject and
-   * only accessing the args this way. This will assert that the args won't
-   * change from under us, while also making it so that we don't needs to pass
-   * any of these values into dependency arrays for useCallback, useEffect, etc.
+   * A set that keeps track of which pages have already been queried for
    */
-  const args = useRef(unsafeArgs)
+  const queriedPageNumbersRef = useRef(new Set<number>())
+
+  /**
+   * A variable that stores all the identifiable information of
+   * to the current query. If any of this data changes, reset
+   * the queriedPageNumbersRef.
+   */
+  const channelQueryData: {
+    query: DocumentNode
+    variables: ChannelQueryVariables
+  } = useMemo(() => {
+    queriedPageNumbersRef.current = new Set()
+
+    return {
+      query: args.channelQuery,
+      variables: {
+        id: args.channelId,
+        page: 1,
+        per: args.per,
+        sort: args.sort,
+        direction: args.direction,
+      } as ChannelQueryVariables,
+    }
+  }, [args.channelQuery, args.channelId, args.per, args.sort, args.direction])
 
   /**
    * The current blocks that we have for a channel
@@ -178,15 +197,9 @@ export function usePaginatedBlocks<
   const { data: unsafeData, fetchMore, client } = useQuery<
     ChannelQueryData,
     ChannelQueryVariables
-  >(args.current.channelQuery, {
-    variables: {
-      id: args.current.channelId,
-      page: 1,
-      per: args.current.per,
-      sort: args.current.sort,
-      direction: args.current.direction,
-    } as ChannelQueryVariables,
-    ssr: args.current.ssr,
+  >(channelQueryData.query, {
+    variables: channelQueryData.variables,
+    ssr: args.ssr,
     context: { queryDeduplication: false },
   })
 
@@ -197,14 +210,10 @@ export function usePaginatedBlocks<
    */
   const getQueryFromCache: () => ChannelQueryData | null = useCallback(() => {
     return client.readQuery<ChannelQueryData, ChannelQueryVariables>({
-      query: args.current.channelQuery,
-      variables: {
-        id: args.current.channelId,
-        page: 1,
-        per: args.current.per,
-      } as ChannelQueryVariables,
+      query: channelQueryData.query,
+      variables: channelQueryData.variables,
     })
-  }, [client])
+  }, [client, channelQueryData])
 
   /**
    * A function that allows you to directly modify the channel's "blokks"
@@ -221,10 +230,19 @@ export function usePaginatedBlocks<
     } | null
   ) => void = useCallback(
     updater => {
+      // client.cache.writeQuery<ChannelQueryData, ChannelQueryVariables>({
+      //   query: channelQueryData.query,
+      //   variables: channelQueryData.variables,
+      //   data: {
+      //     channel: null,
+      //   } as ChannelQueryData,
+      //   overwrite: true,
+      // })
+
       // The normalized cache name of the channel
       const id = client.cache.identify({
         __typename: 'Channel',
-        id: args.current.channelId,
+        id: channelQueryData.variables.id,
       })
 
       // Read the current contentCount of the channel instead
@@ -272,13 +290,8 @@ export function usePaginatedBlocks<
         },
       })
     },
-    [client.cache, getQueryFromCache]
+    [client.cache, channelQueryData, getQueryFromCache]
   )
-
-  /**
-   * A set that keeps track of which pages have already been queried for
-   */
-  const queriedPageNumbersRef = useRef(new Set<number>())
 
   /**
    * A helper function to re-query for pages that have already been
@@ -311,7 +324,7 @@ export function usePaginatedBlocks<
       {
         fetchPolicy: 'cache-only',
         variables: {
-          id: args.current.channelId,
+          id: channelQueryData.variables.id,
         },
       }
     )?.data?.channel?.counts?.contents ??
@@ -370,9 +383,12 @@ export function usePaginatedBlocks<
    */
   const getPageFromIndex: UsePaginatedBlocksApi<
     ChannelQueryData
-  >['getPageFromIndex'] = useCallback(index => {
-    return Math.floor(index / args.current.per) + 1
-  }, [])
+  >['getPageFromIndex'] = useCallback(
+    index => {
+      return Math.floor(index / channelQueryData.variables.per) + 1
+    },
+    [channelQueryData.variables.per]
+  )
 
   /**
    * Removes a block from a channel ONLY on the frontend. Does not do any
@@ -454,7 +470,7 @@ export function usePaginatedBlocks<
         >({
           mutation: moveConnectableMutation,
           variables: {
-            channel_id: args.current.channelId,
+            channel_id: channelQueryData.variables.id,
             connectable: {
               id: id.toString(),
               type: getConnectableType(
@@ -475,7 +491,7 @@ export function usePaginatedBlocks<
         return { newBlocks }
       })
     },
-    [client, updateCache]
+    [channelQueryData.variables.id, client, updateCache]
   )
 
   /**
@@ -498,7 +514,7 @@ export function usePaginatedBlocks<
     ChannelQueryData
   >['updateBlock'] = useCallback(
     async ({ id, type }) => {
-      if (!args.current.blockquery) {
+      if (!args.blockquery) {
         return
       }
 
@@ -509,7 +525,7 @@ export function usePaginatedBlocks<
       let block: BlockQueryData['blokk'] | null = null
       try {
         const result = await client.query<BlockQueryData, BlockQueryVariables>({
-          query: args.current.blockquery,
+          query: args.blockquery,
           variables: {
             id: id.toString(),
           } as BlockQueryVariables,
@@ -550,7 +566,7 @@ export function usePaginatedBlocks<
         }
       })
     },
-    [updateCache, client]
+    [args.blockquery, updateCache, client]
   )
 
   /**
@@ -561,10 +577,10 @@ export function usePaginatedBlocks<
   >['addBlock'] = useCallback(() => {
     queriedPageNumbersRef.current = new Set()
     client.refetchQueries({
-      include: [args.current.channelQuery],
+      include: [args.channelQuery],
       optimistic: true,
     })
-  }, [client])
+  }, [args.channelQuery, client])
 
   // ==============================
   // Build and return the final api
