@@ -72,14 +72,14 @@ const ChannelPage: React.FC<Variables> = ({ id }) => {
       <ChannelContentsFilter channel={channel} />
 
       {channel.counts.contents === 0 &&
-      !channel.can.add_to &&
-      !channel.can.add_to_as_premium ? (
+        !channel.can.add_to &&
+        !channel.can.add_to_as_premium ? (
         <ChannelEmptyMessage my={8} channelOwner={channel.owner} />
       ) : (
         <ChannelContentsWithData channel={channel} />
       )}
 
-      <MobileOrChildren route="channel" id={channel.id}>
+      <MobileOrChildren>
         <BottomBanner banner="LOGGED_OUT_CHANNEL" name={channel.title} />
       </MobileOrChildren>
     </>
