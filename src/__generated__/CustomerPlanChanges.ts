@@ -28,6 +28,8 @@ export interface CustomerPlanChanges_me_customer_invoice {
 export interface CustomerPlanChanges_me_customer {
   __typename: "Customer";
   id: number;
+  is_canceled: boolean;
+  current_period_end_at: string | null;
   invoice: CustomerPlanChanges_me_customer_invoice | null;
 }
 
