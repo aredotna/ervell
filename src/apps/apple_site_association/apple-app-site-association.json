@@ -33,7 +33,6 @@
           "NOT /robots.txt",
           "NOT /statuses/*",
           "NOT /actions/*",
-          "NOT /deeplink",
           "*"
         ]
       }
