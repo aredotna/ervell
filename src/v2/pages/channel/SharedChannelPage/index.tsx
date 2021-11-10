@@ -36,7 +36,7 @@ export default ({ token }) => {
 
             return (
               <>
-                <ChannelPageMetaTags channel={channel} />
+                <ChannelPageMetaTags channel={channel} doNotIndex />
 
                 <ChannelMetadata channel={channel} />
 
