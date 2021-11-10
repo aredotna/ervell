@@ -13,6 +13,7 @@ export interface ChannelPage_channel_owner_User {
   name: string;
   href: string | null;
   label: string;
+  is_indexable: boolean;
 }
 
 export interface ChannelPage_channel_owner_Group {

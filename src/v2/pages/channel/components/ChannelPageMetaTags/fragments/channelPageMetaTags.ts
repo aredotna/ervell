@@ -10,5 +10,10 @@ export const channelPageMetaTagsFragment = gql`
     is_nsfw
     image_url(size: DISPLAY)
     visibility
+    owner {
+      ... on User {
+        is_indexable
+      }
+    }
   }
 `
