@@ -19,7 +19,7 @@ interface PerkProps {
 const NonPremiumDiscord: React.FC = () => {
   const url = 'https://discord.gg/GapEUYhXCj'
   return (
-    <Text>
+    <Text boldLinks>
       Join our Office Hours Discord server{' '}
       <Text display="inline" color="state.premium">
         <a href={url}>here</a>
@@ -33,7 +33,7 @@ const AnnualPerk: React.FC<PerkProps> = () => {
   const url =
     'https://store.are.na/collections/frontpage/products/are-na-annual-2021'
   return (
-    <Text>
+    <Text boldLinks>
       <Text color="state.premium" display="inline">
         <a href={url}>Free 2021 Are.na Annual </a>
       </Text>
@@ -46,7 +46,7 @@ const StickerPerk: React.FC<PerkProps> = () => {
   const url =
     'https://store.are.na/collections/frontpage/products/sticker-sheet-v2'
   return (
-    <Text>
+    <Text boldLinks>
       <Text color="state.premium" display="inline">
         <a href={url}>Free Are.na Stickers</a>
       </Text>{' '}
@@ -57,7 +57,7 @@ const StickerPerk: React.FC<PerkProps> = () => {
 
 const StorePerk: React.FC<PerkProps> = () => {
   return (
-    <Text>
+    <Text boldLinks>
       For a 20% discount on any item in our{' '}
       <a href="https://store.are.na">Store</a>, use the coupon{' '}
       <Text display="inline" color="state.premium">
@@ -68,9 +68,22 @@ const StorePerk: React.FC<PerkProps> = () => {
   )
 }
 
+const BirthdayStickerPerk: React.FC<PerkProps> = () => {
+  return (
+    <Text boldLinks>
+      🎁 Happy Are.na Birthday 🎁 <br /><br />
+      Use the coupon{' '}
+      <Text display="inline" color="state.premium">
+        ITSMYBIRTHDAYGIVEMEASTICKER
+      </Text>{' '}
+      to get your <a href="https://store.are.na/collections/frontpage/products/they-dont-know-sticker">free sticker</a>.
+    </Text>
+  )
+}
+
 const ReportPerk: React.FC<PerkProps> = () => {
   return (
-    <Text>
+    <Text boldLinks>
       Find all past investor reports{' '}
       <Text display="inline" color="state.premium">
         <a href="https://www.are.na/share/JlSzNKI">here</a>
@@ -84,7 +97,7 @@ const PremiumDiscordPerk: React.FC<PerkProps> = ({ isSupporter }) => {
     ? 'https://discord.gg/WZTGRc4C5P'
     : 'https://discord.gg/GXfzEpFpby'
   return (
-    <Text>
+    <Text boldLinks>
       Access premium-only channels on our Discord server{' '}
       <Text display="inline" color="state.premium">
         <a href={url}>here</a>
@@ -98,12 +111,14 @@ interface PerksProps {
   isPremium: boolean
   isSupporter: boolean
   isInvestor: boolean
+  hasHadRecentBirthday: boolean
 }
 
 const Perks: React.FC<PerksProps> = ({
   isPremium,
   isSupporter,
   isInvestor,
+  hasHadRecentBirthday
 }) => {
   const premiumPerks = [PremiumDiscordPerk, StorePerk]
   const supporterPerks = [
@@ -116,6 +131,10 @@ const Perks: React.FC<PerksProps> = ({
 
   if (isInvestor) {
     premiumPerks.push(ReportPerk)
+  }
+
+  if (isPremium && hasHadRecentBirthday) {
+    premiumPerks.push(BirthdayStickerPerk)
   }
 
   const perks = isSupporter ? supporterPerks : premiumPerks

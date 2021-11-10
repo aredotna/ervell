@@ -8,6 +8,8 @@ export default gql`
       customer {
         __typename
         id
+        is_canceled
+        current_period_end_at(format: "%D")
         invoice: upcoming_invoice(
           plan_id: $plan_id
           coupon_code: $coupon_code

@@ -47,6 +47,7 @@ type OperationsEnum =
   | 'CANCEL_PREMIUM_SUBSCRIPTION'
   | 'DOWNGRADE_TO_LIFETIME'
   | 'APPLY_COUPON_CODE'
+  | 'RESUBSCRIBE'
 
 interface BillingFormProps {
   me: Me
@@ -56,12 +57,12 @@ interface BillingFormProps {
 
 interface BillingFormState {
   mode?:
-    | 'resting'
-    | 'error'
-    | 'processing'
-    | 'canceled'
-    | 'subscribed'
-    | 'card_changed'
+  | 'resting'
+  | 'error'
+  | 'processing'
+  | 'canceled'
+  | 'subscribed'
+  | 'card_changed'
   operations?: OperationsEnum[]
   planId?: SupportedPlanEnum | 'basic' | 'lifetime'
   couponCode?: string
@@ -101,7 +102,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
   const planId = state.planId || customer.plan?.id
 
   const isPlanChanged = plan_id !== customer?.plan?.id
-  const fromPlanToPlan = `${customer?.plan?.id}:${plan_id}`
+  const fromPlanToPlan = `${customer?.plan?.id}:${planId}`
   const customerCanSubmit =
     (customer.default_credit_card && operations.length > 0) || total === 0
 
@@ -175,9 +176,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
       total === 0
         ? defaultVariables
         : {
-            ...defaultVariables,
-            token: customer.default_credit_card?.id,
-          }
+          ...defaultVariables,
+          token: customer.default_credit_card?.id,
+        }
 
     return subscribeToPremiumWithOptionalToken({
       variables,
@@ -231,11 +232,15 @@ const BillingForm: React.FC<BillingFormProps> = ({
       // Otherwise we are subscribing.
       const waitForCouponCode =
         doWeNeedTo('APPLY_COUPON_CODE') &&
-        // APPLY_COUPON_CODE is inclusive with swtiching plans so ignore this
-        // if we are also going to change the plan up
-        !doWeNeedTo('CHANGE_PLAN_ID')
+          // APPLY_COUPON_CODE is inclusive with swiching plans so ignore this
+          // if we are also going to change the plan up
+          !doWeNeedTo('CHANGE_PLAN_ID')
           ? applyCouponToSubscription()
           : Promise.resolve(null)
+
+      if (doWeNeedTo('RESUBSCRIBE')) {
+        return handleSubscribeToPremium()
+      }
 
       return waitForCouponCode
         .then(() => {
@@ -281,9 +286,11 @@ const BillingForm: React.FC<BillingFormProps> = ({
   )
 
   const handleCancelPremium = useCallback(
-    e => {
-      setState({ operations: addOperation('CANCEL_PREMIUM_SUBSCRIPTION') })
-      handleSubmit(e)
+    () => {
+      setState({ mode: 'processing' })
+      return cancelPremiumSubscription()
+        .then(() => resolveWithMode('canceled'))
+        .catch(handleErrors)
     },
     [handleSubmit, addOperation, setState]
   )
@@ -300,7 +307,7 @@ const BillingForm: React.FC<BillingFormProps> = ({
   )
 
   const handleReenable = useCallback(
-    e => {
+    () => {
       if (customer.is_beneficiary) {
         return setState({
           mode: 'error',
@@ -310,9 +317,10 @@ const BillingForm: React.FC<BillingFormProps> = ({
 
       setState({
         planId: customer.plan.id as SupportedPlanEnum,
-        operations: addOperation('CHANGE_PLAN_ID'),
+        operations: addOperation('RESUBSCRIBE'),
+        mode: 'processing'
       })
-      handleSubmit(e)
+      handleSubscribeToPremium()
     },
     [addOperation, handleSubmit, customer, setState]
   )
@@ -465,13 +473,15 @@ const BillingForm: React.FC<BillingFormProps> = ({
                 onClick={handleSubmit}
                 disabled={!customerCanSubmit}
               >
-                <Icons name="CreditCard" size="1rem" mr={4} />
+                <Icons name="CreditCard" size="1rem" mr={4} color='gray.bold' />
 
                 {{
                   'basic:monthly': 'Activate',
                   'basic:yearly': 'Activate',
-                  'monthly:yearly': 'Save changes',
-                  'yearly:monthly': 'Save changes',
+                  'monthly:yearly': 'Update subscription',
+                  'yearly:monthly': 'Update subscription',
+                  'monthly:plus_yearly': 'Upgrade subscription',
+                  'yearly:plus_yearly': 'Upgrade subscription',
                   'monthly:basic': 'Cancel Premium',
                   'yearly:basic': 'Cancel Premium',
                 }[fromPlanToPlan] || 'Save changes'}

@@ -38,7 +38,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
           />
 
           <ExploreViews view={view} sort={sort} block_filter={block_filter} />
-          <MobileOrChildren route="explore">
+          <MobileOrChildren>
             <BottomBanner banner="LOGGED_OUT_EXPLORE" />
           </MobileOrChildren>
         </Constrain>
