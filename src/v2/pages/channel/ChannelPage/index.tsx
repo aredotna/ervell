@@ -39,13 +39,9 @@ interface ChannelPageProps {
   fromOnboarding?: boolean
 }
 
-interface Variables {
-  id: string
-}
-
 const isClientSide = typeof window !== 'undefined'
 
-const ChannelPage: React.FC<Variables> = ({ id }) => {
+const ChannelPage: React.FC<ChannelPageProps> = ({ id, fromOnboarding }) => {
   const { data, loading, error } = useQuery<
     ChannelPageData,
     ChannelPageVariables
@@ -72,16 +68,18 @@ const ChannelPage: React.FC<Variables> = ({ id }) => {
       <ChannelContentsFilter channel={channel} />
 
       {channel.counts.contents === 0 &&
-        !channel.can.add_to &&
-        !channel.can.add_to_as_premium ? (
+      !channel.can.add_to &&
+      !channel.can.add_to_as_premium ? (
         <ChannelEmptyMessage my={8} channelOwner={channel.owner} />
       ) : (
         <ChannelContentsWithData channel={channel} />
       )}
 
-      <MobileOrChildren>
-        <BottomBanner banner="LOGGED_OUT_CHANNEL" name={channel.title} />
-      </MobileOrChildren>
+      {!fromOnboarding && (
+        <MobileOrChildren>
+          <BottomBanner banner="LOGGED_OUT_CHANNEL" name={channel.title} />
+        </MobileOrChildren>
+      )}
     </>
   )
 }
@@ -98,9 +96,9 @@ const ChannelPageWrapper: React.FC<ChannelPageProps> = ({
   }, [fromOnboarding])
 
   return (
-    <TopBarLayout>
+    <TopBarLayout noBanner={fromOnboarding}>
       <Constrain>
-        <ChannelPage id={id} />
+        <ChannelPage id={id} fromOnboarding={fromOnboarding} />
       </Constrain>
     </TopBarLayout>
   )
