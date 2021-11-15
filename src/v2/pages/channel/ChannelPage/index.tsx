@@ -96,7 +96,7 @@ const ChannelPageWrapper: React.FC<ChannelPageProps> = ({
   }, [fromOnboarding])
 
   return (
-    <TopBarLayout>
+    <TopBarLayout noBanner={fromOnboarding}>
       <Constrain>
         <ChannelPage id={id} fromOnboarding={fromOnboarding} />
       </Constrain>
