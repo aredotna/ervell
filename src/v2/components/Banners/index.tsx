@@ -99,6 +99,8 @@ export const Bookmarklet = props => (
 )
 
 export const CreateChannel = props => {
+  if (!document) return null
+
   const modal = new Modal(NewChannelForm, {})
 
   return (
