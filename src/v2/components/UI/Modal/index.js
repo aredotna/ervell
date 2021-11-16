@@ -12,6 +12,8 @@ export default class Modal {
   ModalComponent = ModalComponent
 
   constructor(Component, props = {}, modalProps = {}) {
+    if (!document) return null
+
     this.Component = Component
     this.props = props
     this.modalProps = modalProps
@@ -19,7 +21,9 @@ export default class Modal {
   }
 
   open = () => {
-    document.body.appendChild(this.el)
+    if (!document) return null
+
+    document?.body.appendChild(this.el)
 
     const boot = wrapWithProviders(initClientSideApolloClient())
     const { onClose: _onClose, ...rest } = this.props
@@ -37,6 +41,8 @@ export default class Modal {
   }
 
   close = (...args) => {
+    if (!document) return null
+
     if (this.props.onClose) {
       this.props.onClose(...args)
     }
