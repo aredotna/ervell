@@ -38,7 +38,7 @@ export default class Modal {
     )
 
     const App = boot(ModalApp, props)
-    document?.body.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
     mount(App, this.el)
   }
 
@@ -51,6 +51,6 @@ export default class Modal {
 
     unmount(this.el)
     this.el.parentNode.removeChild(this.el)
-    document?.body.style.overflow = 'auto'
+    document.body.style.overflow = 'auto'
   }
 }
