@@ -8,11 +8,13 @@ import unmount from 'v2/util/unmount'
 
 import ModalComponent from 'v2/components/UI/Modal/Modal'
 
+const isClientSide = typeof window !== 'undefined'
+
 export default class Modal {
   ModalComponent = ModalComponent
 
   constructor(Component, props = {}, modalProps = {}) {
-    if (!document) return null
+    if (!isClientSide) return null
 
     this.Component = Component
     this.props = props
@@ -21,7 +23,7 @@ export default class Modal {
   }
 
   open = () => {
-    if (!document) return null
+    if (!isClientSide) return null
 
     document?.body.appendChild(this.el)
 
@@ -36,7 +38,7 @@ export default class Modal {
     )
 
     const App = boot(ModalApp, props)
-    document.body.style.overflow = 'hidden'
+    document?.body.style.overflow = 'hidden'
     mount(App, this.el)
   }
 
@@ -49,6 +51,6 @@ export default class Modal {
 
     unmount(this.el)
     this.el.parentNode.removeChild(this.el)
-    document.body.style.overflow = 'auto'
+    document?.body.style.overflow = 'auto'
   }
 }

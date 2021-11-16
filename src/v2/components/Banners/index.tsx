@@ -20,6 +20,8 @@ import { useQuery } from '@apollo/client'
 import GET_FIRST_CHANNEL from './queries/getFirstChannel'
 import { GetFirstChannel } from '__generated__/GetFirstChannel'
 
+const isClientSide = typeof window !== 'undefined'
+
 const Button = styled(GenericButton).attrs({
   f: [1, 2, 3],
   ml: 6,
@@ -99,7 +101,7 @@ export const Bookmarklet = props => (
 )
 
 export const CreateChannel = props => {
-  if (!document) return null
+  if (!isClientSide) return null
 
   const modal = new Modal(NewChannelForm, {})
 
