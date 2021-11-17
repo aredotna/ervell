@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
 
 import Box from 'v2/components/UI/Box'
@@ -10,6 +11,8 @@ import MyRepresentation from 'v2/components/TopBar/components/MyRepresentation'
 
 import { GlobalNavElements_me as Me } from '__generated__/GlobalNavElements'
 import useSerializedMe from 'v2/hooks/useSerializedMe'
+import IS_CONFIRMED_QUERY from './queries/isConfirmed'
+import { IsConfirmed } from '__generated__/IsConfirmed'
 
 const Container = styled(Box)`
   position: relative;
@@ -41,6 +44,21 @@ const Container = styled(Box)`
   `}
 `
 
+const DotContainer = styled(Box)`
+  position: absolute;
+  bottom: -${({ theme }) => theme.space[6]};
+  width: 100%;
+  text-align: center;
+`
+
+const Dot = styled(Box)`
+  &:before {
+    content: '•';
+    color: ${({ theme }) => theme.colors.brand.deepBlue};
+    font-size: ${({ theme }) => theme.fontSizesIndexed.h2};
+    line-height: 0.5;
+  }
+`
 interface TopBarProps {
   scheme: 'DEFAULT' | 'GROUP'
   me?: Me
@@ -48,6 +66,10 @@ interface TopBarProps {
 
 export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
   const serializedMe = useSerializedMe()
+  const { data } = useQuery<IsConfirmed>(IS_CONFIRMED_QUERY, { ssr: false })
+  const [userMode, setUserMode] = useState<'resting' | 'open'>('resting')
+
+  const needsDot = data && !data.me?.is_confirmed
 
   return (
     <Container scheme={scheme} {...rest}>
@@ -64,7 +86,19 @@ export const TopBar: React.FC<TopBarProps> = ({ scheme, me, ...rest }) => {
             />
           )}
 
-          <MyRepresentation px={5} me={serializedMe} />
+          <Box display="flex" position="relative">
+            <MyRepresentation
+              px={5}
+              me={serializedMe}
+              onOpen={() => setUserMode('open')}
+              onClose={() => setUserMode('resting')}
+            />
+            {needsDot && userMode == 'resting' && (
+              <DotContainer>
+                <Dot />
+              </DotContainer>
+            )}
+          </Box>
         </React.Fragment>
       ) : (
         <AuthenticationLinks px={6} />

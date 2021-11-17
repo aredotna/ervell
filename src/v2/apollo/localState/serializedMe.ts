@@ -15,6 +15,7 @@ export default (
   is_supporter?: any
   hide_notification_count?: any
   dark_mode?: any
+  is_confirmed: any
 } => {
   if (!user) return null
 
@@ -45,5 +46,6 @@ export default (
     is_supporter,
     hide_notification_count,
     dark_mode,
+    is_confirmed: user.is_confirmed,
   }
 }
