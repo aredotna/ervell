@@ -35,7 +35,7 @@ const TabContent = styled(Box).attrs({
 const Avatars = styled(Box).attrs({
   flexDirection: ['column', 'row'],
   display: 'flex',
-  justifyContent: 'space-around',
+  justifyContent: 'center',
   py: 8,
   width: ['auto', '30em'],
   alignItems: 'center',

@@ -15,7 +15,9 @@ import Box from 'v2/components/UI/Box'
 import Text from 'v2/components/UI/Text'
 import ErrorBoundary from 'v2/components/UI/ErrorBoundary'
 
-const Container = styled(Box)`
+const Container = styled(Box).attrs({
+  px: 8,
+})`
   position: relative;
 `
 
