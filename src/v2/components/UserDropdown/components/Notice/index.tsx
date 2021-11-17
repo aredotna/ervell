@@ -50,8 +50,8 @@ export const ConfirmNotice: React.FC = () => {
   return (
     <NoticeWrapper>
       <Copy>
-        Please confirm your email address (check your spam folder if you can't
-        find our email).{' '}
+        Please confirm your email address (check your spam folder if you
+        can&#39;t find our email).{' '}
         <Link onClick={handleClick}>
           {
             {
