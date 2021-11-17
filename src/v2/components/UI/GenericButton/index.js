@@ -69,11 +69,15 @@ export const buttonBorderWidth = x =>
 export const activeMixin = css`
   border: ${buttonBorderWidth} solid
     ${props =>
-      props.theme.name === 'default'
+      props.activeBorderColor
+        ? props.activeBorderColor
+        : props.theme.name === 'default'
         ? translucentGray('bold')
         : translucentWhite('bold')};
   color: ${props =>
-    props.theme.name === 'default'
+    props.activeColor
+      ? props.activeColor
+      : props.theme.name === 'default'
       ? translucentGray('bold')
       : translucentWhite('bold')};
 `
@@ -82,11 +86,15 @@ export const activeMixin = css`
 export const hoverMixin = css`
   border: ${buttonBorderWidth} solid
     ${props =>
-      props.theme.name === 'default'
+      props.hoverBorderColor
+        ? props.hoverBorderColor
+        : props.theme.name === 'default'
         ? translucentGray('medium')
         : translucentWhite('bold')};
   color: ${props =>
-    props.theme.name === 'default'
+    props.hoverColor
+      ? props.hoverColor
+      : props.theme.name === 'default'
       ? translucentGray('bold')
       : translucentWhite('bold')};
 `
