@@ -7,9 +7,9 @@ import { SerializeMeQueryHook } from '__generated__/SerializeMeQueryHook'
 export default function() {
   const client = useApolloClient()
 
-  const { serializedMe } = client.readQuery<SerializeMeQueryHook>({
+  const response = client.readQuery<SerializeMeQueryHook>({
     query: SERIALIZED_ME_QUERY,
   })
 
-  return serializedMe
+  return response.serializedMe
 }

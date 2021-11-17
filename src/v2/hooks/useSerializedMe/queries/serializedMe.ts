@@ -14,6 +14,7 @@ export default gql`
       is_lifetime_premium
       is_supporter
       hide_notification_count
+      is_confirmed
     }
   }
 `
