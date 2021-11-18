@@ -33,7 +33,6 @@ export default gql`
       is_supporter
       slug
       hide_notification_count
-      is_confirmed
     }
     sharify {
       get

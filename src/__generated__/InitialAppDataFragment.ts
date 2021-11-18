@@ -45,7 +45,6 @@ export interface InitialAppDataFragment_serializedMe {
   is_supporter: boolean | null;
   slug: string | null;
   hide_notification_count: boolean | null;
-  is_confirmed: boolean | null;
 }
 
 export interface InitialAppDataFragment_sharify {
