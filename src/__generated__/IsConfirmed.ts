@@ -9,6 +9,7 @@
 
 export interface IsConfirmed_me {
   __typename: "Me";
+  id: number;
   is_confirmed: boolean;
 }
 

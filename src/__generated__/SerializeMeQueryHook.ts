@@ -19,7 +19,6 @@ export interface SerializeMeQueryHook_serializedMe {
   is_lifetime_premium: boolean | null;
   is_supporter: boolean | null;
   hide_notification_count: boolean | null;
-  is_confirmed: boolean | null;
 }
 
 export interface SerializeMeQueryHook {
