@@ -26,7 +26,7 @@ const Container = styled(Box).attrs({
 const Steps = styled(Text).attrs({
   f: 3,
   mr: 6,
-  color: 'gray.medium',
+  color: 'utility.semiTranslucent',
 })``
 
 const Wrapper = styled(Box).attrs({

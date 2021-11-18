@@ -36,6 +36,31 @@ const ButtonLink = styled(GenericButtonLink).attrs({
   background: transparent;
 `
 
+const DeepBlueBanner = styled(Banner).attrs({
+  bg: 'brand.deepBlue',
+  color: 'white',
+})``
+
+const DeepBlueButton = styled(Button).attrs({
+  color: 'utility.semiTranslucent',
+  bg: 'brand.deepBlue',
+  borderColor: 'gray.hint',
+  hoverColor: 'white',
+  activeColor: 'white',
+  activeBorderColor: 'white',
+  hoverBorderColor: 'white',
+})``
+
+const DeepBlueButtonLink = styled(ButtonLink).attrs({
+  color: 'utility.semiTranslucent',
+  bg: 'brand.deepBlue',
+  borderColor: 'gray.hint',
+  hoverColor: 'white',
+  activeColor: 'white',
+  activeBorderColor: 'white',
+  hoverBorderColor: 'white',
+})``
+
 const Buttons = styled(Box).attrs({
   flexDirection: ['column', 'column', 'row'],
 })``
@@ -106,11 +131,13 @@ export const CreateChannel = props => {
   const modal = new Modal(NewChannelForm, {})
 
   return (
-    <Banner bg="gray.light" color="gray.base" steps={'1/3'} {...props}>
+    <DeepBlueBanner steps={'1/3'} {...props}>
       <Box>Create your first channel to start adding content</Box>
 
-      <Button onClick={() => modal.open()}>Create new channel</Button>
-    </Banner>
+      <DeepBlueButton onClick={() => modal.open()}>
+        Create new channel
+      </DeepBlueButton>
+    </DeepBlueBanner>
   )
 }
 
@@ -118,34 +145,30 @@ export const CreateConnections = props => {
   const { data } = useQuery<GetFirstChannel>(GET_FIRST_CHANNEL)
 
   return (
-    <Banner bg="gray.light" color="gray.base" steps={'2/3'} {...props}>
+    <DeepBlueBanner steps={'2/3'} {...props}>
       <Box>
         Get started by adding text, images, links or files to your first channel
       </Box>
 
-      <ButtonLink href={data?.me?.channels[0]?.href}>
+      <DeepBlueButtonLink href={data?.me?.channels[0]?.href}>
         Go to your channel
-      </ButtonLink>
-    </Banner>
+      </DeepBlueButtonLink>
+    </DeepBlueBanner>
   )
 }
 
 export const FollowAnything = props => {
   return (
-    <Banner
-      bg="gray.light"
-      color="gray.base"
-      steps={'3/3'}
-      isCloseable
-      {...props}
-    >
+    <DeepBlueBanner steps={'3/3'} isCloseable {...props}>
       <Box>Find friends to follow, or follow a Featured Channel</Box>
 
-      <ButtonLink href="/tools/find-friends">Connect your Twitter</ButtonLink>
-      <ButtonLink href="/are-na-team/featured-channels">
+      <DeepBlueButtonLink href="/tools/find-friends">
+        Connect your Twitter
+      </DeepBlueButtonLink>
+      <DeepBlueButtonLink href="/are-na-team/featured-channels">
         Go to Featured Channels
-      </ButtonLink>
-    </Banner>
+      </DeepBlueButtonLink>
+    </DeepBlueBanner>
   )
 }
 
