@@ -15,10 +15,12 @@ import MonthlyPremiumReminder from '../MonthlyPremiumBanner'
 
 interface GlobalNavElementsProps {
   scheme: 'DEFAULT' | 'GROUP'
+  noBanner?: boolean
 }
 
 export const GlobalNavElements: React.FC<GlobalNavElementsProps> = ({
   scheme,
+  noBanner,
 }) => {
   const { isLoggedIn } = useLoginStatus()
   const { data, error } = useQuery<GlobalNavElementsType>(
@@ -49,7 +51,7 @@ export const GlobalNavElements: React.FC<GlobalNavElementsProps> = ({
     </FixedWrapper>
   )
 
-  if (isLoggedIn && data?.me?.banner) {
+  if (isLoggedIn && data?.me?.banner && !noBanner) {
     components.push(<BottomBanner key="BottomBanner" banner={data.me.banner} />)
   }
 
