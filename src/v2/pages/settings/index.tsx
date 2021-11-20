@@ -29,12 +29,13 @@ const TabContent = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
   pt: 8,
+  pb: 8,
 })``
 
 const Avatars = styled(Box).attrs({
   flexDirection: ['column', 'row'],
   display: 'flex',
-  justifyContent: 'space-around',
+  justifyContent: 'center',
   py: 8,
   width: ['auto', '30em'],
   alignItems: 'center',
@@ -123,6 +124,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ tab }) => {
                         isPremium={data.me.is_premium}
                         isSupporter={data.me.is_supporter}
                         isInvestor={data.me.is_investor}
+                        hasHadRecentBirthday={data.me.has_had_recent_birthday}
                       />
                     </TabContent>
                   </Tabs>

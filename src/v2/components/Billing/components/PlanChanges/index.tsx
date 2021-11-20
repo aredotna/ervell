@@ -56,9 +56,9 @@ const PlanChanges: React.FC<PlanChangesProps> = ({
         ? data?.group.invoice
         : data?.me.customer.invoice
 
-    if (invoice && invoice.total !== total) {
-      setTotal(invoice.total)
-      handleTotalChange(invoice.total)
+    if (invoice?.total !== total) {
+      setTotal(invoice?.total)
+      handleTotalChange(invoice?.total)
     }
   }, [total, data, entity, handleTotalChange])
 
@@ -86,6 +86,15 @@ const PlanChanges: React.FC<PlanChangesProps> = ({
     )
   }
 
+  if (data.me.customer.is_canceled) {
+    return (
+      <Box position="relative" {...rest}>
+        {/* <ErrorAlert>{error.message}</ErrorAlert> */}
+        <Text f={2}>Subscription ends on {data.me.customer.current_period_end_at}</Text>
+      </Box>
+    )
+  }
+
   const invoice =
     entity.__typename === 'Group'
       ? data.group.invoice
@@ -94,15 +103,14 @@ const PlanChanges: React.FC<PlanChangesProps> = ({
   return (
     <Box position="relative" {...rest}>
       <Text f={2}>
-        {invoice.total >= 0
-          ? `You will be charged $${(invoice.total / 100).toFixed(2)} ${
-              invoice.next_payment_attempt_at
-                ? `on ${invoice.next_payment_attempt_at}`
-                : ''
-            }`
+        {invoice?.total >= 0
+          ? `You will be charged $${(invoice?.total / 100).toFixed(2)} ${invoice.next_payment_attempt_at
+            ? `on ${invoice.next_payment_attempt_at}`
+            : ''
+          }`
           : `Your account will be credited $${Math.abs(
-              invoice.total / 100
-            ).toFixed(2)}`}
+            invoice?.total / 100
+          ).toFixed(2)}`}
       </Text>
     </Box>
   )

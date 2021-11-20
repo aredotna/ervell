@@ -97,7 +97,7 @@
     "@types/react-table": "^7.0.29",
     "@vimeo/player": "^2.7.0",
     "airbrake-js": "^1.6.3",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "axis": "*",
     "babel-loader": "^8.0.5",
     "babel-plugin-inline-react-svg": "^0.5.2",

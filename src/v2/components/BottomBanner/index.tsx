@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Banners from 'v2/components/Banners'
 import FixedWrapper from 'v2/components/UI/FixedWrapper'
@@ -18,14 +17,6 @@ const BottomBanner = ({ banner, ...rest }) => {
       <Banner banner={banner} {...rest} />
     </FixedWrapper>
   )
-}
-
-BottomBanner.propTypes = {
-  banner: PropTypes.string,
-}
-
-BottomBanner.defaultProps = {
-  banner: null,
 }
 
 export default BottomBanner

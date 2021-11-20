@@ -9,6 +9,7 @@ export default gql`
       is_premium
       is_supporter
       is_investor
+      has_had_recent_birthday
       groups(type: OWNER) {
         id
       }

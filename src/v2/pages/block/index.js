@@ -50,7 +50,7 @@ export default class BlockPage extends PureComponent {
 
                   <FullBlock block={block} layout="DEFAULT" />
 
-                  <MobileOrChildren route="block" id={block.id}>
+                  <MobileOrChildren>
                     <div />
                   </MobileOrChildren>
                 </React.Fragment>

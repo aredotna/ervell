@@ -12,8 +12,15 @@ import {
   GenericButton,
   GenericButtonLink,
 } from 'v2/components/UI/GenericButton'
+import Modal from 'v2/components/UI/Modal'
+import NewChannelForm from 'v2/components/NewChannelForm'
 
 import resendConfirmationEmailMutation from 'v2/components/Banners/mutations/resendConfirmationEmail'
+import { useQuery } from '@apollo/client'
+import GET_FIRST_CHANNEL from './queries/getFirstChannel'
+import { GetFirstChannel } from '__generated__/GetFirstChannel'
+
+const isClientSide = typeof window !== 'undefined'
 
 const Button = styled(GenericButton).attrs({
   f: [1, 2, 3],
@@ -28,6 +35,31 @@ const ButtonLink = styled(GenericButtonLink).attrs({
 })`
   background: transparent;
 `
+
+const DeepBlueBanner = styled(Banner).attrs({
+  bg: 'brand.deepBlue',
+  color: 'white',
+})``
+
+const DeepBlueButton = styled(Button).attrs({
+  color: 'utility.semiTranslucent',
+  bg: 'brand.deepBlue',
+  borderColor: 'gray.hint',
+  hoverColor: 'white',
+  activeColor: 'white',
+  activeBorderColor: 'white',
+  hoverBorderColor: 'white',
+})``
+
+const DeepBlueButtonLink = styled(ButtonLink).attrs({
+  color: 'utility.semiTranslucent',
+  bg: 'brand.deepBlue',
+  borderColor: 'gray.hint',
+  hoverColor: 'white',
+  activeColor: 'white',
+  activeBorderColor: 'white',
+  hoverBorderColor: 'white',
+})``
 
 const Buttons = styled(Box).attrs({
   flexDirection: ['column', 'column', 'row'],
@@ -45,9 +77,9 @@ const __Confirm__: React.FC<ConfirmBlockProps> = ({
 
   return (
     <Banner
-      bg="state.neutral"
+      bg="gray.light"
       color="gray.base"
-      iconName="Clipboard"
+      iconName="Info"
       isCloseable={false}
       {...rest}
     >
@@ -86,15 +118,62 @@ export const Confirm = graphql<ConfirmBlockProps>(
 )(__Confirm__)
 
 export const Bookmarklet = props => (
-  <Banner bg="state.neutral" color="gray.base" iconName="Question" {...props}>
-    <Box>Save content from any website with the Are.na bookmarklet.</Box>
+  <Banner bg="gray.light" color="gray.base" iconName="Clipboard" {...props}>
+    <Box>Save content from any website with the Are.na browser extension.</Box>
 
     <ButtonLink href="/tools/bookmarklet">Install</ButtonLink>
   </Banner>
 )
 
+export const CreateChannel = props => {
+  if (!isClientSide) return null
+
+  const modal = new Modal(NewChannelForm, {})
+
+  return (
+    <DeepBlueBanner steps={'1/3'} {...props}>
+      <Box>Create your first channel to start adding content</Box>
+
+      <DeepBlueButton onClick={() => modal.open()}>
+        Create new channel
+      </DeepBlueButton>
+    </DeepBlueBanner>
+  )
+}
+
+export const CreateConnections = props => {
+  const { data } = useQuery<GetFirstChannel>(GET_FIRST_CHANNEL)
+
+  return (
+    <DeepBlueBanner steps={'2/3'} {...props}>
+      <Box>
+        Get started by adding text, images, links or files to your first channel
+      </Box>
+
+      <DeepBlueButtonLink href={data?.me?.channels[0]?.href}>
+        Go to your channel
+      </DeepBlueButtonLink>
+    </DeepBlueBanner>
+  )
+}
+
+export const FollowAnything = props => {
+  return (
+    <DeepBlueBanner steps={'3/3'} isCloseable {...props}>
+      <Box>Find friends to follow, or follow a Featured Channel</Box>
+
+      <DeepBlueButtonLink href="/tools/find-friends">
+        Connect your Twitter
+      </DeepBlueButtonLink>
+      <DeepBlueButtonLink href="/are-na-team/featured-channels">
+        Go to Featured Channels
+      </DeepBlueButtonLink>
+    </DeepBlueBanner>
+  )
+}
+
 export const Invite = props => (
-  <Banner bg="state.neutral" color="gray.base" iconName="Info" {...props}>
+  <Banner bg="gray.light" color="gray.base" iconName="Info" {...props}>
     <Box>Invite friends to collaborate on Are.na.</Box>
 
     <ButtonLink href="/tools/send-invitation">Send invite</ButtonLink>
@@ -217,6 +296,9 @@ export default {
   STRONGLY_PROPOSE_PREMIUM: StronglyProposePremium,
   PROPOSE_PREMIUM: ProposePremium,
   PREMIUM_PLUS: PremiumSupporter,
+  CREATE_CHANNEL: CreateChannel,
+  CREATE_CONNECTIONS: CreateConnections,
+  FOLLOW_ANYTHING: FollowAnything,
   CONFIRM: Confirm,
   BOOKMARKLET: Bookmarklet,
   INVITE: Invite,
