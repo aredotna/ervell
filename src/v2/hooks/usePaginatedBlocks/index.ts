@@ -241,7 +241,9 @@ export function usePaginatedBlocks<
    */
   const updateCache: (
     updater: (args: {
-      blockArgs: Parameters<Modifier<Array<StoreObject | Reference | null>>>
+      blockArgs: Parameters<
+        Modifier<null | Array<StoreObject | Reference | null>>
+      >
       prevCount: number
     }) => {
       newBlocks?: Array<StoreObject | Reference | null>
@@ -445,6 +447,11 @@ export function usePaginatedBlocks<
   >['moveBlock'] = useCallback(
     ({ oldIndex, newIndex }) => {
       updateCache(({ blockArgs: [prevBlocks, { readField }], prevCount }) => {
+        // Early exit if there aren't any blocks in the cache yet
+        if (!prevBlocks) {
+          return null
+        }
+
         // Moving to the "bottom". Convert a -1 newIndex value to a
         // synonymous "count - 1" value that the mutation can understand
         if (newIndex === -1) {
@@ -549,6 +556,11 @@ export function usePaginatedBlocks<
 
       // Update the cache to replace the previous block with the new block
       updateCache(({ blockArgs: [prevBlocks, { readField, toReference }] }) => {
+        // Early exit if there aren't any blocks in the cache yet
+        if (!prevBlocks) {
+          return null
+        }
+
         // Early exit if we can't find a block
         if (!block) {
           return null
