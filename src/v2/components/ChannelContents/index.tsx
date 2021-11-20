@@ -68,6 +68,7 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
       moveBlock,
       removeBlock,
       addBlock,
+      contentCount,
       updateBlock,
       getBlocksFromCache,
     } = usePaginatedBlocks<
@@ -143,18 +144,23 @@ const ChannelContents: React.FC<Props> = WithIsSpiderRequesting<ExtendedProps>(
         getConnectableType(block.__typename) === BaseConnectableTypeEnum.BLOCK
     )
 
-    const blocksJsx = blocks.map((block, i) => (
-      <ChannelContentsItem
-        key={block ? `${block.id}.${block.__typename}` : `nullState${i}`}
-        index={i}
-        channel={channel}
-        connectable={block}
-        context={lightboxConnectables}
-        onRemove={removeBlock}
-        onChangePosition={moveBlock}
-        onItemIntersected={onItemIntersected}
-      />
-    ))
+    const blocksJsx: JSX.Element[] = []
+    for (let i = 0; i < (contentCount || channel?.counts?.contents || 0); i++) {
+      const block = blocks[i]
+
+      blocksJsx.push(
+        <ChannelContentsItem
+          key={block ? `${block.id}.${block.__typename}` : `nullState${i}`}
+          index={i}
+          channel={channel}
+          connectable={block}
+          context={lightboxConnectables}
+          onRemove={removeBlock}
+          onChangePosition={moveBlock}
+          onItemIntersected={onItemIntersected}
+        />
+      )
+    }
 
     return (
       <SortableGrid

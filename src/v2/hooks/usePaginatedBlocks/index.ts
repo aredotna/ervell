@@ -5,6 +5,7 @@ import {
   StoreObject,
   useQuery,
 } from '@apollo/client'
+import { Modifier } from '@apollo/client/cache/core/types/common'
 import { useRef, useCallback, useMemo } from 'react'
 
 import { ChannelContentsConnectable } from '__generated__/ChannelContentsConnectable'
@@ -24,13 +25,13 @@ import {
 
 import moveConnectableMutation from 'v2/components/ChannelContents/mutations/moveConnectable'
 import { getConnectableType } from 'v2/util/getConnectableType'
+
 import { CHANNEL_CONTENT_COUNT } from './ChannelContentCount'
-import { Modifier } from '@apollo/client/cache/core/types/common'
 
 /**
  * The minimum required shape for the channel query
  */
-type RequiredChannelQueryData = {
+interface RequiredChannelQueryData {
   channel: null | {
     __typename: 'Channel'
     id: number
@@ -50,7 +51,7 @@ type RequiredChannelQueryData = {
 /**
  * The minimum required shape for the channel query variables
  */
-type RequiredChannelQueryVariables = {
+interface RequiredChannelQueryVariables {
   id: string
   page: number
   per: number
@@ -61,7 +62,7 @@ type RequiredChannelQueryVariables = {
 /**
  * The minimum required shape for the block query
  */
-type RequiredBlockQueryData = {
+interface RequiredBlockQueryData {
   blokk: null | {
     __typename: ChannelContentsConnectable['__typename']
     id: number
@@ -71,14 +72,14 @@ type RequiredBlockQueryData = {
 /**
  * The minimum required shape for the block query variables
  */
-type RequiredBlockQueryVariables = {
+interface RequiredBlockQueryVariables {
   id: string
 }
 
 /**
  * The base arguments for usePaginatedBlocks
  */
-type UsePaginatedBlocksBaseArgs = {
+interface UsePaginatedBlocksBaseArgs {
   channelId: string
   channelQuery: DocumentNode
   per: number
@@ -90,23 +91,33 @@ type UsePaginatedBlocksBaseArgs = {
 /**
  * The full arguments for usePaginatedBlocks
  */
-type UsePaginatedBlocksArgs = UsePaginatedBlocksBaseArgs & {
+interface UsePaginatedBlocksArgs extends UsePaginatedBlocksBaseArgs {
   blockquery: DocumentNode
 }
 
 /**
  * The contents of the blokks field
  */
-type Block<ChannelQueryData extends RequiredChannelQueryData> = NonNullable<
-  NonNullable<ChannelQueryData['channel']>['blokks']
->[number]
+type Block<ChannelQueryData extends RequiredChannelQueryData> =
+  | NonNullable<NonNullable<ChannelQueryData['channel']>['blokks']>[number]
+  | null
+
+/**
+ * A type that asserts the channel chery and block query have
+ * a matching blokk shape
+ */
+interface MatchingBlockQueryData<
+  ChannelQueryData extends RequiredChannelQueryData
+> extends RequiredBlockQueryData {
+  blokk: Block<ChannelQueryData> | null
+}
 
 /**
  * The base return type for usePaginatedBlocks
  */
-type UsePaginatedBlocksBaseApi<
+interface UsePaginatedBlocksBaseApi<
   ChannelQueryData extends RequiredChannelQueryData
-> = {
+> {
   blocks: Array<Block<ChannelQueryData>>
   contentCount: number
   getPage: (pageNumber: number) => void
@@ -121,9 +132,9 @@ type UsePaginatedBlocksBaseApi<
 /**
  * The full return type for usePaginatedBlocks
  */
-type UsePaginatedBlocksApi<
+interface UsePaginatedBlocksApi<
   ChannelQueryData extends RequiredChannelQueryData
-> = UsePaginatedBlocksBaseApi<ChannelQueryData> & {
+> extends UsePaginatedBlocksBaseApi<ChannelQueryData> {
   updateBlock: (args: {
     id: string
     type: BaseConnectableTypeEnum | false
@@ -150,7 +161,7 @@ export function usePaginatedBlocks<
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ChannelQueryVariables extends RequiredChannelQueryVariables,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  BlockQueryData extends RequiredBlockQueryData,
+  BlockQueryData extends MatchingBlockQueryData<ChannelQueryData>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   BlockQueryVariables extends RequiredBlockQueryVariables
 >(unsafeArgs: UsePaginatedBlocksArgs): UsePaginatedBlocksApi<ChannelQueryData>
@@ -163,7 +174,7 @@ export function usePaginatedBlocks<
 export function usePaginatedBlocks<
   ChannelQueryData extends RequiredChannelQueryData,
   ChannelQueryVariables extends RequiredChannelQueryVariables,
-  BlockQueryData extends RequiredBlockQueryData,
+  BlockQueryData extends MatchingBlockQueryData<ChannelQueryData>,
   BlockQueryVariables extends RequiredBlockQueryVariables
 >({
   channelQuery,
